@@ -9,8 +9,8 @@ Worktree: C:\Users\silas\Projects\OncoGlobal-wt\w3-codex
 | CDX-01 tipos-w3.ts | FEITA | d239c77 | PASS serial: typecheck; 52 arquivos; 20 files/183 tests | tipos locais W3; contratos congelados preservados |
 | CDX-02 labAlerts.ts | FEITA | f57e2a7 | PASS serial: 52 arquivos; 20 files/183 tests; 23.91s | threshold inativo PENDENTE; numericos/conversoes invalidos rejeitados |
 | CDX-03 radAlerts.ts | FEITA | adce743 | PASS serial: 20 files/183 tests; 16.17s | ocorrencias independentes; alerta nunca confirma fato; fonte integral preservada |
-| CDX-04 redFlagsCanal.ts | FEITA | neste commit | PASS serial: 20 files/183 tests; 19.35s | negacao e tempo por ocorrencia; alvo contato preservado |
-| CDX-05 cumulativoAlerta.ts | PENDENTE | - | NOT_RUN | - |
+| CDX-04 redFlagsCanal.ts | FEITA | 58c6c87 | PASS serial: 20 files/183 tests; 19.35s | negacao e tempo por ocorrencia; alvo contato preservado |
+| CDX-05 cumulativoAlerta.ts | FEITA | neste commit | PASS serial: 20 files/183 tests; 13.40s | dedupe por adminId; divergencia vermelha; limite da mesma droga; escopo explicito |
 | CDX-06 ctcaeGrau.ts | PENDENTE | - | NOT_RUN | - |
 | CDX-07 recist.ts | PENDENTE | - | NOT_RUN | - |
 | CDX-08 escores.ts | PENDENTE | - | NOT_RUN | - |
@@ -80,6 +80,7 @@ fronteiras ok (23 arquivos)
    Start at  17:18:10
    Duration  1.68s (import 69%, transform 21%, tests 9%, worker 2%)
 ```
+
 
 
 
