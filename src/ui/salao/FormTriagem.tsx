@@ -108,8 +108,9 @@ export function FormTriagem({
   const [recurso, setRecurso] = useState<Recurso>("AMBULATORIAL");
   const [idade, setIdade] = useState("");
   const [resultado, setResultado] = useState<ReturnType<typeof avaliarTriagem> | null>(null);
+  const [idadePendente, setIdadePendente] = useState(false);
 
-  function montar(): Triagem {
+  function montar(idadeAnos: number): Triagem {
     return {
       patientId,
       encounterId,
@@ -125,13 +126,21 @@ export function FormTriagem({
       grauCtcae: dadoNumero(textoParaInteiro(grau), fonte),
       tontura,
       recurso,
-      idadeAnos: textoParaInteiro(idade) ?? 0,
+      idadeAnos,
       chegadaEm,
     };
   }
 
   function salvar() {
-    const triagem = montar();
+    // Idade decide a FRENTE (limite no ruleset). Ausente nunca vira 0: fica PENDENTE e a triagem não é avaliada.
+    const idadeAnos = textoParaInteiro(idade);
+    if (idadeAnos === null) {
+      setIdadePendente(true);
+      setResultado(null);
+      return;
+    }
+    setIdadePendente(false);
+    const triagem = montar(idadeAnos);
     onSalvar(triagem);
     setResultado(avaliarTriagem(triagem, contexto, ruleset));
   }
@@ -201,7 +210,9 @@ export function FormTriagem({
         </select>
       </label>
       <button type="submit">salvar triagem</button>
-      {resultado ? <ResultadoTriagem resultado={resultado} /> : <p>sem avaliação</p>}
+      {idadePendente ? (
+        <p role="status">PENDENTE: idade ausente. Triagem não avaliada (idade decide a frente).</p>
+      ) : resultado ? <ResultadoTriagem resultado={resultado} /> : <p>sem avaliação</p>}
     </form>
   );
 }

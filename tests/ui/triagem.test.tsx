@@ -85,4 +85,12 @@ describe("triagem do salão", () => {
     expect(onSalvar).toHaveBeenCalledTimes(1);
     expect(screen.getByText("hemoglobina ausente")).toBeTruthy();
   });
+  it("idade vazia não vira 0: fica PENDENTE e não avalia", () => {
+    const onSalvar = abrir();
+    preencherSeguros();
+    fireEvent.change(screen.getByLabelText("Idade (anos)"), { target: { value: "" } });
+    fireEvent.click(screen.getByRole("button", { name: "salvar triagem" }));
+    expect(onSalvar).not.toHaveBeenCalled();
+    expect(screen.getByRole("status").textContent).toContain("PENDENTE: idade ausente");
+  });
 });
