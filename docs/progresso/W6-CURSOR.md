@@ -15,7 +15,7 @@ Executor: CURSOR. Branch: `f0/w6-cursor`. Papel: telas da consulta. UI mostra e 
 | CUR-17 Canal | FEITA | 11de3ec | fronteiras ok (96); corpus ok (20); 62 files, 371 tests | `[VERIFICAR]` modelos de resposta para red flag: a tela mostra "sem modelo aprovado" |
 | CUR-18 APAC | FEITA | 06b2e8c | fronteiras ok (96); corpus ok (20); 62 files, 371 tests | |
 | CUR-19 Importar | FEITA | e1bef3c | fronteiras ok (96); corpus ok (20); 62 files, 371 tests | |
-| CUR-20 Percursos | FEITA | (este commit) | fronteiras ok (96); corpus ok (20); 63 files, 375 tests | patch não aplicado; `[VERIFICAR]` modelos de red flag |
+| CUR-20 Percursos | FEITA | 4f37785 | fronteiras ok (96); corpus ok (20); 63 files, 375 tests | patch não aplicado; `[VERIFICAR]` modelos de red flag |
 
 ## CUR-11 · saída real
 
