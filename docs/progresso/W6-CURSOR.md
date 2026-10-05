@@ -12,8 +12,8 @@ Executor: CURSOR. Branch: `f0/w6-cursor`. Papel: telas da consulta. UI mostra e 
 | CUR-14 Agenda | FEITA | c642b47 | fronteiras ok (87); corpus ok (20); 57 files, 361 tests | |
 | CUR-15 Salão | FEITA | 89dddba | fronteiras ok (91); corpus ok (20); 59 files, 365 tests | |
 | CUR-16 Chat | FEITA | d67cd59 | fronteiras ok (91); corpus ok (20); 59 files, 365 tests | |
-| CUR-17 Canal | FEITA | (este commit) | fronteiras ok (96); corpus ok (20); 62 files, 371 tests | `[VERIFICAR]` modelos de resposta para red flag: a tela mostra "sem modelo aprovado" |
-| CUR-18 APAC |  |  |  |  |
+| CUR-17 Canal | FEITA | 11de3ec | fronteiras ok (96); corpus ok (20); 62 files, 371 tests | `[VERIFICAR]` modelos de resposta para red flag: a tela mostra "sem modelo aprovado" |
+| CUR-18 APAC | FEITA | (este commit) | fronteiras ok (96); corpus ok (20); 62 files, 371 tests | |
 | CUR-19 Importar |  |  |  |  |
 | CUR-20 Percursos |  |  |  |  |
 
@@ -94,6 +94,17 @@ Test Files  62 passed (62)
      Tests  371 passed (371)
 ```
 
+## CUR-18 · saída real
+
+O mesmo `npm run verify` da CUR-17, que já executou a APAC:
+
+```
+fronteiras ok (96 arquivos)
+corpus ok (20 arquivos)
+Test Files  62 passed (62)
+     Tests  371 passed (371)
+```
+
 ## Arquivos criados
 
 - `src/ui/api/porta.ts`
@@ -119,3 +130,5 @@ Test Files  62 passed (62)
 - `src/ui/telas/canal/CaixaCanal.tsx`
 - `src/ui/telas/canal/RespostaCanal.tsx`
 - `tests/ui-telas/canal.test.tsx`
+- `src/ui/telas/apac/TelaApacLote.tsx`
+- `tests/ui-telas/apac.test.tsx`
