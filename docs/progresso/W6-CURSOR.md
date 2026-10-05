@@ -7,8 +7,8 @@ Executor: CURSOR. Branch: `f0/w6-cursor`. Papel: telas da consulta. UI mostra e 
 | Fatia | Estado | Commit | Verify | Pendências |
 |---|---|---|---|---|
 | CUR-11 Porta de dados | FEITA | b68e0b3 | fronteiras ok (83); corpus ok (20); 54 files, 353 tests | `[SERVIDOR_PENDENTE]` exibirBundle, carregarConsulta, agendaDoDia, filaSalao, salvarTriagem, liberarComCorte, caixaCanal, pedirVinculo, lotesApac, chatSetor |
-| CUR-12 Consulta pronta | FEITA | (este commit) | fronteiras ok (84); corpus ok (20); 55 files, 356 tests | |
-| CUR-13 Barra de comando |  |  |  |  |
+| CUR-12 Consulta pronta | FEITA | 3a53cd2 | fronteiras ok (84); corpus ok (20); 55 files, 356 tests | |
+| CUR-13 Barra de comando | FEITA | (este commit) | fronteiras ok (86); corpus ok (20); 56 files, 359 tests | |
 | CUR-14 Agenda |  |  |  |  |
 | CUR-15 Salão |  |  |  |  |
 | CUR-16 Chat |  |  |  |  |
@@ -50,3 +50,6 @@ Test Files  55 passed (55)
 - `src/ui/telas/TelaConsulta.tsx`
 - `src/ui/telas/consulta.css`
 - `tests/ui-telas/consulta.test.tsx`
+- `src/ui/telas/comandos.ts`
+- `src/ui/telas/BarraComando.tsx`
+- `tests/ui-telas/comando.test.tsx`
