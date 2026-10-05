@@ -7,8 +7,8 @@ Executor: CURSOR. Branch: `f0/w2-cursor`. Papel: UI mostra e coleta; regra em `s
 | Fatia | Estado | Commit | Verify | Pendências |
 |---|---|---|---|---|
 | CUR-01 Scaffold Vite + React | FEITA | 469a324 | typecheck ok; fronteiras ok (9 arquivos); vitest 2 files, 25 tests; `ui:build` ok | `[VERIFICAR]` `tsconfig.json` ganhou `"jsx": "react-jsx"` |
-| CUR-02 Tema | FEITA | (este commit) | fronteiras ok (11 arquivos); vitest 3 files, 27 tests | |
-| CUR-03 Cabeçalho | pendente | | | |
+| CUR-02 Tema | FEITA | 927b931 | fronteiras ok (11 arquivos); vitest 3 files, 27 tests | |
+| CUR-03 Cabeçalho | FEITA | (este commit) | fronteiras ok (13 arquivos); vitest 4 files, 30 tests | |
 | CUR-04 Banner E1 | pendente | | | |
 | CUR-05 Delta | pendente | | | |
 | CUR-06 Evidência | pendente | | | |
@@ -56,6 +56,10 @@ Test Files  2 passed (2)
 - `src/ui/tema/temas.ts`
 - `src/ui/tema/ThemeProvider.tsx`
 - `tests/ui/tema.test.tsx`
+- `src/ui/consulta/viewmodels.ts`
+- `src/ui/consulta/CabecalhoPaciente.tsx`
+- `tests/ui/cabecalho.test.tsx`
+- `vite.config.ts` (`maxWorkers: 1` — jsdom em paralelo esgotou a memória)
 
 ## Perguntas ao tech lead
 

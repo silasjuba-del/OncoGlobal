@@ -11,6 +11,7 @@ export default defineConfig(async () => {
     test: {
       // O plugin do React junto do jsdom estoura os 60s de arranque do worker no Windows.
       pool: "threads",
+      maxWorkers: 1,
     },
   };
 });
