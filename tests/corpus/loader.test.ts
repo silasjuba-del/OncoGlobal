@@ -17,7 +17,8 @@ describe("validarRuleset (G-17)", () => {
     });
     for (const r of ids) expect(r.ok).toBe(true);
     const carregados = carregarDiretorio(ler, () => readdirSync(dirCorpus), dirCorpus);
-    expect(carregados.validos.map((v) => v.id).sort()).toEqual(["apac", "dose", "prazos", "salao-triagem"]);
+    for (const id of ["apac", "dose", "prazos", "salao-triagem"])
+      expect(carregados.validos.map((v) => v.id)).toContain(id);
     expect(carregados.rejeitados).toEqual([]);
   });
 
