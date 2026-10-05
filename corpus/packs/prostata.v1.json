@@ -1,0 +1,41 @@
+{
+  "header": {
+    "id": "prostata",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-05",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "estrutura TumorPack R-22; conteúdo clínico do pack pendente de curadoria do Dr. Silas [VERIFICAR]",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-05"
+  },
+  "nota": "esqueleto W2/GLM-06: nenhum conteúdo clínico; estadiamento/labs/imagem/biomarcadores/protocolos aguardam fonte [VERIFICAR]",
+  "cid": [],
+  "estadiamento": {
+    "sistema": "[VERIFICAR]",
+    "edicao": "[VERIFICAR]"
+  },
+  "labsBaseline": [],
+  "labsFollowup": [],
+  "imagem": {
+    "baseline": [],
+    "resposta": [],
+    "seguimento": []
+  },
+  "biomarcadores": [],
+  "protocolos": [
+    {
+      "id": "proto-01",
+      "nome": "[VERIFICAR]",
+      "intencao": null,
+      "linhas": null,
+      "sigtap": "[VERIFICAR]",
+      "ativo": false
+    }
+  ],
+  "intervalos": {},
+  "roteiroAnamnese": []
+}

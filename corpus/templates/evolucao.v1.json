@@ -1,0 +1,36 @@
+{
+  "id": "evolucao",
+  "versao": "1.0.0",
+  "nota": "esqueleto W2/GLM-07: texto fixo só nos títulos; nenhum conteúdo clínico",
+  "secoes": [
+    {
+      "id": "identificacao",
+      "titulo": "Identificação",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "anamnese-hoje",
+      "titulo": "Anamnese do dia",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "exames-revisados",
+      "titulo": "Exames revisados",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "conduta",
+      "titulo": "Conduta",
+      "origem": "DECISAO_MEDICA",
+      "campos": []
+    }
+  ],
+  "proibidoConter": [
+    "ALERTA",
+    "CORRECAO_IA"
+  ],
+  "exibeE1": false
+}

@@ -1,0 +1,24 @@
+{
+  "id": "sinais-alarme",
+  "versao": "1.0.0",
+  "nota": "esqueleto W2/GLM-07: lista de sinais e textos são decisão do Dr. Silas [VERIFICAR]",
+  "secoes": [
+    {
+      "id": "sinais",
+      "titulo": "Sinais de alarme",
+      "origem": "TEXTO_FIXO",
+      "campos": []
+    },
+    {
+      "id": "condutas-orientadas",
+      "titulo": "O que fazer",
+      "origem": "TEXTO_FIXO",
+      "campos": []
+    }
+  ],
+  "proibidoConter": [
+    "ALERTA",
+    "CORRECAO_IA"
+  ],
+  "exibeE1": false
+}

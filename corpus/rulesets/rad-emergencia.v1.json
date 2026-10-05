@@ -1,0 +1,31 @@
+{
+  "header": { "id": "rad-emergencia", "versao": "1.0.0", "vigenteDesde": "2026-10-05",
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "catálogo de candidatos do PLANO BASE §18 / R-12 FN-20; classificação naturezaAlerta e ativação pendentes de curadoria do Dr. Silas", "trecho": null, "edicao": null },
+    "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-05" },
+  "nota": "esqueleto W2/GLM-03: nenhum termo ativo; naturezaAlerta é provisória (estrutural) e SINÔNIMOS vazios até curadoria — o extrator (FN-20) só pode usar item ativo com fonte",
+  "negacoes": ["sem", "ausência de", "ausencia de", "não há", "nao ha", "nega", "descarta", "exclui"],
+  "termos": [
+    { "id": "compressao-medular", "termo": "Compressão medular", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "cauda-equina", "termo": "Síndrome da cauda equina", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "efeito-de-massa", "termo": "Efeito de massa", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "herniacao", "termo": "Herniação cerebral", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "hidrocefalia", "termo": "Hidrocefalia", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "hemorragia-intracraniana", "termo": "Hemorragia intracraniana", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "edema-cerebral-importante", "termo": "Edema cerebral importante", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "sindrome-veia-cava-superior", "termo": "Síndrome da veia cava superior", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "obstrucao-via-aerea-central", "termo": "Obstrução de via aérea central", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "tep", "termo": "Tromboembolismo pulmonar (TEP)", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "tamponamento-derrame-pericardico", "termo": "Tamponamento / derrame pericárdico", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "pneumotorax", "termo": "Pneumotórax", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "obstrucao-intestinal", "termo": "Obstrução intestinal", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "perfuracao", "termo": "Perfuração (víscera oca)", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "pneumoperitoneo", "termo": "Pneumoperitônio", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "enterocolite-neutropenica", "termo": "Enterocolite neutropênica", "sinonimosPt": [], "naturezaAlerta": "AMEACA_IMEDIATA", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "hidronefrose-bilateral", "termo": "Hidronefrose bilateral", "sinonimosPt": [], "naturezaAlerta": "REVISAO_URGENTE", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "obstrucao-biliar", "termo": "Obstrução biliar", "sinonimosPt": [], "naturezaAlerta": "REVISAO_URGENTE", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "fratura-patologica", "termo": "Fratura patológica", "sinonimosPt": [], "naturezaAlerta": "REVISAO_URGENTE", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "fratura-iminente", "termo": "Risco iminente de fratura", "sinonimosPt": [], "naturezaAlerta": "REVISAO_URGENTE", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "instabilidade-vertebral", "termo": "Instabilidade vertebral", "sinonimosPt": [], "naturezaAlerta": "REVISAO_URGENTE", "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "comprometimento-epidural", "termo": "Comprometimento epidural", "sinonimosPt": [], "naturezaAlerta": "REVISAO_URGENTE", "ativo": false, "fonte": "[VERIFICAR]" }
+  ]
+}
