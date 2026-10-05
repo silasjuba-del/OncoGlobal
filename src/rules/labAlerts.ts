@@ -1,3 +1,4 @@
+type SaidaInterna = Omit<LabAlertResult, "inputs_used" | "inputs_missing">;
 type Achado = import("./tipos-w3.js").Achado;
 type LabAlertResult = import("./tipos-w3.js").LabAlertResult;
 type LabAnalitoRegra = import("./tipos-w3.js").LabAnalitoRegra;
@@ -19,7 +20,7 @@ function achado(
   return { codigo, estado, motivo, regraId, rulesetVersao, inputs_used, inputs_missing };
 }
 
-function resultPendente(rs: LabRuleset | null | undefined, inputs_missing: string[]): LabAlertResult {
+function resultPendente(rs: LabRuleset | null | undefined, inputs_missing: string[]): SaidaInterna {
   return {
     rulesetVersao: rs?.versao ?? "MISSING",
     achados: [
@@ -32,6 +33,15 @@ function resultPendente(rs: LabRuleset | null | undefined, inputs_missing: strin
 function regraDoAnalito(rs: LabRuleset, codigo: string): LabAnalitoRegra | undefined {
   const alvo = codigo.toLowerCase();
   return rs.analitos.find((r) => r.codigo.toLowerCase() === alvo || (r.aliases ?? []).some((a) => a.toLowerCase() === alvo));
+}
+
+function multiplicarDecimal(a: number, b: number): number {
+  const partes = (v: number) => {
+    const [mantissa = "0", exp = "0"] = String(v).toLowerCase().split("e");
+    return { n: BigInt(mantissa.replace(".", "")), exp: Number(exp) - (mantissa.split(".")[1]?.length ?? 0) };
+  };
+  const x = partes(a), y = partes(b);
+  return Number(`${x.n * y.n}e${x.exp + y.exp}`);
 }
 
 function normalizar(v: LabValor, regra: LabAnalitoRegra): { valor: LabValorNormalizado | null; achado?: Achado } {
@@ -66,7 +76,7 @@ function normalizar(v: LabValor, regra: LabAnalitoRegra): { valor: LabValorNorma
     valor: {
       ...v,
       codigo: regra.codigo,
-      valor: v.valor * conversao.fator,
+      valor: multiplicarDecimal(v.valor, conversao.fator),
       unidade: conversao.para,
       valorOriginal: v.valor,
       unidadeOriginal: v.unidade,
@@ -83,7 +93,7 @@ function valoresConflitam(valores: readonly LabValorNormalizado[]): boolean {
 }
 
 /** FN-19: alertas laboratoriais com conversao apenas por tabela explicita e rastreavel. */
-export function avaliarLabAlerts(entradas: readonly LabValor[], rs: LabRuleset | null | undefined): LabAlertResult {
+function calcularlabAlerts(entradas: readonly LabValor[], rs: LabRuleset | null | undefined): SaidaInterna {
   if (!rs || !rs.ativo) return resultPendente(rs, ["ruleset"]);
   if (rs.analitos.length === 0) return resultPendente(rs, ["ruleset.analitos"]);
   if (entradas.length === 0) return resultPendente(rs, ["entradas"]);
@@ -209,4 +219,10 @@ export function avaliarLabAlerts(entradas: readonly LabValor[], rs: LabRuleset |
   }
 
   return { rulesetVersao: rs.versao, achados, valores_normalizados };
+}
+
+export function avaliarLabAlerts(...args: Parameters<typeof calcularlabAlerts>): LabAlertResult {
+  const r = calcularlabAlerts(...args);
+  const achados = r.achados;
+  return { ...r, inputs_used: [...new Set(achados.flatMap((a) => a.inputs_used))], inputs_missing: [...new Set(achados.flatMap((a) => a.inputs_missing))] };
 }

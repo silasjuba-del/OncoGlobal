@@ -1,3 +1,4 @@
+type SaidaInterna = Omit<RadAlertResult, "inputs_used" | "inputs_missing">;
 type Achado = import("./tipos-w3.js").Achado;
 type RadAlert = import("./tipos-w3.js").RadAlert;
 type RadAlertResult = import("./tipos-w3.js").RadAlertResult;
@@ -26,11 +27,6 @@ function normalizarTexto(texto: string): string {
     .replace(/\p{Diacritic}/gu, "");
 }
 
-function trecho(textoOriginal: string, inicio: number, fim: number): string {
-  const margem = 48;
-  return textoOriginal.slice(Math.max(0, inicio - margem), Math.min(textoOriginal.length, fim + margem)).trim();
-}
-
 function findTermo(textoNormalizado: string, termo: string): { inicio: number; fim: number }[] {
   const termoNormalizado = normalizarTexto(termo);
   if (!termoNormalizado.trim()) return [];
@@ -56,6 +52,7 @@ function contextoApos(textoNormalizado: string, fim: number): string {
 function negado(textoNormalizado: string, inicio: number, fim: number): boolean {
   const antes = contextoAntes(textoNormalizado, inicio);
   const apos = contextoApos(textoNormalizado, fim);
+  if (/\bsem (?:melhora|resolucao|regressao)\b/.test(antes)) return false;
   // "nao se pode excluir" expressa incerteza, nao ausencia.
   if (/\b(nao (?:se pode |e possivel )?(?:excluir|descartar)|nao descartad[oa])\b/.test(antes + apos)) return false;
   return /\b(sem|nega|negativo para|ausencia de|ausente)\s+[\w\s,]{0,80}$/.test(antes) || /^\s+(ausente|negativo|descartad[oa]|excluid[oa])\b/.test(apos);
@@ -69,7 +66,7 @@ function antecedente(textoNormalizado: string, inicio: number): boolean {
   return /\b(historia de|historico de|antecedente de|previo de)\s+[\w\s]{0,24}$/.test(contextoAntes(textoNormalizado, inicio));
 }
 
-function pendenteRuleset(rs: RadRuleset | null | undefined): RadAlertResult {
+function pendenteRuleset(rs: RadRuleset | null | undefined): SaidaInterna {
   const a = achado("RAD_RULESET", "PENDENTE", RULESET_INATIVO, rs?.id ?? "rad-alerts", rs?.versao ?? "MISSING", [], ["ruleset"]);
   return { rulesetVersao: rs?.versao ?? "MISSING", alerts: [], achados: [a] };
 }
@@ -96,7 +93,7 @@ function montarAlert(regra: RadTermo, rs: RadRuleset, input: RadInput, source_te
 }
 
 /** FN-20: alerta radiologico somente sobre TRANSCRIPTION, nunca sobre imagem bruta. */
-export function avaliarRadAlerts(input: RadInput, rs: RadRuleset | null | undefined): RadAlertResult {
+function calcularradAlerts(input: RadInput, rs: RadRuleset | null | undefined): SaidaInterna {
   if (!rs || !rs.ativo) return pendenteRuleset(rs);
   if (!rs.termosEmergencia.length || rs.termosEmergencia.some((r) => !r.termo.trim())) return pendenteRuleset(rs);
   if (!input.texto.trim() || !input.data.trim()) {
@@ -126,7 +123,7 @@ export function avaliarRadAlerts(input: RadInput, rs: RadRuleset | null | undefi
       );
       continue;
     }
-    const revisaoUrgente = suspeito(textoNormalizado, pos.inicio);
+    const revisaoUrgente = suspeito(textoNormalizado, pos.inicio) || /^\s+nao (?:(?:pode|possa) ser )?(?:descartad[oa]|excluid[oa])\b/.test(contextoApos(textoNormalizado, pos.fim));
     // Preserve o original integral: normalizacao Unicode pode alterar offsets.
     const alert = montarAlert(regra, rs, input, input.texto, revisaoUrgente);
     alerts.push(alert);
@@ -135,4 +132,10 @@ export function avaliarRadAlerts(input: RadInput, rs: RadRuleset | null | undefi
   }
 
   return { rulesetVersao: rs.versao, alerts, achados };
+}
+
+export function avaliarRadAlerts(...args: Parameters<typeof calcularradAlerts>): RadAlertResult {
+  const r = calcularradAlerts(...args);
+  const achados = r.achados;
+  return { ...r, inputs_used: [...new Set(achados.flatMap((a) => a.inputs_used))], inputs_missing: [...new Set(achados.flatMap((a) => a.inputs_missing))] };
 }

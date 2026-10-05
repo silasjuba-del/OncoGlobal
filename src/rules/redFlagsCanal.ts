@@ -1,3 +1,4 @@
+type SaidaInterna = Omit<CanalFlagResult, "inputs_used" | "inputs_missing">;
 type Achado = import("./tipos-w3.js").Achado;
 type CanalFlag = import("./tipos-w3.js").CanalFlag;
 type CanalFlagRegra = import("./tipos-w3.js").CanalFlagRegra;
@@ -56,16 +57,16 @@ function terceiraPessoa(texto: string): boolean {
   return /\b(minha mae|meu pai|minha esposa|meu esposo|minha filha|meu filho|meu familiar|ela esta|ele esta)\b/.test(texto);
 }
 
-function pendenteRuleset(rs: CanalRuleset | null | undefined): CanalFlagResult {
+function pendenteRuleset(rs: CanalRuleset | null | undefined): SaidaInterna {
   const a = achado("CANAL_RULESET", "PENDENTE", RULESET_INATIVO, rs?.id ?? "canal-red-flags", rs?.versao ?? "MISSING", [], ["ruleset"]);
   return { rulesetVersao: rs?.versao ?? "MISSING", flags: [], achados: [a] };
 }
 
 /** FN-21: red flags de canal em texto ja desidentificado; resposta sempre fixa por templateId. */
-export function avaliarRedFlagsCanal(
+function calcularredFlagsCanal(
   mensagem: CanalMensagemDesidentificada,
   rs: CanalRuleset | null | undefined,
-): CanalFlagResult {
+): SaidaInterna {
   if (!rs || !rs.ativo) return pendenteRuleset(rs);
   if (!rs.flags.length || rs.flags.some((r) => !r.termos.length || r.termos.some((t) => !t.trim()))) return pendenteRuleset(rs);
   if (!mensagem.texto.trim() || !mensagem.contatoId.trim()) {
@@ -125,4 +126,10 @@ export function avaliarRedFlagsCanal(
   }
 
   return { rulesetVersao: rs.versao, flags, achados };
+}
+
+export function avaliarRedFlagsCanal(...args: Parameters<typeof calcularredFlagsCanal>): CanalFlagResult {
+  const r = calcularredFlagsCanal(...args);
+  const achados = r.achados;
+  return { ...r, inputs_used: [...new Set(achados.flatMap((a) => a.inputs_used))], inputs_missing: [...new Set(achados.flatMap((a) => a.inputs_missing))] };
 }

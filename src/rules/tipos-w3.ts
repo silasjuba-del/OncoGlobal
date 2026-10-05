@@ -60,7 +60,7 @@ export interface LabValorNormalizado extends LabValor {
   convertidoPorRegraId: string | null;
 }
 
-export interface LabAlertResult {
+export interface LabAlertResult extends RastreabilidadeW3 {
   rulesetVersao: string;
   achados: Achado[];
   valores_normalizados: LabValorNormalizado[];
@@ -93,7 +93,7 @@ export interface RadAlert {
   achado: Achado;
 }
 
-export interface RadAlertResult {
+export interface RadAlertResult extends RastreabilidadeW3 {
   rulesetVersao: string;
   alerts: RadAlert[];
   achados: Achado[];
@@ -125,7 +125,7 @@ export interface CanalFlag {
   achado: Achado;
 }
 
-export interface CanalFlagResult {
+export interface CanalFlagResult extends RastreabilidadeW3 {
   rulesetVersao: string;
   flags: CanalFlag[];
   achados: Achado[];
@@ -151,7 +151,7 @@ export interface CumulativoInput {
   administracoes: readonly AdministracaoCumulativo[];
 }
 
-export interface CumulativoResult {
+export interface CumulativoResult extends RastreabilidadeW3 {
   rulesetVersao: string;
   patientId: string;
   episodioId: string;
@@ -187,7 +187,7 @@ export interface CtcaeInput {
   basal?: Record<string, number | string | boolean | null>;
 }
 
-export interface CtcaeResult {
+export interface CtcaeResult extends RastreabilidadeW3 {
   rulesetVersao: string;
   candidate_grade: number | null;
   achado: Achado;
@@ -216,7 +216,7 @@ export interface RecistInput {
 
 export type RecistCandidate = "CR" | "PR" | "SD" | "PD";
 
-export interface RecistResult {
+export interface RecistResult extends RastreabilidadeW3 {
   rulesetVersao: string;
   candidate_response: RecistCandidate | null;
   somaAtualMm: number | null;
@@ -244,7 +244,7 @@ export interface ScoreInput {
   entradas: Record<string, number | null | undefined>;
 }
 
-export interface ScoreResult {
+export interface ScoreResult extends RastreabilidadeW3 {
   rulesetVersao: string;
   scoreId: string;
   valor: number | null;
@@ -261,6 +261,13 @@ export interface IntervaloQtResult {
   rulesetVersao: string;
   data: string | null;
   adminId: string | null;
+  inputs_used: string[];
+  inputs_missing: string[];
+}
+
+/** INV-14: rastreio tambem disponivel no envelope de cada resultado. */
+export interface RastreabilidadeW3 {
+  rulesetVersao: string;
   inputs_used: string[];
   inputs_missing: string[];
 }

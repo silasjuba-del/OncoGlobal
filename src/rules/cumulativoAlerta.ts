@@ -1,3 +1,4 @@
+type SaidaInterna = Omit<CumulativoResult, "inputs_used" | "inputs_missing">;
 type Achado = import("./tipos-w3.js").Achado;
 type AdministracaoCumulativo = import("./tipos-w3.js").AdministracaoCumulativo;
 type CumulativoInput = import("./tipos-w3.js").CumulativoInput;
@@ -22,7 +23,7 @@ function efetiva(a: AdministracaoCumulativo): boolean {
   return a.status === "COMPLETA" || a.status === "PARCIAL" || a.status === "INTERROMPIDA";
 }
 
-function pendente(input: CumulativoInput, rs: LimiteCumulativo | null | undefined, motivo: string, missing: string[]): CumulativoResult {
+function pendente(input: CumulativoInput, rs: LimiteCumulativo | null | undefined, motivo: string, missing: string[]): SaidaInterna {
   return {
     rulesetVersao: rs?.versao ?? "MISSING",
     patientId: input.patientId,
@@ -35,7 +36,7 @@ function pendente(input: CumulativoInput, rs: LimiteCumulativo | null | undefine
 }
 
 /** FN-26: cumulativo por paciente x episodio, usando apenas administracoes efetivas. */
-export function avaliarCumulativoAlerta(input: CumulativoInput, rs: LimiteCumulativo | null | undefined): CumulativoResult {
+function calcularcumulativoAlerta(input: CumulativoInput, rs: LimiteCumulativo | null | undefined): SaidaInterna {
   if (!rs || !rs.ativo) return pendente(input, rs, RULESET_INATIVO, ["ruleset"]);
   if (rs.maximo === null || !Number.isSafeInteger(rs.maximo) || rs.maximo < 0) return pendente(input, rs, "limite cumulativo ausente ou invalido [VERIFICAR]", ["limite.maximo"]);
   if (rs.droga !== input.droga) return pendente(input, rs, "limite de outra droga [VERIFICAR]", ["limite.droga"]);
@@ -93,4 +94,10 @@ export function avaliarCumulativoAlerta(input: CumulativoInput, rs: LimiteCumula
       administracoes.map((a) => `admin.${a.adminId}.quantidadeEfetivaMg`),
     ),
   };
+}
+
+export function avaliarCumulativoAlerta(...args: Parameters<typeof calcularcumulativoAlerta>): CumulativoResult {
+  const r = calcularcumulativoAlerta(...args);
+  const achados = [r.achado];
+  return { ...r, inputs_used: [...new Set(achados.flatMap((a) => a.inputs_used))], inputs_missing: [...new Set(achados.flatMap((a) => a.inputs_missing))] };
 }

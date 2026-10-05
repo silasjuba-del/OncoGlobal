@@ -1,3 +1,4 @@
+type SaidaInterna = Omit<ScoreResult, "inputs_used" | "inputs_missing">;
 type Achado = import("./tipos-w3.js").Achado;
 type ScoreInput = import("./tipos-w3.js").ScoreInput;
 type ScoreResult = import("./tipos-w3.js").ScoreResult;
@@ -17,7 +18,7 @@ function achado(
   return { codigo, estado, motivo, regraId, rulesetVersao, inputs_used, inputs_missing };
 }
 
-function pendente(input: ScoreInput, rs: ScoreRuleset | null | undefined, motivo: string, missing: string[]): ScoreResult {
+function pendente(input: ScoreInput, rs: ScoreRuleset | null | undefined, motivo: string, missing: string[]): SaidaInterna {
   return {
     rulesetVersao: rs?.versao ?? "MISSING",
     scoreId: input.scoreId,
@@ -32,7 +33,7 @@ function interpretar(valor: number, rs: ScoreRuleset): string | null {
 }
 
 /** Motor generico de escore declarativo: SOMA/PESOS, sem eval e sem escore clinico embutido. */
-export function avaliarEscore(input: ScoreInput, rs: ScoreRuleset | null | undefined): ScoreResult {
+function calcularescores(input: ScoreInput, rs: ScoreRuleset | null | undefined): SaidaInterna {
   if (!rs || !rs.ativo) return pendente(input, rs, RULESET_INATIVO, ["ruleset"]);
   if (input.scoreId !== rs.scoreId) return pendente(input, rs, "scoreId divergente [VERIFICAR]", ["scoreId"]);
   if (!rs.aplicabilidade.trim()) return pendente(input, rs, "aplicabilidade ausente [VERIFICAR]", ["aplicabilidade"]);
@@ -76,4 +77,10 @@ export function avaliarEscore(input: ScoreInput, rs: ScoreRuleset | null | undef
     interpretacao: interpretar(valor, rs),
     achado: achado(`SCORE_${rs.scoreId}`, "VERDE", "escore calculado por formula declarativa", rs.scoreId, rs.versao, used),
   };
+}
+
+export function avaliarEscore(...args: Parameters<typeof calcularescores>): ScoreResult {
+  const r = calcularescores(...args);
+  const achados = [r.achado];
+  return { ...r, inputs_used: [...new Set(achados.flatMap((a) => a.inputs_used))], inputs_missing: [...new Set(achados.flatMap((a) => a.inputs_missing))] };
 }

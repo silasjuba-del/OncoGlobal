@@ -1,3 +1,4 @@
+type SaidaInterna = Omit<CtcaeResult, "inputs_used" | "inputs_missing">;
 type Achado = import("./tipos-w3.js").Achado;
 type CriterioDeclarativo = import("./tipos-w3.js").CriterioDeclarativo;
 type CtcaeInput = import("./tipos-w3.js").CtcaeInput;
@@ -35,7 +36,7 @@ function comparar(valor: number | string | boolean, criterio: CriterioDeclarativ
   }
 }
 
-function pendente(rs: CtcaeRuleset | null | undefined, input: CtcaeInput, motivo: string, missing: string[]): CtcaeResult {
+function pendente(rs: CtcaeRuleset | null | undefined, input: CtcaeInput, motivo: string, missing: string[]): SaidaInterna {
   return {
     rulesetVersao: rs?.versao ?? "MISSING",
     candidate_grade: null,
@@ -56,7 +57,7 @@ function criterioOk(input: CtcaeInput, criterio: CriterioDeclarativo): { ok: boo
 }
 
 /** FN-17: CTCAE candidato, nunca fato clinico. Tabela clinica entra somente pelo ruleset. */
-export function avaliarCtcaeGrau(input: CtcaeInput, rs: CtcaeRuleset | null | undefined): CtcaeResult {
+function calcularctcaeGrau(input: CtcaeInput, rs: CtcaeRuleset | null | undefined): SaidaInterna {
   if (!rs || !rs.ativo) return pendente(rs, input, RULESET_INATIVO, ["ruleset"]);
   if (!input.ctcae_version) return pendente(rs, input, "ctcae_version obrigatória", ["ctcae_version"]);
   if (input.ctcae_version !== rs.ctcae_version) return pendente(rs, input, "ctcae_version divergente [VERIFICAR]", ["ctcae_version"]);
@@ -100,4 +101,10 @@ export function avaliarCtcaeGrau(input: CtcaeInput, rs: CtcaeRuleset | null | un
       [...new Set(["ctcae_version", ...graus.flatMap(([, cs]) => cs.flatMap((c) => c.exigeBasal ? [`medidas.${c.campo}`, `basal.${c.campo}`] : [`medidas.${c.campo}`]))])],
     ),
   };
+}
+
+export function avaliarCtcaeGrau(...args: Parameters<typeof calcularctcaeGrau>): CtcaeResult {
+  const r = calcularctcaeGrau(...args);
+  const achados = [r.achado];
+  return { ...r, inputs_used: [...new Set(achados.flatMap((a) => a.inputs_used))], inputs_missing: [...new Set(achados.flatMap((a) => a.inputs_missing))] };
 }

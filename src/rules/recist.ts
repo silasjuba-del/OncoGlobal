@@ -1,3 +1,4 @@
+type SaidaInterna = Omit<RecistResult, "inputs_used" | "inputs_missing">;
 type Achado = import("./tipos-w3.js").Achado;
 type LesaoRecist = import("./tipos-w3.js").LesaoRecist;
 type RecistInput = import("./tipos-w3.js").RecistInput;
@@ -36,7 +37,7 @@ function todasConfirmadas(lesoes: readonly LesaoRecist[]): boolean {
   return lesoes.every((l) => l.confirmadaPorMedico);
 }
 
-function pendente(input: RecistInput, rs: RecistRuleset | null | undefined, motivo: string, missing: string[]): RecistResult {
+function pendente(input: RecistInput, rs: RecistRuleset | null | undefined, motivo: string, missing: string[]): SaidaInterna {
   return {
     rulesetVersao: rs?.versao ?? "MISSING",
     candidate_response: null,
@@ -50,7 +51,7 @@ function pendente(input: RecistInput, rs: RecistRuleset | null | undefined, moti
 }
 
 /** FN-18: resposta RECIST candidata; nao promove fato nem substitui confirmacao medica. */
-export function avaliarRecist(input: RecistInput, rs: RecistRuleset | null | undefined): RecistResult {
+function calcularrecist(input: RecistInput, rs: RecistRuleset | null | undefined): SaidaInterna {
   if (!rs || !rs.ativo) return pendente(input, rs, RULESET_INATIVO, ["ruleset"]);
   if (
     rs.thresholds.prPercent === undefined ||
@@ -129,4 +130,10 @@ export function avaliarRecist(input: RecistInput, rs: RecistRuleset | null | und
       ["lesoesAtuais", "baseline", "nadir"],
     ),
   };
+}
+
+export function avaliarRecist(...args: Parameters<typeof calcularrecist>): RecistResult {
+  const r = calcularrecist(...args);
+  const achados = [r.achado];
+  return { ...r, inputs_used: [...new Set(achados.flatMap((a) => a.inputs_used))], inputs_missing: [...new Set(achados.flatMap((a) => a.inputs_missing))] };
 }
