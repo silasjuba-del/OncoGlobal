@@ -257,6 +257,8 @@ export type EventoIntervaloQt =
   | (ClinicalEvent & { payload: unknown });
 
 export interface IntervaloQtResult {
+  /** Versao da ponte deterministica A4; nao aplica ruleset de prazos. */
+  rulesetVersao: string;
   data: string | null;
   adminId: string | null;
   inputs_used: string[];

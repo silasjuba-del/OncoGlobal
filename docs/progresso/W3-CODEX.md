@@ -13,8 +13,8 @@ Worktree: C:\Users\silas\Projects\OncoGlobal-wt\w3-codex
 | CDX-05 cumulativoAlerta.ts | FEITA | f9cc8bc | PASS serial: 20 files/183 tests; 13.40s | dedupe por adminId; divergencia vermelha; limite da mesma droga; escopo explicito |
 | CDX-06 ctcaeGrau.ts | FEITA | fe123ee | PASS serial: 20 files/183 tests; 12.76s | basal obrigatorio; sem coercao; grau candidato e PENDENTE de revisao |
 | CDX-07 recist.ts | FEITA | eb06f63 | PASS serial: 20 files/183 tests; 11.46s | decimais exatos na decisao; codigos conferidos; precedencia PR/PD [VERIFICAR] |
-| CDX-08 escores.ts | FEITA | neste commit | PASS serial: 20 files/183 tests; 9.63s | SOMA/PESOS sem eval; numeros e interpretacoes ambiguas geram pendencia |
-| CDX-09 intervaloQt.ts | PENDENTE | - | NOT_RUN | - |
+| CDX-08 escores.ts | FEITA | 070b817 | PASS serial: 20 files/183 tests; 9.63s | SOMA/PESOS sem eval; numeros e interpretacoes ambiguas geram pendencia |
+| CDX-09 intervaloQt.ts | FEITA | neste commit | PASS serial: 20 files/183 tests; 10.06s | contrato real; quantidade efetiva; revisao e supersessao; metadados A4 |
 | CDX-10 tests/w3/** | PENDENTE | - | NOT_RUN | - |
 
 ## Retomada 2026-10-05
@@ -86,4 +86,7 @@ fronteiras ok (23 arquivos)
 
 
 
+
+
+CDX-09: primeira verificacao interrompida por crash de worker Windows em tests/server/server.test.ts (3221226505), sem assertion failure. Repeticao integral serial PASS. Tipos locais e fixture W3 ajustados para o contrato real; contratos congelados preservados.
 
