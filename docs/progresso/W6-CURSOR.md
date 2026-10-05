@@ -10,8 +10,8 @@ Executor: CURSOR. Branch: `f0/w6-cursor`. Papel: telas da consulta. UI mostra e 
 | CUR-12 Consulta pronta | FEITA | 3a53cd2 | fronteiras ok (84); corpus ok (20); 55 files, 356 tests | |
 | CUR-13 Barra de comando | FEITA | ec0bd5e | fronteiras ok (86); corpus ok (20); 56 files, 359 tests | |
 | CUR-14 Agenda | FEITA | c642b47 | fronteiras ok (87); corpus ok (20); 57 files, 361 tests | |
-| CUR-15 Salão | FEITA | (este commit) | fronteiras ok (91); corpus ok (20); 59 files, 365 tests | |
-| CUR-16 Chat |  |  |  |  |
+| CUR-15 Salão | FEITA | 89dddba | fronteiras ok (91); corpus ok (20); 59 files, 365 tests | |
+| CUR-16 Chat | FEITA | (este commit) | fronteiras ok (91); corpus ok (20); 59 files, 365 tests | |
 | CUR-17 Canal |  |  |  |  |
 | CUR-18 APAC |  |  |  |  |
 | CUR-19 Importar |  |  |  |  |
@@ -72,6 +72,17 @@ Test Files  59 passed (59)
      Tests  365 passed (365)
 ```
 
+## CUR-16 · saída real
+
+O mesmo `npm run verify` da CUR-15, que já executou o chat:
+
+```
+fronteiras ok (91 arquivos)
+corpus ok (20 arquivos)
+Test Files  59 passed (59)
+     Tests  365 passed (365)
+```
+
 ## Arquivos criados
 
 - `src/ui/api/porta.ts`
@@ -90,3 +101,7 @@ Test Files  59 passed (59)
 - `tests/ui-telas/agenda.test.tsx`
 - `src/ui/telas/TelaSalao.tsx`
 - `tests/ui-telas/salao.test.tsx`
+- `src/ui/telas/chat/ChatSetor.tsx`
+- `src/ui/telas/chat/CorrecaoFarmacia.tsx`
+- `src/ui/telas/chat/ChipEstoque.tsx`
+- `tests/ui-telas/chat.test.tsx`
