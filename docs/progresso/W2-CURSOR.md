@@ -13,9 +13,9 @@ Executor: CURSOR. Branch: `f0/w2-cursor`. Papel: UI mostra e coleta; regra em `s
 | CUR-05 Delta | FEITA | d04d66d | fronteiras ok (15 arquivos); vitest 6 files, 34 tests | |
 | CUR-06 Evidência | FEITA | 02b3d18 | fronteiras ok (17 arquivos); vitest 7 files, 38 tests | |
 | CUR-07 Triagem | FEITA | 20ff506 | fronteiras ok (57 arquivos); vitest 27 files, 180 tests | idade vazia no contrato é `number`, não `dado` — a borda manda 0 `[VERIFICAR]` |
-| CUR-08 Quadro | FEITA | (este commit) | fronteiras ok (59 arquivos); vitest 29 files, 186 tests | |
+| CUR-08 Quadro | FEITA | 7f8d76b | fronteiras ok (59 arquivos); vitest 29 files, 186 tests | |
 | CUR-09 Fechamento | FEITA | d0cf570 | fronteiras ok (19 arquivos); vitest 8 files, 41 tests | |
-| CUR-10 Dose | pendente | | | `calcularDose` ausente neste branch |
+| CUR-10 Dose | FEITA | (este commit) | fronteiras ok (59 arquivos); vitest 29 files, 186 tests | |
 
 ## CUR-01 · saída real
 
@@ -75,7 +75,40 @@ Test Files  2 passed (2)
 - `tests/ui/triagem.test.tsx`
 - `src/ui/salao/QuadroSalao.tsx`
 - `tests/ui/quadro.test.tsx`
+- `src/ui/tratamento/CalculadoraDose.tsx`
+- `tests/ui/dose.test.tsx`
+
+Integração das regras: merge `1ffd053` (`f0/w1-integrado`) antes de CUR-07, CUR-08 e CUR-10.
+
+## Último `npm run verify`
+
+```
+> oncoglobal@0.0.1 typecheck
+> tsc --noEmit
+
+> oncoglobal@0.0.1 check:boundaries
+> node scripts/check-boundaries.mjs
+
+fronteiras ok (59 arquivos)
+
+> oncoglobal@0.0.1 test
+> vitest run
+
+ Test Files  29 passed (29)
+      Tests  186 passed (186)
+   Duration  53.13s
+```
+
+`npm run ui:build` (CUR-01): vite 8.3.2, ok.
+
+## [VERIFICAR]
+
+- `tsconfig.json` precisou de `"jsx": "react-jsx"` para o typecheck dos `.tsx`. Fora da lista da CUR-01; sem isso a fatia não fecha.
+- Idade vazia na triagem: o contrato é `idadeAnos: number`, não `dado`. Campo vazio vai como `0` para o objeto existir. Não vira PENDENTE.
+- A tela `App` continua só com o título e o aviso de dados sintéticos. As fatias seguintes não listavam `App.tsx`, então o cabeçalho, o banner, o delta, a evidência, o salão e a dose não foram montados num único layout.
 
 ## Perguntas ao tech lead
 
 - Confirmar `"jsx": "react-jsx"` no `tsconfig.json`.
+- Idade ausente deve continuar `0` ou o contrato precisa de um `dado` para a idade?
+- Quer que a próxima fatia monte esses blocos dentro de `App` (consulta única, R-17)?
