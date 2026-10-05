@@ -9,8 +9,8 @@ Executor: CURSOR. Branch: `f0/w2-cursor`. Papel: UI mostra e coleta; regra em `s
 | CUR-01 Scaffold Vite + React | FEITA | 469a324 | typecheck ok; fronteiras ok (9 arquivos); vitest 2 files, 25 tests; `ui:build` ok | `[VERIFICAR]` `tsconfig.json` ganhou `"jsx": "react-jsx"` |
 | CUR-02 Tema | FEITA | 927b931 | fronteiras ok (11 arquivos); vitest 3 files, 27 tests | |
 | CUR-03 Cabeçalho | FEITA | bbec1b5 | fronteiras ok (13 arquivos); vitest 4 files, 30 tests | |
-| CUR-04 Banner E1 | FEITA | (este commit) | fronteiras ok (14 arquivos); vitest 5 files, 31 tests | |
-| CUR-05 Delta | pendente | | | |
+| CUR-04 Banner E1 | FEITA | 9bd72c7 | fronteiras ok (14 arquivos); vitest 5 files, 31 tests | |
+| CUR-05 Delta | FEITA | (este commit) | fronteiras ok (15 arquivos); vitest 6 files, 34 tests | |
 | CUR-06 Evidência | pendente | | | |
 | CUR-07 Triagem | pendente | | | `src/rules/index.ts` ausente neste branch |
 | CUR-08 Quadro | pendente | | | `ordenarFila` ausente neste branch |
@@ -62,6 +62,8 @@ Test Files  2 passed (2)
 - `vite.config.ts` (`maxWorkers: 1` — jsdom em paralelo esgotou a memória)
 - `src/ui/consulta/BannerE1.tsx`
 - `tests/ui/banner-e1.test.tsx`
+- `src/ui/consulta/PainelDelta.tsx`
+- `tests/ui/delta.test.tsx`
 
 ## Perguntas ao tech lead
 
