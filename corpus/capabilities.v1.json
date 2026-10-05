@@ -1,0 +1,40 @@
+{
+  "header": { "id": "capabilities", "versao": "1.0.0", "vigenteDesde": "2026-10-05",
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "R-13 + cortes do manifesto (AG-09/10/12/17/18 viraram funções; K-21) — docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md", "trecho": null, "edicao": null },
+    "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-05" },
+  "nota": "esqueleto W2/GLM-10: cada item valida como AgentSpec (C-18); trigger e wiring (extractor/rulesetRef) são [VERIFICAR] até a tabela do Maestro existir; phiAllowed sempre false (INV-12)",
+  "agentes": [
+    { "id": "AG-01", "version": "1.0.0", "ownerOf": ["Evidencia", "Contexto"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "SPECIFIED" },
+    { "id": "AG-02", "version": "1.0.0", "ownerOf": ["RoteamentoCaixa"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "SPECIFIED" },
+    { "id": "AG-03", "version": "1.0.0", "ownerOf": ["LabResult", "LabAlert"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "SPECIFIED" },
+    { "id": "AG-04", "version": "1.0.0", "ownerOf": ["ImagingStudy", "Lesion", "RadAlert"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "SPECIFIED" },
+    { "id": "AG-05", "version": "1.0.0", "ownerOf": ["PathologyFact", "Biomarker"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "SPECIFIED" },
+    { "id": "AG-06", "version": "1.0.0", "ownerOf": ["CTCAEAssessment"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "SPECIFIED" },
+    { "id": "AG-07", "version": "1.0.0", "ownerOf": ["TreatmentEpisode", "Ciclo", "ItemDose"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "SPECIFIED" },
+    { "id": "AG-08", "version": "1.0.0", "ownerOf": ["Comorbidity", "RiskFinding"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "SPECIFIED" },
+    { "id": "AG-11", "version": "1.0.0", "ownerOf": ["VoiceIntentDraft"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "SPECIFIED" },
+    { "id": "AG-13", "version": "1.0.0", "ownerOf": ["Document"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "SPECIFIED" },
+    { "id": "AG-14", "version": "1.0.0", "ownerOf": ["Conversation"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "SPECIFIED" },
+    { "id": "AG-15", "version": "1.0.0", "ownerOf": ["TriageRecord", "QueueEntry"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "TESTED" },
+    { "id": "AG-16", "version": "1.0.0", "ownerOf": ["Apac", "ApacBatch"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "SPECIFIED" },
+    { "id": "AG-19", "version": "1.0.0", "ownerOf": ["RoteiroAnamnese"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "SPECIFIED" },
+    { "id": "AG-20", "version": "1.0.0", "ownerOf": ["VisualSuggestion"], "trigger": "[VERIFICAR]", "extractor": null, "rulesetRef": null, "capabilityStatus": "DISABLED" }
+  ],
+  "metadados": {
+    "AG-01": { "nome": "INTAKE/IDENTITY", "fase": "F0", "dono": "[VERIFICAR]", "planejado": { "microprompt": null, "ruleset": null } },
+    "AG-02": { "nome": "CAIXA", "fase": "F1", "dono": "[VERIFICAR]", "planejado": { "microprompt": "CAIXA@1.0.0", "ruleset": null } },
+    "AG-03": { "nome": "LAB", "fase": "F1", "dono": "[VERIFICAR]", "planejado": { "microprompt": "LAB@1.0.0", "ruleset": "lab-thresholds.v1.json" } },
+    "AG-04": { "nome": "RADS", "fase": "F1", "dono": "[VERIFICAR]", "planejado": { "microprompt": "RADS@1.0.0", "ruleset": "rad-emergencia.v1.json" } },
+    "AG-05": { "nome": "PATH(+BIOMARKER)", "fase": "F1", "dono": "[VERIFICAR]", "planejado": { "microprompt": "PATH@1.0.0", "ruleset": null } },
+    "AG-06": { "nome": "SYMPTOM/CTCAE", "fase": "F1", "dono": "[VERIFICAR]", "planejado": { "microprompt": "SYMPTOM@1.0.0", "ruleset": null } },
+    "AG-07": { "nome": "CHEMO", "fase": "F1/F3", "dono": "[VERIFICAR]", "planejado": { "microprompt": "CHEMO@1.0.0", "ruleset": "dose.v1.json" } },
+    "AG-08": { "nome": "COMORB", "fase": "F1", "dono": "[VERIFICAR]", "planejado": { "microprompt": null, "ruleset": null } },
+    "AG-11": { "nome": "VOICE_INTENT", "fase": "F1", "dono": "[VERIFICAR]", "planejado": { "microprompt": "INTENT@1.0.0", "ruleset": null } },
+    "AG-13": { "nome": "DOCUMENT", "fase": "F1", "dono": "[VERIFICAR]", "planejado": { "microprompt": null, "ruleset": null } },
+    "AG-14": { "nome": "CANAL_READER", "fase": "F2", "dono": "[VERIFICAR]", "planejado": { "microprompt": "[VERIFICAR]", "ruleset": "canal-redflags.v1.json" } },
+    "AG-15": { "nome": "TRIAGE", "fase": "F3", "dono": "[VERIFICAR]", "planejado": { "microprompt": null, "ruleset": "salao-triagem.v1.json" } },
+    "AG-16": { "nome": "APAC/SIGTAP", "fase": "F4", "dono": "[VERIFICAR]", "planejado": { "microprompt": null, "ruleset": "apac.v1.json" } },
+    "AG-19": { "nome": "ANAMNESE_ROTEIRO", "fase": "F5", "dono": "[VERIFICAR]", "planejado": { "microprompt": "ANAMNESE@1.0.0", "ruleset": null } },
+    "AG-20": { "nome": "VISUAL_TC_RM", "fase": "F5+", "dono": "[VERIFICAR]", "planejado": { "microprompt": null, "ruleset": null } }
+  }
+}

@@ -1,0 +1,97 @@
+/* Aparência substituível (G-28). O significado não mora aqui. */
+
+:root,
+[data-tema="gelo"] {
+  --cor-fundo: #f4f7f8;
+  --cor-superficie: #ffffff;
+  --cor-texto: #2c3338;
+  --cor-texto-suave: #5c6770;
+  --cor-destaque: #2f5f86;
+  --cor-linha: #d5dee5;
+  --cor-verde: #1f6b45;
+  --cor-vermelho: #8f1d1d;
+  --cor-pendente: #5c6770;
+  --fonte: "Segoe UI", sans-serif;
+  --tamanho: 1rem;
+  --linha: 1.5;
+  --espaco: 1rem;
+  --raio: 8px;
+}
+
+[data-tema="contraste"] {
+  --cor-fundo: #101418;
+  --cor-superficie: #1b222a;
+  --cor-texto: #f4f7fa;
+  --cor-texto-suave: #d5dde4;
+  --cor-destaque: #9ec9f0;
+  --cor-linha: #3d4b59;
+  --cor-verde: #8fd0a8;
+  --cor-vermelho: #ffb4b4;
+  --cor-pendente: #d5dde4;
+  --fonte: "Segoe UI", sans-serif;
+  --tamanho: 1.0625rem;
+  --linha: 1.5;
+  --espaco: 1rem;
+  --raio: 8px;
+}
+
+.tema {
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte);
+  font-size: var(--tamanho);
+  line-height: var(--linha);
+}
+
+.semaforo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 650;
+}
+
+.semaforo-verde { color: var(--cor-verde); }
+.semaforo-vermelho { color: var(--cor-vermelho); }
+.semaforo-pendente { color: var(--cor-pendente); }
+
+.cartao,
+.banner-e1,
+.gaveta,
+.coluna {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-linha);
+  border-radius: var(--raio);
+  padding: var(--espaco);
+}
+
+.banner-e1 {
+  border-color: var(--cor-vermelho);
+}
+
+.pilha > * + * { margin-top: 0.75rem; }
+
+.colunas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--espaco);
+}
+
+.lado-a-lado {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espaco);
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-destaque);
+  border-radius: var(--raio);
+  padding: 0.4rem 0.75rem;
+}

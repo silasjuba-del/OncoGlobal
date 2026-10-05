@@ -1,0 +1,42 @@
+{
+  "id": "laudo-judicial",
+  "versao": "1.0.0",
+  "nota": "esqueleto W2/GLM-07: texto fixo só nos títulos; nenhum conteúdo clínico",
+  "secoes": [
+    {
+      "id": "identificacao",
+      "titulo": "Identificação",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "questionamentos",
+      "titulo": "Questionamentos",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "analise-documental",
+      "titulo": "Análise documental",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "conclusao",
+      "titulo": "Conclusão",
+      "origem": "DECISAO_MEDICA",
+      "campos": []
+    },
+    {
+      "id": "referencias",
+      "titulo": "Referências",
+      "origem": "TEXTO_FIXO",
+      "campos": []
+    }
+  ],
+  "proibidoConter": [
+    "ALERTA",
+    "CORRECAO_IA"
+  ],
+  "exibeE1": false
+}

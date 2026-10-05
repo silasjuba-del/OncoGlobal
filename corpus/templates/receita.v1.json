@@ -1,0 +1,30 @@
+{
+  "id": "receita",
+  "versao": "1.0.0",
+  "nota": "esqueleto W2/GLM-07: texto fixo só nos títulos; nenhum conteúdo clínico",
+  "secoes": [
+    {
+      "id": "identificacao",
+      "titulo": "Identificação",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "itens-prescricao",
+      "titulo": "Itens da prescrição",
+      "origem": "DECISAO_MEDICA",
+      "campos": []
+    },
+    {
+      "id": "assinatura",
+      "titulo": "Assinatura",
+      "origem": "TEXTO_FIXO",
+      "campos": []
+    }
+  ],
+  "proibidoConter": [
+    "ALERTA",
+    "CORRECAO_IA"
+  ],
+  "exibeE1": false
+}

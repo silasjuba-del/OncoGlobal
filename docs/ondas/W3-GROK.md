@@ -1,0 +1,15 @@
+# W3 · GROK · 10 FATIAS (linha NOVA: src/modules/** — domínio puro dos módulos; ninguém mais toca)
+Worktree: C:\Users\silas\Projects\OncoGlobal-wt\w3-grok · branch f0/w3-grok (base: f0/w1-integrado). Siga docs/ondas/W2-CABECALHO-COMUM.md (EXECUTOR=GROK; progresso em docs/progresso/W3-GROK.md; retome da primeira fatia não FEITA; npm run verify verde antes de cada commit "W3-GROK-NN: ..."; sem push; Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>).
+LEIA docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md (Parte 0 normativa), docs/DECISOES.md, src/contracts/**, src/rules/** (suas regras já integradas).
+ESCOPO EXCLUSIVO: src/modules/**, tests/modules/**. NÃO toque src/rules/**, src/kernel/**, src/ui/**, src/orchestration/**, src/server/**, corpus/**, tests/rules|w3|ledger|..., contratos. Funções PURAS (sem I/O, sem relógio; "hoje" injetado); rulesets/packs como parâmetro; nada clínico embutido (sem fonte => PENDENTE/[VERIFICAR]).
+FATIAS
+GRK-01 src/modules/consulta/preConsulta.ts: monta o PRE-CONSULT PACK (view) a partir de snapshot atual+anterior CONFIRMED (tipos locais mínimos em src/modules/tipos.ts): o que mudou, pendências, tratamento/ciclo, cumulativos, contatos do canal, APAC (D85), decisões do dia; sem dado => seção PENDENTE; nunca inventa.
+GRK-02 src/modules/consulta/bundles.ts: 4 bundles (fim 1ª consulta, retorno QT, avaliação de resposta, renovação APAC) como MANIFESTOS declarativos vindos do pack (itens pré-marcados); função montarBundle(pack,bundleId) => itens {documento,preMarcado}; pack sem bundle => vazio+PENDENTE.
+GRK-03 src/modules/consulta/fechamento.ts: planejarFechamento(bloco, itensExibidos, alertas) => escopo do que será assinado (A1/G-25), lista de alertas a "reconhecer" (K-14); nunca inclui item não exibido; validar NÃO imprime (K-15).
+GRK-04 src/modules/documentos/render.ts: renderizador determinístico de template (JSON) + fatos CONFIRMADOS => documento estruturado com templateId+versão+hash; tipo de entrada NÃO aceita Alerta (INV-09, falha de tipo); campo faltante fica vazio e listado em camposVazios.
+GRK-05 src/modules/documentos/substituicao.ts: drafts de pedido (TC→RM): substituiDraftId, vigente vs histórico; imprime só vigente; ambiguidade => revisão.
+GRK-06 src/modules/farmacia/estados.ts: transições D9 ENVIADA→CONFERIDA|CORRECAO_PEDIDA→ACEITA; farmácia nunca edita; recusa do médico preserva histórico; transição inválida => erro tipado (não bloqueia o médico).
+GRK-07 src/modules/estoque/chip.ts: DISPONIVEL|INDISPONIVEL|DESCONHECIDO com origem+data; nunca trava, nunca sugere troca; dado velho => DESCONHECIDO.
+GRK-08 src/modules/apac/lote.ts: ApacBatch por critério (competência/cid/esquema/estado); item BLOQUEADO sai do lote com motivo e NÃO trava os demais; resultado por item; cirurgia fora (AIH).
+GRK-09 src/modules/canal/vinculo.ts: pura: dado contato+cadastro (identificadores exatos) => vinculo|candidato|fila; telefone compartilhado => fila; nunca por nome; consentimento (A10) obrigatório para resposta fixa.
+GRK-10 tests/modules/**: positivo+negativo+borda por função; fixtures sintéticas locais; teste estático: nenhum arquivo de src/modules importa relógio/rede/fs.

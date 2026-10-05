@@ -1,0 +1,24 @@
+{
+  "header": { "id": "interacoes", "versao": "1.0.0", "vigenteDesde": "2026-10-05",
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "contrato Delta Δ15 do PLANO; sementes citadas no plano; mecanismo/severidade/manejo e ativação pendem de fonte com trecho [VERIFICAR]", "trecho": null, "edicao": null },
+    "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-05" },
+  "nota": "esqueleto W2/GLM-05: nenhuma interação ativa; mecanismo/severidade/monitorizacao/notaManejo são null até existir fonte verificada (K-27)",
+  "interacoes": [
+    { "drogaA": "capecitabina", "drogaBouClasse": "varfarina",
+      "mecanismo": null, "severidade": null, "monitorizacao": null, "notaManejo": null,
+      "fonte": { "tipo": "LITERATURA", "referencia": "[VERIFICAR]", "trecho": null, "edicao": null },
+      "fonteVersao": null, "verificadoEm": null, "ativo": false },
+    { "drogaA": "inibidor de tirosino quinase (TKI)", "drogaBouClasse": "inibidor de bomba de prótons (IBP)",
+      "mecanismo": null, "severidade": null, "monitorizacao": null, "notaManejo": null,
+      "fonte": { "tipo": "LITERATURA", "referencia": "[VERIFICAR]", "trecho": null, "edicao": null },
+      "fonteVersao": null, "verificadoEm": null, "ativo": false },
+    { "drogaA": "ribociclibe", "drogaBouClasse": "antiemético 5-HT3",
+      "mecanismo": null, "severidade": null, "monitorizacao": null, "notaManejo": null,
+      "fonte": { "tipo": "LITERATURA", "referencia": "[VERIFICAR]", "trecho": null, "edicao": null },
+      "fonteVersao": null, "verificadoEm": null, "ativo": false },
+    { "drogaA": "inibidor de tirosino quinase (TKI)", "drogaBouClasse": "inibidor forte de CYP3A4",
+      "mecanismo": null, "severidade": null, "monitorizacao": null, "notaManejo": null,
+      "fonte": { "tipo": "LITERATURA", "referencia": "[VERIFICAR]", "trecho": null, "edicao": null },
+      "fonteVersao": null, "verificadoEm": null, "ativo": false }
+  ]
+}

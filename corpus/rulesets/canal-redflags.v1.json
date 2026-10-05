@@ -1,0 +1,14 @@
+{
+  "header": { "id": "canal-redflags", "versao": "1.0.0", "vigenteDesde": "2026-10-05",
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "candidatos do PLANO (FN-21); lista FINAL e textos das respostas fixas pendentes do Dr. Silas — pendência 0.8-3 [VERIFICAR]", "trecho": null, "edicao": null },
+    "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-05" },
+  "nota": "esqueleto W2/GLM-04: nada ativo; nenhum texto de resposta fixa foi inventado — respostaFixaTemplateId só deixa de ser null quando o template correspondente existir aprovado",
+  "redflags": [
+    { "id": "febre-em-quimioterapia", "termo": "Febre em paciente em quimioterapia", "sinonimosPt": [], "respostaFixaTemplateId": null, "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "sangramento", "termo": "Sangramento", "sinonimosPt": [], "respostaFixaTemplateId": null, "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "dispneia", "termo": "Dispneia", "sinonimosPt": [], "respostaFixaTemplateId": null, "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "dor-toracica", "termo": "Dor torácica", "sinonimosPt": [], "respostaFixaTemplateId": null, "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "confusao", "termo": "Confusão mental", "sinonimosPt": [], "respostaFixaTemplateId": null, "ativo": false, "fonte": "[VERIFICAR]" },
+    { "id": "vomito-incoercivel", "termo": "Vômito incoercível", "sinonimosPt": [], "respostaFixaTemplateId": null, "ativo": false, "fonte": "[VERIFICAR]" }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": "folha-operacional-salao",
+  "versao": "1.0.0",
+  "nota": "esqueleto W2/GLM-07: único documento que exibe E1 (K-12/INV-09); banner de emergência ativa",
+  "secoes": [
+    {
+      "id": "e1",
+      "titulo": "E1 — Emergência ativa",
+      "origem": "ALERTA",
+      "campos": []
+    },
+    {
+      "id": "dados-triagem",
+      "titulo": "Dados de triagem",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "destino",
+      "titulo": "Destino no salão",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    }
+  ],
+  "proibidoConter": [
+    "CORRECAO_IA"
+  ],
+  "exibeE1": true
+}

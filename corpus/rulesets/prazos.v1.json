@@ -1,0 +1,12 @@
+{
+  "header": { "id": "prazos", "versao": "1.0.0", "vigenteDesde": "2026-10-05",
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "Q56 + A4 + Q20 + Q35", "trecho": null, "edicao": null }, "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-05" },
+  "intervaloPosQtDias": 30,
+  "intervaloAncora": "ULTIMA_ADMINISTRACAO_QT",
+  "intervaloAlvos": ["CIRURGIA", "RT_SEQUENCIAL"],
+  "intervaloNaoSeAplicaA": ["QT_RT_CONCOMITANTE_PLANEJADA"],
+  "intervaloEfeito": "AVISO",
+  "apac": { "ancora": "DATA_GERACAO_APP", "avisoDia": 85, "vencidaDia": 90, "efeitoVencida": "FATURAMENTO_NAO_EMITE_CONSULTA_SEGUE" },
+  "contagem": "dias civis",
+  "fuso": "[VERIFICAR] America/Fortaleza"
+}
