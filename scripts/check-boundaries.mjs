@@ -16,6 +16,9 @@ const NET = /\bfrom\s+["'](node:https?|node:net|undici|axios|node-fetch)["']|\bf
 // src/server/** é servidor de ENTRADA em 127.0.0.1: pode node:http; nunca cliente de saída.
 const NET_SAIDA = /\bfrom\s+["'](node:https|node:net|undici|axios|node-fetch)["']|\bfetch\(|\bhttp\.request\(|\bhttp\.get\(/;
 
+// src/ui/api/** é o ÚNICO cliente HTTP da UI: só caminho relativo ao servidor local (mesma origem).
+const UI_API_PROIBIDO = /["'`](https?:|wss?:)?\/\/|new\s+WebSocket|XMLHttpRequest|sendBeacon|EventSource|import\(/;
+
 const files = [];
 const walk = (d) => { for (const f of readdirSync(d)) { const p = join(d, f); statSync(p).isDirectory() ? walk(p) : /\.(ts|tsx|mjs)$/.test(f) && files.push(p); } };
 try { walk(SRC); } catch { /* src vazio */ }
@@ -36,7 +39,9 @@ for (const file of files) {
     }
   }
   const servidor = rel.startsWith("src/server/");
-  if (servidor && NET_SAIDA.test(code)) erros.push(`${rel} faz rede de saída (servidor só de entrada local)`);
+  const uiApi = rel.startsWith("src/ui/api/");
+  if (uiApi) { if (UI_API_PROIBIDO.test(code)) erros.push(`${rel} cliente da UI fora da mesma origem (só caminho relativo "/...")`); }
+  else if (servidor && NET_SAIDA.test(code)) erros.push(`${rel} faz rede de saída (servidor só de entrada local)`);
   else if (!servidor && !rel.startsWith("src/kernel/gateway/") && !rel.startsWith("src/kernel/llm/") && NET.test(code))
     erros.push(`${rel} usa rede fora do gateway/llm (INV-05)`);
 }
