@@ -15,7 +15,7 @@ Executor: CURSOR. Branch: `f0/w2-cursor`. Papel: UI mostra e coleta; regra em `s
 | CUR-07 Triagem | FEITA | 20ff506 | fronteiras ok (57 arquivos); vitest 27 files, 180 tests | idade vazia no contrato é `number`, não `dado` — a borda manda 0 `[VERIFICAR]` |
 | CUR-08 Quadro | FEITA | 7f8d76b | fronteiras ok (59 arquivos); vitest 29 files, 186 tests | |
 | CUR-09 Fechamento | FEITA | d0cf570 | fronteiras ok (19 arquivos); vitest 8 files, 41 tests | |
-| CUR-10 Dose | FEITA | (este commit) | fronteiras ok (59 arquivos); vitest 29 files, 186 tests | |
+| CUR-10 Dose | FEITA | a09fd0b | fronteiras ok (59 arquivos); vitest 29 files, 186 tests | |
 
 ## CUR-01 · saída real
 
