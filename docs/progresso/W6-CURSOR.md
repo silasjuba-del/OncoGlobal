@@ -8,8 +8,8 @@ Executor: CURSOR. Branch: `f0/w6-cursor`. Papel: telas da consulta. UI mostra e 
 |---|---|---|---|---|
 | CUR-11 Porta de dados | FEITA | b68e0b3 | fronteiras ok (83); corpus ok (20); 54 files, 353 tests | `[SERVIDOR_PENDENTE]` exibirBundle, carregarConsulta, agendaDoDia, filaSalao, salvarTriagem, liberarComCorte, caixaCanal, pedirVinculo, lotesApac, chatSetor |
 | CUR-12 Consulta pronta | FEITA | 3a53cd2 | fronteiras ok (84); corpus ok (20); 55 files, 356 tests | |
-| CUR-13 Barra de comando | FEITA | (este commit) | fronteiras ok (86); corpus ok (20); 56 files, 359 tests | |
-| CUR-14 Agenda |  |  |  |  |
+| CUR-13 Barra de comando | FEITA | ec0bd5e | fronteiras ok (86); corpus ok (20); 56 files, 359 tests | |
+| CUR-14 Agenda | FEITA | (este commit) | fronteiras ok (87); corpus ok (20); 57 files, 361 tests | |
 | CUR-15 Salão |  |  |  |  |
 | CUR-16 Chat |  |  |  |  |
 | CUR-17 Canal |  |  |  |  |
@@ -39,6 +39,28 @@ Test Files  55 passed (55)
      Tests  356 passed (356)
 ```
 
+## CUR-13 · saída real
+
+`npm run verify`:
+
+```
+fronteiras ok (86 arquivos)
+corpus ok (20 arquivos)
+Test Files  56 passed (56)
+     Tests  359 passed (359)
+```
+
+## CUR-14 · saída real
+
+`npm run verify`:
+
+```
+fronteiras ok (87 arquivos)
+corpus ok (20 arquivos)
+Test Files  57 passed (57)
+     Tests  361 passed (361)
+```
+
 ## Arquivos criados
 
 - `src/ui/api/porta.ts`
@@ -53,3 +75,5 @@ Test Files  55 passed (55)
 - `src/ui/telas/comandos.ts`
 - `src/ui/telas/BarraComando.tsx`
 - `tests/ui-telas/comando.test.tsx`
+- `src/ui/telas/Agenda.tsx`
+- `tests/ui-telas/agenda.test.tsx`
