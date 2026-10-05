@@ -2,7 +2,7 @@
 
 > Se a sessão cair: leia este arquivo, depois `docs/w5/ACHADOS.md`, `docs/w5/CLAIMS.md` e `docs/w5/AMB.md`. Continue do primeiro passo não FEITO da tabela "Fases". Nunca refaça o que está FEITO.
 
-- **Fase atual:** P0 · worktrees dos agentes (linha de base VERDE às 19:08)
+- **Fase atual:** P1 (RED lendo) · rodada 1 · corretores em pré-leitura + cobertura (AMB-P05) · E2E-UI no INFRA-01
 - **Rodada:** 1 de 3
 - **Agente ativo no Vitest:** nenhum (lock livre; ultimo: ORQ as 19:08:39, exit 0)
 - **Base:** `f0/w5-integrado` @ `aa99b86` (worktree `C:\Users\silas\Projects\OncoGlobal-wt\w5-orq`)
@@ -12,8 +12,8 @@
 | Fase | Estado | Evidência |
 |---|---|---|
 | P0 linha de base | FEITO 19:08 | `npm run verify` exit 0 · 53 arquivos / 345 testes · fronteiras ok (79) · corpus ok (20) · log `_w5-locks\logs\20261005-190530-ORQ.log` |
-| P0 worktrees + `npm ci` (um por vez) | EM_CURSO | — |
-| P1 matriz de rastreabilidade | PENDENTE | — |
+| P0 worktrees + `npm ci` (um por vez) | FEITO 19:12 | 5 worktrees de `6b96702`; `npm ci` serial, 12–13 s cada, exit 0 |
+| P1 matriz de rastreabilidade | EM_CURSO (RED) | entrada do RED em `docs/w5/achados/_P1-MATRIZ-RED.md` → consolidação em `docs/w5/MATRIZ.md` |
 | P2 ataque (rodada 1) | PENDENTE | — |
 | P3 triagem (rodada 1) | PENDENTE | — |
 | P4 correção (rodada 1) | PENDENTE | — |
@@ -23,11 +23,11 @@
 ## Agentes (§3)
 | Agente | Worktree | Branch | Estado | Tarefa atual |
 |---|---|---|---|---|
-| RED | `w5-red` | `f0/w5-red` | não criado | — |
-| KERNEL | `w5-kernel` | `f0/w5-kernel` | não criado | — |
-| REGRAS | `w5-regras` | `f0/w5-regras` | não criado | — |
-| DOMINIO | `w5-dominio` | `f0/w5-dominio` | não criado | — |
-| E2E-UI | `w5-e2e` | `f0/w5-e2e` | não criado | — |
+| RED | `w5-red` | `f0/w5-red` | ativo (id `01a10e24-772a-7852-a756-1d95105d271b`) | RED-R1: P1 matriz → P2 lote 1 (provas W4) → F1…F11 |
+| KERNEL | `w5-kernel` | `f0/w5-kernel` | ativo (id `01a10e25-6914-7000-896f-5da3cea402e4`) | KERNEL-R1-PRE: leitura, desenho W4-01/02/03/06/07, suspeitas, COB |
+| REGRAS | `w5-regras` | `f0/w5-regras` | ativo (id `01a10e25-754e-7be2-ae7c-7f1002de0688`) | REGRAS-R1-PRE: leitura, desenho datas/W4-04/W4-05, suspeitas, COB |
+| DOMINIO | `w5-dominio` | `f0/w5-dominio` | ativo (id `01a10e25-84ab-7461-a718-c43d38c6437b`) | DOMINIO-R1-PRE: leitura, desenho hash modules, suspeitas, COB |
+| E2E-UI | `w5-e2e` | `f0/w5-e2e` | ativo (id `01a10e24-1044-77a0-8a22-efde89fdd0e9`) | E2E-R1: INFRA-01 (vite exclude tests/adv) → trilho E2E → suspeitas UI |
 
 ## Achados por estado
 | ABERTO | CORRIGIDO | RESISTIU | BLOQUEADO_CONTRATO | AMB |
@@ -45,6 +45,8 @@
 | 2026-10-05 19:00 | Leitura integral de W5-FUGU-ULTRA, W2-CABECALHO-COMUM, PLANO v1.1, DECISOES, contratos, auditoria-regressao, W4-FUGU. |
 | 2026-10-05 19:04 | Criados `docs/w5/` (ESTADO, CLAIMS, AMB, ACHADOS) e as ferramentas de lock/claims/varredura. |
 | 2026-10-05 19:08 | P0 VERDE (saída abaixo). Varredura automática de IDs: 82 IDs sem referência (bate com a do tech lead ±1 em T). |
+| 2026-10-05 19:12 | 5 worktrees criados + `npm ci` serial. Briefing comum (`docs/w5/BRIEFING-AGENTES.md`) commitado em `17f0501`. |
+| 2026-10-05 19:20 | 5 agentes lançados (RED, KERNEL, REGRAS, DOMINIO, E2E-UI). |
 
 ## P0 · saída real de `npm run verify` em `f0/w5-integrado` @ `aa99b86` (19:05–19:08)
 ```
