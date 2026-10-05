@@ -7,7 +7,7 @@ import { lerDraft } from "../kernel/ledger/drafts.js";
 import { confirmar } from "../kernel/ledger/writeRouter.js";
 import { g25EscopoAssinatura } from "../kernel/harness/gates.js";
 import type { criarGateway } from "../kernel/gateway/gateway.js";
-import type { GerenciadorSessao } from "./sessao.js";
+import { hashConteudoExibido, type GerenciadorSessao } from "./sessao.js";
 
 export interface ServidorDeps {
   db: DatabaseSync;
@@ -56,6 +56,13 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
   if (escolhidos.some((ref) => !docs.some((d) =>
     d?.documentId === ref.documentId && d.documentVersion === ref.documentVersion)))
     return { status: 409, body: { codigo: "DOCUMENTO_NAO_SELECIONADO" } };
+  // A13: só assina o conteúdo EXATO exibido. Hash ausente ou diferente ⇒ 409 (o draft mudou depois da tela).
+  const hashes = drafts.map((d) => hashConteudoExibido(d!.payload));
+  const alterado = docs.some((doc, i) => doc && escolhidos.some((e) =>
+    e.documentId === doc.documentId && e.documentVersion === doc.documentVersion)
+    && !exibidosNoServidor.some((x) => x.documentId === doc.documentId
+      && x.documentVersion === doc.documentVersion && x.conteudoHash === hashes[i]));
+  if (alterado) return { status: 409, body: { codigo: "CONTEUDO_ALTERADO_APOS_EXIBICAO" } };
   const em = deps.db.prepare("SELECT criadoEm FROM operation WHERE operationId=?")
     .get(input.idempotencyKey)?.criadoEm as string | undefined ?? deps.agora();
   const reviewDecisionId = sha(JSON.stringify({ input, medicoId: sessao.medicoId }));
@@ -68,7 +75,7 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
       eventId: sha(`${input.idempotencyKey}:${r.id}:${i}`), tipo: doc ? "DOCUMENTO" : "FATO",
       payload: selected ? { data: draft.payload,
         signature: { documentId: doc.documentId, documentVersion: doc.documentVersion,
-          documentHash: doc.documentHash, reviewDecisionId, serverActorId: sessao.medicoId } }
+          documentHash: hashes[i]!, declaredHash: doc.documentHash, reviewDecisionId, serverActorId: sessao.medicoId } }
         : draft.payload,
       fontes: [], revisao: selected ? "ASSINADO" as const : "CONFIRMADO" as const };
   });

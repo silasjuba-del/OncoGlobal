@@ -83,7 +83,7 @@ it("N14 cumulativo usa só administração efetiva; séries guardam origem", () 
   add(db, "lab", null, "lab", { campo: "Hb", valor: 12,
     unidade: "g/dL", data: "2026-10-05", sourceId: "manual" }, "LabResult");
   const events = listarEventos(db, "Paciente Teste 01");
-  expect(cumulativos(events)).toEqual([{ droga: "Droga Sintética", quantidadeEfetivaMg: 60, adminIds: ["admin-1"] }]);
+  expect(cumulativos(events)).toEqual([{ droga: "Droga Sintética", quantidadeEfetivaMg: 60, adminIds: ["admin-1"], conflitoAdminIds: [] }]);
   expect(weightSeries(events)[0]?.origem).toBe("INFORMADO_PACIENTE");
   expect(labSeries(events)[0]?.sourceId).toBe("manual");
   db.close();

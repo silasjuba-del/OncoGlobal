@@ -17,6 +17,7 @@ export interface RegistroAuditoria { acaoPedida: string; decisao: "PERMITIDA" | 
 export interface StoreIdempotencia {
   get(chave: string): { payloadHash: string; resultado: ResultadoGateway } | undefined;
   set(chave: string, v: { payloadHash: string; resultado: ResultadoGateway }): void;
+  delete?(chave: string): void;
 }
 
 const HARD_FORBIDDEN: { id: string; teste: (i: Intent) => boolean }[] = [
@@ -26,7 +27,7 @@ const HARD_FORBIDDEN: { id: string; teste: (i: Intent) => boolean }[] = [
 
 export function memoriaIdempotencia(): StoreIdempotencia {
   const m = new Map<string, { payloadHash: string; resultado: ResultadoGateway }>();
-  return { get: (k) => m.get(k), set: (k, v) => void m.set(k, v) };
+  return { get: (k) => m.get(k), set: (k, v) => void m.set(k, v), delete: (k) => void m.delete(k) };
 }
 
 export function criarGateway(deps: {
@@ -40,6 +41,10 @@ export function criarGateway(deps: {
     return { decisao: "NEGADA", motivoCodigo };
   };
 
+  // A01: chamadas concorrentes com a mesma chave compartilham UMA execução em andamento.
+  const emAndamento = new Map<string, { payloadHash: string; promessa: Promise<ResultadoGateway> }>();
+  const instante = (iso: string) => Date.parse(iso);
+
   return {
     async executar(bruto: unknown, sessao: Sessao | null): Promise<ResultadoGateway> {
       const p = ActionIntent.safeParse(bruto);
@@ -47,12 +52,21 @@ export function criarGateway(deps: {
       const intent = p.data;
       const acao = `${intent.verbo}:${intent.objeto.tipo}`;
       if (!sessao) return negar(acao, "SEM_SESSAO"); // autorização vem do servidor
-      if (sessao.expiraEm <= deps.agora()) return negar(acao, "SESSAO_EXPIRADA");
+      // A03: compara INSTANTES (offsets diferentes), nunca strings; data inválida = expirada.
+      const expira = instante(sessao.expiraEm), agoraMs = instante(deps.agora());
+      if (!Number.isFinite(expira) || !Number.isFinite(agoraMs) || expira <= agoraMs) return negar(acao, "SESSAO_EXPIRADA");
       const proibido = HARD_FORBIDDEN.find((h) => h.teste(intent));
       if (proibido) return negar(acao, `HARD_FORBIDDEN:${proibido.id}`);
 
       const payloadHash = createHash("sha256").update(JSON.stringify(intent)).digest("hex");
-      const anterior = deps.store.get(intent.idempotencyKey);
+      const chave = intent.idempotencyKey;
+      const andamento = emAndamento.get(chave);
+      if (andamento) {
+        if (andamento.payloadHash !== payloadHash) return negar(acao, "CHAVE_REUSADA_PAYLOAD_DIFERENTE");
+        const r = await andamento.promessa;
+        return { ...r, decisao: r.decisao === "EXECUTADA" ? "REPLAY" : r.decisao };
+      }
+      const anterior = deps.store.get(chave);
       if (anterior) {
         if (anterior.payloadHash !== payloadHash) return negar(acao, "CHAVE_REUSADA_PAYLOAD_DIFERENTE"); // N06
         return { ...anterior.resultado, decisao: anterior.resultado.decisao === "EXECUTADA" ? "REPLAY" : anterior.resultado.decisao };
@@ -60,15 +74,29 @@ export function criarGateway(deps: {
       const exec = deps.executores[intent.verbo];
       if (!exec) return negar(acao, "VERBO_SEM_EXECUTOR");
 
-      const r = await exec.executar(intent);
-      const resultado: ResultadoGateway = r.ok
-        ? { decisao: "EXECUTADA", motivoCodigo: "OK", recibo: r.recibo }
-        : r.incerto
-          ? { decisao: "OUTCOME_UNKNOWN", motivoCodigo: "RESULTADO_INCERTO_SEM_REENVIO" }
-          : { decisao: "FALHOU", motivoCodigo: r.erro };
-      if (resultado.decisao !== "FALHOU") deps.store.set(intent.idempotencyKey, { payloadHash, resultado });
-      deps.auditar({ acaoPedida: acao, decisao: "PERMITIDA", motivoCodigo: resultado.motivoCodigo, em: deps.agora() });
-      return resultado;
+      // A02: a reserva é gravada ANTES do efeito. Se o processo cair ou o executor lançar,
+      // o resultado fica OUTCOME_UNKNOWN e a mesma chave nunca reenvia às cegas.
+      deps.store.set(chave, { payloadHash, resultado: { decisao: "OUTCOME_UNKNOWN", motivoCodigo: "RESERVADA_EM_EXECUCAO" } });
+      const promessa = (async (): Promise<ResultadoGateway> => {
+        let resultado: ResultadoGateway;
+        try {
+          const r = await exec.executar(intent);
+          resultado = r.ok
+            ? { decisao: "EXECUTADA", motivoCodigo: "OK", recibo: r.recibo }
+            : r.incerto
+              ? { decisao: "OUTCOME_UNKNOWN", motivoCodigo: "RESULTADO_INCERTO_SEM_REENVIO" }
+              : { decisao: "FALHOU", motivoCodigo: r.erro };
+        } catch {
+          resultado = { decisao: "OUTCOME_UNKNOWN", motivoCodigo: "EXCECAO_NO_EXECUTOR_SEM_REENVIO" };
+        }
+        // FALHOU = falha certa sem efeito: libera a chave para nova tentativa explícita.
+        if (resultado.decisao === "FALHOU") deps.store.delete?.(chave);
+        else deps.store.set(chave, { payloadHash, resultado });
+        deps.auditar({ acaoPedida: acao, decisao: "PERMITIDA", motivoCodigo: resultado.motivoCodigo, em: deps.agora() });
+        return resultado;
+      })();
+      emAndamento.set(chave, { payloadHash, promessa });
+      try { return await promessa; } finally { emAndamento.delete(chave); }
     },
   };
 }

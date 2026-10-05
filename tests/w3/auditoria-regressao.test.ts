@@ -1,3 +1,4 @@
+// Gates permanentes da auditoria adversarial W3 (Codex): A01-A08, A13. Promovidos da reprodução após correção.
 import { describe, expect, it } from "vitest";
 import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gateway.js";
 import { cumulativos } from "../../src/kernel/projections/cumulativos.js";
@@ -8,7 +9,7 @@ import { Readable } from "node:stream";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { salvarDraft } from "../../src/kernel/ledger/drafts.js";
-import { criarGerenciadorSessao } from "../../src/server/sessao.js";
+import { criarGerenciadorSessao, hashConteudoExibido } from "../../src/server/sessao.js";
 import { rotear } from "../../src/server/rotas.js";
 
 const agora = "2026-10-05T10:00:00Z";
@@ -79,7 +80,7 @@ describe("Achados adversariais fora da propriedade W3 - expectativas de seguranc
       const draft = { draftId: "d", patientId: "p", sourceId: "s", rawRef: "opaco", diagnostics: [], revision: 0, criadoEm: agora,
         payload: { documentId: "doc", documentVersion: 1, documentHash: "hash-exibido", texto: "conteudo-exibido" } };
       salvarDraft(db, draft);
-      sessoes.registrarBundleExibido(token, { patientId: "p", encounterId: "e" }, [{ documentId: "doc", documentVersion: 1 }]);
+      sessoes.registrarBundleExibido(token, { patientId: "p", encounterId: "e" }, [{ documentId: "doc", documentVersion: 1, conteudoHash: hashConteudoExibido(draft.payload) }]);
       salvarDraft(db, { ...draft, revision: 1, payload: { ...draft.payload, documentHash: "hash-alterado", texto: "conteudo-nao-exibido" } });
       const comando = { patientId: "p", tumorLotId: "t", encounterId: "e", bloco: "TUDO", registros: [{ id: "d", expectedRevision: 1 }],
         documentosExibidos: [{ documentId: "doc", documentVersion: 1 }], reconhecerAlertas: [], idempotencyKey: "operacao-auditoria-13" };

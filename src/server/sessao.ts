@@ -1,13 +1,24 @@
-import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
+import { createHash, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 import { Sessao, type Sessao as SessaoTipo } from "../contracts/base.js";
+
+/** Documento exibido = id + versão + hash do CONTEÚDO exato mostrado ao médico (A13). */
+export interface DocumentoExibido { documentId: string; documentVersion: number; conteudoHash: string }
+
+/** JSON canônico (chaves ordenadas) → SHA-256. Mesmo conteúdo ⇒ mesmo hash, independente da ordem de chaves. */
+export function hashConteudoExibido(conteudo: unknown): string {
+  const canon = (v: unknown): unknown => Array.isArray(v) ? v.map(canon)
+    : v && typeof v === "object" ? Object.fromEntries(Object.keys(v as object).sort()
+      .map((k) => [k, canon((v as Record<string, unknown>)[k])])) : v;
+  return createHash("sha256").update(JSON.stringify(canon(conteudo))).digest("hex");
+}
 
 export interface GerenciadorSessao {
   login(senha: string): { token: string; sessao: SessaoTipo } | null;
   obter(token: string): SessaoTipo | null;
   registrarBundleExibido(token: string, contexto: { patientId: string; encounterId: string },
-    docs: readonly { documentId: string; documentVersion: number }[]): void;
+    docs: readonly DocumentoExibido[]): void;
   bundleExibido(token: string, contexto: { patientId: string; encounterId: string }):
-    readonly { documentId: string; documentVersion: number }[] | null;
+    readonly DocumentoExibido[] | null;
 }
 
 /** Single-user local login. Caller supplies the secret at startup; no default credentials. */
@@ -19,7 +30,7 @@ export function criarGerenciadorSessao(config: {
   const salt = randomBytes(16), secret = scryptSync(config.senha, salt, 32);
   const sessions = new Map<string, { sessao: SessaoTipo; bundle?: {
     contexto: { patientId: string; encounterId: string };
-    docs: readonly { documentId: string; documentVersion: number }[];
+    docs: readonly DocumentoExibido[];
   } }>();
   const obter = (token: string): SessaoTipo | null => {
     const record = sessions.get(token);
@@ -44,6 +55,7 @@ export function criarGerenciadorSessao(config: {
     obter,
     registrarBundleExibido(token, contexto, docs) {
       if (!obter(token)) throw new Error("SESSAO_EXPIRADA");
+      if (docs.some((d) => !/^[0-9a-f]{64}$/.test(d.conteudoHash))) throw new Error("HASH_EXIBIDO_INVALIDO");
       const record = sessions.get(token)!;
       record.bundle = { contexto: { ...contexto }, docs: docs.map((d) => ({ ...d })) };
     },

@@ -1,12 +1,12 @@
 import { TreatmentAdministration } from "../../contracts/clinico.js";
 import type { ClinicalEvent } from "../../contracts/operacao.js";
-import { dadosDoEvento } from "./snapshot.js";
+import { dadosDoEvento, eventosVigentes } from "./snapshot.js";
 
 export interface PontoLab { campo: string; valor: number; unidade: string; data: string; sourceId: string; eventId: string; tumorLotId: string | null }
 export interface PontoPeso { kg: number; origem: "MEDIDO" | "INFORMADO_PACIENTE" | "ANTERIOR"; data: string; sourceId: string; eventId: string; tumorLotId: string | null }
 
 export function labSeries(eventos: readonly ClinicalEvent[]): PontoLab[] {
-  return eventos.filter((e) => e.tipo === "LabResult").flatMap((e) => {
+  return eventosVigentes(eventos).filter((e) => e.tipo === "LabResult").flatMap((e) => {
     const d = dadosDoEvento(e);
     if (!d || typeof d.campo !== "string" || typeof d.valor !== "number"
       || typeof d.unidade !== "string" || typeof d.data !== "string" || typeof d.sourceId !== "string") return [];
@@ -16,7 +16,7 @@ export function labSeries(eventos: readonly ClinicalEvent[]): PontoLab[] {
 }
 
 export function weightSeries(eventos: readonly ClinicalEvent[]): PontoPeso[] {
-  return eventos.filter((e) => e.tipo === "Weight").flatMap((e) => {
+  return eventosVigentes(eventos).filter((e) => e.tipo === "Weight").flatMap((e) => {
     const d = dadosDoEvento(e);
     if (!d || typeof d.kg !== "number" || !Number.isFinite(d.kg)
       || !["MEDIDO", "INFORMADO_PACIENTE", "ANTERIOR"].includes(String(d.origem))
@@ -27,7 +27,7 @@ export function weightSeries(eventos: readonly ClinicalEvent[]): PontoPeso[] {
 }
 
 export function administrations(eventos: readonly ClinicalEvent[]) {
-  return eventos.filter((e) => e.tipo === "TreatmentAdministration").flatMap((e) => {
+  return eventosVigentes(eventos).filter((e) => e.tipo === "TreatmentAdministration").flatMap((e) => {
     const d = dadosDoEvento(e);
     const parsed = TreatmentAdministration.safeParse(d);
     return parsed.success ? [{ ...parsed.data, eventId: e.eventId, tumorLotId: e.tumorLotId }] : [];

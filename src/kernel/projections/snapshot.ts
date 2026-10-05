@@ -7,8 +7,17 @@ export interface RulesetRef { id: string; version: string; hash: string }
 export interface ValorProjetado {
   valor: unknown;
   eventIds: string[];
-  estado: "VERDE" | "VERMELHO";
+  estado: "VERDE" | "VERMELHO" | "PENDENTE";
   candidatos?: { valor: unknown; eventId: string }[];
+  /** A08: proposta CURRENT fica ao lado do fato; nunca o substitui nem apaga conflito. */
+  proposta?: { valor: unknown; sourceId: string };
+}
+
+/** Só CONFIRMADO/ASSINADO vira fato projetado (A06); substituídos saem (A05). Usado por snapshot e séries. */
+export function eventosVigentes(eventos: readonly ClinicalEvent[]): ClinicalEvent[] {
+  const confirmados = eventos.filter((e) => e.revisao === "CONFIRMADO" || e.revisao === "ASSINADO");
+  const substituidos = new Set(confirmados.map((e) => e.supersedesEventId).filter((id): id is string => !!id));
+  return confirmados.filter((e) => !substituidos.has(e.eventId));
 }
 export interface CaseSnapshot {
   kind: "CURRENT" | "CONFIRMED";
@@ -46,14 +55,12 @@ export function projetarSnapshot(
 ): CaseSnapshot {
   const alvo = eventos.filter((e) => e.patientId === patientId && e.encounterId === encounterId);
   const cutoff = alvo.reduce((max, e) => e.criadoEm > max ? e.criadoEm : max, "");
-  const relevantes = eventos.filter((e) => e.patientId === patientId
+  const relevantes = eventosVigentes(eventos).filter((e) => e.patientId === patientId
     && (e.tumorLotId === tumorLotId || e.tumorLotId === null)
     && (!cutoff || e.criadoEm <= cutoff));
-  const substituidos = new Set(relevantes.map((e) => e.supersedesEventId).filter((id): id is string => !!id));
   const campos: Record<string, ValorProjetado> = Object.create(null);
   const refs = new Map<string, RulesetRef>();
   for (const e of relevantes) {
-    if (substituidos.has(e.eventId)) continue;
     const data = dadosDoEvento(e);
     if (!data) continue;
     for (const ref of refsDoEvento(data)) refs.set(`${ref.id}\0${ref.version}\0${ref.hash}`, ref);
@@ -61,9 +68,10 @@ export function projetarSnapshot(
     if (typeof campo !== "string" || !campo) continue;
     const valor = data.valor ?? null;
     const anterior = campos[campo];
+    const estadoBase = valor === null ? "PENDENTE" as const : "VERDE" as const; // A07: ausente nunca é VERDE
     if (!anterior) {
-      campos[campo] = { valor, eventIds: [e.eventId], estado: "VERDE" };
-    } else if (JSON.stringify(anterior.valor) === JSON.stringify(valor) && anterior.estado === "VERDE") {
+      campos[campo] = { valor, eventIds: [e.eventId], estado: estadoBase };
+    } else if (JSON.stringify(anterior.valor) === JSON.stringify(valor) && anterior.estado !== "VERMELHO") {
       anterior.eventIds.push(e.eventId);
     } else {
       const candidatos = anterior.candidatos ?? anterior.eventIds.map((eventId) => ({ valor: anterior.valor, eventId }));
@@ -76,8 +84,10 @@ export function projetarSnapshot(
   const rulesetRefs = [...refs.values()].sort((a, b) =>
     `${a.id}:${a.version}:${a.hash}`.localeCompare(`${b.id}:${b.version}:${b.hash}`));
   for (const p of propostas) {
-    // Never turn a proposal into a confirmed ledger event, even if it carries a state-like string.
-    campos[p.campo] = { valor: p.valor, eventIds: [], estado: "VERDE" };
+    // Proposta nunca vira fato e nunca apaga fato/conflito confirmado (A08).
+    const existente = campos[p.campo];
+    if (existente) existente.proposta = { valor: p.valor, sourceId: p.sourceId };
+    else campos[p.campo] = { valor: null, eventIds: [], estado: "PENDENTE", proposta: { valor: p.valor, sourceId: p.sourceId } };
   }
   const kind = propostas.length ? "CURRENT" : "CONFIRMED";
   const contentHash = createHash("sha256")

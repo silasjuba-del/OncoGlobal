@@ -8,7 +8,7 @@ import { salvarDraft } from "../../src/kernel/ledger/drafts.js";
 import { listarEventos } from "../../src/kernel/ledger/ledger.js";
 import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gateway.js";
 import { criarServidorLocal } from "../../src/server/http.js";
-import { criarGerenciadorSessao } from "../../src/server/sessao.js";
+import { criarGerenciadorSessao, hashConteudoExibido } from "../../src/server/sessao.js";
 
 const dirs: string[] = [], servers: Server[] = [];
 afterEach(async () => {
@@ -83,10 +83,9 @@ it("G-25 rejeita assinatura fora do bundle; validação grava N eventos e não i
 it("N18 erro com identificador sintético não vaza no log nem na resposta", async () => {
   const f = await fixture();
   const marker = "CPF-SINTETICO-NAO-LOGAR";
-  const errGateway = criarGateway({ agora: () => f.em,
-    auditar: () => {}, store: memoriaIdempotencia(), executores: { IMPRIMIR: {
-      executar: async () => { throw new Error(marker); },
-    } } });
+  // A02: exceção do EXECUTOR vira OUTCOME_UNKNOWN dentro do gateway; aqui a falha nasce no próprio
+  // gateway para exercitar o catch/log do servidor.
+  const errGateway = { executar: async () => { throw new Error(marker); } } as unknown as ReturnType<typeof criarGateway>;
   // This second server exercises the real catch/log boundary with a throwing gateway.
   const second = criarServidorLocal({ ...f.deps, gateway: errGateway });
   servers.push(second);
@@ -106,5 +105,45 @@ it("N18 erro com identificador sintético não vaza no log nem na resposta", asy
 it("servidor recusa bind externo antes de ouvir", async () => {
   const f = await fixture();
   expect(() => criarServidorLocal(f.deps, { host: "0.0.0.0" })).toThrow("BIND_FORA_DO_LOOPBACK");
+  f.close();
+});
+it("A13 assina só o conteúdo exato exibido; draft alterado após exibição → 409", async () => {
+  const f = await fixture();
+  const draft = { draftId: "doc-d", patientId: "Paciente Teste 01", sourceId: "sintetico", rawRef: "opaco-doc",
+    payload: { documentId: "doc-1", documentVersion: 1, documentHash: "declarado", texto: "texto sintético exibido" },
+    diagnostics: [], revision: 0, criadoEm: f.em };
+  salvarDraft(f.db, draft);
+  f.sessoes.registrarBundleExibido(f.token, { patientId: "Paciente Teste 01", encounterId: "e1" },
+    [{ documentId: "doc-1", documentVersion: 1, conteudoHash: hashConteudoExibido(draft.payload) }]);
+  const payload = (rev: number, key: string) => ({ patientId: "Paciente Teste 01", tumorLotId: "t1", encounterId: "e1",
+    bloco: "TUDO", registros: [{ id: "doc-d", expectedRevision: rev }],
+    documentosExibidos: [{ documentId: "doc-1", documentVersion: 1 }], reconhecerAlertas: [], idempotencyKey: key });
+  salvarDraft(f.db, { ...draft, revision: 1, payload: { ...draft.payload, texto: "texto trocado depois" } });
+  const alterado = await f.post("/consulta/confirmar", payload(1, "operation-a13-x"), f.token);
+  expect(alterado.status).toBe(409);
+  expect(alterado.json.codigo).toBe("CONTEUDO_ALTERADO_APOS_EXIBICAO");
+  salvarDraft(f.db, { ...draft, revision: 2 });
+  expect((await f.post("/consulta/confirmar", payload(2, "operation-a13-ok"), f.token)).json.codigo).toBe("GRAVADA");
+  f.close();
+});
+it("A02 exceção do executor vira OUTCOME_UNKNOWN sem vazar identificador", async () => {
+  const f = await fixture();
+  const marker = "CPF-SINTETICO-NAO-LOGAR";
+  const gw = criarGateway({ agora: () => f.em, auditar: () => {}, store: memoriaIdempotencia(),
+    executores: { IMPRIMIR: { executar: async () => { throw new Error(marker); } } } });
+  const second = criarServidorLocal({ ...f.deps, gateway: gw });
+  servers.push(second);
+  await new Promise<void>((resolve) => second.listening ? resolve() : second.once("listening", resolve));
+  const address = second.address();
+  if (!address || typeof address === "string") throw new Error("sem porta");
+  const response = await fetch(`http://127.0.0.1:${address.port}/acao`, { method: "POST",
+    headers: { Authorization: `Bearer ${f.token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ verbo: "IMPRIMIR", objeto: { tipo: "DOCUMENTO", id: "doc-1", versao: 1 },
+      escopo: { patientId: "Paciente Teste 01", encounterId: "e1" },
+      destino: null, idempotencyKey: "action-789" }) });
+  const text = await response.text();
+  expect(JSON.parse(text).decisao).toBe("OUTCOME_UNKNOWN");
+  expect(text).not.toContain(marker);
+  expect(JSON.stringify(f.logs)).not.toContain(marker);
   f.close();
 });
