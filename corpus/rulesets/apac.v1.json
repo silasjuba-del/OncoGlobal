@@ -1,0 +1,11 @@
+{
+  "header": { "id": "apac", "versao": "1.0.0", "vigenteDesde": "2026-10-05",
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "Q33-Q36 + K-03", "trecho": null, "edicao": null }, "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-05" },
+  "nasceDe": "PRESCRICAO_ASSINADA",
+  "calculaDose": false,
+  "finalidade": { "campoSeparado": true, "escolha": "HUMANA_1X_HERDADA", "conversorDaIntencao": false,
+    "vocabulario": ["PREVIA", "ADJUVANTE", "CURATIVA", "CONTROLE_TEMPORARIO", "PALIATIVA"], "nomenclaturaOficial": "[VERIFICAR]" },
+  "camposObrigatorios": "[VERIFICAR] lista oficial por procedimento/competência — validada só na emissão",
+  "cirurgiaFaturaPor": "AIH",
+  "lotes": ["TUMOR_LOT", "APAC_BATCH"]
+}

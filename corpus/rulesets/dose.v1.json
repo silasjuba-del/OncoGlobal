@@ -1,0 +1,11 @@
+{
+  "header": { "id": "dose", "versao": "1.0.0", "vigenteDesde": "2026-10-05",
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "Q29-Q32 + A2 + K-06", "trecho": null, "edicao": null }, "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-05" },
+  "reducoesPct": [0, 20, 30, 40],
+  "base": "DOSE_ADMINISTRADA_CICLO_ANTERIOR",
+  "arredondamento": "inteiro mg, meio para cima, uma vez, após a redução",
+  "semPeso": "DOSE_ANTERIOR_COM_SINAL",
+  "semPesoConsecutivosVermelho": 2,
+  "ciclo1SemBalanca": "PESO_INFORMADO_PACIENTE",
+  "AC": { "ciclosComMedico": [1, 2, 4], "ciclo3SaltaSe": ["SEM_CORTE", "SEM_PENDENCIA"] }
+}
