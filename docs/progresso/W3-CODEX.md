@@ -14,8 +14,8 @@ Worktree: C:\Users\silas\Projects\OncoGlobal-wt\w3-codex
 | CDX-06 ctcaeGrau.ts | FEITA | fe123ee | PASS serial: 20 files/183 tests; 12.76s | basal obrigatorio; sem coercao; grau candidato e PENDENTE de revisao |
 | CDX-07 recist.ts | FEITA | eb06f63 | PASS serial: 20 files/183 tests; 11.46s | decimais exatos na decisao; codigos conferidos; precedencia PR/PD [VERIFICAR] |
 | CDX-08 escores.ts | FEITA | 070b817 | PASS serial: 20 files/183 tests; 9.63s | SOMA/PESOS sem eval; numeros e interpretacoes ambiguas geram pendencia |
-| CDX-09 intervaloQt.ts | FEITA | neste commit | PASS serial: 20 files/183 tests; 10.06s | contrato real; quantidade efetiva; revisao e supersessao; metadados A4 |
-| CDX-10 tests/w3/** | PENDENTE | - | NOT_RUN | - |
+| CDX-09 intervaloQt.ts | FEITA | 1a290cc | PASS serial: 20 files/183 tests; 10.06s | contrato real; quantidade efetiva; revisao e supersessao; metadados A4 |
+| CDX-10 tests/w3/** | FEITA | neste commit | PASS serial: 22 files/216 tests; 10.50s | positivos/negativos/bordas; pureza; fixtures sinteticas locais |
 
 ## Retomada 2026-10-05
 
@@ -90,3 +90,23 @@ fronteiras ok (23 arquivos)
 
 CDX-09: primeira verificacao interrompida por crash de worker Windows em tests/server/server.test.ts (3221226505), sem assertion failure. Repeticao integral serial PASS. Tipos locais e fixture W3 ajustados para o contrato real; contratos congelados preservados.
 
+
+## Fechamento das dez fatias
+
+Arquivos W3: src/rules/{tipos-w3,labAlerts,radAlerts,redFlagsCanal,cumulativoAlerta,ctcaeGrau,recist,escores,intervaloQt}.ts; tests/w3/{fixtures,w3.test,bordas.test,propriedades.test}.ts.
+Comando serial autorizado (equivalente aos tres estagios de verify), saida real:
+
+```text
+> oncoglobal@0.0.1 typecheck
+> tsc --noEmit
+> oncoglobal@0.0.1 check:boundaries
+> node scripts/check-boundaries.mjs
+fronteiras ok (52 arquivos)
+RUN v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w3-codex
+Test Files 22 passed (22)
+Tests 216 passed (216)
+Start at 17:58:41
+Duration 10.50s
+```
+
+Pendencias ao tech lead: [VERIFICAR] curadoria/fontes dos rulesets e templates reais; precedencia PR/PD quando simultaneos; fuso do servico para A4; capacidade CTCAE/RECIST permanece candidata, sem ativacao clinica F0 (K-20). Nao houve push, ativacao de corpus, mudanca dos contratos congelados nem edicao de arquivos de outros executores. Proxima etapa autorizada: avaliacao adversarial do projeto, com reproducoes em tests/w3 e achados fora do escopo registrados para seus donos.
