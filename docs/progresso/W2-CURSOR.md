@@ -10,8 +10,8 @@ Executor: CURSOR. Branch: `f0/w2-cursor`. Papel: UI mostra e coleta; regra em `s
 | CUR-02 Tema | FEITA | 927b931 | fronteiras ok (11 arquivos); vitest 3 files, 27 tests | |
 | CUR-03 Cabeçalho | FEITA | bbec1b5 | fronteiras ok (13 arquivos); vitest 4 files, 30 tests | |
 | CUR-04 Banner E1 | FEITA | 9bd72c7 | fronteiras ok (14 arquivos); vitest 5 files, 31 tests | |
-| CUR-05 Delta | FEITA | (este commit) | fronteiras ok (15 arquivos); vitest 6 files, 34 tests | |
-| CUR-06 Evidência | pendente | | | |
+| CUR-05 Delta | FEITA | d04d66d | fronteiras ok (15 arquivos); vitest 6 files, 34 tests | |
+| CUR-06 Evidência | FEITA | (este commit) | fronteiras ok (17 arquivos); vitest 7 files, 38 tests | |
 | CUR-07 Triagem | pendente | | | `src/rules/index.ts` ausente neste branch |
 | CUR-08 Quadro | pendente | | | `ordenarFila` ausente neste branch |
 | CUR-09 Fechamento | pendente | | | |
@@ -64,6 +64,9 @@ Test Files  2 passed (2)
 - `tests/ui/banner-e1.test.tsx`
 - `src/ui/consulta/PainelDelta.tsx`
 - `tests/ui/delta.test.tsx`
+- `src/ui/evidencia/CardEvidencia.tsx`
+- `src/ui/evidencia/GavetaFonte.tsx`
+- `tests/ui/evidencia.test.tsx`
 
 ## Perguntas ao tech lead
 
