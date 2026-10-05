@@ -11,10 +11,10 @@ Executor: CURSOR. Branch: `f0/w2-cursor`. Papel: UI mostra e coleta; regra em `s
 | CUR-03 Cabeçalho | FEITA | bbec1b5 | fronteiras ok (13 arquivos); vitest 4 files, 30 tests | |
 | CUR-04 Banner E1 | FEITA | 9bd72c7 | fronteiras ok (14 arquivos); vitest 5 files, 31 tests | |
 | CUR-05 Delta | FEITA | d04d66d | fronteiras ok (15 arquivos); vitest 6 files, 34 tests | |
-| CUR-06 Evidência | FEITA | (este commit) | fronteiras ok (17 arquivos); vitest 7 files, 38 tests | |
-| CUR-07 Triagem | pendente | | | `src/rules/index.ts` ausente neste branch |
-| CUR-08 Quadro | pendente | | | `ordenarFila` ausente neste branch |
-| CUR-09 Fechamento | pendente | | | |
+| CUR-06 Evidência | FEITA | 02b3d18 | fronteiras ok (17 arquivos); vitest 7 files, 38 tests | |
+| CUR-07 Triagem | pendente | | | `src/rules` ausente; merge `f0/w1-integrado` antes de retomar |
+| CUR-08 Quadro | pendente | | | `ordenarFila` ausente; merge `f0/w1-integrado` antes de retomar |
+| CUR-09 Fechamento | FEITA | (este commit) | fronteiras ok (19 arquivos); vitest 8 files, 41 tests | |
 | CUR-10 Dose | pendente | | | `calcularDose` ausente neste branch |
 
 ## CUR-01 · saída real
@@ -67,6 +67,9 @@ Test Files  2 passed (2)
 - `src/ui/evidencia/CardEvidencia.tsx`
 - `src/ui/evidencia/GavetaFonte.tsx`
 - `tests/ui/evidencia.test.tsx`
+- `src/ui/consulta/Bundle.tsx`
+- `src/ui/consulta/BarraFechamento.tsx`
+- `tests/ui/fechamento.test.tsx`
 
 ## Perguntas ao tech lead
 
