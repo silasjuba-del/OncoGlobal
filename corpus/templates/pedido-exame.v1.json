@@ -1,0 +1,30 @@
+{
+  "id": "pedido-exame",
+  "versao": "1.0.0",
+  "nota": "esqueleto W2/GLM-07: texto fixo só nos títulos; nenhum conteúdo clínico",
+  "secoes": [
+    {
+      "id": "identificacao",
+      "titulo": "Identificação",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "exames-solicitados",
+      "titulo": "Exames solicitados",
+      "origem": "DECISAO_MEDICA",
+      "campos": []
+    },
+    {
+      "id": "justificativa",
+      "titulo": "Justificativa clínica",
+      "origem": "DECISAO_MEDICA",
+      "campos": []
+    }
+  ],
+  "proibidoConter": [
+    "ALERTA",
+    "CORRECAO_IA"
+  ],
+  "exibeE1": false
+}

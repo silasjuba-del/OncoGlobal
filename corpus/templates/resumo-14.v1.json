@@ -1,0 +1,96 @@
+{
+  "id": "resumo-14",
+  "versao": "1.0.0",
+  "nota": "esqueleto W2/GLM-07: os 14 blocos seguem a BASE §42, não disponível no repo — títulos [VERIFICAR] até o tech lead fornecer a lista",
+  "secoes": [
+    {
+      "id": "bloco-01",
+      "titulo": "[VERIFICAR]",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "bloco-02",
+      "titulo": "[VERIFICAR]",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "bloco-03",
+      "titulo": "[VERIFICAR]",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "bloco-04",
+      "titulo": "[VERIFICAR]",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "bloco-05",
+      "titulo": "[VERIFICAR]",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "bloco-06",
+      "titulo": "[VERIFICAR]",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "bloco-07",
+      "titulo": "[VERIFICAR]",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "bloco-08",
+      "titulo": "[VERIFICAR]",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "bloco-09",
+      "titulo": "[VERIFICAR]",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "bloco-10",
+      "titulo": "[VERIFICAR]",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "bloco-11",
+      "titulo": "[VERIFICAR]",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "bloco-12",
+      "titulo": "[VERIFICAR]",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "bloco-13",
+      "titulo": "[VERIFICAR]",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    },
+    {
+      "id": "bloco-14",
+      "titulo": "[VERIFICAR]",
+      "origem": "FATO_CONFIRMADO",
+      "campos": []
+    }
+  ],
+  "proibidoConter": [
+    "ALERTA",
+    "CORRECAO_IA"
+  ],
+  "exibeE1": false
+}
