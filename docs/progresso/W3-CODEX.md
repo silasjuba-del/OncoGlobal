@@ -7,8 +7,8 @@ Worktree: C:\Users\silas\Projects\OncoGlobal-wt\w3-codex
 | Fatia | Estado | Commit | Verify | Pendencias |
 |---|---|---|---|---|
 | CDX-01 tipos-w3.ts | FEITA | d239c77 | PASS serial: typecheck; 52 arquivos; 20 files/183 tests | tipos locais W3; contratos congelados preservados |
-| CDX-02 labAlerts.ts | FEITA | neste commit | PASS serial: 52 arquivos; 20 files/183 tests; 23.91s | threshold inativo PENDENTE; numericos/conversoes invalidos rejeitados |
-| CDX-03 radAlerts.ts | PENDENTE | - | NOT_RUN | - |
+| CDX-02 labAlerts.ts | FEITA | f57e2a7 | PASS serial: 52 arquivos; 20 files/183 tests; 23.91s | threshold inativo PENDENTE; numericos/conversoes invalidos rejeitados |
+| CDX-03 radAlerts.ts | FEITA | neste commit | PASS serial: 20 files/183 tests; 16.17s | ocorrencias independentes; alerta nunca confirma fato; fonte integral preservada |
 | CDX-04 redFlagsCanal.ts | PENDENTE | - | NOT_RUN | - |
 | CDX-05 cumulativoAlerta.ts | PENDENTE | - | NOT_RUN | - |
 | CDX-06 ctcaeGrau.ts | PENDENTE | - | NOT_RUN | - |
@@ -80,4 +80,5 @@ fronteiras ok (23 arquivos)
    Start at  17:18:10
    Duration  1.68s (import 69%, transform 21%, tests 9%, worker 2%)
 ```
+
 
