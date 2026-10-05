@@ -108,3 +108,7 @@ A9. **Exceção expressa a Q52: só o comando curto de voz vai à Deepgram** (se
 A10. **Exceção expressa a Q52 para o canal WhatsApp** (Meta é o meio; o app guarda só local; consentimento registrado; nunca reenvia PHI a LLM).
 A11. Backup: **só HD externo local, cifrado**; chave de recuperação fora do PC (substitui "ou nuvem" de Q58).
 
+
+## Decisões da onda W5 (2026-10-05, Dr. Silas, via chat)
+- **D-W5-01 · Fuso do serviço = −03:00 (Brasília).** Conversão instante → data civil usa offset injetado; produção = `-03:00`.
+- **D-W5-02 · Aviso APAC adiantado em até 1 dia é aceitável.** Atrasar o aviso não é.

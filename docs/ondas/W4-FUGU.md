@@ -1,3 +1,5 @@
+> **SUPERADO pela W5** (`docs/ondas/W5-FUGU-ULTRA.md`, Trilha KERNEL). Não executar separado.
+
 # PROMPT PERSISTENTE — FUGU · ONDA W4 · 8 FATIAS (correções do backend pós-auditoria)
 
 > Primeiro leia e obedeça `docs/ondas/W2-CABECALHO-COMUM.md` (vale integralmente; onde diz W2, leia W4). EXECUTOR = `FUGU`.
