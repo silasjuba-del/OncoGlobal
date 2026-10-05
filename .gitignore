@@ -4,3 +4,4 @@ node_modules/
 *.sqlite-shm
 data/
 .env
+dist/
