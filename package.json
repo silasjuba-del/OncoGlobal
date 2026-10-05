@@ -10,6 +10,7 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "check:boundaries": "node scripts/check-boundaries.mjs",
+    "check:corpus": "node scripts/validate-corpus.mjs",
     "verify": "npm run typecheck && npm run check:boundaries && npm test"
   },
   "repository": {
