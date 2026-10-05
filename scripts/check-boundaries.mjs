@@ -12,6 +12,8 @@ const RULES = [
   { from: "src/ui/", forbid: ["src/kernel/ledger/"], allow: [], why: "UI não escreve no ledger direto" },
 ];
 const NET = /\bfrom\s+["'](node:https?|node:net|undici|axios|node-fetch)["']|\bfetch\(/;
+// src/server/** é servidor de ENTRADA em 127.0.0.1: pode node:http; nunca cliente de saída.
+const NET_SAIDA = /\bfrom\s+["'](node:https|node:net|undici|axios|node-fetch)["']|\bfetch\(|\bhttp\.request\(|\bhttp\.get\(/;
 
 const files = [];
 const walk = (d) => { for (const f of readdirSync(d)) { const p = join(d, f); statSync(p).isDirectory() ? walk(p) : /\.(ts|tsx|mjs)$/.test(f) && files.push(p); } };
@@ -32,7 +34,9 @@ for (const file of files) {
         erros.push(`${rel} → ${imp} (${r.why})`);
     }
   }
-  if (!rel.startsWith("src/kernel/gateway/") && !rel.startsWith("src/kernel/llm/") && NET.test(code))
+  const servidor = rel.startsWith("src/server/");
+  if (servidor && NET_SAIDA.test(code)) erros.push(`${rel} faz rede de saída (servidor só de entrada local)`);
+  else if (!servidor && !rel.startsWith("src/kernel/gateway/") && !rel.startsWith("src/kernel/llm/") && NET.test(code))
     erros.push(`${rel} usa rede fora do gateway/llm (INV-05)`);
 }
 if (erros.length) { console.error("FRONTEIRAS VIOLADAS:\n" + erros.join("\n")); process.exit(1); }
