@@ -11,8 +11,8 @@ Worktree: C:\Users\silas\Projects\OncoGlobal-wt\w3-codex
 | CDX-03 radAlerts.ts | FEITA | adce743 | PASS serial: 20 files/183 tests; 16.17s | ocorrencias independentes; alerta nunca confirma fato; fonte integral preservada |
 | CDX-04 redFlagsCanal.ts | FEITA | 58c6c87 | PASS serial: 20 files/183 tests; 19.35s | negacao e tempo por ocorrencia; alvo contato preservado |
 | CDX-05 cumulativoAlerta.ts | FEITA | f9cc8bc | PASS serial: 20 files/183 tests; 13.40s | dedupe por adminId; divergencia vermelha; limite da mesma droga; escopo explicito |
-| CDX-06 ctcaeGrau.ts | FEITA | neste commit | PASS serial: 20 files/183 tests; 12.76s | basal obrigatorio; sem coercao; grau candidato e PENDENTE de revisao |
-| CDX-07 recist.ts | PENDENTE | - | NOT_RUN | - |
+| CDX-06 ctcaeGrau.ts | FEITA | fe123ee | PASS serial: 20 files/183 tests; 12.76s | basal obrigatorio; sem coercao; grau candidato e PENDENTE de revisao |
+| CDX-07 recist.ts | FEITA | neste commit | PASS serial: 20 files/183 tests; 11.46s | decimais exatos na decisao; codigos conferidos; precedencia PR/PD [VERIFICAR] |
 | CDX-08 escores.ts | PENDENTE | - | NOT_RUN | - |
 | CDX-09 intervaloQt.ts | PENDENTE | - | NOT_RUN | - |
 | CDX-10 tests/w3/** | PENDENTE | - | NOT_RUN | - |
@@ -80,6 +80,7 @@ fronteiras ok (23 arquivos)
    Start at  17:18:10
    Duration  1.68s (import 69%, transform 21%, tests 9%, worker 2%)
 ```
+
 
 
 
