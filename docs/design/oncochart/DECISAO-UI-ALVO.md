@@ -24,8 +24,11 @@
 | `localStorage` | Só preferências de UI; dado clínico no ledger local |
 | React/Babel via CDN, fontes Google | Recriar em `src/ui` (React 19 + Vite já do projeto), fontes empacotadas localmente (sem CDN em produção) |
 | Amarelo/âmbar em G2 e estados | Semáforo do app: VERDE/VERMELHO/PENDENTE, teto de 5 estados; âmbar só como cor de série de gráfico |
-| Paleta oklch escura | Convive com DIA/NOITE/PERSONALIZAR (D-W9-16); tokens da Muse (gelo/petróleo) viram o tema DIA `[VERIFICAR]` qual paleta é a padrão |
+| Paleta oklch escura | Convive com DIA/NOITE/PERSONALIZAR (D-W9-16); **decidido (D-W9-40): OncoChart é o padrão** (NOITE do desenho + DIA derivado); tokens da Muse = base de contraste AA |
 | Modelo visual anterior (D-W5-07, `ui-modelo-consulta.webp`) | **Substituído** pelo OncoChart; regras do app continuam prevalecendo |
 
 ## Execução
 Porte para React/TS em `src/ui` = onda de UI (Cursor) após W9; usa os dados reais via `src/ui/api` (sem `data.js`). Jornada 3D e Chart3D em CSS 3D (≤200 caixas) antes de considerar react-three-fiber (dependência nova = aprovação).
+
+## OncoAssist explica a imagem (D-W9-40)
+No ImageViewer, o OncoAssist narra **o laudo e os achados extraídos** (trecho-fonte clicável), sem diagnosticar nem medir. Pixel → IA só após sanitizador G-27 e provider aprovado.
