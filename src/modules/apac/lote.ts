@@ -90,6 +90,8 @@ function motivoExclusao(
   if (item.apacId.trim().length === 0) return "identificador ausente";
   if (repetidos.has(item.apacId)) return "identificador repetido no lote; nada eleito";
   if (item.modalidade === "CIRURGIA") return "cirurgia segue por AIH, fora da APAC";
+  // Q35/FN-12: nem criterio aberto nem filtro explicito tornam VENCIDA faturavel.
+  if (item.estado === "VENCIDA") return "APAC vencida: faturamento nao emite; consulta segue";
   if (item.artefato === "BLOQUEADO") {
     return item.motivoBloqueio !== null && item.motivoBloqueio.trim().length > 0
       ? item.motivoBloqueio

@@ -1,15 +1,13 @@
-import { createHash, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
+import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 import { Sessao, type Sessao as SessaoTipo } from "../contracts/base.js";
+import { hashCanonico } from "../modules/tipos.js";
 
 /** Documento exibido = id + versão + hash do CONTEÚDO exato mostrado ao médico (A13). */
 export interface DocumentoExibido { documentId: string; documentVersion: number; conteudoHash: string }
 
-/** JSON canônico (chaves ordenadas) → SHA-256. Mesmo conteúdo ⇒ mesmo hash, independente da ordem de chaves. */
+/** Único canon SHA-256 do módulo, mantendo a API pública do servidor. */
 export function hashConteudoExibido(conteudo: unknown): string {
-  const canon = (v: unknown): unknown => Array.isArray(v) ? v.map(canon)
-    : v && typeof v === "object" ? Object.fromEntries(Object.keys(v as object).sort()
-      .map((k) => [k, canon((v as Record<string, unknown>)[k])])) : v;
-  return createHash("sha256").update(JSON.stringify(canon(conteudo))).digest("hex");
+  return hashCanonico(conteudo);
 }
 
 export interface GerenciadorSessao {
