@@ -72,3 +72,37 @@ Nº de campos do banco ≠ nº de campos visíveis. O resto é parseado, herdado
 | Tabela regulatória (receita B, C, antimicrobiano…) | Nova, versionada, `[VERIFICAR]` (Portaria SVS/MS 344/98 e RDC 471/2021 a confirmar); fica no corpus, não no React. |
 | ClinicalValue / idade do dado | Reaproveita proveniência existente (EXTRACTED, DOCUMENT_CONFIRMED, INFERRED, NOT_FOUND, UNCERTAIN) + `measuredAt`. "RAG-HBEM" = memória longitudinal local do paciente (não sai do PC). |
 | Contratos | Entidades novas = contratos novos em `src/contracts` escritos pelo tech lead antes da W10 (congelamento mantido para o resto). |
+
+---
+## Adendo (Dr. Silas, 2026-10-06) · Prescrição nasce do protocolo versionado — D-W9-45
+`Paciente → tumor → protocolo → ciclo/dia → template → dados atuais → cálculo → SafetyEngine → alterações do médico → prescrição.`
+Ao escolher o protocolo (ex.: FOLFOX), o sistema já traz sequência, drogas, doses de referência, base (mg/m²…), diluentes, volumes, tempos, suporte e dependências laboratoriais. O médico confere **"o que mudou neste ciclo?"**.
+
+```
+PrescriptionItem {
+  drug
+  role              // PREMED | ANTINEOPLASTIC | HYDRATION | SUPPORT
+  sequence
+  standardDose
+  doseBasis         // FIXED | MG_KG | MG_M2 | AUC
+  calculatedDose
+  prescribedDose
+  adjustmentPercent // só −20 | −30 | −40 (D-W9-26)
+  adjustmentReason
+  route
+  diluent
+  finalVolume
+  infusionTime
+  source            // PROTOCOL | MANUAL
+}
+```
+A UI não mostra todos os campos: destaca **só as exceções** (o que difere do protocolo ou do ciclo anterior).
+
+**Três produtos distintos** (nada de "Receita EV" genérica para QT):
+1. **Prescrição antineoplásica** — protocolizada, orientada a ciclo (layout do Modelo 05).
+2. **Receita pós-QT/VO** — entrada rápida de uma linha (`ONDANSETRONA 8 MG VO 8/8H SN NÁUSEA`).
+3. **Prescrição EV avulsa** — hidratação, eletrólitos, ferro etc.
+
+**Foto da prescrição no sentido inverso:** `FOTO → identificar paciente (caixa de revisão, D-W9-34a) → identificar protocolo/ciclo → extrair linhas → reconciliar com o template → detectar alterações manuais → guardar no RAG-HBEM (memória longitudinal local)`. Prescrições antigas fotografadas ensinam o formato real; OCR/transcrição **nunca vira verdade clínica automaticamente** (evidência com proveniência, confirmação médica).
+
+**Regra de UX no topo do ticket:** não perguntar de novo o que o protocolo ou o RAG-HBEM já sabe; mostrar principalmente o que mudou neste ciclo.
