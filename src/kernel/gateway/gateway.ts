@@ -16,7 +16,11 @@ export interface ResultadoGateway {
 export interface RegistroAuditoria { acaoPedida: string; decisao: "PERMITIDA" | "NEGADA"; motivoCodigo: string; em: string }
 export interface StoreIdempotencia {
   get(chave: string): { payloadHash: string; resultado: ResultadoGateway } | undefined;
-  set(chave: string, v: { payloadHash: string; resultado: ResultadoGateway }): void;
+  reserve(chave: string, payloadHash: string, atualizadoEm: string): {
+    criada: boolean;
+    registro: { payloadHash: string; resultado: ResultadoGateway };
+  };
+  set(chave: string, v: { payloadHash: string; resultado: ResultadoGateway }, atualizadoEm: string): void;
   delete?(chave: string): void;
 }
 
@@ -27,7 +31,20 @@ const HARD_FORBIDDEN: { id: string; teste: (i: Intent) => boolean }[] = [
 
 export function memoriaIdempotencia(): StoreIdempotencia {
   const m = new Map<string, { payloadHash: string; resultado: ResultadoGateway }>();
-  return { get: (k) => m.get(k), set: (k, v) => void m.set(k, v), delete: (k) => void m.delete(k) };
+  return {
+    get: (k) => m.get(k),
+    reserve(k, payloadHash) {
+      const anterior = m.get(k);
+      if (anterior) return { criada: false, registro: anterior };
+      const registro = { payloadHash, resultado: {
+        decisao: "OUTCOME_UNKNOWN" as const, motivoCodigo: "RESERVADA_EM_EXECUCAO",
+      } };
+      m.set(k, registro);
+      return { criada: true, registro };
+    },
+    set: (k, v) => void m.set(k, v),
+    delete: (k) => void m.delete(k),
+  };
 }
 
 export function criarGateway(deps: {
@@ -44,8 +61,16 @@ export function criarGateway(deps: {
   // A01: chamadas concorrentes com a mesma chave compartilham UMA execução em andamento.
   const emAndamento = new Map<string, { payloadHash: string; promessa: Promise<ResultadoGateway> }>();
   const instante = (iso: string) => Date.parse(iso);
+  const replay = (resultado: ResultadoGateway): ResultadoGateway => ({
+    ...resultado,
+    decisao: resultado.decisao === "EXECUTADA" ? "REPLAY" : resultado.decisao,
+  });
 
   return {
+    /** Entrada HTTP vincula o mesmo executor a um store persistente do ledger local. */
+    withStore(store: StoreIdempotencia) {
+      return criarGateway({ ...deps, store });
+    },
     async executar(bruto: unknown, sessao: Sessao | null): Promise<ResultadoGateway> {
       const p = ActionIntent.safeParse(bruto);
       if (!p.success) return negar("desconhecida", "NO_ACTION_INTENT_INCOMPLETO"); // ROE-0
@@ -64,19 +89,23 @@ export function criarGateway(deps: {
       if (andamento) {
         if (andamento.payloadHash !== payloadHash) return negar(acao, "CHAVE_REUSADA_PAYLOAD_DIFERENTE");
         const r = await andamento.promessa;
-        return { ...r, decisao: r.decisao === "EXECUTADA" ? "REPLAY" : r.decisao };
+        return replay(r);
       }
       const anterior = deps.store.get(chave);
       if (anterior) {
         if (anterior.payloadHash !== payloadHash) return negar(acao, "CHAVE_REUSADA_PAYLOAD_DIFERENTE"); // N06
-        return { ...anterior.resultado, decisao: anterior.resultado.decisao === "EXECUTADA" ? "REPLAY" : anterior.resultado.decisao };
+        return replay(anterior.resultado);
       }
       const exec = deps.executores[intent.verbo];
       if (!exec) return negar(acao, "VERBO_SEM_EXECUTOR");
 
       // A02: a reserva é gravada ANTES do efeito. Se o processo cair ou o executor lançar,
       // o resultado fica OUTCOME_UNKNOWN e a mesma chave nunca reenvia às cegas.
-      deps.store.set(chave, { payloadHash, resultado: { decisao: "OUTCOME_UNKNOWN", motivoCodigo: "RESERVADA_EM_EXECUCAO" } });
+      const reserva = deps.store.reserve(chave, payloadHash, deps.agora());
+      if (!reserva.criada) {
+        if (reserva.registro.payloadHash !== payloadHash) return negar(acao, "CHAVE_REUSADA_PAYLOAD_DIFERENTE");
+        return replay(reserva.registro.resultado);
+      }
       const promessa = (async (): Promise<ResultadoGateway> => {
         let resultado: ResultadoGateway;
         try {
@@ -91,7 +120,7 @@ export function criarGateway(deps: {
         }
         // FALHOU = falha certa sem efeito: libera a chave para nova tentativa explícita.
         if (resultado.decisao === "FALHOU") deps.store.delete?.(chave);
-        else deps.store.set(chave, { payloadHash, resultado });
+        else deps.store.set(chave, { payloadHash, resultado }, deps.agora());
         deps.auditar({ acaoPedida: acao, decisao: "PERMITIDA", motivoCodigo: resultado.motivoCodigo, em: deps.agora() });
         return resultado;
       })();

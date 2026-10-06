@@ -85,7 +85,12 @@ it("N18 erro com identificador sintético não vaza no log nem na resposta", asy
   const marker = "CPF-SINTETICO-NAO-LOGAR";
   // A02: exceção do EXECUTOR vira OUTCOME_UNKNOWN dentro do gateway; aqui a falha nasce no próprio
   // gateway para exercitar o catch/log do servidor.
-  const errGateway = { executar: async () => { throw new Error(marker); } } as unknown as ReturnType<typeof criarGateway>;
+  // Mesmo após o wiring do store SQLite, exercita a exceção no gateway (não
+  // uma falha acidental de ausência de withStore no fake deste teste).
+  const errGateway = {
+    withStore() { return this; },
+    executar: async () => { throw new Error(marker); },
+  } as unknown as ReturnType<typeof criarGateway>;
   // This second server exercises the real catch/log boundary with a throwing gateway.
   const second = criarServidorLocal({ ...f.deps, gateway: errGateway });
   servers.push(second);

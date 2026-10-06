@@ -4,6 +4,7 @@ import type { DatabaseSync } from "node:sqlite";
 import { z } from "zod";
 import { ActionIntent, ConfirmarBloco, type ConfirmarBloco as Confirmar } from "../contracts/operacao.js";
 import { lerDraft } from "../kernel/ledger/drafts.js";
+import { sqliteIdempotencia } from "../kernel/ledger/idempotencia.js";
 import { confirmar } from "../kernel/ledger/writeRouter.js";
 import { g25EscopoAssinatura } from "../kernel/harness/gates.js";
 import type { criarGateway } from "../kernel/gateway/gateway.js";
@@ -114,7 +115,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     }
     const parsed = ActionIntent.safeParse(raw);
     if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
-    const result = await deps.gateway.executar(parsed.data, sessao);
+    // Uma rota /acao nunca usa a idempotencia volátil do caller: o ledger local
+    // conserva a reserva OUTCOME_UNKNOWN antes do executor, inclusive após reiniciar.
+    const result = await deps.gateway.withStore(sqliteIdempotencia(deps.db)).executar(parsed.data, sessao);
     return reply(result.decisao === "NEGADA" ? 409 : 200, result.motivoCodigo, result);
   } catch {
     // Never log request bodies, identifiers, thrown error text or stack.
