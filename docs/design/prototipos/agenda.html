@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="gelo">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OncoMed · Agenda (protótipo MU-06)</title>
+<link rel="stylesheet" href="../tokens-oncomed.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--om-fundo); color: var(--om-texto);
+    font-family: var(--om-fonte); font-size: var(--om-texto-sm); line-height: var(--om-linha-altura); }
+  .app { display: grid; grid-template-columns: 208px 1fr; min-height: 100vh; }
+  .lateral { background: var(--om-lateral-fundo); color: var(--om-lateral-texto);
+    display: flex; flex-direction: column; padding: var(--om-espaco-4) var(--om-espaco-3); gap: var(--om-espaco-1); }
+  .marca { display: flex; align-items: center; gap: var(--om-espaco-2);
+    font-size: var(--om-texto-lg); font-weight: 700; padding: var(--om-espaco-2); }
+  .marca .ponto { width: 22px; height: 22px; border-radius: 50%; background: var(--om-destaque);
+    display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
+  .nav-item { display: flex; align-items: center; gap: var(--om-espaco-3);
+    padding: var(--om-espaco-2) var(--om-espaco-3); border-radius: var(--om-raio-sm);
+    color: var(--om-lateral-suave); text-decoration: none; font-weight: 550; }
+  .nav-item.ativo { background: var(--om-lateral-ativo); color: #fff; }
+  .lateral-rodape { margin-top: auto; padding: var(--om-espaco-3) var(--om-espaco-2);
+    border-top: 1px solid var(--om-lateral-hover); }
+  .principal { display: flex; flex-direction: column; min-width: 0; }
+  .topo { display: flex; align-items: center; gap: var(--om-espaco-3);
+    padding: var(--om-espaco-3) var(--om-espaco-6); background: var(--om-superficie);
+    border-bottom: 1px solid var(--om-linha); position: sticky; top: 0; z-index: 20; }
+  .topo h1 { margin: 0; font-size: var(--om-texto-lg); }
+  .btn { font: inherit; font-weight: 600; border-radius: var(--om-raio-sm); cursor: pointer;
+    padding: var(--om-espaco-2) var(--om-espaco-4); border: 1px solid var(--om-destaque);
+    background: var(--om-superficie); color: var(--om-destaque-hover); }
+  .btn.primario { background: var(--om-destaque); color: #fff; }
+  .conteudo { padding: var(--om-espaco-6); display: grid; grid-template-columns: 1fr 300px;
+    gap: var(--om-espaco-4); align-items: start; }
+  .cartao { background: var(--om-superficie); border: 1px solid var(--om-linha);
+    border-radius: var(--om-raio-md); padding: var(--om-espaco-4); }
+  .cartao h2 { margin: 0 0 var(--om-espaco-3); font-size: var(--om-texto-sm);
+    text-transform: uppercase; letter-spacing: .04em; color: var(--om-texto-suave); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; border-radius: var(--om-raio-pilula);
+    padding: 2px 10px; font-size: var(--om-texto-xs); font-weight: 700; border: 1px solid transparent; }
+  .chip.verde { background: var(--om-verde-fundo); color: var(--om-verde); }
+  .chip.vermelho { background: var(--om-vermelho-fundo); color: var(--om-vermelho); }
+  .chip.pendente { background: var(--om-pendente-fundo); color: var(--om-pendente); }
+  .chip.info { background: var(--om-info-fundo); color: var(--om-info-texto); }
+  button.filtro { font: inherit; font-size: var(--om-texto-xs); font-weight: 700; cursor: pointer;
+    border: 1px solid var(--om-linha-forte); background: var(--om-superficie); color: var(--om-texto);
+    border-radius: var(--om-raio-pilula); padding: 5px 14px; }
+  button.filtro[aria-pressed="true"] { background: var(--om-destaque); border-color: var(--om-destaque); color: #fff; }
+  .grupo { font-weight: 800; margin: var(--om-espaco-4) 0 var(--om-espaco-2); display: flex;
+    justify-content: space-between; align-items: center; }
+  .grupo:first-of-type { margin-top: 0; }
+  .slot { display: grid; grid-template-columns: 64px 1fr auto; gap: var(--om-espaco-3);
+    align-items: center; border: 1px solid var(--om-linha); border-radius: var(--om-raio-md);
+    padding: var(--om-espaco-3) var(--om-espaco-4); margin-bottom: var(--om-espaco-2);
+    background: var(--om-superficie); }
+  .slot .hora { font-weight: 800; font-size: var(--om-texto-md); }
+  .slot .acoes { display: flex; gap: 6px; }
+  .slot .acoes .btn { padding: 4px 12px; font-size: var(--om-texto-xs); }
+  .nota { font-size: var(--om-texto-xs); color: var(--om-texto-suave); }
+  .overlay { position: fixed; inset: 0; background: rgb(15 34 46 / .5); display: none;
+    align-items: center; justify-content: center; z-index: 50; }
+  .overlay.aberto { display: flex; }
+  .modal { background: var(--om-superficie); border-radius: var(--om-raio-lg);
+    box-shadow: var(--om-sombra-lg); width: min(440px, 92vw); padding: var(--om-espaco-5); }
+  .modal h2 { margin: 0 0 var(--om-espaco-3); font-size: var(--om-texto-lg); }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
+    background: var(--om-lateral-fundo); color: #fff; border-radius: var(--om-raio-sm);
+    padding: var(--om-espaco-3) var(--om-espaco-5); font-weight: 600; opacity: 0; z-index: 60;
+    transition: opacity var(--om-transicao-media), transform var(--om-transicao-media); pointer-events: none; }
+  .toast.visivel { opacity: 1; transform: translateX(-50%); }
+  :focus-visible { outline: 2px solid var(--om-destaque-hover); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media (max-width: 1100px) { .conteudo { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<a href="#conteudo" style="position:absolute;left:-9999px" onfocus="this.style.left='8px'" onblur="this.style.left='-9999px'">Pular para o conteúdo</a>
+<div class="app">
+  <nav class="lateral" aria-label="Navegação principal">
+    <div class="marca"><span class="ponto" aria-hidden="true">oM</span>oncoMed</div>
+    <a class="nav-item" href="consulta.html">Resumo</a>
+    <a class="nav-item" href="#">Prontuário</a>
+    <a class="nav-item" href="#">Exames</a>
+    <a class="nav-item" href="#">Prescrição</a>
+    <a class="nav-item" href="apac.html">APAC</a>
+    <a class="nav-item" href="#">Documentos</a>
+    <a class="nav-item ativo" href="agenda.html" aria-current="page">Agenda</a>
+    <a class="nav-item" href="salao.html">Enfermagem</a>
+    <a class="nav-item" href="#">Farmácia</a>
+    <a class="nav-item" href="#">Relatórios</a>
+    <a class="nav-item" href="centro-comando.html">Configurações</a>
+    <div class="lateral-rodape"><strong>Secretária Teste</strong><br><span class="nota" style="color:var(--om-lateral-suave)">Recepção</span></div>
+  </nav>
+  <div class="principal">
+    <div class="topo"><h1>Agenda · hoje</h1>
+      <span class="chip verde">3 prontos</span><span class="chip pendente">3 com pendência</span><span class="chip vermelho">1 conflito</span>
+      <span style="flex:1"></span><button class="btn primario" data-demo>+ Agendar</button>
+    </div>
+    <main class="conteudo" id="conteudo">
+      <div class="cartao">
+        <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap" role="group" aria-label="Filtrar por tipo">
+          <button class="filtro" aria-pressed="true" data-f="todos">Todos</button>
+          <button class="filtro" aria-pressed="false" data-f="retorno">Retornos</button>
+          <button class="filtro" aria-pressed="false" data-f="primeira">1ª vez</button>
+          <button class="filtro" aria-pressed="false" data-f="apac">APAC</button>
+        </div>
+        <div class="grupo"><span>Manhã</span><span class="nota">4 consultas</span></div>
+        <div class="slot" data-tipo="retorno"><span class="hora">08:00</span>
+          <div><strong>Paciente Teste 08</strong> · retorno QT <span class="chip verde">Pronto</span><br>
+          <span class="nota">Pré-consulta montada · sem pendência</span></div>
+          <div class="acoes"><button class="btn primario" data-demo>Confirmar presença</button><button class="btn" data-remarcar="Paciente Teste 08 · 08:00">Remarcar</button></div></div>
+        <div class="slot" data-tipo="retorno"><span class="hora">08:40</span>
+          <div><strong>Paciente Teste 10</strong> · retorno QT <span class="chip pendente">Pendente</span><br>
+          <span class="nota">Sem hemograma válido · ECOG 4</span></div>
+          <div class="acoes"><button class="btn primario" data-demo>Confirmar presença</button><button class="btn" data-remarcar="Paciente Teste 10 · 08:40">Remarcar</button></div></div>
+        <div class="slot" data-tipo="primeira"><span class="hora">09:20</span>
+          <div><strong>Paciente Teste 17</strong> · 1ª consulta <span class="chip pendente">Pendente</span><br>
+          <span class="nota">Sem documentos vinculados · fila de vínculo</span></div>
+          <div class="acoes"><button class="btn primario" data-demo>Confirmar presença</button><button class="btn" data-remarcar="Paciente Teste 17 · 09:20">Remarcar</button></div></div>
+        <div class="slot" data-tipo="apac"><span class="hora">10:00</span>
+          <div><strong>Paciente Teste 07</strong> · renovação APAC <span class="chip vermelho">Conflito</span><br>
+          <span class="nota">Identificadores em conflito — resolver antes de emitir</span></div>
+          <div class="acoes"><button class="btn primario" data-demo>Confirmar presença</button><button class="btn" data-remarcar="Paciente Teste 07 · 10:00">Remarcar</button></div></div>
+        <div class="grupo"><span>Tarde</span><span class="nota">3 consultas</span></div>
+        <div class="slot" data-tipo="retorno"><span class="hora">14:00</span>
+          <div><strong>Paciente Teste 09</strong> · retorno QT <span class="chip verde">Pronto</span><br>
+          <span class="nota">Pré-consulta montada · sem pendência</span></div>
+          <div class="acoes"><button class="btn primario" data-demo>Confirmar presença</button><button class="btn" data-remarcar="Paciente Teste 09 · 14:00">Remarcar</button></div></div>
+        <div class="slot" data-tipo="primeira"><span class="hora">14:40</span>
+          <div><strong>Paciente Teste 18</strong> · 1ª consulta <span class="chip verde">Pronto</span><br>
+          <span class="nota">Documentos vinculados · sem pendência</span></div>
+          <div class="acoes"><button class="btn primario" data-demo>Confirmar presença</button><button class="btn" data-remarcar="Paciente Teste 18 · 14:40">Remarcar</button></div></div>
+        <div class="slot" data-tipo="apac"><span class="hora">15:20</span>
+          <div><strong>Paciente Teste 19</strong> · renovação APAC <span class="chip pendente">Pendente</span><br>
+          <span class="nota">APAC vence em breve — providenciar renovação</span></div>
+          <div class="acoes"><button class="btn primario" data-demo>Confirmar presença</button><button class="btn" data-remarcar="Paciente Teste 19 · 15:20">Remarcar</button></div></div>
+      </div>
+      <div class="cartao">
+        <h2>Pendências do dia</h2>
+        <div class="linha" style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dotted var(--om-linha)"><span>Sem hemograma válido</span><strong>1</strong></div>
+        <div class="linha" style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dotted var(--om-linha)"><span>Fila de vínculo</span><strong>1</strong></div>
+        <div class="linha" style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dotted var(--om-linha)"><span>Conflito de identificadores</span><strong>1</strong></div>
+        <div class="linha" style="display:flex;justify-content:space-between;padding:6px 0"><span>APAC a vencer</span><strong>1</strong></div>
+        <p class="nota">“Faltou” e “remarcado” atualizam a fila do dia sem apagar o registro.</p>
+        <button class="btn" data-demo style="width:100%">Marcar falta</button>
+      </div>
+    </main>
+  </div>
+</div>
+<div class="overlay" id="overlayRem" role="presentation">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="remTitulo">
+    <h2 id="remTitulo">Remarcar</h2>
+    <p id="remQuem"></p>
+    <p style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" data-demo>Amanhã 08:00</button>
+      <button class="btn" data-demo>Amanhã 14:00</button>
+      <button class="btn" data-demo>Próxima semana</button>
+    </p>
+    <p><button class="btn primario" id="fecharRem">Fechar</button></p>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+(function () {
+  "use strict";
+  var toast = document.getElementById("toast"), t = null;
+  function dizer(msg) {
+    toast.textContent = msg; toast.classList.add("visivel");
+    clearTimeout(t); t = setTimeout(function () { toast.classList.remove("visivel"); }, 2800);
+  }
+  document.querySelectorAll(".filtro").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.querySelectorAll(".filtro").forEach(function (o) {
+        o.setAttribute("aria-pressed", o === b ? "true" : "false");
+      });
+      var f = b.dataset.f;
+      document.querySelectorAll(".slot").forEach(function (s) {
+        s.style.display = (f === "todos" || s.dataset.tipo === f) ? "" : "none";
+      });
+    });
+  });
+  var overlay = document.getElementById("overlayRem");
+  document.querySelectorAll("[data-remarcar]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.getElementById("remQuem").textContent = b.dataset.remarcar;
+      overlay.classList.add("aberto");
+      document.getElementById("fecharRem").focus();
+    });
+  });
+  function fechar() { overlay.classList.remove("aberto"); }
+  document.getElementById("fecharRem").addEventListener("click", fechar);
+  overlay.addEventListener("click", function (e) { if (e.target === overlay) fechar(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") fechar(); });
+  document.querySelectorAll("[data-demo]").forEach(function (b) {
+    b.addEventListener("click", function () { dizer("Demonstração — sem efeito."); });
+  });
+})();
+</script>
+</body>
+</html>
