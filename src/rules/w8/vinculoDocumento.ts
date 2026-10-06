@@ -2,8 +2,6 @@
 // Regras puras: comprovante de terceiro, acompanhante e médicos solicitante/assistente
 // nunca ligam paciente nem preenchem dados. Só identificador exato VÁLIDO POR VALOR liga.
 
-import type { TipoIdentificador } from "../../contracts/clinico.js";
-
 export type TipoDocumentoVinculo =
   | "COMPROVANTE_RESIDENCIA_TERCEIRO"
   | "FICHA_ADMIN"
@@ -22,6 +20,8 @@ export type PapelPessoaDocumento =
   | "TERCEIRO"
   | "DESCONHECIDO";
 
+export type TipoIdentificadorClinico = "CNS" | "CPF" | "PRONTUARIO";
+
 export interface EntradaVinculoDocumento {
   tipoDocumento: TipoDocumentoVinculo;
   papelPessoa?: PapelPessoaDocumento;
@@ -31,7 +31,7 @@ export interface EntradaVinculoDocumento {
   } | null;
   pacienteAlvo?: {
     patientId: string;
-    identificadores: readonly { tipo: TipoIdentificador; valor: string }[];
+    identificadores: readonly { tipo: TipoIdentificadorClinico; valor: string }[];
   } | null;
 }
 

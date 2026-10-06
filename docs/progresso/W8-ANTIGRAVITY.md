@@ -14,9 +14,31 @@ Worktree: `C:\Users\silas\Projects\OncoGlobal-wt\w8-antigravity` · Branch: `f0/
 | AG-06 · Trecho riscado e baixa confiança (R1, C1) | FEITA | `660f784` | 4 ok | Limiar injetado de ruleset [VERIFICAR] |
 | AG-07 · Patologia por sítio (P1–P3) | FEITA | `acf200e` | 6 ok | Tabela ISUP 2014/OMS [VERIFICAR edição], ruleset patologia-agregacao inativo [VERIFICAR] |
 | AG-08 · Resumo de imagem em 2 níveis | FEITA | `b19aa30` | 4 ok | — |
-| AG-09 · Interações sem fonte = PENDENTE (G-09) | FEITA | pendente commit | 3 ok | interacoes.v1.json inativo aguarda literatura e Dr. Silas [VERIFICAR] |
-| AG-10 · Índice e fechamento (Caso 07) | PENDENTE | — | — | Caso 07 sintético ponta a ponta |
+| AG-09 · Interações sem fonte = PENDENTE (G-09) | FEITA | `c8b6afd` | 3 ok | interacoes.v1.json inativo aguarda literatura e Dr. Silas [VERIFICAR] |
+| AG-10 · Índice e fechamento (Caso 07) | FEITA | pendente commit | 9 ok | Caso 07 sintético ponta a ponta |
 
 ## Arquivos Criados / Modificados
 
+- `src/rules/w8/tipos.ts`
+- `src/rules/w8/identificadores.ts`
+- `src/rules/w8/vinculoDocumento.ts`
+- `src/rules/w8/dataClinica.ts`
+- `src/rules/w8/dedupeExame.ts`
+- `src/rules/w8/hierarquiaFonte.ts`
+- `src/rules/w8/rasura.ts`
+- `src/rules/w8/patologiaSitio.ts`
+- `src/rules/w8/resumoImagem.ts`
+- `src/rules/w8/interacoes.ts`
+- `src/rules/w8/index.ts`
+- `tests/rules-w8/identificadores.test.ts`
+- `tests/rules-w8/vinculoDocumento.test.ts`
+- `tests/rules-w8/dataClinica.test.ts`
+- `tests/rules-w8/dedupeExame.test.ts`
+- `tests/rules-w8/hierarquiaFonte.test.ts`
+- `tests/rules-w8/rasura.test.ts`
+- `tests/rules-w8/patologiaSitio.test.ts`
+- `tests/rules-w8/resumoImagem.test.ts`
+- `tests/rules-w8/interacoes.test.ts`
+- `tests/rules-w8/caso07.test.ts`
+- `docs/w8/PEDIDOS-ANTIGRAVITY.md`
 - `docs/progresso/W8-ANTIGRAVITY.md`

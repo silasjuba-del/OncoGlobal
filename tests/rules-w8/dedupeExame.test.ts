@@ -27,7 +27,7 @@ describe("AG-04 · Deduplicação de exame (lições D1–D3)", () => {
     expect(res.totalPaginasOuEntradas).toBe(2);
     expect(res.totalExamesUnicos).toBe(1);
     expect(res.duplicatasDetectadas).toHaveLength(1);
-    expect(res.duplicatasDetectadas[0].idsDuplicados).toEqual(["cintilo-p2"]);
+    expect(res.duplicatasDetectadas[0]!.idsDuplicados).toEqual(["cintilo-p2"]);
     expect(res.conflitos).toHaveLength(0);
   });
 
@@ -85,7 +85,7 @@ describe("AG-04 · Deduplicação de exame (lições D1–D3)", () => {
     const res = deduplicarExames([rtu, ihq]);
     expect(res.totalExamesUnicos).toBe(2);
     expect(res.concordancias).toHaveLength(1);
-    expect(res.concordancias[0].conclusaoComum).toBe("Adenocarcinoma acinar de próstata");
+    expect(res.concordancias[0]!.conclusaoComum).toBe("Adenocarcinoma acinar de próstata");
   });
 
   it("conflito VERMELHO se a mesma chave apresentar conteúdos discordantes", () => {
@@ -110,8 +110,8 @@ describe("AG-04 · Deduplicação de exame (lições D1–D3)", () => {
 
     const res = deduplicarExames([versaoA, versaoB]);
     expect(res.conflitos).toHaveLength(1);
-    expect(res.conflitos[0].estado).toBe("VERMELHO");
-    expect(res.conflitos[0].idsEmConflito).toEqual(["laudo-v1", "laudo-v2"]);
+    expect(res.conflitos[0]!.estado).toBe("VERMELHO");
+    expect(res.conflitos[0]!.idsEmConflito).toEqual(["laudo-v1", "laudo-v2"]);
   });
 
   it("Aceite Caso 07: 8 páginas de exame resultam exatamente em 6 exames únicos", () => {

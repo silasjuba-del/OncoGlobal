@@ -101,7 +101,8 @@ export function deduplicarExames(entradas: EntradaExameDedupe[]): SaidaDedupeExa
   const conflitos: SaidaDedupeExame["conflitos"] = [];
 
   for (const [chave, itens] of grupos.entries()) {
-    const principal = itens[0];
+    if (itens.length === 0) continue;
+    const principal = itens[0]!;
     const ids = itens.map((i) => i.id);
     const paginas = itens.map((i) => i.pagina ?? 0).filter((p) => p > 0);
 
@@ -109,10 +110,13 @@ export function deduplicarExames(entradas: EntradaExameDedupe[]): SaidaDedupeExa
     if (itens.length > 1) {
       const primeiroHash = principal.conteudoHash ?? normalizar(principal.conteudoResumo);
       for (let k = 1; k < itens.length; k++) {
-        const hashAtual = itens[k].conteudoHash ?? normalizar(itens[k].conteudoResumo);
-        if (primeiroHash !== hashAtual) {
-          temConflitoConteudo = true;
-          break;
+        const itemK = itens[k];
+        if (itemK) {
+          const hashAtual = itemK.conteudoHash ?? normalizar(itemK.conteudoResumo);
+          if (primeiroHash !== hashAtual) {
+            temConflitoConteudo = true;
+            break;
+          }
         }
       }
     }
@@ -154,6 +158,7 @@ export function deduplicarExames(entradas: EntradaExameDedupe[]): SaidaDedupeExa
     for (let j = i + 1; j < examesUnicos.length; j++) {
       const a = examesUnicos[i];
       const b = examesUnicos[j];
+      if (!a || !b) continue;
       const concA = a.examePrincipal.conclusao ? a.examePrincipal.conclusao.trim().toLowerCase() : null;
       const concB = b.examePrincipal.conclusao ? b.examePrincipal.conclusao.trim().toLowerCase() : null;
 

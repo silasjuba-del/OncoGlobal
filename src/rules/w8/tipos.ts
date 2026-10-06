@@ -1,7 +1,9 @@
-// Tipos locais para regras puras da onda W8 (derivados dos contratos; nunca duplicar contrato)
 import type { Fonte } from "../../contracts/base.js";
-import type { TipoIdentificador } from "../../contracts/clinico.js";
+import { TipoIdentificador } from "../../contracts/clinico.js";
 import type { Semaforo } from "../../contracts/estados.js";
+import type { z } from "zod";
+
+export type TipoIdentificadorClinico = z.infer<typeof TipoIdentificador>;
 
 // ── AG-01 · Identificadores por valor ───────────────────────────────────────
 export type TipoIdentificadorPorValor = "CPF" | "CNS" | "DESCONHECIDO";
@@ -45,7 +47,7 @@ export interface EntradaVinculoDocumento {
   } | null;
   pacienteAlvo?: {
     patientId: string;
-    identificadores: readonly { tipo: TipoIdentificador; valor: string }[];
+    identificadores: readonly { tipo: TipoIdentificadorClinico; valor: string }[];
   } | null;
 }
 

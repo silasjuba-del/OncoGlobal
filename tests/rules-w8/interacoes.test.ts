@@ -38,8 +38,9 @@ describe("AG-09 · Interações medicamentosas sem fonte = PENDENTE (norma G-09)
       ["pembrolizumabe", "prednisona"],
     ];
 
-    for (const [dA, dB] of pares) {
-      const res = avaliarInteracaoMedicamentosa(dA, dB, rulesetReal);
+    for (const par of pares) {
+      const [dA, dB] = par;
+      const res = avaliarInteracaoMedicamentosa(dA!, dB!, rulesetReal);
       expect(res.estado).not.toBe("VERDE");
       expect(res.estado).toBe("PENDENTE");
       expect(res.motivo).toContain("não verificado");
