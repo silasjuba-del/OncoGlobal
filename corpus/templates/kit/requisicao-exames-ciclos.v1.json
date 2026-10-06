@@ -1,0 +1,85 @@
+{
+  "id": "requisicao-exames-ciclos",
+  "versao": "1.0.0",
+  "header": {
+    "id": "requisicao-exames-ciclos",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-05",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-W5-05 + ADENDO-W6-W7.md (2026-10-05); docs/referencias/kit-oncologia-2026-05.pdf",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-05"
+  },
+  "fonte": {
+    "tipo": "DECISAO_MEDICA",
+    "referencia": "docs/referencias/kit-oncologia-2026-05.pdf",
+    "pagina": 4
+  },
+  "secoes": [
+    {
+      "id": "conteudo",
+      "titulo": "Requisicao de exames",
+      "origem": "TEXTO_FIXO",
+      "campos": [
+        {
+          "id": "texto-integral",
+          "rotulo": "Texto integral",
+          "origem": "TEXTO_FIXO",
+          "texto": " REQUISICAO DE EXAMES LABORATORIAIS\r\n Controle de seguranca durante tratamento oncologico\r\nIDADE:\r\n______\r\nORIENTACAO AO PACIENTE\r\nColetar os exames na data mais proxima da consulta e trazer o resultado impresso ou digital para avaliacao medica. Se\r\nhouver febre, sangramento, falta de ar ou piora importante, procurar atendimento imediatamente.\r\nEXAME\r\nCICLO 1\r\nData: ___/___/___\r\nCICLO 2\r\nData: ___/___/___\r\nCICLO 3\r\nData: ___/___/___\r\nCICLO 4\r\nData: ___/___/___\r\nHEMOGRAMA\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nUREIA\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nCREATININA\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nTGO (AST)\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nTGP (ALT)\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nBILIRRUBINAS\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nFOSFATASE ALCALINA\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nGAMA-GT\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nSODIO/POTASSIO\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nMAGNESIO\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nEXAMES ADICIONAIS / OBSERVACOES\r\nCICLO 1\r\nCICLO 2\r\nCICLO 3\r\nCICLO 4\r\n____________________________________\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\n____________________________________\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\n____________________________________\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\n____________________________________\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\n____________________________________\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\n____________________________________\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\n____________________________________\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nData: ____/____/________\r\nCARIMBO E ASSINATURA"
+        }
+      ]
+    }
+  ],
+  "identificacao": {
+    "origem": "FATO_CONFIRMADO",
+    "campos": [
+      "NOME",
+      "NASC.",
+      "CIDADE",
+      "IDADE"
+    ]
+  },
+  "dataEAssinatura": {
+    "origem": "DECISAO_MEDICA",
+    "campos": [
+      "DATA",
+      "CARIMBO E ASSINATURA"
+    ]
+  },
+  "proibidoConter": [
+    "ALERTA",
+    "CORRECAO_IA"
+  ],
+  "verificacaoAcentuacao": {
+    "necessaria": true,
+    "marcador": "[VERIFICAR acentuacao]",
+    "metadadoSomente": true
+  },
+  "headerExtraidoComoConfiguracao": true,
+  "textoFonteOriginal": "\nH\r\nHOSPITAL DO BEM - UNIDADE ONCOLOGICA\r\nComplexo Hospitalar Regional Dep. Janduhy Carneiro - Patos/PB\r\nDr. Silas Negrao Serra Jr. - CRM-PB 17341 - RQE Oncologia 9099 - RQE Clinica Medica 9098\r\nRequisicao de exames\r\nHospital do Bem - Unidade Oncologica - Patos/PB | Documento medico para impressao\r\nPagina 1\r\n REQUISICAO DE EXAMES LABORATORIAIS\r\n Controle de seguranca durante tratamento oncologico\r\nNOME:\r\n___________________________________________\r\nNASC.:\r\n____/____/________\r\nCIDADE:\r\n______________________\r\nIDADE:\r\n______\r\nORIENTACAO AO PACIENTE\r\nColetar os exames na data mais proxima da consulta e trazer o resultado impresso ou digital para avaliacao medica. Se\r\nhouver febre, sangramento, falta de ar ou piora importante, procurar atendimento imediatamente.\r\nEXAME\r\nCICLO 1\r\nData: ___/___/___\r\nCICLO 2\r\nData: ___/___/___\r\nCICLO 3\r\nData: ___/___/___\r\nCICLO 4\r\nData: ___/___/___\r\nHEMOGRAMA\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nUREIA\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nCREATININA\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nTGO (AST)\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nTGP (ALT)\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nBILIRRUBINAS\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nFOSFATASE ALCALINA\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nGAMA-GT\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nSODIO/POTASSIO\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nMAGNESIO\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nEXAMES ADICIONAIS / OBSERVACOES\r\nCICLO 1\r\nCICLO 2\r\nCICLO 3\r\nCICLO 4\r\n____________________________________\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\n____________________________________\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\n____________________________________\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\n____________________________________\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\n____________________________________\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\n____________________________________\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\n____________________________________\r\n(   )\r\n(   )\r\n(   )\r\n(   )\r\nData: ____/____/________\r\nCARIMBO E ASSINATURA\r\n\r\n",
+  "exames": [
+    "HEMOGRAMA",
+    "UREIA",
+    "CREATININA",
+    "TGO (AST)",
+    "TGP (ALT)",
+    "BILIRRUBINAS",
+    "FOSFATASE ALCALINA",
+    "GAMA-GT",
+    "SODIO/POTASSIO",
+    "MAGNESIO"
+  ],
+  "gradeExames": {
+    "adicionaisLivres": true,
+    "ciclos": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+}
