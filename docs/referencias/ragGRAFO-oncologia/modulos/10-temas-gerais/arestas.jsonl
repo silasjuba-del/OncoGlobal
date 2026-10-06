@@ -1,0 +1,373 @@
+{"de": "tema.oncogenetica-conceitos", "rel": "FONTE", "para": "src.10.83", "pagina": "7-22"}
+{"de": "tema.indicacoes-testagem-germinativa", "rel": "FONTE", "para": "src.10.83", "pagina": 21}
+{"de": "ach.cancer-idade-precoce", "rel": "FONTE", "para": "src.10.83", "pagina": 21}
+{"de": "tema.indicacoes-testagem-germinativa", "rel": "ALERTA", "para": "ach.cancer-idade-precoce"}
+{"de": "ach.multiplos-primarios", "rel": "FONTE", "para": "src.10.83", "pagina": 21}
+{"de": "tema.indicacoes-testagem-germinativa", "rel": "ALERTA", "para": "ach.multiplos-primarios"}
+{"de": "ach.agregacao-familiar", "rel": "FONTE", "para": "src.10.83", "pagina": 21}
+{"de": "tema.indicacoes-testagem-germinativa", "rel": "ALERTA", "para": "ach.agregacao-familiar"}
+{"de": "tema.sindrome-li-fraumeni", "rel": "FONTE", "para": "src.10.83", "pagina": "26-33"}
+{"de": "ach.tp53-r337h", "rel": "FONTE", "para": "src.10.84", "pagina": 48}
+{"de": "tema.sindrome-li-fraumeni", "rel": "ALERTA", "para": "ach.tp53-r337h"}
+{"de": "tema.sindrome-lynch", "rel": "FONTE", "para": "src.10.83", "pagina": "35-44"}
+{"de": "bio.msi-dmmr", "rel": "FONTE", "para": "src.10.84", "pagina": "16;48;53-54"}
+{"de": "ach.perda-mmr-ihq", "rel": "FONTE", "para": "src.10.83", "pagina": "35;44"}
+{"de": "tema.sindrome-lynch", "rel": "ALERTA", "para": "ach.perda-mmr-ihq"}
+{"de": "far.aas", "rel": "FONTE", "para": "src.10.83", "pagina": 42}
+{"de": "reg.lynch.aspirina-quimioprevencao", "rel": "FONTE", "para": "src.10.83", "pagina": 42}
+{"de": "reg.lynch.aspirina-quimioprevencao", "rel": "USA_FARMACO", "para": "far.aas"}
+{"de": "tema.sindrome-lynch", "rel": "MANEJA", "para": "reg.lynch.aspirina-quimioprevencao", "pagina": 42}
+{"de": "tri.burn-2020-aspirina-lynch", "rel": "FONTE", "para": "src.10.83", "pagina": 42}
+{"de": "reg.lynch.aspirina-quimioprevencao", "rel": "SUSTENTADO_POR", "para": "tri.burn-2020-aspirina-lynch"}
+{"de": "tri.burn-2020-aspirina-lynch", "rel": "TESTOU", "para": "reg.lynch.aspirina-quimioprevencao"}
+{"de": "tema.hboc", "rel": "FONTE", "para": "src.10.83", "pagina": "46-52"}
+{"de": "tema.cancer-gastrico-difuso-hereditario", "rel": "FONTE", "para": "src.10.83", "pagina": "54-56;65"}
+{"de": "tema.polipose-hereditaria", "rel": "FONTE", "para": "src.10.83", "pagina": "62-66"}
+{"de": "tema.oncologia-precisao-conceitos", "rel": "FONTE", "para": "src.10.84", "pagina": "7-17;23-31"}
+{"de": "tema.biopsia-liquida", "rel": "FONTE", "para": "src.10.84", "pagina": "38-42;49"}
+{"de": "tema.ngs-somatico-achado-germinativo", "rel": "FONTE", "para": "src.10.84", "pagina": "46-48"}
+{"de": "tema.ngs-somatico-achado-germinativo", "rel": "ALERTA", "para": "ach.tp53-r337h", "pagina": 48}
+{"de": "ach.vaf-alta-gene-suscetibilidade", "rel": "FONTE", "para": "src.10.84", "pagina": "47-48"}
+{"de": "tema.ngs-somatico-achado-germinativo", "rel": "ALERTA", "para": "ach.vaf-alta-gene-suscetibilidade"}
+{"de": "ach.tumor-msi-h", "rel": "FONTE", "para": "src.10.84", "pagina": 48}
+{"de": "tema.ngs-somatico-achado-germinativo", "rel": "ALERTA", "para": "ach.tumor-msi-h"}
+{"de": "tum.tumor-solido-agnostico", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "tum.tumor-solido-agnostico", "rel": "TEM_CENARIO", "para": "cen.tumor-solido-agnostico.irressecavel-metastatico"}
+{"de": "tema.terapia-agnostica", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "bio.ntrk-fusao", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "bio.tmb-alto", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "bio.braf-v600e", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "bio.ret-fusao", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "bio.her2", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "EXIGE_BIOMARCADOR", "para": "bio.msi-dmmr", "para_que": "indicação de terapia agnóstica"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ntrk-fusao", "para_que": "indicação de terapia agnóstica"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "EXIGE_BIOMARCADOR", "para": "bio.tmb-alto", "para_que": "indicação de terapia agnóstica"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "EXIGE_BIOMARCADOR", "para": "bio.braf-v600e", "para_que": "indicação de terapia agnóstica"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ret-fusao", "para_que": "indicação de terapia agnóstica"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "indicação de terapia agnóstica"}
+{"de": "far.pembrolizumabe", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.pembrolizumabe-msi-h", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.pembrolizumabe-msi-h", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "TRATA_COM", "para": "reg.tumor-solido-agnostico.pembrolizumabe-msi-h", "intencao": "paliativa", "condicao_biomarcador": "dMMR/MSI-H"}
+{"de": "tema.terapia-agnostica", "rel": "MANEJA", "para": "reg.tumor-solido-agnostico.pembrolizumabe-msi-h", "pagina": "53-54"}
+{"de": "far.larotrectinibe", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.larotrectinibe-ntrk", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.larotrectinibe-ntrk", "rel": "USA_FARMACO", "para": "far.larotrectinibe"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "TRATA_COM", "para": "reg.tumor-solido-agnostico.larotrectinibe-ntrk", "intencao": "paliativa", "condicao_biomarcador": "fusão NTRK"}
+{"de": "tema.terapia-agnostica", "rel": "MANEJA", "para": "reg.tumor-solido-agnostico.larotrectinibe-ntrk", "pagina": "53-54"}
+{"de": "far.entrectinibe", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.entrectinibe-ntrk", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.entrectinibe-ntrk", "rel": "USA_FARMACO", "para": "far.entrectinibe"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "TRATA_COM", "para": "reg.tumor-solido-agnostico.entrectinibe-ntrk", "intencao": "paliativa", "condicao_biomarcador": "fusão NTRK"}
+{"de": "tema.terapia-agnostica", "rel": "MANEJA", "para": "reg.tumor-solido-agnostico.entrectinibe-ntrk", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.pembrolizumabe-tmb-alto", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.pembrolizumabe-tmb-alto", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "TRATA_COM", "para": "reg.tumor-solido-agnostico.pembrolizumabe-tmb-alto", "intencao": "paliativa", "condicao_biomarcador": "TMB-high"}
+{"de": "tema.terapia-agnostica", "rel": "MANEJA", "para": "reg.tumor-solido-agnostico.pembrolizumabe-tmb-alto", "pagina": "53-54"}
+{"de": "far.dostarlimabe", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.dostarlimabe-dmmr", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.dostarlimabe-dmmr", "rel": "USA_FARMACO", "para": "far.dostarlimabe"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "TRATA_COM", "para": "reg.tumor-solido-agnostico.dostarlimabe-dmmr", "intencao": "paliativa", "condicao_biomarcador": "dMMR/MSI-H"}
+{"de": "tema.terapia-agnostica", "rel": "MANEJA", "para": "reg.tumor-solido-agnostico.dostarlimabe-dmmr", "pagina": "53-54"}
+{"de": "far.dabrafenibe", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "far.trametinibe", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.dabrafenibe-trametinibe-braf", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.dabrafenibe-trametinibe-braf", "rel": "USA_FARMACO", "para": "far.dabrafenibe"}
+{"de": "reg.tumor-solido-agnostico.dabrafenibe-trametinibe-braf", "rel": "USA_FARMACO", "para": "far.trametinibe"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "TRATA_COM", "para": "reg.tumor-solido-agnostico.dabrafenibe-trametinibe-braf", "intencao": "paliativa", "condicao_biomarcador": "BRAF V600E"}
+{"de": "tema.terapia-agnostica", "rel": "MANEJA", "para": "reg.tumor-solido-agnostico.dabrafenibe-trametinibe-braf", "pagina": "53-54"}
+{"de": "far.selpercatinibe", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.selpercatinibe-ret", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.selpercatinibe-ret", "rel": "USA_FARMACO", "para": "far.selpercatinibe"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "TRATA_COM", "para": "reg.tumor-solido-agnostico.selpercatinibe-ret", "intencao": "paliativa", "condicao_biomarcador": "fusão RET"}
+{"de": "tema.terapia-agnostica", "rel": "MANEJA", "para": "reg.tumor-solido-agnostico.selpercatinibe-ret", "pagina": "53-54"}
+{"de": "far.trastuzumabe_deruxtecana", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.trastuzumabe-deruxtecana-her2", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.trastuzumabe-deruxtecana-her2", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "TRATA_COM", "para": "reg.tumor-solido-agnostico.trastuzumabe-deruxtecana-her2", "intencao": "paliativa", "condicao_biomarcador": "HER2 positivo"}
+{"de": "tema.terapia-agnostica", "rel": "MANEJA", "para": "reg.tumor-solido-agnostico.trastuzumabe-deruxtecana-her2", "pagina": "53-54"}
+{"de": "far.repotrectinibe", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.repotrectinibe-ntrk", "rel": "FONTE", "para": "src.10.84", "pagina": "53-54"}
+{"de": "reg.tumor-solido-agnostico.repotrectinibe-ntrk", "rel": "USA_FARMACO", "para": "far.repotrectinibe"}
+{"de": "cen.tumor-solido-agnostico.irressecavel-metastatico", "rel": "TRATA_COM", "para": "reg.tumor-solido-agnostico.repotrectinibe-ntrk", "intencao": "paliativa", "condicao_biomarcador": "NTRK positivo"}
+{"de": "tema.terapia-agnostica", "rel": "MANEJA", "para": "reg.tumor-solido-agnostico.repotrectinibe-ntrk", "pagina": "53-54"}
+{"de": "tema.oncogeriatria-triagem-aga", "rel": "FONTE", "para": "src.10.85", "pagina": "3-21"}
+{"de": "ach.g8-menor-igual-14", "rel": "FONTE", "para": "src.10.85", "pagina": 12}
+{"de": "tema.oncogeriatria-triagem-aga", "rel": "ALERTA", "para": "ach.g8-menor-igual-14"}
+{"de": "tri.mohile-aga-toxicidade", "rel": "FONTE", "para": "src.10.85", "pagina": 15}
+{"de": "tri.li-aga-toxicidade", "rel": "FONTE", "para": "src.10.85", "pagina": 15}
+{"de": "tema.toxicidade-qt-idoso-carg-crash", "rel": "FONTE", "para": "src.10.85", "pagina": "23-25;39"}
+{"de": "ach.carg-alto-risco", "rel": "FONTE", "para": "src.10.85", "pagina": 25}
+{"de": "tema.toxicidade-qt-idoso-carg-crash", "rel": "ALERTA", "para": "ach.carg-alto-risco"}
+{"de": "tema.perioperatorio-idoso", "rel": "FONTE", "para": "src.10.85", "pagina": "29-37"}
+{"de": "tema.hipercalcemia-malignidade", "rel": "FONTE", "para": "src.10.86", "pagina": "6-13;37"}
+{"de": "far.solucao_salina_isotonica", "rel": "FONTE", "para": "src.10.86", "pagina": "9-10"}
+{"de": "reg.hipercalcemia.hidratacao-ev", "rel": "FONTE", "para": "src.10.86", "pagina": "9-10"}
+{"de": "reg.hipercalcemia.hidratacao-ev", "rel": "USA_FARMACO", "para": "far.solucao_salina_isotonica"}
+{"de": "tema.hipercalcemia-malignidade", "rel": "MANEJA", "para": "reg.hipercalcemia.hidratacao-ev", "papel": "primeira conduta", "pagina": 10}
+{"de": "far.acido_zoledronico", "rel": "FONTE", "para": "src.10.86", "pagina": 9}
+{"de": "tema.hipercalcemia-malignidade", "rel": "MANEJA", "para": "far.acido_zoledronico", "papel": "anti-reabsortivo de escolha", "dose_literal": "4 mg IV", "pagina": 9}
+{"de": "far.pamidronato", "rel": "FONTE", "para": "src.10.86", "pagina": 9}
+{"de": "tema.hipercalcemia-malignidade", "rel": "MANEJA", "para": "far.pamidronato", "papel": "alternativa ao zoledronato", "pagina": 9}
+{"de": "far.denosumabe", "rel": "FONTE", "para": "src.10.86", "pagina": "9;12"}
+{"de": "tema.hipercalcemia-malignidade", "rel": "MANEJA", "para": "far.denosumabe", "papel": "refratário a bisfosfonato ou DRC importante", "dose_literal": "subcutâneo", "pagina": "9;12"}
+{"de": "far.calcitonina", "rel": "FONTE", "para": "src.10.86", "pagina": "9;12"}
+{"de": "tema.hipercalcemia-malignidade", "rel": "MANEJA", "para": "far.calcitonina", "papel": "ponte nas formas graves (48–72 h)", "pagina": "9;12"}
+{"de": "far.furosemida", "rel": "FONTE", "para": "src.10.86", "pagina": "9;13"}
+{"de": "tema.hipercalcemia-malignidade", "rel": "MANEJA", "para": "far.furosemida", "papel": "não rotina; só se hipervolemia após expansão", "pagina": "9;13"}
+{"de": "ach.calcio-maior-14", "rel": "FONTE", "para": "src.10.86", "pagina": "11-12"}
+{"de": "tema.hipercalcemia-malignidade", "rel": "ALERTA", "para": "ach.calcio-maior-14", "pagina": 12}
+{"de": "ach.pth-elevado-hipercalcemia", "rel": "FONTE", "para": "src.10.86", "pagina": "6-7"}
+{"de": "tema.hipercalcemia-malignidade", "rel": "ALERTA", "para": "ach.pth-elevado-hipercalcemia", "pagina": 7}
+{"de": "tema.obstrucao-intestinal-maligna", "rel": "FONTE", "para": "src.10.86", "pagina": "15-20;37"}
+{"de": "far.octreotida", "rel": "FONTE", "para": "src.10.86", "pagina": "19-20"}
+{"de": "tema.obstrucao-intestinal-maligna", "rel": "MANEJA", "para": "far.octreotida", "papel": "antissecretório (baixo nível de evidência)", "pagina": "19-20"}
+{"de": "far.haloperidol", "rel": "FONTE", "para": "src.10.86", "pagina": "19-20"}
+{"de": "tema.obstrucao-intestinal-maligna", "rel": "MANEJA", "para": "far.haloperidol", "papel": "antiemético não procinético/náusea refratária", "pagina": "19-20"}
+{"de": "far.olanzapina", "rel": "FONTE", "para": "src.10.86", "pagina": "19-20"}
+{"de": "tema.obstrucao-intestinal-maligna", "rel": "MANEJA", "para": "far.olanzapina", "papel": "náusea refratária", "pagina": "19-20"}
+{"de": "far.ondansetrona", "rel": "FONTE", "para": "src.10.86", "pagina": "19-20"}
+{"de": "tema.obstrucao-intestinal-maligna", "rel": "MANEJA", "para": "far.ondansetrona", "papel": "antiemético não procinético", "pagina": "19-20"}
+{"de": "far.escopolamina", "rel": "FONTE", "para": "src.10.86", "pagina": "19-20"}
+{"de": "tema.obstrucao-intestinal-maligna", "rel": "MANEJA", "para": "far.escopolamina", "papel": "secretivo/cólica", "pagina": "19-20"}
+{"de": "far.dexametasona", "rel": "FONTE", "para": "src.10.86", "pagina": "19-20"}
+{"de": "tema.obstrucao-intestinal-maligna", "rel": "MANEJA", "para": "far.dexametasona", "papel": "curso curto em baixa dose", "pagina": "19-20"}
+{"de": "far.morfina", "rel": "FONTE", "para": "src.10.86", "pagina": "19-20"}
+{"de": "tema.obstrucao-intestinal-maligna", "rel": "MANEJA", "para": "far.morfina", "papel": "analgesia EV ou SC", "pagina": "19-20"}
+{"de": "far.metoclopramida", "rel": "FONTE", "para": "src.10.86", "pagina": "19-20"}
+{"de": "tema.obstrucao-intestinal-maligna", "rel": "MANEJA", "para": "far.metoclopramida", "papel": "só se obstrução parcial sem cólica; evitar na completa", "pagina": "19-20"}
+{"de": "ach.peritonite-perfuracao-isquemia", "rel": "FONTE", "para": "src.10.86", "pagina": 17}
+{"de": "tema.obstrucao-intestinal-maligna", "rel": "ALERTA", "para": "ach.peritonite-perfuracao-isquemia", "pagina": 17}
+{"de": "tema.sindrome-veia-cava-superior", "rel": "FONTE", "para": "src.10.86", "pagina": "22-29;37"}
+{"de": "ach.estridor-edema-laringeo", "rel": "FONTE", "para": "src.10.86", "pagina": "23;27"}
+{"de": "tema.sindrome-veia-cava-superior", "rel": "ALERTA", "para": "ach.estridor-edema-laringeo", "pagina": 27}
+{"de": "reg.svcs.stent-endovascular", "rel": "FONTE", "para": "src.10.86", "pagina": "22-26"}
+{"de": "tema.sindrome-veia-cava-superior", "rel": "MANEJA", "para": "reg.svcs.stent-endovascular", "papel": "alívio rápido nos graves", "pagina": 26}
+{"de": "reg.svcs.radioterapia", "rel": "FONTE", "para": "src.10.86", "pagina": 22}
+{"de": "tema.sindrome-veia-cava-superior", "rel": "MANEJA", "para": "reg.svcs.radioterapia", "pagina": 22}
+{"de": "tema.compressao-medular-maligna", "rel": "FONTE", "para": "src.10.86", "pagina": "30-37"}
+{"de": "ach.dor-coluna-nova-cancer", "rel": "FONTE", "para": "src.10.86", "pagina": 30}
+{"de": "tema.compressao-medular-maligna", "rel": "ALERTA", "para": "ach.dor-coluna-nova-cancer", "pagina": 30}
+{"de": "ach.deficit-neurologico-esfincteriano", "rel": "FONTE", "para": "src.10.86", "pagina": "30-31"}
+{"de": "tema.compressao-medular-maligna", "rel": "ALERTA", "para": "ach.deficit-neurologico-esfincteriano", "pagina": 30}
+{"de": "tema.compressao-medular-maligna", "rel": "MANEJA", "para": "far.dexametasona", "papel": "dose de prova imediata", "dose_literal": "16 mg VO/EV; manter 16 mg/dia", "pagina": "32-33"}
+{"de": "reg.compressao-medular.cirurgia-rt", "rel": "FONTE", "para": "src.10.86", "pagina": 35}
+{"de": "tema.compressao-medular-maligna", "rel": "MANEJA", "para": "reg.compressao-medular.cirurgia-rt", "pagina": 35}
+{"de": "tema.neutropenia-febril", "rel": "FONTE", "para": "src.10.87", "pagina": "5-18"}
+{"de": "ach.febre-neutropenia", "rel": "FONTE", "para": "src.10.87", "pagina": 6}
+{"de": "tema.neutropenia-febril", "rel": "ALERTA", "para": "ach.febre-neutropenia", "pagina": 6}
+{"de": "far.cefepime", "rel": "FONTE", "para": "src.10.87", "pagina": "10-11"}
+{"de": "far.carbapenemico", "rel": "FONTE", "para": "src.10.87", "pagina": "10-11"}
+{"de": "far.piperacilina_tazobactam", "rel": "FONTE", "para": "src.10.87", "pagina": "10-11"}
+{"de": "far.vancomicina", "rel": "FONTE", "para": "src.10.87", "pagina": "10-11"}
+{"de": "reg.neutropenia-febril.alto-risco-betalactamico", "rel": "FONTE", "para": "src.10.87", "pagina": "10-11"}
+{"de": "reg.neutropenia-febril.alto-risco-betalactamico", "rel": "USA_FARMACO", "para": "far.cefepime"}
+{"de": "reg.neutropenia-febril.alto-risco-betalactamico", "rel": "USA_FARMACO", "para": "far.carbapenemico"}
+{"de": "reg.neutropenia-febril.alto-risco-betalactamico", "rel": "USA_FARMACO", "para": "far.piperacilina_tazobactam"}
+{"de": "reg.neutropenia-febril.alto-risco-betalactamico", "rel": "USA_FARMACO", "para": "far.vancomicina"}
+{"de": "tema.neutropenia-febril", "rel": "MANEJA", "para": "reg.neutropenia-febril.alto-risco-betalactamico", "condicao": "alto risco (MASCC <21)", "pagina": 10}
+{"de": "far.amox_clav", "rel": "FONTE", "para": "src.10.87", "pagina": 10}
+{"de": "far.ciprofloxacino", "rel": "FONTE", "para": "src.10.87", "pagina": 10}
+{"de": "reg.neutropenia-febril.baixo-risco-oral", "rel": "FONTE", "para": "src.10.87", "pagina": 10}
+{"de": "reg.neutropenia-febril.baixo-risco-oral", "rel": "USA_FARMACO", "para": "far.amox_clav"}
+{"de": "reg.neutropenia-febril.baixo-risco-oral", "rel": "USA_FARMACO", "para": "far.ciprofloxacino"}
+{"de": "tema.neutropenia-febril", "rel": "MANEJA", "para": "reg.neutropenia-febril.baixo-risco-oral", "condicao": "baixo risco (MASCC ≥21)", "pagina": 10}
+{"de": "far.filgrastim", "rel": "FONTE", "para": "src.10.87", "pagina": "13;16"}
+{"de": "tema.neutropenia-febril", "rel": "MANEJA", "para": "far.filgrastim", "papel": "profilaxia primária se risco de NF ≥20%", "dose_literal": "5 mcg/kg/dia – 24-72 horas após último dia", "pagina": "13;16"}
+{"de": "far.oseltamivir", "rel": "FONTE", "para": "src.10.87", "pagina": 12}
+{"de": "tema.neutropenia-febril", "rel": "MANEJA", "para": "far.oseltamivir", "papel": "influenza em neutropênico sintomático ou exposto não vacinado", "dose_literal": "5 dias", "pagina": 12}
+{"de": "tema.tev-cancer", "rel": "FONTE", "para": "src.10.87", "pagina": "19-29"}
+{"de": "ach.khorana-maior-igual-2", "rel": "FONTE", "para": "src.10.87", "pagina": "27-28"}
+{"de": "tema.tev-cancer", "rel": "ALERTA", "para": "ach.khorana-maior-igual-2", "pagina": 27}
+{"de": "far.hbpm", "rel": "FONTE", "para": "src.10.87", "pagina": "25;27"}
+{"de": "tema.tev-cancer", "rel": "MANEJA", "para": "far.hbpm", "papel": "tratamento e profilaxia", "pagina": "25;27"}
+{"de": "far.edoxabana", "rel": "FONTE", "para": "src.10.87", "pagina": 25}
+{"de": "tema.tev-cancer", "rel": "MANEJA", "para": "far.edoxabana", "papel": "tratamento", "pagina": 25}
+{"de": "far.rivaroxabana", "rel": "FONTE", "para": "src.10.87", "pagina": "25;27"}
+{"de": "tema.tev-cancer", "rel": "MANEJA", "para": "far.rivaroxabana", "papel": "tratamento e profilaxia", "pagina": "25;27"}
+{"de": "far.apixabana", "rel": "FONTE", "para": "src.10.87", "pagina": "26-27"}
+{"de": "tema.tev-cancer", "rel": "MANEJA", "para": "far.apixabana", "papel": "profilaxia (Khorana ≥2) e extensão (API-CAT)", "pagina": "26-27"}
+{"de": "far.varfarina", "rel": "FONTE", "para": "src.10.87", "pagina": 25}
+{"de": "tema.tev-cancer", "rel": "MANEJA", "para": "far.varfarina", "papel": "inferior a HBPM/DOAC no câncer", "pagina": 25}
+{"de": "tri.api-cat", "rel": "FONTE", "para": "src.10.87", "pagina": 26}
+{"de": "reg.tev-cancer.apixabana-dose-reduzida-extensao", "rel": "FONTE", "para": "src.10.87", "pagina": 26}
+{"de": "reg.tev-cancer.apixabana-dose-reduzida-extensao", "rel": "USA_FARMACO", "para": "far.apixabana"}
+{"de": "reg.tev-cancer.apixabana-dose-reduzida-extensao", "rel": "SUSTENTADO_POR", "para": "tri.api-cat"}
+{"de": "tri.api-cat", "rel": "TESTOU", "para": "reg.tev-cancer.apixabana-dose-reduzida-extensao"}
+{"de": "tema.tev-cancer", "rel": "MANEJA", "para": "reg.tev-cancer.apixabana-dose-reduzida-extensao", "pagina": 26}
+{"de": "tema.sindrome-lise-tumoral", "rel": "FONTE", "para": "src.10.87", "pagina": "30-40"}
+{"de": "ach.slt-laboratorial", "rel": "FONTE", "para": "src.10.87", "pagina": 32}
+{"de": "tema.sindrome-lise-tumoral", "rel": "ALERTA", "para": "ach.slt-laboratorial", "pagina": 32}
+{"de": "ach.deficiencia-g6pd", "rel": "FONTE", "para": "src.10.87", "pagina": 35}
+{"de": "tema.sindrome-lise-tumoral", "rel": "ALERTA", "para": "ach.deficiencia-g6pd", "pagina": 35}
+{"de": "far.alopurinol", "rel": "FONTE", "para": "src.10.87", "pagina": 35}
+{"de": "tema.sindrome-lise-tumoral", "rel": "MANEJA", "para": "far.alopurinol", "papel": "previne formação de novo ácido úrico; não reduz o existente", "pagina": 35}
+{"de": "far.febuxostate", "rel": "FONTE", "para": "src.10.87", "pagina": 35}
+{"de": "tema.sindrome-lise-tumoral", "rel": "MANEJA", "para": "far.febuxostate", "papel": "alternativa ao alopurinol", "pagina": 35}
+{"de": "far.rasburicase", "rel": "FONTE", "para": "src.10.87", "pagina": 35}
+{"de": "tema.sindrome-lise-tumoral", "rel": "MANEJA", "para": "far.rasburicase", "papel": "degrada ácido úrico (normaliza em ~4 h); alto risco ou SLT estabelecida; contraindicada em G6PD", "pagina": 35}
+{"de": "tema.nviq", "rel": "FONTE", "para": "src.10.88", "pagina": "5-15"}
+{"de": "far.palonosetrona", "rel": "FONTE", "para": "src.10.88", "pagina": 12}
+{"de": "far.aprepitanto", "rel": "FONTE", "para": "src.10.88", "pagina": 12}
+{"de": "reg.nviq.alto-potencial-nao-ac", "rel": "FONTE", "para": "src.10.88", "pagina": 12}
+{"de": "reg.nviq.alto-potencial-nao-ac", "rel": "USA_FARMACO", "para": "far.palonosetrona"}
+{"de": "reg.nviq.alto-potencial-nao-ac", "rel": "USA_FARMACO", "para": "far.aprepitanto"}
+{"de": "reg.nviq.alto-potencial-nao-ac", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "reg.nviq.alto-potencial-nao-ac", "rel": "USA_FARMACO", "para": "far.olanzapina"}
+{"de": "tema.nviq", "rel": "MANEJA", "para": "reg.nviq.alto-potencial-nao-ac", "pagina": 12}
+{"de": "far.fosaprepitanto", "rel": "FONTE", "para": "src.10.88", "pagina": 12}
+{"de": "reg.nviq.alto-potencial-ac", "rel": "FONTE", "para": "src.10.88", "pagina": 12}
+{"de": "reg.nviq.alto-potencial-ac", "rel": "USA_FARMACO", "para": "far.ondansetrona"}
+{"de": "reg.nviq.alto-potencial-ac", "rel": "USA_FARMACO", "para": "far.palonosetrona"}
+{"de": "reg.nviq.alto-potencial-ac", "rel": "USA_FARMACO", "para": "far.fosaprepitanto"}
+{"de": "reg.nviq.alto-potencial-ac", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "reg.nviq.alto-potencial-ac", "rel": "USA_FARMACO", "para": "far.olanzapina"}
+{"de": "tema.nviq", "rel": "MANEJA", "para": "reg.nviq.alto-potencial-ac", "pagina": 12}
+{"de": "reg.nviq.moderado-emese-tardia", "rel": "FONTE", "para": "src.10.88", "pagina": 13}
+{"de": "reg.nviq.moderado-emese-tardia", "rel": "USA_FARMACO", "para": "far.ondansetrona"}
+{"de": "reg.nviq.moderado-emese-tardia", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "tema.nviq", "rel": "MANEJA", "para": "reg.nviq.moderado-emese-tardia", "pagina": 13}
+{"de": "reg.nviq.moderado-sem-emese-tardia", "rel": "FONTE", "para": "src.10.88", "pagina": 13}
+{"de": "reg.nviq.moderado-sem-emese-tardia", "rel": "USA_FARMACO", "para": "far.ondansetrona"}
+{"de": "reg.nviq.moderado-sem-emese-tardia", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "tema.nviq", "rel": "MANEJA", "para": "reg.nviq.moderado-sem-emese-tardia", "pagina": 13}
+{"de": "reg.nviq.baixo-potencial", "rel": "FONTE", "para": "src.10.88", "pagina": 14}
+{"de": "reg.nviq.baixo-potencial", "rel": "USA_FARMACO", "para": "far.ondansetrona"}
+{"de": "reg.nviq.baixo-potencial", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "tema.nviq", "rel": "MANEJA", "para": "reg.nviq.baixo-potencial", "pagina": 14}
+{"de": "tema.nviq", "rel": "MANEJA", "para": "far.olanzapina", "papel": "breakthrough: 1ª opção se não usada na profilaxia", "pagina": 15}
+{"de": "tema.nviq", "rel": "MANEJA", "para": "far.metoclopramida", "papel": "alternativa no breakthrough", "pagina": 15}
+{"de": "tema.nviq", "rel": "MANEJA", "para": "far.haloperidol", "papel": "alternativa no breakthrough", "pagina": 15}
+{"de": "far.lorazepam", "rel": "FONTE", "para": "src.10.88", "pagina": 15}
+{"de": "tema.nviq", "rel": "MANEJA", "para": "far.lorazepam", "papel": "alternativa no breakthrough", "pagina": 15}
+{"de": "far.alprazolam", "rel": "FONTE", "para": "src.10.88", "pagina": 15}
+{"de": "tema.nviq", "rel": "MANEJA", "para": "far.alprazolam", "papel": "alternativa no breakthrough", "pagina": 15}
+{"de": "tri.olanzapina-5mg-ac-placebo", "rel": "FONTE", "para": "src.10.88", "pagina": 11}
+{"de": "tri.olanzapina-2-5-vs-10mg", "rel": "FONTE", "para": "src.10.88", "pagina": 11}
+{"de": "reg.nviq.alto-potencial-ac", "rel": "SUSTENTADO_POR", "para": "tri.olanzapina-5mg-ac-placebo"}
+{"de": "tri.olanzapina-5mg-ac-placebo", "rel": "TESTOU", "para": "reg.nviq.alto-potencial-ac"}
+{"de": "reg.nviq.alto-potencial-nao-ac", "rel": "SUSTENTADO_POR", "para": "tri.olanzapina-5mg-ac-placebo"}
+{"de": "tri.olanzapina-5mg-ac-placebo", "rel": "TESTOU", "para": "reg.nviq.alto-potencial-nao-ac"}
+{"de": "reg.nviq.alto-potencial-ac", "rel": "SUSTENTADO_POR", "para": "tri.olanzapina-2-5-vs-10mg"}
+{"de": "tri.olanzapina-2-5-vs-10mg", "rel": "TESTOU", "para": "reg.nviq.alto-potencial-ac"}
+{"de": "reg.nviq.alto-potencial-nao-ac", "rel": "SUSTENTADO_POR", "para": "tri.olanzapina-2-5-vs-10mg"}
+{"de": "tri.olanzapina-2-5-vs-10mg", "rel": "TESTOU", "para": "reg.nviq.alto-potencial-nao-ac"}
+{"de": "tema.diarreia-oncologica", "rel": "FONTE", "para": "src.10.88", "pagina": "17-25"}
+{"de": "ach.deficiencia-dpd", "rel": "FONTE", "para": "src.10.88", "pagina": 21}
+{"de": "tema.diarreia-oncologica", "rel": "ALERTA", "para": "ach.deficiencia-dpd", "pagina": 21}
+{"de": "ach.ugt1a1-homozigose", "rel": "FONTE", "para": "src.10.88", "pagina": 21}
+{"de": "tema.diarreia-oncologica", "rel": "ALERTA", "para": "ach.ugt1a1-homozigose", "pagina": 21}
+{"de": "ach.diarreia-g3-g4", "rel": "FONTE", "para": "src.10.88", "pagina": 25}
+{"de": "tema.diarreia-oncologica", "rel": "ALERTA", "para": "ach.diarreia-g3-g4", "pagina": 25}
+{"de": "far.loperamida", "rel": "FONTE", "para": "src.10.88", "pagina": 25}
+{"de": "tema.diarreia-oncologica", "rel": "MANEJA", "para": "far.loperamida", "papel": "manejo específico", "dose_literal": "4 mg (2 comprimidos) imediato, seguido de 2 mg após cada evacuação líquida", "pagina": 25}
+{"de": "far.racecadotril", "rel": "FONTE", "para": "src.10.88", "pagina": 25}
+{"de": "tema.diarreia-oncologica", "rel": "MANEJA", "para": "far.racecadotril", "papel": "manejo específico", "dose_literal": "100 mg, até 3x/dia", "pagina": 25}
+{"de": "tema.diarreia-oncologica", "rel": "MANEJA", "para": "far.octreotida", "papel": "G3/4 sem melhora em 48 h", "dose_literal": "150 mcg", "pagina": 25}
+{"de": "far.uridina_triacetato", "rel": "FONTE", "para": "src.10.88", "pagina": 25}
+{"de": "tema.diarreia-oncologica", "rel": "MANEJA", "para": "far.uridina_triacetato", "papel": "deficiência de DPD (até 96 h)", "dose_literal": "10 g", "pagina": 25}
+{"de": "far.atropina", "rel": "FONTE", "para": "src.10.88", "pagina": 21}
+{"de": "tema.diarreia-oncologica", "rel": "MANEJA", "para": "far.atropina", "papel": "diarreia colinérgica aguda do irinotecano", "dose_literal": "0,25-1 mg SC", "pagina": 21}
+{"de": "tema.diarreia-oncologica", "rel": "MANEJA", "para": "far.ciprofloxacino", "papel": "ATB empírico no G3/4 (com metronidazol ou tazocin)", "pagina": 25}
+{"de": "far.metronidazol", "rel": "FONTE", "para": "src.10.88", "pagina": 25}
+{"de": "tema.diarreia-oncologica", "rel": "MANEJA", "para": "far.metronidazol", "papel": "ATB empírico no G3/4", "pagina": 25}
+{"de": "tema.diarreia-oncologica", "rel": "MANEJA", "para": "far.vancomicina", "papel": "VO se suspeita de Clostridium difficile", "pagina": 25}
+{"de": "tema.colite-imunomediada", "rel": "FONTE", "para": "src.10.88", "pagina": "26;28-29"}
+{"de": "far.prednisona", "rel": "FONTE", "para": "src.10.88", "pagina": 26}
+{"de": "tema.colite-imunomediada", "rel": "MANEJA", "para": "far.prednisona", "papel": "G2 persistente", "dose_literal": "0,5-1,0 mg/kg VO", "pagina": 26}
+{"de": "far.metilprednisolona", "rel": "FONTE", "para": "src.10.88", "pagina": 26}
+{"de": "tema.colite-imunomediada", "rel": "MANEJA", "para": "far.metilprednisolona", "papel": "G3-4", "dose_literal": "1,0-2,0 mg/kg/dia EV", "pagina": 26}
+{"de": "far.infliximabe", "rel": "FONTE", "para": "src.10.88", "pagina": 26}
+{"de": "tema.colite-imunomediada", "rel": "MANEJA", "para": "far.infliximabe", "papel": "refratário a corticoide após 3 dias", "pagina": 26}
+{"de": "far.vedolizumabe", "rel": "FONTE", "para": "src.10.88", "pagina": 26}
+{"de": "tema.colite-imunomediada", "rel": "MANEJA", "para": "far.vedolizumabe", "papel": "refratário ou contraindicação a infliximabe", "pagina": 26}
+{"de": "tema.fadiga-oncologica", "rel": "FONTE", "para": "src.10.88", "pagina": "33-37"}
+{"de": "tema.dispneia-paliativa", "rel": "FONTE", "para": "src.10.89", "pagina": "5-15"}
+{"de": "far.codeina", "rel": "FONTE", "para": "src.10.89", "pagina": 13}
+{"de": "tema.dispneia-paliativa", "rel": "MANEJA", "para": "far.codeina", "papel": "opioide 1ª linha", "dose_literal": "leve: 30 mg VO q4h", "pagina": 13}
+{"de": "far.hidrocodona", "rel": "FONTE", "para": "src.10.89", "pagina": 13}
+{"de": "tema.dispneia-paliativa", "rel": "MANEJA", "para": "far.hidrocodona", "papel": "opioide 1ª linha", "dose_literal": "leve: 5 mg VO q4h", "pagina": 13}
+{"de": "tema.dispneia-paliativa", "rel": "MANEJA", "para": "far.morfina", "papel": "opioide 1ª linha", "dose_literal": "grave: 5 mg VO q4h", "pagina": 13}
+{"de": "far.oxicodona", "rel": "FONTE", "para": "src.10.89", "pagina": 13}
+{"de": "tema.dispneia-paliativa", "rel": "MANEJA", "para": "far.oxicodona", "papel": "opioide 1ª linha", "dose_literal": "grave: 5 mg VO q4h", "pagina": 13}
+{"de": "tema.dispneia-paliativa", "rel": "MANEJA", "para": "far.lorazepam", "papel": "ansiedade associada (não isolado)", "dose_literal": "ansiedade: 0,5-1 mg VO q6h", "pagina": 14}
+{"de": "far.diazepam", "rel": "FONTE", "para": "src.10.89", "pagina": 14}
+{"de": "tema.dispneia-paliativa", "rel": "MANEJA", "para": "far.diazepam", "papel": "ansiedade associada (não isolado)", "dose_literal": "5-10 mg VO q8h", "pagina": 14}
+{"de": "far.clonazepam", "rel": "FONTE", "para": "src.10.89", "pagina": 14}
+{"de": "tema.dispneia-paliativa", "rel": "MANEJA", "para": "far.clonazepam", "papel": "ansiedade associada (não isolado)", "dose_literal": "0,25-2 mg VO q12h", "pagina": 14}
+{"de": "tema.sedacao-paliativa", "rel": "FONTE", "para": "src.10.89", "pagina": 16}
+{"de": "far.midazolam", "rel": "FONTE", "para": "src.10.89", "pagina": 16}
+{"de": "tema.sedacao-paliativa", "rel": "MANEJA", "para": "far.midazolam", "papel": "sedação paliativa", "dose_literal": "4 amp de 15 mg em SF 0,9% 48 mL (1 mg/mL); bolus EV ou SC 2-5 mg, repetir q1h s/n; manutenção 0,5-1,5 mg/h, reavaliar q1h", "pagina": 16}
+{"de": "tema.dor-oncologica", "rel": "FONTE", "para": "src.10.90", "pagina": "8-27"}
+{"de": "ach.dor-nova-focal-complicacao", "rel": "FONTE", "para": "src.10.90", "pagina": 17}
+{"de": "tema.dor-oncologica", "rel": "ALERTA", "para": "ach.dor-nova-focal-complicacao", "pagina": 17}
+{"de": "ach.intoxicacao-opioide", "rel": "FONTE", "para": "src.10.90", "pagina": 21}
+{"de": "tema.dor-oncologica", "rel": "ALERTA", "para": "ach.intoxicacao-opioide", "pagina": 21}
+{"de": "far.dipirona", "rel": "FONTE", "para": "src.10.90", "pagina": 14}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.dipirona", "dose_literal": "500–1000 mg 6/6h; máx. 4–6 g/dia", "pagina": 14}
+{"de": "far.paracetamol", "rel": "FONTE", "para": "src.10.90", "pagina": 14}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.paracetamol", "dose_literal": "500–1000 mg 6/6h; máx. 3–4 g/dia", "pagina": 14}
+{"de": "far.ibuprofeno", "rel": "FONTE", "para": "src.10.90", "pagina": 14}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.ibuprofeno", "pagina": 14}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.morfina", "dose_literal": "5 mg VO 4/4h ou PRN; VO:EV ≈3:1", "pagina": 16}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.oxicodona", "dose_literal": "10 mg LP 12/12h", "pagina": 16}
+{"de": "far.hidromorfona", "rel": "FONTE", "para": "src.10.90", "pagina": 16}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.hidromorfona", "dose_literal": "8 mg 1x/dia LP", "pagina": 16}
+{"de": "far.metadona", "rel": "FONTE", "para": "src.10.90", "pagina": 16}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.metadona", "dose_literal": "2,5–5 mg 8/12h (especialista)", "pagina": 16}
+{"de": "far.fentanil", "rel": "FONTE", "para": "src.10.90", "pagina": 16}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.fentanil", "dose_literal": "12 mcg/h a cada 72h; não iniciar em virgem", "pagina": 16}
+{"de": "far.gabapentina", "rel": "FONTE", "para": "src.10.90", "pagina": 18}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.gabapentina", "dose_literal": "100–300 mg 1–2x/dia, titular a cada 48–72h", "pagina": 18}
+{"de": "far.pregabalina", "rel": "FONTE", "para": "src.10.90", "pagina": 18}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.pregabalina", "dose_literal": "25–75 mg 2x/dia → 150–300 mg 2x/dia", "pagina": 18}
+{"de": "far.duloxetina", "rel": "FONTE", "para": "src.10.90", "pagina": 18}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.duloxetina", "dose_literal": "30 mg/dia → 60 mg/dia", "pagina": 18}
+{"de": "far.nortriptilina", "rel": "FONTE", "para": "src.10.90", "pagina": 18}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.nortriptilina", "dose_literal": "10–25 mg à noite → 50–100 mg", "pagina": 18}
+{"de": "far.cetamina", "rel": "FONTE", "para": "src.10.90", "pagina": 18}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.cetamina", "dose_literal": "0,05–0,3 mg/kg/h em BIC", "pagina": 18}
+{"de": "far.naloxona", "rel": "FONTE", "para": "src.10.90", "pagina": 21}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.naloxona", "dose_literal": "bolus pequenos titulados", "pagina": 21}
+{"de": "tema.dor-oncologica", "rel": "MANEJA", "para": "far.dexametasona", "dose_literal": "1–2 mg pela manhã (dose baixa usual)", "pagina": 19}
+{"de": "tema.irae", "rel": "FONTE", "para": "src.10.91", "pagina": "5-18"}
+{"de": "reg.irae.corticoide-por-grau", "rel": "FONTE", "para": "src.10.91", "pagina": 18}
+{"de": "reg.irae.corticoide-por-grau", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "reg.irae.corticoide-por-grau", "rel": "USA_FARMACO", "para": "far.metilprednisolona"}
+{"de": "reg.irae.corticoide-por-grau", "rel": "USA_FARMACO", "para": "far.infliximabe"}
+{"de": "reg.irae.corticoide-por-grau", "rel": "USA_FARMACO", "para": "far.vedolizumabe"}
+{"de": "tema.irae", "rel": "MANEJA", "para": "reg.irae.corticoide-por-grau", "pagina": 18}
+{"de": "tema.sindrome-liberacao-citocinas", "rel": "FONTE", "para": "src.10.91", "pagina": "23-26"}
+{"de": "far.tocilizumabe", "rel": "FONTE", "para": "src.10.91", "pagina": 26}
+{"de": "tema.sindrome-liberacao-citocinas", "rel": "MANEJA", "para": "far.tocilizumabe", "dose_literal": "4–8 mg/kg em dose única (G4)", "pagina": 26}
+{"de": "tema.sindrome-liberacao-citocinas", "rel": "MANEJA", "para": "far.dexametasona", "dose_literal": "8 mg IV, máximo de 3 doses (24 mg/dia) (G3)", "pagina": 26}
+{"de": "tema.sindrome-liberacao-citocinas", "rel": "MANEJA", "para": "far.paracetamol", "dose_literal": "sintomático", "pagina": 26}
+{"de": "ach.febre-hipotensao-hipoxia-pos-bite", "rel": "FONTE", "para": "src.10.91", "pagina": 25}
+{"de": "tema.sindrome-liberacao-citocinas", "rel": "ALERTA", "para": "ach.febre-hipotensao-hipoxia-pos-bite", "pagina": 25}
+{"de": "tema.icans", "rel": "FONTE", "para": "src.10.91", "pagina": "27-29"}
+{"de": "tema.icans", "rel": "MANEJA", "para": "far.dexametasona", "dose_literal": "10 mg IV (G2 x1, repetir 6/6h; G3 6/6h)", "pagina": 29}
+{"de": "tema.icans", "rel": "MANEJA", "para": "far.metilprednisolona", "dose_literal": "1 mg/kg IV 12/12h", "pagina": 29}
+{"de": "tema.icans", "rel": "MANEJA", "para": "far.tocilizumabe", "dose_literal": "8 mg/kg IV em 1 hora; não exceder 800 mg/dose (se SLC ≥3 concomitante)", "pagina": 29}
+{"de": "ach.ice-reduzido", "rel": "FONTE", "para": "src.10.91", "pagina": "27-28"}
+{"de": "tema.icans", "rel": "ALERTA", "para": "ach.ice-reduzido", "pagina": 28}
+{"de": "tri.ahn-2023-tarlatamabe", "rel": "FONTE", "para": "src.10.91", "pagina": "23;27"}
+{"de": "far.tarlatamabe", "rel": "FONTE", "para": "src.10.91", "pagina": "12;30"}
+{"de": "reg.cppc.tarlatamabe", "rel": "FONTE", "para": "src.10.91", "pagina": "12;30"}
+{"de": "reg.cppc.tarlatamabe", "rel": "USA_FARMACO", "para": "far.tarlatamabe"}
+{"de": "reg.cppc.tarlatamabe", "rel": "SUSTENTADO_POR", "para": "tri.ahn-2023-tarlatamabe"}
+{"de": "tri.ahn-2023-tarlatamabe", "rel": "TESTOU", "para": "reg.cppc.tarlatamabe"}
+{"de": "tema.sindrome-liberacao-citocinas", "rel": "MANEJA", "para": "reg.cppc.tarlatamabe", "papel": "agente causal (monitorar)", "pagina": 23}
+{"de": "tema.epidemiologia-cancer", "rel": "FONTE", "para": "src.10.92", "pagina": "4-11"}
+{"de": "tema.fatores-risco-prevencao", "rel": "FONTE", "para": "src.10.92", "pagina": "13-14;21"}
+{"de": "tema.rastreamento-colo-utero", "rel": "FONTE", "para": "src.10.92", "pagina": 15}
+{"de": "tema.rastreamento-mama", "rel": "FONTE", "para": "src.10.92", "pagina": 16}
+{"de": "tema.rastreamento-colorretal", "rel": "FONTE", "para": "src.10.92", "pagina": 17}
+{"de": "tema.rastreamento-prostata", "rel": "FONTE", "para": "src.10.92", "pagina": 18}
+{"de": "tema.rastreamento-outros", "rel": "FONTE", "para": "src.10.92", "pagina": 19}
+{"de": "tema.sus-principios-organizacao", "rel": "FONTE", "para": "src.10.93", "pagina": "4-8"}
+{"de": "tema.conitec-incorporacao", "rel": "FONTE", "para": "src.10.93", "pagina": "9-12"}
+{"de": "tema.ans-rol", "rel": "FONTE", "para": "src.10.93", "pagina": "12-15"}
+{"de": "tema.prazos-oncologia-lei-60-30", "rel": "FONTE", "para": "src.10.93", "pagina": 16}
+{"de": "tema.interpretacao-estudos-clinicos", "rel": "FONTE", "para": "src.10.94", "pagina": "8-22"}
+{"de": "tema.pesquisa-clinica-fases", "rel": "FONTE", "para": "src.10.95", "pagina": "8-41"}

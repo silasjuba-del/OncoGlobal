@@ -1,0 +1,37 @@
+{
+ "nos": 2746,
+ "arestas": 8024,
+ "por_tipo": {
+  "fonte": 96,
+  "tema": 46,
+  "tumor": 73,
+  "diagnostico": 157,
+  "estadiamento": 106,
+  "biomarcador": 104,
+  "cenario": 286,
+  "trial": 737,
+  "regime": 803,
+  "farmaco": 312,
+  "achado": 26
+ },
+ "por_relacao": {
+  "FONTE": 2981,
+  "DIAGNOSTICA_POR": 160,
+  "ESTADIA_POR": 106,
+  "TEM_CENARIO": 295,
+  "EXIGE_BIOMARCADOR": 230,
+  "USA_FARMACO": 1665,
+  "TRATA_COM": 908,
+  "SUSTENTADO_POR": 757,
+  "TESTOU": 801,
+  "ALERTA": 27,
+  "MANEJA": 94
+ },
+ "fundidos": {
+  "biomarcador": 23,
+  "farmaco": 216,
+  "trial": 4,
+  "regime": 1
+ },
+ "orfas": 0
+}

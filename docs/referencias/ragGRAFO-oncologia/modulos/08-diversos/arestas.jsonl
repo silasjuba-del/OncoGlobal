@@ -1,0 +1,813 @@
+{"de": "tum.melanoma", "rel": "FONTE", "para": "src.08.72", "pagina": 5}
+{"de": "cen.melanoma.localizado", "rel": "FONTE", "para": "src.08.72", "pagina": 20}
+{"de": "tum.melanoma", "rel": "TEM_CENARIO", "para": "cen.melanoma.localizado"}
+{"de": "cen.melanoma.adjuvante", "rel": "FONTE", "para": "src.08.72", "pagina": 28}
+{"de": "tum.melanoma", "rel": "TEM_CENARIO", "para": "cen.melanoma.adjuvante"}
+{"de": "cen.melanoma.neoadjuvante", "rel": "FONTE", "para": "src.08.72", "pagina": 30}
+{"de": "tum.melanoma", "rel": "TEM_CENARIO", "para": "cen.melanoma.neoadjuvante"}
+{"de": "cen.melanoma.metastatico-1a-linha", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "tum.melanoma", "rel": "TEM_CENARIO", "para": "cen.melanoma.metastatico-1a-linha"}
+{"de": "cen.melanoma.2a-linha-posterior", "rel": "FONTE", "para": "src.08.73", "pagina": 32}
+{"de": "tum.melanoma", "rel": "TEM_CENARIO", "para": "cen.melanoma.2a-linha-posterior"}
+{"de": "cen.melanoma.metastase-cerebral", "rel": "FONTE", "para": "src.08.73", "pagina": 21}
+{"de": "tum.melanoma", "rel": "TEM_CENARIO", "para": "cen.melanoma.metastase-cerebral"}
+{"de": "dx.melanoma.dermatoscopia-abcde", "rel": "FONTE", "para": "src.08.72", "pagina": 9}
+{"de": "tum.melanoma", "rel": "DIAGNOSTICA_POR", "para": "dx.melanoma.dermatoscopia-abcde"}
+{"de": "dx.melanoma.biopsia-patologia", "rel": "FONTE", "para": "src.08.72", "pagina": 10}
+{"de": "tum.melanoma", "rel": "DIAGNOSTICA_POR", "para": "dx.melanoma.biopsia-patologia"}
+{"de": "dx.melanoma.exames-estadiamento", "rel": "FONTE", "para": "src.08.72", "pagina": 19}
+{"de": "tum.melanoma", "rel": "DIAGNOSTICA_POR", "para": "dx.melanoma.exames-estadiamento"}
+{"de": "est.melanoma.ajcc8", "rel": "FONTE", "para": "src.08.72", "pagina": 15}
+{"de": "tum.melanoma", "rel": "ESTADIA_POR", "para": "est.melanoma.ajcc8"}
+{"de": "bio.braf-v600", "rel": "FONTE", "para": "src.08.72", "pagina": 12}
+{"de": "cen.melanoma.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.braf-v600", "para_que": "elegibilidade a iBRAF + iMEK"}
+{"de": "cen.melanoma.metastatico-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.braf-v600", "para_que": "elegibilidade a iBRAF + iMEK"}
+{"de": "cen.melanoma.metastase-cerebral", "rel": "EXIGE_BIOMARCADOR", "para": "bio.braf-v600", "para_que": "elegibilidade a iBRAF + iMEK"}
+{"de": "bio.nras-kit-ntrk", "rel": "FONTE", "para": "src.08.72", "pagina": 11}
+{"de": "cen.melanoma.2a-linha-posterior", "rel": "EXIGE_BIOMARCADOR", "para": "bio.nras-kit-ntrk", "para_que": "alvos não-BRAF / protocolos"}
+{"de": "tri.mslt-i", "rel": "FONTE", "para": "src.08.72", "pagina": 21}
+{"de": "tri.mslt-ii-decog", "rel": "FONTE", "para": "src.08.72", "pagina": 21}
+{"de": "tri.checkmate-238", "rel": "FONTE", "para": "src.08.72", "pagina": 25}
+{"de": "tri.keynote-054", "rel": "FONTE", "para": "src.08.72", "pagina": 25}
+{"de": "tri.swog-s1404", "rel": "FONTE", "para": "src.08.72", "pagina": 25}
+{"de": "tri.combi-ad", "rel": "FONTE", "para": "src.08.72", "pagina": 26}
+{"de": "tri.keynote-716", "rel": "FONTE", "para": "src.08.72", "pagina": 27}
+{"de": "tri.checkmate-76k", "rel": "FONTE", "para": "src.08.72", "pagina": 27}
+{"de": "tri.nadina", "rel": "FONTE", "para": "src.08.72", "pagina": 30}
+{"de": "tri.swog-s1801", "rel": "FONTE", "para": "src.08.72", "pagina": 31}
+{"de": "tri.checkmate-066", "rel": "FONTE", "para": "src.08.73", "pagina": 10}
+{"de": "tri.keynote-006", "rel": "FONTE", "para": "src.08.73", "pagina": 12}
+{"de": "tri.checkmate-067", "rel": "FONTE", "para": "src.08.73", "pagina": 16}
+{"de": "tri.relativity-047", "rel": "FONTE", "para": "src.08.73", "pagina": 17}
+{"de": "tri.checkmate-204", "rel": "FONTE", "para": "src.08.73", "pagina": 21}
+{"de": "tri.combi-d-v", "rel": "FONTE", "para": "src.08.73", "pagina": 25}
+{"de": "tri.cobrim", "rel": "FONTE", "para": "src.08.73", "pagina": 25}
+{"de": "tri.columbus", "rel": "FONTE", "para": "src.08.73", "pagina": 25}
+{"de": "tri.combi-md", "rel": "FONTE", "para": "src.08.73", "pagina": 27}
+{"de": "tri.secombit-dreamseq", "rel": "FONTE", "para": "src.08.73", "pagina": 31}
+{"de": "reg.melanoma.cirurgia-bls", "rel": "FONTE", "para": "src.08.72", "pagina": 20}
+{"de": "cen.melanoma.localizado", "rel": "TRATA_COM", "para": "reg.melanoma.cirurgia-bls", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.melanoma.cirurgia-bls", "rel": "SUSTENTADO_POR", "para": "tri.mslt-i"}
+{"de": "tri.mslt-i", "rel": "TESTOU", "para": "reg.melanoma.cirurgia-bls"}
+{"de": "reg.melanoma.cirurgia-bls", "rel": "SUSTENTADO_POR", "para": "tri.mslt-ii-decog"}
+{"de": "tri.mslt-ii-decog", "rel": "TESTOU", "para": "reg.melanoma.cirurgia-bls"}
+{"de": "reg.melanoma.anti-pd1-adjuvante", "rel": "FONTE", "para": "src.08.72", "pagina": 29}
+{"de": "far.pembrolizumabe", "rel": "FONTE", "para": "src.08.72", "pagina": 29}
+{"de": "reg.melanoma.anti-pd1-adjuvante", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "far.nivolumabe", "rel": "FONTE", "para": "src.08.72", "pagina": 29}
+{"de": "reg.melanoma.anti-pd1-adjuvante", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "cen.melanoma.adjuvante", "rel": "TRATA_COM", "para": "reg.melanoma.anti-pd1-adjuvante", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.melanoma.anti-pd1-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-238"}
+{"de": "tri.checkmate-238", "rel": "TESTOU", "para": "reg.melanoma.anti-pd1-adjuvante"}
+{"de": "reg.melanoma.anti-pd1-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.keynote-054"}
+{"de": "tri.keynote-054", "rel": "TESTOU", "para": "reg.melanoma.anti-pd1-adjuvante"}
+{"de": "reg.melanoma.anti-pd1-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.swog-s1404"}
+{"de": "tri.swog-s1404", "rel": "TESTOU", "para": "reg.melanoma.anti-pd1-adjuvante"}
+{"de": "reg.melanoma.anti-pd1-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.keynote-716"}
+{"de": "tri.keynote-716", "rel": "TESTOU", "para": "reg.melanoma.anti-pd1-adjuvante"}
+{"de": "reg.melanoma.anti-pd1-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-76k"}
+{"de": "tri.checkmate-76k", "rel": "TESTOU", "para": "reg.melanoma.anti-pd1-adjuvante"}
+{"de": "reg.melanoma.dabrafenibe-trametinibe-adjuvante", "rel": "FONTE", "para": "src.08.72", "pagina": 29}
+{"de": "far.dabrafenibe", "rel": "FONTE", "para": "src.08.72", "pagina": 29}
+{"de": "reg.melanoma.dabrafenibe-trametinibe-adjuvante", "rel": "USA_FARMACO", "para": "far.dabrafenibe"}
+{"de": "far.trametinibe", "rel": "FONTE", "para": "src.08.72", "pagina": 29}
+{"de": "reg.melanoma.dabrafenibe-trametinibe-adjuvante", "rel": "USA_FARMACO", "para": "far.trametinibe"}
+{"de": "cen.melanoma.adjuvante", "rel": "TRATA_COM", "para": "reg.melanoma.dabrafenibe-trametinibe-adjuvante", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "BRAF V600E/K, estádio III"}
+{"de": "reg.melanoma.dabrafenibe-trametinibe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.combi-ad"}
+{"de": "tri.combi-ad", "rel": "TESTOU", "para": "reg.melanoma.dabrafenibe-trametinibe-adjuvante"}
+{"de": "reg.melanoma.ipi-nivo-neoadjuvante", "rel": "FONTE", "para": "src.08.72", "pagina": 30}
+{"de": "far.ipilimumabe", "rel": "FONTE", "para": "src.08.72", "pagina": 30}
+{"de": "reg.melanoma.ipi-nivo-neoadjuvante", "rel": "USA_FARMACO", "para": "far.ipilimumabe"}
+{"de": "reg.melanoma.ipi-nivo-neoadjuvante", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "cen.melanoma.neoadjuvante", "rel": "TRATA_COM", "para": "reg.melanoma.ipi-nivo-neoadjuvante", "linha": "neoadjuvante", "intencao": "curativa"}
+{"de": "reg.melanoma.ipi-nivo-neoadjuvante", "rel": "SUSTENTADO_POR", "para": "tri.nadina"}
+{"de": "tri.nadina", "rel": "TESTOU", "para": "reg.melanoma.ipi-nivo-neoadjuvante"}
+{"de": "reg.melanoma.pembrolizumabe-neoadjuvante", "rel": "FONTE", "para": "src.08.72", "pagina": 31}
+{"de": "reg.melanoma.pembrolizumabe-neoadjuvante", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.melanoma.neoadjuvante", "rel": "TRATA_COM", "para": "reg.melanoma.pembrolizumabe-neoadjuvante", "linha": "neoadjuvante", "intencao": "curativa"}
+{"de": "reg.melanoma.pembrolizumabe-neoadjuvante", "rel": "SUSTENTADO_POR", "para": "tri.swog-s1801"}
+{"de": "tri.swog-s1801", "rel": "TESTOU", "para": "reg.melanoma.pembrolizumabe-neoadjuvante"}
+{"de": "reg.melanoma.nivolumabe-ipilimumabe", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "reg.melanoma.nivolumabe-ipilimumabe", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "reg.melanoma.nivolumabe-ipilimumabe", "rel": "USA_FARMACO", "para": "far.ipilimumabe"}
+{"de": "cen.melanoma.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.melanoma.nivolumabe-ipilimumabe", "linha": "1ª linha / pós anti-PD-1", "intencao": "paliativa"}
+{"de": "cen.melanoma.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.melanoma.nivolumabe-ipilimumabe", "linha": "1ª linha / pós anti-PD-1", "intencao": "paliativa"}
+{"de": "cen.melanoma.metastase-cerebral", "rel": "TRATA_COM", "para": "reg.melanoma.nivolumabe-ipilimumabe", "linha": "1ª linha / pós anti-PD-1", "intencao": "paliativa"}
+{"de": "reg.melanoma.nivolumabe-ipilimumabe", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-067"}
+{"de": "tri.checkmate-067", "rel": "TESTOU", "para": "reg.melanoma.nivolumabe-ipilimumabe"}
+{"de": "reg.melanoma.nivolumabe-ipilimumabe", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-204"}
+{"de": "tri.checkmate-204", "rel": "TESTOU", "para": "reg.melanoma.nivolumabe-ipilimumabe"}
+{"de": "reg.melanoma.nivolumabe-relatlimabe", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "reg.melanoma.nivolumabe-relatlimabe", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "far.relatlimabe", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "reg.melanoma.nivolumabe-relatlimabe", "rel": "USA_FARMACO", "para": "far.relatlimabe"}
+{"de": "cen.melanoma.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.melanoma.nivolumabe-relatlimabe", "linha": "1ª linha / pós-progressão", "intencao": "paliativa"}
+{"de": "cen.melanoma.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.melanoma.nivolumabe-relatlimabe", "linha": "1ª linha / pós-progressão", "intencao": "paliativa"}
+{"de": "reg.melanoma.nivolumabe-relatlimabe", "rel": "SUSTENTADO_POR", "para": "tri.relativity-047"}
+{"de": "tri.relativity-047", "rel": "TESTOU", "para": "reg.melanoma.nivolumabe-relatlimabe"}
+{"de": "reg.melanoma.anti-pd1-mono", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "reg.melanoma.anti-pd1-mono", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "reg.melanoma.anti-pd1-mono", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.melanoma.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.melanoma.anti-pd1-mono", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.melanoma.anti-pd1-mono", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-066"}
+{"de": "tri.checkmate-066", "rel": "TESTOU", "para": "reg.melanoma.anti-pd1-mono"}
+{"de": "reg.melanoma.anti-pd1-mono", "rel": "SUSTENTADO_POR", "para": "tri.keynote-006"}
+{"de": "tri.keynote-006", "rel": "TESTOU", "para": "reg.melanoma.anti-pd1-mono"}
+{"de": "reg.melanoma.anti-pd1-mono", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-067"}
+{"de": "tri.checkmate-067", "rel": "TESTOU", "para": "reg.melanoma.anti-pd1-mono"}
+{"de": "reg.melanoma.ibraf-imek", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "reg.melanoma.ibraf-imek", "rel": "USA_FARMACO", "para": "far.dabrafenibe"}
+{"de": "reg.melanoma.ibraf-imek", "rel": "USA_FARMACO", "para": "far.trametinibe"}
+{"de": "far.encorafenibe", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "reg.melanoma.ibraf-imek", "rel": "USA_FARMACO", "para": "far.encorafenibe"}
+{"de": "far.binimetinibe", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "reg.melanoma.ibraf-imek", "rel": "USA_FARMACO", "para": "far.binimetinibe"}
+{"de": "far.vemurafenibe", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "reg.melanoma.ibraf-imek", "rel": "USA_FARMACO", "para": "far.vemurafenibe"}
+{"de": "far.cobimetinibe", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "reg.melanoma.ibraf-imek", "rel": "USA_FARMACO", "para": "far.cobimetinibe"}
+{"de": "cen.melanoma.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.melanoma.ibraf-imek", "linha": "1ª linha (sintomático/SNC sintomático) ou pós-IO", "intencao": "paliativa", "condicao_biomarcador": "BRAF V600"}
+{"de": "cen.melanoma.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.melanoma.ibraf-imek", "linha": "1ª linha (sintomático/SNC sintomático) ou pós-IO", "intencao": "paliativa", "condicao_biomarcador": "BRAF V600"}
+{"de": "cen.melanoma.metastase-cerebral", "rel": "TRATA_COM", "para": "reg.melanoma.ibraf-imek", "linha": "1ª linha (sintomático/SNC sintomático) ou pós-IO", "intencao": "paliativa", "condicao_biomarcador": "BRAF V600"}
+{"de": "reg.melanoma.ibraf-imek", "rel": "SUSTENTADO_POR", "para": "tri.combi-d-v"}
+{"de": "tri.combi-d-v", "rel": "TESTOU", "para": "reg.melanoma.ibraf-imek"}
+{"de": "reg.melanoma.ibraf-imek", "rel": "SUSTENTADO_POR", "para": "tri.cobrim"}
+{"de": "tri.cobrim", "rel": "TESTOU", "para": "reg.melanoma.ibraf-imek"}
+{"de": "reg.melanoma.ibraf-imek", "rel": "SUSTENTADO_POR", "para": "tri.columbus"}
+{"de": "tri.columbus", "rel": "TESTOU", "para": "reg.melanoma.ibraf-imek"}
+{"de": "reg.melanoma.ibraf-imek", "rel": "SUSTENTADO_POR", "para": "tri.combi-md"}
+{"de": "tri.combi-md", "rel": "TESTOU", "para": "reg.melanoma.ibraf-imek"}
+{"de": "reg.melanoma.ibraf-imek", "rel": "SUSTENTADO_POR", "para": "tri.secombit-dreamseq"}
+{"de": "tri.secombit-dreamseq", "rel": "TESTOU", "para": "reg.melanoma.ibraf-imek"}
+{"de": "reg.melanoma.ipilimumabe-mono", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "reg.melanoma.ipilimumabe-mono", "rel": "USA_FARMACO", "para": "far.ipilimumabe"}
+{"de": "cen.melanoma.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.melanoma.ipilimumabe-mono", "linha": "pós nivo + ipi / pós anti-PD-1", "intencao": "paliativa"}
+{"de": "reg.melanoma.qt-melanoma", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "far.dacarbazina", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "reg.melanoma.qt-melanoma", "rel": "USA_FARMACO", "para": "far.dacarbazina"}
+{"de": "far.carboplatina", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "reg.melanoma.qt-melanoma", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "far.paclitaxel", "rel": "FONTE", "para": "src.08.73", "pagina": 36}
+{"de": "reg.melanoma.qt-melanoma", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.melanoma.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.melanoma.qt-melanoma", "linha": "linhas tardias", "intencao": "paliativa"}
+{"de": "reg.melanoma.manejo-irae", "rel": "FONTE", "para": "src.08.73", "pagina": 43}
+{"de": "far.infliximabe", "rel": "FONTE", "para": "src.08.73", "pagina": 43}
+{"de": "reg.melanoma.manejo-irae", "rel": "USA_FARMACO", "para": "far.infliximabe"}
+{"de": "far.vedolizumabe", "rel": "FONTE", "para": "src.08.73", "pagina": 43}
+{"de": "reg.melanoma.manejo-irae", "rel": "USA_FARMACO", "para": "far.vedolizumabe"}
+{"de": "cen.melanoma.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.melanoma.manejo-irae", "linha": "suporte", "intencao": "paliativa"}
+{"de": "cen.melanoma.adjuvante", "rel": "TRATA_COM", "para": "reg.melanoma.manejo-irae", "linha": "suporte", "intencao": "paliativa"}
+{"de": "tum.melanoma-uveal", "rel": "FONTE", "para": "src.08.72", "pagina": 33}
+{"de": "cen.melanoma-uveal.localizado", "rel": "FONTE", "para": "src.08.72", "pagina": 35}
+{"de": "tum.melanoma-uveal", "rel": "TEM_CENARIO", "para": "cen.melanoma-uveal.localizado"}
+{"de": "cen.melanoma-uveal.metastatico", "rel": "FONTE", "para": "src.08.72", "pagina": 35}
+{"de": "tum.melanoma-uveal", "rel": "TEM_CENARIO", "para": "cen.melanoma-uveal.metastatico"}
+{"de": "dx.melanoma-uveal.imagem-estadiamento", "rel": "FONTE", "para": "src.08.72", "pagina": 33}
+{"de": "tum.melanoma-uveal", "rel": "DIAGNOSTICA_POR", "para": "dx.melanoma-uveal.imagem-estadiamento"}
+{"de": "est.melanoma-uveal.ajcc-uveal", "rel": "FONTE", "para": "src.08.72", "pagina": 34}
+{"de": "tum.melanoma-uveal", "rel": "ESTADIA_POR", "para": "est.melanoma-uveal.ajcc-uveal"}
+{"de": "bio.hla-a0201", "rel": "FONTE", "para": "src.08.72", "pagina": 33}
+{"de": "cen.melanoma-uveal.metastatico", "rel": "EXIGE_BIOMARCADOR", "para": "bio.hla-a0201", "para_que": "tebentafuspe"}
+{"de": "tri.tebentafuspe-fase3", "rel": "FONTE", "para": "src.08.72", "pagina": 35}
+{"de": "reg.melanoma-uveal.enucleacao-braquiterapia", "rel": "FONTE", "para": "src.08.72", "pagina": 35}
+{"de": "cen.melanoma-uveal.localizado", "rel": "TRATA_COM", "para": "reg.melanoma-uveal.enucleacao-braquiterapia", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.melanoma-uveal.tebentafuspe", "rel": "FONTE", "para": "src.08.72", "pagina": 35}
+{"de": "far.tebentafuspe", "rel": "FONTE", "para": "src.08.72", "pagina": 35}
+{"de": "reg.melanoma-uveal.tebentafuspe", "rel": "USA_FARMACO", "para": "far.tebentafuspe"}
+{"de": "cen.melanoma-uveal.metastatico", "rel": "TRATA_COM", "para": "reg.melanoma-uveal.tebentafuspe", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "HLA-A*02:01 positivo"}
+{"de": "reg.melanoma-uveal.tebentafuspe", "rel": "SUSTENTADO_POR", "para": "tri.tebentafuspe-fase3"}
+{"de": "tri.tebentafuspe-fase3", "rel": "TESTOU", "para": "reg.melanoma-uveal.tebentafuspe"}
+{"de": "reg.melanoma-uveal.ipi-nivo-uveal", "rel": "FONTE", "para": "src.08.72", "pagina": 35}
+{"de": "reg.melanoma-uveal.ipi-nivo-uveal", "rel": "USA_FARMACO", "para": "far.ipilimumabe"}
+{"de": "reg.melanoma-uveal.ipi-nivo-uveal", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "cen.melanoma-uveal.metastatico", "rel": "TRATA_COM", "para": "reg.melanoma-uveal.ipi-nivo-uveal", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "HLA-A*02:01 negativo"}
+{"de": "reg.melanoma-uveal.terapia-hepatica-locorregional", "rel": "FONTE", "para": "src.08.72", "pagina": 35}
+{"de": "cen.melanoma-uveal.metastatico", "rel": "TRATA_COM", "para": "reg.melanoma-uveal.terapia-hepatica-locorregional", "linha": "doença hepática", "intencao": "paliativa"}
+{"de": "tum.carcinoma-basocelular", "rel": "FONTE", "para": "src.08.74", "pagina": 5}
+{"de": "cen.carcinoma-basocelular.localizado", "rel": "FONTE", "para": "src.08.74", "pagina": 10}
+{"de": "tum.carcinoma-basocelular", "rel": "TEM_CENARIO", "para": "cen.carcinoma-basocelular.localizado"}
+{"de": "cen.carcinoma-basocelular.localmente-avancado-metastatico", "rel": "FONTE", "para": "src.08.74", "pagina": 11}
+{"de": "tum.carcinoma-basocelular", "rel": "TEM_CENARIO", "para": "cen.carcinoma-basocelular.localmente-avancado-metastatico"}
+{"de": "dx.carcinoma-basocelular.risco-recorrencia", "rel": "FONTE", "para": "src.08.74", "pagina": 11}
+{"de": "tum.carcinoma-basocelular", "rel": "DIAGNOSTICA_POR", "para": "dx.carcinoma-basocelular.risco-recorrencia"}
+{"de": "est.carcinoma-basocelular.baixo-alto-risco", "rel": "FONTE", "para": "src.08.74", "pagina": 10}
+{"de": "tum.carcinoma-basocelular", "rel": "ESTADIA_POR", "para": "est.carcinoma-basocelular.baixo-alto-risco"}
+{"de": "tri.stevie", "rel": "FONTE", "para": "src.08.74", "pagina": 12}
+{"de": "tri.cemiplimabe-cbc", "rel": "FONTE", "para": "src.08.74", "pagina": 13}
+{"de": "reg.carcinoma-basocelular.cirurgia-cbc", "rel": "FONTE", "para": "src.08.74", "pagina": 10}
+{"de": "cen.carcinoma-basocelular.localizado", "rel": "TRATA_COM", "para": "reg.carcinoma-basocelular.cirurgia-cbc", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.carcinoma-basocelular.rt-cbc", "rel": "FONTE", "para": "src.08.74", "pagina": 11}
+{"de": "cen.carcinoma-basocelular.localizado", "rel": "TRATA_COM", "para": "reg.carcinoma-basocelular.rt-cbc", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.carcinoma-basocelular.topicos-cbc", "rel": "FONTE", "para": "src.08.74", "pagina": 10}
+{"de": "cen.carcinoma-basocelular.localizado", "rel": "TRATA_COM", "para": "reg.carcinoma-basocelular.topicos-cbc", "linha": "baixo risco", "intencao": "curativa"}
+{"de": "reg.carcinoma-basocelular.vismodegibe", "rel": "FONTE", "para": "src.08.74", "pagina": 12}
+{"de": "far.vismodegibe", "rel": "FONTE", "para": "src.08.74", "pagina": 12}
+{"de": "reg.carcinoma-basocelular.vismodegibe", "rel": "USA_FARMACO", "para": "far.vismodegibe"}
+{"de": "far.sonidegibe", "rel": "FONTE", "para": "src.08.74", "pagina": 12}
+{"de": "reg.carcinoma-basocelular.vismodegibe", "rel": "USA_FARMACO", "para": "far.sonidegibe"}
+{"de": "cen.carcinoma-basocelular.localmente-avancado-metastatico", "rel": "TRATA_COM", "para": "reg.carcinoma-basocelular.vismodegibe", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.carcinoma-basocelular.vismodegibe", "rel": "SUSTENTADO_POR", "para": "tri.stevie"}
+{"de": "tri.stevie", "rel": "TESTOU", "para": "reg.carcinoma-basocelular.vismodegibe"}
+{"de": "reg.carcinoma-basocelular.cemiplimabe-cbc", "rel": "FONTE", "para": "src.08.74", "pagina": 13}
+{"de": "far.cemiplimabe", "rel": "FONTE", "para": "src.08.74", "pagina": 13}
+{"de": "reg.carcinoma-basocelular.cemiplimabe-cbc", "rel": "USA_FARMACO", "para": "far.cemiplimabe"}
+{"de": "cen.carcinoma-basocelular.localmente-avancado-metastatico", "rel": "TRATA_COM", "para": "reg.carcinoma-basocelular.cemiplimabe-cbc", "linha": "2ª linha", "intencao": "paliativa"}
+{"de": "reg.carcinoma-basocelular.cemiplimabe-cbc", "rel": "SUSTENTADO_POR", "para": "tri.cemiplimabe-cbc"}
+{"de": "tri.cemiplimabe-cbc", "rel": "TESTOU", "para": "reg.carcinoma-basocelular.cemiplimabe-cbc"}
+{"de": "tum.cec-cutaneo", "rel": "FONTE", "para": "src.08.74", "pagina": 5}
+{"de": "cen.cec-cutaneo.localizado", "rel": "FONTE", "para": "src.08.74", "pagina": 18}
+{"de": "tum.cec-cutaneo", "rel": "TEM_CENARIO", "para": "cen.cec-cutaneo.localizado"}
+{"de": "cen.cec-cutaneo.avancado-metastatico", "rel": "FONTE", "para": "src.08.74", "pagina": 19}
+{"de": "tum.cec-cutaneo", "rel": "TEM_CENARIO", "para": "cen.cec-cutaneo.avancado-metastatico"}
+{"de": "cen.cec-cutaneo.quimioprevencao", "rel": "FONTE", "para": "src.08.74", "pagina": 15}
+{"de": "tum.cec-cutaneo", "rel": "TEM_CENARIO", "para": "cen.cec-cutaneo.quimioprevencao"}
+{"de": "dx.cec-cutaneo.biopsia-fatores-risco", "rel": "FONTE", "para": "src.08.74", "pagina": 17}
+{"de": "tum.cec-cutaneo", "rel": "DIAGNOSTICA_POR", "para": "dx.cec-cutaneo.biopsia-fatores-risco"}
+{"de": "est.cec-cutaneo.brigham-risco", "rel": "FONTE", "para": "src.08.74", "pagina": 17}
+{"de": "tum.cec-cutaneo", "rel": "ESTADIA_POR", "para": "est.cec-cutaneo.brigham-risco"}
+{"de": "tri.oncat-nicotinamida", "rel": "FONTE", "para": "src.08.74", "pagina": 15}
+{"de": "tri.empower-cscc-1", "rel": "FONTE", "para": "src.08.74", "pagina": 22}
+{"de": "tri.keynote-629", "rel": "FONTE", "para": "src.08.74", "pagina": 24}
+{"de": "reg.cec-cutaneo.cirurgia-cec", "rel": "FONTE", "para": "src.08.74", "pagina": 18}
+{"de": "cen.cec-cutaneo.localizado", "rel": "TRATA_COM", "para": "reg.cec-cutaneo.cirurgia-cec", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.cec-cutaneo.rt-cec", "rel": "FONTE", "para": "src.08.74", "pagina": 19}
+{"de": "cen.cec-cutaneo.localizado", "rel": "TRATA_COM", "para": "reg.cec-cutaneo.rt-cec", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.cec-cutaneo.cemiplimabe-cec", "rel": "FONTE", "para": "src.08.74", "pagina": 22}
+{"de": "reg.cec-cutaneo.cemiplimabe-cec", "rel": "USA_FARMACO", "para": "far.cemiplimabe"}
+{"de": "cen.cec-cutaneo.avancado-metastatico", "rel": "TRATA_COM", "para": "reg.cec-cutaneo.cemiplimabe-cec", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.cec-cutaneo.cemiplimabe-cec", "rel": "SUSTENTADO_POR", "para": "tri.empower-cscc-1"}
+{"de": "tri.empower-cscc-1", "rel": "TESTOU", "para": "reg.cec-cutaneo.cemiplimabe-cec"}
+{"de": "reg.cec-cutaneo.pembrolizumabe-cec", "rel": "FONTE", "para": "src.08.74", "pagina": 24}
+{"de": "reg.cec-cutaneo.pembrolizumabe-cec", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.cec-cutaneo.avancado-metastatico", "rel": "TRATA_COM", "para": "reg.cec-cutaneo.pembrolizumabe-cec", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.cec-cutaneo.pembrolizumabe-cec", "rel": "SUSTENTADO_POR", "para": "tri.keynote-629"}
+{"de": "tri.keynote-629", "rel": "TESTOU", "para": "reg.cec-cutaneo.pembrolizumabe-cec"}
+{"de": "reg.cec-cutaneo.platina-cetuximabe-cec", "rel": "FONTE", "para": "src.08.74", "pagina": 20}
+{"de": "far.cisplatina", "rel": "FONTE", "para": "src.08.74", "pagina": 20}
+{"de": "reg.cec-cutaneo.platina-cetuximabe-cec", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.cec-cutaneo.platina-cetuximabe-cec", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cec-cutaneo.platina-cetuximabe-cec", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "far.cetuximabe", "rel": "FONTE", "para": "src.08.74", "pagina": 20}
+{"de": "reg.cec-cutaneo.platina-cetuximabe-cec", "rel": "USA_FARMACO", "para": "far.cetuximabe"}
+{"de": "cen.cec-cutaneo.avancado-metastatico", "rel": "TRATA_COM", "para": "reg.cec-cutaneo.platina-cetuximabe-cec", "linha": "alternativa", "intencao": "paliativa"}
+{"de": "reg.cec-cutaneo.nicotinamida", "rel": "FONTE", "para": "src.08.74", "pagina": 15}
+{"de": "far.nicotinamida", "rel": "FONTE", "para": "src.08.74", "pagina": 15}
+{"de": "reg.cec-cutaneo.nicotinamida", "rel": "USA_FARMACO", "para": "far.nicotinamida"}
+{"de": "cen.cec-cutaneo.quimioprevencao", "rel": "TRATA_COM", "para": "reg.cec-cutaneo.nicotinamida", "linha": "prevenção", "intencao": "curativa"}
+{"de": "reg.cec-cutaneo.nicotinamida", "rel": "SUSTENTADO_POR", "para": "tri.oncat-nicotinamida"}
+{"de": "tri.oncat-nicotinamida", "rel": "TESTOU", "para": "reg.cec-cutaneo.nicotinamida"}
+{"de": "tum.merkel", "rel": "FONTE", "para": "src.08.74", "pagina": 27}
+{"de": "cen.merkel.localizado", "rel": "FONTE", "para": "src.08.74", "pagina": 30}
+{"de": "tum.merkel", "rel": "TEM_CENARIO", "para": "cen.merkel.localizado"}
+{"de": "cen.merkel.avancado-metastatico", "rel": "FONTE", "para": "src.08.74", "pagina": 30}
+{"de": "tum.merkel", "rel": "TEM_CENARIO", "para": "cen.merkel.avancado-metastatico"}
+{"de": "dx.merkel.ihq-estadiamento", "rel": "FONTE", "para": "src.08.74", "pagina": 27}
+{"de": "tum.merkel", "rel": "DIAGNOSTICA_POR", "para": "dx.merkel.ihq-estadiamento"}
+{"de": "est.merkel.ajcc-merkel", "rel": "FONTE", "para": "src.08.74", "pagina": 28}
+{"de": "tum.merkel", "rel": "ESTADIA_POR", "para": "est.merkel.ajcc-merkel"}
+{"de": "tri.javelin-merkel-200", "rel": "FONTE", "para": "src.08.74", "pagina": 31}
+{"de": "reg.merkel.cirurgia-rt-merkel", "rel": "FONTE", "para": "src.08.74", "pagina": 30}
+{"de": "cen.merkel.localizado", "rel": "TRATA_COM", "para": "reg.merkel.cirurgia-rt-merkel", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.merkel.avelumabe-merkel", "rel": "FONTE", "para": "src.08.74", "pagina": 31}
+{"de": "far.avelumabe", "rel": "FONTE", "para": "src.08.74", "pagina": 31}
+{"de": "reg.merkel.avelumabe-merkel", "rel": "USA_FARMACO", "para": "far.avelumabe"}
+{"de": "cen.merkel.avancado-metastatico", "rel": "TRATA_COM", "para": "reg.merkel.avelumabe-merkel", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.merkel.avelumabe-merkel", "rel": "SUSTENTADO_POR", "para": "tri.javelin-merkel-200"}
+{"de": "tri.javelin-merkel-200", "rel": "TESTOU", "para": "reg.merkel.avelumabe-merkel"}
+{"de": "reg.merkel.qt-merkel", "rel": "FONTE", "para": "src.08.74", "pagina": 30}
+{"de": "reg.merkel.qt-merkel", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.merkel.qt-merkel", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "far.etoposideo", "rel": "FONTE", "para": "src.08.74", "pagina": 30}
+{"de": "reg.merkel.qt-merkel", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "cen.merkel.avancado-metastatico", "rel": "TRATA_COM", "para": "reg.merkel.qt-merkel", "linha": "alternativa", "intencao": "paliativa"}
+{"de": "tum.glioma", "rel": "FONTE", "para": "src.08.75", "pagina": 5}
+{"de": "cen.glioma.glioblastoma-idh-selvagem", "rel": "FONTE", "para": "src.08.76", "pagina": 18}
+{"de": "tum.glioma", "rel": "TEM_CENARIO", "para": "cen.glioma.glioblastoma-idh-selvagem"}
+{"de": "cen.glioma.astrocitoma-idh-mutante-grau-3", "rel": "FONTE", "para": "src.08.76", "pagina": 22}
+{"de": "tum.glioma", "rel": "TEM_CENARIO", "para": "cen.glioma.astrocitoma-idh-mutante-grau-3"}
+{"de": "cen.glioma.oligodendroglioma-grau-3", "rel": "FONTE", "para": "src.08.76", "pagina": 25}
+{"de": "tum.glioma", "rel": "TEM_CENARIO", "para": "cen.glioma.oligodendroglioma-grau-3"}
+{"de": "cen.glioma.baixo-grau-grau-2", "rel": "FONTE", "para": "src.08.76", "pagina": 29}
+{"de": "tum.glioma", "rel": "TEM_CENARIO", "para": "cen.glioma.baixo-grau-grau-2"}
+{"de": "cen.glioma.recorrencia", "rel": "FONTE", "para": "src.08.76", "pagina": 42}
+{"de": "tum.glioma", "rel": "TEM_CENARIO", "para": "cen.glioma.recorrencia"}
+{"de": "dx.glioma.clinica-imagem", "rel": "FONTE", "para": "src.08.75", "pagina": 15}
+{"de": "tum.glioma", "rel": "DIAGNOSTICA_POR", "para": "dx.glioma.clinica-imagem"}
+{"de": "dx.glioma.patologia-ihq", "rel": "FONTE", "para": "src.08.75", "pagina": 19}
+{"de": "tum.glioma", "rel": "DIAGNOSTICA_POR", "para": "dx.glioma.patologia-ihq"}
+{"de": "dx.glioma.molecular", "rel": "FONTE", "para": "src.08.75", "pagina": 23}
+{"de": "tum.glioma", "rel": "DIAGNOSTICA_POR", "para": "dx.glioma.molecular"}
+{"de": "est.glioma.oms-2021", "rel": "FONTE", "para": "src.08.75", "pagina": 27}
+{"de": "tum.glioma", "rel": "ESTADIA_POR", "para": "est.glioma.oms-2021"}
+{"de": "bio.idh1-2", "rel": "FONTE", "para": "src.08.75", "pagina": 20}
+{"de": "cen.glioma.baixo-grau-grau-2", "rel": "EXIGE_BIOMARCADOR", "para": "bio.idh1-2", "para_que": "classificação e vorasidenibe"}
+{"de": "cen.glioma.astrocitoma-idh-mutante-grau-3", "rel": "EXIGE_BIOMARCADOR", "para": "bio.idh1-2", "para_que": "classificação e vorasidenibe"}
+{"de": "cen.glioma.glioblastoma-idh-selvagem", "rel": "EXIGE_BIOMARCADOR", "para": "bio.idh1-2", "para_que": "classificação e vorasidenibe"}
+{"de": "bio.codelecao-1p19q", "rel": "FONTE", "para": "src.08.75", "pagina": 25}
+{"de": "cen.glioma.oligodendroglioma-grau-3", "rel": "EXIGE_BIOMARCADOR", "para": "bio.codelecao-1p19q", "para_que": "diagnóstico de oligodendroglioma e escolha de PCV"}
+{"de": "cen.glioma.baixo-grau-grau-2", "rel": "EXIGE_BIOMARCADOR", "para": "bio.codelecao-1p19q", "para_que": "diagnóstico de oligodendroglioma e escolha de PCV"}
+{"de": "bio.mgmt-metilacao", "rel": "FONTE", "para": "src.08.75", "pagina": 26}
+{"de": "cen.glioma.glioblastoma-idh-selvagem", "rel": "EXIGE_BIOMARCADOR", "para": "bio.mgmt-metilacao", "para_que": "prognóstico e escolha TMZ vs RT em idosos/frágeis"}
+{"de": "bio.cdkn2a-b", "rel": "FONTE", "para": "src.08.75", "pagina": 24}
+{"de": "cen.glioma.astrocitoma-idh-mutante-grau-3", "rel": "EXIGE_BIOMARCADOR", "para": "bio.cdkn2a-b", "para_que": "gradação OMS 2021"}
+{"de": "bio.h3k27m", "rel": "FONTE", "para": "src.08.75", "pagina": 22}
+{"de": "cen.glioma.recorrencia", "rel": "EXIGE_BIOMARCADOR", "para": "bio.h3k27m", "para_que": "diagnóstico e terapia-alvo (dordaviprone)"}
+{"de": "bio.braf-ntrk-glioma", "rel": "FONTE", "para": "src.08.76", "pagina": 44}
+{"de": "cen.glioma.recorrencia", "rel": "EXIGE_BIOMARCADOR", "para": "bio.braf-ntrk-glioma", "para_que": "terapia-alvo na recorrência"}
+{"de": "tri.kreth-2013", "rel": "FONTE", "para": "src.08.76", "pagina": 6}
+{"de": "tri.stupp-2005", "rel": "FONTE", "para": "src.08.76", "pagina": 14}
+{"de": "tri.hegi-2005", "rel": "FONTE", "para": "src.08.76", "pagina": 15}
+{"de": "tri.perry-2017", "rel": "FONTE", "para": "src.08.76", "pagina": 16}
+{"de": "tri.noa-08", "rel": "FONTE", "para": "src.08.76", "pagina": 17}
+{"de": "tri.ef-14", "rel": "FONTE", "para": "src.08.76", "pagina": 19}
+{"de": "tri.catnon", "rel": "FONTE", "para": "src.08.76", "pagina": 20}
+{"de": "tri.eortc-26951-rtog-9402", "rel": "FONTE", "para": "src.08.76", "pagina": 24}
+{"de": "tri.noa-04", "rel": "FONTE", "para": "src.08.76", "pagina": 27}
+{"de": "tri.eortc-22845", "rel": "FONTE", "para": "src.08.76", "pagina": 31}
+{"de": "tri.rtog-9802", "rel": "FONTE", "para": "src.08.76", "pagina": 34}
+{"de": "tri.codel", "rel": "FONTE", "para": "src.08.76", "pagina": 36}
+{"de": "tri.indigo", "rel": "FONTE", "para": "src.08.76", "pagina": 37}
+{"de": "tri.belob", "rel": "FONTE", "para": "src.08.76", "pagina": 43}
+{"de": "tri.eortc-26101", "rel": "FONTE", "para": "src.08.76", "pagina": 43}
+{"de": "tri.stewart-2002", "rel": "FONTE", "para": "src.08.76", "pagina": 12}
+{"de": "reg.glioma.ressecao-maxima-segura", "rel": "FONTE", "para": "src.08.76", "pagina": 5}
+{"de": "cen.glioma.glioblastoma-idh-selvagem", "rel": "TRATA_COM", "para": "reg.glioma.ressecao-maxima-segura", "linha": "tratamento inicial", "intencao": "curativa"}
+{"de": "cen.glioma.astrocitoma-idh-mutante-grau-3", "rel": "TRATA_COM", "para": "reg.glioma.ressecao-maxima-segura", "linha": "tratamento inicial", "intencao": "curativa"}
+{"de": "cen.glioma.oligodendroglioma-grau-3", "rel": "TRATA_COM", "para": "reg.glioma.ressecao-maxima-segura", "linha": "tratamento inicial", "intencao": "curativa"}
+{"de": "cen.glioma.baixo-grau-grau-2", "rel": "TRATA_COM", "para": "reg.glioma.ressecao-maxima-segura", "linha": "tratamento inicial", "intencao": "curativa"}
+{"de": "cen.glioma.recorrencia", "rel": "TRATA_COM", "para": "reg.glioma.ressecao-maxima-segura", "linha": "tratamento inicial", "intencao": "curativa"}
+{"de": "reg.glioma.ressecao-maxima-segura", "rel": "SUSTENTADO_POR", "para": "tri.kreth-2013"}
+{"de": "tri.kreth-2013", "rel": "TESTOU", "para": "reg.glioma.ressecao-maxima-segura"}
+{"de": "reg.glioma.stupp", "rel": "FONTE", "para": "src.08.76", "pagina": 18}
+{"de": "far.temozolomida", "rel": "FONTE", "para": "src.08.76", "pagina": 18}
+{"de": "reg.glioma.stupp", "rel": "USA_FARMACO", "para": "far.temozolomida"}
+{"de": "cen.glioma.glioblastoma-idh-selvagem", "rel": "TRATA_COM", "para": "reg.glioma.stupp", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.glioma.stupp", "rel": "SUSTENTADO_POR", "para": "tri.stupp-2005"}
+{"de": "tri.stupp-2005", "rel": "TESTOU", "para": "reg.glioma.stupp"}
+{"de": "reg.glioma.stupp", "rel": "SUSTENTADO_POR", "para": "tri.hegi-2005"}
+{"de": "tri.hegi-2005", "rel": "TESTOU", "para": "reg.glioma.stupp"}
+{"de": "reg.glioma.stupp", "rel": "SUSTENTADO_POR", "para": "tri.perry-2017"}
+{"de": "tri.perry-2017", "rel": "TESTOU", "para": "reg.glioma.stupp"}
+{"de": "reg.glioma.stupp", "rel": "SUSTENTADO_POR", "para": "tri.stewart-2002"}
+{"de": "tri.stewart-2002", "rel": "TESTOU", "para": "reg.glioma.stupp"}
+{"de": "reg.glioma.tmz-isolada-idoso-mgmt", "rel": "FONTE", "para": "src.08.76", "pagina": 17}
+{"de": "reg.glioma.tmz-isolada-idoso-mgmt", "rel": "USA_FARMACO", "para": "far.temozolomida"}
+{"de": "cen.glioma.glioblastoma-idh-selvagem", "rel": "TRATA_COM", "para": "reg.glioma.tmz-isolada-idoso-mgmt", "linha": "adjuvante", "intencao": "paliativa", "condicao_biomarcador": "MGMT metilado → TMZ; não metilado → RT 40 Gy/15 fr ou 25 Gy/5 fr"}
+{"de": "reg.glioma.tmz-isolada-idoso-mgmt", "rel": "SUSTENTADO_POR", "para": "tri.noa-08"}
+{"de": "tri.noa-08", "rel": "TESTOU", "para": "reg.glioma.tmz-isolada-idoso-mgmt"}
+{"de": "reg.glioma.ttf", "rel": "FONTE", "para": "src.08.76", "pagina": 19}
+{"de": "reg.glioma.ttf", "rel": "USA_FARMACO", "para": "far.temozolomida"}
+{"de": "cen.glioma.glioblastoma-idh-selvagem", "rel": "TRATA_COM", "para": "reg.glioma.ttf", "linha": "manutenção", "intencao": "curativa"}
+{"de": "reg.glioma.ttf", "rel": "SUSTENTADO_POR", "para": "tri.ef-14"}
+{"de": "tri.ef-14", "rel": "TESTOU", "para": "reg.glioma.ttf"}
+{"de": "reg.glioma.rt-tmz-adjuvante-catnon", "rel": "FONTE", "para": "src.08.76", "pagina": 22}
+{"de": "reg.glioma.rt-tmz-adjuvante-catnon", "rel": "USA_FARMACO", "para": "far.temozolomida"}
+{"de": "cen.glioma.astrocitoma-idh-mutante-grau-3", "rel": "TRATA_COM", "para": "reg.glioma.rt-tmz-adjuvante-catnon", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "cen.glioma.baixo-grau-grau-2", "rel": "TRATA_COM", "para": "reg.glioma.rt-tmz-adjuvante-catnon", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.glioma.rt-tmz-adjuvante-catnon", "rel": "SUSTENTADO_POR", "para": "tri.catnon"}
+{"de": "tri.catnon", "rel": "TESTOU", "para": "reg.glioma.rt-tmz-adjuvante-catnon"}
+{"de": "reg.glioma.rt-pcv", "rel": "FONTE", "para": "src.08.76", "pagina": 25}
+{"de": "far.procarbazina", "rel": "FONTE", "para": "src.08.76", "pagina": 25}
+{"de": "reg.glioma.rt-pcv", "rel": "USA_FARMACO", "para": "far.procarbazina"}
+{"de": "far.lomustina", "rel": "FONTE", "para": "src.08.76", "pagina": 25}
+{"de": "reg.glioma.rt-pcv", "rel": "USA_FARMACO", "para": "far.lomustina"}
+{"de": "far.vincristina", "rel": "FONTE", "para": "src.08.76", "pagina": 25}
+{"de": "reg.glioma.rt-pcv", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "cen.glioma.oligodendroglioma-grau-3", "rel": "TRATA_COM", "para": "reg.glioma.rt-pcv", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "cen.glioma.baixo-grau-grau-2", "rel": "TRATA_COM", "para": "reg.glioma.rt-pcv", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.glioma.rt-pcv", "rel": "SUSTENTADO_POR", "para": "tri.eortc-26951-rtog-9402"}
+{"de": "tri.eortc-26951-rtog-9402", "rel": "TESTOU", "para": "reg.glioma.rt-pcv"}
+{"de": "reg.glioma.rt-pcv", "rel": "SUSTENTADO_POR", "para": "tri.rtog-9802"}
+{"de": "tri.rtog-9802", "rel": "TESTOU", "para": "reg.glioma.rt-pcv"}
+{"de": "reg.glioma.rt-pcv", "rel": "SUSTENTADO_POR", "para": "tri.codel"}
+{"de": "tri.codel", "rel": "TESTOU", "para": "reg.glioma.rt-pcv"}
+{"de": "reg.glioma.rt-pcv", "rel": "SUSTENTADO_POR", "para": "tri.noa-04"}
+{"de": "tri.noa-04", "rel": "TESTOU", "para": "reg.glioma.rt-pcv"}
+{"de": "reg.glioma.rt-baixo-grau", "rel": "FONTE", "para": "src.08.76", "pagina": 31}
+{"de": "cen.glioma.baixo-grau-grau-2", "rel": "TRATA_COM", "para": "reg.glioma.rt-baixo-grau", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.glioma.rt-baixo-grau", "rel": "SUSTENTADO_POR", "para": "tri.eortc-22845"}
+{"de": "tri.eortc-22845", "rel": "TESTOU", "para": "reg.glioma.rt-baixo-grau"}
+{"de": "reg.glioma.observacao-baixo-grau", "rel": "FONTE", "para": "src.08.76", "pagina": 38}
+{"de": "cen.glioma.baixo-grau-grau-2", "rel": "TRATA_COM", "para": "reg.glioma.observacao-baixo-grau", "linha": "pós-operatório", "intencao": "curativa"}
+{"de": "reg.glioma.vorasidenibe", "rel": "FONTE", "para": "src.08.76", "pagina": 37}
+{"de": "far.vorasidenibe", "rel": "FONTE", "para": "src.08.76", "pagina": 37}
+{"de": "reg.glioma.vorasidenibe", "rel": "USA_FARMACO", "para": "far.vorasidenibe"}
+{"de": "cen.glioma.baixo-grau-grau-2", "rel": "TRATA_COM", "para": "reg.glioma.vorasidenibe", "linha": "pós-operatório grau 2", "intencao": "curativa", "condicao_biomarcador": "IDH-mutante"}
+{"de": "cen.glioma.recorrencia", "rel": "TRATA_COM", "para": "reg.glioma.vorasidenibe", "linha": "pós-operatório grau 2", "intencao": "curativa", "condicao_biomarcador": "IDH-mutante"}
+{"de": "reg.glioma.vorasidenibe", "rel": "SUSTENTADO_POR", "para": "tri.indigo"}
+{"de": "tri.indigo", "rel": "TESTOU", "para": "reg.glioma.vorasidenibe"}
+{"de": "reg.glioma.lomustina-bevacizumabe", "rel": "FONTE", "para": "src.08.76", "pagina": 43}
+{"de": "reg.glioma.lomustina-bevacizumabe", "rel": "USA_FARMACO", "para": "far.lomustina"}
+{"de": "far.bevacizumabe", "rel": "FONTE", "para": "src.08.76", "pagina": 43}
+{"de": "reg.glioma.lomustina-bevacizumabe", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "cen.glioma.recorrencia", "rel": "TRATA_COM", "para": "reg.glioma.lomustina-bevacizumabe", "linha": "2ª linha", "intencao": "paliativa"}
+{"de": "reg.glioma.lomustina-bevacizumabe", "rel": "SUSTENTADO_POR", "para": "tri.belob"}
+{"de": "tri.belob", "rel": "TESTOU", "para": "reg.glioma.lomustina-bevacizumabe"}
+{"de": "reg.glioma.lomustina-bevacizumabe", "rel": "SUSTENTADO_POR", "para": "tri.eortc-26101"}
+{"de": "tri.eortc-26101", "rel": "TESTOU", "para": "reg.glioma.lomustina-bevacizumabe"}
+{"de": "reg.glioma.terapia-alvo-glioma", "rel": "FONTE", "para": "src.08.76", "pagina": 44}
+{"de": "far.larotrectinibe", "rel": "FONTE", "para": "src.08.76", "pagina": 44}
+{"de": "reg.glioma.terapia-alvo-glioma", "rel": "USA_FARMACO", "para": "far.larotrectinibe"}
+{"de": "cen.glioma.recorrencia", "rel": "TRATA_COM", "para": "reg.glioma.terapia-alvo-glioma", "linha": "recorrência", "intencao": "paliativa", "condicao_biomarcador": "BRAF V600 / fusão NTRK"}
+{"de": "reg.glioma.antiepileptico", "rel": "FONTE", "para": "src.08.75", "pagina": 13}
+{"de": "far.levetiracetam", "rel": "FONTE", "para": "src.08.75", "pagina": 13}
+{"de": "reg.glioma.antiepileptico", "rel": "USA_FARMACO", "para": "far.levetiracetam"}
+{"de": "far.lacosamida", "rel": "FONTE", "para": "src.08.75", "pagina": 13}
+{"de": "reg.glioma.antiepileptico", "rel": "USA_FARMACO", "para": "far.lacosamida"}
+{"de": "cen.glioma.glioblastoma-idh-selvagem", "rel": "TRATA_COM", "para": "reg.glioma.antiepileptico", "linha": "suporte", "intencao": "paliativa"}
+{"de": "cen.glioma.baixo-grau-grau-2", "rel": "TRATA_COM", "para": "reg.glioma.antiepileptico", "linha": "suporte", "intencao": "paliativa"}
+{"de": "tum.gist", "rel": "FONTE", "para": "src.08.77", "pagina": 5}
+{"de": "cen.gist.adjuvante", "rel": "FONTE", "para": "src.08.77", "pagina": 27}
+{"de": "tum.gist", "rel": "TEM_CENARIO", "para": "cen.gist.adjuvante"}
+{"de": "cen.gist.neoadjuvante", "rel": "FONTE", "para": "src.08.77", "pagina": 24}
+{"de": "tum.gist", "rel": "TEM_CENARIO", "para": "cen.gist.neoadjuvante"}
+{"de": "cen.gist.metastatico-1a-linha", "rel": "FONTE", "para": "src.08.77", "pagina": 29}
+{"de": "tum.gist", "rel": "TEM_CENARIO", "para": "cen.gist.metastatico-1a-linha"}
+{"de": "cen.gist.2a-linha-posterior", "rel": "FONTE", "para": "src.08.77", "pagina": 38}
+{"de": "tum.gist", "rel": "TEM_CENARIO", "para": "cen.gist.2a-linha-posterior"}
+{"de": "dx.gist.ihq-diagnostico", "rel": "FONTE", "para": "src.08.77", "pagina": 6}
+{"de": "tum.gist", "rel": "DIAGNOSTICA_POR", "para": "dx.gist.ihq-diagnostico"}
+{"de": "est.gist.risco-afip-joensuu", "rel": "FONTE", "para": "src.08.77", "pagina": 13}
+{"de": "tum.gist", "rel": "ESTADIA_POR", "para": "est.gist.risco-afip-joensuu"}
+{"de": "bio.kit-pdgfra", "rel": "FONTE", "para": "src.08.77", "pagina": 37}
+{"de": "cen.gist.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.kit-pdgfra", "para_que": "dose de imatinibe, escolha de TKI e avapritinibe"}
+{"de": "cen.gist.metastatico-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.kit-pdgfra", "para_que": "dose de imatinibe, escolha de TKI e avapritinibe"}
+{"de": "cen.gist.2a-linha-posterior", "rel": "EXIGE_BIOMARCADOR", "para": "bio.kit-pdgfra", "para_que": "dose de imatinibe, escolha de TKI e avapritinibe"}
+{"de": "tri.z9001", "rel": "FONTE", "para": "src.08.77", "pagina": 17}
+{"de": "tri.eortc-62024", "rel": "FONTE", "para": "src.08.77", "pagina": 17}
+{"de": "tri.ssg-xviii", "rel": "FONTE", "para": "src.08.77", "pagina": 18}
+{"de": "tri.imadgist", "rel": "FONTE", "para": "src.08.77", "pagina": 22}
+{"de": "tri.vicenzi-exon9", "rel": "FONTE", "para": "src.08.77", "pagina": 23}
+{"de": "tri.kurokawa-neo", "rel": "FONTE", "para": "src.08.77", "pagina": 25}
+{"de": "tri.b2222", "rel": "FONTE", "para": "src.08.77", "pagina": 29}
+{"de": "tri.eortc-62005", "rel": "FONTE", "para": "src.08.77", "pagina": 31}
+{"de": "tri.metagist", "rel": "FONTE", "para": "src.08.77", "pagina": 34}
+{"de": "tri.sunitinibe-gist", "rel": "FONTE", "para": "src.08.77", "pagina": 38}
+{"de": "tri.grid", "rel": "FONTE", "para": "src.08.77", "pagina": 40}
+{"de": "tri.right", "rel": "FONTE", "para": "src.08.77", "pagina": 42}
+{"de": "tri.invictus", "rel": "FONTE", "para": "src.08.77", "pagina": 45}
+{"de": "tri.intrigue", "rel": "FONTE", "para": "src.08.77", "pagina": 46}
+{"de": "tri.navigator", "rel": "FONTE", "para": "src.08.77", "pagina": 51}
+{"de": "tri.cassier-d842v", "rel": "FONTE", "para": "src.08.77", "pagina": 48}
+{"de": "reg.gist.imatinibe-adjuvante", "rel": "FONTE", "para": "src.08.77", "pagina": 27}
+{"de": "far.imatinibe", "rel": "FONTE", "para": "src.08.77", "pagina": 27}
+{"de": "reg.gist.imatinibe-adjuvante", "rel": "USA_FARMACO", "para": "far.imatinibe"}
+{"de": "cen.gist.adjuvante", "rel": "TRATA_COM", "para": "reg.gist.imatinibe-adjuvante", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.gist.imatinibe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.z9001"}
+{"de": "tri.z9001", "rel": "TESTOU", "para": "reg.gist.imatinibe-adjuvante"}
+{"de": "reg.gist.imatinibe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.eortc-62024"}
+{"de": "tri.eortc-62024", "rel": "TESTOU", "para": "reg.gist.imatinibe-adjuvante"}
+{"de": "reg.gist.imatinibe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.ssg-xviii"}
+{"de": "tri.ssg-xviii", "rel": "TESTOU", "para": "reg.gist.imatinibe-adjuvante"}
+{"de": "reg.gist.imatinibe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.imadgist"}
+{"de": "tri.imadgist", "rel": "TESTOU", "para": "reg.gist.imatinibe-adjuvante"}
+{"de": "reg.gist.imatinibe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.vicenzi-exon9"}
+{"de": "tri.vicenzi-exon9", "rel": "TESTOU", "para": "reg.gist.imatinibe-adjuvante"}
+{"de": "reg.gist.imatinibe-neoadjuvante", "rel": "FONTE", "para": "src.08.77", "pagina": 25}
+{"de": "reg.gist.imatinibe-neoadjuvante", "rel": "USA_FARMACO", "para": "far.imatinibe"}
+{"de": "cen.gist.neoadjuvante", "rel": "TRATA_COM", "para": "reg.gist.imatinibe-neoadjuvante", "linha": "neoadjuvante", "intencao": "curativa"}
+{"de": "reg.gist.imatinibe-neoadjuvante", "rel": "SUSTENTADO_POR", "para": "tri.kurokawa-neo"}
+{"de": "tri.kurokawa-neo", "rel": "TESTOU", "para": "reg.gist.imatinibe-neoadjuvante"}
+{"de": "reg.gist.imatinibe-avancado", "rel": "FONTE", "para": "src.08.77", "pagina": 29}
+{"de": "reg.gist.imatinibe-avancado", "rel": "USA_FARMACO", "para": "far.imatinibe"}
+{"de": "cen.gist.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.gist.imatinibe-avancado", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "KIT éxon 9 → 800 mg"}
+{"de": "reg.gist.imatinibe-avancado", "rel": "SUSTENTADO_POR", "para": "tri.b2222"}
+{"de": "tri.b2222", "rel": "TESTOU", "para": "reg.gist.imatinibe-avancado"}
+{"de": "reg.gist.imatinibe-avancado", "rel": "SUSTENTADO_POR", "para": "tri.eortc-62005"}
+{"de": "tri.eortc-62005", "rel": "TESTOU", "para": "reg.gist.imatinibe-avancado"}
+{"de": "reg.gist.imatinibe-avancado", "rel": "SUSTENTADO_POR", "para": "tri.metagist"}
+{"de": "tri.metagist", "rel": "TESTOU", "para": "reg.gist.imatinibe-avancado"}
+{"de": "reg.gist.avapritinibe", "rel": "FONTE", "para": "src.08.77", "pagina": 49}
+{"de": "far.avapritinibe", "rel": "FONTE", "para": "src.08.77", "pagina": 49}
+{"de": "reg.gist.avapritinibe", "rel": "USA_FARMACO", "para": "far.avapritinibe"}
+{"de": "cen.gist.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.gist.avapritinibe", "linha": "1ª linha D842V", "intencao": "paliativa", "condicao_biomarcador": "PDGFRA D842V"}
+{"de": "reg.gist.avapritinibe", "rel": "SUSTENTADO_POR", "para": "tri.navigator"}
+{"de": "tri.navigator", "rel": "TESTOU", "para": "reg.gist.avapritinibe"}
+{"de": "reg.gist.avapritinibe", "rel": "SUSTENTADO_POR", "para": "tri.cassier-d842v"}
+{"de": "tri.cassier-d842v", "rel": "TESTOU", "para": "reg.gist.avapritinibe"}
+{"de": "reg.gist.sunitinibe-2l", "rel": "FONTE", "para": "src.08.77", "pagina": 38}
+{"de": "far.sunitinibe", "rel": "FONTE", "para": "src.08.77", "pagina": 38}
+{"de": "reg.gist.sunitinibe-2l", "rel": "USA_FARMACO", "para": "far.sunitinibe"}
+{"de": "cen.gist.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.gist.sunitinibe-2l", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "favorece KIT éxon 11 + 13/14 e éxon 9"}
+{"de": "reg.gist.sunitinibe-2l", "rel": "SUSTENTADO_POR", "para": "tri.sunitinibe-gist"}
+{"de": "tri.sunitinibe-gist", "rel": "TESTOU", "para": "reg.gist.sunitinibe-2l"}
+{"de": "reg.gist.sunitinibe-2l", "rel": "SUSTENTADO_POR", "para": "tri.intrigue"}
+{"de": "tri.intrigue", "rel": "TESTOU", "para": "reg.gist.sunitinibe-2l"}
+{"de": "reg.gist.regorafenibe", "rel": "FONTE", "para": "src.08.77", "pagina": 40}
+{"de": "far.regorafenibe", "rel": "FONTE", "para": "src.08.77", "pagina": 40}
+{"de": "reg.gist.regorafenibe", "rel": "USA_FARMACO", "para": "far.regorafenibe"}
+{"de": "cen.gist.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.gist.regorafenibe", "linha": "3ª linha", "intencao": "paliativa"}
+{"de": "reg.gist.regorafenibe", "rel": "SUSTENTADO_POR", "para": "tri.grid"}
+{"de": "tri.grid", "rel": "TESTOU", "para": "reg.gist.regorafenibe"}
+{"de": "reg.gist.ripretinibe", "rel": "FONTE", "para": "src.08.77", "pagina": 44}
+{"de": "far.ripretinibe", "rel": "FONTE", "para": "src.08.77", "pagina": 44}
+{"de": "reg.gist.ripretinibe", "rel": "USA_FARMACO", "para": "far.ripretinibe"}
+{"de": "cen.gist.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.gist.ripretinibe", "linha": "4ª linha", "intencao": "paliativa", "condicao_biomarcador": "favorece KIT éxon 11 + 17/18"}
+{"de": "reg.gist.ripretinibe", "rel": "SUSTENTADO_POR", "para": "tri.invictus"}
+{"de": "tri.invictus", "rel": "TESTOU", "para": "reg.gist.ripretinibe"}
+{"de": "reg.gist.ripretinibe", "rel": "SUSTENTADO_POR", "para": "tri.intrigue"}
+{"de": "tri.intrigue", "rel": "TESTOU", "para": "reg.gist.ripretinibe"}
+{"de": "reg.gist.reexposicao-imatinibe", "rel": "FONTE", "para": "src.08.77", "pagina": 42}
+{"de": "reg.gist.reexposicao-imatinibe", "rel": "USA_FARMACO", "para": "far.imatinibe"}
+{"de": "cen.gist.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.gist.reexposicao-imatinibe", "linha": "linhas tardias", "intencao": "paliativa"}
+{"de": "reg.gist.reexposicao-imatinibe", "rel": "SUSTENTADO_POR", "para": "tri.right"}
+{"de": "tri.right", "rel": "TESTOU", "para": "reg.gist.reexposicao-imatinibe"}
+{"de": "reg.gist.cirurgia-metastases-gist", "rel": "FONTE", "para": "src.08.77", "pagina": 53}
+{"de": "cen.gist.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.gist.cirurgia-metastases-gist", "linha": "após resposta ao TKI", "intencao": "paliativa"}
+{"de": "tum.sarcoma-partes-moles", "rel": "FONTE", "para": "src.08.78", "pagina": 5}
+{"de": "cen.sarcoma-partes-moles.localizado-perioperatorio", "rel": "FONTE", "para": "src.08.78", "pagina": 17}
+{"de": "tum.sarcoma-partes-moles", "rel": "TEM_CENARIO", "para": "cen.sarcoma-partes-moles.localizado-perioperatorio"}
+{"de": "cen.sarcoma-partes-moles.retroperitoneal", "rel": "FONTE", "para": "src.08.78", "pagina": 48}
+{"de": "tum.sarcoma-partes-moles", "rel": "TEM_CENARIO", "para": "cen.sarcoma-partes-moles.retroperitoneal"}
+{"de": "cen.sarcoma-partes-moles.metastatico-1a-linha", "rel": "FONTE", "para": "src.08.78", "pagina": 36}
+{"de": "tum.sarcoma-partes-moles", "rel": "TEM_CENARIO", "para": "cen.sarcoma-partes-moles.metastatico-1a-linha"}
+{"de": "cen.sarcoma-partes-moles.2a-linha-posterior", "rel": "FONTE", "para": "src.08.78", "pagina": 37}
+{"de": "tum.sarcoma-partes-moles", "rel": "TEM_CENARIO", "para": "cen.sarcoma-partes-moles.2a-linha-posterior"}
+{"de": "dx.sarcoma-partes-moles.patologia-centro-referencia", "rel": "FONTE", "para": "src.08.78", "pagina": 10}
+{"de": "tum.sarcoma-partes-moles", "rel": "DIAGNOSTICA_POR", "para": "dx.sarcoma-partes-moles.patologia-centro-referencia"}
+{"de": "est.sarcoma-partes-moles.grau-fnclcc", "rel": "FONTE", "para": "src.08.78", "pagina": 10}
+{"de": "tum.sarcoma-partes-moles", "rel": "ESTADIA_POR", "para": "est.sarcoma-partes-moles.grau-fnclcc"}
+{"de": "est.sarcoma-partes-moles.sarculator", "rel": "FONTE", "para": "src.08.78", "pagina": 29}
+{"de": "tum.sarcoma-partes-moles", "rel": "ESTADIA_POR", "para": "est.sarcoma-partes-moles.sarculator"}
+{"de": "tri.rosenberg-1982", "rel": "FONTE", "para": "src.08.78", "pagina": 18}
+{"de": "tri.smac-1997", "rel": "FONTE", "para": "src.08.78", "pagina": 21}
+{"de": "tri.frustaci-2001", "rel": "FONTE", "para": "src.08.78", "pagina": 24}
+{"de": "tri.gronchi-2012", "rel": "FONTE", "para": "src.08.78", "pagina": 25}
+{"de": "tri.isg-sts-1001", "rel": "FONTE", "para": "src.08.78", "pagina": 27}
+{"de": "tri.pasquali-sarculator", "rel": "FONTE", "para": "src.08.78", "pagina": 30}
+{"de": "tri.bramwell-cochrane", "rel": "FONTE", "para": "src.08.78", "pagina": 34}
+{"de": "tri.lorigan-2007", "rel": "FONTE", "para": "src.08.78", "pagina": 35}
+{"de": "tri.geddis", "rel": "FONTE", "para": "src.08.78", "pagina": 35}
+{"de": "tri.maki-2007", "rel": "FONTE", "para": "src.08.78", "pagina": 37}
+{"de": "tri.garcia-del-muro-2011", "rel": "FONTE", "para": "src.08.78", "pagina": 37}
+{"de": "tri.schoffski-eribulina", "rel": "FONTE", "para": "src.08.78", "pagina": 37}
+{"de": "tri.palette", "rel": "FONTE", "para": "src.08.78", "pagina": 38}
+{"de": "tri.lms-04", "rel": "FONTE", "para": "src.08.78", "pagina": 43}
+{"de": "tri.atezolizumabe-asps", "rel": "FONTE", "para": "src.08.78", "pagina": 45}
+{"de": "tri.angiotax", "rel": "FONTE", "para": "src.08.78", "pagina": 46}
+{"de": "tri.strass", "rel": "FONTE", "para": "src.08.78", "pagina": 49}
+{"de": "tri.sarc028", "rel": "FONTE", "para": "src.08.78", "pagina": 53}
+{"de": "tri.pembrosarc-tls", "rel": "FONTE", "para": "src.08.78", "pagina": 58}
+{"de": "reg.sarcoma-partes-moles.cirurgia-r0", "rel": "FONTE", "para": "src.08.78", "pagina": 18}
+{"de": "cen.sarcoma-partes-moles.localizado-perioperatorio", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.cirurgia-r0", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "cen.sarcoma-partes-moles.retroperitoneal", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.cirurgia-r0", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.sarcoma-partes-moles.cirurgia-r0", "rel": "SUSTENTADO_POR", "para": "tri.rosenberg-1982"}
+{"de": "tri.rosenberg-1982", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.cirurgia-r0"}
+{"de": "reg.sarcoma-partes-moles.rt-perioperatoria", "rel": "FONTE", "para": "src.08.78", "pagina": 19}
+{"de": "cen.sarcoma-partes-moles.localizado-perioperatorio", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.rt-perioperatoria", "linha": "perioperatório", "intencao": "curativa"}
+{"de": "cen.sarcoma-partes-moles.retroperitoneal", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.rt-perioperatoria", "linha": "perioperatório", "intencao": "curativa"}
+{"de": "reg.sarcoma-partes-moles.rt-perioperatoria", "rel": "SUSTENTADO_POR", "para": "tri.strass"}
+{"de": "tri.strass", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.rt-perioperatoria"}
+{"de": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria", "rel": "FONTE", "para": "src.08.78", "pagina": 31}
+{"de": "far.doxorrubicina", "rel": "FONTE", "para": "src.08.78", "pagina": 31}
+{"de": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "far.epirrubicina", "rel": "FONTE", "para": "src.08.78", "pagina": 31}
+{"de": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria", "rel": "USA_FARMACO", "para": "far.epirrubicina"}
+{"de": "far.ifosfamida", "rel": "FONTE", "para": "src.08.78", "pagina": 31}
+{"de": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria", "rel": "USA_FARMACO", "para": "far.ifosfamida"}
+{"de": "cen.sarcoma-partes-moles.localizado-perioperatorio", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria", "linha": "perioperatório", "intencao": "curativa"}
+{"de": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria", "rel": "SUSTENTADO_POR", "para": "tri.smac-1997"}
+{"de": "tri.smac-1997", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria"}
+{"de": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria", "rel": "SUSTENTADO_POR", "para": "tri.frustaci-2001"}
+{"de": "tri.frustaci-2001", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria"}
+{"de": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria", "rel": "SUSTENTADO_POR", "para": "tri.gronchi-2012"}
+{"de": "tri.gronchi-2012", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria"}
+{"de": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria", "rel": "SUSTENTADO_POR", "para": "tri.isg-sts-1001"}
+{"de": "tri.isg-sts-1001", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria"}
+{"de": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria", "rel": "SUSTENTADO_POR", "para": "tri.pasquali-sarculator"}
+{"de": "tri.pasquali-sarculator", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.doxo-ifosfamida-perioperatoria"}
+{"de": "reg.sarcoma-partes-moles.doxorrubicina-mono", "rel": "FONTE", "para": "src.08.78", "pagina": 36}
+{"de": "reg.sarcoma-partes-moles.doxorrubicina-mono", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "cen.sarcoma-partes-moles.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.doxorrubicina-mono", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.sarcoma-partes-moles.doxorrubicina-mono", "rel": "SUSTENTADO_POR", "para": "tri.bramwell-cochrane"}
+{"de": "tri.bramwell-cochrane", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.doxorrubicina-mono"}
+{"de": "reg.sarcoma-partes-moles.doxorrubicina-mono", "rel": "SUSTENTADO_POR", "para": "tri.lorigan-2007"}
+{"de": "tri.lorigan-2007", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.doxorrubicina-mono"}
+{"de": "reg.sarcoma-partes-moles.doxorrubicina-mono", "rel": "SUSTENTADO_POR", "para": "tri.geddis"}
+{"de": "tri.geddis", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.doxorrubicina-mono"}
+{"de": "reg.sarcoma-partes-moles.doxo-ifosfamida-paliativa", "rel": "FONTE", "para": "src.08.78", "pagina": 36}
+{"de": "reg.sarcoma-partes-moles.doxo-ifosfamida-paliativa", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.sarcoma-partes-moles.doxo-ifosfamida-paliativa", "rel": "USA_FARMACO", "para": "far.ifosfamida"}
+{"de": "cen.sarcoma-partes-moles.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.doxo-ifosfamida-paliativa", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.sarcoma-partes-moles.doxo-ifosfamida-paliativa", "rel": "SUSTENTADO_POR", "para": "tri.bramwell-cochrane"}
+{"de": "tri.bramwell-cochrane", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.doxo-ifosfamida-paliativa"}
+{"de": "reg.sarcoma-partes-moles.doxo-trabectedina-lms", "rel": "FONTE", "para": "src.08.78", "pagina": 42}
+{"de": "reg.sarcoma-partes-moles.doxo-trabectedina-lms", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "far.trabectedina", "rel": "FONTE", "para": "src.08.78", "pagina": 42}
+{"de": "reg.sarcoma-partes-moles.doxo-trabectedina-lms", "rel": "USA_FARMACO", "para": "far.trabectedina"}
+{"de": "cen.sarcoma-partes-moles.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.doxo-trabectedina-lms", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "leiomiossarcoma"}
+{"de": "reg.sarcoma-partes-moles.doxo-trabectedina-lms", "rel": "SUSTENTADO_POR", "para": "tri.lms-04"}
+{"de": "tri.lms-04", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.doxo-trabectedina-lms"}
+{"de": "reg.sarcoma-partes-moles.gem-docetaxel", "rel": "FONTE", "para": "src.08.78", "pagina": 37}
+{"de": "far.gencitabina", "rel": "FONTE", "para": "src.08.78", "pagina": 37}
+{"de": "reg.sarcoma-partes-moles.gem-docetaxel", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "far.docetaxel", "rel": "FONTE", "para": "src.08.78", "pagina": 37}
+{"de": "reg.sarcoma-partes-moles.gem-docetaxel", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "cen.sarcoma-partes-moles.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.gem-docetaxel", "linha": "2ª linha", "intencao": "paliativa"}
+{"de": "reg.sarcoma-partes-moles.gem-docetaxel", "rel": "SUSTENTADO_POR", "para": "tri.maki-2007"}
+{"de": "tri.maki-2007", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.gem-docetaxel"}
+{"de": "reg.sarcoma-partes-moles.gem-dacarbazina", "rel": "FONTE", "para": "src.08.78", "pagina": 37}
+{"de": "reg.sarcoma-partes-moles.gem-dacarbazina", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.sarcoma-partes-moles.gem-dacarbazina", "rel": "USA_FARMACO", "para": "far.dacarbazina"}
+{"de": "cen.sarcoma-partes-moles.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.gem-dacarbazina", "linha": "2ª linha", "intencao": "paliativa"}
+{"de": "reg.sarcoma-partes-moles.gem-dacarbazina", "rel": "SUSTENTADO_POR", "para": "tri.garcia-del-muro-2011"}
+{"de": "tri.garcia-del-muro-2011", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.gem-dacarbazina"}
+{"de": "reg.sarcoma-partes-moles.eribulina", "rel": "FONTE", "para": "src.08.78", "pagina": 37}
+{"de": "far.eribulina", "rel": "FONTE", "para": "src.08.78", "pagina": 37}
+{"de": "reg.sarcoma-partes-moles.eribulina", "rel": "USA_FARMACO", "para": "far.eribulina"}
+{"de": "cen.sarcoma-partes-moles.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.eribulina", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "lipossarcoma/leiomiossarcoma"}
+{"de": "reg.sarcoma-partes-moles.eribulina", "rel": "SUSTENTADO_POR", "para": "tri.schoffski-eribulina"}
+{"de": "tri.schoffski-eribulina", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.eribulina"}
+{"de": "reg.sarcoma-partes-moles.pazopanibe", "rel": "FONTE", "para": "src.08.78", "pagina": 38}
+{"de": "far.pazopanibe", "rel": "FONTE", "para": "src.08.78", "pagina": 38}
+{"de": "reg.sarcoma-partes-moles.pazopanibe", "rel": "USA_FARMACO", "para": "far.pazopanibe"}
+{"de": "cen.sarcoma-partes-moles.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.pazopanibe", "linha": "linhas posteriores", "intencao": "paliativa"}
+{"de": "reg.sarcoma-partes-moles.pazopanibe", "rel": "SUSTENTADO_POR", "para": "tri.palette"}
+{"de": "tri.palette", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.pazopanibe"}
+{"de": "reg.sarcoma-partes-moles.atezolizumabe-asps", "rel": "FONTE", "para": "src.08.78", "pagina": 45}
+{"de": "far.atezolizumabe", "rel": "FONTE", "para": "src.08.78", "pagina": 45}
+{"de": "reg.sarcoma-partes-moles.atezolizumabe-asps", "rel": "USA_FARMACO", "para": "far.atezolizumabe"}
+{"de": "cen.sarcoma-partes-moles.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.atezolizumabe-asps", "linha": "1ª+ linha", "intencao": "paliativa", "condicao_biomarcador": "fusão ASPSCR1-TFE3"}
+{"de": "cen.sarcoma-partes-moles.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.atezolizumabe-asps", "linha": "1ª+ linha", "intencao": "paliativa", "condicao_biomarcador": "fusão ASPSCR1-TFE3"}
+{"de": "reg.sarcoma-partes-moles.atezolizumabe-asps", "rel": "SUSTENTADO_POR", "para": "tri.atezolizumabe-asps"}
+{"de": "tri.atezolizumabe-asps", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.atezolizumabe-asps"}
+{"de": "reg.sarcoma-partes-moles.paclitaxel-angiossarcoma", "rel": "FONTE", "para": "src.08.78", "pagina": 46}
+{"de": "reg.sarcoma-partes-moles.paclitaxel-angiossarcoma", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.sarcoma-partes-moles.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.paclitaxel-angiossarcoma", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "angiossarcoma"}
+{"de": "reg.sarcoma-partes-moles.paclitaxel-angiossarcoma", "rel": "SUSTENTADO_POR", "para": "tri.angiotax"}
+{"de": "tri.angiotax", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.paclitaxel-angiossarcoma"}
+{"de": "reg.sarcoma-partes-moles.metastasectomia", "rel": "FONTE", "para": "src.08.78", "pagina": 39}
+{"de": "cen.sarcoma-partes-moles.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.metastasectomia", "linha": "oligometastático", "intencao": "paliativa"}
+{"de": "reg.sarcoma-partes-moles.imunoterapia-sarcoma", "rel": "FONTE", "para": "src.08.78", "pagina": 53}
+{"de": "reg.sarcoma-partes-moles.imunoterapia-sarcoma", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "far.ciclofosfamida", "rel": "FONTE", "para": "src.08.78", "pagina": 53}
+{"de": "reg.sarcoma-partes-moles.imunoterapia-sarcoma", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "cen.sarcoma-partes-moles.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.sarcoma-partes-moles.imunoterapia-sarcoma", "linha": "investigacional", "intencao": "paliativa", "condicao_biomarcador": "estruturas linfoides terciárias (TLS)"}
+{"de": "reg.sarcoma-partes-moles.imunoterapia-sarcoma", "rel": "SUSTENTADO_POR", "para": "tri.sarc028"}
+{"de": "tri.sarc028", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.imunoterapia-sarcoma"}
+{"de": "reg.sarcoma-partes-moles.imunoterapia-sarcoma", "rel": "SUSTENTADO_POR", "para": "tri.pembrosarc-tls"}
+{"de": "tri.pembrosarc-tls", "rel": "TESTOU", "para": "reg.sarcoma-partes-moles.imunoterapia-sarcoma"}
+{"de": "tum.osteossarcoma", "rel": "FONTE", "para": "src.08.79", "pagina": 6}
+{"de": "cen.osteossarcoma.localizado-perioperatorio", "rel": "FONTE", "para": "src.08.79", "pagina": 25}
+{"de": "tum.osteossarcoma", "rel": "TEM_CENARIO", "para": "cen.osteossarcoma.localizado-perioperatorio"}
+{"de": "cen.osteossarcoma.metastatico-de-novo", "rel": "FONTE", "para": "src.08.79", "pagina": 22}
+{"de": "tum.osteossarcoma", "rel": "TEM_CENARIO", "para": "cen.osteossarcoma.metastatico-de-novo"}
+{"de": "cen.osteossarcoma.recidivado", "rel": "FONTE", "para": "src.08.79", "pagina": 23}
+{"de": "tum.osteossarcoma", "rel": "TEM_CENARIO", "para": "cen.osteossarcoma.recidivado"}
+{"de": "dx.osteossarcoma.imagem-estadiamento-osseo", "rel": "FONTE", "para": "src.08.79", "pagina": 9}
+{"de": "tum.osteossarcoma", "rel": "DIAGNOSTICA_POR", "para": "dx.osteossarcoma.imagem-estadiamento-osseo"}
+{"de": "est.osteossarcoma.huvos", "rel": "FONTE", "para": "src.08.79", "pagina": 14}
+{"de": "tum.osteossarcoma", "rel": "ESTADIA_POR", "para": "est.osteossarcoma.huvos"}
+{"de": "tri.anninga-2011", "rel": "FONTE", "para": "src.08.79", "pagina": 16}
+{"de": "tri.euramos-1", "rel": "FONTE", "para": "src.08.79", "pagina": 18}
+{"de": "tri.int-0133", "rel": "FONTE", "para": "src.08.79", "pagina": 21}
+{"de": "tri.kager-2003", "rel": "FONTE", "para": "src.08.79", "pagina": 22}
+{"de": "tri.kempf-bielack-2005", "rel": "FONTE", "para": "src.08.79", "pagina": 23}
+{"de": "tri.osteo-resgate-qt", "rel": "FONTE", "para": "src.08.79", "pagina": 24}
+{"de": "tri.regobone", "rel": "FONTE", "para": "src.08.79", "pagina": 24}
+{"de": "reg.osteossarcoma.map", "rel": "FONTE", "para": "src.08.79", "pagina": 25}
+{"de": "far.metotrexato", "rel": "FONTE", "para": "src.08.79", "pagina": 25}
+{"de": "reg.osteossarcoma.map", "rel": "USA_FARMACO", "para": "far.metotrexato"}
+{"de": "reg.osteossarcoma.map", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.osteossarcoma.map", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.osteossarcoma.localizado-perioperatorio", "rel": "TRATA_COM", "para": "reg.osteossarcoma.map", "linha": "perioperatório", "intencao": "curativa"}
+{"de": "cen.osteossarcoma.metastatico-de-novo", "rel": "TRATA_COM", "para": "reg.osteossarcoma.map", "linha": "perioperatório", "intencao": "curativa"}
+{"de": "reg.osteossarcoma.map", "rel": "SUSTENTADO_POR", "para": "tri.anninga-2011"}
+{"de": "tri.anninga-2011", "rel": "TESTOU", "para": "reg.osteossarcoma.map"}
+{"de": "reg.osteossarcoma.map", "rel": "SUSTENTADO_POR", "para": "tri.euramos-1"}
+{"de": "tri.euramos-1", "rel": "TESTOU", "para": "reg.osteossarcoma.map"}
+{"de": "reg.osteossarcoma.mifamurtida", "rel": "FONTE", "para": "src.08.79", "pagina": 21}
+{"de": "far.mifamurtida", "rel": "FONTE", "para": "src.08.79", "pagina": 21}
+{"de": "reg.osteossarcoma.mifamurtida", "rel": "USA_FARMACO", "para": "far.mifamurtida"}
+{"de": "cen.osteossarcoma.localizado-perioperatorio", "rel": "TRATA_COM", "para": "reg.osteossarcoma.mifamurtida", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.osteossarcoma.mifamurtida", "rel": "SUSTENTADO_POR", "para": "tri.int-0133"}
+{"de": "tri.int-0133", "rel": "TESTOU", "para": "reg.osteossarcoma.mifamurtida"}
+{"de": "reg.osteossarcoma.cirurgia-osteo", "rel": "FONTE", "para": "src.08.79", "pagina": 13}
+{"de": "cen.osteossarcoma.localizado-perioperatorio", "rel": "TRATA_COM", "para": "reg.osteossarcoma.cirurgia-osteo", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "cen.osteossarcoma.metastatico-de-novo", "rel": "TRATA_COM", "para": "reg.osteossarcoma.cirurgia-osteo", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "cen.osteossarcoma.recidivado", "rel": "TRATA_COM", "para": "reg.osteossarcoma.cirurgia-osteo", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.osteossarcoma.cirurgia-osteo", "rel": "SUSTENTADO_POR", "para": "tri.kager-2003"}
+{"de": "tri.kager-2003", "rel": "TESTOU", "para": "reg.osteossarcoma.cirurgia-osteo"}
+{"de": "reg.osteossarcoma.cirurgia-osteo", "rel": "SUSTENTADO_POR", "para": "tri.kempf-bielack-2005"}
+{"de": "tri.kempf-bielack-2005", "rel": "TESTOU", "para": "reg.osteossarcoma.cirurgia-osteo"}
+{"de": "reg.osteossarcoma.qt-resgate-osteo", "rel": "FONTE", "para": "src.08.79", "pagina": 24}
+{"de": "reg.osteossarcoma.qt-resgate-osteo", "rel": "USA_FARMACO", "para": "far.ifosfamida"}
+{"de": "reg.osteossarcoma.qt-resgate-osteo", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.osteossarcoma.qt-resgate-osteo", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.osteossarcoma.qt-resgate-osteo", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.osteossarcoma.qt-resgate-osteo", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "cen.osteossarcoma.recidivado", "rel": "TRATA_COM", "para": "reg.osteossarcoma.qt-resgate-osteo", "linha": "recidiva", "intencao": "paliativa"}
+{"de": "reg.osteossarcoma.qt-resgate-osteo", "rel": "SUSTENTADO_POR", "para": "tri.osteo-resgate-qt"}
+{"de": "tri.osteo-resgate-qt", "rel": "TESTOU", "para": "reg.osteossarcoma.qt-resgate-osteo"}
+{"de": "reg.osteossarcoma.regorafenibe-osteo", "rel": "FONTE", "para": "src.08.79", "pagina": 24}
+{"de": "reg.osteossarcoma.regorafenibe-osteo", "rel": "USA_FARMACO", "para": "far.regorafenibe"}
+{"de": "cen.osteossarcoma.recidivado", "rel": "TRATA_COM", "para": "reg.osteossarcoma.regorafenibe-osteo", "linha": "recidiva", "intencao": "paliativa"}
+{"de": "reg.osteossarcoma.regorafenibe-osteo", "rel": "SUSTENTADO_POR", "para": "tri.regobone"}
+{"de": "tri.regobone", "rel": "TESTOU", "para": "reg.osteossarcoma.regorafenibe-osteo"}
+{"de": "tum.ewing", "rel": "FONTE", "para": "src.08.79", "pagina": 27}
+{"de": "cen.ewing.localizado-perioperatorio", "rel": "FONTE", "para": "src.08.79", "pagina": 39}
+{"de": "tum.ewing", "rel": "TEM_CENARIO", "para": "cen.ewing.localizado-perioperatorio"}
+{"de": "cen.ewing.metastatico", "rel": "FONTE", "para": "src.08.79", "pagina": 32}
+{"de": "tum.ewing", "rel": "TEM_CENARIO", "para": "cen.ewing.metastatico"}
+{"de": "cen.ewing.recorrente", "rel": "FONTE", "para": "src.08.79", "pagina": 38}
+{"de": "tum.ewing", "rel": "TEM_CENARIO", "para": "cen.ewing.recorrente"}
+{"de": "dx.ewing.histologia-molecular", "rel": "FONTE", "para": "src.08.79", "pagina": 27}
+{"de": "tum.ewing", "rel": "DIAGNOSTICA_POR", "para": "dx.ewing.histologia-molecular"}
+{"de": "est.ewing.sitio-extensao", "rel": "FONTE", "para": "src.08.79", "pagina": 29}
+{"de": "tum.ewing", "rel": "ESTADIA_POR", "para": "est.ewing.sitio-extensao"}
+{"de": "bio.ewsr1-fli1", "rel": "FONTE", "para": "src.08.79", "pagina": 28}
+{"de": "cen.ewing.localizado-perioperatorio", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ewsr1-fli1", "para_que": "diagnóstico"}
+{"de": "tri.int-0091", "rel": "FONTE", "para": "src.08.79", "pagina": 32}
+{"de": "tri.aews0031", "rel": "FONTE", "para": "src.08.79", "pagina": 34}
+{"de": "tri.euro-ewing-2012", "rel": "FONTE", "para": "src.08.79", "pagina": 37}
+{"de": "tri.ewing-recorrente", "rel": "FONTE", "para": "src.08.79", "pagina": 38}
+{"de": "reg.ewing.vdc-ie", "rel": "FONTE", "para": "src.08.79", "pagina": 31}
+{"de": "reg.ewing.vdc-ie", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "reg.ewing.vdc-ie", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.ewing.vdc-ie", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.ewing.vdc-ie", "rel": "USA_FARMACO", "para": "far.ifosfamida"}
+{"de": "reg.ewing.vdc-ie", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "far.actinomicina-d", "rel": "FONTE", "para": "src.08.79", "pagina": 31}
+{"de": "reg.ewing.vdc-ie", "rel": "USA_FARMACO", "para": "far.actinomicina-d"}
+{"de": "cen.ewing.localizado-perioperatorio", "rel": "TRATA_COM", "para": "reg.ewing.vdc-ie", "linha": "perioperatório", "intencao": "curativa"}
+{"de": "cen.ewing.metastatico", "rel": "TRATA_COM", "para": "reg.ewing.vdc-ie", "linha": "perioperatório", "intencao": "curativa"}
+{"de": "reg.ewing.vdc-ie", "rel": "SUSTENTADO_POR", "para": "tri.int-0091"}
+{"de": "tri.int-0091", "rel": "TESTOU", "para": "reg.ewing.vdc-ie"}
+{"de": "reg.ewing.vdc-ie", "rel": "SUSTENTADO_POR", "para": "tri.aews0031"}
+{"de": "tri.aews0031", "rel": "TESTOU", "para": "reg.ewing.vdc-ie"}
+{"de": "reg.ewing.vdc-ie", "rel": "SUSTENTADO_POR", "para": "tri.euro-ewing-2012"}
+{"de": "tri.euro-ewing-2012", "rel": "TESTOU", "para": "reg.ewing.vdc-ie"}
+{"de": "reg.ewing.controle-local-ewing", "rel": "FONTE", "para": "src.08.79", "pagina": 30}
+{"de": "cen.ewing.localizado-perioperatorio", "rel": "TRATA_COM", "para": "reg.ewing.controle-local-ewing", "linha": "controle local", "intencao": "curativa"}
+{"de": "reg.ewing.resgate-ewing", "rel": "FONTE", "para": "src.08.79", "pagina": 38}
+{"de": "far.topotecano", "rel": "FONTE", "para": "src.08.79", "pagina": 38}
+{"de": "reg.ewing.resgate-ewing", "rel": "USA_FARMACO", "para": "far.topotecano"}
+{"de": "reg.ewing.resgate-ewing", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.ewing.resgate-ewing", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "far.irinotecano", "rel": "FONTE", "para": "src.08.79", "pagina": 38}
+{"de": "reg.ewing.resgate-ewing", "rel": "USA_FARMACO", "para": "far.irinotecano"}
+{"de": "reg.ewing.resgate-ewing", "rel": "USA_FARMACO", "para": "far.temozolomida"}
+{"de": "reg.ewing.resgate-ewing", "rel": "USA_FARMACO", "para": "far.ifosfamida"}
+{"de": "cen.ewing.recorrente", "rel": "TRATA_COM", "para": "reg.ewing.resgate-ewing", "linha": "recidiva", "intencao": "paliativa"}
+{"de": "reg.ewing.resgate-ewing", "rel": "SUSTENTADO_POR", "para": "tri.ewing-recorrente"}
+{"de": "tri.ewing-recorrente", "rel": "TESTOU", "para": "reg.ewing.resgate-ewing"}
+{"de": "tum.kaposi", "rel": "FONTE", "para": "src.08.96", "pagina": 2}
+{"de": "cen.kaposi.baixo-volume", "rel": "FONTE", "para": "src.08.96", "pagina": 7}
+{"de": "tum.kaposi", "rel": "TEM_CENARIO", "para": "cen.kaposi.baixo-volume"}
+{"de": "cen.kaposi.relacionado-hiv", "rel": "FONTE", "para": "src.08.96", "pagina": 8}
+{"de": "tum.kaposi", "rel": "TEM_CENARIO", "para": "cen.kaposi.relacionado-hiv"}
+{"de": "cen.kaposi.alto-volume-sistemico", "rel": "FONTE", "para": "src.08.96", "pagina": 7}
+{"de": "tum.kaposi", "rel": "TEM_CENARIO", "para": "cen.kaposi.alto-volume-sistemico"}
+{"de": "dx.kaposi.clinico-ihq", "rel": "FONTE", "para": "src.08.96", "pagina": 6}
+{"de": "tum.kaposi", "rel": "DIAGNOSTICA_POR", "para": "dx.kaposi.clinico-ihq"}
+{"de": "est.kaposi.volume-doenca", "rel": "FONTE", "para": "src.08.96", "pagina": 7}
+{"de": "tum.kaposi", "rel": "ESTADIA_POR", "para": "est.kaposi.volume-doenca"}
+{"de": "tri.stewart-1998", "rel": "FONTE", "para": "src.08.96", "pagina": 10}
+{"de": "tri.cianfrocca-2010", "rel": "FONTE", "para": "src.08.96", "pagina": 11}
+{"de": "tri.pomalidomida-ks", "rel": "FONTE", "para": "src.08.96", "pagina": 12}
+{"de": "tri.delyon-pembro", "rel": "FONTE", "para": "src.08.96", "pagina": 14}
+{"de": "tri.zer-nivo-ipi", "rel": "FONTE", "para": "src.08.96", "pagina": 14}
+{"de": "tri.lurain-pembro-hiv", "rel": "FONTE", "para": "src.08.96", "pagina": 15}
+{"de": "tri.rajdev-nivo-hiv", "rel": "FONTE", "para": "src.08.96", "pagina": 15}
+{"de": "reg.kaposi.local-ks", "rel": "FONTE", "para": "src.08.96", "pagina": 7}
+{"de": "cen.kaposi.baixo-volume", "rel": "TRATA_COM", "para": "reg.kaposi.local-ks", "linha": "baixo volume", "intencao": "paliativa"}
+{"de": "cen.kaposi.relacionado-hiv", "rel": "TRATA_COM", "para": "reg.kaposi.local-ks", "linha": "baixo volume", "intencao": "paliativa"}
+{"de": "reg.kaposi.tarv", "rel": "FONTE", "para": "src.08.96", "pagina": 8}
+{"de": "cen.kaposi.relacionado-hiv", "rel": "TRATA_COM", "para": "reg.kaposi.tarv", "linha": "1ª linha SK-HIV", "intencao": "paliativa"}
+{"de": "reg.kaposi.doxorrubicina-lipossomal", "rel": "FONTE", "para": "src.08.96", "pagina": 10}
+{"de": "far.doxorrubicina-lipossomal", "rel": "FONTE", "para": "src.08.96", "pagina": 10}
+{"de": "reg.kaposi.doxorrubicina-lipossomal", "rel": "USA_FARMACO", "para": "far.doxorrubicina-lipossomal"}
+{"de": "cen.kaposi.relacionado-hiv", "rel": "TRATA_COM", "para": "reg.kaposi.doxorrubicina-lipossomal", "linha": "1ª linha sistêmica", "intencao": "paliativa"}
+{"de": "cen.kaposi.alto-volume-sistemico", "rel": "TRATA_COM", "para": "reg.kaposi.doxorrubicina-lipossomal", "linha": "1ª linha sistêmica", "intencao": "paliativa"}
+{"de": "reg.kaposi.doxorrubicina-lipossomal", "rel": "SUSTENTADO_POR", "para": "tri.stewart-1998"}
+{"de": "tri.stewart-1998", "rel": "TESTOU", "para": "reg.kaposi.doxorrubicina-lipossomal"}
+{"de": "reg.kaposi.doxorrubicina-lipossomal", "rel": "SUSTENTADO_POR", "para": "tri.cianfrocca-2010"}
+{"de": "tri.cianfrocca-2010", "rel": "TESTOU", "para": "reg.kaposi.doxorrubicina-lipossomal"}
+{"de": "reg.kaposi.paclitaxel-ks", "rel": "FONTE", "para": "src.08.96", "pagina": 11}
+{"de": "reg.kaposi.paclitaxel-ks", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.kaposi.relacionado-hiv", "rel": "TRATA_COM", "para": "reg.kaposi.paclitaxel-ks", "linha": "1ª linha sistêmica", "intencao": "paliativa"}
+{"de": "cen.kaposi.alto-volume-sistemico", "rel": "TRATA_COM", "para": "reg.kaposi.paclitaxel-ks", "linha": "1ª linha sistêmica", "intencao": "paliativa"}
+{"de": "reg.kaposi.paclitaxel-ks", "rel": "SUSTENTADO_POR", "para": "tri.cianfrocca-2010"}
+{"de": "tri.cianfrocca-2010", "rel": "TESTOU", "para": "reg.kaposi.paclitaxel-ks"}
+{"de": "reg.kaposi.pomalidomida", "rel": "FONTE", "para": "src.08.96", "pagina": 12}
+{"de": "far.pomalidomida", "rel": "FONTE", "para": "src.08.96", "pagina": 12}
+{"de": "reg.kaposi.pomalidomida", "rel": "USA_FARMACO", "para": "far.pomalidomida"}
+{"de": "far.aas", "rel": "FONTE", "para": "src.08.96", "pagina": 12}
+{"de": "reg.kaposi.pomalidomida", "rel": "USA_FARMACO", "para": "far.aas"}
+{"de": "cen.kaposi.alto-volume-sistemico", "rel": "TRATA_COM", "para": "reg.kaposi.pomalidomida", "linha": "refratário/alternativa", "intencao": "paliativa"}
+{"de": "reg.kaposi.pomalidomida", "rel": "SUSTENTADO_POR", "para": "tri.pomalidomida-ks"}
+{"de": "tri.pomalidomida-ks", "rel": "TESTOU", "para": "reg.kaposi.pomalidomida"}
+{"de": "reg.kaposi.imunoterapia-ks", "rel": "FONTE", "para": "src.08.96", "pagina": 16}
+{"de": "reg.kaposi.imunoterapia-ks", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.kaposi.imunoterapia-ks", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "reg.kaposi.imunoterapia-ks", "rel": "USA_FARMACO", "para": "far.ipilimumabe"}
+{"de": "cen.kaposi.alto-volume-sistemico", "rel": "TRATA_COM", "para": "reg.kaposi.imunoterapia-ks", "linha": "refratário à QT", "intencao": "paliativa"}
+{"de": "cen.kaposi.relacionado-hiv", "rel": "TRATA_COM", "para": "reg.kaposi.imunoterapia-ks", "linha": "refratário à QT", "intencao": "paliativa"}
+{"de": "reg.kaposi.imunoterapia-ks", "rel": "SUSTENTADO_POR", "para": "tri.delyon-pembro"}
+{"de": "tri.delyon-pembro", "rel": "TESTOU", "para": "reg.kaposi.imunoterapia-ks"}
+{"de": "reg.kaposi.imunoterapia-ks", "rel": "SUSTENTADO_POR", "para": "tri.zer-nivo-ipi"}
+{"de": "tri.zer-nivo-ipi", "rel": "TESTOU", "para": "reg.kaposi.imunoterapia-ks"}
+{"de": "reg.kaposi.imunoterapia-ks", "rel": "SUSTENTADO_POR", "para": "tri.lurain-pembro-hiv"}
+{"de": "tri.lurain-pembro-hiv", "rel": "TESTOU", "para": "reg.kaposi.imunoterapia-ks"}
+{"de": "reg.kaposi.imunoterapia-ks", "rel": "SUSTENTADO_POR", "para": "tri.rajdev-nivo-hiv"}
+{"de": "tri.rajdev-nivo-hiv", "rel": "TESTOU", "para": "reg.kaposi.imunoterapia-ks"}
