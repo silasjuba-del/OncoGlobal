@@ -1,5 +1,7 @@
 // Tipos mínimos da linha src/modules. Sem I/O, sem relógio, sem dado clínico embutido.
 
+import { createHash } from "node:crypto";
+
 export type Semaforo = "VERDE" | "VERMELHO" | "PENDENTE";
 
 export type RevisaoConfirmada = "CONFIRMADO" | "ASSINADO";
@@ -32,20 +34,9 @@ export function fonteInformada(fonte: string | null | undefined): boolean {
   return typeof fonte === "string" && fonte.trim().length > 0;
 }
 
-/** Hash determinístico (FNV-1a 64). Mesma entrada → mesma saída. */
+/** SHA-256 determinístico do canon existente (chaves ordenadas, UTF-8). */
 export function hashCanonico(valor: unknown): string {
-  const texto = canon(valor);
-  let h = 0xcbf29ce484222325n;
-  const primo = 0x100000001b3n;
-  const mascara = 0xffffffffffffffffn;
-  for (let i = 0; i < texto.length; i++) {
-    const cp = texto.codePointAt(i);
-    if (cp === undefined) continue;
-    h ^= BigInt(cp);
-    h = (h * primo) & mascara;
-    if (cp > 0xffff) i += 1;
-  }
-  return h.toString(16).padStart(16, "0");
+  return createHash("sha256").update(canon(valor), "utf8").digest("hex");
 }
 
 function canon(valor: unknown): string {
