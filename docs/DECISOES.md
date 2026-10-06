@@ -144,4 +144,14 @@ A11. Backup: **só HD externo local, cifrado**; chave de recuperação fora do P
 - **D-W9-19 · APAC automática com antiglosa.** Backend linear: dados do paciente → agente extrai e preenche o laudo APAC no modelo real (D-W5-06) → **antiglosa** (checagem antes do faturamento) → médico valida → lote do faturamento (D-W5-10). Extração é proposta da IA; regras de antiglosa são código (SIGTAP, CID × procedimento, idade, sexo, finalidade, competência, CNS, CNES, campos obrigatórios, duplicidade).
 - **D-W9-20 · Código leve, conhecimento na RAG.** No código ficam só regras e dados mínimos; mensagens de red flag, interações, fichas e textos longos ficam na base de conhecimento aprovada (RAG), versionada e editável. Frontend é extensão do backend: a tela só mostra e coleta.
 - **D-W9-21 · Referência de intake: skill SILAS NEGRÃO (6 papéis → W1 de 5 blocos).** O AUDITOR vira validador **determinístico** (código, não a mesma LLM); alerta catastrófico mantém os 3 critérios sem teto numérico.
+- **D-W9-22 · Uso da onco-referência (auditorias ADV-01…12 e loop 2; regras do Dr. Silas reafirmadas).**
+  (a) Porta de ciclo = **limiar de bula** (neutrófilos, plaquetas, clearance, FEVE), nunca grau CTCAE; grau CTCAE serve só para toxicidade.
+  (b) Protocolo é identificado por **nome + tumor + cenário + estudo/versão** (ex.: Gem+Cis bexiga ≠ vias biliares; TAX 323 ≠ 324); nunca só pelo nome.
+  (c) NÃO_VERIFICADO nunca é preenchido em silêncio por outra fonte (planilha, pack, LLM); conflito entre fontes aparece, nunca some.
+  (d) "Impeditiva/absoluta/não iniciar" do material vira **alerta**; ECOG 3–4 vai à fila do médico; só a exportação/financeiro bloqueia.
+  (e) Dois dutos sem merge: prescrição ≠ APAC (APAC deriva da conduta assinada e só alerta).
+  (f) Bula FDA/EMA ≠ ANVISA: fonte sempre rotulada, nunca fundida.
+  (g) Triagem do ciclo e corte do salão são portões distintos.
+  (h) Fonte de verdade do material = `.md` (o docx perdeu fluxograma 10 e tabela QT-RT de cabeça e pescoço).
+  (i) Esquemas da planilha com dose de estudo (TPF, ddMVAC, capecitabina em mg/m² "1 cp", FOLFOX/FOLFIRI 8 h, IFL/Mayo, antiemese sem NK1, docetaxel sem dexa 3 d, zoledrônico q84d, hidratação de cisplatina) **não entram como ficha** até revisão do Dr. Silas.
 - **Ainda abertos:** mensagens prontas de red flag do canal, ativação de interações medicamentosas (com fonte), biblioteca das ~50 fichas.
