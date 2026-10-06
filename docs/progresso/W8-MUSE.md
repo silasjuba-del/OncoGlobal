@@ -17,7 +17,7 @@
 | MU-07 · Protótipo: APAC em bloco e laudo | FEITA | b64ba2a | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado | – |
 | MU-08 · Protótipo: centro de comando | FEITA | c5c1d85 | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado | – |
 | MU-09 · Impressos | FEITA | 0e4eaa3 | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado | – |
-| MU-10 · Acessibilidade e fechamento | FEITA | (neste commit) | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · auditoria a11y 6/6 | – |
+| MU-10 · Acessibilidade e fechamento | FEITA | 511b662 | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · auditoria a11y 6/6 | – |
 
 ## Arquivos criados
 
