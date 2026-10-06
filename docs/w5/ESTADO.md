@@ -2,10 +2,10 @@
 
 > Se a sessão cair: leia este arquivo, depois `docs/w5/ACHADOS.md`, `docs/w5/CLAIMS.md` e `docs/w5/AMB.md`. Continue do primeiro passo não FEITO da tabela "Fases". Nunca refaça o que está FEITO.
 
-- **Fase atual:** P1 (RED lendo) · rodada 1 · corretores em pré-leitura + cobertura (AMB-P05) · E2E-UI no INFRA-01
+- **Fase atual:** P3 triagem da rodada 1 + P4 correções atribuídas; P2 ainda PARCIAL (F5/F9/F11 não executadas)
 - **Rodada:** 1 de 3
-- **Agente ativo no Vitest:** nenhum (lock livre; ultimo: ORQ as 19:08:39, exit 0)
-- **Base:** `f0/w5-integrado` @ `aa99b86` (worktree `C:\Users\silas\Projects\OncoGlobal-wt\w5-orq`)
+- **Agente ativo no Vitest:** nenhum (lock livre; ultimo: REGRAS as 21:33:48, exit 0)
+- **Base:** `f0/w5-integrado` @ `da75a0c` (worktree `C:\Users\silas\Projects\OncoGlobal-wt\w5-orq`); ramos RED/E2E-UI/REGRAS/KERNEL/DOMINIO ainda NÃO integrados
 - **Fuso do serviço:** −03:00 (D-W5-01) · aviso APAC adiantado ≤ 1 dia aceitável, atrasado não (D-W5-02)
 
 ## Fases
@@ -13,26 +13,26 @@
 |---|---|---|
 | P0 linha de base | FEITO 19:08 | `npm run verify` exit 0 · 53 arquivos / 345 testes · fronteiras ok (79) · corpus ok (20) · log `_w5-locks\logs\20261005-190530-ORQ.log` |
 | P0 worktrees + `npm ci` (um por vez) | FEITO 19:12 | 5 worktrees de `6b96702`; `npm ci` serial, 12–13 s cada, exit 0 |
-| P1 matriz de rastreabilidade | EM_CURSO (RED) | entrada do RED em `docs/w5/achados/_P1-MATRIZ-RED.md` → consolidação em `docs/w5/MATRIZ.md` |
-| P2 ataque (rodada 1) | PENDENTE | — |
-| P3 triagem (rodada 1) | PENDENTE | — |
-| P4 correção (rodada 1) | PENDENTE | — |
+| P1 matriz de rastreabilidade | PARCIAL | `docs/w5/MATRIZ.md`: 195 IDs; 85 PARCIAL por refs, 110 A_AUDITAR; leitura semântica e mutação pendentes |
+| P2 ataque (rodada 1) | PARCIAL | RED @`5e1093d`: 31 testes, 22 FAIL deliberados/9 PASS; 8 famílias ensaiadas, F5/F9/F11 NOT_RUN; log `_w5-locks/logs/20261005-212449-RED.log` |
+| P3 triagem (rodada 1) | EM_CURSO | `docs/w5/ACHADOS.md`: 8 ABERTO, 2 AMB, 1 RESISTIU; AMB-001/002 em `AMB.md` |
+| P4 correção (rodada 1) | EM_CURSO | REGRAS recebeu ADV-010; KERNEL recebeu ADV-006/001 e, se viável, ADV-005; testes vermelhos devem preceder correção |
 | P5 integração + reataque (rodada 1) | PENDENTE | — |
 | P6 relatório | PENDENTE | — |
 
 ## Agentes (§3)
 | Agente | Worktree | Branch | Estado | Tarefa atual |
 |---|---|---|---|---|
-| RED | `w5-red` | `f0/w5-red` | ativo (id `01a10e24-772a-7852-a756-1d95105d271b`) | RED-R1: P1 matriz → P2 lote 1 (provas W4) → F1…F11 |
-| KERNEL | `w5-kernel` | `f0/w5-kernel` | ativo (id `01a10e25-6914-7000-896f-5da3cea402e4`) | KERNEL-R1-PRE: leitura, desenho W4-01/02/03/06/07, suspeitas, COB |
-| REGRAS | `w5-regras` | `f0/w5-regras` | ativo (id `01a10e25-754e-7be2-ae7c-7f1002de0688`) | REGRAS-R1-PRE: leitura, desenho datas/W4-04/W4-05, suspeitas, COB |
-| DOMINIO | `w5-dominio` | `f0/w5-dominio` | ativo (id `01a10e25-84ab-7461-a718-c43d38c6437b`) | DOMINIO-R1-PRE: leitura, desenho hash modules, suspeitas, COB |
-| E2E-UI | `w5-e2e` | `f0/w5-e2e` | ativo (id `01a10e24-1044-77a0-8a22-efde89fdd0e9`) | E2E-R1: INFRA-01 (vite exclude tests/adv) → trilho E2E → suspeitas UI |
+| RED | `w5-red` | `f0/w5-red` | lote 1 entregue @`5e1093d` | F5/F9/F11 e reataque ainda pendentes |
+| KERNEL | `w5-kernel` | `f0/w5-kernel` | cobertura em curso; ADV-006/001 atribuídos | priorizar S0, depois ADV-005 S1; sem alterar contrato |
+| REGRAS | `w5-regras` | `f0/w5-regras` | cobertura entregue (3 commits); ADV-010 atribuído | reproduzir teste vermelho → corrigir conflito delta |
+| DOMINIO | `w5-dominio` | `f0/w5-dominio` | cobertura em curso | ADV-007/008 aguardam decisão do contrato de lote |
+| E2E-UI | `w5-e2e` | `f0/w5-e2e` | INFRA-01/E2E em curso | excluir adversariais da suíte regular mas executar por filtro explícito |
 
 ## Achados por estado
 | ABERTO | CORRIGIDO | RESISTIU | BLOQUEADO_CONTRATO | AMB |
 |---|---|---|---|---|
-| 0 | 0 | 0 | 0 | 0 |
+| 8 | 0 | 1 | 0 | 2 |
 
 ## Mecânica de coordenação (decisão do orquestrador, registrada)
 - **Vitest um por vez (§6.4):** todo `npm run verify`, `npx tsc` ou `npx vitest` passa por `docs/w5/ferramentas/vitest-lock.ps1` (lock atômico fora do repo, em `C:\Users\silas\Projects\OncoGlobal-wt\_w5-locks\vitest.lock`; logs em `_w5-locks\logs`). O script escreve o nome do agente na linha "Agente ativo no Vitest" acima e a limpa ao terminar.
@@ -47,6 +47,9 @@
 | 2026-10-05 19:08 | P0 VERDE (saída abaixo). Varredura automática de IDs: 82 IDs sem referência (bate com a do tech lead ±1 em T). |
 | 2026-10-05 19:12 | 5 worktrees criados + `npm ci` serial. Briefing comum (`docs/w5/BRIEFING-AGENTES.md`) commitado em `17f0501`. |
 | 2026-10-05 19:20 | 5 agentes lançados (RED, KERNEL, REGRAS, DOMINIO, E2E-UI). |
+| 2026-10-05 21:21 | Auditoria-regressão no integrado: 1 arquivo/9 testes PASS, exit 0; log `_w5-locks/logs/20261005-212110-ORQ.log`. |
+| 2026-10-05 21:29 | RED lote 1 commitado: 31 testes (22 FAIL/9 PASS); achados ADV-001…011 triados, duas ambiguidades de lote. |
+| 2026-10-05 21:31 | P4 atribuído a KERNEL/REGRAS; integração P5 e relatório P6 ainda PENDENTES. |
 
 ## P0 · saída real de `npm run verify` em `f0/w5-integrado` @ `aa99b86` (19:05–19:08)
 ```
