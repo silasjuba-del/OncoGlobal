@@ -106,3 +106,13 @@ A UI não mostra todos os campos: destaca **só as exceções** (o que difere do
 **Foto da prescrição no sentido inverso:** `FOTO → identificar paciente (caixa de revisão, D-W9-34a) → identificar protocolo/ciclo → extrair linhas → reconciliar com o template → detectar alterações manuais → guardar no RAG-HBEM (memória longitudinal local)`. Prescrições antigas fotografadas ensinam o formato real; OCR/transcrição **nunca vira verdade clínica automaticamente** (evidência com proveniência, confirmação médica).
 
 **Regra de UX no topo do ticket:** não perguntar de novo o que o protocolo ou o RAG-HBEM já sabe; mostrar principalmente o que mudou neste ciclo.
+
+### Classes de medicação (Dr. Silas, 2026-10-06) — D-W9-47
+| Classe | O que é | `role` |
+|---|---|---|
+| **PRÉ-QT** | pré-medicação e hidratação antes da QT (antiemético, corticoide, anti-H1/H2, SF com Mg/K) | `PRE_QT` |
+| **QT** | medicações **oncológicas** (antineoplásicos, anti-HER2, imunoterapia, alvo, hormonioterapia) | `QT` |
+| **PÓS-QT** | suporte após a QT (receita pós-QT/VO, hidratação pós, fator de crescimento) | `POS_QT` |
+| **NÃO ONCOLÓGICAS** | uso contínuo de doenças de base (HAS, DM-2, DPOC…) | `NAO_ONCOLOGICA` |
+Substitui PREMED/ANTINEOPLASTIC/HYDRATION/SUPPORT. Hidratação entra em PRÉ-QT ou PÓS-QT conforme o momento (Modelo 05: Intervalo PRE-QT/QT/POS-QT).
+As **não oncológicas** formam a lista de medicamentos em uso do paciente: alimentam o semáforo de interações (FN-16; lista incompleta = PENDENTE), a regra "diarreia > 24 h → suspender anti-hipertensivo" (D-W9-28) e o alerta de hiperglicemia por corticoide em DM-2. O app não prescreve nem altera essas medicações sozinho.
