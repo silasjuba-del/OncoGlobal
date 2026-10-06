@@ -50,8 +50,19 @@ export function montarApacBatch(
   const incluidos: string[] = [];
   const excluidos: ExclusaoLote[] = [];
 
+  // D-W5-10: lote diário pode ter vários pacientes, mas UMA competência. Sem critério explícito,
+  // a competência do lote é a do primeiro item elegível; os demais meses vão para o lote deles.
+  let competenciaLote = criterio.competencia;
   for (const item of itens) {
     const motivo = motivoExclusao(item, criterio, repetidos);
+    if (motivo === null && competenciaLote === null && item.competencia) competenciaLote = item.competencia;
+    if (motivo === null) break;
+  }
+  for (const item of itens) {
+    let motivo = motivoExclusao(item, criterio, repetidos);
+    if (motivo === null && !item.competencia) motivo = "competência ausente";
+    else if (motivo === null && item.competencia !== competenciaLote)
+      motivo = `outra competência (${item.competencia}): vai para o lote dela`;
     const resultado = { apacId: item.apacId, incluido: motivo === null, motivo: motivo ?? "incluído" };
     resultados.push(resultado);
     if (motivo === null) incluidos.push(item.apacId);
@@ -61,7 +72,7 @@ export function montarApacBatch(
   return {
     batchId,
     criterio: {
-      competencia: criterio.competencia,
+      competencia: competenciaLote,
       cid: criterio.cid,
       esquema: criterio.esquema,
       estado: criterio.estado,
