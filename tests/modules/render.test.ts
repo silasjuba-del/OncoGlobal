@@ -34,7 +34,7 @@ describe("GRK-04 render", () => {
     expect(a.templateId).toBe("evolucao");
     expect(a.versao).toBe("1.0.0");
     expect(a.hash).toBe(b.hash);
-    expect(a.hash).toMatch(/^[0-9a-f]{16}$/);
+    expect(a.hash).toMatch(/^[0-9a-f]{64}$/);
   });
 
   it("negativo: campo sem fato fica vazio e listado; fato fora do template não entra", () => {
