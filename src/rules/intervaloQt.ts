@@ -1,22 +1,50 @@
 import { TreatmentAdministration } from "../contracts/clinico.js";
+import { DataCivil, Instante } from "../contracts/base.js";
 type EventoIntervaloQt = import("./tipos-w3.js").EventoIntervaloQt;
 type IntervaloQtResult = import("./tipos-w3.js").IntervaloQtResult;
 
-const VERSAO_PONTE = "A4-ponte-1"; // Adaptador de dados; nao aplica limiar clinico.
+const VERSAO_PONTE = "A4-ponte-2"; // Adaptador de dados; nao aplica limiar clinico.
 const TIPOS_ADMIN = ["TreatmentAdministration", "TREATMENT_ADMINISTRATION"];
 function record(v: unknown): v is Record<string, unknown> { return typeof v === "object" && v !== null; }
 
+function offsetEmMinutos(offset: string): number | null {
+  if (typeof offset !== "string" || !/^[+-](?:[01]\d|2[0-3]):[0-5]\d$/.test(offset)) return null;
+  const minutos = Number(offset.slice(1, 3)) * 60 + Number(offset.slice(4, 6));
+  return offset[0] === "-" ? -minutos : minutos;
+}
+
+/** D-W5-01: instante validado, deslocado para o offset do servico antes da data civil.
+ * Helper local porque R-08 permite a rules importar apenas contratos, nao outras rules.
+ */
+export function dataCivilNoOffset(instante: string, offsetServico: string): string | null {
+  const offset = offsetEmMinutos(offsetServico);
+  if (offset === null || !Instante.safeParse(instante).success) return null;
+  const instanteMs = Date.parse(instante);
+  if (!Number.isFinite(instanteMs)) return null;
+  const local = new Date(instanteMs + offset * 60_000);
+  if (!Number.isFinite(local.getTime())) return null;
+  const civil = [String(local.getUTCFullYear()).padStart(4, "0"),
+    String(local.getUTCMonth() + 1).padStart(2, "0"),
+    String(local.getUTCDate()).padStart(2, "0")].join("-");
+  return DataCivil.safeParse(civil).success ? civil : null;
+}
+
 /** A4: historico de um paciente; prazos.ts continua dono do intervalo.
- * Data civil no offset documentado. Fuso do servico [VERIFICAR].
+ * Offset do servico obrigatorio e injetado; producao D-W5-01 = -03:00.
  * Date.parse compara instantes fornecidos; nao consulta o relogio.
  */
-export function ultimaAdministracaoQtEfetiva(eventos: readonly EventoIntervaloQt[], modalidadesPorCiclo: Readonly<Record<string, string>> = {}): IntervaloQtResult {
+export function ultimaAdministracaoQtEfetiva(eventos: readonly EventoIntervaloQt[], offsetServico: string, modalidadesPorCiclo: Readonly<Record<string, string>> = {}): IntervaloQtResult {
   const used: string[] = [];
   const missing: string[] = [];
   const resultado = (data: string | null, adminId: string | null): IntervaloQtResult => ({
     data, adminId, rulesetVersao: VERSAO_PONTE,
     inputs_used: used, inputs_missing: [...new Set(missing)],
   });
+  if (offsetEmMinutos(offsetServico) === null) {
+    missing.push("offset_servico");
+    return resultado(null, null);
+  }
+  used.push("offset_servico");
   const confirmados = eventos.filter((e) => "adminId" in e ||
     (TIPOS_ADMIN.includes(e.tipo) && (e.revisao === "CONFIRMADO" || e.revisao === "ASSINADO")));
   const pacientes = new Set(confirmados.flatMap((e) => "patientId" in e ? [e.patientId] : []));
@@ -55,5 +83,7 @@ export function ultimaAdministracaoQtEfetiva(eventos: readonly EventoIntervaloQt
   const ultima = [...candidatas.entries()].filter(([, a]) => a.data).sort((a, b) =>
     a[1].instante - b[1].instante || a[0].localeCompare(b[0])).at(-1);
   if (!ultima) { missing.push("administracao_qt_efetiva"); return resultado(null, null); }
-  return resultado(ultima[1].data.slice(0, 10), ultima[0]);
+  const civil = dataCivilNoOffset(ultima[1].data, offsetServico);
+  if (civil === null) { missing.push(`admin.${ultima[0]}.data`); return resultado(null, null); }
+  return resultado(civil, ultima[0]);
 }
