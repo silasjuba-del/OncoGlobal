@@ -154,4 +154,8 @@ A11. Backup: **só HD externo local, cifrado**; chave de recuperação fora do P
   (g) Triagem do ciclo e corte do salão são portões distintos.
   (h) Fonte de verdade do material = `.md` (o docx perdeu fluxograma 10 e tabela QT-RT de cabeça e pescoço).
   (i) Esquemas da planilha com dose de estudo (TPF, ddMVAC, capecitabina em mg/m² "1 cp", FOLFOX/FOLFIRI 8 h, IFL/Mayo, antiemese sem NK1, docetaxel sem dexa 3 d, zoledrônico q84d, hidratação de cisplatina) **não entram como ficha** até revisão do Dr. Silas.
+- **D-W9-23 · Protocolos citotóxicos (planilha revisada, `docs/referencias/protocolos/`).**
+  (a) FOLFOX, FOLFIRI, FOLFIRINOX, FOLFOXIRI e FLOT: 5-FU em **infusão contínua de 46 h** (com bomba); o "D1 e D2, 8 h, sem bomba" da planilha **não** vira ficha. A conversão de cada linha é feita na ficha e conferida pelo Dr. Silas antes de ativar (dose total do ciclo nunca é recalculada em silêncio).
+  (b) **5-FU + leucovorina (Mayo) permanece** na biblioteca.
+  (c) **Antiemese padrão do serviço: ondansetrona + dexametasona + difenidramina, sem aprepitanto** (decisão local, inclusive em esquemas de alto risco emetogênico).
 - **Ainda abertos:** mensagens prontas de red flag do canal, ativação de interações medicamentosas (com fonte), biblioteca das ~50 fichas.

@@ -11,3 +11,8 @@ Base da **biblioteca de fichas (item 11 / K-26)**, mas **nenhuma ficha é ativad
 - 5-FU + leucovorina (Mayo): manter ou marcar obsoleto.
 - Nomes repetidos com dose diferente por tumor (ex.: Carboplatina + Paclitaxel 21/21 em próstata e mama; Docetaxel monoterapia ×5): a ficha é identificada por **tumor + nome + cenário**, nunca só pelo nome.
 - Capecitabina já está correta nesta versão ("nº de comprimidos pela SC"); TPF e ddMVAC **não** estão nesta planilha (os achados da auditoria sobre eles vieram de outra versão).
+
+## Decisões do Dr. Silas (D-W9-23, 2026-10-06)
+- 5-FU dos esquemas FOLFOX/FOLFIRI/FOLFIRINOX/FOLFOXIRI/FLOT = **46 h com bomba** (a planilha ainda mostra 8 h; corrigir na ficha, com conferência).
+- Mayo **permanece**.
+- Antiemese local **sem NK1**: ondansetrona + dexametasona + difenidramina.
