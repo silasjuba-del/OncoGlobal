@@ -91,18 +91,18 @@ describe("W3 bordas adicionais", () => {
   });
   it("ancora QT ignora zero, RAW e eventos de outro tipo", () => {
     const e = f.eventoQt("a", "2026-10-01T10:00:00-03:00");
-    expect(ultimaAdministracaoQtEfetiva([{ ...e, revisao: "RAW" }]).data).toBeNull();
-    expect(ultimaAdministracaoQtEfetiva([{ ...e, tipo: "PRESCRICAO" }]).data).toBeNull();
-    expect(ultimaAdministracaoQtEfetiva([{ ...f.administracaoCompleta("a", 0), modalidade: "QT" }]).data).toBeNull();
+    expect(ultimaAdministracaoQtEfetiva([{ ...e, revisao: "RAW" }], "-03:00").data).toBeNull();
+    expect(ultimaAdministracaoQtEfetiva([{ ...e, tipo: "PRESCRICAO" }], "-03:00").data).toBeNull();
+    expect(ultimaAdministracaoQtEfetiva([{ ...f.administracaoCompleta("a", 0), modalidade: "QT" }], "-03:00").data).toBeNull();
   });
   it("ancora QT usa ordem dos instantes e exige escopo unico", () => {
     const a = f.eventoQt("a", "2026-10-01T23:00:00-03:00"), b = f.eventoQt("b", "2026-10-02T00:00:00Z");
-    expect(ultimaAdministracaoQtEfetiva([a, b]).adminId).toBe("a");
-    expect(ultimaAdministracaoQtEfetiva([a, { ...b, patientId: "outro" }]).data).toBeNull();
+    expect(ultimaAdministracaoQtEfetiva([a, b], "-03:00").adminId).toBe("a");
+    expect(ultimaAdministracaoQtEfetiva([a, { ...b, patientId: "outro" }], "-03:00").data).toBeNull();
   });
   it("ancora QT usa correcao confirmada e rejeita dado incompleto", () => {
     const a = f.eventoQt("a", "2026-10-01T10:00:00-03:00"), b = f.eventoQt("b", "2026-09-01T10:00:00-03:00");
-    expect(ultimaAdministracaoQtEfetiva([a, { ...b, supersedesEventId: a.eventId }]).adminId).toBe("b");
-    expect(ultimaAdministracaoQtEfetiva([a, { ...b, payload: { adminId: "b", modalidade: "QT" } }]).data).toBeNull();
+    expect(ultimaAdministracaoQtEfetiva([a, { ...b, supersedesEventId: a.eventId }], "-03:00").adminId).toBe("b");
+    expect(ultimaAdministracaoQtEfetiva([a, { ...b, payload: { adminId: "b", modalidade: "QT" } }], "-03:00").data).toBeNull();
   });
 });
