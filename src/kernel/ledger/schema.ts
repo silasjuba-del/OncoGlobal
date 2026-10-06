@@ -47,6 +47,12 @@ export function criarSchema(db: DatabaseSync): void {
       politicaVersao TEXT NOT NULL,
       em TEXT NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS action_idempotency (
+      chave TEXT PRIMARY KEY,
+      payloadHash TEXT NOT NULL,
+      resultado TEXT NOT NULL,
+      atualizadoEm TEXT NOT NULL
+    );
     CREATE TRIGGER IF NOT EXISTS clinical_event_no_update BEFORE UPDATE ON clinical_event
       BEGIN SELECT RAISE(ABORT, 'clinical_event append-only'); END;
     CREATE TRIGGER IF NOT EXISTS clinical_event_no_delete BEFORE DELETE ON clinical_event
