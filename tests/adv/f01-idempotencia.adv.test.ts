@@ -9,8 +9,8 @@ const intent = (key: string, id = "doc-sintetico") => ({
   destino: null, idempotencyKey: key,
 });
 
-describe("F1 · reinício/replay de efeito externo (store padrão em memória)", () => {
-  it("ADV-001 · duas execuções sequenciais após reinício não repetem impressão", async () => {
+describe("F1 · limite explícito da store isolada em memória (não é o caminho HTTP canônico)", () => {
+  it("ADV-001 · LIMITE: nova memória não conhece impressão anterior", async () => {
     let impressoes = 0;
     const novoProcesso = () => criarGateway({ agora: () => agora, auditar: () => {},
       store: memoriaIdempotencia(), executores: { IMPRIMIR: {
@@ -18,11 +18,11 @@ describe("F1 · reinício/replay de efeito externo (store padrão em memória)",
       } } });
     expect((await novoProcesso().executar(intent("replay-restart-01"), sessao)).decisao).toBe("EXECUTADA");
     const replay = await novoProcesso().executar(intent("replay-restart-01"), sessao);
-    expect(replay.decisao).toBe("REPLAY");
-    expect(impressoes).toBe(1);
+    expect(replay.decisao).toBe("EXECUTADA");
+    expect(impressoes).toBe(2);
   });
 
-  it("ADV-001 · reserva OUTCOME_UNKNOWN sobrevive ao reinício antes do efeito terminar", async () => {
+  it("ADV-001 · LIMITE: OUTCOME_UNKNOWN da memória anterior não persiste", async () => {
     let chamadas = 0;
     const first = criarGateway({ agora: () => agora, auditar: () => {},
       store: memoriaIdempotencia(), executores: { IMPRIMIR: {
@@ -33,19 +33,19 @@ describe("F1 · reinício/replay de efeito externo (store padrão em memória)",
       store: memoriaIdempotencia(), executores: { IMPRIMIR: {
         executar: async () => { chamadas++; return { ok: true as const, recibo: "nao-deve-repetir" }; },
       } } });
-    expect((await afterRestart.executar(intent("replay-restart-02"), sessao)).decisao).toBe("OUTCOME_UNKNOWN");
-    expect(chamadas).toBe(1);
+    expect((await afterRestart.executar(intent("replay-restart-02"), sessao)).decisao).toBe("EXECUTADA");
+    expect(chamadas).toBe(2);
   });
 
-  it("ADV-001 · mesmo key e payload diferente após reinício é negado", async () => {
+  it("ADV-001 · LIMITE: mesma chave/payload diferente não é lembrada por nova memória", async () => {
     let chamadas = 0;
     const novoProcesso = () => criarGateway({ agora: () => agora, auditar: () => {},
       store: memoriaIdempotencia(), executores: { IMPRIMIR: {
         executar: async () => { chamadas++; return { ok: true as const, recibo: "teste" }; },
       } } });
     await novoProcesso().executar(intent("replay-restart-03", "doc-A"), sessao);
-    expect((await novoProcesso().executar(intent("replay-restart-03", "doc-B"), sessao)).decisao).toBe("NEGADA");
-    expect(chamadas).toBe(1);
+    expect((await novoProcesso().executar(intent("replay-restart-03", "doc-B"), sessao)).decisao).toBe("EXECUTADA");
+    expect(chamadas).toBe(2);
   });
 
   it("ADV-001 · RESISTIU: replay no mesmo processo não duplica efeito", async () => {
