@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
-import { renderizarDocumento } from "../../src/modules/documentos/render.js";
+import { renderizarDocumento, type FatoConfirmado } from "../../src/modules/documentos/render.js";
 
 interface TemplateCorpus { id: string; versao: string; proibidoConter: string[] }
 const corpus = (nome: string): TemplateCorpus =>
@@ -21,7 +21,8 @@ describe("F7 · proibidoConter não é verificado no render (somente função; n
         campos: ["conteudo"], proibidoConter: spec.proibidoConter };
       const fato = { campo: "conteudo", valor: "texto sintético sem dado clínico",
         revisao: "CONFIRMADO" as const, origem };
-      const doc = renderizarDocumento({ template, fatos: [fato] });
+      // Cast só na fronteira do teste: não normaliza nem substitui `origem` em runtime.
+      const doc = renderizarDocumento({ template, fatos: [fato as unknown as FatoConfirmado] });
       expect(doc.campos.conteudo).toBe("");
       expect(doc.camposVazios).toContain("conteudo");
     });
