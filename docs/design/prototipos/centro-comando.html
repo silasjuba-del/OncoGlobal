@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="gelo">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OncoMed · Centro de comando (protótipo MU-08)</title>
+<link rel="stylesheet" href="../tokens-oncomed.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--om-fundo); color: var(--om-texto);
+    font-family: var(--om-fonte); font-size: var(--om-texto-sm); line-height: var(--om-linha-altura); }
+  .app { display: grid; grid-template-columns: 208px 1fr; min-height: 100vh; }
+  .lateral { background: var(--om-lateral-fundo); color: var(--om-lateral-texto);
+    display: flex; flex-direction: column; padding: var(--om-espaco-4) var(--om-espaco-3); gap: var(--om-espaco-1); }
+  .marca { display: flex; align-items: center; gap: var(--om-espaco-2);
+    font-size: var(--om-texto-lg); font-weight: 700; padding: var(--om-espaco-2); }
+  .marca .ponto { width: 22px; height: 22px; border-radius: 50%; background: var(--om-destaque);
+    display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
+  .nav-item { display: flex; align-items: center; gap: var(--om-espaco-3);
+    padding: var(--om-espaco-2) var(--om-espaco-3); border-radius: var(--om-raio-sm);
+    color: var(--om-lateral-suave); text-decoration: none; font-weight: 550; }
+  .nav-item.ativo { background: var(--om-lateral-ativo); color: #fff; }
+  .lateral-rodape { margin-top: auto; padding: var(--om-espaco-3) var(--om-espaco-2);
+    border-top: 1px solid var(--om-lateral-hover); }
+  .principal { display: flex; flex-direction: column; min-width: 0; }
+  .topo { display: flex; align-items: center; gap: var(--om-espaco-3);
+    padding: var(--om-espaco-3) var(--om-espaco-6); background: var(--om-superficie);
+    border-bottom: 1px solid var(--om-linha); position: sticky; top: 0; z-index: 20; }
+  .topo h1 { margin: 0; font-size: var(--om-texto-lg); }
+  .btn { font: inherit; font-weight: 600; border-radius: var(--om-raio-sm); cursor: pointer;
+    padding: var(--om-espaco-2) var(--om-espaco-4); border: 1px solid var(--om-destaque);
+    background: var(--om-superficie); color: var(--om-destaque-hover); }
+  .btn.primario { background: var(--om-destaque); color: #fff; }
+  .btn.perigo { background: var(--om-vermelho); border-color: var(--om-vermelho); color: #fff; }
+  .btn.peq { padding: 4px 12px; font-size: var(--om-texto-xs); }
+  .conteudo { padding: var(--om-espaco-6); display: flex; flex-direction: column; gap: var(--om-espaco-4); }
+  .cartao { background: var(--om-superficie); border: 1px solid var(--om-linha);
+    border-radius: var(--om-raio-md); padding: var(--om-espaco-4) var(--om-espaco-5); }
+  .cartao h2 { margin: 0 0 var(--om-espaco-3); font-size: var(--om-texto-sm);
+    text-transform: uppercase; letter-spacing: .04em; color: var(--om-texto-suave); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; border-radius: var(--om-raio-pilula);
+    padding: 2px 10px; font-size: var(--om-texto-xs); font-weight: 700; border: 1px solid transparent; white-space: nowrap; }
+  .chip.verde { background: var(--om-verde-fundo); color: var(--om-verde); }
+  .chip.vermelho { background: var(--om-vermelho-fundo); color: var(--om-vermelho); }
+  .chip.pendente { background: var(--om-pendente-fundo); color: var(--om-pendente); }
+  .chip.info { background: var(--om-info-fundo); color: var(--om-info-texto); }
+  .modulos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--om-espaco-3); }
+  .modulo { border: 1px solid var(--om-linha); border-radius: var(--om-raio-md);
+    padding: var(--om-espaco-4); background: var(--om-superficie); }
+  .modulo h3 { margin: 0 0 6px; font-size: var(--om-texto-md); }
+  .modulo.desligado { opacity: .85; background: var(--om-superficie-sutil); }
+  .nota { font-size: var(--om-texto-xs); color: var(--om-texto-suave); }
+  .mono { font-family: var(--om-fonte-mono); font-size: var(--om-texto-xs); }
+  table.densa { width: 100%; border-collapse: collapse; line-height: var(--om-linha-altura-densa); }
+  table.densa th, table.densa td { padding: 6px 8px; border-bottom: 1px solid var(--om-linha); text-align: left; }
+  table.densa thead th { font-size: var(--om-texto-xs); text-transform: uppercase; color: var(--om-texto-suave); }
+  .banner-off { background: var(--om-vermelho-fundo); border: 2px solid var(--om-vermelho);
+    border-radius: var(--om-raio-md); padding: var(--om-espaco-4) var(--om-espaco-5);
+    display: none; gap: var(--om-espaco-4); align-items: center; }
+  .banner-off.visivel { display: flex; }
+  .contagem { font-size: var(--om-texto-2xl); font-weight: 800; color: var(--om-vermelho); font-variant-numeric: tabular-nums; }
+  .overlay { position: fixed; inset: 0; background: rgb(15 34 46 / .5); display: none;
+    align-items: center; justify-content: center; z-index: 50; }
+  .overlay.aberto { display: flex; }
+  .modal { background: var(--om-superficie); border-radius: var(--om-raio-lg);
+    box-shadow: var(--om-sombra-lg); width: min(480px, 92vw); padding: var(--om-espaco-5); }
+  .modal h2 { margin: 0 0 var(--om-espaco-3); }
+  :focus-visible { outline: 2px solid var(--om-destaque-hover); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media (max-width: 1200px) { .modulos { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<a href="#conteudo" style="position:absolute;left:-9999px" onfocus="this.style.left='8px'" onblur="this.style.left='-9999px'">Pular para o conteúdo</a>
+<div class="app">
+  <nav class="lateral" aria-label="Navegação principal">
+    <div class="marca"><span class="ponto" aria-hidden="true">oM</span>oncoMed</div>
+    <a class="nav-item" href="consulta.html">Resumo</a>
+    <a class="nav-item" href="#">Prontuário</a>
+    <a class="nav-item" href="#">Exames</a>
+    <a class="nav-item" href="#">Prescrição</a>
+    <a class="nav-item" href="apac.html">APAC</a>
+    <a class="nav-item" href="#">Documentos</a>
+    <a class="nav-item" href="agenda.html">Agenda</a>
+    <a class="nav-item" href="salao.html">Enfermagem</a>
+    <a class="nav-item" href="#">Farmácia</a>
+    <a class="nav-item" href="#">Relatórios</a>
+    <a class="nav-item ativo" href="centro-comando.html" aria-current="page">Configurações</a>
+    <div class="lateral-rodape"><strong>Médico Teste</strong><br><span class="nota" style="color:var(--om-lateral-suave)">Médico responsável</span></div>
+  </nav>
+  <div class="principal">
+    <div class="topo"><h1>Centro de comando · OncoAssist</h1>
+      <span class="chip verde" id="chipGeral">IA operando</span>
+      <span style="flex:1"></span>
+      <button class="btn perigo" id="btnBreak">Desligar toda a IA por 30 min</button>
+    </div>
+    <main class="conteudo" id="conteudo">
+      <div class="banner-off" id="bannerOff" role="status">
+        <div class="contagem" id="contagem" aria-label="Tempo restante com a IA desligada">30:00</div>
+        <div style="flex:1"><strong>IA desligada — operação manual.</strong><br>
+        <span class="nota">A IA volta sozinha ao fim do prazo. Nenhuma trava de segurança é liberada: portas, assinaturas e envios continuam exigindo o médico.</span>
+        <br><button class="btn peq" id="btnVoltar">Ligar de volta agora</button>
+        <button class="btn peq" id="btnAvancar" title="Demonstração">avançar (demonstração)</button></div>
+      </div>
+      <div class="cartao">
+        <h2>Módulos</h2>
+        <div class="modulos" id="modulos"></div>
+        <p class="nota">Estados: <span class="chip verde">Operando</span> <span class="chip pendente">Desligado</span> <span class="chip info">Especificado (não habilitado)</span> · Log abaixo é append-only e local.</p>
+      </div>
+      <div class="cartao">
+        <h2>Registro de alterações (quem, quando e por quê)</h2>
+        <table class="densa"><thead><tr><th>Quando</th><th>Quem</th><th>Módulo</th><th>Ação</th><th>Motivo</th></tr></thead>
+        <tbody id="logCorpo">
+          <tr><td class="mono">06/10 07:58</td><td>Médico Teste</td><td>Canal do paciente</td><td>Desativado</td><td>Revisão de consentimento</td></tr>
+          <tr><td class="mono">05/10 18:02</td><td>Médico Teste</td><td>Farmacêutico</td><td>Prompt v1.1.0 → v1.2.0</td><td>Ajuste de texto</td></tr>
+        </tbody></table>
+      </div>
+    </main>
+  </div>
+</div>
+<div class="overlay" id="overlayBreak" role="presentation">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="breakTitulo">
+    <h2 id="breakTitulo">Desligar toda a IA agora e operar manual por 30 min?</h2>
+    <p><strong>Isso NÃO libera nenhuma trava:</strong> portas, assinaturas e envios continuam exigindo o médico. A IA volta sozinha ao fim do prazo, com registro.</p>
+    <p style="display:flex;gap:8px"><button class="btn perigo" id="btnConfirma">Desligar agora</button><button class="btn" id="btnCancela">Cancelar</button></p>
+  </div>
+</div>
+<script>
+(function () {
+  "use strict";
+  var MODULOS = [
+    { id: "farm", nome: "Farmacêutico", estado: "OPERATING", skills: 6, prompt: "v1.2.0 · a3f9" },
+    { id: "enf", nome: "Enfermeiro", estado: "OPERATING", skills: 5, prompt: "v1.0.4 · 77c1" },
+    { id: "adm", nome: "Gestor administrativo", estado: "OPERATING", skills: 4, prompt: "v0.9.2 · e02b" },
+    { id: "canal", nome: "Canal do paciente", estado: "DISABLED", skills: 7, prompt: "v1.3.1 · 9d44" },
+    { id: "ext", nome: "Extrator de laudos", estado: "OPERATING", skills: 3, prompt: "v2.0.0 · 51aa" },
+    { id: "cond", nome: "Rascunho de conduta", estado: "SPECIFIED", skills: 2, prompt: "v0.1.0 · 0000" }
+  ];
+  var NOMES = { OPERATING: ["Operando", "verde"], DISABLED: ["Desligado", "pendente"], SPECIFIED: ["Especificado", "info"] };
+  var MOTIVOS = ["Revisão de consentimento", "Suspeita de erro", "Manutenção programada"];
+  var grade = document.getElementById("modulos"), log = document.getElementById("logCorpo");
+  function agora() {
+    var d = new Date(), p = function (n) { return (n < 10 ? "0" : "") + n; };
+    return p(d.getDate()) + "/" + p(d.getMonth() + 1) + " " + p(d.getHours()) + ":" + p(d.getMinutes());
+  }
+  function registrar(modulo, acao, motivo) {
+    var tr = document.createElement("tr");
+    [["mono", agora()], ["", "Médico Teste"], ["", modulo], ["", acao], ["", motivo]].forEach(function (c) {
+      var td = document.createElement("td"); if (c[0]) td.className = c[0];
+      td.textContent = c[1]; tr.appendChild(td);
+    });
+    log.insertBefore(tr, log.firstChild);
+  }
+  function desenhar() {
+    grade.innerHTML = "";
+    MODULOS.forEach(function (m) {
+      var card = document.createElement("article");
+      card.className = "modulo" + (m.estado === "DISABLED" ? " desligado" : "");
+      var chip = NOMES[m.estado];
+      card.innerHTML = "<h3>" + m.nome + '</h3><p><span class="chip ' + chip[1] + '">' + chip[0] +
+        '</span> <span class="nota">' + m.skills + ' skills · prompt <span class="mono">' + m.prompt + "</span></span></p>";
+      var btn = document.createElement("button");
+      btn.className = "btn peq";
+      btn.textContent = m.estado === "DISABLED" ? "Ativar" : "Desativar";
+      if (m.estado === "SPECIFIED") { btn.disabled = true; btn.title = "Capacidade não habilitada"; }
+      btn.addEventListener("click", function () {
+        if (m.estado === "DISABLED") {
+          m.estado = "OPERATING"; registrar(m.nome, "Ativado", "—"); desenhar();
+        } else {
+          var box = document.createElement("p");
+          MOTIVOS.forEach(function (mot) {
+            var b = document.createElement("button");
+            b.className = "btn peq"; b.style.marginRight = "6px"; b.textContent = mot;
+            b.addEventListener("click", function () {
+              m.estado = "DISABLED"; registrar(m.nome, "Desativado", mot); desenhar();
+            });
+            box.appendChild(b);
+          });
+          card.appendChild(box); btn.disabled = true;
+        }
+      });
+      card.appendChild(btn);
+      grade.appendChild(card);
+    });
+  }
+  desenhar();
+  // Break-glass com contagem regressiva real.
+  var overlay = document.getElementById("overlayBreak"), banner = document.getElementById("bannerOff"),
+      contagem = document.getElementById("contagem"), chipGeral = document.getElementById("chipGeral"),
+      resto = 0, timer = null;
+  function fmt(s) {
+    var m = Math.floor(s / 60), r = s % 60;
+    return (m < 10 ? "0" : "") + m + ":" + (r < 10 ? "0" : "") + r;
+  }
+  function parar(motivo) {
+    clearInterval(timer); timer = null;
+    banner.classList.remove("visivel");
+    chipGeral.className = "chip verde"; chipGeral.textContent = "IA operando";
+    MODULOS.forEach(function (m) { if (m.estado === "DISABLED" && m._break) { m.estado = m._break; delete m._break; } });
+    desenhar(); registrar("Toda a IA", "Ligada de volta", motivo);
+  }
+  document.getElementById("btnBreak").addEventListener("click", function () {
+    overlay.classList.add("aberto"); document.getElementById("btnCancela").focus();
+  });
+  document.getElementById("btnCancela").addEventListener("click", function () { overlay.classList.remove("aberto"); });
+  overlay.addEventListener("click", function (e) { if (e.target === overlay) overlay.classList.remove("aberto"); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") overlay.classList.remove("aberto"); });
+  document.getElementById("btnConfirma").addEventListener("click", function () {
+    overlay.classList.remove("aberto");
+    resto = 30 * 60; contagem.textContent = fmt(resto);
+    banner.classList.add("visivel");
+    chipGeral.className = "chip vermelho"; chipGeral.textContent = "IA desligada — manual";
+    MODULOS.forEach(function (m) { if (m.estado === "OPERATING") { m._break = m.estado; m.estado = "DISABLED"; } });
+    desenhar(); registrar("Toda a IA", "Desligada por 30 min (break-glass)", "Decisão do médico");
+    clearInterval(timer);
+    timer = setInterval(function () {
+      resto -= 1;
+      if (resto <= 0) { parar("Prazo cumprido — volta sozinha"); return; }
+      contagem.textContent = fmt(resto);
+    }, 1000);
+  });
+  document.getElementById("btnVoltar").addEventListener("click", function () { if (timer) parar("Ligada pelo médico antes do prazo"); });
+  document.getElementById("btnAvancar").addEventListener("click", function () { if (timer) { resto = 5; contagem.textContent = fmt(resto); } });
+})();
+</script>
+</body>
+</html>
