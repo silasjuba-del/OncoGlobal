@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="gelo">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OncoMed · Salão (protótipo MU-06)</title>
+<link rel="stylesheet" href="../tokens-oncomed.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--om-fundo); color: var(--om-texto);
+    font-family: var(--om-fonte); font-size: var(--om-texto-sm); line-height: var(--om-linha-altura); }
+  .app { display: grid; grid-template-columns: 208px 1fr; min-height: 100vh; }
+  .lateral { background: var(--om-lateral-fundo); color: var(--om-lateral-texto);
+    display: flex; flex-direction: column; padding: var(--om-espaco-4) var(--om-espaco-3); gap: var(--om-espaco-1); }
+  .marca { display: flex; align-items: center; gap: var(--om-espaco-2);
+    font-size: var(--om-texto-lg); font-weight: 700; padding: var(--om-espaco-2); }
+  .marca .ponto { width: 22px; height: 22px; border-radius: 50%; background: var(--om-destaque);
+    display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
+  .nav-item { display: flex; align-items: center; gap: var(--om-espaco-3);
+    padding: var(--om-espaco-2) var(--om-espaco-3); border-radius: var(--om-raio-sm);
+    color: var(--om-lateral-suave); text-decoration: none; font-weight: 550; }
+  .nav-item.ativo { background: var(--om-lateral-ativo); color: #fff; }
+  .lateral-rodape { margin-top: auto; padding: var(--om-espaco-3) var(--om-espaco-2);
+    border-top: 1px solid var(--om-lateral-hover); }
+  .principal { display: flex; flex-direction: column; min-width: 0; }
+  .topo { display: flex; align-items: center; gap: var(--om-espaco-3);
+    padding: var(--om-espaco-3) var(--om-espaco-6); background: var(--om-superficie);
+    border-bottom: 1px solid var(--om-linha); position: sticky; top: 0; z-index: 20; }
+  .topo h1 { margin: 0; font-size: var(--om-texto-lg); }
+  .btn { font: inherit; font-weight: 600; border-radius: var(--om-raio-sm); cursor: pointer;
+    padding: var(--om-espaco-2) var(--om-espaco-4); border: 1px solid var(--om-destaque);
+    background: var(--om-superficie); color: var(--om-destaque-hover); }
+  .btn.primario { background: var(--om-destaque); color: #fff; }
+  .conteudo { padding: var(--om-espaco-6); display: flex; flex-direction: column; gap: var(--om-espaco-4); }
+  .banner-e1 { background: var(--om-vermelho-fundo); border: 2px solid var(--om-vermelho);
+    border-radius: var(--om-raio-md); padding: var(--om-espaco-4) var(--om-espaco-5);
+    display: flex; gap: var(--om-espaco-4); align-items: center; }
+  .banner-e1 strong { color: var(--om-vermelho); }
+  .quadro { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--om-espaco-4); align-items: start; }
+  .coluna { background: var(--om-superficie-sutil); border: 1px solid var(--om-linha);
+    border-radius: var(--om-raio-lg); padding: var(--om-espaco-4); display: flex;
+    flex-direction: column; gap: var(--om-espaco-3); }
+  .coluna > h2 { margin: 0; font-size: var(--om-texto-sm); text-transform: uppercase;
+    letter-spacing: .05em; display: flex; justify-content: space-between; align-items: center; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; border-radius: var(--om-raio-pilula);
+    padding: 2px 10px; font-size: var(--om-texto-xs); font-weight: 700; border: 1px solid transparent; }
+  .chip.verde { background: var(--om-verde-fundo); color: var(--om-verde); }
+  .chip.vermelho { background: var(--om-vermelho-fundo); color: var(--om-vermelho); }
+  .chip.pendente { background: var(--om-pendente-fundo); color: var(--om-pendente); }
+  .chip.info { background: var(--om-info-fundo); color: var(--om-info-texto); }
+  .card-pac { background: var(--om-superficie); border: 1px solid var(--om-linha);
+    border-radius: var(--om-raio-md); padding: var(--om-espaco-3) var(--om-espaco-4); }
+  .card-pac .top { display: flex; gap: var(--om-espaco-2); align-items: center; }
+  .avatar { width: 34px; height: 34px; border-radius: var(--om-raio-pilula); flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--om-destaque); color: #fff; font-weight: 700; font-size: 13px; }
+  .ordem { font-size: var(--om-texto-2xl); font-weight: 800; color: var(--om-texto-suave); min-width: 34px; text-align: center; }
+  details.ac { margin-top: var(--om-espaco-2); }
+  details.ac summary { cursor: pointer; font-weight: 650; color: var(--om-destaque-hover);
+    font-size: var(--om-texto-sm); list-style: none; }
+  details.ac summary::-webkit-details-marker { display: none; }
+  .linha { display: flex; justify-content: space-between; gap: var(--om-espaco-2);
+    padding: 3px 0; border-bottom: 1px dotted var(--om-linha); font-size: var(--om-texto-sm); }
+  .barra { height: 8px; border-radius: 4px; background: var(--om-superficie-sutil);
+    border: 1px solid var(--om-linha); margin-top: 6px; }
+  .barra > span { display: block; height: 100%; border-radius: 4px; background: var(--om-destaque); }
+  .nota { font-size: var(--om-texto-xs); color: var(--om-texto-suave); }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
+    background: var(--om-lateral-fundo); color: #fff; border-radius: var(--om-raio-sm);
+    padding: var(--om-espaco-3) var(--om-espaco-5); font-weight: 600; opacity: 0; z-index: 60;
+    transition: opacity var(--om-transicao-media), transform var(--om-transicao-media);
+    pointer-events: none; }
+  .toast.visivel { opacity: 1; transform: translateX(-50%); }
+  :focus-visible { outline: 2px solid var(--om-destaque-hover); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media (max-width: 1200px) { .quadro { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<a href="#conteudo" style="position:absolute;left:-9999px" onfocus="this.style.left='8px'" onblur="this.style.left='-9999px'">Pular para o conteúdo</a>
+<div class="app">
+  <nav class="lateral" aria-label="Navegação principal">
+    <div class="marca"><span class="ponto" aria-hidden="true">oM</span>oncoMed</div>
+    <a class="nav-item" href="consulta.html">Resumo</a>
+    <a class="nav-item" href="#">Prontuário</a>
+    <a class="nav-item" href="#">Exames</a>
+    <a class="nav-item" href="#">Prescrição</a>
+    <a class="nav-item" href="apac.html">APAC</a>
+    <a class="nav-item" href="#">Documentos</a>
+    <a class="nav-item" href="agenda.html">Agenda</a>
+    <a class="nav-item ativo" href="salao.html" aria-current="page">Enfermagem</a>
+    <a class="nav-item" href="#">Farmácia</a>
+    <a class="nav-item" href="#">Relatórios</a>
+    <a class="nav-item" href="centro-comando.html">Configurações</a>
+    <div class="lateral-rodape"><strong>Enfermeira Teste</strong><br><span class="nota" style="color:var(--om-lateral-suave)">Salão · turno manhã</span></div>
+  </nav>
+  <div class="principal">
+    <div class="topo"><h1>Salão · hoje</h1>
+      <span class="nota">FRENTE exige zero cortes e zero pendências · E1 não reordena a fila</span>
+      <span style="flex:1"></span><button class="btn primario" data-demo>+ Nova triagem</button>
+    </div>
+    <main class="conteudo" id="conteudo">
+      <div class="banner-e1" role="alert">
+        <div style="flex:1"><strong>E1 ativo — Paciente Teste 12 · dor torácica.</strong>
+        Escalonamento separado em curso. A ordem da fila não muda.</div>
+        <button class="btn" data-demo>Ver escalonamento</button>
+      </div>
+      <div class="quadro">
+        <section class="coluna" aria-label="Frente"><h2>Frente <span class="chip verde">2</span></h2>
+          <article class="card-pac"><div class="top"><span class="avatar" aria-hidden="true">P8</span>
+            <div><strong>Paciente Teste 08</strong><br><span class="nota">Retorno QT · ciclo 3</span></div></div>
+            <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip verde">Sem corte</span><span class="chip verde">Sem pendência</span></div>
+            <details class="ac"><summary>Detalhe da triagem ›</summary>
+              <div class="linha"><span>PA</span><strong>Verde</strong></div>
+              <div class="linha"><span>Hemograma</span><strong>Válido (coleta recente)</strong></div>
+              <div class="linha"><span>Peso</span><strong>Verde</strong></div>
+              <div class="linha"><span>Alergia</span><strong>Revisada · nenhuma</strong></div>
+            </details></article>
+          <article class="card-pac"><div class="top"><span class="avatar" aria-hidden="true">P9</span>
+            <div><strong>Paciente Teste 09</strong><br><span class="nota">Retorno QT · ciclo 2</span></div></div>
+            <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip verde">Sem corte</span><span class="chip verde">Sem pendência</span></div>
+            <details class="ac"><summary>Detalhe da triagem ›</summary>
+              <div class="linha"><span>PA</span><strong>Verde</strong></div>
+              <div class="linha"><span>Hemograma</span><strong>Válido (coleta recente)</strong></div>
+              <div class="linha"><span>Peso</span><strong>Verde</strong></div>
+              <div class="linha"><span>Alergia</span><strong>Revisada · nenhuma</strong></div>
+            </details></article>
+        </section>
+        <section class="coluna" aria-label="Fila do médico"><h2>Fila do médico <span class="chip pendente">5</span></h2>
+          <article class="card-pac"><div class="top"><span class="ordem" aria-hidden="true">1</span><span class="avatar" aria-hidden="true">10</span>
+            <div><strong>Paciente Teste 10</strong><br><span class="nota">ECOG 4 · passa primeiro</span></div></div>
+            <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip pendente">ECOG 4</span><span class="chip pendente">Hemograma pendente</span></div>
+            <p><button class="btn" data-demo style="padding:4px 12px">Chamar no chat</button></p></article>
+          <article class="card-pac"><div class="top"><span class="ordem" aria-hidden="true">2</span><span class="avatar" aria-hidden="true">11</span>
+            <div><strong>Paciente Teste 11</strong><br><span class="nota">ECOG 3</span></div></div>
+            <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip pendente">ECOG 3</span><span class="chip pendente">Peso a confirmar</span></div>
+            <p><button class="btn" data-demo style="padding:4px 12px">Chamar no chat</button></p></article>
+          <article class="card-pac"><div class="top"><span class="ordem" aria-hidden="true">3</span><span class="avatar" aria-hidden="true">12</span>
+            <div><strong>Paciente Teste 12</strong><br><span class="nota">Cama · mantém a posição</span></div></div>
+            <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip vermelho">E1 · escalonado</span><span class="chip info">Cama</span></div>
+            <p class="nota">E1 é badge: não reordena ninguém.</p></article>
+          <article class="card-pac"><div class="top"><span class="ordem" aria-hidden="true">4</span><span class="avatar" aria-hidden="true">13</span>
+            <div><strong>Paciente Teste 13</strong><br><span class="nota">Cadeira</span></div></div>
+            <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip info">Cadeira</span><span class="chip pendente">Alergia não revisada</span></div>
+            <p><button class="btn" data-demo style="padding:4px 12px">Chamar no chat</button></p></article>
+          <article class="card-pac"><div class="top"><span class="ordem" aria-hidden="true">5</span><span class="avatar" aria-hidden="true">14</span>
+            <div><strong>Paciente Teste 14</strong><br><span class="nota">82 anos</span></div></div>
+            <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><span class="chip info">&gt;80</span><span class="chip pendente">Sem hemograma válido</span></div>
+            <p><button class="btn" data-demo style="padding:4px 12px">Chamar no chat</button></p></article>
+        </section>
+        <section class="coluna" aria-label="Salão"><h2>Salão <span class="chip info">2 em atendimento</span></h2>
+          <article class="card-pac"><div class="top"><span class="avatar" aria-hidden="true">15</span>
+            <div><strong>Paciente Teste 15</strong><br><span class="nota">Poltrona 3 · infusão</span></div></div>
+            <div class="barra" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso da infusão"><span style="width:40%"></span></div>
+            <div style="margin-top:8px;display:flex;gap:6px"><span class="chip verde">Sem intercorrência</span></div></article>
+          <article class="card-pac"><div class="top"><span class="avatar" aria-hidden="true">16</span>
+            <div><strong>Paciente Teste 16</strong><br><span class="nota">Leito 1 · pré-medicação</span></div></div>
+            <div class="barra" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso da pré-medicação"><span style="width:70%"></span></div>
+            <div style="margin-top:8px;display:flex;gap:6px"><span class="chip verde">Sem intercorrência</span></div></article>
+          <article class="card-pac"><strong>Chat do setor</strong>
+            <p class="nota">Triagem comunica via chat. Todos os setores têm chat; alertas e correções vivem no chat, nunca no prontuário.</p>
+            <button class="btn" data-demo style="width:100%">Abrir chat do salão</button></article>
+        </section>
+      </div>
+      <p class="nota">Ordem da fila: ECOG 4 → ECOG 3 → cama → cadeira → &gt;80 · empate: ECOG maior, depois chegada. Cama com pendência vai para a fila do médico.</p>
+    </main>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+(function () {
+  "use strict";
+  var toast = document.getElementById("toast"), t = null;
+  document.querySelectorAll("[data-demo]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      toast.textContent = "Demonstração — sem efeito.";
+      toast.classList.add("visivel");
+      clearTimeout(t); t = setTimeout(function () { toast.classList.remove("visivel"); }, 2800);
+    });
+  });
+})();
+</script>
+</body>
+</html>

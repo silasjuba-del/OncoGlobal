@@ -11,7 +11,8 @@
 | MU-02 · Semântica de estado | FEITA | b5395c9 | tsc 0 · fronteiras 81 arq · corpus 20 arq · regressão 9/9 | – |
 | MU-03 · Microcopy pt-BR | FEITA | 3886138 | tsc 0 · fronteiras 82 arq · corpus 20 arq · ui-copy 5/5 + regressão 9/9 | – |
 | MU-04 · Ícones SVG | FEITA | b87c7b7 | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 | – |
-| MU-05 · Protótipo: consulta pronta | FEITA | (neste commit) | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado · URLs sem dado | – |
+| MU-05 · Protótipo: consulta pronta | FEITA | efc6c27 | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado · URLs sem dado | – |
+| MU-06 · Protótipo: salão e agenda | FEITA | (neste commit) | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado | – |
 | MU-04 · Ícones SVG | A_FAZER | – | – | – |
 | MU-05 · Protótipo: consulta pronta | A_FAZER | – | – | – |
 | MU-06 · Protótipo: salão e agenda | A_FAZER | – | – | – |
@@ -49,6 +50,12 @@
   modal Resumo 2, gaveta da biópsia, carrossel ilustrativo, labs com coleta,
   alertas (1 conflito + 3 pendentes), diretrizes sem dado na URL, canal
   WhatsApp, OncoAssist desligado + avatar, modo Flash sem rolagem.
+- `docs/design/prototipos/salao.html` — banner E1 (`role=alert`), quadro
+  FRENTE/FILA DO MÉDICO/SALÃO (ordem ECOG4→ECOG3→cama→cadeira→>80, E1 como
+  badge sem reordenar), triagem em accordion, progresso de infusão, chat.
+- `docs/design/prototipos/agenda.html` — dia com semáforo + pendências por
+  consulta, filtros por tipo, agrupamento manhã/tarde, modal remarcar,
+  resumo de pendências do dia.
 
 ## [VERIFICAR]
 
