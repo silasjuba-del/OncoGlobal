@@ -80,7 +80,9 @@ export function projetarSnapshot(
         eventIds: [...anterior.eventIds, e.eventId], candidatos };
     }
   }
-  const eventIds = relevantes.map((e) => e.eventId);
+  // IDs não carregam precedência clínica: só a relação supersedes decide
+  // substituição. Ordenar a representação não elege candidato nem oculta conflito.
+  const eventIds = relevantes.map((e) => e.eventId).sort();
   const rulesetRefs = [...refs.values()].sort((a, b) =>
     `${a.id}:${a.version}:${a.hash}`.localeCompare(`${b.id}:${b.version}:${b.hash}`));
   for (const p of propostas) {
@@ -89,12 +91,25 @@ export function projetarSnapshot(
     if (existente) existente.proposta = { valor: p.valor, sourceId: p.sourceId };
     else campos[p.campo] = { valor: null, eventIds: [], estado: "PENDENTE", proposta: { valor: p.valor, sourceId: p.sourceId } };
   }
+  const camposOrdenados: Record<string, ValorProjetado> = Object.create(null);
+  for (const campo of Object.keys(campos).sort()) {
+    const entrada = campos[campo]!;
+    camposOrdenados[campo] = {
+      ...entrada,
+      eventIds: [...entrada.eventIds].sort(),
+      ...(entrada.candidatos
+        ? { candidatos: [...entrada.candidatos].sort((a, b) =>
+          a.eventId < b.eventId ? -1 : a.eventId > b.eventId ? 1 : 0) }
+        : {}),
+    };
+  }
   const kind = propostas.length ? "CURRENT" : "CONFIRMED";
   const contentHash = createHash("sha256")
-    .update(JSON.stringify({ kind, patientId, tumorLotId, encounterId, projectionVersion, rulesetRefs, campos, eventIds }))
+    .update(JSON.stringify({ kind, patientId, tumorLotId, encounterId, projectionVersion, rulesetRefs,
+      campos: camposOrdenados, eventIds }))
     .digest("hex");
   return { kind, patientId, tumorLotId, encounterId, projectionVersion,
-    rulesetRefs, campos, eventIds, contentHash };
+    rulesetRefs, campos: camposOrdenados, eventIds, contentHash };
 }
 
 export function montarSnapshot(
