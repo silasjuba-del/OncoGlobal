@@ -2,10 +2,10 @@
 
 > Se a sessão cair: leia este arquivo, depois `docs/w5/ACHADOS.md`, `docs/w5/CLAIMS.md` e `docs/w5/AMB.md`. Continue do primeiro passo não FEITO da tabela "Fases". Nunca refaça o que está FEITO.
 
-- **Fase atual:** retomada Codex de P1/P5/P6; dez correções integradas, quatro causas remanescentes documentadas. W5 ainda sem declaração de pronto; limpeza RED, terceira rodada e leitura semântica da matriz em curso.
-- **Rodada:** 2 concluída quanto às dez correções; 3 em preparação pelo RED (ataques novos, sem reabrir decisões).
-- **Agente ativo no Vitest:** nenhum (lock livre; ultimo: RED as 23:10:43, exit 1)
-- **Base:** `f0/w5-integrado` @ `700f3ee` (worktree `C:\Users\silas\Projects\OncoGlobal-wt\w5-orq`); WIP KERNEL `tests/server/adv006-saida.evidence.ts` preservado fora da suíte regular; sem push/deploy.
+- **Fase atual:** P1 leitura semântica concluída; P5/P6 em fechamento. ADV-017/018/019 integrados e verdes; ADV-020 fuso em correção REGRAS; complemento F5 em isolamento pelo RED. W5 ainda sem declaração de pronto.
+- **Rodada:** 3 de 3; quatro causas adicionais ADV-017…020, sem reabrir decisões.
+- **Agente ativo no Vitest:** nenhum (lock livre; ultimo: ORQ as 23:47:50, exit 0)
+- **Base:** `f0/w5-integrado` @ `a99d8b4` (worktree `C:\Users\silas\Projects\OncoGlobal-wt\w5-orq`); WIP KERNEL `tests/server/adv006-saida.evidence.ts` preservado fora da suíte regular; sem push/deploy.
 - **Fuso do serviço:** −03:00 (D-W5-01) · aviso APAC adiantado ≤ 1 dia aceitável, atrasado não (D-W5-02)
 
 ## Fases
@@ -13,7 +13,7 @@
 |---|---|---|
 | P0 linha de base | FEITO 19:08 | `npm run verify` exit 0 · 53 arquivos / 345 testes · fronteiras ok (79) · corpus ok (20) · log `_w5-locks\logs\20261005-190530-ORQ.log` |
 | P0 worktrees + `npm ci` (um por vez) | FEITO 19:12 | 5 worktrees de `6b96702`; `npm ci` serial, 12–13 s cada, exit 0 |
-| P1 matriz de rastreabilidade | PARCIAL | `docs/w5/MATRIZ.md`: 195 IDs; contagem textual provisória 93 PARCIAL/102 A_AUDITAR após RED-R2; 9/9 mutações unitárias detectadas, mapeamento semântico ainda pendente |
+| P1 matriz de rastreabilidade | FEITO leitura / PARCIAL cobertura | `docs/w5/MATRIZ.md`: 195 IDs; 65 COBERTO/111 PARCIAL/13 SEM_TESTE/6 FORA_DO_F0; zero A_AUDITAR textual residual; mapas de cinco trilhas |
 | P2 ataque (rodadas 1/2) | PARCIAL | RED-R1 31 testes 22 FAIL/9 PASS; RED-R2 F5 9/9 mutações detectadas no unitário, F9/F11/F7/F8 novos ataques e F6 6 PASS; integrado rodada 2 50 testes 31 FAIL/19 PASS antes das últimas correções |
 | P3 triagem (rodadas 1/2) | FEITO para 16 causas atuais | `docs/w5/ACHADOS.md`: 0 ABERTO, 10 CORRIGIDO, 2 BLOQUEADO, 2 AMB, 2 RESISTIU; CP-001/002 e AMB-001/002 |
 | P4 correção (rodadas 1/2) | FEITO para achados autorizados | 10 achados corrigidos/reatacados, inclusive ADV-011/012; ADV-006/013 bloqueados por contrato/escopo |

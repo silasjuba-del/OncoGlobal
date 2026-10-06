@@ -105,3 +105,33 @@ Regra: antes de editar, RESERVA; ao commitar, LIBERA com o hash. Arquivo de outr
 | 2026-10-05 22:59 | LIBERA | `tests/server/adv012-hash.test.ts` | KERNEL | ADV-012 | b3d544b0780a286b7f6a33e15c6ecee5aa64fd2d |
 | 2026-10-05 23:09 | RESERVA | `tests/kernel/adv-resistiu-idempotencia.test.ts` | KERNEL | COB-G20 | |
 | 2026-10-05 23:09 | RESERVA | `tests/server/adv001-http-incerto.test.ts` | KERNEL | COB-G20 | |
+| 2026-10-05 23:11 | RESERVA | `src/modules/consulta/preConsulta.ts` | DOMINIO | ADV-017 | |
+| 2026-10-05 23:11 | RESERVA | `tests/modules/adv017-preconsulta.test.ts` | DOMINIO | ADV-017 | |
+| 2026-10-05 23:11 | RESERVA | `tests/modules/preConsulta.test.ts` | DOMINIO | ADV-017 | |
+| 2026-10-05 23:14 | LIBERA | `tests/kernel/adv-resistiu-idempotencia.test.ts` | KERNEL | COB-G20 | 4f2fc0bfa3c841d1bce93666d576d0e12319b795 |
+| 2026-10-05 23:14 | LIBERA | `tests/server/adv001-http-incerto.test.ts` | KERNEL | COB-G20 | 4f2fc0bfa3c841d1bce93666d576d0e12319b795 |
+| 2026-10-05 23:14 | RESERVA | `src/kernel/projections/snapshot.ts` | KERNEL | ADV-018 | |
+| 2026-10-05 23:14 | RESERVA | `tests/projections/adv018-historico.test.ts` | KERNEL | ADV-018 | |
+| 2026-10-05 23:14 | RESERVA | `tests/projections/adv019-tempo.test.ts` | KERNEL | ADV-019 | |
+| 2026-10-05 23:17 | LIBERA | `src/modules/consulta/preConsulta.ts` | DOMINIO | ADV-017 | 909d02c |
+| 2026-10-05 23:17 | LIBERA | `tests/modules/adv017-preconsulta.test.ts` | DOMINIO | ADV-017 | 909d02c |
+| 2026-10-05 23:17 | LIBERA | `tests/modules/preConsulta.test.ts` | DOMINIO | ADV-017 | 909d02c |
+| 2026-10-05 23:18 | LIBERA | `src/kernel/projections/snapshot.ts` | KERNEL | ADV-018 | 4a3a08236fc97c1e2799cc1f0341aceb52c5b95b |
+| 2026-10-05 23:18 | LIBERA | `tests/projections/adv018-historico.test.ts` | KERNEL | ADV-018 | 4a3a08236fc97c1e2799cc1f0341aceb52c5b95b |
+| 2026-10-05 23:18 | RESERVA | `src/kernel/projections/snapshot.ts` | KERNEL | ADV-019 | |
+| 2026-10-05 23:18 | LIBERA | `src/kernel/projections/snapshot.ts` | KERNEL | ADV-019 | 30d42402885a93852808ed3df2eb1aa9bcadb6b4 |
+| 2026-10-05 23:18 | LIBERA | `tests/projections/adv019-tempo.test.ts` | KERNEL | ADV-019 | 30d42402885a93852808ed3df2eb1aa9bcadb6b4 |
+| 2026-10-05 23:19 | RESERVA | `tests/e2e/pipeline.test.tsx` | E2E-UI | COB-F4-HTTP | |
+| 2026-10-05 23:22 | LIBERA | `tests/e2e/pipeline.test.tsx` | E2E-UI | COB-F4-HTTP | e5977aaa4b29c7e65f676829809340fa7061df7d |
+| 2026-10-05 23:24 | RESERVA | `src/rules/intervaloQt.ts` | REGRAS | ADV-020 | |
+| 2026-10-05 23:24 | RESERVA | `tests/rules/adv020-fuso-qt.test.ts` | REGRAS | ADV-020 | |
+| 2026-10-05 23:24 | RESERVA | `tests/rules/adv020-data-civil.test.ts` | REGRAS | ADV-020 | |
+| 2026-10-05 23:24 | RESERVA | `tests/w3/w3.test.ts` | REGRAS | ADV-020 | |
+| 2026-10-05 23:24 | RESERVA | `tests/w3/bordas.test.ts` | REGRAS | ADV-020 | |
+| 2026-10-05 23:24 | RESERVA | `tests/w3/integracao.test.ts` | REGRAS | ADV-020 | |
+| 2026-10-05 23:31 | LIBERA | `src/rules/intervaloQt.ts` | REGRAS | ADV-020 | d357b96c4e8519b8264842478fd3f46465d0fb4e |
+| 2026-10-05 23:31 | LIBERA | `tests/rules/adv020-fuso-qt.test.ts` | REGRAS | ADV-020 | d357b96c4e8519b8264842478fd3f46465d0fb4e |
+| 2026-10-05 23:31 | LIBERA | `tests/rules/adv020-data-civil.test.ts` | REGRAS | ADV-020 | d357b96c4e8519b8264842478fd3f46465d0fb4e |
+| 2026-10-05 23:31 | LIBERA | `tests/w3/w3.test.ts` | REGRAS | ADV-020 | d357b96c4e8519b8264842478fd3f46465d0fb4e |
+| 2026-10-05 23:31 | LIBERA | `tests/w3/bordas.test.ts` | REGRAS | ADV-020 | d357b96c4e8519b8264842478fd3f46465d0fb4e |
+| 2026-10-05 23:31 | LIBERA | `tests/w3/integracao.test.ts` | REGRAS | ADV-020 | d357b96c4e8519b8264842478fd3f46465d0fb4e |
