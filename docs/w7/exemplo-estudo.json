@@ -1,0 +1,11 @@
+{
+  "title": "ESTUDO FICTÍCIO — demonstração local",
+  "description": "Documento sintético, sem registro real e sem recomendação de tratamento.",
+  "arms": [
+    { "id": "braco-teste-a", "name": "Braço A fictício", "description": "Estratégia de teste A" },
+    { "id": "braco-teste-b", "name": "Braço B fictício", "description": "Estratégia de teste B" }
+  ],
+  "inclusionCriteria": ["Marcador demonstrativo informado como presente."],
+  "exclusionCriteria": ["Impedimento demonstrativo informado como presente."],
+  "outcomes": ["Desfecho fictício para demonstrar seguimento longitudinal."]
+}

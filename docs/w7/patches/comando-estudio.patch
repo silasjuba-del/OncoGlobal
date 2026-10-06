@@ -1,0 +1,13 @@
+diff --git a/package.json b/package.json
+--- a/package.json
++++ b/package.json
+@@ -13,7 +13,8 @@
+     "check:corpus": "node scripts/validate-corpus.mjs",
+     "verify": "npm run typecheck && npm run check:boundaries && npm run check:corpus && npm test",
+     "ui:dev": "vite",
+-    "ui:build": "vite build"
++    "ui:build": "vite build",
++    "estudio": "node scripts/iniciar.mjs"
+   },
+   "repository": {
+     "type": "git",
