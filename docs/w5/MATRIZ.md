@@ -1,11 +1,11 @@
-# W5 · Matriz de rastreabilidade — linha de base P1
+# W5 · Matriz de rastreabilidade — P1 após RED-R2 e correções integradas
 
-**Escopo:** todos os IDs G, INV, K, FN, N e T do plano v1.1. Colunas de referências são apenas busca textual nos arquivos atuais; referência por ID não prova comportamento, positivo/negativo, borda nem integração. Classificação conservadora até leitura e teste: PARCIAL se existe ao menos uma referência em teste; A_AUDITAR se não há referência em teste. A_AUDITAR é estado transitório de P1, não equivale a SEM_TESTE e não pode constar da matriz final. Nenhum COBERTO é reivindicado por varredura textual. FORA_DO_F0 não é inferido: o plano em §F0 declara G-01…G-22 e T-01…T-61 no aceite; cada exceção exige citação individual.
+**Escopo:** 195 IDs G/INV/K/FN/N/T do plano v1.1. Referência textual não prova comportamento ou integração. `PARCIAL` indica somente pelo menos uma referência em teste; `A_AUDITAR` indica nenhuma referência textual, NÃO é `SEM_TESTE` confirmado. `A_AUDITAR` é transição de P1 e não satisfaz o critério de pronto. Nenhum `COBERTO` é reivindicado automaticamente; FORA_DO_F0 requer citação individual.
 
-| ID | Implementação / referência | Teste / referência | Estado inicial | Evidência necessária para promover |
+| ID | Implementação / referência | Teste / referência | Estado provisório | Evidência necessária para promover |
 |---|---|---|---|---|
-| G-01 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
-| G-02 | src/kernel/harness/gates.ts, src/kernel/llm/desidentificar.ts | tests/kernel/kernel.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
+| G-01 | — | tests/identity/g01-vinculo.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
+| G-02 | src/kernel/harness/gates.ts, src/kernel/llm/desidentificar.ts | tests/adv/f07-saida.adv.test.ts, tests/kernel/adv005-phi.test.ts, tests/kernel/kernel.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | G-03 | src/contracts/operacao.ts, src/kernel/harness/gates.ts | tests/kernel/kernel.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | G-04 | — | tests/prompts/prompts.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | G-05 | src/kernel/harness/gates.ts | tests/kernel/kernel.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
@@ -20,7 +20,7 @@
 | G-14 | src/kernel/harness/gates.ts | tests/kernel/kernel.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | G-15 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | G-16 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
-| G-17 | src/contracts/agentes.ts, src/kernel/corpus/loader.ts, scripts/validate-corpus.mjs | tests/contracts/contratos.test.ts, tests/corpus/canal-redflags.test.ts, tests/corpus/capabilities.test.ts, tests/corpus/interacoes.test.ts, tests/corpus/lab-thresholds.test.ts, tests/corpus/loader.test.ts, tests/corpus/packs.test.ts, tests/corpus/rad-emergencia.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
+| G-17 | src/contracts/agentes.ts, src/kernel/corpus/loader.ts, scripts/validate-corpus.mjs | tests/contracts/contratos.test.ts, tests/corpus/canal-redflags.test.ts, tests/corpus/capabilities.test.ts, tests/corpus/g17-packs-cob.test.ts, tests/corpus/interacoes.test.ts, tests/corpus/lab-thresholds.test.ts, tests/corpus/loader.test.ts, tests/corpus/packs.test.ts, tests/corpus/rad-emergencia.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | G-18 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | G-19 | src/kernel/gateway/gateway.ts | tests/kernel/kernel.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | G-20 | src/kernel/gateway/gateway.ts | tests/kernel/kernel.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
@@ -28,7 +28,7 @@
 | G-22 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | G-23 | src/contracts/agentes.ts, src/kernel/harness/gates.ts | tests/kernel/kernel.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | G-24 | src/kernel/llm/desidentificar.ts | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
-| G-25 | src/contracts/operacao.ts, src/kernel/harness/gates.ts, src/modules/consulta/fechamento.ts | tests/kernel/kernel.test.ts, tests/server/server.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
+| G-25 | src/contracts/operacao.ts, src/kernel/harness/gates.ts, src/modules/consulta/fechamento.ts | tests/kernel/kernel.test.ts, tests/server/bundle.test.ts, tests/server/server.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | G-26 | src/contracts/agentes.ts, src/kernel/harness/gates.ts | tests/kernel/kernel.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | G-27 | src/contracts/agentes.ts | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | G-28 | — | tests/ui/tema.test.tsx | PARCIAL | leitura semântica + teste positivo/negativo/borda |
@@ -67,7 +67,7 @@
 | K-09 | src/contracts/agentes.ts | tests/prompts/prompts.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | K-10 | src/contracts/clinico.ts, src/contracts/regras.ts, src/rules/datas.ts, corpus/rulesets/lab-thresholds.v1.json, corpus/rulesets/salao-triagem.v1.json | tests/rules/triagem.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | K-11 | src/rules/destino.ts, corpus/rulesets/salao-triagem.v1.json | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
-| K-12 | src/contracts/operacao.ts, corpus/templates/folha-operacional-salao.v1.json | tests/corpus/templates.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
+| K-12 | src/contracts/operacao.ts, corpus/templates/folha-operacional-salao.v1.json | tests/corpus/k12-folha-operacional-cob.test.ts, tests/corpus/templates.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | K-13 | src/kernel/harness/gates.ts | tests/kernel/kernel.test.ts, tests/prompts/prompts.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | K-14 | src/contracts/operacao.ts, src/modules/consulta/fechamento.ts | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | K-15 | src/modules/consulta/fechamento.ts | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
@@ -78,9 +78,9 @@
 | K-20 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | K-21 | src/contracts/agentes.ts, corpus/capabilities.v1.json | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | K-22 | src/contracts/base.ts, src/contracts/operacao.ts, src/kernel/llm/desidentificar.ts | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
-| K-23 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
+| K-23 | — | tests/backup/k23-fronteiras.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | K-24 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
-| K-25 | src/contracts/index.ts | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
+| K-25 | src/contracts/index.ts | tests/adv/f03-rotas.adv.test.ts, tests/server/bundle.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | K-26 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | K-27 | src/contracts/agentes.ts, src/kernel/corpus/loader.ts, scripts/validate-corpus.mjs, corpus/rulesets/interacoes.v1.json | tests/contracts/contratos.test.ts, tests/corpus/interacoes.test.ts, tests/corpus/loader.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | K-28 | src/rules/triagem.ts | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
@@ -97,9 +97,9 @@
 | FN-09 | src/contracts/regras.ts, src/rules/cicloComMedico.ts | tests/rules/ciclo.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | FN-10 | src/rules/apac.ts | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | FN-11 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
-| FN-12 | src/rules/apac.ts | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
-| FN-13 | src/rules/apac.ts | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
-| FN-14 | src/rules/delta.ts | tests/projections/delta.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
+| FN-12 | src/modules/apac/lote.ts, src/rules/apac.ts | tests/apac/apac-prazo-cob.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
+| FN-13 | src/rules/apac.ts | tests/apac/apac-retrograda-cob.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
+| FN-14 | src/rules/delta.ts | tests/projections/delta.test.ts, tests/rules/delta-pendente-cob.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | FN-15 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | FN-16 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | FN-17 | src/rules/ctcaeGrau.ts | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
@@ -109,7 +109,7 @@
 | FN-21 | src/rules/redFlagsCanal.ts, corpus/rulesets/canal-redflags.v1.json | tests/corpus/canal-redflags.test.ts, tests/ui/banner-e1.test.tsx, tests/ui/fechamento.test.tsx | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | FN-22 | src/rules/reconciliar.ts | tests/kernel/kernel.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | FN-23 | src/rules/identidade.ts | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
-| FN-24 | src/kernel/llm/desidentificar.ts | tests/kernel/kernel.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
+| FN-24 | src/kernel/llm/desidentificar.ts | tests/kernel/adv005-phi.test.ts, tests/kernel/kernel.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | FN-25 | src/rules/caixa.ts | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | FN-26 | src/rules/cumulativoAlerta.ts | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | N01 | — | tests/contracts/contratos.test.ts, tests/kernel/kernel.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
@@ -124,10 +124,10 @@
 | N10 | — | tests/projections/projections.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | N11 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | N12 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
-| N13 | — | tests/apac/apac.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
+| N13 | — | tests/apac/apac-prazo-cob.test.ts, tests/apac/apac.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | N14 | — | tests/contracts/contratos.test.ts, tests/projections/projections.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | N15 | — | tests/projections/projections.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
-| N16 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
+| N16 | — | tests/modules/n16-substituicao-cob.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | N17 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | N18 | — | tests/kernel/kernel.test.ts, tests/server/server.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | N19 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
@@ -167,9 +167,9 @@
 | T-27 | — | tests/apac/apac.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | T-28 | — | tests/apac/apac.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | T-29 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
-| T-30 | — | tests/apac/apac.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
-| T-31 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
-| T-32 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
+| T-30 | — | tests/apac/apac-prazo-cob.test.ts, tests/apac/apac.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
+| T-31 | — | tests/apac/apac-retrograda-cob.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
+| T-32 | — | tests/rules/delta-pendente-cob.test.ts | PARCIAL | leitura semântica + teste positivo/negativo/borda |
 | T-33 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | T-34 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | T-35 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
@@ -200,7 +200,7 @@
 | T-60 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 | T-61 | — | — | A_AUDITAR | leitura semântica + teste positivo/negativo/borda |
 
-**Resumo inicial provisório:** 195 IDs; PARCIAL 85; A_AUDITAR 110; SEM_TESTE 0 confirmados; COBERTO 0 comprovado por esta varredura; FORA_DO_F0 0 comprovado. Todos os A_AUDITAR requerem inspeção manual antes de afirmar lacuna real.
+**Resumo P1 provisório @a2f684c:** 195 IDs; PARCIAL 93; A_AUDITAR 102; SEM_TESTE confirmado 0; COBERTO auditado 0; FORA_DO_F0 confirmado 0. As contagens são textuais, não veredito de cobertura funcional.
 
 ## Leitura manual focal (P1)
 
@@ -210,4 +210,18 @@
 - `src/server/rotas.ts` na base só roteia `/login`, `/consulta/confirmar` e `/acao`; a rota `/consulta/bundle` da W4-03 requer teste HTTP adversarial e correção por KERNEL. A confirmação consulta `bundleExibido` e não deve ser enfraquecida para contornar essa lacuna.
 
 ## F5 · Mutações dos gates
-PENDENTE: mutação controlada dos gates implementados pelo RED; não inferir prova de uma suíte verde.
+RED-R2 mutou, **um por vez**, o corpo de cada função abaixo para sempre retornar `PASSA` numa worktree detached e limpa; restaurou bytes exatos após cada rodada e removeu somente a detached após checar raiz/status, sem `--force`. Fonte completa: `docs/w5/achados/_F05-MUTACAO.md`, runner `tests/adv/f05-mutate-gates.ps1`; baseline de `tests/kernel/kernel.test.ts` = 23 PASS.
+
+| Gate | Teste unitário direcionado sob mutação | Exit | Limite de integração |
+|---|---|---:|---|
+| G-02 | `tests/kernel/kernel.test.ts` | 1 | Consumer real não demonstrado |
+| G-03 | idem | 1 | Consumer real não demonstrado |
+| G-05 | idem | 1 | Consumer real não demonstrado |
+| G-10 | idem | 1 | Consumer real não demonstrado |
+| G-13 | idem | 1 | Consumer real não demonstrado |
+| G-14 | idem | 1 | Consumer real não demonstrado |
+| G-23 | idem | 1 | Consumer real não demonstrado |
+| G-25 | idem | 1 | Teste HTTP `tests/server/server.test.ts -t G-25` **permaneceu 1 PASS** com gate mutado |
+| G-26 | idem | 1 | Consumer real não demonstrado |
+
+**Veredito restrito:** 9/9 mutações foram detectadas **pelo unitário**, portanto não há gate removível sem que *algum* teste quebre no escopo ensaiado; não há S1 F5 pelo critério literal. Isso não valida ligação aos consumidores, nem que o teste HTTP de G-25 detecte a mutação. Os G-01/G-04/G-06… faltantes como função implementada não entram nessa contagem; a matriz normativa inteira continua pendente.
