@@ -38,7 +38,9 @@ export function delta(anterior: SnapshotConfirmado | null, atual: SnapshotAtual,
     const prev = anterior.campos[campo];
     const now = atual.campos[campo];
     if (!now || now.estado === "PENDENTE" || now.valor === null && !now.resolvidoExplicitamente) {
-      itens.push({ campo, classe: "PERSISTE", estado: "PENDENTE" });
+      // Ausencia/proposta nao resolve um conflito confirmado nem apaga um conflito CURRENT.
+      const conflito = prev?.estado === "VERMELHO" || now?.estado === "VERMELHO";
+      itens.push({ campo, classe: "PERSISTE", estado: conflito ? "VERMELHO" : "PENDENTE" });
       continue;
     }
     if (now.estado === "VERMELHO" || prev?.estado === "VERMELHO") {
