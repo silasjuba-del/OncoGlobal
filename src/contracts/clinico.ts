@@ -78,7 +78,7 @@ export const Triagem = z.object({
   grauCtcae: dado(z.number().int().min(0).max(5)),
   tontura: z.boolean(),
   recurso: z.enum(["AMBULATORIAL", "CADEIRA", "CAMA"]),
-  idadeAnos: z.number().int().min(0),
+  idadeAnos: z.number().int().min(0).nullable(), // D-W9-03 · null = PENDENTE; nunca 0
   chegadaEm: Instante,
 }).strict();
 export type Triagem = z.infer<typeof Triagem>;

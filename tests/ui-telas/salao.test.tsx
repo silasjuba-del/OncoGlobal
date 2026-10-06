@@ -36,12 +36,13 @@ describe("tela do salão", () => {
     expect(await screen.findByText("conduta deste ciclo")).toBeTruthy();
   });
 
-  it("idade vazia aparece PENDENTE e não avalia a triagem", async () => {
+  it("idade vazia fica PENDENTE (null, nunca 0) e a triagem vai à fila do médico", async () => {
     const porta = criarPortaFalsa();
     const salvar = vi.spyOn(porta, "salvarTriagem");
     render(<TelaSalao porta={porta} />);
     fireEvent.click(await screen.findByRole("button", { name: "salvar triagem" }));
-    expect(screen.getByText("PENDENTE: idade ausente. Triagem não avaliada (idade decide a frente).")).toBeTruthy();
-    expect(salvar).not.toHaveBeenCalled();
+    expect(await screen.findByText("idade ausente")).toBeTruthy();
+    expect(salvar).toHaveBeenCalledTimes(1);
+    expect((salvar.mock.calls[0]![0] as { idadeAnos: number | null }).idadeAnos).toBeNull();
   });
 });

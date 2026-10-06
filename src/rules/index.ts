@@ -29,11 +29,13 @@ export function decidirDestino(
     temCorte: boolean;
     temPendencia: boolean;
     recurso: "AMBULATORIAL" | "CADEIRA" | "CAMA";
-    idadeAnos: number;
+    idadeAnos: number | null;
   },
   rs: SalaoRuleset,
 ): Destino {
   if (input.temCorte || input.temPendencia) return "FILA_MEDICO";
+  // D-W9-03 · idade ausente é PENDENTE: nunca decide FRENTE nem SALAO.
+  if (input.idadeAnos === null) return "FILA_MEDICO";
   if (rs.frente.recursos.includes(input.recurso) || input.idadeAnos > rs.frente.idadeAcimaDe) {
     return "FRENTE";
   }
@@ -143,6 +145,9 @@ export function avaliarTriagem(t: Triagem, ctx: ContextoTriagem, rs: SalaoRulese
     }
   }
 
+  // D-W9-03 · idade decide a FRENTE; ausente é PENDENTE (nunca 0).
+  if (t.idadeAnos === null) pendentes.push(mot("pendente.idadeAnos", "idade ausente", rs));
+
   if (aplicavel(ctx, "coletaHemograma")) {
     const v = validadeHemograma(t.coletaHemograma.valor, ctx.hoje, rs);
     if (v.estado === "PENDENTE") {
@@ -190,7 +195,7 @@ function casaToken(token: string, e: EntradaFila, rs: SalaoRuleset): boolean {
     case "CADEIRA":
       return e.recurso === "CADEIRA";
     case "IDADE_80":
-      return e.idadeAnos > rs.frente.idadeAcimaDe;
+      return e.idadeAnos !== null && e.idadeAnos > rs.frente.idadeAcimaDe;
     default:
       return false;
   }

@@ -124,6 +124,18 @@ describe("FN-01/FN-02 destino (Q26, N08)", () => {
     expect(avaliar({ idadeAnos: 81 }).destino).toBe("FRENTE");
     expect(avaliar({ idadeAnos: 80 }).destino).toBe("SALAO");
   });
+  it("D-W9-03 · idade ausente (null) → PENDENTE, nunca 0 nem SALAO/FRENTE", () => {
+    const r = avaliar({ idadeAnos: null });
+    expect(r.destino).toBe("FILA_MEDICO");
+    expect(r.pendentes.map((m) => m.codigo)).toContain("pendente.idadeAnos");
+    expect(r.qtPodeIniciarSemMedico).toBe(false);
+    expect(avaliar({ idadeAnos: null, recurso: "CAMA" }).destino).toBe("FILA_MEDICO");
+    expect(avaliar({ idadeAnos: 0 }).pendentes.map((m) => m.codigo)).not.toContain("pendente.idadeAnos");
+  });
+  it("D-W9-03 · idade preenchida não gera pendência de idade", () => {
+    expect(avaliar({ idadeAnos: 60 }).pendentes).toHaveLength(0);
+    expect(decidirDestino({ temCorte: false, temPendencia: false, recurso: "AMBULATORIAL", idadeAnos: null }, salaoRuleset)).toBe("FILA_MEDICO");
+  });
   it("saída carrega rulesetVersao 1.0.0", () => {
     expect(avaliar({}).rulesetVersao).toBe(RULESET_VERSAO);
   });

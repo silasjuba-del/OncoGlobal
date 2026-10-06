@@ -25,11 +25,13 @@ function destinoDe(
     temCorte: boolean;
     temPendencia: boolean;
     recurso: "AMBULATORIAL" | "CADEIRA" | "CAMA";
-    idadeAnos: number;
+    idadeAnos: number | null;
   },
   rs: SalaoRuleset,
 ): Destino {
   if (input.temCorte || input.temPendencia) return "FILA_MEDICO";
+  // D-W9-03 · idade ausente é PENDENTE: nunca decide FRENTE nem SALAO.
+  if (input.idadeAnos === null) return "FILA_MEDICO";
   if (rs.frente.recursos.includes(input.recurso) || input.idadeAnos > rs.frente.idadeAcimaDe) {
     return "FRENTE";
   }
@@ -125,6 +127,9 @@ export function avaliarTriagem(t: Triagem, ctx: ContextoTriagem, rs: SalaoRulese
       else naoCortes.push(mot("naoCorte.ecog.tontura", "ECOG 2 com tontura, anotado", rs));
     }
   }
+
+  // D-W9-03 · idade decide a FRENTE; ausente é PENDENTE (nunca 0).
+  if (t.idadeAnos === null) pendentes.push(mot("pendente.idadeAnos", "idade ausente", rs));
 
   if (aplicavel(ctx, "coletaHemograma")) {
     const v = validadeColeta(t.coletaHemograma.valor, ctx.hoje, rs);
