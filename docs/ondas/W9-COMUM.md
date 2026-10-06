@@ -22,3 +22,12 @@ Tabelas de lateralidade por órgão, anatomia×sexo, regra do pTNM, interações
 
 ## Verificação por fatia (em série, nunca a suíte inteira)
 `npx tsc --noEmit` · `npm run check:boundaries` · `npm run check:corpus` · testes das suas pastas · `tests/w3/auditoria-regressao.test.ts` · o `.adv.ts` da fatia.
+
+## Atualização 2026-10-06 (tech lead) · tabelas clínicas já decididas
+Antes de criar qualquer `[VERIFICAR]`, leia `docs/DECISOES.md` (D-W9-01…D-W9-49). Já decididas pelo Dr. Silas e devem ser usadas como estão:
+- G-07 lateralidade = D-W9-05 · G-08 anatomia×sexo = D-W9-06 · G-09 pTNM = D-W9-07 · grau do caso = D-W9-08 · foto ilegível = D-W9-09.
+- Finalidades APAC = D-W9-12 · CNS = D-W9-13 · nódulo < 1 cm = D-W9-31.
+- Corte do salão = D-W9-37 (SpO₂ < 88, PAS < 90, FC < 50, Hb < 8, Cr > 1,5) · febre estritamente > 37,8 = D-W9-38 · agenda = D-W9-39.
+- Interações (FN-16): base em `docs/referencias/onco-referencia/03-interacoes-qt.*` — continua **inativo** até aprovação item a item.
+- Fichas (K-26): base em `docs/referencias/protocolos/` + D-W9-23/34 (5-FU 46 h, Mayo, pré-medicação ondansetrona + dexametasona + prometazina, cimetidina em taxano, hidratação de cisplatina D1 e D8) + Modelo 05.
+- Junção de paciente nunca automática = D-W9-34a. Ajuste de dose só −20/−30/−40 = D-W9-26.
