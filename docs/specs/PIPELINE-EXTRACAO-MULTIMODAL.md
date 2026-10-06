@@ -62,7 +62,7 @@ Cada campo vira candidatos + resolvido + flag de conflito. Ex.: `stage {candidat
 ## Reconciliação com decisões vigentes (tech lead)
 | Ponto | Encaixe / `[VERIFICAR]` |
 |---|---|
-| AUTO_MERGE por score com nome 0,35 | Q13/D-W9-22c: identidade vem do cadastro, nunca só do nome. Proposta: AUTO_MERGE só liga fatos ao paciente **da consulta aberta** (cadastro já escolhido); fora disso o teto é REVIEW. `[VERIFICAR]` |
+| AUTO_MERGE por score com nome 0,35 | **Decidido (D-W9-34a): nunca automático.** Todo dado entra na caixa de revisão; o score só ordena candidatos. ~~ Q13/D-W9-22c: identidade vem do cadastro, nunca só do nome. Proposta: AUTO_MERGE só liga fatos ao paciente **da consulta aberta** (cadastro já escolhido); fora disso o teto é REVIEW.~~ |
 | Plaud com nomes | A8: a transcrição chega desidentificada; o matching usa idade/tumor/lateralidade/protocolo/datas + a consulta aberta. |
 | `displayName` abreviado | Continua PHI: só local, nunca em payload de LLM (G-02). |
 | EXPLICIT/DERIVED/INFERRED/UNCERTAIN | Mapeia na proveniência existente: EXPLICIT→EXTRACTED, confirmado pelo médico→DOCUMENT_CONFIRMED, DERIVED e INFERRED→INFERRED (com regra), UNCERTAIN→UNCERTAIN, ausente→NOT_FOUND. |

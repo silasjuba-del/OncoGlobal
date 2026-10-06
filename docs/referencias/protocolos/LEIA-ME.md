@@ -15,4 +15,5 @@ Base da **biblioteca de fichas (item 11 / K-26)**, mas **nenhuma ficha é ativad
 ## Decisões do Dr. Silas (D-W9-23, 2026-10-06)
 - 5-FU dos esquemas FOLFOX/FOLFIRI/FOLFIRINOX/FOLFOXIRI/FLOT = **46 h com bomba** (a planilha ainda mostra 8 h; corrigir na ficha, com conferência).
 - Mayo **permanece**.
-- Antiemese local **sem NK1**: ondansetrona + dexametasona + difenidramina.
+- Antiemese local **sem NK1**: ondansetrona + dexametasona + **prometazina VO** (D-W9-34c substitui difenidramina); **cimetidina 300 mg em todo taxano**; olanzapina 5 mg opcional no alto risco.
+- Cisplatina D1 e D8: hidratação com Mg/K nos dois dias (D-W9-34d).

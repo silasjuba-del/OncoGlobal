@@ -168,4 +168,11 @@ A11. Backup: **só HD externo local, cifrado**; chave de recuperação fora do P
 - **D-W9-31 · Nódulo < 1 cm = INDETERMINADO** (nunca metástase confirmada); conduta-padrão: **TC em 4 meses comparando**. O app sugere "cM0 com nódulos indeterminados" em vez de "Mx" (Dr. Silas: SIM).
 - **D-W9-32 · Layout de prescrição de QT** = modelo institucional real (`docs/referencias/modelos/05-prescricao-qt-institucional.md`): cabeçalho com protocolo `P####`, ciclo, dia, alergias; tabela Dose Prot × Dose Presc × Diluente × Via × Intervalo (PRE-QT/QT/POS-QT) × Tempo × Dias.
 - **D-W9-33 · Pipeline de extração multimodal** (`docs/specs/PIPELINE-EXTRACAO-MULTIMODAL.md`): segmentação → paciente → fatos atômicos → normalização → reconciliação multifonte → anti-alucinação → conflitos → timeline → médico só nas exceções. Hierarquia de evidência por domínio; 7 invariantes anti-alucinação; Plaud não é fonte primária de histologia/TNM/dose/IHQ/fármaco/medida; Biomarker Requirement Engine em código.
-- **Ainda abertos:** texto final das mensagens de red flag (base aprovada em D-W9-28), ativação de interações medicamentosas (com fonte), biblioteca das ~50 fichas.
+- **D-W9-34 · Respostas do Dr. Silas (2026-10-06):**
+  (a) **Junção de paciente nunca é automática:** todo dado que entra vai para a **caixa de revisão** e só se liga ao paciente com confirmação (substitui o AUTO_MERGE ≥0,90 de D-W9-33; o score só ordena candidatos).
+  (b) **Alerta FEVE < 50%** com antraciclina ou anti-HER2 programado (alerta, nunca bloqueio).
+  (c) **Pré-medicação/antiemese do serviço = ondansetrona + dexametasona + prometazina VO** (prometazina substitui a difenidramina de D-W9-23c; está na RENAME). **Cimetidina 300 mg em todo taxano** (paclitaxel e docetaxel). **Olanzapina 5 mg opcional** no alto risco emetogênico (sem NK1).
+  (d) **Cisplatina D1 e D8: hidratação pré e pós com magnésio e potássio nos dois dias.**
+  (e) **Laudo de O2 domiciliar ganha SpO2 em ar ambiente e/ou gasometria com data.**
+  (f) **Loperamida no irinotecano: esquema de alta dose da bula do irinotecano** (4 mg, depois 2 mg 2/2 h; 4 mg 4/4 h à noite; até 12 h sem diarreia; máx. 48 h), acima do teto de 16 mg/dia da bula comum — só nesse contexto.
+- **Ainda abertos:** texto do INSS para doença metastática/paliativa; dexametasona D2–D3 sem NK1; texto final das mensagens de red flag (base aprovada em D-W9-28), ativação de interações medicamentosas (com fonte), biblioteca das ~50 fichas.
