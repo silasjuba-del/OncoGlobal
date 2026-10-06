@@ -31,6 +31,7 @@ export async function iniciarEstudio(options:StudioOptions){
   type IdemValue={payloadHash:string;resultado:ResultadoGateway;deleted?:boolean};
   const idem:StoreIdempotencia={
     get:key=>{const r=store.ler<IdemValue>('idempotencia',sha(key))?.value;return r?.deleted?undefined:r;},
+    reserve:(key,payloadHash)=>{const id=sha(key),old=store.ler<IdemValue>('idempotencia',id);if(old?.value&&!old.value.deleted)return{criada:false,registro:old.value};const registro={payloadHash,resultado:{decisao:'OUTCOME_UNKNOWN' as const,motivoCodigo:'RESERVADA_EM_EXECUCAO'}};store.gravar({collection:'idempotencia',key:id,value:registro,expectedRevision:old?.revision??null});return{criada:true,registro};},
     set:(key,value)=>{const id=sha(key),old=store.ler('idempotencia',id);store.gravar({collection:'idempotencia',key:id,value,expectedRevision:old?.revision??null});},
     delete:key=>{const id=sha(key),old=store.ler<IdemValue>('idempotencia',id);if(old)store.gravar({collection:'idempotencia',key:id,value:{...old.value,deleted:true},expectedRevision:old.revision});}
   };
