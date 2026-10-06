@@ -1,23 +1,95 @@
 {
   "header": {
     "id": "prostata",
-    "versao": "1.0.0",
-    "vigenteDesde": "2026-10-05",
+    "versao": "1.1.0",
+    "vigenteDesde": "2026-10-06",
     "fonte": {
       "tipo": "DECISAO_MEDICA",
-      "referencia": "estrutura TumorPack R-22; conteúdo clínico do pack pendente de curadoria do Dr. Silas [VERIFICAR]",
+      "referencia": "estrutura TumorPack R-22 (W2/GLM-06); acréscimo W8/GLM-18 a partir do caso real 01 (S1/S2, E1–E3, P1–P2 — docs/referencias/CASO-REAL-01-LICOES.md §2); conteúdo clínico pendente de curadoria do Dr. Silas [VERIFICAR]",
       "trecho": null,
       "edicao": null
     },
     "curador": "Dr. Silas Negrão",
-    "aprovadoEm": "2026-10-05"
+    "aprovadoEm": "2026-10-06"
   },
-  "nota": "esqueleto W2/GLM-06: nenhum conteúdo clínico; estadiamento/labs/imagem/biomarcadores/protocolos aguardam fonte [VERIFICAR]",
+  "nota": "W8/GLM-18: acrescenta ESTRUTURA sem valores — elementos de estadiamento mostrados com fonte, PSA com origem, PIRADS e Gleason/ISUP por sítio; critérios clínicos [VERIFICAR]; nenhum TNM automático (TNM é do médico, S1)",
   "cid": [],
   "estadiamento": {
     "sistema": "[VERIFICAR]",
     "edicao": "[VERIFICAR]"
   },
+  "elementosEstadiamento": [
+    {
+      "id": "extensao-extracapsular",
+      "rotulo": "Extensão extracapsular",
+      "comoExibir": "elemento com fonte (descrição da imagem primária); não fecha estádio",
+      "criterioClinico": "[VERIFICAR]",
+      "ativo": false,
+      "fonte": "[VERIFICAR]"
+    },
+    {
+      "id": "vesiculas-seminais",
+      "rotulo": "Vesículas seminais",
+      "comoExibir": "elemento com fonte (descrição da imagem primária); não fecha estádio",
+      "criterioClinico": "[VERIFICAR]",
+      "ativo": false,
+      "fonte": "[VERIFICAR]"
+    },
+    {
+      "id": "feixes-neurovasculares",
+      "rotulo": "Feixes neurovasculares",
+      "comoExibir": "elemento com fonte (contato/descrição da imagem primária); não fecha estádio",
+      "criterioClinico": "[VERIFICAR]",
+      "ativo": false,
+      "fonte": "[VERIFICAR]"
+    },
+    {
+      "id": "linfonodos",
+      "rotulo": "Linfonodos",
+      "comoExibir": "elemento com fonte (sem linfonodomegalia é negação preservada); não fecha estádio",
+      "criterioClinico": "[VERIFICAR]",
+      "ativo": false,
+      "fonte": "[VERIFICAR]"
+    },
+    {
+      "id": "osso",
+      "rotulo": "Osso",
+      "comoExibir": "elemento com fonte (captação articular não é lesão óssea oncológica, S2); não fecha estádio",
+      "criterioClinico": "[VERIFICAR]",
+      "ativo": false,
+      "fonte": "[VERIFICAR]"
+    }
+  ],
+  "marcadores": [
+    {
+      "id": "psa",
+      "rotulo": "PSA",
+      "origem": {
+        "opcoes": ["LAUDO_PRIMARIO", "MENCIONADO_EM_FONTE_SECUNDARIA"],
+        "regra": "valor com laudo primário é resultado laboratorial; menção em fonte secundária (receituário de outro médico, sem laudo) entra como 'mencionado sem laudo primário', nunca como resultado confirmado (E2)"
+      },
+      "ativo": false,
+      "fonte": "[VERIFICAR]"
+    },
+    {
+      "id": "pirads",
+      "rotulo": "PI-RADS",
+      "regra": "null quando não numerado no laudo primário; 'PIRADS' sem número fica PENDENTE; nunca inferir a categoria pelo texto da RM (E3)",
+      "ativo": false,
+      "fonte": "[VERIFICAR]"
+    },
+    {
+      "id": "gleason-isup-por-sitio",
+      "rotulo": "Gleason/ISUP por sítio",
+      "regra": "extração por sítio com lateralidade e posição (PATH@1.1.0); 'grau do caso' só por regra (patologia-agregacao.v1.json), nunca pelo LLM (P1/P2)",
+      "ativo": false,
+      "fonte": "[VERIFICAR]"
+    }
+  ],
+  "proibicoes": [
+    "nenhum TNM derivado automaticamente dos elementos de estadiamento: o TNM é do médico (S1)",
+    "captação articular/hiperfixação na cintilografia não vira lesão óssea oncológica nem metástase (S2)"
+  ],
   "labsBaseline": [],
   "labsFollowup": [],
   "imagem": {
