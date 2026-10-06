@@ -683,7 +683,7 @@
     var lab = document.createElement("label");
     lab.style.cssText = "display:flex;gap:10px;align-items:center;border:1px solid var(--om-linha);border-radius:8px;padding:10px 14px;cursor:pointer";
     var c = document.createElement("input");
-    c.type = "checkbox"; c.checked = i < 3; c.style.cssText = "width:20px;height:20px";
+    c.type = "checkbox"; c.checked = i < 3; c.style.cssText = "width:24px;height:24px;flex:none";
     c.setAttribute("aria-label", "Marcar " + nome);
     lab.appendChild(c);
     lab.appendChild(document.createTextNode(nome + (i === 2 ? " (itens desmarcáveis na impressão)" : "")));

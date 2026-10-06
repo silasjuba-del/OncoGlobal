@@ -50,6 +50,9 @@
   ul.caixas { list-style: none; padding: 0; margin: 4px 0; }
   ul.caixas li { padding-left: 22px; position: relative; margin: 2px 0; }
   ul.caixas li::before { content: ""; position: absolute; left: 0; top: 3px; width: 12px; height: 12px; border: 1.5px solid #111; }
+  :focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  .folha :focus-visible { outline-color: #0e4f45; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   tr.excluido td { opacity: .45; text-decoration: line-through; }
   tr.excluido td:first-child { opacity: 1; text-decoration: none; }
   @media print {
@@ -64,6 +67,7 @@
 </style>
 </head>
 <body class="rascunho">
+<a href="#folhas" style="position:absolute;left:-9999px;color:#fff" onfocus="this.style.left='8px'" onblur="this.style.left='-9999px'">Pular para o conteúdo</a>
 <div class="barra">
   <a href="consulta.html">← consulta</a>
   <strong>Impressos · 5 do kit + laudo APAC</strong>
@@ -72,7 +76,7 @@
   <button class="btn" id="btnPrint">Imprimir (janela do sistema)</button>
   <span style="font-size:12px">Texto do kit verbatim · marca d'água condicional · rodapé com hash</span>
 </div>
-<div class="folhas">
+<div class="folhas" id="folhas">
 
   <!-- 1 · orientação nutricional -->
   <section class="folha" aria-label="Orientação nutricional">

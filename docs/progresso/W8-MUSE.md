@@ -2,8 +2,9 @@
 
 > Retomada: primeira fatia não FEITA. Base `f0/w1-integrado` @ 243dcae.
 > Verify por fatia: `npx tsc --noEmit` + `npm run check:boundaries` +
-> `npm run check:corpus` + `npx vitest run <minhas pastas>
+> `npm run check:corpus` + `npx vitest run tests/ui-copy
 > tests/w3/auditoria-regressao.test.ts --no-file-parallelism`. Nunca `git push`.
+> Suíte inteira não rodada (regra de pouca RAM do W8-COMUM).
 
 | Fatia | Estado | Commit | Verify (resumo) | Pendências |
 |---|---|---|---|---|
@@ -15,20 +16,14 @@
 | MU-06 · Protótipo: salão e agenda | FEITA | 3fc4412 | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado | – |
 | MU-07 · Protótipo: APAC em bloco e laudo | FEITA | b64ba2a | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado | – |
 | MU-08 · Protótipo: centro de comando | FEITA | c5c1d85 | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado | – |
-| MU-09 · Impressos | FEITA | (neste commit) | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado | – |
-| MU-04 · Ícones SVG | A_FAZER | – | – | – |
-| MU-05 · Protótipo: consulta pronta | A_FAZER | – | – | – |
-| MU-06 · Protótipo: salão e agenda | A_FAZER | – | – | – |
-| MU-07 · Protótipo: APAC em bloco e laudo | A_FAZER | – | – | – |
-| MU-08 · Protótipo: centro de comando | A_FAZER | – | – | – |
-| MU-09 · Impressos | A_FAZER | – | – | – |
-| MU-10 · Acessibilidade e fechamento | A_FAZER | – | – | – |
+| MU-09 · Impressos | FEITA | 0e4eaa3 | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado | – |
+| MU-10 · Acessibilidade e fechamento | FEITA | (neste commit) | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · auditoria a11y 6/6 | – |
 
 ## Arquivos criados
 
-- `docs/design/SISTEMA.md` — princípios, paleta, contraste AA medido, tipografia,
-  espaçamento, raio, sombra, movimento, vocabulário de componentes, mapeamento
-  para `src/ui/tema/tokens.css`.
+- `docs/design/SISTEMA.md` — princípios, paleta, contraste AA medido (15 pares),
+  tipografia, espaçamento, raio, sombra, movimento, vocabulário de componentes,
+  mapeamento para `src/ui/tema/tokens.css`.
 - `docs/design/tokens-oncomed.css` — variáveis CSS (+ tema contraste, foco,
   `prefers-reduced-motion`).
 - `docs/design/ESTADOS.md` — como VERDE/VERMELHO/PENDENTE aparecem, conflito
@@ -73,11 +68,41 @@
   elisões marcadas, receita com itens desmarcáveis, PENDENTE impresso,
   marca d'água Rascunho/Assinado, modelo em branco, rodapé com hash,
   `@media print`).
+- `docs/design/ACESSIBILIDADE.md` — teclado, foco, leitores de tela, alvos,
+  `role=alert` só E1, movimento + revisão dos 6 protótipos (auditoria
+  automatizada + manual; achados corrigidos).
+
+## Saída real do último verify (MU-10)
+
+```text
+tsc --noEmit → exit 0
+fronteiras ok (86 arquivos)
+corpus ok (20 arquivos)
+tests/ui-copy/copy.test.ts (5 tests) + tests/ui-copy/icones.test.tsx (2 tests)
+  + tests/w3/auditoria-regressao.test.ts (9 tests) → 16 passed (3 files)
+HTML: 6/6 balanceados · role=alert só no banner E1 do salão · URLs sem dado
+```
 
 ## [VERIFICAR]
 
-(nenhum até MU-01)
+- Agregação "grau do caso" por sítio (P2 — regra com o Dr. Silas); protótipos
+  mostram "Pendente".
+- CNES do estabelecimento solicitante (CDX-05).
+- Códigos SIGTAP (tabela não importada; protótipos mostram PENDENTE).
+- Nomenclatura oficial da finalidade APAC (contrato marca [VERIFICAR]).
+- Acentuação do kit: mantida como no `.txt` (sem acentos), sem correção.
+- Versões/hash de prompt e hashes de impresso: ilustrativos nos protótipos.
+- Imagens do carrossel/visualizador: ilustrações (sem imagem real).
 
 ## Perguntas ao tech lead
 
-(nenhuma até MU-01)
+1. Consumo pelo Cursor: `src/ui/copy/pt-BR.ts`, `src/ui/icones/index.ts`,
+   `docs/design/*` nos paths atuais atendem, ou prefere outro arranjo?
+2. `src/ui/telas/tema-oncomed.css` (override do destaque) é do Cursor (W6)?
+   Deixei o mapeamento em SISTEMA.md §5 e não toquei na faixa dele.
+3. Botão break-glass em vermelho: entendo como controle de segurança
+   (kill-switch), não semântica clínica — confirma o uso fora do "vermelho
+   só clínico"?
+4. Sem capturas de tela (ambiente sem browser): relatório traz lista de
+   arquivos + auditoria automatizada. Suficiente, ou gero os HTMLs num
+   servidor local para conferência visual?
