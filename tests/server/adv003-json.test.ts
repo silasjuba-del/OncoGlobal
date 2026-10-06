@@ -1,3 +1,4 @@
+import { artefatoAssinado } from "./_artefatoAssinado.js";
 import { expect, it } from "vitest";
 import { ambienteHttp } from "./http-fixture.js";
 
@@ -29,6 +30,7 @@ it("ADV-003 · falha interna não é reclassificada como JSON inválido", async 
     // corrompido, sem identificador clínico real, para exercitar o catch interno.
     f.db.prepare(`INSERT INTO action_idempotency(chave,payloadHash,resultado,atualizadoEm)
       VALUES (?,?,?,?)`).run("erro-interno-01", "hash-sintetico", "{quebrado", "2026-10-05T12:00:00Z");
+    artefatoAssinado(f.db, { patientId: "Paciente Teste 01", encounterId: "encontro-teste", documentId: "doc-sintetico" });
     const r = await f.request("/acao", "POST", JSON.stringify({
       verbo: "IMPRIMIR", objeto: { tipo: "DOCUMENTO", id: "doc-sintetico", versao: 1 },
       escopo: { patientId: "Paciente Teste 01", encounterId: "encontro-teste" },

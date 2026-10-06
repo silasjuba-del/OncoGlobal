@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { ambienteHttp } from "./http-fixture.js";
+import { ambienteHttp } from "../adv/http-fixture.js";
 
 const action = (verbo: string, tipo: string, id: string) => ({
   verbo, objeto: { tipo, id, versao: 1 },

@@ -1,4 +1,5 @@
 // Prova ADV-001 do RED@5e1093d: mesmas expectativas, agora com reabertura do SQLite.
+import { artefatoAssinado } from "../server/_artefatoAssinado.js";
 import { afterEach, describe, expect, it } from "vitest";
 import { createHash } from "node:crypto";
 import { mkdtempSync, rmSync } from "node:fs";
@@ -177,6 +178,8 @@ describe("F1 · reinício/replay de efeito externo (SQLite persistente)", () => 
       if (!address || typeof address === "string") throw new Error("PORTA_AUSENTE");
       return {
         async post(id: string) {
+          try { artefatoAssinado(db, { patientId: "Paciente Teste 01", encounterId: "encontro-teste", documentId: id }); }
+          catch { /* já assinado nesta base */ }
           const response = await fetch(`http://127.0.0.1:${address.port}/acao`, {
             method: "POST", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
             body: JSON.stringify(intent("http-replay-01", id)),

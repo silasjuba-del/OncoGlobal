@@ -14,9 +14,9 @@ const RULES = [
   { from: "src/impressao/", forbid: ["src/"], allow: ["src/contracts/", "src/modules/", "src/impressao/"], why: "impressão pura: documento entra, HTML sai" },
   { from: "src/modules/", forbid: ["src/"], allow: ["src/contracts/", "src/modules/", "src/rules/"], why: "módulos de domínio puros: só contratos, regras e módulos" },
 ];
-const NET = /\bfrom\s+["'](node:https?|node:net|undici|axios|node-fetch)["']|\bfetch\(/;
+const NET = /from\s+["'](node:https?|node:net|undici|axios|node-fetch)["']|\bfetch\b|\[\s*[\"'`]fetch[\"'`]\s*\]|new\s+WebSocket|\bWebSocket\b|XMLHttpRequest|EventSource|sendBeacon|\bimport\s*\((?!\s*[\"'`][^\"'`]*[\"'`]\s*\)\s*\.[A-Z])|\brequire\s*\(|[\"'`]node:(dgram|tls|http2)[\"'`]/;  // CP-002: inclui acesso computado, WebSocket, import()/require dinâmicos
 // src/server/** é servidor de ENTRADA em 127.0.0.1: pode node:http; nunca cliente de saída.
-const NET_SAIDA = /\bfrom\s+["'](node:https|node:net|undici|axios|node-fetch)["']|\bfetch\(|\bhttp\.request\(|\bhttp\.get\(/;
+const NET_SAIDA = /from\s+["'](node:https|node:net|undici|axios|node-fetch)["']|http\.request\(|http\.get\(|\bfetch\b|\[\s*[\"'`]fetch[\"'`]\s*\]|new\s+WebSocket|\bWebSocket\b|XMLHttpRequest|EventSource|sendBeacon|\bimport\s*\((?!\s*[\"'`][^\"'`]*[\"'`]\s*\)\s*\.[A-Z])|\brequire\s*\(|[\"'`]node:(dgram|tls|http2)[\"'`]/;
 
 // src/ui/api/** é o ÚNICO cliente HTTP da UI: só caminho relativo ao servidor local (mesma origem).
 const UI_API_PROIBIDO = /["'`](https?:|wss?:)?\/\/|new\s+WebSocket|XMLHttpRequest|sendBeacon|EventSource|import\(/;

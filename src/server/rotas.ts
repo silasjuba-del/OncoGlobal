@@ -9,6 +9,7 @@ import { sqliteIdempotencia } from "../kernel/ledger/idempotencia.js";
 import { confirmar } from "../kernel/ledger/writeRouter.js";
 import { g25EscopoAssinatura } from "../kernel/harness/gates.js";
 import type { criarGateway } from "../kernel/gateway/gateway.js";
+import { autorizarSaida } from "./autorizacao.js";
 import { hashConteudoExibido, type GerenciadorSessao } from "./sessao.js";
 
 export interface ServidorDeps {
@@ -172,6 +173,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     }
     const parsed = ActionIntent.safeParse(raw);
     if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
+    const autorizacao = autorizarSaida(deps.db, parsed.data);
+    if (!autorizacao.ok) return reply(409, autorizacao.codigo);
     // Uma rota /acao nunca usa a idempotencia volátil do caller: o ledger local
     // conserva a reserva OUTCOME_UNKNOWN antes do executor, inclusive após reiniciar.
     const result = await deps.gateway.withStore(sqliteIdempotencia(deps.db)).executar(parsed.data, sessao);

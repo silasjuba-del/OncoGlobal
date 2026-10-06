@@ -1,6 +1,7 @@
 // Reataque ADV-001: caminho HTTP /acao, banco SQLite reaberto e executor fake.
 // A store em memória passada ao gateway é intencional: o roteador canônico precisa
 // substituí-la por sqliteIdempotencia(db). Nenhum efeito externo real ocorre.
+import { artefatoAssinado } from "./_artefatoAssinado.js";
 import { afterEach, describe, expect, it } from "vitest";
 import { mkdtempSync, realpathSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -52,6 +53,8 @@ async function boot(path: string, executor: Executor) {
   instances.push(instance);
   return {
     async post(id: string, idempotencyKey: string) {
+      try { artefatoAssinado(db, { patientId: "Paciente Teste 01", encounterId: "encontro-teste", documentId: id }); }
+      catch { /* já assinado nesta base (reabertura): mantém o registro original */ }
       const res = await fetch(`http://127.0.0.1:${address.port}/acao`, {
         method: "POST", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
         body: JSON.stringify({ verbo: "IMPRIMIR", objeto: { tipo: "DOCUMENTO", id, versao: 1 },
