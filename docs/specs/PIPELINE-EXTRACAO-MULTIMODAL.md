@@ -71,3 +71,29 @@ Cada campo vira candidatos + resolvido + flag de conflito. Ex.: `stage {candidat
 | Lateralidade no score | = D-W9-05 (G-07). |
 | Biomarker engine | Novo; tabela `[VERIFICAR]` por tumor (curadoria). |
 | SafetyValidator | = invariantes "IA propõe, código calcula, médico decide" e G-05 (VERDE honesto). |
+
+---
+## Anexo A · Árvore do paciente (Dr. Silas, 2026-10-06) — modelo-alvo da projeção longitudinal
+```
+PATIENT
+ ├─ identity_key / pseudonymous_id
+ ├─ demographics
+ ├─ ONCOLOGY
+ │   ├─ primary_site + laterality + subsite
+ │   ├─ histology + grade
+ │   ├─ biomarkers[]
+ │   ├─ stage_history[]  (clinical | pathological | post-treatment | metastatic_history)
+ │   └─ metastases[]
+ ├─ TREATMENT_TIMELINE[]
+ │   ├─ intent · line · regimen · drugs[] · cycle/day
+ │   └─ status: proposed | ordered | administered | held | stopped
+ ├─ CURRENT_ENCOUNTER
+ │   ├─ symptoms[] · toxicity[] + CTCAE_if_confirmed · ECOG: explicit | inferred
+ │   ├─ labs[] · imaging[] · assessment
+ │   └─ plan/actions[]
+ ├─ SOURCE_EVIDENCE[]  (medical_note | nursing | pathology | imaging_document | prescription | plaud_transcript)
+ └─ RECONCILIATION
+     ├─ confirmed_facts[] · inferred_facts[] · conflicts[] · missing[]
+     └─ clinician_confirmation_required[]
+```
+Notas do tech lead: `identity_key` aponta para o cadastro (Q13), `pseudonymous_id` é o que circula fora do cofre local (G-02). `status` do tratamento tem 5 valores — é estado de **entidade de tratamento**, não semáforo (o teto de 5 estados da UI continua). `CTCAE_if_confirmed` = grau só após confirmação médica (Q45). `ECOG inferred` nunca vira explicit sem clique (SafetyValidator). Mapeia na projeção atual em `src/kernel/projections` — alinhamento de tipos é a fatia GROK-08.
