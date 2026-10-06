@@ -65,7 +65,10 @@ export function desidentificar(textoOriginal: string, dic: DicionarioPaciente): 
   texto = texto.replace(/\b\d{3}[ .]?\d{4}[ .]?\d{4}[ .]?\d{4}\b/g, (m) => (cnsValido(m) ? tokenPara("CNS", m) : m));
   texto = texto.replace(/\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b/g, (m) => (cpfValido(m) ? tokenPara("CPF", m) : m));
   texto = texto.replace(/(?:\+?55\s?)?\(?\d{2}\)?\s?9?\d{4}-?\d{4}\b/g, (m) => tokenPara("TELEFONE", m));
-  texto = texto.replace(/\b(nascid[oa]|nasc\.?|DN|data de nascimento)\s*:?\s*\d{1,2}\/\d{1,2}\/\d{2,4}/gi, (m) => tokenPara("DATA_NASC", m));
+  // Mesma detecção é reutilizada por G-02 para barrar texto residual.
+  // Exige contexto explícito de nascimento: datas clínicas avulsas não são DN.
+  texto = texto.replace(/\b(?:nascid[oa]|nasc\.?|DN|data de nascimento)\s*(?:em\s+)?(?::\s*)?\d{1,2}([/.-])\d{1,2}\1\d{2,4}\b/gi,
+    (m) => tokenPara("DATA_NASC", m));
 
   // 3. Nomes do dicionário: sem acento, sem caixa, por palavra; também partes com ≥3 letras
   const partes = new Set<string>();
