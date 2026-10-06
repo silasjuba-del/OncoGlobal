@@ -27,35 +27,35 @@
 
 ## 2. Sinais de alarme / quando procurar o serviço (lista consolidada)
 
-Todos os itens abaixo são **PROPOSTA (não aprovado)**. Eles servem de matéria-prima para as "mensagens prontas de red flag" que o Dr. Silas vai escrever. Limiares e ações ficam a critério dele.
+**APROVADOS pelo Dr. Silas em 2026-10-06 (D-W9-28)** como base das mensagens de red flag, com os ajustes dele nas linhas 1 e 10 e a ação padrão "ir ao PS". Texto final de cada mensagem continua sendo escrito/aprovado no app (biblioteca versionada). Eles servem de matéria-prima para as "mensagens prontas de red flag" que o Dr. Silas vai escrever. Limiares e ações ficam a critério dele.
 
 | # | Sintoma | Limiar citado na fonte | Ação recomendada na fonte | Fonte | Status |
 |---|---|---|---|---|---|
-| 1 | Febre | "temperatura igual ou acima de 38ºC" (M1). Em M2: "maior ou igual a 37,8 ºC (temperatura axilar)" | Contato imediato com o médico (M1) / ir à Emergência (M2). M1 cita maior risco entre o 10º e o 15º dia após a aplicação | M1 p.5, p.10; M2 pdf7 | PROPOSTA |
-| 2 | Falta de ar / dificuldade respiratória | Início súbito | Contato imediato | M1 p.5 | PROPOSTA |
-| 3 | Alteração urinária | Parar de urinar ou perder o controle da urina | Contato imediato | M1 p.5 | PROPOSTA |
-| 4 | Alteração visual | Visão dupla ou borrada | Contato imediato | M1 p.5 | PROPOSTA |
-| 5 | Dor | Localização ou intensidade anormal | Contato imediato | M1 p.5 | PROPOSTA |
-| 6 | Sangramento | Em qualquer local, persistente/prolongado | Contato imediato | M1 p.5 | PROPOSTA |
-| 7 | Convulsão ou confusão mental | Qualquer episódio | Contato imediato | M1 p.5 | PROPOSTA |
-| 8 | Fraqueza nas pernas | Diminuição de força | Contato imediato | M1 p.5 | PROPOSTA |
-| 9 | Náusea/vômito | Impede a ingestão de líquidos | Contato imediato | M1 p.5 | PROPOSTA |
-| 10 | Diarreia | "mais de quatro episódios ao dia". Na p.10: persistência por mais de 24 h com mais de 4 episódios/dia | Buscar orientação médica | M1 p.5, p.10 | PROPOSTA |
-| 11 | Constipação | "ausência de evacuações por mais de 48 horas" | Contato imediato | M1 p.5 | PROPOSTA |
-| 12 | Inchaço assimétrico de membro | Doloroso, persistente, em um membro só | Contato imediato (sugere TVP) | M1 p.5 | PROPOSTA |
-| 13 | Mucosite / aftas | Interferindo na alimentação | Ir à Emergência | M2 pdf19 | PROPOSTA |
-| 14 | Placas brancas na boca (sapinho) | Presença | Falar com o médico | M2 pdf19 | PROPOSTA |
-| 15 | Ferida com sinais de infecção | Vermelhidão, calor, secreção | Falar com médico/enfermeiro | M2 pdf7 | PROPOSTA |
-| 16 | Deslocamento ou saída do PICC | Qualquer | Comprimir o local com gaze/toalha limpa e ir à Emergência imediatamente | M2 pdf26 | PROPOSTA |
-| 17 | Dor/formigamento no local da infusão (salão) | Durante a aplicação | Avisar a enfermagem na hora (risco de extravasamento) | M1 p.7 | PROPOSTA |
-| 18 | Neuropatia | Surgimento ou piora da alteração de sensibilidade em mãos/pés | Falar com o médico (não urgente) | M2 pdf18 | PROPOSTA |
-| 19 | Atraso menstrual | Qualquer atraso durante a QT | Informar médico/enfermeiro | M2 pdf17 | PROPOSTA |
-| 20 | Imunoterapia: cefaleia, perda de força ou sensibilidade em membro | Qualquer | Reportar à equipe | M1 p.14 | PROPOSTA |
-| 21 | Imunoterapia: falta de ar, dor torácica, tosse | Qualquer | Reportar à equipe | M1 p.14 | PROPOSTA |
-| 22 | Imunoterapia: cansaço extremo, intolerância a calor ou frio | Qualquer | Reportar à equipe | M1 p.14 | PROPOSTA |
-| 23 | Imunoterapia: dor no hipocôndrio direito, icterícia | Qualquer | Reportar à equipe | M1 p.14 | PROPOSTA |
-| 24 | Imunoterapia: diarreia ou sangue nas fezes; artralgia | Qualquer | Reportar à equipe | M1 p.14 | PROPOSTA |
-| 25 | Sinais a relatar na triagem do salão | Febre, resfriado, diarreia, ardência ao urinar | Informar antes da infusão | M2 pdf6 | PROPOSTA |
+| 1 | Febre | ≥37,8 °C (decisão Dr. Silas) | Ir ao PS → hemograma → antibiótico se neutropênico | M1 p.5, p.10; M2 pdf7 | **APROVADO** |
+| 2 | Falta de ar / dificuldade respiratória | Início súbito | Ir ao PS | M1 p.5 | **APROVADO** |
+| 3 | Alteração urinária | Parar de urinar ou perder o controle da urina | Ir ao PS | M1 p.5 | **APROVADO** |
+| 4 | Alteração visual | Visão dupla ou borrada | Ir ao PS | M1 p.5 | **APROVADO** |
+| 5 | Dor | Localização ou intensidade anormal | Ir ao PS | M1 p.5 | **APROVADO** |
+| 6 | Sangramento | Em qualquer local, persistente/prolongado | Ir ao PS | M1 p.5 | **APROVADO** |
+| 7 | Convulsão ou confusão mental | Qualquer episódio | Ir ao PS | M1 p.5 | **APROVADO** |
+| 8 | Fraqueza nas pernas | Diminuição de força | Ir ao PS | M1 p.5 | **APROVADO** |
+| 9 | Náusea/vômito | Impede a ingestão de líquidos | Ir ao PS | M1 p.5 | **APROVADO** |
+| 10 | Diarreia | Diarreia por mais de 24 h; com vômito associado | >24 h: suspender anti-hipertensivo; vômito + diarreia: ir ao PS (hidratação venosa) | M1 p.5, p.10 | **APROVADO** |
+| 11 | Constipação | "ausência de evacuações por mais de 48 horas" | Ir ao PS | M1 p.5 | **APROVADO** |
+| 12 | Inchaço assimétrico de membro | Doloroso, persistente, em um membro só | Ir ao PS | M1 p.5 | **APROVADO** |
+| 13 | Mucosite / aftas | Interferindo na alimentação | Ir ao PS | M2 pdf19 | **APROVADO** |
+| 14 | Placas brancas na boca (sapinho) | Presença | Falar com o médico | M2 pdf19 | **APROVADO** |
+| 15 | Ferida com sinais de infecção | Vermelhidão, calor, secreção | Falar com médico/enfermeiro | M2 pdf7 | **APROVADO** |
+| 16 | Deslocamento ou saída do PICC | Qualquer | Ir ao PS | M2 pdf26 | **APROVADO** |
+| 17 | Dor/formigamento no local da infusão (salão) | Durante a aplicação | Avisar a enfermagem na hora (risco de extravasamento) | M1 p.7 | **APROVADO** |
+| 18 | Neuropatia | Surgimento ou piora da alteração de sensibilidade em mãos/pés | Falar com o médico (não urgente) | M2 pdf18 | **APROVADO** |
+| 19 | Atraso menstrual | Qualquer atraso durante a QT | Informar médico/enfermeiro | M2 pdf17 | **APROVADO** |
+| 20 | Imunoterapia: cefaleia, perda de força ou sensibilidade em membro | Qualquer | Reportar à equipe | M1 p.14 | **APROVADO** |
+| 21 | Imunoterapia: falta de ar, dor torácica, tosse | Qualquer | Reportar à equipe | M1 p.14 | **APROVADO** |
+| 22 | Imunoterapia: cansaço extremo, intolerância a calor ou frio | Qualquer | Reportar à equipe | M1 p.14 | **APROVADO** |
+| 23 | Imunoterapia: dor no hipocôndrio direito, icterícia | Qualquer | Reportar à equipe | M1 p.14 | **APROVADO** |
+| 24 | Imunoterapia: diarreia ou sangue nas fezes; artralgia | Qualquer | Reportar à equipe | M1 p.14 | **APROVADO** |
+| 25 | Sinais a relatar na triagem do salão | Febre, resfriado, diarreia, ardência ao urinar | Informar antes da infusão | M2 pdf6 | **APROVADO** |
 
 **Divergências que o Dr. Silas precisa decidir:**
 - **Limiar de febre:** 38,0 °C (M1) ou 37,8 °C axilar (M2).

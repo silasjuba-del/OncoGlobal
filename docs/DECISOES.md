@@ -162,4 +162,6 @@ A11. Backup: **só HD externo local, cifrado**; chave de recuperação fora do P
 - **D-W9-25 · Material público pode ser copiado e minerado.** Tudo que o Dr. Silas enviar vira extração de ideias registrada (`docs/referencias/externos/`), sem dado de paciente.
 - **D-W9-26 · Ajuste de dose só pelos botões −20/−30/−40** (reafirma Q29; o `doseAdjustment.percent` do patch D-W9-24 aceita só esses valores).
 - **D-W9-27 · Resumo de trial em uma frase** no molde de `docs/referencias/modelos/02-resumo-trial.md` (exemplo KEYNOTE-522).
-- **Ainda abertos:** mensagens prontas de red flag do canal, ativação de interações medicamentosas (com fonte), biblioteca das ~50 fichas.
+- **D-W9-28 · Red flags do paciente: adotados os 25 sinais** de `docs/referencias/externos/IDEIAS-MANUAIS-PACIENTE.md` §2. Ação padrão do paciente = **ir ao PS**. Febre **≥37,8 °C** → PS → hemograma → antibiótico se neutropênico. **Diarreia >24 h → suspender anti-hipertensivo; vômito + diarreia → PS para hidratação venosa.**
+- **D-W9-29 · Orientação por toxicidade = prescrição-modelo por efeito** (náusea, mucosite, diarreia, constipação etc.), pesquisada em fonte pública, em rascunho até aprovação do Dr. Silas; antiemese segue D-W9-23c. **Diário de sintomas e checklist pré-sessão** entram no app (W10).
+- **Ainda abertos:** texto final das mensagens de red flag (base aprovada em D-W9-28), ativação de interações medicamentosas (com fonte), biblioteca das ~50 fichas.
