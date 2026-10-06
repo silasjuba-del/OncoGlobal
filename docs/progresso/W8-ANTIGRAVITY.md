@@ -11,8 +11,8 @@ Worktree: `C:\Users\silas\Projects\OncoGlobal-wt\w8-antigravity` · Branch: `f0/
 | AG-03 · Data clínica (T1–T2) | FEITA | `3280372` | 6 ok | — |
 | AG-04 · Deduplicação de exame (D1–D3) | FEITA | `d440121` | 5 ok | — |
 | AG-05 · Hierarquia de fonte (E1–E3) | FEITA | `5739a85` | 5 ok | — |
-| AG-06 · Trecho riscado e baixa confiança (R1, C1) | FEITA | pendente commit | 4 ok | Limiar injetado de ruleset [VERIFICAR] |
-| AG-07 · Patologia por sítio (P1–P3) | PENDENTE | — | — | Tabela ISUP 2014/OMS [VERIFICAR edição], ruleset patologia-agregacao inativo [VERIFICAR] |
+| AG-06 · Trecho riscado e baixa confiança (R1, C1) | FEITA | `660f784` | 4 ok | Limiar injetado de ruleset [VERIFICAR] |
+| AG-07 · Patologia por sítio (P1–P3) | FEITA | pendente commit | 6 ok | Tabela ISUP 2014/OMS [VERIFICAR edição], ruleset patologia-agregacao inativo [VERIFICAR] |
 | AG-08 · Resumo de imagem em 2 níveis | PENDENTE | — | — | — |
 | AG-09 · Interações sem fonte = PENDENTE (G-09) | PENDENTE | — | — | interacoes.v1.json inativo aguarda literatura e Dr. Silas [VERIFICAR] |
 | AG-10 · Índice e fechamento (Caso 07) | PENDENTE | — | — | Caso 07 sintético ponta a ponta |
