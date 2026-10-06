@@ -1,0 +1,47 @@
+[
+  {
+    "fatia": "01",
+    "commit": "cb87389",
+    "titulo": "base e plano das dez fatias"
+  },
+  {
+    "fatia": "02",
+    "commit": "8b5d673",
+    "titulo": "tres personas detalhadas com rascunhos e citacoes verificadas"
+  },
+  {
+    "fatia": "03",
+    "commit": "f222ab2",
+    "titulo": "ingestao documental local com fontes e hashes"
+  },
+  {
+    "fatia": "04",
+    "commit": "d93baa9",
+    "titulo": "revisao medica versionada dos criterios de estudo"
+  },
+  {
+    "fatia": "05",
+    "commit": "bc5583b",
+    "titulo": "cruzamento conservador de criterios e dados do paciente"
+  },
+  {
+    "fatia": "06",
+    "commit": "f1ef7a5",
+    "titulo": "seguimento por estudo paciente e braco"
+  },
+  {
+    "fatia": "07",
+    "commit": "cd2acaa",
+    "titulo": "workspace SQLite com conflitos e historico preservados"
+  },
+  {
+    "fatia": "08",
+    "commit": "4c7a723",
+    "titulo": "kit medico literal e laudo APAC rastreavel"
+  },
+  {
+    "fatia": "09",
+    "commit": "9038c14",
+    "titulo": "impressao local idempotente e preferencia do medico"
+  }
+]

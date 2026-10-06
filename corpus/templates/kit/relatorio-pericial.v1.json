@@ -1,0 +1,68 @@
+{
+  "id": "relatorio-pericial",
+  "versao": "1.0.0",
+  "header": {
+    "id": "relatorio-pericial",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-05",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-W5-05 + ADENDO-W6-W7.md (2026-10-05); docs/referencias/kit-oncologia-2026-05.pdf",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-05"
+  },
+  "fonte": {
+    "tipo": "DECISAO_MEDICA",
+    "referencia": "docs/referencias/kit-oncologia-2026-05.pdf",
+    "pagina": 5
+  },
+  "secoes": [
+    {
+      "id": "conteudo",
+      "titulo": "Relatorio medico oncologico",
+      "origem": "TEXTO_FIXO",
+      "campos": [
+        {
+          "id": "texto-integral",
+          "rotulo": "Texto integral",
+          "origem": "TEXTO_FIXO",
+          "texto": " RELATORIO MEDICO ONCOLOGICO\r\n Documento para fins periciais e administrativos - modelo para preenchimento medico\r\nAfastamento sugerido por 6 meses, passivel de renovacao conforme evolucao clinica.\r\n1. DECLARACAO MEDICA\r\nAtesto, para fins de pericia medica e demais fins administrativos, que o(a) paciente acima identificado(a) foi diagnosticado(a) com neoplasia\r\ninformada no cabecalho e encontra-se em vigencia de tratamento oncologico sistemico com quimioterapia, sob meus cuidados no Hospital do\r\nBem - Unidade Oncologica, Patos/PB.\r\nO tratamento quimioterapico pode ocasionar fadiga, astenia, nauseas, vomitos, diarreia, mucosite, dor, neuropatia, anemia, neutropenia,\r\nplaquetopenia, maior risco infeccioso e necessidade de consultas, exames, infusoes e reavaliacoes recorrentes.\r\nConsiderando o diagnostico, o tratamento ativo e os riscos associados, recomendo afastamento das atividades laborais por 6 (seis) meses, a\r\ncontar de ____/____/________, passivel de renovacao apos reavaliacao medica. A permanencia em atividade laboral durante a quimioterapia\r\ndeve ser avaliada conforme a funcao exercida, pois efeitos colaterais e condicoes do ambiente de trabalho podem oferecer riscos ao paciente e a\r\nterceiros, conforme a atividade especifica.\r\n2. DIREITOS SOCIAIS QUE PODEM SER AVALIADOS\r\n INSS: beneficio por incapacidade temporaria ou permanente,\r\nconforme pericia, qualidade de segurado e incapacidade laboral.\r\n FGTS: saque quando trabalhador ou dependente for acometido por\r\nneoplasia maligna, conforme Lei 8.036/1990, art. 20, XI.\r\n PIS/PASEP: saque de cotas quando existentes e preenchidos os\r\ncriterios do fundo.\r\n Imposto de renda: isencao sobre aposentadoria, reforma ou\r\npensao, conforme Lei 7.713/1988, art. 6º, XIV.\r\n Transporte: gratuidade conforme legislacao local; Passe Livre\r\ninterestadual quando houver criterios legais.\r\n Veiculo adaptado: IPI, ICMS, IPVA e CNH especial quando\r\nhouver deficiencia/sequela funcional, conforme laudo especifico.\r\n Financiamento habitacional: possivel quitacao se houver\r\ninvalidez total/permanente e cobertura securitaria contratual.\r\n Servico Social: orientar sobre TFD/SUS, medicacoes, transporte e\r\nformularios especificos.\r\nObservacao: o acesso a beneficios depende de documentacao, avaliacao pericial, regras do orgao competente, condicao laboral, renda, deficiencia/sequela e\r\nlegislacao local vigente. Este relatorio deve ser acompanhado de exames, laudos e documentos solicitados pela pericia ou instituicao responsavel.\r\nDr. Silas Negrao Serra Jr. - CRM-PB 17341\r\nRQE Oncologia Clinica 9099 | RQE Clinica Medica 9098\r\nData: ____/____/________\r\nCARIMBO\r\nASSINATURA DO MEDICO"
+        }
+      ]
+    }
+  ],
+  "identificacao": {
+    "origem": "FATO_CONFIRMADO",
+    "campos": [
+      "NOME",
+      "NASC.",
+      "CIDADE",
+      "IDADE"
+    ]
+  },
+  "dataEAssinatura": {
+    "origem": "DECISAO_MEDICA",
+    "campos": [
+      "DATA",
+      "CARIMBO E ASSINATURA"
+    ]
+  },
+  "proibidoConter": [
+    "ALERTA",
+    "CORRECAO_IA"
+  ],
+  "verificacaoAcentuacao": {
+    "necessaria": true,
+    "marcador": "[VERIFICAR acentuacao]",
+    "metadadoSomente": true
+  },
+  "afastamento": {
+    "dataInicio": "campo do médico",
+    "prazo": "campo do médico; substituir valor literal do texto na renderização"
+  },
+  "headerExtraidoComoConfiguracao": true,
+  "textoFonteOriginal": "\nH\r\nHOSPITAL DO BEM - UNIDADE ONCOLOGICA\r\nComplexo Hospitalar Regional Dep. Janduhy Carneiro - Patos/PB\r\nDr. Silas Negrao Serra Jr. - CRM-PB 17341 - RQE Oncologia 9099 - RQE Clinica Medica 9098\r\nRelatorio medico oncologico\r\nHospital do Bem - Unidade Oncologica - Patos/PB | Documento medico para impressao\r\nPagina 1\r\n RELATORIO MEDICO ONCOLOGICO\r\n Documento para fins periciais e administrativos - modelo para preenchimento medico\r\nNOME: ______________________________________\r\nIDADE: ______\r\nNASC.: ____/____/________\r\nCIDADE: ___________________________\r\nCPF:\r\n__________________\r\nCID: __________\r\nAfastamento sugerido por 6 meses, passivel de renovacao conforme evolucao clinica.\r\n1. DECLARACAO MEDICA\r\nAtesto, para fins de pericia medica e demais fins administrativos, que o(a) paciente acima identificado(a) foi diagnosticado(a) com neoplasia\r\ninformada no cabecalho e encontra-se em vigencia de tratamento oncologico sistemico com quimioterapia, sob meus cuidados no Hospital do\r\nBem - Unidade Oncologica, Patos/PB.\r\nO tratamento quimioterapico pode ocasionar fadiga, astenia, nauseas, vomitos, diarreia, mucosite, dor, neuropatia, anemia, neutropenia,\r\nplaquetopenia, maior risco infeccioso e necessidade de consultas, exames, infusoes e reavaliacoes recorrentes.\r\nConsiderando o diagnostico, o tratamento ativo e os riscos associados, recomendo afastamento das atividades laborais por 6 (seis) meses, a\r\ncontar de ____/____/________, passivel de renovacao apos reavaliacao medica. A permanencia em atividade laboral durante a quimioterapia\r\ndeve ser avaliada conforme a funcao exercida, pois efeitos colaterais e condicoes do ambiente de trabalho podem oferecer riscos ao paciente e a\r\nterceiros, conforme a atividade especifica.\r\n2. DIREITOS SOCIAIS QUE PODEM SER AVALIADOS\r\n INSS: beneficio por incapacidade temporaria ou permanente,\r\nconforme pericia, qualidade de segurado e incapacidade laboral.\r\n FGTS: saque quando trabalhador ou dependente for acometido por\r\nneoplasia maligna, conforme Lei 8.036/1990, art. 20, XI.\r\n PIS/PASEP: saque de cotas quando existentes e preenchidos os\r\ncriterios do fundo.\r\n Imposto de renda: isencao sobre aposentadoria, reforma ou\r\npensao, conforme Lei 7.713/1988, art. 6º, XIV.\r\n Transporte: gratuidade conforme legislacao local; Passe Livre\r\ninterestadual quando houver criterios legais.\r\n Veiculo adaptado: IPI, ICMS, IPVA e CNH especial quando\r\nhouver deficiencia/sequela funcional, conforme laudo especifico.\r\n Financiamento habitacional: possivel quitacao se houver\r\ninvalidez total/permanente e cobertura securitaria contratual.\r\n Servico Social: orientar sobre TFD/SUS, medicacoes, transporte e\r\nformularios especificos.\r\nObservacao: o acesso a beneficios depende de documentacao, avaliacao pericial, regras do orgao competente, condicao laboral, renda, deficiencia/sequela e\r\nlegislacao local vigente. Este relatorio deve ser acompanhado de exames, laudos e documentos solicitados pela pericia ou instituicao responsavel.\r\nDr. Silas Negrao Serra Jr. - CRM-PB 17341\r\nRQE Oncologia Clinica 9099 | RQE Clinica Medica 9098\r\nData: ____/____/________\r\nCARIMBO\r\nASSINATURA DO MEDICO\r\n\r\n"
+}

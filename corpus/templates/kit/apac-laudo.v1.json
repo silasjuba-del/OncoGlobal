@@ -1,0 +1,551 @@
+{
+  "id": "apac-laudo",
+  "versao": "1.0.0",
+  "header": {
+    "id": "apac-laudo",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-05",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-W5-06 + ADENDO-W6-W7.md (2026-10-05); docs/referencias/apac-laudo-solicitacao-autorizacao.pdf",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-05"
+  },
+  "fonte": {
+    "tipo": "FORMULARIO_OFICIAL",
+    "referencia": "docs/referencias/apac-laudo-solicitacao-autorizacao.pdf",
+    "pagina": 1
+  },
+  "disposicaoPDF": "Visualmente conferida na página 1 do PDF oficial; blocos em ordem espacial do formulário",
+  "textoFonteOriginal": "sus\r\nSistema Único\r\nde Saúde\r\nMinistério \r\nda Saúde\r\nNOME DO ESTABELECIMENTO DE SAÚDE SOLICITANTE CNES\r\nDATA DA AUTORIZAÇÃO ASSINATURA E CARIMBO (Nº DO REGISTRO DO CONSELHO)\r\nCÓD. ÓRGÃO EMISSOR\r\nNº DA AUTORIZAÇÃO (APAC)\r\nNOME DO PROFISSIONAL AUTORIZADOR\r\nDATA DE NASCIMENTO \r\nNOME DA  MÃE\r\nENDEREÇO (RUA, Nº, BAIRRO)\r\nMUNICÍPIO DE RESIDÊNCIA\r\nDDD\r\nTELEFONE CELULAR\r\nCEPUFCÓD. IBGE MUNICÍPIO\r\nSEXO\r\nFem.Masc.\r\nPROCEDIMENTO(S) SOLICITADO(S)PROCEDIMENTO SOLICITADO\r\nNOME DO PROFISSIONAL SOLICITANTE\r\nCARTÃO NACIONAL DE SAÚDE DO PROFISSIONAL SOLICITANTE\r\nASSINATURA E CARIMBO (REGISTRO DO CONSELHO)\r\nAUTORIZAÇÃO\r\nSOLICITAÇÃO\r\nNº DO PRONTUÁRIO\r\nCARTÃO NACIONAL DE SAÚDE (CNS)\r\nNOME DO PACIENTE\r\nIDENTIFICAÇÃO DO PACIENTE\r\nNOME DO PROCEDIMENTO PRINCIPAL QTDE.CÓDIGO DO PROCEDIMENTO PRINCIPAL\r\nPROCEDIMENTO(S) SOLICITADO(S)PROCEDIMENTO(S) SECUNDÁRIO(S)\r\nDESCRIÇÃO DO DIAGNÓSTICO\r\nJUSTIFICATIVA DO(S) PROCEDIMENTO(S) SOLICITADO(S)\r\nOBSERVAÇÕES\r\nCID10 SECUNDÁRIOCID10 PRINCIPAL CID10 CAUSAS ASSOCIADAS\r\nNOME DO PROCEDIMENTO SECUNDÁRIO QTDE.CÓDIGO DO PROCEDIMENTO SECUNDÁRIO\r\nNOME DO PROCEDIMENTO SECUNDÁRIO QTDE.CÓDIGO DO PROCEDIMENTO SECUNDÁRIO\r\nNOME DO PROCEDIMENTO SECUNDÁRIO QTDE.CÓDIGO DO PROCEDIMENTO SECUNDÁRIO\r\nNOME DO PROCEDIMENTO SECUNDÁRIO QTDE.CÓDIGO DO PROCEDIMENTO SECUNDÁRIO\r\nNOME DO PROCEDIMENTO SECUNDÁRIO QTDE.CÓDIGO DO PROCEDIMENTO SECUNDÁRIO\r\nNOME FANTASIA DO ESTABELECIMENTO DE SAÚDE EXECUTANTE CNES\r\nIDENTIFICAÇÃO DO ESTABELECIMENTO DE SAÚDE (EXECUTANTE)\r\nIDENTIFICAÇÃO DO ESTABELECIMENTO DE SAÚDE (SOLICITANTE)\r\nPERÍODO DE VALIDADE DA APAC\r\na\r\nNOME DO RESPONSÁVEL\r\nDDD\r\nTELEFONE DE CONTATO\r\nRAÇA/COR\r\nAP ACAutorização de Procedimentos Ambulatoriais\r\nLaudo de Solicitação / Autorização pg. 1/2\r\nDATA DA SOLICITAÇÃO\r\nCARTÃO NACIONAL DE SAÚDE DO PROFISSIONAL AUTORIZADOR\r\nETNIA\r\nSERVIÇO CLASS\r\nNº DO TELEFONE\r\nNº DO TELEFONE\r\n=====\r\n",
+  "campos": [
+    {
+      "id": "sus",
+      "campo": "sus",
+      "tipo": "ROTULO",
+      "bloco": "FORMULÁRIO OFICIAL",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "sistema-unico",
+      "campo": "Sistema Único de Saúde",
+      "tipo": "ROTULO",
+      "bloco": "FORMULÁRIO OFICIAL",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "ministerio",
+      "campo": "Ministério da Saúde",
+      "tipo": "ROTULO",
+      "bloco": "FORMULÁRIO OFICIAL",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "bloco-estab-solicitante",
+      "campo": "IDENTIFICAÇÃO DO ESTABELECIMENTO DE SAÚDE (SOLICITANTE)",
+      "tipo": "ROTULO",
+      "bloco": "IDENTIFICAÇÃO DO ESTABELECIMENTO DE SAÚDE (SOLICITANTE)",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "estab-solicitante-nome",
+      "campo": "NOME DO ESTABELECIMENTO DE SAÚDE SOLICITANTE",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO ESTABELECIMENTO DE SAÚDE (SOLICITANTE)",
+      "origem": "configuração institucional"
+    },
+    {
+      "id": "estab-solicitante-cnes",
+      "campo": "CNES",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO ESTABELECIMENTO DE SAÚDE (SOLICITANTE)",
+      "origem": "configuração institucional; [VERIFICAR] CNES"
+    },
+    {
+      "id": "bloco-paciente",
+      "campo": "IDENTIFICAÇÃO DO PACIENTE",
+      "tipo": "ROTULO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "paciente-nome",
+      "campo": "NOME DO PACIENTE",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "paciente-prontuario",
+      "campo": "Nº DO PRONTUÁRIO",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "paciente-cns",
+      "campo": "CARTÃO NACIONAL DE SAÚDE (CNS)",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "paciente-nascimento",
+      "campo": "DATA DE NASCIMENTO",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "paciente-sexo",
+      "campo": "SEXO",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "sexo-masc",
+      "campo": "Masc.",
+      "tipo": "ROTULO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "sexo-fem",
+      "campo": "Fem.",
+      "tipo": "ROTULO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "paciente-raca-cor",
+      "campo": "RAÇA/COR",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "paciente-etnia",
+      "campo": "ETNIA",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "paciente-mae",
+      "campo": "NOME DA MÃE",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "celular-ddd",
+      "campo": "DDD",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "celular-numero",
+      "campo": "TELEFONE CELULAR",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "celular-label-numero",
+      "campo": "Nº DO TELEFONE",
+      "tipo": "ROTULO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "responsavel-nome",
+      "campo": "NOME DO RESPONSÁVEL",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "responsavel-ddd",
+      "campo": "DDD",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "responsavel-contato",
+      "campo": "TELEFONE DE CONTATO",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "responsavel-label-telefone",
+      "campo": "Nº DO TELEFONE",
+      "tipo": "ROTULO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "paciente-endereco",
+      "campo": "ENDEREÇO (RUA, Nº, BAIRRO)",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "paciente-municipio",
+      "campo": "MUNICÍPIO DE RESIDÊNCIA",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "paciente-ibge",
+      "campo": "CÓD. IBGE MUNICÍPIO",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "paciente-uf",
+      "campo": "UF",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "paciente-cep",
+      "campo": "CEP",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO PACIENTE",
+      "origem": "cadastro do paciente"
+    },
+    {
+      "id": "bloco-proc-principal",
+      "campo": "PROCEDIMENTO SOLICITADO",
+      "tipo": "ROTULO",
+      "bloco": "PROCEDIMENTO SOLICITADO",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "proced-principal-codigo",
+      "campo": "CÓDIGO DO PROCEDIMENTO PRINCIPAL",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO SOLICITADO",
+      "origem": "prescrição/protocolo; SIGTAP [VERIFICAR]"
+    },
+    {
+      "id": "proced-servico",
+      "campo": "SERVIÇO",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO SOLICITADO",
+      "origem": "prescrição/protocolo"
+    },
+    {
+      "id": "proced-class",
+      "campo": "CLASS",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO SOLICITADO",
+      "origem": "prescrição/protocolo"
+    },
+    {
+      "id": "proced-principal-nome",
+      "campo": "NOME DO PROCEDIMENTO PRINCIPAL",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO SOLICITADO",
+      "origem": "prescrição/protocolo"
+    },
+    {
+      "id": "proced-principal-qtde",
+      "campo": "QTDE.",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO SOLICITADO",
+      "origem": "prescrição/protocolo"
+    },
+    {
+      "id": "bloco-proc-sec",
+      "campo": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "tipo": "ROTULO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "proced-sec-1-codigo",
+      "campo": "CÓDIGO DO PROCEDIMENTO SECUNDÁRIO",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo; SIGTAP [VERIFICAR]"
+    },
+    {
+      "id": "proced-sec-1-nome",
+      "campo": "NOME DO PROCEDIMENTO SECUNDÁRIO",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo"
+    },
+    {
+      "id": "proced-sec-1-qtde",
+      "campo": "QTDE.",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo"
+    },
+    {
+      "id": "proced-sec-2-codigo",
+      "campo": "CÓDIGO DO PROCEDIMENTO SECUNDÁRIO",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo; SIGTAP [VERIFICAR]"
+    },
+    {
+      "id": "proced-sec-2-nome",
+      "campo": "NOME DO PROCEDIMENTO SECUNDÁRIO",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo"
+    },
+    {
+      "id": "proced-sec-2-qtde",
+      "campo": "QTDE.",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo"
+    },
+    {
+      "id": "proced-sec-3-codigo",
+      "campo": "CÓDIGO DO PROCEDIMENTO SECUNDÁRIO",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo; SIGTAP [VERIFICAR]"
+    },
+    {
+      "id": "proced-sec-3-nome",
+      "campo": "NOME DO PROCEDIMENTO SECUNDÁRIO",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo"
+    },
+    {
+      "id": "proced-sec-3-qtde",
+      "campo": "QTDE.",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo"
+    },
+    {
+      "id": "proced-sec-4-codigo",
+      "campo": "CÓDIGO DO PROCEDIMENTO SECUNDÁRIO",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo; SIGTAP [VERIFICAR]"
+    },
+    {
+      "id": "proced-sec-4-nome",
+      "campo": "NOME DO PROCEDIMENTO SECUNDÁRIO",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo"
+    },
+    {
+      "id": "proced-sec-4-qtde",
+      "campo": "QTDE.",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo"
+    },
+    {
+      "id": "proced-sec-5-codigo",
+      "campo": "CÓDIGO DO PROCEDIMENTO SECUNDÁRIO",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo; SIGTAP [VERIFICAR]"
+    },
+    {
+      "id": "proced-sec-5-nome",
+      "campo": "NOME DO PROCEDIMENTO SECUNDÁRIO",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo"
+    },
+    {
+      "id": "proced-sec-5-qtde",
+      "campo": "QTDE.",
+      "tipo": "CAMPO",
+      "bloco": "PROCEDIMENTO(S) SECUNDÁRIO(S)",
+      "origem": "prescrição/protocolo"
+    },
+    {
+      "id": "bloco-justificativa",
+      "campo": "JUSTIFICATIVA DO(S) PROCEDIMENTO(S) SOLICITADO(S)",
+      "tipo": "ROTULO",
+      "bloco": "JUSTIFICATIVA DO(S) PROCEDIMENTO(S) SOLICITADO(S)",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "diagnostico-descricao",
+      "campo": "DESCRIÇÃO DO DIAGNÓSTICO",
+      "tipo": "CAMPO",
+      "bloco": "JUSTIFICATIVA DO(S) PROCEDIMENTO(S) SOLICITADO(S)",
+      "origem": "TumorLot confirmado"
+    },
+    {
+      "id": "cid-principal",
+      "campo": "CID10 PRINCIPAL",
+      "tipo": "CAMPO",
+      "bloco": "JUSTIFICATIVA DO(S) PROCEDIMENTO(S) SOLICITADO(S)",
+      "origem": "TumorLot confirmado"
+    },
+    {
+      "id": "cid-secundario",
+      "campo": "CID10 SECUNDÁRIO",
+      "tipo": "CAMPO",
+      "bloco": "JUSTIFICATIVA DO(S) PROCEDIMENTO(S) SOLICITADO(S)",
+      "origem": "TumorLot confirmado"
+    },
+    {
+      "id": "cid-causas",
+      "campo": "CID10 CAUSAS ASSOCIADAS",
+      "tipo": "CAMPO",
+      "bloco": "JUSTIFICATIVA DO(S) PROCEDIMENTO(S) SOLICITADO(S)",
+      "origem": "TumorLot confirmado"
+    },
+    {
+      "id": "justificativa-observacoes",
+      "campo": "OBSERVAÇÕES",
+      "tipo": "CAMPO",
+      "bloco": "JUSTIFICATIVA DO(S) PROCEDIMENTO(S) SOLICITADO(S)",
+      "origem": "texto do médico; rascunho editável"
+    },
+    {
+      "id": "bloco-solicitacao",
+      "campo": "SOLICITAÇÃO",
+      "tipo": "ROTULO",
+      "bloco": "SOLICITAÇÃO",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "profissional-solicitante",
+      "campo": "NOME DO PROFISSIONAL SOLICITANTE",
+      "tipo": "CAMPO",
+      "bloco": "SOLICITAÇÃO",
+      "origem": "perfil do médico"
+    },
+    {
+      "id": "data-solicitacao",
+      "campo": "DATA DA SOLICITAÇÃO",
+      "tipo": "CAMPO",
+      "bloco": "SOLICITAÇÃO",
+      "origem": "data de geração no app"
+    },
+    {
+      "id": "assinatura-solicitante",
+      "campo": "ASSINATURA E CARIMBO (REGISTRO DO CONSELHO)",
+      "tipo": "CAMPO",
+      "bloco": "SOLICITAÇÃO",
+      "origem": "assinatura médica"
+    },
+    {
+      "id": "cns-profissional-solicitante",
+      "campo": "CARTÃO NACIONAL DE SAÚDE DO PROFISSIONAL SOLICITANTE",
+      "tipo": "CAMPO",
+      "bloco": "SOLICITAÇÃO",
+      "origem": "perfil do médico"
+    },
+    {
+      "id": "bloco-autorizacao",
+      "campo": "AUTORIZAÇÃO",
+      "tipo": "ROTULO",
+      "bloco": "AUTORIZAÇÃO",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "profissional-autorizador",
+      "campo": "NOME DO PROFISSIONAL AUTORIZADOR",
+      "tipo": "CAMPO",
+      "bloco": "AUTORIZAÇÃO",
+      "origem": "autorizador; sempre em branco"
+    },
+    {
+      "id": "codigo-orgao-emissor",
+      "campo": "CÓD. ÓRGÃO EMISSOR",
+      "tipo": "CAMPO",
+      "bloco": "AUTORIZAÇÃO",
+      "origem": "autorizador; sempre em branco"
+    },
+    {
+      "id": "numero-autorizacao",
+      "campo": "Nº DA AUTORIZAÇÃO (APAC)",
+      "tipo": "CAMPO",
+      "bloco": "AUTORIZAÇÃO",
+      "origem": "autorizador; sempre em branco"
+    },
+    {
+      "id": "cns-profissional-autorizador",
+      "campo": "CARTÃO NACIONAL DE SAÚDE DO PROFISSIONAL AUTORIZADOR",
+      "tipo": "CAMPO",
+      "bloco": "AUTORIZAÇÃO",
+      "origem": "autorizador; sempre em branco"
+    },
+    {
+      "id": "data-autorizacao",
+      "campo": "DATA DA AUTORIZAÇÃO",
+      "tipo": "CAMPO",
+      "bloco": "AUTORIZAÇÃO",
+      "origem": "autorizador; sempre em branco"
+    },
+    {
+      "id": "assinatura-autorizador",
+      "campo": "ASSINATURA E CARIMBO (Nº DO REGISTRO DO CONSELHO)",
+      "tipo": "CAMPO",
+      "bloco": "AUTORIZAÇÃO",
+      "origem": "autorizador; sempre em branco"
+    },
+    {
+      "id": "periodo-validade",
+      "campo": "PERÍODO DE VALIDADE DA APAC",
+      "tipo": "CAMPO",
+      "bloco": "AUTORIZAÇÃO",
+      "origem": "autorizador; sempre em branco"
+    },
+    {
+      "id": "periodo-validade-de-a",
+      "campo": "a",
+      "tipo": "ROTULO",
+      "bloco": "AUTORIZAÇÃO",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "bloco-estab-executante",
+      "campo": "IDENTIFICAÇÃO DO ESTABELECIMENTO DE SAÚDE (EXECUTANTE)",
+      "tipo": "ROTULO",
+      "bloco": "IDENTIFICAÇÃO DO ESTABELECIMENTO DE SAÚDE (EXECUTANTE)",
+      "origem": "FORMULARIO_OFICIAL"
+    },
+    {
+      "id": "estab-executante-nome",
+      "campo": "NOME FANTASIA DO ESTABELECIMENTO DE SAÚDE EXECUTANTE",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO ESTABELECIMENTO DE SAÚDE (EXECUTANTE)",
+      "origem": "configuração institucional"
+    },
+    {
+      "id": "estab-executante-cnes",
+      "campo": "CNES",
+      "tipo": "CAMPO",
+      "bloco": "IDENTIFICAÇÃO DO ESTABELECIMENTO DE SAÚDE (EXECUTANTE)",
+      "origem": "configuração institucional; [VERIFICAR] CNES"
+    }
+  ],
+  "regras": {
+    "autorizacao": "todos os campos do bloco sempre em branco",
+    "periodoValidade": "sempre em branco",
+    "finalidade": "herdada do lote ou PENDENTE; nunca derivada da intenção",
+    "cidPrincipal": "TumorLot confirmado",
+    "sigtap": "PENDENTE [VERIFICAR] até importar tabela"
+  }
+}
