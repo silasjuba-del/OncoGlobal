@@ -7,6 +7,7 @@ import { configDefaults, defineConfig } from "vitest/config";
 //   npx vitest run tests/adv/<arquivo> --no-file-parallelism
 // ou com W5_ADV=1. O `tsc --noEmit` continua cobrindo tests/adv (o tsconfig não muda).
 const PASTA_ADV = "tests/adv";
+const PASTA_FIXTURE = "tests/e2e/fixtures";
 
 function normalizarFiltro(arg: string, raiz: string): string {
   const relativo = isAbsolute(arg) ? relative(raiz, arg) : arg;
@@ -34,11 +35,20 @@ export default defineConfig(async () => {
     plugins.push(react());
   }
   const comAdv = pedeTestesAdv(process.argv.slice(2), process.env, process.cwd());
+  // A fixture vermelha pertence a E2E-UI e nao deve entrar no reataque real
+  // executado a partir da raiz do projeto. So a propria raiz controlada a inclui.
+  const raizFixture = process.cwd().replace(/\\/g, "/").replace(/\/+$/, "")
+    .endsWith(`/${PASTA_FIXTURE}`);
   return {
     plugins,
     test: {
-      // Preserva o exclude padrão do Vitest; tests/adv/** sai da execução padrão.
-      exclude: comAdv ? [...configDefaults.exclude] : [...configDefaults.exclude, `**/${PASTA_ADV}/**`],
+      // Preserva o exclude padrao; filtro explicito habilita apenas o reataque real,
+      // exceto se o comando for executado na propria fixture controlada.
+      exclude: [
+        ...configDefaults.exclude,
+        ...(comAdv ? (raizFixture ? [] : [`**/${PASTA_FIXTURE}/${PASTA_ADV}/**`])
+          : [`**/${PASTA_ADV}/**`]),
+      ],
       // O plugin do React junto do jsdom estoura os 60s de arranque do worker no Windows.
       pool: "threads",
       maxWorkers: 1,
