@@ -31,7 +31,7 @@
 
 | # | Sintoma | Limiar citado na fonte | Ação recomendada na fonte | Fonte | Status |
 |---|---|---|---|---|---|
-| 1 | Febre | ≥37,8 °C (decisão Dr. Silas) | Ir ao PS → hemograma → antibiótico se neutropênico | M1 p.5, p.10; M2 pdf7 | **APROVADO** |
+| 1 | Febre | > 37,8 °C (decisão Dr. Silas) | Ir ao PS → hemograma → antibiótico se neutropênico | M1 p.5, p.10; M2 pdf7 | **APROVADO** |
 | 2 | Falta de ar / dificuldade respiratória | Início súbito | Ir ao PS | M1 p.5 | **APROVADO** |
 | 3 | Alteração urinária | Parar de urinar ou perder o controle da urina | Ir ao PS | M1 p.5 | **APROVADO** |
 | 4 | Alteração visual | Visão dupla ou borrada | Ir ao PS | M1 p.5 | **APROVADO** |

@@ -11,14 +11,14 @@
 | # | Regra | Consequência nas receitas |
 |---|---|---|
 | R1 | Antiemese = **ondansetrona + dexametasona + difenidramina**, **sem aprepitanto/NK1**, mesmo em alto risco | Nenhuma linha com NK1. Divergência com MASCC/ESMO/ASCO registrada no bloco 1 |
-| R2 | **Febre ≥ 37,8 °C → PS → hemograma → antibiótico só se neutropênico** | Nenhuma receita traz antibiótico empírico para casa. Toda orientação de analgésico/antitérmico manda **medir a temperatura antes** |
+| R2 | **Febre > 37,8 °C → PS → hemograma → antibiótico só se neutropênico** | Nenhuma receita traz antibiótico empírico para casa. Toda orientação de analgésico/antitérmico manda **medir a temperatura antes** |
 | R3 | **Diarreia > 24 h → suspender anti-hipertensivo**; **vômito + diarreia → PS** para hidratação venosa | Está no bloco 3 (diarreia) e no bloco 1 (vômito) |
 | R4 | Redução de dose de QT = **decisão médica** (botões −20/−30/−40) | Não aparece em nenhuma receita; só a nota "avaliar dose" para o médico |
 | R5 | Prescrição em **modo rápido de uma linha** | Formato: `FÁRMACO DOSE VIA FREQUÊNCIA [SE ...] — DURAÇÃO / MÁX` |
 
 ## Red flags universais (valem para todos os blocos) — PROPOSTA
 
-Procurar o PS (ou ligar para o serviço) se houver: temperatura ≥ 37,8 °C; calafrios; vômitos que não param ou impedem de tomar líquidos/remédios; vômito **e** diarreia juntos; diarreia com sangue, febre ou > 24 h sem melhora; sinais de desidratação (tontura ao levantar, boca muito seca, pouca urina); sangramento; falta de ar; dor no peito; confusão mental; incapacidade de beber ou comer por dor na boca.
+Procurar o PS (ou ligar para o serviço) se houver: temperatura > 37,8 °C; calafrios; vômitos que não param ou impedem de tomar líquidos/remédios; vômito **e** diarreia juntos; diarreia com sangue, febre ou > 24 h sem melhora; sinais de desidratação (tontura ao levantar, boca muito seca, pouca urina); sangramento; falta de ar; dor no peito; confusão mental; incapacidade de beber ou comer por dor na boca.
 
 ## Tabela-índice
 
@@ -91,7 +91,7 @@ Notas para o médico:
 Tome o remédio de enjoo nos horários certos, mesmo que esteja bem, nos dias marcados; o de "SE NÁUSEA" é para quando o enjoo aparecer. Coma pouco e várias vezes, prefira comida fria e seca e beba líquidos aos goles. A dexametasona deve ser tomada de manhã (pode tirar o sono e aumentar o açúcar no sangue).
 
 **4. Quando ir ao PS**
-Vômitos que impedem de beber ou de tomar os remédios por mais de 24 h; **vômito e diarreia juntos (R3)**; sinais de desidratação; vômito com sangue ou "borra de café"; febre ≥ 37,8 °C (R2).
+Vômitos que impedem de beber ou de tomar os remédios por mais de 24 h; **vômito e diarreia juntos (R3)**; sinais de desidratação; vômito com sangue ou "borra de café"; febre > 37,8 °C (R2).
 
 **5. Cautelas**
 - **Ondansetrona prolonga o QT.** A FDA (2012) retirou a dose IV única de 32 mg: nenhuma dose IV única deve passar de 16 mg. Somar risco com QT-prolongadores: antraciclinas, arsênico, alguns TKIs (vandetanibe, nilotinibe etc.), fluconazol, haloperidol, metoclopramida, hipocalemia/hipomagnesemia (cisplatina, diarreia) → ECG/eletrólitos a critério médico.
@@ -141,7 +141,7 @@ Notas para o médico:
 Escove os dentes com escova macia depois de cada refeição e faça o bochecho 4 vezes ao dia. Evite comida ácida, apimentada, muito quente ou dura, álcool, cigarro e enxaguante com álcool. Se usar prótese, tire-a para dormir e quando houver feridas.
 
 **4. Quando ir ao PS**
-Não consegue beber líquidos nem engolir os remédios por dor; febre ≥ 37,8 °C (R2), porque a mucosite coincide com o nadir; sangramento na boca; placas brancas extensas com febre.
+Não consegue beber líquidos nem engolir os remédios por dor; febre > 37,8 °C (R2), porque a mucosite coincide com o nadir; sangramento na boca; placas brancas extensas com febre.
 
 **5. Cautelas**
 - Mucosite G3–G4 pode significar toxicidade grave ao 5-FU ou à capecitabina (suspeita de deficiência de DPD) → **avaliação médica e decisão de dose (R4)**.
@@ -189,7 +189,7 @@ Notas para o médico:
 Beba bastante líquido (soro caseiro ou de farmácia, água, chás claros) e coma em pouca quantidade, alimentos leves (arroz, banana, batata, frango). Evite leite, gordura, frituras, café, álcool e fibras cruas enquanto durar a diarreia. Se a diarreia passar de 1 dia, **pare o remédio de pressão** e avise o serviço.
 
 **4. Quando ir ao PS**
-**Vômito + diarreia (R3)**; febre ≥ 37,8 °C (R2); sangue ou muco nas fezes; dor/cólica forte ou barriga inchada; 7 ou mais evacuações por dia; tontura, boca seca ou pouca urina; diarreia que não melhora em 24 h com loperamida (alta dose do irinotecano: em 48 h); **qualquer diarreia em quem usa imunoterapia**.
+**Vômito + diarreia (R3)**; febre > 37,8 °C (R2); sangue ou muco nas fezes; dor/cólica forte ou barriga inchada; 7 ou mais evacuações por dia; tontura, boca seca ou pouca urina; diarreia que não melhora em 24 h com loperamida (alta dose do irinotecano: em 48 h); **qualquer diarreia em quem usa imunoterapia**.
 
 **5. Cautelas**
 - **Loperamida é contraindicada com febre, sangue nas fezes, dor abdominal sem diarreia, colite aguda e enterocolite bacteriana** (bula). Também se houver suspeita de colite imunomediada ou de *C. difficile*.
@@ -258,7 +258,7 @@ IBUPROFENO ___ MG VO 8/8H SE DOR, MÁX 3 DIAS  [VERIFICAR dose; ver cautelas —
 Antes de tomar o remédio para dor, **meça a temperatura**: se der 37,8 °C ou mais, não tome e vá ao PS. Não passe da dose máxima nem misture remédios por conta própria.
 
 **4. Quando ir ao PS**
-Febre ≥ 37,8 °C (R2); dor que não cede com a dose máxima; dor nova e forte nas costas com fraqueza ou dormência nas pernas (suspeita de compressão medular); dor no peito; dor abdominal forte.
+Febre > 37,8 °C (R2); dor que não cede com a dose máxima; dor nova e forte nas costas com fraqueza ou dormência nas pernas (suspeita de compressão medular); dor no peito; dor abdominal forte.
 
 **5. Cautelas**
 - **Antitérmicos mascaram febre** em neutropênico: ligação direta com a R2.
