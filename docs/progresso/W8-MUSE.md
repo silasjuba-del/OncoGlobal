@@ -9,7 +9,8 @@
 |---|---|---|---|---|
 | MU-01 · Sistema visual | FEITA | a8ef6a8 | tsc 0 · fronteiras 81 arq · corpus 20 arq · regressão 9/9 | – |
 | MU-02 · Semântica de estado | FEITA | b5395c9 | tsc 0 · fronteiras 81 arq · corpus 20 arq · regressão 9/9 | – |
-| MU-03 · Microcopy pt-BR | FEITA | (neste commit) | tsc 0 · fronteiras 82 arq · corpus 20 arq · ui-copy 5/5 + regressão 9/9 | – |
+| MU-03 · Microcopy pt-BR | FEITA | 3886138 | tsc 0 · fronteiras 82 arq · corpus 20 arq · ui-copy 5/5 + regressão 9/9 | – |
+| MU-04 · Ícones SVG | FEITA | (neste commit) | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 | – |
 | MU-04 · Ícones SVG | A_FAZER | – | – | – |
 | MU-05 · Protótipo: consulta pronta | A_FAZER | – | – | – |
 | MU-06 · Protótipo: salão e agenda | A_FAZER | – | – | – |
@@ -37,6 +38,10 @@
 - `tests/ui-copy/copy.test.ts` — chaves únicas/camelCase, sem texto vazio,
   sem corte clínico (lista + allowlist de números), avisos exatos, sem
   jargão/nomes.
+- `src/ui/icones/{Icone,navegacao,estados}.tsx` + `index.ts` — 18 ícones SVG
+  próprios (11 navegação + 7 estado), traço 24, `aria-hidden`, rótulo no uso.
+- `tests/ui-copy/icones.test.tsx` — 18 expostos; todos renderizam `svg` com
+  `viewBox` 24, `aria-hidden` e conteúdo.
 
 ## [VERIFICAR]
 
