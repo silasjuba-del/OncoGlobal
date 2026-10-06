@@ -5,9 +5,10 @@
 // esperado.json bate com o conteúdo dos arquivos. Regressão: CASO-REAL-01-LICOES.md §4.
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
-const DIR = new URL("../fixtures/caso07", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
+const DIR = fileURLToPath(new URL("../fixtures/caso07", import.meta.url));
 const ler = (nome: string) => readFileSync(join(DIR, nome), "utf8");
 const DOCS = [
   "01-ficha-recepcao.txt", "02-receituario-secundario.txt", "03-documentos-pessoais-comprovante.txt",
