@@ -191,7 +191,8 @@ describe("GRK-01 pré-consulta", () => {
     expect(semFonte.apac.itens).toEqual([]);
   });
 
-  it("borda: NOVO e RESOLVEU saem da comparação, sem direção inventada", () => {
+  // ADV-017: a expectativa antiga RESOLVEU por omissão contradizia K-17 (PLANO:54).
+  it("borda: NOVO aparece, ausência persiste PENDENTE sem resolução ou direção inventada", () => {
     const pack = montarPreConsulta(entrada(
       snapshot({
         snapshotId: "snap-2", patientId: "pac-teste-01",
@@ -203,9 +204,10 @@ describe("GRK-01 pré-consulta", () => {
       }),
     ));
     expect(pack.oQueMudou.itens).toEqual([
-      { campo: "queixa", kind: "RESOLVEU", antes: "dor", depois: null, direcao: null },
+      { campo: "queixa", kind: "PERSISTE", antes: "dor", depois: null, direcao: null },
       { campo: "sintoma", kind: "NOVO", antes: null, depois: "tosse", direcao: null },
     ]);
+    expect(pack.oQueMudou.estado).toBe("PENDENTE");
   });
 
   it("o valor literal CONFLITO não é tratado como colisão", () => {
