@@ -1,0 +1,28 @@
+[SINTÉTICO · Paciente Teste 08 · estrutura de laudo real, sem identificadores]
+Atendimento: 000000000000          Idade: 77 anos
+Paciente: PACIENTE TESTE 08        Data: 01/01/2030
+Data de Nascimento: 01/01/1953
+
+TOMOGRAFIA COMPUTADORIZADA DO CRÂNIO
+
+Técnica:
+Foi realizada aquisição volumétrica em equipamento multislice, antes e após a administração endovenosa do contraste iodado.
+
+DESCRIÇÃO:
+Acentuação dos sulcos entre os giros corticais, das fissuras e cisternas encefálicas, bem como dos sulcos entre as folias cerebelares.
+Dilatação compensatória do sistema ventricular, proporcional ao grau de redução volumétrica encefálica.
+Focos hipoatenuantes na substância branca periventricular e nos centros semiovais, sem efeito expansivo ou atrófico.
+Calcificações ateromatosas nas artérias carótidas internas e vertebrais.
+Estruturas da linha média sem desvios expressivos.
+Não observamos formações expansivas intra-axiais, coleções extra-axiais ou sinais de obliteração das cisternas da base.
+Transição craniocervical sem alterações dignas de nota.
+Estruturas ósseas íntegras.
+
+IMPRESSÃO:
+Redução volumétrica encefálica.
+Focos hipoatenuantes localizados na substância branca dos hemisférios cerebrais, compatíveis com microangiopatia.
+Calcificações ateromatosas nas artérias carótidas internas e vertebrais.
+O valor preditivo de qualquer exame depende da análise conjunta do seu resultado e dos dados clínico-epidemiológicos do(a) paciente.
+
+Este laudo foi liberado em 01/01/2030 15:00.
+RADIOLOGISTA TESTE
