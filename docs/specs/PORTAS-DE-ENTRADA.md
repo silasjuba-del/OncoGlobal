@@ -4,7 +4,7 @@
 
 | Porta | Quem usa | Exemplo consultório | Estado |
 |---|---|---|---|
-| **Página do paciente** | Paciente / familiar | Formulário pré-consulta, upload de exame, intercorrência | Registrada — ver nota (D-W9-46) |
+| **Página do paciente** | Paciente / familiar | Formulário pré-consulta, upload de exame, intercorrência | **v1 = WhatsApp** (D-W9-48); web na v2 |
 | Caixa única (consulta) | Médico | Colar texto, soltar PDF/Word (D-W9-18) | Decidida |
 | Plaud / voz | Médico | Transcrição desidentificada (A8), comando curto (A9) | Decidida |
 | Canal WhatsApp | Paciente | Mensagens, red flags (A10, D-W9-28) | Decidida (envio desligado até vínculo + consentimento) |

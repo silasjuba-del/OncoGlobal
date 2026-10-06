@@ -1,0 +1,356 @@
+{"de": "far.losartana", "rel": "CATEGORIA", "para": "cat.anti-hipertensivo"}
+{"de": "far.losartana", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.enalapril", "rel": "CATEGORIA", "para": "cat.anti-hipertensivo"}
+{"de": "far.enalapril", "rel": "COMPONENTE_SUS", "para": "basico_habitual"}
+{"de": "far.captopril", "rel": "CATEGORIA", "para": "cat.anti-hipertensivo"}
+{"de": "far.captopril", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.anlodipino", "rel": "CATEGORIA", "para": "cat.anti-hipertensivo"}
+{"de": "far.anlodipino", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.hctz", "rel": "CATEGORIA", "para": "cat.diurético"}
+{"de": "far.hctz", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.atenolol", "rel": "CATEGORIA", "para": "cat.betabloqueador"}
+{"de": "far.atenolol", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.carvedilol", "rel": "CATEGORIA", "para": "cat.betabloqueador"}
+{"de": "far.carvedilol", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.metoprolol_succinato", "rel": "CATEGORIA", "para": "cat.betabloqueador"}
+{"de": "far.metoprolol_succinato", "rel": "COMPONENTE_SUS", "para": "conferir_painel"}
+{"de": "far.espironolactona", "rel": "CATEGORIA", "para": "cat.diurético"}
+{"de": "far.espironolactona", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.furosemida", "rel": "CATEGORIA", "para": "cat.diurético"}
+{"de": "far.furosemida", "rel": "COMPONENTE_SUS", "para": "basico_habitual"}
+{"de": "far.doxazosina", "rel": "CATEGORIA", "para": "cat.anti-hipertensivo"}
+{"de": "far.doxazosina", "rel": "COMPONENTE_SUS", "para": "conferir_painel"}
+{"de": "far.sinvastatina", "rel": "CATEGORIA", "para": "cat.hipolipemiante"}
+{"de": "far.sinvastatina", "rel": "COMPONENTE_SUS", "para": "basico_habitual"}
+{"de": "far.atorvastatina", "rel": "CATEGORIA", "para": "cat.hipolipemiante"}
+{"de": "far.atorvastatina", "rel": "COMPONENTE_SUS", "para": "especializado"}
+{"de": "far.aas", "rel": "CATEGORIA", "para": "cat.antiagregante"}
+{"de": "far.aas", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.varfarina", "rel": "CATEGORIA", "para": "cat.anticoagulante"}
+{"de": "far.varfarina", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.isossorbida", "rel": "CATEGORIA", "para": "cat.antianginoso"}
+{"de": "far.isossorbida", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.metformina", "rel": "CATEGORIA", "para": "cat.antidiabético"}
+{"de": "far.metformina", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.glibenclamida", "rel": "CATEGORIA", "para": "cat.antidiabético"}
+{"de": "far.glibenclamida", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.gliclazida", "rel": "CATEGORIA", "para": "cat.antidiabético"}
+{"de": "far.gliclazida", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.dapagliflozina", "rel": "CATEGORIA", "para": "cat.antidiabético"}
+{"de": "far.dapagliflozina", "rel": "COMPONENTE_SUS", "para": "especializado"}
+{"de": "far.insulina_nph", "rel": "CATEGORIA", "para": "cat.insulina"}
+{"de": "far.insulina_nph", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.insulina_regular", "rel": "CATEGORIA", "para": "cat.insulina"}
+{"de": "far.insulina_regular", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.levotiroxina", "rel": "CATEGORIA", "para": "cat.hormônio tireoidiano"}
+{"de": "far.levotiroxina", "rel": "COMPONENTE_SUS", "para": "basico_habitual"}
+{"de": "far.alendronato", "rel": "CATEGORIA", "para": "cat.antirreabsortivo"}
+{"de": "far.alendronato", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.omeprazol", "rel": "CATEGORIA", "para": "cat.supressor ácido"}
+{"de": "far.omeprazol", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.ibuprofeno", "rel": "CATEGORIA", "para": "cat.analgésico"}
+{"de": "far.ibuprofeno", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.paracetamol", "rel": "CATEGORIA", "para": "cat.analgésico"}
+{"de": "far.paracetamol", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.amoxicilina", "rel": "CATEGORIA", "para": "cat.antibiótico"}
+{"de": "far.amoxicilina", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.amox_clav", "rel": "CATEGORIA", "para": "cat.antibiótico"}
+{"de": "far.amox_clav", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.cefalexina", "rel": "CATEGORIA", "para": "cat.antibiótico"}
+{"de": "far.cefalexina", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.azitromicina", "rel": "CATEGORIA", "para": "cat.antibiótico"}
+{"de": "far.azitromicina", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.ceftriaxona", "rel": "CATEGORIA", "para": "cat.antibiótico"}
+{"de": "far.ceftriaxona", "rel": "COMPONENTE_SUS", "para": "hospitalar_ou_urgencia"}
+{"de": "far.metronidazol", "rel": "CATEGORIA", "para": "cat.antibiótico"}
+{"de": "far.metronidazol", "rel": "COMPONENTE_SUS", "para": "conferir_painel"}
+{"de": "far.ciprofloxacino", "rel": "CATEGORIA", "para": "cat.antibiótico"}
+{"de": "far.ciprofloxacino", "rel": "COMPONENTE_SUS", "para": "conferir_painel"}
+{"de": "far.nitrofurantoina", "rel": "CATEGORIA", "para": "cat.antibiótico"}
+{"de": "far.nitrofurantoina", "rel": "COMPONENTE_SUS", "para": "basico_habitual"}
+{"de": "far.penicilina_benzatina", "rel": "CATEGORIA", "para": "cat.antibiótico"}
+{"de": "far.penicilina_benzatina", "rel": "COMPONENTE_SUS", "para": "basico_habitual"}
+{"de": "far.salbutamol", "rel": "CATEGORIA", "para": "cat.broncodilatador"}
+{"de": "far.salbutamol", "rel": "COMPONENTE_SUS", "para": "conferir_painel"}
+{"de": "far.prednisona", "rel": "CATEGORIA", "para": "cat.corticoide"}
+{"de": "far.prednisona", "rel": "COMPONENTE_SUS", "para": "conferir_painel"}
+{"de": "far.carbamazepina", "rel": "CATEGORIA", "para": "cat.anticonvulsivante"}
+{"de": "far.carbamazepina", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.valproato", "rel": "CATEGORIA", "para": "cat.anticonvulsivante"}
+{"de": "far.valproato", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.litio", "rel": "CATEGORIA", "para": "cat.estabilizador de humor"}
+{"de": "far.litio", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.clonazepam", "rel": "CATEGORIA", "para": "cat.benzodiazepínico"}
+{"de": "far.clonazepam", "rel": "COMPONENTE_SUS", "para": "basico"}
+{"de": "far.haloperidol", "rel": "CATEGORIA", "para": "cat.neuroléptico"}
+{"de": "far.haloperidol", "rel": "COMPONENTE_SUS", "para": "conferir_painel"}
+{"de": "far.clorpromazina", "rel": "CATEGORIA", "para": "cat.neuroléptico"}
+{"de": "far.clorpromazina", "rel": "COMPONENTE_SUS", "para": "conferir_painel"}
+{"de": "far.risperidona", "rel": "CATEGORIA", "para": "cat.neuroléptico"}
+{"de": "far.risperidona", "rel": "COMPONENTE_SUS", "para": "conferir_painel"}
+{"de": "cond.has", "rel": "ESPECIALIDADE", "para": "esp.cardiologia"}
+{"de": "cond.has", "rel": "ALARME", "para": "PA ≥ 180/120 com lesão de órgão alvo: emergência, não é receita de UBS"}
+{"de": "cond.has", "rel": "ALARME", "para": "Dor torácica, falta de ar, déficit neurológico, gestação"}
+{"de": "cond.has", "rel": "FONTE", "para": "Diretriz Brasileira de Hipertensão Arterial 2025. DOI 10.36660/abc.20250624"}
+{"de": "cond.has", "rel": "FONTE", "para": "Rename 2024: losartana 50 mg, anlodipino 5 e 10 mg, hidroclorotiazida 12,5 e 25 mg, atenolol, captopril"}
+{"de": "cond.has", "rel": "TEM_RECEITA", "para": "rec.has.associacao", "porta": "APS", "imprimivel": true}
+{"de": "rec.has.associacao", "rel": "USA_FARMACO", "para": "far.losartana"}
+{"de": "rec.has.associacao", "rel": "USA_FARMACO", "para": "far.anlodipino"}
+{"de": "cond.has", "rel": "TEM_RECEITA", "para": "rec.has.mono", "porta": "APS", "imprimivel": true}
+{"de": "rec.has.mono", "rel": "USA_FARMACO", "para": "far.losartana"}
+{"de": "cond.has", "rel": "TEM_RECEITA", "para": "rec.has.quarta", "porta": "APS", "imprimivel": true}
+{"de": "rec.has.quarta", "rel": "USA_FARMACO", "para": "far.espironolactona"}
+{"de": "cond.dac", "rel": "ESPECIALIDADE", "para": "esp.cardiologia"}
+{"de": "cond.dac", "rel": "ALARME", "para": "Dor em repouso, suor, náusea, duração maior que 15 minutos: SAMU"}
+{"de": "cond.dac", "rel": "ALARME", "para": "Síncope"}
+{"de": "cond.dac", "rel": "FONTE", "para": "Rename 2024: sinvastatina no básico habitual; atorvastatina só no especializado; dinitrato de isossorbida 5 mg sublingual no básico; AAS 100 mg não foi a apresentação explícita no trecho lido"}
+{"de": "cond.dac", "rel": "TEM_RECEITA", "para": "rec.dac.fundo", "porta": "APS", "imprimivel": true}
+{"de": "rec.dac.fundo", "rel": "USA_FARMACO", "para": "far.sinvastatina"}
+{"de": "rec.dac.fundo", "rel": "USA_FARMACO", "para": "far.losartana"}
+{"de": "rec.dac.fundo", "rel": "USA_FARMACO", "para": "far.metoprolol_succinato"}
+{"de": "rec.dac.fundo", "rel": "USA_FARMACO", "para": "far.aas"}
+{"de": "rec.dac.fundo", "rel": "USA_FARMACO", "para": "far.isossorbida"}
+{"de": "cond.icfer", "rel": "ESPECIALIDADE", "para": "esp.cardiologia"}
+{"de": "cond.icfer", "rel": "ALARME", "para": "Falta de ar em repouso, hipotensão, confusão, dor torácica: hospital"}
+{"de": "cond.icfer", "rel": "ALARME", "para": "K alto ou creatinina em subida"}
+{"de": "cond.icfer", "rel": "FONTE", "para": "Portaria Conjunta que aprova o PCDT de ICFEr, 2024"}
+{"de": "cond.icfer", "rel": "FONTE", "para": "Conitec: dapagliflozina 10 mg 1 vez ao dia na ICFEr sintomática NYHA II–IV com FEVE ≤ 40% em terapia padrão"}
+{"de": "cond.icfer", "rel": "FONTE", "para": "Rename 2024: carvedilol e espironolactona no básico"}
+{"de": "cond.icfer", "rel": "FONTE", "para": "Consenso ACC 2024 para doses inicial e alvo"}
+{"de": "cond.icfer", "rel": "TEM_RECEITA", "para": "rec.icfer.inicio", "porta": "APS", "imprimivel": true}
+{"de": "rec.icfer.inicio", "rel": "USA_FARMACO", "para": "far.enalapril"}
+{"de": "rec.icfer.inicio", "rel": "USA_FARMACO", "para": "far.carvedilol"}
+{"de": "rec.icfer.inicio", "rel": "USA_FARMACO", "para": "far.espironolactona"}
+{"de": "cond.icfer", "rel": "TEM_RECEITA", "para": "rec.icfer.congestao", "porta": "APS", "imprimivel": true}
+{"de": "rec.icfer.congestao", "rel": "USA_FARMACO", "para": "far.furosemida"}
+{"de": "cond.icfer", "rel": "TEM_RECEITA", "para": "rec.icfer.dapagliflozina", "porta": "CEAF", "imprimivel": false}
+{"de": "rec.icfer.dapagliflozina", "rel": "USA_FARMACO", "para": "far.dapagliflozina"}
+{"de": "cond.fa", "rel": "ESPECIALIDADE", "para": "esp.cardiologia"}
+{"de": "cond.fa", "rel": "ALARME", "para": "Instabilidade, dor torácica, síncope: hospital"}
+{"de": "cond.fa", "rel": "ALARME", "para": "INR sem controle não autoriza renovar varfarina no escuro"}
+{"de": "cond.fa", "rel": "FONTE", "para": "Rename 2024: varfarina 1 mg e 5 mg no básico"}
+{"de": "cond.fa", "rel": "FONTE", "para": "Diretriz Brasileira de Hipertensão 2025 e prática de FA: betabloqueador para frequência"}
+{"de": "cond.fa", "rel": "TEM_RECEITA", "para": "rec.fa.frequencia", "porta": "APS", "imprimivel": true}
+{"de": "rec.fa.frequencia", "rel": "USA_FARMACO", "para": "far.atenolol"}
+{"de": "cond.fa", "rel": "TEM_RECEITA", "para": "rec.fa.varfarina", "porta": "APS", "imprimivel": true}
+{"de": "rec.fa.varfarina", "rel": "USA_FARMACO", "para": "far.varfarina"}
+{"de": "cond.iam", "rel": "ESPECIALIDADE", "para": "esp.cardiologia"}
+{"de": "cond.iam", "rel": "ALARME", "para": "Parada, hipotensão, edema agudo de pulmão"}
+{"de": "cond.iam", "rel": "FONTE", "para": "Via aberta do infarto: tempo até a reperfusão. Rename não transforma a UBS em sala de hemodinâmica."}
+{"de": "cond.iam", "rel": "TEM_RECEITA", "para": "rec.iam.samu", "porta": "EMERGENCIA", "imprimivel": false}
+{"de": "rec.iam.samu", "rel": "USA_FARMACO", "para": "far.aas"}
+{"de": "cond.crise_has", "rel": "ESPECIALIDADE", "para": "esp.cardiologia"}
+{"de": "cond.crise_has", "rel": "ALARME", "para": "Dor torácica, déficit, dispneia, eclâmpsia, dissecção"}
+{"de": "cond.crise_has", "rel": "FONTE", "para": "Diretriz Brasileira de Hipertensão Arterial 2025"}
+{"de": "cond.crise_has", "rel": "TEM_RECEITA", "para": "rec.crise.urgencia", "porta": "APS", "imprimivel": false}
+{"de": "cond.pac", "rel": "ESPECIALIDADE", "para": "esp.infeccao"}
+{"de": "cond.pac", "rel": "ALARME", "para": "Saturação baixa, FR ≥ 30, hipotensão, confusão"}
+{"de": "cond.pac", "rel": "ALARME", "para": "Não melhora em 48–72 horas"}
+{"de": "cond.pac", "rel": "FONTE", "para": "IDSA/ATS 2019: amoxicilina 1 g de 8/8 h no ambulatorial sem comorbidade; betalactâmico mais macrolídeo no hospital; duração ≥ 5 dias se estável"}
+{"de": "cond.pac", "rel": "FONTE", "para": "Protocolo municipal de Ribeirão Preto: amoxicilina 500 mg de 8/8 h por 5 a 7 dias no CRB-65 0–1"}
+{"de": "cond.pac", "rel": "FONTE", "para": "Rename 2024: amoxicilina 500 mg, azitromicina 500 mg, ceftriaxona 1 g"}
+{"de": "cond.pac", "rel": "TEM_RECEITA", "para": "rec.pac.ubs", "porta": "APS", "imprimivel": true}
+{"de": "rec.pac.ubs", "rel": "USA_FARMACO", "para": "far.amoxicilina"}
+{"de": "cond.pac", "rel": "TEM_RECEITA", "para": "rec.pac.hospital", "porta": "HOSPITAL", "imprimivel": false}
+{"de": "rec.pac.hospital", "rel": "USA_FARMACO", "para": "far.ceftriaxona"}
+{"de": "rec.pac.hospital", "rel": "USA_FARMACO", "para": "far.azitromicina"}
+{"de": "cond.diverticulite", "rel": "ESPECIALIDADE", "para": "esp.infeccao"}
+{"de": "cond.diverticulite", "rel": "ALARME", "para": "Defesa abdominal, vômito incoercível, sepse"}
+{"de": "cond.diverticulite", "rel": "ALARME", "para": "Sem melhora em 48–72 horas"}
+{"de": "cond.diverticulite", "rel": "FONTE", "para": "Rename 2024: amoxicilina + clavulanato 500 mg + 125 mg"}
+{"de": "cond.diverticulite", "rel": "FONTE", "para": "Evidência de que o antibiótico pode ser omitido na não complicada imunocompetente"}
+{"de": "cond.diverticulite", "rel": "TEM_RECEITA", "para": "rec.div.ubs", "porta": "APS", "imprimivel": true}
+{"de": "rec.div.ubs", "rel": "USA_FARMACO", "para": "far.amox_clav"}
+{"de": "rec.div.ubs", "rel": "USA_FARMACO", "para": "far.paracetamol"}
+{"de": "cond.colecistite", "rel": "ESPECIALIDADE", "para": "esp.infeccao"}
+{"de": "cond.colecistite", "rel": "ALARME", "para": "Icterícia, hipotensão, confusão: pensar colangite"}
+{"de": "cond.colecistite", "rel": "ALARME", "para": "Defesa abdominal"}
+{"de": "cond.colecistite", "rel": "FONTE", "para": "Tóquio e prática cirúrgica: colecistectomia precoce na colecistite calculosa aguda"}
+{"de": "cond.colecistite", "rel": "TEM_RECEITA", "para": "rec.cole.hospital", "porta": "HOSPITAL", "imprimivel": false}
+{"de": "rec.cole.hospital", "rel": "USA_FARMACO", "para": "far.ceftriaxona"}
+{"de": "cond.abscesso_abd", "rel": "ESPECIALIDADE", "para": "esp.infeccao"}
+{"de": "cond.abscesso_abd", "rel": "ALARME", "para": "Sepse, peritonite"}
+{"de": "cond.abscesso_abd", "rel": "FONTE", "para": "Controle da fonte é o tratamento"}
+{"de": "cond.abscesso_abd", "rel": "TEM_RECEITA", "para": "rec.abs.dreno", "porta": "HOSPITAL", "imprimivel": false}
+{"de": "cond.celulite", "rel": "ESPECIALIDADE", "para": "esp.infeccao"}
+{"de": "cond.celulite", "rel": "ALARME", "para": "Sepse, necrose, mão ou face com progressão rápida, imunossupressão"}
+{"de": "cond.celulite", "rel": "FONTE", "para": "Rename 2024: cefalexina 500 mg"}
+{"de": "cond.celulite", "rel": "FONTE", "para": "IDSA de pele: 5 dias na celulite não complicada que melhora"}
+{"de": "cond.celulite", "rel": "TEM_RECEITA", "para": "rec.cel.ubs", "porta": "APS", "imprimivel": true}
+{"de": "rec.cel.ubs", "rel": "USA_FARMACO", "para": "far.cefalexina"}
+{"de": "cond.ferida", "rel": "ESPECIALIDADE", "para": "esp.infeccao"}
+{"de": "cond.ferida", "rel": "ALARME", "para": "Febre alta, crepitação, evisceração, prótese"}
+{"de": "cond.ferida", "rel": "FONTE", "para": "Controle da fonte na infecção de sítio cirúrgico"}
+{"de": "cond.ferida", "rel": "TEM_RECEITA", "para": "rec.ferida.superficial", "porta": "APS", "imprimivel": true}
+{"de": "rec.ferida.superficial", "rel": "USA_FARMACO", "para": "far.cefalexina"}
+{"de": "cond.sepse", "rel": "ESPECIALIDADE", "para": "esp.infeccao"}
+{"de": "cond.sepse", "rel": "ALARME", "para": "Hipotensão, confusão, queda de urina"}
+{"de": "cond.sepse", "rel": "FONTE", "para": "Surviving Sepsis, com a ressalva de individualizar o volume"}
+{"de": "cond.sepse", "rel": "TEM_RECEITA", "para": "rec.sepse.pacote", "porta": "HOSPITAL", "imprimivel": false}
+{"de": "cond.endocardite", "rel": "ESPECIALIDADE", "para": "esp.infeccao"}
+{"de": "cond.endocardite", "rel": "ALARME", "para": "Choque, embolia, bloqueio cardíaco, insuficiência valvar aguda"}
+{"de": "cond.endocardite", "rel": "FONTE", "para": "Duke e antibioticoterapia dirigida"}
+{"de": "cond.endocardite", "rel": "TEM_RECEITA", "para": "rec.endo.internar", "porta": "HOSPITAL", "imprimivel": false}
+{"de": "cond.fistula", "rel": "ESPECIALIDADE", "para": "esp.infeccao"}
+{"de": "cond.fistula", "rel": "ALARME", "para": "Abscesso, sepse, obstrução"}
+{"de": "cond.fistula", "rel": "FONTE", "para": "A via de tratamento é o fechamento ou a derivação do trânsito, conforme a cirurgia"}
+{"de": "cond.fistula", "rel": "TEM_RECEITA", "para": "rec.fistula.enc", "porta": "ENCAMINHAMENTO", "imprimivel": false}
+{"de": "cond.colangite", "rel": "ESPECIALIDADE", "para": "esp.infeccao"}
+{"de": "cond.colangite", "rel": "ALARME", "para": "Hipotensão, confusão, falência de órgão"}
+{"de": "cond.colangite", "rel": "FONTE", "para": "Critérios de Tóquio: antibiótico mais drenagem"}
+{"de": "cond.colangite", "rel": "TEM_RECEITA", "para": "rec.colangite.hosp", "porta": "HOSPITAL", "imprimivel": false}
+{"de": "rec.colangite.hosp", "rel": "USA_FARMACO", "para": "far.ceftriaxona"}
+{"de": "cond.empiema", "rel": "ESPECIALIDADE", "para": "esp.infeccao"}
+{"de": "cond.empiema", "rel": "ALARME", "para": "Desconforto respiratório, sepse"}
+{"de": "cond.empiema", "rel": "FONTE", "para": "Drenagem é obrigatória no empiema"}
+{"de": "cond.empiema", "rel": "TEM_RECEITA", "para": "rec.empiema.dreno", "porta": "HOSPITAL", "imprimivel": false}
+{"de": "cond.otomastoidite", "rel": "ESPECIALIDADE", "para": "esp.infeccao"}
+{"de": "cond.otomastoidite", "rel": "ALARME", "para": "Cefaleia intensa, rigidez, paralisia facial, confusão"}
+{"de": "cond.otomastoidite", "rel": "FONTE", "para": "Complicação de otite média: drenagem pode ser necessária"}
+{"de": "cond.otomastoidite", "rel": "TEM_RECEITA", "para": "rec.masto.hosp", "porta": "HOSPITAL", "imprimivel": false}
+{"de": "cond.dm2", "rel": "ESPECIALIDADE", "para": "esp.endocrinologia"}
+{"de": "cond.dm2", "rel": "ALARME", "para": "Cetoacidose, vômito, sonolência, glicemia muito alta com desidratação: hospital"}
+{"de": "cond.dm2", "rel": "ALARME", "para": "Hipoglicemia com sulfonilureia ou insulina"}
+{"de": "cond.dm2", "rel": "FONTE", "para": "SBD 2026, capítulo do DM2 no SUS, citando o PCDT de fevereiro de 2026"}
+{"de": "cond.dm2", "rel": "FONTE", "para": "Metformina: máximo 1000 mg/dia se TFG < 45 e suspender se < 30"}
+{"de": "cond.dm2", "rel": "FONTE", "para": "NPH: 10 UI ou 0,2 UI/kg à noite, ajuste de 2 a 4 UI"}
+{"de": "cond.dm2", "rel": "FONTE", "para": "Gliclazida 30 a 120 mg/dia na tabela da SBD 2024"}
+{"de": "cond.dm2", "rel": "TEM_RECEITA", "para": "rec.dm2.metformina", "porta": "APS", "imprimivel": true}
+{"de": "rec.dm2.metformina", "rel": "USA_FARMACO", "para": "far.metformina"}
+{"de": "cond.dm2", "rel": "TEM_RECEITA", "para": "rec.dm2.su", "porta": "APS", "imprimivel": true}
+{"de": "rec.dm2.su", "rel": "USA_FARMACO", "para": "far.gliclazida"}
+{"de": "cond.dm2", "rel": "TEM_RECEITA", "para": "rec.dm2.insulina", "porta": "APS", "imprimivel": true}
+{"de": "rec.dm2.insulina", "rel": "USA_FARMACO", "para": "far.insulina_nph"}
+{"de": "rec.dm2.insulina", "rel": "USA_FARMACO", "para": "far.metformina"}
+{"de": "cond.dm2", "rel": "TEM_RECEITA", "para": "rec.dm2.dapa", "porta": "CEAF", "imprimivel": false}
+{"de": "rec.dm2.dapa", "rel": "USA_FARMACO", "para": "far.dapagliflozina"}
+{"de": "cond.hipotireoidismo", "rel": "ESPECIALIDADE", "para": "esp.endocrinologia"}
+{"de": "cond.hipotireoidismo", "rel": "ALARME", "para": "Mixedema, bradicardia extrema, hipotermia: hospital"}
+{"de": "cond.hipotireoidismo", "rel": "FONTE", "para": "Prática de reposição com levotiroxina. Apresentações de 12,5 a 100 mcg constam de elenco do básico."}
+{"de": "cond.hipotireoidismo", "rel": "TEM_RECEITA", "para": "rec.hipot.adulto", "porta": "APS", "imprimivel": true}
+{"de": "rec.hipot.adulto", "rel": "USA_FARMACO", "para": "far.levotiroxina"}
+{"de": "cond.dislipidemia", "rel": "ESPECIALIDADE", "para": "esp.endocrinologia"}
+{"de": "cond.dislipidemia", "rel": "ALARME", "para": "Dor muscular intensa com urina escura: suspender e dosar CK"}
+{"de": "cond.dislipidemia", "rel": "FONTE", "para": "Rename 2024: atorvastatina no especializado. Sinvastatina 10, 20 e 40 mg no elenco básico habitual."}
+{"de": "cond.dislipidemia", "rel": "TEM_RECEITA", "para": "rec.lip.sinva", "porta": "APS", "imprimivel": true}
+{"de": "rec.lip.sinva", "rel": "USA_FARMACO", "para": "far.sinvastatina"}
+{"de": "cond.sm", "rel": "ESPECIALIDADE", "para": "esp.endocrinologia"}
+{"de": "cond.sm", "rel": "ALARME", "para": "Evento cardiovascular agudo"}
+{"de": "cond.sm", "rel": "FONTE", "para": "SBD 2026: estilo de vida é a base da prevenção do diabetes"}
+{"de": "cond.sm", "rel": "TEM_RECEITA", "para": "rec.sm.base", "porta": "APS", "imprimivel": false}
+{"de": "cond.vitd", "rel": "ESPECIALIDADE", "para": "esp.endocrinologia"}
+{"de": "cond.vitd", "rel": "ALARME", "para": "Cálcio muito baixo com tetania: hospital"}
+{"de": "cond.vitd", "rel": "FONTE", "para": "Limiar de 20 ng/mL é o mais usado para deficiência. Apresentação do SUS a conferir no município."}
+{"de": "cond.vitd", "rel": "TEM_RECEITA", "para": "rec.vitd.manut", "porta": "APS", "imprimivel": true}
+{"de": "cond.osteo", "rel": "ESPECIALIDADE", "para": "esp.endocrinologia"}
+{"de": "cond.osteo", "rel": "ALARME", "para": "Fratura aguda: ortopedia"}
+{"de": "cond.osteo", "rel": "ALARME", "para": "Dor na coxa ou na mandíbula em quem já usa bisfosfonato"}
+{"de": "cond.osteo", "rel": "FONTE", "para": "Rename 2024: alendronato 70 mg e 10 mg no básico"}
+{"de": "cond.osteo", "rel": "TEM_RECEITA", "para": "rec.osteo.alen", "porta": "APS", "imprimivel": true}
+{"de": "rec.osteo.alen", "rel": "USA_FARMACO", "para": "far.alendronato"}
+{"de": "cond.obesidade", "rel": "ESPECIALIDADE", "para": "esp.endocrinologia"}
+{"de": "cond.obesidade", "rel": "ALARME", "para": "Dispneia, apneia grave, IMC muito alto com limitação: avaliar serviço de referência"}
+{"de": "cond.obesidade", "rel": "FONTE", "para": "SBD: perda de 5 a 7% do peso na prevenção do diabetes"}
+{"de": "cond.obesidade", "rel": "TEM_RECEITA", "para": "rec.obes.vida", "porta": "APS", "imprimivel": false}
+{"de": "cond.siadh", "rel": "ESPECIALIDADE", "para": "esp.endocrinologia"}
+{"de": "cond.siadh", "rel": "ALARME", "para": "Convulsão, rebaixamento: emergência"}
+{"de": "cond.siadh", "rel": "FONTE", "para": "Diagnóstico de exclusão. Correção rápida causa desmielinização."}
+{"de": "cond.siadh", "rel": "TEM_RECEITA", "para": "rec.siadh.hosp", "porta": "HOSPITAL", "imprimivel": false}
+{"de": "cond.drc", "rel": "ESPECIALIDADE", "para": "esp.nefrologia"}
+{"de": "cond.drc", "rel": "ALARME", "para": "K alto, edema agudo, TFG em queda rápida"}
+{"de": "cond.drc", "rel": "FONTE", "para": "PCDT de estratégias para atenuar a progressão da DRC, 2024, citado pela SBD"}
+{"de": "cond.drc", "rel": "FONTE", "para": "Diretriz Brasileira de Hipertensão 2025"}
+{"de": "cond.drc", "rel": "TEM_RECEITA", "para": "rec.drc.ieca", "porta": "APS", "imprimivel": true}
+{"de": "rec.drc.ieca", "rel": "USA_FARMACO", "para": "far.losartana"}
+{"de": "cond.ira", "rel": "ESPECIALIDADE", "para": "esp.nefrologia"}
+{"de": "cond.ira", "rel": "ALARME", "para": "K alto, edema de pulmão, anúria, sepse"}
+{"de": "cond.ira", "rel": "FONTE", "para": "KDIGO de injúria renal aguda"}
+{"de": "cond.ira", "rel": "TEM_RECEITA", "para": "rec.ira.parar", "porta": "APS", "imprimivel": false}
+{"de": "cond.hipocalemia", "rel": "ESPECIALIDADE", "para": "esp.nefrologia"}
+{"de": "cond.hipocalemia", "rel": "ALARME", "para": "Fraqueza ascendente, arritmia"}
+{"de": "cond.hipocalemia", "rel": "FONTE", "para": "Reposição oral na hipocalemia leve sem alteração eletrocardiográfica"}
+{"de": "cond.hipocalemia", "rel": "TEM_RECEITA", "para": "rec.k.leve", "porta": "APS", "imprimivel": false}
+{"de": "cond.hipercalemia", "rel": "ESPECIALIDADE", "para": "esp.nefrologia"}
+{"de": "cond.hipercalemia", "rel": "ALARME", "para": "Onda T apiculada, alargamento de QRS"}
+{"de": "cond.hipercalemia", "rel": "FONTE", "para": "Emergência eletrolítica"}
+{"de": "cond.hipercalemia", "rel": "TEM_RECEITA", "para": "rec.k.alto", "porta": "HOSPITAL", "imprimivel": false}
+{"de": "cond.hiponatremia", "rel": "ESPECIALIDADE", "para": "esp.nefrologia"}
+{"de": "cond.hiponatremia", "rel": "ALARME", "para": "Convulsão, rebaixamento"}
+{"de": "cond.hiponatremia", "rel": "FONTE", "para": "A classificação precede o soro"}
+{"de": "cond.hiponatremia", "rel": "TEM_RECEITA", "para": "rec.na.classificar", "porta": "HOSPITAL", "imprimivel": false}
+{"de": "cond.gnm", "rel": "ESPECIALIDADE", "para": "esp.nefrologia"}
+{"de": "cond.gnm", "rel": "ALARME", "para": "Trombose, anasarca, creatinina em subida"}
+{"de": "cond.gnm", "rel": "FONTE", "para": "Conduta de suporte e encaminhamento. Imunossupressão fora desta minuta."}
+{"de": "cond.gnm", "rel": "TEM_RECEITA", "para": "rec.gnm.suporte", "porta": "APS", "imprimivel": true}
+{"de": "rec.gnm.suporte", "rel": "USA_FARMACO", "para": "far.losartana"}
+{"de": "rec.gnm.suporte", "rel": "USA_FARMACO", "para": "far.furosemida"}
+{"de": "cond.uh", "rel": "ESPECIALIDADE", "para": "esp.nefrologia"}
+{"de": "cond.uh", "rel": "ALARME", "para": "Febre com obstrução, anúria, rim único"}
+{"de": "cond.uh", "rel": "FONTE", "para": "Descompressão é o tratamento da obstrução complicada"}
+{"de": "cond.uh", "rel": "TEM_RECEITA", "para": "rec.uh.descomprimir", "porta": "HOSPITAL", "imprimivel": false}
+{"de": "rec.uh.descomprimir", "rel": "USA_FARMACO", "para": "far.paracetamol"}
+{"de": "cond.dialise", "rel": "ESPECIALIDADE", "para": "esp.nefrologia"}
+{"de": "cond.dialise", "rel": "ALARME", "para": "Edema de pulmão, K com ECG alterado"}
+{"de": "cond.dialise", "rel": "FONTE", "para": "Mnemônico AEIOU, lido como decisão clínica e não como lista cega"}
+{"de": "cond.dialise", "rel": "TEM_RECEITA", "para": "rec.dialise.lembrar", "porta": "HOSPITAL", "imprimivel": false}
+{"de": "cond.derivacao", "rel": "ESPECIALIDADE", "para": "esp.nefrologia"}
+{"de": "cond.derivacao", "rel": "ALARME", "para": "Febre, flanco doloroso, anúria, acidose"}
+{"de": "cond.derivacao", "rel": "FONTE", "para": "Resumo anatômico para a prescrição não atrasar a desobstrução"}
+{"de": "cond.derivacao", "rel": "TEM_RECEITA", "para": "rec.derivacao.resumo", "porta": "ENCAMINHAMENTO", "imprimivel": false}
+{"de": "cond.drge", "rel": "ESPECIALIDADE", "para": "esp.gastroenterologia"}
+{"de": "cond.drge", "rel": "ALARME", "para": "Disfagia, emagrecimento, anemia, dor torácica"}
+{"de": "cond.drge", "rel": "FONTE", "para": "Rename 2024: omeprazol 20 mg cápsula no básico"}
+{"de": "cond.drge", "rel": "TEM_RECEITA", "para": "rec.drge.ibp", "porta": "APS", "imprimivel": true}
+{"de": "rec.drge.ibp", "rel": "USA_FARMACO", "para": "far.omeprazol"}
+{"de": "cond.hpylori", "rel": "ESPECIALIDADE", "para": "esp.gastroenterologia"}
+{"de": "cond.hpylori", "rel": "ALARME", "para": "Hematemese, melena, peritonite: hospital"}
+{"de": "cond.hpylori", "rel": "FONTE", "para": "Duração de 14 dias é o padrão atual dos esquemas. Rename 2024: omeprazol e amoxicilina no básico."}
+{"de": "cond.hpylori", "rel": "TEM_RECEITA", "para": "rec.hp.conferir", "porta": "APS", "imprimivel": false}
+{"de": "rec.hp.conferir", "rel": "USA_FARMACO", "para": "far.omeprazol"}
+{"de": "rec.hp.conferir", "rel": "USA_FARMACO", "para": "far.amoxicilina"}
+{"de": "cond.diarreia", "rel": "ESPECIALIDADE", "para": "esp.gastroenterologia"}
+{"de": "cond.diarreia", "rel": "ALARME", "para": "Sangue, prostração, incapacidade de beber, oligúria"}
+{"de": "cond.diarreia", "rel": "FONTE", "para": "Reidratação é o tratamento"}
+{"de": "cond.diarreia", "rel": "TEM_RECEITA", "para": "rec.diarreia.sro", "porta": "APS", "imprimivel": true}
+{"de": "cond.constipacao", "rel": "ESPECIALIDADE", "para": "esp.gastroenterologia"}
+{"de": "cond.constipacao", "rel": "ALARME", "para": "Parada com vômito e distensão: obstrução"}
+{"de": "cond.constipacao", "rel": "ALARME", "para": "Sangue"}
+{"de": "cond.constipacao", "rel": "FONTE", "para": "Rename 2024: óleo mineral no básico"}
+{"de": "cond.constipacao", "rel": "TEM_RECEITA", "para": "rec.constipa.oleo", "porta": "APS", "imprimivel": true}
+{"de": "cond.pancreatite", "rel": "ESPECIALIDADE", "para": "esp.gastroenterologia"}
+{"de": "cond.pancreatite", "rel": "ALARME", "para": "Hipotensão, falta de ar, oligúria"}
+{"de": "cond.pancreatite", "rel": "FONTE", "para": "Antibiótico profilático não melhora a pancreatite intersticial"}
+{"de": "cond.pancreatite", "rel": "TEM_RECEITA", "para": "rec.panc.hosp", "porta": "HOSPITAL", "imprimivel": false}
+{"de": "cond.hda", "rel": "ESPECIALIDADE", "para": "esp.gastroenterologia"}
+{"de": "cond.hda", "rel": "ALARME", "para": "Hipotensão, síncope, hematêmese volumosa"}
+{"de": "cond.hda", "rel": "FONTE", "para": "Via de sangramento alto é hospitalar"}
+{"de": "cond.hda", "rel": "TEM_RECEITA", "para": "rec.hda.samu", "porta": "EMERGENCIA", "imprimivel": false}
+{"de": "cond.asma", "rel": "ESPECIALIDADE", "para": "esp.pneumologia"}
+{"de": "cond.asma", "rel": "ALARME", "para": "Fala entrecortada, saturação baixa, silêncio auscultatório"}
+{"de": "cond.asma", "rel": "FONTE", "para": "GINA: corticoide inalatório é a base. Apresentação local a conferir."}
+{"de": "cond.asma", "rel": "TEM_RECEITA", "para": "rec.asma.resgate", "porta": "APS", "imprimivel": true}
+{"de": "rec.asma.resgate", "rel": "USA_FARMACO", "para": "far.salbutamol"}
+{"de": "cond.dpoc", "rel": "ESPECIALIDADE", "para": "esp.pneumologia"}
+{"de": "cond.dpoc", "rel": "ALARME", "para": "Saturação baixa, confusão, cianose"}
+{"de": "cond.dpoc", "rel": "FONTE", "para": "GOLD: corticoide oral por 5 dias na exacerbação. Rename: amoxicilina 500 mg."}
+{"de": "cond.dpoc", "rel": "TEM_RECEITA", "para": "rec.dpoc.exac", "porta": "APS", "imprimivel": true}
+{"de": "rec.dpoc.exac", "rel": "USA_FARMACO", "para": "far.salbutamol"}
+{"de": "rec.dpoc.exac", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "rec.dpoc.exac", "rel": "USA_FARMACO", "para": "far.amoxicilina"}
+{"de": "cond.enxaqueca", "rel": "ESPECIALIDADE", "para": "esp.neurologia"}
+{"de": "cond.enxaqueca", "rel": "ALARME", "para": "Déficit, trovão, febre com rigidez"}
+{"de": "cond.enxaqueca", "rel": "FONTE", "para": "Rename 2024: ibuprofeno 600 mg no básico. Valproato é teratogênico."}
+{"de": "cond.enxaqueca", "rel": "TEM_RECEITA", "para": "rec.enx.crise", "porta": "APS", "imprimivel": true}
+{"de": "rec.enx.crise", "rel": "USA_FARMACO", "para": "far.ibuprofeno"}
+{"de": "cond.avc", "rel": "ESPECIALIDADE", "para": "esp.neurologia"}
+{"de": "cond.avc", "rel": "ALARME", "para": "Rebaixamento, convulsão"}
+{"de": "cond.avc", "rel": "FONTE", "para": "Janela de reperfusão. Hemorragia precisa ser excluída."}
+{"de": "cond.avc", "rel": "TEM_RECEITA", "para": "rec.avc.samu", "porta": "EMERGENCIA", "imprimivel": false}
+{"de": "cond.vertigem", "rel": "ESPECIALIDADE", "para": "esp.neurologia"}
+{"de": "cond.vertigem", "rel": "ALARME", "para": "Déficit, disartria, diplopia, cefaleia em trovão"}
+{"de": "cond.vertigem", "rel": "FONTE", "para": "Manobra é o tratamento da vertigem posicional paroxística benigna"}
+{"de": "cond.vertigem", "rel": "TEM_RECEITA", "para": "rec.vertigem.manobra", "porta": "APS", "imprimivel": false}
+{"de": "cond.delirium", "rel": "ESPECIALIDADE", "para": "esp.neurologia"}
+{"de": "cond.delirium", "rel": "ALARME", "para": "Hipoglicemia, hipóxia, abstinência de álcool com convulsão"}
+{"de": "cond.delirium", "rel": "FONTE", "para": "Neurolépticos constam como categoria. Apresentação não fixada nesta leitura da Rename."}
+{"de": "cond.delirium", "rel": "TEM_RECEITA", "para": "rec.delirium.causa", "porta": "HOSPITAL", "imprimivel": false}
