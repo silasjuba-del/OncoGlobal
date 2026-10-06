@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="gelo">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OncoMed · Consulta — Paciente Teste 07 (protótipo MU-05)</title>
+<link rel="stylesheet" href="../tokens-oncomed.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--om-fundo); color: var(--om-texto);
+    font-family: var(--om-fonte); font-size: var(--om-texto-sm); line-height: var(--om-linha-altura); }
+  .app { display: grid; grid-template-columns: 208px 1fr; min-height: 100vh; }
+
+  /* ── lateral ─────────────────────────────────────────────── */
+  .lateral { background: var(--om-lateral-fundo); color: var(--om-lateral-texto);
+    display: flex; flex-direction: column; padding: var(--om-espaco-4) var(--om-espaco-3); gap: var(--om-espaco-1); }
+  .marca { display: flex; align-items: center; gap: var(--om-espaco-2);
+    font-size: var(--om-texto-lg); font-weight: 700; padding: var(--om-espaco-2); }
+  .marca .ponto { width: 22px; height: 22px; border-radius: 50%;
+    background: var(--om-destaque); display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 800; }
+  .nav-item { display: flex; align-items: center; gap: var(--om-espaco-3);
+    padding: var(--om-espaco-2) var(--om-espaco-3); border-radius: var(--om-raio-sm);
+    color: var(--om-lateral-suave); text-decoration: none; font-weight: 550;
+    transition: background var(--om-transicao-rapida); }
+  .nav-item svg { width: 20px; height: 20px; flex: none; }
+  .nav-item:hover { background: var(--om-lateral-hover); color: var(--om-lateral-texto); }
+  .nav-item.ativo { background: var(--om-lateral-ativo); color: #fff; }
+  .lateral-rodape { margin-top: auto; padding: var(--om-espaco-3) var(--om-espaco-2);
+    border-top: 1px solid var(--om-lateral-hover); display: flex; gap: var(--om-espaco-2); align-items: center; }
+  .avatar { width: 34px; height: 34px; border-radius: var(--om-raio-pilula); flex: none;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--om-destaque); color: #fff; font-weight: 700; font-size: 13px; }
+
+  /* ── topo ────────────────────────────────────────────────── */
+  .principal { display: flex; flex-direction: column; min-width: 0; }
+  .topo { display: flex; align-items: center; gap: var(--om-espaco-3);
+    padding: var(--om-espaco-3) var(--om-espaco-6); background: var(--om-superficie);
+    border-bottom: 1px solid var(--om-linha); position: sticky; top: 0; z-index: 20; }
+  .busca { flex: 1; max-width: 520px; display: flex; align-items: center; gap: var(--om-espaco-2);
+    background: var(--om-superficie-sutil); border: 1px solid var(--om-linha);
+    border-radius: var(--om-raio-sm); padding: var(--om-espaco-2) var(--om-espaco-3);
+    color: var(--om-texto-suave); }
+  .busca kbd { margin-left: auto; font-family: var(--om-fonte); font-size: var(--om-texto-xs);
+    background: var(--om-superficie); border: 1px solid var(--om-linha); border-radius: 4px; padding: 0 6px; }
+  .btn { font: inherit; font-weight: 600; border-radius: var(--om-raio-sm); cursor: pointer;
+    padding: var(--om-espaco-2) var(--om-espaco-4); border: 1px solid var(--om-destaque);
+    background: var(--om-superficie); color: var(--om-destaque-hover);
+    transition: background var(--om-transicao-rapida), color var(--om-transicao-rapida); }
+  .btn:hover { background: var(--om-destaque-suave); }
+  .btn.primario { background: var(--om-destaque); color: #fff; border-color: var(--om-destaque); }
+  .btn.primario:hover { background: var(--om-destaque-hover); }
+  .btn[disabled] { opacity: .55; cursor: not-allowed; }
+  .sino { position: relative; border: 1px solid var(--om-linha); background: var(--om-superficie);
+    border-radius: var(--om-raio-sm); padding: var(--om-espaco-2) var(--om-espaco-3); cursor: pointer; font: inherit; }
+  .sino .badge { position: absolute; top: -8px; right: -8px; background: var(--om-vermelho); color: #fff;
+    border-radius: var(--om-raio-pilula); font-size: var(--om-texto-xs); font-weight: 700; padding: 0 6px; }
+
+  /* ── hero clínico ────────────────────────────────────────── */
+  .conteudo { padding: var(--om-espaco-6); display: flex; flex-direction: column; gap: var(--om-espaco-4); }
+  .hero { background: var(--om-superficie); border: 1px solid var(--om-linha);
+    border-radius: var(--om-raio-lg); padding: var(--om-espaco-5) var(--om-espaco-6);
+    display: grid; grid-template-columns: auto 1fr; gap: var(--om-espaco-5); align-items: start; }
+  .hero-ident { display: flex; gap: var(--om-espaco-4); align-items: center; }
+  .hero-ident .avatar { width: 56px; height: 56px; font-size: 20px; }
+  .hero-ident h1 { margin: 0; font-size: var(--om-texto-xl); }
+  .hero-ident .sub { color: var(--om-texto-suave); font-size: var(--om-texto-sm); }
+  .hero-cards { grid-column: 1 / -1; display: grid; gap: var(--om-espaco-3);
+    grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .mini { border: 1px solid var(--om-linha); border-radius: var(--om-raio-md);
+    padding: var(--om-espaco-3) var(--om-espaco-4); background: var(--om-superficie); }
+  .mini .rotulo { font-size: var(--om-texto-xs); font-weight: 700; letter-spacing: .04em;
+    color: var(--om-texto-suave); text-transform: uppercase; }
+  .mini .valor { font-weight: 700; margin-top: 2px; }
+  .mini .origem { font-size: var(--om-texto-xs); color: var(--om-texto-suave); }
+  .mini.estadio { background: var(--om-estadio-fundo); border-color: var(--om-estadio-fundo); }
+  .mini.estadio .valor { color: var(--om-estadio-texto); }
+
+  /* ── semáforo / chips / tags ─────────────────────────────── */
+  .semaforo { display: inline-flex; align-items: center; gap: 6px; font-weight: 650; font-size: var(--om-texto-sm); }
+  .semaforo svg { width: 15px; height: 15px; }
+  .semaforo-verde { color: var(--om-verde); }
+  .semaforo-vermelho { color: var(--om-vermelho); }
+  .semaforo-pendente { color: var(--om-pendente); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; border-radius: var(--om-raio-pilula);
+    padding: 2px 10px; font-size: var(--om-texto-xs); font-weight: 700; border: 1px solid transparent; }
+  .chip.verde { background: var(--om-verde-fundo); color: var(--om-verde); }
+  .chip.vermelho { background: var(--om-vermelho-fundo); color: var(--om-vermelho); }
+  .chip.pendente { background: var(--om-pendente-fundo); color: var(--om-pendente); }
+  .chip.info { background: var(--om-info-fundo); color: var(--om-info-texto); }
+  button.chip-escolha { font: inherit; cursor: pointer; border: 1px solid var(--om-linha-forte);
+    background: var(--om-superficie); color: var(--om-texto); border-radius: var(--om-raio-pilula);
+    min-width: 40px; min-height: 40px; font-weight: 700;
+    transition: background var(--om-transicao-rapida), color var(--om-transicao-rapida); }
+  button.chip-escolha[aria-pressed="true"] { background: var(--om-destaque); border-color: var(--om-destaque); color: #fff; }
+  .tag { display: inline-block; background: var(--om-destaque-suave); color: var(--om-destaque-hover);
+    border-radius: var(--om-raio-sm); padding: 1px 8px; font-size: var(--om-texto-xs); font-weight: 650; }
+
+  /* ── abas + colunas ──────────────────────────────────────── */
+  .abas { display: flex; gap: var(--om-espaco-2); border-bottom: 2px solid var(--om-linha); }
+  .aba { font: inherit; font-weight: 650; background: none; border: none; cursor: pointer;
+    padding: var(--om-espaco-2) var(--om-espaco-4); color: var(--om-texto-suave);
+    border-bottom: 3px solid transparent; margin-bottom: -2px; }
+  .aba[aria-selected="true"] { color: var(--om-destaque-hover); border-bottom-color: var(--om-destaque); }
+  .painel { display: none; }
+  .painel.visivel { display: grid; }
+  .grade3 { grid-template-columns: 280px 1fr 300px; gap: var(--om-espaco-4); align-items: start; }
+  .cartao { background: var(--om-superficie); border: 1px solid var(--om-linha);
+    border-radius: var(--om-raio-md); padding: var(--om-espaco-4); }
+  .cartao h2, .cartao h3 { margin: 0 0 var(--om-espaco-3); font-size: var(--om-texto-sm);
+    text-transform: uppercase; letter-spacing: .04em; color: var(--om-texto-suave); }
+  .cartao h2 .cont { float: right; }
+  .linha { display: flex; justify-content: space-between; gap: var(--om-espaco-2);
+    padding: 3px 0; border-bottom: 1px dotted var(--om-linha); }
+  .linha:last-child { border-bottom: none; }
+  .linha dt { color: var(--om-texto-suave); } .linha dd { margin: 0; font-weight: 600; text-align: right; }
+  dl { margin: 0; }
+  .pilha { display: flex; flex-direction: column; gap: var(--om-espaco-4); }
+
+  /* ── accordion ───────────────────────────────────────────── */
+  details.ac { border: 1px solid var(--om-linha); border-radius: var(--om-raio-md);
+    background: var(--om-superficie); }
+  details.ac summary { cursor: pointer; list-style: none; padding: var(--om-espaco-3) var(--om-espaco-4);
+    font-weight: 650; display: flex; justify-content: space-between; align-items: center; }
+  details.ac summary::-webkit-details-marker { display: none; }
+  details.ac summary .seta { transition: transform var(--om-transicao-rapida); color: var(--om-destaque-hover); }
+  details.ac[open] summary .seta { transform: rotate(90deg); }
+  details.ac .corpo { padding: 0 var(--om-espaco-4) var(--om-espaco-4); }
+
+  /* ── timeline ────────────────────────────────────────────── */
+  .tl { list-style: none; margin: 0; padding: 0 0 0 4px; }
+  .tl li { position: relative; padding: 0 0 var(--om-espaco-4) var(--om-espaco-5); }
+  .tl li::before { content: ""; position: absolute; left: 5px; top: 18px; bottom: -2px;
+    width: 2px; background: var(--om-linha); }
+  .tl li:last-child::before { display: none; }
+  .tl .no { position: absolute; left: 0; top: 4px; width: 12px; height: 12px; border-radius: 50%;
+    background: var(--om-superficie); border: 3px solid var(--om-destaque); }
+  .tl .no.vermelho { border-color: var(--om-vermelho); }
+  .tl .no.pendente { border-color: var(--om-pendente); }
+  .tl .data { font-weight: 700; } .tl .oquê { color: var(--om-texto-suave); font-size: var(--om-texto-sm); }
+
+  /* ── cartões de exame + carrossel ────────────────────────── */
+  .exames-lista { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--om-espaco-3); }
+  .exame { border: 1px solid var(--om-linha); border-radius: var(--om-raio-md); overflow: hidden;
+    background: var(--om-superficie); cursor: pointer; font: inherit; text-align: left; padding: 0;
+    transition: border-color var(--om-transicao-rapida), box-shadow var(--om-transicao-rapida); }
+  .exame:hover { border-color: var(--om-destaque); box-shadow: var(--om-sombra-sm); }
+  .exame .thumb { height: 86px; background:
+      repeating-linear-gradient(45deg, var(--om-superficie-sutil) 0 8px, var(--om-linha) 8px 9px);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--om-texto-suave); font-size: var(--om-texto-xs); font-weight: 700; }
+  .exame .info { padding: var(--om-espaco-2) var(--om-espaco-3); }
+  .exame .r1 { font-weight: 650; margin-top: 2px; }
+  .carrossel { background: #0a1218; color: #e8eef1; border-radius: var(--om-raio-md); overflow: hidden; }
+  .carrossel .visor { height: 300px; display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(ellipse at center, #1b2833 0%, #0a1218 70%);
+    font-weight: 700; letter-spacing: .02em; }
+  .carrossel .barra { display: flex; align-items: center; gap: var(--om-espaco-2);
+    padding: var(--om-espaco-2) var(--om-espaco-3); }
+  .carrossel .minis { display: flex; gap: 6px; flex: 1; overflow: hidden; }
+  .carrossel .minis button { width: 52px; height: 38px; border-radius: 4px; cursor: pointer;
+    border: 2px solid transparent; background: #22333e; color: #9fb2bd; font-size: 11px; font-weight: 700; }
+  .carrossel .minis button[aria-current="true"] { border-color: var(--om-destaque); color: #fff; }
+  .carrossel .nav { background: #22333e; color: #fff; border: none; border-radius: 6px;
+    width: 34px; height: 34px; cursor: pointer; font-size: 16px; }
+
+  /* ── labs ────────────────────────────────────────────────── */
+  .subabas { display: flex; gap: 6px; margin-bottom: var(--om-espaco-3); flex-wrap: wrap; }
+  .subabas button { font: inherit; font-size: var(--om-texto-xs); font-weight: 700; cursor: pointer;
+    border: 1px solid var(--om-linha); background: var(--om-superficie); color: var(--om-texto-suave);
+    border-radius: var(--om-raio-pilula); padding: 4px 12px; }
+  .subabas button[aria-selected="true"] { background: var(--om-destaque); border-color: var(--om-destaque); color: #fff; }
+  table.densa { width: 100%; border-collapse: collapse; font-size: var(--om-texto-sm); line-height: var(--om-linha-altura-densa); }
+  table.densa th, table.densa td { padding: 6px 8px; border-bottom: 1px solid var(--om-linha); text-align: right; }
+  table.densa th:first-child, table.densa td:first-child { text-align: left; }
+  table.densa tbody tr:nth-child(even) { background: var(--om-superficie-sutil); }
+
+  /* ── trilho direito ──────────────────────────────────────── */
+  .alerta-item { display: flex; gap: var(--om-espaco-2); align-items: flex-start;
+    padding: var(--om-espaco-2) 0; border-bottom: 1px dotted var(--om-linha); }
+  .alerta-item:last-child { border-bottom: none; }
+  .alerta-item svg { width: 18px; height: 18px; flex: none; margin-top: 2px; }
+  .alerta-item .txt { flex: 1; }
+  .dir-links { display: flex; flex-wrap: wrap; gap: 6px; }
+  .dir-links a { border: 1px solid var(--om-linha); border-radius: var(--om-raio-sm);
+    padding: 4px 10px; font-size: var(--om-texto-xs); font-weight: 700;
+    color: var(--om-destaque-hover); text-decoration: underline; background: var(--om-superficie); }
+  .oa { display: flex; gap: var(--om-espaco-2); align-items: center; margin-bottom: var(--om-espaco-2); }
+  .oa .avatar { background: var(--om-pendente); }
+  .oa-botoes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: var(--om-espaco-2) 0; }
+  .oa-botoes button { font-size: var(--om-texto-xs); }
+  .oa-pergunta { display: flex; gap: 6px; }
+  .oa-pergunta input { flex: 1; font: inherit; border: 1px solid var(--om-linha);
+    border-radius: var(--om-raio-sm); padding: var(--om-espaco-2); background: var(--om-superficie-sutil); }
+  .aviso-legal { font-size: var(--om-texto-xs); color: var(--om-texto-suave); margin-top: var(--om-espaco-2); }
+
+  /* ── modal + gaveta + toast ──────────────────────────────── */
+  .overlay { position: fixed; inset: 0; background: rgb(15 34 46 / .5); display: none;
+    align-items: center; justify-content: center; z-index: 50; }
+  .overlay.aberto { display: flex; }
+  .modal { background: var(--om-superficie); border-radius: var(--om-raio-lg);
+    box-shadow: var(--om-sombra-lg); width: min(640px, 92vw); max-height: 86vh; overflow: auto;
+    padding: var(--om-espaco-5) var(--om-espaco-6); }
+  .overlay.aberto .modal { animation: subir var(--om-transicao-media); }
+  @keyframes subir { from { transform: translateY(10px); opacity: .4; } to { transform: none; opacity: 1; } }
+  .modal-cab { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--om-espaco-3); }
+  .modal-cab h2 { margin: 0; font-size: var(--om-texto-lg); }
+  .gaveta { position: fixed; top: 0; right: 0; bottom: 0; width: min(420px, 94vw); z-index: 50;
+    background: var(--om-superficie); box-shadow: var(--om-sombra-lg);
+    transform: translateX(105%); transition: transform var(--om-transicao-media);
+    padding: var(--om-espaco-5); overflow: auto; }
+  .gaveta.aberta { transform: none; }
+  .fundo-gaveta { position: fixed; inset: 0; background: rgb(15 34 46 / .35); z-index: 40; display: none; }
+  .fundo-gaveta.aberto { display: block; }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
+    background: var(--om-lateral-fundo); color: #fff; border-radius: var(--om-raio-sm);
+    padding: var(--om-espaco-3) var(--om-espaco-5); font-weight: 600; opacity: 0; z-index: 60;
+    transition: opacity var(--om-transicao-media), transform var(--om-transicao-media);
+    pointer-events: none; max-width: 90vw; text-align: center; }
+  .toast.visivel { opacity: 1; transform: translateX(-50%); }
+
+  /* ── modo flash: a consulta cabe na tela, sem rolagem ────── */
+  body.flash .conteudo-completo { display: none; }
+  .flash-grade { display: none; }
+  body.flash .flash-grade { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: var(--om-espaco-4);
+    padding: var(--om-espaco-4) var(--om-espaco-6); height: calc(100vh - 61px); overflow: hidden; }
+  body.flash { overflow: hidden; }
+  .flash-grade .cartao { overflow: auto; }
+  .flash-num { font-size: var(--om-texto-2xl); font-weight: 800; }
+  .rotulo-flash { font-size: var(--om-texto-xs); font-weight: 700; text-transform: uppercase;
+    letter-spacing: .05em; color: var(--om-texto-suave); }
+
+  :focus-visible { outline: 2px solid var(--om-destaque-hover); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+  @media (max-width: 1200px) {
+    .grade3 { grid-template-columns: 1fr 1fr; }
+    .hero-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .exames-lista { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>
+</head>
+<body>
+<a href="#conteudo" style="position:absolute;left:-9999px" onfocus="this.style.left='8px'" onblur="this.style.left='-9999px'">Pular para o conteúdo</a>
+<div class="app">
+  <!-- ── lateral ─────────────────────────────────────────── -->
+  <nav class="lateral" aria-label="Navegação principal">
+    <div class="marca"><span class="ponto" aria-hidden="true">oM</span>oncoMed</div>
+    <a class="nav-item ativo" href="#" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7.5" height="9" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="5.5" rx="1.5"/><rect x="13.5" y="11.5" width="7.5" height="9.5" rx="1.5"/><rect x="3" y="15" width="7.5" height="6" rx="1.5"/></svg>Resumo</a>
+    <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>Prontuário</a>
+    <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 17.5l5-4 4 3 3-2.5 4 3.5"/></svg>Exames</a>
+    <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8.5" width="17" height="7" rx="3.5" transform="rotate(-45 12 12)"/><path d="M9.5 9.5l5 5"/></svg>Prescrição</a>
+    <a class="nav-item" href="apac.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9.3 14.5l2 2 3.6-4.2"/></svg>APAC</a>
+    <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="7" width="13" height="14" rx="2"/><path d="M7 9V5a2 2 0 012-2h8"/><path d="M11 13h5M11 17h5"/></svg>Documentos</a>
+    <a class="nav-item" href="agenda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/><path d="M8 14h3M8 17.5h5"/></svg>Agenda</a>
+    <a class="nav-item" href="salao.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5S4 15.5 4 10a4.2 4.2 0 017-3.1A4.2 4.2 0 0120 10c0 5.5-8 10.5-8 10.5z"/><path d="M7 11.5h2.5l1.2-2 1.8 4l1.2-2H17"/></svg>Enfermagem</a>
+    <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>Farmácia</a>
+    <a class="nav-item" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16h16"/><path d="M8.5 15v-4M13 15V8M17.5 15v-6.5"/></svg>Relatórios</a>
+    <a class="nav-item" href="centro-comando.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M17.5 12H20M12 17.5V20M6.5 12H4M12 6.5V4"/><path d="M15.9 15.9l1.8 1.8M8.1 15.9l-1.8 1.8M8.1 8.1L6.3 6.3M15.9 8.1l1.8-1.8"/></svg>Configurações</a>
+    <div class="lateral-rodape"><span class="avatar" aria-hidden="true">MT</span><div><div style="font-weight:700">Médico Teste</div><div style="font-size:12px;color:var(--om-lateral-suave)">Médico responsável</div></div></div>
+  </nav>
+
+  <!-- ── principal ───────────────────────────────────────── -->
+  <div class="principal">
+    <div class="topo">
+      <div class="busca" role="search"><span aria-hidden="true">⌕</span> Buscar paciente, exame, CID… <kbd>Ctrl K</kbd></div>
+      <button class="sino" id="btnSino" aria-label="Notificações, 4 não lidas">🔔<span class="badge" aria-hidden="true">4</span></button>
+      <button class="btn" id="btnFlash" aria-pressed="false">⚡ Flash</button>
+      <button class="btn primario" data-demo>+ Novo registro</button>
+    </div>
+
+    <main class="conteudo conteudo-completo" id="conteudo">
+      <!-- hero clínico -->
+      <section class="hero" aria-label="Cabeçalho clínico">
+        <div class="hero-ident">
+          <span class="avatar" aria-hidden="true">PT</span>
+          <div>
+            <h1>Paciente Teste 07</h1>
+            <div class="sub">DN: 15/03/1958 (68 anos) · Masculino · ID: PT-0007</div>
+            <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">
+              <span class="chip vermelho">Conflito · identificadores</span>
+              <span class="chip pendente">ECOG pendente</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-cards">
+          <div class="mini"><div class="rotulo">Diagnóstico</div><div class="valor">Adenocarcinoma de próstata</div><div class="origem">Confirmado por biópsia</div></div>
+          <div class="mini estadio"><div class="rotulo">Estadiamento</div><div class="valor">Pendente</div><div class="origem">TNM é do médico</div></div>
+          <div class="mini"><div class="rotulo">CID-10</div><div class="valor">C61</div><div class="origem">Do lote confirmado</div></div>
+          <div class="mini"><div class="rotulo">TNM</div><div class="valor"><span class="semaforo semaforo-pendente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 010 17z" fill="currentColor" stroke="none"/></svg><span>Pendente</span></span></div><div class="origem">Elementos abaixo</div></div>
+          <div class="mini"><div class="rotulo">Subtipo</div><div class="valor">Pendente</div><div class="origem">Agregação por regra [VERIFICAR]</div></div>
+        </div>
+      </section>
+
+      <!-- abas -->
+      <div class="abas" role="tablist" aria-label="Seções da consulta">
+        <button class="aba" role="tab" aria-selected="true" data-aba="evolucao" id="tab-evolucao">Evolução</button>
+        <button class="aba" role="tab" aria-selected="false" data-aba="prescricao" id="tab-prescricao">Prescrição</button>
+        <button class="aba" role="tab" aria-selected="false" data-aba="exames" id="tab-exames">Exames</button>
+      </div>
+
+      <!-- painel evolução -->
+      <section class="painel visivel grade3" id="painel-evolucao" role="tabpanel" aria-labelledby="tab-evolucao">
+        <div class="pilha">
+          <div class="cartao">
+            <h2>Dados anagráficos</h2>
+            <dl>
+              <div class="linha"><dt>Sexo</dt><dd>Masculino</dd></div>
+              <div class="linha"><dt>Idade</dt><dd>68 anos</dd></div>
+              <div class="linha"><dt>Estado civil</dt><dd>Casado</dd></div>
+              <div class="linha"><dt>Contato</dt><dd>(83) 9 9000-0007</dd></div>
+            </dl>
+            <details class="ac" style="margin-top:12px">
+              <summary>Ver todos os dados <span class="seta" aria-hidden="true">›</span></summary>
+              <div class="corpo"><dl>
+                <div class="linha"><dt>CPF</dt><dd>111.444.777-00 <span class="chip vermelho">rotulado “Cartão SUS”</span></dd></div>
+                <div class="linha"><dt>CNS</dt><dd>700 0000 0000 0000 <span class="chip vermelho">rotulado “Matrícula”</span></dd></div>
+                <div class="linha"><dt>Endereço</dt><dd><span class="chip pendente">Comprovante em nome de familiar — não liga</span></dd></div>
+              </dl></div>
+            </details>
+          </div>
+          <div class="cartao">
+            <h2>Dados clínicos gerais</h2>
+            <dl>
+              <div class="linha"><dt>Antecedentes</dt><dd>HAS</dd></div>
+              <div class="linha"><dt>Medicações</dt><dd>Losartana</dd></div>
+              <div class="linha"><dt>Alergias</dt><dd><span class="semaforo semaforo-pendente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 010 17z" fill="currentColor" stroke="none"/></svg><span>Não revisada</span></span></dd></div>
+              <div class="linha"><dt>Cirurgias prévias</dt><dd>Não descrito</dd></div>
+            </dl>
+          </div>
+          <div class="cartao">
+            <h2>Linha do tempo</h2>
+            <ol class="tl">
+              <li><span class="no" aria-hidden="true"></span><div class="data">Hoje · consulta</div><div class="oquê">Retorno — avaliação</div></li>
+              <li><span class="no" aria-hidden="true"></span><div class="data">02/06/2026</div><div class="oquê">Imuno-histoquímica (tabela)</div></li>
+              <li><span class="no" aria-hidden="true"></span><div class="data">20/05/2026</div><div class="oquê">AP de RTU de próstata</div></li>
+              <li><span class="no" aria-hidden="true"></span><div class="data">12/05/2026</div><div class="oquê">Cintilografia óssea — sem lesão</div></li>
+              <li><span class="no pendente" aria-hidden="true"></span><div class="data">28/04/2026</div><div class="oquê">RM multiparamétrica — 2 trechos riscados</div></li>
+              <li><span class="no" aria-hidden="true"></span><div class="data">14/04/2026</div><div class="oquê">Biópsia — 6 sítios</div></li>
+              <li><span class="no vermelho" aria-hidden="true"></span><div class="data">30/03/2026</div><div class="oquê">Receituário urologista (fonte secundária)</div></li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="pilha">
+          <div class="cartao">
+            <h2>Exame físico</h2>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
+              <strong>ECOG</strong>
+              <button class="chip-escolha" aria-pressed="false" data-ecog="0">0</button>
+              <button class="chip-escolha" aria-pressed="false" data-ecog="1">1</button>
+              <button class="chip-escolha" aria-pressed="false" data-ecog="2">2</button>
+              <button class="chip-escolha" aria-pressed="false" data-ecog="3">3</button>
+              <button class="chip-escolha" aria-pressed="false" data-ecog="4">4</button>
+              <span class="aviso-legal" style="margin:0">Escolher o ECOG monta o rascunho do texto, nunca o fato.</span>
+            </div>
+            <p id="rascunhoEF" style="margin:0;color:var(--om-texto-suave)">Nenhum ECOG escolhido — rascunho vazio.</p>
+          </div>
+          <div class="cartao">
+            <h2>Evoluções recentes</h2>
+            <p style="margin-top:0"><strong>Hoje</strong> · Médico Teste — Paciente em acompanhamento de adenocarcinoma de próstata. Refere dor lombar leve, sem febre. Plano: avaliar exames e conduta.</p>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span class="tag" title="Origem: cintilografia 12/05/2026 (fato confirmado)">Sem lesão óssea</span>
+              <span class="tag" title="Origem: biópsia 14/04/2026 (fato confirmado)">Cribriforme em 1 sítio</span>
+              <span class="tag" title="Origem: RM 28/04/2026 — trecho riscado, PENDENTE">Dimensões pendentes</span>
+            </div>
+          </div>
+          <div class="cartao">
+            <h2>Exames de imagem e biópsia — resumo <span class="cont"><button class="btn" data-ir-aba="exames" style="padding:2px 10px">Ver todos ›</button></span></h2>
+            <div class="exames-lista">
+              <button class="exame" data-exame="rm"><span class="thumb">RM · ilustração</span><span class="info"><span class="chip pendente">2 trechos riscados</span><span class="r1">Resumo 1: próstata · dimensões pendentes</span></span></button>
+              <button class="exame" data-exame="biopsia"><span class="thumb">Biópsia · ilustração</span><span class="info"><span class="chip info">Patologia</span><span class="r1">Resumo 1: próstata · 6 sítios</span></span></button>
+              <button class="exame" data-exame="cintilo"><span class="thumb">Cintilo · ilustração</span><span class="info"><span class="chip verde">Sem lesão</span><span class="r1">Resumo 1: esqueleto · sem lesão</span></span></button>
+            </div>
+          </div>
+          <div class="cartao">
+            <h2>Visualizador — RM 28/04/2026 <span class="cont chip info">Ilustração — sem imagem real</span></h2>
+            <div class="carrossel" id="carrossel">
+              <div class="visor" id="visor" role="img" aria-label="Corte ilustrativo 1 de 6">CORTE 1 / 6</div>
+              <div class="barra">
+                <button class="nav" id="carrAnt" aria-label="Imagem anterior">‹</button>
+                <div class="minis" id="carrMinis" role="group" aria-label="Miniaturas"></div>
+                <button class="nav" id="carrProx" aria-label="Próxima imagem">›</button>
+                <button class="nav" id="carrCheia" aria-label="Tela cheia" style="width:auto;padding:0 10px;font-size:13px">⛶</button>
+              </div>
+            </div>
+          </div>
+          <div class="cartao">
+            <h2>Labs recentes</h2>
+            <div class="subabas" role="tablist" aria-label="Grupos de laboratório">
+              <button role="tab" aria-selected="true" data-lab="hemo">Hemograma</button>
+              <button role="tab" aria-selected="false" data-lab="renal">Função renal</button>
+              <button role="tab" aria-selected="false" data-lab="hepat">Função hepática</button>
+              <button role="tab" aria-selected="false" data-lab="outros">Outros</button>
+            </div>
+            <div id="lab-hemo">
+              <table class="densa"><thead><tr><th>Analito</th><th>Valor</th><th>Unidade</th></tr></thead>
+              <tbody><tr><td>Hb</td><td>13,2</td><td>g/dL</td></tr><tr><td>Ht</td><td>40</td><td>%</td></tr>
+              <tr><td>Leucócitos</td><td>6.800</td><td>/mm³</td></tr><tr><td>Plaquetas</td><td>210.000</td><td>/mm³</td></tr></tbody></table>
+              <p class="aviso-legal">Coletado em 03/06/2026 · validade 7 dias — dentro do prazo.</p>
+            </div>
+            <div id="lab-renal" hidden><p><span class="chip pendente">Pendente</span> Sem coleta válida no prazo.</p></div>
+            <div id="lab-hepat" hidden><p><span class="chip pendente">Pendente</span> Sem coleta válida no prazo.</p></div>
+            <div id="lab-outros" hidden><p><span class="chip pendente">PSA mencionado sem laudo</span> Citado no receituário do urologista; sem laudo laboratorial.</p></div>
+          </div>
+          <div class="cartao">
+            <h2>Conduta atual</h2>
+            <p style="margin:0">Manter acompanhamento. Avaliar estadiamento com o médico. Reavaliar após definição do TNM.</p>
+            <p class="aviso-legal">Atualizado por Médico Teste · hoje. <button class="btn" data-demo style="padding:2px 10px">Validar tudo</button></p>
+          </div>
+        </div>
+
+        <div class="pilha">
+          <div class="cartao">
+            <h2>Alertas e pendências <span class="cont chip vermelho">4</span></h2>
+            <div class="alerta-item"><svg viewBox="0 0 24 24" fill="none" stroke="var(--om-vermelho)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5L22 20H2z"/><path d="M12 9.5v5"/><path d="M12 17.4v.3"/></svg><div class="txt"><strong>Conflito · identificadores</strong><br><span class="aviso-legal">CPF rotulado “Cartão SUS” × CNS rotulado “Matrícula”</span></div><span class="chip vermelho">Vermelho</span></div>
+            <div class="alerta-item"><svg viewBox="0 0 24 24" fill="none" stroke="var(--om-pendente)" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 010 17z" fill="var(--om-pendente)" stroke="none"/></svg><div class="txt"><strong>RM com trecho riscado</strong><br><span class="aviso-legal">Trecho riscado à mão: não usar sem revisão</span></div><span class="chip pendente">Pendente</span></div>
+            <div class="alerta-item"><svg viewBox="0 0 24 24" fill="none" stroke="var(--om-pendente)" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 010 17z" fill="var(--om-pendente)" stroke="none"/></svg><div class="txt"><strong>PIRADS sem número</strong><br><span class="aviso-legal">“PIRADS” citado sem categoria — não inferir</span></div><span class="chip pendente">Pendente</span></div>
+            <div class="alerta-item"><svg viewBox="0 0 24 24" fill="none" stroke="var(--om-pendente)" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 010 17z" fill="var(--om-pendente)" stroke="none"/></svg><div class="txt"><strong>ECOG pendente</strong><br><span class="aviso-legal">Escolher monta o rascunho do exame físico</span></div><span class="chip pendente">Pendente</span></div>
+          </div>
+          <div class="cartao">
+            <h2>Atualizações e diretrizes</h2>
+            <div class="dir-links">
+              <a href="https://www.nccn.org/" target="_blank" rel="noopener">NCCN</a>
+              <a href="https://www.esmo.org/" target="_blank" rel="noopener">ESMO</a>
+              <a href="https://www.inca.gov.br/" target="_blank" rel="noopener">INCA</a>
+              <a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">PubMed</a>
+              <a href="https://clinicaltrials.gov/" target="_blank" rel="noopener">ClinicalTrials</a>
+            </div>
+            <p class="aviso-legal">Links de diretriz abrem sem nenhum dado do paciente.</p>
+          </div>
+          <div class="cartao">
+            <h2>Canal · WhatsApp <span class="cont chip info">2 não lidas</span></h2>
+            <p style="margin-top:0"><strong>Familiar Teste 07</strong> · vínculo: telefone cadastrado<br>
+            <span class="aviso-legal">“Bom dia, o exame de sangue já está pronto…”</span></p>
+            <button class="btn" data-demo style="width:100%">Abrir conversa</button>
+          </div>
+          <div class="cartao">
+            <h2>OncoAssist (IA) <span class="cont chip pendente">Capacidade não habilitada</span></h2>
+            <div class="oa"><span class="avatar" aria-hidden="true">OA</span><div><strong>Assistente desligado</strong><br><span class="aviso-legal">Os botões existem, mas não chamam nada nesta versão.</span></div></div>
+            <div class="oa-botoes">
+              <button class="btn" disabled title="Capacidade não habilitada">Resumo do caso</button>
+              <button class="btn" disabled title="Capacidade não habilitada">Sugestão de pendências</button>
+              <button class="btn" disabled title="Capacidade não habilitada">Rascunho de conduta</button>
+            </div>
+            <div class="oa-pergunta"><input type="text" placeholder="Como posso ajudar neste caso?" disabled aria-label="Pergunta ao OncoAssist (desligado)"><button class="btn primario" disabled aria-label="Enviar pergunta (desligado)">➤</button></div>
+            <p class="aviso-legal">As respostas da IA não substituem o julgamento clínico.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- painel prescrição -->
+      <section class="painel" id="painel-prescricao" role="tabpanel" aria-labelledby="tab-prescricao" style="grid-template-columns:1fr">
+        <div class="cartao">
+          <h2>Kit de documentos — marcar e imprimir em bloco</h2>
+          <p class="aviso-legal" style="margin-top:0">Pré-marcados pela rotina · o médico desmarca o que não quer · texto do médico, sem alteração.</p>
+          <div id="kitLista" style="display:flex;flex-direction:column;gap:8px"></div>
+          <p><button class="btn" data-demo>Validar tudo</button> <button class="btn primario" data-demo>Imprimir selecionados</button></p>
+        </div>
+      </section>
+
+      <!-- painel exames -->
+      <section class="painel" id="painel-exames" role="tabpanel" aria-labelledby="tab-exames" style="grid-template-columns:1fr">
+        <div class="cartao">
+          <h2>Exames — 6 únicos (deduplicados)</h2>
+          <div class="exames-lista" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+            <button class="exame" data-exame="rm"><span class="thumb">RM · ilustração</span><span class="info"><span class="chip pendente">2 trechos riscados</span><span class="r1">Resumo 1: próstata · dimensões pendentes</span></span></button>
+            <button class="exame" data-exame="biopsia"><span class="thumb">Biópsia · ilustração</span><span class="info"><span class="chip info">Patologia</span><span class="r1">Resumo 1: próstata · 6 sítios</span></span></button>
+            <button class="exame" data-exame="cintilo"><span class="thumb">Cintilo · ilustração</span><span class="info"><span class="chip verde">Sem lesão</span><span class="r1">Resumo 1: esqueleto · sem lesão</span></span></button>
+            <button class="exame" data-exame="rtu"><span class="thumb">RTU · ilustração</span><span class="info"><span class="chip info">Patologia</span><span class="r1">Resumo 1: próstata · RTU</span></span></button>
+            <button class="exame" data-exame="ihq"><span class="thumb">IHQ · ilustração</span><span class="info"><span class="chip info">Tabela</span><span class="r1">Resumo 1: próstata · painel IHQ</span></span></button>
+            <button class="exame" data-exame="receita"><span class="thumb">Receituário · 2ª</span><span class="info"><span class="chip pendente">Fonte secundária</span><span class="r1">Resumo 1: urologista · PSA sem laudo</span></span></button>
+          </div>
+          <p class="aviso-legal">Cintilografia duplicada conta uma vez · IHQ original + reimpressão contam uma vez · chave: laboratório + número + data de entrada.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ── modo flash: sem rolagem ─────────────────────────── -->
+    <div class="flash-grade" aria-label="Consulta flash">
+      <div class="cartao">
+        <div class="rotulo-flash">Paciente</div>
+        <div style="display:flex;gap:12px;align-items:center;margin:8px 0">
+          <span class="avatar" style="width:48px;height:48px;font-size:18px" aria-hidden="true">PT</span>
+          <div><div class="flash-num" style="font-size:20px">Paciente Teste 07</div>
+          <div class="aviso-legal">Próstata · C61 · TNM pendente</div></div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <span class="chip vermelho">1 conflito</span><span class="chip pendente">3 pendências</span><span class="chip verde">Sem E1</span>
+        </div>
+      </div>
+      <div class="cartao">
+        <div class="rotulo-flash">Conduta</div>
+        <p>Manter acompanhamento. Avaliar estadiamento com o médico.</p>
+        <p style="display:flex;gap:8px"><button class="btn primario" data-demo>Validar tudo</button><button class="btn" data-demo>Imprimir</button></p>
+        <p class="aviso-legal">A assinatura cobre só o que foi exibido.</p>
+      </div>
+      <div class="cartao">
+        <div class="rotulo-flash">Pendências</div>
+        <div class="alerta-item"><div class="txt"><strong>Conflito · identificadores</strong></div><span class="chip vermelho">Vermelho</span></div>
+        <div class="alerta-item"><div class="txt"><strong>RM trecho riscado</strong></div><span class="chip pendente">Pendente</span></div>
+        <div class="alerta-item"><div class="txt"><strong>PIRADS sem número</strong></div><span class="chip pendente">Pendente</span></div>
+        <div class="alerta-item"><div class="txt"><strong>ECOG pendente</strong></div><span class="chip pendente">Pendente</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── modal Resumo 2 ────────────────────────────────────── -->
+<div class="overlay" id="overlayResumo" role="presentation">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="resumoTitulo">
+    <div class="modal-cab"><h2 id="resumoTitulo">Resumo 2</h2><button class="btn" id="fecharResumo">Fechar ✕</button></div>
+    <div id="resumoCorpo"></div>
+  </div>
+</div>
+
+<!-- ── gaveta biópsia ────────────────────────────────────── -->
+<div class="fundo-gaveta" id="fundoGaveta"></div>
+<aside class="gaveta" id="gaveta" role="dialog" aria-modal="true" aria-labelledby="gavetaTitulo" aria-hidden="true">
+  <div class="modal-cab"><h2 id="gavetaTitulo">Biópsia — 6 sítios</h2><button class="btn" id="fecharGaveta">Fechar ✕</button></div>
+  <table class="densa"><thead><tr><th>Sítio</th><th>Grupo</th><th>Cribriforme</th></tr></thead><tbody>
+    <tr><td>Base direita</td><td>1</td><td>ausente</td></tr>
+    <tr><td>Terço médio direito</td><td>2</td><td>presente</td></tr>
+    <tr><td>Ápice direito</td><td>1</td><td>ausente</td></tr>
+    <tr><td>Base esquerda</td><td>1</td><td>ausente</td></tr>
+    <tr><td>Terço médio esquerda</td><td>2</td><td>ausente</td></tr>
+    <tr><td>Ápice esquerda</td><td>1</td><td>ausente</td></tr>
+  </tbody></table>
+  <p class="aviso-legal">Extração por sítio, com lateralidade e posição; negação preservada. “Grau do caso” é agregação por regra [VERIFICAR].</p>
+  <h3 style="font-size:13px;color:var(--om-texto-suave)">Anexos</h3>
+  <p style="display:flex;gap:8px;flex-wrap:wrap"><span class="chip info">laudo_biopsia_PT07.pdf · 1,2 MB</span><span class="chip pendente">recorte RM riscado · conferir</span></p>
+</aside>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function () {
+  "use strict";
+  var toast = document.getElementById("toast"), t = null;
+  function dizer(msg) {
+    toast.textContent = msg; toast.classList.add("visivel");
+    clearTimeout(t); t = setTimeout(function () { toast.classList.remove("visivel"); }, 3200);
+  }
+
+  // Abas principais.
+  var abas = Array.prototype.slice.call(document.querySelectorAll("[data-aba]"));
+  function irAba(nome) {
+    abas.forEach(function (b) { b.setAttribute("aria-selected", b.dataset.aba === nome ? "true" : "false"); });
+    ["evolucao", "prescricao", "exames"].forEach(function (n) {
+      document.getElementById("painel-" + n).classList.toggle("visivel", n === nome);
+    });
+  }
+  abas.forEach(function (b) { b.addEventListener("click", function () { irAba(b.dataset.aba); }); });
+  document.querySelectorAll("[data-ir-aba]").forEach(function (b) {
+    b.addEventListener("click", function () { irAba(b.dataset.irAba); });
+  });
+
+  // Subabas de laboratório.
+  document.querySelectorAll("[data-lab]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.querySelectorAll("[data-lab]").forEach(function (o) {
+        o.setAttribute("aria-selected", o === b ? "true" : "false");
+      });
+      ["hemo", "renal", "hepat", "outros"].forEach(function (n) {
+        document.getElementById("lab-" + n).hidden = n !== b.dataset.lab;
+      });
+    });
+  });
+
+  // ECOG monta rascunho (nunca fato).
+  var rascunho = document.getElementById("rascunhoEF");
+  document.querySelectorAll("[data-ecog]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      document.querySelectorAll("[data-ecog]").forEach(function (o) {
+        o.setAttribute("aria-pressed", o === b ? "true" : "false");
+      });
+      rascunho.innerHTML = "<strong>Rascunho · ECOG " + b.dataset.ecog + ":</strong> " +
+        "estado geral a descrever; revise e complete o exame físico antes de confirmar.";
+      rascunho.style.color = "var(--om-texto)";
+    });
+  });
+
+  // Carrossel ilustrativo.
+  var N = 6, atual = 1, visor = document.getElementById("visor"), minis = document.getElementById("carrMinis");
+  function mostrar(n) {
+    atual = n < 1 ? N : (n > N ? 1 : n);
+    visor.textContent = "CORTE " + atual + " / " + N;
+    visor.setAttribute("aria-label", "Corte ilustrativo " + atual + " de " + N);
+    Array.prototype.forEach.call(minis.children, function (m, i) {
+      m.setAttribute("aria-current", i + 1 === atual ? "true" : "false");
+    });
+  }
+  for (var i = 1; i <= N; i++) {
+    (function (n) {
+      var m = document.createElement("button");
+      m.textContent = n; m.setAttribute("aria-label", "Ir para o corte " + n);
+      m.addEventListener("click", function () { mostrar(n); });
+      minis.appendChild(m);
+    })(i);
+  }
+  document.getElementById("carrAnt").addEventListener("click", function () { mostrar(atual - 1); });
+  document.getElementById("carrProx").addEventListener("click", function () { mostrar(atual + 1); });
+  document.getElementById("carrCheia").addEventListener("click", function () {
+    var c = document.getElementById("carrossel");
+    if (c.requestFullscreen) { try { c.requestFullscreen(); } catch (e) { dizer("Tela cheia indisponível aqui."); } }
+    else dizer("Tela cheia indisponível aqui.");
+  });
+  mostrar(1);
+
+  // Resumo 2 por exame (1 clique; uma palavra por campo).
+  var R2 = {
+    rm: { titulo: "Resumo 2 · RM multiparamétrica 28/04/2026", linhas: [
+      ["Lesão", "periférica"], ["Dimensão RECIST", "pendente — trecho riscado"],
+      ["Linfonodos", "ausente"], ["Osso", "ausente"], ["Pleura", "não descrito"],
+      ["Órgãos adjacentes", "contato-feixes"], ["Infiltração/obstrução/perfuração", "infiltração"],
+      ["Não oncológicos", "cistos"]] },
+    biopsia: { titulo: "Resumo 2 · Biópsia 14/04/2026", gaveta: true, linhas: [
+      ["Lesão", "próstata"], ["Dimensão RECIST", "não se aplica"], ["Linfonodos", "não descrito"],
+      ["Osso", "não descrito"], ["Pleura", "não descrito"], ["Órgãos adjacentes", "não descrito"],
+      ["Infiltração/obstrução/perfuração", "não descrito"], ["Não oncológicos", "nenhum"]] },
+    cintilo: { titulo: "Resumo 2 · Cintilografia 12/05/2026", linhas: [
+      ["Lesão", "ausente"], ["Dimensão RECIST", "não se aplica"], ["Linfonodos", "não descrito"],
+      ["Osso", "ausente — captação articular degenerativa, não lesão"], ["Pleura", "não descrito"],
+      ["Órgãos adjacentes", "não descrito"], ["Infiltração/obstrução/perfuração", "ausente"],
+      ["Não oncológicos", "artrose"]] },
+    rtu: { titulo: "Resumo 2 · AP de RTU 20/05/2026", linhas: [
+      ["Lesão", "próstata"], ["Dimensão RECIST", "não se aplica"], ["Linfonodos", "não descrito"],
+      ["Osso", "não descrito"], ["Pleura", "não descrito"], ["Órgãos adjacentes", "não descrito"],
+      ["Infiltração/obstrução/perfuração", "não descrito"], ["Não oncológicos", "nenhum"]] },
+    ihq: { titulo: "Resumo 2 · Imuno-histoquímica 02/06/2026", linhas: [
+      ["Lesão", "tabela"], ["Dimensão RECIST", "não se aplica"], ["Linfonodos", "não descrito"],
+      ["Osso", "não descrito"], ["Pleura", "não descrito"], ["Órgãos adjacentes", "não descrito"],
+      ["Infiltração/obstrução/perfuração", "não descrito"], ["Não oncológicos", "nenhum"]] },
+    receita: { titulo: "Resumo 2 · Receituário urologista 30/03/2026 (fonte secundária)", linhas: [
+      ["Lesão", "citada"], ["Dimensão RECIST", "não descrito"], ["Linfonodos", "não descrito"],
+      ["Osso", "citado"], ["Pleura", "não descrito"], ["Órgãos adjacentes", "não descrito"],
+      ["Infiltração/obstrução/perfuração", "não descrito"], ["Não oncológicos", "nenhum"]] }
+  };
+  var overlay = document.getElementById("overlayResumo");
+  function abrirResumo(chave) {
+    var r = R2[chave]; if (!r) return;
+    document.getElementById("resumoTitulo").textContent = r.titulo;
+    var html = "<dl>";
+    r.linhas.forEach(function (l) { html += '<div class="linha"><dt>' + l[0] + "</dt><dd>" + l[1] + "</dd></div>"; });
+    html += "</dl>";
+    if (chave === "rm") html += '<p class="aviso-legal">Trecho riscado à mão: não usar sem revisão. <span class="chip pendente">recorte anexado · conferir</span></p>';
+    if (r.gaveta) html += '<p><button class="btn" id="verSitios">Ver detalhe por sítio</button></p>';
+    document.getElementById("resumoCorpo").innerHTML = html;
+    overlay.classList.add("aberto");
+    document.getElementById("fecharResumo").focus();
+    var vs = document.getElementById("verSitios");
+    if (vs) vs.addEventListener("click", function () { fecharResumo(); abrirGaveta(); });
+  }
+  function fecharResumo() { overlay.classList.remove("aberto"); }
+  document.querySelectorAll("[data-exame]").forEach(function (b) {
+    b.addEventListener("click", function () { abrirResumo(b.dataset.exame); });
+  });
+  document.getElementById("fecharResumo").addEventListener("click", fecharResumo);
+  overlay.addEventListener("click", function (e) { if (e.target === overlay) fecharResumo(); });
+
+  // Gaveta da biópsia.
+  var gaveta = document.getElementById("gaveta"), fundo = document.getElementById("fundoGaveta");
+  function abrirGaveta() {
+    gaveta.classList.add("aberta"); fundo.classList.add("aberto");
+    gaveta.setAttribute("aria-hidden", "false"); document.getElementById("fecharGaveta").focus();
+  }
+  function fecharGaveta() {
+    gaveta.classList.remove("aberta"); fundo.classList.remove("aberto");
+    gaveta.setAttribute("aria-hidden", "true");
+  }
+  document.getElementById("fecharGaveta").addEventListener("click", fecharGaveta);
+  fundo.addEventListener("click", fecharGaveta);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { fecharResumo(); fecharGaveta(); }
+  });
+
+  // Kit da aba prescrição (pré-marcados; médico desmarca).
+  var kit = ["Orientação nutricional", "Sinais de alarme", "Receita de sintomáticos",
+    "Requisição de exames por ciclo", "Relatório médico pericial"];
+  var kl = document.getElementById("kitLista");
+  kit.forEach(function (nome, i) {
+    var lab = document.createElement("label");
+    lab.style.cssText = "display:flex;gap:10px;align-items:center;border:1px solid var(--om-linha);border-radius:8px;padding:10px 14px;cursor:pointer";
+    var c = document.createElement("input");
+    c.type = "checkbox"; c.checked = i < 3; c.style.cssText = "width:20px;height:20px";
+    c.setAttribute("aria-label", "Marcar " + nome);
+    lab.appendChild(c);
+    lab.appendChild(document.createTextNode(nome + (i === 2 ? " (itens desmarcáveis na impressão)" : "")));
+    kl.appendChild(lab);
+  });
+
+  // Modo flash.
+  var btnFlash = document.getElementById("btnFlash");
+  btnFlash.addEventListener("click", function () {
+    var on = document.body.classList.toggle("flash");
+    btnFlash.setAttribute("aria-pressed", on ? "true" : "false");
+    btnFlash.textContent = on ? "◉ Completa" : "⚡ Flash";
+  });
+
+  // Ações sem efeito no protótipo.
+  document.querySelectorAll("[data-demo]").forEach(function (b) {
+    b.addEventListener("click", function () { dizer("Demonstração — sem efeito. A ação real passa pela porta /acao."); });
+  });
+  document.getElementById("btnSino").addEventListener("click", function () {
+    dizer("4 itens em Alertas e pendências: 1 conflito, 3 pendentes.");
+  });
+})();
+</script>
+</body>
+</html>
+
