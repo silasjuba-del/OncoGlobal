@@ -1,8 +1,69 @@
+import { useEffect, useMemo, useState } from "react";
+import { criarChaves } from "./api/chaves.js";
+import { criarPortaFalsa } from "./api/fake.js";
+import type { AgendaVisao } from "./api/porta.js";
+import { Agenda } from "./telas/Agenda.js";
+import { BarraComando } from "./telas/BarraComando.js";
+import { TelaConsulta } from "./telas/TelaConsulta.js";
+import { TelaApacLote } from "./telas/apac/TelaApacLote.js";
+import { CaixaCanal } from "./telas/canal/CaixaCanal.js";
+import { TelaSalao } from "./telas/TelaSalao.js";
+
+type Tela = "agenda" | "consulta" | "salao" | "canal" | "apac";
+
+function clicarBotao(nome: string) {
+  const botao = [...document.querySelectorAll("button")].find((item) => item.textContent?.trim() === nome);
+  botao?.click();
+}
+
+/** Proposta de ligacao. Nao aplicar nesta onda. Porta fake enquanto as rotas de leitura nao existem. */
 export function App() {
+  const porta = useMemo(() => criarPortaFalsa(), []);
+  const chaves = useMemo(() => criarChaves(), []);
+  const [tela, setTela] = useState<Tela>("agenda");
+  const [patientId, setPatientId] = useState<string | null>(null);
+  const [agenda, setAgenda] = useState<AgendaVisao | null>(null);
+
+  useEffect(() => {
+    void porta.agendaDoDia().then(setAgenda);
+  }, [porta]);
+
+  function abrir(id: string) {
+    setPatientId(id);
+    setTela("consulta");
+  }
+
   return (
     <main>
       <h1>OncoGlobal — WORK</h1>
       <p>dados sintéticos</p>
+      {agenda ? (
+        <BarraComando
+          pacientes={agenda.itens.map((item) => ({
+            patientId: item.patientId,
+            nome: item.nome,
+            prontuario: item.prontuario,
+          }))}
+          ordemIds={agenda.itens.map((item) => item.patientId)}
+          pacienteAbertoId={patientId}
+          onAbrir={abrir}
+          onValidarTudo={() => clicarBotao("validar tudo")}
+          onImprimir={() => clicarBotao("imprimir")}
+          onNovaTriagem={() => setTela("salao")}
+          onSalao={() => setTela("salao")}
+          onApac={() => setTela("apac")}
+          onCanal={() => setTela("canal")}
+        />
+      ) : (
+        <p>carregando agenda</p>
+      )}
+      {tela === "agenda" && agenda ? <Agenda visao={agenda} onAbrir={abrir} /> : null}
+      {tela === "consulta" && patientId ? (
+        <TelaConsulta patientId={patientId} porta={porta} chaves={chaves} />
+      ) : null}
+      {tela === "salao" ? <TelaSalao porta={porta} /> : null}
+      {tela === "canal" ? <CaixaCanal porta={porta} chaves={chaves} /> : null}
+      {tela === "apac" ? <TelaApacLote porta={porta} chaves={chaves} /> : null}
     </main>
   );
 }
