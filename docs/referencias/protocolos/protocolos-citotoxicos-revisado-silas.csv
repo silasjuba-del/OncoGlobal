@@ -1,0 +1,455 @@
+CID. 10,CID. 10,PROTOCOLO,Nr  CICLOS,DIAS-INTERVALO,INTERVALO,SEQ,MEDICAÇÃO,OBSERVAÇÃO,DOSE,U.M,VIA,DIAS DE APLICAÇÃO,TEMP. Hr,TEMP. MIN
+Genitourinário,CA de Próstata - C61,Docetaxel (D1 e D15),,28,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D15",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D15",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D15",,15
+,,,,,QT,4,Docetaxel Inj.,Fracionado quinzenal,50,mg/m²,IV,"D1,D15",,60
+,,,,,VO,5,Prednisona,5mg 12/12h,5,mg,VO,Contínuo,,
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D15",,
+,,,,,,,,,,,,,,
+Genitourinário,CA de Próstata - C61,Docetaxel (21/21 dias),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Docetaxel Inj.,,75,mg/m²,IV,D1,,60
+,,,,,VO,5,Prednisona,5mg 12/12h,5,mg,VO,Contínuo,,
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Genitourinário,CA de Próstata - C61,Carboplatina + Paclitaxel semanal,,7,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Paclitaxel Inj.,,80,mg/m²,IV,D1,,60
+,,,,,QT,5,Carboplatina Inj.,Calvert (AUC 2) semanal,2,AUC,IV,D1,,60
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Genitourinário,CA de Próstata - C61,Carboplatina + Paclitaxel (21/21 dias),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,Pré-QT,4,Difenidramina Inj.,Pré-medicação do paclitaxel (infusão 3h),1,amp,IV,D1,,15
+,,,,,QT,5,Paclitaxel Inj.,,175,mg/m²,IV,D1,3,
+,,,,,QT,6,Carboplatina Inj.,Calvert (AUC 5),5,AUC,IV,D1,,60
+,,,,,Pós-QT,7,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Mama,CA de Mama - C50 (C50.0–C50.9),AC-T (fase AC),4,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Doxorrubicina Inj.,Seguido de paclitaxel após 4 ciclos,60,mg/m²,IV,D1,,10
+,,,,,QT,5,Ciclofosfamida Inj.,,600,mg/m²,IV,D1,,30
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Mama,CA de Mama - C50 (C50.0–C50.9),AC-T (fase T — Paclitaxel semanal),12,7,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Paclitaxel Inj.,,80,mg/m²,IV,D1,,60
+,,,,,Pós-QT,5,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Mama,CA de Mama - C50 (C50.0–C50.9),AC-CT (fase AC),4,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Doxorrubicina Inj.,Seguido de carbo+paclitaxel após 4 ciclos,60,mg/m²,IV,D1,,10
+,,,,,QT,5,Ciclofosfamida Inj.,,600,mg/m²,IV,D1,,30
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Mama,CA de Mama - C50 (C50.0–C50.9),AC-CT (fase CT — Carboplatina + Paclitaxel semanal),12,7,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Paclitaxel Inj.,Semanal,80,mg/m²,IV,D1,,60
+,,,,,QT,5,Carboplatina Inj.,Calvert (AUC 2) semanal,2,AUC,IV,D1,,60
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Mama,CA de Mama - C50 (C50.0–C50.9),TC,4,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Docetaxel Inj.,,75,mg/m²,IV,D1,,60
+,,,,,QT,5,Ciclofosfamida Inj.,,600,mg/m²,IV,D1,,30
+,,,,,Suporte,6,Filgrastim,5 µg/kg/dia SC 24–72h após QT,5,µg/kg,SC,D2 a D8,,
+,,,,,Pós-QT,7,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Mama,CA de Mama - C50 (C50.0–C50.9),CMF,6,28,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D8",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D8",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D8",,15
+,,,,,QT,4,Ciclofosfamida Inj.,,600,mg/m²,IV,"D1,D8",,30
+,,,,,QT,5,Metotrexato Inj.,,40,mg/m²,IV,"D1,D8",,10
+,,,,,QT,6,Fluoruracila Inj.,,600,mg/m²,IV,"D1,D8",,10
+,,,,,Pós-QT,7,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D8",,
+,,,,,,,,,,,,,,
+Mama,CA de Mama - C50 (C50.0–C50.9),Doxorrubicina + Paclitaxel (AT),4,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,Pré-QT,4,Difenidramina Inj.,Pré-medicação do paclitaxel (infusão 3h),1,amp,IV,D1,,15
+,,,,,QT,5,Doxorrubicina Inj.,,50,mg/m²,IV,D1,,10
+,,,,,QT,6,Paclitaxel Inj.,Infusão 3h,175,mg/m²,IV,D1,3,
+,,,,,Pós-QT,7,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Mama,CA de Mama - C50 (C50.0–C50.9),Docetaxel (monoterapia),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Docetaxel Inj.,,75,mg/m²,IV,D1,,60
+,,,,,Pós-QT,5,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Mama,CA de Mama - C50 (C50.0–C50.9),Paclitaxel (monoterapia),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,Pré-QT,4,Difenidramina Inj.,Pré-medicação do paclitaxel (infusão 3h),1,amp,IV,D1,,15
+,,,,,QT,5,Paclitaxel Inj.,,175,mg/m²,IV,D1,3,
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Mama,CA de Mama - C50 (C50.0–C50.9),Gemcitabina,,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D8",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D8",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D8",,15
+,,,,,QT,4,Gencitabina Inj.,,1000,mg/m²,IV,"D1,D8",,30
+,,,,,Pós-QT,5,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D8",,
+,,,,,,,,,,,,,,
+Mama,CA de Mama - C50 (C50.0–C50.9),Capecitabina (monoterapia),,21,VO,1,Capecitabina,Dose por administração 12/12h; nº de comprimidos pela SC (14 dias),1250,mg/m²,VO,D1 a D14,,
+,,,,,,,,,,,,,,
+Mama,CA de Mama - C50 (C50.0–C50.9),Capecitabina + Docetaxel (XT),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Docetaxel Inj.,,75,mg/m²,IV,D1,,60
+,,,,,VO,5,Capecitabina,Dose por administração 12/12h; nº de comprimidos pela SC (14 dias),1250,mg/m²,VO,D1 a D14,,
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Mama,CA de Mama - C50 (C50.0–C50.9),Carboplatina + Paclitaxel (21/21 dias),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,Pré-QT,4,Difenidramina Inj.,Pré-medicação do paclitaxel (infusão 3h),1,amp,IV,D1,,15
+,,,,,QT,5,Paclitaxel Inj.,,175,mg/m²,IV,D1,3,
+,,,,,QT,6,Carboplatina Inj.,Calvert (AUC 5),5,AUC,IV,D1,,60
+,,,,,Pós-QT,7,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Mama,CA de Mama - C50 (C50.0–C50.9),Carboplatina + Gemcitabina,,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D8",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D8",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D8",,15
+,,,,,QT,4,Gencitabina Inj.,,1000,mg/m²,IV,"D1,D8",,30
+,,,,,QT,5,Carboplatina Inj.,Calvert (AUC 5) — apenas D1,5,AUC,IV,D1,,60
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D8",,
+,,,,,,,,,,,,,,
+Pulmão,CA de Pulmão Não Pequenas Células - C34,Cisplatina + Gemcitabina,6,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D8",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D8",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D8",,15
+,,,,,QT,4,Gencitabina Inj.,,1250,mg/m²,IV,"D1,D8",,30
+,,,,,Pré-QT,5,"Soro Fisiológico 0,9% 500mL",Correr aberto antes da CISPLATINA,1,Fr,IV,D1,,20
+,,,,,QT,6,Cisplatina Inj.,,75,mg/m²,IV,D1,,60
+,,,,,QT,7,Manitol 20% frasco 250mL,Correr em Y com CISPLATINA,1,Fr,IV,D1,,60
+,,,,,Pós-QT,8,"Soro Fisiológico 0,9% 500mL",Correr aberto após CISPLATINA,1,Fr,IV,D1,,20
+,,,,,Pós-QT,9,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D8",,
+,,,,,,,,,,,,,,
+Pulmão,CA de Pulmão Não Pequenas Células - C34,Carboplatina + Gemcitabina,6,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D8",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D8",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D8",,15
+,,,,,QT,4,Gencitabina Inj.,,1000,mg/m²,IV,"D1,D8",,30
+,,,,,QT,5,Carboplatina Inj.,Calvert (AUC 5) — apenas D1,5,AUC,IV,D1,,60
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D8",,
+,,,,,,,,,,,,,,
+Pulmão,CA de Pulmão Não Pequenas Células - C34,Cisplatina + Docetaxel,6,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Docetaxel Inj.,,75,mg/m²,IV,D1,,60
+,,,,,Pré-QT,5,"Soro Fisiológico 0,9% 500mL",Correr aberto antes da CISPLATINA,1,Fr,IV,D1,,20
+,,,,,QT,6,Cisplatina Inj.,,75,mg/m²,IV,D1,,60
+,,,,,QT,7,Manitol 20% frasco 250mL,Correr em Y com CISPLATINA,1,Fr,IV,D1,,60
+,,,,,Pós-QT,8,"Soro Fisiológico 0,9% 500mL",Correr aberto após CISPLATINA,1,Fr,IV,D1,,20
+,,,,,Pós-QT,9,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Pulmão,CA de Pulmão Não Pequenas Células - C34,Carboplatina + Docetaxel,6,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Docetaxel Inj.,,75,mg/m²,IV,D1,,60
+,,,,,QT,5,Carboplatina Inj.,Calvert (AUC 5),5,AUC,IV,D1,,60
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Pulmão,CA de Pulmão Não Pequenas Células - C34,Cisplatina + Paclitaxel,6,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,Pré-QT,4,Difenidramina Inj.,Pré-medicação do paclitaxel (infusão 3h),1,amp,IV,D1,,15
+,,,,,QT,5,Paclitaxel Inj.,,175,mg/m²,IV,D1,3,
+,,,,,Pré-QT,6,"Soro Fisiológico 0,9% 500mL",Correr aberto antes da CISPLATINA,1,Fr,IV,D1,,20
+,,,,,QT,7,Cisplatina Inj.,,75,mg/m²,IV,D1,,60
+,,,,,QT,8,Manitol 20% frasco 250mL,Correr em Y com CISPLATINA,1,Fr,IV,D1,,60
+,,,,,Pós-QT,9,"Soro Fisiológico 0,9% 500mL",Correr aberto após CISPLATINA,1,Fr,IV,D1,,20
+,,,,,Pós-QT,10,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Pulmão,CA de Pulmão Não Pequenas Células - C34,Carboplatina + Paclitaxel,6,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,Pré-QT,4,Difenidramina Inj.,Pré-medicação do paclitaxel (infusão 3h),1,amp,IV,D1,,15
+,,,,,QT,5,Paclitaxel Inj.,,200,mg/m²,IV,D1,3,
+,,,,,QT,6,Carboplatina Inj.,Calvert (AUC 5),5,AUC,IV,D1,,60
+,,,,,Pós-QT,7,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Pulmão,CA de Pulmão Não Pequenas Células - C34,Cisplatina + Vinorelbina,6,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D8",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D8",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D8",,15
+,,,,,QT,4,Vinorelbina Inj.,,25,mg/m²,IV,"D1,D8",,10
+,,,,,Pré-QT,5,"Soro Fisiológico 0,9% 500mL",Correr aberto antes da CISPLATINA,1,Fr,IV,D1,,20
+,,,,,QT,6,Cisplatina Inj.,,80,mg/m²,IV,D1,,60
+,,,,,QT,7,Manitol 20% frasco 250mL,Correr em Y com CISPLATINA,1,Fr,IV,D1,,60
+,,,,,Pós-QT,8,"Soro Fisiológico 0,9% 500mL",Correr aberto após CISPLATINA,1,Fr,IV,D1,,20
+,,,,,Pós-QT,9,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D8",,
+,,,,,,,,,,,,,,
+Pulmão,CA de Pulmão Não Pequenas Células - C34,Cisplatina + Pemetrexede (não escamoso),6,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Pemetrexede Inj.,Suplementar ác. fólico + B12,500,mg/m²,IV,D1,,10
+,,,,,Pré-QT,5,"Soro Fisiológico 0,9% 500mL",Correr aberto antes da CISPLATINA,1,Fr,IV,D1,,20
+,,,,,QT,6,Cisplatina Inj.,,75,mg/m²,IV,D1,,60
+,,,,,QT,7,Manitol 20% frasco 250mL,Correr em Y com CISPLATINA,1,Fr,IV,D1,,60
+,,,,,Pós-QT,8,"Soro Fisiológico 0,9% 500mL",Correr aberto após CISPLATINA,1,Fr,IV,D1,,20
+,,,,,Pós-QT,9,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Pulmão,CA de Pulmão Não Pequenas Células - C34,Carboplatina + Pemetrexede (não escamoso),6,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Pemetrexede Inj.,Suplementar ác. fólico + B12,500,mg/m²,IV,D1,,10
+,,,,,QT,5,Carboplatina Inj.,Calvert (AUC 5),5,AUC,IV,D1,,60
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Pulmão,CA de Pulmão Não Pequenas Células - C34,Docetaxel (monoterapia),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Docetaxel Inj.,,75,mg/m²,IV,D1,,60
+,,,,,Pós-QT,5,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Pulmão,CA de Pulmão Não Pequenas Células - C34,Gemcitabina (monoterapia),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D8",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D8",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D8",,15
+,,,,,QT,4,Gencitabina Inj.,,1000,mg/m²,IV,"D1,D8",,30
+,,,,,Pós-QT,5,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D8",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Pâncreas - C25,"FOLFIRINOX (D1 e D2, infusão 8h — sem bomba)",,14,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D2",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,4,Atropina Sulfato Inj.,Prevenção de síndrome colinérgica aguda,0.25,mg,IV,D1,,5
+,,,,,QT,5,Irinotecano Inj.,,150,mg/m²,IV,D1,,90
+,,,,,QT,6,Oxaliplatina Inj.,,85,mg/m²,IV,D1,2,
+,,,,,QT,7,Folinato de Cálcio Inj.,,400,mg/m²,IV,D1,2,
+,,,,,QT,8,Fluoruracila Inj.,Infusão 8h — sem bolus (1200+1200 = 2400 mg/m²),1200,mg/m²,IV,"D1,D2",8,
+,,,,,Suporte,9,Filgrastim,5 µg/kg/dia SC 24–72h após QT,5,µg/kg,SC,D4 a D10,,
+,,,,,Pós-QT,10,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D2",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Pâncreas - C25,Gemcitabina (monoterapia),6,28,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D8,D15",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D8,D15",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D8,D15",,15
+,,,,,QT,4,Gencitabina Inj.,,1000,mg/m²,IV,"D1,D8,D15",,30
+,,,,,Pós-QT,5,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D8,D15",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Pâncreas - C25,Gemcitabina + Capecitabina,6,28,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D8,D15",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D8,D15",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D8,D15",,15
+,,,,,QT,4,Gencitabina Inj.,,1000,mg/m²,IV,"D1,D8,D15",,30
+,,,,,VO,5,Capecitabina,Dose por administração 12/12h; nº de comprimidos pela SC (21 dias),830,mg/m²,VO,D1 a D21,,
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D8,D15",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Cólon/Reto - C18/C20,"FOLFOXIRI (D1 e D2, infusão 8h — sem bomba)",,14,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D2",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,4,Atropina Sulfato Inj.,Prevenção de síndrome colinérgica aguda,0.25,mg,IV,D1,,5
+,,,,,QT,5,Irinotecano Inj.,,165,mg/m²,IV,D1,,90
+,,,,,QT,6,Oxaliplatina Inj.,,85,mg/m²,IV,D1,2,
+,,,,,QT,7,Folinato de Cálcio Inj.,LV 200 (padrão TRIBE),200,mg/m²,IV,D1,2,
+,,,,,QT,8,Fluoruracila Inj.,Infusão 8h — sem bolus (1200+1200 = 2400 mg/m²),1200,mg/m²,IV,"D1,D2",8,
+,,,,,Suporte,9,Filgrastim,5 µg/kg/dia SC 24–72h após QT,5,µg/kg,SC,D4 a D10,,
+,,,,,Pós-QT,10,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D2",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Cólon/Reto - C18/C20,"FOLFOX (D1 e D2, infusão 8h — sem bomba)",,14,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D2",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D2",,15
+,,,,,QT,4,Oxaliplatina Inj.,,85,mg/m²,IV,D1,2,
+,,,,,QT,5,Folinato de Cálcio Inj.,Correr em Y com oxaliplatina,400,mg/m²,IV,D1,2,
+,,,,,QT,6,Fluoruracila Inj.,Infusão 8h — sem bolus (1200+1200 = 2400 mg/m²),1200,mg/m²,IV,"D1,D2",8,
+,,,,,Pós-QT,7,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D2",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Cólon/Reto - C18/C20,"FOLFIRI (D1 e D2, infusão 8h — sem bomba)",,14,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D2",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,4,Atropina Sulfato Inj.,Prevenção de síndrome colinérgica aguda,0.25,mg,IV,D1,,5
+,,,,,QT,5,Irinotecano Inj.,,180,mg/m²,IV,D1,,90
+,,,,,QT,6,Folinato de Cálcio Inj.,,400,mg/m²,IV,D1,2,
+,,,,,QT,7,Fluoruracila Inj.,Infusão 8h — sem bolus (1200+1200 = 2400 mg/m²),1200,mg/m²,IV,"D1,D2",8,
+,,,,,Pós-QT,8,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D2",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Cólon/Reto - C18/C20,CAPOX (XELOX),8,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Oxaliplatina Inj.,,130,mg/m²,IV,D1,2,
+,,,,,VO,5,Capecitabina,Dose por administração 12/12h; nº de comprimidos pela SC (14 dias),1000,mg/m²,VO,D1 a D14,,
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Reto - C20,Capecitabina + RxT (radiossensibilização),,7,VO,1,Capecitabina,Dose por administração 12/12h; nº de comprimidos pela SC (dias de RxT),825,mg/m²,VO,Dias de RxT,,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Cólon/Reto - C18/C20,Irinotecano (monoterapia),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,Pré-QT,4,Atropina Sulfato Inj.,Prevenção de síndrome colinérgica aguda,0.25,mg,IV,D1,,5
+,,,,,QT,5,Irinotecano Inj.,,350,mg/m²,IV,D1,,90
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Cólon/Reto - C18/C20,5-FU + Leucovorina (Mayo Clinic),6,28,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D2,D3,D4,D5",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D2,D3,D4,D5",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D2,D3,D4,D5",,15
+,,,,,QT,4,Folinato de Cálcio Inj.,IV push,20,mg/m²,IV,"D1,D2,D3,D4,D5",,5
+,,,,,QT,5,Fluoruracila Inj.,IV push/bolus (3–5 min) após o folinato,425,mg/m²,IV,"D1,D2,D3,D4,D5",,5
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D2,D3,D4,D5",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Cólon/Reto - C18/C20,5-FU + Leucovorina (Roswell Park),4,56,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D8,D15,D22,D29,D36",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D8,D15,D22,D29,D36",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D8,D15,D22,D29,D36",,15
+,,,,,QT,4,Folinato de Cálcio Inj.,Infusão 2h,500,mg/m²,IV,"D1,D8,D15,D22,D29,D36",2,
+,,,,,QT,5,Fluoruracila Inj.,"IV push/bolus (3–5 min), 1h após início do folinato",500,mg/m²,IV,"D1,D8,D15,D22,D29,D36",,5
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D8,D15,D22,D29,D36",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Esôfago - C15,"FLOT (D1 e D2, infusão 8h — sem bomba)",,14,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D2",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D2",,15
+,,,,,QT,4,Docetaxel Inj.,,50,mg/m²,IV,D1,,60
+,,,,,QT,5,Oxaliplatina Inj.,,85,mg/m²,IV,D1,2,
+,,,,,QT,6,Folinato de Cálcio Inj.,LV 200 (FLOT4),200,mg/m²,IV,D1,2,
+,,,,,QT,7,Fluoruracila Inj.,Infusão 8h — sem bolus (1200+1200 = 2400 mg/m²),1200,mg/m²,IV,"D1,D2",8,
+,,,,,Suporte,8,Filgrastim,5 µg/kg/dia SC 24–72h após QT,5,µg/kg,SC,D4 a D10,,
+,,,,,Pós-QT,9,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D2",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Esôfago - C15,Carboplatina + Paclitaxel semanal (CROSS + RxT),5,7,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Paclitaxel Inj.,,50,mg/m²,IV,D1,,60
+,,,,,QT,5,Carboplatina Inj.,Calvert (AUC 2) semanal,2,AUC,IV,D1,,60
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Esôfago - C15,"FOLFOX (D1 e D2, infusão 8h — sem bomba)",,14,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D2",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D2",,15
+,,,,,QT,4,Oxaliplatina Inj.,,85,mg/m²,IV,D1,2,
+,,,,,QT,5,Folinato de Cálcio Inj.,Correr em Y com oxaliplatina,400,mg/m²,IV,D1,2,
+,,,,,QT,6,Fluoruracila Inj.,Infusão 8h — sem bolus (1200+1200 = 2400 mg/m²),1200,mg/m²,IV,"D1,D2",8,
+,,,,,Pós-QT,7,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D2",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Esôfago - C15,Carboplatina + Paclitaxel (21/21 dias),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,Pré-QT,4,Difenidramina Inj.,Pré-medicação do paclitaxel (infusão 3h),1,amp,IV,D1,,15
+,,,,,QT,5,Paclitaxel Inj.,,175,mg/m²,IV,D1,3,
+,,,,,QT,6,Carboplatina Inj.,Calvert (AUC 5),5,AUC,IV,D1,,60
+,,,,,Pós-QT,7,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Esôfago - C15,Docetaxel (monoterapia),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Docetaxel Inj.,,75,mg/m²,IV,D1,,60
+,,,,,Pós-QT,5,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Esôfago - C15,"5-FU + Leucovorina (LV5FU2, D1 e D2 8h)",,14,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D2",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D2",,15
+,,,,,QT,4,Folinato de Cálcio Inj.,,400,mg/m²,IV,D1,2,
+,,,,,QT,5,Fluoruracila Inj.,Infusão 8h — sem bolus (1200+1200 = 2400 mg/m²),1200,mg/m²,IV,"D1,D2",8,
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D2",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Esôfago - C15,Irinotecano (monoterapia),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,Pré-QT,4,Atropina Sulfato Inj.,Prevenção de síndrome colinérgica aguda,0.25,mg,IV,D1,,5
+,,,,,QT,5,Irinotecano Inj.,,350,mg/m²,IV,D1,,90
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Estômago/JEG - C16,"FLOT (D1 e D2, infusão 8h — sem bomba)",,14,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D2",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D2",,15
+,,,,,QT,4,Docetaxel Inj.,,50,mg/m²,IV,D1,,60
+,,,,,QT,5,Oxaliplatina Inj.,,85,mg/m²,IV,D1,2,
+,,,,,QT,6,Folinato de Cálcio Inj.,LV 200 (FLOT4),200,mg/m²,IV,D1,2,
+,,,,,QT,7,Fluoruracila Inj.,Infusão 8h — sem bolus (1200+1200 = 2400 mg/m²),1200,mg/m²,IV,"D1,D2",8,
+,,,,,Suporte,8,Filgrastim,5 µg/kg/dia SC 24–72h após QT,5,µg/kg,SC,D4 a D10,,
+,,,,,Pós-QT,9,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D2",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Estômago/JEG - C16,"FOLFOX (D1 e D2, infusão 8h — sem bomba)",,14,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D2",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D2",,15
+,,,,,QT,4,Oxaliplatina Inj.,,85,mg/m²,IV,D1,2,
+,,,,,QT,5,Folinato de Cálcio Inj.,Correr em Y com oxaliplatina,400,mg/m²,IV,D1,2,
+,,,,,QT,6,Fluoruracila Inj.,Infusão 8h — sem bolus (1200+1200 = 2400 mg/m²),1200,mg/m²,IV,"D1,D2",8,
+,,,,,Pós-QT,7,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D2",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Estômago/JEG - C16,"FOLFIRI (D1 e D2, infusão 8h — sem bomba)",,14,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D2",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,4,Atropina Sulfato Inj.,Prevenção de síndrome colinérgica aguda,0.25,mg,IV,D1,,5
+,,,,,QT,5,Irinotecano Inj.,,180,mg/m²,IV,D1,,90
+,,,,,QT,6,Folinato de Cálcio Inj.,,400,mg/m²,IV,D1,2,
+,,,,,QT,7,Fluoruracila Inj.,Infusão 8h — sem bolus (1200+1200 = 2400 mg/m²),1200,mg/m²,IV,"D1,D2",8,
+,,,,,Pós-QT,8,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D2",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Estômago/JEG - C16,XELOX (CAPOX),8,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Oxaliplatina Inj.,,130,mg/m²,IV,D1,2,
+,,,,,VO,5,Capecitabina,Dose por administração 12/12h; nº de comprimidos pela SC (14 dias),1000,mg/m²,VO,D1 a D14,,
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Estômago/JEG - C16,DCF modificado (institucional),,14,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,"D1,D2",,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,"D1,D2",,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,"D1,D2",,15
+,,,,,QT,4,Docetaxel Inj.,D1,40,mg/m²,IV,D1,,60
+,,,,,QT,5,Fluoruracila Inj.,Infusão 6h/dia (D1 e D2),600,mg/m²,IV,"D1,D2",6,
+,,,,,Pré-QT,6,"Soro Fisiológico 0,9% 500mL",Correr aberto antes da CISPLATINA,1,Fr,IV,D2,,20
+,,,,,QT,7,Cisplatina Inj.,D2,40,mg/m²,IV,D2,,60
+,,,,,QT,8,Manitol 20% frasco 250mL,Correr em Y com CISPLATINA,1,Fr,IV,D2,,60
+,,,,,Pós-QT,9,"Soro Fisiológico 0,9% 500mL",Correr aberto após CISPLATINA,1,Fr,IV,D2,,20
+,,,,,Pós-QT,10,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,"D1,D2",,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Estômago/JEG - C16,Docetaxel (monoterapia),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Docetaxel Inj.,,75,mg/m²,IV,D1,,60
+,,,,,Pós-QT,5,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Gastrointestinal,CA de Estômago/JEG - C16,Irinotecano (monoterapia),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,Pré-QT,4,Atropina Sulfato Inj.,Prevenção de síndrome colinérgica aguda,0.25,mg,IV,D1,,5
+,,,,,QT,5,Irinotecano Inj.,,350,mg/m²,IV,D1,,90
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Cabeça/Pescoço,"CA de Cabeça e Pescoço - C00–C14, C32",Cisplatina + RxT,3,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,Pré-QT,4,"Soro Fisiológico 0,9% 500mL",Correr aberto antes da CISPLATINA,1,Fr,IV,D1,,20
+,,,,,QT,5,Cisplatina Inj.,"D1, D22 e D43 concomitante à RxT",100,mg/m²,IV,D1,,60
+,,,,,QT,6,Manitol 20% frasco 250mL,Correr em Y com CISPLATINA,1,Fr,IV,D1,,60
+,,,,,Pós-QT,7,"Soro Fisiológico 0,9% 500mL",Correr aberto após CISPLATINA,1,Fr,IV,D1,,20
+,,,,,Pós-QT,8,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Cabeça/Pescoço,"CA de Cabeça e Pescoço - C00–C14, C32",Carboplatina + Paclitaxel,,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,Pré-QT,4,Difenidramina Inj.,Pré-medicação do paclitaxel (infusão 3h),1,amp,IV,D1,,15
+,,,,,QT,5,Paclitaxel Inj.,,175,mg/m²,IV,D1,3,
+,,,,,QT,6,Carboplatina Inj.,Calvert (AUC 5),5,AUC,IV,D1,,60
+,,,,,Pós-QT,7,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Cabeça/Pescoço,"CA de Cabeça e Pescoço - C00–C14, C32",Carboplatina + Docetaxel,,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Docetaxel Inj.,,75,mg/m²,IV,D1,,60
+,,,,,QT,5,Carboplatina Inj.,Calvert (AUC 5),5,AUC,IV,D1,,60
+,,,,,Pós-QT,6,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Cabeça/Pescoço,"CA de Cabeça e Pescoço - C00–C14, C32",Cisplatina + 5-Fluorouracil (PF),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,Pré-QT,4,"Soro Fisiológico 0,9% 500mL",Correr aberto antes da CISPLATINA,1,Fr,IV,D1,,20
+,,,,,QT,5,Cisplatina Inj.,,100,mg/m²,IV,D1,,60
+,,,,,QT,6,Manitol 20% frasco 250mL,Correr em Y com CISPLATINA,1,Fr,IV,D1,,60
+,,,,,Pós-QT,7,"Soro Fisiológico 0,9% 500mL",Correr aberto após CISPLATINA,1,Fr,IV,D1,,20
+,,,,,QT,8,Fluoruracila Inj.,Infusão contínua 24h/dia,1000,mg/m²,IV,"D1,D2,D3,D4",24,
+,,,,,Pós-QT,9,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Cabeça/Pescoço,"CA de Cabeça e Pescoço - C00–C14, C32",Docetaxel (monoterapia),,21,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Docetaxel Inj.,,75,mg/m²,IV,D1,,60
+,,,,,Pós-QT,5,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
+Cabeça/Pescoço,"CA de Cabeça e Pescoço - C00–C14, C32",Metotrexato semanal,,7,Pré-QT,1,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pré e pós QT,1,Fr,IV,D1,,
+,,,,,Pré-QT,2,Ondansetrona 8mg Inj.,,8,mg,IV,D1,,15
+,,,,,Pré-QT,3,Dexametasona 10mg Inj.,,10,mg,IV,D1,,15
+,,,,,QT,4,Metotrexato Inj.,,40,mg/m²,IV,D1,,10
+,,,,,Pós-QT,5,"Soro fisiológico 0,9% 250mL",Lavar acesso venoso pós-QT,1,Fr,IV,D1,,
+,,,,,,,,,,,,,,
