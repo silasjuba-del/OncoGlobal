@@ -21,7 +21,7 @@ it("W3 A09 ancora le evento envelopado produzido pelo WriteRouter", () => {
     confirmar(db, { operationId: "op", patientId, tumorLotId: "t", encounterId: "e", reviewDecisionId: "r", em,
       sessao: { medicoId: "m", crm: "TESTE", emitidaEm: em, expiraEm: "2026-10-05T13:00:00Z" },
       registros: [{ draftId: "d", expectedRevision: 0, eventId: "ev", tipo: "TreatmentAdministration", payload: admin, fontes: [f.fonteSintetica], revisao: "CONFIRMADO" }] });
-    expect(ultimaAdministracaoQtEfetiva(listarEventos(db, patientId), { "ciclo-01": "QT" }).data).toBe("2026-10-01");
+    expect(ultimaAdministracaoQtEfetiva(listarEventos(db, patientId), "-03:00", { "ciclo-01": "QT" }).data).toBe("2026-10-01");
   } finally { db.close(); }
 });
 it.each(["TEP nao descartado.", "TEP nao pode ser excluido."])("W3 A10 incerteza posterior: %s", (texto) => {
@@ -36,9 +36,9 @@ it("W3 A12 conversao decimal nao cria conflito artificial", () => {
 });
 it("W3 ancora exige modalidade explicita do ciclo sem inventar QT", () => {
   const { patientId: _p, episodioId: _e, unidadeEfetiva: _u, ...a } = f.administracaoCompleta("a", 20);
-  expect(ultimaAdministracaoQtEfetiva([a]).data).toBeNull();
-  expect(ultimaAdministracaoQtEfetiva([a], { "ciclo-01": "QT" }).data).toBe("2026-10-01");
-  expect(ultimaAdministracaoQtEfetiva([{ ...a, modalidade: "QT" }], { "ciclo-01": "RT" }).data).toBeNull();
+  expect(ultimaAdministracaoQtEfetiva([a], "-03:00").data).toBeNull();
+  expect(ultimaAdministracaoQtEfetiva([a], "-03:00", { "ciclo-01": "QT" }).data).toBe("2026-10-01");
+  expect(ultimaAdministracaoQtEfetiva([{ ...a, modalidade: "QT" }], "-03:00", { "ciclo-01": "RT" }).data).toBeNull();
 });
 it("INV-14 toda saida W3 expoe rastreabilidade inclusive em indisponibilidade", () => {
   const resultados = [
@@ -49,7 +49,7 @@ it("INV-14 toda saida W3 expoe rastreabilidade inclusive em indisponibilidade", 
     avaliarCtcaeGrau({ termo: "t", ctcae_version: null, medidas: {} }, null),
     avaliarRecist({ lesoesAtuais: [], baseline: [], nadir: [] }, null),
     avaliarEscore({ scoreId: "s", entradas: {} }, null),
-    ultimaAdministracaoQtEfetiva([]),
+    ultimaAdministracaoQtEfetiva([], "-03:00"),
   ];
   for (const r of resultados) {
     expect(r.rulesetVersao).toBeTruthy();

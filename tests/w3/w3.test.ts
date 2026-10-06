@@ -208,18 +208,18 @@ describe("W3 CDX-08 escores", () => {
 
 describe("W3 CDX-09 intervaloQt", () => {
   it("positivo: devolve ultima administracao efetiva de QT", () => {
-    const r = ultimaAdministracaoQtEfetiva([eventoQt("a1", "2026-09-01T10:00:00-03:00"), eventoQt("a2", "2026-10-01T10:00:00-03:00")]);
+    const r = ultimaAdministracaoQtEfetiva([eventoQt("a1", "2026-09-01T10:00:00-03:00"), eventoQt("a2", "2026-10-01T10:00:00-03:00")], "-03:00");
     expect(r.adminId).toBe("a2");
     expect(r.data).toBe("2026-10-01");
   });
 
   it("negativo: OMITIDA e ignorada", () => {
-    const r = ultimaAdministracaoQtEfetiva([eventoQt("a1", "2026-10-01T10:00:00-03:00", "OMITIDA")]);
+    const r = ultimaAdministracaoQtEfetiva([eventoQt("a1", "2026-10-01T10:00:00-03:00", "OMITIDA")], "-03:00");
     expect(r.data).toBeNull();
     expect(r.inputs_missing).toContain("administracao_qt_efetiva");
   });
 
   it("borda: PARCIAL conta como efetiva", () => {
-    expect(ultimaAdministracaoQtEfetiva([eventoQt("a1", "2026-10-02T10:00:00-03:00", "PARCIAL")]).data).toBe("2026-10-02");
+    expect(ultimaAdministracaoQtEfetiva([eventoQt("a1", "2026-10-02T10:00:00-03:00", "PARCIAL")], "-03:00").data).toBe("2026-10-02");
   });
 });
