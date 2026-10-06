@@ -53,3 +53,12 @@ Faixa "Alergias" (texto livre; ex.: "Paciente nega alergias a medicações"; vaz
 2. P1477: hidratação pré e pós (Mg/K) só no d1, mas cisplatina também no d8. Confirmar se d8 tem hidratação (dose menor, esquema tipo vias biliares 25 mg/m²).
 3. Fichas com Dose Prot 0 (P1477, P1393): falta a base mg/m²/AUC → impede conferência de cálculo; o app exige a base na ficha (D-W9-24).
 4. Carboplatina diluída em SG 5% e demais em SF: diluente vem da ficha (D-W9-24 §8).
+
+**P1426 — docetaxel + CDDP (ciclo 1)** (adicionada em 2026-10-06)
+1. SF 100 mL 15 min + dexametasona 20 mg + ondansetrona 16 mg — PRE-QT d1
+2. SF 500 mL 60 min pré-cisplatina + sulfato de magnésio 10% 10 mL + KCl 19,1% 4 mL — PRE-QT d1
+3. Prometazina 25 mg VO — PRE-QT d1
+4. Docetaxel 75 mg/m² em SF 250 mL EV 60 min — QT d1
+5. Cisplatina 75 mg/m² em SF 500 mL EV 2 h + manitol 20% 200 mL — Obs: taxa máxima 1 mg/min — QT d1
+6. SF 500 mL 60 min pós-cisplatina + KCl 19,1% 4 mL — POS-QT d1
+Nota: aqui não há cimetidina (P1456, também com docetaxel, tem). Padrão de cimetidina por taxano `[VERIFICAR]`.
