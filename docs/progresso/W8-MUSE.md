@@ -12,7 +12,8 @@
 | MU-03 · Microcopy pt-BR | FEITA | 3886138 | tsc 0 · fronteiras 82 arq · corpus 20 arq · ui-copy 5/5 + regressão 9/9 | – |
 | MU-04 · Ícones SVG | FEITA | b87c7b7 | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 | – |
 | MU-05 · Protótipo: consulta pronta | FEITA | efc6c27 | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado · URLs sem dado | – |
-| MU-06 · Protótipo: salão e agenda | FEITA | (neste commit) | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado | – |
+| MU-06 · Protótipo: salão e agenda | FEITA | 3fc4412 | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado | – |
+| MU-07 · Protótipo: APAC em bloco e laudo | FEITA | (neste commit) | tsc 0 · fronteiras 86 arq · corpus 20 arq · ui-copy 7/7 + regressão 9/9 · HTML balanceado | – |
 | MU-04 · Ícones SVG | A_FAZER | – | – | – |
 | MU-05 · Protótipo: consulta pronta | A_FAZER | – | – | – |
 | MU-06 · Protótipo: salão e agenda | A_FAZER | – | – | – |
@@ -56,6 +57,10 @@
 - `docs/design/prototipos/agenda.html` — dia com semáforo + pendências por
   consulta, filtros por tipo, agrupamento manhã/tarde, modal remarcar,
   resumo de pendências do dia.
+- `docs/design/prototipos/apac.html` — lote diário multipaciente, uma
+  competência, D85 aviso, D90 fora, competência errada fora; gaveta com
+  laudo oficial (SOLICITAÇÃO preenchida, AUTORIZAÇÃO em branco, PENDENTE
+  destacado, SIGTAP [VERIFICAR], finalidade herdada visível).
 
 ## [VERIFICAR]
 

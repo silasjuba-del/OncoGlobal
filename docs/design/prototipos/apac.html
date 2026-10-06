@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="gelo">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OncoMed · APAC em bloco (protótipo MU-07)</title>
+<link rel="stylesheet" href="../tokens-oncomed.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--om-fundo); color: var(--om-texto);
+    font-family: var(--om-fonte); font-size: var(--om-texto-sm); line-height: var(--om-linha-altura); }
+  .app { display: grid; grid-template-columns: 208px 1fr; min-height: 100vh; }
+  .lateral { background: var(--om-lateral-fundo); color: var(--om-lateral-texto);
+    display: flex; flex-direction: column; padding: var(--om-espaco-4) var(--om-espaco-3); gap: var(--om-espaco-1); }
+  .marca { display: flex; align-items: center; gap: var(--om-espaco-2);
+    font-size: var(--om-texto-lg); font-weight: 700; padding: var(--om-espaco-2); }
+  .marca .ponto { width: 22px; height: 22px; border-radius: 50%; background: var(--om-destaque);
+    display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
+  .nav-item { display: flex; align-items: center; gap: var(--om-espaco-3);
+    padding: var(--om-espaco-2) var(--om-espaco-3); border-radius: var(--om-raio-sm);
+    color: var(--om-lateral-suave); text-decoration: none; font-weight: 550; }
+  .nav-item.ativo { background: var(--om-lateral-ativo); color: #fff; }
+  .lateral-rodape { margin-top: auto; padding: var(--om-espaco-3) var(--om-espaco-2);
+    border-top: 1px solid var(--om-lateral-hover); }
+  .principal { display: flex; flex-direction: column; min-width: 0; }
+  .topo { display: flex; align-items: center; gap: var(--om-espaco-3);
+    padding: var(--om-espaco-3) var(--om-espaco-6); background: var(--om-superficie);
+    border-bottom: 1px solid var(--om-linha); position: sticky; top: 0; z-index: 20; }
+  .topo h1 { margin: 0; font-size: var(--om-texto-lg); }
+  .btn { font: inherit; font-weight: 600; border-radius: var(--om-raio-sm); cursor: pointer;
+    padding: var(--om-espaco-2) var(--om-espaco-4); border: 1px solid var(--om-destaque);
+    background: var(--om-superficie); color: var(--om-destaque-hover); }
+  .btn.primario { background: var(--om-destaque); color: #fff; }
+  .btn.peq { padding: 4px 12px; font-size: var(--om-texto-xs); }
+  .conteudo { padding: var(--om-espaco-6); display: flex; flex-direction: column; gap: var(--om-espaco-4); }
+  .cartao { background: var(--om-superficie); border: 1px solid var(--om-linha);
+    border-radius: var(--om-raio-md); padding: var(--om-espaco-4) var(--om-espaco-5); }
+  .cartao h2 { margin: 0 0 var(--om-espaco-3); font-size: var(--om-texto-sm);
+    text-transform: uppercase; letter-spacing: .04em; color: var(--om-texto-suave); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; border-radius: var(--om-raio-pilula);
+    padding: 2px 10px; font-size: var(--om-texto-xs); font-weight: 700; border: 1px solid transparent; white-space: nowrap; }
+  .chip.verde { background: var(--om-verde-fundo); color: var(--om-verde); }
+  .chip.vermelho { background: var(--om-vermelho-fundo); color: var(--om-vermelho); }
+  .chip.pendente { background: var(--om-pendente-fundo); color: var(--om-pendente); }
+  .chip.info { background: var(--om-info-fundo); color: var(--om-info-texto); }
+  table.densa { width: 100%; border-collapse: collapse; line-height: var(--om-linha-altura-densa); }
+  table.densa th, table.densa td { padding: 8px 10px; border-bottom: 1px solid var(--om-linha); text-align: left; vertical-align: top; }
+  table.densa thead th { font-size: var(--om-texto-xs); text-transform: uppercase; letter-spacing: .04em; color: var(--om-texto-suave); }
+  table.densa tbody tr:nth-child(even) { background: var(--om-superficie-sutil); }
+  .nota { font-size: var(--om-texto-xs); color: var(--om-texto-suave); }
+  details.ac { border: 1px solid var(--om-linha); border-radius: var(--om-raio-md); background: var(--om-superficie); }
+  details.ac summary { cursor: pointer; list-style: none; padding: var(--om-espaco-3) var(--om-espaco-4); font-weight: 650; }
+  details.ac summary::-webkit-details-marker { display: none; }
+  details.ac .corpo { padding: 0 var(--om-espaco-4) var(--om-espaco-4); }
+  select, input { font: inherit; border: 1px solid var(--om-linha-forte); border-radius: var(--om-raio-sm);
+    padding: var(--om-espaco-2); background: var(--om-superficie); color: inherit; }
+  /* gaveta do laudo */
+  .gaveta { position: fixed; top: 0; right: 0; bottom: 0; width: min(560px, 96vw); z-index: 50;
+    background: var(--om-superficie); box-shadow: var(--om-sombra-lg);
+    transform: translateX(105%); transition: transform var(--om-transicao-media);
+    padding: var(--om-espaco-5) var(--om-espaco-6); overflow: auto; }
+  .gaveta.aberta { transform: none; }
+  .fundo-gaveta { position: fixed; inset: 0; background: rgb(15 34 46 / .35); z-index: 40; display: none; }
+  .fundo-gaveta.aberto { display: block; }
+  .bloco-laudo { border: 1px solid var(--om-linha-forte); border-radius: var(--om-raio-sm);
+    padding: var(--om-espaco-3) var(--om-espaco-4); margin-bottom: var(--om-espaco-3); }
+  .bloco-laudo h3 { margin: 0 0 var(--om-espaco-2); font-size: var(--om-texto-xs);
+    text-transform: uppercase; letter-spacing: .05em; }
+  .bloco-laudo.autorizacao { background: var(--om-superficie-sutil); border-style: dashed; }
+  .pend { background: var(--om-pendente-fundo); border: 1px solid var(--om-pendente);
+    border-radius: 4px; padding: 0 6px; font-weight: 700; white-space: nowrap; }
+  .linha { display: flex; justify-content: space-between; gap: var(--om-espaco-2);
+    padding: 3px 0; border-bottom: 1px dotted var(--om-linha); }
+  .linha:last-child { border-bottom: none; }
+  .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
+    background: var(--om-lateral-fundo); color: #fff; border-radius: var(--om-raio-sm);
+    padding: var(--om-espaco-3) var(--om-espaco-5); font-weight: 600; opacity: 0; z-index: 60;
+    transition: opacity var(--om-transicao-media), transform var(--om-transicao-media); pointer-events: none; }
+  .toast.visivel { opacity: 1; transform: translateX(-50%); }
+  :focus-visible { outline: 2px solid var(--om-destaque-hover); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<a href="#conteudo" style="position:absolute;left:-9999px" onfocus="this.style.left='8px'" onblur="this.style.left='-9999px'">Pular para o conteúdo</a>
+<div class="app">
+  <nav class="lateral" aria-label="Navegação principal">
+    <div class="marca"><span class="ponto" aria-hidden="true">oM</span>oncoMed</div>
+    <a class="nav-item" href="consulta.html">Resumo</a>
+    <a class="nav-item" href="#">Prontuário</a>
+    <a class="nav-item" href="#">Exames</a>
+    <a class="nav-item" href="#">Prescrição</a>
+    <a class="nav-item ativo" href="apac.html" aria-current="page">APAC</a>
+    <a class="nav-item" href="#">Documentos</a>
+    <a class="nav-item" href="agenda.html">Agenda</a>
+    <a class="nav-item" href="salao.html">Enfermagem</a>
+    <a class="nav-item" href="#">Farmácia</a>
+    <a class="nav-item" href="#">Relatórios</a>
+    <a class="nav-item" href="centro-comando.html">Configurações</a>
+    <div class="lateral-rodape"><strong>Faturamento Teste</strong><br><span class="nota" style="color:var(--om-lateral-suave)">Faturamento</span></div>
+  </nav>
+  <div class="principal">
+    <div class="topo"><h1>APAC · lote do dia</h1>
+      <label class="nota" for="comp">Competência</label>
+      <select id="comp"><option>2026-10</option><option>2026-09</option></select>
+      <span class="nota">Uma competência por lote — outro mês vai para o lote dele.</span>
+      <span style="flex:1"></span>
+      <button class="btn" data-demo>Validar tudo</button>
+      <button class="btn primario" data-demo>Imprimir lote</button>
+    </div>
+    <main class="conteudo" id="conteudo">
+      <div class="cartao">
+        <h2>Lote 2026-10-06 · multipaciente <span style="float:right"><span class="chip info">3 no lote</span> <span class="chip verde">1 emitida</span> <span class="chip pendente">2 fora</span></span></h2>
+        <table class="densa">
+          <thead><tr><th>Paciente</th><th>Procedimento principal</th><th>Finalidade</th><th>Estado</th><th>Prazo</th><th>Laudo</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Paciente Teste 07</strong><br><span class="nota">Renovação</span></td>
+              <td>Quimioterapia paliativa · cód. <span class="pend">PENDENTE [VERIFICAR]</span></td>
+              <td>PALIATIVA <span class="nota">(herdada — visível)</span></td>
+              <td><span class="chip pendente">Rascunho</span></td>
+              <td><span class="chip verde">D82</span></td>
+              <td><button class="btn peq" data-laudo="PT07">Ver laudo</button></td></tr>
+            <tr><td><strong>Paciente Teste 19</strong><br><span class="nota">Renovação</span></td>
+              <td>Quimioterapia paliativa · cód. <span class="pend">PENDENTE [VERIFICAR]</span></td>
+              <td>PALIATIVA <span class="nota">(herdada — visível)</span></td>
+              <td><span class="chip pendente">Rascunho</span></td>
+              <td><span class="chip pendente">D85 · renovar</span></td>
+              <td><button class="btn peq" data-laudo="PT19">Ver laudo</button></td></tr>
+            <tr><td><strong>Paciente Teste 21</strong><br><span class="nota">Primeira emissão</span></td>
+              <td>Quimioterapia adjuvante · cód. <span class="pend">PENDENTE [VERIFICAR]</span></td>
+              <td>ADJUVANTE <span class="nota">(escolha do médico)</span></td>
+              <td><span class="chip verde">Emitida</span></td>
+              <td><span class="chip verde">D12</span></td>
+              <td><button class="btn peq" data-laudo="PT21">Ver laudo</button></td></tr>
+          </tbody>
+        </table>
+        <p class="nota">Código SIGTAP: tabela não importada — nunca inventado. Finalidade herdada da renovação ou escolhida pelo médico; nunca derivada da intenção clínica.</p>
+      </div>
+      <details class="ac">
+        <summary>Fora do lote (2) ›</summary>
+        <div class="corpo"><table class="densa"><thead><tr><th>Paciente</th><th>Motivo</th></tr></thead><tbody>
+          <tr><td><strong>Paciente Teste 20</strong></td><td><span class="chip vermelho">D90 · fora</span> O faturamento não emite; a consulta segue.</td></tr>
+          <tr><td><strong>Paciente Teste 22</strong></td><td><span class="chip pendente">Competência 2026-09</span> Vai para o lote dele.</td></tr>
+        </tbody></table></div>
+      </details>
+    </main>
+  </div>
+</div>
+
+<div class="fundo-gaveta" id="fundoGaveta"></div>
+<aside class="gaveta" id="gaveta" role="dialog" aria-modal="true" aria-labelledby="gavetaTitulo" aria-hidden="true">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <h2 id="gavetaTitulo" style="margin:0">Laudo APAC</h2>
+    <span><button class="btn peq" data-demo>Imprimir</button> <button class="btn peq" id="fecharGaveta">Fechar ✕</button></span>
+  </div>
+  <div id="laudoCorpo"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+<script>
+(function () {
+  "use strict";
+  var LAUDOS = {
+    PT07: { pac: "Paciente Teste 07", nasc: "15/03/1958", sexo: "Masculino", cns: "700 0000 0000 0000",
+      cid: "C61", proc: "Quimioterapia paliativa", fin: "PALIATIVA (herdada — visível)",
+      just: "Rascunho da IA — revisar: manutenção de doença estável sob QT paliativa." },
+    PT19: { pac: "Paciente Teste 19", nasc: " pendente ", sexo: "Feminino", cns: " pendente ",
+      cid: "C50", proc: "Quimioterapia paliativa", fin: "PALIATIVA (herdada — visível)",
+      just: "Texto do médico: progressão lenta; manter esquema atual." },
+    PT21: { pac: "Paciente Teste 21", nasc: "02/11/1970", sexo: "Masculino", cns: "700 1111 2222 3333",
+      cid: "C18", proc: "Quimioterapia adjuvante", fin: "ADJUVANTE (escolha do médico)",
+      just: "Texto do médico: adjuvância pós-cirurgia." }
+  };
+  function pend(v) {
+    return v.trim() === "pendente" ? '<span class="pend">PENDENTE</span>' : v;
+  }
+  function montar(chave) {
+    var L = LAUDOS[chave];
+    return '' +
+    '<div class="bloco-laudo"><h3>Estabelecimento solicitante</h3>' +
+      '<div class="linha"><span>Nome / CNES</span><span>Exemplo — <span class="pend">CNES [VERIFICAR]</span></span></div>' +
+      '<p class="nota">Cabeçalho de exemplo: altere nas configurações.</p></div>' +
+    '<div class="bloco-laudo"><h3>Identificação do paciente</h3>' +
+      '<div class="linha"><span>Nome</span><strong>' + L.pac + '</strong></div>' +
+      '<div class="linha"><span>Nascimento</span><span>' + pend(L.nasc) + '</span></div>' +
+      '<div class="linha"><span>Sexo</span><span>' + L.sexo + '</span></div>' +
+      '<div class="linha"><span>CNS</span><span>' + pend(L.cns) + '</span></div></div>' +
+    '<div class="bloco-laudo"><h3>Procedimento principal</h3>' +
+      '<div class="linha"><span>Nome</span><strong>' + L.proc + '</strong></div>' +
+      '<div class="linha"><span>Código SIGTAP</span><span><span class="pend">PENDENTE [VERIFICAR]</span></span></div>' +
+      '<div class="linha"><span>Finalidade</span><span>' + L.fin + '</span></div></div>' +
+    '<div class="bloco-laudo"><h3>Diagnóstico</h3>' +
+      '<div class="linha"><span>CID-10 principal</span><strong>' + L.cid + '</strong></div>' +
+      '<div class="linha"><span>Secundário / causas</span><span><span class="pend">PENDENTE</span></span></div></div>' +
+    '<div class="bloco-laudo"><h3>Justificativa e observações</h3><p>' + L.just + '</p></div>' +
+    '<div class="bloco-laudo"><h3>Solicitação (preenchida pelo app)</h3>' +
+      '<div class="linha"><span>Profissional</span><span>Médico Teste · CRM 00000 (perfil)</span></div>' +
+      '<div class="linha"><span>Data</span><span>Hoje (data do app)</span></div>' +
+      '<div class="linha"><span>Assinatura</span><span><span class="pend">Aguardando assinatura</span></span></div></div>' +
+    '<div class="bloco-laudo autorizacao"><h3>Autorização (sempre em branco)</h3>' +
+      '<div class="linha"><span>Autorizador</span><span>—</span></div>' +
+      '<div class="linha"><span>Data</span><span>—</span></div>' +
+      '<div class="linha"><span>Período de validade</span><span>—</span></div>' +
+      '<p class="nota">Preenchido pelo autorizador.</p></div>';
+  }
+  var gaveta = document.getElementById("gaveta"), fundo = document.getElementById("fundoGaveta");
+  function abrir(chave) {
+    document.getElementById("gavetaTitulo").textContent = "Laudo APAC · " + chave;
+    document.getElementById("laudoCorpo").innerHTML = montar(chave);
+    gaveta.classList.add("aberta"); fundo.classList.add("aberto");
+    gaveta.setAttribute("aria-hidden", "false");
+    document.getElementById("fecharGaveta").focus();
+  }
+  function fechar() {
+    gaveta.classList.remove("aberta"); fundo.classList.remove("aberto");
+    gaveta.setAttribute("aria-hidden", "true");
+  }
+  document.querySelectorAll("[data-laudo]").forEach(function (b) {
+    b.addEventListener("click", function () { abrir(b.dataset.laudo); });
+  });
+  document.getElementById("fecharGaveta").addEventListener("click", fechar);
+  fundo.addEventListener("click", fechar);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") fechar(); });
+  var toast = document.getElementById("toast"), t = null;
+  document.querySelectorAll("[data-demo]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      toast.textContent = "Demonstração — sem efeito.";
+      toast.classList.add("visivel");
+      clearTimeout(t); t = setTimeout(function () { toast.classList.remove("visivel"); }, 2800);
+    });
+  });
+})();
+</script>
+</body>
+</html>
