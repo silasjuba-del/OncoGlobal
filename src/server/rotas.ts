@@ -24,6 +24,7 @@ const ExibirBundle = z.object({
   encounterId: Id,
   draftIds: z.array(Id),
 }).strict();
+class JsonInvalido extends Error {}
 function send(res: ServerResponse, status: number, object: unknown) {
   res.writeHead(status, { "Content-Type": "application/json; charset=utf-8",
     "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" });
@@ -35,7 +36,13 @@ async function body(req: IncomingMessage): Promise<unknown> {
     value += String(chunk);
     if (value.length > 1_000_000) throw new Error("BODY_TOO_LARGE");
   }
-  return JSON.parse(value);
+  try {
+    return JSON.parse(value);
+  } catch (error) {
+    // Só a falha do corpo HTTP é 400; JSON interno do ledger continua erro interno.
+    if (error instanceof SyntaxError) throw new JsonInvalido();
+    throw error;
+  }
 }
 
 function payloadDocumento(value: unknown): { documentId: string; documentVersion: number; documentHash: string } | null {
@@ -161,7 +168,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     // conserva a reserva OUTCOME_UNKNOWN antes do executor, inclusive após reiniciar.
     const result = await deps.gateway.withStore(sqliteIdempotencia(deps.db)).executar(parsed.data, sessao);
     return reply(result.decisao === "NEGADA" ? 409 : 200, result.motivoCodigo, result);
-  } catch {
+  } catch (error) {
+    if (error instanceof JsonInvalido) return reply(400, "JSON_INVALIDO");
     // Never log request bodies, identifiers, thrown error text or stack.
     return reply(500, "ERRO_INTERNO");
   }
