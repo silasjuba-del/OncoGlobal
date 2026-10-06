@@ -175,4 +175,6 @@ A11. Backup: **só HD externo local, cifrado**; chave de recuperação fora do P
   (d) **Cisplatina D1 e D8: hidratação pré e pós com magnésio e potássio nos dois dias.**
   (e) **Laudo de O2 domiciliar ganha SpO2 em ar ambiente e/ou gasometria com data.**
   (f) **Loperamida no irinotecano: esquema de alta dose da bula do irinotecano** (4 mg, depois 2 mg 2/2 h; 4 mg 4/4 h à noite; até 12 h sem diarreia; máx. 48 h), acima do teto de 16 mg/dia da bula comum — só nesse contexto.
-- **Ainda abertos:** texto do INSS para doença metastática/paliativa; dexametasona D2–D3 sem NK1; texto final das mensagens de red flag (base aprovada em D-W9-28), ativação de interações medicamentosas (com fonte), biblioteca das ~50 fichas.
+- **D-W9-35 · OncoChart é a UI-alvo** (`docs/design/oncochart/`, D-W5-07 substituído no visual). Ajustes obrigatórios em `DECISAO-UI-ALVO.md` (CTCAE v6, OncoAssist sem conduta, liberação só com validação humana, sem CDN, semáforo do app).
+- **D-W9-36 · Padrões de UI** dos modelos de triagem/agenda/esteira (`docs/referencias/ui-modelos/PADROES-UI.md`) e **Modelo 09** (solicitação de exame impressa) registrados.
+- **Ainda abertos:** paleta padrão do tema DIA (Muse gelo/petróleo × OncoChart); limiares novos da triagem (SpO₂ <94, PAS <90, Hb <8/7, Cr >1,5) e regras da agenda (≥5 h só até 12h; máx. 5 inícios/30 min); texto do INSS para doença metastática/paliativa; dexametasona D2–D3 sem NK1; texto final das mensagens de red flag (base aprovada em D-W9-28), ativação de interações medicamentosas (com fonte), biblioteca das ~50 fichas.
