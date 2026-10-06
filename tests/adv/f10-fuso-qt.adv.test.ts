@@ -3,7 +3,10 @@ import { ultimaAdministracaoQtEfetiva } from "../../src/rules/intervaloQt.js";
 import { avisoIntervaloPosQt } from "../../src/rules/index.js";
 import { eventoQt } from "../w3/fixtures.js";
 import { prazosRuleset } from "../fixtures/rulesets.js";
-const ultima = (fim: string) => ultimaAdministracaoQtEfetiva([eventoQt("admin-sintetica", fim)]).data;
+// Ponte RED entre a API antiga e a nova assinatura de offset obrigatório.
+// Reflect.apply fornece o mesmo offset em runtime; nenhuma expectativa é relaxada.
+const ultima = (fim: string) => (Reflect.apply(ultimaAdministracaoQtEfetiva, undefined,
+  [[eventoQt("admin-sintetica", fim)], "-03:00"]) as ReturnType<typeof ultimaAdministracaoQtEfetiva>).data;
 
 describe("F10/F11 · ADV-020 data civil do serviço -03:00 na última QT", () => {
   it("ADV-020 · mesmo instante UTC e -03 conserva data civil 05", () => {
