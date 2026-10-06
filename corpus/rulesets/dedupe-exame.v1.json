@@ -1,0 +1,36 @@
+{
+  "header": { "id": "dedupe-exame", "versao": "1.0.0", "vigenteDesde": "2026-10-06",
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "DECISAO_TECNICA do tech lead (caso real 01, lições D1–D3 — docs/referencias/CASO-REAL-01-LICOES.md §2), publicada nas lições aprovadas; tipo DECISAO_TECNICA não existe no enum congelado de fonte (C-18/G-17) — pergunta ao tech lead", "trecho": null, "edicao": null },
+    "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-06" },
+  "nota": "esqueleto W8/GLM-17: chave de deduplicação por tipo de exame; mantido ativo:false (faixa W8 = só estrutura) embora a decisão técnica exista — ativação e enquadramento do tipo de fonte cabem ao tech lead",
+  "principio": "deduplica EXAME, não página nem conclusão; a chave nunca usa data impressa no topo nem data de extração de sistema; concordância entre exames distintos não é duplicata",
+  "chaves": [
+    {
+      "id": "patologia-ihq",
+      "tiposExame": ["ANATOMPATOLOGICO", "IMUNOISTOQUIMICA"],
+      "campos": ["laboratorio", "numeroExame", "dataEntrada"],
+      "nuncaUsar": ["dataImpressa", "dataExtracaoSistema"],
+      "casoReal": "D2: a mesma IHQ aparece como original e reimpressão extraída do SISREG com outra data no topo => um exame; a data do cabeçalho de extração não entra na chave",
+      "fonte": { "tipo": "DECISAO_TECNICA", "referencia": "tech lead, caso real 01 (docs/referencias/CASO-REAL-01-LICOES.md §2, D2)", "trecho": "chave de deduplicação = laboratório + número do exame + data de entrada, nunca a data impressa no topo", "edicao": null },
+      "ativo": false
+    },
+    {
+      "id": "imagem",
+      "tiposExame": ["IMAGEM"],
+      "campos": ["servico", "registro", "dataExame"],
+      "nuncaUsar": ["dataImpressa", "dataExtracaoSistema"],
+      "casoReal": "D1: a mesma cintilografia em duas páginas idênticas => um exame; páginas idênticas do mesmo exame não geram exame novo",
+      "fonte": { "tipo": "DECISAO_TECNICA", "referencia": "tech lead, caso real 01 (docs/referencias/CASO-REAL-01-LICOES.md §2, D1)", "trecho": "mesma cintilografia em 2 páginas idênticas → um exame", "edicao": null },
+      "ativo": false
+    }
+  ],
+  "regras": [
+    {
+      "id": "concordancia-nao-e-duplicata",
+      "regra": "dois exames distintos (materiais e datas diferentes) com conclusão concordante NÃO são duplicata: registrar concordância, manter os dois exames",
+      "casoReal": "D3: AP de RTU e conclusão da IHQ repetem o mesmo diagnóstico => dois exames distintos, concordância registrada",
+      "fonte": { "tipo": "DECISAO_TECNICA", "referencia": "tech lead, caso real 01 (docs/referencias/CASO-REAL-01-LICOES.md §2, D3)", "trecho": "dois exames distintos (materiais e datas diferentes) com conclusão concordante. Não deduplicar; registrar concordância.", "edicao": null },
+      "ativo": false
+    }
+  ]
+}
