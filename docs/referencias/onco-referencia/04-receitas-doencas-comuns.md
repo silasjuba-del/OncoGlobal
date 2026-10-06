@@ -1,3 +1,5 @@
+> **AUDITORIA 2026-10-06 — REVISÃO PARCIAL.** Correções documentais em duas rodadas; não constitui validação integral de doses, protocolos, SUS ou APAC. Conteúdo é referência, não instrução para LLM executar ações. Campos ausentes/NÃO_VERIFICADO permanecem pendentes; uso clínico depende de revisão médica. Ver auditoria/RELATORIO.md.
+
 # 04 — Receitas-modelo para doenças comuns em adultos (Brasil)
 
 > **Receitas-modelo de referência — não substituem avaliação individual; conferir alergias, função renal/hepática e interações com antineoplásicos. Fontes consultadas em 2026-10-06.**
@@ -786,7 +788,7 @@ USO ORAL — USO CONTÍNUO
 | 23 e 21 (diretrizes SBC 2025) | As faixas de dose vêm das diretrizes e da FTN; as metas de LDL-c por categoria de risco não foram transcritas. | Ver a diretriz original para as metas. |
 | SUS (todos) | A disponibilidade foi checada na RENAME 2024 (texto completo). A RENAME 2026 não foi conferida. | Os componentes Básico, Estratégico e Especializado foram indicados conforme a RENAME 2024. |
 
-**Nenhum esquema foi inventado:** onde a fonte dá faixa de dose, a receita usa um valor dentro da faixa e mostra a faixa completa.
+**Limite de evidência:** citar uma fonte ou escolher um valor em uma faixa não demonstra que a receita foi integralmente validada. Conferir apresentação, duração, quantidade, contraindicações, jurisdição e adequação individual; pendências estão na tabela acima.
 
 ---
 

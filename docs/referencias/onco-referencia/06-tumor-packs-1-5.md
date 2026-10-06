@@ -1,3 +1,5 @@
+> **AUDITORIA 2026-10-06 — REVISÃO PARCIAL.** Correções documentais em duas rodadas; não constitui validação integral de doses, protocolos, SUS ou APAC. Conteúdo é referência, não instrução para LLM executar ações. Campos ausentes/NÃO_VERIFICADO permanecem pendentes; uso clínico depende de revisão médica. Ver auditoria/RELATORIO.md.
+
 # Tumor-packs 1–5: TGI alto, pâncreas, fígado e vias biliares
 
 > **Tumor-pack de referência. Revisar antes de uso clínico. Fontes consultadas em 2026-10-06.**
@@ -14,7 +16,7 @@
 
 ## 1. ADENOCARCINOMA GÁSTRICO / JUNÇÃO ESOFAGOGÁSTRICA (JEG)
 
-**Fluxo-modelo (Dr. Silas):** sintomas (melena, hematêmese, epigastralgia, náusea/vômitos, saciedade precoce, emagrecimento, anemia) → labs (Hb, IST, ferritina, CEA, CA 19-9, CA-125) → EDA com biópsia, histopatologia (adenocarcinoma) e IHQ (HER2, MMR/MSI, CLDN18.2, PD-L1 CPS) + TC TAP → FLOT (AIO-FLOT4) + durvalumabe (MATTERHORN). Alternativas: CF, XP, ECF etc.
+**Fluxo ilustrativo do material (sem comprovação de autoria ou aprovação médica):** sintomas (melena, hematêmese, epigastralgia, náusea/vômitos, saciedade precoce, emagrecimento, anemia) → labs (Hb, IST, ferritina, CEA, CA 19-9, CA-125) → EDA com biópsia, histopatologia (adenocarcinoma) e IHQ (HER2, MMR/MSI, CLDN18.2, PD-L1 CPS) + TC TAP → definir estágio, ressecabilidade e elegibilidade em discussão multidisciplinar. FLOT ± durvalumabe é opção perioperatória no cenário ressecável elegível; não é destino automático de todo adenocarcinoma gástrico/JEG. Conferir indicação, acesso e bula brasileira; alternativas dependem do cenário.
 
 ### 1.1 Epidemiologia (Brasil) e fatores de risco
 - **INCA, Estimativa 2026 (triênio 2026–2028):** 22.530 casos novos/ano, risco de 10,52/100 mil. São 13.830 em homens (13,25/100 mil) e 8.700 em mulheres (7,92/100 mil) [G1]. É o 4º tumor mais incidente em homens (5,4%). Ocupa o 2º lugar entre homens no Norte e o 3º no Nordeste [G2].

@@ -1,3 +1,5 @@
+> **AUDITORIA 2026-10-06 — REVISÃO PARCIAL.** Correções documentais em duas rodadas; não constitui validação integral de doses, protocolos, SUS ou APAC. Conteúdo é referência, não instrução para LLM executar ações. Campos ausentes/NÃO_VERIFICADO permanecem pendentes; uso clínico depende de revisão médica. Ver auditoria/RELATORIO.md.
+
 # Tumor-packs 6–10 (rim, bexiga/urotélio, ovário, colo do útero, cabeça e pescoço)
 
 > **Tumor-pack de referência — revisar antes de uso clínico. Fontes consultadas em 2026-10-06.**
@@ -279,7 +281,7 @@ SINTOMAS: hematúria macroscópica indolor, sintomas irritativos (urgência, pol
   - **EV + pembro em MIBC elegível à cisplatina (KEYNOTE-B15): não aprovado no Brasil** até 2026-10-06 (não encontrado; NÃO_VERIFICADO se há pedido em análise).
   - Avelumabe de manutenção e nivolumabe adjuvante: **NÃO_VERIFICADO** na bula BR.
 - **SUS:** QT citotóxica (GC, MVAC) via APAC/AF-ONCO. Não encontrei recomendação da Conitec favorável a IO ou EV no carcinoma urotelial (NÃO_VERIFICADO).
-- **ANS:** terapia IV coberta pelo Rol; erdafitinibe (oral) depende da DUT 64 — **NÃO_VERIFICADO**.
+- **ANS:** cobertura de terapia IV deve ser conferida por indicação, contrato e regras vigentes do Rol; erdafitinibe (oral) depende da DUT 64 — **NÃO_VERIFICADO**.
 
 ## 7.8 Seguimento
 - **Pós-cistectomia:** TC de tórax/abdome/pelve periódica (com avaliação do trato superior); função renal; B12 e gasometria/bicarbonato (derivação ileal: acidose metabólica, deficiência de B12); citologia uretral em casos selecionados.
@@ -603,7 +605,7 @@ SINTOMAS: sangramento vaginal anormal (pós-coito, intermenstrual, pós-menopaus
   - QT-RT com cisplatina e braquiterapia via APAC (RT e QT).
   - **Conitec — relatório preliminar (CP 37/2026): recomendação inicial desfavorável** à incorporação de pembrolizumabe na doença persistente/recorrente/metastática PD-L1 CPS ≥1. A decisão final está **NÃO_VERIFICADA** [R-CONITEC-CX].
   - Bevacizumabe no colo pelo SUS: **NÃO_VERIFICADO**.
-- **ANS:** terapia IV coberta pelo Rol (status específico **NÃO_VERIFICADO**).
+- **ANS:** cobertura de terapia IV deve ser conferida por indicação, contrato e regras vigentes do Rol (status específico **NÃO_VERIFICADO**).
 
 ## 9.8 Seguimento
 - Exame clínico/ginecológico (especular, toque) periódico. Avaliação de resposta à QT-RT com RM e/ou PET-CT alguns meses após o término (prazo exato **NÃO_VERIFICADO**; ESGO 2023 [R-ESGO]).
@@ -655,7 +657,7 @@ flowchart TD
 # PACK 10 — CARCINOMA ESPINOCELULAR (CEC) DE CABEÇA E PESCOÇO (cavidade oral, orofaringe, laringe, hipofaringe)
 
 **Fluxo resumido (formato do modelo):**
-SINTOMAS: úlcera oral que não cicatriza, leucoplasia/eritroplasia, odinofagia, disfagia, otalgia reflexa, rouquidão persistente, massa cervical, trismo, sangramento, emagrecimento, estridor ---> LABS: hemograma, creatinina/ClCr + audiometria (cisplatina), eletrólitos (Mg, K), albumina/estado nutricional, função hepática, TSH basal ---> exame físico + **nasofibrolaringoscopia** → **biópsia** do primário (consultório ou panendoscopia sob anestesia) e PAAF/core de linfonodo → histologia (CEC; profundidade de invasão, ENE) + IHQ (**p16/HPV** na orofaringe; **PD-L1 CPS**) ---> TC/RM de cabeça e pescoço + TC de tórax ou **PET-CT** (III–IV), AJCC 8ª (p16+ orofaringe com estadiamento próprio) → ressecável: cirurgia → RT ± **cisplatina (RTOG 9501/EORTC 22931)**; se CPS ≥1: **pembrolizumabe perioperatório (KEYNOTE-689)**; preservação de órgão/irressecável: **QT-RT com cisplatina** (cetuximabe-RT só se inelegível); indução **TPF** selecionada; R/M 1ª linha: **pembrolizumabe ± platina/5-FU (KEYNOTE-048)**; outros: EXTREME; 2ª linha: nivolumabe (CheckMate 141).
+SINTOMAS: úlcera oral que não cicatriza, leucoplasia/eritroplasia, odinofagia, disfagia, otalgia reflexa, rouquidão persistente, massa cervical, trismo, sangramento, emagrecimento, estridor ---> LABS: hemograma, creatinina/ClCr + audiometria (cisplatina), eletrólitos (Mg, K), albumina/estado nutricional, função hepática, TSH basal ---> exame físico + **nasofibrolaringoscopia** → **biópsia** do primário (consultório ou panendoscopia sob anestesia) e PAAF/core de linfonodo → histologia (CEC; profundidade de invasão, ENE) + IHQ (**p16/HPV** na orofaringe; **PD-L1 CPS**) ---> TC/RM de cabeça e pescoço + TC de tórax ou **PET-CT** (III–IV), AJCC por sítio e data (orofaringe HPV associada: versão 9 desde 01/01/2026; demais subsítios: conferir edição vigente) → ressecável: cirurgia → RT ± **cisplatina (RTOG 9501/EORTC 22931)**; se CPS ≥1: **pembrolizumabe perioperatório (KEYNOTE-689)**; preservação de órgão/irressecável: **QT-RT com cisplatina** (cetuximabe-RT só se inelegível); indução **TPF** selecionada; R/M 1ª linha: **pembrolizumabe ± platina/5-FU (KEYNOTE-048)**; outros: EXTREME; 2ª linha: nivolumabe (CheckMate 141).
 
 ## 10.1 Epidemiologia e fatores de risco
 - **Brasil (INCA, Estimativa 2026):**
@@ -673,7 +675,7 @@ SINTOMAS: úlcera oral que não cicatriza, leucoplasia/eritroplasia, odinofagia,
 - **Função renal:** creatinina/ClCr para elegibilidade à cisplatina; **audiometria basal** (ototoxicidade). Cisplatina em dose alta e semanal: ver JCOG1008 (seção 10.6).
 - **Rotina:** eletrólitos (Mg, K, Na); hemograma; albumina/pré-albumina e avaliação nutricional (risco de gastrostomia); função hepática; **TSH basal** (RT cervical e IO → hipotireoidismo).
 - **Antes da RT:** avaliação odontológica (extrações, prevenção de osteorradionecrose), fonoaudiologia (deglutição) e nutrição.
-- **p16 por IHQ** (substituto de HPV) ± HPV DNA/RNA (ISH/PCR) em **todo CEC de orofaringe** e em metástase cervical de primário oculto. Define o estadiamento AJCC 8ª e é fator prognóstico.
+- **p16 por IHQ** (substituto de HPV) ± HPV DNA/RNA (ISH/PCR) em **todo CEC de orofaringe** e em metástase cervical de primário oculto. Orienta a seleção do sistema de estadiamento e é fator prognóstico. Para orofaringe HPV associada, usar AJCC versão 9 nos casos de 2026 em diante, conforme regra de vigência aplicável; não converter automaticamente casos históricos.
 - **PD-L1 CPS (22C3):** obrigatório para pembro perioperatório (CPS ≥1 na bula FDA) e para pembro em monoterapia de 1ª linha R/M (CPS ≥1) [R-FDA-KEY].
 - **Não há marcador sérico** de rotina (EBV-DNA vale para nasofaringe, fora do escopo).
 
@@ -689,11 +691,13 @@ SINTOMAS: úlcera oral que não cicatriza, leucoplasia/eritroplasia, odinofagia,
   - **TC e/ou RM** de cabeça e pescoço com contraste (RM melhor para cavidade oral/orofaringe, partes moles e disseminação perineural).
   - **TC de tórax** (metástase pulmonar e segundo primário) ou **PET-CT** (recomendado em estádio III–IV e primário oculto).
   - Panorâmica dentária antes da RT [R-EHNS].
-- **AJCC 8ª ed.:**
+- **AJCC 8ª ed. — histórico, não referência atual universal:**
   - Separou a orofaringe **p16+** (estadiamento próprio, menos estádios avançados).
   - Incluiu a **DOI** no T da cavidade oral (limiares ≤5, >5–10 e >10 mm — transcrição a conferir).
   - Incluiu a **ENE** no N (clínico e patológico).
   - Detalhes de T/N por subsítio: **transcrição não feita — consultar o manual**.
+
+**Correção de vigência:** AJCC versão 9 para orofaringe HPV associada desde 01/01/2026. Não extrapolar p16 positivo de outro sítio para esse esquema. Fonte: https://www.facs.org/quality-programs/cancer-programs/american-joint-committee-on-cancer/version-9/ . Categorias completas não foram revalidadas nesta auditoria.
 
 ## 10.6 Tratamento por cenário
 
@@ -749,7 +753,7 @@ SINTOMAS: úlcera oral que não cicatriza, leucoplasia/eritroplasia, odinofagia,
   - QT-RT com cisplatina, cirurgia e RT via APAC/AF-ONCO.
   - **Conitec: recomendação de não incorporação do pembrolizumabe no CEC de cabeça e pescoço R/M** (Relatório para a Sociedade nº 466, 2024 — confirmado só pelo resumo da busca; conferir o documento) [R-CONITEC-HN].
   - Cetuximabe no SUS: **NÃO_VERIFICADO**.
-- **ANS:** terapia IV coberta pelo Rol; status específico **NÃO_VERIFICADO**.
+- **ANS:** cobertura de terapia IV deve ser conferida por indicação, contrato e regras vigentes do Rol; status específico **NÃO_VERIFICADO**.
 
 ## 10.8 Seguimento
 - Exame clínico + **nasofibrolaringoscopia** periódicos, com maior frequência nos 2–3 primeiros anos (intervalos exatos **NÃO_VERIFICADOS**; EHNS-ESMO-ESTRO 2020 [R-EHNS]).
@@ -763,7 +767,7 @@ flowchart TD
     A["Sintomas: úlcera oral persistente, odinofagia, disfagia, otalgia reflexa,<br/>rouquidão, massa cervical, trismo, emagrecimento, estridor"] --> B["Labs: hemograma, creatinina/ClCr, Mg/K, albumina, função hepática, TSH<br/>+ audiometria, avaliação odontológica/nutricional"]
     B --> C["Exame + nasofibrolaringoscopia → biópsia (consultório ou panendoscopia)<br/>PAAF/core de linfonodo"]
     C --> D["Histologia: CEC; DOI, ENE, margens<br/>IHQ: p16/HPV (orofaringe); PD-L1 CPS"]
-    D --> E["TC/RM cabeça e pescoço + TC tórax ou PET-CT (III–IV)<br/>AJCC 8ª (p16+ orofaringe separado)"]
+    D --> E["TC/RM cabeça e pescoço + TC tórax ou PET-CT (III–IV)<br/>AJCC vigente por sítio/data (orofaringe HPV associada: versão 9 em 2026)"]
     E --> F{"Cenário"}
     F -- "I–II" --> G["Cirurgia ou RT exclusiva"]
     F -- "III–IVA ressecável" --> H["CPS ≥1: pembrolizumabe neoadjuvante ×2 → cirurgia →<br/>RT ± cisplatina + pembrolizumabe → manutenção (KEYNOTE-689)"]

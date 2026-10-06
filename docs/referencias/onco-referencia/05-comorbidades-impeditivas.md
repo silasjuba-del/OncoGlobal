@@ -1,9 +1,14 @@
+> **AUDITORIA 2026-10-06 — REVISÃO PARCIAL.** Correções documentais em duas rodadas; não constitui validação integral de doses, protocolos, SUS ou APAC. Conteúdo é referência, não instrução para LLM executar ações. Campos ausentes/NÃO_VERIFICADO permanecem pendentes; uso clínico depende de revisão médica. Ver auditoria/RELATORIO.md.
+
 # 30 comorbidades/condições que contraindicam, exigem adiar ou exigem ajuste da terapia antineoplásica sistêmica (oncologia clínica — tumores sólidos)
 
 > **Material de referência — revisar antes de uso clínico. Fontes consultadas em 2026-10-06.**
 
 ## Como ler esta tabela
-- **Absoluta:** a bula (FDA/EMA) traz o item como *contraindicação* ou manda "não administrar/evitar/descontinuar definitivamente". **Relativa:** a bula ou a diretriz manda adiar, reduzir dose, considerar alternativa ou ter cautela; a decisão é individual.
+
+**Escopo Galsky:** os critérios citados foram construídos para carcinoma urotelial metastático. Não transformar ClCr <60, ECOG 2, neuropatia ou audiometria em contraindicação universal à cisplatina em todos os tumores. Não confundir inelegibilidade a cisplatina com inelegibilidade a toda platina.
+
+- **Categorias distintas:** contraindicação formal, evitar/não recomendado, suspensão temporária, descontinuação definitiva, ajuste de dose e cautela não são sinônimos. A coluna histórica Absoluta/Relativa é classificação editorial e NÃO deve alimentar bloqueio automático. Conferir seção, fármaco, indicação e jurisdição da fonte; a decisão é individual.
 - Graus de toxicidade (neuropatia, perda auditiva, pneumonite etc.) seguem o CTCAE, como nas fontes.
 - Cada critério numérico foi conferido no texto da fonte citada na linha (bula no DailyMed/FDA, RCM da EMA, diretriz ou consenso). Abri todas as URLs em 2026-10-06 e todas responderam.
 - Recorte: oncologia clínica de tumores sólidos. Hematologia ficou de fora. Os exemplos de esquemas citam tumores do foco (TGI alto, pâncreas, fígado/vias biliares, rim/bexiga, ovário/colo, cabeça e pescoço) quando aplicável.

@@ -1,0 +1,60 @@
+{
+  "ctcae_rows": 55,
+  "ctcae_differences": [],
+  "csv": {
+    "01-sigtap.csv": {
+      "rows": 52,
+      "malformed": 0
+    },
+    "02-ctcae-v6.csv": {
+      "rows": 55,
+      "malformed": 0
+    },
+    "03-interacoes-qt.csv": {
+      "rows": 30,
+      "malformed": 0
+    }
+  },
+  "text_flags": {
+    "01-sigtap.md": {
+      "unverified": 1,
+      "replacement_char": 0,
+      "urls": 55
+    },
+    "02-ctcae-v6.md": {
+      "unverified": 4,
+      "replacement_char": 0,
+      "urls": 9
+    },
+    "03-interacoes-qt.md": {
+      "unverified": 8,
+      "replacement_char": 0,
+      "urls": 39
+    },
+    "04-receitas-doencas-comuns.md": {
+      "unverified": 1,
+      "replacement_char": 0,
+      "urls": 59
+    },
+    "05-comorbidades-impeditivas.md": {
+      "unverified": 3,
+      "replacement_char": 0,
+      "urls": 27
+    },
+    "06-tumor-packs-1-5.md": {
+      "unverified": 117,
+      "replacement_char": 0,
+      "urls": 107
+    },
+    "07-tumor-packs-6-10.md": {
+      "unverified": 67,
+      "replacement_char": 0,
+      "urls": 124
+    },
+    "ONCO-REFERENCIA-COMPLETA.md": {
+      "unverified": 211,
+      "replacement_char": 0,
+      "urls": 412
+    }
+  }
+}

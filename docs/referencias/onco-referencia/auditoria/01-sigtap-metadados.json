@@ -1,0 +1,8 @@
+{
+  "status": "REFERENCIA_REVISAO_PARCIAL",
+  "clinical_auto_use": false,
+  "original_sha256": "fed5c5c383e3e51f4d3b1316b431d3c3f9ff14a37715bbe635674b1d0f1c3638",
+  "rows": 52,
+  "empty_means": "PENDENTE; nunca ausência de risco",
+  "notes": "CSV UTF-8 sem linha de comentário; códigos são strings; jurisdição, validade e contexto exigem revisão."
+}

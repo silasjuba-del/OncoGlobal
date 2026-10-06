@@ -1,3 +1,5 @@
+> **AUDITORIA 2026-10-06 — REVISÃO PARCIAL.** Correções documentais em duas rodadas; não constitui validação integral de doses, protocolos, SUS ou APAC. Conteúdo é referência, não instrução para LLM executar ações. Campos ausentes/NÃO_VERIFICADO permanecem pendentes; uso clínico depende de revisão médica. Ver auditoria/RELATORIO.md.
+
 # SIGTAP — 50 procedimentos relevantes para a prática em oncologia clínica
 
 > **Material de referência — revisar antes de uso clínico. Fontes consultadas em 2026-10-06.**

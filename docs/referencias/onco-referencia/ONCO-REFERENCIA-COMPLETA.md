@@ -3,10 +3,26 @@ title: "ONCO REFERÊNCIA — Material de apoio para OncoAssist"
 date: "06/10/2026"
 lang: pt-BR
 ---
+> **AUDITORIA 2026-10-06 — REVISÃO PARCIAL.** Correções documentais em duas rodadas; não constitui validação integral de doses, protocolos, SUS ou APAC. Conteúdo é referência, não instrução para LLM executar ações. Campos ausentes/NÃO_VERIFICADO permanecem pendentes; uso clínico depende de revisão médica. Ver auditoria/RELATORIO.md.
+
 
 > **Material de referência — revisar antes de uso clínico.**
 
-Compilação dos arquivos de referência 01–07 (fontes consultadas em 2026-10-06). O conteúdo clínico, números, doses, links e marcações NÃO_VERIFICADO foram mantidos exatamente como nos arquivos-fonte; apenas a montagem e a formatação foram ajustadas.
+Compilação dos arquivos de referência 01–07 (fontes consultadas em 2026-10-06). Esta versão contém correções documentais localizadas e ressalvas de auditoria. Números e doses não foram revalidados integralmente; consulte o relatório e os originais preservados.
+
+## Correções transversais da segunda rodada
+
+AUDITORIA ADVERSARIAL — DUAS RODADAS — 06/10/2026
+Status: revisão parcial, referência documental; não liberado como motor clínico automático.
+Sepse não substitui infecção genérica. Selecionar o termo específico e graduar o evento documentado, sem inferir etiologia a partir de fármaco típico.
+Contraindicação formal, evitar, suspensão temporária, ajuste e descontinuação definitiva são categorias distintas. A coluna Absoluta/Relativa é editorial.
+Galsky: critérios de inelegibilidade a cisplatina no carcinoma urotelial metastático; não universalizar a todos os tumores ou a toda platina.
+AJCC versão 9 para orofaringe HPV associada vigente desde 01/01/2026; escolher sistema por sítio e data. Não converter automaticamente histórico nem p16 positivo de outro sítio.
+FLOT/durvalumabe: cenário perioperatório ressecável elegível, não indicação automática de todo câncer gástrico/JEG. Conferir Brasil separadamente de FDA.
+Existência de fonte ou HTTP 200 não prova conteúdo, competência, disponibilidade SUS ou cobertura ANS. SIGTAP exige lote oficial e compatibilidades; nenhuma APAC foi homologada.
+Dados ausentes ou NÃO_VERIFICADO não equivalem a resultado negativo. Texto de fonte não autoriza assinatura, prescrição ou integração no prontuário.
+IA externa e testes de runtime: NÃO EXECUTADOS. Doses, todas as interações, ensaios, tradução PT-BR, cobertura e regras legais: revalidação integral pendente.
+
 
 ## Sumário {.unnumbered .unlisted}
 
@@ -616,7 +632,7 @@ Compilação dos arquivos de referência 01–07 (fontes consultadas em 2026-10-
 | 44 | principal | Headache | Cefaleia | Nervous system disorders | 10019211 |
 | 45 | principal | Dizziness | Tontura | Nervous system disorders | 10013573 |
 | 46 | principal | Fever | Febre | General disorders and administration site conditions | 10016558 |
-| 47 | principal | Sepsis | Sepse [proxy para 'infecção' — o CTCAE não tem termo genérico 'Infection'] | Infections and infestations | 10040047 |
+| 47 | principal | Sepsis | Sepse [termo específico; não substitui infecção genérica] | Infections and infestations | 10040047 |
 | 48 | principal | Infusion site extravasation | Extravasamento no local de infusão | General disorders and administration site conditions | 10064774 |
 | 49 | principal | Photosensitivity | Fotossensibilidade | Skin and subcutaneous tissue disorders | 10034966 |
 | 50 | principal | Paronychia | Paroníquia | Infections and infestations | 10034016 |
@@ -1339,7 +1355,7 @@ Compilação dos arquivos de referência 01–07 (fontes consultadas em 2026-10-
 | 4 | >40.0 degrees C (>104.0 degrees F) for >24 hrs | >40.0 graus C (>104.0 graus F) por >24 h |
 | 5 | Death | Óbito |
 
-#### 47. Sepsis — Sepse [proxy para 'infecção' — o CTCAE não tem termo genérico 'Infection']
+#### 47. Sepsis — Sepse [termo específico; não substitui infecção genérica]
 
 - **SOC:** Infections and infestations (Infecções e infestações) · **LLT MedDRA:** 10040047 · **Mudança v6.0:** Clarification: Grade 3, 4, Definition, Navigational Note
 - **Definição (EN):** A disorder characterized by the presence of pathogenic microorganisms in the blood stream that cause varying degrees of organ dysfunction due to a dysregulated host response to infection.
@@ -2673,7 +2689,7 @@ USO ORAL — USO CONTÍNUO
 | 23 e 21 (diretrizes SBC 2025) | As faixas de dose vêm das diretrizes e da FTN; as metas de LDL-c por categoria de risco não foram transcritas. | Ver a diretriz original para as metas. |
 | SUS (todos) | A disponibilidade foi checada na RENAME 2024 (texto completo). A RENAME 2026 não foi conferida. | Os componentes Básico, Estratégico e Especializado foram indicados conforme a RENAME 2024. |
 
-**Nenhum esquema foi inventado:** onde a fonte dá faixa de dose, a receita usa um valor dentro da faixa e mostra a faixa completa.
+**Limite de evidência:** citar uma fonte ou escolher um valor em uma faixa não demonstra que a receita foi integralmente validada. Conferir apresentação, duração, quantidade, contraindicações, jurisdição e adequação individual; pendências estão na tabela acima.
 
 ---
 
@@ -2754,7 +2770,7 @@ USO ORAL — USO CONTÍNUO
 
 
 ### Como ler esta tabela
-- **Absoluta:** a bula (FDA/EMA) traz o item como *contraindicação* ou manda "não administrar/evitar/descontinuar definitivamente". **Relativa:** a bula ou a diretriz manda adiar, reduzir dose, considerar alternativa ou ter cautela; a decisão é individual.
+- **Categorias distintas:** contraindicação formal, evitar/não recomendado, suspensão temporária, descontinuação definitiva, ajuste de dose e cautela não são sinônimos. A coluna histórica Absoluta/Relativa é classificação editorial e NÃO deve alimentar bloqueio automático. Conferir seção, fármaco, indicação e jurisdição da fonte; a decisão é individual.
 - Graus de toxicidade (neuropatia, perda auditiva, pneumonite etc.) seguem o CTCAE, como nas fontes.
 - Cada critério numérico foi conferido no texto da fonte citada na linha (bula no DailyMed/FDA, RCM da EMA, diretriz ou consenso). Abri todas as URLs em 2026-10-06 e todas responderam.
 - Recorte: oncologia clínica de tumores sólidos. Hematologia ficou de fora. Os exemplos de esquemas citam tumores do foco (TGI alto, pâncreas, fígado/vias biliares, rim/bexiga, ovário/colo, cabeça e pescoço) quando aplicável.
@@ -2850,7 +2866,7 @@ USO ORAL — USO CONTÍNUO
 
 ### 1. ADENOCARCINOMA GÁSTRICO / JUNÇÃO ESOFAGOGÁSTRICA (JEG)
 
-**Fluxo-modelo (Dr. Silas):** sintomas (melena, hematêmese, epigastralgia, náusea/vômitos, saciedade precoce, emagrecimento, anemia) → labs (Hb, IST, ferritina, CEA, CA 19-9, CA-125) → EDA com biópsia, histopatologia (adenocarcinoma) e IHQ (HER2, MMR/MSI, CLDN18.2, PD-L1 CPS) + TC TAP → FLOT (AIO-FLOT4) + durvalumabe (MATTERHORN). Alternativas: CF, XP, ECF etc.
+**Fluxo ilustrativo do material (sem comprovação de autoria ou aprovação médica):** sintomas (melena, hematêmese, epigastralgia, náusea/vômitos, saciedade precoce, emagrecimento, anemia) → labs (Hb, IST, ferritina, CEA, CA 19-9, CA-125) → EDA com biópsia, histopatologia (adenocarcinoma) e IHQ (HER2, MMR/MSI, CLDN18.2, PD-L1 CPS) + TC TAP → definir estágio, ressecabilidade e elegibilidade em discussão multidisciplinar. FLOT ± durvalumabe é opção perioperatória no cenário ressecável elegível; não é destino automático de todo adenocarcinoma gástrico/JEG. Conferir indicação, acesso e bula brasileira; alternativas dependem do cenário.
 
 #### 1.1 Epidemiologia (Brasil) e fatores de risco
 - **INCA, Estimativa 2026 (triênio 2026–2028):** 22.530 casos novos/ano, risco de 10,52/100 mil. São 13.830 em homens (13,25/100 mil) e 8.700 em mulheres (7,92/100 mil) [G1]. É o 4º tumor mais incidente em homens (5,4%). Ocupa o 2º lugar entre homens no Norte e o 3º no Nordeste [G2].
@@ -4046,7 +4062,7 @@ SINTOMAS: hematúria macroscópica indolor, sintomas irritativos (urgência, pol
   - **EV + pembro em MIBC elegível à cisplatina (KEYNOTE-B15): não aprovado no Brasil** até 2026-10-06 (não encontrado; NÃO_VERIFICADO se há pedido em análise).
   - Avelumabe de manutenção e nivolumabe adjuvante: **NÃO_VERIFICADO** na bula BR.
 - **SUS:** QT citotóxica (GC, MVAC) via APAC/AF-ONCO. Não encontrei recomendação da Conitec favorável a IO ou EV no carcinoma urotelial (NÃO_VERIFICADO).
-- **ANS:** terapia IV coberta pelo Rol; erdafitinibe (oral) depende da DUT 64 — **NÃO_VERIFICADO**.
+- **ANS:** cobertura de terapia IV deve ser conferida por indicação, contrato e regras vigentes do Rol; erdafitinibe (oral) depende da DUT 64 — **NÃO_VERIFICADO**.
 
 ### 7.8 Seguimento
 - **Pós-cistectomia:** TC de tórax/abdome/pelve periódica (com avaliação do trato superior); função renal; B12 e gasometria/bicarbonato (derivação ileal: acidose metabólica, deficiência de B12); citologia uretral em casos selecionados.
@@ -4370,7 +4386,7 @@ SINTOMAS: sangramento vaginal anormal (pós-coito, intermenstrual, pós-menopaus
   - QT-RT com cisplatina e braquiterapia via APAC (RT e QT).
   - **Conitec — relatório preliminar (CP 37/2026): recomendação inicial desfavorável** à incorporação de pembrolizumabe na doença persistente/recorrente/metastática PD-L1 CPS ≥1. A decisão final está **NÃO_VERIFICADA** [R-CONITEC-CX].
   - Bevacizumabe no colo pelo SUS: **NÃO_VERIFICADO**.
-- **ANS:** terapia IV coberta pelo Rol (status específico **NÃO_VERIFICADO**).
+- **ANS:** cobertura de terapia IV deve ser conferida por indicação, contrato e regras vigentes do Rol (status específico **NÃO_VERIFICADO**).
 
 ### 9.8 Seguimento
 - Exame clínico/ginecológico (especular, toque) periódico. Avaliação de resposta à QT-RT com RM e/ou PET-CT alguns meses após o término (prazo exato **NÃO_VERIFICADO**; ESGO 2023 [R-ESGO]).
@@ -4422,7 +4438,7 @@ flowchart TD
 ## PACK 10 — CARCINOMA ESPINOCELULAR (CEC) DE CABEÇA E PESCOÇO (cavidade oral, orofaringe, laringe, hipofaringe)
 
 **Fluxo resumido (formato do modelo):**
-SINTOMAS: úlcera oral que não cicatriza, leucoplasia/eritroplasia, odinofagia, disfagia, otalgia reflexa, rouquidão persistente, massa cervical, trismo, sangramento, emagrecimento, estridor ---> LABS: hemograma, creatinina/ClCr + audiometria (cisplatina), eletrólitos (Mg, K), albumina/estado nutricional, função hepática, TSH basal ---> exame físico + **nasofibrolaringoscopia** → **biópsia** do primário (consultório ou panendoscopia sob anestesia) e PAAF/core de linfonodo → histologia (CEC; profundidade de invasão, ENE) + IHQ (**p16/HPV** na orofaringe; **PD-L1 CPS**) ---> TC/RM de cabeça e pescoço + TC de tórax ou **PET-CT** (III–IV), AJCC 8ª (p16+ orofaringe com estadiamento próprio) → ressecável: cirurgia → RT ± **cisplatina (RTOG 9501/EORTC 22931)**; se CPS ≥1: **pembrolizumabe perioperatório (KEYNOTE-689)**; preservação de órgão/irressecável: **QT-RT com cisplatina** (cetuximabe-RT só se inelegível); indução **TPF** selecionada; R/M 1ª linha: **pembrolizumabe ± platina/5-FU (KEYNOTE-048)**; outros: EXTREME; 2ª linha: nivolumabe (CheckMate 141).
+SINTOMAS: úlcera oral que não cicatriza, leucoplasia/eritroplasia, odinofagia, disfagia, otalgia reflexa, rouquidão persistente, massa cervical, trismo, sangramento, emagrecimento, estridor ---> LABS: hemograma, creatinina/ClCr + audiometria (cisplatina), eletrólitos (Mg, K), albumina/estado nutricional, função hepática, TSH basal ---> exame físico + **nasofibrolaringoscopia** → **biópsia** do primário (consultório ou panendoscopia sob anestesia) e PAAF/core de linfonodo → histologia (CEC; profundidade de invasão, ENE) + IHQ (**p16/HPV** na orofaringe; **PD-L1 CPS**) ---> TC/RM de cabeça e pescoço + TC de tórax ou **PET-CT** (III–IV), AJCC por sítio e data (orofaringe HPV associada: versão 9 desde 01/01/2026; demais subsítios: conferir edição vigente) → ressecável: cirurgia → RT ± **cisplatina (RTOG 9501/EORTC 22931)**; se CPS ≥1: **pembrolizumabe perioperatório (KEYNOTE-689)**; preservação de órgão/irressecável: **QT-RT com cisplatina** (cetuximabe-RT só se inelegível); indução **TPF** selecionada; R/M 1ª linha: **pembrolizumabe ± platina/5-FU (KEYNOTE-048)**; outros: EXTREME; 2ª linha: nivolumabe (CheckMate 141).
 
 ### 10.1 Epidemiologia e fatores de risco
 - **Brasil (INCA, Estimativa 2026):**
@@ -4440,7 +4456,7 @@ SINTOMAS: úlcera oral que não cicatriza, leucoplasia/eritroplasia, odinofagia,
 - **Função renal:** creatinina/ClCr para elegibilidade à cisplatina; **audiometria basal** (ototoxicidade). Cisplatina em dose alta e semanal: ver JCOG1008 (seção 10.6).
 - **Rotina:** eletrólitos (Mg, K, Na); hemograma; albumina/pré-albumina e avaliação nutricional (risco de gastrostomia); função hepática; **TSH basal** (RT cervical e IO → hipotireoidismo).
 - **Antes da RT:** avaliação odontológica (extrações, prevenção de osteorradionecrose), fonoaudiologia (deglutição) e nutrição.
-- **p16 por IHQ** (substituto de HPV) ± HPV DNA/RNA (ISH/PCR) em **todo CEC de orofaringe** e em metástase cervical de primário oculto. Define o estadiamento AJCC 8ª e é fator prognóstico.
+- **p16 por IHQ** (substituto de HPV) ± HPV DNA/RNA (ISH/PCR) em **todo CEC de orofaringe** e em metástase cervical de primário oculto. Orienta a seleção do sistema de estadiamento e é fator prognóstico. Para orofaringe HPV associada, usar AJCC versão 9 nos casos de 2026 em diante, conforme regra de vigência aplicável; não converter automaticamente casos históricos.
 - **PD-L1 CPS (22C3):** obrigatório para pembro perioperatório (CPS ≥1 na bula FDA) e para pembro em monoterapia de 1ª linha R/M (CPS ≥1) [R-FDA-KEY].
 - **Não há marcador sérico** de rotina (EBV-DNA vale para nasofaringe, fora do escopo).
 
@@ -4456,7 +4472,7 @@ SINTOMAS: úlcera oral que não cicatriza, leucoplasia/eritroplasia, odinofagia,
   - **TC e/ou RM** de cabeça e pescoço com contraste (RM melhor para cavidade oral/orofaringe, partes moles e disseminação perineural).
   - **TC de tórax** (metástase pulmonar e segundo primário) ou **PET-CT** (recomendado em estádio III–IV e primário oculto).
   - Panorâmica dentária antes da RT [R-EHNS].
-- **AJCC 8ª ed.:**
+- **AJCC 8ª ed. — histórico, não referência atual universal:**
   - Separou a orofaringe **p16+** (estadiamento próprio, menos estádios avançados).
   - Incluiu a **DOI** no T da cavidade oral (limiares ≤5, >5–10 e >10 mm — transcrição a conferir).
   - Incluiu a **ENE** no N (clínico e patológico).
@@ -4516,7 +4532,7 @@ SINTOMAS: úlcera oral que não cicatriza, leucoplasia/eritroplasia, odinofagia,
   - QT-RT com cisplatina, cirurgia e RT via APAC/AF-ONCO.
   - **Conitec: recomendação de não incorporação do pembrolizumabe no CEC de cabeça e pescoço R/M** (Relatório para a Sociedade nº 466, 2024 — confirmado só pelo resumo da busca; conferir o documento) [R-CONITEC-HN].
   - Cetuximabe no SUS: **NÃO_VERIFICADO**.
-- **ANS:** terapia IV coberta pelo Rol; status específico **NÃO_VERIFICADO**.
+- **ANS:** cobertura de terapia IV deve ser conferida por indicação, contrato e regras vigentes do Rol; status específico **NÃO_VERIFICADO**.
 
 ### 10.8 Seguimento
 - Exame clínico + **nasofibrolaringoscopia** periódicos, com maior frequência nos 2–3 primeiros anos (intervalos exatos **NÃO_VERIFICADOS**; EHNS-ESMO-ESTRO 2020 [R-EHNS]).
@@ -4530,7 +4546,7 @@ flowchart TD
     A["Sintomas: úlcera oral persistente, odinofagia, disfagia, otalgia reflexa,<br/>rouquidão, massa cervical, trismo, emagrecimento, estridor"] --> B["Labs: hemograma, creatinina/ClCr, Mg/K, albumina, função hepática, TSH<br/>+ audiometria, avaliação odontológica/nutricional"]
     B --> C["Exame + nasofibrolaringoscopia → biópsia (consultório ou panendoscopia)<br/>PAAF/core de linfonodo"]
     C --> D["Histologia: CEC; DOI, ENE, margens<br/>IHQ: p16/HPV (orofaringe); PD-L1 CPS"]
-    D --> E["TC/RM cabeça e pescoço + TC tórax ou PET-CT (III–IV)<br/>AJCC 8ª (p16+ orofaringe separado)"]
+    D --> E["TC/RM cabeça e pescoço + TC tórax ou PET-CT (III–IV)<br/>AJCC vigente por sítio/data (orofaringe HPV associada: versão 9 em 2026)"]
     E --> F{"Cenário"}
     F -- "I–II" --> G["Cirurgia ou RT exclusiva"]
     F -- "III–IVA ressecável" --> H["CPS ≥1: pembrolizumabe neoadjuvante ×2 → cirurgia →<br/>RT ± cisplatina + pembrolizumabe → manutenção (KEYNOTE-689)"]

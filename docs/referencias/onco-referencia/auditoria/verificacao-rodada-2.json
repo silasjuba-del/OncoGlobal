@@ -1,0 +1,153 @@
+{
+  "checks": [
+    {
+      "id": "01-sigtap.md:UTF8",
+      "status": "PASS"
+    },
+    {
+      "id": "01-sigtap.md:sem-proxy",
+      "status": "PASS"
+    },
+    {
+      "id": "01-sigtap.md:ressalva",
+      "status": "PASS"
+    },
+    {
+      "id": "02-ctcae-v6.md:UTF8",
+      "status": "PASS"
+    },
+    {
+      "id": "02-ctcae-v6.md:sem-proxy",
+      "status": "PASS"
+    },
+    {
+      "id": "02-ctcae-v6.md:ressalva",
+      "status": "PASS"
+    },
+    {
+      "id": "03-interacoes-qt.md:UTF8",
+      "status": "PASS"
+    },
+    {
+      "id": "03-interacoes-qt.md:sem-proxy",
+      "status": "PASS"
+    },
+    {
+      "id": "03-interacoes-qt.md:ressalva",
+      "status": "PASS"
+    },
+    {
+      "id": "04-receitas-doencas-comuns.md:UTF8",
+      "status": "PASS"
+    },
+    {
+      "id": "04-receitas-doencas-comuns.md:sem-proxy",
+      "status": "PASS"
+    },
+    {
+      "id": "04-receitas-doencas-comuns.md:ressalva",
+      "status": "PASS"
+    },
+    {
+      "id": "05-comorbidades-impeditivas.md:UTF8",
+      "status": "PASS"
+    },
+    {
+      "id": "05-comorbidades-impeditivas.md:sem-proxy",
+      "status": "PASS"
+    },
+    {
+      "id": "05-comorbidades-impeditivas.md:ressalva",
+      "status": "PASS"
+    },
+    {
+      "id": "06-tumor-packs-1-5.md:UTF8",
+      "status": "PASS"
+    },
+    {
+      "id": "06-tumor-packs-1-5.md:sem-proxy",
+      "status": "PASS"
+    },
+    {
+      "id": "06-tumor-packs-1-5.md:ressalva",
+      "status": "PASS"
+    },
+    {
+      "id": "07-tumor-packs-6-10.md:UTF8",
+      "status": "PASS"
+    },
+    {
+      "id": "07-tumor-packs-6-10.md:sem-proxy",
+      "status": "PASS"
+    },
+    {
+      "id": "07-tumor-packs-6-10.md:ressalva",
+      "status": "PASS"
+    },
+    {
+      "id": "ONCO-REFERENCIA-COMPLETA.md:UTF8",
+      "status": "PASS"
+    },
+    {
+      "id": "ONCO-REFERENCIA-COMPLETA.md:sem-proxy",
+      "status": "PASS"
+    },
+    {
+      "id": "ONCO-REFERENCIA-COMPLETA.md:ressalva",
+      "status": "PASS"
+    },
+    {
+      "id": "01-sigtap.csv:parse-contagem",
+      "status": "PASS"
+    },
+    {
+      "id": "01-sigtap.csv:cabecalho-importavel",
+      "status": "PASS"
+    },
+    {
+      "id": "02-ctcae-v6.csv:parse-contagem",
+      "status": "PASS"
+    },
+    {
+      "id": "02-ctcae-v6.csv:cabecalho-importavel",
+      "status": "PASS"
+    },
+    {
+      "id": "03-interacoes-qt.csv:parse-contagem",
+      "status": "PASS"
+    },
+    {
+      "id": "03-interacoes-qt.csv:cabecalho-importavel",
+      "status": "PASS"
+    },
+    {
+      "id": "DOCX:ZIP",
+      "status": "PASS"
+    },
+    {
+      "id": "DOCX:sem-proxy",
+      "status": "PASS"
+    },
+    {
+      "id": "DOCX:sem-legendaconflitante",
+      "status": "PASS"
+    },
+    {
+      "id": "PDF:legivel-com-ressalva",
+      "status": "PASS"
+    },
+    {
+      "id": "Consolidado:Galsky",
+      "status": "PASS"
+    },
+    {
+      "id": "SIGTAP:uso-automatico-nao",
+      "status": "PASS"
+    }
+  ],
+  "passed": 36,
+  "failed": 0,
+  "pdf_pages": 119,
+  "runtime_llm": "NOT_RUN",
+  "clinical_full_validation": "PARTIAL"
+}

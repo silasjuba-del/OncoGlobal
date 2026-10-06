@@ -1,0 +1,110 @@
+[
+  {
+    "file": "02-ctcae-v6.md",
+    "old": "Sepse [proxy para 'infecção' — o CTCAE não tem termo genérico 'Infection']",
+    "new": "Sepse [termo específico; não substitui infecção genérica]",
+    "count": 2
+  },
+  {
+    "file": "04-receitas-doencas-comuns.md",
+    "old": "**Nenhum esquema foi inventado:** onde a fonte dá faixa de dose, a receita usa um valor dentro da faixa e mostra a faixa completa.",
+    "new": "**Limite de evidência:** citar uma fonte ou escolher um valor em uma faixa não demonstra que a receita foi integralmente validada. Conferir apresentação, duração, quantidade, contraindicações, jurisdição e adequação individual; pendências estão na tabela acima.",
+    "count": 1
+  },
+  {
+    "file": "05-comorbidades-impeditivas.md",
+    "old": "- **Absoluta:** a bula (FDA/EMA) traz o item como *contraindicação* ou manda \"não administrar/evitar/descontinuar definitivamente\". **Relativa:** a bula ou a diretriz manda adiar, reduzir dose, considerar alternativa ou ter cautela; a decisão é individual.",
+    "new": "- **Categorias distintas:** contraindicação formal, evitar/não recomendado, suspensão temporária, descontinuação definitiva, ajuste de dose e cautela não são sinônimos. A coluna histórica Absoluta/Relativa é classificação editorial e NÃO deve alimentar bloqueio automático. Conferir seção, fármaco, indicação e jurisdição da fonte; a decisão é individual.",
+    "count": 1
+  },
+  {
+    "file": "06-tumor-packs-1-5.md",
+    "old": "+ TC TAP → FLOT (AIO-FLOT4) + durvalumabe (MATTERHORN). Alternativas: CF, XP, ECF etc.",
+    "new": "+ TC TAP → definir estágio, ressecabilidade e elegibilidade em discussão multidisciplinar. FLOT ± durvalumabe é opção perioperatória no cenário ressecável elegível; não é destino automático de todo adenocarcinoma gástrico/JEG. Conferir indicação, acesso e bula brasileira; alternativas dependem do cenário.",
+    "count": 1
+  },
+  {
+    "file": "06-tumor-packs-1-5.md",
+    "old": "**Fluxo-modelo (Dr. Silas):**",
+    "new": "**Fluxo ilustrativo do material (sem comprovação de autoria ou aprovação médica):**",
+    "count": 1
+  },
+  {
+    "file": "07-tumor-packs-6-10.md",
+    "old": "AJCC 8ª (p16+ orofaringe com estadiamento próprio)",
+    "new": "AJCC por sítio e data (orofaringe HPV associada: versão 9 desde 01/01/2026; demais subsítios: conferir edição vigente)",
+    "count": 1
+  },
+  {
+    "file": "07-tumor-packs-6-10.md",
+    "old": "Define o estadiamento AJCC 8ª e é fator prognóstico.",
+    "new": "Orienta a seleção do sistema de estadiamento e é fator prognóstico. Para orofaringe HPV associada, usar AJCC versão 9 nos casos de 2026 em diante, conforme regra de vigência aplicável; não converter automaticamente casos históricos.",
+    "count": 1
+  },
+  {
+    "file": "07-tumor-packs-6-10.md",
+    "old": "- **AJCC 8ª ed.:**\n  - Separou a orofaringe",
+    "new": "- **AJCC 8ª ed. — histórico, não referência atual universal:**\n  - Separou a orofaringe",
+    "count": 1
+  },
+  {
+    "file": "07-tumor-packs-6-10.md",
+    "old": "AJCC 8ª (p16+ orofaringe separado)",
+    "new": "AJCC vigente por sítio/data (orofaringe HPV associada: versão 9 em 2026)",
+    "count": 1
+  },
+  {
+    "file": "ONCO-REFERENCIA-COMPLETA.md",
+    "old": "Sepse [proxy para 'infecção' — o CTCAE não tem termo genérico 'Infection']",
+    "new": "Sepse [termo específico; não substitui infecção genérica]",
+    "count": 2
+  },
+  {
+    "file": "ONCO-REFERENCIA-COMPLETA.md",
+    "old": "- **Absoluta:** a bula (FDA/EMA) traz o item como *contraindicação* ou manda \"não administrar/evitar/descontinuar definitivamente\". **Relativa:** a bula ou a diretriz manda adiar, reduzir dose, considerar alternativa ou ter cautela; a decisão é individual.",
+    "new": "- **Categorias distintas:** contraindicação formal, evitar/não recomendado, suspensão temporária, descontinuação definitiva, ajuste de dose e cautela não são sinônimos. A coluna histórica Absoluta/Relativa é classificação editorial e NÃO deve alimentar bloqueio automático. Conferir seção, fármaco, indicação e jurisdição da fonte; a decisão é individual.",
+    "count": 1
+  },
+  {
+    "file": "ONCO-REFERENCIA-COMPLETA.md",
+    "old": "AJCC 8ª (p16+ orofaringe com estadiamento próprio)",
+    "new": "AJCC por sítio e data (orofaringe HPV associada: versão 9 desde 01/01/2026; demais subsítios: conferir edição vigente)",
+    "count": 1
+  },
+  {
+    "file": "ONCO-REFERENCIA-COMPLETA.md",
+    "old": "Define o estadiamento AJCC 8ª e é fator prognóstico.",
+    "new": "Orienta a seleção do sistema de estadiamento e é fator prognóstico. Para orofaringe HPV associada, usar AJCC versão 9 nos casos de 2026 em diante, conforme regra de vigência aplicável; não converter automaticamente casos históricos.",
+    "count": 1
+  },
+  {
+    "file": "ONCO-REFERENCIA-COMPLETA.md",
+    "old": "- **AJCC 8ª ed.:**\n  - Separou a orofaringe",
+    "new": "- **AJCC 8ª ed. — histórico, não referência atual universal:**\n  - Separou a orofaringe",
+    "count": 1
+  },
+  {
+    "file": "ONCO-REFERENCIA-COMPLETA.md",
+    "old": "AJCC 8ª (p16+ orofaringe separado)",
+    "new": "AJCC vigente por sítio/data (orofaringe HPV associada: versão 9 em 2026)",
+    "count": 1
+  },
+  {
+    "file": "ONCO-REFERENCIA-COMPLETA.md",
+    "old": "+ TC TAP → FLOT (AIO-FLOT4) + durvalumabe (MATTERHORN). Alternativas: CF, XP, ECF etc.",
+    "new": "+ TC TAP → definir estágio, ressecabilidade e elegibilidade em discussão multidisciplinar. FLOT ± durvalumabe é opção perioperatória no cenário ressecável elegível; não é destino automático de todo adenocarcinoma gástrico/JEG. Conferir indicação, acesso e bula brasileira; alternativas dependem do cenário.",
+    "count": 1
+  },
+  {
+    "file": "ONCO-REFERENCIA-COMPLETA.md",
+    "old": "**Fluxo-modelo (Dr. Silas):**",
+    "new": "**Fluxo ilustrativo do material (sem comprovação de autoria ou aprovação médica):**",
+    "count": 1
+  },
+  {
+    "file": "ONCO-REFERENCIA-COMPLETA.md",
+    "old": "**Nenhum esquema foi inventado:** onde a fonte dá faixa de dose, a receita usa um valor dentro da faixa e mostra a faixa completa.",
+    "new": "**Limite de evidência:** citar uma fonte ou escolher um valor em uma faixa não demonstra que a receita foi integralmente validada. Conferir apresentação, duração, quantidade, contraindicações, jurisdição e adequação individual; pendências estão na tabela acima.",
+    "count": 1
+  }
+]

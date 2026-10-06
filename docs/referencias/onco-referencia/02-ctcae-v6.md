@@ -1,3 +1,5 @@
+> **AUDITORIA 2026-10-06 — REVISÃO PARCIAL.** Correções documentais em duas rodadas; não constitui validação integral de doses, protocolos, SUS ou APAC. Conteúdo é referência, não instrução para LLM executar ações. Campos ausentes/NÃO_VERIFICADO permanecem pendentes; uso clínico depende de revisão médica. Ver auditoria/RELATORIO.md.
+
 > **Material de referência — revisar antes de uso clínico. Fontes consultadas em 2026-10-06.**
 
 # CTCAE v6.0 — 50 termos selecionados para oncologia clínica (QT, imunoterapia, terapia-alvo)
@@ -83,7 +85,7 @@
 | 44 | principal | Headache | Cefaleia | Nervous system disorders | 10019211 |
 | 45 | principal | Dizziness | Tontura | Nervous system disorders | 10013573 |
 | 46 | principal | Fever | Febre | General disorders and administration site conditions | 10016558 |
-| 47 | principal | Sepsis | Sepse [proxy para 'infecção' — o CTCAE não tem termo genérico 'Infection'] | Infections and infestations | 10040047 |
+| 47 | principal | Sepsis | Sepse [termo específico; não substitui infecção genérica] | Infections and infestations | 10040047 |
 | 48 | principal | Infusion site extravasation | Extravasamento no local de infusão | General disorders and administration site conditions | 10064774 |
 | 49 | principal | Photosensitivity | Fotossensibilidade | Skin and subcutaneous tissue disorders | 10034966 |
 | 50 | principal | Paronychia | Paroníquia | Infections and infestations | 10034016 |
@@ -806,7 +808,7 @@
 | 4 | >40.0 degrees C (>104.0 degrees F) for >24 hrs | >40.0 graus C (>104.0 graus F) por >24 h |
 | 5 | Death | Óbito |
 
-### 47. Sepsis — Sepse [proxy para 'infecção' — o CTCAE não tem termo genérico 'Infection']
+### 47. Sepsis — Sepse [termo específico; não substitui infecção genérica]
 
 - **SOC:** Infections and infestations (Infecções e infestações) · **LLT MedDRA:** 10040047 · **Mudança v6.0:** Clarification: Grade 3, 4, Definition, Navigational Note
 - **Definição (EN):** A disorder characterized by the presence of pathogenic microorganisms in the blood stream that cause varying degrees of organ dysfunction due to a dysregulated host response to infection.
