@@ -1,0 +1,29 @@
+LAUDO ANATOMOPATOLÓGICO — BÓPSIA DE PRÓSTATA POR FRAGMENTOS — LOTE A (3 sítios)
+LABORATÓRIO EXEMPLO (instituição fictícia) · Protocolo: LAB-9001 (sintético)
+=====================================================================
+DOCUMENTO SINTÉTICO — PACIENTE TESTE 07 — nenhum dado real.
+=====================================================================
+Data de entrada do material (data clínica): 2026-07-14
+Data de emissão do laudo: 2026-07-18
+Data da assinatura digital no rodapé: 2026-07-19  (≠ data clínica — T1)
+Identificação no cabeçalho (rótulo impresso "Cartão SUS"): 123.456.789-01
+  -> 11 dígitos = mesmo CPF sintético da ficha; rótulo "Cartão SUS" NÃO prova CNS (I1).
+
+Material: fragmentos de biópsia prostática, sítios direitos.
+Médico solicitante: Dr. Exemplo Um — CRM-TS 000000 (≠ médico assistente, ≠ usuário do app — I5)
+
+SÍTIO R BASE (lateralidade DIREITA, posição base):
+  Adenocarcinoma acinar, GLEASON 3+3=6 (grupo de grau 1). Sem padrão cribriforme.
+
+SÍTIO R TERÇO MÉDIO (lateralidade DIREITA, posição terço médio):
+  Adenocarcinoma acinar, GLEASON 3+4=7 (grupo de grau 2). Sem padrão cribriforme.
+
+SÍTIO R ÁPICE (lateralidade DIREITA, posição ápice):
+  Fragmentos com inflamação crônica; neoplasia não identificada neste sítio.
+
+Conclusão do lote A: adenocarcinoma prostático em 2 de 3 sítios direitos.
+Dr. Patologista Exemplo — CRM-TS 000002 (assinatura fictícia)
+=====================================================================
+Armadilhas reproduzidas: I1 (rótulo "Cartão SUS" sobre valor de 11 dígitos), I5, P1 (extração
+por sítio com lateralidade/posição e negação "Sem padrão cribriforme" preservada por sítio),
+T1 (emissão/assinatura ≠ data clínica de entrada do material).

@@ -1,0 +1,20 @@
+DOCUMENTOS PESSOAIS ESCRANEADOS + COMPROVANTE DE TERCEIRO (página única sintética)
+=====================================================================
+DOCUMENTO SINTÉTICO — PACIENTE TESTE 07 — nenhum dado real.
+=====================================================================
+[1] Documento de identidade (rótulo impresso "CI"): 123.456.789-01
+    Mesmo número de 11 dígitos da ficha (DV propositalmente inválido, sintético).
+    Rótulo "CI" não prova o tipo do identificador (I1/I2).
+
+[2] Cartão do sistema público (rótulo impresso "Matrícula"): 704202600001234
+    15 dígitos, estrutura válida de CNS (sintético). O rótulo "Matrícula" não é o nome do
+    campo — classificar pelo VALOR, não pelo rótulo (I1).
+
+[3] CONTA DE ENERGIA ELÉTRICA — titular: FAMILIAR TESTE 07 (OUTRA PESSOA, não o paciente)
+    Endereço do imóvel: Rua dos Exemplos, 123 — Bairro Teste — Cidade Teste/TS
+    Vencimento: 10/08/2026 · Valor: R$ 0.000,00 (sintético)
+
+    REGRA: comprovante em nome de terceiro NÃO liga paciente e NÃO é dado do paciente sem
+    confirmação (I3). Endereço deste documento não vira dado cadastral do paciente.
+=====================================================================
+Armadilhas reproduzidas: I1/I2 (rótulos vs valores), I3 (comprovante de terceiro).
