@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agenda de Quimioterapia — 13 Poltronas</title>
+<style>
+  :root{
+    --navy:#1B365D; --teal:#2B7A8C; --gold:#B8860B; --dark:#16202E;
+    --bg:#0F1825; --panel:#15233A; --line:#2A3F5C; --ink:#EAF1FA;
+    --ok:#2E8B57; --warn:#C0504D; --muted:#9DB2CC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Trebuchet MS','Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.4}
+  header{background:linear-gradient(90deg,var(--navy),var(--dark));border-bottom:4px solid var(--gold);padding:14px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  header h1{font-size:24px;letter-spacing:.5px;color:#fff}
+  header .sub{color:var(--gold);font-weight:bold;font-size:14px}
+  nav{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
+  nav button{font-size:16px;font-weight:bold;padding:10px 16px;border:2px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;cursor:pointer}
+  nav button.active{background:var(--teal);border-color:var(--gold);color:#fff}
+  main{padding:18px 20px;max-width:1560px;margin:0 auto}
+  .view{display:none} .view.active{display:block}
+  h2{font-size:22px;color:var(--gold);margin-bottom:12px;border-bottom:2px solid var(--line);padding-bottom:6px}
+  h3{color:#fff;font-size:17px;margin-bottom:8px}
+  label{display:block;font-weight:bold;font-size:14px;color:var(--muted);margin:10px 0 4px}
+  input,select,textarea{width:100%;font-size:18px;padding:11px 12px;border:2px solid var(--line);background:#0C1521;color:var(--ink);border-radius:9px;font-weight:bold}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--teal)}
+  .btn{font-size:18px;font-weight:bold;padding:12px 20px;border:none;border-radius:10px;background:var(--teal);color:#fff;cursor:pointer;margin-top:6px}
+  .btn.gold{background:var(--gold);color:#1A1A1A} .btn.navy{background:var(--navy);border:2px solid var(--line)}
+  .btn.danger{background:var(--warn)}
+  .row{display:flex;gap:14px;flex-wrap:wrap}
+  .col{flex:1;min-width:200px}
+  .card{background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:18px;margin-bottom:18px}
+  .toolbar{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:14px}
+  table{width:100%;border-collapse:collapse;font-size:15px}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:var(--navy);color:#fff;font-size:13px;text-transform:uppercase}
+  tr:nth-child(even) td{background:#101D30}
+  .pill{display:inline-block;padding:3px 9px;border-radius:20px;font-size:12px;font-weight:bold;color:#fff}
+  .tag-share{background:var(--gold);color:#1A1A1A} .tag-no{background:#4A5B72}
+  .small{font-size:13px;color:var(--muted)}
+  .gridwrap{overflow-x:auto;border:2px solid var(--line);border-radius:12px;background:#0C1521}
+  .grid{min-width:1000px}
+  .gridhead{display:flex;position:sticky;top:0;z-index:5}
+  .corner{width:120px;flex:0 0 120px;background:var(--navy);color:#fff;font-weight:bold;display:flex;align-items:center;justify-content:center;border-right:2px solid var(--line);font-size:13px}
+  .hours{flex:1;display:flex;background:var(--navy)}
+  .hours .h{flex:1;text-align:center;color:#fff;font-weight:bold;font-size:13px;padding:6px 0;border-left:1px solid #2c466b}
+  .chairrow{display:flex;border-top:1px solid var(--line);min-height:48px}
+  .chairlbl{width:120px;flex:0 0 120px;background:var(--panel);color:var(--ink);font-weight:bold;display:flex;align-items:center;justify-content:center;border-right:2px solid var(--line);font-size:15px}
+  .track{flex:1;position:relative;background:repeating-linear-gradient(90deg,#0C1521 0,#0C1521 calc(10% - 1px),#162234 calc(10% - 1px),#162234 10%)}
+  .track.over{outline:3px dashed var(--gold);outline-offset:-3px}
+  .block{position:absolute;top:3px;bottom:3px;border-radius:7px;color:#fff;font-weight:bold;font-size:12px;padding:4px 6px;overflow:hidden;cursor:grab;border:2px solid rgba(255,255,255,.25);box-shadow:0 2px 5px rgba(0,0,0,.4);line-height:1.15}
+  .block:active{cursor:grabbing}
+  .block small{display:block;font-weight:normal;opacity:.92}
+  .block.cancel{opacity:.4;text-decoration:line-through}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+  .legend span{font-size:13px;display:flex;align-items:center;gap:6px}
+  .sw{width:16px;height:16px;border-radius:4px;display:inline-block}
+  .empty{padding:40px;text-align:center;color:var(--muted);font-size:18px}
+  .kpi{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+  .kpi .box{flex:1;min-width:150px;background:var(--panel);border:2px solid var(--line);border-left:6px solid var(--teal);border-radius:12px;padding:14px}
+  .kpi .box b{display:block;font-size:30px;color:#fff}
+  .kpi .box span{font-size:13px;color:var(--muted);font-weight:bold}
+  .grp{border:2px solid var(--gold);border-radius:12px;padding:14px;margin-bottom:14px;background:#15233A}
+  .grp h4{color:var(--gold);font-size:18px;margin-bottom:6px}
+  .alert{background:#2A1A1A;border:2px solid var(--warn);color:#FFD9D7;padding:12px;border-radius:10px;font-weight:bold;margin:10px 0}
+  .okbox{background:#16261C;border:2px solid var(--ok);color:#CFEFD9;padding:12px;border-radius:10px;font-weight:bold;margin:10px 0}
+  .note{background:#101D30;border:2px solid var(--line);border-left:6px solid var(--gold);padding:12px;border-radius:10px;margin:10px 0;font-size:14px}
+  dialog{border:none;border-radius:16px;background:var(--panel);color:var(--ink);padding:22px;max-width:480px;width:92%;border:3px solid var(--gold)}
+  dialog::backdrop{background:rgba(0,0,0,.6)}
+  dialog h3{color:var(--gold);margin-bottom:12px;font-size:20px}
+  .dlgrow{margin:6px 0;font-size:16px} .dlgrow b{color:#fff}
+  textarea{font-family:'Courier New',monospace}
+  @media print{
+    header nav,.toolbar,.noprint{display:none!important}
+    body{background:#fff;color:#000;font-size:12px}
+    .card,.grid,.gridwrap{border-color:#999}
+    .block{color:#000!important;border:1px solid #333}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>🩺 Agenda de Quimioterapia</h1>
+    <div class="sub">13 poltronas · 08:00–18:00 · agenda segura, ciclos corretos e menor desperdício</div>
+  </div>
+  <nav>
+    <button data-v="agenda" class="active">📅 Agenda</button>
+    <button data-v="pacientes">👤 Pacientes</button>
+    <button data-v="regimes">💊 Regimes</button>
+    <button data-v="farmacia">⚗️ Farmácia</button>
+    <button data-v="ajustes">⚙️ Ajustes</button>
+  </nav>
+</header>
+
+<main>
+  <!-- ===================== AGENDA ===================== -->
+  <section id="agenda" class="view active">
+    <h2>Mapa do dia</h2>
+    <div class="toolbar">
+      <div class="col" style="max-width:200px"><label>Data</label><input type="date" id="agDate"></div>
+      <button class="btn navy" onclick="shiftDay(-1)">◀ Anterior</button>
+      <button class="btn navy" onclick="shiftDay(1)">Próximo ▶</button>
+      <button class="btn gold" onclick="otimizarDia()">🔄 Otimizar dia</button>
+      <button class="btn" onclick="gerarAgendaTexto(true)">📋 Copiar agenda</button>
+      <button class="btn navy noprint" onclick="window.print()">🖨️ Imprimir</button>
+    </div>
+    <div class="kpi" id="agKpi"></div>
+    <div class="legend" id="agLegend"></div>
+    <div class="gridwrap"><div class="grid" id="agGrid"></div></div>
+    <div class="small noprint" style="margin:8px 0">💡 Arraste um bloco para mudar de poltrona/horário. Clique para ver detalhes, alterar status ou remover.</div>
+    <div class="card noprint">
+      <h2>Agenda do dia (copiar e colar)</h2>
+      <textarea id="agendaTexto" rows="14" readonly style="font-size:14px"></textarea>
+    </div>
+  </section>
+
+  <!-- ===================== PACIENTES ===================== -->
+  <section id="pacientes" class="view">
+    <h2>Cadastrar paciente e gerar ciclos</h2>
+    <div class="card">
+      <div class="row">
+        <div class="col"><label>Nome do paciente</label><input id="pNome" placeholder="Ex.: Maria da Silva"></div>
+        <div class="col"><label>Regime / protocolo</label><select id="pRegime"></select></div>
+      </div>
+      <div class="row">
+        <div class="col"><label>Data do 1º ciclo (D1)</label><input type="date" id="pInicio"></div>
+        <div class="col"><label>Nº de ciclos</label><input type="number" id="pCiclos" value="4" min="1" max="24"></div>
+        <div class="col"><label>Preferência de horário</label>
+          <select id="pHora">
+            <option value="auto">Automático</option>
+            <option value="manha">Manhã (08:00–12:00)</option>
+            <option value="tarde">Tarde (12:00–18:00)</option>
+          </select>
+        </div>
+      </div>
+      <div class="note">⚠️ Privacidade (LGPD): registre apenas <b>nome + protocolo + data + horário</b>. Não inclua CPF, diagnóstico, estadiamento ou dose nesta agenda.</div>
+      <button class="btn" onclick="addPaciente()">➕ Agendar paciente e ciclos</button>
+      <div id="pMsg"></div>
+    </div>
+    <h2>Pacientes ativos</h2>
+    <div class="card" style="padding:0">
+      <table id="pTable"><thead><tr><th>Paciente</th><th>Regime</th><th>Sessões</th><th>Próxima</th><th>Ações</th></tr></thead><tbody></tbody></table>
+      <div class="empty" id="pEmpty">Nenhum paciente cadastrado ainda.</div>
+    </div>
+  </section>
+
+  <!-- ===================== REGIMES ===================== -->
+  <section id="regimes" class="view">
+    <h2>Catálogo de regimes (tempo de poltrona)</h2>
+    <div class="toolbar">
+      <button class="btn gold" onclick="resetRegimes()">🔄 Restaurar catálogo padrão</button>
+      <span class="small">Recarrega os 19 regimes de fábrica (não apaga pacientes nem agendamentos).</span>
+    </div>
+    <div class="card small">
+      O <b>tempo de poltrona</b> inclui punção + pré-medicação + infusão + flush + observação. Regimes
+      <span class="pill tag-share">COMPARTILHÁVEL</span> usam droga cara passível de agrupamento operacional na farmácia;
+      o app concentra esses pacientes no mesmo dia. Regimes com <b>dias consecutivos</b> (ex.: FOLFOX D1+D2) são mantidos colados em dias úteis.
+    </div>
+    <div class="card" style="padding:0">
+      <table id="rTable"><thead><tr><th>Regime</th><th>Freq.</th><th>Dias</th><th>1ª</th><th>Manut.</th><th>Frasco</th><th></th></tr></thead><tbody></tbody></table>
+    </div>
+    <h2>Adicionar / editar regime</h2>
+    <div class="card">
+      <input type="hidden" id="rId">
+      <div class="row">
+        <div class="col"><label>Nome do regime</label><input id="rNome" placeholder="Ex.: Paclitaxel semanal"></div>
+        <div class="col" style="max-width:140px"><label>Cor</label><input type="color" id="rCor" value="#2B7A8C" style="height:48px"></div>
+      </div>
+      <div class="row">
+        <div class="col"><label>Frequência</label>
+          <select id="rFreq"><option value="7">7 dias</option><option value="14">14 dias</option><option value="21" selected>21 dias</option><option value="28">28 dias</option></select>
+        </div>
+        <div class="col"><label>Dias no ciclo</label><input id="rDias" value="1" placeholder="Ex.: 1  ou  1,2  ou  1,8,15"></div>
+      </div>
+      <div class="row">
+        <div class="col"><label>Tempo 1ª sessão (min)</label><input type="number" id="rPrim" value="120"></div>
+        <div class="col"><label>Tempo manutenção (min)</label><input type="number" id="rManut" value="120"></div>
+        <div class="col"><label>Droga compartilhável?</label>
+          <select id="rShare"><option value="0">Não</option><option value="1">Sim (agrupar)</option></select>
+        </div>
+      </div>
+      <button class="btn" onclick="saveRegime()">💾 Salvar</button>
+      <button class="btn navy" onclick="clearRegimeForm()">Limpar</button>
+    </div>
+  </section>
+
+  <!-- ===================== FARMÁCIA ===================== -->
+  <section id="farmacia" class="view">
+    <h2>Apoio à farmácia — agrupamento do dia</h2>
+    <div class="toolbar">
+      <div class="col" style="max-width:200px"><label>Data</label><input type="date" id="fDate"></div>
+      <button class="btn navy noprint" onclick="window.print()">🖨️ Imprimir</button>
+    </div>
+    <div class="note">Este painel é <b>apoio operacional</b>. A decisão de preparar é da farmácia, que valida estabilidade, dose prescrita, liberação clínica e rotina interna (RDC Anvisa 220/2004). O app apenas sinaliza oportunidades de agrupamento.</div>
+    <div id="fContent"></div>
+  </section>
+
+  <!-- ===================== AJUSTES ===================== -->
+  <section id="ajustes" class="view">
+    <h2>Backup dos dados</h2>
+    <div class="card">
+      <p class="small">Os dados ficam salvos só neste navegador. Se o computador for formatado ou os dados limpos, tudo se perde. Faça backup com frequência.</p>
+      <button class="btn gold" onclick="exportBackup()">⬇️ Exportar backup (JSON)</button>
+      <label style="margin-top:14px">Importar backup</label>
+      <input type="file" id="impFile" accept="application/json">
+      <button class="btn navy" onclick="importBackup()">⬆️ Importar arquivo selecionado</button>
+    </div>
+
+    <h2>Parâmetros de fluxo</h2>
+    <div class="card">
+      <label>Máximo de pacientes iniciando a cada 30 minutos</label>
+      <input type="number" id="cfgMax" min="1" max="13" style="max-width:160px">
+      <p class="small" style="margin-top:6px">Evita sobrecarregar recepção, enfermagem e farmácia com muitos inícios no mesmo horário.</p>
+      <button class="btn" onclick="saveParams()">💾 Salvar parâmetros</button>
+    </div>
+
+    <h2>Feriados e bloqueios</h2>
+    <div class="card">
+      <p class="small">Datas bloqueadas não recebem agendamento (somam-se a sábados e domingos).</p>
+      <div class="row">
+        <div class="col" style="max-width:220px"><input type="date" id="ferData"></div>
+        <button class="btn" onclick="addFeriado()">➕ Bloquear data</button>
+      </div>
+      <div id="ferList" style="margin-top:12px"></div>
+    </div>
+  </section>
+</main>
+
+<dialog id="dlg"><div id="dlgBody"></div>
+  <label>Status da sessão</label>
+  <select id="dlgStatus">
+    <option value="agendado">Agendado</option>
+    <option value="confirmado">Confirmado</option>
+    <option value="faltou">Faltou</option>
+    <option value="remarcado">Remarcado</option>
+    <option value="cancelado">Cancelado</option>
+  </select>
+  <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+    <button class="btn" id="dlgSave">💾 Salvar status</button>
+    <button class="btn danger" id="dlgDel">🗑️ Remover</button>
+    <button class="btn navy" onclick="document.getElementById('dlg').close()">Fechar</button>
+  </div>
+</dialog>
+
+<script>
+/* ============ ARMAZENAMENTO ============ */
+const DB={get(k,d){try{return JSON.parse(localStorage.getItem('qt_'+k))??d}catch(e){return d}},set(k,v){localStorage.setItem('qt_'+k,JSON.stringify(v))}};
+const CHAIRS=13, OPEN=8*60, CLOSE=18*60, LONGO=300;
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+
+/* ============ CATÁLOGO PADRÃO (19 regimes) ============ */
+const REGIMES_PADRAO=[
+  {nome:'AC (Doxo + Ciclofosfamida)',freq:21,dias:[1],prim:120,manut:120,share:0,cor:'#C0504D'},
+  {nome:'Paclitaxel semanal',freq:7,dias:[1],prim:240,manut:180,share:0,cor:'#8E6BA8'},
+  {nome:'Docetaxel',freq:21,dias:[1],prim:120,manut:120,share:0,cor:'#7E57C2'},
+  {nome:'FOLFOX (2 dias · 6h/dia)',freq:14,dias:[1,2],prim:360,manut:360,share:0,cor:'#3A7A96'},
+  {nome:'FOLFIRI (2 dias · 6h/dia)',freq:14,dias:[1,2],prim:360,manut:360,share:0,cor:'#2E6E86'},
+  {nome:'FOLFIRINOX (2 dias · 6h/dia)',freq:14,dias:[1,2],prim:360,manut:360,share:0,cor:'#1F6E7A'},
+  {nome:'FOLFOXIRI (2 dias · 6h/dia)',freq:14,dias:[1,2],prim:360,manut:360,share:0,cor:'#00695C'},
+  {nome:'FLOT (2 dias · 6h/dia)',freq:14,dias:[1,2],prim:360,manut:360,share:0,cor:'#795548'},
+  {nome:'Carboplatina + Paclitaxel',freq:21,dias:[1],prim:240,manut:240,share:0,cor:'#5C6BC0'},
+  {nome:'Cisplatina + Etoposídeo',freq:21,dias:[1,2,3],prim:300,manut:120,share:0,cor:'#455A64'},
+  {nome:'Gemcitabina',freq:28,dias:[1,8,15],prim:60,manut:60,share:0,cor:'#26A69A'},
+  {nome:'Carboplatina (mono)',freq:21,dias:[1],prim:90,manut:90,share:0,cor:'#607D8B'},
+  {nome:'Cisplatina + Gemcitabina',freq:21,dias:[1,8],prim:300,manut:60,share:0,cor:'#546E7A'},
+  {nome:'Trastuzumabe',freq:21,dias:[1],prim:150,manut:60,share:1,cor:'#B8860B'},
+  {nome:'Rituximabe',freq:21,dias:[1],prim:360,manut:210,share:1,cor:'#D4A017'},
+  {nome:'Pembrolizumabe',freq:21,dias:[1],prim:60,manut:60,share:1,cor:'#CFA84E'},
+  {nome:'Bevacizumabe',freq:21,dias:[1],prim:120,manut:60,share:1,cor:'#E0B33A'},
+  {nome:'R-CHOP',freq:21,dias:[1],prim:360,manut:360,share:1,cor:'#9C7A1E'},
+  {nome:'Ácido Zoledrônico (suporte)',freq:28,dias:[1],prim:45,manut:45,share:0,cor:'#78909C'},
+];
+
+let regimes=DB.get('regimes',null);
+if(!regimes){regimes=REGIMES_PADRAO.map(r=>({id:uid(),...r}));DB.set('regimes',regimes);}
+let pacientes=DB.get('pacientes',[]);
+let sessoes=DB.get('sessoes',[]);
+let feriados=DB.get('feriados',[]);
+let config=DB.get('config',{maxInicios:5});
+let MAX_INICIOS=config.maxInicios||5;
+
+const save=()=>{DB.set('regimes',regimes);DB.set('pacientes',pacientes);DB.set('sessoes',sessoes);DB.set('feriados',feriados);DB.set('config',config);};
+const regById=id=>regimes.find(r=>r.id===id);
+const fmt=m=>String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
+/* data LOCAL (corrige bug do UTC) */
+const todayStr=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
+const brDate=s=>s?s.split('-').reverse().join('/'):'';
+const durTxt=m=>{const h=Math.floor(m/60),x=m%60;return h&&x?`${h}h${String(x).padStart(2,'0')}`:h?`${h}h`:`${x}min`;};
+/* escapa texto digitado (nomes, regimes) antes de ir para innerHTML — previne XSS */
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ============ DATAS ============ */
+function addDays(str,n){const d=new Date(str+'T12:00');d.setDate(d.getDate()+n);return d.toISOString().slice(0,10);}
+function isWeekend(str){const d=new Date(str+'T12:00').getDay();return d===0||d===6;}
+function isBlocked(str){return isWeekend(str)||feriados.includes(str);}
+function nextBusiness(str){let s=str,g=0;while(isBlocked(s)&&g<30){s=addDays(s,1);g++;}return s;}
+const ehConsecutivo=dias=>dias.length>1&&dias.every((x,i)=>i===0||x===dias[i-1]+1);
+/* bloco de N dias seguidos: prefere antecipar (offset -1) a empurrar p/ frente */
+function blockStart(str,n){
+  for(const o of [0,-1,1,-2,2,-3,3]){
+    const d=addDays(str,o); let ok=true;
+    for(let i=0;i<n;i++){ if(isBlocked(addDays(d,i))){ok=false;break;} }
+    if(ok) return d;
+  }
+  let d=nextBusiness(str),g=0;
+  while(g<40){let ok=true;for(let i=0;i<n;i++)if(isBlocked(addDays(d,i))){ok=false;break;}if(ok)return d;d=nextBusiness(addDays(d,1));g++;}
+  return d;
+}
+
+/* ============ DISPONIBILIDADE ============ */
+function chairFreeAt(date,chair,start,dur,exceptId){
+  const end=start+dur;
+  return !sessoes.some(s=>s.id!==exceptId && s.date===date && s.chair===chair && !(end<=s.start||start>=s.start+s.dur));
+}
+function iniciosNaJanela(date,t){
+  const b=OPEN+Math.floor((t-OPEN)/30)*30;
+  return sessoes.filter(s=>s.date===date && s.start>=b && s.start<b+30).length;
+}
+/* tratamentos longos (>=300 min) só iniciam até 12:00 e de manhã; limite de inícios por 30 min */
+function findSlot(date,dur,pref,exceptId){
+  let lo=OPEN, maxStart=CLOSE-dur;
+  if(dur>=LONGO){
+    maxStart=Math.min(CLOSE-dur, 12*60); // tratamento longo: início no máximo às 12:00, de manhã
+  } else {
+    if(pref==='manha') maxStart=Math.min(maxStart, 12*60-dur);
+    if(pref==='tarde') lo=12*60;
+  }
+  const varrer=(a,b)=>{
+    for(let t=a;t<=b;t+=15){
+      if(iniciosNaJanela(date,t)>=MAX_INICIOS) continue;
+      for(let c=1;c<=CHAIRS;c++) if(chairFreeAt(date,c,t,dur,exceptId)) return {chair:c,start:t};
+    }
+    return null;
+  };
+  let r=varrer(lo,maxStart);
+  if(!r && dur<LONGO && pref!=='auto') r=varrer(OPEN, CLOSE-dur); // preferência não coube: tenta dia todo
+  return r;
+}
+
+/* ============ AGRUPAMENTO ANTI-DESPERDÍCIO (só drogas compartilháveis) ============ */
+function escolherData(reg,dataIdeal,dur,pref){
+  dataIdeal=nextBusiness(dataIdeal);
+  if(!reg.share){let d=dataIdeal,g=0;while(g<12){if(findSlot(d,dur,pref))return d;d=nextBusiness(addDays(d,1));g++;}return dataIdeal;}
+  const cand=[];
+  for(let off=-3;off<=3;off++){
+    const d=nextBusiness(addDays(dataIdeal,off));
+    if(!findSlot(d,dur,pref)) continue;
+    cand.push({d,mesmoDia:sessoes.filter(s=>s.date===d&&s.regimeId===reg.id).length,dist:Math.abs(off)});
+  }
+  if(!cand.length) return dataIdeal;
+  cand.sort((a,b)=>b.mesmoDia-a.mesmoDia||a.dist-b.dist);
+  return cand[0].d;
+}
+
+/* ============ CADASTRO PACIENTE + CICLOS ============ */
+function addPaciente(){
+  const nome=pNome.value.trim(), regId=pRegime.value, inicio=pInicio.value;
+  const nCic=parseInt(pCiclos.value)||1, pref=pHora.value, msg=pMsg;
+  if(!nome||!inicio){msg.innerHTML='<div class="alert">Preencha nome e data do 1º ciclo.</div>';return;}
+  const reg=regById(regId), pid=uid();
+  pacientes.push({id:pid,nome,regimeId:regId,inicio});
+  let ok=0,falhas=0,agrup=0;
+  const consec=ehConsecutivo(reg.dias);
+  for(let ciclo=0;ciclo<nCic;ciclo++){
+    if(consec){
+      const ini=blockStart(addDays(inicio,ciclo*reg.freq+(reg.dias[0]-1)),reg.dias.length);
+      reg.dias.forEach((dd,idx)=>{
+        const dur=(ciclo===0&&idx===0)?reg.prim:reg.manut;
+        const data=addDays(ini,idx), slot=findSlot(data,dur,pref);
+        if(!slot){falhas++;return;}
+        sessoes.push({id:uid(),pacienteId:pid,regimeId:reg.id,nome,date:data,chair:slot.chair,start:slot.start,dur,ciclo:ciclo+1,seq:`D${dd}`,share:reg.share,cor:reg.cor,status:'agendado'});ok++;
+      });
+    } else {
+      reg.dias.forEach((dd,idx)=>{
+        const dur=(ciclo===0&&idx===0)?reg.prim:reg.manut;
+        const data=escolherData(reg,addDays(inicio,ciclo*reg.freq+(dd-1)),dur,pref);
+        const slot=findSlot(data,dur,pref);
+        if(!slot){falhas++;return;}
+        if(reg.share&&sessoes.some(s=>s.date===data&&s.regimeId===reg.id))agrup++;
+        sessoes.push({id:uid(),pacienteId:pid,regimeId:reg.id,nome,date:data,chair:slot.chair,start:slot.start,dur,ciclo:ciclo+1,seq:reg.dias.length>1?`D${dd}`:'',share:reg.share,cor:reg.cor,status:'agendado'});ok++;
+      });
+    }
+  }
+  save();
+  const extra=reg.share&&agrup>0?` <b style="color:var(--gold)">${agrup} sessão(ões) agrupadas com outros pacientes na mesma droga.</b>`:'';
+  msg.innerHTML=`<div class="okbox">✔ ${nome}: ${ok} sessões agendadas.${falhas?` ${falhas} não couberam.`:''}${extra}</div>`;
+  pNome.value='';
+  renderPacientes();renderAgenda();renderFarmacia();
+}
+function removerPaciente(pid){
+  if(!confirm('Remover paciente e TODAS as sessões dele?'))return;
+  pacientes=pacientes.filter(p=>p.id!==pid);
+  sessoes=sessoes.filter(s=>s.pacienteId!==pid);
+  save();renderPacientes();renderAgenda();renderFarmacia();
+}
+
+/* ============ RENDER PACIENTES ============ */
+function renderPacientes(){
+  pRegime.innerHTML=regimes.map(r=>`<option value="${r.id}">${esc(r.nome)}</option>`).join('');
+  const tb=document.querySelector('#pTable tbody');
+  pEmpty.style.display=pacientes.length?'none':'block';
+  tb.innerHTML=pacientes.map(p=>{
+    const reg=regById(p.regimeId);
+    const fut=sessoes.filter(s=>s.pacienteId===p.id&&s.date>=todayStr()).sort((a,b)=>a.date.localeCompare(b.date));
+    const prox=fut.length?`${brDate(fut[0].date)} · ${fmt(fut[0].start)} · P${fut[0].chair}`:'—';
+    const total=sessoes.filter(s=>s.pacienteId===p.id).length;
+    return `<tr><td><b>${esc(p.nome)}</b></td><td>${reg?esc(reg.nome):'?'}</td><td>${total}</td><td>${prox}</td>
+      <td><button class="btn danger" style="margin:0;padding:6px 12px;font-size:13px" onclick="removerPaciente('${p.id}')">Remover</button></td></tr>`;
+  }).join('');
+}
+
+/* ============ RENDER REGIMES ============ */
+function renderRegimes(){
+  document.querySelector('#rTable tbody').innerHTML=regimes.map(r=>`<tr>
+    <td><span class="sw" style="background:${r.cor}"></span> <b>${esc(r.nome)}</b></td>
+    <td>${r.freq}d</td><td>${r.dias.map(d=>'D'+d).join(',')}</td><td>${r.prim}min</td><td>${r.manut}min</td>
+    <td>${r.share?'<span class="pill tag-share">COMPART.</span>':'<span class="pill tag-no">individual</span>'}</td>
+    <td><button class="btn navy" style="margin:0;padding:6px 12px;font-size:13px" onclick="editRegime('${r.id}')">Editar</button></td></tr>`).join('');
+}
+function editRegime(id){const r=regById(id);rId.value=r.id;rNome.value=r.nome;rCor.value=r.cor;rFreq.value=r.freq;rDias.value=r.dias.join(',');rPrim.value=r.prim;rManut.value=r.manut;rShare.value=r.share;window.scrollTo(0,document.body.scrollHeight);}
+function clearRegimeForm(){rId.value='';rNome.value='';rDias.value='1';rPrim.value=120;rManut.value=120;rShare.value=0;rCor.value='#2B7A8C';}
+function resetRegimes(){if(!confirm('Restaurar os 19 regimes padrão? Edições no catálogo serão substituídas (pacientes e agendamentos NÃO são afetados).'))return;regimes=REGIMES_PADRAO.map(r=>({id:uid(),...r}));save();renderRegimes();renderPacientes();alert('Catálogo restaurado.');}
+function saveRegime(){
+  const dias=rDias.value.split(',').map(s=>parseInt(s.trim())).filter(n=>n>0);
+  if(!rNome.value.trim()||!dias.length){alert('Informe nome e ao menos um dia.');return;}
+  const obj={nome:rNome.value.trim(),cor:rCor.value,freq:parseInt(rFreq.value),dias,prim:parseInt(rPrim.value),manut:parseInt(rManut.value),share:parseInt(rShare.value)};
+  if(rId.value)Object.assign(regById(rId.value),obj);else regimes.push({id:uid(),...obj});
+  save();clearRegimeForm();renderRegimes();renderPacientes();
+}
+
+/* ============ RENDER AGENDA ============ */
+function renderAgenda(){
+  const date=agDate.value||todayStr();
+  const dia=sessoes.filter(s=>s.date===date);
+  const ativos=dia.filter(s=>s.status!=='cancelado'&&s.status!=='faltou');
+  const usados=ativos.reduce((a,s)=>a+s.dur,0), cap=CHAIRS*(CLOSE-OPEN);
+  const compart=[...new Set(ativos.filter(s=>s.share).map(s=>s.regimeId))].length;
+  agKpi.innerHTML=`
+    <div class="box"><b>${dia.length}</b><span>SESSÕES NO DIA</span></div>
+    <div class="box"><b>${Math.round(usados/cap*100)}%</b><span>OCUPAÇÃO (08–18H)</span></div>
+    <div class="box" style="border-left-color:var(--gold)"><b>${compart}</b><span>REGIMES AGRUPADOS</span></div>`;
+  const regsHoje=[...new Set(dia.map(s=>s.regimeId))].map(regById).filter(Boolean);
+  agLegend.innerHTML=regsHoje.map(r=>`<span><i class="sw" style="background:${r.cor}"></i>${esc(r.nome)}</span>`).join('')||'<span class="small">Sem sessões neste dia.</span>';
+  const W=CLOSE-OPEN;
+  let html='<div class="gridhead"><div class="corner">POLTRONA</div><div class="hours">';
+  for(let h=8;h<18;h++)html+=`<div class="h">${h}h</div>`;
+  html+='</div></div>';
+  for(let c=1;c<=CHAIRS;c++){
+    html+=`<div class="chairrow"><div class="chairlbl">Poltrona ${c}</div><div class="track" data-chair="${c}">`;
+    dia.filter(s=>s.chair===c).forEach(s=>{
+      const left=(s.start-OPEN)/W*100, width=s.dur/W*100;
+      const cancel=(s.status==='cancelado'||s.status==='faltou')?' cancel':'';
+      const stt=s.status&&s.status!=='agendado'?` · ${s.status[0].toUpperCase()}`:'';
+      html+=`<div class="block${cancel}" draggable="true" data-id="${s.id}" style="left:${left}%;width:${width}%;background:${s.cor}" onclick='abrirSessao("${s.id}")'>
+        ${esc(s.nome.split(' ')[0])} ${esc(s.seq||'')}<small>${fmt(s.start)}–${fmt(s.start+s.dur)}${s.share?' ★':''}${stt}</small></div>`;
+    });
+    html+='</div></div>';
+  }
+  agGrid.innerHTML=html;
+  enableDragDrop();
+  gerarAgendaTexto(false);
+}
+function shiftDay(n){agDate.value=addDays(agDate.value||todayStr(),n);renderAgenda();}
+
+/* ============ DRAG & DROP REAL ============ */
+function enableDragDrop(){
+  agGrid.querySelectorAll('.block').forEach(b=>{
+    b.ondragstart=e=>e.dataTransfer.setData('text',b.dataset.id);
+  });
+  agGrid.querySelectorAll('.track').forEach(track=>{
+    track.ondragover=e=>{e.preventDefault();track.classList.add('over');};
+    track.ondragleave=()=>track.classList.remove('over');
+    track.ondrop=e=>{
+      e.preventDefault();track.classList.remove('over');
+      const s=sessoes.find(x=>x.id===e.dataTransfer.getData('text'));if(!s)return;
+      const rect=track.getBoundingClientRect();
+      let start=OPEN+Math.round(((e.clientX-rect.left)/rect.width)*(CLOSE-OPEN)/15)*15;
+      const chair=parseInt(track.dataset.chair);
+      if(start<OPEN)start=OPEN;
+      if(start+s.dur>CLOSE){alert('Não cabe: passaria das 18:00.');return;}
+      if(s.dur>=LONGO&&start>12*60){alert('Tratamento longo (≥5h) não pode iniciar depois das 12:00.');return;}
+      if(!chairFreeAt(s.date,chair,start,s.dur,s.id)){alert('Conflito: poltrona ocupada nesse horário.');return;}
+      s.chair=chair;s.start=start;save();renderAgenda();renderFarmacia();
+    };
+  });
+}
+
+/* ============ OTIMIZAR DIA (longos de manhã, curtos preenchem a tarde) ============ */
+function otimizarDia(){
+  const date=agDate.value||todayStr();
+  let dia=sessoes.filter(s=>s.date===date);
+  if(!dia.length){alert('Sem sessões neste dia.');return;}
+  if(!confirm('Reorganizar todas as sessões deste dia para melhor encaixe?\nTratamentos longos vão para a manhã; curtos preenchem a tarde.'))return;
+  sessoes=sessoes.filter(s=>s.date!==date);
+  dia.sort((a,b)=>b.dur-a.dur);
+  let falhas=0;
+  dia.forEach(s=>{const slot=findSlot(date,s.dur,'auto',s.id);if(slot){s.chair=slot.chair;s.start=slot.start;}else falhas++;sessoes.push(s);});
+  save();renderAgenda();renderFarmacia();
+  alert('Dia reorganizado.'+(falhas?` ${falhas} sessão(ões) sem novo encaixe (mantidas).`:''));
+}
+
+/* ============ DIÁLOGO DE SESSÃO + STATUS ============ */
+function abrirSessao(id){
+  const s=sessoes.find(x=>x.id===id),r=regById(s.regimeId),dlg=document.getElementById('dlg');
+  document.getElementById('dlgBody').innerHTML=`<h3>${esc(s.nome)}</h3>
+    <div class="dlgrow">Regime: <b>${r?r.nome:'?'}</b></div>
+    <div class="dlgrow">Ciclo: <b>${s.ciclo}${s.seq?' · '+s.seq:''}</b></div>
+    <div class="dlgrow">Data: <b>${brDate(s.date)}</b></div>
+    <div class="dlgrow">Horário: <b>${fmt(s.start)} – ${fmt(s.start+s.dur)}</b> (${durTxt(s.dur)})</div>
+    <div class="dlgrow">Poltrona: <b>${s.chair}</b></div>
+    ${s.share?'<div class="okbox" style="margin-top:10px">★ Droga compartilhável — sinalizar agrupamento à farmácia.</div>':''}`;
+  document.getElementById('dlgStatus').value=s.status||'agendado';
+  document.getElementById('dlgSave').onclick=()=>{s.status=document.getElementById('dlgStatus').value;save();renderAgenda();dlg.close();};
+  document.getElementById('dlgDel').onclick=()=>{if(!confirm('Remover esta sessão?'))return;sessoes=sessoes.filter(x=>x.id!==id);save();renderAgenda();renderFarmacia();renderPacientes();dlg.close();};
+  dlg.showModal();
+}
+
+/* ============ FARMÁCIA ============ */
+function renderFarmacia(){
+  const date=fDate.value||todayStr();
+  const dia=sessoes.filter(s=>s.date===date&&s.status!=='cancelado'&&s.status!=='faltou');
+  if(!dia.length){fContent.innerHTML='<div class="empty">Sem preparos para esta data.</div>';return;}
+  const grupos={};dia.forEach(s=>{(grupos[s.regimeId]=grupos[s.regimeId]||[]).push(s);});
+  const ordered=Object.entries(grupos).sort((a,b)=>{const ra=regById(a[0]),rb=regById(b[0]);return (rb.share-ra.share)||(b[1].length-a[1].length);});
+  let html='';
+  ordered.forEach(([rid,list])=>{
+    const r=regById(rid);
+    const linhas=list.sort((a,b)=>a.start-b.start).map(s=>`<tr><td><b>${esc(s.nome)}</b></td><td>${fmt(s.start)}</td><td>P${s.chair}</td><td>C${s.ciclo}${s.seq?' '+s.seq:''}</td></tr>`).join('');
+    const msg=r.share&&list.length>1
+      ?`<div class="okbox">★ ${list.length} pacientes no mesmo regime hoje. A farmácia pode <b>avaliar preparo sequencial/agrupado</b> conforme estabilidade, dose prescrita, liberação clínica e rotina interna.</div>`
+      :(r.share?`<div class="note">Apenas 1 paciente nesta droga cara hoje. Se a rotina permitir, concentrar mais pacientes do mesmo regime no mesmo dia reduz descarte de frasco.</div>`:'');
+    html+=`<div class="grp"><h4><span class="sw" style="background:${r.cor}"></span> ${esc(r.nome)} ${r.share?'<span class="pill tag-share">COMPART.</span>':''} — ${list.length} preparo(s)</h4>${msg}
+      <table><thead><tr><th>Paciente</th><th>Início</th><th>Poltrona</th><th>Ciclo</th></tr></thead><tbody>${linhas}</tbody></table></div>`;
+  });
+  const sharNum=ordered.filter(([id,l])=>regById(id).share&&l.length>1).length;
+  fContent.innerHTML=`<div class="kpi"><div class="box"><b>${dia.length}</b><span>PREPAROS NO DIA</span></div>
+    <div class="box" style="border-left-color:var(--gold)"><b>${sharNum}</b><span>REGIMES AGRUPÁVEIS</span></div></div>`+html;
+}
+
+/* ============ AGENDA COPIÁVEL ============ */
+function gerarAgendaTexto(copiar=false){
+  const date=agDate.value||todayStr();
+  const dia=sessoes.filter(s=>s.date===date).sort((a,b)=>a.start-b.start||a.chair-b.chair||a.nome.localeCompare(b.nome));
+  const L=[];
+  L.push(`AGENDA DE QUIMIOTERAPIA - ${brDate(date)}`);
+  L.push(`Funcionamento: 08:00 as 18:00 | 13 poltronas`);
+  L.push(`Total: ${dia.length} sessao(oes)`);L.push('');
+  if(!dia.length){L.push('Sem pacientes agendados nesta data.');}
+  else{
+    L.push('HORARIO | POLT | PACIENTE | REGIME | CICLO | DURACAO');
+    L.push('------------------------------------------------------------');
+    dia.forEach(s=>{const r=regById(s.regimeId);const st=(s.status&&s.status!=='agendado')?` [${s.status}]`:'';
+      L.push(`${fmt(s.start)}-${fmt(s.start+s.dur)} | P${s.chair} | ${s.nome}${st} | ${r?r.nome:'?'} | C${s.ciclo}${s.seq?' '+s.seq:''} | ${durTxt(s.dur)}`);});
+    L.push('');L.push('RESUMO POR POLTRONA');L.push('-------------------');
+    for(let c=1;c<=CHAIRS;c++){const lst=dia.filter(s=>s.chair===c).sort((a,b)=>a.start-b.start);
+      if(lst.length){L.push(`Poltrona ${c}:`);lst.forEach(s=>{const r=regById(s.regimeId);L.push(`  ${fmt(s.start)}-${fmt(s.start+s.dur)} ${s.nome} - ${r?r.nome:''} ${s.seq||''}`);});}}
+    const g={};dia.forEach(s=>{const r=regById(s.regimeId);const n=r?r.nome:'?';g[n]=(g[n]||0)+1;});
+    L.push('');L.push('RESUMO POR REGIME');L.push('-----------------');
+    Object.entries(g).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).forEach(([n,q])=>L.push(`${q}x ${n}`));
+  }
+  L.push('');L.push('Obs.: confirmar presenca/liberacao antes do preparo pela farmacia.');
+  const txt=L.join('\n');
+  const el=document.getElementById('agendaTexto');if(el)el.value=txt;
+  if(copiar){
+    const fb=()=>{if(el){el.focus();el.select();try{document.execCommand('copy');}catch(e){}}alert('Agenda copiada.');};
+    if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(()=>alert('Agenda copiada.')).catch(fb);else fb();
+  }
+  return txt;
+}
+
+/* ============ BACKUP ============ */
+function exportBackup(){
+  const data={v:2,regimes,pacientes,sessoes,feriados,config,exportado:new Date().toISOString()};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=`backup-agenda-qt-${todayStr()}.json`;a.click();URL.revokeObjectURL(a.href);
+}
+function importBackup(){
+  const f=document.getElementById('impFile').files[0];
+  if(!f){alert('Selecione um arquivo .json primeiro.');return;}
+  const rd=new FileReader();
+  rd.onload=()=>{try{
+    const d=JSON.parse(rd.result);
+    if(!d.regimes||!d.sessoes){alert('Arquivo inválido.');return;}
+    if(!confirm('Importar este backup? Os dados atuais serão SUBSTITUÍDOS.'))return;
+    regimes=d.regimes;pacientes=d.pacientes||[];sessoes=d.sessoes||[];feriados=d.feriados||[];config=d.config||{maxInicios:5};MAX_INICIOS=config.maxInicios||5;
+    save();renderTudo();alert('Backup importado com sucesso.');
+  }catch(e){alert('Erro ao ler o arquivo: '+e.message);}};
+  rd.readAsText(f);
+}
+
+/* ============ PARÂMETROS / FERIADOS ============ */
+function saveParams(){const v=parseInt(cfgMax.value)||5;config.maxInicios=Math.max(1,Math.min(13,v));MAX_INICIOS=config.maxInicios;cfgMax.value=MAX_INICIOS;save();alert('Parâmetros salvos.');}
+function addFeriado(){const d=ferData.value;if(!d)return;if(!feriados.includes(d))feriados.push(d);feriados.sort();save();renderFeriados();}
+function removeFeriado(d){feriados=feriados.filter(x=>x!==d);save();renderFeriados();}
+function renderFeriados(){
+  ferList.innerHTML=feriados.length?feriados.map(d=>`<span class="pill" style="background:var(--warn);margin:3px;display:inline-block">${brDate(d)} <a style="color:#fff;cursor:pointer;font-weight:bold" onclick="removeFeriado('${d}')">✕</a></span>`).join(''):'<span class="small">Nenhuma data bloqueada.</span>';
+}
+
+/* ============ NAV / INIT ============ */
+function renderTudo(){renderPacientes();renderRegimes();renderAgenda();renderFarmacia();renderFeriados();cfgMax.value=MAX_INICIOS;}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');document.getElementById(b.dataset.v).classList.add('active');
+});
+agDate.value=todayStr();fDate.value=todayStr();pInicio.value=todayStr();
+agDate.onchange=renderAgenda;fDate.onchange=renderFarmacia;
+renderTudo();
+</script>
+</body>
+</html>
