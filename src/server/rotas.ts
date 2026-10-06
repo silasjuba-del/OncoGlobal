@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import type { DatabaseSync } from "node:sqlite";
 import { z } from "zod";
+import { Id } from "../contracts/base.js";
 import { ActionIntent, ConfirmarBloco, type ConfirmarBloco as Confirmar } from "../contracts/operacao.js";
 import { lerDraft } from "../kernel/ledger/drafts.js";
 import { sqliteIdempotencia } from "../kernel/ledger/idempotencia.js";
@@ -18,6 +19,11 @@ export interface ServidorDeps {
   log: (entry: { rota: string; codigo: string; status: number }) => void;
 }
 const sha = (s: string) => createHash("sha256").update(s).digest("hex");
+const ExibirBundle = z.object({
+  patientId: Id,
+  encounterId: Id,
+  draftIds: z.array(Id),
+}).strict();
 function send(res: ServerResponse, status: number, object: unknown) {
   res.writeHead(status, { "Content-Type": "application/json; charset=utf-8",
     "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" });
@@ -39,6 +45,35 @@ function payloadDocumento(value: unknown): { documentId: string; documentVersion
     && typeof d.documentHash === "string"
     ? { documentId: d.documentId, documentVersion: d.documentVersion as number, documentHash: d.documentHash }
     : null;
+}
+
+/** W4-03 · a tela recebe conteúdo/hash calculado no servidor, nunca uma declaração do cliente. */
+function exibirBundle(deps: ServidorDeps, token: string,
+  input: z.infer<typeof ExibirBundle>): { status: number; body: unknown } {
+  if (new Set(input.draftIds).size !== input.draftIds.length)
+    return { status: 400, body: { codigo: "DRAFT_DUPLICADO" } };
+  const documentos: { draftId: string; documentId: string; documentVersion: number;
+    conteudo: unknown; conteudoHash: string }[] = [];
+  const chaves = new Set<string>();
+  for (const draftId of input.draftIds) {
+    const draft = lerDraft(deps.db, draftId);
+    if (!draft || draft.patientId !== input.patientId)
+      return { status: 409, body: { codigo: "DRAFT_NAO_ENCONTRADO" } };
+    const doc = payloadDocumento(draft.payload);
+    if (!doc) return { status: 409, body: { codigo: "DOCUMENTO_INVALIDO" } };
+    const chave = JSON.stringify([doc.documentId, doc.documentVersion]);
+    if (chaves.has(chave)) return { status: 409, body: { codigo: "DOCUMENTO_DUPLICADO" } };
+    chaves.add(chave);
+    documentos.push({
+      draftId, documentId: doc.documentId, documentVersion: doc.documentVersion,
+      conteudo: draft.payload, conteudoHash: hashConteudoExibido(draft.payload),
+    });
+  }
+  deps.sessoes.registrarBundleExibido(token,
+    { patientId: input.patientId, encounterId: input.encounterId },
+    documentos.map(({ documentId, documentVersion, conteudoHash }) =>
+      ({ documentId, documentVersion, conteudoHash })));
+  return { status: 200, body: { documentos } };
 }
 
 /** ConfirmarBloco is strict; all clinical contents are fetched from local drafts, not HTTP input. */
@@ -89,7 +124,8 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
 
 export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: ServerResponse): Promise<void> {
   const rota = req.url === "/login" ? "login"
-    : req.url === "/consulta/confirmar" ? "confirmar" : req.url === "/acao" ? "acao" : "desconhecida";
+    : req.url === "/consulta/bundle" ? "bundle"
+      : req.url === "/consulta/confirmar" ? "confirmar" : req.url === "/acao" ? "acao" : "desconhecida";
   const reply = (status: number, codigo: string, result: unknown = { codigo }) => {
     deps.log({ rota, codigo, status }); send(res, status, result);
   };
@@ -107,6 +143,12 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     const sessao = deps.sessoes.obter(token);
     if (!sessao) return reply(401, "SESSAO_INVALIDA");
     const raw = await body(req);
+    if (rota === "bundle") {
+      const parsed = ExibirBundle.safeParse(raw);
+      if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
+      const result = exibirBundle(deps, token, parsed.data);
+      return reply(result.status, (result.body as { codigo?: string }).codigo ?? "BUNDLE_EXIBIDO", result.body);
+    }
     if (rota === "confirmar") {
       const parsed = ConfirmarBloco.safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
