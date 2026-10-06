@@ -37,6 +37,12 @@ describe("impressão de kit e laudo APAC", () => {
     expect(blank.status).toBe("MODELO_EM_BRANCO"); expect(blank.html).toContain("MODELO EM BRANCO");
   });
 
+  it("D-W9-04 · texto do kit sai acentuado e as âncoras de renderização continuam funcionando", () => {
+    const r = renderizarKit(template("receita-sintomaticos"), { ...base, itensSelecionados: ["pantoprazol"] });
+    expect(r.html).toContain("Medicações de apoio");
+    expect(r.html).toContain("OBSERVAÇÃO AO MÉDICO PLANTONISTA");
+  });
+
   it("ignora dose adulterada na entrada e renderiza a dose literal do template selecionado", () => {
     const entradaAdulterada = { ...base, itensSelecionados: ["pantoprazol"], itensReceita: [{ id: "pantoprazol", medicamento: "PANTOPRAZOL", dose: "999 mg", orientacao: "alterada", selecionado: true }] } as unknown as EntradaKit;
     const r = renderizarKit(template("receita-sintomaticos"), entradaAdulterada);

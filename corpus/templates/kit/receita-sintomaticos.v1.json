@@ -22,14 +22,14 @@
   "secoes": [
     {
       "id": "conteudo",
-      "titulo": "Receita medica",
+      "titulo": "Receita médica",
       "origem": "TEXTO_FIXO",
       "campos": [
         {
           "id": "texto-integral",
           "rotulo": "Texto integral",
           "origem": "TEXTO_FIXO",
-          "texto": " RECEITA MEDICA - SINTOMATICOS\r\n Medicacoes de apoio durante quimioterapia - ajustar conforme prescricao individual\r\nIDADE:\r\n______\r\nVIA ORAL\r\nMEDICAMENTO\r\nORIENTACAO\r\nPANTOPRAZOL 20 mg\r\nTomar 1 comprimido em jejum, 30 minutos antes da primeira refeicao, durante a quimioterapia, salvo\r\norientacao contraria.\r\nONDANSETRONA 8 mg\r\nTomar 1 comprimido de 8/8h por 2 dias apos a quimioterapia, mesmo sem nauseas; depois usar se\r\nnecessario.\r\nMETOCLOPRAMIDA 10 mg\r\nTomar 1 comprimido de 8/8h por 2 dias apos a quimioterapia, mesmo sem nauseas; depois usar se\r\nnecessario.\r\nDIMENIDRINATO 50 mg\r\nTomar 1 comprimido de 8/8h por 2 dias apos a quimioterapia, mesmo sem nauseas; depois usar se\r\nnecessario.\r\nDEXAMETASONA 4 mg\r\nTomar 1 comprimido na noite anterior e 1 comprimido no dia seguinte. Nao tomar no dia da\r\nquimioterapia, salvo orientacao medica.\r\nLOPERAMIDA 2 mg\r\nSe diarreia: tomar 2 comprimidos no inicio e 1 comprimido a cada 2 horas. Maximo 8 comprimidos/dia.\r\nSe nao melhorar, procurar pronto-socorro.\r\nLACTULOSE xarope\r\nSe ficar 3 dias sem evacuar: 15 a 30 mL de 12/12h, salvo contraindicao.\r\nSIMETICONA 125 mg\r\nSe gases ou distensao abdominal: 1 comprimido de 8/8h apos as refeicoes.\r\nVIA ENDOVENOSA / PRONTO ATENDIMENTO\r\nMEDICAMENTO\r\nORIENTACAO\r\nCOMPLEXO B + HIDRATACAO\r\n2 ampolas em 500-1000 mL de SF, em 3 horas. Repetir por 2 dias pos-quimioterapia, conforme\r\navaliacao.\r\nONDANSETRONA EV 8 mg\r\nDiluir em 50-100 mL de SF, infundir em 15 minutos. Usar 8/8h a 12/12h se necessario.\r\nMETOCLOPRAMIDA EV 10 mg\r\nDiluir em 50-100 mL de SF, infundir em 20 minutos. Usar 6/6h a 8/8h se necessario.\r\nNORIPURUM EV, se anemia\r\n100-200 mg em 100-250 mL de SF, em 30 minutos. Monitorar durante a infusao.\r\nBUSCOPAN COMPOSTO EV\r\n1-2 ampolas em 100-250 mL de SF, em 30 minutos. Nao fazer bolus.\r\nDEXAMETASONA EV\r\n4-10 mg EV lento (1 minuto) ou diluido em 50-100 mL de SF, em 15 minutos.\r\nOBSERVACAO AO MEDICO PLANTONISTA\r\nNao ha contraindicacao oncologica geral para medicacoes ou antibioticos clinicamente indicados. Avaliar alergias, interacoes, funcao\r\nrenal/hepatica, comorbidades e condicao clinica. Em febre durante quimioterapia, nao retardar atendimento.\r\nData: ____/____/________\r\nCARIMBO E ASSINATURA"
+          "texto": " RECEITA MÉDICA - SINTOMÁTICOS\r\n Medicações de apoio durante quimioterapia - ajustar conforme prescrição individual\r\nIDADE:\r\n______\r\nVIA ORAL\r\nMEDICAMENTO\r\nORIENTAÇÃO\r\nPANTOPRAZOL 20 mg\r\nTomar 1 comprimido em jejum, 30 minutos antes da primeira refeição, durante a quimioterapia, salvo\r\norientação contraria.\r\nONDANSETRONA 8 mg\r\nTomar 1 comprimido de 8/8h por 2 dias após a quimioterapia, mesmo sem náuseas; depois usar se\r\nnecessário.\r\nMETOCLOPRAMIDA 10 mg\r\nTomar 1 comprimido de 8/8h por 2 dias após a quimioterapia, mesmo sem náuseas; depois usar se\r\nnecessário.\r\nDIMENIDRINATO 50 mg\r\nTomar 1 comprimido de 8/8h por 2 dias após a quimioterapia, mesmo sem náuseas; depois usar se\r\nnecessário.\r\nDEXAMETASONA 4 mg\r\nTomar 1 comprimido na noite anterior e 1 comprimido no dia seguinte. Não tomar no dia da\r\nquimioterapia, salvo orientação médica.\r\nLOPERAMIDA 2 mg\r\nSe diarreia: tomar 2 comprimidos no início e 1 comprimido a cada 2 horas. Máximo 8 comprimidos/dia.\r\nSe não melhorar, procurar pronto-socorro.\r\nLACTULOSE xarope\r\nSe ficar 3 dias sem evacuar: 15 a 30 mL de 12/12h, salvo contraindicação.\r\nSIMETICONA 125 mg\r\nSe gases ou distensão abdominal: 1 comprimido de 8/8h após as refeições.\r\nVIA ENDOVENOSA / PRONTO ATENDIMENTO\r\nMEDICAMENTO\r\nORIENTAÇÃO\r\nCOMPLEXO B + HIDRATAÇÃO\r\n2 ampolas em 500-1000 mL de SF, em 3 horas. Repetir por 2 dias pós-quimioterapia, conforme\r\navaliação.\r\nONDANSETRONA EV 8 mg\r\nDiluir em 50-100 mL de SF, infundir em 15 minutos. Usar 8/8h a 12/12h se necessário.\r\nMETOCLOPRAMIDA EV 10 mg\r\nDiluir em 50-100 mL de SF, infundir em 20 minutos. Usar 6/6h a 8/8h se necessário.\r\nNORIPURUM EV, se anemia\r\n100-200 mg em 100-250 mL de SF, em 30 minutos. Monitorar durante a infusão.\r\nBUSCOPAN COMPOSTO EV\r\n1-2 ampolas em 100-250 mL de SF, em 30 minutos. Não fazer bolus.\r\nDEXAMETASONA EV\r\n4-10 mg EV lento (1 minuto) ou diluído em 50-100 mL de SF, em 15 minutos.\r\nOBSERVAÇÃO AO MÉDICO PLANTONISTA\r\nNão há contraindicação oncológica geral para medicações ou antibióticos clinicamente indicados. Avaliar alergias, interações, função\r\nrenal/hepática, comorbidades e condição clínica. Em febre durante quimioterapia, não retardar atendimento.\r\nData: ____/____/________\r\nCARIMBO E ASSINATURA"
         }
       ]
     }
@@ -65,101 +65,101 @@
     "doseLiteralSemCalculoOuAlteracao": true
   },
   "headerExtraidoComoConfiguracao": true,
-  "textoFonteOriginal": "\nH\r\nHOSPITAL DO BEM - UNIDADE ONCOLOGICA\r\nComplexo Hospitalar Regional Dep. Janduhy Carneiro - Patos/PB\r\nDr. Silas Negrao Serra Jr. - CRM-PB 17341 - RQE Oncologia 9099 - RQE Clinica Medica 9098\r\nReceita medica\r\nHospital do Bem - Unidade Oncologica - Patos/PB | Documento medico para impressao\r\nPagina 1\r\n RECEITA MEDICA - SINTOMATICOS\r\n Medicacoes de apoio durante quimioterapia - ajustar conforme prescricao individual\r\nNOME:\r\n___________________________________________\r\nNASC.:\r\n____/____/________\r\nCIDADE:\r\n______________________\r\nIDADE:\r\n______\r\nVIA ORAL\r\nMEDICAMENTO\r\nORIENTACAO\r\nPANTOPRAZOL 20 mg\r\nTomar 1 comprimido em jejum, 30 minutos antes da primeira refeicao, durante a quimioterapia, salvo\r\norientacao contraria.\r\nONDANSETRONA 8 mg\r\nTomar 1 comprimido de 8/8h por 2 dias apos a quimioterapia, mesmo sem nauseas; depois usar se\r\nnecessario.\r\nMETOCLOPRAMIDA 10 mg\r\nTomar 1 comprimido de 8/8h por 2 dias apos a quimioterapia, mesmo sem nauseas; depois usar se\r\nnecessario.\r\nDIMENIDRINATO 50 mg\r\nTomar 1 comprimido de 8/8h por 2 dias apos a quimioterapia, mesmo sem nauseas; depois usar se\r\nnecessario.\r\nDEXAMETASONA 4 mg\r\nTomar 1 comprimido na noite anterior e 1 comprimido no dia seguinte. Nao tomar no dia da\r\nquimioterapia, salvo orientacao medica.\r\nLOPERAMIDA 2 mg\r\nSe diarreia: tomar 2 comprimidos no inicio e 1 comprimido a cada 2 horas. Maximo 8 comprimidos/dia.\r\nSe nao melhorar, procurar pronto-socorro.\r\nLACTULOSE xarope\r\nSe ficar 3 dias sem evacuar: 15 a 30 mL de 12/12h, salvo contraindicao.\r\nSIMETICONA 125 mg\r\nSe gases ou distensao abdominal: 1 comprimido de 8/8h apos as refeicoes.\r\nVIA ENDOVENOSA / PRONTO ATENDIMENTO\r\nMEDICAMENTO\r\nORIENTACAO\r\nCOMPLEXO B + HIDRATACAO\r\n2 ampolas em 500-1000 mL de SF, em 3 horas. Repetir por 2 dias pos-quimioterapia, conforme\r\navaliacao.\r\nONDANSETRONA EV 8 mg\r\nDiluir em 50-100 mL de SF, infundir em 15 minutos. Usar 8/8h a 12/12h se necessario.\r\nMETOCLOPRAMIDA EV 10 mg\r\nDiluir em 50-100 mL de SF, infundir em 20 minutos. Usar 6/6h a 8/8h se necessario.\r\nNORIPURUM EV, se anemia\r\n100-200 mg em 100-250 mL de SF, em 30 minutos. Monitorar durante a infusao.\r\nBUSCOPAN COMPOSTO EV\r\n1-2 ampolas em 100-250 mL de SF, em 30 minutos. Nao fazer bolus.\r\nDEXAMETASONA EV\r\n4-10 mg EV lento (1 minuto) ou diluido em 50-100 mL de SF, em 15 minutos.\r\nOBSERVACAO AO MEDICO PLANTONISTA\r\nNao ha contraindicacao oncologica geral para medicacoes ou antibioticos clinicamente indicados. Avaliar alergias, interacoes, funcao\r\nrenal/hepatica, comorbidades e condicao clinica. Em febre durante quimioterapia, nao retardar atendimento.\r\nData: ____/____/________\r\nCARIMBO E ASSINATURA\r\n\r\n",
+  "textoFonteOriginal": "\nH\r\nHOSPITAL DO BEM - UNIDADE ONCOLÓGICA\r\nComplexo Hospitalar Regional Dep. Janduhy Carneiro - Patos/PB\r\nDr. Silas Negrão Serra Jr. - CRM-PB 17341 - RQE Oncologia 9099 - RQE Clínica Médica 9098\r\nReceita médica\r\nHospital do Bem - Unidade Oncológica - Patos/PB | Documento médico para impressão\r\nPágina 1\r\n RECEITA MÉDICA - SINTOMÁTICOS\r\n Medicações de apoio durante quimioterapia - ajustar conforme prescrição individual\r\nNOME:\r\n___________________________________________\r\nNASC.:\r\n____/____/________\r\nCIDADE:\r\n______________________\r\nIDADE:\r\n______\r\nVIA ORAL\r\nMEDICAMENTO\r\nORIENTAÇÃO\r\nPANTOPRAZOL 20 mg\r\nTomar 1 comprimido em jejum, 30 minutos antes da primeira refeição, durante a quimioterapia, salvo\r\norientação contraria.\r\nONDANSETRONA 8 mg\r\nTomar 1 comprimido de 8/8h por 2 dias após a quimioterapia, mesmo sem náuseas; depois usar se\r\nnecessário.\r\nMETOCLOPRAMIDA 10 mg\r\nTomar 1 comprimido de 8/8h por 2 dias após a quimioterapia, mesmo sem náuseas; depois usar se\r\nnecessário.\r\nDIMENIDRINATO 50 mg\r\nTomar 1 comprimido de 8/8h por 2 dias após a quimioterapia, mesmo sem náuseas; depois usar se\r\nnecessário.\r\nDEXAMETASONA 4 mg\r\nTomar 1 comprimido na noite anterior e 1 comprimido no dia seguinte. Não tomar no dia da\r\nquimioterapia, salvo orientação médica.\r\nLOPERAMIDA 2 mg\r\nSe diarreia: tomar 2 comprimidos no início e 1 comprimido a cada 2 horas. Máximo 8 comprimidos/dia.\r\nSe não melhorar, procurar pronto-socorro.\r\nLACTULOSE xarope\r\nSe ficar 3 dias sem evacuar: 15 a 30 mL de 12/12h, salvo contraindicação.\r\nSIMETICONA 125 mg\r\nSe gases ou distensão abdominal: 1 comprimido de 8/8h após as refeições.\r\nVIA ENDOVENOSA / PRONTO ATENDIMENTO\r\nMEDICAMENTO\r\nORIENTAÇÃO\r\nCOMPLEXO B + HIDRATAÇÃO\r\n2 ampolas em 500-1000 mL de SF, em 3 horas. Repetir por 2 dias pós-quimioterapia, conforme\r\navaliação.\r\nONDANSETRONA EV 8 mg\r\nDiluir em 50-100 mL de SF, infundir em 15 minutos. Usar 8/8h a 12/12h se necessário.\r\nMETOCLOPRAMIDA EV 10 mg\r\nDiluir em 50-100 mL de SF, infundir em 20 minutos. Usar 6/6h a 8/8h se necessário.\r\nNORIPURUM EV, se anemia\r\n100-200 mg em 100-250 mL de SF, em 30 minutos. Monitorar durante a infusão.\r\nBUSCOPAN COMPOSTO EV\r\n1-2 ampolas em 100-250 mL de SF, em 30 minutos. Não fazer bolus.\r\nDEXAMETASONA EV\r\n4-10 mg EV lento (1 minuto) ou diluído em 50-100 mL de SF, em 15 minutos.\r\nOBSERVAÇÃO AO MÉDICO PLANTONISTA\r\nNão há contraindicação oncológica geral para medicações ou antibióticos clinicamente indicados. Avaliar alergias, interações, função\r\nrenal/hepática, comorbidades e condição clínica. Em febre durante quimioterapia, não retardar atendimento.\r\nData: ____/____/________\r\nCARIMBO E ASSINATURA\r\n\r\n",
   "itensReceita": [
     {
-      "orientacao": "Tomar 1 comprimido em jejum, 30 minutos antes da primeira refeicao, durante a quimioterapia, salvo orientacao contraria.",
+      "orientacao": "Tomar 1 comprimido em jejum, 30 minutos antes da primeira refeição, durante a quimioterapia, salvo orientação contraria.",
       "id": "pantoprazol",
       "medicamento": "PANTOPRAZOL",
       "via": "ORAL",
       "dose": "20 mg"
     },
     {
-      "orientacao": "Tomar 1 comprimido de 8/8h por 2 dias apos a quimioterapia, mesmo sem nauseas; depois usar se necessario.",
+      "orientacao": "Tomar 1 comprimido de 8/8h por 2 dias após a quimioterapia, mesmo sem náuseas; depois usar se necessário.",
       "id": "ondansetrona-vo",
       "medicamento": "ONDANSETRONA",
       "via": "ORAL",
       "dose": "8 mg"
     },
     {
-      "orientacao": "Tomar 1 comprimido de 8/8h por 2 dias apos a quimioterapia, mesmo sem nauseas; depois usar se necessario.",
+      "orientacao": "Tomar 1 comprimido de 8/8h por 2 dias após a quimioterapia, mesmo sem náuseas; depois usar se necessário.",
       "id": "metoclopramida-vo",
       "medicamento": "METOCLOPRAMIDA",
       "via": "ORAL",
       "dose": "10 mg"
     },
     {
-      "orientacao": "Tomar 1 comprimido de 8/8h por 2 dias apos a quimioterapia, mesmo sem nauseas; depois usar se necessario.",
+      "orientacao": "Tomar 1 comprimido de 8/8h por 2 dias após a quimioterapia, mesmo sem náuseas; depois usar se necessário.",
       "id": "dimenidrinato",
       "medicamento": "DIMENIDRINATO",
       "via": "ORAL",
       "dose": "50 mg"
     },
     {
-      "orientacao": "Tomar 1 comprimido na noite anterior e 1 comprimido no dia seguinte. Nao tomar no dia da quimioterapia, salvo orientacao medica.",
+      "orientacao": "Tomar 1 comprimido na noite anterior e 1 comprimido no dia seguinte. Não tomar no dia da quimioterapia, salvo orientação médica.",
       "id": "dexametasona-vo",
       "medicamento": "DEXAMETASONA",
       "via": "ORAL",
       "dose": "4 mg"
     },
     {
-      "orientacao": "Se diarreia: tomar 2 comprimidos no inicio e 1 comprimido a cada 2 horas. Maximo 8 comprimidos/dia. Se nao melhorar, procurar pronto-socorro.",
+      "orientacao": "Se diarreia: tomar 2 comprimidos no início e 1 comprimido a cada 2 horas. Máximo 8 comprimidos/dia. Se não melhorar, procurar pronto-socorro.",
       "id": "loperamida",
       "medicamento": "LOPERAMIDA",
       "via": "ORAL",
       "dose": "2 mg"
     },
     {
-      "orientacao": "Se ficar 3 dias sem evacuar: 15 a 30 mL de 12/12h, salvo contraindicacao.",
+      "orientacao": "Se ficar 3 dias sem evacuar: 15 a 30 mL de 12/12h, salvo contraindicação.",
       "id": "lactulose",
       "medicamento": "LACTULOSE",
       "via": "ORAL",
       "dose": "xarope"
     },
     {
-      "orientacao": "Se gases ou distensao abdominal: 1 comprimido de 8/8h apos as refeicoes.",
+      "orientacao": "Se gases ou distensão abdominal: 1 comprimido de 8/8h após as refeições.",
       "id": "simeticona",
       "medicamento": "SIMETICONA",
       "via": "ORAL",
       "dose": "125 mg"
     },
     {
-      "orientacao": "2 ampolas em 500-1000 mL de SF, em 3 horas. Repetir por 2 dias pos-quimioterapia, conforme avaliacao.",
+      "orientacao": "2 ampolas em 500-1000 mL de SF, em 3 horas. Repetir por 2 dias pós-quimioterapia, conforme avaliação.",
       "id": "complexo-b",
-      "medicamento": "COMPLEXO B + HIDRATACAO",
+      "medicamento": "COMPLEXO B + HIDRATAÇÃO",
       "via": "ENDOVENOSA / PRONTO ATENDIMENTO",
       "dose": "2 ampolas"
     },
     {
-      "orientacao": "Diluir em 50-100 mL de SF, infundir em 15 minutos. Usar 8/8h a 12/12h se necessario.",
+      "orientacao": "Diluir em 50-100 mL de SF, infundir em 15 minutos. Usar 8/8h a 12/12h se necessário.",
       "id": "ondansetrona-ev",
       "medicamento": "ONDANSETRONA EV",
       "via": "ENDOVENOSA / PRONTO ATENDIMENTO",
       "dose": "8 mg"
     },
     {
-      "orientacao": "Diluir em 50-100 mL de SF, infundir em 20 minutos. Usar 6/6h a 8/8h se necessario.",
+      "orientacao": "Diluir em 50-100 mL de SF, infundir em 20 minutos. Usar 6/6h a 8/8h se necessário.",
       "id": "metoclopramida-ev",
       "medicamento": "METOCLOPRAMIDA EV",
       "via": "ENDOVENOSA / PRONTO ATENDIMENTO",
       "dose": "10 mg"
     },
     {
-      "orientacao": "100-200 mg em 100-250 mL de SF, em 30 minutos. Monitorar durante a infusao.",
+      "orientacao": "100-200 mg em 100-250 mL de SF, em 30 minutos. Monitorar durante a infusão.",
       "id": "noripurum",
       "medicamento": "NORIPURUM EV, se anemia",
       "via": "ENDOVENOSA / PRONTO ATENDIMENTO",
       "dose": "100-200 mg"
     },
     {
-      "orientacao": "1-2 ampolas em 100-250 mL de SF, em 30 minutos. Nao fazer bolus.",
+      "orientacao": "1-2 ampolas em 100-250 mL de SF, em 30 minutos. Não fazer bolus.",
       "id": "buscopan",
       "medicamento": "BUSCOPAN COMPOSTO EV",
       "via": "ENDOVENOSA / PRONTO ATENDIMENTO",
       "dose": "1-2 ampolas"
     },
     {
-      "orientacao": "4-10 mg EV lento (1 minuto) ou diluido em 50-100 mL de SF, em 15 minutos.",
+      "orientacao": "4-10 mg EV lento (1 minuto) ou diluído em 50-100 mL de SF, em 15 minutos.",
       "id": "dexametasona-ev",
       "medicamento": "DEXAMETASONA EV",
       "via": "ENDOVENOSA / PRONTO ATENDIMENTO",

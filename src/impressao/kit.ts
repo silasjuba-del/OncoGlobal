@@ -43,10 +43,10 @@ function corpo(template: KitTemplate, i: EntradaKit): string {
   const top = `<h1>${esc(template.secoes[0]?.titulo ?? docId)}</h1>${identificacao(i, docId)}`;
   function textoConfiguravel(original: string): string {
     let text = original
-      .replace(/Hospital do Bem - Unidade Oncologica - Patos\/PB \| Documento medico para impressao/g, `${i.cabecalho.nomeInstituicao} | Documento medico para impressao`)
-      .replace(/Hospital do\s+Bem - Unidade Oncologica, Patos\/PB/g, `${i.cabecalho.nomeInstituicao}, ${i.cabecalho.cidadeUf}`)
-      .replace(/Dr\. Silas Negrao Serra Jr\. - CRM-PB 17341/g, `${i.medico.nome} - ${i.medico.crm}`)
-      .replace(/RQE Oncologia Clinica 9099 \| RQE Clinica Medica 9098/g, (i.medico.rqes ?? []).join(" | "));
+      .replace(/Hospital do Bem - Unidade Oncológica - Patos\/PB \| Documento médico para impressão/g, `${i.cabecalho.nomeInstituicao} | Documento médico para impressão`)
+      .replace(/Hospital do\s+Bem - Unidade Oncológica, Patos\/PB/g, `${i.cabecalho.nomeInstituicao}, ${i.cabecalho.cidadeUf}`)
+      .replace(/Dr\. Silas Negrão Serra Jr\. - CRM-PB 17341/g, `${i.medico.nome} - ${i.medico.crm}`)
+      .replace(/RQE Oncologia Clínica 9099 \| RQE Clínica Médica 9098/g, (i.medico.rqes ?? []).join(" | "));
     if (!i.modeloEmBranco) {
       const patientFields: readonly [RegExp, string, string | undefined][] = [
         [/NOME:\s*_+/g, "NOME", i.paciente.nome], [/NASC\.?:\s*[_/]+/g, "NASC.", i.paciente.nasc],
@@ -58,7 +58,7 @@ function corpo(template: KitTemplate, i: EntradaKit): string {
     }
     if (docId === "relatorio-pericial") {
       const prazo = i.prazoAfastamento || "PENDENTE";
-      text = text.replace(/Afastamento sugerido por 6 meses, passivel/g, `Afastamento sugerido por ${prazo}, passivel`)
+      text = text.replace(/Afastamento sugerido por 6 meses, passível/g, `Afastamento sugerido por ${prazo}, passível`)
         .replace(/afastamento das atividades laborais por 6 \(seis\) meses/g, `afastamento das atividades laborais por ${prazo}`)
         .replace(/a\s+contar de ____\/____\/________/g, `a contar de ${i.dataInicioAfastamento || "PENDENTE"}`);
     }
@@ -68,10 +68,10 @@ function corpo(template: KitTemplate, i: EntradaKit): string {
     const text = String(template.secoes[0]?.campos.find((c): c is CampoTemplate => typeof c !== "string")?.texto ?? "");
     const selected = (template.itensReceita ?? []).filter(x => i.itensSelecionados?.includes(x.id));
     const table = (via: "ORAL" | "ENDOVENOSA / PRONTO ATENDIMENTO") => selected.filter(x => x.via === via).map(x => `<tr><td>${esc(x.medicamento)}</td><td>${esc(x.dose)}</td><td>${esc(x.orientacao)}</td></tr>`).join("");
-    const noteStart = text.indexOf("Medicacoes de apoio");
+    const noteStart = text.indexOf("Medicações de apoio");
     const noteEnd = text.indexOf("VIA ORAL");
     const note = noteStart >= 0 && noteEnd > noteStart ? `<div class="texto-fixo">${esc(textoConfiguravel(text.slice(noteStart, noteEnd).trim()))}</div>` : "";
-    const observation = text.includes("OBSERVACAO AO MEDICO PLANTONISTA") ? text.slice(text.indexOf("OBSERVACAO AO MEDICO PLANTONISTA")) : "";
+    const observation = text.includes("OBSERVAÇÃO AO MÉDICO PLANTONISTA") ? text.slice(text.indexOf("OBSERVAÇÃO AO MÉDICO PLANTONISTA")) : "";
     const fixed = i.modeloEmBranco ? "" : `<div class="texto-fixo">${esc(textoConfiguravel(observation))}</div>`;
     return `${top}${note}<h2>VIA ORAL</h2><table class="grade"><thead><tr><th>MEDICAMENTO</th><th>DOSE</th><th>ORIENTAÇÃO</th></tr></thead><tbody>${table("ORAL")}</tbody></table><h2>VIA ENDOVENOSA / PRONTO ATENDIMENTO</h2><table class="grade"><thead><tr><th>MEDICAMENTO</th><th>DOSE</th><th>ORIENTAÇÃO</th></tr></thead><tbody>${table("ENDOVENOSA / PRONTO ATENDIMENTO")}</tbody></table>${fixed}`;
   }
