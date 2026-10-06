@@ -54,12 +54,14 @@ export function projetarSnapshot(
   encounterId: string, projectionVersion: string, propostas: readonly PropostaCurrent[] = [],
 ): CaseSnapshot {
   const alvo = eventos.filter((e) => e.patientId === patientId && e.encounterId === encounterId);
-  const cutoff = alvo.reduce((max, e) => e.criadoEm > max ? e.criadoEm : max, "");
+  // Instante aceita offsets: a ordem temporal não é a ordem lexical do ISO.
+  // A data civil permanece responsabilidade das funções com fuso injetado.
+  const cutoff = alvo.reduce((max, e) => Math.max(max, Date.parse(e.criadoEm)), -Infinity);
   // A substituição só tem autoridade dentro do horizonte da consulta projetada.
   // Uma correção de consulta futura não remove o evento da consulta histórica.
   const noHorizonte = eventos.filter((e) => e.patientId === patientId
     && (e.tumorLotId === tumorLotId || e.tumorLotId === null)
-    && (!cutoff || e.criadoEm <= cutoff));
+    && (!alvo.length || Date.parse(e.criadoEm) <= cutoff));
   const relevantes = eventosVigentes(noHorizonte);
   const campos: Record<string, ValorProjetado> = Object.create(null);
   const refs = new Map<string, RulesetRef>();
