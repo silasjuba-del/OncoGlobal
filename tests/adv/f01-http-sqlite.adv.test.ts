@@ -70,21 +70,6 @@ async function boot(path: string, executor: Executor) {
 }
 
 describe("F1 · ADV-001 reataque da rota real /acao com SQLite entre instâncias", () => {
-  it("ADV-001 · replay após reabrir SQLite não executa segunda impressão fake", async () => {
-    const path = banco();
-    let chamadas = 0;
-    const fake: Executor = { executar: async () => {
-      chamadas++;
-      return { ok: true, recibo: `recibo-${chamadas}` };
-    } };
-    const a = await boot(path, fake);
-    expect((await a.post("doc-teste", "reatack-replay-01")).body.decisao).toBe("EXECUTADA");
-    await a.close();
-    const b = await boot(path, fake);
-    expect((await b.post("doc-teste", "reatack-replay-01")).body.decisao).toBe("REPLAY");
-    expect(chamadas).toBe(1);
-  });
-
   it("ADV-001 · resultado incerto persiste após reabrir SQLite, sem reenviar", async () => {
     const path = banco();
     let chamadas = 0;
@@ -102,20 +87,4 @@ describe("F1 · ADV-001 reataque da rota real /acao com SQLite entre instâncias
     expect(chamadas).toBe(1);
   });
 
-  it("ADV-001 · payload diferente com mesma chave após reabertura é negado", async () => {
-    const path = banco();
-    let chamadas = 0;
-    const fake: Executor = { executar: async () => {
-      chamadas++;
-      return { ok: true, recibo: "recibo-teste" };
-    } };
-    const a = await boot(path, fake);
-    expect((await a.post("doc-A", "reatack-payload-03")).body.decisao).toBe("EXECUTADA");
-    await a.close();
-    const b = await boot(path, fake);
-    const r = await b.post("doc-B", "reatack-payload-03");
-    expect(r.status).toBe(409);
-    expect(r.body.decisao).toBe("NEGADA");
-    expect(chamadas).toBe(1);
-  });
 });

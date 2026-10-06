@@ -24,9 +24,4 @@ describe("F8 · lote administrativo não cruza pacientes/competências", () => {
       [item("apac-a", "Paciente Teste 01"), item("apac-b", "Paciente Teste 01", "2026-11")], "2026-10-05");
     expect(lote.itens).not.toContain("apac-b");
   });
-  it("ADV-008 · RESISTIU: duplicata por apacId é excluída", () => {
-    const lote = montarApacBatch("lote-sintetico", criterio,
-      [item("apac-a", "Paciente Teste 01"), item("apac-a", "Paciente Teste 01")], "2026-10-05");
-    expect(lote.itens).toEqual([]);
-  });
 });

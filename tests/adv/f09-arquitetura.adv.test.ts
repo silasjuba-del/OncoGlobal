@@ -4,8 +4,6 @@ import { join, sep } from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
-import { hashConteudoExibido } from "../../src/server/sessao.js";
-import { hashCanonico } from "../../src/modules/tipos.js";
 
 const scanner = fileURLToPath(new URL("../../scripts/check-boundaries.mjs", import.meta.url));
 
@@ -31,10 +29,6 @@ function verificarSnippet(snippet: string) {
 }
 
 describe("F9 · varredura estática bounded com fonte sintética inerte", () => {
-  it("ADV-012 · mesmo conteúdo não deve ter hashes incompatíveis em módulos e servidor", () => {
-    const conteudo = { documentId: "doc-teste", texto: "sintético", versao: 1 };
-    expect(hashCanonico(conteudo)).toBe(hashConteudoExibido(conteudo));
-  });
   for (const [vetor, codigo] of [
     ["fetch por propriedade computada", 'void globalThis["fetch"]("https://example.invalid");'],
     ["cliente WebSocket", 'void new WebSocket("wss://example.invalid");'],

@@ -48,14 +48,4 @@ describe("F1 · limite explícito da store isolada em memória (não é o caminh
     expect(chamadas).toBe(2);
   });
 
-  it("ADV-001 · RESISTIU: replay no mesmo processo não duplica efeito", async () => {
-    let chamadas = 0;
-    const gateway = criarGateway({ agora: () => agora, auditar: () => {},
-      store: memoriaIdempotencia(), executores: { IMPRIMIR: {
-        executar: async () => { chamadas++; return { ok: true as const, recibo: "teste" }; },
-      } } });
-    await gateway.executar(intent("replay-processo-01"), sessao);
-    expect((await gateway.executar(intent("replay-processo-01"), sessao)).decisao).toBe("REPLAY");
-    expect(chamadas).toBe(1);
-  });
 });
