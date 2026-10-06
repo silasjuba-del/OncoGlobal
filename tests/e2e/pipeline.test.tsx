@@ -141,8 +141,15 @@ it("F4 sintetico: caixa -> ORK fake -> draft -> revisao -> ledger -> delta -> bu
       bundles: [{ bundleId: "FIM_PRIMEIRA_CONSULTA",
         itens: [{ documento: "evolucao", preMarcado: true }] }] }, "FIM_PRIMEIRA_CONSULTA");
     expect(bundle).toMatchObject({ estado: "VERDE" });
-    const doc = renderizarDocumento({ template: { templateId: "evolucao", versao: "1",
-      campos: ["achado_teste"] }, fatos: snapshotParaPack(confirmado).fatos });
+    // Variavel evita excess-property check da branch E2E antiga; no integrado
+    // a mesma politica e obrigatoria e verificada pelo tipo TemplateDocumento.
+    const templateEvolucao = { templateId: "evolucao", versao: "1",
+      campos: ["achado_teste"], proibidoConter: ["ALERTA", "CORRECAO_IA"] };
+    const doc = renderizarDocumento({ template: templateEvolucao,
+    // Adaptador sintetico: apenas fatos ja confirmados pela rota; nunca proposta CURRENT.
+    fatos: snapshotParaPack(confirmado).fatos.map((fato) => ({
+      ...fato, origem: "FATO_CONFIRMADO" as const,
+    })) });
     expect(doc).toMatchObject({ camposVazios: [], conflitos: [],
       campos: { achado_teste: extraido.valor } });
     const docPayload = { documentId: "doc-teste", documentVersion: 1,
