@@ -1,0 +1,30 @@
+RECEITUÁRIO / CARTA DE REFERÊNCIA — SERVIÇO SINTÉTICO DE UROLOGIA (fictício)
+Dr. Exemplo Dois — CRM-TS 000001 (médico fictício) · Cidade Teste/TS
+=====================================================================
+DOCUMENTO SINTÉTICO — PACIENTE TESTE 07 — nenhum dado real.
+=====================================================================
+Data da consulta (emissão do documento): 2026-08-02
+
+Prezado colega,
+
+Encaminho o PACIENTE TESTE 07, 68 anos, com diagnóstico recente de ADENOCARCINOMA DE
+PRÓSTATA, DOENÇA LOCALMENTE AVANÇADA (impressão clínica minha, sem estadiamento fechado).
+
+Resumo do que já investigamos (citação de exames — fonte SECUNDÁRIA, não são os laudos):
+- PSA: 8,4 ng/mL (valor citado; NÃO existe laudo laboratorial no kit).
+- Ressonância multiparamétrica de próstata: realizada, descreve lesão e extensão (laudo à parte).
+- Biópsia prostática: realizada, adenocarcinoma (laudo à parte).
+- Imuno-histoquímica: realizada (laudo à parte).
+- Cintilografia óssea: realizada, sem lesão secundária (laudo à parte).
+
+Achados de imagem descritos como "PIRADS" — SEM o número da categoria neste documento.
+
+Plano multimodal proposto: combinação de hormonioterapia + radioterapia (a definir com
+a equipe de oncologia).
+
+Atenciosamente,
+Dr. Exemplo Dois — CRM-TS 000001 (assinatura fictícia)
+=====================================================================
+Armadilhas reproduzidas: E1 (fonte secundária citando exames primários), E2 (PSA só existe
+aqui — "mencionado sem laudo"), E3 ("PIRADS" sem número ⇒ PENDENTE), S1 (estadiamento
+verbal "localmente avançada" ≠ TNM — TNM é do médico).

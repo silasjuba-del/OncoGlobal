@@ -1,0 +1,21 @@
+LAUDO ANATOMOPATOLÓGICO — RESSECÇÃO TRANSURETRAL (RTU) DE PRÓSTATA
+LABORATÓRIO EXEMPLO (instituição fictícia) · Protocolo: LAB-9003 (sintético)
+=====================================================================
+DOCUMENTO SINTÉTICO — PACIENTE TESTE 07 — nenhum dado real.
+=====================================================================
+Data de entrada do material (data clínica): 2026-08-05
+Data de emissão do laudo: 2026-08-08
+Identificação no cabeçalho (rótulo impresso "Cartão SUS"): 123.456.789-01 (I1)
+
+Material: ressecado transuretral de próstata (RTU).
+Achados: adenocarcinoma acinar prostático, GLEASON 3+4=7 (grupo de grau 2), com padrão
+cribriforme focal; margens de ressecção envolvidas. Componente de hiperplasia nodular
+associado.
+
+Conclusão: adenocarcinoma prostático acinar, grupo de grau 2 — concordante com a
+imuno-histoquímica (LAB-9004), mas são EXAMES DISTINTOS (materiais e datas diferentes):
+NÃO deduplicar; registrar concordância (D3).
+Dr. Patologista Exemplo — CRM-TS 000002 (assinatura fictícia)
+=====================================================================
+Armadilhas reproduzidas: I1, T1, D3 (mesmo diagnóstico da IHQ = dois exames distintos com
+conclusão concordante — nunca deduplicar).

@@ -1,0 +1,23 @@
+IMUNO-HISTOQUÍMICA — PROSTATA (IMPRESSÃO ORIGINAL DO LABORATÓRIO)
+LABORATÓRIO EXEMPLO (instituição fictícia) · Protocolo: LAB-9004 (sintético)
+=====================================================================
+DOCUMENTO SINTÉTICO — PACIENTE TESTE 07 — nenhum dado real.
+=====================================================================
+Data de entrada do material (data clínica): 2026-08-06
+Data de emissão do laudo: 2026-08-09
+Identificação no cabeçalho (rótulo impresso "Cartão SUS"): 123.456.789-01 (I1)
+
+Anticorpo | Clone (fictício) | Interpretação (literal, sem interpretar — P3)
+PSA       | EX-1             | Positivo
+PSAP      | EX-2             | Positivo
+AMACR     | EX-3             | Negativo
+p63/HMWCK | EX-4             | Negativo
+
+Conclusão: perfil imuno-histoquímico compatível com ORIGEM PROSTÁTICA da neoplasia
+(esta frase de conclusão é do patologista; a tabela acima é extraída linha a linha,
+"Positivo/Negativo" literal — P3).
+Dr. Patologista Exemplo — CRM-TS 000002 (assinatura fictícia)
+=====================================================================
+Armadilhas reproduzidas: I1, P3 (tabela anticorpo×clone×interpretação), D2 (o mesmo laudo
+tem uma reimpressão do sistema público com OUTRA data no topo — ver 11-ihq-sisreg; a chave
+de deduplicação é laboratório + número do exame + data de entrada, NUNCA a data impressa).

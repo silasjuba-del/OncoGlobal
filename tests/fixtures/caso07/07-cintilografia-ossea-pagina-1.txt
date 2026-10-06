@@ -1,0 +1,21 @@
+CINTILOGRAFIA ÓSSEA CORPO INTEIRO — PÁGINA 1 DE 2 (cópia idêntica na página 2)
+MEDICINA NUCLEAR EXEMPLO (instituição fictícia) · Exame: MED-5001 (sintético)
+=====================================================================
+DOCUMENTO SINTÉTICO — PACIENTE TESTE 07 — nenhum dado real.
+=====================================================================
+Data de realização do exame (data clínica): 2026-07-22
+Data de emissão do laudo: 2026-07-23
+Identificação no cabeçalho (rótulo impresso "Cartão SUS"): 123.456.789-01 (I1)
+
+Distribuição fisiológica do radiofármaco preservada.
+
+Ossos: hiperfixação articular em ombros e joelhos, PADRÃO COMPATÍVEL COM ALTERAÇÕES
+DEGENERATIVAS articulares. AUSÊNCIA de focos de hipercaptação óssea sugestivos de
+lesão metastática. AUSÊNCIA de linfonodomegalia na tomografia de baixa dose.
+
+Impressão: estudo NEGATIVO para doença óssea secundária. Captação articular degenerativa
+NÃO é lesão óssea oncológica (S2).
+Dr. Med Nuclear Exemplo — CRM-TS 000004 (assinatura fictícia)
+=====================================================================
+Armadilhas reproduzidas: I1, D1 (esta página é IDÊNTICA à página 2 — mesma cintilografia;
+deduplicar para UM exame), S2 (hiperfixação/captação articular isolada ≠ metástase).

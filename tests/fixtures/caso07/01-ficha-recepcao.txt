@@ -1,0 +1,27 @@
+FICHA DE RECEPÇÃO — HOSPITAL SINTÉTICO DOS TESTES (instituição fictícia)
+Unidade Oncológica Exemplo · Cidade Teste/TS
+=====================================================================
+DOCUMENTO SINTÉTICO — PACIENTE TESTE 07 — nenhum nome, número ou instituição real.
+=====================================================================
+Data de impressão da ficha: 2026-08-20 09:14 (data administrativa, não clínica)
+
+Nome: PACIENTE TESTE 07
+Data de nascimento: 12/03/1958
+Idade (impressa nesta ficha): 68 anos
+Sexo cadastral: M
+
+Documento (rótulo impresso "CI"): 123.456.789-01
+  -> 11 dígitos, DV propositalmente inválido (sintético). Rótulo não prova o tipo.
+
+Procedimento agendado (SIGTAP): 0000000000 (número sintético fictício)
+Solicitante: Dr. Exemplo Um — CRM-TS 000000 (médico fictício)
+
+Endereço declarado: Rua dos Exemplos, 123 — Bairro Teste — Cidade Teste/TS
+
+Assinatura no rodapé: Acompanhante Teste 07 (acompanhante, NÃO o paciente).
+
+Observação de recepção: paciente encaminhado pela urologia para avaliação oncológica.
+=====================================================================
+Armadilhas reproduzidas: I1/I2 (rótulo "CI" sobre valor de 11 dígitos), I4 (assinatura de
+acompanhante), I5 (solicitante ≠ médico assistente ≠ usuário do app), T1/T2 (datas e idade
+administrativas, não clínicas).
