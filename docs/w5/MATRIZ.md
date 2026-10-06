@@ -223,4 +223,8 @@ RED-R2 mutou, **um por vez**, o corpo de cada função abaixo para sempre retorn
 | G-25 | idem | 1 | Teste HTTP `tests/server/server.test.ts -t G-25` **permaneceu 1 PASS** com gate mutado |
 | G-26 | idem | 1 | Consumer real não demonstrado |
 
-**Veredito restrito:** 9/9 mutações foram detectadas **pelo unitário**, portanto não há gate removível sem que *algum* teste quebre no escopo ensaiado; não há S1 F5 pelo critério literal. Isso não valida ligação aos consumidores, nem que o teste HTTP de G-25 detecte a mutação. Os G-01/G-04/G-06… faltantes como função implementada não entram nessa contagem; a matriz normativa inteira continua pendente.
+**Veredito restrito:** 9/9 mutações foram detectadas **pelo unitário**, portanto não há gate removível sem que *algum* teste quebre no escopo ensaiado; não há S1 F5 pelo critério literal. Isso não valida ligação aos consumidores, nem que o teste HTTP de G-25 detecte a mutação. Os G-01/G-04/G-06… faltantes como função implementada não entram nessa contagem; a cobertura normativa global continua parcial; a leitura dos 195 IDs está concluída na tabela acima.
+
+## F5 · Complemento final R3
+
+Fonte achados/_F05-IMPLICITOS-FINAL.md: G01/G17/G19/G20/G11/G12/G18, baseline 6 arquivos/45 PASS, sete bypasses detectados por assertions sem editar testes probatórios. SHA/bytes restaurados e idênticos ao integrado; detached limpa removida. Com os nove controles R2, total 16 controles ensaiados. G04 CI e G06/G15/G28 permanecem sem bypass específico; não prova todos os 28 gates nem consumers de produção.

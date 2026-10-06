@@ -2,10 +2,10 @@
 
 > Se a sessão cair: leia este arquivo, depois `docs/w5/ACHADOS.md`, `docs/w5/CLAIMS.md` e `docs/w5/AMB.md`. Continue do primeiro passo não FEITO da tabela "Fases". Nunca refaça o que está FEITO.
 
-- **Fase atual:** P1 leitura semântica concluída; P5/P6 em fechamento. ADV-017/018/019 integrados e verdes; ADV-020 fuso em correção REGRAS; complemento F5 em isolamento pelo RED. W5 ainda sem declaração de pronto.
-- **Rodada:** 3 de 3; quatro causas adicionais ADV-017…020, sem reabrir decisões.
-- **Agente ativo no Vitest:** nenhum (lock livre; ultimo: ORQ as 23:47:50, exit 0)
-- **Base:** `f0/w5-integrado` @ `a99d8b4` (worktree `C:\Users\silas\Projects\OncoGlobal-wt\w5-orq`); WIP KERNEL `tests/server/adv006-saida.evidence.ts` preservado fora da suíte regular; sem push/deploy.
+- **Fase atual:** P6 fechado COM BLOQUEIOS; execução da retomada produzida, ENTREGA_W5_CONCLUIDA=NÃO. Sem S0/S1 ABERTO fora dos bloqueios/AMB; matriz e F5 global ainda parciais. Próximo trabalho depende das decisões/escopo escritos em CONTRATO-PROPOSTAS.md.
+- **Rodada:** 3 de 3 encerrada; ADV-017/018/019/020 S1 corrigidos, sem quarta rodada.
+- **Agente ativo no Vitest:** nenhum (lock livre; ultimo: ORQ as 23:51:19, exit 1)
+- **Base técnica validada:** f0/w5-integrado @ a877dcfe2e62acb5f09d637ef70dcfedbf3b0957 (w5-orq); commit posterior de fechamento altera somente docs. WIP KERNEL adv006-saida.evidence.ts preservado (SHA FE777AB3); sem push/deploy.
 - **Fuso do serviço:** −03:00 (D-W5-01) · aviso APAC adiantado ≤ 1 dia aceitável, atrasado não (D-W5-02)
 
 ## Fases
@@ -13,26 +13,26 @@
 |---|---|---|
 | P0 linha de base | FEITO 19:08 | `npm run verify` exit 0 · 53 arquivos / 345 testes · fronteiras ok (79) · corpus ok (20) · log `_w5-locks\logs\20261005-190530-ORQ.log` |
 | P0 worktrees + `npm ci` (um por vez) | FEITO 19:12 | 5 worktrees de `6b96702`; `npm ci` serial, 12–13 s cada, exit 0 |
-| P1 matriz de rastreabilidade | FEITO leitura / PARCIAL cobertura | `docs/w5/MATRIZ.md`: 195 IDs; 65 COBERTO/111 PARCIAL/13 SEM_TESTE/6 FORA_DO_F0; zero A_AUDITAR textual residual; mapas de cinco trilhas |
-| P2 ataque (rodadas 1/2) | PARCIAL | RED-R1 31 testes 22 FAIL/9 PASS; RED-R2 F5 9/9 mutações detectadas no unitário, F9/F11/F7/F8 novos ataques e F6 6 PASS; integrado rodada 2 50 testes 31 FAIL/19 PASS antes das últimas correções |
-| P3 triagem (rodadas 1/2) | FEITO para 16 causas atuais | `docs/w5/ACHADOS.md`: 0 ABERTO, 10 CORRIGIDO, 2 BLOQUEADO, 2 AMB, 2 RESISTIU; CP-001/002 e AMB-001/002 |
-| P4 correção (rodadas 1/2) | FEITO para achados autorizados | 10 achados corrigidos/reatacados, inclusive ADV-011/012; ADV-006/013 bloqueados por contrato/escopo |
-| P5 integração + reataque | VERDE regular / FAIL adversarial documentado | `700f3ee`: verify 77 arquivos/435 testes PASS, log `_w5-locks/logs/20261005-230022-ORQ.log`; reataque 53 testes, 10 FAIL/43 PASS, log `_w5-locks/logs/20261005-230124-ORQ.log`. W3 reexecutado na retomada: 9/9 PASS, log `_w5-locks/logs/20261005-230909-ORQ.log` |
-| P6 relatório | RASCUNHO | `docs/w5/RELATORIO-W5.md` deve ser atualizado após desbloqueio, último verify e regressão W3 |
+| P1 matriz de rastreabilidade | FEITO leitura / PARCIAL cobertura | 195 IDs: 67 COBERTO / 109 PARCIAL / 13 SEM_TESTE / 6 FORA_DO_F0; zero A_AUDITAR textual; cinco mapas semânticos |
+| P2 ataque (rodadas 1/2/3) | FEITO três rodadas / PARCIAL alcance | Quatro causas S1 novas R3 com RED→GREEN; 16 mutações detectadas, sem provar todos os 28 gates; famílias e limites no RELATORIO-W5.md |
+| P3 triagem (rodadas 1/2/3) | FEITO 20 causas | 0 ABERTO / 14 CORRIGIDO / 2 BLOQUEADO / 2 AMB / 2 RESISTIU promovidos |
+| P4 correção (rodadas 1/2/3) | FEITO autorizado / bloqueios escritos | 14 corrigidos integrados; ADV006 CP001 e ADV013 CP002 não corrigidos; ADV007/008 AMB001/002 mantidos |
+| P5 integração + reataque | FEITO regular / bloqueios adversariais | Verify84/476 PASS 20261005-234852-ORQ.log; W3 9/9 PASS 20261005-235105-ORQ.log; 3 arquivos/10 negativos bloqueados exit1 20261005-235112-ORQ.log; somente bloqueios/AMB na suíte RED |
+| P6 relatório | FEITO COM BLOQUEIOS | RELATORIO-W5.md com saídas completas verify/W3, matriz semântica, fases/famílias, commits, limitações e decisões necessárias; não é declaração de pronto |
 
 ## Agentes (§3)
 | Agente | Worktree | Branch | Estado | Tarefa atual |
 |---|---|---|---|---|
-| RED | `w5-red` | `f0/w5-red` | R2 @`48920a9` + patch `585c113` integrados | F5 9/9 mutações unitárias; reataque R2 restrito |
-| KERNEL | `w5-kernel` | `f0/w5-kernel` | ADV-001/002/003/004/005/011/012 integrados | leitura K/N; ADV-006 bloqueado por CP-001 |
-| REGRAS | `w5-regras` | `f0/w5-regras` | ADV-010 integrado | delta reatacado 4/4; sem WIP |
-| DOMINIO | `w5-dominio` | `f0/w5-dominio` | ADV-012/014/015 integrados/reatacados | leitura módulos/corpus; ADV-007/008 AMB |
-| E2E-UI | `w5-e2e` | `f0/w5-e2e` | INFRA-01 + fixture E2E corrigida | sem WIP conhecido |
+| RED | w5-red | f0/w5-red | 49b7b19 integrado / FEITO | /root/red; 16 mutações, limpeza e 10 negativos preservados |
+| KERNEL | w5-kernel | f0/w5-kernel | 30d4240 integrado / FEITO | /root/kernel; ADV018/019 e promoção; WIP006 preservado |
+| REGRAS | w5-regras | f0/w5-regras | d357b96 integrado / FEITO | /root/regras; ADV020 offset explícito + mapa |
+| DOMINIO | w5-dominio | f0/w5-dominio | 909d02c integrado / FEITO | /root/dominio; ADV017 fonte única delta + mapa |
+| E2E-UI | w5-e2e | f0/w5-e2e | e5977aa integrado / FEITO | /root/e2e_ui; fase documento via HTTP real, demais junções declaradas |
 
 ## Achados por estado
 | ABERTO | CORRIGIDO | RESISTIU | BLOQUEADO_CONTRATO | AMB |
 |---|---|---|---|---|
-| 0 | 10 | 2 | 2 | 2 |
+| 0 | 14 | 2 | 2 | 2 |
 
 ## Mecânica de coordenação (decisão do orquestrador, registrada)
 - **Vitest um por vez (§6.4):** todo `npm run verify`, `npx tsc` ou `npx vitest` passa por `docs/w5/ferramentas/vitest-lock.ps1` (lock atômico fora do repo, em `C:\Users\silas\Projects\OncoGlobal-wt\_w5-locks\vitest.lock`; logs em `_w5-locks\logs`). O script escreve o nome do agente na linha "Agente ativo no Vitest" acima e a limpa ao terminar.
@@ -81,3 +81,6 @@ corpus ok (20 arquivos)
    Duration  167.42s (environment 53%, import 36%, tests 7%, transform 4%, worker 1%)
 EXIT_CODE=0
 ```
+
+
+Reserva histórica preservada: KERNEL em tests/server/adv006-saida.evidence.ts (ADV006/CP001, WIP não commitado, SHA FE777AB3). Não há agente editando; a reserva não foi apagada para simular ausência de pendências.
