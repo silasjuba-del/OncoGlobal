@@ -12,7 +12,7 @@ import { listarEventos } from "../../src/kernel/ledger/ledger.js";
 import { montarSnapshot, type CaseSnapshot } from "../../src/kernel/projections/snapshot.js";
 import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gateway.js";
 import { criarServidorLocal } from "../../src/server/http.js";
-import { criarGerenciadorSessao, hashConteudoExibido } from "../../src/server/sessao.js";
+import { criarGerenciadorSessao } from "../../src/server/sessao.js";
 import { montarPreConsulta, type SnapshotConfirmado } from "../../src/modules/consulta/preConsulta.js";
 import { montarBundle } from "../../src/modules/consulta/bundles.js";
 import { renderizarDocumento } from "../../src/modules/documentos/render.js";
@@ -81,6 +81,8 @@ it("F4 sintetico: caixa -> ORK fake -> draft -> revisao -> ledger -> delta -> bu
     salvarDraft(db, { draftId: "historico-teste", patientId, sourceId: "fonte-manual-teste",
       rawRef: "opaco-historico", payload: { campo: "historico", valor: "baseline sintetico" },
       diagnostics: [], revision: 0, criadoEm: em });
+    // JUNCAO SEM DOCUMENTO: prepara contexto da revisao de fatos diretamente.
+    // Nao exercita /consulta/bundle; a fase documental abaixo usa a rota HTTP.
     sessoes.registrarBundleExibido(token, { patientId, encounterId: "consulta-teste-01" }, []);
     const anterior = await post(port, "/consulta/confirmar", {
       patientId, tumorLotId, encounterId: "consulta-teste-01", bloco: "EVOLUCAO",
@@ -116,6 +118,7 @@ it("F4 sintetico: caixa -> ORK fake -> draft -> revisao -> ledger -> delta -> bu
     // o valor pode sair do envelope inerte e aparecer no ledger/projecao.
     salvarDraft(db, { draftId: "fato-teste", patientId, sourceId: envelope.sourceId,
       rawRef: envelope.rawRef, payload: extraido, diagnostics: [], revision: 0, criadoEm: em });
+    // JUNCAO SEM DOCUMENTO: contexto vazio para confirmar somente o fato sintetico.
     sessoes.registrarBundleExibido(token, { patientId, encounterId }, []);
     const revisao = await post(port, "/consulta/confirmar", {
       patientId, tumorLotId, encounterId, bloco: "EVOLUCAO",
@@ -156,9 +159,18 @@ it("F4 sintetico: caixa -> ORK fake -> draft -> revisao -> ledger -> delta -> bu
       documentHash: doc.hash, texto: doc.campos.achado_teste };
     salvarDraft(db, { draftId: "doc-draft-teste", patientId, sourceId: "render-teste",
       rawRef: "opaco-render", payload: docPayload, diagnostics: [], revision: 0, criadoEm: em });
-    sessoes.registrarBundleExibido(token, { patientId, encounterId },
-      [{ documentId: docPayload.documentId, documentVersion: 1,
-        conteudoHash: hashConteudoExibido(docPayload) }]);
+    const exibicao = await post(port, "/consulta/bundle", {
+      patientId, encounterId, draftIds: ["doc-draft-teste"],
+    }, token);
+    expect(exibicao.status).toBe(200);
+    const documentosServidor = exibicao.json.documentos as {
+      draftId: string; documentId: string; documentVersion: number;
+      conteudo: unknown; conteudoHash: string;
+    }[];
+    expect(documentosServidor).toHaveLength(1);
+    expect(documentosServidor[0]).toMatchObject({ draftId: "doc-draft-teste",
+      documentId: "doc-teste", documentVersion: 1, conteudo: docPayload });
+    expect(documentosServidor[0]!.conteudoHash).toMatch(/^[a-f0-9]{64}$/);
 
     // JUNCAO DE TESTE: App ainda nao faz fetch nem monta a tela. O componente envia
     // callbacks injetados para as rotas reais; impressora e substituida por fake.
@@ -166,12 +178,14 @@ it("F4 sintetico: caixa -> ORK fake -> draft -> revisao -> ledger -> delta -> bu
     let impressao: ReturnType<typeof post> | undefined;
     render(<BarraFechamento patientId={patientId} tumorLotId={tumorLotId}
       encounterId={encounterId} blocoAtual="EVOLUCAO"
-      registros={[{ id: "doc-draft-teste", expectedRevision: 0 }]}
-      documentos={[{ documentId: "doc-teste", documentVersion: 1, titulo: "evolucao",
-        preMarcado: bundle.itens[0]!.preMarcado, visivel: true }]}
+      registros={documentosServidor.map((d) => ({ id: d.draftId, expectedRevision: 0 }))}
+      documentos={documentosServidor.map((d) => ({ documentId: d.documentId,
+        documentVersion: d.documentVersion, titulo: "evolucao",
+        preMarcado: bundle.itens[0]!.preMarcado, visivel: true }))}
       alertasVermelhosExibidos={[]} idempotencyKey="confirmar-documento-teste"
       autorExibido="Medico Teste CRM-TESTE"
-      alvoImpressao={{ tipo: "DOCUMENTO", id: "doc-teste", versao: 1 }}
+      alvoImpressao={{ tipo: "DOCUMENTO", id: documentosServidor[0]!.documentId,
+        versao: documentosServidor[0]!.documentVersion }}
       chaveImpressao="imprimir-documento-teste"
       onValidar={(payload) => { validacao = post(port, "/consulta/confirmar", payload, token); }}
       onImprimir={(intent) => { impressao = post(port, "/acao", intent, token); }} />);
