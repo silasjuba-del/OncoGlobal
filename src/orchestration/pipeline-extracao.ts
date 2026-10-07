@@ -4,12 +4,14 @@ import type {
 } from "../kernel/extracao/tipos.js";
 import { segmentarTranscricao } from "../kernel/extracao/segmenter.js";
 import { rankearPacientes, type IdentityHints, type RegistryPatient } from "../kernel/extracao/patient-resolver.js";
+import { extratorDeterministico } from "../kernel/extracao/extrator.js";
 
 // PROVISORIO-W10: alinhar com src/contracts/w10/... após publicação pelo tech lead.
 export interface ExtractionInput {
   readonly recordingId: string;
   readonly sourceId: string;
   readonly sourceType: FactSourceType;
+  readonly page?: number;
   /** Texto já convertido localmente; nenhum documento ou áudio sai deste módulo. */
   readonly rawTranscript: string;
   /** Cadastro e pistas vêm do chamador local; texto livre sozinho não prova identidade. */
@@ -40,6 +42,7 @@ export function segmentar(state: ExtractionState): ExtractionState {
       recordingId: input.recordingId,
       sourceId: input.sourceId,
       sourceType: input.sourceType,
+      ...(input.page === undefined ? {} : { page: input.page }),
       turns: input.rawTranscript.split(/\r?\n/).map((text) =>
         ({ text, startMs: null, endMs: null })),
     }),
@@ -64,7 +67,8 @@ export function identificarPaciente(state: ExtractionState): ExtractionState {
 
 /** 3 — porta do extrator será introduzida em FUGU-05; vazio não gera fato. */
 export function extrairFatos(state: ExtractionState): ExtractionState {
-  return { ...state, facts: [] };
+  return { ...state, facts: state.segments.flatMap((segment) =>
+    extratorDeterministico.extrair(segment)) };
 }
 
 /** 4 — sem valores extraídos, não há normalização a adivinhar. */

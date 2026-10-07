@@ -17,6 +17,7 @@ export interface EncounterSegment {
   readonly recordingId: string;
   readonly sourceId: string;
   readonly sourceType: FactSourceType;
+  readonly page?: number;
   readonly startMs: number | null;
   readonly endMs: number | null;
   readonly speakers: readonly string[];

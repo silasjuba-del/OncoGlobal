@@ -11,6 +11,7 @@ export interface SegmentationInput {
   readonly recordingId: string;
   readonly sourceId: string;
   readonly sourceType: FactSourceType;
+  readonly page?: number;
   readonly turns: readonly TranscriptTurn[];
 }
 
@@ -60,6 +61,7 @@ export function segmentarTranscricao(input: SegmentationInput): readonly Encount
       recordingId: input.recordingId,
       sourceId: input.sourceId,
       sourceType: input.sourceType,
+      ...(input.page === undefined ? {} : { page: input.page }),
       startMs: group[0]?.startMs ?? null,
       endMs: group.at(-1)?.endMs ?? null,
       speakers: [...new Set(group.map((turn) => turn.speaker).filter((s): s is string => Boolean(s)))],
