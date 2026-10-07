@@ -36,7 +36,9 @@ for (const file of files) {
     for (const imp of imports) {
       const proibido = r.forbid.some((p) => imp.startsWith(p)) && !r.allow.some((a) => imp.startsWith(a));
       const mesmoAgente = r.sameDirOk && imp.split("/").slice(0, 3).join("/") === rel.split("/").slice(0, 3).join("/");
-      if (proibido && !mesmoAgente && !(r.from === "src/contracts/" && imp.startsWith("src/contracts/")))
+      // R-08 (tech lead W10): só o barrel src/rules/index.ts pode reexportar arquivos de src/rules/.
+      const barrelRegras = rel === "src/rules/index.ts" && imp.startsWith("src/rules/");
+      if (proibido && !mesmoAgente && !barrelRegras && !(r.from === "src/contracts/" && imp.startsWith("src/contracts/")))
         erros.push(`${rel} → ${imp} (${r.why})`);
     }
   }
