@@ -31,3 +31,10 @@ Faixa: `docs/ondas/W10-GROK.md`. Contrato que falta fica com tipo local `// PROV
 2. **Fim de semana e feriado** do HTML de referência não movem a data. A geração soma o intervalo do protocolo. Mover seria reorganizar.
 3. **08:00–18:00** está no ruleset como rótulo editável da grade (PADROES-UI §3.2). D-W9-39 não cria corte separado para sessão que passa de 18:00.
 4. **Respostas do tech lead** em `docs/w10/RESPOSTAS-TECH-LEAD.md` (trocar `SinaisExtraW10` e `ProtocoloCiclo`, reexportar o barrel, subir `salao-triagem` para 1.1.0, ativar CREAT, alinhar FN-01 à FC &lt; 50) ficam para a fatia que mexer nesses arquivos. Esta fatia não altera a FN-01.
+
+## GROK-05
+
+1. **Laudo.** `AlertaEmergencia` está em `src/rules/radsEmergencias.ts` (`// PROVISORIO-W10`). O merge não publicou contrato RADS.
+2. **`corpus/rulesets/rad-emergencia.v1.json`** continua o esqueleto da FN-20 (sinônimos vazios, `ativo: false`). Fora do glob `rads-*`. Não foi editado. O detector novo lê `rads-emergencias.v1.json`. `avaliarRadAlerts` não mudou.
+3. **Linha 27** dispara com lesão lítica ou blástica sozinha, porque o PT08 não traz afilamento cortical nem SINS/Mirels. **Linha 7** exige hidronefrose e um elo seguinte (afilamento); a massa pélvica não é obrigatória.
+4. **Lateralidade divergente** entre achado e conclusão (RT-05) não é comparada aqui. O nível e o lado saem da frase dos elos que fecharam a cadeia.

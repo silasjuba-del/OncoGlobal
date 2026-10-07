@@ -8,7 +8,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w10-grok`, branch `f0/w10-grok`.
 | GROK-02 limiar de bula × CTCAE | FEITA | W10-GROK-02 | Porta lê mínimo de bula. Grau CTCAE só candidata. |
 | GROK-03 alerta FEVE | FEITA | W10-GROK-03 | FEVE &lt; 50% com antraciclina ou anti-HER2 programado alerta. |
 | GROK-04 agenda de QT | FEITA | W10-GROK-04 | Conflito alerta. Otimizar dia não reordena. |
-| GROK-05 RADS 30 emergências | — | | |
+| GROK-05 RADS 30 emergências | FEITA | W10-GROK-05 | PT08 abdome alerta linhas 7 e 27. Crânio não alerta. |
 | GROK-06 INTERVAL_PROGRESSION | — | | |
 | GROK-07 nódulo &lt; 1 cm e Mx | — | | |
 | GROK-08 FN-16 semáforo | — | | |
@@ -171,6 +171,44 @@ Test Files  5 passed (5)
 ```
 
 5 da GROK-04, mais GROK-01 (38), GROK-02 (11), GROK-03 (7) e o loader (7).
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
+
+```
+Test Files  1 passed (1)
+     Tests  9 passed (9)
+```
+
+## GROK-05
+
+`detectarEmergencias(laudoTexto, rs)` em `src/rules/radsEmergencias.ts`. As 30 cadeias, os sinônimos, a proximidade e as negações estão em `corpus/rulesets/rads-emergencias.v1.json`. A cadeia só fecha com elos suficientes, na ordem do ruleset e dentro da proximidade. "sem sinais de", "não há" e "ausência de" anulam o elo até o fim da frase. A saída traz trecho, lateralidade e nível vertebral. `confirmadoPeloMedico` e `bloqueiaSalvar` são os literais `false`.
+
+PT08 abdome: linha 7 uropatia à direita e linha 27 fratura em L5. PT08 crânio: nenhum alerta. `corpus/rulesets/rad-emergencia.v1.json` (FN-20, sinônimos vazios) não foi editado.
+
+`git merge f0/w1-integrado` no início: `044d94f` (só `docs/ondas/W10-REDTEAM-GLM.md`).
+
+Testes novos: `tests/w10-grok/grok-05-rads.test.ts` (6).
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries`
+
+```
+fronteiras ok (159 arquivos)
+```
+
+`npm run check:corpus` — `corpus/rulesets/rads-emergencias.v1.json` header ok, `[VERIFICAR]` 0. Fecho: `corpus ok (33 arquivos)`.
+
+`npx vitest run tests/w10-grok tests/corpus/loader.test.ts --no-file-parallelism`
+
+```
+Test Files  6 passed (6)
+     Tests  74 passed (74)
+```
+
+6 da GROK-05, mais GROK-01 (38), GROK-02 (11), GROK-03 (7), GROK-04 (5) e o loader (7).
 
 `npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
 
