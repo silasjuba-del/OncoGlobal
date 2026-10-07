@@ -250,3 +250,11 @@ M-Z  RESPOSTA CURTA DO DR. SILAS A PLN-021 → PLN-022   (texto literal: "nao vi
       |Z3| "mais de 1 tipo de receitas, insiro e memoriza"  = haverá VÁRIOS tipos de receita (modelos); o Dr. Silas insere os modelos e o sistema os memoriza (memória de modelos/preferências do médico)   DECIDIDO (intenção)
 ```
 Ligações: Z3 ⟶ `KitTemplate` versionado (`src/impressao/kit.ts`) e "memória de preferências do médico" (lacuna de PLN-008) ⟶ templates de receita como dado do médico, com versão, vigência e curador (já previstos no kit).
+
+```
+M-AA RESPOSTAS DO DR. SILAS (esclarecem M-Z) → PLN-023   (literal: "1- ia nunca aparece em nenhum documento. somente texto tecnico e dialogo pelo oncoassist e chat llm / 2- sim, reviso o conteudo clinico antes da base")
+      |AA1| IA NUNCA aparece em NENHUM documento. A IA só aparece em: (a) texto técnico e (b) diálogo pelo OncoAssist e pelo chat LLM   DECIDIDO (fecha Y1/Z1; vale para todos os documentos, não só receita)
+      |AA2| "Texto técnico" = registro interno/técnico (proveniência, log, auditoria) fica fora dos documentos clínicos; leitura do planejamento: o registro interno continua existindo como texto técnico, nunca impresso nem entregue   LEITURA — PENDENTE (Dr. Silas confirma só se discordar)
+      |AA3| O "sim" de M-Z = o Dr. Silas REVISA o conteúdo clínico (limiares, doses, condutas, modelos) ANTES de entrar na base (KB)   DECIDIDO (fecha Z2)
+```
+Efeito: fecha Y2 (papel invisível; registro técnico à parte), Z1 e Z2; confirma D-W9-29/61 (rascunho até aprovação do Dr. Silas) e a regra de seed da KB (PLN-020/021).

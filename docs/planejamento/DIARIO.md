@@ -371,3 +371,20 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
 - Lacuna: (a) biblioteca de modelos de receita por tipo (KB do médico); (b) fluxo "inserir modelo" (colar texto/estruturar → revisão → ativar), com versão; (c) escolha do modelo pelo cluster (qual tipo cabe ao medicamento/via); (d) validação por modelo (dose/teto/controlado).
 - Decisão: DECIDIDO (Dr. Silas) Z3 (vários tipos de receita; ele insere; o sistema memoriza) e a intenção "não visível" para o documento. PENDENTE: o que "sim" responde, e se o registro interno permanece.
 - Próxima ação: aguardar liberação; quando liberar, fatiar a biblioteca de modelos de receita (inserção → memória versionada → seleção por cluster). Dono: planejamento.
+
+## PLN-023 · 2026-10-07 · Esclarecimentos: IA nunca aparece em documento; Dr. Silas revisa o conteúdo clínico antes da base
+- Origem: Dr. Silas (literal: "1- ia nunca aparece em nenhum documento. somente texto tecnico e dialogo pelo oncoassist e chat llm / 2- sim, reviso o conteudo clinico antes da base")
+- Liga a: PLN-021 (Y1/Y2), PLN-022 (Z1–Z3), PLN-020 (log), PLN-003 (KB versionada), D-W9-29/61, CHATPLAN M-AA
+- Decisões (Dr. Silas):
+  1. **IA nunca aparece em nenhum documento.** A IA só se mostra em **texto técnico** e no **diálogo** pelo OncoAssist e pelo chat LLM. A regra de PLN-021 deixa de ser "do documento final da receita" e passa a valer para **todo documento** (encaminhamento, receita, solicitação, relatório, evolução, orientação, laudo).
+  2. **Revisão do conteúdo clínico antes da base.** O Dr. Silas revisa limiares, doses, condutas, orientações e modelos **antes** de entrarem na KB (resolve a pergunta pendente de PLN-020/021 e o "sim" de PLN-022).
+- Leitura do planejamento (não perguntada de novo): "texto técnico" inclui o **registro interno de proveniência/auditoria**; ele existe, mas nunca entra no documento clínico. Se o Dr. Silas quiser que nem esse registro exista, é decisão dele a registrar depois.
+- Consequências práticas (para o plano, quando liberar):
+  - **Teste automático** "nenhum documento gerado contém termos de IA/sistema" (lista de termos proibidos: IA, inteligência artificial, algoritmo, sistema, gerado automaticamente, sugere-se…), aplicado a todos os templates, nos documentos finais e nos rascunhos impressos; usa o mecanismo `proibidoConter` do kit estendido a texto.
+  - Conteúdo clínico só entra na KB com **estado de revisão** (`RASCUNHO → REVISADO_PELO_DR_SILAS → ATIVO`), versão e fonte; sem revisão, o item não gera documento (campo PENDENTE).
+  - O **diálogo do OncoAssist/chat LLM** continua sendo o lugar onde a IA fala como IA (explicar, alertar, sugerir) — aí não há invisibilidade; a invisibilidade é só nos documentos.
+  - Separação nítida de **três superfícies**: (1) documento clínico (sem IA), (2) diálogo OncoAssist/chat (IA visível), (3) texto técnico/registro (interno).
+- O que o código tem hoje: `proibidoConter` (origens de fato) no kit; estados RASCUNHO/ASSINADO; sem lista de termos proibidos nem teste de varredura; sem estado de revisão da KB (`REVISADO_PELO_DR_SILAS`) — D-W9-29/61 já tratam fichas e orientações como rascunho até aprovação.
+- Lacuna: (a) teste de varredura de termos de IA em todos os templates/saídas; (b) estado de revisão do conteúdo da KB (RASCUNHO/REVISADO/ATIVO) com quem revisou e quando; (c) contrato das 3 superfícies (documento, diálogo, técnico) para a UI e para o gateway.
+- Decisão: DECIDIDO (Dr. Silas) 1 e 2. Reflexo na árvore: Y2 fechado (papel sem IA; registro técnico à parte, leitura do planejamento), Z1 e Z2 fechados.
+- Próxima ação: aguardar liberação; quando liberar, incluir (a)–(c) nas fatias de documentos e da KB. Dono: planejamento.
