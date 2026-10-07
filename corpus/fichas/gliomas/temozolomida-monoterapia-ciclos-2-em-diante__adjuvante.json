@@ -1,0 +1,38 @@
+{
+  "templateId": "FICHA.gliomas.temozolomida-monoterapia-ciclos-2-em-diante__adjuvante@1.0.0",
+  "tumor": "Gliomas",
+  "nome": "Temozolomida monoterapia (ciclos 2 em diante)",
+  "cenario": "adjuvante",
+  "versao": "1.0.0",
+  "hash": "897038d7ac633031dd34ac5860a74642ef5b108680f23f17552bc27b45d06169",
+  "codigoInstitucional": null,
+  "intervaloDias": 28,
+  "ciclos": 5,
+  "itens": [
+    {
+      "drug": "Temozolomida",
+      "classe": "QT",
+      "sequence": 1,
+      "standardDose": 200,
+      "doseBasis": "MG_M2",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg/m²",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d1-d5"
+      ],
+      "observacao": "1x/dia, D1 a D5 a cada 28 d, a partir do ciclo 2 (D-W9-62).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    }
+  ],
+  "limiaresBula": null,
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Gliomas \"Temozolamida monoterapia 200\" p. 369; decisões D-W9-23, D-W9-34, D-W9-50.",
+  "status": "RASCUNHO"
+}
