@@ -124,12 +124,16 @@ function ausente(motivo = "não informado") {
 }
 
 function paciente(patientId: string, nome: string, prontuario: string, nascimento: string | null): Paciente {
+  const digito = patientId.replace(/\D/g, "").slice(-2) || "00";
+  const cns = `7000000000000${digito.padStart(2, "0")}`.slice(0, 15);
+  const ids: { tipo: "PRONTUARIO" | "CNS"; valor: string }[] = [{ tipo: "PRONTUARIO", valor: prontuario }];
+  if (!patientId.includes("pendente")) ids.push({ tipo: "CNS", valor: cns });
   return Paciente.parse({
     patientId,
-    identificadores: [{ tipo: "PRONTUARIO", valor: prontuario }],
+    identificadores: ids,
     nome,
     nascimento,
-    sexoCadastral: "NAO_INFORMADO",
+    sexoCadastral: patientId.includes("pendente") ? "NAO_INFORMADO" : "F",
     divergencia: false,
   });
 }
@@ -397,7 +401,7 @@ function montarFichas(): Map<string, Ficha> {
       patientId: ID.vermelho, nome: "Paciente Teste", prontuario: "PR-VERMELHO", nascimento: "1954-02-02",
       semaforo: "VERMELHO", pendentes: 1, lotes: [lotVermelho],
       episodio: episodio("ep-vermelho", "lot-vermelho", "PALIATIVA"), ciclo: ciclo("ci-vermelho", "ep-vermelho", "doc-rx-vermelho"),
-      contatos: [], alergias: PREENCHIDO, comorbidades: COMO, alertas: [febre], vermelhos: [febre], temSnapshot: true,
+      contatos: [], alergias: ["penicilina"], comorbidades: COMO, alertas: [febre], vermelhos: [febre], temSnapshot: true,
     })],
     [ID.pendente, ficha({
       patientId: ID.pendente, nome: "Paciente Teste 03", prontuario: "PR-PENDENTE", nascimento: null,

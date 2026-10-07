@@ -1,39 +1,83 @@
 # W10-CURSOR
 
-Retomada: a primeira fatia não FEITA é a CURSOR-02.
+Retomada: onda W10-CURSOR fechada nesta worktree (01–14 FEITA).
 
 | Fatia | Estado | Commit | Nota |
 |---|---|---|---|
 | CURSOR-01 | FEITA | W10-CURSOR-01 | Canvas 1680×1000, grade 58 · main · 396, topbar, DIA/NOITE |
-| CURSOR-02 | — | | PatientHeader + cartão Modelo 08 |
-| CURSOR-03 | — | | Timeline 2D |
-| CURSOR-04 | — | | Abas e cards |
-| CURSOR-05 | — | | Caixa única |
-| CURSOR-06 | — | | Painel lateral |
-| CURSOR-07 | — | | Visualizador + OncoAssist |
-| CURSOR-08 | — | | Jornada 3D + Chart3D |
-| CURSOR-09 | — | | Dock e overlays |
-| CURSOR-10 | — | | Prescrição |
-| CURSOR-11 | — | | Configurações |
-| CURSOR-12 | — | | Triagem + agenda de QT |
-| CURSOR-13 | — | | Acessibilidade |
-| CURSOR-14 | — | | Percursos e fechamento |
+| CURSOR-02 | FEITA | W10-CURSOR-02 | PatientHeader + cartão Modelo 08 |
+| CURSOR-03 | FEITA | W10-CURSOR-02 | Timeline 2D + Ver em 3D (stub → 08) |
+| CURSOR-04 | FEITA | W10-CURSOR-02 | Abas + cards Visão geral / caixa única stub |
+| CURSOR-05 | FEITA | W10-CURSOR-05 | Caixa única + revisão (D-W9-34a junção só com clique) |
+| CURSOR-06 | FEITA | W10-CURSOR-05 | Painel Exame/OncoBoard/fila; E1 badge sem reordenar |
+| CURSOR-07 | FEITA | W10-CURSOR-05 | ImageViewer + OncoAssist sem conduta; morfometria DRAFT |
+| CURSOR-08 | FEITA | W10-CURSOR-08 | Jornada 3D + Chart3D CSS (RECIST/CTCAE, teclado, ≤200) |
+| CURSOR-09 | FEITA | W10-CURSOR-09 | Dock + overlays (WhatsApp CANAL_EXTERNO; liberação sem bloqueio) |
+| CURSOR-10 | FEITA | W10-CURSOR-10 | Prescrição 3 produtos + Modelo 05 só exceções + −20/−30/−40 |
+| CURSOR-11 | FEITA | W10-CURSOR-10 | Configurações + caixa nº + glossário + DIA|NOITE|PERSONALIZAR |
+| CURSOR-12 | FEITA | W10-CURSOR-12 | Triagem 5 passos (sem trava) + agenda QT |
+| CURSOR-13 | FEITA | W10-CURSOR-12 | Foco/reduced-motion/dock 44px; jornada sob demanda |
+| CURSOR-14 | FEITA | W10-CURSOR-12 | Percursos rotina / viewer / pós-QT |
 
 ## Testes criados
 - `tests/w10-cursor/escala.test.ts`
 - `tests/w10-cursor/layout.test.tsx`
+- `tests/w10-cursor/cadastro.test.ts`
+- `tests/w10-cursor/header.test.tsx`
+- `tests/w10-cursor/timeline.test.ts`
+- `tests/w10-cursor/timeline-ui.test.tsx`
+- `tests/w10-cursor/abas.test.tsx`
+- `tests/w10-cursor/caixa-revisao.test.ts`
+- `tests/w10-cursor/revisao-viewer.test.tsx`
+- `tests/w10-cursor/painel.test.tsx`
+- `tests/w10-cursor/jornada3d.test.ts`
+- `tests/w10-cursor/jornada3d-ui.test.tsx`
+- `tests/w10-cursor/dock.test.tsx`
+- `tests/w10-cursor/prescricao.test.ts`
+- `tests/w10-cursor/prescricao-ui.test.tsx`
+- `tests/w10-cursor/config.test.tsx`
+- `tests/w10-cursor/salao-qt.test.tsx`
+- `tests/w10-cursor/a11y.test.tsx`
+- `tests/w10-cursor/percursos.test.tsx`
+
+## [VERIFICAR]
+- Capturas de tela com navegador real (não feitas nesta fatia)
+- RADS hidronefrose no viewer exige origem com “hidronefrose” no rótulo
+- Integração real porta/Fugu/contratos w10 (hoje PROVISORIO-W10)
+
+## Saídas reais · fatia CURSOR-08…09
+
+### `npx tsc --noEmit`
+exit 0.
+
+### `npm run check:boundaries`
+```
+fronteiras ok (165 arquivos)
+```
+
+### `npx vitest run tests/w10-cursor` (pré-dock; 08)
+```
+ Test Files  12 passed (12)
+      Tests  28 passed (28)
+```
+
+### regressão UI + auditoria
+```
+ Test Files  4 passed (4)
+      Tests  16 passed (16)
+```
 
 ## PEDIDOS
 Ver `docs/w10/PEDIDOS-CURSOR.md`.
 
-## Saídas reais · CURSOR-01
+## Saídas reais · fatia CURSOR-05…07
 
 ### `npx tsc --noEmit`
-exit 0, sem diagnósticos.
+exit 0.
 
 ### `npm run check:boundaries`
 ```
-fronteiras ok (145 arquivos)
+fronteiras ok (158 arquivos)
 ```
 
 ### `npm run check:corpus`
@@ -41,16 +85,23 @@ fronteiras ok (145 arquivos)
 corpus ok (29 arquivos)
 ```
 
-### `npx vitest run tests/ui tests/ui-telas tests/w10-cursor --no-file-parallelism`
+### `npx vitest run tests/w10-cursor --no-file-parallelism`
 ```
- Test Files  24 passed (24)
-      Tests  74 passed (74)
-   Duration  452.60s
+ Test Files  10 passed (10)
+      Tests  25 passed (25)
+   Duration  271.48s
 ```
 
-### `npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
+### `npx vitest run tests/ui-telas/consulta.test.tsx tests/ui/cabecalho.test.tsx tests/ui/app.test.tsx tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
 ```
- Test Files  1 passed (1)
-      Tests  9 passed (9)
-   Duration  4.14s
+ Test Files  4 passed (4)
+      Tests  16 passed (16)
+```
+
+## Saídas reais · fatia longa CURSOR-02…04
+
+### `npx vitest run tests/w10-cursor --no-file-parallelism` (02–04)
+```
+ Test Files  7 passed (7)
+      Tests  20 passed (20)
 ```
