@@ -12,10 +12,33 @@ const abdome = readFileSync("docs/referencias/modelos/laudos-sinteticos/PT08-tc-
 const cranio = readFileSync("docs/referencias/modelos/laudos-sinteticos/PT08-tc-cranio.txt", "utf8");
 
 describe("GROK-05 detectarEmergencias", () => {
-  it("o catálogo tem as 30 linhas e a negação declarada", () => {
-    expect(rs.emergencias.map((e) => e.linha)).toEqual(Array.from({ length: 30 }, (_, i) => i + 1));
+  it("o catálogo tem as 31 linhas e a negação declarada", () => {
+    expect(rs.emergencias.map((e) => e.linha)).toEqual(Array.from({ length: 31 }, (_, i) => i + 1));
     expect(rs.negacoes).toEqual(expect.arrayContaining(["sem sinais de", "não há", "ausência de"]));
     expect(rs.decisao).toBe("D-W9-51");
+  });
+
+  it("exclusões anulam imuno quando há infecção; tiflite exige neutropenia e exclui pneumoperitônio", () => {
+    const imunoOk = detectarEmergencias(
+      "Vidro fosco difuso com pneumonia em organização nos limites do campo de RT.",
+      rs,
+    );
+    expect(imunoOk.alertas.map((a) => a.linha)).toContain(28);
+    const imunoInfec = detectarEmergencias(
+      "Vidro fosco com pneumonia em organização e abscesso pulmonar.",
+      rs,
+    );
+    expect(imunoInfec.alertas.map((a) => a.linha)).not.toContain(28);
+    const tiflite = detectarEmergencias(
+      "Espessamento cecal com densificação pericecal em paciente com neutropenia febril.",
+      rs,
+    );
+    expect(tiflite.alertas.map((a) => a.linha)).toContain(22);
+    const tiflitePerf = detectarEmergencias(
+      "Espessamento cecal com densificação pericecal e neutropenia; há pneumoperitônio.",
+      rs,
+    );
+    expect(tiflitePerf.alertas.map((a) => a.linha)).not.toContain(22);
   });
 
   it("PT08 abdome alerta uropatia à direita e fratura em L5, e só essas", () => {

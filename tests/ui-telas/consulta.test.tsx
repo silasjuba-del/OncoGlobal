@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { useState } from "react";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ActionIntent } from "../../src/contracts/operacao.js";
 import { criarChaves, type ChavesIntencao } from "../../src/ui/api/chaves.js";
@@ -31,9 +31,10 @@ function Abrir({
 }
 
 describe("consulta pronta", () => {
-  it("rotina abre, valida e imprime em 3 cliques; imprimir só depois do Enter", async () => {
+  it("rotina abre e valida em 2 cliques; exibe bundle antes; Enter imprime", async () => {
     const porta = criarPortaFalsa();
     const acao = vi.spyOn(porta, "acao");
+    const exibir = vi.spyOn(porta, "exibirBundle");
     const confirmar = vi.spyOn(porta, "confirmar");
     const cliques: string[] = [];
     render(<Abrir porta={porta} chaves={criarChaves()} patientId={ID.verde} rotulo="abrir Paciente Teste" />);
@@ -42,20 +43,17 @@ describe("consulta pronta", () => {
     cliques.push("abrir");
     fireEvent.click(await screen.findByRole("button", { name: "validar tudo" }));
     cliques.push("validar tudo");
-    fireEvent.click(screen.getByRole("button", { name: "validar tudo" }));
-    fireEvent.click(screen.getByRole("button", { name: "imprimir" }));
-    cliques.push("imprimir");
 
-    expect(cliques).toEqual(["abrir", "validar tudo", "imprimir"]);
-    expect(acao).not.toHaveBeenCalled();
-    expect(confirmar).toHaveBeenCalledTimes(2);
-    const chaves = confirmar.mock.calls.map((chamada) => chamada[0].idempotencyKey);
-    expect(chaves[0]).toBe(chaves[1]);
+    await waitFor(() => expect(exibir).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(confirmar).toHaveBeenCalledTimes(1));
+    expect(exibir.mock.invocationCallOrder[0]!).toBeLessThan(confirmar.mock.invocationCallOrder[0]!);
     expect(confirmar.mock.calls[0]?.[0].bloco).toBe("TUDO");
     expect(JSON.stringify(confirmar.mock.calls[0]?.[0])).not.toContain("medicoId");
+    expect(await screen.findByText("Enter confirma a impressão")).toBeTruthy();
+    expect(cliques).toEqual(["abrir", "validar tudo"]);
 
     fireEvent.keyDown(window, { key: "Enter" });
-    expect(acao).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(acao).toHaveBeenCalledTimes(1));
     const intent = acao.mock.calls[0]?.[0];
     expect(ActionIntent.safeParse(intent).success).toBe(true);
     expect(intent?.verbo).toBe("IMPRIMIR");

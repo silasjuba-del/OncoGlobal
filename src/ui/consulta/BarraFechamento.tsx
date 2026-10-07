@@ -61,6 +61,7 @@ export function BarraFechamento({
   chaveImpressao,
   onValidar,
   onImprimir,
+  ocupado = false,
 }: {
   patientId: string;
   tumorLotId: string | null;
@@ -75,11 +76,13 @@ export function BarraFechamento({
   chaveImpressao: string;
   onValidar: (payload: Confirmar) => void;
   onImprimir: (intent: IntentImprimir) => void;
+  ocupado?: boolean;
 }) {
   const [marcados, setMarcados] = useState(() => marcacaoInicial(documentos));
   const [aviso, setAviso] = useState<string | null>(null);
 
   function entregar(bloco: Bloco) {
+    if (ocupado) return;
     const payload = montarConfirmarBloco({
       patientId,
       tumorLotId,
@@ -149,9 +152,13 @@ export function BarraFechamento({
         </section>
       ) : null}
       {aviso ? <p>{aviso}</p> : null}
-      <button type="button" onClick={() => entregar(blocoAtual)}>validar bloco</button>
-      <button type="button" onClick={() => entregar("TUDO")}>validar tudo</button>
-      <button type="button" onClick={imprimir}>imprimir</button>
+      <button type="button" disabled={ocupado} onClick={() => entregar("TUDO")}>
+        validar tudo
+      </button>
+      <button type="button" disabled={ocupado} onClick={() => entregar(blocoAtual)}>
+        validar bloco
+      </button>
+      <button type="button" disabled={ocupado} onClick={imprimir}>imprimir</button>
     </section>
   );
 }

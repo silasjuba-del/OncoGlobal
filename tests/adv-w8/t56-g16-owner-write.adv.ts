@@ -2,10 +2,9 @@
 // INV-15; MATRIZ). capabilities.v1.json declara ownerOf por agente (AG-13 é dono de Document,
 // AG-14 de Conversation — K-21), mas declaração não é enforcement: "dono cadastrado não
 // enforcement runtime" (MATRIZ T-56).
-// ESTADO: SEM_IMPLEMENTACAO — não há veredito runtime que compare agente×objeto contra o
-// catálogo de donos; writeRouter confirma registros sem checar ownership.
-// Dono provável: kernel/harness (gate) + writeRouter (consumer). DEPENDE da tabela do
-// Maestro/capabilities carregada em runtime (orchestration — ainda esqueleto).
+// ESTADO 2026-10-07: g16Owner está em src/kernel/harness/ownership.ts e reexportado por
+// gates.ts. Write alheio → BLOQUEIA_AUTORIDADE; dono e leitura → PASSA. Título
+// SEM_IMPLEMENTACAO é histórico. O writeRouter em si não é reauditado por este arquivo.
 import { describe, expect, it } from "vitest";
 
 interface VereditoLike { gate?: string; decisao?: string; motivo?: string }

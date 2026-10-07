@@ -2,9 +2,9 @@
 // Regra (FN-16): meds + InteractionKB → findings; lista incompleta ⇒ PENDENTE, NUNCA VERDE.
 // Nota da fatia KIMI-13: corpus/rulesets/interacoes.v1.json está INATIVO ⇒ nenhuma interação
 // pode virar VERMELHO sem fonte; ausência de checagem ⇒ PENDENTE, nunca "sem interação".
-// ESTADO: SEM_IMPLEMENTACAO — não existe função semaforoInteracoes em src/ (MATRIZ FN-16:
-// "busca semântica não encontrou motor nem assertion"; corpus não substitui função).
-// Dono provável: src/rules (função pura) + corpus ativação por curadoria do Dr. Silas (K-27).
+// ESTADO 2026-10-07: semaforoInteracoes existe e está reexportada em src/rules/index.ts.
+// Ruleset inativo ou lista incompleta continua PENDENTE, nunca VERDE; par ativo com fonte
+// continua VERMELHO (achado, não bloqueio). Título SEM_IMPLEMENTACAO é histórico.
 import { describe, expect, it } from "vitest";
 
 interface ResultadoLike { estado?: string; motivo?: string; rulesetVersao?: string }

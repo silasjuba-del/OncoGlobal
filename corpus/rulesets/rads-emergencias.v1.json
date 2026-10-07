@@ -1,12 +1,12 @@
 {
   "header": {
     "id": "rads-emergencias",
-    "versao": "1.0.0",
+    "versao": "1.1.0",
     "vigenteDesde": "2026-10-07",
     "fonte": {
       "tipo": "DECISAO_MEDICA",
-      "referencia": "D-W9-51 + docs/referencias/rads/EMERGENCIAS-RADIOLOGICAS-30.md",
-      "trecho": "O laudo é varrido pela cadeia de elos, não por palavra solta. Negação (sem sinais de, não há, ausência de) anula o elo. Achado da cadeia é ALERTA com trecho; o médico confirma.",
+      "referencia": "D-W9-51 + D-W9-68 + docs/referencias/rads/EMERGENCIAS-RADIOLOGICAS-30.md",
+      "trecho": "O laudo é varrido pela cadeia de elos, não por palavra solta. Negação anula o elo. Exclusões (ex.: infecção vs imuno) anulam a cadeia. Achado = ALERTA; o médico confirma.",
       "edicao": null
     },
     "curador": "Dr. Silas Negrão",
@@ -313,12 +313,12 @@
       "nome": "Blowout carotídeo/pseudoaneurisma",
       "modalidade": "angio-TC cervical",
       "minimoElos": 2,
-      "obrigatorios": ["pseudo"],
+      "obrigatorios": ["pseudo", "leito"],
       "elos": [
         { "id": "pseudo", "sinonimos": ["pseudoaneurisma"] },
         { "id": "extravasamento", "sinonimos": ["extravasamento ativo"] },
         { "id": "hematoma", "sinonimos": ["hematoma cervical"] },
-        { "id": "leito", "sinonimos": ["leito irradiado"] }
+        { "id": "leito", "sinonimos": ["leito irradiado", "pós-radioterapia cervical", "pos-radioterapia cervical", "campo de rt cervical"] }
       ]
     },
     {
@@ -326,12 +326,16 @@
       "categoria": "Infecciosa",
       "nome": "Colite neutropênica (tiflite)",
       "modalidade": "TC abdome",
-      "minimoElos": 2,
-      "obrigatorios": ["cecal"],
+      "minimoElos": 3,
+      "obrigatorios": ["cecal", "neutropenia"],
+      "exclusoes": [
+        { "id": "pneumo", "sinonimos": ["pneumoperitônio", "pneumoperitonio"] }
+      ],
       "elos": [
         { "id": "cecal", "sinonimos": ["espessamento cecal"] },
         { "id": "pericecal", "sinonimos": ["densificação pericecal"] },
-        { "id": "pneumatose", "sinonimos": ["pneumatose cecal"] }
+        { "id": "pneumatose", "sinonimos": ["pneumatose cecal", "pneumatose"] },
+        { "id": "neutropenia", "sinonimos": ["neutropenia", "neutropênico", "neutropenico", "febril neutropênico", "febril neutropenico"] }
       ]
     },
     {
@@ -396,7 +400,8 @@
       "elos": [
         { "id": "litica", "sinonimos": ["lesões líticas", "lesão lítica", "líticas", "osteolíticas", "osteoblásticas", "lesões blásticas", "lesão blástica", "blásticas"] },
         { "id": "cortical", "sinonimos": ["afilamento cortical"] },
-        { "id": "escore", "sinonimos": ["sins", "mirels"] }
+        { "id": "sins", "sinonimos": ["sins", "score sins", "escore sins"] },
+        { "id": "mirels", "sinonimos": ["mirels", "score mirels", "escore mirels"] }
       ]
     },
     {
@@ -406,9 +411,14 @@
       "modalidade": "TC tórax",
       "minimoElos": 2,
       "obrigatorios": ["vidro"],
+      "exclusoes": [
+        { "id": "colecao", "sinonimos": ["coleção", "colecao", "abscesso", "empiema"] },
+        { "id": "gas", "sinonimos": ["gás extraluminal", "gas extraluminal", "nível hidroaéreo pulmonar"] },
+        { "id": "infeccao", "sinonimos": ["foco infeccioso", "pneumonia bacteriana", "consolidação infecciosa", "consolidacao infecciosa"] }
+      ],
       "elos": [
         { "id": "vidro", "sinonimos": ["vidro fosco"] },
-        { "id": "op", "sinonimos": ["pneumonia em organização", "padrão op"] },
+        { "id": "op", "sinonimos": ["pneumonia em organização", "padrão op", "padrao op"] },
         { "id": "campo", "sinonimos": ["campo de radioterapia", "limites do campo de rt"] }
       ]
     },
@@ -419,8 +429,13 @@
       "modalidade": "TC abdome",
       "minimoElos": 2,
       "obrigatorios": ["mucosa"],
+      "exclusoes": [
+        { "id": "abscesso", "sinonimos": ["abscesso", "coleção com gás", "colecao com gas"] },
+        { "id": "infeccao", "sinonimos": ["c. difficile", "clostridioides", "colite infecciosa", "foco infeccioso"] },
+        { "id": "pneumo", "sinonimos": ["pneumoperitônio", "pneumoperitonio"] }
+      ],
       "elos": [
-        { "id": "mucosa", "sinonimos": ["espessamento mucoso"] },
+        { "id": "mucosa", "sinonimos": ["espessamento mucoso", "espessamento mucoso contínuo", "espessamento mucoso continuo"] },
         { "id": "alvo", "sinonimos": ["sinal do alvo"] },
         { "id": "vascular", "sinonimos": ["ingurgitamento vascular"] }
       ]
@@ -428,14 +443,31 @@
     {
       "linha": 30,
       "categoria": "Tratamento",
-      "nome": "Derrame pleural maligno sob tensão",
+      "nome": "Derrame pleural maligno",
       "modalidade": "RX/TC tórax",
       "minimoElos": 2,
-      "obrigatorios": ["opacidade"],
+      "obrigatorios": ["derrame"],
+      "exclusoes": [
+        { "id": "pnm", "sinonimos": ["pneumotórax", "pneumotorax"] }
+      ],
       "elos": [
-        { "id": "opacidade", "sinonimos": ["opacidade hemitorácica"] },
+        { "id": "derrame", "sinonimos": ["derrame pleural", "opacidade hemitorácica", "opacidade hemitoracica"] },
+        { "id": "nodulos", "sinonimos": ["nódulos pleurais", "nodulos pleurais", "espessamento pleural nodular"] },
         { "id": "mediastino", "sinonimos": ["desvio mediastinal contralateral", "desvio mediastinal"] },
-        { "id": "atelectasia", "sinonimos": ["atelectasia compressiva"] }
+        { "id": "atelectasia", "sinonimos": ["atelectasia compressiva", "atelectasia"] }
+      ]
+    },
+    {
+      "linha": 31,
+      "categoria": "Tratamento",
+      "nome": "Pneumotórax hipertensivo",
+      "modalidade": "RX/TC tórax",
+      "minimoElos": 2,
+      "obrigatorios": ["pnm", "mediastino"],
+      "elos": [
+        { "id": "pnm", "sinonimos": ["pneumotórax", "pneumotorax"] },
+        { "id": "mediastino", "sinonimos": ["desvio mediastinal contralateral", "desvio mediastinal"] },
+        { "id": "colapso", "sinonimos": ["colapso de câmaras", "colapso de camaras", "colapso de câmaras direitas", "colapso de camaras direitas"] }
       ]
     }
   ]

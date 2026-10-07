@@ -2,13 +2,13 @@
 // Regra: executor altera arquivo fora do manifesto ⇒ reprovado ANTES do merge (harness, não
 // procedimento manual). K-25: manifesto W0 por onda com base, dono por arquivo, hashes,
 // proibições; diff real comparado antes do merge.
-// ESTADO: SEM_IMPLEMENTACAO — docs/MANIFESTO-W1-F0.md é declarativo (não tem hashes por
-// arquivo) e docs/w5/ferramentas/claim.ps1 é semáforo de reserva da W5 com caminho fixo do
-// worktree do orquestrador (não um gate de merge reprovável em CI deste repo).
-// Dono provável: tech lead (CI/scripts) — fora da faixa de qualquer executor W8.
+// ESTADO 2026-10-07: scripts/verificar-manifesto.mjs existe e é a trilha do executor GROK,
+// não um gate genérico de toda onda. O caso positivo chama esse script com um arquivo fora
+// da trilha e exige saída diferente de zero mais a linha FORA_DA_TRILHA.
 // GIVEN/WHEN/THEN de referência (N19): dado um diff que toca arquivo fora do manifesto da
 // onda, quando o harness de merge avalia, então a reprovação acontece antes do merge com o
 // arquivo identificado.
+import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
@@ -39,11 +39,22 @@ describe("N19 · gating de merge: diff fora do manifesto reprova antes do merge"
     expect(manifesto).toMatch(/hash/i); // K-25 exige hashes no manifesto
   });
 
-  it("N19 · positivo (quando implementado): diff adulterado fora da trilha ⇒ reprovado com arquivo nomeado", () => {
-    const harness = harnessManifesto();
-    if (!harness) return;
-    // O harness existente será acionado aqui com um diff sintético fora do manifesto;
-    // a expectativa concreta depende da interface escolhida pelo implementador.
-    expect(harness).toBeTruthy();
+  it("N19 · positivo: arquivo fora da trilha GROK é reprovado com o caminho nomeado", () => {
+    const fora = "src/server/rotas.ts";
+    let status = 0;
+    let saida = "";
+    try {
+      saida = execFileSync(process.execPath, [
+        join(RAIZ, "scripts/verificar-manifesto.mjs"),
+        "--executor", "GROK",
+        "--arquivos", fora,
+      ], { encoding: "utf8", cwd: RAIZ });
+    } catch (erro) {
+      const falha = erro as { status?: number; stdout?: string; stderr?: string };
+      status = falha.status ?? 1;
+      saida = `${falha.stdout ?? ""}\n${falha.stderr ?? ""}`;
+    }
+    expect(status).not.toBe(0);
+    expect(saida).toContain(`FORA_DA_TRILHA ${fora}`);
   });
 });

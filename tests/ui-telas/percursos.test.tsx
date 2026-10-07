@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { useEffect, useState } from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ActionIntent } from "../../src/contracts/operacao.js";
@@ -104,21 +104,22 @@ function clicar(el: HTMLElement, cliques: string[]) {
 }
 
 describe("percursos", () => {
-  it("rotina: agenda, validar e imprimir em até 3 cliques; imprimir só depois do Enter", async () => {
+  it("rotina: agenda e validar em 2 cliques; Enter imprime sem clique extra", async () => {
     const porta = criarPortaFalsa();
     const acao = vi.spyOn(porta, "acao");
+    const exibir = vi.spyOn(porta, "exibirBundle");
     const confirmar = vi.spyOn(porta, "confirmar");
     const cliques: string[] = [];
     render(<Shell porta={porta} chaves={criarChaves()} />);
     clicar(await screen.findByRole("button", { name: "abrir Paciente Teste PR-VERDE" }), cliques);
     clicar(await screen.findByRole("button", { name: "validar tudo" }), cliques);
-    expect(confirmar).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(exibir).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(confirmar).toHaveBeenCalledTimes(1));
     expect(acao).not.toHaveBeenCalled();
-    clicar(screen.getByRole("button", { name: "imprimir" }), cliques);
-    expect(acao).not.toHaveBeenCalled();
-    expect(cliques).toEqual(["abrir Paciente Teste PR-VERDE", "validar tudo", "imprimir"]);
+    expect(await screen.findByText("Enter confirma a impressão")).toBeTruthy();
+    expect(cliques).toEqual(["abrir Paciente Teste PR-VERDE", "validar tudo"]);
     fireEvent.keyDown(window, { key: "Enter" });
-    expect(acao).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(acao).toHaveBeenCalledTimes(1));
     expect(acao.mock.calls[0]?.[0].verbo).toBe("IMPRIMIR");
     expect(ActionIntent.safeParse(acao.mock.calls[0]?.[0]).success).toBe(true);
   });
@@ -155,6 +156,7 @@ describe("percursos", () => {
 
   it("abre, valida e percorre os controles só pelo teclado", async () => {
     const porta = criarPortaFalsa();
+    const exibir = vi.spyOn(porta, "exibirBundle");
     const confirmar = vi.spyOn(porta, "confirmar");
     const { container } = render(<Shell porta={porta} chaves={criarChaves()} />);
     await screen.findByRole("button", { name: "abrir Paciente Teste PR-VERDE" });
@@ -164,7 +166,8 @@ describe("percursos", () => {
     fireEvent.keyDown(campo, { key: "Enter" });
     await screen.findByRole("button", { name: "validar tudo" });
     fireEvent.keyDown(window, { key: "Enter", ctrlKey: true });
-    expect(confirmar).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(exibir).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(confirmar).toHaveBeenCalledTimes(1));
     exigirNomes(container);
   });
 });

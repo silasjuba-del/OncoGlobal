@@ -652,7 +652,6 @@ export function criarPortaFalsa(): PortaConsulta {
       return { codigo: parsed.data.verbo, decisao: "EXECUTADA" };
     },
 
-    // [SERVIDOR_PENDENTE] POST /consulta/bundle
     async exibirBundle(pedido) {
       const atual = fichas.get(pedido.patientId);
       if (!atual) throw new ErroPorta("PACIENTE_AUSENTE");

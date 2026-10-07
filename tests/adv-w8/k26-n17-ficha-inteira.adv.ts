@@ -2,11 +2,9 @@
 // Regra (K-26): busca semântica só DESCOBRE candidatos; a receita carrega UMA ficha aprovada
 // INTEIRA (templateId+version+hash), nunca dose remontada de trechos. N17: duas versões de
 // ficha ⇒ carrega uma inteira, sem mistura.
-// ESTADO: SEM_IMPLEMENTACAO — não existe biblioteca de fichas aprovadas em src/; render.ts
-// renderiza qualquer TemplateDocumento genérico (receita.v1.json é esqueleto sem conteúdo
-// clínico). MATRIZ: "templates/renders genéricos não provam ficha receita inteira sem mistura".
-// Dono provável: modules/documentos (DOMINIO) + corpus/templates (GLM cura conteúdo; a W5
-// proíbe inventar conteúdo — a biblioteca depende da curadoria do Dr. Silas, pendência 0.8-5).
+// ESTADO 2026-10-07: carregarFichaAprovada está em src/modules/documentos/biblioteca.ts
+// (templateId+version+hash, ficha inteira; trecho ou versão errada lança). Conteúdo clínico
+// das fichas continua curadoria do Dr. Silas. Título SEM_IMPLEMENTACAO é histórico.
 import { describe, expect, it } from "vitest";
 
 interface FichaLike { templateId?: string; versao?: string; hash?: string }

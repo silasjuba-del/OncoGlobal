@@ -179,9 +179,8 @@ export interface PortaConsulta {
   login(senha: string): Promise<ResultadoLogin>;
   confirmar(bloco: ConfirmarBloco): Promise<ResultadoConfirmar>;
   acao(intent: AcaoIntent): Promise<ResultadoAcao>;
-  // [SERVIDOR_PENDENTE] POST /consulta/bundle
+  /** POST /consulta/bundle — registra conteúdo/hash antes de confirmar. */
   exibirBundle(pedido: PedidoBundle): Promise<BundleExibidoVisao>;
-  // [SERVIDOR_PENDENTE]
   carregarConsulta(patientId: string): Promise<ConsultaVisao>;
   // [SERVIDOR_PENDENTE]
   agendaDoDia(): Promise<AgendaVisao>;

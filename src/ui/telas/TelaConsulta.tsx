@@ -2,6 +2,10 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { BannerE1 } from "../consulta/BannerE1.js";
 import { BarraFechamento } from "../consulta/BarraFechamento.js";
 import { PainelDelta } from "../consulta/PainelDelta.js";
+import {
+  confirmacaoPreparouImpressao,
+  validarComExibicao,
+} from "../consulta/validarComExibicao.js";
 import { CardEvidencia } from "../evidencia/CardEvidencia.js";
 import type { ChavesIntencao } from "../api/chaves.js";
 import { ID } from "../api/fake.js";
@@ -58,6 +62,8 @@ export function TelaConsulta({
   const [viewer, setViewer] = useState(false);
   const [overlay, setOverlay] = useState<OverlayId>(null);
   const [mic, setMic] = useState(false);
+  const [statusFechamento, setStatusFechamento] = useState<string | null>(null);
+  const [validando, setValidando] = useState(false);
   const impressao = useRef<AcaoIntent | null>(null);
   const impressaoEnviada = useRef(false);
   const chaveValidar = chaves.novaChaveIntencao(`validar:${patientId}`);
@@ -298,8 +304,46 @@ export function TelaConsulta({
           autorExibido={visao.fechamento.autorExibido}
           alvoImpressao={visao.fechamento.alvoImpressao}
           chaveImpressao={chaveImprimir}
+          ocupado={validando}
           onValidar={(payload) => {
-            void porta.confirmar(payload);
+            if (validando) return;
+            setValidando(true);
+            setStatusFechamento("exibindo e validando");
+            void validarComExibicao(
+              porta,
+              {
+                patientId: visao.patientId,
+                encounterId: visao.encounterId,
+                tumorLotId: loteId,
+              },
+              payload,
+            ).then(
+              (resultado) => {
+                setValidando(false);
+                setStatusFechamento(resultado.codigo);
+                if (
+                  confirmacaoPreparouImpressao(resultado.codigo)
+                  && visao.fechamento.alvoImpressao
+                ) {
+                  const alvo = visao.fechamento.alvoImpressao;
+                  impressao.current = {
+                    verbo: "IMPRIMIR",
+                    objeto: { tipo: alvo.tipo, id: alvo.id, versao: alvo.versao },
+                    escopo: { patientId: visao.patientId, encounterId: visao.encounterId },
+                    destino: null,
+                    idempotencyKey: chaveImprimir,
+                  };
+                  impressaoEnviada.current = false;
+                  setImpressaoArmada(true);
+                }
+              },
+              (erro: unknown) => {
+                setValidando(false);
+                setStatusFechamento(
+                  erro instanceof ErroPorta ? erro.codigo : "FALHA_VALIDACAO",
+                );
+              },
+            );
           }}
           onImprimir={(intent) => {
             impressao.current = intent;
@@ -307,6 +351,9 @@ export function TelaConsulta({
             setImpressaoArmada(true);
           }}
         />
+        {statusFechamento ? (
+          <p role="status" aria-label="status do fechamento">{statusFechamento}</p>
+        ) : null}
         {impressaoArmada ? (
           <p role="status">
             Enter confirma a impressão

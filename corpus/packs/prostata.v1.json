@@ -1,18 +1,18 @@
 {
   "header": {
     "id": "prostata",
-    "versao": "1.1.0",
-    "vigenteDesde": "2026-10-06",
+    "versao": "1.2.0",
+    "vigenteDesde": "2026-10-07",
     "fonte": {
       "tipo": "DECISAO_MEDICA",
-      "referencia": "estrutura TumorPack R-22 (W2/GLM-06); acréscimo W8/GLM-18 a partir do caso real 01 (S1/S2, E1–E3, P1–P2 — docs/referencias/CASO-REAL-01-LICOES.md §2); conteúdo clínico pendente de curadoria do Dr. Silas [VERIFICAR]",
-      "trecho": null,
+      "referencia": "D-W9-67 · kit baseline TumorLot próstata (Dr. Silas, 2026-10-07); estrutura W8/GLM-18 mantida",
+      "trecho": "PSAT + fosfatase alcalina + cálcio + testosterona + cintilografia + RMN pelve",
       "edicao": null
     },
     "curador": "Dr. Silas Negrão",
-    "aprovadoEm": "2026-10-06"
+    "aprovadoEm": "2026-10-07"
   },
-  "nota": "W8/GLM-18: acrescenta ESTRUTURA sem valores — elementos de estadiamento mostrados com fonte, PSA com origem, PIRADS e Gleason/ISUP por sítio; critérios clínicos [VERIFICAR]; nenhum TNM automático (TNM é do médico, S1)",
+  "nota": "v1.2.0: kit de investigação baseline do lote próstata (D-W9-67). Não fecha estádio, progressão nem conduta. Ausente = PENDENTE. TNM continua do médico.",
   "cid": [],
   "estadiamento": {
     "sistema": "[VERIFICAR]",
@@ -68,8 +68,13 @@
         "opcoes": ["LAUDO_PRIMARIO", "MENCIONADO_EM_FONTE_SECUNDARIA"],
         "regra": "valor com laudo primário é resultado laboratorial; menção em fonte secundária (receituário de outro médico, sem laudo) entra como 'mencionado sem laudo primário', nunca como resultado confirmado (E2)"
       },
-      "ativo": false,
-      "fonte": "[VERIFICAR]"
+      "ativo": true,
+      "fonte": {
+        "tipo": "DECISAO_MEDICA",
+        "referencia": "D-W9-67",
+        "trecho": "PSAT no kit baseline do lote próstata",
+        "edicao": null
+      }
     },
     {
       "id": "pirads",
@@ -88,12 +93,87 @@
   ],
   "proibicoes": [
     "nenhum TNM derivado automaticamente dos elementos de estadiamento: o TNM é do médico (S1)",
-    "captação articular/hiperfixação na cintilografia não vira lesão óssea oncológica nem metástase (S2)"
+    "captação articular/hiperfixação na cintilografia não vira lesão óssea oncológica nem metástase (S2)",
+    "kit incompleto não gera APAC nem fecha progressão"
   ],
-  "labsBaseline": [],
+  "labsBaseline": [
+    {
+      "id": "psat",
+      "rotulo": "PSA total (PSAT)",
+      "unidade": "ng/mL",
+      "ativo": true,
+      "fonte": {
+        "tipo": "DECISAO_MEDICA",
+        "referencia": "D-W9-67",
+        "trecho": "PSAT",
+        "edicao": null
+      }
+    },
+    {
+      "id": "fosfatase-alcalina",
+      "rotulo": "Fosfatase alcalina",
+      "unidade": "[VERIFICAR]",
+      "ativo": true,
+      "fonte": {
+        "tipo": "DECISAO_MEDICA",
+        "referencia": "D-W9-67",
+        "trecho": "fosfatase alcalina",
+        "edicao": null
+      }
+    },
+    {
+      "id": "calcio",
+      "rotulo": "Cálcio",
+      "unidade": "[VERIFICAR]",
+      "ativo": true,
+      "fonte": {
+        "tipo": "DECISAO_MEDICA",
+        "referencia": "D-W9-67",
+        "trecho": "cálcio",
+        "edicao": null
+      }
+    },
+    {
+      "id": "testosterona",
+      "rotulo": "Testosterona",
+      "unidade": "[VERIFICAR]",
+      "ativo": true,
+      "fonte": {
+        "tipo": "DECISAO_MEDICA",
+        "referencia": "D-W9-67",
+        "trecho": "testosterona",
+        "edicao": null
+      }
+    }
+  ],
   "labsFollowup": [],
   "imagem": {
-    "baseline": [],
+    "baseline": [
+      {
+        "id": "cintilografia-ossea",
+        "rotulo": "Cintilografia óssea",
+        "modalidade": "CINTILOGRAFIA",
+        "ativo": true,
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "D-W9-67",
+          "trecho": "cintilografia",
+          "edicao": null
+        }
+      },
+      {
+        "id": "rmn-pelve",
+        "rotulo": "RMN de pelve",
+        "modalidade": "RM",
+        "ativo": true,
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "D-W9-67",
+          "trecho": "RMN pelve",
+          "edicao": null
+        }
+      }
+    ],
     "resposta": [],
     "seguimento": []
   },
@@ -109,5 +189,10 @@
     }
   ],
   "intervalos": {},
-  "roteiroAnamnese": []
+  "roteiroAnamnese": [],
+  "completudeKit": {
+    "limiarIncompleto": 0.6,
+    "bloqueiaApacSeIncompleto": true,
+    "nota": "completude = campos documentados / obrigatórios do baseline; < 0,6 ⇒ KIT_INCOMPLETO (alerta; APAC não emite)"
+  }
 }

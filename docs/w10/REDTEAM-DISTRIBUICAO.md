@@ -1,5 +1,7 @@
 # W10 · Endurecimento pelo red team · quem conserta o quê (tech lead, 2026-10-07)
 
+> Nota 2026-10-07, fase de eixo: os cinco `.adv.ts` em `tests/adv-w8` que falhavam por sentinela `SEM_IMPLEMENTACAO` encontram motor em `2690fe1`. O N19 passou a executar `scripts/verificar-manifesto.mjs`. A contagem abaixo é o mapa da distribuição original; esta fase não recontou `tests/redteam`.
+
 Red team integrado em `f0/w1-integrado`: 28 arquivos, 227 testes; **43 vermelhos** nos `.adv.ts` (2 já caíram com o trabalho interno). Rodar: `npx vitest run --config tests/redteam/vitest.config.ts --no-file-parallelism`. Achados detalhados: `docs/w10/REDTEAM-ACHADOS.md`.
 **Regra:** cada dono deixa verdes os `.adv.ts` dos seus achados **sem mudar a expectativa**; ao terminar, avisa no progresso. Expectativa errada? Argumente em PEDIDOS — só o tech lead altera teste do red team.
 
