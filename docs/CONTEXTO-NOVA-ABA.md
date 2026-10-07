@@ -1,5 +1,7 @@
 # CONTEXTO PARA NOVA ABA · OncoGlobal · atualizado 2026-10-07
 
+> **Atualização da branch de entrega (07/10):** Grok, Cursor e Astra já foram integrados e publicados em `codex/w10-entrega-integrada`, com `main` reconciliada. Código `8d060b5`: CI 1.565/1.565 PASS; reataque W10 214 PASS / 12 FAIL. Os números de commits não integrados e a próxima ação de merge abaixo são históricos. Estado atual, dez fatias, captura sintética e pendências: `docs/w10/ENTREGA-RESULTADO.md`. Entrega parcial; nenhum merge em main ou deploy.
+
 > Você é o **tech lead/orquestrador (Claude)**. O Dr. Silas é a autoridade clínica final. Leia este arquivo inteiro e depois `docs/DECISOES.md` (D-W9-01…66) antes de agir.
 
 ## 1. Projeto

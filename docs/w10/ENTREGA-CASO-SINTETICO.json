@@ -1,0 +1,105 @@
+{
+  "sintetico": true,
+  "codigoSha": "8d060b5",
+  "resumo": "Evolução clínica — rascunho de revisão médica\nExames e procedimentos\n- pulmonar: 38 mm; fato revisado explicitamente pelo médico; evidência EXPLICIT; fonte laudo-sintetico-88; data clínica 2026-09-10; trecho original: 10/09/2026 Lesão pulmonar 38 mm\nPendências\n- Fato não selecionado (gravacao-sintetica-88:0:f1:1, imaging): permanece pendente de revisão; fonte laudo-sintetico-88; trecho: Nódulo linfonodal axilar 14 mm eixo curto\n- Pendência de extração: Fronteira ou continuidade da gravação exige revisão\n- Pendência de extração: Vínculo com paciente exige confirmação médica\nFonte original laudo-sintetico-88 preservada no rascunho de extração; trechos não extraídos não foram convertidos em fatos.\nEste rascunho não fecha estadiamento TNM, dose ou conduta.\n\n--- Próximo rascunho de evolução ---\n\nEvolução clínica — rascunho de revisão médica\nExames e procedimentos\n- linfonodal: 14 mm; candidato revisado; incerteza original preservada e requer confirmação clínica adicional; evidência EXPLICIT; fonte laudo-sintetico-88; data clínica não consta no fato; trecho original: Nódulo linfonodal axilar 14 mm eixo curto\nPendências\n- Fato não selecionado (gravacao-sintetica-88:0:f0:0, imaging): permanece pendente de revisão; fonte laudo-sintetico-88; trecho: 10/09/2026 Lesão pulmonar 38 mm\n- Pendência de extração: Fronteira ou continuidade da gravação exige revisão\n- Pendência de extração: Vínculo com paciente exige confirmação médica\nFonte original laudo-sintetico-88 preservada no rascunho de extração; trechos não extraídos não foram convertidos em fatos.\nEste rascunho não fecha estadiamento TNM, dose ou conduta.",
+  "estatistica": {
+    "versao": "W10-LUNA4-02",
+    "escopo": "LEDGER_COMPLETO",
+    "periodoClinico": null,
+    "denominadorPacientes": 2,
+    "exclusoes": {
+      "eventosNaoConfirmados": 0,
+      "eventosSupersedidos": 0,
+      "linhasDuplicadas": 0,
+      "administracoesInvalidas": 0,
+      "administracoesConflito": 0
+    },
+    "totalPacientes": 2,
+    "eventosPorCategoria": {
+      "FATO": 1,
+      "DOCUMENTO": 0,
+      "ADMINISTRACAO": 0,
+      "OUTRO": 3
+    },
+    "pacientesPorCategoria": {
+      "FATO": 1,
+      "DOCUMENTO": 0,
+      "ADMINISTRACAO": 0,
+      "OUTRO": 2
+    },
+    "documentosAssinados": 0,
+    "pacientesComDocumentoAssinado": 0,
+    "administracoesPorStatus": {
+      "COMPLETA": 0,
+      "PARCIAL": 0,
+      "OMITIDA": 0,
+      "INTERROMPIDA": 0
+    },
+    "pacientesPorStatusDeAdministracao": {
+      "COMPLETA": 0,
+      "PARCIAL": 0,
+      "OMITIDA": 0,
+      "INTERROMPIDA": 0
+    },
+    "administracoesPendentes": 0,
+    "administracoesConflito": 0
+  },
+  "conhecimento": {
+    "status": "OK",
+    "modo": "LEXICAL",
+    "algoritmo": "TOKEN_EXATO_NORMALIZADO",
+    "corpus": {
+      "versao": "sha256:af968dd9fbcb8d34559bd4794c6beb8f7b10959c0957bf155f380fa6db8a17e8",
+      "arquivos": [
+        {
+          "caminho": "docs/referencias/ragGRAFO-oncologia/dados/nos.jsonl",
+          "sha256": "5b33e0c0abb6e77c856937d36b697a83e536d8c606173aa52687245900515f2e",
+          "linhas": 2971
+        },
+        {
+          "caminho": "docs/referencias/ragGRAFO-oncologia/dados/arestas.jsonl",
+          "sha256": "33e326fe4321651e199c5dcf9c31f3d8828fead9487d8448cfe94fc0c709a5cc",
+          "linhas": 9347
+        }
+      ]
+    },
+    "vetorial": {
+      "status": "NOT_IMPLEMENTED"
+    },
+    "resultados": [
+      {
+        "referencia": {
+          "id": "tema.teoc-formato-exame",
+          "tipo": "tema",
+          "nome": "TEOC – formato do exame de título (SBOC/AMB)",
+          "status": "NAO_VERIFICADO",
+          "proveniencia": {
+            "fonte": {
+              "modulo": "01",
+              "aula": "01",
+              "pagina": "13-16"
+            },
+            "fontes": [
+              {
+                "modulo": "01",
+                "aula": "01",
+                "pagina": "13-16"
+              }
+            ],
+            "arquivo": null,
+            "paginas": null
+          },
+          "trecho": "TEOC: título de especialista em oncologia clínica pela SBOC com a AMB; prova anual em novembro com 100 questões objetivas e discursiva de 8 casos clínicos (~24 questões); peso 60% objetiva e 40% discursiva; aprovação média acima de 70%.",
+          "nivel": "REFERENCIA_NAO_VERIFICADA",
+          "classificacao": "REFERENCIA",
+          "usavelComoRegra": false,
+          "usavelComoFicha": false,
+          "doseSomenteReferencia": false
+        },
+        "scoreLexical": 7
+      }
+    ],
+    "topKAplicado": 1,
+    "aviso": "Busca lexical local em texto de referência; não é recomendação, regra clínica, ficha ou avaliação de elegibilidade."
+  }
+}
