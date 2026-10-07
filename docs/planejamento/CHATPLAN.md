@@ -258,3 +258,11 @@ M-AA RESPOSTAS DO DR. SILAS (esclarecem M-Z) → PLN-023   (literal: "1- ia nunc
       |AA3| O "sim" de M-Z = o Dr. Silas REVISA o conteúdo clínico (limiares, doses, condutas, modelos) ANTES de entrar na base (KB)   DECIDIDO (fecha Z2)
 ```
 Efeito: fecha Y2 (papel invisível; registro técnico à parte), Z1 e Z2; confirma D-W9-29/61 (rascunho até aprovação do Dr. Silas) e a regra de seed da KB (PLN-020/021).
+
+```
+M-AB  MODELO DE ORIENTAÇÃO NUTRICIONAL (PDF, 1 pág.) + 8 KITS DE 1ª CONSULTA ANEXADOS SEM INSTRUÇÃO → PLN-024   fontes/M-AB_PLN-024_modelo-orientacao-nutricional.md
+      |AB1| Modelo de documento "Orientação Nutricional": cabeçalho institucional, identificação em branco, PODE COMER (7 grupos), NÃO PODE COMER (7 grupos), dicas, data/assinatura/carimbo; "Documento médico"   MATERIAL (seed de conteúdo; Dr. Silas revisa antes da base — PLN-023)
+      |AB2| Liga a ASSISTIR→Nutrição (PLN-016), cluster anemia (PLN-013: dieta + nutricionista), orientação (PLN-012 cat. 6/8), D-W9-29 (orientação por toxicidade em rascunho até aprovação)   VÍNCULO
+      |AB3| Sem texto do Dr. Silas junto: não diz se é para (a) virar modelo de orientação na base, (b) servir de padrão visual dos documentos, (c) outra coisa   PENDENTE
+      |AB4| 8 PDFs de "Pacientes primeira consulta" (kits reais; nomes nos nomes de arquivo) anexados SEM instrução. NÃO lidos pelo planejamento; PHI não entra no repositório   PENDENTE (Dr. Silas diz o que fazer)
+```
