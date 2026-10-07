@@ -4,11 +4,17 @@
 // Reaproveitamento de FN-04: src/rules só pode importar src/contracts e não pode importar irmãos,
 // então a regra de arredondamento é COPIADA aqui (meio para cima em inteiros, uma única vez) e o teste
 // tests/rules-prescricao/instanciarProtocolo.test.ts prova equivalência com calcularDose (src/rules/dose.ts).
-// BSA vem pronta em `dados` (fórmula ainda não decidida) e é LIMITADA a [1,40; 2,20] m² (D-W9-60), com aviso visível.
+// BSA: se `dados.bsaM2` vier null, é calculada por Mosteller (D-W9-61); em qualquer caso é LIMITADA a [1,40; 2,20] m² (D-W9-60), com aviso visível.
 // Calvert: dose(mg) = AUC × (ClCr + 25), com ClCr LIMITADO a 125 mL/min (D-W9-60), com aviso visível.
 export const BSA_MIN_M2 = 1.4;
 export const BSA_MAX_M2 = 2.2;
 export const CLCR_MAX_CALVERT = 125;
+
+/** D-W9-61 · Superfície corporal por Mosteller: √(altura cm × peso kg / 3600), em m², 2 casas. Ausente/inválido ⇒ null (PENDENTE). */
+export function bsaMosteller(pesoKg: number | null, alturaCm: number | null): number | null {
+  if (pesoKg === null || alturaCm === null || !Number.isFinite(pesoKg) || !Number.isFinite(alturaCm) || pesoKg <= 0 || alturaCm <= 0) return null;
+  return Math.round(Math.sqrt((alturaCm * pesoKg) / 3600) * 100) / 100;
+}
 import type { PrescriptionItem, ProtocolTemplate } from "../../contracts/w10/prescricao.js";
 
 export interface DadosCorporais {
@@ -68,9 +74,10 @@ function calcular(item: PrescriptionItem, d: DadosCorporais): { dose: number | n
     case "MG_M2":
       if (std === null) return { dose: null, unidade: "mg", motivo: "dose padrão ausente na ficha" };
       if (!valido(d.pesoKg) || !valido(d.alturaCm)) return { dose: null, unidade: "mg", motivo: "mg/m² sem peso/altura" };
-      if (!valido(d.bsaM2)) return { dose: null, unidade: "mg", motivo: "mg/m² sem superfície corporal informada" };
-      { const bsa = Math.min(BSA_MAX_M2, Math.max(BSA_MIN_M2, d.bsaM2));
-        const aviso = bsa !== d.bsaM2 ? `BSA ${d.bsaM2} m² limitada a ${bsa} m² (D-W9-60)` : null;
+      const bsaBase = valido(d.bsaM2) ? d.bsaM2 : bsaMosteller(d.pesoKg, d.alturaCm);
+      if (bsaBase === null) return { dose: null, unidade: "mg", motivo: "mg/m² sem superfície corporal" };
+      { const bsa = Math.min(BSA_MAX_M2, Math.max(BSA_MIN_M2, bsaBase));
+        const aviso = bsa !== bsaBase ? `BSA ${bsaBase} m² limitada a ${bsa} m² (D-W9-60)` : null;
         return { dose: arredondaMeioParaCima(std * bsa), unidade: "mg", motivo: null, aviso }; }
     case "AUC":
       if (std === null) return { dose: null, unidade: "mg", motivo: "AUC alvo ausente na ficha" };
