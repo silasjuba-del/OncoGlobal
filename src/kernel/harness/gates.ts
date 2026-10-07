@@ -2,7 +2,10 @@
 // Efeito mínimo (K-xx / auditoria seção 9): nenhum gate bloqueia salvar rascunho; bloqueiam artefato, saída ou autoridade.
 import type { Semaforo } from "../../contracts/index.js";
 import { contemPhiResidual, type DicionarioPaciente } from "../llm/desidentificar.js";
-import { ALIAS_ORGAO, LATERALIDADE_POR_ORGAO, LATERALIDADE_SINONIMOS, VALORES_AUSENTES } from "./gates-tabelas.js";
+import {
+  ALIAS_ORGAO, ANATOMIA_CONFERIR_SEXO, ANATOMIA_SEXO_ESPERADO, CRITERIOS_PECA_RESSECCAO, LATERALIDADE_POR_ORGAO,
+  LATERALIDADE_SINONIMOS, PREFIXO_CLINICO, PREFIXO_PATOLOGICO, SPECIMEN_BIOPSIA, SPECIMEN_RESSECCAO, VALORES_AUSENTES,
+} from "./gates-tabelas.js";
 
 export interface Veredito {
   gate: string;
@@ -111,5 +114,85 @@ export function g07Lateralidade(entrada: {
     return { gate: G, decisao: "ALERTA", motivo: `lateralidade divergente/inválida (${presentes.map((x) => `${x.nome}=${x.v.replace(/^\?/, "")}`).join(", ")}): revisão humana obrigatória` };
   const faltam = valores.filter((x) => x.v === null).map((x) => x.nome);
   if (faltam.length) return { gate: G, decisao: "PENDENTE", motivo: `lateralidade ausente em: ${faltam.join(", ")}` };
+  return passa(G);
+}
+
+/**
+ * G-08 · anatomia × sexo cadastral (D-W9-06). Divergência = conferir cadastro (ALERTA), nunca veto.
+ * Mama está fora da tabela (existe nos dois sexos): em cadastro M só pede conferência (PENDENTE), sem acusar incoerência.
+ */
+export function g08AnatomiaSexo(entrada: { anatomia?: unknown; sexoCadastral?: unknown }): Veredito {
+  const G = "G-08";
+  if (ausente(entrada?.anatomia)) return { gate: G, decisao: "PENDENTE", motivo: "anatomia não informada" };
+  const anat = orgaoCanonico(entrada.anatomia);
+  const sexo = typeof entrada.sexoCadastral === "string" ? entrada.sexoCadastral.trim().toUpperCase() : "";
+  const esperado = ANATOMIA_SEXO_ESPERADO[anat];
+  const conferir = ANATOMIA_CONFERIR_SEXO[anat];
+  if (!esperado && !conferir) return { gate: G, decisao: "PASSA", motivo: `anatomia "${anat}" sem restrição de sexo (D-W9-06)` };
+  if (sexo !== "F" && sexo !== "M")
+    return { gate: G, decisao: "PENDENTE", motivo: `sexo cadastral ${sexo || "ausente"}: não é possível conferir anatomia × sexo` };
+  if (esperado) {
+    return sexo === esperado
+      ? passa(G)
+      : { gate: G, decisao: "ALERTA", motivo: `${anat} com cadastro ${sexo}: conferir cadastro/identidade (revisão humana; não bloqueia)` };
+  }
+  return sexo === conferir
+    ? passa(G)
+    : { gate: G, decisao: "PENDENTE", motivo: `${anat} em cadastro ${sexo}: possível (existe nos dois sexos); conferir cadastro` };
+}
+
+/** Entrada de G-09. `laudo` permite reconhecer peça de ressecção por conteúdo (D-W9-07) quando `specimen` não vem tipado. */
+export interface EntradaG09 {
+  prefixo?: unknown; tnmExplicito?: unknown; specimen?: unknown;
+  laudo?: { identificacaoPecaCirurgica?: boolean; dimensoes?: boolean; peso?: boolean; margens?: boolean; linfonodos?: boolean } | null;
+}
+type Peca = "RESSECCAO" | "BIOPSIA" | "DESCONHECIDA";
+function classificarPeca(e: EntradaG09): Peca {
+  const sp = typeof e.specimen === "string" ? e.specimen.trim().toUpperCase() : "";
+  if (SPECIMEN_BIOPSIA.includes(sp)) return "BIOPSIA";
+  if (SPECIMEN_RESSECCAO.includes(sp)) return "RESSECCAO";
+  const l = e.laudo;
+  if (l?.identificacaoPecaCirurgica && CRITERIOS_PECA_RESSECCAO.some((c) => (l as Record<string, unknown>)[c] === true)) return "RESSECCAO";
+  return "DESCONHECIDA";
+}
+
+/** G-09 · pTNM só com peça de ressecção + TNM explícito; biópsia dá só cT (D-W9-07). */
+export function g09PtDeBiopsia(entrada: EntradaG09): Veredito {
+  const G = "G-09";
+  const prefixo = typeof entrada?.prefixo === "string" ? entrada.prefixo.trim().toLowerCase() : "";
+  if (!prefixo) return { gate: G, decisao: "PENDENTE", motivo: "prefixo TNM ausente" };
+  if (PREFIXO_CLINICO.includes(prefixo)) return passa(G);
+  if (!PREFIXO_PATOLOGICO.includes(prefixo))
+    return { gate: G, decisao: "PENDENTE", motivo: `prefixo "${prefixo}" não coberto pela regra pTNM: conferir` };
+  const peca = classificarPeca(entrada);
+  if (peca === "BIOPSIA")
+    return { gate: G, decisao: "BLOQUEIA_ARTEFATO", motivo: "pTNM rejeitado: peça é biópsia (só cT; D-W9-07); campo nunca preenchido por regra" };
+  if (peca === "DESCONHECIDA")
+    return { gate: G, decisao: "PENDENTE", motivo: "peça de ressecção não comprovada (tamanho/peso/margens/linfonodos + identificação de peça)" };
+  return entrada.tnmExplicito === true
+    ? passa(G)
+    : { gate: G, decisao: "PENDENTE", motivo: "ressecção sem TNM explícito no laudo: pTNM é do médico" };
+}
+
+/**
+ * G-27 · saída externa limpa (N25). Artefato a caminho de serviço externo só sai com SanitizationReport
+ * de risco BAIXO + versão do sanitizador e sem metadado de identificação. Sem relatório ⇒ bloqueia a SAÍDA
+ * (trabalho local segue). Convive com G-02; não reabre egress (autorizacao.ts continua recusando canais externos).
+ */
+export function g27SaidaExternaLimpa(entrada: {
+  artefato?: { tipo?: string; metadados?: Record<string, unknown> | null } | null;
+  destino?: string | null;
+  sanitizationReport?: { riscoResidual?: unknown; versaoSanitizador?: unknown } | null;
+}): Veredito {
+  const G = "G-27";
+  const bloqueia = (motivo: string): Veredito => ({ gate: G, decisao: "BLOQUEIA_SAIDA", motivo });
+  if (!entrada?.artefato) return bloqueia("artefato ausente: nada sai sem inspeção");
+  if (ausente(entrada.destino)) return bloqueia("destino ausente/desconhecido: tratado como externo");
+  const r = entrada.sanitizationReport;
+  if (!r || typeof r !== "object") return bloqueia("sem SanitizationReport: saída externa bloqueada (HALTED); trabalho local segue");
+  const ident = Object.entries(entrada.artefato.metadados ?? {}).filter(([, v]) => typeof v === "string" ? !ausente(v) : v !== null && v !== undefined);
+  if (ident.length) return bloqueia(`metadado de identificação presente (${ident.map(([k]) => k).join(", ")}): HALTED da saída`);
+  if (r.riscoResidual !== "BAIXO") return bloqueia(`risco residual ${String(r.riscoResidual)}: HALTED da saída`);
+  if (typeof r.versaoSanitizador !== "string" || !r.versaoSanitizador.trim()) return bloqueia("relatório sem versão do sanitizador: inválido");
   return passa(G);
 }
