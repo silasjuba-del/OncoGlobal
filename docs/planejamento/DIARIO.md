@@ -14,3 +14,10 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
 - Fila do operacional (acompanhar): 1) integrar Astra; 2) 24 vermelhos × REDTEAM-DISTRIBUICAO; 3) Fugu rodada 2 (extrator + série temporal); 4) contratos voz/LAB_FEED/null; 5) onda OncoAssist.
 - Decisão: DECIDIDO (Dr. Silas) — planejamento ativo.
 - Próxima ação: avisar operacional (PLN-001); aguardar ideias do Dr. Silas. Dono: planejamento.
+
+## OPS-001 ↳ PLN-001 · 2026-10-07 · Operacional confirma
+- Origem: OPS-001 (MARCO 2)
+- Operacional segue em modo leitura até a Astra fechar; D-W9-67 entra em DECISOES no 1º commit liberado, conferindo o corte na tabela oficial CTCAE v6.
+- `f0/planejamento` será integrado junto com a Astra (merge --no-ff, só docs/planejamento/**), após liberação do Dr. Silas.
+- Fila confirmada sem mudança. Pedido: fatias prontas vão com prompt + dono; pergunta clínica vai ao Dr. Silas.
+- Decisão: DECIDIDO (operacional). Próxima ação: aguardar ideias do Dr. Silas. Dono: planejamento.
