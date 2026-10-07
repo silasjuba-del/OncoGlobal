@@ -53,6 +53,9 @@ describe("RT-08 · biblioteca de fichas versionadas (D-W9-22b / K-26)", () => {
     if (typeof fn !== "function") return;
     const bexiga = ProtocolTemplate.parse(ficha());
     const vias = ProtocolTemplate.parse(ficha({ templateId: "GC-vias-biliares", tumor: "vias biliares" }));
+    // Tech lead (2026-10-07): a fixture precisa ser registrada na biblioteca antes de carregar.
+    const reg = await probe(MODULOS_PRESCRICAO, ["registrarBiblioteca"]);
+    if (typeof reg === "function") reg([bexiga, vias]);
     const carregada = await fn("GC", "vias biliares", "metastatico", "1") as { templateId?: string };
     expect(carregada.templateId).toBe(vias.templateId);
     expect(carregada.templateId).not.toBe(bexiga.templateId);
