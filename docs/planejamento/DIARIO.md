@@ -66,3 +66,26 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
 - Sugestão do texto (schema da TUMOR_KNOWLEDGE antes de alimentar órgãos): anotada. Mapas iniciais decididos em PLN-002/P4 = próstata + mama + pulmão (o texto cita também cólon).
 - Decisão: PENDENTE — Dr. Silas pediu só análise, sem perguntas e sem fatias.
 - Próxima ação: aguardar texto do X/Y/Z e liberação. Dono: planejamento.
+
+## PLN-004 · 2026-10-07 · Addendum: linha temporal + texto bruto + voz + Plaud
+- Origem: Dr. Silas (texto íntegro em `fontes/M-F_PLN-004_addendum-linha-temporal-voz-plaud.md`; exemplo sintético, sem PHI)
+- Liga a: PLN-003 (workflow C, voz), PLN-001 (texto colado = 0 fatos; voice_command/lab_feed 400; série temporal vira conflito), D-W9-65/66, CHATPLAN nó M-F
+- Ideia (sem perda): (1) 4 datas fixas no cabeçalho clínico: `biopsy_date`, `c1d1_date`, `last_staging_date` (tipo STAGING|RESTAGING), `last_treatment_date` (QT, IO, alvo…); dias desde C1D1/último tto/último reestadiamento calculados por código; (2) 3 fontes de entrada (escrita, Whisper realtime, Plaud em segundo plano) → MERGE → consulta estruturada, nenhuma substitui as outras; (3) caixa de texto bruto obrigatória + [PROCESSAR TEXTO] (aceita evolução anterior, resumo de ChatGPT, laudo, anotação, prontuário, resumo longitudinal, saída da Skill); (4) fluxo Skill→formato canônico→copiar→colar→parser→distribuição→checklist; Skill sempre no mesmo contrato, sem prosa livre; (5) `CLINICAL_IMPORT_V1` com blocos DIAGNOSTICO, DATAS, TRATAMENTO_ATUAL, ESTADO_ATUAL, LABS, RADS, PENDENCIAS, TEXTO_LIVRE; campo ausente fica vazio; (6) cada campo importado = `SOURCE: LLM_IMPORT`, `STATUS: NEEDS_REVIEW`, nunca CONFIRMED só por importar; (7) resumo vira checklist/roteiro flexível; (8) Whisper realtime → intent/comando → atualiza checklist/cluster/draft ("anemia" abre cluster sem conduta; "vou pedir ferritina, B12, folato" marca 3 exames + REQUEST_LAB_DRAFT); (9) Plaud só passivo, reconcilia depois (MERGE 1 = Whisper+escrita; MERGE 2 final = + Plaud); (10) hierarquia: médico editado/confirmado > ordem vocal explícita > import estruturado > Whisper > Plaud, sem apagar silenciosamente, conflito mostra opções [28/04][30/04][OUTRO]; (11) fluxo completo antes/durante/paralelo/final → FINALIZAR CONSULTA. Regra: ESCRITA estrutura · Whisper opera · Plaud recupera · Médico valida.
+- O que o código tem hoje:
+  - 4 datas: `c1d1` **zero** no código; biópsia só em telas/gates; sem campos canônicos nem "dias desde" de consulta (existe `diasDesde` só em `src/apac/antiglosa.ts`, `src/modules/consulta/preConsulta.ts`). Peso vale 30 dias (D-W9-63) é outro prazo.
+  - Fontes: `FactSourceType` (`src/contracts/w10/extracao.ts:12`) = pathology, imaging_report, prescription, medical_note, nursing, **plaud**, administration — não tem import de Skill, Whisper/voz, texto manual nem lab_feed. Enum em `src/contracts/base.ts:10` tem PLAUD, VOICE_COMMAND, CHAT_TEXT, MANUAL, LAB_FEED (dois enums divergentes → causa provável do 400 da PLN-001).
+  - Merge/conflito: `src/kernel/extracao/reconciliacao.ts` já reconcilia com hierarquia por domínio e conflito explícito → base aproveitável; hierarquia do Dr. Silas (F4) ainda não é a do código.
+  - Revisão: `src/kernel/extracao/caixaRevisao.ts` e estados PROPOSTA/NEEDS_REVIEW já existem (29 arquivos) → coerente com F3 (nada confirma sozinho).
+  - Parser de `CLINICAL_IMPORT_V1`: **não existe**; texto colado gera 0 fatos (PLN-001).
+  - Whisper realtime: nada além de menção em telas/agentes; sem intent description × ordem.
+- Lacuna: (a) contrato `CLINICAL_IMPORT_V1` versionado + parser determinístico; (b) fonte `LLM_IMPORT` (+ voz, manual, lab_feed) unificada num só enum; (c) campos das 4 datas + tipo STAGING|RESTAGING + dias desde (código); (d) hierarquia F4 na reconciliação; (e) roteiro/checklist gerado do resumo; (f) merge em 2 etapas (Whisper+escrita, depois Plaud); (g) intent descrição × ordem.
+- Notas de vigilância: LLM no caminho Skill→app é externa (D-W9-65/66 já cobre kit documental; texto da Skill não passa por gateway do app, só o colado → ok); "médico define tudo" (PLN-002/B2) vale também aqui.
+- Decisão: DECIDIDO (Dr. Silas) — regra congelada (ESCRITA estrutura, Whisper opera, Plaud recupera, médico valida) e 4 datas permanentes. PENDENTE: exemplo usa cólon (CAPOX) × mapas iniciais próstata+mama+pulmão (só exemplo?). Sugestão do texto ("dias desde…") = proposta "acrescentaria depois" → EM ESPERA.
+- Próxima ação: aguardar texto do X/Y/Z e liberação para fatiar. Dono: planejamento.
+
+## PLN-005 · 2026-10-07 · /CHATPLAN e registro literal
+- Origem: Dr. Silas ("ANOTE TUDO, SEM PERDER DETALHES — /CHATPLAN = contexto com edição documental longitudinal entre as mensagens", com desenho de árvore A→B→C |C1,C2,C3| |_> E→F)
+- Liga a: `docs/planejamento/CHATPLAN.md`, `docs/planejamento/fontes/*`
+- Decisão: DECIDIDO (Dr. Silas) — método de trabalho: toda mensagem do Dr. Silas é guardada **literal** em `fontes/` (sem edição) e entra como nó na árvore do `CHATPLAN.md`; análise fica no DIARIO. Correções = nó novo, nunca sobrescrever.
+- Feito: fontes literais M-0 (papel), M-B (v1.0), M-D (v1.1), M-F (addendum); CHATPLAN com ramos B1–B4, D1–D5, F1–F5 e ligações cruzadas.
+- Próxima ação: manter CHATPLAN a cada mensagem. Dono: planejamento.
