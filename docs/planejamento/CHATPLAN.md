@@ -231,3 +231,14 @@ M-X  FLUXO EM 6 FASES (Médico A valida → Plantonista executa) + EMERGENCY_ALA
       |X9| Camada 7: dashboard "DoctorOS" com alertas em tempo real e [VALIDAR][REJEITAR][MODIFICAR]   MATERIAL (UI)
       |X10| Checklist de 10 itens; "MÉDICO SEMPRE TEM PALAVRA FINAL"   DECIDIDO (consistente)
 ```
+
+```
+M-Y  "IA INVISÍVEL" NO DOCUMENTO FINAL + 3 DOCUMENTOS DE EXEMPLO + RECEITA VO → PLN-021   fontes/M-Y_PLN-021_ia-invisivel-documentos-receita-vo.md  (DESIDENTIFICADA; CPF completo e CRM no original)
+      |Y1| Regra: documento final ao paciente/colega sem menção a IA, "sugere-se", processo ou ferramenta; escrito como o médico; médico assina, carimba e despacha   DECIDIDO como regra do TEXTO FINAL do documento (Dr. Silas) — a rastreabilidade interna fica fora do papel   (ver PLN-021)
+      |Y2| "Zero rastreabilidade de processo" no documento × log 100% rastreável (M-X camada 6, X8)   PENDENTE — resolução proposta: invisível no papel, preservado no ledger interno
+      |Y3| Fluxo: IA detecta/alerta (invisível) → oncologista valida (visível) → IA redige em nome do médico → médico carimba e despacha   DECIDIDO
+      |Y4| 3 exemplos: encaminhamento urgente, receita multi-fármaco, solicitação de exame (RM coluna dinâmica, ECG, labs pré-cirúrgicos)   MATERIAL (seed; conteúdo clínico a revisar)
+      |Y5| Template de receita VO: [fármaco][dose]; quantidade; via; posologia; duração; instruções ao paciente; efeitos esperados; assinatura; validade 30 dias; "farmácia retém original"   MATERIAL (estrutura) — a validar com regras de receituário [VERIFICAR]
+      |Y6| Checklists "deve ter / jamais ter" para documento e receita   DECIDIDO (estrutura) — alinha com `proibidoConter` e origem de campo no kit
+      |Y7| Pergunta final do texto: "Falta implementar no oncoMed ou tem mais alguma layer?"   RESPONDIDA em PLN-021 (lacunas)
+```
