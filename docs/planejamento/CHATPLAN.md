@@ -281,3 +281,14 @@ M-AC  ⚠ CAUTION/ATTENTION (Dr. Silas: "GRAVAR MEMORIZAR REGISTRAR"): (1) REGRA
       |AC10| ATUALIZAÇÕES CIENTÍFICAS / ESTUDO DIÁRIO: estudos relevantes ao tipo/subtipo/cenário, formato "NOME: braços; desfecho; ganho em meses, % de redução, HR"; não vira recomendação; sem aplicabilidade direta → "atualização educacional, sem implicar disponibilidade no SUS"   DECIDIDO (formato) — números devem vir de fonte verificada   PENDENTE (origem dos dados)
       |AC11| Existem dois modelos de resumo de caso: W1 de 5 blocos (skill SILAS NEGRÃO / Plaud W1) e este de 3 seções   PENDENTE (qual é o canônico, ou o W1 é a saída da skill e este é o do Drive?)
 ```
+
+```
+M-AD  ⚠ COMPLEMENTO DO PRONTUÁRIO DRIVE: HISTÓRICO DE TRATAMENTO (sistêmico por ciclo, cirurgia, radioterapia) → PLN-026   fontes/M-AD_PLN-026_historico-de-tratamento.md   (continua M-AC)
+      |AD1| Nova seção obrigatória: HISTÓRICO DE TRATAMENTO ("faltou algo importante")   DECIDIDO
+      |AD2| Sistêmico, uma linha por CICLO: DATA — CICLO n — PROTOCOLO (— DOSE %) + OBSERVAÇÃO (ex.: 03/04/25: ciclo 1 cisplatina + vinorelbina, dose 80%; ciclo 2: neutropenia febril, atrasou 2 semanas; ciclo 3: má tolerância, perda de 4 kg em 3 semanas)   DECIDIDO
+      |AD3| "COLOCANDO SEMPRE A OBSERVAÇÃO": toda linha leva OBS (toxicidade, atraso, tolerância, pós-operatório…)   DECIDIDO ⚠
+      |AD4| Cirurgia: DATA — CIRURGIA (tipo, ex.: mastectomia radical esquerda + esvaziamento axilar) = OBS pós-op   DECIDIDO
+      |AD5| Radioterapia: DATA INÍCIO E FIM (período) — RADIOTERAPIA (frações | dose | topografia | médico responsável | local) (ex.: 02/05/2024 até 15/06/2024: 15 frações em membro inferior esquerdo com boost, total 54 Gy | [Médico RT] | [Serviço de RT] — João Pessoa)   DECIDIDO
+      |AD6| Posição da seção dentro dos 3 blocos de M-AC (sugestão: bloco 3, depois de "Protocolo:" e antes de EXAMES E LAUDOS)   PENDENTE
+      |AD7| Regra do campo vazio (M-AC/AC3) vale: ciclo sem data, protocolo ou dose fica vazio; as linhas 2 e 3 do exemplo vieram só com a observação   DECIDIDO (consistente) — formato exato de linha incompleta   PENDENTE
+```
