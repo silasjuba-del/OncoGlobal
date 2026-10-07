@@ -127,3 +127,19 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
 - Lacuna: nenhuma nova; confirma a fila da onda OncoAssist já com o operacional: roteador + cofre → gateway READ → persona versionada (BRAIN_OS) → custo por tarefa → conexões desligadas → ragGRAFO com vetores + conector. Itens fora dessa fila e citados pelo Dr. Silas: STUDY (OncoMind) e visão → sem dono definido.
 - Decisão: DECIDIDO (Dr. Silas) — definição. PENDENTE: onde entra o STUDY no repositório (hoje fora).
 - Próxima ação: aguardar mais texto/liberação. Dono: planejamento.
+
+## PLN-009 · 2026-10-07 · Refino: OncoAgent/OncoAssist, Maestro, determinístico, OncoBoard, circuito, segurança
+- Origem: Dr. Silas (`fontes/M-M_PLN-009_oncoagent-maestro-governanca.md`)
+- Liga a: PLN-007 (conflito ORK × agente), PLN-008, D-W9-15/16/20, RAIZ CANÔNICA/SSOT (MEMORY_OS, BRAIN_OS), CHATPLAN M-M
+- Ideia (sem perda): OncoAgent = classe; OncoAssist = instância nominal; Maestro orquestra percurso/contexto, executores com contexto mínimo, setores desnecessários em STAND_BY; determinístico = controle da execução (não resposta clínica da LLM) → if/else terapêuticos recentes não pertencem ao núcleo; OncoBoard = Onco Clínica + Cirurgia + RT, debate limitado, divergência preservada, saída minuta/opinião; circuito MEMORY_OS→BRAIN_OS→Maestro→execução→Harness→minuta→revisão→registro, falha vira proposta de melhoria, nunca mudança silenciosa de regra; ferramentas externas = territórios sob contrato; chaves no backend, READ/EDIT/SEND separados, PHI não atravessa automaticamente territórios de comunicação; princípio pedido→contexto→execução→verificação→minuta→revisão→registro.
+- O que o código tem hoje:
+  - Maestro/ORK: `src/orchestration/maestro.ts` (tabela de eventos R-14) + `ork.ts` → **coerente** com M2/M3. "STAND_BY": 0 no código (só em docs de governança QT-HBEM) → hoje não-selecionado = simplesmente ausente do plano; falta estado explícito e "contexto mínimo por executor".
+  - "OncoAgent": 0 no código (só 2 docs de referência) → nome da classe a formalizar nos contratos/AG-xx.
+  - OncoBoard: `src/app/oncoboard` com 3 personas e desidentificação; provider desligado → coerente com M4; "divergências preservadas" e "debate limitado" a conferir nos testes.
+  - MEMORY_OS/BRAIN_OS: citados em RAIZ CANÔNICA, SSOT e DECISOES; 1 menção em `src`; circuito completo não implementado ponta a ponta.
+  - READ/EDIT/SEND: gateway só tem 6 efeitos de saída (SEND/EDIT); READ não modelado (PLN-001); PHI × territórios de comunicação: regra existe (A8–A10, D-W9-66), a conferir por gate.
+  - "Falha → proposta de melhoria, nunca mudança silenciosa": coerente com decisão 12–13 de PLN-003; sem fila formal de propostas.
+- Lacuna: (a) estado STAND_BY + contexto mínimo por executor no Maestro; (b) nome OncoAgent na taxonomia AG-xx; (c) READ no gateway; (d) fila de "propostas de melhoria" a partir de falhas do Harness; (e) **reclassificar as regras terapêuticas if/else recentes** (quais? Dr. Silas não listou — "aquelas") como conteúdo de KB versionada, fora do núcleo → PENDENTE identificar quais.
+- Conflito PLN-007: **resolvido pelo Dr. Silas** (M3): Maestro/determinístico controla a execução; resposta clínica vem do agente/LLM, nunca do if/else.
+- Decisão: DECIDIDO (Dr. Silas) — M1–M8. PENDENTE: quais "if/else terapêuticos recentes" saem do núcleo (referência não explícita).
+- Próxima ação: aguardar liberação/texto X/Y/Z. Dono: planejamento.

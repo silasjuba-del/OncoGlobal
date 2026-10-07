@@ -89,3 +89,16 @@ M-L  ONCOASSIST = soma de 12 capacidades (fórmula curta) → PLN-008   fontes/M
       |L2| Liga M-J (agentes, ORK) e M-D (KB versionada): OncoAssist é um dos agentes do ORK e a fonte de conhecimento   vide J5
       |L3| Sem instrução nova: texto só confirma a lista já usada em ONCOASSIST-PROGRAMA-X-CODIGO.md   —
 ```
+
+```
+M-M  REFINO DE NOMES E PAPÉIS: OncoAgent/OncoAssist, Maestro, determinístico, OncoBoard, circuito, ferramentas, segurança → PLN-009   fontes/M-M_PLN-009_oncoagent-maestro-governanca.md
+      |M1| OncoAgent = classe (pesquisa, informa, alerta, organiza, minuta); OncoAssist = instância nominal   DECIDIDO (resolve K2 em parte: nome da classe dos agentes)
+      |M2| Maestro = orquestrador de percurso/contexto; executores recebem contexto mínimo; setores desnecessários em STAND_BY   DECIDIDO
+      |M3| Determinístico = controle da execução, NÃO resposta clínica da LLM; if/else terapêuticos recentes NÃO são núcleo arquitetural   DECIDIDO (resolve o conflito de J: ORK/Maestro determinístico decide caminho; conteúdo clínico vem do agente)
+      |M4| OncoBoard = Onco Clínica + Cirurgia + RT; debate limitado; divergências preservadas; saída em minuta/opinião   DECIDIDO (já no código)
+      |M5| Circuito MEMORY_OS → BRAIN_OS → Maestro → execução → Harness → minuta → revisão → registro; falha = proposta de melhoria, nunca mudança silenciosa de regra   DECIDIDO
+      |M6| Ferramentas externas (Grok, Claude, Drive, Agenda, Gmail, Microsoft, redes, plugins, skills, MCP/API) = territórios sob contrato, não definem a identidade   DECIDIDO
+      |M7| Segurança: chaves só backend; READ/EDIT/SEND separados; PHI não atravessa automaticamente territórios de comunicação   DECIDIDO
+      |M8| Princípio: pedido → contexto → execução → verificação → minuta → revisão → registro = "IA prepara o botão; médico aperta"   DECIDIDO
+```
+Ligações: M3 ⟶ resolve o "conflito a vigiar" de PLN-007 · M3 ⟶ reclassifica regras terapêuticas (if/else) como conteúdo versionado/KB, não núcleo (liga a D-W9-20, PLN-003).
