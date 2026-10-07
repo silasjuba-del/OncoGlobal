@@ -136,3 +136,20 @@ M-P  MATRIZ UNIVERSAL CANÔNICA (8 categorias × classe × seção × tópico ×
       |P6| CERTEZA (M-O eixo) não aparece na matriz de 8 categorias   PENDENTE (O7 segue aberto)
       |P7| Cluster-exemplo (DOR LOMBAR) NÃO tem o gatilho de emergência neurológica nem SUS/linha no MED   PENDENTE (liga a O-c/O-d)
 ```
+
+```
+M-Q  EIXOS X e Y (CRUZ: LONGITUDINAL × TRANSVERSAL) + ESTEIRA PRÁTICA POR VOZ → PLN-013   fontes/M-Q_PLN-013_eixos-xy-esteira-voz-clusters.md
+      |Q1| Origem do X/Y: "primeiro pensei em apenas X e Y (em cruz) = LONGITUDINAL × TRANSVERSAL" — mensagem sobre os EIXOS   DECIDIDO (conceito) · qual é X e qual é Y   PENDENTE
+      |Q2| Esteira prática: DIVISÃO POR CLUSTERS (vertical) → FATIAMENTO HORIZONTAL → PERCURSO (steps) → SAÍDA = FINALIZA CONSULTA   DECIDIDO
+      |Q3| Eixo correto NÃO é "menu médico": é esteira de microfluxos clínicos disparados pela conversa   DECIDIDO
+      |Q4| Cadeia: VOZ → EVENTO → CLUSTER → MICROFLUXO HORIZONTAL → ARTEFATOS → MERGE FINAL   DECIDIDO
+      |Q5| Cluster vertical = problema/necessidade ATIVA da consulta, não módulo fixo; cada fala pode abrir, alimentar ou fechar um cluster   DECIDIDO
+      |Q6| Percurso horizontal: detectar → confirmar → avaliar → agir → saída (anemia, neutropenia, imagem, diarreia, retorno)   DECIDIDO
+      |Q7| Cluster ANEMIA: dieta + nutricionista (sugestão + encaminhamento) + HMG, perfil de ferro, B12 + MED (B12, ácido fólico, ferro VO/EV)   DECIDIDO (conteúdo-semente, não regra)
+      |Q8| "Voz navega sem navegar": UI abre só a decisão necessária; cluster anterior recolhe (acordeão), novo expande; modal onde fizer sentido   DECIDIDO
+      |Q9| Carrossel = percurso temporal da consulta (Contexto → Temas detectados → Decisões → Ações geradas → Finalização), NÃO "Labs/RADS/Prescrição/Documentos"   DECIDIDO (muda M do carrossel atual)
+      |Q10| FINALIZAR CONSULTA: merge de todos os clusters (evolução automática, pedidos, prescrições, encaminhamentos, orientações, retorno, documentos) → REVISAR TUDO · ASSINAR · IMPRIMIR TUDO   DECIDIDO
+      |Q11| TRAVA: Whisper identifica intenção e prepara ação; não executa decisão clínica. "Vou pedir TC" → REQUEST_EXAM_DRAFT; "neutropênica" abre cluster, filgrastim só após seleção do médico   DECIDIDO (casa com M-D §11 e M-F §8)
+      |Q12| Pergunta do texto: desenhar taxonomia dos clusters vocais (anemia, neutropenia, dor, náusea, diarreia, mucosite, imagem, labs, encaminhamento, retorno…) com frases-gatilho → etapas → opções → saída   EM ESPERA (Dr. Silas: só analisar)
+```
+Ligações: Q4/Q5 ⟶ M-D §10–12 (voz, workflow) e M-F §8 (Whisper) · Q6 ⟶ M-O/M-P (matriz) · Q9 ⟶ prototipo `docs/design/prototipos/consulta.html` (carrossel atual) · Q11 ⟶ M-N (IA prepara o botão).
