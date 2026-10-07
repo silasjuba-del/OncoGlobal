@@ -10,7 +10,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w10-grok`, branch `f0/w10-grok`.
 | GROK-04 agenda de QT | FEITA | W10-GROK-04 | Conflito alerta. Otimizar dia não reordena. |
 | GROK-05 RADS 30 emergências | FEITA | W10-GROK-05 | PT08 abdome alerta linhas 7 e 27. Crânio não alerta. |
 | GROK-06 INTERVAL_PROGRESSION | FEITA | W10-GROK-06 | L5 do PT10 alerta. Não gera M1. |
-| GROK-07 nódulo &lt; 1 cm e Mx | — | | |
+| GROK-07 nódulo &lt; 1 cm e Mx | FEITA | W10-GROK-07 | Abaixo de 1 cm fica INDETERMINADO. Mx não troca o texto. |
 | GROK-08 FN-16 semáforo | — | | |
 | GROK-09 suporte não oncológico | — | | |
 | GROK-10 ownership | — | | |
@@ -247,6 +247,44 @@ Test Files  7 passed (7)
 ```
 
 7 da GROK-06, mais GROK-01 (38), GROK-02 (11), GROK-03 (7), GROK-04 (5), GROK-05 (6) e o loader (7).
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
+
+```
+Test Files  1 passed (1)
+     Tests  9 passed (9)
+```
+
+## GROK-07
+
+`avaliarNodulo` e `sugerirMx` em `src/rules/noduloIndeterminado.ts`. O limite de 10 mm, a pendência e a sugestão estão em `corpus/rulesets/rads-nodulo.v1.json`. Nódulo abaixo de 1 cm (incluindo "6–7 mm" e "0,9 cm") fica `INDETERMINADO`, com pendência "TC em 4 meses comparando". Igual a 1 cm não entra. Faixa que cruza 1 cm fica PENDENTE. Medida ausente não vira 0. `geraM1` e `bloqueiaSalvar` são os literais `false`.
+
+Texto com Mx (também cMx, pMx e cT2N0Mx) devolve a sugestão "cM0 com nódulos indeterminados" e o texto original intacto. "cM0" e "Máximo" não disparam.
+
+`git merge f0/w1-integrado` no início: `6c3141a` (prescrição, morfometria, D-W9-59/60). `src/rules/prescricao/**` e `src/rules/morfometria/**` não foram editados.
+
+Testes novos: `tests/w10-grok/grok-07-nodulo.test.ts` (5).
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries`
+
+```
+fronteiras ok (179 arquivos)
+```
+
+`npm run check:corpus` — `corpus/rulesets/rads-nodulo.v1.json` header ok, `[VERIFICAR]` 0. Fecho: `corpus ok (96 arquivos)`.
+
+`npx vitest run tests/w10-grok tests/corpus/loader.test.ts --no-file-parallelism`
+
+```
+Test Files  8 passed (8)
+     Tests  86 passed (86)
+```
+
+5 da GROK-07, mais GROK-01 (38), GROK-02 (11), GROK-03 (7), GROK-04 (5), GROK-05 (6), GROK-06 (7) e o loader (7).
 
 `npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
 

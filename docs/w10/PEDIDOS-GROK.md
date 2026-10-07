@@ -44,3 +44,10 @@ Faixa: `docs/ondas/W10-GROK.md`. Contrato que falta fica com tipo local `// PROV
 1. **Exame seriado.** `ExameSeriado` e `LacunasNaoSei` estão em `src/rules/intervalProgression.ts` (`// PROVISORIO-W10`). O literal `INTERVAL_PROGRESSION` já é `ExceptionKind` em `src/contracts/w10/extracao.ts`. Falta o contrato do exame (data, método, sítio, lateralidade, medida, descrição, exame dirigido).
 2. **Exame dirigido** sai do campo do laudo atual. A função não escolhe a modalidade. Sem nome, a pendência é "exame dirigido não nomeado no laudo".
 3. **NÃO SEI** só entra quando o chamador passa o mapa. Campo preenchido sai da lista. Campo ausente não vira fato.
+
+## GROK-07
+
+1. **Nódulo.** `AchadoNodulo` e `TextoEstadiamento` estão em `src/rules/noduloIndeterminado.ts` (`// PROVISORIO-W10`). Não há contrato publicado para o nódulo nem para a sugestão de Mx.
+2. **Mx não reescreve.** A sugestão "cM0 com nódulos indeterminados" sai ao lado do texto. `substituiu` é o literal `false`.
+3. **Faixa que cruza 1 cm** (ex.: 8–12 mm) não vira INDETERMINADO nem M1. Fica PENDENTE.
+4. **Faixa nova.** O merge `6c3141a` tirou `src/rules/prescricao/**` e `src/rules/morfometria/**` da faixa do Grok. Esta fatia não os editou.

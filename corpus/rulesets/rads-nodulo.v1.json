@@ -1,0 +1,34 @@
+{
+  "header": {
+    "id": "rads-nodulo",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-07",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-W9-31",
+      "trecho": "Nódulo < 1 cm (ou 6–7 mm) fica INDETERMINADO, com pendência TC em 4 meses comparando, e nunca vira M1. Igual a 1 cm não entra. Estadiamento com Mx recebe a sugestão cM0 com nódulos indeterminados, sem trocar o texto do médico.",
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-07"
+  },
+  "nodulo": {
+    "decisao": "D-W9-31",
+    "limiteExclusivoMm": 10,
+    "igualAoLimiteNaoIndetermina": true,
+    "bloqueiaSalvar": false,
+    "geraM1": false,
+    "tokenMx": "Mx",
+    "pendencia": "TC em 4 meses comparando",
+    "sugestaoMx": "cM0 com nódulos indeterminados",
+    "modeloMotivo": "Nódulo abaixo de 1 cm fica INDETERMINADO. Pendência: {pendencia}. Não gera M1",
+    "modeloFaixa": "A faixa de tamanho cruza 1 cm. Não classifica como INDETERMINADO nem como M1",
+    "modeloConflito": "A medida numérica e o texto do laudo não descrevem o mesmo tamanho. O conflito permanece e não vira M1",
+    "modeloAusente": "Tamanho do nódulo ausente. Não vira 0, nem INDETERMINADO, nem M1",
+    "modeloMx": "O estadiamento contém Mx. Sugestão ao médico, sem trocar o texto: {sugestao}",
+    "unidades": [
+      {"simbolo": "mm", "paraMm": 1},
+      {"simbolo": "cm", "paraMm": 10}
+    ]
+  }
+}
