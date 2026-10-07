@@ -3,7 +3,7 @@
 // TNM sobrescrito via supersede apaga o valor antigo (stageHistory não existe na projeção).
 // Dono provável: contracts/w10/clinico-w10.ts (tech lead) + kernel/projections (equipe interna).
 import { describe, expect, it } from "vitest";
-import { PatientTimeline } from "../../src/contracts/w10/clinico-w10.js";
+import { PatientTimeline, validarMonotonicidade } from "../../src/contracts/w10/clinico-w10.js";
 import { eventosVigentes, projetarSnapshot } from "../../src/kernel/projections/snapshot.js";
 import type { ClinicalEvent } from "../../src/contracts/operacao.js";
 
@@ -56,7 +56,11 @@ describe("RT-10 · ordem temporal e monotonicidade", () => {
       treatments: [], recist: [], missingRequiredData: [], unresolvedConflicts: [],
     };
     expect(PatientTimeline.safeParse(base).success).toBe(true);
-    const rebaixado = PatientTimeline.safeParse({ ...base, historicalMetastaticDisease: false });
+    // Tech lead (2026-10-07): schema sem memória não distingue "false legítimo" de "rebaixado"; a regra
+    // vira (1) monotonicidade entre versões e (2) M1 no stageHistory obriga true. Expectativa reescrita pelo tech lead.
+    expect(validarMonotonicidade(PatientTimeline.parse(base), { ...PatientTimeline.parse(base), historicalMetastaticDisease: false })).toBe(false);
+    const rebaixado = PatientTimeline.safeParse({ ...base, historicalMetastaticDisease: false,
+      stageHistory: [...base.stageHistory, { tipo: "CLINICO" as const, valor: "cT2N0M1", sistema: "TNM8", data: "2030-02-01", sourceId: "d2" }] });
     expect(rebaixado.success,
       "D-W9-33 §5.7: 'historicalMetastaticDisease = true nunca volta a false' — o contrato " +
       "PatientTimeline (clinico-w10.ts) apenas comenta a regra; o superRefine não existe e o " +

@@ -103,8 +103,17 @@ export const PatientTimeline = z.object({
   recist: z.array(RecistAvaliacao),
   missingRequiredData: z.array(z.string().min(1)),
   unresolvedConflicts: z.array(Id), // ids de ReviewException
-}).strict();
+}).strict().superRefine((t, ctx) => {
+  // RT-10b: M1 registrado em qualquer avaliação ⇒ doença metastática histórica (nunca false).
+  if (t.stageHistory.some((e) => /M1/i.test(e.valor)) && !t.historicalMetastaticDisease)
+    ctx.addIssue({ code: "custom", message: "stageHistory com M1 exige historicalMetastaticDisease = true" });
+});
 export type PatientTimeline = z.infer<typeof PatientTimeline>;
+
+/** RT-10b · monotonicidade entre versões da projeção: true nunca volta a false. Chamar no ponto de gravação. */
+export function validarMonotonicidade(anterior: PatientTimeline, novo: PatientTimeline): boolean {
+  return !(anterior.historicalMetastaticDisease && !novo.historicalMetastaticDisease);
+}
 
 /** Finalidades APAC de RADIOTERAPIA (Portaria SAES/MS 470/2021, Anexo II; D-W9-12). QT segue em `FinalidadeApac` (estados.ts).
  * O médico escolhe; nunca é deduzida da intenção clínica. */
