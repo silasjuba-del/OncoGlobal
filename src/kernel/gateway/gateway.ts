@@ -155,6 +155,9 @@ export function criarGateway(deps: {
         try {
           if (!evidenciasSaidaPassam(intent, evidencia)) return negar(acao, "GATES_SAIDA_NAO_PASSARAM");
         } catch { return negar(acao, "GATES_SAIDA_NAO_PASSARAM"); }
+        const destinoCanonico = evidencia.destinoCanonico;
+        const proibidoCanonico = HARD_FORBIDDEN.find((h) => h.teste({ ...intent, destino: destinoCanonico }));
+        if (proibidoCanonico) return negar(acao, `HARD_FORBIDDEN:${proibidoCanonico.id}`);
       }
 
       // Hash de conteúdo validado integra a chave idempotente; mudança de payload/destino nunca reaproveita autorização anterior.

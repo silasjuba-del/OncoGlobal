@@ -44,6 +44,15 @@ function montar(options: {
 }
 
 describe("W10-LUNA2 · saída externa governada", () => {
+  it.each([
+    ["production", "HARD_FORBIDDEN:producao"],
+    ["rede_social", "HARD_FORBIDDEN:rede-social-paciente"],
+  ])("recusa destino canônico proibido %s mesmo com destino do pedido ausente", async (destino, codigo) => {
+    const t = montar({ callback: async () => ({ ok: true, evidencia: evidencia("Conteúdo sintético", destino) }) });
+    expect(await t.gw.executar(intent(), sessao)).toMatchObject({ decisao: "NEGADA", motivoCodigo: codigo });
+    expect(t.chamadas()).toBe(0);
+  });
+
   it("passa G-02 + G-27 e executa exatamente o payload validado", async () => {
     const payload = "Minuta sintética sem PHI";
     const t = montar({ callback: async () => ({ ok: true, evidencia: evidencia(payload) }) });

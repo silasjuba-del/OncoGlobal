@@ -26,3 +26,9 @@ Reexecucao `LUNA2-F03-F04-R2`: typecheck exit 0; fronteiras ok (175 arquivos); c
 Log completo: `C:\Users\silas\Projects\OncoGlobal-wt\_w10-astra\logs\20261007-030015-165-LUNA2-F03-F04-R2.log` e arquivos `.typecheck.txt`, `.boundaries.txt`, `.corpus.txt`, `.vitest.txt` associados.
 
 Reataques R02-R05 incluidos: recibo local preservado; recibo externo UUID interno, sem texto recebido; snapshot profundo imutavel da evidencia; auditoria previa obrigatoria para egress. Integracao L1 ainda pendente nesta evidencia.
+
+## ASTRA-04 - destino canonico
+
+Reproducao `ASTRA-GATEWAY-RED`: 2 FAIL / 7 PASS confirmaram que production e rede_social resolvidos internamente contornavam HARD_FORBIDDEN. Correcao reavalia politica no destino efetivo validado antes da reserva/execucao.
+
+Reataque `ASTRA-GATEWAY-GREEN-R2`: typecheck/boundaries/corpus PASS; **12 arquivos / 76 testes PASS**, incluindo negativos novos, gateway legado, server e W3. Log `C:\Users\silas\Projects\OncoGlobal-wt\_w10-astra\logs\20261007-031910-273-ASTRA-GATEWAY-GREEN-R2.log`. Nenhuma saida real foi habilitada.
