@@ -1,0 +1,1325 @@
+{"de": "far.doxorrubicina", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "far.epirrubicina", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 8}
+{"de": "far.doxorrubicina_lipossomal", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "far.ciclofosfamida", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "far.paclitaxel", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "far.docetaxel", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "far.nab_paclitaxel", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "far.carboplatina", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "far.cisplatina", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "far.metotrexato", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "far.fluoruracila", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "far.capecitabina", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "far.gencitabina", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "far.eribulina", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "far.vinorelbina", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "far.filgrastim", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 8}
+{"de": "far.pegfilgrastim", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 8}
+{"de": "far.trastuzumabe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 10}
+{"de": "far.pertuzumabe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 10}
+{"de": "far.trastuzumabe_entansina", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 11}
+{"de": "far.trastuzumabe_deruxtecana", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "far.lapatinibe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 17}
+{"de": "far.neratinibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 11}
+{"de": "far.tucatinibe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 19}
+{"de": "far.pembrolizumabe", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 10}
+{"de": "far.atezolizumabe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "far.olaparibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "far.talazoparibe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "far.tamoxifeno", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "far.anastrozol", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "far.letrozol", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "far.exemestano", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "far.fulvestranto", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 8}
+{"de": "far.elacestranto", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 14}
+{"de": "far.imlunestranto", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 15}
+{"de": "far.triptorrelina", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "far.goserelina", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "far.abemaciclibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "far.ribociclibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "far.palbociclibe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 8}
+{"de": "far.inavolisibe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 8}
+{"de": "far.alpelisibe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 12}
+{"de": "far.capivasertibe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "far.everolimo", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "far.sacituzumabe_govitecana", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "far.datopotamabe_deruxtecana", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "far.acido_zoledronico", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "far.denosumabe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "far.megestrol", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "far.estradiol", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "far.larotrectinibe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "far.bevacizumabe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 24}
+{"de": "tum.mama", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 9}
+{"de": "bio.re-rp", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 5}
+{"de": "bio.re-rp", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 6}
+{"de": "bio.re-rp", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 5}
+{"de": "bio.er-low", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 13}
+{"de": "bio.er-low", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 14}
+{"de": "bio.er-low", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 25}
+{"de": "bio.her2", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 5}
+{"de": "bio.her2", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 23}
+{"de": "bio.her2", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "bio.her2-low-ultralow", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 15}
+{"de": "bio.her2-low-ultralow", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 5}
+{"de": "bio.her2-low-ultralow", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "bio.ki-67", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 5}
+{"de": "bio.ki-67", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 6}
+{"de": "bio.ki-67", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 14}
+{"de": "bio.brca", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 5}
+{"de": "bio.brca", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 7}
+{"de": "bio.brca", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 25}
+{"de": "bio.brca", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 14}
+{"de": "bio.brca", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 23}
+{"de": "bio.palb2", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 5}
+{"de": "bio.palb2", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 14}
+{"de": "bio.pik3ca", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 5}
+{"de": "bio.pik3ca", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 8}
+{"de": "bio.pik3ca", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "bio.pik3ca", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 13}
+{"de": "bio.akt1-pten", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 5}
+{"de": "bio.akt1-pten", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "bio.akt1-pten", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 13}
+{"de": "bio.esr1", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 14}
+{"de": "bio.esr1", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 15}
+{"de": "bio.pd-l1", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "bio.pd-l1", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 5}
+{"de": "bio.pd-l1", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 25}
+{"de": "bio.pd-l1", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 5}
+{"de": "bio.oncotype-rs", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 7}
+{"de": "bio.oncotype-rs", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 8}
+{"de": "bio.mammaprint", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 8}
+{"de": "bio.tils", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 5}
+{"de": "bio.tmb-msi-ntrk", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "bio.tmb-msi-ntrk", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "bio.tmb-msi-ntrk", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "dx.mama.rastreamento", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 4}
+{"de": "tum.mama", "rel": "DIAGNOSTICA_POR", "para": "dx.mama.rastreamento"}
+{"de": "dx.mama.avaliacao-clinica", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 5}
+{"de": "tum.mama", "rel": "DIAGNOSTICA_POR", "para": "dx.mama.avaliacao-clinica"}
+{"de": "dx.mama.imagem-locorregional", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 5}
+{"de": "dx.mama.imagem-locorregional", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 6}
+{"de": "tum.mama", "rel": "DIAGNOSTICA_POR", "para": "dx.mama.imagem-locorregional"}
+{"de": "dx.mama.core-biopsy", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 5}
+{"de": "dx.mama.core-biopsy", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 23}
+{"de": "tum.mama", "rel": "DIAGNOSTICA_POR", "para": "dx.mama.core-biopsy"}
+{"de": "dx.mama.ihq", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 5}
+{"de": "tum.mama", "rel": "DIAGNOSTICA_POR", "para": "dx.mama.ihq"}
+{"de": "dx.mama.axila-puncao", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 25}
+{"de": "tum.mama", "rel": "DIAGNOSTICA_POR", "para": "dx.mama.axila-puncao"}
+{"de": "dx.mama.rm-mamas", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 6}
+{"de": "tum.mama", "rel": "DIAGNOSTICA_POR", "para": "dx.mama.rm-mamas"}
+{"de": "dx.mama.clipagem", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 25}
+{"de": "dx.mama.clipagem", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 23}
+{"de": "tum.mama", "rel": "DIAGNOSTICA_POR", "para": "dx.mama.clipagem"}
+{"de": "dx.mama.ecocardiograma", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 25}
+{"de": "dx.mama.ecocardiograma", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 23}
+{"de": "tum.mama", "rel": "DIAGNOSTICA_POR", "para": "dx.mama.ecocardiograma"}
+{"de": "dx.mama.ecocardiograma", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "dx.mama.fertilidade-beta-hcg", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 24}
+{"de": "dx.mama.fertilidade-beta-hcg", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 23}
+{"de": "tum.mama", "rel": "DIAGNOSTICA_POR", "para": "dx.mama.fertilidade-beta-hcg"}
+{"de": "dx.mama.aconselhamento-genetico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 24}
+{"de": "dx.mama.aconselhamento-genetico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 23}
+{"de": "tum.mama", "rel": "DIAGNOSTICA_POR", "para": "dx.mama.aconselhamento-genetico"}
+{"de": "dx.mama.aconselhamento-genetico", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 23}
+{"de": "dx.mama.biopsia-metastase", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 5}
+{"de": "dx.mama.biopsia-metastase", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 6}
+{"de": "tum.mama", "rel": "DIAGNOSTICA_POR", "para": "dx.mama.biopsia-metastase"}
+{"de": "dx.mama.seguimento", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 23}
+{"de": "tum.mama", "rel": "DIAGNOSTICA_POR", "para": "dx.mama.seguimento"}
+{"de": "dx.mama.densitometria", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 21}
+{"de": "tum.mama", "rel": "DIAGNOSTICA_POR", "para": "dx.mama.densitometria"}
+{"de": "est.mama.ajcc8-t", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 10}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.ajcc8-t"}
+{"de": "est.mama.ajcc8-cn", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 11}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.ajcc8-cn"}
+{"de": "est.mama.ajcc8-pn", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 12}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.ajcc8-pn"}
+{"de": "est.mama.ajcc8-m", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 13}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.ajcc8-m"}
+{"de": "est.mama.ajcc8-anatomico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 14}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.ajcc8-anatomico"}
+{"de": "est.mama.ajcc8-prognostico-clinico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 15}
+{"de": "est.mama.ajcc8-prognostico-clinico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 16}
+{"de": "est.mama.ajcc8-prognostico-clinico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 17}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.ajcc8-prognostico-clinico"}
+{"de": "est.mama.ajcc8-prognostico-patologico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 18}
+{"de": "est.mama.ajcc8-prognostico-patologico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 19}
+{"de": "est.mama.ajcc8-prognostico-patologico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 20}
+{"de": "est.mama.ajcc8-prognostico-patologico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 21}
+{"de": "est.mama.ajcc8-prognostico-patologico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 22}
+{"de": "est.mama.ajcc8-prognostico-patologico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 23}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.ajcc8-prognostico-patologico"}
+{"de": "est.mama.oncotype-rs-menor-11", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 23}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.oncotype-rs-menor-11"}
+{"de": "est.mama.grau-histologico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 9}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.grau-histologico"}
+{"de": "est.mama.estadiamento-sistemico-inicial", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 6}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.estadiamento-sistemico-inicial"}
+{"de": "est.mama.estadiamento-sistemico-avancado", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 7}
+{"de": "est.mama.estadiamento-sistemico-avancado", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 8}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.estadiamento-sistemico-avancado"}
+{"de": "est.mama.pet-ct-fdg", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 7}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.pet-ct-fdg"}
+{"de": "est.mama.pet-ct-fes", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 7}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.pet-ct-fes"}
+{"de": "est.mama.metastatico-exames", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 5}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.metastatico-exames"}
+{"de": "est.mama.risco-clinico-adjuvancia", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 6}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.risco-clinico-adjuvancia"}
+{"de": "est.mama.cts5", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 16}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.cts5"}
+{"de": "est.mama.localmente-avancado-definicao", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 6}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.localmente-avancado-definicao"}
+{"de": "est.mama.resistencia-endocrina", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 11}
+{"de": "tum.mama", "rel": "ESTADIA_POR", "para": "est.mama.resistencia-endocrina"}
+{"de": "cen.mama.todos.cuidados-diagnostico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 24}
+{"de": "cen.mama.todos.cuidados-diagnostico", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 25}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.todos.cuidados-diagnostico"}
+{"de": "cen.mama.todos.adjuvante-geral", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 22}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.todos.adjuvante-geral"}
+{"de": "cen.mama.rh.neoadjuvante", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 7}
+{"de": "cen.mama.rh.neoadjuvante", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 11}
+{"de": "cen.mama.rh.neoadjuvante", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 12}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.rh.neoadjuvante"}
+{"de": "cen.mama.rh.adjuvante", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 13}
+{"de": "cen.mama.rh.adjuvante", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 14}
+{"de": "cen.mama.rh.adjuvante", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 15}
+{"de": "cen.mama.rh.adjuvante", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 16}
+{"de": "cen.mama.rh.adjuvante", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 21}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.rh.adjuvante"}
+{"de": "cen.mama.rh.metastatico-1a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 8}
+{"de": "cen.mama.rh.metastatico-1a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.rh.metastatico-1a-linha"}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 11}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.rh.metastatico-2a-linha"}
+{"de": "cen.mama.rh.metastatico-endocrino-refratario", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "cen.mama.rh.metastatico-endocrino-refratario", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.rh.metastatico-endocrino-refratario"}
+{"de": "cen.mama.tn.neoadjuvante-estadio-i", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 13}
+{"de": "cen.mama.tn.neoadjuvante-estadio-i", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 14}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.tn.neoadjuvante-estadio-i"}
+{"de": "cen.mama.tn.neoadjuvante-estadio-ii-iii", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 13}
+{"de": "cen.mama.tn.neoadjuvante-estadio-ii-iii", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 14}
+{"de": "cen.mama.tn.neoadjuvante-estadio-ii-iii", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 15}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.tn.neoadjuvante-estadio-ii-iii"}
+{"de": "cen.mama.tn.adjuvante", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.tn.adjuvante"}
+{"de": "cen.mama.tn.doenca-residual", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "cen.mama.tn.doenca-residual", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.tn.doenca-residual"}
+{"de": "cen.mama.tn.doenca-residual", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 13}
+{"de": "cen.mama.tn.metastatico-1a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "cen.mama.tn.metastatico-1a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 25}
+{"de": "cen.mama.tn.metastatico-1a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.tn.metastatico-1a-linha"}
+{"de": "cen.mama.tn.metastatico-2a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "cen.mama.tn.metastatico-2a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.tn.metastatico-2a-linha"}
+{"de": "cen.mama.tn.metastatico-3a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "cen.mama.tn.metastatico-3a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.tn.metastatico-3a-linha"}
+{"de": "cen.mama.her2.neoadjuvante", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "cen.mama.her2.neoadjuvante", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 17}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.her2.neoadjuvante"}
+{"de": "cen.mama.her2.adjuvante", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "cen.mama.her2.adjuvante", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.her2.adjuvante"}
+{"de": "cen.mama.her2.pos-neoadjuvante-rpc", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "cen.mama.her2.pos-neoadjuvante-rpc", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 17}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.her2.pos-neoadjuvante-rpc"}
+{"de": "cen.mama.her2.pos-neoadjuvante-rpc", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "cen.mama.her2.doenca-residual", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "cen.mama.her2.doenca-residual", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 17}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.her2.doenca-residual"}
+{"de": "cen.mama.her2.doenca-residual", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "cen.mama.her2.metastatico-1a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 17}
+{"de": "cen.mama.her2.metastatico-1a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 18}
+{"de": "cen.mama.her2.metastatico-1a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "cen.mama.her2.metastatico-1a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 21}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.her2.metastatico-1a-linha"}
+{"de": "cen.mama.her2.metastatico-2a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 17}
+{"de": "cen.mama.her2.metastatico-2a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 19}
+{"de": "cen.mama.her2.metastatico-2a-linha", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 21}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.her2.metastatico-2a-linha"}
+{"de": "cen.mama.her2.metastatico-linhas-subsequentes", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 17}
+{"de": "cen.mama.her2.metastatico-linhas-subsequentes", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 19}
+{"de": "cen.mama.her2.metastatico-linhas-subsequentes", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "cen.mama.her2.metastatico-linhas-subsequentes", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 21}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.her2.metastatico-linhas-subsequentes"}
+{"de": "cen.mama.cdis.tratamento", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 21}
+{"de": "cen.mama.cdis.tratamento", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 22}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.cdis.tratamento"}
+{"de": "cen.mama.homem.adjuvante", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 5}
+{"de": "tum.mama", "rel": "TEM_CENARIO", "para": "cen.mama.homem.adjuvante"}
+{"de": "cen.mama.rh.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.re-rp", "para_que": "definir subtipo"}
+{"de": "cen.mama.rh.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "definir subtipo"}
+{"de": "cen.mama.rh.neoadjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.re-rp", "para_que": "definir subtipo"}
+{"de": "cen.mama.rh.neoadjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "definir subtipo"}
+{"de": "cen.mama.her2.neoadjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.re-rp", "para_que": "definir subtipo"}
+{"de": "cen.mama.her2.neoadjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "definir subtipo"}
+{"de": "cen.mama.her2.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.re-rp", "para_que": "definir subtipo"}
+{"de": "cen.mama.her2.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "definir subtipo"}
+{"de": "cen.mama.tn.neoadjuvante-estadio-i", "rel": "EXIGE_BIOMARCADOR", "para": "bio.re-rp", "para_que": "definir subtipo"}
+{"de": "cen.mama.tn.neoadjuvante-estadio-i", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "definir subtipo"}
+{"de": "cen.mama.tn.neoadjuvante-estadio-ii-iii", "rel": "EXIGE_BIOMARCADOR", "para": "bio.re-rp", "para_que": "definir subtipo"}
+{"de": "cen.mama.tn.neoadjuvante-estadio-ii-iii", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "definir subtipo"}
+{"de": "cen.mama.tn.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.re-rp", "para_que": "definir subtipo"}
+{"de": "cen.mama.tn.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "definir subtipo"}
+{"de": "cen.mama.rh.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ki-67", "para_que": "critério de alto risco (QT; abemaciclibe/ribociclibe)"}
+{"de": "cen.mama.rh.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.oncotype-rs", "para_que": "decidir omissão/indicação de QT adjuvante"}
+{"de": "cen.mama.rh.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.mammaprint", "para_que": "decidir omissão de QT (alto risco clínico, pós-menopausa)"}
+{"de": "cen.mama.rh.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.brca", "para_que": "olaparibe adjuvante em gBRCA de alto risco"}
+{"de": "cen.mama.rh.neoadjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.oncotype-rs", "para_que": "evitar QT neoadjuvante automática em pós-menopausa até cN1 (possível omissão de QT)"}
+{"de": "cen.mama.rh.neoadjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ki-67", "para_que": "seleção para HT neoadjuvante (Ki67 baixo)"}
+{"de": "cen.mama.tn.neoadjuvante-estadio-ii-iii", "rel": "EXIGE_BIOMARCADOR", "para": "bio.er-low", "para_que": "ER-low manejado como TN"}
+{"de": "cen.mama.tn.neoadjuvante-estadio-i", "rel": "EXIGE_BIOMARCADOR", "para": "bio.er-low", "para_que": "ER-low manejado como TN"}
+{"de": "cen.mama.tn.doenca-residual", "rel": "EXIGE_BIOMARCADOR", "para": "bio.brca", "para_que": "olaparibe se gBRCA"}
+{"de": "cen.mama.tn.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.brca", "para_que": "olaparibe se gBRCA de alto risco (≥ T2 ou N+)"}
+{"de": "cen.mama.tn.neoadjuvante-estadio-ii-iii", "rel": "EXIGE_BIOMARCADOR", "para": "bio.tils", "para_que": "informação prognóstica/preditiva"}
+{"de": "cen.mama.her2.neoadjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.tils", "para_que": "informação prognóstica/preditiva"}
+{"de": "cen.mama.rh.metastatico-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pik3ca", "para_que": "fulvestranto + palbociclibe + inavolisibe se resistência endócrina"}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pik3ca", "para_que": "capivasertibe (ou alpelisibe) + fulvestranto"}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.akt1-pten", "para_que": "capivasertibe + fulvestranto"}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.brca", "para_que": "olaparibe ou talazoparibe"}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.palb2", "para_que": "pesquisa germinativa (olaparibe ativo em PALB2 – TBCRC 048)"}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2-low-ultralow", "para_que": "trastuzumabe deruxtecana"}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.esr1", "para_que": "SERDs orais (sem aprovação Anvisa)"}
+{"de": "cen.mama.rh.metastatico-endocrino-refratario", "rel": "EXIGE_BIOMARCADOR", "para": "bio.brca", "para_que": "iPARP"}
+{"de": "cen.mama.rh.metastatico-endocrino-refratario", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2-low-ultralow", "para_que": "T-DXd"}
+{"de": "cen.mama.rh.metastatico-endocrino-refratario", "rel": "EXIGE_BIOMARCADOR", "para": "bio.tmb-msi-ntrk", "para_que": "terapia alvo na 3ª linha em diante"}
+{"de": "cen.mama.tn.metastatico-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pd-l1", "para_que": "pembrolizumabe + QT se CPS ≥ 10"}
+{"de": "cen.mama.tn.metastatico-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.brca", "para_que": "iPARP se CPS < 10 e gBRCA"}
+{"de": "cen.mama.tn.metastatico-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.er-low", "para_que": "RE 1-10% com HER2- segue fluxograma TN"}
+{"de": "cen.mama.tn.metastatico-2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.brca", "para_que": "iPARP"}
+{"de": "cen.mama.tn.metastatico-2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2-low-ultralow", "para_que": "T-DXd se HER2 1+/2+ ISH-"}
+{"de": "cen.mama.tn.metastatico-3a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.tmb-msi-ntrk", "para_que": "terapia alvo guiada por biomarcador"}
+{"de": "cen.mama.her2.metastatico-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.re-rp", "para_que": "HER2+/RH+: anti-HER2 + HT na manutenção"}
+{"de": "reg.mama.rh.neo-acdd-t", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 11}
+{"de": "reg.mama.rh.neo-acdd-t", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 7}
+{"de": "reg.mama.rh.neo-acdd-t", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 8}
+{"de": "cen.mama.rh.neoadjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.neo-acdd-t", "linha": "neoadjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.neo-acdd-t", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.rh.neo-acdd-t", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.rh.neo-acdd-t", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.rh.neo-acdd-t", "rel": "USA_FARMACO", "para": "far.filgrastim"}
+{"de": "reg.mama.rh.neo-acdd-t", "rel": "USA_FARMACO", "para": "far.pegfilgrastim"}
+{"de": "reg.mama.rh.neo-ac-t", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 11}
+{"de": "reg.mama.rh.neo-ac-t", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 8}
+{"de": "cen.mama.rh.neoadjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.neo-ac-t", "linha": "neoadjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.neo-ac-t", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.rh.neo-ac-t", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.rh.neo-ac-t", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.rh.neo-ac-t", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.mama.rh.neo-ec-t", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 11}
+{"de": "reg.mama.rh.neo-ec-t", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 8}
+{"de": "cen.mama.rh.neoadjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.neo-ec-t", "linha": "neoadjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.neo-ec-t", "rel": "USA_FARMACO", "para": "far.epirrubicina"}
+{"de": "reg.mama.rh.neo-ec-t", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.rh.neo-ec-t", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.rh.neo-ec-t", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.mama.rh.neo-5fu-contra", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 11}
+{"de": "cen.mama.rh.neoadjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.neo-5fu-contra", "linha": "neoadjuvante", "intencao": "curativa", "direcao_recomendacao": "contra"}
+{"de": "reg.mama.rh.neo-5fu-contra", "rel": "USA_FARMACO", "para": "far.fluoruracila"}
+{"de": "reg.mama.rh.neo-5fu-contra", "rel": "USA_FARMACO", "para": "far.epirrubicina"}
+{"de": "reg.mama.rh.neo-5fu-contra", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.rh.neo-ia", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 12}
+{"de": "cen.mama.rh.neoadjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.neo-ia", "linha": "neoadjuvante", "intencao": "curativa", "condicao_biomarcador": "pós-menopausa; grau 1-2, RE forte, RP+, Ki67 baixo, HER2- (luminal A-like)"}
+{"de": "reg.mama.rh.neo-ia", "rel": "USA_FARMACO", "para": "far.anastrozol"}
+{"de": "reg.mama.rh.neo-ia", "rel": "USA_FARMACO", "para": "far.letrozol"}
+{"de": "reg.mama.rh.neo-ia", "rel": "USA_FARMACO", "para": "far.exemestano"}
+{"de": "reg.mama.rh.adj-tc", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 13}
+{"de": "reg.mama.rh.adj-tc", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 10}
+{"de": "cen.mama.rh.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.adj-tc", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.adj-tc", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.mama.rh.adj-tc", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.rh.adj-acdd-t", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 13}
+{"de": "reg.mama.rh.adj-acdd-t", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "cen.mama.rh.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.adj-acdd-t", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.adj-acdd-t", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.rh.adj-acdd-t", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.rh.adj-acdd-t", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.rh.adj-acdd-t", "rel": "USA_FARMACO", "para": "far.filgrastim"}
+{"de": "reg.mama.rh.adj-acdd-t", "rel": "USA_FARMACO", "para": "far.pegfilgrastim"}
+{"de": "reg.mama.rh.adj-ac-t", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 13}
+{"de": "reg.mama.rh.adj-ac-t", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "cen.mama.rh.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.adj-ac-t", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.adj-ac-t", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.rh.adj-ac-t", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.rh.adj-ac-t", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.rh.adj-ac-t", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.mama.rh.adj-ac", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 13}
+{"de": "reg.mama.rh.adj-ac", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "cen.mama.rh.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.adj-ac", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FRACA"}
+{"de": "reg.mama.rh.adj-ac", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.rh.adj-ac", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.rh.adj-cmf-classico", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 13}
+{"de": "reg.mama.rh.adj-cmf-classico", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "cen.mama.rh.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.adj-cmf-classico", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FRACA"}
+{"de": "reg.mama.rh.adj-cmf-classico", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.rh.adj-cmf-classico", "rel": "USA_FARMACO", "para": "far.metotrexato"}
+{"de": "reg.mama.rh.adj-cmf-classico", "rel": "USA_FARMACO", "para": "far.fluoruracila"}
+{"de": "reg.mama.rh.adj-cmf-ev", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 13}
+{"de": "reg.mama.rh.adj-cmf-ev", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "cen.mama.rh.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.adj-cmf-ev", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FRACA"}
+{"de": "reg.mama.rh.adj-cmf-ev", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.rh.adj-cmf-ev", "rel": "USA_FARMACO", "para": "far.metotrexato"}
+{"de": "reg.mama.rh.adj-cmf-ev", "rel": "USA_FARMACO", "para": "far.fluoruracila"}
+{"de": "reg.mama.rh.adj-5fu-contra", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 13}
+{"de": "cen.mama.rh.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.adj-5fu-contra", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE", "direcao_recomendacao": "contra"}
+{"de": "reg.mama.rh.adj-5fu-contra", "rel": "USA_FARMACO", "para": "far.fluoruracila"}
+{"de": "reg.mama.rh.adj-tmx-pre", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 14}
+{"de": "reg.mama.rh.adj-tmx-pre", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "reg.mama.rh.adj-tmx-pre", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 15}
+{"de": "cen.mama.rh.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.adj-tmx-pre", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "pré-menopausa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.adj-tmx-pre", "rel": "USA_FARMACO", "para": "far.tamoxifeno"}
+{"de": "reg.mama.rh.adj-so-tmx-ia", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 14}
+{"de": "reg.mama.rh.adj-so-tmx-ia", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "reg.mama.rh.adj-so-tmx-ia", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 15}
+{"de": "cen.mama.rh.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.adj-so-tmx-ia", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "pré-menopausa (alto risco)", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.adj-so-tmx-ia", "rel": "USA_FARMACO", "para": "far.triptorrelina"}
+{"de": "reg.mama.rh.adj-so-tmx-ia", "rel": "USA_FARMACO", "para": "far.goserelina"}
+{"de": "reg.mama.rh.adj-so-tmx-ia", "rel": "USA_FARMACO", "para": "far.tamoxifeno"}
+{"de": "reg.mama.rh.adj-so-tmx-ia", "rel": "USA_FARMACO", "para": "far.exemestano"}
+{"de": "reg.mama.rh.adj-so-tmx-ia", "rel": "USA_FARMACO", "para": "far.anastrozol"}
+{"de": "reg.mama.rh.adj-so-tmx-ia", "rel": "USA_FARMACO", "para": "far.letrozol"}
+{"de": "reg.mama.rh.adj-ht-pos", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 14}
+{"de": "reg.mama.rh.adj-ht-pos", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "reg.mama.rh.adj-ht-pos", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 15}
+{"de": "reg.mama.rh.adj-ht-pos", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 16}
+{"de": "reg.mama.rh.adj-ht-pos", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 17}
+{"de": "cen.mama.rh.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.adj-ht-pos", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "pós-menopausa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.adj-ht-pos", "rel": "USA_FARMACO", "para": "far.tamoxifeno"}
+{"de": "reg.mama.rh.adj-ht-pos", "rel": "USA_FARMACO", "para": "far.anastrozol"}
+{"de": "reg.mama.rh.adj-ht-pos", "rel": "USA_FARMACO", "para": "far.letrozol"}
+{"de": "reg.mama.rh.adj-ht-pos", "rel": "USA_FARMACO", "para": "far.exemestano"}
+{"de": "reg.mama.rh.adj-abemaciclibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 14}
+{"de": "reg.mama.rh.adj-abemaciclibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "reg.mama.rh.adj-abemaciclibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 15}
+{"de": "cen.mama.rh.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.adj-abemaciclibe", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "alto risco clínico: ≥ 4 LFN, ou 1-3 LFN com T ≥ 5 cm ou G3 ou Ki67 ≥ 20%", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.adj-abemaciclibe", "rel": "USA_FARMACO", "para": "far.abemaciclibe"}
+{"de": "reg.mama.rh.adj-abemaciclibe", "rel": "USA_FARMACO", "para": "far.anastrozol"}
+{"de": "reg.mama.rh.adj-abemaciclibe", "rel": "USA_FARMACO", "para": "far.letrozol"}
+{"de": "reg.mama.rh.adj-abemaciclibe", "rel": "USA_FARMACO", "para": "far.exemestano"}
+{"de": "reg.mama.rh.adj-abemaciclibe", "rel": "USA_FARMACO", "para": "far.tamoxifeno"}
+{"de": "reg.mama.rh.adj-ribociclibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 14}
+{"de": "reg.mama.rh.adj-ribociclibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "reg.mama.rh.adj-ribociclibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 15}
+{"de": "cen.mama.rh.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.adj-ribociclibe", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "alto risco clínico: N+ (qualquer), ou N0 com T ≥ 2 cm + G3, ou T ≥ 2 cm + Ki67 ≥ 20% / alto risco genômico", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.adj-ribociclibe", "rel": "USA_FARMACO", "para": "far.ribociclibe"}
+{"de": "reg.mama.rh.adj-ribociclibe", "rel": "USA_FARMACO", "para": "far.anastrozol"}
+{"de": "reg.mama.rh.adj-ribociclibe", "rel": "USA_FARMACO", "para": "far.letrozol"}
+{"de": "reg.mama.rh.adj-ribociclibe", "rel": "USA_FARMACO", "para": "far.exemestano"}
+{"de": "reg.mama.rh.adj-palbociclibe-contra", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 15}
+{"de": "reg.mama.rh.adj-palbociclibe-contra", "rel": "USA_FARMACO", "para": "far.palbociclibe"}
+{"de": "reg.mama.rh.adj-olaparibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 14}
+{"de": "reg.mama.rh.adj-olaparibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "reg.mama.rh.adj-olaparibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "cen.mama.rh.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.adj-olaparibe", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "variante patogênica germinativa BRCA1/2 + alto risco: doença residual com CPS-EG ≥ 3 após neoadjuvância, ou ≥ 4 LFN após QT adjuvante", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.adj-olaparibe", "rel": "USA_FARMACO", "para": "far.olaparibe"}
+{"de": "reg.mama.rh.adj-osteolise", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 21}
+{"de": "reg.mama.rh.adj-osteolise", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "cen.mama.rh.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.rh.adj-osteolise", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "pós-menopausa (natural ou induzida) ou pré-menopausa em supressão ovariana", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.adj-osteolise", "rel": "USA_FARMACO", "para": "far.acido_zoledronico"}
+{"de": "reg.mama.rh.adj-osteolise", "rel": "USA_FARMACO", "para": "far.denosumabe"}
+{"de": "reg.mama.tn.neo-i-acdd-t", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 13}
+{"de": "reg.mama.tn.neo-i-acdd-t", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 8}
+{"de": "reg.mama.tn.neo-i-acdd-t", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 14}
+{"de": "cen.mama.tn.neoadjuvante-estadio-i", "rel": "TRATA_COM", "para": "reg.mama.tn.neo-i-acdd-t", "linha": "neoadjuvante", "intencao": "curativa", "condicao_biomarcador": "TN ou ER-low, T1c (1-2 cm) N0", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.neo-i-acdd-t", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.tn.neo-i-acdd-t", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.tn.neo-i-acdd-t", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.neo-i-acdd-t", "rel": "USA_FARMACO", "para": "far.filgrastim"}
+{"de": "reg.mama.tn.neo-i-acdd-t", "rel": "USA_FARMACO", "para": "far.pegfilgrastim"}
+{"de": "reg.mama.tn.neo-i-ac-t", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 13}
+{"de": "reg.mama.tn.neo-i-ac-t", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 8}
+{"de": "cen.mama.tn.neoadjuvante-estadio-i", "rel": "TRATA_COM", "para": "reg.mama.tn.neo-i-ac-t", "linha": "neoadjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.neo-i-ac-t", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.tn.neo-i-ac-t", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.tn.neo-i-ac-t", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.neo-i-ac-carbo-pacli", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 13}
+{"de": "reg.mama.tn.neo-i-ac-carbo-pacli", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 8}
+{"de": "cen.mama.tn.neoadjuvante-estadio-i", "rel": "TRATA_COM", "para": "reg.mama.tn.neo-i-ac-carbo-pacli", "linha": "neoadjuvante", "intencao": "curativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.neo-i-ac-carbo-pacli", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.tn.neo-i-ac-carbo-pacli", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.tn.neo-i-ac-carbo-pacli", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.mama.tn.neo-i-ac-carbo-pacli", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.neo-i-carbo-pacli", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 13}
+{"de": "reg.mama.tn.neo-i-carbo-pacli", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 8}
+{"de": "reg.mama.tn.neo-i-carbo-pacli", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 14}
+{"de": "cen.mama.tn.neoadjuvante-estadio-i", "rel": "TRATA_COM", "para": "reg.mama.tn.neo-i-carbo-pacli", "linha": "neoadjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.neo-i-carbo-pacli", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.mama.tn.neo-i-carbo-pacli", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.neo-kn522", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 13}
+{"de": "reg.mama.tn.neo-kn522", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 10}
+{"de": "reg.mama.tn.neo-kn522", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 14}
+{"de": "cen.mama.tn.neoadjuvante-estadio-ii-iii", "rel": "TRATA_COM", "para": "reg.mama.tn.neo-kn522", "linha": "neoadjuvante", "intencao": "curativa", "condicao_biomarcador": "TN ou ER-low, > 2 cm ou N+ (estádios II-III)", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.neo-kn522", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.mama.tn.neo-kn522", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.neo-kn522", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.mama.tn.neo-kn522", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.tn.neo-kn522", "rel": "USA_FARMACO", "para": "far.epirrubicina"}
+{"de": "reg.mama.tn.neo-kn522", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.tn.neo-ac-t-sem-pembro", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 13}
+{"de": "reg.mama.tn.neo-ac-t-sem-pembro", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 8}
+{"de": "cen.mama.tn.neoadjuvante-estadio-ii-iii", "rel": "TRATA_COM", "para": "reg.mama.tn.neo-ac-t-sem-pembro", "linha": "neoadjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.neo-ac-t-sem-pembro", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.tn.neo-ac-t-sem-pembro", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.tn.neo-ac-t-sem-pembro", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 13}
+{"de": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 8}
+{"de": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 15}
+{"de": "cen.mama.tn.neoadjuvante-estadio-ii-iii", "rel": "TRATA_COM", "para": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro", "linha": "neoadjuvante", "intencao": "curativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.neo-rt-capecitabina-refratario", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 13}
+{"de": "reg.mama.tn.neo-rt-capecitabina-refratario", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 15}
+{"de": "cen.mama.tn.neoadjuvante-estadio-ii-iii", "rel": "TRATA_COM", "para": "reg.mama.tn.neo-rt-capecitabina-refratario", "linha": "neoadjuvante (após refratariedade)", "intencao": "curativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.neo-rt-capecitabina-refratario", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "reg.mama.tn.adj-acdd-t", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "reg.mama.tn.adj-acdd-t", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "cen.mama.tn.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.tn.adj-acdd-t", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.adj-acdd-t", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.tn.adj-acdd-t", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.tn.adj-acdd-t", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.adj-acdd-t", "rel": "USA_FARMACO", "para": "far.filgrastim"}
+{"de": "reg.mama.tn.adj-acdd-t", "rel": "USA_FARMACO", "para": "far.pegfilgrastim"}
+{"de": "reg.mama.tn.adj-ac-t", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "reg.mama.tn.adj-ac-t", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "cen.mama.tn.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.tn.adj-ac-t", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.adj-ac-t", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.tn.adj-ac-t", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.tn.adj-ac-t", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.adj-ac-t", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.mama.tn.adj-carbo-pacli", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "reg.mama.tn.adj-carbo-pacli", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "reg.mama.tn.adj-carbo-pacli", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 13}
+{"de": "cen.mama.tn.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.tn.adj-carbo-pacli", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.adj-carbo-pacli", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.mama.tn.adj-carbo-pacli", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.adj-ac", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "reg.mama.tn.adj-ac", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "cen.mama.tn.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.tn.adj-ac", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FRACA"}
+{"de": "reg.mama.tn.adj-ac", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.tn.adj-ac", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.tn.adj-tc", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "reg.mama.tn.adj-tc", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 10}
+{"de": "cen.mama.tn.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.tn.adj-tc", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.adj-tc", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.mama.tn.adj-tc", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.tn.adj-cmf-classico", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "reg.mama.tn.adj-cmf-classico", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "cen.mama.tn.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.tn.adj-cmf-classico", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FRACA"}
+{"de": "reg.mama.tn.adj-cmf-classico", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.tn.adj-cmf-classico", "rel": "USA_FARMACO", "para": "far.metotrexato"}
+{"de": "reg.mama.tn.adj-cmf-classico", "rel": "USA_FARMACO", "para": "far.fluoruracila"}
+{"de": "reg.mama.tn.adj-cmf-ev", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "reg.mama.tn.adj-cmf-ev", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "cen.mama.tn.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.tn.adj-cmf-ev", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FRACA"}
+{"de": "reg.mama.tn.adj-cmf-ev", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.tn.adj-cmf-ev", "rel": "USA_FARMACO", "para": "far.metotrexato"}
+{"de": "reg.mama.tn.adj-cmf-ev", "rel": "USA_FARMACO", "para": "far.fluoruracila"}
+{"de": "reg.mama.tn.adj-olaparibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "reg.mama.tn.adj-olaparibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "cen.mama.tn.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.tn.adj-olaparibe", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "gBRCA1/2 + tumor ≥ T2 ou N+ após QT adjuvante", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.adj-olaparibe", "rel": "USA_FARMACO", "para": "far.olaparibe"}
+{"de": "reg.mama.tn.residual-capecitabina", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "reg.mama.tn.residual-capecitabina", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "reg.mama.tn.residual-capecitabina", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 10}
+{"de": "reg.mama.tn.residual-capecitabina", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "cen.mama.tn.doenca-residual", "rel": "TRATA_COM", "para": "reg.mama.tn.residual-capecitabina", "linha": "adjuvante pós-neoadjuvância", "intencao": "curativa", "condicao_biomarcador": "doença residual após neo com antracíclico e/ou taxano; independente de BRCA", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.residual-capecitabina", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "reg.mama.tn.residual-pembrolizumabe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "reg.mama.tn.residual-pembrolizumabe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 10}
+{"de": "reg.mama.tn.residual-pembrolizumabe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "cen.mama.tn.doenca-residual", "rel": "TRATA_COM", "para": "reg.mama.tn.residual-pembrolizumabe", "linha": "adjuvante pós-neoadjuvância", "intencao": "curativa", "condicao_biomarcador": "tratadas com pembrolizumabe na neoadjuvância, independentemente da resposta", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.residual-pembrolizumabe", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.mama.tn.residual-olaparibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "reg.mama.tn.residual-olaparibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 12}
+{"de": "reg.mama.tn.residual-olaparibe", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "cen.mama.tn.doenca-residual", "rel": "TRATA_COM", "para": "reg.mama.tn.residual-olaparibe", "linha": "adjuvante pós-neoadjuvância", "intencao": "curativa", "condicao_biomarcador": "gBRCA1/2 com doença residual após neoadjuvância", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.residual-olaparibe", "rel": "USA_FARMACO", "para": "far.olaparibe"}
+{"de": "reg.mama.her2.neo-tchp", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "reg.mama.her2.neo-tchp", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 9}
+{"de": "reg.mama.her2.neo-tchp", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 17}
+{"de": "cen.mama.her2.neoadjuvante", "rel": "TRATA_COM", "para": "reg.mama.her2.neo-tchp", "linha": "neoadjuvante", "intencao": "curativa", "condicao_biomarcador": "HER2+ > 2 cm ou localmente avançado", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.neo-tchp", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.mama.her2.neo-tchp", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.her2.neo-tchp", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.mama.her2.neo-tchp", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.neo-tchp", "rel": "USA_FARMACO", "para": "far.pertuzumabe"}
+{"de": "reg.mama.her2.neo-thp", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "reg.mama.her2.neo-thp", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 9}
+{"de": "cen.mama.her2.neoadjuvante", "rel": "TRATA_COM", "para": "reg.mama.her2.neo-thp", "linha": "neoadjuvante", "intencao": "curativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.neo-thp", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.mama.her2.neo-thp", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.her2.neo-thp", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.neo-thp", "rel": "USA_FARMACO", "para": "far.pertuzumabe"}
+{"de": "reg.mama.her2.neo-acthp", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "reg.mama.her2.neo-acthp", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 8}
+{"de": "reg.mama.her2.neo-acthp", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 9}
+{"de": "reg.mama.her2.neo-acthp", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 10}
+{"de": "cen.mama.her2.neoadjuvante", "rel": "TRATA_COM", "para": "reg.mama.her2.neo-acthp", "linha": "neoadjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.neo-acthp", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.her2.neo-acthp", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.her2.neo-acthp", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.her2.neo-acthp", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.neo-acthp", "rel": "USA_FARMACO", "para": "far.pertuzumabe"}
+{"de": "reg.mama.her2.neo-th", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "reg.mama.her2.neo-th", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 10}
+{"de": "cen.mama.her2.neoadjuvante", "rel": "TRATA_COM", "para": "reg.mama.her2.neo-th", "linha": "neoadjuvante", "intencao": "curativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.neo-th", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.her2.neo-th", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.neo-tdxd-thp-db11", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 17}
+{"de": "reg.mama.her2.neo-tdxd-thp-db11", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "reg.mama.her2.neo-tdxd-thp-db11", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.her2.neo-tdxd-thp-db11", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.neo-tdxd-thp-db11", "rel": "USA_FARMACO", "para": "far.pertuzumabe"}
+{"de": "reg.mama.her2.rpc-trastuzumabe-cn0", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "reg.mama.her2.rpc-trastuzumabe-cn0", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 9}
+{"de": "cen.mama.her2.pos-neoadjuvante-rpc", "rel": "TRATA_COM", "para": "reg.mama.her2.rpc-trastuzumabe-cn0", "linha": "adjuvante pós-neoadjuvância", "intencao": "curativa", "condicao_biomarcador": "RPC; cN0 ao diagnóstico", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.rpc-trastuzumabe-cn0", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.rpc-trastuzumabe-cn0", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "reg.mama.her2.rpc-pertuzumabe-trastuzumabe-cn", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "reg.mama.her2.rpc-pertuzumabe-trastuzumabe-cn", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 17}
+{"de": "cen.mama.her2.pos-neoadjuvante-rpc", "rel": "TRATA_COM", "para": "reg.mama.her2.rpc-pertuzumabe-trastuzumabe-cn", "linha": "adjuvante pós-neoadjuvância", "intencao": "curativa", "condicao_biomarcador": "RPC; cN+ ao diagnóstico (comprometimento axilar)", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.rpc-pertuzumabe-trastuzumabe-cn", "rel": "USA_FARMACO", "para": "far.pertuzumabe"}
+{"de": "reg.mama.her2.rpc-pertuzumabe-trastuzumabe-cn", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.rpc-pertuzumabe-trastuzumabe-cn", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "reg.mama.her2.residual-tdm1", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "reg.mama.her2.residual-tdm1", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 17}
+{"de": "cen.mama.her2.doenca-residual", "rel": "TRATA_COM", "para": "reg.mama.her2.residual-tdm1", "linha": "adjuvante pós-neoadjuvância", "intencao": "curativa", "condicao_biomarcador": "doença residual invasiva após QT neo com bloqueio simples ou duplo", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.residual-tdm1", "rel": "USA_FARMACO", "para": "far.trastuzumabe_entansina"}
+{"de": "reg.mama.her2.residual-tdm1", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "reg.mama.her2.residual-tdm1", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 11}
+{"de": "reg.mama.her2.neratinibe-estendido", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "reg.mama.her2.neratinibe-estendido", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 11}
+{"de": "reg.mama.her2.neratinibe-estendido", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "cen.mama.her2.doenca-residual", "rel": "TRATA_COM", "para": "reg.mama.her2.neratinibe-estendido", "linha": "adjuvante estendida", "intencao": "curativa", "condicao_biomarcador": "HER2+/RH+, em especial com doença residual após neoadjuvância", "nivel_evidencia": "ALTO", "forca_recomendacao": "FRACA"}
+{"de": "reg.mama.her2.neratinibe-estendido", "rel": "USA_FARMACO", "para": "far.neratinibe"}
+{"de": "cen.mama.her2.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.her2.neratinibe-estendido", "linha": "adjuvante estendida", "intencao": "curativa", "condicao_biomarcador": "HER2+/RH+", "nivel_evidencia": "ALTO", "forca_recomendacao": "FRACA"}
+{"de": "reg.mama.her2.residual-tdxd-db05", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "reg.mama.her2.residual-tdxd-db05", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "reg.mama.her2.adj-acdd-th", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "reg.mama.her2.adj-acdd-th", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "reg.mama.her2.adj-acdd-th", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 11}
+{"de": "cen.mama.her2.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.her2.adj-acdd-th", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.adj-acdd-th", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.her2.adj-acdd-th", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.her2.adj-acdd-th", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.her2.adj-acdd-th", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.adj-acdd-th", "rel": "USA_FARMACO", "para": "far.filgrastim"}
+{"de": "reg.mama.her2.adj-acdd-th", "rel": "USA_FARMACO", "para": "far.pegfilgrastim"}
+{"de": "reg.mama.her2.adj-ac-th", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "reg.mama.her2.adj-ac-th", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 9}
+{"de": "reg.mama.her2.adj-ac-th", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 11}
+{"de": "cen.mama.her2.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.her2.adj-ac-th", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.adj-ac-th", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.her2.adj-ac-th", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.her2.adj-ac-th", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.her2.adj-ac-th", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.adj-tch", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "reg.mama.her2.adj-tch", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 11}
+{"de": "reg.mama.her2.adj-tch", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "cen.mama.her2.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.her2.adj-tch", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.adj-tch", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.mama.her2.adj-tch", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.mama.her2.adj-tch", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.adj-th", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "reg.mama.her2.adj-th", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 11}
+{"de": "reg.mama.her2.adj-th", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "cen.mama.her2.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.her2.adj-th", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "tumores < 2 cm e N0 (regime de escolha)", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.adj-th", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.her2.adj-th", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.adj-trastuzumabe-1-ano", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "reg.mama.her2.adj-trastuzumabe-1-ano", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 10}
+{"de": "cen.mama.her2.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.her2.adj-trastuzumabe-1-ano", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.adj-trastuzumabe-1-ano", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.adj-pertuzumabe-n-positivo", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 19}
+{"de": "reg.mama.her2.adj-pertuzumabe-n-positivo", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 10}
+{"de": "reg.mama.her2.adj-pertuzumabe-n-positivo", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "cen.mama.her2.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.her2.adj-pertuzumabe-n-positivo", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "LFN positivo", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.adj-pertuzumabe-n-positivo", "rel": "USA_FARMACO", "para": "far.pertuzumabe"}
+{"de": "reg.mama.her2.adj-pertuzumabe-n-positivo", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.adj-tchp-dose", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 11}
+{"de": "reg.mama.her2.adj-tchp-dose", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.mama.her2.adj-tchp-dose", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.mama.her2.adj-tchp-dose", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.adj-tchp-dose", "rel": "USA_FARMACO", "para": "far.pertuzumabe"}
+{"de": "reg.mama.cdis.cirurgia", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 21}
+{"de": "reg.mama.cdis.cirurgia", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 22}
+{"de": "cen.mama.cdis.tratamento", "rel": "TRATA_COM", "para": "reg.mama.cdis.cirurgia", "linha": "local", "intencao": "curativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.cdis.ht", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 21}
+{"de": "reg.mama.cdis.ht", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 22}
+{"de": "cen.mama.cdis.tratamento", "rel": "TRATA_COM", "para": "reg.mama.cdis.ht", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "CDIS RH+ não submetido a mastectomia bilateral", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.cdis.ht", "rel": "USA_FARMACO", "para": "far.tamoxifeno"}
+{"de": "reg.mama.cdis.ht", "rel": "USA_FARMACO", "para": "far.anastrozol"}
+{"de": "reg.mama.cdis.anti-her2-contra", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 21}
+{"de": "cen.mama.cdis.tratamento", "rel": "TRATA_COM", "para": "reg.mama.cdis.anti-her2-contra", "linha": "adjuvante", "intencao": "curativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FRACA", "direcao_recomendacao": "contra"}
+{"de": "reg.mama.cdis.anti-her2-contra", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.homem.tmx", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 5}
+{"de": "cen.mama.homem.adjuvante", "rel": "TRATA_COM", "para": "reg.mama.homem.tmx", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "RH+"}
+{"de": "reg.mama.homem.tmx", "rel": "USA_FARMACO", "para": "far.tamoxifeno"}
+{"de": "reg.mama.todos.gnrha-protecao-ovariana", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 24}
+{"de": "cen.mama.todos.cuidados-diagnostico", "rel": "TRATA_COM", "para": "reg.mama.todos.gnrha-protecao-ovariana", "linha": "durante QT (neo)adjuvante", "intencao": "curativa", "condicao_biomarcador": "pré-menopausa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.todos.gnrha-protecao-ovariana", "rel": "USA_FARMACO", "para": "far.goserelina"}
+{"de": "reg.mama.todos.gnrha-protecao-ovariana", "rel": "USA_FARMACO", "para": "far.triptorrelina"}
+{"de": "reg.mama.todos.exercicio", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 22}
+{"de": "cen.mama.todos.adjuvante-geral", "rel": "TRATA_COM", "para": "reg.mama.todos.exercicio", "linha": "durante tratamento", "intencao": "curativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.met-fulv-palbo-inavolisibe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 8}
+{"de": "reg.mama.rh.met-fulv-palbo-inavolisibe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "cen.mama.rh.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.mama.rh.met-fulv-palbo-inavolisibe", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "mutação PIK3CA + recidiva durante ou até 1 ano após término da HT adjuvante", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.met-fulv-palbo-inavolisibe", "rel": "USA_FARMACO", "para": "far.fulvestranto"}
+{"de": "reg.mama.rh.met-fulv-palbo-inavolisibe", "rel": "USA_FARMACO", "para": "far.palbociclibe"}
+{"de": "reg.mama.rh.met-fulv-palbo-inavolisibe", "rel": "USA_FARMACO", "para": "far.inavolisibe"}
+{"de": "reg.mama.rh.met-ia-icdk", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 8}
+{"de": "reg.mama.rh.met-ia-icdk", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 9}
+{"de": "reg.mama.rh.met-ia-icdk", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "cen.mama.rh.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.mama.rh.met-ia-icdk", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "sem critério para inavolisibe; fluxograma: sem HT prévia/só TMX, ou IA prévio com intervalo > 12 meses", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.met-ia-icdk", "rel": "USA_FARMACO", "para": "far.anastrozol"}
+{"de": "reg.mama.rh.met-ia-icdk", "rel": "USA_FARMACO", "para": "far.letrozol"}
+{"de": "reg.mama.rh.met-ia-icdk", "rel": "USA_FARMACO", "para": "far.palbociclibe"}
+{"de": "reg.mama.rh.met-ia-icdk", "rel": "USA_FARMACO", "para": "far.ribociclibe"}
+{"de": "reg.mama.rh.met-ia-icdk", "rel": "USA_FARMACO", "para": "far.abemaciclibe"}
+{"de": "reg.mama.rh.met-fulv-icdk", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 8}
+{"de": "reg.mama.rh.met-fulv-icdk", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 9}
+{"de": "reg.mama.rh.met-fulv-icdk", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "cen.mama.rh.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.mama.rh.met-fulv-icdk", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "alternativa; fluxograma: tratamento prévio com IA", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.met-fulv-icdk", "rel": "USA_FARMACO", "para": "far.fulvestranto"}
+{"de": "reg.mama.rh.met-fulv-icdk", "rel": "USA_FARMACO", "para": "far.palbociclibe"}
+{"de": "reg.mama.rh.met-fulv-icdk", "rel": "USA_FARMACO", "para": "far.ribociclibe"}
+{"de": "reg.mama.rh.met-fulv-icdk", "rel": "USA_FARMACO", "para": "far.abemaciclibe"}
+{"de": "reg.mama.rh.met-capivasertibe-fulv", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "reg.mama.rh.met-capivasertibe-fulv", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 13}
+{"de": "reg.mama.rh.met-capivasertibe-fulv", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.rh.met-capivasertibe-fulv", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "alteração da via PIK3CA/AKT1/PTEN; progressão após 12 meses com iCDK4/6", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.met-capivasertibe-fulv", "rel": "USA_FARMACO", "para": "far.capivasertibe"}
+{"de": "reg.mama.rh.met-capivasertibe-fulv", "rel": "USA_FARMACO", "para": "far.fulvestranto"}
+{"de": "reg.mama.rh.met-alpelisibe-fulv", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "reg.mama.rh.met-alpelisibe-fulv", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 12}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.rh.met-alpelisibe-fulv", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "mutação PIK3CA"}
+{"de": "reg.mama.rh.met-alpelisibe-fulv", "rel": "USA_FARMACO", "para": "far.alpelisibe"}
+{"de": "reg.mama.rh.met-alpelisibe-fulv", "rel": "USA_FARMACO", "para": "far.fulvestranto"}
+{"de": "reg.mama.rh.met-everolimo-ht", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "reg.mama.rh.met-everolimo-ht", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 12}
+{"de": "reg.mama.rh.met-everolimo-ht", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.rh.met-everolimo-ht", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "sem alterações da via PIK3CA/AKT1/PTEN; progressão após 12 meses com iCDK4/6", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.met-everolimo-ht", "rel": "USA_FARMACO", "para": "far.everolimo"}
+{"de": "reg.mama.rh.met-everolimo-ht", "rel": "USA_FARMACO", "para": "far.fulvestranto"}
+{"de": "reg.mama.rh.met-everolimo-ht", "rel": "USA_FARMACO", "para": "far.exemestano"}
+{"de": "reg.mama.rh.met-icdk-fulv-pos-palbo", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "reg.mama.rh.met-icdk-fulv-pos-palbo", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 13}
+{"de": "reg.mama.rh.met-icdk-fulv-pos-palbo", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.rh.met-icdk-fulv-pos-palbo", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "progressão a palbociclibe + IA; fluxograma: HT + iCDK4/6 se não previamente usado", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.met-icdk-fulv-pos-palbo", "rel": "USA_FARMACO", "para": "far.abemaciclibe"}
+{"de": "reg.mama.rh.met-icdk-fulv-pos-palbo", "rel": "USA_FARMACO", "para": "far.ribociclibe"}
+{"de": "reg.mama.rh.met-icdk-fulv-pos-palbo", "rel": "USA_FARMACO", "para": "far.fulvestranto"}
+{"de": "reg.mama.rh.met-iparp", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "reg.mama.rh.met-iparp", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 14}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.rh.met-iparp", "linha": "2ª linha ou posterior", "intencao": "paliativa", "condicao_biomarcador": "mutação germinativa BRCA1 ou BRCA2", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.met-iparp", "rel": "USA_FARMACO", "para": "far.olaparibe"}
+{"de": "reg.mama.rh.met-iparp", "rel": "USA_FARMACO", "para": "far.talazoparibe"}
+{"de": "reg.mama.rh.met-tdxd-her2-low", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "reg.mama.rh.met-tdxd-her2-low", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 15}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.rh.met-tdxd-her2-low", "linha": "2ª linha ou posterior", "intencao": "paliativa", "condicao_biomarcador": "resistente à HT, com indicação de citotóxico, HER2-low ou ultralow", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.met-tdxd-her2-low", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "reg.mama.rh.met-sacituzumabe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "reg.mama.rh.met-sacituzumabe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.rh.met-sacituzumabe", "linha": "linhas subsequentes", "intencao": "paliativa", "condicao_biomarcador": "resistente à HT, progressão a 1+ linhas de QT, sem HER2-low", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.met-sacituzumabe", "rel": "USA_FARMACO", "para": "far.sacituzumabe_govitecana"}
+{"de": "reg.mama.rh.met-pos-tdxd-qt", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 11}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.rh.met-pos-tdxd-qt", "linha": "após T-DXd", "intencao": "paliativa", "condicao_biomarcador": "HER2-low com progressão após T-DXd", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.met-pos-tdxd-qt", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "reg.mama.rh.met-pos-tdxd-qt", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.rh.met-pos-tdxd-qt", "rel": "USA_FARMACO", "para": "far.eribulina"}
+{"de": "reg.mama.rh.met-pos-tdxd-qt", "rel": "USA_FARMACO", "para": "far.vinorelbina"}
+{"de": "reg.mama.rh.met-pos-tdxd-qt", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.mama.rh.met-pos-tdxd-qt", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.rh.met-pos-tdxd-sacituzumabe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 11}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.rh.met-pos-tdxd-sacituzumabe", "linha": "após T-DXd", "intencao": "paliativa", "condicao_biomarcador": "HER2-low com progressão após T-DXd", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FRACA"}
+{"de": "reg.mama.rh.met-pos-tdxd-sacituzumabe", "rel": "USA_FARMACO", "para": "far.sacituzumabe_govitecana"}
+{"de": "reg.mama.rh.met-ht-classica", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.rh.met-ht-classica", "linha": "linhas subsequentes", "intencao": "paliativa", "condicao_biomarcador": "sensibilidade endócrina persistente ou contraindicação formal à QT", "nivel_evidencia": "ALTO", "forca_recomendacao": "FRACA"}
+{"de": "reg.mama.rh.met-ht-classica", "rel": "USA_FARMACO", "para": "far.tamoxifeno"}
+{"de": "reg.mama.rh.met-ht-classica", "rel": "USA_FARMACO", "para": "far.megestrol"}
+{"de": "reg.mama.rh.met-ht-classica", "rel": "USA_FARMACO", "para": "far.estradiol"}
+{"de": "reg.mama.rh.met-abemaciclibe-mono", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 12}
+{"de": "cen.mama.rh.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.rh.met-abemaciclibe-mono", "linha": "linhas subsequentes", "intencao": "paliativa"}
+{"de": "reg.mama.rh.met-abemaciclibe-mono", "rel": "USA_FARMACO", "para": "far.abemaciclibe"}
+{"de": "reg.mama.rh.met-elacestranto", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 14}
+{"de": "reg.mama.rh.met-elacestranto", "rel": "USA_FARMACO", "para": "far.elacestranto"}
+{"de": "reg.mama.rh.met-imlunestranto", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 15}
+{"de": "reg.mama.rh.met-imlunestranto", "rel": "USA_FARMACO", "para": "far.imlunestranto"}
+{"de": "reg.mama.rh.met-imlunestranto", "rel": "USA_FARMACO", "para": "far.abemaciclibe"}
+{"de": "reg.mama.rh.met-dato-dxd", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "reg.mama.rh.met-dato-dxd", "rel": "USA_FARMACO", "para": "far.datopotamabe_deruxtecana"}
+{"de": "reg.mama.rh.refr-1l-qt", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "reg.mama.rh.refr-1l-qt", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "cen.mama.rh.metastatico-endocrino-refratario", "rel": "TRATA_COM", "para": "reg.mama.rh.refr-1l-qt", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "sem mutação germinativa BRCA1/2 e HER2 0+, 1+ ou 2+ (ISH negativo)", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.refr-1l-qt", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.rh.refr-1l-qt", "rel": "USA_FARMACO", "para": "far.doxorrubicina_lipossomal"}
+{"de": "reg.mama.rh.refr-1l-qt", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.rh.refr-1l-qt", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "reg.mama.rh.refr-1l-qt", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.mama.rh.refr-1l-qt", "rel": "USA_FARMACO", "para": "far.eribulina"}
+{"de": "reg.mama.rh.refr-1l-qt", "rel": "USA_FARMACO", "para": "far.vinorelbina"}
+{"de": "reg.mama.rh.refr-1l-tdxd", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "cen.mama.rh.metastatico-endocrino-refratario", "rel": "TRATA_COM", "para": "reg.mama.rh.refr-1l-tdxd", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "sem mutação germinativa BRCA1/2 e HER2 0+, 1+ ou 2+ (ISH negativo)", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.refr-1l-tdxd", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "reg.mama.rh.refr-1l-iparp", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "cen.mama.rh.metastatico-endocrino-refratario", "rel": "TRATA_COM", "para": "reg.mama.rh.refr-1l-iparp", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "mutação germinativa BRCA1/2", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.refr-1l-iparp", "rel": "USA_FARMACO", "para": "far.olaparibe"}
+{"de": "reg.mama.rh.refr-1l-iparp", "rel": "USA_FARMACO", "para": "far.talazoparibe"}
+{"de": "reg.mama.rh.refr-2l-tdxd", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "cen.mama.rh.metastatico-endocrino-refratario", "rel": "TRATA_COM", "para": "reg.mama.rh.refr-2l-tdxd", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "HER2 1+ ou 2+ (ISH negativo)", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.refr-2l-tdxd", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "reg.mama.rh.refr-2l-sacituzumabe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "cen.mama.rh.metastatico-endocrino-refratario", "rel": "TRATA_COM", "para": "reg.mama.rh.refr-2l-sacituzumabe", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "sem biomarcador; após 2 linhas de QT (ao menos 1 na doença metastática)", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.refr-2l-sacituzumabe", "rel": "USA_FARMACO", "para": "far.sacituzumabe_govitecana"}
+{"de": "reg.mama.rh.refr-2l-qt", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "cen.mama.rh.metastatico-endocrino-refratario", "rel": "TRATA_COM", "para": "reg.mama.rh.refr-2l-qt", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "sem biomarcador", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.refr-2l-qt", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.rh.refr-2l-qt", "rel": "USA_FARMACO", "para": "far.doxorrubicina_lipossomal"}
+{"de": "reg.mama.rh.refr-2l-qt", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.rh.refr-2l-qt", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "reg.mama.rh.refr-2l-qt", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.mama.rh.refr-2l-qt", "rel": "USA_FARMACO", "para": "far.eribulina"}
+{"de": "reg.mama.rh.refr-2l-qt", "rel": "USA_FARMACO", "para": "far.vinorelbina"}
+{"de": "reg.mama.rh.refr-3l-alvo", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "reg.mama.rh.refr-3l-alvo", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "cen.mama.rh.metastatico-endocrino-refratario", "rel": "TRATA_COM", "para": "reg.mama.rh.refr-3l-alvo", "linha": "3ª linha em diante", "intencao": "paliativa", "condicao_biomarcador": "MSI-H, NTRK, RET, TMB-H", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.refr-3l-alvo", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.mama.rh.refr-3l-alvo", "rel": "USA_FARMACO", "para": "far.larotrectinibe"}
+{"de": "reg.mama.rh.refr-3l-qt", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "cen.mama.rh.metastatico-endocrino-refratario", "rel": "TRATA_COM", "para": "reg.mama.rh.refr-3l-qt", "linha": "3ª linha em diante", "intencao": "paliativa", "condicao_biomarcador": "qualquer biomarcador", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.rh.refr-3l-qt", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.rh.refr-3l-qt", "rel": "USA_FARMACO", "para": "far.doxorrubicina_lipossomal"}
+{"de": "reg.mama.rh.refr-3l-qt", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.rh.refr-3l-qt", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "reg.mama.rh.refr-3l-qt", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.mama.rh.refr-3l-qt", "rel": "USA_FARMACO", "para": "far.eribulina"}
+{"de": "reg.mama.rh.refr-3l-qt", "rel": "USA_FARMACO", "para": "far.vinorelbina"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 22}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 24}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "USA_FARMACO", "para": "far.epirrubicina"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "USA_FARMACO", "para": "far.metotrexato"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "USA_FARMACO", "para": "far.fluoruracila"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.mama.tn.met-pembro-qt", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "reg.mama.tn.met-pembro-qt", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 25}
+{"de": "cen.mama.tn.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.mama.tn.met-pembro-qt", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "PD-L1 CPS ≥ 10 (22C3), independente de BRCA1/2", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.met-pembro-qt", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.mama.tn.met-pembro-qt", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.met-pembro-qt", "rel": "USA_FARMACO", "para": "far.nab_paclitaxel"}
+{"de": "reg.mama.tn.met-pembro-qt", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.mama.tn.met-pembro-qt", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.mama.tn.met-dato-dxd", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "reg.mama.tn.met-dato-dxd", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "cen.mama.tn.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.mama.tn.met-dato-dxd", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "PD-L1 CPS < 10 sem mutação germinativa BRCA1/2", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.met-dato-dxd", "rel": "USA_FARMACO", "para": "far.datopotamabe_deruxtecana"}
+{"de": "reg.mama.tn.met-1l-qt", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "cen.mama.tn.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.mama.tn.met-1l-qt", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "PD-L1 CPS < 10 sem mutação germinativa BRCA1/2", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.met-1l-qt", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.tn.met-1l-qt", "rel": "USA_FARMACO", "para": "far.doxorrubicina_lipossomal"}
+{"de": "reg.mama.tn.met-1l-qt", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.met-1l-qt", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "reg.mama.tn.met-1l-qt", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.mama.tn.met-1l-qt", "rel": "USA_FARMACO", "para": "far.eribulina"}
+{"de": "reg.mama.tn.met-1l-qt", "rel": "USA_FARMACO", "para": "far.vinorelbina"}
+{"de": "reg.mama.tn.met-1l-qt", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.mama.tn.met-1l-iparp", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "reg.mama.tn.met-1l-iparp", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 25}
+{"de": "cen.mama.tn.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.mama.tn.met-1l-iparp", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "PD-L1 CPS < 10 + mutação germinativa BRCA1/2", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.met-1l-iparp", "rel": "USA_FARMACO", "para": "far.olaparibe"}
+{"de": "reg.mama.tn.met-1l-iparp", "rel": "USA_FARMACO", "para": "far.talazoparibe"}
+{"de": "reg.mama.tn.met-atezo-nabpacli", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "reg.mama.tn.met-atezo-nabpacli", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 25}
+{"de": "cen.mama.tn.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.mama.tn.met-atezo-nabpacli", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "CPS < 10 (22C3) e PD-L1 > 1 por Ventana SP142"}
+{"de": "reg.mama.tn.met-atezo-nabpacli", "rel": "USA_FARMACO", "para": "far.atezolizumabe"}
+{"de": "reg.mama.tn.met-atezo-nabpacli", "rel": "USA_FARMACO", "para": "far.nab_paclitaxel"}
+{"de": "reg.mama.tn.met-sacituzumabe-1l", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "reg.mama.tn.met-sacituzumabe-1l", "rel": "USA_FARMACO", "para": "far.sacituzumabe_govitecana"}
+{"de": "reg.mama.tn.met-sacituzumabe-1l", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.mama.tn.met-2l-iparp", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "cen.mama.tn.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.tn.met-2l-iparp", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "mutação germinativa BRCA1/2", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.met-2l-iparp", "rel": "USA_FARMACO", "para": "far.olaparibe"}
+{"de": "reg.mama.tn.met-2l-iparp", "rel": "USA_FARMACO", "para": "far.talazoparibe"}
+{"de": "reg.mama.tn.met-2l-sacituzumabe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "reg.mama.tn.met-2l-sacituzumabe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "cen.mama.tn.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.tn.met-2l-sacituzumabe", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "qualquer biomarcador; progressão após ≥ 1 linha na doença metastática", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.met-2l-sacituzumabe", "rel": "USA_FARMACO", "para": "far.sacituzumabe_govitecana"}
+{"de": "reg.mama.tn.met-2l-qt", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "cen.mama.tn.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.tn.met-2l-qt", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "qualquer biomarcador", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.met-2l-qt", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.tn.met-2l-qt", "rel": "USA_FARMACO", "para": "far.doxorrubicina_lipossomal"}
+{"de": "reg.mama.tn.met-2l-qt", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.met-2l-qt", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "reg.mama.tn.met-2l-qt", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.mama.tn.met-2l-qt", "rel": "USA_FARMACO", "para": "far.eribulina"}
+{"de": "reg.mama.tn.met-2l-qt", "rel": "USA_FARMACO", "para": "far.vinorelbina"}
+{"de": "reg.mama.tn.met-2l-qt", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.mama.tn.met-2l-qt", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.mama.tn.met-2l-tdxd", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "reg.mama.tn.met-2l-tdxd", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "cen.mama.tn.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.tn.met-2l-tdxd", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "HER2 1+ ou 2+ (ISH negativo)", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.met-2l-tdxd", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "reg.mama.tn.met-3l-alvo", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "reg.mama.tn.met-3l-alvo", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "cen.mama.tn.metastatico-3a-linha", "rel": "TRATA_COM", "para": "reg.mama.tn.met-3l-alvo", "linha": "3ª linha em diante", "intencao": "paliativa", "condicao_biomarcador": "MSI-H/dMMR, NTRK, RET, TMB-H (≥ 10 mut/Mb)", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.met-3l-alvo", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.mama.tn.met-3l-alvo", "rel": "USA_FARMACO", "para": "far.larotrectinibe"}
+{"de": "reg.mama.tn.met-3l-qt", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 23}
+{"de": "cen.mama.tn.metastatico-3a-linha", "rel": "TRATA_COM", "para": "reg.mama.tn.met-3l-qt", "linha": "3ª linha em diante", "intencao": "paliativa", "condicao_biomarcador": "qualquer biomarcador", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.tn.met-3l-qt", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.mama.tn.met-3l-qt", "rel": "USA_FARMACO", "para": "far.doxorrubicina_lipossomal"}
+{"de": "reg.mama.tn.met-3l-qt", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.tn.met-3l-qt", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "reg.mama.tn.met-3l-qt", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.mama.tn.met-3l-qt", "rel": "USA_FARMACO", "para": "far.eribulina"}
+{"de": "reg.mama.tn.met-3l-qt", "rel": "USA_FARMACO", "para": "far.vinorelbina"}
+{"de": "reg.mama.her2.met-hp-taxano", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 17}
+{"de": "reg.mama.her2.met-hp-taxano", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 18}
+{"de": "reg.mama.her2.met-hp-taxano", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 21}
+{"de": "cen.mama.her2.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.mama.her2.met-hp-taxano", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "sem tratamento prévio ou recidiva > 6 meses após término de trastuzumabe adjuvante", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.met-hp-taxano", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.met-hp-taxano", "rel": "USA_FARMACO", "para": "far.pertuzumabe"}
+{"de": "reg.mama.her2.met-hp-taxano", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.mama.her2.met-hp-taxano", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.mama.her2.met-hp-taxano", "rel": "USA_FARMACO", "para": "far.nab_paclitaxel"}
+{"de": "reg.mama.her2.met-hp-vinorelbina", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 18}
+{"de": "cen.mama.her2.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.mama.her2.met-hp-vinorelbina", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.mama.her2.met-hp-vinorelbina", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.met-hp-vinorelbina", "rel": "USA_FARMACO", "para": "far.pertuzumabe"}
+{"de": "reg.mama.her2.met-hp-vinorelbina", "rel": "USA_FARMACO", "para": "far.vinorelbina"}
+{"de": "reg.mama.her2.met-tdxd-recidiva-precoce", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 18}
+{"de": "cen.mama.her2.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.mama.her2.met-tdxd-recidiva-precoce", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "recidiva antes de 6 meses do término da adjuvância com trastuzumabe"}
+{"de": "reg.mama.her2.met-tdxd-recidiva-precoce", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "reg.mama.her2.met-her2-rh-anti-her2-ht", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "cen.mama.her2.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.mama.her2.met-her2-rh-anti-her2-ht", "linha": "1ª linha (manutenção)", "intencao": "paliativa", "condicao_biomarcador": "HER2+/RH+"}
+{"de": "reg.mama.her2.met-her2-rh-anti-her2-ht", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.met-her2-rh-anti-her2-ht", "rel": "USA_FARMACO", "para": "far.pertuzumabe"}
+{"de": "reg.mama.her2.met-her2-rh-anti-her2-ht", "rel": "USA_FARMACO", "para": "far.lapatinibe"}
+{"de": "reg.mama.her2.met-her2-rh-anti-her2-ht", "rel": "USA_FARMACO", "para": "far.anastrozol"}
+{"de": "reg.mama.her2.met-her2-rh-anti-her2-ht", "rel": "USA_FARMACO", "para": "far.letrozol"}
+{"de": "reg.mama.her2.met-her2-rh-anti-her2-ht", "rel": "USA_FARMACO", "para": "far.fulvestranto"}
+{"de": "reg.mama.her2.met-tdxd-pertuzumabe-db09", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 18}
+{"de": "reg.mama.her2.met-tdxd-pertuzumabe-db09", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "reg.mama.her2.met-tdxd-pertuzumabe-db09", "rel": "USA_FARMACO", "para": "far.pertuzumabe"}
+{"de": "reg.mama.her2.met-palbo-manutencao-patina", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 18}
+{"de": "reg.mama.her2.met-palbo-manutencao-patina", "rel": "USA_FARMACO", "para": "far.palbociclibe"}
+{"de": "reg.mama.her2.met-palbo-manutencao-patina", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.met-palbo-manutencao-patina", "rel": "USA_FARMACO", "para": "far.pertuzumabe"}
+{"de": "reg.mama.her2.met-tucatinibe-manutencao", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 19}
+{"de": "reg.mama.her2.met-tucatinibe-manutencao", "rel": "USA_FARMACO", "para": "far.tucatinibe"}
+{"de": "reg.mama.her2.met-tucatinibe-manutencao", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.met-tucatinibe-manutencao", "rel": "USA_FARMACO", "para": "far.pertuzumabe"}
+{"de": "reg.mama.her2.met-tdxd", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 17}
+{"de": "reg.mama.her2.met-tdxd", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 19}
+{"de": "reg.mama.her2.met-tdxd", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 21}
+{"de": "cen.mama.her2.metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.mama.her2.met-tdxd", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "progressão após trastuzumabe + pertuzumabe", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.met-tdxd", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "reg.mama.her2.met-tdm1", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 17}
+{"de": "reg.mama.her2.met-tdm1", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "reg.mama.her2.met-tdm1", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 21}
+{"de": "cen.mama.her2.metastatico-linhas-subsequentes", "rel": "TRATA_COM", "para": "reg.mama.her2.met-tdm1", "linha": "linhas subsequentes", "intencao": "paliativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.met-tdm1", "rel": "USA_FARMACO", "para": "far.trastuzumabe_entansina"}
+{"de": "reg.mama.her2.met-tdxd-subsequente", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 17}
+{"de": "reg.mama.her2.met-tdxd-subsequente", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 21}
+{"de": "cen.mama.her2.metastatico-linhas-subsequentes", "rel": "TRATA_COM", "para": "reg.mama.her2.met-tdxd-subsequente", "linha": "linhas subsequentes", "intencao": "paliativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.met-tdxd-subsequente", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "reg.mama.her2.met-h-cape", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 17}
+{"de": "reg.mama.her2.met-h-cape", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "reg.mama.her2.met-h-cape", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 21}
+{"de": "cen.mama.her2.metastatico-linhas-subsequentes", "rel": "TRATA_COM", "para": "reg.mama.her2.met-h-cape", "linha": "linhas subsequentes", "intencao": "paliativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.met-h-cape", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.met-h-cape", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "reg.mama.her2.met-lapa-cape", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 17}
+{"de": "reg.mama.her2.met-lapa-cape", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "reg.mama.her2.met-lapa-cape", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 21}
+{"de": "cen.mama.her2.metastatico-linhas-subsequentes", "rel": "TRATA_COM", "para": "reg.mama.her2.met-lapa-cape", "linha": "linhas subsequentes", "intencao": "paliativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.met-lapa-cape", "rel": "USA_FARMACO", "para": "far.lapatinibe"}
+{"de": "reg.mama.her2.met-lapa-cape", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "reg.mama.her2.met-h-lapa", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 17}
+{"de": "reg.mama.her2.met-h-lapa", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "reg.mama.her2.met-h-lapa", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 21}
+{"de": "cen.mama.her2.metastatico-linhas-subsequentes", "rel": "TRATA_COM", "para": "reg.mama.her2.met-h-lapa", "linha": "linhas subsequentes", "intencao": "paliativa", "nivel_evidencia": "ALTO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.met-h-lapa", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.met-h-lapa", "rel": "USA_FARMACO", "para": "far.lapatinibe"}
+{"de": "reg.mama.her2.met-h-outras-qt", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 17}
+{"de": "reg.mama.her2.met-h-outras-qt", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 21}
+{"de": "cen.mama.her2.metastatico-linhas-subsequentes", "rel": "TRATA_COM", "para": "reg.mama.her2.met-h-outras-qt", "linha": "linhas subsequentes", "intencao": "paliativa", "nivel_evidencia": "MODERADO", "forca_recomendacao": "FORTE"}
+{"de": "reg.mama.her2.met-h-outras-qt", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.met-tucatinibe-h-cape", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 19}
+{"de": "reg.mama.her2.met-tucatinibe-h-cape", "rel": "USA_FARMACO", "para": "far.tucatinibe"}
+{"de": "reg.mama.her2.met-tucatinibe-h-cape", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.mama.her2.met-tucatinibe-h-cape", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "tri.metanalise-rpc-sabcs2018", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 7}
+{"de": "tri.ebctcg-dose-densa-2019", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 11}
+{"de": "tri.del-mastro-5fu", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 11}
+{"de": "tri.acosog-z1031", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 12}
+{"de": "tri.ia-vs-tmx-neoadjuvante", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 12}
+{"de": "tri.keynote-522", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 14}
+{"de": "tri.calgb-40603", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 14}
+{"de": "tri.geparsixto", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 14}
+{"de": "tri.nacatrine", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 14}
+{"de": "tri.brightness", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 14}
+{"de": "tri.brightness", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 15}
+{"de": "tri.pearly", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 14}
+{"de": "tri.gaui-capecitabina-rt", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 15}
+{"de": "tri.noah", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "tri.geparquinto", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "tri.neosphere", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "tri.tryphaena", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 16}
+{"de": "tri.train-2", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 17}
+{"de": "tri.destiny-breast11", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 17}
+{"de": "tri.aphinity", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "tri.aphinity", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 17}
+{"de": "tri.katherine", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "tri.katherine", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 17}
+{"de": "tri.create-x", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "tri.create-x", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 7}
+{"de": "tri.olympia", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 18}
+{"de": "tri.olympia", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 7}
+{"de": "tri.mindact", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 8}
+{"de": "tri.mindact", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 7}
+{"de": "tri.rxponder", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 7}
+{"de": "tri.rxponder", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 7}
+{"de": "tri.tailorx", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 7}
+{"de": "tri.vaz-luis-sem-gcsf", "rel": "FONTE", "para": "src.sboc2026.neoadjuvancia", "pagina": 8}
+{"de": "tri.nsabp-b15", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 13}
+{"de": "tri.usor-9735", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 13}
+{"de": "tri.ac-t-vs-ac-n-positivo", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 13}
+{"de": "tri.abc-trials-planb", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 13}
+{"de": "tri.carbo-pacli-tn-asiatico", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 13}
+{"de": "tri.monarche", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 15}
+{"de": "tri.natalee", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 15}
+{"de": "tri.pallas", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 15}
+{"de": "tri.penelope-b", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 15}
+{"de": "tri.gim4", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 16}
+{"de": "tri.gim4", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 17}
+{"de": "tri.abcsg16-salsa", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 16}
+{"de": "tri.abcsg16-salsa", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 17}
+{"de": "tri.ma17r", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 17}
+{"de": "tri.atlas", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 17}
+{"de": "tri.attom", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 17}
+{"de": "tri.nsabp-b14-tmx-estendido", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 17}
+{"de": "tri.ebctcg-2005-tmx", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 17}
+{"de": "tri.persephone", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "tri.extenet", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "tri.destiny-breast05", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "tri.bcirg-006", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "tri.apt", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 20}
+{"de": "tri.ebctcg-bifosfonatos", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 21}
+{"de": "tri.abcsg-18", "rel": "FONTE", "para": "src.sboc2026.adjuvancia", "pagina": 21}
+{"de": "tri.poems-gnrha", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 24}
+{"de": "tri.right-choice", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 8}
+{"de": "tri.paloma-2", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 8}
+{"de": "tri.monaleesa-2", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 8}
+{"de": "tri.monarch-3", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 8}
+{"de": "tri.monaleesa-7", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 8}
+{"de": "tri.parsifal", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 9}
+{"de": "tri.sonia", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 9}
+{"de": "tri.inavo120", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 10}
+{"de": "tri.monarch-2", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 11}
+{"de": "tri.monaleesa-3", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 11}
+{"de": "tri.monaleesa-3", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 12}
+{"de": "tri.paloma-3", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 12}
+{"de": "tri.monarch-1", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 12}
+{"de": "tri.nextmonarch", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 12}
+{"de": "tri.bolero-2", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 12}
+{"de": "tri.solar-1", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 12}
+{"de": "tri.capitello-291", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 13}
+{"de": "tri.postmonarch", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 13}
+{"de": "tri.maintain", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 13}
+{"de": "tri.olympiad", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 14}
+{"de": "tri.olympiad", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 25}
+{"de": "tri.embraca", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 14}
+{"de": "tri.embraca", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 25}
+{"de": "tri.tbcrc-048", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 14}
+{"de": "tri.emerald", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 14}
+{"de": "tri.ember-3", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 15}
+{"de": "tri.destiny-breast04", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 15}
+{"de": "tri.destiny-breast04", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "tri.destiny-breast06", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 15}
+{"de": "tri.tropics-02", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "tri.tropion-breast01", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 16}
+{"de": "tri.cleopatra", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 17}
+{"de": "tri.cleopatra", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 18}
+{"de": "tri.peruse", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 18}
+{"de": "tri.velvet", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 18}
+{"de": "tri.destiny-breast09", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 18}
+{"de": "tri.patina", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 18}
+{"de": "tri.patina", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 19}
+{"de": "tri.her2climb-05", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 19}
+{"de": "tri.destiny-breast03", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 19}
+{"de": "tri.her2climb", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 19}
+{"de": "tri.th3resa", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "tri.lapatinibe-capecitabina", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "tri.gbg-26", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "tri.lapatinibe-trastuzumabe", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "tri.pherexa", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "tri.pertain", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "tri.alternative", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "tri.sysucc-002", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 20}
+{"de": "tri.keynote-355", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 25}
+{"de": "tri.impassion130", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 25}
+{"de": "tri.tnt", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 25}
+{"de": "tri.ascent", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "tri.ascent-03", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "tri.ascent-04", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "tri.tropion-breast02", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 26}
+{"de": "tri.doxorrubicina-lipossomal-509", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 24}
+{"de": "tri.embrace", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 24}
+{"de": "tri.eribulina-vs-capecitabina", "rel": "FONTE", "para": "src.sboc2026.metastatica", "pagina": 24}
+{"de": "tri.pet-ct-estadiamento-ecr", "rel": "FONTE", "para": "src.sboc2026.estadiamento", "pagina": 7}
+{"de": "reg.mama.rh.neo-acdd-t", "rel": "SUSTENTADO_POR", "para": "tri.ebctcg-dose-densa-2019"}
+{"de": "tri.ebctcg-dose-densa-2019", "rel": "TESTOU", "para": "reg.mama.rh.neo-acdd-t"}
+{"de": "reg.mama.rh.neo-5fu-contra", "rel": "SUSTENTADO_POR", "para": "tri.del-mastro-5fu"}
+{"de": "tri.del-mastro-5fu", "rel": "TESTOU", "para": "reg.mama.rh.neo-5fu-contra"}
+{"de": "reg.mama.rh.neo-ia", "rel": "SUSTENTADO_POR", "para": "tri.acosog-z1031"}
+{"de": "tri.acosog-z1031", "rel": "TESTOU", "para": "reg.mama.rh.neo-ia"}
+{"de": "reg.mama.rh.neo-ia", "rel": "SUSTENTADO_POR", "para": "tri.ia-vs-tmx-neoadjuvante"}
+{"de": "tri.ia-vs-tmx-neoadjuvante", "rel": "TESTOU", "para": "reg.mama.rh.neo-ia"}
+{"de": "reg.mama.rh.adj-tc", "rel": "SUSTENTADO_POR", "para": "tri.usor-9735"}
+{"de": "tri.usor-9735", "rel": "TESTOU", "para": "reg.mama.rh.adj-tc"}
+{"de": "reg.mama.rh.adj-tc", "rel": "SUSTENTADO_POR", "para": "tri.abc-trials-planb"}
+{"de": "tri.abc-trials-planb", "rel": "TESTOU", "para": "reg.mama.rh.adj-tc"}
+{"de": "reg.mama.rh.adj-acdd-t", "rel": "SUSTENTADO_POR", "para": "tri.ebctcg-dose-densa-2019"}
+{"de": "tri.ebctcg-dose-densa-2019", "rel": "TESTOU", "para": "reg.mama.rh.adj-acdd-t"}
+{"de": "reg.mama.rh.adj-acdd-t", "rel": "SUSTENTADO_POR", "para": "tri.ac-t-vs-ac-n-positivo"}
+{"de": "tri.ac-t-vs-ac-n-positivo", "rel": "TESTOU", "para": "reg.mama.rh.adj-acdd-t"}
+{"de": "reg.mama.rh.adj-ac-t", "rel": "SUSTENTADO_POR", "para": "tri.ac-t-vs-ac-n-positivo"}
+{"de": "tri.ac-t-vs-ac-n-positivo", "rel": "TESTOU", "para": "reg.mama.rh.adj-ac-t"}
+{"de": "reg.mama.rh.adj-ac", "rel": "SUSTENTADO_POR", "para": "tri.nsabp-b15"}
+{"de": "tri.nsabp-b15", "rel": "TESTOU", "para": "reg.mama.rh.adj-ac"}
+{"de": "reg.mama.rh.adj-5fu-contra", "rel": "SUSTENTADO_POR", "para": "tri.del-mastro-5fu"}
+{"de": "tri.del-mastro-5fu", "rel": "TESTOU", "para": "reg.mama.rh.adj-5fu-contra"}
+{"de": "reg.mama.rh.adj-tmx-pre", "rel": "SUSTENTADO_POR", "para": "tri.atlas"}
+{"de": "tri.atlas", "rel": "TESTOU", "para": "reg.mama.rh.adj-tmx-pre"}
+{"de": "reg.mama.rh.adj-tmx-pre", "rel": "SUSTENTADO_POR", "para": "tri.attom"}
+{"de": "tri.attom", "rel": "TESTOU", "para": "reg.mama.rh.adj-tmx-pre"}
+{"de": "reg.mama.rh.adj-ht-pos", "rel": "SUSTENTADO_POR", "para": "tri.gim4"}
+{"de": "tri.gim4", "rel": "TESTOU", "para": "reg.mama.rh.adj-ht-pos"}
+{"de": "reg.mama.rh.adj-ht-pos", "rel": "SUSTENTADO_POR", "para": "tri.abcsg16-salsa"}
+{"de": "tri.abcsg16-salsa", "rel": "TESTOU", "para": "reg.mama.rh.adj-ht-pos"}
+{"de": "reg.mama.rh.adj-ht-pos", "rel": "SUSTENTADO_POR", "para": "tri.ma17r"}
+{"de": "tri.ma17r", "rel": "TESTOU", "para": "reg.mama.rh.adj-ht-pos"}
+{"de": "reg.mama.rh.adj-ht-pos", "rel": "SUSTENTADO_POR", "para": "tri.nsabp-b14-tmx-estendido"}
+{"de": "tri.nsabp-b14-tmx-estendido", "rel": "TESTOU", "para": "reg.mama.rh.adj-ht-pos"}
+{"de": "reg.mama.rh.adj-ht-pos", "rel": "SUSTENTADO_POR", "para": "tri.ebctcg-2005-tmx"}
+{"de": "tri.ebctcg-2005-tmx", "rel": "TESTOU", "para": "reg.mama.rh.adj-ht-pos"}
+{"de": "reg.mama.rh.adj-abemaciclibe", "rel": "SUSTENTADO_POR", "para": "tri.monarche"}
+{"de": "tri.monarche", "rel": "TESTOU", "para": "reg.mama.rh.adj-abemaciclibe"}
+{"de": "reg.mama.rh.adj-ribociclibe", "rel": "SUSTENTADO_POR", "para": "tri.natalee"}
+{"de": "tri.natalee", "rel": "TESTOU", "para": "reg.mama.rh.adj-ribociclibe"}
+{"de": "reg.mama.rh.adj-palbociclibe-contra", "rel": "SUSTENTADO_POR", "para": "tri.pallas"}
+{"de": "tri.pallas", "rel": "TESTOU", "para": "reg.mama.rh.adj-palbociclibe-contra"}
+{"de": "reg.mama.rh.adj-palbociclibe-contra", "rel": "SUSTENTADO_POR", "para": "tri.penelope-b"}
+{"de": "tri.penelope-b", "rel": "TESTOU", "para": "reg.mama.rh.adj-palbociclibe-contra"}
+{"de": "reg.mama.rh.adj-olaparibe", "rel": "SUSTENTADO_POR", "para": "tri.olympia"}
+{"de": "tri.olympia", "rel": "TESTOU", "para": "reg.mama.rh.adj-olaparibe"}
+{"de": "reg.mama.rh.adj-osteolise", "rel": "SUSTENTADO_POR", "para": "tri.ebctcg-bifosfonatos"}
+{"de": "tri.ebctcg-bifosfonatos", "rel": "TESTOU", "para": "reg.mama.rh.adj-osteolise"}
+{"de": "reg.mama.rh.adj-osteolise", "rel": "SUSTENTADO_POR", "para": "tri.abcsg-18"}
+{"de": "tri.abcsg-18", "rel": "TESTOU", "para": "reg.mama.rh.adj-osteolise"}
+{"de": "reg.mama.tn.neo-kn522", "rel": "SUSTENTADO_POR", "para": "tri.keynote-522"}
+{"de": "tri.keynote-522", "rel": "TESTOU", "para": "reg.mama.tn.neo-kn522"}
+{"de": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro", "rel": "SUSTENTADO_POR", "para": "tri.brightness"}
+{"de": "tri.brightness", "rel": "TESTOU", "para": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro"}
+{"de": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro", "rel": "SUSTENTADO_POR", "para": "tri.pearly"}
+{"de": "tri.pearly", "rel": "TESTOU", "para": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro"}
+{"de": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro", "rel": "SUSTENTADO_POR", "para": "tri.calgb-40603"}
+{"de": "tri.calgb-40603", "rel": "TESTOU", "para": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro"}
+{"de": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro", "rel": "SUSTENTADO_POR", "para": "tri.geparsixto"}
+{"de": "tri.geparsixto", "rel": "TESTOU", "para": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro"}
+{"de": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro", "rel": "SUSTENTADO_POR", "para": "tri.nacatrine"}
+{"de": "tri.nacatrine", "rel": "TESTOU", "para": "reg.mama.tn.neo-ac-carbotaxol-sem-pembro"}
+{"de": "reg.mama.tn.neo-rt-capecitabina-refratario", "rel": "SUSTENTADO_POR", "para": "tri.gaui-capecitabina-rt"}
+{"de": "tri.gaui-capecitabina-rt", "rel": "TESTOU", "para": "reg.mama.tn.neo-rt-capecitabina-refratario"}
+{"de": "reg.mama.tn.adj-carbo-pacli", "rel": "SUSTENTADO_POR", "para": "tri.carbo-pacli-tn-asiatico"}
+{"de": "tri.carbo-pacli-tn-asiatico", "rel": "TESTOU", "para": "reg.mama.tn.adj-carbo-pacli"}
+{"de": "reg.mama.tn.adj-olaparibe", "rel": "SUSTENTADO_POR", "para": "tri.olympia"}
+{"de": "tri.olympia", "rel": "TESTOU", "para": "reg.mama.tn.adj-olaparibe"}
+{"de": "reg.mama.tn.residual-capecitabina", "rel": "SUSTENTADO_POR", "para": "tri.create-x"}
+{"de": "tri.create-x", "rel": "TESTOU", "para": "reg.mama.tn.residual-capecitabina"}
+{"de": "reg.mama.tn.residual-pembrolizumabe", "rel": "SUSTENTADO_POR", "para": "tri.keynote-522"}
+{"de": "tri.keynote-522", "rel": "TESTOU", "para": "reg.mama.tn.residual-pembrolizumabe"}
+{"de": "reg.mama.tn.residual-olaparibe", "rel": "SUSTENTADO_POR", "para": "tri.olympia"}
+{"de": "tri.olympia", "rel": "TESTOU", "para": "reg.mama.tn.residual-olaparibe"}
+{"de": "reg.mama.her2.neo-tchp", "rel": "SUSTENTADO_POR", "para": "tri.train-2"}
+{"de": "tri.train-2", "rel": "TESTOU", "para": "reg.mama.her2.neo-tchp"}
+{"de": "reg.mama.her2.neo-tchp", "rel": "SUSTENTADO_POR", "para": "tri.tryphaena"}
+{"de": "tri.tryphaena", "rel": "TESTOU", "para": "reg.mama.her2.neo-tchp"}
+{"de": "reg.mama.her2.neo-tchp", "rel": "SUSTENTADO_POR", "para": "tri.neosphere"}
+{"de": "tri.neosphere", "rel": "TESTOU", "para": "reg.mama.her2.neo-tchp"}
+{"de": "reg.mama.her2.neo-thp", "rel": "SUSTENTADO_POR", "para": "tri.neosphere"}
+{"de": "tri.neosphere", "rel": "TESTOU", "para": "reg.mama.her2.neo-thp"}
+{"de": "reg.mama.her2.neo-acthp", "rel": "SUSTENTADO_POR", "para": "tri.noah"}
+{"de": "tri.noah", "rel": "TESTOU", "para": "reg.mama.her2.neo-acthp"}
+{"de": "reg.mama.her2.neo-acthp", "rel": "SUSTENTADO_POR", "para": "tri.geparquinto"}
+{"de": "tri.geparquinto", "rel": "TESTOU", "para": "reg.mama.her2.neo-acthp"}
+{"de": "reg.mama.her2.neo-tdxd-thp-db11", "rel": "SUSTENTADO_POR", "para": "tri.destiny-breast11"}
+{"de": "tri.destiny-breast11", "rel": "TESTOU", "para": "reg.mama.her2.neo-tdxd-thp-db11"}
+{"de": "reg.mama.her2.rpc-pertuzumabe-trastuzumabe-cn", "rel": "SUSTENTADO_POR", "para": "tri.aphinity"}
+{"de": "tri.aphinity", "rel": "TESTOU", "para": "reg.mama.her2.rpc-pertuzumabe-trastuzumabe-cn"}
+{"de": "reg.mama.her2.residual-tdm1", "rel": "SUSTENTADO_POR", "para": "tri.katherine"}
+{"de": "tri.katherine", "rel": "TESTOU", "para": "reg.mama.her2.residual-tdm1"}
+{"de": "reg.mama.her2.neratinibe-estendido", "rel": "SUSTENTADO_POR", "para": "tri.extenet"}
+{"de": "tri.extenet", "rel": "TESTOU", "para": "reg.mama.her2.neratinibe-estendido"}
+{"de": "reg.mama.her2.residual-tdxd-db05", "rel": "SUSTENTADO_POR", "para": "tri.destiny-breast05"}
+{"de": "tri.destiny-breast05", "rel": "TESTOU", "para": "reg.mama.her2.residual-tdxd-db05"}
+{"de": "reg.mama.her2.adj-tch", "rel": "SUSTENTADO_POR", "para": "tri.bcirg-006"}
+{"de": "tri.bcirg-006", "rel": "TESTOU", "para": "reg.mama.her2.adj-tch"}
+{"de": "reg.mama.her2.adj-th", "rel": "SUSTENTADO_POR", "para": "tri.apt"}
+{"de": "tri.apt", "rel": "TESTOU", "para": "reg.mama.her2.adj-th"}
+{"de": "reg.mama.her2.adj-trastuzumabe-1-ano", "rel": "SUSTENTADO_POR", "para": "tri.persephone"}
+{"de": "tri.persephone", "rel": "TESTOU", "para": "reg.mama.her2.adj-trastuzumabe-1-ano"}
+{"de": "reg.mama.her2.adj-pertuzumabe-n-positivo", "rel": "SUSTENTADO_POR", "para": "tri.aphinity"}
+{"de": "tri.aphinity", "rel": "TESTOU", "para": "reg.mama.her2.adj-pertuzumabe-n-positivo"}
+{"de": "reg.mama.todos.gnrha-protecao-ovariana", "rel": "SUSTENTADO_POR", "para": "tri.poems-gnrha"}
+{"de": "tri.poems-gnrha", "rel": "TESTOU", "para": "reg.mama.todos.gnrha-protecao-ovariana"}
+{"de": "reg.mama.rh.met-fulv-palbo-inavolisibe", "rel": "SUSTENTADO_POR", "para": "tri.inavo120"}
+{"de": "tri.inavo120", "rel": "TESTOU", "para": "reg.mama.rh.met-fulv-palbo-inavolisibe"}
+{"de": "reg.mama.rh.met-ia-icdk", "rel": "SUSTENTADO_POR", "para": "tri.paloma-2"}
+{"de": "tri.paloma-2", "rel": "TESTOU", "para": "reg.mama.rh.met-ia-icdk"}
+{"de": "reg.mama.rh.met-ia-icdk", "rel": "SUSTENTADO_POR", "para": "tri.monaleesa-2"}
+{"de": "tri.monaleesa-2", "rel": "TESTOU", "para": "reg.mama.rh.met-ia-icdk"}
+{"de": "reg.mama.rh.met-ia-icdk", "rel": "SUSTENTADO_POR", "para": "tri.monarch-3"}
+{"de": "tri.monarch-3", "rel": "TESTOU", "para": "reg.mama.rh.met-ia-icdk"}
+{"de": "reg.mama.rh.met-ia-icdk", "rel": "SUSTENTADO_POR", "para": "tri.monaleesa-7"}
+{"de": "tri.monaleesa-7", "rel": "TESTOU", "para": "reg.mama.rh.met-ia-icdk"}
+{"de": "reg.mama.rh.met-ia-icdk", "rel": "SUSTENTADO_POR", "para": "tri.right-choice"}
+{"de": "tri.right-choice", "rel": "TESTOU", "para": "reg.mama.rh.met-ia-icdk"}
+{"de": "reg.mama.rh.met-ia-icdk", "rel": "SUSTENTADO_POR", "para": "tri.sonia"}
+{"de": "tri.sonia", "rel": "TESTOU", "para": "reg.mama.rh.met-ia-icdk"}
+{"de": "reg.mama.rh.met-fulv-icdk", "rel": "SUSTENTADO_POR", "para": "tri.parsifal"}
+{"de": "tri.parsifal", "rel": "TESTOU", "para": "reg.mama.rh.met-fulv-icdk"}
+{"de": "reg.mama.rh.met-capivasertibe-fulv", "rel": "SUSTENTADO_POR", "para": "tri.capitello-291"}
+{"de": "tri.capitello-291", "rel": "TESTOU", "para": "reg.mama.rh.met-capivasertibe-fulv"}
+{"de": "reg.mama.rh.met-alpelisibe-fulv", "rel": "SUSTENTADO_POR", "para": "tri.solar-1"}
+{"de": "tri.solar-1", "rel": "TESTOU", "para": "reg.mama.rh.met-alpelisibe-fulv"}
+{"de": "reg.mama.rh.met-everolimo-ht", "rel": "SUSTENTADO_POR", "para": "tri.bolero-2"}
+{"de": "tri.bolero-2", "rel": "TESTOU", "para": "reg.mama.rh.met-everolimo-ht"}
+{"de": "reg.mama.rh.met-icdk-fulv-pos-palbo", "rel": "SUSTENTADO_POR", "para": "tri.postmonarch"}
+{"de": "tri.postmonarch", "rel": "TESTOU", "para": "reg.mama.rh.met-icdk-fulv-pos-palbo"}
+{"de": "reg.mama.rh.met-icdk-fulv-pos-palbo", "rel": "SUSTENTADO_POR", "para": "tri.maintain"}
+{"de": "tri.maintain", "rel": "TESTOU", "para": "reg.mama.rh.met-icdk-fulv-pos-palbo"}
+{"de": "reg.mama.rh.met-icdk-fulv-pos-palbo", "rel": "SUSTENTADO_POR", "para": "tri.monarch-2"}
+{"de": "tri.monarch-2", "rel": "TESTOU", "para": "reg.mama.rh.met-icdk-fulv-pos-palbo"}
+{"de": "reg.mama.rh.met-icdk-fulv-pos-palbo", "rel": "SUSTENTADO_POR", "para": "tri.monaleesa-3"}
+{"de": "tri.monaleesa-3", "rel": "TESTOU", "para": "reg.mama.rh.met-icdk-fulv-pos-palbo"}
+{"de": "reg.mama.rh.met-icdk-fulv-pos-palbo", "rel": "SUSTENTADO_POR", "para": "tri.paloma-3"}
+{"de": "tri.paloma-3", "rel": "TESTOU", "para": "reg.mama.rh.met-icdk-fulv-pos-palbo"}
+{"de": "reg.mama.rh.met-iparp", "rel": "SUSTENTADO_POR", "para": "tri.olympiad"}
+{"de": "tri.olympiad", "rel": "TESTOU", "para": "reg.mama.rh.met-iparp"}
+{"de": "reg.mama.rh.met-iparp", "rel": "SUSTENTADO_POR", "para": "tri.embraca"}
+{"de": "tri.embraca", "rel": "TESTOU", "para": "reg.mama.rh.met-iparp"}
+{"de": "reg.mama.rh.met-iparp", "rel": "SUSTENTADO_POR", "para": "tri.tbcrc-048"}
+{"de": "tri.tbcrc-048", "rel": "TESTOU", "para": "reg.mama.rh.met-iparp"}
+{"de": "reg.mama.rh.met-tdxd-her2-low", "rel": "SUSTENTADO_POR", "para": "tri.destiny-breast04"}
+{"de": "tri.destiny-breast04", "rel": "TESTOU", "para": "reg.mama.rh.met-tdxd-her2-low"}
+{"de": "reg.mama.rh.met-tdxd-her2-low", "rel": "SUSTENTADO_POR", "para": "tri.destiny-breast06"}
+{"de": "tri.destiny-breast06", "rel": "TESTOU", "para": "reg.mama.rh.met-tdxd-her2-low"}
+{"de": "reg.mama.rh.met-sacituzumabe", "rel": "SUSTENTADO_POR", "para": "tri.tropics-02"}
+{"de": "tri.tropics-02", "rel": "TESTOU", "para": "reg.mama.rh.met-sacituzumabe"}
+{"de": "reg.mama.rh.met-abemaciclibe-mono", "rel": "SUSTENTADO_POR", "para": "tri.monarch-1"}
+{"de": "tri.monarch-1", "rel": "TESTOU", "para": "reg.mama.rh.met-abemaciclibe-mono"}
+{"de": "reg.mama.rh.met-abemaciclibe-mono", "rel": "SUSTENTADO_POR", "para": "tri.nextmonarch"}
+{"de": "tri.nextmonarch", "rel": "TESTOU", "para": "reg.mama.rh.met-abemaciclibe-mono"}
+{"de": "reg.mama.rh.met-elacestranto", "rel": "SUSTENTADO_POR", "para": "tri.emerald"}
+{"de": "tri.emerald", "rel": "TESTOU", "para": "reg.mama.rh.met-elacestranto"}
+{"de": "reg.mama.rh.met-imlunestranto", "rel": "SUSTENTADO_POR", "para": "tri.ember-3"}
+{"de": "tri.ember-3", "rel": "TESTOU", "para": "reg.mama.rh.met-imlunestranto"}
+{"de": "reg.mama.rh.met-dato-dxd", "rel": "SUSTENTADO_POR", "para": "tri.tropion-breast01"}
+{"de": "tri.tropion-breast01", "rel": "TESTOU", "para": "reg.mama.rh.met-dato-dxd"}
+{"de": "reg.mama.rh.refr-1l-tdxd", "rel": "SUSTENTADO_POR", "para": "tri.destiny-breast06"}
+{"de": "tri.destiny-breast06", "rel": "TESTOU", "para": "reg.mama.rh.refr-1l-tdxd"}
+{"de": "reg.mama.rh.refr-1l-iparp", "rel": "SUSTENTADO_POR", "para": "tri.olympiad"}
+{"de": "tri.olympiad", "rel": "TESTOU", "para": "reg.mama.rh.refr-1l-iparp"}
+{"de": "reg.mama.rh.refr-1l-iparp", "rel": "SUSTENTADO_POR", "para": "tri.embraca"}
+{"de": "tri.embraca", "rel": "TESTOU", "para": "reg.mama.rh.refr-1l-iparp"}
+{"de": "reg.mama.rh.refr-2l-tdxd", "rel": "SUSTENTADO_POR", "para": "tri.destiny-breast04"}
+{"de": "tri.destiny-breast04", "rel": "TESTOU", "para": "reg.mama.rh.refr-2l-tdxd"}
+{"de": "reg.mama.rh.refr-2l-sacituzumabe", "rel": "SUSTENTADO_POR", "para": "tri.tropics-02"}
+{"de": "tri.tropics-02", "rel": "TESTOU", "para": "reg.mama.rh.refr-2l-sacituzumabe"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "SUSTENTADO_POR", "para": "tri.tnt"}
+{"de": "tri.tnt", "rel": "TESTOU", "para": "reg.mama.tn.met-qt-combinacoes"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "SUSTENTADO_POR", "para": "tri.embrace"}
+{"de": "tri.embrace", "rel": "TESTOU", "para": "reg.mama.tn.met-qt-combinacoes"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "SUSTENTADO_POR", "para": "tri.eribulina-vs-capecitabina"}
+{"de": "tri.eribulina-vs-capecitabina", "rel": "TESTOU", "para": "reg.mama.tn.met-qt-combinacoes"}
+{"de": "reg.mama.tn.met-qt-combinacoes", "rel": "SUSTENTADO_POR", "para": "tri.doxorrubicina-lipossomal-509"}
+{"de": "tri.doxorrubicina-lipossomal-509", "rel": "TESTOU", "para": "reg.mama.tn.met-qt-combinacoes"}
+{"de": "reg.mama.tn.met-pembro-qt", "rel": "SUSTENTADO_POR", "para": "tri.keynote-355"}
+{"de": "tri.keynote-355", "rel": "TESTOU", "para": "reg.mama.tn.met-pembro-qt"}
+{"de": "reg.mama.tn.met-dato-dxd", "rel": "SUSTENTADO_POR", "para": "tri.tropion-breast02"}
+{"de": "tri.tropion-breast02", "rel": "TESTOU", "para": "reg.mama.tn.met-dato-dxd"}
+{"de": "reg.mama.tn.met-1l-iparp", "rel": "SUSTENTADO_POR", "para": "tri.olympiad"}
+{"de": "tri.olympiad", "rel": "TESTOU", "para": "reg.mama.tn.met-1l-iparp"}
+{"de": "reg.mama.tn.met-1l-iparp", "rel": "SUSTENTADO_POR", "para": "tri.embraca"}
+{"de": "tri.embraca", "rel": "TESTOU", "para": "reg.mama.tn.met-1l-iparp"}
+{"de": "reg.mama.tn.met-atezo-nabpacli", "rel": "SUSTENTADO_POR", "para": "tri.impassion130"}
+{"de": "tri.impassion130", "rel": "TESTOU", "para": "reg.mama.tn.met-atezo-nabpacli"}
+{"de": "reg.mama.tn.met-sacituzumabe-1l", "rel": "SUSTENTADO_POR", "para": "tri.ascent-03"}
+{"de": "tri.ascent-03", "rel": "TESTOU", "para": "reg.mama.tn.met-sacituzumabe-1l"}
+{"de": "reg.mama.tn.met-sacituzumabe-1l", "rel": "SUSTENTADO_POR", "para": "tri.ascent-04"}
+{"de": "tri.ascent-04", "rel": "TESTOU", "para": "reg.mama.tn.met-sacituzumabe-1l"}
+{"de": "reg.mama.tn.met-2l-iparp", "rel": "SUSTENTADO_POR", "para": "tri.olympiad"}
+{"de": "tri.olympiad", "rel": "TESTOU", "para": "reg.mama.tn.met-2l-iparp"}
+{"de": "reg.mama.tn.met-2l-iparp", "rel": "SUSTENTADO_POR", "para": "tri.embraca"}
+{"de": "tri.embraca", "rel": "TESTOU", "para": "reg.mama.tn.met-2l-iparp"}
+{"de": "reg.mama.tn.met-2l-sacituzumabe", "rel": "SUSTENTADO_POR", "para": "tri.ascent"}
+{"de": "tri.ascent", "rel": "TESTOU", "para": "reg.mama.tn.met-2l-sacituzumabe"}
+{"de": "reg.mama.tn.met-2l-qt", "rel": "SUSTENTADO_POR", "para": "tri.tnt"}
+{"de": "tri.tnt", "rel": "TESTOU", "para": "reg.mama.tn.met-2l-qt"}
+{"de": "reg.mama.tn.met-2l-tdxd", "rel": "SUSTENTADO_POR", "para": "tri.destiny-breast04"}
+{"de": "tri.destiny-breast04", "rel": "TESTOU", "para": "reg.mama.tn.met-2l-tdxd"}
+{"de": "reg.mama.her2.met-hp-taxano", "rel": "SUSTENTADO_POR", "para": "tri.cleopatra"}
+{"de": "tri.cleopatra", "rel": "TESTOU", "para": "reg.mama.her2.met-hp-taxano"}
+{"de": "reg.mama.her2.met-hp-taxano", "rel": "SUSTENTADO_POR", "para": "tri.peruse"}
+{"de": "tri.peruse", "rel": "TESTOU", "para": "reg.mama.her2.met-hp-taxano"}
+{"de": "reg.mama.her2.met-hp-vinorelbina", "rel": "SUSTENTADO_POR", "para": "tri.velvet"}
+{"de": "tri.velvet", "rel": "TESTOU", "para": "reg.mama.her2.met-hp-vinorelbina"}
+{"de": "reg.mama.her2.met-her2-rh-anti-her2-ht", "rel": "SUSTENTADO_POR", "para": "tri.pertain"}
+{"de": "tri.pertain", "rel": "TESTOU", "para": "reg.mama.her2.met-her2-rh-anti-her2-ht"}
+{"de": "reg.mama.her2.met-her2-rh-anti-her2-ht", "rel": "SUSTENTADO_POR", "para": "tri.alternative"}
+{"de": "tri.alternative", "rel": "TESTOU", "para": "reg.mama.her2.met-her2-rh-anti-her2-ht"}
+{"de": "reg.mama.her2.met-her2-rh-anti-her2-ht", "rel": "SUSTENTADO_POR", "para": "tri.sysucc-002"}
+{"de": "tri.sysucc-002", "rel": "TESTOU", "para": "reg.mama.her2.met-her2-rh-anti-her2-ht"}
+{"de": "reg.mama.her2.met-tdxd-pertuzumabe-db09", "rel": "SUSTENTADO_POR", "para": "tri.destiny-breast09"}
+{"de": "tri.destiny-breast09", "rel": "TESTOU", "para": "reg.mama.her2.met-tdxd-pertuzumabe-db09"}
+{"de": "reg.mama.her2.met-palbo-manutencao-patina", "rel": "SUSTENTADO_POR", "para": "tri.patina"}
+{"de": "tri.patina", "rel": "TESTOU", "para": "reg.mama.her2.met-palbo-manutencao-patina"}
+{"de": "reg.mama.her2.met-tucatinibe-manutencao", "rel": "SUSTENTADO_POR", "para": "tri.her2climb-05"}
+{"de": "tri.her2climb-05", "rel": "TESTOU", "para": "reg.mama.her2.met-tucatinibe-manutencao"}
+{"de": "reg.mama.her2.met-tdxd", "rel": "SUSTENTADO_POR", "para": "tri.destiny-breast03"}
+{"de": "tri.destiny-breast03", "rel": "TESTOU", "para": "reg.mama.her2.met-tdxd"}
+{"de": "reg.mama.her2.met-tdm1", "rel": "SUSTENTADO_POR", "para": "tri.th3resa"}
+{"de": "tri.th3resa", "rel": "TESTOU", "para": "reg.mama.her2.met-tdm1"}
+{"de": "reg.mama.her2.met-h-cape", "rel": "SUSTENTADO_POR", "para": "tri.gbg-26"}
+{"de": "tri.gbg-26", "rel": "TESTOU", "para": "reg.mama.her2.met-h-cape"}
+{"de": "reg.mama.her2.met-lapa-cape", "rel": "SUSTENTADO_POR", "para": "tri.lapatinibe-capecitabina"}
+{"de": "tri.lapatinibe-capecitabina", "rel": "TESTOU", "para": "reg.mama.her2.met-lapa-cape"}
+{"de": "reg.mama.her2.met-h-lapa", "rel": "SUSTENTADO_POR", "para": "tri.lapatinibe-trastuzumabe"}
+{"de": "tri.lapatinibe-trastuzumabe", "rel": "TESTOU", "para": "reg.mama.her2.met-h-lapa"}
+{"de": "reg.mama.her2.met-h-outras-qt", "rel": "SUSTENTADO_POR", "para": "tri.pherexa"}
+{"de": "tri.pherexa", "rel": "TESTOU", "para": "reg.mama.her2.met-h-outras-qt"}
+{"de": "reg.mama.her2.met-tucatinibe-h-cape", "rel": "SUSTENTADO_POR", "para": "tri.her2climb"}
+{"de": "tri.her2climb", "rel": "TESTOU", "para": "reg.mama.her2.met-tucatinibe-h-cape"}
+{"de": "reg.mama.rh.neo-acdd-t", "rel": "SUSTENTADO_POR", "para": "tri.vaz-luis-sem-gcsf"}
+{"de": "tri.vaz-luis-sem-gcsf", "rel": "TESTOU", "para": "reg.mama.rh.neo-acdd-t"}
+{"de": "reg.mama.her2.neo-tchp", "rel": "SUSTENTADO_POR", "para": "tri.aphinity"}
+{"de": "tri.aphinity", "rel": "TESTOU", "para": "reg.mama.her2.neo-tchp"}
