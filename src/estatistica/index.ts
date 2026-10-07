@@ -9,6 +9,18 @@ export type StatusAdministracaoEstatistica = "COMPLETA" | "PARCIAL" | "OMITIDA" 
 
 export interface ProjecaoEstatistica {
   versao: typeof ESTATISTICA_VERSAO;
+  /** O leitor atual recebe o ledger completo e não filtra intervalo clínico. */
+  escopo: "LEDGER_COMPLETO";
+  periodoClinico: null;
+  /** Coorte observável: pacientes com ao menos um evento confirmado vigente. */
+  denominadorPacientes: number;
+  exclusoes: {
+    eventosNaoConfirmados: number;
+    eventosSupersedidos: number;
+    linhasDuplicadas: number;
+    administracoesInvalidas: number;
+    administracoesConflito: number;
+  };
   totalPacientes: number;
   eventosPorCategoria: Record<CategoriaEventoEstatistico, number>;
   pacientesPorCategoria: Record<CategoriaEventoEstatistico, number>;
@@ -40,10 +52,12 @@ function fingerprint(evento: ClinicalEvent): string {
 export function projetarEstatistica(eventos: readonly ClinicalEventType[]): ProjecaoEstatistica {
   const porId = new Map<string, ClinicalEventType>();
   const hashes = new Map<string, string>();
+  let linhasDuplicadas = 0;
   for (const evento of eventos) {
     const anterior = porId.get(evento.eventId);
     if (anterior) {
       if (hashes.get(evento.eventId) !== fingerprint(evento)) throw new Error("EVENT_ID_CONFLICT");
+      linhasDuplicadas += 1;
       continue;
     }
     porId.set(evento.eventId, evento);
@@ -70,7 +84,8 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[]): Proj
     }
   }
 
-  const confirmados = [...porId.values()].filter((e) => e.revisao === "CONFIRMADO" || e.revisao === "ASSINADO");
+  const unicos = [...porId.values()];
+  const confirmados = unicos.filter((e) => e.revisao === "CONFIRMADO" || e.revisao === "ASSINADO");
   const substituidos = new Set(confirmados.map((e) => e.supersedesEventId).filter((id): id is string => !!id));
   const vigentes = confirmados.filter((e) => !substituidos.has(e.eventId));
   const pacientes = new Set<string>();
@@ -148,6 +163,16 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[]): Proj
 
   return {
     versao: ESTATISTICA_VERSAO,
+    escopo: "LEDGER_COMPLETO",
+    periodoClinico: null,
+    denominadorPacientes: pacientes.size,
+    exclusoes: {
+      eventosNaoConfirmados: unicos.length - confirmados.length,
+      eventosSupersedidos: vigentes.length >= confirmados.length ? 0 : confirmados.length - vigentes.length,
+      linhasDuplicadas,
+      administracoesInvalidas: administracoesInvalidas.length,
+      administracoesConflito,
+    },
     totalPacientes: pacientes.size,
     eventosPorCategoria,
     pacientesPorCategoria: {

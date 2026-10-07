@@ -49,11 +49,25 @@ const codigoNegativaSeguro = (codigo: unknown): string =>
   typeof codigo === "string" && CODIGOS_NEGATIVA_EGRESS.has(codigo) ? codigo : "SAIDA_NAO_AUTORIZADA";
 const hashPayload = (payload: string) => createHash("sha256").update(payload, "utf8").digest("hex");
 const hashDestino = (destino: string) => createHash("sha256").update(destino, "utf8").digest("hex");
+
 function congelarProfundo<T>(value: T, vistos = new WeakSet<object>()): T {
   if (!value || typeof value !== "object" || vistos.has(value as object)) return value;
   vistos.add(value as object);
   for (const child of Object.values(value as Record<string, unknown>)) congelarProfundo(child, vistos);
   return Object.freeze(value);
+}
+
+/** The evidence contract is JSON data. Reject exotic mutable containers before gating/freezing. */
+function evidenciaEhJson(value: unknown, vistos = new WeakSet<object>()): boolean {
+  if (value === null || typeof value === "string" || typeof value === "boolean") return true;
+  if (typeof value === "number") return Number.isFinite(value);
+  if (typeof value !== "object") return false;
+  if (vistos.has(value)) return false;
+  vistos.add(value);
+  if (Array.isArray(value)) return value.every((item) => evidenciaEhJson(item, vistos));
+  const proto = Object.getPrototypeOf(value);
+  if (proto !== Object.prototype && proto !== null) return false;
+  return Object.keys(value).every((key) => evidenciaEhJson((value as Record<string, unknown>)[key], vistos));
 }
 
 function evidenciasSaidaPassam(intent: Intent, evidencia: EvidenciaSaidaExterna): boolean {
@@ -150,7 +164,11 @@ export function criarGateway(deps: {
           const codigo = validacao && validacao.ok === false ? validacao.codigo : undefined;
           return negar(acao, codigoNegativaSeguro(codigo));
         }
-        try { evidencia = congelarProfundo(structuredClone(validacao.evidencia)); }
+        try {
+          const copia = structuredClone(validacao.evidencia);
+          if (!evidenciaEhJson(copia)) return negar(acao, "CONTEXTO_SAIDA_INDISPONIVEL");
+          evidencia = congelarProfundo(copia);
+        }
         catch { return negar(acao, "CONTEXTO_SAIDA_INDISPONIVEL"); }
         try {
           if (!evidenciasSaidaPassam(intent, evidencia)) return negar(acao, "GATES_SAIDA_NAO_PASSARAM");

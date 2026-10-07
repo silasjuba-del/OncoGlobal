@@ -19,6 +19,9 @@ import { antiglosa } from "../apac/antiglosa.js";
 import type { CaixaNumerada } from "../contracts/w10/clinico-w10.js";
 import type { TabelasSigtap } from "../apac/sigtap.js";
 import { avaliarSerieRecist, type RecistSerieInput } from "../rules/recist/index.js";
+import { ClinicalFact } from "../contracts/w10/extracao.js";
+import { reconciliarCampos } from "../kernel/extracao/reconciliacao.js";
+import { normalizarDataCivil } from "../kernel/extracao/normalizacao.js";
 
 const RecistSerieSchema = z.object({
   patientId: z.string().min(1), tumorLotId: z.string().nullable(), episodioId: z.string().min(1),
@@ -63,6 +66,17 @@ function eventos(db: DatabaseSync) {
     || a.operationId.localeCompare(b.operationId) || a.eventIndex - b.eventIndex);
 }
 function data(e: ReturnType<typeof eventos>[number]) { return dadosDoEvento(e); }
+function valorCandidatoResumo(value: unknown): string {
+  if (typeof value === "string") return value;
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    const v = value as Record<string, unknown>;
+    if (typeof v.marker === "string") return `${v.marker}: ${v.value ?? v.raw ?? "NÃO CONSTA"}${typeof v.unit === "string" ? ` ${v.unit}` : ""}`;
+    if (typeof v.siteRaw === "string" || typeof v.measureRaw === "string")
+      return `${typeof v.siteRaw === "string" ? v.siteRaw : "sítio NÃO CONSTA"}: ${typeof v.measureRaw === "string" ? `${v.measureRaw} ${String(v.unit ?? "")}`.trim() : "medida NÃO CONSTA"}`;
+    if (typeof v.raw === "string") return v.raw;
+  }
+  return JSON.stringify(value) ?? String(value);
+}
 function porTipo<T>(all: ReturnType<typeof eventos>, tipo: string, schema: ZodType<T>) {
   const groups = new Map<string, ReturnType<typeof eventos>>();
   for (const event of all.filter((e) => e.tipo === tipo)) {
@@ -134,6 +148,53 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
       titulo: typeof d.titulo === "string" ? d.titulo : "Documento em revisão",
       preMarcado: false, visivel: true }];
   });
+  const evolucoesRascunho = drafts.flatMap((draft) => {
+    const payload = draft.payload;
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) return [];
+    const value = payload as Record<string, unknown>;
+    return value.kind === "EVOLUCAO_RASCUNHO" && typeof value.resumo === "string"
+      ? [{ draftId: draft.draftId, revision: draft.revision, status: "RASCUNHO" as const, resumo: value.resumo }]
+      : [];
+  });
+  const resumoEvolucao = evolucoesRascunho.length
+    ? evolucoesRascunho.map((item) => item.resumo).join("\n\n--- Próximo rascunho de evolução ---\n\n")
+    : null;
+  const fatosRevisados = eventosVigentes(all.filter((event) => event.patientId === patientId
+    && event.encounterId === current.encounterId && event.tumorLotId === (lote?.tumorLotId ?? null)
+    && (event.revisao === "CONFIRMADO" || event.revisao === "ASSINADO")))
+    .filter((event) => event.tipo === "FATO").flatMap((event) => {
+    const fact = data(event);
+    if (!fact || typeof fact.campo !== "string"
+      || (!fact.campo.startsWith("extracao.") && fact.campo !== "TNM")
+      || typeof fact.factId !== "string" || typeof fact.sourceType !== "string"
+      || typeof fact.sourceId !== "string" || typeof fact.rawEvidence !== "string") return [];
+    const domain = typeof fact.domain === "string" ? fact.domain
+      : fact.campo === "TNM" ? "stage" : fact.campo.slice("extracao.".length).split(":")[0];
+    const parsed = ClinicalFact.safeParse({ id: fact.factId, segmentId: `reviewed:${event.eventId}`,
+      patientCandidateId: null, domain,
+      value: fact.valor, sourceType: fact.sourceType, evidence: fact.evidence, sourceId: fact.sourceId,
+      rawEvidence: fact.rawEvidence, confidence: fact.confidence, requiresConfirmation: fact.requiresConfirmation,
+      ...(typeof fact.factDate === "string" ? { date: fact.factDate } : {}),
+      ...(typeof fact.page === "number" ? { page: fact.page } : {}),
+      ...(typeof fact.regra === "string" ? { regra: fact.regra } : {}) });
+    return parsed.success ? [parsed.data] : [];
+  });
+  const conflitosRevisaoExtracao = Object.entries(reconciliarCampos(fatosRevisados))
+    .filter(([, field]) => field.conflict)
+    .map(([chave, field]) => ({ chave, dominio: field.domain,
+      candidatos: field.candidates.map((fact) => ({ factId: fact.id, sourceId: fact.sourceId,
+        valor: fact.value, evidence: fact.evidence, rawEvidence: fact.rawEvidence,
+        dataClinica: typeof fact.date === "string" ? normalizarDataCivil(fact.date) : null })) }));
+  const textoConflitos = conflitosRevisaoExtracao.length
+    ? ["Divergências entre fontes — candidatos preservados, sem eleição automática",
+      ...conflitosRevisaoExtracao.flatMap((conflito) => [
+        `${conflito.dominio} (${conflito.chave})`,
+        ...conflito.candidatos.map((candidate) => `- ${candidate.sourceId}: ${candidate.rawEvidence}`
+          + (candidate.dataClinica ? `; data clínica ${candidate.dataClinica}` : "; data clínica NÃO CONSTA")
+          + `; valor extraído ${valorCandidatoResumo(candidate.valor)}`),
+      ])].join("\n") : null;
+  const resumoEvolucaoComConflitos = resumoEvolucao && textoConflitos
+    ? `${resumoEvolucao}\n\n${textoConflitos}` : resumoEvolucao;
   const pendenciasLeitura = [
     "SNAPSHOT_DE_CAMPOS_NAO_PERSISTIDO", "ALERGIAS_NAO_CARREGADAS", "COMORBIDADES_NAO_CARREGADAS",
     "ALERTAS_NAO_PERSISTIDOS", "DELTA_ANTERIOR_NAO_PROJETADO",
@@ -155,6 +216,9 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
       })(),
       alergiasPaciente: [], comorbidadesPaciente: [] },
     alertas: [], delta: { temSnapshotAnterior: false, itens: [] }, evidencias: [],
+    evolucoesRascunho,
+    resumoEvolucao: resumoEvolucaoComConflitos,
+    conflitosRevisaoExtracao,
     fechamento: { blocoAtual: "EVOLUCAO" as const,
       registros: drafts.map((d) => ({ id: d.draftId, expectedRevision: d.revision })),
       documentos: docs, autorExibido: sessao.crm, alvoImpressao: null, alertasVermelhos: [] },

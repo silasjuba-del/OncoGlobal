@@ -64,7 +64,7 @@ describe("W10-LUNA4 F08 · projeção estatística do ledger", () => {
     for (const forbidden of [patient1, "Paciente Teste 99", "PHI-SINTETICA", "NAO-RETORNAR", "admin-1", "Fármaco sintético"])
       expect(json).not.toContain(forbidden);
     expect(Object.keys(projection)).toEqual([
-      "versao", "totalPacientes", "eventosPorCategoria", "pacientesPorCategoria", "documentosAssinados",
+      "versao", "escopo", "periodoClinico", "denominadorPacientes", "exclusoes", "totalPacientes", "eventosPorCategoria", "pacientesPorCategoria", "documentosAssinados",
       "pacientesComDocumentoAssinado", "administracoesPorStatus", "pacientesPorStatusDeAdministracao", "administracoesPendentes", "administracoesConflito",
     ]);
   });

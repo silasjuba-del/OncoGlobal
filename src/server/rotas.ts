@@ -21,6 +21,8 @@ import { classificarDocumento } from "../rules/prescricao/classificarDocumento.j
 import { instanciarProtocolo } from "../rules/prescricao/instanciarProtocolo.js";
 import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
 import { projetarEstatisticaLedger } from "../estatistica/index.js";
+import { consultarGrafoLocal } from "../app/pesquisa/conhecimento.js";
+import { prepararRevisaoExtracao } from "../app/revisaoExtracao.js";
 
 export interface ServidorDeps {
   db: DatabaseSync;
@@ -130,9 +132,13 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
   if (drafts.some((draft) => !draft || draft.patientId !== input.patientId))
     return { status: 409, body: { codigo: "DRAFT_NAO_ENCONTRADO" } };
   if (drafts.some((draft) => {
+    const contexto = contextoDraft(draft?.payload);
+    return contexto && (contexto.encounterId !== input.encounterId || contexto.tumorLotId !== input.tumorLotId);
+  })) return { status: 409, body: { codigo: "DRAFT_FORA_DO_ESCOPO" } };
+  if (drafts.some((draft) => {
     const kind = draft?.payload && typeof draft.payload === "object" && "kind" in draft.payload
       ? draft.payload.kind : null;
-    return kind === "EXTRACAO_RASCUNHO" || kind === "PRESCRICAO_RASCUNHO";
+    return kind === "EXTRACAO_RASCUNHO" || kind === "PRESCRICAO_RASCUNHO" || kind === "EVOLUCAO_RASCUNHO";
   })) return { status: 409, body: { codigo: "DRAFT_AINDA_RASCUNHO" } };
   const escolhidos = input.documentosExibidos;
   const docs = drafts.map((d) => payloadDocumento(d!.payload));
@@ -184,7 +190,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
                       : req.url === "/consulta/apac" ? "apac"
                         : req.url === "/consulta/chat" ? "chat"
                           : req.url === "/consulta/recist" ? "recist"
-                            : req.url === "/consulta/estatistica" ? "estatistica"
+      : req.url === "/consulta/estatistica" ? "estatistica"
+                            : req.url === "/conhecimento/consultar" ? "consultarConhecimento"
                           : req.url === "/config/perfil" ? "lerPerfil"
                             : req.url === "/config/perfil/salvar" ? "salvarPerfil"
                               : req.url === "/config/caixa/ler" ? "lerCaixa"
@@ -211,6 +218,24 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     // O gate de autenticação continua anterior a esta checagem.
     if (rota === "acao" && !contentTypeJson(req)) return reply(415, "CONTENT_TYPE_INVALIDO");
     const raw = await body(req);
+    if (rota === "consultarConhecimento") {
+      const parsed = z.object({ query: z.string().min(1).max(240), tipos: z.array(z.string()).optional(),
+        status: z.array(z.string()).optional(), proveniencia: z.object({ modulo: z.string().optional(), aula: z.string().optional() })
+          .strict().optional(), topK: z.number().int().positive().max(100).optional() }).strict().safeParse(raw);
+      if (!parsed.success) return reply(400, "CONSULTA_INVALIDA");
+      const proveniencia = parsed.data.proveniencia === undefined ? undefined : {
+        ...(parsed.data.proveniencia.modulo === undefined ? {} : { modulo: parsed.data.proveniencia.modulo }),
+        ...(parsed.data.proveniencia.aula === undefined ? {} : { aula: parsed.data.proveniencia.aula }),
+      };
+      const consulta = { query: parsed.data.query,
+        ...(parsed.data.tipos === undefined ? {} : { tipos: parsed.data.tipos }),
+        ...(parsed.data.status === undefined ? {} : { status: parsed.data.status }),
+        ...(proveniencia === undefined ? {} : { proveniencia }),
+        ...(parsed.data.topK === undefined ? {} : { topK: parsed.data.topK }) };
+      const result = await consultarGrafoLocal(consulta);
+      return reply(result.status === "OK" ? 200 : 409,
+        result.status === "OK" ? "REFERENCIAS_CARREGADAS" : result.codigo, result);
+    }
     if (rota === "recist") {
       const parsed = z.object({ patientId: Id }).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
@@ -422,27 +447,92 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     }
     if (rota === "revisarRascunho") {
       const parsed = z.object({ draftId: z.string().min(1), expectedRevision: z.number().int().nonnegative(),
-        patientId: Id }).strict().safeParse(raw);
+        patientId: Id, factIds: z.array(Id).min(1).optional(), operationId: z.string().min(8).optional() })
+        .strict().refine((value) => value.factIds === undefined || value.operationId !== undefined).safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
-      const draft = lerDraft(deps.db, parsed.data.draftId);
+      let draft = lerDraft(deps.db, parsed.data.draftId);
       if (!draft || draft.revision !== parsed.data.expectedRevision)
         return reply(409, "REVISAO_RASCUNHO_CONFLITANTE");
       const draftKind = draft.payload && typeof draft.payload === "object" && "kind" in draft.payload
         ? draft.payload.kind : null;
-      if (draftKind !== "EXTRACAO_RASCUNHO" || draft.patientId !== null)
+      if (draftKind !== "EXTRACAO_RASCUNHO")
         return reply(409, "TIPO_RASCUNHO_NAO_PODE_SER_VINCULADO");
       if (!lerPaciente(deps.db, parsed.data.patientId)) return reply(404, "PACIENTE_DESTINO_NAO_ENCONTRADO");
-      if (draft.payload && typeof draft.payload === "object" && "patientLinkReview" in draft.payload)
-        return reply(409, "VINCULO_JA_REVISADO");
-      const reviewed = salvarDraft(deps.db, { ...draft, patientId: parsed.data.patientId,
-        revision: draft.revision + 1,
-        payload: { ...(draft.payload && typeof draft.payload === "object" ? draft.payload : { content: draft.payload }),
-          patientLinkReview: { patientId: parsed.data.patientId, medicoId: sessao.medicoId, em: deps.agora() } },
-        diagnostics: [...draft.diagnostics, "VINCULO_PACIENTE_CONFIRMADO_POR_MEDICO"] });
-      if (reviewed.diagnostics.includes("EXPECTED_REVISION_CONFLICT"))
-        return reply(409, "REVISAO_RASCUNHO_CONFLITANTE");
-      return reply(200, "VINCULO_REVISTO", { codigo: "VINCULO_REVISTO", draftId: reviewed.draftId, revision: reviewed.revision,
-        linkedPatientId: reviewed.patientId, criaEventoClinico: false });
+      const payloadOriginal = draft.payload && typeof draft.payload === "object" && !Array.isArray(draft.payload)
+        ? draft.payload as Record<string, unknown> : null;
+      const linkReview = payloadOriginal?.patientLinkReview && typeof payloadOriginal.patientLinkReview === "object"
+        ? payloadOriginal.patientLinkReview as Record<string, unknown> : null;
+      if (draft.patientId !== null && draft.patientId !== parsed.data.patientId)
+        return reply(409, "RASCUNHO_VINCULADO_A_OUTRO_PACIENTE");
+      if (draft.patientId === null) {
+        if (parsed.data.factIds) return reply(409, "VINCULO_PACIENTE_NAO_CONFIRMADO");
+        const reviewed = salvarDraft(deps.db, { ...draft, patientId: parsed.data.patientId,
+          revision: draft.revision + 1,
+          payload: { ...payloadOriginal, patientLinkReview: { patientId: parsed.data.patientId,
+            medicoId: sessao.medicoId, em: deps.agora() } },
+          diagnostics: [...draft.diagnostics, "VINCULO_PACIENTE_CONFIRMADO_POR_MEDICO"] });
+        if (reviewed.diagnostics.includes("EXPECTED_REVISION_CONFLICT"))
+          return reply(409, "REVISAO_RASCUNHO_CONFLITANTE");
+        draft = reviewed;
+      } else if (linkReview?.patientId !== parsed.data.patientId) {
+        return reply(409, "VINCULO_PACIENTE_NAO_CONFIRMADO");
+      }
+      if (!parsed.data.factIds) return reply(200, "VINCULO_REVISTO", {
+        codigo: "VINCULO_REVISTO", draftId: draft.draftId, revision: draft.revision,
+        linkedPatientId: draft.patientId, fatosConfirmados: 0, criaEventoClinico: false,
+      });
+
+      const contexto = deps.sessoes.consultaSelecionada(token);
+      if (!contexto) return reply(409, "CONTEXTO_CONSULTA_NAO_SELECIONADO");
+      if (contexto.patientId !== parsed.data.patientId) return reply(409, "PACIENTE_FORA_DA_CONSULTA_SELECIONADA");
+      if (!payloadOriginal || typeof payloadOriginal.input !== "object" || payloadOriginal.input === null
+        || typeof payloadOriginal.state !== "object" || payloadOriginal.state === null)
+        return reply(409, "EXTRACAO_RASCUNHO_INVALIDO");
+      const extractionInput = payloadOriginal.input as Record<string, unknown>;
+      const extractionState = payloadOriginal.state as Record<string, unknown>;
+      if (typeof extractionInput.sourceId !== "string" || typeof extractionInput.sourceType !== "string"
+        || typeof extractionInput.rawTranscript !== "string" || !Array.isArray(extractionState.facts)
+        || !Array.isArray(extractionState.confirmationRequired))
+        return reply(409, "EXTRACAO_RASCUNHO_INVALIDO");
+      const operationId = parsed.data.operationId!;
+      const operacaoExistente = deps.db.prepare("SELECT criadoEm FROM operation WHERE operationId=?").get(operationId);
+      const em = typeof operacaoExistente?.criadoEm === "string" ? operacaoExistente.criadoEm : deps.agora();
+      let revisao: ReturnType<typeof prepararRevisaoExtracao>;
+      try {
+        revisao = prepararRevisaoExtracao({ draftId: draft.draftId, sourceId: extractionInput.sourceId,
+          rawTranscript: extractionInput.rawTranscript, sourceType: extractionInput.sourceType,
+          facts: extractionState.facts, exceptions: extractionState.confirmationRequired,
+          patientId: parsed.data.patientId, encounterId: contexto.encounterId,
+          tumorLotId: contexto.tumorLotId ?? null, factIds: parsed.data.factIds, operationId,
+          medicoId: sessao.medicoId, em });
+      } catch (error) {
+        const code = error instanceof Error ? error.message : "EXTRACAO_RASCUNHO_INVALIDO";
+        return reply(409, ["FACT_IDS_INVALIDOS", "PROVENIENCIA_DIVERGENTE", "FATO_NAO_ENCONTRADO"].includes(code)
+          ? code : "EXTRACAO_RASCUNHO_INVALIDO");
+      }
+      const summaryDraft = lerDraft(deps.db, revisao.draftId);
+      if (operacaoExistente && !summaryDraft)
+        return reply(409, "CHAVE_IDEMPOTENCIA_REUTILIZADA");
+      if (summaryDraft && (summaryDraft.patientId !== parsed.data.patientId
+        || JSON.stringify(summaryDraft.payload) !== JSON.stringify(revisao.payload)))
+        return reply(409, "CHAVE_IDEMPOTENCIA_REUTILIZADA");
+      if (!summaryDraft) salvarDraft(deps.db, { draftId: revisao.draftId, patientId: parsed.data.patientId,
+        sourceId: revisao.sourceId, rawRef: `revisao-local:${draft.draftId}`, payload: revisao.payload,
+        diagnostics: ["EVOLUCAO_RASCUNHO", "REVISAO_MEDICA_EXPLICITA"], revision: 0, criadoEm: em });
+      const result = confirmar(deps.db, { operationId, patientId: parsed.data.patientId,
+        tumorLotId: contexto.tumorLotId ?? null, encounterId: contexto.encounterId,
+        reviewDecisionId: operationId, sessao, em,
+        registros: revisao.registros.map((registro) => ({ draftId: revisao.draftId, expectedRevision: 0,
+          eventId: registro.eventId, tipo: registro.tipo, payload: registro.payload, fontes: [...registro.fontes],
+          revisao: "CONFIRMADO" as const })) });
+      if (result.estado === "NEGADA") return reply(409, result.motivo ?? "REVISAO_NEGADA");
+      const persisted = lerDraft(deps.db, revisao.draftId);
+      return reply(200, result.estado === "REPLAY" ? "REVISAO_REPLAY" : "FATOS_REVISTOS", {
+        codigo: result.estado, draftId: revisao.draftId, revision: persisted?.revision ?? 1,
+        linkedPatientId: parsed.data.patientId, encounterId: contexto.encounterId,
+        factIds: parsed.data.factIds, resultRef: result.resultRef, evolucaoRascunho: revisao.payload.resumo,
+        revisaoMedica: { medicoId: sessao.medicoId, em },
+      });
     }
     const parsed = ActionIntent.safeParse(raw);
     if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");

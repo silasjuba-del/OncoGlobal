@@ -1,8 +1,9 @@
 // KIMI-17 · regressão do CASO 07 contra o que existe hoje (identidade, vínculo, radAlerts).
 // Fonte normativa: docs/referencias/CASO-REAL-01-LICOES.md §2 e §4 + fixtures sintéticas
 // tests/fixtures/caso07/**. Tudo aqui é PROVA POSITIVA/NEGATIVA contra código existente;
-// a deduplicação (D1/D2) e o extrator de trechos riscados (R1) não existem em src/ e estão
-// em tests/adv-w8/caso07-dedupe.adv.ts (SEM_IMPLEMENTACAO, DEPENDE_W7).
+// a deduplicação (D1/D2) permanece fora desta fatia; a conversão local e a extração
+// de conteúdo riscado são verificadas por comportamento (R1).
+import { createHash } from "node:crypto";
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -12,6 +13,9 @@ import { resolverVinculo, type CadastroVinculo, type ContatoVinculo } from "../.
 import { avaliarRadAlerts } from "../../src/rules/radAlerts.js";
 import type { Paciente } from "../../src/contracts/clinico.js";
 import type { RadRuleset } from "../../src/rules/tipos-w3.js";
+import { converterEntradaLocal } from "../../src/leitura/caixa-unica.js";
+import { extratorDeterministico } from "../../src/kernel/extracao/extrator.js";
+import { segmentarTranscricao } from "../../src/kernel/extracao/segmenter.js";
 
 const FIX = fileURLToPath(new URL("../fixtures/caso07", import.meta.url));
 const ler = (nome: string) => readFileSync(join(FIX, nome), "utf8");
@@ -147,14 +151,20 @@ describe("KIMI-17 · caso 07 · S1 — TNM nunca preenchido por regra", () => {
 });
 
 describe("KIMI-17 · caso 07 · R1 — âncora dos trechos riscados (regressão para a leitura W7)", () => {
-  it("o fixture carrega exatamente 2 trechos riscados marcados; extração ainda não existe (DEPENDE_W7)", () => {
+  it("preserva fixture e hash como PENDENTE e não promove os trechos riscados", () => {
     const rm = ler("06-rm-prostata.txt");
     expect(rm.match(/\[RISCADO\][\s\S]*?\[\/RISCADO\]/g)).toHaveLength(2);
-    // Nenhum código em src/ lê a marcação [RISCADO] ainda — quando a leitura (W7) existir,
-    // esta âncora deve virar prova de PENDENTE + recorte para o médico (R1).
-    const srcDir = fileURLToPath(new URL("../../src", import.meta.url));
-    const menciona = readdirSync(srcDir, { recursive: true }).some((f) =>
-      typeof f === "string" && f.endsWith(".ts") && readFileSync(join(srcDir, f), "utf8").includes("RISCADO"));
-    expect(menciona).toBe(false);
+    const bytes = Buffer.from(rm, "utf8");
+    const convertido = converterEntradaLocal({ id: "caso07-rm", tipo: "TEXT", conteudo: bytes,
+      recebidoEm: "2026-10-07T09:00:00-03:00" });
+    expect(convertido.status).toBe("PENDENTE");
+    expect(convertido.documento.hash).toBe(createHash("sha256").update(bytes).digest("hex"));
+    expect(convertido.documento.paginas[0]?.texto).toBe(rm);
+
+    const segmento = segmentarTranscricao({ recordingId: "caso07-rm", sourceId: "fonte-caso07",
+      sourceType: "imaging_report", turns: rm.split(/\r?\n/).map((text) => ({ text, startMs: null, endMs: null })) })[0]!;
+    const fatos = extratorDeterministico.extrair(segmento);
+    expect(fatos.some((f) => /RISCADO|volume prostático de 42 mL|realce precoce difuso/iu.test(f.rawEvidence)))
+      .toBe(false);
   });
 });

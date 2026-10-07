@@ -5,6 +5,7 @@ import type {
   ClinicalFact, EncounterSegment, FactSourceType, PatientCandidate, ReconciledField,
   ReviewAction, ReviewException,
 } from "../kernel/extracao/tipos.js";
+import { ClinicalFact as ClinicalFactContract } from "../contracts/w10/extracao.js";
 import type { PatientTimeline } from "../contracts/w10/clinico-w10.js";
 import { segmentarTranscricao } from "../kernel/extracao/segmenter.js";
 import { rankearPacientes, type IdentityHints, type RegistryPatient } from "../kernel/extracao/patient-resolver.js";
@@ -46,6 +47,8 @@ export interface ExtractionState {
   readonly conflitos: readonly ReviewException[];
   readonly exceptions: readonly ReviewException[];
   readonly rejeitados: readonly ClinicalFact[];
+  /** Raw facts that failed the strict runtime contract; retained for draft/review diagnostics. */
+  readonly factContractRejections: readonly FactContractRejection[];
   readonly violacoes: readonly ViolacaoInvariante[];
   readonly caixaRevisao: CaixaRevisao;
   readonly series: readonly SerieImagem[];
@@ -55,10 +58,43 @@ export interface ExtractionState {
   readonly confirmationRequired: readonly ReviewException[];
 }
 
+export interface FactContractRejection {
+  readonly rawFact: unknown;
+  readonly diagnostics: readonly string[];
+}
+
+export interface FactContractValidation {
+  readonly facts: readonly ClinicalFact[];
+  readonly rejected: readonly FactContractRejection[];
+}
+
+/** Validate runtime extractor output before normalization or reconciliation. */
+export function validarFatosContraContrato(fatos: readonly unknown[]): FactContractValidation {
+  const facts: ClinicalFact[] = [];
+  const rejected: FactContractRejection[] = [];
+  for (const rawFact of fatos) {
+    try {
+      const parsed = ClinicalFactContract.safeParse(rawFact);
+      if (parsed.success) facts.push(parsed.data);
+      else rejected.push({
+        rawFact,
+        diagnostics: parsed.error.issues.map((issue) => {
+          const path = issue.path.map(String).join(".") || "<root>";
+          return `${path}: ${issue.message}`;
+        }),
+      });
+    } catch {
+      // Malformed runtime values are expected input failures; retain the raw candidate and do not abort the draft.
+      rejected.push({ rawFact, diagnostics: ["<root>: contrato não pôde inspecionar o fato"] });
+    }
+  }
+  return { facts, rejected };
+}
+
 function base(input: ExtractionInput): ExtractionState {
   return {
     input, segments: [], patientCandidates: [], facts: [], fields: {}, conflitos: [],
-    exceptions: [], rejeitados: [], violacoes: [],
+    exceptions: [], rejeitados: [], factContractRejections: [], violacoes: [],
     caixaRevisao: { itens: [], resumo: { reconciliadosAutomaticamente: 0, precisamConfirmacao: 0, texto: "", lista: [] } },
     series: [], timeline: null, timelines: [], confirmationRequired: [],
   };
@@ -98,8 +134,9 @@ export function identificarPaciente(state: ExtractionState): ExtractionState {
 
 /** 3 — porta do extrator (dublê determinístico dos sintéticos; LLM desligada). */
 export function extrairFatos(state: ExtractionState): ExtractionState {
-  return { ...state, facts: state.segments.flatMap((segment) =>
-    extratorDeterministico.extrair(segment)) };
+  const valida = validarFatosContraContrato(state.segments.flatMap((segment) =>
+    extratorDeterministico.extrair(segment)));
+  return { ...state, facts: valida.facts, factContractRejections: valida.rejected };
 }
 
 /** 4 — normalização: unidades, data civil −03:00, lateralidade, sítio, fármaco, TNM. */
