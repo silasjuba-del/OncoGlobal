@@ -14,7 +14,7 @@ const leitura = (tipo: Parameters<typeof converterEntradaLocal>[0]["tipo"], cont
 describe("RT-13 · conversão local incompleta e encoding", () => {
   it("SEM_IMPLEMENTACAO: PDF digital com camada de texto é convertido localmente (pdfjs-dist)", async () => {
     const mod = (await import("../../src/leitura/caixa-unica.js")) as Record<string, unknown>;
-    const fn = mod["converterPdfDigital"] ?? mod["converterPdf"] ?? mod["lerPdf"];
+    const fn = mod["converterPdfDigital"] ?? mod["converterPdf"] ?? mod["lerPdf"] ?? mod["converterEntradaLocalAsync"]; // + nome do Fugu (tech lead)
     expect(fn,
       "D-W9-18: 'PDF digital e Word convertidos localmente'; D-W9-58 aprovou pdfjs-dist (instalada " +
       "em package.json). Todo PDF vira PENDENTE 'sem conversor local aprovado' — o caixa única " +
