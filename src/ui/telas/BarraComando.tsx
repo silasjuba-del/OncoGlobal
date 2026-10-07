@@ -17,6 +17,9 @@ export function BarraComando({
   onSalao,
   onApac,
   onCanal,
+  sinalAbrir = 0,
+  ocultarGatilho = false,
+  className,
 }: {
   pacientes: readonly PacienteBusca[];
   ordemIds: readonly string[];
@@ -28,6 +31,9 @@ export function BarraComando({
   onSalao: () => void;
   onApac: () => void;
   onCanal: () => void;
+  sinalAbrir?: number;
+  ocultarGatilho?: boolean;
+  className?: string;
 }) {
   const [aberto, setAberto] = useState(false);
   const [texto, setTexto] = useState("");
@@ -88,6 +94,11 @@ export function BarraComando({
   }, [aberto]);
 
   useEffect(() => {
+    if (sinalAbrir <= 0) return;
+    setAberto(true);
+  }, [sinalAbrir]);
+
+  useEffect(() => {
     function tecla(evento: KeyboardEvent) {
       if (evento.ctrlKey && evento.key.toLowerCase() === "k") {
         evento.preventDefault();
@@ -115,8 +126,10 @@ export function BarraComando({
   }, [onValidarTudo, onImprimir, onAbrir]);
 
   return (
-    <section aria-label="Comandos" className="pilha">
-      <button type="button" onClick={() => setAberto(true)}>comandos</button>
+    <section aria-label="Comandos" className={className ?? "pilha"}>
+      {ocultarGatilho ? null : (
+        <button type="button" onClick={() => setAberto(true)}>comandos</button>
+      )}
       {confirmando ? <p role="status">Enter confirma a impressão</p> : null}
       {aberto ? (
         <div role="dialog" aria-label="Barra de comando" className="cartao pilha">
