@@ -174,3 +174,17 @@ M-S  EIXO Z = AÇÃO MÉDICA; X + Y = Z → PLN-015   fontes/M-S_PLN-015_eixo-z-
       |S5| Z cobre ações RESOLUTIVAS (tratar, operar, administrar fármacos, planejar RT) — as categorias de investigação/encaminhamento/retorno de M-P não estão citadas como Z neste texto   PENDENTE (investigação é Z, ou é "análise" do passivo?)
       |S6| Fecha (b) e (c) de PLN-014: Z foi definido; X e Y são entradas e Z a saída (X + Y = Z), não três eixos independentes   DECIDIDO (leitura direta do texto)
 ```
+
+```
+M-T  EIXO Z EM 5 VERBOS: INVESTIGAR · TRATAR · ASSISTIR · ENCAMINHAR · SEGUIR → PLN-016   fontes/M-T_PLN-016_eixo-z-verbos.md   (responde S5 de M-S)
+      |T1| INVESTIGAR = LAB | RAD | ENDO | PATH | PROC   DECIDIDO
+      |T2| TRATAR = Sintomático | Específico; TRATAMENTO ESPECÍFICO = MED | CX | RT | PROC   DECIDIDO
+      |T3| MED por via: VO | EV | SC | IM | SL | Tópico   DECIDIDO
+      |T4| ASSISTIR = Nutrição | Fisio | Fono | Psico | Social   DECIDIDO
+      |T5| ENCAMINHAR = Especialidade | Serviço | PS   DECIDIDO
+      |T6| SEGUIR = Retorno | Monitorização | Alarmes   DECIDIDO
+      |T7| Responde S5: INVESTIGAR faz parte do Z (não é só "análise passiva")   DECIDIDO (leitura direta: listado entre os verbos de Z)
+      |T8| Mapeamento com a matriz M-P: INVESTIGAR=cat.3 · TRATAR=cat.4 · ENCAMINHAR=cat.5 · ASSISTIR≈cat.6 (suporte multiprofissional) · SEGUIR≈cat.7 + sinais de alarme (cat.6) · cat.8 (Saída/Documento) = artefato, não verbo; cat.1 e 2 = X/Y   inferência do planejamento
+      |T9| Não aparecem aqui: Orientação (dieta/atividade/autocuidado) da cat.6; MED oncológico (QT·IO·alvo·hormonal) da cat.4; Relatório da cat.8   PENDENTE (estão dentro dos verbos ou fora do Z?)
+      |T10| "Monitorização" é item novo (não existia na matriz M-P)   PENDENTE (definir: parâmetros? vigilância de toxicidade?)
+```
