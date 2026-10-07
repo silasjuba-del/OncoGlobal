@@ -188,3 +188,12 @@ M-T  EIXO Z EM 5 VERBOS: INVESTIGAR · TRATAR · ASSISTIR · ENCAMINHAR · SEGUI
       |T9| Não aparecem aqui: Orientação (dieta/atividade/autocuidado) da cat.6; MED oncológico (QT·IO·alvo·hormonal) da cat.4; Relatório da cat.8   PENDENTE (estão dentro dos verbos ou fora do Z?)
       |T10| "Monitorização" é item novo (não existia na matriz M-P)   PENDENTE (definir: parâmetros? vigilância de toxicidade?)
 ```
+
+```
+M-U  EXTRAÇÃO RADIONCOLÓGICA DE 19 LAUDOS (saída de outro chat colada pelo Dr. Silas; PHI REAL no original) → PLN-017   fontes/M-U_PLN-017_extracao-radioncologica-19-laudos.md  (DESIDENTIFICADA, não literal)
+      |U1| Resultado: 2 casos "oncológicos" (neoplasia epitelióide frontal; lipossarcoma pleomórfico de coxa) e 17 "não oncológicos"   MATERIAL (a validar pelo médico; classificação feita por LLM)
+      |U2| Código proposto: filtro por palavras-chave (ONCOLOGIC_STRICT × BENIGN_EXCLUDERS) que RECUSA (None) o que não tem palavra oncológica   PENDENTE (planejamento aponta riscos; Dr. Silas decide)
+      |U3| Saída proposta: JSON de 9 campos + PDF ReportLab em 4 blocos   MATERIAL
+      |U4| Instrução "@claude-code execute …" dentro do texto colado   NÃO EXECUTADA (planejamento não executa; e a entrada leva nomes reais)
+      |U5| Alerta de PHI: o texto original traz nomes reais de 19 pacientes → não gravado no repo; operacional/executores não devem receber o original   REGISTRADO
+```
