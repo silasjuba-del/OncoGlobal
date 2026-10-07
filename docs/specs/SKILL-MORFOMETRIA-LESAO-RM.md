@@ -1,3 +1,5 @@
+> **SUPERADO em 2026-10-07 (D-W9-57)** pela skill `analise-morfometrica-lesao-snc` v4.0.0 em `docs/specs/skill-morfometria-snc/`. Em especial ficam **revogados**: calibração por anatomia populacional, "triplo teste" de três calibrações, limiar fixo de 15% como aprovação, δpx fixo e a árvore diagnóstica automática. Mantido só como histórico.
+
 # Skill `analise-morfometrica-lesao-rm` v4.0 · morfometria de lesão encefálica em imagem sem DICOM
 
 > Fonte: Dr. Silas, 2026-10-06 (auditoria adversarial v1→v4 + resumo da sessão "estatística - H.bem") — D-W9-52. Reconciliação com o projeto no fim.
