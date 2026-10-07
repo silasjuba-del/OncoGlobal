@@ -11,7 +11,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w10-grok`, branch `f0/w10-grok`.
 | GROK-05 RADS 30 emergências | FEITA | W10-GROK-05 | PT08 abdome alerta linhas 7 e 27. Crânio não alerta. |
 | GROK-06 INTERVAL_PROGRESSION | FEITA | W10-GROK-06 | L5 do PT10 alerta. Não gera M1. |
 | GROK-07 nódulo &lt; 1 cm e Mx | FEITA | W10-GROK-07 | Abaixo de 1 cm fica INDETERMINADO. Mx não troca o texto. |
-| GROK-08 FN-16 semáforo | — | | |
+| GROK-08 FN-16 semáforo | FEITA | W10-GROK-08 | Adv FN-16 verde. Catálogo inativo. Sem bloqueio. |
 | GROK-09 suporte não oncológico | — | | |
 | GROK-10 ownership | — | | |
 | GROK-11 manifesto | — | | |
@@ -291,4 +291,51 @@ Test Files  8 passed (8)
 ```
 Test Files  1 passed (1)
      Tests  9 passed (9)
+```
+
+## GROK-08
+
+`semaforoInteracoes(input, rs)` em `src/rules/semaforoInteracoes.ts`, reexportado por `src/rules/index.ts`. As 30 linhas de `03-interacoes-qt.csv` entraram em `corpus/rulesets/interacoes.v1.json` com `ativo: false`. `fonte.referencia` continua `[VERIFICAR]` (o teste de corpus exige isso nas 34 linhas). A citação fica em `fonte.trecho`. `gravidadeEditorial` não vira bloqueio. `bloqueiaSalvar` é o literal `false`.
+
+Lista nula ou sem a classe NÃO ONCOLÓGICAS fica PENDENTE. "sem interação" só sai VERDE com `checagemCompleta: true`, ruleset com item ativo que tem trecho, e nenhum par casado. Par ativo com trecho fica VERMELHO, inclusive se a coluna editorial diz Contraindicada.
+
+`git merge f0/w1-integrado` no início: já estava em `597b868`.
+
+`src/rules/w8/interacoes.ts` não foi editado.
+
+Testes novos: `tests/w10-grok/grok-08-semaforo.test.ts` (5). Adv FN-16: 5 testes verdes.
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries`
+
+```
+fronteiras ok (180 arquivos)
+```
+
+`npm run check:corpus` — `corpus/rulesets/interacoes.v1.json` header ok, `[VERIFICAR]` 36, ativos 0. Fecho: `corpus ok (96 arquivos)`.
+
+`npx vitest run tests/w10-grok tests/corpus/loader.test.ts tests/corpus/interacoes.test.ts tests/rules-w8/interacoes.test.ts --no-file-parallelism`
+
+```
+Test Files  11 passed (11)
+     Tests  97 passed (97)
+```
+
+5 da GROK-08, mais GROK-01 (38), GROK-02 (11), GROK-03 (7), GROK-04 (5), GROK-05 (6), GROK-06 (7), GROK-07 (5), loader (7), corpus de interações (3) e `rules-w8/interacoes` (3).
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
+
+```
+Test Files  1 passed (1)
+     Tests  9 passed (9)
+```
+
+`npx vitest run --config tests/adv-w8/vitest.config.ts tests/adv-w8/fn16-t34-semaforo-interacoes.adv.ts --no-file-parallelism`
+
+```
+Test Files  1 passed (1)
+     Tests  5 passed (5)
 ```

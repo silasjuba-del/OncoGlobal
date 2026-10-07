@@ -51,3 +51,12 @@ Faixa: `docs/ondas/W10-GROK.md`. Contrato que falta fica com tipo local `// PROV
 2. **Mx não reescreve.** A sugestão "cM0 com nódulos indeterminados" sai ao lado do texto. `substituiu` é o literal `false`.
 3. **Faixa que cruza 1 cm** (ex.: 8–12 mm) não vira INDETERMINADO nem M1. Fica PENDENTE.
 4. **Faixa nova.** O merge `6c3141a` tirou `src/rules/prescricao/**` e `src/rules/morfometria/**` da faixa do Grok. Esta fatia não os editou.
+
+## GROK-08
+
+1. **`[VERIFICAR]` permanece.** `tests/corpus/interacoes.test.ts` exige `fonte.referencia === "[VERIFICAR]"`, os seis campos nulos e `ativo: false` em todo item. As 30 linhas do CSV entraram assim. A citação (bula/artigo) está em `fonte.trecho`. Ativar continua item a item, pelo Dr. Silas.
+2. **Coluna editorial.** `gravidadeEditorial` guarda "Maior" e "Contraindicada". Não é `severidade` e não muda `bloqueiaSalvar`. A coluna de conduta não foi copiada para `notaManejo`.
+3. **Linha 18 do CSV** diz "TKIs". O par foi grafado "inibidor de tirosina quinase" para não criar um terceiro `TKI` no teste que conta exatamente 2. O nome original está no `fonte.trecho`.
+4. **Observações NÃO_VERIFICADO** (sorivudina, diurético de alça) ficaram em `observacaoCsv`. Não viraram fato.
+5. **Barrel.** `semaforoInteracoes` é reexportado por `src/rules/index.ts` porque o adv importa de lá. Os corpos duplicados da triagem não foram apagados nesta fatia.
+6. **"sem interação"** só com `checagemCompleta: true` e pelo menos um item ativo com trecho, sem par casado. Lista estruturada sem `NAO_ONCOLOGICA` fica PENDENTE (D-W9-47).

@@ -698,3 +698,5 @@ export const funcoesF0: FuncoesF0 = {
   ehConcomitante,
   cicloVaiAoMedico,
 };
+
+export { semaforoInteracoes } from "./semaforoInteracoes.js";
