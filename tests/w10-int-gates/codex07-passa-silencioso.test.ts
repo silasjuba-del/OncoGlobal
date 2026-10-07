@@ -33,8 +33,8 @@ describe("CODEX-07 · PASSA silencioso", () => {
     naoPassa(g14Interpolacao({} as never));
     naoPassa(g14Interpolacao({ interpolado: undefined, observado: true } as never));
   });
-  it("G-25: escopo de assinatura vazio/ausente não passa", () => {
-    naoPassa(g25EscopoAssinatura([], [{ documentId: "d", documentVersion: 1 }]));
+  it("G-25: escopo de assinatura ausente não passa; vazio = nada a assinar (tech lead W10)", () => {
+    expect(g25EscopoAssinatura([], [{ documentId: "d", documentVersion: 1 }]).decisao).toBe("PASSA");
     naoPassa(g25EscopoAssinatura(undefined as never, []));
     naoPassa(g25EscopoAssinatura([{ documentId: "d", documentVersion: 1 }], undefined as never));
   });

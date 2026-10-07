@@ -4,7 +4,7 @@
   "nome": "Doxorrubicina + Paclitaxel (AT)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "5499f39b9529a5886e1bc855a5af04eaea8b21497771874b916205d33ff280b2",
+  "hash": "049535a916565e9105d878acb5ec3fc19a3dcb50fce3af88a7d427bc2c120ba2",
   "codigoInstitucional": "P1603",
   "intervaloDias": 21,
   "ciclos": 4,
@@ -123,7 +123,7 @@
       "drug": "Doxorrubicina",
       "classe": "QT",
       "sequence": 6,
-      "standardDose": 50,
+      "standardDose": 60,
       "doseBasis": "MG_M2",
       "calculatedDose": null,
       "prescribedDose": null,
@@ -137,7 +137,7 @@
       "days": [
         "d1"
       ],
-      "observacao": "Planilha 50 mg/m²; ficha real P1603: 60 mg/m² em 15 min [VERIFICAR].",
+      "observacao": "60 mg/m² decidido pelo Dr. Silas (D-W9-59; ficha real P1603, 15 min). Planilha trazia 50.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },

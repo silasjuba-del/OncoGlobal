@@ -105,3 +105,8 @@ export const PatientTimeline = z.object({
   unresolvedConflicts: z.array(Id), // ids de ReviewException
 }).strict();
 export type PatientTimeline = z.infer<typeof PatientTimeline>;
+
+/** Finalidades APAC de RADIOTERAPIA (Portaria SAES/MS 470/2021, Anexo II; D-W9-12). QT segue em `FinalidadeApac` (estados.ts).
+ * O médico escolhe; nunca é deduzida da intenção clínica. */
+export const FinalidadeApacRt = z.enum(["RADICAL", "ADJUVANTE", "ANTIALGICA", "PALIATIVA", "PREVIA", "ANTI_HEMORRAGICA"]);
+export type FinalidadeApacRt = z.infer<typeof FinalidadeApacRt>;

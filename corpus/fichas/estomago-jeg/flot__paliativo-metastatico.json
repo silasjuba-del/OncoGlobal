@@ -4,7 +4,7 @@
   "nome": "FLOT",
   "cenario": "paliativo/metastático",
   "versao": "1.0.0",
-  "hash": "add830300fec60ba80994d533e538b3813e5433c2e6ded8e21835f89eece143a",
+  "hash": "b18e2bb625582970afeaa2ca0229ab508cff3366728f108b44ab64818b6e394e",
   "codigoInstitucional": null,
   "intervaloDias": 14,
   "ciclos": null,
@@ -189,7 +189,7 @@
       "drug": "Fluoruracila (5-FU) infusão contínua",
       "classe": "QT",
       "sequence": 9,
-      "standardDose": null,
+      "standardDose": 2400,
       "doseBasis": "MG_M2",
       "calculatedDose": null,
       "prescribedDose": null,
@@ -203,7 +203,7 @@
       "days": [
         "d1"
       ],
-      "observacao": "Bomba de infusão contínua de 46 h (d1 a d3), SEM bolus (D-W9-23a). Planilha: 1.200 mg/m² D1+D2 em 8 h (total 2.400); SOnHe: 2.600 mg/m² em bomba de 24 h ('validar' no próprio manual); decisão local: 46 h. Total ambíguo entre 2.400 e 2.600: dose null até conferência [VERIFICAR].",
+      "observacao": "Bomba de infusão contínua de 46 h (d1 a d3), SEM bolus (D-W9-23a). Planilha: 1.200 mg/m² D1+D2 em 8 h (total 2.400); SOnHe: 2.600 mg/m² em bomba de 24 h ('validar' no próprio manual); decisão local: 46 h. Dose decidida pelo Dr. Silas: 2.400 mg/m² (D-W9-59).",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },

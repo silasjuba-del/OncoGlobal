@@ -15,9 +15,10 @@
 | Executor | Faixa |
 |---|---|
 | **FUGU** (externo) | `src/kernel/extracao/**` (novo), `src/kernel/projections/**`, `src/orchestration/**`, `src/leitura/**`, `tests/{kernel/extracao,projections,orchestration,leitura}/**`, `tests/w10-fugu/**` |
-| **GROK** (externo) | `src/rules/**` **exceto** `src/rules/prescricao/**` e os arquivos já existentes de `src/rules/w8/*` (pode criar arquivos novos ao lado); `src/modules/**`; `src/kernel/harness/ownership.ts` (novo); `scripts/verificar-manifesto.mjs` (novo); `corpus/rulesets/{rads-*,salao-*,agenda-*,interacoes*}`; `tests/{rules,rules-w8,modules}/**`, `tests/w10-grok/**` |
+| **GROK** (externo) | `src/rules/**` **exceto** `src/rules/{prescricao,morfometria,recist}/**` e os arquivos já existentes de `src/rules/w8/*` (pode criar arquivos novos ao lado); `src/modules/**`; `src/kernel/harness/ownership.ts` (novo); `scripts/verificar-manifesto.mjs` (novo); `corpus/rulesets/{rads-*,salao-*,agenda-*,interacoes*}`; `tests/{rules,rules-w8,modules}/**`, `tests/w10-grok/**` |
 | **CURSOR** (externo) | `src/ui/**` **exceto** `src/ui/copy/**` e `src/ui/icones/**`; `tests/{ui,ui-telas}/**`, `tests/w10-cursor/**` |
 | Claude (tech lead) | `src/contracts/**` (contratos novos em `src/contracts/w10/`), integração, `docs/DECISOES.md`, `package.json` |
+| **Cadeia Astra + 5 Lunas** (`docs/ondas/W10-CADEIA-ASTRA.md`) | `src/server/**`, `src/app/**`, `src/kernel/gateway/**`, `src/rules/recist/**`, `src/estatistica/**`, `src/config/**`, `corpus/{glossario,regulatorio,receitas,redflags}/**`, `tests/w10-luna*/**` |
 | Equipe interna (Claude + 5 agentes + Codex CLI) | `src/kernel/harness/gates.ts`, `src/kernel/llm/**`, `src/app/**`, `src/server/**`, `src/apac/**` (novo), `src/rules/prescricao/**` (novo), `corpus/{templates,fichas,glossario,regulatorio}/**`, `src/ui/copy/**`, `src/ui/icones/**`, `docs/design/**`, `tests/adv-w10/**` |
 **Ninguém** edita: `src/contracts/**` (só o tech lead), `package.json`, `package-lock.json`, `tsconfig.json`, `scripts/check-boundaries.mjs`, `.github/**`, `docs/DECISOES.md`, `docs/PLANO-*`, CANONICA.
 

@@ -148,8 +148,8 @@ F({ tumor: MAMA, nome: "CMF", cenario: NE, intervalo: 28, ciclos: 6, premedDias:
     qt("Fluoruracila (5-FU) em bolus", 600, "m2", D(1, 8), { t: "10 min", obs: "O bolus é o desenho do CMF (não é esquema de bomba de 46 h)." })] });
 F({ tumor: MAMA, nome: "Doxorrubicina + Paclitaxel (AT)", cenario: NE, intervalo: 21, ciclos: 4, codigo: "P1603", tinhaDifen: true,
   fonteExtra: "ficha real P1603 (docs/referencias/modelos/05)",
-  div: ["Doxorrubicina: planilha 50 mg/m²; ficha real P1603 60 mg/m² (mantida a planilha; conferir)."],
-  itens: [qt("Doxorrubicina", 50, "m2", D(1), { t: "10 min", dil: "SF 0,9%", vol: 100, obs: "Planilha 50 mg/m²; ficha real P1603: 60 mg/m² em 15 min [VERIFICAR]." }),
+  div: ["Doxorrubicina: planilha 50 mg/m²; ficha real P1603 60 mg/m² — decidido 60 pelo Dr. Silas (D-W9-59)."],
+  itens: [qt("Doxorrubicina", 60, "m2", D(1), { t: "10 min", dil: "SF 0,9%", vol: 100, obs: "60 mg/m² decidido pelo Dr. Silas (D-W9-59; ficha real P1603, 15 min). Planilha trazia 50." }),
     qt("Paclitaxel", 175, "m2", D(1), { t: "3 h", dil: "SF 0,9%", vol: 500 })] });
 F({ tumor: MAMA, nome: "Docetaxel monoterapia", cenario: PAL, intervalo: 21, ciclos: null, sonhe: [[MAMA, "Docetaxel"]],
   itens: [qt("Docetaxel", 75, "m2", D(1), { t: "60 min", obs: DOCE_OBS })] });
@@ -251,11 +251,11 @@ F({ tumor: "Reto", nome: "Capecitabina + RxT (radiossensibilização)", cenario:
 
 // ===== ESÔFAGO =====
 const ESO = "Esôfago";
-const OBS_FLOT = "Planilha: 1.200 mg/m² D1+D2 em 8 h (total 2.400); SOnHe: 2.600 mg/m² em bomba de 24 h ('validar' no próprio manual); decisão local: 46 h. Total ambíguo entre 2.400 e 2.600: dose null até conferência [VERIFICAR].";
-const DIV_FLOT = ["5-FU: planilha 2.400 total em 8 h; SOnHe 2.600 em 24 h (manual pede validar); decisão local 46 h sem bolus. Dose do 5-FU null (ambígua)."];
+const OBS_FLOT = "Planilha: 1.200 mg/m² D1+D2 em 8 h (total 2.400); SOnHe: 2.600 mg/m² em bomba de 24 h ('validar' no próprio manual); decisão local: 46 h. Dose decidida pelo Dr. Silas: 2.400 mg/m² (D-W9-59).";
+const DIV_FLOT = ["5-FU: planilha 2.400 total em 8 h; SOnHe 2.600 em 24 h (manual pede validar); decisão local 46 h sem bolus. 5-FU 2.400 mg/m² (D-W9-59)."];
 const flot = (tumor, cenario, sonheRef) => ({ tumor, nome: "FLOT", cenario, intervalo: 14, ciclos: null, sonhe: sonheRef, div: DIV_FLOT,
   itens: [qt("Docetaxel", 50, "m2", D(1), { t: "60 min", obs: DOCE_OBS }), qt("Oxaliplatina", 85, "m2", D(1), { t: "2 h" }),
-    qt("Folinato de cálcio (leucovorina)", 200, "m2", D(1), { t: "2 h", obs: "LV 200 (FLOT4)." }), FU46(null, OBS_FLOT)],
+    qt("Folinato de cálcio (leucovorina)", 200, "m2", D(1), { t: "2 h", obs: "LV 200 (FLOT4)." }), FU46(2400, OBS_FLOT)],
   posQt: [it("Filgrastim", "POS_QT", 5, "ugkg", "SC", R(4, 10), { obs: "5 µg/kg/dia, 24–72 h após QT (planilha)." })] });
 F(flot(ESO, NE, null));
 F({ tumor: ESO, nome: "Carboplatina + Paclitaxel semanal (CROSS + RxT)", cenario: RT, intervalo: 7, ciclos: 5, sonhe: [[ESO, "Esquema CROSS"]],
