@@ -301,3 +301,12 @@ M-AE  ⚠ MODELO DE APAC = IMPORTANTE: "SEPARE CADA CAIXA E ORIENTE O AGENTE OND
       |AE4| 10 anomalias do laudo real (CID de mama em tumor de próstata; RT preenchida sem RT; 3 "tratamentos anteriores" com a mesma data; AUC 1,5 × ficha AUC 2; código SIGTAP 0304020087 não achado na tabela local; executante preenchido × código em branco…)   PENDENTE (Dr. Silas valida)
       |AE5| Prontuário Drive (M-AC/M-AD) não tem 7 dados que a APAC exige (prontuário, raça/cor, etnia, UF, CEP, responsável, IBGE)   LACUNA
 ```
+
+```
+M-AF  DUAS REFERÊNCIAS: STF TEMA 6 (medicamento fora do SUS) + MANUAL SOnHe 2024 ("GUIA DO SONHE = PACIENTES PARTICULAR = ÚTIL VARIAÇÃO COM FÁRMACOS QUE NÃO TEM NO SUS") → PLN-028   fontes/M-AF_PLN-028_stf-tema6-e-manual-sonhe-2024.md
+      |AF1| Trilha PARTICULAR/saúde suplementar: o manual do SOnHe vale para paciente particular e para variações com fármacos que NÃO existem no SUS   DECIDIDO (Dr. Silas)
+      |AF2| Acesso por 3 trilhas: SUS (CONITEC/RENAME/PCDT/SBOC) · particular/suplementar (SOnHe) · judicial (Tema 6) — "clinicamente indicado ≠ SUS ≠ instituição" ganha uma 4ª coluna: particular   PROPOSTA do planejamento — PENDENTE
+      |AF3| STF Tema 6: 6 requisitos cumulativos para conceder fármaco fora das listas (negativa administrativa; ilegalidade/mora da Conitec; sem substituto no SUS/PCDT; evidência de alto nível; imprescindibilidade com laudo que descreva o tratamento já realizado; incapacidade financeira)   MATERIAL — liga à capacidade "laudo para judicialização" (Q48)
+      |AF4| Manual SOnHe: 412 páginas, sumário por tumor + suporte (dor, náusea/vômito, neutropenia febril); só capa/créditos/apresentação/sumário lidos   PARCIAL
+      |AF5| Manual SOnHe não é cópia no repositório: referência + extração com fonte/página, revisada pelo Dr. Silas antes da base   PROPOSTA (PLN-023)
+```
