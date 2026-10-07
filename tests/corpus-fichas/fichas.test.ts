@@ -211,10 +211,10 @@ describe("corpus/fichas", () => {
   });
 
   describe("dose ausente = null e erros do manual SOnHe não entram", () => {
-    it("FLOT: dose do 5-FU null (2.400 x 2.600 ambíguo) mas infusão 46 h", () => {
+    it("FLOT: 5-FU 2.400 mg/m² em 46 h (D-W9-59)", () => {
       for (const p of parseadas.filter((x) => x.ficha.nome === "FLOT")) {
         const fu = p.ficha.itens.find((i) => eh5fu(i.drug))!;
-        expect(fu.standardDose).toBeNull();
+        expect(fu.standardDose).toBe(2400);
         expect(fu.infusionTime).toBe("46 h");
       }
     });
