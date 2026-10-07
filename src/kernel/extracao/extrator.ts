@@ -1,4 +1,20 @@
 import type { ClinicalFact, EncounterSegment, FactDomain, FactEvidence } from "./tipos.js";
+import { normalizarLateralidade, normalizarSitioAnatomico } from "./normalizacao.js";
+
+/**
+ * Comparação seriada declarada pela própria fonte (ex.: "aumentado em relação à CO de 14/05/28").
+ * Aumento/redução só entram quando o texto os afirma; nada é deduzido de medidas ausentes.
+ */
+function comparacaoDeclarada(raw: string): { tipo: "AUMENTO" | "REDUCAO" | "ESTAVEL"; refData: string | null } | null {
+  const match = raw.match(
+    /\b(aument\w*|reduz\w*|diminu\w*|est[áa]vel|inalterad\w*)\b[^.;]*?(?:\bde\s+)?(\d{2}\/\d{2}\/\d{2,4})/iu,
+  );
+  if (!match) return null;
+  const termo = match[1] ?? "";
+  const tipo = /^aument/iu.test(termo) ? "AUMENTO" as const
+    : /^(reduz|diminu)/iu.test(termo) ? "REDUCAO" as const : "ESTAVEL" as const;
+  return { tipo, refData: match[2] ?? null };
+}
 
 export interface Extrator {
   extrair(segmento: EncounterSegment): readonly ClinicalFact[];
@@ -43,6 +59,20 @@ export const extratorDeterministico: Extrator = {
       if (diagnosis && !negated && !/\bNÃO SEI\b/iu.test(raw)) {
         add("diagnosis", diagnosis[1]?.trim());
       }
+      // Menção literal de neoplasia/carcinoma (ex.: "antecedente de neoplasia mamária direita"):
+      // o sítio só entra quando a tabela de órgãos o reconhece; nada é inferido de "dona Maria".
+      if (!negated && !/^\s*diagn[oó]stico/iu.test(raw)) {
+        const mencao = raw.match(/\b(?:neoplasia|carcinoma|adenocarcinoma)\s+(?:de\s+|do\s+|da\s+)?([\p{L}]+)/iu);
+        const sitioCanonico = mencao ? normalizarSitioAnatomico(mencao[1]) : null;
+        if (mencao && sitioCanonico) {
+          const lateralityRaw = raw.match(/\b(?:à esquerda|esquerda|à direita|direita)\b/iu)?.[0] ?? null;
+          add("diagnosis", {
+            sitioCanonico,
+            lateralidade: normalizarLateralidade(lateralityRaw, sitioCanonico),
+            raw: mencao[0],
+          });
+        }
+      }
       const tnm = raw.match(
         /\b(?:yp|[cp])T[0-4X](?:[a-d])?\s+(?:yp|[cp])N[0-3X](?:[a-d])?\s+(?:yp|[cp])M[0-1X](?:[a-d])?\b/iu,
       ) ?? raw.match(/\b(?:yp|[cp])T[0-4X](?:[a-d])?N[0-3X](?:[a-d])?M[0-1X](?:[a-d])?\b/iu);
@@ -80,6 +110,7 @@ export const extratorDeterministico: Extrator = {
         add("imaging", {
           siteRaw: imaging[1], measureRaw: imaging[2], unit: imaging[3],
           lateralityRaw: raw.match(/\b(?:à esquerda|esquerda|à direita|direita)\b/iu)?.[0] ?? null,
+          comparacao: comparacaoDeclarada(raw),
         });
       } else if (segmento.sourceType === "imaging_report" && !negated &&
                  /\b(?:foco|lesão|nódulo)\b/iu.test(raw) && /\bL\d{1,2}\b/iu.test(raw)) {
@@ -87,6 +118,7 @@ export const extratorDeterministico: Extrator = {
         add("imaging", {
           siteRaw: raw.match(/\bL\d{1,2}\b/iu)?.[0], measureRaw: null, unit: null,
           lateralityRaw: raw.match(/\b(?:à esquerda|esquerda|à direita|direita)\b/iu)?.[0] ?? null,
+          comparacao: comparacaoDeclarada(raw),
         });
       }
       if (segmento.sourceType === "prescription" && !negated) {

@@ -63,9 +63,19 @@ describe("FUGU-01 — mapa de proveniência", () => {
   it("não promove inferência sem regra ou confirmação vazia", () => {
     expect(() => mapearProveniencia({ ...explicit, evidence: "INFERRED" }))
       .toThrow("regra nomeada");
-    expect(() => mapearProveniencia(explicit, { medicoId: "", decisionEventId: "e1" }))
+    const confirmacao = {
+      exceptionId: "exc:UNLINKED_PATIENT:gravacao-sintetica-01:0",
+      acao: "CONFIRMAR" as const, medicoId: "medico-teste", em: "2026-10-07T09:00:00-03:00",
+    };
+    expect(() => mapearProveniencia(explicit, {
+      acao: { ...confirmacao, medicoId: "" }, decisionEventId: "e1",
+    }))
       .toThrow("Confirmação médica");
-    expect(mapearProveniencia(explicit, { medicoId: "medico-teste", decisionEventId: "e1" }))
+    expect(() => mapearProveniencia(explicit, {
+      acao: { ...confirmacao, acao: "DESCARTAR", motivo: "duplicado" }, decisionEventId: "e1",
+    }))
+      .toThrow("CONFIRMAR");
+    expect(mapearProveniencia(explicit, { acao: confirmacao, decisionEventId: "e1" }))
       .toEqual({ provenance: "DOCUMENT_CONFIRMED" });
   });
 });
