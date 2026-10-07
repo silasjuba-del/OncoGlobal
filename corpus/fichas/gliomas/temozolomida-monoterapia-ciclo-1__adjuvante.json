@@ -1,19 +1,19 @@
 {
-  "templateId": "FICHA.gliomas.temozolomida-monoterapia__adjuvante@1.0.0",
+  "templateId": "FICHA.gliomas.temozolomida-monoterapia-ciclo-1__adjuvante@1.0.0",
   "tumor": "Gliomas",
-  "nome": "Temozolomida monoterapia",
+  "nome": "Temozolomida monoterapia (ciclo 1)",
   "cenario": "adjuvante",
   "versao": "1.0.0",
-  "hash": "d9c75396e5c1bf4c2d69c02e9cd1a9bcb3f9572d2adc06a87dcb22dda56854c6",
+  "hash": "710bfb46e79fc617024cb42fa2032837db65cf3222774c9ad62c02ab683ba3fc",
   "codigoInstitucional": null,
   "intervaloDias": 28,
-  "ciclos": 6,
+  "ciclos": 1,
   "itens": [
     {
       "drug": "Temozolomida",
       "classe": "QT",
       "sequence": 1,
-      "standardDose": 200,
+      "standardDose": 150,
       "doseBasis": "MG_M2",
       "calculatedDose": null,
       "prescribedDose": null,
@@ -27,7 +27,7 @@
       "days": [
         "d1-d5"
       ],
-      "observacao": "1x/dia, D1 a D5 a cada 28 d. No manual SOnHe de gliomas o primeiro ciclo após RT pode usar 150 mg/m² (esquema sequencial); não aplicado aqui [VERIFICAR].",
+      "observacao": "1x/dia, D1 a D5. Ciclo 1 = 150 mg/m² (D-W9-62); depois usar a ficha 'ciclos 2 em diante' (200 mg/m²).",
       "source": "PROTOCOL",
       "overrideMotivo": null
     }

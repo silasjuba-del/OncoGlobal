@@ -4,7 +4,7 @@
   "nome": "GEMOX",
   "cenario": "paliativo/metastático",
   "versao": "1.0.0",
-  "hash": "7264fe21940864154f26c7b464634b65138c3935aef7dd65bbb7e01c37a2a62c",
+  "hash": "f4eb9fca4378105e707b36171b98bc23fef128691e68081782a67b247509ac84",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": null,
@@ -128,7 +128,7 @@
       "drug": "Oxaliplatina",
       "classe": "QT",
       "sequence": 6,
-      "standardDose": 130,
+      "standardDose": 100,
       "doseBasis": "MG_M2",
       "calculatedDose": null,
       "prescribedDose": null,
@@ -142,7 +142,7 @@
       "days": [
         "d1"
       ],
-      "observacao": "SOnHe GemOx p. 227: 130 mg/m² em D1. Consolidado: uso real ~100 mg/m² [VERIFICAR].",
+      "observacao": "100 mg/m² decidido pelo Dr. Silas (D-W9-62); SOnHe GemOx p. 227 traz 130.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },

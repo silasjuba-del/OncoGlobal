@@ -334,7 +334,7 @@ F({ tumor: NI, nome: "GEMOX", cenario: PAL, intervalo: 21, ciclos: null, premedD
   fonteExtra: "tumor da ficha não definido: o único GemOx do SOnHe está no capítulo de testículo; uso real citado em AVALIACAO-CONSULTAS-E-CONSOLIDADO §4 (oxaliplatina ~100, gemcitabina ~1000)",
   div: ["Oxaliplatina: SOnHe 130 mg/m² D1; uso real do consolidado ~100 mg/m² (vale SOnHe, D-W9-50; conferir [VERIFICAR]).", "Tumor/cenário/ciclos: o SOnHe traz GemOx só em testículo (paliativo, até progressão)."],
   itens: [qt("Gemcitabina", 1000, "m2", D(1, 8), { t: "30 min", obs: "SOnHe GemOx p. 227: 1.000 mg/m² em D1 e D8." }),
-    qt("Oxaliplatina", 130, "m2", D(1), { t: "2 h", obs: "SOnHe GemOx p. 227: 130 mg/m² em D1. Consolidado: uso real ~100 mg/m² [VERIFICAR]." })] });
+    qt("Oxaliplatina", 100, "m2", D(1), { t: "2 h", obs: "100 mg/m² decidido pelo Dr. Silas (D-W9-62); SOnHe GemOx p. 227 traz 130." })] });
 F({ tumor: HN, nome: "Carboplatina + Paclitaxel semanal", cenario: NE, intervalo: 7, ciclos: null, sonhe: [["Colo de útero", "Carboplatina + Paclitaxel semanal (indução)"]],
   fonteExtra: "uso real em cabeça e pescoço em AVALIACAO-CONSULTAS-E-CONSOLIDADO §4 (paclitaxel 80 + carboplatina AUC 1,5 em um caso); AUC 2 decidida pelo Dr. Silas (D-W9-61); o SOnHe não traz carbotaxol semanal de cabeça e pescoço: paclitaxel 80 e AUC 2 tomados do esquema semanal do SOnHe de colo (p. 51) e de mama (p. 21)",
   div: ["Carboplatina: AUC 2 (Dr. Silas, D-W9-61); consolidado registra AUC 1,5 em um caso real e o SOnHe de mama aceita 1,5 a 2."],
@@ -370,9 +370,12 @@ F({ tumor: CR, nome: "FOLFIRI + Bevacizumabe", cenario: PAL, intervalo: 14, cicl
   itens: [qt("Bevacizumabe", 5, "mgkg", D(1), { obs: "5 mg/kg a cada 14 d (SOnHe p. 104, 'isolado ou em combinação'). Tempo de infusão sem fonte: null." }),
     qt("Irinotecano", 180, "m2", D(1), { t: "90 min" }), qt("Folinato de cálcio (leucovorina)", 400, "m2", D(1), { t: "2 h" }),
     FU46(2400, "Total 2.400 mg/m² em 46 h, sem bolus (D-W9-23a); mesmo 5-FU do FOLFIRI da ficha.")] });
-F({ tumor: "Gliomas", nome: "Temozolomida monoterapia", cenario: ADJ, intervalo: 28, ciclos: 6, semPremed: true, sonhe: [["Gliomas", "Temozolamida monoterapia 200"]],
-  div: ["SOnHe p. 369: 200 mg/m² VO D1-D5 q28, 6 ciclos adjuvante (paliativo: até progressão). Sem pré-medicação EV: antiemético oral a critério [VERIFICAR]."],
-  itens: [qt("Temozolomida", 200, "m2", R(1, 5), { route: "VO", obs: "1x/dia, D1 a D5 a cada 28 d. No manual SOnHe de gliomas o primeiro ciclo após RT pode usar 150 mg/m² (esquema sequencial); não aplicado aqui [VERIFICAR]." })] });
+F({ tumor: "Gliomas", nome: "Temozolomida monoterapia (ciclo 1)", cenario: ADJ, intervalo: 28, ciclos: 1, semPremed: true, sonhe: [["Gliomas", "Temozolamida monoterapia 200"]],
+  div: ["D-W9-62: ciclo 1 com 150 mg/m²; a partir do ciclo 2, 200 mg/m² (ficha separada). Sem pré-medicação EV: antiemético oral a critério [VERIFICAR]."],
+  itens: [qt("Temozolomida", 150, "m2", R(1, 5), { route: "VO", obs: "1x/dia, D1 a D5. Ciclo 1 = 150 mg/m² (D-W9-62); depois usar a ficha 'ciclos 2 em diante' (200 mg/m²)." })] });
+F({ tumor: "Gliomas", nome: "Temozolomida monoterapia (ciclos 2 em diante)", cenario: ADJ, intervalo: 28, ciclos: 5, semPremed: true, sonhe: [["Gliomas", "Temozolamida monoterapia 200"]],
+  div: ["SOnHe p. 369: 200 mg/m² VO D1-D5 q28 (6 ciclos adjuvante no total, contando o ciclo 1 de 150). Sem pré-medicação EV: antiemético oral a critério [VERIFICAR]."],
+  itens: [qt("Temozolomida", 200, "m2", R(1, 5), { route: "VO", obs: "1x/dia, D1 a D5 a cada 28 d, a partir do ciclo 2 (D-W9-62)." })] });
 F({ tumor: "Colo do útero", nome: "Cisplatina semanal + RxT", cenario: RT, intervalo: 7, ciclos: null, sonhe: [["Colo de útero", "CDDP semanal"]],
   div: ["Ciclos: SOnHe 6 a 8 semanas (null)."],
   itens: [CIS(40, D(1), { obs: "Semanal, 6 a 8 semanas, concomitante à RxT (SOnHe colo p. 51)." })] });

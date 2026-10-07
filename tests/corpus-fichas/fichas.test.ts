@@ -290,6 +290,10 @@ describe("esquemas novos (D-W9-61)", () => {
     expect(por("GEMOX")[0]!.ficha.itens.map((i) => i.drug)).toEqual(expect.arrayContaining(["Gemcitabina", "Oxaliplatina"]));
     const fb = por("FOLFIRI + Bevacizumabe")[0]!.ficha;
     expect(fb.itens.find((i) => /bevacizumabe/i.test(i.drug))!.standardDose).toBe(5);
-    expect(por("Temozolomida monoterapia")[0]!.ficha.itens.find((i) => /temozolomida/i.test(i.drug))!.route).toBe("VO");
+    const tmz = (n: string) => por(n)[0]!.ficha.itens.find((i) => /temozolomida/i.test(i.drug))!;
+    expect(tmz("Temozolomida monoterapia (ciclo 1)").route).toBe("VO");
+    expect(tmz("Temozolomida monoterapia (ciclo 1)").standardDose).toBe(150); // D-W9-62
+    expect(tmz("Temozolomida monoterapia (ciclos 2 em diante)").standardDose).toBe(200);
+    expect(por("GEMOX")[0]!.ficha.itens.find((i) => i.drug === "Oxaliplatina")!.standardDose).toBe(100); // D-W9-62
   });
 });
