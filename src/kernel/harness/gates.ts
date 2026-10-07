@@ -16,6 +16,7 @@ const passa = (gate: string): Veredito => ({ gate, decisao: "PASSA", motivo: "ok
 
 /** G-02 · PHI residual a caminho de provider externo ⇒ bloqueia só a saída. */
 export function g02PhiEgress(payloadTexto: string, dic: DicionarioPaciente): Veredito {
+  if (typeof payloadTexto !== "string") return { gate: "G-02", decisao: "BLOQUEIA_SAIDA", motivo: "payload ausente/ilegível: não há prova de ausência de PHI" };
   return contemPhiResidual(payloadTexto, dic)
     ? { gate: "G-02", decisao: "BLOQUEIA_SAIDA", motivo: "PHI residual detectado; nada sai do PC" }
     : passa("G-02");
@@ -23,28 +24,31 @@ export function g02PhiEgress(payloadTexto: string, dic: DicionarioPaciente): Ver
 
 /** G-03 · assinatura só por humano com CRM, vindo da sessão do servidor. */
 export function g03Assinatura(ator: { tipo: "SESSAO" | "AGENTE" | "SISTEMA" | "EXECUTOR"; crm?: string | null }): Veredito {
-  return ator.tipo === "SESSAO" && !!ator.crm
+  return ator?.tipo === "SESSAO" && typeof ator.crm === "string" && ator.crm.trim() !== ""
     ? passa("G-03")
     : { gate: "G-03", decisao: "BLOQUEIA_AUTORIDADE", motivo: "assinatura exige médico com CRM na sessão" };
 }
 
 /** G-05 · VERDE honesto: sem checks executados ou com pendência obrigatória não há VERDE. */
 export function g05VerdeHonesto(cor: Semaforo, checksExecutados: boolean, pendenciasObrigatorias: number): Veredito {
-  return cor === "VERDE" && (!checksExecutados || pendenciasObrigatorias > 0)
+  const pendOk = typeof pendenciasObrigatorias === "number" && Number.isFinite(pendenciasObrigatorias);
+  return cor === "VERDE" && (checksExecutados !== true || !pendOk || pendenciasObrigatorias > 0)
     ? { gate: "G-05", decisao: "ALERTA", motivo: "VERDE indevido: rebaixado para PENDENTE (dado preservado)" }
     : passa("G-05");
 }
 
 /** G-10 · dose calculada por LLM é proibida; menção literal com fonte é permitida (K-13). */
 export function g10DosePura(saidaAgente: Record<string, unknown>, origem: "LLM" | "FUNCAO_PURA"): Veredito {
-  const temDoseCalculada = "doseFinalMg" in saidaAgente || "doseCalculadaMg" in saidaAgente;
-  return origem === "LLM" && temDoseCalculada
+  const temDoseCalculada = !saidaAgente || typeof saidaAgente !== "object" || "doseFinalMg" in saidaAgente || "doseCalculadaMg" in saidaAgente;
+  // só FUNCAO_PURA é origem confiável; origem ausente/desconhecida trata-se como LLM
+  return origem !== "FUNCAO_PURA" && temDoseCalculada
     ? { gate: "G-10", decisao: "BLOQUEIA_AUTORIDADE", motivo: "LLM não calcula dose; só FN-04" }
     : passa("G-10");
 }
 
 /** G-13 · intenção persistida como termo, nunca letra A–D. */
 export function g13Letra(intencao: string): Veredito {
+  if (typeof intencao !== "string" || intencao.trim() === "") return { gate: "G-13", decisao: "PENDENTE", motivo: "intenção ausente: nada a validar" };
   return /^[A-D]$/i.test(intencao.trim())
     ? { gate: "G-13", decisao: "BLOQUEIA_ARTEFATO", motivo: "intenção deve ser o termo (ex.: ADJUVANTE), não a letra" }
     : passa("G-13");
@@ -52,6 +56,8 @@ export function g13Letra(intencao: string): Veredito {
 
 /** G-14 · ponto interpolado nunca é observação. */
 export function g14Interpolacao(ponto: { interpolado: boolean; observado: boolean }): Veredito {
+  if (typeof ponto?.interpolado !== "boolean" || typeof ponto?.observado !== "boolean")
+    return { gate: "G-14", decisao: "PENDENTE", motivo: "proveniência do ponto (interpolado/observado) não informada" };
   return ponto.interpolado && ponto.observado
     ? { gate: "G-14", decisao: "BLOQUEIA_ARTEFATO", motivo: "interpolação não vira dado observado" }
     : passa("G-14");
@@ -69,6 +75,8 @@ export function g25EscopoAssinatura(
   assinar: readonly { documentId: string; documentVersion: number }[],
   exibidos: readonly { documentId: string; documentVersion: number }[],
 ): Veredito {
+  if (!Array.isArray(assinar) || !Array.isArray(exibidos) || assinar.length === 0)
+    return { gate: "G-25", decisao: "BLOQUEIA_AUTORIDADE", motivo: "escopo de assinatura ou bundle exibido ausente/vazio" };
   const fora = assinar.filter((a) => !exibidos.some((e) => e.documentId === a.documentId && e.documentVersion === a.documentVersion));
   return fora.length
     ? { gate: "G-25", decisao: "BLOQUEIA_AUTORIDADE", motivo: `documento não exibido: ${fora.map((f) => `${f.documentId}@${f.documentVersion}`).join(", ")}` }
@@ -78,7 +86,10 @@ export function g25EscopoAssinatura(
 /** G-26 · sugestão visual não altera TNM/RECIST/resposta/protocolo/APAC nem gera VERDE. */
 export function g26VisaoSemAutoridade(alvo: string, origem: "VISUAL_SUGGESTION" | "MEDICO" | "REGRA"): Veredito {
   const protegidos = ["TNM", "RECIST", "RESPOSTA", "PROTOCOLO", "APAC", "SEMAFORO"];
-  return origem === "VISUAL_SUGGESTION" && protegidos.includes(alvo.toUpperCase())
+  if (typeof alvo !== "string" || alvo.trim() === "") return { gate: "G-26", decisao: "PENDENTE", motivo: "alvo da alteração ausente" };
+  if (origem !== "VISUAL_SUGGESTION" && origem !== "MEDICO" && origem !== "REGRA")
+    return { gate: "G-26", decisao: "BLOQUEIA_AUTORIDADE", motivo: "origem da alteração desconhecida: sem autoridade comprovada" };
+  return origem === "VISUAL_SUGGESTION" && protegidos.includes(alvo.trim().toUpperCase())
     ? { gate: "G-26", decisao: "BLOQUEIA_AUTORIDADE", motivo: "sugestão da IA sem laudo não altera dado clínico" }
     : passa("G-26");
 }
