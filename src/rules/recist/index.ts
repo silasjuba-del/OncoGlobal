@@ -3,11 +3,16 @@ import type { RecistAvaliacao } from "../../contracts/w10/clinico-w10.js";
 export type RecistTipoAlvo = "NAO_NODAL" | "LINFONODO";
 export type RecistEixo = "MAIOR" | "CURTO";
 export type EstadoNaoAlvo = "AUSENTE_DOCUMENTADO" | "PERSISTENTE_SEM_PROGRESSAO" | "PROGRESSAO_INEQUIVOCA" | "NAO_AVALIADO";
+export type MetodoMedicao = "TC" | "CXR" | "CALIPER" | "RM" | "US" | "OUTRO";
+export type QualidadeMedicao = "ADEQUADA" | "INADEQUADA" | "NAO_AVALIADA";
 
 export interface RecistAlvoDefinido {
   codigo: string;
   tipo: RecistTipoAlvo;
   eixo: RecistEixo;
+  orgaoId: string | null;
+  elegibilidadeBasal: "ELEGIVEL" | "NAO_ELEGIVEL" | null;
+  fonteElegibilidadeIds: readonly string[];
 }
 
 export interface RecistLesaoMedida {
@@ -22,7 +27,12 @@ export interface RecistPontoSerie {
   tumorLotId: string | null;
   episodioId: string;
   data: string;
+  metodo: MetodoMedicao;
+  tecnicaId: string | null;
+  espessuraCorteMm: number | null;
+  qualidadeMedicao: QualidadeMedicao;
   lesoes: readonly RecistLesaoMedida[];
+  /** true means unequivocal new malignant lesion; equivocal/unassessed maps to null. */
   novasLesoes: boolean | null;
   naoAlvos: EstadoNaoAlvo;
   fonteIds: readonly string[];
@@ -47,6 +57,16 @@ export type RecistPendencia =
   | "EVENTO_DUPLICADO"
   | "ALVOS_INVALIDOS"
   | "ALVOS_DUPLICADOS"
+  | "ALVOS_MAXIMO_EXCEDIDO"
+  | "ALVOS_ORGAO_MAXIMO_EXCEDIDO"
+  | "ORGAO_ALVO_AUSENTE"
+  | "ALVO_ELEGIBILIDADE_AUSENTE"
+  | "ALVO_BASAL_NAO_ELEGIVEL"
+  | "FONTE_ELEGIBILIDADE_AUSENTE"
+  | "MEDIDA_BASAL_INELEGIVEL"
+  | "METODO_NAO_SUPORTADO"
+  | "METODO_TECNICA_DIVERGENTE"
+  | "QUALIDADE_MEDICAO_PENDENTE"
   | "ALVO_AUSENTE"
   | "ALVO_DUPLICADO"
   | "ALVO_NAO_DECLARADO"
@@ -76,7 +96,7 @@ export interface RecistCalculoPonto {
   /** Target-lesion progression candidate only; it is not the global RECIST category. */
   progressaoAlvos: "PROPOSTO_PD" | null;
   revisao: "PROPOSTO";
-  lesoes: readonly (RecistLesaoMedida & { tipo: RecistTipoAlvo; eixo: RecistEixo })[];
+  lesoes: readonly (RecistLesaoMedida & RecistAlvoDefinido)[];
   fonteIds: readonly string[];
 }
 
@@ -89,6 +109,7 @@ export interface RecistPontoResultado {
   calculo: RecistCalculoPonto | null;
   avaliacao: RecistAvaliacao | null;
   categoriaGlobal: RecistAvaliacao["categoria"];
+  categoriaGlobalRevisao: "PROPOSTO" | "PENDENTE";
   pendencias: readonly RecistPendencia[];
 }
 
@@ -112,9 +133,13 @@ function unicaOrdenada<T extends string>(values: readonly T[]): T[] {
   return [...new Set(values)].sort();
 }
 
+function textoPresente(value: unknown): value is string {
+  return typeof value === "string" && value.trim().length > 0;
+}
+
 function pendente(eventId: string, data: string, pendencias: readonly RecistPendencia[]): RecistPontoResultado {
   return { eventId, data, estado: "PENDENTE", estadoCalculo: "PENDENTE", estadoInterpretacao: "PENDENTE", calculo: null, avaliacao: null, categoriaGlobal: null,
-    pendencias: unicaOrdenada(pendencias) };
+    categoriaGlobalRevisao: "PENDENTE", pendencias: unicaOrdenada(pendencias) };
 }
 
 /**
@@ -125,7 +150,11 @@ function pendente(eventId: string, data: string, pendencias: readonly RecistPend
 export function avaliarSerieRecist(input: RecistSerieInput): RecistSerieResultado {
   const seriePendencias = new Set<RecistPendencia>();
   if (!input.pontos.length) seriePendencias.add("SERIE_VAZIA");
-  if (!input.alvos.length || input.alvos.some((a) => !a.codigo
+  if (!textoPresente(input.patientId) || !textoPresente(input.episodioId))
+    seriePendencias.add("IDENTIDADE_OU_EPISODIO_DIVERGENTE");
+  if (input.tumorLotId !== null && !textoPresente(input.tumorLotId))
+    seriePendencias.add("IDENTIDADE_OU_EPISODIO_DIVERGENTE");
+  if (!input.alvos.length || input.alvos.some((a) => !textoPresente(a.codigo)
     || (a.tipo === "LINFONODO" && a.eixo !== "CURTO")
     || (a.tipo === "NAO_NODAL" && a.eixo !== "MAIOR")
     || !["LINFONODO", "NAO_NODAL"].includes(a.tipo)
@@ -140,7 +169,8 @@ export function avaliarSerieRecist(input: RecistSerieInput): RecistSerieResultad
   if (pontosOrdenados.some((p) => !dataValida(p.data))) seriePendencias.add("DATA_INVALIDA");
   if (pontosOrdenados.some((p, i) => i > 0 && p.data === pontosOrdenados[i - 1]!.data))
     seriePendencias.add("CONFLITO_TEMPORAL");
-  if (pontosOrdenados.some((p) => p.patientId !== input.patientId
+  if (pontosOrdenados.some((p) => !textoPresente(p.patientId) || !textoPresente(p.episodioId)
+    || p.patientId !== input.patientId
     || p.tumorLotId !== input.tumorLotId || p.episodioId !== input.episodioId))
     seriePendencias.add("IDENTIDADE_OU_EPISODIO_DIVERGENTE");
   const baselines = pontosOrdenados.filter((p) => p.eventId === input.baselineEventId);
@@ -152,6 +182,47 @@ export function avaliarSerieRecist(input: RecistSerieInput): RecistSerieResultad
     return { estado: "PENDENTE", estadoCalculo: "PENDENTE", estadoInterpretacao: "PENDENTE",
       baselineEventId: input.baselineEventId,
       pontos: perPoint, pendencias: unicaOrdenada([...seriePendencias]) };
+  }
+
+  const bloqueiosElegibilidade = new Set<RecistPendencia>();
+  if (input.alvos.length > 5) bloqueiosElegibilidade.add("ALVOS_MAXIMO_EXCEDIDO");
+  const porOrgao = new Map<string, number>();
+  for (const alvo of input.alvos) {
+    if (!textoPresente(alvo.orgaoId)) bloqueiosElegibilidade.add("ORGAO_ALVO_AUSENTE");
+    else porOrgao.set(alvo.orgaoId, (porOrgao.get(alvo.orgaoId) ?? 0) + 1);
+    if (alvo.elegibilidadeBasal == null) bloqueiosElegibilidade.add("ALVO_ELEGIBILIDADE_AUSENTE");
+    else if (alvo.elegibilidadeBasal !== "ELEGIVEL") bloqueiosElegibilidade.add("ALVO_BASAL_NAO_ELEGIVEL");
+    if (!Array.isArray(alvo.fonteElegibilidadeIds) || !alvo.fonteElegibilidadeIds.length
+      || alvo.fonteElegibilidadeIds.some((id) => !textoPresente(id)))
+      bloqueiosElegibilidade.add("FONTE_ELEGIBILIDADE_AUSENTE");
+  }
+  if ([...porOrgao.values()].some((total) => total > 2))
+    bloqueiosElegibilidade.add("ALVOS_ORGAO_MAXIMO_EXCEDIDO");
+
+  const baselineInput = baselines[0]!;
+  const baselineLesoes = new Map(baselineInput.lesoes.map((l) => [l.codigo, l]));
+  if (!textoPresente(baselineInput.tecnicaId)) bloqueiosElegibilidade.add("METODO_NAO_SUPORTADO");
+  if (baselineInput.metodo === "TC") {
+    if (!Number.isFinite(baselineInput.espessuraCorteMm) || baselineInput.espessuraCorteMm! <= 0)
+      bloqueiosElegibilidade.add("METODO_NAO_SUPORTADO");
+  } else if (["CXR", "CALIPER"].includes(baselineInput.metodo)) {
+    if (baselineInput.espessuraCorteMm !== null) bloqueiosElegibilidade.add("METODO_NAO_SUPORTADO");
+  } else {
+    bloqueiosElegibilidade.add("METODO_NAO_SUPORTADO");
+  }
+  for (const alvo of input.alvos) {
+    const medida = baselineLesoes.get(alvo.codigo);
+    if (!medida || !Number.isFinite(medida.diametroMm) || medida.diametroMm < 0) continue;
+    let minimo: number | null = null;
+    if (baselineInput.metodo === "TC" && Number.isFinite(baselineInput.espessuraCorteMm)
+      && baselineInput.espessuraCorteMm! > 0) {
+      if (alvo.tipo === "LINFONODO" && baselineInput.espessuraCorteMm! <= 5) minimo = 15;
+      else if (alvo.tipo === "NAO_NODAL")
+        minimo = Math.max(10, baselineInput.espessuraCorteMm! > 5 ? 2 * baselineInput.espessuraCorteMm! : 10);
+    } else if (baselineInput.metodo === "CALIPER" && alvo.tipo === "NAO_NODAL") minimo = 10;
+    else if (baselineInput.metodo === "CXR" && alvo.tipo === "NAO_NODAL") minimo = 20;
+    else bloqueiosElegibilidade.add("METODO_NAO_SUPORTADO");
+    if (minimo === null || medida.diametroMm < minimo) bloqueiosElegibilidade.add("MEDIDA_BASAL_INELEGIVEL");
   }
 
   const alvoPorCodigo = new Map(input.alvos.map((a) => [a.codigo, a]));
@@ -166,9 +237,13 @@ export function avaliarSerieRecist(input: RecistSerieInput): RecistSerieResultad
       faltas.push("NOVAS_LESOES_NAO_AVALIADAS");
     if (!["AUSENTE_DOCUMENTADO", "PERSISTENTE_SEM_PROGRESSAO", "PROGRESSAO_INEQUIVOCA", "NAO_AVALIADO"]
       .includes(ponto.naoAlvos)) faltas.push("NAO_ALVOS_NAO_AVALIADOS");
-    if (!ponto.eventId || ponto.lesoes.some((l) => !l.codigo)) faltas.push("ALVOS_INVALIDOS");
-    if (!ponto.fonteIds.length || ponto.fonteIds.some((id) => !id)
-      || ponto.lesoes.some((l) => !l.fonteIds.length || l.fonteIds.some((id) => !id)))
+    if (!textoPresente(ponto.eventId) || ponto.lesoes.some((l) => !textoPresente(l.codigo))) faltas.push("ALVOS_INVALIDOS");
+    if (ponto.metodo !== baselineInput.metodo || ponto.tecnicaId !== baselineInput.tecnicaId
+      || ponto.espessuraCorteMm !== baselineInput.espessuraCorteMm)
+      faltas.push("METODO_TECNICA_DIVERGENTE");
+    if (ponto.qualidadeMedicao !== "ADEQUADA") faltas.push("QUALIDADE_MEDICAO_PENDENTE");
+    if (!ponto.fonteIds.length || ponto.fonteIds.some((id) => !textoPresente(id))
+      || ponto.lesoes.some((l) => !l.fonteIds.length || l.fonteIds.some((id) => !textoPresente(id))))
       faltas.push("PROVENIENCIA_AUSENTE");
     const codigos = ponto.lesoes.map((l) => l.codigo);
     if (new Set(codigos).size !== codigos.length) faltas.push("ALVO_DUPLICADO");
@@ -186,20 +261,31 @@ export function avaliarSerieRecist(input: RecistSerieInput): RecistSerieResultad
       continue;
     }
 
-    const lesoes = [...ponto.lesoes].sort((a, b) => a.codigo.localeCompare(b.codigo)).map((l) => ({
-      ...l,
-      fonteIds: unicaOrdenada(l.fonteIds),
-      tipo: alvoPorCodigo.get(l.codigo)!.tipo,
-      eixo: alvoPorCodigo.get(l.codigo)!.eixo,
-    }));
+    const lesoes = [...ponto.lesoes].sort((a, b) => a.codigo.localeCompare(b.codigo)).map((l) => {
+      const alvo = alvoPorCodigo.get(l.codigo)!;
+      return {
+        ...l,
+        fonteIds: unicaOrdenada(l.fonteIds),
+        ...alvo,
+        fonteElegibilidadeIds: unicaOrdenada(alvo.fonteElegibilidadeIds),
+      };
+    });
     const soma = lesoes.reduce((total, lesao) => total + lesao.diametroMm, 0);
     if (!Number.isFinite(soma)) {
+      if (ponto.eventId === input.baselineEventId) {
+        baselineInvalido = true;
+        motivosBaseline = ["MEDIDA_INVALIDA"];
+      }
       resultados.push(pendente(ponto.eventId, ponto.data, ["MEDIDA_INVALIDA"]));
       continue;
     }
     validos.push({ ponto, soma, lesoes });
 
-      const baseline = validos.find((v) => v.ponto.eventId === input.baselineEventId)!;
+    const baseline = validos.find((v) => v.ponto.eventId === input.baselineEventId);
+    if (!baseline) {
+      resultados.push(pendente(ponto.eventId, ponto.data, ["BASELINE_INVALIDO", ...motivosBaseline]));
+      continue;
+    }
     const anteriores = validos.filter((v) => v.ponto.data < ponto.data);
     const nadirReferencia = ponto.eventId === input.baselineEventId
       ? baseline
@@ -214,7 +300,7 @@ export function avaliarSerieRecist(input: RecistSerieInput): RecistSerieResultad
       ? pctBaselineCalculado : null;
     const deltaNadirPct = pctNadirCalculado !== null && Number.isFinite(pctNadirCalculado)
       ? pctNadirCalculado : null;
-    const pendencias: RecistPendencia[] = [];
+    const pendencias: RecistPendencia[] = [...bloqueiosElegibilidade];
     if (deltaBaselinePct === null) pendencias.push("BASELINE_ZERO_SEM_PERCENTUAL");
     if (deltaNadirPct === null) pendencias.push("NADIR_ZERO_SEM_PERCENTUAL");
     if (ponto.novasLesoes === null) pendencias.push("NOVAS_LESOES_NAO_AVALIADAS");
@@ -222,22 +308,25 @@ export function avaliarSerieRecist(input: RecistSerieInput): RecistSerieResultad
     const isBaseline = ponto.eventId === input.baselineEventId;
     if (isBaseline) pendencias.push("BASELINE_SEM_COMPARACAO");
 
-    const progressaoAlvos = deltaNadirPct !== null && deltaNadirMm >= 5 && deltaNadirPct >= 20
+    const progressaoAlvos = bloqueiosElegibilidade.size === 0
+      && deltaNadirPct !== null && deltaNadirMm >= 5 && deltaNadirPct >= 20
       ? "PROPOSTO_PD" as const : null;
     let categoriaGlobal: RecistAvaliacao["categoria"] = null;
     let avaliacao: RecistAvaliacao | null = null;
-    if (!isBaseline && deltaBaselinePct !== null && deltaNadirPct !== null
-      && ponto.novasLesoes !== null && ponto.naoAlvos !== "NAO_AVALIADO") {
-      if (progressaoAlvos || ponto.novasLesoes || ponto.naoAlvos === "PROGRESSAO_INEQUIVOCA") {
+    if (!isBaseline && bloqueiosElegibilidade.size === 0 && deltaBaselinePct !== null) {
+      if (ponto.novasLesoes === true || ponto.naoAlvos === "PROGRESSAO_INEQUIVOCA" || progressaoAlvos) {
         categoriaGlobal = "PD";
-      } else {
+      } else if (ponto.novasLesoes === false && ponto.naoAlvos !== "NAO_AVALIADO" && deltaBaselinePct !== null) {
         const respostaCompleta = lesoes.every((l) => l.tipo === "LINFONODO"
           ? l.diametroMm < 10 : l.diametroMm === 0)
           && ponto.naoAlvos === "AUSENTE_DOCUMENTADO";
         if (respostaCompleta) categoriaGlobal = "RC";
         else if (deltaBaselinePct <= -30) categoriaGlobal = "RP";
-        else categoriaGlobal = "DE";
+        else if (deltaNadirPct !== null) categoriaGlobal = "DE";
       }
+    }
+    if (categoriaGlobal !== null && deltaBaselinePct !== null && deltaNadirPct !== null
+      && ponto.novasLesoes !== null && ponto.naoAlvos !== "NAO_AVALIADO") {
       avaliacao = {
         data: ponto.data,
         somaMm: soma,
@@ -250,7 +339,8 @@ export function avaliarSerieRecist(input: RecistSerieInput): RecistSerieResultad
         categoria: categoriaGlobal,
         revisao: "PROPOSTO",
       };
-    } else if (!isBaseline) {
+    }
+    if (!isBaseline && categoriaGlobal === null) {
       pendencias.push("CATEGORIA_GLOBAL_INCOMPLETA");
     }
     const calculo: RecistCalculoPonto = {
@@ -276,7 +366,8 @@ export function avaliarSerieRecist(input: RecistSerieInput): RecistSerieResultad
       estado: estadoCalculo,
       estadoCalculo,
       estadoInterpretacao: categoriaGlobal ? "PROPOSTO" : "PENDENTE", calculo, avaliacao,
-      categoriaGlobal, pendencias: unicaOrdenada(pendencias) });
+      categoriaGlobal, categoriaGlobalRevisao: categoriaGlobal ? "PROPOSTO" : "PENDENTE",
+      pendencias: unicaOrdenada(pendencias) });
   }
 
   const pendenciasSerie = unicaOrdenada(resultados.flatMap((p) => p.pendencias));

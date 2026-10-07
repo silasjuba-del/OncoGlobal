@@ -1,18 +1,27 @@
 import { describe, expect, it } from "vitest";
-import { avaliarSerieRecist, type RecistPontoSerie, type RecistSerieInput } from "../../src/rules/recist/index.js";
+import { avaliarSerieRecist, type RecistAlvoDefinido, type RecistPontoSerie, type RecistSerieInput } from "../../src/rules/recist/index.js";
+
+type AlvoFixture = Pick<RecistAlvoDefinido, "codigo" | "tipo" | "eixo">
+  & Partial<Pick<RecistAlvoDefinido, "orgaoId" | "elegibilidadeBasal" | "fonteElegibilidadeIds">>;
 
 function recistPoint(eventId: string, data: string, values: number[], patch: Partial<RecistPontoSerie> = {}): RecistPontoSerie {
   return {
     eventId, patientId: "paciente-teste-01", tumorLotId: "tumor-01", episodioId: "episodio-01", data,
+    metodo: "TC", tecnicaId: "tc-5mm-fixo", espessuraCorteMm: 5, qualidadeMedicao: "ADEQUADA",
     lesoes: values.map((diametroMm, i) => ({ codigo: `L${i + 1}`, diametroMm, fonteIds: [`fonte-${eventId}-${i + 1}`] })),
     novasLesoes: false, naoAlvos: "AUSENTE_DOCUMENTADO", fonteIds: [`fonte-${eventId}`], ...patch,
   };
 }
-function recistInput(pontos: RecistPontoSerie[], alvos: RecistSerieInput["alvos"] = [
+function recistInput(pontos: RecistPontoSerie[], alvos: readonly AlvoFixture[] = [
   { codigo: "L1", tipo: "NAO_NODAL", eixo: "MAIOR" },
 ]): RecistSerieInput {
   return { patientId: "paciente-teste-01", tumorLotId: "tumor-01", episodioId: "episodio-01",
-    baselineEventId: "baseline", alvos, pontos };
+    baselineEventId: "baseline", alvos: alvos.map((alvo) => ({
+      ...alvo,
+      orgaoId: alvo.orgaoId === undefined ? "orgao-1" : alvo.orgaoId,
+      elegibilidadeBasal: alvo.elegibilidadeBasal === undefined ? "ELEGIVEL" : alvo.elegibilidadeBasal,
+      fonteElegibilidadeIds: alvo.fonteElegibilidadeIds ?? [`selecao-${alvo.codigo}`],
+    })), pontos };
 }
 function byId(result: ReturnType<typeof avaliarSerieRecist>, id: string) {
   return result.pontos.find((point) => point.eventId === id)!;
@@ -35,6 +44,17 @@ describe("W10-LUNA4 F07 · série RECIST longitudinal", () => {
     expect(atual.estadoInterpretacao).toBe("PROPOSTO");
     expect(result.estado).toBe("CALCULADO");
     expect(result.estadoInterpretacao).toBe("PROPOSTO");
+
+    const prefixo = avaliarSerieRecist(recistInput([
+      recistPoint("baseline", "2026-01-01", [100]),
+      recistPoint("atual", "2026-03-01", [101]),
+    ]));
+    const comFuturoInadequado = avaliarSerieRecist(recistInput([
+      recistPoint("baseline", "2026-01-01", [100]),
+      recistPoint("atual", "2026-03-01", [101]),
+      recistPoint("futuro-inadequado", "2026-04-01", [40], { qualidadeMedicao: "INADEQUADA", metodo: "RM" }),
+    ]));
+    expect(byId(comFuturoInadequado, "atual")).toEqual(byId(prefixo, "atual"));
   });
 
   it.each([
@@ -143,6 +163,35 @@ describe("W10-LUNA4 F07 · série RECIST longitudinal", () => {
     expect(atual.pendencias).toContain("NADIR_ZERO_SEM_PERCENTUAL");
   });
 
+  it("mantém RC proposta em 20→0→0 com nadir atualizado zero, sem fabricar percentual", () => {
+    const result = avaliarSerieRecist(recistInput([
+      recistPoint("baseline", "2026-01-01", [20]),
+      recistPoint("resposta", "2026-02-01", [0]),
+      recistPoint("atual", "2026-03-01", [0]),
+    ]));
+    const atual = byId(result, "atual");
+    expect(atual.calculo?.nadirMm).toBe(0);
+    expect(atual.calculo?.deltaNadirPct).toBeNull();
+    expect(atual.avaliacao).toBeNull();
+    expect(atual.categoriaGlobal).toBe("RC");
+    expect(atual.categoriaGlobalRevisao).toBe("PROPOSTO");
+    expect(atual.pendencias).toContain("NADIR_ZERO_SEM_PERCENTUAL");
+  });
+
+  it("propõe PD por nova lesão mesmo se o nadir anterior zero torna o delta indefinido", () => {
+    const result = avaliarSerieRecist(recistInput([
+      recistPoint("baseline", "2026-01-01", [20]),
+      recistPoint("resposta", "2026-02-01", [0]),
+      recistPoint("atual", "2026-03-01", [10], { novasLesoes: true }),
+    ]));
+    const atual = byId(result, "atual");
+    expect(atual.calculo?.deltaNadirPct).toBeNull();
+    expect(atual.avaliacao).toBeNull();
+    expect(atual.categoriaGlobal).toBe("PD");
+    expect(atual.categoriaGlobalRevisao).toBe("PROPOSTO");
+    expect(atual.pendencias).toContain("NADIR_ZERO_SEM_PERCENTUAL");
+  });
+
   it("mantém seguimentos pendentes sem lançar quando o baseline não tem todos os alvos válidos", () => {
     const result = avaliarSerieRecist(recistInput([
       recistPoint("baseline", "2026-01-01", []),
@@ -158,6 +207,98 @@ describe("W10-LUNA4 F07 · série RECIST longitudinal", () => {
     ]));
     expect(byId(invalidMeasure, "atual").calculo).toBeNull();
     expect(byId(invalidMeasure, "atual").pendencias).toContain("BASELINE_INVALIDO");
+  });
+
+  it("falha fechado quando a soma basal de medidas finitas transborda", () => {
+    const input = recistInput([
+      recistPoint("baseline", "2026-01-01", [Number.MAX_VALUE, Number.MAX_VALUE]),
+      recistPoint("atual", "2026-02-01", [20, 20]),
+    ], [
+      { codigo: "L1", tipo: "NAO_NODAL", eixo: "MAIOR", orgaoId: "orgao-1" },
+      { codigo: "L2", tipo: "NAO_NODAL", eixo: "MAIOR", orgaoId: "orgao-1" },
+    ]);
+    expect(() => avaliarSerieRecist(input)).not.toThrow();
+    const result = avaliarSerieRecist(input);
+    expect(byId(result, "baseline").pendencias).toContain("MEDIDA_INVALIDA");
+    expect(byId(result, "atual").calculo).toBeNull();
+    expect(byId(result, "atual").pendencias).toContain("BASELINE_INVALIDO");
+  });
+
+  it("pendura categoria para baseline não elegível, seleção excessiva ou proveniência de elegibilidade vazia", () => {
+    const tiny = avaliarSerieRecist(recistInput([
+      recistPoint("baseline", "2026-01-01", [1]), recistPoint("atual", "2026-02-01", [0]),
+    ]));
+    expect(byId(tiny, "atual").calculo?.somaMm).toBe(0);
+    expect(byId(tiny, "atual").categoriaGlobal).toBeNull();
+    expect(byId(tiny, "atual").pendencias).toContain("MEDIDA_BASAL_INELEGIVEL");
+
+    const sixTargets = Array.from({ length: 6 }, (_, i) => ({ codigo: `L${i + 1}`, tipo: "NAO_NODAL" as const, eixo: "MAIOR" as const }));
+    const excess = avaliarSerieRecist(recistInput([
+      recistPoint("baseline", "2026-01-01", Array(6).fill(10)),
+      recistPoint("atual", "2026-02-01", Array(6).fill(10)),
+    ], sixTargets));
+    expect(byId(excess, "atual").categoriaGlobal).toBeNull();
+    expect(byId(excess, "atual").pendencias).toContain("ALVOS_MAXIMO_EXCEDIDO");
+    expect(byId(excess, "atual").pendencias).toContain("ALVOS_ORGAO_MAXIMO_EXCEDIDO");
+
+    const noSource = avaliarSerieRecist(recistInput([
+      recistPoint("baseline", "2026-01-01", [20]), recistPoint("atual", "2026-02-01", [0]),
+    ], [{ codigo: "L1", tipo: "NAO_NODAL", eixo: "MAIOR", fonteElegibilidadeIds: [] }]));
+    expect(byId(noSource, "atual").categoriaGlobal).toBeNull();
+    expect(byId(noSource, "atual").pendencias).toContain("FONTE_ELEGIBILIDADE_AUSENTE");
+  });
+
+  it("aceita cinco alvos distribuídos até dois por órgão, aplica corte de TC e rejeita nodo <15 mm", () => {
+    const validTargets = Array.from({ length: 5 }, (_, i) => ({ codigo: `L${i + 1}`, tipo: "NAO_NODAL" as const,
+      eixo: "MAIOR" as const, orgaoId: `orgao-${Math.floor(i / 2) + 1}` }));
+    const five = avaliarSerieRecist(recistInput([
+      recistPoint("baseline", "2026-01-01", Array(5).fill(10)),
+      recistPoint("atual", "2026-02-01", Array(5).fill(10)),
+    ], validTargets));
+    expect(byId(five, "atual").categoriaGlobal).toBe("DE");
+
+    const thickCut = avaliarSerieRecist(recistInput([
+      recistPoint("baseline", "2026-01-01", [20], { espessuraCorteMm: 10 }),
+      recistPoint("atual", "2026-02-01", [20], { espessuraCorteMm: 10 }),
+    ]));
+    expect(byId(thickCut, "atual").categoriaGlobal).toBe("DE");
+    const belowThickCut = avaliarSerieRecist(recistInput([
+      recistPoint("baseline", "2026-01-01", [19], { espessuraCorteMm: 10 }),
+      recistPoint("atual", "2026-02-01", [19], { espessuraCorteMm: 10 }),
+    ]));
+    expect(byId(belowThickCut, "atual").categoriaGlobal).toBeNull();
+    expect(byId(belowThickCut, "atual").pendencias).toContain("MEDIDA_BASAL_INELEGIVEL");
+
+    const smallNode = avaliarSerieRecist(recistInput([
+      recistPoint("baseline", "2026-01-01", [9]), recistPoint("atual", "2026-02-01", [0]),
+    ], [{ codigo: "L1", tipo: "LINFONODO", eixo: "CURTO" }]));
+    expect(byId(smallNode, "atual").categoriaGlobal).toBeNull();
+    expect(byId(smallNode, "atual").pendencias).toContain("MEDIDA_BASAL_INELEGIVEL");
+  });
+
+  it("não presume elegibilidade, órgão, técnica ou qualidade ausentes", () => {
+    const missing = avaliarSerieRecist(recistInput([
+      recistPoint("baseline", "2026-01-01", [20]), recistPoint("atual", "2026-02-01", [20]),
+    ], [{ codigo: "L1", tipo: "NAO_NODAL", eixo: "MAIOR", orgaoId: null,
+      elegibilidadeBasal: null, fonteElegibilidadeIds: [" "] }]));
+    expect(byId(missing, "atual").categoriaGlobal).toBeNull();
+    expect(byId(missing, "atual").pendencias).toContain("ORGAO_ALVO_AUSENTE");
+    expect(byId(missing, "atual").pendencias).toContain("ALVO_ELEGIBILIDADE_AUSENTE");
+    expect(byId(missing, "atual").pendencias).toContain("FONTE_ELEGIBILIDADE_AUSENTE");
+
+    const unsupported = avaliarSerieRecist(recistInput([
+      recistPoint("baseline", "2026-01-01", [20], { metodo: "RM" }),
+      recistPoint("atual", "2026-02-01", [20], { metodo: "RM" }),
+    ]));
+    expect(byId(unsupported, "atual").categoriaGlobal).toBeNull();
+    expect(byId(unsupported, "atual").pendencias).toContain("METODO_NAO_SUPORTADO");
+
+    const badQuality = avaliarSerieRecist(recistInput([
+      recistPoint("baseline", "2026-01-01", [20], { qualidadeMedicao: "NAO_AVALIADA" }),
+      recistPoint("atual", "2026-02-01", [20]),
+    ]));
+    expect(byId(badQuality, "atual").categoriaGlobal).toBeNull();
+    expect(byId(badQuality, "atual").pendencias).toContain("QUALIDADE_MEDICAO_PENDENTE");
   });
 
   it("mantém baseline e conjuntos de alvo explícitos; ausência, duplicidade e conflito temporal pendem", () => {
