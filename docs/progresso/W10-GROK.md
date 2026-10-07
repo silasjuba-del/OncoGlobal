@@ -12,7 +12,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w10-grok`, branch `f0/w10-grok`.
 | GROK-06 INTERVAL_PROGRESSION | FEITA | W10-GROK-06 | L5 do PT10 alerta. Não gera M1. |
 | GROK-07 nódulo &lt; 1 cm e Mx | FEITA | W10-GROK-07 | Abaixo de 1 cm fica INDETERMINADO. Mx não troca o texto. |
 | GROK-08 FN-16 semáforo | FEITA | W10-GROK-08 | Adv FN-16 verde. Catálogo inativo. Sem bloqueio. |
-| GROK-09 suporte não oncológico | — | | |
+| GROK-09 suporte não oncológico | FEITA | W10-GROK-09 | Alertas da biblioteca. Sem bloqueio. |
 | GROK-10 ownership | — | | |
 | GROK-11 manifesto | — | | |
 | GROK-12 dedupe + fachada w8 | — | | |
@@ -338,4 +338,42 @@ Test Files  1 passed (1)
 ```
 Test Files  1 passed (1)
      Tests  5 passed (5)
+```
+
+## GROK-09
+
+`alertarSuporte(entrada, rs)` em `src/rules/suporteNaoOncologico.ts`. Textos e sinônimos em `corpus/rulesets/salao-suporte.v1.json`. `bloqueiaSalvar` é o literal `false`. `canal-redflags.v1.json` não foi editado.
+
+Diarreia estritamente acima de 24 h com anti-hipertensivo na lista alerta "suspender anti-hipertensivo". Lista nula fica PENDENTE. Vômito com diarreia (horas > 0) alerta "orientar PS para hidratação venosa". Vômito sozinho não alerta. Horas nulas com vômito ficam PENDENTE. Corticoide com DM-2 alerta hiperglicemia. Um dos dois sozinho não alerta. DM-2 ausente com corticoide fica PENDENTE. Febre em décimos estritamente acima de 378 alerta o texto da biblioteca (D-W9-38). 378 não dispara. Temperatura nula continua nula.
+
+`git merge f0/w1-integrado` no início: já estava em `bd8a35e`.
+
+Testes novos: `tests/w10-grok/grok-09-suporte.test.ts` (6).
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries`
+
+```
+fronteiras ok (181 arquivos)
+```
+
+`npm run check:corpus` — `corpus/rulesets/salao-suporte.v1.json` header ok, `[VERIFICAR]` 0, ativos 0. Fecho: `corpus ok (97 arquivos)`.
+
+`npx vitest run tests/w10-grok tests/corpus/loader.test.ts tests/corpus/interacoes.test.ts tests/rules-w8/interacoes.test.ts --no-file-parallelism`
+
+```
+Test Files  12 passed (12)
+     Tests  103 passed (103)
+```
+
+6 da GROK-09, mais GROK-01 (38), GROK-02 (11), GROK-03 (7), GROK-04 (5), GROK-05 (6), GROK-06 (7), GROK-07 (5), GROK-08 (5), loader (7), corpus de interações (3) e `rules-w8/interacoes` (3).
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
+
+```
+Test Files  1 passed (1)
+     Tests  9 passed (9)
 ```

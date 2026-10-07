@@ -60,3 +60,11 @@ Faixa: `docs/ondas/W10-GROK.md`. Contrato que falta fica com tipo local `// PROV
 4. **Observações NÃO_VERIFICADO** (sorivudina, diurético de alça) ficaram em `observacaoCsv`. Não viraram fato.
 5. **Barrel.** `semaforoInteracoes` é reexportado por `src/rules/index.ts` porque o adv importa de lá. Os corpos duplicados da triagem não foram apagados nesta fatia.
 6. **"sem interação"** só com `checagemCompleta: true` e pelo menos um item ativo com trecho, sem par casado. Lista estruturada sem `NAO_ONCOLOGICA` fica PENDENTE (D-W9-47).
+
+## GROK-09
+
+1. **Redação final aberta.** `docs/DECISOES.md` ainda deixa a redação final das red flags em aberto. A tabela aprovada em `docs/referencias/externos/IDEIAS-MANUAIS-PACIENTE.md` diz "antibiótico se neutropênico" e "ir ao PS (hidratação venosa)". Esta fatia emite as frases do enunciado: "ir ao PS → hemograma → ATB se neutropênico" e "orientar PS para hidratação venosa".
+2. **Sinônimos.** A lista em `salao-suporte.v1.json` é vocabulário de casamento, não formulário e não lista completa. Furosemida ficou de fora.
+3. **`canal-redflags.v1.json`** não foi editado. Continua esqueleto, `ativo: false`, fonte `[VERIFICAR]`.
+4. **Ausência.** Lista nula com diarreia acima de 24 h fica PENDENTE e não vira "sem anti-hipertensivo". Temperatura nula continua nula. Igual a 24 h e igual a 37,8 não disparam.
+5. **Tipo.** `EntradaSuporte` está em `src/rules/suporteNaoOncologico.ts` (`// PROVISORIO-W10`).
