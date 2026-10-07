@@ -698,3 +698,25 @@ export const funcoesF0: FuncoesF0 = {
   ehConcomitante,
   cicloVaiAoMedico,
 };
+
+export { semaforoInteracoes } from "./semaforoInteracoes.js";
+
+// Fachada estável do w8 para o Fugu. R-08 só permite este barrel reexportar src/rules/*.
+export { escolherDataClinica, idadeNaData } from "./w8/dataClinica.js";
+export type { EntradaDataClinica, SaidaDataClinica, SaidaIdadeNaData } from "./w8/dataClinica.js";
+export { avaliarHierarquiaFonte } from "./w8/hierarquiaFonte.js";
+export type { AchadoFonte, NaturezaFonte, OrigemResultado, SaidaHierarquiaFonte } from "./w8/hierarquiaFonte.js";
+export { deduplicarExames as deduplicarExamesW8, gerarChaveDedupe } from "./w8/dedupeExame.js";
+export type { EntradaExameDedupe, ExameUnicoAgrupado, SaidaDedupeExame, TipoExameDedupe } from "./w8/dedupeExame.js";
+export { classificarIdentificador, cnsValido, cpfValido } from "./w8/identificadores.js";
+export type { EntradaClassificarIdentificador, SaidaClassificarIdentificador, TipoIdentificadorPorValor } from "./w8/identificadores.js";
+export { avaliarRasuraEConfianca } from "./w8/rasura.js";
+export type { ConfigRasura, EntradaCampoExtraido, SaidaAvaliacaoRasura } from "./w8/rasura.js";
+export { agregarCaso, calcularGrupoGrauISUP, validarSitioPatologia } from "./w8/patologiaSitio.js";
+export type { EntradaSitioPatologia, RulesetPatologiaAgregacao, SaidaAgregacaoCaso, SaidaValidacaoSitio } from "./w8/patologiaSitio.js";
+export { gerarResumoImagem } from "./w8/resumoImagem.js";
+export type { CampoResumo2, EntradaRADS11, Resumo1Imagem, Resumo2Imagem, SaidaResumoImagem } from "./w8/resumoImagem.js";
+export { vincularDocumentoAoPaciente } from "./w8/vinculoDocumento.js";
+export type { EntradaVinculoDocumento, PapelPessoaDocumento, SaidaVinculoDocumento, TipoDocumentoVinculo, TipoIdentificadorClinico } from "./w8/vinculoDocumento.js";
+export { avaliarInteracaoMedicamentosa } from "./w8/interacoes.js";
+export type { RegraInteracaoItem, RulesetInteracoes, SaidaAvaliacaoInteracao } from "./w8/interacoes.js";

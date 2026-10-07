@@ -1,0 +1,64 @@
+{
+  "header": {
+    "id": "salao-suporte",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-07",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-W9-28",
+      "trecho": "Diarreia > 24 h com anti-hipertensivo na lista: suspender anti-hipertensivo. Vômito + diarreia: orientar PS para hidratação venosa. Corticoide + DM-2: alerta de hiperglicemia. Febre estritamente > 37,8 °C (D-W9-38): ir ao PS → hemograma → ATB se neutropênico. Só o texto da biblioteca. Igual ao limite não dispara.",
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-07"
+  },
+  "suporte": {
+    "decisao": "D-W9-28",
+    "decisaoFebre": "D-W9-38",
+    "decisaoClasse": "D-W9-47",
+    "horasDiarreiaExclusivo": 24,
+    "igualAsHorasNaoAlerta": true,
+    "febreDecimosExclusivo": 378,
+    "igualAFebreNaoAlerta": true,
+    "bloqueiaSalvar": false,
+    "textos": {
+      "suspenderAntiHipertensivo": "suspender anti-hipertensivo",
+      "hidratacao": "orientar PS para hidratação venosa",
+      "hiperglicemia": "Corticoide + DM-2 → alerta de hiperglicemia",
+      "febre": "ir ao PS → hemograma → ATB se neutropênico"
+    },
+    "classes": [
+      {
+        "id": "anti-hipertensivo",
+        "sinonimos": [
+          "anti-hipertensivo",
+          "anti-hipertensivos",
+          "antihipertensivo",
+          "losartana",
+          "enalapril",
+          "captopril",
+          "valsartana",
+          "anlodipino",
+          "anlodipina",
+          "atenolol",
+          "hidroclorotiazida",
+          "clortalidona"
+        ]
+      },
+      {
+        "id": "corticoide",
+        "sinonimos": [
+          "corticoide",
+          "corticosteroide",
+          "corticosteroides",
+          "dexametasona",
+          "prednisona",
+          "prednisolona",
+          "hidrocortisona",
+          "metilprednisolona",
+          "betametasona"
+        ]
+      }
+    ]
+  }
+}

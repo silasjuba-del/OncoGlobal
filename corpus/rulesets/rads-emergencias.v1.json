@@ -1,0 +1,442 @@
+{
+  "header": {
+    "id": "rads-emergencias",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-07",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-W9-51 + docs/referencias/rads/EMERGENCIAS-RADIOLOGICAS-30.md",
+      "trecho": "O laudo é varrido pela cadeia de elos, não por palavra solta. Negação (sem sinais de, não há, ausência de) anula o elo. Achado da cadeia é ALERTA com trecho; o médico confirma.",
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-07"
+  },
+  "detector": {
+    "decisao": "D-W9-51",
+    "bloqueiaSalvar": false,
+    "confirmacaoMedicaObrigatoria": true,
+    "ordemObrigatoria": true,
+    "proximidade": 400,
+    "alcanceNegacao": 180,
+    "negacoes": [
+      "sem sinais de",
+      "sem evidência de",
+      "sem evidencia de",
+      "não há sinais de",
+      "nao ha sinais de",
+      "não há",
+      "nao ha",
+      "não observamos",
+      "nao observamos",
+      "não foram caracterizados",
+      "nao foram caracterizados",
+      "ausência de",
+      "ausencia de",
+      "sem "
+    ]
+  },
+  "emergencias": [
+    {
+      "linha": 1,
+      "categoria": "Compressão",
+      "nome": "Compressão medular metastática",
+      "modalidade": "RM coluna total",
+      "minimoElos": 2,
+      "obrigatorios": ["massa"],
+      "elos": [
+        { "id": "massa", "sinonimos": ["massa epidural"] },
+        { "id": "apagamento", "sinonimos": ["apagamento do saco dural", "apagamento dural"] },
+        { "id": "compressao", "sinonimos": ["compressão medular"] },
+        { "id": "mielopatia", "sinonimos": ["mielopatia"] }
+      ]
+    },
+    {
+      "linha": 2,
+      "categoria": "Compressão",
+      "nome": "Síndrome de veia cava superior",
+      "modalidade": "TC tórax +C",
+      "minimoElos": 2,
+      "obrigatorios": ["vcs"],
+      "elos": [
+        { "id": "mediastino", "sinonimos": ["massa mediastinal"] },
+        { "id": "vcs", "sinonimos": ["estenose da veia cava superior", "trombo da veia cava superior", "estenose de vcs", "trombo de vcs"] },
+        { "id": "colaterais", "sinonimos": ["circulação colateral", "colaterais mediastinais"] },
+        { "id": "edema", "sinonimos": ["edema em pelerine", "edema de face", "edema cervical"] }
+      ]
+    },
+    {
+      "linha": 3,
+      "categoria": "Compressão",
+      "nome": "Metástase cerebral com herniação",
+      "modalidade": "RM/TC crânio",
+      "minimoElos": 2,
+      "obrigatorios": ["herniacao"],
+      "elos": [
+        { "id": "massa", "sinonimos": ["lesão expansiva", "massa intracraniana"] },
+        { "id": "edema", "sinonimos": ["edema vasogênico"] },
+        { "id": "desvio", "sinonimos": ["desvio da linha média", "desvio de linha média"] },
+        { "id": "herniacao", "sinonimos": ["herniação uncal", "herniação subfalcina", "herniação"] }
+      ]
+    },
+    {
+      "linha": 4,
+      "categoria": "Compressão",
+      "nome": "Compressão de cauda equina",
+      "modalidade": "RM lombossacra",
+      "minimoElos": 2,
+      "obrigatorios": ["massa"],
+      "elos": [
+        { "id": "massa", "sinonimos": ["massa sacral", "massa lombar epidural", "massa epidural lombar"] },
+        { "id": "raizes", "sinonimos": ["amputação de raízes", "amputação das raízes"] },
+        { "id": "ossea", "sinonimos": ["destruição óssea"] }
+      ]
+    },
+    {
+      "linha": 5,
+      "categoria": "Compressão",
+      "nome": "Hidrocefalia obstrutiva (fossa posterior)",
+      "modalidade": "TC/RM crânio",
+      "minimoElos": 2,
+      "obrigatorios": ["cerebelo"],
+      "elos": [
+        { "id": "cerebelo", "sinonimos": ["lesão cerebelar", "massa cerebelar"] },
+        { "id": "ventriculo", "sinonimos": ["colapso do quarto ventrículo", "colapso do 4º ventrículo", "colapso do iv ventrículo"] },
+        { "id": "dilatacao", "sinonimos": ["dilatação supratentorial"] },
+        { "id": "edema", "sinonimos": ["edema transependimário"] }
+      ]
+    },
+    {
+      "linha": 6,
+      "categoria": "Obstrução",
+      "nome": "Obstrução intestinal maligna",
+      "modalidade": "TC abdome",
+      "minimoElos": 2,
+      "obrigatorios": ["transicao"],
+      "elos": [
+        { "id": "transicao", "sinonimos": ["ponto de transição"] },
+        { "id": "distensao", "sinonimos": ["distensão a montante", "distensão de alças"] },
+        { "id": "hidroaereos", "sinonimos": ["níveis hidroaéreos"] },
+        { "id": "carcinomatose", "sinonimos": ["carcinomatose"] }
+      ]
+    },
+    {
+      "linha": 7,
+      "categoria": "Obstrução",
+      "nome": "Uropatia obstrutiva maligna",
+      "modalidade": "TC/US",
+      "minimoElos": 2,
+      "obrigatorios": ["hidronefrose"],
+      "elos": [
+        { "id": "massa", "sinonimos": ["massa pélvica", "massa retroperitoneal", "retroperitoneal"] },
+        { "id": "hidronefrose", "sinonimos": ["hidronefrose"] },
+        { "id": "afilamento", "sinonimos": ["afilamento do parênquima", "afilamento cortical"] }
+      ]
+    },
+    {
+      "linha": 8,
+      "categoria": "Obstrução",
+      "nome": "Obstrução de via aérea central",
+      "modalidade": "TC tórax/broncoscopia",
+      "minimoElos": 2,
+      "obrigatorios": ["massa"],
+      "elos": [
+        { "id": "massa", "sinonimos": ["massa endoluminal"] },
+        { "id": "estenose", "sinonimos": ["estenose traqueal", "estenose brônquica"] },
+        { "id": "atelectasia", "sinonimos": ["atelectasia completa"] }
+      ]
+    },
+    {
+      "linha": 9,
+      "categoria": "Obstrução",
+      "nome": "Obstrução biliar/colangite",
+      "modalidade": "colangio-RM/TC",
+      "minimoElos": 2,
+      "obrigatorios": ["ducto"],
+      "elos": [
+        { "id": "ducto", "sinonimos": ["sinal do duplo ducto", "duplo ducto"] },
+        { "id": "dilatacao", "sinonimos": ["dilatação intra-hepática", "dilatação das vias biliares"] },
+        { "id": "realce", "sinonimos": ["realce parietal biliar"] }
+      ]
+    },
+    {
+      "linha": 10,
+      "categoria": "Obstrução",
+      "nome": "Obstrução de saída gástrica maligna",
+      "modalidade": "TC abdome",
+      "minimoElos": 2,
+      "obrigatorios": ["estomago"],
+      "elos": [
+        { "id": "estomago", "sinonimos": ["estômago de retenção"] },
+        { "id": "estenose", "sinonimos": ["estenose piloro-duodenal", "estenose pilórica"] },
+        { "id": "invasao", "sinonimos": ["invasão pancreática"] }
+      ]
+    },
+    {
+      "linha": 11,
+      "categoria": "Perfuração",
+      "nome": "Perfuração de víscera oca",
+      "modalidade": "TC abdome",
+      "minimoElos": 2,
+      "obrigatorios": ["pneumo"],
+      "elos": [
+        { "id": "pneumo", "sinonimos": ["pneumoperitônio"] },
+        { "id": "gas", "sinonimos": ["gás extraluminal"] },
+        { "id": "colecao", "sinonimos": ["coleção bloqueada"] },
+        { "id": "peritonite", "sinonimos": ["peritonite"] }
+      ]
+    },
+    {
+      "linha": 12,
+      "categoria": "Perfuração",
+      "nome": "Perfuração GI por antiangiogênico",
+      "modalidade": "TC abdome",
+      "minimoElos": 2,
+      "obrigatorios": ["pneumo"],
+      "elos": [
+        { "id": "pneumo", "sinonimos": ["pneumoperitônio"] },
+        { "id": "parede", "sinonimos": ["descontinuidade parietal"] },
+        { "id": "liquido", "sinonimos": ["líquido livre"] }
+      ]
+    },
+    {
+      "linha": 13,
+      "categoria": "Perfuração",
+      "nome": "Fístula traqueoesofágica/mediastinite",
+      "modalidade": "TC tórax",
+      "minimoElos": 2,
+      "obrigatorios": ["fistula"],
+      "elos": [
+        { "id": "gas", "sinonimos": ["gás mediastinal"] },
+        { "id": "fistula", "sinonimos": ["trajeto fistuloso"] },
+        { "id": "contraste", "sinonimos": ["contraste extraluminal"] },
+        { "id": "derrame", "sinonimos": ["derrame pleural"] }
+      ]
+    },
+    {
+      "linha": 14,
+      "categoria": "Perfuração",
+      "nome": "Fístula anastomótica com abscesso",
+      "modalidade": "TC abdome +C",
+      "minimoElos": 2,
+      "obrigatorios": ["colecao"],
+      "elos": [
+        { "id": "colecao", "sinonimos": ["coleção com gás"] },
+        { "id": "contraste", "sinonimos": ["extravasamento de contraste"] },
+        { "id": "densificacao", "sinonimos": ["densificação pericólica", "densificação anastomótica"] }
+      ]
+    },
+    {
+      "linha": 15,
+      "categoria": "Vascular",
+      "nome": "Tromboembolismo pulmonar",
+      "modalidade": "angio-TC tórax",
+      "minimoElos": 2,
+      "obrigatorios": ["falha"],
+      "elos": [
+        { "id": "falha", "sinonimos": ["falha de enchimento"] },
+        { "id": "vd", "sinonimos": ["dilatação do ventrículo direito", "dilatação de vd"] },
+        { "id": "septal", "sinonimos": ["desvio septal"] },
+        { "id": "infarto", "sinonimos": ["infarto pulmonar"] }
+      ]
+    },
+    {
+      "linha": 16,
+      "categoria": "Vascular",
+      "nome": "Tamponamento cardíaco",
+      "modalidade": "eco/TC tórax",
+      "minimoElos": 2,
+      "obrigatorios": ["derrame"],
+      "elos": [
+        { "id": "derrame", "sinonimos": ["derrame pericárdico"] },
+        { "id": "colapso", "sinonimos": ["colapso de câmaras direitas", "colapso do ventrículo direito"] },
+        { "id": "vci", "sinonimos": ["pletora de vci", "pletora da veia cava inferior"] }
+      ]
+    },
+    {
+      "linha": 17,
+      "categoria": "Vascular",
+      "nome": "Hemorragia intratumoral cerebral",
+      "modalidade": "TC sem contraste",
+      "minimoElos": 2,
+      "obrigatorios": ["hiperdensa"],
+      "elos": [
+        { "id": "hiperdensa", "sinonimos": ["área hiperdensa", "hiperdensidade intralesional"] },
+        { "id": "nivel", "sinonimos": ["nível líquido-líquido"] },
+        { "id": "expansivo", "sinonimos": ["efeito expansivo agudo"] }
+      ]
+    },
+    {
+      "linha": 18,
+      "categoria": "Vascular",
+      "nome": "Ruptura de CHC/hemoperitônio",
+      "modalidade": "TC trifásica",
+      "minimoElos": 2,
+      "obrigatorios": ["chc"],
+      "elos": [
+        { "id": "chc", "sinonimos": ["chc exofítico", "hepatocarcinoma exofítico"] },
+        { "id": "hematoma", "sinonimos": ["hematoma sentinela"] },
+        { "id": "blush", "sinonimos": ["blush arterial"] },
+        { "id": "hemo", "sinonimos": ["hemoperitônio"] }
+      ]
+    },
+    {
+      "linha": 19,
+      "categoria": "Vascular",
+      "nome": "Hemoptise maciça",
+      "modalidade": "angio-TC tórax",
+      "minimoElos": 2,
+      "obrigatorios": ["cavitacao"],
+      "elos": [
+        { "id": "cavitacao", "sinonimos": ["cavitação"] },
+        { "id": "erosao", "sinonimos": ["erosão vascular"] },
+        { "id": "bronquicas", "sinonimos": ["hipertrofia de artérias brônquicas", "artérias brônquicas hipertrofiadas"] }
+      ]
+    },
+    {
+      "linha": 20,
+      "categoria": "Vascular",
+      "nome": "Trombose mesentérica/portal",
+      "modalidade": "angio-TC abdome",
+      "minimoElos": 2,
+      "obrigatorios": ["porta"],
+      "elos": [
+        { "id": "porta", "sinonimos": ["trombo na veia porta", "falha de enchimento da veia porta", "trombo portomesentérico"] },
+        { "id": "alcas", "sinonimos": ["espessamento de alças"] },
+        { "id": "pneumatose", "sinonimos": ["pneumatose intestinal"] },
+        { "id": "gas", "sinonimos": ["gás portal"] }
+      ]
+    },
+    {
+      "linha": 21,
+      "categoria": "Vascular",
+      "nome": "Blowout carotídeo/pseudoaneurisma",
+      "modalidade": "angio-TC cervical",
+      "minimoElos": 2,
+      "obrigatorios": ["pseudo"],
+      "elos": [
+        { "id": "pseudo", "sinonimos": ["pseudoaneurisma"] },
+        { "id": "extravasamento", "sinonimos": ["extravasamento ativo"] },
+        { "id": "hematoma", "sinonimos": ["hematoma cervical"] },
+        { "id": "leito", "sinonimos": ["leito irradiado"] }
+      ]
+    },
+    {
+      "linha": 22,
+      "categoria": "Infecciosa",
+      "nome": "Colite neutropênica (tiflite)",
+      "modalidade": "TC abdome",
+      "minimoElos": 2,
+      "obrigatorios": ["cecal"],
+      "elos": [
+        { "id": "cecal", "sinonimos": ["espessamento cecal"] },
+        { "id": "pericecal", "sinonimos": ["densificação pericecal"] },
+        { "id": "pneumatose", "sinonimos": ["pneumatose cecal"] }
+      ]
+    },
+    {
+      "linha": 23,
+      "categoria": "Infecciosa",
+      "nome": "Pionefrose/pielonefrite enfisematosa",
+      "modalidade": "TC abdome",
+      "minimoElos": 2,
+      "obrigatorios": ["debris"],
+      "elos": [
+        { "id": "hidronefrose", "sinonimos": ["hidronefrose"] },
+        { "id": "debris", "sinonimos": ["debris", "gás parenquimatoso"] },
+        { "id": "nefrograma", "sinonimos": ["perda de nefrograma"] }
+      ]
+    },
+    {
+      "linha": 24,
+      "categoria": "Infecciosa",
+      "nome": "Abscesso hepático/colangite supurativa",
+      "modalidade": "TC trifásica",
+      "minimoElos": 2,
+      "obrigatorios": ["colecoes"],
+      "elos": [
+        { "id": "colecoes", "sinonimos": ["coleções coalescentes"] },
+        { "id": "realce", "sinonimos": ["realce em alvo", "realce periférico"] },
+        { "id": "gas", "sinonimos": ["gás intralesional"] }
+      ]
+    },
+    {
+      "linha": 25,
+      "categoria": "Infecciosa",
+      "nome": "Aspergilose angioinvasiva",
+      "modalidade": "TC tórax",
+      "minimoElos": 2,
+      "obrigatorios": ["halo"],
+      "elos": [
+        { "id": "halo", "sinonimos": ["nódulos com halo", "sinal do halo"] },
+        { "id": "cavitacao", "sinonimos": ["cavitação"] },
+        { "id": "crescente", "sinonimos": ["crescente aéreo"] }
+      ]
+    },
+    {
+      "linha": 26,
+      "categoria": "Infecciosa",
+      "nome": "Fasceíte necrosante/Fournier",
+      "modalidade": "TC pélvica/perineal",
+      "minimoElos": 2,
+      "obrigatorios": ["gas"],
+      "elos": [
+        { "id": "gas", "sinonimos": ["gás em planos fasciais", "gás fascial"] },
+        { "id": "espessamento", "sinonimos": ["espessamento fascial"] },
+        { "id": "colecoes", "sinonimos": ["coleções dissecantes"] }
+      ]
+    },
+    {
+      "linha": 27,
+      "categoria": "Tratamento",
+      "nome": "Fratura patológica iminente",
+      "modalidade": "RX/TC",
+      "minimoElos": 1,
+      "obrigatorios": ["litica"],
+      "elos": [
+        { "id": "litica", "sinonimos": ["lesões líticas", "lesão lítica", "líticas", "osteolíticas", "osteoblásticas", "lesões blásticas", "lesão blástica", "blásticas"] },
+        { "id": "cortical", "sinonimos": ["afilamento cortical"] },
+        { "id": "escore", "sinonimos": ["sins", "mirels"] }
+      ]
+    },
+    {
+      "linha": 28,
+      "categoria": "Tratamento",
+      "nome": "Pneumonite imunomediada/actínica",
+      "modalidade": "TC tórax",
+      "minimoElos": 2,
+      "obrigatorios": ["vidro"],
+      "elos": [
+        { "id": "vidro", "sinonimos": ["vidro fosco"] },
+        { "id": "op", "sinonimos": ["pneumonia em organização", "padrão op"] },
+        { "id": "campo", "sinonimos": ["campo de radioterapia", "limites do campo de rt"] }
+      ]
+    },
+    {
+      "linha": 29,
+      "categoria": "Tratamento",
+      "nome": "Colite imunomediada",
+      "modalidade": "TC abdome",
+      "minimoElos": 2,
+      "obrigatorios": ["mucosa"],
+      "elos": [
+        { "id": "mucosa", "sinonimos": ["espessamento mucoso"] },
+        { "id": "alvo", "sinonimos": ["sinal do alvo"] },
+        { "id": "vascular", "sinonimos": ["ingurgitamento vascular"] }
+      ]
+    },
+    {
+      "linha": 30,
+      "categoria": "Tratamento",
+      "nome": "Derrame pleural maligno sob tensão",
+      "modalidade": "RX/TC tórax",
+      "minimoElos": 2,
+      "obrigatorios": ["opacidade"],
+      "elos": [
+        { "id": "opacidade", "sinonimos": ["opacidade hemitorácica"] },
+        { "id": "mediastino", "sinonimos": ["desvio mediastinal contralateral", "desvio mediastinal"] },
+        { "id": "atelectasia", "sinonimos": ["atelectasia compressiva"] }
+      ]
+    }
+  ]
+}

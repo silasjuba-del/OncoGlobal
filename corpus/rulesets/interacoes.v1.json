@@ -1,24 +1,686 @@
 {
-  "header": { "id": "interacoes", "versao": "1.0.0", "vigenteDesde": "2026-10-05",
-    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "contrato Delta Δ15 do PLANO; sementes citadas no plano; mecanismo/severidade/manejo e ativação pendem de fonte com trecho [VERIFICAR]", "trecho": null, "edicao": null },
-    "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-05" },
-  "nota": "esqueleto W2/GLM-05: nenhuma interação ativa; mecanismo/severidade/monitorizacao/notaManejo são null até existir fonte verificada (K-27)",
+  "header": {
+    "id": "interacoes",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-05",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "contrato Delta Δ15 do PLANO; sementes citadas no plano; mecanismo/severidade/manejo e ativação pendem de fonte com trecho [VERIFICAR]",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-05"
+  },
+  "nota": "Sementes do plano e linhas de 03-interacoes-qt.csv. Tudo ativo:false. referencia fica [VERIFICAR] até o Dr. Silas ativar item a item; a citação da linha está em fonte.trecho. gravidadeEditorial é a coluna editorial e não bloqueia (D-W9-22d).",
   "interacoes": [
-    { "drogaA": "capecitabina", "drogaBouClasse": "varfarina",
-      "mecanismo": null, "severidade": null, "monitorizacao": null, "notaManejo": null,
-      "fonte": { "tipo": "LITERATURA", "referencia": "[VERIFICAR]", "trecho": null, "edicao": null },
-      "fonteVersao": null, "verificadoEm": null, "ativo": false },
-    { "drogaA": "inibidor de tirosino quinase (TKI)", "drogaBouClasse": "inibidor de bomba de prótons (IBP)",
-      "mecanismo": null, "severidade": null, "monitorizacao": null, "notaManejo": null,
-      "fonte": { "tipo": "LITERATURA", "referencia": "[VERIFICAR]", "trecho": null, "edicao": null },
-      "fonteVersao": null, "verificadoEm": null, "ativo": false },
-    { "drogaA": "ribociclibe", "drogaBouClasse": "antiemético 5-HT3",
-      "mecanismo": null, "severidade": null, "monitorizacao": null, "notaManejo": null,
-      "fonte": { "tipo": "LITERATURA", "referencia": "[VERIFICAR]", "trecho": null, "edicao": null },
-      "fonteVersao": null, "verificadoEm": null, "ativo": false },
-    { "drogaA": "inibidor de tirosino quinase (TKI)", "drogaBouClasse": "inibidor forte de CYP3A4",
-      "mecanismo": null, "severidade": null, "monitorizacao": null, "notaManejo": null,
-      "fonte": { "tipo": "LITERATURA", "referencia": "[VERIFICAR]", "trecho": null, "edicao": null },
-      "fonteVersao": null, "verificadoEm": null, "ativo": false }
+    {
+      "drogaA": "capecitabina",
+      "drogaBouClasse": "varfarina",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": null,
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false
+    },
+    {
+      "drogaA": "inibidor de tirosino quinase (TKI)",
+      "drogaBouClasse": "inibidor de bomba de prótons (IBP)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": null,
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false
+    },
+    {
+      "drogaA": "ribociclibe",
+      "drogaBouClasse": "antiemético 5-HT3",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": null,
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false
+    },
+    {
+      "drogaA": "inibidor de tirosino quinase (TKI)",
+      "drogaBouClasse": "inibidor forte de CYP3A4",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": null,
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false
+    },
+    {
+      "drogaA": "Capecitabina; 5-FU",
+      "drogaBouClasse": "Varfarina e outros antagonistas da vitamina K (cumarínicos, p. ex., femprocumona)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 1. Capecitabina; 5-FU × Varfarina e outros antagonistas da vitamina K (cumarínicos, p. ex., femprocumona). Efeito: Alteração de parâmetros de coagulação e/ou sangramento, incluindo óbito; pode surgir em poucos dias após o início e até 1 mês após a suspensão da capecitabina.. Fonte: Xeloda (capecitabina) — bula FDA/DailyMed, rev. 02/2026, seções 5.1, 7.1–7.3, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e702d84d-7162-4751-bf37-d724cc7e45a5>; Xeloda — SmPC EMA (EPAR product information), seções 4.3, 4.4, 4.5 <https://www.ema.europa.eu/en/documents/product-information/xeloda-epar-product-information_en.pdf>; Fluorouracil injeção (Alembic) — bula FDA/DailyMed, rev. 09/2026, seção 7.1 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6b34cbf2-66f9-48a4-b41f-deb84ba8e8c4>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 1,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Capecitabina",
+      "drogaBouClasse": "Fenitoína",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 2. Capecitabina × Fenitoína. Efeito: Aumento das concentrações de fenitoína com sintomas de intoxicação (casos isolados relatados — EMA 4.5).. Fonte: Xeloda (capecitabina) — bula FDA/DailyMed, rev. 02/2026, seções 5.1, 7.1–7.3, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e702d84d-7162-4751-bf37-d724cc7e45a5>; Xeloda — SmPC EMA (EPAR product information), seções 4.3, 4.4, 4.5 <https://www.ema.europa.eu/en/documents/product-information/xeloda-epar-product-information_en.pdf>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 2,
+      "gravidadeEditorial": "Moderada",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Capecitabina; 5-FU; tegafur (fluoropirimidinas)",
+      "drogaBouClasse": "Brivudina (antiviral; inibidor da DPD)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 3. Capecitabina; 5-FU; tegafur (fluoropirimidinas) × Brivudina (antiviral; inibidor da DPD). Efeito: Aumento da toxicidade das fluoropirimidinas, potencialmente fatal; casos fatais relatados.. Fonte: Xeloda — SmPC EMA (EPAR product information), seções 4.3, 4.4, 4.5 <https://www.ema.europa.eu/en/documents/product-information/xeloda-epar-product-information_en.pdf>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 3,
+      "gravidadeEditorial": "Contraindicada",
+      "observacaoCsv": "Brivudina não é comercializada nos EUA (não aparece na bula FDA). Sorivudina (citada no pedido) NÃO_VERIFICADO: não aparece nas bulas consultadas. Disponibilidade de brivudina no Brasil: NÃO_VERIFICADO."
+    },
+    {
+      "drogaA": "Capecitabina",
+      "drogaBouClasse": "Alopurinol",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 4. Capecitabina × Alopurinol. Efeito: Possível redução da eficácia antitumoral.. Fonte: Xeloda (capecitabina) — bula FDA/DailyMed, rev. 02/2026, seções 5.1, 7.1–7.3, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e702d84d-7162-4751-bf37-d724cc7e45a5>; Xeloda — SmPC EMA (EPAR product information), seções 4.3, 4.4, 4.5 <https://www.ema.europa.eu/en/documents/product-information/xeloda-epar-product-information_en.pdf>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 4,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Tamoxifeno",
+      "drogaBouClasse": "Inibidores fortes de CYP2D6: paroxetina, fluoxetina, bupropiona (também quinidina, terbinafina)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 5. Tamoxifeno × Inibidores fortes de CYP2D6: paroxetina, fluoxetina, bupropiona (também quinidina, terbinafina). Efeito: Possível redução da eficácia do tamoxifeno. Evidência conflitante: a bula diz que o impacto \"não está bem estabelecido\" (alguns estudos mostram redução de eficácia, outros não). Coorte de Kelly 2010 (n=2.430): sobreposição de paroxetina em 25%, 50% e 75% do tempo de tamoxifeno associada a aumentos de 24%, 54% e 91% no risco de morte por câncer de mama.. Fonte: Soltamox (tamoxifeno solução oral) — bula FDA/DailyMed, rev. 12/2021, seções 4, 7.1–7.4, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1e6ff055-590c-41e6-9530-1fdf04cdbd02>; FDA — Examples of Drugs that Interact with CYP Enzymes and Transporter Systems (tabela) <https://www.fda.gov/drugs/drug-interactions-labeling/healthcare-professionals-fdas-examples-drugs-interact-cyp-enzymes-and-transporter-systems>; Kelly CM et al. Selective serotonin reuptake inhibitors and breast cancer mortality in women receiving tamoxifen: a population based cohort study. BMJ. 2010;340:c693. doi:10.1136/bmj.c693 <https://pubmed.ncbi.nlm.nih.gov/20142325/>; Stearns V et al. Active tamoxifen metabolite plasma concentrations after coadministration of tamoxifen and the SSRI paroxetine. J Natl Cancer Inst. 2003;95(23):1758-64. doi:10.1093/jnci/djg108 <https://pubmed.ncbi.nlm.nih.gov/14652237/>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 5,
+      "gravidadeEditorial": "Maior (potencial perda de eficácia; evidência clínica conflitante)",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Tamoxifeno",
+      "drogaBouClasse": "Varfarina / anticoagulantes cumarínicos",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 6. Tamoxifeno × Varfarina / anticoagulantes cumarínicos. Efeito: Aumento significativo do efeito anticoagulante (risco de sangramento).. Fonte: Soltamox (tamoxifeno solução oral) — bula FDA/DailyMed, rev. 12/2021, seções 4, 7.1–7.4, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1e6ff055-590c-41e6-9530-1fdf04cdbd02>; Tamoxifeno comprimidos (Mylan) — bula FDA/DailyMed (formato antigo), Contraindicações/Precauções <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7ee3d3d2-85d1-4018-8e70-5ed8a64ae1f0>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 6,
+      "gravidadeEditorial": "Contraindicada (se a indicação for redução de risco em alto risco ou CDIS) / Maior (tratamento adjuvante ou metastático)",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Tamoxifeno",
+      "drogaBouClasse": "Inibidores de aromatase (letrozol, anastrozol)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 7. Tamoxifeno × Inibidores de aromatase (letrozol, anastrozol). Efeito: Redução da exposição ao IA; no ATAC, a combinação anastrozol + tamoxifeno não teve benefício sobre o tamoxifeno isolado.. Fonte: Soltamox (tamoxifeno solução oral) — bula FDA/DailyMed, rev. 12/2021, seções 4, 7.1–7.4, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1e6ff055-590c-41e6-9530-1fdf04cdbd02>; Femara (letrozol) — bula FDA/DailyMed, rev. 06/2026, seção 7 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=82b77d74-085f-45ac-a7dd-1f5c038bf406>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 7,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Irinotecano",
+      "drogaBouClasse": "Inibidores fortes de CYP3A4 (cetoconazol, claritromicina, itraconazol, voriconazol, ritonavir, nelfinavir etc.) e/ou inibidores de UGT1A1 (atazanavir, genfibrozila, indinavir)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 8. Irinotecano × Inibidores fortes de CYP3A4 (cetoconazol, claritromicina, itraconazol, voriconazol, ritonavir, nelfinavir etc.) e/ou inibidores de UGT1A1 (atazanavir, genfibrozila, indinavir). Efeito: Aumento da exposição sistêmica a irinotecano/SN-38 → maior toxicidade (diarreia, neutropenia).. Fonte: Camptosar (irinotecano) — bula FDA/DailyMed, rev. 05/2026, seções 7.2–7.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e518dfc6-7e93-4fee-a66c-51e1ab71c056>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 8,
+      "gravidadeEditorial": "Contraindicada (salvo ausência de alternativa terapêutica)",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Irinotecano",
+      "drogaBouClasse": "Indutores fortes de CYP3A4: fenitoína, fenobarbital, carbamazepina, rifampicina, rifabutina, erva-de-são-joão",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 9. Irinotecano × Indutores fortes de CYP3A4: fenitoína, fenobarbital, carbamazepina, rifampicina, rifabutina, erva-de-são-joão. Efeito: Perda de eficácia; a dose inicial adequada nesses pacientes não foi definida.. Fonte: Camptosar (irinotecano) — bula FDA/DailyMed, rev. 05/2026, seções 7.2–7.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e518dfc6-7e93-4fee-a66c-51e1ab71c056>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 9,
+      "gravidadeEditorial": "Contraindicada (salvo ausência de alternativa terapêutica)",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Cisplatina; carboplatina",
+      "drogaBouClasse": "Aminoglicosídeos (e outros ototóxicos, p. ex., vancomicina)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 10. Cisplatina; carboplatina × Aminoglicosídeos (e outros ototóxicos, p. ex., vancomicina). Efeito: Insuficiência renal; perda auditiva (alta frequência) e zumbido.. Fonte: Cisplatina injeção (Hikma) — bula FDA/DailyMed, rev. 11/2025, Warnings (Nefrotoxicidade/Ototoxicidade), Precautions <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=76aea034-6d58-4390-a164-36aa09c1f101>; Carboplatina injeção (Natco) — bula FDA/DailyMed, rev. 07/2026, Warnings/Precautions <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4c89cedc-e48b-445c-ad05-54dbe60e4fb0>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 10,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": "Diuréticos de alça (furosemida, ácido etacrínico) + cisplatina (ototoxicidade): NÃO_VERIFICADO — não constam nas bulas FDA consultadas; não incluído como interação de bula."
+    },
+    {
+      "drogaA": "Pemetrexede",
+      "drogaBouClasse": "AINEs (ibuprofeno; AAS em dose alta >1,3 g/dia; AINEs de meia-vida longa, p. ex., piroxicam)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 11. Pemetrexede × AINEs (ibuprofeno; AAS em dose alta >1,3 g/dia; AINEs de meia-vida longa, p. ex., piroxicam). Efeito: Mais mielossupressão e toxicidade renal e gastrointestinal, sobretudo com insuficiência renal leve a moderada.. Fonte: Alimta (pemetrexede) — bula FDA/DailyMed, rev. 05/2023, seções 2.5, 5.6, 7 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f5a860f3-37ec-429c-ae04-9c88d7c55c08>; Alimta — SmPC EMA, seções 4.4 e 4.5 <https://www.ema.europa.eu/en/documents/product-information/alimta-epar-product-information_en.pdf>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 11,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Paclitaxel",
+      "drogaBouClasse": "Clopidogrel",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 12. Paclitaxel × Clopidogrel. Efeito: Mais neuropatia periférica grave. Agergaard 2017 (48 casos vs 88 controles em uso de AAS): HR 1,7 (IC95% 0,9–3,0) no total e HR 2,3 (IC95% 1,1–4,5) em regimes de paclitaxel de dose alta.. Fonte: Paclitaxel injeção (Hospira) — bula FDA/DailyMed, rev. 07/2026, Clinical Pharmacology/Precautions (Drug Interactions) <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ea28753a-8631-460a-bfdc-b101eb8ac84a>; Plavix (clopidogrel) — bula FDA/DailyMed, rev. 05/2025, seção 7.8 e 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=de8b0b67-eb25-4684-83b5-7ad785314227>; Agergaard K et al. Clopidogrel-Paclitaxel Drug-Drug Interaction: A Pharmacoepidemiologic Study. Clin Pharmacol Ther. 2017;102(3):547-553. doi:10.1002/cpt.674 <https://pubmed.ncbi.nlm.nih.gov/28224612/>; FDA — Examples of Drugs that Interact with CYP Enzymes and Transporter Systems (tabela) <https://www.fda.gov/drugs/drug-interactions-labeling/healthcare-professionals-fdas-examples-drugs-interact-cyp-enzymes-and-transporter-systems>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 12,
+      "gravidadeEditorial": "Moderada a maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Docetaxel",
+      "drogaBouClasse": "Inibidores fortes de CYP3A4 (cetoconazol, itraconazol, claritromicina, ritonavir e outros inibidores de protease, voriconazol etc.)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 13. Docetaxel × Inibidores fortes de CYP3A4 (cetoconazol, itraconazol, claritromicina, ritonavir e outros inibidores de protease, voriconazol etc.). Efeito: Aumento da exposição → maior toxicidade (neutropenia etc.).. Fonte: Docetaxel injeção (Baxter) — bula FDA/DailyMed, rev. 08/2025, seções 2.7, 7, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=654319ae-e5f9-4a6a-b566-201923153b6e>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 13,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Doxorrubicina (antraciclinas)",
+      "drogaBouClasse": "Trastuzumabe",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 14. Doxorrubicina (antraciclinas) × Trastuzumabe. Efeito: Aumento do risco de disfunção cardíaca / insuficiência cardíaca.. Fonte: Adriamycin (doxorrubicina, Hikma) — bula FDA/DailyMed, rev. 04/2024, seções 7.1–7.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0f153c1e-efce-4276-8273-d9e4c8455d16>; Herceptin (trastuzumabe) — bula FDA/DailyMed, rev. 05/2026, seção 7 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=492dbdb2-077e-4064-bff3-372d6af0a7a2>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 14,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Erlotinibe",
+      "drogaBouClasse": "Inibidores da bomba de prótons (omeprazol etc.); antagonistas H2; antiácidos",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 15. Erlotinibe × Inibidores da bomba de prótons (omeprazol etc.); antagonistas H2; antiácidos. Efeito: Menor exposição → possível perda de eficácia; aumentar a dose não compensa.. Fonte: Erlotinibe comprimidos (Camber) — bula FDA/DailyMed, rev. 06/2024, seções 2.4, 7, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a3b2d622-b4d5-4819-862b-f8fd3adcec6f>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 15,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Gefitinibe",
+      "drogaBouClasse": "Inibidores da bomba de prótons; antagonistas H2; antiácidos",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 16. Gefitinibe × Inibidores da bomba de prótons; antagonistas H2; antiácidos. Efeito: Menor exposição → possível perda de eficácia.. Fonte: Iressa (gefitinibe) — bula FDA/DailyMed, rev. 02/2023, seções 7.1, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=827d60e8-7e07-41b7-c28b-49ef1c4a5a41>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 16,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Pazopanibe",
+      "drogaBouClasse": "Redutores de acidez gástrica (IBP, p. ex., esomeprazol; antagonistas H2)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 17. Pazopanibe × Redutores de acidez gástrica (IBP, p. ex., esomeprazol; antagonistas H2). Efeito: Menor exposição → possível perda de eficácia.. Fonte: Votrient (pazopanibe) — bula FDA/DailyMed, rev. 12/2025, seções 2.4, 7.4, 7.5, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=eeaaaf38-fb86-4d9f-a19d-0f61daac2fd7>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 17,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "inibidor de tirosina quinase com prolongamento de QT: pazopanibe, sunitinibe, osimertinibe",
+      "drogaBouClasse": "Fármacos que prolongam o QT/QTc (especialmente os com risco conhecido de torsades de pointes)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 18. inibidor de tirosina quinase com prolongamento de QT: pazopanibe, sunitinibe, osimertinibe × Fármacos que prolongam o QT/QTc (especialmente os com risco conhecido de torsades de pointes). Efeito: Prolongamento do QTc, risco de torsades de pointes.. Fonte: Votrient (pazopanibe) — bula FDA/DailyMed, rev. 12/2025, seções 2.4, 7.4, 7.5, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=eeaaaf38-fb86-4d9f-a19d-0f61daac2fd7>; Tagrisso (osimertinibe) — bula FDA/DailyMed, rev. 09/2026, seções 2.5, 7.1, 7.3, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5e81b4a7-b971-45e1-9c31-29cea8c87ce7>; Sutent (sunitinibe) — bula FDA/DailyMed, rev. 02/2026, seções 2.5, 7.1, 7.2, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=43a4d7f8-48ae-4a63-9108-2fa8e3ea9d9c>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 18,
+      "gravidadeEditorial": "Maior (pazopanibe, osimertinibe) / Moderada (sunitinibe)",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Osimertinibe",
+      "drogaBouClasse": "Indutores fortes de CYP3A (rifampicina, carbamazepina, fenitoína, erva-de-são-joão)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 19. Osimertinibe × Indutores fortes de CYP3A (rifampicina, carbamazepina, fenitoína, erva-de-são-joão). Efeito: Redução da exposição → possível perda de eficácia.. Fonte: Tagrisso (osimertinibe) — bula FDA/DailyMed, rev. 09/2026, seções 2.5, 7.1, 7.3, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5e81b4a7-b971-45e1-9c31-29cea8c87ce7>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 19,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Sunitinibe",
+      "drogaBouClasse": "Inibidores fortes de CYP3A4 (p. ex., cetoconazol) / indutores fortes (p. ex., rifampicina)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 20. Sunitinibe × Inibidores fortes de CYP3A4 (p. ex., cetoconazol) / indutores fortes (p. ex., rifampicina). Efeito: Inibidor: mais toxicidade. Indutor: possível perda de eficácia.. Fonte: Sutent (sunitinibe) — bula FDA/DailyMed, rev. 02/2026, seções 2.5, 7.1, 7.2, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=43a4d7f8-48ae-4a63-9108-2fa8e3ea9d9c>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 20,
+      "gravidadeEditorial": "Moderada a maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Cabozantinibe (comprimidos Cabometyx)",
+      "drogaBouClasse": "Inibidores fortes de CYP3A4 (cetoconazol, toranja) / indutores fortes ou moderados (rifampicina, erva-de-são-joão)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 21. Cabozantinibe (comprimidos Cabometyx) × Inibidores fortes de CYP3A4 (cetoconazol, toranja) / indutores fortes ou moderados (rifampicina, erva-de-são-joão). Efeito: Inibidor: mais reações adversas. Indutor: possível perda de eficácia.. Fonte: Cabometyx (cabozantinibe) — bula FDA/DailyMed, rev. 10/2025, seções 2.4, 2.5, 7.1, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=3850cce2-6137-42e5-a792-d318c4a4b3b5>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 21,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": "Esomeprazol não teve efeito clinicamente significativo sobre o cabozantinibe (bula 12.3)."
+    },
+    {
+      "drogaA": "Ribociclibe",
+      "drogaBouClasse": "Fármacos que prolongam o QT (p. ex., antiarrítmicos) e inibidores fortes de CYP3A",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 22. Ribociclibe × Fármacos que prolongam o QT (p. ex., antiarrítmicos) e inibidores fortes de CYP3A. Efeito: Prolongamento do QTc / arritmia; mais toxicidade.. Fonte: Kisqali (ribociclibe) — bula FDA/DailyMed, rev. 07/2026, seções 2.2, 5.3, 7.1, 7.4 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=aaeaef94-f3f5-4367-8ea2-b181d7be2da8>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 22,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Palbociclibe",
+      "drogaBouClasse": "Inibidores fortes de CYP3A (itraconazol, cetoconazol, claritromicina, posaconazol, voriconazol, ritonavir; toranja)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 23. Palbociclibe × Inibidores fortes de CYP3A (itraconazol, cetoconazol, claritromicina, posaconazol, voriconazol, ritonavir; toranja). Efeito: Mais toxicidade (neutropenia).. Fonte: Ibrance (palbociclibe) comprimidos — bula FDA/DailyMed, rev. 07/2026, seções 2.2, 7.1, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fecbdd7d-b729-41b5-9872-231b8fe104ce>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 23,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": "Evitar também indutores fortes de CYP3A (rifampicina reduziu a AUC em 85%)."
+    },
+    {
+      "drogaA": "Abiraterona",
+      "drogaBouClasse": "Indutores fortes de CYP3A4 (rifampicina, fenitoína, carbamazepina, fenobarbital, rifabutina, erva-de-são-joão)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 24. Abiraterona × Indutores fortes de CYP3A4 (rifampicina, fenitoína, carbamazepina, fenobarbital, rifabutina, erva-de-são-joão). Efeito: Possível perda de eficácia.. Fonte: Zytiga (abiraterona) — bula FDA/DailyMed, rev. 03/2025, seções 2.5, 7.1, 7.2 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4e338e89-3cf2-48eb-b6e2-a06c608c6513>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 24,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Abiraterona",
+      "drogaBouClasse": "Substratos de CYP2D6 com índice terapêutico estreito (p. ex., tioridazina); substratos de CYP2C8",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 25. Abiraterona × Substratos de CYP2D6 com índice terapêutico estreito (p. ex., tioridazina); substratos de CYP2C8. Efeito: Aumento da exposição/toxicidade do substrato.. Fonte: Zytiga (abiraterona) — bula FDA/DailyMed, rev. 03/2025, seções 2.5, 7.1, 7.2 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4e338e89-3cf2-48eb-b6e2-a06c608c6513>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 25,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Abiraterona",
+      "drogaBouClasse": "Espironolactona",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 26. Abiraterona × Espironolactona. Efeito: Possível elevação do PSA/interferência na resposta; espironolactona não foi permitida nos estudos pivotais.. Fonte: Zytiga — SmPC EMA, seções 4.5 e 5.1 <https://www.ema.europa.eu/en/documents/product-information/zytiga-epar-product-information_en.pdf>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 26,
+      "gravidadeEditorial": "Moderada (uso não recomendado)",
+      "observacaoCsv": "Não consta na seção 7 da bula FDA consultada (Zytiga, rev. 03/2025)."
+    },
+    {
+      "drogaA": "Enzalutamida",
+      "drogaBouClasse": "Substratos de CYP3A4, CYP2C9 ou CYP2C19 em que pequena queda de concentração causa falha terapêutica (p. ex., midazolam, varfarina, omeprazol; também imunossupressores e anticoagulantes diretos — avaliar a bula de cada um)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 27. Enzalutamida × Substratos de CYP3A4, CYP2C9 ou CYP2C19 em que pequena queda de concentração causa falha terapêutica (p. ex., midazolam, varfarina, omeprazol; também imunossupressores e anticoagulantes diretos — avaliar a bula de cada um). Efeito: Falha terapêutica do fármaco concomitante; se houver metabólitos ativos, a exposição a eles pode aumentar.. Fonte: Xtandi (enzalutamida) — bula FDA/DailyMed, rev. 07/2026, seções 2.3, 7.1, 7.2, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b129fdc9-1d8e-425c-a5a9-8a2ed36dfbdf>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 27,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": "Relacionada (não contada): genfibrozila (inibidor forte de CYP2C8) aumenta a AUC de enzalutamida + N-desmetil 2,2× → evitar; se inevitável, enzalutamida 80 mg/dia. Indutor forte de CYP3A4 inevitável: 160→240 mg/dia."
+    },
+    {
+      "drogaA": "Olaparibe (comprimidos)",
+      "drogaBouClasse": "Inibidores fortes (itraconazol, claritromicina etc.) ou moderados (fluconazol etc.) de CYP3A",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 28. Olaparibe (comprimidos) × Inibidores fortes (itraconazol, claritromicina etc.) ou moderados (fluconazol etc.) de CYP3A. Efeito: Mais reações adversas (mielossupressão etc.).. Fonte: Lynparza (olaparibe) comprimidos — bula FDA/DailyMed, rev. 07/2025, seções 2.4, 7.2, 12.3 <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=741ff3e3-dc1a-45a6-84e5-2481b27131aa>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 28,
+      "gravidadeEditorial": "Maior",
+      "observacaoCsv": null
+    },
+    {
+      "drogaA": "Inibidores de checkpoint imune (anti-PD-1/PD-L1)",
+      "drogaBouClasse": "Corticosteroides sistêmicos basais (≥10 mg/dia de prednisona-equivalente no início do ICI)",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 29. Inibidores de checkpoint imune (anti-PD-1/PD-L1) × Corticosteroides sistêmicos basais (≥10 mg/dia de prednisona-equivalente no início do ICI). Efeito: Arbour 2018 (CPNPC, n=640; 14% com ≥10 mg/dia): associação com menor TRO, SLP e SG; na análise multivariada, SLP HR 1,3 e SG HR 1,7. Ricciuti 2019 (n=650): pior desfecho apenas quando o corticoide era por indicação paliativa ligada ao câncer, e não por indicações não oncológicas → forte confundimento por prognóstico.. Fonte: Arbour KC et al. Impact of Baseline Steroids on Efficacy of PD-1 and PD-L1 Blockade in Patients With NSCLC. J Clin Oncol. 2018;36(28):2872-2878. doi:10.1200/JCO.2018.79.0006 <https://pubmed.ncbi.nlm.nih.gov/30125216/>; Ricciuti B et al. ICI Outcomes for Patients With NSCLC Receiving Baseline Corticosteroids for Palliative Versus Nonpalliative Indications. J Clin Oncol. 2019;37(22):1927-1934. doi:10.1200/JCO.19.00189 <https://pubmed.ncbi.nlm.nih.gov/31206316/>; Keytruda (pembrolizumabe) — bula FDA/DailyMed, rev. 07/2026 (sem seção de interações medicamentosas) <https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9333c79b-d487-4538-a9f0-71b91a02b287>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 29,
+      "gravidadeEditorial": "Moderada (associação observacional; causalidade não estabelecida)",
+      "observacaoCsv": "A bula FDA do pembrolizumabe não contém seção de interações medicamentosas."
+    },
+    {
+      "drogaA": "Inibidores de checkpoint imune (anti-PD-1/PD-L1 ± anti-CTLA-4)",
+      "drogaBouClasse": "Antibióticos sistêmicos (sobretudo de amplo espectro) próximos ao início do ICI",
+      "mecanismo": null,
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "[VERIFICAR]",
+        "trecho": "03-interacoes-qt.csv linha 30. Inibidores de checkpoint imune (anti-PD-1/PD-L1 ± anti-CTLA-4) × Antibióticos sistêmicos (sobretudo de amplo espectro) próximos ao início do ICI. Efeito: Derosa 2018 (CCR n=121; CPNPC n=239): antibiótico nos 30 dias antes do ICI associado a SLP e SG menores (CPNPC: SG mediana 7,9 vs 24,6 meses, HR 4,4). Pinato 2019 (coorte prospectiva, n=196): antibiótico PRÉVIO, mas não concomitante, associado a pior SG (HR multivariado 3,4) e mais refratariedade primária.. Fonte: Routy B et al. Gut microbiome influences efficacy of PD-1-based immunotherapy against epithelial tumors. Science. 2018;359(6371):91-97. doi:10.1126/science.aan3706 <https://pubmed.ncbi.nlm.nih.gov/29097494/>; Derosa L et al. Negative association of antibiotics on clinical activity of ICI in patients with advanced RCC and NSCLC. Ann Oncol. 2018;29(6):1437-1444. doi:10.1093/annonc/mdy103 <https://pubmed.ncbi.nlm.nih.gov/29617710/>; Pinato DJ et al. Association of Prior Antibiotic Treatment With Survival and Response to ICI Therapy in Patients With Cancer. JAMA Oncol. 2019;5(12):1774-1778. doi:10.1001/jamaoncol.2019.2785 <https://pubmed.ncbi.nlm.nih.gov/31513236/>",
+        "edicao": null
+      },
+      "fonteVersao": null,
+      "verificadoEm": null,
+      "ativo": false,
+      "csvN": 30,
+      "gravidadeEditorial": "Moderada (associação observacional; causalidade não estabelecida)",
+      "observacaoCsv": null
+    }
   ]
 }

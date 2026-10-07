@@ -1,0 +1,64 @@
+{
+  "header": {
+    "id": "rads-interval",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-07",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-W9-43",
+      "trecho": "Mesmo sítio anatômico + mesmo método + aumento (medida ou texto) eleva suspeição: FLAG INTERVAL_PROGRESSION, exame dirigido como pendência, nunca M1. Igual à medida anterior não é aumento. Modelo 10, Paciente Teste 10.",
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-07"
+  },
+  "intervalProgression": {
+    "decisao": "D-W9-43",
+    "decisaoLateralidade": "D-W9-05",
+    "flag": "INTERVAL_PROGRESSION",
+    "bloqueiaSalvar": false,
+    "geraM1": false,
+    "igualAMedidaNaoAumenta": true,
+    "modeloMotivo": "FLAG INTERVAL_PROGRESSION em {sitio}{lado}{datas}: mesmo sítio anatômico, mesmo método e aumento. Exame dirigido é pendência. Não gera M1",
+    "textoExameDirigido": "exame dirigido sugerido como pendência",
+    "textoExameDirigidoAusente": "exame dirigido não nomeado no laudo",
+    "gruposMetodo": [
+      ["cintilografia óssea", "cintilografia", "CO"],
+      ["tomografia", "TC"],
+      ["ressonância", "RM"],
+      ["mamografia", "MMG"],
+      ["ultrassonografia", "USG"]
+    ],
+    "frasesAumento": [
+      "aumentado em relação",
+      "aumento da captação",
+      "aumento"
+    ],
+    "frasesSemAumento": [
+      "sem aumento",
+      "não aumentado",
+      "estável",
+      "inalterado",
+      "inalterada",
+      "reduzido",
+      "reduzida",
+      "diminuiu",
+      "diminuído",
+      "diminuída"
+    ],
+    "negacoes": ["não", "sem", "ausência de", "não há"],
+    "lateralidades": [
+      {"id": "esquerda", "frases": ["à esquerda", "a esquerda", "esquerda"]},
+      {"id": "direita", "frases": ["à direita", "a direita", "direita"]}
+    ],
+    "lacunas": [
+      {"chave": "histologia", "rotulo": "histologia original"},
+      {"chave": "tnm", "rotulo": "TNM"},
+      {"chave": "re", "rotulo": "RE"},
+      {"chave": "rp", "rotulo": "RP"},
+      {"chave": "her2", "rotulo": "HER2"},
+      {"chave": "dataCirurgia", "rotulo": "data da mastectomia"},
+      {"chave": "tratamentoSistemico", "rotulo": "tratamento sistêmico"}
+    ]
+  }
+}
