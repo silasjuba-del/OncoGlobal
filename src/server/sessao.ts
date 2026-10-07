@@ -17,6 +17,8 @@ export interface GerenciadorSessao {
     docs: readonly DocumentoExibido[]): void;
   bundleExibido(token: string, contexto: { patientId: string; encounterId: string }):
     readonly DocumentoExibido[] | null;
+  selecionarConsulta(token: string, contexto: { patientId: string; encounterId: string; tumorLotId?: string | null } | null): void;
+  consultaSelecionada(token: string): { patientId: string; encounterId: string; tumorLotId?: string | null } | null;
 }
 
 /** Single-user local login. Caller supplies the secret at startup; no default credentials. */
@@ -29,7 +31,7 @@ export function criarGerenciadorSessao(config: {
   const sessions = new Map<string, { sessao: SessaoTipo; bundle?: {
     contexto: { patientId: string; encounterId: string };
     docs: readonly DocumentoExibido[];
-  } }>();
+  }; consulta?: { patientId: string; encounterId: string; tumorLotId?: string | null } }>();
   const obter = (token: string): SessaoTipo | null => {
     const record = sessions.get(token);
     if (!record) return null;
@@ -63,6 +65,17 @@ export function criarGerenciadorSessao(config: {
       if (!bundle || bundle.contexto.patientId !== contexto.patientId
         || bundle.contexto.encounterId !== contexto.encounterId) return null;
       return bundle.docs.map((d) => ({ ...d }));
+    },
+    selecionarConsulta(token, contexto) {
+      if (!obter(token)) throw new Error("SESSAO_EXPIRADA");
+      const record = sessions.get(token)!;
+      if (contexto === null) delete record.consulta;
+      else record.consulta = { ...contexto };
+    },
+    consultaSelecionada(token) {
+      if (!obter(token)) return null;
+      const contexto = sessions.get(token)?.consulta;
+      return contexto ? { ...contexto } : null;
     },
   };
 }
