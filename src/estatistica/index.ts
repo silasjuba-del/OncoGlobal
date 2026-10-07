@@ -1,5 +1,5 @@
 import { ClinicalEvent, SignatureReference, type ClinicalEvent as ClinicalEventType } from "../contracts/operacao.js";
-import { TreatmentAdministration } from "../contracts/clinico.js";
+import { TreatmentAdministration, type TreatmentAdministration as TreatmentAdministrationType } from "../contracts/clinico.js";
 import type { DatabaseSync } from "node:sqlite";
 
 export const ESTATISTICA_VERSAO = "W10-LUNA4-02" as const;
@@ -17,6 +17,7 @@ export interface ProjecaoEstatistica {
   administracoesPorStatus: Record<StatusAdministracaoEstatistica, number>;
   pacientesPorStatusDeAdministracao: Record<StatusAdministracaoEstatistica, number>;
   administracoesPendentes: number;
+  administracoesConflito: number;
 }
 
 function isObject(value: unknown): value is Record<string, unknown> {
@@ -87,13 +88,51 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[]): Proj
     COMPLETA: 0, PARCIAL: 0, OMITIDA: 0, INTERROMPIDA: 0,
   };
   let documentosAssinados = 0;
-  let administracoesPendentes = 0;
+  const administracoesPorChave = new Map<string, Array<{ evento: ClinicalEventType; dado: TreatmentAdministrationType }>>();
+  const administracoesInvalidas: ClinicalEventType[] = [];
 
   for (const evento of vigentes) {
+    if (evento.tipo !== "TreatmentAdministration") continue;
+    const payload = evento.payload;
+    const data = isObject(payload) && isObject(payload.data) ? payload.data : null;
+    const parsed = data ? TreatmentAdministration.safeParse(data) : null;
+    if (!parsed?.success) {
+      administracoesInvalidas.push(evento);
+      continue;
+    }
+    const chave = JSON.stringify([evento.patientId, parsed.data.adminId]);
+    const registros = administracoesPorChave.get(chave) ?? [];
+    registros.push({ evento, dado: parsed.data });
+    administracoesPorChave.set(chave, registros);
+  }
+
+  let administracoesPendentes = administracoesInvalidas.length;
+  let administracoesConflito = 0;
+  for (const registros of administracoesPorChave.values()) {
+    const canonicos = new Set(registros.map(({ dado }) => JSON.stringify({
+      adminId: dado.adminId, cicloId: dado.cicloId, prescricaoRef: dado.prescricaoRef,
+      item: dado.item, droga: dado.droga, quantidadeEfetivaMg: dado.quantidadeEfetivaMg,
+      status: dado.status, motivo: dado.motivo, inicio: dado.inicio, fim: dado.fim,
+    })));
+    if (canonicos.size > 1) {
+      // Competing current versions of one administration are unresolved facts.
+      administracoesConflito += 1;
+      administracoesPendentes += 1;
+      continue;
+    }
+    // Same adminId and same clinical payload is one administration, even if
+    // duplicated across confirmed ledger rows with different provenance.
+    const { evento, dado } = registros[0]!;
+    administracoesPorStatus[dado.status] += 1;
+    statusSets[dado.status].add(evento.patientId);
+  }
+
+  for (const evento of vigentes) {
+    pacientes.add(evento.patientId);
     const categoria = categoriaEvento(evento.tipo);
     eventosPorCategoria[categoria] += 1;
-    pacientes.add(evento.patientId);
     pacientesPorCategoria[categoria].add(evento.patientId);
+    if (evento.tipo === "TreatmentAdministration") continue;
 
     if (evento.tipo === "DOCUMENTO" && evento.revisao === "ASSINADO") {
       const payload = evento.payload;
@@ -105,18 +144,6 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[]): Proj
       }
     }
 
-    if (evento.tipo === "TreatmentAdministration") {
-      const payload = evento.payload;
-      const data = isObject(payload) && isObject(payload.data) ? payload.data : null;
-      const parsed = data ? TreatmentAdministration.safeParse(data) : null;
-      if (!parsed?.success) {
-        administracoesPendentes += 1;
-        continue;
-      }
-      const status = parsed.data.status;
-      administracoesPorStatus[status] += 1;
-      statusSets[status].add(evento.patientId);
-    }
   }
 
   return {
@@ -139,6 +166,7 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[]): Proj
       INTERROMPIDA: statusSets.INTERROMPIDA.size,
     },
     administracoesPendentes,
+    administracoesConflito,
   };
 }
 

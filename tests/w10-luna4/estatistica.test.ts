@@ -26,8 +26,9 @@ function ledgerEvent(id: string, patientId: string, tipo: string, data: unknown,
 }
 function confirmRealLedgerRecord(db: ReturnType<typeof abrirLedger>, input: {
   eventId: string; tipo: string; payload: unknown; revisao: "CONFIRMADO" | "ASSINADO"; patientId: string;
+  em?: string; supersedesEventId?: string | null;
 }) {
-  const em = "2026-10-01T10:00:00-03:00";
+  const em = input.em ?? "2026-10-01T10:00:00-03:00";
   salvarDraft(db, { draftId: `draft-${input.eventId}`, patientId: input.patientId,
     sourceId: `source-${input.eventId}`, rawRef: `opaque-${input.eventId}`, payload: input.payload,
     diagnostics: [], revision: 0, criadoEm: em });
@@ -35,9 +36,10 @@ function confirmRealLedgerRecord(db: ReturnType<typeof abrirLedger>, input: {
     operationId: `operation-${input.eventId}`, patientId: input.patientId, tumorLotId: "tumor-01",
     encounterId: `encounter-${input.eventId}`, reviewDecisionId: `review-${input.eventId}`,
     sessao: { medicoId: "medico-teste", crm: "CRM-SINTETICO", emitidaEm: em,
-      expiraEm: "2026-10-02T10:00:00-03:00" }, em,
+      expiraEm: new Date(Date.parse(em) + 86_400_000).toISOString() }, em,
     registros: [{ draftId: `draft-${input.eventId}`, expectedRevision: 0, eventId: input.eventId,
-      tipo: input.tipo, payload: input.payload, fontes: [], revisao: input.revisao }],
+      tipo: input.tipo, payload: input.payload, fontes: [], revisao: input.revisao,
+      supersedesEventId: input.supersedesEventId ?? null }],
   };
 }
 
@@ -63,7 +65,7 @@ describe("W10-LUNA4 F08 · projeção estatística do ledger", () => {
       expect(json).not.toContain(forbidden);
     expect(Object.keys(projection)).toEqual([
       "versao", "totalPacientes", "eventosPorCategoria", "pacientesPorCategoria", "documentosAssinados",
-      "pacientesComDocumentoAssinado", "administracoesPorStatus", "pacientesPorStatusDeAdministracao", "administracoesPendentes",
+      "pacientesComDocumentoAssinado", "administracoesPorStatus", "pacientesPorStatusDeAdministracao", "administracoesPendentes", "administracoesConflito",
     ]);
   });
 
@@ -138,5 +140,45 @@ describe("W10-LUNA4 F08 · projeção estatística do ledger", () => {
     expect(projetarEstatistica(events)).toEqual(first);
     expect(JSON.stringify(first)).not.toContain("segredo sintético");
     db.close();
+  });
+
+  it("não conta sucessores incompatíveis do mesmo adminId; cadeia linear mantém só a versão vigente", () => {
+    const db = abrirLedger(":memory:");
+    const patientId = "paciente-teste-01";
+    const writeAdmin = (eventId: string, status: "COMPLETA" | "PARCIAL" | "OMITIDA" | "INTERROMPIDA",
+      em: string, supersedesEventId: string | null = null) => confirmar(db, confirmRealLedgerRecord(db, {
+      eventId, tipo: "TreatmentAdministration", payload: treatment(status), revisao: "CONFIRMADO",
+      patientId, em, supersedesEventId,
+    }));
+
+    expect(writeAdmin("admin-A", "COMPLETA", "2026-10-01T10:00:00-03:00").estado).toBe("GRAVADA");
+    expect(writeAdmin("admin-B", "COMPLETA", "2026-10-02T10:00:00-03:00", "admin-A").estado).toBe("GRAVADA");
+    expect(writeAdmin("admin-C", "OMITIDA", "2026-10-03T10:00:00-03:00", "admin-A").estado).toBe("GRAVADA");
+    const forked = projetarEstatisticaLedger(db);
+    expect(forked.totalPacientes).toBe(1);
+    expect(forked.eventosPorCategoria.ADMINISTRACAO).toBe(2); // dois eventos atuais, uma administração conflitante não contabilizada
+    expect(forked.administracoesPorStatus).toEqual({ COMPLETA: 0, PARCIAL: 0, OMITIDA: 0, INTERROMPIDA: 0 });
+    expect(forked.administracoesPendentes).toBe(1);
+    expect(forked.administracoesConflito).toBe(1);
+    db.close();
+
+    const linear = abrirLedger(":memory:");
+    expect(confirmar(linear, confirmRealLedgerRecord(linear, {
+      eventId: "linear-A", tipo: "TreatmentAdministration", payload: treatment("COMPLETA"),
+      revisao: "CONFIRMADO", patientId, em: "2026-10-01T10:00:00-03:00",
+    })).estado).toBe("GRAVADA");
+    expect(confirmar(linear, confirmRealLedgerRecord(linear, {
+      eventId: "linear-B", tipo: "TreatmentAdministration", payload: treatment("OMITIDA"),
+      revisao: "CONFIRMADO", patientId, em: "2026-10-02T10:00:00-03:00", supersedesEventId: "linear-A",
+    })).estado).toBe("GRAVADA");
+    expect(confirmar(linear, confirmRealLedgerRecord(linear, {
+      eventId: "linear-C", tipo: "TreatmentAdministration", payload: treatment("PARCIAL"),
+      revisao: "CONFIRMADO", patientId, em: "2026-10-03T10:00:00-03:00", supersedesEventId: "linear-B",
+    })).estado).toBe("GRAVADA");
+    const current = projetarEstatisticaLedger(linear);
+    expect(current.administracoesPorStatus).toEqual({ COMPLETA: 0, PARCIAL: 1, OMITIDA: 0, INTERROMPIDA: 0 });
+    expect(current.administracoesPendentes).toBe(0);
+    expect(current.administracoesConflito).toBe(0);
+    linear.close();
   });
 });
