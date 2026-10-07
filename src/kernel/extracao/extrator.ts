@@ -82,7 +82,9 @@ export const extratorDeterministico: Extrator = {
       const dataUnicaNaLinha = datasLinha.length === 1 && !referenciasNaLinha.includes(datasLinha[0]!)
         ? datasLinha[0] : null;
       for (const trecho of visiveis.trechos) {
-      const clausulas = trecho.split(";");
+      // Uma nova afirmação explícita encerra a negação anterior; uma simples
+      // lista ("nega dor, náusea") continua sob a mesma negação.
+      const clausulas = trecho.split(/;|,\s*(?=(?:mas\s+)?(?:relata|refere|apresenta|informa)\b)/iu);
       for (const clausula of clausulas) {
       const raw = clausula.trim();
       if (!raw) continue;

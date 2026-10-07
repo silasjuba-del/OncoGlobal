@@ -123,11 +123,14 @@ export function projetarSnapshot(
       continue;
     }
     const anterior = campos[campo];
-    const estadoBase = valor === null ? "PENDENTE" as const : "VERDE" as const; // A07: ausente nunca é VERDE
+    // A date (including a malformed one) does not establish clinical validity.
+    const estadoBase = valor === null || data.observacaoDatada === true || e.tipo === "LabResult"
+      ? "PENDENTE" as const : "VERDE" as const;
     if (!anterior) {
       campos[campo] = { valor, eventIds: [e.eventId], estado: estadoBase };
     } else if (JSON.stringify(anterior.valor) === JSON.stringify(valor) && anterior.estado !== "VERMELHO") {
       anterior.eventIds.push(e.eventId);
+      if (estadoBase === "PENDENTE") anterior.estado = "PENDENTE";
     } else {
       const candidatos = anterior.candidatos ?? anterior.eventIds.map((eventId) => ({ valor: anterior.valor, eventId }));
       candidatos.push({ valor, eventId: e.eventId });
@@ -149,34 +152,33 @@ export function projetarSnapshot(
     const ultimaData = atuais.reduce((max, item) => item.dataClinica > max ? item.dataClinica : max, "");
     const doDia = atuais.filter((item) => item.dataClinica === ultimaData)
       .sort((a, b) => a.eventId.localeCompare(b.eventId));
-    const valores = new Set(doDia.map((item) => JSON.stringify(item.valor)));
+    const porDia = new Map<string, typeof atuais>();
+    for (const item of atuais) porDia.set(item.dataClinica, [...(porDia.get(item.dataClinica) ?? []), item]);
+    // A later observation is not a resolution of competing values from an earlier day.
+    // Only explicit supersession removes an observation from this conflict check.
+    const divergentes = [...porDia.values()].flatMap((itens) =>
+      new Set(itens.map((item) => JSON.stringify(item.valor))).size > 1 ? itens : []);
     const existente = campos[campo];
-    if (existente) {
-      const valorObservado = doDia[0]?.valor ?? null;
-      if (existente.estado === "VERMELHO") {
-        campos[campo] = { ...existente, observacoes: todos };
-      } else if (existente.estado === "PENDENTE") {
-        campos[campo] = { ...existente, observacoes: todos };
-      } else if (JSON.stringify(existente.valor) !== JSON.stringify(valorObservado) || valores.size > 1) {
-        const candidatos = existente.candidatos ?? existente.eventIds.map((eventId) => ({ valor: existente.valor, eventId }));
-        candidatos.push(...doDia.map(({ valor, eventId }) => ({ valor, eventId })));
-        campos[campo] = { valor: null, estado: "VERMELHO",
-          eventIds: [...new Set([...existente.eventIds, ...doDia.map((item) => item.eventId)])].sort(),
-          candidatos: candidatos.sort((a, b) => a.eventId.localeCompare(b.eventId)), observacoes: todos };
-      } else {
-        campos[campo] = { ...existente, observacoes: todos };
-      }
+    const incompativelSemData = existente && existente.valor !== null
+      && JSON.stringify(existente.valor) !== JSON.stringify(doDia[0]?.valor ?? null);
+    if (divergentes.length || incompativelSemData) {
+      const candidatos = existente
+        ? [...(existente.candidatos ?? existente.eventIds.map((eventId) => ({ valor: existente.valor, eventId })))] : [];
+      candidatos.push(...(divergentes.length ? divergentes : doDia).map(({ valor, eventId }) => ({ valor, eventId })));
+      campos[campo] = { valor: null, estado: "VERMELHO",
+        eventIds: [...new Set(candidatos.map((item) => item.eventId))].sort(),
+        candidatos: candidatos.sort((a, b) => a.eventId.localeCompare(b.eventId)), observacoes: todos };
       continue;
     }
-    if (valores.size > 1) {
-      campos[campo] = { valor: null, eventIds: doDia.map((item) => item.eventId).sort(),
-        estado: "VERMELHO", candidatos: doDia.map(({ valor, eventId }) => ({ valor, eventId })),
-        observacoes: todos };
-    } else {
-      const escolhido = doDia[0]!;
-      campos[campo] = { valor: escolhido.valor, eventIds: doDia.map((item) => item.eventId).sort(),
-        estado: escolhido.valor === null ? "PENDENTE" : "VERDE", observacoes: todos };
+    if (existente) {
+      campos[campo] = { ...existente,
+        estado: existente.estado === "VERMELHO" ? "VERMELHO" : "PENDENTE", observacoes: todos };
+      continue;
     }
+    const escolhido = doDia[0]!;
+    campos[campo] = { valor: escolhido.valor, eventIds: doDia.map((item) => item.eventId).sort(),
+      // Most recent is a display order only. No validity/fitness rule was evaluated.
+      estado: "PENDENTE", observacoes: todos };
   }
   // IDs não carregam precedência clínica: só a relação supersedes decide
   // substituição. Ordenar a representação não elege candidato nem oculta conflito.

@@ -146,19 +146,27 @@ export function normalizarFatos(state: ExtractionState): ExtractionState {
 
 /** 5 — reconciliação multifonte: cada campo vira `ReconciledField` + conflitos explícitos. */
 export function reconciliarFontes(state: ExtractionState): ExtractionState {
+  const grupos = [...new Set(state.facts.map((fact) => fact.segmentId))]
+    .map((segmentId) => ({ segmentId, facts: state.facts.filter((fact) => fact.segmentId === segmentId) }));
+  // Segmentos ainda não vinculados são identidades distintas. Só um consumidor
+  // com vínculo médico explícito pode reconciliar fontes de segmentos diferentes.
   return {
     ...state,
-    fields: reconciliarCampos(state.facts),
-    conflitos: detectarConflitos(state.facts),
+    fields: Object.fromEntries(grupos.flatMap(({ segmentId, facts }) =>
+      Object.entries(reconciliarCampos(facts)).map(([key, value]) =>
+        [grupos.length > 1 ? `${segmentId}::${key}` : key, value]))),
+    conflitos: grupos.flatMap(({ facts }) => detectarConflitos(facts)),
   };
 }
 
 /** 6 — SafetyValidator: os 7 invariantes anti-alucinação (FUGU-08). */
 export function validarSeguranca(state: ExtractionState): ExtractionState {
-  const resultado = validarSegurancaAntiAlucinacao(state.facts, {
-    conflitoTemporalDetectado: state.conflitos.some((c) => c.kind === "TEMPORAL_CONFLICT"),
-  });
-  return { ...state, facts: resultado.facts, rejeitados: resultado.rejeitados, violacoes: resultado.violacoes };
+  const resultados = [...new Set(state.facts.map((fact) => fact.segmentId))].map((segmentId) =>
+    validarSegurancaAntiAlucinacao(state.facts.filter((fact) => fact.segmentId === segmentId), {
+      conflitoTemporalDetectado: state.conflitos.some((c) => c.kind === "TEMPORAL_CONFLICT" && c.segmentId === segmentId),
+    }));
+  return { ...state, facts: resultados.flatMap((r) => r.facts),
+    rejeitados: resultados.flatMap((r) => r.rejeitados), violacoes: resultados.flatMap((r) => r.violacoes) };
 }
 
 /** 7 — conflitos/pendências viram a caixa de revisão (o que vai ao médico). */
@@ -173,14 +181,21 @@ export function classificarExcecoes(state: ExtractionState): ExtractionState {
     .map(excecaoDeNumeroFalado);
   const farmacosIncertos = state.facts.filter((f) => f.domain === "drug" && f.evidence === "INFERRED")
     .map(excecaoDeFarmacoIncerto);
-  const series = seriesDeImagem(state.facts);
+  const grupos = state.segments.length
+    ? state.segments.map(({ id }) => ({ segmentId: id, facts: state.facts.filter((fact) => fact.segmentId === id) }))
+    : [{ segmentId: null, facts: state.facts }];
+  const series = grupos.flatMap(({ facts }) => seriesDeImagem(facts));
   const progressoes = excecoesProgressao(series);
-  const requisitos = requiredBiomarkers({
-    tumor: state.input.tumorContexto?.tumor ?? tumorDosFatos(state.facts),
-    histologia: state.input.tumorContexto?.histologia ?? histologiaDosFatos(state.facts),
-    estadio: state.input.tumorContexto?.estadio ?? null,
+  const faltantes = grupos.flatMap(({ segmentId, facts }) => {
+    // Contexto único da entrada não pode ser herdado por vários pacientes.
+    const contexto = state.segments.length <= 1 ? state.input.tumorContexto : undefined;
+    const requisitos = requiredBiomarkers({
+      tumor: contexto?.tumor ?? tumorDosFatos(facts),
+      histologia: contexto?.histologia ?? histologiaDosFatos(facts),
+      estadio: contexto?.estadio ?? null,
+    });
+    return faltantesObrigatorios(facts, requisitos, segmentId);
   });
-  const faltantes = faltantesObrigatorios(state.facts, requisitos, state.segments[0]?.id ?? null);
   const caixaRevisao = montarCaixaRevisao({
     fatos: state.facts,
     conflitos: state.conflitos, vinculos,

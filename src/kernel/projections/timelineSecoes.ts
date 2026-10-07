@@ -27,7 +27,9 @@ export function secoesDaTimeline(timeline: PatientTimeline): SecoesTimeline {
     : secaoVazia<TreatmentEntry>("sem tratamento documentado: PENDENTE");
 
   const recist = timeline.recist.length
-    ? secaoDe("VERDE", "avaliações RECIST calculadas por código (src/rules/recist)", timeline.recist)
+    ? timeline.recist.some((avaliacao) => avaliacao.revisao !== "CONFIRMADO" || avaliacao.categoria === null)
+      ? secaoDe("PENDENTE", "avaliações RECIST propostas ou incompletas; revisão médica pendente", timeline.recist)
+      : secaoDe("VERDE", "avaliações RECIST confirmadas pelo médico", timeline.recist)
     : secaoVazia<RecistAvaliacao>("RECIST não calculado aqui: cálculo é de src/rules/recist; categoria nasce PROPOSTA");
 
   const pendencias = timeline.missingRequiredData.length

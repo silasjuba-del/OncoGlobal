@@ -1,18 +1,21 @@
 import { ClinicalEvent, SignatureReference, type ClinicalEvent as ClinicalEventType } from "../contracts/operacao.js";
 import { TreatmentAdministration, type TreatmentAdministration as TreatmentAdministrationType } from "../contracts/clinico.js";
 import type { DatabaseSync } from "node:sqlite";
+import { DataCivil, Instante } from "../contracts/base.js";
 
 export const ESTATISTICA_VERSAO = "W10-LUNA4-02" as const;
 
 export type CategoriaEventoEstatistico = "FATO" | "DOCUMENTO" | "ADMINISTRACAO" | "OUTRO";
 export type StatusAdministracaoEstatistica = "COMPLETA" | "PARCIAL" | "OMITIDA" | "INTERROMPIDA";
+export interface PeriodoClinicoEstatistica { inicio: string; fim: string }
+export interface OpcoesEstatistica { periodoClinico?: PeriodoClinicoEstatistica }
 
 export interface ProjecaoEstatistica {
   versao: typeof ESTATISTICA_VERSAO;
-  /** O leitor atual recebe o ledger completo e não filtra intervalo clínico. */
-  escopo: "LEDGER_COMPLETO";
-  periodoClinico: null;
-  /** Coorte observável: pacientes com ao menos um evento confirmado vigente. */
+  /** Supersession is resolved on the complete ledger before applying the period. */
+  escopo: "LEDGER_COMPLETO" | "PERIODO_CLINICO";
+  periodoClinico: PeriodoClinicoEstatistica | null;
+  /** Pacientes com ao menos um evento confirmado vigente no escopo selecionado. */
   denominadorPacientes: number;
   exclusoes: {
     eventosNaoConfirmados: number;
@@ -20,6 +23,9 @@ export interface ProjecaoEstatistica {
     linhasDuplicadas: number;
     administracoesInvalidas: number;
     administracoesConflito: number;
+    eventosSemDataClinica: number;
+    eventosDataClinicaInvalida: number;
+    eventosForaPeriodo: number;
   };
   totalPacientes: number;
   eventosPorCategoria: Record<CategoriaEventoEstatistico, number>;
@@ -48,8 +54,30 @@ function fingerprint(evento: ClinicalEvent): string {
   return JSON.stringify(evento);
 }
 
+/** Exact civil day explicitly recorded for the fact, never the ingestion time.
+ * Administration uses its actual start and the civil day in its recorded offset.
+ * Source-document dates do not establish the date of the administration.
+ */
+function diaClinico(evento: ClinicalEventType): { dia: string | null; invalida: boolean } {
+  const payload = evento.payload;
+  const data = isObject(payload) && isObject(payload.data) ? payload.data : null;
+  if (!data) return { dia: null, invalida: false };
+  const value = evento.tipo === "TreatmentAdministration" ? data.inicio : data.dataClinica;
+  if (value === null || value === undefined) return { dia: null, invalida: false };
+  if (evento.tipo === "TreatmentAdministration") {
+    if (!Instante.safeParse(value).success || typeof value !== "string") return { dia: null, invalida: true };
+    return { dia: value.slice(0, 10), invalida: false };
+  }
+  const parsed = DataCivil.safeParse(value);
+  return parsed.success ? { dia: parsed.data, invalida: false } : { dia: null, invalida: true };
+}
+
 /** Regenerable, PHI-free projection from confirmed ledger events. */
-export function projetarEstatistica(eventos: readonly ClinicalEventType[]): ProjecaoEstatistica {
+export function projetarEstatistica(eventos: readonly ClinicalEventType[], opcoes: OpcoesEstatistica = {}): ProjecaoEstatistica {
+  const periodo = opcoes.periodoClinico;
+  if (periodo !== undefined && (!periodo || !DataCivil.safeParse(periodo.inicio).success
+    || !DataCivil.safeParse(periodo.fim).success || periodo.inicio > periodo.fim))
+    throw new Error("PERIODO_CLINICO_INVALIDO");
   const porId = new Map<string, ClinicalEventType>();
   const hashes = new Map<string, string>();
   let linhasDuplicadas = 0;
@@ -88,6 +116,17 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[]): Proj
   const confirmados = unicos.filter((e) => e.revisao === "CONFIRMADO" || e.revisao === "ASSINADO");
   const substituidos = new Set(confirmados.map((e) => e.supersedesEventId).filter((id): id is string => !!id));
   const vigentes = confirmados.filter((e) => !substituidos.has(e.eventId));
+  let eventosSemDataClinica = 0;
+  let eventosDataClinicaInvalida = 0;
+  let eventosForaPeriodo = 0;
+  const selecionados = periodo ? vigentes.filter((evento) => {
+    const { dia, invalida } = diaClinico(evento);
+    if (invalida) { eventosDataClinicaInvalida++; return false; }
+    if (dia === null) { eventosSemDataClinica++; return false; }
+    if (dia < periodo.inicio || dia > periodo.fim) { eventosForaPeriodo++; return false; }
+    return true;
+  }) : vigentes;
+  const idsSelecionados = new Set(selecionados.map((evento) => evento.eventId));
   const pacientes = new Set<string>();
   const pacientesPorCategoria: Record<CategoriaEventoEstatistico, Set<string>> = {
     FATO: new Set(), DOCUMENTO: new Set(), ADMINISTRACAO: new Set(), OUTRO: new Set(),
@@ -112,7 +151,7 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[]): Proj
     const data = isObject(payload) && isObject(payload.data) ? payload.data : null;
     const parsed = data ? TreatmentAdministration.safeParse(data) : null;
     if (!parsed?.success) {
-      administracoesInvalidas.push(evento);
+      if (idsSelecionados.has(evento.eventId)) administracoesInvalidas.push(evento);
       continue;
     }
     const chave = JSON.stringify([evento.patientId, parsed.data.adminId]);
@@ -124,6 +163,8 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[]): Proj
   let administracoesPendentes = administracoesInvalidas.length;
   let administracoesConflito = 0;
   for (const registros of administracoesPorChave.values()) {
+    // Filtering must not hide a competing current version just outside the period.
+    if (!registros.some(({ evento }) => idsSelecionados.has(evento.eventId))) continue;
     const canonicos = new Set(registros.map(({ dado }) => JSON.stringify({
       adminId: dado.adminId, cicloId: dado.cicloId, prescricaoRef: dado.prescricaoRef,
       item: dado.item, droga: dado.droga, quantidadeEfetivaMg: dado.quantidadeEfetivaMg,
@@ -142,7 +183,7 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[]): Proj
     statusSets[dado.status].add(evento.patientId);
   }
 
-  for (const evento of vigentes) {
+  for (const evento of selecionados) {
     pacientes.add(evento.patientId);
     const categoria = categoriaEvento(evento.tipo);
     eventosPorCategoria[categoria] += 1;
@@ -163,8 +204,8 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[]): Proj
 
   return {
     versao: ESTATISTICA_VERSAO,
-    escopo: "LEDGER_COMPLETO",
-    periodoClinico: null,
+    escopo: periodo ? "PERIODO_CLINICO" : "LEDGER_COMPLETO",
+    periodoClinico: periodo ? { inicio: periodo.inicio, fim: periodo.fim } : null,
     denominadorPacientes: pacientes.size,
     exclusoes: {
       eventosNaoConfirmados: unicos.length - confirmados.length,
@@ -172,6 +213,9 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[]): Proj
       linhasDuplicadas,
       administracoesInvalidas: administracoesInvalidas.length,
       administracoesConflito,
+      eventosSemDataClinica,
+      eventosDataClinicaInvalida,
+      eventosForaPeriodo,
     },
     totalPacientes: pacientes.size,
     eventosPorCategoria,
@@ -196,7 +240,7 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[]): Proj
 }
 
 /** Reads the complete persisted ledger; no parallel counter/cache is written. */
-export function projetarEstatisticaLedger(db: DatabaseSync): ProjecaoEstatistica {
+export function projetarEstatisticaLedger(db: DatabaseSync, opcoes: OpcoesEstatistica = {}): ProjecaoEstatistica {
   const eventos = db.prepare("SELECT * FROM clinical_event ORDER BY criadoEm, operationId, eventIndex")
     .all().map((row) => {
       const parsed = {
@@ -207,5 +251,5 @@ export function projetarEstatisticaLedger(db: DatabaseSync): ProjecaoEstatistica
       };
       return ClinicalEvent.parse(parsed);
     });
-  return projetarEstatistica(eventos);
+  return projetarEstatistica(eventos, opcoes);
 }

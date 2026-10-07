@@ -62,7 +62,8 @@ describe("W10 longitudinal delivery", () => {
       event("obs-2", "peso", 68, { criadoEm: "2030-01-01T13:00:00Z", dataClinica: "2030-02-01", observacaoDatada: true }),
     ]).campos.peso;
     expect(dated?.valor).toBe(68);
-    expect(dated?.estado).toBe("VERDE");
+    // Data clínica não é uma regra de validade ou normalidade do serviço.
+    expect(dated?.estado).toBe("PENDENTE");
     expect(dated?.observacoes?.map((item) => item.valor)).toEqual([70, 68]);
 
     const sameDayConflict = snapshot([
