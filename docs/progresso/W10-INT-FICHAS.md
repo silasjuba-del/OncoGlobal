@@ -122,3 +122,7 @@ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-int-fichas
    Start at  01:50:24
    Duration  7.72s (import 71%, transform 15%, tests 14%, worker 1%)
 ```
+
+## INT-FICHAS-12 · esquemas novos (D-W9-61)
+11 fichas RASCUNHO acrescentadas ao gerador (total 71): GEMOX (SOnHe GemOx p. 227: gem 1.000 D1/D8, oxali 130 D1); Carboplatina + Paclitaxel semanal de cabeça e pescoço (pacli 80, AUC 2; análogo SOnHe colo p. 51/mama p. 21); Ifosfamida + Mesna (colo p. 54: 1.200 mg/m² D1-D5, mesna 600 em 0 e 4 h); Ifosfamida + Gemcitabina e Ifosfamida + Topotecana (sem fonte: doses null); AC-TH fase AC (SOnHe p. 20, 60/600) e fase TH (SOnHe TH p. 21; trastuzumabe ataque 8 depois 6 mg/kg; SBOC 2026); FOLFIRI + Bevacizumabe (bev 5 mg/kg, SOnHe p. 104; 5-FU 46 h sem bolus); Temozolomida (gliomas p. 369, 200 mg/m² D1-D5 q28); Cisplatina semanal 40 + RxT (colo p. 51).
+Null: mesna 8 h em todas as fichas com ifosfamida; ifosfamida, gemcitabina, topotecana e mesna 0/4 h nas duas combinações; infusão do trastuzumabe e bevacizumabe; ciclos em vários. Mayo 425 e carbo+pacli semanal AUC 2 inalterados. Regenerar também atualizou FLOT/AT (D-W9-59 vindos do merge).

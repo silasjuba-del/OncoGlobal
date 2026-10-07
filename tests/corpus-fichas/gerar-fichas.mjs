@@ -31,7 +31,7 @@ function pagSonhe([tumor, proto]) {
 
 // ---------- construtores de item ----------
 const slug = (s) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-const UN = { m2: ["MG_M2", "mg/m²"], mg: ["FIXED", "mg"], auc: ["AUC", "AUC"], ugkg: ["MG_KG", "µg/kg"], fr: ["FIXED", "frasco"], ml: ["FIXED", "mL"] };
+const UN = { m2: ["MG_M2", "mg/m²"], mg: ["FIXED", "mg"], auc: ["AUC", "AUC"], ugkg: ["MG_KG", "µg/kg"], mgkg: ["MG_KG", "mg/kg"], fr: ["FIXED", "frasco"], ml: ["FIXED", "mL"] };
 function it(drug, classe, dose, un, route, days, o = {}) {
   const [doseBasis, unit] = UN[un];
   return {
@@ -321,6 +321,61 @@ F({ tumor: "Não informado (ficha institucional)", nome: "Cisplatina + Gemcitabi
   div: ["Fora da planilha: cisplatina em D1 e D8; doses ausentes na ficha real (Dose Prot 0): null (PENDENTE da base de cálculo)."],
   itens: [qt("Gemcitabina", null, "m2", D(1, 8), { t: "30 min", dil: "SF 0,9%", vol: 250, obs: "Ficha real P1477: dose fixa com Dose Prot 0; base mg/m² ausente [VERIFICAR]." }),
     CIS(null, D(1, 8), { dil: "SF 0,9%", vol: 500, obs: "Cisplatina D1 e D8 (D-W9-34d): hidratação Mg/K nos dois dias. Ficha real P1477: dose fixa com Dose Prot 0; base mg/m² ausente [VERIFICAR]." })] });
+
+// ===== ESQUEMAS NOVOS (D-W9-61): fonte de dose/dias = SOnHe quando houver; dose sem fonte = null =====
+const NI = "Não informado (ficha institucional)";
+const MESNA3 = (dose, days, nota) => [
+  qt("Mesna (0 h)", dose, "m2", days, { t: "15 min", obs: `Junto com a ifosfamida (0 h). ${nota}` }),
+  it("Mesna (4 h)", "POS_QT", dose, "m2", "EV", days, { t: "15 min", obs: `4 h após o início da ifosfamida. ${nota}` }),
+  it("Mesna (8 h)", "POS_QT", null, "m2", "EV", days, { t: "15 min", obs: "8 h após o início da ifosfamida: cobertura nos 3 tempos 0/4/8 h (AVALIACAO-CONSULTAS-E-CONSOLIDADO §3.3 item 6). O SOnHe só traz 0 e 4 h: dose do 8 h sem fonte = null [VERIFICAR]." }),
+];
+const NOTA_MESNA_SONHE = "SOnHe: mesna 600 mg/m² em 0 e 4 h após a ifosfamida; o terceiro horário (8 h) foi acrescentado pela regra de cobertura 0/4/8 h.";
+F({ tumor: NI, nome: "GEMOX", cenario: PAL, intervalo: 21, ciclos: null, premedDias: D(1, 8), sonhe: [["Testículo", "GemOx"]],
+  fonteExtra: "tumor da ficha não definido: o único GemOx do SOnHe está no capítulo de testículo; uso real citado em AVALIACAO-CONSULTAS-E-CONSOLIDADO §4 (oxaliplatina ~100, gemcitabina ~1000)",
+  div: ["Oxaliplatina: SOnHe 130 mg/m² D1; uso real do consolidado ~100 mg/m² (vale SOnHe, D-W9-50; conferir [VERIFICAR]).", "Tumor/cenário/ciclos: o SOnHe traz GemOx só em testículo (paliativo, até progressão)."],
+  itens: [qt("Gemcitabina", 1000, "m2", D(1, 8), { t: "30 min", obs: "SOnHe GemOx p. 227: 1.000 mg/m² em D1 e D8." }),
+    qt("Oxaliplatina", 130, "m2", D(1), { t: "2 h", obs: "SOnHe GemOx p. 227: 130 mg/m² em D1. Consolidado: uso real ~100 mg/m² [VERIFICAR]." })] });
+F({ tumor: HN, nome: "Carboplatina + Paclitaxel semanal", cenario: NE, intervalo: 7, ciclos: null, sonhe: [["Colo de útero", "Carboplatina + Paclitaxel semanal (indução)"]],
+  fonteExtra: "uso real em cabeça e pescoço em AVALIACAO-CONSULTAS-E-CONSOLIDADO §4 (paclitaxel 80 + carboplatina AUC 1,5 em um caso); AUC 2 decidida pelo Dr. Silas (D-W9-61); o SOnHe não traz carbotaxol semanal de cabeça e pescoço: paclitaxel 80 e AUC 2 tomados do esquema semanal do SOnHe de colo (p. 51) e de mama (p. 21)",
+  div: ["Carboplatina: AUC 2 (Dr. Silas, D-W9-61); consolidado registra AUC 1,5 em um caso real e o SOnHe de mama aceita 1,5 a 2."],
+  itens: [qt("Paclitaxel", 80, "m2", D(1), { t: "60 min", obs: "Semanal. Dose do esquema semanal do SOnHe (colo p. 51 / mama p. 21) e do uso real do consolidado." }),
+    qt("Carboplatina", 2, "auc", D(1), { t: "60 min", obs: "Calvert (AUC 2) semanal, decidido pelo Dr. Silas (D-W9-61)." })] });
+F({ tumor: "Colo do útero", nome: "Ifosfamida + Mesna", cenario: PAL, intervalo: 21, ciclos: null, premedDias: R(1, 5), sonhe: [["Colo de útero", "Ifosfamida monoterapia"]],
+  div: ["Ifosfamida 1.200 mg/m² D1-D5 q21 (SOnHe p. 54); o '1.200 g/m²' do capítulo de endométrio é erro do manual e não entra (D-W9-50).", "Mesna: SOnHe 600 mg/m² em 0 e 4 h; 8 h sem dose de fonte (null). Uso real do consolidado (ifosfamida 1.800, mesna 2x900) não adotado."],
+  itens: [qt("Ifosfamida", 1200, "m2", R(1, 5), { t: "60 min", obs: "SOnHe p. 54 (colo, paliativo, até progressão): 1.200 mg/m² D1 a D5 a cada 21 d. Tempo de infusão sem fonte no SOnHe [VERIFICAR]." }),
+    ...MESNA3(600, R(1, 5), NOTA_MESNA_SONHE)] });
+F({ tumor: NI, nome: "Ifosfamida + Gemcitabina", cenario: NE, intervalo: null, ciclos: null, premedDias: R(1, 5),
+  fonteExtra: "esquema sem fonte de dose/dias no SOnHe (só ifosfamida e gemcitabina em monoterapia); uso real citado em AVALIACAO-CONSULTAS-E-CONSOLIDADO §4 sem doses auditadas",
+  div: ["Doses e dias do esquema combinado sem fonte: null. Dias plausíveis (ifosfamida D1-D5, gemcitabina D1 e D8) a conferir."],
+  itens: [qt("Ifosfamida", null, "m2", R(1, 5), { t: "60 min", obs: "Dose sem fonte para o esquema combinado: null (o SOnHe só traz a monoterapia 1.200 mg/m²) [VERIFICAR]; dias a conferir." }),
+    qt("Gemcitabina", null, "m2", D(1, 8), { t: "30 min", obs: "Dose sem fonte para o esquema combinado: null [VERIFICAR]; dias a conferir." }),
+    ...MESNA3(null, R(1, 5), "Dose do 0 h e 4 h sem fonte para o esquema combinado: null [VERIFICAR].")] });
+F({ tumor: NI, nome: "Ifosfamida + Topotecana", cenario: NE, intervalo: null, ciclos: null, premedDias: R(1, 5),
+  fonteExtra: "esquema sem fonte de dose/dias no SOnHe (só ifosfamida e topotecano em monoterapia: colo p. 54, 1,5 mg/m² D1-D5); o topotecano de 1.200 mg/m² do capítulo de endométrio é erro do manual e não entra (D-W9-50)",
+  div: ["Doses e dias do esquema combinado sem fonte: null. Dias plausíveis (D1-D5) a conferir."],
+  itens: [qt("Ifosfamida", null, "m2", R(1, 5), { t: "60 min", obs: "Dose sem fonte para o esquema combinado: null [VERIFICAR]; dias a conferir." }),
+    qt("Topotecana", null, "m2", R(1, 5), { t: "30 min", obs: "Dose sem fonte para o esquema combinado: null (monoterapia SOnHe colo p. 54: 1,5 mg/m² D1-D5 q21, não transposta) [VERIFICAR]; dias a conferir." }),
+    ...MESNA3(null, R(1, 5), "Dose do 0 h e 4 h sem fonte para o esquema combinado: null [VERIFICAR].")] });
+F({ tumor: MAMA, nome: "AC-TH (fase AC)", cenario: NEO, intervalo: 21, ciclos: 4, altoRisco: true, sonhe: [[MAMA, "Esquema AC convencional"]],
+  fonteExtra: "SBOC 2026 mama (docs/referencias/evidencias/SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md): ACTH(P) como alternativa HER2+",
+  itens: [qt("Doxorrubicina", 60, "m2", D(1), { t: "10 min", obs: "Seguido da fase TH (paclitaxel semanal + trastuzumabe) após 4 ciclos." }), qt("Ciclofosfamida", 600, "m2", D(1), { t: "30 min" })] });
+F({ tumor: MAMA, nome: "AC-TH (fase TH — paclitaxel semanal + trastuzumabe)", cenario: NEO, intervalo: 21, ciclos: 4, premedDias: D(1, 8, 15), sonhe: [[MAMA, "Esquema TH"]],
+  fonteExtra: "SBOC 2026 mama (docs/referencias/evidencias/SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md): trastuzumabe ataque 8 mg/kg, depois 6 mg/kg",
+  div: ["Ciclo de 21 d com paclitaxel semanal (D1, D8, D15 = 12 semanas) para casar com o trastuzumabe q21d do SOnHe; o SOnHe mantém o trastuzumabe até completar 1 ano (fora desta ficha)."],
+  itens: [qt("Paclitaxel", 80, "m2", D(1, 8, 15), { t: "60 min", obs: "Semanal por 12 semanas (SOnHe TH p. 21)." }),
+    qt("Trastuzumabe (ataque, somente ciclo 1)", 8, "mgkg", D(1), { obs: "Dose de ataque 8 mg/kg no C1 (SOnHe TH p. 21; SBOC 2026). Tempo de infusão sem fonte: null. Usar apenas no ciclo 1." }),
+    qt("Trastuzumabe (manutenção)", 6, "mgkg", D(1), { obs: "6 mg/kg a cada 21 d, a partir do ciclo 2 (no C1 vale o ataque de 8 mg/kg); completar 1 ano de anti-HER2 (SOnHe TH p. 21; SBOC 2026). Tempo de infusão sem fonte: null." })] });
+F({ tumor: CR, nome: "FOLFIRI + Bevacizumabe", cenario: PAL, intervalo: 14, ciclos: null, atropina: true, sonhe: [["Cólon", "Esquema FOLFIRI"], ["Cólon", "Bevacizumabe (isolado ou em combinação)"]],
+  div: ["5-FU: ficha de 46 h sem bolus, total 2.400 mg/m² (D-W9-23a/50); o SOnHe do FOLFIRI traz bolus, que NÃO entra.", "Bevacizumabe 5 mg/kg q14d: SOnHe 'isolado ou em combinação' (p. 104); sem linha específica FOLFIRI + bevacizumabe."],
+  itens: [qt("Bevacizumabe", 5, "mgkg", D(1), { obs: "5 mg/kg a cada 14 d (SOnHe p. 104, 'isolado ou em combinação'). Tempo de infusão sem fonte: null." }),
+    qt("Irinotecano", 180, "m2", D(1), { t: "90 min" }), qt("Folinato de cálcio (leucovorina)", 400, "m2", D(1), { t: "2 h" }),
+    FU46(2400, "Total 2.400 mg/m² em 46 h, sem bolus (D-W9-23a); mesmo 5-FU do FOLFIRI da ficha.")] });
+F({ tumor: "Gliomas", nome: "Temozolomida monoterapia", cenario: ADJ, intervalo: 28, ciclos: 6, semPremed: true, sonhe: [["Gliomas", "Temozolamida monoterapia 200"]],
+  div: ["SOnHe p. 369: 200 mg/m² VO D1-D5 q28, 6 ciclos adjuvante (paliativo: até progressão). Sem pré-medicação EV: antiemético oral a critério [VERIFICAR]."],
+  itens: [qt("Temozolomida", 200, "m2", R(1, 5), { route: "VO", obs: "1x/dia, D1 a D5 a cada 28 d. No manual SOnHe de gliomas o primeiro ciclo após RT pode usar 150 mg/m² (esquema sequencial); não aplicado aqui [VERIFICAR]." })] });
+F({ tumor: "Colo do útero", nome: "Cisplatina semanal + RxT", cenario: RT, intervalo: 7, ciclos: null, sonhe: [["Colo de útero", "CDDP semanal"]],
+  div: ["Ciclos: SOnHe 6 a 8 semanas (null)."],
+  itens: [CIS(40, D(1), { obs: "Semanal, 6 a 8 semanas, concomitante à RxT (SOnHe colo p. 51)." })] });
 
 // ---------- saída ----------
 rmSync(SAIDA, { recursive: true, force: true });
