@@ -121,3 +121,7 @@ export const ReviewAction = z.object({
   if (a.acao === "LIGAR_PACIENTE" && !a.patientId) ctx.addIssue({ code: "custom", message: "ligar exige patientId" });
 });
 export type ReviewAction = z.infer<typeof ReviewAction>;
+
+/** Tipo canônico do evento de ledger que registra a decisão do médico na caixa de revisão (FUGU-09; tech lead W10). */
+export const TIPO_EVENTO_REVISAO = "ReviewDecision" as const;
+export type TipoEventoRevisao = typeof TIPO_EVENTO_REVISAO;
