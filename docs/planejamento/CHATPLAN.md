@@ -217,3 +217,17 @@ M-W  GATE CONTROL + RESUMO RADIONCOLÓGICO (3 blocos; saída de outro chat; PHI 
       |W6| A→B→C: diagnóstico (clínica+biópsia) → estadiamento (radiologia+labs) → tratamento (regime+trials) com alertas de incongruência   MATERIAL (liga a M-B, M-D)
       |W7| Mesma máquina de PHI: nomes/CPF/DN no exemplo → registrado desidentificado   REGISTRADO
 ```
+
+```
+M-X  FLUXO EM 6 FASES (Médico A valida → Plantonista executa) + EMERGENCY_ALARM_GENERATION (7 camadas) → PLN-020   fontes/M-X_PLN-020_fluxo-6-fases-e-emergency-alarm.md  (DESIDENTIFICADA)
+      |X1| Fases: detecção (IA) → alerta+sugestão (IA) → validação (Médico A, assinatura+CRM) → preparação de material (IA, "NOVO") → execução (Plantonista, "autoridade final": aceita/rejeita/modifica) → log A→B→Z   MATERIAL — conflito de autoridade entre Médico A e Plantonista   PENDENTE
+      |X2| PRINCÍPIO OURO: IA alerta + sugere | médico valida + decide; nenhuma ação automática sem validação médica   DECIDIDO (consistente com M-N/M-O)
+      |X3| Camada 1: 12 triggers (compressão medular, mediastinal, met. cerebral+edema, via aérea, hipercalcemia, hiponatremia, leucostase, sepse, neutropenia febril, lise, trombose, DIC, hemorragia GI) com limiares numéricos   MATERIAL (seed da KB; limiares/doses a verificar contra diretrizes) — não hard-code
+      |X4| Camada 2: template de alerta (achado, trigger, risco, evidência em tabela, sugestão NÃO-VINCULANTE, alternativas, validação obrigatória, escalação, log)   DECIDIDO (estrutura) — alinha com M-D §6
+      |X5| Camada 3: matriz de sugestões (compressão medular, hipercalcemia, met. cerebral) com condutas paralelas e doses de exemplo   MATERIAL (exemplos; erros anotados em PLN-020)
+      |X6| Camada 4: fluxo de validação com notificação por SMS/App/pop-up   PENDENTE (SMS leva PHI → gate de saída)
+      |X7| Camada 5: SLA 30 min / 2 h / 24 h / 7 d com escalação   PENDENTE (escala quem? sistema notifica coordenador = SEND)
+      |X8| Camada 6: interface EmergencyAlert (aiDetection, medicalValidation, execution, escalation, closure)   MATERIAL (contrato proposto)
+      |X9| Camada 7: dashboard "DoctorOS" com alertas em tempo real e [VALIDAR][REJEITAR][MODIFICAR]   MATERIAL (UI)
+      |X10| Checklist de 10 itens; "MÉDICO SEMPRE TEM PALAVRA FINAL"   DECIDIDO (consistente)
+```
