@@ -134,3 +134,69 @@ Executar somente pelo wrapper e lock já definidos, em grupos focais:
 | Fechamento | Regressão W3 e testes focais F01/F02 após integração serial | Saídas reais registradas, nenhum FAIL/NOT_RUN transformado em PASS, limites canônicos explícitos |
 
 Nenhuma nova rodada ampla de arquitetura ou expansão de corpus é necessária para esta aceitação. O restante é correção/reataque dos achados já abertos e ligação dos consumidores planejados.
+
+## Rodada 3 — composição HTTP L1
+
+Revisão de `C:\Users\silas\Projects\OncoGlobal-wt\w10-luna1`, HEAD-base verificado `9eb91db3d0f5de9fe9ecb4864264939deeda29f6` mais WIP de servidor/testes. **Read-only; nenhum teste executado pelo Astra.** Linhas abaixo correspondem à leitura anterior às correções desta rodada. L1 está implementando testes: estes achados são despachos para correção/reataque, não alegação sobre uma entrega final já encerrada.
+
+### ASTRA-09 — P1 — revisão de vínculo transfere rascunho já associado
+
+- `src/server/rotas.ts:376–389`: a rota `/consulta/rascunho/revisar` verifica revisão e ausência de `patientLinkReview`, mas aceita qualquer kind e qualquer `draft.patientId` anterior.
+- Prova mínima: selecionar paciente A, criar uma prescrição por `/consulta/prescricao/rascunho`, depois enviar o draftId para `/consulta/rascunho/revisar` com revisão 0 e paciente B. O envelope passa a B enquanto `payload.contexto.patientId` continua A. Documento genérico existente de A também pode ser reatribuído por esse caminho.
+- Correção: limitar a operação de vínculo inicial a EXTRACAO_RASCUNHO ainda não vinculado; validar que o paciente destinatário existe; não reaproveitar essa porta para transferência de prescrições/documentos. Transferência futura, se requerida, precisará de operação explícita que preserve origem e coerência do conteúdo.
+- Aceite: negativo HTTP mantém envelope/conteúdo/revisão originais para prescrição, documento e extração já vinculada; vínculo inicial válido continua permitido. Ajustar apenas a fixture nova de vínculo positivo para cadastrar antes o paciente-alvo.
+
+### ASTRA-10 — P1 — confirmação direta promove envelope protegido pela tela
+
+- `src/server/leituras.ts:102–105` exclui EXTRACAO_RASCUNHO/PRESCRICAO_RASCUNHO da lista de fechamento, mas `src/server/rotas.ts:114–143` não recusa esses kinds no comando.
+- Prova mínima: documento elegível D e extração vinculada E do mesmo paciente; registrar bundle exibido somente para D; enviar `/consulta/confirmar` com `registros:[D,E]` e `documentosExibidos:[D]`. G-25/hashes de D passam e E vira FATO/CONFIRMADO. A mesma composição funciona com rascunho de prescrição.
+- Impacto: a marcação de envelope para reconciliação específica não é aplicada na borda de gravação. Ocultar item do cliente não impede um comando direto.
+- Correção: bloquear esses envelopes na confirmação genérica antes do writer, mantendo-os salvos como rascunho. A futura revisão clínica de fatos/ordens deve usar operação própria; não inventar promoção de todo envelope.
+- Aceite: confirmação mista recusa atomicamente, sem assinar D nem promover E; documento convencional válido preserva o caminho existente. Fonte, negação e pendências do envelope permanecem recuperáveis.
+
+### ASTRA-11 — P1 — contexto mutável da sessão escreve prescrição no paciente errado
+
+- `src/server/rotas.ts:204–209,222–244,278–285`: a prescrição recebe só expression/templateId, sem contexto esperado; consultaSelecionada é um único valor mutável por token. Carregamento que falha não limpa seleção anterior.
+- Prova mínima: com o mesmo token, carregar A; carregar B; repetir a ação de salvar linha da primeira tela. O servidor salva em B porque o pedido não identifica A. Variante: carregar A, tentar paciente inexistente, receber 404 e enviar linha; a seleção antiga A permanece utilizável.
+- Correção: gravação de prescrição deve informar paciente/encontro esperado ou token versionado da seleção e validar a correspondência no servidor. Mudança/falha de seleção não pode redirecionar silenciosamente um comando. Preservar escopo antigo somente em operação explicitamente vinculada a ele; não inferir intenção pelo último clique global.
+- Aceite: sequência A→B com comando esperado A é recusada sem criar draft em B; pedido com contexto vigente passa; falha de carga invalida a seleção implícita. Chat setor-only tem a mesma limitação de concorrência, mas o reataque obrigatório prioritário é a gravação clínica.
+
+### ASTRA-12 — P1 — canal mistura identidade do payload com outro envelope
+
+- `src/server/leituras.ts:155–165`: `lerCanal` descarta o event da mensagem ao montar saída. O contato é comparado com `value.patientId`, não com a identidade da mensagem no ledger; revogação do contato é ignorada. Em `lerConsulta:127–128`, contatos também são filtrados somente pelo patientId do payload.
+- Prova mínima: cadastrar A/B e contato válido de B; gravar CanalMessage cujo evento pertence a A, mas payload declara B/contato de B. `/consulta/canal` devolve texto de A vinculado a B. Para cabeçalho, gravar Contato sob envelope A com payload.patientId=B: ele aparece nos contatos de B. Contato com `revogadoEm` preenchido continua apresentado como vínculo ativo.
+- Correção: exigir concordância envelope/payload em cada salto de mensagem/contato/paciente; revogação não pode ser tratada como vínculo atual. Dado divergente deve ficar não vinculado/pendente ou ser omitido com motivo, sem eleger identidade silenciosamente.
+- Aceite: fixtures discordantes não aparecem vinculadas a B e não contaminam seu cabeçalho; contato revogado fica desvinculado; caso positivo coerente permanece legível.
+
+### ASTRA-13 — P2 — fila do salão ressuscita atendimentos históricos e duplica pessoa
+
+- `src/server/leituras.ts:204–244`: lê todas as triagens vigentes sem delimitar dia/atendimento atual. Ordena todas e depois resolve cartão em Map por patientId, fazendo duas entradas da mesma pessoa apontarem para o último cartão.
+- Evidência concreta da própria fixture nova: `tests/server/leituras-http.test.ts` usa agora 07/10/2026 e `triagemBase()` sem substituir chegadaEm; `tests/fixtures/triagem.ts` fixa chegada em 05/10/2026. O novo teste espera que essa triagem histórica apareça na fila atual.
+- Prova mínima adicional: dois encontros sem supersessão, ontem e hoje, mesmo paciente. O resultado contém dois cartões montados a partir do mesmo último card, com possível mistura de chegada/estado. Paciente com apenas triagem de ontem também aparece hoje.
+- Correção: delimitar explicitamente a sessão/dia operacional usando tempo civil do serviço e identidade de atendimento. Em múltiplos eventos realmente concorrentes no mesmo atendimento, preservar conflito/pendência em vez de duplicar ou escolher silenciosamente. Não apagar o histórico.
+- Aceite: positivo novo usa chegadaEm de hoje; triagem de ontem não entra na fila corrente; duas versões/coexistências produzem resultado único coerente ou pendência, nunca dois cartões do último evento. Ajustar fixture nova, não expectativas dos testes congelados.
+
+### ASTRA-14 — P2 — ordenação textual de instantes seleciona encontro incorreto
+
+- `src/server/leituras.ts:56–62,86–88,97–100`: SQL ordena `criadoEm` como texto, e leitores usam `.at(-1)` como o evento/episódio/ciclo atual. O contrato Instante permite offsets diferentes.
+- Prova mínima: evento do encontro antigo em `2026-10-07T12:00:00+03:00` (09:00Z) e evento mais novo em `2026-10-07T10:00:00Z`. A ordem lexical põe 12h+03 depois de 10hZ; consultaSelecionada recebe encontro antigo. Isso afeta também o contexto implícito de escrita.
+- Correção: ordenar por instante interpretado, com desempate determinístico que não invente precedência clínica. Relação supersedes continua a autoridade de substituição.
+- Aceite: seleção correta com offsets diferentes e igualdade de instantes; registros históricos não são removidos; valores não interpretáveis não ganham prioridade silenciosa.
+
+### Dependências reais de integração — não contornar gates para fechar F02
+
+1. **Assinatura pela UI ainda não demonstrada.** `src/ui/api/porta.ts` define PedidoBundle `{patientId,encounterId,tumorLotId}`; `src/ui/api/http.ts` envia esse objeto para `/consulta/bundle`, mas `ExibirBundle` em `rotas.ts:37–41` exige draftIds e proíbe tumorLotId. Esse contrato retorna 400. Além disso, `TelaConsulta.tsx` chama carregarConsulta e depois confirmar, sem chamar exibirBundle: no servidor atual o fluxo termina em BUNDLE_NAO_EXIBIDO. O problema antecede esta rodada, mas impede afirmar conclusão do fluxo de assinatura real. Dono da UI é Cursor/tech lead; servidor pode oferecer adaptação compatível quando acordada. **Não registrar hash como exibido no carregarConsulta se o conteúdo não foi efetivamente entregue/exibido.** Cabeçalho/título não é prova de revisão do documento. Registrar pedido e aceitação por porta real.
+2. **G-07/G-08 são invocados sempre com `{}`** em `rotas.ts:349–350`. Isso conserva PENDENTE e não bloqueia salvar; não prova comparação clínica de fontes disponíveis. G-09 recebe apenas prefixo e espécie desconhecida. Como reconciliador/extração completos do Fugu ainda são skeletons, manter F02 como composição parcial nesse ponto. Não declarar gate funcionalmente integrado para divergência de lateralidade/anatomia sem teste com entradas realmente fornecidas ao gate. A revisão não propõe inferir campos ausentes.
+3. **SafetyEngine real ainda não é consumidor da rota de prescrição.** O código monta manualmente NOT_EVALUABLE em `rotas.ts:218–221,235–238`; parser/classificador/instanciador são consumidos. Contenção é segura, mas não é prova das quatro camadas completas. Requisitos tipados e dados clínicos persistidos são dependência explícita; nunca trocar o marcador por PASS para satisfazer teste.
+4. **RECIST:** request só aceita patientId e leitor compara identidade dos pontos/eventos; não recebe série arbitrária via HTTP. O envelope local ainda não é contrato canônico. Reataque precisa incluir ponto de outro paciente, referência ausente e fonte desconhecida; todos devem permanecer PENDENTE sem categoria. Não chamar isso de validação semântica das medidas apenas porque sourceId existe no conjunto de fontes do paciente.
+
+### Confirmações desta rodada
+
+- A busca de episódio global quando paciente não possui lote foi corrigida: `episodios` vira [] sem lote; episódios/ciclos são filtrados pelo paciente e lote. O teste novo verifica que A sem lote não recebe episódio de B.
+- Corpus regulatório é carregado pelo arquivo ativo exato; receitas elegíveis exigem consumivel/aprovadoMedico nos envelopes. Não foi observado uso de imprimivel:true da fonte histórica como autoridade. Saídas externas e APAC SIA continuam contidas.
+- Rotas de configuração repassam a sessão obtida do servidor, mantêm autoria fora do payload e mapeiam CONTEXTO_PACIENTE_OBRIGATORIO para 409; os reataques HTTP independentes da L5 devem confirmar.
+- Antiglosa recebe CNES configurado, nunca o exemplo por fallback; SIGTAP vazio continua bloqueando exportação. Isso permite testar contenção sem inventar tabela regulatória clínica.
+
+### Sequência de fechamento para L1/root
+
+Corrigir primeiro ASTRA-09/10/11/12 (identidade/autoridade), depois ASTRA-13/14 (projeção temporal). Acrescentar os negativos ao teste HTTP focal com fixtures sintéticas e fechar servidor/SQLite em finally. Validar pelo wrapper: typecheck, boundaries, corpus, testes server/L1 e regressão W3; manter o teste HTTP independente L5. Registrar limites de bundle/UI, extração/gates e SafetyEngine como PARCIAL/PEDIDO, sem ampliar faixa ou reduzir gates. Esta rodada se encerra no despacho; não aguarda execução e não marca achados corrigidos sem nova evidência.
