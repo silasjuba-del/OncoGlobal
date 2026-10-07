@@ -7,7 +7,7 @@ Worktree `w10-fugu`, branch `f0/w10-fugu`; base no início `d2af9e7`. Apenas dad
 | FUGU-01 · Tipos e esqueleto | FEITA | `W10-FUGU-01` (commit desta fatia) | Nove etapas puras, 5 testes novos; tipos locais provisórios até contratos W10 |
 | FUGU-02 · Conversão local | BLOQUEADA_DEPENDENCIA (parcial) | `W10-FUGU-02` (commit desta fatia) | Texto/DOCX locais, 5 testes novos; PDF digital não extraído sem parser aprovado; pedido ao tech lead |
 | FUGU-03 · Segmentação | FEITA | `W10-FUGU-03` (commit desta fatia) | 4 testes: maratona de 3 pacientes, fronteira incerta, pausa longa, acompanhante; sem vínculo automático |
-| FUGU-04 · PatientResolver | NÃO_INICIADA | — | — |
+| FUGU-04 · PatientResolver | FEITA | `W10-FUGU-04` (commit desta fatia) | Ranking por pesos, razões, homônimos por cadastro e nome zerado em Plaud; 4 testes, nunca AUTO_MERGE |
 | FUGU-05 · Extrator | NÃO_INICIADA | — | — |
 | FUGU-06 · Normalização | NÃO_INICIADA | — | — |
 | FUGU-07 · Reconciliação | NÃO_INICIADA | — | — |
@@ -92,3 +92,27 @@ Tests  9 passed (9)
 ```
 
 Heurísticas de fronteira permanecem propostas, não provam identidade: toda ligação ao paciente segue na caixa de revisão. O score/limiar técnico de fronteira não é validação clínica.
+
+## Saídas reais · FUGU-04 (comandos em série)
+
+`npx tsc --noEmit`: exit 0, sem diagnósticos.
+
+```text
+> oncoglobal@0.0.1 check:boundaries
+> node scripts/check-boundaries.mjs
+fronteiras ok (141 arquivos)
+
+> oncoglobal@0.0.1 check:corpus
+> node scripts/validate-corpus.mjs
+corpus ok (29 arquivos)
+
+RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-fugu
+Test Files  10 passed (10)
+Tests  43 passed (43)
+
+RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-fugu
+Test Files  1 passed (1)
+Tests  9 passed (9)
+```
+
+O cadastro é parâmetro local; o resultado carrega apenas ID de candidato, score e razões sem valores identificáveis. Homônimos permanecem distintos e todo candidato exige revisão.

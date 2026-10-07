@@ -48,6 +48,7 @@ export interface ClinicalFact<T = unknown> {
 }
 
 export interface PatientCandidate {
+  readonly segmentId: string;
   readonly patientId: string;
   readonly score: number;
   readonly reasons: Readonly<Record<string, string>>;

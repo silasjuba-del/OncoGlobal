@@ -3,6 +3,7 @@ import type {
   ReconciledField,
 } from "../kernel/extracao/tipos.js";
 import { segmentarTranscricao } from "../kernel/extracao/segmenter.js";
+import { rankearPacientes, type IdentityHints, type RegistryPatient } from "../kernel/extracao/patient-resolver.js";
 
 // PROVISORIO-W10: alinhar com src/contracts/w10/... após publicação pelo tech lead.
 export interface ExtractionInput {
@@ -11,6 +12,10 @@ export interface ExtractionInput {
   readonly sourceType: FactSourceType;
   /** Texto já convertido localmente; nenhum documento ou áudio sai deste módulo. */
   readonly rawTranscript: string;
+  /** Cadastro e pistas vêm do chamador local; texto livre sozinho não prova identidade. */
+  readonly registeredPatients?: readonly RegistryPatient[];
+  readonly identityHintsBySegment?: Readonly<Record<string, IdentityHints>>;
+  readonly openedPatientId?: string;
 }
 
 export interface ExtractionState {
@@ -43,7 +48,18 @@ export function segmentar(state: ExtractionState): ExtractionState {
 
 /** 2 — PatientResolver: sem evidência de cadastro, zero candidato/vínculo. */
 export function identificarPaciente(state: ExtractionState): ExtractionState {
-  return { ...state, patientCandidates: [] };
+  const { input } = state;
+  return {
+    ...state,
+    patientCandidates: state.segments.flatMap((segment) =>
+      rankearPacientes(
+        segment.id,
+        input.identityHintsBySegment?.[segment.id] ?? {},
+        input.registeredPatients ?? [],
+        { desidentified: segment.sourceType === "plaud", ...(input.openedPatientId
+          ? { openedPatientId: input.openedPatientId } : {}) },
+      )),
+  };
 }
 
 /** 3 — porta do extrator será introduzida em FUGU-05; vazio não gera fato. */
