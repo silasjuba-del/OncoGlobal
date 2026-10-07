@@ -1,0 +1,58 @@
+{
+  "header": {
+    "id": "salao-feve",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-07",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-W9-34b",
+      "trecho": "Alerta FEVE < 50% com antraciclina ou anti-HER2 programado (alerta, nunca bloqueio). FEVE ausente com esses fármacos fica PENDENTE e não vira 0.",
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-07"
+  },
+  "alertaFeve": {
+    "decisao": "D-W9-34b",
+    "limiteExclusivo": 50,
+    "igualAoLimitePassa": true,
+    "bloqueiaSalvar": false,
+    "ausenteNaoViraZero": true,
+    "classes": [
+      {
+        "id": "antraciclina",
+        "sinonimos": [
+          "antraciclina",
+          "antraciclinas",
+          "doxorrubicina",
+          "doxorubicina",
+          "adriamicina",
+          "epirrubicina",
+          "epirubicina",
+          "daunorrubicina",
+          "daunorubicina",
+          "idarrubicina",
+          "idarubicina"
+        ]
+      },
+      {
+        "id": "anti-her2",
+        "sinonimos": [
+          "anti-her2",
+          "anti her2",
+          "antiher2",
+          "trastuzumabe",
+          "trastuzumab",
+          "pertuzumabe",
+          "pertuzumab",
+          "trastuzumabe deruxtecana",
+          "trastuzumab deruxtecan",
+          "ado-trastuzumabe entansina",
+          "ado-trastuzumab emtansine",
+          "t-dm1",
+          "t-dxd"
+        ]
+      }
+    ]
+  }
+}

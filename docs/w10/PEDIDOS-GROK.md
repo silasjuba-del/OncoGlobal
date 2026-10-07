@@ -17,3 +17,10 @@ Faixa: `docs/ondas/W10-GROK.md`. Contrato que falta fica com tipo local `// PROV
 2. **G1 de hemoglobina e de plaquetas** depende do LIN no CTCAE v6. A tabela não inventa LIN: valor nessa zona fica com grau `null`, estado `PENDENTE`, nunca 0.
 3. **FEVE na porta** só compara o mínimo declarado na ficha. O alerta D-W9-34b (método, data, fármaco programado) fica para a GROK-03.
 4. **Barrel.** `portaCiclo` e `grauCtcae` ficam em `src/rules/portaCiclo.ts`, no mesmo molde de `ctcaeGrau.ts` (R-08 impede o `index.ts` de reexportar).
+
+## GROK-03
+
+1. **Eco.** `EcoFeve` e `FarmacoProgramado` estão em `src/rules/alertaFeve.ts` (`// PROVISORIO-W10`). Trocar pelo ecocardiograma (percentual, método, data) e pela lista de fármacos programados em `src/contracts/w10/`.
+2. **Sinônimos de classe.** A lista em `corpus/rulesets/salao-feve.v1.json` é editável. Mitoxantrona não entrou: não é antraciclina. Anti-HER2 aqui é o anticorpo (trastuzumabe, pertuzumabe, T-DM1, T-DXd) e o rótulo da classe.
+3. **FEVE baixa sem esses fármacos** não dispara este alerta. A porta de bula continua na GROK-02.
+4. **Barrel.** `alertarFeve` fica em `src/rules/alertaFeve.ts` (R-08).

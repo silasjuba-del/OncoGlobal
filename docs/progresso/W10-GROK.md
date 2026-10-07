@@ -6,7 +6,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w10-grok`, branch `f0/w10-grok`.
 |---|---|---|---|
 | GROK-01 corte do salão | FEITA | W10-GROK-01 | Portões nomeados no ruleset. FN-01 intacta. |
 | GROK-02 limiar de bula × CTCAE | FEITA | W10-GROK-02 | Porta lê mínimo de bula. Grau CTCAE só candidata. |
-| GROK-03 alerta FEVE | — | | |
+| GROK-03 alerta FEVE | FEITA | W10-GROK-03 | FEVE &lt; 50% com antraciclina ou anti-HER2 programado alerta. |
 | GROK-04 agenda de QT | — | | |
 | GROK-05 RADS 30 emergências | — | | |
 | GROK-06 INTERVAL_PROGRESSION | — | | |
@@ -104,3 +104,39 @@ Test Files  26 passed (26)
 ```
 
 O filtro `tests/rules` também casou `tests/rules-w8`. A série inclui GROK-01 (38), GROK-02 (11) e a auditoria (9).
+
+## GROK-03
+
+`alertarFeve(entrada, rs)` em `src/rules/alertaFeve.ts`. O limite e as classes (antraciclina, anti-HER2) estão em `corpus/rulesets/salao-feve.v1.json`. FEVE abaixo do limite, com um desses fármacos na lista programada, devolve ALERTA com valor, método e data. Igual ao limite passa. FEVE ausente com esses fármacos fica PENDENTE e não vira 0. FEVE medida 0 alerta. Sem esses fármacos não há alerta. Método ou data ausentes permanecem como pendência dentro do alerta. `bloqueiaSalvar` é o literal `false`.
+
+`git merge f0/w1-integrado` no início: fast-forward até `f62c2fe` (D-W9-55 a D-W9-57). Não alteram esta fatia.
+
+Testes novos: `tests/w10-grok/grok-03-feve.test.ts` (7).
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries`
+
+```
+fronteiras ok (153 arquivos)
+```
+
+`npm run check:corpus` — `corpus/rulesets/salao-feve.v1.json` header ok, `[VERIFICAR]` 0. Fecho: `corpus ok (31 arquivos)`.
+
+`npx vitest run tests/w10-grok tests/corpus/loader.test.ts --no-file-parallelism`
+
+```
+Test Files  4 passed (4)
+     Tests  63 passed (63)
+```
+
+7 da GROK-03, 38 da GROK-01, 11 da GROK-02 e 7 do loader.
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
+
+```
+Test Files  1 passed (1)
+     Tests  9 passed (9)
+```
