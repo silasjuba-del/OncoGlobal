@@ -1,6 +1,6 @@
 import type { PatientCandidate } from "./tipos.js";
 
-// PROVISORIO-W10: cadastro permanece local, sem vínculo automático (D-W9-34a).
+// Cadastro permanece local e o score nunca vincula sozinho (D-W9-34a).
 export interface IdentityHints {
   readonly name?: string;
   readonly age?: number;

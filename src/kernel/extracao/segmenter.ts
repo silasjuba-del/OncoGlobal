@@ -1,6 +1,6 @@
 import type { EncounterSegment, FactSourceType } from "./tipos.js";
 
-// PROVISORIO-W10: ajustar sinais/limiares ao contrato w10, sem implicar vínculo de paciente.
+// Sinais/limiares de fronteira não implicam vínculo de paciente (D-W9-34a).
 export interface TranscriptTurn {
   readonly text: string;
   readonly startMs: number | null;

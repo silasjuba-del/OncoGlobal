@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { inflateRawSync } from "node:zlib";
 import { avaliarRasuraEConfianca } from "../rules/w8/rasura.js";
+import { lerPdfDigital, type PaginaTexto } from "./pdf-digital.js";
 
 export type TipoDocumento = "TEXT" | "DOCX" | "PDF_DIGITAL" | "PDF_ESCANEADO" | "IMAGEM";
 
@@ -68,9 +69,9 @@ function lerZipDocx(bytes: Buffer): { text: string; rasurado: boolean } {
       if (entity.startsWith("#")) {
         const cp = entity[1]?.toLowerCase() === "x"
           ? Number.parseInt(entity.slice(2), 16) : Number.parseInt(entity.slice(1), 10);
-        return cp > 0 && cp <= 0x10ffff ? String.fromCodePoint(cp) : "�";
+        return cp > 0 && cp <= 0x10ffff ? String.fromCodePoint(cp) : "ï¿½";
       }
-      return named[entity.toLowerCase()] ?? "�";
+      return named[entity.toLowerCase()] ?? "ï¿½";
     });
     const text = paras.map((p) => {
       const contents = p[1] ?? "";
@@ -82,7 +83,30 @@ function lerZipDocx(bytes: Buffer): { text: string; rasurado: boolean } {
   throw new Error("DOCX sem word/document.xml");
 }
 
-/** Conversão local: entrada binária, sem filesystem, rede, OCR ou promoção clínica. */
+function montarDocumento(
+  entrada: EntradaLeitura,
+  hash: string,
+  paginas: readonly PaginaTexto[],
+  pending: string | null,
+): ResultadoLeitura {
+  const documento: DocumentoBruto = Object.freeze({
+    id: entrada.id,
+    tipo: entrada.tipo,
+    paginas: Object.freeze(paginas.filter((p) => p.texto).map((p) => Object.freeze({ n: p.n, texto: p.texto }))),
+    hash,
+    recebidoEm: entrada.recebidoEm,
+  });
+  const motivo = pending ?? (documento.paginas.length ? null : "Documento sem texto legível: PENDENTE");
+  return motivo
+    ? Object.freeze({ status: "PENDENTE", documento, motivo })
+    : Object.freeze({ status: "PRONTO", documento });
+}
+
+/**
+ * Conversão local síncrona: texto colado e .docx (zip+XML com `node:zlib`, sem dependência nova).
+ * PDF digital exige o caminho assíncrono (`converterEntradaLocalAsync`), porque o parser
+ * aprovado (`pdfjs-dist`) é assíncrono; PDF escaneado/imagem ficam PENDENTE (D-W9-09).
+ */
 export function converterEntradaLocal(entrada: EntradaLeitura): ResultadoLeitura {
   if (!entrada.id.trim() || !entrada.recebidoEm.trim()) throw new Error("ID e recebidoEm obrigatórios");
   const bytes = typeof entrada.conteudo === "string"
@@ -108,19 +132,32 @@ export function converterEntradaLocal(entrada: EntradaLeitura): ResultadoLeitura
     } catch {
       pending = "DOCX ilegível: conferir localmente; nenhuma extração clínica";
     }
+  } else if (entrada.tipo === "PDF_DIGITAL") {
+    pending = "PDF digital: usar converterEntradaLocalAsync (pdfjs-dist aprovado em D-W9-58)";
   } else {
-    // Não extrair bytes de PDF digital sem parser confiável/ToUnicode; imagem exige OCR local aprovado.
-    pending = "PDF/imagem sem conversor local aprovado: PENDENTE (não solicitar nova foto)";
+    // Imagem e PDF escaneado exigem OCR local aprovado; nada vai a serviço externo.
+    pending = "PDF escaneado/imagem sem OCR local aprovado: PENDENTE (não solicitar nova foto)";
   }
-  if (!text.trim()) pending ??= "Documento sem texto legível: PENDENTE";
-  const documento: DocumentoBruto = Object.freeze({
-    id: entrada.id,
-    tipo: entrada.tipo,
-    paginas: Object.freeze(text ? [Object.freeze({ n: 1, texto: text })] : []),
-    hash,
-    recebidoEm: entrada.recebidoEm,
-  });
-  return pending
-    ? Object.freeze({ status: "PENDENTE", documento, motivo: pending })
-    : Object.freeze({ status: "PRONTO", documento });
+  if (!text.trim() && pending === null) pending = "Documento sem texto legível: PENDENTE";
+  return montarDocumento(entrada, hash, text ? [{ n: 1, texto: text }] : [], pending);
+}
+
+/** Conversão local assíncrona: PDF digital por página; demais tipos delegam ao caminho síncrono. */
+export async function converterEntradaLocalAsync(entrada: EntradaLeitura): Promise<ResultadoLeitura> {
+  if (entrada.tipo !== "PDF_DIGITAL") return converterEntradaLocal(entrada);
+  if (!entrada.id.trim() || !entrada.recebidoEm.trim()) throw new Error("ID e recebidoEm obrigatórios");
+  const bytes = typeof entrada.conteudo === "string"
+    ? Buffer.from(entrada.conteudo, "utf8") : Buffer.from(entrada.conteudo);
+  const hash = createHash("sha256").update(bytes).digest("hex");
+  let paginas: readonly PaginaTexto[] = [];
+  let pending: string | null = null;
+  try {
+    paginas = await lerPdfDigital(bytes);
+  } catch {
+    pending = "PDF ilegível: conferir localmente; nenhuma extração clínica";
+  }
+  if (pending === null && !paginas.some((p) => p.texto)) {
+    pending = "PDF digital sem texto legível (escaneado): PENDENTE (não solicitar nova foto)";
+  }
+  return montarDocumento(entrada, hash, paginas, pending);
 }
