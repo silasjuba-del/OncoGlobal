@@ -34,10 +34,18 @@ describe("FUGU-07 · hierarquia por domínio", () => {
     expect(campo.conflict).toBe(true);
   });
 
-  it("fonte única é resolvida sem conflito; ausência não elege valor", () => {
-    const unico = fato({ domain: "lab", sourceType: "medical_note", value: { marker: "Hb" } });
+  it("fonte única com valor normalizado é resolvida; ausência e valor inútil não elegem", () => {
+    const unico = fato({
+      domain: "lab", sourceType: "medical_note",
+      value: { marker: "Hb", value: 11.2, unit: "g/dL", raw: "11,2 g/dL", normalizado: true },
+    });
     expect(reconciliarCampo("lab", [unico])).toMatchObject({ resolvedFactId: unico.id, conflict: false });
     expect(reconciliarCampo("lab", [])).toMatchObject({ resolvedFactId: null, conflict: false, candidates: [] });
+    // Marcador sem valor e laboratório não normalizado não resolvem o campo (ausência ≠ valor)
+    const semValor = fato({ id: "sem-valor", domain: "lab", sourceType: "medical_note", value: { marker: "Creatinina" } });
+    const falado = fato({ id: "falado", domain: "lab", sourceType: "plaud", value: { marker: "Creatinina", value: null, unit: null, raw: "quatorze", normalizado: false } });
+    expect(reconciliarCampo("lab", [semValor])).toMatchObject({ resolvedFactId: null });
+    expect(reconciliarCampo("lab", [falado])).toMatchObject({ resolvedFactId: null });
   });
 
   it("agrupa por campo: marcadores diferentes não disputam o mesmo valor", () => {

@@ -21,7 +21,7 @@ Retomada após `git merge f0/w1-integrado` (fast-forward `fe4f459 → 0d84302`),
 ## FUGU-02R · Contratos W10 no lugar de `PROVISORIO-W10` (atendido)
 - `src/kernel/extracao/tipos.ts` deixou de declarar tipos próprios: reexporta `ClinicalFact`, `EncounterSegment`, `FactDomain`, `FactEvidence`, `FactProvenance`, `FactSourceType`, `PatientCandidate`, `ReconciledField`, `ReviewAction`, `ReviewException` e `ExceptionKind` de `src/contracts/w10/extracao.js`. Não há mais nenhum `PROVISORIO-W10` na faixa do FUGU.
 - `mapearProveniencia` passou a exigir **decisão persistida**: `PhysicianConfirmation = { acao: ReviewAction, decisionEventId }`, e a ação precisa ser `CONFIRMAR`. O identificador sozinho não prova o evento (D-W9-34a).
-- **Pedido (contrato do ledger):** confirmar o `tipo` canônico do evento de decisão. Hoje o FUGU emite o rascunho `{ tipo: "ReviewDecision", payload: { reviewDecisionId, exceptionId, acao, medicoId, em, patientId?, motivo? } }` porque `gravarOperacao` exige `reviewDecisionId` no payload (`REVIEW_DECISION_REQUIRED`). Falta o tech lead registrar `tipo`/payload no contrato do ledger e, se houver evento dedicado, publicá-lo.
+- **Atualizado (FUGU-12B):** a interface já está entregue e **provada contra o ledger real** — `src/kernel/extracao/eventoRevisao.ts` monta `Operation` + `ClinicalEvent` e `gravarOperacao` responde `GRAVADA` (e `REPLAY` no mesmo payload); sem `payload.reviewDecisionId` o ledger responde `NEGADA/REVIEW_DECISION_REQUIRED`, que é justamente o que o builder garante. **Pedido remanescente:** registrar no contrato do ledger o `tipo` canônico `"ReviewDecision"` (hoje é constante do FUGU) e, se houver evento dedicado, publicá-lo.
 
 ## FUGU-02 · PDF digital — **DESTRAVADO**
 - `pdfjs-dist` ^6.4.299 instalado por `npm ci` no worktree. `src/leitura/pdf-digital.ts` usa o build legado para Node (`pdfjs-dist/legacy/build/pdf.mjs`) com **import estático**, `disableFontFace`, `useSystemFonts: false`, `useWorkerFetch: false`, `useWasm: false` e `verbosity: 0`; nenhum worker/fonte/CMap por rede.
@@ -39,9 +39,10 @@ Retomada após `git merge f0/w1-integrado` (fast-forward `fe4f459 → 0d84302`),
 - Conteúdo inicial **só** o que a spec §9 decidiu: CPNPC adenocarcinoma IV (PD-L1, EGFR, ALK, ROS1, BRAF, KRAS G12C, MET éxon 14, RET, NTRK, HER2) e mama (RE, RP, HER2, Ki-67 sempre; BRCA/PALB2 quando indicado), com `fonte` citando a spec/D-W9-33.
 - **Pedido:** (a) mover a tabela para o corpus versionado quando houver consumidor (Grok/equipe interna), com o mesmo conteúdo e fonte; (b) curadoria do Dr. Silas para os demais tumores — hoje `requiredBiomarkers` devolve `[VERIFICAR]` em vez de inventar exigência. CPNPC exige `estadio` explícito no contexto local para casar o grupo "IV": **não** inferimos estágio do literal TNM (invariante 2).
 
-## FUGU-10 · Alinhamento com `src/modules` (projeção/snapshot) — patch proposto, não aplicado
+## FUGU-10 · Alinhamento com `src/modules` (projeção/snapshot) — **entregue na faixa do FUGU**
 - `PatientTimeline` (contrato W10) e `src/kernel/projections/snapshot.ts` (`ValorProjetado`/`CaseSnapshot`) descrevem o mesmo paciente em vocabulários diferentes. O FUGU **não** editou `src/modules/**` (faixa do Grok).
-- **Patch proposto (para o tech lead/Grok avaliarem):** expor em `src/modules` um consumidor que receba `PatientTimeline` e monte as `Secao<T>`/`Semaforo` das telas, sem duplicar `missingRequiredData` nem `unresolvedConflicts`. Enquanto isso, `projetarTimelinePaciente` devolve o contrato W10 validado por Zod e a conversão para `Secao<T>` fica fora da faixa do FUGU.
+- **Atualizado (FUGU-12B):** `src/kernel/projections/timelineSecoes.ts` faz a conversão `PatientTimeline` → `Secao<T>` reusando `secaoDe`/`secaoVazia`/`Semaforo` **importados** de `src/modules/tipos.ts`. Ausente = PENDENTE; conflito não resolvido = VERMELHO; `recist` vazio é PENDENTE (o cálculo é de `src/rules/recist`). **Não é necessário mudar `src/modules`** — o pedido anterior de patch fica retirado.
+- **Pedido remanescente (opcional):** se a UI quiser consumir direto, o tech lead decide se `src/modules` deve expor um reexport dessa conversão; hoje ela vive na faixa do FUGU e é testada.
 - `recist: []` é intencional: o RECIST é calculado por código em `src/rules/recist` (faixa Astra/Grok); o FUGU não recalcula nem inventa categoria.
 
 ## FUGU-08 · Invariante 6 e 7 — sem pedido novo

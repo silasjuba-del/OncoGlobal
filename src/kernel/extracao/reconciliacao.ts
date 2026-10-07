@@ -76,6 +76,21 @@ export function chaveDoFato(fact: ClinicalFact): string {
   }
 }
 
+/**
+ * Fato sem valor utilizável não pode "resolver" um campo: ausência fica PENDENTE.
+ * Vale para valor nulo e para laboratório que não normalizou (número falado, unidade estranha).
+ */
+export function valorNaoResolvivel(fact: ClinicalFact): boolean {
+  if (fact.value === null || fact.value === undefined) return true;
+  if (fact.domain === "lab") {
+    const v = fact.value as Record<string, unknown>;
+    return v.normalizado !== true || v.value === null || v.value === undefined;
+  }
+  if (typeof fact.value === "string") return fact.value.trim() === "";
+  if (fact.domain === "stage") return literalDoEstagio(fact).trim() === "";
+  return false;
+}
+
 /** Reconcilia um campo: candidatos ordenados por hierarquia + conflito explícito. */
 export function reconciliarCampo(domain: FactDomain, candidatos: readonly ClinicalFact[]): ReconciledField {
   const ordenados = [...candidatos].sort((a, b) =>
@@ -88,11 +103,14 @@ export function reconciliarCampo(domain: FactDomain, candidatos: readonly Clinic
   const divergenciaHierarquica = !divergenciaInterna
     && [...valoresAbaixo].some((valor) => !valoresTopo.has(valor));
   const conflict = divergenciaInterna || divergenciaHierarquica;
+  const eleito = noTopo[0] ?? null;
   return {
     domain,
     candidates: ordenados,
     // conflito entre fontes do mesmo nível não é decidido por id: fica para o médico
-    resolvedFactId: divergenciaInterna ? null : (noTopo[0]?.id ?? null),
+    // e fato sem valor utilizável não resolve o campo (ausência ≠ valor)
+    resolvedFactId: divergenciaInterna || eleito === null || valorNaoResolvivel(eleito)
+      ? null : eleito.id,
     conflict,
     hierarquia: HIERARQUIA_TEXTO[domain],
   };
