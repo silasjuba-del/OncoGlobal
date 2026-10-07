@@ -38,3 +38,9 @@ Faixa: `docs/ondas/W10-GROK.md`. Contrato que falta fica com tipo local `// PROV
 2. **`corpus/rulesets/rad-emergencia.v1.json`** continua o esqueleto da FN-20 (sinônimos vazios, `ativo: false`). Fora do glob `rads-*`. Não foi editado. O detector novo lê `rads-emergencias.v1.json`. `avaliarRadAlerts` não mudou.
 3. **Linha 27** dispara com lesão lítica ou blástica sozinha, porque o PT08 não traz afilamento cortical nem SINS/Mirels. **Linha 7** exige hidronefrose e um elo seguinte (afilamento); a massa pélvica não é obrigatória.
 4. **Lateralidade divergente** entre achado e conclusão (RT-05) não é comparada aqui. O nível e o lado saem da frase dos elos que fecharam a cadeia.
+
+## GROK-06
+
+1. **Exame seriado.** `ExameSeriado` e `LacunasNaoSei` estão em `src/rules/intervalProgression.ts` (`// PROVISORIO-W10`). O literal `INTERVAL_PROGRESSION` já é `ExceptionKind` em `src/contracts/w10/extracao.ts`. Falta o contrato do exame (data, método, sítio, lateralidade, medida, descrição, exame dirigido).
+2. **Exame dirigido** sai do campo do laudo atual. A função não escolhe a modalidade. Sem nome, a pendência é "exame dirigido não nomeado no laudo".
+3. **NÃO SEI** só entra quando o chamador passa o mapa. Campo preenchido sai da lista. Campo ausente não vira fato.

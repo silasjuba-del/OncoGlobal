@@ -9,7 +9,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w10-grok`, branch `f0/w10-grok`.
 | GROK-03 alerta FEVE | FEITA | W10-GROK-03 | FEVE &lt; 50% com antraciclina ou anti-HER2 programado alerta. |
 | GROK-04 agenda de QT | FEITA | W10-GROK-04 | Conflito alerta. Otimizar dia não reordena. |
 | GROK-05 RADS 30 emergências | FEITA | W10-GROK-05 | PT08 abdome alerta linhas 7 e 27. Crânio não alerta. |
-| GROK-06 INTERVAL_PROGRESSION | — | | |
+| GROK-06 INTERVAL_PROGRESSION | FEITA | W10-GROK-06 | L5 do PT10 alerta. Não gera M1. |
 | GROK-07 nódulo &lt; 1 cm e Mx | — | | |
 | GROK-08 FN-16 semáforo | — | | |
 | GROK-09 suporte não oncológico | — | | |
@@ -209,6 +209,44 @@ Test Files  6 passed (6)
 ```
 
 6 da GROK-05, mais GROK-01 (38), GROK-02 (11), GROK-03 (7), GROK-04 (5) e o loader (7).
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
+
+```
+Test Files  1 passed (1)
+     Tests  9 passed (9)
+```
+
+## GROK-06
+
+`intervalProgression(exameAnterior, exameAtual, rs, lacunas)` em `src/rules/intervalProgression.ts`. Frases de aumento, métodos equivalentes e a lista NÃO SEI estão em `corpus/rulesets/rads-interval.v1.json`. Mesmo sítio, mesmo método e aumento (medida estritamente maior, ou texto "aumentado em relação a") geram a flag `INTERVAL_PROGRESSION`. O exame dirigido entra como pendência. `geraM1` e `bloqueiaSalvar` são os literais `false`. Medida igual não aumenta. Medida ausente não vira 0. "Degenerativo" no laudo não apaga a flag. Lateralidade divergente fica pendente (D-W9-05) e não vira progressão.
+
+PT10: CO de 2028-05-14 e cintilografia óssea de 2029-08-19 em L5, lateralidade "à esquerda", pendência "RM lombar", NÃO SEI de histologia, TNM, RE, RP, HER2, data da mastectomia e tratamento sistêmico.
+
+`git merge f0/w1-integrado` no início: `5975dd2` (fichas, APAC, gates).
+
+Testes novos: `tests/w10-grok/grok-06-interval.test.ts` (7).
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries`
+
+```
+fronteiras ok (171 arquivos)
+```
+
+`npm run check:corpus` — `corpus/rulesets/rads-interval.v1.json` header ok, `[VERIFICAR]` 0. Fecho: `corpus ok (95 arquivos)`.
+
+`npx vitest run tests/w10-grok tests/corpus/loader.test.ts --no-file-parallelism`
+
+```
+Test Files  7 passed (7)
+     Tests  81 passed (81)
+```
+
+7 da GROK-06, mais GROK-01 (38), GROK-02 (11), GROK-03 (7), GROK-04 (5), GROK-05 (6) e o loader (7).
 
 `npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
 
