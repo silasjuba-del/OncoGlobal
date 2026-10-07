@@ -292,3 +292,12 @@ M-AD  ⚠ COMPLEMENTO DO PRONTUÁRIO DRIVE: HISTÓRICO DE TRATAMENTO (sistêmico
       |AD6| Posição da seção dentro dos 3 blocos de M-AC (sugestão: bloco 3, depois de "Protocolo:" e antes de EXAMES E LAUDOS)   PENDENTE
       |AD7| Regra do campo vazio (M-AC/AC3) vale: ciclo sem data, protocolo ou dose fica vazio; as linhas 2 e 3 do exemplo vieram só com a observação   DECIDIDO (consistente) — formato exato de linha incompleta   PENDENTE
 ```
+
+```
+M-AE  ⚠ MODELO DE APAC = IMPORTANTE: "SEPARE CADA CAIXA E ORIENTE O AGENTE ONDE ALOCAR" (2 anexos: modelo nutricional já registrado + laudo APAC real, 2 páginas) → PLN-027   docs/planejamento/APAC-MAPA-DE-CAIXAS.md
+      |AE1| Pedido: mapa de cada caixa da APAC com orientação de onde alocar cada dado (páginas 1 e 2)   FEITO (APAC-MAPA-DE-CAIXAS.md)
+      |AE2| Laudo APAC real lido SEM copiar dado identificável (nome, CNS, CPF, endereço, telefone, mãe, prontuário, documentos do médico)   REGISTRADO
+      |AE3| Página 2 (Dados complementares: oncologia 56–64, QT 65–72, RT 73–83, nefrologia 84–87) NÃO existe no código (só página 1)   LACUNA
+      |AE4| 10 anomalias do laudo real (CID de mama em tumor de próstata; RT preenchida sem RT; 3 "tratamentos anteriores" com a mesma data; AUC 1,5 × ficha AUC 2; código SIGTAP 0304020087 não achado na tabela local; executante preenchido × código em branco…)   PENDENTE (Dr. Silas valida)
+      |AE5| Prontuário Drive (M-AC/M-AD) não tem 7 dados que a APAC exige (prontuário, raça/cor, etnia, UF, CEP, responsável, IBGE)   LACUNA
+```
