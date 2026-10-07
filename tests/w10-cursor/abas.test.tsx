@@ -41,6 +41,6 @@ describe("CURSOR-04 Abas e cards", () => {
     expect(await screen.findByRole("region", { name: "Caixa de revisão" }, lento)).toBeTruthy();
 
     fireEvent.click(within(abas).getByRole("tab", { name: /^Quimioterapia/ }));
-    expect(within(abas).getByText(/CURSOR-10/)).toBeTruthy();
+    expect(screen.getByRole("region", { name: "Prescrição" })).toBeTruthy();
   }, 30_000);
 });

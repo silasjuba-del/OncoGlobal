@@ -70,6 +70,7 @@ export function Topbar({
   tema,
   onTema,
   onBuscar,
+  onConfigurar,
   comandos,
 }: {
   tela: TelaCasca;
@@ -77,6 +78,7 @@ export function Topbar({
   tema: TemaOnco;
   onTema: (tema: TemaOnco) => void;
   onBuscar: () => void;
+  onConfigurar?: () => void;
   comandos: ReactNode;
 }) {
   function alternar(origem: HTMLElement) {
@@ -136,6 +138,11 @@ export function Topbar({
             <button type="button" onClick={(evento) => alternar(evento.currentTarget)}>
               {tema === "noite" ? "Modo dia" : "Modo noite"}
             </button>
+            {onConfigurar ? (
+              <button type="button" onClick={onConfigurar}>
+                Configurações
+              </button>
+            ) : null}
           </>
         }
       >

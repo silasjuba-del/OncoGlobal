@@ -1,6 +1,6 @@
 # W10-CURSOR
 
-Retomada: a primeira fatia não FEITA é a CURSOR-10.
+Retomada: a primeira fatia não FEITA é a CURSOR-12.
 
 | Fatia | Estado | Commit | Nota |
 |---|---|---|---|
@@ -13,8 +13,9 @@ Retomada: a primeira fatia não FEITA é a CURSOR-10.
 | CURSOR-07 | FEITA | W10-CURSOR-05 | ImageViewer + OncoAssist sem conduta; morfometria DRAFT |
 | CURSOR-08 | FEITA | W10-CURSOR-08 | Jornada 3D + Chart3D CSS (RECIST/CTCAE, teclado, ≤200) |
 | CURSOR-09 | FEITA | W10-CURSOR-09 | Dock + overlays (WhatsApp CANAL_EXTERNO; liberação sem bloqueio) |
-| CURSOR-10 | — | | Prescrição |
-| CURSOR-11 | — | | Configurações |
+| CURSOR-10 | FEITA | W10-CURSOR-10 | Prescrição 3 produtos + Modelo 05 só exceções + −20/−30/−40 |
+| CURSOR-11 | FEITA | W10-CURSOR-10 | Configurações + caixa nº + glossário + DIA|NOITE|PERSONALIZAR |
+| CURSOR-12 | — | | Triagem + agenda de QT |
 | CURSOR-12 | — | | Triagem + agenda de QT |
 | CURSOR-13 | — | | Acessibilidade |
 | CURSOR-14 | — | | Percursos e fechamento |
@@ -33,6 +34,8 @@ Retomada: a primeira fatia não FEITA é a CURSOR-10.
 - `tests/w10-cursor/jornada3d.test.ts`
 - `tests/w10-cursor/jornada3d-ui.test.tsx`
 - `tests/w10-cursor/dock.test.tsx`
+- `tests/w10-cursor/prescricao.test.ts`
+- `tests/w10-cursor/prescricao-ui.test.tsx`
 
 ## Saídas reais · fatia CURSOR-08…09
 

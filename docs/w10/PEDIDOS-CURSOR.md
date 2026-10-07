@@ -162,3 +162,36 @@ Geist e Geist Mono estão em `src/ui/oncochart/fontes/*.woff2`, com a OFL ao lad
 | `ov.interacoes` | Interações |
 | `ov.liberacao` | Liberação QT |
 | `ov.flash` | Consulta Flash |
+
+## CURSOR-10
+
+### Contratos / porta / regras
+- `PrescriptionItem` + 4 classes em `src/contracts/w10`
+- `calcularDose` / template de ciclo na porta (UI só exibe)
+- Parser da linha VO = equipe interna (`src/rules/prescricao/**` fora da faixa)
+
+### Copy
+| Chave pedida | Texto em uso |
+|---|---|
+| `prescricao.titulo` | Prescrição |
+| `prescricao.antineoplasica` | Antineoplásica |
+| `prescricao.posQtVo` | Receita pós-QT / VO |
+| `prescricao.evAvulsa` | EV avulsa |
+| `prescricao.alterarPadrao` | ALTERAR PADRÃO |
+| `prescricao.motivo` | Motivo do ajuste |
+
+## CURSOR-11
+
+### Copy / integrações
+| Chave pedida | Texto em uso |
+|---|---|
+| `cfg.titulo` | Configurações |
+| `cfg.personalizar` | PERSONALIZAR |
+| `cfg.caixaNumero` | Caixa de número |
+| `cfg.glossario` | Glossário |
+| `cfg.esteira` | Esteira de UI |
+
+### Ainda aberto
+- Skills/plugins/MCP lista real (nascem desligados)
+- Sincronizar telefone / impressora rede
+- Tema PERSONALIZAR além do flag visual (tokens custom)

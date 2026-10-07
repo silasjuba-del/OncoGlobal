@@ -20,6 +20,8 @@ import { ImageViewerOncoAssist } from "../oncochart/ImageViewerOncoAssist.js";
 import { Jornada3D } from "../oncochart/Jornada3D.js";
 import { OverlayAtivo, type OverlayId } from "../oncochart/Overlays.js";
 import { PatientHeader } from "../oncochart/PatientHeader.js";
+import { PrescricaoPainel } from "../oncochart/PrescricaoPainel.js";
+import { prescricaoSintetica } from "../oncochart/prescricao-visao.js";
 import { Timeline2D } from "../oncochart/Timeline2D.js";
 import { timelineSintetica } from "../oncochart/timeline-visao.js";
 
@@ -244,7 +246,7 @@ export function TelaConsulta({
             );
           }
           if (atual === "qt") {
-            return <p className="oc-aba-placeholder">Quimioterapia — prescrição na CURSOR-10</p>;
+            return <PrescricaoPainel inicial={prescricaoSintetica()} />;
           }
           if (atual === "clin") {
             return <p className="oc-aba-placeholder">Dados clínicos — painéis nas fatias seguintes</p>;
