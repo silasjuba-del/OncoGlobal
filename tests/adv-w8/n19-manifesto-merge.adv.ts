@@ -17,7 +17,7 @@ const RAIZ = new URL("../..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/
 
 /** Harness candidato: script de verificação de manifesto ligado ao merge/CI. */
 function harnessManifesto(): string | null {
-  for (const candidato of ["scripts/check-manifesto.mjs", "scripts/check-claims.mjs",
+  for (const candidato of ["scripts/check-manifesto.mjs", "scripts/verificar-manifesto.mjs", "scripts/check-claims.mjs",
     "tests/w3/manifesto-merge.test.ts", "tests/manifesto.test.ts"]) {
     if (existsSync(join(RAIZ, candidato))) return candidato;
   }

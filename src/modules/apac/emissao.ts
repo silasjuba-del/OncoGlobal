@@ -1,7 +1,7 @@
 // GROK-13 · Emissão APAC persistível. Não grava ledger, não exporta SIA, não chama antiglosa.
 // Uma competência por lote sai de montarApacBatch. Relógio, finalidade, CNS e CNES são desta função.
 
-import { readFileSync } from "node:fs";
+import rulesetEmissao from "../../../corpus/rulesets/agenda-apac-emissao.v1.json" with { type: "json" };
 import { diferencaDiasCivis } from "../tipos.js";
 import { validarCns, type ResultadoCns } from "./cns.js";
 import { montarApacBatch, type CriterioApacBatch, type ItemApacLote } from "./lote.js";
@@ -397,8 +397,7 @@ function paraItemLote(paciente: PacienteEmissao): ItemApacLote {
 }
 
 function jsonPadrao(): unknown {
-  const url = new URL("../../../corpus/rulesets/agenda-apac-emissao.v1.json", import.meta.url);
-  return JSON.parse(readFileSync(url, "utf8")) as unknown;
+  return rulesetEmissao as unknown;
 }
 
 function listaTexto(valor: unknown): readonly string[] | null {

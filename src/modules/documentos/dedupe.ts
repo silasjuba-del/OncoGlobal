@@ -1,7 +1,7 @@
 // Caso 07 · D1–D3. Chave = laboratório + nº do exame + data de entrada.
 // A data impressa no topo e a data de extração não entram. src/rules/w8/dedupeExame.ts não foi editado.
 
-import { readFileSync } from "node:fs";
+import rulesetDedupe from "../../../corpus/rulesets/dedupe-exame.v1.json" with { type: "json" };
 
 export interface ResultadoDedupe {
   unicos: number;
@@ -15,8 +15,7 @@ interface ChaveRuleset {
 }
 
 function camposDoRuleset(): readonly string[] {
-  const url = new URL("../../../corpus/rulesets/dedupe-exame.v1.json", import.meta.url);
-  const json = JSON.parse(readFileSync(url, "utf8")) as { chaves?: unknown };
+  const json = rulesetDedupe as { chaves?: unknown };
   if (!Array.isArray(json.chaves)) throw new Error("chaves de dedupe ausentes");
   const patologia = json.chaves.find((item) => {
     const chave = item as ChaveRuleset;

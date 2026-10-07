@@ -27,7 +27,7 @@ describe("W10-LUNA3 receitas e red flags", () => {
     const toxic = json("corpus/receitas/toxicidade.v1.json");
     const copied = readFileSync(new URL("../../corpus/receitas/toxicidade-fonte-original.v1.md", import.meta.url));
     const original = readFileSync(new URL("../../docs/referencias/externos/PRESCRICAO-POR-TOXICIDADE.md", import.meta.url));
-    const digest = (value: Buffer) => createHash("sha256").update(value).digest("hex");
+    const digest = (value: Buffer) => createHash("sha256").update(value.toString("utf8").replaceAll("\r", "")).digest("hex");
     expect(digest(copied)).toBe(digest(original));
     expect(toxic.status).toBe("RASCUNHO");
     expect(toxic.consumivel).toBe(false);
