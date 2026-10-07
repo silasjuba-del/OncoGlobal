@@ -37,6 +37,14 @@ Retomada: a primeira fatia não FEITA é a CURSOR-12.
 - `tests/w10-cursor/prescricao.test.ts`
 - `tests/w10-cursor/prescricao-ui.test.tsx`
 - `tests/w10-cursor/config.test.tsx`
+- `tests/w10-cursor/salao-qt.test.tsx`
+- `tests/w10-cursor/a11y.test.tsx`
+- `tests/w10-cursor/percursos.test.tsx`
+
+## [VERIFICAR]
+- Capturas de tela com navegador real (não feitas nesta fatia)
+- RADS hidronefrose no viewer exige origem com “hidronefrose” no rótulo
+- Integração real porta/Fugu/contratos w10 (hoje PROVISORIO-W10)
 
 ## Saídas reais · fatia CURSOR-08…09
 
