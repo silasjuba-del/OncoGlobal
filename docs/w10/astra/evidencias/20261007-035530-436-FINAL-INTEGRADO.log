@@ -1,0 +1,158 @@
+**********************
+PowerShell transcript start
+Start time: 20261007035530
+Username: SILAS\silas
+RunAs User: SILAS\silas
+Configuration Name: 
+Machine: SILAS (Microsoft Windows NT 10.0.26300.0)
+Host Application: C:\Users\silas\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+& .\docs\w10\astra\validar.ps1 -Worktree 'C:\Users\silas\Projects\OncoGlobal-wt\w10-astra' -Rotulo 'FINAL-INTEGRADO' -Testes @('tests/server','tests/app','tests/sistema','tests/w10-luna2','tests/w10-luna3','tests/w10-luna4','tests/w10-luna5','tests/kernel/kernel.test.ts','tests/kernel/adv-resistiu-idempotencia.test.ts','tests/kernel/gates-w10','tests/w10-int-gates','tests/rules-prescricao','tests/apac-w10','tests/corpus-fichas','tests/w3/auditoria-regressao.test.ts')
+Process ID: 36140
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26300
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+WORKTREE=C:\Users\silas\Projects\OncoGlobal-wt\w10-astra
+
+TYPECHECK_EXIT=0
+fronteiras ok (180 arquivos)
+BOUNDARIES_EXIT=0
+ARQUIVO                                                                                               | HEADER     | [VERIFICAR] | ATIVOS
+--------------------------------------------------------------------------------------------------------------------------------------------
+corpus/capabilities.v1.json                                                                           | ok         | 41          | 0
+corpus/fichas/cabeca-e-pescoco/carboplatina-docetaxel__nao-especificado.json                          | —          | 2           | 0
+corpus/fichas/cabeca-e-pescoco/carboplatina-paclitaxel-semanal__nao-especificado.json                 | —          | 1           | 0
+corpus/fichas/cabeca-e-pescoco/carboplatina-paclitaxel__nao-especificado.json                         | —          | 1           | 0
+corpus/fichas/cabeca-e-pescoco/cisplatina-5-fluorouracil-pf__nao-especificado.json                    | —          | 5           | 0
+corpus/fichas/cabeca-e-pescoco/cisplatina-rxt__concomitante-a-rt.json                                 | —          | 5           | 0
+corpus/fichas/cabeca-e-pescoco/docetaxel-monoterapia__paliativo-metastatico.json                      | —          | 2           | 0
+corpus/fichas/cabeca-e-pescoco/metotrexato-semanal__paliativo-metastatico.json                        | —          | 1           | 0
+corpus/fichas/colo-do-utero/cisplatina-semanal-rxt__concomitante-a-rt.json                            | —          | 5           | 0
+corpus/fichas/colo-do-utero/ifosfamida-mesna__paliativo-metastatico.json                              | —          | 3           | 0
+corpus/fichas/colon-reto/5-fu-leucovorina-mayo-clinic__nao-especificado.json                          | —          | 1           | 0
+corpus/fichas/colon-reto/5-fu-leucovorina-roswell-park__nao-especificado.json                         | —          | 1           | 0
+corpus/fichas/colon-reto/capox-xelox__adjuvante.json                                                  | —          | 1           | 0
+corpus/fichas/colon-reto/folfiri-bevacizumabe__paliativo-metastatico.json                             | —          | 1           | 0
+corpus/fichas/colon-reto/folfiri__paliativo-metastatico.json                                          | —          | 1           | 0
+corpus/fichas/colon-reto/folfox__paliativo-metastatico.json                                           | —          | 1           | 0
+corpus/fichas/colon-reto/folfoxiri__paliativo-metastatico.json                                        | —          | 2           | 0
+corpus/fichas/colon-reto/irinotecano-monoterapia__nao-especificado.json                               | —          | 1           | 0
+corpus/fichas/esofago/5-fu-leucovorina-lv5fu2__nao-especificado.json                                  | —          | 1           | 0
+corpus/fichas/esofago/carboplatina-paclitaxel-21-21-dias__nao-especificado.json                       | —          | 1           | 0
+corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json               | —          | 1           | 0
+corpus/fichas/esofago/docetaxel-monoterapia__nao-especificado.json                                    | —          | 2           | 0
+corpus/fichas/esofago/flot__nao-especificado.json                                                     | —          | 2           | 0
+corpus/fichas/esofago/folfox__nao-especificado.json                                                   | —          | 1           | 0
+corpus/fichas/esofago/irinotecano-monoterapia__nao-especificado.json                                  | —          | 1           | 0
+corpus/fichas/estomago-jeg/dcf-modificado-institucional__nao-especificado.json                        | —          | 7           | 0
+corpus/fichas/estomago-jeg/docetaxel-monoterapia__paliativo-metastatico.json                          | —          | 2           | 0
+corpus/fichas/estomago-jeg/flot__paliativo-metastatico.json                                           | —          | 2           | 0
+corpus/fichas/estomago-jeg/folfiri__nao-especificado.json                                             | —          | 1           | 0
+corpus/fichas/estomago-jeg/folfox__paliativo-metastatico.json                                         | —          | 1           | 0
+corpus/fichas/estomago-jeg/irinotecano-monoterapia__paliativo-metastatico.json                        | —          | 1           | 0
+corpus/fichas/estomago-jeg/xelox-capox__adjuvante.json                                                | —          | 1           | 0
+corpus/fichas/gliomas/temozolomida-monoterapia-ciclo-1__adjuvante.json                                | —          | 0           | 0
+corpus/fichas/gliomas/temozolomida-monoterapia-ciclos-2-em-diante__adjuvante.json                     | —          | 0           | 0
+corpus/fichas/mama/ac-ct-fase-ac__neo-adjuvante.json                                                  | —          | 1           | 0
+corpus/fichas/mama/ac-ct-fase-ct-carboplatina-paclitaxel-semanal__neo-adjuvante.json                  | —          | 1           | 0
+corpus/fichas/mama/ac-t-fase-ac__neo-adjuvante.json                                                   | —          | 1           | 0
+corpus/fichas/mama/ac-t-fase-t-paclitaxel-semanal__adjuvante.json                                     | —          | 1           | 0
+corpus/fichas/mama/ac-th-fase-ac__neo-adjuvante.json                                                  | —          | 1           | 0
+corpus/fichas/mama/ac-th-fase-th-paclitaxel-semanal-trastuzumabe__neo-adjuvante.json                  | —          | 1           | 0
+corpus/fichas/mama/capecitabina-docetaxel-xt__paliativo-metastatico.json                              | —          | 2           | 0
+corpus/fichas/mama/capecitabina-monoterapia__paliativo-metastatico.json                               | —          | 0           | 0
+corpus/fichas/mama/carboplatina-gemcitabina__nao-especificado.json                                    | —          | 1           | 0
+corpus/fichas/mama/carboplatina-paclitaxel-21-21-dias__paliativo-metastatico.json                     | —          | 1           | 0
+corpus/fichas/mama/cmf__nao-especificado.json                                                         | —          | 1           | 0
+corpus/fichas/mama/docetaxel-monoterapia__paliativo-metastatico.json                                  | —          | 2           | 0
+corpus/fichas/mama/doxorrubicina-paclitaxel-at__nao-especificado.json                                 | —          | 1           | 0
+corpus/fichas/mama/gemcitabina__paliativo-metastatico.json                                            | —          | 1           | 0
+corpus/fichas/mama/paclitaxel-monoterapia-21-21-dias__nao-especificado.json                           | —          | 1           | 0
+corpus/fichas/mama/tc__neo-adjuvante.json                                                             | —          | 2           | 0
+corpus/fichas/nao-informado-ficha-institucional/cisplatina-gemcitabina-d1-e-d8__nao-especificado.json | —          | 5           | 0
+corpus/fichas/nao-informado-ficha-institucional/gemox__paliativo-metastatico.json                     | —          | 1           | 0
+corpus/fichas/nao-informado-ficha-institucional/ifosfamida-gemcitabina__nao-especificado.json         | —          | 6           | 0
+corpus/fichas/nao-informado-ficha-institucional/ifosfamida-topotecana__nao-especificado.json          | —          | 6           | 0
+corpus/fichas/pancreas/folfirinox__paliativo-metastatico.json                                         | —          | 1           | 0
+corpus/fichas/pancreas/gemcitabina-capecitabina__nao-especificado.json                                | —          | 1           | 0
+corpus/fichas/pancreas/gemcitabina-monoterapia__adjuvante.json                                        | —          | 1           | 0
+corpus/fichas/prostata/carboplatina-paclitaxel-21-21-dias__nao-especificado.json                      | —          | 1           | 0
+corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json                         | —          | 1           | 0
+corpus/fichas/prostata/docetaxel-21-21-dias__paliativo-metastatico.json                               | —          | 2           | 0
+corpus/fichas/prostata/docetaxel-quinzenal__paliativo-metastatico.json                                | —          | 2           | 0
+corpus/fichas/pulmao-cpnpc/carboplatina-docetaxel__nao-especificado.json                              | —          | 2           | 0
+corpus/fichas/pulmao-cpnpc/carboplatina-gemcitabina__nao-especificado.json                            | —          | 1           | 0
+corpus/fichas/pulmao-cpnpc/carboplatina-paclitaxel-21-21-dias__paliativo-metastatico.json             | —          | 1           | 0
+corpus/fichas/pulmao-cpnpc/carboplatina-pemetrexede-nao-escamoso__paliativo-metastatico.json          | —          | 1           | 0
+corpus/fichas/pulmao-cpnpc/cisplatina-docetaxel__nao-especificado.json                                | —          | 6           | 0
+corpus/fichas/pulmao-cpnpc/cisplatina-gemcitabina__nao-especificado.json                              | —          | 5           | 0
+corpus/fichas/pulmao-cpnpc/cisplatina-paclitaxel__nao-especificado.json                               | —          | 5           | 0
+corpus/fichas/pulmao-cpnpc/cisplatina-pemetrexede-nao-escamoso__paliativo-metastatico.json            | —          | 5           | 0
+corpus/fichas/pulmao-cpnpc/cisplatina-vinorelbina__nao-especificado.json                              | —          | 6           | 0
+corpus/fichas/pulmao-cpnpc/docetaxel-monoterapia__paliativo-metastatico.json                          | —          | 2           | 0
+corpus/fichas/pulmao-cpnpc/gemcitabina-monoterapia__nao-especificado.json                             | —          | 1           | 0
+corpus/fichas/reto/capecitabina-rxt-radiossensibilizacao__concomitante-a-rt.json                      | —          | 0           | 0
+corpus/glossario/caixas.v1.json                                                                       | —          | 0           | 0
+corpus/glossario/fontes.v1.json                                                                       | —          | 0           | 0
+corpus/packs/colorretal.v1.json                                                                       | ok         | 6           | 0
+corpus/packs/mama.v1.json                                                                             | ok         | 6           | 0
+corpus/packs/prostata.v1.json                                                                         | ok         | 19          | 0
+corpus/packs/pulmao.v1.json                                                                           | ok         | 6           | 0
+corpus/receitas/comuns.v1.json                                                                        | —          | 0           | 0
+corpus/receitas/toxicidade.v1.json                                                                    | —          | 0           | 0
+corpus/redflags/sinais-alarme.v1.json                                                                 | —          | 0           | 0
+corpus/regulatorio/pendencias.v1.json                                                                 | —          | 12          | 0
+corpus/regulatorio/tabela-ativa.v1.json                                                               | —          | 0           | 0
+corpus/rulesets/apac.v1.json                                                                          | ok         | 2           | 0
+corpus/rulesets/canal-redflags.v1.json                                                                | ok         | 7           | 0
+corpus/rulesets/dedupe-exame.v1.json                                                                  | ok         | 0           | 0
+corpus/rulesets/dose.v1.json                                                                          | ok         | 0           | 0
+corpus/rulesets/identificadores.v1.json                                                               | ok         | 8           | 0
+corpus/rulesets/interacoes.v1.json                                                                    | ok         | 5           | 0
+corpus/rulesets/lab-thresholds.v1.json                                                                | ok         | 19          | 3
+corpus/rulesets/patologia-agregacao.v1.json                                                           | ok         | 8           | 0
+corpus/rulesets/prazos.v1.json                                                                        | ok         | 1           | 0
+corpus/rulesets/rad-emergencia.v1.json                                                                | ok         | 22          | 0
+corpus/rulesets/salao-ctcae.v1.json                                                                   | ok         | 0           | 0
+corpus/rulesets/salao-triagem.v1.json                                                                 | ok         | 0           | 0
+corpus/templates/evolucao.v1.json                                                                     | —          | 0           | 0
+corpus/templates/folha-operacional-salao.v1.json                                                      | —          | 0           | 0
+corpus/templates/kit/apac-laudo.v1.json                                                               | ok         | 9           | 0
+corpus/templates/kit/orientacao-nutricional.v1.json                                                   | ok         | 0           | 0
+corpus/templates/kit/receita-sintomaticos.v1.json                                                     | ok         | 0           | 0
+corpus/templates/kit/relatorio-pericial.v1.json                                                       | ok         | 0           | 0
+corpus/templates/kit/requisicao-exames-ciclos.v1.json                                                 | ok         | 0           | 0
+corpus/templates/kit/sinais-alarme.v1.json                                                            | ok         | 0           | 0
+corpus/templates/laudo-judicial.v1.json                                                               | —          | 0           | 0
+corpus/templates/pedido-exame.v1.json                                                                 | —          | 0           | 0
+corpus/templates/receita.v1.json                                                                      | —          | 0           | 0
+corpus/templates/resumo-14.v1.json                                                                    | —          | 15          | 0
+corpus/templates/sinais-alarme.v1.json                                                                | —          | 1           | 0
+
+corpus ok (109 arquivos)
+CORPUS_EXIT=0
+VITEST_ARGUMENTS=run tests/server tests/app tests/sistema tests/w10-luna2 tests/w10-luna3 tests/w10-luna4 tests/w10-luna5 tests/kernel/kernel.test.ts tests/kernel/adv-resistiu-idempotencia.test.ts tests/kernel/gates-w10 tests/w10-int-gates tests/rules-prescricao tests/apac-w10 tests/corpus-fichas tests/w3/auditoria-regressao.test.ts --no-file-parallelism --pool=forks --maxWorkers=1 --testTimeout=30000 --hookTimeout=30000
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-astra
+
+
+ Test Files  47 passed (47)
+      Tests  362 passed (362)
+   Start at  03:55:35
+   Duration  96.05s (tests 50%, import 34%, transform 14%, worker 2%)
+
+     Import  136 modules were evaluated 257 times · 21.74s total, 34% of tracked time
+             ~10.24s faster with isolate: false — shared modules are evaluated once per worker instead of once per file
+             learn more: https://vitest.dev/guide/improving-performance#test-isolation
+
+VITEST_EXIT=0
+**********************
+PowerShell transcript end
+End time: 20261007035712
+**********************
