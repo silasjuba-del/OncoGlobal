@@ -102,7 +102,7 @@ describe("corpus/fichas", () => {
   describe("5-FU", () => {
     it("esquemas de bomba (FOLFOX/FOLFIRI/FOLFIRINOX/FOLFOXIRI/FLOT/LV5FU2): um único 5-FU, infusão de 46 h, sem bolus", () => {
       const familia = parseadas.filter((p) => FAMILIA_BOMBA.test(p.ficha.nome));
-      expect(familia.length).toBe(10);
+      expect(familia.length).toBe(11); // + FOLFIRI + Bevacizumabe (D-W9-61)
       for (const { ficha, arquivo } of familia) {
         const fus = ficha.itens.filter((i) => eh5fu(i.drug));
         expect(fus.length, arquivo).toBe(1);
@@ -219,11 +219,15 @@ describe("corpus/fichas", () => {
       }
     });
 
-    it("gemcitabina + capecitabina: 830 mg/m² (não 1.660); sem ifosfamida/topotecano/amivantamabe", () => {
+    it("gemcitabina + capecitabina: 830 mg/m² (não 1.660); sem erros do manual (ifosfamida em g/m², topotecano 1.200, amivantamabe)", () => {
       const gc = parseadas.find((x) => x.ficha.nome === "Gemcitabina + Capecitabina")!;
       expect(gc.ficha.itens.find((i) => /capecitabina/i.test(i.drug))!.standardDose).toBe(830);
       for (const { ficha, arquivo } of parseadas) {
-        expect(ficha.itens.some((i) => /ifosfamida|topotecano|amivantamabe/i.test(i.drug)), arquivo).toBe(false);
+        expect(ficha.itens.some((i) => /amivantamabe/i.test(i.drug)), arquivo).toBe(false);
+        for (const i of ficha.itens.filter((x) => /ifosfamida|topotecan/i.test(x.drug))) {
+          expect(i.unit, arquivo).toBe("mg/m²");
+          if (/topotecan/i.test(i.drug)) expect(i.standardDose, arquivo).not.toBe(1200);
+        }
         for (const i of ficha.itens) expect([1660, 2400].includes(i.standardDose ?? 0) && /capecitabina/i.test(i.drug), arquivo).toBe(false);
       }
     });
@@ -245,5 +249,47 @@ describe("corpus/fichas", () => {
     it("todo código segue P####", () => {
       for (const { ficha } of parseadas) if (ficha.codigoInstitucional !== null) expect(ficha.codigoInstitucional).toMatch(/^P\d{4}$/);
     });
+  });
+});
+
+describe("esquemas novos (D-W9-61)", () => {
+  const por = (nome: string) => parseadas.filter((p) => p.ficha.nome === nome);
+  it("mesna nos 3 horários (0/4/8 h) em toda ficha com ifosfamida; 8 h sem fonte = null", () => {
+    const ifo = parseadas.filter((p) => p.ficha.itens.some((i) => /^ifosfamida/i.test(i.drug)));
+    expect(ifo.map((p) => p.ficha.nome).sort()).toEqual(["Ifosfamida + Gemcitabina", "Ifosfamida + Mesna", "Ifosfamida + Topotecana"]);
+    for (const { ficha, arquivo } of ifo) {
+      for (const h of ["0 h", "4 h", "8 h"]) expect(ficha.itens.filter((i) => i.drug === `Mesna (${h})`).length, `${arquivo} ${h}`).toBe(1);
+      expect(ficha.itens.find((i) => i.drug === "Mesna (8 h)")!.standardDose, arquivo).toBeNull();
+    }
+    const m = por("Ifosfamida + Mesna")[0]!.ficha;
+    expect(m.itens.find((i) => /^ifosfamida/i.test(i.drug))!.standardDose).toBe(1200);
+    expect(m.itens.find((i) => i.drug === "Mesna (4 h)")!.standardDose).toBe(600);
+  });
+  it("combinações sem fonte (ifosfamida + gencitabina/topotecana): todas as doses null", () => {
+    for (const n of ["Ifosfamida + Gemcitabina", "Ifosfamida + Topotecana"])
+      for (const i of por(n)[0]!.ficha.itens.filter((x) => /ifosfamida|gemcitabina|topotecana|mesna/i.test(x.drug))) expect(i.standardDose, `${n} ${i.drug}`).toBeNull();
+  });
+  it("AC-TH: trastuzumabe ataque 8 mg/kg e manutenção 6 mg/kg; AC 60/600", () => {
+    const th = por("AC-TH (fase TH — paclitaxel semanal + trastuzumabe)")[0]!.ficha;
+    expect(th.itens.find((i) => /ataque/i.test(i.drug))!.standardDose).toBe(8);
+    expect(th.itens.find((i) => /manuten/i.test(i.drug))!.standardDose).toBe(6);
+    for (const i of th.itens.filter((x) => /trastuzumabe/i.test(x.drug))) expect(i.unit).toBe("mg/kg");
+    const ac = por("AC-TH (fase AC)")[0]!.ficha;
+    expect(ac.itens.find((i) => /doxorrubicina/i.test(i.drug))!.standardDose).toBe(60);
+    expect(ac.itens.find((i) => /ciclofosfamida/i.test(i.drug))!.standardDose).toBe(600);
+  });
+  it("carbotaxol semanal de cabeça e pescoço AUC 2; Mayo 425; carbo+pacli semanal AUC 2 mantidos", () => {
+    const hn = parseadas.find((p) => p.ficha.tumor === "Cabeça e pescoço" && p.ficha.nome === "Carboplatina + Paclitaxel semanal")!.ficha;
+    expect(hn.itens.find((i) => /carboplatina/i.test(i.drug))!.standardDose).toBe(2);
+    const mayo = por("5-FU + Leucovorina (Mayo Clinic)")[0]!.ficha;
+    expect(mayo.itens.find((i) => eh5fu(i.drug))!.standardDose).toBe(425);
+    for (const p of por("Carboplatina + Paclitaxel semanal (CROSS + RxT)")) expect(p.ficha.itens.find((i) => /carboplatina/i.test(i.drug))!.standardDose).toBe(2);
+  });
+  it("cisplatina semanal 40 mg/m² com RT (colo), GEMOX, FOLFIRI + bevacizumabe e temozolomida", () => {
+    expect(por("Cisplatina semanal + RxT")[0]!.ficha.itens.find((i) => /^cisplatina/i.test(i.drug))!.standardDose).toBe(40);
+    expect(por("GEMOX")[0]!.ficha.itens.map((i) => i.drug)).toEqual(expect.arrayContaining(["Gemcitabina", "Oxaliplatina"]));
+    const fb = por("FOLFIRI + Bevacizumabe")[0]!.ficha;
+    expect(fb.itens.find((i) => /bevacizumabe/i.test(i.drug))!.standardDose).toBe(5);
+    expect(por("Temozolomida monoterapia")[0]!.ficha.itens.find((i) => /temozolomida/i.test(i.drug))!.route).toBe("VO");
   });
 });
