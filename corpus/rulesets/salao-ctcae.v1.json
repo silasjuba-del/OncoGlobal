@@ -1,0 +1,59 @@
+{
+  "header": {
+    "id": "salao-ctcae",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-06",
+    "fonte": {
+      "tipo": "LITERATURA",
+      "referencia": "D-W9-22a + docs/referencias/onco-referencia/02-ctcae-v6.md §13–15 (CTCAE v6.0 NCI)",
+      "trecho": "Neutrophil count decreased: G1 <1500-1000/mm3; G2 <1000-500/mm3; G3 <500-100/mm3; G4 <100/mm3. Anemia: G2 Hgb <10.0-8.0 g/dL; G3 <8.0 g/dL. Thrombocytopenia: G2 <75000-50000/mm3; G3 <50000-10000/mm3; G4 <10000/mm3. Porta de ciclo = limiar de bula, nunca grau CTCAE.",
+      "edicao": "CTCAE v6.0"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-06"
+  },
+  "portaCiclo": {
+    "decisao": "D-W9-22a",
+    "igualAoLimitePassa": true,
+    "bloqueiaSalvar": false,
+    "grauNaoAbrePorta": true,
+    "codigos": ["anc", "plq", "clearance", "feve"]
+  },
+  "graus": {
+    "decisao": "D-W9-22a",
+    "versaoCtcae": "6.0",
+    "ausenteNaoViraZero": true,
+    "confirmacaoMedicaObrigatoria": true,
+    "termos": {
+      "neutrofilos": {
+        "unidade": "/mm3",
+        "fonte": "02-ctcae-v6.md §13",
+        "faixas": [
+          { "grau": 1, "minInclusivo": 1000, "maxExclusivo": 1500 },
+          { "grau": 2, "minInclusivo": 500, "maxExclusivo": 1000 },
+          { "grau": 3, "minInclusivo": 100, "maxExclusivo": 500 },
+          { "grau": 4, "maxExclusivo": 100 }
+        ]
+      },
+      "hemoglobina": {
+        "unidade": "dg/dL",
+        "nota": "80 = 8,0 g/dL. G1 exige LIN e não entra nesta tabela.",
+        "fonte": "02-ctcae-v6.md §14",
+        "faixas": [
+          { "grau": 2, "minInclusivo": 80, "maxExclusivo": 100 },
+          { "grau": 3, "maxExclusivo": 80 }
+        ]
+      },
+      "plaquetas": {
+        "unidade": "/mm3",
+        "nota": "G1 exige LIN e não entra nesta tabela.",
+        "fonte": "02-ctcae-v6.md §15",
+        "faixas": [
+          { "grau": 2, "minInclusivo": 50000, "maxExclusivo": 75000 },
+          { "grau": 3, "minInclusivo": 10000, "maxExclusivo": 50000 },
+          { "grau": 4, "maxExclusivo": 10000 }
+        ]
+      }
+    }
+  }
+}
