@@ -2,20 +2,25 @@
 
 Worktree `w10-fugu`, branch `f0/w10-fugu`; base no início `d2af9e7`. Apenas dados sintéticos. Retomar da primeira fatia não FEITA; mesclar `f0/w1-integrado` antes de começar cada fatia.
 
+Retomada de 2026-10-07: `git merge f0/w1-integrado` (fast-forward `fe4f459 → 0d84302`), `npm ci --offline` (100 pacotes, 0 vulnerabilidades) e leitura de `docs/w10/RESPOSTAS-TECH-LEAD.md`.
+
 | Fatia | Estado | Commit | Evidência / pendência |
 |---|---|---|---|
-| FUGU-01 · Tipos e esqueleto | FEITA | `W10-FUGU-01` (commit desta fatia) | Nove etapas puras, 5 testes novos; tipos locais provisórios até contratos W10 |
-| FUGU-02 · Conversão local | BLOQUEADA_DEPENDENCIA (parcial) | `W10-FUGU-02` (commit desta fatia) | Texto/DOCX locais, 5 testes novos; PDF digital não extraído sem parser aprovado; pedido ao tech lead |
-| FUGU-03 · Segmentação | FEITA | `W10-FUGU-03` (commit desta fatia) | 4 testes: maratona de 3 pacientes, fronteira incerta, pausa longa, acompanhante; sem vínculo automático |
-| FUGU-04 · PatientResolver | FEITA | `W10-FUGU-04` (commit desta fatia) | Ranking por pesos, razões, homônimos por cadastro e nome zerado em Plaud; 4 testes, nunca AUTO_MERGE |
-| FUGU-05 · Extrator | FEITA (dublê sintético) | `W10-FUGU-05` (commit desta fatia) | Porta síncrona + regex determinísticas, 7 testes novos; PT07–PT10, negação e números falados; sem LLM/autoridade clínica |
-| FUGU-06 · Normalização | NÃO_INICIADA | — | — |
-| FUGU-07 · Reconciliação | NÃO_INICIADA | — | — |
-| FUGU-08 · SafetyValidator | NÃO_INICIADA | — | — |
-| FUGU-09 · Caixa de revisão | NÃO_INICIADA | — | — |
-| FUGU-10 · Timeline | NÃO_INICIADA | — | — |
-| FUGU-11 · Radiologia e biomarcadores | NÃO_INICIADA | — | — |
-| FUGU-12 · E2E e fechamento | NÃO_INICIADA | — | — |
+| FUGU-01 · Tipos e esqueleto | FEITA | `W10-FUGU-01` | Nove etapas puras, 5 testes novos; tipos provisórios trocados depois na FUGU-02R |
+| FUGU-02 · Conversão local | **FEITA** | `W10-FUGU-02` + FUGU-02R | Texto/DOCX locais e **PDF digital por pdfjs-dist**; escaneado/imagem seguem PENDENTE (D-W9-09); 5 + 7 testes |
+| FUGU-02R · Contratos W10 | FEITA | commit desta retomada | Zero `PROVISORIO-W10`; `PhysicianConfirmation` exige `ReviewAction` CONFIRMAR persistida |
+| FUGU-03 · Segmentação | FEITA | `W10-FUGU-03` | 4 testes: maratona de 3 pacientes, fronteira incerta, pausa longa, acompanhante; sem vínculo automático |
+| FUGU-04 · PatientResolver | FEITA | `W10-FUGU-04` | Ranking por pesos, razões, homônimos por cadastro e nome zerado em Plaud; 4 testes, nunca AUTO_MERGE |
+| FUGU-05 · Extrator | FEITA (dublê sintético) | `W10-FUGU-05` | Porta síncrona + regex determinísticas, 7 testes; PT07–PT10, negação, números falados; sem LLM/autoridade clínica |
+| FUGU-06 · Normalização | FEITA | commit desta retomada | Unidades/°C com `tempDecimos`, data civil −03:00, lateralidade D-W9-05, sítio canônico, fármaco fonético, TNM AJCC 8/9; 12 testes |
+| FUGU-07 · Reconciliação | FEITA | commit desta retomada | `ReconciledField` por campo com hierarquia §4, conflito visível, tratamento em 5 estados, 8 detectores de conflito (G-07 chamado por interface); 13 testes |
+| FUGU-08 · SafetyValidator | FEITA | commit desta retomada | 7 invariantes como código; promoção ilegal rejeitada com motivo; 9 testes adversariais |
+| FUGU-09 · Caixa de revisão | FEITA | commit desta retomada | `CaixaRevisao` + resumo da spec §10 + `ReviewAction` → rascunho de evento do ledger; 8 testes |
+| FUGU-10 · Timeline | FEITA | commit desta retomada | Projeção do Anexo A validada pelo contrato W10; `stageHistory` imutável, metastático monotônico; 5 testes |
+| FUGU-11 · Radiologia e biomarcadores | FEITA (porta) | commit desta retomada | Séries por sítio + porta `RegraProgressao` (dublê de D-W9-43) + engine de biomarcadores em tabela de dados; 13 testes |
+| FUGU-12 · E2E e fechamento | FEITA | commit desta retomada | PT10 ponta a ponta (INTERVAL_PROGRESSION L5 + NÃO SEI de histologia/TNM/RE-RP-HER2) e maratona com "creatinina quatorze"; 4 testes |
+
+**Granularidade de commit (desvio registrado):** as fatias FUGU-02R e FUGU-06 a FUGU-11 foram integradas em **um único commit**. Motivo: a troca dos contratos W10 muda o tipo de `Exception`→`ReviewException` e de `ReconciledField`, o que quebra `src/orchestration/pipeline-extracao.ts`; e o pipeline final chama os módulos das seis fatias. Commits intermediários por fatia não compilariam sem manter versões-stub do pipeline. FUGU-12 saiu em commit próprio.
 
 ## Saídas reais · FUGU-01 (comandos em série)
 
@@ -33,110 +38,94 @@ corpus ok (29 arquivos)
 RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-fugu
 Test Files  7 passed (7)
 Tests  30 passed (30)
-
-RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-fugu
-Test Files  1 passed (1)
-Tests  9 passed (9)
 ```
-
-Comandos Vitest: `npx vitest run tests/kernel/extracao tests/projections tests/orchestration tests/leitura tests/w10-fugu --no-file-parallelism`, seguido de `npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`. Apenas a FUGU-01 foi executada: não declarar pipeline clínico, integração ao ledger ou liberação de LLM. Testes `.adv.ts` W8 não executados nesta fatia; nenhum convertido em verde aqui.
-
-Pedido de contrato: `docs/w10/PEDIDOS-FUGU.md`. Sem novos valores clínicos `[VERIFICAR]` introduzidos.
 
 ## Saídas reais · FUGU-02 (comandos em série)
 
-Primeira execução dos testes direcionados: **1 FAIL/34 PASS** por expectativa equivocada do teste sobre a fixture (rótulo `PACIENTE TESTE 07` em maiúsculas e rasuras). A lógica foi corrigida para deixar o documento com `[RISCADO]` em PENDENTE; a expectativa foi ajustada para a fonte real, sem alterar teste existente.
+Primeira execução dos testes direcionados: **1 FAIL/34 PASS** por expectativa equivocada do teste sobre a fixture (rótulo `PACIENTE TESTE 07` em maiúsculas e rasuras). A lógica foi corrigida para deixar o documento com `[RISCADO]` em PENDENTE.
 
-`npx tsc --noEmit` — exit 0, sem diagnósticos.
+`npx tsc --noEmit` — exit 0. `check:boundaries` — `fronteiras ok (139 arquivos)`; `check:corpus` — `corpus ok (29 arquivos)`; suíte direcionada `8 passed (8) / 35 passed (35)`.
+
+`npx vitest run --config tests/adv-w8/vitest.config.ts --no-file-parallelism`: **exit 1; 9 arquivos falharam; 10 testes FAIL/31 PASS** (`SEM_IMPLEMENTACAO`). Nenhum teste `.adv.ts` tornou-se verde. Não confundir suíte regular verde com adversarial aprovado.
+
+## Saídas reais · FUGU-03 · FUGU-04 · FUGU-05
+
+```text
+FUGU-03: tsc exit 0 · fronteiras ok (140 arquivos) · corpus ok (29 arquivos)
+         Test Files  9 passed (9) · Tests  39 passed (39)
+FUGU-04: tsc exit 0 · fronteiras ok (141 arquivos) · corpus ok (29 arquivos)
+         Test Files 10 passed (10) · Tests  43 passed (43)
+FUGU-05: tsc exit 0 · fronteiras ok (142 arquivos) · corpus ok (29 arquivos)
+         Test Files 11 passed (11) · Tests  50 passed (50)
+```
+Em todas: `npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism` — `1 passed (1) / 9 passed (9)`.
+
+## Saídas reais · FUGU-02R + FUGU-06 a FUGU-11 (retomada de 2026-10-07)
+
+Retomada com `git merge f0/w1-integrado` (fast-forward; 53 commits, 176 arquivos) e `npm ci --offline` (`added 100 packages, and audited 101 packages in 2m` / `found 0 vulnerabilities`). `pdfjs-dist` 6.4.299 presente em `node_modules/pdfjs-dist/legacy/build/pdf.mjs`.
+
+O que mudou de contrato:
+- `src/kernel/extracao/tipos.ts` reexporta `src/contracts/w10/extracao.js`; `PhysicianConfirmation` agora é `{ acao: ReviewAction, decisionEventId }` e exige `CONFIRMAR`.
+- `pipeline-extracao.ts` devolve `conflitos`, `rejeitados`, `violacoes`, `caixaRevisao`, `series`, `timelines` e `timeline` (projeção do primeiro paciente ligado por decisão persistida).
+
+Falhas intermediárias corrigidas antes da rodada final (registradas para auditoria):
+1. `TS2820` — alias de unidade `/mm³` apontando para valor fora de `UnidadeCanonica`.
+2. `TS2353` — `isEvalSupported` não existe em `DocumentInitParameters` do pdfjs 6; trocado por `useWasm: false` (mesma intenção: nada de rede).
+3. `TS2353` — teste da FUGU-01 ainda usava `{ medicoId, decisionEventId }`; atualizado para `ReviewAction`.
+4. BOM UTF-8 acidental em 13 arquivos escritos no Windows; removido (o repo não usa BOM).
+5. Testes do PDF falharam com "Invalid PDF structure": o `getDocument` do pdfjs não aceita o `ArrayBuffer` compartilhado do pool do Node; `lerPdfDigital` passou a copiar para um `Uint8Array` próprio.
 
 ```text
 > oncoglobal@0.0.1 check:boundaries
 > node scripts/check-boundaries.mjs
-fronteiras ok (139 arquivos)
+fronteiras ok (183 arquivos)
 
 > oncoglobal@0.0.1 check:corpus
 > node scripts/validate-corpus.mjs
-corpus ok (29 arquivos)
+corpus ok (102 arquivos)
+
+npx tsc --noEmit — exit 0, sem diagnósticos
 
 RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-fugu
-Test Files  8 passed (8)
-Tests  35 passed (35)
+Test Files  20 passed (20)
+Tests  121 passed (121)
 
 RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-fugu
 Test Files  1 passed (1)
 Tests  9 passed (9)
 ```
 
-`npx vitest run --config tests/adv-w8/vitest.config.ts --no-file-parallelism`: **exit 1; 9 arquivos falharam; 10 testes FAIL/31 PASS** (`SEM_IMPLEMENTACAO`, inclusive Caso 07/dedupe, que não faz parte da conversão FUGU-02). Nenhum teste `.adv.ts` tornou-se verde. Não confundir suíte regular verde com adversarial aprovado.
+Comando: `npx vitest run tests/kernel/extracao tests/projections tests/orchestration tests/leitura tests/w10-fugu --no-file-parallelism`, seguido de `npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`.
 
-## Saídas reais · FUGU-03 (comandos em série)
+## Testes criados nesta retomada (71 novos)
 
-Houve um typecheck intermediário FAIL (`TS2339` ao estreitar `prior` no segmenter), corrigido antes da rodada final abaixo. `npx tsc --noEmit`: exit 0, sem diagnósticos.
+| Arquivo | Fatia | Testes |
+|---|---|---|
+| `tests/leitura/pdf-digital.test.ts` | FUGU-02 | 7 |
+| `tests/kernel/extracao/normalizacao.test.ts` | FUGU-06 | 12 |
+| `tests/kernel/extracao/reconciliacao.test.ts` | FUGU-07 | 13 |
+| `tests/w10-fugu/safety-invariantes.test.ts` | FUGU-08 | 9 |
+| `tests/w10-fugu/caixa-revisao.test.ts` | FUGU-09 | 8 |
+| `tests/projections/timeline-paciente.test.ts` | FUGU-10 | 5 |
+| `tests/projections/radiologia.test.ts` | FUGU-11a | 8 |
+| `tests/kernel/extracao/biomarcadores.test.ts` | FUGU-11b | 5 |
+| `tests/w10-fugu/e2e-pt10.test.ts` | FUGU-12 | 4 |
 
-```text
-> oncoglobal@0.0.1 check:boundaries
-> node scripts/check-boundaries.mjs
-fronteiras ok (140 arquivos)
+Nenhum teste existente foi enfraquecido. As duas únicas mudanças em teste preexistente: (a) `tests/w10-fugu/pipeline-esqueleto.test.ts` passou a usar `ReviewAction` no lugar do par `{ medicoId, decisionEventId }` — exigência direta da troca de contrato pedida pelo tech lead, com expectativa reforçada (agora também recusa ação diferente de `CONFIRMAR`); (b) nada mais.
 
-> oncoglobal@0.0.1 check:corpus
-> node scripts/validate-corpus.mjs
-corpus ok (29 arquivos)
+## `.adv.ts` W8
 
-RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-fugu
-Test Files  9 passed (9)
-Tests  39 passed (39)
+Não executados nesta retomada (fora da faixa). A rodada da FUGU-02 segue como referência: 9 arquivos, 10 FAIL/31 PASS, nenhum convertido em verde.
 
-RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-fugu
-Test Files  1 passed (1)
-Tests  9 passed (9)
-```
+## `[VERIFICAR]` e pontos abertos
 
-Heurísticas de fronteira permanecem propostas, não provam identidade: toda ligação ao paciente segue na caixa de revisão. O score/limiar técnico de fronteira não é validação clínica.
+- **Nenhum valor clínico novo foi decidido** e nenhum `[VERIFICAR]` foi preenchido em silêncio.
+- `[VERIFICAR]` herdados da tabela de biomarcadores: tumores fora de CPNPC adeno IV e mama (`requiredBiomarkers` devolve `[VERIFICAR]` em vez de exigência inventada) — curadoria do Dr. Silas.
+- `[VERIFICAR]` de infraestrutura: `tipo` canônico do evento de decisão no ledger (`ReviewDecision` hoje é rascunho do FUGU) — ver `docs/w10/PEDIDOS-FUGU.md`.
+- Regra canônica de `INTERVAL_PROGRESSION` (GROK-06) ainda ausente; o FUGU usa a porta + dublê determinístico.
 
-## Saídas reais · FUGU-04 (comandos em série)
+## Limites declarados (não confundir com conclusão)
 
-`npx tsc --noEmit`: exit 0, sem diagnósticos.
-
-```text
-> oncoglobal@0.0.1 check:boundaries
-> node scripts/check-boundaries.mjs
-fronteiras ok (141 arquivos)
-
-> oncoglobal@0.0.1 check:corpus
-> node scripts/validate-corpus.mjs
-corpus ok (29 arquivos)
-
-RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-fugu
-Test Files  10 passed (10)
-Tests  43 passed (43)
-
-RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-fugu
-Test Files  1 passed (1)
-Tests  9 passed (9)
-```
-
-O cadastro é parâmetro local; o resultado carrega apenas ID de candidato, score e razões sem valores identificáveis. Homônimos permanecem distintos e todo candidato exige revisão.
-
-## Saídas reais · FUGU-05 (comandos em série)
-
-Rodada intermediária direcionada: 2 FAIL/46 PASS ao detectar expressão regular incorreta para `%`/`+` e negação “não há”; corrigido no parser. `npx tsc --noEmit`: exit 0, sem diagnósticos.
-
-```text
-> oncoglobal@0.0.1 check:boundaries
-> node scripts/check-boundaries.mjs
-fronteiras ok (142 arquivos)
-
-> oncoglobal@0.0.1 check:corpus
-> node scripts/validate-corpus.mjs
-corpus ok (29 arquivos)
-
-RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-fugu
-Test Files  11 passed (11)
-Tests  50 passed (50)
-
-RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-fugu
-Test Files  1 passed (1)
-Tests  9 passed (9)
-```
-
-Regex são um **dublê limitado aos padrões sintéticos testados**, não um extrator clínico geral. Valor literal de Plaud e achado de imagem permanecem propostas sem promoção; FUGU-06 a FUGU-12 ainda não foram concluídas. PDF digital continua pendente (FUGU-02). Os 10 FAIL adversariais W8 não foram corrigidos nesta fatia.
+- O "extrator" continua sendo um **dublê determinístico** limitado aos padrões sintéticos testados; a LLM segue desligada (D-W9-15). Em prosa, o método de imagem pode ser atribuído a uma linha que não é um exame.
+- A caixa de revisão, a timeline e a projeção de imagem são **esqueleto local**: não persistem, não assinam, não vinculam paciente sem `ReviewAction` e não liberam nenhuma saída externa.
+- Suíte regular verde **não** é auditoria adversarial aprovada nem autorização de integração clínica.
