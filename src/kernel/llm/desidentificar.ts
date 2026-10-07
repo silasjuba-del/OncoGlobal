@@ -20,6 +20,21 @@ export type TipoAchado = "NOME" | "IDENTIFICADOR" | "CPF" | "CNS" | "TELEFONE" |
 const semAcento = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "");
 const escapar = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
+/** só letras, sem acento, minúsculas */
+function letrasCompactas(s: string): string {
+  return compactarComIndices(s).compacto;
+}
+/** compacto + índice (no original) de cada letra mantida */
+function compactarComIndices(s: string): { compacto: string; indices: number[] } {
+  let compacto = "";
+  const indices: number[] = [];
+  for (let i = 0; i < s.length; i++) {
+    const c = semAcento(s[i] ?? "").toLowerCase();
+    if (/^\p{L}$/u.test(c)) { compacto += c; indices.push(i); }
+  }
+  return { compacto, indices };
+}
+
 /** CPF com dígitos verificadores válidos (11 dígitos, aceita pontuação). */
 export function cpfValido(raw: string): boolean {
   const d = raw.replace(/\D/g, "");
@@ -93,6 +108,52 @@ export function desidentificar(textoOriginal: string, dic: DicionarioPaciente): 
         } else out.push(palavras[i] ?? "");
       }
       return out.join("");
+    });
+  }
+
+  // 4. Nome compacto (URL, caminho, nome de arquivo, camelCase, snake_case, sem acento, %20): RT-12a.
+  //    Por trecho sem espaços, reduz a letras e procura o nome completo / pares de palavras consecutivas colados.
+  const sequencias = new Set<string>();
+  for (const nome of dic.nomes) {
+    const pal = nome.trim().split(/\s+/).filter((p) => p.length > 0);
+    for (let i = 0; i < pal.length; i++)
+      for (let j = i + 2; j <= pal.length; j++) {
+        const c = letrasCompactas(pal.slice(i, j).join(" "));
+        if (c.length >= 7) sequencias.add(c);
+      }
+  }
+  if (sequencias.size) {
+    const alvos = [...sequencias].sort((a, b) => b.length - a.length);
+    const decodificado = (trecho: string): string => {
+      try { return decodeURIComponent(trecho); } catch { return trecho; }
+    };
+    texto = texto.replace(/\S+/g, (trecho) => {
+      if (/^⟨[A-Z_]+_\d+⟩$/.test(trecho)) return trecho;
+      // trechos já tokenizados dentro do caminho: preserva-os, só examina o resto
+      const base = decodificado(trecho);
+      const { compacto, indices } = compactarComIndices(base);
+      for (const alvo of alvos) {
+        const pos = compacto.indexOf(alvo);
+        if (pos >= 0) {
+          const ini = indices[pos] ?? 0;
+          const fim = (indices[pos + alvo.length - 1] ?? base.length - 1) + 1;
+          return base.slice(0, ini) + tokenPara("NOME", base.slice(ini, fim)) + base.slice(fim);
+        }
+      }
+      // base64 (padrão ou URL-safe) em qualquer parte do trecho: decodifica e confere o conteúdo
+      let mudou = false;
+      const sem64 = trecho.replace(/[A-Za-z0-9+/_-]{16,}={0,2}/g, (b64) => {
+        try {
+          const dec = Buffer.from(b64.replace(/-/g, "+").replace(/_/g, "/"), "base64").toString("utf8");
+          if (/^[ -~À-ſ]+$/.test(dec) && alvos.some((x) => compactarComIndices(dec).compacto.includes(x))) {
+            mudou = true;
+            return tokenPara("NOME", b64);
+          }
+        } catch { /* não é base64 */ }
+        return b64;
+      });
+      if (mudou) return sem64;
+      return trecho;
     });
   }
 
