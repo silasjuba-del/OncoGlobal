@@ -75,8 +75,9 @@ export function g25EscopoAssinatura(
   assinar: readonly { documentId: string; documentVersion: number }[],
   exibidos: readonly { documentId: string; documentVersion: number }[],
 ): Veredito {
-  if (!Array.isArray(assinar) || !Array.isArray(exibidos) || assinar.length === 0)
-    return { gate: "G-25", decisao: "BLOQUEIA_AUTORIDADE", motivo: "escopo de assinatura ou bundle exibido ausente/vazio" };
+  // Lista malformada ⇒ bloqueia. Lista VAZIA = nada a assinar (confirmação sem documento): não exerce autoridade.
+  if (!Array.isArray(assinar) || !Array.isArray(exibidos))
+    return { gate: "G-25", decisao: "BLOQUEIA_AUTORIDADE", motivo: "escopo de assinatura ou bundle exibido ausente" };
   const fora = assinar.filter((a) => !exibidos.some((e) => e.documentId === a.documentId && e.documentVersion === a.documentVersion));
   return fora.length
     ? { gate: "G-25", decisao: "BLOQUEIA_AUTORIDADE", motivo: `documento não exibido: ${fora.map((f) => `${f.documentId}@${f.documentVersion}`).join(", ")}` }
