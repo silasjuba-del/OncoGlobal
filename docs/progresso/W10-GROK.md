@@ -17,7 +17,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w10-grok`, branch `f0/w10-grok`.
 | GROK-11 manifesto | FEITA | W10-GROK-11 | Script nomeia arquivo fora da trilha. n19 procura outro nome. |
 | GROK-12 dedupe + fachada w8 | FEITA | W10-GROK-12 | Caso 07 verde. Fachada no barrel. |
 | GROK-13 APAC no ledger | FEITA | W10-GROK-13 | Emissão persistível no módulo. Snapshot alinhado sem contrato. |
-| GROK-14 fichas + fechamento | — | | |
+| GROK-14 fichas + fechamento | FEITA | W10-GROK-14 | k26 verde. T-56 e N19 seguem vermelhos. |
 
 ## GROK-01
 
@@ -549,6 +549,71 @@ Test Files  16 passed (16)
 ```
 
 16 da GROK-13, mais GROK-01 (38), GROK-02 (11), GROK-03 (7), GROK-04 (5), GROK-05 (6), GROK-06 (7), GROK-07 (5), GROK-08 (5), GROK-09 (6), GROK-10 (7), GROK-11 (5), GROK-12 (6), loader (7), corpus de interações (3) e `rules-w8/interacoes` (3).
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
+
+```
+Test Files  1 passed (1)
+     Tests  9 passed (9)
+```
+
+## GROK-14
+
+`carregarFichaAprovada` em `src/modules/documentos/biblioteca.ts`. A carga pede `templateId + version + hash` e devolve uma ficha inteira, com o campo `versao`. Identidade = tumor + nome + cenário + versão (D-W9-22b). O catálogo padrão é sintético: `ficha-teste` `2.0.0` `sha256:esperado` e a versão `1.0.0` da mesma ficha, sem mistura. Trechos com `semFicha` lançam `ErroFicha`. Versão `9.9.9` lança `ErroFicha` com `codigo` `VERSAO` e não devolve a outra versão. Hash divergente também falha. `corpus/fichas/` não foi lido nem editado. `render.ts` não passou a montar dose.
+
+`git merge f0/w1-integrado` no início desta fatia trouxe `8ce01c1` (expectativas de redteam). Merge ort `e4f137b`, sem conflito. A série abaixo é depois desse merge.
+
+Testes novos: `tests/w10-grok/grok-14-biblioteca.test.ts` (6).
+
+O adv `k26-n17-ficha-inteira.adv.ts` fica verde: 4 testes.
+
+### Adv dos cinco alvos
+
+`npx vitest run --config tests/adv-w8/vitest.config.ts` nos cinco arquivos. Exit 1.
+
+```
+Test Files  2 failed | 3 passed (5)
+     Tests  2 failed | 19 passed (21)
+```
+
+| Adv | Resultado |
+| --- | --- |
+| fn16-t34-semaforo-interacoes | verde, 5 testes |
+| caso07-dedupe | verde, 4 testes |
+| k26-n17-ficha-inteira | verde, 4 testes |
+| t56-g16-owner-write | 1 falha, 4 passam. A falha é o primeiro teste: `gates.ts` não exporta `g16Owner`. Os três de comportamento saem cedo. |
+| n19-manifesto-merge | 1 falha, 2 passam. A falha é o primeiro teste: os nomes candidatos não incluem `scripts/verificar-manifesto.mjs`. O caso positivo sai cedo. |
+
+### Fechamento da onda
+
+Nada foi enviado ao remoto. Commits da faixa, do mais antigo ao mais novo: `27d9f42` GROK-01, `7747bd1` GROK-02, `4af01fc` GROK-03, `f1c3549` GROK-04, `886a4bf` GROK-05, `351362b` GROK-06, `597b868` GROK-07, `bd8a35e` GROK-08, `af16cbe` GROK-09, `07f0370` GROK-10, `d507e53` GROK-11, `ebdd6fd` GROK-12, `c074a5f` GROK-13. A GROK-14 é o commit que inclui esta seção.
+
+Merges de `f0/w1-integrado` nesta branch: `f51e9ba`, `589aaee`, `e4f137b`.
+
+Pedidos ainda abertos, em `docs/w10/PEDIDOS-GROK.md`: reexport de `g16Owner` em `gates.ts`; incluir `verificar-manifesto.mjs` na lista que o n19 procura; script npm `check:manifesto`; fachada w8 continua no barrel, não em `w8-fachada.ts`; snapshot do pack pré-consulta continua diferente da projeção; SIA e antiglosa continuam fora da faixa; CNS do w8 ainda cita a Portaria 711.
+
+Fora desta onda, segue aberto o item do tech lead: reescrever a FN-01, ativar CREAT em `lab-thresholds`, deduplicar os corpos de triagem e `portaCiclo` no barrel, `LimiaresBula` e subir `salao-triagem` para 1.1.0. Não entrou em commit GROK.
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries`
+
+```
+fronteiras ok (205 arquivos)
+```
+
+`npm run check:corpus` — fecho: `corpus ok (109 arquivos)`.
+
+`npx vitest run tests/w10-grok tests/corpus/loader.test.ts tests/corpus/interacoes.test.ts tests/rules-w8/interacoes.test.ts --no-file-parallelism`
+
+```
+Test Files  17 passed (17)
+     Tests  143 passed (143)
+```
+
+6 da GROK-14, mais GROK-01 (38), GROK-02 (11), GROK-03 (7), GROK-04 (5), GROK-05 (6), GROK-06 (7), GROK-07 (5), GROK-08 (5), GROK-09 (6), GROK-10 (7), GROK-11 (5), GROK-12 (6), GROK-13 (16), loader (7), corpus de interações (3) e `rules-w8/interacoes` (3).
 
 `npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
 

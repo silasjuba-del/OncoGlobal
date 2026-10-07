@@ -104,3 +104,9 @@ export { g16Owner } from "./ownership.js";
 3. **Snapshot.** `SnapshotConfirmado` em `src/modules/consulta/preConsulta.ts` não mudou. A projeção do Fugu (`kind`, `campos`, `contentHash`, `projectionVersion`) entra por `alinharSnapshotProjecao`. Os dois formatos continuam diferentes. Sem mudança de contrato. Se o pack pré-consulta for consumir a projeção, a ligação fica com o tech lead.
 4. **CNS do w8.** `src/rules/w8/identificadores.ts` ainda cita a Portaria 711/2004, descartada pela D-W9-13, e devolve só booleano. O algoritmo e-SUS desta fatia está em `src/modules/apac/cns.ts`. O arquivo w8 não foi editado.
 5. **Prazo de 85/90 dias.** `apacPrazo` em `src/rules/apac.ts` não mudou. O aviso de até 1 dia adiantado (D-W5-02) é o relógio do módulo, com offset injetado (D-W5-01).
+
+## GROK-14
+
+1. **Fichas reais.** `corpus/fichas/` continua com a equipe interna. O catálogo padrão de `carregarFichaAprovada` é só a ficha sintética `ficha-teste` / `2.0.0` / `sha256:esperado`, mais a versão `1.0.0`. Não há dose clínica nesse catálogo.
+2. **T-56 e N19.** Seguem vermelhos no primeiro teste. Fecham quando o tech lead aplicar o reexport de `g16Owner` em `gates.ts` (GROK-10) e incluir `scripts/verificar-manifesto.mjs` na lista de candidatos do n19 (GROK-11). O script npm `check:manifesto` também continua só neste arquivo.
+3. **Item do tech lead fora da onda.** FN-01 com FC &lt; 50, CREAT ativo em `lab-thresholds`, deduplicar triagem e `portaCiclo` no barrel, `LimiaresBula` e `salao-triagem` 1.1.0 não foram feitos aqui.
