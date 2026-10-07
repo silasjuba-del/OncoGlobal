@@ -22,7 +22,18 @@ export {
   IconeRascunho,
   IconeRiscado,
 } from "./estados.js";
+export {
+  IconeBusca,
+  IconeCanal,
+  IconeChevron,
+  IconeLua,
+  IconeSalao,
+  IconeSino,
+  IconeSol,
+  IconeUsuario,
+} from "./cromo.js";
 
+import { IconeBusca, IconeCanal, IconeChevron, IconeLua, IconeSalao, IconeSino, IconeSol, IconeUsuario } from "./cromo.js";
 import { IconeAgenda } from "./navegacao.js";
 import { IconeApac } from "./navegacao.js";
 import { IconeConfiguracoes } from "./navegacao.js";
@@ -42,7 +53,7 @@ import { IconePendente } from "./estados.js";
 import { IconeRascunho } from "./estados.js";
 import { IconeRiscado } from "./estados.js";
 
-/** Mapa nome → componente (11 navegação + 7 estado). */
+/** Mapa nome → componente (11 navegação + 7 estado + 8 cromo). */
 export const ICONES = {
   resumo: IconeResumo,
   prontuario: IconeProntuario,
@@ -62,6 +73,14 @@ export const ICONES = {
   rascunho: IconeRascunho,
   e1: IconeE1,
   riscado: IconeRiscado,
+  busca: IconeBusca,
+  lua: IconeLua,
+  sol: IconeSol,
+  sino: IconeSino,
+  chevron: IconeChevron,
+  usuario: IconeUsuario,
+  canal: IconeCanal,
+  salao: IconeSalao,
 } as const;
 
 export type IconeNome = keyof typeof ICONES;
