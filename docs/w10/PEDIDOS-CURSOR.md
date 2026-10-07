@@ -195,3 +195,20 @@ Geist e Geist Mono estão em `src/ui/oncochart/fontes/*.woff2`, com a OFL ao lad
 - Skills/plugins/MCP lista real (nascem desligados)
 - Sincronizar telefone / impressora rede
 - Tema PERSONALIZAR além do flag visual (tokens custom)
+
+## CURSOR-12
+
+### Porta / regras
+- Cortes do salão (D-W9-37/38) na regra Grok — UI só alerta
+- Persistência da agenda QT / arraste real no servidor
+
+### Copy
+| Chave pedida | Texto em uso |
+|---|---|
+| `triagem.passos` | Triagem em 5 passos |
+| `triagem.proximo` | Próximo: … → |
+| `agendaQt.titulo` | Agenda de QT |
+
+## CURSOR-13 / 14
+- Capturas de percurso com browser (PEDIDO a quem tiver Chromium no CI)
+- Orçamento de pintura: jornada já sob demanda (“Ver em 3D”)

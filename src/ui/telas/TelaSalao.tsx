@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import type { PortaConsulta, SalaoVisao } from "../api/porta.js";
+import { AgendaQt } from "../oncochart/AgendaQt.js";
+import { Triagem5Passos } from "../oncochart/Triagem5Passos.js";
 import { FormTriagem } from "../salao/FormTriagem.js";
 import { QuadroSalao } from "../salao/QuadroSalao.js";
 
@@ -7,6 +9,7 @@ import { QuadroSalao } from "../salao/QuadroSalao.js";
 export function TelaSalao({ porta }: { porta: PortaConsulta }) {
   const [visao, setVisao] = useState<SalaoVisao | null>(null);
   const [patientId, setPatientId] = useState<string | null>(null);
+  const [resumoFlash, setResumoFlash] = useState<string | null>(null);
 
   useEffect(() => {
     let viva = true;
@@ -40,6 +43,16 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
           ))}
         </select>
       </label>
+      <Triagem5Passos
+        pacienteNome={escolhido.nome}
+        onResumo={(t) => {
+          setResumoFlash("resumo copiado");
+          if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+            void navigator.clipboard.writeText(t);
+          }
+        }}
+      />
+      {resumoFlash ? <p role="status">{resumoFlash}</p> : null}
       <div className="colunas">
         <FormTriagem
           patientId={escolhido.patientId}
@@ -60,6 +73,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
           }}
         />
       </div>
+      <AgendaQt />
       <section aria-label="Decisões do médico">
         <h2>Decisões do médico</h2>
         {visao.decisoes.length === 0 ? (

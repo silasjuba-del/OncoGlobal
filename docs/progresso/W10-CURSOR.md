@@ -36,6 +36,7 @@ Retomada: a primeira fatia não FEITA é a CURSOR-12.
 - `tests/w10-cursor/dock.test.tsx`
 - `tests/w10-cursor/prescricao.test.ts`
 - `tests/w10-cursor/prescricao-ui.test.tsx`
+- `tests/w10-cursor/config.test.tsx`
 
 ## Saídas reais · fatia CURSOR-08…09
 
