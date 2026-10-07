@@ -1,0 +1,29 @@
+LAUDO ANATOMOPATOLÓGICO — BÓPSIA DE PRÓSTATA POR FRAGMENTOS — LOTE B (3 sítios)
+LABORATÓRIO EXEMPLO (instituição fictícia) · Protocolo: LAB-9002 (sintético)
+=====================================================================
+DOCUMENTO SINTÉTICO — PACIENTE TESTE 07 — nenhum dado real.
+=====================================================================
+Data de entrada do material (data clínica): 2026-07-16
+Data de emissão do laudo: 2026-07-20
+Identificação no cabeçalho (rótulo impresso "Cartão SUS"): 123.456.789-01
+  -> 11 dígitos = mesmo CPF sintético da ficha; rótulo "Cartão SUS" NÃO prova CNS (I1).
+
+Material: fragmentos de biópsia prostática, sítios esquerdos (segundo lote de entrada).
+
+SÍTIO L BASE (lateralidade ESQUERDA, posição base):
+  Adenocarcinoma acinar, GLEASON 3+3=6 (grupo de grau 1). Sem padrão cribriforme.
+
+SÍTIO L TERÇO MÉDIO (lateralidade ESQUERDA, posição terço médio):
+  Adenocarcinoma acinar, GLEASON 4+3=7 (grupo de grau 2), COM PADRÃO CRIBRIFORME.
+
+SÍTIO L ÁPICE (lateralidade ESQUERDA, posição ápice):
+  Adenocarcinoma acinar, GLEASON 3+3=6 (grupo de grau 1). Sem padrão cribriforme.
+
+Conclusão do lote B: adenocarcinoma prostático em 3 de 3 sítios esquerdos; padrão cribriforme
+presente em 1 sítio (L terço médio).
+Dr. Patologista Exemplo — CRM-TS 000002 (assinatura fictícia)
+=====================================================================
+Armadilhas reproduzidas: I1, P1 (graus mistos por sítio; cribriforme em exatamente 1 sítio;
+negação "Sem padrão cribriforme" nos demais). Lotes A e B têm protocolos e datas de entrada
+DISTINTOS (LAB-9001 ≠ LAB-9002) — são dois exames para a chave de deduplicação
+(laboratório + número do exame + data de entrada), não duplicatas (D2).

@@ -7,12 +7,18 @@ export interface TemplateDocumento {
   templateId: string;
   versao: string;
   campos: readonly string[];
+  /** Politica declarada pelo template do corpus. */
+  proibidoConter: readonly string[];
 }
+
+export type OrigemFatoDocumento =
+  | "FATO_CONFIRMADO" | "DECISAO_MEDICA" | "TEXTO_FIXO" | "ALERTA" | "CORRECAO_IA";
 
 export interface FatoConfirmado {
   campo: string;
   valor: string;
   revisao: "CONFIRMADO" | "ASSINADO";
+  origem: OrigemFatoDocumento;
 }
 
 /** Objeto Alerta não satisfaz esta forma: falta template/fatos e sobra o tipo do chat. */
@@ -43,6 +49,10 @@ export function renderizarDocumento(entrada: EntradaRender): DocumentoRenderizad
   for (const fato of entrada.fatos) {
     if (fato.revisao !== "CONFIRMADO" && fato.revisao !== "ASSINADO") continue;
     if (!vistos.has(fato.campo)) continue;
+    // Nao promover fato sem politica e proveniencia reconhecida (inclusive em runtime JS).
+    if (!Array.isArray(entrada.template.proibidoConter)
+      || !ORIGENS_RECONHECIDAS.has(fato.origem)
+      || entrada.template.proibidoConter.includes(fato.origem)) continue;
     const previo = porCampo.get(fato.campo);
     if (previo === undefined) porCampo.set(fato.campo, fato.valor);
     else if (previo !== fato.valor) porCampo.set(fato.campo, FATO_CONFLITO);
@@ -78,3 +88,7 @@ export function renderizarDocumento(entrada: EntradaRender): DocumentoRenderizad
     conflitos,
   };
 }
+
+const ORIGENS_RECONHECIDAS: ReadonlySet<string> = new Set([
+  "FATO_CONFIRMADO", "DECISAO_MEDICA", "TEXTO_FIXO", "ALERTA", "CORRECAO_IA",
+]);

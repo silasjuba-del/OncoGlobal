@@ -1,0 +1,750 @@
+{"de": "tum.linfoma-hodgkin", "rel": "FONTE", "para": "src.09.80", "pagina": "5-6"}
+{"de": "dx.linfomas.biopsia-excisional", "rel": "FONTE", "para": "src.09.80", "pagina": "6;18;27"}
+{"de": "tum.linfoma-hodgkin", "rel": "DIAGNOSTICA_POR", "para": "dx.linfomas.biopsia-excisional"}
+{"de": "est.linfoma-hodgkin.lugano", "rel": "FONTE", "para": "src.09.80", "pagina": 7}
+{"de": "tum.linfoma-hodgkin", "rel": "ESTADIA_POR", "para": "est.linfoma-hodgkin.lugano"}
+{"de": "est.linfoma-hodgkin.ips", "rel": "FONTE", "para": "src.09.80", "pagina": 7}
+{"de": "tum.linfoma-hodgkin", "rel": "ESTADIA_POR", "para": "est.linfoma-hodgkin.ips"}
+{"de": "est.linfoma-hodgkin.precoce-desfavoravel", "rel": "FONTE", "para": "src.09.80", "pagina": 7}
+{"de": "tum.linfoma-hodgkin", "rel": "ESTADIA_POR", "para": "est.linfoma-hodgkin.precoce-desfavoravel"}
+{"de": "cen.linfoma-hodgkin.precoce-favoravel", "rel": "FONTE", "para": "src.09.80", "pagina": 8}
+{"de": "tum.linfoma-hodgkin", "rel": "TEM_CENARIO", "para": "cen.linfoma-hodgkin.precoce-favoravel"}
+{"de": "far.doxorrubicina", "rel": "FONTE", "para": "src.09.80", "pagina": 8}
+{"de": "far.bleomicina", "rel": "FONTE", "para": "src.09.80", "pagina": 8}
+{"de": "far.vimblastina", "rel": "FONTE", "para": "src.09.80", "pagina": 8}
+{"de": "far.dacarbazina", "rel": "FONTE", "para": "src.09.80", "pagina": 8}
+{"de": "reg.linfoma-hodgkin.abvd-2c-isrt-20gy", "rel": "FONTE", "para": "src.09.80", "pagina": 8}
+{"de": "reg.linfoma-hodgkin.abvd-2c-isrt-20gy", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.linfoma-hodgkin.abvd-2c-isrt-20gy", "rel": "USA_FARMACO", "para": "far.bleomicina"}
+{"de": "reg.linfoma-hodgkin.abvd-2c-isrt-20gy", "rel": "USA_FARMACO", "para": "far.vimblastina"}
+{"de": "reg.linfoma-hodgkin.abvd-2c-isrt-20gy", "rel": "USA_FARMACO", "para": "far.dacarbazina"}
+{"de": "cen.linfoma-hodgkin.precoce-favoravel", "rel": "TRATA_COM", "para": "reg.linfoma-hodgkin.abvd-2c-isrt-20gy", "linha": "1a", "intencao": "curativa"}
+{"de": "cen.linfoma-hodgkin.precoce-desfavoravel", "rel": "FONTE", "para": "src.09.80", "pagina": 9}
+{"de": "tum.linfoma-hodgkin", "rel": "TEM_CENARIO", "para": "cen.linfoma-hodgkin.precoce-desfavoravel"}
+{"de": "reg.linfoma-hodgkin.abvd-isrt-30gy", "rel": "FONTE", "para": "src.09.80", "pagina": 9}
+{"de": "reg.linfoma-hodgkin.abvd-isrt-30gy", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.linfoma-hodgkin.abvd-isrt-30gy", "rel": "USA_FARMACO", "para": "far.bleomicina"}
+{"de": "reg.linfoma-hodgkin.abvd-isrt-30gy", "rel": "USA_FARMACO", "para": "far.vimblastina"}
+{"de": "reg.linfoma-hodgkin.abvd-isrt-30gy", "rel": "USA_FARMACO", "para": "far.dacarbazina"}
+{"de": "cen.linfoma-hodgkin.precoce-desfavoravel", "rel": "TRATA_COM", "para": "reg.linfoma-hodgkin.abvd-isrt-30gy", "linha": "1a", "intencao": "curativa"}
+{"de": "far.ciclofosfamida", "rel": "FONTE", "para": "src.09.80", "pagina": 9}
+{"de": "far.etoposideo", "rel": "FONTE", "para": "src.09.80", "pagina": 9}
+{"de": "far.procarbazina", "rel": "FONTE", "para": "src.09.80", "pagina": 9}
+{"de": "far.prednisolona", "rel": "FONTE", "para": "src.09.80", "pagina": 9}
+{"de": "far.vincristina", "rel": "FONTE", "para": "src.09.80", "pagina": 9}
+{"de": "reg.linfoma-hodgkin.ebeacopp", "rel": "FONTE", "para": "src.09.80", "pagina": 9}
+{"de": "reg.linfoma-hodgkin.ebeacopp", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.linfoma-hodgkin.ebeacopp", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.linfoma-hodgkin.ebeacopp", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.linfoma-hodgkin.ebeacopp", "rel": "USA_FARMACO", "para": "far.procarbazina"}
+{"de": "reg.linfoma-hodgkin.ebeacopp", "rel": "USA_FARMACO", "para": "far.prednisolona"}
+{"de": "reg.linfoma-hodgkin.ebeacopp", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "reg.linfoma-hodgkin.ebeacopp", "rel": "USA_FARMACO", "para": "far.bleomicina"}
+{"de": "cen.linfoma-hodgkin.precoce-desfavoravel", "rel": "TRATA_COM", "para": "reg.linfoma-hodgkin.ebeacopp", "linha": "1a (PET+ Deauville 4-5)", "intencao": "curativa"}
+{"de": "far.brentuximabe_vedotina", "rel": "FONTE", "para": "src.09.80", "pagina": "9-11"}
+{"de": "far.dexametasona", "rel": "FONTE", "para": "src.09.80", "pagina": "9-11"}
+{"de": "reg.linfoma-hodgkin.brecadd", "rel": "FONTE", "para": "src.09.80", "pagina": "9-11"}
+{"de": "reg.linfoma-hodgkin.brecadd", "rel": "USA_FARMACO", "para": "far.brentuximabe_vedotina"}
+{"de": "reg.linfoma-hodgkin.brecadd", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.linfoma-hodgkin.brecadd", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.linfoma-hodgkin.brecadd", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.linfoma-hodgkin.brecadd", "rel": "USA_FARMACO", "para": "far.dacarbazina"}
+{"de": "reg.linfoma-hodgkin.brecadd", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "cen.linfoma-hodgkin.precoce-desfavoravel", "rel": "TRATA_COM", "para": "reg.linfoma-hodgkin.brecadd", "linha": "1a (PET+ Deauville 4-5)", "intencao": "curativa"}
+{"de": "cen.linfoma-hodgkin.avancado", "rel": "FONTE", "para": "src.09.80", "pagina": "10-11"}
+{"de": "tum.linfoma-hodgkin", "rel": "TEM_CENARIO", "para": "cen.linfoma-hodgkin.avancado"}
+{"de": "reg.linfoma-hodgkin.abvd-ou-a-avd", "rel": "FONTE", "para": "src.09.80", "pagina": 10}
+{"de": "reg.linfoma-hodgkin.abvd-ou-a-avd", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.linfoma-hodgkin.abvd-ou-a-avd", "rel": "USA_FARMACO", "para": "far.bleomicina"}
+{"de": "reg.linfoma-hodgkin.abvd-ou-a-avd", "rel": "USA_FARMACO", "para": "far.vimblastina"}
+{"de": "reg.linfoma-hodgkin.abvd-ou-a-avd", "rel": "USA_FARMACO", "para": "far.dacarbazina"}
+{"de": "reg.linfoma-hodgkin.abvd-ou-a-avd", "rel": "USA_FARMACO", "para": "far.brentuximabe_vedotina"}
+{"de": "cen.linfoma-hodgkin.avancado", "rel": "TRATA_COM", "para": "reg.linfoma-hodgkin.abvd-ou-a-avd", "linha": "1a", "intencao": "curativa"}
+{"de": "far.nivolumabe", "rel": "FONTE", "para": "src.09.80", "pagina": 11}
+{"de": "reg.linfoma-hodgkin.nivo-avd", "rel": "FONTE", "para": "src.09.80", "pagina": 11}
+{"de": "reg.linfoma-hodgkin.nivo-avd", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "reg.linfoma-hodgkin.nivo-avd", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.linfoma-hodgkin.nivo-avd", "rel": "USA_FARMACO", "para": "far.vimblastina"}
+{"de": "reg.linfoma-hodgkin.nivo-avd", "rel": "USA_FARMACO", "para": "far.dacarbazina"}
+{"de": "cen.linfoma-hodgkin.avancado", "rel": "TRATA_COM", "para": "reg.linfoma-hodgkin.nivo-avd", "linha": "1a", "intencao": "curativa"}
+{"de": "cen.linfoma-hodgkin.avancado", "rel": "TRATA_COM", "para": "reg.linfoma-hodgkin.brecadd", "linha": "1a (opção, 4-6 ciclos)", "intencao": "curativa"}
+{"de": "cen.linfoma-hodgkin.recaida", "rel": "FONTE", "para": "src.09.80", "pagina": "12-13"}
+{"de": "tum.linfoma-hodgkin", "rel": "TEM_CENARIO", "para": "cen.linfoma-hodgkin.recaida"}
+{"de": "far.pembrolizumabe", "rel": "FONTE", "para": "src.09.80", "pagina": 12}
+{"de": "reg.linfoma-hodgkin.resgate-io-qt-tmo-auto", "rel": "FONTE", "para": "src.09.80", "pagina": 12}
+{"de": "reg.linfoma-hodgkin.resgate-io-qt-tmo-auto", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.linfoma-hodgkin.resgate-io-qt-tmo-auto", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "reg.linfoma-hodgkin.resgate-io-qt-tmo-auto", "rel": "USA_FARMACO", "para": "far.brentuximabe_vedotina"}
+{"de": "cen.linfoma-hodgkin.recaida", "rel": "TRATA_COM", "para": "reg.linfoma-hodgkin.resgate-io-qt-tmo-auto", "linha": "2a", "intencao": "curativa"}
+{"de": "tum.dlbcl", "rel": "FONTE", "para": "src.09.80", "pagina": 18}
+{"de": "tum.dlbcl", "rel": "DIAGNOSTICA_POR", "para": "dx.linfomas.biopsia-excisional"}
+{"de": "est.dlbcl.lugano", "rel": "FONTE", "para": "src.09.80", "pagina": 19}
+{"de": "tum.dlbcl", "rel": "ESTADIA_POR", "para": "est.dlbcl.lugano"}
+{"de": "est.dlbcl.ipi-r-ipi", "rel": "FONTE", "para": "src.09.80", "pagina": 19}
+{"de": "tum.dlbcl", "rel": "ESTADIA_POR", "para": "est.dlbcl.ipi-r-ipi"}
+{"de": "cen.dlbcl.ec-i-ii", "rel": "FONTE", "para": "src.09.80", "pagina": 20}
+{"de": "tum.dlbcl", "rel": "TEM_CENARIO", "para": "cen.dlbcl.ec-i-ii"}
+{"de": "far.rituximabe", "rel": "FONTE", "para": "src.09.80", "pagina": 20}
+{"de": "far.prednisona", "rel": "FONTE", "para": "src.09.80", "pagina": 20}
+{"de": "reg.dlbcl.r-chop-x3-pet", "rel": "FONTE", "para": "src.09.80", "pagina": 20}
+{"de": "reg.dlbcl.r-chop-x3-pet", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "reg.dlbcl.r-chop-x3-pet", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.dlbcl.r-chop-x3-pet", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.dlbcl.r-chop-x3-pet", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "reg.dlbcl.r-chop-x3-pet", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "cen.dlbcl.ec-i-ii", "rel": "TRATA_COM", "para": "reg.dlbcl.r-chop-x3-pet", "linha": "1a", "intencao": "curativa"}
+{"de": "cen.dlbcl.ec-iii-iv", "rel": "FONTE", "para": "src.09.80", "pagina": 21}
+{"de": "tum.dlbcl", "rel": "TEM_CENARIO", "para": "cen.dlbcl.ec-iii-iv"}
+{"de": "reg.dlbcl.r-chop", "rel": "FONTE", "para": "src.09.80", "pagina": 21}
+{"de": "reg.dlbcl.r-chop", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "reg.dlbcl.r-chop", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.dlbcl.r-chop", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.dlbcl.r-chop", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "reg.dlbcl.r-chop", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "cen.dlbcl.ec-iii-iv", "rel": "TRATA_COM", "para": "reg.dlbcl.r-chop", "linha": "1a", "intencao": "curativa"}
+{"de": "far.polatuzumabe_vedotina", "rel": "FONTE", "para": "src.09.80", "pagina": 21}
+{"de": "reg.dlbcl.r-pola-chp", "rel": "FONTE", "para": "src.09.80", "pagina": 21}
+{"de": "reg.dlbcl.r-pola-chp", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "reg.dlbcl.r-pola-chp", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.dlbcl.r-pola-chp", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.dlbcl.r-pola-chp", "rel": "USA_FARMACO", "para": "far.polatuzumabe_vedotina"}
+{"de": "reg.dlbcl.r-pola-chp", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "cen.dlbcl.ec-iii-iv", "rel": "TRATA_COM", "para": "reg.dlbcl.r-pola-chp", "linha": "1a", "intencao": "curativa"}
+{"de": "cen.dlbcl.recaida-refrataria", "rel": "FONTE", "para": "src.09.80", "pagina": "22;24"}
+{"de": "tum.dlbcl", "rel": "TEM_CENARIO", "para": "cen.dlbcl.recaida-refrataria"}
+{"de": "far.axicabtagene_ciloleucel", "rel": "FONTE", "para": "src.09.80", "pagina": 22}
+{"de": "far.lisocabtagene_maraleucel", "rel": "FONTE", "para": "src.09.80", "pagina": 22}
+{"de": "reg.dlbcl.car-t", "rel": "FONTE", "para": "src.09.80", "pagina": 22}
+{"de": "reg.dlbcl.car-t", "rel": "USA_FARMACO", "para": "far.axicabtagene_ciloleucel"}
+{"de": "reg.dlbcl.car-t", "rel": "USA_FARMACO", "para": "far.lisocabtagene_maraleucel"}
+{"de": "cen.dlbcl.recaida-refrataria", "rel": "TRATA_COM", "para": "reg.dlbcl.car-t", "linha": "2a", "intencao": "curativa", "condicao_biomarcador": "recaída/refratariedade < 12 meses"}
+{"de": "reg.dlbcl.resgate-platina-tmo-auto", "rel": "FONTE", "para": "src.09.80", "pagina": 22}
+{"de": "reg.dlbcl.resgate-platina-tmo-auto", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "cen.dlbcl.recaida-refrataria", "rel": "TRATA_COM", "para": "reg.dlbcl.resgate-platina-tmo-auto", "linha": "2a", "intencao": "curativa", "condicao_biomarcador": "recaída ≥ 12 meses, elegível a TMO"}
+{"de": "far.epcoritamabe", "rel": "FONTE", "para": "src.09.80", "pagina": 22}
+{"de": "far.glofitamabe", "rel": "FONTE", "para": "src.09.80", "pagina": 22}
+{"de": "reg.dlbcl.biespecificos", "rel": "FONTE", "para": "src.09.80", "pagina": 22}
+{"de": "reg.dlbcl.biespecificos", "rel": "USA_FARMACO", "para": "far.epcoritamabe"}
+{"de": "reg.dlbcl.biespecificos", "rel": "USA_FARMACO", "para": "far.glofitamabe"}
+{"de": "cen.dlbcl.recaida-refrataria", "rel": "TRATA_COM", "para": "reg.dlbcl.biespecificos", "linha": "2a+", "intencao": "paliativa", "condicao_biomarcador": "não elegível a TMO"}
+{"de": "far.tafasitamabe", "rel": "FONTE", "para": "src.09.80", "pagina": 22}
+{"de": "far.lenalidomida", "rel": "FONTE", "para": "src.09.80", "pagina": 22}
+{"de": "reg.dlbcl.tafasitamabe-lenalidomida", "rel": "FONTE", "para": "src.09.80", "pagina": 22}
+{"de": "reg.dlbcl.tafasitamabe-lenalidomida", "rel": "USA_FARMACO", "para": "far.tafasitamabe"}
+{"de": "reg.dlbcl.tafasitamabe-lenalidomida", "rel": "USA_FARMACO", "para": "far.lenalidomida"}
+{"de": "cen.dlbcl.recaida-refrataria", "rel": "TRATA_COM", "para": "reg.dlbcl.tafasitamabe-lenalidomida", "linha": "2a+", "intencao": "paliativa", "condicao_biomarcador": "não elegível a TMO"}
+{"de": "tum.linfoma-burkitt", "rel": "FONTE", "para": "src.09.80", "pagina": 23}
+{"de": "cen.linfoma-burkitt.1a-linha", "rel": "FONTE", "para": "src.09.80", "pagina": 23}
+{"de": "tum.linfoma-burkitt", "rel": "TEM_CENARIO", "para": "cen.linfoma-burkitt.1a-linha"}
+{"de": "reg.linfoma-burkitt.r-codox-m-ivac", "rel": "FONTE", "para": "src.09.80", "pagina": 23}
+{"de": "reg.linfoma-burkitt.r-codox-m-ivac", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "cen.linfoma-burkitt.1a-linha", "rel": "TRATA_COM", "para": "reg.linfoma-burkitt.r-codox-m-ivac", "linha": "1a", "intencao": "curativa"}
+{"de": "reg.linfoma-burkitt.r-da-epoch", "rel": "FONTE", "para": "src.09.80", "pagina": 23}
+{"de": "reg.linfoma-burkitt.r-da-epoch", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "cen.linfoma-burkitt.1a-linha", "rel": "TRATA_COM", "para": "reg.linfoma-burkitt.r-da-epoch", "linha": "1a", "intencao": "curativa"}
+{"de": "tum.linfoma-b-alto-grau", "rel": "FONTE", "para": "src.09.80", "pagina": 23}
+{"de": "cen.linfoma-b-alto-grau.1a-linha", "rel": "FONTE", "para": "src.09.80", "pagina": 23}
+{"de": "tum.linfoma-b-alto-grau", "rel": "TEM_CENARIO", "para": "cen.linfoma-b-alto-grau.1a-linha"}
+{"de": "reg.linfoma-b-alto-grau.r-codox-m-ivac", "rel": "FONTE", "para": "src.09.80", "pagina": 23}
+{"de": "reg.linfoma-b-alto-grau.r-codox-m-ivac", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "cen.linfoma-b-alto-grau.1a-linha", "rel": "TRATA_COM", "para": "reg.linfoma-b-alto-grau.r-codox-m-ivac", "linha": "1a", "intencao": "curativa"}
+{"de": "reg.linfoma-b-alto-grau.r-da-epoch", "rel": "FONTE", "para": "src.09.80", "pagina": 23}
+{"de": "reg.linfoma-b-alto-grau.r-da-epoch", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "cen.linfoma-b-alto-grau.1a-linha", "rel": "TRATA_COM", "para": "reg.linfoma-b-alto-grau.r-da-epoch", "linha": "1a", "intencao": "curativa"}
+{"de": "tum.ptld-monomorfica", "rel": "FONTE", "para": "src.09.80", "pagina": 23}
+{"de": "tum.linfoma-folicular", "rel": "FONTE", "para": "src.09.80", "pagina": 27}
+{"de": "tum.linfoma-folicular", "rel": "DIAGNOSTICA_POR", "para": "dx.linfomas.biopsia-excisional"}
+{"de": "est.linfoma-folicular.flipi", "rel": "FONTE", "para": "src.09.80", "pagina": 28}
+{"de": "tum.linfoma-folicular", "rel": "ESTADIA_POR", "para": "est.linfoma-folicular.flipi"}
+{"de": "est.linfoma-folicular.gelf", "rel": "FONTE", "para": "src.09.80", "pagina": 29}
+{"de": "tum.linfoma-folicular", "rel": "ESTADIA_POR", "para": "est.linfoma-folicular.gelf"}
+{"de": "cen.linfoma-folicular.ec-i-ii", "rel": "FONTE", "para": "src.09.80", "pagina": "30;33"}
+{"de": "tum.linfoma-folicular", "rel": "TEM_CENARIO", "para": "cen.linfoma-folicular.ec-i-ii"}
+{"de": "reg.linfoma-folicular.isrt", "rel": "FONTE", "para": "src.09.80", "pagina": 30}
+{"de": "cen.linfoma-folicular.ec-i-ii", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.isrt", "linha": "1a", "intencao": "curativa"}
+{"de": "cen.linfoma-folicular.ec-iii-iv", "rel": "FONTE", "para": "src.09.80", "pagina": "29;31"}
+{"de": "tum.linfoma-folicular", "rel": "TEM_CENARIO", "para": "cen.linfoma-folicular.ec-iii-iv"}
+{"de": "reg.linfoma-folicular.r-chop", "rel": "FONTE", "para": "src.09.80", "pagina": 31}
+{"de": "reg.linfoma-folicular.r-chop", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "reg.linfoma-folicular.r-chop", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.linfoma-folicular.r-chop", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.linfoma-folicular.r-chop", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "reg.linfoma-folicular.r-chop", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "cen.linfoma-folicular.ec-iii-iv", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.r-chop", "linha": "1a", "intencao": "paliativa"}
+{"de": "far.bendamustina", "rel": "FONTE", "para": "src.09.80", "pagina": 31}
+{"de": "reg.linfoma-folicular.r-benda", "rel": "FONTE", "para": "src.09.80", "pagina": 31}
+{"de": "reg.linfoma-folicular.r-benda", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "reg.linfoma-folicular.r-benda", "rel": "USA_FARMACO", "para": "far.bendamustina"}
+{"de": "cen.linfoma-folicular.ec-iii-iv", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.r-benda", "linha": "1a", "intencao": "paliativa"}
+{"de": "far.obinutuzumabe", "rel": "FONTE", "para": "src.09.80", "pagina": 31}
+{"de": "reg.linfoma-folicular.o-chop", "rel": "FONTE", "para": "src.09.80", "pagina": 31}
+{"de": "reg.linfoma-folicular.o-chop", "rel": "USA_FARMACO", "para": "far.obinutuzumabe"}
+{"de": "reg.linfoma-folicular.o-chop", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.linfoma-folicular.o-chop", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.linfoma-folicular.o-chop", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "reg.linfoma-folicular.o-chop", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "cen.linfoma-folicular.ec-iii-iv", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.o-chop", "linha": "1a", "intencao": "paliativa"}
+{"de": "reg.linfoma-folicular.o-benda", "rel": "FONTE", "para": "src.09.80", "pagina": 31}
+{"de": "reg.linfoma-folicular.o-benda", "rel": "USA_FARMACO", "para": "far.obinutuzumabe"}
+{"de": "reg.linfoma-folicular.o-benda", "rel": "USA_FARMACO", "para": "far.bendamustina"}
+{"de": "cen.linfoma-folicular.ec-iii-iv", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.o-benda", "linha": "1a", "intencao": "paliativa"}
+{"de": "reg.linfoma-folicular.r2", "rel": "FONTE", "para": "src.09.80", "pagina": 31}
+{"de": "reg.linfoma-folicular.r2", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "reg.linfoma-folicular.r2", "rel": "USA_FARMACO", "para": "far.lenalidomida"}
+{"de": "cen.linfoma-folicular.ec-iii-iv", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.r2", "linha": "1a", "intencao": "paliativa"}
+{"de": "reg.linfoma-folicular.manutencao-anti-cd20", "rel": "FONTE", "para": "src.09.80", "pagina": 31}
+{"de": "reg.linfoma-folicular.manutencao-anti-cd20", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "reg.linfoma-folicular.manutencao-anti-cd20", "rel": "USA_FARMACO", "para": "far.obinutuzumabe"}
+{"de": "cen.linfoma-folicular.ec-iii-iv", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.manutencao-anti-cd20", "linha": "manutenção", "intencao": "paliativa"}
+{"de": "cen.linfoma-folicular.recaida", "rel": "FONTE", "para": "src.09.80", "pagina": "32-33"}
+{"de": "tum.linfoma-folicular", "rel": "TEM_CENARIO", "para": "cen.linfoma-folicular.recaida"}
+{"de": "cen.linfoma-folicular.recaida", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.r-chop", "linha": "2a", "intencao": "paliativa"}
+{"de": "cen.linfoma-folicular.recaida", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.r-benda", "linha": "2a", "intencao": "paliativa"}
+{"de": "cen.linfoma-folicular.recaida", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.o-chop", "linha": "2a", "intencao": "paliativa"}
+{"de": "cen.linfoma-folicular.recaida", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.o-benda", "linha": "2a", "intencao": "paliativa"}
+{"de": "cen.linfoma-folicular.recaida", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.r2", "linha": "2a", "intencao": "paliativa"}
+{"de": "far.zanubrutinibe", "rel": "FONTE", "para": "src.09.80", "pagina": 32}
+{"de": "reg.linfoma-folicular.3a-linha", "rel": "FONTE", "para": "src.09.80", "pagina": 32}
+{"de": "reg.linfoma-folicular.3a-linha", "rel": "USA_FARMACO", "para": "far.epcoritamabe"}
+{"de": "reg.linfoma-folicular.3a-linha", "rel": "USA_FARMACO", "para": "far.zanubrutinibe"}
+{"de": "reg.linfoma-folicular.3a-linha", "rel": "USA_FARMACO", "para": "far.obinutuzumabe"}
+{"de": "cen.linfoma-folicular.recaida", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.3a-linha", "linha": "3a", "intencao": "paliativa"}
+{"de": "tum.linfoma-malt", "rel": "FONTE", "para": "src.09.80", "pagina": 35}
+{"de": "cen.linfoma-malt.gastrico-localizado", "rel": "FONTE", "para": "src.09.80", "pagina": 35}
+{"de": "tum.linfoma-malt", "rel": "TEM_CENARIO", "para": "cen.linfoma-malt.gastrico-localizado"}
+{"de": "bio.h-pylori", "rel": "FONTE", "para": "src.09.80", "pagina": 35}
+{"de": "cen.linfoma-malt.gastrico-localizado", "rel": "EXIGE_BIOMARCADOR", "para": "bio.h-pylori", "para_que": "erradicação como tratamento se positivo"}
+{"de": "reg.linfoma-malt.erradicacao-h-pylori", "rel": "FONTE", "para": "src.09.80", "pagina": 35}
+{"de": "cen.linfoma-malt.gastrico-localizado", "rel": "TRATA_COM", "para": "reg.linfoma-malt.erradicacao-h-pylori", "linha": "1a", "intencao": "curativa", "condicao_biomarcador": "H. pylori positivo"}
+{"de": "reg.linfoma-malt.isrt", "rel": "FONTE", "para": "src.09.80", "pagina": 35}
+{"de": "cen.linfoma-malt.gastrico-localizado", "rel": "TRATA_COM", "para": "reg.linfoma-malt.isrt", "linha": "1a", "intencao": "curativa", "condicao_biomarcador": "H. pylori negativo"}
+{"de": "cen.linfoma-malt.gastrico-nao-localizado", "rel": "FONTE", "para": "src.09.80", "pagina": 35}
+{"de": "tum.linfoma-malt", "rel": "TEM_CENARIO", "para": "cen.linfoma-malt.gastrico-nao-localizado"}
+{"de": "cen.linfoma-malt.gastrico-nao-localizado", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.r-chop", "linha": "1a", "intencao": "paliativa"}
+{"de": "cen.linfoma-malt.gastrico-nao-localizado", "rel": "TRATA_COM", "para": "reg.linfoma-folicular.r-benda", "linha": "1a", "intencao": "paliativa"}
+{"de": "tum.linfoma-manto", "rel": "FONTE", "para": "src.09.80", "pagina": 36}
+{"de": "bio.t11-14-ciclina-d1", "rel": "FONTE", "para": "src.09.80", "pagina": 36}
+{"de": "dx.linfoma-manto.t11-14", "rel": "FONTE", "para": "src.09.80", "pagina": 36}
+{"de": "tum.linfoma-manto", "rel": "DIAGNOSTICA_POR", "para": "dx.linfoma-manto.t11-14"}
+{"de": "bio.tp53", "rel": "FONTE", "para": "src.09.80", "pagina": "36"}
+{"de": "cen.linfoma-manto.elegivel", "rel": "FONTE", "para": "src.09.80", "pagina": 36}
+{"de": "tum.linfoma-manto", "rel": "TEM_CENARIO", "para": "cen.linfoma-manto.elegivel"}
+{"de": "cen.linfoma-manto.elegivel", "rel": "EXIGE_BIOMARCADOR", "para": "bio.tp53", "para_que": "prognóstico"}
+{"de": "reg.linfoma-manto.inducao-tmo-auto", "rel": "FONTE", "para": "src.09.80", "pagina": 36}
+{"de": "reg.linfoma-manto.inducao-tmo-auto", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "reg.linfoma-manto.inducao-tmo-auto", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.linfoma-manto.inducao-tmo-auto", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.linfoma-manto.inducao-tmo-auto", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "reg.linfoma-manto.inducao-tmo-auto", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "cen.linfoma-manto.elegivel", "rel": "TRATA_COM", "para": "reg.linfoma-manto.inducao-tmo-auto", "linha": "1a", "intencao": "curativa"}
+{"de": "cen.linfoma-manto.nao-elegivel", "rel": "FONTE", "para": "src.09.80", "pagina": 36}
+{"de": "tum.linfoma-manto", "rel": "TEM_CENARIO", "para": "cen.linfoma-manto.nao-elegivel"}
+{"de": "far.acalabrutinibe", "rel": "FONTE", "para": "src.09.80", "pagina": 36}
+{"de": "reg.linfoma-manto.r-benda-acalabrutinibe", "rel": "FONTE", "para": "src.09.80", "pagina": 36}
+{"de": "reg.linfoma-manto.r-benda-acalabrutinibe", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "reg.linfoma-manto.r-benda-acalabrutinibe", "rel": "USA_FARMACO", "para": "far.bendamustina"}
+{"de": "reg.linfoma-manto.r-benda-acalabrutinibe", "rel": "USA_FARMACO", "para": "far.acalabrutinibe"}
+{"de": "cen.linfoma-manto.nao-elegivel", "rel": "TRATA_COM", "para": "reg.linfoma-manto.r-benda-acalabrutinibe", "linha": "1a", "intencao": "paliativa"}
+{"de": "cen.linfoma-manto.recaida", "rel": "FONTE", "para": "src.09.80", "pagina": 36}
+{"de": "tum.linfoma-manto", "rel": "TEM_CENARIO", "para": "cen.linfoma-manto.recaida"}
+{"de": "far.ibrutinibe", "rel": "FONTE", "para": "src.09.80", "pagina": 36}
+{"de": "far.pirtobrutinibe", "rel": "FONTE", "para": "src.09.80", "pagina": 36}
+{"de": "reg.linfoma-manto.btki-recaida", "rel": "FONTE", "para": "src.09.80", "pagina": 36}
+{"de": "reg.linfoma-manto.btki-recaida", "rel": "USA_FARMACO", "para": "far.ibrutinibe"}
+{"de": "reg.linfoma-manto.btki-recaida", "rel": "USA_FARMACO", "para": "far.zanubrutinibe"}
+{"de": "reg.linfoma-manto.btki-recaida", "rel": "USA_FARMACO", "para": "far.pirtobrutinibe"}
+{"de": "cen.linfoma-manto.recaida", "rel": "TRATA_COM", "para": "reg.linfoma-manto.btki-recaida", "linha": "2a+", "intencao": "paliativa"}
+{"de": "tum.linfoma-t", "rel": "FONTE", "para": "src.09.80", "pagina": 37}
+{"de": "cen.linfoma-t.elegivel", "rel": "FONTE", "para": "src.09.80", "pagina": 37}
+{"de": "tum.linfoma-t", "rel": "TEM_CENARIO", "para": "cen.linfoma-t.elegivel"}
+{"de": "reg.linfoma-t.choep-ou-bv-chp-tmo", "rel": "FONTE", "para": "src.09.80", "pagina": 37}
+{"de": "reg.linfoma-t.choep-ou-bv-chp-tmo", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.linfoma-t.choep-ou-bv-chp-tmo", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.linfoma-t.choep-ou-bv-chp-tmo", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "reg.linfoma-t.choep-ou-bv-chp-tmo", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "reg.linfoma-t.choep-ou-bv-chp-tmo", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.linfoma-t.choep-ou-bv-chp-tmo", "rel": "USA_FARMACO", "para": "far.brentuximabe_vedotina"}
+{"de": "cen.linfoma-t.elegivel", "rel": "TRATA_COM", "para": "reg.linfoma-t.choep-ou-bv-chp-tmo", "linha": "1a", "intencao": "curativa"}
+{"de": "cen.linfoma-t.nao-elegivel", "rel": "FONTE", "para": "src.09.80", "pagina": 37}
+{"de": "tum.linfoma-t", "rel": "TEM_CENARIO", "para": "cen.linfoma-t.nao-elegivel"}
+{"de": "reg.linfoma-t.chop", "rel": "FONTE", "para": "src.09.80", "pagina": 37}
+{"de": "reg.linfoma-t.chop", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.linfoma-t.chop", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.linfoma-t.chop", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "reg.linfoma-t.chop", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "cen.linfoma-t.nao-elegivel", "rel": "TRATA_COM", "para": "reg.linfoma-t.chop", "linha": "1a", "intencao": "paliativa"}
+{"de": "bio.bcr-abl1", "rel": "FONTE", "para": "src.09.81", "pagina": "5;7;9;31"}
+{"de": "tum.lmc", "rel": "FONTE", "para": "src.09.81", "pagina": "5-6"}
+{"de": "dx.lmc.t9-22-bcr-abl1", "rel": "FONTE", "para": "src.09.81", "pagina": 7}
+{"de": "tum.lmc", "rel": "DIAGNOSTICA_POR", "para": "dx.lmc.t9-22-bcr-abl1"}
+{"de": "cen.lmc.fase-cronica", "rel": "FONTE", "para": "src.09.81", "pagina": "8-9"}
+{"de": "tum.lmc", "rel": "TEM_CENARIO", "para": "cen.lmc.fase-cronica"}
+{"de": "cen.lmc.fase-cronica", "rel": "EXIGE_BIOMARCADOR", "para": "bio.bcr-abl1", "para_que": "diagnóstico e seguimento molecular"}
+{"de": "far.imatinibe", "rel": "FONTE", "para": "src.09.81", "pagina": 8}
+{"de": "far.dasatinibe", "rel": "FONTE", "para": "src.09.81", "pagina": 8}
+{"de": "far.nilotinibe", "rel": "FONTE", "para": "src.09.81", "pagina": 8}
+{"de": "far.asciminibe", "rel": "FONTE", "para": "src.09.81", "pagina": 8}
+{"de": "reg.lmc.itk-1a-2a-geracao", "rel": "FONTE", "para": "src.09.81", "pagina": 8}
+{"de": "reg.lmc.itk-1a-2a-geracao", "rel": "USA_FARMACO", "para": "far.imatinibe"}
+{"de": "reg.lmc.itk-1a-2a-geracao", "rel": "USA_FARMACO", "para": "far.dasatinibe"}
+{"de": "reg.lmc.itk-1a-2a-geracao", "rel": "USA_FARMACO", "para": "far.nilotinibe"}
+{"de": "reg.lmc.itk-1a-2a-geracao", "rel": "USA_FARMACO", "para": "far.asciminibe"}
+{"de": "cen.lmc.fase-cronica", "rel": "TRATA_COM", "para": "reg.lmc.itk-1a-2a-geracao", "linha": "1a", "intencao": "controle de doença"}
+{"de": "cen.lmc.fase-blastica", "rel": "FONTE", "para": "src.09.81", "pagina": 8}
+{"de": "tum.lmc", "rel": "TEM_CENARIO", "para": "cen.lmc.fase-blastica"}
+{"de": "reg.lmc.blastica-qt-itk-alo", "rel": "FONTE", "para": "src.09.81", "pagina": 8}
+{"de": "cen.lmc.fase-blastica", "rel": "TRATA_COM", "para": "reg.lmc.blastica-qt-itk-alo", "linha": "1a", "intencao": "curativa"}
+{"de": "cen.lmc.recaida-progressao", "rel": "FONTE", "para": "src.09.81", "pagina": 10}
+{"de": "tum.lmc", "rel": "TEM_CENARIO", "para": "cen.lmc.recaida-progressao"}
+{"de": "bio.abl1-mutacao-dominio-quinase", "rel": "FONTE", "para": "src.09.81", "pagina": 10}
+{"de": "cen.lmc.recaida-progressao", "rel": "EXIGE_BIOMARCADOR", "para": "bio.abl1-mutacao-dominio-quinase", "para_que": "escolha do ITK"}
+{"de": "far.ponatinibe", "rel": "FONTE", "para": "src.09.81", "pagina": 10}
+{"de": "reg.lmc.ponatinibe", "rel": "FONTE", "para": "src.09.81", "pagina": 10}
+{"de": "reg.lmc.ponatinibe", "rel": "USA_FARMACO", "para": "far.ponatinibe"}
+{"de": "cen.lmc.recaida-progressao", "rel": "TRATA_COM", "para": "reg.lmc.ponatinibe", "linha": "2a+", "intencao": "controle de doença", "condicao_biomarcador": "perfil mutacional ABL"}
+{"de": "tum.llc", "rel": "FONTE", "para": "src.09.81", "pagina": "13-14"}
+{"de": "dx.llc.iwcll-2018", "rel": "FONTE", "para": "src.09.81", "pagina": 15}
+{"de": "tum.llc", "rel": "DIAGNOSTICA_POR", "para": "dx.llc.iwcll-2018"}
+{"de": "est.llc.rai-binet", "rel": "FONTE", "para": "src.09.81", "pagina": 15}
+{"de": "tum.llc", "rel": "ESTADIA_POR", "para": "est.llc.rai-binet"}
+{"de": "bio.ighv-mutacao", "rel": "FONTE", "para": "src.09.81", "pagina": 16}
+{"de": "cen.llc.1a-linha", "rel": "FONTE", "para": "src.09.81", "pagina": "16-17"}
+{"de": "tum.llc", "rel": "TEM_CENARIO", "para": "cen.llc.1a-linha"}
+{"de": "cen.llc.1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ighv-mutacao", "para_que": "estratificação molecular antes de tratar"}
+{"de": "cen.llc.1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.tp53", "para_que": "define esquema (TP53 mutado/deletado)"}
+{"de": "reg.llc.btk-continuo", "rel": "FONTE", "para": "src.09.81", "pagina": 17}
+{"de": "reg.llc.btk-continuo", "rel": "USA_FARMACO", "para": "far.ibrutinibe"}
+{"de": "reg.llc.btk-continuo", "rel": "USA_FARMACO", "para": "far.acalabrutinibe"}
+{"de": "reg.llc.btk-continuo", "rel": "USA_FARMACO", "para": "far.zanubrutinibe"}
+{"de": "cen.llc.1a-linha", "rel": "TRATA_COM", "para": "reg.llc.btk-continuo", "linha": "1a", "intencao": "controle de doença"}
+{"de": "far.venetoclax", "rel": "FONTE", "para": "src.09.81", "pagina": 17}
+{"de": "reg.llc.o-ven", "rel": "FONTE", "para": "src.09.81", "pagina": 17}
+{"de": "reg.llc.o-ven", "rel": "USA_FARMACO", "para": "far.obinutuzumabe"}
+{"de": "reg.llc.o-ven", "rel": "USA_FARMACO", "para": "far.venetoclax"}
+{"de": "cen.llc.1a-linha", "rel": "TRATA_COM", "para": "reg.llc.o-ven", "linha": "1a", "intencao": "controle de doença"}
+{"de": "reg.llc.btk-ven", "rel": "FONTE", "para": "src.09.81", "pagina": 17}
+{"de": "reg.llc.btk-ven", "rel": "USA_FARMACO", "para": "far.ibrutinibe"}
+{"de": "reg.llc.btk-ven", "rel": "USA_FARMACO", "para": "far.acalabrutinibe"}
+{"de": "reg.llc.btk-ven", "rel": "USA_FARMACO", "para": "far.zanubrutinibe"}
+{"de": "reg.llc.btk-ven", "rel": "USA_FARMACO", "para": "far.venetoclax"}
+{"de": "cen.llc.1a-linha", "rel": "TRATA_COM", "para": "reg.llc.btk-ven", "linha": "1a", "intencao": "controle de doença"}
+{"de": "far.fludarabina", "rel": "FONTE", "para": "src.09.81", "pagina": 17}
+{"de": "reg.llc.fcr", "rel": "FONTE", "para": "src.09.81", "pagina": 17}
+{"de": "reg.llc.fcr", "rel": "USA_FARMACO", "para": "far.fludarabina"}
+{"de": "reg.llc.fcr", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.llc.fcr", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "cen.llc.1a-linha", "rel": "TRATA_COM", "para": "reg.llc.fcr", "linha": "1a (exceção)", "intencao": "controle de doença", "condicao_biomarcador": "< 65 anos, IgH mutado, TP53 selvagem"}
+{"de": "cen.llc.recaida", "rel": "FONTE", "para": "src.09.81", "pagina": 18}
+{"de": "tum.llc", "rel": "TEM_CENARIO", "para": "cen.llc.recaida"}
+{"de": "cen.llc.recaida", "rel": "TRATA_COM", "para": "reg.llc.o-ven", "linha": "2a", "intencao": "controle de doença", "condicao_biomarcador": "BTK prévio"}
+{"de": "cen.llc.recaida", "rel": "TRATA_COM", "para": "reg.llc.btk-continuo", "linha": "2a", "intencao": "controle de doença", "condicao_biomarcador": "O+Ven prévio"}
+{"de": "reg.llc.pirtobrutinibe-car-t", "rel": "FONTE", "para": "src.09.81", "pagina": 18}
+{"de": "reg.llc.pirtobrutinibe-car-t", "rel": "USA_FARMACO", "para": "far.pirtobrutinibe"}
+{"de": "cen.llc.recaida", "rel": "TRATA_COM", "para": "reg.llc.pirtobrutinibe-car-t", "linha": "3a", "intencao": "controle de doença"}
+{"de": "tum.lma", "rel": "FONTE", "para": "src.09.81", "pagina": "20-21"}
+{"de": "dx.lma.blastos-20", "rel": "FONTE", "para": "src.09.81", "pagina": 22}
+{"de": "tum.lma", "rel": "DIAGNOSTICA_POR", "para": "dx.lma.blastos-20"}
+{"de": "est.lma.eln-2022", "rel": "FONTE", "para": "src.09.81", "pagina": 22}
+{"de": "tum.lma", "rel": "ESTADIA_POR", "para": "est.lma.eln-2022"}
+{"de": "bio.flt3", "rel": "FONTE", "para": "src.09.81", "pagina": "25;27"}
+{"de": "bio.core-binding-factor", "rel": "FONTE", "para": "src.09.81", "pagina": 25}
+{"de": "bio.npm1-kmt2a", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "bio.idh1", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "bio.idh2", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "cen.lma.fit-inducao", "rel": "FONTE", "para": "src.09.81", "pagina": 25}
+{"de": "tum.lma", "rel": "TEM_CENARIO", "para": "cen.lma.fit-inducao"}
+{"de": "cen.lma.fit-inducao", "rel": "EXIGE_BIOMARCADOR", "para": "bio.flt3", "para_que": "midostaurina na indução"}
+{"de": "cen.lma.fit-inducao", "rel": "EXIGE_BIOMARCADOR", "para": "bio.core-binding-factor", "para_que": "gentuzumabe na indução"}
+{"de": "far.daunorrubicina", "rel": "FONTE", "para": "src.09.81", "pagina": 25}
+{"de": "far.idarrubicina", "rel": "FONTE", "para": "src.09.81", "pagina": 25}
+{"de": "far.citarabina", "rel": "FONTE", "para": "src.09.81", "pagina": 25}
+{"de": "reg.lma.d3a7-i3a7", "rel": "FONTE", "para": "src.09.81", "pagina": 25}
+{"de": "reg.lma.d3a7-i3a7", "rel": "USA_FARMACO", "para": "far.daunorrubicina"}
+{"de": "reg.lma.d3a7-i3a7", "rel": "USA_FARMACO", "para": "far.idarrubicina"}
+{"de": "reg.lma.d3a7-i3a7", "rel": "USA_FARMACO", "para": "far.citarabina"}
+{"de": "cen.lma.fit-inducao", "rel": "TRATA_COM", "para": "reg.lma.d3a7-i3a7", "linha": "indução", "intencao": "curativa"}
+{"de": "far.midostaurina", "rel": "FONTE", "para": "src.09.81", "pagina": 25}
+{"de": "reg.lma.d3a7-midostaurina", "rel": "FONTE", "para": "src.09.81", "pagina": 25}
+{"de": "reg.lma.d3a7-midostaurina", "rel": "USA_FARMACO", "para": "far.daunorrubicina"}
+{"de": "reg.lma.d3a7-midostaurina", "rel": "USA_FARMACO", "para": "far.citarabina"}
+{"de": "reg.lma.d3a7-midostaurina", "rel": "USA_FARMACO", "para": "far.midostaurina"}
+{"de": "cen.lma.fit-inducao", "rel": "TRATA_COM", "para": "reg.lma.d3a7-midostaurina", "linha": "indução", "intencao": "curativa", "condicao_biomarcador": "FLT3 mutado"}
+{"de": "far.gentuzumabe_ozogamicina", "rel": "FONTE", "para": "src.09.81", "pagina": 25}
+{"de": "reg.lma.d3a7-gentuzumabe", "rel": "FONTE", "para": "src.09.81", "pagina": 25}
+{"de": "reg.lma.d3a7-gentuzumabe", "rel": "USA_FARMACO", "para": "far.daunorrubicina"}
+{"de": "reg.lma.d3a7-gentuzumabe", "rel": "USA_FARMACO", "para": "far.citarabina"}
+{"de": "reg.lma.d3a7-gentuzumabe", "rel": "USA_FARMACO", "para": "far.gentuzumabe_ozogamicina"}
+{"de": "cen.lma.fit-inducao", "rel": "TRATA_COM", "para": "reg.lma.d3a7-gentuzumabe", "linha": "indução", "intencao": "curativa", "condicao_biomarcador": "CBF t(8;21)/t(16;16)"}
+{"de": "reg.lma.hidac-consolidacao", "rel": "FONTE", "para": "src.09.81", "pagina": 25}
+{"de": "reg.lma.hidac-consolidacao", "rel": "USA_FARMACO", "para": "far.citarabina"}
+{"de": "cen.lma.fit-inducao", "rel": "TRATA_COM", "para": "reg.lma.hidac-consolidacao", "linha": "consolidação", "intencao": "curativa"}
+{"de": "cen.lma.nao-fit", "rel": "FONTE", "para": "src.09.81", "pagina": 26}
+{"de": "tum.lma", "rel": "TEM_CENARIO", "para": "cen.lma.nao-fit"}
+{"de": "far.azacitidina", "rel": "FONTE", "para": "src.09.81", "pagina": 26}
+{"de": "far.decitabina", "rel": "FONTE", "para": "src.09.81", "pagina": 26}
+{"de": "reg.lma.hma-venetoclax", "rel": "FONTE", "para": "src.09.81", "pagina": 26}
+{"de": "reg.lma.hma-venetoclax", "rel": "USA_FARMACO", "para": "far.azacitidina"}
+{"de": "reg.lma.hma-venetoclax", "rel": "USA_FARMACO", "para": "far.decitabina"}
+{"de": "reg.lma.hma-venetoclax", "rel": "USA_FARMACO", "para": "far.venetoclax"}
+{"de": "cen.lma.nao-fit", "rel": "TRATA_COM", "para": "reg.lma.hma-venetoclax", "linha": "1a", "intencao": "paliativa"}
+{"de": "cen.lma.recaida", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "tum.lma", "rel": "TEM_CENARIO", "para": "cen.lma.recaida"}
+{"de": "cen.lma.recaida", "rel": "EXIGE_BIOMARCADOR", "para": "bio.flt3", "para_que": "gilteritinibe"}
+{"de": "cen.lma.recaida", "rel": "EXIGE_BIOMARCADOR", "para": "bio.npm1-kmt2a", "para_que": "inibidor de menina"}
+{"de": "cen.lma.recaida", "rel": "EXIGE_BIOMARCADOR", "para": "bio.idh1", "para_que": "ivosidenibe"}
+{"de": "cen.lma.recaida", "rel": "EXIGE_BIOMARCADOR", "para": "bio.idh2", "para_que": "enasidenibe"}
+{"de": "far.filgrastim", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "reg.lma.ida-flag-ven", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "reg.lma.ida-flag-ven", "rel": "USA_FARMACO", "para": "far.idarrubicina"}
+{"de": "reg.lma.ida-flag-ven", "rel": "USA_FARMACO", "para": "far.fludarabina"}
+{"de": "reg.lma.ida-flag-ven", "rel": "USA_FARMACO", "para": "far.citarabina"}
+{"de": "reg.lma.ida-flag-ven", "rel": "USA_FARMACO", "para": "far.filgrastim"}
+{"de": "reg.lma.ida-flag-ven", "rel": "USA_FARMACO", "para": "far.venetoclax"}
+{"de": "cen.lma.recaida", "rel": "TRATA_COM", "para": "reg.lma.ida-flag-ven", "linha": "2a", "intencao": "paliativa"}
+{"de": "far.mitoxantrona", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "reg.lma.mec", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "reg.lma.mec", "rel": "USA_FARMACO", "para": "far.mitoxantrona"}
+{"de": "reg.lma.mec", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.lma.mec", "rel": "USA_FARMACO", "para": "far.citarabina"}
+{"de": "cen.lma.recaida", "rel": "TRATA_COM", "para": "reg.lma.mec", "linha": "2a", "intencao": "paliativa"}
+{"de": "cen.lma.recaida", "rel": "TRATA_COM", "para": "reg.lma.hma-venetoclax", "linha": "2a", "intencao": "paliativa"}
+{"de": "far.gilteritinibe", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "reg.lma.gilteritinibe", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "reg.lma.gilteritinibe", "rel": "USA_FARMACO", "para": "far.gilteritinibe"}
+{"de": "cen.lma.recaida", "rel": "TRATA_COM", "para": "reg.lma.gilteritinibe", "linha": "2a", "intencao": "paliativa", "condicao_biomarcador": "FLT3"}
+{"de": "far.ivosidenibe", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "reg.lma.ivosidenibe", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "reg.lma.ivosidenibe", "rel": "USA_FARMACO", "para": "far.ivosidenibe"}
+{"de": "cen.lma.recaida", "rel": "TRATA_COM", "para": "reg.lma.ivosidenibe", "linha": "2a", "intencao": "paliativa", "condicao_biomarcador": "IDH1"}
+{"de": "far.enasidenibe", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "reg.lma.enasidenibe", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "reg.lma.enasidenibe", "rel": "USA_FARMACO", "para": "far.enasidenibe"}
+{"de": "cen.lma.recaida", "rel": "TRATA_COM", "para": "reg.lma.enasidenibe", "linha": "2a", "intencao": "paliativa", "condicao_biomarcador": "IDH2"}
+{"de": "reg.lma.inibidor-menina", "rel": "FONTE", "para": "src.09.81", "pagina": 27}
+{"de": "cen.lma.recaida", "rel": "TRATA_COM", "para": "reg.lma.inibidor-menina", "linha": "2a", "intencao": "paliativa", "condicao_biomarcador": "NPM1/KMT2A"}
+{"de": "cen.lma.promielocitica-lpa", "rel": "FONTE", "para": "src.09.81", "pagina": "23-24;29"}
+{"de": "tum.lma", "rel": "TEM_CENARIO", "para": "cen.lma.promielocitica-lpa"}
+{"de": "bio.pml-rara", "rel": "FONTE", "para": "src.09.81", "pagina": "24;29"}
+{"de": "cen.lma.promielocitica-lpa", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pml-rara", "para_que": "diagnóstico de LPA"}
+{"de": "far.trioxido_de_arsenio", "rel": "FONTE", "para": "src.09.81", "pagina": 23}
+{"de": "far.tretinoina_atra", "rel": "FONTE", "para": "src.09.81", "pagina": 23}
+{"de": "reg.lma.lpa-ato-atra", "rel": "FONTE", "para": "src.09.81", "pagina": 23}
+{"de": "reg.lma.lpa-ato-atra", "rel": "USA_FARMACO", "para": "far.trioxido_de_arsenio"}
+{"de": "reg.lma.lpa-ato-atra", "rel": "USA_FARMACO", "para": "far.tretinoina_atra"}
+{"de": "cen.lma.promielocitica-lpa", "rel": "TRATA_COM", "para": "reg.lma.lpa-ato-atra", "linha": "1a", "intencao": "curativa", "condicao_biomarcador": "risco baixo/intermediário"}
+{"de": "reg.lma.lpa-ato-atra-ida", "rel": "FONTE", "para": "src.09.81", "pagina": 23}
+{"de": "reg.lma.lpa-ato-atra-ida", "rel": "USA_FARMACO", "para": "far.trioxido_de_arsenio"}
+{"de": "reg.lma.lpa-ato-atra-ida", "rel": "USA_FARMACO", "para": "far.tretinoina_atra"}
+{"de": "reg.lma.lpa-ato-atra-ida", "rel": "USA_FARMACO", "para": "far.idarrubicina"}
+{"de": "cen.lma.promielocitica-lpa", "rel": "TRATA_COM", "para": "reg.lma.lpa-ato-atra-ida", "linha": "1a", "intencao": "curativa", "condicao_biomarcador": "alto risco"}
+{"de": "tum.lla", "rel": "FONTE", "para": "src.09.81", "pagina": "30-34"}
+{"de": "dx.lla.imunofenotipagem", "rel": "FONTE", "para": "src.09.81", "pagina": "31-33"}
+{"de": "tum.lla", "rel": "DIAGNOSTICA_POR", "para": "dx.lla.imunofenotipagem"}
+{"de": "bio.drm", "rel": "FONTE", "para": "src.09.81", "pagina": "35-37"}
+{"de": "cen.lla.ph-neg-aya", "rel": "FONTE", "para": "src.09.81", "pagina": 35}
+{"de": "tum.lla", "rel": "TEM_CENARIO", "para": "cen.lla.ph-neg-aya"}
+{"de": "cen.lla.ph-neg-aya", "rel": "EXIGE_BIOMARCADOR", "para": "bio.drm", "para_que": "indicação de blinatumomabe"}
+{"de": "cen.lla.ph-neg-aya", "rel": "EXIGE_BIOMARCADOR", "para": "bio.bcr-abl1", "para_que": "excluir Ph+"}
+{"de": "far.pegaspargase", "rel": "FONTE", "para": "src.09.81", "pagina": 35}
+{"de": "reg.lla.esquema-pediatrico", "rel": "FONTE", "para": "src.09.81", "pagina": 35}
+{"de": "reg.lla.esquema-pediatrico", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "reg.lla.esquema-pediatrico", "rel": "USA_FARMACO", "para": "far.daunorrubicina"}
+{"de": "reg.lla.esquema-pediatrico", "rel": "USA_FARMACO", "para": "far.pegaspargase"}
+{"de": "reg.lla.esquema-pediatrico", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.lla.esquema-pediatrico", "rel": "USA_FARMACO", "para": "far.citarabina"}
+{"de": "reg.lla.esquema-pediatrico", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "cen.lla.ph-neg-aya", "rel": "TRATA_COM", "para": "reg.lla.esquema-pediatrico", "linha": "1a", "intencao": "curativa"}
+{"de": "far.blinatumomabe", "rel": "FONTE", "para": "src.09.81", "pagina": "35-37"}
+{"de": "reg.lla.blinatumomabe", "rel": "FONTE", "para": "src.09.81", "pagina": "35-37"}
+{"de": "reg.lla.blinatumomabe", "rel": "USA_FARMACO", "para": "far.blinatumomabe"}
+{"de": "cen.lla.ph-neg-aya", "rel": "TRATA_COM", "para": "reg.lla.blinatumomabe", "linha": "DRM+ / resgate", "intencao": "curativa", "condicao_biomarcador": "DRM positiva"}
+{"de": "far.inotuzumabe_ozogamicina", "rel": "FONTE", "para": "src.09.81", "pagina": "35-37"}
+{"de": "reg.lla.inotuzumabe", "rel": "FONTE", "para": "src.09.81", "pagina": "35-37"}
+{"de": "reg.lla.inotuzumabe", "rel": "USA_FARMACO", "para": "far.inotuzumabe_ozogamicina"}
+{"de": "cen.lla.ph-neg-aya", "rel": "TRATA_COM", "para": "reg.lla.inotuzumabe", "linha": "resgate", "intencao": "curativa"}
+{"de": "reg.lla.transplante-alogenico", "rel": "FONTE", "para": "src.09.81", "pagina": "35-37"}
+{"de": "cen.lla.ph-neg-aya", "rel": "TRATA_COM", "para": "reg.lla.transplante-alogenico", "linha": "consolidação (alto risco)", "intencao": "curativa"}
+{"de": "tri.calgb10403", "rel": "FONTE", "para": "src.09.81", "pagina": 35}
+{"de": "reg.lla.esquema-pediatrico", "rel": "SUSTENTADO_POR", "para": "tri.calgb10403"}
+{"de": "tri.calgb10403", "rel": "TESTOU", "para": "reg.lla.esquema-pediatrico"}
+{"de": "cen.lla.ph-neg-mais-45", "rel": "FONTE", "para": "src.09.81", "pagina": 36}
+{"de": "tum.lla", "rel": "TEM_CENARIO", "para": "cen.lla.ph-neg-mais-45"}
+{"de": "cen.lla.ph-neg-mais-45", "rel": "EXIGE_BIOMARCADOR", "para": "bio.drm", "para_que": "indicação de blinatumomabe"}
+{"de": "reg.lla.nao-intensivo", "rel": "FONTE", "para": "src.09.81", "pagina": 36}
+{"de": "reg.lla.nao-intensivo", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "reg.lla.nao-intensivo", "rel": "USA_FARMACO", "para": "far.daunorrubicina"}
+{"de": "reg.lla.nao-intensivo", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.lla.nao-intensivo", "rel": "USA_FARMACO", "para": "far.citarabina"}
+{"de": "reg.lla.nao-intensivo", "rel": "USA_FARMACO", "para": "far.rituximabe"}
+{"de": "cen.lla.ph-neg-mais-45", "rel": "TRATA_COM", "para": "reg.lla.nao-intensivo", "linha": "1a", "intencao": "curativa"}
+{"de": "cen.lla.ph-neg-mais-45", "rel": "TRATA_COM", "para": "reg.lla.blinatumomabe", "linha": "DRM+ / resgate", "intencao": "curativa", "condicao_biomarcador": "DRM positiva"}
+{"de": "cen.lla.ph-neg-mais-45", "rel": "TRATA_COM", "para": "reg.lla.inotuzumabe", "linha": "resgate", "intencao": "curativa"}
+{"de": "tri.graall-elderly", "rel": "FONTE", "para": "src.09.81", "pagina": 36}
+{"de": "reg.lla.nao-intensivo", "rel": "SUSTENTADO_POR", "para": "tri.graall-elderly"}
+{"de": "tri.graall-elderly", "rel": "TESTOU", "para": "reg.lla.nao-intensivo"}
+{"de": "cen.lla.ph-pos", "rel": "FONTE", "para": "src.09.81", "pagina": 37}
+{"de": "tum.lla", "rel": "TEM_CENARIO", "para": "cen.lla.ph-pos"}
+{"de": "cen.lla.ph-pos", "rel": "EXIGE_BIOMARCADOR", "para": "bio.bcr-abl1", "para_que": "define adição de ITK"}
+{"de": "cen.lla.ph-pos", "rel": "EXIGE_BIOMARCADOR", "para": "bio.drm", "para_que": "resposta molecular maior em 90 dias"}
+{"de": "reg.lla.qt-itk", "rel": "FONTE", "para": "src.09.81", "pagina": 37}
+{"de": "reg.lla.qt-itk", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "reg.lla.qt-itk", "rel": "USA_FARMACO", "para": "far.daunorrubicina"}
+{"de": "reg.lla.qt-itk", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.lla.qt-itk", "rel": "USA_FARMACO", "para": "far.citarabina"}
+{"de": "reg.lla.qt-itk", "rel": "USA_FARMACO", "para": "far.imatinibe"}
+{"de": "reg.lla.qt-itk", "rel": "USA_FARMACO", "para": "far.dasatinibe"}
+{"de": "reg.lla.qt-itk", "rel": "USA_FARMACO", "para": "far.ponatinibe"}
+{"de": "cen.lla.ph-pos", "rel": "TRATA_COM", "para": "reg.lla.qt-itk", "linha": "1a", "intencao": "curativa", "condicao_biomarcador": "BCR::ABL1 positivo"}
+{"de": "cen.lla.ph-pos", "rel": "TRATA_COM", "para": "reg.lla.transplante-alogenico", "linha": "consolidação", "intencao": "curativa", "condicao_biomarcador": "ausência de RMM após 90d"}
+{"de": "cen.lla.ph-pos", "rel": "TRATA_COM", "para": "reg.lla.blinatumomabe", "linha": "resgate", "intencao": "curativa"}
+{"de": "cen.lla.ph-pos", "rel": "TRATA_COM", "para": "reg.lla.inotuzumabe", "linha": "resgate", "intencao": "curativa"}
+{"de": "tri.graaph-2005", "rel": "FONTE", "para": "src.09.81", "pagina": 37}
+{"de": "reg.lla.qt-itk", "rel": "SUSTENTADO_POR", "para": "tri.graaph-2005"}
+{"de": "tri.graaph-2005", "rel": "TESTOU", "para": "reg.lla.qt-itk"}
+{"de": "tum.smd", "rel": "FONTE", "para": "src.09.81", "pagina": "39-40"}
+{"de": "dx.smd.criterios", "rel": "FONTE", "para": "src.09.81", "pagina": 41}
+{"de": "tum.smd", "rel": "DIAGNOSTICA_POR", "para": "dx.smd.criterios"}
+{"de": "est.smd.ipss-r-ipss-m", "rel": "FONTE", "para": "src.09.81", "pagina": 42}
+{"de": "tum.smd", "rel": "ESTADIA_POR", "para": "est.smd.ipss-r-ipss-m"}
+{"de": "bio.del5q", "rel": "FONTE", "para": "src.09.81", "pagina": 43}
+{"de": "bio.sf3b1", "rel": "FONTE", "para": "src.09.81", "pagina": 43}
+{"de": "bio.epo-serica", "rel": "FONTE", "para": "src.09.81", "pagina": 43}
+{"de": "cen.smd.baixo-risco", "rel": "FONTE", "para": "src.09.81", "pagina": 43}
+{"de": "tum.smd", "rel": "TEM_CENARIO", "para": "cen.smd.baixo-risco"}
+{"de": "cen.smd.baixo-risco", "rel": "EXIGE_BIOMARCADOR", "para": "bio.del5q", "para_que": "lenalidomida"}
+{"de": "cen.smd.baixo-risco", "rel": "EXIGE_BIOMARCADOR", "para": "bio.sf3b1", "para_que": "luspatercepte"}
+{"de": "cen.smd.baixo-risco", "rel": "EXIGE_BIOMARCADOR", "para": "bio.epo-serica", "para_que": "resposta à eritropoetina"}
+{"de": "far.eritropoetina", "rel": "FONTE", "para": "src.09.81", "pagina": "43-44"}
+{"de": "reg.smd.eritropoetina", "rel": "FONTE", "para": "src.09.81", "pagina": "43-44"}
+{"de": "reg.smd.eritropoetina", "rel": "USA_FARMACO", "para": "far.eritropoetina"}
+{"de": "cen.smd.baixo-risco", "rel": "TRATA_COM", "para": "reg.smd.eritropoetina", "linha": "1a", "intencao": "controle de doença", "condicao_biomarcador": "anemia; EPO sérica < 200"}
+{"de": "reg.smd.lenalidomida-del5q", "rel": "FONTE", "para": "src.09.81", "pagina": "43-44"}
+{"de": "reg.smd.lenalidomida-del5q", "rel": "USA_FARMACO", "para": "far.lenalidomida"}
+{"de": "cen.smd.baixo-risco", "rel": "TRATA_COM", "para": "reg.smd.lenalidomida-del5q", "linha": "1a", "intencao": "controle de doença", "condicao_biomarcador": "del(5q)"}
+{"de": "far.luspatercepte", "rel": "FONTE", "para": "src.09.81", "pagina": "43-44"}
+{"de": "reg.smd.luspatercepte", "rel": "FONTE", "para": "src.09.81", "pagina": "43-44"}
+{"de": "reg.smd.luspatercepte", "rel": "USA_FARMACO", "para": "far.luspatercepte"}
+{"de": "cen.smd.baixo-risco", "rel": "TRATA_COM", "para": "reg.smd.luspatercepte", "linha": "1a", "intencao": "controle de doença", "condicao_biomarcador": "SF3B1 ou sideroblastos em anel"}
+{"de": "far.eltrombopague", "rel": "FONTE", "para": "src.09.81", "pagina": "43-44"}
+{"de": "far.romiplostim", "rel": "FONTE", "para": "src.09.81", "pagina": "43-44"}
+{"de": "reg.smd.agonista-tpo", "rel": "FONTE", "para": "src.09.81", "pagina": "43-44"}
+{"de": "reg.smd.agonista-tpo", "rel": "USA_FARMACO", "para": "far.eltrombopague"}
+{"de": "reg.smd.agonista-tpo", "rel": "USA_FARMACO", "para": "far.romiplostim"}
+{"de": "cen.smd.baixo-risco", "rel": "TRATA_COM", "para": "reg.smd.agonista-tpo", "linha": "1a", "intencao": "controle de doença", "condicao_biomarcador": "plaquetopenia"}
+{"de": "reg.smd.gcsf", "rel": "FONTE", "para": "src.09.81", "pagina": "43-44"}
+{"de": "reg.smd.gcsf", "rel": "USA_FARMACO", "para": "far.filgrastim"}
+{"de": "cen.smd.baixo-risco", "rel": "TRATA_COM", "para": "reg.smd.gcsf", "linha": "1a", "intencao": "controle de doença", "condicao_biomarcador": "neutropenia (com interrogação no slide)"}
+{"de": "reg.smd.hipometilante", "rel": "FONTE", "para": "src.09.81", "pagina": "43-44"}
+{"de": "reg.smd.hipometilante", "rel": "USA_FARMACO", "para": "far.azacitidina"}
+{"de": "reg.smd.hipometilante", "rel": "USA_FARMACO", "para": "far.decitabina"}
+{"de": "cen.smd.baixo-risco", "rel": "TRATA_COM", "para": "reg.smd.hipometilante", "linha": "1a", "intencao": "controle de doença", "condicao_biomarcador": "múltiplas citopenias ou falha"}
+{"de": "cen.smd.alto-risco", "rel": "FONTE", "para": "src.09.81", "pagina": 44}
+{"de": "tum.smd", "rel": "TEM_CENARIO", "para": "cen.smd.alto-risco"}
+{"de": "cen.smd.alto-risco", "rel": "TRATA_COM", "para": "reg.smd.hipometilante", "linha": "1a", "intencao": "paliativa"}
+{"de": "reg.smd.hma-ponte-alo", "rel": "FONTE", "para": "src.09.81", "pagina": 44}
+{"de": "reg.smd.hma-ponte-alo", "rel": "USA_FARMACO", "para": "far.azacitidina"}
+{"de": "reg.smd.hma-ponte-alo", "rel": "USA_FARMACO", "para": "far.decitabina"}
+{"de": "cen.smd.alto-risco", "rel": "TRATA_COM", "para": "reg.smd.hma-ponte-alo", "linha": "1a", "intencao": "curativa", "condicao_biomarcador": "candidato a alo-TMO"}
+{"de": "bio.jak2-calr-mpl", "rel": "FONTE", "para": "src.09.81", "pagina": "47;49;51"}
+{"de": "tum.policitemia-vera", "rel": "FONTE", "para": "src.09.81", "pagina": 47}
+{"de": "dx.policitemia-vera.criterios", "rel": "FONTE", "para": "src.09.81", "pagina": 47}
+{"de": "tum.policitemia-vera", "rel": "DIAGNOSTICA_POR", "para": "dx.policitemia-vera.criterios"}
+{"de": "est.policitemia-vera.risco", "rel": "FONTE", "para": "src.09.81", "pagina": 48}
+{"de": "tum.policitemia-vera", "rel": "ESTADIA_POR", "para": "est.policitemia-vera.risco"}
+{"de": "cen.policitemia-vera.tratamento", "rel": "FONTE", "para": "src.09.81", "pagina": 48}
+{"de": "tum.policitemia-vera", "rel": "TEM_CENARIO", "para": "cen.policitemia-vera.tratamento"}
+{"de": "cen.policitemia-vera.tratamento", "rel": "EXIGE_BIOMARCADOR", "para": "bio.jak2-calr-mpl", "para_que": "diagnóstico"}
+{"de": "far.aas", "rel": "FONTE", "para": "src.09.81", "pagina": 48}
+{"de": "reg.policitemia-vera.aas-sangria", "rel": "FONTE", "para": "src.09.81", "pagina": 48}
+{"de": "reg.policitemia-vera.aas-sangria", "rel": "USA_FARMACO", "para": "far.aas"}
+{"de": "cen.policitemia-vera.tratamento", "rel": "TRATA_COM", "para": "reg.policitemia-vera.aas-sangria", "linha": "1a", "intencao": "controle de doença", "condicao_biomarcador": "baixo risco"}
+{"de": "far.hidroxiureia", "rel": "FONTE", "para": "src.09.81", "pagina": 48}
+{"de": "far.interferon", "rel": "FONTE", "para": "src.09.81", "pagina": 48}
+{"de": "reg.policitemia-vera.citorreducao", "rel": "FONTE", "para": "src.09.81", "pagina": 48}
+{"de": "reg.policitemia-vera.citorreducao", "rel": "USA_FARMACO", "para": "far.aas"}
+{"de": "reg.policitemia-vera.citorreducao", "rel": "USA_FARMACO", "para": "far.hidroxiureia"}
+{"de": "reg.policitemia-vera.citorreducao", "rel": "USA_FARMACO", "para": "far.interferon"}
+{"de": "cen.policitemia-vera.tratamento", "rel": "TRATA_COM", "para": "reg.policitemia-vera.citorreducao", "linha": "1a", "intencao": "controle de doença", "condicao_biomarcador": "alto risco"}
+{"de": "tum.trombocitemia-essencial", "rel": "FONTE", "para": "src.09.81", "pagina": 49}
+{"de": "dx.trombocitemia-essencial.criterios", "rel": "FONTE", "para": "src.09.81", "pagina": 49}
+{"de": "tum.trombocitemia-essencial", "rel": "DIAGNOSTICA_POR", "para": "dx.trombocitemia-essencial.criterios"}
+{"de": "est.trombocitemia-essencial.ipset", "rel": "FONTE", "para": "src.09.81", "pagina": 50}
+{"de": "tum.trombocitemia-essencial", "rel": "ESTADIA_POR", "para": "est.trombocitemia-essencial.ipset"}
+{"de": "cen.trombocitemia-essencial.tratamento", "rel": "FONTE", "para": "src.09.81", "pagina": 50}
+{"de": "tum.trombocitemia-essencial", "rel": "TEM_CENARIO", "para": "cen.trombocitemia-essencial.tratamento"}
+{"de": "cen.trombocitemia-essencial.tratamento", "rel": "EXIGE_BIOMARCADOR", "para": "bio.jak2-calr-mpl", "para_que": "diagnóstico e IPSET"}
+{"de": "reg.trombocitemia-essencial.aas", "rel": "FONTE", "para": "src.09.81", "pagina": 50}
+{"de": "reg.trombocitemia-essencial.aas", "rel": "USA_FARMACO", "para": "far.aas"}
+{"de": "cen.trombocitemia-essencial.tratamento", "rel": "TRATA_COM", "para": "reg.trombocitemia-essencial.aas", "linha": "1a", "intencao": "controle de doença", "condicao_biomarcador": "muito baixo a intermediário"}
+{"de": "reg.trombocitemia-essencial.aas-citorreducao", "rel": "FONTE", "para": "src.09.81", "pagina": 50}
+{"de": "reg.trombocitemia-essencial.aas-citorreducao", "rel": "USA_FARMACO", "para": "far.aas"}
+{"de": "reg.trombocitemia-essencial.aas-citorreducao", "rel": "USA_FARMACO", "para": "far.hidroxiureia"}
+{"de": "reg.trombocitemia-essencial.aas-citorreducao", "rel": "USA_FARMACO", "para": "far.interferon"}
+{"de": "cen.trombocitemia-essencial.tratamento", "rel": "TRATA_COM", "para": "reg.trombocitemia-essencial.aas-citorreducao", "linha": "1a", "intencao": "controle de doença", "condicao_biomarcador": "alto risco"}
+{"de": "tum.mielofibrose", "rel": "FONTE", "para": "src.09.81", "pagina": 51}
+{"de": "dx.mielofibrose.criterios", "rel": "FONTE", "para": "src.09.81", "pagina": 51}
+{"de": "tum.mielofibrose", "rel": "DIAGNOSTICA_POR", "para": "dx.mielofibrose.criterios"}
+{"de": "est.mielofibrose.mipss70-gipss-dipss", "rel": "FONTE", "para": "src.09.81", "pagina": 52}
+{"de": "tum.mielofibrose", "rel": "ESTADIA_POR", "para": "est.mielofibrose.mipss70-gipss-dipss"}
+{"de": "cen.mielofibrose.alto-risco", "rel": "FONTE", "para": "src.09.81", "pagina": 52}
+{"de": "tum.mielofibrose", "rel": "TEM_CENARIO", "para": "cen.mielofibrose.alto-risco"}
+{"de": "reg.mielofibrose.alo-tmo", "rel": "FONTE", "para": "src.09.81", "pagina": 52}
+{"de": "cen.mielofibrose.alto-risco", "rel": "TRATA_COM", "para": "reg.mielofibrose.alo-tmo", "linha": "1a", "intencao": "curativa"}
+{"de": "cen.mielofibrose.baixo-risco", "rel": "FONTE", "para": "src.09.81", "pagina": 53}
+{"de": "tum.mielofibrose", "rel": "TEM_CENARIO", "para": "cen.mielofibrose.baixo-risco"}
+{"de": "cen.mielofibrose.baixo-risco", "rel": "EXIGE_BIOMARCADOR", "para": "bio.jak2-calr-mpl", "para_que": "diagnóstico"}
+{"de": "far.danazol", "rel": "FONTE", "para": "src.09.81", "pagina": 53}
+{"de": "reg.mielofibrose.anemia-epo-danazol", "rel": "FONTE", "para": "src.09.81", "pagina": 53}
+{"de": "reg.mielofibrose.anemia-epo-danazol", "rel": "USA_FARMACO", "para": "far.eritropoetina"}
+{"de": "reg.mielofibrose.anemia-epo-danazol", "rel": "USA_FARMACO", "para": "far.danazol"}
+{"de": "cen.mielofibrose.baixo-risco", "rel": "TRATA_COM", "para": "reg.mielofibrose.anemia-epo-danazol", "linha": "suporte", "intencao": "paliativa", "condicao_biomarcador": "anemia"}
+{"de": "reg.mielofibrose.hidroxiureia", "rel": "FONTE", "para": "src.09.81", "pagina": 53}
+{"de": "reg.mielofibrose.hidroxiureia", "rel": "USA_FARMACO", "para": "far.hidroxiureia"}
+{"de": "cen.mielofibrose.baixo-risco", "rel": "TRATA_COM", "para": "reg.mielofibrose.hidroxiureia", "linha": "suporte", "intencao": "paliativa"}
+{"de": "far.ruxolitinibe", "rel": "FONTE", "para": "src.09.81", "pagina": 53}
+{"de": "far.momelotinibe", "rel": "FONTE", "para": "src.09.81", "pagina": 53}
+{"de": "reg.mielofibrose.inibidor-jak", "rel": "FONTE", "para": "src.09.81", "pagina": 53}
+{"de": "reg.mielofibrose.inibidor-jak", "rel": "USA_FARMACO", "para": "far.ruxolitinibe"}
+{"de": "reg.mielofibrose.inibidor-jak", "rel": "USA_FARMACO", "para": "far.momelotinibe"}
+{"de": "cen.mielofibrose.baixo-risco", "rel": "TRATA_COM", "para": "reg.mielofibrose.inibidor-jak", "linha": "suporte", "intencao": "paliativa"}
+{"de": "tum.gmsi", "rel": "FONTE", "para": "src.09.82", "pagina": "6-7"}
+{"de": "dx.gamopatias.criterios-imwg", "rel": "FONTE", "para": "src.09.82", "pagina": 6}
+{"de": "tum.gmsi", "rel": "DIAGNOSTICA_POR", "para": "dx.gamopatias.criterios-imwg"}
+{"de": "cen.gmsi.seguimento", "rel": "FONTE", "para": "src.09.82", "pagina": 7}
+{"de": "tum.gmsi", "rel": "TEM_CENARIO", "para": "cen.gmsi.seguimento"}
+{"de": "tum.mieloma-smoldering", "rel": "FONTE", "para": "src.09.82", "pagina": 6}
+{"de": "tum.mieloma-smoldering", "rel": "DIAGNOSTICA_POR", "para": "dx.gamopatias.criterios-imwg"}
+{"de": "tum.mieloma-multiplo", "rel": "FONTE", "para": "src.09.82", "pagina": "9-10"}
+{"de": "dx.mieloma-multiplo.investigacao", "rel": "FONTE", "para": "src.09.82", "pagina": 10}
+{"de": "tum.mieloma-multiplo", "rel": "DIAGNOSTICA_POR", "para": "dx.mieloma-multiplo.investigacao"}
+{"de": "dx.mieloma-multiplo.criterios-imwg", "rel": "FONTE", "para": "src.09.82", "pagina": 11}
+{"de": "tum.mieloma-multiplo", "rel": "DIAGNOSTICA_POR", "para": "dx.mieloma-multiplo.criterios-imwg"}
+{"de": "est.mieloma-multiplo.iss-r-iss", "rel": "FONTE", "para": "src.09.82", "pagina": 12}
+{"de": "tum.mieloma-multiplo", "rel": "ESTADIA_POR", "para": "est.mieloma-multiplo.iss-r-iss"}
+{"de": "est.mieloma-multiplo.imwg-alto-risco", "rel": "FONTE", "para": "src.09.82", "pagina": 12}
+{"de": "tum.mieloma-multiplo", "rel": "ESTADIA_POR", "para": "est.mieloma-multiplo.imwg-alto-risco"}
+{"de": "bio.mieloma-citogenetica-alto-risco", "rel": "FONTE", "para": "src.09.82", "pagina": "12-13"}
+{"de": "cen.mieloma-multiplo.elegivel-tmo", "rel": "FONTE", "para": "src.09.82", "pagina": 13}
+{"de": "tum.mieloma-multiplo", "rel": "TEM_CENARIO", "para": "cen.mieloma-multiplo.elegivel-tmo"}
+{"de": "cen.mieloma-multiplo.elegivel-tmo", "rel": "EXIGE_BIOMARCADOR", "para": "bio.mieloma-citogenetica-alto-risco", "para_que": "define manutenção (alto risco)"}
+{"de": "far.daratumumabe", "rel": "FONTE", "para": "src.09.82", "pagina": "13-14"}
+{"de": "far.bortezomibe", "rel": "FONTE", "para": "src.09.82", "pagina": "13-14"}
+{"de": "reg.mieloma-multiplo.dara-vrd", "rel": "FONTE", "para": "src.09.82", "pagina": "13-14"}
+{"de": "reg.mieloma-multiplo.dara-vrd", "rel": "USA_FARMACO", "para": "far.daratumumabe"}
+{"de": "reg.mieloma-multiplo.dara-vrd", "rel": "USA_FARMACO", "para": "far.bortezomibe"}
+{"de": "reg.mieloma-multiplo.dara-vrd", "rel": "USA_FARMACO", "para": "far.lenalidomida"}
+{"de": "reg.mieloma-multiplo.dara-vrd", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "far.isatuximabe", "rel": "FONTE", "para": "src.09.82", "pagina": "13-14"}
+{"de": "reg.mieloma-multiplo.isa-vrd", "rel": "FONTE", "para": "src.09.82", "pagina": "13-14"}
+{"de": "reg.mieloma-multiplo.isa-vrd", "rel": "USA_FARMACO", "para": "far.isatuximabe"}
+{"de": "reg.mieloma-multiplo.isa-vrd", "rel": "USA_FARMACO", "para": "far.bortezomibe"}
+{"de": "reg.mieloma-multiplo.isa-vrd", "rel": "USA_FARMACO", "para": "far.lenalidomida"}
+{"de": "reg.mieloma-multiplo.isa-vrd", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "reg.mieloma-multiplo.vrd", "rel": "FONTE", "para": "src.09.82", "pagina": "13-14"}
+{"de": "reg.mieloma-multiplo.vrd", "rel": "USA_FARMACO", "para": "far.bortezomibe"}
+{"de": "reg.mieloma-multiplo.vrd", "rel": "USA_FARMACO", "para": "far.lenalidomida"}
+{"de": "reg.mieloma-multiplo.vrd", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "far.carfilzomibe", "rel": "FONTE", "para": "src.09.82", "pagina": "13-14"}
+{"de": "reg.mieloma-multiplo.dara-krd", "rel": "FONTE", "para": "src.09.82", "pagina": "13-14"}
+{"de": "reg.mieloma-multiplo.dara-krd", "rel": "USA_FARMACO", "para": "far.daratumumabe"}
+{"de": "reg.mieloma-multiplo.dara-krd", "rel": "USA_FARMACO", "para": "far.carfilzomibe"}
+{"de": "reg.mieloma-multiplo.dara-krd", "rel": "USA_FARMACO", "para": "far.lenalidomida"}
+{"de": "reg.mieloma-multiplo.dara-krd", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "reg.mieloma-multiplo.tmo-autologo", "rel": "FONTE", "para": "src.09.82", "pagina": 13}
+{"de": "reg.mieloma-multiplo.manutencao-lenalidomida", "rel": "FONTE", "para": "src.09.82", "pagina": 13}
+{"de": "reg.mieloma-multiplo.manutencao-lenalidomida", "rel": "USA_FARMACO", "para": "far.lenalidomida"}
+{"de": "reg.mieloma-multiplo.manutencao-lenalidomida", "rel": "USA_FARMACO", "para": "far.daratumumabe"}
+{"de": "cen.mieloma-multiplo.elegivel-tmo", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.dara-vrd", "linha": "1a (indução)", "intencao": "controle de doença"}
+{"de": "cen.mieloma-multiplo.elegivel-tmo", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.isa-vrd", "linha": "1a (indução)", "intencao": "controle de doença"}
+{"de": "cen.mieloma-multiplo.elegivel-tmo", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.vrd", "linha": "1a (indução)", "intencao": "controle de doença"}
+{"de": "cen.mieloma-multiplo.elegivel-tmo", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.dara-krd", "linha": "1a (indução)", "intencao": "controle de doença"}
+{"de": "cen.mieloma-multiplo.elegivel-tmo", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.tmo-autologo", "linha": "consolidação", "intencao": "controle de doença"}
+{"de": "cen.mieloma-multiplo.elegivel-tmo", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.manutencao-lenalidomida", "linha": "manutenção", "intencao": "controle de doença"}
+{"de": "cen.mieloma-multiplo.nao-elegivel", "rel": "FONTE", "para": "src.09.82", "pagina": 14}
+{"de": "tum.mieloma-multiplo", "rel": "TEM_CENARIO", "para": "cen.mieloma-multiplo.nao-elegivel"}
+{"de": "reg.mieloma-multiplo.drd", "rel": "FONTE", "para": "src.09.82", "pagina": "14;16"}
+{"de": "reg.mieloma-multiplo.drd", "rel": "USA_FARMACO", "para": "far.daratumumabe"}
+{"de": "reg.mieloma-multiplo.drd", "rel": "USA_FARMACO", "para": "far.lenalidomida"}
+{"de": "reg.mieloma-multiplo.drd", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "far.melfalano", "rel": "FONTE", "para": "src.09.82", "pagina": 14}
+{"de": "reg.mieloma-multiplo.dara-vmp", "rel": "FONTE", "para": "src.09.82", "pagina": 14}
+{"de": "reg.mieloma-multiplo.dara-vmp", "rel": "USA_FARMACO", "para": "far.daratumumabe"}
+{"de": "reg.mieloma-multiplo.dara-vmp", "rel": "USA_FARMACO", "para": "far.bortezomibe"}
+{"de": "reg.mieloma-multiplo.dara-vmp", "rel": "USA_FARMACO", "para": "far.melfalano"}
+{"de": "reg.mieloma-multiplo.dara-vmp", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "cen.mieloma-multiplo.nao-elegivel", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.dara-vrd", "linha": "1a (até progressão)", "intencao": "controle de doença"}
+{"de": "cen.mieloma-multiplo.nao-elegivel", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.isa-vrd", "linha": "1a (até progressão)", "intencao": "controle de doença"}
+{"de": "cen.mieloma-multiplo.nao-elegivel", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.drd", "linha": "1a (até progressão)", "intencao": "controle de doença"}
+{"de": "cen.mieloma-multiplo.nao-elegivel", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.vrd", "linha": "1a (até progressão)", "intencao": "controle de doença"}
+{"de": "cen.mieloma-multiplo.nao-elegivel", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.dara-vmp", "linha": "1a (até progressão)", "intencao": "controle de doença"}
+{"de": "cen.mieloma-multiplo.nao-elegivel", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.dara-krd", "linha": "1a (até progressão)", "intencao": "controle de doença"}
+{"de": "cen.mieloma-multiplo.recaida", "rel": "FONTE", "para": "src.09.82", "pagina": "15-16"}
+{"de": "tum.mieloma-multiplo", "rel": "TEM_CENARIO", "para": "cen.mieloma-multiplo.recaida"}
+{"de": "reg.mieloma-multiplo.krd", "rel": "FONTE", "para": "src.09.82", "pagina": 16}
+{"de": "reg.mieloma-multiplo.krd", "rel": "USA_FARMACO", "para": "far.carfilzomibe"}
+{"de": "reg.mieloma-multiplo.krd", "rel": "USA_FARMACO", "para": "far.lenalidomida"}
+{"de": "reg.mieloma-multiplo.krd", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "cen.mieloma-multiplo.recaida", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.krd", "linha": "2a", "intencao": "controle de doença", "condicao_biomarcador": "sensível à lenalidomida"}
+{"de": "reg.mieloma-multiplo.ird", "rel": "FONTE", "para": "src.09.82", "pagina": 16}
+{"de": "reg.mieloma-multiplo.ird", "rel": "USA_FARMACO", "para": "far.isatuximabe"}
+{"de": "reg.mieloma-multiplo.ird", "rel": "USA_FARMACO", "para": "far.lenalidomida"}
+{"de": "reg.mieloma-multiplo.ird", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "cen.mieloma-multiplo.recaida", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.ird", "linha": "2a", "intencao": "controle de doença", "condicao_biomarcador": "sensível à lenalidomida"}
+{"de": "cen.mieloma-multiplo.recaida", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.drd", "linha": "2a", "intencao": "controle de doença", "condicao_biomarcador": "sensível à lenalidomida"}
+{"de": "reg.mieloma-multiplo.dvd", "rel": "FONTE", "para": "src.09.82", "pagina": 16}
+{"de": "reg.mieloma-multiplo.dvd", "rel": "USA_FARMACO", "para": "far.daratumumabe"}
+{"de": "reg.mieloma-multiplo.dvd", "rel": "USA_FARMACO", "para": "far.bortezomibe"}
+{"de": "reg.mieloma-multiplo.dvd", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "cen.mieloma-multiplo.recaida", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.dvd", "linha": "2a", "intencao": "controle de doença", "condicao_biomarcador": "refratário à lenalidomida"}
+{"de": "reg.mieloma-multiplo.dkd", "rel": "FONTE", "para": "src.09.82", "pagina": 16}
+{"de": "reg.mieloma-multiplo.dkd", "rel": "USA_FARMACO", "para": "far.daratumumabe"}
+{"de": "reg.mieloma-multiplo.dkd", "rel": "USA_FARMACO", "para": "far.carfilzomibe"}
+{"de": "reg.mieloma-multiplo.dkd", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "cen.mieloma-multiplo.recaida", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.dkd", "linha": "2a", "intencao": "controle de doença", "condicao_biomarcador": "refratário à lenalidomida"}
+{"de": "far.pomalidomida", "rel": "FONTE", "para": "src.09.82", "pagina": 16}
+{"de": "reg.mieloma-multiplo.pvd", "rel": "FONTE", "para": "src.09.82", "pagina": 16}
+{"de": "reg.mieloma-multiplo.pvd", "rel": "USA_FARMACO", "para": "far.pomalidomida"}
+{"de": "reg.mieloma-multiplo.pvd", "rel": "USA_FARMACO", "para": "far.bortezomibe"}
+{"de": "reg.mieloma-multiplo.pvd", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "cen.mieloma-multiplo.recaida", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.pvd", "linha": "2a", "intencao": "controle de doença", "condicao_biomarcador": "refratário à lenalidomida"}
+{"de": "cen.mieloma-multiplo.pentarrefratario", "rel": "FONTE", "para": "src.09.82", "pagina": "15;17"}
+{"de": "tum.mieloma-multiplo", "rel": "TEM_CENARIO", "para": "cen.mieloma-multiplo.pentarrefratario"}
+{"de": "far.teclistamabe", "rel": "FONTE", "para": "src.09.82", "pagina": 17}
+{"de": "reg.mieloma-multiplo.teclistamabe", "rel": "FONTE", "para": "src.09.82", "pagina": 17}
+{"de": "reg.mieloma-multiplo.teclistamabe", "rel": "USA_FARMACO", "para": "far.teclistamabe"}
+{"de": "cen.mieloma-multiplo.pentarrefratario", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.teclistamabe", "linha": "3a+", "intencao": "paliativa"}
+{"de": "far.talquetamabe", "rel": "FONTE", "para": "src.09.82", "pagina": 17}
+{"de": "reg.mieloma-multiplo.talquetamabe", "rel": "FONTE", "para": "src.09.82", "pagina": 17}
+{"de": "reg.mieloma-multiplo.talquetamabe", "rel": "USA_FARMACO", "para": "far.talquetamabe"}
+{"de": "cen.mieloma-multiplo.pentarrefratario", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.talquetamabe", "linha": "3a+", "intencao": "paliativa"}
+{"de": "far.ciltacabtagene_autoleucel", "rel": "FONTE", "para": "src.09.82", "pagina": 17}
+{"de": "reg.mieloma-multiplo.cilta-cel", "rel": "FONTE", "para": "src.09.82", "pagina": 17}
+{"de": "reg.mieloma-multiplo.cilta-cel", "rel": "USA_FARMACO", "para": "far.ciltacabtagene_autoleucel"}
+{"de": "cen.mieloma-multiplo.pentarrefratario", "rel": "TRATA_COM", "para": "reg.mieloma-multiplo.cilta-cel", "linha": "3a+", "intencao": "paliativa"}
+{"de": "tum.plasmocitoma-solitario", "rel": "FONTE", "para": "src.09.82", "pagina": "21-22"}
+{"de": "dx.plasmocitoma.criterios", "rel": "FONTE", "para": "src.09.82", "pagina": 21}
+{"de": "tum.plasmocitoma-solitario", "rel": "DIAGNOSTICA_POR", "para": "dx.plasmocitoma.criterios"}
+{"de": "cen.plasmocitoma.isolado", "rel": "FONTE", "para": "src.09.82", "pagina": 22}
+{"de": "tum.plasmocitoma-solitario", "rel": "TEM_CENARIO", "para": "cen.plasmocitoma.isolado"}
+{"de": "reg.plasmocitoma.isrt-40-50gy", "rel": "FONTE", "para": "src.09.82", "pagina": 22}
+{"de": "cen.plasmocitoma.isolado", "rel": "TRATA_COM", "para": "reg.plasmocitoma.isrt-40-50gy", "linha": "1a", "intencao": "curativa"}
+{"de": "tum.amiloidose-al", "rel": "FONTE", "para": "src.09.82", "pagina": "24-25"}
+{"de": "dx.amiloidose-al.investigacao", "rel": "FONTE", "para": "src.09.82", "pagina": 25}
+{"de": "tum.amiloidose-al", "rel": "DIAGNOSTICA_POR", "para": "dx.amiloidose-al.investigacao"}
+{"de": "dx.amiloidose-al.criterios-imwg", "rel": "FONTE", "para": "src.09.82", "pagina": 26}
+{"de": "tum.amiloidose-al", "rel": "DIAGNOSTICA_POR", "para": "dx.amiloidose-al.criterios-imwg"}
+{"de": "est.amiloidose-al.mayo", "rel": "FONTE", "para": "src.09.82", "pagina": 27}
+{"de": "tum.amiloidose-al", "rel": "ESTADIA_POR", "para": "est.amiloidose-al.mayo"}
+{"de": "cen.amiloidose-al.i-iiia", "rel": "FONTE", "para": "src.09.82", "pagina": 28}
+{"de": "tum.amiloidose-al", "rel": "TEM_CENARIO", "para": "cen.amiloidose-al.i-iiia"}
+{"de": "reg.amiloidose-al.dara-vcd", "rel": "FONTE", "para": "src.09.82", "pagina": 28}
+{"de": "reg.amiloidose-al.dara-vcd", "rel": "USA_FARMACO", "para": "far.daratumumabe"}
+{"de": "reg.amiloidose-al.dara-vcd", "rel": "USA_FARMACO", "para": "far.bortezomibe"}
+{"de": "reg.amiloidose-al.dara-vcd", "rel": "USA_FARMACO", "para": "far.dexametasona"}
+{"de": "cen.amiloidose-al.i-iiia", "rel": "TRATA_COM", "para": "reg.amiloidose-al.dara-vcd", "linha": "1a", "intencao": "controle de doença"}
+{"de": "cen.amiloidose-al.iiib", "rel": "FONTE", "para": "src.09.82", "pagina": 28}
+{"de": "tum.amiloidose-al", "rel": "TEM_CENARIO", "para": "cen.amiloidose-al.iiib"}
+{"de": "cen.amiloidose-al.iiib", "rel": "TRATA_COM", "para": "reg.amiloidose-al.dara-vcd", "linha": "1a", "intencao": "controle de doença"}
+{"de": "tri.andromeda", "rel": "FONTE", "para": "src.09.82", "pagina": 28}
+{"de": "reg.amiloidose-al.dara-vcd", "rel": "SUSTENTADO_POR", "para": "tri.andromeda"}
+{"de": "tri.andromeda", "rel": "TESTOU", "para": "reg.amiloidose-al.dara-vcd"}

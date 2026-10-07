@@ -1,0 +1,435 @@
+{"de": "tum.cecp", "rel": "FONTE", "para": "src.06.53", "pagina": 10}
+{"de": "tum.cec-cavidade-oral", "rel": "FONTE", "para": "src.06.53", "pagina": 10}
+{"de": "tum.cec-orofaringe", "rel": "FONTE", "para": "src.06.54", "pagina": 20}
+{"de": "tum.cec-laringe", "rel": "FONTE", "para": "src.06.54", "pagina": 7}
+{"de": "tum.nasofaringe", "rel": "FONTE", "para": "src.06.55", "pagina": 7}
+{"de": "tum.glandula-salivar", "rel": "FONTE", "para": "src.06.56", "pagina": 7}
+{"de": "tum.tireoide", "rel": "FONTE", "para": "src.06.57", "pagina": 7}
+{"de": "dx.cecp.workup-inicial", "rel": "FONTE", "para": "src.06.53", "pagina": 7}
+{"de": "tum.cecp", "rel": "DIAGNOSTICA_POR", "para": "dx.cecp.workup-inicial"}
+{"de": "dx.cecp.pet-ct-alto-risco", "rel": "FONTE", "para": "src.06.53", "pagina": 8}
+{"de": "tum.cecp", "rel": "DIAGNOSTICA_POR", "para": "dx.cecp.pet-ct-alto-risco"}
+{"de": "dx.cecp.seguimento", "rel": "FONTE", "para": "src.06.54", "pagina": 14}
+{"de": "tum.cecp", "rel": "DIAGNOSTICA_POR", "para": "dx.cecp.seguimento"}
+{"de": "bio.pd-l1-cps", "rel": "FONTE", "para": "src.06.54", "pagina": 48}
+{"de": "bio.p16", "rel": "FONTE", "para": "src.06.54", "pagina": 23}
+{"de": "bio.hpv-ish", "rel": "FONTE", "para": "src.06.54", "pagina": 23}
+{"de": "bio.tmb", "rel": "FONTE", "para": "src.06.54", "pagina": 42}
+{"de": "cen.cec-cavidade-oral.localizado", "rel": "FONTE", "para": "src.06.53", "pagina": 10}
+{"de": "tum.cec-cavidade-oral", "rel": "TEM_CENARIO", "para": "cen.cec-cavidade-oral.localizado"}
+{"de": "tri.dcruz-2015", "rel": "FONTE", "para": "src.06.53", "pagina": 12}
+{"de": "tri.garrel-2020-sent", "rel": "FONTE", "para": "src.06.53", "pagina": 13}
+{"de": "reg.cec-cavidade-oral.cirurgia-esvaziamento-eletivo", "rel": "FONTE", "para": "src.06.53", "pagina": 12}
+{"de": "cen.cec-cavidade-oral.localizado", "rel": "TRATA_COM", "para": "reg.cec-cavidade-oral.cirurgia-esvaziamento-eletivo", "linha": "cirurgia", "intencao": "curativa", "condicao_biomarcador": "cN0"}
+{"de": "reg.cec-cavidade-oral.cirurgia-esvaziamento-eletivo", "rel": "SUSTENTADO_POR", "para": "tri.dcruz-2015"}
+{"de": "tri.dcruz-2015", "rel": "TESTOU", "para": "reg.cec-cavidade-oral.cirurgia-esvaziamento-eletivo"}
+{"de": "reg.cec-cavidade-oral.cirurgia-slnb", "rel": "FONTE", "para": "src.06.53", "pagina": 14}
+{"de": "cen.cec-cavidade-oral.localizado", "rel": "TRATA_COM", "para": "reg.cec-cavidade-oral.cirurgia-slnb", "linha": "cirurgia", "intencao": "curativa", "condicao_biomarcador": "EC I-II"}
+{"de": "reg.cec-cavidade-oral.cirurgia-slnb", "rel": "SUSTENTADO_POR", "para": "tri.garrel-2020-sent"}
+{"de": "tri.garrel-2020-sent", "rel": "TESTOU", "para": "reg.cec-cavidade-oral.cirurgia-slnb"}
+{"de": "cen.cecp.adjuvante", "rel": "FONTE", "para": "src.06.53", "pagina": 17}
+{"de": "tum.cecp", "rel": "TEM_CENARIO", "para": "cen.cecp.adjuvante"}
+{"de": "tum.cec-cavidade-oral", "rel": "TEM_CENARIO", "para": "cen.cecp.adjuvante"}
+{"de": "tum.cec-orofaringe", "rel": "TEM_CENARIO", "para": "cen.cecp.adjuvante"}
+{"de": "tum.cec-laringe", "rel": "TEM_CENARIO", "para": "cen.cecp.adjuvante"}
+{"de": "tri.eortc-22931", "rel": "FONTE", "para": "src.06.53", "pagina": 17}
+{"de": "tri.rtog-9501", "rel": "FONTE", "para": "src.06.53", "pagina": 17}
+{"de": "tri.kiyota-2022-cddp-semanal", "rel": "FONTE", "para": "src.06.53", "pagina": 19}
+{"de": "reg.cecp.qrt-adjuvante-cisplatina", "rel": "FONTE", "para": "src.06.53", "pagina": 17}
+{"de": "far.cisplatina", "rel": "FONTE", "para": "src.06.53", "pagina": 17}
+{"de": "reg.cecp.qrt-adjuvante-cisplatina", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.cecp.adjuvante", "rel": "TRATA_COM", "para": "reg.cecp.qrt-adjuvante-cisplatina", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "margens positivas e/ou EEC"}
+{"de": "reg.cecp.qrt-adjuvante-cisplatina", "rel": "SUSTENTADO_POR", "para": "tri.eortc-22931"}
+{"de": "tri.eortc-22931", "rel": "TESTOU", "para": "reg.cecp.qrt-adjuvante-cisplatina"}
+{"de": "reg.cecp.qrt-adjuvante-cisplatina", "rel": "SUSTENTADO_POR", "para": "tri.rtog-9501"}
+{"de": "tri.rtog-9501", "rel": "TESTOU", "para": "reg.cecp.qrt-adjuvante-cisplatina"}
+{"de": "reg.cecp.qrt-adjuvante-cisplatina", "rel": "SUSTENTADO_POR", "para": "tri.kiyota-2022-cddp-semanal"}
+{"de": "tri.kiyota-2022-cddp-semanal", "rel": "TESTOU", "para": "reg.cecp.qrt-adjuvante-cisplatina"}
+{"de": "reg.cecp.rt-adjuvante", "rel": "FONTE", "para": "src.06.53", "pagina": 17}
+{"de": "cen.cecp.adjuvante", "rel": "TRATA_COM", "para": "reg.cecp.rt-adjuvante", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "fatores intermediários (pT3-4, >=2 LN, IPN, êmbolo vascular)"}
+{"de": "tri.nivopost-op", "rel": "FONTE", "para": "src.06.53", "pagina": 29}
+{"de": "reg.cecp.nivolumabe-qrt-adjuvante", "rel": "FONTE", "para": "src.06.53", "pagina": 29}
+{"de": "far.nivolumabe", "rel": "FONTE", "para": "src.06.53", "pagina": 29}
+{"de": "reg.cecp.nivolumabe-qrt-adjuvante", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "reg.cecp.nivolumabe-qrt-adjuvante", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.cecp.adjuvante", "rel": "TRATA_COM", "para": "reg.cecp.nivolumabe-qrt-adjuvante", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "alto risco patológico, independente de PD-L1"}
+{"de": "reg.cecp.nivolumabe-qrt-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.nivopost-op"}
+{"de": "tri.nivopost-op", "rel": "TESTOU", "para": "reg.cecp.nivolumabe-qrt-adjuvante"}
+{"de": "cen.cecp.localmente-avancado-ressecavel", "rel": "FONTE", "para": "src.06.53", "pagina": 36}
+{"de": "tum.cecp", "rel": "TEM_CENARIO", "para": "cen.cecp.localmente-avancado-ressecavel"}
+{"de": "tum.cec-cavidade-oral", "rel": "TEM_CENARIO", "para": "cen.cecp.localmente-avancado-ressecavel"}
+{"de": "cen.cecp.localmente-avancado-ressecavel", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pd-l1-cps", "para_que": "pembrolizumabe perioperatório aprovado para CPS>=1"}
+{"de": "tri.keynote-689", "rel": "FONTE", "para": "src.06.53", "pagina": 28}
+{"de": "reg.cecp.pembrolizumabe-perioperatorio", "rel": "FONTE", "para": "src.06.53", "pagina": 28}
+{"de": "far.pembrolizumabe", "rel": "FONTE", "para": "src.06.53", "pagina": 28}
+{"de": "reg.cecp.pembrolizumabe-perioperatorio", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.cecp.pembrolizumabe-perioperatorio", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.cecp.localmente-avancado-ressecavel", "rel": "TRATA_COM", "para": "reg.cecp.pembrolizumabe-perioperatorio", "linha": "perioperatorio", "intencao": "curativa", "condicao_biomarcador": "CPS >=1"}
+{"de": "reg.cecp.pembrolizumabe-perioperatorio", "rel": "SUSTENTADO_POR", "para": "tri.keynote-689"}
+{"de": "tri.keynote-689", "rel": "TESTOU", "para": "reg.cecp.pembrolizumabe-perioperatorio"}
+{"de": "cen.cecp.localmente-avancado-irressecavel", "rel": "FONTE", "para": "src.06.53", "pagina": 39}
+{"de": "tum.cecp", "rel": "TEM_CENARIO", "para": "cen.cecp.localmente-avancado-irressecavel"}
+{"de": "tum.cec-orofaringe", "rel": "TEM_CENARIO", "para": "cen.cecp.localmente-avancado-irressecavel"}
+{"de": "tum.cec-laringe", "rel": "TEM_CENARIO", "para": "cen.cecp.localmente-avancado-irressecavel"}
+{"de": "est.cecp.t4b", "rel": "FONTE", "para": "src.06.53", "pagina": 23}
+{"de": "tum.cecp", "rel": "ESTADIA_POR", "para": "est.cecp.t4b"}
+{"de": "tri.pignon-2009-meta-analise", "rel": "FONTE", "para": "src.06.53", "pagina": 31}
+{"de": "reg.cecp.qrt-definitiva-cisplatina", "rel": "FONTE", "para": "src.06.53", "pagina": 34}
+{"de": "reg.cecp.qrt-definitiva-cisplatina", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.cecp.localmente-avancado-irressecavel", "rel": "TRATA_COM", "para": "reg.cecp.qrt-definitiva-cisplatina", "linha": "definitivo", "intencao": "curativa"}
+{"de": "reg.cecp.qrt-definitiva-cisplatina", "rel": "SUSTENTADO_POR", "para": "tri.pignon-2009-meta-analise"}
+{"de": "tri.pignon-2009-meta-analise", "rel": "TESTOU", "para": "reg.cecp.qrt-definitiva-cisplatina"}
+{"de": "tri.lee-2021-avelumabe-qrt", "rel": "FONTE", "para": "src.06.53", "pagina": 24}
+{"de": "tri.machiels-2024-pembro-qrt", "rel": "FONTE", "para": "src.06.53", "pagina": 26}
+{"de": "reg.cecp.io-concomitante-qrt", "rel": "FONTE", "para": "src.06.53", "pagina": 25}
+{"de": "far.avelumabe", "rel": "FONTE", "para": "src.06.53", "pagina": 25}
+{"de": "reg.cecp.io-concomitante-qrt", "rel": "USA_FARMACO", "para": "far.avelumabe"}
+{"de": "reg.cecp.io-concomitante-qrt", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.cecp.io-concomitante-qrt", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.cecp.localmente-avancado-irressecavel", "rel": "TRATA_COM", "para": "reg.cecp.io-concomitante-qrt", "linha": "definitivo", "intencao": "curativa"}
+{"de": "reg.cecp.io-concomitante-qrt", "rel": "SUSTENTADO_POR", "para": "tri.lee-2021-avelumabe-qrt"}
+{"de": "tri.lee-2021-avelumabe-qrt", "rel": "TESTOU", "para": "reg.cecp.io-concomitante-qrt"}
+{"de": "reg.cecp.io-concomitante-qrt", "rel": "SUSTENTADO_POR", "para": "tri.machiels-2024-pembro-qrt"}
+{"de": "tri.machiels-2024-pembro-qrt", "rel": "TESTOU", "para": "reg.cecp.io-concomitante-qrt"}
+{"de": "tri.patil-2023", "rel": "FONTE", "para": "src.06.53", "pagina": 35}
+{"de": "reg.cecp.rt-docetaxel", "rel": "FONTE", "para": "src.06.53", "pagina": 35}
+{"de": "far.docetaxel", "rel": "FONTE", "para": "src.06.53", "pagina": 35}
+{"de": "reg.cecp.rt-docetaxel", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "cen.cecp.localmente-avancado-irressecavel", "rel": "TRATA_COM", "para": "reg.cecp.rt-docetaxel", "linha": "definitivo", "intencao": "curativa", "condicao_biomarcador": "inelegível a cisplatina"}
+{"de": "reg.cecp.rt-docetaxel", "rel": "SUSTENTADO_POR", "para": "tri.patil-2023"}
+{"de": "tri.patil-2023", "rel": "TESTOU", "para": "reg.cecp.rt-docetaxel"}
+{"de": "tri.vermorken-2007-tpf", "rel": "FONTE", "para": "src.06.54", "pagina": 9}
+{"de": "reg.cecp.tpf-inducao", "rel": "FONTE", "para": "src.06.54", "pagina": 9}
+{"de": "reg.cecp.tpf-inducao", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.cecp.tpf-inducao", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "far.fluoruracila", "rel": "FONTE", "para": "src.06.54", "pagina": 9}
+{"de": "reg.cecp.tpf-inducao", "rel": "USA_FARMACO", "para": "far.fluoruracila"}
+{"de": "cen.cecp.localmente-avancado-irressecavel", "rel": "TRATA_COM", "para": "reg.cecp.tpf-inducao", "linha": "indução", "intencao": "curativa", "condicao_biomarcador": "casos selecionados (alto volume, sintomático, alto risco de falha)"}
+{"de": "reg.cecp.tpf-inducao", "rel": "SUSTENTADO_POR", "para": "tri.vermorken-2007-tpf"}
+{"de": "tri.vermorken-2007-tpf", "rel": "TESTOU", "para": "reg.cecp.tpf-inducao"}
+{"de": "cen.cec-laringe.preservacao-laringe", "rel": "FONTE", "para": "src.06.54", "pagina": 12}
+{"de": "tum.cec-laringe", "rel": "TEM_CENARIO", "para": "cen.cec-laringe.preservacao-laringe"}
+{"de": "cen.cec-laringe.t4a-laringectomia", "rel": "FONTE", "para": "src.06.54", "pagina": 12}
+{"de": "tum.cec-laringe", "rel": "TEM_CENARIO", "para": "cen.cec-laringe.t4a-laringectomia"}
+{"de": "tri.wolf-1991-preservacao-laringe", "rel": "FONTE", "para": "src.06.54", "pagina": 8}
+{"de": "tri.forastiere-2003-preservacao-laringe", "rel": "FONTE", "para": "src.06.54", "pagina": 10}
+{"de": "reg.cec-laringe.qrt-cisplatina-preservacao", "rel": "FONTE", "para": "src.06.54", "pagina": 10}
+{"de": "reg.cec-laringe.qrt-cisplatina-preservacao", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.cec-laringe.preservacao-laringe", "rel": "TRATA_COM", "para": "reg.cec-laringe.qrt-cisplatina-preservacao", "linha": "definitivo", "intencao": "curativa"}
+{"de": "reg.cec-laringe.qrt-cisplatina-preservacao", "rel": "SUSTENTADO_POR", "para": "tri.forastiere-2003-preservacao-laringe"}
+{"de": "tri.forastiere-2003-preservacao-laringe", "rel": "TESTOU", "para": "reg.cec-laringe.qrt-cisplatina-preservacao"}
+{"de": "reg.cec-laringe.qt-inducao-rt", "rel": "FONTE", "para": "src.06.54", "pagina": 8}
+{"de": "reg.cec-laringe.qt-inducao-rt", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.cec-laringe.qt-inducao-rt", "rel": "USA_FARMACO", "para": "far.fluoruracila"}
+{"de": "reg.cec-laringe.qt-inducao-rt", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "cen.cec-laringe.preservacao-laringe", "rel": "TRATA_COM", "para": "reg.cec-laringe.qt-inducao-rt", "linha": "indução", "intencao": "curativa", "condicao_biomarcador": "tumor bulky, sintomático ou alto risco de falha (board)"}
+{"de": "reg.cec-laringe.qt-inducao-rt", "rel": "SUSTENTADO_POR", "para": "tri.wolf-1991-preservacao-laringe"}
+{"de": "tri.wolf-1991-preservacao-laringe", "rel": "TESTOU", "para": "reg.cec-laringe.qt-inducao-rt"}
+{"de": "reg.cec-laringe.qt-inducao-rt", "rel": "SUSTENTADO_POR", "para": "tri.vermorken-2007-tpf"}
+{"de": "tri.vermorken-2007-tpf", "rel": "TESTOU", "para": "reg.cec-laringe.qt-inducao-rt"}
+{"de": "reg.cec-laringe.laringectomia-total", "rel": "FONTE", "para": "src.06.54", "pagina": 12}
+{"de": "reg.cec-laringe.laringectomia-total", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.cec-laringe.t4a-laringectomia", "rel": "TRATA_COM", "para": "reg.cec-laringe.laringectomia-total", "linha": "cirurgia", "intencao": "curativa"}
+{"de": "cen.cecp.localmente-avancado-irressecavel", "rel": "EXIGE_BIOMARCADOR", "para": "bio.p16", "para_que": "estadiamento/prognóstico da orofaringe"}
+{"de": "est.cec-orofaringe.ajcc8-p16-positivo", "rel": "FONTE", "para": "src.06.54", "pagina": 22}
+{"de": "tum.cec-orofaringe", "rel": "ESTADIA_POR", "para": "est.cec-orofaringe.ajcc8-p16-positivo"}
+{"de": "est.cec-orofaringe.ajcc8-p16-negativo", "rel": "FONTE", "para": "src.06.54", "pagina": 22}
+{"de": "tum.cec-orofaringe", "rel": "ESTADIA_POR", "para": "est.cec-orofaringe.ajcc8-p16-negativo"}
+{"de": "dx.cec-orofaringe.hpv-vs-negativo", "rel": "FONTE", "para": "src.06.54", "pagina": 21}
+{"de": "tum.cec-orofaringe", "rel": "DIAGNOSTICA_POR", "para": "dx.cec-orofaringe.hpv-vs-negativo"}
+{"de": "cen.cec-orofaringe.hpv-relacionado-definitivo", "rel": "FONTE", "para": "src.06.54", "pagina": 27}
+{"de": "tum.cec-orofaringe", "rel": "TEM_CENARIO", "para": "cen.cec-orofaringe.hpv-relacionado-definitivo"}
+{"de": "cen.cec-orofaringe.hpv-relacionado-definitivo", "rel": "EXIGE_BIOMARCADOR", "para": "bio.p16", "para_que": "obrigatório - estadiamento AJCC 8"}
+{"de": "cen.cec-orofaringe.hpv-relacionado-definitivo", "rel": "EXIGE_BIOMARCADOR", "para": "bio.hpv-ish", "para_que": "discordância p16/HPV (10%)"}
+{"de": "tri.mc1675", "rel": "FONTE", "para": "src.06.54", "pagina": 24}
+{"de": "reg.cec-orofaringe.qrt-cisplatina", "rel": "FONTE", "para": "src.06.54", "pagina": 27}
+{"de": "reg.cec-orofaringe.qrt-cisplatina", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.cec-orofaringe.hpv-relacionado-definitivo", "rel": "TRATA_COM", "para": "reg.cec-orofaringe.qrt-cisplatina", "linha": "definitivo/adjuvante", "intencao": "curativa"}
+{"de": "reg.cec-orofaringe.desintensificacao", "rel": "FONTE", "para": "src.06.54", "pagina": 24}
+{"de": "reg.cec-orofaringe.desintensificacao", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "cen.cec-orofaringe.hpv-relacionado-definitivo", "rel": "TRATA_COM", "para": "reg.cec-orofaringe.desintensificacao", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.cec-orofaringe.desintensificacao", "rel": "SUSTENTADO_POR", "para": "tri.mc1675"}
+{"de": "tri.mc1675", "rel": "TESTOU", "para": "reg.cec-orofaringe.desintensificacao"}
+{"de": "dx.cec-orofaringe.vacina-hpv", "rel": "FONTE", "para": "src.06.54", "pagina": 31}
+{"de": "tum.cec-orofaringe", "rel": "DIAGNOSTICA_POR", "para": "dx.cec-orofaringe.vacina-hpv"}
+{"de": "cen.cecp.recorrente-metastatico-1a-linha", "rel": "FONTE", "para": "src.06.54", "pagina": 48}
+{"de": "tum.cecp", "rel": "TEM_CENARIO", "para": "cen.cecp.recorrente-metastatico-1a-linha"}
+{"de": "tum.cec-cavidade-oral", "rel": "TEM_CENARIO", "para": "cen.cecp.recorrente-metastatico-1a-linha"}
+{"de": "tum.cec-orofaringe", "rel": "TEM_CENARIO", "para": "cen.cecp.recorrente-metastatico-1a-linha"}
+{"de": "tum.cec-laringe", "rel": "TEM_CENARIO", "para": "cen.cecp.recorrente-metastatico-1a-linha"}
+{"de": "cen.cecp.recorrente-metastatico-2a-linha", "rel": "FONTE", "para": "src.06.54", "pagina": 43}
+{"de": "tum.cecp", "rel": "TEM_CENARIO", "para": "cen.cecp.recorrente-metastatico-2a-linha"}
+{"de": "cen.cecp.recorrente-metastatico-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pd-l1-cps", "para_que": "escolha pembro monodroga vs pembro+QT vs cetuximabe+QT"}
+{"de": "cen.cecp.recorrente-metastatico-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.tmb", "para_que": "TMB>=10 pembro (ASCO)"}
+{"de": "tri.extreme", "rel": "FONTE", "para": "src.06.54", "pagina": 35}
+{"de": "reg.cecp.extreme", "rel": "FONTE", "para": "src.06.54", "pagina": 35}
+{"de": "reg.cecp.extreme", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "far.carboplatina", "rel": "FONTE", "para": "src.06.54", "pagina": 35}
+{"de": "reg.cecp.extreme", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cecp.extreme", "rel": "USA_FARMACO", "para": "far.fluoruracila"}
+{"de": "far.cetuximabe", "rel": "FONTE", "para": "src.06.54", "pagina": 35}
+{"de": "reg.cecp.extreme", "rel": "USA_FARMACO", "para": "far.cetuximabe"}
+{"de": "cen.cecp.recorrente-metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.cecp.extreme", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "CPS <1 (alternativa)"}
+{"de": "reg.cecp.extreme", "rel": "SUSTENTADO_POR", "para": "tri.extreme"}
+{"de": "tri.extreme", "rel": "TESTOU", "para": "reg.cecp.extreme"}
+{"de": "reg.cecp.tpex", "rel": "FONTE", "para": "src.06.54", "pagina": 43}
+{"de": "reg.cecp.tpex", "rel": "USA_FARMACO", "para": "far.cetuximabe"}
+{"de": "reg.cecp.tpex", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.cecp.tpex", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "cen.cecp.recorrente-metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.cecp.tpex", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "CPS 0 ou desconhecido"}
+{"de": "tri.burtness-2019-pembro-rm", "rel": "FONTE", "para": "src.06.54", "pagina": 38}
+{"de": "reg.cecp.pembrolizumabe-monodroga", "rel": "FONTE", "para": "src.06.54", "pagina": 40}
+{"de": "reg.cecp.pembrolizumabe-monodroga", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.cecp.recorrente-metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.cecp.pembrolizumabe-monodroga", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "CPS >=20 (ou >=1) sem necessidade de TRO"}
+{"de": "reg.cecp.pembrolizumabe-monodroga", "rel": "SUSTENTADO_POR", "para": "tri.burtness-2019-pembro-rm"}
+{"de": "tri.burtness-2019-pembro-rm", "rel": "TESTOU", "para": "reg.cecp.pembrolizumabe-monodroga"}
+{"de": "reg.cecp.pembrolizumabe-platina-5fu", "rel": "FONTE", "para": "src.06.54", "pagina": 40}
+{"de": "reg.cecp.pembrolizumabe-platina-5fu", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.cecp.pembrolizumabe-platina-5fu", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.cecp.pembrolizumabe-platina-5fu", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cecp.pembrolizumabe-platina-5fu", "rel": "USA_FARMACO", "para": "far.fluoruracila"}
+{"de": "cen.cecp.recorrente-metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.cecp.pembrolizumabe-platina-5fu", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "CPS >=1, necessidade de TRO; opção em CPS <1"}
+{"de": "reg.cecp.pembrolizumabe-platina-5fu", "rel": "SUSTENTADO_POR", "para": "tri.burtness-2019-pembro-rm"}
+{"de": "tri.burtness-2019-pembro-rm", "rel": "TESTOU", "para": "reg.cecp.pembrolizumabe-platina-5fu"}
+{"de": "tri.ferris-2016-nivolumabe", "rel": "FONTE", "para": "src.06.54", "pagina": 37}
+{"de": "reg.cecp.nivolumabe-2l", "rel": "FONTE", "para": "src.06.54", "pagina": 37}
+{"de": "reg.cecp.nivolumabe-2l", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "reg.cecp.nivolumabe-2l", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.cecp.recorrente-metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.cecp.nivolumabe-2l", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "PD <6 meses de QT com platina"}
+{"de": "reg.cecp.nivolumabe-2l", "rel": "SUSTENTADO_POR", "para": "tri.ferris-2016-nivolumabe"}
+{"de": "tri.ferris-2016-nivolumabe", "rel": "TESTOU", "para": "reg.cecp.nivolumabe-2l"}
+{"de": "tri.origami-4", "rel": "FONTE", "para": "src.06.54", "pagina": 44}
+{"de": "reg.cecp.amivantamabe-sc", "rel": "FONTE", "para": "src.06.54", "pagina": 44}
+{"de": "far.amivantamabe", "rel": "FONTE", "para": "src.06.54", "pagina": 44}
+{"de": "reg.cecp.amivantamabe-sc", "rel": "USA_FARMACO", "para": "far.amivantamabe"}
+{"de": "cen.cecp.recorrente-metastatico-2a-linha", "rel": "TRATA_COM", "para": "reg.cecp.amivantamabe-sc", "linha": "2a linha+", "intencao": "paliativa"}
+{"de": "reg.cecp.amivantamabe-sc", "rel": "SUSTENTADO_POR", "para": "tri.origami-4"}
+{"de": "tri.origami-4", "rel": "TESTOU", "para": "reg.cecp.amivantamabe-sc"}
+{"de": "dx.nasofaringe.workflow", "rel": "FONTE", "para": "src.06.55", "pagina": 15}
+{"de": "tum.nasofaringe", "rel": "DIAGNOSTICA_POR", "para": "dx.nasofaringe.workflow"}
+{"de": "dx.nasofaringe.rastreamento-ebv", "rel": "FONTE", "para": "src.06.55", "pagina": 12}
+{"de": "tum.nasofaringe", "rel": "DIAGNOSTICA_POR", "para": "dx.nasofaringe.rastreamento-ebv"}
+{"de": "bio.ebv-dna", "rel": "FONTE", "para": "src.06.55", "pagina": 13}
+{"de": "est.nasofaringe.ajcc8", "rel": "FONTE", "para": "src.06.55", "pagina": 16}
+{"de": "tum.nasofaringe", "rel": "ESTADIA_POR", "para": "est.nasofaringe.ajcc8"}
+{"de": "cen.nasofaringe.inicial", "rel": "FONTE", "para": "src.06.55", "pagina": 21}
+{"de": "tum.nasofaringe", "rel": "TEM_CENARIO", "para": "cen.nasofaringe.inicial"}
+{"de": "cen.nasofaringe.localmente-avancado", "rel": "FONTE", "para": "src.06.55", "pagina": 28}
+{"de": "tum.nasofaringe", "rel": "TEM_CENARIO", "para": "cen.nasofaringe.localmente-avancado"}
+{"de": "cen.nasofaringe.recorrente-metastatico", "rel": "FONTE", "para": "src.06.55", "pagina": 32}
+{"de": "tum.nasofaringe", "rel": "TEM_CENARIO", "para": "cen.nasofaringe.recorrente-metastatico"}
+{"de": "cen.nasofaringe.inicial", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ebv-dna", "para_que": "estratificação de risco EC II (>=4000 cópias/mL)"}
+{"de": "cen.nasofaringe.localmente-avancado", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ebv-dna", "para_que": "critério de alto risco adjuvante (>20.000 cópias/mL)"}
+{"de": "tri.al-sarraf-1998", "rel": "FONTE", "para": "src.06.55", "pagina": 18}
+{"de": "tri.chen-2012-imrt", "rel": "FONTE", "para": "src.06.55", "pagina": 19}
+{"de": "reg.nasofaringe.imrt", "rel": "FONTE", "para": "src.06.55", "pagina": 20}
+{"de": "cen.nasofaringe.inicial", "rel": "TRATA_COM", "para": "reg.nasofaringe.imrt", "linha": "definitivo", "intencao": "curativa", "condicao_biomarcador": "EC I (T1N0) e EC II/T3N0 baixo risco"}
+{"de": "reg.nasofaringe.imrt-cisplatina-semanal", "rel": "FONTE", "para": "src.06.55", "pagina": 19}
+{"de": "reg.nasofaringe.imrt-cisplatina-semanal", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.nasofaringe.inicial", "rel": "TRATA_COM", "para": "reg.nasofaringe.imrt-cisplatina-semanal", "linha": "definitivo", "intencao": "curativa", "condicao_biomarcador": "EC II alto risco, T3N0, EC III-IVA"}
+{"de": "cen.nasofaringe.localmente-avancado", "rel": "TRATA_COM", "para": "reg.nasofaringe.imrt-cisplatina-semanal", "linha": "definitivo", "intencao": "curativa", "condicao_biomarcador": "EC II alto risco, T3N0, EC III-IVA"}
+{"de": "reg.nasofaringe.imrt-cisplatina-semanal", "rel": "SUSTENTADO_POR", "para": "tri.al-sarraf-1998"}
+{"de": "tri.al-sarraf-1998", "rel": "TESTOU", "para": "reg.nasofaringe.imrt-cisplatina-semanal"}
+{"de": "reg.nasofaringe.imrt-cisplatina-semanal", "rel": "SUSTENTADO_POR", "para": "tri.chen-2012-imrt"}
+{"de": "tri.chen-2012-imrt", "rel": "TESTOU", "para": "reg.nasofaringe.imrt-cisplatina-semanal"}
+{"de": "tri.zhang-2019-gp-inducao", "rel": "FONTE", "para": "src.06.55", "pagina": 24}
+{"de": "tri.yang-2019-pf-inducao", "rel": "FONTE", "para": "src.06.55", "pagina": 24}
+{"de": "tri.petit-2023-meta-analise", "rel": "FONTE", "para": "src.06.55", "pagina": 26}
+{"de": "tri.guo-2025-tpf-vs-adjuvante", "rel": "FONTE", "para": "src.06.55", "pagina": 29}
+{"de": "reg.nasofaringe.gp-inducao-qrt", "rel": "FONTE", "para": "src.06.55", "pagina": 28}
+{"de": "reg.nasofaringe.gp-inducao-qrt", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "far.gencitabina", "rel": "FONTE", "para": "src.06.55", "pagina": 28}
+{"de": "reg.nasofaringe.gp-inducao-qrt", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "cen.nasofaringe.localmente-avancado", "rel": "TRATA_COM", "para": "reg.nasofaringe.gp-inducao-qrt", "linha": "indução", "intencao": "curativa", "condicao_biomarcador": "N+ (especialmente N2-N3)"}
+{"de": "reg.nasofaringe.gp-inducao-qrt", "rel": "SUSTENTADO_POR", "para": "tri.zhang-2019-gp-inducao"}
+{"de": "tri.zhang-2019-gp-inducao", "rel": "TESTOU", "para": "reg.nasofaringe.gp-inducao-qrt"}
+{"de": "reg.nasofaringe.gp-inducao-qrt", "rel": "SUSTENTADO_POR", "para": "tri.yang-2019-pf-inducao"}
+{"de": "tri.yang-2019-pf-inducao", "rel": "TESTOU", "para": "reg.nasofaringe.gp-inducao-qrt"}
+{"de": "reg.nasofaringe.gp-inducao-qrt", "rel": "SUSTENTADO_POR", "para": "tri.petit-2023-meta-analise"}
+{"de": "tri.petit-2023-meta-analise", "rel": "TESTOU", "para": "reg.nasofaringe.gp-inducao-qrt"}
+{"de": "reg.nasofaringe.gp-inducao-qrt", "rel": "SUSTENTADO_POR", "para": "tri.guo-2025-tpf-vs-adjuvante"}
+{"de": "tri.guo-2025-tpf-vs-adjuvante", "rel": "TESTOU", "para": "reg.nasofaringe.gp-inducao-qrt"}
+{"de": "tri.miao-2022-capecitabina", "rel": "FONTE", "para": "src.06.55", "pagina": 25}
+{"de": "reg.nasofaringe.capecitabina-adjuvante", "rel": "FONTE", "para": "src.06.55", "pagina": 25}
+{"de": "far.capecitabina", "rel": "FONTE", "para": "src.06.55", "pagina": 25}
+{"de": "reg.nasofaringe.capecitabina-adjuvante", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "cen.nasofaringe.localmente-avancado", "rel": "TRATA_COM", "para": "reg.nasofaringe.capecitabina-adjuvante", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "alto risco"}
+{"de": "reg.nasofaringe.capecitabina-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.miao-2022-capecitabina"}
+{"de": "tri.miao-2022-capecitabina", "rel": "TESTOU", "para": "reg.nasofaringe.capecitabina-adjuvante"}
+{"de": "tri.liu-2024-toripalimabe-sanduiche", "rel": "FONTE", "para": "src.06.55", "pagina": 30}
+{"de": "tri.continuum", "rel": "FONTE", "para": "src.06.55", "pagina": 30}
+{"de": "tri.diamond", "rel": "FONTE", "para": "src.06.55", "pagina": 31}
+{"de": "reg.nasofaringe.io-precoce", "rel": "FONTE", "para": "src.06.55", "pagina": 30}
+{"de": "far.toripalimabe", "rel": "FONTE", "para": "src.06.55", "pagina": 30}
+{"de": "reg.nasofaringe.io-precoce", "rel": "USA_FARMACO", "para": "far.toripalimabe"}
+{"de": "far.sintilimabe", "rel": "FONTE", "para": "src.06.55", "pagina": 30}
+{"de": "reg.nasofaringe.io-precoce", "rel": "USA_FARMACO", "para": "far.sintilimabe"}
+{"de": "reg.nasofaringe.io-precoce", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.nasofaringe.io-precoce", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "cen.nasofaringe.localmente-avancado", "rel": "TRATA_COM", "para": "reg.nasofaringe.io-precoce", "linha": "perioperatório/definitivo", "intencao": "curativa", "condicao_biomarcador": "alto risco"}
+{"de": "reg.nasofaringe.io-precoce", "rel": "SUSTENTADO_POR", "para": "tri.liu-2024-toripalimabe-sanduiche"}
+{"de": "tri.liu-2024-toripalimabe-sanduiche", "rel": "TESTOU", "para": "reg.nasofaringe.io-precoce"}
+{"de": "reg.nasofaringe.io-precoce", "rel": "SUSTENTADO_POR", "para": "tri.continuum"}
+{"de": "tri.continuum", "rel": "TESTOU", "para": "reg.nasofaringe.io-precoce"}
+{"de": "reg.nasofaringe.io-precoce", "rel": "SUSTENTADO_POR", "para": "tri.diamond"}
+{"de": "tri.diamond", "rel": "TESTOU", "para": "reg.nasofaringe.io-precoce"}
+{"de": "tri.jupiter-02", "rel": "FONTE", "para": "src.06.55", "pagina": 32}
+{"de": "tri.captain-1st", "rel": "FONTE", "para": "src.06.55", "pagina": 32}
+{"de": "tri.rationale-309", "rel": "FONTE", "para": "src.06.55", "pagina": 32}
+{"de": "reg.nasofaringe.anti-pd1-cisplatina-gencitabina", "rel": "FONTE", "para": "src.06.55", "pagina": 32}
+{"de": "reg.nasofaringe.anti-pd1-cisplatina-gencitabina", "rel": "USA_FARMACO", "para": "far.toripalimabe"}
+{"de": "far.camrelizumabe", "rel": "FONTE", "para": "src.06.55", "pagina": 32}
+{"de": "reg.nasofaringe.anti-pd1-cisplatina-gencitabina", "rel": "USA_FARMACO", "para": "far.camrelizumabe"}
+{"de": "far.tislelizumabe", "rel": "FONTE", "para": "src.06.55", "pagina": 32}
+{"de": "reg.nasofaringe.anti-pd1-cisplatina-gencitabina", "rel": "USA_FARMACO", "para": "far.tislelizumabe"}
+{"de": "reg.nasofaringe.anti-pd1-cisplatina-gencitabina", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.nasofaringe.anti-pd1-cisplatina-gencitabina", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "cen.nasofaringe.recorrente-metastatico", "rel": "TRATA_COM", "para": "reg.nasofaringe.anti-pd1-cisplatina-gencitabina", "linha": "1a linha", "intencao": "paliativa"}
+{"de": "reg.nasofaringe.anti-pd1-cisplatina-gencitabina", "rel": "SUSTENTADO_POR", "para": "tri.jupiter-02"}
+{"de": "tri.jupiter-02", "rel": "TESTOU", "para": "reg.nasofaringe.anti-pd1-cisplatina-gencitabina"}
+{"de": "reg.nasofaringe.anti-pd1-cisplatina-gencitabina", "rel": "SUSTENTADO_POR", "para": "tri.captain-1st"}
+{"de": "tri.captain-1st", "rel": "TESTOU", "para": "reg.nasofaringe.anti-pd1-cisplatina-gencitabina"}
+{"de": "reg.nasofaringe.anti-pd1-cisplatina-gencitabina", "rel": "SUSTENTADO_POR", "para": "tri.rationale-309"}
+{"de": "tri.rationale-309", "rel": "TESTOU", "para": "reg.nasofaringe.anti-pd1-cisplatina-gencitabina"}
+{"de": "tri.iza-bren-npc", "rel": "FONTE", "para": "src.06.55", "pagina": 34}
+{"de": "reg.nasofaringe.iza-bren", "rel": "FONTE", "para": "src.06.55", "pagina": 34}
+{"de": "far.izalontamabe-brengitecana", "rel": "FONTE", "para": "src.06.55", "pagina": 34}
+{"de": "reg.nasofaringe.iza-bren", "rel": "USA_FARMACO", "para": "far.izalontamabe-brengitecana"}
+{"de": "cen.nasofaringe.recorrente-metastatico", "rel": "TRATA_COM", "para": "reg.nasofaringe.iza-bren", "linha": "3a linha+", "intencao": "paliativa"}
+{"de": "reg.nasofaringe.iza-bren", "rel": "SUSTENTADO_POR", "para": "tri.iza-bren-npc"}
+{"de": "tri.iza-bren-npc", "rel": "TESTOU", "para": "reg.nasofaringe.iza-bren"}
+{"de": "reg.nasofaringe.rt-locorregional-metastatico", "rel": "FONTE", "para": "src.06.55", "pagina": 33}
+{"de": "cen.nasofaringe.recorrente-metastatico", "rel": "TRATA_COM", "para": "reg.nasofaringe.rt-locorregional-metastatico", "linha": "consolidação", "intencao": "paliativa"}
+{"de": "dx.glandula-salivar.workflow", "rel": "FONTE", "para": "src.06.56", "pagina": 13}
+{"de": "tum.glandula-salivar", "rel": "DIAGNOSTICA_POR", "para": "dx.glandula-salivar.workflow"}
+{"de": "dx.glandula-salivar.paaf-milao", "rel": "FONTE", "para": "src.06.56", "pagina": 14}
+{"de": "tum.glandula-salivar", "rel": "DIAGNOSTICA_POR", "para": "dx.glandula-salivar.paaf-milao"}
+{"de": "dx.glandula-salivar.perfil-genomico", "rel": "FONTE", "para": "src.06.56", "pagina": 23}
+{"de": "tum.glandula-salivar", "rel": "DIAGNOSTICA_POR", "para": "dx.glandula-salivar.perfil-genomico"}
+{"de": "bio.her2", "rel": "FONTE", "para": "src.06.56", "pagina": 24}
+{"de": "bio.receptor-androgeno", "rel": "FONTE", "para": "src.06.56", "pagina": 24}
+{"de": "bio.ntrk", "rel": "FONTE", "para": "src.06.56", "pagina": 26}
+{"de": "cen.glandula-salivar.localizado", "rel": "FONTE", "para": "src.06.56", "pagina": 16}
+{"de": "tum.glandula-salivar", "rel": "TEM_CENARIO", "para": "cen.glandula-salivar.localizado"}
+{"de": "cen.glandula-salivar.recorrente-metastatico", "rel": "FONTE", "para": "src.06.56", "pagina": 20}
+{"de": "tum.glandula-salivar", "rel": "TEM_CENARIO", "para": "cen.glandula-salivar.recorrente-metastatico"}
+{"de": "cen.glandula-salivar.recorrente-metastatico", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "anti-HER2 no ducto salivar"}
+{"de": "cen.glandula-salivar.recorrente-metastatico", "rel": "EXIGE_BIOMARCADOR", "para": "bio.receptor-androgeno", "para_que": "bloqueio androgênico"}
+{"de": "cen.glandula-salivar.recorrente-metastatico", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ntrk", "para_que": "larotrectinibe/entrectinibe no secretório"}
+{"de": "tri.amini-2016", "rel": "FONTE", "para": "src.06.56", "pagina": 17}
+{"de": "reg.glandula-salivar.cirurgia-rt-adjuvante", "rel": "FONTE", "para": "src.06.56", "pagina": 16}
+{"de": "cen.glandula-salivar.localizado", "rel": "TRATA_COM", "para": "reg.glandula-salivar.cirurgia-rt-adjuvante", "linha": "cirurgia/adjuvante", "intencao": "curativa"}
+{"de": "reg.glandula-salivar.cirurgia-rt-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.amini-2016"}
+{"de": "tri.amini-2016", "rel": "TESTOU", "para": "reg.glandula-salivar.cirurgia-rt-adjuvante"}
+{"de": "reg.glandula-salivar.qt-paliativa", "rel": "FONTE", "para": "src.06.56", "pagina": 21}
+{"de": "reg.glandula-salivar.qt-paliativa", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.glandula-salivar.qt-paliativa", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "far.paclitaxel", "rel": "FONTE", "para": "src.06.56", "pagina": 21}
+{"de": "reg.glandula-salivar.qt-paliativa", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.glandula-salivar.qt-paliativa", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "far.vinorelbina", "rel": "FONTE", "para": "src.06.56", "pagina": 21}
+{"de": "reg.glandula-salivar.qt-paliativa", "rel": "USA_FARMACO", "para": "far.vinorelbina"}
+{"de": "far.ciclofosfamida", "rel": "FONTE", "para": "src.06.56", "pagina": 21}
+{"de": "reg.glandula-salivar.qt-paliativa", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "far.doxorrubicina", "rel": "FONTE", "para": "src.06.56", "pagina": 21}
+{"de": "reg.glandula-salivar.qt-paliativa", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "cen.glandula-salivar.recorrente-metastatico", "rel": "TRATA_COM", "para": "reg.glandula-salivar.qt-paliativa", "linha": "1a linha", "intencao": "paliativa"}
+{"de": "tri.kang-2021-axitinibe", "rel": "FONTE", "para": "src.06.56", "pagina": 22}
+{"de": "reg.glandula-salivar.axitinibe", "rel": "FONTE", "para": "src.06.56", "pagina": 22}
+{"de": "far.axitinibe", "rel": "FONTE", "para": "src.06.56", "pagina": 22}
+{"de": "reg.glandula-salivar.axitinibe", "rel": "USA_FARMACO", "para": "far.axitinibe"}
+{"de": "reg.glandula-salivar.axitinibe", "rel": "USA_FARMACO", "para": "far.avelumabe"}
+{"de": "cen.glandula-salivar.recorrente-metastatico", "rel": "TRATA_COM", "para": "reg.glandula-salivar.axitinibe", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "adenoide cístico sintomático/em progressão"}
+{"de": "reg.glandula-salivar.axitinibe", "rel": "SUSTENTADO_POR", "para": "tri.kang-2021-axitinibe"}
+{"de": "tri.kang-2021-axitinibe", "rel": "TESTOU", "para": "reg.glandula-salivar.axitinibe"}
+{"de": "reg.glandula-salivar.trastuzumabe-pertuzumabe", "rel": "FONTE", "para": "src.06.56", "pagina": 24}
+{"de": "far.trastuzumabe", "rel": "FONTE", "para": "src.06.56", "pagina": 24}
+{"de": "reg.glandula-salivar.trastuzumabe-pertuzumabe", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "far.pertuzumabe", "rel": "FONTE", "para": "src.06.56", "pagina": 24}
+{"de": "reg.glandula-salivar.trastuzumabe-pertuzumabe", "rel": "USA_FARMACO", "para": "far.pertuzumabe"}
+{"de": "cen.glandula-salivar.recorrente-metastatico", "rel": "TRATA_COM", "para": "reg.glandula-salivar.trastuzumabe-pertuzumabe", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "HER2+ (ducto salivar)"}
+{"de": "tri.destiny-pantumor02-hn", "rel": "FONTE", "para": "src.06.56", "pagina": 25}
+{"de": "reg.glandula-salivar.t-dxd", "rel": "FONTE", "para": "src.06.56", "pagina": 25}
+{"de": "far.trastuzumabe-deruxtecana", "rel": "FONTE", "para": "src.06.56", "pagina": 25}
+{"de": "reg.glandula-salivar.t-dxd", "rel": "USA_FARMACO", "para": "far.trastuzumabe-deruxtecana"}
+{"de": "reg.glandula-salivar.t-dxd", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "reg.glandula-salivar.t-dxd", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "cen.glandula-salivar.recorrente-metastatico", "rel": "TRATA_COM", "para": "reg.glandula-salivar.t-dxd", "linha": "linha posterior", "intencao": "paliativa", "condicao_biomarcador": "HER2+"}
+{"de": "reg.glandula-salivar.t-dxd", "rel": "SUSTENTADO_POR", "para": "tri.destiny-pantumor02-hn"}
+{"de": "tri.destiny-pantumor02-hn", "rel": "TESTOU", "para": "reg.glandula-salivar.t-dxd"}
+{"de": "reg.glandula-salivar.bicalutamida-leuprorrelina", "rel": "FONTE", "para": "src.06.56", "pagina": 24}
+{"de": "far.bicalutamida", "rel": "FONTE", "para": "src.06.56", "pagina": 24}
+{"de": "reg.glandula-salivar.bicalutamida-leuprorrelina", "rel": "USA_FARMACO", "para": "far.bicalutamida"}
+{"de": "far.leuprorrelina", "rel": "FONTE", "para": "src.06.56", "pagina": 24}
+{"de": "reg.glandula-salivar.bicalutamida-leuprorrelina", "rel": "USA_FARMACO", "para": "far.leuprorrelina"}
+{"de": "cen.glandula-salivar.recorrente-metastatico", "rel": "TRATA_COM", "para": "reg.glandula-salivar.bicalutamida-leuprorrelina", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "RA+ (ducto salivar)"}
+{"de": "tri.drilon-2018-larotrectinibe", "rel": "FONTE", "para": "src.06.56", "pagina": 26}
+{"de": "reg.glandula-salivar.larotrectinibe", "rel": "FONTE", "para": "src.06.56", "pagina": 26}
+{"de": "far.larotrectinibe", "rel": "FONTE", "para": "src.06.56", "pagina": 26}
+{"de": "reg.glandula-salivar.larotrectinibe", "rel": "USA_FARMACO", "para": "far.larotrectinibe"}
+{"de": "far.entrectinibe", "rel": "FONTE", "para": "src.06.56", "pagina": 26}
+{"de": "reg.glandula-salivar.larotrectinibe", "rel": "USA_FARMACO", "para": "far.entrectinibe"}
+{"de": "far.repotrectinibe", "rel": "FONTE", "para": "src.06.56", "pagina": 26}
+{"de": "reg.glandula-salivar.larotrectinibe", "rel": "USA_FARMACO", "para": "far.repotrectinibe"}
+{"de": "cen.glandula-salivar.recorrente-metastatico", "rel": "TRATA_COM", "para": "reg.glandula-salivar.larotrectinibe", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "NTRK fusão (secretório)"}
+{"de": "reg.glandula-salivar.larotrectinibe", "rel": "SUSTENTADO_POR", "para": "tri.drilon-2018-larotrectinibe"}
+{"de": "tri.drilon-2018-larotrectinibe", "rel": "TESTOU", "para": "reg.glandula-salivar.larotrectinibe"}
+{"de": "dx.tireoide.estadiamento-exames", "rel": "FONTE", "para": "src.06.57", "pagina": 11}
+{"de": "tum.tireoide", "rel": "DIAGNOSTICA_POR", "para": "dx.tireoide.estadiamento-exames"}
+{"de": "est.tireoide.ata-risco-recorrencia", "rel": "FONTE", "para": "src.06.57", "pagina": 13}
+{"de": "tum.tireoide", "rel": "ESTADIA_POR", "para": "est.tireoide.ata-risco-recorrencia"}
+{"de": "est.tireoide.anaplasico-ajcc", "rel": "FONTE", "para": "src.06.57", "pagina": 42}
+{"de": "tum.tireoide", "rel": "ESTADIA_POR", "para": "est.tireoide.anaplasico-ajcc"}
+{"de": "bio.braf-v600e", "rel": "FONTE", "para": "src.06.57", "pagina": 42}
+{"de": "bio.ret-mutacao", "rel": "FONTE", "para": "src.06.57", "pagina": 40}
+{"de": "bio.ret", "rel": "FONTE", "para": "src.06.57", "pagina": 45}
+{"de": "cen.tireoide.diferenciado-inicial", "rel": "FONTE", "para": "src.06.57", "pagina": 46}
+{"de": "tum.tireoide", "rel": "TEM_CENARIO", "para": "cen.tireoide.diferenciado-inicial"}
+{"de": "cen.tireoide.iodorrefratario", "rel": "FONTE", "para": "src.06.57", "pagina": 24}
+{"de": "tum.tireoide", "rel": "TEM_CENARIO", "para": "cen.tireoide.iodorrefratario"}
+{"de": "cen.tireoide.medular-avancado", "rel": "FONTE", "para": "src.06.57", "pagina": 40}
+{"de": "tum.tireoide", "rel": "TEM_CENARIO", "para": "cen.tireoide.medular-avancado"}
+{"de": "cen.tireoide.anaplasico", "rel": "FONTE", "para": "src.06.57", "pagina": 43}
+{"de": "tum.tireoide", "rel": "TEM_CENARIO", "para": "cen.tireoide.anaplasico"}
+{"de": "cen.tireoide.iodorrefratario", "rel": "EXIGE_BIOMARCADOR", "para": "bio.braf-v600e", "para_que": "dabrafenibe + trametinibe 2ª linha"}
+{"de": "cen.tireoide.iodorrefratario", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ntrk", "para_que": "inibidor de TRK"}
+{"de": "cen.tireoide.iodorrefratario", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ret", "para_que": "inibidor RET"}
+{"de": "cen.tireoide.medular-avancado", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ret-mutacao", "para_que": "selpercatinibe/pralsetinibe; germinativo"}
+{"de": "cen.tireoide.anaplasico", "rel": "EXIGE_BIOMARCADOR", "para": "bio.braf-v600e", "para_que": "BRAF/MEK"}
+{"de": "reg.tireoide.cirurgia", "rel": "FONTE", "para": "src.06.57", "pagina": 46}
+{"de": "cen.tireoide.diferenciado-inicial", "rel": "TRATA_COM", "para": "reg.tireoide.cirurgia", "linha": "cirurgia", "intencao": "curativa"}
+{"de": "reg.tireoide.radioiodoterapia", "rel": "FONTE", "para": "src.06.57", "pagina": 14}
+{"de": "cen.tireoide.diferenciado-inicial", "rel": "TRATA_COM", "para": "reg.tireoide.radioiodoterapia", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "Recomendado: extensão extratireoidiana grosseira, >4 cm, invasão vascular, Tg pós-op >5-10, >5 LN+; não indicado <2 cm intratireoidiano com Tg <1 ng/mL"}
+{"de": "reg.tireoide.supressao-tsh", "rel": "FONTE", "para": "src.06.57", "pagina": 20}
+{"de": "far.levotiroxina", "rel": "FONTE", "para": "src.06.57", "pagina": 20}
+{"de": "reg.tireoide.supressao-tsh", "rel": "USA_FARMACO", "para": "far.levotiroxina"}
+{"de": "cen.tireoide.diferenciado-inicial", "rel": "TRATA_COM", "para": "reg.tireoide.supressao-tsh", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "tri.decision", "rel": "FONTE", "para": "src.06.57", "pagina": 33}
+{"de": "tri.select", "rel": "FONTE", "para": "src.06.57", "pagina": 33}
+{"de": "reg.tireoide.lenvatinibe", "rel": "FONTE", "para": "src.06.57", "pagina": 45}
+{"de": "far.lenvatinibe", "rel": "FONTE", "para": "src.06.57", "pagina": 45}
+{"de": "reg.tireoide.lenvatinibe", "rel": "USA_FARMACO", "para": "far.lenvatinibe"}
+{"de": "cen.tireoide.iodorrefratario", "rel": "TRATA_COM", "para": "reg.tireoide.lenvatinibe", "linha": "1a linha", "intencao": "paliativa"}
+{"de": "reg.tireoide.lenvatinibe", "rel": "SUSTENTADO_POR", "para": "tri.select"}
+{"de": "tri.select", "rel": "TESTOU", "para": "reg.tireoide.lenvatinibe"}
+{"de": "reg.tireoide.sorafenibe", "rel": "FONTE", "para": "src.06.57", "pagina": 33}
+{"de": "far.sorafenibe", "rel": "FONTE", "para": "src.06.57", "pagina": 33}
+{"de": "reg.tireoide.sorafenibe", "rel": "USA_FARMACO", "para": "far.sorafenibe"}
+{"de": "cen.tireoide.iodorrefratario", "rel": "TRATA_COM", "para": "reg.tireoide.sorafenibe", "linha": "1a linha", "intencao": "paliativa"}
+{"de": "reg.tireoide.sorafenibe", "rel": "SUSTENTADO_POR", "para": "tri.decision"}
+{"de": "tri.decision", "rel": "TESTOU", "para": "reg.tireoide.sorafenibe"}
+{"de": "reg.tireoide.dabrafenibe-trametinibe", "rel": "FONTE", "para": "src.06.57", "pagina": 45}
+{"de": "far.dabrafenibe", "rel": "FONTE", "para": "src.06.57", "pagina": 45}
+{"de": "reg.tireoide.dabrafenibe-trametinibe", "rel": "USA_FARMACO", "para": "far.dabrafenibe"}
+{"de": "far.trametinibe", "rel": "FONTE", "para": "src.06.57", "pagina": 45}
+{"de": "reg.tireoide.dabrafenibe-trametinibe", "rel": "USA_FARMACO", "para": "far.trametinibe"}
+{"de": "cen.tireoide.iodorrefratario", "rel": "TRATA_COM", "para": "reg.tireoide.dabrafenibe-trametinibe", "linha": "2a linha (iodorrefratário) / 1a (anaplásico)", "intencao": "paliativa", "condicao_biomarcador": "BRAF V600E"}
+{"de": "cen.tireoide.anaplasico", "rel": "TRATA_COM", "para": "reg.tireoide.dabrafenibe-trametinibe", "linha": "2a linha (iodorrefratário) / 1a (anaplásico)", "intencao": "paliativa", "condicao_biomarcador": "BRAF V600E"}
+{"de": "reg.tireoide.selpercatinibe-pralsetinibe", "rel": "FONTE", "para": "src.06.57", "pagina": 40}
+{"de": "far.selpercatinibe", "rel": "FONTE", "para": "src.06.57", "pagina": 40}
+{"de": "reg.tireoide.selpercatinibe-pralsetinibe", "rel": "USA_FARMACO", "para": "far.selpercatinibe"}
+{"de": "far.pralsetinibe", "rel": "FONTE", "para": "src.06.57", "pagina": 40}
+{"de": "reg.tireoide.selpercatinibe-pralsetinibe", "rel": "USA_FARMACO", "para": "far.pralsetinibe"}
+{"de": "cen.tireoide.medular-avancado", "rel": "TRATA_COM", "para": "reg.tireoide.selpercatinibe-pralsetinibe", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "RET mutado / RET fusão"}
+{"de": "reg.tireoide.anaplasico-cirurgia-qrt", "rel": "FONTE", "para": "src.06.57", "pagina": 43}
+{"de": "cen.tireoide.anaplasico", "rel": "TRATA_COM", "para": "reg.tireoide.anaplasico-cirurgia-qrt", "linha": "cirurgia", "intencao": "curativa", "condicao_biomarcador": "IVA/IVB ressecável não-BRAF"}

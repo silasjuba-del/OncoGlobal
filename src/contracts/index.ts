@@ -5,3 +5,4 @@ export * from "./clinico.js";
 export * from "./operacao.js";
 export * from "./agentes.js";
 export * from "./regras.js";
+export * from "./w10/index.js";

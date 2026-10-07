@@ -1,0 +1,959 @@
+{"de": "tum.prostata", "rel": "FONTE", "para": "src.07.58", "pagina": 6}
+{"de": "cen.prostata.localizado-muito-baixo-baixo-risco", "rel": "FONTE", "para": "src.07.59", "pagina": 7}
+{"de": "tum.prostata", "rel": "TEM_CENARIO", "para": "cen.prostata.localizado-muito-baixo-baixo-risco"}
+{"de": "cen.prostata.localizado-risco-intermediario", "rel": "FONTE", "para": "src.07.59", "pagina": 5}
+{"de": "tum.prostata", "rel": "TEM_CENARIO", "para": "cen.prostata.localizado-risco-intermediario"}
+{"de": "cen.prostata.localizado-alto-muito-alto-risco", "rel": "FONTE", "para": "src.07.59", "pagina": 5}
+{"de": "tum.prostata", "rel": "TEM_CENARIO", "para": "cen.prostata.localizado-alto-muito-alto-risco"}
+{"de": "cen.prostata.adjuvante-pos-prostatectomia", "rel": "FONTE", "para": "src.07.59", "pagina": 18}
+{"de": "tum.prostata", "rel": "TEM_CENARIO", "para": "cen.prostata.adjuvante-pos-prostatectomia"}
+{"de": "cen.prostata.recidiva-bioquimica", "rel": "FONTE", "para": "src.07.60", "pagina": 5}
+{"de": "tum.prostata", "rel": "TEM_CENARIO", "para": "cen.prostata.recidiva-bioquimica"}
+{"de": "cen.prostata.metastatico-sensivel-castracao", "rel": "FONTE", "para": "src.07.60", "pagina": 17}
+{"de": "tum.prostata", "rel": "TEM_CENARIO", "para": "cen.prostata.metastatico-sensivel-castracao"}
+{"de": "cen.prostata.mcrpc-1a-linha", "rel": "FONTE", "para": "src.07.61", "pagina": 4}
+{"de": "tum.prostata", "rel": "TEM_CENARIO", "para": "cen.prostata.mcrpc-1a-linha"}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "FONTE", "para": "src.07.61", "pagina": 7}
+{"de": "tum.prostata", "rel": "TEM_CENARIO", "para": "cen.prostata.mcrpc-2a-linha-posterior"}
+{"de": "dx.prostata.psa", "rel": "FONTE", "para": "src.07.58", "pagina": 15}
+{"de": "tum.prostata", "rel": "DIAGNOSTICA_POR", "para": "dx.prostata.psa"}
+{"de": "dx.prostata.rastreamento", "rel": "FONTE", "para": "src.07.58", "pagina": 17}
+{"de": "tum.prostata", "rel": "DIAGNOSTICA_POR", "para": "dx.prostata.rastreamento"}
+{"de": "dx.prostata.rm-multiparametrica-pirads", "rel": "FONTE", "para": "src.07.58", "pagina": 19}
+{"de": "tum.prostata", "rel": "DIAGNOSTICA_POR", "para": "dx.prostata.rm-multiparametrica-pirads"}
+{"de": "dx.prostata.biopsia", "rel": "FONTE", "para": "src.07.58", "pagina": 18}
+{"de": "tum.prostata", "rel": "DIAGNOSTICA_POR", "para": "dx.prostata.biopsia"}
+{"de": "dx.prostata.pet-psma", "rel": "FONTE", "para": "src.07.58", "pagina": 23}
+{"de": "tum.prostata", "rel": "DIAGNOSTICA_POR", "para": "dx.prostata.pet-psma"}
+{"de": "est.prostata.isup-gleason", "rel": "FONTE", "para": "src.07.58", "pagina": 20}
+{"de": "tum.prostata", "rel": "ESTADIA_POR", "para": "est.prostata.isup-gleason"}
+{"de": "est.prostata.tnm-anatomia", "rel": "FONTE", "para": "src.07.58", "pagina": 5}
+{"de": "tum.prostata", "rel": "ESTADIA_POR", "para": "est.prostata.tnm-anatomia"}
+{"de": "est.prostata.risco-nccn", "rel": "FONTE", "para": "src.07.59", "pagina": 5}
+{"de": "tum.prostata", "rel": "ESTADIA_POR", "para": "est.prostata.risco-nccn"}
+{"de": "est.prostata.volume-risco-mcspc", "rel": "FONTE", "para": "src.07.60", "pagina": 17}
+{"de": "tum.prostata", "rel": "ESTADIA_POR", "para": "est.prostata.volume-risco-mcspc"}
+{"de": "est.prostata.criterio-recidiva-bioquimica", "rel": "FONTE", "para": "src.07.60", "pagina": 5}
+{"de": "tum.prostata", "rel": "ESTADIA_POR", "para": "est.prostata.criterio-recidiva-bioquimica"}
+{"de": "bio.brca2", "rel": "FONTE", "para": "src.07.58", "pagina": 14}
+{"de": "cen.prostata.metastatico-sensivel-castracao", "rel": "EXIGE_BIOMARCADOR", "para": "bio.brca2", "para_que": "elegibilidade a iPARP e aconselhamento genético"}
+{"de": "cen.prostata.mcrpc-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.brca2", "para_que": "elegibilidade a iPARP e aconselhamento genético"}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "EXIGE_BIOMARCADOR", "para": "bio.brca2", "para_que": "elegibilidade a iPARP e aconselhamento genético"}
+{"de": "bio.hrr", "rel": "FONTE", "para": "src.07.61", "pagina": 12}
+{"de": "cen.prostata.mcrpc-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.hrr", "para_que": "indicar iPARP e iPARP + ARPI"}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "EXIGE_BIOMARCADOR", "para": "bio.hrr", "para_que": "indicar iPARP e iPARP + ARPI"}
+{"de": "bio.msi-dmmr", "rel": "FONTE", "para": "src.07.61", "pagina": 12}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "EXIGE_BIOMARCADOR", "para": "bio.msi-dmmr", "para_que": "pembrolizumabe tumor-agnóstico"}
+{"de": "bio.psma-pet-positivo", "rel": "FONTE", "para": "src.07.62", "pagina": 10}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "EXIGE_BIOMARCADOR", "para": "bio.psma-pet-positivo", "para_que": "elegibilidade a Lu-177-PSMA-617"}
+{"de": "bio.pten", "rel": "FONTE", "para": "src.07.62", "pagina": 15}
+{"de": "cen.prostata.metastatico-sensivel-castracao", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pten", "para_que": "capivasertibe (não estabelecido)"}
+{"de": "tri.protect", "rel": "FONTE", "para": "src.07.59", "pagina": 10}
+{"de": "tri.rtog-85-31", "rel": "FONTE", "para": "src.07.59", "pagina": 13}
+{"de": "tri.eortc-22863", "rel": "FONTE", "para": "src.07.59", "pagina": 13}
+{"de": "tri.eortc-22961", "rel": "FONTE", "para": "src.07.59", "pagina": 13}
+{"de": "tri.nabid-pcs-iv", "rel": "FONTE", "para": "src.07.59", "pagina": 13}
+{"de": "tri.rtog-94-08", "rel": "FONTE", "para": "src.07.59", "pagina": 13}
+{"de": "tri.stampede-abiraterona-m0", "rel": "FONTE", "para": "src.07.59", "pagina": 16}
+{"de": "tri.radicals-rt", "rel": "FONTE", "para": "src.07.59", "pagina": 18}
+{"de": "tri.getug-afu-17", "rel": "FONTE", "para": "src.07.59", "pagina": 19}
+{"de": "tri.raves", "rel": "FONTE", "para": "src.07.59", "pagina": 19}
+{"de": "tri.artistic", "rel": "FONTE", "para": "src.07.59", "pagina": 21}
+{"de": "tri.rtog-9601", "rel": "FONTE", "para": "src.07.60", "pagina": 9}
+{"de": "tri.getug-afu-16", "rel": "FONTE", "para": "src.07.60", "pagina": 9}
+{"de": "tri.spport", "rel": "FONTE", "para": "src.07.60", "pagina": 9}
+{"de": "tri.radicals-hd", "rel": "FONTE", "para": "src.07.60", "pagina": 9}
+{"de": "tri.embark", "rel": "FONTE", "para": "src.07.60", "pagina": 15}
+{"de": "tri.chaarted", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "tri.stampede-docetaxel", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "tri.stampede-abiraterona-m1", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "tri.latitude", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "tri.arches", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "tri.enzamet", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "tri.titan", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "tri.arasens", "rel": "FONTE", "para": "src.07.60", "pagina": 23}
+{"de": "tri.aranote", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "tri.stampede-rt-primario", "rel": "FONTE", "para": "src.07.60", "pagina": 27}
+{"de": "tri.stomp", "rel": "FONTE", "para": "src.07.60", "pagina": 21}
+{"de": "tri.oriole", "rel": "FONTE", "para": "src.07.60", "pagina": 21}
+{"de": "tri.tax-327", "rel": "FONTE", "para": "src.07.61", "pagina": 5}
+{"de": "tri.prosty", "rel": "FONTE", "para": "src.07.61", "pagina": 5}
+{"de": "tri.tropic", "rel": "FONTE", "para": "src.07.61", "pagina": 7}
+{"de": "tri.proselica", "rel": "FONTE", "para": "src.07.61", "pagina": 7}
+{"de": "tri.card", "rel": "FONTE", "para": "src.07.61", "pagina": 7}
+{"de": "tri.firstana", "rel": "FONTE", "para": "src.07.61", "pagina": 7}
+{"de": "tri.cou-aa-301", "rel": "FONTE", "para": "src.07.61", "pagina": 9}
+{"de": "tri.cou-aa-302", "rel": "FONTE", "para": "src.07.61", "pagina": 9}
+{"de": "tri.affirm", "rel": "FONTE", "para": "src.07.61", "pagina": 9}
+{"de": "tri.prevail", "rel": "FONTE", "para": "src.07.61", "pagina": 9}
+{"de": "tri.khalaf-2019", "rel": "FONTE", "para": "src.07.61", "pagina": 9}
+{"de": "tri.profound", "rel": "FONTE", "para": "src.07.61", "pagina": 15}
+{"de": "tri.triton-3", "rel": "FONTE", "para": "src.07.61", "pagina": 15}
+{"de": "tri.propel", "rel": "FONTE", "para": "src.07.61", "pagina": 20}
+{"de": "tri.talapro-2", "rel": "FONTE", "para": "src.07.61", "pagina": 20}
+{"de": "tri.magnitude", "rel": "FONTE", "para": "src.07.61", "pagina": 20}
+{"de": "tri.alsympca", "rel": "FONTE", "para": "src.07.62", "pagina": 7}
+{"de": "tri.peace-3", "rel": "FONTE", "para": "src.07.62", "pagina": 8}
+{"de": "tri.era-223", "rel": "FONTE", "para": "src.07.62", "pagina": 6}
+{"de": "tri.vision", "rel": "FONTE", "para": "src.07.62", "pagina": 10}
+{"de": "tri.therap", "rel": "FONTE", "para": "src.07.62", "pagina": 12}
+{"de": "tri.psmafore", "rel": "FONTE", "para": "src.07.62", "pagina": 12}
+{"de": "tri.capitello-281", "rel": "FONTE", "para": "src.07.62", "pagina": 15}
+{"de": "reg.prostata.vigilancia-ativa", "rel": "FONTE", "para": "src.07.59", "pagina": 8}
+{"de": "cen.prostata.localizado-muito-baixo-baixo-risco", "rel": "TRATA_COM", "para": "reg.prostata.vigilancia-ativa", "linha": "manejo inicial", "intencao": "curativa"}
+{"de": "cen.prostata.localizado-risco-intermediario", "rel": "TRATA_COM", "para": "reg.prostata.vigilancia-ativa", "linha": "manejo inicial", "intencao": "curativa"}
+{"de": "reg.prostata.vigilancia-ativa", "rel": "SUSTENTADO_POR", "para": "tri.protect"}
+{"de": "tri.protect", "rel": "TESTOU", "para": "reg.prostata.vigilancia-ativa"}
+{"de": "reg.prostata.watchful-waiting", "rel": "FONTE", "para": "src.07.59", "pagina": 9}
+{"de": "cen.prostata.localizado-muito-baixo-baixo-risco", "rel": "TRATA_COM", "para": "reg.prostata.watchful-waiting", "linha": "manejo inicial", "intencao": "paliativa"}
+{"de": "reg.prostata.prostatectomia-radical", "rel": "FONTE", "para": "src.07.59", "pagina": 6}
+{"de": "cen.prostata.localizado-muito-baixo-baixo-risco", "rel": "TRATA_COM", "para": "reg.prostata.prostatectomia-radical", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "cen.prostata.localizado-risco-intermediario", "rel": "TRATA_COM", "para": "reg.prostata.prostatectomia-radical", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "cen.prostata.localizado-alto-muito-alto-risco", "rel": "TRATA_COM", "para": "reg.prostata.prostatectomia-radical", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.prostata.prostatectomia-radical", "rel": "SUSTENTADO_POR", "para": "tri.protect"}
+{"de": "tri.protect", "rel": "TESTOU", "para": "reg.prostata.prostatectomia-radical"}
+{"de": "reg.prostata.rt-adt-curta", "rel": "FONTE", "para": "src.07.59", "pagina": 13}
+{"de": "far.leuprorrelina", "rel": "FONTE", "para": "src.07.59", "pagina": 13}
+{"de": "reg.prostata.rt-adt-curta", "rel": "USA_FARMACO", "para": "far.leuprorrelina"}
+{"de": "cen.prostata.localizado-risco-intermediario", "rel": "TRATA_COM", "para": "reg.prostata.rt-adt-curta", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.prostata.rt-adt-curta", "rel": "SUSTENTADO_POR", "para": "tri.rtog-94-08"}
+{"de": "tri.rtog-94-08", "rel": "TESTOU", "para": "reg.prostata.rt-adt-curta"}
+{"de": "reg.prostata.rt-adt-longa", "rel": "FONTE", "para": "src.07.59", "pagina": 13}
+{"de": "reg.prostata.rt-adt-longa", "rel": "USA_FARMACO", "para": "far.leuprorrelina"}
+{"de": "cen.prostata.localizado-alto-muito-alto-risco", "rel": "TRATA_COM", "para": "reg.prostata.rt-adt-longa", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.prostata.rt-adt-longa", "rel": "SUSTENTADO_POR", "para": "tri.rtog-85-31"}
+{"de": "tri.rtog-85-31", "rel": "TESTOU", "para": "reg.prostata.rt-adt-longa"}
+{"de": "reg.prostata.rt-adt-longa", "rel": "SUSTENTADO_POR", "para": "tri.eortc-22863"}
+{"de": "tri.eortc-22863", "rel": "TESTOU", "para": "reg.prostata.rt-adt-longa"}
+{"de": "reg.prostata.rt-adt-longa", "rel": "SUSTENTADO_POR", "para": "tri.eortc-22961"}
+{"de": "tri.eortc-22961", "rel": "TESTOU", "para": "reg.prostata.rt-adt-longa"}
+{"de": "reg.prostata.rt-adt-longa", "rel": "SUSTENTADO_POR", "para": "tri.nabid-pcs-iv"}
+{"de": "tri.nabid-pcs-iv", "rel": "TESTOU", "para": "reg.prostata.rt-adt-longa"}
+{"de": "reg.prostata.rt-adt-abiraterona", "rel": "FONTE", "para": "src.07.59", "pagina": 15}
+{"de": "reg.prostata.rt-adt-abiraterona", "rel": "USA_FARMACO", "para": "far.leuprorrelina"}
+{"de": "far.abiraterona", "rel": "FONTE", "para": "src.07.59", "pagina": 15}
+{"de": "reg.prostata.rt-adt-abiraterona", "rel": "USA_FARMACO", "para": "far.abiraterona"}
+{"de": "far.prednisolona", "rel": "FONTE", "para": "src.07.59", "pagina": 15}
+{"de": "reg.prostata.rt-adt-abiraterona", "rel": "USA_FARMACO", "para": "far.prednisolona"}
+{"de": "cen.prostata.localizado-alto-muito-alto-risco", "rel": "TRATA_COM", "para": "reg.prostata.rt-adt-abiraterona", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.prostata.rt-adt-abiraterona", "rel": "SUSTENTADO_POR", "para": "tri.stampede-abiraterona-m0"}
+{"de": "tri.stampede-abiraterona-m0", "rel": "TESTOU", "para": "reg.prostata.rt-adt-abiraterona"}
+{"de": "reg.prostata.rt-resgate-precoce", "rel": "FONTE", "para": "src.07.59", "pagina": 21}
+{"de": "cen.prostata.adjuvante-pos-prostatectomia", "rel": "TRATA_COM", "para": "reg.prostata.rt-resgate-precoce", "linha": "pós-prostatectomia", "intencao": "curativa"}
+{"de": "cen.prostata.recidiva-bioquimica", "rel": "TRATA_COM", "para": "reg.prostata.rt-resgate-precoce", "linha": "pós-prostatectomia", "intencao": "curativa"}
+{"de": "reg.prostata.rt-resgate-precoce", "rel": "SUSTENTADO_POR", "para": "tri.radicals-rt"}
+{"de": "tri.radicals-rt", "rel": "TESTOU", "para": "reg.prostata.rt-resgate-precoce"}
+{"de": "reg.prostata.rt-resgate-precoce", "rel": "SUSTENTADO_POR", "para": "tri.getug-afu-17"}
+{"de": "tri.getug-afu-17", "rel": "TESTOU", "para": "reg.prostata.rt-resgate-precoce"}
+{"de": "reg.prostata.rt-resgate-precoce", "rel": "SUSTENTADO_POR", "para": "tri.raves"}
+{"de": "tri.raves", "rel": "TESTOU", "para": "reg.prostata.rt-resgate-precoce"}
+{"de": "reg.prostata.rt-resgate-precoce", "rel": "SUSTENTADO_POR", "para": "tri.artistic"}
+{"de": "tri.artistic", "rel": "TESTOU", "para": "reg.prostata.rt-resgate-precoce"}
+{"de": "reg.prostata.rt-resgate-adt", "rel": "FONTE", "para": "src.07.60", "pagina": 9}
+{"de": "far.bicalutamida", "rel": "FONTE", "para": "src.07.60", "pagina": 9}
+{"de": "reg.prostata.rt-resgate-adt", "rel": "USA_FARMACO", "para": "far.bicalutamida"}
+{"de": "reg.prostata.rt-resgate-adt", "rel": "USA_FARMACO", "para": "far.leuprorrelina"}
+{"de": "cen.prostata.recidiva-bioquimica", "rel": "TRATA_COM", "para": "reg.prostata.rt-resgate-adt", "linha": "recidiva bioquímica", "intencao": "curativa"}
+{"de": "reg.prostata.rt-resgate-adt", "rel": "SUSTENTADO_POR", "para": "tri.rtog-9601"}
+{"de": "tri.rtog-9601", "rel": "TESTOU", "para": "reg.prostata.rt-resgate-adt"}
+{"de": "reg.prostata.rt-resgate-adt", "rel": "SUSTENTADO_POR", "para": "tri.getug-afu-16"}
+{"de": "tri.getug-afu-16", "rel": "TESTOU", "para": "reg.prostata.rt-resgate-adt"}
+{"de": "reg.prostata.rt-resgate-adt", "rel": "SUSTENTADO_POR", "para": "tri.spport"}
+{"de": "tri.spport", "rel": "TESTOU", "para": "reg.prostata.rt-resgate-adt"}
+{"de": "reg.prostata.rt-resgate-adt", "rel": "SUSTENTADO_POR", "para": "tri.radicals-hd"}
+{"de": "tri.radicals-hd", "rel": "TESTOU", "para": "reg.prostata.rt-resgate-adt"}
+{"de": "reg.prostata.adt-enzalutamida-bcr", "rel": "FONTE", "para": "src.07.60", "pagina": 15}
+{"de": "far.enzalutamida", "rel": "FONTE", "para": "src.07.60", "pagina": 15}
+{"de": "reg.prostata.adt-enzalutamida-bcr", "rel": "USA_FARMACO", "para": "far.enzalutamida"}
+{"de": "reg.prostata.adt-enzalutamida-bcr", "rel": "USA_FARMACO", "para": "far.leuprorrelina"}
+{"de": "cen.prostata.recidiva-bioquimica", "rel": "TRATA_COM", "para": "reg.prostata.adt-enzalutamida-bcr", "linha": "recidiva bioquímica após tratamento local máximo", "intencao": "paliativa"}
+{"de": "reg.prostata.adt-enzalutamida-bcr", "rel": "SUSTENTADO_POR", "para": "tri.embark"}
+{"de": "tri.embark", "rel": "TESTOU", "para": "reg.prostata.adt-enzalutamida-bcr"}
+{"de": "reg.prostata.adt-isolada", "rel": "FONTE", "para": "src.07.60", "pagina": 14}
+{"de": "reg.prostata.adt-isolada", "rel": "USA_FARMACO", "para": "far.leuprorrelina"}
+{"de": "cen.prostata.recidiva-bioquimica", "rel": "TRATA_COM", "para": "reg.prostata.adt-isolada", "linha": "recidiva bioquímica / mCSPC", "intencao": "paliativa"}
+{"de": "cen.prostata.metastatico-sensivel-castracao", "rel": "TRATA_COM", "para": "reg.prostata.adt-isolada", "linha": "recidiva bioquímica / mCSPC", "intencao": "paliativa"}
+{"de": "reg.prostata.adt-docetaxel", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "reg.prostata.adt-docetaxel", "rel": "USA_FARMACO", "para": "far.leuprorrelina"}
+{"de": "far.docetaxel", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "reg.prostata.adt-docetaxel", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "cen.prostata.metastatico-sensivel-castracao", "rel": "TRATA_COM", "para": "reg.prostata.adt-docetaxel", "linha": "1ª linha mCSPC", "intencao": "paliativa"}
+{"de": "reg.prostata.adt-docetaxel", "rel": "SUSTENTADO_POR", "para": "tri.chaarted"}
+{"de": "tri.chaarted", "rel": "TESTOU", "para": "reg.prostata.adt-docetaxel"}
+{"de": "reg.prostata.adt-docetaxel", "rel": "SUSTENTADO_POR", "para": "tri.stampede-docetaxel"}
+{"de": "tri.stampede-docetaxel", "rel": "TESTOU", "para": "reg.prostata.adt-docetaxel"}
+{"de": "reg.prostata.adt-abiraterona", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "reg.prostata.adt-abiraterona", "rel": "USA_FARMACO", "para": "far.leuprorrelina"}
+{"de": "reg.prostata.adt-abiraterona", "rel": "USA_FARMACO", "para": "far.abiraterona"}
+{"de": "far.prednisona", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "reg.prostata.adt-abiraterona", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "cen.prostata.metastatico-sensivel-castracao", "rel": "TRATA_COM", "para": "reg.prostata.adt-abiraterona", "linha": "1ª linha mCSPC", "intencao": "paliativa"}
+{"de": "reg.prostata.adt-abiraterona", "rel": "SUSTENTADO_POR", "para": "tri.latitude"}
+{"de": "tri.latitude", "rel": "TESTOU", "para": "reg.prostata.adt-abiraterona"}
+{"de": "reg.prostata.adt-abiraterona", "rel": "SUSTENTADO_POR", "para": "tri.stampede-abiraterona-m1"}
+{"de": "tri.stampede-abiraterona-m1", "rel": "TESTOU", "para": "reg.prostata.adt-abiraterona"}
+{"de": "reg.prostata.adt-enzalutamida", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "reg.prostata.adt-enzalutamida", "rel": "USA_FARMACO", "para": "far.leuprorrelina"}
+{"de": "reg.prostata.adt-enzalutamida", "rel": "USA_FARMACO", "para": "far.enzalutamida"}
+{"de": "cen.prostata.metastatico-sensivel-castracao", "rel": "TRATA_COM", "para": "reg.prostata.adt-enzalutamida", "linha": "1ª linha mCSPC", "intencao": "paliativa"}
+{"de": "reg.prostata.adt-enzalutamida", "rel": "SUSTENTADO_POR", "para": "tri.arches"}
+{"de": "tri.arches", "rel": "TESTOU", "para": "reg.prostata.adt-enzalutamida"}
+{"de": "reg.prostata.adt-enzalutamida", "rel": "SUSTENTADO_POR", "para": "tri.enzamet"}
+{"de": "tri.enzamet", "rel": "TESTOU", "para": "reg.prostata.adt-enzalutamida"}
+{"de": "reg.prostata.adt-apalutamida", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "reg.prostata.adt-apalutamida", "rel": "USA_FARMACO", "para": "far.leuprorrelina"}
+{"de": "far.apalutamida", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "reg.prostata.adt-apalutamida", "rel": "USA_FARMACO", "para": "far.apalutamida"}
+{"de": "cen.prostata.metastatico-sensivel-castracao", "rel": "TRATA_COM", "para": "reg.prostata.adt-apalutamida", "linha": "1ª linha mCSPC", "intencao": "paliativa"}
+{"de": "reg.prostata.adt-apalutamida", "rel": "SUSTENTADO_POR", "para": "tri.titan"}
+{"de": "tri.titan", "rel": "TESTOU", "para": "reg.prostata.adt-apalutamida"}
+{"de": "reg.prostata.adt-darolutamida-docetaxel", "rel": "FONTE", "para": "src.07.60", "pagina": 23}
+{"de": "reg.prostata.adt-darolutamida-docetaxel", "rel": "USA_FARMACO", "para": "far.leuprorrelina"}
+{"de": "far.darolutamida", "rel": "FONTE", "para": "src.07.60", "pagina": 23}
+{"de": "reg.prostata.adt-darolutamida-docetaxel", "rel": "USA_FARMACO", "para": "far.darolutamida"}
+{"de": "reg.prostata.adt-darolutamida-docetaxel", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "cen.prostata.metastatico-sensivel-castracao", "rel": "TRATA_COM", "para": "reg.prostata.adt-darolutamida-docetaxel", "linha": "1ª linha mCSPC", "intencao": "paliativa"}
+{"de": "reg.prostata.adt-darolutamida-docetaxel", "rel": "SUSTENTADO_POR", "para": "tri.arasens"}
+{"de": "tri.arasens", "rel": "TESTOU", "para": "reg.prostata.adt-darolutamida-docetaxel"}
+{"de": "reg.prostata.adt-darolutamida", "rel": "FONTE", "para": "src.07.60", "pagina": 20}
+{"de": "reg.prostata.adt-darolutamida", "rel": "USA_FARMACO", "para": "far.leuprorrelina"}
+{"de": "reg.prostata.adt-darolutamida", "rel": "USA_FARMACO", "para": "far.darolutamida"}
+{"de": "cen.prostata.metastatico-sensivel-castracao", "rel": "TRATA_COM", "para": "reg.prostata.adt-darolutamida", "linha": "1ª linha mCSPC", "intencao": "paliativa"}
+{"de": "reg.prostata.adt-darolutamida", "rel": "SUSTENTADO_POR", "para": "tri.aranote"}
+{"de": "tri.aranote", "rel": "TESTOU", "para": "reg.prostata.adt-darolutamida"}
+{"de": "reg.prostata.rt-primario-mcspc", "rel": "FONTE", "para": "src.07.60", "pagina": 27}
+{"de": "cen.prostata.metastatico-sensivel-castracao", "rel": "TRATA_COM", "para": "reg.prostata.rt-primario-mcspc", "linha": "mCSPC (tratamento local)", "intencao": "paliativa"}
+{"de": "reg.prostata.rt-primario-mcspc", "rel": "SUSTENTADO_POR", "para": "tri.stampede-rt-primario"}
+{"de": "tri.stampede-rt-primario", "rel": "TESTOU", "para": "reg.prostata.rt-primario-mcspc"}
+{"de": "reg.prostata.mdt-oligometastase", "rel": "FONTE", "para": "src.07.60", "pagina": 21}
+{"de": "cen.prostata.metastatico-sensivel-castracao", "rel": "TRATA_COM", "para": "reg.prostata.mdt-oligometastase", "linha": "oligometastático recorrente", "intencao": "paliativa"}
+{"de": "reg.prostata.mdt-oligometastase", "rel": "SUSTENTADO_POR", "para": "tri.stomp"}
+{"de": "tri.stomp", "rel": "TESTOU", "para": "reg.prostata.mdt-oligometastase"}
+{"de": "reg.prostata.mdt-oligometastase", "rel": "SUSTENTADO_POR", "para": "tri.oriole"}
+{"de": "tri.oriole", "rel": "TESTOU", "para": "reg.prostata.mdt-oligometastase"}
+{"de": "reg.prostata.docetaxel-mcrpc", "rel": "FONTE", "para": "src.07.61", "pagina": 5}
+{"de": "reg.prostata.docetaxel-mcrpc", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.prostata.docetaxel-mcrpc", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "cen.prostata.mcrpc-1a-linha", "rel": "TRATA_COM", "para": "reg.prostata.docetaxel-mcrpc", "linha": "1ª linha QT mCRPC", "intencao": "paliativa"}
+{"de": "reg.prostata.docetaxel-mcrpc", "rel": "SUSTENTADO_POR", "para": "tri.tax-327"}
+{"de": "tri.tax-327", "rel": "TESTOU", "para": "reg.prostata.docetaxel-mcrpc"}
+{"de": "reg.prostata.docetaxel-mcrpc", "rel": "SUSTENTADO_POR", "para": "tri.prosty"}
+{"de": "tri.prosty", "rel": "TESTOU", "para": "reg.prostata.docetaxel-mcrpc"}
+{"de": "reg.prostata.docetaxel-mcrpc", "rel": "SUSTENTADO_POR", "para": "tri.firstana"}
+{"de": "tri.firstana", "rel": "TESTOU", "para": "reg.prostata.docetaxel-mcrpc"}
+{"de": "reg.prostata.cabazitaxel", "rel": "FONTE", "para": "src.07.61", "pagina": 7}
+{"de": "far.cabazitaxel", "rel": "FONTE", "para": "src.07.61", "pagina": 7}
+{"de": "reg.prostata.cabazitaxel", "rel": "USA_FARMACO", "para": "far.cabazitaxel"}
+{"de": "reg.prostata.cabazitaxel", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.prostata.cabazitaxel", "linha": "pós-docetaxel", "intencao": "paliativa"}
+{"de": "reg.prostata.cabazitaxel", "rel": "SUSTENTADO_POR", "para": "tri.tropic"}
+{"de": "tri.tropic", "rel": "TESTOU", "para": "reg.prostata.cabazitaxel"}
+{"de": "reg.prostata.cabazitaxel", "rel": "SUSTENTADO_POR", "para": "tri.proselica"}
+{"de": "tri.proselica", "rel": "TESTOU", "para": "reg.prostata.cabazitaxel"}
+{"de": "reg.prostata.cabazitaxel", "rel": "SUSTENTADO_POR", "para": "tri.card"}
+{"de": "tri.card", "rel": "TESTOU", "para": "reg.prostata.cabazitaxel"}
+{"de": "reg.prostata.abiraterona-mcrpc", "rel": "FONTE", "para": "src.07.61", "pagina": 9}
+{"de": "reg.prostata.abiraterona-mcrpc", "rel": "USA_FARMACO", "para": "far.abiraterona"}
+{"de": "reg.prostata.abiraterona-mcrpc", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "cen.prostata.mcrpc-1a-linha", "rel": "TRATA_COM", "para": "reg.prostata.abiraterona-mcrpc", "linha": "1ª ou 2ª linha mCRPC", "intencao": "paliativa"}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.prostata.abiraterona-mcrpc", "linha": "1ª ou 2ª linha mCRPC", "intencao": "paliativa"}
+{"de": "reg.prostata.abiraterona-mcrpc", "rel": "SUSTENTADO_POR", "para": "tri.cou-aa-301"}
+{"de": "tri.cou-aa-301", "rel": "TESTOU", "para": "reg.prostata.abiraterona-mcrpc"}
+{"de": "reg.prostata.abiraterona-mcrpc", "rel": "SUSTENTADO_POR", "para": "tri.cou-aa-302"}
+{"de": "tri.cou-aa-302", "rel": "TESTOU", "para": "reg.prostata.abiraterona-mcrpc"}
+{"de": "reg.prostata.abiraterona-mcrpc", "rel": "SUSTENTADO_POR", "para": "tri.khalaf-2019"}
+{"de": "tri.khalaf-2019", "rel": "TESTOU", "para": "reg.prostata.abiraterona-mcrpc"}
+{"de": "reg.prostata.enzalutamida-mcrpc", "rel": "FONTE", "para": "src.07.61", "pagina": 9}
+{"de": "reg.prostata.enzalutamida-mcrpc", "rel": "USA_FARMACO", "para": "far.enzalutamida"}
+{"de": "cen.prostata.mcrpc-1a-linha", "rel": "TRATA_COM", "para": "reg.prostata.enzalutamida-mcrpc", "linha": "1ª ou 2ª linha mCRPC", "intencao": "paliativa"}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.prostata.enzalutamida-mcrpc", "linha": "1ª ou 2ª linha mCRPC", "intencao": "paliativa"}
+{"de": "reg.prostata.enzalutamida-mcrpc", "rel": "SUSTENTADO_POR", "para": "tri.affirm"}
+{"de": "tri.affirm", "rel": "TESTOU", "para": "reg.prostata.enzalutamida-mcrpc"}
+{"de": "reg.prostata.enzalutamida-mcrpc", "rel": "SUSTENTADO_POR", "para": "tri.prevail"}
+{"de": "tri.prevail", "rel": "TESTOU", "para": "reg.prostata.enzalutamida-mcrpc"}
+{"de": "reg.prostata.enzalutamida-mcrpc", "rel": "SUSTENTADO_POR", "para": "tri.khalaf-2019"}
+{"de": "tri.khalaf-2019", "rel": "TESTOU", "para": "reg.prostata.enzalutamida-mcrpc"}
+{"de": "reg.prostata.olaparibe-mono", "rel": "FONTE", "para": "src.07.61", "pagina": 15}
+{"de": "far.olaparibe", "rel": "FONTE", "para": "src.07.61", "pagina": 15}
+{"de": "reg.prostata.olaparibe-mono", "rel": "USA_FARMACO", "para": "far.olaparibe"}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.prostata.olaparibe-mono", "linha": "pós-ARPI", "intencao": "paliativa", "condicao_biomarcador": "HRRm (BRCA1/2, ATM; maior ganho em BRCA)"}
+{"de": "reg.prostata.olaparibe-mono", "rel": "SUSTENTADO_POR", "para": "tri.profound"}
+{"de": "tri.profound", "rel": "TESTOU", "para": "reg.prostata.olaparibe-mono"}
+{"de": "reg.prostata.rucaparibe-mono", "rel": "FONTE", "para": "src.07.61", "pagina": 15}
+{"de": "far.rucaparibe", "rel": "FONTE", "para": "src.07.61", "pagina": 15}
+{"de": "reg.prostata.rucaparibe-mono", "rel": "USA_FARMACO", "para": "far.rucaparibe"}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.prostata.rucaparibe-mono", "linha": "pós-ARPI", "intencao": "paliativa", "condicao_biomarcador": "BRCA1/2 (ATM responde mal)"}
+{"de": "reg.prostata.rucaparibe-mono", "rel": "SUSTENTADO_POR", "para": "tri.triton-3"}
+{"de": "tri.triton-3", "rel": "TESTOU", "para": "reg.prostata.rucaparibe-mono"}
+{"de": "reg.prostata.olaparibe-abiraterona", "rel": "FONTE", "para": "src.07.61", "pagina": 19}
+{"de": "reg.prostata.olaparibe-abiraterona", "rel": "USA_FARMACO", "para": "far.olaparibe"}
+{"de": "reg.prostata.olaparibe-abiraterona", "rel": "USA_FARMACO", "para": "far.abiraterona"}
+{"de": "reg.prostata.olaparibe-abiraterona", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "cen.prostata.mcrpc-1a-linha", "rel": "TRATA_COM", "para": "reg.prostata.olaparibe-abiraterona", "linha": "1ª linha mCRPC", "intencao": "paliativa", "condicao_biomarcador": "all-comers (maior benefício BRCA)"}
+{"de": "reg.prostata.olaparibe-abiraterona", "rel": "SUSTENTADO_POR", "para": "tri.propel"}
+{"de": "tri.propel", "rel": "TESTOU", "para": "reg.prostata.olaparibe-abiraterona"}
+{"de": "reg.prostata.talazoparibe-enzalutamida", "rel": "FONTE", "para": "src.07.61", "pagina": 19}
+{"de": "far.talazoparibe", "rel": "FONTE", "para": "src.07.61", "pagina": 19}
+{"de": "reg.prostata.talazoparibe-enzalutamida", "rel": "USA_FARMACO", "para": "far.talazoparibe"}
+{"de": "reg.prostata.talazoparibe-enzalutamida", "rel": "USA_FARMACO", "para": "far.enzalutamida"}
+{"de": "cen.prostata.mcrpc-1a-linha", "rel": "TRATA_COM", "para": "reg.prostata.talazoparibe-enzalutamida", "linha": "1ª linha mCRPC", "intencao": "paliativa", "condicao_biomarcador": "all-comers (maior benefício HRRm/BRCA)"}
+{"de": "reg.prostata.talazoparibe-enzalutamida", "rel": "SUSTENTADO_POR", "para": "tri.talapro-2"}
+{"de": "tri.talapro-2", "rel": "TESTOU", "para": "reg.prostata.talazoparibe-enzalutamida"}
+{"de": "reg.prostata.niraparibe-abiraterona", "rel": "FONTE", "para": "src.07.61", "pagina": 19}
+{"de": "far.niraparibe", "rel": "FONTE", "para": "src.07.61", "pagina": 19}
+{"de": "reg.prostata.niraparibe-abiraterona", "rel": "USA_FARMACO", "para": "far.niraparibe"}
+{"de": "reg.prostata.niraparibe-abiraterona", "rel": "USA_FARMACO", "para": "far.abiraterona"}
+{"de": "reg.prostata.niraparibe-abiraterona", "rel": "USA_FARMACO", "para": "far.prednisona"}
+{"de": "cen.prostata.mcrpc-1a-linha", "rel": "TRATA_COM", "para": "reg.prostata.niraparibe-abiraterona", "linha": "1ª linha mCRPC", "intencao": "paliativa", "condicao_biomarcador": "somente HRRm"}
+{"de": "reg.prostata.niraparibe-abiraterona", "rel": "SUSTENTADO_POR", "para": "tri.magnitude"}
+{"de": "tri.magnitude", "rel": "TESTOU", "para": "reg.prostata.niraparibe-abiraterona"}
+{"de": "reg.prostata.radio-223", "rel": "FONTE", "para": "src.07.62", "pagina": 6}
+{"de": "far.radio-223", "rel": "FONTE", "para": "src.07.62", "pagina": 6}
+{"de": "reg.prostata.radio-223", "rel": "USA_FARMACO", "para": "far.radio-223"}
+{"de": "cen.prostata.mcrpc-1a-linha", "rel": "TRATA_COM", "para": "reg.prostata.radio-223", "linha": "mCRPC ósseo sintomático", "intencao": "paliativa", "condicao_biomarcador": "sem metástase visceral"}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.prostata.radio-223", "linha": "mCRPC ósseo sintomático", "intencao": "paliativa", "condicao_biomarcador": "sem metástase visceral"}
+{"de": "reg.prostata.radio-223", "rel": "SUSTENTADO_POR", "para": "tri.alsympca"}
+{"de": "tri.alsympca", "rel": "TESTOU", "para": "reg.prostata.radio-223"}
+{"de": "reg.prostata.radio-223", "rel": "SUSTENTADO_POR", "para": "tri.era-223"}
+{"de": "tri.era-223", "rel": "TESTOU", "para": "reg.prostata.radio-223"}
+{"de": "reg.prostata.radio-223-enzalutamida", "rel": "FONTE", "para": "src.07.62", "pagina": 8}
+{"de": "reg.prostata.radio-223-enzalutamida", "rel": "USA_FARMACO", "para": "far.radio-223"}
+{"de": "reg.prostata.radio-223-enzalutamida", "rel": "USA_FARMACO", "para": "far.enzalutamida"}
+{"de": "cen.prostata.mcrpc-1a-linha", "rel": "TRATA_COM", "para": "reg.prostata.radio-223-enzalutamida", "linha": "1ª linha mCRPC ósseo", "intencao": "paliativa"}
+{"de": "reg.prostata.radio-223-enzalutamida", "rel": "SUSTENTADO_POR", "para": "tri.peace-3"}
+{"de": "tri.peace-3", "rel": "TESTOU", "para": "reg.prostata.radio-223-enzalutamida"}
+{"de": "reg.prostata.lutecio-psma", "rel": "FONTE", "para": "src.07.62", "pagina": 10}
+{"de": "far.lutecio-177-psma-617", "rel": "FONTE", "para": "src.07.62", "pagina": 10}
+{"de": "reg.prostata.lutecio-psma", "rel": "USA_FARMACO", "para": "far.lutecio-177-psma-617"}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.prostata.lutecio-psma", "linha": "pós-ARPI + taxano", "intencao": "paliativa", "condicao_biomarcador": "PSMA-PET positivo"}
+{"de": "reg.prostata.lutecio-psma", "rel": "SUSTENTADO_POR", "para": "tri.vision"}
+{"de": "tri.vision", "rel": "TESTOU", "para": "reg.prostata.lutecio-psma"}
+{"de": "reg.prostata.lutecio-psma", "rel": "SUSTENTADO_POR", "para": "tri.therap"}
+{"de": "tri.therap", "rel": "TESTOU", "para": "reg.prostata.lutecio-psma"}
+{"de": "reg.prostata.lutecio-psma", "rel": "SUSTENTADO_POR", "para": "tri.psmafore"}
+{"de": "tri.psmafore", "rel": "TESTOU", "para": "reg.prostata.lutecio-psma"}
+{"de": "reg.prostata.pembrolizumabe-msi", "rel": "FONTE", "para": "src.07.58", "pagina": 14}
+{"de": "far.pembrolizumabe", "rel": "FONTE", "para": "src.07.58", "pagina": 14}
+{"de": "reg.prostata.pembrolizumabe-msi", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.prostata.pembrolizumabe-msi", "linha": "mCRPC (tumor-agnóstico)", "intencao": "paliativa", "condicao_biomarcador": "MSI-H/dMMR"}
+{"de": "reg.prostata.platina-variantes-agressivas", "rel": "FONTE", "para": "src.07.62", "pagina": 17}
+{"de": "far.carboplatina", "rel": "FONTE", "para": "src.07.62", "pagina": 17}
+{"de": "reg.prostata.platina-variantes-agressivas", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.prostata.platina-variantes-agressivas", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "far.cisplatina", "rel": "FONTE", "para": "src.07.62", "pagina": 17}
+{"de": "reg.prostata.platina-variantes-agressivas", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "far.etoposideo", "rel": "FONTE", "para": "src.07.62", "pagina": 17}
+{"de": "reg.prostata.platina-variantes-agressivas", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.prostata.platina-variantes-agressivas", "rel": "USA_FARMACO", "para": "far.cabazitaxel"}
+{"de": "cen.prostata.mcrpc-1a-linha", "rel": "TRATA_COM", "para": "reg.prostata.platina-variantes-agressivas", "linha": "variantes histológicas agressivas", "intencao": "paliativa"}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.prostata.platina-variantes-agressivas", "linha": "variantes histológicas agressivas", "intencao": "paliativa"}
+{"de": "reg.prostata.agente-osseo", "rel": "FONTE", "para": "src.07.62", "pagina": 16}
+{"de": "far.acido-zoledronico", "rel": "FONTE", "para": "src.07.62", "pagina": 16}
+{"de": "reg.prostata.agente-osseo", "rel": "USA_FARMACO", "para": "far.acido-zoledronico"}
+{"de": "far.denosumabe", "rel": "FONTE", "para": "src.07.62", "pagina": 16}
+{"de": "reg.prostata.agente-osseo", "rel": "USA_FARMACO", "para": "far.denosumabe"}
+{"de": "cen.prostata.mcrpc-1a-linha", "rel": "TRATA_COM", "para": "reg.prostata.agente-osseo", "linha": "suporte", "intencao": "paliativa"}
+{"de": "cen.prostata.mcrpc-2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.prostata.agente-osseo", "linha": "suporte", "intencao": "paliativa"}
+{"de": "reg.prostata.capivasertibe-abiraterona", "rel": "FONTE", "para": "src.07.62", "pagina": 15}
+{"de": "far.capivasertibe", "rel": "FONTE", "para": "src.07.62", "pagina": 15}
+{"de": "reg.prostata.capivasertibe-abiraterona", "rel": "USA_FARMACO", "para": "far.capivasertibe"}
+{"de": "reg.prostata.capivasertibe-abiraterona", "rel": "USA_FARMACO", "para": "far.abiraterona"}
+{"de": "cen.prostata.metastatico-sensivel-castracao", "rel": "TRATA_COM", "para": "reg.prostata.capivasertibe-abiraterona", "linha": "mHSPC", "intencao": "paliativa", "condicao_biomarcador": "PTEN-deficiente"}
+{"de": "reg.prostata.capivasertibe-abiraterona", "rel": "SUSTENTADO_POR", "para": "tri.capitello-281"}
+{"de": "tri.capitello-281", "rel": "TESTOU", "para": "reg.prostata.capivasertibe-abiraterona"}
+{"de": "reg.prostata.oxibutinina-fogachos", "rel": "FONTE", "para": "src.07.60", "pagina": 31}
+{"de": "far.oxibutinina", "rel": "FONTE", "para": "src.07.60", "pagina": 31}
+{"de": "reg.prostata.oxibutinina-fogachos", "rel": "USA_FARMACO", "para": "far.oxibutinina"}
+{"de": "cen.prostata.metastatico-sensivel-castracao", "rel": "TRATA_COM", "para": "reg.prostata.oxibutinina-fogachos", "linha": "suporte", "intencao": "paliativa"}
+{"de": "tum.rim", "rel": "FONTE", "para": "src.07.63", "pagina": 4}
+{"de": "cen.rim.localizado", "rel": "FONTE", "para": "src.07.64", "pagina": 4}
+{"de": "tum.rim", "rel": "TEM_CENARIO", "para": "cen.rim.localizado"}
+{"de": "cen.rim.adjuvante", "rel": "FONTE", "para": "src.07.64", "pagina": 19}
+{"de": "tum.rim", "rel": "TEM_CENARIO", "para": "cen.rim.adjuvante"}
+{"de": "cen.rim.metastatico-1a-linha", "rel": "FONTE", "para": "src.07.65", "pagina": 12}
+{"de": "tum.rim", "rel": "TEM_CENARIO", "para": "cen.rim.metastatico-1a-linha"}
+{"de": "cen.rim.2a-linha-posterior", "rel": "FONTE", "para": "src.07.65", "pagina": 27}
+{"de": "tum.rim", "rel": "TEM_CENARIO", "para": "cen.rim.2a-linha-posterior"}
+{"de": "cen.rim.nao-celulas-claras-metastatico", "rel": "FONTE", "para": "src.07.65", "pagina": 29}
+{"de": "tum.rim", "rel": "TEM_CENARIO", "para": "cen.rim.nao-celulas-claras-metastatico"}
+{"de": "dx.rim.apresentacao-paraneoplasias", "rel": "FONTE", "para": "src.07.63", "pagina": 16}
+{"de": "tum.rim", "rel": "DIAGNOSTICA_POR", "para": "dx.rim.apresentacao-paraneoplasias"}
+{"de": "dx.rim.bosniak", "rel": "FONTE", "para": "src.07.63", "pagina": 6}
+{"de": "tum.rim", "rel": "DIAGNOSTICA_POR", "para": "dx.rim.bosniak"}
+{"de": "dx.rim.imagem-estadiamento", "rel": "FONTE", "para": "src.07.63", "pagina": 17}
+{"de": "tum.rim", "rel": "DIAGNOSTICA_POR", "para": "dx.rim.imagem-estadiamento"}
+{"de": "dx.rim.avaliacao-genetica", "rel": "FONTE", "para": "src.07.63", "pagina": 12}
+{"de": "tum.rim", "rel": "DIAGNOSTICA_POR", "para": "dx.rim.avaliacao-genetica"}
+{"de": "est.rim.tnm-ajcc8", "rel": "FONTE", "para": "src.07.63", "pagina": 19}
+{"de": "tum.rim", "rel": "ESTADIA_POR", "para": "est.rim.tnm-ajcc8"}
+{"de": "est.rim.isup-oms-2016", "rel": "FONTE", "para": "src.07.63", "pagina": 14}
+{"de": "tum.rim", "rel": "ESTADIA_POR", "para": "est.rim.isup-oms-2016"}
+{"de": "est.rim.imdc-mskcc", "rel": "FONTE", "para": "src.07.65", "pagina": 4}
+{"de": "tum.rim", "rel": "ESTADIA_POR", "para": "est.rim.imdc-mskcc"}
+{"de": "bio.vhl", "rel": "FONTE", "para": "src.07.64", "pagina": 17}
+{"de": "cen.rim.localizado", "rel": "EXIGE_BIOMARCADOR", "para": "bio.vhl", "para_que": "belzutifan quando cirurgia contraindicada"}
+{"de": "bio.fh-hlrcc", "rel": "FONTE", "para": "src.07.65", "pagina": 34}
+{"de": "cen.rim.nao-celulas-claras-metastatico", "rel": "EXIGE_BIOMARCADOR", "para": "bio.fh-hlrcc", "para_que": "bevacizumabe + erlotinibe"}
+{"de": "tri.assure", "rel": "FONTE", "para": "src.07.64", "pagina": 12}
+{"de": "tri.s-trac", "rel": "FONTE", "para": "src.07.64", "pagina": 12}
+{"de": "tri.protect-pazopanibe", "rel": "FONTE", "para": "src.07.64", "pagina": 12}
+{"de": "tri.atlas", "rel": "FONTE", "para": "src.07.64", "pagina": 12}
+{"de": "tri.sorce", "rel": "FONTE", "para": "src.07.64", "pagina": 12}
+{"de": "tri.keynote-564", "rel": "FONTE", "para": "src.07.64", "pagina": 15}
+{"de": "tri.immotion010", "rel": "FONTE", "para": "src.07.64", "pagina": 13}
+{"de": "tri.checkmate-914", "rel": "FONTE", "para": "src.07.64", "pagina": 13}
+{"de": "tri.prosper-rcc", "rel": "FONTE", "para": "src.07.64", "pagina": 13}
+{"de": "tri.litespark-004-vhl", "rel": "FONTE", "para": "src.07.64", "pagina": 17}
+{"de": "tri.marcc", "rel": "FONTE", "para": "src.07.65", "pagina": 7}
+{"de": "tri.carmena", "rel": "FONTE", "para": "src.07.65", "pagina": 10}
+{"de": "tri.surtime", "rel": "FONTE", "para": "src.07.65", "pagina": 10}
+{"de": "tri.checkmate-214", "rel": "FONTE", "para": "src.07.65", "pagina": 12}
+{"de": "tri.keynote-426", "rel": "FONTE", "para": "src.07.65", "pagina": 12}
+{"de": "tri.checkmate-9er", "rel": "FONTE", "para": "src.07.65", "pagina": 12}
+{"de": "tri.clear", "rel": "FONTE", "para": "src.07.65", "pagina": 12}
+{"de": "tri.javelin-renal-101", "rel": "FONTE", "para": "src.07.65", "pagina": 13}
+{"de": "tri.immotion151", "rel": "FONTE", "para": "src.07.65", "pagina": 13}
+{"de": "tri.cosmic-313", "rel": "FONTE", "para": "src.07.65", "pagina": 20}
+{"de": "tri.checkmate-025", "rel": "FONTE", "para": "src.07.65", "pagina": 22}
+{"de": "tri.meteor", "rel": "FONTE", "para": "src.07.65", "pagina": 23}
+{"de": "tri.litespark-005", "rel": "FONTE", "para": "src.07.65", "pagina": 24}
+{"de": "tri.litespark-011", "rel": "FONTE", "para": "src.07.65", "pagina": 26}
+{"de": "tri.record-1", "rel": "FONTE", "para": "src.07.65", "pagina": 25}
+{"de": "tri.lenvatinibe-everolimo-fase2", "rel": "FONTE", "para": "src.07.65", "pagina": 25}
+{"de": "tri.axis", "rel": "FONTE", "para": "src.07.65", "pagina": 25}
+{"de": "tri.espn-aspen", "rel": "FONTE", "para": "src.07.65", "pagina": 29}
+{"de": "tri.papmet", "rel": "FONTE", "para": "src.07.65", "pagina": 29}
+{"de": "tri.keynote-427", "rel": "FONTE", "para": "src.07.65", "pagina": 29}
+{"de": "tri.nivo-cabo-nccrcc", "rel": "FONTE", "para": "src.07.65", "pagina": 30}
+{"de": "tri.keynote-b61", "rel": "FONTE", "para": "src.07.65", "pagina": 30}
+{"de": "tri.bev-erlotinibe-hlrcc", "rel": "FONTE", "para": "src.07.65", "pagina": 34}
+{"de": "reg.rim.vigilancia-ativa-localizado", "rel": "FONTE", "para": "src.07.64", "pagina": 5}
+{"de": "cen.rim.localizado", "rel": "TRATA_COM", "para": "reg.rim.vigilancia-ativa-localizado", "linha": "manejo inicial", "intencao": "curativa"}
+{"de": "reg.rim.ablacao-sbrt", "rel": "FONTE", "para": "src.07.64", "pagina": 7}
+{"de": "cen.rim.localizado", "rel": "TRATA_COM", "para": "reg.rim.ablacao-sbrt", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.rim.nefrectomia", "rel": "FONTE", "para": "src.07.64", "pagina": 11}
+{"de": "cen.rim.localizado", "rel": "TRATA_COM", "para": "reg.rim.nefrectomia", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.rim.pembrolizumabe-adjuvante", "rel": "FONTE", "para": "src.07.64", "pagina": 19}
+{"de": "reg.rim.pembrolizumabe-adjuvante", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.rim.adjuvante", "rel": "TRATA_COM", "para": "reg.rim.pembrolizumabe-adjuvante", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "ccRCC de alto risco"}
+{"de": "reg.rim.pembrolizumabe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.keynote-564"}
+{"de": "tri.keynote-564", "rel": "TESTOU", "para": "reg.rim.pembrolizumabe-adjuvante"}
+{"de": "reg.rim.pembrolizumabe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.immotion010"}
+{"de": "tri.immotion010", "rel": "TESTOU", "para": "reg.rim.pembrolizumabe-adjuvante"}
+{"de": "reg.rim.pembrolizumabe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-914"}
+{"de": "tri.checkmate-914", "rel": "TESTOU", "para": "reg.rim.pembrolizumabe-adjuvante"}
+{"de": "reg.rim.pembrolizumabe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.prosper-rcc"}
+{"de": "tri.prosper-rcc", "rel": "TESTOU", "para": "reg.rim.pembrolizumabe-adjuvante"}
+{"de": "reg.rim.tki-adjuvante", "rel": "FONTE", "para": "src.07.64", "pagina": 12}
+{"de": "far.sunitinibe", "rel": "FONTE", "para": "src.07.64", "pagina": 12}
+{"de": "reg.rim.tki-adjuvante", "rel": "USA_FARMACO", "para": "far.sunitinibe"}
+{"de": "far.pazopanibe", "rel": "FONTE", "para": "src.07.64", "pagina": 12}
+{"de": "reg.rim.tki-adjuvante", "rel": "USA_FARMACO", "para": "far.pazopanibe"}
+{"de": "far.axitinibe", "rel": "FONTE", "para": "src.07.64", "pagina": 12}
+{"de": "reg.rim.tki-adjuvante", "rel": "USA_FARMACO", "para": "far.axitinibe"}
+{"de": "far.sorafenibe", "rel": "FONTE", "para": "src.07.64", "pagina": 12}
+{"de": "reg.rim.tki-adjuvante", "rel": "USA_FARMACO", "para": "far.sorafenibe"}
+{"de": "cen.rim.adjuvante", "rel": "TRATA_COM", "para": "reg.rim.tki-adjuvante", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.rim.tki-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.assure"}
+{"de": "tri.assure", "rel": "TESTOU", "para": "reg.rim.tki-adjuvante"}
+{"de": "reg.rim.tki-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.s-trac"}
+{"de": "tri.s-trac", "rel": "TESTOU", "para": "reg.rim.tki-adjuvante"}
+{"de": "reg.rim.tki-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.protect-pazopanibe"}
+{"de": "tri.protect-pazopanibe", "rel": "TESTOU", "para": "reg.rim.tki-adjuvante"}
+{"de": "reg.rim.tki-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.atlas"}
+{"de": "tri.atlas", "rel": "TESTOU", "para": "reg.rim.tki-adjuvante"}
+{"de": "reg.rim.tki-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.sorce"}
+{"de": "tri.sorce", "rel": "TESTOU", "para": "reg.rim.tki-adjuvante"}
+{"de": "reg.rim.belzutifan-vhl", "rel": "FONTE", "para": "src.07.64", "pagina": 17}
+{"de": "far.belzutifan", "rel": "FONTE", "para": "src.07.64", "pagina": 17}
+{"de": "reg.rim.belzutifan-vhl", "rel": "USA_FARMACO", "para": "far.belzutifan"}
+{"de": "cen.rim.localizado", "rel": "TRATA_COM", "para": "reg.rim.belzutifan-vhl", "linha": "localizado VHL", "intencao": "curativa", "condicao_biomarcador": "síndrome de VHL"}
+{"de": "reg.rim.belzutifan-vhl", "rel": "SUSTENTADO_POR", "para": "tri.litespark-004-vhl"}
+{"de": "tri.litespark-004-vhl", "rel": "TESTOU", "para": "reg.rim.belzutifan-vhl"}
+{"de": "reg.rim.vigilancia-ativa-metastatico", "rel": "FONTE", "para": "src.07.65", "pagina": 8}
+{"de": "cen.rim.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.rim.vigilancia-ativa-metastatico", "linha": "1ª linha (adiamento)", "intencao": "paliativa"}
+{"de": "reg.rim.vigilancia-ativa-metastatico", "rel": "SUSTENTADO_POR", "para": "tri.marcc"}
+{"de": "tri.marcc", "rel": "TESTOU", "para": "reg.rim.vigilancia-ativa-metastatico"}
+{"de": "reg.rim.nefrectomia-citorredutora", "rel": "FONTE", "para": "src.07.65", "pagina": 10}
+{"de": "cen.rim.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.rim.nefrectomia-citorredutora", "linha": "1ª linha (local)", "intencao": "paliativa"}
+{"de": "reg.rim.nefrectomia-citorredutora", "rel": "SUSTENTADO_POR", "para": "tri.carmena"}
+{"de": "tri.carmena", "rel": "TESTOU", "para": "reg.rim.nefrectomia-citorredutora"}
+{"de": "reg.rim.nefrectomia-citorredutora", "rel": "SUSTENTADO_POR", "para": "tri.surtime"}
+{"de": "tri.surtime", "rel": "TESTOU", "para": "reg.rim.nefrectomia-citorredutora"}
+{"de": "reg.rim.oligometastasectomia", "rel": "FONTE", "para": "src.07.65", "pagina": 11}
+{"de": "cen.rim.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.rim.oligometastasectomia", "linha": "oligometastático", "intencao": "paliativa"}
+{"de": "reg.rim.nivolumabe-ipilimumabe", "rel": "FONTE", "para": "src.07.65", "pagina": 16}
+{"de": "far.nivolumabe", "rel": "FONTE", "para": "src.07.65", "pagina": 16}
+{"de": "reg.rim.nivolumabe-ipilimumabe", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "far.ipilimumabe", "rel": "FONTE", "para": "src.07.65", "pagina": 16}
+{"de": "reg.rim.nivolumabe-ipilimumabe", "rel": "USA_FARMACO", "para": "far.ipilimumabe"}
+{"de": "cen.rim.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.rim.nivolumabe-ipilimumabe", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "IMDC intermediário/desfavorável"}
+{"de": "reg.rim.nivolumabe-ipilimumabe", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-214"}
+{"de": "tri.checkmate-214", "rel": "TESTOU", "para": "reg.rim.nivolumabe-ipilimumabe"}
+{"de": "reg.rim.pembrolizumabe-axitinibe", "rel": "FONTE", "para": "src.07.65", "pagina": 17}
+{"de": "reg.rim.pembrolizumabe-axitinibe", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.rim.pembrolizumabe-axitinibe", "rel": "USA_FARMACO", "para": "far.axitinibe"}
+{"de": "cen.rim.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.rim.pembrolizumabe-axitinibe", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.rim.pembrolizumabe-axitinibe", "rel": "SUSTENTADO_POR", "para": "tri.keynote-426"}
+{"de": "tri.keynote-426", "rel": "TESTOU", "para": "reg.rim.pembrolizumabe-axitinibe"}
+{"de": "reg.rim.nivolumabe-cabozantinibe", "rel": "FONTE", "para": "src.07.65", "pagina": 18}
+{"de": "reg.rim.nivolumabe-cabozantinibe", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "far.cabozantinibe", "rel": "FONTE", "para": "src.07.65", "pagina": 18}
+{"de": "reg.rim.nivolumabe-cabozantinibe", "rel": "USA_FARMACO", "para": "far.cabozantinibe"}
+{"de": "cen.rim.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.rim.nivolumabe-cabozantinibe", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.rim.nivolumabe-cabozantinibe", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-9er"}
+{"de": "tri.checkmate-9er", "rel": "TESTOU", "para": "reg.rim.nivolumabe-cabozantinibe"}
+{"de": "reg.rim.pembrolizumabe-lenvatinibe", "rel": "FONTE", "para": "src.07.65", "pagina": 19}
+{"de": "reg.rim.pembrolizumabe-lenvatinibe", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "far.lenvatinibe", "rel": "FONTE", "para": "src.07.65", "pagina": 19}
+{"de": "reg.rim.pembrolizumabe-lenvatinibe", "rel": "USA_FARMACO", "para": "far.lenvatinibe"}
+{"de": "cen.rim.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.rim.pembrolizumabe-lenvatinibe", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "cen.rim.nao-celulas-claras-metastatico", "rel": "TRATA_COM", "para": "reg.rim.pembrolizumabe-lenvatinibe", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.rim.pembrolizumabe-lenvatinibe", "rel": "SUSTENTADO_POR", "para": "tri.clear"}
+{"de": "tri.clear", "rel": "TESTOU", "para": "reg.rim.pembrolizumabe-lenvatinibe"}
+{"de": "reg.rim.pembrolizumabe-lenvatinibe", "rel": "SUSTENTADO_POR", "para": "tri.keynote-b61"}
+{"de": "tri.keynote-b61", "rel": "TESTOU", "para": "reg.rim.pembrolizumabe-lenvatinibe"}
+{"de": "reg.rim.avelumabe-axitinibe", "rel": "FONTE", "para": "src.07.65", "pagina": 13}
+{"de": "far.avelumabe", "rel": "FONTE", "para": "src.07.65", "pagina": 13}
+{"de": "reg.rim.avelumabe-axitinibe", "rel": "USA_FARMACO", "para": "far.avelumabe"}
+{"de": "reg.rim.avelumabe-axitinibe", "rel": "USA_FARMACO", "para": "far.axitinibe"}
+{"de": "cen.rim.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.rim.avelumabe-axitinibe", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.rim.avelumabe-axitinibe", "rel": "SUSTENTADO_POR", "para": "tri.javelin-renal-101"}
+{"de": "tri.javelin-renal-101", "rel": "TESTOU", "para": "reg.rim.avelumabe-axitinibe"}
+{"de": "reg.rim.atezolizumabe-bevacizumabe", "rel": "FONTE", "para": "src.07.65", "pagina": 13}
+{"de": "far.atezolizumabe", "rel": "FONTE", "para": "src.07.65", "pagina": 13}
+{"de": "reg.rim.atezolizumabe-bevacizumabe", "rel": "USA_FARMACO", "para": "far.atezolizumabe"}
+{"de": "far.bevacizumabe", "rel": "FONTE", "para": "src.07.65", "pagina": 13}
+{"de": "reg.rim.atezolizumabe-bevacizumabe", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "cen.rim.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.rim.atezolizumabe-bevacizumabe", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.rim.atezolizumabe-bevacizumabe", "rel": "SUSTENTADO_POR", "para": "tri.immotion151"}
+{"de": "tri.immotion151", "rel": "TESTOU", "para": "reg.rim.atezolizumabe-bevacizumabe"}
+{"de": "reg.rim.ipi-nivo-cabo", "rel": "FONTE", "para": "src.07.65", "pagina": 20}
+{"de": "reg.rim.ipi-nivo-cabo", "rel": "USA_FARMACO", "para": "far.ipilimumabe"}
+{"de": "reg.rim.ipi-nivo-cabo", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "reg.rim.ipi-nivo-cabo", "rel": "USA_FARMACO", "para": "far.cabozantinibe"}
+{"de": "cen.rim.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.rim.ipi-nivo-cabo", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.rim.ipi-nivo-cabo", "rel": "SUSTENTADO_POR", "para": "tri.cosmic-313"}
+{"de": "tri.cosmic-313", "rel": "TESTOU", "para": "reg.rim.ipi-nivo-cabo"}
+{"de": "reg.rim.sunitinibe", "rel": "FONTE", "para": "src.07.65", "pagina": 27}
+{"de": "reg.rim.sunitinibe", "rel": "USA_FARMACO", "para": "far.sunitinibe"}
+{"de": "cen.rim.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.rim.sunitinibe", "linha": "1ª linha (acesso limitado) / pós IO+IO", "intencao": "paliativa"}
+{"de": "cen.rim.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.rim.sunitinibe", "linha": "1ª linha (acesso limitado) / pós IO+IO", "intencao": "paliativa"}
+{"de": "reg.rim.cabozantinibe", "rel": "FONTE", "para": "src.07.65", "pagina": 23}
+{"de": "reg.rim.cabozantinibe", "rel": "USA_FARMACO", "para": "far.cabozantinibe"}
+{"de": "cen.rim.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.rim.cabozantinibe", "linha": "2ª linha", "intencao": "paliativa"}
+{"de": "cen.rim.nao-celulas-claras-metastatico", "rel": "TRATA_COM", "para": "reg.rim.cabozantinibe", "linha": "2ª linha", "intencao": "paliativa"}
+{"de": "reg.rim.cabozantinibe", "rel": "SUSTENTADO_POR", "para": "tri.meteor"}
+{"de": "tri.meteor", "rel": "TESTOU", "para": "reg.rim.cabozantinibe"}
+{"de": "reg.rim.cabozantinibe", "rel": "SUSTENTADO_POR", "para": "tri.papmet"}
+{"de": "tri.papmet", "rel": "TESTOU", "para": "reg.rim.cabozantinibe"}
+{"de": "reg.rim.nivolumabe-2l", "rel": "FONTE", "para": "src.07.65", "pagina": 22}
+{"de": "reg.rim.nivolumabe-2l", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "cen.rim.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.rim.nivolumabe-2l", "linha": "2ª linha (sem IO prévia)", "intencao": "paliativa"}
+{"de": "reg.rim.nivolumabe-2l", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-025"}
+{"de": "tri.checkmate-025", "rel": "TESTOU", "para": "reg.rim.nivolumabe-2l"}
+{"de": "reg.rim.belzutifan", "rel": "FONTE", "para": "src.07.65", "pagina": 27}
+{"de": "reg.rim.belzutifan", "rel": "USA_FARMACO", "para": "far.belzutifan"}
+{"de": "cen.rim.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.rim.belzutifan", "linha": "3ª linha e subsequentes", "intencao": "paliativa"}
+{"de": "reg.rim.belzutifan", "rel": "SUSTENTADO_POR", "para": "tri.litespark-005"}
+{"de": "tri.litespark-005", "rel": "TESTOU", "para": "reg.rim.belzutifan"}
+{"de": "reg.rim.belzutifan", "rel": "SUSTENTADO_POR", "para": "tri.litespark-011"}
+{"de": "tri.litespark-011", "rel": "TESTOU", "para": "reg.rim.belzutifan"}
+{"de": "reg.rim.everolimo-axitinibe-resgate", "rel": "FONTE", "para": "src.07.65", "pagina": 25}
+{"de": "far.everolimo", "rel": "FONTE", "para": "src.07.65", "pagina": 25}
+{"de": "reg.rim.everolimo-axitinibe-resgate", "rel": "USA_FARMACO", "para": "far.everolimo"}
+{"de": "reg.rim.everolimo-axitinibe-resgate", "rel": "USA_FARMACO", "para": "far.axitinibe"}
+{"de": "reg.rim.everolimo-axitinibe-resgate", "rel": "USA_FARMACO", "para": "far.lenvatinibe"}
+{"de": "cen.rim.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.rim.everolimo-axitinibe-resgate", "linha": "linhas posteriores", "intencao": "paliativa"}
+{"de": "reg.rim.everolimo-axitinibe-resgate", "rel": "SUSTENTADO_POR", "para": "tri.record-1"}
+{"de": "tri.record-1", "rel": "TESTOU", "para": "reg.rim.everolimo-axitinibe-resgate"}
+{"de": "reg.rim.everolimo-axitinibe-resgate", "rel": "SUSTENTADO_POR", "para": "tri.lenvatinibe-everolimo-fase2"}
+{"de": "tri.lenvatinibe-everolimo-fase2", "rel": "TESTOU", "para": "reg.rim.everolimo-axitinibe-resgate"}
+{"de": "reg.rim.everolimo-axitinibe-resgate", "rel": "SUSTENTADO_POR", "para": "tri.axis"}
+{"de": "tri.axis", "rel": "TESTOU", "para": "reg.rim.everolimo-axitinibe-resgate"}
+{"de": "reg.rim.everolimo-sunitinibe-ncc", "rel": "FONTE", "para": "src.07.65", "pagina": 29}
+{"de": "reg.rim.everolimo-sunitinibe-ncc", "rel": "USA_FARMACO", "para": "far.sunitinibe"}
+{"de": "reg.rim.everolimo-sunitinibe-ncc", "rel": "USA_FARMACO", "para": "far.everolimo"}
+{"de": "cen.rim.nao-celulas-claras-metastatico", "rel": "TRATA_COM", "para": "reg.rim.everolimo-sunitinibe-ncc", "linha": "1ª linha nccRCC", "intencao": "paliativa"}
+{"de": "reg.rim.everolimo-sunitinibe-ncc", "rel": "SUSTENTADO_POR", "para": "tri.espn-aspen"}
+{"de": "tri.espn-aspen", "rel": "TESTOU", "para": "reg.rim.everolimo-sunitinibe-ncc"}
+{"de": "reg.rim.io-nccrcc", "rel": "FONTE", "para": "src.07.65", "pagina": 30}
+{"de": "reg.rim.io-nccrcc", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.rim.io-nccrcc", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "reg.rim.io-nccrcc", "rel": "USA_FARMACO", "para": "far.cabozantinibe"}
+{"de": "cen.rim.nao-celulas-claras-metastatico", "rel": "TRATA_COM", "para": "reg.rim.io-nccrcc", "linha": "1ª linha nccRCC", "intencao": "paliativa"}
+{"de": "reg.rim.io-nccrcc", "rel": "SUSTENTADO_POR", "para": "tri.keynote-427"}
+{"de": "tri.keynote-427", "rel": "TESTOU", "para": "reg.rim.io-nccrcc"}
+{"de": "reg.rim.io-nccrcc", "rel": "SUSTENTADO_POR", "para": "tri.nivo-cabo-nccrcc"}
+{"de": "tri.nivo-cabo-nccrcc", "rel": "TESTOU", "para": "reg.rim.io-nccrcc"}
+{"de": "reg.rim.bevacizumabe-erlotinibe-hlrcc", "rel": "FONTE", "para": "src.07.65", "pagina": 32}
+{"de": "reg.rim.bevacizumabe-erlotinibe-hlrcc", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "far.erlotinibe", "rel": "FONTE", "para": "src.07.65", "pagina": 32}
+{"de": "reg.rim.bevacizumabe-erlotinibe-hlrcc", "rel": "USA_FARMACO", "para": "far.erlotinibe"}
+{"de": "cen.rim.nao-celulas-claras-metastatico", "rel": "TRATA_COM", "para": "reg.rim.bevacizumabe-erlotinibe-hlrcc", "linha": "nccRCC papilífero/HLRCC", "intencao": "paliativa", "condicao_biomarcador": "HLRCC (FH)"}
+{"de": "reg.rim.bevacizumabe-erlotinibe-hlrcc", "rel": "SUSTENTADO_POR", "para": "tri.bev-erlotinibe-hlrcc"}
+{"de": "tri.bev-erlotinibe-hlrcc", "rel": "TESTOU", "para": "reg.rim.bevacizumabe-erlotinibe-hlrcc"}
+{"de": "tum.bexiga", "rel": "FONTE", "para": "src.07.66", "pagina": 4}
+{"de": "cen.bexiga.nmibc", "rel": "FONTE", "para": "src.07.66", "pagina": 18}
+{"de": "tum.bexiga", "rel": "TEM_CENARIO", "para": "cen.bexiga.nmibc"}
+{"de": "cen.bexiga.nmibc-bcg-nao-responsivo", "rel": "FONTE", "para": "src.07.66", "pagina": 21}
+{"de": "tum.bexiga", "rel": "TEM_CENARIO", "para": "cen.bexiga.nmibc-bcg-nao-responsivo"}
+{"de": "cen.bexiga.mibc-perioperatorio", "rel": "FONTE", "para": "src.07.67", "pagina": 14}
+{"de": "tum.bexiga", "rel": "TEM_CENARIO", "para": "cen.bexiga.mibc-perioperatorio"}
+{"de": "cen.bexiga.trato-urinario-alto-adjuvante", "rel": "FONTE", "para": "src.07.67", "pagina": 17}
+{"de": "tum.bexiga", "rel": "TEM_CENARIO", "para": "cen.bexiga.trato-urinario-alto-adjuvante"}
+{"de": "cen.bexiga.metastatico-1a-linha", "rel": "FONTE", "para": "src.07.68", "pagina": 14}
+{"de": "tum.bexiga", "rel": "TEM_CENARIO", "para": "cen.bexiga.metastatico-1a-linha"}
+{"de": "cen.bexiga.2a-linha-posterior", "rel": "FONTE", "para": "src.07.68", "pagina": 14}
+{"de": "tum.bexiga", "rel": "TEM_CENARIO", "para": "cen.bexiga.2a-linha-posterior"}
+{"de": "dx.bexiga.cistoscopia-rtu", "rel": "FONTE", "para": "src.07.66", "pagina": 11}
+{"de": "tum.bexiga", "rel": "DIAGNOSTICA_POR", "para": "dx.bexiga.cistoscopia-rtu"}
+{"de": "dx.bexiga.estadiamento-sistemico", "rel": "FONTE", "para": "src.07.66", "pagina": 11}
+{"de": "tum.bexiga", "rel": "DIAGNOSTICA_POR", "para": "dx.bexiga.estadiamento-sistemico"}
+{"de": "est.bexiga.tnm-ajcc-n", "rel": "FONTE", "para": "src.07.66", "pagina": 10}
+{"de": "tum.bexiga", "rel": "ESTADIA_POR", "para": "est.bexiga.tnm-ajcc-n"}
+{"de": "est.bexiga.risco-nmibc", "rel": "FONTE", "para": "src.07.66", "pagina": 18}
+{"de": "tum.bexiga", "rel": "ESTADIA_POR", "para": "est.bexiga.risco-nmibc"}
+{"de": "est.bexiga.criterios-galsky", "rel": "FONTE", "para": "src.07.67", "pagina": 5}
+{"de": "tum.bexiga", "rel": "ESTADIA_POR", "para": "est.bexiga.criterios-galsky"}
+{"de": "bio.fgfr2-3", "rel": "FONTE", "para": "src.07.68", "pagina": 7}
+{"de": "cen.bexiga.2a-linha-posterior", "rel": "EXIGE_BIOMARCADOR", "para": "bio.fgfr2-3", "para_que": "erdafitinibe"}
+{"de": "bio.her2", "rel": "FONTE", "para": "src.07.68", "pagina": 7}
+{"de": "cen.bexiga.2a-linha-posterior", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "trastuzumabe deruxtecana"}
+{"de": "bio.pd-l1", "rel": "FONTE", "para": "src.07.68", "pagina": 13}
+{"de": "cen.bexiga.metastatico-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pd-l1", "para_que": "IO isolada em 1ª linha"}
+{"de": "cen.bexiga.2a-linha-posterior", "rel": "EXIGE_BIOMARCADOR", "para": "bio.msi-dmmr", "para_que": "pembrolizumabe tumor-agnóstico e rastreio de Lynch"}
+{"de": "cen.bexiga.trato-urinario-alto-adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.msi-dmmr", "para_que": "pembrolizumabe tumor-agnóstico e rastreio de Lynch"}
+{"de": "bio.ercc2", "rel": "FONTE", "para": "src.07.68", "pagina": 5}
+{"de": "cen.bexiga.mibc-perioperatorio", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ercc2", "para_que": "preditor de resposta à cisplatina"}
+{"de": "tri.keynote-057", "rel": "FONTE", "para": "src.07.66", "pagina": 21}
+{"de": "tri.nadofaragene-fase3", "rel": "FONTE", "para": "src.07.66", "pagina": 22}
+{"de": "tri.quilt-3032", "rel": "FONTE", "para": "src.07.66", "pagina": 22}
+{"de": "tri.sunrise-1", "rel": "FONTE", "para": "src.07.66", "pagina": 22}
+{"de": "tri.niagara", "rel": "FONTE", "para": "src.07.67", "pagina": 8}
+{"de": "tri.vesper", "rel": "FONTE", "para": "src.07.67", "pagina": 10}
+{"de": "tri.checkmate-274", "rel": "FONTE", "para": "src.07.67", "pagina": 12}
+{"de": "tri.ambassador", "rel": "FONTE", "para": "src.07.67", "pagina": 13}
+{"de": "tri.pout", "rel": "FONTE", "para": "src.07.67", "pagina": 18}
+{"de": "tri.javelin-bladder-100", "rel": "FONTE", "para": "src.07.68", "pagina": 9}
+{"de": "tri.ev-302", "rel": "FONTE", "para": "src.07.68", "pagina": 9}
+{"de": "tri.checkmate-901", "rel": "FONTE", "para": "src.07.68", "pagina": 12}
+{"de": "tri.keynote-361-imvigor130", "rel": "FONTE", "para": "src.07.68", "pagina": 12}
+{"de": "tri.keynote-052", "rel": "FONTE", "para": "src.07.68", "pagina": 13}
+{"de": "tri.imvigor210", "rel": "FONTE", "para": "src.07.68", "pagina": 13}
+{"de": "tri.keynote-045", "rel": "FONTE", "para": "src.07.68", "pagina": 16}
+{"de": "tri.ev-301", "rel": "FONTE", "para": "src.07.68", "pagina": 17}
+{"de": "tri.thor", "rel": "FONTE", "para": "src.07.68", "pagina": 18}
+{"de": "tri.destiny-pantumor02-bexiga", "rel": "FONTE", "para": "src.07.68", "pagina": 20}
+{"de": "tri.trophy-u-01", "rel": "FONTE", "para": "src.07.68", "pagina": 14}
+{"de": "reg.bexiga.qt-intravesical-dose-unica", "rel": "FONTE", "para": "src.07.66", "pagina": 18}
+{"de": "far.gencitabina", "rel": "FONTE", "para": "src.07.66", "pagina": 18}
+{"de": "reg.bexiga.qt-intravesical-dose-unica", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "far.mitomicina", "rel": "FONTE", "para": "src.07.66", "pagina": 18}
+{"de": "reg.bexiga.qt-intravesical-dose-unica", "rel": "USA_FARMACO", "para": "far.mitomicina"}
+{"de": "cen.bexiga.nmibc", "rel": "TRATA_COM", "para": "reg.bexiga.qt-intravesical-dose-unica", "linha": "pós-RTU", "intencao": "curativa"}
+{"de": "reg.bexiga.bcg-intravesical", "rel": "FONTE", "para": "src.07.66", "pagina": 18}
+{"de": "far.bcg", "rel": "FONTE", "para": "src.07.66", "pagina": 18}
+{"de": "reg.bexiga.bcg-intravesical", "rel": "USA_FARMACO", "para": "far.bcg"}
+{"de": "cen.bexiga.nmibc", "rel": "TRATA_COM", "para": "reg.bexiga.bcg-intravesical", "linha": "pós-RTU", "intencao": "curativa"}
+{"de": "reg.bexiga.cistectomia-radical", "rel": "FONTE", "para": "src.07.66", "pagina": 21}
+{"de": "cen.bexiga.nmibc", "rel": "TRATA_COM", "para": "reg.bexiga.cistectomia-radical", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "cen.bexiga.nmibc-bcg-nao-responsivo", "rel": "TRATA_COM", "para": "reg.bexiga.cistectomia-radical", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "cen.bexiga.mibc-perioperatorio", "rel": "TRATA_COM", "para": "reg.bexiga.cistectomia-radical", "linha": "tratamento local", "intencao": "curativa"}
+{"de": "reg.bexiga.pembrolizumabe-bcg-nr", "rel": "FONTE", "para": "src.07.66", "pagina": 22}
+{"de": "reg.bexiga.pembrolizumabe-bcg-nr", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.bexiga.nmibc-bcg-nao-responsivo", "rel": "TRATA_COM", "para": "reg.bexiga.pembrolizumabe-bcg-nr", "linha": "BCG não responsivo", "intencao": "curativa"}
+{"de": "reg.bexiga.pembrolizumabe-bcg-nr", "rel": "SUSTENTADO_POR", "para": "tri.keynote-057"}
+{"de": "tri.keynote-057", "rel": "TESTOU", "para": "reg.bexiga.pembrolizumabe-bcg-nr"}
+{"de": "reg.bexiga.nadofaragene", "rel": "FONTE", "para": "src.07.66", "pagina": 22}
+{"de": "far.nadofaragene-firadenovec", "rel": "FONTE", "para": "src.07.66", "pagina": 22}
+{"de": "reg.bexiga.nadofaragene", "rel": "USA_FARMACO", "para": "far.nadofaragene-firadenovec"}
+{"de": "cen.bexiga.nmibc-bcg-nao-responsivo", "rel": "TRATA_COM", "para": "reg.bexiga.nadofaragene", "linha": "BCG não responsivo", "intencao": "curativa"}
+{"de": "reg.bexiga.nadofaragene", "rel": "SUSTENTADO_POR", "para": "tri.nadofaragene-fase3"}
+{"de": "tri.nadofaragene-fase3", "rel": "TESTOU", "para": "reg.bexiga.nadofaragene"}
+{"de": "reg.bexiga.n803-bcg", "rel": "FONTE", "para": "src.07.66", "pagina": 22}
+{"de": "far.nogapendekin-alfa", "rel": "FONTE", "para": "src.07.66", "pagina": 22}
+{"de": "reg.bexiga.n803-bcg", "rel": "USA_FARMACO", "para": "far.nogapendekin-alfa"}
+{"de": "reg.bexiga.n803-bcg", "rel": "USA_FARMACO", "para": "far.bcg"}
+{"de": "cen.bexiga.nmibc-bcg-nao-responsivo", "rel": "TRATA_COM", "para": "reg.bexiga.n803-bcg", "linha": "BCG não responsivo", "intencao": "curativa"}
+{"de": "reg.bexiga.n803-bcg", "rel": "SUSTENTADO_POR", "para": "tri.quilt-3032"}
+{"de": "tri.quilt-3032", "rel": "TESTOU", "para": "reg.bexiga.n803-bcg"}
+{"de": "reg.bexiga.tar-200", "rel": "FONTE", "para": "src.07.66", "pagina": 22}
+{"de": "reg.bexiga.tar-200", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "cen.bexiga.nmibc-bcg-nao-responsivo", "rel": "TRATA_COM", "para": "reg.bexiga.tar-200", "linha": "BCG não responsivo", "intencao": "curativa"}
+{"de": "reg.bexiga.tar-200", "rel": "SUSTENTADO_POR", "para": "tri.sunrise-1"}
+{"de": "tri.sunrise-1", "rel": "TESTOU", "para": "reg.bexiga.tar-200"}
+{"de": "reg.bexiga.cis-gem-durvalumabe", "rel": "FONTE", "para": "src.07.67", "pagina": 7}
+{"de": "reg.bexiga.cis-gem-durvalumabe", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.bexiga.cis-gem-durvalumabe", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "far.durvalumabe", "rel": "FONTE", "para": "src.07.67", "pagina": 7}
+{"de": "reg.bexiga.cis-gem-durvalumabe", "rel": "USA_FARMACO", "para": "far.durvalumabe"}
+{"de": "cen.bexiga.mibc-perioperatorio", "rel": "TRATA_COM", "para": "reg.bexiga.cis-gem-durvalumabe", "linha": "perioperatório", "intencao": "curativa"}
+{"de": "reg.bexiga.cis-gem-durvalumabe", "rel": "SUSTENTADO_POR", "para": "tri.niagara"}
+{"de": "tri.niagara", "rel": "TESTOU", "para": "reg.bexiga.cis-gem-durvalumabe"}
+{"de": "reg.bexiga.ddmvac-neo", "rel": "FONTE", "para": "src.07.67", "pagina": 10}
+{"de": "far.metotrexato", "rel": "FONTE", "para": "src.07.67", "pagina": 10}
+{"de": "reg.bexiga.ddmvac-neo", "rel": "USA_FARMACO", "para": "far.metotrexato"}
+{"de": "far.vimblastina", "rel": "FONTE", "para": "src.07.67", "pagina": 10}
+{"de": "reg.bexiga.ddmvac-neo", "rel": "USA_FARMACO", "para": "far.vimblastina"}
+{"de": "far.doxorrubicina", "rel": "FONTE", "para": "src.07.67", "pagina": 10}
+{"de": "reg.bexiga.ddmvac-neo", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.bexiga.ddmvac-neo", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.bexiga.mibc-perioperatorio", "rel": "TRATA_COM", "para": "reg.bexiga.ddmvac-neo", "linha": "neoadjuvante", "intencao": "curativa"}
+{"de": "reg.bexiga.ddmvac-neo", "rel": "SUSTENTADO_POR", "para": "tri.vesper"}
+{"de": "tri.vesper", "rel": "TESTOU", "para": "reg.bexiga.ddmvac-neo"}
+{"de": "reg.bexiga.gem-cis-neo", "rel": "FONTE", "para": "src.07.67", "pagina": 10}
+{"de": "reg.bexiga.gem-cis-neo", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.bexiga.gem-cis-neo", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.bexiga.mibc-perioperatorio", "rel": "TRATA_COM", "para": "reg.bexiga.gem-cis-neo", "linha": "neoadjuvante", "intencao": "curativa"}
+{"de": "reg.bexiga.gem-cis-neo", "rel": "SUSTENTADO_POR", "para": "tri.vesper"}
+{"de": "tri.vesper", "rel": "TESTOU", "para": "reg.bexiga.gem-cis-neo"}
+{"de": "reg.bexiga.nivolumabe-adjuvante", "rel": "FONTE", "para": "src.07.67", "pagina": 12}
+{"de": "reg.bexiga.nivolumabe-adjuvante", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "cen.bexiga.mibc-perioperatorio", "rel": "TRATA_COM", "para": "reg.bexiga.nivolumabe-adjuvante", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.bexiga.nivolumabe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-274"}
+{"de": "tri.checkmate-274", "rel": "TESTOU", "para": "reg.bexiga.nivolumabe-adjuvante"}
+{"de": "reg.bexiga.pembrolizumabe-adjuvante", "rel": "FONTE", "para": "src.07.67", "pagina": 13}
+{"de": "reg.bexiga.pembrolizumabe-adjuvante", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.bexiga.mibc-perioperatorio", "rel": "TRATA_COM", "para": "reg.bexiga.pembrolizumabe-adjuvante", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.bexiga.pembrolizumabe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.ambassador"}
+{"de": "tri.ambassador", "rel": "TESTOU", "para": "reg.bexiga.pembrolizumabe-adjuvante"}
+{"de": "reg.bexiga.trimodal", "rel": "FONTE", "para": "src.07.67", "pagina": 16}
+{"de": "reg.bexiga.trimodal", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.bexiga.trimodal", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "far.paclitaxel", "rel": "FONTE", "para": "src.07.67", "pagina": 16}
+{"de": "reg.bexiga.trimodal", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "far.fluorouracil", "rel": "FONTE", "para": "src.07.67", "pagina": 16}
+{"de": "reg.bexiga.trimodal", "rel": "USA_FARMACO", "para": "far.fluorouracil"}
+{"de": "reg.bexiga.trimodal", "rel": "USA_FARMACO", "para": "far.mitomicina"}
+{"de": "cen.bexiga.mibc-perioperatorio", "rel": "TRATA_COM", "para": "reg.bexiga.trimodal", "linha": "alternativa à cistectomia", "intencao": "curativa"}
+{"de": "reg.bexiga.nefroureterectomia-qt-adjuvante", "rel": "FONTE", "para": "src.07.67", "pagina": 17}
+{"de": "reg.bexiga.nefroureterectomia-qt-adjuvante", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.bexiga.nefroureterectomia-qt-adjuvante", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.bexiga.nefroureterectomia-qt-adjuvante", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "cen.bexiga.trato-urinario-alto-adjuvante", "rel": "TRATA_COM", "para": "reg.bexiga.nefroureterectomia-qt-adjuvante", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.bexiga.nefroureterectomia-qt-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.pout"}
+{"de": "tri.pout", "rel": "TESTOU", "para": "reg.bexiga.nefroureterectomia-qt-adjuvante"}
+{"de": "reg.bexiga.ev-pembrolizumabe", "rel": "FONTE", "para": "src.07.68", "pagina": 11}
+{"de": "far.enfortumabe-vedotina", "rel": "FONTE", "para": "src.07.68", "pagina": 11}
+{"de": "reg.bexiga.ev-pembrolizumabe", "rel": "USA_FARMACO", "para": "far.enfortumabe-vedotina"}
+{"de": "reg.bexiga.ev-pembrolizumabe", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.bexiga.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.bexiga.ev-pembrolizumabe", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.bexiga.ev-pembrolizumabe", "rel": "SUSTENTADO_POR", "para": "tri.ev-302"}
+{"de": "tri.ev-302", "rel": "TESTOU", "para": "reg.bexiga.ev-pembrolizumabe"}
+{"de": "reg.bexiga.gem-cis-nivolumabe", "rel": "FONTE", "para": "src.07.68", "pagina": 12}
+{"de": "reg.bexiga.gem-cis-nivolumabe", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.bexiga.gem-cis-nivolumabe", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.bexiga.gem-cis-nivolumabe", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "cen.bexiga.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.bexiga.gem-cis-nivolumabe", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "cisplatina-elegível"}
+{"de": "reg.bexiga.gem-cis-nivolumabe", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-901"}
+{"de": "tri.checkmate-901", "rel": "TESTOU", "para": "reg.bexiga.gem-cis-nivolumabe"}
+{"de": "reg.bexiga.gem-cis-nivolumabe", "rel": "SUSTENTADO_POR", "para": "tri.keynote-361-imvigor130"}
+{"de": "tri.keynote-361-imvigor130", "rel": "TESTOU", "para": "reg.bexiga.gem-cis-nivolumabe"}
+{"de": "reg.bexiga.platina-avelumabe-manutencao", "rel": "FONTE", "para": "src.07.68", "pagina": 10}
+{"de": "reg.bexiga.platina-avelumabe-manutencao", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.bexiga.platina-avelumabe-manutencao", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.bexiga.platina-avelumabe-manutencao", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.bexiga.platina-avelumabe-manutencao", "rel": "USA_FARMACO", "para": "far.avelumabe"}
+{"de": "cen.bexiga.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.bexiga.platina-avelumabe-manutencao", "linha": "1ª linha + manutenção", "intencao": "paliativa"}
+{"de": "reg.bexiga.platina-avelumabe-manutencao", "rel": "SUSTENTADO_POR", "para": "tri.javelin-bladder-100"}
+{"de": "tri.javelin-bladder-100", "rel": "TESTOU", "para": "reg.bexiga.platina-avelumabe-manutencao"}
+{"de": "reg.bexiga.io-platina-inelegivel", "rel": "FONTE", "para": "src.07.68", "pagina": 13}
+{"de": "reg.bexiga.io-platina-inelegivel", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.bexiga.io-platina-inelegivel", "rel": "USA_FARMACO", "para": "far.atezolizumabe"}
+{"de": "cen.bexiga.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.bexiga.io-platina-inelegivel", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "PD-L1+ (CPS ≥10 / IC ≥5%)"}
+{"de": "reg.bexiga.io-platina-inelegivel", "rel": "SUSTENTADO_POR", "para": "tri.keynote-052"}
+{"de": "tri.keynote-052", "rel": "TESTOU", "para": "reg.bexiga.io-platina-inelegivel"}
+{"de": "reg.bexiga.io-platina-inelegivel", "rel": "SUSTENTADO_POR", "para": "tri.imvigor210"}
+{"de": "tri.imvigor210", "rel": "TESTOU", "para": "reg.bexiga.io-platina-inelegivel"}
+{"de": "reg.bexiga.pembrolizumabe-2l", "rel": "FONTE", "para": "src.07.68", "pagina": 16}
+{"de": "reg.bexiga.pembrolizumabe-2l", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.bexiga.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.bexiga.pembrolizumabe-2l", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "sem IO prévia"}
+{"de": "reg.bexiga.pembrolizumabe-2l", "rel": "SUSTENTADO_POR", "para": "tri.keynote-045"}
+{"de": "tri.keynote-045", "rel": "TESTOU", "para": "reg.bexiga.pembrolizumabe-2l"}
+{"de": "reg.bexiga.ev-2l", "rel": "FONTE", "para": "src.07.68", "pagina": 17}
+{"de": "reg.bexiga.ev-2l", "rel": "USA_FARMACO", "para": "far.enfortumabe-vedotina"}
+{"de": "cen.bexiga.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.bexiga.ev-2l", "linha": "2ª+ linha", "intencao": "paliativa"}
+{"de": "reg.bexiga.ev-2l", "rel": "SUSTENTADO_POR", "para": "tri.ev-301"}
+{"de": "tri.ev-301", "rel": "TESTOU", "para": "reg.bexiga.ev-2l"}
+{"de": "reg.bexiga.erdafitinibe", "rel": "FONTE", "para": "src.07.68", "pagina": 18}
+{"de": "far.erdafitinibe", "rel": "FONTE", "para": "src.07.68", "pagina": 18}
+{"de": "reg.bexiga.erdafitinibe", "rel": "USA_FARMACO", "para": "far.erdafitinibe"}
+{"de": "cen.bexiga.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.bexiga.erdafitinibe", "linha": "2ª+ linha", "intencao": "paliativa", "condicao_biomarcador": "FGFR2/3 alterado"}
+{"de": "reg.bexiga.erdafitinibe", "rel": "SUSTENTADO_POR", "para": "tri.thor"}
+{"de": "tri.thor", "rel": "TESTOU", "para": "reg.bexiga.erdafitinibe"}
+{"de": "reg.bexiga.tdxd-her2", "rel": "FONTE", "para": "src.07.68", "pagina": 20}
+{"de": "far.trastuzumabe-deruxtecana", "rel": "FONTE", "para": "src.07.68", "pagina": 20}
+{"de": "reg.bexiga.tdxd-her2", "rel": "USA_FARMACO", "para": "far.trastuzumabe-deruxtecana"}
+{"de": "cen.bexiga.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.bexiga.tdxd-her2", "linha": "2ª+ linha", "intencao": "paliativa", "condicao_biomarcador": "HER2 3+ IHQ"}
+{"de": "reg.bexiga.tdxd-her2", "rel": "SUSTENTADO_POR", "para": "tri.destiny-pantumor02-bexiga"}
+{"de": "tri.destiny-pantumor02-bexiga", "rel": "TESTOU", "para": "reg.bexiga.tdxd-her2"}
+{"de": "reg.bexiga.sacituzumabe", "rel": "FONTE", "para": "src.07.68", "pagina": 14}
+{"de": "far.sacituzumabe-govitecana", "rel": "FONTE", "para": "src.07.68", "pagina": 14}
+{"de": "reg.bexiga.sacituzumabe", "rel": "USA_FARMACO", "para": "far.sacituzumabe-govitecana"}
+{"de": "cen.bexiga.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.bexiga.sacituzumabe", "linha": "3ª+ linha", "intencao": "paliativa"}
+{"de": "reg.bexiga.sacituzumabe", "rel": "SUSTENTADO_POR", "para": "tri.trophy-u-01"}
+{"de": "tri.trophy-u-01", "rel": "TESTOU", "para": "reg.bexiga.sacituzumabe"}
+{"de": "reg.bexiga.qt-resgate", "rel": "FONTE", "para": "src.07.68", "pagina": 23}
+{"de": "reg.bexiga.qt-resgate", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.bexiga.qt-resgate", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "far.ifosfamida", "rel": "FONTE", "para": "src.07.68", "pagina": 23}
+{"de": "reg.bexiga.qt-resgate", "rel": "USA_FARMACO", "para": "far.ifosfamida"}
+{"de": "cen.bexiga.2a-linha-posterior", "rel": "TRATA_COM", "para": "reg.bexiga.qt-resgate", "linha": "linhas posteriores", "intencao": "paliativa"}
+{"de": "tum.testiculo", "rel": "FONTE", "para": "src.07.69", "pagina": 4}
+{"de": "cen.testiculo.seminoma-estadio-i", "rel": "FONTE", "para": "src.07.70", "pagina": 7}
+{"de": "tum.testiculo", "rel": "TEM_CENARIO", "para": "cen.testiculo.seminoma-estadio-i"}
+{"de": "cen.testiculo.nao-seminoma-estadio-i", "rel": "FONTE", "para": "src.07.70", "pagina": 9}
+{"de": "tum.testiculo", "rel": "TEM_CENARIO", "para": "cen.testiculo.nao-seminoma-estadio-i"}
+{"de": "cen.testiculo.estadio-ii", "rel": "FONTE", "para": "src.07.70", "pagina": 13}
+{"de": "tum.testiculo", "rel": "TEM_CENARIO", "para": "cen.testiculo.estadio-ii"}
+{"de": "cen.testiculo.estadio-iii-avancado", "rel": "FONTE", "para": "src.07.70", "pagina": 16}
+{"de": "tum.testiculo", "rel": "TEM_CENARIO", "para": "cen.testiculo.estadio-iii-avancado"}
+{"de": "cen.testiculo.resgate", "rel": "FONTE", "para": "src.07.70", "pagina": 27}
+{"de": "tum.testiculo", "rel": "TEM_CENARIO", "para": "cen.testiculo.resgate"}
+{"de": "dx.testiculo.orquiectomia-inguinal", "rel": "FONTE", "para": "src.07.69", "pagina": 18}
+{"de": "tum.testiculo", "rel": "DIAGNOSTICA_POR", "para": "dx.testiculo.orquiectomia-inguinal"}
+{"de": "dx.testiculo.marcadores-imagem", "rel": "FONTE", "para": "src.07.69", "pagina": 16}
+{"de": "tum.testiculo", "rel": "DIAGNOSTICA_POR", "para": "dx.testiculo.marcadores-imagem"}
+{"de": "dx.testiculo.patologia-ihq", "rel": "FONTE", "para": "src.07.69", "pagina": 8}
+{"de": "tum.testiculo", "rel": "DIAGNOSTICA_POR", "para": "dx.testiculo.patologia-ihq"}
+{"de": "est.testiculo.tnms", "rel": "FONTE", "para": "src.07.69", "pagina": 11}
+{"de": "tum.testiculo", "rel": "ESTADIA_POR", "para": "est.testiculo.tnms"}
+{"de": "est.testiculo.igcccg", "rel": "FONTE", "para": "src.07.69", "pagina": 15}
+{"de": "tum.testiculo", "rel": "ESTADIA_POR", "para": "est.testiculo.igcccg"}
+{"de": "tri.warde-2002", "rel": "FONTE", "para": "src.07.70", "pagina": 6}
+{"de": "tri.mortensen-2014", "rel": "FONTE", "para": "src.07.70", "pagina": 6}
+{"de": "tri.te19-oliver", "rel": "FONTE", "para": "src.07.70", "pagina": 7}
+{"de": "tri.swenoteca", "rel": "FONTE", "para": "src.07.70", "pagina": 9}
+{"de": "tri.horwich-1997", "rel": "FONTE", "para": "src.07.70", "pagina": 18}
+{"de": "tri.hinton-2003", "rel": "FONTE", "para": "src.07.70", "pagina": 19}
+{"de": "tri.getug-t93bp", "rel": "FONTE", "para": "src.07.70", "pagina": 20}
+{"de": "tri.ggccg-pet-seminoma", "rel": "FONTE", "para": "src.07.70", "pagina": 23}
+{"de": "tri.hellesnes-2021", "rel": "FONTE", "para": "src.07.70", "pagina": 30}
+{"de": "reg.testiculo.vigilancia-seminoma", "rel": "FONTE", "para": "src.07.70", "pagina": 7}
+{"de": "cen.testiculo.seminoma-estadio-i", "rel": "TRATA_COM", "para": "reg.testiculo.vigilancia-seminoma", "linha": "pós-orquiectomia", "intencao": "curativa"}
+{"de": "reg.testiculo.vigilancia-seminoma", "rel": "SUSTENTADO_POR", "para": "tri.warde-2002"}
+{"de": "tri.warde-2002", "rel": "TESTOU", "para": "reg.testiculo.vigilancia-seminoma"}
+{"de": "reg.testiculo.vigilancia-seminoma", "rel": "SUSTENTADO_POR", "para": "tri.mortensen-2014"}
+{"de": "tri.mortensen-2014", "rel": "TESTOU", "para": "reg.testiculo.vigilancia-seminoma"}
+{"de": "reg.testiculo.carboplatina-auc7", "rel": "FONTE", "para": "src.07.70", "pagina": 7}
+{"de": "reg.testiculo.carboplatina-auc7", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "cen.testiculo.seminoma-estadio-i", "rel": "TRATA_COM", "para": "reg.testiculo.carboplatina-auc7", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.testiculo.carboplatina-auc7", "rel": "SUSTENTADO_POR", "para": "tri.te19-oliver"}
+{"de": "tri.te19-oliver", "rel": "TESTOU", "para": "reg.testiculo.carboplatina-auc7"}
+{"de": "reg.testiculo.rt-paraaortica", "rel": "FONTE", "para": "src.07.70", "pagina": 7}
+{"de": "cen.testiculo.seminoma-estadio-i", "rel": "TRATA_COM", "para": "reg.testiculo.rt-paraaortica", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "cen.testiculo.estadio-ii", "rel": "TRATA_COM", "para": "reg.testiculo.rt-paraaortica", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.testiculo.rt-paraaortica", "rel": "SUSTENTADO_POR", "para": "tri.te19-oliver"}
+{"de": "tri.te19-oliver", "rel": "TESTOU", "para": "reg.testiculo.rt-paraaortica"}
+{"de": "reg.testiculo.vigilancia-nsgct", "rel": "FONTE", "para": "src.07.70", "pagina": 9}
+{"de": "cen.testiculo.nao-seminoma-estadio-i", "rel": "TRATA_COM", "para": "reg.testiculo.vigilancia-nsgct", "linha": "pós-orquiectomia", "intencao": "curativa"}
+{"de": "reg.testiculo.bep-x1-adjuvante", "rel": "FONTE", "para": "src.07.70", "pagina": 9}
+{"de": "far.bleomicina", "rel": "FONTE", "para": "src.07.70", "pagina": 9}
+{"de": "reg.testiculo.bep-x1-adjuvante", "rel": "USA_FARMACO", "para": "far.bleomicina"}
+{"de": "reg.testiculo.bep-x1-adjuvante", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.testiculo.bep-x1-adjuvante", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.testiculo.nao-seminoma-estadio-i", "rel": "TRATA_COM", "para": "reg.testiculo.bep-x1-adjuvante", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.testiculo.bep-x1-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.swenoteca"}
+{"de": "tri.swenoteca", "rel": "TESTOU", "para": "reg.testiculo.bep-x1-adjuvante"}
+{"de": "reg.testiculo.rplnd", "rel": "FONTE", "para": "src.07.70", "pagina": 9}
+{"de": "cen.testiculo.nao-seminoma-estadio-i", "rel": "TRATA_COM", "para": "reg.testiculo.rplnd", "linha": "EC I/II", "intencao": "curativa"}
+{"de": "cen.testiculo.estadio-ii", "rel": "TRATA_COM", "para": "reg.testiculo.rplnd", "linha": "EC I/II", "intencao": "curativa"}
+{"de": "reg.testiculo.bep", "rel": "FONTE", "para": "src.07.70", "pagina": 22}
+{"de": "reg.testiculo.bep", "rel": "USA_FARMACO", "para": "far.bleomicina"}
+{"de": "reg.testiculo.bep", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.testiculo.bep", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.testiculo.estadio-ii", "rel": "TRATA_COM", "para": "reg.testiculo.bep", "linha": "1ª linha", "intencao": "curativa"}
+{"de": "cen.testiculo.estadio-iii-avancado", "rel": "TRATA_COM", "para": "reg.testiculo.bep", "linha": "1ª linha", "intencao": "curativa"}
+{"de": "reg.testiculo.bep", "rel": "SUSTENTADO_POR", "para": "tri.hinton-2003"}
+{"de": "tri.hinton-2003", "rel": "TESTOU", "para": "reg.testiculo.bep"}
+{"de": "reg.testiculo.bep", "rel": "SUSTENTADO_POR", "para": "tri.getug-t93bp"}
+{"de": "tri.getug-t93bp", "rel": "TESTOU", "para": "reg.testiculo.bep"}
+{"de": "reg.testiculo.bep", "rel": "SUSTENTADO_POR", "para": "tri.horwich-1997"}
+{"de": "tri.horwich-1997", "rel": "TESTOU", "para": "reg.testiculo.bep"}
+{"de": "reg.testiculo.ep", "rel": "FONTE", "para": "src.07.70", "pagina": 21}
+{"de": "reg.testiculo.ep", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.testiculo.ep", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.testiculo.estadio-ii", "rel": "TRATA_COM", "para": "reg.testiculo.ep", "linha": "1ª linha", "intencao": "curativa", "condicao_biomarcador": "bom risco ou bleomicina contraindicada"}
+{"de": "cen.testiculo.estadio-iii-avancado", "rel": "TRATA_COM", "para": "reg.testiculo.ep", "linha": "1ª linha", "intencao": "curativa", "condicao_biomarcador": "bom risco ou bleomicina contraindicada"}
+{"de": "reg.testiculo.ep", "rel": "SUSTENTADO_POR", "para": "tri.getug-t93bp"}
+{"de": "tri.getug-t93bp", "rel": "TESTOU", "para": "reg.testiculo.ep"}
+{"de": "reg.testiculo.vip", "rel": "FONTE", "para": "src.07.70", "pagina": 22}
+{"de": "reg.testiculo.vip", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.testiculo.vip", "rel": "USA_FARMACO", "para": "far.ifosfamida"}
+{"de": "reg.testiculo.vip", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "far.mesna", "rel": "FONTE", "para": "src.07.70", "pagina": 22}
+{"de": "reg.testiculo.vip", "rel": "USA_FARMACO", "para": "far.mesna"}
+{"de": "cen.testiculo.estadio-iii-avancado", "rel": "TRATA_COM", "para": "reg.testiculo.vip", "linha": "1ª linha", "intencao": "curativa", "condicao_biomarcador": "risco intermediário/ruim com bleomicina contraindicada"}
+{"de": "reg.testiculo.vip", "rel": "SUSTENTADO_POR", "para": "tri.hinton-2003"}
+{"de": "tri.hinton-2003", "rel": "TESTOU", "para": "reg.testiculo.vip"}
+{"de": "reg.testiculo.ressecao-massa-residual", "rel": "FONTE", "para": "src.07.70", "pagina": 23}
+{"de": "cen.testiculo.estadio-iii-avancado", "rel": "TRATA_COM", "para": "reg.testiculo.ressecao-massa-residual", "linha": "pós-QT", "intencao": "curativa"}
+{"de": "reg.testiculo.ressecao-massa-residual", "rel": "SUSTENTADO_POR", "para": "tri.ggccg-pet-seminoma"}
+{"de": "tri.ggccg-pet-seminoma", "rel": "TESTOU", "para": "reg.testiculo.ressecao-massa-residual"}
+{"de": "reg.testiculo.tip", "rel": "FONTE", "para": "src.07.70", "pagina": 22}
+{"de": "reg.testiculo.tip", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.testiculo.tip", "rel": "USA_FARMACO", "para": "far.ifosfamida"}
+{"de": "reg.testiculo.tip", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.testiculo.tip", "rel": "USA_FARMACO", "para": "far.mesna"}
+{"de": "cen.testiculo.resgate", "rel": "TRATA_COM", "para": "reg.testiculo.tip", "linha": "resgate", "intencao": "curativa"}
+{"de": "tum.penis", "rel": "FONTE", "para": "src.07.71", "pagina": 4}
+{"de": "cen.penis.localizado", "rel": "FONTE", "para": "src.07.71", "pagina": 14}
+{"de": "tum.penis", "rel": "TEM_CENARIO", "para": "cen.penis.localizado"}
+{"de": "cen.penis.localmente-avancado-n-positivo", "rel": "FONTE", "para": "src.07.71", "pagina": 15}
+{"de": "tum.penis", "rel": "TEM_CENARIO", "para": "cen.penis.localmente-avancado-n-positivo"}
+{"de": "cen.penis.avancado", "rel": "FONTE", "para": "src.07.71", "pagina": 16}
+{"de": "tum.penis", "rel": "TEM_CENARIO", "para": "cen.penis.avancado"}
+{"de": "dx.penis.biopsia-histologia", "rel": "FONTE", "para": "src.07.71", "pagina": 7}
+{"de": "tum.penis", "rel": "DIAGNOSTICA_POR", "para": "dx.penis.biopsia-histologia"}
+{"de": "dx.penis.avaliacao-linfonodal", "rel": "FONTE", "para": "src.07.71", "pagina": 21}
+{"de": "tum.penis", "rel": "DIAGNOSTICA_POR", "para": "dx.penis.avaliacao-linfonodal"}
+{"de": "est.penis.tnm-ajcc8", "rel": "FONTE", "para": "src.07.71", "pagina": 12}
+{"de": "tum.penis", "rel": "ESTADIA_POR", "para": "est.penis.tnm-ajcc8"}
+{"de": "bio.p16-hpv", "rel": "FONTE", "para": "src.07.71", "pagina": 7}
+{"de": "cen.penis.localizado", "rel": "EXIGE_BIOMARCADOR", "para": "bio.p16-hpv", "para_que": "classificação HPV-dependente vs independente (prognóstico)"}
+{"de": "tri.hercules", "rel": "FONTE", "para": "src.07.71", "pagina": 16}
+{"de": "tri.epic-a", "rel": "FONTE", "para": "src.07.71", "pagina": 16}
+{"de": "reg.penis.topico-pein", "rel": "FONTE", "para": "src.07.71", "pagina": 14}
+{"de": "reg.penis.topico-pein", "rel": "USA_FARMACO", "para": "far.fluorouracil"}
+{"de": "far.imiquimode", "rel": "FONTE", "para": "src.07.71", "pagina": 14}
+{"de": "reg.penis.topico-pein", "rel": "USA_FARMACO", "para": "far.imiquimode"}
+{"de": "cen.penis.localizado", "rel": "TRATA_COM", "para": "reg.penis.topico-pein", "linha": "Tis/Ta/T1a", "intencao": "curativa"}
+{"de": "reg.penis.penectomia", "rel": "FONTE", "para": "src.07.71", "pagina": 14}
+{"de": "cen.penis.localizado", "rel": "TRATA_COM", "para": "reg.penis.penectomia", "linha": "T1b-T4", "intencao": "curativa"}
+{"de": "reg.penis.linfadenectomia-bls", "rel": "FONTE", "para": "src.07.71", "pagina": 15}
+{"de": "cen.penis.localizado", "rel": "TRATA_COM", "para": "reg.penis.linfadenectomia-bls", "linha": "abordagem linfonodal", "intencao": "curativa"}
+{"de": "cen.penis.localmente-avancado-n-positivo", "rel": "TRATA_COM", "para": "reg.penis.linfadenectomia-bls", "linha": "abordagem linfonodal", "intencao": "curativa"}
+{"de": "reg.penis.tip-neoadjuvante", "rel": "FONTE", "para": "src.07.71", "pagina": 15}
+{"de": "reg.penis.tip-neoadjuvante", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.penis.tip-neoadjuvante", "rel": "USA_FARMACO", "para": "far.ifosfamida"}
+{"de": "reg.penis.tip-neoadjuvante", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.penis.localmente-avancado-n-positivo", "rel": "TRATA_COM", "para": "reg.penis.tip-neoadjuvante", "linha": "neoadjuvante / 1ª linha", "intencao": "curativa"}
+{"de": "cen.penis.avancado", "rel": "TRATA_COM", "para": "reg.penis.tip-neoadjuvante", "linha": "neoadjuvante / 1ª linha", "intencao": "curativa"}
+{"de": "reg.penis.tpf", "rel": "FONTE", "para": "src.07.71", "pagina": 15}
+{"de": "reg.penis.tpf", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.penis.tpf", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.penis.tpf", "rel": "USA_FARMACO", "para": "far.fluorouracil"}
+{"de": "cen.penis.localmente-avancado-n-positivo", "rel": "TRATA_COM", "para": "reg.penis.tpf", "linha": "neoadjuvante / 1ª linha", "intencao": "curativa"}
+{"de": "cen.penis.avancado", "rel": "TRATA_COM", "para": "reg.penis.tpf", "linha": "neoadjuvante / 1ª linha", "intencao": "curativa"}
+{"de": "reg.penis.cisplatina-5fu", "rel": "FONTE", "para": "src.07.71", "pagina": 16}
+{"de": "reg.penis.cisplatina-5fu", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.penis.cisplatina-5fu", "rel": "USA_FARMACO", "para": "far.fluorouracil"}
+{"de": "cen.penis.avancado", "rel": "TRATA_COM", "para": "reg.penis.cisplatina-5fu", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "ECOG 0-1, ClCr >50"}
+{"de": "reg.penis.carboplatina-paclitaxel", "rel": "FONTE", "para": "src.07.71", "pagina": 16}
+{"de": "reg.penis.carboplatina-paclitaxel", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.penis.carboplatina-paclitaxel", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.penis.avancado", "rel": "TRATA_COM", "para": "reg.penis.carboplatina-paclitaxel", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "ClCr <50 mL/min"}
+{"de": "reg.penis.qt-io-investigacional", "rel": "FONTE", "para": "src.07.71", "pagina": 16}
+{"de": "reg.penis.qt-io-investigacional", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "far.cemiplimabe", "rel": "FONTE", "para": "src.07.71", "pagina": 16}
+{"de": "reg.penis.qt-io-investigacional", "rel": "USA_FARMACO", "para": "far.cemiplimabe"}
+{"de": "cen.penis.avancado", "rel": "TRATA_COM", "para": "reg.penis.qt-io-investigacional", "linha": "estudo clínico", "intencao": "paliativa"}
+{"de": "reg.penis.qt-io-investigacional", "rel": "SUSTENTADO_POR", "para": "tri.hercules"}
+{"de": "tri.hercules", "rel": "TESTOU", "para": "reg.penis.qt-io-investigacional"}
+{"de": "reg.penis.qt-io-investigacional", "rel": "SUSTENTADO_POR", "para": "tri.epic-a"}
+{"de": "tri.epic-a", "rel": "TESTOU", "para": "reg.penis.qt-io-investigacional"}
+{"de": "reg.penis.qt-rt-adjuvante", "rel": "FONTE", "para": "src.07.71", "pagina": 15}
+{"de": "cen.penis.localmente-avancado-n-positivo", "rel": "TRATA_COM", "para": "reg.penis.qt-rt-adjuvante", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "tri.hellesnes-2021", "rel": "TESTOU", "para": "reg.testiculo.bep"}
+{"de": "tri.hellesnes-2021", "rel": "TESTOU", "para": "reg.testiculo.rt-paraaortica"}

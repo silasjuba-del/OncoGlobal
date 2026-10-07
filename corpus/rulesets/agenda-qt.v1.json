@@ -1,0 +1,28 @@
+{
+  "header": {
+    "id": "agenda-qt",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-07",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-W9-39 + D-W9-36 (docs/referencias/ui-modelos/PADROES-UI.md §3.2)",
+      "trecho": "Tratamento ≥ 5 h só inicia até 12h; máximo 5 inícios a cada 30 min. Grade editável: 13 poltronas, 08:00–18:00. Conflito é alerta. Otimizar dia é proibido.",
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-07"
+  },
+  "agenda": {
+    "decisao": "D-W9-39",
+    "bloqueiaSalvar": false,
+    "otimizarDiaProibido": true,
+    "igualAoLimitePassa": true,
+    "duracaoLongaMinutos": 300,
+    "inicioLongoAteMinutos": 720,
+    "janelaIniciosMinutos": 30,
+    "maxIniciosPorJanela": 5,
+    "poltronas": 13,
+    "gradeInicioMinutos": 480,
+    "gradeFimMinutos": 1080
+  }
+}

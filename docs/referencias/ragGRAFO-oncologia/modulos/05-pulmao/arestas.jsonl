@@ -1,0 +1,941 @@
+{"de": "tum.cpnpc", "rel": "FONTE", "para": "src.05.42", "pagina": 11}
+{"de": "tum.cppc", "rel": "FONTE", "para": "src.05.50", "pagina": 5}
+{"de": "tum.mesotelioma-pleural", "rel": "FONTE", "para": "src.05.51", "pagina": 7}
+{"de": "tum.timoma", "rel": "FONTE", "para": "src.05.52", "pagina": 7}
+{"de": "dx.cpnpc.ihq-histologia", "rel": "FONTE", "para": "src.05.42", "pagina": 11}
+{"de": "tum.cpnpc", "rel": "DIAGNOSTICA_POR", "para": "dx.cpnpc.ihq-histologia"}
+{"de": "dx.cpnpc.rastreamento-tcbd", "rel": "FONTE", "para": "src.05.42", "pagina": 21}
+{"de": "tum.cpnpc", "rel": "DIAGNOSTICA_POR", "para": "dx.cpnpc.rastreamento-tcbd"}
+{"de": "dx.cpnpc.metodos-biopsia", "rel": "FONTE", "para": "src.05.42", "pagina": 23}
+{"de": "tum.cpnpc", "rel": "DIAGNOSTICA_POR", "para": "dx.cpnpc.metodos-biopsia"}
+{"de": "dx.cpnpc.pet-ct", "rel": "FONTE", "para": "src.05.42", "pagina": 24}
+{"de": "tum.cpnpc", "rel": "DIAGNOSTICA_POR", "para": "dx.cpnpc.pet-ct"}
+{"de": "dx.cpnpc.rm-cranio", "rel": "FONTE", "para": "src.05.42", "pagina": 25}
+{"de": "tum.cpnpc", "rel": "DIAGNOSTICA_POR", "para": "dx.cpnpc.rm-cranio"}
+{"de": "dx.cpnpc.mediastino-invasivo", "rel": "FONTE", "para": "src.05.42", "pagina": 26}
+{"de": "tum.cpnpc", "rel": "DIAGNOSTICA_POR", "para": "dx.cpnpc.mediastino-invasivo"}
+{"de": "dx.cpnpc.pfp", "rel": "FONTE", "para": "src.05.42", "pagina": 25}
+{"de": "tum.cpnpc", "rel": "DIAGNOSTICA_POR", "para": "dx.cpnpc.pfp"}
+{"de": "dx.cpnpc.quadro-clinico", "rel": "FONTE", "para": "src.05.42", "pagina": 42}
+{"de": "tum.cpnpc", "rel": "DIAGNOSTICA_POR", "para": "dx.cpnpc.quadro-clinico"}
+{"de": "dx.cpnpc.biopsia-liquida", "rel": "FONTE", "para": "src.05.42", "pagina": 36}
+{"de": "tum.cpnpc", "rel": "DIAGNOSTICA_POR", "para": "dx.cpnpc.biopsia-liquida"}
+{"de": "est.cpnpc.ajcc9-t", "rel": "FONTE", "para": "src.05.42", "pagina": 28}
+{"de": "tum.cpnpc", "rel": "ESTADIA_POR", "para": "est.cpnpc.ajcc9-t"}
+{"de": "est.cpnpc.ajcc9-mudancas", "rel": "FONTE", "para": "src.05.42", "pagina": 31}
+{"de": "tum.cpnpc", "rel": "ESTADIA_POR", "para": "est.cpnpc.ajcc9-mudancas"}
+{"de": "est.cpnpc.sg-5a-estadio", "rel": "FONTE", "para": "src.05.42", "pagina": 44}
+{"de": "tum.cpnpc", "rel": "ESTADIA_POR", "para": "est.cpnpc.sg-5a-estadio"}
+{"de": "est.cpnpc.ressecabilidade", "rel": "FONTE", "para": "src.05.44", "pagina": 5}
+{"de": "tum.cpnpc", "rel": "ESTADIA_POR", "para": "est.cpnpc.ressecabilidade"}
+{"de": "bio.pd-l1-tps", "rel": "FONTE", "para": "src.05.42", "pagina": 35}
+{"de": "bio.pd-l1-cps", "rel": "FONTE", "para": "src.05.42", "pagina": 35}
+{"de": "bio.egfr", "rel": "FONTE", "para": "src.05.48", "pagina": 12}
+{"de": "bio.alk", "rel": "FONTE", "para": "src.05.46", "pagina": 20}
+{"de": "bio.ros1", "rel": "FONTE", "para": "src.05.46", "pagina": 31}
+{"de": "bio.ret", "rel": "FONTE", "para": "src.05.46", "pagina": 33}
+{"de": "bio.ntrk", "rel": "FONTE", "para": "src.05.46", "pagina": 34}
+{"de": "bio.nrg1", "rel": "FONTE", "para": "src.05.46", "pagina": 35}
+{"de": "bio.her2-mut", "rel": "FONTE", "para": "src.05.47", "pagina": 6}
+{"de": "bio.her2-ihq", "rel": "FONTE", "para": "src.05.49", "pagina": 15}
+{"de": "bio.met-ex14", "rel": "FONTE", "para": "src.05.47", "pagina": 12}
+{"de": "bio.c-met-ihq", "rel": "FONTE", "para": "src.05.49", "pagina": 16}
+{"de": "bio.braf-v600e", "rel": "FONTE", "para": "src.05.47", "pagina": 20}
+{"de": "bio.kras-g12c", "rel": "FONTE", "para": "src.05.47", "pagina": 22}
+{"de": "bio.kras-g12d", "rel": "FONTE", "para": "src.05.47", "pagina": 24}
+{"de": "bio.stk11-keap1", "rel": "FONTE", "para": "src.05.45", "pagina": 37}
+{"de": "bio.trop2", "rel": "FONTE", "para": "src.05.49", "pagina": 14}
+{"de": "cen.cpnpc.localizado-ressecavel", "rel": "FONTE", "para": "src.05.43", "pagina": 25}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.localizado-ressecavel"}
+{"de": "cen.cpnpc.ec-ia-inoperavel", "rel": "FONTE", "para": "src.05.43", "pagina": 28}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.ec-ia-inoperavel"}
+{"de": "cen.cpnpc.adjuvante", "rel": "FONTE", "para": "src.05.43", "pagina": 25}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.adjuvante"}
+{"de": "cen.cpnpc.neoadjuvante-perioperatorio", "rel": "FONTE", "para": "src.05.43", "pagina": 33}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.neoadjuvante-perioperatorio"}
+{"de": "cen.cpnpc.ec-iii-irressecavel", "rel": "FONTE", "para": "src.05.44", "pagina": 26}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.ec-iii-irressecavel"}
+{"de": "cen.cpnpc.metastatico-1a-linha-nao-escamoso", "rel": "FONTE", "para": "src.05.45", "pagina": 41}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.metastatico-1a-linha-nao-escamoso"}
+{"de": "cen.cpnpc.metastatico-1a-linha-escamoso", "rel": "FONTE", "para": "src.05.45", "pagina": 34}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.metastatico-1a-linha-escamoso"}
+{"de": "cen.cpnpc.metastatico-driver", "rel": "FONTE", "para": "src.05.46", "pagina": 11}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.metastatico-driver"}
+{"de": "cen.cpnpc.2a-linha", "rel": "FONTE", "para": "src.05.49", "pagina": 30}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.2a-linha"}
+{"de": "cen.cpnpc.egfr-pos-tki", "rel": "FONTE", "para": "src.05.48", "pagina": 29}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.egfr-pos-tki"}
+{"de": "cen.cpnpc.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.egfr", "para_que": "osimertinibe adjuvante (testagem mandatória)"}
+{"de": "cen.cpnpc.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.alk", "para_que": "alectinibe adjuvante (testagem mandatória)"}
+{"de": "cen.cpnpc.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pd-l1-tps", "para_que": "atezolizumabe adjuvante se PD-L1>=1%"}
+{"de": "cen.cpnpc.localizado-ressecavel", "rel": "EXIGE_BIOMARCADOR", "para": "bio.egfr", "para_que": "osimertinibe adjuvante (testagem mandatória)"}
+{"de": "cen.cpnpc.localizado-ressecavel", "rel": "EXIGE_BIOMARCADOR", "para": "bio.alk", "para_que": "alectinibe adjuvante (testagem mandatória)"}
+{"de": "cen.cpnpc.localizado-ressecavel", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pd-l1-tps", "para_que": "atezolizumabe adjuvante se PD-L1>=1%"}
+{"de": "cen.cpnpc.neoadjuvante-perioperatorio", "rel": "EXIGE_BIOMARCADOR", "para": "bio.egfr", "para_que": "excluir driver antes de IO neo/perioperatória"}
+{"de": "cen.cpnpc.neoadjuvante-perioperatorio", "rel": "EXIGE_BIOMARCADOR", "para": "bio.alk", "para_que": "excluir driver"}
+{"de": "cen.cpnpc.neoadjuvante-perioperatorio", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pd-l1-tps", "para_que": "magnitude de benefício (maior se PD-L1+)"}
+{"de": "cen.cpnpc.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ret", "para_que": "selpercatinibe adjuvante em discussão (LIBRETTO-432)"}
+{"de": "cen.cpnpc.ec-iii-irressecavel", "rel": "EXIGE_BIOMARCADOR", "para": "bio.egfr", "para_que": "osimertinibe de consolidação (LAURA); mandatório"}
+{"de": "cen.cpnpc.ec-iii-irressecavel", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pd-l1-tps", "para_que": "status mínimo junto com EGFR"}
+{"de": "cen.cpnpc.metastatico-1a-linha-nao-escamoso", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pd-l1-tps", "para_que": "escolha IO monodroga vs QT+IO vs QT+dupla IO"}
+{"de": "cen.cpnpc.metastatico-1a-linha-escamoso", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pd-l1-tps", "para_que": "escolha IO monodroga vs QT+IO vs QT+dupla IO"}
+{"de": "cen.cpnpc.metastatico-1a-linha-nao-escamoso", "rel": "EXIGE_BIOMARCADOR", "para": "bio.stk11-keap1", "para_que": "co-mutações: evitar IO monodroga, considerar dupla IO"}
+{"de": "cen.cpnpc.metastatico-driver", "rel": "EXIGE_BIOMARCADOR", "para": "bio.egfr", "para_que": "terapia-alvo dirigida"}
+{"de": "cen.cpnpc.metastatico-driver", "rel": "EXIGE_BIOMARCADOR", "para": "bio.alk", "para_que": "terapia-alvo dirigida"}
+{"de": "cen.cpnpc.metastatico-driver", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ros1", "para_que": "terapia-alvo dirigida"}
+{"de": "cen.cpnpc.metastatico-driver", "rel": "EXIGE_BIOMARCADOR", "para": "bio.braf-v600e", "para_que": "terapia-alvo dirigida"}
+{"de": "cen.cpnpc.metastatico-driver", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ntrk", "para_que": "terapia-alvo dirigida"}
+{"de": "cen.cpnpc.metastatico-driver", "rel": "EXIGE_BIOMARCADOR", "para": "bio.met-ex14", "para_que": "terapia-alvo dirigida"}
+{"de": "cen.cpnpc.metastatico-driver", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ret", "para_que": "terapia-alvo dirigida"}
+{"de": "cen.cpnpc.metastatico-driver", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2-mut", "para_que": "terapia-alvo dirigida"}
+{"de": "cen.cpnpc.metastatico-driver", "rel": "EXIGE_BIOMARCADOR", "para": "bio.nrg1", "para_que": "terapia-alvo dirigida"}
+{"de": "cen.cpnpc.metastatico-driver", "rel": "EXIGE_BIOMARCADOR", "para": "bio.kras-g12c", "para_que": "terapia-alvo dirigida"}
+{"de": "cen.cpnpc.2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.kras-g12c", "para_que": "sotorasibe/adagrasibe"}
+{"de": "cen.cpnpc.2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.met-ex14", "para_que": "capmatinibe/tepotinibe"}
+{"de": "cen.cpnpc.2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2-mut", "para_que": "T-DXd / TKI HER2"}
+{"de": "cen.cpnpc.2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.braf-v600e", "para_que": "dabrafenibe+trametinibe / encorafenibe+binimetinibe"}
+{"de": "cen.cpnpc.2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2-ihq", "para_que": "T-DXd agnóstico (IHQ 3+)"}
+{"de": "cen.cpnpc.2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.c-met-ihq", "para_que": "telisotuzumabe vedotina"}
+{"de": "cen.cpnpc.2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.trop2", "para_que": "datopotamabe deruxtecana"}
+{"de": "cen.cpnpc.egfr-pos-tki", "rel": "EXIGE_BIOMARCADOR", "para": "bio.egfr", "para_que": "mecanismos de resistência (rebiópsia/NGS)"}
+{"de": "cen.cpnpc.egfr-pos-tki", "rel": "EXIGE_BIOMARCADOR", "para": "bio.met-ex14", "para_que": "amplificação de MET como resistência ao osimertinibe"}
+{"de": "tri.nlst", "rel": "FONTE", "para": "src.05.42", "pagina": 20}
+{"de": "dx.cpnpc.rastreamento-tcbd", "rel": "SUSTENTADO_POR", "para": "tri.nlst"}
+{"de": "tri.nelson", "rel": "FONTE", "para": "src.05.42", "pagina": 20}
+{"de": "dx.cpnpc.rastreamento-tcbd", "rel": "SUSTENTADO_POR", "para": "tri.nelson"}
+{"de": "tri.impower010", "rel": "FONTE", "para": "src.05.43", "pagina": 9}
+{"de": "tri.keynote-091-pearls", "rel": "FONTE", "para": "src.05.43", "pagina": 11}
+{"de": "reg.cpnpc.atezolizumabe-adjuvante", "rel": "FONTE", "para": "src.05.43", "pagina": 9}
+{"de": "far.atezolizumabe", "rel": "FONTE", "para": "src.05.43", "pagina": 9}
+{"de": "reg.cpnpc.atezolizumabe-adjuvante", "rel": "USA_FARMACO", "para": "far.atezolizumabe"}
+{"de": "cen.cpnpc.adjuvante", "rel": "TRATA_COM", "para": "reg.cpnpc.atezolizumabe-adjuvante", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "PD-L1 >=1%, EC II-IIIA, sem EGFR/ALK"}
+{"de": "reg.cpnpc.atezolizumabe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.impower010"}
+{"de": "tri.impower010", "rel": "TESTOU", "para": "reg.cpnpc.atezolizumabe-adjuvante"}
+{"de": "reg.cpnpc.pembrolizumabe-adjuvante", "rel": "FONTE", "para": "src.05.43", "pagina": 11}
+{"de": "far.pembrolizumabe", "rel": "FONTE", "para": "src.05.43", "pagina": 11}
+{"de": "reg.cpnpc.pembrolizumabe-adjuvante", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.cpnpc.adjuvante", "rel": "TRATA_COM", "para": "reg.cpnpc.pembrolizumabe-adjuvante", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "independente de PD-L1 (IB-IIIA)"}
+{"de": "reg.cpnpc.pembrolizumabe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.keynote-091-pearls"}
+{"de": "tri.keynote-091-pearls", "rel": "TESTOU", "para": "reg.cpnpc.pembrolizumabe-adjuvante"}
+{"de": "reg.cpnpc.qt-adjuvante-cisplatina", "rel": "FONTE", "para": "src.05.43", "pagina": 25}
+{"de": "far.cisplatina", "rel": "FONTE", "para": "src.05.43", "pagina": 25}
+{"de": "reg.cpnpc.qt-adjuvante-cisplatina", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "far.pemetrexede", "rel": "FONTE", "para": "src.05.43", "pagina": 25}
+{"de": "reg.cpnpc.qt-adjuvante-cisplatina", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "far.gencitabina", "rel": "FONTE", "para": "src.05.43", "pagina": 25}
+{"de": "reg.cpnpc.qt-adjuvante-cisplatina", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "far.docetaxel", "rel": "FONTE", "para": "src.05.43", "pagina": 25}
+{"de": "reg.cpnpc.qt-adjuvante-cisplatina", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "far.vinorelbina", "rel": "FONTE", "para": "src.05.43", "pagina": 25}
+{"de": "reg.cpnpc.qt-adjuvante-cisplatina", "rel": "USA_FARMACO", "para": "far.vinorelbina"}
+{"de": "cen.cpnpc.adjuvante", "rel": "TRATA_COM", "para": "reg.cpnpc.qt-adjuvante-cisplatina", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "EC II-IIIA"}
+{"de": "tri.adaura", "rel": "FONTE", "para": "src.05.43", "pagina": 19}
+{"de": "reg.cpnpc.osimertinibe-adjuvante", "rel": "FONTE", "para": "src.05.43", "pagina": 19}
+{"de": "far.osimertinibe", "rel": "FONTE", "para": "src.05.43", "pagina": 19}
+{"de": "reg.cpnpc.osimertinibe-adjuvante", "rel": "USA_FARMACO", "para": "far.osimertinibe"}
+{"de": "cen.cpnpc.adjuvante", "rel": "TRATA_COM", "para": "reg.cpnpc.osimertinibe-adjuvante", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "EGFR del19/L858R, EC IB-IIIA"}
+{"de": "reg.cpnpc.osimertinibe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.adaura"}
+{"de": "tri.adaura", "rel": "TESTOU", "para": "reg.cpnpc.osimertinibe-adjuvante"}
+{"de": "tri.alina", "rel": "FONTE", "para": "src.05.43", "pagina": 22}
+{"de": "reg.cpnpc.alectinibe-adjuvante", "rel": "FONTE", "para": "src.05.43", "pagina": 22}
+{"de": "far.alectinibe", "rel": "FONTE", "para": "src.05.43", "pagina": 22}
+{"de": "reg.cpnpc.alectinibe-adjuvante", "rel": "USA_FARMACO", "para": "far.alectinibe"}
+{"de": "cen.cpnpc.adjuvante", "rel": "TRATA_COM", "para": "reg.cpnpc.alectinibe-adjuvante", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "ALK+"}
+{"de": "reg.cpnpc.alectinibe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.alina"}
+{"de": "tri.alina", "rel": "TESTOU", "para": "reg.cpnpc.alectinibe-adjuvante"}
+{"de": "tri.libretto-432", "rel": "FONTE", "para": "src.05.43", "pagina": 24}
+{"de": "reg.cpnpc.selpercatinibe-adjuvante", "rel": "FONTE", "para": "src.05.43", "pagina": 25}
+{"de": "far.selpercatinibe", "rel": "FONTE", "para": "src.05.43", "pagina": 25}
+{"de": "reg.cpnpc.selpercatinibe-adjuvante", "rel": "USA_FARMACO", "para": "far.selpercatinibe"}
+{"de": "cen.cpnpc.adjuvante", "rel": "TRATA_COM", "para": "reg.cpnpc.selpercatinibe-adjuvante", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "RET fusão+"}
+{"de": "reg.cpnpc.selpercatinibe-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.libretto-432"}
+{"de": "tri.libretto-432", "rel": "TESTOU", "para": "reg.cpnpc.selpercatinibe-adjuvante"}
+{"de": "tri.sabr-vats", "rel": "FONTE", "para": "src.05.43", "pagina": 28}
+{"de": "reg.cpnpc.sbrt", "rel": "FONTE", "para": "src.05.43", "pagina": 28}
+{"de": "cen.cpnpc.ec-ia-inoperavel", "rel": "TRATA_COM", "para": "reg.cpnpc.sbrt", "linha": "tratamento local definitivo", "intencao": "curativa"}
+{"de": "reg.cpnpc.sbrt", "rel": "SUSTENTADO_POR", "para": "tri.sabr-vats"}
+{"de": "tri.sabr-vats", "rel": "TESTOU", "para": "reg.cpnpc.sbrt"}
+{"de": "reg.cpnpc.lobectomia", "rel": "FONTE", "para": "src.05.42", "pagina": 46}
+{"de": "cen.cpnpc.localizado-ressecavel", "rel": "TRATA_COM", "para": "reg.cpnpc.lobectomia", "linha": "cirurgia", "intencao": "curativa"}
+{"de": "tri.checkmate-816", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "reg.cpnpc.nivolumabe-qt-neoadjuvante", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "far.nivolumabe", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "reg.cpnpc.nivolumabe-qt-neoadjuvante", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "reg.cpnpc.nivolumabe-qt-neoadjuvante", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "far.carboplatina", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "reg.cpnpc.nivolumabe-qt-neoadjuvante", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "cen.cpnpc.neoadjuvante-perioperatorio", "rel": "TRATA_COM", "para": "reg.cpnpc.nivolumabe-qt-neoadjuvante", "linha": "neoadjuvante", "intencao": "curativa", "condicao_biomarcador": "driver-negativo"}
+{"de": "reg.cpnpc.nivolumabe-qt-neoadjuvante", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-816"}
+{"de": "tri.checkmate-816", "rel": "TESTOU", "para": "reg.cpnpc.nivolumabe-qt-neoadjuvante"}
+{"de": "tri.keynote-671", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "reg.cpnpc.pembrolizumabe-qt-perioperatorio", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "reg.cpnpc.pembrolizumabe-qt-perioperatorio", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.cpnpc.pembrolizumabe-qt-perioperatorio", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.cpnpc.neoadjuvante-perioperatorio", "rel": "TRATA_COM", "para": "reg.cpnpc.pembrolizumabe-qt-perioperatorio", "linha": "perioperatorio", "intencao": "curativa", "condicao_biomarcador": "driver-negativo"}
+{"de": "reg.cpnpc.pembrolizumabe-qt-perioperatorio", "rel": "SUSTENTADO_POR", "para": "tri.keynote-671"}
+{"de": "tri.keynote-671", "rel": "TESTOU", "para": "reg.cpnpc.pembrolizumabe-qt-perioperatorio"}
+{"de": "tri.checkmate-77t", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "reg.cpnpc.nivolumabe-qt-perioperatorio", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "reg.cpnpc.nivolumabe-qt-perioperatorio", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "reg.cpnpc.nivolumabe-qt-perioperatorio", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.cpnpc.neoadjuvante-perioperatorio", "rel": "TRATA_COM", "para": "reg.cpnpc.nivolumabe-qt-perioperatorio", "linha": "perioperatorio", "intencao": "curativa", "condicao_biomarcador": "driver-negativo"}
+{"de": "reg.cpnpc.nivolumabe-qt-perioperatorio", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-77t"}
+{"de": "tri.checkmate-77t", "rel": "TESTOU", "para": "reg.cpnpc.nivolumabe-qt-perioperatorio"}
+{"de": "tri.aegean", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "reg.cpnpc.durvalumabe-qt-perioperatorio", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "far.durvalumabe", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "reg.cpnpc.durvalumabe-qt-perioperatorio", "rel": "USA_FARMACO", "para": "far.durvalumabe"}
+{"de": "reg.cpnpc.durvalumabe-qt-perioperatorio", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.cpnpc.neoadjuvante-perioperatorio", "rel": "TRATA_COM", "para": "reg.cpnpc.durvalumabe-qt-perioperatorio", "linha": "perioperatorio", "intencao": "curativa", "condicao_biomarcador": "driver-negativo"}
+{"de": "reg.cpnpc.durvalumabe-qt-perioperatorio", "rel": "SUSTENTADO_POR", "para": "tri.aegean"}
+{"de": "tri.aegean", "rel": "TESTOU", "para": "reg.cpnpc.durvalumabe-qt-perioperatorio"}
+{"de": "tri.neotorch", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "reg.cpnpc.toripalimabe-qt-perioperatorio", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "far.toripalimabe", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "reg.cpnpc.toripalimabe-qt-perioperatorio", "rel": "USA_FARMACO", "para": "far.toripalimabe"}
+{"de": "reg.cpnpc.toripalimabe-qt-perioperatorio", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.cpnpc.neoadjuvante-perioperatorio", "rel": "TRATA_COM", "para": "reg.cpnpc.toripalimabe-qt-perioperatorio", "linha": "perioperatorio", "intencao": "curativa", "condicao_biomarcador": "driver-negativo"}
+{"de": "reg.cpnpc.toripalimabe-qt-perioperatorio", "rel": "SUSTENTADO_POR", "para": "tri.neotorch"}
+{"de": "tri.neotorch", "rel": "TESTOU", "para": "reg.cpnpc.toripalimabe-qt-perioperatorio"}
+{"de": "tri.rationale-315", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "reg.cpnpc.tislelizumabe-qt-perioperatorio", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "far.tislelizumabe", "rel": "FONTE", "para": "src.05.43", "pagina": 34}
+{"de": "reg.cpnpc.tislelizumabe-qt-perioperatorio", "rel": "USA_FARMACO", "para": "far.tislelizumabe"}
+{"de": "reg.cpnpc.tislelizumabe-qt-perioperatorio", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.cpnpc.neoadjuvante-perioperatorio", "rel": "TRATA_COM", "para": "reg.cpnpc.tislelizumabe-qt-perioperatorio", "linha": "perioperatorio", "intencao": "curativa", "condicao_biomarcador": "driver-negativo"}
+{"de": "reg.cpnpc.tislelizumabe-qt-perioperatorio", "rel": "SUSTENTADO_POR", "para": "tri.rationale-315"}
+{"de": "tri.rationale-315", "rel": "TESTOU", "para": "reg.cpnpc.tislelizumabe-qt-perioperatorio"}
+{"de": "tri.meta-sorin-2024", "rel": "FONTE", "para": "src.05.43", "pagina": 39}
+{"de": "reg.cpnpc.pembrolizumabe-qt-perioperatorio", "rel": "SUSTENTADO_POR", "para": "tri.meta-sorin-2024"}
+{"de": "tri.meta-sorin-2024", "rel": "TESTOU", "para": "reg.cpnpc.pembrolizumabe-qt-perioperatorio"}
+{"de": "tri.pacific", "rel": "FONTE", "para": "src.05.44", "pagina": 11}
+{"de": "tri.qrt-concomitante-vs-sequencial", "rel": "FONTE", "para": "src.05.44", "pagina": 8}
+{"de": "reg.cpnpc.qrt-durvalumabe", "rel": "FONTE", "para": "src.05.44", "pagina": 26}
+{"de": "reg.cpnpc.qrt-durvalumabe", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "far.etoposideo", "rel": "FONTE", "para": "src.05.44", "pagina": 26}
+{"de": "reg.cpnpc.qrt-durvalumabe", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.cpnpc.qrt-durvalumabe", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "far.paclitaxel", "rel": "FONTE", "para": "src.05.44", "pagina": 26}
+{"de": "reg.cpnpc.qrt-durvalumabe", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.cpnpc.qrt-durvalumabe", "rel": "USA_FARMACO", "para": "far.durvalumabe"}
+{"de": "cen.cpnpc.ec-iii-irressecavel", "rel": "TRATA_COM", "para": "reg.cpnpc.qrt-durvalumabe", "linha": "consolidação", "intencao": "curativa", "condicao_biomarcador": "EGFR selvagem"}
+{"de": "reg.cpnpc.qrt-durvalumabe", "rel": "SUSTENTADO_POR", "para": "tri.pacific"}
+{"de": "tri.pacific", "rel": "TESTOU", "para": "reg.cpnpc.qrt-durvalumabe"}
+{"de": "reg.cpnpc.qrt-durvalumabe", "rel": "SUSTENTADO_POR", "para": "tri.qrt-concomitante-vs-sequencial"}
+{"de": "tri.qrt-concomitante-vs-sequencial", "rel": "TESTOU", "para": "reg.cpnpc.qrt-durvalumabe"}
+{"de": "tri.laura", "rel": "FONTE", "para": "src.05.44", "pagina": 18}
+{"de": "tri.nassar-2024", "rel": "FONTE", "para": "src.05.44", "pagina": 17}
+{"de": "reg.cpnpc.qrt-osimertinibe", "rel": "FONTE", "para": "src.05.44", "pagina": 26}
+{"de": "reg.cpnpc.qrt-osimertinibe", "rel": "USA_FARMACO", "para": "far.osimertinibe"}
+{"de": "cen.cpnpc.ec-iii-irressecavel", "rel": "TRATA_COM", "para": "reg.cpnpc.qrt-osimertinibe", "linha": "consolidação", "intencao": "curativa", "condicao_biomarcador": "EGFR del19/L858R"}
+{"de": "reg.cpnpc.qrt-osimertinibe", "rel": "SUSTENTADO_POR", "para": "tri.laura"}
+{"de": "tri.laura", "rel": "TESTOU", "para": "reg.cpnpc.qrt-osimertinibe"}
+{"de": "reg.cpnpc.qrt-osimertinibe", "rel": "SUSTENTADO_POR", "para": "tri.nassar-2024"}
+{"de": "tri.nassar-2024", "rel": "TESTOU", "para": "reg.cpnpc.qrt-osimertinibe"}
+{"de": "tri.keynote-024", "rel": "FONTE", "para": "src.05.45", "pagina": 9}
+{"de": "tri.impower110", "rel": "FONTE", "para": "src.05.45", "pagina": 9}
+{"de": "tri.empower-lung-1", "rel": "FONTE", "para": "src.05.45", "pagina": 9}
+{"de": "reg.cpnpc.io-monodroga-pdl1-alto", "rel": "FONTE", "para": "src.05.45", "pagina": 41}
+{"de": "reg.cpnpc.io-monodroga-pdl1-alto", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.cpnpc.io-monodroga-pdl1-alto", "rel": "USA_FARMACO", "para": "far.atezolizumabe"}
+{"de": "far.cemiplimabe", "rel": "FONTE", "para": "src.05.45", "pagina": 41}
+{"de": "reg.cpnpc.io-monodroga-pdl1-alto", "rel": "USA_FARMACO", "para": "far.cemiplimabe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-nao-escamoso", "rel": "TRATA_COM", "para": "reg.cpnpc.io-monodroga-pdl1-alto", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "PD-L1 >=50%"}
+{"de": "cen.cpnpc.metastatico-1a-linha-escamoso", "rel": "TRATA_COM", "para": "reg.cpnpc.io-monodroga-pdl1-alto", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "PD-L1 >=50%"}
+{"de": "reg.cpnpc.io-monodroga-pdl1-alto", "rel": "SUSTENTADO_POR", "para": "tri.keynote-024"}
+{"de": "tri.keynote-024", "rel": "TESTOU", "para": "reg.cpnpc.io-monodroga-pdl1-alto"}
+{"de": "reg.cpnpc.io-monodroga-pdl1-alto", "rel": "SUSTENTADO_POR", "para": "tri.impower110"}
+{"de": "tri.impower110", "rel": "TESTOU", "para": "reg.cpnpc.io-monodroga-pdl1-alto"}
+{"de": "reg.cpnpc.io-monodroga-pdl1-alto", "rel": "SUSTENTADO_POR", "para": "tri.empower-lung-1"}
+{"de": "tri.empower-lung-1", "rel": "TESTOU", "para": "reg.cpnpc.io-monodroga-pdl1-alto"}
+{"de": "tri.fda-pooled-pdl1-50", "rel": "FONTE", "para": "src.05.45", "pagina": 11}
+{"de": "tri.ricciuti-pdl1-90", "rel": "FONTE", "para": "src.05.45", "pagina": 12}
+{"de": "reg.cpnpc.io-monodroga-pdl1-alto", "rel": "SUSTENTADO_POR", "para": "tri.ricciuti-pdl1-90"}
+{"de": "tri.fda-pooled-pdl1-1-49", "rel": "FONTE", "para": "src.05.45", "pagina": 16}
+{"de": "tri.keynote-189", "rel": "FONTE", "para": "src.05.45", "pagina": 21}
+{"de": "reg.cpnpc.pembro-platina-pemetrexede", "rel": "FONTE", "para": "src.05.45", "pagina": 5}
+{"de": "reg.cpnpc.pembro-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.cpnpc.pembro-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cpnpc.pembro-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.cpnpc.pembro-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "cen.cpnpc.metastatico-1a-linha-nao-escamoso", "rel": "TRATA_COM", "para": "reg.cpnpc.pembro-platina-pemetrexede", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "qualquer PD-L1 (preferencial 1-49%)"}
+{"de": "reg.cpnpc.pembro-platina-pemetrexede", "rel": "SUSTENTADO_POR", "para": "tri.fda-pooled-pdl1-1-49"}
+{"de": "tri.fda-pooled-pdl1-1-49", "rel": "TESTOU", "para": "reg.cpnpc.pembro-platina-pemetrexede"}
+{"de": "reg.cpnpc.pembro-platina-pemetrexede", "rel": "SUSTENTADO_POR", "para": "tri.fda-pooled-pdl1-50"}
+{"de": "tri.fda-pooled-pdl1-50", "rel": "TESTOU", "para": "reg.cpnpc.pembro-platina-pemetrexede"}
+{"de": "reg.cpnpc.pembro-platina-pemetrexede", "rel": "SUSTENTADO_POR", "para": "tri.keynote-189"}
+{"de": "tri.keynote-189", "rel": "TESTOU", "para": "reg.cpnpc.pembro-platina-pemetrexede"}
+{"de": "reg.cpnpc.cemiplimabe-platina-pemetrexede", "rel": "FONTE", "para": "src.05.45", "pagina": 5}
+{"de": "reg.cpnpc.cemiplimabe-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.cemiplimabe"}
+{"de": "reg.cpnpc.cemiplimabe-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cpnpc.cemiplimabe-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.cpnpc.cemiplimabe-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "cen.cpnpc.metastatico-1a-linha-nao-escamoso", "rel": "TRATA_COM", "para": "reg.cpnpc.cemiplimabe-platina-pemetrexede", "linha": "1a linha", "intencao": "paliativa"}
+{"de": "reg.cpnpc.atezo-carbo-pacli-bev", "rel": "FONTE", "para": "src.05.45", "pagina": 5}
+{"de": "reg.cpnpc.atezo-carbo-pacli-bev", "rel": "USA_FARMACO", "para": "far.atezolizumabe"}
+{"de": "reg.cpnpc.atezo-carbo-pacli-bev", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cpnpc.atezo-carbo-pacli-bev", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "far.bevacizumabe", "rel": "FONTE", "para": "src.05.45", "pagina": 5}
+{"de": "reg.cpnpc.atezo-carbo-pacli-bev", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-nao-escamoso", "rel": "TRATA_COM", "para": "reg.cpnpc.atezo-carbo-pacli-bev", "linha": "1a linha", "intencao": "paliativa"}
+{"de": "tri.checkmate-9la", "rel": "FONTE", "para": "src.05.45", "pagina": 22}
+{"de": "tri.poseidon", "rel": "FONTE", "para": "src.05.45", "pagina": 22}
+{"de": "tri.meta-federico-2025", "rel": "FONTE", "para": "src.05.45", "pagina": 25}
+{"de": "tri.shiraishi-2024-dupla-io", "rel": "FONTE", "para": "src.05.45", "pagina": 26}
+{"de": "reg.cpnpc.nivo-ipi-qt-2ciclos", "rel": "FONTE", "para": "src.05.45", "pagina": 22}
+{"de": "reg.cpnpc.nivo-ipi-qt-2ciclos", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "far.ipilimumabe", "rel": "FONTE", "para": "src.05.45", "pagina": 22}
+{"de": "reg.cpnpc.nivo-ipi-qt-2ciclos", "rel": "USA_FARMACO", "para": "far.ipilimumabe"}
+{"de": "reg.cpnpc.nivo-ipi-qt-2ciclos", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cpnpc.nivo-ipi-qt-2ciclos", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "reg.cpnpc.nivo-ipi-qt-2ciclos", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.cpnpc.metastatico-1a-linha-nao-escamoso", "rel": "TRATA_COM", "para": "reg.cpnpc.nivo-ipi-qt-2ciclos", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "PD-L1 <1% ou co-mutação STK11/KEAP1 (opção, não obrigatória)"}
+{"de": "cen.cpnpc.metastatico-1a-linha-escamoso", "rel": "TRATA_COM", "para": "reg.cpnpc.nivo-ipi-qt-2ciclos", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "PD-L1 <1% ou co-mutação STK11/KEAP1 (opção, não obrigatória)"}
+{"de": "reg.cpnpc.nivo-ipi-qt-2ciclos", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-9la"}
+{"de": "tri.checkmate-9la", "rel": "TESTOU", "para": "reg.cpnpc.nivo-ipi-qt-2ciclos"}
+{"de": "reg.cpnpc.nivo-ipi-qt-2ciclos", "rel": "SUSTENTADO_POR", "para": "tri.meta-federico-2025"}
+{"de": "tri.meta-federico-2025", "rel": "TESTOU", "para": "reg.cpnpc.nivo-ipi-qt-2ciclos"}
+{"de": "reg.cpnpc.nivo-ipi-qt-2ciclos", "rel": "SUSTENTADO_POR", "para": "tri.shiraishi-2024-dupla-io"}
+{"de": "tri.shiraishi-2024-dupla-io", "rel": "TESTOU", "para": "reg.cpnpc.nivo-ipi-qt-2ciclos"}
+{"de": "reg.cpnpc.durva-treme-qt", "rel": "FONTE", "para": "src.05.45", "pagina": 22}
+{"de": "reg.cpnpc.durva-treme-qt", "rel": "USA_FARMACO", "para": "far.durvalumabe"}
+{"de": "far.tremelimumabe", "rel": "FONTE", "para": "src.05.45", "pagina": 22}
+{"de": "reg.cpnpc.durva-treme-qt", "rel": "USA_FARMACO", "para": "far.tremelimumabe"}
+{"de": "reg.cpnpc.durva-treme-qt", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "cen.cpnpc.metastatico-1a-linha-nao-escamoso", "rel": "TRATA_COM", "para": "reg.cpnpc.durva-treme-qt", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "PD-L1 <1% ou co-mutação STK11/KEAP1 (opção)"}
+{"de": "cen.cpnpc.metastatico-1a-linha-escamoso", "rel": "TRATA_COM", "para": "reg.cpnpc.durva-treme-qt", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "PD-L1 <1% ou co-mutação STK11/KEAP1 (opção)"}
+{"de": "reg.cpnpc.durva-treme-qt", "rel": "SUSTENTADO_POR", "para": "tri.poseidon"}
+{"de": "tri.poseidon", "rel": "TESTOU", "para": "reg.cpnpc.durva-treme-qt"}
+{"de": "reg.cpnpc.durva-treme-qt", "rel": "SUSTENTADO_POR", "para": "tri.meta-federico-2025"}
+{"de": "tri.meta-federico-2025", "rel": "TESTOU", "para": "reg.cpnpc.durva-treme-qt"}
+{"de": "tri.lee-2023-atezo-frageis", "rel": "FONTE", "para": "src.05.45", "pagina": 18}
+{"de": "reg.cpnpc.atezolizumabe-fragil", "rel": "FONTE", "para": "src.05.45", "pagina": 18}
+{"de": "reg.cpnpc.atezolizumabe-fragil", "rel": "USA_FARMACO", "para": "far.atezolizumabe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-nao-escamoso", "rel": "TRATA_COM", "para": "reg.cpnpc.atezolizumabe-fragil", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "inelegível a platina, independente de PD-L1"}
+{"de": "reg.cpnpc.atezolizumabe-fragil", "rel": "SUSTENTADO_POR", "para": "tri.lee-2023-atezo-frageis"}
+{"de": "tri.lee-2023-atezo-frageis", "rel": "TESTOU", "para": "reg.cpnpc.atezolizumabe-fragil"}
+{"de": "tri.xiong-2025-ivonescimabe", "rel": "FONTE", "para": "src.05.45", "pagina": 19}
+{"de": "reg.cpnpc.ivonescimabe-monodroga", "rel": "FONTE", "para": "src.05.45", "pagina": 19}
+{"de": "far.ivonescimabe", "rel": "FONTE", "para": "src.05.45", "pagina": 19}
+{"de": "reg.cpnpc.ivonescimabe-monodroga", "rel": "USA_FARMACO", "para": "far.ivonescimabe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-nao-escamoso", "rel": "TRATA_COM", "para": "reg.cpnpc.ivonescimabe-monodroga", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "PD-L1 >=1%"}
+{"de": "reg.cpnpc.ivonescimabe-monodroga", "rel": "SUSTENTADO_POR", "para": "tri.xiong-2025-ivonescimabe"}
+{"de": "tri.xiong-2025-ivonescimabe", "rel": "TESTOU", "para": "reg.cpnpc.ivonescimabe-monodroga"}
+{"de": "tri.keynote-407", "rel": "FONTE", "para": "src.05.45", "pagina": 30}
+{"de": "reg.cpnpc.pembro-carbo-taxano", "rel": "FONTE", "para": "src.05.45", "pagina": 30}
+{"de": "reg.cpnpc.pembro-carbo-taxano", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.cpnpc.pembro-carbo-taxano", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cpnpc.pembro-carbo-taxano", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "far.nab-paclitaxel", "rel": "FONTE", "para": "src.05.45", "pagina": 30}
+{"de": "reg.cpnpc.pembro-carbo-taxano", "rel": "USA_FARMACO", "para": "far.nab-paclitaxel"}
+{"de": "cen.cpnpc.metastatico-1a-linha-escamoso", "rel": "TRATA_COM", "para": "reg.cpnpc.pembro-carbo-taxano", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "qualquer PD-L1"}
+{"de": "reg.cpnpc.pembro-carbo-taxano", "rel": "SUSTENTADO_POR", "para": "tri.keynote-407"}
+{"de": "tri.keynote-407", "rel": "TESTOU", "para": "reg.cpnpc.pembro-carbo-taxano"}
+{"de": "reg.cpnpc.cemiplimabe-carbo-paclitaxel", "rel": "FONTE", "para": "src.05.45", "pagina": 34}
+{"de": "reg.cpnpc.cemiplimabe-carbo-paclitaxel", "rel": "USA_FARMACO", "para": "far.cemiplimabe"}
+{"de": "reg.cpnpc.cemiplimabe-carbo-paclitaxel", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cpnpc.cemiplimabe-carbo-paclitaxel", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.cpnpc.metastatico-1a-linha-escamoso", "rel": "TRATA_COM", "para": "reg.cpnpc.cemiplimabe-carbo-paclitaxel", "linha": "1a linha", "intencao": "paliativa"}
+{"de": "tri.harmoni-6", "rel": "FONTE", "para": "src.05.45", "pagina": 32}
+{"de": "reg.cpnpc.ivonescimabe-qt-escamoso", "rel": "FONTE", "para": "src.05.45", "pagina": 32}
+{"de": "reg.cpnpc.ivonescimabe-qt-escamoso", "rel": "USA_FARMACO", "para": "far.ivonescimabe"}
+{"de": "reg.cpnpc.ivonescimabe-qt-escamoso", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cpnpc.ivonescimabe-qt-escamoso", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.cpnpc.metastatico-1a-linha-escamoso", "rel": "TRATA_COM", "para": "reg.cpnpc.ivonescimabe-qt-escamoso", "linha": "1a linha", "intencao": "paliativa"}
+{"de": "reg.cpnpc.ivonescimabe-qt-escamoso", "rel": "SUSTENTADO_POR", "para": "tri.harmoni-6"}
+{"de": "tri.harmoni-6", "rel": "TESTOU", "para": "reg.cpnpc.ivonescimabe-qt-escamoso"}
+{"de": "cen.cpnpc.metastatico-1a-linha-alk", "rel": "FONTE", "para": "src.05.46", "pagina": 37}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.metastatico-1a-linha-alk"}
+{"de": "cen.cpnpc.metastatico-1a-linha-alk", "rel": "EXIGE_BIOMARCADOR", "para": "bio.alk", "para_que": "seleciona terapia-alvo"}
+{"de": "tri.alex", "rel": "FONTE", "para": "src.05.46", "pagina": 21}
+{"de": "tri.alta-1l", "rel": "FONTE", "para": "src.05.46", "pagina": 23}
+{"de": "tri.crown", "rel": "FONTE", "para": "src.05.46", "pagina": 25}
+{"de": "reg.cpnpc.alectinibe", "rel": "FONTE", "para": "src.05.46", "pagina": 21}
+{"de": "reg.cpnpc.alectinibe", "rel": "USA_FARMACO", "para": "far.alectinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-alk", "rel": "TRATA_COM", "para": "reg.cpnpc.alectinibe", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "ALK+"}
+{"de": "reg.cpnpc.alectinibe", "rel": "SUSTENTADO_POR", "para": "tri.alex"}
+{"de": "tri.alex", "rel": "TESTOU", "para": "reg.cpnpc.alectinibe"}
+{"de": "reg.cpnpc.brigatinibe", "rel": "FONTE", "para": "src.05.46", "pagina": 23}
+{"de": "far.brigatinibe", "rel": "FONTE", "para": "src.05.46", "pagina": 23}
+{"de": "reg.cpnpc.brigatinibe", "rel": "USA_FARMACO", "para": "far.brigatinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-alk", "rel": "TRATA_COM", "para": "reg.cpnpc.brigatinibe", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "ALK+"}
+{"de": "reg.cpnpc.brigatinibe", "rel": "SUSTENTADO_POR", "para": "tri.alta-1l"}
+{"de": "tri.alta-1l", "rel": "TESTOU", "para": "reg.cpnpc.brigatinibe"}
+{"de": "reg.cpnpc.lorlatinibe", "rel": "FONTE", "para": "src.05.46", "pagina": 25}
+{"de": "far.lorlatinibe", "rel": "FONTE", "para": "src.05.46", "pagina": 25}
+{"de": "reg.cpnpc.lorlatinibe", "rel": "USA_FARMACO", "para": "far.lorlatinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-alk", "rel": "TRATA_COM", "para": "reg.cpnpc.lorlatinibe", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "ALK+"}
+{"de": "reg.cpnpc.lorlatinibe", "rel": "SUSTENTADO_POR", "para": "tri.crown"}
+{"de": "tri.crown", "rel": "TESTOU", "para": "reg.cpnpc.lorlatinibe"}
+{"de": "reg.cpnpc.crizotinibe-alk", "rel": "FONTE", "para": "src.05.46", "pagina": 37}
+{"de": "far.crizotinibe", "rel": "FONTE", "para": "src.05.46", "pagina": 37}
+{"de": "reg.cpnpc.crizotinibe-alk", "rel": "USA_FARMACO", "para": "far.crizotinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-alk", "rel": "TRATA_COM", "para": "reg.cpnpc.crizotinibe-alk", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "ALK+"}
+{"de": "cen.cpnpc.metastatico-1a-linha-ros1", "rel": "FONTE", "para": "src.05.46", "pagina": 31}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.metastatico-1a-linha-ros1"}
+{"de": "cen.cpnpc.metastatico-1a-linha-ros1", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ros1", "para_que": "seleciona terapia-alvo"}
+{"de": "tri.profile-1001-ros1", "rel": "FONTE", "para": "src.05.46", "pagina": 31}
+{"de": "tri.trident-1", "rel": "FONTE", "para": "src.05.46", "pagina": 32}
+{"de": "reg.cpnpc.crizotinibe-ros1", "rel": "FONTE", "para": "src.05.46", "pagina": 31}
+{"de": "reg.cpnpc.crizotinibe-ros1", "rel": "USA_FARMACO", "para": "far.crizotinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-ros1", "rel": "TRATA_COM", "para": "reg.cpnpc.crizotinibe-ros1", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "ROS1+"}
+{"de": "reg.cpnpc.crizotinibe-ros1", "rel": "SUSTENTADO_POR", "para": "tri.profile-1001-ros1"}
+{"de": "tri.profile-1001-ros1", "rel": "TESTOU", "para": "reg.cpnpc.crizotinibe-ros1"}
+{"de": "reg.cpnpc.repotrectinibe", "rel": "FONTE", "para": "src.05.46", "pagina": 32}
+{"de": "far.repotrectinibe", "rel": "FONTE", "para": "src.05.46", "pagina": 32}
+{"de": "reg.cpnpc.repotrectinibe", "rel": "USA_FARMACO", "para": "far.repotrectinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-ros1", "rel": "TRATA_COM", "para": "reg.cpnpc.repotrectinibe", "linha": "1a linha / pós-TKI", "intencao": "paliativa", "condicao_biomarcador": "ROS1+"}
+{"de": "reg.cpnpc.repotrectinibe", "rel": "SUSTENTADO_POR", "para": "tri.trident-1"}
+{"de": "tri.trident-1", "rel": "TESTOU", "para": "reg.cpnpc.repotrectinibe"}
+{"de": "reg.cpnpc.entrectinibe-ros1", "rel": "FONTE", "para": "src.05.42", "pagina": 34}
+{"de": "far.entrectinibe", "rel": "FONTE", "para": "src.05.42", "pagina": 34}
+{"de": "reg.cpnpc.entrectinibe-ros1", "rel": "USA_FARMACO", "para": "far.entrectinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-ros1", "rel": "TRATA_COM", "para": "reg.cpnpc.entrectinibe-ros1", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "ROS1+"}
+{"de": "cen.cpnpc.metastatico-1a-linha-ret", "rel": "FONTE", "para": "src.05.46", "pagina": 33}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.metastatico-1a-linha-ret"}
+{"de": "cen.cpnpc.metastatico-1a-linha-ret", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ret", "para_que": "seleciona terapia-alvo"}
+{"de": "tri.libretto-431", "rel": "FONTE", "para": "src.05.46", "pagina": 33}
+{"de": "reg.cpnpc.selpercatinibe", "rel": "FONTE", "para": "src.05.46", "pagina": 33}
+{"de": "reg.cpnpc.selpercatinibe", "rel": "USA_FARMACO", "para": "far.selpercatinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-ret", "rel": "TRATA_COM", "para": "reg.cpnpc.selpercatinibe", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "RET fusão+"}
+{"de": "reg.cpnpc.selpercatinibe", "rel": "SUSTENTADO_POR", "para": "tri.libretto-431"}
+{"de": "tri.libretto-431", "rel": "TESTOU", "para": "reg.cpnpc.selpercatinibe"}
+{"de": "reg.cpnpc.pralsetinibe", "rel": "FONTE", "para": "src.05.42", "pagina": 34}
+{"de": "far.pralsetinibe", "rel": "FONTE", "para": "src.05.42", "pagina": 34}
+{"de": "reg.cpnpc.pralsetinibe", "rel": "USA_FARMACO", "para": "far.pralsetinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-ret", "rel": "TRATA_COM", "para": "reg.cpnpc.pralsetinibe", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "RET fusão+"}
+{"de": "cen.cpnpc.metastatico-1a-linha-ntrk", "rel": "FONTE", "para": "src.05.46", "pagina": 34}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.metastatico-1a-linha-ntrk"}
+{"de": "cen.cpnpc.metastatico-1a-linha-ntrk", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ntrk", "para_que": "seleciona terapia-alvo"}
+{"de": "tri.larotrectinibe-pooled", "rel": "FONTE", "para": "src.05.46", "pagina": 34}
+{"de": "reg.cpnpc.larotrectinibe", "rel": "FONTE", "para": "src.05.46", "pagina": 34}
+{"de": "far.larotrectinibe", "rel": "FONTE", "para": "src.05.46", "pagina": 34}
+{"de": "reg.cpnpc.larotrectinibe", "rel": "USA_FARMACO", "para": "far.larotrectinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-ntrk", "rel": "TRATA_COM", "para": "reg.cpnpc.larotrectinibe", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "NTRK fusão+"}
+{"de": "reg.cpnpc.larotrectinibe", "rel": "SUSTENTADO_POR", "para": "tri.larotrectinibe-pooled"}
+{"de": "tri.larotrectinibe-pooled", "rel": "TESTOU", "para": "reg.cpnpc.larotrectinibe"}
+{"de": "reg.cpnpc.entrectinibe-ntrk", "rel": "FONTE", "para": "src.05.42", "pagina": 34}
+{"de": "reg.cpnpc.entrectinibe-ntrk", "rel": "USA_FARMACO", "para": "far.entrectinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-ntrk", "rel": "TRATA_COM", "para": "reg.cpnpc.entrectinibe-ntrk", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "NTRK fusão+"}
+{"de": "cen.cpnpc.metastatico-1a-linha-nrg1", "rel": "FONTE", "para": "src.05.46", "pagina": 35}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.metastatico-1a-linha-nrg1"}
+{"de": "cen.cpnpc.metastatico-1a-linha-nrg1", "rel": "EXIGE_BIOMARCADOR", "para": "bio.nrg1", "para_que": "seleciona terapia-alvo"}
+{"de": "tri.enrgy", "rel": "FONTE", "para": "src.05.46", "pagina": 35}
+{"de": "reg.cpnpc.zenocutuzumabe", "rel": "FONTE", "para": "src.05.46", "pagina": 35}
+{"de": "far.zenocutuzumabe", "rel": "FONTE", "para": "src.05.46", "pagina": 35}
+{"de": "reg.cpnpc.zenocutuzumabe", "rel": "USA_FARMACO", "para": "far.zenocutuzumabe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-nrg1", "rel": "TRATA_COM", "para": "reg.cpnpc.zenocutuzumabe", "linha": "linha posterior", "intencao": "paliativa", "condicao_biomarcador": "NRG1 fusão+"}
+{"de": "reg.cpnpc.zenocutuzumabe", "rel": "SUSTENTADO_POR", "para": "tri.enrgy"}
+{"de": "tri.enrgy", "rel": "TESTOU", "para": "reg.cpnpc.zenocutuzumabe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-her2", "rel": "FONTE", "para": "src.05.47", "pagina": 6}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.metastatico-1a-linha-her2"}
+{"de": "cen.cpnpc.metastatico-1a-linha-her2", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2-mut", "para_que": "seleciona terapia-alvo"}
+{"de": "tri.destiny-lung02", "rel": "FONTE", "para": "src.05.47", "pagina": 7}
+{"de": "tri.destiny-lung01-her2mut", "rel": "FONTE", "para": "src.05.49", "pagina": 18}
+{"de": "reg.cpnpc.t-dxd-her2mut", "rel": "FONTE", "para": "src.05.47", "pagina": 7}
+{"de": "far.trastuzumabe-deruxtecana", "rel": "FONTE", "para": "src.05.47", "pagina": 7}
+{"de": "reg.cpnpc.t-dxd-her2mut", "rel": "USA_FARMACO", "para": "far.trastuzumabe-deruxtecana"}
+{"de": "cen.cpnpc.metastatico-1a-linha-her2", "rel": "TRATA_COM", "para": "reg.cpnpc.t-dxd-her2mut", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "HER2 mutado"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.t-dxd-her2mut", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "HER2 mutado"}
+{"de": "reg.cpnpc.t-dxd-her2mut", "rel": "SUSTENTADO_POR", "para": "tri.destiny-lung02"}
+{"de": "tri.destiny-lung02", "rel": "TESTOU", "para": "reg.cpnpc.t-dxd-her2mut"}
+{"de": "reg.cpnpc.t-dxd-her2mut", "rel": "SUSTENTADO_POR", "para": "tri.destiny-lung01-her2mut"}
+{"de": "tri.destiny-lung01-her2mut", "rel": "TESTOU", "para": "reg.cpnpc.t-dxd-her2mut"}
+{"de": "tri.soho-01", "rel": "FONTE", "para": "src.05.47", "pagina": 8}
+{"de": "reg.cpnpc.sevabertinibe", "rel": "FONTE", "para": "src.05.47", "pagina": 8}
+{"de": "far.sevabertinibe", "rel": "FONTE", "para": "src.05.47", "pagina": 8}
+{"de": "reg.cpnpc.sevabertinibe", "rel": "USA_FARMACO", "para": "far.sevabertinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-her2", "rel": "TRATA_COM", "para": "reg.cpnpc.sevabertinibe", "linha": "1a linha / pós-QT", "intencao": "paliativa", "condicao_biomarcador": "HER2 mutado"}
+{"de": "reg.cpnpc.sevabertinibe", "rel": "SUSTENTADO_POR", "para": "tri.soho-01"}
+{"de": "tri.soho-01", "rel": "TESTOU", "para": "reg.cpnpc.sevabertinibe"}
+{"de": "tri.beamion-lung-1", "rel": "FONTE", "para": "src.05.47", "pagina": 9}
+{"de": "reg.cpnpc.zongertinibe", "rel": "FONTE", "para": "src.05.47", "pagina": 9}
+{"de": "far.zongertinibe", "rel": "FONTE", "para": "src.05.47", "pagina": 9}
+{"de": "reg.cpnpc.zongertinibe", "rel": "USA_FARMACO", "para": "far.zongertinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-her2", "rel": "TRATA_COM", "para": "reg.cpnpc.zongertinibe", "linha": "1a linha / 2a linha", "intencao": "paliativa", "condicao_biomarcador": "HER2 mutado"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.zongertinibe", "linha": "1a linha / 2a linha", "intencao": "paliativa", "condicao_biomarcador": "HER2 mutado"}
+{"de": "reg.cpnpc.zongertinibe", "rel": "SUSTENTADO_POR", "para": "tri.beamion-lung-1"}
+{"de": "tri.beamion-lung-1", "rel": "TESTOU", "para": "reg.cpnpc.zongertinibe"}
+{"de": "tri.destiny-lung01", "rel": "FONTE", "para": "src.05.47", "pagina": 10}
+{"de": "tri.destiny-lung03", "rel": "FONTE", "para": "src.05.49", "pagina": 15}
+{"de": "reg.cpnpc.t-dxd-her2-ihq", "rel": "FONTE", "para": "src.05.49", "pagina": 15}
+{"de": "reg.cpnpc.t-dxd-her2-ihq", "rel": "USA_FARMACO", "para": "far.trastuzumabe-deruxtecana"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.t-dxd-her2-ihq", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "HER2 IHQ 3+"}
+{"de": "reg.cpnpc.t-dxd-her2-ihq", "rel": "SUSTENTADO_POR", "para": "tri.destiny-lung01"}
+{"de": "tri.destiny-lung01", "rel": "TESTOU", "para": "reg.cpnpc.t-dxd-her2-ihq"}
+{"de": "reg.cpnpc.t-dxd-her2-ihq", "rel": "SUSTENTADO_POR", "para": "tri.destiny-lung03"}
+{"de": "tri.destiny-lung03", "rel": "TESTOU", "para": "reg.cpnpc.t-dxd-her2-ihq"}
+{"de": "cen.cpnpc.metastatico-1a-linha-met-ex14", "rel": "FONTE", "para": "src.05.47", "pagina": 13}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.metastatico-1a-linha-met-ex14"}
+{"de": "cen.cpnpc.metastatico-1a-linha-met-ex14", "rel": "EXIGE_BIOMARCADOR", "para": "bio.met-ex14", "para_que": "seleciona terapia-alvo"}
+{"de": "tri.geometry-mono-1", "rel": "FONTE", "para": "src.05.47", "pagina": 14}
+{"de": "tri.vision", "rel": "FONTE", "para": "src.05.47", "pagina": 15}
+{"de": "reg.cpnpc.capmatinibe", "rel": "FONTE", "para": "src.05.47", "pagina": 14}
+{"de": "far.capmatinibe", "rel": "FONTE", "para": "src.05.47", "pagina": 14}
+{"de": "reg.cpnpc.capmatinibe", "rel": "USA_FARMACO", "para": "far.capmatinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-met-ex14", "rel": "TRATA_COM", "para": "reg.cpnpc.capmatinibe", "linha": "1a linha / 2a linha", "intencao": "paliativa", "condicao_biomarcador": "MET skip14"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.capmatinibe", "linha": "1a linha / 2a linha", "intencao": "paliativa", "condicao_biomarcador": "MET skip14"}
+{"de": "reg.cpnpc.capmatinibe", "rel": "SUSTENTADO_POR", "para": "tri.geometry-mono-1"}
+{"de": "tri.geometry-mono-1", "rel": "TESTOU", "para": "reg.cpnpc.capmatinibe"}
+{"de": "reg.cpnpc.tepotinibe", "rel": "FONTE", "para": "src.05.47", "pagina": 15}
+{"de": "far.tepotinibe", "rel": "FONTE", "para": "src.05.47", "pagina": 15}
+{"de": "reg.cpnpc.tepotinibe", "rel": "USA_FARMACO", "para": "far.tepotinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-met-ex14", "rel": "TRATA_COM", "para": "reg.cpnpc.tepotinibe", "linha": "1a linha / 2a linha", "intencao": "paliativa", "condicao_biomarcador": "MET skip14"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.tepotinibe", "linha": "1a linha / 2a linha", "intencao": "paliativa", "condicao_biomarcador": "MET skip14"}
+{"de": "reg.cpnpc.tepotinibe", "rel": "SUSTENTADO_POR", "para": "tri.vision"}
+{"de": "tri.vision", "rel": "TESTOU", "para": "reg.cpnpc.tepotinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-braf", "rel": "FONTE", "para": "src.05.47", "pagina": 20}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.metastatico-1a-linha-braf"}
+{"de": "cen.cpnpc.metastatico-1a-linha-braf", "rel": "EXIGE_BIOMARCADOR", "para": "bio.braf-v600e", "para_que": "seleciona terapia-alvo"}
+{"de": "tri.planchard-dabra-trame", "rel": "FONTE", "para": "src.05.47", "pagina": 20}
+{"de": "tri.pharos", "rel": "FONTE", "para": "src.05.47", "pagina": 21}
+{"de": "reg.cpnpc.dabrafenibe-trametinibe", "rel": "FONTE", "para": "src.05.47", "pagina": 20}
+{"de": "far.dabrafenibe", "rel": "FONTE", "para": "src.05.47", "pagina": 20}
+{"de": "reg.cpnpc.dabrafenibe-trametinibe", "rel": "USA_FARMACO", "para": "far.dabrafenibe"}
+{"de": "far.trametinibe", "rel": "FONTE", "para": "src.05.47", "pagina": 20}
+{"de": "reg.cpnpc.dabrafenibe-trametinibe", "rel": "USA_FARMACO", "para": "far.trametinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-braf", "rel": "TRATA_COM", "para": "reg.cpnpc.dabrafenibe-trametinibe", "linha": "1a linha / 2a linha", "intencao": "paliativa", "condicao_biomarcador": "BRAF V600E"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.dabrafenibe-trametinibe", "linha": "1a linha / 2a linha", "intencao": "paliativa", "condicao_biomarcador": "BRAF V600E"}
+{"de": "reg.cpnpc.dabrafenibe-trametinibe", "rel": "SUSTENTADO_POR", "para": "tri.planchard-dabra-trame"}
+{"de": "tri.planchard-dabra-trame", "rel": "TESTOU", "para": "reg.cpnpc.dabrafenibe-trametinibe"}
+{"de": "reg.cpnpc.encorafenibe-binimetinibe", "rel": "FONTE", "para": "src.05.47", "pagina": 21}
+{"de": "far.encorafenibe", "rel": "FONTE", "para": "src.05.47", "pagina": 21}
+{"de": "reg.cpnpc.encorafenibe-binimetinibe", "rel": "USA_FARMACO", "para": "far.encorafenibe"}
+{"de": "far.binimetinibe", "rel": "FONTE", "para": "src.05.47", "pagina": 21}
+{"de": "reg.cpnpc.encorafenibe-binimetinibe", "rel": "USA_FARMACO", "para": "far.binimetinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-braf", "rel": "TRATA_COM", "para": "reg.cpnpc.encorafenibe-binimetinibe", "linha": "1a linha / 2a linha", "intencao": "paliativa", "condicao_biomarcador": "BRAF V600E"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.encorafenibe-binimetinibe", "linha": "1a linha / 2a linha", "intencao": "paliativa", "condicao_biomarcador": "BRAF V600E"}
+{"de": "reg.cpnpc.encorafenibe-binimetinibe", "rel": "SUSTENTADO_POR", "para": "tri.pharos"}
+{"de": "tri.pharos", "rel": "TESTOU", "para": "reg.cpnpc.encorafenibe-binimetinibe"}
+{"de": "tri.codebreak-200", "rel": "FONTE", "para": "src.05.47", "pagina": 22}
+{"de": "tri.krystal-12", "rel": "FONTE", "para": "src.05.47", "pagina": 23}
+{"de": "reg.cpnpc.sotorasibe", "rel": "FONTE", "para": "src.05.47", "pagina": 22}
+{"de": "far.sotorasibe", "rel": "FONTE", "para": "src.05.47", "pagina": 22}
+{"de": "reg.cpnpc.sotorasibe", "rel": "USA_FARMACO", "para": "far.sotorasibe"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.sotorasibe", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "KRAS G12C"}
+{"de": "reg.cpnpc.sotorasibe", "rel": "SUSTENTADO_POR", "para": "tri.codebreak-200"}
+{"de": "tri.codebreak-200", "rel": "TESTOU", "para": "reg.cpnpc.sotorasibe"}
+{"de": "reg.cpnpc.adagrasibe", "rel": "FONTE", "para": "src.05.47", "pagina": 23}
+{"de": "far.adagrasibe", "rel": "FONTE", "para": "src.05.47", "pagina": 23}
+{"de": "reg.cpnpc.adagrasibe", "rel": "USA_FARMACO", "para": "far.adagrasibe"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.adagrasibe", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "KRAS G12C"}
+{"de": "reg.cpnpc.adagrasibe", "rel": "SUSTENTADO_POR", "para": "tri.krystal-12"}
+{"de": "tri.krystal-12", "rel": "TESTOU", "para": "reg.cpnpc.adagrasibe"}
+{"de": "tri.setidegrasibe-fase1", "rel": "FONTE", "para": "src.05.47", "pagina": 24}
+{"de": "reg.cpnpc.setidegrasibe", "rel": "FONTE", "para": "src.05.47", "pagina": 24}
+{"de": "far.setidegrasibe", "rel": "FONTE", "para": "src.05.47", "pagina": 24}
+{"de": "reg.cpnpc.setidegrasibe", "rel": "USA_FARMACO", "para": "far.setidegrasibe"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.setidegrasibe", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "KRAS G12D"}
+{"de": "reg.cpnpc.setidegrasibe", "rel": "SUSTENTADO_POR", "para": "tri.setidegrasibe-fase1"}
+{"de": "tri.setidegrasibe-fase1", "rel": "TESTOU", "para": "reg.cpnpc.setidegrasibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-classica", "rel": "FONTE", "para": "src.05.48", "pagina": 24}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.metastatico-1a-linha-egfr-classica"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-classica", "rel": "EXIGE_BIOMARCADOR", "para": "bio.egfr", "para_que": "seleciona terapia-alvo"}
+{"de": "tri.ipass", "rel": "FONTE", "para": "src.05.48", "pagina": 13}
+{"de": "reg.cpnpc.tki-egfr-1a-2a-geracao", "rel": "FONTE", "para": "src.05.48", "pagina": 14}
+{"de": "far.gefitinibe", "rel": "FONTE", "para": "src.05.48", "pagina": 14}
+{"de": "reg.cpnpc.tki-egfr-1a-2a-geracao", "rel": "USA_FARMACO", "para": "far.gefitinibe"}
+{"de": "far.erlotinibe", "rel": "FONTE", "para": "src.05.48", "pagina": 14}
+{"de": "reg.cpnpc.tki-egfr-1a-2a-geracao", "rel": "USA_FARMACO", "para": "far.erlotinibe"}
+{"de": "far.afatinibe", "rel": "FONTE", "para": "src.05.48", "pagina": 14}
+{"de": "reg.cpnpc.tki-egfr-1a-2a-geracao", "rel": "USA_FARMACO", "para": "far.afatinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-classica", "rel": "TRATA_COM", "para": "reg.cpnpc.tki-egfr-1a-2a-geracao", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "EGFR del19/L858R"}
+{"de": "reg.cpnpc.tki-egfr-1a-2a-geracao", "rel": "SUSTENTADO_POR", "para": "tri.ipass"}
+{"de": "tri.ipass", "rel": "TESTOU", "para": "reg.cpnpc.tki-egfr-1a-2a-geracao"}
+{"de": "tri.flaura", "rel": "FONTE", "para": "src.05.48", "pagina": 15}
+{"de": "reg.cpnpc.osimertinibe", "rel": "FONTE", "para": "src.05.48", "pagina": 15}
+{"de": "reg.cpnpc.osimertinibe", "rel": "USA_FARMACO", "para": "far.osimertinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-classica", "rel": "TRATA_COM", "para": "reg.cpnpc.osimertinibe", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "EGFR del19/L858R"}
+{"de": "reg.cpnpc.osimertinibe", "rel": "SUSTENTADO_POR", "para": "tri.flaura"}
+{"de": "tri.flaura", "rel": "TESTOU", "para": "reg.cpnpc.osimertinibe"}
+{"de": "tri.flaura2", "rel": "FONTE", "para": "src.05.48", "pagina": 16}
+{"de": "reg.cpnpc.osimertinibe-platina-pemetrexede", "rel": "FONTE", "para": "src.05.48", "pagina": 16}
+{"de": "reg.cpnpc.osimertinibe-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.osimertinibe"}
+{"de": "reg.cpnpc.osimertinibe-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cpnpc.osimertinibe-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.cpnpc.osimertinibe-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-classica", "rel": "TRATA_COM", "para": "reg.cpnpc.osimertinibe-platina-pemetrexede", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "EGFR del19/L858R"}
+{"de": "reg.cpnpc.osimertinibe-platina-pemetrexede", "rel": "SUSTENTADO_POR", "para": "tri.flaura2"}
+{"de": "tri.flaura2", "rel": "TESTOU", "para": "reg.cpnpc.osimertinibe-platina-pemetrexede"}
+{"de": "tri.mariposa", "rel": "FONTE", "para": "src.05.48", "pagina": 19}
+{"de": "tri.cocoon", "rel": "FONTE", "para": "src.05.48", "pagina": 23}
+{"de": "reg.cpnpc.amivantamabe-lazertinibe", "rel": "FONTE", "para": "src.05.48", "pagina": 19}
+{"de": "far.amivantamabe", "rel": "FONTE", "para": "src.05.48", "pagina": 19}
+{"de": "reg.cpnpc.amivantamabe-lazertinibe", "rel": "USA_FARMACO", "para": "far.amivantamabe"}
+{"de": "far.lazertinibe", "rel": "FONTE", "para": "src.05.48", "pagina": 19}
+{"de": "reg.cpnpc.amivantamabe-lazertinibe", "rel": "USA_FARMACO", "para": "far.lazertinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-classica", "rel": "TRATA_COM", "para": "reg.cpnpc.amivantamabe-lazertinibe", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "EGFR del19/L858R"}
+{"de": "reg.cpnpc.amivantamabe-lazertinibe", "rel": "SUSTENTADO_POR", "para": "tri.mariposa"}
+{"de": "tri.mariposa", "rel": "TESTOU", "para": "reg.cpnpc.amivantamabe-lazertinibe"}
+{"de": "reg.cpnpc.amivantamabe-lazertinibe", "rel": "SUSTENTADO_POR", "para": "tri.cocoon"}
+{"de": "tri.cocoon", "rel": "TESTOU", "para": "reg.cpnpc.amivantamabe-lazertinibe"}
+{"de": "reg.cpnpc.erlotinibe-ramucirumabe", "rel": "FONTE", "para": "src.05.48", "pagina": 55}
+{"de": "reg.cpnpc.erlotinibe-ramucirumabe", "rel": "USA_FARMACO", "para": "far.erlotinibe"}
+{"de": "far.ramucirumabe", "rel": "FONTE", "para": "src.05.48", "pagina": 55}
+{"de": "reg.cpnpc.erlotinibe-ramucirumabe", "rel": "USA_FARMACO", "para": "far.ramucirumabe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-classica", "rel": "TRATA_COM", "para": "reg.cpnpc.erlotinibe-ramucirumabe", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "EGFR clássico"}
+{"de": "tri.mariposa-2", "rel": "FONTE", "para": "src.05.48", "pagina": 31}
+{"de": "reg.cpnpc.amivantamabe-carbo-pemetrexede", "rel": "FONTE", "para": "src.05.48", "pagina": 31}
+{"de": "reg.cpnpc.amivantamabe-carbo-pemetrexede", "rel": "USA_FARMACO", "para": "far.amivantamabe"}
+{"de": "reg.cpnpc.amivantamabe-carbo-pemetrexede", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cpnpc.amivantamabe-carbo-pemetrexede", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "cen.cpnpc.egfr-pos-tki", "rel": "TRATA_COM", "para": "reg.cpnpc.amivantamabe-carbo-pemetrexede", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "EGFRm pós-osimertinibe"}
+{"de": "reg.cpnpc.amivantamabe-carbo-pemetrexede", "rel": "SUSTENTADO_POR", "para": "tri.mariposa-2"}
+{"de": "tri.mariposa-2", "rel": "TESTOU", "para": "reg.cpnpc.amivantamabe-carbo-pemetrexede"}
+{"de": "tri.keynote-789", "rel": "FONTE", "para": "src.05.48", "pagina": 32}
+{"de": "tri.impower150-egfr", "rel": "FONTE", "para": "src.05.48", "pagina": 33}
+{"de": "reg.cpnpc.platina-pemetrexede-pos-tki", "rel": "FONTE", "para": "src.05.48", "pagina": 32}
+{"de": "reg.cpnpc.platina-pemetrexede-pos-tki", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cpnpc.platina-pemetrexede-pos-tki", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "reg.cpnpc.platina-pemetrexede-pos-tki", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "cen.cpnpc.egfr-pos-tki", "rel": "TRATA_COM", "para": "reg.cpnpc.platina-pemetrexede-pos-tki", "linha": "2a linha", "intencao": "paliativa"}
+{"de": "reg.cpnpc.platina-pemetrexede-pos-tki", "rel": "SUSTENTADO_POR", "para": "tri.keynote-789"}
+{"de": "tri.keynote-789", "rel": "TESTOU", "para": "reg.cpnpc.platina-pemetrexede-pos-tki"}
+{"de": "reg.cpnpc.platina-pemetrexede-pos-tki", "rel": "SUSTENTADO_POR", "para": "tri.impower150-egfr"}
+{"de": "tri.impower150-egfr", "rel": "TESTOU", "para": "reg.cpnpc.platina-pemetrexede-pos-tki"}
+{"de": "tri.harmoni-a", "rel": "FONTE", "para": "src.05.48", "pagina": 34}
+{"de": "reg.cpnpc.ivonescimabe-qt-egfr", "rel": "FONTE", "para": "src.05.48", "pagina": 34}
+{"de": "reg.cpnpc.ivonescimabe-qt-egfr", "rel": "USA_FARMACO", "para": "far.ivonescimabe"}
+{"de": "reg.cpnpc.ivonescimabe-qt-egfr", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cpnpc.ivonescimabe-qt-egfr", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "cen.cpnpc.egfr-pos-tki", "rel": "TRATA_COM", "para": "reg.cpnpc.ivonescimabe-qt-egfr", "linha": "2a linha", "intencao": "paliativa"}
+{"de": "reg.cpnpc.ivonescimabe-qt-egfr", "rel": "SUSTENTADO_POR", "para": "tri.harmoni-a"}
+{"de": "tri.harmoni-a", "rel": "TESTOU", "para": "reg.cpnpc.ivonescimabe-qt-egfr"}
+{"de": "tri.tropion-lung01-05-egfr", "rel": "FONTE", "para": "src.05.48", "pagina": 35}
+{"de": "tri.optitrop-lung04", "rel": "FONTE", "para": "src.05.48", "pagina": 36}
+{"de": "reg.cpnpc.dato-dxd-egfr", "rel": "FONTE", "para": "src.05.48", "pagina": 35}
+{"de": "far.datopotamabe-deruxtecana", "rel": "FONTE", "para": "src.05.48", "pagina": 35}
+{"de": "reg.cpnpc.dato-dxd-egfr", "rel": "USA_FARMACO", "para": "far.datopotamabe-deruxtecana"}
+{"de": "cen.cpnpc.egfr-pos-tki", "rel": "TRATA_COM", "para": "reg.cpnpc.dato-dxd-egfr", "linha": "2a linha+", "intencao": "paliativa", "condicao_biomarcador": "EGFRm pós-TKI / TROP2"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.dato-dxd-egfr", "linha": "2a linha+", "intencao": "paliativa", "condicao_biomarcador": "EGFRm pós-TKI / TROP2"}
+{"de": "reg.cpnpc.dato-dxd-egfr", "rel": "SUSTENTADO_POR", "para": "tri.tropion-lung01-05-egfr"}
+{"de": "tri.tropion-lung01-05-egfr", "rel": "TESTOU", "para": "reg.cpnpc.dato-dxd-egfr"}
+{"de": "reg.cpnpc.sac-tmt", "rel": "FONTE", "para": "src.05.48", "pagina": 36}
+{"de": "far.sacituzumabe-tirumotecana", "rel": "FONTE", "para": "src.05.48", "pagina": 36}
+{"de": "reg.cpnpc.sac-tmt", "rel": "USA_FARMACO", "para": "far.sacituzumabe-tirumotecana"}
+{"de": "cen.cpnpc.egfr-pos-tki", "rel": "TRATA_COM", "para": "reg.cpnpc.sac-tmt", "linha": "2a linha", "intencao": "paliativa"}
+{"de": "reg.cpnpc.sac-tmt", "rel": "SUSTENTADO_POR", "para": "tri.optitrop-lung04"}
+{"de": "tri.optitrop-lung04", "rel": "TESTOU", "para": "reg.cpnpc.sac-tmt"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-ex20ins", "rel": "FONTE", "para": "src.05.48", "pagina": 46}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.metastatico-1a-linha-egfr-ex20ins"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-ex20ins", "rel": "EXIGE_BIOMARCADOR", "para": "bio.egfr", "para_que": "seleciona terapia-alvo"}
+{"de": "tri.papillon", "rel": "FONTE", "para": "src.05.48", "pagina": 46}
+{"de": "reg.cpnpc.amivantamabe-qt-ex20", "rel": "FONTE", "para": "src.05.48", "pagina": 46}
+{"de": "reg.cpnpc.amivantamabe-qt-ex20", "rel": "USA_FARMACO", "para": "far.amivantamabe"}
+{"de": "reg.cpnpc.amivantamabe-qt-ex20", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cpnpc.amivantamabe-qt-ex20", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-ex20ins", "rel": "TRATA_COM", "para": "reg.cpnpc.amivantamabe-qt-ex20", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "EGFR ex20ins"}
+{"de": "reg.cpnpc.amivantamabe-qt-ex20", "rel": "SUSTENTADO_POR", "para": "tri.papillon"}
+{"de": "tri.papillon", "rel": "TESTOU", "para": "reg.cpnpc.amivantamabe-qt-ex20"}
+{"de": "tri.wu-kong1b", "rel": "FONTE", "para": "src.05.48", "pagina": 47}
+{"de": "tri.rezilient-1", "rel": "FONTE", "para": "src.05.48", "pagina": 47}
+{"de": "reg.cpnpc.sunvozertinibe", "rel": "FONTE", "para": "src.05.48", "pagina": 47}
+{"de": "far.sunvozertinibe", "rel": "FONTE", "para": "src.05.48", "pagina": 47}
+{"de": "reg.cpnpc.sunvozertinibe", "rel": "USA_FARMACO", "para": "far.sunvozertinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-ex20ins", "rel": "TRATA_COM", "para": "reg.cpnpc.sunvozertinibe", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "EGFR ex20ins"}
+{"de": "reg.cpnpc.sunvozertinibe", "rel": "SUSTENTADO_POR", "para": "tri.wu-kong1b"}
+{"de": "tri.wu-kong1b", "rel": "TESTOU", "para": "reg.cpnpc.sunvozertinibe"}
+{"de": "reg.cpnpc.zipalertinibe", "rel": "FONTE", "para": "src.05.48", "pagina": 47}
+{"de": "far.zipalertinibe", "rel": "FONTE", "para": "src.05.48", "pagina": 47}
+{"de": "reg.cpnpc.zipalertinibe", "rel": "USA_FARMACO", "para": "far.zipalertinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-ex20ins", "rel": "TRATA_COM", "para": "reg.cpnpc.zipalertinibe", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "EGFR ex20ins"}
+{"de": "reg.cpnpc.zipalertinibe", "rel": "SUSTENTADO_POR", "para": "tri.rezilient-1"}
+{"de": "tri.rezilient-1", "rel": "TESTOU", "para": "reg.cpnpc.zipalertinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-atipica", "rel": "FONTE", "para": "src.05.48", "pagina": 48}
+{"de": "tum.cpnpc", "rel": "TEM_CENARIO", "para": "cen.cpnpc.metastatico-1a-linha-egfr-atipica"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-atipica", "rel": "EXIGE_BIOMARCADOR", "para": "bio.egfr", "para_que": "seleciona terapia-alvo"}
+{"de": "tri.lux-lung-2-3-6-atipicas", "rel": "FONTE", "para": "src.05.48", "pagina": 48}
+{"de": "tri.unicorn", "rel": "FONTE", "para": "src.05.48", "pagina": 48}
+{"de": "tri.chrysalis-2", "rel": "FONTE", "para": "src.05.48", "pagina": 49}
+{"de": "reg.cpnpc.afatinibe-atipica", "rel": "FONTE", "para": "src.05.48", "pagina": 48}
+{"de": "reg.cpnpc.afatinibe-atipica", "rel": "USA_FARMACO", "para": "far.afatinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-atipica", "rel": "TRATA_COM", "para": "reg.cpnpc.afatinibe-atipica", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "EGFR atípica"}
+{"de": "reg.cpnpc.afatinibe-atipica", "rel": "SUSTENTADO_POR", "para": "tri.lux-lung-2-3-6-atipicas"}
+{"de": "tri.lux-lung-2-3-6-atipicas", "rel": "TESTOU", "para": "reg.cpnpc.afatinibe-atipica"}
+{"de": "reg.cpnpc.osimertinibe-atipica", "rel": "FONTE", "para": "src.05.48", "pagina": 48}
+{"de": "reg.cpnpc.osimertinibe-atipica", "rel": "USA_FARMACO", "para": "far.osimertinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-atipica", "rel": "TRATA_COM", "para": "reg.cpnpc.osimertinibe-atipica", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "EGFR atípica"}
+{"de": "reg.cpnpc.osimertinibe-atipica", "rel": "SUSTENTADO_POR", "para": "tri.unicorn"}
+{"de": "tri.unicorn", "rel": "TESTOU", "para": "reg.cpnpc.osimertinibe-atipica"}
+{"de": "reg.cpnpc.amivantamabe-lazertinibe-atipica", "rel": "FONTE", "para": "src.05.48", "pagina": 49}
+{"de": "reg.cpnpc.amivantamabe-lazertinibe-atipica", "rel": "USA_FARMACO", "para": "far.amivantamabe"}
+{"de": "reg.cpnpc.amivantamabe-lazertinibe-atipica", "rel": "USA_FARMACO", "para": "far.lazertinibe"}
+{"de": "cen.cpnpc.metastatico-1a-linha-egfr-atipica", "rel": "TRATA_COM", "para": "reg.cpnpc.amivantamabe-lazertinibe-atipica", "linha": "1a-3a linha", "intencao": "paliativa", "condicao_biomarcador": "EGFR atípica"}
+{"de": "reg.cpnpc.amivantamabe-lazertinibe-atipica", "rel": "SUSTENTADO_POR", "para": "tri.chrysalis-2"}
+{"de": "tri.chrysalis-2", "rel": "TESTOU", "para": "reg.cpnpc.amivantamabe-lazertinibe-atipica"}
+{"de": "tri.garon-2014-ramucirumabe", "rel": "FONTE", "para": "src.05.49", "pagina": 8}
+{"de": "reg.cpnpc.docetaxel-ramucirumabe", "rel": "FONTE", "para": "src.05.49", "pagina": 8}
+{"de": "reg.cpnpc.docetaxel-ramucirumabe", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.cpnpc.docetaxel-ramucirumabe", "rel": "USA_FARMACO", "para": "far.ramucirumabe"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.docetaxel-ramucirumabe", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "sem alteração acionável"}
+{"de": "reg.cpnpc.docetaxel-ramucirumabe", "rel": "SUSTENTADO_POR", "para": "tri.garon-2014-ramucirumabe"}
+{"de": "tri.garon-2014-ramucirumabe", "rel": "TESTOU", "para": "reg.cpnpc.docetaxel-ramucirumabe"}
+{"de": "tri.reck-2014-nintedanibe", "rel": "FONTE", "para": "src.05.49", "pagina": 9}
+{"de": "reg.cpnpc.docetaxel-nintedanibe", "rel": "FONTE", "para": "src.05.49", "pagina": 9}
+{"de": "reg.cpnpc.docetaxel-nintedanibe", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "far.nintedanibe", "rel": "FONTE", "para": "src.05.49", "pagina": 9}
+{"de": "reg.cpnpc.docetaxel-nintedanibe", "rel": "USA_FARMACO", "para": "far.nintedanibe"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.docetaxel-nintedanibe", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "adenocarcinoma"}
+{"de": "reg.cpnpc.docetaxel-nintedanibe", "rel": "SUSTENTADO_POR", "para": "tri.reck-2014-nintedanibe"}
+{"de": "tri.reck-2014-nintedanibe", "rel": "TESTOU", "para": "reg.cpnpc.docetaxel-nintedanibe"}
+{"de": "tri.evoke-01", "rel": "FONTE", "para": "src.05.49", "pagina": 12}
+{"de": "tri.tropion-lung01", "rel": "FONTE", "para": "src.05.49", "pagina": 12}
+{"de": "reg.cpnpc.dato-dxd-egfr", "rel": "SUSTENTADO_POR", "para": "tri.tropion-lung01"}
+{"de": "tri.tropion-lung01", "rel": "TESTOU", "para": "reg.cpnpc.dato-dxd-egfr"}
+{"de": "reg.cpnpc.docetaxel-ramucirumabe", "rel": "SUSTENTADO_POR", "para": "tri.evoke-01"}
+{"de": "tri.camidge-2024-teliso-v", "rel": "FONTE", "para": "src.05.49", "pagina": 16}
+{"de": "reg.cpnpc.telisotuzumabe-vedotina", "rel": "FONTE", "para": "src.05.49", "pagina": 16}
+{"de": "far.telisotuzumabe-vedotina", "rel": "FONTE", "para": "src.05.49", "pagina": 16}
+{"de": "reg.cpnpc.telisotuzumabe-vedotina", "rel": "USA_FARMACO", "para": "far.telisotuzumabe-vedotina"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.telisotuzumabe-vedotina", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "c-MET high IHQ"}
+{"de": "reg.cpnpc.telisotuzumabe-vedotina", "rel": "SUSTENTADO_POR", "para": "tri.camidge-2024-teliso-v"}
+{"de": "tri.camidge-2024-teliso-v", "rel": "TESTOU", "para": "reg.cpnpc.telisotuzumabe-vedotina"}
+{"de": "tri.tsai-oligoprogressao", "rel": "FONTE", "para": "src.05.49", "pagina": 26}
+{"de": "reg.cpnpc.sbrt-oligoprogressao", "rel": "FONTE", "para": "src.05.49", "pagina": 26}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.sbrt-oligoprogressao", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "<=5 lesões em progressão"}
+{"de": "reg.cpnpc.sbrt-oligoprogressao", "rel": "SUSTENTADO_POR", "para": "tri.tsai-oligoprogressao"}
+{"de": "tri.tsai-oligoprogressao", "rel": "TESTOU", "para": "reg.cpnpc.sbrt-oligoprogressao"}
+{"de": "reg.cpnpc.reexposicao-io", "rel": "FONTE", "para": "src.05.49", "pagina": 23}
+{"de": "reg.cpnpc.reexposicao-io", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.reexposicao-io", "linha": "2a linha", "intencao": "paliativa"}
+{"de": "reg.cpnpc.qt-monodroga-2l", "rel": "FONTE", "para": "src.05.49", "pagina": 29}
+{"de": "reg.cpnpc.qt-monodroga-2l", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "reg.cpnpc.qt-monodroga-2l", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "cen.cpnpc.2a-linha", "rel": "TRATA_COM", "para": "reg.cpnpc.qt-monodroga-2l", "linha": "2a linha", "intencao": "paliativa"}
+{"de": "dx.cppc.ihq", "rel": "FONTE", "para": "src.05.50", "pagina": 10}
+{"de": "tum.cppc", "rel": "DIAGNOSTICA_POR", "para": "dx.cppc.ihq"}
+{"de": "dx.cppc.quadro-clinico", "rel": "FONTE", "para": "src.05.50", "pagina": 9}
+{"de": "tum.cppc", "rel": "DIAGNOSTICA_POR", "para": "dx.cppc.quadro-clinico"}
+{"de": "est.cppc.valsg", "rel": "FONTE", "para": "src.05.50", "pagina": 11}
+{"de": "tum.cppc", "rel": "ESTADIA_POR", "para": "est.cppc.valsg"}
+{"de": "cen.cppc.doenca-limitada", "rel": "FONTE", "para": "src.05.50", "pagina": 14}
+{"de": "tum.cppc", "rel": "TEM_CENARIO", "para": "cen.cppc.doenca-limitada"}
+{"de": "cen.cppc.doenca-extensa-1a-linha", "rel": "FONTE", "para": "src.05.50", "pagina": 52}
+{"de": "tum.cppc", "rel": "TEM_CENARIO", "para": "cen.cppc.doenca-extensa-1a-linha"}
+{"de": "cen.cppc.doenca-extensa-2a-linha", "rel": "FONTE", "para": "src.05.50", "pagina": 34}
+{"de": "tum.cppc", "rel": "TEM_CENARIO", "para": "cen.cppc.doenca-extensa-2a-linha"}
+{"de": "tri.convert", "rel": "FONTE", "para": "src.05.50", "pagina": 14}
+{"de": "reg.cppc.qrt-cisplatina-etoposideo", "rel": "FONTE", "para": "src.05.50", "pagina": 14}
+{"de": "reg.cppc.qrt-cisplatina-etoposideo", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.cppc.qrt-cisplatina-etoposideo", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cppc.qrt-cisplatina-etoposideo", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "cen.cppc.doenca-limitada", "rel": "TRATA_COM", "para": "reg.cppc.qrt-cisplatina-etoposideo", "linha": "definitivo", "intencao": "curativa"}
+{"de": "reg.cppc.qrt-cisplatina-etoposideo", "rel": "SUSTENTADO_POR", "para": "tri.convert"}
+{"de": "tri.convert", "rel": "TESTOU", "para": "reg.cppc.qrt-cisplatina-etoposideo"}
+{"de": "tri.adriatic", "rel": "FONTE", "para": "src.05.50", "pagina": 15}
+{"de": "reg.cppc.durvalumabe-consolidacao", "rel": "FONTE", "para": "src.05.50", "pagina": 15}
+{"de": "reg.cppc.durvalumabe-consolidacao", "rel": "USA_FARMACO", "para": "far.durvalumabe"}
+{"de": "cen.cppc.doenca-limitada", "rel": "TRATA_COM", "para": "reg.cppc.durvalumabe-consolidacao", "linha": "consolidação", "intencao": "curativa"}
+{"de": "reg.cppc.durvalumabe-consolidacao", "rel": "SUSTENTADO_POR", "para": "tri.adriatic"}
+{"de": "tri.adriatic", "rel": "TESTOU", "para": "reg.cppc.durvalumabe-consolidacao"}
+{"de": "reg.cppc.pci-limitada", "rel": "FONTE", "para": "src.05.50", "pagina": 52}
+{"de": "cen.cppc.doenca-limitada", "rel": "TRATA_COM", "para": "reg.cppc.pci-limitada", "linha": "consolidação", "intencao": "curativa"}
+{"de": "reg.cppc.cirurgia-t1-2n0", "rel": "FONTE", "para": "src.05.50", "pagina": 52}
+{"de": "reg.cppc.cirurgia-t1-2n0", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.cppc.cirurgia-t1-2n0", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "cen.cppc.doenca-limitada", "rel": "TRATA_COM", "para": "reg.cppc.cirurgia-t1-2n0", "linha": "cirurgia", "intencao": "curativa", "condicao_biomarcador": "T1/T2 N0 com mediastinoscopia negativa"}
+{"de": "tri.noda-ip-vs-ep", "rel": "FONTE", "para": "src.05.50", "pagina": 20}
+{"de": "tri.rossi-2012-cis-vs-carbo", "rel": "FONTE", "para": "src.05.50", "pagina": 20}
+{"de": "tri.impower133", "rel": "FONTE", "para": "src.05.50", "pagina": 21}
+{"de": "tri.caspian", "rel": "FONTE", "para": "src.05.50", "pagina": 23}
+{"de": "reg.cppc.carbo-etoposideo-atezolizumabe", "rel": "FONTE", "para": "src.05.50", "pagina": 21}
+{"de": "reg.cppc.carbo-etoposideo-atezolizumabe", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cppc.carbo-etoposideo-atezolizumabe", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.cppc.carbo-etoposideo-atezolizumabe", "rel": "USA_FARMACO", "para": "far.atezolizumabe"}
+{"de": "cen.cppc.doenca-extensa-1a-linha", "rel": "TRATA_COM", "para": "reg.cppc.carbo-etoposideo-atezolizumabe", "linha": "1a linha", "intencao": "paliativa"}
+{"de": "reg.cppc.carbo-etoposideo-atezolizumabe", "rel": "SUSTENTADO_POR", "para": "tri.impower133"}
+{"de": "tri.impower133", "rel": "TESTOU", "para": "reg.cppc.carbo-etoposideo-atezolizumabe"}
+{"de": "reg.cppc.carbo-etoposideo-atezolizumabe", "rel": "SUSTENTADO_POR", "para": "tri.rossi-2012-cis-vs-carbo"}
+{"de": "tri.rossi-2012-cis-vs-carbo", "rel": "TESTOU", "para": "reg.cppc.carbo-etoposideo-atezolizumabe"}
+{"de": "reg.cppc.platina-etoposideo-durvalumabe", "rel": "FONTE", "para": "src.05.50", "pagina": 23}
+{"de": "reg.cppc.platina-etoposideo-durvalumabe", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.cppc.platina-etoposideo-durvalumabe", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cppc.platina-etoposideo-durvalumabe", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.cppc.platina-etoposideo-durvalumabe", "rel": "USA_FARMACO", "para": "far.durvalumabe"}
+{"de": "cen.cppc.doenca-extensa-1a-linha", "rel": "TRATA_COM", "para": "reg.cppc.platina-etoposideo-durvalumabe", "linha": "1a linha", "intencao": "paliativa"}
+{"de": "reg.cppc.platina-etoposideo-durvalumabe", "rel": "SUSTENTADO_POR", "para": "tri.caspian"}
+{"de": "tri.caspian", "rel": "TESTOU", "para": "reg.cppc.platina-etoposideo-durvalumabe"}
+{"de": "reg.cppc.platina-irinotecano", "rel": "FONTE", "para": "src.05.50", "pagina": 20}
+{"de": "reg.cppc.platina-irinotecano", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "far.irinotecano", "rel": "FONTE", "para": "src.05.50", "pagina": 20}
+{"de": "reg.cppc.platina-irinotecano", "rel": "USA_FARMACO", "para": "far.irinotecano"}
+{"de": "cen.cppc.doenca-extensa-1a-linha", "rel": "TRATA_COM", "para": "reg.cppc.platina-irinotecano", "linha": "1a linha", "intencao": "paliativa"}
+{"de": "reg.cppc.platina-irinotecano", "rel": "SUSTENTADO_POR", "para": "tri.noda-ip-vs-ep"}
+{"de": "tri.noda-ip-vs-ep", "rel": "TESTOU", "para": "reg.cppc.platina-irinotecano"}
+{"de": "tri.imforte", "rel": "FONTE", "para": "src.05.50", "pagina": 25}
+{"de": "reg.cppc.lurbinectedina-atezolizumabe-manutencao", "rel": "FONTE", "para": "src.05.50", "pagina": 25}
+{"de": "far.lurbinectedina", "rel": "FONTE", "para": "src.05.50", "pagina": 25}
+{"de": "reg.cppc.lurbinectedina-atezolizumabe-manutencao", "rel": "USA_FARMACO", "para": "far.lurbinectedina"}
+{"de": "reg.cppc.lurbinectedina-atezolizumabe-manutencao", "rel": "USA_FARMACO", "para": "far.atezolizumabe"}
+{"de": "cen.cppc.doenca-extensa-1a-linha", "rel": "TRATA_COM", "para": "reg.cppc.lurbinectedina-atezolizumabe-manutencao", "linha": "manutenção 1a linha", "intencao": "paliativa"}
+{"de": "reg.cppc.lurbinectedina-atezolizumabe-manutencao", "rel": "SUSTENTADO_POR", "para": "tri.imforte"}
+{"de": "tri.imforte", "rel": "TESTOU", "para": "reg.cppc.lurbinectedina-atezolizumabe-manutencao"}
+{"de": "tri.slotman-pci", "rel": "FONTE", "para": "src.05.50", "pagina": 45}
+{"de": "tri.takahashi-pci", "rel": "FONTE", "para": "src.05.50", "pagina": 45}
+{"de": "reg.cppc.pci-extensa", "rel": "FONTE", "para": "src.05.50", "pagina": 45}
+{"de": "cen.cppc.doenca-extensa-1a-linha", "rel": "TRATA_COM", "para": "reg.cppc.pci-extensa", "linha": "consolidação", "intencao": "paliativa"}
+{"de": "reg.cppc.pci-extensa", "rel": "SUSTENTADO_POR", "para": "tri.slotman-pci"}
+{"de": "tri.slotman-pci", "rel": "TESTOU", "para": "reg.cppc.pci-extensa"}
+{"de": "reg.cppc.pci-extensa", "rel": "SUSTENTADO_POR", "para": "tri.takahashi-pci"}
+{"de": "tri.takahashi-pci", "rel": "TESTOU", "para": "reg.cppc.pci-extensa"}
+{"de": "tri.slotman-2014-rt-toracica", "rel": "FONTE", "para": "src.05.50", "pagina": 46}
+{"de": "reg.cppc.rt-toracica-consolidacao", "rel": "FONTE", "para": "src.05.50", "pagina": 46}
+{"de": "cen.cppc.doenca-extensa-1a-linha", "rel": "TRATA_COM", "para": "reg.cppc.rt-toracica-consolidacao", "linha": "consolidação", "intencao": "paliativa", "condicao_biomarcador": "resíduo torácico após resposta"}
+{"de": "reg.cppc.rt-toracica-consolidacao", "rel": "SUSTENTADO_POR", "para": "tri.slotman-2014-rt-toracica"}
+{"de": "tri.slotman-2014-rt-toracica", "rel": "TESTOU", "para": "reg.cppc.rt-toracica-consolidacao"}
+{"de": "tri.dellphi-301", "rel": "FONTE", "para": "src.05.50", "pagina": 35}
+{"de": "tri.dellphi-304", "rel": "FONTE", "para": "src.05.50", "pagina": 38}
+{"de": "reg.cppc.tarlatamabe", "rel": "FONTE", "para": "src.05.50", "pagina": 38}
+{"de": "far.tarlatamabe", "rel": "FONTE", "para": "src.05.50", "pagina": 38}
+{"de": "reg.cppc.tarlatamabe", "rel": "USA_FARMACO", "para": "far.tarlatamabe"}
+{"de": "cen.cppc.doenca-extensa-2a-linha", "rel": "TRATA_COM", "para": "reg.cppc.tarlatamabe", "linha": "2a linha", "intencao": "paliativa"}
+{"de": "reg.cppc.tarlatamabe", "rel": "SUSTENTADO_POR", "para": "tri.dellphi-301"}
+{"de": "tri.dellphi-301", "rel": "TESTOU", "para": "reg.cppc.tarlatamabe"}
+{"de": "reg.cppc.tarlatamabe", "rel": "SUSTENTADO_POR", "para": "tri.dellphi-304"}
+{"de": "tri.dellphi-304", "rel": "TESTOU", "para": "reg.cppc.tarlatamabe"}
+{"de": "reg.cppc.reexposicao-platina", "rel": "FONTE", "para": "src.05.50", "pagina": 34}
+{"de": "reg.cppc.reexposicao-platina", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.cppc.reexposicao-platina", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "cen.cppc.doenca-extensa-2a-linha", "rel": "TRATA_COM", "para": "reg.cppc.reexposicao-platina", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "platino-sensível (PD >90 dias)"}
+{"de": "reg.cppc.topotecano", "rel": "FONTE", "para": "src.05.50", "pagina": 34}
+{"de": "far.topotecano", "rel": "FONTE", "para": "src.05.50", "pagina": 34}
+{"de": "reg.cppc.topotecano", "rel": "USA_FARMACO", "para": "far.topotecano"}
+{"de": "cen.cppc.doenca-extensa-2a-linha", "rel": "TRATA_COM", "para": "reg.cppc.topotecano", "linha": "2a linha", "intencao": "paliativa"}
+{"de": "reg.cppc.lurbinectedina", "rel": "FONTE", "para": "src.05.50", "pagina": 34}
+{"de": "reg.cppc.lurbinectedina", "rel": "USA_FARMACO", "para": "far.lurbinectedina"}
+{"de": "cen.cppc.doenca-extensa-2a-linha", "rel": "TRATA_COM", "para": "reg.cppc.lurbinectedina", "linha": "2a linha", "intencao": "paliativa"}
+{"de": "reg.cppc.cav", "rel": "FONTE", "para": "src.05.50", "pagina": 34}
+{"de": "far.ciclofosfamida", "rel": "FONTE", "para": "src.05.50", "pagina": 34}
+{"de": "reg.cppc.cav", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "far.doxorrubicina", "rel": "FONTE", "para": "src.05.50", "pagina": 34}
+{"de": "reg.cppc.cav", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "cen.cppc.doenca-extensa-2a-linha", "rel": "TRATA_COM", "para": "reg.cppc.cav", "linha": "2a linha", "intencao": "paliativa"}
+{"de": "reg.cppc.paclitaxel-2l", "rel": "FONTE", "para": "src.05.50", "pagina": 52}
+{"de": "reg.cppc.paclitaxel-2l", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.cppc.paclitaxel-2l", "rel": "USA_FARMACO", "para": "far.irinotecano"}
+{"de": "cen.cppc.doenca-extensa-2a-linha", "rel": "TRATA_COM", "para": "reg.cppc.paclitaxel-2l", "linha": "2a linha", "intencao": "paliativa"}
+{"de": "dx.mesotelioma-pleural.biopsia-pleural", "rel": "FONTE", "para": "src.05.51", "pagina": 11}
+{"de": "tum.mesotelioma-pleural", "rel": "DIAGNOSTICA_POR", "para": "dx.mesotelioma-pleural.biopsia-pleural"}
+{"de": "dx.mesotelioma-pleural.imagem", "rel": "FONTE", "para": "src.05.51", "pagina": 13}
+{"de": "tum.mesotelioma-pleural", "rel": "DIAGNOSTICA_POR", "para": "dx.mesotelioma-pleural.imagem"}
+{"de": "dx.mesotelioma-pleural.bap1", "rel": "FONTE", "para": "src.05.51", "pagina": 10}
+{"de": "tum.mesotelioma-pleural", "rel": "DIAGNOSTICA_POR", "para": "dx.mesotelioma-pleural.bap1"}
+{"de": "bio.bap1", "rel": "FONTE", "para": "src.05.51", "pagina": 10}
+{"de": "cen.mesotelioma-pleural.ressecavel-selecionado", "rel": "FONTE", "para": "src.05.51", "pagina": 17}
+{"de": "tum.mesotelioma-pleural", "rel": "TEM_CENARIO", "para": "cen.mesotelioma-pleural.ressecavel-selecionado"}
+{"de": "cen.mesotelioma-pleural.avancado-1a-linha", "rel": "FONTE", "para": "src.05.51", "pagina": 25}
+{"de": "tum.mesotelioma-pleural", "rel": "TEM_CENARIO", "para": "cen.mesotelioma-pleural.avancado-1a-linha"}
+{"de": "cen.mesotelioma-pleural.2a-linha", "rel": "FONTE", "para": "src.05.51", "pagina": 25}
+{"de": "tum.mesotelioma-pleural", "rel": "TEM_CENARIO", "para": "cen.mesotelioma-pleural.2a-linha"}
+{"de": "tri.mars-2", "rel": "FONTE", "para": "src.05.51", "pagina": 16}
+{"de": "reg.mesotelioma-pleural.pleurectomia-decorticacao", "rel": "FONTE", "para": "src.05.51", "pagina": 17}
+{"de": "reg.mesotelioma-pleural.pleurectomia-decorticacao", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.mesotelioma-pleural.pleurectomia-decorticacao", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "cen.mesotelioma-pleural.ressecavel-selecionado", "rel": "TRATA_COM", "para": "reg.mesotelioma-pleural.pleurectomia-decorticacao", "linha": "perioperatório", "intencao": "curativa"}
+{"de": "reg.mesotelioma-pleural.pleurectomia-decorticacao", "rel": "SUSTENTADO_POR", "para": "tri.mars-2"}
+{"de": "tri.mars-2", "rel": "TESTOU", "para": "reg.mesotelioma-pleural.pleurectomia-decorticacao"}
+{"de": "reg.mesotelioma-pleural.ipc-pleurodese", "rel": "FONTE", "para": "src.05.51", "pagina": 18}
+{"de": "cen.mesotelioma-pleural.avancado-1a-linha", "rel": "TRATA_COM", "para": "reg.mesotelioma-pleural.ipc-pleurodese", "linha": "suporte", "intencao": "paliativa"}
+{"de": "tri.emphacis", "rel": "FONTE", "para": "src.05.51", "pagina": 20}
+{"de": "tri.maps", "rel": "FONTE", "para": "src.05.51", "pagina": 20}
+{"de": "reg.mesotelioma-pleural.platina-pemetrexede-bev", "rel": "FONTE", "para": "src.05.51", "pagina": 20}
+{"de": "reg.mesotelioma-pleural.platina-pemetrexede-bev", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.mesotelioma-pleural.platina-pemetrexede-bev", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.mesotelioma-pleural.platina-pemetrexede-bev", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "reg.mesotelioma-pleural.platina-pemetrexede-bev", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "cen.mesotelioma-pleural.avancado-1a-linha", "rel": "TRATA_COM", "para": "reg.mesotelioma-pleural.platina-pemetrexede-bev", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "epitelioide (QT não recomendada isolada no não epitelioide)"}
+{"de": "cen.mesotelioma-pleural.2a-linha", "rel": "TRATA_COM", "para": "reg.mesotelioma-pleural.platina-pemetrexede-bev", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "epitelioide (QT não recomendada isolada no não epitelioide)"}
+{"de": "reg.mesotelioma-pleural.platina-pemetrexede-bev", "rel": "SUSTENTADO_POR", "para": "tri.emphacis"}
+{"de": "tri.emphacis", "rel": "TESTOU", "para": "reg.mesotelioma-pleural.platina-pemetrexede-bev"}
+{"de": "reg.mesotelioma-pleural.platina-pemetrexede-bev", "rel": "SUSTENTADO_POR", "para": "tri.maps"}
+{"de": "tri.maps", "rel": "TESTOU", "para": "reg.mesotelioma-pleural.platina-pemetrexede-bev"}
+{"de": "tri.checkmate-743", "rel": "FONTE", "para": "src.05.51", "pagina": 22}
+{"de": "reg.mesotelioma-pleural.nivolumabe-ipilimumabe", "rel": "FONTE", "para": "src.05.51", "pagina": 22}
+{"de": "reg.mesotelioma-pleural.nivolumabe-ipilimumabe", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "reg.mesotelioma-pleural.nivolumabe-ipilimumabe", "rel": "USA_FARMACO", "para": "far.ipilimumabe"}
+{"de": "cen.mesotelioma-pleural.avancado-1a-linha", "rel": "TRATA_COM", "para": "reg.mesotelioma-pleural.nivolumabe-ipilimumabe", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "especialmente não epitelioide"}
+{"de": "reg.mesotelioma-pleural.nivolumabe-ipilimumabe", "rel": "SUSTENTADO_POR", "para": "tri.checkmate-743"}
+{"de": "tri.checkmate-743", "rel": "TESTOU", "para": "reg.mesotelioma-pleural.nivolumabe-ipilimumabe"}
+{"de": "tri.chu-2023-pembro-qt-meso", "rel": "FONTE", "para": "src.05.51", "pagina": 24}
+{"de": "reg.mesotelioma-pleural.pembro-platina-pemetrexede", "rel": "FONTE", "para": "src.05.51", "pagina": 24}
+{"de": "reg.mesotelioma-pleural.pembro-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.mesotelioma-pleural.pembro-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.mesotelioma-pleural.pembro-platina-pemetrexede", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "cen.mesotelioma-pleural.avancado-1a-linha", "rel": "TRATA_COM", "para": "reg.mesotelioma-pleural.pembro-platina-pemetrexede", "linha": "1a linha", "intencao": "paliativa"}
+{"de": "reg.mesotelioma-pleural.pembro-platina-pemetrexede", "rel": "SUSTENTADO_POR", "para": "tri.chu-2023-pembro-qt-meso"}
+{"de": "tri.chu-2023-pembro-qt-meso", "rel": "TESTOU", "para": "reg.mesotelioma-pleural.pembro-platina-pemetrexede"}
+{"de": "tri.confirm", "rel": "FONTE", "para": "src.05.51", "pagina": 21}
+{"de": "reg.mesotelioma-pleural.nivolumabe-2l", "rel": "FONTE", "para": "src.05.51", "pagina": 21}
+{"de": "reg.mesotelioma-pleural.nivolumabe-2l", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "cen.mesotelioma-pleural.2a-linha", "rel": "TRATA_COM", "para": "reg.mesotelioma-pleural.nivolumabe-2l", "linha": "2a linha", "intencao": "paliativa"}
+{"de": "reg.mesotelioma-pleural.nivolumabe-2l", "rel": "SUSTENTADO_POR", "para": "tri.confirm"}
+{"de": "tri.confirm", "rel": "TESTOU", "para": "reg.mesotelioma-pleural.nivolumabe-2l"}
+{"de": "tri.ceresoli-2019-ttfields", "rel": "FONTE", "para": "src.05.51", "pagina": 27}
+{"de": "reg.mesotelioma-pleural.ttfields-qt", "rel": "FONTE", "para": "src.05.51", "pagina": 27}
+{"de": "reg.mesotelioma-pleural.ttfields-qt", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.mesotelioma-pleural.ttfields-qt", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "cen.mesotelioma-pleural.avancado-1a-linha", "rel": "TRATA_COM", "para": "reg.mesotelioma-pleural.ttfields-qt", "linha": "1a linha", "intencao": "paliativa"}
+{"de": "reg.mesotelioma-pleural.ttfields-qt", "rel": "SUSTENTADO_POR", "para": "tri.ceresoli-2019-ttfields"}
+{"de": "tri.ceresoli-2019-ttfields", "rel": "TESTOU", "para": "reg.mesotelioma-pleural.ttfields-qt"}
+{"de": "dx.timoma.imagem", "rel": "FONTE", "para": "src.05.52", "pagina": 12}
+{"de": "tum.timoma", "rel": "DIAGNOSTICA_POR", "para": "dx.timoma.imagem"}
+{"de": "dx.timoma.sem-biopsia-upfront", "rel": "FONTE", "para": "src.05.52", "pagina": 13}
+{"de": "tum.timoma", "rel": "DIAGNOSTICA_POR", "para": "dx.timoma.sem-biopsia-upfront"}
+{"de": "dx.timoma.who", "rel": "FONTE", "para": "src.05.52", "pagina": 20}
+{"de": "tum.timoma", "rel": "DIAGNOSTICA_POR", "para": "dx.timoma.who"}
+{"de": "dx.timoma.paraneoplasicas", "rel": "FONTE", "para": "src.05.52", "pagina": 10}
+{"de": "tum.timoma", "rel": "DIAGNOSTICA_POR", "para": "dx.timoma.paraneoplasicas"}
+{"de": "est.timoma.masaoka-koga", "rel": "FONTE", "para": "src.05.52", "pagina": 14}
+{"de": "tum.timoma", "rel": "ESTADIA_POR", "para": "est.timoma.masaoka-koga"}
+{"de": "cen.timoma.ressecado", "rel": "FONTE", "para": "src.05.52", "pagina": 22}
+{"de": "tum.timoma", "rel": "TEM_CENARIO", "para": "cen.timoma.ressecado"}
+{"de": "cen.timoma.localmente-avancado", "rel": "FONTE", "para": "src.05.52", "pagina": 25}
+{"de": "tum.timoma", "rel": "TEM_CENARIO", "para": "cen.timoma.localmente-avancado"}
+{"de": "cen.timoma.avancado", "rel": "FONTE", "para": "src.05.52", "pagina": 27}
+{"de": "tum.timoma", "rel": "TEM_CENARIO", "para": "cen.timoma.avancado"}
+{"de": "reg.timoma.cirurgia-r0", "rel": "FONTE", "para": "src.05.52", "pagina": 18}
+{"de": "cen.timoma.ressecado", "rel": "TRATA_COM", "para": "reg.timoma.cirurgia-r0", "linha": "cirurgia", "intencao": "curativa"}
+{"de": "reg.timoma.port", "rel": "FONTE", "para": "src.05.52", "pagina": 22}
+{"de": "cen.timoma.ressecado", "rel": "TRATA_COM", "para": "reg.timoma.port", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.timoma.cap", "rel": "FONTE", "para": "src.05.52", "pagina": 25}
+{"de": "reg.timoma.cap", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.timoma.cap", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.timoma.cap", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "cen.timoma.localmente-avancado", "rel": "TRATA_COM", "para": "reg.timoma.cap", "linha": "indução / 1a linha", "intencao": "curativa/paliativa", "condicao_biomarcador": "timoma"}
+{"de": "cen.timoma.avancado", "rel": "TRATA_COM", "para": "reg.timoma.cap", "linha": "indução / 1a linha", "intencao": "curativa/paliativa", "condicao_biomarcador": "timoma"}
+{"de": "tri.marble", "rel": "FONTE", "para": "src.05.52", "pagina": 28}
+{"de": "tri.relevent", "rel": "FONTE", "para": "src.05.52", "pagina": 28}
+{"de": "reg.timoma.carbo-paclitaxel", "rel": "FONTE", "para": "src.05.52", "pagina": 28}
+{"de": "reg.timoma.carbo-paclitaxel", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.timoma.carbo-paclitaxel", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.timoma.carbo-paclitaxel", "rel": "USA_FARMACO", "para": "far.atezolizumabe"}
+{"de": "reg.timoma.carbo-paclitaxel", "rel": "USA_FARMACO", "para": "far.ramucirumabe"}
+{"de": "cen.timoma.avancado", "rel": "TRATA_COM", "para": "reg.timoma.carbo-paclitaxel", "linha": "1a linha", "intencao": "paliativa", "condicao_biomarcador": "carcinoma tímico"}
+{"de": "reg.timoma.carbo-paclitaxel", "rel": "SUSTENTADO_POR", "para": "tri.marble"}
+{"de": "tri.marble", "rel": "TESTOU", "para": "reg.timoma.carbo-paclitaxel"}
+{"de": "reg.timoma.carbo-paclitaxel", "rel": "SUSTENTADO_POR", "para": "tri.relevent"}
+{"de": "tri.relevent", "rel": "TESTOU", "para": "reg.timoma.carbo-paclitaxel"}
+{"de": "tri.pecati", "rel": "FONTE", "para": "src.05.52", "pagina": 29}
+{"de": "tri.caveatt", "rel": "FONTE", "para": "src.05.52", "pagina": 29}
+{"de": "reg.timoma.lenvatinibe-sunitinibe-2l", "rel": "FONTE", "para": "src.05.52", "pagina": 29}
+{"de": "far.lenvatinibe", "rel": "FONTE", "para": "src.05.52", "pagina": 29}
+{"de": "reg.timoma.lenvatinibe-sunitinibe-2l", "rel": "USA_FARMACO", "para": "far.lenvatinibe"}
+{"de": "far.sunitinibe", "rel": "FONTE", "para": "src.05.52", "pagina": 29}
+{"de": "reg.timoma.lenvatinibe-sunitinibe-2l", "rel": "USA_FARMACO", "para": "far.sunitinibe"}
+{"de": "reg.timoma.lenvatinibe-sunitinibe-2l", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.timoma.avancado", "rel": "TRATA_COM", "para": "reg.timoma.lenvatinibe-sunitinibe-2l", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "carcinoma tímico"}
+{"de": "reg.timoma.lenvatinibe-sunitinibe-2l", "rel": "SUSTENTADO_POR", "para": "tri.pecati"}
+{"de": "tri.pecati", "rel": "TESTOU", "para": "reg.timoma.lenvatinibe-sunitinibe-2l"}
+{"de": "reg.timoma.lenvatinibe-sunitinibe-2l", "rel": "SUSTENTADO_POR", "para": "tri.caveatt"}
+{"de": "tri.caveatt", "rel": "TESTOU", "para": "reg.timoma.lenvatinibe-sunitinibe-2l"}
+{"de": "reg.timoma.timoma-2l", "rel": "FONTE", "para": "src.05.52", "pagina": 27}
+{"de": "far.capecitabina", "rel": "FONTE", "para": "src.05.52", "pagina": 27}
+{"de": "reg.timoma.timoma-2l", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "reg.timoma.timoma-2l", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.timoma.timoma-2l", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "reg.timoma.timoma-2l", "rel": "USA_FARMACO", "para": "far.sunitinibe"}
+{"de": "far.everolimo", "rel": "FONTE", "para": "src.05.52", "pagina": 27}
+{"de": "reg.timoma.timoma-2l", "rel": "USA_FARMACO", "para": "far.everolimo"}
+{"de": "far.octreotida", "rel": "FONTE", "para": "src.05.52", "pagina": 27}
+{"de": "reg.timoma.timoma-2l", "rel": "USA_FARMACO", "para": "far.octreotida"}
+{"de": "cen.timoma.avancado", "rel": "TRATA_COM", "para": "reg.timoma.timoma-2l", "linha": "2a linha", "intencao": "paliativa", "condicao_biomarcador": "timoma"}

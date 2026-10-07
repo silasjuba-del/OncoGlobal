@@ -11,7 +11,7 @@ function casaToken(token: string, e: EntradaFila, rs: SalaoRuleset): boolean {
     case "CADEIRA":
       return e.recurso === "CADEIRA";
     case "IDADE_80":
-      return e.idadeAnos > rs.frente.idadeAcimaDe;
+      return e.idadeAnos !== null && e.idadeAnos > rs.frente.idadeAcimaDe;
     default:
       return false;
   }

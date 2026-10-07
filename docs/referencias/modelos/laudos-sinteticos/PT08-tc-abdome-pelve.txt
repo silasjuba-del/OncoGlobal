@@ -1,0 +1,24 @@
+[SINTÉTICO · Paciente Teste 08 · estrutura de laudo real, sem identificadores]
+Atendimento: 000000000000          Idade: 77 anos
+Paciente: PACIENTE TESTE 08        Data: 01/01/2030
+Data de Nascimento: 01/01/1953
+
+TOMOGRAFIA COMPUTADORIZADA DO ABDOMEN SUPERIOR E PELVE
+
+Técnica:
+Aquisições volumétricas sem e com contraste iodado.
+
+Análise:
+Fígado de dimensões reduzidas, contornos irregulares e com acentuação das fissuras, apresentando nódulos heterogêneos e hipovasculares distribuídos pelo seu parênquima, destacando-se os maiores localizados no segmento II, medindo 3,4 x 2,5 cm e no segmento IV, medindo 4,3 x 2,4 cm, inespecíficos, que podem ser suspeitos para acometimento secundário. Prosseguir investigação. Existem ainda diminutos cistos esparsos, medindo até 1,0 cm.
+Não há sinais de dilatação das vias biliares intra ou extra-hepáticas.
+Vesícula biliar, baço, adrenais e pâncreas sem particularidades.
+Dilatação ureteral à direita, promovendo acentuada hidronefrose e afilamento do parênquima renal, sem cálculos obstrutivos identificados.
+Rim esquerdo exibe realce satisfatório pelo meio de contraste, sem sinais de processos expansivos, cálculos ou hidronefrose.
+Aorta e veia cava de calibre habitual. Placas ateromatosas calcificadas na aorta e artérias ilíacas.
+Divertículos cólicos, sem sinais inflamatórios atuais.
+Pequena hérnia umbilical.
+Bexiga com capacidade e forma preservadas.
+Útero e regiões anexiais sem particularidades.
+Não foram caracterizados líquido livre, coleções ou linfonodomegalias.
+Espondilodiscopatia degenerativa lombar.
+Lesões osteoblásticas e líticas no corpo vertebral L5, suspeitas. Correlacionar com cintilografia óssea.

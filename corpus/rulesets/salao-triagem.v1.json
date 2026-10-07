@@ -1,6 +1,6 @@
 {
   "header": { "id": "salao-triagem", "versao": "1.0.0", "vigenteDesde": "2026-10-05",
-    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "Q21-Q28 + A7 + K-10/K-11 (docs/DECISOES.md)", "trecho": null, "edicao": null }, "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-05" },
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "Q21-Q28 + A7 + K-10/K-11 + D-W9-22g + D-W9-37 + D-W9-38 + D-W9-41 (docs/DECISOES.md)", "trecho": null, "edicao": null }, "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-05" },
   "regra": "igual ao limite passa",
   "cortes": {
     "pasMax": 160, "pasMin": 90,
@@ -21,5 +21,50 @@
   "emergenciaAlteraFila": false,
   "pesoVermelho": { "perdaKgAcimaDe": 5, "janelaDias": 60, "informadoDisparaSozinho": false, "acao": ["NUTRICAO", "QT_ADIADA", "CONSULTA_MEDICA"] },
   "aplicaSemMedicoSe": ["SEM_CORTE", "SEM_PENDENCIA", "PRESCRICAO_VIGENTE"],
-  "ciclosLiberadosPorPrescricao": 2
+  "ciclosLiberadosPorPrescricao": 2,
+  "portoes": {
+    "nota": "Dois portões nomeados. Não fundir os objetos (D-W9-22g). Igual ao limite passa. Alerta: bloqueiaSalvar é false. header.versao permanece 1.0.0 porque a suíte FN-01 exige essa string. FC < 50 corta só em corteSalao (D-W9-37); cortes.fcMinNaoCorta da FN-01 continua anotando.",
+    "triagemCiclo": {
+      "nome": "triagem-do-ciclo",
+      "decisao": "D-W9-22g",
+      "bloqueiaSalvar": false,
+      "idadeDecisao": "D-W9-03",
+      "tempDecimosMax": 378,
+      "pasMax": 140,
+      "padMax": 90,
+      "fcMax": 110,
+      "decisoes": {
+        "temp": "D-W9-22g",
+        "pas": "D-W9-22g",
+        "pad": "D-W9-22g",
+        "fc": "D-W9-22g"
+      }
+    },
+    "corteSalao": {
+      "nome": "corte-do-salao",
+      "decisao": "D-W9-37",
+      "bloqueiaSalvar": false,
+      "idadeDecisao": "D-W9-03",
+      "tempDecimosMax": 378,
+      "spo2Min": 88,
+      "pasMin": 90,
+      "fcMin": 50,
+      "hbDgDlMin": 80,
+      "crCentesimosMax": 150,
+      "ancMin": 1500,
+      "plqMin": 100000,
+      "ecogCorta": [3, 4],
+      "decisoes": {
+        "temp": "D-W9-38",
+        "spo2": "D-W9-37",
+        "pas": "D-W9-41",
+        "fc": "D-W9-37",
+        "hb": "D-W9-37",
+        "cr": "D-W9-37",
+        "anc": "D-W9-22a",
+        "plq": "D-W9-22a",
+        "ecog": "D-W9-22d"
+      }
+    }
+  }
 }

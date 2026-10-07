@@ -1,0 +1,192 @@
+{
+  "templateId": "FICHA.colon-reto.folfox__paliativo-metastatico@1.0.0",
+  "tumor": "Cólon/Reto",
+  "nome": "FOLFOX",
+  "cenario": "paliativo/metastático",
+  "versao": "1.0.0",
+  "hash": "e6e409486401fee672129c15036fc45768518e7048f1708ceea1956f8a8bad78",
+  "codigoInstitucional": null,
+  "intervaloDias": 14,
+  "ciclos": null,
+  "itens": [
+    {
+      "drug": "Soro fisiológico 0,9% 250 mL (lavagem de acesso)",
+      "classe": "PRE_QT",
+      "sequence": 1,
+      "standardDose": 1,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "frasco",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": 250,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Lavar acesso venoso pré e pós QT (planilha).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Ondansetrona",
+      "classe": "PRE_QT",
+      "sequence": 2,
+      "standardDose": 8,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "15 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Planilha: 8 mg EV; fichas reais do serviço usam 16 mg em alguns esquemas [VERIFICAR].",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Dexametasona",
+      "classe": "PRE_QT",
+      "sequence": 3,
+      "standardDose": 10,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "15 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Antiemese local sem NK1 (D-W9-23c/34c).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Prometazina",
+      "classe": "PRE_QT",
+      "sequence": 4,
+      "standardDose": 25,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Pré-medicação local (D-W9-34c).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Oxaliplatina",
+      "classe": "QT",
+      "sequence": 5,
+      "standardDose": 85,
+      "doseBasis": "MG_M2",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg/m²",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "2 h",
+      "days": [
+        "d1"
+      ],
+      "observacao": null,
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Folinato de cálcio (leucovorina)",
+      "classe": "QT",
+      "sequence": 6,
+      "standardDose": 400,
+      "doseBasis": "MG_M2",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg/m²",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "2 h",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Correr em Y com a oxaliplatina.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Fluoruracila (5-FU) infusão contínua",
+      "classe": "QT",
+      "sequence": 7,
+      "standardDose": 2400,
+      "doseBasis": "MG_M2",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg/m²",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "46 h",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Bomba de infusão contínua de 46 h (d1 a d3), SEM bolus (D-W9-23a). Planilha: 1.200 mg/m² D1+D2 em 8 h (total 2.400). O SOnHe traz também bolus de 5-FU 400 mg/m², que NÃO entra (D-W9-50).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Soro fisiológico 0,9% 250 mL (lavagem pós-QT)",
+      "classe": "POS_QT",
+      "sequence": 8,
+      "standardDose": 1,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "frasco",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": 250,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Lavar acesso venoso pós-QT (planilha).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    }
+  ],
+  "limiaresBula": null,
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Cólon \"Esquema FOLFOX\" p. 102; decisões D-W9-23, D-W9-34, D-W9-50.",
+  "status": "RASCUNHO"
+}

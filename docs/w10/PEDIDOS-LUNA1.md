@@ -1,0 +1,12 @@
+# Pedidos Luna1 · W10
+
+1. **Promover envelopes operacionais provisórios** (`AgendaEntry`, `CanalMessage`, `ChatMessage`, `RecistSerie`) para contratos canônicos. Os leitores exigem `safeParse`, evento confirmado e correspondência de patient/encounter com o payload. Envelopes estritos estão em `src/server/leituras.ts`.
+2. **Concluir dados operacionais do salão**: ruleset real é carregado/validado e triagem/corte/fila são calculados. `Triagem` não carrega PAD/creatinina nem vínculo de prescrição vigente; esses dados permanecem PENDENTE. Reatacar especificamente os limiares alterados em Grok contra o leitor atual.
+3. **Persistir mensagens internas/canal por writer canônico**: as leituras `ChatMessage` e `CanalMessage` são provisórias. Nenhum produtor de mensagem foi implementado nesta faixa; listas vazias indicam fonte ausente. `Conversation` continua distinta de chat por setor.
+4. **Ponte de revisão→projeção**: `/consulta/rascunho/revisar` aceita somente `EXTRACAO_RASCUNHO` não vinculada e exige paciente destino existente + sessão + revisão esperada; não cria fato. O pipeline de extração existente ainda não reconcilia/promove fatos.
+5. **SIGTAP elegível para antiglosa**: antiglosa consome as 47 caixas reais e lê prazo D85/D90 após `dataCivilDoServico(..., "-03:00")`. O corpus não contém tabela SIGTAP por competência; antiglosa retorna resultado sem elegibilidade e exportação segue bloqueada.
+6. **Requisitos de segurança de prescrição**: protocolos atuais permanecem RASCUNHO. `comuns.v1.json` tem `consumivel:false`; sua receita histórica nunca ativa modelo. Para qualquer ficha futura CONFERIDA, declarar `ValidationRequirement` com fonte e integrar medidas confirmadas antes de apresentar PASS. Linha manual sem item/requisitos e ficha sem template aprovado ficam `NOT_EVALUABLE`.
+7. **Fluxo de bundle no UI**: o endpoint mantém `BUNDLE_NAO_EXIBIDO` e adapta o formato `PedidoBundle` da Porta, filtrando drafts por paciente/encontro/lote. A `TelaConsulta` atual não chama `exibirBundle` antes de `confirmar`; Cursor precisa ligar exibição explícita/hash ao passo de confirmação. Não alegar assinatura UI end-to-end até isso ser feito.
+8. **Configuração local por host**: rotas L5 criam `SettingsService` quando `configRootDir` é injetado. Tentativa de gravar `apac.*` global falha com `409 CONTEXTO_PACIENTE_OBRIGATORIO`, sem mutação.
+
+Pendências não autorizam preencher prescrição, classificação, elegibilidade, SIGTAP ou campos clínicos ausentes.

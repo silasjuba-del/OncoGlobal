@@ -52,7 +52,8 @@ describe("GRK-08 lote APAC", () => {
     const aberto = montarApacBatch("lote-02", {
       competencia: null, cid: null, esquema: null, estado: null,
     }, [
-      item({ apacId: "apac-a", competencia: null, cid: null, esquema: null, estado: "RASCUNHO" }),
+      // D-W5-10: competência ausente não fatura; o teste mantém só "critério nulo não filtra".
+      item({ apacId: "apac-a", competencia: "2026-10", cid: null, esquema: null, estado: "RASCUNHO" }),
     ], "2026-10-05");
     expect(aberto.itens).toEqual(["apac-a"]);
 

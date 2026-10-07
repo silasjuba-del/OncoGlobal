@@ -1,0 +1,42 @@
+{
+  "header": {
+    "id": "agenda-apac-emissao",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-07",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-W5-01; D-W5-02; D-W5-10; D-W9-10; D-W9-12; D-W9-13",
+      "trecho": "Fuso do serviço −03:00, offset injetado. Aviso de APAC adiantada em até 1 dia civil é aceitável; atrasar esse aviso não é. Um lote diário reúne vários pacientes e uma competência. CNES 2605473 é exemplo editável, não o único válido. Finalidade de QT e de RT é escolha do médico, nunca a intenção clínica. CNS pelo algoritmo e-SUS: DV válido não prova identidade.",
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-07"
+  },
+  "emissao": {
+    "fuso": "-03:00",
+    "fusoOffsetMinutos": -180,
+    "avisoAdiantadoDias": 1,
+    "igualAoLimiteAvisa": true,
+    "ausenteNaoEDiaZero": true,
+    "consultaSegue": true,
+    "cnesExemploEditavel": "2605473",
+    "cnesUnicoValido": false,
+    "finalidades": {
+      "QT": [
+        "Paliativa",
+        "Para Controle Temporário",
+        "Prévia",
+        "Adjuvante",
+        "Curativa"
+      ],
+      "RT": [
+        "Radical",
+        "Adjuvante",
+        "Antiálgica",
+        "Paliativa",
+        "Prévia",
+        "Anti-hemorrágica"
+      ]
+    }
+  }
+}

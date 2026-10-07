@@ -1,6 +1,8 @@
 // GRK-01 · PRE-CONSULT PACK. Só snapshots CONFIRMED. Sem dado → seção PENDENTE. Não inventa valor.
 import { diferencaDiasCivis, fonteInformada, secaoDe, secaoVazia } from "../tipos.js";
 import type { DeltaKind, Secao, Semaforo } from "../tipos.js";
+import { delta } from "../../rules/delta.js";
+import type { CampoDelta } from "../../rules/delta.js";
 
 export interface FatoSnapshot {
   campo: string;
@@ -168,22 +170,22 @@ function montarDelta(
   for (const [campo, valor] of idxAtual) if (valor === FATO_CONFLITO) conflitos.add(campo);
   for (const [campo, valor] of idxAnterior) if (valor === FATO_CONFLITO) conflitos.add(campo);
 
-  const campos = [...new Set([...idxAtual.keys(), ...idxAnterior.keys()])].sort();
+  // K-17: classificação e ausência seguem a única FN-14; a vista não infere resolução.
+  const resultado = delta(
+    { kind: "CONFIRMED", campos: camposDelta(idxAnterior) },
+    { kind: "CURRENT", campos: camposDelta(idxAtual) },
+    {},
+  );
   const itens: Mudanca[] = [];
-  for (const campo of campos) {
+  for (const item of resultado.itens) {
+    const { campo } = item;
     if (conflitos.has(campo)) continue;
     const antes = idxAnterior.get(campo);
     const depois = idxAtual.get(campo);
     const valorAntes = typeof antes === "string" ? antes : null;
     const valorDepois = typeof depois === "string" ? depois : null;
     if (valorAntes === null && valorDepois === null) continue;
-    const kind: DeltaKind = valorAntes === null
-      ? "NOVO"
-      : valorDepois === null
-        ? "RESOLVEU"
-        : valorAntes === valorDepois
-          ? "PERSISTE"
-          : "MUDOU";
+    const kind = item.classe;
     itens.push({
       campo,
       kind,
@@ -193,18 +195,28 @@ function montarDelta(
     });
   }
 
-  if (campos.length === 0) return mudancaVazia("sem fatos confirmados para comparar");
+  if (resultado.itens.length === 0) return mudancaVazia("sem fatos confirmados para comparar");
 
-  const estado: Semaforo = conflitos.size > 0 ? "VERMELHO" : "VERDE";
+  const pendente = resultado.itens.some((item) => item.estado === "PENDENTE");
+  const estado: Semaforo = conflitos.size > 0 ? "VERMELHO" : pendente ? "PENDENTE" : "VERDE";
   const motivo = conflitos.size > 0
     ? "conflito em campo confirmado; valor não eleito"
-    : itens.some((item) => item.kind !== "PERSISTE")
-      ? "comparação entre snapshots confirmados"
-      : "nenhuma mudança entre os snapshots confirmados";
+    : pendente
+      ? "campo ausente no snapshot atual; resolução não confirmada"
+      : itens.some((item) => item.kind !== "PERSISTE")
+        ? "comparação entre snapshots confirmados"
+        : "nenhuma mudança entre os snapshots confirmados";
   return { estado, motivo, itens, camposConflitantes: [...conflitos].sort() };
 }
 
 const FATO_CONFLITO = Symbol("fato-conflito");
+
+function camposDelta(indice: ReadonlyMap<string, string | typeof FATO_CONFLITO>): Record<string, CampoDelta> {
+  return Object.fromEntries([...indice].map(([campo, valor]) => [campo, {
+    valor: valor === FATO_CONFLITO ? null : valor,
+    estado: valor === FATO_CONFLITO ? "VERMELHO" : "VERDE",
+  }]));
+}
 
 function indexarFatos(fatos: readonly FatoSnapshot[]): Map<string, string | typeof FATO_CONFLITO> {
   const mapa = new Map<string, string | typeof FATO_CONFLITO>();

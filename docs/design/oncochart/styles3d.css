@@ -1,0 +1,130 @@
+/* ============ ONCOASSIST AVATAR ============ */
+.ava{--s:100px;--lx:0;--ly:0;width:var(--s);height:calc(var(--s) * 1.14);position:relative;flex-shrink:0;perspective:calc(var(--s) * 5)}
+.ava-float{position:absolute;left:0;top:0;width:var(--s);height:var(--s);transform-style:preserve-3d;animation:avaFloat 4.2s ease-in-out infinite}
+@keyframes avaFloat{50%{transform:translateY(calc(var(--s) * -.07))}}
+.ava-halo{position:absolute;inset:-14%;border-radius:50%;background:radial-gradient(circle, color-mix(in oklch,var(--accent) 45%, transparent), transparent 66%);filter:blur(6px);opacity:.55;animation:avaHalo 3s ease-in-out infinite}
+@keyframes avaHalo{50%{opacity:.9;transform:scale(1.06)}}
+.ava.talk .ava-halo{animation-duration:.7s}
+.ava-head{position:absolute;inset:8%;border-radius:50%;transform-style:preserve-3d;
+  transform:rotateY(calc(var(--lx) * 28deg)) rotateX(calc(var(--ly) * -24deg));transition:transform .25s var(--ease);
+  background:radial-gradient(circle at calc(38% + var(--lx) * 10%) calc(30% + var(--ly) * 10%), oklch(0.98 0.03 292) 0%, color-mix(in oklch,var(--accent) 70%, #fff) 18%, var(--accent) 52%, oklch(0.28 0.12 292) 100%);
+  box-shadow:inset calc(var(--s) * -.06) calc(var(--s) * -.08) calc(var(--s) * .14) oklch(0.2 0.1 292 / .55), 0 calc(var(--s) * .1) calc(var(--s) * .24) -6px color-mix(in oklch,var(--accent) 70%, transparent)}
+.ava-head::after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg, transparent, oklch(0.85 0.12 230 / .45), transparent 30%, oklch(0.85 0.13 78 / .35), transparent 60%);mix-blend-mode:screen;animation:spin 7s linear infinite}
+.ava.talk .ava-head::after{animation-duration:2s}
+.ava-face{position:absolute;left:18%;right:18%;top:30%;height:44%;border-radius:40%;background:oklch(0.16 0.05 285 / .88);
+  transform:translate3d(calc(var(--lx) * var(--s) * .07), calc(var(--ly) * var(--s) * .06), calc(var(--s) * .12));transition:transform .2s var(--ease);
+  box-shadow:inset 0 1px 0 oklch(1 0 0 / .18), 0 0 calc(var(--s) * .08) oklch(0.8 0.12 230 / .35);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(var(--s) * .05)}
+.ava-eyes{display:flex;gap:calc(var(--s) * .13)}
+.ava-eyes i{width:calc(var(--s) * .085);height:calc(var(--s) * .13);border-radius:calc(var(--s) * .05);background:oklch(0.9 0.12 200);box-shadow:0 0 calc(var(--s) * .06) oklch(0.85 0.14 200);animation:avaBlink 4.6s infinite}
+@keyframes avaBlink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+.ava-mouth{width:calc(var(--s) * .16);height:calc(var(--s) * .03);border-radius:0 0 calc(var(--s) * .08) calc(var(--s) * .08);background:oklch(0.9 0.12 200 / .85);box-shadow:0 0 calc(var(--s) * .04) oklch(0.85 0.14 200)}
+.ava.talk .ava-mouth{animation:avaTalk .22s ease-in-out infinite alternate}
+@keyframes avaTalk{from{height:calc(var(--s) * .02);width:calc(var(--s) * .14)}to{height:calc(var(--s) * .075);width:calc(var(--s) * .11);border-radius:calc(var(--s) * .05)}}
+.ava-ring{position:absolute;inset:-4%;border-radius:50%;border:1.5px solid color-mix(in oklch,var(--info) 55%, transparent);transform-style:preserve-3d}
+.ava-ring.r1{animation:ring1 6s linear infinite}
+.ava-ring.r2{inset:4%;border-color:color-mix(in oklch,var(--amber) 50%, transparent);animation:ring2 9s linear infinite}
+.ava-ring b{position:absolute;top:-4px;left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:var(--info);box-shadow:0 0 8px var(--info)}
+.ava-ring.r2 b{background:var(--amber);box-shadow:0 0 8px var(--amber);top:auto;bottom:-4px}
+@keyframes ring1{from{transform:rotateX(72deg) rotateZ(0)}to{transform:rotateX(72deg) rotateZ(360deg)}}
+@keyframes ring2{from{transform:rotateY(64deg) rotateZ(0)}to{transform:rotateY(64deg) rotateZ(-360deg)}}
+.ava.talk .ava-ring.r1{animation-duration:2.4s}
+.ava-shadow{position:absolute;left:22%;right:22%;bottom:0;height:calc(var(--s) * .07);border-radius:50%;background:radial-gradient(oklch(0 0 0 / .4), transparent 70%);animation:avaShadow 4.2s ease-in-out infinite}
+@keyframes avaShadow{50%{transform:scaleX(.78);opacity:.55}}
+
+/* FAB */
+.av-fab{right:20px;bottom:10px;display:block;width:58px;height:66px}
+.av-bubble{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 12px;border-radius:16px 16px 4px 16px;background:var(--surface);border:1px solid var(--line-strong);box-shadow:var(--shadow);font-size:11.5px;font-weight:500;white-space:nowrap;color:var(--text);animation:bubIn .45s var(--spring);position:absolute;right:30px;bottom:70px}
+.av-bubble svg{color:var(--accent)}
+@keyframes bubIn{from{opacity:0;transform:translateX(10px) scale(.9)}}
+
+/* ============ BOX 3D ============ */
+.b3{position:absolute;left:0;top:0;transform-style:preserve-3d;transition:transform .9s var(--spring)}
+.b3f{position:absolute;left:0;top:0;border:1px solid;border-color:inherit;backface-visibility:visible;opacity:.94;transition:width .9s var(--spring),height .9s var(--spring),margin .9s var(--spring),transform .9s var(--spring)}
+.b3.ghost .b3f{border-style:dashed;opacity:.85;background:color-mix(in oklch, currentColor 0%, transparent)}
+.b3:hover .b3f{filter:brightness(1.25)}
+
+/* ============ GRÁFICO 3D ============ */
+.c3-stage{height:250px;position:relative;perspective:900px;perspective-origin:50% 30%;overflow:hidden;cursor:grab;touch-action:none;border-top:1px solid var(--line);background:radial-gradient(300px 140px at 50% 85%, var(--accent-soft), transparent 70%)}
+.c3-stage:active{cursor:grabbing}
+.c3-world{--yaw:-30deg;position:absolute;left:50%;top:66%;transform-style:preserve-3d;transform:rotateX(-24deg) rotateY(var(--yaw))}
+.c3-floor{position:absolute;left:-190px;top:-150px;width:380px;height:300px;transform:rotateX(90deg);background-image:linear-gradient(var(--line) 1px, transparent 1px),linear-gradient(90deg, var(--line) 1px, transparent 1px);background-size:34px 34px;border:1px solid var(--line-strong);border-radius:6px;-webkit-mask:radial-gradient(closest-side, #000 60%, transparent)}
+.c3-plane{position:absolute;border:1.5px dashed var(--ok);background:color-mix(in oklch,var(--ok) 12%, transparent);pointer-events:none}
+.c3-lbl{position:absolute;left:0;top:0;transform-style:preserve-3d;pointer-events:none}
+.c3-lbl span{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;line-height:1.25}
+.c3-lbl.val span{font-size:13px;font-weight:700;color:var(--text)}
+.c3-lbl.val small,.c3-lbl.thr small{font-size:9px;font-weight:500;color:var(--faint)}
+.c3-lbl.thr span{color:var(--ok);font-weight:700;font-size:11px}
+.c3-lbl.sm span{font-size:9px}
+.b3.grow{transition:transform .9s var(--spring)}
+
+/* ============ JORNADA 3D ============ */
+.j3{position:absolute;inset:24px;z-index:101;display:grid;grid-template-columns:1fr 440px;border-radius:22px;overflow:hidden;border:1px solid var(--line-strong);background:var(--surface);box-shadow:0 40px 100px -20px #000c}
+.j3-main{position:relative;display:flex;flex-direction:column;min-width:0;background:radial-gradient(900px 420px at 50% 110%, color-mix(in oklch,var(--accent) 16%, transparent), transparent 70%), radial-gradient(600px 300px at 15% -10%, color-mix(in oklch,var(--info) 10%, transparent), transparent 70%), var(--bg)}
+.j3-head{display:flex;align-items:center;gap:9px;padding:14px 18px;flex-shrink:0;position:relative;z-index:5}
+.j3-head h2{font-size:16px;font-weight:600;letter-spacing:-.3px;margin-right:4px}
+.j3-views{margin-left:auto;width:290px}
+.j3-stage{flex:1;position:relative;perspective:1150px;perspective-origin:50% 38%;overflow:hidden;cursor:grab;touch-action:none}
+.j3-stage:active{cursor:grabbing}
+.j3-cam{--yaw:-10deg;position:absolute;left:50%;top:60%;transform-style:preserve-3d;will-change:transform}
+.j3-floor{position:absolute;transform:rotateX(90deg);transform-style:preserve-3d;border-radius:14px;
+  background-image:linear-gradient(color-mix(in oklch,var(--line) 60%, transparent) 1px, transparent 1px),linear-gradient(90deg, color-mix(in oklch,var(--line) 60%, transparent) 1px, transparent 1px);background-size:30px 30px;
+  -webkit-mask:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);border-top:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong)}
+.j3-future{position:absolute;top:0;bottom:0;right:0;background:repeating-linear-gradient(135deg, color-mix(in oklch,var(--ok) 7%, transparent) 0 10px, transparent 10px 20px)}
+.j3-lane{position:absolute;left:0;right:0;height:52px;border-radius:10px;background:color-mix(in oklch,var(--surface) 55%, transparent);border:1px solid var(--line)}
+.j3-lane span{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--faint)}
+.j3-month{position:absolute;top:0;bottom:0;width:0;border-left:1px dashed var(--line-strong)}
+.j3-month span{position:absolute;bottom:-26px;left:6px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.j3-today{position:absolute;left:-240px;top:-220px;width:480px;height:220px;background:linear-gradient(0deg, color-mix(in oklch,var(--accent) 20%, transparent), transparent);border-left:0;border-bottom:2px solid var(--accent);pointer-events:none;-webkit-mask:linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent)}
+.j3-bb{position:absolute;left:0;top:0;transform-style:preserve-3d;transition:opacity .5s, filter .5s}
+.j3-hoje{position:absolute;transform:translate(-50%,-100%);font-size:11px;font-weight:700;letter-spacing:1px;color:var(--accent-ink);background:var(--accent);padding:3px 9px;border-radius:6px;white-space:nowrap;box-shadow:0 0 20px var(--accent-soft)}
+.j3-dot{position:absolute;left:-11px;top:-11px;width:22px;height:22px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px color-mix(in oklch, currentColor 25%, transparent), 0 0 18px currentColor;opacity:.85}
+.j3-dot.on{animation:j3ring 1.6s infinite}
+@keyframes j3ring{0%{box-shadow:0 0 0 0 color-mix(in oklch, currentColor 60%, transparent), 0 0 18px currentColor}100%{box-shadow:0 0 0 22px transparent, 0 0 18px currentColor}}
+.j3-stem{position:absolute;left:-1px;bottom:0;width:2px;background:linear-gradient(currentColor, transparent);opacity:.8;transform-origin:bottom}
+.j3-card{position:absolute;left:0;transform:translateX(-50%);width:162px;text-align:left;padding:9px 11px;border-radius:12px;background:color-mix(in oklch,var(--surface) 88%, transparent);backdrop-filter:blur(8px);border:1px solid color-mix(in oklch,var(--c) 45%, var(--line));box-shadow:0 14px 30px -14px #0009;display:flex;flex-direction:column;gap:1px;transition:transform .35s var(--spring), box-shadow .3s, border-color .3s;cursor:pointer}
+.j3-card:hover{transform:translateX(-50%) translateY(-4px) scale(1.04)}
+.j3-card.on{transform:translateX(-50%) scale(1.16);border-color:var(--c);box-shadow:0 0 0 3px color-mix(in oklch,var(--c) 22%, transparent), 0 22px 40px -14px #000a;z-index:5}
+.j3-card.future{border-style:dashed;background:color-mix(in oklch,var(--surface) 62%, transparent)}
+.j3-card small{font-size:9.5px;font-family:var(--mono);color:var(--c);text-transform:uppercase;letter-spacing:.4px;font-weight:600}
+.j3-card b{font-size:13px;font-weight:600;letter-spacing:-.2px;color:var(--text)}
+.j3-card span{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.j3-thumb{position:absolute;left:0;transform:translateX(-50%);width:150px;border-radius:12px;overflow:hidden;background:#000;border:1.5px solid var(--info);box-shadow:0 16px 34px -12px #000b;transition:transform .35s var(--spring), box-shadow .3s;cursor:pointer;padding:0}
+.j3-thumb img{display:block;width:100%;height:92px;object-fit:cover;pointer-events:none}
+.j3-thumb span{display:flex;flex-direction:column;padding:6px 9px 7px;font-size:10.5px;color:#aab;text-align:left;background:#0b0b12}
+.j3-thumb span b{color:#fff;font-size:12px;font-weight:600}
+.j3-thumb:hover{transform:translateX(-50%) translateY(-4px) scale(1.05)}
+.j3-thumb.on{transform:translateX(-50%) scale(1.2);box-shadow:0 0 0 3px color-mix(in oklch,var(--info) 30%, transparent), 0 24px 46px -12px #000c;border-color:var(--ok)}
+.j3-pulse .b3f{animation:j3p 1.4s ease-in-out infinite}
+@keyframes j3p{50%{filter:brightness(1.6)}}
+.j3-hint{position:absolute;left:18px;bottom:12px;font-size:11px;color:var(--faint);pointer-events:none}
+.j3-scrub{flex-shrink:0;padding:10px 26px 22px;position:relative;z-index:5}
+.j3-scrub-track{height:6px;border-radius:4px;background:var(--surface-3);position:relative}
+.j3-scrub-fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:linear-gradient(90deg, var(--info), var(--accent))}
+.j3-tick{position:absolute;top:50%;width:13px;height:13px;margin:-6.5px 0 0 -6.5px;border-radius:50%;background:currentColor;border:2.5px solid var(--bg);transition:transform .25s var(--spring)}
+.j3-tick.future{background:var(--bg);box-shadow:inset 0 0 0 2px currentColor}
+.j3-tick:hover{transform:scale(1.35)}
+.j3-tick.on{transform:scale(1.6);box-shadow:0 0 0 4px color-mix(in oklch, currentColor 30%, transparent)}
+.j3-scrub-m{position:absolute;top:12px;transform:translateX(-50%);font-family:var(--mono);font-size:10px;color:var(--faint)}
+
+.j3-side{display:flex;flex-direction:column;gap:12px;padding:16px 18px;border-left:1px solid var(--line);min-height:0;overflow:auto;background:var(--surface)}
+.j3-ava-row{display:flex;align-items:center;gap:12px}
+.j3-say{padding:14px;background:var(--surface-2);min-height:150px;flex-shrink:0;animation:paneIn .35s var(--ease)}
+.j3-say-h{font-size:12px;font-weight:600;margin-bottom:6px;display:flex;gap:8px;align-items:center}
+.j3-say-h .mono{font-size:10.5px;color:var(--faint)}
+.j3-nav{display:flex;gap:6px;align-items:center}
+.j3-prog{display:flex;gap:3px}
+.j3-prog i{flex:1;height:4px;border-radius:3px;background:var(--surface-3);cursor:pointer;transition:background .3s, transform .3s}
+.j3-prog i.done{background:color-mix(in oklch, currentColor 55%, transparent)}
+.j3-prog i.on{background:currentColor;transform:scaleY(1.8)}
+.j3-chart{flex-shrink:0;overflow:hidden}
+.j3-chart .seg button{height:22px;padding:0 9px;font-size:10.5px}
+.j3-legend{display:flex;gap:12px;padding:8px 14px 10px;font-size:10.5px;color:var(--muted);border-top:1px solid var(--line);align-items:center}
+.j3-legend span{display:inline-flex;align-items:center;gap:5px}
+.j3-legend i{width:9px;height:9px;border-radius:3px}
+
+/* correção de grid: app renderiza 3 colunas (rail · main · side) */
+.app{grid-template-columns:58px 1fr 396px}
+
+/* botão 3D na timeline */
+.tl-3d{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 9px;border-radius:7px;font-size:10.5px;font-weight:600;background:var(--accent);color:var(--accent-ink);transition:transform .2s var(--spring), box-shadow .2s}
+.tl-3d:hover{transform:translateY(-1px);box-shadow:var(--glow)}

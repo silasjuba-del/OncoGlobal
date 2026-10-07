@@ -1,0 +1,35 @@
+{
+  "header": { "id": "identificadores", "versao": "1.0.0", "vigenteDesde": "2026-10-06",
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "estrutura W8/GLM-15 a partir das lições I1/I2 do caso real 01 (docs/referencias/CASO-REAL-01-LICOES.md §2) — norma oficial de cada validação pendente de confirmação do tech lead [VERIFICAR]", "trecho": null, "edicao": null },
+    "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-06" },
+  "nota": "esqueleto W8/GLM-15: validação POR VALOR, nunca por rótulo; nenhuma regra ativa até o tech lead confirmar a norma oficial de CPF/CNS (cite só o nome do documento confirmado; não inventar número de portaria); algoritmo de DV e regras de início do CNS ficam [VERIFICAR] até a fonte",
+  "principio": "rótulo não prova o tipo do identificador: classificar pelo valor (formato + dígito verificador); rótulo e valor discordantes => conflito VERMELHO na fila de vínculo, nunca ligação silenciosa",
+  "identificadores": [
+    {
+      "id": "cpf",
+      "nome": "CPF (Cadastro de Pessoas Físicas)",
+      "quantidadeDigitos": 11,
+      "digitoVerificador": { "quantidadeDigitos": 2, "algoritmo": "[VERIFICAR]" },
+      "normalizacao": "remover separadores antes de validar",
+      "ativo": false,
+      "fonte": "[VERIFICAR]"
+    },
+    {
+      "id": "cns",
+      "nome": "CNS (Cartão Nacional de Saúde)",
+      "quantidadeDigitos": 15,
+      "regrasDeInicio": "[VERIFICAR]",
+      "digitoVerificador": { "quantidadeDigitos": "[VERIFICAR]", "algoritmo": "[VERIFICAR]" },
+      "ativo": false,
+      "fonte": "[VERIFICAR]"
+    }
+  ],
+  "conflitos": [
+    {
+      "id": "rotulo-x-valor",
+      "regra": "valor não confere com o tipo que o rótulo anuncia (ex.: 'Cartão SUS' com 11 dígitos; 'CI' repetindo o número do CPF; 'Matrícula' com 15 dígitos) => conflito VERMELHO até revisão; classificar pelo valor, nunca pelo rótulo",
+      "ativo": false,
+      "fonte": "caso real 01, lições I1/I2 (docs/referencias/CASO-REAL-01-LICOES.md §2)"
+    }
+  ]
+}

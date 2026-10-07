@@ -1,0 +1,20 @@
+.tela-consulta {
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-family: var(--fonte);
+  font-size: var(--tamanho);
+  line-height: var(--linha);
+}
+
+.tela-consulta :focus-visible {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: 2px;
+}
+
+.barra-fixa {
+  position: sticky;
+  bottom: 0;
+  background: var(--cor-superficie);
+  border-top: 1px solid var(--cor-linha);
+  padding: var(--espaco);
+}

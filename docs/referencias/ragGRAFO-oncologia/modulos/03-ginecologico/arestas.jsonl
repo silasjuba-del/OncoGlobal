@@ -1,0 +1,861 @@
+{"de": "tum.ovario-epitelial", "rel": "FONTE", "para": "src.03.a22", "pagina": 6}
+{"de": "tum.ovario-epitelial", "rel": "FONTE", "para": "src.03.a22", "pagina": 2}
+{"de": "tum.ovario-cordao-sexual", "rel": "FONTE", "para": "src.03.a24", "pagina": 11}
+{"de": "tum.ovario-germinativo", "rel": "FONTE", "para": "src.03.a24", "pagina": 14}
+{"de": "tum.colo-utero", "rel": "FONTE", "para": "src.03.a25", "pagina": 3}
+{"de": "tum.endometrio", "rel": "FONTE", "para": "src.03.a27", "pagina": 3}
+{"de": "tum.carcinossarcoma-uterino", "rel": "FONTE", "para": "src.03.a30", "pagina": 3}
+{"de": "tum.sarcoma-uterino", "rel": "FONTE", "para": "src.03.a30", "pagina": 7}
+{"de": "tum.ntg", "rel": "FONTE", "para": "src.03.a31", "pagina": 2}
+{"de": "tum.vulva", "rel": "FONTE", "para": "src.03.a32", "pagina": 4}
+{"de": "tum.vagina", "rel": "FONTE", "para": "src.03.a32", "pagina": 14}
+{"de": "bio.brca", "rel": "FONTE", "para": "src.03.a22", "pagina": 14}
+{"de": "bio.hrd", "rel": "FONTE", "para": "src.03.a22", "pagina": 12}
+{"de": "bio.msi-dmmr", "rel": "FONTE", "para": "src.03.a27", "pagina": 15}
+{"de": "bio.msi-dmmr", "rel": "FONTE", "para": "src.03.a22", "pagina": 12}
+{"de": "bio.p53", "rel": "FONTE", "para": "src.03.a27", "pagina": 8}
+{"de": "bio.pole", "rel": "FONTE", "para": "src.03.a27", "pagina": 15}
+{"de": "bio.re-rp", "rel": "FONTE", "para": "src.03.a27", "pagina": 15}
+{"de": "bio.her2", "rel": "FONTE", "para": "src.03.a27", "pagina": 15}
+{"de": "bio.her2", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "bio.folr1", "rel": "FONTE", "para": "src.03.a22", "pagina": 12}
+{"de": "bio.folr1", "rel": "FONTE", "para": "src.03.a23", "pagina": 11}
+{"de": "bio.pd-l1-cps", "rel": "FONTE", "para": "src.03.a26", "pagina": 3}
+{"de": "bio.kras", "rel": "FONTE", "para": "src.03.a24", "pagina": 5}
+{"de": "bio.braf-ret-ntrk", "rel": "FONTE", "para": "src.03.a22", "pagina": 12}
+{"de": "bio.ca-125", "rel": "FONTE", "para": "src.03.a22", "pagina": 8}
+{"de": "bio.beta-hcg", "rel": "FONTE", "para": "src.03.a31", "pagina": 6}
+{"de": "bio.beta-hcg", "rel": "FONTE", "para": "src.03.a24", "pagina": 17}
+{"de": "bio.afp", "rel": "FONTE", "para": "src.03.a24", "pagina": 17}
+{"de": "bio.ldh", "rel": "FONTE", "para": "src.03.a24", "pagina": 17}
+{"de": "bio.inibina-b", "rel": "FONTE", "para": "src.03.a24", "pagina": 12}
+{"de": "bio.hpv", "rel": "FONTE", "para": "src.03.a25", "pagina": 9}
+{"de": "dx.ovario-epitelial.us-pelve", "rel": "FONTE", "para": "src.03.a22", "pagina": 7}
+{"de": "tum.ovario-epitelial", "rel": "DIAGNOSTICA_POR", "para": "dx.ovario-epitelial.us-pelve"}
+{"de": "dx.ovario-epitelial.histologia", "rel": "FONTE", "para": "src.03.a22", "pagina": 7}
+{"de": "tum.ovario-epitelial", "rel": "DIAGNOSTICA_POR", "para": "dx.ovario-epitelial.histologia"}
+{"de": "dx.ovario-epitelial.avaliacao-estadiamento", "rel": "FONTE", "para": "src.03.a22", "pagina": 8}
+{"de": "tum.ovario-epitelial", "rel": "DIAGNOSTICA_POR", "para": "dx.ovario-epitelial.avaliacao-estadiamento"}
+{"de": "dx.ovario-epitelial.mucinoso-excluir-tgi", "rel": "FONTE", "para": "src.03.a24", "pagina": 7}
+{"de": "tum.ovario-epitelial", "rel": "DIAGNOSTICA_POR", "para": "dx.ovario-epitelial.mucinoso-excluir-tgi"}
+{"de": "est.ovario-epitelial.figo-2014", "rel": "FONTE", "para": "src.03.a22", "pagina": 11}
+{"de": "tum.ovario-epitelial", "rel": "ESTADIA_POR", "para": "est.ovario-epitelial.figo-2014"}
+{"de": "est.ovario-epitelial.estadiamento-cirurgico", "rel": "FONTE", "para": "src.03.a22", "pagina": 9}
+{"de": "tum.ovario-epitelial", "rel": "ESTADIA_POR", "para": "est.ovario-epitelial.estadiamento-cirurgico"}
+{"de": "cen.ovario-epitelial.precoce-adjuvante", "rel": "FONTE", "para": "src.03.a22", "pagina": 16}
+{"de": "tum.ovario-epitelial", "rel": "TEM_CENARIO", "para": "cen.ovario-epitelial.precoce-adjuvante"}
+{"de": "cen.ovario-epitelial.avancado-1a-linha", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "tum.ovario-epitelial", "rel": "TEM_CENARIO", "para": "cen.ovario-epitelial.avancado-1a-linha"}
+{"de": "cen.ovario-epitelial.manutencao-1a-linha", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "tum.ovario-epitelial", "rel": "TEM_CENARIO", "para": "cen.ovario-epitelial.manutencao-1a-linha"}
+{"de": "cen.ovario-epitelial.recidiva-platinossensivel", "rel": "FONTE", "para": "src.03.a23", "pagina": 10}
+{"de": "tum.ovario-epitelial", "rel": "TEM_CENARIO", "para": "cen.ovario-epitelial.recidiva-platinossensivel"}
+{"de": "cen.ovario-epitelial.recidiva-platinorresistente", "rel": "FONTE", "para": "src.03.a23", "pagina": 11}
+{"de": "tum.ovario-epitelial", "rel": "TEM_CENARIO", "para": "cen.ovario-epitelial.recidiva-platinorresistente"}
+{"de": "cen.ovario-epitelial.lgsoc", "rel": "FONTE", "para": "src.03.a24", "pagina": 5}
+{"de": "tum.ovario-epitelial", "rel": "TEM_CENARIO", "para": "cen.ovario-epitelial.lgsoc"}
+{"de": "cen.ovario-epitelial.mucinoso-avancado", "rel": "FONTE", "para": "src.03.a24", "pagina": 7}
+{"de": "tum.ovario-epitelial", "rel": "TEM_CENARIO", "para": "cen.ovario-epitelial.mucinoso-avancado"}
+{"de": "cen.ovario-epitelial.celulas-claras-recidiva", "rel": "FONTE", "para": "src.03.a24", "pagina": 7}
+{"de": "tum.ovario-epitelial", "rel": "TEM_CENARIO", "para": "cen.ovario-epitelial.celulas-claras-recidiva"}
+{"de": "cen.ovario-epitelial.precoce-adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.brca", "para_que": "testagem germinativa obrigatória (aconselhamento oncogenético)"}
+{"de": "cen.ovario-epitelial.avancado-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.brca", "para_que": "testagem germinativa obrigatória (aconselhamento oncogenético)"}
+{"de": "cen.ovario-epitelial.manutencao-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.brca", "para_que": "seleção de iPARP (olaparibe se BRCA1/2mt)"}
+{"de": "cen.ovario-epitelial.manutencao-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.hrd", "para_que": "seleção de olaparibe + bevacizumabe (HRD, BRCAwt) quando gBRCA negativo"}
+{"de": "cen.ovario-epitelial.recidiva-platinorresistente", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "T-DXd se HER2 3+"}
+{"de": "cen.ovario-epitelial.recidiva-platinorresistente", "rel": "EXIGE_BIOMARCADOR", "para": "bio.msi-dmmr", "para_que": "pembrolizumabe se dMMR"}
+{"de": "cen.ovario-epitelial.recidiva-platinorresistente", "rel": "EXIGE_BIOMARCADOR", "para": "bio.folr1", "para_que": "mirvetuximabe se FOLR1 2+/3+ ≥75%"}
+{"de": "cen.ovario-epitelial.recidiva-platinorresistente", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pd-l1-cps", "para_que": "pembrolizumabe com paclitaxel semanal se PD-L1 positivo"}
+{"de": "cen.ovario-epitelial.recidiva-platinorresistente", "rel": "EXIGE_BIOMARCADOR", "para": "bio.braf-ret-ntrk", "para_que": "terapias-alvo no cenário recorrente"}
+{"de": "cen.ovario-epitelial.recidiva-platinossensivel", "rel": "EXIGE_BIOMARCADOR", "para": "bio.brca", "para_que": "manutenção com iPARP (g/sBRCA1/2mt) após resposta a platina"}
+{"de": "cen.ovario-epitelial.lgsoc", "rel": "EXIGE_BIOMARCADOR", "para": "bio.kras", "para_que": "prever resposta a iMEK (trametinibe; avutometinibe + defactinibe)"}
+{"de": "cen.ovario-epitelial.lgsoc", "rel": "EXIGE_BIOMARCADOR", "para": "bio.re-rp", "para_que": "terapia endócrina de manutenção se RE+"}
+{"de": "tri.gog-157", "rel": "FONTE", "para": "src.03.a22", "pagina": 16}
+{"de": "tri.lion", "rel": "FONTE", "para": "src.03.a22", "pagina": 9}
+{"de": "reg.ovario-epitelial.carbo-pacli-adjuvante", "rel": "FONTE", "para": "src.03.a22", "pagina": 16}
+{"de": "far.carboplatina", "rel": "FONTE", "para": "src.03.a22", "pagina": 16}
+{"de": "reg.ovario-epitelial.carbo-pacli-adjuvante", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "far.paclitaxel", "rel": "FONTE", "para": "src.03.a22", "pagina": 16}
+{"de": "reg.ovario-epitelial.carbo-pacli-adjuvante", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.ovario-epitelial.precoce-adjuvante", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.carbo-pacli-adjuvante", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.ovario-epitelial.carbo-pacli-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.gog-157"}
+{"de": "tri.gog-157", "rel": "TESTOU", "para": "reg.ovario-epitelial.carbo-pacli-adjuvante"}
+{"de": "reg.ovario-epitelial.citorreducao-primaria", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "cen.ovario-epitelial.avancado-1a-linha", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.citorreducao-primaria", "linha": "1ª linha (cirurgia)", "intencao": "curativa"}
+{"de": "reg.ovario-epitelial.citorreducao-primaria", "rel": "SUSTENTADO_POR", "para": "tri.lion"}
+{"de": "tri.lion", "rel": "TESTOU", "para": "reg.ovario-epitelial.citorreducao-primaria"}
+{"de": "reg.ovario-epitelial.citorreducao-primaria", "rel": "SUSTENTADO_POR", "para": "tri.ago-metanalise-du-bois-2009"}
+{"de": "tri.ago-metanalise-du-bois-2009", "rel": "TESTOU", "para": "reg.ovario-epitelial.citorreducao-primaria"}
+{"de": "tri.ago-metanalise-du-bois-2009", "rel": "FONTE", "para": "src.03.a23", "pagina": 3}
+{"de": "tri.gog-218", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "tri.icon7", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "reg.ovario-epitelial.carbo-pacli-1l", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "reg.ovario-epitelial.carbo-pacli-1l", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.ovario-epitelial.carbo-pacli-1l", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.ovario-epitelial.avancado-1a-linha", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.carbo-pacli-1l", "linha": "1ª linha", "intencao": "curativa"}
+{"de": "tri.gog-218", "rel": "TESTOU", "para": "reg.ovario-epitelial.carbo-pacli-1l"}
+{"de": "tri.icon7", "rel": "TESTOU", "para": "reg.ovario-epitelial.carbo-pacli-1l"}
+{"de": "reg.ovario-epitelial.carbo-pacli-bev-1l", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "reg.ovario-epitelial.carbo-pacli-bev-1l", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.ovario-epitelial.carbo-pacli-bev-1l", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "far.bevacizumabe", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "reg.ovario-epitelial.carbo-pacli-bev-1l", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "cen.ovario-epitelial.avancado-1a-linha", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.carbo-pacli-bev-1l", "linha": "1ª linha", "intencao": "curativa"}
+{"de": "reg.ovario-epitelial.carbo-pacli-bev-1l", "rel": "SUSTENTADO_POR", "para": "tri.gog-218"}
+{"de": "tri.gog-218", "rel": "TESTOU", "para": "reg.ovario-epitelial.carbo-pacli-bev-1l"}
+{"de": "reg.ovario-epitelial.carbo-pacli-bev-1l", "rel": "SUSTENTADO_POR", "para": "tri.icon7"}
+{"de": "tri.icon7", "rel": "TESTOU", "para": "reg.ovario-epitelial.carbo-pacli-bev-1l"}
+{"de": "tri.ovhipec-1", "rel": "FONTE", "para": "src.03.a23", "pagina": 7}
+{"de": "reg.ovario-epitelial.neoadjuvante-cirurgia-intervalo", "rel": "FONTE", "para": "src.03.a23", "pagina": 7}
+{"de": "reg.ovario-epitelial.neoadjuvante-cirurgia-intervalo", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.ovario-epitelial.neoadjuvante-cirurgia-intervalo", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.ovario-epitelial.neoadjuvante-cirurgia-intervalo", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "cen.ovario-epitelial.avancado-1a-linha", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.neoadjuvante-cirurgia-intervalo", "linha": "1ª linha (neoadjuvante)", "intencao": "curativa"}
+{"de": "reg.ovario-epitelial.hipec-cisplatina", "rel": "FONTE", "para": "src.03.a23", "pagina": 7}
+{"de": "far.cisplatina", "rel": "FONTE", "para": "src.03.a23", "pagina": 7}
+{"de": "reg.ovario-epitelial.hipec-cisplatina", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.ovario-epitelial.avancado-1a-linha", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.hipec-cisplatina", "linha": "1ª linha (intraoperatório)", "intencao": "curativa"}
+{"de": "reg.ovario-epitelial.hipec-cisplatina", "rel": "SUSTENTADO_POR", "para": "tri.ovhipec-1"}
+{"de": "tri.ovhipec-1", "rel": "TESTOU", "para": "reg.ovario-epitelial.hipec-cisplatina"}
+{"de": "tri.solo-1", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "tri.paola-1", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "tri.prima", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "reg.ovario-epitelial.olaparibe-manutencao-1l", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "far.olaparibe", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "reg.ovario-epitelial.olaparibe-manutencao-1l", "rel": "USA_FARMACO", "para": "far.olaparibe"}
+{"de": "cen.ovario-epitelial.manutencao-1a-linha", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.olaparibe-manutencao-1l", "linha": "manutenção 1ª linha", "intencao": "curativa", "condicao_biomarcador": "BRCA1/2 mutado"}
+{"de": "reg.ovario-epitelial.olaparibe-manutencao-1l", "rel": "SUSTENTADO_POR", "para": "tri.solo-1"}
+{"de": "tri.solo-1", "rel": "TESTOU", "para": "reg.ovario-epitelial.olaparibe-manutencao-1l"}
+{"de": "reg.ovario-epitelial.olaparibe-bev-manutencao-1l", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "reg.ovario-epitelial.olaparibe-bev-manutencao-1l", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "reg.ovario-epitelial.olaparibe-bev-manutencao-1l", "rel": "USA_FARMACO", "para": "far.olaparibe"}
+{"de": "cen.ovario-epitelial.manutencao-1a-linha", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.olaparibe-bev-manutencao-1l", "linha": "manutenção 1ª linha", "intencao": "curativa", "condicao_biomarcador": "HRD (BRCAwt) ou BRCA1/2 mutado"}
+{"de": "reg.ovario-epitelial.olaparibe-bev-manutencao-1l", "rel": "SUSTENTADO_POR", "para": "tri.paola-1"}
+{"de": "tri.paola-1", "rel": "TESTOU", "para": "reg.ovario-epitelial.olaparibe-bev-manutencao-1l"}
+{"de": "reg.ovario-epitelial.niraparibe-manutencao-1l", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "far.niraparibe", "rel": "FONTE", "para": "src.03.a23", "pagina": 5}
+{"de": "reg.ovario-epitelial.niraparibe-manutencao-1l", "rel": "USA_FARMACO", "para": "far.niraparibe"}
+{"de": "cen.ovario-epitelial.manutencao-1a-linha", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.niraparibe-manutencao-1l", "linha": "manutenção 1ª linha", "intencao": "curativa", "condicao_biomarcador": "opção nas colunas BRCAmut/HRD/HRP do slide"}
+{"de": "reg.ovario-epitelial.niraparibe-manutencao-1l", "rel": "SUSTENTADO_POR", "para": "tri.prima"}
+{"de": "tri.prima", "rel": "TESTOU", "para": "reg.ovario-epitelial.niraparibe-manutencao-1l"}
+{"de": "tri.eortc-55955", "rel": "FONTE", "para": "src.03.a23", "pagina": 8}
+{"de": "tri.desktop-iii", "rel": "FONTE", "para": "src.03.a23", "pagina": 10}
+{"de": "reg.ovario-epitelial.citorreducao-secundaria", "rel": "FONTE", "para": "src.03.a23", "pagina": 10}
+{"de": "cen.ovario-epitelial.recidiva-platinossensivel", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.citorreducao-secundaria", "linha": "recidiva (cirurgia)", "intencao": "paliativa"}
+{"de": "reg.ovario-epitelial.citorreducao-secundaria", "rel": "SUSTENTADO_POR", "para": "tri.desktop-iii"}
+{"de": "tri.desktop-iii", "rel": "TESTOU", "para": "reg.ovario-epitelial.citorreducao-secundaria"}
+{"de": "tri.oceans", "rel": "FONTE", "para": "src.03.a23", "pagina": 9}
+{"de": "tri.gog-0213", "rel": "FONTE", "para": "src.03.a23", "pagina": 9}
+{"de": "tri.ago-ovar-2-21", "rel": "FONTE", "para": "src.03.a23", "pagina": 9}
+{"de": "reg.ovario-epitelial.dupla-platina-recidiva", "rel": "FONTE", "para": "src.03.a23", "pagina": 10}
+{"de": "reg.ovario-epitelial.dupla-platina-recidiva", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "far.doxorrubicina_lipossomal", "rel": "FONTE", "para": "src.03.a23", "pagina": 10}
+{"de": "reg.ovario-epitelial.dupla-platina-recidiva", "rel": "USA_FARMACO", "para": "far.doxorrubicina_lipossomal"}
+{"de": "reg.ovario-epitelial.dupla-platina-recidiva", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "far.gencitabina", "rel": "FONTE", "para": "src.03.a23", "pagina": 10}
+{"de": "reg.ovario-epitelial.dupla-platina-recidiva", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "cen.ovario-epitelial.recidiva-platinossensivel", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.dupla-platina-recidiva", "linha": "recidiva platinossensível", "intencao": "paliativa"}
+{"de": "tri.oceans", "rel": "TESTOU", "para": "reg.ovario-epitelial.dupla-platina-recidiva"}
+{"de": "tri.gog-0213", "rel": "TESTOU", "para": "reg.ovario-epitelial.dupla-platina-recidiva"}
+{"de": "tri.ago-ovar-2-21", "rel": "TESTOU", "para": "reg.ovario-epitelial.dupla-platina-recidiva"}
+{"de": "reg.ovario-epitelial.dupla-platina-bev-recidiva", "rel": "FONTE", "para": "src.03.a23", "pagina": 10}
+{"de": "reg.ovario-epitelial.dupla-platina-bev-recidiva", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.ovario-epitelial.dupla-platina-bev-recidiva", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.ovario-epitelial.dupla-platina-bev-recidiva", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.ovario-epitelial.dupla-platina-bev-recidiva", "rel": "USA_FARMACO", "para": "far.doxorrubicina_lipossomal"}
+{"de": "reg.ovario-epitelial.dupla-platina-bev-recidiva", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "cen.ovario-epitelial.recidiva-platinossensivel", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.dupla-platina-bev-recidiva", "linha": "recidiva platinossensível", "intencao": "paliativa"}
+{"de": "reg.ovario-epitelial.dupla-platina-bev-recidiva", "rel": "SUSTENTADO_POR", "para": "tri.oceans"}
+{"de": "tri.oceans", "rel": "TESTOU", "para": "reg.ovario-epitelial.dupla-platina-bev-recidiva"}
+{"de": "reg.ovario-epitelial.dupla-platina-bev-recidiva", "rel": "SUSTENTADO_POR", "para": "tri.gog-0213"}
+{"de": "tri.gog-0213", "rel": "TESTOU", "para": "reg.ovario-epitelial.dupla-platina-bev-recidiva"}
+{"de": "reg.ovario-epitelial.dupla-platina-bev-recidiva", "rel": "SUSTENTADO_POR", "para": "tri.ago-ovar-2-21"}
+{"de": "tri.ago-ovar-2-21", "rel": "TESTOU", "para": "reg.ovario-epitelial.dupla-platina-bev-recidiva"}
+{"de": "tri.solo-2", "rel": "FONTE", "para": "src.03.a23", "pagina": 10}
+{"de": "tri.nova", "rel": "FONTE", "para": "src.03.a23", "pagina": 10}
+{"de": "tri.ariel3", "rel": "FONTE", "para": "src.03.a23", "pagina": 10}
+{"de": "reg.ovario-epitelial.parpi-manutencao-recidiva", "rel": "FONTE", "para": "src.03.a23", "pagina": 10}
+{"de": "reg.ovario-epitelial.parpi-manutencao-recidiva", "rel": "USA_FARMACO", "para": "far.olaparibe"}
+{"de": "reg.ovario-epitelial.parpi-manutencao-recidiva", "rel": "USA_FARMACO", "para": "far.niraparibe"}
+{"de": "far.rucaparibe", "rel": "FONTE", "para": "src.03.a23", "pagina": 10}
+{"de": "reg.ovario-epitelial.parpi-manutencao-recidiva", "rel": "USA_FARMACO", "para": "far.rucaparibe"}
+{"de": "cen.ovario-epitelial.recidiva-platinossensivel", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.parpi-manutencao-recidiva", "linha": "manutenção na recidiva", "intencao": "paliativa", "condicao_biomarcador": "g/sBRCA1/2 mutado"}
+{"de": "reg.ovario-epitelial.parpi-manutencao-recidiva", "rel": "SUSTENTADO_POR", "para": "tri.solo-2"}
+{"de": "tri.solo-2", "rel": "TESTOU", "para": "reg.ovario-epitelial.parpi-manutencao-recidiva"}
+{"de": "reg.ovario-epitelial.parpi-manutencao-recidiva", "rel": "SUSTENTADO_POR", "para": "tri.nova"}
+{"de": "tri.nova", "rel": "TESTOU", "para": "reg.ovario-epitelial.parpi-manutencao-recidiva"}
+{"de": "reg.ovario-epitelial.parpi-manutencao-recidiva", "rel": "SUSTENTADO_POR", "para": "tri.ariel3"}
+{"de": "tri.ariel3", "rel": "TESTOU", "para": "reg.ovario-epitelial.parpi-manutencao-recidiva"}
+{"de": "reg.ovario-epitelial.paclitaxel-semanal-pembro-bev", "rel": "FONTE", "para": "src.03.a23", "pagina": 11}
+{"de": "reg.ovario-epitelial.paclitaxel-semanal-pembro-bev", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "far.pembrolizumabe", "rel": "FONTE", "para": "src.03.a23", "pagina": 11}
+{"de": "reg.ovario-epitelial.paclitaxel-semanal-pembro-bev", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.ovario-epitelial.paclitaxel-semanal-pembro-bev", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "cen.ovario-epitelial.recidiva-platinorresistente", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.paclitaxel-semanal-pembro-bev", "linha": "recidiva platinorresistente", "intencao": "paliativa", "condicao_biomarcador": "pembrolizumabe se PD-L1 positivo"}
+{"de": "tri.aurelia", "rel": "FONTE", "para": "src.03.a23", "pagina": 11}
+{"de": "reg.ovario-epitelial.monoqt-bev-platinorresistente", "rel": "FONTE", "para": "src.03.a23", "pagina": 11}
+{"de": "reg.ovario-epitelial.monoqt-bev-platinorresistente", "rel": "USA_FARMACO", "para": "far.doxorrubicina_lipossomal"}
+{"de": "far.topotecano", "rel": "FONTE", "para": "src.03.a23", "pagina": 11}
+{"de": "reg.ovario-epitelial.monoqt-bev-platinorresistente", "rel": "USA_FARMACO", "para": "far.topotecano"}
+{"de": "reg.ovario-epitelial.monoqt-bev-platinorresistente", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.ovario-epitelial.monoqt-bev-platinorresistente", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "cen.ovario-epitelial.recidiva-platinorresistente", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.monoqt-bev-platinorresistente", "linha": "recidiva platinorresistente", "intencao": "paliativa"}
+{"de": "reg.ovario-epitelial.monoqt-bev-platinorresistente", "rel": "SUSTENTADO_POR", "para": "tri.aurelia"}
+{"de": "tri.aurelia", "rel": "TESTOU", "para": "reg.ovario-epitelial.monoqt-bev-platinorresistente"}
+{"de": "reg.ovario-epitelial.monoqt-platinorresistente", "rel": "FONTE", "para": "src.03.a23", "pagina": 11}
+{"de": "reg.ovario-epitelial.monoqt-platinorresistente", "rel": "USA_FARMACO", "para": "far.doxorrubicina_lipossomal"}
+{"de": "reg.ovario-epitelial.monoqt-platinorresistente", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.ovario-epitelial.monoqt-platinorresistente", "rel": "USA_FARMACO", "para": "far.topotecano"}
+{"de": "far.vinorelbina", "rel": "FONTE", "para": "src.03.a23", "pagina": 11}
+{"de": "reg.ovario-epitelial.monoqt-platinorresistente", "rel": "USA_FARMACO", "para": "far.vinorelbina"}
+{"de": "far.ciclofosfamida", "rel": "FONTE", "para": "src.03.a23", "pagina": 11}
+{"de": "reg.ovario-epitelial.monoqt-platinorresistente", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "cen.ovario-epitelial.recidiva-platinorresistente", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.monoqt-platinorresistente", "linha": "recidiva platinorresistente", "intencao": "paliativa"}
+{"de": "tri.destiny-pantumor02", "rel": "FONTE", "para": "src.03.a23", "pagina": 14}
+{"de": "tri.destiny-pantumor02", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "tri.destiny-pantumor02", "rel": "FONTE", "para": "src.03.a29", "pagina": 9}
+{"de": "reg.ovario-epitelial.t-dxd-her2", "rel": "FONTE", "para": "src.03.a23", "pagina": 11}
+{"de": "far.trastuzumabe_deruxtecana", "rel": "FONTE", "para": "src.03.a23", "pagina": 11}
+{"de": "reg.ovario-epitelial.t-dxd-her2", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "cen.ovario-epitelial.recidiva-platinorresistente", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.t-dxd-her2", "linha": "recidiva platinorresistente", "intencao": "paliativa", "condicao_biomarcador": "HER2 3+"}
+{"de": "reg.ovario-epitelial.t-dxd-her2", "rel": "SUSTENTADO_POR", "para": "tri.destiny-pantumor02"}
+{"de": "tri.destiny-pantumor02", "rel": "TESTOU", "para": "reg.ovario-epitelial.t-dxd-her2"}
+{"de": "reg.ovario-epitelial.pembrolizumabe-dmmr", "rel": "FONTE", "para": "src.03.a23", "pagina": 11}
+{"de": "reg.ovario-epitelial.pembrolizumabe-dmmr", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.ovario-epitelial.recidiva-platinorresistente", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.pembrolizumabe-dmmr", "linha": "recidiva platinorresistente", "intencao": "paliativa", "condicao_biomarcador": "dMMR"}
+{"de": "reg.ovario-epitelial.mirvetuximabe", "rel": "FONTE", "para": "src.03.a23", "pagina": 13}
+{"de": "far.mirvetuximabe_soravtansina", "rel": "FONTE", "para": "src.03.a23", "pagina": 13}
+{"de": "reg.ovario-epitelial.mirvetuximabe", "rel": "USA_FARMACO", "para": "far.mirvetuximabe_soravtansina"}
+{"de": "cen.ovario-epitelial.recidiva-platinorresistente", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.mirvetuximabe", "linha": "recidiva platinorresistente", "intencao": "paliativa", "condicao_biomarcador": "FOLR1 2+/3+ em ≥75%"}
+{"de": "tri.gog-281-logs", "rel": "FONTE", "para": "src.03.a24", "pagina": 5}
+{"de": "tri.ramp-201", "rel": "FONTE", "para": "src.03.a24", "pagina": 6}
+{"de": "reg.ovario-epitelial.lgsoc-qt-adjuvante", "rel": "FONTE", "para": "src.03.a24", "pagina": 5}
+{"de": "reg.ovario-epitelial.lgsoc-qt-adjuvante", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.ovario-epitelial.lgsoc-qt-adjuvante", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.ovario-epitelial.lgsoc", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.lgsoc-qt-adjuvante", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.ovario-epitelial.lgsoc-te-manutencao", "rel": "FONTE", "para": "src.03.a24", "pagina": 5}
+{"de": "cen.ovario-epitelial.lgsoc", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.lgsoc-te-manutencao", "linha": "manutenção", "intencao": "curativa", "condicao_biomarcador": "RE+"}
+{"de": "reg.ovario-epitelial.trametinibe", "rel": "FONTE", "para": "src.03.a24", "pagina": 5}
+{"de": "far.trametinibe", "rel": "FONTE", "para": "src.03.a24", "pagina": 5}
+{"de": "reg.ovario-epitelial.trametinibe", "rel": "USA_FARMACO", "para": "far.trametinibe"}
+{"de": "cen.ovario-epitelial.lgsoc", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.trametinibe", "linha": "recidiva", "intencao": "paliativa", "condicao_biomarcador": "KRAS/BRAF/NRAS mutado (maior ORR)"}
+{"de": "reg.ovario-epitelial.trametinibe", "rel": "SUSTENTADO_POR", "para": "tri.gog-281-logs"}
+{"de": "tri.gog-281-logs", "rel": "TESTOU", "para": "reg.ovario-epitelial.trametinibe"}
+{"de": "reg.ovario-epitelial.avutometinibe-defactinibe", "rel": "FONTE", "para": "src.03.a24", "pagina": 5}
+{"de": "far.avutometinibe", "rel": "FONTE", "para": "src.03.a24", "pagina": 5}
+{"de": "reg.ovario-epitelial.avutometinibe-defactinibe", "rel": "USA_FARMACO", "para": "far.avutometinibe"}
+{"de": "far.defactinibe", "rel": "FONTE", "para": "src.03.a24", "pagina": 5}
+{"de": "reg.ovario-epitelial.avutometinibe-defactinibe", "rel": "USA_FARMACO", "para": "far.defactinibe"}
+{"de": "cen.ovario-epitelial.lgsoc", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.avutometinibe-defactinibe", "linha": "recidiva", "intencao": "paliativa", "condicao_biomarcador": "KRAS mutado"}
+{"de": "reg.ovario-epitelial.avutometinibe-defactinibe", "rel": "SUSTENTADO_POR", "para": "tri.ramp-201"}
+{"de": "tri.ramp-201", "rel": "TESTOU", "para": "reg.ovario-epitelial.avutometinibe-defactinibe"}
+{"de": "tri.gog-0241", "rel": "FONTE", "para": "src.03.a24", "pagina": 7}
+{"de": "reg.ovario-epitelial.folfox-capox-mucinoso", "rel": "FONTE", "para": "src.03.a24", "pagina": 7}
+{"de": "far.oxaliplatina", "rel": "FONTE", "para": "src.03.a24", "pagina": 7}
+{"de": "reg.ovario-epitelial.folfox-capox-mucinoso", "rel": "USA_FARMACO", "para": "far.oxaliplatina"}
+{"de": "far.fluoruracila", "rel": "FONTE", "para": "src.03.a24", "pagina": 7}
+{"de": "reg.ovario-epitelial.folfox-capox-mucinoso", "rel": "USA_FARMACO", "para": "far.fluoruracila"}
+{"de": "far.acido_folinico", "rel": "FONTE", "para": "src.03.a24", "pagina": 7}
+{"de": "reg.ovario-epitelial.folfox-capox-mucinoso", "rel": "USA_FARMACO", "para": "far.acido_folinico"}
+{"de": "far.capecitabina", "rel": "FONTE", "para": "src.03.a24", "pagina": 7}
+{"de": "reg.ovario-epitelial.folfox-capox-mucinoso", "rel": "USA_FARMACO", "para": "far.capecitabina"}
+{"de": "cen.ovario-epitelial.mucinoso-avancado", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.folfox-capox-mucinoso", "linha": "1ª linha/recidiva", "intencao": "paliativa"}
+{"de": "reg.ovario-epitelial.folfox-capox-mucinoso", "rel": "SUSTENTADO_POR", "para": "tri.gog-0241"}
+{"de": "tri.gog-0241", "rel": "TESTOU", "para": "reg.ovario-epitelial.folfox-capox-mucinoso"}
+{"de": "reg.ovario-epitelial.carbo-pacli-mucinoso", "rel": "FONTE", "para": "src.03.a24", "pagina": 7}
+{"de": "reg.ovario-epitelial.carbo-pacli-mucinoso", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.ovario-epitelial.carbo-pacli-mucinoso", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.ovario-epitelial.mucinoso-avancado", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.carbo-pacli-mucinoso", "linha": "1ª linha/recidiva", "intencao": "paliativa"}
+{"de": "tri.gog-0241", "rel": "TESTOU", "para": "reg.ovario-epitelial.carbo-pacli-mucinoso"}
+{"de": "reg.ovario-epitelial.ipi-nivo-celulas-claras", "rel": "FONTE", "para": "src.03.a24", "pagina": 7}
+{"de": "far.ipilimumabe", "rel": "FONTE", "para": "src.03.a24", "pagina": 7}
+{"de": "reg.ovario-epitelial.ipi-nivo-celulas-claras", "rel": "USA_FARMACO", "para": "far.ipilimumabe"}
+{"de": "far.nivolumabe", "rel": "FONTE", "para": "src.03.a24", "pagina": 7}
+{"de": "reg.ovario-epitelial.ipi-nivo-celulas-claras", "rel": "USA_FARMACO", "para": "far.nivolumabe"}
+{"de": "cen.ovario-epitelial.celulas-claras-recidiva", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.ipi-nivo-celulas-claras", "linha": "recidiva", "intencao": "paliativa"}
+{"de": "reg.ovario-epitelial.pembrolizumabe-celulas-claras", "rel": "FONTE", "para": "src.03.a24", "pagina": 7}
+{"de": "reg.ovario-epitelial.pembrolizumabe-celulas-claras", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.ovario-epitelial.celulas-claras-recidiva", "rel": "TRATA_COM", "para": "reg.ovario-epitelial.pembrolizumabe-celulas-claras", "linha": "recidiva", "intencao": "paliativa"}
+{"de": "dx.ovario-cordao-sexual.granulosa-marcadores", "rel": "FONTE", "para": "src.03.a24", "pagina": 12}
+{"de": "tum.ovario-cordao-sexual", "rel": "DIAGNOSTICA_POR", "para": "dx.ovario-cordao-sexual.granulosa-marcadores"}
+{"de": "cen.ovario-cordao-sexual.granulosa-adjuvante", "rel": "FONTE", "para": "src.03.a24", "pagina": 12}
+{"de": "tum.ovario-cordao-sexual", "rel": "TEM_CENARIO", "para": "cen.ovario-cordao-sexual.granulosa-adjuvante"}
+{"de": "cen.ovario-cordao-sexual.granulosa-recidiva", "rel": "FONTE", "para": "src.03.a24", "pagina": 12}
+{"de": "tum.ovario-cordao-sexual", "rel": "TEM_CENARIO", "para": "cen.ovario-cordao-sexual.granulosa-recidiva"}
+{"de": "cen.ovario-cordao-sexual.granulosa-adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.inibina-b", "para_que": "marcador diagnóstico/seguimento"}
+{"de": "tri.gog-264", "rel": "FONTE", "para": "src.03.a24", "pagina": 12}
+{"de": "reg.ovario-cordao-sexual.carbo-pacli", "rel": "FONTE", "para": "src.03.a24", "pagina": 12}
+{"de": "reg.ovario-cordao-sexual.carbo-pacli", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.ovario-cordao-sexual.carbo-pacli", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.ovario-cordao-sexual.granulosa-adjuvante", "rel": "TRATA_COM", "para": "reg.ovario-cordao-sexual.carbo-pacli", "linha": "adjuvante/recidiva", "intencao": "curativa"}
+{"de": "cen.ovario-cordao-sexual.granulosa-recidiva", "rel": "TRATA_COM", "para": "reg.ovario-cordao-sexual.carbo-pacli", "linha": "adjuvante/recidiva", "intencao": "curativa"}
+{"de": "reg.ovario-cordao-sexual.carbo-pacli", "rel": "SUSTENTADO_POR", "para": "tri.gog-264"}
+{"de": "tri.gog-264", "rel": "TESTOU", "para": "reg.ovario-cordao-sexual.carbo-pacli"}
+{"de": "reg.ovario-cordao-sexual.bep", "rel": "FONTE", "para": "src.03.a24", "pagina": 12}
+{"de": "far.bleomicina", "rel": "FONTE", "para": "src.03.a24", "pagina": 12}
+{"de": "reg.ovario-cordao-sexual.bep", "rel": "USA_FARMACO", "para": "far.bleomicina"}
+{"de": "far.etoposideo", "rel": "FONTE", "para": "src.03.a24", "pagina": 12}
+{"de": "reg.ovario-cordao-sexual.bep", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.ovario-cordao-sexual.bep", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.ovario-cordao-sexual.granulosa-adjuvante", "rel": "TRATA_COM", "para": "reg.ovario-cordao-sexual.bep", "linha": "adjuvante/recidiva", "intencao": "curativa"}
+{"de": "cen.ovario-cordao-sexual.granulosa-recidiva", "rel": "TRATA_COM", "para": "reg.ovario-cordao-sexual.bep", "linha": "adjuvante/recidiva", "intencao": "curativa"}
+{"de": "tri.gog-264", "rel": "TESTOU", "para": "reg.ovario-cordao-sexual.bep"}
+{"de": "reg.ovario-cordao-sexual.outras-opcoes-recidiva", "rel": "FONTE", "para": "src.03.a24", "pagina": 12}
+{"de": "reg.ovario-cordao-sexual.outras-opcoes-recidiva", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.ovario-cordao-sexual.outras-opcoes-recidiva", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "cen.ovario-cordao-sexual.granulosa-recidiva", "rel": "TRATA_COM", "para": "reg.ovario-cordao-sexual.outras-opcoes-recidiva", "linha": "recidiva", "intencao": "paliativa"}
+{"de": "dx.ovario-germinativo.marcadores-imagem", "rel": "FONTE", "para": "src.03.a24", "pagina": 17}
+{"de": "tum.ovario-germinativo", "rel": "DIAGNOSTICA_POR", "para": "dx.ovario-germinativo.marcadores-imagem"}
+{"de": "dx.ovario-germinativo.marcadores-imagem", "rel": "FONTE", "para": "src.03.a24", "pagina": 16}
+{"de": "est.ovario-germinativo.figo-2018", "rel": "FONTE", "para": "src.03.a24", "pagina": 17}
+{"de": "tum.ovario-germinativo", "rel": "ESTADIA_POR", "para": "est.ovario-germinativo.figo-2018"}
+{"de": "cen.ovario-germinativo.adjuvante", "rel": "FONTE", "para": "src.03.a24", "pagina": 19}
+{"de": "tum.ovario-germinativo", "rel": "TEM_CENARIO", "para": "cen.ovario-germinativo.adjuvante"}
+{"de": "cen.ovario-germinativo.residual-recidiva", "rel": "FONTE", "para": "src.03.a24", "pagina": 21}
+{"de": "tum.ovario-germinativo", "rel": "TEM_CENARIO", "para": "cen.ovario-germinativo.residual-recidiva"}
+{"de": "cen.ovario-germinativo.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.afp", "para_que": "diagnóstico, prognóstico e seguimento"}
+{"de": "cen.ovario-germinativo.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.beta-hcg", "para_que": "diagnóstico, prognóstico e seguimento"}
+{"de": "cen.ovario-germinativo.adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.ldh", "para_que": "diagnóstico, prognóstico e seguimento"}
+{"de": "reg.ovario-germinativo.bep", "rel": "FONTE", "para": "src.03.a24", "pagina": 20}
+{"de": "reg.ovario-germinativo.bep", "rel": "USA_FARMACO", "para": "far.bleomicina"}
+{"de": "reg.ovario-germinativo.bep", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.ovario-germinativo.bep", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.ovario-germinativo.adjuvante", "rel": "TRATA_COM", "para": "reg.ovario-germinativo.bep", "linha": "adjuvante / resgate sem QT prévia", "intencao": "curativa"}
+{"de": "cen.ovario-germinativo.residual-recidiva", "rel": "TRATA_COM", "para": "reg.ovario-germinativo.bep", "linha": "adjuvante / resgate sem QT prévia", "intencao": "curativa"}
+{"de": "reg.ovario-germinativo.tip", "rel": "FONTE", "para": "src.03.a24", "pagina": 21}
+{"de": "reg.ovario-germinativo.tip", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "far.ifosfamida", "rel": "FONTE", "para": "src.03.a24", "pagina": 21}
+{"de": "reg.ovario-germinativo.tip", "rel": "USA_FARMACO", "para": "far.ifosfamida"}
+{"de": "reg.ovario-germinativo.tip", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.ovario-germinativo.residual-recidiva", "rel": "TRATA_COM", "para": "reg.ovario-germinativo.tip", "linha": "resgate", "intencao": "curativa"}
+{"de": "reg.ovario-germinativo.veip", "rel": "FONTE", "para": "src.03.a24", "pagina": 21}
+{"de": "far.vimblastina", "rel": "FONTE", "para": "src.03.a24", "pagina": 21}
+{"de": "reg.ovario-germinativo.veip", "rel": "USA_FARMACO", "para": "far.vimblastina"}
+{"de": "reg.ovario-germinativo.veip", "rel": "USA_FARMACO", "para": "far.ifosfamida"}
+{"de": "reg.ovario-germinativo.veip", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.ovario-germinativo.residual-recidiva", "rel": "TRATA_COM", "para": "reg.ovario-germinativo.veip", "linha": "resgate", "intencao": "curativa"}
+{"de": "reg.ovario-germinativo.vac", "rel": "FONTE", "para": "src.03.a24", "pagina": 21}
+{"de": "far.vincristina", "rel": "FONTE", "para": "src.03.a24", "pagina": 21}
+{"de": "reg.ovario-germinativo.vac", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "far.dactinomicina", "rel": "FONTE", "para": "src.03.a24", "pagina": 21}
+{"de": "reg.ovario-germinativo.vac", "rel": "USA_FARMACO", "para": "far.dactinomicina"}
+{"de": "reg.ovario-germinativo.vac", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "cen.ovario-germinativo.residual-recidiva", "rel": "TRATA_COM", "para": "reg.ovario-germinativo.vac", "linha": "resgate", "intencao": "curativa"}
+{"de": "reg.ovario-germinativo.qt-altas-doses-tmo", "rel": "FONTE", "para": "src.03.a24", "pagina": 21}
+{"de": "cen.ovario-germinativo.residual-recidiva", "rel": "TRATA_COM", "para": "reg.ovario-germinativo.qt-altas-doses-tmo", "linha": "resgate", "intencao": "curativa"}
+{"de": "dx.colo-utero.rastreamento-hpv", "rel": "FONTE", "para": "src.03.a25", "pagina": 9}
+{"de": "tum.colo-utero", "rel": "DIAGNOSTICA_POR", "para": "dx.colo-utero.rastreamento-hpv"}
+{"de": "dx.colo-utero.exames-estadiamento", "rel": "FONTE", "para": "src.03.a25", "pagina": 13}
+{"de": "tum.colo-utero", "rel": "DIAGNOSTICA_POR", "para": "dx.colo-utero.exames-estadiamento"}
+{"de": "dx.colo-utero.pet-recidiva", "rel": "FONTE", "para": "src.03.a26", "pagina": 2}
+{"de": "tum.colo-utero", "rel": "DIAGNOSTICA_POR", "para": "dx.colo-utero.pet-recidiva"}
+{"de": "est.colo-utero.figo-2018", "rel": "FONTE", "para": "src.03.a25", "pagina": 11}
+{"de": "tum.colo-utero", "rel": "ESTADIA_POR", "para": "est.colo-utero.figo-2018"}
+{"de": "est.colo-utero.figo-2018", "rel": "FONTE", "para": "src.03.a25", "pagina": 12}
+{"de": "est.colo-utero.sedlis-peters", "rel": "FONTE", "para": "src.03.a25", "pagina": 18}
+{"de": "tum.colo-utero", "rel": "ESTADIA_POR", "para": "est.colo-utero.sedlis-peters"}
+{"de": "cen.colo-utero.precoce", "rel": "FONTE", "para": "src.03.a25", "pagina": 16}
+{"de": "tum.colo-utero", "rel": "TEM_CENARIO", "para": "cen.colo-utero.precoce"}
+{"de": "cen.colo-utero.localmente-avancado", "rel": "FONTE", "para": "src.03.a25", "pagina": 19}
+{"de": "tum.colo-utero", "rel": "TEM_CENARIO", "para": "cen.colo-utero.localmente-avancado"}
+{"de": "cen.colo-utero.recidiva-local-oligometastatica", "rel": "FONTE", "para": "src.03.a26", "pagina": 2}
+{"de": "tum.colo-utero", "rel": "TEM_CENARIO", "para": "cen.colo-utero.recidiva-local-oligometastatica"}
+{"de": "cen.colo-utero.metastatico-1a-linha", "rel": "FONTE", "para": "src.03.a26", "pagina": 3}
+{"de": "tum.colo-utero", "rel": "TEM_CENARIO", "para": "cen.colo-utero.metastatico-1a-linha"}
+{"de": "cen.colo-utero.2a-linha", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "tum.colo-utero", "rel": "TEM_CENARIO", "para": "cen.colo-utero.2a-linha"}
+{"de": "cen.colo-utero.gestacao", "rel": "FONTE", "para": "src.03.a26", "pagina": 6}
+{"de": "tum.colo-utero", "rel": "TEM_CENARIO", "para": "cen.colo-utero.gestacao"}
+{"de": "cen.colo-utero.metastatico-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pd-l1-cps", "para_que": "pembrolizumabe se CPS ≥1"}
+{"de": "cen.colo-utero.2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "T-DXd se HER2 3+ (IHQ padrão gástrico)"}
+{"de": "cen.colo-utero.2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pd-l1-cps", "para_que": "pembrolizumabe se PD-L1 positivo (sem aprovação Anvisa)"}
+{"de": "tri.lacc", "rel": "FONTE", "para": "src.03.a25", "pagina": 14}
+{"de": "tri.phenix", "rel": "FONTE", "para": "src.03.a25", "pagina": 14}
+{"de": "tri.shape", "rel": "FONTE", "para": "src.03.a25", "pagina": 14}
+{"de": "reg.colo-utero.cirurgia-radical", "rel": "FONTE", "para": "src.03.a25", "pagina": 14}
+{"de": "cen.colo-utero.precoce", "rel": "TRATA_COM", "para": "reg.colo-utero.cirurgia-radical", "linha": "cirurgia primária", "intencao": "curativa"}
+{"de": "reg.colo-utero.cirurgia-radical", "rel": "SUSTENTADO_POR", "para": "tri.lacc"}
+{"de": "tri.lacc", "rel": "TESTOU", "para": "reg.colo-utero.cirurgia-radical"}
+{"de": "reg.colo-utero.cirurgia-radical", "rel": "SUSTENTADO_POR", "para": "tri.phenix"}
+{"de": "tri.phenix", "rel": "TESTOU", "para": "reg.colo-utero.cirurgia-radical"}
+{"de": "reg.colo-utero.cirurgia-radical", "rel": "SUSTENTADO_POR", "para": "tri.shape"}
+{"de": "tri.shape", "rel": "TESTOU", "para": "reg.colo-utero.cirurgia-radical"}
+{"de": "tri.gog-92", "rel": "FONTE", "para": "src.03.a25", "pagina": 18}
+{"de": "tri.gog-109", "rel": "FONTE", "para": "src.03.a25", "pagina": 18}
+{"de": "reg.colo-utero.rt-adjuvante-sedlis", "rel": "FONTE", "para": "src.03.a25", "pagina": 18}
+{"de": "cen.colo-utero.precoce", "rel": "TRATA_COM", "para": "reg.colo-utero.rt-adjuvante-sedlis", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.colo-utero.rt-adjuvante-sedlis", "rel": "SUSTENTADO_POR", "para": "tri.gog-92"}
+{"de": "tri.gog-92", "rel": "TESTOU", "para": "reg.colo-utero.rt-adjuvante-sedlis"}
+{"de": "reg.colo-utero.qrt-adjuvante-peters", "rel": "FONTE", "para": "src.03.a25", "pagina": 18}
+{"de": "reg.colo-utero.qrt-adjuvante-peters", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.colo-utero.precoce", "rel": "TRATA_COM", "para": "reg.colo-utero.qrt-adjuvante-peters", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.colo-utero.qrt-adjuvante-peters", "rel": "SUSTENTADO_POR", "para": "tri.gog-109"}
+{"de": "tri.gog-109", "rel": "TESTOU", "para": "reg.colo-utero.qrt-adjuvante-peters"}
+{"de": "tri.interlace", "rel": "FONTE", "para": "src.03.a25", "pagina": 19}
+{"de": "tri.embrace-i", "rel": "FONTE", "para": "src.03.a25", "pagina": 19}
+{"de": "tri.outback", "rel": "FONTE", "para": "src.03.a25", "pagina": 19}
+{"de": "reg.colo-utero.qrt-cisplatina", "rel": "FONTE", "para": "src.03.a25", "pagina": 19}
+{"de": "reg.colo-utero.qrt-cisplatina", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.colo-utero.localmente-avancado", "rel": "TRATA_COM", "para": "reg.colo-utero.qrt-cisplatina", "linha": "definitivo", "intencao": "curativa"}
+{"de": "reg.colo-utero.qrt-cisplatina", "rel": "SUSTENTADO_POR", "para": "tri.embrace-i"}
+{"de": "tri.embrace-i", "rel": "TESTOU", "para": "reg.colo-utero.qrt-cisplatina"}
+{"de": "reg.colo-utero.inducao-carbo-pacli-qrt", "rel": "FONTE", "para": "src.03.a25", "pagina": 19}
+{"de": "reg.colo-utero.inducao-carbo-pacli-qrt", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.colo-utero.inducao-carbo-pacli-qrt", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.colo-utero.inducao-carbo-pacli-qrt", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.colo-utero.localmente-avancado", "rel": "TRATA_COM", "para": "reg.colo-utero.inducao-carbo-pacli-qrt", "linha": "definitivo", "intencao": "curativa"}
+{"de": "reg.colo-utero.inducao-carbo-pacli-qrt", "rel": "SUSTENTADO_POR", "para": "tri.interlace"}
+{"de": "tri.interlace", "rel": "TESTOU", "para": "reg.colo-utero.inducao-carbo-pacli-qrt"}
+{"de": "reg.colo-utero.qrt-pembrolizumabe", "rel": "FONTE", "para": "src.03.a25", "pagina": 19}
+{"de": "reg.colo-utero.qrt-pembrolizumabe", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.colo-utero.qrt-pembrolizumabe", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.colo-utero.localmente-avancado", "rel": "TRATA_COM", "para": "reg.colo-utero.qrt-pembrolizumabe", "linha": "definitivo", "intencao": "curativa"}
+{"de": "reg.colo-utero.qt-consolidacao", "rel": "FONTE", "para": "src.03.a25", "pagina": 19}
+{"de": "cen.colo-utero.localmente-avancado", "rel": "TRATA_COM", "para": "reg.colo-utero.qt-consolidacao", "linha": "consolidação", "intencao": "curativa"}
+{"de": "tri.outback", "rel": "TESTOU", "para": "reg.colo-utero.qt-consolidacao"}
+{"de": "reg.colo-utero.exenteracao-pelvica", "rel": "FONTE", "para": "src.03.a26", "pagina": 2}
+{"de": "cen.colo-utero.recidiva-local-oligometastatica", "rel": "TRATA_COM", "para": "reg.colo-utero.exenteracao-pelvica", "linha": "recidiva", "intencao": "curativa"}
+{"de": "tri.gog-240", "rel": "FONTE", "para": "src.03.a26", "pagina": 3}
+{"de": "tri.keynote-826", "rel": "FONTE", "para": "src.03.a26", "pagina": 3}
+{"de": "tri.beatcc", "rel": "FONTE", "para": "src.03.a26", "pagina": 3}
+{"de": "tri.gog-204", "rel": "FONTE", "para": "src.03.a26", "pagina": 3}
+{"de": "reg.colo-utero.platina-pacli-bev-pembro", "rel": "FONTE", "para": "src.03.a26", "pagina": 3}
+{"de": "reg.colo-utero.platina-pacli-bev-pembro", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.colo-utero.platina-pacli-bev-pembro", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.colo-utero.platina-pacli-bev-pembro", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "reg.colo-utero.platina-pacli-bev-pembro", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.colo-utero.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.colo-utero.platina-pacli-bev-pembro", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "pembrolizumabe se PD-L1 CPS ≥1"}
+{"de": "reg.colo-utero.platina-pacli-bev-pembro", "rel": "SUSTENTADO_POR", "para": "tri.gog-240"}
+{"de": "tri.gog-240", "rel": "TESTOU", "para": "reg.colo-utero.platina-pacli-bev-pembro"}
+{"de": "reg.colo-utero.platina-pacli-bev-pembro", "rel": "SUSTENTADO_POR", "para": "tri.keynote-826"}
+{"de": "tri.keynote-826", "rel": "TESTOU", "para": "reg.colo-utero.platina-pacli-bev-pembro"}
+{"de": "reg.colo-utero.carbo-pacli", "rel": "FONTE", "para": "src.03.a26", "pagina": 3}
+{"de": "reg.colo-utero.carbo-pacli", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.colo-utero.carbo-pacli", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.colo-utero.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.colo-utero.carbo-pacli", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.colo-utero.atezo-bev-qt", "rel": "FONTE", "para": "src.03.a26", "pagina": 3}
+{"de": "far.atezolizumabe", "rel": "FONTE", "para": "src.03.a26", "pagina": 3}
+{"de": "reg.colo-utero.atezo-bev-qt", "rel": "USA_FARMACO", "para": "far.atezolizumabe"}
+{"de": "reg.colo-utero.atezo-bev-qt", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "reg.colo-utero.atezo-bev-qt", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.colo-utero.atezo-bev-qt", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.colo-utero.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.colo-utero.atezo-bev-qt", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.colo-utero.atezo-bev-qt", "rel": "SUSTENTADO_POR", "para": "tri.beatcc"}
+{"de": "tri.beatcc", "rel": "TESTOU", "para": "reg.colo-utero.atezo-bev-qt"}
+{"de": "reg.colo-utero.dupla-cisplatina-alternativas", "rel": "FONTE", "para": "src.03.a26", "pagina": 3}
+{"de": "reg.colo-utero.dupla-cisplatina-alternativas", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.colo-utero.dupla-cisplatina-alternativas", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.colo-utero.dupla-cisplatina-alternativas", "rel": "USA_FARMACO", "para": "far.vinorelbina"}
+{"de": "reg.colo-utero.dupla-cisplatina-alternativas", "rel": "USA_FARMACO", "para": "far.topotecano"}
+{"de": "cen.colo-utero.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.colo-utero.dupla-cisplatina-alternativas", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "tri.gog-204", "rel": "TESTOU", "para": "reg.colo-utero.dupla-cisplatina-alternativas"}
+{"de": "tri.empower-cervical-1", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "tri.innovatv-301", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "tri.innovatv-301", "rel": "FONTE", "para": "src.03.a26", "pagina": 5}
+{"de": "reg.colo-utero.cemiplimabe", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "far.cemiplimabe", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "reg.colo-utero.cemiplimabe", "rel": "USA_FARMACO", "para": "far.cemiplimabe"}
+{"de": "cen.colo-utero.2a-linha", "rel": "TRATA_COM", "para": "reg.colo-utero.cemiplimabe", "linha": "2ª linha+", "intencao": "paliativa"}
+{"de": "reg.colo-utero.cemiplimabe", "rel": "SUSTENTADO_POR", "para": "tri.empower-cervical-1"}
+{"de": "tri.empower-cervical-1", "rel": "TESTOU", "para": "reg.colo-utero.cemiplimabe"}
+{"de": "reg.colo-utero.t-dxd-her2", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "reg.colo-utero.t-dxd-her2", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "cen.colo-utero.2a-linha", "rel": "TRATA_COM", "para": "reg.colo-utero.t-dxd-her2", "linha": "2ª linha+", "intencao": "paliativa", "condicao_biomarcador": "HER2 3+ (IHQ padrão gástrico)"}
+{"de": "reg.colo-utero.t-dxd-her2", "rel": "SUSTENTADO_POR", "para": "tri.destiny-pantumor02"}
+{"de": "tri.destiny-pantumor02", "rel": "TESTOU", "para": "reg.colo-utero.t-dxd-her2"}
+{"de": "reg.colo-utero.tisotumabe-vedotina", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "far.tisotumabe_vedotina", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "reg.colo-utero.tisotumabe-vedotina", "rel": "USA_FARMACO", "para": "far.tisotumabe_vedotina"}
+{"de": "cen.colo-utero.2a-linha", "rel": "TRATA_COM", "para": "reg.colo-utero.tisotumabe-vedotina", "linha": "2ª linha+", "intencao": "paliativa"}
+{"de": "reg.colo-utero.tisotumabe-vedotina", "rel": "SUSTENTADO_POR", "para": "tri.innovatv-301"}
+{"de": "tri.innovatv-301", "rel": "TESTOU", "para": "reg.colo-utero.tisotumabe-vedotina"}
+{"de": "reg.colo-utero.monoqt-2l", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "reg.colo-utero.monoqt-2l", "rel": "USA_FARMACO", "para": "far.topotecano"}
+{"de": "reg.colo-utero.monoqt-2l", "rel": "USA_FARMACO", "para": "far.vinorelbina"}
+{"de": "far.pemetrexede", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "reg.colo-utero.monoqt-2l", "rel": "USA_FARMACO", "para": "far.pemetrexede"}
+{"de": "reg.colo-utero.monoqt-2l", "rel": "USA_FARMACO", "para": "far.ifosfamida"}
+{"de": "far.irinotecano", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "reg.colo-utero.monoqt-2l", "rel": "USA_FARMACO", "para": "far.irinotecano"}
+{"de": "far.docetaxel", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "reg.colo-utero.monoqt-2l", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "cen.colo-utero.2a-linha", "rel": "TRATA_COM", "para": "reg.colo-utero.monoqt-2l", "linha": "2ª linha+", "intencao": "paliativa"}
+{"de": "tri.empower-cervical-1", "rel": "TESTOU", "para": "reg.colo-utero.monoqt-2l"}
+{"de": "tri.innovatv-301", "rel": "TESTOU", "para": "reg.colo-utero.monoqt-2l"}
+{"de": "reg.colo-utero.pembrolizumabe-2l", "rel": "FONTE", "para": "src.03.a26", "pagina": 4}
+{"de": "reg.colo-utero.pembrolizumabe-2l", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.colo-utero.2a-linha", "rel": "TRATA_COM", "para": "reg.colo-utero.pembrolizumabe-2l", "linha": "2ª linha+", "intencao": "paliativa", "condicao_biomarcador": "PD-L1 positivo"}
+{"de": "reg.colo-utero.qt-neoadjuvante-gestacao", "rel": "FONTE", "para": "src.03.a26", "pagina": 6}
+{"de": "reg.colo-utero.qt-neoadjuvante-gestacao", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.colo-utero.qt-neoadjuvante-gestacao", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.colo-utero.qt-neoadjuvante-gestacao", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "cen.colo-utero.gestacao", "rel": "TRATA_COM", "para": "reg.colo-utero.qt-neoadjuvante-gestacao", "linha": "neoadjuvante", "intencao": "curativa"}
+{"de": "dx.endometrio.promise", "rel": "FONTE", "para": "src.03.a27", "pagina": 5}
+{"de": "tum.endometrio", "rel": "DIAGNOSTICA_POR", "para": "dx.endometrio.promise"}
+{"de": "dx.endometrio.promise", "rel": "FONTE", "para": "src.03.a27", "pagina": 6}
+{"de": "dx.endometrio.exames-estadiamento", "rel": "FONTE", "para": "src.03.a27", "pagina": 14}
+{"de": "tum.endometrio", "rel": "DIAGNOSTICA_POR", "para": "dx.endometrio.exames-estadiamento"}
+{"de": "est.endometrio.figo-2023", "rel": "FONTE", "para": "src.03.a27", "pagina": 11}
+{"de": "tum.endometrio", "rel": "ESTADIA_POR", "para": "est.endometrio.figo-2023"}
+{"de": "est.endometrio.figo-2023", "rel": "FONTE", "para": "src.03.a27", "pagina": 12}
+{"de": "est.endometrio.figo-2023", "rel": "FONTE", "para": "src.03.a27", "pagina": 13}
+{"de": "est.endometrio.grupos-risco-sboc-2025", "rel": "FONTE", "para": "src.03.a28", "pagina": 4}
+{"de": "tum.endometrio", "rel": "ESTADIA_POR", "para": "est.endometrio.grupos-risco-sboc-2025"}
+{"de": "est.endometrio.grupos-risco-sboc-2025", "rel": "FONTE", "para": "src.03.a28", "pagina": 5}
+{"de": "cen.endometrio.localizado-adjuvante", "rel": "FONTE", "para": "src.03.a28", "pagina": 4}
+{"de": "tum.endometrio", "rel": "TEM_CENARIO", "para": "cen.endometrio.localizado-adjuvante"}
+{"de": "cen.endometrio.preservacao-fertilidade", "rel": "FONTE", "para": "src.03.a28", "pagina": 11}
+{"de": "tum.endometrio", "rel": "TEM_CENARIO", "para": "cen.endometrio.preservacao-fertilidade"}
+{"de": "cen.endometrio.recidiva-locorregional", "rel": "FONTE", "para": "src.03.a29", "pagina": 2}
+{"de": "tum.endometrio", "rel": "TEM_CENARIO", "para": "cen.endometrio.recidiva-locorregional"}
+{"de": "cen.endometrio.metastatico-1a-linha", "rel": "FONTE", "para": "src.03.a29", "pagina": 3}
+{"de": "tum.endometrio", "rel": "TEM_CENARIO", "para": "cen.endometrio.metastatico-1a-linha"}
+{"de": "cen.endometrio.2a-linha", "rel": "FONTE", "para": "src.03.a29", "pagina": 6}
+{"de": "tum.endometrio", "rel": "TEM_CENARIO", "para": "cen.endometrio.2a-linha"}
+{"de": "cen.endometrio.localizado-adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pole", "para_que": "classificação molecular para definir adjuvância"}
+{"de": "cen.endometrio.localizado-adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.msi-dmmr", "para_que": "classificação molecular (todas as pacientes); rastrear Lynch"}
+{"de": "cen.endometrio.localizado-adjuvante", "rel": "EXIGE_BIOMARCADOR", "para": "bio.p53", "para_que": "classificação molecular; p53abn → risco alto"}
+{"de": "cen.endometrio.preservacao-fertilidade", "rel": "EXIGE_BIOMARCADOR", "para": "bio.p53", "para_que": "ausência de p53 aberrante (conforme algumas referências)"}
+{"de": "cen.endometrio.metastatico-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.msi-dmmr", "para_que": "benefício maior de anti-PD-(L)1 em dMMR; durvalumabe apenas dMMR"}
+{"de": "cen.endometrio.metastatico-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "seroso HER2+ → TC + trastuzumabe"}
+{"de": "cen.endometrio.metastatico-1a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.re-rp", "para_que": "terapia endócrina se RH+ baixo grau indolente"}
+{"de": "cen.endometrio.2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.msi-dmmr", "para_que": "dMMR → IO monodroga; pMMR → pembrolizumabe + lenvatinibe"}
+{"de": "cen.endometrio.2a-linha", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "HER2 3+ → T-DXd"}
+{"de": "tri.gog-99", "rel": "FONTE", "para": "src.03.a28", "pagina": 7}
+{"de": "tri.portec-1", "rel": "FONTE", "para": "src.03.a28", "pagina": 7}
+{"de": "tri.portec-2", "rel": "FONTE", "para": "src.03.a28", "pagina": 7}
+{"de": "tri.portec-3", "rel": "FONTE", "para": "src.03.a28", "pagina": 8}
+{"de": "tri.gog-258", "rel": "FONTE", "para": "src.03.a28", "pagina": 9}
+{"de": "tri.gog-249", "rel": "FONTE", "para": "src.03.a28", "pagina": 9}
+{"de": "tri.keynote-b21", "rel": "FONTE", "para": "src.03.a28", "pagina": 10}
+{"de": "reg.endometrio.braquiterapia-vaginal", "rel": "FONTE", "para": "src.03.a28", "pagina": 4}
+{"de": "cen.endometrio.localizado-adjuvante", "rel": "TRATA_COM", "para": "reg.endometrio.braquiterapia-vaginal", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.endometrio.braquiterapia-vaginal", "rel": "SUSTENTADO_POR", "para": "tri.portec-2"}
+{"de": "tri.portec-2", "rel": "TESTOU", "para": "reg.endometrio.braquiterapia-vaginal"}
+{"de": "tri.gog-249", "rel": "TESTOU", "para": "reg.endometrio.braquiterapia-vaginal"}
+{"de": "reg.endometrio.ebrt-pelvica", "rel": "FONTE", "para": "src.03.a28", "pagina": 4}
+{"de": "cen.endometrio.localizado-adjuvante", "rel": "TRATA_COM", "para": "reg.endometrio.ebrt-pelvica", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.endometrio.ebrt-pelvica", "rel": "SUSTENTADO_POR", "para": "tri.gog-99"}
+{"de": "tri.gog-99", "rel": "TESTOU", "para": "reg.endometrio.ebrt-pelvica"}
+{"de": "reg.endometrio.ebrt-pelvica", "rel": "SUSTENTADO_POR", "para": "tri.portec-1"}
+{"de": "tri.portec-1", "rel": "TESTOU", "para": "reg.endometrio.ebrt-pelvica"}
+{"de": "tri.portec-2", "rel": "TESTOU", "para": "reg.endometrio.ebrt-pelvica"}
+{"de": "tri.portec-3", "rel": "TESTOU", "para": "reg.endometrio.ebrt-pelvica"}
+{"de": "tri.gog-249", "rel": "TESTOU", "para": "reg.endometrio.ebrt-pelvica"}
+{"de": "reg.endometrio.qrt-portec3", "rel": "FONTE", "para": "src.03.a28", "pagina": 8}
+{"de": "reg.endometrio.qrt-portec3", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.endometrio.qrt-portec3", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.endometrio.qrt-portec3", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.endometrio.localizado-adjuvante", "rel": "TRATA_COM", "para": "reg.endometrio.qrt-portec3", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.endometrio.qrt-portec3", "rel": "SUSTENTADO_POR", "para": "tri.portec-3"}
+{"de": "tri.portec-3", "rel": "TESTOU", "para": "reg.endometrio.qrt-portec3"}
+{"de": "tri.gog-258", "rel": "TESTOU", "para": "reg.endometrio.qrt-portec3"}
+{"de": "reg.endometrio.carbo-pacli-adjuvante", "rel": "FONTE", "para": "src.03.a28", "pagina": 9}
+{"de": "reg.endometrio.carbo-pacli-adjuvante", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.endometrio.carbo-pacli-adjuvante", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.endometrio.localizado-adjuvante", "rel": "TRATA_COM", "para": "reg.endometrio.carbo-pacli-adjuvante", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.endometrio.carbo-pacli-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.gog-258"}
+{"de": "tri.gog-258", "rel": "TESTOU", "para": "reg.endometrio.carbo-pacli-adjuvante"}
+{"de": "reg.endometrio.vbt-carbo-pacli", "rel": "FONTE", "para": "src.03.a28", "pagina": 9}
+{"de": "reg.endometrio.vbt-carbo-pacli", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.endometrio.vbt-carbo-pacli", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.endometrio.localizado-adjuvante", "rel": "TRATA_COM", "para": "reg.endometrio.vbt-carbo-pacli", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "tri.gog-249", "rel": "TESTOU", "para": "reg.endometrio.vbt-carbo-pacli"}
+{"de": "reg.endometrio.qt-pembro-adjuvante-dmmr", "rel": "FONTE", "para": "src.03.a28", "pagina": 4}
+{"de": "reg.endometrio.qt-pembro-adjuvante-dmmr", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.endometrio.qt-pembro-adjuvante-dmmr", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.endometrio.qt-pembro-adjuvante-dmmr", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.endometrio.localizado-adjuvante", "rel": "TRATA_COM", "para": "reg.endometrio.qt-pembro-adjuvante-dmmr", "linha": "adjuvante", "intencao": "curativa", "condicao_biomarcador": "dMMR"}
+{"de": "reg.endometrio.qt-pembro-adjuvante-dmmr", "rel": "SUSTENTADO_POR", "para": "tri.keynote-b21"}
+{"de": "tri.keynote-b21", "rel": "TESTOU", "para": "reg.endometrio.qt-pembro-adjuvante-dmmr"}
+{"de": "reg.endometrio.qt-pembro-adjuvante-dmmr", "rel": "FONTE", "para": "src.03.a28", "pagina": 10}
+{"de": "reg.endometrio.progestageno-fertilidade", "rel": "FONTE", "para": "src.03.a28", "pagina": 11}
+{"de": "cen.endometrio.preservacao-fertilidade", "rel": "TRATA_COM", "para": "reg.endometrio.progestageno-fertilidade", "linha": "preservação de fertilidade", "intencao": "curativa"}
+{"de": "reg.endometrio.rt-recidiva", "rel": "FONTE", "para": "src.03.a29", "pagina": 2}
+{"de": "cen.endometrio.recidiva-locorregional", "rel": "TRATA_COM", "para": "reg.endometrio.rt-recidiva", "linha": "recidiva", "intencao": "curativa"}
+{"de": "tri.gog-209", "rel": "FONTE", "para": "src.03.a29", "pagina": 5}
+{"de": "tri.nrg-gy018", "rel": "FONTE", "para": "src.03.a29", "pagina": 4}
+{"de": "tri.ruby-parte-1", "rel": "FONTE", "para": "src.03.a29", "pagina": 4}
+{"de": "tri.duo-e", "rel": "FONTE", "para": "src.03.a29", "pagina": 4}
+{"de": "tri.fader-2020-trastuzumabe-seroso", "rel": "FONTE", "para": "src.03.a29", "pagina": 5}
+{"de": "reg.endometrio.carbo-pacli", "rel": "FONTE", "para": "src.03.a29", "pagina": 5}
+{"de": "reg.endometrio.carbo-pacli", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.endometrio.carbo-pacli", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.endometrio.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.endometrio.carbo-pacli", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.endometrio.carbo-pacli", "rel": "SUSTENTADO_POR", "para": "tri.gog-209"}
+{"de": "tri.gog-209", "rel": "TESTOU", "para": "reg.endometrio.carbo-pacli"}
+{"de": "tri.nrg-gy018", "rel": "TESTOU", "para": "reg.endometrio.carbo-pacli"}
+{"de": "tri.ruby-parte-1", "rel": "TESTOU", "para": "reg.endometrio.carbo-pacli"}
+{"de": "tri.duo-e", "rel": "TESTOU", "para": "reg.endometrio.carbo-pacli"}
+{"de": "tri.fader-2020-trastuzumabe-seroso", "rel": "TESTOU", "para": "reg.endometrio.carbo-pacli"}
+{"de": "reg.endometrio.carbo-pacli-pembro", "rel": "FONTE", "para": "src.03.a29", "pagina": 3}
+{"de": "reg.endometrio.carbo-pacli-pembro", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.endometrio.carbo-pacli-pembro", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.endometrio.carbo-pacli-pembro", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.endometrio.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.endometrio.carbo-pacli-pembro", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "pMMR ou dMMR (maior benefício dMMR)"}
+{"de": "reg.endometrio.carbo-pacli-pembro", "rel": "SUSTENTADO_POR", "para": "tri.nrg-gy018"}
+{"de": "tri.nrg-gy018", "rel": "TESTOU", "para": "reg.endometrio.carbo-pacli-pembro"}
+{"de": "reg.endometrio.carbo-pacli-dostarlimabe", "rel": "FONTE", "para": "src.03.a29", "pagina": 3}
+{"de": "reg.endometrio.carbo-pacli-dostarlimabe", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.endometrio.carbo-pacli-dostarlimabe", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "far.dostarlimabe", "rel": "FONTE", "para": "src.03.a29", "pagina": 3}
+{"de": "reg.endometrio.carbo-pacli-dostarlimabe", "rel": "USA_FARMACO", "para": "far.dostarlimabe"}
+{"de": "cen.endometrio.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.endometrio.carbo-pacli-dostarlimabe", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "pMMR ou dMMR (maior benefício dMMR)"}
+{"de": "reg.endometrio.carbo-pacli-dostarlimabe", "rel": "SUSTENTADO_POR", "para": "tri.ruby-parte-1"}
+{"de": "tri.ruby-parte-1", "rel": "TESTOU", "para": "reg.endometrio.carbo-pacli-dostarlimabe"}
+{"de": "reg.endometrio.carbo-pacli-durvalumabe", "rel": "FONTE", "para": "src.03.a29", "pagina": 3}
+{"de": "reg.endometrio.carbo-pacli-durvalumabe", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.endometrio.carbo-pacli-durvalumabe", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "far.durvalumabe", "rel": "FONTE", "para": "src.03.a29", "pagina": 3}
+{"de": "reg.endometrio.carbo-pacli-durvalumabe", "rel": "USA_FARMACO", "para": "far.durvalumabe"}
+{"de": "cen.endometrio.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.endometrio.carbo-pacli-durvalumabe", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "dMMR"}
+{"de": "reg.endometrio.carbo-pacli-durvalumabe", "rel": "SUSTENTADO_POR", "para": "tri.duo-e"}
+{"de": "tri.duo-e", "rel": "TESTOU", "para": "reg.endometrio.carbo-pacli-durvalumabe"}
+{"de": "reg.endometrio.carbo-pacli-durva-olaparibe", "rel": "FONTE", "para": "src.03.a29", "pagina": 3}
+{"de": "reg.endometrio.carbo-pacli-durva-olaparibe", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.endometrio.carbo-pacli-durva-olaparibe", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.endometrio.carbo-pacli-durva-olaparibe", "rel": "USA_FARMACO", "para": "far.durvalumabe"}
+{"de": "reg.endometrio.carbo-pacli-durva-olaparibe", "rel": "USA_FARMACO", "para": "far.olaparibe"}
+{"de": "cen.endometrio.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.endometrio.carbo-pacli-durva-olaparibe", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "pMMR"}
+{"de": "reg.endometrio.carbo-pacli-durva-olaparibe", "rel": "SUSTENTADO_POR", "para": "tri.duo-e"}
+{"de": "tri.duo-e", "rel": "TESTOU", "para": "reg.endometrio.carbo-pacli-durva-olaparibe"}
+{"de": "reg.endometrio.carbo-pacli-trastuzumabe", "rel": "FONTE", "para": "src.03.a29", "pagina": 3}
+{"de": "reg.endometrio.carbo-pacli-trastuzumabe", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.endometrio.carbo-pacli-trastuzumabe", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "far.trastuzumabe", "rel": "FONTE", "para": "src.03.a29", "pagina": 3}
+{"de": "reg.endometrio.carbo-pacli-trastuzumabe", "rel": "USA_FARMACO", "para": "far.trastuzumabe"}
+{"de": "cen.endometrio.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.endometrio.carbo-pacli-trastuzumabe", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "seroso HER2+"}
+{"de": "reg.endometrio.carbo-pacli-trastuzumabe", "rel": "SUSTENTADO_POR", "para": "tri.fader-2020-trastuzumabe-seroso"}
+{"de": "tri.fader-2020-trastuzumabe-seroso", "rel": "TESTOU", "para": "reg.endometrio.carbo-pacli-trastuzumabe"}
+{"de": "reg.endometrio.terapia-endocrina", "rel": "FONTE", "para": "src.03.a29", "pagina": 3}
+{"de": "far.medroxiprogesterona", "rel": "FONTE", "para": "src.03.a29", "pagina": 3}
+{"de": "reg.endometrio.terapia-endocrina", "rel": "USA_FARMACO", "para": "far.medroxiprogesterona"}
+{"de": "far.megestrol", "rel": "FONTE", "para": "src.03.a29", "pagina": 3}
+{"de": "reg.endometrio.terapia-endocrina", "rel": "USA_FARMACO", "para": "far.megestrol"}
+{"de": "far.tamoxifeno", "rel": "FONTE", "para": "src.03.a29", "pagina": 3}
+{"de": "reg.endometrio.terapia-endocrina", "rel": "USA_FARMACO", "para": "far.tamoxifeno"}
+{"de": "cen.endometrio.metastatico-1a-linha", "rel": "TRATA_COM", "para": "reg.endometrio.terapia-endocrina", "linha": "1ª linha / subsequentes", "intencao": "paliativa", "condicao_biomarcador": "RH+ baixo grau"}
+{"de": "cen.endometrio.2a-linha", "rel": "TRATA_COM", "para": "reg.endometrio.terapia-endocrina", "linha": "1ª linha / subsequentes", "intencao": "paliativa", "condicao_biomarcador": "RH+ baixo grau"}
+{"de": "tri.keynote-775", "rel": "FONTE", "para": "src.03.a29", "pagina": 7}
+{"de": "tri.keynote-775", "rel": "FONTE", "para": "src.03.a29", "pagina": 8}
+{"de": "reg.endometrio.pembro-lenvatinibe", "rel": "FONTE", "para": "src.03.a29", "pagina": 6}
+{"de": "reg.endometrio.pembro-lenvatinibe", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "far.lenvatinibe", "rel": "FONTE", "para": "src.03.a29", "pagina": 6}
+{"de": "reg.endometrio.pembro-lenvatinibe", "rel": "USA_FARMACO", "para": "far.lenvatinibe"}
+{"de": "cen.endometrio.2a-linha", "rel": "TRATA_COM", "para": "reg.endometrio.pembro-lenvatinibe", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "pMMR"}
+{"de": "reg.endometrio.pembro-lenvatinibe", "rel": "SUSTENTADO_POR", "para": "tri.keynote-775"}
+{"de": "tri.keynote-775", "rel": "TESTOU", "para": "reg.endometrio.pembro-lenvatinibe"}
+{"de": "reg.endometrio.io-mono-dmmr", "rel": "FONTE", "para": "src.03.a29", "pagina": 6}
+{"de": "reg.endometrio.io-mono-dmmr", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "reg.endometrio.io-mono-dmmr", "rel": "USA_FARMACO", "para": "far.dostarlimabe"}
+{"de": "cen.endometrio.2a-linha", "rel": "TRATA_COM", "para": "reg.endometrio.io-mono-dmmr", "linha": "2ª linha", "intencao": "paliativa", "condicao_biomarcador": "dMMR"}
+{"de": "reg.endometrio.t-dxd-her2", "rel": "FONTE", "para": "src.03.a29", "pagina": 6}
+{"de": "reg.endometrio.t-dxd-her2", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "cen.endometrio.2a-linha", "rel": "TRATA_COM", "para": "reg.endometrio.t-dxd-her2", "linha": "2ª linha+", "intencao": "paliativa", "condicao_biomarcador": "HER2 3+"}
+{"de": "reg.endometrio.t-dxd-her2", "rel": "SUSTENTADO_POR", "para": "tri.destiny-pantumor02"}
+{"de": "tri.destiny-pantumor02", "rel": "TESTOU", "para": "reg.endometrio.t-dxd-her2"}
+{"de": "reg.endometrio.qt-mono", "rel": "FONTE", "para": "src.03.a29", "pagina": 6}
+{"de": "far.doxorrubicina", "rel": "FONTE", "para": "src.03.a29", "pagina": 6}
+{"de": "reg.endometrio.qt-mono", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "reg.endometrio.qt-mono", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.endometrio.2a-linha", "rel": "TRATA_COM", "para": "reg.endometrio.qt-mono", "linha": "2ª linha+", "intencao": "paliativa"}
+{"de": "tri.keynote-775", "rel": "TESTOU", "para": "reg.endometrio.qt-mono"}
+{"de": "cen.carcinossarcoma-uterino.adjuvante", "rel": "FONTE", "para": "src.03.a30", "pagina": 4}
+{"de": "tum.carcinossarcoma-uterino", "rel": "TEM_CENARIO", "para": "cen.carcinossarcoma-uterino.adjuvante"}
+{"de": "cen.carcinossarcoma-uterino.metastatico", "rel": "FONTE", "para": "src.03.a30", "pagina": 5}
+{"de": "tum.carcinossarcoma-uterino", "rel": "TEM_CENARIO", "para": "cen.carcinossarcoma-uterino.metastatico"}
+{"de": "cen.carcinossarcoma-uterino.metastatico", "rel": "EXIGE_BIOMARCADOR", "para": "bio.her2", "para_que": "T-DXd agnóstico em linhas subsequentes se HER2+"}
+{"de": "tri.gog-150", "rel": "FONTE", "para": "src.03.a30", "pagina": 4}
+{"de": "tri.gog-0261", "rel": "FONTE", "para": "src.03.a30", "pagina": 5}
+{"de": "tri.statice", "rel": "FONTE", "para": "src.03.a30", "pagina": 5}
+{"de": "reg.carcinossarcoma-uterino.carbo-pacli", "rel": "FONTE", "para": "src.03.a30", "pagina": 5}
+{"de": "reg.carcinossarcoma-uterino.carbo-pacli", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.carcinossarcoma-uterino.carbo-pacli", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.carcinossarcoma-uterino.adjuvante", "rel": "TRATA_COM", "para": "reg.carcinossarcoma-uterino.carbo-pacli", "linha": "adjuvante / 1ª linha", "intencao": "curativa/paliativa"}
+{"de": "cen.carcinossarcoma-uterino.metastatico", "rel": "TRATA_COM", "para": "reg.carcinossarcoma-uterino.carbo-pacli", "linha": "adjuvante / 1ª linha", "intencao": "curativa/paliativa"}
+{"de": "reg.carcinossarcoma-uterino.carbo-pacli", "rel": "SUSTENTADO_POR", "para": "tri.gog-0261"}
+{"de": "tri.gog-0261", "rel": "TESTOU", "para": "reg.carcinossarcoma-uterino.carbo-pacli"}
+{"de": "reg.carcinossarcoma-uterino.cisplatina-ifosfamida", "rel": "FONTE", "para": "src.03.a30", "pagina": 4}
+{"de": "reg.carcinossarcoma-uterino.cisplatina-ifosfamida", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.carcinossarcoma-uterino.cisplatina-ifosfamida", "rel": "USA_FARMACO", "para": "far.ifosfamida"}
+{"de": "cen.carcinossarcoma-uterino.adjuvante", "rel": "TRATA_COM", "para": "reg.carcinossarcoma-uterino.cisplatina-ifosfamida", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.carcinossarcoma-uterino.cisplatina-ifosfamida", "rel": "SUSTENTADO_POR", "para": "tri.gog-150"}
+{"de": "tri.gog-150", "rel": "TESTOU", "para": "reg.carcinossarcoma-uterino.cisplatina-ifosfamida"}
+{"de": "reg.carcinossarcoma-uterino.ifosfamida-paclitaxel", "rel": "FONTE", "para": "src.03.a30", "pagina": 5}
+{"de": "reg.carcinossarcoma-uterino.ifosfamida-paclitaxel", "rel": "USA_FARMACO", "para": "far.ifosfamida"}
+{"de": "reg.carcinossarcoma-uterino.ifosfamida-paclitaxel", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "cen.carcinossarcoma-uterino.metastatico", "rel": "TRATA_COM", "para": "reg.carcinossarcoma-uterino.ifosfamida-paclitaxel", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "tri.gog-0261", "rel": "TESTOU", "para": "reg.carcinossarcoma-uterino.ifosfamida-paclitaxel"}
+{"de": "reg.carcinossarcoma-uterino.carbo-pacli-dostarlimabe", "rel": "FONTE", "para": "src.03.a30", "pagina": 5}
+{"de": "reg.carcinossarcoma-uterino.carbo-pacli-dostarlimabe", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.carcinossarcoma-uterino.carbo-pacli-dostarlimabe", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.carcinossarcoma-uterino.carbo-pacli-dostarlimabe", "rel": "USA_FARMACO", "para": "far.dostarlimabe"}
+{"de": "cen.carcinossarcoma-uterino.metastatico", "rel": "TRATA_COM", "para": "reg.carcinossarcoma-uterino.carbo-pacli-dostarlimabe", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.carcinossarcoma-uterino.carbo-pacli-dostarlimabe", "rel": "SUSTENTADO_POR", "para": "tri.ruby-parte-1"}
+{"de": "tri.ruby-parte-1", "rel": "TESTOU", "para": "reg.carcinossarcoma-uterino.carbo-pacli-dostarlimabe"}
+{"de": "reg.carcinossarcoma-uterino.t-dxd-her2", "rel": "FONTE", "para": "src.03.a30", "pagina": 5}
+{"de": "reg.carcinossarcoma-uterino.t-dxd-her2", "rel": "USA_FARMACO", "para": "far.trastuzumabe_deruxtecana"}
+{"de": "cen.carcinossarcoma-uterino.metastatico", "rel": "TRATA_COM", "para": "reg.carcinossarcoma-uterino.t-dxd-her2", "linha": "linhas subsequentes", "intencao": "paliativa", "condicao_biomarcador": "HER2+"}
+{"de": "reg.carcinossarcoma-uterino.t-dxd-her2", "rel": "SUSTENTADO_POR", "para": "tri.statice"}
+{"de": "tri.statice", "rel": "TESTOU", "para": "reg.carcinossarcoma-uterino.t-dxd-her2"}
+{"de": "dx.sarcoma-uterino.avaliacao", "rel": "FONTE", "para": "src.03.a30", "pagina": 8}
+{"de": "tum.sarcoma-uterino", "rel": "DIAGNOSTICA_POR", "para": "dx.sarcoma-uterino.avaliacao"}
+{"de": "dx.sarcoma-uterino.avaliacao", "rel": "FONTE", "para": "src.03.a30", "pagina": 10}
+{"de": "est.sarcoma-uterino.figo-lms-see", "rel": "FONTE", "para": "src.03.a30", "pagina": 9}
+{"de": "tum.sarcoma-uterino", "rel": "ESTADIA_POR", "para": "est.sarcoma-uterino.figo-lms-see"}
+{"de": "cen.sarcoma-uterino.lms-localizado", "rel": "FONTE", "para": "src.03.a30", "pagina": 11}
+{"de": "tum.sarcoma-uterino", "rel": "TEM_CENARIO", "para": "cen.sarcoma-uterino.lms-localizado"}
+{"de": "cen.sarcoma-uterino.lms-metastatico", "rel": "FONTE", "para": "src.03.a30", "pagina": 11}
+{"de": "tum.sarcoma-uterino", "rel": "TEM_CENARIO", "para": "cen.sarcoma-uterino.lms-metastatico"}
+{"de": "cen.sarcoma-uterino.see-baixo-grau", "rel": "FONTE", "para": "src.03.a30", "pagina": 13}
+{"de": "tum.sarcoma-uterino", "rel": "TEM_CENARIO", "para": "cen.sarcoma-uterino.see-baixo-grau"}
+{"de": "cen.sarcoma-uterino.see-alto-grau", "rel": "FONTE", "para": "src.03.a30", "pagina": 13}
+{"de": "tum.sarcoma-uterino", "rel": "TEM_CENARIO", "para": "cen.sarcoma-uterino.see-alto-grau"}
+{"de": "cen.sarcoma-uterino.see-baixo-grau", "rel": "EXIGE_BIOMARCADOR", "para": "bio.re-rp", "para_que": "terapia endócrina (RE+/RP+)"}
+{"de": "tri.sarc-005", "rel": "FONTE", "para": "src.03.a30", "pagina": 11}
+{"de": "tri.gog-277", "rel": "FONTE", "para": "src.03.a30", "pagina": 11}
+{"de": "tri.lms04", "rel": "FONTE", "para": "src.03.a30", "pagina": 12}
+{"de": "tri.geddis", "rel": "FONTE", "para": "src.03.a30", "pagina": 11}
+{"de": "tri.palette", "rel": "FONTE", "para": "src.03.a30", "pagina": 11}
+{"de": "reg.sarcoma-uterino.gem-doce-doxo-adjuvante", "rel": "FONTE", "para": "src.03.a30", "pagina": 11}
+{"de": "reg.sarcoma-uterino.gem-doce-doxo-adjuvante", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "reg.sarcoma-uterino.gem-doce-doxo-adjuvante", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.sarcoma-uterino.gem-doce-doxo-adjuvante", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "cen.sarcoma-uterino.lms-localizado", "rel": "TRATA_COM", "para": "reg.sarcoma-uterino.gem-doce-doxo-adjuvante", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "cen.sarcoma-uterino.see-alto-grau", "rel": "TRATA_COM", "para": "reg.sarcoma-uterino.gem-doce-doxo-adjuvante", "linha": "adjuvante", "intencao": "curativa"}
+{"de": "reg.sarcoma-uterino.gem-doce-doxo-adjuvante", "rel": "SUSTENTADO_POR", "para": "tri.sarc-005"}
+{"de": "tri.sarc-005", "rel": "TESTOU", "para": "reg.sarcoma-uterino.gem-doce-doxo-adjuvante"}
+{"de": "tri.gog-277", "rel": "TESTOU", "para": "reg.sarcoma-uterino.gem-doce-doxo-adjuvante"}
+{"de": "reg.sarcoma-uterino.doxo-trabectedina", "rel": "FONTE", "para": "src.03.a30", "pagina": 11}
+{"de": "reg.sarcoma-uterino.doxo-trabectedina", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "far.trabectedina", "rel": "FONTE", "para": "src.03.a30", "pagina": 11}
+{"de": "reg.sarcoma-uterino.doxo-trabectedina", "rel": "USA_FARMACO", "para": "far.trabectedina"}
+{"de": "cen.sarcoma-uterino.lms-metastatico", "rel": "TRATA_COM", "para": "reg.sarcoma-uterino.doxo-trabectedina", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.sarcoma-uterino.doxo-trabectedina", "rel": "SUSTENTADO_POR", "para": "tri.lms04"}
+{"de": "tri.lms04", "rel": "TESTOU", "para": "reg.sarcoma-uterino.doxo-trabectedina"}
+{"de": "reg.sarcoma-uterino.doxorrubicina", "rel": "FONTE", "para": "src.03.a30", "pagina": 11}
+{"de": "reg.sarcoma-uterino.doxorrubicina", "rel": "USA_FARMACO", "para": "far.doxorrubicina"}
+{"de": "cen.sarcoma-uterino.lms-metastatico", "rel": "TRATA_COM", "para": "reg.sarcoma-uterino.doxorrubicina", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "cen.sarcoma-uterino.see-alto-grau", "rel": "TRATA_COM", "para": "reg.sarcoma-uterino.doxorrubicina", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "tri.lms04", "rel": "TESTOU", "para": "reg.sarcoma-uterino.doxorrubicina"}
+{"de": "tri.geddis", "rel": "TESTOU", "para": "reg.sarcoma-uterino.doxorrubicina"}
+{"de": "reg.sarcoma-uterino.gem-doce", "rel": "FONTE", "para": "src.03.a30", "pagina": 11}
+{"de": "reg.sarcoma-uterino.gem-doce", "rel": "USA_FARMACO", "para": "far.gencitabina"}
+{"de": "reg.sarcoma-uterino.gem-doce", "rel": "USA_FARMACO", "para": "far.docetaxel"}
+{"de": "cen.sarcoma-uterino.lms-metastatico", "rel": "TRATA_COM", "para": "reg.sarcoma-uterino.gem-doce", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "cen.sarcoma-uterino.see-alto-grau", "rel": "TRATA_COM", "para": "reg.sarcoma-uterino.gem-doce", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "reg.sarcoma-uterino.gem-doce", "rel": "SUSTENTADO_POR", "para": "tri.geddis"}
+{"de": "tri.geddis", "rel": "TESTOU", "para": "reg.sarcoma-uterino.gem-doce"}
+{"de": "reg.sarcoma-uterino.trabectedina", "rel": "FONTE", "para": "src.03.a30", "pagina": 11}
+{"de": "reg.sarcoma-uterino.trabectedina", "rel": "USA_FARMACO", "para": "far.trabectedina"}
+{"de": "cen.sarcoma-uterino.lms-metastatico", "rel": "TRATA_COM", "para": "reg.sarcoma-uterino.trabectedina", "linha": "linhas subsequentes", "intencao": "paliativa"}
+{"de": "reg.sarcoma-uterino.pazopanibe", "rel": "FONTE", "para": "src.03.a30", "pagina": 11}
+{"de": "far.pazopanibe", "rel": "FONTE", "para": "src.03.a30", "pagina": 11}
+{"de": "reg.sarcoma-uterino.pazopanibe", "rel": "USA_FARMACO", "para": "far.pazopanibe"}
+{"de": "cen.sarcoma-uterino.lms-metastatico", "rel": "TRATA_COM", "para": "reg.sarcoma-uterino.pazopanibe", "linha": "linhas subsequentes", "intencao": "paliativa"}
+{"de": "reg.sarcoma-uterino.pazopanibe", "rel": "SUSTENTADO_POR", "para": "tri.palette"}
+{"de": "tri.palette", "rel": "TESTOU", "para": "reg.sarcoma-uterino.pazopanibe"}
+{"de": "reg.sarcoma-uterino.progestageno-see", "rel": "FONTE", "para": "src.03.a30", "pagina": 13}
+{"de": "reg.sarcoma-uterino.progestageno-see", "rel": "USA_FARMACO", "para": "far.megestrol"}
+{"de": "reg.sarcoma-uterino.progestageno-see", "rel": "USA_FARMACO", "para": "far.medroxiprogesterona"}
+{"de": "cen.sarcoma-uterino.see-baixo-grau", "rel": "TRATA_COM", "para": "reg.sarcoma-uterino.progestageno-see", "linha": "adjuvante (II-IV operado) / metastático", "intencao": "curativa/paliativa", "condicao_biomarcador": "RE+/RP+"}
+{"de": "dx.ntg.us-hcg-curetagem", "rel": "FONTE", "para": "src.03.a31", "pagina": 5}
+{"de": "tum.ntg", "rel": "DIAGNOSTICA_POR", "para": "dx.ntg.us-hcg-curetagem"}
+{"de": "dx.ntg.criterio-ntg-pos-molar", "rel": "FONTE", "para": "src.03.a31", "pagina": 6}
+{"de": "tum.ntg", "rel": "DIAGNOSTICA_POR", "para": "dx.ntg.criterio-ntg-pos-molar"}
+{"de": "dx.ntg.imagem-estadiamento", "rel": "FONTE", "para": "src.03.a31", "pagina": 7}
+{"de": "tum.ntg", "rel": "DIAGNOSTICA_POR", "para": "dx.ntg.imagem-estadiamento"}
+{"de": "est.ntg.figo-oms", "rel": "FONTE", "para": "src.03.a31", "pagina": 9}
+{"de": "tum.ntg", "rel": "ESTADIA_POR", "para": "est.ntg.figo-oms"}
+{"de": "est.ntg.figo-oms", "rel": "FONTE", "para": "src.03.a31", "pagina": 10}
+{"de": "cen.ntg.baixo-risco", "rel": "FONTE", "para": "src.03.a31", "pagina": 11}
+{"de": "tum.ntg", "rel": "TEM_CENARIO", "para": "cen.ntg.baixo-risco"}
+{"de": "cen.ntg.alto-risco", "rel": "FONTE", "para": "src.03.a31", "pagina": 12}
+{"de": "tum.ntg", "rel": "TEM_CENARIO", "para": "cen.ntg.alto-risco"}
+{"de": "cen.ntg.ultra-alto-risco", "rel": "FONTE", "para": "src.03.a31", "pagina": 12}
+{"de": "tum.ntg", "rel": "TEM_CENARIO", "para": "cen.ntg.ultra-alto-risco"}
+{"de": "cen.ntg.pstt-ett", "rel": "FONTE", "para": "src.03.a31", "pagina": 14}
+{"de": "tum.ntg", "rel": "TEM_CENARIO", "para": "cen.ntg.pstt-ett"}
+{"de": "cen.ntg.recorrencia", "rel": "FONTE", "para": "src.03.a31", "pagina": 15}
+{"de": "tum.ntg", "rel": "TEM_CENARIO", "para": "cen.ntg.recorrencia"}
+{"de": "cen.ntg.baixo-risco", "rel": "EXIGE_BIOMARCADOR", "para": "bio.beta-hcg", "para_que": "monitorização de resposta (normalização) e consolidação"}
+{"de": "cen.ntg.alto-risco", "rel": "EXIGE_BIOMARCADOR", "para": "bio.beta-hcg", "para_que": "monitorização de resposta (normalização) e consolidação"}
+{"de": "cen.ntg.ultra-alto-risco", "rel": "EXIGE_BIOMARCADOR", "para": "bio.beta-hcg", "para_que": "monitorização de resposta (normalização) e consolidação"}
+{"de": "cen.ntg.recorrencia", "rel": "EXIGE_BIOMARCADOR", "para": "bio.beta-hcg", "para_que": "monitorização de resposta (normalização) e consolidação"}
+{"de": "reg.ntg.metotrexato", "rel": "FONTE", "para": "src.03.a31", "pagina": 11}
+{"de": "far.metotrexato", "rel": "FONTE", "para": "src.03.a31", "pagina": 11}
+{"de": "reg.ntg.metotrexato", "rel": "USA_FARMACO", "para": "far.metotrexato"}
+{"de": "reg.ntg.metotrexato", "rel": "USA_FARMACO", "para": "far.acido_folinico"}
+{"de": "cen.ntg.baixo-risco", "rel": "TRATA_COM", "para": "reg.ntg.metotrexato", "linha": "1ª linha", "intencao": "curativa"}
+{"de": "reg.ntg.dactinomicina", "rel": "FONTE", "para": "src.03.a31", "pagina": 11}
+{"de": "reg.ntg.dactinomicina", "rel": "USA_FARMACO", "para": "far.dactinomicina"}
+{"de": "cen.ntg.baixo-risco", "rel": "TRATA_COM", "para": "reg.ntg.dactinomicina", "linha": "1ª linha / após resistência", "intencao": "curativa"}
+{"de": "reg.ntg.ema-co", "rel": "FONTE", "para": "src.03.a31", "pagina": 13}
+{"de": "reg.ntg.ema-co", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.ntg.ema-co", "rel": "USA_FARMACO", "para": "far.metotrexato"}
+{"de": "reg.ntg.ema-co", "rel": "USA_FARMACO", "para": "far.dactinomicina"}
+{"de": "reg.ntg.ema-co", "rel": "USA_FARMACO", "para": "far.acido_folinico"}
+{"de": "reg.ntg.ema-co", "rel": "USA_FARMACO", "para": "far.ciclofosfamida"}
+{"de": "reg.ntg.ema-co", "rel": "USA_FARMACO", "para": "far.vincristina"}
+{"de": "cen.ntg.baixo-risco", "rel": "TRATA_COM", "para": "reg.ntg.ema-co", "linha": "1ª linha (alto risco) / resistência", "intencao": "curativa", "condicao_biomarcador": "resistência a monodroga"}
+{"de": "cen.ntg.alto-risco", "rel": "TRATA_COM", "para": "reg.ntg.ema-co", "linha": "1ª linha (alto risco) / resistência", "intencao": "curativa"}
+{"de": "cen.ntg.ultra-alto-risco", "rel": "TRATA_COM", "para": "reg.ntg.ema-co", "linha": "1ª linha (alto risco) / resistência", "intencao": "curativa"}
+{"de": "cen.ntg.recorrencia", "rel": "TRATA_COM", "para": "reg.ntg.ema-co", "linha": "1ª linha (alto risco) / resistência", "intencao": "curativa"}
+{"de": "reg.ntg.ema-ep", "rel": "FONTE", "para": "src.03.a31", "pagina": 13}
+{"de": "reg.ntg.ema-ep", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.ntg.ema-ep", "rel": "USA_FARMACO", "para": "far.metotrexato"}
+{"de": "reg.ntg.ema-ep", "rel": "USA_FARMACO", "para": "far.dactinomicina"}
+{"de": "reg.ntg.ema-ep", "rel": "USA_FARMACO", "para": "far.acido_folinico"}
+{"de": "reg.ntg.ema-ep", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.ntg.alto-risco", "rel": "TRATA_COM", "para": "reg.ntg.ema-ep", "linha": "1ª linha / resgate", "intencao": "curativa"}
+{"de": "cen.ntg.ultra-alto-risco", "rel": "TRATA_COM", "para": "reg.ntg.ema-ep", "linha": "1ª linha / resgate", "intencao": "curativa"}
+{"de": "cen.ntg.pstt-ett", "rel": "TRATA_COM", "para": "reg.ntg.ema-ep", "linha": "1ª linha / resgate", "intencao": "curativa"}
+{"de": "cen.ntg.recorrencia", "rel": "TRATA_COM", "para": "reg.ntg.ema-ep", "linha": "1ª linha / resgate", "intencao": "curativa"}
+{"de": "reg.ntg.ep-baixa-dose-inducao", "rel": "FONTE", "para": "src.03.a31", "pagina": 13}
+{"de": "reg.ntg.ep-baixa-dose-inducao", "rel": "USA_FARMACO", "para": "far.etoposideo"}
+{"de": "reg.ntg.ep-baixa-dose-inducao", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.ntg.ultra-alto-risco", "rel": "TRATA_COM", "para": "reg.ntg.ep-baixa-dose-inducao", "linha": "indução", "intencao": "curativa"}
+{"de": "reg.ntg.histerectomia-pstt", "rel": "FONTE", "para": "src.03.a31", "pagina": 14}
+{"de": "cen.ntg.pstt-ett", "rel": "TRATA_COM", "para": "reg.ntg.histerectomia-pstt", "linha": "cirurgia", "intencao": "curativa"}
+{"de": "dx.vulva.avaliacao", "rel": "FONTE", "para": "src.03.a32", "pagina": 8}
+{"de": "tum.vulva", "rel": "DIAGNOSTICA_POR", "para": "dx.vulva.avaliacao"}
+{"de": "est.vulva.figo-2021", "rel": "FONTE", "para": "src.03.a32", "pagina": 7}
+{"de": "tum.vulva", "rel": "ESTADIA_POR", "para": "est.vulva.figo-2021"}
+{"de": "cen.vulva.precoce", "rel": "FONTE", "para": "src.03.a32", "pagina": 10}
+{"de": "tum.vulva", "rel": "TEM_CENARIO", "para": "cen.vulva.precoce"}
+{"de": "cen.vulva.localmente-avancado", "rel": "FONTE", "para": "src.03.a32", "pagina": 11}
+{"de": "tum.vulva", "rel": "TEM_CENARIO", "para": "cen.vulva.localmente-avancado"}
+{"de": "cen.vulva.metastatico", "rel": "FONTE", "para": "src.03.a32", "pagina": 12}
+{"de": "tum.vulva", "rel": "TEM_CENARIO", "para": "cen.vulva.metastatico"}
+{"de": "reg.vulva.cirurgia-linfonodal", "rel": "FONTE", "para": "src.03.a32", "pagina": 10}
+{"de": "cen.vulva.precoce", "rel": "TRATA_COM", "para": "reg.vulva.cirurgia-linfonodal", "linha": "cirurgia primária", "intencao": "curativa"}
+{"de": "reg.vulva.qrt-cisplatina", "rel": "FONTE", "para": "src.03.a32", "pagina": 11}
+{"de": "reg.vulva.qrt-cisplatina", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "cen.vulva.localmente-avancado", "rel": "TRATA_COM", "para": "reg.vulva.qrt-cisplatina", "linha": "definitivo", "intencao": "curativa"}
+{"de": "reg.vulva.platina-pacli-bev-pembro", "rel": "FONTE", "para": "src.03.a32", "pagina": 12}
+{"de": "reg.vulva.platina-pacli-bev-pembro", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.vulva.platina-pacli-bev-pembro", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.vulva.platina-pacli-bev-pembro", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.vulva.platina-pacli-bev-pembro", "rel": "USA_FARMACO", "para": "far.bevacizumabe"}
+{"de": "reg.vulva.platina-pacli-bev-pembro", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.vulva.metastatico", "rel": "TRATA_COM", "para": "reg.vulva.platina-pacli-bev-pembro", "linha": "1ª linha", "intencao": "paliativa"}
+{"de": "dx.vagina.avaliacao", "rel": "FONTE", "para": "src.03.a32", "pagina": 17}
+{"de": "tum.vagina", "rel": "DIAGNOSTICA_POR", "para": "dx.vagina.avaliacao"}
+{"de": "est.vagina.figo-ajcc", "rel": "FONTE", "para": "src.03.a32", "pagina": 16}
+{"de": "tum.vagina", "rel": "ESTADIA_POR", "para": "est.vagina.figo-ajcc"}
+{"de": "cen.vagina.localizado-avancado", "rel": "FONTE", "para": "src.03.a32", "pagina": 19}
+{"de": "tum.vagina", "rel": "TEM_CENARIO", "para": "cen.vagina.localizado-avancado"}
+{"de": "cen.vagina.metastatico", "rel": "FONTE", "para": "src.03.a32", "pagina": 19}
+{"de": "tum.vagina", "rel": "TEM_CENARIO", "para": "cen.vagina.metastatico"}
+{"de": "cen.vagina.metastatico", "rel": "EXIGE_BIOMARCADOR", "para": "bio.pd-l1-cps", "para_que": "pembrolizumabe se PD-L1+ (extrapolado de colo)"}
+{"de": "reg.vagina.qrt", "rel": "FONTE", "para": "src.03.a32", "pagina": 19}
+{"de": "reg.vagina.qrt", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.vagina.qrt", "rel": "USA_FARMACO", "para": "far.fluoruracila"}
+{"de": "cen.vagina.localizado-avancado", "rel": "TRATA_COM", "para": "reg.vagina.qrt", "linha": "definitivo", "intencao": "curativa"}
+{"de": "reg.vagina.qrt", "rel": "FONTE", "para": "src.03.a32", "pagina": 18}
+{"de": "reg.vagina.platina-pacli-pembro", "rel": "FONTE", "para": "src.03.a32", "pagina": 19}
+{"de": "reg.vagina.platina-pacli-pembro", "rel": "USA_FARMACO", "para": "far.cisplatina"}
+{"de": "reg.vagina.platina-pacli-pembro", "rel": "USA_FARMACO", "para": "far.carboplatina"}
+{"de": "reg.vagina.platina-pacli-pembro", "rel": "USA_FARMACO", "para": "far.paclitaxel"}
+{"de": "reg.vagina.platina-pacli-pembro", "rel": "USA_FARMACO", "para": "far.pembrolizumabe"}
+{"de": "cen.vagina.metastatico", "rel": "TRATA_COM", "para": "reg.vagina.platina-pacli-pembro", "linha": "1ª linha", "intencao": "paliativa", "condicao_biomarcador": "pembrolizumabe se PD-L1+"}

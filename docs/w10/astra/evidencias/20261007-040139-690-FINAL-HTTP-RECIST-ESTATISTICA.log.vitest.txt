@@ -1,0 +1,13 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-luna4
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  04:01:56
+   Duration  11.59s (transform 64%, tests 18%, import 17%, worker 1%)
+
+  Transform  transforming modules took 6.72s · 64% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

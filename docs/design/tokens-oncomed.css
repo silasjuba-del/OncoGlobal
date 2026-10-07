@@ -1,0 +1,134 @@
+/* ═══════════════════════════════════════════════════════════════════
+ * ONCOMED · tokens visuais (W8-MUSE · MU-01)
+ * Referência de aparência para os protótipos em docs/design/prototipos/**.
+ * O significado clínico NÃO mora aqui: estado vem dos contratos
+ * (src/contracts/estados.ts) e a cor anda sempre com texto/ícone.
+ * Direção: branco-gelo + verde-petróleo do modelo; vermelho só clínico.
+ * Contrastes AA verificados em docs/design/SISTEMA.md §2.
+ * ═══════════════════════════════════════════════════════════════════ */
+
+:root,
+[data-tema="gelo"] {
+  /* ── superfícies ─────────────────────────────────────────────── */
+  --om-fundo: #f2f5f6;            /* gelo da página */
+  --om-superficie: #ffffff;       /* cartões, modais, gavetas */
+  --om-superficie-sutil: #eef3f4; /* poços, trilhas, zebrado */
+  --om-linha: #d5dee5;            /* bordas de 1px */
+  --om-linha-forte: #b9c6cf;      /* bordas de campos em foco/repouso */
+
+  /* ── texto ───────────────────────────────────────────────────── */
+  --om-texto: #232b31;            /* grafite · 14.37:1 no branco */
+  --om-texto-suave: #4d5a63;      /* secundário · 7.10:1 no branco */
+  --om-texto-invertido: #ffffff;
+
+  /* ── destaque (ação, navegação, seleção — NUNCA semântica) ───── */
+  --om-destaque: #14685c;         /* verde-petróleo · 6.64:1 */
+  --om-destaque-hover: #0e4f45;   /* hover/ativo · 9.45:1 */
+  --om-destaque-suave: #e0efec;   /* trilho de selecionado */
+  --om-link: #0e4f45;             /* links · 9.45:1, sempre sublinhado */
+
+  /* ── barra lateral ───────────────────────────────────────────── */
+  --om-lateral-fundo: #0f222e;
+  --om-lateral-texto: #ffffff;    /* 16.30:1 */
+  --om-lateral-suave: #b9c8d1;    /* 9.50:1 */
+  --om-lateral-ativo: #14685c;    /* item ativo (pílula) */
+  --om-lateral-hover: #1a3445;
+
+  /* ── semáforo clínico (sempre com texto/ícone) ───────────────── */
+  --om-verde: #1f6b45;            /* 6.47:1 · "nenhum alerta" */
+  --om-verde-fundo: #e3f1e9;
+  --om-vermelho: #8f1d1d;         /* 8.89:1 · conflito/alerta/E1 */
+  --om-vermelho-fundo: #f9e4e4;
+  --om-pendente: #5c6770;         /* 5.79:1 · ausente = PENDENTE */
+  --om-pendente-fundo: #e8edf0;
+
+  /* ── acentos neutros de agrupamento (sem valor clínico) ──────── */
+  --om-estadio-texto: #6b21a8;    /* 7.39:1 sobre o fundo abaixo */
+  --om-estadio-fundo: #f3e8ff;    /* roxo só decoração do cartão */
+  --om-info-fundo: #e4f0fa;
+  --om-info-texto: #174a7c;
+
+  /* ── tipografia (sistema; sem fonte externa) ─────────────────── */
+  --om-fonte: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --om-fonte-mono: Consolas, "Cascadia Mono", ui-monospace, SFMono-Regular, monospace;
+  --om-texto-xs: 0.75rem;         /* 12px · legendas, contadores */
+  --om-texto-sm: 0.875rem;        /* 14px · corpo denso */
+  --om-texto-md: 1rem;            /* 16px · corpo */
+  --om-texto-lg: 1.125rem;        /* 18px · títulos de seção */
+  --om-texto-xl: 1.25rem;         /* 20px · nome do paciente */
+  --om-texto-2xl: 1.5rem;         /* 24px · hero numérico */
+  --om-linha-altura: 1.5;
+  --om-linha-altura-densa: 1.35;
+
+  /* ── espaçamento (base 4px) ──────────────────────────────────── */
+  --om-espaco-1: 0.25rem;         /* 4px */
+  --om-espaco-2: 0.5rem;          /* 8px */
+  --om-espaco-3: 0.75rem;         /* 12px */
+  --om-espaco-4: 1rem;            /* 16px */
+  --om-espaco-5: 1.25rem;         /* 20px */
+  --om-espaco-6: 1.5rem;          /* 24px */
+  --om-espaco-8: 2rem;            /* 32px */
+
+  /* ── raio ────────────────────────────────────────────────────── */
+  --om-raio-sm: 6px;              /* chips, campos, botões */
+  --om-raio-md: 8px;              /* cartões */
+  --om-raio-lg: 12px;             /* modais, gavetas, heros */
+  --om-raio-pilula: 999px;        /* pílulas, avatares */
+
+  /* ── sombra (um nível; elevação comunica camada, não enfeite) ── */
+  --om-sombra-sm: 0 1px 2px rgb(15 34 46 / 0.08);
+  --om-sombra-md: 0 4px 16px rgb(15 34 46 / 0.16);
+  --om-sombra-lg: 0 12px 40px rgb(15 34 46 / 0.24);
+
+  /* ── movimento contido (só comunica estado) ──────────────────── */
+  --om-transicao-rapida: 120ms ease-out;  /* hover, foco, chips */
+  --om-transicao-media: 180ms ease-out;   /* abrir/fechar modal, gaveta */
+  --om-transicao-lenta: 260ms ease-out;   /* carrossel, troca de aba */
+}
+
+/* Alto contraste: mesma semântica, pares revalidados. */
+[data-tema="contraste"] {
+  --om-fundo: #101418;
+  --om-superficie: #1b222a;
+  --om-superficie-sutil: #242e38;
+  --om-linha: #3d4b59;
+  --om-linha-forte: #5a6b7d;
+  --om-texto: #f4f7fa;
+  --om-texto-suave: #d5dde4;
+  --om-destaque: #7fd0b8;
+  --om-destaque-hover: #a5e3cd;
+  --om-destaque-suave: #143b33;
+  --om-link: #a5e3cd;
+  --om-lateral-fundo: #0a1218;
+  --om-lateral-texto: #f4f7fa;
+  --om-lateral-suave: #c3cfd8;
+  --om-verde: #8fd0a8;
+  --om-verde-fundo: #14352a;
+  --om-vermelho: #ffb4b4;
+  --om-vermelho-fundo: #471d1d;
+  --om-pendente: #d5dde4;
+  --om-pendente-fundo: #2b3540;
+  --om-estadio-texto: #e3c8ff;
+  --om-estadio-fundo: #3a2354;
+  --om-info-fundo: #16324f;
+  --om-info-texto: #bfe0ff;
+}
+
+/* Foco sempre visível; nunca só cor. */
+:focus-visible {
+  outline: 2px solid var(--om-destaque-hover);
+  outline-offset: 2px;
+  border-radius: var(--om-raio-sm);
+}
+[data-tema="contraste"] :focus-visible {
+  outline-color: var(--om-destaque);
+}
+
+/* Movimento respeita quem prefere repouso (MU-10). */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --om-transicao-rapida: 0ms;
+    --om-transicao-media: 0ms;
+    --om-transicao-lenta: 0ms;
+  }
+}

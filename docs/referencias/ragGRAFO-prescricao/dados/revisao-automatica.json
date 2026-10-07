@@ -1,0 +1,16 @@
+{
+  "condicoes": 47,
+  "receitas": 56,
+  "imprimiveis": 27,
+  "farmacos": 45,
+  "nos": 175,
+  "arestas": 356,
+  "erros": [],
+  "avisos": [
+    "imprime fármaco com apresentação a conferir: dac.fundo / metoprolol_succinato",
+    "imprime fármaco com apresentação a conferir: asma.resgate / salbutamol",
+    "imprime fármaco com apresentação a conferir: dpoc.exac / salbutamol",
+    "imprime fármaco com apresentação a conferir: dpoc.exac / prednisona"
+  ],
+  "embedding_min": 22
+}

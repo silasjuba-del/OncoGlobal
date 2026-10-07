@@ -8,7 +8,11 @@ type SemChaveDeAlerta = "alertaId" extends keyof EntradaRender ? never : true;
 type ParametroRecusaAlerta = Alerta extends Parameters<typeof renderizarDocumento>[0] ? never : true;
 const inv09: RecusaAlerta & SemChaveDeAlerta & ParametroRecusaAlerta = true;
 
-const template = { templateId: "evolucao", versao: "1.0.0", campos: ["queixa", "conduta", "queixa"] as const };
+const template = {
+  templateId: "evolucao", versao: "1.0.0",
+  campos: ["queixa", "conduta", "queixa"] as const,
+  proibidoConter: ["ALERTA", "CORRECAO_IA"] as const,
+};
 
 describe("GRK-04 render", () => {
   it("INV-09: a entrada do render não é um Alerta", () => {
@@ -19,8 +23,8 @@ describe("GRK-04 render", () => {
     const entrada: EntradaRender = {
       template,
       fatos: [
-        { campo: "queixa", valor: "tosse", revisao: "CONFIRMADO" },
-        { campo: "conduta", valor: "retorno", revisao: "ASSINADO" },
+        { campo: "queixa", valor: "tosse", revisao: "CONFIRMADO", origem: "FATO_CONFIRMADO" },
+        { campo: "conduta", valor: "retorno", revisao: "ASSINADO", origem: "DECISAO_MEDICA" },
       ],
     };
     const a = renderizarDocumento(entrada);
@@ -30,13 +34,13 @@ describe("GRK-04 render", () => {
     expect(a.templateId).toBe("evolucao");
     expect(a.versao).toBe("1.0.0");
     expect(a.hash).toBe(b.hash);
-    expect(a.hash).toMatch(/^[0-9a-f]{16}$/);
+    expect(a.hash).toMatch(/^[0-9a-f]{64}$/);
   });
 
   it("negativo: campo sem fato fica vazio e listado; fato fora do template não entra", () => {
     const doc = renderizarDocumento({
       template,
-      fatos: [{ campo: "alergia", valor: "nenhuma", revisao: "CONFIRMADO" }],
+      fatos: [{ campo: "alergia", valor: "nenhuma", revisao: "CONFIRMADO", origem: "FATO_CONFIRMADO" }],
     });
     expect(doc.campos).toEqual({ queixa: "", conduta: "" });
     expect(doc.camposVazios).toEqual(["queixa", "conduta"]);
@@ -47,9 +51,9 @@ describe("GRK-04 render", () => {
     const conflito = renderizarDocumento({
       template,
       fatos: [
-        { campo: "queixa", valor: "tosse", revisao: "CONFIRMADO" },
-        { campo: "queixa", valor: "dor", revisao: "ASSINADO" },
-        { campo: "conduta", valor: "CONFLITO", revisao: "CONFIRMADO" },
+        { campo: "queixa", valor: "tosse", revisao: "CONFIRMADO", origem: "FATO_CONFIRMADO" },
+        { campo: "queixa", valor: "dor", revisao: "ASSINADO", origem: "FATO_CONFIRMADO" },
+        { campo: "conduta", valor: "CONFLITO", revisao: "CONFIRMADO", origem: "FATO_CONFIRMADO" },
       ],
     });
     expect(conflito.campos.queixa).toBe("");
@@ -59,7 +63,7 @@ describe("GRK-04 render", () => {
 
     const bruto = renderizarDocumento({
       template,
-      fatos: [{ campo: "queixa", valor: "tosse", revisao: "RAW" as "CONFIRMADO" }],
+      fatos: [{ campo: "queixa", valor: "tosse", revisao: "RAW" as "CONFIRMADO", origem: "FATO_CONFIRMADO" }],
     });
     expect(bruto.campos.queixa).toBe("");
     expect(bruto.camposVazios).toContain("queixa");
@@ -67,7 +71,7 @@ describe("GRK-04 render", () => {
     const vazio = renderizarDocumento({ template, fatos: [] });
     const preenchido = renderizarDocumento({
       template,
-      fatos: [{ campo: "queixa", valor: "tosse", revisao: "CONFIRMADO" }],
+      fatos: [{ campo: "queixa", valor: "tosse", revisao: "CONFIRMADO", origem: "FATO_CONFIRMADO" }],
     });
     expect(vazio.hash).not.toBe(preenchido.hash);
   });

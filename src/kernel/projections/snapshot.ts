@@ -54,10 +54,15 @@ export function projetarSnapshot(
   encounterId: string, projectionVersion: string, propostas: readonly PropostaCurrent[] = [],
 ): CaseSnapshot {
   const alvo = eventos.filter((e) => e.patientId === patientId && e.encounterId === encounterId);
-  const cutoff = alvo.reduce((max, e) => e.criadoEm > max ? e.criadoEm : max, "");
-  const relevantes = eventosVigentes(eventos).filter((e) => e.patientId === patientId
+  // Instante aceita offsets: a ordem temporal não é a ordem lexical do ISO.
+  // A data civil permanece responsabilidade das funções com fuso injetado.
+  const cutoff = alvo.reduce((max, e) => Math.max(max, Date.parse(e.criadoEm)), -Infinity);
+  // A substituição só tem autoridade dentro do horizonte da consulta projetada.
+  // Uma correção de consulta futura não remove o evento da consulta histórica.
+  const noHorizonte = eventos.filter((e) => e.patientId === patientId
     && (e.tumorLotId === tumorLotId || e.tumorLotId === null)
-    && (!cutoff || e.criadoEm <= cutoff));
+    && (!alvo.length || Date.parse(e.criadoEm) <= cutoff));
+  const relevantes = eventosVigentes(noHorizonte);
   const campos: Record<string, ValorProjetado> = Object.create(null);
   const refs = new Map<string, RulesetRef>();
   for (const e of relevantes) {
@@ -80,7 +85,9 @@ export function projetarSnapshot(
         eventIds: [...anterior.eventIds, e.eventId], candidatos };
     }
   }
-  const eventIds = relevantes.map((e) => e.eventId);
+  // IDs não carregam precedência clínica: só a relação supersedes decide
+  // substituição. Ordenar a representação não elege candidato nem oculta conflito.
+  const eventIds = relevantes.map((e) => e.eventId).sort();
   const rulesetRefs = [...refs.values()].sort((a, b) =>
     `${a.id}:${a.version}:${a.hash}`.localeCompare(`${b.id}:${b.version}:${b.hash}`));
   for (const p of propostas) {
@@ -89,12 +96,25 @@ export function projetarSnapshot(
     if (existente) existente.proposta = { valor: p.valor, sourceId: p.sourceId };
     else campos[p.campo] = { valor: null, eventIds: [], estado: "PENDENTE", proposta: { valor: p.valor, sourceId: p.sourceId } };
   }
+  const camposOrdenados: Record<string, ValorProjetado> = Object.create(null);
+  for (const campo of Object.keys(campos).sort()) {
+    const entrada = campos[campo]!;
+    camposOrdenados[campo] = {
+      ...entrada,
+      eventIds: [...entrada.eventIds].sort(),
+      ...(entrada.candidatos
+        ? { candidatos: [...entrada.candidatos].sort((a, b) =>
+          a.eventId < b.eventId ? -1 : a.eventId > b.eventId ? 1 : 0) }
+        : {}),
+    };
+  }
   const kind = propostas.length ? "CURRENT" : "CONFIRMED";
   const contentHash = createHash("sha256")
-    .update(JSON.stringify({ kind, patientId, tumorLotId, encounterId, projectionVersion, rulesetRefs, campos, eventIds }))
+    .update(JSON.stringify({ kind, patientId, tumorLotId, encounterId, projectionVersion, rulesetRefs,
+      campos: camposOrdenados, eventIds }))
     .digest("hex");
   return { kind, patientId, tumorLotId, encounterId, projectionVersion,
-    rulesetRefs, campos, eventIds, contentHash };
+    rulesetRefs, campos: camposOrdenados, eventIds, contentHash };
 }
 
 export function montarSnapshot(

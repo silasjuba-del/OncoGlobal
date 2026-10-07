@@ -1,0 +1,84 @@
+{
+  "paciente": "Paciente Teste 07",
+  "fonte": "docs/referencias/CASO-REAL-01-LICOES.md §4 — 100% sintético; nenhum nome, número ou instituição real",
+  "identidade": {
+    "pacientesUnicos": 1,
+    "cpfRotuladoErrado": {
+      "valor": "123.456.789-01",
+      "rotulos": ["CI", "Cartão SUS"],
+      "digitos": 11,
+      "dv": "invalido proposital (sintético)",
+      "classificacao": "nao classificavel sozinho: formato de CPF com DV invalido; rotulo 'Cartão SUS' nao prova CNS",
+      "estado": "VERMELHO até revisão humana — nunca ligacao silenciosa (I1/I2)"
+    },
+    "cnsRotuladoMatricula": {
+      "valor": "704202600001234",
+      "rotulo": "Matrícula",
+      "digitos": 15,
+      "dv": "estrutura valida de CNS (sintético)",
+      "classificacao": "classificar pelo VALOR, nunca pelo rótulo (I1)"
+    },
+    "comprovanteTerceiro": {
+      "titular": "Familiar Teste 07",
+      "ligaPaciente": false,
+      "ehDadoDoPaciente": false,
+      "regra": "endereço de documento em nome de terceiro não vira dado cadastral sem confirmação (I3)"
+    }
+  },
+  "exames": {
+    "paginas": 8,
+    "unicos": 6,
+    "nao": 8,
+    "listaUnica": [
+      { "protocolo": "LAB-9001", "tipo": "biopsia prostática por fragmentos — lote A (sítios R base, R terço médio, R ápice)", "dataClinica": "2026-07-14" },
+      { "protocolo": "LAB-9002", "tipo": "biopsia prostática por fragmentos — lote B (sítios L base, L terço médio, L ápice)", "dataClinica": "2026-07-16" },
+      { "protocolo": "RAD-7001", "tipo": "ressonância magnética multiparamétrica de próstata", "dataClinica": "2026-07-10" },
+      { "protocolo": "MED-5001", "tipo": "cintilografia óssea (duas páginas idênticas = UM exame)", "dataClinica": "2026-07-22" },
+      { "protocolo": "LAB-9003", "tipo": "anatomopatológico de RTU de próstata", "dataClinica": "2026-08-05" },
+      { "protocolo": "LAB-9004", "tipo": "imuno-histoquímica (original + reimpressão do sistema = UM exame)", "dataClinica": "2026-08-06" }
+    ],
+    "chaveDeduplicacao": "laboratório + número do exame + data de entrada — NUNCA a data impressa no topo (D2)",
+    "duplicatas": [
+      { "pares": ["07-cintilografia-ossea-pagina-1.txt", "08-cintilografia-ossea-pagina-2.txt"], "tipo": "paginas identicas", "colapsamPara": "MED-5001" },
+      { "pares": ["10-ihq-original.txt", "11-ihq-sisreg-reimpressao.txt"], "tipo": "reimpressão com cabeçalho de extração diferente", "colapsamPara": "LAB-9004" }
+    ],
+    "distintosNaoDedup": [
+      { "exames": ["LAB-9003 (RTU)", "LAB-9004 (IHQ)"], "motivo": "mesmo diagnóstico, materiais e datas diferentes — registrar concordância, não deduplicar (D3)" },
+      { "exames": ["LAB-9001", "LAB-9002"], "motivo": "protocolos e datas de entrada distintos — dois exames (P1: 6 sítios ao todo)" }
+    ],
+    "datas": "só a data clínica (coleta/realização/entrada do material) entra na linha do tempo; emissão, assinatura digital e extração do sistema não (T1)"
+  },
+  "biopsia": {
+    "sitios": 6,
+    "extracao": "por sítio, com lateralidade e posição; negação preservada por sítio (P1)",
+    "gruposMistos": true,
+    "padraoCribriforme": { "presenteEm": "L terço médio", "negadoExplicitamenteEm": 4, "sitioSemNeoplasia": "R ápice (inflamação crônica)" },
+    "agregacaoDeGrau": "regra com fonte em src/rules — [VERIFICAR] com Dr. Silas (P2); NUNCA feita por LLM"
+  },
+  "trechosRiscados": {
+    "quantidade": 2,
+    "arquivo": "06-rm-prostata.txt",
+    "estado": "PENDENTE — 'trecho riscado à mão: não usar sem revisão'; nunca extrair valor de trecho riscado como fato (R1)"
+  },
+  "psa": {
+    "valor": "8.4 ng/mL",
+    "origem": "receituário de outro especialista, sem laudo laboratorial",
+    "registro": "mencionado em fonte secundária — nunca como resultado laboratorial confirmado (E2)"
+  },
+  "pirads": {
+    "estado": "PENDENTE — citado sem número na fonte secundária; nunca inferir categoria pelo texto (E3)",
+    "rm": "o laudo primário (RAD-7001) informa PI-RADS 4 — prevalece sobre a citação (E1)"
+  },
+  "tnm": {
+    "estado": "PENDENTE — TNM é do médico; nenhuma regra ou LLM fecha estádio (S1)",
+    "elementosComFonte": ["RM: extensão para gordura periprostática, contato com feixes", "cintilografia: negativa", "sem linfonodomegalia"]
+  },
+  "osso": {
+    "metastaseInferida": false,
+    "regra": "captação/hiperfixação articular degenerativa NÃO é lesão óssea oncológica (S2)"
+  },
+  "hierarquiaEvidencia": {
+    "primarias": ["LAB-9001", "LAB-9002", "RAD-7001", "MED-5001", "LAB-9003", "LAB-9004"],
+    "secundaria": "02-receituario-secundario.txt — só corrobora ou conflita com a primária (E1)"
+  }
+}

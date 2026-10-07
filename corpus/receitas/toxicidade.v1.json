@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "toxicidade-rascunho.v1",
+  "versao": "2026-10-07.1",
+  "status": "RASCUNHO",
+  "consumivel": false,
+  "aprovadoMedico": false,
+  "fonte": {
+    "copia": "corpus/receitas/toxicidade-fonte-original.v1.md",
+    "referencia": "docs/referencias/externos/PRESCRICAO-POR-TOXICIDADE.md",
+    "sha256": "7240df3a7f20eab26251307b964c333a97b4fe7647b9faa10671bdc7279083f3",
+    "compiladoEm": "2026-10-06"
+  },
+  "secoesFonte": [
+    "## 1.",
+    "## 2.",
+    "## 3.",
+    "## 4.",
+    "## 5.",
+    "## 6.",
+    "## 7.",
+    "## 8.",
+    "## 9.",
+    "## 10.",
+    "## 11.",
+    "## 12.",
+    "## 13.",
+    "## 14.",
+    "## 15.",
+    "## 16."
+  ],
+  "preservarMarcadores": [
+    "[VERIFICAR]",
+    "[PADRONIZAÇÃO LOCAL]",
+    "CTCAE v6.0"
+  ],
+  "divergenciaAntiEmese": {
+    "status": "DIVERGENCIA_PRESERVADA",
+    "conteudoOriginal": "A fonte de toxicidade diz que antiemese/premedicação usa ondansetrona + dexametasona + difenidramina, sem aprepitanto/NK1.",
+    "alteraTextoFonte": false,
+    "decisaoPosterior": "D-W9-34c: padrão local = ondansetrona + dexametasona + prometazina VO; cimetidina 300 mg em todo taxano (paclitaxel e docetaxel); olanzapina 5 mg opcional no alto risco emetogênico, sem NK1.",
+    "textoFonte": "D-W9-34c"
+  },
+  "ctcae": {
+    "versaoExigida": "6",
+    "status": "RASCUNHO_VERIFICAR",
+    "nenhumGrauValidado": true
+  }
+}

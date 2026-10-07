@@ -1,0 +1,38 @@
+{
+  "templateId": "FICHA.mama.capecitabina-monoterapia__paliativo-metastatico@1.0.0",
+  "tumor": "Mama",
+  "nome": "Capecitabina monoterapia",
+  "cenario": "paliativo/metastático",
+  "versao": "1.0.0",
+  "hash": "143a11a519fbde9620d26c25b435669b0635b1f1b37431d194e02332220a29fc",
+  "codigoInstitucional": null,
+  "intervaloDias": 21,
+  "ciclos": null,
+  "itens": [
+    {
+      "drug": "Capecitabina",
+      "classe": "QT",
+      "sequence": 1,
+      "standardDose": 1000,
+      "doseBasis": "MG_M2",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg/m²",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d1-d14"
+      ],
+      "observacao": "Dose por administração, 12/12 h; nº de comprimidos pela SC. Planilha: 1.250 mg/m²; SOnHe paliativo: 1.000 mg/m² (vale SOnHe, D-W9-50); SOnHe adjuvante: 1.250.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    }
+  ],
+  "limiaresBula": null,
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Capecitabina\" p. 40; decisões D-W9-23, D-W9-34, D-W9-50.",
+  "status": "RASCUNHO"
+}

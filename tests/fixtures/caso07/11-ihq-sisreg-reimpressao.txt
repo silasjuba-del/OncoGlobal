@@ -1,0 +1,22 @@
+SISTEMA PÚBLICO DE REGULAÇÃO — REIMPRESSÃO DE EXAME (documento extraído do sistema)
+Cabeçalho de extração do sistema · Data da extração: 2026-09-01  (≠ data clínica — T1)
+=====================================================================
+DOCUMENTO SINTÉTICO — PACIENTE TESTE 07 — nenhum dado real.
+=====================================================================
+Exame reimpresso: IMUNO-HISTOQUÍMICA — PROSTATA
+Laboratório de origem: LABORATÓRIO EXEMPLO (fictício) · Protocolo de origem: LAB-9004
+Identificação no cabeçalho (rótulo impresso "Cartão SUS"): 123.456.789-01 (I1)
+
+[Conteúdo idêntico à impressão original do laboratório]
+
+Anticorpo | Clone (fictício) | Interpretação (literal, sem interpretar — P3)
+PSA       | EX-1             | Positivo
+PSAP      | EX-2             | Positivo
+AMACR     | EX-3             | Negativo
+p63/HMWCK | EX-4             | Negativo
+
+Conclusão: perfil imuno-histoquímico compatível com ORIGEM PROSTÁTICA da neoplasia.
+=====================================================================
+Armadilhas reproduzidas: D2 (reimpressão com data de EXTRAÇÃO diferente no topo = MESMO
+exame; deduplicar por laboratório + número do exame + data de entrada — nunca pela data
+impressa no topo), I1, T1.

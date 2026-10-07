@@ -1,0 +1,64 @@
+{
+  "id": "orientacao-nutricional",
+  "versao": "1.0.0",
+  "header": {
+    "id": "orientacao-nutricional",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-05",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-W5-05 + ADENDO-W6-W7.md (2026-10-05); docs/referencias/kit-oncologia-2026-05.pdf",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-05"
+  },
+  "fonte": {
+    "tipo": "DECISAO_MEDICA",
+    "referencia": "docs/referencias/kit-oncologia-2026-05.pdf",
+    "pagina": 1
+  },
+  "secoes": [
+    {
+      "id": "conteudo",
+      "titulo": "Orientação nutricional",
+      "origem": "TEXTO_FIXO",
+      "campos": [
+        {
+          "id": "texto-integral",
+          "rotulo": "Texto integral",
+          "origem": "TEXTO_FIXO",
+          "texto": " ORIENTAÇÃO NUTRICIONAL\r\n Cuidados alimentares durante quimioterapia e tratamento oncológico\r\nIDADE:\r\n______\r\nOBJETIVO\r\nManter peso, força muscular, hidratação e segurança alimentar. Prefira alimentos bem higienizados e, quando houver baixa\r\nimunidade, priorize preparações cozidas. Suplementos devem ser usados somente com orientação médica ou nutricional.\r\nPREFERIR / PODE COMER\r\nProteínas: frango, peixe, carne magra bem passada, ovos com\r\ngema dura, feijão, lentilha, grão-de-bico, tofu e soja.\r\nCarboidratos: arroz, macarrão, pão, torrada, batata, mandioca,\r\ninhame, aveia, tapioca e cuscuz.\r\nGorduras boas: azeite de oliva, abacate, pasta de amendoim e\r\ncastanhas em pequena quantidade.\r\nFrutas: bem lavadas e descascadas; preferir banana, maçã, pera,\r\nmamão, melão, manga e compotas caseiras.\r\nVegetais: preferir cozidos ou refogados: cenoura, abobrinha,\r\nchuchu, beterraba, brócolis, couve-flor, espinafre e couve.\r\nLíquidos: 2 a 3 litros/dia, salvo restrição médica. Água filtrada ou\r\nfervida, chás suaves, caldos, sopas e sucos naturais coados.\r\nLaticínios seguros: leite UHT/caixinha e iogurtes pasteurizados\r\ndentro da validade.\r\nEVITAR / NÃO CONSUMIR\r\nCrus ou malpassados: sushi, sashimi, ceviche, carpaccio, kibe\r\ncru, carnes, frango, peixes e ovos com gema mole.\r\nProdutos sem inspeção: leite cru, queijos artesanais de feira,\r\nmaionese caseira, mousses não pasteurizados e iogurtes\r\nartesanais.\r\nEmbutidos e ultraprocessados: salsicha, linguiça, mortadela,\r\npresunto, bacon, salgadinhos, miojo e temperos prontos.\r\nDoces em excesso: refrigerantes, sucos industrializados, balas,\r\nbiscoito recheado, bolos industrializados e sorvetes de origem\r\nduvidosa.\r\nÁlcool: evitar cerveja, vinho, cachaça, whisky, vodca, licores e\r\nbebidas fermentadas.\r\nIrritantes: pimentas, frituras, condimentos fortes, alimentos muito\r\nquentes ou gelados. Em mucosite, evitar cítricos.\r\nÁgua e gelo inseguros: água de torneira/poço sem tratamento e\r\ngelo de origem desconhecida.\r\nDICAS PRÁTICAS\r\nLave as mãos antes das refeições. Higienize frutas e verduras. Fracione a alimentação em 5 a 6 pequenas refeições ao dia.\r\nEm náuseas, prefira pequenas porções frias e secas, como torrada ou biscoito de água e sal. Mastigue devagar e avise a\r\nequipe se houver perda de peso, falta de apetite, vômitos persistentes, diarreia ou dificuldade para engolir.\r\nData: ____/____/________\r\nCARIMBO E ASSINATURA"
+        }
+      ]
+    }
+  ],
+  "identificacao": {
+    "origem": "FATO_CONFIRMADO",
+    "campos": [
+      "NOME",
+      "NASC.",
+      "CIDADE",
+      "IDADE"
+    ]
+  },
+  "dataEAssinatura": {
+    "origem": "DECISAO_MEDICA",
+    "campos": [
+      "DATA",
+      "CARIMBO E ASSINATURA"
+    ]
+  },
+  "proibidoConter": [
+    "ALERTA",
+    "CORRECAO_IA"
+  ],
+  "verificacaoAcentuacao": {
+    "necessaria": true,
+    "marcador": "[VERIFICAR acentuacao]",
+    "metadadoSomente": true
+  },
+  "headerExtraidoComoConfiguracao": true,
+  "textoFonteOriginal": "H\r\nHOSPITAL DO BEM - UNIDADE ONCOLÓGICA\r\nComplexo Hospitalar Regional Dep. Janduhy Carneiro - Patos/PB\r\nDr. Silas Negrão Serra Jr. - CRM-PB 17341 - RQE Oncologia 9099 - RQE Clínica Médica 9098\r\nOrientação nutricional\r\nHospital do Bem - Unidade Oncológica - Patos/PB | Documento médico para impressão\r\nPágina 1\r\n ORIENTAÇÃO NUTRICIONAL\r\n Cuidados alimentares durante quimioterapia e tratamento oncológico\r\nNOME:\r\n___________________________________________\r\nNASC.:\r\n____/____/________\r\nCIDADE:\r\n______________________\r\nIDADE:\r\n______\r\nOBJETIVO\r\nManter peso, força muscular, hidratação e segurança alimentar. Prefira alimentos bem higienizados e, quando houver baixa\r\nimunidade, priorize preparações cozidas. Suplementos devem ser usados somente com orientação médica ou nutricional.\r\nPREFERIR / PODE COMER\r\nProteínas: frango, peixe, carne magra bem passada, ovos com\r\ngema dura, feijão, lentilha, grão-de-bico, tofu e soja.\r\nCarboidratos: arroz, macarrão, pão, torrada, batata, mandioca,\r\ninhame, aveia, tapioca e cuscuz.\r\nGorduras boas: azeite de oliva, abacate, pasta de amendoim e\r\ncastanhas em pequena quantidade.\r\nFrutas: bem lavadas e descascadas; preferir banana, maçã, pera,\r\nmamão, melão, manga e compotas caseiras.\r\nVegetais: preferir cozidos ou refogados: cenoura, abobrinha,\r\nchuchu, beterraba, brócolis, couve-flor, espinafre e couve.\r\nLíquidos: 2 a 3 litros/dia, salvo restrição médica. Água filtrada ou\r\nfervida, chás suaves, caldos, sopas e sucos naturais coados.\r\nLaticínios seguros: leite UHT/caixinha e iogurtes pasteurizados\r\ndentro da validade.\r\nEVITAR / NÃO CONSUMIR\r\nCrus ou malpassados: sushi, sashimi, ceviche, carpaccio, kibe\r\ncru, carnes, frango, peixes e ovos com gema mole.\r\nProdutos sem inspeção: leite cru, queijos artesanais de feira,\r\nmaionese caseira, mousses não pasteurizados e iogurtes\r\nartesanais.\r\nEmbutidos e ultraprocessados: salsicha, linguiça, mortadela,\r\npresunto, bacon, salgadinhos, miojo e temperos prontos.\r\nDoces em excesso: refrigerantes, sucos industrializados, balas,\r\nbiscoito recheado, bolos industrializados e sorvetes de origem\r\nduvidosa.\r\nÁlcool: evitar cerveja, vinho, cachaça, whisky, vodca, licores e\r\nbebidas fermentadas.\r\nIrritantes: pimentas, frituras, condimentos fortes, alimentos muito\r\nquentes ou gelados. Em mucosite, evitar cítricos.\r\nÁgua e gelo inseguros: água de torneira/poço sem tratamento e\r\ngelo de origem desconhecida.\r\nDICAS PRÁTICAS\r\nLave as mãos antes das refeições. Higienize frutas e verduras. Fracione a alimentação em 5 a 6 pequenas refeições ao dia.\r\nEm náuseas, prefira pequenas porções frias e secas, como torrada ou biscoito de água e sal. Mastigue devagar e avise a\r\nequipe se houver perda de peso, falta de apetite, vômitos persistentes, diarreia ou dificuldade para engolir.\r\nData: ____/____/________\r\nCARIMBO E ASSINATURA\r\n\r\n"
+}

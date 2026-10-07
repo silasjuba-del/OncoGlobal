@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OncoChart · Marina Costa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles3d.css" />
+<style>@keyframes viewerIn{from{opacity:0;transform:scale(.6) translateY(-120px)}}</style>
+</head>
+<body>
+<div id="viewport"><div id="canvas"><div id="root"></div></div></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="data.js"></script>
+<script type="text/babel" src="ui.jsx"></script>
+<script type="text/babel" src="side.jsx"></script>
+<script type="text/babel" src="patient.jsx"></script>
+<script type="text/babel" src="tabs.jsx"></script>
+<script type="text/babel" src="overlays.jsx"></script>
+<script type="text/babel" src="panels.jsx"></script>
+<script type="text/babel" src="avatar.jsx"></script>
+<script type="text/babel" src="chart3d.jsx"></script>
+<script type="text/babel" src="journey3d.jsx"></script>
+<script type="text/babel">
+// ---- fixed canvas scaling: página nunca rola ----
+function fit() {
+  const W = 1680, H = 1000, vw = innerWidth, vh = innerHeight;
+  const s = Math.min(vw / W, vh / H);
+  const c = document.getElementById('canvas');
+  c.style.transform = `translate(${(vw - W * s) / 2}px, ${(vh - H * s) / 2}px) scale(${s})`;
+}
+addEventListener('resize', fit); fit();
+
+const LS = (k, d) => { try { const v = localStorage.getItem('onco.' + k); return v == null ? d : JSON.parse(v); } catch { return d; } };
+const SV = (k, v) => localStorage.setItem('onco.' + k, JSON.stringify(v));
+
+function App() {
+  const [theme, setTheme] = useState(LS('theme.v2', 'day'));
+  const [tab, setTab] = useState(LS('tab', 'geral'));
+  const [sideTab, setSideTab] = useState(LS('side', 'agenda'));
+  const [ecog, setEcog] = useState(1);
+  const [dx, setDx] = useState(DATA.dx);
+  const [ov, setOv] = useState(null); const [viewer, setViewer] = useState(null);
+  const [exam, setExam] = useState('e1'); const [mic, setMic] = useState(false);
+  const [queue, setQueue] = useState(DATA.queue); const [calling, setCalling] = useState(false);
+  const [pal, setPal] = useState(false); const [rail, setRail] = useState('pac');
+  const [note, setNote] = useState({ S: 'Parestesia leve em polpas digitais, sem impacto funcional. Nega febre, diarreia, mucosite.', O: 'BEG, corada, PA 132/84, FC 82. Sem edema. Neuropatia CTCAE G1.', A: 'Paclitaxel C11 · tolerância adequada. RP pela TC 28/set (−34%).', P: 'Liberar C11 dose plena. Dexa 10 mg. Glicemia 6/6h 48h. RM mamas + ECO. Discutir cirurgia no tumor board.' });
+  const toast = useToast();
+  useEffect(() => { document.documentElement.dataset.theme = theme; SV('theme.v2', theme); }, [theme]);
+  useEffect(() => SV('tab', tab), [tab]); useEffect(() => SV('side', sideTab), [sideTab]);
+  useEffect(() => { const k = (e) => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); setPal(true); } }; addEventListener('keydown', k); return () => removeEventListener('keydown', k); }, []);
+
+  const flipTheme = (e) => {
+    const next = theme === 'night' ? 'day' : 'night';
+    if (!document.startViewTransition) return setTheme(next);
+    const r = e.currentTarget.getBoundingClientRect(); const x = r.left + r.width / 2, y = r.top + r.height / 2;
+    const rad = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+    const t = document.startViewTransition(() => { ReactDOM.flushSync(() => setTheme(next)); });
+    t.ready.then(() => document.documentElement.animate({ clipPath: [`circle(0 at ${x}px ${y}px)`, `circle(${rad}px at ${x}px ${y}px)`] }, { duration: 650, easing: 'cubic-bezier(.2,.8,.2,1)', pseudoElement: '::view-transition-new(root)' }));
+  };
+  const openViewer = (id) => { setExam(id); setViewer(id); };
+  const open = (k) => { if (k === 'viewer') return openViewer('e1'); if (k === 'exam') { setTab('geral'); return toast('Painel de solicitação aberto na Visão geral', 'info', 'flask'); } if (k === 'dx' || k === 'stad') return setOv('dx'); setOv(k); };
+  const callNext = () => {
+    setCalling(true);
+    setTimeout(() => {
+      setQueue(q => { const i = q.findIndex(x => x.st === 'now'); const n = q.findIndex((x, j) => j > i && (x.st === 'wait' || x.st === 'triage')); return q.map((x, j) => j === i ? { ...x, st: 'done' } : j === n ? { ...x, st: 'now' } : x); });
+      setCalling(false); toast('Próximo paciente chamado no painel', 'accent', 'volume');
+    }, 900);
+  };
+
+  const railItems = [['pac', 'home', 'Início'], ['users', 'users', 'Pacientes'], ['cal', 'cal', 'Agenda'], ['file', 'file', 'Documentos'], ['chat', 'chat', 'Mensagens'], ['chart', 'chart', 'Indicadores'], ['book', 'book', 'Protocolos']];
+  const tabs = [{ v: 'geral', l: 'Visão geral', icon: 'home' }, { v: 'qt', l: 'Quimioterapia', icon: 'drip', cnt: 'C11' }, { v: 'clin', l: 'Dados clínicos', icon: 'heart' }, { v: 'evo', l: 'Evolução', icon: 'edit' }];
+
+  return (
+    <div className="app">
+      <nav className="rail">
+        <div className="logo">On</div>
+        {railItems.map(([k, ic, l]) => <button key={k} title={l} className={`rail-btn ${rail === k ? 'on' : ''}`} onClick={() => setRail(k)}><Icon n={ic} s={19} /></button>)}
+        <div className="sp" />
+        <button className="rail-btn" title="Configurações"><Icon n="gear" s={19} /></button>
+      </nav>
+
+      <main className="main">
+        <div className="topbar">
+          <div className="crumb">Pacientes <Icon n="chev" s={12} /> Oncologia mamária <Icon n="chev" s={12} /> <b>Marina Costa</b></div>
+          <button className="search" onClick={() => setPal(true)}><Icon n="search" s={15} /><span style={{ flex: 1, textAlign: 'left' }}>Buscar pacientes, exames, protocolos…</span><span className="kbd">Ctrl K</span></button>
+          <button className="theme-toggle" onClick={flipTheme} title="Dia / noite"><Icon n="moon" s={13} /><Icon n="sun" s={13} /><span className="knob"><Icon n={theme === 'night' ? 'moon' : 'sun'} s={13} /></span></button>
+          <Dropdown align="right" width={300} trigger={<button className="icon-btn"><Icon n="bell" s={18} /><span className="dot-badge" /></button>}>
+            <div className="dd-lbl">Alertas clínicos</div>
+            <DDItem icon="alert" sub="Fluoxetina × Tamoxifeno planejado" onClick={() => setOv('ix')}>Interação grave</DDItem>
+            <DDItem icon="flask" sub="Hemograma 04/out disponível">Resultado de laboratório</DDItem>
+            <DDItem icon="beaker" sub="ONC-BR-207 · match 92%" onClick={() => setOv('trials')}>Nova elegibilidade a trial</DDItem>
+          </Dropdown>
+          <Dropdown align="right" width={220} trigger={<button className="avatar" style={{ width: 34, height: 34, background: 'var(--accent-soft)', color: 'var(--accent)', fontSize: 12 }}>DS</button>}>
+            <div style={{ padding: '8px 9px' }}><b>Dr. Silas</b><div className="faint" style={{ fontSize: 11 }}>Oncologia clínica · CRM ••••</div></div>
+            <div className="dd-sep" /><DDItem icon="user">Perfil</DDItem><DDItem icon={theme === 'night' ? 'sun' : 'moon'} onClick={() => setTheme(theme === 'night' ? 'day' : 'night')}>Modo {theme === 'night' ? 'dia' : 'noite'}</DDItem><DDItem icon="logout">Sair</DDItem>
+          </Dropdown>
+        </div>
+
+        <PatientHeader ecog={ecog} setEcog={setEcog} open={open} dxState={dx} />
+        <Timeline openViewer={openViewer} open3d={() => setOv('j3')} />
+        <Tabs items={tabs} value={tab} onChange={setTab} />
+        <div className="tab-content">
+          <div className="pane" key={tab}>
+            {tab === 'geral' && <Overview open={open} openViewer={openViewer} />}
+            {tab === 'qt' && <ChemoPane open={() => setOv('release')} />}
+            {tab === 'clin' && <ClinicalPane />}
+            {tab === 'evo' && <EvolutionPane note={note} setNote={setNote} />}
+          </div>
+        </div>
+
+        <div className="dock">
+          <button className={`mic-btn ${mic ? 'rec' : ''}`} onClick={() => setMic(m => !m)} title="Gravar consulta"><Icon n={mic ? 'stop' : 'mic'} s={20} /></button>
+          <div className="dock-sep" />
+          {[['plus', 'Novo registro', () => setTab('evo')], ['flask', 'Exames', () => open('exam')], ['drip', 'Ciclo QT', () => setTab('qt')], ['pack', 'Tumor-pack', () => setOv('pack')], ['beaker', 'Trials', () => setOv('trials')], ['cube', 'Jornada 3D', () => setOv('j3')]].map(([ic, l, f]) => <button key={l} className="dock-btn" onClick={f}><Icon n={ic} s={17} />{l}</button>)}
+          <div className="dock-sep" />
+          <Btn kind="wa" icon="wa" onClick={() => setOv('finish')}>Encerrar · WhatsApp</Btn>
+        </div>
+        {!mic && <OncoFab onOpen={() => setOv('j3')} />}
+        {mic && <AudioBox onClose={() => setMic(false)} onUse={() => { setMic(false); setTab('evo'); toast('Evolução SOAP preenchida a partir do áudio', 'accent', 'zap'); }} />}
+      </main>
+
+      <SidePanel queue={queue} onCall={callNext} calling={calling} exam={exam} setExam={setExam} openViewer={openViewer} sideTab={sideTab} setSideTab={setSideTab} />
+
+      {ov === 'finish' && <FinishModal ecog={ecog} onClose={() => setOv(null)} onDone={callNext} />}
+      {ov === 'pack' && <TumorPackDrawer onClose={() => setOv(null)} />}
+      {ov === 'trials' && <TrialsDrawer onClose={() => setOv(null)} />}
+      {ov === 'anag' && <AnagModal onClose={() => setOv(null)} />}
+      {ov === 'ix' && <IxModal onClose={() => setOv(null)} />}
+      {ov === 'clin' && <Modal title="Dados clínicos gerais" icon="heart" width={1100} onClose={() => setOv(null)}><div style={{ height: 560, position: 'relative' }}><ClinicalPane /></div></Modal>}
+      {(ov === 'release' || ov === 'chemo') && <ReleaseModal onClose={() => setOv(null)} />}
+      {ov === 'flash' && <FlashModal ecog={ecog} onClose={() => setOv(null)} />}
+      {ov === 'dx' && <DxModal dx={dx} setDx={(d) => { setDx(d); toast('Diagnóstico versionado · estadiamento anterior preservado', 'accent', 'file'); }} onClose={() => setOv(null)} />}
+      {ov === 'cid' && <CidModal dx={dx} onClose={() => setOv(null)} />}
+      {ov === 'j3' && <Journey3D onClose={() => setOv(null)} openViewer={openViewer} />}
+      {viewer && <ImageViewer examId={viewer} onClose={() => setViewer(null)} />}
+      {pal && <Palette onClose={() => setPal(false)} open={open} />}
+    </div>
+  );
+}
+document.documentElement.dataset.theme = LS('theme.v2', 'day');
+ReactDOM.createRoot(document.getElementById('root')).render(<ToastHost><App /></ToastHost>);
+</script>
+</body>
+</html>

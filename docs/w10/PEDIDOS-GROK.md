@@ -1,0 +1,112 @@
+# PEDIDOS-GROK · W10
+
+Faixa: `docs/ondas/W10-GROK.md`. Contrato que falta fica com tipo local `// PROVISORIO-W10` dentro da faixa. Nada aqui edita `src/contracts/**`, `package.json` ou `src/ui/**`.
+
+## GROK-01
+
+1. **Contrato C-08.** `Triagem` não tem PAD nem creatinina. O portão usa `SinaisExtraW10` em `src/rules/triagem.ts` e o espelho em `src/rules/index.ts` (`pad: number | null` em mmHg; `crCentesimos: number | null`, 150 = 1,50 mg/dL). Trocar por campo em `src/contracts/w10/` (ou na Triagem) e apagar o tipo local.
+2. **R-08.** `src/rules/` não importa `src/rules/`. As funções `avaliarCorteSalao`, `avaliarTriagemCiclo` e `avaliarPortoesW10` estão copiadas em `triagem.ts` e `index.ts`. A paridade está em `tests/w10-grok/grok-01-portoes.test.ts`. Liberar o barrel a reexportar, ou aceitar as duas cópias.
+3. **`header.versao` preso em 1.0.0.** A suíte FN-01 compara `rulesetVersao` com a constante `1.0.0`. O acréscimo D-W9-37/38/22g não bumpou o semver. Quando o tech lead autorizar, subir o ruleset e a expectativa juntos.
+4. **`corpus/rulesets/lab-thresholds.v1.json` está fora da faixa** (`salao-*` / `rads-*` / `agenda-*` / `interacoes-*`). CREAT continua `ativo: false`. Pedido: ativar com `limiarSuperior` 150 (centésimos de mg/dL), fonte D-W9-37, sem limiar inventado no `.ts`.
+5. **Religação.** `avaliarTriagem` (FN-01) continua com FC &lt; 50 em `naoCortes`. Os testes congelados e o comentário de `ResultadoTriagem` exigem isso. O corte D-W9-37 (FC &lt; 50 → `FILA_MEDICO`, alerta) está só em `avaliarCorteSalao`. Quem orquestra a tela precisa chamar `avaliarPortoesW10` além da FN-01. `src/ui/api/fake.ts` está fora da faixa e ainda não vê `portoes`.
+6. **PAS &gt; 160 e FC &gt; 120** continuam só no objeto `cortes` da FN-01 (Q21). Não foram copiados para `corteSalao`, para não fundir os portões (D-W9-22g).
+
+## GROK-02
+
+1. **Ficha do protocolo.** `ProtocoloCiclo` e `LabsCiclo` estão em `src/rules/portaCiclo.ts` (`// PROVISORIO-W10`). Trocar pelos limiares de bula em `src/contracts/w10/` (neutrófilos, plaquetas, clearance, FEVE, cada um com mínimo inteiro).
+2. **G1 de hemoglobina e de plaquetas** depende do LIN no CTCAE v6. A tabela não inventa LIN: valor nessa zona fica com grau `null`, estado `PENDENTE`, nunca 0.
+3. **FEVE na porta** só compara o mínimo declarado na ficha. O alerta D-W9-34b (método, data, fármaco programado) fica para a GROK-03.
+4. **Barrel.** `portaCiclo` e `grauCtcae` ficam em `src/rules/portaCiclo.ts`, no mesmo molde de `ctcaeGrau.ts` (R-08 impede o `index.ts` de reexportar).
+
+## GROK-03
+
+1. **Eco.** `EcoFeve` e `FarmacoProgramado` estão em `src/rules/alertaFeve.ts` (`// PROVISORIO-W10`). Trocar pelo ecocardiograma (percentual, método, data) e pela lista de fármacos programados em `src/contracts/w10/`.
+2. **Sinônimos de classe.** A lista em `corpus/rulesets/salao-feve.v1.json` é editável. Mitoxantrona não entrou: não é antraciclina. Anti-HER2 aqui é o anticorpo (trastuzumabe, pertuzumabe, T-DM1, T-DXd) e o rótulo da classe.
+3. **FEVE baixa sem esses fármacos** não dispara este alerta. A porta de bula continua na GROK-02.
+4. **Barrel.** `alertarFeve` fica em `src/rules/alertaFeve.ts` (R-08).
+
+## GROK-04
+
+1. **Grade.** `SessaoAgenda` e `PedidoGeracao` estão em `src/rules/agendaQt.ts` (`// PROVISORIO-W10`). O merge `10bb8d4` não publicou contrato de agenda.
+2. **Fim de semana e feriado** do HTML de referência não movem a data. A geração soma o intervalo do protocolo. Mover seria reorganizar.
+3. **08:00–18:00** está no ruleset como rótulo editável da grade (PADROES-UI §3.2). D-W9-39 não cria corte separado para sessão que passa de 18:00.
+4. **Respostas do tech lead** em `docs/w10/RESPOSTAS-TECH-LEAD.md` (trocar `SinaisExtraW10` e `ProtocoloCiclo`, reexportar o barrel, subir `salao-triagem` para 1.1.0, ativar CREAT, alinhar FN-01 à FC &lt; 50) ficam para a fatia que mexer nesses arquivos. Esta fatia não altera a FN-01.
+
+## GROK-05
+
+1. **Laudo.** `AlertaEmergencia` está em `src/rules/radsEmergencias.ts` (`// PROVISORIO-W10`). O merge não publicou contrato RADS.
+2. **`corpus/rulesets/rad-emergencia.v1.json`** continua o esqueleto da FN-20 (sinônimos vazios, `ativo: false`). Fora do glob `rads-*`. Não foi editado. O detector novo lê `rads-emergencias.v1.json`. `avaliarRadAlerts` não mudou.
+3. **Linha 27** dispara com lesão lítica ou blástica sozinha, porque o PT08 não traz afilamento cortical nem SINS/Mirels. **Linha 7** exige hidronefrose e um elo seguinte (afilamento); a massa pélvica não é obrigatória.
+4. **Lateralidade divergente** entre achado e conclusão (RT-05) não é comparada aqui. O nível e o lado saem da frase dos elos que fecharam a cadeia.
+
+## GROK-06
+
+1. **Exame seriado.** `ExameSeriado` e `LacunasNaoSei` estão em `src/rules/intervalProgression.ts` (`// PROVISORIO-W10`). O literal `INTERVAL_PROGRESSION` já é `ExceptionKind` em `src/contracts/w10/extracao.ts`. Falta o contrato do exame (data, método, sítio, lateralidade, medida, descrição, exame dirigido).
+2. **Exame dirigido** sai do campo do laudo atual. A função não escolhe a modalidade. Sem nome, a pendência é "exame dirigido não nomeado no laudo".
+3. **NÃO SEI** só entra quando o chamador passa o mapa. Campo preenchido sai da lista. Campo ausente não vira fato.
+
+## GROK-07
+
+1. **Nódulo.** `AchadoNodulo` e `TextoEstadiamento` estão em `src/rules/noduloIndeterminado.ts` (`// PROVISORIO-W10`). Não há contrato publicado para o nódulo nem para a sugestão de Mx.
+2. **Mx não reescreve.** A sugestão "cM0 com nódulos indeterminados" sai ao lado do texto. `substituiu` é o literal `false`.
+3. **Faixa que cruza 1 cm** (ex.: 8–12 mm) não vira INDETERMINADO nem M1. Fica PENDENTE.
+4. **Faixa nova.** O merge `6c3141a` tirou `src/rules/prescricao/**` e `src/rules/morfometria/**` da faixa do Grok. Esta fatia não os editou.
+
+## GROK-08
+
+1. **`[VERIFICAR]` permanece.** `tests/corpus/interacoes.test.ts` exige `fonte.referencia === "[VERIFICAR]"`, os seis campos nulos e `ativo: false` em todo item. As 30 linhas do CSV entraram assim. A citação (bula/artigo) está em `fonte.trecho`. Ativar continua item a item, pelo Dr. Silas.
+2. **Coluna editorial.** `gravidadeEditorial` guarda "Maior" e "Contraindicada". Não é `severidade` e não muda `bloqueiaSalvar`. A coluna de conduta não foi copiada para `notaManejo`.
+3. **Linha 18 do CSV** diz "TKIs". O par foi grafado "inibidor de tirosina quinase" para não criar um terceiro `TKI` no teste que conta exatamente 2. O nome original está no `fonte.trecho`.
+4. **Observações NÃO_VERIFICADO** (sorivudina, diurético de alça) ficaram em `observacaoCsv`. Não viraram fato.
+5. **Barrel.** `semaforoInteracoes` é reexportado por `src/rules/index.ts` porque o adv importa de lá. Os corpos duplicados da triagem não foram apagados nesta fatia.
+6. **"sem interação"** só com `checagemCompleta: true` e pelo menos um item ativo com trecho, sem par casado. Lista estruturada sem `NAO_ONCOLOGICA` fica PENDENTE (D-W9-47).
+
+## GROK-09
+
+1. **Redação final aberta.** `docs/DECISOES.md` ainda deixa a redação final das red flags em aberto. A tabela aprovada em `docs/referencias/externos/IDEIAS-MANUAIS-PACIENTE.md` diz "antibiótico se neutropênico" e "ir ao PS (hidratação venosa)". Esta fatia emite as frases do enunciado: "ir ao PS → hemograma → ATB se neutropênico" e "orientar PS para hidratação venosa".
+2. **Sinônimos.** A lista em `salao-suporte.v1.json` é vocabulário de casamento, não formulário e não lista completa. Furosemida ficou de fora.
+3. **`canal-redflags.v1.json`** não foi editado. Continua esqueleto, `ativo: false`, fonte `[VERIFICAR]`.
+4. **Ausência.** Lista nula com diarreia acima de 24 h fica PENDENTE e não vira "sem anti-hipertensivo". Temperatura nula continua nula. Igual a 24 h e igual a 37,8 não disparam.
+5. **Tipo.** `EntradaSuporte` está em `src/rules/suporteNaoOncologico.ts` (`// PROVISORIO-W10`).
+
+## GROK-10
+
+1. **Registro no harness.** `src/kernel/harness/gates.ts` está fora da faixa. Uma linha fecha o adv T-56:
+
+```ts
+export { g16Owner } from "./ownership.js";
+```
+
+2. **O adv não exercita o veredito hoje.** `t56-g16-owner-write.adv.ts` só importa `gates.js` (`g16Owner`, `g16` ou `donoDoObjeto`). Com a função null, os três casos de write/leitura devolvem cedo e contam como passou. O RT-09 já acha `g16Owner` em `ownership.ts`.
+3. **Veredito.** Write alheio, objeto sem dono e objeto com dois donos saem `BLOQUEIA_AUTORIDADE`. Leitura sai `PASSA`. Operação diferente de write/read sai `PENDENTE`. O catálogo é `corpus/capabilities.v1.json`; o segundo argumento injeta outro catálogo.
+
+## GROK-11
+
+1. **Script npm.** `package.json` não foi editado. Sugestão:
+
+```json
+"check:manifesto": "node scripts/verificar-manifesto.mjs --executor GROK --base f0/w1-integrado --head HEAD"
+```
+
+2. **Nome que o adv procura.** `n19-manifesto-merge.adv.ts` aceita só `scripts/check-manifesto.mjs`, `scripts/check-claims.mjs`, `tests/w3/manifesto-merge.test.ts` ou `tests/manifesto.test.ts`. A faixa manda `scripts/verificar-manifesto.mjs`. O primeiro teste fica vermelho. O terceiro devolve cedo com harness null. Incluir o nome da faixa na lista de candidatos fecha o adv sem mudar a expectativa dos outros casos.
+3. **Trilha.** Hoje o script só aceita `--executor GROK`. Outro nome sai `EXECUTOR_SEM_TRILHA` e exit 2. Sem `--base`, todo `src/rules/w8/*` fica fora. Com `--base`, entra o arquivo que a revisão ainda não tem.
+
+## GROK-12
+
+1. **Caso 07.** `deduplicarExames` está em `src/modules/documentos/dedupe.ts`. O adv já procura esse caminho, depois de `src/leitura/dedupe.js`. `src/leitura` continua com o Fugu. O adv ficou verde.
+2. **Fachada.** `src/rules/w8-fachada.ts` não foi criado. A R-08 só deixa `src/rules/index.ts` reexportar `src/rules/*`. Os exports estáveis saem dos arquivos folha de `w8` por esse barrel. O Fugu importa de `src/rules/index.js`. Os corpos duplicados de `src/rules/w8/index.ts` continuam lá.
+3. **Ruleset.** `dedupe-exame.v1.json` segue com `ativo: false` (fora da faixa de edição). A função lê os `campos` de `patologia-ihq`. A chave de imagem (`servico`, `registro`, `dataExame`) não é a chave do caso 07. `dataImpressaNoTopo` não entra na chave.
+
+## GROK-13
+
+1. **Ledger.** `validarEmissaoPersistida` devolve o registro e deixa `gravadoNoLedger: false`. O módulo não importa `src/kernel`. Quem grava o append é o Fugu.
+2. **SIA e antiglosa.** Não implementados. Continuam em `src/apac`, fora da faixa. `apac.v1.json` não foi editado: a nomenclatura oficial segue `[VERIFICAR]` e a lista de finalidades de lá é menor que a D-W9-12. A lista decidida está em `corpus/rulesets/agenda-apac-emissao.v1.json`.
+3. **Snapshot.** `SnapshotConfirmado` em `src/modules/consulta/preConsulta.ts` não mudou. A projeção do Fugu (`kind`, `campos`, `contentHash`, `projectionVersion`) entra por `alinharSnapshotProjecao`. Os dois formatos continuam diferentes. Sem mudança de contrato. Se o pack pré-consulta for consumir a projeção, a ligação fica com o tech lead.
+4. **CNS do w8.** `src/rules/w8/identificadores.ts` ainda cita a Portaria 711/2004, descartada pela D-W9-13, e devolve só booleano. O algoritmo e-SUS desta fatia está em `src/modules/apac/cns.ts`. O arquivo w8 não foi editado.
+5. **Prazo de 85/90 dias.** `apacPrazo` em `src/rules/apac.ts` não mudou. O aviso de até 1 dia adiantado (D-W5-02) é o relógio do módulo, com offset injetado (D-W5-01).
+
+## GROK-14
+
+1. **Fichas reais.** `corpus/fichas/` continua com a equipe interna. O catálogo padrão de `carregarFichaAprovada` é só a ficha sintética `ficha-teste` / `2.0.0` / `sha256:esperado`, mais a versão `1.0.0`. Não há dose clínica nesse catálogo.
+2. **T-56 e N19.** Seguem vermelhos no primeiro teste. Fecham quando o tech lead aplicar o reexport de `g16Owner` em `gates.ts` (GROK-10) e incluir `scripts/verificar-manifesto.mjs` na lista de candidatos do n19 (GROK-11). O script npm `check:manifesto` também continua só neste arquivo.
+3. **Item do tech lead fora da onda.** FN-01 com FC &lt; 50, CREAT ativo em `lab-thresholds`, deduplicar triagem e `portaCiclo` no barrel, `LimiaresBula` e `salao-triagem` 1.1.0 não foram feitos aqui.

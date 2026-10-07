@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Triagem-QT v20 • Hospital do Bem • Dr. Silas Negrão</title>
+<style>
+:root{
+  --N:#1B365D;--T:#2B7A8C;--G:#B8860B;--VE:#15803D;--AM:#B45309;--VM:#B91C1C;
+  --BG:#0f172a;--CARD:#1e293b;--BORDER:#334155;--TEXT:#e2e8f0;--MUTED:#94a3b8;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;min-height:100%;background:var(--BG);color:var(--TEXT);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;overflow-x:hidden}
+input,textarea,select,button{font-family:inherit;font-size:14px;color:inherit}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:#0f172a}
+::-webkit-scrollbar-thumb{background:#334155;border-radius:3px}
+
+/* ─── LAYOUT ─── */
+#app{display:flex;flex-direction:column;min-height:100vh;max-width:620px;margin:0 auto}
+
+/* ─── TOPBAR ─── */
+.topbar{background:linear-gradient(90deg,var(--N),#0d2347);padding:10px 14px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.4)}
+.topbar-logo{width:34px;height:34px;background:linear-gradient(135deg,var(--G),#d97706);border-radius:9px;display:grid;place-items:center;font-size:16px;flex-shrink:0}
+.topbar-info{flex:1}.topbar-title{font-size:14px;font-weight:800;color:#fff}
+.topbar-sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px}
+.topbar-badge{background:var(--G);color:#1a0a00;font-weight:900;font-size:10px;padding:2px 8px;border-radius:999px}
+
+/* ─── ALERTA GLOBAL ─── */
+#global-alert{background:var(--VM);color:#fff;padding:10px 14px;text-align:center;font-weight:700;font-size:12px;cursor:pointer;display:none;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+
+/* ─── PROGRESS ─── */
+.progress-wrap{padding:12px 14px;background:#1e293b;border-bottom:1px solid var(--BORDER)}
+.progress-steps{display:flex;gap:4px;margin-bottom:8px}
+.step-dot{flex:1;height:4px;border-radius:999px;background:var(--BORDER);transition:background .3s}
+.step-dot.done{background:var(--VE)}.step-dot.active{background:var(--G)}
+.step-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--MUTED);font-weight:700;text-transform:uppercase}
+
+/* ─── MAIN ─── */
+.main{flex:1;padding:14px;display:flex;flex-direction:column;gap:12px}
+
+/* ─── CARD ─── */
+.card{background:var(--CARD);border:1px solid var(--BORDER);border-radius:13px;padding:14px}
+.card-title{font-size:13px;font-weight:800;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.card-title .ico{font-size:18px}
+
+/* ─── CAMPOS ─── */
+label.lbl{display:block;font-size:10px;font-weight:800;color:var(--MUTED);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
+input.inp,textarea.inp,select.inp{
+  width:100%;background:#0f172a;border:1px solid var(--BORDER);border-radius:8px;
+  padding:9px 11px;color:var(--TEXT);outline:none;transition:border-color .2s
+}
+input.inp:focus,textarea.inp:focus,select.inp:focus{border-color:var(--T)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 10px}
+.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0 8px}
+
+/* ─── BOTÃO ─── */
+.btn{border:none;cursor:pointer;font-weight:800;border-radius:9px;padding:9px 16px;font-size:13px;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:7px}
+.btn-gold{background:var(--G);color:#fff}.btn-navy{background:var(--N);color:#fff}
+.btn-teal{background:var(--T);color:#fff}.btn-green{background:var(--VE);color:#fff}
+.btn-red{background:var(--VM);color:#fff}.btn-ghost{background:#1e293b;color:var(--TEXT);border:1px solid var(--BORDER)}
+.btn:disabled{opacity:.4;cursor:default}.btn-full{width:100%}
+.btn-row{display:flex;gap:8px}.btn-row .btn{flex:1}
+
+/* ─── ALERTA INLINE ─── */
+.alerta{border-radius:9px;padding:9px 12px;font-size:12px;font-weight:700;display:flex;gap:7px;align-items:flex-start;margin-top:6px}
+.alerta-vm{background:#3b0a0a;border:1px solid var(--VM);color:#fca5a5}
+.alerta-am{background:#451a03;border:1px solid var(--AM);color:#fbbf24}
+.alerta-vd{background:#052e16;border:1px solid var(--VE);color:#86efac}
+
+/* ─── ECOG CARDS ─── */
+.ecog-grid{display:grid;gap:6px}
+.ecog-card{border:2px solid var(--BORDER);border-radius:10px;padding:10px 13px;cursor:pointer;display:flex;gap:10px;align-items:center;transition:all .15s}
+.ecog-card:hover{border-color:var(--T)}.ecog-card.sel{border-color:var(--T);background:#0c2033}
+.ecog-num{width:32px;height:32px;background:var(--N);border-radius:8px;display:grid;place-items:center;font-size:16px;font-weight:900;flex-shrink:0}
+.ecog-card.sel .ecog-num{background:var(--T)}
+
+/* ─── CTCAE ─── */
+.ctcae-item{margin-bottom:10px}
+.ctcae-nome{font-size:12px;font-weight:700;color:#fff;margin-bottom:5px}
+.ctcae-desc{font-size:9px;color:var(--MUTED);margin-bottom:5px;line-height:1.4}
+.ctcae-btns{display:flex;gap:4px}
+.ctcae-btn{flex:1;border:1.5px solid var(--BORDER);border-radius:7px;padding:5px 3px;cursor:pointer;font-size:11px;font-weight:900;font-family:inherit;text-align:center;transition:all .15s;background:#0f172a;color:var(--MUTED)}
+.ctcae-btn:hover{border-color:var(--T)}.ctcae-btn.g0.sel{background:#14532d;border-color:#16a34a;color:#86efac}
+.ctcae-btn.g1.sel{background:#1a2e0a;border-color:#65a30d;color:#bef264}
+.ctcae-btn.g2.sel{background:#451a03;border-color:#ea580c;color:#fdba74}
+.ctcae-btn.g3.sel{background:#3b0a0a;border-color:#dc2626;color:#fca5a5}
+.ctcae-btn.g4.sel{background:#2d0000;border-color:#7f1d1d;color:#fca5a5}
+
+/* ─── CONCLUSÃO ─── */
+.conclusao-opts{display:grid;gap:7px}
+.conclusao-opt{border:2px solid var(--BORDER);border-radius:11px;padding:12px 14px;cursor:pointer;display:flex;gap:10px;align-items:center;transition:all .15s}
+.conclusao-opt:hover{border-color:var(--G)}.conclusao-opt.sel-vd{border-color:var(--VE);background:#052e16}
+.conclusao-opt.sel-am{border-color:var(--AM);background:#1c0a00}.conclusao-opt.sel-az{border-color:var(--T);background:#0c2033}
+.conclusao-opt.sel-vm{border-color:var(--VM);background:#3b0a0a}
+.conclusao-ico{font-size:26px;flex-shrink:0}.conclusao-txt{font-size:13px;font-weight:800;color:#fff}
+.conclusao-sub{font-size:10px;color:var(--MUTED);margin-top:2px}
+
+/* ─── FOOTER GOLD ─── */
+.footer{background:#0c1a2e;border-top:1px solid rgba(184,134,11,.3);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.footer-hosp{font-size:9px;color:rgba(255,255,255,.25);display:flex;align-items:center;gap:5px}
+.footer-autor{color:var(--G);font-weight:900;font-size:13px;letter-spacing:.5px;font-family:Georgia,serif;display:flex;align-items:center;gap:5px}
+.footer-crm{font-size:8px;color:rgba(184,134,11,.5)}
+
+/* ─── HISTÓRICO ─── */
+.hist-item{border:1px solid var(--BORDER);border-radius:9px;padding:9px 12px;margin-bottom:6px;cursor:pointer;transition:all .15s}
+.hist-item:hover{border-color:var(--T)}.hist-nome{font-size:13px;font-weight:700;color:#fff}
+.hist-meta{font-size:10px;color:var(--MUTED);margin-top:2px}
+.hist-status{font-size:10px;font-weight:900;padding:2px 8px;border-radius:999px}
+.st-vd{background:#14532d;color:#86efac}.st-am{background:#451a03;color:#fbbf24}
+.st-az{background:#0c2033;color:#7dd3fc}.st-vm{background:#3b0a0a;color:#fca5a5}
+
+/* ─── BADGE NOTIF ─── */
+.badge{background:var(--VM);color:#fff;border-radius:999px;padding:1px 7px;font-size:10px;font-weight:900;margin-left:5px}
+
+/* ─── TELA HOME ─── */
+.home-grid{display:grid;gap:10px}
+.home-card{border-radius:13px;padding:14px;cursor:pointer;display:flex;gap:12px;align-items:center;transition:transform .2s}
+.home-card:hover{transform:translateY(-1px)}
+.home-card-ico{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;font-size:20px;flex-shrink:0}
+.home-card-txt .t{font-size:13px;font-weight:800;color:#fff}
+.home-card-txt .s{font-size:10px;color:var(--MUTED);margin-top:2px}
+
+/* ─── PRINT ─── */
+@media print{
+  body{background:#fff;color:#000;font-size:11px}
+  .topbar,.progress-wrap,.btn,.btn-row,.footer,.no-print{display:none!important}
+  .card{border:1px solid #ccc;border-radius:0;background:#fff;color:#000;margin-bottom:8px}
+  .card-title{color:#000}.alerta-vm{background:#ffe0e0;border-color:#ff0000;color:#700}
+  .alerta-am{background:#fff3cd;border-color:#f90;color:#700}.lbl{color:#555}
+  input.inp,select.inp{border:1px solid #999;background:#fff;color:#000}
+  .print-show{display:block!important}
+}
+.print-show{display:none}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-logo">⚕</div>
+  <div class="topbar-info">
+    <div class="topbar-title">Triagem-QT <span id="top-v" style="opacity:.5;font-size:10px">v20</span></div>
+    <div class="topbar-sub" id="top-sub">Hospital do Bem · Patos/PB</div>
+  </div>
+  <div style="display:flex;gap:7px;align-items:center">
+    <span class="topbar-badge" id="badge-hist" style="display:none;cursor:pointer" onclick="irTela('historico')">📋</span>
+    <span class="topbar-badge" style="cursor:pointer" onclick="irTela('home')">🏠</span>
+  </div>
+</div>
+
+<!-- ALERTA GLOBAL -->
+<div id="global-alert" onclick="irTela('historico')">
+  🚨 ALERTA CLÍNICO — Toque para ver
+</div>
+
+<!-- PROGRESS BAR -->
+<div class="progress-wrap" id="progress-wrap" style="display:none">
+  <div class="progress-steps">
+    <div class="step-dot" id="sd1"></div>
+    <div class="step-dot" id="sd2"></div>
+    <div class="step-dot" id="sd3"></div>
+    <div class="step-dot" id="sd4"></div>
+    <div class="step-dot" id="sd5"></div>
+  </div>
+  <div class="step-labels">
+    <span>Ident.</span><span>Sinais</span><span>Lab</span><span>ECOG</span><span>CTCAE</span>
+  </div>
+</div>
+
+<!-- CONTEÚDO PRINCIPAL -->
+<div class="main" id="main"></div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-hosp">🏥 Hospital do Bem · Patos-PB</div>
+  <div style="text-align:center">
+    <div class="footer-autor">🏅 Dr. Silas Negrão</div>
+    <div class="footer-crm">CRM-PB 17341 · RQE Oncologia Clínica 9099</div>
+  </div>
+  <div class="footer-crm" style="text-align:right">Triagem-QT<br>v20 · 2026</div>
+</div>
+
+</div><!-- #app -->
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   TRIAGEM-QT v20 · Dr. Silas Negrão Serra Jr. · CRM-PB 17341
+   Hospital do Bem — Unidade Oncológica · Patos/PB
+═══════════════════════════════════════════════════════════ */
+
+const AUTOR = "Dr. Silas Negrão Serra Jr.";
+const CRM   = "CRM-PB 17341 · RQE Oncologia Clínica 9099";
+const HOSP  = "Hospital do Bem — Unidade Oncológica · Patos/PB";
+
+/* ─── Estado ─────────────────────────────────────────────── */
+let tela = 'home';
+let step = 1;
+let d = {};
+let historico = JSON.parse(localStorage.getItem('tqt_hist') || '[]');
+let triage_id = null;
+
+const STEPS = 5;
+
+function resetD(){
+  triage_id = 'TQT-' + Date.now();
+  d = {
+    id: triage_id,
+    // Ident.
+    nome:'', ciclo:'', proto:'', enfermeira:'',
+    data: hoje(), hora: agora(),
+    // Sinais
+    pas:'', pad:'', fc:'', fr:'', temp:'', spo2:'', peso:'', altura:'',
+    // Lab
+    hgb:'', leuco:'', neutro:'', plt:'', creat:'', tgo:'', tgp:'', glicemia:'',
+    // ECOG
+    ecog:null,
+    // CTCAE
+    ctcae:{
+      nausea:'G0', vomito:'G0', diarreia:'G0', mucosite:'G0',
+      fadiga:'G0', neuropatia:'G0', maoPe:'G0', pele:'G0'
+    },
+    // Conclusão
+    conclusao:'', obs:'',
+    status:'pendente'
+  };
+}
+
+function hoje(){ return new Date().toLocaleDateString('pt-BR'); }
+function agora(){ return new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}); }
+
+/* ─── Navegação ─────────────────────────────────────────── */
+function irTela(t){
+  tela = t;
+  document.getElementById('progress-wrap').style.display = (t==='triagem') ? '' : 'none';
+  render();
+}
+
+function irStep(n){
+  if(n<1 || n>STEPS) return;
+  // Validar step atual antes de avançar
+  if(n > step){
+    const err = validarStep(step);
+    if(err){ alertaCustom(err); return; }
+  }
+  step = n;
+  atualizarProgress();
+  render();
+}
+
+function atualizarProgress(){
+  for(let i=1;i<=STEPS;i++){
+    const el = document.getElementById('sd'+i);
+    if(!el) continue;
+    el.className = 'step-dot ' + (i < step ? 'done' : i===step ? 'active' : '');
+  }
+}
+
+/* ─── Validação ─────────────────────────────────────────── */
+function validarStep(s){
+  if(s===1){
+    if(!d.nome.trim()) return '⚠️ Informe o nome do paciente.';
+    if(!d.ciclo.trim()) return '⚠️ Informe o número do ciclo.';
+  }
+  if(s===2){
+    if(!d.pas||!d.pad) return '⚠️ Informe a pressão arterial (PAS e PAD).';
+    if(!d.temp) return '⚠️ Informe a temperatura.';
+    if(!d.spo2) return '⚠️ Informe a saturação de O₂.';
+  }
+  if(s===4){
+    if(d.ecog === null) return '⚠️ Selecione o ECOG do paciente.';
+  }
+  return null;
+}
+
+function alertaCustom(msg){
+  const el = document.createElement('div');
+  el.style.cssText = 'position:fixed;top:60px;left:50%;transform:translateX(-50%);background:#451a03;border:1px solid #ea580c;color:#fdba74;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:700;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.5)';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), 2500);
+}
+
+/* ─── Render principal ─────────────────────────────────── */
+function render(){
+  const main = document.getElementById('main');
+  document.getElementById('top-sub').textContent = {
+    home:'Hospital do Bem · Patos/PB',
+    triagem:'Triagem em andamento',
+    historico:'Histórico de triagens',
+    conclusao:'Conclusão da triagem',
+    ver:'Visualizar triagem'
+  }[tela] || 'Hospital do Bem';
+
+  if(tela==='home') main.innerHTML = renderHome();
+  else if(tela==='triagem') main.innerHTML = renderStep(step);
+  else if(tela==='historico') main.innerHTML = renderHistorico();
+  else if(tela==='conclusao') main.innerHTML = renderConclusao();
+  else if(tela==='ver') main.innerHTML = renderVer();
+
+  // Atualizar badge histórico
+  const bh = document.getElementById('badge-hist');
+  if(historico.length>0){ bh.style.display=''; bh.textContent='📋 '+historico.length; }
+  else bh.style.display='none';
+
+  // Alerta global
+  const urgentes = historico.filter(h=>h.nivel==='verm'&&h.status==='pendente');
+  const ga = document.getElementById('global-alert');
+  if(urgentes.length>0){
+    ga.style.display='';
+    ga.textContent=`🚨 ${urgentes.length} ALERTA${urgentes.length>1?'S':''} URGENTE${urgentes.length>1?'S':''} — ${urgentes[0].nome} · Toque para ver`;
+  } else ga.style.display='none';
+
+  attachEvents();
+}
+
+/* ─── HOME ─────────────────────────────────────────────── */
+function renderHome(){
+  return `
+  <div style="text-align:center;padding:6px 0 14px">
+    <div style="font-size:48px;margin-bottom:8px">🏥</div>
+    <div style="font-size:20px;font-weight:900;color:#fff;font-family:Georgia,serif">Triagem-QT</div>
+    <div style="font-size:11px;color:var(--MUTED);margin-top:3px">Avaliação Pré-Quimioterapia · v20</div>
+  </div>
+  <div class="home-grid">
+    <div class="home-card" style="background:linear-gradient(135deg,var(--N),#0d2347);border:1px solid rgba(43,122,140,.3)" onclick="novaTriagem()">
+      <div class="home-card-ico" style="background:linear-gradient(135deg,var(--T),#1a4a5c)">🩺</div>
+      <div class="home-card-txt">
+        <div class="t">Nova Triagem</div>
+        <div class="s">Iniciar avaliação pré-QT · 5 etapas</div>
+      </div>
+      <div style="color:var(--G);font-size:18px;margin-left:auto">→</div>
+    </div>
+    <div class="home-card" style="background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid var(--BORDER)" onclick="irTela('historico')">
+      <div class="home-card-ico" style="background:linear-gradient(135deg,#374151,#1f2937)">📋</div>
+      <div class="home-card-txt">
+        <div class="t">Histórico ${historico.length>0?`<span class="badge">${historico.length}</span>`:''}
+        </div>
+        <div class="s">${historico.length} triagem${historico.length!==1?'s':''} realizada${historico.length!==1?'s':''}</div>
+      </div>
+      <div style="color:var(--MUTED);font-size:18px;margin-left:auto">→</div>
+    </div>
+  </div>
+  ${historico.filter(h=>h.nivel==='verm'&&h.status==='pendente').length>0?`
+  <div class="alerta alerta-vm" style="cursor:pointer;border-radius:11px;padding:11px 13px" onclick="irTela('historico')">
+    <span style="font-size:20px">🚨</span>
+    <div>
+      <div style="font-weight:900">ALERTA URGENTE PENDENTE</div>
+      <div style="font-size:11px;margin-top:2px">${historico.filter(h=>h.nivel==='verm'&&h.status==='pendente').map(h=>h.nome).join(' · ')}</div>
+    </div>
+  </div>`:''}
+  <div style="margin-top:6px;padding:10px 12px;border:1px solid var(--BORDER);border-radius:10px;font-size:10px;color:var(--MUTED);line-height:1.6">
+    <div style="font-weight:800;color:#fff;margin-bottom:4px">ℹ️ Critérios mínimos para QT</div>
+    Neutrófilos ≥ 1.500/mm³ · Plaquetas ≥ 100.000/mm³ · Hgb ≥ 8,0 g/dL<br>
+    Temp < 37,8°C · SPO₂ ≥ 94% · ECOG ≤ 2 (em geral)
+  </div>
+  <div style="text-align:center;margin-top:4px;font-size:9px;color:var(--MUTED)">
+    ⚠️ Esta triagem é uma avaliação de enfermagem.<br>
+    A liberação final é de responsabilidade do médico plantonista.
+  </div>`;
+}
+
+function novaTriagem(){
+  resetD();
+  step = 1;
+  tela = 'triagem';
+  document.getElementById('progress-wrap').style.display = '';
+  atualizarProgress();
+  render();
+}
+
+/* ─── STEP RENDER ─────────────────────────────────────── */
+function renderStep(s){
+  const renders = [null, renderS1, renderS2, renderS3, renderS4, renderS5];
+  return renders[s] ? renders[s]() : '';
+}
+
+/* ── S1: Identificação ─ */
+function renderS1(){
+  return `
+  <div class="card">
+    <div class="card-title"><span class="ico">👤</span> Identificação do Paciente</div>
+    <label class="lbl">Nome completo *</label>
+    <input class="inp" id="f_nome" value="${e(d.nome)}" placeholder="Nome do paciente" style="margin-bottom:10px">
+    <div class="grid2">
+      <div>
+        <label class="lbl">Nº do ciclo *</label>
+        <input class="inp" id="f_ciclo" value="${e(d.ciclo)}" placeholder="Ex: C3D1">
+      </div>
+      <div>
+        <label class="lbl" style="margin-top:10px">Protocolo de QT</label>
+        <input class="inp" id="f_proto" value="${e(d.proto)}" placeholder="Ex: mFOLFOX6">
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:10px">
+      <div>
+        <label class="lbl">Data</label>
+        <input class="inp" id="f_data" value="${e(d.data)}" placeholder="${hoje()}">
+      </div>
+      <div>
+        <label class="lbl">Hora</label>
+        <input class="inp" id="f_hora" value="${e(d.hora)}" placeholder="${agora()}">
+      </div>
+    </div>
+    <label class="lbl" style="margin-top:10px">Enfermeira responsável</label>
+    <input class="inp" id="f_enf" value="${e(d.enfermeira)}" placeholder="Nome da enfermeira">
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-ghost btn-full" onclick="irTela('home')">← Início</button>
+    <button class="btn btn-gold btn-full" onclick="avancar()">Próximo: Sinais Vitais →</button>
+  </div>`;
+}
+
+/* ── S2: Sinais Vitais ─ */
+function renderS2(){
+  const paSist = parseFloat(d.pas), diastol = parseFloat(d.pad);
+  const tempV = parseFloat(d.temp?.replace(',','.'));
+  const spo2V = parseFloat(d.spo2);
+  return `
+  <div class="card">
+    <div class="card-title"><span class="ico">🩺</span> Sinais Vitais</div>
+    <div class="grid2">
+      <div>
+        <label class="lbl">PA Sistólica (mmHg) *</label>
+        <input class="inp" id="f_pas" type="number" value="${e(d.pas)}" placeholder="120">
+      </div>
+      <div>
+        <label class="lbl">PA Diastólica (mmHg) *</label>
+        <input class="inp" id="f_pad" type="number" value="${e(d.pad)}" placeholder="80">
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:10px">
+      <div>
+        <label class="lbl">FC (bpm)</label>
+        <input class="inp" id="f_fc" type="number" value="${e(d.fc)}" placeholder="72">
+      </div>
+      <div>
+        <label class="lbl">FR (irpm)</label>
+        <input class="inp" id="f_fr" type="number" value="${e(d.fr)}" placeholder="16">
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:10px">
+      <div>
+        <label class="lbl">Temperatura (°C) *</label>
+        <input class="inp" id="f_temp" value="${e(d.temp)}" placeholder="36,8">
+      </div>
+      <div>
+        <label class="lbl">SPO₂ (%) *</label>
+        <input class="inp" id="f_spo2" type="number" value="${e(d.spo2)}" placeholder="97">
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:10px">
+      <div>
+        <label class="lbl">Peso (kg)</label>
+        <input class="inp" id="f_peso" value="${e(d.peso)}" placeholder="65">
+      </div>
+      <div>
+        <label class="lbl">Altura (cm)</label>
+        <input class="inp" id="f_altura" value="${e(d.altura)}" placeholder="162">
+      </div>
+    </div>
+    ${d.peso&&d.altura?`<div class="alerta alerta-vd" style="margin-top:6px"><span>📐</span> SC (Mosteller): <strong>${calcSC(d.peso,d.altura)} m²</strong></div>`:''}
+  </div>
+  ${alertasSV()}
+  <div class="btn-row">
+    <button class="btn btn-ghost" onclick="irStep(1)">← Voltar</button>
+    <button class="btn btn-gold btn-full" onclick="avancar()">Próximo: Laboratorial →</button>
+  </div>`;
+}
+
+function alertasSV(){
+  let html='';
+  const t=parseFloat((d.temp||'').replace(',','.'));
+  const s=parseFloat(d.spo2), p=parseFloat(d.pas);
+  if(t>=37.8) html+=`<div class="alerta alerta-vm"><span>🔴</span><div><strong>ATENÇÃO: Temperatura ${d.temp}°C</strong><br><span style="font-size:11px">Investigar neutropenia febril! Hemoculturas + antibioticoterapia empírica.</span></div></div>`;
+  if(s>0&&s<94) html+=`<div class="alerta alerta-vm"><span>🔴</span><div><strong>SPO₂ baixa: ${d.spo2}%</strong><br><span style="font-size:11px">Avaliar suporte de O₂ e causas. Comunicar médico.</span></div></div>`;
+  if(p>0&&p<90) html+=`<div class="alerta alerta-am"><span>⚠️</span><div><strong>Hipotensão: PA ${d.pas}/${d.pad} mmHg</strong><br><span style="font-size:11px">Hidratação IV, comunicar médico antes de iniciar QT.</span></div></div>`;
+  return html;
+}
+
+function calcSC(p,h){ return (0.016667*Math.pow(+p,0.5)*Math.pow(+h,0.5)).toFixed(2); }
+
+/* ── S3: Laboratorial ─ */
+function renderS3(){
+  return `
+  <div class="card">
+    <div class="card-title"><span class="ico">🧪</span> Exames Laboratoriais Pré-Ciclo</div>
+    <div style="background:#0f172a;border:1px solid var(--T);border-radius:8px;padding:8px 11px;margin-bottom:10px;font-size:11px;color:#7dd3fc">
+      💡 Mínimos habituais para QT:<br>
+      Neutrófilos ≥ 1.500 · Plaquetas ≥ 100.000 · Hgb ≥ 8,0 g/dL · Creat ≤ 1,5
+    </div>
+    <div class="grid2">
+      <div>
+        <label class="lbl">Hemoglobina (g/dL)</label>
+        <input class="inp lab-inp" id="f_hgb" data-k="hgb" data-lo="8" data-warn="10" type="number" step="0.1" value="${e(d.hgb)}" placeholder="12">
+      </div>
+      <div>
+        <label class="lbl">Leucócitos (/mm³)</label>
+        <input class="inp lab-inp" id="f_leuco" data-k="leuco" data-lo="3000" data-warn="4000" type="number" value="${e(d.leuco)}" placeholder="5000">
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:10px">
+      <div>
+        <label class="lbl">Neutrófilos (/mm³)</label>
+        <input class="inp lab-inp" id="f_neutro" data-k="neutro" data-lo="500" data-warn="1500" type="number" value="${e(d.neutro)}" placeholder="2000">
+        ${neutroAlerta()}
+      </div>
+      <div>
+        <label class="lbl">Plaquetas (/mm³)</label>
+        <input class="inp lab-inp" id="f_plt" data-k="plt" data-lo="50000" data-warn="100000" type="number" value="${e(d.plt)}" placeholder="180000">
+        ${pltAlerta()}
+      </div>
+    </div>
+    <div class="grid3" style="margin-top:10px">
+      <div>
+        <label class="lbl">Creatinina (mg/dL)</label>
+        <input class="inp" id="f_creat" type="number" step="0.1" value="${e(d.creat)}" placeholder="1,0">
+      </div>
+      <div>
+        <label class="lbl">TGO (U/L)</label>
+        <input class="inp" id="f_tgo" type="number" value="${e(d.tgo)}" placeholder="30">
+      </div>
+      <div>
+        <label class="lbl">TGP (U/L)</label>
+        <input class="inp" id="f_tgp" type="number" value="${e(d.tgp)}" placeholder="35">
+      </div>
+    </div>
+    <div style="margin-top:10px">
+      <label class="lbl">Glicemia (mg/dL)</label>
+      <input class="inp" id="f_glicemia" type="number" value="${e(d.glicemia)}" placeholder="98" style="max-width:140px">
+    </div>
+  </div>
+  ${alertasLab()}
+  <div class="btn-row">
+    <button class="btn btn-ghost" onclick="irStep(2)">← Voltar</button>
+    <button class="btn btn-gold btn-full" onclick="avancar()">Próximo: ECOG →</button>
+  </div>`;
+}
+
+function neutroAlerta(){
+  const v=+d.neutro; if(!v) return '';
+  if(v<500) return '<div style="color:#fca5a5;font-size:10px;font-weight:700;margin-top:3px">🔴 Crítico — NÃO iniciar QT</div>';
+  if(v<1500) return '<div style="color:#fbbf24;font-size:10px;font-weight:700;margin-top:3px">⚠️ Abaixo do limite — comunicar médico</div>';
+  return '<div style="color:#86efac;font-size:10px;font-weight:700;margin-top:3px">✅ Dentro do limite</div>';
+}
+function pltAlerta(){
+  const v=+d.plt; if(!v) return '';
+  if(v<50000) return '<div style="color:#fca5a5;font-size:10px;font-weight:700;margin-top:3px">🔴 Crítico — NÃO iniciar QT</div>';
+  if(v<100000) return '<div style="color:#fbbf24;font-size:10px;font-weight:700;margin-top:3px">⚠️ Plaquetopenia — comunicar médico</div>';
+  return '<div style="color:#86efac;font-size:10px;font-weight:700;margin-top:3px">✅ Dentro do limite</div>';
+}
+
+function alertasLab(){
+  let html='';
+  const n=+d.neutro, p=+d.plt, h=+d.hgb, c=+d.creat;
+  const critico = (n>0&&n<500)||(p>0&&p<50000)||(h>0&&h<7);
+  const atencao = (n>0&&n<1500&&n>=500)||(p>0&&p<100000&&p>=50000)||(h>0&&h<8&&h>=7);
+  if(critico) html+=`<div class="alerta alerta-vm"><span>🔴</span><div><strong>VALORES CRÍTICOS — NÃO INICIAR QT</strong><br><span style="font-size:11px">Comunicar médico imediatamente. Aguardar avaliação e conduta antes de qualquer procedimento.</span></div></div>`;
+  else if(atencao) html+=`<div class="alerta alerta-am"><span>⚠️</span><div><strong>Valores limítrofes — revisar com médico</strong><br><span style="font-size:11px">Neutrófilos e/ou plaquetas abaixo do limiar padrão. Médico pode autorizar ou adiar o ciclo.</span></div></div>`;
+  if(c>1.5&&c>0) html+=`<div class="alerta alerta-am"><span>⚠️</span><div><strong>Creatinina elevada: ${d.creat} mg/dL</strong><br><span style="font-size:11px">Ajuste de dose pode ser necessário. Avaliar protocolo com médico.</span></div></div>`;
+  return html;
+}
+
+/* ── S4: ECOG ─ */
+function renderS4(){
+  const ecogs=[
+    {n:0,ico:'🏃',t:'ECOG 0',s:'Totalmente ativo, sem restrição'},
+    {n:1,ico:'🚶',t:'ECOG 1',s:'Atividade física intensa restrita, ambulatorial'},
+    {n:2,ico:'🪑',t:'ECOG 2',s:'Ambulatorial, acamado <50% do tempo'},
+    {n:3,ico:'🛏️',t:'ECOG 3',s:'Limitado autocuidado, acamado >50%'},
+    {n:4,ico:'🛌',t:'ECOG 4',s:'Completamente incapaz, dependente, 100% acamado'},
+  ];
+  return `
+  <div class="card">
+    <div class="card-title"><span class="ico">🏃</span> ECOG Performance Status</div>
+    <p style="font-size:11px;color:var(--MUTED);margin-bottom:11px">Selecione o estado funcional atual do paciente:</p>
+    <div class="ecog-grid">
+      ${ecogs.map(ec=>`
+      <div class="ecog-card ${d.ecog===ec.n?'sel':''}" onclick="selEcog(${ec.n})">
+        <div class="ecog-num">${ec.ico}</div>
+        <div>
+          <div style="font-size:13px;font-weight:800;color:#fff">${ec.t}</div>
+          <div style="font-size:10px;color:var(--MUTED);margin-top:2px">${ec.s}</div>
+        </div>
+        ${d.ecog===ec.n?`<div style="margin-left:auto;color:var(--T);font-size:18px">✓</div>`:''}
+      </div>`).join('')}
+    </div>
+    ${d.ecog>=3?`<div class="alerta alerta-vm" style="margin-top:8px"><span>🔴</span><div><strong>ECOG ${d.ecog} — Revisar indicação de QT</strong><br><span style="font-size:11px">Estado funcional comprometido. Discutir com médico antes de autorizar o ciclo.</span></div></div>`:''}
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-ghost" onclick="irStep(3)">← Voltar</button>
+    <button class="btn btn-gold btn-full" onclick="avancar()" ${d.ecog===null?'disabled':''}>Próximo: Toxicidade →</button>
+  </div>`;
+}
+
+function selEcog(n){ d.ecog=n; irStep(4); }
+
+/* ── S5: CTCAE ─ */
+const CTCAE_DEF=[
+  {k:'nausea',    n:'Náusea',                desc:'G0: sem · G1: sem perda apetite · G2: apetite reduzido, sem perda peso · G3: nutrição IV indicada · G4: ameaça vida'},
+  {k:'vomito',    n:'Vômito',                desc:'G0: sem · G1: 1-2×/dia · G2: 3-5×/dia, hidratação oral · G3: ≥6×/dia, IV indicada · G4: ameaça vida'},
+  {k:'diarreia',  n:'Diarreia',              desc:'G0: sem · G1: <4×/dia · G2: 4-6×/dia, IV não indicada · G3: ≥7×/dia, internação · G4: ameaça vida'},
+  {k:'mucosite',  n:'Mucosite oral',         desc:'G0: sem · G1: assintomática · G2: dor, sem dificuldade oral · G3: nutrição enteral necessária · G4: ameaça vida'},
+  {k:'fadiga',    n:'Fadiga',                desc:'G0: sem · G1: não limitante · G2: limita AVD instrumental · G3: limita autocuidado · G4: —'},
+  {k:'neuropatia',n:'Neuropatia periférica', desc:'G0: sem · G1: assintomática · G2: dificuldade AVD · G3: limita autocuidado · G4: incapacitante'},
+  {k:'maoPe',     n:'Síndrome mão-pé',       desc:'G0: sem · G1: eritema assintomático · G2: dor EVA 4-6 · G3: intenso, incapacitante · G4: —'},
+  {k:'pele',      n:'Reação cutânea',        desc:'G0: sem · G1: máculas <10% corp · G2: 10-30% · G3: >30%, limitante · G4: ameaça vida'},
+];
+function renderS5(){
+  const g34 = Object.values(d.ctcae).some(v=>v==='G3'||v==='G4');
+  return `
+  <div class="card">
+    <div class="card-title"><span class="ico">⚡</span> Toxicidade CTCAE v5.0</div>
+    <p style="font-size:11px;color:var(--MUTED);margin-bottom:11px">G0 = sem toxicidade. Avalie cada item:</p>
+    ${CTCAE_DEF.map(c=>`
+    <div class="ctcae-item">
+      <div class="ctcae-nome">${c.n}</div>
+      <div class="ctcae-desc">${c.desc}</div>
+      <div class="ctcae-btns">
+        ${['G0','G1','G2','G3','G4'].map(g=>`<button class="ctcae-btn ${g.toLowerCase()} ${d.ctcae[c.k]===g?'sel':''}" onclick="selCtcae('${c.k}','${g}')">${g}</button>`).join('')}
+      </div>
+    </div>`).join('')}
+    ${g34?`<div class="alerta alerta-vm"><span>🔴</span><div><strong>Toxicidade G3/G4 detectada</strong><br><span style="font-size:11px">Conforme protocolo, toxicidade grave pode contraindicar o ciclo atual. Comunicar médico imediatamente antes de iniciar QT.</span></div></div>`:''}
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-ghost" onclick="irStep(4)">← Voltar</button>
+    <button class="btn btn-gold btn-full" onclick="irTela('conclusao')">Próximo: Conclusão →</button>
+  </div>`;
+}
+
+function selCtcae(k,g){ d.ctcae[k]=g; renderStep5Upd(); }
+function renderStep5Upd(){ document.getElementById('main').innerHTML = renderS5(); attachEvents(); }
+
+/* ─── CONCLUSÃO ─────────────────────────────────────────── */
+function renderConclusao(){
+  const gravidade = calcNivel();
+  const OPTS=[
+    {v:'liberar',ico:'✅',t:'LIBERAR para QT',s:'Paciente apto conforme critérios avaliados',cls:'sel-vd'},
+    {v:'adiar',  ico:'⏸',t:'ADIAR o ciclo',  s:'Aguardar nova avaliação médica',cls:'sel-am'},
+    {v:'atencao',ico:'⚠️',t:'ATENÇÃO — comunicar médico ANTES de iniciar',s:'Valores limítrofes ou toxicidade relevante',cls:'sel-az'},
+    {v:'contra', ico:'🚨',t:'CONTRAINDICADO — não iniciar sem avaliação médica',s:'Valores críticos ou toxicidade G3/G4',cls:'sel-vm'},
+  ];
+  return `
+  <div class="card">
+    <div class="card-title"><span class="ico">📋</span> Conclusão da Triagem</div>
+    <div style="background:#0f172a;border-radius:9px;padding:11px;margin-bottom:12px">
+      <div style="font-size:11px;font-weight:800;color:var(--MUTED);text-transform:uppercase;letter-spacing:.6px;margin-bottom:7px">Resumo dos alertas</div>
+      ${resumoAlertas()}
+    </div>
+    <div style="font-size:11px;color:var(--MUTED);margin-bottom:9px">Selecione a conclusão da triagem de enfermagem:</div>
+    <div class="conclusao-opts">
+      ${OPTS.map(o=>`
+      <div class="conclusao-opt ${d.conclusao===o.v?o.cls:''}" onclick="selConclusao('${o.v}')">
+        <div class="conclusao-ico">${o.ico}</div>
+        <div>
+          <div class="conclusao-txt">${o.t}</div>
+          <div class="conclusao-sub">${o.s}</div>
+        </div>
+        ${d.conclusao===o.v?`<div style="margin-left:auto;color:var(--T);font-size:22px">✓</div>`:''}
+      </div>`).join('')}
+    </div>
+    <div style="margin-top:12px">
+      <label class="lbl">Observações da Enfermagem</label>
+      <textarea class="inp" id="f_obs" rows="3" placeholder="Intercorrências, sintomas relatados, orientações fornecidas...">${e(d.obs)}</textarea>
+    </div>
+    <div style="background:#1c1917;border:1px solid rgba(184,134,11,.3);border-radius:8px;padding:9px 11px;margin-top:10px;font-size:10px;color:rgba(184,134,11,.7);line-height:1.5">
+      ⚠️ NOTA LEGAL: Esta triagem é uma avaliação de enfermagem. A liberação final para quimioterapia é de responsabilidade exclusiva do médico plantonista, que pode ou não seguir esta avaliação conforme seu julgamento clínico.
+    </div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-ghost" onclick="irTela('triagem');step=5">← Voltar</button>
+    <button class="btn btn-gold btn-full" onclick="concluir()" ${!d.conclusao?'disabled':''}>✅ Concluir e Registrar</button>
+  </div>`;
+}
+
+function selConclusao(v){
+  d.conclusao=v;
+  const el = document.getElementById('main');
+  if(el) el.innerHTML = renderConclusao();
+  attachEvents();
+}
+
+function resumoAlertas(){
+  const itens=[];
+  const t=parseFloat((d.temp||'').replace(',','.'));
+  const s=parseFloat(d.spo2), n=+d.neutro, p=+d.plt, h=+d.hgb;
+  if(t>=37.8) itens.push({ico:'🔴',txt:`Febre: ${d.temp}°C`});
+  if(s>0&&s<94) itens.push({ico:'🔴',txt:`SPO₂: ${d.spo2}%`});
+  if(n>0&&n<500) itens.push({ico:'🔴',txt:`Neutrófilos críticos: ${n}`});
+  else if(n>0&&n<1500) itens.push({ico:'⚠️',txt:`Neutrófilos: ${n}`});
+  if(p>0&&p<50000) itens.push({ico:'🔴',txt:`Plaquetas críticas: ${p.toLocaleString('pt-BR')}`});
+  else if(p>0&&p<100000) itens.push({ico:'⚠️',txt:`Plaquetas: ${p.toLocaleString('pt-BR')}`});
+  if(h>0&&h<8) itens.push({ico:'⚠️',txt:`Hgb: ${h} g/dL`});
+  if(d.ecog>=3) itens.push({ico:'⚠️',txt:`ECOG ${d.ecog}`});
+  const g34=Object.entries(d.ctcae).filter(([,v])=>v==='G3'||v==='G4');
+  g34.forEach(([k,v])=>itens.push({ico:'🔴',txt:`${CTCAE_DEF.find(c=>c.k===k)?.n||k}: ${v}`}));
+  if(!itens.length) return '<div style="color:#86efac;font-size:12px;font-weight:700">✅ Sem alertas identificados</div>';
+  return itens.map(i=>`<div style="display:flex;gap:6px;align-items:center;font-size:11px;margin-bottom:3px"><span>${i.ico}</span><span style="color:${i.ico==='🔴'?'#fca5a5':'#fbbf24'};font-weight:700">${i.txt}</span></div>`).join('');
+}
+
+function calcNivel(){
+  const t=parseFloat((d.temp||'').replace(',','.'));
+  const s=parseFloat(d.spo2), n=+d.neutro, p=+d.plt;
+  const g34=Object.values(d.ctcae).some(v=>v==='G3'||v==='G4');
+  if(t>=38.5||s<90||(n>0&&n<500)||(p>0&&p<50000)||g34) return 'verm';
+  if(t>=37.8||s<94||(n>0&&n<1500)||(p>0&&p<100000)||d.ecog>=3) return 'amar';
+  return 'verd';
+}
+
+/* ─── CONCLUIR ─────────────────────────────────────────── */
+function concluir(){
+  const obs = document.getElementById('f_obs');
+  if(obs) d.obs = obs.value;
+  d.status = 'pendente';
+  d.nivel  = calcNivel();
+  const reg = {
+    id:d.id, nome:d.nome, ciclo:d.ciclo, proto:d.proto,
+    data:d.data, hora:d.hora, enfermeira:d.enfermeira,
+    pas:d.pas, pad:d.pad, fc:d.fc, fr:d.fr, temp:d.temp, spo2:d.spo2, peso:d.peso, altura:d.altura,
+    hgb:d.hgb, leuco:d.leuco, neutro:d.neutro, plt:d.plt, creat:d.creat, tgo:d.tgo, tgp:d.tgp,
+    ecog:d.ecog, ctcae:d.ctcae, conclusao:d.conclusao, obs:d.obs,
+    nivel:d.nivel, status:'pendente'
+  };
+  historico.unshift(reg);
+  localStorage.setItem('tqt_hist', JSON.stringify(historico));
+  irTela('ver');
+}
+
+/* ─── VER TRIAGEM ─────────────────────────────────────── */
+function renderVer(){
+  const reg = historico[0];
+  if(!reg) return '<p>Nenhuma triagem selecionada.</p>';
+  const sc2 = reg.peso&&reg.altura ? calcSC(reg.peso,reg.altura) : '—';
+  const ctcaeStr = Object.entries(reg.ctcae||{}).filter(([,v])=>v&&v!=='G0').map(([k,v])=>`${CTCAE_DEF.find(c=>c.k===k)?.n||k}: ${v}`).join(' · ')||'Sem toxicidade G1+';
+  const CONC_CFG={liberar:{ico:'✅',txt:'LIBERAR para QT',c:'#86efac',bg:'#052e16'},adiar:{ico:'⏸',txt:'ADIAR ciclo',c:'#fbbf24',bg:'#451a03'},atencao:{ico:'⚠️',txt:'ATENÇÃO — comunicar médico',c:'#7dd3fc',bg:'#0c2033'},contra:{ico:'🚨',txt:'CONTRAINDICADO',c:'#fca5a5',bg:'#3b0a0a'}};
+  const cf=CONC_CFG[reg.conclusao]||{ico:'—',txt:reg.conclusao,c:'#fff',bg:'#1e293b'};
+  const docTxt = gerarDoc(reg, sc2, ctcaeStr);
+  return `
+  <div style="text-align:center;padding:4px 0 12px">
+    <div style="font-size:40px;margin-bottom:6px">${cf.ico}</div>
+    <div style="font-size:17px;font-weight:900;color:${cf.c}">${cf.txt}</div>
+    <div style="font-size:11px;color:var(--MUTED);margin-top:3px">${reg.nome} · ${reg.ciclo} · ${reg.data}</div>
+  </div>
+  <div style="background:${cf.bg};border:1px solid ${cf.c}44;border-radius:11px;padding:11px 13px;margin-bottom:12px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px">
+      ${[['PA',`${reg.pas||'—'}/${reg.pad||'—'} mmHg`],['FC',reg.fc?reg.fc+' bpm':'—'],['Temp',reg.temp?reg.temp+'°C':'—'],['SPO₂',reg.spo2?reg.spo2+'%':'—'],['Neutro',reg.neutro?Number(reg.neutro).toLocaleString('pt-BR'):'—'],['PLT',reg.plt?Number(reg.plt).toLocaleString('pt-BR'):'—'],['Hgb',reg.hgb?reg.hgb+' g/dL':'—'],['ECOG',reg.ecog!==null?reg.ecog:'—']].map(([l,v])=>`<div style="font-size:11px"><span style="color:var(--MUTED)">${l}:</span> <strong style="color:#fff">${v}</strong></div>`).join('')}
+    </div>
+    ${ctcaeStr!=='Sem toxicidade G1+'?`<div style="margin-top:8px;font-size:11px;color:${cf.c}"><strong>CTCAE:</strong> ${ctcaeStr}</div>`:''}
+    ${reg.obs?`<div style="margin-top:6px;font-size:11px;color:var(--MUTED)"><strong>Obs:</strong> ${reg.obs}</div>`:''}
+    <div style="margin-top:8px;font-size:10px;color:var(--MUTED)">SC: ${sc2} m² · ${reg.enfermeira||'Enfermagem'}</div>
+  </div>
+  <div style="background:#1c1917;border:1px solid rgba(184,134,11,.3);border-radius:8px;padding:8px 11px;margin-bottom:12px;font-size:10px;color:rgba(184,134,11,.7)">
+    ⚠️ Esta triagem é uma avaliação de enfermagem. A liberação final é de responsabilidade exclusiva do médico.
+  </div>
+  <div class="btn-row" style="margin-bottom:8px">
+    <button class="btn btn-teal btn-full" onclick="imprimirDoc()">🖨️ Imprimir</button>
+    <button class="btn btn-ghost btn-full" onclick="copiarDoc()">📋 Copiar</button>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-ghost btn-full" onclick="irTela('historico')">📋 Histórico</button>
+    <button class="btn btn-gold btn-full" onclick="novaTriagem()">+ Nova Triagem</button>
+  </div>
+  <div id="doc-hidden" style="display:none">${docTxt.replace(/</g,'&lt;')}</div>`;
+}
+
+function gerarDoc(reg, sc2, ctcaeStr){
+  return `TRIAGEM ONCOLÓGICA PRÉ-QUIMIOTERAPIA
+${HOSP}
+${'═'.repeat(55)}
+Data: ${reg.data} às ${reg.hora}
+Enfermeira: ${reg.enfermeira||'—'}
+Paciente: ${reg.nome||'—'}
+Protocolo: ${reg.proto||'—'} · ${reg.ciclo||'—'}
+SC: ${sc2} m²
+${'─'.repeat(55)}
+
+SINAIS VITAIS:
+PA: ${reg.pas||'—'}/${reg.pad||'—'} mmHg   FC: ${reg.fc||'—'} bpm   FR: ${reg.fr||'—'} irpm
+Temperatura: ${reg.temp||'—'}°C   SPO₂: ${reg.spo2||'—'}%
+Peso: ${reg.peso||'—'} kg   Altura: ${reg.altura||'—'} cm
+
+EXAMES LABORATORIAIS (pré-ciclo):
+Hemoglobina:   ${reg.hgb||'—'} g/dL
+Leucócitos:    ${reg.leuco||'—'} /mm³
+Neutrófilos:   ${reg.neutro||'—'} /mm³
+Plaquetas:     ${reg.plt||'—'} /mm³
+Creatinina:    ${reg.creat||'—'} mg/dL
+TGO:           ${reg.tgo||'—'} U/L
+TGP:           ${reg.tgp||'—'} U/L
+Glicemia:      ${reg.glicemia||'—'} mg/dL
+
+ECOG: ${reg.ecog !== null ? reg.ecog : '—'}
+
+TOXICIDADE CTCAE v5.0:
+${ctcaeStr}
+${reg.obs?'\nOBSERVAÇÕES:\n'+reg.obs:''}
+${'─'.repeat(55)}
+CONCLUSÃO DA TRIAGEM: ${({liberar:'✅ LIBERAR PARA QT',adiar:'⏸ ADIAR CICLO',atencao:'⚠️ ATENÇÃO — COMUNICAR MÉDICO',contra:'🚨 CONTRAINDICADO'})[reg.conclusao]||reg.conclusao}
+
+⚠️ NOTA LEGAL: Esta triagem é uma avaliação de
+enfermagem. A liberação final para quimioterapia
+é de responsabilidade exclusiva do médico
+plantonista, que pode ou não seguir esta avaliação
+conforme seu julgamento clínico.
+${'═'.repeat(55)}
+${AUTOR}
+${CRM}
+${HOSP}`;
+}
+
+function imprimirDoc(){
+  const reg = historico[0];
+  if(!reg) return;
+  const sc2 = reg.peso&&reg.altura ? calcSC(reg.peso,reg.altura) : '—';
+  const ctcaeStr = Object.entries(reg.ctcae||{}).filter(([,v])=>v&&v!=='G0').map(([k,v])=>`${CTCAE_DEF.find(c=>c.k===k)?.n||k}: ${v}`).join(' · ')||'Sem toxicidade G1+';
+  const corpo = gerarDoc(reg, sc2, ctcaeStr);
+  const CONC_CFG={liberar:'✅ LIBERAR para QT',adiar:'⏸ ADIAR ciclo',atencao:'⚠️ ATENÇÃO',contra:'🚨 CONTRAINDICADO'};
+  const html=`<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8">
+<title>Triagem QT — ${reg.nome}</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;padding:28px;font-size:12px;line-height:1.8;color:#1a1a1a}
+.hd{border-bottom:3px solid #B8860B;padding-bottom:10px;margin-bottom:16px}
+.hosp{color:#1B365D;font-size:11px}.medico{font-weight:900;color:#1B365D;font-size:14px}
+.conclusao{border:2px solid #15803D;border-radius:8px;padding:10px 14px;margin:12px 0;text-align:center;font-size:14px;font-weight:900;color:#15803D;background:#f0fdf4}
+.conclusao.vm{border-color:#B91C1C;color:#B91C1C;background:#fef2f2}
+.conclusao.am{border-color:#B45309;color:#B45309;background:#fffbeb}
+.conclusao.az{border-color:#2B7A8C;color:#2B7A8C;background:#eff9ff}
+pre{white-space:pre-wrap;font-family:Georgia,serif;font-size:11.5px}
+.aviso{border:1px solid #B8860B;border-radius:6px;padding:8px 12px;margin-top:14px;font-size:10px;color:#7a5500;background:#fffbeb;line-height:1.5}
+.btn{background:#B8860B;color:#fff;border:none;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:900;cursor:pointer;margin-top:12px}
+@media print{.btn{display:none}body{padding:15px}}
+</style></head><body>
+<div class="hd">
+<div class="medico">${AUTOR}</div>
+<div class="hosp">${CRM} · ${HOSP}</div>
+</div>
+<h2 style="color:#1B365D;margin-bottom:8px;font-size:15px">Triagem Oncológica Pré-Quimioterapia</h2>
+<div class="conclusao ${reg.conclusao==='contra'?'vm':reg.conclusao==='adiar'?'am':reg.conclusao==='atencao'?'az':''}">${CONC_CFG[reg.conclusao]||reg.conclusao}</div>
+<pre>${corpo.replace(/</g,'&lt;')}</pre>
+<div class="aviso">⚠️ Esta triagem é uma avaliação de enfermagem. A liberação final para quimioterapia é de responsabilidade exclusiva do médico plantonista.</div>
+<button class="btn" onclick="window.print()">🖨️ Imprimir</button>
+</body></html>`;
+  try{const w=window.open('','_blank','width=820,height=700,scrollbars=yes');w.document.open();w.document.write(html);w.document.close();}
+  catch{const a=document.createElement('a');a.href='data:text/html;charset=utf-8,'+encodeURIComponent(html);a.download='triagem_'+reg.nome.replace(/\s/g,'_').slice(0,20)+'.html';document.body.appendChild(a);a.click();a.remove();}
+}
+
+function copiarDoc(){
+  const reg=historico[0]; if(!reg) return;
+  const sc2=reg.peso&&reg.altura?calcSC(reg.peso,reg.altura):'—';
+  const ctcaeStr=Object.entries(reg.ctcae||{}).filter(([,v])=>v&&v!=='G0').map(([k,v])=>`${CTCAE_DEF.find(c=>c.k===k)?.n||k}: ${v}`).join(' · ')||'Sem toxicidade G1+';
+  navigator.clipboard?.writeText(gerarDoc(reg,sc2,ctcaeStr)).then(()=>{
+    alertaCustom_ok('📋 Triagem copiada para área de transferência!');
+  }).catch(()=>alertaCustom('Cópia não disponível neste browser.'));
+}
+
+function alertaCustom_ok(msg){
+  const el=document.createElement('div');
+  el.style.cssText='position:fixed;top:60px;left:50%;transform:translateX(-50%);background:#052e16;border:1px solid #16a34a;color:#86efac;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:700;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.5)';
+  el.textContent=msg;document.body.appendChild(el);setTimeout(()=>el.remove(),2500);
+}
+
+/* ─── HISTÓRICO ─────────────────────────────────────────── */
+function renderHistorico(){
+  if(!historico.length) return `
+  <div style="text-align:center;padding:32px;color:var(--MUTED)">
+    <div style="font-size:38px;margin-bottom:10px">📋</div>
+    <p style="font-size:13px">Nenhuma triagem registrada.</p>
+    <button class="btn btn-gold" style="margin-top:14px" onclick="novaTriagem()">+ Nova Triagem</button>
+  </div>`;
+  const STATUS_CFG={liberar:{ico:'✅',cls:'st-vd',txt:'Liberado'},adiar:{ico:'⏸',cls:'st-am',txt:'Adiado'},atencao:{ico:'⚠️',cls:'st-az',txt:'Atenção'},contra:{ico:'🚨',cls:'st-vm',txt:'Contraindicado'}};
+  return `
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+    <div style="font-size:14px;font-weight:800;color:#fff">📋 Histórico (${historico.length})</div>
+    <div style="display:flex;gap:7px">
+      <button class="btn btn-gold" style="padding:5px 12px;font-size:11px" onclick="novaTriagem()">+ Nova</button>
+      ${historico.length?`<button class="btn btn-ghost" style="padding:5px 12px;font-size:11px;color:#fca5a5" onclick="limparHistorico()">🗑 Limpar</button>`:''}
+    </div>
+  </div>
+  ${historico.map((h,i)=>{
+    const cf=STATUS_CFG[h.conclusao]||{ico:'—',cls:'',txt:h.conclusao||'—'};
+    return `<div class="hist-item" onclick="verHistItem(${i})">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div class="hist-nome">${h.nome||'—'}</div>
+        <span class="hist-status ${cf.cls}">${cf.ico} ${cf.txt}</span>
+      </div>
+      <div class="hist-meta">${h.proto||'—'} · ${h.ciclo||'—'} · ${h.data||'—'} ${h.hora||''}</div>
+      ${h.enfermeira?`<div class="hist-meta" style="margin-top:2px">Enf: ${h.enfermeira}</div>`:''}
+      <div style="display:flex;gap:10px;margin-top:5px;font-size:10px">
+        ${h.temp?`<span style="color:${+h.temp.replace(',','.')>=37.8?'#fca5a5':'var(--MUTED)'}">${h.temp}°C</span>`:''}
+        ${h.spo2?`<span style="color:${+h.spo2<94?'#fca5a5':'var(--MUTED)'}">SPO₂ ${h.spo2}%</span>`:''}
+        ${h.neutro?`<span style="color:${+h.neutro<1500?'#fbbf24':'var(--MUTED)'}">N ${Number(h.neutro).toLocaleString('pt-BR')}</span>`:''}
+        ${h.plt?`<span style="color:${+h.plt<100000?'#fbbf24':'var(--MUTED)'}">PLT ${Number(h.plt).toLocaleString('pt-BR')}</span>`:''}
+        ${h.ecog!==null&&h.ecog!==undefined?`<span style="color:${h.ecog>=3?'#fbbf24':'var(--MUTED)'}">ECOG ${h.ecog}</span>`:''}
+      </div>
+    </div>`;
+  }).join('')}`;
+}
+
+function verHistItem(i){
+  historico = historico; // re-order to view
+  const item = historico.splice(i,1)[0];
+  historico.unshift(item);
+  localStorage.setItem('tqt_hist', JSON.stringify(historico));
+  irTela('ver');
+}
+
+function limparHistorico(){
+  if(!confirm('Apagar todo o histórico de triagens?\n\nEsta ação não pode ser desfeita.')) return;
+  historico=[];
+  localStorage.removeItem('tqt_hist');
+  render();
+}
+
+/* ─── ATTACH EVENTS ─────────────────────────────────────── */
+function attachEvents(){
+  const binds=[
+    ['f_nome','nome'],['f_ciclo','ciclo'],['f_proto','proto'],['f_enf','enfermeira'],
+    ['f_data','data'],['f_hora','hora'],
+    ['f_pas','pas'],['f_pad','pad'],['f_fc','fc'],['f_fr','fr'],
+    ['f_temp','temp'],['f_spo2','spo2'],['f_peso','peso'],['f_altura','altura'],
+    ['f_hgb','hgb'],['f_leuco','leuco'],['f_neutro','neutro'],['f_plt','plt'],
+    ['f_creat','creat'],['f_tgo','tgo'],['f_tgp','tgp'],['f_glicemia','glicemia'],
+  ];
+  binds.forEach(([id,key])=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.oninput=()=>{
+      d[key]=el.value;
+      // Atualizar alertas em tempo real nos steps
+      if(['f_pas','f_pad','f_temp','f_spo2'].includes(id) && tela==='triagem' && step===2){
+        const alertDiv = document.querySelector('.main .alerta-vm, .main .alerta-am');
+        // Re-renderizar alertas
+        const c=document.getElementById('main');
+        if(c) c.innerHTML=renderS2();
+        attachEvents();
+      }
+      if(['f_neutro','f_plt','f_hgb'].includes(id) && tela==='triagem' && step===3){
+        const c=document.getElementById('main');
+        if(c) c.innerHTML=renderS3();
+        attachEvents();
+      }
+    };
+  });
+}
+
+function avancar(){
+  // Capturar valores atuais antes de avançar
+  const binds=[
+    ['f_nome','nome'],['f_ciclo','ciclo'],['f_proto','proto'],['f_enf','enfermeira'],
+    ['f_data','data'],['f_hora','hora'],
+    ['f_pas','pas'],['f_pad','pad'],['f_fc','fc'],['f_fr','fr'],
+    ['f_temp','temp'],['f_spo2','spo2'],['f_peso','peso'],['f_altura','altura'],
+    ['f_hgb','hgb'],['f_leuco','leuco'],['f_neutro','neutro'],['f_plt','plt'],
+    ['f_creat','creat'],['f_tgo','tgo'],['f_tgp','tgp'],['f_glicemia','glicemia'],
+  ];
+  binds.forEach(([id,key])=>{
+    const el=document.getElementById(id);
+    if(el) d[key]=el.value;
+  });
+  const err=validarStep(step);
+  if(err){ alertaCustom(err); return; }
+  if(step<STEPS) irStep(step+1);
+  else irTela('conclusao');
+}
+
+function e(v){ return (v||'').toString().replace(/"/g,'&quot;'); }
+
+/* ─── INIT ──────────────────────────────────────────────── */
+resetD();
+irTela('home');
+</script>
+</body>
+</html>

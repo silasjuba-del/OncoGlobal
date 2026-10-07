@@ -1,15 +1,13 @@
-import { createHash, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
+import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 import { Sessao, type Sessao as SessaoTipo } from "../contracts/base.js";
+import { hashCanonico } from "../modules/tipos.js";
 
 /** Documento exibido = id + versão + hash do CONTEÚDO exato mostrado ao médico (A13). */
 export interface DocumentoExibido { documentId: string; documentVersion: number; conteudoHash: string }
 
-/** JSON canônico (chaves ordenadas) → SHA-256. Mesmo conteúdo ⇒ mesmo hash, independente da ordem de chaves. */
+/** Único canon SHA-256 do módulo, mantendo a API pública do servidor. */
 export function hashConteudoExibido(conteudo: unknown): string {
-  const canon = (v: unknown): unknown => Array.isArray(v) ? v.map(canon)
-    : v && typeof v === "object" ? Object.fromEntries(Object.keys(v as object).sort()
-      .map((k) => [k, canon((v as Record<string, unknown>)[k])])) : v;
-  return createHash("sha256").update(JSON.stringify(canon(conteudo))).digest("hex");
+  return hashCanonico(conteudo);
 }
 
 export interface GerenciadorSessao {
@@ -19,6 +17,8 @@ export interface GerenciadorSessao {
     docs: readonly DocumentoExibido[]): void;
   bundleExibido(token: string, contexto: { patientId: string; encounterId: string }):
     readonly DocumentoExibido[] | null;
+  selecionarConsulta(token: string, contexto: { patientId: string; encounterId: string; tumorLotId?: string | null } | null): void;
+  consultaSelecionada(token: string): { patientId: string; encounterId: string; tumorLotId?: string | null } | null;
 }
 
 /** Single-user local login. Caller supplies the secret at startup; no default credentials. */
@@ -31,7 +31,7 @@ export function criarGerenciadorSessao(config: {
   const sessions = new Map<string, { sessao: SessaoTipo; bundle?: {
     contexto: { patientId: string; encounterId: string };
     docs: readonly DocumentoExibido[];
-  } }>();
+  }; consulta?: { patientId: string; encounterId: string; tumorLotId?: string | null } }>();
   const obter = (token: string): SessaoTipo | null => {
     const record = sessions.get(token);
     if (!record) return null;
@@ -65,6 +65,17 @@ export function criarGerenciadorSessao(config: {
       if (!bundle || bundle.contexto.patientId !== contexto.patientId
         || bundle.contexto.encounterId !== contexto.encounterId) return null;
       return bundle.docs.map((d) => ({ ...d }));
+    },
+    selecionarConsulta(token, contexto) {
+      if (!obter(token)) throw new Error("SESSAO_EXPIRADA");
+      const record = sessions.get(token)!;
+      if (contexto === null) delete record.consulta;
+      else record.consulta = { ...contexto };
+    },
+    consultaSelecionada(token) {
+      if (!obter(token)) return null;
+      const contexto = sessions.get(token)?.consulta;
+      return contexto ? { ...contexto } : null;
     },
   };
 }

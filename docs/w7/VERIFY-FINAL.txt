@@ -1,0 +1,64 @@
+
+> oncoglobal@0.0.1 verify
+> npm run typecheck && npm run check:boundaries && npm run check:corpus && npm test -- --no-file-parallelism
+
+
+> oncoglobal@0.0.1 typecheck
+> tsc --noEmit
+
+
+> oncoglobal@0.0.1 check:boundaries
+> node scripts/check-boundaries.mjs
+
+fronteiras ok (101 arquivos)
+
+> oncoglobal@0.0.1 check:corpus
+> node scripts/validate-corpus.mjs
+
+ARQUIVO                                               | HEADER     | [VERIFICAR] | ATIVOS
+--------------------------------------------------------------------------------------------
+corpus/capabilities.v1.json                           | ok         | 32          | 0     
+corpus/packs/colorretal.v1.json                       | ok         | 6           | 0     
+corpus/packs/mama.v1.json                             | ok         | 6           | 0     
+corpus/packs/prostata.v1.json                         | ok         | 6           | 0     
+corpus/packs/pulmao.v1.json                           | ok         | 6           | 0     
+corpus/rulesets/apac.v1.json                          | ok         | 2           | 0     
+corpus/rulesets/canal-redflags.v1.json                | ok         | 7           | 0     
+corpus/rulesets/dose.v1.json                          | ok         | 0           | 0     
+corpus/rulesets/interacoes.v1.json                    | ok         | 5           | 0     
+corpus/rulesets/lab-thresholds.v1.json                | ok         | 19          | 3     
+corpus/rulesets/prazos.v1.json                        | ok         | 1           | 0     
+corpus/rulesets/rad-emergencia.v1.json                | ok         | 22          | 0     
+corpus/rulesets/salao-triagem.v1.json                 | ok         | 0           | 0     
+corpus/templates/evolucao.v1.json                     | —          | 0           | 0     
+corpus/templates/folha-operacional-salao.v1.json      | —          | 0           | 0     
+corpus/templates/kit/apac-laudo.v1.json               | ok         | 9           | 0     
+corpus/templates/kit/orientacao-nutricional.v1.json   | ok         | 0           | 0     
+corpus/templates/kit/receita-sintomaticos.v1.json     | ok         | 0           | 0     
+corpus/templates/kit/relatorio-pericial.v1.json       | ok         | 0           | 0     
+corpus/templates/kit/requisicao-exames-ciclos.v1.json | ok         | 0           | 0     
+corpus/templates/kit/sinais-alarme.v1.json            | ok         | 0           | 0     
+corpus/templates/laudo-judicial.v1.json               | —          | 0           | 0     
+corpus/templates/pedido-exame.v1.json                 | —          | 0           | 0     
+corpus/templates/receita.v1.json                      | —          | 0           | 0     
+corpus/templates/resumo-14.v1.json                    | —          | 15          | 0     
+corpus/templates/sinais-alarme.v1.json                | —          | 1           | 0     
+
+corpus ok (26 arquivos)
+
+> oncoglobal@0.0.1 test
+> vitest run --no-file-parallelism
+
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w7-codex
+
+
+ Test Files  64 passed (64)
+      Tests  397 passed (397)
+   Start at  22:30:13
+   Duration  69.71s (environment 45%, import 30%, tests 18%, transform 5%, worker 2%)
+
+     Import  160 modules were evaluated 468 times · 15.35s total, 30% of tracked time
+             ~10.10s faster with isolate: false — shared modules are evaluated once per worker instead of once per file
+             learn more: https://vitest.dev/guide/improving-performance#test-isolation
+

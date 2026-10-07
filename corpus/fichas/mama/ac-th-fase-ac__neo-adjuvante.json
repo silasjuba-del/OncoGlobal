@@ -1,0 +1,170 @@
+{
+  "templateId": "FICHA.mama.ac-th-fase-ac__neo-adjuvante@1.0.0",
+  "tumor": "Mama",
+  "nome": "AC-TH (fase AC)",
+  "cenario": "neo/adjuvante",
+  "versao": "1.0.0",
+  "hash": "4aaaf2edc1ee18676b6a4d169145ea4c324e1991823f85c53a4a5755d8f34274",
+  "codigoInstitucional": null,
+  "intervaloDias": 21,
+  "ciclos": 4,
+  "itens": [
+    {
+      "drug": "Soro fisiológico 0,9% 250 mL (lavagem de acesso)",
+      "classe": "PRE_QT",
+      "sequence": 1,
+      "standardDose": 1,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "frasco",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": 250,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Lavar acesso venoso pré e pós QT (planilha).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Ondansetrona",
+      "classe": "PRE_QT",
+      "sequence": 2,
+      "standardDose": 8,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "15 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Planilha: 8 mg EV; fichas reais do serviço usam 16 mg em alguns esquemas [VERIFICAR].",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Dexametasona",
+      "classe": "PRE_QT",
+      "sequence": 3,
+      "standardDose": 10,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "15 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Alto risco emetogênico: olanzapina 5 mg VO opcional (D-W9-34c); sem antagonista NK1 (padrão local).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Prometazina",
+      "classe": "PRE_QT",
+      "sequence": 4,
+      "standardDose": 25,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Pré-medicação local (D-W9-34c).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Doxorrubicina",
+      "classe": "QT",
+      "sequence": 5,
+      "standardDose": 60,
+      "doseBasis": "MG_M2",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg/m²",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "10 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Seguido da fase TH (paclitaxel semanal + trastuzumabe) após 4 ciclos.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Ciclofosfamida",
+      "classe": "QT",
+      "sequence": 6,
+      "standardDose": 600,
+      "doseBasis": "MG_M2",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg/m²",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "30 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": null,
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Soro fisiológico 0,9% 250 mL (lavagem pós-QT)",
+      "classe": "POS_QT",
+      "sequence": 7,
+      "standardDose": 1,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "frasco",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": 250,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Lavar acesso venoso pós-QT (planilha).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    }
+  ],
+  "limiaresBula": null,
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema AC convencional\" p. 20; SBOC 2026 mama (docs/referencias/evidencias/SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md): ACTH(P) como alternativa HER2+; decisões D-W9-23, D-W9-34, D-W9-50.",
+  "status": "RASCUNHO"
+}

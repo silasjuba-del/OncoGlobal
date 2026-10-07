@@ -1,0 +1,10 @@
+AUDITORIA ADVERSARIAL — DUAS RODADAS — 06/10/2026
+Status: revisão parcial, referência documental; não liberado como motor clínico automático.
+Sepse não substitui infecção genérica. Selecionar o termo específico e graduar o evento documentado, sem inferir etiologia a partir de fármaco típico.
+Contraindicação formal, evitar, suspensão temporária, ajuste e descontinuação definitiva são categorias distintas. A coluna Absoluta/Relativa é editorial.
+Galsky: critérios de inelegibilidade a cisplatina no carcinoma urotelial metastático; não universalizar a todos os tumores ou a toda platina.
+AJCC versão 9 para orofaringe HPV associada vigente desde 01/01/2026; escolher sistema por sítio e data. Não converter automaticamente histórico nem p16 positivo de outro sítio.
+FLOT/durvalumabe: cenário perioperatório ressecável elegível, não indicação automática de todo câncer gástrico/JEG. Conferir Brasil separadamente de FDA.
+Existência de fonte ou HTTP 200 não prova conteúdo, competência, disponibilidade SUS ou cobertura ANS. SIGTAP exige lote oficial e compatibilidades; nenhuma APAC foi homologada.
+Dados ausentes ou NÃO_VERIFICADO não equivalem a resultado negativo. Texto de fonte não autoriza assinatura, prescrição ou integração no prontuário.
+IA externa e testes de runtime: NÃO EXECUTADOS. Doses, todas as interações, ensaios, tradução PT-BR, cobertura e regras legais: revalidação integral pendente.

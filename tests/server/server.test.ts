@@ -1,3 +1,4 @@
+import { artefatoAssinado } from "./_artefatoAssinado.js";
 import { afterEach, expect, it } from "vitest";
 import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -72,6 +73,7 @@ it("G-25 rejeita assinatura fora do bundle; validação grava N eventos e não i
   expect((await f.post("/consulta/confirmar", payload, f.token)).json.codigo).toBe("REPLAY");
   expect(listarEventos(f.db, "Paciente Teste 01")).toHaveLength(2);
   expect(f.actions()).toBe(0);
+  artefatoAssinado(f.db, { patientId: "Paciente Teste 01", encounterId: "e1", documentId: "doc-1" });
   const action = await f.post("/acao", { verbo: "IMPRIMIR",
     objeto: { tipo: "DOCUMENTO", id: "doc-1", versao: 1 },
     escopo: { patientId: "Paciente Teste 01", encounterId: "e1" },
@@ -85,13 +87,19 @@ it("N18 erro com identificador sintético não vaza no log nem na resposta", asy
   const marker = "CPF-SINTETICO-NAO-LOGAR";
   // A02: exceção do EXECUTOR vira OUTCOME_UNKNOWN dentro do gateway; aqui a falha nasce no próprio
   // gateway para exercitar o catch/log do servidor.
-  const errGateway = { executar: async () => { throw new Error(marker); } } as unknown as ReturnType<typeof criarGateway>;
+  // Mesmo após o wiring do store SQLite, exercita a exceção no gateway (não
+  // uma falha acidental de ausência de withStore no fake deste teste).
+  const errGateway = {
+    withStore() { return this; },
+    executar: async () => { throw new Error(marker); },
+  } as unknown as ReturnType<typeof criarGateway>;
   // This second server exercises the real catch/log boundary with a throwing gateway.
   const second = criarServidorLocal({ ...f.deps, gateway: errGateway });
   servers.push(second);
   await new Promise<void>((resolve) => second.listening ? resolve() : second.once("listening", resolve));
   const address = second.address();
   if (!address || typeof address === "string") throw new Error("sem porta");
+  artefatoAssinado(f.db, { patientId: "Paciente Teste 01", encounterId: "e1", documentId: "doc-1" });
   const response = await fetch(`http://127.0.0.1:${address.port}/acao`, { method: "POST",
     headers: { Authorization: `Bearer ${f.token}`, "Content-Type": "application/json" },
     body: JSON.stringify({ verbo: "IMPRIMIR", objeto: { tipo: "DOCUMENTO", id: "doc-1", versao: 1 },
@@ -136,6 +144,7 @@ it("A02 exceção do executor vira OUTCOME_UNKNOWN sem vazar identificador", asy
   await new Promise<void>((resolve) => second.listening ? resolve() : second.once("listening", resolve));
   const address = second.address();
   if (!address || typeof address === "string") throw new Error("sem porta");
+  artefatoAssinado(f.db, { patientId: "Paciente Teste 01", encounterId: "e1", documentId: "doc-1" });
   const response = await fetch(`http://127.0.0.1:${address.port}/acao`, { method: "POST",
     headers: { Authorization: `Bearer ${f.token}`, "Content-Type": "application/json" },
     body: JSON.stringify({ verbo: "IMPRIMIR", objeto: { tipo: "DOCUMENTO", id: "doc-1", versao: 1 },

@@ -1,0 +1,64 @@
+{
+  "id": "sinais-alarme",
+  "versao": "1.0.0",
+  "header": {
+    "id": "sinais-alarme",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-05",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-W5-05 + ADENDO-W6-W7.md (2026-10-05); docs/referencias/kit-oncologia-2026-05.pdf",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-05"
+  },
+  "fonte": {
+    "tipo": "DECISAO_MEDICA",
+    "referencia": "docs/referencias/kit-oncologia-2026-05.pdf",
+    "pagina": 2
+  },
+  "secoes": [
+    {
+      "id": "conteudo",
+      "titulo": "Sinais de alarme",
+      "origem": "TEXTO_FIXO",
+      "campos": [
+        {
+          "id": "texto-integral",
+          "rotulo": "Texto integral",
+          "origem": "TEXTO_FIXO",
+          "texto": " SINAIS DE ALARME\r\n Quando procurar pronto-socorro durante tratamento oncológico\r\nIDADE:\r\n______\r\nFEBRE ACIMA DE 37,8°C OU CALAFRIOS: PROCURE PRONTO-SOCORRO IMEDIATAMENTE.\r\nSINAIS DE INFECÇÃO\r\n Febre acima de 37,8°C, calafrios ou tremores, mesmo sem\r\nfebre alta.\r\n Dor, vermelhidão, calor local, secreção ou pus em cateter, ferida\r\nou acesso venoso.\r\n Tosse associada a falta de ar, dor no peito ou queda importante\r\ndo estado geral.\r\n Dor ao urinar, urina turva, sangue na urina ou cheiro forte.\r\n Feridas na boca, dor de garganta, placas brancas ou dificuldade\r\npara engolir.\r\n Fraqueza intensa, sonolência fora do habitual ou confusão\r\nmental.\r\nCOMPLICAÇÕES GRAVES\r\n Sangramento que não para: nariz, gengiva, fezes, urina ou\r\nvômitos com sangue.\r\n Manchas roxas extensas ou pontinhos vermelhos na pele.\r\n Falta de ar súbita, dor ao respirar, dor no peito ou inchaço nas\r\npernas.\r\n Dor forte que não melhora com remédio prescrito.\r\n Convulsão, desmaio, confusão, dificuldade para falar ou\r\nfraqueza em um lado do corpo.\r\n Pouca urina, inchaço no corpo, vômitos repetidos ou sinais de\r\ndesidratação.\r\nNA DÚVIDA, NÃO ESPERE\r\nDurante quimioterapia, infecções podem evoluir rapidamente. Leve este documento, lista de medicamentos e, se possível, os\r\nexames mais recentes ao pronto-socorro.\r\nANOTAÇÕES DO PACIENTE\r\nPRESSÃO\r\n____/____ mmHg\r\n____/____ mmHg\r\n____/____ mmHg\r\nVÔMITOS\r\n( ) nenhum\r\n( ) 1-2x\r\n( ) 3-5x  ( ) >5x/dia\r\nDIARREIA\r\n( ) nenhuma\r\n( ) 1-3x\r\n( ) 4-6x  ( ) >6x/dia\r\nDOR 0-10\r\n( ) 0\r\n( ) 1-3 leve\r\n( ) 4-6 moderada  ( ) 7-10 forte\r\nData: ____/____/________\r\nCARIMBO E ASSINATURA"
+        }
+      ]
+    }
+  ],
+  "identificacao": {
+    "origem": "FATO_CONFIRMADO",
+    "campos": [
+      "NOME",
+      "NASC.",
+      "CIDADE",
+      "IDADE"
+    ]
+  },
+  "dataEAssinatura": {
+    "origem": "DECISAO_MEDICA",
+    "campos": [
+      "DATA",
+      "CARIMBO E ASSINATURA"
+    ]
+  },
+  "proibidoConter": [
+    "ALERTA",
+    "CORRECAO_IA"
+  ],
+  "verificacaoAcentuacao": {
+    "necessaria": true,
+    "marcador": "[VERIFICAR acentuacao]",
+    "metadadoSomente": true
+  },
+  "headerExtraidoComoConfiguracao": true,
+  "textoFonteOriginal": "\nH\r\nHOSPITAL DO BEM - UNIDADE ONCOLÓGICA\r\nComplexo Hospitalar Regional Dep. Janduhy Carneiro - Patos/PB\r\nDr. Silas Negrão Serra Jr. - CRM-PB 17341 - RQE Oncologia 9099 - RQE Clínica Médica 9098\r\nSinais de alarme\r\nHospital do Bem - Unidade Oncológica - Patos/PB | Documento médico para impressão\r\nPágina 1\r\n SINAIS DE ALARME\r\n Quando procurar pronto-socorro durante tratamento oncológico\r\nNOME:\r\n___________________________________________\r\nNASC.:\r\n____/____/________\r\nCIDADE:\r\n______________________\r\nIDADE:\r\n______\r\nFEBRE >= 37,8°C OU CALAFRIOS: PROCURE PRONTO-SOCORRO IMEDIATAMENTE.\r\nSINAIS DE INFECÇÃO\r\n Febre acima de 37,8°C, calafrios ou tremores, mesmo sem\r\nfebre alta.\r\n Dor, vermelhidão, calor local, secreção ou pus em cateter, ferida\r\nou acesso venoso.\r\n Tosse associada a falta de ar, dor no peito ou queda importante\r\ndo estado geral.\r\n Dor ao urinar, urina turva, sangue na urina ou cheiro forte.\r\n Feridas na boca, dor de garganta, placas brancas ou dificuldade\r\npara engolir.\r\n Fraqueza intensa, sonolência fora do habitual ou confusão\r\nmental.\r\nCOMPLICAÇÕES GRAVES\r\n Sangramento que não para: nariz, gengiva, fezes, urina ou\r\nvômitos com sangue.\r\n Manchas roxas extensas ou pontinhos vermelhos na pele.\r\n Falta de ar súbita, dor ao respirar, dor no peito ou inchaço nas\r\npernas.\r\n Dor forte que não melhora com remédio prescrito.\r\n Convulsão, desmaio, confusão, dificuldade para falar ou\r\nfraqueza em um lado do corpo.\r\n Pouca urina, inchaço no corpo, vômitos repetidos ou sinais de\r\ndesidratação.\r\nNA DÚVIDA, NÃO ESPERE\r\nDurante quimioterapia, infecções podem evoluir rapidamente. Leve este documento, lista de medicamentos e, se possível, os\r\nexames mais recentes ao pronto-socorro.\r\nANOTAÇÕES DO PACIENTE\r\nPRESSÃO\r\n____/____ mmHg\r\n____/____ mmHg\r\n____/____ mmHg\r\nVÔMITOS\r\n( ) nenhum\r\n( ) 1-2x\r\n( ) 3-5x  ( ) >5x/dia\r\nDIARREIA\r\n( ) nenhuma\r\n( ) 1-3x\r\n( ) 4-6x  ( ) >6x/dia\r\nDOR 0-10\r\n( ) 0\r\n( ) 1-3 leve\r\n( ) 4-6 moderada  ( ) 7-10 forte\r\nData: ____/____/________\r\nCARIMBO E ASSINATURA\r\n\r\n"
+}

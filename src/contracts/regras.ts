@@ -51,7 +51,7 @@ export const EntradaFila = z.object({
   patientId: z.string(),
   ecog: z.number().int().min(0).max(4).nullable(),
   recurso: z.enum(["AMBULATORIAL", "CADEIRA", "CAMA"]),
-  idadeAnos: z.number().int(),
+  idadeAnos: z.number().int().nullable(), // D-W9-03 · null = PENDENTE
   chegadaEm: Instante,
 }).strict();
 export type EntradaFila = z.infer<typeof EntradaFila>;
@@ -91,7 +91,7 @@ export interface FuncoesF0 {
   /** FN-01+FN-02 · src/rules/triagem.ts */
   avaliarTriagem(t: Triagem, ctx: ContextoTriagem, rs: SalaoRuleset): ResultadoTriagem;
   /** FN-02 · src/rules/destino.ts */
-  decidirDestino(input: { temCorte: boolean; temPendencia: boolean; recurso: "AMBULATORIAL" | "CADEIRA" | "CAMA"; idadeAnos: number }, rs: SalaoRuleset): z.infer<typeof Destino>;
+  decidirDestino(input: { temCorte: boolean; temPendencia: boolean; recurso: "AMBULATORIAL" | "CADEIRA" | "CAMA"; idadeAnos: number | null }, rs: SalaoRuleset): z.infer<typeof Destino>;
   /** FN-03 · src/rules/fila.ts — estável; não muta a entrada */
   ordenarFila(entradas: readonly EntradaFila[], rs: SalaoRuleset): EntradaFila[];
   /** FN-04 · src/rules/dose.ts */

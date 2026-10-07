@@ -1,0 +1,29 @@
+RESSONÂNCIA MAGNÉTICA MULTIPARAMÉTRICA DE PRÓSTATA
+SERVIÇO SINTÉTICO DE IMAGEM (instituição fictícia) · Exame: RAD-7001 (sintético)
+=====================================================================
+DOCUMENTO SINTÉTICO — PACIENTE TESTE 07 — nenhum dado real.
+=====================================================================
+Data de realização do exame (data clínica): 2026-07-10
+Data de emissão do laudo: 2026-07-13
+Data da assinatura digital no rodapé: 2026-07-14  (≠ data clínica — T1)
+Identificação no cabeçalho (rótulo impresso "Cartão SUS"): 123.456.789-01 (I1)
+
+Técnica: multiparamétrica (T2, difusão e perfusão), 3T (equipamento fictício).
+
+Próstata: [RISCADO] volume prostático de 42 mL; dimensões 4,1 × 3,3 × 3,6 cm [/RISCADO]
+  -> TRECHO RISCADO À CANETA na fonte: não usar sem revisão; PENDENTE (R1).
+
+Lesão: nódulo hipointenso em T2 no LOBO ESQUERDO (transição), aproximadamente 1,2 cm,
+       PI-RADS 4, com extensão para a gordura periprostática e contato com os feixes
+       neurovasculares posteriores.
+
+[RISCADO] realce precoce difuso da glândula central, possivelmente inflamatório [/RISCADO]
+  -> TRECHO RISCADO À CANETA na fonte: não usar sem revisão; PENDENTE (R1).
+
+Linfonodos pélvicos: sem linfonodomegalia. Ossos pélvicos visualizados: sem lesão franca.
+Impressão: lesão significativa no lobo esquerdo com suspeita de extensão extraprostática;
+estadiamento formal é do médico (nenhum TNM é fechado por exame — S1).
+Dr. Radiologista Exemplo — CRM-TS 000003 (assinatura fictícia)
+=====================================================================
+Armadilhas reproduzidas: I1, R1 (2 trechos [RISCADO] — nunca extrair valor de trecho riscado
+como fato), S1 (TNM PENDENTE — médico).

@@ -1,0 +1,36 @@
+{
+  "header": { "id": "patologia-agregacao", "versao": "1.0.0", "vigenteDesde": "2026-10-06",
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "estrutura W8/GLM-16 a partir da lição P2 do caso real 01 (docs/referencias/CASO-REAL-01-LICOES.md §2): 'grau do caso' é agregação por regra, nunca LLM — critérios exatos pendentes de decisão do Dr. Silas [VERIFICAR]", "trecho": null, "edicao": null },
+    "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-06" },
+  "nota": "esqueleto W8/GLM-16: agrega SÍTIOS extraídos por PATH@1.1.0 em um 'grau do caso'; todo critério [VERIFICAR] e ativo:false até decisão do Dr. Silas; a agregação roda em código puro a partir dos sítios — o LLM nunca agrega",
+  "principio": "entrada: sitios[] extraídos por microprompt (um por sítio, com negação preservada); saída: agregados do caso calculados por função pura; conflito entre espécimes nunca é resolvido na agregação",
+  "agregacoes": [
+    {
+      "id": "grau-do-caso-maior-grupo",
+      "nome": "Maior grupo de grau entre os sítios",
+      "criterio": "[VERIFICAR]",
+      "ativo": false,
+      "fonte": "[VERIFICAR]"
+    },
+    {
+      "id": "cribriforme-qualquer-sitio",
+      "nome": "Presença de padrão cribriforme em qualquer sítio",
+      "criterio": "[VERIFICAR]",
+      "ativo": false,
+      "fonte": "[VERIFICAR]"
+    },
+    {
+      "id": "percentual-fragmentos-comprometidos",
+      "nome": "Percentual de fragmentos comprometidos (sobre o total avaliado)",
+      "criterio": "[VERIFICAR]",
+      "ativo": false,
+      "fonte": "[VERIFICAR]"
+    }
+  ],
+  "proibicoes": [
+    "LLM nunca agrega o caso nem responde 'qual é o grau do caso' (PATH@1.1.0 proíbe; FN-04: cálculo é código)",
+    "espécimes distintos (biópsia, RTU, IHQ) agregam separadamente; nunca fundidos",
+    "negação por sítio é preservada na entrada; agregação não 'apaga' negações ('sem padrão cribriforme' em um sítio não vira presença no caso, e vice-versa)",
+    "sítio sem grupo de grau documentado não recebe grupo derivado pelo modelo"
+  ]
+}

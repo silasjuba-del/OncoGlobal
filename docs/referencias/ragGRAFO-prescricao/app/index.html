@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ficha 20 segundos</title>
+<style>
+  :root { color-scheme: light; --ink:#14202b; --muted:#4d5b68; --line:#d5dde4; --paper:#f4f7f8; --green:#0e6b45; --red:#8d1d18; --amber:#8a5a00; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: "Segoe UI", sans-serif; color:var(--ink); background:var(--paper); }
+  header { padding:16px 20px 8px; max-width:1100px; margin:0 auto; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  p.lead { margin:0; color:var(--muted); }
+  .layout { display:grid; grid-template-columns: 280px 1fr; gap:16px; max-width:1100px; margin:0 auto; padding:12px 20px 40px; }
+  input[type="search"] { width:100%; font-size:16px; padding:10px 12px; border:1px solid var(--line); border-radius:8px; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
+  button.chip, button.rec { border:1px solid var(--line); background:#fff; border-radius:999px; padding:6px 10px; cursor:pointer; }
+  button.chip.on, button.rec.on { background:#14202b; color:#fff; }
+  ul.lista { list-style:none; padding:0; margin:0; max-height:70vh; overflow:auto; }
+  ul.lista button { width:100%; text-align:left; background:#fff; border:1px solid var(--line); border-radius:8px; margin:0 0 6px; padding:8px 10px; cursor:pointer; }
+  ul.lista button small { display:block; color:var(--muted); }
+  article { background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .selo { display:inline-block; font-size:12px; font-weight:700; letter-spacing:.04em; padding:4px 8px; border-radius:999px; }
+  .ok { background:#e5f6ee; color:var(--green); }
+  .no { background:#fde8e6; color:var(--red); }
+  .faixa { padding:10px 12px; border-radius:8px; margin:10px 0; }
+  .faixa.no { background:#fde8e6; }
+  .banda { border-top:1px solid var(--line); padding:10px 0; }
+  .banda h2 { font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:0 0 6px; }
+  .receita { font-family: Consolas, monospace; font-size:16px; line-height:1.45; background:#f7fafc; padding:12px; border-radius:8px; }
+  .checks label { display:block; margin:6px 0; }
+  button.copiar { font-size:16px; padding:10px 14px; border:0; border-radius:8px; background:var(--green); color:#fff; cursor:pointer; }
+  button.copiar:disabled { background:#b7c0c7; cursor:not-allowed; }
+  details { color:var(--muted); }
+  @media (max-width: 800px) { .layout { grid-template-columns: 1fr; } ul.lista { max-height:none; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Ficha de 20 segundos</h1>
+  <p class="lead">Uma decisão por faixa. A receita só copia depois da trava. O que é hospital não tem botão de imprimir.</p>
+</header>
+<div class="layout">
+  <aside>
+    <input id="q" type="search" placeholder="Sintoma, sigla ou fármaco" aria-label="Buscar">
+    <div class="chips" id="chips"></div>
+    <ul class="lista" id="lista"></ul>
+  </aside>
+  <article id="ficha"><p>Escolha uma condição.</p></article>
+</div>
+<script src="fichas.js"></script>
+<script>
+const estado = { esp: "todas", id: null, rec: 0 };
+const chipsEl = document.getElementById("chips");
+const listaEl = document.getElementById("lista");
+const fichaEl = document.getElementById("ficha");
+const qEl = document.getElementById("q");
+
+function especiais() {
+  return ["todas", ...new Set(window.FICHAS.map(f => f.especialidade))];
+}
+function texto(f) {
+  return [f.nome, f.cid, f.especialidade, ...f.sinonimos, ...f.sintomas, f.foco,
+    ...f.receitas.flatMap(r => r.linhas)].join(" ").toLowerCase();
+}
+function filtra() {
+  const q = qEl.value.trim().toLowerCase();
+  return window.FICHAS.filter(f => (estado.esp === "todas" || f.especialidade === estado.esp)
+    && (!q || texto(f).includes(q)));
+}
+function desenhaChips() {
+  chipsEl.innerHTML = "";
+  especiais().forEach(esp => {
+    const b = document.createElement("button");
+    b.className = "chip" + (esp === estado.esp ? " on" : "");
+    b.type = "button";
+    b.textContent = esp;
+    b.onclick = () => { estado.esp = esp; desenha(); };
+    chipsEl.appendChild(b);
+  });
+}
+function desenhaLista() {
+  listaEl.innerHTML = "";
+  filtra().forEach(f => {
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.type = "button";
+    b.innerHTML = f.nome + "<small>" + f.especialidade + " · " + f.cid + "</small>";
+    b.onclick = () => { estado.id = f.id; estado.rec = 0; desenhaFicha(); };
+    li.appendChild(b);
+    listaEl.appendChild(li);
+  });
+}
+function desenhaFicha() {
+  const f = window.FICHAS.find(x => x.id === estado.id);
+  if (!f) { fichaEl.innerHTML = "<p>Escolha uma condição.</p>"; return; }
+  const r = f.receitas[estado.rec];
+  const botoes = f.receitas.map((rec, i) =>
+    '<button type="button" class="rec' + (i === estado.rec ? " on" : "") + '" data-i="' + i + '">' + rec.porta + "</button>").join(" ");
+  const linhas = r.linhas.map(l => "<div>" + l + "</div>").join("");
+  const trava = r.imprimivel
+    ? '<div class="checks"><label><input type="checkbox" class="trava"> Não está gestante nem lactante</label><label><input type="checkbox" class="trava"> Alergia conferida</label><label><input type="checkbox" class="trava"> Função renal e potássio conferidos, quando o fármaco exige</label></div><button type="button" class="copiar" id="copiar" disabled>Copiar minuta</button>'
+    : '<div class="faixa no">Esta porta não imprime receita. O próximo passo é encaminhar.</div>';
+  fichaEl.innerHTML =
+    '<span class="selo ' + (r.imprimivel ? "ok" : "no") + '">' + (r.imprimivel ? "PODE COPIAR NA APS" : "NÃO IMPRIMIR") + "</span> " +
+    "<strong>" + f.nome + "</strong> <span>" + f.cid + "</span>" +
+    '<div class="chips">' + botoes + "</div>" +
+    '<div class="banda"><h2>1. É isto?</h2><ul>' + f.sintomas.map(s => "<li>" + s + "</li>").join("") + "</ul></div>" +
+    '<div class="banda"><h2>2. O que confirma</h2><p>' + f.diagnostico + "</p></div>" +
+    '<div class="banda"><h2>3. O que fazer</h2><p>' + f.foco + "</p><p><strong>Cenário desta minuta:</strong> " + r.cenario + "</p></div>" +
+    '<div class="banda"><h2>Receita</h2><div class="receita" id="bloco">' + linhas +
+    "<div>Duração: " + r.duracao + ".</div><div>Quantidade: " + r.quantidade + ".</div></div>" +
+    "<p>" + r.ajustes + "</p><p><strong>Alternativa:</strong> " + r.alternativa + "</p>" + trava + "</div>" +
+    '<div class="banda"><h2>Alarme</h2><ul>' + f.alarmes.map(s => "<li>" + s + "</li>").join("") + "</ul>" +
+    "<p><strong>Não fazer:</strong> " + f.nao_fazer.join(" ") + "</p></div>" +
+    "<details><summary>Fonte e confiança (" + f.confianca + " / receita " + r.confianca + ")</summary><p>" +
+    f.fontes.join(" ") + "</p></details>";
+  fichaEl.querySelectorAll("button.rec").forEach(b => b.onclick = () => { estado.rec = Number(b.dataset.i); desenhaFicha(); });
+  const copiar = document.getElementById("copiar");
+  if (copiar) {
+    const atualiza = () => { copiar.disabled = [...fichaEl.querySelectorAll(".trava")].some(x => !x.checked); };
+    fichaEl.querySelectorAll(".trava").forEach(x => x.onchange = atualiza);
+    copiar.onclick = async () => {
+      const bloco = document.getElementById("bloco").innerText;
+      await navigator.clipboard.writeText(f.nome + "\n" + bloco + "\nMinuta para assinatura do prescritor. Adulto não gestante.");
+      copiar.textContent = "Copiada";
+    };
+  }
+}
+function desenha() { desenhaChips(); desenhaLista(); desenhaFicha(); }
+qEl.oninput = desenhaLista;
+desenha();
+</script>
+</body>
+</html>

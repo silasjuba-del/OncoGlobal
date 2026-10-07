@@ -10,11 +10,16 @@ const RULES = [
   { from: "src/agents/", forbid: ["src/agents/"], allow: [], why: "agente nunca importa outro agente", sameDirOk: true },
   { from: "src/kernel/harness/", forbid: ["src/agents/"], allow: [], why: "harness não depende de agentes" },
   { from: "src/ui/", forbid: ["src/kernel/ledger/"], allow: [], why: "UI não escreve no ledger direto" },
+  { from: "src/leitura/", forbid: ["src/"], allow: ["src/contracts/", "src/rules/", "src/modules/", "src/kernel/projections/", "src/leitura/"], why: "leitura pura: eventos/projeções entram por parâmetro" },
+  { from: "src/impressao/", forbid: ["src/"], allow: ["src/contracts/", "src/modules/", "src/impressao/"], why: "impressão pura: documento entra, HTML sai" },
   { from: "src/modules/", forbid: ["src/"], allow: ["src/contracts/", "src/modules/", "src/rules/"], why: "módulos de domínio puros: só contratos, regras e módulos" },
 ];
-const NET = /\bfrom\s+["'](node:https?|node:net|undici|axios|node-fetch)["']|\bfetch\(/;
+const NET = /from\s+["'](node:https?|node:net|undici|axios|node-fetch)["']|\bfetch\b|\[\s*[\"'`]fetch[\"'`]\s*\]|new\s+WebSocket|\bWebSocket\b|XMLHttpRequest|EventSource|sendBeacon|\bimport\s*\((?!\s*[\"'`][^\"'`]*[\"'`]\s*\)\s*\.[A-Z])|\brequire\s*\(|[\"'`]node:(dgram|tls|http2)[\"'`]/;  // CP-002: inclui acesso computado, WebSocket, import()/require dinâmicos
 // src/server/** é servidor de ENTRADA em 127.0.0.1: pode node:http; nunca cliente de saída.
-const NET_SAIDA = /\bfrom\s+["'](node:https|node:net|undici|axios|node-fetch)["']|\bfetch\(|\bhttp\.request\(|\bhttp\.get\(/;
+const NET_SAIDA = /from\s+["'](node:https|node:net|undici|axios|node-fetch)["']|http\.request\(|http\.get\(|\bfetch\b|\[\s*[\"'`]fetch[\"'`]\s*\]|new\s+WebSocket|\bWebSocket\b|XMLHttpRequest|EventSource|sendBeacon|\bimport\s*\((?!\s*[\"'`][^\"'`]*[\"'`]\s*\)\s*\.[A-Z])|\brequire\s*\(|[\"'`]node:(dgram|tls|http2)[\"'`]/;
+
+// src/ui/api/** é o ÚNICO cliente HTTP da UI: só caminho relativo ao servidor local (mesma origem).
+const UI_API_PROIBIDO = /["'`](https?:|wss?:)?\/\/|new\s+WebSocket|XMLHttpRequest|sendBeacon|EventSource|import\(/;
 
 const files = [];
 const walk = (d) => { for (const f of readdirSync(d)) { const p = join(d, f); statSync(p).isDirectory() ? walk(p) : /\.(ts|tsx|mjs)$/.test(f) && files.push(p); } };
@@ -31,12 +36,17 @@ for (const file of files) {
     for (const imp of imports) {
       const proibido = r.forbid.some((p) => imp.startsWith(p)) && !r.allow.some((a) => imp.startsWith(a));
       const mesmoAgente = r.sameDirOk && imp.split("/").slice(0, 3).join("/") === rel.split("/").slice(0, 3).join("/");
-      if (proibido && !mesmoAgente && !(r.from === "src/contracts/" && imp.startsWith("src/contracts/")))
+      // R-08 (tech lead W10): só o barrel src/rules/index.ts pode reexportar arquivos de src/rules/.
+      const barrelRegras = rel === "src/rules/index.ts" && imp.startsWith("src/rules/");
+      if (proibido && !mesmoAgente && !barrelRegras && !(r.from === "src/contracts/" && imp.startsWith("src/contracts/")))
         erros.push(`${rel} → ${imp} (${r.why})`);
     }
   }
-  const servidor = rel.startsWith("src/server/");
-  if (servidor && NET_SAIDA.test(code)) erros.push(`${rel} faz rede de saída (servidor só de entrada local)`);
+  // src/app/** é a raiz de composição: pode subir servidor de ENTRADA local, nunca rede de saída.
+  const servidor = rel.startsWith("src/server/") || rel.startsWith("src/app/");
+  const uiApi = rel.startsWith("src/ui/api/");
+  if (uiApi) { if (UI_API_PROIBIDO.test(code)) erros.push(`${rel} cliente da UI fora da mesma origem (só caminho relativo "/...")`); }
+  else if (servidor && NET_SAIDA.test(code)) erros.push(`${rel} faz rede de saída (servidor só de entrada local)`);
   else if (!servidor && !rel.startsWith("src/kernel/gateway/") && !rel.startsWith("src/kernel/llm/") && NET.test(code))
     erros.push(`${rel} usa rede fora do gateway/llm (INV-05)`);
 }
