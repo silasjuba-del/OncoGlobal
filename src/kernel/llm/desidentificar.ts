@@ -108,3 +108,6 @@ export function reidentificar(texto: string, mapa: ReadonlyMap<string, string>):
 export function contemPhiResidual(texto: string, dic: DicionarioPaciente): boolean {
   return desidentificar(texto, dic).achados.length > 0;
 }
+
+// G-27 · sanitizador de artefato (implementação em ./sanitizador.ts; reexportado aqui por contrato dos testes adversariais).
+export { sanitizarArtefato } from "./sanitizador.js";

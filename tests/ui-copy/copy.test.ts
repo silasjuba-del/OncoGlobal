@@ -28,6 +28,7 @@ function entradas(): Entrada[] {
 const NUMEROS_PERMITIDOS = new Set([
   "Desligar toda a IA por 30 min",
   "Desligar toda a IA agora e operar manual por 30 min?",
+  "Ver em 3D",
 ]);
 
 // Padrões de corte clínico que nunca entram em microcopy (Q21–24, Q34–35,
@@ -60,6 +61,39 @@ describe("microcopy pt-BR (MU-03)", () => {
       for (const parte of caminho.split(".")) {
         expect(parte).toMatch(/^[a-z][a-zA-Z0-9]*$/);
       }
+    }
+  });
+
+  it("traz as chaves pedidas pelo Cursor (PEDIDOS 01-04)", () => {
+    const mapa = new Map(entradas().map((e) => [e.caminho, e.texto]));
+    const pedidas: Record<string, string> = {
+      "navegacao.salao": "Salão",
+      "navegacao.canal": "Canal",
+      "navegacao.consulta": "Consulta",
+      "app.diaNoite": "Dia / noite",
+      "app.buscarOncoChart": "Buscar pacientes, exames, protocolos…",
+      "app.alertasClinicos": "Alertas clínicos",
+      "app.modoDia": "Modo dia",
+      "app.modoNoite": "Modo noite",
+      "app.usuario": "Usuário",
+      "consulta.flash": "Consulta Flash",
+      "consulta.alergiaPendente": "Alergia PENDENTE",
+      "consulta.negaAlergias": "Nega alergias",
+      "cadastro.titulo": "Cartão de cadastro",
+      "timeline.titulo": "Linha do tempo oncológica",
+      "timeline.ver3d": "Ver em 3D",
+      "abas.visaoGeral": "Visão geral",
+      "abas.quimioterapia": "Quimioterapia",
+      "abas.dadosClinicos": "Dados clínicos",
+      "abas.evolucao": "Evolução",
+      "cards.protocolos": "Protocolos ativos",
+      "cards.documentos": "Documentos recentes",
+      "cards.estadiamento": "Estadiamento e avaliações",
+      "cards.rascunho": "Rascunho de evolução",
+      "cards.caixaUnica": "Soltar PDF/Word — caixa única",
+    };
+    for (const [chave, texto] of Object.entries(pedidas)) {
+      expect(mapa.get(chave), chave).toBe(texto);
     }
   });
 

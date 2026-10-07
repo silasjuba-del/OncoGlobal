@@ -23,8 +23,17 @@ export const COPY_PT_BR = {
     validarTudo: "Validar tudo",
     assinar: "Assinar",
     configuracoes: "Configurações",
+    diaNoite: "Dia / noite",
+    buscarOncoChart: "Buscar pacientes, exames, protocolos…",
+    alertasClinicos: "Alertas clínicos",
+    modoDia: "Modo dia",
+    modoNoite: "Modo noite",
+    usuario: "Usuário",
   },
   navegacao: {
+    salao: "Salão",
+    canal: "Canal",
+    consulta: "Consulta",
     resumo: "Resumo",
     prontuario: "Prontuário",
     exames: "Exames",
@@ -103,6 +112,9 @@ export const COPY_PT_BR = {
     atualizacoesEDiretrizes: "Atualizações e diretrizes",
     verDetalhes: "Ver detalhes",
     verTodosOsDados: "Ver todos os dados",
+    flash: "Consulta Flash",
+    alergiaPendente: "Alergia PENDENTE",
+    negaAlergias: "Nega alergias",
   },
   exame: {
     resumo1: "Resumo",
@@ -221,6 +233,26 @@ export const COPY_PT_BR = {
     breakGlassNota:
       "Nenhuma trava de segurança é liberada. Portas, assinaturas e envios continuam exigindo o médico.",
     quemQuandoMotivo: "Quem, quando e por quê",
+  },
+  abas: {
+    visaoGeral: "Visão geral",
+    quimioterapia: "Quimioterapia",
+    dadosClinicos: "Dados clínicos",
+    evolucao: "Evolução",
+  },
+  cards: {
+    protocolos: "Protocolos ativos",
+    documentos: "Documentos recentes",
+    estadiamento: "Estadiamento e avaliações",
+    rascunho: "Rascunho de evolução",
+    caixaUnica: "Soltar PDF/Word — caixa única",
+  },
+  timeline: {
+    titulo: "Linha do tempo oncológica",
+    ver3d: "Ver em 3D",
+  },
+  cadastro: {
+    titulo: "Cartão de cadastro",
   },
   vazios: {
     filaVazia: "Ninguém na fila",
