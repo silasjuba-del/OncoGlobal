@@ -81,7 +81,14 @@ describe("RT-15 · caso completo com contradições: exceções esperadas (spec 
   it("nenhuma conclusão silenciosa: campos resolvidos vazios, timeline nula, nada promovido", () => {
     const { plaud, ap, rx } = rodarCaso();
     for (const estado of [plaud, ap, rx]) {
-      expect(estado.fields).toEqual({});
+      // Tech lead (2026-10-07): com a ReconciliationEngine (FUGU-07) campos podem ser RESOLVIDOS como proposta
+      // (spec §10 "fatos reconciliados automaticamente"); o que nunca pode é resolver a partir de fato não EXPLICIT
+      // nem promover sem paciente ligado. Expectativa ajustada pelo tech lead; o resto do teste continua.
+      for (const campo of Object.values(estado.fields as Record<string, { resolvedFactId: string | null }>)) {
+        if (!campo.resolvedFactId) continue;
+        const fato = estado.facts.find((f) => f.id === campo.resolvedFactId);
+        expect(fato?.evidence).toBe("EXPLICIT");
+      }
       expect(estado.timeline).toBeNull();
       for (const fato of estado.facts) expect(fato.patientCandidateId).toBeNull();
       expect(estado.exceptions.some((e) => e.kind === "UNLINKED_PATIENT")).toBe(true);

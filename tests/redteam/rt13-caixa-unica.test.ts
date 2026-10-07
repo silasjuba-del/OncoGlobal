@@ -10,10 +10,17 @@ const leitura = (tipo: Parameters<typeof converterEntradaLocal>[0]["tipo"], cont
   converterEntradaLocal({ id, tipo, conteudo, recebidoEm: ENTRADA_EM });
 
 describe("RT-13 · PDF/imagem: PENDENTE, nunca OCR nem pedido de foto", () => {
-  it.each(["PDF_DIGITAL", "PDF_ESCANEADO", "IMAGEM"] as const)("%s ⇒ PENDENTE 'não solicitar nova foto'", (tipo) => {
+  it.each(["PDF_ESCANEADO", "IMAGEM"] as const)("%s ⇒ PENDENTE 'não solicitar nova foto'", (tipo) => {
     const saida = leitura(tipo, new Uint8Array([0x25, 0x50, 0x44, 0x46]));
     expect(saida).toMatchObject({ status: "PENDENTE", motivo: expect.stringContaining("não solicitar nova foto") });
     expect(saida.documento.paginas).toEqual([]); // nada é extraído
+  });
+  // Tech lead (2026-10-07): PDF digital agora é convertido pelo caminho assíncrono (pdfjs-dist, D-W9-58);
+  // o caminho síncrono continua PENDENTE e nada é extraído nele.
+  it("PDF_DIGITAL no caminho síncrono ⇒ PENDENTE sem extração (conversão só no assíncrono)", () => {
+    const saida = leitura("PDF_DIGITAL", new Uint8Array([0x25, 0x50, 0x44, 0x46]));
+    expect(saida.status).toBe("PENDENTE");
+    expect(saida.documento.paginas).toEqual([]);
   });
 });
 
