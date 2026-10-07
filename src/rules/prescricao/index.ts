@@ -144,6 +144,9 @@ export const calcularDoseBasis = calcularDosePorBase;
 
 /* ───────────── RT-08e · fonte e idade do dado reutilizado (D-W9-24) ───────────── */
 
+/** D-W9-63 · peso para cálculo de dose vale por 30 dias; depois disso o dado é antigo (pedir peso atual). */
+export const PESO_VALIDADE_DIAS = 30;
+
 export interface DadoReutilizado { valor: number | null; unidade?: string; fonte: string | null; medidoEm: string | null }
 export interface IdadeDado {
   fonte: string | null;

@@ -53,3 +53,11 @@ describe("D-W9-61 · Mosteller", () => {
     if (!g.ok) throw new Error(); expect(g.itens[0]!.item.calculatedDose).toBe(220); expect(g.itens[0]!.aviso).toMatch(/2\.2/);
   });
 });
+
+import { PESO_VALIDADE_DIAS, idadeDoDado } from "../../src/rules/prescricao/index.js";
+describe("D-W9-63 · peso vale 30 dias", () => {
+  it("31 dias = antigo; 30 = válido", () => {
+    expect(PESO_VALIDADE_DIAS).toBe(30);
+    expect(idadeDoDado({ valor: 70, fonte: "consulta", medidoEm: "2030-01-01" }, "2030-02-01", PESO_VALIDADE_DIAS).idadeDias).toBe(31);
+  });
+});

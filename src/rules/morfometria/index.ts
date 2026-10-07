@@ -162,7 +162,7 @@ export const eixoCurtoMm = (l: { eixoCurtoMm: number | null }): number | null =>
 
 /**
  * RECIST 1.1 para linfonodo: < 10 mm normal (nunca alvo); 10 a < 15 mm patológico não-alvo; ≥ 15 mm elegível a alvo.
- * Cortes configuráveis (ruleset): defaults 10/15 [VERIFICAR com o ruleset recist ativo].
+ * Cortes configuráveis (ruleset): defaults 10/15 mm (eixo curto: ≥15 alvo; 10–15 não-alvo; <10 normal) — confirmado pelo Dr. Silas (D-W9-63).
  */
 export function avaliarLinfonodoAlvo(
   l: { codigo: string; eixoCurtoMm: number | null },
