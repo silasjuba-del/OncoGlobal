@@ -1,0 +1,429 @@
+{
+  "schemaVersion": "caixas-fontes.v1",
+  "catalogo": "corpus/glossario/caixas.v1.json",
+  "versao": "2026-10-07.1",
+  "fontes": [
+    {
+      "numero": 1,
+      "origens": [
+        "D-W9-16",
+        "D-W9-17",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.medico.nome"
+    },
+    {
+      "numero": 2,
+      "origens": [
+        "D-W9-16",
+        "D-W9-17",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.medico.crm"
+    },
+    {
+      "numero": 3,
+      "origens": [
+        "D-W9-16",
+        "D-W9-17",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.medico.rqe"
+    },
+    {
+      "numero": 4,
+      "origens": [
+        "D-W9-16",
+        "D-W9-17",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.medico.telefone"
+    },
+    {
+      "numero": 5,
+      "origens": [
+        "D-W9-16",
+        "D-W9-17",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.medico.cns"
+    },
+    {
+      "numero": 6,
+      "origens": [
+        "D-W5-03",
+        "D-W9-10",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.instituicao.hospital"
+    },
+    {
+      "numero": 7,
+      "origens": [
+        "D-W5-03",
+        "D-W9-10",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.instituicao.cnes"
+    },
+    {
+      "numero": 8,
+      "origens": [
+        "D-W5-04",
+        "D-W9-16",
+        "D-W9-17",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.preferencias.tema"
+    },
+    {
+      "numero": 9,
+      "origens": [
+        "D-W5-04",
+        "D-W9-16",
+        "D-W9-17",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.preferencias.layoutPersonalizado"
+    },
+    {
+      "numero": 10,
+      "origens": [
+        "D-W5-04",
+        "D-W9-16",
+        "D-W9-17",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.preferencias.impressora"
+    },
+    {
+      "numero": 11,
+      "origens": [
+        "D-W5-04",
+        "D-W9-16",
+        "D-W9-17",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.preferencias.sincronizarTelefone"
+    },
+    {
+      "numero": 12,
+      "origens": [
+        "D-W9-16",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.conexoes.sites"
+    },
+    {
+      "numero": 13,
+      "origens": [
+        "D-W9-16",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.conexoes.redeImpressora"
+    },
+    {
+      "numero": 14,
+      "origens": [
+        "D-W9-16",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.conexoes.skills"
+    },
+    {
+      "numero": 15,
+      "origens": [
+        "D-W9-16",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.conexoes.plugins"
+    },
+    {
+      "numero": 16,
+      "origens": [
+        "D-W9-16",
+        "docs/DECISOES.md"
+      ],
+      "chave": "config.conexoes.mcp"
+    },
+    {
+      "numero": 101,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.nomeEstabelecimento"
+    },
+    {
+      "numero": 102,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.cnesSolicitante"
+    },
+    {
+      "numero": 103,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.numeroProntuario"
+    },
+    {
+      "numero": 104,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.pacienteCns"
+    },
+    {
+      "numero": 105,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.pacienteNome"
+    },
+    {
+      "numero": 106,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.pacienteNascimento"
+    },
+    {
+      "numero": 107,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.pacienteSexo"
+    },
+    {
+      "numero": 108,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.racaCor"
+    },
+    {
+      "numero": 109,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.etnia"
+    },
+    {
+      "numero": 110,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.nomeMae"
+    },
+    {
+      "numero": 111,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.telefoneContato"
+    },
+    {
+      "numero": 112,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.nomeResponsavel"
+    },
+    {
+      "numero": 113,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.endereco"
+    },
+    {
+      "numero": 114,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.municipioResidencia"
+    },
+    {
+      "numero": 115,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.codIbgeMunicipio"
+    },
+    {
+      "numero": 116,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.uf"
+    },
+    {
+      "numero": 117,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.cep"
+    },
+    {
+      "numero": 118,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.procedimentoPrincipal"
+    },
+    {
+      "numero": 119,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.quantidadePrincipal"
+    },
+    {
+      "numero": 120,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.descricaoDiagnostico"
+    },
+    {
+      "numero": 121,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.cidPrincipal"
+    },
+    {
+      "numero": 122,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.cidSecundario"
+    },
+    {
+      "numero": 123,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.cidCausasAssociadas"
+    },
+    {
+      "numero": 124,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.justificativa"
+    },
+    {
+      "numero": 125,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.observacoes"
+    },
+    {
+      "numero": 126,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.solicitanteNome"
+    },
+    {
+      "numero": 127,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.solicitanteCns"
+    },
+    {
+      "numero": 128,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.dataSolicitacao"
+    },
+    {
+      "numero": 129,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.finalidadeApac"
+    },
+    {
+      "numero": 130,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.modalidade"
+    },
+    {
+      "numero": 131,
+      "origens": [
+        "src/apac/antiglosa.ts",
+        "src/apac/laudo.ts",
+        "src/apac/campos.ts"
+      ],
+      "chave": "apac.procedimentosSecundarios"
+    }
+  ]
+}

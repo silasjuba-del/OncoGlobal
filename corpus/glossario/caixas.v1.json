@@ -1,0 +1,570 @@
+{
+  "schemaVersion": "caixas.v1",
+  "versao": "2026-10-07.1",
+  "caixas": [
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.medico.nome",
+      "nome": "Nome do médico",
+      "tipo": "TEXTO",
+      "ondeAparece": [
+        "cabeçalho institucional",
+        "documentos médicos"
+      ],
+      "numero": 1,
+      "significado": "Nome profissional do médico"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.medico.crm",
+      "nome": "CRM do médico",
+      "tipo": "TEXTO",
+      "ondeAparece": [
+        "cabeçalho institucional",
+        "documentos médicos"
+      ],
+      "numero": 2,
+      "significado": "Registro profissional do médico"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.medico.rqe",
+      "nome": "RQE do médico",
+      "tipo": "TEXTO",
+      "ondeAparece": [
+        "cabeçalho institucional",
+        "documentos médicos"
+      ],
+      "numero": 3,
+      "significado": "Registro de qualificação de especialista"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.medico.telefone",
+      "nome": "Telefone do médico",
+      "tipo": "TEXTO",
+      "ondeAparece": [
+        "configurações",
+        "preferências de contato"
+      ],
+      "numero": 4,
+      "significado": "Telefone configurado no perfil médico"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.medico.cns",
+      "nome": "CNS do médico",
+      "tipo": "TEXTO",
+      "ondeAparece": [
+        "configurações",
+        "documentos médicos quando aplicável"
+      ],
+      "numero": 5,
+      "significado": "Cartão Nacional de Saúde do médico"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.instituicao.hospital",
+      "nome": "Hospital/instituição",
+      "tipo": "TEXTO",
+      "ondeAparece": [
+        "cabeçalho institucional",
+        "documentos médicos"
+      ],
+      "numero": 6,
+      "significado": "Nome configurável da instituição"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.instituicao.cnes",
+      "nome": "CNES da instituição",
+      "tipo": "TEXTO",
+      "ondeAparece": [
+        "cabeçalho institucional",
+        "documentos médicos"
+      ],
+      "numero": 7,
+      "significado": "Cadastro Nacional de Estabelecimentos de Saúde"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.preferencias.tema",
+      "nome": "Tema da interface",
+      "tipo": "TEXTO",
+      "ondeAparece": [
+        "interface",
+        "configurações"
+      ],
+      "numero": 8,
+      "significado": "Preferência de apresentação da interface"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.preferencias.layoutPersonalizado",
+      "nome": "Layout personalizado",
+      "tipo": "TEXTO",
+      "ondeAparece": [
+        "interface",
+        "configurações"
+      ],
+      "numero": 9,
+      "significado": "Preferência de layout personalizado"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.preferencias.impressora",
+      "nome": "Impressora preferida",
+      "tipo": "TEXTO",
+      "ondeAparece": [
+        "impressão",
+        "configurações"
+      ],
+      "numero": 10,
+      "significado": "Nome da impressora instalada selecionada pelo médico"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.preferencias.sincronizarTelefone",
+      "nome": "Sincronizar telefone",
+      "tipo": "BOOLEANO",
+      "ondeAparece": [
+        "configurações",
+        "preferências de contato"
+      ],
+      "numero": 11,
+      "significado": "Preferência de sincronização de telefone"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.conexoes.sites",
+      "nome": "Sites externos",
+      "tipo": "TEXTO",
+      "ondeAparece": [
+        "configurações",
+        "conexões"
+      ],
+      "numero": 12,
+      "significado": "Sites externos configurados para acesso"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.conexoes.redeImpressora",
+      "nome": "Rede da impressora",
+      "tipo": "TEXTO",
+      "ondeAparece": [
+        "impressão",
+        "configurações"
+      ],
+      "numero": 13,
+      "significado": "Identificação da rede/Wi-Fi da impressora instalada"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.conexoes.skills",
+      "nome": "Skills",
+      "tipo": "LISTA",
+      "ondeAparece": [
+        "configurações",
+        "conexões"
+      ],
+      "numero": 14,
+      "significado": "Lista de skills configuradas"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.conexoes.plugins",
+      "nome": "Plugins",
+      "tipo": "LISTA",
+      "ondeAparece": [
+        "configurações",
+        "conexões"
+      ],
+      "numero": 15,
+      "significado": "Lista de plugins configurados"
+    },
+    {
+      "editavelPor": "MEDICO",
+      "chave": "config.conexoes.mcp",
+      "nome": "MCP",
+      "tipo": "LISTA",
+      "ondeAparece": [
+        "configurações",
+        "conexões"
+      ],
+      "numero": 16,
+      "significado": "Lista de servidores/conexões MCP configurados"
+    },
+    {
+      "numero": 101,
+      "chave": "apac.nomeEstabelecimento",
+      "nome": "Nome do estabelecimento de saúde solicitante",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 102,
+      "chave": "apac.cnesSolicitante",
+      "nome": "CNES do estabelecimento solicitante",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 103,
+      "chave": "apac.numeroProntuario",
+      "nome": "Número de prontuário",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 104,
+      "chave": "apac.pacienteCns",
+      "nome": "CNS do paciente",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 105,
+      "chave": "apac.pacienteNome",
+      "nome": "Nome do paciente",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 106,
+      "chave": "apac.pacienteNascimento",
+      "nome": "Data de nascimento do paciente",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 107,
+      "chave": "apac.pacienteSexo",
+      "nome": "Sexo do paciente",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 108,
+      "chave": "apac.racaCor",
+      "nome": "Raça/cor",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 109,
+      "chave": "apac.etnia",
+      "nome": "Etnia",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 110,
+      "chave": "apac.nomeMae",
+      "nome": "Nome da mãe",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 111,
+      "chave": "apac.telefoneContato",
+      "nome": "Telefone de contato",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 112,
+      "chave": "apac.nomeResponsavel",
+      "nome": "Nome do responsável",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 113,
+      "chave": "apac.endereco",
+      "nome": "Endereço",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 114,
+      "chave": "apac.municipioResidencia",
+      "nome": "Município de residência",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 115,
+      "chave": "apac.codIbgeMunicipio",
+      "nome": "Código IBGE do município",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 116,
+      "chave": "apac.uf",
+      "nome": "Unidade federativa",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 117,
+      "chave": "apac.cep",
+      "nome": "CEP",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 118,
+      "chave": "apac.procedimentoPrincipal",
+      "nome": "Procedimento principal",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 119,
+      "chave": "apac.quantidadePrincipal",
+      "nome": "Quantidade do procedimento principal",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 120,
+      "chave": "apac.descricaoDiagnostico",
+      "nome": "Descrição do diagnóstico",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 121,
+      "chave": "apac.cidPrincipal",
+      "nome": "CID-10 principal",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 122,
+      "chave": "apac.cidSecundario",
+      "nome": "CID-10 secundário",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 123,
+      "chave": "apac.cidCausasAssociadas",
+      "nome": "CID-10 de causas associadas",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 124,
+      "chave": "apac.justificativa",
+      "nome": "Justificativa dos procedimentos solicitados",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 125,
+      "chave": "apac.observacoes",
+      "nome": "Observações da solicitação",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 126,
+      "chave": "apac.solicitanteNome",
+      "nome": "Nome do profissional solicitante",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 127,
+      "chave": "apac.solicitanteCns",
+      "nome": "CNS do profissional solicitante",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 128,
+      "chave": "apac.dataSolicitacao",
+      "nome": "Data da solicitação",
+      "significado": "Campo da solicitação APAC lido pela antiglosa e/ou renderizado no laudo.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 129,
+      "chave": "apac.finalidadeApac",
+      "nome": "Finalidade APAC escolhida pelo médico",
+      "significado": "Finalidade escolhida pelo médico e validada pela antiglosa; não é deduzida.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 130,
+      "chave": "apac.modalidade",
+      "nome": "Modalidade QT/RT",
+      "significado": "Modalidade de tratamento usada para validar finalidade QT/RT.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "TEXTO",
+      "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 131,
+      "chave": "apac.procedimentosSecundarios",
+      "nome": "Procedimentos secundários",
+      "significado": "Lista de procedimentos secundários da solicitação APAC.",
+      "ondeAparece": [
+        "solicitação do laudo APAC",
+        "antiglosa"
+      ],
+      "tipo": "LISTA",
+      "editavelPor": "MEDICO"
+    }
+  ]
+}
