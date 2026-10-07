@@ -48,3 +48,21 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
   - P3: em espera — "aguarde, sem perguntas, apenas analise os textos". Não fatiar ainda.
   - P4: DECIDIDO — primeiros mapas de órgão: próstata + mama + pulmão.
 - Regra de trabalho (Dr. Silas): agora é só analisar os textos recebidos. Sem perguntas e sem fatias até ele liberar.
+
+## PLN-003 · 2026-10-07 · Freeze v1.1: conhecimento tumoral + emergências + loop médico-IA
+- Origem: Dr. Silas (texto colado; refs ascopubs JCO-25-02822 CPNPC, ASCO/IDSA neutropenia febril, guideline hipercalcemia, NICE MSCC)
+- Liga a: PLN-002 (v1.0 permanece íntegro), D-W9-20 (código leve, conhecimento na RAG versionada), D-W9-15/66 (LLM via gateway), PLN-001 (voz 400, ragGRAFO sem conector)
+- Ideia (resumo): 3 camadas separadas — A. KNOWLEDGE_TUMOR (órgão→histologia→molecular→estágio→**setting**→**linha**→paciente→opções; tabela tumoral = seed da KB, não regra); B. EMERGENCY_ENGINE transversal (14 emergências + OUTROS; tumor só se associa; contrato padrão→evidências presentes/ausentes→prioridade→kit; sem "%"; kit, não prescrição; KB de emergência versionada); C. CLINICAL_WORKFLOW (voz/dados→extração→contexto→detector→knowledge→UI→médico→drafts→médico assina/envia). Estadiamento como required/suggested/conditional/not_routine. Voz: congela contrato, não modelo; descrição abre cluster, ordem preenche draft. Desfecho → evento auditável → avaliação offline → nova versão; sem auto-learning. Envio final é ato explícito. 16 decisões congeladas.
+- O que o código tem hoje:
+  - D-W9-20 já diz "código leve, conhecimento na RAG versionada" → **coerente** com camadas A/B como KB versionada. Mas a KB tumoral estruturada não existe: só `src/kernel/extracao/dados/biomarcadoresRequeridos.ts` (CPNPC adeno IV + mama).
+  - Setting/linha: nenhum contrato em `src/contracts`/`src/kernel` (aparece só em telas do estúdio). Lacuna direta do TUMOR_FINGERPRINT.
+  - Emergências: **nenhuma biblioteca**. Neutropenia só em visual (`src/ui/oncochart/`); hipercalcemia, lise tumoral, MSCC: zero. `NaturezaAlerta` (`src/contracts/estados.ts:57`) é o gancho mais próximo.
+  - Confiança: `confianca` 0–1 em `src/contracts/base.ts:47` e `confidence` em `src/contracts/w10/extracao.ts:61` — já é de extração; falta trava de nomenclatura/UI para nunca virar "probabilidade diagnóstica" (decisão 7).
+  - Voz: `voice_command` existe no enum (`src/contracts/base.ts`) mas dá 400 (PLN-001); falta distinguir DESCRIÇÃO × ORDEM.
+  - Envio: gateway registra efeito (`src/kernel/gateway/gateway.ts`); conforme D-W9-15/66 nada sai sem passo explícito → **coerente** com decisão 14.
+  - Auto-learning: não existe no código → coerente com decisões 12–13; falta registrar o desfecho como evento auditável/dataset.
+- Lacuna: (a) schema TUMOR_KNOWLEDGE versionado (com setting, linha, staging required/suggested/conditional/not_routine); (b) biblioteca ONCO_EMERGENCY com contrato evidências presentes/ausentes + kit; (c) relação tumor↔sítio↔morfologia/função↔sintoma (não lista fechada); (d) intent de voz descrição × ordem; (e) evento de desfecho para avaliação offline; (f) trava "extraction_confidence ≠ probabilidade".
+- Conflito a vigiar: decisão "PRIORIDADE" no contrato de emergência × resposta do Dr. Silas em PLN-002/P2 (**médico define a prioridade**). Leitura compatível: o motor mostra o padrão e as evidências; o nível é marcado pelo médico. Não resolvido em silêncio — registrar quando ele liberar perguntas.
+- Sugestão do texto (schema da TUMOR_KNOWLEDGE antes de alimentar órgãos): anotada. Mapas iniciais decididos em PLN-002/P4 = próstata + mama + pulmão (o texto cita também cólon).
+- Decisão: PENDENTE — Dr. Silas pediu só análise, sem perguntas e sem fatias.
+- Próxima ação: aguardar texto do X/Y/Z e liberação. Dono: planejamento.
