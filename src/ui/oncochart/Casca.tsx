@@ -13,6 +13,7 @@ export function CascaOncoChart({
   pacienteNome,
   onBuscar,
   comandos,
+  lateral,
   children,
 }: {
   tela: TelaCasca;
@@ -20,6 +21,7 @@ export function CascaOncoChart({
   pacienteNome: string | null;
   onBuscar: () => void;
   comandos: ReactNode;
+  lateral?: ReactNode;
   children: ReactNode;
 }) {
   const [tema, setTema] = useState<TemaOnco>(lerTemaOnco);
@@ -43,7 +45,7 @@ export function CascaOncoChart({
           />
           <div className="oc-corpo">{children}</div>
         </main>
-        <PainelLateral />
+        <PainelLateral>{lateral}</PainelLateral>
       </div>
     </Palco>
   );

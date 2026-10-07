@@ -33,6 +33,51 @@ Os desenhos de cromo estão em `src/ui/oncochart/icones-cromo.tsx` até entrarem
 ### Fontes
 Geist e Geist Mono estão em `src/ui/oncochart/fontes/*.woff2`, com a OFL ao lado. Sem dependência npm e sem CDN.
 
-### Ainda não nesta fatia
-- Tema PERSONALIZAR (D-W9-16) entra na CURSOR-11.
-- O miolo do painel de 396 px entra nas fatias seguintes.
+## CURSOR-02
+
+### Contratos (`src/contracts/w10`)
+- Cartão Modelo 08 (convênio, matrícula, CNS, mãe, responsável, cidade, endereço, profissão, obs)
+- Diagnóstico/estadiamento versionado com `stageHistory` (hoje: tipos `PROVISORIO-W10` em `src/ui/oncochart/chart-visao.ts`)
+
+### Copy
+| Chave pedida | Texto em uso |
+|---|---|
+| `consulta.flash` | Consulta Flash |
+| `consulta.alergiaPendente` | Alergia PENDENTE |
+| `consulta.negaAlergias` | Nega alergias |
+| `cadastro.titulo` | Cartão de cadastro |
+
+### Fake / servidor
+- CNS sintético com DV inválido já entra nos identificadores da porta falsa
+- Alergia real de exemplo: `penicilina` no PR-VERMELHO
+
+## CURSOR-03
+
+### Porta / Fugu
+- Projeção longitudinal da timeline (lanes, barras, eventos, HOJE) — hoje `timelineSintetica` em `src/ui/oncochart/timeline-visao.ts` (`PROVISORIO-W10`)
+- `stageHistory` só leitura (nunca sobrescreve)
+
+### Copy
+| Chave pedida | Texto em uso |
+|---|---|
+| `timeline.titulo` | Linha do tempo oncológica |
+| `timeline.ver3d` | Ver em 3D |
+
+## CURSOR-04
+
+### Copy
+| Chave pedida | Texto em uso |
+|---|---|
+| `abas.visaoGeral` | Visão geral |
+| `abas.quimioterapia` | Quimioterapia |
+| `abas.dadosClinicos` | Dados clínicos |
+| `abas.evolucao` | Evolução |
+| `cards.protocolos` | Protocolos ativos |
+| `cards.documentos` | Documentos recentes |
+| `cards.estadiamento` | Estadiamento e avaliações |
+| `cards.rascunho` | Rascunho de evolução |
+| `cards.caixaUnica` | Soltar PDF/Word — caixa única |
+
+### Ainda aberto
+- Tema PERSONALIZAR (CURSOR-11)
+- Modal Jornada 3D (CURSOR-08), Flash/TNM (CURSOR-09), revisão da caixa única (CURSOR-05)

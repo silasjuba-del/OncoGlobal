@@ -416,3 +416,479 @@
     transition: none;
   }
 }
+
+/* ============ CURSOR-02 · PatientHeader + cartão Modelo 08 ============ */
+.oc-phead {
+  display: grid;
+  grid-template-columns: 72px 1fr minmax(280px, 540px) 104px;
+  gap: 14px;
+  align-items: stretch;
+  flex-shrink: 0;
+  margin-bottom: 10px;
+}
+
+.oc-p-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  padding: 3px;
+  background: conic-gradient(from 200deg, var(--accent), var(--amber), var(--accent));
+}
+
+.oc-p-avatar-in {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--surface-2);
+  display: grid;
+  place-items: center;
+  font-size: 23px;
+  font-weight: 600;
+  color: var(--accent);
+  border: 3px solid var(--bg);
+}
+
+.oc-p-meta { min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+.oc-p-nome-linha { display: flex; align-items: center; gap: 10px; }
+.oc-p-name {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.7px;
+  line-height: 1.05;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.oc-anag {
+  display: flex;
+  gap: 11px;
+  color: var(--muted);
+  font-size: 11.5px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.oc-mono { font-family: var(--mono); }
+.oc-muted { color: var(--muted); font-size: 11px; margin: 3px 0 0; }
+
+.oc-tags { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
+.oc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 7px;
+  font-size: 10.5px;
+  font-weight: 500;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--text);
+  white-space: nowrap;
+}
+.oc-chip-accent { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+.oc-chip-danger { background: var(--danger-soft); color: var(--danger); border-color: transparent; }
+.oc-chip-pendente { background: var(--surface-2); }
+.oc-chip-fonte { color: var(--faint); font-weight: 400; }
+
+.oc-dx {
+  border-radius: 18px;
+  background: radial-gradient(420px 160px at 100% 0%, var(--accent-soft), transparent 70%), var(--surface);
+  border: 1.5px solid color-mix(in oklch, var(--accent) 26%, var(--line));
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.oc-dx-h {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 13px;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in oklch, var(--accent) 7%, transparent);
+}
+
+.oc-dx-lb {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.oc-dx-c {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 12px 0;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.oc-dx-mid { flex: 1; min-width: 120px; }
+.oc-dx-title { margin: 0; font-size: 13.5px; font-weight: 600; letter-spacing: -0.2px; line-height: 1.25; }
+
+.oc-cid-big {
+  width: 66px;
+  height: 66px;
+  border-radius: 13px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.oc-c1 { font-size: 9px; font-weight: 700; letter-spacing: 1.4px; opacity: 0.75; }
+.oc-c2 { font-size: 19px; font-weight: 700; font-family: var(--mono); letter-spacing: -0.5px; }
+
+.oc-dx-stat {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 5px 8px;
+  background: var(--surface-2);
+  text-align: left;
+  min-width: 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  color: inherit;
+  cursor: pointer;
+}
+
+.oc-dx-stat.oc-eco { min-width: 96px; cursor: default; }
+.oc-dx-stat .oc-k,
+.oc-k { font-size: 9px; text-transform: uppercase; letter-spacing: 0.7px; color: var(--faint); font-weight: 600; }
+.oc-dx-stat .oc-v,
+.oc-v { font-size: 19px; font-weight: 700; font-family: var(--mono); letter-spacing: -0.7px; line-height: 1.1; }
+
+.oc-dx-ev {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 12px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  flex-wrap: wrap;
+}
+
+.oc-actions-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: center;
+}
+
+.oc-btn-primary {
+  height: 34px;
+  padding: 0 13px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border: 0;
+  font-weight: 500;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.oc-side {
+  padding: 12px 11px;
+  overflow: auto;
+}
+
+.oc-cartao-cadastro h3 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.oc-cartao-cadastro dl { margin: 0; }
+.oc-cartao-linha {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.oc-cartao-linha dt { color: var(--faint); font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+.oc-cartao-linha dd { margin: 0; }
+.oc-cartao-linha dd[data-pendente="sim"] { color: var(--muted); }
+
+.oc-flash-status {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ============ CURSOR-03 · Timeline 2D ============ */
+.oc-tl {
+  margin-top: 10px;
+  padding: 9px 13px 8px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.oc-tl-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.oc-tl-head h3 {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.oc-tl-3d {
+  height: 22px;
+  border-radius: 7px;
+  padding: 0 8px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border: 0;
+  font-size: 10.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.oc-tl-legend {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+  font-size: 10.5px;
+  color: var(--muted);
+}
+
+.oc-tl-legend button {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.oc-tl-body {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  position: relative;
+}
+
+.oc-tl-lane-l {
+  height: 21px;
+  display: flex;
+  align-items: center;
+  font-size: 9.5px;
+  color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.oc-tl-track { position: relative; min-height: 100px; }
+.oc-tl-row {
+  height: 21px;
+  position: relative;
+  border-bottom: 1px dashed var(--line);
+}
+.oc-tl-row:last-of-type { border-bottom: 0; }
+
+.oc-tl-bar {
+  position: absolute;
+  top: 5.5px;
+  height: 10px;
+  border-radius: 5px;
+  background: color-mix(in oklch, var(--accent) 22%, transparent);
+  overflow: hidden;
+}
+.oc-tl-bar span {
+  position: absolute;
+  left: 6px;
+  top: -1px;
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+  line-height: 13px;
+}
+.oc-tl-bar.oc-tl-future {
+  background: transparent;
+  border: 1.5px dashed var(--accent);
+}
+
+.oc-tl-ev {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: var(--info);
+}
+.oc-tl-ev.oc-tl-future { color: var(--muted); }
+.oc-tl-pt {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+  box-shadow: 0 0 0 1.5px currentColor;
+  background: currentColor;
+  display: block;
+}
+.oc-tl-ev.oc-tl-future .oc-tl-pt { background: var(--surface); }
+.oc-tl-tip {
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 11px;
+  white-space: nowrap;
+  z-index: 5;
+  box-shadow: var(--shadow);
+}
+.oc-tl-ev:hover .oc-tl-tip { display: block; }
+.oc-tl-thumb .oc-tl-pt {
+  width: 34px;
+  height: 19px;
+  border-radius: 5px;
+  background: #000;
+  border-color: var(--info);
+}
+
+.oc-tl-today {
+  position: absolute;
+  top: -4px;
+  bottom: 14px;
+  width: 0;
+  border-left: 1.5px solid var(--accent);
+  z-index: 3;
+  pointer-events: none;
+}
+.oc-tl-today::before {
+  content: "HOJE";
+  position: absolute;
+  top: -11px;
+  left: -15px;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  color: var(--accent-ink);
+  background: var(--accent);
+  padding: 0 4px;
+  border-radius: 3px;
+  line-height: 12px;
+}
+
+.oc-tl-axis {
+  position: relative;
+  height: 14px;
+  font-size: 10px;
+  color: var(--faint);
+  font-family: var(--mono);
+  margin-top: 2px;
+}
+.oc-tl-axis span {
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.oc-tl-hist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ============ CURSOR-04 · Abas e cards ============ */
+.oc-abas { margin-top: 12px; min-height: 0; display: flex; flex-direction: column; }
+.oc-tabs {
+  display: flex;
+  gap: 2px;
+  position: relative;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.oc-tab {
+  height: 34px;
+  padding: 0 12px;
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+.oc-tab.on { color: var(--text); }
+.oc-tab-ind {
+  position: absolute;
+  bottom: -1px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: left 0.35s var(--spring), width 0.35s var(--spring);
+}
+@media (prefers-reduced-motion: reduce) {
+  .oc-tab-ind { transition: none; }
+}
+.oc-tab-content { padding-top: 10px; min-height: 0; overflow: auto; }
+.oc-cards-geral {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.oc-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  min-height: 0;
+}
+.oc-card-h {
+  display: flex;
+  align-items: center;
+  padding: 12px 14px 8px;
+}
+.oc-card-h h3 { margin: 0; font-size: 13px; font-weight: 600; }
+.oc-card-b { padding: 0 14px 12px; font-size: 12.5px; }
+.oc-card-b p { margin: 0 0 6px; }
+.oc-card-b textarea {
+  width: 100%;
+  margin-top: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: inherit;
+  padding: 8px;
+}
+.oc-drop {
+  border: 1.5px dashed var(--line-strong);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  background: var(--surface-2);
+  margin-bottom: 8px;
+}
+.oc-drop input[type="file"] { display: block; margin: 8px auto 0; font-size: 11px; }
+.oc-aba-placeholder {
+  padding: 18px;
+  color: var(--muted);
+  font-size: 12.5px;
+}

@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { criarChaves } from "./api/chaves.js";
 import { criarPortaFalsa } from "./api/fake.js";
 import type { AgendaVisao } from "./api/porta.js";
+import { CartaoCadastro } from "./oncochart/CartaoCadastro.js";
 import { CascaOncoChart, type TelaCasca } from "./oncochart/Casca.js";
+import type { CabecalhoChart } from "./oncochart/chart-visao.js";
 import { Agenda } from "./telas/Agenda.js";
 import { BarraComando } from "./telas/BarraComando.js";
 import { TelaConsulta } from "./telas/TelaConsulta.js";
@@ -23,6 +25,8 @@ export function App() {
   const [patientId, setPatientId] = useState<string | null>(null);
   const [agenda, setAgenda] = useState<AgendaVisao | null>(null);
   const [sinalBusca, setSinalBusca] = useState(0);
+  const [chart, setChart] = useState<CabecalhoChart | null>(null);
+  const onChart = useCallback((proximo: CabecalhoChart | null) => setChart(proximo), []);
 
   useEffect(() => {
     void porta.agendaDoDia().then(setAgenda);
@@ -33,7 +37,10 @@ export function App() {
     setTela("consulta");
   }
 
-  const pacienteNome = agenda?.itens.find((item) => item.patientId === patientId)?.nome ?? null;
+  const pacienteNome =
+    chart?.pacienteNome ??
+    agenda?.itens.find((item) => item.patientId === patientId)?.nome ??
+    null;
 
   return (
     <CascaOncoChart
@@ -41,6 +48,7 @@ export function App() {
       onTela={setTela}
       pacienteNome={tela === "consulta" ? pacienteNome : null}
       onBuscar={() => setSinalBusca((valor) => valor + 1)}
+      lateral={tela === "consulta" && chart ? <CartaoCadastro chart={chart} /> : null}
       comandos={
         agenda ? (
           <BarraComando
@@ -68,7 +76,7 @@ export function App() {
       {!agenda ? <p>carregando agenda</p> : null}
       {tela === "agenda" && agenda ? <Agenda visao={agenda} onAbrir={abrir} /> : null}
       {tela === "consulta" && patientId ? (
-        <TelaConsulta patientId={patientId} porta={porta} chaves={chaves} />
+        <TelaConsulta patientId={patientId} porta={porta} chaves={chaves} onChart={onChart} />
       ) : null}
       {tela === "consulta" && !patientId ? (
         <section aria-label="Consulta">

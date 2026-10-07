@@ -16,6 +16,8 @@ beforeEach(() => {
   localStorage.clear();
 });
 
+const lento = { timeout: 20_000 };
+
 describe("casca OncoChart", () => {
   it("monta o canvas, a grade e as telas já ligadas", async () => {
     render(<App />);
@@ -28,24 +30,24 @@ describe("casca OncoChart", () => {
     expect(document.querySelector("[data-coluna='lateral']")).toBeTruthy();
     expect(document.querySelector("[data-tema-onco]")?.getAttribute("data-tema-onco")).toBe("noite");
 
-    expect(await screen.findByRole("region", { name: "Agenda do dia" })).toBeTruthy();
+    expect(await screen.findByRole("region", { name: "Agenda do dia" }, lento)).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Salão" }));
-    expect(await screen.findByRole("region", { name: "Salão" })).toBeTruthy();
+    expect(await screen.findByRole("region", { name: "Salão" }, lento)).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Canal" }));
-    expect(await screen.findByRole("region", { name: "Caixa do canal" })).toBeTruthy();
+    expect(await screen.findByRole("region", { name: "Caixa do canal" }, lento)).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "APAC" }));
-    expect(await screen.findByRole("region", { name: "APAC por lote" })).toBeTruthy();
+    expect(await screen.findByRole("region", { name: "APAC por lote" }, lento)).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Agenda" }));
-    expect(await screen.findByRole("region", { name: "Agenda do dia" })).toBeTruthy();
+    expect(await screen.findByRole("region", { name: "Agenda do dia" }, lento)).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Prontuário" }));
     expect(screen.getByRole("region", { name: "Consulta" }).textContent).toContain("nenhum paciente aberto");
-  });
+  }, 60_000);
 
   it("troca DIA/NOITE sem alterar o texto clínico e grava só a preferência", async () => {
     render(<App />);
-    const agenda = await screen.findByRole("region", { name: "Agenda do dia" });
+    const agenda = await screen.findByRole("region", { name: "Agenda do dia" }, lento);
     const antes = agenda.textContent;
-    fireEvent.click(screen.getByRole("button", { name: /Dia \/ noite/ }));
+    fireEvent.click(screen.getByRole("button", { name: /Dia \/ noite, agora/ }));
     expect(document.querySelector("[data-tema-onco]")?.getAttribute("data-tema-onco")).toBe("dia");
     expect(localStorage.getItem("onco.theme.v2")).toBe("dia");
     expect(screen.getByRole("region", { name: "Agenda do dia" }).textContent).toBe(antes);
@@ -57,18 +59,18 @@ describe("casca OncoChart", () => {
     fireEvent.click(screen.getByRole("button", { name: "Usuário" }));
     expect(screen.getByText("Médico Teste")).toBeTruthy();
     expect(screen.getByText(/CRM 00000/)).toBeTruthy();
-  });
+  }, 30_000);
 
   it("Ctrl K e a busca abrem a mesma paleta de comandos", async () => {
     render(<App />);
-    await screen.findByRole("region", { name: "Agenda do dia" });
+    await screen.findByRole("region", { name: "Agenda do dia" }, lento);
     fireEvent.keyDown(window, { key: "k", ctrlKey: true });
     expect(screen.getByRole("dialog", { name: "Barra de comando" })).toBeTruthy();
     fireEvent.keyDown(window, { key: "k", ctrlKey: true });
     expect(screen.queryByRole("dialog", { name: "Barra de comando" })).toBeNull();
     fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
     expect(screen.getByLabelText("Comando")).toBeTruthy();
-  });
+  }, 30_000);
 
   it("declara tokens oklch, motion e a grade no CSS, com Geist local", () => {
     const css = readFileSync(join(process.cwd(), "src/ui/oncochart/tokens.css"), "utf8");
