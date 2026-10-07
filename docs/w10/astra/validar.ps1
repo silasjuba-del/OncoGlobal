@@ -35,20 +35,22 @@ try {
       $env:NO_COLOR='1'
       $env:FORCE_COLOR='0'
       if (-not $SoTestes) {
-        & '.\node_modules\.bin\tsc.cmd' --noEmit
+        & '.\node_modules\.bin\tsc.cmd' --noEmit 2>&1 | Tee-Object -FilePath ($logPath + '.typecheck.txt')
         Write-Output "TYPECHECK_EXIT=$LASTEXITCODE"
         if ($LASTEXITCODE -ne 0) { throw 'Typecheck falhou.' }
-        & node '.\scripts\check-boundaries.mjs'
+        & node '.\scripts\check-boundaries.mjs' 2>&1 | Tee-Object -FilePath ($logPath + '.boundaries.txt')
         Write-Output "BOUNDARIES_EXIT=$LASTEXITCODE"
         if ($LASTEXITCODE -ne 0) { throw 'Boundaries falhou.' }
-        & node '.\scripts\validate-corpus.mjs'
+        & node '.\scripts\validate-corpus.mjs' 2>&1 | Tee-Object -FilePath ($logPath + '.corpus.txt')
         Write-Output "CORPUS_EXIT=$LASTEXITCODE"
         if ($LASTEXITCODE -ne 0) { throw 'Corpus falhou.' }
       }
-      $vitestArgs = @('run') + $Testes + @('--no-file-parallelism')
+      # Process isolation avoids a timed-out HTTP worker retaining handles in the runner.
+      # Fixed single worker and bounded I/O timeout support this low-memory workstation.
+      $vitestArgs = @('run') + $Testes + @('--no-file-parallelism','--pool=forks','--maxWorkers=1','--testTimeout=30000','--hookTimeout=30000')
       if ($ConfigVitest) { $vitestArgs += @('--config',$ConfigVitest) }
       Write-Output ('VITEST_ARGUMENTS=' + ($vitestArgs -join ' '))
-      & '.\node_modules\.bin\vitest.cmd' @vitestArgs
+      & '.\node_modules\.bin\vitest.cmd' @vitestArgs 2>&1 | Tee-Object -FilePath ($logPath + '.vitest.txt')
       $result = $LASTEXITCODE
       Write-Output "VITEST_EXIT=$result"
     } finally { Stop-Transcript | Out-Null }
