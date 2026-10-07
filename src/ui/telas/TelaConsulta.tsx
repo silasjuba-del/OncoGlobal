@@ -15,7 +15,10 @@ import {
 } from "../oncochart/caixa-revisao-visao.js";
 import { CardsVisaoGeral } from "../oncochart/CardsVisaoGeral.js";
 import { montarCabecalhoChart, type CabecalhoChart } from "../oncochart/chart-visao.js";
+import { Dock, type AcaoDock } from "../oncochart/Dock.js";
 import { ImageViewerOncoAssist } from "../oncochart/ImageViewerOncoAssist.js";
+import { Jornada3D } from "../oncochart/Jornada3D.js";
+import { OverlayAtivo, type OverlayId } from "../oncochart/Overlays.js";
 import { PatientHeader } from "../oncochart/PatientHeader.js";
 import { Timeline2D } from "../oncochart/Timeline2D.js";
 import { timelineSintetica } from "../oncochart/timeline-visao.js";
@@ -45,14 +48,14 @@ export function TelaConsulta({
   const [loteId, setLoteId] = useState<string | null>(null);
   const [sessaoExpirada, setSessaoExpirada] = useState(false);
   const [impressaoArmada, setImpressaoArmada] = useState(false);
-  const [flash, setFlash] = useState<string | null>(null);
-  const [tnmMsg, setTnmMsg] = useState<string | null>(null);
-  const [jornada3d, setJornada3d] = useState<string | null>(null);
+  const [jornada3d, setJornada3d] = useState(false);
   const [aba, setAba] = useState<AbaChart>("geral");
   const [revisao, setRevisao] = useState<RevisaoCaixaUnica | null>(null);
   const [acaoRevisao, setAcaoRevisao] = useState<string | null>(null);
   const [fonteAberta, setFonteAberta] = useState<string | null>(null);
   const [viewer, setViewer] = useState(false);
+  const [overlay, setOverlay] = useState<OverlayId>(null);
+  const [mic, setMic] = useState(false);
   const impressao = useRef<AcaoIntent | null>(null);
   const impressaoEnviada = useRef(false);
   const chaveValidar = chaves.novaChaveIntencao(`validar:${patientId}`);
@@ -133,25 +136,55 @@ export function TelaConsulta({
   const cabecalho = { ...visao.cabecalho, loteSelecionadoId: loteId };
   const temHidronefrose = /hidronefrose/i.test(revisao?.origemRotulo ?? "");
 
+  function onDock(acao: AcaoDock) {
+    if (acao === "mic") {
+      setMic((v) => !v);
+      return;
+    }
+    if (acao === "jornada") {
+      setJornada3d(true);
+      return;
+    }
+    if (acao === "whatsapp") {
+      setOverlay("whatsapp");
+      return;
+    }
+    if (acao === "pack") {
+      setOverlay("pack");
+      return;
+    }
+    if (acao === "trials") {
+      setOverlay("trials");
+      return;
+    }
+    if (acao === "ciclo") {
+      setOverlay("liberacao");
+      return;
+    }
+    if (acao === "exame") {
+      setOverlay("interacoes");
+      return;
+    }
+    if (acao === "novo") {
+      setAba("evo");
+      setOverlay("paleta");
+    }
+  }
+
   return (
     <main aria-label="Consulta pronta" className="tela-consulta pilha" style={{ position: "relative" }}>
       {sessaoExpirada ? <p>sessão expirada — entre de novo</p> : null}
-      {flash ? <p className="oc-flash-status" role="status">{flash}</p> : null}
-      {tnmMsg ? <p className="oc-flash-status" role="status">{tnmMsg}</p> : null}
-      {jornada3d ? <p className="oc-flash-status" role="status">{jornada3d}</p> : null}
       {acaoRevisao ? <p className="oc-flash-status" role="status">{acaoRevisao}</p> : null}
       {fonteAberta ? <p className="oc-flash-status" role="status">fonte: {fonteAberta}</p> : null}
       <PatientHeader
         chart={chart}
         semaforo={cabecalho.semaforo}
-        onFlash={() => setFlash("Consulta Flash — overlay na CURSOR-09")}
-        onEditarTnm={() =>
-          setTnmMsg("Edição de TNM versionada — overlay na CURSOR-09 (histórico nunca sobrescreve)")
-        }
+        onFlash={() => setOverlay("flash")}
+        onEditarTnm={() => setOverlay("dx")}
       />
       <Timeline2D
         visao={timelineSintetica(patientId, visao.hoje)}
-        onVer3d={() => setJornada3d("Jornada 3D — modal na CURSOR-08")}
+        onVer3d={() => setJornada3d(true)}
       />
       <button type="button" className="oc-btn-primary" style={{ alignSelf: "flex-start" }} onClick={() => setViewer(true)}>
         Abrir TC
@@ -303,6 +336,22 @@ export function TelaConsulta({
           onTrecho={(t) => setFonteAberta(t)}
         />
       ) : null}
+      {jornada3d ? (
+        <Jornada3D
+          visao={timelineSintetica(patientId, visao.hoje)}
+          onFechar={() => setJornada3d(false)}
+          onAbrirTc={() => {
+            setJornada3d(false);
+            setViewer(true);
+          }}
+        />
+      ) : null}
+      <Dock gravando={mic} onAcao={onDock} />
+      <OverlayAtivo
+        id={overlay}
+        onFechar={() => setOverlay(null)}
+        onAbrirPaleta={() => setOverlay("interacoes")}
+      />
     </main>
   );
 }

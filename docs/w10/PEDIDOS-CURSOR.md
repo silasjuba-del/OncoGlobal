@@ -80,7 +80,6 @@ Geist e Geist Mono estão em `src/ui/oncochart/fontes/*.woff2`, com a OFL ao lad
 
 ### Ainda aberto
 - Tema PERSONALIZAR (CURSOR-11)
-- Modal Jornada 3D (CURSOR-08), Flash/TNM (CURSOR-09)
 
 ## CURSOR-05
 
@@ -126,3 +125,40 @@ Geist e Geist Mono estão em `src/ui/oncochart/fontes/*.woff2`, com a OFL ao lad
 | `viewer.semConduta` | Narra o laudo e achados já extraídos — sem conduta. |
 | `viewer.morfoDraft` | DRAFT / NEEDS_REVIEW — morfometria sintética; não alimenta RECIST |
 | `viewer.voz` | Voz local (opcional) |
+
+## CURSOR-08
+
+### Porta / Fugu
+- Paradas/narração da Jornada 3D a partir da projeção longitudinal (hoje `montarParadasJornada` + timeline sintética)
+- Lesões RECIST e graus CTCAE confirmados via contrato (hoje `chart3d-visao.ts`)
+
+### Copy
+| Chave pedida | Texto em uso |
+|---|---|
+| `jornada.titulo` | Jornada oncológica · 3D |
+| `jornada.semConduta` | Narração assistiva — sem conduta. |
+| `jornada.tour` | Tour guiado |
+| `chart3d.recist` | RECIST 1.1 · lesões-alvo |
+| `chart3d.ctcae` | CTCAE · skyline de toxicidade |
+| `chart3d.limiarRp` | −30% limiar RP |
+
+## CURSOR-09
+
+### Canal / servidor
+- Vínculo + consentimento real para WhatsApp (hoje UI mostra `CANAL_EXTERNO_NAO_HABILITADO`)
+- Portões de liberação QT com motivos do salão/bula (hoje sintéticos)
+
+### Copy
+| Chave pedida | Texto em uso |
+|---|---|
+| `dock.mic` | Mic |
+| `dock.novo` | Novo registro |
+| `dock.exame` | Solicitar exame |
+| `dock.ciclo` | Ciclo QT |
+| `dock.pack` | Tumor-pack |
+| `dock.trials` | Trials |
+| `dock.jornada` | Jornada 3D |
+| `dock.whatsapp` | Encerrar · WhatsApp |
+| `ov.interacoes` | Interações |
+| `ov.liberacao` | Liberação QT |
+| `ov.flash` | Consulta Flash |

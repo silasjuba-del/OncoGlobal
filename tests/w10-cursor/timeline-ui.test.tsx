@@ -22,6 +22,6 @@ describe("CURSOR-03 Timeline 2D", () => {
     expect(within(tl).getByText(/Ciclo sintético/)).toBeTruthy();
     expect(within(tl).getByRole("region", { name: "Histórico de estádio" }).textContent).toContain("cT2N1M0");
     fireEvent.click(within(tl).getByRole("button", { name: "Ver em 3D" }));
-    expect(screen.getByText(/CURSOR-08/)).toBeTruthy();
+    expect(screen.getByRole("dialog", { name: "Jornada oncológica 3D" })).toBeTruthy();
   }, 30_000);
 });

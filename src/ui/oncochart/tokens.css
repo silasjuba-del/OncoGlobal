@@ -1030,3 +1030,311 @@
   padding: 10px;
 }
 .oc-laudo-lado { margin-top: 8px; font-size: 12px; }
+
+/* ============ CURSOR-08 · Box3D / Chart3D / Jornada 3D ============ */
+.oc-b3 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.9s var(--spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+}
+.oc-b3f {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid;
+  backface-visibility: hidden;
+}
+.oc-b3-ghost .oc-b3f {
+  border-style: dashed;
+  opacity: 0.55;
+}
+.oc-c3-stage {
+  position: relative;
+  height: 220px;
+  perspective: 900px;
+  perspective-origin: 50% 30%;
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+  touch-action: none;
+}
+.oc-c3-world {
+  --yaw: -30deg;
+  position: absolute;
+  left: 50%;
+  top: 66%;
+  transform-style: preserve-3d;
+  transform: rotateX(-24deg) rotateY(var(--yaw));
+}
+.oc-c3-floor {
+  position: absolute;
+  width: 380px;
+  height: 300px;
+  margin-left: -190px;
+  margin-top: -150px;
+  transform: rotateX(90deg);
+  background:
+    radial-gradient(circle at 50% 50%, color-mix(in oklch, var(--accent) 18%, transparent), transparent 70%),
+    repeating-linear-gradient(0deg, transparent, transparent 33px, var(--line) 34px),
+    repeating-linear-gradient(90deg, transparent, transparent 33px, var(--line) 34px);
+  mask-image: radial-gradient(circle, #000 40%, transparent 75%);
+}
+.oc-c3-lbl {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.oc-c3-lbl.thr { color: var(--ok); font-weight: 700; }
+.oc-c3-plane {
+  position: absolute;
+  width: 340px;
+  height: 64px;
+  left: -170px;
+  top: -32px;
+  border: 1px dashed var(--ok);
+  background: color-mix(in oklch, var(--ok) 12%, transparent);
+}
+.oc-j3 {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+}
+.oc-j3-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: color-mix(in oklch, var(--bg) 55%, transparent);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+.oc-j3-panel {
+  position: relative;
+  z-index: 1;
+  inset: auto;
+  width: min(1600px, calc(100% - 32px));
+  height: min(860px, calc(100% - 32px));
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  border-radius: 22px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.oc-j3-scene { display: flex; flex-direction: column; min-width: 0; }
+.oc-j3-h {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.oc-j3-h h2 { margin: 0; font-size: 15px; flex: 1; }
+.oc-j3-views { display: flex; gap: 4px; }
+.oc-j3-views button, .oc-j3-nav button, .oc-j3-chart-h button {
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: inherit;
+  cursor: pointer;
+  font-size: 11.5px;
+}
+.oc-j3-views button[aria-pressed="true"],
+.oc-j3-chart-h button[aria-pressed="true"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: transparent;
+}
+.oc-j3-stage {
+  flex: 1;
+  position: relative;
+  perspective: 1150px;
+  perspective-origin: 50% 38%;
+  overflow: hidden;
+  background: color-mix(in oklch, var(--bg) 70%, var(--surface));
+}
+.oc-j3-cam {
+  --yaw: -10deg;
+  --tilt: -15deg;
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.oc-j3-floor {
+  position: absolute;
+  transform: rotateX(90deg);
+  transform-style: preserve-3d;
+  border-radius: 14px;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 29px, var(--line) 30px),
+    repeating-linear-gradient(90deg, transparent, transparent 29px, var(--line) 30px);
+  margin-left: -840px;
+  margin-top: -240px;
+}
+.oc-j3-hoje {
+  position: absolute;
+  width: 220px;
+  height: 480px;
+  margin-top: -240px;
+  border-bottom: 2px solid var(--accent);
+  background: linear-gradient(to top, color-mix(in oklch, var(--accent) 35%, transparent), transparent);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  display: grid;
+  place-items: end center;
+  padding-bottom: 8px;
+}
+.oc-j3-card {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 162px;
+  margin-left: -81px;
+  padding: 9px 11px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklch, var(--accent) 45%, var(--line));
+  background: color-mix(in oklch, var(--surface) 88%, transparent);
+  backdrop-filter: blur(8px);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+.oc-j3-card.is-sel { outline: 3px solid var(--accent); transform: scale(1.08); }
+.oc-j3-card.is-fut { border-style: dashed; opacity: 0.7; }
+.oc-j3-card-k { display: block; font-size: 13px; font-weight: 600; }
+.oc-j3-card-s { display: block; font-size: 11px; color: var(--muted); }
+.oc-j3-hint { margin: 0; padding: 6px 16px; font-size: 11px; color: var(--faint); }
+.oc-j3-lanes {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--faint);
+}
+.oc-j3-assist {
+  border-left: 1px solid var(--line);
+  padding: 14px 16px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.oc-j3-assist h3 { margin: 0; }
+.oc-j3-say {
+  min-height: 110px;
+  margin: 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  font-size: 13px;
+  line-height: 1.55;
+}
+.oc-j3-nav { display: flex; flex-wrap: wrap; gap: 6px; }
+.oc-j3-chart-h {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+}
+.oc-j3-chart-h > div { display: flex; gap: 4px; }
+.oc-j3-disc { margin: 0; font-size: 10px; color: var(--faint); }
+
+@media (prefers-reduced-motion: reduce) {
+  .oc-b3 { transition: none; }
+  .oc-j3-cam { will-change: auto; }
+}
+
+/* ============ CURSOR-09 · Dock + overlays ============ */
+.oc-dock {
+  position: sticky;
+  bottom: 10px;
+  z-index: 40;
+  margin: 12px auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 18px;
+  border: 1px solid var(--line-strong);
+  background: color-mix(in oklch, var(--surface) 82%, transparent);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow);
+  max-width: 920px;
+}
+.oc-dock-btn {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: inherit;
+  cursor: pointer;
+  font-size: 12px;
+}
+.oc-dock-btn[aria-pressed="true"] {
+  background: var(--danger-soft, var(--accent-soft));
+  color: var(--danger, var(--accent));
+}
+.oc-ov {
+  position: absolute;
+  inset: 0;
+  z-index: 55;
+  display: grid;
+  place-items: center;
+}
+.oc-ov-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: color-mix(in oklch, var(--bg) 50%, transparent);
+  cursor: pointer;
+}
+.oc-ov-card {
+  position: relative;
+  z-index: 1;
+  width: min(520px, calc(100% - 40px));
+  max-height: min(720px, calc(100% - 40px));
+  overflow: auto;
+  border-radius: 16px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+}
+.oc-ov-h {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.oc-ov-h h3 { margin: 0; flex: 1; font-size: 15px; }
+.oc-ov-body { font-size: 13px; display: grid; gap: 10px; }
+.oc-ov-body input {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: inherit;
+  padding: 0 8px;
+}

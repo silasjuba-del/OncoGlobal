@@ -1,6 +1,6 @@
 # W10-CURSOR
 
-Retomada: a primeira fatia não FEITA é a CURSOR-08.
+Retomada: a primeira fatia não FEITA é a CURSOR-10.
 
 | Fatia | Estado | Commit | Nota |
 |---|---|---|---|
@@ -11,8 +11,8 @@ Retomada: a primeira fatia não FEITA é a CURSOR-08.
 | CURSOR-05 | FEITA | W10-CURSOR-05 | Caixa única + revisão (D-W9-34a junção só com clique) |
 | CURSOR-06 | FEITA | W10-CURSOR-05 | Painel Exame/OncoBoard/fila; E1 badge sem reordenar |
 | CURSOR-07 | FEITA | W10-CURSOR-05 | ImageViewer + OncoAssist sem conduta; morfometria DRAFT |
-| CURSOR-08 | — | | Jornada 3D + Chart3D |
-| CURSOR-09 | — | | Dock e overlays |
+| CURSOR-08 | FEITA | W10-CURSOR-08 | Jornada 3D + Chart3D CSS (RECIST/CTCAE, teclado, ≤200) |
+| CURSOR-09 | FEITA | W10-CURSOR-09 | Dock + overlays (WhatsApp CANAL_EXTERNO; liberação sem bloqueio) |
 | CURSOR-10 | — | | Prescrição |
 | CURSOR-11 | — | | Configurações |
 | CURSOR-12 | — | | Triagem + agenda de QT |
@@ -30,6 +30,31 @@ Retomada: a primeira fatia não FEITA é a CURSOR-08.
 - `tests/w10-cursor/caixa-revisao.test.ts`
 - `tests/w10-cursor/revisao-viewer.test.tsx`
 - `tests/w10-cursor/painel.test.tsx`
+- `tests/w10-cursor/jornada3d.test.ts`
+- `tests/w10-cursor/jornada3d-ui.test.tsx`
+- `tests/w10-cursor/dock.test.tsx`
+
+## Saídas reais · fatia CURSOR-08…09
+
+### `npx tsc --noEmit`
+exit 0.
+
+### `npm run check:boundaries`
+```
+fronteiras ok (165 arquivos)
+```
+
+### `npx vitest run tests/w10-cursor` (pré-dock; 08)
+```
+ Test Files  12 passed (12)
+      Tests  28 passed (28)
+```
+
+### regressão UI + auditoria
+```
+ Test Files  4 passed (4)
+      Tests  16 passed (16)
+```
 
 ## PEDIDOS
 Ver `docs/w10/PEDIDOS-CURSOR.md`.
