@@ -4,8 +4,11 @@
 // Reaproveitamento de FN-04: src/rules só pode importar src/contracts e não pode importar irmãos,
 // então a regra de arredondamento é COPIADA aqui (meio para cima em inteiros, uma única vez) e o teste
 // tests/rules-prescricao/instanciarProtocolo.test.ts prova equivalência com calcularDose (src/rules/dose.ts).
-// Não há BSA calculada aqui (a fórmula de BSA não foi decidida): bsaM2 vem pronta em `dados`.
-// Calvert: dose(mg) = AUC × (ClCr + 25), sem teto de ClCr (nenhum teto foi decidido; ver relatório).
+// BSA vem pronta em `dados` (fórmula ainda não decidida) e é LIMITADA a [1,40; 2,20] m² (D-W9-60), com aviso visível.
+// Calvert: dose(mg) = AUC × (ClCr + 25), com ClCr LIMITADO a 125 mL/min (D-W9-60), com aviso visível.
+export const BSA_MIN_M2 = 1.4;
+export const BSA_MAX_M2 = 2.2;
+export const CLCR_MAX_CALVERT = 125;
 import type { PrescriptionItem, ProtocolTemplate } from "../../contracts/w10/prescricao.js";
 
 export interface DadosCorporais {
@@ -25,6 +28,8 @@ export interface ItemInstanciado {
   estado: EstadoItem;
   /** por que está PENDENTE (null se PRONTO) */
   motivo: string | null;
+  /** limite aplicado ao cálculo (BSA/ClCr), visível ao médico; null se nenhum */
+  aviso: string | null;
   /** unidade da dose padrão no template (ex.: "mg/m²"); item.unit passa a ser a unidade calculada ("mg") */
   unidadePadrao: string;
   /** prescribedDose do mesmo item no ciclo anterior (base para os botões −20/−30/−40); null se não houve */
@@ -51,7 +56,7 @@ export function arredondaMeioParaCima(x: number): number {
 const norm = (t: string): string => t.normalize("NFD").replace(/[̀-ͯ]/g, "").trim().toUpperCase();
 const valido = (n: number | null): n is number => n !== null && Number.isFinite(n) && n > 0;
 
-function calcular(item: PrescriptionItem, d: DadosCorporais): { dose: number | null; unidade: string; motivo: string | null } {
+function calcular(item: PrescriptionItem, d: DadosCorporais): { dose: number | null; unidade: string; motivo: string | null; aviso?: string | null } {
   const std = item.standardDose;
   switch (item.doseBasis) {
     case "FIXED":
@@ -64,11 +69,15 @@ function calcular(item: PrescriptionItem, d: DadosCorporais): { dose: number | n
       if (std === null) return { dose: null, unidade: "mg", motivo: "dose padrão ausente na ficha" };
       if (!valido(d.pesoKg) || !valido(d.alturaCm)) return { dose: null, unidade: "mg", motivo: "mg/m² sem peso/altura" };
       if (!valido(d.bsaM2)) return { dose: null, unidade: "mg", motivo: "mg/m² sem superfície corporal informada" };
-      return { dose: arredondaMeioParaCima(std * d.bsaM2), unidade: "mg", motivo: null };
+      { const bsa = Math.min(BSA_MAX_M2, Math.max(BSA_MIN_M2, d.bsaM2));
+        const aviso = bsa !== d.bsaM2 ? `BSA ${d.bsaM2} m² limitada a ${bsa} m² (D-W9-60)` : null;
+        return { dose: arredondaMeioParaCima(std * bsa), unidade: "mg", motivo: null, aviso }; }
     case "AUC":
       if (std === null) return { dose: null, unidade: "mg", motivo: "AUC alvo ausente na ficha" };
       if (d.clcr === null || !Number.isFinite(d.clcr) || d.clcr < 0) return { dose: null, unidade: "mg", motivo: "AUC (Calvert) sem clearance de creatinina" };
-      return { dose: arredondaMeioParaCima(std * (d.clcr + 25)), unidade: "mg", motivo: null };
+      { const clcr = Math.min(CLCR_MAX_CALVERT, d.clcr);
+        const aviso = clcr !== d.clcr ? `ClCr ${d.clcr} mL/min limitado a ${CLCR_MAX_CALVERT} no Calvert (D-W9-60)` : null;
+        return { dose: arredondaMeioParaCima(std * (clcr + 25)), unidade: "mg", motivo: null, aviso }; }
     default:
       return { dose: null, unidade: item.unit, motivo: "base de cálculo OTHER: sem fórmula; conferência manual" };
   }
@@ -116,6 +125,7 @@ export function instanciarProtocolo(
       item,
       estado: pronto ? "PRONTO" : "PENDENTE",
       motivo: c.motivo,
+      aviso: c.aviso ?? null,
       unidadePadrao: orig.unit,
       doseAnteriorPrescrita: ant.get(`${norm(orig.drug)}#${k}`)?.prescribedDose ?? null,
       medidoEm: dados.medidoEm,
