@@ -206,3 +206,14 @@ M-V  ESTRUTURA DE SAÍDA (4 blocos) + 2 SKILLS → PLN-018   fontes/M-V_PLN-018_
       |V4| Substitui/refina M-U: os 4 blocos de saída (identificação/achados/progressão/conclusão) do script proposto dão lugar a estes 4 (patologia/radiologia/medicina nuclear/radiopatologia)   PENDENTE (Dr. Silas confirma)
       |V5| "Diagnóstico integrado" por skill vs regra: o diagnóstico é do médico (B2/M-N)   PENDENTE (reformular como "proposta de integração a revisar")
 ```
+
+```
+M-W  GATE CONTROL + RESUMO RADIONCOLÓGICO (3 blocos; saída de outro chat; PHI no original) → PLN-019   fontes/M-W_PLN-019_gate-control-resumo-radioncologico.md  (DESIDENTIFICADA, não literal)
+      |W1| Resumo de saída em 6 itens (lesão primária, TNM/recidiva, tamanho, invasão, comparação, próxima ação)   MATERIAL (exemplo)
+      |W2| Método: ler como oncologista → ordenar por urgência → formatar (emoji, bold só em números críticos, tabelas, bullets, ≤3–4 linhas) → validar "<30 s para agir"   DECIDIDO (estilo) — ordem do passo 2 × ordem do exemplo divergem   PENDENTE
+      |W3| PRINCÍPIO: JAMAIS INVENTAR; dúvida → ALERTA, não suposição   DECIDIDO (consistente com "ausente = PENDENTE")
+      |W4| Gate Control ANTES de extrair: 5 camadas (identidade · OCR/matriz de confusão · alertas estruturados · typos · esteira A→B→C) + template universal + checklist pré-processamento + estrutura TypeScript   MATERIAL (proposta de skill) — a validar
+      |W5| Ação do alerta com AUTO_CORRECT por confiança alta e "ALERT_AND_USE" por média   PENDENTE (conflita com "nunca corrige em silêncio"; ver PLN-019)
+      |W6| A→B→C: diagnóstico (clínica+biópsia) → estadiamento (radiologia+labs) → tratamento (regime+trials) com alertas de incongruência   MATERIAL (liga a M-B, M-D)
+      |W7| Mesma máquina de PHI: nomes/CPF/DN no exemplo → registrado desidentificado   REGISTRADO
+```
