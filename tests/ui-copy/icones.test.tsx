@@ -5,9 +5,10 @@ import { describe, expect, it } from "vitest";
 import { ICONES } from "../../src/ui/icones/index.js";
 
 describe("ícones SVG (MU-04)", () => {
-  it("expõe 11 de navegação + 7 de estado", () => {
+  it("expõe 11 de navegação + 7 de estado + 8 de cromo", () => {
     expect(Object.keys(ICONES).sort()).toEqual(
       [
+        "busca", "canal", "chevron", "lua", "salao", "sino", "sol", "usuario",
         "agenda", "alerta", "apac", "assinado", "conflito", "configuracoes",
         "documentos", "e1", "enfermagem", "exames", "farmacia", "pendente",
         "prescricao", "prontuario", "rascunho", "relatorios", "resumo", "riscado",
