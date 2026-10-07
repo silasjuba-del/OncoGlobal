@@ -153,3 +153,14 @@ M-Q  EIXOS X e Y (CRUZ: LONGITUDINAL × TRANSVERSAL) + ESTEIRA PRÁTICA POR VOZ 
       |Q12| Pergunta do texto: desenhar taxonomia dos clusters vocais (anemia, neutropenia, dor, náusea, diarreia, mucosite, imagem, labs, encaminhamento, retorno…) com frases-gatilho → etapas → opções → saída   EM ESPERA (Dr. Silas: só analisar)
 ```
 Ligações: Q4/Q5 ⟶ M-D §10–12 (voz, workflow) e M-F §8 (Whisper) · Q6 ⟶ M-O/M-P (matriz) · Q9 ⟶ prototipo `docs/design/prototipos/consulta.html` (carrossel atual) · Q11 ⟶ M-N (IA prepara o botão).
+
+```
+M-R  EIXO X e EIXO Y DEFINIDOS → PLN-014   fontes/M-R_PLN-014_eixos-x-y-definicao.md   (responde Q1 de M-Q)
+      |R1| EIXO X = O QUE / ONDE? domínio morfofuncional: SISTEMA → órgão/estrutura → morfologia → função → sítio específico (ex.: hepático: morfológico = massa, infiltração, dilatação biliar, efeito de massa; funcional = lesão hepatocelular, colestase, função sintética)   DECIDIDO
+      |R2| EIXO Y = O QUE ESTÁ ACONTECENDO AGORA? estado clínico: sinal/sintoma/achado → novo | antigo | recorrente | piorando | estável → causa conhecida? SIM | NÃO | INCERTA → gravidade/risco → eletivo | prioritário | urgente | emergência   DECIDIDO
+      |R3| "Aqui está o tempo clínico": NÃO é tempo = gravidade; é gravidade + risco → prioridade temporal da ação   DECIDIDO
+      |R4| Prioridade com 4 níveis também em Y (confirma M-B e M-P; fecha O6/P3)   DECIDIDO
+      |R5| "Causa conhecida? SIM/NÃO/INCERTA" parece ser a "CERTEZA" do eixo de M-O (evento→prioridade→certeza→ação→artefato)?   PENDENTE (Dr. Silas confirma; fecha O7/P6 se sim)
+      |R6| Mapeamento com M-B (X morfologia/função/sítio · Y estado/gravidade/prioridade · Z ação): coerente; Z (ação) não foi redefinido aqui = categorias 3–8 da matriz (M-P) + artefatos   inferência do planejamento
+      |R7| "Longitudinal × transversal" (M-Q, abertura): SUPERADO como leitura de X/Y — X e Y agora são O QUE/ONDE e O QUE ESTÁ ACONTECENDO (a leitura de longitudinal/transversal proposta no diário não vale como X/Y; o tempo longitudinal fica nas 4 datas/ledger, PLN-004)   registrado, não apagado
+```
