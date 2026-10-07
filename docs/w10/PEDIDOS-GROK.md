@@ -68,3 +68,14 @@ Faixa: `docs/ondas/W10-GROK.md`. Contrato que falta fica com tipo local `// PROV
 3. **`canal-redflags.v1.json`** não foi editado. Continua esqueleto, `ativo: false`, fonte `[VERIFICAR]`.
 4. **Ausência.** Lista nula com diarreia acima de 24 h fica PENDENTE e não vira "sem anti-hipertensivo". Temperatura nula continua nula. Igual a 24 h e igual a 37,8 não disparam.
 5. **Tipo.** `EntradaSuporte` está em `src/rules/suporteNaoOncologico.ts` (`// PROVISORIO-W10`).
+
+## GROK-10
+
+1. **Registro no harness.** `src/kernel/harness/gates.ts` está fora da faixa. Uma linha fecha o adv T-56:
+
+```ts
+export { g16Owner } from "./ownership.js";
+```
+
+2. **O adv não exercita o veredito hoje.** `t56-g16-owner-write.adv.ts` só importa `gates.js` (`g16Owner`, `g16` ou `donoDoObjeto`). Com a função null, os três casos de write/leitura devolvem cedo e contam como passou. O RT-09 já acha `g16Owner` em `ownership.ts`.
+3. **Veredito.** Write alheio, objeto sem dono e objeto com dois donos saem `BLOQUEIA_AUTORIDADE`. Leitura sai `PASSA`. Operação diferente de write/read sai `PENDENTE`. O catálogo é `corpus/capabilities.v1.json`; o segundo argumento injeta outro catálogo.

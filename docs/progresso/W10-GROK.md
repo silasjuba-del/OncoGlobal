@@ -13,7 +13,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w10-grok`, branch `f0/w10-grok`.
 | GROK-07 nódulo &lt; 1 cm e Mx | FEITA | W10-GROK-07 | Abaixo de 1 cm fica INDETERMINADO. Mx não troca o texto. |
 | GROK-08 FN-16 semáforo | FEITA | W10-GROK-08 | Adv FN-16 verde. Catálogo inativo. Sem bloqueio. |
 | GROK-09 suporte não oncológico | FEITA | W10-GROK-09 | Alertas da biblioteca. Sem bloqueio. |
-| GROK-10 ownership | — | | |
+| GROK-10 ownership | FEITA | W10-GROK-10 | Veredito em ownership.ts. t56 ainda lê gates.ts. |
 | GROK-11 manifesto | — | | |
 | GROK-12 dedupe + fachada w8 | — | | |
 | GROK-13 APAC no ledger | — | | |
@@ -376,4 +376,49 @@ Test Files  12 passed (12)
 ```
 Test Files  1 passed (1)
      Tests  9 passed (9)
+```
+
+## GROK-10
+
+`g16Owner(input, catalogo?)` em `src/kernel/harness/ownership.ts`. O catálogo padrão é `corpus/capabilities.v1.json` (`ownerOf` de `AgentSpec`). Write do dono declarado passa. Write de outro agente é `BLOQUEIA_AUTORIDADE`, gate `G-16`, motivo com o dono declarado (K-21). Leitura passa. Operação ausente ou diferente de write fica PENDENTE. Objeto sem dono, ou com dois donos, bloqueia. `gates.ts` não foi editado.
+
+`git merge f0/w1-integrado` no início: merge `f51e9ba` (integração em `9c8a113`).
+
+Testes novos: `tests/w10-grok/grok-10-ownership.test.ts` (7).
+
+O adv `t56-g16-owner-write.adv.ts` importa só `gates.js`. Resultado real: 1 falha (`SEM_IMPLEMENTACAO`, função null) e 4 passos. Os três casos de write/leitura devolvem cedo quando a função é null. O RT-09 acha `g16Owner` em `ownership.ts`: o teste de existência passa, e AG-04 escrevendo Conversation é `BLOQUEIA_AUTORIDADE` enquanto AG-14 passa.
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries`
+
+```
+fronteiras ok (189 arquivos)
+```
+
+`npm run check:corpus` — fecho: `corpus ok (108 arquivos)`.
+
+`npx vitest run tests/w10-grok tests/corpus/loader.test.ts tests/corpus/interacoes.test.ts tests/rules-w8/interacoes.test.ts --no-file-parallelism`
+
+```
+Test Files  13 passed (13)
+     Tests  110 passed (110)
+```
+
+7 da GROK-10, mais GROK-01 (38), GROK-02 (11), GROK-03 (7), GROK-04 (5), GROK-05 (6), GROK-06 (7), GROK-07 (5), GROK-08 (5), GROK-09 (6), loader (7), corpus de interações (3) e `rules-w8/interacoes` (3).
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
+
+```
+Test Files  1 passed (1)
+     Tests  9 passed (9)
+```
+
+`npx vitest run --config tests/adv-w8/vitest.config.ts tests/adv-w8/t56-g16-owner-write.adv.ts --no-file-parallelism` — exit 1.
+
+```
+Test Files  1 failed (1)
+     Tests  1 failed | 4 passed (5)
 ```
