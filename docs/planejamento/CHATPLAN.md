@@ -266,3 +266,18 @@ M-AB  MODELO DE ORIENTAÇÃO NUTRICIONAL (PDF, 1 pág.) + 8 KITS DE 1ª CONSULTA
       |AB3| Sem texto do Dr. Silas junto: não diz se é para (a) virar modelo de orientação na base, (b) servir de padrão visual dos documentos, (c) outra coisa   PENDENTE
       |AB4| 8 PDFs de "Pacientes primeira consulta" (kits reais; nomes nos nomes de arquivo) anexados SEM instrução. NÃO lidos pelo planejamento; PHI não entra no repositório   PENDENTE (Dr. Silas diz o que fazer)
 ```
+
+```
+M-AC  ⚠ CAUTION/ATTENTION (Dr. Silas: "GRAVAR MEMORIZAR REGISTRAR"): (1) REGRA PARA O CURSOR e (2) MODELO DE RESUMO DE CASO "PRONTUÁRIO DRIVE" (3 seções) → PLN-025   fontes/M-AC_PLN-025_modelo-resumo-caso-prontuario-drive.md
+      |AC1| CURSOR CODING = NÃO PRODUZIR DOCUMENTOS EM PASTAS (executor Cursor só entrega código/testes; relatório vai na resposta do chat, não em arquivo no repositório)   DECIDIDO ⚠ REGRA FIXA — entra em todo prompt para Cursor
+      |AC2| Gatilho "PRONTUÁRIO DRIVE: [NOME]" → pesquisar no Drive conectado e gerar prontuário oncológico estruturado, pronto para revisão médica   DECIDIDO (modelo)
+      |AC3| REGRA CENTRAL: não inventar; dado ausente = campo VAZIO após os dois pontos; nunca "não informado/não consta/ausente", salvo negativo declarado no documento   DECIDIDO ⚠ (tensão com "ausente = PENDENTE" resolvida em PLN-025: vazio no papel, PENDENTE no estado interno)
+      |AC4| Seção 1 DADOS ANAGRÁFICOS (15 campos); Seção 2 DADOS CLÍNICOS (antecedentes, medicações, alergias, cirurgias, histórico familiar, vacinação, ECOG); Seção 3 DADOS ONCOLÓGICOS   DECIDIDO
+      |AC5| Título diagnóstico obrigatório: TIPO DE NEOPLASIA — TNM — ESTÁDIO — SUBTIPO (maiúsculas, negrito, fonte maior; campo ausente fica vazio no título); depois 12 campos (topografia … protocolo)   DECIDIDO
+      |AC6| EXAMES E LAUDOS: "DATA — TIPO: resumo oncológico" (só topografia, dimensões, invasão, linfonodos, metástases; sem descrição técnica radiológica; achados não oncológicos só citados ao final)   DECIDIDO
+      |AC7| LABORATORIAIS + CTCAE (se em QT): hemograma, renal, hepática, marcadores, outros   DECIDIDO
+      |AC8| CONDUTA [VAZIA]: campo livre para decisão médica; não preencher, não sugerir prescrição, não inserir tratamento sem validação   DECIDIDO ⚠
+      |AC9| OBSERVAÇÕES/PENDÊNCIAS: dados ausentes, divergências, pendências APAC/biomarcadores/estadiamento/confirmação diagnóstica/glosa   DECIDIDO
+      |AC10| ATUALIZAÇÕES CIENTÍFICAS / ESTUDO DIÁRIO: estudos relevantes ao tipo/subtipo/cenário, formato "NOME: braços; desfecho; ganho em meses, % de redução, HR"; não vira recomendação; sem aplicabilidade direta → "atualização educacional, sem implicar disponibilidade no SUS"   DECIDIDO (formato) — números devem vir de fonte verificada   PENDENTE (origem dos dados)
+      |AC11| Existem dois modelos de resumo de caso: W1 de 5 blocos (skill SILAS NEGRÃO / Plaud W1) e este de 3 seções   PENDENTE (qual é o canônico, ou o W1 é a saída da skill e este é o do Drive?)
+```
