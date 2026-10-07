@@ -34,7 +34,8 @@ export const ausente = <T,>() => ({
   revisao: "RAW" as const,
 });
 
-/** Triagem válida: todos os campos PRESENTE/VERDE/CONFIRMADO, valores fora de qualquer corte. */
+/** Triagem válida: todos os campos PRESENTE/VERDE/CONFIRMADO, valores fora de qualquer corte.
+ *  recurso AMBULATORIAL + idade 60 → destino SALAO quando limpa (CADEIRA/CAMA iriam à FRENTE — Q26). */
 export const triagemBase = (overrides: Partial<Triagem> = {}): Triagem => ({
   patientId: "paciente-teste-01",
   encounterId: "encontro-teste-01",
@@ -49,7 +50,7 @@ export const triagemBase = (overrides: Partial<Triagem> = {}): Triagem => ({
   ecog: presente(1),
   grauCtcae: presente(1),
   tontura: false,
-  recurso: "CADEIRA",
+  recurso: "AMBULATORIAL",
   idadeAnos: 60,
   chegadaEm: "2026-10-05T08:00:00-03:00",
   ...overrides,

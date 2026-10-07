@@ -138,10 +138,12 @@ describe("FN-02 decidirDestino (função pura isolada)", () => {
     expect(decidirDestino({ temCorte: false, temPendencia: true, recurso: "CAMA", idadeAnos: 60 }, salaoRuleset)).toBe("FILA_MEDICO"));
   it("AMBULATORIAL sem corte e sem pendência → SALAO", () =>
     expect(decidirDestino({ temCorte: false, temPendencia: false, recurso: "AMBULATORIAL", idadeAnos: 60 }, salaoRuleset)).toBe("SALAO"));
-  it("idade 81 CADEIRA → FRENTE; idade 80 → SALAO", () => {
-    expect(decidirDestino({ temCorte: false, temPendencia: false, recurso: "CADEIRA", idadeAnos: 81 }, salaoRuleset)).toBe("FRENTE");
-    expect(decidirDestino({ temCorte: false, temPendencia: false, recurso: "CADEIRA", idadeAnos: 80 }, salaoRuleset)).toBe("SALAO");
+  it("idade 81 AMBULATORIAL → FRENTE; idade 80 → SALAO (igual NÃO passa na idade)", () => {
+    expect(decidirDestino({ temCorte: false, temPendencia: false, recurso: "AMBULATORIAL", idadeAnos: 81 }, salaoRuleset)).toBe("FRENTE");
+    expect(decidirDestino({ temCorte: false, temPendencia: false, recurso: "AMBULATORIAL", idadeAnos: 80 }, salaoRuleset)).toBe("SALAO");
   });
+  it("CADEIRA sem corte e sem pendência → FRENTE em qualquer idade (Q26)", () =>
+    expect(decidirDestino({ temCorte: false, temPendencia: false, recurso: "CADEIRA", idadeAnos: 60 }, salaoRuleset)).toBe("FRENTE"));
 });
 
 describe("FN-01 qtPodeIniciarSemMedico (Q21)", () => {
