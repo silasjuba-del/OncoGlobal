@@ -125,3 +125,14 @@ M-O  FLUXO UNIVERSAL: EVENTO → PRIORIDADE → CERTEZA → AÇÃO → ARTEFATO 
       |O6| Prioridade com 3 níveis aqui × 4 níveis em M-B (eletivo/prioritário/urgente/emergência) × "imediata/urgente/eletiva" na tabela   PENDENTE (unificar)
       |O7| "CERTEZA" aparece no eixo mas não tem campo/tabela no texto   PENDENTE (definir)
 ```
+
+```
+M-P  MATRIZ UNIVERSAL CANÔNICA (8 categorias × classe × seção × tópico × OUTROS) → PLN-012   fontes/M-P_PLN-012_matriz-universal-canonica.md
+      |P1| Hierarquia fixa no backend: CATEGORIA › CLASSE › SEÇÃO › TÓPICO › OUTROS [+]; OUTROS em TODOS os níveis, nunca substitui o canônico, só estende   DECIDIDO
+      |P2| 8 categorias: 1 Problema/Evento · 2 Prioridade · 3 Investigação (LAB, RAD, ENDO, PATH, PROC) · 4 Tratamento (sintomático, específico, MED, MED oncológico, CX, RT) · 5 Encaminhamento · 6 Suporte/Segurança · 7 Retorno · 8 Saída/Documento   DECIDIDO
+      |P3| PRIORIDADE = 4 níveis: Eletiva · Prioritária · Urgente · Emergência (volta aos 4 de M-B; resolve O6 em parte)   DECIDIDO (matriz) — o cluster-exemplo de M-P ainda mostra só 3 (Eletivo/Urgente/PS)   PENDENTE (alinhar exemplo)
+      |P4| OUTROS: texto livre · selecionar existente · adicionar novo · duplicar · remover; mesmo contrato seleciona→DRAFT→médico revisa→imprime/assina   DECIDIDO
+      |P5| Regra: a matriz define possibilidades; o cluster seleciona o subconjunto pertinente; o médico sempre pode acrescentar fora da previsão   DECIDIDO (consolida M-O)
+      |P6| CERTEZA (M-O eixo) não aparece na matriz de 8 categorias   PENDENTE (O7 segue aberto)
+      |P7| Cluster-exemplo (DOR LOMBAR) NÃO tem o gatilho de emergência neurológica nem SUS/linha no MED   PENDENTE (liga a O-c/O-d)
+```
