@@ -89,3 +89,32 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
 - Decisão: DECIDIDO (Dr. Silas) — método de trabalho: toda mensagem do Dr. Silas é guardada **literal** em `fontes/` (sem edição) e entra como nó na árvore do `CHATPLAN.md`; análise fica no DIARIO. Correções = nó novo, nunca sobrescrever.
 - Feito: fontes literais M-0 (papel), M-B (v1.0), M-D (v1.1), M-F (addendum); CHATPLAN com ramos B1–B4, D1–D5, F1–F5 e ligações cruzadas.
 - Próxima ação: manter CHATPLAN a cada mensagem. Dono: planejamento.
+
+## PLN-006 · 2026-10-07 · Motor de continuidade: CTCAE→cruzamento→conduta + 7+1 clusters do retorno
+- Origem: Dr. Silas (2 textos literais: `fontes/M-H_…` e `fontes/M-I_…`; exemplos sintéticos; refs NCI CTCAE v5/v6, ASCO emese de escape)
+- Liga a: PLN-002 (§6–9 retorno, 4 eixos), PLN-003, D-W9-67 (CTCAE v6 pura), D-W9-63, CHATPLAN M-H/M-I
+- Ideia (sem perda): (H) vômito 6x/dia não fecha G3 — G3 exige enteral/TPN ou internação, G2 hidratação EV ambulatorial; app extrai episódios mas pede os critérios; evento≠grau≠causalidade; cruzamento = tumor×tto×ECOG×CTCAE×comorbidades×MUC×labs/rads×tempo desde tto → espaço de conduta (exemplo cólon FOLFOX C4, DRC, losartana, Cr 1,9, K 3,1, D5); 7 perguntas do retorno; motor em 3 funis (oncologia → paciente → continuidade); UI do cluster com [EXPLICAR] (evidências, nunca %), [GERAR] → drafts, tudo desmarcado salvo ordem médica; matriz MANTER/SUPORTE/ADIAR/AJUSTAR/SUSPENDER. (I) 8 clusters: toxicidade, eficácia/doença, intercorrência/internação, interação/MUC, função orgânica (valor atual, anterior, delta, limite do protocolo), elegibilidade próximo ciclo (semáforo, nunca "aprovado"), suporte/sintomáticos (adequado/parcial/falha/não utilizou), novo problema (escape). Cada um com dados de entrada, perguntas de voz, regras de cruzamento e saídas sugeridas + OUTROS [+]. Regra: nenhum cluster decide isolado.
+- O que o código tem hoje:
+  - CTCAE: `src/rules/ctcaeGrau.ts` já devolve `pendente` com `inputs_missing` → coerente com H1. Vômito só em `rules/suporteNaoOncologico.ts` (sem ruleset G2×G3).
+  - Cruzamento: peças separadas — interações (`rules/semaforoInteracoes.ts`), dose/ClCr (`rules/prescricao/safetyEngine.ts`), porta do ciclo (`portaCiclo.ts`), ciclo com médico (`cicloComMedico.ts`), delta (`delta.ts`), RECIST (`rules/recist*`), alertas lab/rad. Falta o cluster que cruza tudo e emite o semáforo de elegibilidade e a visão "valor atual/anterior/delta/limite do protocolo".
+  - Eficácia como concordância clínica+marcador+rad: não existe (só RECIST por código, categoria PROPOSTA).
+  - Intercorrência/internação estruturada, MUC como cluster, "suporte adequado/parcial/falha", "novo problema": não existem.
+  - EXPLICAR/GERAR com "baseado em": não vistos.
+- Lacuna: contrato dos 8 clusters; ruleset de vômito CTCAE v6; motor de elegibilidade com semáforo; evidência "baseada em" por sugestão; mapeamento voz→variável.
+- Decisão: DECIDIDO (Dr. Silas) — nenhum cluster decide isolado; semáforo sem "aprovado"; cluster escape. EM ESPERA: congelar a matriz de retorno (Dr. Silas pediu só análise). Cuidado: corte de grau CTCAE v6 só com tabela oficial.
+- Próxima ação: aguardar liberação. Dono: planejamento.
+
+## PLN-007 · 2026-10-07 · Camada de conhecimento/assistência: scores, biomarcadores, SUS, agentes, ORK
+- Origem: Dr. Silas (2 textos literais: `fontes/M-J_…` e `fontes/M-K_…`)
+- Liga a: PLN-003 (KB versionada), D-W9-20, D-W9-64 (ExecSpec/CKG), D-W9-15 (gateway/LLM), PLN-001 (OncoAssist × código), CHATPLAN M-J/M-K
+- Ideia (sem perda): 5 blocos (classificações, scores, biomarcadores/scoring path, tratamento/evidência, realidade SUS); código só roteia, cálculo/interpretação no agente/OncoAssist; retorno do agente = resultado + variáveis usadas/ausentes + versão + interpretação curta + fonte + incertezas + próximos passos; SUS primeira classe (indicado ≠ SUS ≠ instituição); 8 agentes; EXTERNAL_SOURCE → NEEDS_REVIEW; prompt do ORK com 10 regras; ORK-1 determinísticos (13 módulos, ver M-K).
+- O que o código tem hoje:
+  - **ORK e Maestro já existem**: `src/orchestration/maestro.ts` (tabela determinística R-14 evento→passos: LAB, RADS, PATH, CHEMO, CTCAE, COMORB, INTERACTION, EMERGENCY, DELTA, DOCUMENT, SINTESE…; comentário: "nenhum texto/LLM altera o ACTIVE_SET") e `ork.ts` (ondas, timeout, 2 tentativas, `AGENTE_INDISPONIVEL`). Agentes ainda são `AgenteFake`. O ORK-1 do texto bate com essa camada, mas nomes diferem (CHEMO × CHEMOSAFE/DOSE_SAFE/MED_SAFE; faltam STAGING, APAC, PROTOCOL/TRIALS, CLINICAL_DOCS, DOC_CONTROL como passos).
+  - Scores: `src/rules/escores.ts` existe; Khorana/MASCC zero. PD-L1/CPS/TPS/CLDN18.2: sem contrato.
+  - SUS: só APAC/CNS (`src/apac/`); sem camada de disponibilidade SUS × instituição.
+  - Agentes de conhecimento: inexistentes; OncoAssist sem roteador/gateway READ.
+  - EXTERNAL_SOURCE / NEEDS_DATA: zero (há NEEDS_REVIEW e `pendente` com campos ausentes → vocabulário a unificar).
+- Lacuna: contrato universal "resposta de capacidade"; registro de capacidades com gatilhos; camada SUS/instituição; EXTERNAL_SOURCE; alinhar nomes ORK-1; fronteira ORK × LLM.
+- Conflito a vigiar (não resolvido em silêncio): o texto descreve o ORK como orquestrador que "determina" capacidades (estilo agente/LLM); o código tem ORK/maestro determinístico por tabela e proíbe LLM de alterar o plano. Leitura compatível: ORK-1 = tabela de código (decide QUAIS capacidades); agentes/LLM só devolvem conteúdo. PENDENTE para o Dr. Silas.
+- Decisão: DECIDIDO (Dr. Silas) nos princípios (J1–J6, J8, K1). PENDENTE: J7 (prompt final), K2 (nome da camada dos agentes), fronteira ORK × agente.
+- Próxima ação: aguardar liberação. Dono: planejamento.

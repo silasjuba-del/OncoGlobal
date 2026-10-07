@@ -47,3 +47,38 @@ M-F  ADDENDUM · linha temporal + texto bruto + voz + Plaud → PLN-004   fontes
 - D §11 voz descrição × ordem ⟶ F §8 (anemia abre cluster; "vou pedir" marca exames).
 - PLN-001 lacunas (texto colado = 0 fatos; voice_command/lab_feed 400; série temporal vira conflito) ⟶ F3/F4.
 - B2 (médico define prioridade) ⟶ restringe D §6 e §15 (EMERGENCY_ENGINE "PRIORIDADE").
+
+## Nós adicionados (continuação da árvore)
+
+```
+M-H  MOTOR DE CONTINUIDADE · CTCAE → cruzamento → conduta, fluxo do vômito → PLN-006   fontes/M-H_PLN-006_motor-continuidade-ctcae-vomito.md
+ │    |H1| Correção clínica: "6x/dia" NÃO fecha G3 (G3 = enteral/TPN ou internação; G2 = hidratação EV ambulatorial); extrair episódios, pedir critérios   DECIDIDO
+ │    |H2| Evento ≠ grau ≠ causalidade (NCI)                                  DECIDIDO
+ │    |H3| 7 perguntas do retorno (não é formulário rígido)                   DECIDIDO
+ │    |H4| [? EXPLICAR] mostra evidências (nunca "93%"); [GERAR] → DRAFT; sugestões desmarcadas salvo ordem médica   DECIDIDO
+ │    |H5| Exemplo cólon/FOLFOX = ilustração                                  vide D5
+ │    |H6| "Congelar a matriz de RETORNO?" → respondida em M-I                EM ESPERA (formalizar quando liberar)
+ ↓
+M-I  CLUSTERS UNIVERSAIS · retorno em tratamento (7+1) → PLN-006   fontes/M-I_PLN-006_clusters-universais-retorno.md
+ │    |I1| 1 Toxicidade · 2 Eficácia · 3 Intercorrência · 4 Interação/MUC · 5 Função orgânica · 6 Elegibilidade · 7 Suporte · 8 Novo problema (escape)   DECIDIDO
+ │    |I2| Semáforo de elegibilidade; nunca "aprovado para QT" sem médico   DECIDIDO
+ │    |I3| Interação em 4 níveis (sem · atenção · importante · contraindicação/revisão obrigatória)   DECIDIDO
+ │    |I4| Eficácia: só concordância (favorável · desfavorável · discordante); não conclui progressão (liga a B §7–9)   DECIDIDO
+ │    |I5| Regra congelada: nenhum cluster decide isolado; julgamento médico acima de regra   DECIDIDO
+ ↓
+M-J  CAMADA DE CONHECIMENTO/ASSISTÊNCIA · scores, biomarcadores, SUS, agentes, prompt do ORK → PLN-007   fontes/M-J_PLN-007_camada-conhecimento-scores-sus-ork.md
+ │    |J1| Khorana/MASCC = scores; CPS/TPS = métodos PD-L1; CLDN18.2 = biomarcador → todos "instrumentos acionáveis", sem categoria única   DECIDIDO
+ │    |J2| 5 blocos: classificações · scores · biomarcadores/scoring path · tratamento/evidência · realidade SUS   DECIDIDO
+ │    |J3| Não codificar todos os scores: código só sabe QUANDO chamar; cálculo/interpretação no agente/OncoAssist   DECIDIDO
+ │    |J4| SUS primeira classe: clinicamente indicado ≠ disponível no SUS ≠ disponível na instituição; nunca esconder a opção correta   DECIDIDO
+ │    |J5| Agentes: OncoAssist, ScoreAgent, BiomarkerAgent, ProtocolAgent, InteractionAgent, SUS/AccessAgent, LabAgent, RadAgent   DECIDIDO (lista)
+ │    |J6| EXTERNAL_SOURCE: importar → normalizar → origem/data → longitudinal → NEEDS_REVIEW → médico confirma; nunca direto a CONFIRMED   DECIDIDO
+ │    |J7| Prompt do ORK (10 regras; NEEDS_DATA; CONFLICT; SUGGESTION→DRAFT→MEDICAL_REVIEW→CONFIRMATION), "aproximadamente assim"   RASCUNHO (texto final PENDENTE)
+ │    |J8| "IA prepara o botão. Médico aperta."                                 DECIDIDO
+ ↓
+M-K  ORK-1 / DETERMINÍSTICOS (lista) → PLN-007   fontes/M-K_PLN-007_ork-1-deterministicos.md
+      |K1| LABS · RADS · PATH · STAGING · CTCAE · CHEMOSAFE · DOSE_SAFE · MED_SAFE · EMERGENCY · APAC · PROTOCOL/TRIALS · CLINICAL_DOCS · DOC_CONTROL   DECIDIDO (lista)
+      |K2| Camada dos agentes de conhecimento (J5) ao lado do ORK-1: nome não definido   PENDENTE (nomear)
+```
+
+Ligações novas: H §1 ⟶ `src/rules/ctcaeGrau.ts` (já devolve pendente + inputs faltantes) · I §4 ⟶ `semaforoInteracoes` · I §5 ⟶ `rules/prescricao/safetyEngine` · J ⟶ `orchestration/ork.ts` + `maestro.ts` · K ⟶ tabela R-14 do maestro.
