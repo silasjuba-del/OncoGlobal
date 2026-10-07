@@ -242,3 +242,11 @@ M-Y  "IA INVISÍVEL" NO DOCUMENTO FINAL + 3 DOCUMENTOS DE EXEMPLO + RECEITA VO �
       |Y6| Checklists "deve ter / jamais ter" para documento e receita   DECIDIDO (estrutura) — alinha com `proibidoConter` e origem de campo no kit
       |Y7| Pergunta final do texto: "Falta implementar no oncoMed ou tem mais alguma layer?"   RESPONDIDA em PLN-021 (lacunas)
 ```
+
+```
+M-Z  RESPOSTA CURTA DO DR. SILAS A PLN-021 → PLN-022   (texto literal: "nao visivel. sim. mais de 1 tipo de receitas, insiro e moriza.")
+      |Z1| "não visível"  = a IA não aparece no documento (consistente com Y1). Se também vale para o REGISTRO INTERNO (sem log), não foi dito   LEITURA DO PLANEJAMENTO — PENDENTE confirmar que o registro interno de proveniência permanece (auditoria do próprio médico)
+      |Z2| "sim"  = resposta afirmativa a uma das perguntas de PLN-021 (a mensagem não diz a qual: separação papel × registro, revisão do conteúdo clínico, ou regras de receituário)   PENDENTE (qual pergunta?)
+      |Z3| "mais de 1 tipo de receitas, insiro e memoriza"  = haverá VÁRIOS tipos de receita (modelos); o Dr. Silas insere os modelos e o sistema os memoriza (memória de modelos/preferências do médico)   DECIDIDO (intenção)
+```
+Ligações: Z3 ⟶ `KitTemplate` versionado (`src/impressao/kit.ts`) e "memória de preferências do médico" (lacuna de PLN-008) ⟶ templates de receita como dado do médico, com versão, vigência e curador (já previstos no kit).
