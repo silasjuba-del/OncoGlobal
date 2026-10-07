@@ -1,6 +1,6 @@
 # W10-CURSOR
 
-Retomada: a primeira fatia não FEITA é a CURSOR-12.
+Retomada: onda W10-CURSOR fechada nesta worktree (01–14 FEITA).
 
 | Fatia | Estado | Commit | Nota |
 |---|---|---|---|
@@ -15,10 +15,9 @@ Retomada: a primeira fatia não FEITA é a CURSOR-12.
 | CURSOR-09 | FEITA | W10-CURSOR-09 | Dock + overlays (WhatsApp CANAL_EXTERNO; liberação sem bloqueio) |
 | CURSOR-10 | FEITA | W10-CURSOR-10 | Prescrição 3 produtos + Modelo 05 só exceções + −20/−30/−40 |
 | CURSOR-11 | FEITA | W10-CURSOR-10 | Configurações + caixa nº + glossário + DIA|NOITE|PERSONALIZAR |
-| CURSOR-12 | — | | Triagem + agenda de QT |
-| CURSOR-12 | — | | Triagem + agenda de QT |
-| CURSOR-13 | — | | Acessibilidade |
-| CURSOR-14 | — | | Percursos e fechamento |
+| CURSOR-12 | FEITA | W10-CURSOR-12 | Triagem 5 passos (sem trava) + agenda QT |
+| CURSOR-13 | FEITA | W10-CURSOR-12 | Foco/reduced-motion/dock 44px; jornada sob demanda |
+| CURSOR-14 | FEITA | W10-CURSOR-12 | Percursos rotina / viewer / pós-QT |
 
 ## Testes criados
 - `tests/w10-cursor/escala.test.ts`
