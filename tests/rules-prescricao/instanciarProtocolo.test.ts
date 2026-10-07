@@ -43,10 +43,13 @@ describe("W10-INT-PRESC-02 · instanciarProtocolo", () => {
       expect(b?.motivo).toContain("peso/altura");
     }
   });
-  it("mg/m² com peso e altura mas sem BSA ⇒ PENDENTE (não inventa fórmula)", () => {
+  it("mg/m² com peso e altura mas sem BSA ⇒ calcula por Mosteller (D-W9-61); sem peso/altura ⇒ PENDENTE", () => {
     const r = instanciarProtocolo(tpl(), dados({ bsaM2: null }));
     if (!r.ok) throw new Error("esperado ok");
-    expect(r.itens[1]?.estado).toBe("PENDENTE");
+    expect(r.itens[1]?.estado).toBe("PRONTO");
+    const s2 = instanciarProtocolo(tpl(), dados({ bsaM2: null, pesoKg: null }));
+    if (!s2.ok) throw new Error("esperado ok");
+    expect(s2.itens[1]?.estado).toBe("PENDENTE");
   });
   it("AUC sem clcr ⇒ PENDENTE; demais itens seguem", () => {
     const r = instanciarProtocolo(tpl(), dados({ clcr: null }));

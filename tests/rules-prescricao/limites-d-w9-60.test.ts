@@ -41,3 +41,15 @@ describe("D-W9-60 · limites de BSA e ClCr", () => {
     expect(FinalidadeApacRt.options).toEqual(["RADICAL", "ADJUVANTE", "ANTIALGICA", "PALIATIVA", "PREVIA", "ANTI_HEMORRAGICA"]);
   });
 });
+
+import { bsaMosteller } from "../../src/rules/prescricao/instanciarProtocolo.js";
+describe("D-W9-61 · Mosteller", () => {
+  it("170 cm e 70 kg = 1,82 m²", () => { expect(bsaMosteller(70, 170)).toBe(1.82); });
+  it("ausente ou inválido = null", () => { expect(bsaMosteller(null, 170)).toBeNull(); expect(bsaMosteller(70, 0)).toBeNull(); });
+  it("sem bsaM2 informada, calcula por Mosteller e limita", () => {
+    const r = instanciarProtocolo(tpl([base]), { pesoKg: 70, alturaCm: 170, bsaM2: null, clcr: 90, medidoEm: "2030-01-01" });
+    if (!r.ok) throw new Error(); expect(r.itens[0]!.item.calculatedDose).toBe(182);
+    const g = instanciarProtocolo(tpl([base]), { pesoKg: 150, alturaCm: 200, bsaM2: null, clcr: 90, medidoEm: "2030-01-01" });
+    if (!g.ok) throw new Error(); expect(g.itens[0]!.item.calculatedDose).toBe(220); expect(g.itens[0]!.aviso).toMatch(/2\.2/);
+  });
+});
