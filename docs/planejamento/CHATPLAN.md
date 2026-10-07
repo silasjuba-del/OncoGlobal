@@ -317,3 +317,26 @@ M-AG  RESUMO DE ESTUDO "CÂNCERES GINECOLÓGICOS" (PDF de 33 pág., declara "ela
       |AG2| Achado: atribuições e números de vários estudos NÃO batem (RUBY/GARNET/KEYNOTE-868/KEYNOTE-826/PRIMA/GOG-0218/SOLO-1) e há erros de FIGO do colo; alguns são inconsistências internas do próprio PDF   ALERTA — conferir fonte primária
       |AG3| Regra proposta: documento de estudo gerado por IA NÃO entra na base como fonte; vale só como pista de busca; números só de fonte primária revisada pelo Dr. Silas (PLN-023/025)   PENDENTE (Dr. Silas decide)
 ```
+
+```
+M-AI  AVISOS CURTOS DO DR. SILAS: (1) "receitas-50-ja-validadas" (texto de memória colado) · (2) "CURSOR CODANDO" → PLN-030
+      |AI1| As 50 receitas de clínica médica (INT-MED, `docs/biblioteca/50-modelos-receitas.md`) já foram auditadas várias vezes: NÃO reauditar; OncoAssist tem COMORB-INTER   DECIDIDO ⚠ — gravado na memória (feedback_receitas_50_validadas.md)
+      |AI2| Essa biblioteca NÃO existe neste repositório (conferido); o exemplo com tramadol de PLN-021 NÃO é dessa biblioteca   REGISTRADO
+      |AI3| "CURSOR CODANDO": o Cursor está em execução (worktree `w10-cursor` com alterações em `src/ui/*`); lembrar a regra AC1 (sem documentos em pastas) e não tocar código   AVISO
+```
+
+```
+M-AH  DOCUMENTO FINAL DE ARQUITETURA CLÍNICA "OncoGlobal WORK" (datado 5 out 2026, outro chat; 19 seções) → PLN-030   fontes/M-AH_PLN-030_documento-final-arquitetura-clinica-work.md
+      |AH1| Funde 3 fontes (planejamento OncoGlobal LAB, chat da esteira A-B-C-D-E, modelos do serviço QT Hospital do Bem); conflitos C1–C6 declarados   MATERIAL (anterior às decisões de 06–07/10)
+      |AH2| C1 Febre (≥37,8 × >37,8)   JÁ DECIDIDO: D-W9-38 febre estritamente > 37,8 °C em tudo (corte, red flag, prescrições)   RESOLVIDO
+      |AH3| C2 Classe clínica × finalidade APAC   JÁ DECIDIDO: Bloco 9 nº 33 = campo separado da intenção clínica, o médico escolhe 1×, nenhum mapa automático (= opção C do doc)   RESOLVIDO
+      |AH4| C6 Redução de dose: 3 botões 20|30|40%   JÁ DECIDIDO (Bloco 8 nº 29, sobre a dose aplicada no ciclo anterior)   RESOLVIDO
+      |AH5| Semáforo sem amarelo (VERDE/VERMELHO/PENDENTE)   JÁ DECIDIDO (nº 10)   CONFLITA com PLN-006 I2/I3 (🟡 e 4 níveis de interação)   PENDENTE
+      |AH6| Prazos 15/45 dias   SUPERADO por nº 56/A4: 30 dias da última QT até cirurgia ou RT sequencial   SUPERADO
+      |AH7| CTCAE na tabela do doc é v5 (plaquetas G4 < 25.000)   CONFLITA com D-W9-67 (v6 pura; 20.000 = G3)   PENDENTE
+      |AH8| "Receita de sintomáticos: nunca tramadol; dexametasona D-1 e D+1 (nunca D+2); dipirona/paracetamol SOS só para dor"   REGRA DO SERVIÇO (QT) × exemplo de PLN-021 (tramadol)   PENDENTE
+      |AH9| FOLFOX/FOLFIRI no serviço SUS: D1+D2 ~6 h, sem bomba   CONFLITA com D-W9-59(a) (5-FU 46 h com bomba; "D1 e D2, 8 h, sem bomba" não vira ficha)   PENDENTE
+      |AH10| MAESTRO planeja × ORK executa (pendência 5 do doc)   RESPOSTA: DECISOES nº 11 e PLN-010 — Maestro = tabela de planos fixos (LLM só em pergunta livre); ORK executa, entrega microprompt e supervisiona; ORK-2 = Harness clínico + OncoChief   RESOLVIDO
+      |AH11| Nome do território (WORK/OncoGlobal; "oncomind" sai?)   PENDENTE
+      |AH12| Terceiro modelo de "resumo de caso" (seção 18): anagráficos · clínicos gerais · oncológicos · exames cronológicos · conduta · pendências · trials + medicação SUS   PENDENTE (junta-se a W1 de 5 blocos e ao PRONTUÁRIO DRIVE; qual é o canônico?)
+```
