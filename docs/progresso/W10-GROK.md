@@ -14,7 +14,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w10-grok`, branch `f0/w10-grok`.
 | GROK-08 FN-16 semáforo | FEITA | W10-GROK-08 | Adv FN-16 verde. Catálogo inativo. Sem bloqueio. |
 | GROK-09 suporte não oncológico | FEITA | W10-GROK-09 | Alertas da biblioteca. Sem bloqueio. |
 | GROK-10 ownership | FEITA | W10-GROK-10 | Veredito em ownership.ts. t56 ainda lê gates.ts. |
-| GROK-11 manifesto | — | | |
+| GROK-11 manifesto | FEITA | W10-GROK-11 | Script nomeia arquivo fora da trilha. n19 procura outro nome. |
 | GROK-12 dedupe + fachada w8 | — | | |
 | GROK-13 APAC no ledger | — | | |
 | GROK-14 fichas + fechamento | — | | |
@@ -421,4 +421,49 @@ Test Files  1 passed (1)
 ```
 Test Files  1 failed (1)
      Tests  1 failed | 4 passed (5)
+```
+
+## GROK-11
+
+`scripts/verificar-manifesto.mjs` compara arquivos com a faixa GROK de `docs/ondas/W10-COMUM.md` e `docs/ondas/W10-GROK.md`. Fora da trilha sai `FORA_DA_TRILHA <arquivo>` e exit 1. Dentro sai `trilha ok`. Cada saída pina `BASE` e o sha256 de `src/contracts/**/*.ts`, `corpus/rulesets/*.json`, do manifesto e do W10-COMUM. Arquivo já existente em `src/rules/w8/` fica fora. Arquivo novo nesse diretório entra quando `--base` não o contém. `package.json` não foi editado.
+
+`git merge f0/w1-integrado` no início: já estava em `07f0370`.
+
+Testes novos: `tests/w10-grok/grok-11-manifesto.test.ts` (5). O diff `f0/w1-integrado...HEAD` cabe na trilha.
+
+O adv `n19-manifesto-merge.adv.ts` procura `scripts/check-manifesto.mjs`, `scripts/check-claims.mjs`, `tests/w3/manifesto-merge.test.ts` ou `tests/manifesto.test.ts`. Resultado real: 1 falha (`SEM_IMPLEMENTACAO`) e 2 passos. O caso positivo devolve cedo quando o harness é null.
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries`
+
+```
+fronteiras ok (189 arquivos)
+```
+
+`npm run check:corpus` — fecho: `corpus ok (108 arquivos)`.
+
+`npx vitest run tests/w10-grok tests/corpus/loader.test.ts tests/corpus/interacoes.test.ts tests/rules-w8/interacoes.test.ts --no-file-parallelism`
+
+```
+Test Files  14 passed (14)
+     Tests  115 passed (115)
+```
+
+5 da GROK-11, mais GROK-01 (38), GROK-02 (11), GROK-03 (7), GROK-04 (5), GROK-05 (6), GROK-06 (7), GROK-07 (5), GROK-08 (5), GROK-09 (6), GROK-10 (7), loader (7), corpus de interações (3) e `rules-w8/interacoes` (3).
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
+
+```
+Test Files  1 passed (1)
+     Tests  9 passed (9)
+```
+
+`npx vitest run --config tests/adv-w8/vitest.config.ts tests/adv-w8/n19-manifesto-merge.adv.ts --no-file-parallelism` — exit 1.
+
+```
+Test Files  1 failed (1)
+     Tests  1 failed | 2 passed (3)
 ```

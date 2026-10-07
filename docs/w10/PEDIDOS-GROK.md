@@ -79,3 +79,14 @@ export { g16Owner } from "./ownership.js";
 
 2. **O adv não exercita o veredito hoje.** `t56-g16-owner-write.adv.ts` só importa `gates.js` (`g16Owner`, `g16` ou `donoDoObjeto`). Com a função null, os três casos de write/leitura devolvem cedo e contam como passou. O RT-09 já acha `g16Owner` em `ownership.ts`.
 3. **Veredito.** Write alheio, objeto sem dono e objeto com dois donos saem `BLOQUEIA_AUTORIDADE`. Leitura sai `PASSA`. Operação diferente de write/read sai `PENDENTE`. O catálogo é `corpus/capabilities.v1.json`; o segundo argumento injeta outro catálogo.
+
+## GROK-11
+
+1. **Script npm.** `package.json` não foi editado. Sugestão:
+
+```json
+"check:manifesto": "node scripts/verificar-manifesto.mjs --executor GROK --base f0/w1-integrado --head HEAD"
+```
+
+2. **Nome que o adv procura.** `n19-manifesto-merge.adv.ts` aceita só `scripts/check-manifesto.mjs`, `scripts/check-claims.mjs`, `tests/w3/manifesto-merge.test.ts` ou `tests/manifesto.test.ts`. A faixa manda `scripts/verificar-manifesto.mjs`. O primeiro teste fica vermelho. O terceiro devolve cedo com harness null. Incluir o nome da faixa na lista de candidatos fecha o adv sem mudar a expectativa dos outros casos.
+3. **Trilha.** Hoje o script só aceita `--executor GROK`. Outro nome sai `EXECUTOR_SEM_TRILHA` e exit 2. Sem `--base`, todo `src/rules/w8/*` fica fora. Com `--base`, entra o arquivo que a revisão ainda não tem.
