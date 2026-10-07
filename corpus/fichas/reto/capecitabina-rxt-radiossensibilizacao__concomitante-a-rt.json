@@ -1,0 +1,38 @@
+{
+  "templateId": "FICHA.reto.capecitabina-rxt-radiossensibilizacao__concomitante-a-rt@1.0.0",
+  "tumor": "Reto",
+  "nome": "Capecitabina + RxT (radiossensibilização)",
+  "cenario": "concomitante à RT",
+  "versao": "1.0.0",
+  "hash": "044fbf30d82f722e07ae358a0a9d33eaf6b6a597046587b0ee6cd28d5b8b4624",
+  "codigoInstitucional": null,
+  "intervaloDias": 7,
+  "ciclos": null,
+  "itens": [
+    {
+      "drug": "Capecitabina",
+      "classe": "QT",
+      "sequence": 1,
+      "standardDose": 825,
+      "doseBasis": "MG_M2",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg/m²",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "dias de RxT (5 dias por semana)"
+      ],
+      "observacao": "Dose por administração, 12/12 h, nos dias de radioterapia; nº de comprimidos pela SC.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    }
+  ],
+  "limiaresBula": null,
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Reto \"Capecitabina (+ RT)\" p. 112; decisões D-W9-23, D-W9-34, D-W9-50.",
+  "status": "RASCUNHO"
+}
