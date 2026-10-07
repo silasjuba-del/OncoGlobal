@@ -90,3 +90,9 @@ export { g16Owner } from "./ownership.js";
 
 2. **Nome que o adv procura.** `n19-manifesto-merge.adv.ts` aceita só `scripts/check-manifesto.mjs`, `scripts/check-claims.mjs`, `tests/w3/manifesto-merge.test.ts` ou `tests/manifesto.test.ts`. A faixa manda `scripts/verificar-manifesto.mjs`. O primeiro teste fica vermelho. O terceiro devolve cedo com harness null. Incluir o nome da faixa na lista de candidatos fecha o adv sem mudar a expectativa dos outros casos.
 3. **Trilha.** Hoje o script só aceita `--executor GROK`. Outro nome sai `EXECUTOR_SEM_TRILHA` e exit 2. Sem `--base`, todo `src/rules/w8/*` fica fora. Com `--base`, entra o arquivo que a revisão ainda não tem.
+
+## GROK-12
+
+1. **Caso 07.** `deduplicarExames` está em `src/modules/documentos/dedupe.ts`. O adv já procura esse caminho, depois de `src/leitura/dedupe.js`. `src/leitura` continua com o Fugu. O adv ficou verde.
+2. **Fachada.** `src/rules/w8-fachada.ts` não foi criado. A R-08 só deixa `src/rules/index.ts` reexportar `src/rules/*`. Os exports estáveis saem dos arquivos folha de `w8` por esse barrel. O Fugu importa de `src/rules/index.js`. Os corpos duplicados de `src/rules/w8/index.ts` continuam lá.
+3. **Ruleset.** `dedupe-exame.v1.json` segue com `ativo: false` (fora da faixa de edição). A função lê os `campos` de `patologia-ihq`. A chave de imagem (`servico`, `registro`, `dataExame`) não é a chave do caso 07. `dataImpressaNoTopo` não entra na chave.

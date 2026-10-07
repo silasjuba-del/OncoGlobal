@@ -15,7 +15,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w10-grok`, branch `f0/w10-grok`.
 | GROK-09 suporte não oncológico | FEITA | W10-GROK-09 | Alertas da biblioteca. Sem bloqueio. |
 | GROK-10 ownership | FEITA | W10-GROK-10 | Veredito em ownership.ts. t56 ainda lê gates.ts. |
 | GROK-11 manifesto | FEITA | W10-GROK-11 | Script nomeia arquivo fora da trilha. n19 procura outro nome. |
-| GROK-12 dedupe + fachada w8 | — | | |
+| GROK-12 dedupe + fachada w8 | FEITA | W10-GROK-12 | Caso 07 verde. Fachada no barrel. |
 | GROK-13 APAC no ledger | — | | |
 | GROK-14 fichas + fechamento | — | | |
 
@@ -466,4 +466,51 @@ Test Files  1 passed (1)
 ```
 Test Files  1 failed (1)
      Tests  1 failed | 2 passed (3)
+```
+
+## GROK-12
+
+`deduplicarExames(paginas, campos?)` em `src/modules/documentos/dedupe.ts`. A chave padrão sai de `corpus/rulesets/dedupe-exame.v1.json`, item `patologia-ihq`: laboratório + nº do exame + data de entrada. Data impressa no topo e texto de conclusão ficam fora da chave. Campo ausente não junta páginas. `src/rules/w8/*` não foi editado. `src/leitura` não foi editado.
+
+O adv `caso07-dedupe.adv.ts` acha a função no módulo e fica verde: 4 testes.
+
+A fachada pedida em `src/rules/w8-fachada.ts` furaria a R-08. Os reexports estáveis estão em `src/rules/index.ts`, a partir dos arquivos folha de `w8`. O nome da função do w8 no barrel é `deduplicarExamesW8`, para não colidir com a do módulo.
+
+`git merge f0/w1-integrado` no início: já estava em `d507e53`.
+
+Testes novos: `tests/w10-grok/grok-12-dedupe.test.ts` (6).
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries`
+
+```
+fronteiras ok (190 arquivos)
+```
+
+`npm run check:corpus` — fecho: `corpus ok (108 arquivos)`.
+
+`npx vitest run tests/w10-grok tests/corpus/loader.test.ts tests/corpus/interacoes.test.ts tests/rules-w8/interacoes.test.ts --no-file-parallelism`
+
+```
+Test Files  15 passed (15)
+     Tests  121 passed (121)
+```
+
+6 da GROK-12, mais GROK-01 (38), GROK-02 (11), GROK-03 (7), GROK-04 (5), GROK-05 (6), GROK-06 (7), GROK-07 (5), GROK-08 (5), GROK-09 (6), GROK-10 (7), GROK-11 (5), loader (7), corpus de interações (3) e `rules-w8/interacoes` (3).
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
+
+```
+Test Files  1 passed (1)
+     Tests  9 passed (9)
+```
+
+`npx vitest run --config tests/adv-w8/vitest.config.ts tests/adv-w8/caso07-dedupe.adv.ts --no-file-parallelism`
+
+```
+Test Files  1 passed (1)
+     Tests  4 passed (4)
 ```
