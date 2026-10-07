@@ -1,4 +1,5 @@
 import type { z } from "zod";
+import type { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
 import type { Fonte } from "../../contracts/base.js";
 import type { Triagem, TumorLot } from "../../contracts/clinico.js";
 import type { Semaforo } from "../../contracts/estados.js";
@@ -17,7 +18,9 @@ export type CodigoPorta =
   | "SESSAO_EXPIRADA"
   | "SERVIDOR_PENDENTE"
   | "PAYLOAD_INVALIDO"
-  | "PACIENTE_AUSENTE";
+  | "PACIENTE_AUSENTE"
+  | "FONTE_ALTERADA"
+  | "CONTEXTO_CONSULTA_ALTERADO";
 
 export class ErroPorta extends Error {
   constructor(readonly codigo: CodigoPorta) {
@@ -176,13 +179,16 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  oncoassistStatus?(signal?: AbortSignal): Promise<EstadoOncoassist>;
+  oncoassistFontes?(contexto: PedidoBundle, signal?: AbortSignal): Promise<FontesOncoassist>;
+  oncoassistClassificar?(pedido: PedidoBundle & { draftId: string }, signal?: AbortSignal): Promise<RespostaOncoassist>;
   login(senha: string): Promise<ResultadoLogin>;
   confirmar(bloco: ConfirmarBloco): Promise<ResultadoConfirmar>;
   acao(intent: AcaoIntent): Promise<ResultadoAcao>;
   // [SERVIDOR_PENDENTE] POST /consulta/bundle
   exibirBundle(pedido: PedidoBundle): Promise<BundleExibidoVisao>;
   // [SERVIDOR_PENDENTE]
-  carregarConsulta(patientId: string): Promise<ConsultaVisao>;
+  carregarConsulta(patientId: string, tumorLotId?: string | null): Promise<ConsultaVisao>;
   // [SERVIDOR_PENDENTE]
   agendaDoDia(): Promise<AgendaVisao>;
   // [SERVIDOR_PENDENTE]

@@ -102,7 +102,8 @@ export function lerPaciente(db: DatabaseSync, patientId: string) {
   return porTipo(eventos(db), "Paciente", Paciente)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value ?? null;
 }
-export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, sessao: Sessao) {
+export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, sessao: Sessao,
+  tumorLotId?: string | null) {
   const all = eventos(db), paciente = porTipo(all, "Paciente", Paciente)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value;
   if (!paciente) return { codigo: "PACIENTE_NAO_ENCONTRADO" as const };
@@ -113,10 +114,13 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   if (civil.estado !== "OK") return { codigo: civil.codigo };
   const lotes = porTipo(all, "TumorLot", TumorLot)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).map((x) => x.value);
+  if (tumorLotId !== undefined && tumorLotId !== null && !lotes.some((lote) => lote.tumorLotId === tumorLotId))
+    return { codigo: "TUMOR_LOT_FORA_DO_PACIENTE" as const };
   const lotesNoEncontro = [...new Set(patientEvents.filter((event) => event.encounterId === current.encounterId
     && event.tumorLotId !== null).map((event) => event.tumorLotId!))];
-  const loteAmbiguo = current.tumorLotId === null && lotesNoEncontro.length > 1;
-  const tumorLotSelecionado = current.tumorLotId ?? (lotesNoEncontro.length === 1 ? lotesNoEncontro[0]! : null);
+  const loteAmbiguo = tumorLotId === undefined && current.tumorLotId === null && lotesNoEncontro.length > 1;
+  const tumorLotSelecionado = tumorLotId !== undefined ? tumorLotId
+    : current.tumorLotId ?? (lotesNoEncontro.length === 1 ? lotesNoEncontro[0]! : null);
   const lote = !loteAmbiguo && tumorLotSelecionado
     ? lotes.find((x) => x.tumorLotId === tumorLotSelecionado) ?? null : null;
   const episodios = lote ? porTipo(all, "TreatmentEpisode", TreatmentEpisode)

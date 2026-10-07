@@ -1,4 +1,5 @@
 import { ActionIntent, ConfirmarBloco } from "../../contracts/operacao.js";
+import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
 import {
   ErroPorta,
   type AcaoIntent,
@@ -34,7 +35,7 @@ function decisaoDe(json: unknown): string | null {
 export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   let token: string | null = null;
 
-  async function enviar(caminho: string, corpo: unknown, autenticar: boolean): Promise<RespostaBruta> {
+  async function enviar(caminho: string, corpo: unknown, autenticar: boolean, signal?: AbortSignal): Promise<RespostaBruta> {
     const headers: Record<string, string> = {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -45,6 +46,7 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       headers,
       body: JSON.stringify(corpo),
       credentials: "omit",
+      ...(signal ? { signal } : {}),
     });
     let json: unknown = null;
     try {
@@ -61,6 +63,26 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   }
 
   return {
+    async oncoassistStatus(signal) {
+      const { status, json } = await enviar("/consulta/oncoassist/status", {}, true, signal);
+      const result = EstadoOncoassist.safeParse(json);
+      if (status !== 200 || !result.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return result.data;
+    },
+    async oncoassistFontes(contexto, signal) {
+      const { status, json } = await enviar("/consulta/oncoassist/fontes", contexto, true, signal);
+      const result = FontesOncoassist.safeParse(json);
+      if (status !== 200 || !result.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return result.data;
+    },
+    async oncoassistClassificar(pedido, signal) {
+      const { status, json } = await enviar("/consulta/oncoassist/classificar-fonte", pedido, true, signal);
+      const codigo = codigoDe(json, "PAYLOAD_INVALIDO");
+      if (codigo === "FONTE_ALTERADA" || codigo === "CONTEXTO_CONSULTA_ALTERADO") throw new ErroPorta(codigo);
+      const result = RespostaOncoassist.safeParse(json);
+      if (status !== 200 || !result.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return result.data;
+    },
     async login(senha: string): Promise<ResultadoLogin> {
       const { status, json } = await enviar("/login", { senha }, false);
       if (status === 200 && json && typeof json === "object" && "token" in json && typeof json.token === "string") {
@@ -92,8 +114,10 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     },
 
     // [SERVIDOR_PENDENTE]
-    async carregarConsulta(patientId) {
-      const { json } = await enviar("/consulta/carregar", { patientId }, true);
+    async carregarConsulta(patientId, tumorLotId) {
+      const { status, json } = await enviar("/consulta/carregar", { patientId,
+        ...(tumorLotId === undefined ? {} : { tumorLotId }) }, true);
+      if (status !== 200) throw new ErroPorta("PACIENTE_AUSENTE");
       return json as Awaited<ReturnType<PortaConsulta["carregarConsulta"]>>;
     },
 

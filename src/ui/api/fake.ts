@@ -664,9 +664,15 @@ export function criarPortaFalsa(): PortaConsulta {
     },
 
     // [SERVIDOR_PENDENTE]
-    async carregarConsulta(patientId) {
+    async carregarConsulta(patientId, tumorLotId) {
       const atual = fichas.get(patientId);
       if (!atual) throw new ErroPorta("PACIENTE_AUSENTE");
+      if (tumorLotId !== undefined) {
+        if (tumorLotId !== null && !atual.consulta.cabecalho.lotes.some((lote) => lote.tumorLotId === tumorLotId))
+          throw new ErroPorta("PAYLOAD_INVALIDO");
+        return { ...atual.consulta, tumorLotId,
+          cabecalho: { ...atual.consulta.cabecalho, loteSelecionadoId: tumorLotId } };
+      }
       return atual.consulta;
     },
 

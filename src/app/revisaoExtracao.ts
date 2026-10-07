@@ -15,6 +15,7 @@ export interface RevisaoExtracaoPreparada {
     readonly facts: readonly FatoClinico[];
     readonly fontes: readonly Fonte[];
     readonly review: { readonly medicoId: string; readonly em: string; readonly operationId: string };
+    readonly origem?: { readonly draftId: string; readonly revision: number; readonly conteudoHash: string };
   };
   readonly registros: readonly {
     readonly eventId: string;
@@ -90,6 +91,7 @@ export function prepararRevisaoExtracao(input: {
   readonly operationId: string;
   readonly medicoId: string;
   readonly em: string;
+  readonly origem?: { readonly draftId: string; readonly revision: number; readonly conteudoHash: string };
 }): RevisaoExtracaoPreparada {
   if (!input.factIds.length || new Set(input.factIds).size !== input.factIds.length)
     throw new Error("FACT_IDS_INVALIDOS");
@@ -145,6 +147,7 @@ export function prepararRevisaoExtracao(input: {
     contexto: { patientId: input.patientId, encounterId: input.encounterId, tumorLotId: input.tumorLotId },
     status: "RASCUNHO", resumo, selectedFactIds: [...input.factIds], facts: escolhidos,
     fontes, review: { medicoId: input.medicoId, em: input.em, operationId: input.operationId },
+    ...(input.origem ? { origem: { ...input.origem } } : {}),
   };
   const registros = escolhidos.map((fact) => {
     const fatoExplicito = fact.evidence === "EXPLICIT" && !fact.requiresConfirmation;
