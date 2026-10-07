@@ -4,17 +4,30 @@ import { BarraFechamento } from "../consulta/BarraFechamento.js";
 import { PainelDelta } from "../consulta/PainelDelta.js";
 import { CardEvidencia } from "../evidencia/CardEvidencia.js";
 import type { ChavesIntencao } from "../api/chaves.js";
+import { ID } from "../api/fake.js";
 import { ErroPorta, type AcaoIntent, type ConsultaVisao, type PortaConsulta } from "../api/porta.js";
-import { cadastroSintetico } from "../oncochart/cadastro-sintetico.js";
-import { montarCabecalhoChart, type CabecalhoChart } from "../oncochart/chart-visao.js";
 import { AbasChart, type AbaChart } from "../oncochart/AbasChart.js";
+import { cadastroSintetico } from "../oncochart/cadastro-sintetico.js";
+import { CaixaRevisao } from "../oncochart/CaixaRevisao.js";
+import {
+  montarRevisaoSintetica,
+  type RevisaoCaixaUnica,
+} from "../oncochart/caixa-revisao-visao.js";
 import { CardsVisaoGeral } from "../oncochart/CardsVisaoGeral.js";
+import { montarCabecalhoChart, type CabecalhoChart } from "../oncochart/chart-visao.js";
+import { ImageViewerOncoAssist } from "../oncochart/ImageViewerOncoAssist.js";
 import { PatientHeader } from "../oncochart/PatientHeader.js";
 import { Timeline2D } from "../oncochart/Timeline2D.js";
 import { timelineSintetica } from "../oncochart/timeline-visao.js";
 
 // @ts-expect-error folha CSS pura, resolvida pelo Vite
 import "./consulta.css";
+
+const CANDIDATOS = [
+  { patientId: ID.verde, nome: "Paciente Teste", prontuario: "PR-VERDE" },
+  { patientId: ID.vermelho, nome: "Paciente Teste", prontuario: "PR-VERMELHO" },
+  { patientId: ID.pendente, nome: "Paciente Teste 03", prontuario: "PR-PENDENTE" },
+] as const;
 
 /** Consulta já montada. Validar não imprime. Imprimir só depois de uma tecla de confirmação. */
 export function TelaConsulta({
@@ -36,7 +49,10 @@ export function TelaConsulta({
   const [tnmMsg, setTnmMsg] = useState<string | null>(null);
   const [jornada3d, setJornada3d] = useState<string | null>(null);
   const [aba, setAba] = useState<AbaChart>("geral");
-  const [caixaUnica, setCaixaUnica] = useState<string | null>(null);
+  const [revisao, setRevisao] = useState<RevisaoCaixaUnica | null>(null);
+  const [acaoRevisao, setAcaoRevisao] = useState<string | null>(null);
+  const [fonteAberta, setFonteAberta] = useState<string | null>(null);
+  const [viewer, setViewer] = useState(false);
   const impressao = useRef<AcaoIntent | null>(null);
   const impressaoEnviada = useRef(false);
   const chaveValidar = chaves.novaChaveIntencao(`validar:${patientId}`);
@@ -75,6 +91,19 @@ export function TelaConsulta({
     return () => onChart?.(null);
   }, [chart, onChart]);
 
+  function abrirRevisao(origemRotulo: string, texto: string) {
+    setRevisao(
+      montarRevisaoSintetica({
+        origemRotulo,
+        texto,
+        patientIdAberto: patientId,
+        candidatos: CANDIDATOS,
+      }),
+    );
+    setAcaoRevisao(null);
+    setFonteAberta(null);
+  }
+
   function dispararImpressao() {
     const intent = impressao.current;
     if (!intent || impressaoEnviada.current) return;
@@ -102,13 +131,16 @@ export function TelaConsulta({
   }
 
   const cabecalho = { ...visao.cabecalho, loteSelecionadoId: loteId };
+  const temHidronefrose = /hidronefrose/i.test(revisao?.origemRotulo ?? "");
 
   return (
-    <main aria-label="Consulta pronta" className="tela-consulta pilha">
+    <main aria-label="Consulta pronta" className="tela-consulta pilha" style={{ position: "relative" }}>
       {sessaoExpirada ? <p>sessão expirada — entre de novo</p> : null}
       {flash ? <p className="oc-flash-status" role="status">{flash}</p> : null}
       {tnmMsg ? <p className="oc-flash-status" role="status">{tnmMsg}</p> : null}
       {jornada3d ? <p className="oc-flash-status" role="status">{jornada3d}</p> : null}
+      {acaoRevisao ? <p className="oc-flash-status" role="status">{acaoRevisao}</p> : null}
+      {fonteAberta ? <p className="oc-flash-status" role="status">fonte: {fonteAberta}</p> : null}
       <PatientHeader
         chart={chart}
         semaforo={cabecalho.semaforo}
@@ -121,6 +153,9 @@ export function TelaConsulta({
         visao={timelineSintetica(patientId, visao.hoje)}
         onVer3d={() => setJornada3d("Jornada 3D — modal na CURSOR-08")}
       />
+      <button type="button" className="oc-btn-primary" style={{ alignSelf: "flex-start" }} onClick={() => setViewer(true)}>
+        Abrir TC
+      </button>
       <AbasChart
         valor={aba}
         onChange={setAba}
@@ -130,11 +165,6 @@ export function TelaConsulta({
           if (atual === "geral") {
             return (
               <>
-                {caixaUnica ? (
-                  <p className="oc-flash-status" role="status">
-                    caixa única: {caixaUnica} — revisão na CURSOR-05
-                  </p>
-                ) : null}
                 <CardsVisaoGeral
                   protocolo={cabecalho.episodio?.esquemaId ?? null}
                   ciclo={chart.cicloNumero != null ? `C${chart.cicloNumero}` : null}
@@ -146,9 +176,37 @@ export function TelaConsulta({
                   recist={null}
                   ecog={chart.diagnostico.ecog != null ? String(chart.diagnostico.ecog) : null}
                   ctcae={null}
-                  onSoltarArquivo={(nome) => setCaixaUnica(nome)}
+                  onSoltarArquivo={(nome, texto) => abrirRevisao(nome, texto)}
+                  onColarTexto={(texto) => abrirRevisao("colar", texto)}
                   onSalvarRascunho={() => undefined}
                 />
+                {revisao ? (
+                  <CaixaRevisao
+                    revisao={revisao}
+                    onFechar={() => setRevisao(null)}
+                    onAbrirFonte={(f) => setFonteAberta(`${f.origem} · ${f.trecho}`)}
+                    onConfirmar={(id) => setAcaoRevisao(`confirmado: ${id}`)}
+                    onCorrigir={(id) => setAcaoRevisao(`corrigir: ${id}`)}
+                    onDescartar={(id) => {
+                      setRevisao((r) =>
+                        r ? { ...r, excecoes: r.excecoes.filter((e) => e.id !== id) } : null,
+                      );
+                      setAcaoRevisao(`descartado: ${id}`);
+                    }}
+                    onLigar={(excecaoId, pid) => {
+                      setRevisao((r) => {
+                        if (!r) return r;
+                        return {
+                          ...r,
+                          excecoes: r.excecoes.map((e) =>
+                            e.id === excecaoId ? { ...e, patientId: pid } : e,
+                          ),
+                        };
+                      });
+                      setAcaoRevisao(`ligado: ${excecaoId} → ${pid}`);
+                    }}
+                  />
+                ) : null}
               </>
             );
           }
@@ -221,6 +279,30 @@ export function TelaConsulta({
           </p>
         ) : null}
       </div>
+      {viewer ? (
+        <ImageViewerOncoAssist
+          exameTitulo="TC abdome sintético"
+          laudo={
+            temHidronefrose
+              ? "Hidronefrose à direita descrita no laudo sintético."
+              : "Laudo sintético sem emergência RADS destacada."
+          }
+          achados={[
+            {
+              id: "ach-1",
+              texto: "Achado já extraído (proposta)",
+              trechoFonte: "trecho do laudo sintético",
+            },
+          ]}
+          alertasRads={
+            temHidronefrose
+              ? [{ id: "rads-1", rotulo: "RADS hidronefrose", trecho: "hidronefrose à direita" }]
+              : []
+          }
+          onFechar={() => setViewer(false)}
+          onTrecho={(t) => setFonteAberta(t)}
+        />
+      ) : null}
     </main>
   );
 }

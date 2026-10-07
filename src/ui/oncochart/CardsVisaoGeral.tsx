@@ -8,7 +8,8 @@ export interface CardVisaoGeralProps {
   recist: string | null;
   ecog: string | null;
   ctcae: string | null;
-  onSoltarArquivo: (nome: string) => void;
+  onSoltarArquivo: (nome: string, texto: string) => void;
+  onColarTexto: (texto: string) => void;
   onSalvarRascunho: (texto: string) => void;
 }
 
@@ -21,11 +22,13 @@ export function CardsVisaoGeral({
   ecog,
   ctcae,
   onSoltarArquivo,
+  onColarTexto,
   onSalvarRascunho,
 }: CardVisaoGeralProps) {
   const [rascunho, setRascunho] = useState("");
   const [salvo, setSalvo] = useState<string | null>(null);
   const [arquivo, setArquivo] = useState<string | null>(null);
+  const [colar, setColar] = useState("");
 
   function pendente(v: string | null): string {
     return v && v.trim().length > 0 ? v : "PENDENTE";
@@ -57,7 +60,14 @@ export function CardsVisaoGeral({
               const f = e.dataTransfer.files[0];
               const nome = f?.name ?? "arquivo-sintetico.pdf";
               setArquivo(nome);
-              onSoltarArquivo(nome);
+              if (f) {
+                const leitor = new FileReader();
+                leitor.onload = () => onSoltarArquivo(nome, String(leitor.result ?? ""));
+                leitor.onerror = () => onSoltarArquivo(nome, "");
+                leitor.readAsText(f);
+              } else {
+                onSoltarArquivo(nome, "");
+              }
             }}
           >
             <p>Soltar PDF/Word — caixa única</p>
@@ -65,17 +75,40 @@ export function CardsVisaoGeral({
               Anexar
               <input
                 type="file"
-                accept=".pdf,.doc,.docx,application/pdf"
+                accept=".pdf,.doc,.docx,.txt,application/pdf,text/plain"
                 aria-label="Anexar documento"
                 onChange={(e) => {
                   const f = e.target.files?.[0];
                   if (!f) return;
                   setArquivo(f.name);
-                  onSoltarArquivo(f.name);
+                  const leitor = new FileReader();
+                  leitor.onload = () => onSoltarArquivo(f.name, String(leitor.result ?? ""));
+                  leitor.onerror = () => onSoltarArquivo(f.name, "");
+                  leitor.readAsText(f);
                 }}
               />
             </label>
           </div>
+          <label>
+            Colar texto
+            <textarea
+              className="oc-colar"
+              aria-label="Colar texto na caixa única"
+              value={colar}
+              onChange={(e) => setColar(e.target.value)}
+              rows={3}
+            />
+          </label>
+          <button
+            type="button"
+            onClick={() => {
+              if (colar.trim().length === 0) return;
+              onColarTexto(colar);
+              setArquivo("colar");
+            }}
+          >
+            Enviar para revisão
+          </button>
           {arquivo ? <p role="status">recebido: {arquivo}</p> : (
             <p className={classeSemaforo("PENDENTE")}>nenhum documento — PENDENTE</p>
           )}

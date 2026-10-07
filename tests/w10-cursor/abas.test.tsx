@@ -38,7 +38,7 @@ describe("CURSOR-04 Abas e cards", () => {
         getData: () => "",
       },
     });
-    expect(screen.getByText(/caixa única: laudo-sintetico\.pdf/)).toBeTruthy();
+    expect(await screen.findByRole("region", { name: "Caixa de revisão" }, lento)).toBeTruthy();
 
     fireEvent.click(within(abas).getByRole("tab", { name: /^Quimioterapia/ }));
     expect(within(abas).getByText(/CURSOR-10/)).toBeTruthy();

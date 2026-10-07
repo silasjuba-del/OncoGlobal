@@ -80,4 +80,49 @@ Geist e Geist Mono estão em `src/ui/oncochart/fontes/*.woff2`, com a OFL ao lad
 
 ### Ainda aberto
 - Tema PERSONALIZAR (CURSOR-11)
-- Modal Jornada 3D (CURSOR-08), Flash/TNM (CURSOR-09), revisão da caixa única (CURSOR-05)
+- Modal Jornada 3D (CURSOR-08), Flash/TNM (CURSOR-09)
+
+## CURSOR-05
+
+### Contratos / Fugu
+- Reconciliação real ClinicalFact + EncounterSegment (`PROVISORIO-W10` em `caixa-revisao-visao.ts`)
+- Extração de caixas numeradas (hoje sintética)
+
+### Copy
+| Chave pedida | Texto em uso |
+|---|---|
+| `revisao.titulo` | Caixa de revisão |
+| `revisao.resumo` | ✓ N fatos reconciliados · ⚠ K precisam confirmação |
+| `revisao.juncaoNuncaAuto` | Sem paciente — junção só com clique (nunca automática) |
+| `caixaUnica.colar` | Colar texto na caixa única |
+| `caixaUnica.enviar` | Enviar para revisão |
+
+## CURSOR-06
+
+### Porta / servidor
+- Fila do dia com status agora/espera/feito e “Chamar próximo” real
+- Exame selecionado (resumo/laudo/imagens) ligado ao lote
+- OncoBoard persistido (hoje board sintético no App)
+
+### Copy
+| Chave pedida | Texto em uso |
+|---|---|
+| `painel.exame` | Exame |
+| `painel.board` | OncoBoard |
+| `painel.fila` | Fila |
+| `fila.chamarProximo` | Chamar próximo |
+
+## CURSOR-07
+
+### Funções / catálogo
+- Catálogo RADS 30 emergências (regra Grok) — chips sintéticos na UI
+- Morfometria “4 cliques” → função de cálculo da equipe interna (UI só mostra DRAFT)
+
+### Copy
+| Chave pedida | Texto em uso |
+|---|---|
+| `viewer.titulo` | Visualizador de imagem |
+| `viewer.oncoAssist` | OncoAssist |
+| `viewer.semConduta` | Narra o laudo e achados já extraídos — sem conduta. |
+| `viewer.morfoDraft` | DRAFT / NEEDS_REVIEW — morfometria sintética; não alimenta RECIST |
+| `viewer.voz` | Voz local (opcional) |
