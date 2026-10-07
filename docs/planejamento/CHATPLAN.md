@@ -310,3 +310,10 @@ M-AF  DUAS REFERÊNCIAS: STF TEMA 6 (medicamento fora do SUS) + MANUAL SOnHe 202
       |AF4| Manual SOnHe: 412 páginas, sumário por tumor + suporte (dor, náusea/vômito, neutropenia febril); só capa/créditos/apresentação/sumário lidos   PARCIAL
       |AF5| Manual SOnHe não é cópia no repositório: referência + extração com fonte/página, revisada pelo Dr. Silas antes da base   PROPOSTA (PLN-023)
 ```
+
+```
+M-AG  RESUMO DE ESTUDO "CÂNCERES GINECOLÓGICOS" (PDF de 33 pág., declara "elaborado com assistência de IA") → PLN-029   fontes/M-AG_PLN-029_resumo-canceres-ginecologicos-ia.md
+      |AG1| Material de estudo (ovário, endométrio, colo) com tabela de estudos, 20 flashcards, 10 questões e 10 referências   MATERIAL (sem instrução do Dr. Silas)
+      |AG2| Achado: atribuições e números de vários estudos NÃO batem (RUBY/GARNET/KEYNOTE-868/KEYNOTE-826/PRIMA/GOG-0218/SOLO-1) e há erros de FIGO do colo; alguns são inconsistências internas do próprio PDF   ALERTA — conferir fonte primária
+      |AG3| Regra proposta: documento de estudo gerado por IA NÃO entra na base como fonte; vale só como pista de busca; números só de fonte primária revisada pelo Dr. Silas (PLN-023/025)   PENDENTE (Dr. Silas decide)
+```
