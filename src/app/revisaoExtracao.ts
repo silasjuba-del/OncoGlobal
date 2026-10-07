@@ -122,8 +122,8 @@ export function prepararRevisaoExtracao(input: {
     const data = dataIso(fact.date);
     const incerto = fact.requiresConfirmation || fact.evidence === "UNCERTAIN" || fact.evidence === "INFERRED";
     const estado = incerto
-      ? "candidato revisado; incerteza original preservada e requer confirmação clínica adicional"
-      : "fato revisado explicitamente pelo médico";
+      ? "candidato selecionado para revisão; incerteza original preservada e requer confirmação clínica adicional"
+      : "fato selecionado para revisão médica";
     return { secao: secao(fact.domain), texto: `- ${literal(fact.value)}; ${estado}; evidência ${fact.evidence}; fonte ${fact.sourceId}`
       + (data ? `; data clínica ${data}` : "; data clínica não consta no fato")
       + `; trecho original: ${fact.rawEvidence}` };

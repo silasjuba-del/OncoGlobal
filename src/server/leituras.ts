@@ -156,12 +156,19 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     const payload = draft.payload;
     if (!payload || typeof payload !== "object" || Array.isArray(payload)) return [];
     const value = payload as Record<string, unknown>;
+    const review = value.review && typeof value.review === "object" ? value.review as Record<string, unknown> : null;
+    const revisaoRegistrada = !!review && all.some((event) => event.operationId === review.operationId
+      && event.patientId === patientId && event.encounterId === current.encounterId
+      && event.tumorLotId === (lote?.tumorLotId ?? null)
+      && (event.revisao === "CONFIRMADO" || event.revisao === "ASSINADO"));
     return value.kind === "EVOLUCAO_RASCUNHO" && typeof value.resumo === "string"
-      ? [{ draftId: draft.draftId, revision: draft.revision, status: "RASCUNHO" as const, resumo: value.resumo }]
+      ? [{ draftId: draft.draftId, revision: draft.revision, status: "RASCUNHO" as const, resumo: value.resumo,
+        revisaoRegistrada, somentePreparada: !!value.origem && !revisaoRegistrada }]
       : [];
   });
-  const resumoEvolucao = evolucoesRascunho.length
-    ? evolucoesRascunho.map((item) => item.resumo).join("\n\n--- Próximo rascunho de evolução ---\n\n")
+  const evolucoesRevisadas = evolucoesRascunho.filter((item) => !item.somentePreparada);
+  const resumoEvolucao = evolucoesRevisadas.length
+    ? evolucoesRevisadas.map((item) => item.resumo).join("\n\n--- Próximo rascunho de evolução ---\n\n")
     : null;
   const fatosRevisados = eventosVigentes(all.filter((event) => event.patientId === patientId
     && event.encounterId === current.encounterId && event.tumorLotId === (lote?.tumorLotId ?? null)

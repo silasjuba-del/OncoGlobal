@@ -3,7 +3,7 @@ import { Sessao, type Sessao as SessaoTipo } from "../contracts/base.js";
 import { hashCanonico } from "../modules/tipos.js";
 
 /** Documento exibido = id + versão + hash do CONTEÚDO exato mostrado ao médico (A13). */
-export interface DocumentoExibido { documentId: string; documentVersion: number; conteudoHash: string }
+export interface DocumentoExibido { documentId: string; documentVersion: number; conteudoHash: string; draftId?: string }
 type ContextoExibicao = { patientId: string; encounterId: string; tumorLotId?: string | null };
 
 /** Único canon SHA-256 do módulo, mantendo a API pública do servidor. */

@@ -3,6 +3,7 @@ import { z } from "zod";
 import { criarPortaHttp, type OpcoesHttp } from "./api/http.js";
 import type { PedidoBundle, PortaConsulta } from "./api/porta.js";
 import { PainelOncoassist } from "./consulta/PainelOncoassist.js";
+import { RevisaoExtracaoLocal } from "./consulta/RevisaoExtracaoLocal.js";
 
 const agendaSchema = z.object({ itens: z.array(z.object({ patientId: z.string().min(1), nome: z.string(), horario: z.string() })) });
 const consultaSchema = z.object({ patientId: z.string().min(1), encounterId: z.string().min(1), tumorLotId: z.string().nullable() });
@@ -85,8 +86,10 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         </select>
       </label>}
       {ocupado ? <p role="status">Abrindo consulta…</p> : null}
-      {contexto ? <PainelOncoassist key={`${contexto.patientId}:${contexto.encounterId}:${contexto.tumorLotId ?? ""}`}
-        porta={porta} contexto={contexto} /> : null}
+      {contexto ? <div key={`${contexto.patientId}:${contexto.encounterId}:${contexto.tumorLotId ?? ""}`}>
+        <RevisaoExtracaoLocal porta={porta} contexto={contexto} />
+        <PainelOncoassist porta={porta} contexto={contexto} />
+      </div> : null}
     </>}
   </main>;
 }

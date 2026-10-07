@@ -2,8 +2,9 @@ import { ClinicalEvent, SignatureReference, type ClinicalEvent as ClinicalEventT
 import { TreatmentAdministration, type TreatmentAdministration as TreatmentAdministrationType } from "../contracts/clinico.js";
 import type { DatabaseSync } from "node:sqlite";
 import { DataCivil, Instante } from "../contracts/base.js";
+import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
 
-export const ESTATISTICA_VERSAO = "W10-LUNA4-02" as const;
+export const ESTATISTICA_VERSAO = "W10-REAUDITORIA-03" as const;
 
 export type CategoriaEventoEstatistico = "FATO" | "DOCUMENTO" | "ADMINISTRACAO" | "OUTRO";
 export type StatusAdministracaoEstatistica = "COMPLETA" | "PARCIAL" | "OMITIDA" | "INTERROMPIDA";
@@ -55,7 +56,7 @@ function fingerprint(evento: ClinicalEvent): string {
 }
 
 /** Exact civil day explicitly recorded for the fact, never the ingestion time.
- * Administration uses its actual start and the civil day in its recorded offset.
+ * Administration uses its actual start converted to the service civil day (-03:00).
  * Source-document dates do not establish the date of the administration.
  */
 function diaClinico(evento: ClinicalEventType): { dia: string | null; invalida: boolean } {
@@ -66,7 +67,8 @@ function diaClinico(evento: ClinicalEventType): { dia: string | null; invalida: 
   if (value === null || value === undefined) return { dia: null, invalida: false };
   if (evento.tipo === "TreatmentAdministration") {
     if (!Instante.safeParse(value).success || typeof value !== "string") return { dia: null, invalida: true };
-    return { dia: value.slice(0, 10), invalida: false };
+    const civil = dataCivilDoServico(value);
+    return civil.estado === "OK" ? { dia: civil.dataCivil, invalida: false } : { dia: null, invalida: true };
   }
   const parsed = DataCivil.safeParse(value);
   return parsed.success ? { dia: parsed.data, invalida: false } : { dia: null, invalida: true };
@@ -168,7 +170,9 @@ export function projetarEstatistica(eventos: readonly ClinicalEventType[], opcoe
     const canonicos = new Set(registros.map(({ dado }) => JSON.stringify({
       adminId: dado.adminId, cicloId: dado.cicloId, prescricaoRef: dado.prescricaoRef,
       item: dado.item, droga: dado.droga, quantidadeEfetivaMg: dado.quantidadeEfetivaMg,
-      status: dado.status, motivo: dado.motivo, inicio: dado.inicio, fim: dado.fim,
+      status: dado.status, motivo: dado.motivo,
+      inicio: dado.inicio === null ? null : Date.parse(dado.inicio),
+      fim: dado.fim === null ? null : Date.parse(dado.fim),
     })));
     if (canonicos.size > 1) {
       // Competing current versions of one administration are unresolved facts.

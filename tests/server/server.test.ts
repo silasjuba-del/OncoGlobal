@@ -9,7 +9,7 @@ import { salvarDraft } from "../../src/kernel/ledger/drafts.js";
 import { listarEventos } from "../../src/kernel/ledger/ledger.js";
 import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gateway.js";
 import { criarServidorLocal } from "../../src/server/http.js";
-import { criarGerenciadorSessao, hashConteudoExibido } from "../../src/server/sessao.js";
+import { criarGerenciadorSessao } from "../../src/server/sessao.js";
 
 const dirs: string[] = [], servers: Server[] = [];
 afterEach(async () => {
@@ -61,11 +61,13 @@ it("G-25 rejeita assinatura fora do bundle; validação grava N eventos e não i
   for (const id of ["d1", "d2"]) salvarDraft(f.db, { draftId: id, patientId: "Paciente Teste 01",
     sourceId: "sintetico", rawRef: `opaco-${id}`, payload: { campo: id, valor: "sintético" },
     diagnostics: [], revision: 0, criadoEm: f.em });
-  f.sessoes.registrarBundleExibido(f.token,
-    { patientId: "Paciente Teste 01", encounterId: "e1" }, []);
+  // Positive path must actually display both facts through the HTTP route.
+  expect((await f.post("/consulta/bundle", { patientId: "Paciente Teste 01", encounterId: "e1",
+    tumorLotId: "t1", draftIds: ["d1", "d2"] }, f.token)).status).toBe(200);
   const payload = { patientId: "Paciente Teste 01", tumorLotId: "t1", encounterId: "e1",
     bloco: "TUDO", registros: [{ id: "d1", expectedRevision: 0 }, { id: "d2", expectedRevision: 0 }],
-    documentosExibidos: [], reconhecerAlertas: [], idempotencyKey: "operation-123" };
+    documentosExibidos: [{ documentId: "d1", documentVersion: 1 }, { documentId: "d2", documentVersion: 1 }],
+    reconhecerAlertas: [], idempotencyKey: "operation-123" };
   const forged = await f.post("/consulta/confirmar", { ...payload,
     documentosExibidos: [{ documentId: "outro", documentVersion: 1 }] }, f.token);
   expect(forged.status).toBe(409);
@@ -121,8 +123,8 @@ it("A13 assina só o conteúdo exato exibido; draft alterado após exibição �
     payload: { documentId: "doc-1", documentVersion: 1, documentHash: "declarado", texto: "texto sintético exibido" },
     diagnostics: [], revision: 0, criadoEm: f.em };
   salvarDraft(f.db, draft);
-  f.sessoes.registrarBundleExibido(f.token, { patientId: "Paciente Teste 01", encounterId: "e1" },
-    [{ documentId: "doc-1", documentVersion: 1, conteudoHash: hashConteudoExibido(draft.payload) }]);
+  expect((await f.post("/consulta/bundle", { patientId: "Paciente Teste 01", encounterId: "e1",
+    tumorLotId: "t1", draftIds: ["doc-d"] }, f.token)).status).toBe(200);
   const payload = (rev: number, key: string) => ({ patientId: "Paciente Teste 01", tumorLotId: "t1", encounterId: "e1",
     bloco: "TUDO", registros: [{ id: "doc-d", expectedRevision: rev }],
     documentosExibidos: [{ documentId: "doc-1", documentVersion: 1 }], reconhecerAlertas: [], idempotencyKey: key });

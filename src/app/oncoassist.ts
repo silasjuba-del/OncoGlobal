@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { z } from "zod";
 import { contemPhiResidual, desidentificar, type DicionarioPaciente } from "../kernel/llm/desidentificar.js";
 import { criarTransporteJev, TimeoutTransporteJev } from "../kernel/llm/jev/sdk.js";
+import { marcadoresDocumentoJev } from "./marcadoresDocumentoJev.js";
 import {
   entradaJevSchema, respostaJevSchema, TIMEOUT_JEV_MS,
   type TransporteJev, type ResultadoOncoassistJev, type StatusOncoassistJev,
@@ -50,7 +51,8 @@ export function criarOncoassistJev(opcoes: OpcoesOncoassistJev = {}): Oncoassist
       if (!dic.success) return { status: "PENDENTE", codigo: "DICIONARIO_AUSENTE" };
       if (signal?.aborted) return { status: "ERRO", codigo: "CANCELADO" };
 
-      // Input source, map and original hash stay local; only redacted text leaves.
+      // Source and dictionary stay local. Unknown names cannot be made safe by
+      // a dictionary: the provider receives only fixed document markers below.
       const { fonte } = parsed.data;
       let texto: string;
       try {
@@ -59,6 +61,8 @@ export function criarOncoassistJev(opcoes: OpcoesOncoassistJev = {}): Oncoassist
       } catch {
         return { status: "ERRO", codigo: "PHI_RESIDUAL" };
       }
+      const marcadores = marcadoresDocumentoJev(texto);
+      if (!marcadores) return { status: "PENDENTE", codigo: "ENTRADA_INVALIDA" };
       const sha256 = createHash("sha256").update(fonte.texto, "utf8").digest("hex");
       const controller = new AbortController();
       let timeout = false;
@@ -73,7 +77,7 @@ export function criarOncoassistJev(opcoes: OpcoesOncoassistJev = {}): Oncoassist
           aoAbortar = () => reject(new Error("INTERROMPIDO"));
           controller.signal.addEventListener("abort", aoAbortar, { once: true });
         });
-        const resposta = await Promise.race([transporte.avaliar(texto, controller.signal), interrupcao]);
+        const resposta = await Promise.race([transporte.avaliar(marcadores, controller.signal), interrupcao]);
         if (signal?.aborted) return { status: "ERRO", codigo: "CANCELADO" };
         const validada = respostaJevSchema.safeParse(resposta);
         if (!validada.success) return { status: "ERRO", codigo: "RESPOSTA_INVALIDA" };

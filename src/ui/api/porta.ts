@@ -179,6 +179,9 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  carregarFonteRevisao?(draftId: string, signal?: AbortSignal): Promise<import("./revisaoExtracao.js").FonteRevisao>;
+  prepararRevisaoExtracao?(pedido: import("./revisaoExtracao.js").PedidoRevisaoExtracao, signal?: AbortSignal): Promise<import("./revisaoExtracao.js").RevisaoPreparada>;
+  confirmarRevisaoExtracao?(pedido: import("./revisaoExtracao.js").PedidoRevisaoExtracao, signal?: AbortSignal): Promise<{ codigo: "GRAVADA" | "REPLAY" }>;
   oncoassistStatus?(signal?: AbortSignal): Promise<EstadoOncoassist>;
   oncoassistFontes?(contexto: PedidoBundle, signal?: AbortSignal): Promise<FontesOncoassist>;
   oncoassistClassificar?(pedido: PedidoBundle & { draftId: string }, signal?: AbortSignal): Promise<RespostaOncoassist>;

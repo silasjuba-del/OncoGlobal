@@ -1,5 +1,6 @@
 import { ActionIntent, ConfirmarBloco } from "../../contracts/operacao.js";
 import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
+import { FonteRevisao, RevisaoPreparada } from "./revisaoExtracao.js";
 import {
   ErroPorta,
   type AcaoIntent,
@@ -63,6 +64,24 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   }
 
   return {
+    async carregarFonteRevisao(draftId, signal) {
+      const { status, json } = await enviar("/consulta/rascunho", { draftId }, true, signal);
+      const parsed = FonteRevisao.safeParse(json);
+      if (status !== 200 || !parsed.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return parsed.data;
+    },
+    async prepararRevisaoExtracao(pedido, signal) {
+      const { status, json } = await enviar("/consulta/rascunho/preparar-revisao", pedido, true, signal);
+      const parsed = RevisaoPreparada.safeParse(json);
+      if (status !== 200 || !parsed.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return parsed.data;
+    },
+    async confirmarRevisaoExtracao(pedido, signal) {
+      const { status, json } = await enviar("/consulta/rascunho/revisar", pedido, true, signal);
+      const codigo = codigoDe(json, "PAYLOAD_INVALIDO");
+      if (status !== 200 || (codigo !== "GRAVADA" && codigo !== "REPLAY")) throw new ErroPorta("PAYLOAD_INVALIDO");
+      return { codigo };
+    },
     async oncoassistStatus(signal) {
       const { status, json } = await enviar("/consulta/oncoassist/status", {}, true, signal);
       const result = EstadoOncoassist.safeParse(json);

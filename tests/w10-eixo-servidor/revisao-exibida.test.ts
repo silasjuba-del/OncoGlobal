@@ -7,6 +7,7 @@ import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gate
 import { criarServidorLocal } from "../../src/server/http.js";
 import { criarGerenciadorSessao, hashConteudoExibido } from "../../src/server/sessao.js";
 import type { ServidorDeps } from "../../src/server/rotas.js";
+import { criarOncoassistJev } from "../../src/app/oncoassist.js";
 
 const NOW = "2026-10-07T13:00:00.000Z";
 const PATIENT = "Paciente Teste 91";
@@ -51,6 +52,7 @@ async function fixture(oncoassistJev?: ServidorDeps["oncoassistJev"]) {
   const pedido = { draftId, patientId: PATIENT, expectedRevision: 1,
     factIds: extracted.data.facts.map((fact: { id: string }) => fact.id) as string[], operationId: "review-op-91" };
   return { db, sessoes, token, request, pedido, advance: () => { now = "2026-10-07T13:00:01.000Z"; },
+    expire: () => { now = "2026-10-07T13:02:00.000Z"; },
     reviewed: () => listarEventos(db, PATIENT).filter((event) => event.operationId === pedido.operationId) };
 }
 
@@ -140,6 +142,31 @@ describe("G25 · revisão da extração exige conteúdo preparado e exibido na m
 });
 
 describe("OncoAssist HTTP · contexto e fonte locais", () => {
+  it("nomes inéditos no documento não alcançam o transporte real do serviço Jev", async () => {
+    const enviados: string[] = [];
+    const app = await fixture(criarOncoassistJev({ env: { ONCOASSIST_JEV_ENABLED: "true", TYPESAFE_API_KEY: "teste" },
+      transporte: { avaliar: async (texto) => { enviados.push(texto); return null; } } }));
+    const draft = lerDraft(app.db, app.pedido.draftId)!;
+    const payload = structuredClone(draft.payload) as any;
+    payload.input.rawTranscript += " Familiar: Zorélia Vintalux. Dr. Xandor Velquim.";
+    salvarDraft(app.db, { ...draft, payload, revision: draft.revision + 1 });
+    expect((await app.request("/consulta/oncoassist/classificar-fonte", { ...CONTEXTO, draftId: draft.draftId })).status).toBe(200);
+    expect(enviados).toEqual(["Marcadores documentais (vocabulário fechado): Creatinina."]);
+    expect(app.reviewed()).toEqual([]);
+  });
+
+  it("sessão expirada durante o provedor retorna 401, sem conteúdo da resposta", async () => {
+    let entered!: () => void;
+    const started = new Promise<void>((resolve) => { entered = resolve; });
+    let release!: () => void;
+    const pending = new Promise<void>((resolve) => { release = resolve; });
+    const app = await fixture({ status: () => ({ status: "DISPONIVEL" }),
+      avaliar: async () => { entered(); await pending; return { status: "PENDENTE", codigo: "DESABILITADO" }; } });
+    const result = app.request("/consulta/oncoassist/classificar-fonte", { ...CONTEXTO, draftId: app.pedido.draftId });
+    await started;
+    app.expire(); release();
+    expect(await result).toMatchObject({ status: 401, data: { codigo: "SESSAO_INVALIDA" } });
+  });
   it("descarta resposta pendente quando a consulta muda durante a avaliação", async () => {
     let entered!: () => void;
     const started = new Promise<void>((resolve) => { entered = resolve; });

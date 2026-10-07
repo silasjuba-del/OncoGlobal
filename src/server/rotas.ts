@@ -106,8 +106,8 @@ function exibirBundle(deps: ServidorDeps, token: string,
       return { status: 409, body: { codigo: "DRAFT_ENCONTRO_DIVERGENTE" } };
     if (contexto && input.tumorLotId !== undefined && contexto.tumorLotId !== input.tumorLotId)
       return { status: 409, body: { codigo: "DRAFT_LOTE_DIVERGENTE" } };
-    const doc = payloadDocumento(draft.payload);
-    if (!doc) return { status: 409, body: { codigo: "DOCUMENTO_INVALIDO" } };
+    // Generic facts also need a server-issued reference and exact displayed content.
+    const doc = payloadDocumento(draft.payload) ?? { documentId: draft.draftId, documentVersion: draft.revision + 1 };
     const chave = JSON.stringify([doc.documentId, doc.documentVersion]);
     if (chaves.has(chave)) return { status: 409, body: { codigo: "DOCUMENTO_DUPLICADO" } };
     chaves.add(chave);
@@ -118,19 +118,21 @@ function exibirBundle(deps: ServidorDeps, token: string,
   }
   deps.sessoes.registrarBundleExibido(token,
     { patientId: input.patientId, encounterId: input.encounterId, tumorLotId: input.tumorLotId ?? null },
-    documentos.map(({ documentId, documentVersion, conteudoHash }) =>
-      ({ documentId, documentVersion, conteudoHash })));
+    documentos.map(({ draftId, documentId, documentVersion, conteudoHash }) =>
+      ({ draftId, documentId, documentVersion, conteudoHash })));
   return { status: 200, body: { patientId: input.patientId, encounterId: input.encounterId, documentos } };
 }
 
 /** ConfirmarBloco is strict; all clinical contents are fetched from local drafts, not HTTP input. */
 function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { status: number; body: unknown } {
   const sessao = deps.sessoes.obter(token)!;
-  const contexto = { patientId: input.patientId, encounterId: input.encounterId };
+  const contexto = { patientId: input.patientId, encounterId: input.encounterId, tumorLotId: input.tumorLotId };
   const exibidosNoServidor = deps.sessoes.bundleExibido(token, contexto);
   if (!exibidosNoServidor) return { status: 409, body: { codigo: "BUNDLE_NAO_EXIBIDO" } };
   if (g25EscopoAssinatura(input.documentosExibidos, exibidosNoServidor).decisao !== "PASSA")
     return { status: 409, body: { codigo: "ESCOPO_ASSINATURA_INVALIDO" } };
+  if (new Set(input.registros.map((r) => r.id)).size !== input.registros.length)
+    return { status: 409, body: { codigo: "DRAFT_DUPLICADO" } };
   const drafts = input.registros.map((r) => lerDraft(deps.db, r.id));
   if (drafts.some((draft) => !draft || draft.patientId !== input.patientId))
     return { status: 409, body: { codigo: "DRAFT_NAO_ENCONTRADO" } };
@@ -143,17 +145,22 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
       ? draft.payload.kind : null;
     return kind === "EXTRACAO_RASCUNHO" || kind === "PRESCRICAO_RASCUNHO" || kind === "EVOLUCAO_RASCUNHO";
   })) return { status: 409, body: { codigo: "DRAFT_AINDA_RASCUNHO" } };
+  const consulta = deps.sessoes.consultaSelecionada(token);
+  if (consulta && (consulta.patientId !== contexto.patientId || consulta.encounterId !== contexto.encounterId
+    || (consulta.tumorLotId ?? null) !== contexto.tumorLotId))
+    return { status: 409, body: { codigo: "CONTEXTO_CONSULTA_ALTERADO" } };
   const escolhidos = input.documentosExibidos;
   const docs = drafts.map((d) => payloadDocumento(d!.payload));
-  if (escolhidos.some((ref) => !docs.some((d) =>
-    d?.documentId === ref.documentId && d.documentVersion === ref.documentVersion)))
+  const refs = docs.map((doc, i) => doc ?? { documentId: drafts[i]!.draftId,
+    documentVersion: input.registros[i]!.expectedRevision + 1 });
+  if (refs.length !== escolhidos.length || new Set(refs.map((r) => JSON.stringify([r.documentId, r.documentVersion]))).size !== refs.length
+    || refs.some((ref) => !escolhidos.some((d) => d.documentId === ref.documentId && d.documentVersion === ref.documentVersion)))
     return { status: 409, body: { codigo: "DOCUMENTO_NAO_SELECIONADO" } };
   // A13: só assina o conteúdo EXATO exibido. Hash ausente ou diferente ⇒ 409 (o draft mudou depois da tela).
   const hashes = drafts.map((d) => hashConteudoExibido(d!.payload));
-  const alterado = docs.some((doc, i) => doc && escolhidos.some((e) =>
-    e.documentId === doc.documentId && e.documentVersion === doc.documentVersion)
-    && !exibidosNoServidor.some((x) => x.documentId === doc.documentId
-      && x.documentVersion === doc.documentVersion && x.conteudoHash === hashes[i]));
+  const alterado = refs.some((doc, i) => !exibidosNoServidor.some((x) => x.documentId === doc.documentId
+      && x.documentVersion === doc.documentVersion && x.conteudoHash === hashes[i]
+      && x.draftId === drafts[i]!.draftId));
   if (alterado) return { status: 409, body: { codigo: "CONTEUDO_ALTERADO_APOS_EXIBICAO" } };
   const em = deps.db.prepare("SELECT criadoEm FROM operation WHERE operationId=?")
     .get(input.idempotencyKey)?.criadoEm as string | undefined ?? deps.agora();
@@ -269,6 +276,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
           nomes: [paciente.nome], identificadores: [paciente.patientId, sessao.medicoId, sessao.crm,
             ...paciente.identificadores.map((item) => item.valor), ...(paciente.nascimento ? [paciente.nascimento] : [])],
         } }, controller.signal);
+        if (!deps.sessoes.obter(token)) return reply(401, "SESSAO_INVALIDA");
         const atual = deps.sessoes.consultaSelecionada(token);
         const draftAtual = lerDraft(deps.db, draft.draftId);
         if (!atual || atual.patientId !== contexto.patientId || atual.encounterId !== contexto.encounterId
