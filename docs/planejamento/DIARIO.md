@@ -42,3 +42,9 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
   - P3 · Próxima verticalização: (a) CASO NOVO; (b) EM TRATAMENTO (casa com a simulação da próstata e o RECIST já existente); (c) SEGUIMENTO.
   - P4 · Primeiros mapas de órgão: (a) próstata + mama; (b) próstata + mama + pulmão; (c) outro.
 - Próxima ação: aguardar P1–P4; depois fatiar (contrato → regras → UI), com prompt por executor. Dono: planejamento. Nada vai ao operacional antes (ele está em modo leitura).
+- Respostas do Dr. Silas (2026-10-07):
+  - P1: DECIDIDO — tem texto pronto do X/Y/Z; vai enviar.
+  - P2: DECIDIDO — **o médico define tudo, inclusive a prioridade.** A IA faz o burocrático: organiza, rascunha, checa e preenche. O médico valida, libera e despacha. Nenhum nível de prioridade é calculado por regra.
+  - P3: em espera — "aguarde, sem perguntas, apenas analise os textos". Não fatiar ainda.
+  - P4: DECIDIDO — primeiros mapas de órgão: próstata + mama + pulmão.
+- Regra de trabalho (Dr. Silas): agora é só analisar os textos recebidos. Sem perguntas e sem fatias até ele liberar.
