@@ -96,3 +96,11 @@ export { g16Owner } from "./ownership.js";
 1. **Caso 07.** `deduplicarExames` está em `src/modules/documentos/dedupe.ts`. O adv já procura esse caminho, depois de `src/leitura/dedupe.js`. `src/leitura` continua com o Fugu. O adv ficou verde.
 2. **Fachada.** `src/rules/w8-fachada.ts` não foi criado. A R-08 só deixa `src/rules/index.ts` reexportar `src/rules/*`. Os exports estáveis saem dos arquivos folha de `w8` por esse barrel. O Fugu importa de `src/rules/index.js`. Os corpos duplicados de `src/rules/w8/index.ts` continuam lá.
 3. **Ruleset.** `dedupe-exame.v1.json` segue com `ativo: false` (fora da faixa de edição). A função lê os `campos` de `patologia-ihq`. A chave de imagem (`servico`, `registro`, `dataExame`) não é a chave do caso 07. `dataImpressaNoTopo` não entra na chave.
+
+## GROK-13
+
+1. **Ledger.** `validarEmissaoPersistida` devolve o registro e deixa `gravadoNoLedger: false`. O módulo não importa `src/kernel`. Quem grava o append é o Fugu.
+2. **SIA e antiglosa.** Não implementados. Continuam em `src/apac`, fora da faixa. `apac.v1.json` não foi editado: a nomenclatura oficial segue `[VERIFICAR]` e a lista de finalidades de lá é menor que a D-W9-12. A lista decidida está em `corpus/rulesets/agenda-apac-emissao.v1.json`.
+3. **Snapshot.** `SnapshotConfirmado` em `src/modules/consulta/preConsulta.ts` não mudou. A projeção do Fugu (`kind`, `campos`, `contentHash`, `projectionVersion`) entra por `alinharSnapshotProjecao`. Os dois formatos continuam diferentes. Sem mudança de contrato. Se o pack pré-consulta for consumir a projeção, a ligação fica com o tech lead.
+4. **CNS do w8.** `src/rules/w8/identificadores.ts` ainda cita a Portaria 711/2004, descartada pela D-W9-13, e devolve só booleano. O algoritmo e-SUS desta fatia está em `src/modules/apac/cns.ts`. O arquivo w8 não foi editado.
+5. **Prazo de 85/90 dias.** `apacPrazo` em `src/rules/apac.ts` não mudou. O aviso de até 1 dia adiantado (D-W5-02) é o relógio do módulo, com offset injetado (D-W5-01).

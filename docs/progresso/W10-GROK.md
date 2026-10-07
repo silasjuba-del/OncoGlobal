@@ -16,7 +16,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w10-grok`, branch `f0/w10-grok`.
 | GROK-10 ownership | FEITA | W10-GROK-10 | Veredito em ownership.ts. t56 ainda lê gates.ts. |
 | GROK-11 manifesto | FEITA | W10-GROK-11 | Script nomeia arquivo fora da trilha. n19 procura outro nome. |
 | GROK-12 dedupe + fachada w8 | FEITA | W10-GROK-12 | Caso 07 verde. Fachada no barrel. |
-| GROK-13 APAC no ledger | — | | |
+| GROK-13 APAC no ledger | FEITA | W10-GROK-13 | Emissão persistível no módulo. Snapshot alinhado sem contrato. |
 | GROK-14 fichas + fechamento | — | | |
 
 ## GROK-01
@@ -513,4 +513,46 @@ Test Files  1 passed (1)
 ```
 Test Files  1 passed (1)
      Tests  4 passed (4)
+```
+
+## GROK-13
+
+`validarEmissaoPersistida` em `src/modules/apac/emissao.ts`. O lote diário continua em `montarApacBatch`: vários pacientes, uma competência, exclusão nomeada, `trava: false`. O registro é persistível e `gravadoNoLedger` fica `false`. Não há escrita de sqlite, exportação SIA nem antiglosa.
+
+O aviso usa data civil no offset injetado (produção −03:00, D-W5-01). Exatamente 1 dia adiantado avisa (D-W5-02). Zero não avisa. Acima de 1 dia não entra nesse aviso e bloqueia só o documento. Data ausente fica PENDENTE, sem virar dia 0. `consultaSegue` é `true` e `bloqueiaSalvar` é `false`.
+
+Finalidade sai da lista D-W9-12 em `corpus/rulesets/agenda-apac-emissao.v1.json`. Intenção clínica não preenche a finalidade. `PREVIA` não vira `Prévia`. CNS é o algoritmo e-SUS em `src/modules/apac/cns.ts` (o módulo não importa `src/apac`); DV válido traz `DV_VALIDO_NAO_PROVA_IDENTIDADE`. CNES vem da configuração injetada. `2605473` no ruleset é exemplo, não trava.
+
+`alinharSnapshotProjecao` em `src/modules/consulta/alinharSnapshot.ts` aceita um objeto no formato da projeção, sem importar `src/kernel`. `CURRENT` não vira snapshot confirmado. Proposta não vira fato. Valor ausente não vira VERDE nem string vazia. Conflito permanece. `SnapshotConfirmado` de `preConsulta.ts` não foi reescrito.
+
+`git merge f0/w1-integrado` no início não era ancestral (`376b6e1`). Merge ort `589aaee`, sem conflito. A série abaixo é depois desse merge.
+
+Testes novos: `tests/w10-grok/grok-13-apac-snapshot.test.ts` (16). Os testes de lote em `tests/modules` seguem verdes (11).
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries`
+
+```
+fronteiras ok (204 arquivos)
+```
+
+`npm run check:corpus` — fecho: `corpus ok (109 arquivos)`.
+
+`npx vitest run tests/w10-grok tests/corpus/loader.test.ts tests/corpus/interacoes.test.ts tests/rules-w8/interacoes.test.ts --no-file-parallelism`
+
+```
+Test Files  16 passed (16)
+     Tests  137 passed (137)
+```
+
+16 da GROK-13, mais GROK-01 (38), GROK-02 (11), GROK-03 (7), GROK-04 (5), GROK-05 (6), GROK-06 (7), GROK-07 (5), GROK-08 (5), GROK-09 (6), GROK-10 (7), GROK-11 (5), GROK-12 (6), loader (7), corpus de interações (3) e `rules-w8/interacoes` (3).
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
+
+```
+Test Files  1 passed (1)
+     Tests  9 passed (9)
 ```
