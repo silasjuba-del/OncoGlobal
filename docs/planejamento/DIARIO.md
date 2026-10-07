@@ -143,3 +143,39 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
 - Conflito PLN-007: **resolvido pelo Dr. Silas** (M3): Maestro/determinístico controla a execução; resposta clínica vem do agente/LLM, nunca do if/else.
 - Decisão: DECIDIDO (Dr. Silas) — M1–M8. PENDENTE: quais "if/else terapêuticos recentes" saem do núcleo (referência não explícita).
 - Próxima ação: aguardar liberação/texto X/Y/Z. Dono: planejamento.
+
+## PLN-010 · 2026-10-07 · Documento primário da governança e planta v0 (busca de OncoChief/ORK-2/Ombro Amigo)
+- Origem: Dr. Silas (`fontes/M-N_PLN-010_governanca-primaria-planta-v0.md`); o texto termina pedindo busca de `ONCOCHIEF`, `ORK-1`, `ORK-2`, `OMBRO AMIGO`, `OncoAgent`.
+- Liga a: PLN-007 (ORK-1), PLN-009 (Maestro, STAND_BY), `docs/referencias/governanca-qt-hbem/PROGRAMA_FASE_A.md`, `docs/canonica/SSOT-ONCOMIND-v1.md:45`, `docs/DECISOES.md:25` (decisão 11), `docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md:443,582`
+- Busca feita (leitura nos docs do repo):
+  - **ORK-1/ORK-2 têm duas formulações**: (A) PROGRAMA_FASE_A: ORK-1 supervisiona a execução técnica, ORK-2 a completude clínica; papéis ≠ processos/LLMs separados. (B) DECISOES #11 / SSOT:45 / PLANO-FINAL:443: **ORK-1 ≡ ORK** (executa, entrega microprompt, "nunca pensa oncologia") e **ORK-2 ≡ Harness clínico + OncoChief**. São compatíveis: ORK-2 = a supervisão clínica de (A), realizada por Harness clínico + OncoChief. No código só existe ORK-1 (`src/orchestration/ork.ts`).
+  - **OncoChief existe nos docs**: PLANO-FINAL F5 (linhas 582/585) "modo de revisão cruzada da P-COG (sem serviço próprio)"; DECISOES #11 e SSOT ligam ao ORK-2. Não está no PROGRAMA_FASE_A (confirma a lacuna apontada); vem da evolução v1.1 (05/10) e ordem de 07/10. No código: 0.
+  - **OMBRO_AMIGO**: só SSOT:9 ("Governo superior: LLM-CENTER-CONSTITUINTE (OMBRO_AMIGO)"); sem definição de papel nos docs do repo.
+  - **OncoAgent**: PROGRAMA_FASE_A e REVISAO_DAS_ABAS; 0 no código. **STANDBY/estados do grafo e `stop_conditions`**: só PROGRAMA_FASE_A; 0 no código.
+- Ideia × código × lacuna: planta v0 (N9) é coerente com o repo com duas observações: (1) o texto põe OncoChief como "chefia" ao lado do Maestro; o repo o define como modo de revisão cruzada sem serviço próprio, ligado ao ORK-2 → posição provável dentro do ORK-2; (2) ORK-1 (A técnica) × (B executor): no código vale B. Lacunas de código: estados do grafo + stop_conditions; ORK-2/OncoChief; Harness proporcional com PASS/WARN/FAIL (existem gates G-02…G-28, falta mapear ao vocabulário); MEMORY_OS/BRAIN_OS parciais; documento do LLM Constituinte/Ombro Amigo fora do repo.
+- Corrige: PLN-007 (K1 tratava ORK-1 como lista de determinísticos) e PLN-009 (pendência "quais if/else" → N4: os do protótipo Kimi).
+- Decisão: DECIDIDO (Dr. Silas) N1–N8; N9 provisória. PENDENTE: (a) posição do OncoChief (proposta: dentro do ORK-2); (b) qual definição de ORK-1 vale; (c) onde está o documento do Ombro Amigo.
+- Próxima ação: aguardar liberação para fechar planta v1; se o Dr. Silas indicar o arquivo do Ombro Amigo, registrar como fonte nova. Dono: planejamento.
+
+## PLN-011 · 2026-10-07 · Corroboração: fluxo universal EVENTO → PRIORIDADE → CERTEZA → AÇÃO → ARTEFATO
+- Origem: Dr. Silas ("CORROBORAR ESTE FLUXO"; `fontes/M-O_PLN-011_fluxo-universal-evento-prioridade-acao.md`; nome do paciente do exemplo trocado por "Paciente Teste")
+- Liga a: PLN-002 (v1.0: tipo de consulta, X/Y/Z, saltos, emergência), PLN-003 (kit, OUTROS [+]), PLN-006 (clusters e semáforo), PLN-007 (SUS, ORK), CHATPLAN M-O
+- **Corroboração (ponto a ponto):**
+  1. **Eixo evento clínico, não doença** — corrobora M-B §12 (sinal→órgão→hipótese→ação, com saltos) e M-B §15 (X/Y/Z); doença/assinatura entra como contexto, não como porta. ✔
+  2. **Mapeamento com X/Y/Z (inferência, texto X/Y/Z ainda não recebido):** Evento ≈ X (morfologia/função/sítio); Prioridade + Certeza ≈ Y (estado/gravidade/prioridade); Ação + Artefato ≈ Z (ação). ✔ plausível; confirmar quando o Dr. Silas enviar o texto.
+  3. **Fluxo "causa conhecida? não→investigação; sim→tratamento (sintomático | específico)"** — corrobora M-B §12 e M-D (investigação required/suggested/conditional); o sintomático convive com a investigação (não é exclusivo). ✔
+  4. **⊕ OUTROS em todo nível + cluster B manual** — corrobora M-D decisão 15 e M-B/I (OUTROS [+] universal); cluster manual de hemorragia = M-I cluster 8 (novo problema). ✔
+  5. **Médico define gravidade, causalidade, prioridade, decisão** — corrobora PLN-002/B2 ("médico define tudo") e M-N/M-M (IA prepara o botão). ✔
+  6. **Não concluir progressão (PSA ↑ + dor lombar)** — corrobora M-B §7–9 e M-I cluster 2 (discordância → REVISAR). ✔
+  7. **GERAR pedidos/encaminhamentos/receita + IMPRIMIR** — corrobora M-H (drafts) e decisão 14 de M-D (envio/assinatura explícitos). ✔
+  - **Divergências/pendências (não resolvidas em silêncio):**
+    - (a) **Prioridade**: aqui 3 níveis [ELETIVO][URGENTE][PS] e na tabela "imediata · urgente · eletiva"; em M-B eram 4 (eletivo, prioritário, urgente, emergência). Unificar → PENDENTE (Dr. Silas).
+    - (b) **CERTEZA** aparece no eixo mas não tem campo nem opções → PENDENTE (sugestão: níveis não numéricos — hipótese · provável · confirmado pelo médico — nunca %, conforme M-D decisão 7).
+    - (c) **Emergência com déficit neurológico** (M-B §13: dor lombar + fraqueza + esfíncter → EMERGÊNCIA): o cluster de dor lombar do exemplo não mostra o gatilho para escalar a PS; ligar ao cluster transversal de emergência (compressão medular) → lacuna de contrato.
+    - (d) **MED em "Opções sistêmicas"**: falta a coluna de acesso SUS × instituição (M-J J4) e setting/linha (M-D) — corrobora a necessidade, não está no exemplo.
+    - (e) **Fechamento** (retorno, documento, impressão, prazo) corresponde a M-F §11 (FINALIZAR CONSULTA); a tabela não cita alertas, que estão no fluxo.
+    - (f) Exemplo traz abiraterona/enzalutamida/docetaxel como MED: seed de conhecimento, não regra (M-D decisão 1).
+- O que o código tem hoje: artefatos de saída existem como impressão (`src/impressao/kit.ts`, `apacLaudo.ts`; `src/app/executores/imprimir.ts`); "encaminhamento" aparece em contratos/estúdio/oncoboard (`src/contracts/estados.ts`, `regras.ts`, `app/estudio/servidor.ts`), sem pedido/encaminhamento/receita gerados a partir de seleção de cluster; **não há objeto Cluster nem a tabela de 8 categorias**; prioridade de consulta não existe (só `NaturezaAlerta`); OUTROS [+] não existe como campo livre estruturado (ligado a rascunho → ledger, PLN-001).
+- Lacuna: contrato Evento (problema, novo/piorou/estável) + Prioridade (níveis unificados) + Certeza + Cluster (categorias/seções com ⊕ OUTROS) + Artefatos (pedido, encaminhamento, receita, orientação, retorno) + gatilho para emergência.
+- Decisão: **CORROBORADO pelo planejamento nos itens 1–7**; PENDENTE (Dr. Silas): unificar níveis de prioridade (a) e definir CERTEZA (b). Regra O5 pronta para congelar quando o Dr. Silas liberar.
+- Próxima ação: aguardar texto X/Y/Z e liberação. Dono: planejamento.

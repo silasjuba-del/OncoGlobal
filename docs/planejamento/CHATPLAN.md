@@ -102,3 +102,26 @@ M-M  REFINO DE NOMES E PAPÉIS: OncoAgent/OncoAssist, Maestro, determinístico, 
       |M8| Princípio: pedido → contexto → execução → verificação → minuta → revisão → registro = "IA prepara o botão; médico aperta"   DECIDIDO
 ```
 Ligações: M3 ⟶ resolve o "conflito a vigiar" de PLN-007 · M3 ⟶ reclassifica regras terapêuticas (if/else) como conteúdo versionado/KB, não núcleo (liga a D-W9-20, PLN-003).
+
+```
+M-N  DOCUMENTO PRIMÁRIO DA GOVERNANÇA (PROGRAMA_FASE_A) + PLANTA v0 → PLN-010   fontes/M-N_PLN-010_governanca-primaria-planta-v0.md
+      |N1| Hierarquia: Dr. Silas ← OncoAssist=OncoAgent ← síntese ← Maestro ← grafo ← {ORK-1 técnica, ORK-2 clínica} ← executores ← Harness   DECIDIDO (fonte primária)
+      |N2| Retira hipótese "ORK-1 computacional / ORK-2 médico = 2 cérebros": são supervisores do grafo (papéis, não processos/LLMs separados)   DECIDIDO (corrige M-J/M-K)
+      |N3| OncoAgent = classe; OncoAssist = identidade/produto ("um agente, não dois cadastros")   DECIDIDO (confirma M1)
+      |N4| Determinístico = roteamento, permissões, validação estrutural, idempotência, merge; não determinístico = raciocínio da LLM; schema válido ≠ correção clínica; if/else terapêuticos do protótipo Kimi fora da constituição   DECIDIDO (resolve pendência de M-M)
+      |N5| Harness estrutural e proporcional ao risco (identidade, proveniência, contratos, conflitos/negações, fronteiras de dados, efeitos repetidos, falhas de ferramenta); PASS/WARN/FAIL   DECIDIDO
+      |N6| OncoBoard: 3 personas (+ opcional 2ª crítica); máx. 2 rodadas; divergências preservadas; síntese única; consenso não aumenta evidência nem decide   DECIDIDO
+      |N7| Grafo econômico: STANDBY/READY/RUNNING/WAITING_INPUT/DONE/FAILED; contexto mínimo; limites de ferramentas/chamadas/tokens/destinos; stop_conditions   DECIDIDO (resolve STAND_BY)
+      |N8| MEMORY_OS = fontes/documentos/versões; BRAIN_OS = conhecimento operacional revisado, skills, falhas, melhorias; infraestrutura transversal   DECIDIDO
+      |N9| Planta v0 (LLM constituinte "Ombro Amigo" → classe OncoAgent → OncoAssist ↔ Dr. Silas e LLMs externos → chefias Maestro / OncoChief → grafo finito → ORK-1/ORK-2 → executores → Harness)   PROVISÓRIA
+      |N10| OncoChief: posição em aberto no texto; achado nos docs do repo = modo de revisão cruzada sem serviço próprio, ligado ao ORK-2 (ver PLN-010)   PENDENTE (Dr. Silas confirma)
+ ↓
+M-O  FLUXO UNIVERSAL: EVENTO → PRIORIDADE → CERTEZA → AÇÃO → ARTEFATO ("CORROBORAR ESTE FLUXO") → PLN-011   fontes/M-O_PLN-011_fluxo-universal-evento-prioridade-acao.md
+      |O1| Eixo universal não é doença, é evento clínico   DECIDIDO (proposta do texto, corroborada em PLN-011)
+      |O2| Tabela de 8 categorias (problema, prioridade, investigação, tratamento, med, suporte, encaminhamento, fechamento)   DECIDIDO (lista)
+      |O3| Fluxo: sinal → novo/piorou → prioridade [ELETIVO][URGENTE][PS] → causa conhecida? não→investigação; sim→tratamento (sintomático | específico) → encaminhamentos+alertas+retorno → finalizar   DECIDIDO
+      |O4| Cluster exemplo "DOR LOMBAR + PSA em ascensão" sem concluir progressão; todo nível aceita ⊕ OUTROS; cluster B manual livre (hemorragia → colonoscopia + PS + transfusão)   DECIDIDO
+      |O5| Regra a congelar: IA reconhece tema e monta plataforma provável; médico define gravidade, causalidade, prioridade, decisão final   DECIDIDO (consistente com B2)
+      |O6| Prioridade com 3 níveis aqui × 4 níveis em M-B (eletivo/prioritário/urgente/emergência) × "imediata/urgente/eletiva" na tabela   PENDENTE (unificar)
+      |O7| "CERTEZA" aparece no eixo mas não tem campo/tabela no texto   PENDENTE (definir)
+```
