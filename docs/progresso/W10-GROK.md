@@ -7,7 +7,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w10-grok`, branch `f0/w10-grok`.
 | GROK-01 corte do salão | FEITA | W10-GROK-01 | Portões nomeados no ruleset. FN-01 intacta. |
 | GROK-02 limiar de bula × CTCAE | FEITA | W10-GROK-02 | Porta lê mínimo de bula. Grau CTCAE só candidata. |
 | GROK-03 alerta FEVE | FEITA | W10-GROK-03 | FEVE &lt; 50% com antraciclina ou anti-HER2 programado alerta. |
-| GROK-04 agenda de QT | — | | |
+| GROK-04 agenda de QT | FEITA | W10-GROK-04 | Conflito alerta. Otimizar dia não reordena. |
 | GROK-05 RADS 30 emergências | — | | |
 | GROK-06 INTERVAL_PROGRESSION | — | | |
 | GROK-07 nódulo &lt; 1 cm e Mx | — | | |
@@ -133,6 +133,44 @@ Test Files  4 passed (4)
 ```
 
 7 da GROK-03, 38 da GROK-01, 11 da GROK-02 e 7 do loader.
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
+
+```
+Test Files  1 passed (1)
+     Tests  9 passed (9)
+```
+
+## GROK-04
+
+`validarAgenda(sessoes, rs)` e `gerarSessoes(pedido)` em `src/rules/agendaQt.ts`. Limites em `corpus/rulesets/agenda-qt.v1.json`: tratamento de 300 min ou mais só inicia até 12:00; no máximo 5 inícios em janela de 30 min; grade de 13 poltronas, 08:00–18:00. Igual ao limite passa. Conflito de poltrona ou de lotação é ALERTA. Poltrona ausente fica PENDENTE. `bloqueiaSalvar` é o literal `false`. `reorganizou` é o literal `false`: pedir Otimizar dia devolve o alerta e mantém ordem e horário.
+
+A geração soma dias civis (1º dia + ciclos × intervalo) sem pular sábado, domingo ou feriado.
+
+`git merge f0/w1-integrado` no fechamento trouxe `10bb8d4` (contratos `src/contracts/w10/`, barrel R-08, pdfjs-dist). Não há contrato de agenda; a fatia segue com tipo local. A série abaixo rodou depois desse merge.
+
+Testes novos: `tests/w10-grok/grok-04-agenda.test.ts` (5).
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries`
+
+```
+fronteiras ok (158 arquivos)
+```
+
+`npm run check:corpus` — `corpus/rulesets/agenda-qt.v1.json` header ok, `[VERIFICAR]` 0. Fecho: `corpus ok (32 arquivos)`.
+
+`npx vitest run tests/w10-grok tests/corpus/loader.test.ts --no-file-parallelism`
+
+```
+Test Files  5 passed (5)
+     Tests  68 passed (68)
+```
+
+5 da GROK-04, mais GROK-01 (38), GROK-02 (11), GROK-03 (7) e o loader (7).
 
 `npx vitest run tests/w3/auditoria-regressao.test.ts --no-file-parallelism`
 

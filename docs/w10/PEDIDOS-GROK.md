@@ -24,3 +24,10 @@ Faixa: `docs/ondas/W10-GROK.md`. Contrato que falta fica com tipo local `// PROV
 2. **Sinônimos de classe.** A lista em `corpus/rulesets/salao-feve.v1.json` é editável. Mitoxantrona não entrou: não é antraciclina. Anti-HER2 aqui é o anticorpo (trastuzumabe, pertuzumabe, T-DM1, T-DXd) e o rótulo da classe.
 3. **FEVE baixa sem esses fármacos** não dispara este alerta. A porta de bula continua na GROK-02.
 4. **Barrel.** `alertarFeve` fica em `src/rules/alertaFeve.ts` (R-08).
+
+## GROK-04
+
+1. **Grade.** `SessaoAgenda` e `PedidoGeracao` estão em `src/rules/agendaQt.ts` (`// PROVISORIO-W10`). O merge `10bb8d4` não publicou contrato de agenda.
+2. **Fim de semana e feriado** do HTML de referência não movem a data. A geração soma o intervalo do protocolo. Mover seria reorganizar.
+3. **08:00–18:00** está no ruleset como rótulo editável da grade (PADROES-UI §3.2). D-W9-39 não cria corte separado para sessão que passa de 18:00.
+4. **Respostas do tech lead** em `docs/w10/RESPOSTAS-TECH-LEAD.md` (trocar `SinaisExtraW10` e `ProtocoloCiclo`, reexportar o barrel, subir `salao-triagem` para 1.1.0, ativar CREAT, alinhar FN-01 à FC &lt; 50) ficam para a fatia que mexer nesses arquivos. Esta fatia não altera a FN-01.
