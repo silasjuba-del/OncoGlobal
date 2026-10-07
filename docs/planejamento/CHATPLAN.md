@@ -82,3 +82,10 @@ M-K  ORK-1 / DETERMINÍSTICOS (lista) → PLN-007   fontes/M-K_PLN-007_ork-1-det
 ```
 
 Ligações novas: H §1 ⟶ `src/rules/ctcaeGrau.ts` (já devolve pendente + inputs faltantes) · I §4 ⟶ `semaforoInteracoes` · I §5 ⟶ `rules/prescricao/safetyEngine` · J ⟶ `orchestration/ork.ts` + `maestro.ts` · K ⟶ tabela R-14 do maestro.
+
+```
+M-L  ONCOASSIST = soma de 12 capacidades (fórmula curta) → PLN-008   fontes/M-L_PLN-008_oncoassist-definicao.md
+      |L1| Definição por soma: identidade persistente + personalidade + memória longitudinal + voz/ouvido/visão + LLMs intercambiáveis + chaves por referência + MCP/plugins/skills + web/PC/externos + WORK+STUDY + agentes internos + conhecimento oncológico + governança clínica   DECIDIDO (definição)
+      |L2| Liga M-J (agentes, ORK) e M-D (KB versionada): OncoAssist é um dos agentes do ORK e a fonte de conhecimento   vide J5
+      |L3| Sem instrução nova: texto só confirma a lista já usada em ONCOASSIST-PROGRAMA-X-CODIGO.md   —
+```

@@ -118,3 +118,12 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
 - Conflito a vigiar (não resolvido em silêncio): o texto descreve o ORK como orquestrador que "determina" capacidades (estilo agente/LLM); o código tem ORK/maestro determinístico por tabela e proíbe LLM de alterar o plano. Leitura compatível: ORK-1 = tabela de código (decide QUAIS capacidades); agentes/LLM só devolvem conteúdo. PENDENTE para o Dr. Silas.
 - Decisão: DECIDIDO (Dr. Silas) nos princípios (J1–J6, J8, K1). PENDENTE: J7 (prompt final), K2 (nome da camada dos agentes), fronteira ORK × agente.
 - Próxima ação: aguardar liberação. Dono: planejamento.
+
+## PLN-008 · 2026-10-07 · Definição do OncoAssist (soma de 12 capacidades)
+- Origem: Dr. Silas (`fontes/M-L_PLN-008_oncoassist-definicao.md`; mensagem curta, sem texto adicional)
+- Liga a: `docs/specs/ONCOASSIST-PROGRAMA-X-CODIGO.md` (mesma lista de 12), PLN-001 (OncoAssist × código), PLN-007 (agentes/ORK), PLN-003 (KB versionada), D-W9-15/16/40
+- Ideia: OncoAssist = identidade persistente + personalidade + memória longitudinal + voz/ouvido/visão + LLMs intercambiáveis + API keys por referência segura + MCP/plugins/skills + web/PC/sistemas externos + WORK+STUDY + agentes internos + conhecimento oncológico profundo + governança clínica.
+- O que o código tem hoje (conforme o programa X-código, conferido): ✅ agentes internos (18 AG-xx, Maestro+ORK) e governança (gates G-02…G-28, red team) · 🟡 identidade (só rótulo/painel), memória (ledger/timeline existem; preferências do médico não), voz (comando curto Deepgram G-23 + Plaud manual; visão desligada D-W9-40), chaves (regra sem cofre), WORK sem STUDY (OncoMind fora do repo), conhecimento (corpus + 72 fichas + ragGRAFO 2.971 nós, sem RAG ligado) · ❌ personalidade (sem persona no código), LLMs intercambiáveis (sem model router; provider único D-W9-15 desligado) · ⏸ MCP/plugins/skills (desligados, D-W9-16), web/PC/externos (gateway só com 6 efeitos; READ não modelado).
+- Lacuna: nenhuma nova; confirma a fila da onda OncoAssist já com o operacional: roteador + cofre → gateway READ → persona versionada (BRAIN_OS) → custo por tarefa → conexões desligadas → ragGRAFO com vetores + conector. Itens fora dessa fila e citados pelo Dr. Silas: STUDY (OncoMind) e visão → sem dono definido.
+- Decisão: DECIDIDO (Dr. Silas) — definição. PENDENTE: onde entra o STUDY no repositório (hoje fora).
+- Próxima ação: aguardar mais texto/liberação. Dono: planejamento.
