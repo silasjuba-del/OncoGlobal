@@ -271,3 +271,7 @@ export interface RastreabilidadeW3 {
   inputs_used: string[];
   inputs_missing: string[];
 }
+
+// RT-06b (tech lead W10)
+export const eixoCurtoMm = (l: { eixoCurtoMm: number | null }): number | null =>
+  l.eixoCurtoMm !== null && Number.isFinite(l.eixoCurtoMm) && l.eixoCurtoMm >= 0 ? l.eixoCurtoMm : null;

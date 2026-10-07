@@ -42,3 +42,14 @@ fronteiras ok (163 arquivos)
  Test Files  7 passed (7)
       Tests  96 passed (96)
 ```
+
+## Endurecimento do red team (RT-06, RT-08, RT-11) · 2026-10-07
+| Commit | Achados | Código | Estado |
+|---|---|---|---|
+| W10-INT-PRESC-03 | RT-08a–e, RT-11b | `src/rules/prescricao/index.ts` (`carregarFicha`/`criarBiblioteca`/`registrarBiblioteca` só CONFERIDA_MEDICO com `FICHA_*` tipado, `calcularDosePorBase`, `idadeDoDado`, `validarInfusao`, `validarAntiemese`, `ehDoseDeEstudo`/`recusarDoseEstudo`) | verde, exceto o teste "homônimas" (fixture inexistente, PEDIDOS P3) |
+| W10-INT-PRESC-04 | RT-11a/c/d | `src/rules/conhecimento/index.ts` (loader JSONL puro: status explícito, arestas órfãs, `avaliarTrial` POSSIBLE_MATCH/negativo≠ganho, `confrontarFontes` lado a lado, `divergenciasDoGrafo`); roda no dado vivo (2.971 nós, 9.347 arestas, 0 órfãs) | lógica pronta; RT-11 verde com fachadas `src/kernel/*` (PEDIDOS P1) |
+| W10-INT-PRESC-05 | RT-06a/b/c/d | `src/rules/morfometria/index.ts` (`medirLesao`, `calcularVolume`, `avaliarRecistComNovasLesoes`, `avaliarLinfonodoAlvo`, `validarUnidadeMedida`) | lógica pronta; RT-06 verde com fachada kernel + patch em recist/tipos-w3 (PEDIDOS P1/P2) |
+
+Testes novos: `tests/rules-prescricao/index.test.ts`, `tests/rules-conhecimento/grafo.test.ts`, `tests/rules-morfometria/index.test.ts`. Suíte da faixa: 11 arquivos, 145 testes verdes.
+Red team (rt06+rt08+rt11, `--no-file-parallelism`): antes 14 vermelhos de 58 → depois 8 (os 8 restantes dependem de PEDIDOS: 6 de fachadas/patch fora da faixa, 1 de fixture do próprio teste; com P1+P2 aplicados cai para 1).
+Sem tocar `.adv.ts`, `src/contracts`, `recist.ts`, `src/kernel`. Pedidos e patches exatos: `docs/w10/PEDIDOS-INT-PRESCRICAO.md`.
