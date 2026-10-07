@@ -91,7 +91,7 @@ describe("W10-LUNA2 · saída externa governada", () => {
     expect(failed.motivoCodigo).toBe("FALHA_EXECUTOR");
     expect(JSON.stringify({ failed, audit: executor.auditoria })).not.toContain("Paciente Teste 07");
 
-    for (const segredo of ["11987654321", "52998224725", "PacienteTeste07"]) {
+    for (const segredo of ["11987654321", "52998224726", "PacienteTeste07"]) { // CPF sintético com DV inválido.
       const receipt = montar({ executor: async () => ({ ok: true, recibo: segredo }) });
       const result = await receipt.gw.executar(intent("ENVIAR_EMAIL", `acao-${segredo.length}-0003`), sessao);
       expect(result.decisao).toBe("EXECUTADA");
