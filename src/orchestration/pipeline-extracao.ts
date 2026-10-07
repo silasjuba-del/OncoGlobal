@@ -2,6 +2,7 @@ import type {
   ClinicalFact, EncounterSegment, Exception, FactSourceType, PatientCandidate,
   ReconciledField,
 } from "../kernel/extracao/tipos.js";
+import { segmentarTranscricao } from "../kernel/extracao/segmenter.js";
 
 // PROVISORIO-W10: alinhar com src/contracts/w10/... após publicação pelo tech lead.
 export interface ExtractionInput {
@@ -30,19 +31,13 @@ export function segmentar(state: ExtractionState): ExtractionState {
   if (!input.rawTranscript.trim()) return state;
   return {
     ...state,
-    segments: [{
-      id: `${input.recordingId}:0`,
+    segments: segmentarTranscricao({
       recordingId: input.recordingId,
       sourceId: input.sourceId,
       sourceType: input.sourceType,
-      startMs: null,
-      endMs: null,
-      speakers: [],
-      candidateNames: [],
-      rawTranscript: input.rawTranscript,
-      boundaryConfidence: null,
-      patientId: null,
-    }],
+      turns: input.rawTranscript.split(/\r?\n/).map((text) =>
+        ({ text, startMs: null, endMs: null })),
+    }),
   };
 }
 
@@ -76,13 +71,13 @@ export function classificarExcecoes(state: ExtractionState): ExtractionState {
   return {
     ...state,
     exceptions: state.segments.flatMap((segment): Exception[] => [
-      {
-        kind: "REVISAR_FRONTEIRA",
+      ...(segment.boundaryReviewRequired ? [{
+        kind: "REVISAR_FRONTEIRA" as const,
         segmentId: segment.id,
         factIds: [],
-        reason: "Segmentação preliminar: fronteiras ainda não verificadas",
+        reason: "Fronteira ou continuidade da gravação exige revisão",
         sourceIds: [segment.sourceId],
-      },
+      }] : []),
       {
         kind: "UNLINKED_PATIENT",
         segmentId: segment.id,

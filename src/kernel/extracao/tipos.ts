@@ -23,6 +23,7 @@ export interface EncounterSegment {
   readonly candidateNames: readonly string[];
   readonly rawTranscript: string;
   readonly boundaryConfidence: number | null;
+  readonly boundaryReviewRequired: boolean;
   /** Vinculação com paciente só por decisão explícita do médico. */
   readonly patientId: string | null;
 }
