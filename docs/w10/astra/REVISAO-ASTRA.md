@@ -200,3 +200,35 @@ Revisão de `C:\Users\silas\Projects\OncoGlobal-wt\w10-luna1`, HEAD-base verific
 ### Sequência de fechamento para L1/root
 
 Corrigir primeiro ASTRA-09/10/11/12 (identidade/autoridade), depois ASTRA-13/14 (projeção temporal). Acrescentar os negativos ao teste HTTP focal com fixtures sintéticas e fechar servidor/SQLite em finally. Validar pelo wrapper: typecheck, boundaries, corpus, testes server/L1 e regressão W3; manter o teste HTTP independente L5. Registrar limites de bundle/UI, extração/gates e SafetyEngine como PARCIAL/PEDIDO, sem ampliar faixa ou reduzir gates. Esta rodada se encerra no despacho; não aguarda execução e não marca achados corrigidos sem nova evidência.
+
+## Verificação de fechamento — somente achados já abertos
+
+Leitura em 2026-10-07 do candidato L1 congelado, base verificada `1a6abb3e4a49e73baa5d8ff8a59015bb003a45a5` mais WIP server/testes. A base já inclui atualização do tech lead; fichas RASCUNHO não foram reinterpretadas nem promovidas nesta revisão. Nenhum teste foi executado pelo Astra e nenhum arquivo de produto foi alterado. Esta seção atualiza a observação de código; o integrador é responsável por resultado executado, logs e fechamento final.
+
+**Conclusão restrita: correções de ASTRA-09 a ASTRA-14 observadas e suficientes para as reproduções originalmente descritas. Não identificada insuficiência residual nesses seis casos.** Não foi ampliado o escopo para novos requisitos ou nova rodada de descoberta.
+
+| Achado | Correção observada no candidato | Execução da raiz |
+|---|---|---|
+| ASTRA-09 | `rotas.ts:430–434` exige EXTRACAO_RASCUNHO, patientId null e destinatário encontrado por lerPaciente; prescrição/documento já vinculado são recusados antes de salvar | Reataque LUNA1 em execução na raiz; teste independente `tests/w10-luna2/identidade-http.test.ts` cobre recusa sem mutação e vínculo válido |
+| ASTRA-10 | `rotas.ts:132–136` recusa os dois kinds antes de construir registros e chamar confirmar; confirmação mista não chega ao writer | Teste L1 e teste independente exercitam lote misto, preservação de eventos e documento isolado válido; execução final a registrar pela raiz |
+| ASTRA-11 | `rotas.ts:225–234` exige patientId/encounterId/tumorLotId esperado e compara com seleção; `311–318` limpa seleção quando paciente não é encontrado; sessão aceita seleção null | Testes cobrem A→B, pedido esperado A recusado, B válido, falha de carregamento e recuperação após nova seleção; execução final a registrar pela raiz |
+| ASTRA-12 | `leituras.ts:178–185` verifica identidade envelope/mensagem; helper contatoUnico recusa duplicidade/revogação; cabeçalho `144–148` exige envelope e payload do paciente | Novo teste L1 contém mensagem discordante e contato revogado; resultado executado sob raiz |
+| ASTRA-13 | `leituras.ts:244–253` seleciona chegada no dia civil -03:00; múltiplas triagens atuais da mesma pessoa não viram cartões repetidos e geram TRIAGEM_DUPLICADA/PENDENTE em `276–277` | Fixture positiva alterada apenas no teste novo para chegada hoje; inclui triagem histórica e duplicada; resultado executado sob raiz |
+| ASTRA-14 | `leituras.ts:56–63` ordena por Date.parse(criadoEm), com operationId/eventIndex como desempate; não usa mais ordenação lexical ISO como prioridade temporal | Teste L1 inclui seleção por offsets e expectativa do encontro atual; resultado executado sob raiz |
+| ASTRA-01 | RECIST agora verifica elegibilidade basal, órgão, fontes, limite de cinco/dois por órgão e mensurabilidade suportada, mantendo interpretação pendente quando necessário | Raiz informou reataque L4 de 42 testes; execução não reproduzida pelo Astra |
+| ASTRA-02 | RC mantida e PD por critério independente podem ser propostas no envelope quando delta do nadir é indefinido; avaliação numérica não fabrica denominador | Mesmo reataque L4 informado pela raiz; código conferido nesta leitura |
+| ASTRA-03 | Overflow da soma basal seta baselineInvalido/motivo e referência basal é verificada antes de uso | Mesmo reataque L4 informado pela raiz; código conferido nesta leitura |
+| ASTRA-04 | Gateway reaplica HARD_FORBIDDEN ao destinoCanonico validado antes da execução | Raiz informou reprodução negativa de dois casos seguida de reataque L2 de 76 testes; execução não reproduzida pelo Astra |
+| ASTRA-05/06/07 | Booleano obrigatório, replay antes da validação de estado corrente e sessão com CRM/intervalo temporal válido permanecem no código integrado | Raiz informou reataque L5 de 26 testes; teste HTTP independente adicional aguarda integração/execução final |
+| ASTRA-08 | Estatística agrupa administrações atuais por patientId/adminId; alternativas clínicas incompatíveis contam como conflito/pendência e não incrementam status válido | Mesmo reataque L4 de 42 testes informado pela raiz; código conferido nesta leitura |
+
+### Adaptador de bundle e limites de conclusão
+
+- `rotas.ts:355–372` aceita o PedidoBundle da porta existente, seleciona documentos por paciente/encontro/lote e exclui os envelopes de extração/prescrição. A rota explícita chama exibirBundle, que devolve conteúdo e hash. O formato anterior com draftIds continua suportado.
+- Há somente uma chamada a registrarBundleExibido em `rotas.ts`, dentro de exibirBundle (`114`). **Carregar consulta não registra documento como exibido.** Assim, a adaptação não contorna G-25 para fazer o teste passar.
+- O teste independente de identidade exercita o adaptador, lote misto recusado e documento isolado confirmado após exibição explícita. Isso prova a sequência de API quando executado; não prova que TelaConsulta/Cursor já apresenta conteúdo e chama essa sequência.
+- A assinatura pela UI permanece dependência separada. Extração/reconciliação completas, dados para comparação efetiva de G-07/08 e requisitos para SafetyEngine continuam com os limites explicitados nas rodadas anteriores. Saídas externas, ativação de modelos clínicos e SIGTAP ausente não foram liberados.
+
+### Entrega da verificação
+
+Nenhuma correção adicional solicitada nesta leitura. Raiz deve concluir o wrapper em andamento, integrar L1 em série e executar os dois arquivos HTTP independentes (sete testes informados no conjunto) sobre o candidato integrado. Só depois registrar os resultados reais e classificar fechamento dos achados; esta revisão fornece **CORRECAO_OBSERVADA**, sem substituir a evidência de execução do integrador. A conclusão final deve distinguir backend validado e fluxo UI de assinatura ainda parcial.

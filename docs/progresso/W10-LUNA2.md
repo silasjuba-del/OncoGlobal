@@ -1,5 +1,7 @@
 # W10-LUNA2 · progresso
 
+**Estado atual (raiz, 2026-10-07): F03/F04 integradas e validadas, inclusive destino canonico e consumidor temporal HTTP. Evidencia integrada: 47 arquivos/362 testes PASS; testes HTTP independentes incluidos. Notas NOT_RUN abaixo sao historicas.**
+
 Base: `f0/w10-luna2` em `04b53db31598fb80ff78192d4cd3eafde36428fd`.
 
 | Fatia | Estado | Entrega | Validação/commit |

@@ -1,5 +1,7 @@
 # W10-LUNA3 — corpus com fonte, versão e estado
 
+**Estado atual (raiz, 2026-10-07): F05/F06 integradas e testes PASS. Corpus continua em seus estados RASCUNHO/PENDENTE; PASS estrutural nao ativa conhecimento clinico. Notas NOT_RUN abaixo sao historicas.**
+
 - Executor/base: Luna3, worktree `w10-luna3`, branch `f0/w10-luna3`, base `04b53db31598fb80ff78192d4cd3eafde36428fd`.
 - Estado: implementação local das F05/F06 pronta para wrapper serial e revisão de integração. Nenhum commit feito; aguarda evidência do wrapper antes de fechar `W10-LUNA3-01/02`.
 - Escopo: somente `corpus/{glossario,regulatorio,receitas,redflags}/**`, `tests/w10-luna3/**`, este relatório e `docs/w10/PEDIDOS-LUNA3.md`.

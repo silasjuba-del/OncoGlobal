@@ -1,5 +1,7 @@
 # W10-LUNA5 · configurações e caixa numerada
 
+**Estado atual (raiz, 2026-10-07): F09/F10 integradas; 26 testes do reataque e 4 testes HTTP independentes PASS. Evento global segue PROVISORIO-W10 operacional. Notas NOT_RUN abaixo sao historicas.**
+
 Base `04b53db31598fb80ff78192d4cd3eafde36428fd` · branch `f0/w10-luna5` · implementação WIP entregue para validação serial do root.
 
 | Fatia | Estado de implementação | Arquivos | Persistência/consumidor/evento |

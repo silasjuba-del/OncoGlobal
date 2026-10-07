@@ -1,5 +1,7 @@
 # W10-LUNA1 · progresso
 
+**Estado atual (raiz, 2026-10-07): codigo integrado e testes HTTP/regressao PASS. F02 permanece PARCIAL pelas dependencias clinicas/UI registradas; nao e fluxo de assinatura completo. A evidencia mais recente prevalece sobre as notas historicas abaixo.**
+
 Base recebida do root: `f0/w10-luna1` @ `7a5ec6f3efa9669decbc9c61529bf2741da3e551`. Nenhum teste, typecheck ou wrapper foi executado neste worktree; validação permanece `NOT_RUN` para o root serializar.
 
 | Fatia | Estado local | Implementação / consumidor | Limite |

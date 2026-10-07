@@ -1,49 +1,84 @@
-# W10 — cadeia Astra e cinco Lunas
+# W10 — entrega local da cadeia Astra e cinco Lunas
 
-Data: 2026-10-07. Base original `04b53db31598fb80ff78192d4cd3eafde36428fd`. Branch de integracao `f0/w10-astra`; diretorio `C:\Users\silas\Projects\OncoGlobal-wt\w10-astra`.
+**ENTREGA LOCAL VALIDADA; W10 funcional ainda PARCIAL.** Planejamento, cinco frentes, correções e integração foram executados. F02 e F08 conservam dependências explícitas; testes aprovados não encerram essas dependências nem liberam produção clínica.
 
-**Estado atual: EM_EXECUCAO.** Este registro sera fechado depois da integracao e dos testes HTTP. Nao e declaracao de prontidao clinica ou de producao.
+Data: 2026-10-07. Worktree: `C:\Users\silas\Projects\OncoGlobal-wt\w10-astra`. Branch: `f0/w10-astra`.
+Base inicial: `04b53db31598fb80ff78192d4cd3eafde36428fd`. Base canônica de aceite congelada: `0d843027fa01aa965f5733ba7e816d84f4ac8d9c` (D-W9-61/62 e fichas recebidas do tech lead, preservadas).
 
-Planejamento e revisao independente: `gpt-6-astra`. Implementadores reais: cinco agentes `gpt-6-luna` (L1 servidor, L2 gateway/tempo, L3 corpus, L4 RECIST/estatistica, L5 configuracoes). Root coordenou worktrees, verificacao, correcoes de integracao e merges seriais. Maximo de tres subagentes simultaneos; checks com um worker e lock externo.
+## Resultado verificado
+
+| Verificação | Evidência real |
+|---|---|
+| TypeScript | tsc --noEmit, exit 0 |
+| Fronteiras | fronteiras ok (180 arquivos), exit 0 |
+| Corpus | corpus ok (109 arquivos), exit 0 |
+| Conjunto integrado das áreas tocadas | **47 arquivos / 362 testes PASS**, exit 0 |
+| HTTP adicional RECIST/estatística | **1 arquivo / 2 testes PASS**, exit 0; mesmo código de produto |
+| HTTP independente identidade/configuração | 7 testes PASS, já incluídos nos 362; não somar novamente |
+| Adversarial W8 | 9 arquivos / 41 testes: **36 PASS e 5 FAIL preexistentes**, exatamente os mesmos da baseline |
+| Revisão Astra | 14 achados ASTRA-01–14 corrigidos; inspeção independente e execução da raiz discriminadas no relatório de revisão |
+| Escopo protegido | Nenhuma diferença autoral em contratos, package/lock, tsconfig, scripts, CI, decisões ou CANONICA contra a base de aceite |
+
+Total distinto aprovado no fechamento técnico: **364**, em dois comandos (362 integrados + 2 HTTP adicionais). Outros totais históricos se sobrepõem. Nunca foi executada a suíte inteira: lock externo, forks, um worker, --no-file-parallelism e seletores explícitos. A primeira baseline com pool padrão excedeu timeout HTTP: INCOMPLETO; reexecução isolada passou sem alterar expectativas antigas.
 
 ## Dez fatias
 
-| Fatia | Estado da implementacao nesta revisao | Evidencia / limite |
+| Fatia / executor | Entrega integrada | Estado e limite |
 |---|---|---|
-| F01 — leituras autenticadas | EM_EXECUCAO | L1: consulta, agenda, salao, canal, APAC e chat derivados de eventos locais. |
-| F02 — composicao governada | EM_EXECUCAO | L1: extracao/revisao/gates, prescricao/APAC e servicos auxiliares. |
-| F03 — gateway | INTEGRADA / PASS focal | G-02/G-27, evidencia imutavel, recibo opaco, auditoria e destino canonico. |
-| F04 — tempo | INTEGRADA / PASS focal | -03:00, calendario estrito; consumidor HTTP depende da F02. |
-| F05 — glossario/regulacao | INTEGRADA / PASS | 47 caixas; 12 pendencias regulatorias fora da tabela ativa. |
-| F06 — receitas/red flags | INTEGRADA / PASS estrutural | 47 fichas/56 modelos RASCUNHO, 16 secoes toxicidade, 25 sinais; nenhuma ativacao clinica automatica. |
-| F07 — RECIST | INTEGRADA / PASS focal | Categorias propostas; mensurabilidade, nadir zero, overflow e independencia de ponto futuro reatacados. |
-| F08 — estatistica | PARCIAL / PASS do escopo tipado | Contagens operacionais e administracao tipada com conflito preservado; categorias clinicas amplas exigem contratos/produtores. |
-| F09 — perfil/conexoes | INTEGRADA / PASS focal | Perfil persistente, conexoes desligadas, sessao valida. |
-| F10 — caixas/historico | INTEGRADA / PASS operacional | Historico atomico/idempotente; envelope global PROVISORIO-W10 em SQLite operacional, pedido de contrato canonico. |
+| F01 / Luna 1 | Seis leituras HTTP autenticadas: consulta, agenda, salão, canal, APAC e chat, derivadas do ledger | PASS do backend; dados/produtores ausentes continuam pendentes |
+| F02 / Luna 1 | Extração/revisão persistida, contenção de rascunhos, prescrição proposta, antiglosa e consumidores auxiliares | **PARCIAL**: reconciliação/fontes tipadas, quatro camadas completas da prescrição e assinatura na UI dependem dos donos externos |
+| F03 / Luna 2 | Egress exige autorização e G-02/G-27; evidência imutável, auditoria, recibo opaco e política no destino efetivo | PASS; conexões externas continuam desligadas |
+| F04 / Luna 2 | Instantes/data civil -03:00 e limites D85/D90 consumidos pela APAC HTTP | PASS |
+| F05 / Luna 3 | 47 caixas: 16 config e 31 APAC; regulação versionada | PASS estrutural; 12 candidatos pendentes fora da tabela ativa |
+| F06 / Luna 3 | 47 fichas/56 modelos, toxicidades com fonte preservada e 25 sinais de alarme | PASS estrutural; RASCUNHO e textos não aprovados não viram conduta/envio |
+| F07 / Luna 4 | RECIST longitudinal: elegibilidade, fontes, alvos, nadir, deltas e categorias PROPOSTO; HTTP real | PASS; métodos/dados não avaliáveis permanecem PENDENTE |
+| F08 / Luna 4 | Estatística regenerável do ledger, dedupe, categorias operacionais/administração e conflitos | PASS tipado; **PARCIAL** para categorias clínicas amplas de D-W9-42/44 |
+| F09 / Luna 5 | Perfil médico/instituição persistente e conexões desligadas, com HTTP | PASS, incluindo reabertura e catálogo real |
+| F10 / Luna 5 | Caixas com autoria, antes/depois, revisão esperada, replay e histórico atômico | PASS operacional; envelope global PROVISORIO-W10 em SQLite próprio aguarda contrato canônico |
 
-## Evidencias ja executadas
+## Correções e pendências
 
-Logs completos ficam em `C:\Users\silas\Projects\OncoGlobal-wt\_w10-astra\logs`. Cada validacao tem transcript e saidas `.typecheck.txt`, `.boundaries.txt`, `.corpus.txt`, `.vitest.txt` quando executadas. Os totais abaixo se sobrepoem: **nao somar como testes unicos**.
+Corrigidos: PHI em erro/log/recibo, evidência mutável, auditoria ausente, bypass de destino canônico; RECIST sem elegibilidade/nadir zero/overflow/futuro; administração estatística conflitante; configuração com valor anterior/normalização/replay/sessão inconsistentes; transferência de rascunho entre pacientes, confirmação genérica indevida, contexto de outra aba, vínculo revogado/discordante, fila histórica/duplicada e ordenação lexical de instantes.
 
-| Execucao | Resultado real |
+As reproduções e a inspeção de fechamento estão em `docs/w10/astra/REVISAO-ASTRA.md`. A raiz executou os testes; Astra não declarou ter rodado comandos.
+
+Dependências abertas, sem contornar controles:
+
+1. **UI/Cursor:** exibir conteúdo/versões antes de confirmar. O servidor conserva BUNDLE_NAO_EXIBIDO; carregar cabeçalho não registra hash como se o documento tivesse sido exibido. PedidoBundle tem adaptação server-side, mas o fluxo da TelaConsulta não está concluído.
+2. **Fugu/gates:** reconciliador/linha do tempo ainda incompletos; G-07/G-08 com entrada ausente retornam PENDENTE, sem comprovar confronto clínico. Necessário produtor tipado com fonte/escopo.
+3. **Prescrição:** requisitos e medidas confirmadas para SafetyEngine/renderer. Sem eles, NOT_EVALUABLE; não promover ficha ou rascunho a ordem assinada.
+4. **Contratos/estatística:** promover envelopes provisórios e definir categorias clínicas/denominadores com produtores seguros. Configuração global não usa paciente sentinela.
+5. **SIGTAP/SIA/curadoria:** pacote por competência, layout e verificação individual ainda dependem dos donos. Nenhum PASS estrutural autoriza exportação ou conduta.
+
+Cinco falhas antigas fora da cadeia: deduplicação (Fugu); interações, ficha inteira aprovada, manifesto de merge e ownership (Grok). Permanecem FAIL, não foram excluídas nem ajustadas. Pedidos rastreáveis em `docs/w10/PEDIDOS-ASTRA.md` e relatórios individuais.
+
+## Execução e commits
+
+Planejamento/revisão: **gpt-6-astra**. Implementação: **cinco gpt-6-luna**, em worktrees isolados w10-luna1…5. Root coordenou correções, checks e merges seriais. Máximo de três subagentes ativos; um validador pesado por vez.
+
+| Dono | Commits principais |
 |---|---|
-| Baseline isolada | 29 arquivos / 229 testes PASS; typecheck, fronteiras174 e corpus91 PASS na baseline. |
-| Baseline adversarial W8 | 9 arquivos / 41 testes: 36 PASS e 5 FAIL preexistentes, fora das faixas Astra. |
-| L2 inicial | 15 arquivos / 88 testes PASS e checks estruturais PASS. |
-| ASTRA-04 RED | 2 falhas reproduziram bypass de destino canonico. |
-| ASTRA-04 GREEN | 12 arquivos / 76 testes PASS e checks estruturais PASS. |
-| L3 separado por fatias | 3 arquivos / 13 testes PASS; fronteiras174/corpus98/typecheck PASS. |
-| L4 anterior a revisao | 3 arquivos / 35 testes PASS; insuficiente para fechar achados ASTRA-01/02/03/08. |
-| L4 reataque Astra | 3 arquivos / 42 testes PASS; fronteiras176/corpus91/typecheck PASS. |
-| L5 reataque Astra | 3 arquivos / 26 testes PASS; fronteiras175/corpus91/typecheck PASS. |
-| Atualizacao canonica D-W9-61 | 8 arquivos / 79 testes PASS (prescricao + W3); typecheck/fronteiras176/corpus98 PASS. |
+| Luna 1 | afe9efe, aec59c4 |
+| Luna 2 | 3aef417, 660718a, b1e0330 |
+| Luna 3 | 0f874b3, 1de66bb |
+| Luna 4 | 22a3582, 5bd3012, a15d3ca, 6c36c6d, 401fe5a |
+| Luna 5 | 9eccdc7, f545123 |
 
-Primeira baseline Vitest com pool padrao excedeu timeout HTTP e parou de avancar: resultado INCOMPLETO, processo proprio interrompido. Reexecucao com forks, um worker e timeout de I/O 30 s passou; expectativas antigas preservadas. Outros FAILs de desenvolvimento e suas correcoes permanecem nos logs/relatorios individuais.
+F01/F02 e F09/F10 compartilham fontes: primeiro commit introduz a composição, segundo acrescenta provas específicas e limites. Testes HTTP independentes L2/L5 foram produzidos no checkout de integração com ownership explícita.
 
-## Revisao e limites
+Código integrado testado em `9a4f4ff90c145b7455ca5794691974a74d2b2c3f`. A prova HTTP final entrou em `d81f925`, sem alterar produto. Fechamento posterior acrescenta testes/documentação/evidências ao mesmo produto validado.
 
-Plano e prompts: `docs/w10/astra/PLANO-EXECUCAO.md`, `LUNA1.md` a `LUNA5.md`. Achados com reproducoes: `docs/w10/astra/REVISAO-ASTRA.md` e `ACHADOS-REVISAO.md`. Pedidos externos: `docs/w10/PEDIDOS-ASTRA.md` e pedidos individuais de cada Luna.
+## Evidências reproduzíveis
 
-Cinco falhas adversariais anteriores: deduplicacao de exames (Fugu), interacoes, ficha aprovada por hash, manifesto de merge e ownership de escrita (Grok). Os quatro testes de gates G-07/G-08/G-09/G-27 passaram no mesmo reataque; isso nao encerra aquelas dependencias.
+Saídas reais em `docs/w10/astra/evidencias/`:
 
-Nenhum contrato congelado, package.json/lock, checker de fronteiras ou checkout de executor externo foi editado pela cadeia. A base principal avancou durante a execucao: o commit canonico `4679e240557e925ec06a26e424737dfb6f2fa287` (D-W9-61 e BSA Mosteller, publicado pelo tech lead) foi recebido por merge controlado, com seus testes e decisao preservados. Sem push, deploy ou merge de volta em `f0/w1-integrado`. Prescricoes-modelo, mensagens e regulacao pendente continuam nos estados registrados por suas fontes. Somente dados sinteticos usados nos testes.
+- `20261007-035530-436-FINAL-INTEGRADO.log*`: 362 testes.
+- `20261007-035444-068-INTEGRACAO-HTTP-INDEPENDENTE.log*`: 7 testes, incluídos acima.
+- `20261007-040139-690-FINAL-HTTP-RECIST-ESTATISTICA.log*`: 2 adicionais.
+- `20261007-035829-779-FINAL-ADVERSARIAL-W8.log*`: cinco falhas antigas.
+
+Histórico: `C:\Users\silas\Projects\OncoGlobal-wt\_w10-astra\logs`. Typecheck silencioso é registrado por TYPECHECK_EXIT=0. Logs preservam espaços do terminal; whitespace de código exclui somente essas cópias brutas.
+
+Reprodução pelo wrapper `docs/w10/astra/validar.ps1`, com seletores VITEST_ARGUMENTS dos transcripts. Usa binários locais e não baixa pacotes.
+
+**Handoff:** worktrees/commits preservados para o tech lead. Sem push, deploy ou merge de volta na principal. Nenhuma decisão clínica ou contrato congelado foi alterado autoralmente pela cadeia.

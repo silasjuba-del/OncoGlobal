@@ -1,5 +1,7 @@
 # W10 — Luna 4 (RECIST e estatística)
 
+**Estado atual (raiz, 2026-10-07): correcoes ASTRA-01/02/03/08 integradas, reataque 42 testes PASS e consumidor HTTP RECIST/estatistica 2 testes PASS. F08 clinica ampliada permanece PARCIAL. Notas NOT_RUN abaixo sao historicas.**
+
 Base inicial: `04b53db31598fb80ff78192d4cd3eafde36428fd` (`f0/w10-luna4`). Worktree exclusivo da Luna 4.
 
 | Fatia | Estado | Entrega |

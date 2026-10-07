@@ -1,0 +1,118 @@
+**********************
+PowerShell transcript start
+Start time: 20261007035829
+Username: SILAS\silas
+RunAs User: SILAS\silas
+Configuration Name: 
+Machine: SILAS (Microsoft Windows NT 10.0.26300.0)
+Host Application: C:\Users\silas\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.dll -NoProfile -Command try { [Console]::OutputEncoding=[System.Text.Encoding]::UTF8 } catch {}
+& .\docs\w10\astra\validar.ps1 -Worktree 'C:\Users\silas\Projects\OncoGlobal-wt\w10-astra' -Rotulo 'FINAL-ADVERSARIAL-W8' -SoTestes -ConfigVitest 'tests/adv-w8/vitest.config.ts' -Testes @('tests/adv-w8')
+Process ID: 5836
+PSVersion: 7.6.5
+PSEdition: Core
+GitCommitId: 7.6.5
+OS: Microsoft Windows 10.0.26300
+Platform: Win32NT
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1, 6.0, 7.0
+PSRemotingProtocolVersion: 2.4
+SerializationVersion: 1.1.0.1
+WSManStackVersion: 3.0
+**********************
+WORKTREE=C:\Users\silas\Projects\OncoGlobal-wt\w10-astra
+
+VITEST_ARGUMENTS=run tests/adv-w8 --no-file-parallelism --pool=forks --maxWorkers=1 --testTimeout=30000 --hookTimeout=30000 --config tests/adv-w8/vitest.config.ts
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/w10-astra
+
+ ❯ tests/adv-w8/fn16-t34-semaforo-interacoes.adv.ts (5 tests | 1 failed) 579ms
+   ❯ FN-16 / T-34 · semáforo de interações medicamentosas (5)
+     × FN-16 · SEM_IMPLEMENTACAO: semaforoInteracoes existe em src/rules 571ms
+ ❯ tests/adv-w8/k26-n17-ficha-inteira.adv.ts (4 tests | 1 failed) 1128ms
+   ❯ K-26 / N17 · biblioteca de fichas de prescrição aprovadas (4)
+     × K-26 · SEM_IMPLEMENTACAO: biblioteca de fichas aprovadas (templateId+version+hash) existe 918ms
+ ❯ tests/adv-w8/caso07-dedupe.adv.ts (4 tests | 1 failed) 104ms
+   ❯ CASO 07 · D1/D2 · deduplicação de exames por (laboratório, nº exame, data de entrada) (4)
+     × SEM_IMPLEMENTACAO: existe motor de deduplicação de exames (DEPENDE_W7 — faixa src/leitura) 53ms
+ ❯ tests/adv-w8/n19-manifesto-merge.adv.ts (3 tests | 1 failed) 25ms
+   ❯ N19 · gating de merge: diff fora do manifesto reprova antes do merge (3)
+     × N19 · SEM_IMPLEMENTACAO: existe harness executável que reprova diff fora do manifesto 17ms
+ ❯ tests/adv-w8/t56-g16-owner-write.adv.ts (5 tests | 1 failed) 569ms
+   ❯ T-56 / G-16 · um dono por objeto: write alheio rejeitado em runtime (5)
+     × T-56 · SEM_IMPLEMENTACAO: veredito de ownership existe no harness 538ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/adv-w8/caso07-dedupe.adv.ts > CASO 07 · D1/D2 · deduplicação de exames por (laboratório, nº exame, data de entrada) > SEM_IMPLEMENTACAO: existe motor de deduplicação de exames (DEPENDE_W7 — faixa src/leitura)
+AssertionError: Caso 07: 8 páginas de exame devem colapsar para 6 exames únicos (cintilografia ×2, IHQ ×2); sem motor de dedupe em src/, nada verifica a chave D2 nem impede contagem em dobro: expected null not to be null
+ ❯ tests/adv-w8/caso07-dedupe.adv.ts:29:106
+     27|     expect(await deduplicar(),
+     28|       "Caso 07: 8 páginas de exame devem colapsar para 6 exames únicos…
+     29|       "IHQ ×2); sem motor de dedupe em src/, nada verifica a chave D2 …
+       |                                                                                                          ^
+     30|   });
+     31|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/adv-w8/fn16-t34-semaforo-interacoes.adv.ts > FN-16 / T-34 · semáforo de interações medicamentosas > FN-16 · SEM_IMPLEMENTACAO: semaforoInteracoes existe em src/rules
+AssertionError: FN-16 não implementado: interacoes.v1.json tem só sementes INATIVAS e não existe motor; sem função, nenhum consumidor pode distinguir 'sem interação' de 'interação não checada': expected null not to be null
+ ❯ tests/adv-w8/fn16-t34-semaforo-interacoes.adv.ts:22:103
+     20|     expect(await fn16(),
+     21|       "FN-16 não implementado: interacoes.v1.json tem só sementes INAT…
+     22|       "sem função, nenhum consumidor pode distinguir 'sem interação' d…
+       |                                                                                                       ^
+     23|   });
+     24|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/adv-w8/k26-n17-ficha-inteira.adv.ts > K-26 / N17 · biblioteca de fichas de prescrição aprovadas > K-26 · SEM_IMPLEMENTACAO: biblioteca de fichas aprovadas (templateId+version+hash) existe
+AssertionError: K-26 não implementado: não há biblioteca de ficha aprovada inteira nem função que carregue ficha por (templateId, version, hash); render.ts aceita qualquer template genérico: expected null not to be null
+ ❯ tests/adv-w8/k26-n17-ficha-inteira.adv.ts:30:106
+     28|     expect(await biblioteca(),
+     29|       "K-26 não implementado: não há biblioteca de ficha aprovada inte…
+     30|       "carregue ficha por (templateId, version, hash); render.ts aceit…
+       |                                                                                                          ^
+     31|   });
+     32|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/adv-w8/n19-manifesto-merge.adv.ts > N19 · gating de merge: diff fora do manifesto reprova antes do merge > N19 · SEM_IMPLEMENTACAO: existe harness executável que reprova diff fora do manifesto
+AssertionError: N19 não implementado: nenhum script/teste neste repo reprova, antes do merge, um diff que toque arquivo fora do manifesto da onda; claim.ps1 é semáforo W5 (caminho fixo de outro worktree), não gate de merge (MATRIZ: 'claim não é harness de rejeição de diff adulterado'): expected null not to be null
+ ❯ tests/adv-w8/n19-manifesto-merge.adv.ts:32:112
+     30|       "N19 não implementado: nenhum script/teste neste repo reprova, a…
+     31|       "que toque arquivo fora do manifesto da onda; claim.ps1 é semáfo…
+     32|       "outro worktree), não gate de merge (MATRIZ: 'claim não é harnes…
+       |                                                                                                                ^
+     33|   });
+     34|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/adv-w8/t56-g16-owner-write.adv.ts > T-56 / G-16 · um dono por objeto: write alheio rejeitado em runtime > T-56 · SEM_IMPLEMENTACAO: veredito de ownership existe no harness
+AssertionError: T-56 não implementado: capabilities.v1.json só DECLARA ownerOf; nenhum gate/runtime rejeita agente escrevendo objeto de que não é dono (ex.: AG-04 escrevendo Conversation): expected null not to be null
+ ❯ tests/adv-w8/t56-g16-owner-write.adv.ts:23:102
+     21|     expect(await gateG16(),
+     22|       "T-56 não implementado: capabilities.v1.json só DECLARA ownerOf;…
+     23|       "rejeita agente escrevendo objeto de que não é dono (ex.: AG-04 …
+       |                                                                                                      ^
+     24|   });
+     25|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  5 failed | 4 passed (9)
+      Tests  5 failed | 36 passed (41)
+   Start at  03:58:32
+   Duration  10.03s (tests 58%, transform 29%, import 10%, worker 3%)
+
+    Isolate  9 workers spawned · ~573ms startup each (spawn + environment, per file)
+             at least ~4.59s faster with isolate: false — reuses workers across files instead of one per file
+
+VITEST_EXIT=1
+**********************
+PowerShell transcript end
+End time: 20261007035843
+**********************
