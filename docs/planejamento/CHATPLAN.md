@@ -164,3 +164,13 @@ M-R  EIXO X e EIXO Y DEFINIDOS → PLN-014   fontes/M-R_PLN-014_eixos-x-y-defini
       |R6| Mapeamento com M-B (X morfologia/função/sítio · Y estado/gravidade/prioridade · Z ação): coerente; Z (ação) não foi redefinido aqui = categorias 3–8 da matriz (M-P) + artefatos   inferência do planejamento
       |R7| "Longitudinal × transversal" (M-Q, abertura): SUPERADO como leitura de X/Y — X e Y agora são O QUE/ONDE e O QUE ESTÁ ACONTECENDO (a leitura de longitudinal/transversal proposta no diário não vale como X/Y; o tempo longitudinal fica nas 4 datas/ledger, PLN-004)   registrado, não apagado
 ```
+
+```
+M-S  EIXO Z = AÇÃO MÉDICA; X + Y = Z → PLN-015   fontes/M-S_PLN-015_eixo-z-acao-medica.md   (responde (b) e (c) de PLN-014)
+      |S1| X (o que/onde) + Y (gravidade/intensidade no tempo) "só informa": é dado que chega = médico PASSIVO = fase de RECEPÇÃO DE DADOS, ANÁLISE e PLANNING   DECIDIDO
+      |S2| Deve gerar AÇÃO = médico PROATIVO → RESOLUTIVO: trata, opera, administra fármacos, elabora radioterapia   DECIDIDO
+      |S3| EIXO Z = AÇÃO MÉDICA   DECIDIDO
+      |S4| Fórmula: X + Y = Z   DECIDIDO
+      |S5| Z cobre ações RESOLUTIVAS (tratar, operar, administrar fármacos, planejar RT) — as categorias de investigação/encaminhamento/retorno de M-P não estão citadas como Z neste texto   PENDENTE (investigação é Z, ou é "análise" do passivo?)
+      |S6| Fecha (b) e (c) de PLN-014: Z foi definido; X e Y são entradas e Z a saída (X + Y = Z), não três eixos independentes   DECIDIDO (leitura direta do texto)
+```

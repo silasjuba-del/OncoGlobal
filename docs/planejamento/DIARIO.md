@@ -225,3 +225,21 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
 - Pendências: (a) "causa conhecida?" = a "CERTEZA" do eixo de M-O? (R5); (b) Z não foi redefinido nesta mensagem — vale como ação/artefatos (categorias 3–8 de M-P)? (c) ordem de uso: X e Y são dois eixos independentes que se cruzam (cruz) e depois definem Z? O desenho original do Dr. Silas era "em cruz" → confirmar com ele.
 - Decisão: DECIDIDO (Dr. Silas) R1–R4. PENDENTE: R5 e (b), (c). R6 é inferência do planejamento.
 - Próxima ação: aguardar liberação; quando liberar, fatiar: schema X → schema Y → regra X×Y→cluster→matriz. Dono: planejamento.
+
+## PLN-015 · 2026-10-07 · Eixo Z = ação médica; X + Y = Z
+- Origem: Dr. Silas (`fontes/M-S_PLN-015_eixo-z-acao-medica.md`; mensagem curta, ênfase própria)
+- Liga a: PLN-014 (X e Y), PLN-002 (X/Y/Z de M-B §15), PLN-011/012 (fluxo e matriz), PLN-013 (esteira), CHATPLAN M-S
+- Ideia (sem perda): saber O QUE/ONDE (X) + gravidade/intensidade no tempo (Y) **só informa** — é dado que chega; o médico aí é **passivo** (fase de recepção de dados, análise e planning). Logo deve gerar **ação** — médico **proativo, resolutivo**: trata, opera, administra fármacos, elabora radioterapia. **Eixo Z = ação médica. X + Y = Z.**
+- Efeito na árvore: fecha as pendências (b) e (c) de PLN-014 — Z definido; os três eixos não são independentes: X e Y são entradas, Z é a saída. Confirma a leitura de M-B §15 (X/Y/Z) e a esteira de PLN-013 (percurso detectar→confirmar→avaliar→**agir**→saída: o "agir" é o Z).
+- Corroboração com o já congelado:
+  - ✔ Z na matriz de PLN-012: categoria 4 TRATAMENTO (MED, MED oncológico, CX, RT) é o núcleo do Z; categoria 8 (documentos) é o artefato do Z; **MED, CX, RT** coincidem exatamente com "administra fármacos, opera, elabora radioterapia" do Dr. Silas.
+  - ✔ "IA reconhece o tema e monta a plataforma; médico define a ação" (M-O/M-N): X e Y podem ser preenchidos por IA/voz/dados (recepção); Z só nasce da decisão do médico (ação proativa) — a IA só prepara as opções e o rascunho.
+  - ✔ Cabe no ORK-2 (completude clínica): o Harness confere se, dado X+Y, o Z previsto na matriz foi considerado (sem decidir).
+- Pontos em aberto (não resolvidos em silêncio):
+  - (1) **O que é Z exatamente**: o texto lista só ações resolutivas (tratar, operar, administrar fármacos, RT). Investigação (LAB/RAD/ENDO/PATH), encaminhamento, suporte e retorno da matriz de PLN-012 contam como Z, ou pertencem à fase passiva de "análise/planning"? Sugestão do planejamento (a validar): Z = tratamento + procedimentos + ações resolutivas; investigação/encaminhamento/retorno = "análise e planning" que ainda é passivo até virar ação. Mas então o fluxo de M-O/M-P (investigar se causa desconhecida) fica entre Y e Z.
+  - (2) Em emergência (compressão medular), Z pode vir direto de X+Y sem investigação extensa (M-B §12–13) — coerente com a fórmula.
+  - (3) "Médico passivo" é fase, não papel: a UI deve deixar claro quando o sistema está em recepção/análise e quando exige ação (botões do Dr. Silas).
+- O que o código tem hoje: **nada do eixo Z como conceito**. Há peças de ação: prescrição (`src/rules/prescricao/*`, `contracts/w10/prescricao.ts`), dose (`rules/dose.ts`), APAC, impressão (`src/impressao/kit.ts`), gateway de efeitos (6 efeitos). RT: sem módulo de planejamento; CX: sem. Não existe o contrato `Acao` que una X+Y→Z, nem lista de opções de Z por X×Y.
+- Lacuna: contrato **Z** (tipo: MED | CX | RT | procedimento…, intenção, estado DRAFT→REVISÃO→CONFIRMAÇÃO, origem) e a relação X×Y→Z como **dado versionado** (KB), com a matriz de PLN-012 como catálogo; regra de que Z só vira CONFIRMADO por ato do médico (decisão 14 de M-D).
+- Decisão: DECIDIDO (Dr. Silas) S1–S4 e S6. PENDENTE: S5 / ponto (1) (investigação é Z ou análise?).
+- Próxima ação: aguardar liberação; quando liberar, fatiar: contrato Z → catálogo X×Y→Z (seed por órgão: próstata, mama, pulmão) → regra de confirmação → UI. Dono: planejamento.
