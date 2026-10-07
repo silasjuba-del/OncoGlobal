@@ -340,3 +340,24 @@ M-AH  DOCUMENTO FINAL DE ARQUITETURA CLÍNICA "OncoGlobal WORK" (datado 5 out 20
       |AH11| Nome do território (WORK/OncoGlobal; "oncomind" sai?)   PENDENTE
       |AH12| Terceiro modelo de "resumo de caso" (seção 18): anagráficos · clínicos gerais · oncológicos · exames cronológicos · conduta · pendências · trials + medicação SUS   PENDENTE (junta-se a W1 de 5 blocos e ao PRONTUÁRIO DRIVE; qual é o canônico?)
 ```
+
+```
+M-AJ  RESPOSTAS ÀS 6 DECISÕES DE PLN-030 + "RESUMO UI (LONGO)" → PLN-031   fontes/M-AJ_PLN-031_respostas-e-template-resumo-longo.md
+      |AJ1| 1 — SIM: semáforo de 3 cores (sem amarelo) também em elegibilidade e interação; "revisar" = VERMELHO com motivo; níveis (atenção/importante/contraindicação) vão no texto   DECIDIDO (fecha AH5; corrige PLN-006 I2/I3)
+      |AJ2| 2 — CTCAE 6: tabela v5 do documento de 5/out é substituída pela v6; corte conferido na tabela oficial v6 pelo operacional   DECIDIDO (fecha AH7; reafirma D-W9-67)
+      |AJ3| 3 — FOLFOX em DOIS TIPOS: COM PORT-A-CATH e SEM PORT-A-CATH ("PORTH/PORHCATH")   DECIDIDO (fecha AH9 em parte; ver PLN-031: doses do tipo sem port e FOLFIRI/FOLFOXIRI/FLOT)   PENDENTE (doses e demais esquemas)
+      |AJ4| 4 — Tramadol é RECEITA ESPECIAL, SÓ SE TIVER (o serviço dispuser de receituário especial)   DECIDIDO (fecha AH8): item "controlado" só é oferecido se houver receituário especial configurado
+      |AJ5| 5 — Nome do território: ONCOGLOBAL — WORK   DECIDIDO (fecha AH11; "oncomind" fora do nome do território)
+      |AJ6| 6 — "RESUMO UI (LONGO)" = TEMPLATE PADRÃO — RESUMO ONCOLÓGICO LONGITUDINAL (anagráficos · resumo operacional · clínicos · oncológicos com cTNM/pTNM/ypTNM · timeline · laboratório · tratamento atual com status · CTCAE · alergias · contraindicações · CD vazia · histórico pregresso · IA FALA · trials/evidências · bloco SUS/CONITEC/APAC/SIGTAP)   DECIDIDO (fecha AH12/AC11 para a UI)
+      |AJ7| Regra MEMORY_OS → oncoMed: o bloco regulatório persiste como UMA unidade (CID + dx/estágio/biomarcador + SIGTAP + finalidade/enquadramento + prioridade + competência + proveniência); mudança de estágio, linha ou intenção cria NOVA versão sem apagar a anterior   DECIDIDO
+      |AJ8| "IA FALA — REVISÃO CLÍNICA" (sugestões, pendências, erros/conflitos, lacunas, pearls, pitfalls, caution, NÃO SEI) é superfície da UI, nunca do documento impresso   DECIDIDO (coerente com PLN-023)
+```
+
+```
+M-AK  CONSULTA FLASH — "ONE CLICK, BYE-BYE, NEXT" → PLN-031   fontes/M-AK_PLN-031_consulta-flash-one-click.md
+      |AK1| Modal mínimo que encerra a consulta: header imutável (DX+TNM+ESTÁDIO+BIOMARCADOR / AP+MUC+ALERGIA+ECOG / TTO+LINHA+CICLO) → exames recentes → ações de hoje → receitas/documentos pré-selecionados → APAC/SIGTAP   DECIDIDO (estrutura)
+      |AK2| Chip APAC/SIGTAP operacional: CID · SIGTAP · finalidade · APAC válida · competência · pendências; estados ✓ VERDE / ! PENDENTE / × VERMELHO (sem quinze estados)   DECIDIDO
+      |AK3| Clique final FINALIZAR·IMPRIMIR·SAIR em cadeia: validar → confirmar CD → evolução → atualizar tratamento → gerar/renovar APAC → SIGTAP → receitas/exames/encaminhamentos → retorno → snapshot assinado → imprimir lote → fechar paciente → próximo da fila   DECIDIDO (intenção) — 7 pontos a alinhar com decisões anteriores (ver PLN-031)   PENDENTE
+      |AK4| RETORNO como objeto operacional: prazo + motivo + exames necessários antes do retorno (gera agenda + pedidos)   DECIDIDO (sugestão do texto; liga a PLN-012 cat. 7)
+      |AK5| Itens PRÉ-MARCADOS (☑ liberar tratamento, ☑ receitas) × regra "sugestões desmarcadas salvo ordem médica" (PLN-006 H4) e "nunca 'liberado' sem ato médico" (I2)   PENDENTE
+```
