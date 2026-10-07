@@ -566,3 +566,20 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
 - Lacuna: (a) UI: resumo longo (template) e modal Flash; (b) objeto `Retorno` (prazo + motivo + exames); (c) unidade regulatória versionada; (d) fichas `FOLFOX-COM-PORT` e `FOLFOX-SEM-PORT` (doses do segundo a definir pelo Dr. Silas); (e) atributo "controlado/receita especial" + configuração do serviço; (f) tabela CTCAE v6 no lugar da v5; (g) semáforo de 3 cores em PLN-006 (elegibilidade/interação).
 - Decisão: **DECIDIDO (Dr. Silas):** respostas 1–6 e a estrutura do Flash. **PENDENTE:** os 7 pontos do Flash (principalmente 1, 4 e 5); doses do FOLFOX sem port e variantes dos outros esquemas.
 - Próxima ação: aguardar liberação; quando liberar, fatiar (UI longa → modal Flash → objeto Retorno → fichas FOLFOX → CTCAE v6). Prompt ao Cursor: lembrar "sem documentos em pastas". Dono: planejamento.
+
+## PLN-032 · 2026-10-07 · Auditoria READ_ONLY antes de codar
+- Origem: Dr. Silas ("VAMOS COMEÇAR A CODAR … ESTÁ MODIFICADO. FAÇA UMA AUDITORIA ANTES READ_ONLY.")
+- Entregue: `docs/planejamento/AUDITORIA-PRE-CODIGO-2026-10-07.md` (8 seções: ramos, árvore suja, entrega Astra, conflitos de decisão, higiene de dados, lacunas do código, ordem recomendada, limites).
+- Método: só leitura (git status/log/diff, grep, leitura de docs). Nada editado/mesclado/enviado. **tsc e testes não foram executados** (árvore suja com outro escritor).
+- Achados principais:
+  1. O checkout `f0/w1-integrado` tem **31 arquivos sem commit** (23 M + 8 novos; 393+/108−): D-W9-67…72, packs/rulesets, `kitTumorLot.ts`, `validarComExibicao.ts`, UI de consulta. Risco de perda; **commitar primeiro**.
+  2. A Astra tem **8 commits à frente**; os 3 últimos (17:45) são **posteriores** à revisão do operacional que classificou o diff como MERGE_COM_RISCO (CONFIRMADO sem exibição, A1/G-25). **Reauditar o HEAD `23937b2`** antes de qualquer merge.
+  3. Astra adicionou **provedor LLM "Jev"** (`@typesafe-ai/sdk@0.6.0`, opt-in, só classifica tipo de fonte, texto desidentificado) → conflita com **D-W9-15** (provedor único) → decisão do Dr. Silas.
+  4. **Colisão de número**: D-W9-67 foi usado para o kit baseline TumorLot da próstata; a decisão CTCAE v6 pura (minha) **não está registrada** e precisa de novo número.
+  5. **Nome do território**: resposta de hoje "ONCOGLOBAL — WORK" × **D-W9-72** (OncoGlobal = guarda-chuva; OncoMind = projeto solo; WORK×STUDY abolido) → conflito, decisão do Dr. Silas.
+  6. **Papéis:** o PEDIDO-ASTRA chama o **Cursor** de tech lead da fase; regra fixa diz que o Cursor não produz documentos em pastas e o checkout sujo contém documentos.
+  7. **Sobreposição de arquivos** checkout × Astra: `src/ui/api/fake.ts`, `src/ui/api/porta.ts`, `src/ui/telas/TelaConsulta.tsx`, `docs/CONTEXTO-NOVA-ABA.md`.
+  8. **Higiene:** varredura de CPF/CNS sem dado real (só sintético declarado).
+  9. **Evidência da Astra (8d060b5):** CI 238 arq./1.565 testes PASS; W8 41 PASS; red team 214 PASS/12 FAIL; UI 103 PASS; entrega parcial, PR rascunho.
+- Decisão: **PENDENTE (Dr. Silas):** (a) nome do território (WORK × OncoMind/D-W9-72); (b) aceitar Jev e a dependência; (c) quem escreve em `f0/w1-integrado` e se o Cursor entra como tech lead da fase.
+- Próxima ação: Dr. Silas decide (a)–(c); operacional commita a fase suja e renumera D-W9; reauditoria do HEAD da Astra; só então fatias de código (lista na seção 7 do relatório). Dono: planejamento / operacional.

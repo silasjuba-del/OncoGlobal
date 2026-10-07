@@ -361,3 +361,11 @@ M-AK  CONSULTA FLASH — "ONE CLICK, BYE-BYE, NEXT" → PLN-031   fontes/M-AK_PL
       |AK4| RETORNO como objeto operacional: prazo + motivo + exames necessários antes do retorno (gera agenda + pedidos)   DECIDIDO (sugestão do texto; liga a PLN-012 cat. 7)
       |AK5| Itens PRÉ-MARCADOS (☑ liberar tratamento, ☑ receitas) × regra "sugestões desmarcadas salvo ordem médica" (PLN-006 H4) e "nunca 'liberado' sem ato médico" (I2)   PENDENTE
 ```
+
+```
+M-AL  PEDIDO: AUDITORIA READ_ONLY ANTES DE CODAR → PLN-032   docs/planejamento/AUDITORIA-PRE-CODIGO-2026-10-07.md
+      |AL1| Auditoria feita só com leitura; tsc/testes NÃO executados   FEITO
+      |AL2| Nome do território: ONCOGLOBAL — WORK (PLN-031) × D-W9-72 (OncoMind solo; WORK×STUDY abolido)   PENDENTE
+      |AL3| Jev (@typesafe-ai/sdk) × D-W9-15 (provedor único)   PENDENTE
+      |AL4| Quem escreve em f0/w1-integrado; Cursor como tech lead × regra "sem documentos em pastas"   PENDENTE
+```
