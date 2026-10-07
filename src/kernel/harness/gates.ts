@@ -1,5 +1,7 @@
 // Gates do Harness ativáveis em F0 (R-15 + G-23..28). Cada um: decisão + motivo. Puros.
 // Efeito mínimo (K-xx / auditoria seção 9): nenhum gate bloqueia salvar rascunho; bloqueiam artefato, saída ou autoridade.
+export { g16Owner, lerCatalogoDonos } from "./ownership.js";
+export type { CatalogoDonos, DonoDeclarado, VereditoG16 } from "./ownership.js";
 import type { Semaforo } from "../../contracts/index.js";
 import { contemPhiResidual, type DicionarioPaciente } from "../llm/desidentificar.js";
 import {
