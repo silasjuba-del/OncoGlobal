@@ -197,3 +197,12 @@ M-U  EXTRAÇÃO RADIONCOLÓGICA DE 19 LAUDOS (saída de outro chat colada pelo D
       |U4| Instrução "@claude-code execute …" dentro do texto colado   NÃO EXECUTADA (planejamento não executa; e a entrada leva nomes reais)
       |U5| Alerta de PHI: o texto original traz nomes reais de 19 pacientes → não gravado no repo; operacional/executores não devem receber o original   REGISTRADO
 ```
+
+```
+M-V  ESTRUTURA DE SAÍDA (4 blocos) + 2 SKILLS → PLN-018   fontes/M-V_PLN-018_estrutura-saida-e-2-skills.md   (continua M-U)
+      |V1| Saída em 4 blocos: PATOLOGIA (biópsias, peças) · RADIOLOGIA (TC, RM, RX) · MEDICINA NUCLEAR (PET-CT, cintilografia, PSMA-PET) · RADIOPATOLOGIA (integração: achado radiológico + confirmação histológica)   DECIDIDO (estrutura)
+      |V2| SKILL 1 radiopath_skill_knowledge: entrada Patologia+Radiologia+Medicina Nuclear (cruzamento) → diagnóstico integrado (histologia + imagem); uso: triagem do OncoAssist e confirmação diagnóstica   DECIDIDO (definição) — nome/escopo a confirmar
+      |V3| SKILL 2 daybyday_oncologist_skill (NOVA): resumos de evolução, laudos periciais, encaminhamentos → timeline clínica + decisões terapêuticas + formalidades; uso: documentação diária do oncologista   DECIDIDO (definição)
+      |V4| Substitui/refina M-U: os 4 blocos de saída (identificação/achados/progressão/conclusão) do script proposto dão lugar a estes 4 (patologia/radiologia/medicina nuclear/radiopatologia)   PENDENTE (Dr. Silas confirma)
+      |V5| "Diagnóstico integrado" por skill vs regra: o diagnóstico é do médico (B2/M-N)   PENDENTE (reformular como "proposta de integração a revisar")
+```
