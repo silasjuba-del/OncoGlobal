@@ -14,10 +14,34 @@ import { lerLimitesRetorno, montarRetornoToxicidade, type EntradaRetornoToxicida
 import { alertarSuporte, lerSuporte } from "./suporteNaoOncologico.js";
 import { avaliarAlertaPlaquetas, lerLimiarAlertaPlaquetas } from "./plaquetasAlerta.js";
 import { alertarVertigemNova, lerAlertaVertigem } from "./tontura.js";
+import { dataCivilNoOffset } from "./intervaloQt.js";
+import { avaliarIntervaloPosQt, lerIntervalos, type EntradaIntervaloCivil } from "./intervaloPosQt.js";
 export { avaliarTriagem, validadeHemograma, avaliarCorteSalao, avaliarTriagemCiclo, avaliarPortoesW10, decidirDestino, ordenarFila, calcularDose, avaliarPeso, avisoIntervaloPosQt, ehConcomitante, cicloVaiAoMedico };
 export { portaCiclo, grauCtcae, lerSalaoCtcae, limiaresDaBula } from "./portaCiclo.js";
 export { extrairCriteriosCtcae, sugerirGrauCtcae };
 export { alertarVertigemNova, lerAlertaVertigem };
+export { avaliarIntervaloPosQt, lerIntervalos };
+
+const CIVIL_PRONTA = /^\d{4}-\d{2}-\d{2}$/;
+
+function civilInjetada(valor: string | null, offset: string): string | null {
+  if (valor === null) return null;
+  if (CIVIL_PRONTA.test(valor)) return valor;
+  return dataCivilNoOffset(valor, offset);
+}
+
+/** Q56. Converte instante com o fuso injetado e avalia o intervalo. A FN-07 não muda. */
+export function avaliarIntervaloDaUltimaQt(
+  entrada: EntradaIntervaloCivil & { offset: string },
+  json: unknown,
+) {
+  const limites = lerIntervalos(json);
+  return avaliarIntervaloPosQt({
+    ultimaQt: civilInjetada(entrada.ultimaQt, entrada.offset),
+    dataAlvo: civilInjetada(entrada.dataAlvo, entrada.offset),
+    alvo: entrada.alvo,
+  }, limites);
+}
 
 /** D-W9-75. Compõe extração e sugestão. O barrel é o único arquivo de regras que pode importar os dois. */
 export function avaliarTextoCtcae(texto: string, corpus: unknown) {

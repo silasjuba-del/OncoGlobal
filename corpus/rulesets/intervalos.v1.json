@@ -1,0 +1,23 @@
+{
+  "header": {
+    "id": "intervalos",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-08",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Q56 + A4 + D-W5-01",
+      "trecho": "Da última administração de QT até a cirurgia ou o início de RT sequencial. Menos de 30 dias avisa. 30 exatos passa. Não se aplica a QT+RT concomitante planejada. Data ausente fica pendente. Fuso injetado −03:00. Só aviso, nunca trava.",
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-08"
+  },
+  "intervaloPosQtDias": 30,
+  "igualAoLimitePassa": true,
+  "ancora": "ULTIMA_ADMINISTRACAO_QT",
+  "alvos": ["CIRURGIA", "RT_SEQUENCIAL"],
+  "naoSeAplicaA": ["QT_RT_CONCOMITANTE_PLANEJADA"],
+  "efeito": "AVISO",
+  "bloqueiaSalvar": false,
+  "fuso": "-03:00"
+}

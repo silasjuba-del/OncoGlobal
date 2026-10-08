@@ -14,3 +14,6 @@
 1. **`SalaoRuleset.cortes.ecog2ComTonturaCorta`.** D-W9-76 tirou o ramo do corte. A chave continua no JSON porque o schema a exige. O código não lê mais o booleano e não emite `naoCorte.ecog.tontura`. Pedido: retirar o campo do contrato quando ele abrir.
 2. **Histórico e início da vertigem.** `EntradaVertigem` está em `src/rules/tontura.ts` (`PROVISORIO-W12`). `Triagem` só tem `tontura`. Pedido: publicar histórico anterior e início novo. Ausente fica PENDENTE e não vira "novo".
 3. **Formulário do salão.** `src/ui/salao/FormTriagem.tsx` ainda guarda tontura como checkbox que nasce em `false`. Fora da faixa desta onda. Pedido: o campo precisa aceitar desconhecido (`null`), não só sim/não.
+
+## GROK-07
+1. **Contrato do intervalo pós-QT.** `ResultadoIntervaloPosQt` está em `src/rules/intervaloPosQt.ts` (`PROVISORIO-W12`) e lê `corpus/rulesets/intervalos.v1.json`. A FN-07 (`avisoIntervaloPosQt` + `prazos.v1.json` 1.0.0) não mudou. Pedido: publicar o tipo quando o contrato abrir, sem fundir os dois rulesets.

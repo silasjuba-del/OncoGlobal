@@ -10,7 +10,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w12-grok`, branch `f0/w12-grok`.
 | GROK-04 texto para grau | FEITA | W12-GROK-04 | Extração pura e sugestão só com frase literal da v6. Plaquetas 20.000 = G3, fila, sem E1. |
 | GROK-05 retorno com toxicidade | FEITA | W12-GROK-05 | G3 + plaquetas 20.000 vão à fila. E1 alerta e não altera a fila. |
 | GROK-06 tontura | FEITA | W12-GROK-06 | Tontura não corta. Vertigem nova sem histórico alerta SNC e não bloqueia. |
-| GROK-07 intervalo de 30 dias | | | |
+| GROK-07 intervalo de 30 dias | FEITA | W12-GROK-07 | Menos de 30 dias avisa. 30 exato passa. Concomitante planejada não entra. |
 | GROK-08 red flags do canal | | | |
 | GROK-09 valor atual | | | |
 | GROK-10 fechamento | | | |
@@ -134,5 +134,23 @@ A exceção mora em `tontura.ts`. O texto "investigar SNC (metástase cerebral/c
 `npm run check:corpus` — `corpus ok (124 arquivos)`.
 
 `npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 57 files, 442 tests, exit 0.
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.
+
+## GROK-07
+
+`intervalos.v1.json` guarda 30 dias, os alvos cirurgia e RT sequencial, a exclusão de QT+RT concomitante planejada e o fuso `−03:00`. `intervaloPosQt.ts` só compara datas civis já resolvidas. O barrel converte instante com `dataCivilNoOffset` e o offset injetado. A FN-07 e o `prazos.v1.json` 1.0.0 não mudaram.
+
+30 dias passam. 29 avisam e não travam. Data ausente fica PENDENTE, com dias nulos. Concomitante planejada devolve NAO_APLICA mesmo abaixo de 30. O instante `2026-07-31T02:30:00.000Z` no fuso −03:00 cai no dia 30 de julho e avisa (29 dias), em vez de passar como se fosse UTC. Tipo local em `docs/w12/PEDIDOS-GROK.md`.
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries` — `fronteiras ok (287 arquivos)`.
+
+`npm run check:corpus` — `corpus ok (125 arquivos)`. `intervalos.v1.json` header ok.
+
+`npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 58 files, 448 tests, exit 0.
 
 `npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.
