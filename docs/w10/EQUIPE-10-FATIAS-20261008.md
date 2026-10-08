@@ -2,18 +2,18 @@
 
 Autorização: Dr. Silas, 2026-10-08. Base `367825e`. Orquestrador/integrador: Codex. Modelos Luna: gpt-6-luna. Fugu por CLI Sakana, com `responses` e image_generation desabilitada, sem troca de provider global.
 
-| Fatia | Dono | Entrega | Estado inicial |
+| Fatia | Dono | Entrega | Estado de implementação |
 |---|---|---|---|
-| F01 | Fugu | Fármaco com homóglifo/invisível preserva literal e incerteza | DESPACHADA |
-| F02 | Fugu | Deduplicação causal de fatos/laudos no pipeline | DESPACHADA |
-| F03 | Fugu | Reconciliação de regime planejado × prescrito | DESPACHADA |
-| F04 | Luna 1 | Revisão, vínculo médico e confronto nome × identificador | IMPLEMENTANDO |
-| F05 | Luna 2 | Unidade/origem de LAB, sem faixa clínica inventada | CÓDIGO — NOT_RUN; plausibilidade sem fonte bloqueada |
-| F06 | Luna 2 | READ separado de WRITE, mínimo payload e PHI gate | CÓDIGO — NOT_RUN |
-| F07 | Luna 1 | Triagem draft-only e liberação com motivo/revisão | IMPLEMENTANDO |
-| F08 | Luna 1 | Vínculo de contato por ReviewDecision, origem imutável | IMPLEMENTANDO |
-| F09 | Luna 2 | Backup/restore consistente dos três stores e manifesto | CÓDIGO — NOT_RUN |
-| F10 | Luna 3 + root | Jornadas HTTP/SQLite reais, contratos e integração | TESTES PRODUZIDOS — NOT_RUN |
+| F01 | Fugu | Fármaco com homóglifo/invisível preserva literal e incerteza | IMPLEMENTADA; testes focais PASS |
+| F02 | Fugu | Deduplicação causal de fatos/laudos no pipeline | IMPLEMENTADA; preserva originais e propostas |
+| F03 | Fugu + Luna 1 | Reconciliação de regime planejado × prescrito | IMPLEMENTADA no pipeline e consumidor HTTP/UI; contexto insuficiente permanece PENDENTE |
+| F04 | Luna 1 | Revisão, vínculo médico e confronto nome × identificador | IMPLEMENTADA; vínculo explícito por segmento |
+| F05 | Luna 2 | Unidade/origem de LAB, sem faixa clínica inventada | PARCIAL; concordância de origem PASS; plausibilidade BLOCKED_MEDICAL_RULE |
+| F06 | Luna 2 | READ separado de WRITE, mínimo payload e PHI gate | IMPLEMENTADA; testes offline PASS; transporte externo não conectado |
+| F07 | Luna 1 | Triagem draft-only e liberação com motivo/revisão | IMPLEMENTADA; jornada UI/HTTP/SQLite PASS |
+| F08 | Luna 1 | Vínculo de contato por ReviewDecision, origem imutável | IMPLEMENTADA; projeção e HTTP PASS |
+| F09 | Luna 2 | Backup/restore dos três stores e manifesto | IMPLEMENTADA; backup/restore e manifesto adulterado PASS; sem transação distribuída entre stores |
+| F10 | Luna 3 + root | Jornadas HTTP/SQLite reais, contratos e integração | IMPLEMENTADA; validação serial pelo root |
 
 ## Território
 
@@ -25,6 +25,6 @@ Autorização: Dr. Silas, 2026-10-08. Base `367825e`. Orquestrador/integrador: C
 
 Todos os checkouts partem da mesma base, com node_modules reutilizado por junction somente para dependências existentes. Nenhuma instalação/dependência nova. W11, outros worktrees e o checkout DeepSeek permanecem fora da faixa.
 
-Testes da equipe serializados por lease: Fugu recebeu o primeiro lease; Lunas produziram testes com NOT_RUN. Root valida depois, sem Vitest concorrentes. Claims CÓDIGO/COMMIT não equivalem a PASS.
+Lunas e Fugu produziram testes com NOT_RUN; a execução fica com o root. O retorno original FUGU_RETURN registra corretamente NOT_RUN no agente; os testes de sua entrega foram executados posteriormente pelo root. Claims CÓDIGO/COMMIT não equivalem a PASS. As contagens por bateria não devem ser somadas: há sobreposição entre grupos.
 
 Sem push, merge em main/integrado, deploy, limpeza, leitura de bancos reais ou alteração de limiar/decisão médica para obter verde. A skill codex-fugu foi adaptada à ordem atual: Fugu tem uma parte própria, não cinco subordinados adicionais.
