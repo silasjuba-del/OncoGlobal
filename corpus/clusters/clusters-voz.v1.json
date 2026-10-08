@@ -1,0 +1,117 @@
+{
+  "header": {
+    "id": "clusters-voz",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-08",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "PLN-013 (M-Q) esteira de clusters verticais por voz/texto; subconjunto da matriz universal (PLN-012)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão (curadoria pendente)",
+    "aprovadoEm": "2026-10-08"
+  },
+  "schemaVersion": "clusters-voz.v1",
+  "status": "RASCUNHO",
+  "consumivel": false,
+  "matrizRef": "corpus/matriz/matriz-universal.v1.json",
+  "regras": {
+    "descricaoAbreSemMarcar": true,
+    "ordemMarcaSomenteItensDitos": true,
+    "marcacaoInicialStatus": "DRAFT",
+    "negacaoNaoAbre": true,
+    "farmacoOuDoseDeduzido": false
+  },
+  "clusters": [
+    {
+      "id": "ANEMIA",
+      "nome": "Anemia",
+      "chavesMatriz": ["problema-evento/alteracao-laboratorial/nova/anemia"],
+      "gatilhosDescricao": ["anemia", "hemoglobina baixa", "hb baixa"],
+      "itens": [
+        { "id": "hmg", "nome": "Hemograma", "chaveMatriz": "investigacao/lab/hematologia/hmg", "termos": ["hemograma", "hmg"] },
+        { "id": "ferritina", "nome": "Ferritina", "chaveMatriz": "investigacao/lab/hematologia/ferritina", "termos": ["ferritina"] },
+        { "id": "ferro-tsat", "nome": "Ferro / saturação de transferrina", "chaveMatriz": null, "termos": ["saturacao de transferrina", "tsat", "ferro serico"] },
+        { "id": "b12", "nome": "Vitamina B12", "chaveMatriz": null, "termos": ["b12", "vitamina b12", "cobalamina"] },
+        { "id": "folato", "nome": "Ácido fólico / folato", "chaveMatriz": null, "termos": ["folato", "acido folico"] }
+      ],
+      "pendencias": [
+        { "texto": "confirmar Hb e data", "coberturaItens": ["hmg"] },
+        { "texto": "classificar gravidade", "coberturaItens": [] },
+        { "texto": "avaliar ferro / ferritina / TSAT", "coberturaItens": ["ferritina", "ferro-tsat"] },
+        { "texto": "avaliar B12", "coberturaItens": ["b12"] },
+        { "texto": "avaliar folato", "coberturaItens": ["folato"] }
+      ]
+    },
+    {
+      "id": "NEUTROPENIA",
+      "nome": "Neutropenia",
+      "chavesMatriz": ["problema-evento/alteracao-laboratorial/nova/neutropenia", "suporte-seguranca/sinais-de-alarme"],
+      "gatilhosDescricao": ["neutropenia", "neutrofilos baixos", "anc baixo"],
+      "itens": [
+        { "id": "anc", "nome": "ANC / hemograma com neutrófilos", "chaveMatriz": "investigacao/lab/hematologia/hmg", "termos": ["anc", "neutrofilos"] },
+        { "id": "orientacao-geral", "nome": "Cuidados gerais", "chaveMatriz": "suporte-seguranca/orientacao/geral", "termos": ["cuidados gerais", "cuidados"] },
+        { "id": "sinais-de-alarme", "nome": "Sinais de alarme", "chaveMatriz": "suporte-seguranca/sinais-de-alarme", "termos": ["sinais de alarme"] },
+        { "id": "filgrastim", "nome": "Filgrastim", "chaveMatriz": null, "termos": ["filgrastim", "fator de crescimento"] }
+      ],
+      "pendencias": [
+        { "texto": "confirmar ANC e data", "coberturaItens": ["anc"] },
+        { "texto": "classificar grau (CTCAE v6)", "coberturaItens": [] },
+        { "texto": "checar febre / infecção", "coberturaItens": ["sinais-de-alarme"] },
+        { "texto": "decidir suporte (dose e duração pelo médico)", "coberturaItens": ["filgrastim"] }
+      ]
+    },
+    {
+      "id": "IMAGEM",
+      "nome": "Exame de imagem",
+      "chavesMatriz": ["investigacao/rad"],
+      "gatilhosDescricao": ["exame de imagem", "exames de imagem", "imagem indicada"],
+      "itens": [
+        { "id": "tc", "nome": "Tomografia computadorizada", "chaveMatriz": "investigacao/rad/tc", "termos": ["tomografia", "tc"] },
+        { "id": "rm", "nome": "Ressonância magnética", "chaveMatriz": "investigacao/rad/rm", "termos": ["ressonancia", "rm"] },
+        { "id": "rx", "nome": "Radiografia", "chaveMatriz": "investigacao/rad/rx", "termos": ["radiografia", "raio x", "rx"] },
+        { "id": "us", "nome": "Ultrassonografia", "chaveMatriz": "investigacao/rad/us", "termos": ["ultrassonografia", "ultrassom", "usg"] },
+        { "id": "pet", "nome": "PET", "chaveMatriz": "investigacao/rad/pet", "termos": ["pet", "pet-ct", "pet ct"] },
+        { "id": "cintilografia", "nome": "Cintilografia", "chaveMatriz": "investigacao/rad/cintilografia", "termos": ["cintilografia"] }
+      ],
+      "pendencias": [
+        { "texto": "definir sítio", "coberturaItens": ["tc", "rm", "rx", "us", "pet", "cintilografia"] },
+        { "texto": "definir motivo (resposta / estadiamento / seguimento)", "coberturaItens": [] },
+        { "texto": "checar contraste (creatinina e alergia)", "coberturaItens": [] }
+      ]
+    },
+    {
+      "id": "DIARREIA",
+      "nome": "Diarreia",
+      "chavesMatriz": ["problema-evento/sinal-sintoma/novo/diarreia", "suporte-seguranca/orientacao/geral"],
+      "gatilhosDescricao": ["diarreia", "diarreia relatada", "evacuacoes frequentes"],
+      "itens": [
+        { "id": "hidratacao", "nome": "Hidratação", "chaveMatriz": "suporte-seguranca/orientacao/geral/hidratacao", "termos": ["hidratacao", "soro"] },
+        { "id": "dieta", "nome": "Orientação alimentar", "chaveMatriz": "suporte-seguranca/orientacao/geral/dieta", "termos": ["dieta", "alimentacao"] },
+        { "id": "exame-fezes", "nome": "Exame de fezes / coprocultura", "chaveMatriz": null, "termos": ["coprocultura", "parasitologico"] }
+      ],
+      "pendencias": [
+        { "texto": "classificar grau e duração (CTCAE v6)", "coberturaItens": [] },
+        { "texto": "avaliar risco de desidratação", "coberturaItens": ["hidratacao"] },
+        { "texto": "orientação alimentar", "coberturaItens": ["dieta"] }
+      ]
+    },
+    {
+      "id": "RETORNO",
+      "nome": "Retorno",
+      "chavesMatriz": ["retorno"],
+      "gatilhosDescricao": ["retorno", "voltar em", "precisa voltar"],
+      "itens": [
+        { "id": "21-dias", "nome": "Retorno em 21 dias", "chaveMatriz": "retorno/programado/dias/21-dias", "termos": ["21 dias", "21 dia", "21-dias"] },
+        { "id": "semanas", "nome": "Retorno em semanas", "chaveMatriz": "retorno/programado/semanas", "termos": ["semanas"] },
+        { "id": "meses", "nome": "Retorno em meses", "chaveMatriz": "retorno/programado/meses", "termos": ["meses"] },
+        { "id": "retorno-com-tc", "nome": "Retorno com exame", "chaveMatriz": "retorno/condicionado/apos-exame/retorno-com-tc", "termos": ["com tc", "com exame"] }
+      ],
+      "pendencias": [
+        { "texto": "definir intervalo", "coberturaItens": ["21-dias", "semanas", "meses"] },
+        { "texto": "definir condição do retorno", "coberturaItens": ["retorno-com-tc"] }
+      ]
+    }
+  ]
+}
