@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it } from "vitest";
-import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { DatabaseSync } from "node:sqlite";
@@ -7,6 +7,7 @@ import { criarBackup } from "../../scripts/backup.mjs";
 import { restaurarBackup } from "../../scripts/backup-restore.mjs";
 
 const roots: string[] = [];
+const closeFixtures: Array<() => void> = [];
 function fixture() {
   const root = mkdtempSync(join(tmpdir(), "og-luna2-backup-"));
   roots.push(root);
@@ -17,23 +18,32 @@ function fixture() {
     settings: join(data, "config-w10.sqlite"),
     workspace: join(data, "workspace.sqlite"),
   };
+  const connections: DatabaseSync[] = [];
   for (const [name, path] of Object.entries(stores)) {
     const db = new DatabaseSync(path);
-    db.exec("PRAGMA journal_mode=WAL; CREATE TABLE sample (value TEXT NOT NULL); INSERT INTO sample VALUES ('synthetic'); PRAGMA user_version=7;");
+    db.exec("PRAGMA journal_mode=WAL; PRAGMA wal_autocheckpoint=0; CREATE TABLE sample (value TEXT NOT NULL); INSERT INTO sample VALUES ('synthetic'); PRAGMA user_version=7;");
     if (name === "ledger") db.exec("CREATE TABLE draft_envelope (rawRef TEXT NOT NULL); INSERT INTO draft_envelope VALUES ('drafts/a.txt');");
-    db.close();
+    connections.push(db);
   }
+  let closed = false;
+  const finish = () => { if (!closed) { closed = true; for (const db of connections) db.close(); } };
+  closeFixtures.push(finish);
   mkdirSync(join(files, "drafts"));
   writeFileSync(join(files, "drafts", "a.txt"), "synthetic draft");
-  return { root, data, files, out, stores };
+  return { root, data, files, out, stores, finish };
 }
 
-afterEach(() => { for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true }); });
+afterEach(() => {
+  for (const close of closeFixtures.splice(0)) close();
+  for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true });
+});
 
 describe("F09 · manifesto de backup dos três stores SQLite", () => {
   it("faz snapshot consistente de ledger, settings e workspace e valida manifesto no restore", async () => {
     const f = fixture();
+    expect(existsSync(`${f.stores.ledger}-wal`)).toBe(true);
     const arquivo = await criarBackup({ stores: f.stores, filesRoot: f.files, destino: f.out, nome: "fixture", senha: "senha-sintetica-segura" });
+    f.finish();
     const destino = join(f.root, "restaurado");
     const restored = restaurarBackup({ arquivo, destino, senha: "senha-sintetica-segura" });
     expect(Object.keys(restored.databases ?? {}).sort()).toEqual(["config-w10.sqlite", "ledger.sqlite", "workspace.sqlite"]);
@@ -49,6 +59,7 @@ describe("F09 · manifesto de backup dos três stores SQLite", () => {
   it("não sobrescreve destino preexistente e credencial errada não materializa restauração", async () => {
     const f = fixture();
     const arquivo = await criarBackup({ stores: f.stores, filesRoot: f.files, destino: f.out, nome: "fixture", senha: "senha-sintetica-segura" });
+    f.finish();
     const destino = join(f.root, "restaurado");
     expect(() => restaurarBackup({ arquivo, destino, senha: "senha-incorreta" })).toThrow();
     expect(() => restaurarBackup({ arquivo, destino, senha: "senha-sintetica-segura" })).not.toThrow();
