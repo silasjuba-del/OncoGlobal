@@ -7,14 +7,22 @@ import { pathToFileURL } from "node:url";
 const hash = (data) => createHash("sha256").update(data).digest("hex");
 const networkPath = (path) => /^(?:\\\\|\/\/|[a-z]+:\/\/)/i.test(path);
 const STORE_NAMES = Object.freeze({ ledger: "ledger.sqlite", settings: "config-w10.sqlite", workspace: "workspace.sqlite" });
+const WINDOWS_DEVICE = /^(?:CON|PRN|AUX|NUL|CONIN\$|CONOUT\$|CLOCK\$|COM[1-9¹²³]|LPT[1-9¹²³])$/i;
 function local(path) {
   if (typeof path !== "string" || !isAbsolute(path) || networkPath(path))
     throw new Error("CAMINHO_LOCAL_ABSOLUTO_OBRIGATORIO");
 }
 function inside(root, rel) {
-  if (!rel || isAbsolute(rel) || networkPath(rel) || rel.split(/[\\/]/).includes(".."))
+  if (typeof rel !== "string" || !rel || rel.length > 240 || isAbsolute(rel) || networkPath(rel))
     throw new Error("REFERENCIA_FORA_DA_RAIZ");
-  const full = resolve(root, rel);
+  const components = rel.split(/[\\/]/);
+  if (components.some((component) => {
+    if (!component || component === "." || component === ".." || component.length > 255
+      || /[\u0000-\u001f<>:"|?*]/.test(component) || /[. ]$/.test(component)) return true;
+    const deviceStem = (component.split(".", 1)[0] ?? "").replace(/[ .]+$/g, "");
+    return WINDOWS_DEVICE.test(deviceStem);
+  })) throw new Error("REFERENCIA_FORA_DA_RAIZ");
+  const full = resolve(root, ...components);
   if (!full.startsWith(resolve(root) + sep)) throw new Error("REFERENCIA_FORA_DA_RAIZ");
   return full;
 }
@@ -29,7 +37,9 @@ function refsLedger(db, files) {
   let rows = [];
   try { rows = db.prepare("SELECT rawRef FROM draft_envelope").all(); }
   catch { /* a synthetic/minimal ledger may not define drafts */ }
-  return [...new Set([...rows.map((row) => String(row.rawRef)), ...files])].sort();
+  const rawRefs = rows.map((row) => row.rawRef);
+  if (rawRefs.some((ref) => typeof ref !== "string" || !ref)) throw new Error("REFERENCIA_FORA_DA_RAIZ");
+  return [...new Set([...rawRefs, ...files])].sort();
 }
 function validateStores(stores) {
   if (!stores || typeof stores !== "object" || Array.isArray(stores)
@@ -47,6 +57,7 @@ export async function criarBackup({ dbPath, stores, filesRoot, files = [], desti
   if (!senha || senha.length < 12) throw new Error("SENHA_INSUFICIENTE");
   if (!statSync(destino).isDirectory() || !statSync(filesRoot).isDirectory()) throw new Error("DIRETORIO_INVALIDO");
   if (!/^[a-zA-Z0-9_-]+$/.test(nome)) throw new Error("NOME_INVALIDO");
+  if (!Array.isArray(files) || files.some((ref) => typeof ref !== "string")) throw new Error("REFERENCIAS_INVALIDAS");
   const v2 = stores !== undefined;
   if (v2) validateStores(stores);
   else { local(dbPath); if (!statSync(dbPath).isFile()) throw new Error("STORE_INVALIDO"); }
