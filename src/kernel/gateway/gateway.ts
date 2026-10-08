@@ -55,10 +55,6 @@ export interface ReadRequest {
 }
 export type ReadAudit = (r: RegistroAuditoria) => void;
 export type ReadTransport = (request: {
-  destination: ReadDestination;
-  purpose: ReadRequest["purpose"];
-  context: ReadRequest["context"];
-  provenance: ReadRequest["provenance"];
   query?: string;
   refs?: readonly string[];
   signal: AbortSignal;
@@ -130,7 +126,10 @@ export function autorizarLeitura(input: unknown, options: {
     provenance: { sourceId: (provenance as { sourceId: string }).sourceId.trim(), version: (provenance as { version: string }).version.trim() },
     timeoutMs,
   };
-  return { ok: true, request, requestHash: readHash(request.requestId) };
+  return { ok: true, request, requestHash: readHash(JSON.stringify({
+    requestId: request.requestId, destination: request.destination, purpose: request.purpose,
+    context: request.context, provenance: request.provenance,
+  })) };
 }
 
 /** Executes only through an explicitly injected transport; the production app has no READ connector wired here. */
@@ -142,9 +141,10 @@ export async function executarLeitura(input: unknown, options: {
   context: ReadRequest["context"] | null;
   provenance: ReadRequest["provenance"] | null;
   auditar: ReadAudit;
-  transporte: ReadTransport;
-  /** Local/server callback must apply the active PHI policy before any non-local transport. */
-  validarPayloadDesidentificado: (request: ReadRequest) => boolean | Promise<boolean>;
+  /** Adapter map is bound locally to allowlisted destinations; no URL/provider comes from the body. */
+  transportes: Partial<Record<ReadDestination, ReadTransport>>;
+  /** Known-identifier dictionary is resolved locally. G-02 detects known PHI, not every possible identity. */
+  dicionarioPaciente: DicionarioPaciente | null;
   signal?: AbortSignal;
 }): Promise<{ estado: "CONCLUIDA"; resultado: unknown; requestHash: string } | { estado: "NEGADA" | "FALHOU" | "CANCELADA"; motivoCodigo: string; requestHash?: string }> {
   const auditarFalha = (destino: unknown, motivoCodigo: string) => {
@@ -152,21 +152,26 @@ export async function executarLeitura(input: unknown, options: {
     try { options.auditar({ acaoPedida, decisao: "NEGADA", motivoCodigo, em: options.agora() }); return true; }
     catch { return false; }
   };
-  if (typeof options.transporte !== "function") {
-    auditarFalha("READ", "READ_TRANSPORTE_AUSENTE");
-    return { estado: "NEGADA", motivoCodigo: "READ_TRANSPORTE_AUSENTE" };
-  }
-  if (typeof options.validarPayloadDesidentificado !== "function") {
-    auditarFalha("READ", "READ_VALIDACAO_PHI_AUSENTE");
-    return { estado: "NEGADA", motivoCodigo: "READ_VALIDACAO_PHI_AUSENTE" };
-  }
   const authorization = autorizarLeitura(input, { agora: options.agora(), auditar: options.auditar,
     sessao: options.sessao, context: options.context, provenance: options.provenance });
   if (!authorization.ok) return { estado: "NEGADA", motivoCodigo: authorization.motivoCodigo };
-  let payloadSanitizado = false;
-  try { payloadSanitizado = (await options.validarPayloadDesidentificado(authorization.request)) === true; }
-  catch { payloadSanitizado = false; }
-  if (!payloadSanitizado) {
+  const transporte = options.transportes?.[authorization.request.destination];
+  if (typeof transporte !== "function") {
+    const auditOk = auditarFalha(authorization.request.destination, "READ_TRANSPORTE_AUSENTE");
+    return { estado: "NEGADA", motivoCodigo: auditOk ? "READ_TRANSPORTE_AUSENTE" : "AUDITORIA_INDISPONIVEL", requestHash: authorization.requestHash };
+  }
+  if (!options.dicionarioPaciente || !Array.isArray(options.dicionarioPaciente.nomes)
+    || !Array.isArray(options.dicionarioPaciente.identificadores)
+    || options.dicionarioPaciente.nomes.some((item) => typeof item !== "string")
+    || options.dicionarioPaciente.identificadores.some((item) => typeof item !== "string")) {
+    const auditOk = auditarFalha(authorization.request.destination, "READ_VALIDACAO_PHI_AUSENTE");
+    return { estado: "NEGADA", motivoCodigo: auditOk ? "READ_VALIDACAO_PHI_AUSENTE" : "AUDITORIA_INDISPONIVEL", requestHash: authorization.requestHash };
+  }
+  const textoPayload = JSON.stringify(authorization.request.payload);
+  let phiGatePassa = false;
+  try { phiGatePassa = g02PhiEgress(textoPayload, options.dicionarioPaciente).decisao === "PASSA"; }
+  catch { phiGatePassa = false; }
+  if (!phiGatePassa) {
     const auditOk = auditarFalha(authorization.request.destination, "READ_PHI_NAO_VALIDADA");
     return { estado: "NEGADA", motivoCodigo: auditOk ? "READ_PHI_NAO_VALIDADA" : "AUDITORIA_INDISPONIVEL", requestHash: authorization.requestHash };
   }
@@ -175,7 +180,7 @@ export async function executarLeitura(input: unknown, options: {
     return { estado: "CANCELADA", motivoCodigo: auditOk ? "READ_CANCELADA" : "AUDITORIA_INDISPONIVEL", requestHash: authorization.requestHash };
   }
   try {
-    options.auditar({ acaoPedida: `READ:${authorization.request.destination}`, decisao: "PERMITIDA",
+    options.auditar({ acaoPedida: `READ:${authorization.request.destination}:${authorization.requestHash}`, decisao: "PERMITIDA",
       motivoCodigo: "READ_AUTORIZADA", em: options.agora() });
   } catch { return { estado: "NEGADA", motivoCodigo: "AUDITORIA_INDISPONIVEL", requestHash: authorization.requestHash }; }
   const controller = new AbortController();
@@ -188,9 +193,7 @@ export async function executarLeitura(input: unknown, options: {
   try {
     const timeoutMs = authorization.request.timeoutMs ?? 5000;
     const resultado = await Promise.race([
-      options.transporte({ destination: authorization.request.destination, purpose: authorization.request.purpose,
-        context: authorization.request.context, provenance: authorization.request.provenance,
-        ...authorization.request.payload, signal: controller.signal }),
+      transporte({ ...authorization.request.payload, signal: controller.signal }),
       new Promise<never>((_, reject) => {
         timeout = setTimeout(() => { controller.abort(); reject(new Error("READ_TIMEOUT")); }, timeoutMs);
       }),
@@ -200,7 +203,7 @@ export async function executarLeitura(input: unknown, options: {
   } catch (error) {
     const motivoCodigo = error instanceof Error && error.message === "READ_CANCELADA" ? "READ_CANCELADA"
       : error instanceof Error && error.message === "READ_TIMEOUT" ? "READ_TIMEOUT" : "READ_TRANSPORTE_FALHOU";
-    try { options.auditar({ acaoPedida: `READ:${authorization.request.destination}`, decisao: "NEGADA", motivoCodigo, em: options.agora() }); }
+    try { options.auditar({ acaoPedida: `READ:${authorization.request.destination}:${authorization.requestHash}`, decisao: "NEGADA", motivoCodigo, em: options.agora() }); }
     catch { return { estado: "FALHOU", motivoCodigo: "AUDITORIA_INDISPONIVEL", requestHash: authorization.requestHash }; }
     return { estado: motivoCodigo === "READ_CANCELADA" ? "CANCELADA" : "FALHOU", motivoCodigo, requestHash: authorization.requestHash };
   } finally {
