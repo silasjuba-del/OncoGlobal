@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { marcadoInicialmente } from "./Bundle.js";
+import { COPY_PT_BR } from "../copy/pt-BR.js";
+import { TarefasRetorno, type MarcacaoTarefasRetorno, type TarefaRetornoId } from "./TarefasRetorno.js";
+import { montarLinhaPontualizada } from "./viewmodels.js";
 
 /**
  * Consulta Flash (one click). Decisão PLN-031 (fonte M-AK).
@@ -42,6 +45,15 @@ export interface RetornoFlash {
   examesAntesDoRetorno: readonly string[];
 }
 
+/** Itens do cartão "Tarefas do retorno". Pré-seleção vem só do modelo padrão salvo (origem MODELO_MEDICO). */
+export interface TarefasRetornoFlash {
+  modeloPadraoSalvo: boolean;
+  retorno: ItemFlash;
+  /** Laboratório está sempre presente. */
+  laboratorio: ItemFlash;
+  imagem: ItemFlash;
+}
+
 export interface ConsultaFlashProps {
   cabecalho: {
     diagnostico?: string;
@@ -62,6 +74,10 @@ export interface ConsultaFlashProps {
   apac: ApacFlash;
   iaFala: readonly string[];
   retorno: RetornoFlash;
+  /** Quando presente, mostra o cartão "Tarefas do retorno". */
+  tarefasRetorno?: TarefasRetornoFlash;
+  /** Mostra a linha pontualizada dos achados-chave no topo. */
+  linhaPontualizada?: boolean;
   aoSalvarRascunho: (plano: PlanoFlash) => void;
   aoFinalizar: (plano: PlanoFlash) => void;
 }
@@ -72,6 +88,8 @@ export interface PlanoFlash {
   receitasMarcadas: readonly string[];
   apac: ApacFlash & { emitir: false };
   retorno: RetornoFlash;
+  /** Presente só quando o cartão de tarefas do retorno foi exibido. */
+  tarefasRetorno?: MarcacaoTarefasRetorno;
 }
 
 const ID_LIBERAR_TRATAMENTO = "liberar_tratamento";
@@ -106,7 +124,26 @@ function valorOuPendente(v: string | undefined): string {
 }
 
 export function ConsultaFlash(props: ConsultaFlashProps) {
-  const { cabecalho, exames, acoesHoje, receitas, apac, iaFala, retorno } = props;
+  const { cabecalho, exames, acoesHoje, receitas, apac, iaFala, retorno, tarefasRetorno } = props;
+
+  const [tarefas, setTarefas] = useState<MarcacaoTarefasRetorno>(() => {
+    if (!tarefasRetorno || !tarefasRetorno.modeloPadraoSalvo) {
+      return { retorno: false, laboratorio: false, imagem: false };
+    }
+    return {
+      retorno: marcadoInicialFlash(tarefasRetorno.retorno),
+      laboratorio: marcadoInicialFlash(tarefasRetorno.laboratorio),
+      imagem: marcadoInicialFlash(tarefasRetorno.imagem),
+    };
+  });
+
+  function alternarTarefa(id: TarefaRetornoId) {
+    setTarefas((atual) => ({ ...atual, [id]: !atual[id] }));
+  }
+
+  const linha = props.linhaPontualizada
+    ? montarLinhaPontualizada({ diagnostico: cabecalho.diagnostico, exames })
+    : "";
 
   const [marcadas, setMarcadas] = useState<Record<string, boolean>>(() => {
     const inicial: Record<string, boolean> = {};
@@ -125,6 +162,7 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
       receitasMarcadas: receitas.filter((r) => marcadas[`receita:${r.id}`] === true).map((r) => r.id),
       apac: { ...apac, pendencias: [...apac.pendencias], emitir: false },
       retorno: { ...retorno, examesAntesDoRetorno: [...retorno.examesAntesDoRetorno] },
+      ...(tarefasRetorno ? { tarefasRetorno: { ...tarefas } } : {}),
     };
   }
 
@@ -134,6 +172,7 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
         <p>
           <strong>CONSULTA FLASH</strong>
         </p>
+        {linha ? <p aria-label={COPY_PT_BR.flashRetorno.achadosChave}>{linha}</p> : null}
         <p>
           DX: {valorOuPendente(cabecalho.diagnostico)} · TNM: {valorOuPendente(cabecalho.tnm)} · Estádio:{" "}
           {valorOuPendente(cabecalho.estadio)} · Biomarcador: {valorOuPendente(cabecalho.biomarcador)}
@@ -151,6 +190,15 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
           {retorno.motivo ? ` · ${retorno.motivo}` : ""}
         </p>
       </header>
+
+      {tarefasRetorno ? (
+        <TarefasRetorno
+          prazoDias={retorno.dias}
+          marcadas={tarefas}
+          modeloPadraoSalvo={tarefasRetorno.modeloPadraoSalvo}
+          onAlternar={alternarTarefa}
+        />
+      ) : null}
 
       <section aria-label="Exames recentes">
         <h2>Exames recentes</h2>
