@@ -1476,3 +1476,9 @@
 }
 .oc-aqt-cell[data-status="em_infusao"] { border-style: solid; border-color: var(--accent); }
 .oc-aqt-cell[data-status="liberado"] { opacity: 0.7; }
+
+/* W12-F3 · Consulta Flash: overlay fixo na janela (o .oc-ov absoluto centralizava no conteúdo rolável e sumia da vista). */
+.oc-ov.oc-ov--fixa { position: fixed; }
+.oc-ov--fixa .oc-ov-card { width: min(760px, calc(100% - 40px)); max-height: calc(100vh - 40px); }
+.oc-ov--fixa .oc-ov-body input[type="checkbox"],
+.oc-ov--fixa .oc-ov-body input[type="radio"] { display: inline-block; width: auto; height: auto; margin: 0 6px 0 0; }

@@ -76,7 +76,7 @@ describe("W12-F3 tela", () => {
     fireEvent.click(await screen.findByRole("button", { name: "Consulta Flash" }));
     expect(screen.getByLabelText("Retrato transversal do tumor-índice")).toBeTruthy();
     await waitFor(() =>
-      expect(screen.getByLabelText("Achados-chave").textContent).toContain("Biópsia de próstata: adenocarcinoma acinar"),
+      expect(screen.getByLabelText("Achados-chave").textContent).toContain("Biópsia de mama: carcinoma invasivo de tipo não especial"),
     );
     expect(screen.getByText("Tarefas do retorno")).toBeTruthy();
     expect(screen.getByText(/^Retorno \(30 dias\)/)).toBeTruthy();
