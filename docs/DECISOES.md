@@ -236,3 +236,8 @@ A11. Backup: **só HD externo local, cifrado**; chave de recuperação fora do P
   (b) **Consulta Flash = visão rápida só com os temas fundamentais**, em itens curtos (ex.: "biópsia: adenocarcinoma · TC tórax: nódulo pulmonar 43 mm · cintilografia: captação em T7"). Com 1 clique o médico deixa o **retorno com laboratório** (sempre presente, pré-selecionado como modelo padrão do médico, compatível com "pré-marca só do modelo salvo") e, eventualmente, exame radiológico, e finaliza a consulta.
   (c) **Retrato transversal começa por:** mama, próstata, cólon, pulmão, colo uterino e gástrico.
   (d) **Interações e comorbidade × remédio:** bula ANVISA/FDA rotulada + literatura pública, sempre em RASCUNHO até o Dr. Silas conferir item a item.
+- **D-W9-78 · Retrato transversal e Flash (Dr. Silas, 2026-10-08):**
+  (a) **"Cólon" = colorretal**, com subsítio: cólon direito, transverso ou esquerdo; sigmoide; reto alto, médio ou baixo.
+  (b) **O retorno vai sempre na Consulta Flash**, com o prazo visível; não pode ser desmarcado. Laboratório e imagem continuam marcáveis, com pré-seleção só pelo modelo do médico.
+  (c) **Colo uterino tem um só campo FIGO**: o estádio do núcleo. O campo duplicado saiu.
+  Revisão do planejamento (PLN-037) aplicada ao schema AP: lateralidade e topografia no núcleo; CONFLITO sem origem geral; confiança BAIXA só com valor; HER2 de mama com "0 ultralow".

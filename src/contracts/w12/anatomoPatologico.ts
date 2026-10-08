@@ -1,10 +1,10 @@
 // W12-F2 · Retrato TRANSVERSAL (intraconsulta) · schema anatomopatológico comum + extensões por tumor.
-// D-W9-77c: mama, próstata, cólon, pulmão, colo uterino, gástrico. PLN-037 (adendo OPS-006): cada campo
+// D-W9-77c/78: mama, próstata, colorretal, pulmão, colo uterino (FIGO no `estadio` do núcleo, D-W9-78c), gástrico. D-W9-77c original: mama, próstata, cólon, pulmão, colo uterino, gástrico. PLN-037 (adendo OPS-006): cada campo
 // mostra a ORIGEM — laudo (documento + data) · afirmado pelo encaminhador · não informado. Nada de default inventado.
 import { z } from "zod";
 import { DataCivil, Id } from "../base.js";
 
-export const TumorTransversal = z.enum(["MAMA", "PROSTATA", "COLON", "PULMAO", "COLO_UTERINO", "GASTRICO"]);
+export const TumorTransversal = z.enum(["MAMA", "PROSTATA", "COLORRETAL", "PULMAO", "COLO_UTERINO", "GASTRICO"]);
 export type TumorTransversal = z.infer<typeof TumorTransversal>;
 
 /** De onde veio o valor. ENCAMINHADOR = só citado no relatório de encaminhamento, sem laudo próprio (não confirmado). */
@@ -90,8 +90,9 @@ const Prostata = z.object({
   psaNgMl: campoAP(z.number().min(0)),
   fragmentosPositivos: campoAP(z.object({ positivos: z.number().int().min(0), total: z.number().int().min(1) }).strict()),
 }).strict();
-const Colon = z.object({
-  tumor: z.literal("COLON"),
+const Colorretal = z.object({
+  tumor: z.literal("COLORRETAL"),
+  subsitio: campoAP(z.enum(["COLON_DIREITO", "COLON_TRANSVERSO", "COLON_ESQUERDO", "SIGMOIDE", "RETO_ALTO", "RETO_MEDIO", "RETO_BAIXO"])), // D-W9-78a
   mmr: campoAP(z.enum(["PROFICIENTE", "DEFICIENTE"])), msi: campoAP(z.enum(["MSS", "MSI_L", "MSI_H"])),
   kras: campoAP(texto), nras: campoAP(texto), braf: campoAP(texto),
   trg: campoAP(texto), budding: campoAP(texto),
@@ -103,7 +104,7 @@ const Pulmao = z.object({
 }).strict();
 const ColoUterino = z.object({
   tumor: z.literal("COLO_UTERINO"),
-  figo: campoAP(texto), hpvP16: campoAP(texto), invasaoEstromalMm: campoAP(mm),
+  hpvP16: campoAP(texto), invasaoEstromalMm: campoAP(mm),
 }).strict();
 const Gastrico = z.object({
   tumor: z.literal("GASTRICO"),
@@ -113,7 +114,7 @@ const Gastrico = z.object({
   cldn18: campoAP(texto), pdl1Cps: campoAP(z.number().min(0)),
 }).strict();
 
-export const ExtensaoTumor = z.discriminatedUnion("tumor", [Mama, Prostata, Colon, Pulmao, ColoUterino, Gastrico]);
+export const ExtensaoTumor = z.discriminatedUnion("tumor", [Mama, Prostata, Colorretal, Pulmao, ColoUterino, Gastrico]);
 export type ExtensaoTumor = z.infer<typeof ExtensaoTumor>;
 
 /** Retrato transversal de UM tumor-índice. Achados de outros órgãos ficam fora (tumor-índice × incidental). */

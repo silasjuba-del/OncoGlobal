@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BannerE1 } from "../consulta/BannerE1.js";
 import { BarraFechamento } from "../consulta/BarraFechamento.js";
+import { CartaoTransversal } from "../consulta/CartaoTransversal.js";
+import { montarPropsFlash } from "../consulta/flashDaVisao.js";
+import { OverlayFlash } from "../consulta/OverlayFlash.js";
 import { PainelDelta } from "../consulta/PainelDelta.js";
 import {
   confirmacaoPreparouImpressao,
@@ -198,6 +201,9 @@ export function TelaConsulta({
         onFlash={() => setOverlay("flash")}
         onEditarTnm={() => setOverlay("dx")}
       />
+      {visao.retratoTransversal !== undefined && visao.retratoTransversal !== null ? (
+        <CartaoTransversal entrada={visao.retratoTransversal} />
+      ) : null}
       <Timeline2D
         visao={timelineSintetica(patientId, visao.hoje)}
         onVer3d={() => setJornada3d(true)}
@@ -417,8 +423,19 @@ export function TelaConsulta({
         />
       ) : null}
       <Dock gravando={mic} onAcao={onDock} />
+      {overlay === "flash" ? (
+        <OverlayFlash
+          flash={montarPropsFlash(
+            visao,
+            chart,
+            () => setOverlay(null),
+            () => setOverlay(null),
+          )}
+          onFechar={() => setOverlay(null)}
+        />
+      ) : null}
       <OverlayAtivo
-        id={overlay}
+        id={overlay === "flash" ? null : overlay}
         onFechar={() => setOverlay(null)}
         onAbrirPaleta={() => setOverlay("interacoes")}
       />

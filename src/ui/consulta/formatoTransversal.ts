@@ -47,7 +47,8 @@ export const CAMPOS_EXTENSAO: Readonly<Record<string, readonly CampoSpec[]>> = {
     { chave: "psaNgMl", rotulo: "PSA", unidade: "ng/mL" },
     { chave: "fragmentosPositivos", rotulo: "Fragmentos positivos" },
   ],
-  COLON: [
+  COLORRETAL: [
+    { chave: "subsitio", rotulo: "Subsítio" },
     { chave: "mmr", rotulo: "MMR" },
     { chave: "msi", rotulo: "MSI" },
     { chave: "kras", rotulo: "KRAS" },
@@ -64,7 +65,6 @@ export const CAMPOS_EXTENSAO: Readonly<Record<string, readonly CampoSpec[]>> = {
     { chave: "krasG12c", rotulo: "KRAS G12C" },
   ],
   COLO_UTERINO: [
-    { chave: "figo", rotulo: "FIGO" },
     { chave: "hpvP16", rotulo: "HPV / p16" },
     { chave: "invasaoEstromalMm", rotulo: "Invasão estromal", unidade: "mm" },
   ],
@@ -80,7 +80,7 @@ export const CAMPOS_EXTENSAO: Readonly<Record<string, readonly CampoSpec[]>> = {
 export const ROTULO_TUMOR: Readonly<Record<string, string>> = {
   MAMA: "Mama",
   PROSTATA: "Próstata",
-  COLON: "Cólon",
+  COLORRETAL: "Colorretal",
   PULMAO: "Pulmão",
   COLO_UTERINO: "Colo uterino",
   GASTRICO: "Gástrico",
