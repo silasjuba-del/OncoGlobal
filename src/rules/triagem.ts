@@ -52,14 +52,25 @@ export function avaliarTriagem(t: Triagem, ctx: ContextoTriagem, rs: SalaoRulese
   let emergencia = false;
   const c = rs.cortes;
 
+  // RT-07 · mesmo contrato de plausibilidade dos portões: implausível vira PENDENTE, nunca corta.
+  const plausivel = {
+    pas: checarPlausibilidade("pas", t.pas.valor, "PAS", "FN-01", rs, pendentes),
+    fc: checarPlausibilidade("fc", t.fc.valor, "frequência cardíaca", "FN-01", rs, pendentes),
+    spo2: checarPlausibilidade("spo2", t.spo2.valor, "saturação de oxigênio", "FN-01", rs, pendentes),
+    temp: checarPlausibilidade("tempDecimos", t.tempDecimos.valor, "temperatura", "FN-01", rs, pendentes),
+    hb: checarPlausibilidade("hbDgDl", t.hbDgDl.valor, "hemoglobina", "FN-01", rs, pendentes),
+    anc: checarPlausibilidade("anc", t.anc.valor, "neutrófilos", "FN-01", rs, pendentes),
+    plq: checarPlausibilidade("plq", t.plq.valor, "plaquetas", "FN-01", rs, pendentes),
+  };
+
   const pas = t.pas.valor;
-  if (pendenteSeNulo(pas, "pas", "pressão arterial ausente", ctx, rs, pendentes)) {
+  if (pendenteSeNulo(pas, "pas", "pressão arterial ausente", ctx, rs, pendentes) && plausivel.pas) {
     if (pas > c.pasMax) cortes.push(mot("corte.pas.alta", "pressão arterial acima do limite", rs));
     else if (pas < c.pasMin) cortes.push(mot("corte.pas.baixa", "pressão arterial abaixo do limite", rs));
   }
 
   const fc = t.fc.valor;
-  if (pendenteSeNulo(fc, "fc", "frequência cardíaca ausente", ctx, rs, pendentes)) {
+  if (pendenteSeNulo(fc, "fc", "frequência cardíaca ausente", ctx, rs, pendentes) && plausivel.fc) {
     if (fc > c.fcMax) cortes.push(mot("corte.fc.alta", "frequência cardíaca acima do limite", rs));
     // FN-01 (Q21) congela FC baixa como anotação. O corte D-W9-37 vive em avaliarCorteSalao.
     else if (fc < c.fcMinNaoCorta) {
@@ -68,27 +79,27 @@ export function avaliarTriagem(t: Triagem, ctx: ContextoTriagem, rs: SalaoRulese
   }
 
   const spo2 = t.spo2.valor;
-  if (pendenteSeNulo(spo2, "spo2", "saturação de oxigênio ausente", ctx, rs, pendentes)) {
+  if (pendenteSeNulo(spo2, "spo2", "saturação de oxigênio ausente", ctx, rs, pendentes) && plausivel.spo2) {
     if (spo2 < c.spo2Min) cortes.push(mot("corte.spo2.baixa", "saturação de oxigênio abaixo do limite", rs));
   }
 
   const temp = t.tempDecimos.valor;
-  if (pendenteSeNulo(temp, "tempDecimos", "temperatura ausente", ctx, rs, pendentes)) {
+  if (pendenteSeNulo(temp, "tempDecimos", "temperatura ausente", ctx, rs, pendentes) && plausivel.temp) {
     if (temp > c.tempDecimosMax) cortes.push(mot("corte.temp.alta", "temperatura acima do limite", rs));
   }
 
   const hb = t.hbDgDl.valor;
-  if (pendenteSeNulo(hb, "hbDgDl", "hemoglobina ausente", ctx, rs, pendentes)) {
+  if (pendenteSeNulo(hb, "hbDgDl", "hemoglobina ausente", ctx, rs, pendentes) && plausivel.hb) {
     if (hb < c.hbDgDlMin) cortes.push(mot("corte.hb.baixa", "hemoglobina abaixo do limite", rs));
   }
 
   const anc = t.anc.valor;
-  if (pendenteSeNulo(anc, "anc", "neutrófilos ausentes", ctx, rs, pendentes)) {
+  if (pendenteSeNulo(anc, "anc", "neutrófilos ausentes", ctx, rs, pendentes) && plausivel.anc) {
     if (anc < c.ancMin) cortes.push(mot("corte.anc.baixa", "neutrófilos abaixo do limite", rs));
   }
 
   const plq = t.plq.valor;
-  if (pendenteSeNulo(plq, "plq", "plaquetas ausentes", ctx, rs, pendentes)) {
+  if (pendenteSeNulo(plq, "plq", "plaquetas ausentes", ctx, rs, pendentes) && plausivel.plq) {
     if (plq < c.plqMin) cortes.push(mot("corte.plq.baixa", "plaquetas abaixo do limite", rs));
   }
 
