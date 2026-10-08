@@ -90,12 +90,18 @@ it("triagem autenticada cria somente rascunho no escopo selecionado e fica legí
     coletaHemograma: { ...triagemBase().coletaHemograma, fontes: [fonteSintetica("fonte-triagem") ] } });
   expect((await f.select(paciente, encontro, lote)).status).toBe(200);
   const baselineEvents = listarEventos(f.db, paciente);
+  const salaoBefore = await f.request("/consulta/salao", {}, f.token);
 
   const anonimo = await f.request("/consulta/salao/triagem", { triagem });
   expect(anonimo.status).toBe(401);
   expect(listarEventos(f.db, paciente)).toEqual(baselineEvents);
 
-  const gravado = await f.request("/consulta/salao/triagem", { triagem, expectedRevision: 0 }, f.token);
+  const semDraftAnterior = await f.request("/consulta/salao/triagem", { triagem, expectedRevision: 0 }, f.token);
+  expect(semDraftAnterior.status).toBe(409);
+  expect(listarEventos(f.db, paciente)).toEqual(baselineEvents);
+  expect((await f.request("/consulta/salao", {}, f.token)).body).toEqual(salaoBefore.body);
+
+  const gravado = await f.request("/consulta/salao/triagem", { triagem, expectedRevision: null }, f.token);
   expect(gravado.status).toBe(200);
   expect(gravado.body.pacientes).toEqual(expect.arrayContaining([
     expect.objectContaining({ patientId: paciente, encounterId: encontro, draftId: expect.any(String), revision: expect.any(Number) }),
@@ -120,14 +126,15 @@ it("liberação com corte registra ator da sessão, preserva a negativa sem moti
   const triagem = triagemBase({ patientId: paciente, encounterId: encontro, pas: {
     ...triagemBase().pas, valor: 161, fontes: [fonteSintetica("fonte-corte")],
   } });
-  const triagemSalva = await f.request("/consulta/salao/triagem", { triagem, expectedRevision: 0 }, f.token);
+  const triagemSalva = await f.request("/consulta/salao/triagem", { triagem, expectedRevision: null }, f.token);
   expect(triagemSalva.status).toBe(200);
   const draft = triagemSalva.body.pacientes.find((item: Record<string, unknown>) => item.patientId === paciente);
   const semMotivo = await f.request("/consulta/salao/liberar", {
     patientId: paciente, encounterId: encontro, expectedRevision: draft.revision, motivo: "", idempotencyKey: "liberacao-sem-motivo-01",
   }, f.token);
   expect(semMotivo.status).toBe(400);
-  expect(listarEventos(f.db, paciente).filter((event) => event.tipo === "DecisaoLiberacaoSalao")).toHaveLength(0);
+  expect(listarEventos(f.db, paciente).filter((event) => event.tipo === "ReviewDecision"
+    && (event.payload as { data?: Record<string, unknown> }).data?.campo === "liberacaoComCorteSalao")).toHaveLength(0);
 
   const pedido = { patientId: paciente, encounterId: encontro, expectedRevision: draft.revision,
     motivo: "Médico avaliou o corte e registrou justificativa sintética", idempotencyKey: "liberacao-medica-01" };
