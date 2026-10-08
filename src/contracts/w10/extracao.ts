@@ -10,7 +10,7 @@ export const FactDomain = z.enum([
 export type FactDomain = z.infer<typeof FactDomain>;
 
 export const FactSourceType = z.enum([
-  "pathology", "imaging_report", "prescription", "medical_note", "nursing", "plaud", "administration",
+  "pathology", "imaging_report", "prescription", "medical_note", "nursing", "plaud", "administration", "lab_feed",
 ]);
 export type FactSourceType = z.infer<typeof FactSourceType>;
 

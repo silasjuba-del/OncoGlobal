@@ -20,7 +20,7 @@ const HIERARQUIA: Readonly<Record<FactDomain, readonly FactSourceType[]>> = {
   cycle: ["prescription", "administration", "medical_note", "nursing", "plaud"],
   symptom: ["plaud", "nursing", "medical_note", "imaging_report", "pathology"],
   toxicity: ["plaud", "nursing", "medical_note", "pathology"],
-  lab: ["medical_note", "nursing", "administration", "plaud", "pathology"],
+  lab: ["lab_feed", "medical_note", "nursing", "administration", "plaud", "pathology"],
   imaging: ["imaging_report", "medical_note", "nursing", "plaud", "pathology"],
   procedure: ["pathology", "administration", "medical_note", "nursing", "plaud"],
   plan: ["medical_note", "prescription", "nursing", "plaud", "administration"],

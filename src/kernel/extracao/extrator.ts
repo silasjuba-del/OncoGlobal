@@ -282,6 +282,14 @@ export const extratorDeterministico: Extrator = {
         const regimen = raw.match(/\b(?:protocolo|esquema)\s*:\s*([^.;]+)/iu);
         if (regimen) add("regimen", regimen[1]?.trim());
       }
+      // Graduação histológica de próstata (Gleason/ISUP): literal da fonte, sem inferência.
+      // Negação vale por cláusula, como nos demais biomarcadores.
+      if (!negated) {
+        const gleason = raw.match(/\bGleason\s*:?\s*(\d\s*\+\s*\d|\d)(?=$|[\s,;.)])/iu);
+        if (gleason) add("biomarker", { marker: "Gleason", value: (gleason[1] ?? "").replace(/\s+/g, ""), raw: gleason[0] });
+        const isup = raw.match(/\bISUP\s*:?\s*([1-5])(?=$|[\s,;.)])/iu);
+        if (isup) add("biomarker", { marker: "ISUP", value: isup[1], raw: isup[0] });
+      }
       const plan = raw.match(/^\s*(?:plano|conduta verbalizada)\s*:\s*(.+)/iu);
       if (plan) add("plan", plan[1]?.trim());
       }
