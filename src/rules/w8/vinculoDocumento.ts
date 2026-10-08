@@ -42,6 +42,36 @@ export interface SaidaVinculoDocumento {
   motivo: string;
 }
 
+export interface EntradaConfrontoNomeIdentificador {
+  nomeDocumento?: string | null;
+  identificador?: { tipo: TipoIdentificadorClinico; valor: string } | null;
+  cadastroNome: string;
+  cadastroIdentificadores?: readonly { tipo: TipoIdentificadorClinico; valor: string }[];
+}
+
+function nomeCanonico(value: string): string {
+  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .toLocaleUpperCase("pt-BR").replace(/[^A-Z0-9]+/g, " ").trim().replace(/\s+/g, " ");
+}
+
+/** Detects contradictory identity evidence. It never chooses or links a patient. */
+export function confrontarNomeIdentificador(entrada: EntradaConfrontoNomeIdentificador): SaidaVinculoDocumento {
+  const nome = entrada.nomeDocumento?.trim();
+  if (nome && nomeCanonico(nome) !== nomeCanonico(entrada.cadastroNome)) {
+    return { liga: false, motivo: "conflito entre nome documental e nome do cadastro; revisão médica necessária" };
+  }
+  const id = entrada.identificador;
+  if (id) {
+    const match = (entrada.cadastroIdentificadores ?? []).some((cadastrado) => cadastrado.tipo === id.tipo
+      && cadastrado.valor.replace(/\D/g, "") === id.valor.replace(/\D/g, ""));
+    const validado = vincularDocumentoAoPaciente({ tipoDocumento: "LAUDO_PRIMARIO", papelPessoa: "PACIENTE",
+      identificador: { valor: id.valor }, pacienteAlvo: { patientId: "confronto", identificadores: entrada.cadastroIdentificadores ?? [] } });
+    if (!match || !validado.liga) return { liga: false,
+      motivo: "conflito entre identificador documental e cadastro; revisão médica necessária" };
+  }
+  return { liga: true, motivo: "sem conflito de identidade nos campos documentais disponíveis; vínculo continua explícito" };
+}
+
 /**
  * Avalia se o documento ou fragmento vincula legitimamente ao cadastro do paciente.
  * Bloqueia vínculos por comprovantes em nome de terceiro (I3), assinatura de acompanhante (I4)
