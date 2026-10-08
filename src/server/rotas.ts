@@ -415,7 +415,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "carregarConsulta") {
       const parsed = z.object({ patientId: Id, tumorLotId: Id.nullable().optional() }).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
-      const result = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao, parsed.data.tumorLotId);
+      const result = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao, parsed.data.tumorLotId,
+        { limiarPlaquetas: deps.corpus?.limiarPlaquetas ?? null });
       if (!("codigo" in result)) deps.sessoes.selecionarConsulta(token, {
         patientId: result.patientId, encounterId: result.encounterId, tumorLotId: result.tumorLotId,
       });

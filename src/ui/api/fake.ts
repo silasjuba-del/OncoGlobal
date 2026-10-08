@@ -18,6 +18,7 @@ import {
 import { ContextoTriagem, SalaoRuleset, type EntradaFila } from "../../contracts/regras.js";
 import { avaliarChip } from "../../modules/estoque/chip.js";
 import { apacRetrograda } from "../../rules/apac.js";
+import { elegibilidadeCiclo } from "../../rules/elegibilidadeCiclo.js";
 import { avaliarTriagem, avaliarCorteSalao } from "../../rules/index.js";
 import type { DocumentoBundleVisao } from "../consulta/Bundle.js";
 import type { AlvoImpressao } from "../consulta/BarraFechamento.js";
@@ -275,7 +276,29 @@ function ficha(input: {
         alvoImpressao: alvo(prefixo),
         alertasVermelhos: input.vermelhos,
       },
+      ...camposW11(input.patientId),
     },
+  };
+}
+
+/** W11-H22: campos calculados no servidor, com dados sintéticos. Só a biópsia está confirmada; o resto é PENDENTE. */
+function camposW11(patientId: string): Pick<ConsultaVisao, "datasFixas" | "historicoTratamento" | "alertaPlaquetas" | "elegibilidade"> {
+  const prefixo = patientId.slice(3);
+  const pendente = { data: null, estado: "PENDENTE" as const, motivo: "AUSENTE" as const, fonte: null, fontesConflitantes: [] };
+  return {
+    datasFixas: {
+      dataReferencia: HOJE,
+      biopsyDate: { data: "2026-01-10", estado: "PREENCHIDO", motivo: null, fonte: `biopsia-${prefixo}`, fontesConflitantes: [] },
+      c1d1Date: pendente,
+      lastStagingDate: { ...pendente, tipo: null },
+      lastRestagingDate: pendente,
+      lastTreatmentDate: pendente,
+      diasDesde: { c1d1: null, lastTreatment: null, lastRestaging: null },
+    },
+    historicoTratamento: { linhas: [], estado: "PENDENTE", codigo: "HISTORICO_NAO_CARREGADO" },
+    alertaPlaquetas: null,
+    elegibilidade: elegibilidadeCiclo({ portaCiclo: null, triagem: null, ctcae: null, interacoes: null,
+      funcaoOrganica: null, plaquetas: null }),
   };
 }
 

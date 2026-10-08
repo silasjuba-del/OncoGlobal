@@ -22,6 +22,11 @@ import { avaliarSerieRecist, type RecistSerieInput } from "../rules/recist/index
 import { ClinicalFact } from "../contracts/w10/extracao.js";
 import { reconciliarCampos } from "../kernel/extracao/reconciliacao.js";
 import { normalizarDataCivil } from "../kernel/extracao/normalizacao.js";
+import { projetarDatasFixas } from "../kernel/projections/datasFixas.js";
+import { projetarHistoricoTratamento, type FatoSistemico } from "../kernel/projections/historicoTratamento.js";
+import { labSeries } from "../kernel/projections/series.js";
+import { avaliarAlertaPlaquetas, type AlertaPlaquetas, type LimiarAlertaPlaquetas } from "../rules/plaquetasAlerta.js";
+import { elegibilidadeCiclo, type SinalElegibilidade } from "../rules/elegibilidadeCiclo.js";
 
 const RecistSerieSchema = z.object({
   patientId: z.string().min(1), tumorLotId: z.string().nullable(), episodioId: z.string().min(1),
@@ -101,12 +106,54 @@ function contatoUnico(contatos: readonly { event: ReturnType<typeof eventos>[num
   return contato.revogadoEm === null ? contato : null;
 }
 
+const DATA_CIVIL_LEITURA = /^\d{4}-\d{2}-\d{2}$/;
+
+/** W11-H22: linha do tempo a partir dos ciclos confirmados. Campo ausente no payload fica null (PENDENTE). */
+function historicoDaConsulta(eventosDaConsulta: ReturnType<typeof eventos>) {
+  const fatos = eventosVigentes(eventosDaConsulta).filter((e) => e.tipo === "TreatmentCycle").flatMap((e): FatoSistemico[] => {
+    const d = data(e);
+    if (!d || typeof d.dataClinica !== "string" || !DATA_CIVIL_LEITURA.test(d.dataClinica)) return [];
+    return [{ tipo: "SISTEMICO", id: e.eventId, data: d.dataClinica,
+      ciclo: typeof d.ciclo === "number" && Number.isInteger(d.ciclo) && d.ciclo >= 1 ? d.ciclo : null,
+      protocolo: typeof d.protocolo === "string" ? d.protocolo : null,
+      doseRelativaPct: typeof d.doseRelativaPct === "number" ? d.doseRelativaPct : null,
+      previstoEm: typeof d.previstoEm === "string" && DATA_CIVIL_LEITURA.test(d.previstoEm) ? d.previstoEm : null,
+      observacao: typeof d.observacao === "string" ? d.observacao : null }];
+  });
+  try {
+    return { linhas: projetarHistoricoTratamento(fatos), estado: "PARCIAL" as const, codigo: null };
+  } catch {
+    return { linhas: [], estado: "PENDENTE" as const, codigo: "HISTORICO_INVALIDO" };
+  }
+}
+
+/** W11-H22: alerta de plaquetas do valor mais recente. Empate de data com valores diferentes = ausente (nunca eleito). */
+function alertaPlaquetasDaConsulta(eventosDaConsulta: ReturnType<typeof eventos>,
+  limiar: LimiarAlertaPlaquetas | null): AlertaPlaquetas | null {
+  if (limiar === null) return null;
+  const pontos = labSeries(eventosDaConsulta).filter((p) => p.campo === "plaquetas" && DATA_CIVIL_LEITURA.test(p.data));
+  const maisRecente = pontos.reduce<string | null>((max, p) => max === null || p.data > max ? p.data : max, null);
+  const doDia = pontos.filter((p) => p.data === maisRecente);
+  const entrada = maisRecente === null || new Set(doDia.map((p) => p.valor)).size !== 1
+    ? { valor: null, data: null } : { valor: doDia[0]!.valor, data: maisRecente };
+  const [alerta] = avaliarAlertaPlaquetas(entrada, limiar, () => ({ grau: null, estado: "PENDENTE",
+    confirmadoPeloMedico: false, motivo: "graduação CTCAE fora da visão de consulta" }));
+  return alerta;
+}
+
+function sinalPlaquetas(alerta: AlertaPlaquetas | null): SinalElegibilidade | null {
+  if (alerta === null) return null;
+  if (alerta.estado === "ALERTA") return { estado: "VERMELHO", motivos: [{ texto: alerta.motivo }] };
+  if (alerta.estado === "SEM_ALERTA") return { estado: "VERDE", motivos: [] };
+  return { estado: "PENDENTE", motivos: [{ texto: alerta.motivo }] };
+}
+
 export function lerPaciente(db: DatabaseSync, patientId: string) {
   return porTipo(eventos(db), "Paciente", Paciente)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value ?? null;
 }
 export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, sessao: Sessao,
-  tumorLotId?: string | null) {
+  tumorLotId?: string | null, config: { limiarPlaquetas?: LimiarAlertaPlaquetas | null } = {}) {
   const all = eventos(db), paciente = porTipo(all, "Paciente", Paciente)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value;
   if (!paciente) return { codigo: "PACIENTE_NAO_ENCONTRADO" as const };
@@ -217,6 +264,10 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   ];
   const pendenciasCampos = lotes.reduce((n, item) => n + [item.cid, item.topografia, item.histologia, item.finalidadeApac]
     .filter((field) => field.estado === "PENDENTE").length, lote ? 0 : 1);
+  // Escopo da consulta: eventos do paciente no lote selecionado ou sem lote (ex.: biópsia, paciente).
+  const eventosDaConsulta = all.filter((event) => event.patientId === patientId
+    && (event.tumorLotId === null || event.tumorLotId === (lote?.tumorLotId ?? undefined)));
+  const alertaPlaquetas = alertaPlaquetasDaConsulta(eventosDaConsulta, config.limiarPlaquetas ?? null);
   return {
     hoje: civil.dataCivil, patientId, encounterId: current.encounterId,
     tumorLotId: lote?.tumorLotId ?? null,
@@ -237,6 +288,12 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
       registros: drafts.map((d) => ({ id: d.draftId, expectedRevision: d.revision })),
       documentos: docs, autorExibido: sessao.crm, alvoImpressao: null, alertasVermelhos: [] },
     estado: "PARCIAL" as const, pendenciasLeitura,
+    // W11-H22: calculados aqui, a partir do ledger, com a data do servidor passada explicitamente.
+    datasFixas: projetarDatasFixas(eventosDaConsulta, civil.dataCivil),
+    historicoTratamento: historicoDaConsulta(eventosDaConsulta),
+    alertaPlaquetas,
+    elegibilidade: elegibilidadeCiclo({ portaCiclo: null, triagem: null, ctcae: null, interacoes: null,
+      funcaoOrganica: null, plaquetas: sinalPlaquetas(alertaPlaquetas) }),
   };
 }
 export function lerLotes(db: DatabaseSync, patientId: string) {
