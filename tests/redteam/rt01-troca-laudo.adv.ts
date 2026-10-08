@@ -24,7 +24,7 @@ async function confrontoNomeIdentificador(): Promise<((entrada: unknown) => unkn
 describe("RT-01 · lacunas de defesa contra troca de laudo", () => {
   it("SEM_IMPLEMENTACAO: executor da ReviewAction LIGAR_PACIENTE existe (contrato w10 sem consumidor)", async () => {
     const executor = await executorReviewAction();
-    expect(executor,
+    expect(executor?.aplicar,
       "ReviewAction LIGAR_PACIENTE existe só como schema em src/contracts/w10/extracao.ts; " +
       "nenhuma função aplica a ação (a caixa de revisão não fecha o ciclo: exceção nunca é resolvida). " +
       "Dono provável: orchestration/pipeline (Fugu) + kernel (tech lead)")
