@@ -231,3 +231,70 @@ export function criarGateway(deps: {
     },
   };
 }
+
+// ── CANONICA §7 / D-W9-55 · READ × WORLD_EFFECT ─────────────────────────────
+// "Ler Drive ou PubMed não equivale a enviar WhatsApp": são duas classes com permissões separadas.
+// WORLD_EFFECT: verbos do ActionIntent (imprimir, enviar, agendar, exportar, backup) — passam por executar().
+// READ: leitura externa — nunca é verbo de ActionIntent; passa só por autorizarLeitura(), com política própria.
+// autorizarLeitura apenas DECIDE. Não abre conexão, não lê e não recebe executor: a leitura externa fica DESLIGADA
+// por padrão (POLITICA_LEITURA_PADRAO) e, quando ligada, cada consulta precisa de fonte explicitamente permitida
+// e de passar no G-02 (sem PHI no texto que sai do PC).
+export type ClasseEfeito = "READ" | "WORLD_EFFECT";
+
+export function classificarEfeito(verbo: unknown): ClasseEfeito | null {
+  return typeof verbo === "string" && (ActionIntent.shape.verbo.options as readonly string[]).includes(verbo)
+    ? "WORLD_EFFECT"
+    : null;
+}
+
+export interface PoliticaLeitura {
+  readonly conexoesExternasHabilitadas: boolean;
+  readonly fontesPermitidas: readonly string[];
+}
+export const POLITICA_LEITURA_PADRAO: PoliticaLeitura = Object.freeze({
+  conexoesExternasHabilitadas: false,
+  fontesPermitidas: Object.freeze([]) as readonly string[],
+});
+export type ResultadoLeitura =
+  | { decisao: "PERMITIDA"; classe: "READ"; motivoCodigo: "OK" }
+  | { decisao: "NEGADA"; classe: "READ"; motivoCodigo: string };
+
+export interface PedidoLeitura {
+  fonteId: string;
+  consulta: string;
+  dicionarioPaciente: DicionarioPaciente;
+}
+
+export function autorizarLeitura(
+  pedido: unknown,
+  sessao: Sessao | null,
+  politica: PoliticaLeitura = POLITICA_LEITURA_PADRAO,
+  agora: string = new Date().toISOString(),
+): ResultadoLeitura {
+  const negar = (motivoCodigo: string): ResultadoLeitura => ({ decisao: "NEGADA", classe: "READ", motivoCodigo });
+  if (!sessao) return negar("SEM_SESSAO");
+  const expira = Date.parse(sessao.expiraEm);
+  const instante = Date.parse(agora);
+  if (!Number.isFinite(expira) || !Number.isFinite(instante) || expira <= instante) return negar("SESSAO_EXPIRADA");
+  if (politica?.conexoesExternasHabilitadas !== true) return negar("LEITURA_EXTERNA_DESLIGADA");
+  if (!pedido || typeof pedido !== "object") return negar("PEDIDO_LEITURA_INVALIDO");
+  const { fonteId, consulta, dicionarioPaciente } = pedido as Record<string, unknown>;
+  if (typeof fonteId !== "string" || !fonteId.trim() || typeof consulta !== "string" || !consulta.trim()) {
+    return negar("PEDIDO_LEITURA_INVALIDO");
+  }
+  if (!Array.isArray(politica.fontesPermitidas) || !politica.fontesPermitidas.includes(fonteId)) {
+    return negar("LEITURA_SEM_PERMISSAO");
+  }
+  const dic = dicionarioPaciente as { nomes?: unknown; identificadores?: unknown } | null | undefined;
+  if (!dic || typeof dic !== "object" || !Array.isArray(dic.nomes) || !Array.isArray(dic.identificadores)) {
+    return negar("G02_DICIONARIO_AUSENTE");
+  }
+  let veredito: ReturnType<typeof g02PhiEgress>;
+  try {
+    veredito = g02PhiEgress(`${fonteId}\n${consulta}`, dic as DicionarioPaciente);
+  } catch {
+    return negar("G02_FALHOU");
+  }
+  if (veredito.decisao !== "PASSA") return negar("G02_PHI_NA_CONSULTA");
+  return { decisao: "PERMITIDA", classe: "READ", motivoCodigo: "OK" };
+}
