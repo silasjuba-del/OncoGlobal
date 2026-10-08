@@ -558,6 +558,7 @@ export function criarPortaFalsa(): PortaConsulta {
         return {
           horario: linha.horario,
           patientId: linha.id,
+          encounterId: atual.consulta.encounterId,
           nome: atual.consulta.cabecalho.paciente.nome,
           prontuario: atual.prontuario,
           semaforo: atual.consulta.cabecalho.semaforo,
