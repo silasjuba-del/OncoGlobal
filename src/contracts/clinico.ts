@@ -76,7 +76,7 @@ export const Triagem = z.object({
   coletaHemograma: dado(DataCivil), // âncora da validade de 7 dias (K-10)
   ecog: dado(z.number().int().min(0).max(4)),
   grauCtcae: dado(z.number().int().min(0).max(5)),
-  tontura: z.boolean(),
+  tontura: z.boolean().nullable(), // D-W9-03 por analogia: desconhecido = null → PENDENTE, nunca false (simulação Astra PT91)
   recurso: z.enum(["AMBULATORIAL", "CADEIRA", "CAMA"]),
   idadeAnos: z.number().int().min(0).nullable(), // D-W9-03 · null = PENDENTE; nunca 0
   chegadaEm: Instante,
