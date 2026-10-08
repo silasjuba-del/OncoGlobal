@@ -108,12 +108,14 @@ describe("F02 · deduplicação documental no pipeline real", () => {
   it("chave incompleta não agrupa fontes independentes; a mesma fonte repetida é rastreável", () => {
     const a: ExtractionInput = { ...fonte("exame-1", "fonte-1"),
       examIdentity: { tipo: "IMAGEM", registro: "IMG-001" } };
+    const examIdentity = a.examIdentity;
+    if (!examIdentity) throw new Error("fixture deve declarar identidade de exame");
     const independente = executarPipelineExtracao({ ...a, additionalSources: [{
-      ...fonte("exame-2", "fonte-2"), examIdentity: a.examIdentity,
+      ...fonte("exame-2", "fonte-2"), examIdentity,
     }] });
     expect(independente.deduplicacao.repeticoes).toEqual([]);
     const reingestao = executarPipelineExtracao({ ...a, additionalSources: [{
-      ...fonte("exame-2", "fonte-1"), examIdentity: a.examIdentity,
+      ...fonte("exame-2", "fonte-1"), examIdentity,
     }] });
     expect(reingestao.deduplicacao.repeticoes).toHaveLength(1);
     expect(reingestao.facts).toHaveLength(2);

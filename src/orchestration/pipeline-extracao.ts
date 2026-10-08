@@ -243,7 +243,7 @@ export function reconciliarFontes(state: ExtractionState): ExtractionState {
       ...deduplicacao.versoesDiscordantes.map((grupo, indice) => ({
         id: `exc:CONFLICT:versao-documental:${indice}`,
         kind: "CONFLICT" as const,
-        segmentId: null, factIds: grupo.factIds,
+        segmentId: null, factIds: [...grupo.factIds],
         reason: `mesma identidade de exame com conteúdo ou versão discordante (${grupo.chaveExame}): conferir fontes`,
         sourceIds: [...new Set(grupo.fontes.map((f) => f.sourceId))],
       })),
