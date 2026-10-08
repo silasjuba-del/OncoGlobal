@@ -350,19 +350,19 @@ export function lerTriagens(db: DatabaseSync) {
       eventId: null as string | null, draftId: draft.draftId, revision: draft.revision,
       criadoEm: draft.criadoEm }];
   });
-  const latest = new Map<string, (typeof persisted)[number] | (typeof drafts)[number]>();
-  for (const item of [...persisted, ...drafts]) {
-    const key = JSON.stringify([item.patientId, item.encounterId]);
-    const old = latest.get(key);
-    if (!old || Date.parse(item.criadoEm) >= Date.parse(old.criadoEm)) latest.set(key, item);
-  }
-  return [...latest.values()].map(({ criadoEm: _criadoEm, ...item }) => item);
+  // Preserve every event and draft. The Salon projection scopes by clinical arrival
+  // date and marks multiple same-day entries pending; createdAt is not a clinical
+  // ordering signal and must never erase a duplicate or an older clinical arrival.
+  return [...persisted, ...drafts].map(({ criadoEm: _criadoEm, ...item }) => item);
 }
 export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown) {
   const civil = dataCivilDoServico(agora, "-03:00");
   const parsedRuleset = SalaoRuleset.safeParse(rulesetInput);
   const triagensTodas = lerTriagens(db);
-  const agendaCandidatos = lerAgenda(db, agora).itens.flatMap((item) => {
+  const agendaHoje = lerAgenda(db, agora).itens;
+  const agendaOrdem = new Map(agendaHoje.map((item, index) =>
+    [JSON.stringify([item.patientId, item.encounterId]), index] as const));
+  const agendaCandidatos = agendaHoje.flatMap((item) => {
     if (triagensTodas.some((triagem) => triagem.patientId === item.patientId && triagem.encounterId === item.encounterId)) return [];
     const paciente = lerPaciente(db, item.patientId);
     if (!paciente) return [];
@@ -394,7 +394,7 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown)
   for (const item of doDia) porPaciente.set(item.patientId, [...(porPaciente.get(item.patientId) ?? []), item]);
   const triagens = [...porPaciente.values()].filter((items) => items.length === 1).map((items) => items[0]!);
   const pacientesComTriagemDuplicada = [...porPaciente.values()].filter((items) => items.length > 1)
-    .map((items) => ({ patientId: items[0]!.patientId, encounterId: "", chegadaEm: items[0]!.chegadaEm,
+    .map((items) => ({ patientId: items[0]!.patientId, encounterId: items[0]!.encounterId, chegadaEm: items[0]!.chegadaEm,
       paciente: items[0]!.paciente, triagemDuplicada: true }));
   const ruleset = parsedRuleset.data;
   const contexto: ContextoTriagem = { hoje: civil.dataCivil, prescricaoVigente: null,
@@ -415,16 +415,27 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown)
   const byPatient = new Map(calculados.map((x) => [x.card.entrada.patientId, x.card]));
   const cartoes = ordenadas.flatMap((e) => { const c = byPatient.get(e.patientId); return c ? [c] : []; });
   const decisionesVisiveis = decisoes.map(({ patientId, motivo }) => ({ patientId, motivo }));
+  const pacientesBase = [...[...triagens, ...pacientesComTriagemDuplicada].map((p) => ({ patientId: p.patientId, encounterId: p.encounterId,
+    chegadaEm: p.chegadaEm, nome: p.paciente?.nome ?? "",
+    draftId: "draftId" in p ? p.draftId : null, revision: "revision" in p ? p.revision : null,
+    estadoRascunho: "draftId" in p && p.draftId
+      ? (decisoes.some((decision) => decision.patientId === p.patientId && decision.encounterId === p.encounterId
+        && decision.draftId === p.draftId && decision.revision !== null && decision.revision + 1 === p.revision)
+        ? "DECISAO_REGISTRADA" as const : "RASCUNHO" as const) : null })),
+    ...agendaCandidatos.filter((agenda) => !triagens.some((triagem) => triagem.patientId === agenda.patientId
+      && triagem.encounterId === agenda.encounterId))];
+  const pacientesOrdenados = pacientesBase.sort((a, b) => {
+    const ordemA = agendaOrdem.get(JSON.stringify([a.patientId, a.encounterId]));
+    const ordemB = agendaOrdem.get(JSON.stringify([b.patientId, b.encounterId]));
+    if (ordemA !== undefined || ordemB !== undefined) {
+      if (ordemA === undefined) return 1;
+      if (ordemB === undefined) return -1;
+      return ordemA - ordemB;
+    }
+    return Date.parse(a.chegadaEm) - Date.parse(b.chegadaEm);
+  });
   return { hoje: civil.dataCivil, ruleset, contexto, fonte: calculados[0]?.fonte ?? null,
-    cartoes, pacientes: [...[...triagens, ...pacientesComTriagemDuplicada].map((p) => ({ patientId: p.patientId, encounterId: p.encounterId,
-      chegadaEm: p.chegadaEm, nome: p.paciente?.nome ?? "",
-      draftId: "draftId" in p ? p.draftId : null, revision: "revision" in p ? p.revision : null,
-      estadoRascunho: "draftId" in p && p.draftId
-        ? (decisoes.some((decision) => decision.patientId === p.patientId && decision.encounterId === p.encounterId
-          && decision.draftId === p.draftId && decision.revision !== null && decision.revision + 1 === p.revision)
-          ? "DECISAO_REGISTRADA" as const : "RASCUNHO" as const) : null })),
-      ...agendaCandidatos.filter((agenda) => !triagens.some((triagem) => triagem.patientId === agenda.patientId
-        && triagem.encounterId === agenda.encounterId))], decisoes: decisionesVisiveis,
+    cartoes, pacientes: pacientesOrdenados, decisoes: decisionesVisiveis,
     estado: "PARCIAL" as const,
     pendencias: [...calculados.flatMap((x) => [...x.base.pendentes, ...x.portao.pendentes]),
       ...pacientesComTriagemDuplicada.map(() => ({ codigo: "TRIAGEM_DUPLICADA", estado: "PENDENTE" as const }))] };

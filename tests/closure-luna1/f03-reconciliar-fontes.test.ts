@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { executarPipelineExtracao } from "../../src/orchestration/pipeline-extracao.js";
+import { normalizarDataCivil } from "../../src/kernel/extracao/normalizacao.js";
 import { lerDraft, salvarDraft } from "../../src/kernel/ledger/drafts.js";
 import { confirmar } from "../../src/kernel/ledger/writeRouter.js";
 import { ambienteHttp } from "../server/http-fixture.js";
@@ -40,13 +41,15 @@ async function vincularFonte(ambiente: Awaited<ReturnType<typeof ambienteHttp>>,
 }
 
 function salvarFonte(ambiente: Awaited<ReturnType<typeof ambienteHttp>>, args: {
-  draftId: string; recordingId: string; sourceId: string; texto: string; dataClinica?: string;
+  draftId: string; recordingId: string; sourceId: string; texto: string;
+  sourceType?: "pathology" | "imaging_report" | "prescription" | "medical_note" | "nursing" | "plaud" | "administration";
+  dataClinica?: string;
 }) {
   const input = { recordingId: args.recordingId, sourceId: args.sourceId,
-    sourceType: "medical_note" as const, rawTranscript: args.texto };
+    sourceType: args.sourceType ?? "medical_note" as const, rawTranscript: args.texto };
   const state = executarPipelineExtracao(input);
   if (!state.segments[0]) throw new Error("SEGMENTO_SINTETICO_AUSENTE");
-  if (args.dataClinica && !state.facts.some((fact) => fact.date === args.dataClinica))
+  if (args.dataClinica && !state.facts.some((fact) => normalizarDataCivil(fact.date) === normalizarDataCivil(args.dataClinica)))
     throw new Error("DATA_CLINICA_SINTETICA_NAO_EXTRAIDA");
   salvarDraft(ambiente.db, { draftId: args.draftId, patientId: null, sourceId: args.sourceId,
     rawRef: `fixture-local:${args.recordingId}`, payload: { kind: "EXTRACAO_RASCUNHO", input,
@@ -93,10 +96,12 @@ describe("F03 HTTP · reconciliação local de fontes explicitamente vinculadas"
       await post(ambiente, "/consulta/contexto/selecionar", { patientId: PACIENTE,
         encounterId: ENCONTRO, tumorLotId: null });
       salvarFonte(ambiente, { draftId: "draft-date-pending", recordingId: "recording-date-pending",
-        sourceId: "source-date-pending", texto: "Nota sintética sem marcador laboratorial clínico." });
+        sourceId: "source-date-pending", sourceType: "medical_note",
+        texto: "Plano: fazer cisplatina.\nHemoglobina 12 g/dL em 08/10/2026." });
       await vincularFonte(ambiente, "draft-date-pending");
       salvarFonte(ambiente, { draftId: "draft-date-pending-2", recordingId: "recording-date-pending-2",
-        sourceId: "source-date-pending-2", texto: "Outra nota sem marcador clínico ou data." });
+        sourceId: "source-date-pending-2", sourceType: "prescription",
+        texto: "Carboplatina AUC 6 D1 em 08/10/2026." });
       await vincularFonte(ambiente, "draft-date-pending-2");
       const beforeEvents = Number((ambiente.db.prepare("SELECT COUNT(*) AS n FROM clinical_event").get() as { n: number }).n);
       const beforeOperations = Number((ambiente.db.prepare("SELECT COUNT(*) AS n FROM operation").get() as { n: number }).n);
@@ -113,6 +118,32 @@ describe("F03 HTTP · reconciliação local de fontes explicitamente vinculadas"
       expect(ambiente.db.prepare("SELECT COUNT(*) AS n FROM operation").get()).toMatchObject({ n: beforeOperations });
       expect(ambiente.db.prepare("SELECT COUNT(*) AS n FROM clinical_event WHERE tipo='ReviewDecision'").get())
         .toMatchObject({ n: 2 });
+    } finally { await ambiente.close(); }
+  });
+
+  it("confronta plano e prescrição HTTP apenas com ambas as decisões persistidas e a mesma data clínica", async () => {
+    const ambiente = await ambienteHttp();
+    try {
+      cadastrarPaciente(ambiente);
+      await post(ambiente, "/consulta/contexto/selecionar", { patientId: PACIENTE,
+        encounterId: ENCONTRO, tumorLotId: null });
+      salvarFonte(ambiente, { draftId: "draft-plan-http", recordingId: "recording-plan-http",
+        sourceId: "source-plan-http", texto: "Plano: cisplatina em 08/10/2026.",
+        sourceType: "medical_note", dataClinica: "08/10/2026" });
+      await vincularFonte(ambiente, "draft-plan-http");
+      salvarFonte(ambiente, { draftId: "draft-prescription-http", recordingId: "recording-prescription-http",
+        sourceId: "source-prescription-http", texto: "Carboplatina AUC 6 D1 em 08/10/2026.",
+        sourceType: "prescription", dataClinica: "08/10/2026" });
+      await vincularFonte(ambiente, "draft-prescription-http");
+      const beforeEvents = Number((ambiente.db.prepare("SELECT COUNT(*) AS n FROM clinical_event").get() as { n: number }).n);
+      const proposal = await post<{ codigo: string; decisaoClinicaTomada: boolean;
+        conflitos: Array<{ reason: string; factIds: string[]; sourceIds: string[] }> }>(
+        ambiente, "/consulta/rascunho/reconciliar", { draftIds: ["draft-plan-http", "draft-prescription-http"] });
+      expect(proposal).toMatchObject({ status: 200, data: { codigo: "RECONCILIACAO_PROPOSTA", decisaoClinicaTomada: false } });
+      const planned = proposal.data.conflitos.find((item) => item.reason.includes("planned_regimen"));
+      expect(planned).toBeDefined();
+      expect(planned?.sourceIds).toEqual(expect.arrayContaining(["source-plan-http", "source-prescription-http"]));
+      expect(ambiente.db.prepare("SELECT COUNT(*) AS n FROM clinical_event").get()).toMatchObject({ n: beforeEvents });
     } finally { await ambiente.close(); }
   });
 });
