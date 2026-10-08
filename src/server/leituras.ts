@@ -1,6 +1,6 @@
 import type { DatabaseSync } from "node:sqlite";
 import { z, type ZodType } from "zod";
-import { DataCivil } from "../contracts/base.js";
+import { DataCivil, Fonte } from "../contracts/base.js";
 import { ClinicalEvent, Apac } from "../contracts/operacao.js";
 import { Paciente, TumorLot, Triagem, TreatmentEpisode, Ciclo } from "../contracts/clinico.js";
 import { Conversation } from "../contracts/agentes.js";
@@ -22,6 +22,7 @@ import { avaliarSerieRecist, type RecistSerieInput } from "../rules/recist/index
 import { ClinicalFact } from "../contracts/w10/extracao.js";
 import { reconciliarCampos } from "../kernel/extracao/reconciliacao.js";
 import { normalizarDataCivil } from "../kernel/extracao/normalizacao.js";
+import { projetarVinculosContato, type ContatoProjetado } from "../kernel/projections/vinculosContato.js";
 
 const RecistSerieSchema = z.object({
   patientId: z.string().min(1), tumorLotId: z.string().nullable(), episodioId: z.string().min(1),
@@ -92,13 +93,11 @@ function porTipo<T>(all: ReturnType<typeof eventos>, tipo: string, schema: ZodTy
     const p = schema.safeParse(data(e)); return p.success ? [{ event: e, value: p.data }] : [];
   });
 }
-function contatoUnico(contatos: readonly { event: ReturnType<typeof eventos>[number]; value: Contato }[],
-  contatoId: string, patientId: string) {
-  const matches = contatos.filter((c) => c.value.contatoId === contatoId
-    && c.event.patientId === patientId);
-  if (matches.length !== 1) return null;
-  const contato = matches[0]!.value;
-  return contato.revogadoEm === null ? contato : null;
+function contatoUnico(contatoId: string, patientId: string, projetados: readonly ContatoProjetado[] = []) {
+  const matches = projetados.filter((c) => c.value.contatoId === contatoId
+    && c.patientIdResolvido === patientId && c.estadoVinculo === "VINCULADO"
+    && c.value.revogadoEm === null);
+  return matches.length === 1 ? matches[0]!.value : null;
 }
 
 export function lerPaciente(db: DatabaseSync, patientId: string) {
@@ -223,9 +222,9 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     cabecalho: { hoje: civil.dataCivil, paciente, lotes, loteSelecionadoId: lote?.tumorLotId ?? null,
       episodio, ciclo: ciclos.at(-1) ?? null, semaforo: "PENDENTE" as const,
       pendentes: pendenciasLeitura.length + pendenciasCampos, contatosDesdeUltima: (() => {
-        const contacts = porTipo(all, "Contato", Contato).filter((x) => x.event.patientId === patientId
-          && x.value.patientId === patientId);
-        return contacts.map((x) => contatoUnico(contacts, x.value.contatoId, patientId))
+        const contacts = porTipo(all, "Contato", Contato);
+        const projected = projetarVinculosContato(contacts, all);
+        return contacts.map((x) => contatoUnico(x.value.contatoId, patientId, projected))
           .filter((x): x is Contato => x !== null);
       })(),
       alergiasPaciente: [], comorbidadesPaciente: [] },
@@ -250,7 +249,7 @@ export function lerAgenda(db: DatabaseSync, agora: string) {
   const items = rows.filter(({ event, value }) => value.data === civil.dataCivil
     && event.patientId === value.patientId && event.encounterId === value.encounterId).flatMap(({ value }) => {
     const patient = lerPaciente(db, value.patientId);
-    return patient ? [{ horario: value.horario, patientId: value.patientId, nome: patient.nome,
+    return patient ? [{ horario: value.horario, patientId: value.patientId, encounterId: value.encounterId, nome: patient.nome,
       prontuario: patient.identificadores.find((i) => i.tipo === "PRONTUARIO")?.valor ?? "",
       semaforo: "PENDENTE" as const, pendentes: 1, preConsultaPronta: false,
       contatosDesdeUltima: 0, temE1: false }] : [];
@@ -259,15 +258,25 @@ export function lerAgenda(db: DatabaseSync, agora: string) {
 }
 export function lerCanal(db: DatabaseSync) {
   const all = eventos(db), contatos = porTipo(all, "Contato", Contato), rows = porTipo(all, "CanalMessage", CanalMessage);
-  const mensagens = rows.flatMap(({ event, value }) => {
-    if (event.patientId !== value.patientId) return [];
-    const contato = contatoUnico(contatos, value.contatoId, event.patientId);
-    if (!contato) return [];
-    const linkedPatientId = contato.patientId === value.patientId ? value.patientId : null;
+  const projected = projetarVinculosContato(contatos, all);
+  const mensagens = rows.flatMap(({ value }) => {
+    const registros = projected.filter((c) => c.value.contatoId === value.contatoId);
+    if (!registros.length) return [];
+    const revogado = registros.some((record) => record.value.revogadoEm !== null);
+    const conflict = registros.length > 1 || registros.some((record) => record.estadoVinculo === "CONFLITO");
+    const allTargets = [...new Set(registros.flatMap((record) => record.candidatosVinculo))];
+    const resolved = registros.filter((record) => record.estadoVinculo === "VINCULADO");
+    const linkedPatientId = !revogado && !conflict && resolved.length === 1 ? resolved[0]!.patientIdResolvido : null;
     const patient = linkedPatientId ? lerPaciente(db, linkedPatientId) : null;
+    if (linkedPatientId && !patient) return [];
+    const candidatos = revogado ? [] : conflict ? allTargets : allTargets.length ? allTargets
+      : [...new Set(all.filter((candidate) => candidate.tipo === "Paciente").map((candidate) => candidate.patientId))];
     return [{ mensagemId: value.mensagemId, texto: value.texto, em: value.em, redFlag: value.redFlag,
-      contatoId: value.contatoId, patientId: linkedPatientId, nomePaciente: patient?.nome ?? null,
-      candidatos: [] }];
+      contatoId: value.contatoId, patientId: revogado ? null : linkedPatientId, nomePaciente: patient?.nome ?? null,
+      estadoVinculo: revogado ? "REVOGADO" as const : conflict ? "CONFLITO" as const
+        : linkedPatientId ? "VINCULADO" as const : "SEM_VINCULO" as const,
+      candidatos: candidatos.flatMap((patientId) => { const cadastro = lerPaciente(db, patientId);
+        return cadastro ? [{ patientId, nome: cadastro.nome }] : []; }) }];
   });
   return { mensagens, estado: mensagens.length ? "PARCIAL" : rows.length ? "PENDENTE" : "FONTE_AUSENTE" };
 }
@@ -305,25 +314,77 @@ export function lerConversas(db: DatabaseSync) {
   const all = eventos(db), conversations = porTipo(all, "Conversation", Conversation)
     .filter((x) => x.event.patientId === x.value.patientId);
   const contacts = porTipo(all, "Contato", Contato);
-  return conversations.map(({ event, value }) => ({ value,
-    contato: contatoUnico(contacts, value.contatoId, event.patientId) }));
+  const projected = projetarVinculosContato(contacts, all);
+  return conversations.map(({ value }) => {
+    const links = projected.filter((item) => item.value.contatoId === value.contatoId);
+    const link = links.length === 1 && links[0]!.estadoVinculo === "VINCULADO" ? links[0]! : null;
+    return { value: link && link.patientIdResolvido ? { ...value, patientId: link.patientIdResolvido } : value,
+      contato: link?.value ?? null };
+  });
 }
 export function lerTriagens(db: DatabaseSync) {
-  return porTipo(eventos(db), "Triagem", Triagem).filter(({ event, value }) =>
+  const persisted = porTipo(eventos(db), "Triagem", Triagem).filter(({ event, value }) =>
     event.patientId === value.patientId && event.encounterId === value.encounterId).map(({ event, value }) => ({
     patientId: value.patientId, encounterId: value.encounterId, chegadaEm: value.chegadaEm,
     paciente: lerPaciente(db, value.patientId), triagem: value, fontes: event.fontes, eventId: event.eventId,
+    draftId: null as string | null, revision: null as number | null, criadoEm: event.criadoEm,
   }));
+  const drafts = listarDrafts(db).flatMap((draft) => {
+    const payload = draft.payload && typeof draft.payload === "object" && !Array.isArray(draft.payload)
+      ? draft.payload as Record<string, unknown> : null;
+    if (payload?.kind !== "SALAO_TRIAGEM_RASCUNHO" || !payload.triagem) return [];
+    const triagem = Triagem.safeParse(payload.triagem);
+    if (!triagem.success || !draft.patientId || draft.patientId !== triagem.data.patientId) return [];
+    const contexto = payload.contexto && typeof payload.contexto === "object"
+      ? payload.contexto as Record<string, unknown> : null;
+    if (!contexto || contexto.encounterId !== triagem.data.encounterId) return [];
+    const paciente = lerPaciente(db, draft.patientId);
+    if (!paciente) return [];
+    const fontes = [triagem.data.pas, triagem.data.fc, triagem.data.spo2, triagem.data.tempDecimos,
+      triagem.data.hbDgDl, triagem.data.anc, triagem.data.plq, triagem.data.coletaHemograma,
+      triagem.data.ecog, triagem.data.grauCtcae].flatMap((field) => field.fontes);
+    const fonteTriagem = Fonte.safeParse(payload.source);
+    if (fonteTriagem.success && !fontes.length) fontes.push(fonteTriagem.data);
+    return [{ patientId: draft.patientId, encounterId: triagem.data.encounterId,
+      chegadaEm: triagem.data.chegadaEm, paciente, triagem: triagem.data, fontes,
+      eventId: null as string | null, draftId: draft.draftId, revision: draft.revision,
+      criadoEm: draft.criadoEm }];
+  });
+  const latest = new Map<string, (typeof persisted)[number] | (typeof drafts)[number]>();
+  for (const item of [...persisted, ...drafts]) {
+    const key = JSON.stringify([item.patientId, item.encounterId]);
+    const old = latest.get(key);
+    if (!old || Date.parse(item.criadoEm) >= Date.parse(old.criadoEm)) latest.set(key, item);
+  }
+  return [...latest.values()].map(({ criadoEm: _criadoEm, ...item }) => item);
 }
 export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown) {
   const civil = dataCivilDoServico(agora, "-03:00");
   const parsedRuleset = SalaoRuleset.safeParse(rulesetInput);
   const triagensTodas = lerTriagens(db);
+  const agendaCandidatos = lerAgenda(db, agora).itens.flatMap((item) => {
+    if (triagensTodas.some((triagem) => triagem.patientId === item.patientId && triagem.encounterId === item.encounterId)) return [];
+    const paciente = lerPaciente(db, item.patientId);
+    if (!paciente) return [];
+    const hoje = civil.estado === "OK" ? civil.dataCivil : `${agora.slice(0, 10)}`;
+    return [{ patientId: item.patientId, encounterId: item.encounterId, chegadaEm: `${hoje}T${item.horario}:00-03:00`,
+      nome: paciente.nome, draftId: null, revision: null, estadoRascunho: null }];
+  });
+  const allEvents = eventos(db);
+  const decisoes = allEvents.flatMap((event) => {
+    if (event.tipo !== "ReviewDecision") return [];
+    const value = data(event) as Record<string, unknown> | null;
+    return value?.campo === "liberacaoComCorteSalao" && typeof value.motivo === "string"
+      ? [{ patientId: event.patientId, motivo: value.motivo, encounterId: event.encounterId,
+        eventId: event.eventId, draftId: typeof value.triagemDraftId === "string" ? value.triagemDraftId : null,
+        revision: typeof value.triagemRevision === "number" ? value.triagemRevision : null }] : [];
+  });
   if (civil.estado !== "OK" || !parsedRuleset.success) {
     return { codigo: civil.estado === "PENDENTE" ? civil.codigo : "RULESET_SALAO_INVALIDO",
       hoje: null, estado: "PENDENTE" as const, motivo: "RULESET_OU_DATA_CIVIL_INDISPONIVEL",
-      pacientes: triagensTodas.map((p) => ({ patientId: p.patientId, encounterId: p.encounterId,
-        chegadaEm: p.chegadaEm, nome: p.paciente?.nome ?? "" })), cartoes: [], decisoes: [] };
+      pacientes: [...triagensTodas.map((p) => ({ patientId: p.patientId, encounterId: p.encounterId,
+      chegadaEm: p.chegadaEm, nome: p.paciente?.nome ?? "", draftId: p.draftId, revision: p.revision,
+      estadoRascunho: p.draftId ? "RASCUNHO" as const : null })), ...agendaCandidatos], cartoes: [], decisoes };
   }
   const doDia = triagensTodas.filter((item) => {
     const data = dataCivilDoServico(item.chegadaEm, "-03:00");
@@ -353,9 +414,17 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown)
   const ordenadas = ordenarFila(calculados.map((x) => x.card.entrada), ruleset);
   const byPatient = new Map(calculados.map((x) => [x.card.entrada.patientId, x.card]));
   const cartoes = ordenadas.flatMap((e) => { const c = byPatient.get(e.patientId); return c ? [c] : []; });
+  const decisionesVisiveis = decisoes.map(({ patientId, motivo }) => ({ patientId, motivo }));
   return { hoje: civil.dataCivil, ruleset, contexto, fonte: calculados[0]?.fonte ?? null,
-    cartoes, pacientes: [...triagens, ...pacientesComTriagemDuplicada].map((p) => ({ patientId: p.patientId, encounterId: p.encounterId,
-      chegadaEm: p.chegadaEm, nome: p.paciente?.nome ?? "" })), decisoes: [],
+    cartoes, pacientes: [...[...triagens, ...pacientesComTriagemDuplicada].map((p) => ({ patientId: p.patientId, encounterId: p.encounterId,
+      chegadaEm: p.chegadaEm, nome: p.paciente?.nome ?? "",
+      draftId: "draftId" in p ? p.draftId : null, revision: "revision" in p ? p.revision : null,
+      estadoRascunho: "draftId" in p && p.draftId
+        ? (decisoes.some((decision) => decision.patientId === p.patientId && decision.encounterId === p.encounterId
+          && decision.draftId === p.draftId && decision.revision !== null && decision.revision + 1 === p.revision)
+          ? "DECISAO_REGISTRADA" as const : "RASCUNHO" as const) : null })),
+      ...agendaCandidatos.filter((agenda) => !triagens.some((triagem) => triagem.patientId === agenda.patientId
+        && triagem.encounterId === agenda.encounterId))], decisoes: decisionesVisiveis,
     estado: "PARCIAL" as const,
     pendencias: [...calculados.flatMap((x) => [...x.base.pendentes, ...x.portao.pendentes]),
       ...pacientesComTriagemDuplicada.map(() => ({ codigo: "TRIAGEM_DUPLICADA", estado: "PENDENTE" as const }))] };
