@@ -12,6 +12,11 @@ import { rankearPacientes, type IdentityHints, type RegistryPatient } from "../k
 import { extratorDeterministico } from "../kernel/extracao/extrator.js";
 import { normalizarFatos as normalizar } from "../kernel/extracao/normalizacao.js";
 import { detectarConflitos, reconciliarCampos } from "../kernel/extracao/reconciliacao.js";
+import {
+  deduplicarFatos, type FonteParaDedupe, type ResultadoDeduplicacao,
+} from "../kernel/extracao/deduplicacao.js";
+// A mesma função pura usada na etapa 5 está disponível para confrontos offline.
+export { deduplicarFatos } from "../kernel/extracao/deduplicacao.js";
 import { validarSegurancaAntiAlucinacao, type ViolacaoInvariante } from "../kernel/extracao/safety.js";
 import {
   excecaoDeFarmacoIncerto, excecaoDeNumeroFalado, excecoesDeVinculo, montarCaixaRevisao,
@@ -21,13 +26,13 @@ import { faltantesObrigatorios, requiredBiomarkers } from "../kernel/extracao/bi
 import { excecoesProgressao, seriesDeImagem, type SerieImagem } from "../kernel/projections/radiologia.js";
 import { projetarTimelinePaciente } from "../kernel/projections/timelinePaciente.js";
 
-export interface ExtractionInput {
-  readonly recordingId: string;
-  readonly sourceId: string;
-  readonly sourceType: FactSourceType;
-  readonly page?: number;
-  /** Texto já convertido localmente; nenhum documento ou áudio sai deste módulo. */
-  readonly rawTranscript: string;
+export interface ExtractionSource extends FonteParaDedupe {
+  /** Fonte do mesmo lote local; não implica identidade de paciente. */
+}
+
+export interface ExtractionInput extends ExtractionSource {
+  /** Entradas adicionais explícitas: não há acesso oculto a store/documentos. */
+  readonly additionalSources?: readonly ExtractionSource[];
   /** Cadastro e pistas vêm do chamador local; texto livre sozinho não prova identidade. */
   readonly registeredPatients?: readonly RegistryPatient[];
   readonly identityHintsBySegment?: Readonly<Record<string, IdentityHints>>;
@@ -43,6 +48,7 @@ export interface ExtractionState {
   readonly segments: readonly EncounterSegment[];
   readonly patientCandidates: readonly PatientCandidate[];
   readonly facts: readonly ClinicalFact[];
+  readonly deduplicacao: ResultadoDeduplicacao;
   readonly fields: Readonly<Record<string, ReconciledField>>;
   readonly conflitos: readonly ReviewException[];
   readonly exceptions: readonly ReviewException[];
@@ -93,26 +99,32 @@ export function validarFatosContraContrato(fatos: readonly unknown[]): FactContr
 
 function base(input: ExtractionInput): ExtractionState {
   return {
-    input, segments: [], patientCandidates: [], facts: [], fields: {}, conflitos: [],
+    input, segments: [], patientCandidates: [], facts: [],
+    deduplicacao: { repeticoes: [], versoesDiscordantes: [], fatoRepetidoIds: [] },
+    fields: {}, conflitos: [],
     exceptions: [], rejeitados: [], factContractRejections: [], violacoes: [],
     caixaRevisao: { itens: [], resumo: { reconciliadosAutomaticamente: 0, precisamConfirmacao: 0, texto: "", lista: [] } },
     series: [], timeline: null, timelines: [], confirmationRequired: [],
   };
 }
 
+function fontes(input: ExtractionInput): readonly ExtractionSource[] {
+  return [input, ...(input.additionalSources ?? [])];
+}
+
 /** 1 — Segmenter preliminar: uma entrada não é tomada como um paciente. */
 export function segmentar(state: ExtractionState): ExtractionState {
   const { input } = state;
-  if (!input.rawTranscript.trim()) return state;
   return {
     ...state,
-    segments: segmentarTranscricao({
-      recordingId: input.recordingId,
-      sourceId: input.sourceId,
-      sourceType: input.sourceType,
-      ...(input.page === undefined ? {} : { page: input.page }),
-      turns: input.rawTranscript.split(/\r?\n/).map((text) => ({ text, startMs: null, endMs: null })),
-    }),
+    segments: fontes(input).flatMap((fonte) => fonte.rawTranscript.trim()
+      ? segmentarTranscricao({
+        recordingId: fonte.recordingId,
+        sourceId: fonte.sourceId,
+        sourceType: fonte.sourceType,
+        ...(fonte.page === undefined ? {} : { page: fonte.page }),
+        turns: fonte.rawTranscript.split(/\r?\n/).map((text) => ({ text, startMs: null, endMs: null })),
+      }) : []),
   };
 }
 
@@ -146,16 +158,27 @@ export function normalizarFatos(state: ExtractionState): ExtractionState {
 
 /** 5 — reconciliação multifonte: cada campo vira `ReconciledField` + conflitos explícitos. */
 export function reconciliarFontes(state: ExtractionState): ExtractionState {
+  const deduplicacao = deduplicarFatos(state.facts, fontes(state.input));
   const grupos = [...new Set(state.facts.map((fact) => fact.segmentId))]
     .map((segmentId) => ({ segmentId, facts: state.facts.filter((fact) => fact.segmentId === segmentId) }));
   // Segmentos ainda não vinculados são identidades distintas. Só um consumidor
   // com vínculo médico explícito pode reconciliar fontes de segmentos diferentes.
   return {
     ...state,
+    deduplicacao,
     fields: Object.fromEntries(grupos.flatMap(({ segmentId, facts }) =>
       Object.entries(reconciliarCampos(facts)).map(([key, value]) =>
         [grupos.length > 1 ? `${segmentId}::${key}` : key, value]))),
-    conflitos: grupos.flatMap(({ facts }) => detectarConflitos(facts)),
+    conflitos: [
+      ...grupos.flatMap(({ facts }) => detectarConflitos(facts)),
+      ...deduplicacao.versoesDiscordantes.map((grupo, indice) => ({
+        id: `exc:CONFLICT:versao-documental:${indice}`,
+        kind: "CONFLICT" as const,
+        segmentId: null, factIds: grupo.factIds,
+        reason: `mesma identidade de exame com conteúdo ou versão discordante (${grupo.chaveExame}): conferir fontes`,
+        sourceIds: [...new Set(grupo.fontes.map((f) => f.sourceId))],
+      })),
+    ],
   };
 }
 
@@ -270,8 +293,13 @@ export function prepararConfirmacaoMedica(state: ExtractionState): ExtractionSta
 
 /** Nove transformações síncronas e puras, em ordem normativa; nenhuma faz I/O. */
 export function executarPipelineExtracao(input: ExtractionInput): ExtractionState {
-  if (!input.recordingId.trim() || !input.sourceId.trim()) {
-    throw new Error("Entrada exige recordingId e sourceId");
+  const entradas = fontes(input);
+  if (entradas.some((fonte) => !fonte.recordingId.trim() || !fonte.sourceId.trim())) {
+    throw new Error("Cada entrada exige recordingId e sourceId");
+  }
+  if (new Set(entradas.map((fonte) => fonte.recordingId)).size !== entradas.length) {
+    // O segmentador deriva IDs do recordingId; colisão confundiria pacientes/fatos.
+    throw new Error("Entradas multifonte exigem recordingId distintos");
   }
   return prepararConfirmacaoMedica(
     projetarTimeline(
