@@ -32,6 +32,7 @@ import { criarOncoassistJev } from "../app/oncoassist.js";
 import { detectarEmergencias } from "../rules/radsEmergencias.js";
 import { confrontarNomeIdentificador } from "../rules/w8/vinculoDocumento.js";
 import { normalizarDataCivil } from "../kernel/extracao/normalizacao.js";
+import { farmacosMencionados } from "../kernel/extracao/reconciliacao.js";
 
 export interface ServidorDeps {
   db: DatabaseSync;
@@ -110,6 +111,28 @@ function chaveVinculoLegado(input: { draftId: string; revision: number; patientI
   encounterId: string; tumorLotId: string | null }): string {
   return `review-link-legacy-${sha(JSON.stringify([input.draftId, input.revision, input.patientId,
     input.encounterId, input.tumorLotId])).slice(0, 40)}`;
+}
+
+function fatoSustentaDataClinica(fact: z.infer<typeof ClinicalFactContract>, data: string): boolean {
+  const literal = /(?:\b\d{4}-\d{2}-\d{2}\b|\b\d{1,2}[/.]\d{1,2}[/.]\d{2,4}\b)/gu;
+  const textoValor = typeof fact.value === "string" ? fact.value
+    : fact.value && typeof fact.value === "object" && !Array.isArray(fact.value)
+      ? ["raw", "normalizado", "marker"].map((key) => (fact.value as Record<string, unknown>)[key])
+        .filter((value): value is string => typeof value === "string").join(" ") : "";
+  const normalizar = (value: string) => value.normalize("NFD").replace(/\p{Diacritic}/gu, "")
+    .toLocaleUpperCase("pt-BR").trim();
+  const farmacos = farmacosMencionados(textoValor).map(normalizar);
+  const clauses = fact.rawEvidence.split(/[;,]|\s+e\s+(?=(?:Hb|hemoglobina|creatinina|PSA|CEA|plaquetas)\b)/iu);
+  return clauses.some((clause) => {
+    const dates = [...clause.matchAll(literal)].map((match) => normalizarDataCivil(match[0]));
+    if (!dates.includes(data)) return false;
+    if (fact.domain === "plan" || fact.domain === "drug" || fact.domain === "regimen") {
+      const normalizedClause = normalizar(clause);
+      return farmacos.length > 0 && farmacos.some((term) => normalizedClause.includes(term));
+    }
+    if (fact.domain === "cycle") return /\bciclo\s*\d+/iu.test(clause);
+    return true;
+  });
 }
 
 /** W4-03 · a tela recebe conteúdo/hash calculado no servidor, nunca uma declaração do cliente. */
@@ -549,14 +572,19 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
           return reply(409, "DECISAO_VINCULO_NAO_PERSISTIDA", { codigo: "DECISAO_VINCULO_NAO_PERSISTIDA", draftId });
 
         const factsForSegment = facts.flatMap((item) => item.success && item.data.segmentId === segment.id ? [item.data] : []);
-        const dateFacts = factsForSegment.filter((fact) => fact.date !== undefined);
+        const dominiosTratamento = new Set(["plan", "drug", "regimen", "cycle"]);
+        const fatosDeTratamento = factsForSegment.filter((fact) => dominiosTratamento.has(fact.domain));
+        // A laboratory date can anchor that result, but it cannot timestamp an
+        // undated plan or prescription for cross-source treatment comparison.
+        if (fatosDeTratamento.length && fatosDeTratamento.some((fact) => fact.date === undefined))
+          return reply(409, "DATA_CLINICA_PENDENTE", { codigo: "DATA_CLINICA_PENDENTE", draftId });
+        const dateFacts = (fatosDeTratamento.length ? fatosDeTratamento : factsForSegment)
+          .filter((fact) => fact.date !== undefined);
         const clinicalDates = dateFacts.map((fact) => {
-          if (fact.evidence !== "EXPLICIT" || fact.requiresConfirmation || !fact.date) return null;
+          if (!fact.date) return null;
           const normalized = normalizarDataCivil(fact.date);
-          if (!normalized) return null;
-          const evidenceDates = [...fact.rawEvidence.matchAll(/(?:\b\d{4}-\d{2}-\d{2}\b|\b\d{1,2}[/.]\d{1,2}[/.]\d{2,4}\b)/gu)]
-            .map((match) => normalizarDataCivil(match[0]));
-          return evidenceDates.includes(normalized) ? normalized : null;
+          if (!normalized || !fatoSustentaDataClinica(fact, normalized)) return null;
+          return normalized;
         });
         const validDates = [...new Set(clinicalDates.filter((value): value is string => value !== null))];
         if (!dateFacts.length || validDates.length !== 1 || clinicalDates.some((value) => value === null))
@@ -839,7 +867,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       const result = lerSalao(deps.db, deps.agora(), deps.salaoRuleset);
       if ("estado" in result && result.estado === "PENDENTE")
         return reply(503, result.codigo, result);
-      return reply(200, "estado" in result && result.estado === "PENDENTE" ? result.codigo : "SALAO_CARREGADO", result);
+      return reply(200, "SALAO_CARREGADO", result);
     }
     if (rota === "canal") {
       const parsed = z.object({}).strict().safeParse(raw);
@@ -1136,9 +1164,13 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         draft = reviewed;
       } else if (linkReview?.patientId !== parsed.data.patientId) {
         return reply(409, "VINCULO_PACIENTE_NAO_CONFIRMADO");
-      } else if (linkReview?.encounterId !== deps.sessoes.consultaSelecionada(token)?.encounterId
-        || (linkReview?.tumorLotId ?? null) !== (deps.sessoes.consultaSelecionada(token)?.tumorLotId ?? null)) {
-        return reply(409, "DRAFT_FORA_DO_ESCOPO");
+      } else {
+        const consultaAtual = deps.sessoes.consultaSelecionada(token);
+        if (consultaAtual && consultaAtual.patientId !== parsed.data.patientId)
+          return reply(409, "PACIENTE_FORA_DA_CONSULTA_SELECIONADA");
+        if (consultaAtual && (linkReview?.encounterId !== consultaAtual.encounterId
+          || (linkReview?.tumorLotId ?? null) !== (consultaAtual.tumorLotId ?? null)))
+          return reply(409, "DRAFT_FORA_DO_ESCOPO");
       }
       if (!parsed.data.factIds) return reply(200, "VINCULO_REVISTO", {
         codigo: "VINCULO_REVISTO", draftId: draft.draftId, revision: draft.revision,
