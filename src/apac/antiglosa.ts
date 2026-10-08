@@ -30,7 +30,15 @@ export interface ContextoAntiglosa {
   competenciaLote?: string | null; // competência única do lote (D-W5-10)
   apacsDoLote?: readonly Apac[]; // demais APACs do lote (duplicidade)
   camposObrigatorios?: readonly string[];
+  /** Tabela CID x sexo (corpus/rulesets/apac-cid-sexo.v1.json, injetada). Ausente = gate AG-13 desligado. */
+  regrasCidSexo?: readonly RegraCidSexo[] | null;
+  /** Códigos da tabela local de referência (gate AG-17). Ausente = gate desligado. */
+  codigosSigtapLocal?: ReadonlySet<string> | null;
+  /** Esquema da ficha/prescrição vigente (gate AG-18). Ausente = gate desligado. */
+  esquemaVigente?: string | null;
 }
+
+export interface RegraCidSexo { prefixo: string; sexoExigido: "M" | "F" }
 
 const F = {
   sigtap: "SIGTAP/DATASUS, tabela da competência (D-W9-11)",
@@ -51,6 +59,101 @@ function cidCompativel(cid: string, lista: readonly string[]): boolean {
     const x = normCid(l);
     return x === c || (x.length === 3 && c.startsWith(x));
   });
+}
+
+/** Campo com algum conteúdo real (texto não vazio, número, true, lista ou objeto com conteúdo). */
+function temConteudo(v: unknown): boolean {
+  if (v === null || v === undefined || v === false) return false;
+  if (typeof v === "string") return v.trim() !== "";
+  if (typeof v === "number") return true;
+  if (v === true) return true;
+  if (Array.isArray(v)) return v.some(temConteudo);
+  if (typeof v === "object") return Object.values(v).some(temConteudo);
+  return false;
+}
+
+function normEsquema(v: string): string {
+  return v.normalize("NFD").replace(/\p{M}/gu, "").toUpperCase().replace(/\s+/g, " ").trim();
+}
+
+/**
+ * Gates de coerência do laudo (página 2 e cruzamentos). VERMELHO = BLOQUEIA_EXPORTACAO;
+ * PENDENTE = ALERTA (falta dado). Nunca corrige dado, nunca bloqueia o clínico.
+ * Campos da página 2 ainda não contratados são lidos tolerantemente: ausentes não geram achado.
+ */
+export function gatesCoerencia(apac: Apac, ctx: ContextoAntiglosa): Achado[] {
+  const campos = apac.campos;
+  const out: Achado[] = [];
+  const caixa = (campo: string): number | null => ctx.caixas.find((c) => c.chave === `apac.${campo}`)?.numero ?? null;
+  const vermelho = (regraId: string, campo: string, motivo: string, fonte: string): void => {
+    out.push({ regraId, caixaNumero: caixa(campo), severidade: "BLOQUEIA_EXPORTACAO", motivo: `VERMELHO: ${motivo}`, fonte });
+  };
+  const pendente = (regraId: string, campo: string, motivo: string, fonte: string): void => {
+    out.push({ regraId, caixaNumero: caixa(campo), severidade: "ALERTA", motivo: `PENDENTE: ${motivo}`, fonte });
+  };
+
+  const cid = lerTexto(campos, "cidPrincipal");
+  const sexo = lerTexto(campos, "pacienteSexo");
+
+  // AG-13 CID principal x sexo cadastrado (tabela injetada, por prefixo CID-10)
+  if (cid && sexo && ctx.regrasCidSexo) {
+    const c = normCid(cid);
+    const regra = ctx.regrasCidSexo.find((r) => c.startsWith(normCid(r.prefixo)) && sexo !== r.sexoExigido);
+    if (regra) {
+      const tumor = lerTexto(campos, "tumorPrimario");
+      const sufixo = tumor && normEsquema(tumor).includes("PROST") ? " Tumor primário informado: próstata; CID de mama em paciente masculino indica resíduo de modelo." : "";
+      vermelho("AG-13", "cidPrincipal",
+        `CID ${cid} é incompatível com o sexo ${sexo} (exige ${regra.sexoExigido}).${sufixo}`, F.cid);
+    }
+  }
+
+  // AG-14 CID principal (37) x CID da topografia (57)
+  const cidTopografia = lerTexto(campos, "cidTopografia");
+  if (cid && cidTopografia && normCid(cid) !== normCid(cidTopografia))
+    vermelho("AG-14", "cidPrincipal", `CID principal ${cid} difere do CID da topografia ${cidTopografia}.`, F.laudo);
+
+  // AG-15 bloco de radioterapia preenchido sem RT solicitada
+  const bloco = lerCampo(campos, "blocoRadioterapia");
+  const rtSolicitada = lerCampo(campos, "radioterapiaSolicitada");
+  const solicitada = rtSolicitada.estado === "PRESENTE" && rtSolicitada.valor === true;
+  if (bloco.estado === "PRESENTE" && temConteudo(bloco.valor) && !solicitada)
+    vermelho("AG-15", "blocoRadioterapia", "RT preenchida sem RT solicitada.", F.laudo);
+
+  // AG-16 tratamentos anteriores: ciclos do mesmo esquema lançados como tratamentos com a mesma data
+  const anteriores = lerCampo(campos, "tratamentosAnteriores");
+  if (anteriores.estado === "PRESENTE" && Array.isArray(anteriores.valor)) {
+    const grupos = new Map<string, string[]>();
+    for (const t of anteriores.valor) {
+      if (!t || typeof t !== "object") continue;
+      const esq = (t as { esquema?: unknown }).esquema;
+      const dat = (t as { dataInicio?: unknown }).dataInicio;
+      if (typeof esq !== "string" || typeof dat !== "string") continue;
+      const chave = normEsquema(esq).replace(/\b(CICLO|C)\s*\d+\b/g, "").replace(/\s+/g, " ").trim();
+      grupos.set(chave, [...(grupos.get(chave) ?? []), dat]);
+    }
+    for (const [esq, datas] of grupos)
+      if (datas.length >= 2 && new Set(datas).size === 1)
+        vermelho("AG-16", "tratamentosAnteriores",
+          `ciclos lançados como tratamentos: ${datas.length} entradas de "${esq}" com a mesma data (${datas[0]}). A caixa pede tratamentos/esquemas anteriores, não ciclos.`, F.laudo);
+  }
+
+  // AG-17 código SIGTAP do principal ausente da tabela local de referência
+  const codPrincipal = lerTexto(campos, "procedimentoPrincipal");
+  if (ctx.codigosSigtapLocal && codPrincipal && codigoProcValido(codPrincipal)
+    && !ctx.codigosSigtapLocal.has(normalizarCodigoProc(codPrincipal)))
+    pendente("AG-17", "procedimentoPrincipal",
+      `código ${normalizarCodigoProc(codPrincipal)} não consta da tabela local; conferir código na tabela vigente.`, F.sigtap);
+
+  // AG-18 esquema da APAC x esquema da prescrição/ficha vigente
+  if (ctx.esquemaVigente) {
+    const esq = lerTexto(campos, "esquemaApac");
+    if (esq === null)
+      pendente("AG-18", "esquemaApac", "esquema da APAC não informado; não dá para comparar com a ficha vigente.", F.laudo);
+    else if (normEsquema(esq) !== normEsquema(ctx.esquemaVigente))
+      vermelho("AG-18", "esquemaApac", `esquema da APAC (${esq}) difere do esquema da prescrição/ficha vigente (${ctx.esquemaVigente}).`, F.laudo);
+  }
+
+  return out;
 }
 
 export function antiglosa(apac: Apac, ctx: ContextoAntiglosa): VereditoAntiglosa {
@@ -183,6 +286,8 @@ export function antiglosa(apac: Apac, ctx: ContextoAntiglosa): VereditoAntiglosa
     else if (dias >= DIA_AVISO_APAC)
       add("AG-11", "dataSolicitacao", "ALERTA", `APAC com ${dias} dias: aviso D${DIA_AVISO_APAC}; vence em D${DIA_VENCIDA_APAC}.`, F.prazo);
   }
+
+  achados.push(...gatesCoerencia(apac, ctx));
 
   return VereditoAntiglosa.parse({
     apacId: apac.apacId, competencia: apac.competencia, achados,

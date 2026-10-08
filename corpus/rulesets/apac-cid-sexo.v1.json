@@ -1,0 +1,19 @@
+{
+  "header": { "id": "apac-cid-sexo", "versao": "1.0.0", "vigenteDesde": "2026-10-08",
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "APAC-MAPA-DE-CAIXAS.md, anomalias 1 e 2 (W11-H8); tabela de compatibilidade CID x sexo por prefixo da CID-10 (neoplasias de órgão de sexo único)", "trecho": null, "edicao": null },
+    "curador": "PENDENTE: curadoria do Dr. Silas Negrão", "aprovadoEm": "2026-10-08" },
+  "nota": "Gate AG-13. Cada regra: prefixo da CID-10 (3 caracteres) e sexo exigido pelo órgão. Sexo ausente não é avaliado aqui (PENDENTE tratado no campo). Ampliar só com curadoria.",
+  "regras": [
+    { "prefixo": "C50", "sexoExigido": "F", "descricao": "neoplasia maligna de mama" },
+    { "prefixo": "C51", "sexoExigido": "F", "descricao": "neoplasia maligna de vulva" },
+    { "prefixo": "C52", "sexoExigido": "F", "descricao": "neoplasia maligna de vagina" },
+    { "prefixo": "C53", "sexoExigido": "F", "descricao": "neoplasia maligna do colo do útero" },
+    { "prefixo": "C54", "sexoExigido": "F", "descricao": "neoplasia maligna do corpo do útero" },
+    { "prefixo": "C56", "sexoExigido": "F", "descricao": "neoplasia maligna do ovário" },
+    { "prefixo": "C57", "sexoExigido": "F", "descricao": "neoplasia maligna de outros órgãos genitais femininos" },
+    { "prefixo": "C61", "sexoExigido": "M", "descricao": "neoplasia maligna da próstata" },
+    { "prefixo": "C62", "sexoExigido": "M", "descricao": "neoplasia maligna do testículo" },
+    { "prefixo": "C60", "sexoExigido": "M", "descricao": "neoplasia maligna do pênis" },
+    { "prefixo": "C63", "sexoExigido": "M", "descricao": "neoplasia maligna de outros órgãos genitais masculinos" }
+  ]
+}
