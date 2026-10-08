@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { PortaConsulta, PedidoBundle } from "../api/porta.js";
-import type { FonteRevisao, PedidoRevisaoExtracao, RevisaoPreparada } from "../api/revisaoExtracao.js";
+import type { FonteRevisao, PedidoRevisaoExtracao, ReconciliacaoProposta, RevisaoPreparada } from "../api/revisaoExtracao.js";
 import { ErroPorta } from "../api/porta.js";
 
 /** Linked sources are reviewed locally, independently of provider availability. */
@@ -9,11 +9,13 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
 }) {
   const [fontes, setFontes] = useState<Array<{ draftId: string; rotulo: string }>>([]);
   const [fontesSemVinculo, setFontesSemVinculo] = useState<Array<{ draftId: string; sourceId: string;
-    exceptionId: string | null; rotulo: string; criadoEm: string; revision: number; textoOriginal: string }>>([]);
+    segmentId: string | null; exceptionId: string | null; rotulo: string; criadoEm: string; revision: number; textoOriginal: string }>>([]);
   const [fontePendenteId, setFontePendenteId] = useState("");
   const [fonte, setFonte] = useState<FonteRevisao["draft"] | null>(null);
   const [ids, setIds] = useState<string[]>([]);
   const [preparada, setPreparada] = useState<{ pedido: PedidoRevisaoExtracao; resposta: RevisaoPreparada } | null>(null);
+  const [fontesSelecionadas, setFontesSelecionadas] = useState<string[]>([]);
+  const [reconciliacao, setReconciliacao] = useState<ReconciliacaoProposta | null>(null);
   const [ocupado, setOcupado] = useState(false);
   const [mensagem, setMensagem] = useState("");
   const [concluida, setConcluida] = useState(false);
@@ -27,7 +29,7 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
     const abort = new AbortController();
     controller.current = abort;
     setFonte(null); setIds([]); setPreparada(null); setConcluida(false); setFontes([]);
-    setFontesSemVinculo([]); setFontePendenteId(""); setMensagem("");
+    setFontesSemVinculo([]); setFontePendenteId(""); setFontesSelecionadas([]); setReconciliacao(null); setMensagem("");
     emCurso.current = false; setOcupado(false);
     if (porta.oncoassistFontes && porta.carregarFonteRevisao) {
       void porta.oncoassistFontes({ patientId, encounterId, tumorLotId }, abort.signal)
@@ -101,6 +103,19 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
     });
   }
 
+  async function reconciliar() {
+    if (fontesSelecionadas.length < 2 || !porta.reconciliarFontes) return;
+    setReconciliacao(null);
+    await executar(async (atual) => {
+      const resultado = await porta.reconciliarFontes!(fontesSelecionadas, controller.current?.signal);
+      if (atual !== geracao.current) return;
+      if (resultado.decisaoClinicaTomada || resultado.contexto.patientId !== patientId
+        || resultado.contexto.encounterId !== encounterId
+        || resultado.contexto.tumorLotId !== (tumorLotId ?? null)) throw new Error("ESCOPO_RECONCILIACAO_DIVERGENTE");
+      setReconciliacao(resultado);
+    });
+  }
+
   async function confirmar() {
     if (!preparada || !porta.confirmarRevisaoExtracao || concluida) return;
     await executar(async (atual) => {
@@ -117,9 +132,9 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
     <p>Selecione os achados, confira o resumo e registre sua revisão.</p>
     {mensagem ? <p role="status">{mensagem}</p> : null}
     {fontesSemVinculo.length ? <section aria-label="Fontes sem vínculo">
-      <h3>Fontes sem paciente vinculado</h3>
-      <p>O vínculo exige sua escolha explícita. Confira o original antes de associar a fonte a {patientLabel ?? patientId} ({patientId}).</p>
-      <label>Fonte sem vínculo <select aria-label="Fonte sem vínculo" disabled={ocupado}
+      <h3>Trechos sem paciente vinculado</h3>
+      <p>O vínculo exige sua escolha explícita. Confira o trecho original antes de associá-lo a {patientLabel ?? patientId} ({patientId}).</p>
+      <label>Trecho sem vínculo <select aria-label="Trecho sem vínculo" disabled={ocupado}
         value={fontePendenteId} onChange={(e) => setFontePendenteId(e.target.value)}>
         <option value="">Selecione uma fonte</option>
         {fontesSemVinculo.map((item) => <option key={item.draftId} value={item.draftId}>{item.rotulo} · {item.sourceId}</option>)}
@@ -129,8 +144,47 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
         <pre style={{ whiteSpace: "pre-wrap" }}>{fontesSemVinculo.find((item) => item.draftId === fontePendenteId)!.textoOriginal}</pre>
         <button type="button" disabled={ocupado || !porta.vincularFonteRevisao
           || !fontesSemVinculo.find((item) => item.draftId === fontePendenteId)?.exceptionId}
-          onClick={() => void vincularFontePendente()}>Confirmar vínculo com {patientLabel ?? patientId} · {patientId}</button>
+          onClick={() => void vincularFontePendente()}>Confirmar vínculo deste trecho com {patientLabel ?? patientId} · {patientId}</button>
       </> : null}
+    </section> : null}
+    {fontes.length >= 2 && porta.reconciliarFontes ? <section aria-label="Reconciliar fontes vinculadas">
+      <h3>Confrontar fontes da consulta</h3>
+      <p>A comparação é uma proposta. Fatos repetidos permanecem disponíveis; nenhum regime ou conflito é resolvido automaticamente.</p>
+      <fieldset disabled={ocupado}><legend>Fontes explicitamente vinculadas</legend>
+        {fontes.map((item) => <label key={item.draftId} style={{ display: "block" }}>
+          <input type="checkbox" checked={fontesSelecionadas.includes(item.draftId)} onChange={(e) => {
+            setReconciliacao(null);
+            setFontesSelecionadas((antes) => e.target.checked ? [...antes, item.draftId]
+              : antes.filter((id) => id !== item.draftId));
+          }} />{item.rotulo} · {item.draftId}
+        </label>)}
+      </fieldset>
+      <button type="button" disabled={ocupado || fontesSelecionadas.length < 2}
+        onClick={() => void reconciliar()}>Confrontar fontes selecionadas</button>
+    </section> : null}
+    {reconciliacao ? <section aria-label="Proposta de reconciliação">
+      <h3>Proposta de reconciliação · revisão médica pendente</h3>
+      <p>Encontro {reconciliacao.contexto.encounterId} · data clínica comum {reconciliacao.contexto.dataClinica}. Nenhum fato foi gravado.</p>
+      {reconciliacao.conflitos.length ? <section aria-label="Conflitos preservados">
+        <h4>Conflitos preservados para decisão</h4>
+        <ul>{reconciliacao.conflitos.map((item) => <li key={item.id}>{item.reason}
+          <small> Fontes: {item.sourceIds.join(", ")} · fatos: {item.factIds.join(", ")}</small></li>)}</ul>
+      </section> : <p>Nenhum conflito explícito encontrado neste conjunto.</p>}
+      {reconciliacao.deduplicacao.repeticoes.length || reconciliacao.deduplicacao.versoesDiscordantes.length
+        ? <section aria-label="Repetições propostas">
+          <h4>Repetições/versões propostas — fontes preservadas</h4>
+          {reconciliacao.deduplicacao.repeticoes.map((item) => <p key={item.chaveExame}>
+            PENDENTE_REVISAO · {item.fatoPrincipalIds.length} fato(s) principal(is), {item.fatoRepetidoIds.length} repetido(s) · fontes {item.fontes.map((fonte) => fonte.sourceId).join(", ")}
+          </p>)}
+          {reconciliacao.deduplicacao.versoesDiscordantes.map((item) => <p key={item.chaveExame}>
+            Versões discordantes · fatos {item.factIds.join(", ")}
+          </p>)}
+        </section> : <p>Nenhuma repetição documental proposta.</p>}
+      <details><summary>Fatos e trechos preservados ({reconciliacao.fatos.length})</summary>
+        <ul>{reconciliacao.fatos.map((fact) => <li key={fact.id}>{fact.domain} · {fact.rawEvidence}
+          <small> Fonte {fact.sourceId} · segmento {fact.segmentId} · {fact.evidence}{fact.requiresConfirmation ? " · confirmação pendente" : ""}</small>
+        </li>)}</ul>
+      </details>
     </section> : null}
     <label>Fonte para revisão <select aria-label="Fonte para revisão" disabled={ocupado}
       onChange={(e) => void abrir(e.target.value)} defaultValue="">
@@ -138,6 +192,8 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
       {fontes.map((f) => <option key={f.draftId} value={f.draftId}>{f.rotulo}</option>)}
     </select></label>
     {fonte ? <>
+      {fonte.payload.patientLinkReview.segmentId
+        ? <p>Trecho vinculado explicitamente: {fonte.payload.patientLinkReview.segmentId}</p> : null}
       <h3>Texto original</h3><pre style={{ whiteSpace: "pre-wrap" }}>{fonte.payload.input.rawTranscript}</pre>
       {fonte.payload.alertasRads?.length ? <section aria-label="Alertas RADS para revisão">
         <h3>Alertas de imagem — confirmação médica pendente</h3>
