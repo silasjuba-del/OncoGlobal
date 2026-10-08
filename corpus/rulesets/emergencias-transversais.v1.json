@@ -1,0 +1,471 @@
+{
+  "header": {
+    "id": "emergencias-transversais",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-08",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "PLN-003 §5 a §9 (M-D, emergências como camada transversal); PLN-020 Camada 1 (M-X, triggers); PLN-030 §8 (M-AH, emergências radiológicas)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-08"
+  },
+  "schemaVersion": "emergencias-transversais.v1",
+  "status": "RASCUNHO",
+  "consumivel": false,
+  "regras": {
+    "semDoses": true,
+    "semCondutaFixa": true,
+    "semPorcentagem": true,
+    "prioridadeEhDoMedico": true,
+    "kitEhCategoriaDeAcao": true
+  },
+  "kitCategorias": [
+    { "id": "DESTINO", "nome": "DESTINO" },
+    { "id": "LAB", "nome": "LAB" },
+    { "id": "MICROBIOLOGIA", "nome": "MICROBIOLOGIA" },
+    { "id": "RAD", "nome": "RAD" },
+    { "id": "TRATAMENTO", "nome": "TRATAMENTO" },
+    { "id": "ENCAMINHAMENTO", "nome": "ENCAMINHAMENTO" },
+    { "id": "SUPORTE", "nome": "SUPORTE" },
+    { "id": "OUTROS", "nome": "OUTROS [+]", "outros": true }
+  ],
+  "emergencias": [
+    {
+      "id": "NEUTROPENIA_FEBRIL",
+      "nome": "Neutropenia febril",
+      "origem": ["M-D §5 e §7", "M-X Camada 1 (NEUTROPENIA_FEBRIL)"],
+      "minimoPresentes": 2,
+      "achados": [
+        { "id": "febre", "rotulo": "temperatura elevada registrada" },
+        { "id": "anc_baixo", "rotulo": "contagem de neutrófilos absoluta baixa" },
+        { "id": "quimioterapia_recente", "rotulo": "quimioterapia recente" }
+      ],
+      "pendencias": [
+        { "id": "pa", "rotulo": "pressão arterial" },
+        { "id": "perfusao", "rotulo": "perfusão" },
+        { "id": "foco_infeccioso", "rotulo": "foco infeccioso" },
+        { "id": "funcao_renal", "rotulo": "função renal" },
+        { "id": "alergias", "rotulo": "alergias" }
+      ],
+      "kit": ["DESTINO", "LAB", "MICROBIOLOGIA", "RAD", "TRATAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "SEPSE_ONCOLOGICA",
+      "nome": "Sepse oncológica",
+      "origem": ["M-D §5", "M-X Camada 1 (SEPSE_ONCOLÓGICA)"],
+      "minimoPresentes": 2,
+      "achados": [
+        { "id": "febre", "rotulo": "temperatura elevada registrada" },
+        { "id": "anc_baixo", "rotulo": "contagem de neutrófilos absoluta baixa" },
+        { "id": "hipoperfusao", "rotulo": "sinais de hipoperfusão ou hemoinsuficiência" }
+      ],
+      "pendencias": [
+        { "id": "pa", "rotulo": "pressão arterial" },
+        { "id": "lactato", "rotulo": "lactato" },
+        { "id": "foco_infeccioso", "rotulo": "foco infeccioso" },
+        { "id": "funcao_renal", "rotulo": "função renal" }
+      ],
+      "kit": ["DESTINO", "LAB", "MICROBIOLOGIA", "RAD", "TRATAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "COMPRESSAO_MEDULAR",
+      "nome": "Compressão medular",
+      "origem": ["M-D §5 e §9", "M-X Camada 1 (COMPRESSÃO_MEDULAR)", "M-AH §8"],
+      "minimoPresentes": 2,
+      "achados": [
+        { "id": "cancer_conhecido", "rotulo": "câncer conhecido" },
+        { "id": "dor_vertebral", "rotulo": "dor vertebral ou dorsal" },
+        { "id": "deficit_motor_sensitivo", "rotulo": "déficit motor ou sensitivo" },
+        { "id": "disfuncao_esfincteriana", "rotulo": "disfunção esfincteriana" },
+        { "id": "efeito_massa_raiz", "rotulo": "efeito de massa em raiz nervosa ou compressão medular no laudo" },
+        { "id": "lesao_vertebral_epidural", "rotulo": "lesão vertebral com componente epidural" }
+      ],
+      "pendencias": [
+        { "id": "rm_coluna", "rotulo": "RM de coluna" },
+        { "id": "estabilidade_vertebral", "rotulo": "estabilidade vertebral" }
+      ],
+      "kit": ["DESTINO", "RAD", "TRATAMENTO", "ENCAMINHAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "SINDROME_VCS",
+      "nome": "Síndrome da veia cava superior",
+      "origem": ["M-D §5", "M-AH §8"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "edema_face_membros_superiores", "rotulo": "edema de face e membros superiores" },
+        { "id": "compressao_ou_trombose_vcs", "rotulo": "compressão ou trombose da veia cava superior no laudo" },
+        { "id": "circulacao_colateral", "rotulo": "circulação colateral" }
+      ],
+      "pendencias": [
+        { "id": "via_aerea", "rotulo": "via aérea" },
+        { "id": "sintomas_neurologicos", "rotulo": "sintomas neurológicos" }
+      ],
+      "kit": ["DESTINO", "RAD", "LAB", "ENCAMINHAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "HIPERCALCEMIA",
+      "nome": "Hipercalcemia",
+      "origem": ["M-D §5 e §8", "M-X Camada 1 (HIPERCALCEMIA_SEVERA)"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "calcio_elevado", "rotulo": "cálcio sérico elevado" },
+        { "id": "calcio_ionizado_elevado", "rotulo": "cálcio ionizado elevado" },
+        { "id": "sintomas_neurologicos_hipercalcemia", "rotulo": "sintomas neurológicos ou digestivos" }
+      ],
+      "pendencias": [
+        { "id": "funcao_renal", "rotulo": "função renal" },
+        { "id": "hidratacao_previa", "rotulo": "hidratação prévia" },
+        { "id": "eletrocardiograma", "rotulo": "eletrocardiograma" }
+      ],
+      "kit": ["LAB", "TRATAMENTO", "SUPORTE", "DESTINO"]
+    },
+    {
+      "id": "TEP_ALTO_RISCO",
+      "nome": "Tromboembolismo pulmonar de alto risco",
+      "origem": ["M-D §5", "M-AH §8 (TEP)"],
+      "minimoPresentes": 2,
+      "achados": [
+        { "id": "dispneia_subita", "rotulo": "dispneia de início recente" },
+        { "id": "taquicardia", "rotulo": "taquicardia" },
+        { "id": "dessaturacao", "rotulo": "dessaturação" },
+        { "id": "falha_enchimento_arteria_pulmonar", "rotulo": "falha de enchimento em artéria pulmonar no laudo" },
+        { "id": "sobrecarga_vd", "rotulo": "sobrecarga de ventrículo direito no laudo" }
+      ],
+      "pendencias": [
+        { "id": "pa", "rotulo": "pressão arterial" },
+        { "id": "lesao_vd_ecocardio", "rotulo": "avaliação de ventrículo direito" }
+      ],
+      "kit": ["DESTINO", "LAB", "RAD", "TRATAMENTO", "ENCAMINHAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "HEMOPTISE_MACICA",
+      "nome": "Hemoptise maciça",
+      "origem": ["M-D §5"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "hemoptise_volumosa", "rotulo": "hemoptise volumosa" },
+        { "id": "instabilidade_respiratoria", "rotulo": "instabilidade respiratória" }
+      ],
+      "pendencias": [
+        { "id": "via_aerea", "rotulo": "via aérea" },
+        { "id": "coagulacao", "rotulo": "coagulação" },
+        { "id": "plaquetas", "rotulo": "plaquetas" }
+      ],
+      "kit": ["DESTINO", "LAB", "RAD", "ENCAMINHAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "HEMORRAGIA",
+      "nome": "Hemorragia",
+      "origem": ["M-D §5", "M-X Camada 1 (HEMORRAGIA_GI_SEVERA)", "M-AH §8"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "sangramento_ativo", "rotulo": "sangramento ativo" },
+        { "id": "hematemese", "rotulo": "hematemese" },
+        { "id": "queda_hemoglobina", "rotulo": "queda de hemoglobina" },
+        { "id": "instabilidade_hemodinamica", "rotulo": "instabilidade hemodinâmica" },
+        { "id": "hematoma_tumoral", "rotulo": "hematoma ou sangramento tumoral no laudo" }
+      ],
+      "pendencias": [
+        { "id": "tipagem_sanguinea", "rotulo": "tipagem sanguínea" },
+        { "id": "coagulacao", "rotulo": "coagulação" },
+        { "id": "plaquetas", "rotulo": "plaquetas" }
+      ],
+      "kit": ["DESTINO", "LAB", "RAD", "ENCAMINHAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "OBSTRUCAO_INTESTINAL",
+      "nome": "Obstrução intestinal",
+      "origem": ["M-D §5", "M-AH §8"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "vomito", "rotulo": "vômito" },
+        { "id": "parada_eliminacao", "rotulo": "parada de eliminação de gases e fezes" },
+        { "id": "distensao_alcas", "rotulo": "distensão de alças no laudo" },
+        { "id": "nivel_hidroaereo", "rotulo": "nível hidroaéreo no laudo" },
+        { "id": "ponto_transicao", "rotulo": "ponto de transição no laudo" }
+      ],
+      "pendencias": [
+        { "id": "abdome_exame", "rotulo": "exame físico de abdome" },
+        { "id": "funcao_renal", "rotulo": "função renal" }
+      ],
+      "kit": ["DESTINO", "LAB", "RAD", "ENCAMINHAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "PERFURACAO",
+      "nome": "Perfuração",
+      "origem": ["M-D §5", "M-AH §8"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "abdome_agudo", "rotulo": "abdome agudo" },
+        { "id": "pneumoperitonio", "rotulo": "pneumoperitônio ou ar livre no laudo" }
+      ],
+      "pendencias": [
+        { "id": "uso_bevacizumabe", "rotulo": "uso recente de bevacizumabe" },
+        { "id": "sinais_peritoneais", "rotulo": "sinais de irritação peritoneal" }
+      ],
+      "kit": ["DESTINO", "LAB", "RAD", "ENCAMINHAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "HIPERTENSAO_INTRACRANIANA",
+      "nome": "Hipertensão intracraniana e metástase cerebral com efeito de massa",
+      "origem": ["M-D §5", "M-X Camada 1 (METÁSTASE_CEREBRAL_COM_EDEMA)", "M-AH §8"],
+      "minimoPresentes": 2,
+      "achados": [
+        { "id": "cefaleia", "rotulo": "cefaleia" },
+        { "id": "vomito", "rotulo": "vômito" },
+        { "id": "deficit_focal", "rotulo": "déficit focal" },
+        { "id": "convulsao", "rotulo": "convulsão" },
+        { "id": "edema_perilesional", "rotulo": "edema perilesional no laudo" },
+        { "id": "desvio_linha_media", "rotulo": "desvio da linha média no laudo" },
+        { "id": "hidrocefalia", "rotulo": "hidrocefalia no laudo" }
+      ],
+      "pendencias": [
+        { "id": "rebaixamento_consciencia", "rotulo": "nível de consciência" },
+        { "id": "pupilas", "rotulo": "pupilas" }
+      ],
+      "kit": ["DESTINO", "RAD", "TRATAMENTO", "ENCAMINHAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "CRISE_EPILEPTICA",
+      "nome": "Crise epiléptica",
+      "origem": ["M-D §5"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "crise_convulsiva", "rotulo": "crise convulsiva" },
+        { "id": "estado_pos_ictal_prolongado", "rotulo": "rebaixamento prolongado após a crise" }
+      ],
+      "pendencias": [
+        { "id": "glicemia", "rotulo": "glicemia" },
+        { "id": "sodio", "rotulo": "sódio" },
+        { "id": "lesao_sno_laudo", "rotulo": "lesão do sistema nervoso central no laudo" }
+      ],
+      "kit": ["DESTINO", "LAB", "RAD", "TRATAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "HIPONATREMIA_SIADH_GRAVE",
+      "nome": "Hiponatremia grave (SIADH)",
+      "origem": ["M-D §5", "M-X Camada 1 (HIPONATREMIA_SEVERA)"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "sodio_baixo", "rotulo": "sódio sérico baixo" },
+        { "id": "sintomas_neurologicos_sodio", "rotulo": "sintomas neurológicos" }
+      ],
+      "pendencias": [
+        { "id": "osmolalidade", "rotulo": "osmolalidade" },
+        { "id": "funcao_renal", "rotulo": "função renal" },
+        { "id": "medicamentos_em_uso", "rotulo": "medicamentos em uso" }
+      ],
+      "kit": ["LAB", "TRATAMENTO", "SUPORTE", "DESTINO"]
+    },
+    {
+      "id": "SINDROME_LISE_TUMORAL",
+      "nome": "Síndrome de lise tumoral",
+      "origem": ["M-D §5", "M-X Camada 1 (SÍNDROME_LISE_TUMORAL)"],
+      "minimoPresentes": 2,
+      "achados": [
+        { "id": "potassio_elevado", "rotulo": "potássio sérico elevado" },
+        { "id": "fosforo_elevado", "rotulo": "fósforo sérico elevado" },
+        { "id": "acido_urico_elevado", "rotulo": "ácido úrico elevado" },
+        { "id": "creatinina_elevada", "rotulo": "creatinina elevada em relação à basal" }
+      ],
+      "pendencias": [
+        { "id": "ecg", "rotulo": "eletrocardiograma" },
+        { "id": "diurese", "rotulo": "diurese" },
+        { "id": "calcio", "rotulo": "cálcio sérico" }
+      ],
+      "kit": ["LAB", "TRATAMENTO", "SUPORTE", "DESTINO"]
+    },
+    {
+      "id": "SINDROME_MEDIASTINAL",
+      "nome": "Síndrome mediastinal",
+      "origem": ["M-X Camada 1 (SÍNDROME_MEDIASTINAL)"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "massa_mediastinal_volumosa", "rotulo": "massa mediastinal volumosa no laudo" },
+        { "id": "derrame_pericardico_relevante", "rotulo": "derrame pericárdico relevante no laudo" },
+        { "id": "tamponamento", "rotulo": "tamponamento cardíaco no laudo" }
+      ],
+      "pendencias": [
+        { "id": "pa", "rotulo": "pressão arterial" },
+        { "id": "ecocardiograma", "rotulo": "ecocardiograma" }
+      ],
+      "kit": ["DESTINO", "RAD", "ENCAMINHAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "TAMPONAMENTO_PERICARDICO",
+      "nome": "Tamponamento pericárdico",
+      "origem": ["M-AH §8"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "derrame_pericardico_volumoso", "rotulo": "derrame pericárdico volumoso no laudo" },
+        { "id": "colapso_camaras_direitas", "rotulo": "colapso de câmaras direitas no laudo" },
+        { "id": "hipotensao", "rotulo": "hipotensão" },
+        { "id": "turgencia_jugular", "rotulo": "turgência jugular" }
+      ],
+      "pendencias": [
+        { "id": "pa", "rotulo": "pressão arterial" },
+        { "id": "ecocardiograma", "rotulo": "ecocardiograma" }
+      ],
+      "kit": ["DESTINO", "RAD", "ENCAMINHAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "DERRAME_PLEURAL_VOLUMOSO",
+      "nome": "Derrame pleural volumoso",
+      "origem": ["M-AH §8"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "derrame_pleural_volumoso", "rotulo": "derrame pleural volumoso no laudo" },
+        { "id": "desvio_mediastino", "rotulo": "desvio do mediastino no laudo" },
+        { "id": "atelectasia", "rotulo": "atelectasia no laudo" },
+        { "id": "dispneia", "rotulo": "dispneia" }
+      ],
+      "pendencias": [
+        { "id": "saturacao", "rotulo": "saturação" },
+        { "id": "gasometria", "rotulo": "gasometria" }
+      ],
+      "kit": ["DESTINO", "RAD", "ENCAMINHAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "OBSTRUCAO_VIAS_AEREAS",
+      "nome": "Obstrução de via aérea",
+      "origem": ["M-X Camada 1 (OBSTRUÇÃO_VIAS_AÉREAS)", "M-AH §8"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "estridor", "rotulo": "estridor" },
+        { "id": "estenose_traqueal_bronquica", "rotulo": "estenose traqueal ou brônquica no laudo" },
+        { "id": "tumor_laringe_faringe", "rotulo": "tumor de laringe ou faringe com obstrução da luz no laudo" },
+        { "id": "atelectasia_lobar", "rotulo": "atelectasia lobar no laudo" },
+        { "id": "dispneia", "rotulo": "dispneia" }
+      ],
+      "pendencias": [
+        { "id": "via_aerea", "rotulo": "via aérea" },
+        { "id": "voz", "rotulo": "voz" }
+      ],
+      "kit": ["DESTINO", "RAD", "ENCAMINHAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "HIDRONEFROSE_BILATERAL",
+      "nome": "Hidronefrose bilateral ou rim único",
+      "origem": ["M-AH §8"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "dilatacao_pielocalicial_bilateral", "rotulo": "dilatação pielocalicial bilateral no laudo" },
+        { "id": "rim_unico", "rotulo": "rim único" },
+        { "id": "oliguria", "rotulo": "oligúria" },
+        { "id": "creatinina_subindo", "rotulo": "creatinina em elevação" }
+      ],
+      "pendencias": [
+        { "id": "diurese", "rotulo": "diurese" },
+        { "id": "funcao_renal", "rotulo": "função renal" }
+      ],
+      "kit": ["LAB", "RAD", "ENCAMINHAMENTO", "SUPORTE", "DESTINO"]
+    },
+    {
+      "id": "OBSTRUCAO_BILIAR_COLANGITE",
+      "nome": "Obstrução biliar com risco de colangite",
+      "origem": ["M-AH §8"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "dilatacao_vias_biliares", "rotulo": "dilatação de vias biliares no laudo" },
+        { "id": "icterica", "rotulo": "icterícia" },
+        { "id": "febre_colangite", "rotulo": "febre" }
+      ],
+      "pendencias": [
+        { "id": "bilirrubinas", "rotulo": "bilirrubinas" },
+        { "id": "funcao_renal", "rotulo": "função renal" },
+        { "id": "hemograma", "rotulo": "hemograma" }
+      ],
+      "kit": ["LAB", "RAD", "ENCAMINHAMENTO", "TRATAMENTO", "DESTINO"]
+    },
+    {
+      "id": "FRATURA_PATOLOGICA",
+      "nome": "Fratura patológica ou risco iminente",
+      "origem": ["M-AH §8"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "lesao_litica_osso_carga", "rotulo": "lesão lítica em osso de carga no laudo" },
+        { "id": "cortical_comprometida", "rotulo": "cortical comprometida no laudo" },
+        { "id": "dor_apoio", "rotulo": "dor ao apoio" }
+      ],
+      "pendencias": [
+        { "id": "imobilidade", "rotulo": "mobilidade" },
+        { "id": "ortopedia", "rotulo": "avaliação ortopédica" }
+      ],
+      "kit": ["RAD", "ENCAMINHAMENTO", "SUPORTE", "DESTINO"]
+    },
+    {
+      "id": "PNEUMONITE_GRAVE",
+      "nome": "Pneumonite",
+      "origem": ["M-AH §8"],
+      "minimoPresentes": 2,
+      "achados": [
+        { "id": "opacidade_vidro_fosco_nova", "rotulo": "opacidades em vidro fosco novas no laudo" },
+        { "id": "padrao_intersticial", "rotulo": "padrão intersticial no laudo" },
+        { "id": "tosse_seca", "rotulo": "tosse seca" },
+        { "id": "dispneia", "rotulo": "dispneia" },
+        { "id": "uso_droga_pneumonite", "rotulo": "uso recente de medicamento associado a pneumonite" }
+      ],
+      "pendencias": [
+        { "id": "saturacao", "rotulo": "saturação" },
+        { "id": "infeccao_excluida", "rotulo": "infecção excluída" },
+        { "id": "tc_repetida", "rotulo": "nova tomografia para confirmação" }
+      ],
+      "kit": ["DESTINO", "LAB", "RAD", "MICROBIOLOGIA", "ENCAMINHAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "LEUCOSTASE",
+      "nome": "Leucostase",
+      "origem": ["M-X Camada 1 (LEUCOSTASE)"],
+      "minimoPresentes": 2,
+      "achados": [
+        { "id": "leucocitose_muito_elevada", "rotulo": "leucocitose muito elevada" },
+        { "id": "sintomas_snc", "rotulo": "sintomas do sistema nervoso central" },
+        { "id": "dispneia", "rotulo": "dispneia" }
+      ],
+      "pendencias": [
+        { "id": "hemograma", "rotulo": "hemograma" },
+        { "id": "coagulacao", "rotulo": "coagulação" },
+        { "id": "tc_cranio", "rotulo": "tomografia de crânio" }
+      ],
+      "kit": ["DESTINO", "LAB", "RAD", "TRATAMENTO", "ENCAMINHAMENTO", "SUPORTE"]
+    },
+    {
+      "id": "COAGULOPATIA_DIC",
+      "nome": "Coagulopatia e coagulação intravascular disseminada",
+      "origem": ["M-X Camada 1 (COAGULOPATIA_DIC)"],
+      "minimoPresentes": 2,
+      "achados": [
+        { "id": "plaquetas_baixas", "rotulo": "plaquetas baixas" },
+        { "id": "tp_tt_prolongado", "rotulo": "tempo de protrombina ou tromboplastina prolongado" },
+        { "id": "fibrinogenio_baixo", "rotulo": "fibrinogênio baixo" },
+        { "id": "sangramento_ativo", "rotulo": "sangramento ativo" }
+      ],
+      "pendencias": [
+        { "id": "hemograma", "rotulo": "hemograma" },
+        { "id": "coagulacao", "rotulo": "coagulação" },
+        { "id": "funcao_hepatica", "rotulo": "função hepática" }
+      ],
+      "kit": ["DESTINO", "LAB", "TRATAMENTO", "SUPORTE", "ENCAMINHAMENTO"]
+    },
+    {
+      "id": "TROMBOSE_VENOSA",
+      "nome": "Trombose venosa profunda ou trombose tumoral",
+      "origem": ["M-X Camada 1 (TROMBOSE_VENOSA)", "M-AH §8"],
+      "minimoPresentes": 1,
+      "achados": [
+        { "id": "edema_membro", "rotulo": "edema de membro" },
+        { "id": "trombo_venoso_laudo", "rotulo": "trombo venoso no laudo" },
+        { "id": "trombose_portal_laudo", "rotulo": "trombose portal no laudo" },
+        { "id": "tvp_bilateral", "rotulo": "trombose venosa profunda bilateral" }
+      ],
+      "pendencias": [
+        { "id": "anticoagulacao_previa", "rotulo": "anticoagulação em curso" },
+        { "id": "plaquetas", "rotulo": "plaquetas" }
+      ],
+      "kit": ["DESTINO", "RAD", "LAB", "TRATAMENTO", "ENCAMINHAMENTO"]
+    }
+  ]
+}
