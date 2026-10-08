@@ -1,10 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import type { PortaConsulta, PedidoBundle } from "../api/porta.js";
 import type { FonteRevisao, PedidoRevisaoExtracao, RevisaoPreparada } from "../api/revisaoExtracao.js";
+import { ErroPorta } from "../api/porta.js";
 
 /** Linked sources are reviewed locally, independently of provider availability. */
-export function RevisaoExtracaoLocal({ porta, contexto }: { porta: PortaConsulta; contexto: PedidoBundle }) {
+export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
+  porta: PortaConsulta; contexto: PedidoBundle; patientLabel?: string;
+}) {
   const [fontes, setFontes] = useState<Array<{ draftId: string; rotulo: string }>>([]);
+  const [fontesSemVinculo, setFontesSemVinculo] = useState<Array<{ draftId: string; sourceId: string;
+    exceptionId: string | null; rotulo: string; criadoEm: string; revision: number; textoOriginal: string }>>([]);
+  const [fontePendenteId, setFontePendenteId] = useState("");
   const [fonte, setFonte] = useState<FonteRevisao["draft"] | null>(null);
   const [ids, setIds] = useState<string[]>([]);
   const [preparada, setPreparada] = useState<{ pedido: PedidoRevisaoExtracao; resposta: RevisaoPreparada } | null>(null);
@@ -20,11 +26,12 @@ export function RevisaoExtracaoLocal({ porta, contexto }: { porta: PortaConsulta
     const atual = ++geracao.current;
     const abort = new AbortController();
     controller.current = abort;
-    setFonte(null); setIds([]); setPreparada(null); setConcluida(false); setFontes([]); setMensagem("");
+    setFonte(null); setIds([]); setPreparada(null); setConcluida(false); setFontes([]);
+    setFontesSemVinculo([]); setFontePendenteId(""); setMensagem("");
     emCurso.current = false; setOcupado(false);
     if (porta.oncoassistFontes && porta.carregarFonteRevisao) {
       void porta.oncoassistFontes({ patientId, encounterId, tumorLotId }, abort.signal)
-        .then((r) => { if (atual === geracao.current) setFontes(r.fontes); })
+        .then((r) => { if (atual === geracao.current) { setFontes(r.fontes); setFontesSemVinculo(r.fontesSemVinculo); } })
         .catch(() => { if (atual === geracao.current) setMensagem("Não foi possível carregar as fontes locais."); });
     }
     return () => { geracao.current++; abort.abort(); };
@@ -39,7 +46,9 @@ export function RevisaoExtracaoLocal({ porta, contexto }: { porta: PortaConsulta
     emCurso.current = true; setOcupado(true); setMensagem("");
     const atual = geracao.current;
     try { await acao(atual); }
-    catch { if (atual === geracao.current) setMensagem("A operação não foi concluída. Reabra a fonte se ela ou a consulta mudou."); }
+    catch (error) { if (atual === geracao.current) setMensagem(error instanceof ErroPorta
+      ? `A operação não foi concluída (${error.codigo}). Reconfira a fonte e o contexto.`
+      : "A operação não foi concluída. Reabra a fonte se ela ou a consulta mudou."); }
     finally { if (atual === geracao.current) { emCurso.current = false; setOcupado(false); } }
   }
 
@@ -52,6 +61,27 @@ export function RevisaoExtracaoLocal({ porta, contexto }: { porta: PortaConsulta
       if (r.draft.draftId !== draftId || r.draft.patientId !== patientId || !mesmoContexto(r.draft.payload.patientLinkReview))
         throw new Error("CONTEXTO_DIVERGENTE");
       setFonte(r.draft);
+    });
+  }
+
+  async function vincularFontePendente() {
+    const pendente = fontesSemVinculo.find((item) => item.draftId === fontePendenteId);
+    if (!pendente || !porta.vincularFonteRevisao) return;
+    if (!pendente.exceptionId) { setMensagem("A exceção de vínculo não consta nesta fonte; o vínculo segue pendente."); return; }
+    await executar(async (atual) => {
+      const idempotencyKey = ["review-link", pendente.draftId, pendente.revision, patientId,
+        encounterId, tumorLotId ?? "sem-lote"].join(":");
+      const resultado = await porta.vincularFonteRevisao!({ exceptionId: pendente.exceptionId!,
+        acao: "LIGAR_PACIENTE", patientId, sourceId: pendente.sourceId, draftId: pendente.draftId,
+        expectedRevision: pendente.revision, encounterId, tumorLotId: tumorLotId ?? null,
+        idempotencyKey }, controller.current?.signal);
+      if (atual !== geracao.current) return;
+      const atualizadas = await porta.oncoassistFontes?.({ patientId, encounterId, tumorLotId }, controller.current?.signal);
+      if (atual !== geracao.current) return;
+      setFontes(atualizadas?.fontes ?? fontes);
+      setFontesSemVinculo(atualizadas?.fontesSemVinculo ?? []);
+      setFontePendenteId("");
+      setMensagem(`Vínculo explícito registrado (${resultado.codigo}). A fonte permanece em revisão médica.`);
     });
   }
 
@@ -84,6 +114,22 @@ export function RevisaoExtracaoLocal({ porta, contexto }: { porta: PortaConsulta
     <h2>Revisar extração</h2>
     <p>Selecione os achados, confira o resumo e registre sua revisão.</p>
     {mensagem ? <p role="status">{mensagem}</p> : null}
+    {fontesSemVinculo.length ? <section aria-label="Fontes sem vínculo">
+      <h3>Fontes sem paciente vinculado</h3>
+      <p>O vínculo exige sua escolha explícita. Confira o original antes de associar a fonte a {patientLabel ?? patientId} ({patientId}).</p>
+      <label>Fonte sem vínculo <select aria-label="Fonte sem vínculo" disabled={ocupado}
+        value={fontePendenteId} onChange={(e) => setFontePendenteId(e.target.value)}>
+        <option value="">Selecione uma fonte</option>
+        {fontesSemVinculo.map((item) => <option key={item.draftId} value={item.draftId}>{item.rotulo} · {item.sourceId}</option>)}
+      </select></label>
+      {fontesSemVinculo.find((item) => item.draftId === fontePendenteId) ? <>
+        <h4>Texto original da fonte</h4>
+        <pre style={{ whiteSpace: "pre-wrap" }}>{fontesSemVinculo.find((item) => item.draftId === fontePendenteId)!.textoOriginal}</pre>
+        <button type="button" disabled={ocupado || !porta.vincularFonteRevisao
+          || !fontesSemVinculo.find((item) => item.draftId === fontePendenteId)?.exceptionId}
+          onClick={() => void vincularFontePendente()}>Confirmar vínculo com {patientLabel ?? patientId} · {patientId}</button>
+      </> : null}
+    </section> : null}
     <label>Fonte para revisão <select aria-label="Fonte para revisão" disabled={ocupado}
       onChange={(e) => void abrir(e.target.value)} defaultValue="">
       <option value="">Selecione uma fonte</option>
