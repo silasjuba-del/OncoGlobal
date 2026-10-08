@@ -32,6 +32,7 @@ describe("F02 · deduplicação documental no pipeline real", () => {
       .toEqual([["laudo-original", 2, "2030-01-03"], ["laudo-reimpresso", 2, "2030-01-03"]]);
     expect(r.deduplicacao.repeticoes).toHaveLength(1);
     expect(r.deduplicacao.repeticoes[0]).toMatchObject({
+      estado: "PENDENTE_REVISAO",
       fatoPrincipalIds: [achados[0]!.id],
       fatoRepetidoIds: [achados[1]!.id],
       fontes: [
@@ -80,6 +81,17 @@ describe("F02 · deduplicação documental no pipeline real", () => {
       kind: "CONFLICT", segmentId: null,
       sourceIds: ["fonte-1", "fonte-2"], factIds: r.facts.map((f) => f.id),
     }));
+  });
+
+  it("texto clínico ainda não extraído mas discordante não desaparece sob fatos iguais", () => {
+    const r = executar(fonte("exame-1", "fonte-1"), fonte(
+      "exame-2", "fonte-2", `${linha}\nConclusão: achado adicional ainda não estruturado.`,
+    ));
+    expect(r.facts).toHaveLength(2);
+    expect(r.facts[0]?.value).toEqual(r.facts[1]?.value);
+    expect(r.deduplicacao.repeticoes).toEqual([]);
+    expect(r.deduplicacao.versoesDiscordantes).toHaveLength(1);
+    expect(r.exceptions.some((e) => e.kind === "CONFLICT" && e.segmentId === null)).toBe(true);
   });
 
   it("versões explícitas distintas ficam separadas mesmo com texto idêntico", () => {
