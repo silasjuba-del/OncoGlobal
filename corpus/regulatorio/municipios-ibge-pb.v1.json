@@ -1,0 +1,17 @@
+{
+  "versao": "2026-10-08.1",
+  "uf": "PB",
+  "fonte": "IBGE: Divisão Territorial Brasileira (DTB), código de município de 7 dígitos (2 de UF + 4 de município + 1 verificador). Entradas incluídas apenas quando o código foi conferido, inclusive pelo dígito verificador (algoritmo IBGE, pesos 1 e 2). Municípios sem código conferido NÃO entram: a ausência resulta em PENDENTE no cadastro.",
+  "municipios": [
+    { "nome": "BAYEUX", "codigoIbge": "2501807" },
+    { "nome": "CABEDELO", "codigoIbge": "2503209" },
+    { "nome": "CAJAZEIRAS", "codigoIbge": "2503704" },
+    { "nome": "CAMPINA GRANDE", "codigoIbge": "2504009" },
+    { "nome": "GUARABIRA", "codigoIbge": "2506004" },
+    { "nome": "JOAO PESSOA", "codigoIbge": "2507507" },
+    { "nome": "PATOS", "codigoIbge": "2511004" },
+    { "nome": "SANTA RITA", "codigoIbge": "2513703" },
+    { "nome": "SAPE", "codigoIbge": "2514800" },
+    { "nome": "SOUSA", "codigoIbge": "2516201" }
+  ]
+}
