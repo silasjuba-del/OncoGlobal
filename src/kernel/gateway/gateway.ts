@@ -77,6 +77,8 @@ export function autorizarLeitura(input: unknown, options: {
   if (!parsedIntent.success) return negarRead("READ_REQUEST_INVALIDO");
   const context = ReadContextSchema.safeParse(options.context);
   if (!context.success) return negarRead("READ_CONTEXTO_INVALIDO");
+  if (context.data.territory === "WORK" && parsedIntent.data.destination !== "WORKSPACE")
+    return negarRead("READ_DESTINO_FORA_DO_TERRITORIO");
   const provenance = ReadProvenanceSchema.safeParse(options.provenance);
   if (!provenance.success) return negarRead("READ_PROVENIENCIA_INVALIDA");
   const parsedSession = SessaoSchema.safeParse(options.sessao);
