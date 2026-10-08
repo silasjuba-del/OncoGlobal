@@ -31,6 +31,44 @@ function hashPayload(eventos: unknown): string {
   return createHash("sha256").update(JSON.stringify(eventos)).digest("hex");
 }
 
+export interface ResultadoAcaoRevisao {
+  readonly ok: boolean;
+  readonly motivo?: string;
+  /** Ação validada pelo contrato W10; só existe quando ok. */
+  readonly decisao?: ReviewAction;
+  /** Operação de ledger; só existe quando ok e o chamador forneceu o contexto de persistência. */
+  readonly operacao?: OperacaoDeRevisao;
+}
+
+const DATA_CIVIL_SEM_HORA = /^\d{4}-\d{2}-\d{2}$/;
+
+/**
+ * Executor da ReviewAction: aplica a decisão explícita do médico sem nunca criar vínculo sozinha.
+ * - Valida a ação pelo contrato W10 (LIGAR_PACIENTE exige patientId; DESCARTAR exige motivo).
+ * - Data civil sem horário é lida como início do dia em −03:00 (convenção de normalizarDataCivil).
+ * - Com `contexto`, monta a operação de ledger (ReviewDecision); sem ele, não há evento gravado.
+ */
+export function aplicarAcaoRevisao(acao: unknown, contexto?: ContextoEventoRevisao): ResultadoAcaoRevisao {
+  if (acao === null || typeof acao !== "object" || Array.isArray(acao)) {
+    return { ok: false, motivo: "ação de revisão deve ser um objeto" };
+  }
+  const bruto = acao as Record<string, unknown>;
+  const em = typeof bruto.em === "string" && DATA_CIVIL_SEM_HORA.test(bruto.em)
+    ? `${bruto.em}T00:00:00-03:00` : bruto.em;
+  const valida = ReviewAction.safeParse({ ...bruto, em });
+  if (!valida.success) {
+    const primeiro = valida.error.issues[0];
+    const campo = primeiro?.path.map(String).join(".") || "<raiz>";
+    return { ok: false, motivo: `${campo}: ${primeiro?.message ?? "ação inválida"}` };
+  }
+  if (contexto === undefined) return { ok: true, decisao: valida.data };
+  try {
+    return { ok: true, decisao: valida.data, operacao: montarOperacaoDeRevisao(valida.data, contexto) };
+  } catch (erro) {
+    return { ok: false, motivo: erro instanceof Error ? erro.message : "falha ao montar operação de revisão" };
+  }
+}
+
 /**
  * Constrói a operação atômica da decisão médica. A autoridade vem da `ReviewAction`
  * (CONFIRMAR/CORRIGIR/DESCARTAR/LIGAR_PACIENTE) e do CRM da sessão, nunca do payload.
