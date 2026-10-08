@@ -6,12 +6,19 @@ import { executarPipelineExtracao } from "../../src/orchestration/pipeline-extra
 import { CNS_INVALIDO_PT07, CNS_INVALIDO_PT09, pacientePt07Registry, pacientePt09Registry } from "../fixtures/redteam/pacientes.js";
 import { LAUDO_NOME_TROCADO } from "../fixtures/redteam/laudos.js";
 
+function nomeObrigatorio(nome: string | undefined, fixture: string): string {
+  if (typeof nome !== "string" || nome.trim() === "") throw new Error(`fixture ${fixture} sem nome`);
+  return nome;
+}
+const nomePt07 = nomeObrigatorio(pacientePt07Registry.name, "PT07");
+const nomePt09 = nomeObrigatorio(pacientePt09Registry.name, "PT09");
+
 describe("RT-01 · troca de laudo e vínculo de paciente", () => {
   it("CNS que corresponde ao PT07 junto do nome PT09 é recusado com conflito nominal explícito", () => {
     const result = confrontarNomeIdentificador({
-      nomeDocumento: pacientePt09Registry.name,
+      nomeDocumento: nomePt09,
       identificador: { tipo: "CNS", valor: CNS_INVALIDO_PT07 },
-      cadastroNome: pacientePt07Registry.name,
+      cadastroNome: nomePt07,
       cadastroIdentificadores: [{ tipo: "CNS", valor: CNS_INVALIDO_PT07 }],
     });
     expect(result.liga).toBe(false);
@@ -20,9 +27,9 @@ describe("RT-01 · troca de laudo e vínculo de paciente", () => {
 
   it("nome coincidente não compensa CNS que pertence a outro cadastro", () => {
     const result = confrontarNomeIdentificador({
-      nomeDocumento: pacientePt07Registry.name,
+      nomeDocumento: nomePt07,
       identificador: { tipo: "CNS", valor: CNS_INVALIDO_PT09 },
-      cadastroNome: pacientePt07Registry.name,
+      cadastroNome: nomePt07,
       cadastroIdentificadores: [{ tipo: "CNS", valor: CNS_INVALIDO_PT07 }],
     });
     expect(result.liga).toBe(false);
@@ -46,7 +53,7 @@ describe("RT-01 · troca de laudo e vínculo de paciente", () => {
     const state = executarPipelineExtracao({ recordingId: "grav-rt01-adv", sourceId: "fonte-rt01-trocada",
       sourceType: "imaging_report", rawTranscript: `${LAUDO_NOME_TROCADO}\nNódulo em L5 medindo 12 mm.`,
       registeredPatients: [pacientePt07Registry, pacientePt09Registry],
-      identityHintsBySegment: { "grav-rt01-adv:0": { name: pacientePt09Registry.name, age: 54 } },
+      identityHintsBySegment: { "grav-rt01-adv:0": { name: nomePt09, age: 54 } },
       openedPatientId: pacientePt07Registry.patientId });
     expect(state.segments).toHaveLength(1);
     expect(state.segments[0]?.patientId).toBeNull();
