@@ -32,9 +32,12 @@ async function executarUm(p: Passo, plano: Plano, agentes: Readonly<Record<strin
   if (typeof agente !== "function") return { id: p.id, resultado: "missing", motivo: "AGENTE_INDISPONIVEL", tentativas: 0 };
   for (let tentativa = 1; tentativa <= 2; tentativa++) {
     let timer: ReturnType<typeof setTimeout> | undefined;
+    const trabalho = Promise.resolve().then(() => emAgente.run(true, () => agente({ evento: plano.evento, resultados: anteriores })));
+    // Se o timeout vencer a corrida, uma falha tardia do agente não pode virar unhandledRejection.
+    trabalho.catch(() => {});
     try {
       const outcome = await Promise.race([
-        Promise.resolve().then(() => emAgente.run(true, () => agente({ evento: plano.evento, resultados: anteriores }))),
+        trabalho,
         new Promise<never>((_, reject) => {
           timer = setTimeout(() => reject(new Error("TIMEOUT")), p.timeoutMs);
         }),
