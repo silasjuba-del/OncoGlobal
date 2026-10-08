@@ -44,7 +44,12 @@ const BOLUS_POR_DESENHO = /Mayo Clinic|Roswell Park|^CMF$/;
 const INFUSAO_FORA_46H: Record<string, string> = {
   "DCF modificado (institucional)": "6 h",
   "Cisplatina + 5-Fluorouracil (PF)": "24 h",
+  // FOLFOX4 — decisão Dr. Silas 2026-10-08 (bolus + infusão de 22 h; ficha nova, não altera a FOLFOX de 46 h).
+  "FOLFOX4 — com port-a-cath": "22 h",
+  "FOLFOX4 — sem port-a-cath": "22 h",
 };
+// Bolus de 5-FU fora do desenho Mayo/Roswell Park/CMF: só as duas FOLFOX4 — decisão Dr. Silas 2026-10-08. Nominais, nada mais.
+const BOLUS_EXCECAO_FOLFOX4 = ["FOLFOX4 — com port-a-cath", "FOLFOX4 — sem port-a-cath"];
 
 describe("corpus/fichas", () => {
   it("existem fichas (60 da planilha + P1477 fora dela)", () => {
@@ -116,11 +121,18 @@ describe("corpus/fichas", () => {
       for (const { ficha, arquivo } of parseadas) {
         const bolus = ficha.itens.filter((i) => eh5fu(i.drug) && /bolus/i.test(i.drug));
         if (bolus.length === 0) continue;
+        if (BOLUS_EXCECAO_FOLFOX4.includes(ficha.nome)) continue;
         expect(BOLUS_POR_DESENHO.test(ficha.nome), arquivo).toBe(true);
         expect(FAMILIA_BOMBA.test(ficha.nome), arquivo).toBe(false);
       }
       const nomesComBolus = parseadas.filter((p) => p.ficha.itens.some((i) => eh5fu(i.drug) && /bolus/i.test(i.drug))).map((p) => p.ficha.nome).sort();
-      expect(nomesComBolus).toEqual(["5-FU + Leucovorina (Mayo Clinic)", "5-FU + Leucovorina (Roswell Park)", "CMF"]);
+      expect(nomesComBolus).toEqual(["5-FU + Leucovorina (Mayo Clinic)", "5-FU + Leucovorina (Roswell Park)", "CMF", ...BOLUS_EXCECAO_FOLFOX4].sort());
+    });
+
+    it("a FOLFOX de 46 h existente continua sem bolus e em 46 h", () => {
+      const folfox = parseadas.find((p) => p.ficha.nome === "FOLFOX")!;
+      expect(folfox.ficha.itens.some((i) => eh5fu(i.drug) && /bolus/i.test(i.drug))).toBe(false);
+      expect(folfox.ficha.itens.find((i) => eh5fu(i.drug))!.infusionTime).toBe("46 h");
     });
 
     it("todo 5-FU infusional é 46 h, exceto os dois esquemas fora de bomba declarados", () => {

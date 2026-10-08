@@ -59,7 +59,7 @@ function montar(s) {
   const diasTaxano = taxano ? s.itens.find((i) => /paclitaxel|docetaxel/i.test(i.drug ?? "")).days : null;
   const pd = s.premedDias ?? D(1);
   if (temIV) {
-    itens.push(it("Soro fisiológico 0,9% 250 mL (lavagem de acesso)", "PRE_QT", 1, "fr", "EV", pd, { vol: 250, obs: "Lavar acesso venoso pré e pós QT (planilha)." }));
+    itens.push(it("Soro fisiológico 0,9% 250 mL (lavagem de acesso)", "PRE_QT", 1, "fr", "EV", pd, { vol: 250, obs: s.acessoObs ?? "Lavar acesso venoso pré e pós QT (planilha)." }));
     itens.push(it("Ondansetrona", "PRE_QT", s.ond ?? 8, "mg", "EV", pd, { t: "15 min", obs: s.obsOnd ?? "Planilha: 8 mg EV; fichas reais do serviço usam 16 mg em alguns esquemas [VERIFICAR]." }));
     itens.push(it("Dexametasona", "PRE_QT", s.dex ?? 10, "mg", "EV", pd, {
       t: "15 min",
@@ -82,15 +82,15 @@ function montar(s) {
   }
   itens.push(...(s.posQt ?? []));
   itens.push(...pos);
-  if (temIV) itens.push(it("Soro fisiológico 0,9% 250 mL (lavagem pós-QT)", "POS_QT", 1, "fr", "EV", pd, { vol: 250, obs: "Lavar acesso venoso pós-QT (planilha)." }));
+  if (temIV) itens.push(it("Soro fisiológico 0,9% 250 mL (lavagem pós-QT)", "POS_QT", 1, "fr", "EV", pd, { vol: 250, obs: s.acessoObs ? "Lavar acesso venoso pós-QT (acesso conforme ficha)." : "Lavar acesso venoso pós-QT (planilha)." }));
   const finais = itens.map((x, i) => ({ ...x, sequence: i + 1 }));
-  const baseId = `${slug(s.nome)}__${slug(s.cenario)}`;
+  const baseId = s.slug ?? `${slug(s.nome)}__${slug(s.cenario)}`;
   const t = {
     templateId: `FICHA.${slug(s.tumor)}.${baseId}@${VERSAO}`,
     tumor: s.tumor, nome: s.nome, cenario: s.cenario, versao: VERSAO, hash: "",
     codigoInstitucional: s.codigo ?? null, intervaloDias: s.intervalo ?? null, ciclos: s.ciclos ?? null,
     itens: finais, limiaresBula: null,
-    fonte: `Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado)${s.sonhe ? `; SOnHe 2024 (secundária, setor privado): ${s.sonhe.map(pagSonhe).join("; ")}` : ""}${s.fonteExtra ? `; ${s.fonteExtra}` : ""}; decisões D-W9-23, D-W9-34, D-W9-50.`,
+    fonte: s.fonteDecisao ?? `Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado)${s.sonhe ? `; SOnHe 2024 (secundária, setor privado): ${s.sonhe.map(pagSonhe).join("; ")}` : ""}${s.fonteExtra ? `; ${s.fonteExtra}` : ""}; decisões D-W9-23, D-W9-34, D-W9-50.`,
     status: "RASCUNHO",
   };
   t.hash = hashDe(t);
@@ -230,6 +230,18 @@ F({ tumor: CR, nome: "FOLFOX", cenario: PAL, intervalo: 14, ciclos: null, sonhe:
   div: ["5-FU: planilha 8 h D1+D2 sem bomba; ficha 2.400 mg/m² em 46 h sem bolus (o bolus 400 do SOnHe NÃO entra)."],
   itens: [qt("Oxaliplatina", 85, "m2", D(1), { t: "2 h" }), qt("Folinato de cálcio (leucovorina)", 400, "m2", D(1), { t: "2 h", obs: "Correr em Y com a oxaliplatina." }),
     FU46(2400, "Planilha: 1.200 mg/m² D1+D2 em 8 h (total 2.400). O SOnHe traz também bolus de 5-FU 400 mg/m², que NÃO entra (D-W9-50).")] });
+// FOLFOX4 (decisão médica do Dr. Silas, 2026-10-08): ficha NOVA; não altera a FOLFOX de 46 h (D-W9-23a/50). Mesmas doses; diferença só o acesso.
+const FOLFOX4_DECISAO = "DECISAO_MEDICA do Dr. Silas em 2026-10-08, transcrita como dado de ficha: \"FOLFOX COM E SEM PORT = FOLFOX4: Oxaliplatina 85 mg/m² IV em 2h · Leucovorina 200 mg/m² IV em 2h · 5-FU 400 mg/m² em bolus, seguido de 600 mg/m² em infusão de 22h (repetido no Dia 2) · A cada 14 dias.\" Pré-QT, antiemese e hidratação copiados da ficha FOLFOX (padrão local).";
+const FOLFOX4_ITENS = () => [qt("Oxaliplatina", 85, "m2", D(1), { t: "2 h" }),
+  qt("Folinato de cálcio (leucovorina)", 200, "m2", D(1, 2), { t: "2 h" }),
+  qt("Fluoruracila (5-FU) em bolus", 400, "m2", D(1, 2), {}),
+  qt("Fluoruracila (5-FU) infusão contínua", 600, "m2", D(1, 2), { t: "22 h" })];
+F({ tumor: CR, nome: "FOLFOX4 — com port-a-cath", cenario: PAL, intervalo: 14, ciclos: null, slug: "folfox4-com-port__paliativo-metastatico",
+  acessoObs: "Acesso com port-a-cath (DECISAO_MEDICA 2026-10-08). Lavar acesso venoso pré e pós QT.", fonteDecisao: FOLFOX4_DECISAO,
+  itens: FOLFOX4_ITENS() });
+F({ tumor: CR, nome: "FOLFOX4 — sem port-a-cath", cenario: PAL, intervalo: 14, ciclos: null, slug: "folfox4-sem-port__paliativo-metastatico",
+  acessoObs: "Acesso sem port-a-cath (DECISAO_MEDICA 2026-10-08). Lavar acesso venoso pré e pós QT.", fonteDecisao: FOLFOX4_DECISAO,
+  itens: FOLFOX4_ITENS() });
 F({ tumor: CR, nome: "FOLFIRI", cenario: PAL, intervalo: 14, ciclos: null, atropina: true, sonhe: [["Cólon", "Esquema FOLFIRI"]],
   div: ["5-FU: planilha 8 h D1+D2 sem bomba; ficha 2.400 mg/m² em 46 h sem bolus (o SOnHe cita bolus apenas no FOLFOX/de Gramont)."],
   itens: [qt("Irinotecano", 180, "m2", D(1), { t: "90 min" }), qt("Folinato de cálcio (leucovorina)", 400, "m2", D(1), { t: "2 h" }),
