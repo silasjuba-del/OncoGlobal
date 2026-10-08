@@ -3,6 +3,14 @@
 import { createHash, randomUUID } from "node:crypto";
 import type { z } from "zod";
 import { ActionIntent, Sessao as SessaoSchema, type Sessao } from "../../contracts/index.js";
+import {
+  ReadContext as ReadContextSchema,
+  ReadIntent as ReadIntentSchema,
+  ReadProvenance as ReadProvenanceSchema,
+  type ReadContext,
+  type ReadIntent,
+  type ReadProvenance,
+} from "../../contracts/w10/closure.js";
 import { g02PhiEgress, g27SaidaExternaLimpa } from "../harness/gates.js";
 import type { DicionarioPaciente } from "../llm/desidentificar.js";
 
@@ -42,17 +50,8 @@ export interface StoreIdempotencia {
   delete?(chave: string): void;
 }
 
-// PROVISORIO-W10: READ é uma autorização técnica independente de ActionIntent/assinatura de escrita.
-export type ReadDestination = "PUBMED" | "WORKSPACE";
-export interface ReadRequest {
-  requestId: string;
-  purpose: "RESEARCH" | "WORKSPACE_LOOKUP";
-  destination: ReadDestination;
-  context: { territory: "WORK" | "STUDY" };
-  payload: { query?: string; refs?: readonly string[] };
-  provenance: { sourceId: string; version: string };
-  timeoutMs?: number;
-}
+// READ usa contrato próprio; mantém finalidade separada de WORLD_EFFECT/ActionIntent.
+export type ReadRequest = ReadIntent & { context: ReadContext; provenance: ReadProvenance };
 export type ReadAudit = (r: RegistroAuditoria) => void;
 export type ReadTransport = (request: {
   query?: string;
@@ -60,15 +59,12 @@ export type ReadTransport = (request: {
   signal: AbortSignal;
 }) => Promise<unknown>;
 
-const READ_PURPOSE_BY_DESTINATION: Readonly<Record<ReadDestination, ReadRequest["purpose"]>> = Object.freeze({
-  PUBMED: "RESEARCH", WORKSPACE: "WORKSPACE_LOOKUP",
-});
 const readHash = (value: string) => createHash("sha256").update(value, "utf8").digest("hex");
 
 /** Fail-closed authorization for READ. No patient/encounter identity, payload or credential reaches audit. */
 export function autorizarLeitura(input: unknown, options: {
-  agora: string; sessao: Sessao | null; context: ReadRequest["context"] | null;
-  provenance: ReadRequest["provenance"] | null; auditar: ReadAudit;
+  agora: string; sessao: Sessao | null; context: ReadContext | null;
+  provenance: ReadProvenance | null; auditar: ReadAudit;
 }):
   | { ok: true; request: ReadRequest; requestHash: string }
   | { ok: false; motivoCodigo: string } {
@@ -77,54 +73,22 @@ export function autorizarLeitura(input: unknown, options: {
     catch { return { ok: false, motivoCodigo: "AUDITORIA_INDISPONIVEL" }; }
     return { ok: false, motivoCodigo };
   };
-  if (!input || typeof input !== "object" || Array.isArray(input)) return negarRead("READ_REQUEST_INVALIDO");
-  const raw = input as Record<string, unknown>;
-  if (Object.keys(raw).some((key) => !["requestId", "purpose", "destination", "payload", "timeoutMs"].includes(key)))
-    return negarRead("READ_REQUEST_INVALIDO");
-  if (typeof raw.requestId !== "string" || !/^[A-Za-z0-9._:-]{8,160}$/.test(raw.requestId)) return negarRead("READ_REQUEST_INVALIDO");
-  if (raw.destination !== "PUBMED" && raw.destination !== "WORKSPACE") return negarRead("READ_DESTINO_NAO_ALLOWLISTED");
-  if (raw.purpose !== READ_PURPOSE_BY_DESTINATION[raw.destination]) return negarRead("READ_FINALIDADE_INVALIDA");
-  const context = options.context;
-  if (!context || typeof context !== "object" || (context.territory !== "WORK" && context.territory !== "STUDY"))
-    return negarRead("READ_CONTEXTO_INVALIDO");
-  const territory = context.territory;
-  if (territory !== "WORK" && territory !== "STUDY") return negarRead("READ_CONTEXTO_INVALIDO");
+  const parsedIntent = ReadIntentSchema.safeParse(input);
+  if (!parsedIntent.success) return negarRead("READ_REQUEST_INVALIDO");
+  const context = ReadContextSchema.safeParse(options.context);
+  if (!context.success) return negarRead("READ_CONTEXTO_INVALIDO");
+  const provenance = ReadProvenanceSchema.safeParse(options.provenance);
+  if (!provenance.success) return negarRead("READ_PROVENIENCIA_INVALIDA");
   const parsedSession = SessaoSchema.safeParse(options.sessao);
   const nowMs = Date.parse(options.agora);
   if (!parsedSession.success || !Number.isFinite(nowMs)) return negarRead("READ_SESSAO_INVALIDA");
   const issuedMs = Date.parse(parsedSession.data.emitidaEm), expiresMs = Date.parse(parsedSession.data.expiraEm);
   if (!Number.isFinite(issuedMs) || !Number.isFinite(expiresMs) || issuedMs > nowMs || expiresMs <= nowMs)
     return negarRead("READ_SESSAO_EXPIRADA");
-  const provenance = options.provenance;
-  if (!provenance || typeof provenance !== "object" || Array.isArray(provenance)
-    || Object.keys(provenance).sort().join(",") !== "sourceId,version"
-    || typeof (provenance as { sourceId?: unknown }).sourceId !== "string"
-    || !(provenance as { sourceId: string }).sourceId.trim() || (provenance as { sourceId: string }).sourceId.length > 160
-    || typeof (provenance as { version?: unknown }).version !== "string"
-    || !(provenance as { version: string }).version.trim() || (provenance as { version: string }).version.length > 80)
-    return negarRead("READ_PROVENIENCIA_INVALIDA");
-  const payload = raw.payload;
-  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return negarRead("READ_PAYLOAD_INVALIDO");
-  const body = payload as { query?: unknown; refs?: unknown };
-  if (Object.keys(payload).some((key) => key !== "query" && key !== "refs")) return negarRead("READ_PAYLOAD_INVALIDO");
-  if ((body.query !== undefined && (typeof body.query !== "string" || !body.query.trim() || body.query.length > 500))
-    || (body.refs !== undefined && (!Array.isArray(body.refs) || body.refs.length < 1 || body.refs.length > 20
-      || body.refs.some((ref) => typeof ref !== "string" || !ref.trim() || ref.length > 160)))
-    || (body.query === undefined && body.refs === undefined)) return negarRead("READ_PAYLOAD_INVALIDO");
-  const timeoutMs = raw.timeoutMs === undefined ? 5000 : raw.timeoutMs;
-  if (typeof timeoutMs !== "number" || !Number.isInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 10000)
-    return negarRead("READ_TIMEOUT_INVALIDO");
   const request: ReadRequest = {
-    requestId: raw.requestId as string,
-    purpose: raw.purpose as ReadRequest["purpose"],
-    destination: raw.destination,
-    context: { territory },
-    payload: {
-      ...(typeof body.query === "string" ? { query: body.query.trim() } : {}),
-      ...(Array.isArray(body.refs) ? { refs: body.refs.map((ref) => (ref as string).trim()) } : {}),
-    },
-    provenance: { sourceId: (provenance as { sourceId: string }).sourceId.trim(), version: (provenance as { version: string }).version.trim() },
-    timeoutMs,
+    ...parsedIntent.data,
+    context: context.data,
+    provenance: provenance.data,
   };
   return { ok: true, request, requestHash: readHash(JSON.stringify({
     requestId: request.requestId, destination: request.destination, purpose: request.purpose,
@@ -138,11 +102,11 @@ export async function executarLeitura(input: unknown, options: {
   /** Server-resolved session; session data supplied in request payload is never trusted. */
   sessao: Sessao | null;
   /** Context and provenance are resolved by the local server, never accepted from the body. */
-  context: ReadRequest["context"] | null;
-  provenance: ReadRequest["provenance"] | null;
+  context: ReadContext | null;
+  provenance: ReadProvenance | null;
   auditar: ReadAudit;
   /** Adapter map is bound locally to allowlisted destinations; no URL/provider comes from the body. */
-  transportes: Partial<Record<ReadDestination, ReadTransport>>;
+  transportes: Partial<Record<ReadIntent["destination"], ReadTransport>>;
   /** Known-identifier dictionary is resolved locally. G-02 detects known PHI, not every possible identity. */
   dicionarioPaciente: DicionarioPaciente | null;
   signal?: AbortSignal;
