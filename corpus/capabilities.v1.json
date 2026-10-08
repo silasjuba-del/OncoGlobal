@@ -37,7 +37,7 @@
     "AG-14": { "nome": "CANAL_READER", "fase": "F2", "dono": "[VERIFICAR]", "planejado": { "microprompt": "[VERIFICAR]", "ruleset": "canal-redflags.v1.json" } },
     "AG-15": { "nome": "TRIAGE", "fase": "F3", "dono": "[VERIFICAR]", "planejado": { "microprompt": null, "ruleset": "salao-triagem.v1.json" } },
     "AG-16": { "nome": "APAC/SIGTAP", "fase": "F4", "dono": "[VERIFICAR]", "planejado": { "microprompt": null, "ruleset": "apac.v1.json" } },
-    "AG-19": { "nome": "ANAMNESE_ROTEIRO", "fase": "F5", "dono": "[VERIFICAR]", "planejado": { "microprompt": "ANAMNESE@1.0.0", "ruleset": null } },
+    "AG-19": { "nome": "ANAMNESE_ROTEIRO", "fase": "F5", "dono": "[VERIFICAR]", "planejado": { "microprompt": "[VERIFICAR]", "ruleset": null } },
     "AG-20": { "nome": "VISUAL_TC_RM", "fase": "F5+", "dono": "[VERIFICAR]", "planejado": { "microprompt": null, "ruleset": null } },
     "AG-21": { "nome": "ONCOASSIST_FARMACEUTICO", "fase": "F5+", "dono": "[VERIFICAR]", "planejado": { "microprompt": "[VERIFICAR]", "ruleset": null } },
     "AG-22": { "nome": "ONCOASSIST_ENFERMEIRO", "fase": "F5+", "dono": "[VERIFICAR]", "planejado": { "microprompt": "[VERIFICAR]", "ruleset": null } },

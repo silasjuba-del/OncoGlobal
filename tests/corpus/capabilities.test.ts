@@ -74,4 +74,14 @@ describe("capabilities.v1.json", () => {
       expect(json.agentes.find((a) => a.id === id)!.capabilityStatus, id).toBe("DISABLED");
     }
   });
+
+  it("nenhuma referência concreta de microprompt pendura: toda versão declarada existe como arquivo", () => {
+    const raizPrompts = fileURLToPath(new URL("../../corpus/prompts/", import.meta.url));
+    for (const [id, m] of Object.entries(json.metadados)) {
+      const microprompt = m.planejado?.microprompt;
+      if (microprompt === null || microprompt === undefined || microprompt === "[VERIFICAR]") continue;
+      expect(microprompt, `${id}: versão concreta sem @`).toMatch(/@1\.\d+\.\d+$/);
+      expect(existsSync(join(raizPrompts, `${microprompt}.md`)), `${id} -> ${microprompt}`).toBe(true);
+    }
+  });
 });
