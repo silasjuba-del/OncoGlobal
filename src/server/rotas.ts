@@ -279,7 +279,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
       const contexto = deps.sessoes.consultaSelecionada(token);
       if (!contexto || contexto.patientId !== parsed.data.triagem.patientId
-        || contexto.encounterId !== parsed.data.triagem.encounterId || contexto.tumorLotId !== null)
+        || contexto.encounterId !== parsed.data.triagem.encounterId)
         return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
       if (!lerPaciente(deps.db, contexto.patientId)) return reply(404, "PACIENTE_NAO_ENCONTRADO");
       const draftId = `salao-triagem-${sha(JSON.stringify([contexto.patientId, contexto.encounterId])).slice(0, 36)}`;
@@ -366,7 +366,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         triagemHash: (draft.payload as { contentHash?: string })?.contentHash ?? hashConteudoExibido(draft.payload),
         motivo: parsed.data.motivo };
       const result = confirmar(deps.db, { operationId, patientId: contexto.patientId,
-        tumorLotId: contexto.tumorLotId ?? null, encounterId: contexto.encounterId,
+        tumorLotId: null, encounterId: contexto.encounterId,
         reviewDecisionId: operationId, sessao, em, registros: [{ draftId: draft.draftId,
           expectedRevision: parsed.data.expectedRevision, eventId: `salao-release-event-${sha(operationId).slice(0, 32)}`,
           tipo: "ReviewDecision", payload, fontes: [], revisao: "CONFIRMADO" }] });
