@@ -14,6 +14,7 @@ import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gate
 import { criarServidorLocal } from "../../src/server/http.js";
 import { criarGerenciadorSessao } from "../../src/server/sessao.js";
 import { criarPortaHttp } from "../../src/ui/api/http.js";
+import { SalaoResposta } from "../../src/ui/api/respostas.js";
 import { TelaSalao } from "../../src/ui/telas/TelaSalao.js";
 
 const servers: Server[] = [];
@@ -72,8 +73,18 @@ it("UI de primeiro uso envia triagem como draft e registra liberação no SQLite
 
   let base = await iniciarServidor();
   const realFetch = globalThis.fetch;
-  vi.stubGlobal("fetch", (input: string | URL | Request, init?: RequestInit) =>
-    realFetch(new URL(String(input), base), init));
+  const salaDiagnostics: string[] = [];
+  vi.stubGlobal("fetch", async (input: string | URL | Request, init?: RequestInit) => {
+    const target = new URL(String(input), base);
+    const response = await realFetch(target, init);
+    if (target.pathname === "/consulta/salao") {
+      const body = await response.clone().json() as unknown;
+      const parsed = SalaoResposta.safeParse(body);
+      if (!parsed.success) salaDiagnostics.push(`status=${response.status}; `
+        + parsed.error.issues.map((issue) => `${issue.path.join(".") || "<root>"}:${issue.code}`).join(","));
+    }
+    return response;
+  });
   const porta = criarPortaHttp({ onSessaoExpirada: () => {} });
   expect((await porta.login(senha)).ok).toBe(true);
   const agenda = await porta.agendaDoDia();
@@ -83,7 +94,10 @@ it("UI de primeiro uso envia triagem como draft e registra liberação no SQLite
   ]));
   const contexto = await porta.carregarConsulta(patientId);
   expect(contexto.encounterId).toBe(encounterId);
-  const fila = await porta.filaSalao();
+  const fila = await porta.filaSalao().catch((error: unknown) => {
+    throw new Error(`fila HTTP não corresponde a SalaoResposta: ${salaDiagnostics.join(" | ") || "sem issues zod"}; `
+      + `erro cliente=${error instanceof Error ? error.message : "desconhecido"}`);
+  });
   expect(fila.pacientes).toEqual(expect.arrayContaining([
     expect.objectContaining({ patientId, encounterId }),
     expect.objectContaining({ patientId: outroPatientId, encounterId: outroEncounterId }),
