@@ -25,11 +25,13 @@ export function QuadroSalao({
 }: {
   cartoes: readonly CartaoSalaoVisao[];
   ruleset: SalaoRuleset;
-  onLiberarComCorte: (patientId: string, motivo: string) => void;
+  onLiberarComCorte: (patientId: string, motivo: string, idempotencyKey: string) => void | Promise<void>;
 }) {
   const [aberto, setAberto] = useState<string | null>(null);
   const [motivo, setMotivo] = useState("");
   const [erro, setErro] = useState<string | null>(null);
+  const [salvando, setSalvando] = useState(false);
+  const [idempotencyKey, setIdempotencyKey] = useState("");
 
   const porId = new Map(cartoes.map((c) => [c.entrada.patientId, c]));
   const ordenados: CartaoSalaoVisao[] = [];
@@ -38,14 +40,20 @@ export function QuadroSalao({
     if (cartao) ordenados.push(cartao);
   }
 
-  function confirmar() {
+  async function confirmar() {
     if (!aberto) return;
+    if (salvando) return;
     if (motivo.trim() === "") {
       setErro("motivo obrigatório");
       return;
     }
-    onLiberarComCorte(aberto, motivo.trim());
-    setErro(null);
+    setSalvando(true); setErro(null);
+    try {
+      await onLiberarComCorte(aberto, motivo.trim(), idempotencyKey);
+      setAberto(null); setMotivo(""); setIdempotencyKey("");
+    } catch {
+      setErro("Liberação não registrada. Confira o contexto e tente novamente.");
+    } finally { setSalvando(false); }
   }
 
   return (
@@ -60,7 +68,8 @@ export function QuadroSalao({
                   <p>{c.nome}</p>
                   {c.emergencia ? <p>E1</p> : null}
                   {c.temCorte ? (
-                    <button type="button" onClick={() => { setAberto(c.entrada.patientId); setMotivo(""); setErro(null); }}>
+                    <button type="button" onClick={() => { setAberto(c.entrada.patientId); setMotivo(""); setErro(null);
+                      setIdempotencyKey(`salao-release-${crypto.randomUUID()}`); }}>
                       liberar mesmo com corte
                     </button>
                   ) : null}
@@ -89,7 +98,7 @@ export function QuadroSalao({
             <input value={motivo} onChange={(e) => setMotivo(e.target.value)} />
           </label>
           {erro ? <p>{erro}</p> : null}
-          <button type="button" onClick={confirmar}>confirmar liberação</button>
+          <button type="button" disabled={salvando} onClick={() => void confirmar()}>{salvando ? "registrando…" : "confirmar liberação"}</button>
         </section>
       ) : null}
     </div>
