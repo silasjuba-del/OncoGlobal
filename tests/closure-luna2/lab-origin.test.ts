@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { avaliarPortoesW10 } from "../../src/rules/triagem.js";
+import { avaliarPortoesW10, avaliarTriagem } from "../../src/rules/triagem.js";
 import { TriagemExtraW10 } from "../../src/contracts/w10/clinico-w10.js";
 import { ProvenienciaLaboratorial } from "../../src/contracts/w10/closure.js";
-import { fonteSintetica, presente, triagemBase } from "../fixtures/triagem.js";
+import { ctxBase, fonteSintetica, presente, triagemBase } from "../fixtures/triagem.js";
 import { salaoRuleset } from "../fixtures/rulesets.js";
 
 const EXTRA = { pad: 80, crCentesimos: 100 };
@@ -70,16 +70,24 @@ describe("F05 · unidade e proveniência declarada da hemoglobina", () => {
       motivo: "fontes discordam", fontes: [a, b], revisao: "RAW" as const,
       candidatos: [{ valor: 9, fontes: [a] }, { valor: 90, fontes: [b] }],
     };
-    const result = avaliarPortoesW10(triagemBase({ hbDgDl: hbConflito }), extraComHb({
+    const triagem = triagemBase({ hbDgDl: hbConflito });
+    const candidatosOriginais = structuredClone(triagem.hbDgDl.candidatos);
+    const result = avaliarPortoesW10(triagem, extraComHb({
       valorOriginal: 9,
       unidadeOriginal: "g/dL",
       fonte: a,
       dataClinica: "2026-10-01",
     }), salaoRuleset);
-    expect(result.corteSalao.pendentes.some((item) => item.codigo === "pendente.corteSalao.hb")).toBe(true);
-    expect(result.corteSalao.pendentes.some((item) => item.codigo === "pendente.corteSalao.hb.origem")).toBe(true);
+    expect(result.corteSalao.pendentes.some((item) => item.codigo === "pendente.corteSalao.hb.conflito")).toBe(true);
     expect(result.corteSalao.motivos.some((item) => item.codigo === "corteSalao.hb.baixa")).toBe(false);
     expect(result.corteSalao.destino).toBe("FILA_MEDICO");
+    expect(triagem.hbDgDl.valor).toBeNull();
+    expect(triagem.hbDgDl.campo).toBe("CONFLITO");
+    expect(triagem.hbDgDl.candidatos).toEqual(candidatosOriginais);
+    const geral = avaliarTriagem(triagem, ctxBase(), salaoRuleset, {
+      valorOriginal: 9, unidadeOriginal: "g/dL", fonte: a, dataClinica: "2026-10-01",
+    });
+    expect(geral.pendentes.some((item) => item.codigo === "pendente.hbDgDl.conflito")).toBe(true);
   });
 
   it("usa o schema canônico estrito para proveniência e data clínica", () => {

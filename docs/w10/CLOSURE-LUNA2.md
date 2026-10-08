@@ -12,7 +12,7 @@ Checkout: `C:\Users\silas\Projects\OncoGlobal-wt\w10-finish-luna2`
 
 Não foi criada regra de plausibilidade superior: converter `12000 g/L` é matematicamente coerente com a escala declarada, e afirmar impossibilidade clínica exige uma faixa aprovada. A parte de magnitude do RT-07 segue `BLOCKED_MEDICAL_RULE`; os testes RT-07 existentes não foram alterados nem forçados a verde.
 
-Regressões próprias em `tests/closure-luna2/lab-origin.test.ts` cobrem conversão declarada, discordância mantendo o corte, unidade ausente e Hb em conflito sem eleger candidato.
+Regressões próprias em `tests/closure-luna2/lab-origin.test.ts` cobrem conversão declarada, discordância mantendo o corte, unidade ausente e Hb em conflito. `CONFLITO` recebe diagnóstico de pendência próprio, sem ser reduzido a ausência; o Dado original, seus candidatos e fontes permanecem intactos, e nenhum candidato é eleito.
 
 ## F06 — READ separado de WORLD_EFFECT
 
