@@ -1,5 +1,8 @@
 import type { TriagemExtraW10 } from "../contracts/w10/clinico-w10.js";
-import { DataCivil, Fonte as FonteSchema, type Fonte } from "../contracts/base.js";
+import {
+  ProvenienciaLaboratorial as ProvenienciaLaboratorialSchema,
+  type ProvenienciaLaboratorial,
+} from "../contracts/w10/closure.js";
 import type { Motivo, ResultadoTriagem, Triagem } from "../contracts/clinico.js";
 import type { Destino, Semaforo } from "../contracts/estados.js";
 import type { ContextoTriagem, SalaoRuleset } from "../contracts/regras.js";
@@ -28,28 +31,19 @@ function mot(codigo: string, texto: string, rs: SalaoRuleset): Motivo {
   return { codigo, texto, regraId: rs.header.id, rulesetVersao: rs.header.versao };
 }
 
-// PROVISORIO-W10: o contrato canônico será promovido pelo root em contracts/w10/closure.ts.
-export interface ProvenienciaLaboratorial {
-  valorOriginal: number | null;
-  unidadeOriginal: "g/dL" | "dg/dL" | "g/L" | null;
-  fonte: Fonte | null;
-  dataClinica: string | null;
-}
-
 function pendenciaOrigemHemoglobina(
   t: Triagem,
   origem?: ProvenienciaLaboratorial | null,
 ): string | null {
   // O campo legado hbDgDl já declara a escala canônica (décimos de g/dL).
   if (origem === undefined) return null;
-  if (!origem || origem.valorOriginal === null || origem.unidadeOriginal === null
-    || origem.fonte === null || origem.dataClinica === null
-    || !Number.isFinite(origem.valorOriginal) || !FonteSchema.safeParse(origem.fonte).success
-    || !DataCivil.safeParse(origem.dataClinica).success || t.hbDgDl.valor === null) {
+  const proveniencia = ProvenienciaLaboratorialSchema.safeParse(origem);
+  if (!proveniencia.success || proveniencia.data.valorOriginal === null || proveniencia.data.unidadeOriginal === null
+    || proveniencia.data.fonte === null || proveniencia.data.dataClinica === null || t.hbDgDl.valor === null) {
     return "unidade/origem laboratorial ausente ou incompleta; confirmar antes de promover";
   }
-  const fatorParaDecimos = origem.unidadeOriginal === "g/dL" ? 10 : 1;
-  const valorCanonico = origem.valorOriginal * fatorParaDecimos;
+  const fatorParaDecimos = proveniencia.data.unidadeOriginal === "g/dL" ? 10 : 1;
+  const valorCanonico = proveniencia.data.valorOriginal * fatorParaDecimos;
   if (!Number.isFinite(valorCanonico) || Math.abs(valorCanonico - t.hbDgDl.valor) > 1e-6) {
     return "valor e unidade da origem não concordam com hbDgDl; manter pendente para revisão";
   }
@@ -322,7 +316,6 @@ export function avaliarCorteSalao(
   t: Triagem,
   extra: SinaisExtraW10,
   rs: SalaoRuleset,
-  origemHb?: ProvenienciaLaboratorial | null,
 ): ResultadoPortao {
   const nome = "corteSalao";
   const bloco = lerPortao(rs, nome, "corte-do-salao");
@@ -373,7 +366,7 @@ export function avaliarCorteSalao(
     `hemoglobina ${hb === null ? "" : textoHb(hb)} abaixo do limite do corte do salão`,
     decisaoPortao(bloco, "hb", nome), rs, motivos, pendentes,
   );
-  const pendenciaHb = pendenciaOrigemHemoglobina(t, origemHb);
+  const pendenciaHb = pendenciaOrigemHemoglobina(t, extra.provenienciaHb);
   if (pendenciaHb) pendentes.push(motivoPortao("pendente.corteSalao.hb.origem", pendenciaHb,
     decisaoPortao(bloco, "hb", nome), rs));
   compararLimite(
@@ -454,10 +447,9 @@ export function avaliarPortoesW10(
   t: Triagem,
   extra: SinaisExtraW10,
   rs: SalaoRuleset,
-  origemHb?: ProvenienciaLaboratorial | null,
 ): { triagemCiclo: ResultadoPortao; corteSalao: ResultadoPortao } {
   return {
     triagemCiclo: avaliarTriagemCiclo(t, extra, rs),
-    corteSalao: avaliarCorteSalao(t, extra, rs, origemHb),
+    corteSalao: avaliarCorteSalao(t, extra, rs),
   };
 }
