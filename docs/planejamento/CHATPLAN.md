@@ -369,3 +369,11 @@ M-AL  PEDIDO: AUDITORIA READ_ONLY ANTES DE CODAR → PLN-032   docs/planejamento
       |AL3| Jev (@typesafe-ai/sdk) × D-W9-15 (provedor único)   PENDENTE
       |AL4| Quem escreve em f0/w1-integrado; Cursor como tech lead × regra "sem documentos em pastas"   PENDENTE
 ```
+
+```
+M-AM  FLUXO CLÍNICO = NORTE DO APP (OPS-003, MARCO 2) → PLN-037   fontes/M-AM_PLN-037_fluxo-clinico-norte.md
+      |AM1| 6 blocos (entrada/resumo · exames · consulta · prescrição · documentos · segurança) + UI de agrupamento funcional + eixos longitudinal/transversal   REGISTRADO
+      |AM2| Lacunas duras: perícia INSS/LOAS/BPC; comorbidade×droga; fluoxetina×tamoxifeno; modelo biopatológico transversal   PENDENTE
+      |AM3| Fatias F1–F8 propostas (UI primeiro, backend leve)   PROPOSTO
+      |AM4| Q1 REVISAR · Q2 Flash pontualizada + 1 clique (retorno+lab pré-selecionado ± imagem) · Q3 6 tumores · Q5 bula+literatura em RASCUNHO (D-W9-77)   DECIDIDO; Q4, Q6 e "mantendo a consulta"   PENDENTE
+```
