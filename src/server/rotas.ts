@@ -875,7 +875,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
           payload: { ...payloadOriginal, patientLinkReview: { patientId: parsed.data.patientId,
             encounterId: consultaVinculo.encounterId, tumorLotId: consultaVinculo.tumorLotId ?? null,
             medicoId: sessao.medicoId, em, reviewDecisionId: operationId,
-            sourceId: extractionInput.sourceId, sourceHash } } },
+            sourceId: extractionInput.sourceId, sourceHash } },
           diagnostics: [...draft.diagnostics, "VINCULO_PACIENTE_CONFIRMADO_POR_MEDICO"] });
         if (reviewed.diagnostics.includes("EXPECTED_REVISION_CONFLICT"))
           return reply(409, "REVISAO_RASCUNHO_CONFLITANTE");
