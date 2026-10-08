@@ -13,6 +13,8 @@ import { rankearPacientes, type IdentityHints, type RegistryPatient } from "../k
 import { extratorDeterministico } from "../kernel/extracao/extrator.js";
 import { normalizarFatos as normalizar } from "../kernel/extracao/normalizacao.js";
 import { detectarConflitos, reconciliarCampos } from "../kernel/extracao/reconciliacao.js";
+/** Reconciliação multifonte exposta pelo pipeline: o mesmo motor usado em reconciliarFontes (conflito explícito, nunca escolha silenciosa). */
+export { detectarConflitos } from "../kernel/extracao/reconciliacao.js";
 export { aplicarAcaoRevisao, type ResultadoAcaoRevisao } from "../kernel/extracao/eventoRevisao.js";
 import { validarSegurancaAntiAlucinacao, type ViolacaoInvariante } from "../kernel/extracao/safety.js";
 import {
