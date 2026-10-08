@@ -50,3 +50,8 @@ Q6 Classificações adicionais que quer acrescentar aos 6 blocos.
 - Q3 Transversal: mama, próstata, cólon, pulmão, colo uterino, gástrico.
 - Q5 Fonte: bula ANVISA/FDA + literatura, rotuladas, em RASCUNHO até conferência item a item.
 - Abertas: Q4, Q6.
+
+## Adendo OPS-006 — tipologia de 3 kits reais (docs/referencias/tipologia/KITS-PRIMEIRA-VEZ-2026-10-08.md)
+- Dr. Silas: resumo de primeira vez nasce NO CHAT, pela skill/template dele (em uso há mais de 1 ano); o app recebe, aloca na evolução, médico revisa (D-W9-77a). Skill será registrada como fonte literal quando enviada.
+- Lacunas novas do bloco 1: (a) classificador de página clínica × administrativa (30–40% administrativas); (b) proveniência LAUDO × CITAÇÃO (exames só citados); (c) máscara de segredos (login/senha de portal em cabeçalho de laudo); (d) checagem de lateralidade/topografia e data impossível; (e) CID SISREG (ex.: R63.8) nunca como diagnóstico; (f) estadiamento do encaminhador sem base = não confirmado; (g) tumor-índice × incidental; (h) manuscrito/riscado = baixa confiança.
+- F2 ajuste: cada campo do cartão transversal exibe a origem: "laudo" (documento + data) × "afirmado pelo encaminhador" × "não informado".
