@@ -10,6 +10,9 @@ import type { Fonte } from "../../contracts/base.js";
 function textoErro(error: unknown) {
   return error instanceof ErroPorta ? `Operação não gravada (${error.codigo}).` : "Operação não gravada. Tente novamente após conferir a consulta.";
 }
+function erroCarregamento(error: unknown) {
+  return error instanceof ErroPorta ? `Salão indisponível (${error.codigo}).` : "Não foi possível carregar o salão local.";
+}
 
 /** Triagem à esquerda, quadro à direita. A ordem continua sendo a de ordenarFila. */
 export function TelaSalao({ porta }: { porta: PortaConsulta }) {
@@ -17,9 +20,11 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
   const [patientId, setPatientId] = useState<string | null>(null);
   const [resumoFlash, setResumoFlash] = useState<string | null>(null);
   const [erro, setErro] = useState<string | null>(null);
+  const [tentativa, setTentativa] = useState(0);
 
   useEffect(() => {
     let viva = true;
+    setErro(null);
     porta.filaSalao().then(async (proxima) => {
       if (!viva) return;
       setVisao(proxima);
@@ -30,18 +35,21 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
           encounterId: primeira.encounterId, tumorLotId: null }); }
         catch (error) { if (viva) setErro(textoErro(error)); }
       }
-    }).catch((error) => { if (viva) setErro(textoErro(error)); });
+    }).catch((error) => { if (viva) setErro(erroCarregamento(error)); });
     return () => {
       viva = false;
     };
-  }, [porta]);
+  }, [porta, tentativa]);
 
-  if (!visao) return <p>carregando salão</p>;
+  if (!visao) return erro ? <section aria-label="Salão indisponível">
+    <p role="alert">{erro}</p>
+    <button type="button" onClick={() => setTentativa((atual) => atual + 1)}>Tentar carregar novamente</button>
+  </section> : <p>carregando salão</p>;
   const escolhido = visao.pacientes.find((p) => p.patientId === patientId) ?? visao.pacientes[0];
   if (!escolhido) return <p>salão vazio</p>;
   const fonteFormulario: Fonte = visao.fonte ?? { sourceId: `triagem-manual-${crypto.randomUUID()}`,
     classe: "MANUAL", localizador: "entrada manual em rascunho", dataClinica: visao.hoje,
-    dataCaptura: new Date().toISOString(), versao: "triagem-form-local", contentHash: "0".repeat(64) };
+    dataCaptura: new Date().toISOString(), versao: "triagem-form-local", contentHash: "PENDENTE_HASH_SERVIDOR" };
 
   return (
     <section aria-label="Salão" className="pilha">

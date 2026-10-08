@@ -182,6 +182,7 @@ export interface PortaConsulta {
   vincularFonteRevisao?(pedido: { exceptionId: string; acao: "LIGAR_PACIENTE"; patientId: string;
     sourceId: string; draftId: string; expectedRevision: number; encounterId: string;
     tumorLotId: string | null; idempotencyKey: string }, signal?: AbortSignal): Promise<{ codigo: "VINCULO_REVISTO"; revision: number }>;
+  reconciliarFontes?(draftIds: readonly string[], signal?: AbortSignal): Promise<import("./revisaoExtracao.js").ReconciliacaoProposta>;
   prepararRevisaoExtracao?(pedido: import("./revisaoExtracao.js").PedidoRevisaoExtracao, signal?: AbortSignal): Promise<import("./revisaoExtracao.js").RevisaoPreparada>;
   confirmarRevisaoExtracao?(pedido: import("./revisaoExtracao.js").PedidoRevisaoExtracao, signal?: AbortSignal): Promise<{ codigo: "GRAVADA" | "REPLAY" }>;
   oncoassistStatus?(signal?: AbortSignal): Promise<EstadoOncoassist>;

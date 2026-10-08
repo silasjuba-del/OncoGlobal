@@ -1,6 +1,6 @@
 import { ActionIntent, ConfirmarBloco } from "../../contracts/operacao.js";
 import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
-import { FonteRevisao, RevisaoPreparada } from "./revisaoExtracao.js";
+import { FonteRevisao, ReconciliacaoProposta, RevisaoPreparada } from "./revisaoExtracao.js";
 import { AcaoResposta, AgendaResposta, ApacResposta, BundleResposta, CanalResposta, ChatResposta, ConfirmacaoResposta, ConsultaResposta, SalaoResposta } from "./respostas.js";
 import { z } from "zod";
 import {
@@ -78,6 +78,12 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     async vincularFonteRevisao(pedido, signal) {
       const { status, json } = await enviar("/consulta/rascunho/revisar", pedido, true, signal);
       const result = z.object({ codigo: z.literal("VINCULO_REVISTO"), revision: z.number().int().nonnegative() }).safeParse(json);
+      if (status !== 200 || !result.success) throw new ErroPorta(codigoDe(json, "PAYLOAD_INVALIDO"));
+      return result.data;
+    },
+    async reconciliarFontes(draftIds, signal) {
+      const { status, json } = await enviar("/consulta/rascunho/reconciliar", { draftIds: [...draftIds] }, true, signal);
+      const result = ReconciliacaoProposta.safeParse(json);
       if (status !== 200 || !result.success) throw new ErroPorta(codigoDe(json, "PAYLOAD_INVALIDO"));
       return result.data;
     },
