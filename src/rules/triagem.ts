@@ -37,6 +37,8 @@ function pendenciaOrigemHemoglobina(
 ): string | null {
   // O campo legado hbDgDl já declara a escala canônica (décimos de g/dL).
   if (origem === undefined) return null;
+  // A origem do conflito é diagnosticada separadamente; não reinterpretar null como ausência.
+  if (t.hbDgDl.campo === "CONFLITO") return null;
   const proveniencia = ProvenienciaLaboratorialSchema.safeParse(origem);
   if (!proveniencia.success || proveniencia.data.valorOriginal === null || proveniencia.data.unidadeOriginal === null
     || proveniencia.data.fonte === null || proveniencia.data.dataClinica === null || t.hbDgDl.valor === null) {
@@ -106,7 +108,9 @@ export function avaliarTriagem(
   }
 
   const hb = t.hbDgDl.valor;
-  if (pendenteSeNulo(hb, "hbDgDl", "hemoglobina ausente", ctx, rs, pendentes)) {
+  if (t.hbDgDl.campo === "CONFLITO") {
+    pendentes.push(mot("pendente.hbDgDl.conflito", "hemoglobina em conflito entre fontes; nenhum valor foi eleito", rs));
+  } else if (pendenteSeNulo(hb, "hbDgDl", "hemoglobina ausente", ctx, rs, pendentes)) {
     if (hb < c.hbDgDlMin) cortes.push(mot("corte.hb.baixa", "hemoglobina abaixo do limite", rs));
   }
 
@@ -360,12 +364,18 @@ export function avaliarCorteSalao(
     decisaoPortao(bloco, "fc", nome), rs, motivos, pendentes,
   );
   const hb = t.hbDgDl.valor;
-  compararLimite(
-    hb, hb !== null && hb < hbMin,
-    "corteSalao.hb.baixa", "hemoglobina ausente",
-    `hemoglobina ${hb === null ? "" : textoHb(hb)} abaixo do limite do corte do salão`,
-    decisaoPortao(bloco, "hb", nome), rs, motivos, pendentes,
-  );
+  if (t.hbDgDl.campo === "CONFLITO") {
+    pendentes.push(motivoPortao("pendente.corteSalao.hb.conflito",
+      "hemoglobina em conflito entre fontes; nenhum valor foi eleito",
+      decisaoPortao(bloco, "hb", nome), rs));
+  } else {
+    compararLimite(
+      hb, hb !== null && hb < hbMin,
+      "corteSalao.hb.baixa", "hemoglobina ausente",
+      `hemoglobina ${hb === null ? "" : textoHb(hb)} abaixo do limite do corte do salão`,
+      decisaoPortao(bloco, "hb", nome), rs, motivos, pendentes,
+    );
+  }
   const pendenciaHb = pendenciaOrigemHemoglobina(t, extra.provenienciaHb);
   if (pendenciaHb) pendentes.push(motivoPortao("pendente.corteSalao.hb.origem", pendenciaHb,
     decisaoPortao(bloco, "hb", nome), rs));
