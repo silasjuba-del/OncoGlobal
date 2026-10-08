@@ -96,7 +96,10 @@ export function gatesCoerencia(apac: Apac, ctx: ContextoAntiglosa): Achado[] {
   const sexo = lerTexto(campos, "pacienteSexo");
 
   // AG-13 CID principal x sexo cadastrado (tabela injetada, por prefixo CID-10)
-  if (cid && sexo && ctx.regrasCidSexo) {
+  // H20: só M/F canônicos decidem o gate; sexo em outra forma ("masculino", "X") é PENDENTE, nunca VERMELHO falso.
+  if (cid && sexo && ctx.regrasCidSexo && sexo !== "M" && sexo !== "F")
+    pendente("AG-13", "pacienteSexo", `sexo "${sexo}" não é M ou F; compatibilidade CID x sexo não avaliada.`, F.cid);
+  else if (cid && sexo && ctx.regrasCidSexo) {
     const c = normCid(cid);
     const regra = ctx.regrasCidSexo.find((r) => c.startsWith(normCid(r.prefixo)) && sexo !== r.sexoExigido);
     if (regra) {

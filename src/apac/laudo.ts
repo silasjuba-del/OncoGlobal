@@ -153,8 +153,11 @@ function linhasHistorico(campos: Record<string, unknown>, chave: string): { desc
     if (!x || typeof x !== "object") continue;
     const esquema = (x as { esquema?: unknown }).esquema;
     const inicio = (x as { dataInicio?: unknown }).dataInicio;
-    if (typeof esquema !== "string" || esquema.trim() === "" || vistos.has(esquema.trim())) continue;
-    vistos.add(esquema.trim());
+    if (typeof esquema !== "string" || esquema.trim() === "") continue;
+    // H20: a chave ignora o marcador de ciclo (mesmo critério do gate AG-16), senão "FOLFOX ciclo 1" e "FOLFOX ciclo 2" viram duas linhas.
+    const chave = semAcento(esquema).replace(/\b(CICLO|C)\s*\d+\b/g, "").replace(/\s+/g, " ").trim();
+    if (vistos.has(chave)) continue;
+    vistos.add(chave);
     out.push({ descricao: esquema.trim(), dataInicio: typeof inicio === "string" || typeof inicio === "number" ? String(inicio) : "" });
   }
   return out.slice(0, MAX_LINHAS_ANTERIORES);
