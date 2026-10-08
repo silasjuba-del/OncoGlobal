@@ -1,5 +1,7 @@
 import type { ClinicalFact, EncounterSegment, FactDomain, FactEvidence } from "./tipos.js";
-import { DICIONARIO_FARMACO, normalizarLateralidade, normalizarSitioAnatomico } from "./normalizacao.js";
+import {
+  DICIONARIO_FARMACO, normalizarFarmaco, normalizarLateralidade, normalizarSitioAnatomico,
+} from "./normalizacao.js";
 
 const aliasesFarmacos = Object.keys(DICIONARIO_FARMACO)
   .sort((a, b) => b.length - a.length)
@@ -11,6 +13,53 @@ const padraoFarmacoPlaud = new RegExp(
 
 function chaveFarmaco(texto: string): string {
   return texto.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase("pt-BR").trim().replace(/\s+/g, " ");
+}
+
+const CARACTERES_INVISIVEIS = /[­​-‍⁠﻿]/gu;
+const LETRA_NAO_LATINA = /[\p{Script=Cyrillic}\p{Script=Greek}]/u;
+const LETRA_LATINA = /\p{Script=Latin}/u;
+/** Homóglifos cirílicos/gregos que se parecem com letras latinas (apenas para casar o dicionário). */
+const HOMOGLIFOS_PARA_LATINO: Readonly<Record<string, string>> = {
+  "а": "a", "с": "c", "е": "e", "о": "o", "р": "p", "х": "x",
+  "у": "y", "і": "i", "ј": "j", "ѕ": "s",
+  "А": "A", "В": "B", "Е": "E", "К": "K", "М": "M", "Н": "H",
+  "О": "O", "Р": "P", "С": "C", "Т": "T", "Х": "X", "У": "Y",
+  "Α": "A", "Β": "B", "Ε": "E", "Ζ": "Z", "Η": "H", "Ι": "I",
+  "Κ": "K", "Μ": "M", "Ν": "N", "Ο": "O", "Ρ": "P", "Τ": "T",
+  "Υ": "Y", "Χ": "X", "ο": "o", "ι": "i",
+};
+
+export interface DeteccaoFarmaco {
+  /** Texto como veio da fonte; nunca reescrito. */
+  readonly raw: string;
+  /** NFKC sem caracteres de largura zero. */
+  readonly normalized: string;
+  /** true quando a grafia é anômala (zero-width, alfabeto misto ou não latino): exige confirmação. */
+  readonly incerto: boolean;
+  /** Canônico do dicionário local, apenas como SUGESTÃO pendente; nunca substitui o raw. */
+  readonly sugestao: string;
+  readonly motivo: string;
+}
+
+/**
+ * Detector de fármaco com grafia suspeita (homóglifo, zero-width, alfabeto misto).
+ * Só analisa tokens anômalos: texto latino comum não é avaliado (retorna null). Um token
+ * anômalo que se parece com fármaco do dicionário local devolve incerto = true.
+ */
+export function detectarFarmaco(valor: string): DeteccaoFarmaco | null {
+  const semInvisiveis = valor.replace(CARACTERES_INVISIVEIS, "");
+  const normalized = semInvisiveis.normalize("NFKC").trim();
+  if (!normalized) return null;
+  const motivos: string[] = [];
+  if (semInvisiveis.length !== valor.length) motivos.push("caractere de largura zero removido");
+  const naoLatina = LETRA_NAO_LATINA.test(normalized);
+  if (naoLatina && LETRA_LATINA.test(normalized)) motivos.push("alfabetos misturados (latino + cirílico/grego)");
+  else if (naoLatina) motivos.push("letras cirílicas/gregas no lugar de latinas");
+  if (!motivos.length) return null;
+  const esqueleto = [...normalized].map((c) => HOMOGLIFOS_PARA_LATINO[c] ?? c).join("");
+  const sugestao = normalizarFarmaco(chaveFarmaco(esqueleto)).normalizado;
+  if (!sugestao) return null;
+  return { raw: valor, normalized, incerto: true, sugestao, motivo: motivos.join("; ") };
 }
 
 const MARCADOR_RASURA = /\[\/?RISCADO\]/giu;
@@ -217,6 +266,17 @@ export const extratorDeterministico: Extrator = {
       if (segmento.sourceType === "prescription" && !negated) {
         const drug = raw.match(/\b(carboplatina|cisplatina|paclitaxel|docetaxel|oxaliplatina)\b/iu);
         if (drug) add("drug", drug[0]);
+        else {
+          // Grafia anômala (homóglifo/zero-width): fato UNCERTAIN com confirmação, nunca troca silenciosa.
+          const suspeito = raw.split(/\s+/u).flatMap((token) => {
+            const deteccao = detectarFarmaco(token);
+            return deteccao?.incerto ? [deteccao] : [];
+          })[0];
+          if (suspeito) {
+            add("drug", { raw: suspeito.raw, normalizado: suspeito.sugestao, incerto: true, motivo: suspeito.motivo },
+              "UNCERTAIN", true);
+          }
+        }
         const cycle = raw.match(/\bciclo\s*(\d+)\b/iu);
         if (cycle) add("cycle", cycle[1]);
         const regimen = raw.match(/\b(?:protocolo|esquema)\s*:\s*([^.;]+)/iu);
