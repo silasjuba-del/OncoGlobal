@@ -194,10 +194,30 @@ export interface FarmacoNormalizado {
   /** true quando o nome só casa por aproximação fonética (⇒ INFERRED, com confiança). */
   incerto: boolean;
   confidence: number;
+  /** Conteúdo invisível ou homóglifo: apenas candidato para revisão, nunca EXPLICIT. */
+  suspeito?: true;
 }
 
 function semAcento(chave: string): string {
   return chave.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase("pt-BR").trim();
+}
+
+// Substituições usadas SOMENTE para procurar um candidato, jamais para corrigir o
+// texto de origem. Scripts mistos e formatadores invisíveis são sempre suspeitos.
+const HOMOGLIFOS: Readonly<Record<string, string>> = {
+  "а": "a", "е": "e", "і": "i", "о": "o", "р": "p", "с": "c",
+  "х": "x", "у": "y", "ο": "o", "α": "a", "ι": "i", "ρ": "p",
+  "ν": "v", "ϲ": "c",
+};
+const INVISIVEIS = /[\p{Cf}\u034f\u180e]/gu;
+const OUTRO_SCRIPT = /[\p{Script=Cyrillic}\p{Script=Greek}]/u;
+
+function chaveVisualSuspeita(texto: string): string | null {
+  if (!INVISIVEIS.test(texto) && !OUTRO_SCRIPT.test(texto)) return null;
+  INVISIVEIS.lastIndex = 0;
+  const visivel = texto.toLocaleLowerCase("pt-BR").replace(INVISIVEIS, "")
+    .replace(/[\p{Script=Cyrillic}\p{Script=Greek}]/gu, (char) => HOMOGLIFOS[char] ?? "?");
+  return semAcento(visivel);
 }
 
 function distancia(a: string, b: string): number {
@@ -216,6 +236,13 @@ function distancia(a: string, b: string): number {
 
 /** Normalização de fármaco com proveniência: exato ⇒ EXPLICIT; aproximado ⇒ INFERRED incerto. */
 export function normalizarFarmaco(texto: string): FarmacoNormalizado {
+  const visual = chaveVisualSuspeita(texto);
+  if (visual !== null) {
+    // Não usamos distância de edição neste ramo: um formatador ou alfabeto estranho
+    // por si só não autoriza converter uma palavra arbitrária em medicamento.
+    return { raw: texto, normalizado: DICIONARIO_FARMACO[visual] ?? null,
+      incerto: true, confidence: 0.5, suspeito: true };
+  }
   const chave = semAcento(texto);
   const exato = DICIONARIO_FARMACO[chave];
   if (exato) return { raw: texto.trim(), normalizado: exato, incerto: false, confidence: 1 };
@@ -345,6 +372,17 @@ export function normalizarFatos(fatos: readonly ClinicalFact[]): readonly Clinic
       const raw = typeof fact.value === "string" ? fact.value : String(valorDe(fact).raw ?? "");
       if (!raw) return fact;
       const farmaco = normalizarFarmaco(raw);
+      if (farmaco.suspeito) {
+        return {
+          ...fact,
+          raw: farmaco.raw,
+          value: { ...valorDe(fact), raw: farmaco.raw, normalizado: farmaco.normalizado,
+            incerto: true, suspeito: true },
+          evidence: "UNCERTAIN",
+          confidence: Math.min(fact.confidence, farmaco.confidence),
+          requiresConfirmation: true,
+        };
+      }
       if (farmaco.normalizado === null) return comRaw(fact, raw);
       return {
         ...fact,

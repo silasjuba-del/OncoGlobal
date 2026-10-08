@@ -96,7 +96,7 @@ export function excecaoDeNumeroFalado(fact: ClinicalFact): ReviewException {
   };
 }
 
-/** Exceção de fármaco foneticamente incerto. */
+/** Exceção de fármaco incerto (fonético ou caracteres suspeitos). */
 export function excecaoDeFarmacoIncerto(fact: ClinicalFact): ReviewException {
   const v = typeof fact.value === "object" && fact.value !== null
     ? fact.value as Record<string, unknown> : {};
@@ -105,7 +105,7 @@ export function excecaoDeFarmacoIncerto(fact: ClinicalFact): ReviewException {
     kind: "UNCERTAIN_DRUG",
     segmentId: fact.segmentId,
     factIds: [fact.id],
-    reason: `fármaco foneticamente incerto: "${String(v.raw ?? "")}" ≈ ${String(v.normalizado ?? "")}`,
+    reason: `fármaco ${v.suspeito ? "com caracteres suspeitos" : "foneticamente incerto"}: "${String(v.raw ?? "")}" ≈ ${String(v.normalizado ?? "")}`,
     sourceIds: [fact.sourceId],
   };
 }

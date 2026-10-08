@@ -179,7 +179,8 @@ export function classificarExcecoes(state: ExtractionState): ExtractionState {
     .filter((f) => f.sourceType === "plaud" && f.requiresConfirmation
       && (f.domain === "lab" || f.domain === "cycle" || f.domain === "imaging"))
     .map(excecaoDeNumeroFalado);
-  const farmacosIncertos = state.facts.filter((f) => f.domain === "drug" && f.evidence === "INFERRED")
+  const farmacosIncertos = state.facts.filter((f) => f.domain === "drug" && f.requiresConfirmation
+    && (f.evidence === "INFERRED" || f.evidence === "UNCERTAIN"))
     .map(excecaoDeFarmacoIncerto);
   const grupos = state.segments.length
     ? state.segments.map(({ id }) => ({ segmentId: id, facts: state.facts.filter((fact) => fact.segmentId === id) }))
