@@ -7,7 +7,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w12-grok`, branch `f0/w12-grok`.
 | GROK-01 corte do salão 1.1.0 | FEITA | W12-GROK-01 | FC &lt; 50 corta na FN-01. CREAT 150 ativo. PAS &gt; 160 no corte do salão. |
 | GROK-02 um corpo de triagem e porta | FEITA | W12-GROK-02 | Barrel reexporta a mesma função. Porta lê `LimiaresBula`. |
 | GROK-03 CTCAE v6 no corpus | FEITA | W12-GROK-03 | Termos clínicos literais da v6 em `graus.termosClinicos`. Plaquetas G4 continua &lt; 10.000. |
-| GROK-04 texto para grau | | | |
+| GROK-04 texto para grau | FEITA | W12-GROK-04 | Extração pura e sugestão só com frase literal da v6. Plaquetas 20.000 = G3, fila, sem E1. |
 | GROK-05 retorno com toxicidade | | | |
 | GROK-06 tontura | | | |
 | GROK-07 intervalo de 30 dias | | | |
@@ -74,5 +74,25 @@ Plaquetas numéricas não mudaram: G3 inclui 10.000 e exclui 50.000; G4 é `maxE
 `npm run check:corpus` — `corpus ok (124 arquivos)`. `salao-ctcae.v1.json` header ok, 0 `[VERIFICAR]`, ATIVOS 7.
 
 `npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 54 files, 402 tests, exit 0.
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.
+
+## GROK-04
+
+`ctcaeTexto.ts` extrai quantidade, período, hidratação EV, hospitalização, AVD, laboratório e temperatura, com o trecho do texto. Negação imediata ("sem vômitos", "não tem febre") não gera critério. `ctcaeClinico.ts` não importa outra regra: o corpus entra por parâmetro. O barrel compõe os dois, porque a fronteira só permite esse reexport.
+
+Grau sugerido só sai de frase literal da v6 ou da faixa numérica injetada. "6 episódios por 3 dias" mostra as duas leituras e não elege grau quando elas divergem. Observação hospitalar de vômito casa "hospitalization indicated" (G3) e as duas leituras da quantidade continuam visíveis, ambas sem grau, porque a v6 de vômito não tem corte por episódio. Diarreia 4–6 por dia acima do basal é G2; 7 ou mais é G3; hidratação EV na diarreia é G3. Febre lê os números do próprio texto do corpus: 38,0–39,0 inclusive é G1, acima de 39,0 até 40,0 é G2, acima de 40,0 sem duração fica PENDENTE, 24 h é G3 e 25 h é G4.
+
+Plaquetas 20.000 e 10.000 são G3, destino FILA_MEDICO, E1 falso. 9.999 é G4 com E1, sem bloquear. Dois valores no mesmo texto não elegem nenhum. O resultado é sugestão: `confirmadoPeloMedico` falso e `bloqueiaSalvar` falso. Tipo local marcado PROVISORIO-W12 em `docs/w12/PEDIDOS-GROK.md`.
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries` — `fronteiras ok (284 arquivos)`.
+
+`npm run check:corpus` — `corpus ok (124 arquivos)`.
+
+`npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 55 files, 416 tests, exit 0.
 
 `npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.

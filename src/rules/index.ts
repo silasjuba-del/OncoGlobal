@@ -8,8 +8,16 @@ import { avaliarPeso } from "./peso.js";
 import { avisoIntervaloPosQt } from "./prazos.js";
 import { ehConcomitante } from "./concomitancia.js";
 import { cicloVaiAoMedico } from "./cicloComMedico.js";
+import { extrairCriteriosCtcae } from "./ctcaeTexto.js";
+import { sugerirGrauCtcae } from "./ctcaeClinico.js";
 export { avaliarTriagem, validadeHemograma, avaliarCorteSalao, avaliarTriagemCiclo, avaliarPortoesW10, decidirDestino, ordenarFila, calcularDose, avaliarPeso, avisoIntervaloPosQt, ehConcomitante, cicloVaiAoMedico };
 export { portaCiclo, grauCtcae, lerSalaoCtcae, limiaresDaBula } from "./portaCiclo.js";
+export { extrairCriteriosCtcae, sugerirGrauCtcae };
+
+/** D-W9-75. Compõe extração e sugestão. O barrel é o único arquivo de regras que pode importar os dois. */
+export function avaliarTextoCtcae(texto: string, corpus: unknown) {
+  return sugerirGrauCtcae(extrairCriteriosCtcae(texto), corpus);
+}
 export { diferencaDiasCivis } from "./datas.js";
 export type { SinaisExtraW10, ResultadoPortao } from "./triagem.js";
 export const funcoesF0: FuncoesF0 = { avaliarTriagem, decidirDestino, ordenarFila, calcularDose, validadeHemograma, avaliarPeso, avisoIntervaloPosQt, ehConcomitante, cicloVaiAoMedico };
