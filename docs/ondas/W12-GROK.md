@@ -36,11 +36,19 @@
 - Termo sem trecho v6 no repositório: entra `ativo:false` com `NAO_VERIFICADO`, e o pedido vai para PEDIDOS.
 - **CTCAE v6 pura (decisão do Dr. Silas):** nenhum corte da v5. Teste que prova que o valor 25.000 de plaquetas não aparece como limite G4.
 
-### GROK-04 · Avaliador CTCAE clínico (puro)
-- `src/rules/ctcaeClinico.ts`: recebe o termo e os critérios estruturados (ex.: evacuações acima do basal/24 h, hidratação EV indicada, hospitalização indicada, limitação de AVD) e devolve `{ grauCandidato, criteriosUsados, criteriosFaltantes, status }`.
-- Critério que falta = grau `null` e status PENDENTE. Nunca adivinha o grau.
-- **A IA nunca define o grau.** O resultado é candidato e o médico confirma.
-- Plaquetas 20.000 = **G3** (v6) e vão para a fila do médico, sem E1.
+### GROK-04 · Do texto ao grau: o médico descreve, o app classifica (D-W9-75)
+**Fluxo do Dr. Silas (processo inverso):** o médico abre a caixa "Texto" e descreve o que aconteceu, por exemplo: "paciente teve 6 episódios de vômito por 3 dias, sendo necessária observação hospitalar". **O app calcula e sugere o grau.** O médico nunca marca "grau 3" à mão.
+- `src/rules/ctcaeTexto.ts` (puro e determinístico, sem LLM) extrai do texto os critérios do termo, cada um com o **trecho-fonte**:
+  - quantidade e período (episódios/24 h, dias);
+  - hidratação EV, internação ou observação hospitalar;
+  - limitação de AVD;
+  - números de laboratório.
+  A negação ("sem vômitos") não conta.
+- `src/rules/ctcaeClinico.ts` recebe esses critérios e devolve `{ termo, grauSugerido, criteriosUsados (com trecho), criteriosFaltantes, ambiguidades, status }`.
+- **Ambiguidade aparece, nunca é resolvida em silêncio.** Exemplo: "6 episódios por 3 dias" pode ser 6 por dia ou 6 no total. O app mostra as duas leituras e o grau de cada uma. Critério que falta = grau `null` + PENDENTE, com a pergunta que falta.
+- Vale **só o critério literal da v6** do corpus (GROK-03). O resultado é sempre SUGESTÃO; o médico confirma ou corrige com 1 clique.
+- Plaquetas 20.000 = **G3** (v6) → fila do médico, sem E1.
+- Testes com pelo menos 10 frases sintéticas: vômito, diarreia, mucosite, febre, negação, ambiguidade, frase sem critério, e o mesmo texto dando sempre o mesmo resultado.
 
 ### GROK-05 · Cadeia do retorno com toxicidade (caso "Paciente Teste 91")
 Em `src/rules/retorno.ts` ou num arquivo novo ao lado, a entrada "diarreia G3 + plaquetas 20.000" deve gerar:
@@ -52,8 +60,12 @@ Em `src/rules/retorno.ts` ou num arquivo novo ao lado, a entrada "diarreia G3 + 
 
 Tudo isso é alerta: nunca bloqueia o clínico e nunca define dose ou causalidade.
 
-### GROK-06 · Desconhecido nunca vira "não"
-- `tontura: null` → PENDENTE com motivo `pendente.tontura`. Nunca é tratada como `false`.
+### GROK-06 · Tontura deixa de ser critério; desconhecido nunca vira "não" (D-W9-76)
+- **Tontura sozinha não é critério clínico relevante:** não corta, não pesa no ECOG e não gera alerta (é comum por fármaco e por labirinto do idoso).
+  - Remova o ramo "ECOG 2 + tontura" do corte do salão. `ecog2ComTonturaCorta` sai do ruleset (vai para 1.1.0 junto com a GROK-01).
+  - O campo `tontura` continua no contrato, só como registro.
+  - Teste existente que exigia a anotação "ECOG 2 com tontura": **autorizado pelo tech lead a ser atualizado** (D-W9-76). Comente a decisão no teste.
+- **Exceção: vertigem subjetiva de início NOVO, sem histórico anterior** → alerta "investigar SNC (metástase cerebral/cerebelar)". É alerta, nunca bloqueio. Histórico ausente = PENDENTE, nunca "novo".
 - Ausência de E1 nunca equivale a liberação: a saída nunca contém "liberado", "aprovado" ou "apto".
 - Teste para cada campo opcional da triagem: ausente → PENDENTE, nunca VERDE.
 
@@ -63,13 +75,19 @@ Tudo isso é alerta: nunca bloqueia o clínico e nunca define dose ou causalidad
 - Data ausente → PENDENTE. Data civil com fuso −03:00 injetado (D-W5-01).
 - Só aviso, nunca trava.
 
-### GROK-08 · Red flags do canal paciente (avaliador)
+### GROK-08 · Red flags do canal paciente: orientação geral por cenário, nunca prescrição (D-W9-75)
 `src/rules/canalRedflags.ts`, que consome `corpus/rulesets/canal-redflags.v1.json` (25 sinais, D-W9-28):
-- febre estritamente > 37,8;
-- a negação ("não tem febre") não dispara;
-- a resposta ao paciente é o texto FIXO do corpus ("procure a emergência"), nunca escrito pelo código;
-- sempre gera alerta ao médico;
-- nunca orienta tratamento, dose ou diagnóstico (Q43).
+- **A resposta não é fixa para todos os cenários.** Cada sinal tem a sua **orientação geral** no corpus, em RASCUNHO, para curadoria do Dr. Silas. Exemplo da diarreia:
+  - hidratação e dieta antidiarreica;
+  - alimentos a evitar;
+  - sinais de gravidade a observar;
+  - suspender anti-hipertensivos e diuréticos (D-W9-28);
+  - ir ao PS se houver sinal de gravidade.
+- **Proibido:** prescrição. Nenhum nome de remédio com dose, posologia, início de medicamento ou diagnóstico. Teste que varre todas as orientações do corpus atrás de dose/unidade (mg, gotas, comprimido, 8/8 h…) e reprova se achar.
+- Toda resposta termina com a frase fixa: **"Nada substitui a avaliação presencial do seu médico."**
+- Febre estritamente > 37,8. A negação ("não tem febre") não dispara.
+- Sempre gera alerta ao médico. O texto vem do corpus, nunca é escrito pelo código.
+- O `canal-redflags` sobe para 1.1.0.
 
 ### GROK-09 · Valor atual × série temporal
 - `src/rules/valorAtual.ts` (puro) escolhe o valor mais recente válido de uma série datada, dentro da validade do campo (ex.: hemograma 7 dias, peso 30 dias).
