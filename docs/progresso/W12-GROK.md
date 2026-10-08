@@ -6,7 +6,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w12-grok`, branch `f0/w12-grok`.
 |---|---|---|---|
 | GROK-01 corte do salão 1.1.0 | FEITA | W12-GROK-01 | FC &lt; 50 corta na FN-01. CREAT 150 ativo. PAS &gt; 160 no corte do salão. |
 | GROK-02 um corpo de triagem e porta | FEITA | W12-GROK-02 | Barrel reexporta a mesma função. Porta lê `LimiaresBula`. |
-| GROK-03 CTCAE v6 no corpus | | | |
+| GROK-03 CTCAE v6 no corpus | FEITA | W12-GROK-03 | Termos clínicos literais da v6 em `graus.termosClinicos`. Plaquetas G4 continua &lt; 10.000. |
 | GROK-04 texto para grau | | | |
 | GROK-05 retorno com toxicidade | | | |
 | GROK-06 tontura | | | |
@@ -56,5 +56,23 @@ Triagem do ciclo e corte do salão seguem portões distintos: FC 49 só corta o 
 `npm run check:corpus` — `corpus ok (124 arquivos)`.
 
 `npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 55 files, 428 tests, exit 0 (a corrida também incluiu `tests/w10-grok/grok-02-bula-ctcae.test.ts` e `tests/redteam/rt07-labs-salao.test.ts`).
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.
+
+## GROK-03
+
+`salao-ctcae` foi de 1.0.0 para 1.1.0. Os sete termos clínicos ficam em `graus.termosClinicos`, fora de `graus.termos`, porque `lerSalaoCtcae` só aceita faixa numérica. Cada `grau.texto` é a célula EN literal de `docs/referencias/onco-referencia/02-ctcae-v6.md`, e o teste confere que o trecho é substring do arquivo. Grau com traço na tabela oficial não entra. Termo sem trecho ficaria `ativo:false` e `NAO_VERIFICADO`; os sete têm trecho.
+
+Plaquetas numéricas não mudaram: G3 inclui 10.000 e exclui 50.000; G4 é `maxExclusivo` 10.000. 25.000 continua G3. O arquivo não contém 25000.
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries` — `fronteiras ok (280 arquivos)`.
+
+`npm run check:corpus` — `corpus ok (124 arquivos)`. `salao-ctcae.v1.json` header ok, 0 `[VERIFICAR]`, ATIVOS 7.
+
+`npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 54 files, 402 tests, exit 0.
 
 `npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.

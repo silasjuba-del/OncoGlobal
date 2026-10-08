@@ -1,16 +1,16 @@
 {
   "header": {
     "id": "salao-ctcae",
-    "versao": "1.0.0",
-    "vigenteDesde": "2026-10-06",
+    "versao": "1.1.0",
+    "vigenteDesde": "2026-10-08",
     "fonte": {
       "tipo": "LITERATURA",
-      "referencia": "D-W9-22a + docs/referencias/onco-referencia/02-ctcae-v6.md §13–15 (CTCAE v6.0 NCI)",
+      "referencia": "D-W9-22a + D-W9-73 + docs/referencias/onco-referencia/02-ctcae-v6.md (CTCAE v6.0 NCI)",
       "trecho": "Neutrophil count decreased: G1 <1500-1000/mm3; G2 <1000-500/mm3; G3 <500-100/mm3; G4 <100/mm3. Anemia: G2 Hgb <10.0-8.0 g/dL; G3 <8.0 g/dL. Thrombocytopenia: G2 <75000-50000/mm3; G3 <50000-10000/mm3; G4 <10000/mm3. Porta de ciclo = limiar de bula, nunca grau CTCAE.",
       "edicao": "CTCAE v6.0"
     },
     "curador": "Dr. Silas Negrão",
-    "aprovadoEm": "2026-10-06"
+    "aprovadoEm": "2026-10-08"
   },
   "portaCiclo": {
     "decisao": "D-W9-22a",
@@ -52,6 +52,81 @@
           { "grau": 2, "minInclusivo": 50000, "maxExclusivo": 75000 },
           { "grau": 3, "minInclusivo": 10000, "maxExclusivo": 50000 },
           { "grau": 4, "maxExclusivo": 10000 }
+        ]
+      }
+    },
+    "termosClinicos": {
+      "nota": "Texto literal da v6 (coluna EN de 02-ctcae-v6.md). Grau ausente na tabela oficial não entra. Termo sem trecho no repositório fica ativo:false e status NAO_VERIFICADO.",
+      "diarreia": {
+        "ativo": true, "status": "VERIFICADO", "nome": "Diarreia", "termoEn": "Diarrhea",
+        "fonte": { "tipo": "LITERATURA", "referencia": "docs/referencias/onco-referencia/02-ctcae-v6.md", "trecho": "### 3. Diarrhea — Diarreia", "edicao": "CTCAE v6.0" },
+        "graus": [
+          { "grau": 1, "texto": "Change in consistency or frequency" },
+          { "grau": 2, "texto": "Increase of 4 - 6 stools per day over baseline; moderate increase in ostomy output compared to baseline; limiting instrumental ADL or mild/moderate impact on age-appropriate normal daily activity (pediatric); change in consistency or frequency AND limiting instrumental ADL or mild/moderate impact on age-appropriate normal daily activity (pediatric)" },
+          { "grau": 3, "texto": "Increase of >=7 stools per day over baseline; hospitalization indicated; severe increase in ostomy output compared to baseline; requires IV intervention; limiting self-care ADL or severe impact on age-appropriate normal daily activity (pediatric)" },
+          { "grau": 4, "texto": "Life-threatening consequences; urgent intervention indicated" },
+          { "grau": 5, "texto": "Death" }
+        ]
+      },
+      "nausea": {
+        "ativo": true, "status": "VERIFICADO", "nome": "Náusea", "termoEn": "Nausea",
+        "fonte": { "tipo": "LITERATURA", "referencia": "docs/referencias/onco-referencia/02-ctcae-v6.md", "trecho": "### 1. Nausea — Náusea", "edicao": "CTCAE v6.0" },
+        "graus": [
+          { "grau": 1, "texto": "Loss of appetite without alteration in eating habits" },
+          { "grau": 2, "texto": "Oral intake decreased without significant weight loss, dehydration or malnutrition; IV intervention indicated" },
+          { "grau": 3, "texto": "Inadequate oral caloric or fluid intake; tube feeding, TPN, or hospitalization indicated" }
+        ]
+      },
+      "vomito": {
+        "ativo": true, "status": "VERIFICADO", "nome": "Vômito", "termoEn": "Vomiting",
+        "fonte": { "tipo": "LITERATURA", "referencia": "docs/referencias/onco-referencia/02-ctcae-v6.md", "trecho": "### 2. Vomiting — Vômito", "edicao": "CTCAE v6.0" },
+        "graus": [
+          { "grau": 1, "texto": "Intervention not indicated" },
+          { "grau": 2, "texto": "Initiation of outpatient IV hydration; medical intervention indicated" },
+          { "grau": 3, "texto": "Initiation of tube feeding, or TPN; hospitalization indicated" },
+          { "grau": 4, "texto": "Life-threatening consequences" },
+          { "grau": 5, "texto": "Death" }
+        ]
+      },
+      "mucositeOral": {
+        "ativo": true, "status": "VERIFICADO", "nome": "Mucosite oral", "termoEn": "Mucositis oral",
+        "fonte": { "tipo": "LITERATURA", "referencia": "docs/referencias/onco-referencia/02-ctcae-v6.md", "trecho": "### 5. Mucositis oral — Mucosite oral", "edicao": "CTCAE v6.0" },
+        "graus": [
+          { "grau": 1, "texto": "Asymptomatic or mild symptoms; intervention not indicated" },
+          { "grau": 2, "texto": "Moderate pain or ulcer that does not interfere with oral intake; modified diet indicated" },
+          { "grau": 3, "texto": "Severe pain; interfering with oral intake" },
+          { "grau": 4, "texto": "Life-threatening consequences; urgent intervention indicated" },
+          { "grau": 5, "texto": "Death" }
+        ]
+      },
+      "fadiga": {
+        "ativo": true, "status": "VERIFICADO", "nome": "Fadiga", "termoEn": "Fatigue",
+        "fonte": { "tipo": "LITERATURA", "referencia": "docs/referencias/onco-referencia/02-ctcae-v6.md", "trecho": "### 7. Fatigue — Fadiga", "edicao": "CTCAE v6.0" },
+        "graus": [
+          { "grau": 1, "texto": "Fatigue relieved by rest" },
+          { "grau": 2, "texto": "Fatigue not relieved by rest; limiting instrumental ADL or mild/moderate impact on age-appropriate normal daily activity (pediatric)" },
+          { "grau": 3, "texto": "Fatigue not relieved by rest, limiting self-care ADL or severe impact on age-appropriate normal daily activity (pediatric)" }
+        ]
+      },
+      "neuropatiaPerifericaSensitiva": {
+        "ativo": true, "status": "VERIFICADO", "nome": "Neuropatia periférica sensitiva", "termoEn": "Peripheral sensory neuropathy",
+        "fonte": { "tipo": "LITERATURA", "referencia": "docs/referencias/onco-referencia/02-ctcae-v6.md", "trecho": "### 9. Peripheral sensory neuropathy — Neuropatia sensitiva periférica", "edicao": "CTCAE v6.0" },
+        "graus": [
+          { "grau": 1, "texto": "Mild symptoms" },
+          { "grau": 2, "texto": "Moderate symptoms; limiting instrumental ADL or mild/moderate impact on age-appropriate normal daily activity (pediatric)" },
+          { "grau": 3, "texto": "Severe symptoms; limiting self-care ADL or severe impact on age-appropriate normal daily activity (pediatric)" },
+          { "grau": 4, "texto": "Life-threatening consequences; urgent intervention indicated" }
+        ]
+      },
+      "febre": {
+        "ativo": true, "status": "VERIFICADO", "nome": "Febre", "termoEn": "Fever",
+        "fonte": { "tipo": "LITERATURA", "referencia": "docs/referencias/onco-referencia/02-ctcae-v6.md", "trecho": "### 46. Fever — Febre", "edicao": "CTCAE v6.0" },
+        "graus": [
+          { "grau": 1, "texto": "38.0 - 39.0 degrees C (100.4 - 102.2 degrees F)" },
+          { "grau": 2, "texto": ">39.0 - 40.0 degrees C (102.3 - 104.0 degrees F)" },
+          { "grau": 3, "texto": ">40.0 degrees C (>104.0 degrees F) for <=24 hrs" },
+          { "grau": 4, "texto": ">40.0 degrees C (>104.0 degrees F) for >24 hrs" },
+          { "grau": 5, "texto": "Death" }
         ]
       }
     }
