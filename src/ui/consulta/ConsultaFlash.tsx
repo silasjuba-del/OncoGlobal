@@ -128,16 +128,17 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
 
   const [tarefas, setTarefas] = useState<MarcacaoTarefasRetorno>(() => {
     if (!tarefasRetorno || !tarefasRetorno.modeloPadraoSalvo) {
-      return { retorno: false, laboratorio: false, imagem: false };
+      return { retorno: true, laboratorio: false, imagem: false };
     }
     return {
-      retorno: marcadoInicialFlash(tarefasRetorno.retorno),
+      retorno: true, // D-W9-78b: o retorno vai sempre na Flash e não pode ser desmarcado
       laboratorio: marcadoInicialFlash(tarefasRetorno.laboratorio),
       imagem: marcadoInicialFlash(tarefasRetorno.imagem),
     };
   });
 
   function alternarTarefa(id: TarefaRetornoId) {
+    if (id === "retorno") return;
     setTarefas((atual) => ({ ...atual, [id]: !atual[id] }));
   }
 

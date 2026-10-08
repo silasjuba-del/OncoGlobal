@@ -59,6 +59,15 @@ export interface BundleExibidoVisao {
   documentos: readonly DocumentoBundleVisao[];
 }
 
+/** W12-F3 (opcional): dados da Consulta Flash. Ausente = Flash sem exames, retorno PENDENTE e sem modelo padrão. */
+export interface FlashVisao {
+  exames: readonly { data: string; nome: string; fraseLaudo?: string; situacao: "DENTRO_DO_LIMITE" | "FORA_DO_LIMITE" | "SEM_REFERENCIA" }[];
+  retornoDias: number | null;
+  modeloPadraoSalvo: boolean;
+  laboratorioPreMarcado: boolean;
+  imagemPreMarcada: boolean;
+}
+
 export interface ConsultaVisao {
   hoje: string;
   patientId: string;
@@ -89,6 +98,10 @@ export interface ConsultaVisao {
   /** null = limiar de plaquetas não configurado no corpus (PENDENTE na tela). */
   alertaPlaquetas?: AlertaPlaquetas | null;
   elegibilidade?: SaidaElegibilidadeCiclo;
+  /** W12-F3 (opcional): dados da Consulta Flash. */
+  flash?: FlashVisao;
+  /** W12-F3 (opcional): retrato transversal do tumor-índice (contrato RetratoTransversal, validado pelo cartão). Ausente = sem cartão. */
+  retratoTransversal?: unknown;
 }
 
 export interface ItemAgendaVisao {
