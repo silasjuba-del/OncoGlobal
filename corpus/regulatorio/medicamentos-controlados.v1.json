@@ -1,0 +1,27 @@
+{
+  "consumivel": false,
+  "versao": "2026-10-08.1",
+  "fonte": "Anvisa: Portaria SVS/MS 344/1998 (lista de substâncias controladas). Lista A/B e tipo documental por substância: PENDENTE_VERIFICACAO; nenhuma lista foi afirmada sem verificação oficial.",
+  "entradas": [
+    {
+      "id": "ctrl-001",
+      "nomes": ["tramadol"],
+      "lista": null,
+      "exigeReceituarioEspecial": true,
+      "status": "PENDENTE_VERIFICACAO",
+      "fonte": "Portaria SVS/MS 344/1998, lista de substâncias controladas",
+      "decisaoMedica": "TRAMADOL É RECEITA ESPECIAL, SÓ SE TIVER (Dr. Silas, 2026-10-07)",
+      "marcador": "[VERIFICAR]"
+    },
+    {
+      "id": "ctrl-002",
+      "nomes": ["morfina"],
+      "lista": null,
+      "exigeReceituarioEspecial": true,
+      "status": "PENDENTE_VERIFICACAO",
+      "fonte": "Portaria SVS/MS 344/1998, lista de substâncias controladas",
+      "decisaoMedica": null,
+      "marcador": "[VERIFICAR]"
+    }
+  ]
+}
