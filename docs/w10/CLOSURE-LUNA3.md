@@ -6,6 +6,8 @@ Base: `367825e4e0ae3f9a088256d24a745fd5b3705844`, branch `closure/w10-luna3`.
 
 `tests/closure-e2e/jornadas-salao-canal.test.ts` monta servidor HTTP local, sessão autenticada e SQLite temporário. Os casos cobrem triagem com lote selecionado e persistência global, draft consultável, liberação com corte e motivo médico, idempotência/replay, autor derivado da sessão, recusa sem alteração, seleção humana de vínculo e escopo de paciente/encontro. A liberação repete a requisição após reabrir o SQLite e espera `REPLAY` sem duplicar eventos.
 
+`tests/closure-e2e/tela-salao-primeiro-uso.test.tsx` adiciona o percurso UI→porta HTTP real→servidor loopback→SQLite persistente. O paciente sintético vem de `Paciente` + `AgendaEntry` reais no ledger e começa sem evento `Triagem`; a UI seleciona o paciente da agenda e fornece uma referência manual provisória para o formulário. O servidor calcula a fonte/hash e grava apenas `SALAO_TRIAGEM_RASCUNHO`, sem confirmar fato. O caso libera com motivo e reabre decisão e draft após restart. Nenhuma `Fonte` clínica confirmada foi inventada para habilitar a UI.
+
 Os testes exercitam endpoints e ledger reais; não simulam respostas de persistência. Os identificadores, fontes, razões e conteúdo são sintéticos. A sessão selecionada é instalada pelo gerenciador server-side no fixture.
 
 ## Estado de validação
