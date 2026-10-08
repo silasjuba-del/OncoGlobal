@@ -75,11 +75,16 @@ describe("W11-H10 · identificação APAC a partir do check-in", () => {
     expect(lerCampo(campos, "etnia")).toMatchObject({ estado: "PENDENTE" });
   });
 
-  it("todas as chaves de identificação existem na página 1 do laudo, exceto o telefone do responsável", () => {
+  it("todas as chaves de identificação existem na página 1 do laudo (inclui telefone do responsável)", () => {
     const naPagina = CHAVES_IDENTIFICACAO.filter((c) => c in CAMPOS_SOLICITACAO);
-    expect(naPagina).toHaveLength(CHAVES_IDENTIFICACAO.length - 1);
-    expect(CHAVES_IDENTIFICACAO).toContain("telefoneResponsavel");
-    expect(CAMPOS_SOLICITACAO).not.toHaveProperty("telefoneResponsavel");
+    expect(naPagina).toHaveLength(CHAVES_IDENTIFICACAO.length);
+    expect(CAMPOS_SOLICITACAO).toHaveProperty("telefoneResponsavel");
+  });
+
+  it("chave pendente no check-in apaga valor antigo da APAC", () => {
+    const id = lerIdentificacaoCheckin(cadastroCompleto({ cep: null }), TABELA);
+    const campos = aplicarIdentificacaoCheckin({ cep: { estado: "PRESENTE", valor: "00000000" } }, id);
+    expect(campos).not.toHaveProperty("cep");
   });
 
   it("cadastro sem CEP deixa o CEP PENDENTE com motivo e não inventa valor", () => {

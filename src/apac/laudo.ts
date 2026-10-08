@@ -21,6 +21,7 @@ export const CAMPOS_SOLICITACAO: Readonly<Record<string, string>> = {
   nomeMae: "NOME DA MÃE",
   telefoneContato: "TELEFONE DE CONTATO",
   nomeResponsavel: "NOME DO RESPONSÁVEL",
+  telefoneResponsavel: "TELEFONE DO RESPONSÁVEL",
   endereco: "ENDEREÇO (RUA, Nº, BAIRRO)",
   municipioResidencia: "MUNICÍPIO DE RESIDÊNCIA",
   codIbgeMunicipio: "CÓD. IBGE MUNICÍPIO",
@@ -163,8 +164,12 @@ export function preencherLaudo(apac: Apac, sigtap: TabelasSigtap): LaudoApac {
   const campos = apac.campos;
   const solicitacao: Record<string, CampoLaudo> = {};
   const pendentes: string[] = [];
+  const raca = lerCampo(campos, "racaCor");
+  const indigena = raca.estado === "PRESENTE" && typeof raca.valor === "string" && semAcento(raca.valor) === "INDIGENA";
   for (const [chave, rotulo] of Object.entries(CAMPOS_SOLICITACAO)) {
     const c = texto(campos, chave);
+    // Etnia só se aplica a paciente indígena: fora disso a caixa fica vazia por regra, sem virar pendência.
+    if (chave === "etnia" && !indigena && c.estado === "PENDENTE") { solicitacao[chave] = { estado: "PENDENTE", motivo: "não se aplica (paciente não indígena)" }; continue; }
     solicitacao[chave] = c;
     if (c.estado === "PENDENTE") pendentes.push(rotulo);
   }

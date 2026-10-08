@@ -100,7 +100,7 @@ export function gatesCoerencia(apac: Apac, ctx: ContextoAntiglosa): Achado[] {
     const c = normCid(cid);
     const regra = ctx.regrasCidSexo.find((r) => c.startsWith(normCid(r.prefixo)) && sexo !== r.sexoExigido);
     if (regra) {
-      const tumor = lerTexto(campos, "tumorPrimario");
+      const tumor = lerTexto(campos, "localizacaoTumorPrimario");
       const sufixo = tumor && normEsquema(tumor).includes("PROST") ? " Tumor primário informado: próstata; CID de mama em paciente masculino indica resíduo de modelo." : "";
       vermelho("AG-13", "cidPrincipal",
         `CID ${cid} é incompatível com o sexo ${sexo} (exige ${regra.sexoExigido}).${sufixo}`, F.cid);
@@ -112,15 +112,18 @@ export function gatesCoerencia(apac: Apac, ctx: ContextoAntiglosa): Achado[] {
   if (cid && cidTopografia && normCid(cid) !== normCid(cidTopografia))
     vermelho("AG-14", "cidPrincipal", `CID principal ${cid} difere do CID da topografia ${cidTopografia}.`, F.laudo);
 
-  // AG-15 bloco de radioterapia preenchido sem RT solicitada
-  const bloco = lerCampo(campos, "blocoRadioterapia");
-  const rtSolicitada = lerCampo(campos, "radioterapiaSolicitada");
-  const solicitada = rtSolicitada.estado === "PRESENTE" && rtSolicitada.valor === true;
-  if (bloco.estado === "PRESENTE" && temConteudo(bloco.valor) && !solicitada)
-    vermelho("AG-15", "blocoRadioterapia", "RT preenchida sem RT solicitada.", F.laudo);
+  // AG-15 bloco de radioterapia preenchido sem RT solicitada (mesmas chaves da página 2 em laudo.ts)
+  const rtSolicitadaCampo = lerCampo(campos, "radioterapiaSolicitada");
+  const solicitada = rtSolicitadaCampo.estado === "PRESENTE"
+    && (rtSolicitadaCampo.valor === true || (typeof rtSolicitadaCampo.valor === "string" && normEsquema(rtSolicitadaCampo.valor) === "SIM"));
+  const chavesRt = ["rtTratamentoAnterior", "rtContinuidade", "rtDataInicioSolicitado", "rtFinalidade", "rtCidTopografico",
+    "rtDescricaoArea", "rtNumeroCampos", "rtDataInicio", "rtDataTermino", "historicoRadioterapia"];
+  const preenchidas = chavesRt.filter((k) => { const c = lerCampo(campos, k); return c.estado === "PRESENTE" && temConteudo(c.valor); });
+  if (preenchidas.length > 0 && !solicitada)
+    vermelho("AG-15", "radioterapiaSolicitada", `RT preenchida sem RT solicitada (${preenchidas.join(", ")}).`, F.laudo);
 
   // AG-16 tratamentos anteriores: ciclos do mesmo esquema lançados como tratamentos com a mesma data
-  const anteriores = lerCampo(campos, "tratamentosAnteriores");
+  const anteriores = lerCampo(campos, "historicoQuimioterapia");
   if (anteriores.estado === "PRESENTE" && Array.isArray(anteriores.valor)) {
     const grupos = new Map<string, string[]>();
     for (const t of anteriores.valor) {
@@ -133,7 +136,7 @@ export function gatesCoerencia(apac: Apac, ctx: ContextoAntiglosa): Achado[] {
     }
     for (const [esq, datas] of grupos)
       if (datas.length >= 2 && new Set(datas).size === 1)
-        vermelho("AG-16", "tratamentosAnteriores",
+        vermelho("AG-16", "historicoQuimioterapia",
           `ciclos lançados como tratamentos: ${datas.length} entradas de "${esq}" com a mesma data (${datas[0]}). A caixa pede tratamentos/esquemas anteriores, não ciclos.`, F.laudo);
   }
 
@@ -146,11 +149,11 @@ export function gatesCoerencia(apac: Apac, ctx: ContextoAntiglosa): Achado[] {
 
   // AG-18 esquema da APAC x esquema da prescrição/ficha vigente
   if (ctx.esquemaVigente) {
-    const esq = lerTexto(campos, "esquemaApac");
+    const esq = lerTexto(campos, "qtEsquema");
     if (esq === null)
-      pendente("AG-18", "esquemaApac", "esquema da APAC não informado; não dá para comparar com a ficha vigente.", F.laudo);
+      pendente("AG-18", "qtEsquema", "esquema da APAC não informado; não dá para comparar com a ficha vigente.", F.laudo);
     else if (normEsquema(esq) !== normEsquema(ctx.esquemaVigente))
-      vermelho("AG-18", "esquemaApac", `esquema da APAC (${esq}) difere do esquema da prescrição/ficha vigente (${ctx.esquemaVigente}).`, F.laudo);
+      vermelho("AG-18", "qtEsquema", `esquema da APAC (${esq}) difere do esquema da prescrição/ficha vigente (${ctx.esquemaVigente}).`, F.laudo);
   }
 
   return out;

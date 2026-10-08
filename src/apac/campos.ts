@@ -229,5 +229,8 @@ export function lerIdentificacaoCheckin(cadastro: CadastroCheckin, tabelaIbge: r
 export function aplicarIdentificacaoCheckin(
   campos: Record<string, unknown>, identificacao: IdentificacaoCheckin,
 ): Record<string, unknown> {
-  return { ...campos, ...identificacao.campos };
+  // Cadastro do check-in é a fonte da identificação: chave pendente no check-in apaga valor antigo (nunca sobrevive dado velho).
+  const out: Record<string, unknown> = { ...campos };
+  for (const p of identificacao.pendencias) delete out[p.chave];
+  return { ...out, ...identificacao.campos };
 }
