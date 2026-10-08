@@ -297,6 +297,14 @@ export const COPY_PT_BR = {
       "Mensagens do canal ficam guardadas só neste computador, com consentimento registrado",
     semDadosNaUrl: "Links de diretriz abrem sem nenhum dado do paciente",
   },
+  flashRetorno: {
+    tituloTarefas: "Tarefas do retorno",
+    retorno: "Retorno",
+    laboratorio: "Laboratório",
+    imagem: "Imagem (opcional)",
+    semModeloPadrao: "Sem modelo padrão salvo: nada vem marcado",
+    achadosChave: "Achados-chave",
+  },
   acessibilidade: {
     pularParaConteudo: "Pular para o conteúdo",
     abrirMenu: "Abrir menu",
