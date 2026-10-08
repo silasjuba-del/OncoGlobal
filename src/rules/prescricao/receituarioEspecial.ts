@@ -26,7 +26,9 @@ export interface ItemReceita {
 export type ResultadoItem =
   | { estado: "OFERECIDO_RECEITA_COMUM"; item: ItemReceita }
   | { estado: "RECEITA_ESPECIAL"; item: ItemReceita; tipoDocumento: "RECEITA_ESPECIAL"; fonte: string }
-  | { estado: "INDISPONIVEL_SEM_RECEITUARIO_ESPECIAL"; item: ItemReceita; motivo: string; fonte: string };
+  | { estado: "INDISPONIVEL_SEM_RECEITUARIO_ESPECIAL"; item: ItemReceita; motivo: string; fonte: string }
+  /** H28 · dado ausente: item sem nome de medicamento é pendência, nunca oferecido na receita comum. */
+  | { estado: "PENDENTE_MEDICAMENTO_AUSENTE"; item: ItemReceita; motivo: string };
 
 export interface DocumentoReceitaEspecial {
   tipoDocumento: "RECEITA_ESPECIAL";
@@ -64,6 +66,9 @@ export function rotearItemReceita(
   configuracao: ConfiguracaoReceituario,
   tabela: readonly EntradaControlado[],
 ): ResultadoItem {
+  if (normalizar(item.medicamento) === "") {
+    return { estado: "PENDENTE_MEDICAMENTO_AUSENTE", item, motivo: "medicamento sem nome: item pendente, não oferecido" };
+  }
   const controlado = encontrarControlado(item.medicamento, tabela);
   if (controlado === null || !controlado.exigeReceituarioEspecial) {
     return { estado: "OFERECIDO_RECEITA_COMUM", item };
