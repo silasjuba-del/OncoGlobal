@@ -142,8 +142,10 @@ it("liberação com corte registra ator da sessão, preserva a negativa sem moti
   expect(first.status).toBe(200);
   expect(first.body.codigo).toBe("GRAVADA");
   const eventos = listarEventos(f.db, paciente);
+  expect(eventos.filter((event) => event.tipo === "ReviewDecision"
+    && (event.payload as { data?: Record<string, unknown> }).data?.campo === "liberacaoComCorteSalao")).toHaveLength(1);
   const decision = eventos.find((event) => event.tipo === "ReviewDecision"
-    && (event.payload as { data?: Record<string, unknown> }).data?.liberacaoComCorteSalao !== undefined);
+    && (event.payload as { data?: Record<string, unknown> }).data?.campo === "liberacaoComCorteSalao");
   expect(decision).toMatchObject({ encounterId: encontro, tipo: "ReviewDecision",
     criadoPor: { tipo: "SESSAO", id: "medico-fechamento" } });
   expect(JSON.stringify(decision)).not.toContain("reviewed");
