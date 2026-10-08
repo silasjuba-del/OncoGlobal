@@ -601,3 +601,12 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
 - W11-3 (10 agentes, 7 código + 3 ataque): Retorno operacional (H11), receita especial/controlados (H12), elegibilidade 3 cores (H13), 4 datas fixas (H14), linha do tempo terapêutica (H15), resumo longitudinal (H16), matriz universal como RASCUNHO (H17); ataques: Jev (H18, sem falha), UI consulta (H19, sem falha), APAC (H20, 2 bugs corrigidos) + costuras (datas futuras, regras fora do documento, AG-04, pré-marcação só do modelo).
 - Estado publicado: `f0/w1-integrado@9e658e0` — tsc ok · fronteiras 266 · corpus 122 · suíte 283 arquivos / 1.994 testes · red team 226/226 · adv-w8 41/41.
 - Pendências para o Dr. Silas: curadoria da tabela CID×sexo e da matriz universal (RASCUNHO); confirmar municípios/IBGE contra lista oficial; Jev retorna ERRO (não PENDENTE/INDETERMINADO) em resposta inválida/timeout — Astra decide; eixo X não aparece nas 8 categorias da matriz; ligar o check-in real ao novo cadastro; flag "serviço tem receituário especial" nas configurações.
+
+## PLN-035 — 2026-10-08 — "retoma e integra" (onda W11-4)
+
+- H21–H30 integradas em `f0/w1-integrado@67912f9` (push feito). H25 e H27 retomadas e concluídas.
+- Verificação: 293 arquivos / 2.160 testes verdes; redteam 226/226; adv-w8 41/41; fronteiras e corpus ok.
+- Ajuste técnico: timeout padrão de teste 30 s (falhas só sob carga, passavam isolados).
+- Para o Dr. Silas decidir (H25): B12, folato, ferro/TSAT, filgrastim, fezes entram na matriz? Ferro EV/VO no cluster de anemia? Regra de ordem em enumeração por voz.
+- Para o Dr. Silas decidir (H27): mudança só de SIGTAP/prioridade/competência gera nova versão (atual) ou sobrescreve?
+- Costuras ainda pendentes: plugar CabecalhoDatasFixas e ConsultaFlash na TelaConsulta; exames pré-retorno no Flash.
