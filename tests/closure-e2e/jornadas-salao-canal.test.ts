@@ -47,13 +47,14 @@ async function fixture() {
   };
   const token = sessoes.login("senha-sintetica-comprida")!.token;
   let sequence = 0;
-  const seed = (anchorPatient: string, anchorEncounter: string, tipo: string, payload: unknown) => {
+  const seed = (anchorPatient: string, anchorEncounter: string, tipo: string, payload: unknown,
+    tumorLotId: string | null = null) => {
     sequence += 1;
     const id = `closure-seed-${sequence}`;
     salvarDraft(db, { draftId: id, patientId: anchorPatient, sourceId: `source-${id}`,
       rawRef: "fixture-sintetico-local", payload: {}, diagnostics: [], revision: 0, criadoEm: agora() });
     const result = confirmar(db, { operationId: `closure-seed-op-${sequence}`, patientId: anchorPatient,
-      tumorLotId: null, encounterId: anchorEncounter, reviewDecisionId: `closure-review-${sequence}`,
+      tumorLotId, encounterId: anchorEncounter, reviewDecisionId: `closure-review-${sequence}`,
       sessao: sessoes.obter(token)!, em: agora(), registros: [{ draftId: id, expectedRevision: 0,
         eventId: `closure-seed-event-${sequence}`, tipo, payload, fontes: [], revisao: "CONFIRMADO" }] });
     expect(result.estado).toBe("GRAVADA");
@@ -72,14 +73,22 @@ async function fixture() {
 
 const paciente = "Paciente Sintetico Fechamento";
 const encontro = "encontro-fechamento-01";
+const lote = "lote-fechamento-01";
+const ausente = () => ({ valor: null, estado: "PENDENTE", campo: "AUSENTE",
+  motivo: "não consta na fixture sintética", fontes: [], revisao: "RAW" });
+const seedTumorLot = (f: Awaited<ReturnType<typeof fixture>>) => f.seed(paciente, encontro, "TumorLot", {
+  tumorLotId: lote, patientId: paciente, cid: ausente(), topografia: ausente(), histologia: ausente(),
+  estadiamentos: [], finalidadeApac: ausente(), marcos: [],
+}, lote);
 
 it("triagem autenticada cria somente rascunho no escopo selecionado e fica legível por HTTP", async () => {
   const f = await fixture();
   f.seedPatientAndEncounter(paciente, encontro);
+  seedTumorLot(f);
   const triagem = triagemBase({ patientId: paciente, encounterId: encontro,
     pas: { ...triagemBase().pas, valor: 161 },
     coletaHemograma: { ...triagemBase().coletaHemograma, fontes: [fonteSintetica("fonte-triagem") ] } });
-  expect((await f.select(paciente, encontro)).status).toBe(200);
+  expect((await f.select(paciente, encontro, lote)).status).toBe(200);
   const baselineEvents = listarEventos(f.db, paciente);
 
   const anonimo = await f.request("/consulta/salao/triagem", { triagem });
@@ -106,7 +115,8 @@ it("triagem autenticada cria somente rascunho no escopo selecionado e fica legí
 it("liberação com corte registra ator da sessão, preserva a negativa sem motivo e reproduz replay após reabrir SQLite", async () => {
   const f = await fixture();
   f.seedPatientAndEncounter(paciente, encontro);
-  expect((await f.select(paciente, encontro)).status).toBe(200);
+  seedTumorLot(f);
+  expect((await f.select(paciente, encontro, lote)).status).toBe(200);
   const triagem = triagemBase({ patientId: paciente, encounterId: encontro, pas: {
     ...triagemBase().pas, valor: 161, fontes: [fonteSintetica("fonte-corte")],
   } });
@@ -125,11 +135,12 @@ it("liberação com corte registra ator da sessão, preserva a negativa sem moti
   expect(first.status).toBe(200);
   expect(first.body.codigo).toBe("GRAVADA");
   const eventos = listarEventos(f.db, paciente);
-  expect(eventos.filter((event) => event.tipo === "DecisaoLiberacaoSalao")).toHaveLength(1);
-  expect(eventos.at(-1)).toMatchObject({ encounterId: encontro, tipo: "DecisaoLiberacaoSalao",
+  const decision = eventos.find((event) => event.tipo === "ReviewDecision"
+    && (event.payload as { data?: Record<string, unknown> }).data?.liberacaoComCorteSalao !== undefined);
+  expect(decision).toMatchObject({ encounterId: encontro, tipo: "ReviewDecision",
     criadoPor: { tipo: "SESSAO", id: "medico-fechamento" } });
-  expect(JSON.stringify(eventos[0])).not.toContain("reviewed");
-  expect(JSON.stringify(eventos[0])).not.toContain("signed");
+  expect(JSON.stringify(decision)).not.toContain("reviewed");
+  expect(JSON.stringify(decision)).not.toContain("signed");
 
   const replay = await f.request("/consulta/salao/liberar", pedido, f.token);
   expect(replay.status).toBe(200);
@@ -161,29 +172,42 @@ it("vínculo de canal exige escolha humana, escopo da sessão e deixa negativas 
     endereco: "5511999999999", patientId: null, relacao: "DESCONHECIDO", vinculadoEm: null, revogadoEm: null });
   f.seed(paciente, encontro, "CanalMessage", { mensagemId: "mensagem-sintetica-01", contatoId: "contato-sintetico-01",
     patientId: null, texto: "mensagem sintética", em: "2026-10-08T12:00:00-03:00", redFlag: false });
+  const originalContact = listarEventos(f.db, paciente).find((event) => event.tipo === "Contato");
+  expect(originalContact).toBeDefined();
+  const beforeInvalidBody = listarEventos(f.db, paciente);
+  const canonicalBody = { contatoId: "contato-sintetico-01", patientId: paciente, idempotencyKey: "vinculo-humano-01" };
   const semAutenticacao = await f.request("/consulta/canal/vincular", {
-    contatoId: "contato-sintetico-01", patientId: paciente, encounterId: encontro, idempotencyKey: "vinculo-sem-auth-01",
+    ...canonicalBody, idempotencyKey: "vinculo-sem-auth-01",
   });
   expect(semAutenticacao.status).toBe(401);
+  const bodyComEncontro = await f.request("/consulta/canal/vincular", {
+    ...canonicalBody, encounterId: encontro, idempotencyKey: "vinculo-extra-encounter-01",
+  }, f.token);
+  expect(bodyComEncontro.status).toBe(400);
+  expect(listarEventos(f.db, paciente)).toEqual(beforeInvalidBody);
   const outroPaciente = "Outro Paciente Sintetico";
   f.seedPatientAndEncounter(outroPaciente, "outro-encontro-01");
   expect((await f.select(outroPaciente, "outro-encontro-01")).status).toBe(200);
-  const foraDoEscopo = await f.request("/consulta/canal/vincular", {
-    contatoId: "contato-sintetico-01", patientId: paciente, encounterId: encontro, idempotencyKey: "vinculo-fora-escopo-01",
-  }, f.token);
+  const beforeWrongContext = listarEventos(f.db, paciente);
+  const foraDoEscopo = await f.request("/consulta/canal/vincular", { ...canonicalBody,
+    idempotencyKey: "vinculo-fora-escopo-01" }, f.token);
   expect(foraDoEscopo.status).toBe(409);
-  const beforeLink = listarEventos(f.db, paciente).length;
+  expect(listarEventos(f.db, paciente)).toEqual(beforeWrongContext);
+  const beforeLink = beforeWrongContext.length;
 
   expect((await f.select(paciente, encontro)).status).toBe(200);
-  const escolha = await f.request("/consulta/canal/vincular", {
-    contatoId: "contato-sintetico-01", patientId: paciente, encounterId: encontro, idempotencyKey: "vinculo-humano-01",
-  }, f.token);
+  const escolha = await f.request("/consulta/canal/vincular", canonicalBody, f.token);
   expect(escolha.status).toBe(200);
   expect(escolha.body.codigo).toBe("GRAVADA");
   const eventos = listarEventos(f.db, paciente);
   expect(eventos).toHaveLength(beforeLink + 1);
-  expect(eventos.at(-1)).toMatchObject({ encounterId: encontro, tipo: "VinculoContato",
-    criadoPor: { tipo: "SESSAO", id: "medico-fechamento" } });
+  const linkDecision = eventos.find((event) => event.tipo === "ReviewDecision"
+    && (event.payload as { data?: Record<string, unknown> }).data?.kind === "VinculoContato");
+  expect(linkDecision).toMatchObject({ encounterId: encontro, tipo: "ReviewDecision",
+    criadoPor: { tipo: "SESSAO", id: "medico-fechamento" },
+    payload: { data: { kind: "VinculoContato", sourceEventId: originalContact?.eventId } } });
+  expect(eventos.filter((event) => event.tipo === "Contato")).toHaveLength(1);
+  expect(eventos.find((event) => event.eventId === originalContact?.eventId)).toEqual(originalContact);
   const leitura = await f.request("/consulta/canal", {}, f.token);
   expect(leitura.status).toBe(200);
   expect(leitura.body.mensagens).toEqual(expect.arrayContaining([
