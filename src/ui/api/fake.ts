@@ -287,12 +287,12 @@ const ORIGEM_LAUDO = { tipo: "LAUDO", documentoId: "doc-lau-sint", dataDocumento
 const ORIGEM_ENC = { tipo: "ENCAMINHADOR", documentoId: "doc-enc-sint", dataDocumento: null, trecho: null } as const;
 const VAL_AP = (valor: unknown, origem: object) => ({ estado: "VALOR", valor, origem, candidatos: [], confianca: "NORMAL" });
 
-/** W12-F3: retrato transversal sintético (próstata) e dados da Flash. Só o paciente "multi" os recebe. */
+/** W12-F3: retrato transversal sintético (mama; coerente com o diagnóstico e o sexo da paciente) e dados da Flash. Só o paciente "multi" os recebe. */
 function camposW12(patientId: string): Pick<ConsultaVisao, "flash" | "retratoTransversal"> {
   if (patientId !== ID.multi) return {};
   return {
     flash: {
-      exames: [{ data: "2026-09-20", nome: "Biópsia de próstata", fraseLaudo: "adenocarcinoma acinar", situacao: "SEM_REFERENCIA" }],
+      exames: [{ data: "2026-09-20", nome: "Biópsia de mama", fraseLaudo: "carcinoma invasivo de tipo não especial", situacao: "SEM_REFERENCIA" }],
       retornoDias: 30,
       modeloPadraoSalvo: true,
       laboratorioPreMarcado: true,
@@ -302,7 +302,7 @@ function camposW12(patientId: string): Pick<ConsultaVisao, "flash" | "retratoTra
       pacienteRef: "Paciente Teste 05",
       tumorIndice: true,
       nucleo: {
-        histologia: VAL_AP("adenocarcinoma acinar", ORIGEM_LAUDO),
+        histologia: VAL_AP("carcinoma invasivo de tipo não especial", ORIGEM_LAUDO),
         lateralidade: {
           estado: "CONFLITO", valor: null, origem: null, confianca: "NORMAL",
           candidatos: [
@@ -319,11 +319,11 @@ function camposW12(patientId: string): Pick<ConsultaVisao, "flash" | "retratoTra
         respostaNeoadjuvancia: NI_AP, progressaoNaVigencia: NI_AP,
       },
       extensao: {
-        tumor: "PROSTATA",
-        gleason: VAL_AP({ primario: 3, secundario: 4 }, ORIGEM_LAUDO),
-        isup: VAL_AP(2, ORIGEM_LAUDO),
-        psaNgMl: VAL_AP(8.5, ORIGEM_ENC),
-        fragmentosPositivos: NI_AP,
+        tumor: "MAMA",
+        rePct: VAL_AP(90, ORIGEM_LAUDO),
+        rpPct: VAL_AP(40, ORIGEM_LAUDO),
+        her2: VAL_AP("2+_ISH_NEG", ORIGEM_ENC),
+        rcb: NI_AP,
       },
     },
   };

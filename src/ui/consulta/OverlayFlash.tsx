@@ -11,7 +11,7 @@ export function OverlayFlash({ flash, onFechar }: { flash: ConsultaFlashProps; o
     return () => document.removeEventListener("keydown", k);
   }, [onFechar]);
   return (
-    <div className="oc-ov" role="dialog" aria-label="Consulta Flash">
+    <div className="oc-ov oc-ov--fixa" role="dialog" aria-label="Consulta Flash">
       <button type="button" className="oc-ov-backdrop" aria-label="Fechar overlay" onClick={onFechar} />
       <div className="oc-ov-card">
         <header className="oc-ov-h">
