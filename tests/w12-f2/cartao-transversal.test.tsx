@@ -24,9 +24,9 @@ const vazioExt = (tumor: string) => ({ tumor, ...Object.fromEntries(CAMPOS_EXTEN
 const cheioExt: Record<string, object> = {
   MAMA: { tumor: "MAMA", rePct: V(90), rpPct: V(40), her2: V("2+_ISH_NEG"), rcb: V("RCB-II") },
   PROSTATA: { tumor: "PROSTATA", gleason: V({ primario: 3, secundario: 4 }), isup: V(2), psaNgMl: V(8.5), fragmentosPositivos: V({ positivos: 4, total: 12 }) },
-  COLON: { tumor: "COLON", mmr: V("DEFICIENTE"), msi: V("MSI_H"), kras: V("selvagem"), nras: V("selvagem"), braf: V("V600E"), trg: V("TRG 1"), budding: V("baixo") },
+  COLORRETAL: { tumor: "COLORRETAL", subsitio: V("RETO_MEDIO"), mmr: V("DEFICIENTE"), msi: V("MSI_H"), kras: V("selvagem"), nras: V("selvagem"), braf: V("V600E"), trg: V("TRG 1"), budding: V("baixo") },
   PULMAO: { tumor: "PULMAO", egfr: V("exon 19 del"), alk: V("negativo"), ros1: V("negativo"), pdl1TpsPct: V(60), krasG12c: V(false) },
-  COLO_UTERINO: { tumor: "COLO_UTERINO", figo: V("IB2"), hpvP16: V("p16 positivo"), invasaoEstromalMm: V(7) },
+  COLO_UTERINO: { tumor: "COLO_UTERINO", hpvP16: V("p16 positivo"), invasaoEstromalMm: V(7) },
   GASTRICO: { tumor: "GASTRICO", her2: V("3+"), mmr: V("PROFICIENTE"), lauren: V("DIFUSO"), cldn18: V("2+ em 80%"), pdl1Cps: V(5) },
 };
 const TUMORES = Object.keys(cheioExt);
@@ -61,7 +61,7 @@ describe("CartaoTransversal · 6 tumores", () => {
     expect(screen.getByText("8.5 ng/mL")).toBeTruthy();
     expect(screen.getByText("4 de 12")).toBeTruthy();
     cleanup();
-    render(<CartaoTransversal entrada={retrato(nucleoCheio(), cheioExt.COLON as object)} />);
+    render(<CartaoTransversal entrada={retrato(nucleoCheio(), cheioExt.COLORRETAL as object)} />);
     expect(screen.getByText("MSI-H")).toBeTruthy();
     expect(screen.getByText("deficiente")).toBeTruthy();
   });
