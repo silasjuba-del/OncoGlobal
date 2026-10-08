@@ -1,5 +1,8 @@
 // Leitura tolerante de Apac.campos (valores crus ou Dado{valor,campo,revisao}). Ausente = PENDENTE.
 import { normalizarCns, validarCns } from "./cns.js";
+import type { CadastroCheckin } from "../contracts/w11/cadastroCheckin.js";
+
+export type { CadastroCheckin };
 
 export const FINALIDADES_QT = ["PALIATIVA", "CONTROLE_TEMPORARIO", "PREVIA", "ADJUVANTE", "CURATIVA"] as const;
 export const FINALIDADES_RT = ["RADICAL", "ADJUVANTE", "ANTIALGICA", "PALIATIVA", "PREVIA", "ANTI_HEMORRAGICA"] as const;
@@ -57,31 +60,12 @@ export function lerSecundarios(campos: Record<string, unknown>): ProcQtde[] {
 
 export type RacaCor = "BRANCA" | "PRETA" | "PARDA" | "AMARELA" | "INDIGENA";
 const RACAS_COR: readonly RacaCor[] = ["BRANCA", "PRETA", "PARDA", "AMARELA", "INDIGENA"];
-const UFS_BRASIL: ReadonlySet<string> = new Set([
+export const UFS_BRASIL: ReadonlySet<string> = new Set([
   "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR",
   "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO",
 ]);
 /** Prefixo de 2 dígitos do código IBGE por UF; só as UFs presentes na tabela carregada. */
 const PREFIXO_IBGE_UF: Readonly<Record<string, string>> = { PB: "25" };
-
-/** Cadastro do check-in/secretaria, já como o sistema o guarda. `revisao` precisa ser CONFIRMADO ou ASSINADO. */
-export interface CadastroCheckin {
-  revisao?: "RASCUNHO" | "CONFIRMADO" | "ASSINADO";
-  prontuario?: string | null;
-  cns?: string | null;
-  nome?: string | null;
-  nascimento?: string | null; // AAAA-MM-DD
-  sexo?: string | null; // "M" | "F"
-  racaCor?: string | null;
-  etnia?: string | null; // só lida quando racaCor === INDIGENA
-  mae?: string | null;
-  telefones?: readonly string[] | null;
-  responsavel?: { nome?: string | null; telefone?: string | null } | null;
-  endereco?: string | null;
-  municipio?: string | null;
-  uf?: string | null;
-  cep?: string | null;
-}
 
 export interface EntradaIbge { nome: string; uf: string; codigoIbge: string }
 
