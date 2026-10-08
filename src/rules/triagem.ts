@@ -262,6 +262,59 @@ function fecharPortao(
   };
 }
 
+interface FaixaPlausivel {
+  unidade: string;
+  min: number;
+  max: number;
+}
+
+/** RT-07 · lê a faixa de plausibilidade do ruleset. Ausente ou malformada = erro (fail-closed). */
+function faixaPlausivel(rs: SalaoRuleset, campo: string): FaixaPlausivel {
+  const raiz = rs as unknown as { plausibilidade?: unknown };
+  const bloco = raiz.plausibilidade;
+  if (typeof bloco !== "object" || bloco === null || Array.isArray(bloco)) {
+    throw new Error("ruleset salao-triagem sem plausibilidade");
+  }
+  const campos = (bloco as Record<string, unknown>).campos;
+  if (typeof campos !== "object" || campos === null || Array.isArray(campos)) {
+    throw new Error("ruleset salao-triagem sem plausibilidade.campos");
+  }
+  const f = (campos as Record<string, unknown>)[campo];
+  if (typeof f !== "object" || f === null) throw new Error(`plausibilidade.campos.${campo} ausente`);
+  const { unidade, min, max } = f as Record<string, unknown>;
+  if (typeof unidade !== "string" || typeof min !== "number" || typeof max !== "number" || min > max) {
+    throw new Error(`plausibilidade.campos.${campo} inválido`);
+  }
+  return { unidade, min, max };
+}
+
+/**
+ * RT-07 · contrato de plausibilidade. Valor fora da faixa para a unidade declarada vira PENDENTE
+ * (motivo unidade/plausibilidade) e NÃO corta nem libera. Nunca converte unidade pela magnitude.
+ * Retorna false quando o valor foi barrado; ausente (null) retorna true e segue o fluxo normal.
+ */
+function checarPlausibilidade(
+  campo: string,
+  valor: number | null,
+  rotulo: string,
+  decisao: string,
+  rs: SalaoRuleset,
+  pendentes: Motivo[],
+): boolean {
+  if (valor === null) return true;
+  const f = faixaPlausivel(rs, campo);
+  if (valor >= f.min && valor <= f.max) return true;
+  pendentes.push(
+    motivoPortao(
+      `pendente.plausibilidade.${campo}`,
+      `${rotulo} ${valor} (${f.unidade}) fora da faixa plausível para a unidade declarada: possível erro de unidade, confirmar`,
+      decisao,
+      rs,
+    ),
+  );
+  return false;
+}
+
 function compararLimite(
   valor: number | null,
   dispara: boolean,
@@ -296,57 +349,68 @@ export function avaliarCorteSalao(t: Triagem, extra: SinaisExtraW10, rs: SalaoRu
   const plqMin = inteiroPortao(bloco, "plqMin", nome);
   const ecogCorta = listaInteiros(bloco, "ecogCorta", nome);
 
+  const plausivel = {
+    temp: checarPlausibilidade("tempDecimos", t.tempDecimos.valor, "temperatura", decisaoPortao(bloco, "temp", nome), rs, pendentes),
+    spo2: checarPlausibilidade("spo2", t.spo2.valor, "saturação de oxigênio", decisaoPortao(bloco, "spo2", nome), rs, pendentes),
+    pas: checarPlausibilidade("pas", t.pas.valor, "PAS", decisaoPortao(bloco, "pas", nome), rs, pendentes),
+    fc: checarPlausibilidade("fc", t.fc.valor, "frequência cardíaca", decisaoPortao(bloco, "fc", nome), rs, pendentes),
+    hb: checarPlausibilidade("hbDgDl", t.hbDgDl.valor, "hemoglobina", decisaoPortao(bloco, "hb", nome), rs, pendentes),
+    cr: checarPlausibilidade("cr", extra.crCentesimos, "creatinina", decisaoPortao(bloco, "cr", nome), rs, pendentes),
+    anc: checarPlausibilidade("anc", t.anc.valor, "neutrófilos", decisaoPortao(bloco, "anc", nome), rs, pendentes),
+    plq: checarPlausibilidade("plq", t.plq.valor, "plaquetas", decisaoPortao(bloco, "plq", nome), rs, pendentes),
+  };
+
   const temp = t.tempDecimos.valor;
   compararLimite(
-    temp, temp !== null && temp > tempMax,
+    temp, plausivel.temp && temp !== null && temp > tempMax,
     "corteSalao.temp.alta", "temperatura ausente",
     `temperatura ${temp === null ? "" : textoTemp(temp)} acima do limite do corte do salão`,
     decisaoPortao(bloco, "temp", nome), rs, motivos, pendentes,
   );
   const spo2 = t.spo2.valor;
   compararLimite(
-    spo2, spo2 !== null && spo2 < spo2Min,
+    spo2, plausivel.spo2 && spo2 !== null && spo2 < spo2Min,
     "corteSalao.spo2.baixa", "saturação de oxigênio ausente",
     `saturação de oxigênio ${spo2 === null ? "" : spo2}% abaixo do limite do corte do salão`,
     decisaoPortao(bloco, "spo2", nome), rs, motivos, pendentes,
   );
   const pas = t.pas.valor;
   compararLimite(
-    pas, pas !== null && pas < pasMin,
+    pas, plausivel.pas && pas !== null && pas < pasMin,
     "corteSalao.pas.baixa", "PAS ausente",
     `PAS ${pas === null ? "" : pas} mmHg abaixo do limite do corte do salão`,
     decisaoPortao(bloco, "pas", nome), rs, motivos, pendentes,
   );
   const fc = t.fc.valor;
   compararLimite(
-    fc, fc !== null && fc < fcMin,
+    fc, plausivel.fc && fc !== null && fc < fcMin,
     "corteSalao.fc.baixa", "frequência cardíaca ausente",
     `frequência cardíaca ${fc === null ? "" : fc} bpm abaixo do limite do corte do salão`,
     decisaoPortao(bloco, "fc", nome), rs, motivos, pendentes,
   );
   const hb = t.hbDgDl.valor;
   compararLimite(
-    hb, hb !== null && hb < hbMin,
+    hb, plausivel.hb && hb !== null && hb < hbMin,
     "corteSalao.hb.baixa", "hemoglobina ausente",
     `hemoglobina ${hb === null ? "" : textoHb(hb)} abaixo do limite do corte do salão`,
     decisaoPortao(bloco, "hb", nome), rs, motivos, pendentes,
   );
   compararLimite(
-    extra.crCentesimos, extra.crCentesimos !== null && extra.crCentesimos > crMax,
+    extra.crCentesimos, plausivel.cr && extra.crCentesimos !== null && extra.crCentesimos > crMax,
     "corteSalao.cr.alta", "creatinina ausente",
     `creatinina ${extra.crCentesimos === null ? "" : textoCr(extra.crCentesimos)} acima do limite do corte do salão`,
     decisaoPortao(bloco, "cr", nome), rs, motivos, pendentes,
   );
   const anc = t.anc.valor;
   compararLimite(
-    anc, anc !== null && anc < ancMin,
+    anc, plausivel.anc && anc !== null && anc < ancMin,
     "corteSalao.anc.baixa", "neutrófilos ausentes",
     `neutrófilos ${anc === null ? "" : anc}/µL abaixo do limiar de bula do corte do salão`,
     decisaoPortao(bloco, "anc", nome), rs, motivos, pendentes,
   );
   const plq = t.plq.valor;
   compararLimite(
-    plq, plq !== null && plq < plqMin,
+    plq, plausivel.plq && plq !== null && plq < plqMin,
     "corteSalao.plq.baixa", "plaquetas ausentes",
     `plaquetas ${plq === null ? "" : plq}/µL abaixo do limiar de bula do corte do salão`,
     decisaoPortao(bloco, "plq", nome), rs, motivos, pendentes,
@@ -373,29 +437,36 @@ export function avaliarTriagemCiclo(t: Triagem, extra: SinaisExtraW10, rs: Salao
   const padMax = inteiroPortao(bloco, "padMax", nome);
   const fcMax = inteiroPortao(bloco, "fcMax", nome);
 
+  const plausivel = {
+    temp: checarPlausibilidade("tempDecimos", t.tempDecimos.valor, "temperatura", decisaoPortao(bloco, "temp", nome), rs, pendentes),
+    pas: checarPlausibilidade("pas", t.pas.valor, "PAS", decisaoPortao(bloco, "pas", nome), rs, pendentes),
+    pad: checarPlausibilidade("pad", extra.pad, "PAD", decisaoPortao(bloco, "pad", nome), rs, pendentes),
+    fc: checarPlausibilidade("fc", t.fc.valor, "frequência cardíaca", decisaoPortao(bloco, "fc", nome), rs, pendentes),
+  };
+
   const temp = t.tempDecimos.valor;
   compararLimite(
-    temp, temp !== null && temp > tempMax,
+    temp, plausivel.temp && temp !== null && temp > tempMax,
     "triagemCiclo.temp.alta", "temperatura ausente",
     `temperatura ${temp === null ? "" : textoTemp(temp)} acima do limite da triagem do ciclo`,
     decisaoPortao(bloco, "temp", nome), rs, motivos, pendentes,
   );
   const pas = t.pas.valor;
   compararLimite(
-    pas, pas !== null && pas > pasMax,
+    pas, plausivel.pas && pas !== null && pas > pasMax,
     "triagemCiclo.pas.alta", "PAS ausente",
     `PAS ${pas === null ? "" : pas} mmHg acima do limite da triagem do ciclo`,
     decisaoPortao(bloco, "pas", nome), rs, motivos, pendentes,
   );
   compararLimite(
-    extra.pad, extra.pad !== null && extra.pad > padMax,
+    extra.pad, plausivel.pad && extra.pad !== null && extra.pad > padMax,
     "triagemCiclo.pad.alta", "PAD ausente",
     `PAD ${extra.pad === null ? "" : extra.pad} mmHg acima do limite da triagem do ciclo`,
     decisaoPortao(bloco, "pad", nome), rs, motivos, pendentes,
   );
   const fc = t.fc.valor;
   compararLimite(
-    fc, fc !== null && fc > fcMax,
+    fc, plausivel.fc && fc !== null && fc > fcMax,
     "triagemCiclo.fc.alta", "frequência cardíaca ausente",
     `frequência cardíaca ${fc === null ? "" : fc} bpm acima do limite da triagem do ciclo`,
     decisaoPortao(bloco, "fc", nome), rs, motivos, pendentes,
