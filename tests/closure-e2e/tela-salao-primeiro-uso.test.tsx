@@ -3,9 +3,10 @@ import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/re
 import { afterEach, expect, it, vi } from "vitest";
 import type { Server } from "node:http";
 import type { DatabaseSync } from "node:sqlite";
-import { mkdtempSync, rmSync } from "node:fs";
+import { mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { SalaoRuleset } from "../../src/contracts/regras.js";
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { salvarDraft, listarDrafts } from "../../src/kernel/ledger/drafts.js";
 import { confirmar } from "../../src/kernel/ledger/writeRouter.js";
@@ -20,6 +21,8 @@ import { TelaSalao } from "../../src/ui/telas/TelaSalao.js";
 const servers: Server[] = [];
 const databases: DatabaseSync[] = [];
 const dirs: string[] = [];
+const salaoRuleset = SalaoRuleset.parse(JSON.parse(readFileSync(
+  join(process.cwd(), "corpus/rulesets/salao-triagem.v1.json"), "utf8")) as unknown);
 afterEach(async () => {
   cleanup();
   vi.unstubAllGlobals();
@@ -40,6 +43,7 @@ it("UI de primeiro uso envia triagem como draft e registra liberação no SQLite
   let server: Server | null = null;
   const iniciarServidor = async () => {
     const iniciado = criarServidorLocal({ db, sessoes, agora, log: () => {},
+      salaoRuleset,
       gateway: criarGateway({ agora, auditar: () => {}, store: memoriaIdempotencia(), executores: {} }) });
     server = iniciado;
     servers.push(iniciado);
