@@ -38,4 +38,4 @@ Limite de extração de identidade: o confronto usa nome e CPF/CNS quando aparec
 - Formulário e liberação do salão F07: `ca05867`.
 - Interface do canal F08: `6e5f09b`.
 - Integração das telas locais com HTTP: `535b91c`.
-- Testes sintéticos e este relatório: pendentes de commit final.
+- Regressões sintéticas e relatório: `541b8b9`.
