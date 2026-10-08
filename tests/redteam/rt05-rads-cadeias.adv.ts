@@ -11,6 +11,10 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { avaliarRadAlerts } from "../../src/rules/radAlerts.js";
 import type { RadRuleset } from "../../src/rules/tipos-w3.js";
+import { detectarEmergencias, lerRadsEmergencias } from "../../src/rules/radsEmergencias.js";
+
+const corpusCadeias = JSON.parse(readFileSync(join(process.cwd(), "corpus", "rulesets", "rads-emergencias.v1.json"), "utf8"));
+const rsCadeias = lerRadsEmergencias(corpusCadeias);
 
 const rsAtivo: RadRuleset = {
   id: "rad-emergencia", versao: "1.0.0", ativo: true,
@@ -26,14 +30,13 @@ const rsAtivo: RadRuleset = {
 const input = (texto: string) => ({ tipoFonte: "TRANSCRIPTION" as const, texto, data: "2030-01-01" });
 
 async function avaliadorDeCadeia(): Promise<((entrada: unknown) => unknown) | null> {
-  const mod = (await import("../../src/rules/radAlerts.js")) as Record<string, unknown>;
-  const modOrch = (await import("../../src/orchestration/maestro.js")) as Record<string, unknown>;
-  const fn = mod["avaliarCadeia"] ?? mod["cadeiaEmergencia"] ?? modOrch["avaliarCadeiaRads"];
-  return typeof fn === "function" ? (fn as (entrada: unknown) => unknown) : null;
+  // Test the actual chain consumer, not a guessed export name on the legacy scanner.
+  return typeof detectarEmergencias === "function"
+    ? (entrada) => detectarEmergencias((entrada as { texto: string }).texto, rsCadeias) : null;
 }
 
 describe("RT-05 · cadeias das 30 emergências", () => {
-  it("SEM_IMPLEMENTACAO: avaliador de CADEIA (elo a elo) das 30 emergências existe", async () => {
+  it("avaliador real de CADEIA (elo a elo) das 30 emergências existe", async () => {
     const fn = await avaliadorDeCadeia();
     expect(fn,
       "D-W9-51 define o alerta RADS por CADEIA (massa epidural → apagamento do saco dural → " +
@@ -87,17 +90,11 @@ describe("RT-05 · cadeias das 30 emergências", () => {
       .toBeTypeOf("function");
   });
 
-  it("PROVA DE FALHA (S1): ruleset do corpus (rad-emergencia.v1.json) não conecta ao avaliador", () => {
-    const corpus = JSON.parse(readFileSync(join(process.cwd(), "corpus", "rulesets",
-      "rad-emergencia.v1.json"), "utf8")) as Record<string, unknown>;
-    // O avaliador exige { id, versao, ativo, termosEmergencia: [{codigo, termo, regraId}] }.
-    const shapeOk = typeof corpus.termosEmergencia !== "undefined" ||
-      (corpus.header !== undefined && corpus.ativo !== undefined);
-    expect(shapeOk,
-      "O corpus declara {header, negacoes, termos:[{id,termo,naturezaAlerta,ativo,fonte}]}: sem " +
-      "`ativo` na raiz e sem `termosEmergencia`/`regraId`. AvaliarRadAlerts não consome o corpus — " +
-      "a lista `negacoes` do corpus (que inclui 'não há') também é ignorada pelo código. " +
-      "Wiring ausente; risco de duas fontes de negação divergentes.")
-      .toBe(true);
+  it("corpus das 30 cadeias é consumível e a capacidade aponta a autoridade atual", () => {
+    expect(rsCadeias.id).toBe("rads-emergencias");
+    expect(rsCadeias.emergencias).toHaveLength(30);
+    expect(rsCadeias.negacoes).toEqual(expect.arrayContaining(["sem sinais de", "não há", "ausência de"]));
+    const capabilities = JSON.parse(readFileSync(join(process.cwd(), "corpus", "capabilities.v1.json"), "utf8"));
+    expect(capabilities.metadados["AG-04"].planejado.ruleset).toBe("rads-emergencias.v1.json");
   });
 });

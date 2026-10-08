@@ -45,7 +45,7 @@ export default defineConfig(async () => {
   const target = apiPort ? `http://127.0.0.1:${Number(apiPort)}` : undefined;
   return {
     plugins,
-    build: { rollupOptions: { input: { demonstracao: "index.html", oncoassist: "oncoassist.html" } } },
+    build: { outDir: "dist/ui", rollupOptions: { input: { demonstracao: "index.html", oncoassist: "oncoassist.html" } } },
     ...(target ? { server: { host: "127.0.0.1", proxy: { "/login": { target }, "/consulta": { target } } } } : {}),
     test: {
       // Preserva o exclude padrao; filtro explicito habilita apenas o reataque real,

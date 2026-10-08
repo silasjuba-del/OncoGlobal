@@ -29,16 +29,22 @@ const erros = [];
 for (const file of files) {
   const rel = relative(ROOT, file).split(sep).join("/");
   const code = readFileSync(file, "utf8");
-  const imports = [...code.matchAll(/from\s+["'](\.{1,2}\/[^"']+)["']/g)].map((m) =>
-    relative(ROOT, join(file, "..", m[1])).split(sep).join("/"));
+  const referencias = [...code.matchAll(/(?:from\s*|import\s*)["']([^"']+)["']/g)].map((m) => m[1]);
+  for (const ref of referencias) {
+    if (/^(?:@\/|~\/|src\/)/.test(ref)) erros.push(`${rel} usa alias de workspace não autorizado: ${ref}`);
+  }
+  const imports = referencias.filter((ref) => /^\.{1,2}\//.test(ref)).map((ref) =>
+    relative(ROOT, join(file, "..", ref)).split(sep).join("/"));
   for (const r of RULES) {
     if (!rel.startsWith(r.from)) continue;
     for (const imp of imports) {
       const proibido = r.forbid.some((p) => imp.startsWith(p)) && !r.allow.some((a) => imp.startsWith(a));
       const mesmoAgente = r.sameDirOk && imp.split("/").slice(0, 3).join("/") === rel.split("/").slice(0, 3).join("/");
       // R-08 (tech lead W10): só o barrel src/rules/index.ts pode reexportar arquivos de src/rules/.
-      const barrelRegras = rel === "src/rules/index.ts" && imp.startsWith("src/rules/");
-      if (proibido && !mesmoAgente && !barrelRegras && !(r.from === "src/contracts/" && imp.startsWith("src/contracts/")))
+      const barrelRegras = ["src/rules/index.ts", "src/rules/w8/index.ts"].includes(rel) && imp.startsWith("src/rules/");
+      // Explicit pure shared leaves; do not permit arbitrary rule-to-rule imports.
+      const folhaCompartilhada = r.from === "src/rules/" && ["src/rules/cns.js", "src/rules/datas.js", "src/rules/medidas.js", "src/rules/destino.js", "src/rules/w8/identificadores.js"].includes(imp);
+      if (proibido && !mesmoAgente && !barrelRegras && !folhaCompartilhada && !(r.from === "src/contracts/" && imp.startsWith("src/contracts/")))
         erros.push(`${rel} → ${imp} (${r.why})`);
     }
   }

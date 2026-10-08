@@ -24,6 +24,7 @@ import { projetarEstatisticaLedger } from "../estatistica/index.js";
 import { consultarGrafoLocal } from "../app/pesquisa/conhecimento.js";
 import { prepararRevisaoExtracao } from "../app/revisaoExtracao.js";
 import { criarOncoassistJev } from "../app/oncoassist.js";
+import { detectarEmergencias } from "../rules/radsEmergencias.js";
 
 export interface ServidorDeps {
   db: DatabaseSync;
@@ -211,7 +212,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
                               : req.url === "/config/caixa/ler" ? "lerCaixa"
                                 : req.url === "/config/caixa/alterar" ? "alterarCaixa"
             : req.url === "/config/historico" ? "historicoConfig"
-                          : req.url === "/acao" ? "acao" : "desconhecida";
+                          : req.url === "/acao" ? "acao"
+                            : ["/consulta/salao/triagem", "/consulta/salao/liberar", "/consulta/canal/vincular"].includes(req.url ?? "")
+                              ? "capacidadePendente" : "desconhecida";
   const reply = (status: number, codigo: string, result: unknown = { codigo }) => {
     deps.log({ rota, codigo, status }); send(res, status, result);
   };
@@ -232,6 +235,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     // O gate de autenticação continua anterior a esta checagem.
     if (rota === "acao" && !contentTypeJson(req)) return reply(415, "CONTENT_TYPE_INVALIDO");
     const raw = await body(req);
+    if (rota === "capacidadePendente") return reply(501, "CAPACIDADE_PENDENTE", {
+      codigo: "CAPACIDADE_PENDENTE", criaEventoClinico: false,
+    });
     if (rota === "oncoassistStatus") {
       if (!z.object({}).strict().safeParse(raw).success) return reply(400, "PAYLOAD_INVALIDO");
       const service = deps.oncoassistJev ?? criarOncoassistJev();
@@ -487,6 +493,11 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         sourceType: parsed.data.sourceType, rawTranscript: parsed.data.rawTranscript,
         ...(parsed.data.page === undefined ? {} : { page: parsed.data.page }) };
       const state = executarPipelineExtracao(input);
+      // Advisory chains use the approved local corpus and preserve original source.
+      // They never create a clinical fact or confirm an emergency automatically.
+      const rads = parsed.data.sourceType === "imaging_report" && deps.corpus?.rads
+        ? detectarEmergencias(parsed.data.rawTranscript, deps.corpus.rads) : null;
+      const alertasRads = rads?.alertas.map((alerta) => ({ ...alerta, sourceId: parsed.data.sourceId })) ?? [];
       // Gates are advisory at draft time: absent anatomy/laterality/specimen stays
       // pending and never prevents local persistence or consultation.
       const stages = state.facts.filter((f) => f.domain === "stage" && typeof f.value === "string");
@@ -502,14 +513,14 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       const saved = salvarDraft(deps.db, {
         draftId: randomUUID(), patientId: null, sourceId: parsed.data.sourceId,
         rawRef: `importacao-local:${parsed.data.recordingId}`,
-        payload: { kind: "EXTRACAO_RASCUNHO", input: parsed.data, state, alerts },
+        payload: { kind: "EXTRACAO_RASCUNHO", input: parsed.data, state, alerts, alertasRads },
         diagnostics: ["VINCULO_MEDICO_PENDENTE", ...state.confirmationRequired.map((e) => e.kind),
           ...alerts.filter((a) => a.decisao !== "PASSA").map((a) => `${a.gate}_${a.decisao}`)],
         revision: 0, criadoEm: deps.agora(),
       });
       return reply(201, "RASCUNHO_SALVO", { draftId: saved.draftId, revision: saved.revision,
         linkedPatientId: null, facts: state.facts, exceptions: state.confirmationRequired,
-        timeline: null, alerts, requiresMedicalReview: true });
+        timeline: null, alerts, alertasRads, requiresMedicalReview: true });
     }
     if (rota === "rascunho") {
       const parsed = z.object({ draftId: z.string().min(1) }).strict().safeParse(raw);

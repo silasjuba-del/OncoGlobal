@@ -6,6 +6,8 @@ export const FonteRevisao = z.object({ draft: z.object({
   payload: z.object({ kind: z.literal("EXTRACAO_RASCUNHO"),
     input: z.object({ sourceId: z.string(), rawTranscript: z.string() }),
     state: z.object({ facts: z.array(ClinicalFact) }),
+    alertasRads: z.array(z.object({ nome: z.string(), trecho: z.string(), sourceId: z.string(),
+      confirmadoPeloMedico: z.literal(false), bloqueiaSalvar: z.literal(false) })).optional(),
     patientLinkReview: z.object({ patientId: z.string(), encounterId: z.string(), tumorLotId: z.string().nullable() }),
   }),
 }) });

@@ -29,10 +29,10 @@ Abra a URL local apresentada pelo Vite com `/oncoassist.html`. A API e o proxy v
 1. Entrar com a senha local e selecionar paciente da agenda de hoje.
 2. O servidor recupera a consulta e suas fontes de extração previamente vinculadas por revisão médica.
 3. Selecionar um documento e solicitar a classificação. O navegador envia referência e contexto; o texto e o dicionário de identificação são recuperados localmente pelo servidor.
-4. O serviço desidentifica, verifica resíduos pelo detector existente e envia somente o texto tratado ao endpoint fixo da TypeSafe. Fonte, hash original e mapa de reidentificação ficam locais.
+4. O serviço desidentifica e verifica resíduos localmente. Envia somente marcadores documentais de vocabulário fechado, em ordem fixa, ao endpoint da TypeSafe. Transcrição, nomes, valores, datas, fonte, hash original e mapa de reidentificação ficam locais. Sem marcadores reconhecidos, retorna PENDENTE e não chama o provedor.
 5. A resposta é validada e exibida como sugestão para revisão, sem escrita no ledger clínico.
 
-O detector usa padrões e nomes/identificadores conhecidos no cadastro local. Isso não demonstra anonimização universal de familiares, profissionais ou pacientes desconhecidos mencionados no documento. O uso real continua dependente da configuração e da governança do serviço; nenhum documento real foi usado nos testes desta entrega.
+O detector local usa padrões e identificadores conhecidos, mas a saída não depende de reconhecer todos os nomes: nenhum trecho livre é encaminhado ao Jev. A representação reduzida limita a classificação; sua acurácia no provedor real permanece não validada. Os testes usam somente fontes sintéticas e transporte offline.
 
 ## Contratos de consumo
 
@@ -43,6 +43,6 @@ O detector usa padrões e nomes/identificadores conhecidos no cadastro local. Is
 - `POST /consulta/rascunho/revisar`: exige o comprovante para confirmar fatos. A interface consumidora deve mostrar o conteúdo antes da ação médica; receber HTTP 200 sozinho não prova leitura visual.
 - `POST /consulta/estatistica`: aceita opcionalmente `{ "periodoClinico": { "inicio": "2026-10-01", "fim": "2026-10-31" } }`; datas inclusivas, exclusões explícitas, sem fallback para data de ingestão.
 
-O modo local do OncoAssist apresenta apenas classificação documental; não expõe todos os fluxos da consulta clínica. Nenhum índice vetorial, conector de laboratório, Plaud/Nova-3 ou integração externa de agenda foi instalado por esta mudança.
+O modo local do OncoAssist apresenta classificação documental e revisão de extrações já vinculadas, com resumo exibido e confirmação separada; não expõe todos os fluxos da consulta clínica. Nenhum índice vetorial, conector de laboratório, Plaud/Nova-3 ou integração externa de agenda foi instalado por esta mudança.
 
 Documentação do provedor consultada: https://docs.typesafe.ai/sdk/javascript e https://docs.typesafe.ai/primitives/choice.

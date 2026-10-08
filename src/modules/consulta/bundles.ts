@@ -1,6 +1,6 @@
 // GRK-02 · Bundles são manifestos do pack. O módulo não preenche documento clínico.
-import { fonteInformada } from "../tipos.js";
-import type { Semaforo } from "../tipos.js";
+import { fonteInformada } from "../base.js";
+import type { Semaforo } from "../base.js";
 
 export const BUNDLES = [
   "FIM_PRIMEIRA_CONSULTA",

@@ -91,6 +91,10 @@ export function RevisaoExtracaoLocal({ porta, contexto }: { porta: PortaConsulta
     </select></label>
     {fonte ? <>
       <h3>Texto original</h3><pre style={{ whiteSpace: "pre-wrap" }}>{fonte.payload.input.rawTranscript}</pre>
+      {fonte.payload.alertasRads?.length ? <section aria-label="Alertas RADS para revisão">
+        <h3>Alertas de imagem — confirmação médica pendente</h3>
+        {fonte.payload.alertasRads.map((a, i) => <p key={i}>{a.nome}: {a.trecho} — fonte {a.sourceId}</p>)}
+      </section> : null}
       <fieldset disabled={ocupado || concluida}><legend>Achados para revisão</legend>
         {fonte.payload.state.facts.map((fact) => <label key={fact.id} style={{ display: "block" }}>
           <input type="checkbox" checked={ids.includes(fact.id)} onChange={(e) => {

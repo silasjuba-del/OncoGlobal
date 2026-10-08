@@ -31,3 +31,23 @@ jobs:
 
       - name: Verify (typecheck + fronteiras + testes)
         run: npm run verify
+
+  adversarial:
+    name: Provas adversariais W10 e W8
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Reataque W10 (inclui .adv.ts)
+        run: node node_modules/vitest/vitest.mjs run --config tests/redteam/vitest.config.ts --no-file-parallelism
+      - name: Reataque W8 (inclui .adv.ts)
+        if: ${{ !cancelled() }}
+        run: node node_modules/vitest/vitest.mjs run --config tests/adv-w8/vitest.config.ts --no-file-parallelism

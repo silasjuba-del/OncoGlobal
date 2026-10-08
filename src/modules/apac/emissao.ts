@@ -2,7 +2,7 @@
 // Uma competência por lote sai de montarApacBatch. Relógio, finalidade, CNS e CNES são desta função.
 
 import rulesetEmissao from "../../../corpus/rulesets/agenda-apac-emissao.v1.json" with { type: "json" };
-import { diferencaDiasCivis } from "../tipos.js";
+import { diferencaDiasCivis } from "../base.js";
 import { validarCns, type ResultadoCns } from "./cns.js";
 import { montarApacBatch, type CriterioApacBatch, type ItemApacLote } from "./lote.js";
 

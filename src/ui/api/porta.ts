@@ -110,7 +110,7 @@ export interface SalaoVisao {
   hoje: string;
   ruleset: SalaoRuleset;
   contexto: ContextoTriagem;
-  fonte: Fonte;
+  fonte: Fonte | null;
   cartoes: readonly CartaoSalaoVisao[];
   pacientes: readonly PacienteTriagemVisao[];
   decisoes: readonly DecisaoLiberacaoVisao[];

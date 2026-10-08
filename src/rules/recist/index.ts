@@ -1,4 +1,5 @@
 import type { RecistAvaliacao } from "../../contracts/w10/clinico-w10.js";
+import { validarUnidadeMedida } from "../medidas.js";
 
 export type RecistTipoAlvo = "NAO_NODAL" | "LINFONODO";
 export type RecistEixo = "MAIOR" | "CURTO";
@@ -19,6 +20,9 @@ export interface RecistLesaoMedida {
   codigo: string;
   diametroMm: number;
   fonteIds: readonly string[];
+  /** Original units when importing raw measurements. Legacy diametroMm is an explicit normalized-mm field. */
+  unidadeOriginal?: "mm" | "cm" | null;
+  valorOriginal?: number | null;
 }
 
 export interface RecistPontoSerie {
@@ -71,6 +75,7 @@ export type RecistPendencia =
   | "ALVO_DUPLICADO"
   | "ALVO_NAO_DECLARADO"
   | "MEDIDA_INVALIDA"
+  | "UNIDADE_MEDIDA_PENDENTE"
   | "PROVENIENCIA_AUSENTE"
   | "BASELINE_ZERO_SEM_PERCENTUAL"
   | "NADIR_ZERO_SEM_PERCENTUAL"
@@ -251,6 +256,11 @@ export function avaliarSerieRecist(input: RecistSerieInput): RecistSerieResultad
     if (codigosAlvo.some((codigo) => !codigos.includes(codigo))) faltas.push("ALVO_AUSENTE");
     if (ponto.lesoes.some((l) => !Number.isFinite(l.diametroMm) || l.diametroMm < 0))
       faltas.push("MEDIDA_INVALIDA");
+    if (ponto.lesoes.some((l) => {
+      if (l.unidadeOriginal === undefined && l.valorOriginal === undefined) return false;
+      const unidade = validarUnidadeMedida({ valor: l.valorOriginal ?? null, unidade: l.unidadeOriginal ?? null });
+      return unidade.estado !== "OK" || unidade.valorMm === null || Math.abs(unidade.valorMm - l.diametroMm) > 1e-6;
+    })) faltas.push("UNIDADE_MEDIDA_PENDENTE");
     if (faltas.length) {
       if (ponto.eventId === input.baselineEventId) { baselineInvalido = true; motivosBaseline = [...faltas]; }
       resultados.push(pendente(ponto.eventId, ponto.data, faltas));

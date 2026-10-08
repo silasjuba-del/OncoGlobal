@@ -54,7 +54,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
       />
       {resumoFlash ? <p role="status">{resumoFlash}</p> : null}
       <div className="colunas">
-        <FormTriagem
+        {visao.fonte ? <FormTriagem
           patientId={escolhido.patientId}
           encounterId={escolhido.encounterId}
           chegadaEm={escolhido.chegadaEm}
@@ -64,7 +64,7 @@ export function TelaSalao({ porta }: { porta: PortaConsulta }) {
           onSalvar={(triagem) => {
             void porta.salvarTriagem(triagem).then(setVisao);
           }}
-        />
+        /> : <p>Fonte da triagem indisponível. Os pacientes permanecem na fila.</p>}
         <QuadroSalao
           cartoes={visao.cartoes}
           ruleset={visao.ruleset}

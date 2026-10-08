@@ -1,3 +1,7 @@
+import { cpfValido } from "../../rules/w8/identificadores.js";
+export { cpfValido };
+import { cnsValido } from "../../rules/cns.js";
+export { cnsValido };
 // FN-24 · Desidentificação ANTES de qualquer saída (INV-12, G-02, G-24). Pura: sem I/O.
 // O mapa de reidentificação nunca sai do PC; tokens são por chamada (K-22).
 
@@ -36,26 +40,6 @@ function compactarComIndices(s: string): { compacto: string; indices: number[] }
 }
 
 /** CPF com dígitos verificadores válidos (11 dígitos, aceita pontuação). */
-export function cpfValido(raw: string): boolean {
-  const d = raw.replace(/\D/g, "");
-  if (d.length !== 11 || /^(\d)\1{10}$/.test(d)) return false;
-  const dv = (n: number) => {
-    let s = 0;
-    for (let i = 0; i < n; i++) s += Number(d[i]) * (n + 1 - i);
-    const r = (s * 10) % 11;
-    return r === 10 ? 0 : r;
-  };
-  return dv(9) === Number(d[9]) && dv(10) === Number(d[10]);
-}
-
-/** CNS (15 dígitos): soma ponderada 15..1 múltipla de 11. */
-export function cnsValido(raw: string): boolean {
-  const d = raw.replace(/\D/g, "");
-  if (d.length !== 15 || !/^[1-9]/.test(d)) return false;
-  let s = 0;
-  for (let i = 0; i < 15; i++) s += Number(d[i]) * (15 - i);
-  return s % 11 === 0;
-}
 
 export function desidentificar(textoOriginal: string, dic: DicionarioPaciente): ResultadoDesidentificacao {
   const mapa = new Map<string, string>();
@@ -77,7 +61,7 @@ export function desidentificar(textoOriginal: string, dic: DicionarioPaciente): 
 
   // 2. Padrões estruturados
   texto = texto.replace(/[\w.+-]+@[\w-]+\.[\w.-]+/g, (m) => tokenPara("EMAIL", m));
-  texto = texto.replace(/\b\d{3}[ .]?\d{4}[ .]?\d{4}[ .]?\d{4}\b/g, (m) => (cnsValido(m) ? tokenPara("CNS", m) : m));
+  texto = texto.replace(/\b\d{3}[ .]?\d{4}[ .]?\d{4}[ .]?\d{4}\b/g, (m) => tokenPara("CNS", m));
   texto = texto.replace(/\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b/g, (m) => (cpfValido(m) ? tokenPara("CPF", m) : m));
   texto = texto.replace(/(?:\+?55\s?)?\(?\d{2}\)?\s?9?\d{4}-?\d{4}\b/g, (m) => tokenPara("TELEFONE", m));
   // Mesma detecção é reutilizada por G-02 para barrar texto residual.

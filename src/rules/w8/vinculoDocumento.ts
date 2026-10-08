@@ -1,3 +1,5 @@
+import { cpfValido } from "./identificadores.js";
+import { cnsValido } from "../cns.js";
 // AG-02 · Vínculo de documento ao paciente (lições I3–I5)
 // Regras puras: comprovante de terceiro, acompanhante e médicos solicitante/assistente
 // nunca ligam paciente nem preenchem dados. Só identificador exato VÁLIDO POR VALOR liga.
@@ -38,26 +40,6 @@ export interface EntradaVinculoDocumento {
 export interface SaidaVinculoDocumento {
   liga: boolean;
   motivo: string;
-}
-
-function cpfValido(raw: string): boolean {
-  const d = (raw ?? "").replace(/\D/g, "");
-  if (d.length !== 11 || /^(\d)\1{10}$/.test(d)) return false;
-  const dv = (n: number) => {
-    let s = 0;
-    for (let i = 0; i < n; i++) s += Number(d[i]) * (n + 1 - i);
-    const r = (s * 10) % 11;
-    return r === 10 ? 0 : r;
-  };
-  return dv(9) === Number(d[9]) && dv(10) === Number(d[10]);
-}
-
-function cnsValido(raw: string): boolean {
-  const d = (raw ?? "").replace(/\D/g, "");
-  if (d.length !== 15 || !/^[1-9]/.test(d)) return false;
-  let s = 0;
-  for (let i = 0; i < 15; i++) s += Number(d[i]) * (15 - i);
-  return s % 11 === 0;
 }
 
 /**

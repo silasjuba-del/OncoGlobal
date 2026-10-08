@@ -1,42 +1,25 @@
+import type { TriagemExtraW10 } from "../contracts/w10/clinico-w10.js";
 import type { Motivo, ResultadoTriagem, Triagem } from "../contracts/clinico.js";
 import type { Destino, Semaforo } from "../contracts/estados.js";
 import type { ContextoTriagem, SalaoRuleset } from "../contracts/regras.js";
 
-function diferencaDiasCivis(de: string, ate: string): number {
-  const a = Date.UTC(Number(de.slice(0, 4)), Number(de.slice(5, 7)) - 1, Number(de.slice(8, 10)));
-  const b = Date.UTC(Number(ate.slice(0, 4)), Number(ate.slice(5, 7)) - 1, Number(ate.slice(8, 10)));
-  return Math.trunc((b - a) / 86_400_000);
-}
+import { diferencaDiasCivis } from "./datas.js";
 
-function validadeColeta(
+export function validadeHemograma(
   coleta: string | null,
   hoje: string,
   rs: SalaoRuleset,
-): { estado: Semaforo; motivo: string } {
-  if (coleta === null) return { estado: "PENDENTE", motivo: "hemograma ausente" };
+): { estado: Semaforo; dias: number | null; motivo: string } {
+  if (coleta === null) {
+    return { estado: "PENDENTE", dias: null, motivo: "hemograma ausente" };
+  }
   const dias = diferencaDiasCivis(coleta, hoje);
-  if (dias < 0) return { estado: "PENDENTE", motivo: "coleta futura" };
-  if (dias > rs.hemogramaValidadeDias) return { estado: "PENDENTE", motivo: "hemograma vencido" };
-  return { estado: "VERDE", motivo: "hemograma válido" };
+  if (dias < 0) return { estado: "PENDENTE", dias, motivo: "coleta futura" };
+  if (dias > rs.hemogramaValidadeDias) return { estado: "PENDENTE", dias, motivo: "hemograma vencido" };
+  return { estado: "VERDE", dias, motivo: "hemograma válido" };
 }
 
-function destinoDe(
-  input: {
-    temCorte: boolean;
-    temPendencia: boolean;
-    recurso: "AMBULATORIAL" | "CADEIRA" | "CAMA";
-    idadeAnos: number | null;
-  },
-  rs: SalaoRuleset,
-): Destino {
-  if (input.temCorte || input.temPendencia) return "FILA_MEDICO";
-  // D-W9-03 · idade ausente é PENDENTE: nunca decide FRENTE nem SALAO.
-  if (input.idadeAnos === null) return "FILA_MEDICO";
-  if (rs.frente.recursos.includes(input.recurso) || input.idadeAnos > rs.frente.idadeAcimaDe) {
-    return "FRENTE";
-  }
-  return "SALAO";
-}
+import { decidirDestino as destinoDe } from "./destino.js";
 
 type CampoRequisito = ContextoTriagem["requisitosAplicaveis"][number];
 
@@ -133,7 +116,7 @@ export function avaliarTriagem(t: Triagem, ctx: ContextoTriagem, rs: SalaoRulese
   if (t.idadeAnos === null) pendentes.push(mot("pendente.idadeAnos", "idade ausente", rs));
 
   if (aplicavel(ctx, "coletaHemograma")) {
-    const v = validadeColeta(t.coletaHemograma.valor, ctx.hoje, rs);
+    const v = validadeHemograma(t.coletaHemograma.valor, ctx.hoje, rs);
     if (v.estado === "PENDENTE") {
       pendentes.push(mot("pendente.coletaHemograma", v.motivo, rs));
     }
@@ -169,12 +152,7 @@ export function avaliarTriagem(t: Triagem, ctx: ContextoTriagem, rs: SalaoRulese
   };
 }
 
-// PROVISORIO-W10: trocar por src/contracts/w10/ (pad e crCentesimos na Triagem; C-08 não tem os dois).
-/** PAD em mmHg e creatinina em centésimos de mg/dL (150 = 1,50). null = ausente, nunca 0. */
-export interface SinaisExtraW10 {
-  pad: number | null;
-  crCentesimos: number | null;
-}
+export type SinaisExtraW10 = TriagemExtraW10;
 
 export interface ResultadoPortao {
   portao: "TRIAGEM_CICLO" | "CORTE_SALAO";
