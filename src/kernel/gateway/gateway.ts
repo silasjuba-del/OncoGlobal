@@ -156,8 +156,13 @@ export async function executarLeitura(input: unknown, options: {
   let timeout: ReturnType<typeof setTimeout> | undefined;
   try {
     const timeoutMs = authorization.request.timeoutMs ?? 5000;
+    const { query, refs } = authorization.request.payload;
     const resultado = await Promise.race([
-      transporte({ ...authorization.request.payload, signal: controller.signal }),
+      transporte({
+        ...(query !== undefined ? { query } : {}),
+        ...(refs !== undefined ? { refs } : {}),
+        signal: controller.signal,
+      }),
       new Promise<never>((_, reject) => {
         timeout = setTimeout(() => { controller.abort(); reject(new Error("READ_TIMEOUT")); }, timeoutMs);
       }),
