@@ -1,14 +1,13 @@
 // W11-H12 · receituário especial por medicamento controlado (decisão do Dr. Silas: "TRAMADOL É RECEITA ESPECIAL, SÓ SE TIVER").
+import { CONFIGURACAO_SERVICO_PADRAO, type ConfiguracaoServico } from "../../contracts/w11/configuracaoServico.js";
+
 // Funções puras. src/rules só importa src/contracts (R-08): a tabela de controlados é INJETADA (corpus/regulatorio/medicamentos-controlados.v1.json).
 // Regras: fármaco que exige receituário especial e serviço sem ele => INDISPONÍVEL (nunca substituído em silêncio);
 // serviço com receituário especial => item vai para documento separado RECEITA_ESPECIAL, nunca na receita comum.
 
-export interface ConfiguracaoReceituario {
-  /** padrão false: sem receituário especial, itens controlados ficam indisponíveis */
-  servicoTemReceituarioEspecial: boolean;
-}
+export type ConfiguracaoReceituario = ConfiguracaoServico;
 
-export const CONFIGURACAO_RECEITUARIO_PADRAO: ConfiguracaoReceituario = { servicoTemReceituarioEspecial: false };
+export const CONFIGURACAO_RECEITUARIO_PADRAO: ConfiguracaoReceituario = CONFIGURACAO_SERVICO_PADRAO;
 
 export interface EntradaControlado {
   nomes: readonly string[];
