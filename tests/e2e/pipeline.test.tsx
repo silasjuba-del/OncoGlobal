@@ -81,12 +81,15 @@ it("F4 sintetico: caixa -> ORK fake -> draft -> revisao -> ledger -> delta -> bu
     salvarDraft(db, { draftId: "historico-teste", patientId, sourceId: "fonte-manual-teste",
       rawRef: "opaco-historico", payload: { campo: "historico", valor: "baseline sintetico" },
       diagnostics: [], revision: 0, criadoEm: em });
-    // JUNCAO SEM DOCUMENTO: prepara contexto da revisao de fatos diretamente.
-    // Nao exercita /consulta/bundle; a fase documental abaixo usa a rota HTTP.
-    sessoes.registrarBundleExibido(token, { patientId, encounterId: "consulta-teste-01" }, []);
+    // Exibicao do fato anterior pela rota real: o contexto (paciente, consulta e lote) fica vinculado na sessao.
+    const exibicaoAnterior = await post(port, "/consulta/bundle", {
+      patientId, tumorLotId, encounterId: "consulta-teste-01", draftIds: ["historico-teste"],
+    }, token);
+    expect(exibicaoAnterior).toMatchObject({ status: 200 });
     const anterior = await post(port, "/consulta/confirmar", {
       patientId, tumorLotId, encounterId: "consulta-teste-01", bloco: "EVOLUCAO",
-      registros: [{ id: "historico-teste", expectedRevision: 0 }], documentosExibidos: [],
+      registros: [{ id: "historico-teste", expectedRevision: 0 }],
+      documentosExibidos: [{ documentId: "historico-teste", documentVersion: 1 }],
       reconhecerAlertas: [], idempotencyKey: "confirmar-teste-01",
     }, token);
     expect(anterior).toMatchObject({ status: 200, json: { codigo: "GRAVADA" } });
@@ -118,11 +121,15 @@ it("F4 sintetico: caixa -> ORK fake -> draft -> revisao -> ledger -> delta -> bu
     // o valor pode sair do envelope inerte e aparecer no ledger/projecao.
     salvarDraft(db, { draftId: "fato-teste", patientId, sourceId: envelope.sourceId,
       rawRef: envelope.rawRef, payload: extraido, diagnostics: [], revision: 0, criadoEm: em });
-    // JUNCAO SEM DOCUMENTO: contexto vazio para confirmar somente o fato sintetico.
-    sessoes.registrarBundleExibido(token, { patientId, encounterId }, []);
+    // Exibicao do fato sintetico pela rota real, no mesmo lote, antes de confirmar.
+    const exibicaoRevisao = await post(port, "/consulta/bundle", {
+      patientId, tumorLotId, encounterId, draftIds: ["fato-teste"],
+    }, token);
+    expect(exibicaoRevisao).toMatchObject({ status: 200 });
     const revisao = await post(port, "/consulta/confirmar", {
       patientId, tumorLotId, encounterId, bloco: "EVOLUCAO",
-      registros: [{ id: "fato-teste", expectedRevision: 0 }], documentosExibidos: [],
+      registros: [{ id: "fato-teste", expectedRevision: 0 }],
+      documentosExibidos: [{ documentId: "fato-teste", documentVersion: 1 }],
       reconhecerAlertas: [], idempotencyKey: "confirmar-fato-teste",
     }, token);
     expect(revisao).toMatchObject({ status: 200, json: { codigo: "GRAVADA" } });
@@ -160,7 +167,7 @@ it("F4 sintetico: caixa -> ORK fake -> draft -> revisao -> ledger -> delta -> bu
     salvarDraft(db, { draftId: "doc-draft-teste", patientId, sourceId: "render-teste",
       rawRef: "opaco-render", payload: docPayload, diagnostics: [], revision: 0, criadoEm: em });
     const exibicao = await post(port, "/consulta/bundle", {
-      patientId, encounterId, draftIds: ["doc-draft-teste"],
+      patientId, tumorLotId, encounterId, draftIds: ["doc-draft-teste"],
     }, token);
     expect(exibicao.status).toBe(200);
     const documentosServidor = exibicao.json.documentos as {
