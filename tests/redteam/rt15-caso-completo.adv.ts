@@ -1,100 +1,86 @@
-// RT-15 · Erro de análise de exame ponta a ponta (S1) — FALHAS do pipeline de extração
-// num caso completo sintético (PT10): colar laudo AP + prescrição + Plaud com contradições.
-// Especificação (PIPELINE §10): saem EXATAMENTE as exceções esperadas — cisplatina ×
-// carboplatina; PET antes do diagnóstico; cN2 sem prova; "prednisona 10 mg por hora" — e
-// nenhuma conclusão silenciosa.
-// Dono provável: orchestration/pipeline-extracao.ts (Fugu) — ReconciliationEngine/safety no-op.
+// RT-15 · caso completo: contradicções entre fala e prescrição exigem escopo e revisão.
 import { describe, expect, it } from "vitest";
-import { executarPipelineExtracao } from "../../src/orchestration/pipeline-extracao.js";
-import { PLAUD_CONTRADICOES, PRESCRICAO_CARBO, LAUDO_AP_PT10 } from "../fixtures/redteam/laudos.js";
+import { executarPipelineExtracao, type ExtractionInput } from "../../src/orchestration/pipeline-extracao.js";
+import type { ReviewAction } from "../../src/kernel/extracao/tipos.js";
+import { PLAUD_CONTRADICOES, PRESCRICAO_CARBO } from "../fixtures/redteam/laudos.js";
 
-const rodarCaso = () => {
-  const plaud = executarPipelineExtracao({
-    recordingId: "grav-rt15", sourceId: "plaud-pt10", sourceType: "plaud",
-    rawTranscript: PLAUD_CONTRADICOES,
-    registeredPatients: [{ patientId: "Paciente Teste 10", age: 60, tumor: "mama" }],
-  });
-  const ap = executarPipelineExtracao({
-    recordingId: "grav-rt15-ap", sourceId: "ap-pt10", sourceType: "pathology",
-    rawTranscript: LAUDO_AP_PT10,
-    registeredPatients: [{ patientId: "Paciente Teste 10", age: 60, tumor: "mama" }],
-  });
-  const rx = executarPipelineExtracao({
-    recordingId: "grav-rt15-rx", sourceId: "rx-pt10", sourceType: "prescription",
-    rawTranscript: PRESCRICAO_CARBO,
-    registeredPatients: [{ patientId: "Paciente Teste 10", age: 60, tumor: "mama" }],
-  });
-  return { plaud, ap, rx };
+const em = "2030-01-03T10:00:00-03:00";
+const contexto = { encounterId: "encontro-rt15-sintetico", dataClinica: "03/01/2030" };
+const input: ExtractionInput = {
+  recordingId: "grav-rt15-fala", sourceId: "fala-rt15", sourceType: "plaud",
+  rawTranscript: PLAUD_CONTRADICOES, contexto,
+  additionalSources: [{ recordingId: "grav-rt15-prescricao", sourceId: "prescricao-rt15",
+    sourceType: "prescription", rawTranscript: PRESCRICAO_CARBO, contexto }],
 };
 
-describe("RT-15 · caso completo com contradições: exceções esperadas (spec §10)", () => {
-  it("SEM_IMPLEMENTACAO: ReconciliationEngine emite CONFLICT para regimen planejado × prescrito", async () => {
-    const mod = (await import("../../src/orchestration/pipeline-extracao.js")) as Record<string, unknown>;
-    const fn = mod["reconciliarComConflitos"] ?? mod["detectarConflitos"] ?? mod["reconciliar"];
-    expect(fn,
-      "reconciliarFontes é no-op declarado (fields sempre {}): a contradição central do caso " +
-      "(Plaud fala cisplatina; prescrição ordena carboplatina) nunca vira exceção CONFLICT " +
-      "('planned_regimen != ordered_regimen'). PIPELINE §4/§7 exige o conflito, nunca escolha " +
-      "silenciosa. Dono provável: orchestration/pipeline-extracao.ts (Fugu).")
-      .toBeTypeOf("function");
+function decisoes(state: ReturnType<typeof executarPipelineExtracao>, patientBySource: Readonly<Record<string, string>>): ReviewAction[] {
+  return state.exceptions.filter((item) => item.kind === "UNLINKED_PATIENT").map((item) => ({
+    exceptionId: item.id, acao: "LIGAR_PACIENTE", medicoId: "medico-rt15-sintetico", em,
+    patientId: patientBySource[item.sourceIds[0] ?? ""] ?? "Paciente Teste 10",
+  }));
+}
+
+describe("RT-15 · não reconciliar plano e ordem sem autorização e contexto equivalentes", () => {
+  it("sem ações de vínculo persistidas, não cruza as fontes nem inventa paciente", () => {
+    const state = executarPipelineExtracao(input);
+    expect(state.exceptions.some((item) => item.reason.includes("planned_regimen"))).toBe(false);
+    expect(state.segments.every((segment) => segment.patientId === null)).toBe(true);
+    expect(state.facts.every((fact) => fact.patientCandidateId === null)).toBe(true);
+    expect(state.timeline).toBeNull();
+    expect(state.exceptions.filter((item) => item.kind === "UNLINKED_PATIENT")).toHaveLength(2);
   });
 
-  it("cisplatina (falada) × carboplatina (prescrita) ⇒ exceção CONFLICT, nunca escolha silenciosa", async () => {
-    const mod = (await import("../../src/orchestration/pipeline-extracao.js")) as Record<string, unknown>;
-    if (typeof mod["reconciliar"] !== "function") return;
-    const { plaud, rx } = rodarCaso();
-    const conflitos = [...plaud.exceptions, ...rx.exceptions].filter((e) => e.kind === "CONFLICT");
-    expect(conflitos.length,
-      "esperada exceção CONFLICT unindo as duas fontes (regimen divergente)")
-      .toBeGreaterThan(0);
-  });
-
-  it("PET de 02/2030 antes do diagnóstico de 11/2030 ⇒ TEMPORAL_CONFLICT", async () => {
-    const mod = (await import("../../src/orchestration/pipeline-extracao.js")) as Record<string, unknown>;
-    if (typeof mod["reconciliar"] !== "function") return;
-    const { plaud } = rodarCaso();
-    expect(plaud.exceptions.some((e) => e.kind === "TEMPORAL_CONFLICT")).toBe(true);
-  });
-
-  it("'cN2' falado sem prova anexada ⇒ exceção/pendência de confirmação (nunca fato firme, nunca silêncio)", () => {
-    const { plaud } = rodarCaso();
-    // Hoje o TNM parcial nem é extraído (regex exige cT…N…M completo): o cN2 some em silêncio.
-    const estagio = plaud.facts.filter((f) => f.domain === "stage");
-    const excecaoEstadiamento = plaud.exceptions.some((e) => /cN2|estadiamento/iu.test(e.reason));
-    expect(estagio.length > 0 || excecaoEstadiamento,
-      "'o estadiamento é cN2, sem imagem de axila anexada' não gera NADA: nem fato (regex TNM " +
-      "exige T-N-M completos), nem exceção de confirmação. Spec §10 espera pendência de " +
-      "estadiamento sem prova (cN2 = canditado que exige documento).")
-      .toBe(true);
-  });
-
-  it("'prednisona 10 mg por hora' dita em consulta ⇒ exceção (dose absurda nunca entra como plano)", () => {
-    const { plaud } = rodarCaso();
-    const mencionaPrednisona = plaud.exceptions.some((e) => e.reason.match(/prednisona/iu)) ||
-      plaud.facts.some((f) => f.rawEvidence.match(/prednisona/iu));
-    expect(mencionaPrednisona,
-      "A linha de prednisona 10 mg por hora desaparece sem rastro: extrator não extraí fármaco de " +
-      "plaud e nenhuma exceção registra o trecho. Spec §10 espera essa linha entre as 4 exceções.")
-      .toBe(true);
-  });
-
-  it("nenhuma conclusão silenciosa: campos resolvidos vazios, timeline nula, nada promovido", () => {
-    const { plaud, ap, rx } = rodarCaso();
-    for (const estado of [plaud, ap, rx]) {
-      // Tech lead (2026-10-07): com a ReconciliationEngine (FUGU-07) campos podem ser RESOLVIDOS como proposta
-      // (spec §10 "fatos reconciliados automaticamente"); o que nunca pode é resolver a partir de fato não EXPLICIT
-      // nem promover sem paciente ligado. Expectativa ajustada pelo tech lead; o resto do teste continua.
-      for (const campo of Object.values(estado.fields as Record<string, { resolvedFactId: string | null }>)) {
-        if (!campo.resolvedFactId) continue;
-        const fato = estado.facts.find((f) => f.id === campo.resolvedFactId);
-        expect(fato?.evidence).toBe("EXPLICIT");
-      }
-      expect(estado.timeline).toBeNull();
-      for (const fato of estado.facts) expect(fato.patientCandidateId).toBeNull();
-      expect(estado.exceptions.some((e) => e.kind === "UNLINKED_PATIENT")).toBe(true);
+  it("ReviewAction com exceção inventada ou alvo divergente não autoriza confronto entre fontes", () => {
+    const unlinked = executarPipelineExtracao(input);
+    const valid = decisoes(unlinked, { "fala-rt15": "Paciente Teste 10", "prescricao-rt15": "Paciente Teste 10" });
+    const [fala, prescricao] = valid;
+    expect(fala).toBeDefined();
+    expect(prescricao).toBeDefined();
+    const variantes: ExtractionInput[] = [
+      { ...input, confirmacoes: [{ ...fala!, exceptionId: "exc:UNLINKED_PATIENT:segmento-inexistente" }, prescricao!] },
+      { ...input, confirmacoes: decisoes(unlinked, { "fala-rt15": "Paciente Teste 10", "prescricao-rt15": "Paciente Teste 11" }) },
+    ];
+    for (const variante of variantes) {
+      const state = executarPipelineExtracao(variante);
+      expect(state.exceptions.some((item) => item.reason.includes("planned_regimen"))).toBe(false);
+      expect(state.facts).toHaveLength(unlinked.facts.length);
     }
-    // O ap (pathology) extrai histologia como CANDIDATA confirmável — nunca como fato fechado:
-    const histologia = ap.facts.find((f) => f.domain === "histology");
-    expect(histologia?.value).toContain("carcinoma ductal");
+  });
+
+  it("com duas decisões explícitas no mesmo paciente/encontro/data, mantém conflito e os dois candidatos", () => {
+    const unlinked = executarPipelineExtracao(input);
+    const state = executarPipelineExtracao({ ...input, confirmacoes: decisoes(unlinked, {
+      "fala-rt15": "Paciente Teste 10", "prescricao-rt15": "Paciente Teste 10",
+    }) });
+    const plano = state.facts.find((fact) => fact.domain === "plan");
+    const receita = state.facts.find((fact) => fact.domain === "drug" && fact.sourceId === "prescricao-rt15");
+    const conflito = state.exceptions.find((item) => item.reason.includes("planned_regimen"));
+    expect(plano).toBeDefined();
+    expect(receita).toBeDefined();
+    expect(conflito).toMatchObject({ kind: "CONFLICT", factIds: expect.arrayContaining([plano!.id, receita!.id]),
+      sourceIds: expect.arrayContaining(["fala-rt15", "prescricao-rt15"]) });
+    expect(state.confirmationRequired).toContainEqual(conflito);
+    expect(state.fields[`${plano!.segmentId}::plan`]?.resolvedFactId).toBeNull();
+    expect(state.facts).toHaveLength(unlinked.facts.length);
+    expect(state.segments.every((segment) => segment.patientId === null)).toBe(true);
+  });
+
+  it("mesmo vínculo não cruza uma prescrição de outro encontro ou data clínica", () => {
+    const unlinked = executarPipelineExtracao(input);
+    const confirmacoes = decisoes(unlinked, { "fala-rt15": "Paciente Teste 10", "prescricao-rt15": "Paciente Teste 10" });
+    const prescricao = input.additionalSources![0]!;
+    const variants: ExtractionInput[] = [
+      { ...input, confirmacoes, additionalSources: [{ ...prescricao,
+        contexto: { ...contexto, encounterId: "outro-encontro" } }] },
+      { ...input, confirmacoes, additionalSources: [{ ...prescricao,
+        contexto: { ...contexto, dataClinica: "04/01/2030" } }] },
+      { ...input, confirmacoes, additionalSources: [{ ...prescricao,
+        contexto: { ...contexto, dataClinica: "31/02/2030" } }] },
+    ];
+    for (const variant of variants) {
+      const state = executarPipelineExtracao(variant);
+      expect(state.exceptions.some((item) => item.reason.includes("planned_regimen"))).toBe(false);
+      expect(state.facts).toHaveLength(unlinked.facts.length);
+    }
   });
 });

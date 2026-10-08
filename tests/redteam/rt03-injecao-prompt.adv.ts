@@ -1,56 +1,52 @@
-// RT-03 · Injeção de prompt e conteúdo hostil (S0/S1) — FALHAS reais.
-// 1) Fármaco com homóglifo (С cirílica) some silenciosamente — a especificação exige
-//    UNCERTAIN + confirmação (PIPELINE §5.5: medicamento foneticamente incerto guarda
-//    raw + normalized + confidence).
-// 2) Caractere zero-width no meio do fármaco: mesmo silêncio.
-// Dono provável: src/kernel/extracao/extrator.ts (Fugu) — normalização NFKD + fuzz fármaco.
+// RT-03 · instrução hostil e homóglifos são dados de origem, nunca ordens.
 import { describe, expect, it } from "vitest";
+import { normalizarFarmaco } from "../../src/kernel/extracao/normalizacao.js";
+import { extratorDeterministico } from "../../src/kernel/extracao/extrator.js";
+import { executarPipelineExtracao } from "../../src/orchestration/pipeline-extracao.js";
+import type { EncounterSegment } from "../../src/kernel/extracao/tipos.js";
+import { LAUDO_INJECAO } from "../fixtures/redteam/laudos.js";
 
-interface NormalizadorFarmaco {
-  normalizar(valor: string): { normalized: string; incerto: boolean } | null;
-}
-
-async function normalizadorFarmaco(): Promise<NormalizadorFarmaco | null> {
-  const mod = (await import("../../src/kernel/extracao/extrator.js")) as Record<string, unknown>;
-  const fn = mod["normalizarFarmaco"] ?? mod["similaridadeFarmaco"] ?? mod["detectarFarmaco"];
-  return typeof fn === "function" ? { normalizar: fn as NormalizadorFarmaco["normalizar"] } : null;
-}
-
-const segmento = (rawTranscript: string) => ({
-  id: "grav-rt03-adv:0", recordingId: "grav-rt03-adv", sourceId: "doc-adv", sourceType: "prescription" as const,
-  startMs: null, endMs: null, speakers: [], candidateNames: [],
-  rawTranscript, boundaryConfidence: null, boundaryReviewRequired: false, patientId: null,
+const segmento = (rawTranscript: string): EncounterSegment => ({
+  id: "grav-rt03-adv:0", recordingId: "grav-rt03-adv", sourceId: "prescricao-rt03-sintetica",
+  sourceType: "prescription", page: 2, startMs: null, endMs: null, speakers: [], candidateNames: [],
+  rawTranscript, boundaryConfidence: null, boundaryReviewRequired: true, patientId: null,
 });
 
-describe("RT-03 · homóglifo e texto invisível em fármaco", () => {
-  it("SEM_IMPLEMENTACAO: detector de fármaco foneticamente incerto/homóglifo existe", async () => {
-    const fn = await normalizadorFarmaco();
-    expect(fn,
-      "extrator.ts casa fármacos por regex literal; 'сisplatina' (С cirílica U+0441) e " +
-      "'cis\\u200Bplatina' (zero-width) não casam NEM sinalizam: a prescrição entra sem o fármaco " +
-      "e sem exceção. PIPELINE §5.5 exige raw + normalized + INFERRED/UNCERTAIN + confidence. " +
-      "Dono provável: src/kernel/extracao/extrator.ts (Fugu).")
-      .toBeTypeOf("function");
-  });
+describe("RT-03 · conteúdo hostil e adulteração visual em fármaco", () => {
+  it.each(["сisplatina", "cis\u200Bplatina", "CIS\u2060PLATINA"])(
+    "normalização conserva o literal suspeito como candidato incerto: %s", (literal) => {
+      expect(normalizarFarmaco(literal)).toMatchObject({ raw: literal, normalizado: "CISPLATINA",
+        incerto: true, confidence: 0.5, suspeito: true });
+    });
 
-  it("fármaco com homóglifo vira UNCERTAIN com confirmação obrigatória (nunca silêncio)", async () => {
-    const fn = await normalizadorFarmaco();
-    if (!fn) return;
-    const { extratorDeterministico } = await import("../../src/kernel/extracao/extrator.js");
-    const fatos = extratorDeterministico.extrair(segmento("protocolo: GC\r\nсisplatina 75 mg/m² D1\r\nciclo 1"));
-    const droga = fatos.find((f) => f.domain === "drug");
-    expect(droga?.evidence).toBe("UNCERTAIN");
-    expect(droga?.requiresConfirmation).toBe(true);
-    expect(droga?.rawEvidence).toContain("сisplatina");
-  });
+  it.each(["сisplatina 75 mg/m² D1", "cis\u200Bplatina AUC 5"])(
+    "pipeline mantém fonte e exige revisão para candidato com caracteres suspeitos: %s", (linha) => {
+      const texto = `protocolo: GC\n${linha}\nciclo 1`;
+      const bruto = extratorDeterministico.extrair(segmento(texto)).find((fact) => fact.domain === "drug");
+      expect(bruto).toMatchObject({ value: linha.split(" ")[0], evidence: "UNCERTAIN",
+        requiresConfirmation: true, sourceId: "prescricao-rt03-sintetica", page: 2 });
 
-  it("zero-width no meio do fármaco não elimina o fato nem engana a extração", async () => {
-    const fn = await normalizadorFarmaco();
-    if (!fn) return;
-    const { extratorDeterministico } = await import("../../src/kernel/extracao/extrator.js");
-    const fatos = extratorDeterministico.extrair(segmento("protocolo: GC\r\ncis\u{200B}platina AUC 5\r\nciclo 1"));
-    const droga = fatos.find((f) => f.domain === "drug");
-    expect(droga).toBeDefined();
-    expect(droga?.requiresConfirmation).toBe(true);
+      const resultado = executarPipelineExtracao({ recordingId: "grav-rt03-adv", sourceId: "prescricao-rt03-sintetica",
+        sourceType: "prescription", page: 2, rawTranscript: texto });
+      const farmaco = resultado.facts.find((fact) => fact.domain === "drug");
+      expect(farmaco).toMatchObject({ evidence: "UNCERTAIN", requiresConfirmation: true,
+        confidence: 0.5, raw: linha.split(" ")[0], sourceId: "prescricao-rt03-sintetica", page: 2,
+        value: { normalizado: "CISPLATINA", suspeito: true } });
+      expect(resultado.exceptions).toContainEqual(expect.objectContaining({ kind: "UNCERTAIN_DRUG",
+        factIds: [farmaco!.id], sourceIds: ["prescricao-rt03-sintetica"] }));
+      expect(resultado.timeline).toBeNull();
+    },
+  );
+
+  it("instrução dentro do laudo não confirma diagnóstico nem cria paciente ligado", () => {
+    const result = executarPipelineExtracao({ recordingId: "grav-rt03-injection", sourceId: "laudo-hostil-sintetico",
+      sourceType: "medical_note", rawTranscript: LAUDO_INJECAO,
+      registeredPatients: [{ patientId: "Paciente Teste 08", name: "Paciente Teste 08", age: 77, tumor: "pulmao" }] });
+    expect(result.segments.every((segment) => segment.patientId === null)).toBe(true);
+    expect(result.facts.every((fact) => fact.patientCandidateId === null)).toBe(true);
+    expect(result.timeline).toBeNull();
+    expect(result.exceptions.some((exception) => exception.kind === "UNLINKED_PATIENT")).toBe(true);
+    expect(result.facts.some((fact) => /IGNORE TODAS AS REGRAS|paciente liberado para QT|dose 10x/i.test(
+      `${fact.domain}:${JSON.stringify(fact.value)}`))).toBe(false);
   });
 });
