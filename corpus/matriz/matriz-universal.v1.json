@@ -1,0 +1,2244 @@
+{
+  "header": {
+    "id": "matriz-universal",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-08",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "PLN-012 matriz universal canônica (Dr. Silas, 2026-10-07); eixo Z: PLN-016 (M-T); eixos X/Y: PLN-014 (M-R)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-08"
+  },
+  "schemaVersion": "matriz-universal.v1",
+  "status": "RASCUNHO",
+  "consumivel": false,
+  "hierarquia": [
+    "CATEGORIA",
+    "CLASSE",
+    "SECAO",
+    "TOPICO",
+    "OUTROS"
+  ],
+  "categorias": [
+    {
+      "id": "problema-evento",
+      "numero": 1,
+      "nome": "PROBLEMA / EVENTO",
+      "eixo": "Y",
+      "verbo": null,
+      "outros": true,
+      "classes": [
+        {
+          "id": "sinal-sintoma",
+          "nome": "Sinal/sintoma",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "novo",
+              "nome": "Novo",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "dor-lombar",
+                  "nome": "Dor lombar",
+                  "outros": true
+                },
+                {
+                  "id": "dispneia",
+                  "nome": "dispneia",
+                  "outros": true
+                },
+                {
+                  "id": "diarreia",
+                  "nome": "diarreia",
+                  "outros": true
+                },
+                {
+                  "id": "sangramento",
+                  "nome": "sangramento",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "antigo",
+              "nome": "antigo",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "dor-lombar",
+                  "nome": "Dor lombar",
+                  "outros": true
+                },
+                {
+                  "id": "dispneia",
+                  "nome": "dispneia",
+                  "outros": true
+                },
+                {
+                  "id": "diarreia",
+                  "nome": "diarreia",
+                  "outros": true
+                },
+                {
+                  "id": "sangramento",
+                  "nome": "sangramento",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "piora",
+              "nome": "piora",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "dor-lombar",
+                  "nome": "Dor lombar",
+                  "outros": true
+                },
+                {
+                  "id": "dispneia",
+                  "nome": "dispneia",
+                  "outros": true
+                },
+                {
+                  "id": "diarreia",
+                  "nome": "diarreia",
+                  "outros": true
+                },
+                {
+                  "id": "sangramento",
+                  "nome": "sangramento",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "recorrente",
+              "nome": "recorrente",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "dor-lombar",
+                  "nome": "Dor lombar",
+                  "outros": true
+                },
+                {
+                  "id": "dispneia",
+                  "nome": "dispneia",
+                  "outros": true
+                },
+                {
+                  "id": "diarreia",
+                  "nome": "diarreia",
+                  "outros": true
+                },
+                {
+                  "id": "sangramento",
+                  "nome": "sangramento",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "estavel",
+              "nome": "estável",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "dor-lombar",
+                  "nome": "Dor lombar",
+                  "outros": true
+                },
+                {
+                  "id": "dispneia",
+                  "nome": "dispneia",
+                  "outros": true
+                },
+                {
+                  "id": "diarreia",
+                  "nome": "diarreia",
+                  "outros": true
+                },
+                {
+                  "id": "sangramento",
+                  "nome": "sangramento",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "alteracao-laboratorial",
+          "nome": "Alteração laboratorial",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "nova",
+              "nome": "Nova",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "anemia",
+                  "nome": "Anemia",
+                  "outros": true
+                },
+                {
+                  "id": "neutropenia",
+                  "nome": "neutropenia",
+                  "outros": true
+                },
+                {
+                  "id": "hipercalcemia",
+                  "nome": "hipercalcemia",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "persistente",
+              "nome": "persistente",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "anemia",
+                  "nome": "Anemia",
+                  "outros": true
+                },
+                {
+                  "id": "neutropenia",
+                  "nome": "neutropenia",
+                  "outros": true
+                },
+                {
+                  "id": "hipercalcemia",
+                  "nome": "hipercalcemia",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "progressiva",
+              "nome": "progressiva",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "anemia",
+                  "nome": "Anemia",
+                  "outros": true
+                },
+                {
+                  "id": "neutropenia",
+                  "nome": "neutropenia",
+                  "outros": true
+                },
+                {
+                  "id": "hipercalcemia",
+                  "nome": "hipercalcemia",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "alteracao-de-imagem",
+          "nome": "Alteração de imagem",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "nova",
+              "nome": "Nova",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "nova-lesao-ossea",
+                  "nome": "Nova lesão óssea",
+                  "outros": true
+                },
+                {
+                  "id": "derrame",
+                  "nome": "derrame",
+                  "outros": true
+                },
+                {
+                  "id": "massa",
+                  "nome": "massa",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "progressao",
+              "nome": "progressão",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "nova-lesao-ossea",
+                  "nome": "Nova lesão óssea",
+                  "outros": true
+                },
+                {
+                  "id": "derrame",
+                  "nome": "derrame",
+                  "outros": true
+                },
+                {
+                  "id": "massa",
+                  "nome": "massa",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "incidental",
+              "nome": "incidental",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "nova-lesao-ossea",
+                  "nome": "Nova lesão óssea",
+                  "outros": true
+                },
+                {
+                  "id": "derrame",
+                  "nome": "derrame",
+                  "outros": true
+                },
+                {
+                  "id": "massa",
+                  "nome": "massa",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "biomarcador",
+          "nome": "Biomarcador",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "aumento",
+              "nome": "Aumento",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "psa-crescente",
+                  "nome": "PSA crescente",
+                  "outros": true
+                },
+                {
+                  "id": "cea-elevado",
+                  "nome": "CEA elevado",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "queda",
+              "nome": "queda",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "psa-crescente",
+                  "nome": "PSA crescente",
+                  "outros": true
+                },
+                {
+                  "id": "cea-elevado",
+                  "nome": "CEA elevado",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "estabilidade",
+              "nome": "estabilidade",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "psa-crescente",
+                  "nome": "PSA crescente",
+                  "outros": true
+                },
+                {
+                  "id": "cea-elevado",
+                  "nome": "CEA elevado",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "toxicidade",
+          "nome": "Toxicidade",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "clinica",
+              "nome": "Clínica",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "mucosite",
+                  "nome": "Mucosite",
+                  "outros": true
+                },
+                {
+                  "id": "neuropatia",
+                  "nome": "neuropatia",
+                  "outros": true
+                },
+                {
+                  "id": "neutropenia",
+                  "nome": "neutropenia",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "hematologica",
+              "nome": "hematológica",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "mucosite",
+                  "nome": "Mucosite",
+                  "outros": true
+                },
+                {
+                  "id": "neuropatia",
+                  "nome": "neuropatia",
+                  "outros": true
+                },
+                {
+                  "id": "neutropenia",
+                  "nome": "neutropenia",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "organica",
+              "nome": "orgânica",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "mucosite",
+                  "nome": "Mucosite",
+                  "outros": true
+                },
+                {
+                  "id": "neuropatia",
+                  "nome": "neuropatia",
+                  "outros": true
+                },
+                {
+                  "id": "neutropenia",
+                  "nome": "neutropenia",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prioridade",
+      "numero": 2,
+      "nome": "PRIORIDADE",
+      "eixo": "Y",
+      "verbo": null,
+      "outros": true,
+      "classes": [
+        {
+          "id": "eletiva",
+          "nome": "Eletiva",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "ambulatorio",
+              "nome": "Ambulatório",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "investigar-programadamente",
+                  "nome": "Investigar programadamente",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "prioritaria",
+          "nome": "Prioritária",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "curto-prazo",
+              "nome": "Curto prazo",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "exame-avaliacao-antecipada",
+                  "nome": "Exame/avaliação antecipada",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "urgente",
+          "nome": "Urgente",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "mesmo-dia-servico-de-urgencia",
+              "nome": "Mesmo dia / serviço de urgência",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "avaliacao-rapida",
+                  "nome": "Avaliação rápida",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "emergencia",
+          "nome": "Emergência",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "ps-hospital",
+              "nome": "PS / hospital",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "encaminhamento-imediato",
+                  "nome": "Encaminhamento imediato",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "investigacao",
+      "numero": 3,
+      "nome": "INVESTIGAÇÃO",
+      "eixo": "Z",
+      "verbo": "INVESTIGAR",
+      "outros": true,
+      "classes": [
+        {
+          "id": "lab",
+          "nome": "LAB",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "hematologia",
+              "nome": "Hematologia",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "hmg",
+                  "nome": "HMG",
+                  "outros": true
+                },
+                {
+                  "id": "ferritina",
+                  "nome": "ferritina",
+                  "outros": true
+                },
+                {
+                  "id": "psa",
+                  "nome": "PSA",
+                  "outros": true
+                },
+                {
+                  "id": "calcio",
+                  "nome": "cálcio",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "renal",
+              "nome": "renal",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "hmg",
+                  "nome": "HMG",
+                  "outros": true
+                },
+                {
+                  "id": "ferritina",
+                  "nome": "ferritina",
+                  "outros": true
+                },
+                {
+                  "id": "psa",
+                  "nome": "PSA",
+                  "outros": true
+                },
+                {
+                  "id": "calcio",
+                  "nome": "cálcio",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "hepatica",
+              "nome": "hepática",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "hmg",
+                  "nome": "HMG",
+                  "outros": true
+                },
+                {
+                  "id": "ferritina",
+                  "nome": "ferritina",
+                  "outros": true
+                },
+                {
+                  "id": "psa",
+                  "nome": "PSA",
+                  "outros": true
+                },
+                {
+                  "id": "calcio",
+                  "nome": "cálcio",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "metabolica",
+              "nome": "metabólica",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "hmg",
+                  "nome": "HMG",
+                  "outros": true
+                },
+                {
+                  "id": "ferritina",
+                  "nome": "ferritina",
+                  "outros": true
+                },
+                {
+                  "id": "psa",
+                  "nome": "PSA",
+                  "outros": true
+                },
+                {
+                  "id": "calcio",
+                  "nome": "cálcio",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "marcadores",
+              "nome": "marcadores",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "hmg",
+                  "nome": "HMG",
+                  "outros": true
+                },
+                {
+                  "id": "ferritina",
+                  "nome": "ferritina",
+                  "outros": true
+                },
+                {
+                  "id": "psa",
+                  "nome": "PSA",
+                  "outros": true
+                },
+                {
+                  "id": "calcio",
+                  "nome": "cálcio",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "rad",
+          "nome": "RAD",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "rx",
+              "nome": "RX",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "rm-coluna-lombar",
+                  "nome": "RM coluna lombar",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "us",
+              "nome": "US",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "rm-coluna-lombar",
+                  "nome": "RM coluna lombar",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "tc",
+              "nome": "TC",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "rm-coluna-lombar",
+                  "nome": "RM coluna lombar",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "rm",
+              "nome": "RM",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "rm-coluna-lombar",
+                  "nome": "RM coluna lombar",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "pet",
+              "nome": "PET",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "rm-coluna-lombar",
+                  "nome": "RM coluna lombar",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "cintilografia",
+              "nome": "cintilografia",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "rm-coluna-lombar",
+                  "nome": "RM coluna lombar",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "endo",
+          "nome": "ENDO",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "digestiva",
+              "nome": "Digestiva",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "colonoscopia",
+                  "nome": "Colonoscopia",
+                  "outros": true
+                },
+                {
+                  "id": "eda",
+                  "nome": "EDA",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "respiratoria",
+              "nome": "respiratória",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "colonoscopia",
+                  "nome": "Colonoscopia",
+                  "outros": true
+                },
+                {
+                  "id": "eda",
+                  "nome": "EDA",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "urinaria-etc",
+              "nome": "urinária etc.",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "colonoscopia",
+                  "nome": "Colonoscopia",
+                  "outros": true
+                },
+                {
+                  "id": "eda",
+                  "nome": "EDA",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "path",
+          "nome": "PATH",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "citologia",
+              "nome": "Citologia",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "biopsia",
+                  "nome": "Biópsia",
+                  "outros": true
+                },
+                {
+                  "id": "her2",
+                  "nome": "HER2",
+                  "outros": true
+                },
+                {
+                  "id": "ngs",
+                  "nome": "NGS",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "biopsia",
+              "nome": "biópsia",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "biopsia",
+                  "nome": "Biópsia",
+                  "outros": true
+                },
+                {
+                  "id": "her2",
+                  "nome": "HER2",
+                  "outros": true
+                },
+                {
+                  "id": "ngs",
+                  "nome": "NGS",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "ap",
+              "nome": "AP",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "biopsia",
+                  "nome": "Biópsia",
+                  "outros": true
+                },
+                {
+                  "id": "her2",
+                  "nome": "HER2",
+                  "outros": true
+                },
+                {
+                  "id": "ngs",
+                  "nome": "NGS",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "ihq",
+              "nome": "IHQ",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "biopsia",
+                  "nome": "Biópsia",
+                  "outros": true
+                },
+                {
+                  "id": "her2",
+                  "nome": "HER2",
+                  "outros": true
+                },
+                {
+                  "id": "ngs",
+                  "nome": "NGS",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "molecular",
+              "nome": "molecular",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "biopsia",
+                  "nome": "Biópsia",
+                  "outros": true
+                },
+                {
+                  "id": "her2",
+                  "nome": "HER2",
+                  "outros": true
+                },
+                {
+                  "id": "ngs",
+                  "nome": "NGS",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "proc",
+          "nome": "PROC",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "procedimento-diagnostico",
+              "nome": "Procedimento diagnóstico",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "puncao",
+                  "nome": "Punção",
+                  "outros": true
+                },
+                {
+                  "id": "toracocentese",
+                  "nome": "toracocentese",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tratamento",
+      "numero": 4,
+      "nome": "TRATAMENTO",
+      "eixo": "Z",
+      "verbo": "TRATAR",
+      "outros": true,
+      "classes": [
+        {
+          "id": "sintomatico",
+          "nome": "Sintomático",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "med",
+              "nome": "MED",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "analgesia",
+                  "nome": "Analgesia",
+                  "outros": true
+                },
+                {
+                  "id": "antiemetico",
+                  "nome": "antiemético",
+                  "outros": true
+                },
+                {
+                  "id": "hidratacao",
+                  "nome": "hidratação",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "procedimento",
+              "nome": "procedimento",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "analgesia",
+                  "nome": "Analgesia",
+                  "outros": true
+                },
+                {
+                  "id": "antiemetico",
+                  "nome": "antiemético",
+                  "outros": true
+                },
+                {
+                  "id": "hidratacao",
+                  "nome": "hidratação",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "suporte",
+              "nome": "suporte",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "analgesia",
+                  "nome": "Analgesia",
+                  "outros": true
+                },
+                {
+                  "id": "antiemetico",
+                  "nome": "antiemético",
+                  "outros": true
+                },
+                {
+                  "id": "hidratacao",
+                  "nome": "hidratação",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "especifico",
+          "nome": "Específico",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "med",
+              "nome": "MED",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "antineoplasico",
+                  "nome": "Antineoplásico",
+                  "outros": true
+                },
+                {
+                  "id": "cirurgia",
+                  "nome": "cirurgia",
+                  "outros": true
+                },
+                {
+                  "id": "rt",
+                  "nome": "RT",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "cx",
+              "nome": "CX",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "antineoplasico",
+                  "nome": "Antineoplásico",
+                  "outros": true
+                },
+                {
+                  "id": "cirurgia",
+                  "nome": "cirurgia",
+                  "outros": true
+                },
+                {
+                  "id": "rt",
+                  "nome": "RT",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "rt",
+              "nome": "RT",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "antineoplasico",
+                  "nome": "Antineoplásico",
+                  "outros": true
+                },
+                {
+                  "id": "cirurgia",
+                  "nome": "cirurgia",
+                  "outros": true
+                },
+                {
+                  "id": "rt",
+                  "nome": "RT",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "procedimento",
+              "nome": "procedimento",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "antineoplasico",
+                  "nome": "Antineoplásico",
+                  "outros": true
+                },
+                {
+                  "id": "cirurgia",
+                  "nome": "cirurgia",
+                  "outros": true
+                },
+                {
+                  "id": "rt",
+                  "nome": "RT",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "med",
+          "nome": "MED",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "vo",
+              "nome": "VO",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "enzalutamida",
+                  "nome": "Enzalutamida",
+                  "outros": true
+                },
+                {
+                  "id": "ferro-ev",
+                  "nome": "ferro EV",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "ev",
+              "nome": "EV",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "enzalutamida",
+                  "nome": "Enzalutamida",
+                  "outros": true
+                },
+                {
+                  "id": "ferro-ev",
+                  "nome": "ferro EV",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "sc",
+              "nome": "SC",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "enzalutamida",
+                  "nome": "Enzalutamida",
+                  "outros": true
+                },
+                {
+                  "id": "ferro-ev",
+                  "nome": "ferro EV",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "im",
+              "nome": "IM",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "enzalutamida",
+                  "nome": "Enzalutamida",
+                  "outros": true
+                },
+                {
+                  "id": "ferro-ev",
+                  "nome": "ferro EV",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "topico",
+              "nome": "tópico",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "enzalutamida",
+                  "nome": "Enzalutamida",
+                  "outros": true
+                },
+                {
+                  "id": "ferro-ev",
+                  "nome": "ferro EV",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "sl",
+              "nome": "SL",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "enzalutamida",
+                  "nome": "Enzalutamida",
+                  "outros": true
+                },
+                {
+                  "id": "ferro-ev",
+                  "nome": "ferro EV",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "med-oncologico",
+          "nome": "MED oncológico",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "qt",
+              "nome": "QT",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "docetaxel",
+                  "nome": "Docetaxel",
+                  "outros": true
+                },
+                {
+                  "id": "antiandrogenico",
+                  "nome": "antiandrogênico",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "io",
+              "nome": "IO",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "docetaxel",
+                  "nome": "Docetaxel",
+                  "outros": true
+                },
+                {
+                  "id": "antiandrogenico",
+                  "nome": "antiandrogênico",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "alvo",
+              "nome": "alvo",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "docetaxel",
+                  "nome": "Docetaxel",
+                  "outros": true
+                },
+                {
+                  "id": "antiandrogenico",
+                  "nome": "antiandrogênico",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "hormonal",
+              "nome": "hormonal",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "docetaxel",
+                  "nome": "Docetaxel",
+                  "outros": true
+                },
+                {
+                  "id": "antiandrogenico",
+                  "nome": "antiandrogênico",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "outros",
+              "nome": "outros",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "docetaxel",
+                  "nome": "Docetaxel",
+                  "outros": true
+                },
+                {
+                  "id": "antiandrogenico",
+                  "nome": "antiandrogênico",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "cx",
+          "nome": "CX",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "curativa",
+              "nome": "Curativa",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "estabilizacao-vertebral",
+                  "nome": "Estabilização vertebral",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "paliativa",
+              "nome": "paliativa",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "estabilizacao-vertebral",
+                  "nome": "Estabilização vertebral",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "estabilizacao",
+              "nome": "estabilização",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "estabilizacao-vertebral",
+                  "nome": "Estabilização vertebral",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "diagnostica",
+              "nome": "diagnóstica",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "estabilizacao-vertebral",
+                  "nome": "Estabilização vertebral",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "rt",
+          "nome": "RT",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "curativa",
+              "nome": "Curativa",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "rt-antalgica-ossea",
+                  "nome": "RT antálgica óssea",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "adjuvante",
+              "nome": "adjuvante",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "rt-antalgica-ossea",
+                  "nome": "RT antálgica óssea",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "paliativa",
+              "nome": "paliativa",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "rt-antalgica-ossea",
+                  "nome": "RT antálgica óssea",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "antalgica",
+              "nome": "antálgica",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "rt-antalgica-ossea",
+                  "nome": "RT antálgica óssea",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "encaminhamento",
+      "numero": 5,
+      "nome": "ENCAMINHAMENTO",
+      "eixo": "Z",
+      "verbo": "ENCAMINHAR",
+      "outros": true,
+      "classes": [
+        {
+          "id": "especialidade",
+          "nome": "Especialidade",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "oncologica",
+              "nome": "Oncológica",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "ortopedia-oncologica",
+                  "nome": "Ortopedia oncológica",
+                  "outros": true
+                },
+                {
+                  "id": "nutricao",
+                  "nome": "nutrição",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "clinica",
+              "nome": "clínica",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "ortopedia-oncologica",
+                  "nome": "Ortopedia oncológica",
+                  "outros": true
+                },
+                {
+                  "id": "nutricao",
+                  "nome": "nutrição",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "cirurgica",
+              "nome": "cirúrgica",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "ortopedia-oncologica",
+                  "nome": "Ortopedia oncológica",
+                  "outros": true
+                },
+                {
+                  "id": "nutricao",
+                  "nome": "nutrição",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "suporte",
+              "nome": "suporte",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "ortopedia-oncologica",
+                  "nome": "Ortopedia oncológica",
+                  "outros": true
+                },
+                {
+                  "id": "nutricao",
+                  "nome": "nutrição",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "servico",
+          "nome": "Serviço",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "ambulatorio",
+              "nome": "Ambulatório",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "radioterapia",
+                  "nome": "Radioterapia",
+                  "outros": true
+                },
+                {
+                  "id": "emergencia",
+                  "nome": "emergência",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "hospital",
+              "nome": "hospital",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "radioterapia",
+                  "nome": "Radioterapia",
+                  "outros": true
+                },
+                {
+                  "id": "emergencia",
+                  "nome": "emergência",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "ps",
+              "nome": "PS",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "radioterapia",
+                  "nome": "Radioterapia",
+                  "outros": true
+                },
+                {
+                  "id": "emergencia",
+                  "nome": "emergência",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "unidade-especializada",
+              "nome": "unidade especializada",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "radioterapia",
+                  "nome": "Radioterapia",
+                  "outros": true
+                },
+                {
+                  "id": "emergencia",
+                  "nome": "emergência",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "procedimento",
+          "nome": "Procedimento",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "avaliacao-intervencao-especifica",
+              "nome": "Avaliação/intervenção específica",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "vertebroplastia",
+                  "nome": "Vertebroplastia",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "motivo",
+          "nome": "Motivo",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "diagnostico",
+              "nome": "Diagnóstico",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "dor-suspeita-de-instabilidade",
+                  "nome": "Dor + suspeita de instabilidade",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "tratamento",
+              "nome": "tratamento",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "dor-suspeita-de-instabilidade",
+                  "nome": "Dor + suspeita de instabilidade",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "urgencia",
+              "nome": "urgência",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "dor-suspeita-de-instabilidade",
+                  "nome": "Dor + suspeita de instabilidade",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "segunda-avaliacao",
+              "nome": "segunda avaliação",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "dor-suspeita-de-instabilidade",
+                  "nome": "Dor + suspeita de instabilidade",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "suporte-seguranca",
+      "numero": 6,
+      "nome": "SUPORTE / SEGURANÇA",
+      "eixo": "Z",
+      "verbo": null,
+      "outros": true,
+      "classes": [
+        {
+          "id": "orientacao",
+          "nome": "Orientação",
+          "verbo": null,
+          "outros": true,
+          "secoes": [
+            {
+              "id": "geral",
+              "nome": "Geral",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "hidratacao",
+                  "nome": "Hidratação",
+                  "outros": true
+                },
+                {
+                  "id": "dieta",
+                  "nome": "dieta",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "dieta",
+              "nome": "dieta",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "hidratacao",
+                  "nome": "Hidratação",
+                  "outros": true
+                },
+                {
+                  "id": "dieta",
+                  "nome": "dieta",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "atividade",
+              "nome": "atividade",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "hidratacao",
+                  "nome": "Hidratação",
+                  "outros": true
+                },
+                {
+                  "id": "dieta",
+                  "nome": "dieta",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "autocuidado",
+              "nome": "autocuidado",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "hidratacao",
+                  "nome": "Hidratação",
+                  "outros": true
+                },
+                {
+                  "id": "dieta",
+                  "nome": "dieta",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sinais-de-alarme",
+          "nome": "Sinais de alarme",
+          "verbo": "SEGUIR",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "hematologico",
+              "nome": "Hematológico",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "febre",
+                  "nome": "Febre",
+                  "outros": true
+                },
+                {
+                  "id": "deficit-motor",
+                  "nome": "déficit motor",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "infeccioso",
+              "nome": "infeccioso",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "febre",
+                  "nome": "Febre",
+                  "outros": true
+                },
+                {
+                  "id": "deficit-motor",
+                  "nome": "déficit motor",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "neurologico-etc",
+              "nome": "neurológico etc.",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "febre",
+                  "nome": "Febre",
+                  "outros": true
+                },
+                {
+                  "id": "deficit-motor",
+                  "nome": "déficit motor",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "suporte-multiprofissional",
+          "nome": "Suporte multiprofissional",
+          "verbo": "ASSISTIR",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "nutricao",
+              "nome": "Nutrição",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "encaminhar-nutricionista",
+                  "nome": "Encaminhar nutricionista",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "psicologia",
+              "nome": "psicologia",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "encaminhar-nutricionista",
+                  "nome": "Encaminhar nutricionista",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "fisio",
+              "nome": "fisio",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "encaminhar-nutricionista",
+                  "nome": "Encaminhar nutricionista",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "social",
+              "nome": "social",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "encaminhar-nutricionista",
+                  "nome": "Encaminhar nutricionista",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "retorno",
+      "numero": 7,
+      "nome": "RETORNO",
+      "eixo": "Z",
+      "verbo": "SEGUIR",
+      "outros": true,
+      "classes": [
+        {
+          "id": "programado",
+          "nome": "Programado",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "dias",
+              "nome": "Dias",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "21-dias",
+                  "nome": "21 dias",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "semanas",
+              "nome": "semanas",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "21-dias",
+                  "nome": "21 dias",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "meses",
+              "nome": "meses",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "21-dias",
+                  "nome": "21 dias",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "condicionado",
+          "nome": "Condicionado",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "apos-exame",
+              "nome": "Após exame",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "retorno-com-tc",
+                  "nome": "Retorno com TC",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "apos-tratamento",
+              "nome": "após tratamento",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "retorno-com-tc",
+                  "nome": "Retorno com TC",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "apos-intercorrencia",
+              "nome": "após intercorrência",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "retorno-com-tc",
+                  "nome": "Retorno com TC",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "antecipado",
+          "nome": "Antecipado",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "mudanca-clinica",
+              "nome": "Mudança clínica",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "voltar-se-piora",
+                  "nome": "Voltar se piora",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sem-retorno-definido",
+          "nome": "Sem retorno definido",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "seguimento-externo-alta",
+              "nome": "Seguimento externo / alta",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "item-0",
+                  "nome": "—",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "saida-documento",
+      "numero": 8,
+      "nome": "SAÍDA / DOCUMENTO",
+      "eixo": "Z",
+      "verbo": null,
+      "natureza": "ARTEFATO",
+      "outros": true,
+      "classes": [
+        {
+          "id": "solicitacao",
+          "nome": "Solicitação",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "lab",
+              "nome": "LAB",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "pedido-de-rm",
+                  "nome": "Pedido de RM",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "rad",
+              "nome": "RAD",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "pedido-de-rm",
+                  "nome": "Pedido de RM",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "endo",
+              "nome": "ENDO",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "pedido-de-rm",
+                  "nome": "Pedido de RM",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "path",
+              "nome": "PATH",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "pedido-de-rm",
+                  "nome": "Pedido de RM",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "receita",
+          "nome": "Receita",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "medicamentos",
+              "nome": "Medicamentos",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "receita-pronta",
+                  "nome": "Receita pronta",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "suporte",
+              "nome": "suporte",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "receita-pronta",
+                  "nome": "Receita pronta",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "encaminhamento",
+          "nome": "Encaminhamento",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "especialidade",
+              "nome": "Especialidade",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "carta-para-rt",
+                  "nome": "Carta para RT",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "servico",
+              "nome": "serviço",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "carta-para-rt",
+                  "nome": "Carta para RT",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "orientacao",
+          "nome": "Orientação",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "cuidados",
+              "nome": "Cuidados",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "folha-do-paciente",
+                  "nome": "Folha do paciente",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "dieta",
+              "nome": "dieta",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "folha-do-paciente",
+                  "nome": "Folha do paciente",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "sinais-de-alarme",
+              "nome": "sinais de alarme",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "folha-do-paciente",
+                  "nome": "Folha do paciente",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "relatorio",
+          "nome": "Relatório",
+          "outros": true,
+          "secoes": [
+            {
+              "id": "resumo",
+              "nome": "Resumo",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "resumo-clinico",
+                  "nome": "Resumo clínico",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "laudo",
+              "nome": "laudo",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "resumo-clinico",
+                  "nome": "Resumo clínico",
+                  "outros": true
+                }
+              ]
+            },
+            {
+              "id": "declaracao",
+              "nome": "declaração",
+              "outros": true,
+              "topicos": [
+                {
+                  "id": "resumo-clinico",
+                  "nome": "Resumo clínico",
+                  "outros": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
