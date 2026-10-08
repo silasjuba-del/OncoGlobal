@@ -55,22 +55,7 @@ export const AgentSpec = z.object({
 export type AgentSpec = z.infer<typeof AgentSpec>;
 
 // ── Ruleset/corpus: sem fonte não carrega (G-17, K-27) ──────────────────────
-export const RulesetHeader = z.object({
-  id: z.string().min(1),
-  versao: z.string().regex(/^\d+\.\d+\.\d+$/),
-  vigenteDesde: z.iso.date(),
-  fonte: z.object({
-    tipo: z.enum(["DECISAO_MEDICA", "DIRETRIZ", "NORMA", "LITERATURA"]),
-    referencia: z.string().min(1),
-    trecho: z.string().nullable(), // obrigatório para DIRETRIZ/NORMA/LITERATURA
-    edicao: z.string().nullable(),
-  }).strict(),
-  curador: z.string().min(1),
-  aprovadoEm: z.iso.date(),
-}).strict().superRefine((h, ctx) => {
-  if (h.fonte.tipo !== "DECISAO_MEDICA" && !h.fonte.trecho)
-    ctx.addIssue({ code: "custom", message: "fonte externa exige trecho que sustente a regra (K-27)" });
-});
+export { RulesetHeader } from "./rulesetHeader.mjs";
 
 // ── C-21 SanitizationReport (R-31; G-27) ─────────────────────────────────────
 export const SanitizationReport = z.object({

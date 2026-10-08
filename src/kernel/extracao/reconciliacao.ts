@@ -69,6 +69,7 @@ export function chaveDoFato(fact: ClinicalFact): string {
     typeof valor === "string" && valor.trim() ? `:${valor.trim().toLocaleUpperCase("pt-BR")}` : "";
   switch (fact.domain) {
     case "biomarker": return `biomarker${sufixo(v.marker)}`;
+    // A data clínica é aplicada por reconciliarCampos; não usar captura como exame.
     case "lab": return `lab${sufixo(v.marker)}`;
     case "drug": return `drug${sufixo(v.normalizado ?? v.raw ?? fact.value)}`;
     case "imaging": return `imaging${sufixo(v.sitioCanonico ?? v.siteRaw)}`;
@@ -104,12 +105,13 @@ export function reconciliarCampo(domain: FactDomain, candidatos: readonly Clinic
     && [...valoresAbaixo].some((valor) => !valoresTopo.has(valor));
   const conflict = divergenciaInterna || divergenciaHierarquica;
   const eleito = noTopo[0] ?? null;
+  const exigeRevisao = eleito !== null && (eleito.evidence !== "EXPLICIT" || eleito.requiresConfirmation);
   return {
     domain,
     candidates: ordenados,
     // conflito entre fontes do mesmo nível não é decidido por id: fica para o médico
     // e fato sem valor utilizável não resolve o campo (ausência ≠ valor)
-    resolvedFactId: divergenciaInterna || eleito === null || valorNaoResolvivel(eleito)
+    resolvedFactId: divergenciaInterna || eleito === null || exigeRevisao || valorNaoResolvivel(eleito)
       ? null : eleito.id,
     conflict,
     hierarquia: HIERARQUIA_TEXTO[domain],
@@ -120,7 +122,17 @@ export function reconciliarCampo(domain: FactDomain, candidatos: readonly Clinic
 export function reconciliarCampos(fatos: readonly ClinicalFact[]): Readonly<Record<string, ReconciledField>> {
   const grupos = new Map<string, ClinicalFact[]>();
   for (const fact of fatos) {
-    const chave = chaveDoFato(fact);
+    let chave = chaveDoFato(fact);
+    if (fact.domain === "lab") {
+      const dia = fact.date?.trim() ?? "";
+      const dataCompleta = /^\d{4}-\d{2}-\d{2}$/.test(dia)
+        && !Number.isNaN(Date.parse(`${dia}T00:00:00Z`))
+        && new Date(`${dia}T00:00:00Z`).toISOString().slice(0, 10) === dia;
+      // Precisa de data clínica exata para comparar resultados entre fontes.
+      // Sem data não inferimos série e mantemos a chave preexistente do campo;
+      // divergências do mesmo marcador continuam agrupadas e visíveis.
+      if (dataCompleta) chave = `${chave}:data:${dia}`;
+    }
     const atual = grupos.get(chave);
     if (atual) atual.push(fact); else grupos.set(chave, [fact]);
   }
@@ -379,6 +391,31 @@ export function conflitoPlanejadoOrdenado(fatos: readonly ClinicalFact[]): Revie
   };
 }
 
+/**
+ * Regime planejado (plano/fala, já sem o suspenso) × regime ordenado (prescrição) divergentes.
+ * As duas versões ficam preservadas no conflito; nenhuma é escolhida em silêncio.
+ */
+export function conflitoRegimePlanejadoPrescrito(fatos: readonly ClinicalFact[]): ReviewException | null {
+  const tratamento = reconciliarTratamento(fatos);
+  const canonico = (nome: string): string => farmacosMencionados(nome)[0] ?? nome;
+  const planejado = [...new Set(tratamento.proposto.map(canonico))].sort();
+  const prescrito = [...new Set(tratamento.prescrito.map(canonico))].sort();
+  if (!planejado.length || !prescrito.length) return null;
+  const divergente = planejado.length !== prescrito.length || planejado.some((nome) => !prescrito.includes(nome));
+  if (!divergente) return null;
+  const planos = fatos.filter((f) => f.domain === "plan");
+  const prescricoes = fatos.filter((f) => f.domain === "drug" && f.sourceType === "prescription");
+  const primeiro = planos[0]!;
+  return {
+    id: novoId("CONFLICT", primeiro.segmentId, 9),
+    kind: "CONFLICT",
+    segmentId: primeiro.segmentId,
+    factIds: [...planos, ...prescricoes].map((f) => f.id),
+    reason: `planned_regimen != ordered_regimen: planejado [${planejado.join(", ")}] × prescrito [${prescrito.join(", ")}]`,
+    sourceIds: [...new Set([...planos, ...prescricoes].map((f) => f.sourceId))],
+  };
+}
+
 /** Todos os conflitos clínicos detectáveis a partir dos fatos. */
 export function detectarConflitos(fatos: readonly ClinicalFact[]): readonly ReviewException[] {
   return [
@@ -390,5 +427,6 @@ export function detectarConflitos(fatos: readonly ClinicalFact[]): readonly Revi
     conflitoCronologia(fatos),
     conflitoSitio(fatos),
     conflitoPlanejadoOrdenado(fatos),
+    conflitoRegimePlanejadoPrescrito(fatos),
   ].filter((e): e is ReviewException => e !== null);
 }

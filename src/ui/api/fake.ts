@@ -1,3 +1,4 @@
+import corpusSalao from "../../../corpus/rulesets/salao-triagem.v1.json" with { type: "json" };
 import type { Fonte } from "../../contracts/base.js";
 import {
   Apac,
@@ -17,7 +18,7 @@ import {
 import { ContextoTriagem, SalaoRuleset, type EntradaFila } from "../../contracts/regras.js";
 import { avaliarChip } from "../../modules/estoque/chip.js";
 import { apacRetrograda } from "../../rules/apac.js";
-import { avaliarTriagem } from "../../rules/index.js";
+import { avaliarTriagem, avaliarCorteSalao } from "../../rules/index.js";
 import type { DocumentoBundleVisao } from "../consulta/Bundle.js";
 import type { AlvoImpressao } from "../consulta/BarraFechamento.js";
 import type { ItemDeltaVisao } from "../consulta/PainelDelta.js";
@@ -49,51 +50,7 @@ const FONTE: Fonte = {
   contentHash: "sintetico",
 };
 
-const RULESET = SalaoRuleset.parse({
-  header: {
-    id: "salao-triagem",
-    versao: "1.0.0",
-    vigenteDesde: "2026-10-05",
-    fonte: {
-      tipo: "DECISAO_MEDICA",
-      referencia: "Q21-Q28 + A7 + K-10/K-11 (docs/DECISOES.md)",
-      trecho: null,
-      edicao: null,
-    },
-    curador: "Dr. Silas Negrão",
-    aprovadoEm: "2026-10-05",
-  },
-  regra: "igual ao limite passa",
-  cortes: {
-    pasMax: 160,
-    pasMin: 90,
-    fcMax: 120,
-    fcMinNaoCorta: 50,
-    spo2Min: 88,
-    tempDecimosMax: 378,
-    hbDgDlMin: 80,
-    ancMin: 1500,
-    plqMin: 100000,
-    grauCtcaeCorta: 3,
-    grauCtcaeEmergencia: 4,
-    ecogCorta: [3, 4],
-    ecog2ComTonturaCorta: false,
-  },
-  hemogramaValidadeDias: 7,
-  ausenteVai: "FILA_MEDICO",
-  frente: { recursos: ["CAMA", "CADEIRA"], idadeAcimaDe: 80, exigeSemCorte: true, exigeSemPendencia: true },
-  filaOrdem: ["ECOG_4", "ECOG_3", "CAMA", "CADEIRA", "IDADE_80"],
-  filaEmpate: ["ECOG_MAIOR", "CHEGADA"],
-  emergenciaAlteraFila: false,
-  pesoVermelho: {
-    perdaKgAcimaDe: 5,
-    janelaDias: 60,
-    informadoDisparaSozinho: false,
-    acao: ["NUTRICAO", "QT_ADIADA", "CONSULTA_MEDICA"],
-  },
-  aplicaSemMedicoSe: ["SEM_CORTE", "SEM_PENDENCIA", "PRESCRICAO_VIGENTE"],
-  ciclosLiberadosPorPrescricao: 2,
-});
+const RULESET = SalaoRuleset.parse(corpusSalao);
 
 const CONTEXTO = ContextoTriagem.parse({
   hoje: HOJE,
@@ -663,9 +620,15 @@ export function criarPortaFalsa(): PortaConsulta {
     },
 
     // [SERVIDOR_PENDENTE]
-    async carregarConsulta(patientId) {
+    async carregarConsulta(patientId, tumorLotId) {
       const atual = fichas.get(patientId);
       if (!atual) throw new ErroPorta("PACIENTE_AUSENTE");
+      if (tumorLotId !== undefined) {
+        if (tumorLotId !== null && !atual.consulta.cabecalho.lotes.some((lote) => lote.tumorLotId === tumorLotId))
+          throw new ErroPorta("PAYLOAD_INVALIDO");
+        return { ...atual.consulta, tumorLotId,
+          cabecalho: { ...atual.consulta.cabecalho, loteSelecionadoId: tumorLotId } };
+      }
       return atual.consulta;
     },
 
@@ -682,14 +645,17 @@ export function criarPortaFalsa(): PortaConsulta {
     // [SERVIDOR_PENDENTE]
     async salvarTriagem(triagem: Triagem) {
       const resultado = avaliarTriagem(triagem, CONTEXTO, RULESET);
+      const portao = avaliarCorteSalao(triagem, { pad: null, crCentesimos: null }, RULESET);
+      const temCorte = resultado.cortes.length > 0 || portao.motivos.length > 0;
+      const temPendencia = resultado.pendentes.length > 0 || portao.pendentes.length > 0;
       cartoes = cartoes.map((c) => {
         if (c.entrada.patientId !== triagem.patientId) return c;
         const ecog = triagem.ecog.campo === "PRESENTE" ? triagem.ecog.valor : null;
         return {
           ...c,
-          destino: resultado.destino,
+          destino: temCorte || temPendencia ? "FILA_MEDICO" : resultado.destino,
           emergencia: resultado.emergencia,
-          temCorte: resultado.cortes.length > 0,
+          temCorte,
           entrada: {
             patientId: triagem.patientId,
             ecog,

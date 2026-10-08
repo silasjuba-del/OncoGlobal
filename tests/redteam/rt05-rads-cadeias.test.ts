@@ -17,7 +17,7 @@ const rsAtivo: RadRuleset = {
 const input = (texto: string, tipoFonte: "TRANSCRIPTION" | "IMAGE_RAW" = "TRANSCRIPTION") =>
   ({ tipoFonte, texto, data: "2030-01-01" });
 
-describe("RT-05 · alerta RADS só com cadeia válida e trecho-fonte", () => {
+describe("RT-05 · scanner legado de termos RADS com trecho-fonte", () => {
   it("termo de emergência em transcrição ⇒ alerta VERMELHO com trecho e revisão obrigatória", () => {
     const saida = avaliarRadAlerts(input("TC: acentuada hidronefrose à direita com afilamento do parênquima."), rsAtivo);
     expect(saida.alerts).toHaveLength(1);

@@ -1,4 +1,17 @@
 import type { AgenteFake, Plano, ResultadoPasso, RunOrk, Passo } from "./tipos.js";
+import { AsyncLocalStorage } from "node:async_hooks";
+import { z } from "zod";
+
+const emAgente = new AsyncLocalStorage<boolean>();
+const planoSchema = z.object({ evento: z.string().min(1), passos: z.array(z.object({
+  id: z.string().min(1), dependsOn: z.array(z.string().min(1)),
+  timeoutMs: z.number().finite().int().positive().max(2_147_483_647),
+}).strict()) }).strict();
+
+/** Reentrada pelo ORK é proibida dentro do contexto assíncrono de um agente. */
+export function verificarChamadaAgente(): { decisao: "PASSA" | "REJEITA" } {
+  return { decisao: emAgente.getStore() ? "REJEITA" : "PASSA" };
+}
 
 function validarPlano(plano: Plano): void {
   const ids = new Set(plano.passos.map((p) => p.id));
@@ -15,13 +28,13 @@ function validarPlano(plano: Plano): void {
 
 async function executarUm(p: Passo, plano: Plano, agentes: Readonly<Record<string, AgenteFake>>,
   anteriores: readonly ResultadoPasso[]): Promise<ResultadoPasso> {
-  const agente = agentes[p.id];
-  if (!agente) return { id: p.id, resultado: "missing", motivo: "AGENTE_INDISPONIVEL", tentativas: 0 };
+  const agente = Object.hasOwn(agentes, p.id) ? agentes[p.id] : undefined;
+  if (typeof agente !== "function") return { id: p.id, resultado: "missing", motivo: "AGENTE_INDISPONIVEL", tentativas: 0 };
   for (let tentativa = 1; tentativa <= 2; tentativa++) {
     let timer: ReturnType<typeof setTimeout> | undefined;
     try {
       const outcome = await Promise.race([
-        Promise.resolve().then(() => agente({ evento: plano.evento, resultados: anteriores })),
+        Promise.resolve().then(() => emAgente.run(true, () => agente({ evento: plano.evento, resultados: anteriores }))),
         new Promise<never>((_, reject) => {
           timer = setTimeout(() => reject(new Error("TIMEOUT")), p.timeoutMs);
         }),
@@ -51,6 +64,12 @@ async function executarUm(p: Passo, plano: Plano, agentes: Readonly<Record<strin
 
 /** Dependency waves run concurrently; each Promise settles before the one-shot join. */
 export async function executarOrk(plano: Plano, agentes: Readonly<Record<string, AgenteFake>>): Promise<RunOrk> {
+  if (verificarChamadaAgente().decisao === "REJEITA") throw new Error("COMPOSICAO_AGENTE_PROIBIDA");
+  const parsed = planoSchema.safeParse(plano);
+  if (!parsed.success) throw new Error("PLANO_INVALIDO");
+  // Snapshot before any asynchronous callback; caller mutation cannot add steps.
+  plano = parsed.data;
+  agentes = { ...agentes };
   validarPlano(plano);
   const run: RunOrk = { estado: "RECEBIDO", etapa: "RECEBIDO", resultados: [] };
   run.estado = "EM_CURSO";

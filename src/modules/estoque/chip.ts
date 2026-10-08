@@ -1,5 +1,5 @@
 // GRK-07 · Chip de estoque. Informa; não trava; não sugere troca. Leitura velha → DESCONHECIDO.
-import { diferencaDiasCivis, fonteInformada } from "../tipos.js";
+import { diferencaDiasCivis, fonteInformada } from "../base.js";
 
 export type EstadoChip = "DISPONIVEL" | "INDISPONIVEL" | "DESCONHECIDO";
 

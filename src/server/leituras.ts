@@ -19,6 +19,9 @@ import { antiglosa } from "../apac/antiglosa.js";
 import type { CaixaNumerada } from "../contracts/w10/clinico-w10.js";
 import type { TabelasSigtap } from "../apac/sigtap.js";
 import { avaliarSerieRecist, type RecistSerieInput } from "../rules/recist/index.js";
+import { ClinicalFact } from "../contracts/w10/extracao.js";
+import { reconciliarCampos } from "../kernel/extracao/reconciliacao.js";
+import { normalizarDataCivil } from "../kernel/extracao/normalizacao.js";
 
 const RecistSerieSchema = z.object({
   patientId: z.string().min(1), tumorLotId: z.string().nullable(), episodioId: z.string().min(1),
@@ -31,7 +34,10 @@ const RecistSerieSchema = z.object({
     episodioId: z.string(), data: z.string(), metodo: z.enum(["TC", "CXR", "CALIPER", "RM", "US", "OUTRO"]),
     tecnicaId: z.string().nullable(), espessuraCorteMm: z.number().nullable(),
     qualidadeMedicao: z.enum(["ADEQUADA", "INADEQUADA", "NAO_AVALIADA"]),
-    lesoes: z.array(z.object({ codigo: z.string(), diametroMm: z.number(), fonteIds: z.array(z.string()) }).strict()),
+    lesoes: z.array(z.object({ codigo: z.string(), diametroMm: z.number(), fonteIds: z.array(z.string()),
+      unidadeOriginal: z.enum(["mm", "cm"]).nullable().optional(), valorOriginal: z.number().nullable().optional()
+    }).strict().transform(({ unidadeOriginal, valorOriginal, ...l }) => ({ ...l,
+      ...(unidadeOriginal === undefined ? {} : { unidadeOriginal }), ...(valorOriginal === undefined ? {} : { valorOriginal }) }))),
     novasLesoes: z.boolean().nullable(),
     naoAlvos: z.enum(["AUSENTE_DOCUMENTADO", "PERSISTENTE_SEM_PROGRESSAO", "PROGRESSAO_INEQUIVOCA", "NAO_AVALIADO"]),
     fonteIds: z.array(z.string()) }).strict()),
@@ -63,6 +69,17 @@ function eventos(db: DatabaseSync) {
     || a.operationId.localeCompare(b.operationId) || a.eventIndex - b.eventIndex);
 }
 function data(e: ReturnType<typeof eventos>[number]) { return dadosDoEvento(e); }
+function valorCandidatoResumo(value: unknown): string {
+  if (typeof value === "string") return value;
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    const v = value as Record<string, unknown>;
+    if (typeof v.marker === "string") return `${v.marker}: ${v.value ?? v.raw ?? "NÃO CONSTA"}${typeof v.unit === "string" ? ` ${v.unit}` : ""}`;
+    if (typeof v.siteRaw === "string" || typeof v.measureRaw === "string")
+      return `${typeof v.siteRaw === "string" ? v.siteRaw : "sítio NÃO CONSTA"}: ${typeof v.measureRaw === "string" ? `${v.measureRaw} ${String(v.unit ?? "")}`.trim() : "medida NÃO CONSTA"}`;
+    if (typeof v.raw === "string") return v.raw;
+  }
+  return JSON.stringify(value) ?? String(value);
+}
 function porTipo<T>(all: ReturnType<typeof eventos>, tipo: string, schema: ZodType<T>) {
   const groups = new Map<string, ReturnType<typeof eventos>>();
   for (const event of all.filter((e) => e.tipo === tipo)) {
@@ -88,7 +105,8 @@ export function lerPaciente(db: DatabaseSync, patientId: string) {
   return porTipo(eventos(db), "Paciente", Paciente)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value ?? null;
 }
-export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, sessao: Sessao) {
+export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, sessao: Sessao,
+  tumorLotId?: string | null) {
   const all = eventos(db), paciente = porTipo(all, "Paciente", Paciente)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value;
   if (!paciente) return { codigo: "PACIENTE_NAO_ENCONTRADO" as const };
@@ -99,10 +117,13 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   if (civil.estado !== "OK") return { codigo: civil.codigo };
   const lotes = porTipo(all, "TumorLot", TumorLot)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).map((x) => x.value);
+  if (tumorLotId !== undefined && tumorLotId !== null && !lotes.some((lote) => lote.tumorLotId === tumorLotId))
+    return { codigo: "TUMOR_LOT_FORA_DO_PACIENTE" as const };
   const lotesNoEncontro = [...new Set(patientEvents.filter((event) => event.encounterId === current.encounterId
     && event.tumorLotId !== null).map((event) => event.tumorLotId!))];
-  const loteAmbiguo = current.tumorLotId === null && lotesNoEncontro.length > 1;
-  const tumorLotSelecionado = current.tumorLotId ?? (lotesNoEncontro.length === 1 ? lotesNoEncontro[0]! : null);
+  const loteAmbiguo = tumorLotId === undefined && current.tumorLotId === null && lotesNoEncontro.length > 1;
+  const tumorLotSelecionado = tumorLotId !== undefined ? tumorLotId
+    : current.tumorLotId ?? (lotesNoEncontro.length === 1 ? lotesNoEncontro[0]! : null);
   const lote = !loteAmbiguo && tumorLotSelecionado
     ? lotes.find((x) => x.tumorLotId === tumorLotSelecionado) ?? null : null;
   const episodios = lote ? porTipo(all, "TreatmentEpisode", TreatmentEpisode)
@@ -134,6 +155,60 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
       titulo: typeof d.titulo === "string" ? d.titulo : "Documento em revisão",
       preMarcado: false, visivel: true }];
   });
+  const evolucoesRascunho = drafts.flatMap((draft) => {
+    const payload = draft.payload;
+    if (!payload || typeof payload !== "object" || Array.isArray(payload)) return [];
+    const value = payload as Record<string, unknown>;
+    const review = value.review && typeof value.review === "object" ? value.review as Record<string, unknown> : null;
+    const revisaoRegistrada = !!review && all.some((event) => event.operationId === review.operationId
+      && event.patientId === patientId && event.encounterId === current.encounterId
+      && event.tumorLotId === (lote?.tumorLotId ?? null)
+      && (event.revisao === "CONFIRMADO" || event.revisao === "ASSINADO"));
+    return value.kind === "EVOLUCAO_RASCUNHO" && typeof value.resumo === "string"
+      ? [{ draftId: draft.draftId, revision: draft.revision, status: "RASCUNHO" as const, resumo: value.resumo,
+        revisaoRegistrada, somentePreparada: !!value.origem && !revisaoRegistrada }]
+      : [];
+  });
+  const evolucoesRevisadas = evolucoesRascunho.filter((item) => !item.somentePreparada);
+  const resumoEvolucao = evolucoesRevisadas.length
+    ? evolucoesRevisadas.map((item) => item.resumo).join("\n\n--- Próximo rascunho de evolução ---\n\n")
+    : null;
+  const fatosRevisados = eventosVigentes(all.filter((event) => event.patientId === patientId
+    && event.encounterId === current.encounterId && event.tumorLotId === (lote?.tumorLotId ?? null)
+    && (event.revisao === "CONFIRMADO" || event.revisao === "ASSINADO")))
+    .filter((event) => event.tipo === "FATO").flatMap((event) => {
+    const fact = data(event);
+    if (!fact || typeof fact.campo !== "string"
+      || (!fact.campo.startsWith("extracao.") && fact.campo !== "TNM")
+      || typeof fact.factId !== "string" || typeof fact.sourceType !== "string"
+      || typeof fact.sourceId !== "string" || typeof fact.rawEvidence !== "string") return [];
+    const domain = typeof fact.domain === "string" ? fact.domain
+      : fact.campo === "TNM" ? "stage" : fact.campo.slice("extracao.".length).split(":")[0];
+    const parsed = ClinicalFact.safeParse({ id: fact.factId, segmentId: `reviewed:${event.eventId}`,
+      patientCandidateId: null, domain,
+      value: fact.valor, sourceType: fact.sourceType, evidence: fact.evidence, sourceId: fact.sourceId,
+      rawEvidence: fact.rawEvidence, confidence: fact.confidence, requiresConfirmation: fact.requiresConfirmation,
+      ...(typeof fact.factDate === "string" ? { date: fact.factDate } : {}),
+      ...(typeof fact.page === "number" ? { page: fact.page } : {}),
+      ...(typeof fact.regra === "string" ? { regra: fact.regra } : {}) });
+    return parsed.success ? [parsed.data] : [];
+  });
+  const conflitosRevisaoExtracao = Object.entries(reconciliarCampos(fatosRevisados))
+    .filter(([, field]) => field.conflict)
+    .map(([chave, field]) => ({ chave, dominio: field.domain,
+      candidatos: field.candidates.map((fact) => ({ factId: fact.id, sourceId: fact.sourceId,
+        valor: fact.value, evidence: fact.evidence, rawEvidence: fact.rawEvidence,
+        dataClinica: typeof fact.date === "string" ? normalizarDataCivil(fact.date) : null })) }));
+  const textoConflitos = conflitosRevisaoExtracao.length
+    ? ["Divergências entre fontes — candidatos preservados, sem eleição automática",
+      ...conflitosRevisaoExtracao.flatMap((conflito) => [
+        `${conflito.dominio} (${conflito.chave})`,
+        ...conflito.candidatos.map((candidate) => `- ${candidate.sourceId}: ${candidate.rawEvidence}`
+          + (candidate.dataClinica ? `; data clínica ${candidate.dataClinica}` : "; data clínica NÃO CONSTA")
+          + `; valor extraído ${valorCandidatoResumo(candidate.valor)}`),
+      ])].join("\n") : null;
+  const resumoEvolucaoComConflitos = resumoEvolucao && textoConflitos
+    ? `${resumoEvolucao}\n\n${textoConflitos}` : resumoEvolucao;
   const pendenciasLeitura = [
     "SNAPSHOT_DE_CAMPOS_NAO_PERSISTIDO", "ALERGIAS_NAO_CARREGADAS", "COMORBIDADES_NAO_CARREGADAS",
     "ALERTAS_NAO_PERSISTIDOS", "DELTA_ANTERIOR_NAO_PROJETADO",
@@ -155,6 +230,9 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
       })(),
       alergiasPaciente: [], comorbidadesPaciente: [] },
     alertas: [], delta: { temSnapshotAnterior: false, itens: [] }, evidencias: [],
+    evolucoesRascunho,
+    resumoEvolucao: resumoEvolucaoComConflitos,
+    conflitosRevisaoExtracao,
     fechamento: { blocoAtual: "EVOLUCAO" as const,
       registros: drafts.map((d) => ({ id: d.draftId, expectedRevision: d.revision })),
       documentos: docs, autorExibido: sessao.crm, alvoImpressao: null, alertasVermelhos: [] },

@@ -25,7 +25,7 @@ const segmento = (rawTranscript: string) => ({
 describe("RT-03 · homóglifo e texto invisível em fármaco", () => {
   it("SEM_IMPLEMENTACAO: detector de fármaco foneticamente incerto/homóglifo existe", async () => {
     const fn = await normalizadorFarmaco();
-    expect(fn,
+    expect(fn?.normalizar,
       "extrator.ts casa fármacos por regex literal; 'сisplatina' (С cirílica U+0441) e " +
       "'cis\\u200Bplatina' (zero-width) não casam NEM sinalizam: a prescrição entra sem o fármaco " +
       "e sem exceção. PIPELINE §5.5 exige raw + normalized + INFERRED/UNCERTAIN + confidence. " +

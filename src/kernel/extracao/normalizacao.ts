@@ -55,7 +55,12 @@ export function normalizarLab(valor: {
 }): LabNormalizado {
   const marker = typeof valor.marker === "string" ? valor.marker.trim() : "";
   const unidade = normalizarUnidade(typeof valor.unit === "string" ? valor.unit : null);
-  const numero = numeroDecimal(valor.value);
+  // Ponto como separador de milhar só é inequívoco aqui para contagem de plaquetas.
+  // Mantemos a regra restrita ao marcador e preservamos o literal original em `raw`.
+  const plaquetas = /^plaquetas?$/iu.test(marker.normalize("NFD").replace(/\p{Diacritic}/gu, ""));
+  const numero = plaquetas && typeof valor.value === "string" && /^\d{1,3}(?:\.\d{3})+$/.test(valor.value.trim())
+    ? numeroDecimal(valor.value.replace(/\./g, ""))
+    : numeroDecimal(valor.value);
   const raw = typeof valor.raw === "string" ? valor.raw
     : (numero === null ? null : `${String(valor.value)} ${String(valor.unit ?? "")}`.trim());
   const normalizado = unidade !== null && numero !== null;
@@ -136,7 +141,7 @@ const ALIAS_ORGAO_LOCAL: Readonly<Record<string, string>> = {
   mama: "mama", mamao: "mama", mamaria: "mama", mamario: "mama",
   prostata: "prostata", prostatica: "prostata", prostatico: "prostata",
   pulmao: "pulmao", pulmonar: "pulmao", broncogenico: "pulmao",
-  colon: "colon", colo: "colon", colorretal: "colon", reto: "reto",
+  colon: "colon", colorretal: "colon", reto: "reto",
   estomago: "estomago", gastrico: "estomago", esofago: "esofago",
   pancreas: "pancreas", pancreatico: "pancreas", figado: "figado", hepatico: "figado",
   cabeca: "cabeca-e-pescoco", pescoco: "cabeca-e-pescoco", orofaringe: "orofaringe",
@@ -158,6 +163,10 @@ export function orgaoCanonico(texto: string | null | undefined): string {
 /** Sítio canônico só quando reconhecido pela tabela; caso contrário null (PENDENTE). */
 export function normalizarSitioAnatomico(texto: string | null | undefined): string | null {
   if (typeof texto !== "string" || !texto.trim()) return null;
+  const chave = texto.normalize("NFD").replace(/\p{Diacritic}/gu, "")
+    .trim().toLocaleLowerCase("pt-BR").replace(/\s+/g, " ");
+  // "colo" sozinho também designa cólon; o complemento anatômico é obrigatório.
+  if (chave === "colo uterino" || chave === "colo do utero") return "utero";
   const canonico = orgaoCanonico(texto);
   return canonico in ALIAS_ORGAO_LOCAL || Object.values(ALIAS_ORGAO_LOCAL).includes(canonico)
     ? canonico : null;
@@ -173,6 +182,7 @@ export const DICIONARIO_FARMACO: Readonly<Record<string, string>> = {
   doxorrubicina: "DOXORRUBICINA", ciclofosfamida: "CICLOFOSFAMIDA", metotrexato: "METOTREXATO",
   temozolomida: "TEMOZOLOMIDA", pemetrexede: "PEMETREXEDE", vinorelbina: "VINORELBINA",
   trastuzumabe: "TRASTUZUMABE", bevacizumabe: "BEVACIZUMABE", ifosfamida: "IFOSFAMIDA",
+  prednisona: "PREDNISONA",
   topotecana: "TOPOTECANA", leucovorina: "LEUCOVORINA", mesna: "MESNA",
 };
 
@@ -278,7 +288,22 @@ function valorDe(fact: ClinicalFact): Record<string, unknown> {
  * `rawEvidence`/`raw`. Fato que não normaliza mantém o literal e fica sem resolução.
  */
 export function normalizarFatos(fatos: readonly ClinicalFact[]): readonly ClinicalFact[] {
-  return fatos.map((fact) => {
+  return fatos.map((original) => {
+    let fact = original;
+    if (original.date !== undefined) {
+      const data = normalizarDataCivil(original.date);
+      if (data === null) {
+        // A data literal continua em rawEvidence; sem data clínica válida não há ordenação.
+        const { date, ...semData } = original;
+        void date;
+        fact = { ...semData, requiresConfirmation: true };
+      } else {
+        fact = { ...original, date: data };
+      }
+    } else if (original.domain === "lab" || original.domain === "imaging") {
+      // Sem data clínica de exame não se cria ordem longitudinal por hora de captura.
+      fact = { ...original, requiresConfirmation: true };
+    }
     if (fact.domain === "lab") {
       const v = valorDe(fact);
       const normalizado = normalizarLab({

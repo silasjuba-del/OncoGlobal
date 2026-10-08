@@ -6,6 +6,8 @@ import { SalaoRuleset } from "../contracts/regras.js";
 import { PrescriptionDocumentType } from "../contracts/w10/prescricao.js";
 import { ProtocolTemplate } from "../contracts/w10/prescricao.js";
 import type { TabelaRegulatoria } from "../rules/prescricao/classificarDocumento.js";
+import { RulesetHeader } from "../contracts/agentes.js";
+import { lerRadsEmergencias } from "../rules/radsEmergencias.js";
 
 const CaixaEnvelope = z.object({ schemaVersion: z.string(), versao: z.string(), caixas: z.array(CaixaNumerada) }).strict();
 const EntradaRegulatoria = z.object({ nomes: z.array(z.string()), tipo: PrescriptionDocumentType, fonte: z.string() }).strict();
@@ -56,8 +58,11 @@ export function carregarCorpusServidor() {
   const table: TabelaRegulatoria = { versao: regulatorio.versao, fonte: regulatorio.fonte,
     entradas: regulatorio.entradas as TabelaRegulatoria["entradas"] };
   const receitasElegiveis = filtrarReceitasConsumiveis(ler("receitas/comuns.v1.json"));
+  const radsInput = ler("rulesets/rads-emergencias.v1.json");
+  RulesetHeader.parse((radsInput as { header?: unknown }).header);
+  const rads = lerRadsEmergencias(radsInput);
   return { caixas: caixaEnvelope.caixas.filter((c) => c.chave.startsWith("config.")),
     caixasTodas: caixaEnvelope.caixas, ruleset, regulatorio: table, receitasElegiveis,
-    templatesProtocolo: lerTemplatesProtocolo(),
+    templatesProtocolo: lerTemplatesProtocolo(), rads,
     versoes: { caixas: caixaEnvelope.versao, regulatorio: table.versao, ruleset: ruleset.header.versao } };
 }

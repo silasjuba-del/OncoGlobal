@@ -5,12 +5,17 @@ import type {
   ClinicalFact, EncounterSegment, FactSourceType, PatientCandidate, ReconciledField,
   ReviewAction, ReviewException,
 } from "../kernel/extracao/tipos.js";
+import { ClinicalFact as ClinicalFactContract } from "../contracts/w10/extracao.js";
+import { createHash } from "node:crypto";
 import type { PatientTimeline } from "../contracts/w10/clinico-w10.js";
 import { segmentarTranscricao } from "../kernel/extracao/segmenter.js";
 import { rankearPacientes, type IdentityHints, type RegistryPatient } from "../kernel/extracao/patient-resolver.js";
 import { extratorDeterministico } from "../kernel/extracao/extrator.js";
 import { normalizarFatos as normalizar } from "../kernel/extracao/normalizacao.js";
 import { detectarConflitos, reconciliarCampos } from "../kernel/extracao/reconciliacao.js";
+/** Reconciliação multifonte exposta pelo pipeline: o mesmo motor usado em reconciliarFontes (conflito explícito, nunca escolha silenciosa). */
+export { detectarConflitos } from "../kernel/extracao/reconciliacao.js";
+export { aplicarAcaoRevisao, type ResultadoAcaoRevisao } from "../kernel/extracao/eventoRevisao.js";
 import { validarSegurancaAntiAlucinacao, type ViolacaoInvariante } from "../kernel/extracao/safety.js";
 import {
   excecaoDeFarmacoIncerto, excecaoDeNumeroFalado, excecoesDeVinculo, montarCaixaRevisao,
@@ -46,6 +51,8 @@ export interface ExtractionState {
   readonly conflitos: readonly ReviewException[];
   readonly exceptions: readonly ReviewException[];
   readonly rejeitados: readonly ClinicalFact[];
+  /** Raw facts that failed the strict runtime contract; retained for draft/review diagnostics. */
+  readonly factContractRejections: readonly FactContractRejection[];
   readonly violacoes: readonly ViolacaoInvariante[];
   readonly caixaRevisao: CaixaRevisao;
   readonly series: readonly SerieImagem[];
@@ -55,10 +62,43 @@ export interface ExtractionState {
   readonly confirmationRequired: readonly ReviewException[];
 }
 
+export interface FactContractRejection {
+  readonly rawFact: unknown;
+  readonly diagnostics: readonly string[];
+}
+
+export interface FactContractValidation {
+  readonly facts: readonly ClinicalFact[];
+  readonly rejected: readonly FactContractRejection[];
+}
+
+/** Validate runtime extractor output before normalization or reconciliation. */
+export function validarFatosContraContrato(fatos: readonly unknown[]): FactContractValidation {
+  const facts: ClinicalFact[] = [];
+  const rejected: FactContractRejection[] = [];
+  for (const rawFact of fatos) {
+    try {
+      const parsed = ClinicalFactContract.safeParse(rawFact);
+      if (parsed.success) facts.push(parsed.data);
+      else rejected.push({
+        rawFact,
+        diagnostics: parsed.error.issues.map((issue) => {
+          const path = issue.path.map(String).join(".") || "<root>";
+          return `${path}: ${issue.message}`;
+        }),
+      });
+    } catch {
+      // Malformed runtime values are expected input failures; retain the raw candidate and do not abort the draft.
+      rejected.push({ rawFact, diagnostics: ["<root>: contrato não pôde inspecionar o fato"] });
+    }
+  }
+  return { facts, rejected };
+}
+
 function base(input: ExtractionInput): ExtractionState {
   return {
     input, segments: [], patientCandidates: [], facts: [], fields: {}, conflitos: [],
-    exceptions: [], rejeitados: [], violacoes: [],
+    exceptions: [], rejeitados: [], factContractRejections: [], violacoes: [],
     caixaRevisao: { itens: [], resumo: { reconciliadosAutomaticamente: 0, precisamConfirmacao: 0, texto: "", lista: [] } },
     series: [], timeline: null, timelines: [], confirmationRequired: [],
   };
@@ -98,30 +138,60 @@ export function identificarPaciente(state: ExtractionState): ExtractionState {
 
 /** 3 — porta do extrator (dublê determinístico dos sintéticos; LLM desligada). */
 export function extrairFatos(state: ExtractionState): ExtractionState {
-  return { ...state, facts: state.segments.flatMap((segment) =>
-    extratorDeterministico.extrair(segment)) };
+  const valida = validarFatosContraContrato(state.segments.flatMap((segment) =>
+    extratorDeterministico.extrair(segment)));
+  return { ...state, facts: valida.facts, factContractRejections: valida.rejected };
 }
 
-/** 4 — normalização: unidades, data civil −03:00, lateralidade, sítio, fármaco, TNM. */
+/** Chave de conteúdo: mesmo segmento, mesma fonte, mesmo domínio, valor, frase original e data. */
+function chaveDeConteudo(fact: ClinicalFact): string {
+  return createHash("sha256").update(JSON.stringify([
+    fact.segmentId, fact.sourceId, fact.domain, fact.value ?? null, fact.rawEvidence, fact.date ?? null,
+  ])).digest("hex");
+}
+
+/**
+ * Colapsa fatos com conteúdo idêntico na mesma fonte e segmento (laudo reimpresso ou repetido),
+ * mantendo a primeira ocorrência. Conteúdo divergente nunca é descartado: segue para reconciliação.
+ */
+export function deduplicarFatos(fatos: readonly ClinicalFact[]): readonly ClinicalFact[] {
+  const vistos = new Set<string>();
+  return fatos.filter((fact) => {
+    const chave = chaveDeConteudo(fact);
+    if (vistos.has(chave)) return false;
+    vistos.add(chave);
+    return true;
+  });
+}
+
+/** 4 — normalização: unidades, data civil −03:00, lateralidade, sítio, fármaco, TNM; depois deduplicação. */
 export function normalizarFatos(state: ExtractionState): ExtractionState {
-  return { ...state, facts: normalizar(state.facts) };
+  return { ...state, facts: deduplicarFatos(normalizar(state.facts)) };
 }
 
 /** 5 — reconciliação multifonte: cada campo vira `ReconciledField` + conflitos explícitos. */
 export function reconciliarFontes(state: ExtractionState): ExtractionState {
+  const grupos = [...new Set(state.facts.map((fact) => fact.segmentId))]
+    .map((segmentId) => ({ segmentId, facts: state.facts.filter((fact) => fact.segmentId === segmentId) }));
+  // Segmentos ainda não vinculados são identidades distintas. Só um consumidor
+  // com vínculo médico explícito pode reconciliar fontes de segmentos diferentes.
   return {
     ...state,
-    fields: reconciliarCampos(state.facts),
-    conflitos: detectarConflitos(state.facts),
+    fields: Object.fromEntries(grupos.flatMap(({ segmentId, facts }) =>
+      Object.entries(reconciliarCampos(facts)).map(([key, value]) =>
+        [grupos.length > 1 ? `${segmentId}::${key}` : key, value]))),
+    conflitos: grupos.flatMap(({ facts }) => detectarConflitos(facts)),
   };
 }
 
 /** 6 — SafetyValidator: os 7 invariantes anti-alucinação (FUGU-08). */
 export function validarSeguranca(state: ExtractionState): ExtractionState {
-  const resultado = validarSegurancaAntiAlucinacao(state.facts, {
-    conflitoTemporalDetectado: state.conflitos.some((c) => c.kind === "TEMPORAL_CONFLICT"),
-  });
-  return { ...state, facts: resultado.facts, rejeitados: resultado.rejeitados, violacoes: resultado.violacoes };
+  const resultados = [...new Set(state.facts.map((fact) => fact.segmentId))].map((segmentId) =>
+    validarSegurancaAntiAlucinacao(state.facts.filter((fact) => fact.segmentId === segmentId), {
+      conflitoTemporalDetectado: state.conflitos.some((c) => c.kind === "TEMPORAL_CONFLICT" && c.segmentId === segmentId),
+    }));
+  return { ...state, facts: resultados.flatMap((r) => r.facts),
+    rejeitados: resultados.flatMap((r) => r.rejeitados), violacoes: resultados.flatMap((r) => r.violacoes) };
 }
 
 /** 7 — conflitos/pendências viram a caixa de revisão (o que vai ao médico). */
@@ -136,14 +206,21 @@ export function classificarExcecoes(state: ExtractionState): ExtractionState {
     .map(excecaoDeNumeroFalado);
   const farmacosIncertos = state.facts.filter((f) => f.domain === "drug" && f.evidence === "INFERRED")
     .map(excecaoDeFarmacoIncerto);
-  const series = seriesDeImagem(state.facts);
+  const grupos = state.segments.length
+    ? state.segments.map(({ id }) => ({ segmentId: id, facts: state.facts.filter((fact) => fact.segmentId === id) }))
+    : [{ segmentId: null, facts: state.facts }];
+  const series = grupos.flatMap(({ facts }) => seriesDeImagem(facts));
   const progressoes = excecoesProgressao(series);
-  const requisitos = requiredBiomarkers({
-    tumor: state.input.tumorContexto?.tumor ?? tumorDosFatos(state.facts),
-    histologia: state.input.tumorContexto?.histologia ?? histologiaDosFatos(state.facts),
-    estadio: state.input.tumorContexto?.estadio ?? null,
+  const faltantes = grupos.flatMap(({ segmentId, facts }) => {
+    // Contexto único da entrada não pode ser herdado por vários pacientes.
+    const contexto = state.segments.length <= 1 ? state.input.tumorContexto : undefined;
+    const requisitos = requiredBiomarkers({
+      tumor: contexto?.tumor ?? tumorDosFatos(facts),
+      histologia: contexto?.histologia ?? histologiaDosFatos(facts),
+      estadio: contexto?.estadio ?? null,
+    });
+    return faltantesObrigatorios(facts, requisitos, segmentId);
   });
-  const faltantes = faltantesObrigatorios(state.facts, requisitos, state.segments[0]?.id ?? null);
   const caixaRevisao = montarCaixaRevisao({
     fatos: state.facts,
     conflitos: state.conflitos, vinculos,

@@ -1,6 +1,6 @@
 // GRK-01 · PRE-CONSULT PACK. Só snapshots CONFIRMED. Sem dado → seção PENDENTE. Não inventa valor.
-import { diferencaDiasCivis, fonteInformada, secaoDe, secaoVazia } from "../tipos.js";
-import type { DeltaKind, Secao, Semaforo } from "../tipos.js";
+import { diferencaDiasCivis, fonteInformada, secaoDe, secaoVazia } from "../base.js";
+import type { DeltaKind, Secao, Semaforo } from "../base.js";
 import { delta } from "../../rules/delta.js";
 import type { CampoDelta } from "../../rules/delta.js";
 

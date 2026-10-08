@@ -6,6 +6,7 @@ import {
   confirmacaoPreparouImpressao,
   validarComExibicao,
 } from "../consulta/validarComExibicao.js";
+import { PainelOncoassist } from "../consulta/PainelOncoassist.js";
 import { CardEvidencia } from "../evidencia/CardEvidencia.js";
 import type { ChavesIntencao } from "../api/chaves.js";
 import { ID } from "../api/fake.js";
@@ -52,6 +53,9 @@ export function TelaConsulta({
 }) {
   const [visao, setVisao] = useState<ConsultaVisao | null>(null);
   const [loteId, setLoteId] = useState<string | null>(null);
+  const [selecionandoLote, setSelecionandoLote] = useState(false);
+  const pacienteAtual = useRef(patientId);
+  pacienteAtual.current = patientId;
   const [sessaoExpirada, setSessaoExpirada] = useState(false);
   const [impressaoArmada, setImpressaoArmada] = useState(false);
   const [jornada3d, setJornada3d] = useState(false);
@@ -71,6 +75,10 @@ export function TelaConsulta({
 
   useEffect(() => {
     let viva = true;
+    setSelecionandoLote(false);
+    impressao.current = null;
+    impressaoEnviada.current = false;
+    setImpressaoArmada(false);
     porta.carregarConsulta(patientId).then(
       (proxima) => {
         if (!viva) return;
@@ -194,6 +202,8 @@ export function TelaConsulta({
         visao={timelineSintetica(patientId, visao.hoje)}
         onVer3d={() => setJornada3d(true)}
       />
+      <PainelOncoassist key={`${patientId}:${visao.encounterId}:${loteId ?? ""}`} porta={porta}
+        contexto={{ patientId, encounterId: visao.encounterId, tumorLotId: loteId }} />
       <button type="button" className="oc-btn-primary" style={{ alignSelf: "flex-start" }} onClick={() => setViewer(true)}>
         Abrir TC
       </button>
@@ -266,8 +276,19 @@ export function TelaConsulta({
           <select
             aria-label="Tumor / lote"
             value={loteId ?? ""}
+            disabled={selecionandoLote}
             onChange={(e) => {
-              if (e.target.value) setLoteId(e.target.value);
+              const escolhido = e.target.value;
+              if (!escolhido) return;
+              setSelecionandoLote(true);
+              impressao.current = null;
+              setImpressaoArmada(false);
+              void porta.carregarConsulta(patientId, escolhido).then((proxima) => {
+                if (pacienteAtual.current !== patientId) return;
+                setVisao(proxima); setLoteId(proxima.cabecalho.loteSelecionadoId);
+              }, () => {
+                if (pacienteAtual.current === patientId) setAcaoRevisao("Não foi possível selecionar o lote. Reabra a consulta.");
+              }).finally(() => { if (pacienteAtual.current === patientId) setSelecionandoLote(false); });
             }}
           >
             {cabecalho.lotes.map((l) => (

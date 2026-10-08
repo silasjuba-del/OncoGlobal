@@ -14,6 +14,20 @@
     "ecogCorta": [3, 4], "ecog2ComTonturaCorta": false
   },
   "hemogramaValidadeDias": 7,
+  "plausibilidade": {
+    "nota": "Contrato RT-07. Valor fora da faixa para a unidade declarada NÃO corta nem libera: vira PENDENTE com motivo unidade/plausibilidade. Nunca converter unidade pela magnitude do número. Faixas são limites fisiológicos amplos, inclusivos.",
+    "campos": {
+      "hbDgDl": { "unidade": "dg/dL (g/dL x 10)", "min": 30, "max": 250 },
+      "tempDecimos": { "unidade": "décimos de °C", "min": 300, "max": 450 },
+      "spo2": { "unidade": "% SpO2", "min": 50, "max": 100 },
+      "pas": { "unidade": "mmHg", "min": 40, "max": 300 },
+      "pad": { "unidade": "mmHg", "min": 20, "max": 200 },
+      "fc": { "unidade": "bpm", "min": 20, "max": 250 },
+      "anc": { "unidade": "/µL", "min": 0, "max": 50000 },
+      "plq": { "unidade": "/µL", "min": 0, "max": 2000000 },
+      "cr": { "unidade": "centésimos de mg/dL", "min": 10, "max": 3000 }
+    }
+  },
   "ausenteVai": "FILA_MEDICO",
   "frente": { "recursos": ["CAMA", "CADEIRA"], "idadeAcimaDe": 80, "exigeSemCorte": true, "exigeSemPendencia": true },
   "filaOrdem": ["ECOG_4", "ECOG_3", "CAMA", "CADEIRA", "IDADE_80"],

@@ -35,3 +35,7 @@ Prompts de onda `docs/ondas/W10-*.md` · respostas aos executores `docs/w10/` ·
 
 ## 7. Como trabalhar
 Executores externos em worktree próprio, faixa exclusiva, sem push; tech lead confere escopo, mergeia, verifica em blocos, registra em DECISOES e faz push. Equipe interna = agentes Sonnet em worktrees `w10-int-*`. Commits do tech lead terminam com `Co-Authored-By: <modelo da sessão> <noreply@anthropic.com>`. O Dr. Silas quer respostas curtas, em português, sem jargão; consultar só quando bloqueia (perguntas com opções).
+
+## W11 (2026-10-08)
+
+Integrada a onda `f0/w11-claude` (HEAD da Astra + correções W11: plausibilidade de laboratório, RT-01/03/07/12/15, gate READ × WORLD_EFFECT, suíte "IA nunca no documento"). Red team 226/226. Ver `docs/planejamento/DIARIO.md` PLN-033.

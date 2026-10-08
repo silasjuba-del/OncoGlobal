@@ -55,7 +55,9 @@ function negado(textoNormalizado: string, inicio: number, fim: number): boolean 
   if (/\bsem (?:melhora|resolucao|regressao)\b/.test(antes)) return false;
   // "nao se pode excluir" expressa incerteza, nao ausencia.
   if (/\b(nao (?:se pode |e possivel )?(?:excluir|descartar)|nao descartad[oa])\b/.test(antes + apos)) return false;
-  return /\b(sem|nega|negativo para|ausencia de|ausente)\s+[\w\s,]{0,80}$/.test(antes) || /^\s+(ausente|negativo|descartad[oa]|excluid[oa])\b/.test(apos);
+  const negacaoNarrativa = /\b(?:nao observamos|nao ha|nao se observa(?:m)?)\s+[\w\s,]{0,80}$/.test(antes);
+  return negacaoNarrativa || /\b(sem|nega|negativo para|ausencia de|ausente)\s+[\w\s,]{0,80}$/.test(antes)
+    || /^\s+(ausente|negativo|descartad[oa]|excluid[oa])\b/.test(apos);
 }
 
 function suspeito(textoNormalizado: string, inicio: number): boolean {

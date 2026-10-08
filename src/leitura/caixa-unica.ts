@@ -61,6 +61,7 @@ function lerZipDocx(bytes: Buffer): { text: string; rasurado: boolean } {
     total += xml.length;
     if (total > MAX_XML || xml.length !== expanded) throw new Error("Tamanho DOCX inconsistente");
     const markup = xml.toString("utf8");
+    if (markup.includes("\uFFFD")) throw new Error("XML DOCX não está codificado em UTF-8");
     if (!markup.includes("<w:document")) throw new Error("XML Word inválido");
     // Somente texto dentro de w:t; nenhum HTML/script é interpretado. Texto riscado não é confiável.
     const paras = [...markup.matchAll(/<w:p(?:\s[^>]*)?>([\s\S]*?)<\/w:p>/g)];
@@ -116,7 +117,7 @@ export function converterEntradaLocal(entrada: EntradaLeitura): ResultadoLeitura
   let pending: string | null = null;
   if (entrada.tipo === "TEXT") {
     text = typeof entrada.conteudo === "string" ? entrada.conteudo : bytes.toString("utf8");
-    if (/\[RISCADO\][\s\S]*?\[\/RISCADO\]/i.test(text)) {
+    if (/\[\/?RISCADO\]/i.test(text)) {
       const rasura = avaliarRasuraEConfianca({ valor: text, riscado: true }, { limiarConfiancaMinima: 0 });
       if (rasura.pendenteRevisao) pending = rasura.motivo;
     }

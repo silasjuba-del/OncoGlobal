@@ -38,9 +38,9 @@
 | RT-09a | S2 | `src/kernel/harness/gates.ts` | Agente escrevendo objeto de outro dono (T-56) | G-16 rejeita write alheio | Sem veredito runtime (redundante com KIMI T-56) | Tech lead/Grok (ownership.ts) |
 | RT-09b | S2 | `src/orchestration/ork.ts` | Agente invocando agente dentro da própria saída | Composição só via ORK/plano, auditável | Sem restrição representável no runtime | Fugu + tech lead |
 | RT-09c | S1 | `pipeline-extracao.ts` (`validarSeguranca`) | Extrator devolvendo fato fora do contrato (campo inventado) | Rejeição com motivo (contrato Zod existe) | `validarSeguranca`/`normalizarFatos` são no-op: **o pipeline não usa o contrato** | Fugu |
-| RT-10a | S0 | `kernel/projections` + orchestration | PET 02/2030 × diagnóstico 11/2030 | `TEMPORAL_CONFLICT` (PIPELINE §5.6) | Enum existe em 2 lugares; **nenhum produtor** | Equipe interna + Fugu |
+| RT-10a | S0 | `kernel/extracao/reconciliacao.ts` (`conflitoCronologia`) | PET 02/2030 × diagnóstico 11/2030 | `TEMPORAL_CONFLICT` (PIPELINE §5.6) | **Reataque observado:** função real `conflitoCronologia(ClinicalFact[])` é chamada por `detectarConflitos`; teste agora usa este contrato e verifica PET + diagnóstico. Teste alterado, execução pendente. | Fugu / integração |
 | RT-10b | S0 | `src/contracts/w10/clinico-w10.ts` | `historicalMetastaticDisease: true → false` | Nunca volta a false (PIPELINE §5.7) | Schema **aceita o rebaixamento** (só há comentário; sem superRefine) | Tech lead (1 linha de contrato) |
-| RT-10c | S0 | `kernel/projections/snapshot.ts` | TNM corrigido por supersede | `stageHistory` preserva o anterior (A3) | Valor antigo some da projeção; histórico só no ledger bruto | Tech lead + equipe interna |
+| RT-10c | S0 | `kernel/projections/snapshot.ts` | TNM corrigido por supersede | `stageHistory` preserva o anterior (A3) | **Reataque observado:** snapshot retorna exatamente os dois TNM confirmados no horizonte, inclui revisão/fonte/superseded e exclui RAW, outro paciente/lote e evento futuro. Teste alterado, execução pendente. | Tech lead + equipe interna |
 | RT-11a | S1 | trials (módulo inexistente) | Nó de trial com `status_resultado` negativo | Só POSSIBLE_MATCH; nunca "elegível" (D-W9-48) | Nenhum avaliador: negativo poderia ser apresentado como ganho | Equipe interna (BRAIN_OS) |
 | RT-11b | S0 | `src/rules/prescricao/**` | Dose de braço de estudo (TPF, ddMVAC…) | Não vira ficha sem revisão (D-W9-22i) | Nenhuma barreira de origem de dose | Equipe interna + curadoria |
 | RT-11c | S2 | grafo ragGRAFO (JSONL) | Aresta órfã (nó removido) | Loader valida arestas ao carregar | Dado declarado está íntegro, mas **nenhum loader/validador existe** para o dado vivo | Equipe interna |
@@ -66,11 +66,11 @@
 2. **RT-10b** (S0) — `historicalMetastaticDisease` rebaixável em silêncio: uma linha de `superRefine` no contrato resolve.
 3. **RT-15a** (S0/S1) — ReconciliationEngine: o coração do pipeline (§4/§7) não existe; resolve junto RT-01c e a contradição central de RT-15.
 4. **RT-08a + RT-08b** (S0) — biblioteca de fichas versionadas + enforcement "só CONFERIDA_MEDICO": sem isso prescrição segura não destrava.
-5. **RT-10c** (S0) — `stageHistory` na projeção (TNM sobrescrito apaga histórico).
+5. **RT-10c** (S0) — reataque do `stageHistory` observado no código; execução do teste permanece pendente.
 6. **RT-05a** (S1) — negador incompleto dispara alerta VERMELHO num laudo **negativo** (PT08); fix pequeno em `radAlerts.ts`.
 7. **RT-04a + RT-04b** (S1) — linguagem de incerteza virando fato firme (fix concentrado no extrator).
 8. **RT-02a** (S0) — homônimos completos fundidos num segmento sem revisão de fronteira.
-9. **RT-10a** (S0/S1) — produtor de `TEMPORAL_CONFLICT` (PET antes do diagnóstico).
+9. **RT-10a** (S0/S1) — implementação observada em `conflitoCronologia`; execução do teste permanece pendente.
 10. **RT-13b + RT-01a** (S2/S0) — detecção de encoding na caixa única (barato) e executor das `ReviewAction` (fecha o ciclo da caixa de revisão).
 
 ## Bases reais comprovadas (defesas que passaram — resumo por fatia)

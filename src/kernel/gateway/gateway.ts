@@ -49,11 +49,25 @@ const codigoNegativaSeguro = (codigo: unknown): string =>
   typeof codigo === "string" && CODIGOS_NEGATIVA_EGRESS.has(codigo) ? codigo : "SAIDA_NAO_AUTORIZADA";
 const hashPayload = (payload: string) => createHash("sha256").update(payload, "utf8").digest("hex");
 const hashDestino = (destino: string) => createHash("sha256").update(destino, "utf8").digest("hex");
+
 function congelarProfundo<T>(value: T, vistos = new WeakSet<object>()): T {
   if (!value || typeof value !== "object" || vistos.has(value as object)) return value;
   vistos.add(value as object);
   for (const child of Object.values(value as Record<string, unknown>)) congelarProfundo(child, vistos);
   return Object.freeze(value);
+}
+
+/** The evidence contract is JSON data. Reject exotic mutable containers before gating/freezing. */
+function evidenciaEhJson(value: unknown, vistos = new WeakSet<object>()): boolean {
+  if (value === null || typeof value === "string" || typeof value === "boolean") return true;
+  if (typeof value === "number") return Number.isFinite(value);
+  if (typeof value !== "object") return false;
+  if (vistos.has(value)) return false;
+  vistos.add(value);
+  if (Array.isArray(value)) return value.every((item) => evidenciaEhJson(item, vistos));
+  const proto = Object.getPrototypeOf(value);
+  if (proto !== Object.prototype && proto !== null) return false;
+  return Object.keys(value).every((key) => evidenciaEhJson((value as Record<string, unknown>)[key], vistos));
 }
 
 function evidenciasSaidaPassam(intent: Intent, evidencia: EvidenciaSaidaExterna): boolean {
@@ -150,7 +164,11 @@ export function criarGateway(deps: {
           const codigo = validacao && validacao.ok === false ? validacao.codigo : undefined;
           return negar(acao, codigoNegativaSeguro(codigo));
         }
-        try { evidencia = congelarProfundo(structuredClone(validacao.evidencia)); }
+        try {
+          const copia = structuredClone(validacao.evidencia);
+          if (!evidenciaEhJson(copia)) return negar(acao, "CONTEXTO_SAIDA_INDISPONIVEL");
+          evidencia = congelarProfundo(copia);
+        }
         catch { return negar(acao, "CONTEXTO_SAIDA_INDISPONIVEL"); }
         try {
           if (!evidenciasSaidaPassam(intent, evidencia)) return negar(acao, "GATES_SAIDA_NAO_PASSARAM");
@@ -212,4 +230,71 @@ export function criarGateway(deps: {
       try { return await promessa; } finally { emAndamento.delete(chave); }
     },
   };
+}
+
+// ── CANONICA §7 / D-W9-55 · READ × WORLD_EFFECT ─────────────────────────────
+// "Ler Drive ou PubMed não equivale a enviar WhatsApp": são duas classes com permissões separadas.
+// WORLD_EFFECT: verbos do ActionIntent (imprimir, enviar, agendar, exportar, backup) — passam por executar().
+// READ: leitura externa — nunca é verbo de ActionIntent; passa só por autorizarLeitura(), com política própria.
+// autorizarLeitura apenas DECIDE. Não abre conexão, não lê e não recebe executor: a leitura externa fica DESLIGADA
+// por padrão (POLITICA_LEITURA_PADRAO) e, quando ligada, cada consulta precisa de fonte explicitamente permitida
+// e de passar no G-02 (sem PHI no texto que sai do PC).
+export type ClasseEfeito = "READ" | "WORLD_EFFECT";
+
+export function classificarEfeito(verbo: unknown): ClasseEfeito | null {
+  return typeof verbo === "string" && (ActionIntent.shape.verbo.options as readonly string[]).includes(verbo)
+    ? "WORLD_EFFECT"
+    : null;
+}
+
+export interface PoliticaLeitura {
+  readonly conexoesExternasHabilitadas: boolean;
+  readonly fontesPermitidas: readonly string[];
+}
+export const POLITICA_LEITURA_PADRAO: PoliticaLeitura = Object.freeze({
+  conexoesExternasHabilitadas: false,
+  fontesPermitidas: Object.freeze([]) as readonly string[],
+});
+export type ResultadoLeitura =
+  | { decisao: "PERMITIDA"; classe: "READ"; motivoCodigo: "OK" }
+  | { decisao: "NEGADA"; classe: "READ"; motivoCodigo: string };
+
+export interface PedidoLeitura {
+  fonteId: string;
+  consulta: string;
+  dicionarioPaciente: DicionarioPaciente;
+}
+
+export function autorizarLeitura(
+  pedido: unknown,
+  sessao: Sessao | null,
+  politica: PoliticaLeitura = POLITICA_LEITURA_PADRAO,
+  agora: string = new Date().toISOString(),
+): ResultadoLeitura {
+  const negar = (motivoCodigo: string): ResultadoLeitura => ({ decisao: "NEGADA", classe: "READ", motivoCodigo });
+  if (!sessao) return negar("SEM_SESSAO");
+  const expira = Date.parse(sessao.expiraEm);
+  const instante = Date.parse(agora);
+  if (!Number.isFinite(expira) || !Number.isFinite(instante) || expira <= instante) return negar("SESSAO_EXPIRADA");
+  if (politica?.conexoesExternasHabilitadas !== true) return negar("LEITURA_EXTERNA_DESLIGADA");
+  if (!pedido || typeof pedido !== "object") return negar("PEDIDO_LEITURA_INVALIDO");
+  const { fonteId, consulta, dicionarioPaciente } = pedido as Record<string, unknown>;
+  if (typeof fonteId !== "string" || !fonteId.trim() || typeof consulta !== "string" || !consulta.trim()) {
+    return negar("PEDIDO_LEITURA_INVALIDO");
+  }
+  if (!Array.isArray(politica.fontesPermitidas) || !politica.fontesPermitidas.includes(fonteId)) {
+    return negar("LEITURA_SEM_PERMISSAO");
+  }
+  const dic = dicionarioPaciente as { nomes?: unknown; identificadores?: unknown } | null | undefined;
+  if (!dic || typeof dic !== "object" || !Array.isArray(dic.nomes) || !Array.isArray(dic.identificadores)) {
+    return negar("G02_DICIONARIO_AUSENTE");
+  }
+  let veredito: ReturnType<typeof g02PhiEgress>;
+  try {
+    veredito = g02PhiEgress(`${fonteId}\n${consulta}`, dic as DicionarioPaciente);
+  } catch {
+    return negar("G02_FALHOU");
+  }
+  if (veredito.decisao !== "PASSA") return negar("G02_PHI_NA_CONSULTA");
+  return { decisao: "PERMITIDA", classe: "READ", motivoCodigo: "OK" };
 }

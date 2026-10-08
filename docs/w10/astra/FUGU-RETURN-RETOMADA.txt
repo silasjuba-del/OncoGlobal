@@ -1,0 +1,16 @@
+**FUGU_RETURN — W10-FUGU-ADV-EIXO**
+
+| Item | Resultado |
+|---|---|
+| Cinco codificadores reais | Kepler `01a117ff-302c-7621-8842-16ef60ff3347`; Noether `01a117ff-58b9-7371-a1bd-8d720b141af7`; Gauss `01a117ff-8074-7e20-8291-266eca351aff`; Locke `01a117ff-a1ce-7b92-ae3f-c5763f29e63d`; Parfit `01a117ff-b404-7e51-9b4d-6968fcaa2b09`. **Capacidade disponível** — não houve `BLOCKED_FUGU_AGENT_CAPACITY`. |
+| WIP produzido | Cinco novos arquivos: `tests/w10-fugu-eixo/{extracao,revisao,temporal,orquestracao,phi}.test.ts`; relatório em `docs/progresso/W10-FUGU-ADV-EIXO.md`. |
+| Checagem estática | **PASS** para presença dos cinco arquivos, imports relativos existentes e ausência de testes marcados `skip`, `only` ou `todo`. Isso não comprova compilação ou comportamento. |
+| Testes | **NOT_RUN**. Tentei o wrapper serial contratado, mas ele falhou antes do Vitest: `Access to the path 'C:\Users\silas\Projects\OncoGlobal-wt\_w5-locks\vitest.lock' is denied.` O diretório do lock fica fora da raiz gravável desta sessão. Não houve `VITEST_EXIT` nem log de teste; **zero PASS e zero FAIL verificados**. Não era `LOCK_OCUPADO`. |
+| Defeitos causais | Nenhum reproduzido por execução. Os alvos e hipóteses, com arquivo/linha e limites de cobertura, estão no relatório; não foram declarados FAIL. |
+| Integração | Apenas WIP não rastreado, no HEAD `846be32d0777ef89559a5325fd352367e4bf781b`. Sem commit, push, edição de produção ou alteração do WIP dos outros writers. **Não integrado nem aprovado.** |
+
+Para concluir o gate, é necessário executar **em série**, num ambiente com permissão de escrita nos diretórios compartilhados de lock e log, o mesmo comando:
+
+```powershell
+& '.\docs\w10\astra\validar.ps1' -Worktree 'C:\Users\silas\Projects\OncoGlobal-wt\w10-astra' -Rotulo 'FUGU-RETOMADA-ADV' -Testes @('tests/w10-fugu-eixo') -SoTestes
+```

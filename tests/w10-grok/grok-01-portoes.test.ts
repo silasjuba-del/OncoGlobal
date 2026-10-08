@@ -103,7 +103,11 @@ describe("GROK-01 corte do salão — fronteira (igual passa)", () => {
 
   it("creatinina 151 cita 1,51 mg/dL; 0 presente não vira ausente", () => {
     expect(salao({}, { pad: 80, crCentesimos: 151 }).motivos[0]?.texto).toContain("1,51 mg/dL");
-    passa(salao({}, { pad: 80, crCentesimos: 0 }));
+    // RT-07: 0 presente nao vira ausente (nao some), mas creatinina 0 e implausivel: PENDENTE por plausibilidade, nunca SALAO.
+    const zero = salao({}, { pad: 80, crCentesimos: 0 });
+    expect(zero.destino).toBe("FILA_MEDICO");
+    expect(zero.pendentes.map((m) => m.codigo)).toContain("pendente.plausibilidade.cr");
+    expect(zero.pendentes.map((m) => m.codigo)).not.toContain("pendente.corteSalao.cr.alta");
   });
 
   it("ausente é PENDENTE, nunca corte nem SALAO", () => {
