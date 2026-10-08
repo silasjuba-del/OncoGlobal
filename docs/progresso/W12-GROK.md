@@ -11,7 +11,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w12-grok`, branch `f0/w12-grok`.
 | GROK-05 retorno com toxicidade | FEITA | W12-GROK-05 | G3 + plaquetas 20.000 vão à fila. E1 alerta e não altera a fila. |
 | GROK-06 tontura | FEITA | W12-GROK-06 | Tontura não corta. Vertigem nova sem histórico alerta SNC e não bloqueia. |
 | GROK-07 intervalo de 30 dias | FEITA | W12-GROK-07 | Menos de 30 dias avisa. 30 exato passa. Concomitante planejada não entra. |
-| GROK-08 red flags do canal | | | |
+| GROK-08 red flags do canal | FEITA | W12-GROK-08 | 25 orientações em RASCUNHO. Febre acima de 37,8. Negação não dispara. |
 | GROK-09 valor atual | | | |
 | GROK-10 fechamento | | | |
 
@@ -152,5 +152,23 @@ A exceção mora em `tontura.ts`. O texto "investigar SNC (metástase cerebral/c
 `npm run check:corpus` — `corpus ok (125 arquivos)`. `intervalos.v1.json` header ok.
 
 `npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 58 files, 448 tests, exit 0.
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.
+
+## GROK-08
+
+`canal-redflags` foi para 1.1.0. Os 6 candidatos antigos continuam inativos, com fonte `[VERIFICAR]` e sem resposta fixa. Os 25 sinais de D-W9-28 entraram em `sinais`, cada um com orientação própria e status RASCUNHO. A diarreia traz hidratação, dieta, alimentos a evitar, sinais de gravidade, suspensão de anti-hipertensivos e diuréticos, e ida ao PS. As outras orientações repetem a ação já aprovada na lista (ir ao PS, falar com o médico, avisar a equipe), sem dose.
+
+`canalRedflags.ts` só lê o corpus. Toda resposta termina com a frase final do JSON. Febre numérica dispara só acima de 378 décimos; 37,8 passa. "não tem febre" não dispara. Cada achado alerta o médico e não bloqueia. `redFlagsCanal.ts` não foi substituído. Tipo local em `docs/w12/PEDIDOS-GROK.md`.
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries` — `fronteiras ok (288 arquivos)`.
+
+`npm run check:corpus` — `corpus ok (125 arquivos)`. `canal-redflags.v1.json` header ok, 7 `[VERIFICAR]`, ATIVOS 0.
+
+`npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 59 files, 453 tests, exit 0.
 
 `npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.

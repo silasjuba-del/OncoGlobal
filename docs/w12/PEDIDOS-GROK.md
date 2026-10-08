@@ -17,3 +17,6 @@
 
 ## GROK-07
 1. **Contrato do intervalo pós-QT.** `ResultadoIntervaloPosQt` está em `src/rules/intervaloPosQt.ts` (`PROVISORIO-W12`) e lê `corpus/rulesets/intervalos.v1.json`. A FN-07 (`avisoIntervaloPosQt` + `prazos.v1.json` 1.0.0) não mudou. Pedido: publicar o tipo quando o contrato abrir, sem fundir os dois rulesets.
+
+## GROK-08
+1. **Contrato do canal.** `ResultadoCanal` está em `src/rules/canalRedflags.ts` (`PROVISORIO-W12`). Não substitui `redFlagsCanal.ts`. Pedido: publicar o tipo. As 25 orientações estão em RASCUNHO para curadoria. A frase de febre ao paciente não traz início de antibiótico; o texto final é do Dr. Silas.

@@ -16,11 +16,13 @@ import { avaliarAlertaPlaquetas, lerLimiarAlertaPlaquetas } from "./plaquetasAle
 import { alertarVertigemNova, lerAlertaVertigem } from "./tontura.js";
 import { dataCivilNoOffset } from "./intervaloQt.js";
 import { avaliarIntervaloPosQt, lerIntervalos, type EntradaIntervaloCivil } from "./intervaloPosQt.js";
+import { avaliarCanalRedflags, lerCanalRedflags } from "./canalRedflags.js";
 export { avaliarTriagem, validadeHemograma, avaliarCorteSalao, avaliarTriagemCiclo, avaliarPortoesW10, decidirDestino, ordenarFila, calcularDose, avaliarPeso, avisoIntervaloPosQt, ehConcomitante, cicloVaiAoMedico };
 export { portaCiclo, grauCtcae, lerSalaoCtcae, limiaresDaBula } from "./portaCiclo.js";
 export { extrairCriteriosCtcae, sugerirGrauCtcae };
 export { alertarVertigemNova, lerAlertaVertigem };
 export { avaliarIntervaloPosQt, lerIntervalos };
+export { avaliarCanalRedflags, lerCanalRedflags };
 
 const CIVIL_PRONTA = /^\d{4}-\d{2}-\d{2}$/;
 
