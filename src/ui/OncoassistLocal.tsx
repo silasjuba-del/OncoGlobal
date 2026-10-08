@@ -1,11 +1,14 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { criarPortaHttp, type OpcoesHttp } from "./api/http.js";
+import { criarChaves } from "./api/chaves.js";
 import type { PedidoBundle, PortaConsulta } from "./api/porta.js";
 import { PainelOncoassist } from "./consulta/PainelOncoassist.js";
 import { RevisaoExtracaoLocal } from "./consulta/RevisaoExtracaoLocal.js";
+import { TelaSalao } from "./telas/TelaSalao.js";
+import { CaixaCanal } from "./telas/canal/CaixaCanal.js";
 
-const agendaSchema = z.object({ itens: z.array(z.object({ patientId: z.string().min(1), nome: z.string(), horario: z.string() })) });
+const agendaSchema = z.object({ itens: z.array(z.object({ patientId: z.string().min(1), encounterId: z.string().min(1), nome: z.string(), horario: z.string() })) });
 const consultaSchema = z.object({ patientId: z.string().min(1), encounterId: z.string().min(1), tumorLotId: z.string().nullable() });
 
 /** Explicit real-server view; never mounts the synthetic clinical chart. */
@@ -20,11 +23,14 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const [contexto, setContexto] = useState<PedidoBundle | null>(null);
   const [ocupado, setOcupado] = useState(false);
   const [mensagem, setMensagem] = useState("");
+  const [tela, setTela] = useState<"consulta" | "salao" | "canal">("consulta");
   const geracao = useRef(0);
+  const chaves = useMemo(() => criarChaves(), []);
+  const pacienteAtivo = agenda.find((item) => item.patientId === contexto?.patientId);
 
   const limpar = useCallback(() => {
     geracao.current++;
-    setSenha(""); setAutenticado(false); setAgenda([]); setSelecionado("");
+    setSenha(""); setAutenticado(false); setAgenda([]); setSelecionado(""); setTela("consulta");
     setContexto(null); setOcupado(false); setSessao((s) => s + 1);
   }, []);
   const expirar = useCallback(() => { limpar(); setMensagem("Sessão expirada. Entre novamente."); }, [limpar]);
@@ -56,12 +62,21 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     if (!patientId) return;
     setOcupado(true);
     try {
-      const consulta = consultaSchema.safeParse(await porta.carregarConsulta(patientId));
-      if (atual !== geracao.current) return;
-      if (!consulta.success || consulta.data.patientId !== patientId) {
+      try {
+        const consulta = consultaSchema.safeParse(await porta.carregarConsulta(patientId));
+        if (atual !== geracao.current) return;
+        if (consulta.success && consulta.data.patientId === patientId) {
+          setContexto(consulta.data); return;
+        }
+      } catch { /* An active appointment can start a new encounter without prior clinical events. */ }
+      const agendaEntry = agenda.find((item) => item.patientId === patientId);
+      if (!agendaEntry || !porta.selecionarContexto) {
         setMensagem("Consulta local indisponível para este paciente."); return;
       }
-      setContexto(consulta.data);
+      await porta.selecionarContexto({ patientId, encounterId: agendaEntry.encounterId, tumorLotId: null });
+      if (atual !== geracao.current) return;
+      setContexto({ patientId, encounterId: agendaEntry.encounterId, tumorLotId: null });
+      setMensagem("Contexto da agenda selecionado. A revisão continua pendente até a decisão médica.");
     } catch {
       if (atual === geracao.current) setMensagem("Não foi possível abrir a consulta local.");
     } finally { if (atual === geracao.current) setOcupado(false); }
@@ -85,11 +100,21 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
           {agenda.map((p) => <option key={p.patientId} value={p.patientId}>{p.horario} — {p.nome}</option>)}
         </select>
       </label>}
+      <nav aria-label="Áreas clínicas">
+        <button type="button" disabled={ocupado} onClick={() => setTela("consulta")}>Consulta</button>
+        <button type="button" disabled={ocupado} onClick={() => setTela("salao")}>Salão</button>
+        <button type="button" disabled={ocupado} onClick={() => setTela("canal")}>Canal</button>
+      </nav>
       {ocupado ? <p role="status">Abrindo consulta…</p> : null}
-      {contexto ? <div key={`${contexto.patientId}:${contexto.encounterId}:${contexto.tumorLotId ?? ""}`}>
-        <RevisaoExtracaoLocal porta={porta} contexto={contexto} />
+      {tela === "consulta" && contexto ? <div key={`${contexto.patientId}:${contexto.encounterId}:${contexto.tumorLotId ?? ""}`}>
+        <RevisaoExtracaoLocal porta={porta} contexto={contexto} patientLabel={pacienteAtivo?.nome} />
         <PainelOncoassist porta={porta} contexto={contexto} />
       </div> : null}
+      {tela === "salao" ? <TelaSalao porta={porta} /> : null}
+      {tela === "canal" ? <><p>Contexto ativo para vínculo: {pacienteAtivo
+        ? `${pacienteAtivo.nome} · ${pacienteAtivo.patientId} · ${pacienteAtivo.encounterId}`
+        : contexto ? `${contexto.patientId} · ${contexto.encounterId}` : "selecione na agenda"}</p>
+        <CaixaCanal porta={porta} chaves={chaves} /></> : null}
     </>}
   </main>;
 }
