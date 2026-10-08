@@ -6,12 +6,14 @@ import type {
   ReviewAction, ReviewException,
 } from "../kernel/extracao/tipos.js";
 import { ClinicalFact as ClinicalFactContract } from "../contracts/w10/extracao.js";
+import { createHash } from "node:crypto";
 import type { PatientTimeline } from "../contracts/w10/clinico-w10.js";
 import { segmentarTranscricao } from "../kernel/extracao/segmenter.js";
 import { rankearPacientes, type IdentityHints, type RegistryPatient } from "../kernel/extracao/patient-resolver.js";
 import { extratorDeterministico } from "../kernel/extracao/extrator.js";
 import { normalizarFatos as normalizar } from "../kernel/extracao/normalizacao.js";
 import { detectarConflitos, reconciliarCampos } from "../kernel/extracao/reconciliacao.js";
+export { aplicarAcaoRevisao, type ResultadoAcaoRevisao } from "../kernel/extracao/eventoRevisao.js";
 import { validarSegurancaAntiAlucinacao, type ViolacaoInvariante } from "../kernel/extracao/safety.js";
 import {
   excecaoDeFarmacoIncerto, excecaoDeNumeroFalado, excecoesDeVinculo, montarCaixaRevisao,
@@ -139,9 +141,30 @@ export function extrairFatos(state: ExtractionState): ExtractionState {
   return { ...state, facts: valida.facts, factContractRejections: valida.rejected };
 }
 
-/** 4 — normalização: unidades, data civil −03:00, lateralidade, sítio, fármaco, TNM. */
+/** Chave de conteúdo: mesmo segmento, mesma fonte, mesmo domínio, valor, frase original e data. */
+function chaveDeConteudo(fact: ClinicalFact): string {
+  return createHash("sha256").update(JSON.stringify([
+    fact.segmentId, fact.sourceId, fact.domain, fact.value ?? null, fact.rawEvidence, fact.date ?? null,
+  ])).digest("hex");
+}
+
+/**
+ * Colapsa fatos com conteúdo idêntico na mesma fonte e segmento (laudo reimpresso ou repetido),
+ * mantendo a primeira ocorrência. Conteúdo divergente nunca é descartado: segue para reconciliação.
+ */
+export function deduplicarFatos(fatos: readonly ClinicalFact[]): readonly ClinicalFact[] {
+  const vistos = new Set<string>();
+  return fatos.filter((fact) => {
+    const chave = chaveDeConteudo(fact);
+    if (vistos.has(chave)) return false;
+    vistos.add(chave);
+    return true;
+  });
+}
+
+/** 4 — normalização: unidades, data civil −03:00, lateralidade, sítio, fármaco, TNM; depois deduplicação. */
 export function normalizarFatos(state: ExtractionState): ExtractionState {
-  return { ...state, facts: normalizar(state.facts) };
+  return { ...state, facts: deduplicarFatos(normalizar(state.facts)) };
 }
 
 /** 5 — reconciliação multifonte: cada campo vira `ReconciledField` + conflitos explícitos. */

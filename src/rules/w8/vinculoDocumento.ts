@@ -27,12 +27,15 @@ export type TipoIdentificadorClinico = "CNS" | "CPF" | "PRONTUARIO";
 export interface EntradaVinculoDocumento {
   tipoDocumento: TipoDocumentoVinculo;
   papelPessoa?: PapelPessoaDocumento;
+  /** Nome impresso no documento; quando presente é conferido contra o cadastro (D-W9-34a). */
+  nomeDocumento?: string | null;
   identificador?: {
     rotulo?: string | null;
     valor: string;
   } | null;
   pacienteAlvo?: {
     patientId: string;
+    nome?: string | null;
     identificadores: readonly { tipo: TipoIdentificadorClinico; valor: string }[];
   } | null;
 }
@@ -40,6 +43,49 @@ export interface EntradaVinculoDocumento {
 export interface SaidaVinculoDocumento {
   liga: boolean;
   motivo: string;
+}
+
+export interface EntradaConfrontoNome {
+  nomeDocumento?: string | null;
+  identificador?: { tipo: TipoIdentificadorClinico; valor: string } | null;
+  cadastroNome?: string | null;
+}
+
+export interface SaidaConfrontoNome {
+  /** true quando o nome do documento diverge do cadastro do identificador: conflito visível. */
+  excecao: boolean;
+  motivo: string;
+}
+
+/** Nome em forma comparável: sem acento, caixa, pontuação ou espaço duplicado. */
+function nomeComparavel(nome: string): string[] {
+  return nome.normalize("NFD").replace(/\p{Diacritic}/gu, "")
+    .toLocaleUpperCase("pt-BR").replace(/[^A-Z0-9 ]/g, " ")
+    .split(/\s+/).filter(Boolean);
+}
+
+/**
+ * Confronta o nome impresso no documento com o nome do cadastro do paciente ligado
+ * pelo identificador. Divergência ⇒ exceção de revisão; nunca escolhe um dos dois em silêncio.
+ * Um nome é compatível quando os tokens são iguais ou um é subconjunto do outro (≥ 2 tokens).
+ */
+export function confrontarNomeIdentificador(entrada: EntradaConfrontoNome): SaidaConfrontoNome {
+  const documento = entrada.nomeDocumento ? nomeComparavel(entrada.nomeDocumento) : [];
+  const cadastro = entrada.cadastroNome ? nomeComparavel(entrada.cadastroNome) : [];
+  if (!documento.length || !cadastro.length) {
+    return { excecao: false, motivo: "nome ausente em documento ou cadastro: confronto de nome não aplicável" };
+  }
+  const menor = documento.length <= cadastro.length ? documento : cadastro;
+  const maior = menor === documento ? cadastro : documento;
+  const conjunto = new Set(maior);
+  const mesmoNome = documento.join(" ") === cadastro.join(" ");
+  const compativel = mesmoNome || (menor.length >= 2 && menor.every((token) => conjunto.has(token)));
+  if (compativel) return { excecao: false, motivo: "nome do documento compatível com o cadastro" };
+  const tipo = entrada.identificador?.tipo ?? "identificador";
+  return {
+    excecao: true,
+    motivo: `conflito de nome: nome impresso no documento diverge do cadastro vinculado por ${tipo} (revisão obrigatória, D-W9-34a)`,
+  };
 }
 
 /**
@@ -126,6 +172,15 @@ export function vincularDocumentoAoPaciente(
       liga: false,
       motivo: `identificador ${tipoPorValor} válido por valor não coincide com nenhum identificador do paciente alvo`,
     };
+  }
+
+  const confronto = confrontarNomeIdentificador({
+    nomeDocumento: entrada.nomeDocumento ?? null,
+    identificador: { tipo: tipoPorValor, valor: entrada.identificador.valor },
+    cadastroNome: entrada.pacienteAlvo.nome ?? null,
+  });
+  if (confronto.excecao) {
+    return { liga: false, motivo: confronto.motivo };
   }
 
   return {
