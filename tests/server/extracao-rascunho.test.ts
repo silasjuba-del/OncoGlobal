@@ -81,7 +81,11 @@ it("persiste extração como rascunho não vinculado e recupera após reabrir o 
   const reopened = abrirLedger(path);
   databases.push(reopened);
   const drafts = listarDrafts(reopened);
-  expect(drafts).toHaveLength(2);
+  expect(drafts).toHaveLength(3);
+  const reviewDrafts = drafts.filter((draft) => draft.rawRef.startsWith("review-link:"));
+  expect(reviewDrafts).toHaveLength(1);
+  expect(reviewDrafts[0]?.patientId).toBe("Paciente Teste 31");
+  expect(reviewDrafts[0]?.diagnostics).toContain("DECISAO_DE_VINCULO_MEDICO");
   const extraction = drafts.find((d) => d.draftId === result.draftId);
   expect(extraction?.patientId).toBe("Paciente Teste 31");
   expect(extraction?.revision).toBe(1);
