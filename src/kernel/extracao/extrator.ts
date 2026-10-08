@@ -1,5 +1,7 @@
 import type { ClinicalFact, EncounterSegment, FactDomain, FactEvidence } from "./tipos.js";
-import { DICIONARIO_FARMACO, normalizarLateralidade, normalizarSitioAnatomico } from "./normalizacao.js";
+import {
+  DICIONARIO_FARMACO, normalizarFarmaco, normalizarLateralidade, normalizarSitioAnatomico,
+} from "./normalizacao.js";
 
 const aliasesFarmacos = Object.keys(DICIONARIO_FARMACO)
   .sort((a, b) => b.length - a.length)
@@ -217,6 +219,16 @@ export const extratorDeterministico: Extrator = {
       if (segmento.sourceType === "prescription" && !negated) {
         const drug = raw.match(/\b(carboplatina|cisplatina|paclitaxel|docetaxel|oxaliplatina)\b/iu);
         if (drug) add("drug", drug[0]);
+        // A regex latina não vê "сisplatina" (cirílico) nem "cis\u200Bplatina".
+        // Procurar também quando há outro fármaco limpo na mesma linha.
+        // Apenas um candidato de dicionário com sinal explícito de adulteração
+        // entra aqui; o literal permanece na fonte e exige revisão médica.
+        for (const token of raw.matchAll(/[\p{L}\p{M}\p{Cf}\u180e]+/gu)) {
+          const candidato = normalizarFarmaco(token[0]);
+          if (candidato.suspeito && candidato.normalizado) {
+            add("drug", token[0], "UNCERTAIN", true);
+          }
+        }
         const cycle = raw.match(/\bciclo\s*(\d+)\b/iu);
         if (cycle) add("cycle", cycle[1]);
         const regimen = raw.match(/\b(?:protocolo|esquema)\s*:\s*([^.;]+)/iu);
