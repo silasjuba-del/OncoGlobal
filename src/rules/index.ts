@@ -10,6 +10,9 @@ import { ehConcomitante } from "./concomitancia.js";
 import { cicloVaiAoMedico } from "./cicloComMedico.js";
 import { extrairCriteriosCtcae } from "./ctcaeTexto.js";
 import { sugerirGrauCtcae } from "./ctcaeClinico.js";
+import { lerLimitesRetorno, montarRetornoToxicidade, type EntradaRetornoToxicidade } from "./retornoToxicidade.js";
+import { alertarSuporte, lerSuporte } from "./suporteNaoOncologico.js";
+import { avaliarAlertaPlaquetas, lerLimiarAlertaPlaquetas } from "./plaquetasAlerta.js";
 export { avaliarTriagem, validadeHemograma, avaliarCorteSalao, avaliarTriagemCiclo, avaliarPortoesW10, decidirDestino, ordenarFila, calcularDose, avaliarPeso, avisoIntervaloPosQt, ehConcomitante, cicloVaiAoMedico };
 export { portaCiclo, grauCtcae, lerSalaoCtcae, limiaresDaBula } from "./portaCiclo.js";
 export { extrairCriteriosCtcae, sugerirGrauCtcae };
@@ -17,6 +20,35 @@ export { extrairCriteriosCtcae, sugerirGrauCtcae };
 /** D-W9-75. Compõe extração e sugestão. O barrel é o único arquivo de regras que pode importar os dois. */
 export function avaliarTextoCtcae(texto: string, corpus: unknown) {
   return sugerirGrauCtcae(extrairCriteriosCtcae(texto), corpus);
+}
+
+/** W12-GROK-05. Compõe corte, alerta de plaquetas e suporte. O barrel é o único arquivo que importa os três. */
+export function avaliarRetornoToxicidade(
+  entrada: EntradaRetornoToxicidade,
+  suporteJson: unknown,
+  labJson: unknown,
+  triagemJson: unknown,
+  ctcaeJson: unknown,
+) {
+  const limites = lerLimitesRetorno(triagemJson, labJson, ctcaeJson);
+  const suporte = alertarSuporte({
+    medicamentos: entrada.medicamentos,
+    horasDiarreia: entrada.horasDiarreia,
+    vomito: entrada.vomito,
+    dm2: entrada.dm2,
+    tempDecimos: entrada.tempDecimos,
+  }, lerSuporte(suporteJson));
+  const [alertaPlq] = avaliarAlertaPlaquetas(
+    { valor: entrada.plaquetas, data: entrada.dataPlaquetas },
+    lerLimiarAlertaPlaquetas(labJson),
+    () => ({
+      grau: null,
+      estado: "PENDENTE",
+      confirmadoPeloMedico: false,
+      motivo: "grau de plaquetas não confirmado nesta cadeia",
+    }),
+  );
+  return montarRetornoToxicidade(entrada, limites, suporte, alertaPlq);
 }
 export { diferencaDiasCivis } from "./datas.js";
 export type { SinaisExtraW10, ResultadoPortao } from "./triagem.js";

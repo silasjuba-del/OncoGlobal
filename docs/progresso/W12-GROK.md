@@ -8,7 +8,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w12-grok`, branch `f0/w12-grok`.
 | GROK-02 um corpo de triagem e porta | FEITA | W12-GROK-02 | Barrel reexporta a mesma função. Porta lê `LimiaresBula`. |
 | GROK-03 CTCAE v6 no corpus | FEITA | W12-GROK-03 | Termos clínicos literais da v6 em `graus.termosClinicos`. Plaquetas G4 continua &lt; 10.000. |
 | GROK-04 texto para grau | FEITA | W12-GROK-04 | Extração pura e sugestão só com frase literal da v6. Plaquetas 20.000 = G3, fila, sem E1. |
-| GROK-05 retorno com toxicidade | | | |
+| GROK-05 retorno com toxicidade | FEITA | W12-GROK-05 | G3 + plaquetas 20.000 vão à fila. E1 alerta e não altera a fila. |
 | GROK-06 tontura | | | |
 | GROK-07 intervalo de 30 dias | | | |
 | GROK-08 red flags do canal | | | |
@@ -94,5 +94,25 @@ Plaquetas 20.000 e 10.000 são G3, destino FILA_MEDICO, E1 falso. 9.999 é G4 co
 `npm run check:corpus` — `corpus ok (124 arquivos)`.
 
 `npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 55 files, 416 tests, exit 0.
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.
+
+## GROK-05
+
+A cadeia ficou em `retornoToxicidade.ts`, ao lado do agendador de `retorno.ts`, que não mudou. O módulo não importa outras regras. O barrel lê o corte do salão, o alerta de plaquetas e o suporte e entrega os três já calculados.
+
+Paciente Teste 91 com grau 3 e plaquetas 20.000 vai a FILA_MEDICO com `corte.grau` e `corte.plq.baixa`. O alerta abaixo de 50.000 sai do `alertaClinico` do PLQ e não depende do CTCAE. 60.000 e 50.000 exato cortam o salão (abaixo de 100.000) e não disparam esse alerta. 100.000 passa os dois. 9.999 acrescenta `alerta.e1` pela faixa G4 e não cria motivo. G4 com as mesmas 20.000 mantém destino e motivos; o E1 tem `alteraFila` falso.
+
+Diarreia acima de 24 h com HAS na lista não oncológica alerta "suspender anti-hipertensivo". 24 h exato não alerta. Vômito com diarreia alerta "PS para hidratação venosa". O sinônimo `has` entrou na classe anti-hipertensivo do suporte. Nenhum alerta bloqueia, altera a fila, define dose ou causalidade. Grau ou plaquetas ausentes ficam PENDENTE e vão à fila, sem virar corte. Sem motivo e sem pendência o destino é SEM_FILA. Tipos locais em `docs/w12/PEDIDOS-GROK.md`.
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries` — `fronteiras ok (285 arquivos)`.
+
+`npm run check:corpus` — `corpus ok (124 arquivos)`.
+
+`npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 56 files, 425 tests, exit 0.
 
 `npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.
