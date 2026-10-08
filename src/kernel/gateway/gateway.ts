@@ -2,7 +2,7 @@
 // F0: executores são portas injetadas (fake nos testes). Store de idempotência é porta (SQLite em S-F0-03).
 import { createHash, randomUUID } from "node:crypto";
 import type { z } from "zod";
-import { ActionIntent, type Sessao } from "../../contracts/index.js";
+import { ActionIntent, Sessao as SessaoSchema, type Sessao } from "../../contracts/index.js";
 import { g02PhiEgress, g27SaidaExternaLimpa } from "../harness/gates.js";
 import type { DicionarioPaciente } from "../llm/desidentificar.js";
 
@@ -40,6 +40,173 @@ export interface StoreIdempotencia {
   };
   set(chave: string, v: { payloadHash: string; resultado: ResultadoGateway }, atualizadoEm: string): void;
   delete?(chave: string): void;
+}
+
+// PROVISORIO-W10: READ é uma autorização técnica independente de ActionIntent/assinatura de escrita.
+export type ReadDestination = "PUBMED" | "WORKSPACE";
+export interface ReadRequest {
+  requestId: string;
+  purpose: "RESEARCH" | "WORKSPACE_LOOKUP";
+  destination: ReadDestination;
+  context: { territory: "WORK" | "STUDY" };
+  payload: { query?: string; refs?: readonly string[] };
+  provenance: { sourceId: string; version: string };
+  timeoutMs?: number;
+}
+export type ReadAudit = (r: RegistroAuditoria) => void;
+export type ReadTransport = (request: {
+  destination: ReadDestination;
+  purpose: ReadRequest["purpose"];
+  context: ReadRequest["context"];
+  provenance: ReadRequest["provenance"];
+  query?: string;
+  refs?: readonly string[];
+  signal: AbortSignal;
+}) => Promise<unknown>;
+
+const READ_PURPOSE_BY_DESTINATION: Readonly<Record<ReadDestination, ReadRequest["purpose"]>> = Object.freeze({
+  PUBMED: "RESEARCH", WORKSPACE: "WORKSPACE_LOOKUP",
+});
+const readHash = (value: string) => createHash("sha256").update(value, "utf8").digest("hex");
+
+/** Fail-closed authorization for READ. No patient/encounter identity, payload or credential reaches audit. */
+export function autorizarLeitura(input: unknown, options: {
+  agora: string; sessao: Sessao | null; context: ReadRequest["context"] | null;
+  provenance: ReadRequest["provenance"] | null; auditar: ReadAudit;
+}):
+  | { ok: true; request: ReadRequest; requestHash: string }
+  | { ok: false; motivoCodigo: string } {
+  const negarRead = (motivoCodigo: string): { ok: false; motivoCodigo: string } => {
+    try { options.auditar({ acaoPedida: "READ", decisao: "NEGADA", motivoCodigo, em: options.agora }); }
+    catch { return { ok: false, motivoCodigo: "AUDITORIA_INDISPONIVEL" }; }
+    return { ok: false, motivoCodigo };
+  };
+  if (!input || typeof input !== "object" || Array.isArray(input)) return negarRead("READ_REQUEST_INVALIDO");
+  const raw = input as Record<string, unknown>;
+  if (Object.keys(raw).some((key) => !["requestId", "purpose", "destination", "payload", "timeoutMs"].includes(key)))
+    return negarRead("READ_REQUEST_INVALIDO");
+  if (typeof raw.requestId !== "string" || !/^[A-Za-z0-9._:-]{8,160}$/.test(raw.requestId)) return negarRead("READ_REQUEST_INVALIDO");
+  if (raw.destination !== "PUBMED" && raw.destination !== "WORKSPACE") return negarRead("READ_DESTINO_NAO_ALLOWLISTED");
+  if (raw.purpose !== READ_PURPOSE_BY_DESTINATION[raw.destination]) return negarRead("READ_FINALIDADE_INVALIDA");
+  const context = options.context;
+  if (!context || typeof context !== "object" || (context.territory !== "WORK" && context.territory !== "STUDY"))
+    return negarRead("READ_CONTEXTO_INVALIDO");
+  const territory = context.territory;
+  if (territory !== "WORK" && territory !== "STUDY") return negarRead("READ_CONTEXTO_INVALIDO");
+  const parsedSession = SessaoSchema.safeParse(options.sessao);
+  const nowMs = Date.parse(options.agora);
+  if (!parsedSession.success || !Number.isFinite(nowMs)) return negarRead("READ_SESSAO_INVALIDA");
+  const issuedMs = Date.parse(parsedSession.data.emitidaEm), expiresMs = Date.parse(parsedSession.data.expiraEm);
+  if (!Number.isFinite(issuedMs) || !Number.isFinite(expiresMs) || issuedMs > nowMs || expiresMs <= nowMs)
+    return negarRead("READ_SESSAO_EXPIRADA");
+  const provenance = options.provenance;
+  if (!provenance || typeof provenance !== "object" || Array.isArray(provenance)
+    || Object.keys(provenance).sort().join(",") !== "sourceId,version"
+    || typeof (provenance as { sourceId?: unknown }).sourceId !== "string"
+    || !(provenance as { sourceId: string }).sourceId.trim() || (provenance as { sourceId: string }).sourceId.length > 160
+    || typeof (provenance as { version?: unknown }).version !== "string"
+    || !(provenance as { version: string }).version.trim() || (provenance as { version: string }).version.length > 80)
+    return negarRead("READ_PROVENIENCIA_INVALIDA");
+  const payload = raw.payload;
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return negarRead("READ_PAYLOAD_INVALIDO");
+  const body = payload as { query?: unknown; refs?: unknown };
+  if (Object.keys(payload).some((key) => key !== "query" && key !== "refs")) return negarRead("READ_PAYLOAD_INVALIDO");
+  if ((body.query !== undefined && (typeof body.query !== "string" || !body.query.trim() || body.query.length > 500))
+    || (body.refs !== undefined && (!Array.isArray(body.refs) || body.refs.length < 1 || body.refs.length > 20
+      || body.refs.some((ref) => typeof ref !== "string" || !ref.trim() || ref.length > 160)))
+    || (body.query === undefined && body.refs === undefined)) return negarRead("READ_PAYLOAD_INVALIDO");
+  const timeoutMs = raw.timeoutMs === undefined ? 5000 : raw.timeoutMs;
+  if (typeof timeoutMs !== "number" || !Number.isInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 10000)
+    return negarRead("READ_TIMEOUT_INVALIDO");
+  const request: ReadRequest = {
+    requestId: raw.requestId as string,
+    purpose: raw.purpose as ReadRequest["purpose"],
+    destination: raw.destination,
+    context: { territory },
+    payload: {
+      ...(typeof body.query === "string" ? { query: body.query.trim() } : {}),
+      ...(Array.isArray(body.refs) ? { refs: body.refs.map((ref) => (ref as string).trim()) } : {}),
+    },
+    provenance: { sourceId: (provenance as { sourceId: string }).sourceId.trim(), version: (provenance as { version: string }).version.trim() },
+    timeoutMs,
+  };
+  return { ok: true, request, requestHash: readHash(request.requestId) };
+}
+
+/** Executes only through an explicitly injected transport; the production app has no READ connector wired here. */
+export async function executarLeitura(input: unknown, options: {
+  agora: () => string;
+  /** Server-resolved session; session data supplied in request payload is never trusted. */
+  sessao: Sessao | null;
+  /** Context and provenance are resolved by the local server, never accepted from the body. */
+  context: ReadRequest["context"] | null;
+  provenance: ReadRequest["provenance"] | null;
+  auditar: ReadAudit;
+  transporte: ReadTransport;
+  /** Local/server callback must apply the active PHI policy before any non-local transport. */
+  validarPayloadDesidentificado: (request: ReadRequest) => boolean | Promise<boolean>;
+  signal?: AbortSignal;
+}): Promise<{ estado: "CONCLUIDA"; resultado: unknown; requestHash: string } | { estado: "NEGADA" | "FALHOU" | "CANCELADA"; motivoCodigo: string; requestHash?: string }> {
+  const auditarFalha = (destino: unknown, motivoCodigo: string) => {
+    const acaoPedida = destino === "PUBMED" || destino === "WORKSPACE" ? `READ:${destino}` : "READ";
+    try { options.auditar({ acaoPedida, decisao: "NEGADA", motivoCodigo, em: options.agora() }); return true; }
+    catch { return false; }
+  };
+  if (typeof options.transporte !== "function") {
+    auditarFalha("READ", "READ_TRANSPORTE_AUSENTE");
+    return { estado: "NEGADA", motivoCodigo: "READ_TRANSPORTE_AUSENTE" };
+  }
+  if (typeof options.validarPayloadDesidentificado !== "function") {
+    auditarFalha("READ", "READ_VALIDACAO_PHI_AUSENTE");
+    return { estado: "NEGADA", motivoCodigo: "READ_VALIDACAO_PHI_AUSENTE" };
+  }
+  const authorization = autorizarLeitura(input, { agora: options.agora(), auditar: options.auditar,
+    sessao: options.sessao, context: options.context, provenance: options.provenance });
+  if (!authorization.ok) return { estado: "NEGADA", motivoCodigo: authorization.motivoCodigo };
+  let payloadSanitizado = false;
+  try { payloadSanitizado = (await options.validarPayloadDesidentificado(authorization.request)) === true; }
+  catch { payloadSanitizado = false; }
+  if (!payloadSanitizado) {
+    const auditOk = auditarFalha(authorization.request.destination, "READ_PHI_NAO_VALIDADA");
+    return { estado: "NEGADA", motivoCodigo: auditOk ? "READ_PHI_NAO_VALIDADA" : "AUDITORIA_INDISPONIVEL", requestHash: authorization.requestHash };
+  }
+  if (options.signal?.aborted) {
+    const auditOk = auditarFalha(authorization.request.destination, "READ_CANCELADA");
+    return { estado: "CANCELADA", motivoCodigo: auditOk ? "READ_CANCELADA" : "AUDITORIA_INDISPONIVEL", requestHash: authorization.requestHash };
+  }
+  try {
+    options.auditar({ acaoPedida: `READ:${authorization.request.destination}`, decisao: "PERMITIDA",
+      motivoCodigo: "READ_AUTORIZADA", em: options.agora() });
+  } catch { return { estado: "NEGADA", motivoCodigo: "AUDITORIA_INDISPONIVEL", requestHash: authorization.requestHash }; }
+  const controller = new AbortController();
+  let cancelar: (() => void) | undefined;
+  const cancelamento = options.signal ? new Promise<never>((_, reject) => {
+    cancelar = () => { controller.abort(); reject(new Error("READ_CANCELADA")); };
+    options.signal?.addEventListener("abort", cancelar, { once: true });
+  }) : null;
+  let timeout: ReturnType<typeof setTimeout> | undefined;
+  try {
+    const timeoutMs = authorization.request.timeoutMs ?? 5000;
+    const resultado = await Promise.race([
+      options.transporte({ destination: authorization.request.destination, purpose: authorization.request.purpose,
+        context: authorization.request.context, provenance: authorization.request.provenance,
+        ...authorization.request.payload, signal: controller.signal }),
+      new Promise<never>((_, reject) => {
+        timeout = setTimeout(() => { controller.abort(); reject(new Error("READ_TIMEOUT")); }, timeoutMs);
+      }),
+      ...(cancelamento ? [cancelamento] : []),
+    ]);
+    return { estado: "CONCLUIDA", resultado, requestHash: authorization.requestHash };
+  } catch (error) {
+    const motivoCodigo = error instanceof Error && error.message === "READ_CANCELADA" ? "READ_CANCELADA"
+      : error instanceof Error && error.message === "READ_TIMEOUT" ? "READ_TIMEOUT" : "READ_TRANSPORTE_FALHOU";
+    try { options.auditar({ acaoPedida: `READ:${authorization.request.destination}`, decisao: "NEGADA", motivoCodigo, em: options.agora() }); }
+    catch { return { estado: "FALHOU", motivoCodigo: "AUDITORIA_INDISPONIVEL", requestHash: authorization.requestHash }; }
+    return { estado: motivoCodigo === "READ_CANCELADA" ? "CANCELADA" : "FALHOU", motivoCodigo, requestHash: authorization.requestHash };
+  } finally {
+    if (timeout !== undefined) clearTimeout(timeout);
+    if (cancelar) options.signal?.removeEventListener("abort", cancelar);
+  }
 }
 
 const VERBOS_SAIDA_EXTERNA = new Set<Verbo>(["ENVIAR_WHATSAPP", "ENVIAR_EMAIL", "AGENDAR", "EXPORTAR_APAC"]);
