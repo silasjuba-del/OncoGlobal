@@ -2,7 +2,7 @@ import { ActionIntent, ConfirmarBloco } from "../../contracts/operacao.js";
 import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
 import { FonteRevisao, RevisaoPreparada } from "./revisaoExtracao.js";
 import { AcaoResposta, AgendaResposta, ApacResposta, BundleResposta, CanalResposta, ChatResposta, ConfirmacaoResposta, ConsultaResposta, SalaoResposta } from "./respostas.js";
-import type { z } from "zod";
+import { z } from "zod";
 import {
   ErroPorta,
   type AcaoIntent,

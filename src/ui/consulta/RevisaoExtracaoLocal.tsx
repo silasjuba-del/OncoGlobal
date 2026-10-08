@@ -31,7 +31,9 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
     emCurso.current = false; setOcupado(false);
     if (porta.oncoassistFontes && porta.carregarFonteRevisao) {
       void porta.oncoassistFontes({ patientId, encounterId, tumorLotId }, abort.signal)
-        .then((r) => { if (atual === geracao.current) { setFontes(r.fontes); setFontesSemVinculo(r.fontesSemVinculo); } })
+        .then((r) => { if (atual === geracao.current) {
+          setFontes(r.fontes); setFontesSemVinculo(r.fontesSemVinculo ?? []);
+        } })
         .catch(() => { if (atual === geracao.current) setMensagem("Não foi possível carregar as fontes locais."); });
     }
     return () => { geracao.current++; abort.abort(); };

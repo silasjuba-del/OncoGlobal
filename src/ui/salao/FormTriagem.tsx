@@ -84,7 +84,7 @@ export function FormTriagem({
   ruleset,
   contexto,
   fonte,
-  draftRevision,
+  draftRevision = null,
   onSalvar,
 }: {
   patientId: string;
@@ -93,7 +93,7 @@ export function FormTriagem({
   ruleset: SalaoRuleset;
   contexto: ContextoTriagem;
   fonte: Fonte;
-  draftRevision: number | null;
+  draftRevision?: number | null;
   onSalvar: (triagem: Triagem, expectedRevision: number | null) => void | Promise<void>;
 }) {
   const [pas, setPas] = useState("");
