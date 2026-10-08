@@ -9,7 +9,7 @@ export const OFFSET_SERVICO = "-03:00";
 
 // ── Unidades ─────────────────────────────────────────────────────────────────
 /** Unidades canônicas aceitas pela normalização de laboratório. */
-export const UNIDADES_CANONICAS = ["mg/dL", "g/dL", "mm³", "×10³/µL", "°C"] as const;
+export const UNIDADES_CANONICAS = ["mg/dL", "g/dL", "mm³", "×10³/µL", "°C", "ng/mL"] as const;
 export type UnidadeCanonica = (typeof UNIDADES_CANONICAS)[number];
 
 const ALIAS_UNIDADE: Readonly<Record<string, UnidadeCanonica>> = {
@@ -18,6 +18,7 @@ const ALIAS_UNIDADE: Readonly<Record<string, UnidadeCanonica>> = {
   "x10³/µl": "×10³/µL", "×10³/µl": "×10³/µL", "10³/µl": "×10³/µL", "10^3/ul": "×10³/µL",
   "mil/mm3": "×10³/µL", "mil/mm³": "×10³/µL", "x10^3/ul": "×10³/µL",
   "c": "°C", "°c": "°C", "ºc": "°C",
+  "ng/ml": "ng/mL",
 };
 
 /** Unidade em forma canônica; null quando o texto não é reconhecido (PENDENTE, não adivinha). */
