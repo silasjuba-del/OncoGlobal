@@ -45,3 +45,42 @@ export function renderizarApacLaudo(template: TemplateApac, entrada: EntradaApac
   const motivoAssinatura = signatureValid ? "REFERENCIA_COMPATIVEL" : signature ? "ID_VERSAO_OU_HASH_DIVERGENTE" : "SEM_ASSINATURA";
   return { html, templateId: template.id, versao: template.versao, hash, campos, finalidadeLote: entrada.metadados?.finalidadeLote || "PENDENTE", status, motivoAssinatura };
 }
+
+/** Valor de caixa já decidido pelo chamador: só o confirmado sai impresso; PENDENTE sai como a palavra PENDENTE. */
+export type CampoImpressao = { estado: "PREENCHIDO"; valor: string } | { estado: "PENDENTE"; motivo: string };
+export interface EntradaPagina2 {
+  documentId: string;
+  documentVersion: number;
+  blocos: readonly { titulo: string; campos: readonly { chave: string; rotulo: string }[] }[];
+  campos: Readonly<Record<string, CampoImpressao>>;
+  /** Caixas vazias por regra (ex.: RT sem solicitação); saem em branco e não contam como pendência. */
+  naoAplicavel: readonly string[];
+  /** Sem assinatura do médico o documento sai como RASCUNHO. */
+  assinado: boolean;
+}
+const kebab = (id: string): string => id.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`);
+export interface ResultadoPagina2 { html: string; hash: string; status: "ASSINADO" | "RASCUNHO" }
+
+/** Página 2 "Dados complementares" da APAC (caixas 56–85). Não importa a camada de laudo: recebe os valores já decididos. */
+export function renderizarApacComplementar(entrada: EntradaPagina2): ResultadoPagina2 {
+  const documentId = entrada.documentId;
+  const documentVersion = entrada.documentVersion;
+  const naoAplicavel = new Set(entrada.naoAplicavel);
+  const valorDe = (chave: string): string => {
+    if (naoAplicavel.has(chave)) return "";
+    const c = entrada.campos[chave];
+    return c?.estado === "PREENCHIDO" ? c.valor.trim() : "PENDENTE";
+  };
+  const linhas = entrada.blocos.flatMap((b) => b.campos.map((c) => ({ bloco: b.titulo, id: c.chave, rotulo: c.rotulo, valor: valorDe(c.chave) })));
+  const hash = hashCanonico({ documentId, documentVersion, pagina: 2, campos: linhas.map(({ id, valor }) => [id, valor]) });
+  const status = entrada.assinado ? "ASSINADO" : "RASCUNHO";
+  const corpo = entrada.blocos.map((b) => {
+    const celulas = linhas.filter((l) => l.bloco === b.titulo).map((l) => `<div class="campo campo-${esc(kebab(l.id))}"><strong>${esc(l.rotulo)}</strong><br>${l.valor ? esc(l.valor) : ""}</div>`).join("");
+    return `<section class="bloco"><h2 class="apac-bloco">${esc(b.titulo)}</h2><div class="grade">${celulas}</div></section>`;
+  }).join("");
+  const stamp = status === "RASCUNHO" ? '<div class="rascunho">RASCUNHO — NÃO VÁLIDO</div>' : "";
+  const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>APAC · Dados complementares</title><style>${CSS_IMPRESSAO_A4}
+@page{size:A4;margin:8mm}body{font-size:6.5pt;line-height:1.1}.documento{font-size:6.5pt}.documento>header{border:1px solid #244879;padding:2mm;margin-bottom:1mm}.documento>header h1{font-size:11pt;margin:0}.documento>header div{font-size:6pt}.grade{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:1px}.campo{grid-column:span 3;border:1px solid #8ca0bb;padding:1mm;min-height:8mm;overflow-wrap:anywhere}.campo strong{font-size:5.5pt;font-weight:normal}.apac-bloco{grid-column:1/-1;background:#244879;color:white;text-align:center;font-size:7pt;margin:1px 0;padding:1mm}.campo-cid-topografia,.campo-rt-cid-topografico,.campo-qt-esquema{grid-column:span 4}.campo-localizacao-tumor-primario,.campo-localizacao-metastases,.campo-rt-descricao-area,.campo-diagnostico-cito-histopatologico{grid-column:span 6}.rodape{font-size:5pt}
+</style></head><body><main id="apac-complementar" class="documento"><header><div>Ministério da Saúde · Sistema Único de Saúde — SUS</div><h1>APAC · Autorização de Procedimentos Ambulatoriais</h1><div>Laudo de Solicitação / Autorização · Dados complementares · pg. 2/2</div></header>${stamp}${corpo}<footer class="rodape">id: ${esc(documentId)} · versão: ${documentVersion} · hash: ${esc(hash)}</footer></main></body></html>`;
+  return { html, hash, status };
+}
