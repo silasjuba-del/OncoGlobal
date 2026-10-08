@@ -38,11 +38,12 @@ it("UI de primeiro uso envia triagem como draft e registra liberação no SQLite
     senha, duracaoMs: 60_000, agora });
   let server: Server | null = null;
   const iniciarServidor = async () => {
-    server = criarServidorLocal({ db, sessoes, agora, log: () => {},
+    const iniciado = criarServidorLocal({ db, sessoes, agora, log: () => {},
       gateway: criarGateway({ agora, auditar: () => {}, store: memoriaIdempotencia(), executores: {} }) });
-    servers.push(server);
-    await new Promise<void>((resolve) => server.listening ? resolve() : server.once("listening", resolve));
-    const address = server.address();
+    server = iniciado;
+    servers.push(iniciado);
+    await new Promise<void>((resolve) => iniciado.listening ? resolve() : iniciado.once("listening", resolve));
+    const address = iniciado.address();
     if (!address || typeof address === "string") throw new Error("PORTA_AUSENTE");
     return `http://127.0.0.1:${address.port}`;
   };
@@ -82,6 +83,11 @@ it("UI de primeiro uso envia triagem como draft e registra liberação no SQLite
   ]));
   const contexto = await porta.carregarConsulta(patientId);
   expect(contexto.encounterId).toBe(encounterId);
+  const fila = await porta.filaSalao();
+  expect(fila.pacientes).toEqual(expect.arrayContaining([
+    expect.objectContaining({ patientId, encounterId }),
+    expect.objectContaining({ patientId: outroPatientId, encounterId: outroEncounterId }),
+  ]));
   const baseline = listarEventos(db, patientId);
 
   render(<TelaSalao porta={porta} />);
