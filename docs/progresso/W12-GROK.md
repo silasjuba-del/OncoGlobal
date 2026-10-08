@@ -9,7 +9,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w12-grok`, branch `f0/w12-grok`.
 | GROK-03 CTCAE v6 no corpus | FEITA | W12-GROK-03 | Termos clínicos literais da v6 em `graus.termosClinicos`. Plaquetas G4 continua &lt; 10.000. |
 | GROK-04 texto para grau | FEITA | W12-GROK-04 | Extração pura e sugestão só com frase literal da v6. Plaquetas 20.000 = G3, fila, sem E1. |
 | GROK-05 retorno com toxicidade | FEITA | W12-GROK-05 | G3 + plaquetas 20.000 vão à fila. E1 alerta e não altera a fila. |
-| GROK-06 tontura | | | |
+| GROK-06 tontura | FEITA | W12-GROK-06 | Tontura não corta. Vertigem nova sem histórico alerta SNC e não bloqueia. |
 | GROK-07 intervalo de 30 dias | | | |
 | GROK-08 red flags do canal | | | |
 | GROK-09 valor atual | | | |
@@ -114,5 +114,25 @@ Diarreia acima de 24 h com HAS na lista não oncológica alerta "suspender anti-
 `npm run check:corpus` — `corpus ok (124 arquivos)`.
 
 `npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 56 files, 425 tests, exit 0.
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.
+
+## GROK-06
+
+D-W9-76 tirou o ramo "ECOG 2 + tontura" de `avaliarTriagem`. ECOG 2 com tontura fica no salão, sem corte e sem `naoCorte.ecog.tontura`. A chave `ecog2ComTonturaCorta` continua no JSON porque o schema a exige; o código não lê mais o booleano. O teste antigo da anotação foi atualizado com a decisão no comentário.
+
+`tontura: null` gera `pendente.tontura` e FILA_MEDICO. Não vira ausência. Cada campo opcional da triagem, quando ausente, fica PENDENTE e o destino não traz VERDE. A saída não contém "liberado", "aprovado" ou "apto".
+
+A exceção mora em `tontura.ts`. O texto "investigar SNC (metástase cerebral/cerebelar)" sai do bloco `vertigem` do ruleset. Só dispara com tontura registrada, início novo e histórico anterior falso. Histórico ou início ausente fica PENDENTE e a classificação não vira NOVO. O alerta não bloqueia. Tipos locais em `docs/w12/PEDIDOS-GROK.md`.
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries` — `fronteiras ok (286 arquivos)`.
+
+`npm run check:corpus` — `corpus ok (124 arquivos)`.
+
+`npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 57 files, 442 tests, exit 0.
 
 `npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.

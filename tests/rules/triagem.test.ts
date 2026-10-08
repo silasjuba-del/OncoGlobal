@@ -66,11 +66,15 @@ describe("FN-01 grau CTCAE e ECOG", () => {
     expect(r.destino).toBe("FILA_MEDICO");
     expect(r.emergencia).toBe(true);
   });
-  it("ECOG 2 + tontura → SALAO com anotação em naoCortes", () => {
-    const r = avaliar({ ecog: presente(2), tontura: true });
-    expect(r.destino).toBe("SALAO");
-    expect(r.cortes).toHaveLength(0);
-    expect(r.naoCortes.length).toBeGreaterThan(0);
+  // D-W9-76 · tontura deixa de ser critério. ECOG 2 com tontura não corta e não anota naoCorte.
+  it("ECOG 2 + tontura → SALAO sem anotação de tontura (D-W9-76)", () => {
+    const com = avaliar({ ecog: presente(2), tontura: true });
+    const sem = avaliar({ ecog: presente(2), tontura: false });
+    expect(com.destino).toBe("SALAO");
+    expect(com.cortes).toHaveLength(0);
+    expect(com.naoCortes.map((m) => m.codigo)).not.toContain("naoCorte.ecog.tontura");
+    expect(com.destino).toBe(sem.destino);
+    expect(com.cortes).toEqual(sem.cortes);
   });
   it("ECOG 3 → FILA_MEDICO; ECOG 4 → FILA_MEDICO", () => {
     expect(avaliar({ ecog: presente(3) }).destino).toBe("FILA_MEDICO");

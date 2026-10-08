@@ -9,3 +9,8 @@
 
 ## GROK-05
 1. **Contrato da cadeia de retorno.** `EntradaRetornoToxicidade` e `ResultadoRetornoToxicidade` estão marcados `PROVISORIO-W12` em `src/rules/retornoToxicidade.ts`. Pedido: publicar os tipos quando o contrato abrir. O módulo não importa outras regras; corte, alerta de plaquetas e suporte entram prontos pelo barrel.
+
+## GROK-06
+1. **`SalaoRuleset.cortes.ecog2ComTonturaCorta`.** D-W9-76 tirou o ramo do corte. A chave continua no JSON porque o schema a exige. O código não lê mais o booleano e não emite `naoCorte.ecog.tontura`. Pedido: retirar o campo do contrato quando ele abrir.
+2. **Histórico e início da vertigem.** `EntradaVertigem` está em `src/rules/tontura.ts` (`PROVISORIO-W12`). `Triagem` só tem `tontura`. Pedido: publicar histórico anterior e início novo. Ausente fica PENDENTE e não vira "novo".
+3. **Formulário do salão.** `src/ui/salao/FormTriagem.tsx` ainda guarda tontura como checkbox que nasce em `false`. Fora da faixa desta onda. Pedido: o campo precisa aceitar desconhecido (`null`), não só sim/não.

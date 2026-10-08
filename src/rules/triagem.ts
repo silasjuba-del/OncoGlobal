@@ -117,11 +117,12 @@ export function avaliarTriagem(t: Triagem, ctx: ContextoTriagem, rs: SalaoRulese
   if (pendenteSeNulo(ecog, "ecog", "ECOG ausente", ctx, rs, pendentes)) {
     if (c.ecogCorta.includes(ecog)) {
       cortes.push(mot("corte.ecog", "ECOG no limite de corte", rs));
-    } else if (ecog === 2 && t.tontura) {
-      if (c.ecog2ComTonturaCorta) cortes.push(mot("corte.ecog.tontura", "ECOG 2 com tontura", rs));
-      else naoCortes.push(mot("naoCorte.ecog.tontura", "ECOG 2 com tontura, anotado", rs));
     }
   }
+
+  // D-W9-76 · tontura não corta, não pesa no ECOG e não anota naoCorte. A chave ecog2ComTonturaCorta fica no JSON por causa do schema.
+  // D-W9-74 · null é desconhecido: PENDENTE, nunca false.
+  if (t.tontura === null) pendentes.push(mot("pendente.tontura", "tontura desconhecida; não vira ausência", rs));
 
   // D-W9-03 · idade decide a FRENTE; ausente é PENDENTE (nunca 0).
   if (t.idadeAnos === null) pendentes.push(mot("pendente.idadeAnos", "idade ausente", rs));

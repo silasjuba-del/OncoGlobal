@@ -13,9 +13,11 @@ import { sugerirGrauCtcae } from "./ctcaeClinico.js";
 import { lerLimitesRetorno, montarRetornoToxicidade, type EntradaRetornoToxicidade } from "./retornoToxicidade.js";
 import { alertarSuporte, lerSuporte } from "./suporteNaoOncologico.js";
 import { avaliarAlertaPlaquetas, lerLimiarAlertaPlaquetas } from "./plaquetasAlerta.js";
+import { alertarVertigemNova, lerAlertaVertigem } from "./tontura.js";
 export { avaliarTriagem, validadeHemograma, avaliarCorteSalao, avaliarTriagemCiclo, avaliarPortoesW10, decidirDestino, ordenarFila, calcularDose, avaliarPeso, avisoIntervaloPosQt, ehConcomitante, cicloVaiAoMedico };
 export { portaCiclo, grauCtcae, lerSalaoCtcae, limiaresDaBula } from "./portaCiclo.js";
 export { extrairCriteriosCtcae, sugerirGrauCtcae };
+export { alertarVertigemNova, lerAlertaVertigem };
 
 /** D-W9-75. Compõe extração e sugestão. O barrel é o único arquivo de regras que pode importar os dois. */
 export function avaliarTextoCtcae(texto: string, corpus: unknown) {

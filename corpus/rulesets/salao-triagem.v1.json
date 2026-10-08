@@ -1,6 +1,6 @@
 {
   "header": { "id": "salao-triagem", "versao": "1.1.0", "vigenteDesde": "2026-10-08",
-    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "Q21-Q28 + A7 + K-10/K-11 + D-W9-22g + D-W9-37 + D-W9-38 + D-W9-41 + D-W9-58 (docs/DECISOES.md)", "trecho": null, "edicao": null }, "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-08" },
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "Q21-Q28 + A7 + K-10/K-11 + D-W9-22g + D-W9-37 + D-W9-38 + D-W9-41 + D-W9-58 + D-W9-76 (docs/DECISOES.md)", "trecho": null, "edicao": null }, "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-08" },
   "regra": "igual ao limite passa",
   "cortes": {
     "pasMax": 160, "pasMin": 90,
@@ -12,6 +12,11 @@
     "plqMin": 100000,
     "grauCtcaeCorta": 3, "grauCtcaeEmergencia": 4,
     "ecogCorta": [3, 4], "ecog2ComTonturaCorta": false
+  },
+  "vertigem": {
+    "decisao": "D-W9-76",
+    "bloqueiaSalvar": false,
+    "alertaSnc": "investigar SNC (metástase cerebral/cerebelar)"
   },
   "hemogramaValidadeDias": 7,
   "plausibilidade": {
