@@ -179,4 +179,48 @@ describe("clusters por voz/texto (PLN-013)", () => {
   it("entrada que não é texto falha de forma explícita", () => {
     expect(() => interpretarFrase(42 as unknown as string, corpus)).toThrow(TypeError);
   });
+
+  it("gatilhos de ordem: vou pedir / vou solicitar / renovar", () => {
+    const tc = um("Vou pedir uma tomografia pra senhora.");
+    expect(tc.intencao).toBe("ORDEM");
+    expect(tc.cluster).toBe("IMAGEM");
+    expect(idsMarcados(tc)).toEqual(["tc"]);
+
+    const fer = um("Tá na hora de renovar a ferritina.");
+    expect(fer.intencao).toBe("ORDEM");
+    expect(fer.cluster).toBe("ANEMIA");
+    expect(idsMarcados(fer)).toEqual(["ferritina"]);
+    expect(idsMarcados(um("Ta na hora de renovar a ferritina."))).toEqual(["ferritina"]);
+
+    const b = um("Vou solicitar b12 e acido folico.");
+    expect(b.intencao).toBe("ORDEM");
+    expect(idsMarcados(b)).toEqual(["b12", "folato"]);
+  });
+
+  it("itens do pack de anemia têm id próprio; IST não se confunde com transferrina nem ferro sérico", () => {
+    expect(idsMarcados(um("Vou pedir IST."))).toEqual(["ist"]);
+    expect(idsMarcados(um("Vou pedir tsat."))).toEqual(["ist"]);
+    expect(idsMarcados(um("Vou pedir saturação de transferrina."))).toEqual(["ist"]);
+    expect(idsMarcados(um("Vou pedir transferrina."))).toEqual(["transferrina"]);
+    expect(idsMarcados(um("Vou pedir ferro sérico."))).toEqual(["ferro-serico"]);
+    expect(idsMarcados(um("Vou pedir PSOF, ureia e creatinina, EDA e colono."))).toEqual(["sangue-oculto", "funcao-renal", "eda", "colonoscopia"]);
+    expect(idsMarcados(um("Vou pedir pesquisa de sangue oculto e endoscopia."))).toEqual(["sangue-oculto", "eda"]);
+  });
+
+  it("pack de anemia em ordem marca todos os itens do pack como DRAFT; descrição ou negação não marcam", () => {
+    const todos = ["transferrina", "ist", "ferritina", "ferro-serico", "sangue-oculto", "funcao-renal", "b12", "folato", "eda", "colonoscopia"];
+    for (const frase of ["Vou pedir o pack de anemia.", "Vou solicitar o pacote de anemia.", "Tá na hora de renovar os exames de anemia."]) {
+      const r = um(frase);
+      expect(r.intencao).toBe("ORDEM");
+      expect(idsMarcados(r)).toEqual(todos);
+      expect(r.itensMarcados.every((i) => i.status === "DRAFT")).toBe(true);
+    }
+    expect(um("A paciente está com anemia.").itensMarcados).toEqual([]);
+    expect(um("Não vou pedir o pack de anemia.").itensMarcados).toEqual([]);
+  });
+
+  it("ferro isolado não é termo de item (sem dedução de tratamento)", () => {
+    const termos = corpus.clusters.flatMap((c) => c.itens.flatMap((i) => i.termos));
+    expect(termos).not.toContain("ferro");
+  });
 });

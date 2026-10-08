@@ -1,6 +1,7 @@
 // W11-H25 · clusters por voz/texto (PLN-013, M-Q). Função pura: a frase já transcrita e o corpus entram por parâmetro.
 // Regras: DESCRIÇÃO ("está com anemia") abre o cluster SEM marcar nada; ORDEM explícita ("vou pedir ferritina")
 // marca SOMENTE os itens ditos, com status DRAFT; negação ("não tem anemia", "não vou pedir ferritina") não abre nem marca;
+// pack ("pack/pacote/exames de anemia") em frase de ordem marca todos os itens do pack, também DRAFT;
 // nada vira CONFIRMADO; nenhum fármaco ou dose é deduzido. Dado ausente vira pendência, nunca marcação.
 // Não importa outras regras: o corpus (corpus/clusters/clusters-voz.v1.json) chega pronto.
 
@@ -18,11 +19,18 @@ export interface PendenciaClusterVoz {
   readonly coberturaItens: readonly string[];
 }
 
+/** Modo pack: frase de ordem citando o pacote marca todos os itens listados (DRAFT, desmarcáveis). */
+export interface PackClusterVoz {
+  readonly gatilhos: readonly string[];
+  readonly itens: readonly string[];
+}
+
 export interface ClusterVoz {
   readonly id: string;
   readonly nome: string;
   readonly chavesMatriz: readonly string[];
   readonly gatilhosDescricao: readonly string[];
+  readonly pack?: PackClusterVoz;
   readonly itens: readonly ItemClusterVoz[];
   readonly pendencias: readonly PendenciaClusterVoz[];
 }
@@ -58,7 +66,7 @@ export interface ResultadoVoz {
 // Palavras que negam o termo quando aparecem nas quatro palavras anteriores, no mesmo trecho.
 const NEGACOES: readonly string[] = ["nao", "sem", "nega", "negou", "descarta", "descartado", "exclui", "excluido", "afasta", "ausencia"];
 // Verbos de ordem explícita: sem um deles, um item citado não vira marcação.
-const ORDEM_RE = /\b(vou|vamos|vai|pedir|pedimos|pedi|peco|solicit\w*|fazer|fazemos|colher|prescrev\w*|indicar|indico|marcar|marco|agendar)\b/;
+const ORDEM_RE = /\b(vou|vamos|vai|pedir|pedimos|pedi|peco|solicit\w*|fazer|fazemos|colher|prescrev\w*|renov\w*|indicar|indico|marcar|marco|agendar)\b/;
 const SEPARADOR_TRECHO = /[.;!?,:\n]|\s+(?:mas|porem|porém|entretanto)\s+/i;
 
 const normalizar = (texto: string): string =>
@@ -88,6 +96,17 @@ const negadoAntes = (norm: string, pos: number): boolean => {
 /** Ocorrência positiva (não negada) do termo no trecho. */
 const ocorrenciaPositiva = (norm: string, termo: string): boolean =>
   posicoes(norm, termo).some((pos) => !negadoAntes(norm, pos));
+
+/** O termo está contido num termo mais longo de outro item do cluster que também aparece (ex.: "transferrina" em "saturacao de transferrina")? */
+const coberto = (norm: string, cl: ClusterVoz, itemId: string, termo: string): boolean => {
+  const alvo = normalizar(termo);
+  return cl.itens.some((outro) =>
+    outro.id !== itemId &&
+    outro.termos.some((t) => {
+      const maior = normalizar(t);
+      return maior.length > alvo.length && maior.includes(alvo) && ocorrenciaPositiva(norm, t);
+    }));
+};
 
 interface Achado {
   readonly clusterId: string;
@@ -139,6 +158,7 @@ export function interpretarFrase(frase: string, corpus: CorpusClustersVoz, conte
         for (const t of it.termos) {
           const chave = normalizar(t);
           if (!ocorrenciaPositiva(norm, t)) continue;
+          if (coberto(norm, cl, it.id, t)) continue;
           const donos = [...(donosDoTermo.get(chave) ?? [])];
           if (donos.length > 1) {
             const filtrados = donos.filter((d) => abertos.has(d));
@@ -151,6 +171,8 @@ export function interpretarFrase(frase: string, corpus: CorpusClustersVoz, conte
           break;
         }
       }
+      if (cl.pack !== undefined && cl.pack.gatilhos.some((g) => ocorrenciaPositiva(norm, g)))
+        for (const id of cl.pack.itens) achados.push({ clusterId: cl.id, itemId: id, trecho });
     }
   }
 

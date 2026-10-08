@@ -29,17 +29,29 @@
       "nome": "Anemia",
       "chavesMatriz": ["problema-evento/alteracao-laboratorial/nova/anemia"],
       "gatilhosDescricao": ["anemia", "hemoglobina baixa", "hb baixa"],
+      "pack": {
+        "gatilhos": ["pack de anemia", "pacote de anemia", "exames de anemia"],
+        "itens": ["transferrina", "ist", "ferritina", "ferro-serico", "sangue-oculto", "funcao-renal", "b12", "folato", "eda", "colonoscopia"]
+      },
       "itens": [
         { "id": "hmg", "nome": "Hemograma", "chaveMatriz": "investigacao/lab/hematologia/hmg", "termos": ["hemograma", "hmg"] },
+        { "id": "transferrina", "nome": "Transferrina", "chaveMatriz": null, "termos": ["transferrina"] },
+        { "id": "ist", "nome": "Índice de saturação de transferrina (IST)", "chaveMatriz": null, "termos": ["ist", "tsat", "indice de saturacao de transferrina", "saturacao de transferrina", "saturacao da transferrina"] },
         { "id": "ferritina", "nome": "Ferritina", "chaveMatriz": "investigacao/lab/hematologia/ferritina", "termos": ["ferritina"] },
-        { "id": "ferro-tsat", "nome": "Ferro / saturação de transferrina", "chaveMatriz": null, "termos": ["saturacao de transferrina", "tsat", "ferro serico"] },
+        { "id": "ferro-serico", "nome": "Ferro sérico", "chaveMatriz": null, "termos": ["ferro serico", "ferro no sangue"] },
+        { "id": "sangue-oculto", "nome": "Pesquisa de sangue oculto nas fezes", "chaveMatriz": null, "termos": ["sangue oculto", "pesquisa de sangue oculto", "psof"] },
+        { "id": "funcao-renal", "nome": "Função renal", "chaveMatriz": "investigacao/lab/renal", "termos": ["funcao renal", "ureia e creatinina", "ureia", "creatinina"] },
         { "id": "b12", "nome": "Vitamina B12", "chaveMatriz": null, "termos": ["b12", "vitamina b12", "cobalamina"] },
-        { "id": "folato", "nome": "Ácido fólico / folato", "chaveMatriz": null, "termos": ["folato", "acido folico"] }
+        { "id": "folato", "nome": "Ácido fólico / folato", "chaveMatriz": null, "termos": ["folato", "acido folico"] },
+        { "id": "eda", "nome": "Gastroscopia (EDA)", "chaveMatriz": "investigacao/endo/digestiva/eda", "termos": ["eda", "gastroscopia", "endoscopia", "endoscopia digestiva alta"] },
+        { "id": "colonoscopia", "nome": "Colonoscopia", "chaveMatriz": "investigacao/endo/digestiva/colonoscopia", "termos": ["colonoscopia", "colono"] }
       ],
       "pendencias": [
         { "texto": "confirmar Hb e data", "coberturaItens": ["hmg"] },
         { "texto": "classificar gravidade", "coberturaItens": [] },
-        { "texto": "avaliar ferro / ferritina / TSAT", "coberturaItens": ["ferritina", "ferro-tsat"] },
+        { "texto": "avaliar ferro / ferritina / TSAT", "coberturaItens": ["transferrina", "ist", "ferritina", "ferro-serico"] },
+        { "texto": "investigar perda digestiva (sangue oculto / EDA / colonoscopia)", "coberturaItens": ["sangue-oculto", "eda", "colonoscopia"] },
+        { "texto": "avaliar função renal", "coberturaItens": ["funcao-renal"] },
         { "texto": "avaliar B12", "coberturaItens": ["b12"] },
         { "texto": "avaliar folato", "coberturaItens": ["folato"] }
       ]
