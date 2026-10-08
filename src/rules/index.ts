@@ -9,6 +9,7 @@ import { avisoIntervaloPosQt } from "./prazos.js";
 import { ehConcomitante } from "./concomitancia.js";
 import { cicloVaiAoMedico } from "./cicloComMedico.js";
 export { avaliarTriagem, validadeHemograma, avaliarCorteSalao, avaliarTriagemCiclo, avaliarPortoesW10, decidirDestino, ordenarFila, calcularDose, avaliarPeso, avisoIntervaloPosQt, ehConcomitante, cicloVaiAoMedico };
+export { portaCiclo, grauCtcae, lerSalaoCtcae, limiaresDaBula } from "./portaCiclo.js";
 export { diferencaDiasCivis } from "./datas.js";
 export type { SinaisExtraW10, ResultadoPortao } from "./triagem.js";
 export const funcoesF0: FuncoesF0 = { avaliarTriagem, decidirDestino, ordenarFila, calcularDose, validadeHemograma, avaliarPeso, avisoIntervaloPosQt, ehConcomitante, cicloVaiAoMedico };

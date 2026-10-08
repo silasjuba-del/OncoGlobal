@@ -5,7 +5,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w12-grok`, branch `f0/w12-grok`.
 | Fatia | Estado | Commit | Notas |
 |---|---|---|---|
 | GROK-01 corte do salão 1.1.0 | FEITA | W12-GROK-01 | FC &lt; 50 corta na FN-01. CREAT 150 ativo. PAS &gt; 160 no corte do salão. |
-| GROK-02 um corpo de triagem e porta | | | |
+| GROK-02 um corpo de triagem e porta | FEITA | W12-GROK-02 | Barrel reexporta a mesma função. Porta lê `LimiaresBula`. |
 | GROK-03 CTCAE v6 no corpus | | | |
 | GROK-04 texto para grau | | | |
 | GROK-05 retorno com toxicidade | | | |
@@ -36,5 +36,25 @@ Expectativas atualizadas, com a decisão no teste: `tests/rules/triagem.test.ts`
 `npm run check:corpus` — `corpus ok (124 arquivos)`. `lab-thresholds.v1.json` header ok, 18 `[VERIFICAR]`, coluna ATIVOS 5.
 
 `npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 52 files, 395 tests, exit 0.
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.
+
+## GROK-02
+
+O barrel já era fachada (uma implementação em `triagem.ts`). Esta fatia reexporta `portaCiclo`, `grauCtcae`, `lerSalaoCtcae` e `limiaresDaBula` do mesmo módulo. Teste prova identidade de referência (`toBe`).
+
+`portaCiclo` aceita `LimiaresBula` (`neutrofilosMin`, `plaquetasMin`, `clcrMinMlMin`, `fevePctMin`). Null não declara o limiar. Os quatro nulos viram PENDENTE, sem usar grau. O `ProtocoloCiclo` provisório continua no mesmo corpo, para a suíte e o red team que já chamam essa forma. `grauUsadoNaPorta` permanece false. `portaPorGrau` continua ignorado.
+
+Triagem do ciclo e corte do salão seguem portões distintos: FC 49 só corta o salão; PAS 150 só corta o ciclo.
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries` — `fronteiras ok (280 arquivos)`.
+
+`npm run check:corpus` — `corpus ok (124 arquivos)`.
+
+`npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 55 files, 428 tests, exit 0 (a corrida também incluiu `tests/w10-grok/grok-02-bula-ctcae.test.ts` e `tests/redteam/rt07-labs-salao.test.ts`).
 
 `npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.
