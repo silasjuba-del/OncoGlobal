@@ -391,6 +391,31 @@ export function conflitoPlanejadoOrdenado(fatos: readonly ClinicalFact[]): Revie
   };
 }
 
+/**
+ * Regime planejado (plano/fala, já sem o suspenso) × regime ordenado (prescrição) divergentes.
+ * As duas versões ficam preservadas no conflito; nenhuma é escolhida em silêncio.
+ */
+export function conflitoRegimePlanejadoPrescrito(fatos: readonly ClinicalFact[]): ReviewException | null {
+  const tratamento = reconciliarTratamento(fatos);
+  const canonico = (nome: string): string => farmacosMencionados(nome)[0] ?? nome;
+  const planejado = [...new Set(tratamento.proposto.map(canonico))].sort();
+  const prescrito = [...new Set(tratamento.prescrito.map(canonico))].sort();
+  if (!planejado.length || !prescrito.length) return null;
+  const divergente = planejado.length !== prescrito.length || planejado.some((nome) => !prescrito.includes(nome));
+  if (!divergente) return null;
+  const planos = fatos.filter((f) => f.domain === "plan");
+  const prescricoes = fatos.filter((f) => f.domain === "drug" && f.sourceType === "prescription");
+  const primeiro = planos[0]!;
+  return {
+    id: novoId("CONFLICT", primeiro.segmentId, 9),
+    kind: "CONFLICT",
+    segmentId: primeiro.segmentId,
+    factIds: [...planos, ...prescricoes].map((f) => f.id),
+    reason: `planned_regimen != ordered_regimen: planejado [${planejado.join(", ")}] × prescrito [${prescrito.join(", ")}]`,
+    sourceIds: [...new Set([...planos, ...prescricoes].map((f) => f.sourceId))],
+  };
+}
+
 /** Todos os conflitos clínicos detectáveis a partir dos fatos. */
 export function detectarConflitos(fatos: readonly ClinicalFact[]): readonly ReviewException[] {
   return [
@@ -402,5 +427,6 @@ export function detectarConflitos(fatos: readonly ClinicalFact[]): readonly Revi
     conflitoCronologia(fatos),
     conflitoSitio(fatos),
     conflitoPlanejadoOrdenado(fatos),
+    conflitoRegimePlanejadoPrescrito(fatos),
   ].filter((e): e is ReviewException => e !== null);
 }
