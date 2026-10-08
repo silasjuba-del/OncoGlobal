@@ -13,7 +13,7 @@ const V = (valor: unknown, origem: unknown = laudo, extra: object = {}) => ({ es
 
 const nucleoVazio = () => Object.fromEntries(CAMPOS_NUCLEO.map((s) => [s.chave, NI]));
 const nucleoCheio = () => ({
-  histologia: V("adenocarcinoma sintético"), grauHistologico: V("G2"), cTNM: V("cT2N0M0"), pTNM: V("pT2N1a"),
+  histologia: V("adenocarcinoma sintético"), lateralidade: V("ESQUERDA"), topografia: V("sítio sintético"), grauHistologico: V("G2"), cTNM: V("cT2N0M0"), pTNM: V("pT2N1a"),
   ypTNM: V("ypT1N0"), estadio: V("IIB"), tamanhoMm: V(22), profundidade: V("submucosa"),
   linfonodos: V({ positivos: 2, avaliados: 14 }), metastase: V({ presente: true, sitios: ["fígado"] }),
   invasaoAngiolinfatica: V(true), invasaoPerineural: V(false), margem: V("LIVRE"), necrose: V(false),

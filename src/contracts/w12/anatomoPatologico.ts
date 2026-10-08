@@ -19,7 +19,7 @@ export type OrigemCampoAP = z.infer<typeof OrigemCampoAP>;
 /**
  * Campo tri-estado. VALOR ⇒ valor + origem; NAO_INFORMADO / NAO_SE_APLICA ⇒ valor null e origem null.
  * confianca BAIXA = manuscrito/OCR duvidoso (tipologia dos kits: manuscrito nunca é dado firme).
- * Conflito entre fontes: estado VALOR com ≥2 candidatos e valor null (o cartão mostra os dois; ninguém elege).
+ * CONFLITO ⇒ valor null, origem null e ≥2 candidatos (cada um com sua origem; o cartão mostra todos; ninguém elege).
  */
 export const campoAP = <T extends z.ZodTypeAny>(valor: T) =>
   z.object({
@@ -32,7 +32,8 @@ export const campoAP = <T extends z.ZodTypeAny>(valor: T) =>
     const erro = (m: string) => ctx.addIssue({ code: "custom", message: m });
     const valor = (c as unknown as { valor: unknown }).valor;
     if (c.estado === "VALOR" && (valor === null || c.origem === null)) erro("VALOR exige valor e origem");
-    if (c.estado === "CONFLITO" && (valor !== null || c.candidatos.length < 2)) erro("CONFLITO exige valor null e ≥2 candidatos");
+    if (c.estado === "CONFLITO" && (valor !== null || c.origem !== null || c.candidatos.length < 2)) erro("CONFLITO exige valor e origem null e ≥2 candidatos");
+    if ((c.estado === "NAO_INFORMADO" || c.estado === "NAO_SE_APLICA") && c.confianca === "BAIXA") erro("confiança BAIXA só com VALOR ou CONFLITO");
     if ((c.estado === "NAO_INFORMADO" || c.estado === "NAO_SE_APLICA") && (valor !== null || c.origem !== null)) {
       erro(`${c.estado} exige valor e origem null`);
     }
@@ -53,6 +54,8 @@ export const RespostaNeoadjuvancia = z.object({
 /** Núcleo comum aos 6 tumores. Todos os campos sempre presentes (lacuna visível). */
 export const NucleoAP = z.object({
   histologia: campoAP(texto), // adenocarcinoma, CEC, neuroendócrino, sarcomatoide…
+  lateralidade: campoAP(z.enum(["DIREITA", "ESQUERDA", "BILATERAL", "LINHA_MEDIA"])), // G-07; conflito de lado é o mais frequente nos kits
+  topografia: campoAP(texto), // sítio/subsítio literal do laudo (ex.: esôfago médio × distal = CONFLITO)
   grauHistologico: campoAP(texto),
   cTNM: campoAP(texto),
   pTNM: campoAP(texto),
@@ -77,7 +80,7 @@ export type NucleoAP = z.infer<typeof NucleoAP>;
 const Mama = z.object({
   tumor: z.literal("MAMA"),
   rePct: campoAP(pct), rpPct: campoAP(pct),
-  her2: campoAP(z.enum(["0", "1+", "2+", "3+", "2+_ISH_POS", "2+_ISH_NEG"])),
+  her2: campoAP(z.enum(["0", "0_ULTRALOW", "1+", "2+", "3+", "2+_ISH_POS", "2+_ISH_NEG"])),
   rcb: campoAP(texto),
 }).strict();
 const Prostata = z.object({

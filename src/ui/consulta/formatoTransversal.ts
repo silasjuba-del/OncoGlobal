@@ -12,6 +12,8 @@ export interface CampoSpec {
 /** Ordem fixa do núcleo: nenhum campo some. */
 export const CAMPOS_NUCLEO: readonly CampoSpec[] = [
   { chave: "histologia", rotulo: "Histologia" },
+  { chave: "lateralidade", rotulo: "Lateralidade" },
+  { chave: "topografia", rotulo: "Topografia" },
   { chave: "grauHistologico", rotulo: "Grau histológico" },
   { chave: "cTNM", rotulo: "cTNM" },
   { chave: "pTNM", rotulo: "pTNM" },

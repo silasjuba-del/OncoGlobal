@@ -4,7 +4,7 @@ import { validarRetratoTransversal } from "../../src/contracts/index.js";
 const NI = { estado: "NAO_INFORMADO", valor: null, origem: null };
 const laudo = { tipo: "LAUDO", documentoId: "doc-1", dataDocumento: "2026-05-01", trecho: "Gleason 3+4" };
 const nucleo = Object.fromEntries([
-  "histologia", "grauHistologico", "cTNM", "pTNM", "ypTNM", "estadio", "tamanhoMm", "profundidade", "linfonodos",
+  "histologia", "lateralidade", "topografia", "grauHistologico", "cTNM", "pTNM", "ypTNM", "estadio", "tamanhoMm", "profundidade", "linfonodos",
   "metastase", "invasaoAngiolinfatica", "invasaoPerineural", "margem", "necrose", "indiceMitotico", "ki67Pct",
   "neoadjuvancia", "respostaNeoadjuvancia", "progressaoNaVigencia",
 ].map((k) => [k, NI]));
@@ -35,5 +35,16 @@ describe("W12-F2 contrato anatomopatológico (tech lead)", () => {
     expect(ok.ok).toBe(true);
     const eleito = { ...conflito, valor: "cT2N1M0" };
     expect(validarRetratoTransversal({ pacienteRef: "p", tumorIndice: true, nucleo: { ...nucleo, cTNM: eleito }, extensao: prostata }).ok).toBe(false);
+  });
+});
+
+describe("W12-F2 ajustes da revisão (PLN-037)", () => {
+  const base = { pacienteRef: "p", tumorIndice: true, extensao: prostata };
+  it("CONFLITO com origem preenchida é rejeitado", () => {
+    const c = { estado: "CONFLITO", valor: null, origem: laudo, candidatos: [{ valor: "DIREITA", origem: laudo }, { valor: "ESQUERDA", origem: laudo }] };
+    expect(validarRetratoTransversal({ ...base, nucleo: { ...nucleo, lateralidade: c } }).ok).toBe(false);
+  });
+  it("confiança BAIXA em NAO_INFORMADO é rejeitada", () => {
+    expect(validarRetratoTransversal({ ...base, nucleo: { ...nucleo, topografia: { ...NI, confianca: "BAIXA" } } }).ok).toBe(false);
   });
 });
