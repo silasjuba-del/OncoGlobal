@@ -2,11 +2,13 @@
 // D-W9-17/19/37/38 · RAIZ CANÔNICA §4 (MEMORY_OS).
 import { z } from "zod";
 import { DataCivil, Id, Instante } from "../base.js";
+import { ProvenienciaLaboratorial } from "./closure.js";
 
 /** Sinais que a C-08 não tem (D-W9-37). null = PENDENTE, nunca 0. Inteiros nas bordas (K-10). */
 export const TriagemExtraW10 = z.object({
   pad: z.number().int().nullable(), // mmHg
   crCentesimos: z.number().int().nullable(), // 150 = 1,50 mg/dL
+  provenienciaHb: ProvenienciaLaboratorial.optional(),
 }).strict();
 export type TriagemExtraW10 = z.infer<typeof TriagemExtraW10>;
 
