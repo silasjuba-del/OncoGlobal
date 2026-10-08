@@ -610,3 +610,10 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
 - Para o Dr. Silas decidir (H25): B12, folato, ferro/TSAT, filgrastim, fezes entram na matriz? Ferro EV/VO no cluster de anemia? Regra de ordem em enumeração por voz.
 - Para o Dr. Silas decidir (H27): mudança só de SIGTAP/prioridade/competência gera nova versão (atual) ou sobrescreve?
 - Costuras ainda pendentes: plugar CabecalhoDatasFixas e ConsultaFlash na TelaConsulta; exames pré-retorno no Flash.
+
+## PLN-036 — 2026-10-08 — respostas H25/H27 (fonte M-AL)
+
+- Anemia vira PACK: transferrina, IST, ferritina, ferro sérico, sangue oculto nas fezes, função renal, B12, ácido fólico, gastroscopia, colonoscopia. Leitura: "sangue oculto ... nas fezes" + "função renal" como itens separados — confirmar.
+- Gatilhos de ordem no ditado: "vou pedir", "vou solicitar", "tá na hora de renovar X".
+- SIGTAP = MANTÉM: leitura = mantém regra atual (qualquer mudança gera nova versão, nada sobrescreve) — confirmar.
+- Ferro EV/VO segue sem dose deduzida (médico decide). Código delegado (fast-worker) em `f0/w1-integrado`.
