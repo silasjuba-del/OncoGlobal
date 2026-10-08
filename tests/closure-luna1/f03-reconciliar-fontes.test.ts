@@ -82,7 +82,7 @@ describe("F03 HTTP · reconciliação local de fontes explicitamente vinculadas"
       expect(ambiente.db.prepare("SELECT COUNT(*) AS n FROM operation").get()).toMatchObject({ n: beforeOperations });
       expect(lerDraft(ambiente.db, "draft-recon-a")?.revision).toBe(1);
       expect(result.data.fatos.length).toBeGreaterThanOrEqual(2);
-      expect(result.data.deduplicacao.fatoRepetidoIds.every((id) => result.data.fatos.some((fact) => fact.id === id)).toBe(true);
+      expect(result.data.deduplicacao.fatoRepetidoIds.every((id) => result.data.fatos.some((fact) => fact.id === id))).toBe(true);
     } finally { await ambiente.close(); }
   });
 
