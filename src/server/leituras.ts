@@ -259,7 +259,7 @@ export function lerAgenda(db: DatabaseSync, agora: string) {
 export function lerCanal(db: DatabaseSync) {
   const all = eventos(db), contatos = porTipo(all, "Contato", Contato), rows = porTipo(all, "CanalMessage", CanalMessage);
   const projected = projetarVinculosContato(contatos, all);
-  const mensagens = rows.flatMap(({ value }) => {
+  const mensagens = rows.flatMap(({ event, value }) => {
     const registros = projected.filter((c) => c.value.contatoId === value.contatoId);
     if (!registros.length) return [];
     const revogado = registros.some((record) => record.value.revogadoEm !== null);
@@ -267,14 +267,24 @@ export function lerCanal(db: DatabaseSync) {
     const allTargets = [...new Set(registros.flatMap((record) => record.candidatosVinculo))];
     const resolved = registros.filter((record) => record.estadoVinculo === "VINCULADO");
     const linkedPatientId = !revogado && !conflict && resolved.length === 1 ? resolved[0]!.patientIdResolvido : null;
-    const patient = linkedPatientId ? lerPaciente(db, linkedPatientId) : null;
-    if (linkedPatientId && !patient) return [];
-    const candidatos = revogado ? [] : conflict ? allTargets : allTargets.length ? allTargets
+    // A persisted payload identity and the event envelope are independent evidence.
+    // Never let a Contact projection silently move a message across either boundary.
+    const sourceMismatch = value.patientId !== null && event.patientId !== value.patientId;
+    const projectedMismatch = value.patientId !== null && linkedPatientId !== null
+      && linkedPatientId !== value.patientId;
+    const unresolvedPayloadIdentity = value.patientId !== null && linkedPatientId === null && !revogado;
+    const hasConflict = conflict || sourceMismatch || projectedMismatch || unresolvedPayloadIdentity;
+    const patientId = revogado || hasConflict ? null : linkedPatientId;
+    const patient = patientId ? lerPaciente(db, patientId) : null;
+    if (patientId && !patient) return [];
+    const candidatos = revogado ? [] : hasConflict
+      ? [...new Set([...allTargets, ...(value.patientId ? [value.patientId] : []), event.patientId])]
+      : allTargets.length ? allTargets
       : [...new Set(all.filter((candidate) => candidate.tipo === "Paciente").map((candidate) => candidate.patientId))];
     return [{ mensagemId: value.mensagemId, texto: value.texto, em: value.em, redFlag: value.redFlag,
-      contatoId: value.contatoId, patientId: revogado ? null : linkedPatientId, nomePaciente: patient?.nome ?? null,
-      estadoVinculo: revogado ? "REVOGADO" as const : conflict ? "CONFLITO" as const
-        : linkedPatientId ? "VINCULADO" as const : "SEM_VINCULO" as const,
+      contatoId: value.contatoId, patientId, nomePaciente: patient?.nome ?? null,
+      estadoVinculo: revogado ? "REVOGADO" as const : hasConflict ? "CONFLITO" as const
+        : patientId ? "VINCULADO" as const : "SEM_VINCULO" as const,
       candidatos: candidatos.flatMap((patientId) => { const cadastro = lerPaciente(db, patientId);
         return cadastro ? [{ patientId, nome: cadastro.nome }] : []; }) }];
   });
