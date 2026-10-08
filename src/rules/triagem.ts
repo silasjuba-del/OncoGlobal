@@ -1,4 +1,5 @@
 import type { TriagemExtraW10 } from "../contracts/w10/clinico-w10.js";
+import { DataCivil, Fonte as FonteSchema, type Fonte } from "../contracts/base.js";
 import type { Motivo, ResultadoTriagem, Triagem } from "../contracts/clinico.js";
 import type { Destino, Semaforo } from "../contracts/estados.js";
 import type { ContextoTriagem, SalaoRuleset } from "../contracts/regras.js";
@@ -27,6 +28,34 @@ function mot(codigo: string, texto: string, rs: SalaoRuleset): Motivo {
   return { codigo, texto, regraId: rs.header.id, rulesetVersao: rs.header.versao };
 }
 
+// PROVISORIO-W10: o contrato canônico será promovido pelo root em contracts/w10/closure.ts.
+export interface ProvenienciaLaboratorial {
+  valorOriginal: number | null;
+  unidadeOriginal: "g/dL" | "dg/dL" | "g/L" | null;
+  fonte: Fonte | null;
+  dataClinica: string | null;
+}
+
+function pendenciaOrigemHemoglobina(
+  t: Triagem,
+  origem?: ProvenienciaLaboratorial | null,
+): string | null {
+  // O campo legado hbDgDl já declara a escala canônica (décimos de g/dL).
+  if (origem === undefined) return null;
+  if (!origem || origem.valorOriginal === null || origem.unidadeOriginal === null
+    || origem.fonte === null || origem.dataClinica === null
+    || !Number.isFinite(origem.valorOriginal) || !FonteSchema.safeParse(origem.fonte).success
+    || !DataCivil.safeParse(origem.dataClinica).success || t.hbDgDl.valor === null) {
+    return "unidade/origem laboratorial ausente ou incompleta; confirmar antes de promover";
+  }
+  const fatorParaDecimos = origem.unidadeOriginal === "g/dL" ? 10 : 1;
+  const valorCanonico = origem.valorOriginal * fatorParaDecimos;
+  if (!Number.isFinite(valorCanonico) || Math.abs(valorCanonico - t.hbDgDl.valor) > 1e-6) {
+    return "valor e unidade da origem não concordam com hbDgDl; manter pendente para revisão";
+  }
+  return null;
+}
+
 function aplicavel(ctx: ContextoTriagem, campo: CampoRequisito): boolean {
   return ctx.requisitosAplicaveis.includes(campo);
 }
@@ -45,7 +74,12 @@ function pendenteSeNulo(
 }
 
 /** FN-01 · cortes, anotações, pendências, emergência e destino. Igual ao limite passa. */
-export function avaliarTriagem(t: Triagem, ctx: ContextoTriagem, rs: SalaoRuleset): ResultadoTriagem {
+export function avaliarTriagem(
+  t: Triagem,
+  ctx: ContextoTriagem,
+  rs: SalaoRuleset,
+  origemHb?: ProvenienciaLaboratorial | null,
+): ResultadoTriagem {
   const cortes: Motivo[] = [];
   const naoCortes: Motivo[] = [];
   const pendentes: Motivo[] = [];
@@ -121,6 +155,9 @@ export function avaliarTriagem(t: Triagem, ctx: ContextoTriagem, rs: SalaoRulese
       pendentes.push(mot("pendente.coletaHemograma", v.motivo, rs));
     }
   }
+
+  const pendenciaHb = pendenciaOrigemHemoglobina(t, origemHb);
+  if (pendenciaHb) pendentes.push(mot("pendente.hb.origem", pendenciaHb, rs));
 
   // Febre e neutrófilos baixos juntos: alerta urgente, sem nomear diagnóstico (K-28).
   if (temp !== null && anc !== null && temp > c.tempDecimosMax && anc < c.ancMin) {
@@ -281,7 +318,12 @@ function compararLimite(
 }
 
 /** D-W9-37/38 · corte do salão. Alerta: destino FILA_MEDICO + motivo. Nunca bloqueia salvar. */
-export function avaliarCorteSalao(t: Triagem, extra: SinaisExtraW10, rs: SalaoRuleset): ResultadoPortao {
+export function avaliarCorteSalao(
+  t: Triagem,
+  extra: SinaisExtraW10,
+  rs: SalaoRuleset,
+  origemHb?: ProvenienciaLaboratorial | null,
+): ResultadoPortao {
   const nome = "corteSalao";
   const bloco = lerPortao(rs, nome, "corte-do-salao");
   const motivos: Motivo[] = [];
@@ -331,6 +373,9 @@ export function avaliarCorteSalao(t: Triagem, extra: SinaisExtraW10, rs: SalaoRu
     `hemoglobina ${hb === null ? "" : textoHb(hb)} abaixo do limite do corte do salão`,
     decisaoPortao(bloco, "hb", nome), rs, motivos, pendentes,
   );
+  const pendenciaHb = pendenciaOrigemHemoglobina(t, origemHb);
+  if (pendenciaHb) pendentes.push(motivoPortao("pendente.corteSalao.hb.origem", pendenciaHb,
+    decisaoPortao(bloco, "hb", nome), rs));
   compararLimite(
     extra.crCentesimos, extra.crCentesimos !== null && extra.crCentesimos > crMax,
     "corteSalao.cr.alta", "creatinina ausente",
@@ -409,9 +454,10 @@ export function avaliarPortoesW10(
   t: Triagem,
   extra: SinaisExtraW10,
   rs: SalaoRuleset,
+  origemHb?: ProvenienciaLaboratorial | null,
 ): { triagemCiclo: ResultadoPortao; corteSalao: ResultadoPortao } {
   return {
     triagemCiclo: avaliarTriagemCiclo(t, extra, rs),
-    corteSalao: avaliarCorteSalao(t, extra, rs),
+    corteSalao: avaliarCorteSalao(t, extra, rs, origemHb),
   };
 }
