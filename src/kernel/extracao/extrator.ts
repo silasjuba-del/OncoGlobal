@@ -2,6 +2,7 @@ import type { ClinicalFact, EncounterSegment, FactDomain, FactEvidence } from ".
 import {
   DICIONARIO_FARMACO, normalizarFarmaco, normalizarLateralidade, normalizarSitioAnatomico,
 } from "./normalizacao.js";
+import { farmacosMencionados } from "./reconciliacao.js";
 
 const aliasesFarmacos = Object.keys(DICIONARIO_FARMACO)
   .sort((a, b) => b.length - a.length)
@@ -236,6 +237,17 @@ export const extratorDeterministico: Extrator = {
       }
       const plan = raw.match(/^\s*(?:plano|conduta verbalizada)\s*:\s*(.+)/iu);
       if (plan) add("plan", plan[1]?.trim());
+      else if (segmento.sourceType === "plaud" || segmento.sourceType === "medical_note") {
+        // Apenas intenção futura literal na cláusula atual: o histórico depois
+        // de vírgula ("corrigi da outra vez...") permanece na fonte, não no plano.
+        const clausulaAtual = raw.split(/[,;]/u)[0]?.trim() ?? "";
+        const historico = /\b(?:anteriormente|antigamente|da outra vez|no ciclo anterior)\b/iu;
+        const futuro = /\b(?:vai|vou|vamos|iremos)\s+(?:fazer|receber|usar|iniciar)\b/iu;
+        if (futuro.test(clausulaAtual) && !historico.test(clausulaAtual)
+          && farmacosMencionados(clausulaAtual).length > 0) {
+          add("plan", clausulaAtual, "UNCERTAIN", true);
+        }
+      }
       }
       }
     }

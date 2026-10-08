@@ -19,6 +19,8 @@ export interface FonteParaDedupe {
   readonly rawTranscript: string;
   /** Identidade do exame fornecida pelo importador; nunca inferida da conclusão. */
   readonly examIdentity?: IdentidadeExame;
+  /** Contexto declarado da fonte; data clínica ≠ data de importação/impressão. */
+  readonly contexto?: Readonly<{ encounterId: string; dataClinica: string }>;
 }
 
 export interface ReferenciaFonteDedupe {
@@ -26,9 +28,12 @@ export interface ReferenciaFonteDedupe {
   readonly sourceId: string;
   readonly page?: number;
   readonly versao: string | null;
+  readonly contexto?: Readonly<{ encounterId: string; dataClinica: string }>;
 }
 
 export interface RepeticaoDocumental {
+  /** D-W8-01: motor de dedupe ainda é proposta, nunca descarte/merge automático. */
+  readonly estado: "PENDENTE_REVISAO";
   readonly chaveExame: string;
   readonly fontes: readonly ReferenciaFonteDedupe[];
   /** Fatos preservados em `ExtractionState.facts`; apenas os IDs se repetem logicamente. */
@@ -69,8 +74,16 @@ function chaveExame(fonte: FonteParaDedupe): string {
     }
   }
   // Identidade incompleta NÃO vira chave "NULO:NULO:NULO" do motor legado.
-  // Mesmo sourceId + mesma página é a única pista local de reingestão sem chave.
-  return `MESMA_FONTE:${JSON.stringify([fonte.sourceType, fonte.sourceId, fonte.page ?? null])}`;
+  // Mesmo sourceId + página só é comparável no mesmo encontro/data clínica.
+  const contexto = fonte.contexto;
+  const data = contexto ? normalizarDataCivil(contexto.dataClinica) : null;
+  if (contexto && (!contexto.encounterId.trim() || !data)) {
+    return `SEM_CHAVE:${fonte.recordingId}`;
+  }
+  return `MESMA_FONTE:${JSON.stringify([
+    fonte.sourceType, fonte.sourceId, fonte.page ?? null,
+    contexto?.encounterId.trim() ?? null, data,
+  ])}`;
 }
 
 function referencia(fonte: FonteParaDedupe): ReferenciaFonteDedupe {
@@ -78,6 +91,7 @@ function referencia(fonte: FonteParaDedupe): ReferenciaFonteDedupe {
     recordingId: fonte.recordingId, sourceId: fonte.sourceId,
     ...(fonte.page === undefined ? {} : { page: fonte.page }),
     versao: fonte.examIdentity?.versao?.trim() || null,
+    ...(fonte.contexto === undefined ? {} : { contexto: fonte.contexto }),
   };
 }
 
@@ -91,6 +105,15 @@ function assinaturaDoFato(fato: ClinicalFact): string {
     confidence: fato.confidence, requiresConfirmation: fato.requiresConfirmation,
     regra: fato.regra ?? null,
   });
+}
+
+function conteudoSemCabecalhoDeImpressao(texto: string): string {
+  // Somente uma linha que contém EXCLUSIVAMENTE carimbo de impressão pode
+  // variar. Texto clínico ainda não reconhecido pelo extrator é comparado
+  // literalmente: achados discordantes jamais viram "mesmo laudo".
+  const carimbo = /^\s*(?:reimpresso|impresso)\s+em\s+\d{1,2}\/\d{1,2}\/\d{2,4}(?:\s+\d{1,2}:\d{2})?(?:\s*\(extra[cç][aã]o\s+\d{1,2}\/\d{1,2}\/\d{2,4}\))?\s*$/iu;
+  return texto.replace(/\r\n/g, "\n").split("\n")
+    .filter((linha) => !carimbo.test(linha)).join("\n").trim();
 }
 
 /** Propõe repetição com chave completa + conteúdo igual; nunca apaga fatos/versões. */
@@ -116,9 +139,7 @@ export function deduplicarFatos(
     const assinaturas = new Map<string, typeof documentos>();
     for (const documento of documentos) {
       const sinais = documento.fatos.map(assinaturaDoFato).sort();
-      // Sem fatos extraíveis, só a igualdade literal pode comprovar reingestão.
-      const conteudo = sinais.length ? JSON.stringify(sinais)
-        : JSON.stringify(["TEXTO_SEM_FATOS", documento.fonte.rawTranscript.replace(/\r\n/g, "\n")]);
+      const conteudo = JSON.stringify([sinais, conteudoSemCabecalhoDeImpressao(documento.fonte.rawTranscript)]);
       const versao = documento.fonte.examIdentity?.versao?.trim() || null;
       const assinatura = JSON.stringify([versao, conteudo]);
       const grupo = assinaturas.get(assinatura) ?? [];
@@ -130,6 +151,7 @@ export function deduplicarFatos(
       const primeiro = grupo[0]!.fatos;
       const repetidos = grupo.slice(1).flatMap(({ fatos: duplicados }) => duplicados.map((f) => f.id));
       repeticoes.push({
+        estado: "PENDENTE_REVISAO",
         chaveExame: chave,
         fontes: grupo.map(({ fonte }) => referencia(fonte)),
         fatoPrincipalIds: primeiro.map((f) => f.id),
