@@ -617,3 +617,9 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
 - Gatilhos de ordem no ditado: "vou pedir", "vou solicitar", "tá na hora de renovar X".
 - SIGTAP = MANTÉM: leitura = mantém regra atual (qualquer mudança gera nova versão, nada sobrescreve) — confirmar.
 - Ferro EV/VO segue sem dose deduzida (médico decide). Código delegado (fast-worker) em `f0/w1-integrado`.
+
+## PLN-037 — 2026-10-08 — fluxo clínico como norte (fonte M-AM, OPS-003/004)
+
+- Registrados 6 blocos + agrupamento funcional + eixos longitudinal/transversal; mapa ideia × código × lacuna e fatias F1–F8.
+- Decisões do operacional anotadas: D-W9-73 (CTCAE v6 pura, plaquetas 20.000 = G3), D-W9-74 (tontura boolean|null), D-W9-75 (texto livre → grau CTCAE sugerido; canal do paciente sem prescrição), D-W9-76 (só vertigem nova alerta SNC), D-W9-77 (Q1/Q2/Q3/Q5).
+- Nota: PLN-036 já usado (M-AL); este registro é PLN-037.
