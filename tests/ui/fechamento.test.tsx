@@ -31,9 +31,9 @@ const febre: Alerta = {
 };
 
 const documentos: DocumentoBundleVisao[] = [
-  { documentId: "doc-evo", documentVersion: 1, titulo: "evolução", preMarcado: true, visivel: true },
-  { documentId: "doc-rx", documentVersion: 2, titulo: "receita", preMarcado: true, visivel: true },
-  { documentId: "doc-oculto", documentVersion: 1, titulo: "laudo não exibido", preMarcado: true, visivel: false },
+  { documentId: "doc-evo", documentVersion: 1, titulo: "evolução", preMarcado: true, visivel: true, origem: "MODELO_MEDICO" },
+  { documentId: "doc-rx", documentVersion: 2, titulo: "receita", preMarcado: true, visivel: true, origem: "MODELO_MEDICO" },
+  { documentId: "doc-oculto", documentVersion: 1, titulo: "laudo não exibido", preMarcado: true, visivel: false, origem: "MODELO_MEDICO" },
 ];
 
 afterEach(() => {

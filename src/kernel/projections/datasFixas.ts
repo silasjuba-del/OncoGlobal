@@ -95,7 +95,10 @@ function diasEntre(dataFato: string, dataReferencia: string): number {
 }
 
 function dias(data: DataFixa, dataReferencia: string): number | null {
-  return data.data === null ? null : diasEntre(data.data, dataReferencia);
+  if (data.data === null) return null;
+  const n = diasEntre(data.data, dataReferencia);
+  // Data posterior à referência não é "dias desde": fica ausente (PENDENTE na tela), nunca número negativo.
+  return n < 0 ? null : n;
 }
 
 function candidatosDeEstadiamento(vigentes: readonly ClinicalEvent[]): CandidatoEstadiamento[] {

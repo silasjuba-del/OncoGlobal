@@ -157,8 +157,8 @@ function alerta(alertaId: string, patientId: string, texto: string, e1: boolean)
 
 function documentos(prefixo: string): DocumentoBundleVisao[] {
   return [
-    { documentId: `doc-evo-${prefixo}`, documentVersion: 1, titulo: "evolução", preMarcado: true, visivel: true },
-    { documentId: `doc-rx-${prefixo}`, documentVersion: 1, titulo: "receita", preMarcado: true, visivel: true },
+    { documentId: `doc-evo-${prefixo}`, documentVersion: 1, titulo: "evolução", preMarcado: true, visivel: true, origem: "MODELO_MEDICO" },
+    { documentId: `doc-rx-${prefixo}`, documentVersion: 1, titulo: "receita", preMarcado: true, visivel: true, origem: "MODELO_MEDICO" },
   ];
 }
 

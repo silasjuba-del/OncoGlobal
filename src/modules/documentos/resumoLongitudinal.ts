@@ -489,10 +489,16 @@ function secoes(e: EntradaResumoLongitudinal): SecaoResumo[] {
   ];
 }
 
+const REGRAS_SO_TELA = new Set([
+  "**Regra:** preservar medidas, datas e linguagem da fonte. `Suspeito ≠ confirmado`.",
+  "**Não atribuir grau CTCAE sem elementos suficientes.**",
+]);
+
 function montar(e: EntradaResumoLongitudinal, incluiIa: boolean): string {
   const blocos = secoes(e)
     .filter((s) => incluiIa || s.soTela !== true)
-    .map((s) => `### ${s.titulo}\n${s.corpo.join("\n")}`.trimEnd());
+    // Regras do template são instrução de trabalho (tela), não conteúdo clínico: saem do documento.
+    .map((s) => `### ${s.titulo}\n${s.corpo.filter((l) => incluiIa || !REGRAS_SO_TELA.has(l)).join("\n")}`.trimEnd());
   return [cabecalho(e).join("\n"), ...blocos].join("\n\n").trimEnd() + "\n";
 }
 

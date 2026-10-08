@@ -188,7 +188,7 @@ it("F4 sintetico: caixa -> ORK fake -> draft -> revisao -> ledger -> delta -> bu
       registros={documentosServidor.map((d) => ({ id: d.draftId, expectedRevision: 0 }))}
       documentos={documentosServidor.map((d) => ({ documentId: d.documentId,
         documentVersion: d.documentVersion, titulo: "evolucao",
-        preMarcado: bundle.itens[0]!.preMarcado, visivel: true }))}
+        preMarcado: bundle.itens[0]!.preMarcado, visivel: true, origem: "MODELO_MEDICO" as const }))}
       alertasVermelhosExibidos={[]} idempotencyKey="confirmar-documento-teste"
       autorExibido="Medico Teste CRM-TESTE"
       alvoImpressao={{ tipo: "DOCUMENTO", id: documentosServidor[0]!.documentId,

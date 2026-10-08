@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { z } from "zod";
 import { ActionIntent, ConfirmarBloco, type Alerta } from "../../contracts/operacao.js";
-import { Bundle, type DocumentoBundleVisao } from "./Bundle.js";
+import { Bundle, marcadoInicialmente, type DocumentoBundleVisao } from "./Bundle.js";
 
 type Confirmar = z.infer<typeof ConfirmarBloco>;
 type Bloco = Confirmar["bloco"];
@@ -16,7 +16,7 @@ export interface AlvoImpressao {
 function marcacaoInicial(documentos: readonly DocumentoBundleVisao[]): Readonly<Record<string, boolean>> {
   const marcados: Record<string, boolean> = {};
   for (const d of documentos) {
-    if (d.visivel) marcados[d.documentId] = d.preMarcado;
+    if (d.visivel) marcados[d.documentId] = marcadoInicialmente(d);
   }
   return marcados;
 }

@@ -219,7 +219,10 @@ export function antiglosa(apac: Apac, ctx: ContextoAntiglosa): VereditoAntiglosa
         add("AG-02", "cidPrincipal", "BLOQUEIA_EXPORTACAO", `CID ${cid} não é compatível com o procedimento ${proc.codigo} na competência ${apac.competencia}.`, F.cid);
     }
     // AG-04 sexo
-    if (sexo && proc.sexo && proc.sexo !== "AMBOS" && sexo !== proc.sexo)
+    // Mesmo criterio do AG-13: so M/F decidem; outra forma vira PENDENTE (nunca bloqueio falso).
+    if (sexo && proc.sexo && proc.sexo !== "AMBOS" && sexo !== "M" && sexo !== "F")
+      add("AG-04", "pacienteSexo", "ALERTA", `PENDENTE: sexo "${sexo}" nao e M ou F; restricao de sexo do procedimento ${proc.codigo} nao avaliada.`, F.sigtap);
+    else if (sexo && proc.sexo && proc.sexo !== "AMBOS" && sexo !== proc.sexo)
       add("AG-04", "pacienteSexo", "BLOQUEIA_EXPORTACAO", `Procedimento ${proc.codigo} é restrito ao sexo ${proc.sexo}; paciente ${sexo}.`, F.sigtap);
     // AG-03 idade
     if (idadeMeses !== null

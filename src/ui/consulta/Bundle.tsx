@@ -4,9 +4,19 @@ export interface DocumentoBundleVisao {
   titulo: string;
   preMarcado: boolean;
   visivel: boolean;
+  /**
+   * Decisão Dr. Silas (2026-10-08): só pré-marca o que vem do MODELO SALVO pelo médico para o protocolo/ciclo.
+   * Qualquer outra origem (sugestão do sistema, pack sem modelo) nasce desmarcada, mesmo com preMarcado=true.
+   */
+  origem?: "MODELO_MEDICO" | "SUGESTAO";
 }
 
-/** Lista pré-marcada pelo pack. O médico desmarca. Documento invisível não entra na tela. */
+/** Marcação inicial: pré-marca apenas documento do modelo salvo pelo médico. */
+export function marcadoInicialmente(d: DocumentoBundleVisao): boolean {
+  return d.preMarcado && d.origem === "MODELO_MEDICO";
+}
+
+/** Lista pré-marcada pelo modelo do médico. O médico desmarca. Documento invisível não entra na tela. */
 export function Bundle({
   documentos,
   marcados,
