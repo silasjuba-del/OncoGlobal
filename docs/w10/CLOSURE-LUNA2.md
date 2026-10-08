@@ -1,7 +1,9 @@
 # Encerramento Luna 2 — F05, F06 e F09
 
-Base: `367825e4e0ae3f9a088256d24a745fd5b3705844`  
-Branch: `closure/w10-luna2`  
+Base: `367825e4e0ae3f9a088256d24a745fd5b3705844`
+
+Branch: `closure/w10-luna2`
+
 Checkout: `C:\Users\silas\Projects\OncoGlobal-wt\w10-finish-luna2`
 
 ## F05 — proveniência e unidade de Hb
