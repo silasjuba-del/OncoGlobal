@@ -60,6 +60,8 @@ export default defineConfig(async () => {
       maxWorkers: 1,
       // npm run verify termina em `npm test` sem flag CLI; ainda assim, um arquivo por vez.
       fileParallelism: false,
+      // Sob carga (2.000+ testes num worker) varreduras e percursos de UI passam de 5s.
+      testTimeout: 30_000,
     },
   };
 });

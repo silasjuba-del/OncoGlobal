@@ -78,7 +78,7 @@ describe("W11-H30 · (a) varredura de PHI no repositório", () => {
             achados.push(`${relative(RAIZ, caminho)}: ${tipo} ${m[0]}`);
     }
     expect(achados).toEqual([]);
-  });
+  }, 60_000);
 });
 
 // ---------- (f) segredos e variáveis VITE_ ----------
