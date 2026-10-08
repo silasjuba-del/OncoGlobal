@@ -13,6 +13,10 @@ import type { AlvoImpressao } from "../consulta/BarraFechamento.js";
 import type { ItemDeltaVisao } from "../consulta/PainelDelta.js";
 import type { AfirmacaoVisao } from "../evidencia/CardEvidencia.js";
 import type { CartaoSalaoVisao } from "../salao/QuadroSalao.js";
+import type { DatasFixas } from "../../kernel/projections/datasFixas.js";
+import type { LinhaTratamento } from "../../kernel/projections/historicoTratamento.js";
+import type { AlertaPlaquetas } from "../../rules/plaquetasAlerta.js";
+import type { SaidaElegibilidadeCiclo } from "../../rules/elegibilidadeCiclo.js";
 
 export type CodigoPorta =
   | "SESSAO_EXPIRADA"
@@ -75,6 +79,16 @@ export interface ConsultaVisao {
     alvoImpressao: AlvoImpressao | null;
     alertasVermelhos: readonly Alerta[];
   };
+  /** W11-H22 (opcionais): calculados no servidor. Ausente = PENDENTE; campo nunca vira verde por omissão. */
+  datasFixas?: DatasFixas;
+  historicoTratamento?: {
+    linhas: readonly LinhaTratamento[];
+    estado: "PARCIAL" | "PENDENTE";
+    codigo: string | null;
+  };
+  /** null = limiar de plaquetas não configurado no corpus (PENDENTE na tela). */
+  alertaPlaquetas?: AlertaPlaquetas | null;
+  elegibilidade?: SaidaElegibilidadeCiclo;
 }
 
 export interface ItemAgendaVisao {

@@ -8,6 +8,7 @@ import { ProtocolTemplate } from "../contracts/w10/prescricao.js";
 import type { TabelaRegulatoria } from "../rules/prescricao/classificarDocumento.js";
 import { RulesetHeader } from "../contracts/agentes.js";
 import { lerRadsEmergencias } from "../rules/radsEmergencias.js";
+import { lerLimiarAlertaPlaquetas, type LimiarAlertaPlaquetas } from "../rules/plaquetasAlerta.js";
 
 const CaixaEnvelope = z.object({ schemaVersion: z.string(), versao: z.string(), caixas: z.array(CaixaNumerada) }).strict();
 const EntradaRegulatoria = z.object({ nomes: z.array(z.string()), tipo: PrescriptionDocumentType, fonte: z.string() }).strict();
@@ -61,8 +62,11 @@ export function carregarCorpusServidor() {
   const radsInput = ler("rulesets/rads-emergencias.v1.json");
   RulesetHeader.parse((radsInput as { header?: unknown }).header);
   const rads = lerRadsEmergencias(radsInput);
+  // W11-H22: limiar do alerta de plaquetas. Ausente ou inválido = alerta PENDENTE na visão, nunca silêncio.
+  let limiarPlaquetas: LimiarAlertaPlaquetas | null = null;
+  try { limiarPlaquetas = lerLimiarAlertaPlaquetas(ler("rulesets/lab-thresholds.v1.json")); } catch { /* PENDENTE na visão */ }
   return { caixas: caixaEnvelope.caixas.filter((c) => c.chave.startsWith("config.")),
     caixasTodas: caixaEnvelope.caixas, ruleset, regulatorio: table, receitasElegiveis,
-    templatesProtocolo: lerTemplatesProtocolo(), rads,
+    templatesProtocolo: lerTemplatesProtocolo(), rads, limiarPlaquetas,
     versoes: { caixas: caixaEnvelope.versao, regulatorio: table.versao, ruleset: ruleset.header.versao } };
 }
