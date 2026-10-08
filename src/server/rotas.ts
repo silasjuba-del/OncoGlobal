@@ -255,14 +255,15 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
       if (!lerPaciente(deps.db, parsed.data.patientId)) return reply(404, "PACIENTE_NAO_ENCONTRADO");
       const hoje = dataCivilDoServico(deps.agora(), "-03:00");
-      const agendaAtiva = hoje.estado === "OK"
+      const dataCivilHoje = hoje.estado === "OK" ? hoje.dataCivil : null;
+      const agendaAtiva = dataCivilHoje !== null
         && (deps.db.prepare("SELECT patientId,encounterId,payload FROM clinical_event WHERE tipo='AgendaEntry'").all() as Array<Record<string, unknown>>)
           .some((row) => {
             try {
               const outer = typeof row.payload === "string" ? JSON.parse(row.payload) as Record<string, unknown> : row.payload as Record<string, unknown>;
               const value = outer.data && typeof outer.data === "object" ? outer.data as Record<string, unknown> : outer;
               return row.patientId === parsed.data.patientId && value.patientId === parsed.data.patientId
-                && value.encounterId === parsed.data.encounterId && value.data === hoje.dataCivil;
+                && value.encounterId === parsed.data.encounterId && value.data === dataCivilHoje;
             } catch { return false; }
           });
       const permitido = lerTriagens(deps.db).some((item) => item.patientId === parsed.data.patientId
@@ -299,9 +300,10 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if ((existente?.revision ?? null) !== parsed.data.expectedRevision)
         return reply(409, "REVISAO_RASCUNHO_CONFLITANTE");
       const em = existente ? existente.criadoEm : deps.agora();
+      const dataCaptura = dataCivilDoServico(em, "-03:00");
       const fonte: Fonte = { sourceId: `triagem-${sha(draftId).slice(0, 24)}`, classe: "MANUAL",
-        localizador: "triagem presencial", dataClinica: dataCivilDoServico(em, "-03:00").estado === "OK"
-          ? dataCivilDoServico(em, "-03:00").dataCivil : null, dataCaptura: deps.agora(),
+        localizador: "triagem presencial", dataClinica: dataCaptura.estado === "OK" ? dataCaptura.dataCivil : null,
+        dataCaptura: deps.agora(),
         versao: "salao-triagem-v1", contentHash };
       const dado = <T>(valor: T | null, label: string) => valor === null
         ? { valor: null, estado: "PENDENTE" as const, campo: "AUSENTE" as const,
@@ -343,7 +345,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
             return value.campo === "liberacaoComCorteSalao" && value.triagemDraftId === draftId
               && typeof value.triagemRevision === "number" ? [value] : [];
           } catch { return []; }
-        }).find((value) => value.triagemRevision + 1 === draft.revision);
+        }).find((value) => typeof value.triagemRevision === "number"
+          && value.triagemRevision + 1 === draft.revision);
       if (priorDecision) {
         if (priorDecision.motivo === parsed.data.motivo)
           return reply(200, "REPLAY", { ...lerSalao(deps.db, deps.agora(), deps.salaoRuleset), codigo: "REPLAY" });

@@ -8,7 +8,7 @@ import { RevisaoExtracaoLocal } from "./consulta/RevisaoExtracaoLocal.js";
 import { TelaSalao } from "./telas/TelaSalao.js";
 import { CaixaCanal } from "./telas/canal/CaixaCanal.js";
 
-const agendaSchema = z.object({ itens: z.array(z.object({ patientId: z.string().min(1), encounterId: z.string().min(1), nome: z.string(), horario: z.string() })) });
+const agendaSchema = z.object({ itens: z.array(z.object({ patientId: z.string().min(1), encounterId: z.string().min(1).optional(), nome: z.string(), horario: z.string() })) });
 const consultaSchema = z.object({ patientId: z.string().min(1), encounterId: z.string().min(1), tumorLotId: z.string().nullable() });
 
 /** Explicit real-server view; never mounts the synthetic clinical chart. */
@@ -70,7 +70,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         }
       } catch { /* An active appointment can start a new encounter without prior clinical events. */ }
       const agendaEntry = agenda.find((item) => item.patientId === patientId);
-      if (!agendaEntry || !porta.selecionarContexto) {
+      if (!agendaEntry?.encounterId || !porta.selecionarContexto) {
         setMensagem("Consulta local indisponível para este paciente."); return;
       }
       await porta.selecionarContexto({ patientId, encounterId: agendaEntry.encounterId, tumorLotId: null });
@@ -107,7 +107,8 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
       </nav>
       {ocupado ? <p role="status">Abrindo consulta…</p> : null}
       {tela === "consulta" && contexto ? <div key={`${contexto.patientId}:${contexto.encounterId}:${contexto.tumorLotId ?? ""}`}>
-        <RevisaoExtracaoLocal porta={porta} contexto={contexto} patientLabel={pacienteAtivo?.nome} />
+        <RevisaoExtracaoLocal porta={porta} contexto={contexto}
+          {...(pacienteAtivo ? { patientLabel: pacienteAtivo.nome } : {})} />
         <PainelOncoassist porta={porta} contexto={contexto} />
       </div> : null}
       {tela === "salao" ? <TelaSalao porta={porta} /> : null}

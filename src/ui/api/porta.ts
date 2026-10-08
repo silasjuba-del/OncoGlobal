@@ -74,7 +74,7 @@ export interface ConsultaVisao {
 export interface ItemAgendaVisao {
   horario: string;
   patientId: string;
-  encounterId: string;
+  encounterId?: string | undefined;
   nome: string;
   prontuario: string;
   semaforo: Semaforo;
@@ -94,9 +94,9 @@ export interface PacienteTriagemVisao {
   encounterId: string;
   chegadaEm: string;
   nome: string;
-  draftId?: string | null;
-  revision?: number | null;
-  estadoRascunho?: "RASCUNHO" | "DECISAO_REGISTRADA";
+  draftId?: string | null | undefined;
+  revision?: number | null | undefined;
+  estadoRascunho?: "RASCUNHO" | "DECISAO_REGISTRADA" | null | undefined;
 }
 
 export interface DecisaoLiberacaoVisao {
@@ -126,7 +126,7 @@ export interface MensagemCanalVisao {
   redFlag: boolean;
   contatoId: string;
   patientId: string | null;
-  estadoVinculo?: "VINCULADO" | "SEM_VINCULO" | "CONFLITO" | "REVOGADO";
+  estadoVinculo?: "VINCULADO" | "SEM_VINCULO" | "CONFLITO" | "REVOGADO" | undefined;
   nomePaciente: string | null;
   candidatos: readonly CandidatoVinculoVisao[];
 }
@@ -185,7 +185,10 @@ export interface PortaConsulta {
   prepararRevisaoExtracao?(pedido: import("./revisaoExtracao.js").PedidoRevisaoExtracao, signal?: AbortSignal): Promise<import("./revisaoExtracao.js").RevisaoPreparada>;
   confirmarRevisaoExtracao?(pedido: import("./revisaoExtracao.js").PedidoRevisaoExtracao, signal?: AbortSignal): Promise<{ codigo: "GRAVADA" | "REPLAY" }>;
   oncoassistStatus?(signal?: AbortSignal): Promise<EstadoOncoassist>;
-  oncoassistFontes?(contexto: PedidoBundle, signal?: AbortSignal): Promise<FontesOncoassist>;
+  oncoassistFontes?(contexto: PedidoBundle, signal?: AbortSignal): Promise<{
+    fontes: FontesOncoassist["fontes"];
+    fontesSemVinculo?: FontesOncoassist["fontesSemVinculo"] | undefined;
+  }>;
   oncoassistClassificar?(pedido: PedidoBundle & { draftId: string }, signal?: AbortSignal): Promise<RespostaOncoassist>;
   login(senha: string): Promise<ResultadoLogin>;
   confirmar(bloco: ConfirmarBloco): Promise<ResultadoConfirmar>;

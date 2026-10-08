@@ -34,7 +34,7 @@ export const ConsultaResposta: z.ZodType<ConsultaVisao> = z.object({ hoje: DataC
     alertasVermelhos: z.array(Alerta) }),
 }).passthrough();
 export const AgendaResposta: z.ZodType<AgendaVisao> = z.object({ hoje: DataCivil, itens: z.array(z.object({
-  horario: Texto, patientId: Texto, encounterId: Texto, nome: Texto, prontuario: Texto, semaforo: Semaforo,
+  horario: Texto, patientId: Texto, encounterId: Texto.optional(), nome: Texto, prontuario: Texto, semaforo: Semaforo,
   pendentes: Count, preConsultaPronta: z.boolean(), contatosDesdeUltima: Count, temE1: z.boolean(),
 })) });
 export const SalaoResposta: z.ZodType<SalaoVisao> = z.object({ hoje: DataCivil, ruleset: SalaoRuleset,
