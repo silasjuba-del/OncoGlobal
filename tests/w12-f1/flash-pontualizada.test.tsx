@@ -86,7 +86,7 @@ describe("W12-F1 linha pontualizada", () => {
 describe("W12-F1 tarefas do retorno", () => {
   it("com modelo salvo: pré-marca só o que o modelo marca; imagem nasce desmarcada", () => {
     render(<ConsultaFlash {...props()} />);
-    expect(cb(/^Retorno/).checked).toBe(true);
+    expect(screen.queryByRole("checkbox", { name: /^Retorno/ })).toBeNull();
     expect(cb(/^Laboratório/).checked).toBe(true);
     expect(cb(/^Imagem/).checked).toBe(false);
     expect(screen.queryByText(/sem modelo padrão salvo/i)).toBeNull();
@@ -101,7 +101,7 @@ describe("W12-F1 tarefas do retorno", () => {
         })}
       />,
     );
-    expect(cb(/^Retorno/).checked).toBe(false);
+    expect(screen.queryByRole("checkbox", { name: /^Retorno/ })).toBeNull();
     expect(cb(/^Laboratório/).checked).toBe(false);
     expect(cb(/^Imagem/).checked).toBe(false);
     expect(screen.getByText(/sem modelo padrão salvo/i)).toBeTruthy();
@@ -109,7 +109,7 @@ describe("W12-F1 tarefas do retorno", () => {
 
   it("mostra o prazo do retorno", () => {
     render(<ConsultaFlash {...props()} />);
-    expect(cb(/^Retorno \(30 dias\)/)).toBeTruthy();
+    expect(screen.getByText(/^Retorno \(30 dias\)/)).toBeTruthy();
   });
 
   it("1 clique em Finalizar chama o fechamento com exatamente os itens marcados", () => {
@@ -117,12 +117,11 @@ describe("W12-F1 tarefas do retorno", () => {
     const aoSalvarRascunho = vi.fn();
     render(<ConsultaFlash {...props({ aoFinalizar, aoSalvarRascunho })} />);
     fireEvent.click(cb(/^Imagem/));
-    fireEvent.click(cb(/^Retorno/));
     fireEvent.click(screen.getByRole("button", { name: "FINALIZAR · IMPRIMIR · SAIR" }));
     expect(aoSalvarRascunho).not.toHaveBeenCalled();
     expect(aoFinalizar).toHaveBeenCalledTimes(1);
     const plano = aoFinalizar.mock.calls[0]?.[0] as PlanoFlash;
-    expect(plano.tarefasRetorno).toEqual({ retorno: false, laboratorio: true, imagem: true });
+    expect(plano.tarefasRetorno).toEqual({ retorno: true, laboratorio: true, imagem: true });
     expect(plano.apac.emitir).toBe(false);
   });
 

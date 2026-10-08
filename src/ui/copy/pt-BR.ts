@@ -300,6 +300,7 @@ export const COPY_PT_BR = {
   flashRetorno: {
     tituloTarefas: "Tarefas do retorno",
     retorno: "Retorno",
+    retornoSempre: "sempre incluído",
     laboratorio: "Laboratório",
     imagem: "Imagem (opcional)",
     semModeloPadrao: "Sem modelo padrão salvo: nada vem marcado",

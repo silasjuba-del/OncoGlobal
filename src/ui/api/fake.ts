@@ -277,6 +277,54 @@ function ficha(input: {
         alertasVermelhos: input.vermelhos,
       },
       ...camposW11(input.patientId),
+      ...camposW12(input.patientId),
+    },
+  };
+}
+
+const NI_AP = { estado: "NAO_INFORMADO", valor: null, origem: null, candidatos: [], confianca: "NORMAL" } as const;
+const ORIGEM_LAUDO = { tipo: "LAUDO", documentoId: "doc-lau-sint", dataDocumento: "2026-09-20", trecho: null } as const;
+const ORIGEM_ENC = { tipo: "ENCAMINHADOR", documentoId: "doc-enc-sint", dataDocumento: null, trecho: null } as const;
+const VAL_AP = (valor: unknown, origem: object) => ({ estado: "VALOR", valor, origem, candidatos: [], confianca: "NORMAL" });
+
+/** W12-F3: retrato transversal sintético (próstata) e dados da Flash. Só o paciente "multi" os recebe. */
+function camposW12(patientId: string): Pick<ConsultaVisao, "flash" | "retratoTransversal"> {
+  if (patientId !== ID.multi) return {};
+  return {
+    flash: {
+      exames: [{ data: "2026-09-20", nome: "Biópsia de próstata", fraseLaudo: "adenocarcinoma acinar", situacao: "SEM_REFERENCIA" }],
+      retornoDias: 30,
+      modeloPadraoSalvo: true,
+      laboratorioPreMarcado: true,
+      imagemPreMarcada: false,
+    },
+    retratoTransversal: {
+      pacienteRef: "Paciente Teste 05",
+      tumorIndice: true,
+      nucleo: {
+        histologia: VAL_AP("adenocarcinoma acinar", ORIGEM_LAUDO),
+        lateralidade: {
+          estado: "CONFLITO", valor: null, origem: null, confianca: "NORMAL",
+          candidatos: [
+            { valor: "DIREITA", origem: ORIGEM_LAUDO },
+            { valor: "ESQUERDA", origem: ORIGEM_ENC },
+          ],
+        },
+        topografia: NI_AP,
+        grauHistologico: VAL_AP("Grupo 2", ORIGEM_LAUDO),
+        cTNM: VAL_AP("cT2N0M0", ORIGEM_ENC),
+        pTNM: NI_AP, ypTNM: NI_AP, estadio: NI_AP, tamanhoMm: NI_AP, profundidade: NI_AP,
+        linfonodos: NI_AP, metastase: NI_AP, invasaoAngiolinfatica: NI_AP, invasaoPerineural: VAL_AP(true, ORIGEM_LAUDO),
+        margem: NI_AP, necrose: NI_AP, indiceMitotico: NI_AP, ki67Pct: NI_AP, neoadjuvancia: NI_AP,
+        respostaNeoadjuvancia: NI_AP, progressaoNaVigencia: NI_AP,
+      },
+      extensao: {
+        tumor: "PROSTATA",
+        gleason: VAL_AP({ primario: 3, secundario: 4 }, ORIGEM_LAUDO),
+        isup: VAL_AP(2, ORIGEM_LAUDO),
+        psaNgMl: VAL_AP(8.5, ORIGEM_ENC),
+        fragmentosPositivos: NI_AP,
+      },
     },
   };
 }

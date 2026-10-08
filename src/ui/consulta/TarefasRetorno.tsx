@@ -18,9 +18,8 @@ export function TarefasRetorno({
   modeloPadraoSalvo: boolean;
   onAlternar: (id: TarefaRetornoId) => void;
 }) {
-  const rotuloRetorno = prazoDias === null ? C.retorno : `${C.retorno} (${prazoDias} dias)`;
-  const linhas: readonly { id: TarefaRetornoId; rotulo: string }[] = [
-    { id: "retorno", rotulo: rotuloRetorno },
+  const rotuloRetorno = prazoDias === null ? `${C.retorno} (prazo PENDENTE)` : `${C.retorno} (${prazoDias} dias)`;
+  const linhas: readonly { id: Exclude<TarefaRetornoId, "retorno">; rotulo: string }[] = [
     { id: "laboratorio", rotulo: C.laboratorio },
     { id: "imagem", rotulo: C.imagem },
   ];
@@ -29,6 +28,9 @@ export function TarefasRetorno({
       <legend>{C.tituloTarefas}</legend>
       {modeloPadraoSalvo ? null : <p role="note">{C.semModeloPadrao}</p>}
       <ul>
+        <li data-tarefa="retorno">
+          {rotuloRetorno} · {C.retornoSempre}
+        </li>
         {linhas.map((l) => (
           <li key={l.id}>
             <label>
