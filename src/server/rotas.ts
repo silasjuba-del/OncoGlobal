@@ -15,7 +15,7 @@ import { autorizarSaida } from "./autorizacao.js";
 import { hashConteudoExibido, type GerenciadorSessao } from "./sessao.js";
 import { executarPipelineExtracao, type ExtractionInput } from "../orchestration/pipeline-extracao.js";
 import { g07Lateralidade, g08AnatomiaSexo, g09PtDeBiopsia } from "../kernel/harness/gates.js";
-import { lerAgenda, lerApacs, lerCanal, lerConsulta, lerMensagensChat, lerPaciente, lerRecist, lerSalao, lerTriagens } from "./leituras.js";
+import { lerAgenda, lerApacs, lerCanal, lerConsulta, lerLotes, lerMensagensChat, lerPaciente, lerRecist, lerSalao, lerTriagens } from "./leituras.js";
 import type { SettingsService } from "../config/settings.js";
 import type { carregarCorpusServidor } from "./corpus.js";
 import { parserLinha } from "../rules/prescricao/parserLinha.js";
@@ -150,9 +150,10 @@ function exibirBundle(deps: ServidorDeps, token: string,
     if (!draft || draft.patientId !== input.patientId)
       return { status: 409, body: { codigo: "DRAFT_NAO_ENCONTRADO" } };
     const contexto = contextoDraft(draft.payload);
-    if (contexto && contexto.encounterId !== input.encounterId)
+    if (!contexto) return { status: 409, body: { codigo: "DRAFT_CONTEXTO_AUSENTE" } };
+    if (contexto.encounterId !== input.encounterId)
       return { status: 409, body: { codigo: "DRAFT_ENCONTRO_DIVERGENTE" } };
-    if (contexto && input.tumorLotId !== undefined && contexto.tumorLotId !== input.tumorLotId)
+    if (contexto.tumorLotId !== (input.tumorLotId ?? null))
       return { status: 409, body: { codigo: "DRAFT_LOTE_DIVERGENTE" } };
     // Generic facts also need a server-issued reference and exact displayed content.
     const doc = payloadDocumento(draft.payload) ?? { documentId: draft.draftId, documentVersion: draft.revision + 1 };
@@ -186,7 +187,7 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
     return { status: 409, body: { codigo: "DRAFT_NAO_ENCONTRADO" } };
   if (drafts.some((draft) => {
     const contexto = contextoDraft(draft?.payload);
-    return contexto && (contexto.encounterId !== input.encounterId || contexto.tumorLotId !== input.tumorLotId);
+    return !contexto || contexto.encounterId !== input.encounterId || contexto.tumorLotId !== input.tumorLotId;
   })) return { status: 409, body: { codigo: "DRAFT_FORA_DO_ESCOPO" } };
   if (drafts.some((draft) => {
     const kind = draft?.payload && typeof draft.payload === "object" && "kind" in draft.payload
@@ -291,7 +292,11 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "selecionarContexto") {
       const parsed = z.object({ patientId: Id, encounterId: Id, tumorLotId: Id.nullable() }).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
+      deps.sessoes.selecionarConsulta(token, null);
       if (!lerPaciente(deps.db, parsed.data.patientId)) return reply(404, "PACIENTE_NAO_ENCONTRADO");
+      if (parsed.data.tumorLotId !== null
+        && !lerLotes(deps.db, parsed.data.patientId).some((lote) => lote.tumorLotId === parsed.data.tumorLotId))
+        return reply(409, "TUMOR_LOT_FORA_DO_PACIENTE");
       const hoje = dataCivilDoServico(deps.agora(), "-03:00");
       const dataCivilHoje = hoje.estado === "OK" ? hoje.dataCivil : null;
       const agendaAtiva = dataCivilHoje !== null
@@ -891,7 +896,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         || (contexto.tumorLotId ?? null) !== parsed.data.tumorLotId)
         return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
       const consultaRevisada = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao, parsed.data.tumorLotId);
-      const resumoClinico = "codigo" in consultaRevisada ? null : consultaRevisada.resumoConfirmadoParaDocumento;
+      if ("codigo" in consultaRevisada) return reply(409, consultaRevisada.codigo);
+      const resumoClinico = consultaRevisada.resumoConfirmadoParaDocumento;
       const result = "expectedRevision" in parsed.data
         ? salvarRascunhoFlash(deps.db, deps.agora(), parsed.data)
         : prepararFinalizacaoFlash(deps.db, deps.agora(), parsed.data, resumoClinico);

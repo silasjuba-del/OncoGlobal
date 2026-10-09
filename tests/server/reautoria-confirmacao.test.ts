@@ -5,8 +5,9 @@ import { ambienteHttp } from "./http-fixture.js";
 
 const scope = { patientId: "Paciente Teste 01", encounterId: "consulta-01", tumorLotId: "lote-01" };
 const doc = { documentId: "doc-01", documentVersion: 1, documentHash: "declarado", texto: "conteúdo sintético" };
-const envelope = (id: string, payload: unknown) => ({ draftId: id, patientId: scope.patientId,
-  payload, sourceId: "fonte-teste", rawRef: "local", revision: 0, diagnostics: [], criadoEm: "2026-10-05T12:00:00Z" });
+const envelope = (id: string, payload: Record<string, unknown>) => ({ draftId: id, patientId: scope.patientId,
+  payload: { ...payload, contexto: { encounterId: scope.encounterId, tumorLotId: scope.tumorLotId } },
+  sourceId: "fonte-teste", rawRef: "local", revision: 0, diagnostics: [], criadoEm: "2026-10-05T12:00:00Z" });
 
 it.each(["vazio", "fato-oculto", "documento-oculto", "desmarcado", "duplicado", "lote", "alias"])(
   "reauditoria: rejeita %s atomicamente", async (cenario) => {
@@ -43,7 +44,8 @@ it("fato genérico exibido e selecionado pode ser confirmado, sem assinatura doc
     const bundle = await post("/consulta/bundle", { ...scope, draftIds: ["fato"] });
     expect(bundle.status).toBe(200);
     const exibidos = JSON.parse(bundle.body).documentos;
-    expect(exibidos[0].conteudo).toEqual({ campo: "sintetico", valor: "revisado" });
+    expect(exibidos[0].conteudo).toEqual({ campo: "sintetico", valor: "revisado",
+      contexto: { encounterId: "consulta-01", tumorLotId: "lote-01" } });
     const pedido = { ...scope, bloco: "EVOLUCAO", registros: [{ id: "fato", expectedRevision: 0 }],
       documentosExibidos: exibidos.map(({ documentId, documentVersion }: typeof doc) => ({ documentId, documentVersion })),
       reconhecerAlertas: [], idempotencyKey: "fato-exibido-01" };

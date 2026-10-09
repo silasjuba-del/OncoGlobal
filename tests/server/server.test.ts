@@ -4,6 +4,7 @@ import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { Server } from "node:http";
+import type { DatabaseSync } from "node:sqlite";
 import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { salvarDraft } from "../../src/kernel/ledger/drafts.js";
 import { listarEventos } from "../../src/kernel/ledger/ledger.js";
@@ -12,13 +13,17 @@ import { criarServidorLocal } from "../../src/server/http.js";
 import { criarGerenciadorSessao } from "../../src/server/sessao.js";
 
 const dirs: string[] = [], servers: Server[] = [];
+const databases = new Set<DatabaseSync>();
 afterEach(async () => {
   await Promise.all(servers.splice(0).map((server) => new Promise<void>((resolve) => server.close(() => resolve()))));
+  for (const db of databases) db.close();
+  databases.clear();
   for (const dir of dirs.splice(0)) rmSync(dir, { force: true, recursive: true });
 });
 async function fixture() {
   const dir = mkdtempSync(join(tmpdir(), "oncoglobal-http-")); dirs.push(dir);
   const db = abrirLedger(join(dir, "test.sqlite"));
+  databases.add(db);
   const em = "2026-10-05T12:00:00.000Z";
   let now = em, actions = 0;
   const logs: { rota: string; codigo: string; status: number }[] = [];
@@ -44,7 +49,7 @@ async function fixture() {
   const login = await post("/login", { senha: "senha-de-teste-sintetica" });
   const token = login.json.token as string;
   return { db, deps, sessoes, post, token, logs, em, now: (date: string) => { now = date; },
-    actions: () => actions, close: () => db.close() };
+    actions: () => actions, close: () => { if (databases.delete(db)) db.close(); } };
 }
 it("INV-04 payload medicoId rejeitado; sessão expirada 401", async () => {
   const f = await fixture();
@@ -59,7 +64,8 @@ it("INV-04 payload medicoId rejeitado; sessão expirada 401", async () => {
 it("G-25 rejeita assinatura fora do bundle; validação grava N eventos e não imprime", async () => {
   const f = await fixture();
   for (const id of ["d1", "d2"]) salvarDraft(f.db, { draftId: id, patientId: "Paciente Teste 01",
-    sourceId: "sintetico", rawRef: `opaco-${id}`, payload: { campo: id, valor: "sintético" },
+    sourceId: "sintetico", rawRef: `opaco-${id}`, payload: { campo: id, valor: "sintético",
+      contexto: { encounterId: "e1", tumorLotId: "t1" } },
     diagnostics: [], revision: 0, criadoEm: f.em });
   // Positive path must actually display both facts through the HTTP route.
   expect((await f.post("/consulta/bundle", { patientId: "Paciente Teste 01", encounterId: "e1",
@@ -120,7 +126,8 @@ it("servidor recusa bind externo antes de ouvir", async () => {
 it("A13 assina só o conteúdo exato exibido; draft alterado após exibição → 409", async () => {
   const f = await fixture();
   const draft = { draftId: "doc-d", patientId: "Paciente Teste 01", sourceId: "sintetico", rawRef: "opaco-doc",
-    payload: { documentId: "doc-1", documentVersion: 1, documentHash: "declarado", texto: "texto sintético exibido" },
+    payload: { documentId: "doc-1", documentVersion: 1, documentHash: "declarado", texto: "texto sintético exibido",
+      contexto: { encounterId: "e1", tumorLotId: "t1" } },
     diagnostics: [], revision: 0, criadoEm: f.em };
   salvarDraft(f.db, draft);
   expect((await f.post("/consulta/bundle", { patientId: "Paciente Teste 01", encounterId: "e1",

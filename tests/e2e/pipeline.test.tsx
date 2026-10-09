@@ -79,7 +79,8 @@ it("F4 sintetico: caixa -> ORK fake -> draft -> revisao -> ledger -> delta -> bu
 
     // Snapshot N-1: uma revisao humana anterior feita pela rota real, sem assinatura de documento.
     salvarDraft(db, { draftId: "historico-teste", patientId, sourceId: "fonte-manual-teste",
-      rawRef: "opaco-historico", payload: { campo: "historico", valor: "baseline sintetico" },
+      rawRef: "opaco-historico", payload: { campo: "historico", valor: "baseline sintetico",
+        contexto: { encounterId: "consulta-teste-01", tumorLotId } },
       diagnostics: [], revision: 0, criadoEm: em });
     // Exibicao do fato anterior pela rota real: o contexto (paciente, consulta e lote) fica vinculado na sessao.
     const exibicaoAnterior = await post(port, "/consulta/bundle", {
@@ -120,7 +121,8 @@ it("F4 sintetico: caixa -> ORK fake -> draft -> revisao -> ledger -> delta -> bu
     // A decisao humana e simulada EXPLICITAMENTE: so depois do POST confirmado
     // o valor pode sair do envelope inerte e aparecer no ledger/projecao.
     salvarDraft(db, { draftId: "fato-teste", patientId, sourceId: envelope.sourceId,
-      rawRef: envelope.rawRef, payload: extraido, diagnostics: [], revision: 0, criadoEm: em });
+      rawRef: envelope.rawRef, payload: { ...extraido, contexto: { encounterId, tumorLotId } },
+      diagnostics: [], revision: 0, criadoEm: em });
     // Exibicao do fato sintetico pela rota real, no mesmo lote, antes de confirmar.
     const exibicaoRevisao = await post(port, "/consulta/bundle", {
       patientId, tumorLotId, encounterId, draftIds: ["fato-teste"],
@@ -163,7 +165,7 @@ it("F4 sintetico: caixa -> ORK fake -> draft -> revisao -> ledger -> delta -> bu
     expect(doc).toMatchObject({ camposVazios: [], conflitos: [],
       campos: { achado_teste: extraido.valor } });
     const docPayload = { documentId: "doc-teste", documentVersion: 1,
-      documentHash: doc.hash, texto: doc.campos.achado_teste };
+      documentHash: doc.hash, texto: doc.campos.achado_teste, contexto: { encounterId, tumorLotId } };
     salvarDraft(db, { draftId: "doc-draft-teste", patientId, sourceId: "render-teste",
       rawRef: "opaco-render", payload: docPayload, diagnostics: [], revision: 0, criadoEm: em });
     const exibicao = await post(port, "/consulta/bundle", {
