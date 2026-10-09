@@ -1,0 +1,48 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-luna4
+
+ ❯ tests/w12-f4/servidor-flash.test.ts (21 tests | 1 failed) 6114ms
+   ❯ W12-F4 · visão entrega a Flash do ledger (6)
+     × modelo com formato inesperado vale como sem modelo 249ms
+ ❯ tests/f0-fecha/flash-producao.test.tsx (4 tests | 1 failed) 445ms
+   ❯ F0 · Consulta Flash em produção (4)
+     × a caixa do modelo padrão existe no catálogo com o tipo REGRA_CLINICA suportado 11ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/f0-fecha/flash-producao.test.tsx > F0 · Consulta Flash em produção > a caixa do modelo padrão existe no catálogo com o tipo REGRA_CLINICA suportado
+Error: ENOENT: no such file or directory, open 'C:\Users\silas\Projects\OncoGlobal-wt\f0f-luna4\src\server\undefined'
+ ❯ ler src/server/corpus.ts:23:21
+     21| function ler(relativo: string): unknown {
+     22|   const caminho = fileURLToPath(new URL(`../../corpus/${relativo}`, im…
+     23|   return JSON.parse(readFileSync(caminho, "utf8")) as unknown;
+       |                     ^
+     24| }
+     25| function lerTemplatesProtocolo() {
+ ❯ carregarCorpusServidor src/server/corpus.ts:56:45
+ ❯ tests/f0-fecha/flash-producao.test.tsx:15:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/w12-f4/servidor-flash.test.ts > W12-F4 · visão entrega a Flash do ledger > modelo com formato inesperado vale como sem modelo
+TypeError: TIPO_CAIXA_INVALIDO
+ ❯ Object.changeBox src/config/settings.ts:401:129
+    399|       if (box.chave.startsWith("apac.")) throw new Error("CONTEXTO_PAC…
+    400|       if (box.editavelPor !== "MEDICO") throw new Error("CAIXA_SISTEMA…
+    401|       if (!validarTipo(box.tipo, requestInput.valorNovo) || !validarCh…
+       |                                                                                                                                 ^
+    402|       if (box.tipo === "REGRA_CLINICA" && requestInput.autorizacaoMedi…
+    403|       const normalizedValue = normalizarValor(box, requestInput.valorN…
+ ❯ tests/w12-f4/servidor-flash.test.ts:343:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 4 passed (6)
+      Tests  2 failed | 50 passed (52)
+   Start at  15:17:01
+   Duration  34.89s (tests 40%, environment 30%, import 17%, transform 13%)
+
+    Isolate  6 workers spawned · ~1.93s startup each (spawn + environment, per file)
+             at least ~9.64s faster with isolate: false — reuses workers across files instead of one per file
+

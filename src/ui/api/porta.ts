@@ -33,6 +33,16 @@ export interface ResultadoLogin {
   expiraEm: string | null;
 }
 
+export interface CaixaConfiguracaoFlash {
+  revision: number;
+  value: unknown | null;
+}
+
+export interface AlteracaoConfiguracaoFlash {
+  estado: "GRAVADA" | "REPLAY";
+  revision: number;
+}
+
 export interface ResultadoConfirmar {
   codigo: string;
   resultRef: string | null;
@@ -240,6 +250,9 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  /** Configuração global autenticada; ausente quando a porta não oferece persistência. */
+  lerCaixaConfiguracao?(numero: number): Promise<CaixaConfiguracaoFlash>;
+  alterarCaixaConfiguracao?(pedido: { numero: number; valorNovo: unknown; expectedRevision: number; operationId: string }): Promise<AlteracaoConfiguracaoFlash>;
   carregarFonteRevisao?(draftId: string, signal?: AbortSignal): Promise<import("./revisaoExtracao.js").FonteRevisao>;
   vincularFonteRevisao?(pedido: { exceptionId: string; acao: "LIGAR_PACIENTE"; patientId: string;
     sourceId: string; draftId: string; expectedRevision: number; encounterId: string;
