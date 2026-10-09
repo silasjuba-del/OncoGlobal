@@ -3,6 +3,7 @@
 export { g16Owner, lerCatalogoDonos } from "./ownership.js";
 export type { CatalogoDonos, DonoDeclarado, VereditoG16 } from "./ownership.js";
 export { g06E1Destaque } from "../../modules/documentos/destaqueE1.js";
+export { decidirFonteAlertaPorCapabilityStatus } from "./capabilityStatus.js";
 import type { Semaforo } from "../../contracts/index.js";
 import { contemPhiResidual, type DicionarioPaciente } from "../llm/desidentificar.js";
 import {
