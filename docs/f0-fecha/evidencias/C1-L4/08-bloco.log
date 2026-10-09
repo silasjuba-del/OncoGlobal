@@ -1,0 +1,60 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal
+
+ ❯ tests/w10-luna5/http-config-real.test.ts (4 tests | 1 failed) 2085ms
+   ❯ W10 Luna5 · configurações pela API HTTP real (4)
+     × carrega o corpus compartilhado, nega leitura sem sessão e retorna o tema DIA por default 344ms
+ ❯ tests/w10-luna3/catalogos.test.ts (2 tests | 1 failed) 76ms
+   ❯ W10-LUNA3 corpus (2)
+     × keeps a strict, stable glossary with separate configuration and APAC fields 51ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/w10-luna3/catalogos.test.ts > W10-LUNA3 corpus > keeps a strict, stable glossary with separate configuration and APAC fields
+AssertionError: expected [ …(48) ] to have a length of 47 but got 48
+
+- Expected
++ Received
+
+- 47
++ 48
+
+ ❯ tests/w10-luna3/catalogos.test.ts:14:28
+     12|     const sources = json("corpus/glossario/fontes.v1.json");
+     13|     expect(catalog.schemaVersion).toBe("caixas.v1");
+     14|     expect(catalog.caixas).toHaveLength(47);
+       |                            ^
+     15|     const numbers = new Set<number>();
+     16|     const keys = new Set<string>();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/w10-luna5/http-config-real.test.ts > W10 Luna5 · configurações pela API HTTP real > carrega o corpus compartilhado, nega leitura sem sessão e retorna o tema DIA por default
+AssertionError: expected [ { numero: 1, …(6) }, …(47) ] to have a length of 47 but got 48
+
+- Expected
++ Received
+
+- 47
++ 48
+
+ ❯ tests/w10-luna5/http-config-real.test.ts:87:32
+     85|   it("carrega o corpus compartilhado, nega leitura sem sessão e retorn…
+     86|     const corpus = carregarCorpusServidor();
+     87|     expect(corpus.caixasTodas).toHaveLength(47);
+       |                                ^
+     88|     expect(corpus.caixas).toHaveLength(16);
+     89|     expect(corpus.caixasTodas.filter((box) => box.chave.startsWith("ap…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 61 passed (63)
+      Tests  2 failed | 497 passed (499)
+   Start at  17:12:01
+   Duration  97.39s (tests 47%, import 39%, transform 12%, worker 2%)
+
+     Import  205 modules were evaluated 1546 times · 27.06s total, 39% of tracked time
+             ~23.47s faster with isolate: false — shared modules are evaluated once per worker instead of once per file
+             learn more: https://vitest.dev/guide/improving-performance#test-isolation
+

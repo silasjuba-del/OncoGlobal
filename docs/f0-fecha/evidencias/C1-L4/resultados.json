@@ -1,0 +1,115 @@
+[
+  {
+    "segundos": 7.62,
+    "bloco": "01-tsc",
+    "resumo": [],
+    "exitCode": 0
+  },
+  {
+    "segundos": 0.58,
+    "bloco": "02-fronteiras",
+    "resumo": [
+      "fronteiras ok (295 arquivos)"
+    ],
+    "exitCode": 0
+  },
+  {
+    "segundos": 0.88,
+    "bloco": "03-corpus",
+    "resumo": [],
+    "exitCode": 0
+  },
+  {
+    "segundos": 56.04,
+    "bloco": "04-bloco",
+    "resumo": [
+      " Test Files  73 passed (73)",
+      "      Tests  546 passed (546)",
+      "   Duration  53.85s (import 67%, transform 19%, tests 10%, worker 4%)"
+    ],
+    "exitCode": 0
+  },
+  {
+    "segundos": 30.75,
+    "bloco": "05-bloco",
+    "resumo": [
+      " Test Files  36 passed (36)",
+      "      Tests  234 passed (234)",
+      "   Duration  29.07s (import 51%, tests 25%, transform 21%, worker 3%)"
+    ],
+    "exitCode": 0
+  },
+  {
+    "segundos": 34.16,
+    "bloco": "06-bloco",
+    "resumo": [],
+    "exitCode": -1073740791
+  },
+  {
+    "segundos": 224.86,
+    "bloco": "07-bloco",
+    "resumo": [
+      " Test Files  48 passed (48)",
+      "      Tests  131 passed (131)",
+      "   Duration  222.01s (environment 53%, tests 20%, import 20%, transform 6%, worker 1%)"
+    ],
+    "exitCode": 0
+  },
+  {
+    "segundos": 99.11,
+    "bloco": "08-bloco",
+    "resumo": [
+      " ❯ tests/w10-luna5/http-config-real.test.ts (4 tests | 1 failed) 2085ms",
+      " ❯ tests/w10-luna3/catalogos.test.ts (2 tests | 1 failed) 76ms",
+      "⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯",
+      " FAIL  tests/w10-luna3/catalogos.test.ts > W10-LUNA3 corpus > keeps a strict, stable glossary with separate configuration and APAC fields",
+      "AssertionError: expected [ …(48) ] to have a length of 47 but got 48",
+      " FAIL  tests/w10-luna5/http-config-real.test.ts > W10 Luna5 · configurações pela API HTTP real > carrega o corpus compartilhado, nega leitura sem sessão e retorna o tema DIA por default",
+      "AssertionError: expected [ { numero: 1, …(6) }, …(47) ] to have a length of 47 but got 48",
+      " Test Files  2 failed | 61 passed (63)",
+      "      Tests  2 failed | 497 passed (499)",
+      "   Duration  97.39s (tests 47%, import 39%, transform 12%, worker 2%)"
+    ],
+    "exitCode": 1
+  },
+  {
+    "segundos": 115.77,
+    "bloco": "09-bloco",
+    "resumo": [
+      " Test Files  44 passed (44)",
+      "      Tests  591 passed (591)",
+      "   Duration  113.70s (tests 48%, environment 23%, import 18%, transform 10%, worker 1%)"
+    ],
+    "exitCode": 0
+  },
+  {
+    "segundos": 43.02,
+    "bloco": "10-bloco",
+    "resumo": [
+      " Test Files  13 passed (13)",
+      "      Tests  64 passed (64)",
+      "   Duration  40.05s (tests 49%, import 22%, transform 19%, environment 9%, worker 1%)"
+    ],
+    "exitCode": 0
+  },
+  {
+    "segundos": 33.08,
+    "bloco": "redteam",
+    "resumo": [
+      " Test Files  31 passed (31)",
+      "      Tests  240 passed (240)",
+      "   Duration  31.82s (import 43%, tests 36%, transform 19%, worker 2%)"
+    ],
+    "exitCode": 0
+  },
+  {
+    "segundos": 10.4,
+    "bloco": "adv-w8",
+    "resumo": [
+      " Test Files  9 passed (9)",
+      "      Tests  41 passed (41)",
+      "   Duration  8.89s (tests 72%, import 14%, transform 9%, worker 5%)"
+    ],
+    "exitCode": 0
+  }
+]

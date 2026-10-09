@@ -84,8 +84,10 @@ afterEach(async () => { await harness.dispose(); });
 describe("W10 Luna5 · configurações pela API HTTP real", () => {
   it("carrega o corpus compartilhado, nega leitura sem sessão e retorna o tema DIA por default", async () => {
     const corpus = carregarCorpusServidor();
-    expect(corpus.caixasTodas).toHaveLength(47);
-    expect(corpus.caixas).toHaveLength(16);
+    expect(corpus.caixasTodas).toHaveLength(48);
+    expect(corpus.caixas).toHaveLength(17);
+    expect(corpus.caixas.find((box) => box.chave === "config.flash.modeloPadrao"))
+      .toMatchObject({ numero: 17, tipo: "REGRA_CLINICA", editavelPor: "MEDICO" });
     expect(corpus.caixasTodas.filter((box) => box.chave.startsWith("apac."))).toHaveLength(31);
 
     const unauthorized = await harness.post("/config/perfil", {});

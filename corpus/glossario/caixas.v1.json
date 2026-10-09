@@ -567,7 +567,7 @@
       "editavelPor": "MEDICO"
     },
     {
-      "numero": 132,
+      "numero": 17,
       "chave": "config.flash.modeloPadrao",
       "nome": "Modelo padrão da Consulta Flash",
       "significado": "Marcações iniciais de laboratório e imagem na Consulta Flash, configuradas pelo médico.",
