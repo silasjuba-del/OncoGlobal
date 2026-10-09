@@ -1,13 +1,8 @@
+import type { EntradaVertigem } from "../contracts/w12/regrasClinicas.js";
+export type { EntradaVertigem } from "../contracts/w12/regrasClinicas.js";
 // D-W9-76 · tontura não é critério. A exceção é vertigem subjetiva de início novo, sem histórico anterior.
-// PROVISORIO-W12: histórico e início novo não estão no contrato de Triagem. O texto do alerta sai do corpus.
+// Histórico e início novo são dados distintos. O texto do alerta sai do corpus.
 // Alerta nunca bloqueia. Histórico ausente não vira "novo".
-
-export interface EntradaVertigem {
-  tontura: boolean | null;
-  historicoAnterior: boolean | null;
-  inicioNovo: boolean | null;
-}
-
 export interface AchadoVertigem {
   codigo: string;
   texto: string;

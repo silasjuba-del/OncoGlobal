@@ -102,8 +102,8 @@ export function avaliarTriagem(
   const fc = t.fc.valor;
   if (pendenteSeNulo(fc, "fc", "frequência cardíaca ausente", ctx, rs, pendentes) && plausivel.fc) {
     if (fc > c.fcMax) cortes.push(mot("corte.fc.alta", "frequência cardíaca acima do limite", rs));
-    // D-W9-58 · FC < 50 corta (D-W9-37). O campo do contrato continua fcMinNaoCorta; igual ao limite passa.
-    else if (fc < c.fcMinNaoCorta) {
+    // D-W9-58 · FC abaixo de fcMin corta (D-W9-37); igual ao limite passa.
+    else if (fc < c.fcMin) {
       cortes.push(mot("corte.fc.baixa", "frequência cardíaca abaixo do limite", rs));
     }
   }
@@ -152,7 +152,7 @@ export function avaliarTriagem(
     }
   }
 
-  // D-W9-76 · tontura não corta, não pesa no ECOG e não anota naoCorte. A chave ecog2ComTonturaCorta fica no JSON por causa do schema.
+  // D-W9-76 · tontura não corta, não pesa no ECOG e não anota naoCorte.
   // D-W9-74 · null é desconhecido: PENDENTE, nunca false.
   if (t.tontura === null) pendentes.push(mot("pendente.tontura", "tontura desconhecida; não vira ausência", rs));
 

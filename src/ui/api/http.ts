@@ -12,6 +12,9 @@ import {
   type ResultadoLogin,
 } from "./porta.js";
 
+const CaixaConfiguracaoResposta = z.object({ revision: z.number().int().nonnegative(), value: z.unknown().nullable() }).passthrough();
+const AlteracaoConfiguracaoResposta = z.object({ estado: z.enum(["GRAVADA", "REPLAY"]), revision: z.number().int().nonnegative() }).passthrough();
+
 export interface OpcoesHttp {
   onSessaoExpirada: () => void;
 }
@@ -69,6 +72,18 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   }
 
   return {
+    async lerCaixaConfiguracao(numero) {
+      const { status, json } = await enviar("/config/caixa/ler", { numero }, true);
+      const parsed = CaixaConfiguracaoResposta.safeParse(json);
+      if (status !== 200 || !parsed.success) throw new ErroPorta(codigoDe(json, "PAYLOAD_INVALIDO"));
+      return parsed.data;
+    },
+    async alterarCaixaConfiguracao(pedido) {
+      const { status, json } = await enviar("/config/caixa/alterar", pedido, true);
+      const parsed = AlteracaoConfiguracaoResposta.safeParse(json);
+      if (status !== 200 || !parsed.success) throw new ErroPorta(codigoDe(json, "PAYLOAD_INVALIDO"));
+      return parsed.data;
+    },
     // W12-F4: o servidor recusa com um código (sem dado clínico); a UI mostra esse código e mantém o overlay.
     async salvarRascunhoFlash(pedido, signal) {
       const { status, json } = await enviar("/consulta/flash/rascunho", pedido, true, signal);

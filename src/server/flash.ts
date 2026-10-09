@@ -10,10 +10,7 @@ import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.j
 import type { FlashVisao } from "../ui/api/porta.js";
 import { hashConteudoExibido } from "./sessao.js";
 
-/** PROVISORIO-W12: chave da caixa de configuração do modelo padrão da Flash. Ausente do corpus = sem modelo. */
-export const CHAVE_CAIXA_MODELO_FLASH = "config.flash.modeloPadrao";
-
-/** PROVISORIO-W12: tipos de evento que carregam laudo com frase (data.dataClinica, data.fraseLaudo, data.nome). */
+/** Tipos de evento que carregam laudo com frase (data.dataClinica, data.fraseLaudo, data.nome). */
 const TIPOS_EXAME_COM_LAUDO = new Set(["Biopsy", "ImagingReport", "ExameLaudo", "LabResult"]);
 const TIPO_DOC = {
   evolucao: "FLASH_EVOLUCAO",
@@ -30,7 +27,8 @@ export interface ModeloFlash { laboratorio: boolean; imagem: boolean }
 export function lerModeloFlash(valor: unknown): ModeloFlash | null {
   if (!valor || typeof valor !== "object" || Array.isArray(valor)) return null;
   const v = valor as Record<string, unknown>;
-  if (typeof v.laboratorio !== "boolean" || typeof v.imagem !== "boolean") return null;
+  if (Object.keys(v).length !== 2 || !Object.hasOwn(v, "laboratorio") || !Object.hasOwn(v, "imagem")
+    || typeof v.laboratorio !== "boolean" || typeof v.imagem !== "boolean") return null;
   return { laboratorio: v.laboratorio, imagem: v.imagem };
 }
 

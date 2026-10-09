@@ -1,0 +1,13 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-luna4
+
+
+ Test Files  18 passed (18)
+      Tests  82 passed (82)
+   Start at  15:38:15
+   Duration  96.43s (tests 37%, import 28%, transform 26%, environment 9%, worker 1%)
+
+     Import  132 modules were evaluated 1007 times · 21.82s total, 28% of tracked time
+             ~18.96s faster with isolate: false — shared modules are evaluated once per worker instead of once per file
+             learn more: https://vitest.dev/guide/improving-performance#test-isolation
+

@@ -106,7 +106,7 @@ export function FormTriagem({
   const [coleta, setColeta] = useState("");
   const [ecog, setEcog] = useState("");
   const [grau, setGrau] = useState("");
-  const [tontura, setTontura] = useState(false);
+  const [tontura, setTontura] = useState<boolean | null>(null);
   const [recurso, setRecurso] = useState<Recurso>("AMBULATORIAL");
   const [idade, setIdade] = useState("");
   const [resultado, setResultado] = useState<ReturnType<typeof avaliarTriagem> | null>(null);
@@ -126,6 +126,8 @@ export function FormTriagem({
       ecog: dadoNumero(textoParaInteiro(ecog), fonte),
       grauCtcae: dadoNumero(textoParaInteiro(grau), fonte),
       tontura,
+      vertigemHistoricoAnterior: null,
+      vertigemInicioNovo: null,
       recurso,
       idadeAnos,
       chegadaEm,
@@ -197,8 +199,13 @@ export function FormTriagem({
         <input value={idade} onChange={(e) => setIdade(e.target.value)} />
       </label>
       <label>
-        <input type="checkbox" checked={tontura} onChange={(e) => setTontura(e.target.checked)} />
         Tontura
+        <select aria-label="Tontura" value={tontura === null ? "NAO_SEI" : tontura ? "SIM" : "NAO"}
+          onChange={(e) => setTontura(e.target.value === "NAO_SEI" ? null : e.target.value === "SIM")}>
+          <option value="NAO_SEI">Não sei</option>
+          <option value="SIM">Sim</option>
+          <option value="NAO">Não</option>
+        </select>
       </label>
       <label>
         Recurso

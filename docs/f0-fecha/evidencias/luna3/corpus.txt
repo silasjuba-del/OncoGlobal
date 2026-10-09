@@ -1,0 +1,3 @@
+$ node scripts/validate-corpus.mjs
+corpus ok (125 arquivos)
+exit code: 0

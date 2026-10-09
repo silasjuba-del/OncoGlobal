@@ -4,14 +4,14 @@
   "regra": "igual ao limite passa",
   "cortes": {
     "pasMax": 160, "pasMin": 90,
-    "fcMax": 120, "fcMinNaoCorta": 50,
+    "fcMax": 120, "fcMin": 50,
     "spo2Min": 88,
     "tempDecimosMax": 378,
     "hbDgDlMin": 80,
     "ancMin": 1500,
     "plqMin": 100000,
     "grauCtcaeCorta": 3, "grauCtcaeEmergencia": 4,
-    "ecogCorta": [3, 4], "ecog2ComTonturaCorta": false
+    "ecogCorta": [3, 4]
   },
   "vertigem": {
     "decisao": "D-W9-76",
@@ -42,7 +42,7 @@
   "aplicaSemMedicoSe": ["SEM_CORTE", "SEM_PENDENCIA", "PRESCRICAO_VIGENTE"],
   "ciclosLiberadosPorPrescricao": 2,
   "portoes": {
-    "nota": "Dois portões nomeados. Não fundir os objetos (D-W9-22g). Igual ao limite passa. Alerta: bloqueiaSalvar é false. header.versao 1.1.0 (D-W9-58). FN-01 corta FC < cortes.fcMinNaoCorta (o nome do campo continua no contrato; o comportamento deixou de ser anotação). PAS > 160 está no corte do salão e na FN-01. FC > 120 continua só na FN-01: a triagem do ciclo tem teto próprio (110) e o portão corteSalao não absorve esse teto.",
+    "nota": "Dois portões nomeados. Não fundir os objetos (D-W9-22g). Igual ao limite passa. Alerta: bloqueiaSalvar é false. header.versao 1.1.0 (D-W9-58). FN-01 corta FC < cortes.fcMin (o nome do campo continua no contrato; o comportamento deixou de ser anotação). PAS > 160 está no corte do salão e na FN-01. FC > 120 continua só na FN-01: a triagem do ciclo tem teto próprio (110) e o portão corteSalao não absorve esse teto.",
     "triagemCiclo": {
       "nome": "triagem-do-ciclo",
       "decisao": "D-W9-22g",

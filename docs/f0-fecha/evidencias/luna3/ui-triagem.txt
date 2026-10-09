@@ -1,0 +1,8 @@
+$ npx vitest run tests/ui/triagem.test.tsx --no-file-parallelism --maxWorkers=1
+Test Files  1 passed (1)
+Tests       6 passed (6)
+Start at    15:00:59
+Duration    7.19s
+exit code: 0
+
+Tentativa anterior: 1 falha em cenário que agora nasce tontura=null. Corrigido o cenário clínico conhecido para informar explicitamente Não; expectativas clínicas mantidas.

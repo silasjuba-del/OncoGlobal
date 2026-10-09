@@ -1,0 +1,6 @@
+$ npx vitest run tests/rules tests/modules tests/contracts tests/w12-grok tests/w10-grok tests/corpus --no-file-parallelism --maxWorkers=1
+Test Files  97 passed (97)
+Tests       759 passed (759)
+Start at    14:58:29
+Duration    90.11s
+exit code: 0

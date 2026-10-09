@@ -1,5 +1,7 @@
+import type { ResultadoValorAtual } from "../contracts/w12/regrasClinicas.js";
+export type { ResultadoValorAtual } from "../contracts/w12/regrasClinicas.js";
 // W12-GROK-09 · valor atual de uma série datada. A validade e o "hoje" entram por parâmetro.
-// PROVISORIO-W12. Datas diferentes são evolução. Mesma data e hora com valores diferentes é conflito.
+// Datas diferentes são evolução. Mesma data e hora com valores diferentes é conflito.
 // Nada é apagado e nada vira média. Fora da validade fica PENDENTE, com o dado antigo visível.
 
 import { diferencaDiasCivis } from "./datas.js";
@@ -14,15 +16,6 @@ export interface PedidoValorAtual {
   hoje: string;
   validadeDias: number;
   leituras: readonly Leitura[];
-}
-
-export interface ResultadoValorAtual {
-  estado: "ATUAL" | "PENDENTE" | "CONFLITO";
-  valorAtual: number | null;
-  serie: Leitura[];
-  candidatos: Leitura[];
-  dadoAntigo: Leitura | null;
-  bloqueiaSalvar: false;
 }
 
 const CIVIL = /^\d{4}-\d{2}-\d{2}$/;

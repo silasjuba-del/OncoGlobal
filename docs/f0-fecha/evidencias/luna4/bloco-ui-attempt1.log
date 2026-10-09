@@ -1,0 +1,313 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-luna4
+
+ ❯ tests/w10-cursor/config.test.tsx (1 test | 1 failed) 2151ms
+   ❯ CURSOR-11 Configurações (1)
+     × abre DIA|NOITE|PERSONALIZAR, caixa de número e glossário 2145ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/w10-cursor/config.test.tsx > CURSOR-11 Configurações > abre DIA|NOITE|PERSONALIZAR, caixa de número e glossário
+TestingLibraryElementError: Found multiple elements with the role "status"
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+<p
+  role="status"
+>
+  salvo #8 → teste (evento versionado sintético)
+</p>
+
+Ignored nodes: comments, script, style
+<p
+  aria-label="status configuração Flash"
+  role="status"
+>
+  Persistência autenticada indisponível nesta tela.
+</p>
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+<div
+  aria-label="Configurações"
+  class="oc-cfg"
+  role="dialog"
+>
+  <header
+    class="oc-cfg-h"
+  >
+    <h2>
+      Configurações
+    </h2>
+    <button
+      aria-label="Fechar configurações"
+      type="button"
+    >
+      Fechar
+    </button>
+  </header>
+  <section
+    aria-label="Identidade profissional"
+  >
+    <h3>
+      Identidade
+    </h3>
+    <label>
+      Telefone
+      <input
+        aria-label="Telefone"
+        value=""
+      />
+    </label>
+    <label>
+      CRM
+      <input
+        aria-label="CRM"
+        value=""
+      />
+    </label>
+    <label>
+      Hospital
+      <input
+        aria-label="Hospital"
+        value=""
+      />
+    </label>
+    <label>
+      CNES (exemplo editável)
+      <input
+        aria-label="CNES"
+        value="2605473"
+      />
+    </label>
+    <label>
+      CNS
+      <input
+        aria-label="CNS"
+        value=""
+      />
+    </label>
+  </section>
+  <section
+    aria-label="Layout e tema"
+  >
+    <h3>
+      Layout
+    </h3>
+    <div
+      aria-label="Tema DIA NOITE PERSONALIZAR"
+      role="group"
+    >
+      <button
+        aria-pressed="false"
+        data-tema-opcao="dia"
+        type="button"
+      >
+        DIA
+      </button>
+      <button
+        aria-pressed="true"
+        data-tema-opcao="noite"
+        type="button"
+      >
+        NOITE
+      </button>
+      <button
+        aria-pressed="false"
+        data-tema-opcao="personalizar"
+        type="button"
+      >
+        PERSONALIZAR
+      </button>
+    </div>
+    <p
+      class="oc-muted"
+    >
+      MCP/plugins externos nascem desligados.
+    </p>
+  </section>
+  <section
+    aria-label="Caixa de número"
+  >
+    <h3>
+      Caixa de número
+    </h3>
+    <label>
+      Nº da caixa
+      <input
+        aria-label="Número da caixa"
+        value="8"
+      />
+    </label>
+    <label>
+      Dado
+      <input
+        aria-label="Dado da caixa"
+        value="teste"
+      />
+    </label>
+    <p>
+      Caixa #
+      8
+      : valor antigo =
+       
+      Identidade
+    </p>
+    <button
+      class="oc-btn-primary"
+      type="button"
+    >
+      Salvar (1 clique)
+    </button>
+    <p
+      role="status"
+    >
+      salvo #8 → teste (evento versionado sintético)
+    </p>
+  </section>
+  <section
+    aria-busy="false"
+    aria-label="Modelo padrão da Consulta Flash"
+  >
+    <h3>
+      Modelo padrão da Consulta Flash
+    </h3>
+    <p>
+      As opções marcadas são uma preferência editável do médico. A Consulta Flash continua revisável antes de qualquer assinatura.
+    </p>
+    <label>
+      <input
+        aria-label="Pré-marcar laboratório na Consulta Flash"
+        disabled=""
+        type="checkbox"
+      />
+      Pré-marcar laboratório
+    </label>
+    <label>
+      <input
+        aria-label="Pré-marcar imagem na Consulta Flash"
+        disabled=""
+        type="checkbox"
+      />
+      Pré-marcar imagem
+    </label>
+    <button
+      class="oc-btn-primary"
+      disabled=""
+      type="button"
+    >
+      Salvar modelo Flash
+    </button>
+    <p
+      aria-label="status configuração Flash"
+      role="status"
+    >
+      Persistência autenticada indisponível nesta tela.
+    </p>
+  </section>
+  <section
+    aria-label="Glossário de caixas"
+  >
+    <h3>
+      Glossário
+    </h3>
+    <label>
+      Pesquisar
+      <input
+        aria-label="Pesquisar glossário"
+        value=""
+      />
+    </label>
+    <ul>
+      <li>
+        <button
+          type="button"
+        >
+          #
+          8
+           
+          Identidade
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+        >
+          #
+          21
+           
+          Laudo / texto
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+        >
+          #
+          34
+           
+          Achado estruturado
+        </button>
+      </li>
+      <li>
+        <button
+          type="button"
+        >
+          #
+          45
+           
+          Prescrição antineoplásica
+        </button>
+      </li>
+    </ul>
+  </section>
+  <section
+    aria-label="Esteira de UI"
+  >
+    <h3>
+      Esteira de UI
+    </h3>
+    <p
+      class="oc-muted"
+    >
+      Versões em uso — padrão PADROES-UI §4 (sintético).
+    </p>
+    <ul>
+      <li>
+        Consulta · W10-CURSOR
+      </li>
+      <li>
+        Prescrição · Modelo 05
+      </li>
+      <li>
+        Jornada 3D · CSS preserve-3d
+      </li>
+    </ul>
+  </section>
+</div>
+ ❯ Object.getElementError ../../OncoGlobal/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ getElementError ../../OncoGlobal/node_modules/@testing-library/dom/dist/query-helpers.js:20:35
+ ❯ getMultipleElementsFoundError ../../OncoGlobal/node_modules/@testing-library/dom/dist/query-helpers.js:23:10
+ ❯ ../../OncoGlobal/node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+ ❯ ../../OncoGlobal/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/w10-cursor/config.test.tsx:24:24
+     22|     fireEvent.change(within(cfg).getByLabelText("Dado da caixa"), { ta…
+     23|     fireEvent.click(within(cfg).getByRole("button", { name: "Salvar (1…
+     24|     expect(within(cfg).getByRole("status").textContent).toMatch(/salvo…
+       |                        ^
+     25|     fireEvent.change(within(cfg).getByLabelText("Pesquisar glossário")…
+     26|       target: { value: "Laudo" },
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 47 passed (48)
+      Tests  1 failed | 130 passed (131)
+   Start at  15:20:17
+   Duration  220.76s (environment 50%, tests 21%, import 19%, transform 10%, worker 1%)
+
+    Isolate  48 workers spawned · ~2.46s startup each (spawn + environment, per file)
+             at least ~115.75s faster with isolate: false — reuses workers across files instead of one per file
+
