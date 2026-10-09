@@ -19,6 +19,7 @@ import { criarGateway, memoriaIdempotencia, type EvidenciaSaidaExterna, type Reg
 import { g02PhiEgress } from "../../src/kernel/harness/gates.js";
 import { criarServidorLocal } from "../../src/server/http.js";
 import { criarGerenciadorSessao } from "../../src/server/sessao.js";
+import { findTextCandidates, scanText, sha256, type PhiManifest } from "../../scripts/phi-repo.mjs";
 
 const RAIZ = process.cwd();
 const SENHA = "senha-sintetica-w11-h30";
@@ -66,15 +67,43 @@ const PADROES_PHI: { tipo: TipoPhi; re: RegExp }[] = [
   { tipo: "EMAIL", re: /[A-Za-z0-9._%+-]+@[A-Za-z][A-Za-z0-9-]*(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}/g },
 ];
 
+// Metadados que parecem e-mail só passam se a linha inteira foi revisada por
+// ocorrência e o arquivo conserva o SHA aprovado. A detecção histórica permanece.
+function emailRevisado(texto: string, caminho: string, indice: number, manifesto: PhiManifest): boolean {
+  const registro = manifesto.files.find((item) => item.path === caminho);
+  if (!registro) return false;
+  const hash = sha256(Buffer.from(texto, "utf8"), registro.hashMode ?? "raw", caminho);
+  if (hash !== registro.sha256) return false;
+  const linha = texto.slice(0, indice).split(/\r?\n/).length;
+  const candidatos = findTextCandidates(texto, caminho).filter((item) => item.type === "email" && item.line === linha);
+  const revisados = scanText(texto, caminho, { sha256: hash, manifest: manifesto }).dispositionsApplied;
+  return candidatos.length > 0 && candidatos.every((item) => revisados.some((rev) => rev.type === "email"
+    && rev.line === item.line && rev.ordinal === item.ordinal
+    && (rev.status === "technical_token_false_positive" || rev.status === "synthetic_declared")));
+}
+
 describe("W11-H30 · (a) varredura de PHI no repositório", () => {
+  it("recusa dispensa de email sem revisão ou depois de alterar o conteúdo aprovado", () => {
+    const texto = "Contato de fixture: " + ["exemplo", "example.invalid"].join("@");
+    const caminho = "fixture-revisao.txt";
+    const manifesto: PhiManifest = { schemaVersion: 1, files: [{ path: caminho, sha256: sha256(Buffer.from(texto)),
+      items: [{ type: "email", line: 1, ordinal: 0, status: "synthetic_declared",
+        evidenceRef: "fixture sintética deste teste", reason: "endereço reservado de teste" }] }] };
+    expect(emailRevisado(texto, caminho, 20, { schemaVersion: 1, files: [] })).toBe(false);
+    expect(emailRevisado(texto, caminho, 20, manifesto)).toBe(true);
+    expect(emailRevisado(texto + " alterado", caminho, 20, manifesto)).toBe(false);
+    expect(emailRevisado(texto, caminho, 20, { ...manifesto, files: [{ ...manifesto.files[0]!, items: [] }] })).toBe(false);
+  });
   it("só aparecem CPF, CNS, telefone e e-mail sintéticos já declarados", () => {
     const achados: string[] = [];
+    const manifesto = JSON.parse(readFileSync(join(RAIZ, "docs/f0-fecha/PHI-TRIAGEM.json"), "utf8")) as PhiManifest;
     for (const caminho of arquivos(RAIZ)) {
       const texto = textoDe(caminho);
       if (texto === null) continue;
       for (const { tipo, re } of PADROES_PHI)
         for (const m of texto.matchAll(re))
-          if (!(SINTETICOS[tipo] as readonly string[]).includes(m[0]))
+          if (!(SINTETICOS[tipo] as readonly string[]).includes(m[0])
+            && !(tipo === "EMAIL" && emailRevisado(texto, relative(RAIZ, caminho).replaceAll("\\", "/"), m.index!, manifesto)))
             achados.push(`${relative(RAIZ, caminho)}: ${tipo} ${m[0]}`);
     }
     expect(achados).toEqual([]);

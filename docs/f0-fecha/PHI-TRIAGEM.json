@@ -2122,370 +2122,370 @@
     },
     {
       "path": "tests/w11-adv/seguranca-phi.test.ts",
-      "sha256": "6cea923c3f6d3b56c0a99faad623d3c1c0ca37ef1fe929fba5c809838697c498",
+      "sha256": "a0871be3bb60211e7ac1c1ff180bc88aa7be8e2a9564942ff93ed80ec6f0b743",
+      "hashMode": "utf8-lf",
       "items": [
         {
           "type": "cpf",
-          "line": 48,
+          "line": 49,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,45,47; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:49"
         },
         {
           "type": "cpf",
-          "line": 49,
+          "line": 50,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,45,47; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:50"
         },
         {
           "type": "cpf",
-          "line": 49,
-          "ordinal": 1,
-          "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,45,47; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
-        },
-        {
-          "type": "cns",
-          "line": 50,
-          "ordinal": 0,
-          "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,45,47; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
-        },
-        {
-          "type": "cns",
           "line": 50,
           "ordinal": 1,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,45,47; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:50"
         },
         {
           "type": "cns",
           "line": 51,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,47; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:51"
         },
         {
           "type": "cns",
           "line": 51,
           "ordinal": 1,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,47; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
-        },
-        {
-          "type": "cns",
-          "line": 51,
-          "ordinal": 2,
-          "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,47; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
-        },
-        {
-          "type": "cns",
-          "line": 51,
-          "ordinal": 3,
-          "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,47; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:51"
         },
         {
           "type": "cns",
           "line": 52,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,47; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:52"
         },
         {
           "type": "cns",
           "line": 52,
           "ordinal": 1,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,47; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:52"
         },
         {
           "type": "cns",
           "line": 52,
           "ordinal": 2,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,47; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:52"
         },
         {
           "type": "cns",
           "line": 52,
           "ordinal": 3,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,47; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:52"
         },
         {
           "type": "cns",
-          "line": 52,
+          "line": 53,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:53"
+        },
+        {
+          "type": "cns",
+          "line": 53,
+          "ordinal": 1,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:53"
+        },
+        {
+          "type": "cns",
+          "line": 53,
+          "ordinal": 2,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:53"
+        },
+        {
+          "type": "cns",
+          "line": 53,
+          "ordinal": 3,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:53"
+        },
+        {
+          "type": "cns",
+          "line": 53,
           "ordinal": 4,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,47; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:53"
         },
         {
           "type": "cns",
-          "line": 53,
+          "line": 54,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:54"
         },
         {
           "type": "cns",
-          "line": 53,
+          "line": 54,
           "ordinal": 1,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:54"
         },
         {
           "type": "cns",
-          "line": 53,
+          "line": 54,
           "ordinal": 2,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:54"
         },
         {
           "type": "cns",
-          "line": 53,
+          "line": 54,
           "ordinal": 3,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
-        },
-        {
-          "type": "telefone",
-          "line": 54,
-          "ordinal": 0,
-          "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
-        },
-        {
-          "type": "telefone",
-          "line": 54,
-          "ordinal": 1,
-          "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
-        },
-        {
-          "type": "telefone",
-          "line": 54,
-          "ordinal": 2,
-          "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:54"
         },
         {
           "type": "telefone",
           "line": 55,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,60; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:55"
         },
         {
           "type": "telefone",
           "line": 55,
           "ordinal": 1,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,60; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:55"
         },
         {
           "type": "telefone",
           "line": 55,
           "ordinal": 2,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,60; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:55"
         },
         {
-          "type": "email",
+          "type": "telefone",
           "line": 56,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,60; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:56"
         },
         {
-          "type": "email",
+          "type": "telefone",
           "line": 56,
           "ordinal": 1,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,60; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:56"
         },
         {
-          "type": "email",
+          "type": "telefone",
           "line": 56,
           "ordinal": 2,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,60; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:56"
         },
         {
           "type": "email",
-          "line": 56,
+          "line": 57,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:57"
+        },
+        {
+          "type": "email",
+          "line": 57,
+          "ordinal": 1,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:57"
+        },
+        {
+          "type": "email",
+          "line": 57,
+          "ordinal": 2,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:57"
+        },
+        {
+          "type": "email",
+          "line": 57,
           "ordinal": 3,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,60; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
-        },
-        {
-          "type": "email",
-          "line": 57,
-          "ordinal": 0,
-          "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,60; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
-        },
-        {
-          "type": "email",
-          "line": 57,
-          "ordinal": 1,
-          "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,60; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
-        },
-        {
-          "type": "email",
-          "line": 57,
-          "ordinal": 2,
-          "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,60; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "Token adicional na mesma linha/contexto sintético já revisado; exceção individual por ordinal e hash.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:57"
         },
         {
           "type": "email",
           "line": 58,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,60; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:58"
         },
         {
           "type": "email",
-          "line": 65,
+          "line": 58,
+          "ordinal": 1,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:58"
+        },
+        {
+          "type": "email",
+          "line": 58,
+          "ordinal": 2,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:58"
+        },
+        {
+          "type": "email",
+          "line": 59,
           "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:59"
+        },
+        {
+          "type": "email",
+          "line": 66,
+          "ordinal": 0,
+          "contextTag": "microprompt_version_filename",
           "status": "technical_token_false_positive",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:65",
-          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
-          "contextTag": "microprompt_version_filename"
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:66"
         },
         {
           "type": "email",
-          "line": 226,
+          "line": 255,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:255"
         },
         {
           "type": "cpf",
-          "line": 256,
+          "line": 285,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,255,256,257,258,259,260; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:285"
         },
         {
           "type": "cns",
-          "line": 257,
+          "line": 286,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,255,256,257,258,259,260; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:286"
         },
         {
           "type": "telefone",
-          "line": 258,
+          "line": 287,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,255,256,257,258,259,260; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:287"
         },
         {
           "type": "email",
-          "line": 259,
+          "line": 288,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2,255,256,257,258,259,260; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:288"
         },
         {
           "type": "cpf",
-          "line": 293,
+          "line": 322,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:322"
         },
         {
           "type": "cpf",
-          "line": 300,
+          "line": 329,
           "ordinal": 0,
+          "contextTag": null,
           "status": "synthetic_declared",
-          "evidenceRef": "tests/w11-adv/seguranca-phi.test.ts:1,2; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:329"
         }
-      ],
-      "hashMode": "utf8-lf"
+      ]
     },
     {
       "path": "docs/referencias/ui-modelo-consulta.webp",
@@ -2845,6 +2845,76 @@
           "status": "technical_token_false_positive",
           "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
           "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/inventario-final.json:638"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/evidencias/D2-final/09-bloco.log",
+      "sha256": "23e8cb9ef2668cba3baa16e4aebdcaddba5fbf982477af69ce7953120e0fe76c",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "email",
+          "line": 21,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:21"
+        },
+        {
+          "type": "email",
+          "line": 22,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:22"
+        },
+        {
+          "type": "email",
+          "line": 23,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:23"
+        },
+        {
+          "type": "email",
+          "line": 24,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:24"
+        },
+        {
+          "type": "email",
+          "line": 25,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:25"
+        },
+        {
+          "type": "email",
+          "line": 26,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Endereço reservado sintético da configuração Git temporária citado no log de falha.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:26"
+        },
+        {
+          "type": "email",
+          "line": 27,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Endereço reservado sintético da configuração Git temporária citado no log de falha.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:27"
         }
       ]
     }

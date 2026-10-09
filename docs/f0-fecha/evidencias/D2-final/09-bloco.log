@@ -1,0 +1,48 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal
+
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'eol.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'staged-id.txt', LF will be replaced by CRLF the next time Git touches it
+ ❯ tests/w11-adv/seguranca-phi.test.ts (45 tests | 1 failed) 4786ms
+   ❯ W11-H30 · (a) varredura de PHI no repositório (1)
+     × só aparecem CPF, CNS, telefone e e-mail sintéticos já declarados 936ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/w11-adv/seguranca-phi.test.ts > W11-H30 · (a) varredura de PHI no repositório > só aparecem CPF, CNS, telefone e e-mail sintéticos já declarados
+AssertionError: expected [ …(7) ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "docs\\f0-fecha\\CLAUDE-TRIAGEM-PHI.json: EMAIL doc-N@N.html",
++   "docs\\f0-fecha\\CLAUDE-TRIAGEM-PHI.json: EMAIL doc-N@N.html",
++   "docs\\f0-fecha\\CLAUDE-TRIAGEM-PHI.json: EMAIL doc-N@N.html",
++   "docs\\f0-fecha\\CLAUDE-TRIAGEM-PHI.json: EMAIL doc-N@N.html",
++   "docs\\f0-fecha\\CLAUDE-TRIAGEM-PHI.md: EMAIL doc-N@N.html",
++   "tests\\f0-fecha\\phi-repo.test.ts: EMAIL test@example.invalid",
++   "tests\\f0-fecha\\phi-repo.test.ts: EMAIL test@example.invalid",
++ ]
+
+ ❯ tests/w11-adv/seguranca-phi.test.ts:80:21
+     78|             achados.push(`${relative(RAIZ, caminho)}: ${tipo} ${m[0]}`…
+     79|     }
+     80|     expect(achados).toEqual([]);
+       |                     ^
+     81|   }, 60_000);
+     82| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 56 passed (57)
+      Tests  1 failed | 637 passed (638)
+   Start at  20:02:35
+   Duration  102.17s (tests 53%, environment 21%, import 18%, transform 7%, worker 1%)
+
+    Isolate  57 workers spawned · ~587ms startup each (spawn + environment, per file)
+             at least ~32.88s faster with isolate: false — reuses workers across files instead of one per file
+
