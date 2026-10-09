@@ -12,7 +12,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w12-grok`, branch `f0/w12-grok`.
 | GROK-06 tontura | FEITA | W12-GROK-06 | Tontura não corta. Vertigem nova sem histórico alerta SNC e não bloqueia. |
 | GROK-07 intervalo de 30 dias | FEITA | W12-GROK-07 | Menos de 30 dias avisa. 30 exato passa. Concomitante planejada não entra. |
 | GROK-08 red flags do canal | FEITA | W12-GROK-08 | 25 orientações em RASCUNHO. Febre acima de 37,8. Negação não dispara. |
-| GROK-09 valor atual | | | |
+| GROK-09 valor atual | FEITA | W12-GROK-09 | 180.000 em 21/07 e 20.000 em 04/08 elegem 20.000. Conflito na mesma hora não elege e não vira média. |
 | GROK-10 fechamento | | | |
 
 ## GROK-01
@@ -170,5 +170,23 @@ A exceção mora em `tontura.ts`. O texto "investigar SNC (metástase cerebral/c
 `npm run check:corpus` — `corpus ok (125 arquivos)`. `canal-redflags.v1.json` header ok, 7 `[VERIFICAR]`, ATIVOS 0.
 
 `npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 59 files, 453 tests, exit 0.
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.
+
+## GROK-09
+
+`valorAtual` escolhe o valor mais recente dentro da validade injetada. Plaquetas 180.000 em 2026-07-21 e 20.000 em 2026-08-04, com hoje 2026-08-04 e validade de 7 dias, elegem 20.000. A série copiada conserva as duas leituras e o valor de julho fica visível como dado antigo. Com validade de 30 dias as duas datas são evolução e o eleito continua 20.000.
+
+Valores diferentes na mesma data e hora devolvem CONFLITO, com os dois candidatos e valor nulo. Não há média. Hora posterior no mesmo dia é evolução. Igual ao limite da validade passa. Só o dado vencido fica PENDENTE, com o dado antigo visível. Leitura futura não é eleita. `bloqueiaSalvar` é falso. Tipo local em `docs/w12/PEDIDOS-GROK.md`.
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries` — `fronteiras ok (289 arquivos)`.
+
+`npm run check:corpus` — `corpus ok (125 arquivos)`.
+
+`npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 60 files, 462 tests, exit 0.
 
 `npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.

@@ -20,3 +20,6 @@
 
 ## GROK-08
 1. **Contrato do canal.** `ResultadoCanal` está em `src/rules/canalRedflags.ts` (`PROVISORIO-W12`). Não substitui `redFlagsCanal.ts`. Pedido: publicar o tipo. As 25 orientações estão em RASCUNHO para curadoria. A frase de febre ao paciente não traz início de antibiótico; o texto final é do Dr. Silas.
+
+## GROK-09
+1. **Contrato do valor atual.** `ResultadoValorAtual` está em `src/rules/valorAtual.ts` (`PROVISORIO-W12`). A validade e o hoje entram por parâmetro. Pedido: publicar o tipo quando o contrato abrir. Conflito na mesma data e hora não elege valor e não vira média.

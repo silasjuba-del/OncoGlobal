@@ -23,6 +23,8 @@ export { extrairCriteriosCtcae, sugerirGrauCtcae };
 export { alertarVertigemNova, lerAlertaVertigem };
 export { avaliarIntervaloPosQt, lerIntervalos };
 export { avaliarCanalRedflags, lerCanalRedflags };
+export { valorAtual } from "./valorAtual.js";
+export type { Leitura, PedidoValorAtual, ResultadoValorAtual } from "./valorAtual.js";
 
 const CIVIL_PRONTA = /^\d{4}-\d{2}-\d{2}$/;
 
