@@ -1,5 +1,7 @@
+import type { RespostaCanal, ResultadoCanal } from "../contracts/w12/regrasClinicas.js";
+export type { ResultadoCanal, RespostaCanal } from "../contracts/w12/regrasClinicas.js";
 // D-W9-75 · canal do paciente. Cada sinal traz a própria orientação, lida do corpus.
-// PROVISORIO-W12. Não substitui redFlagsCanal.ts. O texto não é escrito aqui.
+// Não substitui redFlagsCanal.ts. O texto não é escrito aqui.
 // Alerta ao médico. Nunca bloqueia e nunca prescreve.
 
 export interface SinalCanal {
@@ -15,25 +17,6 @@ export interface CanalLido {
   fraseFinal: string;
   sinais: readonly SinalCanal[];
   rulesetId: string;
-  rulesetVersao: string;
-}
-
-export interface RespostaCanal {
-  id: string;
-  termo: string;
-  texto: string;
-  status: string;
-  alertaMedico: true;
-  bloqueiaSalvar: false;
-  defineDose: false;
-  defineCausalidade: false;
-}
-
-export interface ResultadoCanal {
-  estado: "ALERTA" | "SEM_ALERTA";
-  respostas: RespostaCanal[];
-  alertaMedico: boolean;
-  bloqueiaSalvar: false;
   rulesetVersao: string;
 }
 

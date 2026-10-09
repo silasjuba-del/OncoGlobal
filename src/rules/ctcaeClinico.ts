@@ -1,5 +1,6 @@
+import type { ResultadoCtcaeClinico } from "../contracts/w12/regrasClinicas.js";
+export type { ResultadoCtcaeClinico } from "../contracts/w12/regrasClinicas.js";
 // W12-GROK-04 · D-W9-75. Sugere grau só com o texto literal da v6 injetado.
-// PROVISORIO-W12: o contrato publicado ainda não descreve esta sugestão.
 // Este arquivo não importa outras regras. Ambiguidade fica visível e não elege grau.
 
 export interface TrechoFonte {
@@ -23,21 +24,6 @@ export interface LeituraQuantidade {
   grau: number | null;
   criterioLiteral: string | null;
   trecho: TrechoFonte;
-}
-
-export interface ResultadoCtcaeClinico {
-  termo: string | null;
-  grauSugerido: number | null;
-  criteriosUsados: CriterioUsado[];
-  criteriosFaltantes: { pergunta: string }[];
-  ambiguidades: LeituraQuantidade[];
-  status: "SUGESTAO" | "PENDENTE";
-  sugestao: true;
-  confirmadoPeloMedico: false;
-  bloqueiaSalvar: false;
-  destino: "FILA_MEDICO" | null;
-  e1: boolean;
-  rulesetVersao: string;
 }
 
 export interface EntradaCriterio {

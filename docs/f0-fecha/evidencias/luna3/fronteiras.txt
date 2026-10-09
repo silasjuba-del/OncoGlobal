@@ -1,0 +1,3 @@
+$ node scripts/check-boundaries.mjs
+fronteiras ok (294 arquivos)
+exit code: 0

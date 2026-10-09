@@ -50,6 +50,8 @@ export const triagemBase = (overrides: Partial<Triagem> = {}): Triagem => ({
   ecog: presente(1),
   grauCtcae: presente(1),
   tontura: false,
+  vertigemHistoricoAnterior: null,
+  vertigemInicioNovo: null,
   recurso: "AMBULATORIAL",
   idadeAnos: 60,
   chegadaEm: "2026-10-05T08:00:00-03:00",

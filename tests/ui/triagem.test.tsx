@@ -68,6 +68,7 @@ describe("triagem do salão", () => {
   it("37,9 °C mostra corte e 37,8 não", async () => {
     abrir();
     preencherSeguros();
+    fireEvent.change(screen.getByLabelText("Tontura"), { target: { value: "NAO" } });
     fireEvent.change(screen.getByLabelText("Temperatura (°C)"), { target: { value: "37,8" } });
     fireEvent.click(screen.getByRole("button", { name: "salvar triagem" }));
     await screen.findByText("Destino: SALAO");
@@ -94,5 +95,19 @@ describe("triagem do salão", () => {
     expect(onSalvar).toHaveBeenCalledTimes(1);
     expect(onSalvar.mock.calls[0]![0].idadeAnos).toBeNull();
     expect(await screen.findByText("idade ausente")).toBeTruthy();
+  });
+  it("tontura nasce como não sei (null) e permite sim e não", async () => {
+    const onSalvar = abrir();
+    preencherSeguros();
+    const tontura = screen.getByLabelText("Tontura");
+    expect((tontura as HTMLSelectElement).value).toBe("NAO_SEI");
+    fireEvent.click(screen.getByRole("button", { name: "salvar triagem" }));
+    expect(onSalvar.mock.calls[0]![0].tontura).toBeNull();
+    fireEvent.change(tontura, { target: { value: "SIM" } });
+    fireEvent.click(screen.getByRole("button", { name: "salvar triagem" }));
+    expect(onSalvar.mock.calls[1]![0].tontura).toBe(true);
+    fireEvent.change(tontura, { target: { value: "NAO" } });
+    fireEvent.click(screen.getByRole("button", { name: "salvar triagem" }));
+    expect(onSalvar.mock.calls[2]![0].tontura).toBe(false);
   });
 });
