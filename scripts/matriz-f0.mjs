@@ -10,6 +10,21 @@ const MATRIX = "docs/MATRIZ-RASTREABILIDADE-F0.md";
 const A6_HEAD = "72ce726e92bf059eb9bde394c0b070e9389fe85f";
 
 const laterByDecision = new Map([
+  ["Q47", ["F1", "PLANO-FINAL §R-22 curadoria e §F1 provider/agentes/telas; LLM real e edição de pack ficam fora de F0"]],
+  ["D-W9-01", ["F3", "PLANO-FINAL §R-19 (salão F3); liberação justificada do núcleo é verificada em F0, break-glass de salão é F3"]],
+  ["D-W9-15", ["F1", "PLANO-FINAL §F0 proíbe LLM real e §F1 autoriza provider real sob gates; D-W9-66 mantém chamada desligada até G-02/G-27"]],
+  ["D-W9-65", ["F1", "PLANO-FINAL §F1 permite provider real somente no gateway; D-W9-66 mantém PDF/LLM desligados até G-02/G-27"]],
+  ["D-W9-66", ["F1", "PLANO-FINAL §F1 + D-W9-66: exceção só após adapter/provider e gates; a F0 mantém a saída externa fechada"]],
+  ["D-W9-22b", ["F3", "PLANO-FINAL §R-19 e §F3: identidade de esquema e contexto de ciclo são integração clínica de ciclo"]],
+  ["D-W9-22d", ["F3", "PLANO-FINAL §R-19 (salão F3): alertas e fila de médico na jornada do salão"]],
+  ["D-W9-22e", ["F4", "PLANO-FINAL §R-20: dutos de prescrição e APAC persistida separados"]],
+  ["D-W9-22f", ["F1", "PLANO-FINAL §R-22: fontes externas/conhecimento com rótulo e gateway"]],
+  ["D-W9-22i", ["F3", "PLANO-FINAL §R-22/R-28: fichas de protocolo só após curadoria médica, na faixa de ciclo"]],
+  ["D-W9-34b", ["F3", "PLANO-FINAL §R-19: alertas de risco no contexto de ciclo/salão"]],
+  ["D-W9-34c", ["F1", "PLANO-FINAL §R-18: pré-medicação em receita e consulta"]],
+  ["D-W9-34d", ["F1+", "FECHAMENTO-F0 §0.8: questão clínica requer fonte/autoridade médica; fichas seguem RASCUNHO"]],
+  ["D-W9-34e", ["F1", "PLANO-FINAL §R-18: documento clínico longitudinal e suporte a O2"]],
+  ["D-W9-34f", ["F3", "PLANO-FINAL §R-19: prescrição de sintoma e jornada de salão"]],
   ["Q14", ["F1", "R-18, caixa universal e roteamento na consulta"]],
   ["Q15", ["F1", "R-18, voz e merge na consulta"]],
   ["Q16", ["F1", "R-18, ciclo de áudio da consulta"]],
@@ -39,17 +54,27 @@ const laterByDecision = new Map([
   ["D-W5-05", ["F1", "R-17, documentos da consulta"]],
   ["D-W5-06", ["F4", "R-22, laudo APAC"]],
   ["D-W5-07", ["F1", "R-17, tela da consulta"]],
+  ["D-W9-02", ["F1", "R-18, atalhos de validação/impressão na UI da consulta"]],
+  ["D-W9-14", ["F1", "R-14/R-18, comando explícito de imprimir na UI; validar só prepara"]],
   ["D-W5-10", ["F4", "R-22, lote APAC"]],
   ["D-W9-19", ["F4", "R-22, APAC e antiglosa"]],
   ["D-W9-27", ["F4", "R-23/Q48, forma do resumo de trial para laudo judicial; trials fora da v1"]],
   ["D-W9-28", ["F2", "R-21, canal do paciente e red flags"]],
+  ["D-W9-49", ["F4", "R-28 F4, catálogo de medicamentos/modelos de prescrição"]],
+  ["D-W9-50", ["F4", "R-28 F3/F4, conteúdo de protocolo/dose/ciclo e templates não é runtime do núcleo F0"]],
+  ["D-W9-59", ["F4", "R-28 F3/F4, fichas/protocolos permanecem RASCUNHO até revisão humana"]],
+  ["D-W9-60", ["F3", "R-28 F3, limites de dose/ciclo no módulo de prescrição"]],
+  ["D-W9-61", ["F3", "R-28 F3, escolhas do esquema e dose pertencem à prescrição/ciclo"]],
+  ["D-W9-62", ["F3", "R-28 F3, fichas de protocolo e ciclo, sem ativação clínica automática"]],
+  ["D-W9-11", ["F4", "R-28 F4 reserva importação e tabela SIGTAP; a fonte oficial fica [VERIFICAR] até existir pacote aprovado"]],
+  ["D-W9-34d", ["F1", "PLANO-FINAL §F1/R-19; FECHAMENTO-F0 §0.8: questão clínica requer fonte/autoridade; ficha permanece RASCUNHO"]],
   ["D-W9-75", ["F2", "R-21 / FECHAMENTO-F0 §4: canal do paciente; o corpus deve permanecer RASCUNHO até curadoria"]],
   ["D-W9-75b", ["F2", "R-21 / FECHAMENTO-F0 §4: conteúdo curado do canal do paciente é F2"]],
   ["D-W9-42", ["F5", "R-28, prompt mestre/assistente longitudinal; núcleo do bot é F5"]],
   ["D-W9-44", ["F6", "R-28, módulo de estatística em F6; SQLite local continua coberto por Q05"]],
   ["D-W9-63", ["F1", "R-18, resposta RECIST; código/t testes existentes não significam UI entregue"]],
-  ["D-W9-65", ["F1+", "D-W9-66 mantém LLM desligada até provider, desidentificação e gates de saída"]],
-  ["D-W9-66", ["F1+", "a própria decisão mantém LLM desligada até provider e gates G-02/G-27"]],
+  ["D-W9-65", ["F1", "PLANO-FINAL §F0 proíbe LLM real; §F1 provider real fica sob D-W9-66, G-02 e G-27"]],
+  ["D-W9-66", ["F1", "PLANO-FINAL §F0 sem LLM real; §F1 só liga a exceção após adapter e gates G-02/G-27"]],
   ["D-W9-23", ["F3", "R-18 prescrição versionada e R-28 F3 protocolo/dose/ciclo"]],
   ["D-W9-23a", ["F3", "R-28 F3 protocolo/dose/ciclo"]],
   ["D-W9-23c", ["F1", "R-18 documentação e receitas da consulta"]],
@@ -67,6 +92,7 @@ const laterByDecision = new Map([
 ]);
 const decisionOwner = new Map([
   ["Q05", { file: "src/kernel/ledger/db.ts", symbol: "abrirLedger" }],
+  ["A3", { file: "src/kernel/extracao/reconciliacao.ts", symbol: "reconciliarCampos" }],
   ["Q06", { file: "src/contracts/operacao.ts", symbol: "ConfirmarBloco" }],
   ["Q08", { file: "src/app/oncoassist.ts", symbol: "criarOncoassistJev" }],
   ["Q11", { file: "src/orchestration/maestro.ts", symbol: "maestro" }],
@@ -77,18 +103,17 @@ const decisionOwner = new Map([
   ["Q18", { file: "src/ui/consulta/BarraFechamento.tsx", symbol: "BarraFechamento" }],
   ["Q20", { file: "src/modules/consulta/bundles.ts", symbol: "montarBundle" }],
   ["T-41", { file: "src/rules/identidade.ts", symbol: "resolverIdentidade" }],
-  ["G-06", { file: "src/ui/consulta/BannerE1.tsx", symbol: "BannerE1" }],
-  ["T-48", { file: "src/ui/consulta/BannerE1.tsx", symbol: "BannerE1" }],
-  ["G-22", { file: "src/contracts/estados.ts", symbol: "CapabilityStatus" }],
-  ["T-61", { file: "src/contracts/estados.ts", symbol: "CapabilityStatus" }],
+  ["G-06", { file: "src/modules/documentos/destaqueE1.ts", symbol: "g06E1Destaque" }],
+  ["T-48", { file: "src/modules/documentos/destaqueE1.ts", symbol: "g06E1Destaque" }],
+  ["G-22", { file: "src/kernel/harness/capabilityStatus.ts", symbol: "decidirFonteAlertaPorCapabilityStatus" }],
+  ["T-61", { file: "src/kernel/harness/capabilityStatus.ts", symbol: "decidirFonteAlertaPorCapabilityStatus" }],
   ["D-W9-08", { file: "src/rules/w8/patologiaSitio.ts", symbol: "agregarCaso" }],
-  ["Q09", { file: "src/contracts/estados.ts", symbol: "Semaforo" }],
+  ["Q09", { file: "src/contracts/estados.ts", symbol: "Revisao" }],
   ["A11", { file: "scripts/backup.mjs", symbol: "criarBackup" }],
   ["A4", { file: "src/rules/intervaloQt.ts", symbol: "ultimaAdministracaoQtEfetiva" }],
   ["D-W9-17", { file: "src/contracts/w10/clinico-w10.ts", symbol: "CaixaNumerada" }],
-  ["D-W9-18", { file: "src/leitura/caixa-unica.ts", symbol: "converterEntradaLocal" }],
-  ["D-W9-58", { file: "src/contracts/w10/extracao.ts", symbol: "ExtractionSource" }],
-  ["G-22", { file: "src/contracts/estados.ts", symbol: "CapabilityStatus" }],
+  ["D-W9-18", { file: "src/leitura/caixa-unica.ts", symbol: "converterEntradaLocalAsync" }],
+  ["D-W9-58", { file: "src/leitura/caixa-unica.ts", symbol: "converterEntradaLocalAsync" }],
   ["D-W5-01", { file: "src/kernel/extracao/normalizacao.ts", symbol: "dataCivilDoInstante" }],
   ["D-W5-02", { file: "src/modules/apac/emissao.ts", symbol: "avaliarAdiantamento" }],
   ["D-W5-08", { file: "src/server/autorizacao.ts", symbol: "autorizarSaida" }],
@@ -96,6 +121,15 @@ const decisionOwner = new Map([
   ["D-W9-04", { file: "src/impressao/kit.ts", symbol: "renderizarKit" }],
   ["D-W9-05", { file: "src/kernel/harness/gates.ts", symbol: "g07Lateralidade" }],
   ["D-W9-09", { file: "src/leitura/caixa-unica.ts", symbol: "converterEntradaLocal" }],
+  ["D-W9-16", { file: "src/config/settings.ts", symbol: "createSettingsService" }],
+  ["D-W9-17", { file: "src/config/settings.ts", symbol: "createSettingsService" }],
+  ["D-W9-10", { file: "src/modules/apac/emissao.ts", symbol: "avaliarCnes" }],
+  ["D-W9-15", { file: "src/server/autorizacao.ts", symbol: "autorizarSaida" }],
+  ["D-W9-12", { file: "src/modules/apac/emissao.ts", symbol: "classificarFinalidade" }],
+  ["D-W9-41", { file: "src/impressao/kit.ts", symbol: "renderizarKit" }],
+  ["D-W9-68", { file: "src/rules/radsEmergencias.ts", symbol: "detectarEmergencias" }],
+  ["T-53", { file: "src/rules/apac.ts", symbol: "validarEmissaoApac" }],
+  ["G-15", { file: "src/orchestration/ork.ts", symbol: "executarOrk" }],
   ["D-W9-13", { file: "src/rules/cns.ts", symbol: "validarCns" }],
   ["D-W9-26", { file: "src/contracts/w10/prescricao.ts", symbol: "PrescriptionItem" }],
   ["D-W9-31", { file: "src/rules/noduloIndeterminado.ts", symbol: "avaliarNodulo" }],
@@ -114,12 +148,16 @@ const decisionOwner = new Map([
   ["D-W9-75a", { file: "src/rules/index.ts", symbol: "avaliarTextoCtcae" }],
   ["D-W9-75b", { file: "src/rules/canalRedflags.ts", symbol: "avaliarCanalRedflags" }],
   ["D-W9-76", { file: "src/rules/tontura.ts", symbol: "alertarVertigemNova" }],
-  ["D-W9-77", { file: "src/contracts/w12/anatomoPatologico.ts", symbol: "validarRetratoTransversal" }],
-  ["D-W9-78", { file: "src/server/flash.ts", symbol: "lerModeloFlash" }],
+  ["D-W9-77", { file: "src/ui/consulta/ConsultaPersistida.tsx", symbol: "ConsultaPersistida" }],
+  ["D-W9-78", { file: "src/ui/consulta/ConsultaPersistida.tsx", symbol: "ConsultaPersistida" }],
   ["D-W9-11", { file: "src/apac/sigtap.ts", symbol: "montarTabelaSigtap" }],
   ["D-W9-34d", { file: "src/contracts/w10/prescricao.ts", symbol: "ProtocolTemplate" }],
   ["D-W9-77d", { file: "src/rules/semaforoInteracoes.ts", symbol: "semaforoInteracoes" }],
   ["D-W9-22", { file: "src/rules/portaCiclo.ts", symbol: "portaCiclo" }],
+  ["D-W9-22a", { file: "src/rules/portaCiclo.ts", symbol: "portaCiclo" }],
+  ["D-W9-22c", { file: "src/kernel/extracao/reconciliacao.ts", symbol: "reconciliarCampos" }],
+  ["D-W9-22g", { file: "src/rules/triagem.ts", symbol: "avaliarCorteSalao" }],
+  ["D-W9-34a", { file: "src/kernel/extracao/patient-resolver.ts", symbol: "rankearPacientes" }],
 ]);
 const consumerOverride = new Map([
   ["Q05", "src/app/oncoassistLocal.ts"],
@@ -128,16 +166,13 @@ const consumerOverride = new Map([
   ["Q11", "src/orchestration/ork.ts"],
   ["Q17", "src/ui/telas/TelaConsulta.tsx"],
   ["Q18", "src/ui/telas/TelaConsulta.tsx"],
-  ["G-06", "src/ui/telas/TelaConsulta.tsx"],
-  ["T-48", "tests/ui/banner-e1.test.tsx"],
-  ["G-22", "tests/corpus/capabilities.test.ts"],
-  ["T-61", "tests/corpus/capabilities.test.ts"],
+  ["G-06", "src/impressao/kit.ts"],
+  ["T-48", "src/impressao/kit.ts"],
+  ["G-22", "src/kernel/harness/gates.ts"],
+  ["T-61", "src/kernel/harness/gates.ts"],
   ["D-W9-08", "tests/rules-w8/patologiaSitio.test.ts"],
   ["G-18", "tests/modules/adv015-template.test.ts"],
   ["T-58", "tests/modules/adv015-template.test.ts"],
-  ["T-48", "tests/ui/banner-e1.test.tsx"],
-  ["G-22", "tests/corpus/capabilities.test.ts"],
-  ["T-61", "tests/corpus/capabilities.test.ts"],
   ["D-W9-08", "tests/rules-w8/patologiaSitio.test.ts"],
   ["G-09", "src/server/rotas.ts"],
   ["G-19", "src/server/rotas.ts"],
@@ -153,17 +188,16 @@ const consumerOverride = new Map([
   ["D-W9-34d", "tests/corpus-fichas/fichas.test.ts"],
   ["A4", "tests/cobertura/fuso.test.ts"],
   ["D-W9-17", "src/server/corpus.ts"],
-  ["D-W9-18", "tests/redteam/rt13-caixa-unica.test.ts"],
+  ["D-W9-18", "tests/leitura/pdf-digital.test.ts"],
   ["D-W9-47", "src/rules/semaforoInteracoes.ts"],
   ["D-W9-57", "tests/rules-morfometria/index.test.ts"],
   ["D-W9-58", "src/orchestration/pipeline-extracao.ts"],
-  ["Q09", "tests/contracts/contratos.test.ts"],
+  ["Q09", "tests/contracts/dimensoes-limite.test.ts"],
   ["A11", "tests/backup/backup.test.ts"],
   ["A4", "tests/cobertura/fuso.test.ts"],
   ["D-W9-17", "src/server/corpus.ts"],
   ["D-W9-18", "tests/redteam/rt13-caixa-unica.test.ts"],
   ["D-W9-58", "src/orchestration/pipeline-extracao.ts"],
-  ["G-22", "tests/corpus/capabilities.test.ts"],
   ["D-W5-01", "tests/kernel/extracao/normalizacao.test.ts"],
   ["D-W5-02", "tests/w10-grok/grok-13-apac-snapshot.test.ts"],
   ["D-W5-08", "src/server/rotas.ts"],
@@ -171,6 +205,20 @@ const consumerOverride = new Map([
   ["D-W9-04", "tests/impressao/kit-apac.test.ts"],
   ["D-W9-05", "tests/kernel/gates-w10/g07-lateralidade.test.ts"],
   ["D-W9-09", "tests/leitura/pdf-digital.test.ts"],
+  ["D-W9-16", "src/server/http.ts"],
+  ["D-W9-17", "src/server/http.ts"],
+  ["D-W9-10", "tests/w10-grok/grok-13-apac-snapshot.test.ts"],
+  ["D-W9-12", "tests/w10-grok/grok-13-apac-snapshot.test.ts"],
+  ["D-W9-58", "tests/leitura/pdf-digital.test.ts"],
+  ["D-W9-68", "src/server/rotas.ts"],
+  ["D-W9-15", "src/server/rotas.ts"],
+  ["A3", "tests/kernel/extracao/reconciliacao.test.ts"],
+  ["D-W9-22a", "tests/w12-grok/grok-02-corpo.test.ts"],
+  ["D-W9-22c", "src/orchestration/pipeline-extracao.ts"],
+  ["D-W9-22g", "tests/w12-grok/grok-02-corpo.test.ts"],
+  ["D-W9-34a", "src/orchestration/pipeline-extracao.ts"],
+  ["G-15", "tests/orchestration/ork.test.ts"],
+  ["T-53", "tests/apac/apac.test.ts"],
   ["D-W9-13", "src/apac/antiglosa.ts"],
   ["D-W9-26", "tests/contracts/w10.test.ts"],
   ["D-W9-31", "tests/w10-grok/grok-07-nodulo.test.ts"],
@@ -180,14 +228,14 @@ const consumerOverride = new Map([
   ["D-W9-43", "tests/w10-grok/grok-06-interval.test.ts"],
   ["D-W9-47", "tests/contracts/w10.test.ts"],
   ["D-W9-51", "tests/w10-grok/grok-05-rads.test.ts"],
-  ["D-W9-57", "tests/rules-morfometria/morfometriaCore.test.ts"],
+  ["D-W9-57", "tests/rules-morfometria/index.test.ts"],
   ["D-W9-67", "tests/corpus/prostata-w8.test.ts"],
   ["D-W9-73", "tests/w3/w3.test.ts"],
   ["D-W9-74", "tests/ui/triagem.test.tsx"],
   ["D-W9-75", "tests/w12-grok/grok-04-texto.test.ts"],
   ["D-W9-76", "tests/w12-grok/grok-06-tontura.test.ts"],
-  ["D-W9-77", "tests/contracts/anatomo-patologico.test.ts"],
-  ["D-W9-78", "tests/f0-fecha/flash-producao.test.tsx"],
+  ["D-W9-77", "src/ui/OncoassistLocal.tsx"],
+  ["D-W9-78", "src/ui/OncoassistLocal.tsx"],
   ["D-W9-75a", "tests/w12-grok/grok-04-texto.test.ts"],
   ["D-W9-75b", "tests/w12-grok/grok-08-canal.test.ts"],
   ["D-W9-77d", "tests/w10-grok/grok-08-semaforo.test.ts"],
@@ -199,6 +247,12 @@ const consumerOverride = new Map([
   ["D-W9-17", "tests/f0-fecha/flash-producao.test.tsx"],
   ["D-W9-18", "tests/redteam/rt13-caixa-unica.test.ts"],
   ["D-W9-58", "tests/w10-fugu/e2e-pt10.test.ts"],
+  ["D-W9-10", "tests/w10-grok/grok-13-apac-snapshot.test.ts"],
+  ["D-W9-12", "tests/w10-grok/grok-13-apac-snapshot.test.ts"],
+  ["D-W9-58", "tests/leitura/pdf-digital.test.ts"],
+  ["D-W9-68", "src/server/rotas.ts"],
+  ["G-15", "tests/orchestration/ork.test.ts"],
+  ["T-53", "tests/apac/apac.test.ts"],
   ["Q11", "tests/orchestration/ork.test.ts"],
   ["D-W5-01", "tests/kernel/extracao/normalizacao.test.ts"],
   ["D-W5-02", "tests/w10-grok/grok-13-apac-snapshot.test.ts"],
@@ -210,15 +264,22 @@ const consumerOverride = new Map([
   ["D-W9-38", "tests/kernel/extracao/normalizacao.test.ts"],
   ["D-W9-39", "tests/w10-grok/grok-04-agenda.test.ts"],
   ["D-W9-43", "tests/w10-grok/grok-06-interval.test.ts"],
-  ["D-W9-47", "tests/w12-grok/grok-02-corpo.test.ts"],
-  ["D-W9-57", "tests/rules-morfometria/morfometriaCore.test.ts"],
+  ["D-W9-47", "src/rules/semaforoInteracoes.ts"],
+  ["D-W9-57", "tests/rules-morfometria/index.test.ts"],
   ["D-W9-67", "tests/corpus/prostata-w8.test.ts"],
   ["D-W9-73", "tests/w3/w3.test.ts"],
   ["D-W9-74", "tests/ui/triagem.test.tsx"],
   ["D-W9-75", "tests/w12-grok/grok-08-canal.test.ts"],
   ["D-W9-76", "tests/w12-grok/grok-06-tontura.test.ts"],
-  ["D-W9-77", "tests/contracts/anatomo-patologico.test.ts"],
-  ["D-W9-78", "tests/f0-fecha/flash-producao.test.tsx"],
+  ["D-W9-77", "src/ui/OncoassistLocal.tsx"],
+  ["D-W9-78", "src/ui/OncoassistLocal.tsx"],
+  ["D-W9-16", "src/server/http.ts"],
+  ["D-W9-17", "src/server/http.ts"],
+  ["A3", "tests/kernel/extracao/reconciliacao.test.ts"],
+  ["D-W9-22a", "tests/w12-grok/grok-02-corpo.test.ts"],
+  ["D-W9-22c", "src/orchestration/pipeline-extracao.ts"],
+  ["D-W9-22g", "tests/w12-grok/grok-02-corpo.test.ts"],
+  ["D-W9-34a", "src/orchestration/pipeline-extracao.ts"],
   ["G-03", "tests/kernel/kernel.test.ts"], ["G-05", "tests/kernel/kernel.test.ts"],
   ["G-10", "tests/kernel/kernel.test.ts"], ["G-13", "tests/kernel/kernel.test.ts"],
   ["G-14", "tests/kernel/kernel.test.ts"],
@@ -229,6 +290,7 @@ const consumerOverride = new Map([
   ["T-55", "tests/kernel/kernel.test.ts"], ["T-57", "tests/corpus/loader.test.ts"],
 ]);
 const organizationalChecks = new Map([
+  ["D-W9-22h", "confirmar docs/referencias/protocolos/*.md como fonte de verdade e registrar o limite do DOCX em DECISOES.md D-W9-22(h)"],
   ["Q01", "confirmar origin remoto e raiz OncoGlobal segundo docs/FECHAMENTO-F0.md §0"],
   ["Q02", "conferir autoria e writer em docs/ondas/F0-FECHAMENTO-ASTRA.md §2"],
   ["Q03", "confirmar CANONICA somente por ordem expressa em docs/FECHAMENTO-F0.md §2"],
@@ -255,6 +317,48 @@ const organizationalChecks = new Map([
   ["D-W9-80", "conferir autoridade, writer e etapas do fechamento em docs/DECISOES.md D-W9-80"],
 ]);
 const multiTestEvidence = new Map([
+  ["Q46", [
+    ["tests/corpus/packs.test.ts", "estrutura TumorPack: pulmão/mama/colorretal vazios; próstata com kit D-W9-67"],
+    ["tests/corpus/packs.test.ts", "nenhum campo dose numérico em nenhum pack (LLM/FN-04 calcula; corpus não carrega dose)"],
+    ["tests/corpus/packs.test.ts", "nenhum código SIGTAP além de [VERIFICAR]"],
+  ]],
+  ["D-W9-16", [
+    ["tests/w10-luna5/http-config-real.test.ts", "carrega o corpus compartilhado, nega leitura sem sessão e retorna o tema DIA por default"],
+    ["tests/w10-luna5/http-config-real.test.ts", "reabre o SQLite local ao reiniciar o servidor e recupera perfil, caixa e trilha"],
+  ]],
+  ["D-W9-17", [
+    ["tests/w10-luna5/http-config-real.test.ts", "grava CNES como texto com zeros, atribui a sessão e replay não duplica histórico nem vaza valores em logs"],
+    ["tests/w10-luna5/http-config-real.test.ts", "reabre o SQLite local ao reiniciar o servidor e recupera perfil, caixa e trilha"],
+  ]],
+  ["D-W9-18", [
+    ["tests/leitura/pdf-digital.test.ts", "extrai o texto por página com hash dos bytes, sem rede"],
+    ["tests/leitura/pdf-digital.test.ts", "texto e DOCX seguem pelo caminho síncrono quando chamados pelo assíncrono"],
+    ["tests/leitura/pdf-digital.test.ts", "PDF escaneado e imagem continuam PENDENTE (D-W9-09) e delegam no caminho assíncrono"],
+  ]],
+  ["A3", [
+    ["tests/kernel/extracao/reconciliacao.test.ts", "TNM incompatível no mesmo tipo de avaliação é CONFLICT; tipos diferentes coexistem (A3)"],
+  ]],
+  ["D-W9-22a", [
+    ["tests/w12-grok/grok-02-corpo.test.ts", "neutrófilos 1499 ficam abaixo da bula 1500; 1500 passa; grau não abre a porta"],
+  ]],
+  ["D-W9-22c", [
+    ["tests/f0-fecha/consulta-completa.test.ts", "mantém duas fontes contraditórias como CONFLITO e sem eleição automática antes de decisão"],
+  ]],
+  ["D-W9-22g", [
+    ["tests/w12-grok/grok-02-corpo.test.ts", "FC 49 corta o salão e não a triagem do ciclo; PAS 150 faz o inverso"],
+  ]],
+  ["D-W9-34a", [
+    ["tests/f0-fecha/consulta-completa.test.ts", "percorre kit sintético, vínculo explícito, evolução exibida e Flash assinada; reabre o SQLite e preserva a história"],
+  ]],
+  ["D-W9-17", [
+    ["tests/w10-cursor/config.test.tsx", "abre DIA|NOITE|PERSONALIZAR, caixa de número e glossário"],
+    ["tests/f0-fecha/flash-producao.test.tsx", "Configurações lê e grava o modelo pela porta autenticada, sem persistência em estado local"],
+  ]],
+  ["D-W9-68", [
+    ["tests/w10-grok/grok-05-rads.test.ts", "o catálogo tem as 31 linhas e a negação declarada"],
+    ["tests/w10-grok/grok-05-rads.test.ts", "exclusões anulam imuno quando há infecção; tiflite exige neutropenia e exclui pneumoperitônio"],
+    ["tests/muse/rads-http.test.ts", "HTTP usa as cadeias RADS do corpus, preserva trecho/fonte e não confirma emergência"],
+  ]],
   ["G-04", [
     ["tests/prompts/prompts.test.ts", "G-04 cada prompt repete contrato universal sem números de corte clínico"],
     ["tests/prompts/prompts.test.ts", "G-04 nenhum arquivo em corpus/prompts tem número de corte ou comparação com limiar"],
@@ -275,6 +379,25 @@ const multiTestEvidence = new Map([
     ["tests/w12-grok/grok-04-texto.test.ts", "vômito com observação hospitalar sugere G3 e mostra as duas leituras da quantidade"],
     ["tests/w12-grok/grok-08-canal.test.ts", "versão 1.1.0, 25 sinais em RASCUNHO e os 6 candidatos antigos continuam inativos"],
   ]],
+  ["Q50", [
+    ["tests/f0-fecha/consulta-completa.test.ts", "percorre kit sintético, vínculo explícito, evolução exibida e Flash assinada; reabre o SQLite e preserva a história"],
+    ["tests/f0-fecha/consulta-completa.test.ts", "mantém duas fontes contraditórias como CONFLITO e sem eleição automática antes de decisão"],
+    ["tests/f0-fecha/consulta-completa.test.ts", "preserva negação literal, data e unidade; ausência continua sem fato numérico inventado"],
+    ["tests/f0-fecha/consulta-completa.test.ts", "repete após falha percebida pelo cliente sem duplicar o evento nem a evolução"],
+    ["tests/f0-fecha/consulta-completa.test.ts", "recusa paciente trocado e conteúdo editado depois da exibição"],
+    ["tests/f0-fecha/consulta-completa.test.ts", "conclui revisão e Flash manualmente com o caminho de IA ausente"],
+  ]],
+  ["D-W9-77", [
+    ["tests/f0-fecha/retrato-ledger.test.ts", "copia histologia literal de AP com fonte e mantém os demais campos ausentes, salvo TNM literal prefixado"],
+    ["tests/f0-fecha/c2-consulta-local.test.tsx", "exibe textos reais, assina por HTTP e reabre o histórico persistido sem dados de demonstração"],
+    ["tests/f0-fecha/consulta-completa.test.ts", "percorre kit sintético, vínculo explícito, evolução exibida e Flash assinada; reabre o SQLite e preserva a história"],
+  ]],
+  ["D-W9-78", [
+    ["tests/f0-fecha/flash-producao.test.tsx", "a caixa do modelo padrão existe no catálogo com o tipo REGRA_CLINICA suportado"],
+    ["tests/f0-fecha/c2-consulta-local.test.tsx", "exibe textos reais, assina por HTTP e reabre o histórico persistido sem dados de demonstração"],
+    ["tests/f0-fecha/c2-flash-retomada.test.ts", "retoma após reiniciar SQLite e sessão com nova chave sem duplicar preparação ou assinatura"],
+    ["tests/f0-fecha/consulta-completa.test.ts", "percorre kit sintético, vínculo explícito, evolução exibida e Flash assinada; reabre o SQLite e preserva a história"],
+  ]],
   ["D-W9-74", [
     ["tests/contracts/w12-regras-clinicas.test.ts", "representa histórico e início da vertigem desconhecidos como null"],
     ["tests/ui/triagem.test.tsx", "tontura nasce como não sei (null) e permite sim e não"],
@@ -287,21 +410,9 @@ const multiTestEvidence = new Map([
 ]);
 const mappingPending = new Map([
   ["Q20", "os quatro bundles estão declarados e testados no módulo, mas nenhum consumidor de produção chama montarBundle no checkout"],
-  ["Q09", "estados centrais existem, mas o teste referenciado cobre Semaforo; falta prova que fixe o teto e o vocabulário das oito dimensões da tabela v2"],
-  ["Q46", "os quatro packs existem, mas as fontes marcadas [VERIFICAR] não provam curadoria clínica completa nem SIGTAP vigente"],
-  ["Q47", "o núcleo OncoAssist devolve PROPOSTA e exige revisão; não localizei uma jornada de produção que grave a curadoria editada pelo médico"],
-  ["Q50", "a prova E6b 8/8 da preparação Astra ainda não está integrada nesta base; Q50 não fecha por execução prévia fora do HEAD atual"],
-  ["A3", "contrato e teste provam coexistência de TNM conflitante; ainda falta o consumidor de consulta que mostra qual avaliação está em uso e para quê"],
-  ["D-W9-08", "patologia-agregacao permanece ativo:false e [VERIFICAR] até haver teste aprovado; não existe agregação clínica ativa"],
-  ["D-W9-11", "a rota/tabela suporta import por competência, mas a decisão deixa a fonte oficial SIGTAP [VERIFICAR]; não há corpus oficial autenticado nesta base"],
+  ["Q50", "E6b HTTP/SQLite está integrada e passou 8/8; a condição normativa de Q50 ainda exige PR revisado e demo da fase (PLANO-FINAL §5), não entregues por esta faixa"],
   ["D-W9-14", "impressão usa a ação do servidor/gateway; não há prova observável de escolha/abertura da janela do sistema no percurso local real"],
-  ["D-W9-15", "provider escolhido não está habilitado: D-W9-66 mantém LLM desligada até adapter e gates; não afirmar chamada externa entregue"],
-  ["D-W9-16", "a tela contém os campos, mas não achei persistência autenticada de todo o perfil do médico/hospital que a decisão lista"],
-  ["D-W9-17", "glossário tem 48 caixas; as configurações gerais não salvam/persistem todos os campos editáveis e o glossário da UI é estático"],
-  ["D-W9-18", "conversão local e endpoint existem; PDF escaneado/imagem seguem PENDENTE conforme decisão, e a caixa não está montada na casca local completa nesta base"],
-  ["D-W9-22", "decisão composta por (a)-(i); regras/tests de porta, fichas e fontes existem, mas esta linha-pai não substitui o rastreio separado de cada critério"],
-  ["D-W9-34", "a entrada agrupa respostas; subitens com comportamento próprio precisam ser conferidos individualmente, em especial 34c"],
-  ["D-W9-34d", "há evidência da hidratação pré e pós, mas a ficha/cobertura atual mostra Mg/K pré e KCl pós; decisão pede Mg e K nos dois lados"],
+  ["D-W9-47", "ClasseMedicacao declara quatro classes e o semáforo as consome, mas falta teste observável que valide as quatro classes como conjunto"],
   ["D-W9-50", "fichas e testes registram comparações SOnHe; dose sem fonte mantém [VERIFICAR], sem extrapolar aprovação clínica geral"],
   ["D-W9-55", "arquitetura e mapa de componentes estão documentados; model router multi-LLM, READ externo e agentes não são alegados como runtime F0"],
   ["D-W9-59", "fichas têm conteúdo e testes estruturais; a confirmação de cada dose protocolar continua limitada às fontes e itens [VERIFICAR] registrados"],
@@ -311,18 +422,29 @@ const mappingPending = new Map([
   ["D-W9-64", "proposta aguardando escolha do Dr. Silas; não é requisito de implementação aprovado"],
   ["D-W9-65", "extração de PDF via LLM não está habilitada; D-W9-66 condiciona a ativação a provider, desidentificação e gates"],
   ["D-W9-66", "a exceção é autorizada sob condições, mas a LLM segue desligada até provider e gates; a prova é de contenção"],
-  ["D-W9-77", "contrato de retrato existe; falta montagem da visão transversal no percurso local e cobertura ponta a ponta dos subitens de primeira consulta"],
-  ["D-W9-22", "decisão composta por (a)-(i); testes e módulos dos portões/fichas cobrem partes, mas esta linha-pai não substitui rastreio separado de cada critério"],
-  ["D-W9-11", "sigtap aceita tabela injetada por competência; fonte oficial continua [VERIFICAR], conforme a própria decisão"],
-  ["D-W9-34d", "o teste e as fichas mostram Mg/K pré e KCl pós; D-W9-34d exige também Mg e K na hidratação pós"],
-  ["D-W9-78", "modelo/prazo Flash têm componente e provas L4; a montagem de TelaConsulta/CartaoTransversal na porta local não foi integrada/provada nesta base"],
-  ["G-06", "BannerE1 e TelaConsulta provam alerta em UI sintética; falta o commit ffeef6 da folha operacional estar integrado à base desta matriz"],
-  ["G-22", "CapabilityStatus registra SPECIFIED/TESTED; não localizei mecanismo/consumidor que oculte capability abaixo de TESTED na fonte de alerta"],
-  ["T-48", "prova parcial do banner; falta integrar e provar o bloqueio de documento sem impedir a tela no caminho real"],
-  ["T-61", "capability status tem contrato/corpus, mas falta teste observável da regra que oculta alerta abaixo de TESTED"],
 ]);
+const residualClass = new Map([["D-W9-47", "PENDENTE_DE_PROVA_DE_CLASSES"]]);
 const proofByDecision = new Map([
+  ["Q46", "F0 estrutura/guard provados em tests/corpus/packs.test.ts: quatro packs incompletos carregam com protocolos inativos e SIGTAP [VERIFICAR]; curadoria clínica continua pendente"],
+  ["A3", "contrato/projeção F0 e teste provam avaliações TNM distintas coexistem e conflito do mesmo tipo não é eleito; UI de seleção é F1/F4"],
+  ["D-W9-16", "tests/w10-luna5/http-config-real.test.ts prova API local autenticada, perfil, histórico e replay; tela completa é F1"],
+  ["D-W9-17", "HTTP real salva caixa versionada e reabre SQLite; editor/glossário completo da tela pertence a F1"],
+  ["D-W9-18", "PDF digital, DOCX e texto têm conversão local pura testada; a caixa multimodal/roteamento na UI completa fica em F1"],
+  ["D-W9-22a", "porta pura usa limiar de bula, nunca grau CTCAE; teste de neutrófilos inclui borda 1499/1500"],
+  ["D-W9-22c", "reconciliação/exibição E6b preserva conflitos sem eleição automática antes da revisão humana"],
+  ["D-W9-22g", "teste de regras prova distinção entre triagem do ciclo e corte do salão; nenhum runtime de salão é alegado em F0"],
+  ["D-W9-34a", "pipeline/E6b mantém vínculo explícito e não faz junção automática de paciente"],
+  ["D-W9-15", "F0 mantém o caminho externo fechado; provider real OpenAI/Responses é F1 segundo PLANO-FINAL §F1 e D-W9-66"],
+  ["D-W9-41", "tests/f0-fecha/d41-fonte.test.ts verifica redação corrigida, frase original do PDF e preservação da proveniência no renderizador"],
   ["D-W9-74", "prova L3 C2 em `docs/f0-fecha/LUNA-3.md` e `evidencias/luna3/` (contrato, FormTriagem e regras W12)"],
+  ["D-W9-08", "prova negativa A6: `agregarCaso` retorna PENDENTE com ruleset inativo; nenhum critério clínico foi promovido"],
+  ["Q09", "prova C2 em `docs/f0-fecha/C2-L4-G22.md`: teste cobre dimensões D1-D11, teto de cinco e as quatro famílias de classificação"],
+  ["G-22", "prova C2 em `docs/f0-fecha/C2-L4-G22.md`: estados TESTED/VALIDATED/OPERATING positivos; SPECIFIED/DISABLED/ausente/desconhecido ocultos"],
+  ["T-61", "prova C2 em `docs/f0-fecha/C2-L4-G22.md`: status da capacidade fora da allowlist não aparece como fonte de alerta"],
+  ["G-06", "prova C2 em `docs/f0-fecha/C2-L4-E1.md`: renderer real bloqueia folha operacional sem destaque e preserva evolução; upstream de salão é limite documentado"],
+  ["T-48", "prova C2 em `docs/f0-fecha/C2-L4-E1.md`: positivo/negativo do destaque E1 no renderer, sem bloquear a tela"],
+  ["D-W9-77", "prova C2 em `docs/f0-fecha/C2-L4-CARTAO.md` e `evidencias/C2-retomada-15.log`: projeção real + UI local; sem alegação de decisão clínica"],
+  ["D-W9-78", "prova C2 em `evidencias/C2-retomada-15.log`: 7 arquivos/50 testes para reinício SQLite, sessão, replay e UI Flash real"],
 ]);
 
 const linkedEvidence = new Map([
@@ -360,12 +482,13 @@ const fnSymbol = new Map([
 ]);
 const gateSource = new Map([
   ["G-01", "src/rules/identidade.ts"],
+  ["G-06", "src/modules/documentos/destaqueE1.ts"],
   ["G-03", "src/kernel/harness/gates.ts"], ["G-05", "src/kernel/harness/gates.ts"],
   ["G-07", "src/kernel/harness/gates.ts"], ["G-10", "src/kernel/harness/gates.ts"],
   ["G-11", "src/rules/apac.ts"], ["G-12", "src/rules/apac.ts"],
   ["G-13", "src/kernel/harness/gates.ts"], ["G-14", "src/kernel/harness/gates.ts"],
   ["G-18", "src/modules/documentos/render.ts"],
-  ["G-22", "src/contracts/estados.ts"],
+  ["G-22", "src/kernel/harness/capabilityStatus.ts"],
   ["G-09", "src/kernel/harness/gates.ts"], ["G-19", "src/server/autorizacao.ts"],
   ["G-20", "src/kernel/gateway/gateway.ts"],
   ["G-16", "src/kernel/harness/ownership.ts"], ["G-17", "src/kernel/corpus/loader.ts"],
@@ -375,7 +498,7 @@ const gateSymbol = new Map([
   ["G-07", "g07Lateralidade"], ["G-09", "g09PtDeBiopsia"], ["G-10", "g10DosePura"],
   ["G-11", "validarEmissaoApac"], ["G-12", "apacGerar"], ["G-13", "g13Letra"],
   ["G-14", "g14Interpolacao"], ["G-16", "g16Owner"], ["G-17", "carregarDiretorio"],
-  ["G-22", "CapabilityStatus"],
+  ["G-06", "g06E1Destaque"], ["G-22", "decidirFonteAlertaPorCapabilityStatus"], ["T-61", "decidirFonteAlertaPorCapabilityStatus"],
   ["G-18", "EntradaRender"], ["G-19", "autorizarSaida"], ["G-20", "criarGateway"],
 ]);
 const functionConsumer = new Map([
@@ -385,13 +508,14 @@ const functionConsumer = new Map([
 const forceTestConsumer = new Set([
   "FN-10", "FN-11", "FN-13", "FN-17", "FN-19", "FN-21", "FN-25", "FN-26",
   "Q11", "D-W9-09", "G-03", "G-05", "G-07", "G-10", "G-11", "G-12", "G-13", "G-14", "G-17", "G-18",
-  "A4", "A11", "G-22", "Q46", "D-W9-11", "D-W9-34d", "D-W9-75a", "D-W9-77d", "T-45", "T-47", "T-49", "T-52", "T-53", "T-54", "T-55", "T-57", "T-58", "T-61",
+  "D-W9-18", "A3", "D-W9-22a", "D-W9-22c", "D-W9-22g", "D-W9-34a",
+  "A4", "A11", "G-15", "G-22", "Q09", "Q46", "D-W9-10", "D-W9-11", "D-W9-12", "D-W9-16", "D-W9-17", "D-W9-34d", "D-W9-58", "D-W9-75a", "D-W9-77d", "T-45", "T-47", "T-49", "T-52", "T-53", "T-54", "T-55", "T-57", "T-58", "T-61",
 ]);
 const testConsumerRuntime = new Map([
   ["FN-10", "F4"], ["FN-11", "F4"], ["FN-13", "F4"], ["FN-16", "F1"],
   ["FN-17", "F1"], ["FN-19", "F1"], ["FN-21", "F2"], ["FN-25", "F1"], ["FN-26", "F3"],
-  ["D-W9-77", "F2"],
   ["D-W9-77d", "F1"],
+  ["D-W9-18", "F1"],
 ]);
 
 const fnTest = new Map([
@@ -425,7 +549,7 @@ const gateTest = new Map([
   ["G-25", "tests/server/server.test.ts"],
 ]);
 const decisionTest = new Map([["Q58", "tests/backup/backup.test.ts"], ["A11", "tests/backup/backup.test.ts"]]);
-decisionTest.set("Q09", "tests/contracts/contratos.test.ts");
+decisionTest.set("Q09", "tests/contracts/dimensoes-limite.test.ts");
 decisionTest.set("Q11", "tests/orchestration/ork.test.ts");
 decisionTest.set("A11", "tests/backup/backup.test.ts");
 decisionTest.set("D-W5-01", "tests/kernel/extracao/normalizacao.test.ts");
@@ -434,6 +558,29 @@ decisionTest.set("D-W8-01", "tests/closure-fugu/f02-dedupe-pipeline.test.ts");
 decisionTest.set("D-W9-04", "tests/impressao/kit-apac.test.ts");
 decisionTest.set("D-W9-05", "tests/kernel/gates-w10/g07-lateralidade.test.ts");
 decisionTest.set("D-W9-09", "tests/leitura/pdf-digital.test.ts");
+decisionTest.set("D-W9-18", "tests/leitura/pdf-digital.test.ts");
+decisionTest.set("D-W9-16", "tests/w10-cursor/config.test.tsx");
+decisionTest.set("D-W9-16", "tests/w10-luna5/http-config-real.test.ts");
+decisionTest.set("D-W9-17", "tests/w10-luna5/http-config-real.test.ts");
+decisionTest.set("A3", "tests/kernel/extracao/reconciliacao.test.ts");
+decisionTest.set("D-W9-22a", "tests/w12-grok/grok-02-corpo.test.ts");
+decisionTest.set("D-W9-22c", "tests/f0-fecha/consulta-completa.test.ts");
+decisionTest.set("D-W9-22g", "tests/w12-grok/grok-02-corpo.test.ts");
+decisionTest.set("D-W9-34a", "tests/f0-fecha/consulta-completa.test.ts");
+decisionTest.set("D-W9-10", "tests/w10-grok/grok-13-apac-snapshot.test.ts");
+decisionTest.set("D-W9-15", "tests/cobertura/saida.test.ts");
+decisionTest.set("D-W9-65", "tests/adv-w8/g27-saida-externa.adv.ts");
+decisionTest.set("D-W9-66", "tests/adv-w8/g27-saida-externa.adv.ts");
+decisionTest.set("D-W9-12", "tests/w10-grok/grok-13-apac-snapshot.test.ts");
+decisionTest.set("D-W9-41", "tests/f0-fecha/d41-fonte.test.ts");
+decisionTest.set("D-W9-58", "tests/leitura/pdf-digital.test.ts");
+decisionTest.set("D-W9-68", "tests/w10-grok/grok-05-rads.test.ts");
+decisionTest.set("G-15", "tests/ledger/ledger.test.ts");
+decisionTest.set("T-53", "tests/apac/apac.test.ts");
+decisionTest.set("D-W5-08", "tests/server/cp001-autorizacao.test.ts");
+decisionTest.set("D-W5-09", "tests/kernel/adv013-fronteiras.test.ts");
+decisionTest.set("G-15", "tests/orchestration/ork.test.ts");
+decisionTest.set("T-53", "tests/apac/apac.test.ts");
 decisionTest.set("D-W9-13", "tests/apac-w10/cns-sigtap.test.ts");
 decisionTest.set("D-W9-26", "tests/contracts/w10.test.ts");
 decisionTest.set("D-W9-47", "tests/w10-grok/grok-08-semaforo.test.ts");
@@ -443,6 +590,7 @@ decisionTest.set("D-W9-38", "tests/kernel/extracao/normalizacao.test.ts");
 decisionTest.set("D-W9-39", "tests/w10-grok/grok-04-agenda.test.ts");
 decisionTest.set("D-W9-43", "tests/w10-grok/grok-06-interval.test.ts");
 decisionTest.set("D-W9-47", "tests/w12-grok/grok-02-corpo.test.ts");
+decisionTest.delete("D-W9-47");
 decisionTest.set("D-W9-51", "tests/w10-grok/grok-05-rads.test.ts");
 decisionTest.set("D-W9-57", "tests/rules-morfometria/index.test.ts");
 decisionTest.set("D-W9-52", "tests/rules-morfometria/index.test.ts");
@@ -451,11 +599,13 @@ decisionTest.set("D-W9-73", "tests/w12-grok/grok-03-ctcae.test.ts");
 decisionTest.set("D-W9-74", "tests/contracts/w12-regras-clinicas.test.ts");
 decisionTest.set("D-W9-75", "tests/w12-grok/grok-04-texto.test.ts");
 decisionTest.set("D-W9-76", "tests/w12-grok/grok-06-tontura.test.ts");
-decisionTest.set("D-W9-77", "tests/contracts/anatomo-patologico.test.ts");
-decisionTest.set("D-W9-78", "tests/f0-fecha/flash-producao.test.tsx");
+decisionTest.set("D-W9-77", "tests/f0-fecha/retrato-ledger.test.ts");
+decisionTest.set("D-W9-78", "tests/f0-fecha/c2-flash-retomada.test.ts");
+decisionTest.set("D-W9-08", "tests/rules-w8/patologiaSitio.test.ts");
 decisionTest.set("D-W9-08", "tests/rules-w8/patologiaSitio.test.ts");
 decisionTest.set("Q46", "tests/corpus/packs.test.ts");
 decisionTest.set("Q47", "tests/oncoassist-jev/oncoassist.test.ts");
+decisionTest.set("Q50", "tests/f0-fecha/consulta-completa.test.ts");
 decisionTest.set("Q56", "tests/cobertura/fuso.test.ts");
 decisionTest.set("D-W9-11", "tests/apac-w10/cns-sigtap.test.ts");
 decisionTest.set("D-W9-34d", "tests/corpus-fichas/fichas.test.ts");
@@ -463,8 +613,8 @@ decisionTest.set("D-W9-75a", "tests/w12-grok/grok-04-texto.test.ts");
 decisionTest.set("D-W9-75b", "tests/w12-grok/grok-08-canal.test.ts");
 decisionTest.set("D-W9-77d", "tests/w10-grok/grok-08-semaforo.test.ts");
 decisionTest.set("D-W9-22", "tests/w12-grok/grok-02-corpo.test.ts");
-decisionTest.set("G-22", "tests/corpus/capabilities.test.ts");
-decisionTest.set("T-61", "tests/corpus/capabilities.test.ts");
+decisionTest.set("G-22", "tests/f0-fecha/capability-status.test.ts");
+decisionTest.set("T-61", "tests/f0-fecha/capability-status.test.ts");
 decisionTest.set("T-48", "tests/ui/banner-e1.test.tsx");
 decisionTest.set("G-03", "tests/kernel/kernel.test.ts");
 decisionTest.set("G-05", "tests/kernel/kernel.test.ts");
@@ -506,8 +656,8 @@ decisionTest.set("Q11", "tests/orchestration/ork.test.ts");
 decisionTest.set("Q17", "tests/ui/fechamento.test.tsx");
 decisionTest.set("Q18", "tests/ui/fechamento.test.tsx");
 decisionTest.set("Q20", "tests/modules/bundles.test.ts");
-decisionTest.set("G-06", "tests/ui/banner-e1.test.tsx");
-decisionTest.set("T-48", "tests/ui/banner-e1.test.tsx");
+decisionTest.set("G-06", "tests/f0-fecha/e1-operacional.test.ts");
+decisionTest.set("T-48", "tests/f0-fecha/e1-operacional.test.ts");
 decisionTest.set("T-41", "tests/identity/identidade.test.ts");
 decisionTest.set("T-29", "tests/apac/apac.test.ts");
 decisionTest.set("T-40", "tests/closure-luna1/f03-reconciliar-fontes.test.ts");
@@ -528,8 +678,34 @@ decisionTest.set("T-39", "tests/w3/w3.test.ts");
 decisionTest.set("T-44", "tests/w3/w3.test.ts");
 for (const id of ["FN-19", "FN-20", "FN-21", "FN-22", "FN-23", "FN-25", "FN-26"]) decisionTest.set(id, fnTest.get(id));
 const testTitleOverride = new Map([
+  ["D-W9-15", "KIMI-19 · G-02: canais externos nunca habilitados — WhatsApp/e-mail/agendar recusados mesmo com artefato assinado"],
+  ["D-W9-16", "reabre o SQLite local ao reiniciar o servidor e recupera perfil, caixa e trilha"],
+  ["D-W9-17", "grava CNES como texto com zeros, atribui a sessão e replay não duplica histórico nem vaza valores em logs"],
+  ["A3", "TNM incompatível no mesmo tipo de avaliação é CONFLICT; tipos diferentes coexistem (A3)"],
+  ["D-W9-22a", "neutrófilos 1499 ficam abaixo da bula 1500; 1500 passa; grau não abre a porta"],
+  ["D-W9-22c", "mantém duas fontes contraditórias como CONFLITO e sem eleição automática antes de decisão"],
+  ["D-W9-22g", "FC 49 corta o salão e não a triagem do ciclo; PAS 150 faz o inverso"],
+  ["D-W9-34a", "percorre kit sintético, vínculo explícito, evolução exibida e Flash assinada; reabre o SQLite e preserva a história"],
+  ["D-W9-18", "extrai o texto por página com hash dos bytes, sem rede"],
+  ["D-W9-41", "D-W9-41 imprime a redação corrigida e conserva a frase original do PDF como proveniência"],
+  ["D-W9-57", "anatomia média, máscara probabilística e modo desconhecido ⇒ recusado"],
+  ["D-W9-10", "CNES ausente fica pendente e outro número de 7 dígitos vale se for o configurado"],
+  ["D-W9-12", "intenção não preenche finalidade ausente e código desconhecido não é mapeado"],
+  ["D-W9-58", "extrai o texto por página com hash dos bytes, sem rede"],
+  ["D-W9-68", "o catálogo tem as 31 linhas e a negação declarada"],
+  ["G-15", "A4 JSON com state não muda os cinco estados do run"],
+  ["T-53", "G-12 nenhuma conversão de intenção em finalidade no código"],
+  ["D-W5-08", "CP-001 · positivo: artefato ASSINADO do mesmo paciente/encontro/versão autoriza IMPRIMIR"],
+  ["D-W5-09", "ADV-013 · check-boundaries rejeita ${vetor} fora de gateway/llm"],
+  ["T-53", "T-28/29/N03 valida completude só na emissão; NEGADA e comprovante sobrevivem"],
+  ["Q09", "mantém a tabela normativa completa, teto de cinco e rejeição fora do enum"],
+  ["G-22", "aplica a regra positiva/negativa a cada estado declarado sem ordenar o enum"],
+  ["T-61", "oculta status ausente/desconhecido sem coerção e informa em validação"],
+  ["G-06", "bloqueia somente o artefato quando emergência ativa não tem destaque"],
+  ["T-48", "bloqueia somente o artefato quando emergência ativa não tem destaque"],
   ["Q46", "os 4 packs têm header válido (G-17) e id correto"],
   ["Q47", "envia só texto desidentificado e devolve proposta com hash do original"],
+  ["Q50", "percorre kit sintético, vínculo explícito, evolução exibida e Flash assinada; reabre o SQLite e preserva a história"],
   ["Q56", "intervalo pós-QT · FN-07/A4: 30 dias — igual passa (VERDE); 29 dispara aviso; concomitante nunca avisa"],
   ["D-W9-11", "busca por competência, sem cair em outra"],
   ["D-W9-34d", "hidratação com Mg/K (pré) e KCl (pós) em cada dia de cisplatina; manitol junto"],
@@ -539,8 +715,8 @@ const testTitleOverride = new Map([
   ["Q11", "Maestro só oferece tabela fixa sem impressão no validar"],
   ["Q17", "percurso de rotina ≤ 5 cliques; validar não imprime; payload estrito"],
   ["Q18", "percurso de rotina ≤ 5 cliques; validar não imprime; payload estrito"],
-  ["G-06", "não fecha; reconhecer deixa o banner e o horário"],
-  ["T-48", "não fecha; reconhecer deixa o banner e o horário"],
+  ["G-06", "bloqueia somente o artefato quando emergência ativa não tem destaque"],
+  ["T-48", "bloqueia somente o artefato quando emergência ativa não tem destaque"],
   ["Q20", "declara os quatro bundles da decisão"],
   ["T-41", "T-41 CNS exato liga; nome sozinho jamais; nome+nascimento só candidato"],
   ["G-19", "CP-001 · positivo: artefato ASSINADO do mesmo paciente/encontro/versão autoriza IMPRIMIR"],
@@ -550,6 +726,7 @@ const testTitleOverride = new Map([
   ["D-W5-01", "instante com offset vira data civil em −03:00 (D-W5-01)"],
   ["D-W5-02", "1 dia civil no fuso −03:00 avisa; 0 não avisa; 2 não entra no aviso; data ausente não vira zero"],
   ["D-W9-04", "D-W9-04 · texto do kit sai acentuado e as âncoras de renderização continuam funcionando"],
+  ["D-W9-08", "P2: agregarCaso retorna PENDENTE enquanto ruleset patologia-agregacao estiver inativo"],
   ["D-W9-09", "PDF escaneado e imagem continuam PENDENTE (D-W9-09) e delegam no caminho assíncrono"],
   ["D-W9-26", "ajuste de dose só −20/−30/−40 e com motivo (D-W9-26)"],
   ["D-W9-38", "°C com tempDecimos e febre estritamente > 37,8 (D-W9-38)"],
@@ -560,7 +737,8 @@ const testTitleOverride = new Map([
   ["D-W9-75b", "versão 1.1.0, 25 sinais em RASCUNHO e os 6 candidatos antigos continuam inativos"],
   ["D-W9-76", "o corte por tontura não faz parte do contrato e o código não emite naoCorte.ecog.tontura"],
   ["D-W9-77", "aceita retrato todo 'não informado' sem inventar valor"],
-  ["D-W9-78", "a caixa do modelo padrão existe no catálogo com o tipo REGRA_CLINICA suportado"],
+  ["D-W9-77", "copia histologia literal de AP com fonte e mantém os demais campos ausentes, salvo TNM literal prefixado"],
+  ["D-W9-78", "retoma após reiniciar SQLite e sessão com nova chave sem duplicar preparação ou assinatura"],
   ["D-W9-34d", "hidratação com Mg/K (pré) e KCl (pós) em cada dia de cisplatina; manitol junto"],
   ["D-W9-77d", "o catálogo importado continua todo inativo e não acrescenta par com TKI"],
   ["D-W9-22", "neutrófilos 1499 ficam abaixo da bula 1500; 1500 passa; grau não abre a porta"],
@@ -674,8 +852,8 @@ function decisionEntries(root) {
   entries.set("D-W9-23c", { line: 160, summary: "Antiemese local: ondansetrona, dexametasona e difenidramina; sem aprepitanto", source: DECISIONS });
   entries.set("D-W9-34c", { line: 174, summary: "Atualiza pré-medicação local; inclui cimetidina e olanzapina opcional", source: DECISIONS });
   entries.set("D-W9-34d", { line: 175, summary: "Cisplatina D1/D8: magnésio e potássio na hidratação pré e pós", source: DECISIONS });
-  // L1 C2 decomposition: these parent decisions have subparts with different normative phases.
-  for (const parent of ["D-W9-75"]) {
+  // Parent rows remain; subitems with independent phases are traced individually.
+  for (const parent of ["D-W9-22", "D-W9-34", "D-W9-75"]) {
     const parentLine = lines.findIndex(line => line.includes(`**${parent} ·`));
     if (parentLine < 0) continue;
     for (let i = parentLine + 1; i < lines.length && !/^\s*- \*\*D-W9-\d{2}/.test(lines[i] ?? ""); i++) {
@@ -869,6 +1047,11 @@ function evidenceFor(id, sources, tests) {
     consumer = { file: "package.json" };
     selectedTest = { file: "tests/prompts/prompts.test.ts", title: "G-04 cada prompt repete contrato universal sem números de corte clínico" };
   }
+  if (id === "D-W5-09") {
+    owner = { file: "scripts/check-boundaries.mjs", symbol: "RULES" };
+    consumer = { file: "package.json", testConsumer: false };
+    selectedTest = { file: "tests/kernel/adv013-fronteiras.test.ts", title: "ADV-013 · check-boundaries rejeita ${vetor} fora de gateway/llm" };
+  }
   const runtimeAnchor = [...new Set([id, ...(linkedEvidence.get(id) ?? []), ...(testAnchors.get(id) ?? []), ...(tAnchor ? [tAnchor] : [])])]
     .find(anchor => testConsumerRuntime.has(anchor));
   const runtimePhase = runtimeAnchor ? testConsumerRuntime.get(runtimeAnchor) : undefined;
@@ -932,6 +1115,17 @@ function rowFor(id, requirement, sources, tests) {
     }
     return [id, cleanSummary(entry.summary), `${contract}; substituída por A11`, "scripts/backup.mjs:criarBackup", "tests/backup/backup.test.ts", evidence.test ? `${evidence.test.file}:${evidence.test.title}` : "tests/backup/backup.test.ts:N20 backup e restauração cifrados", "F0", `N-A — ${supersededDecision.get(id)}`];
   }
+  if (id === "D-W9-22" || id === "D-W9-34") {
+    return [id, cleanSummary(entry.summary), `${contract}; decomposição detalhada em subitens com fase própria`,
+      "não se aplica: item-pai de subitens", "não se aplica: ver subitens na matriz", "—", "F0",
+      "N-A — item-pai preservado; cada subitem (a–i / a–f) é rastreado separadamente abaixo"];
+  }
+  if (id === "Q50") {
+    const testText = multiTestEvidence.get(id).map(([file, title]) => `${file}:${title}`).join(" || ");
+    return [id, cleanSummary(entry.summary), `${contract}; PLANO-FINAL §5 exige testes positivos/negativos/borda + PR revisado + demo`,
+      "não se aplica: gate de aceitação da fase", "não se aplica: PR e demo são evidência de fase",
+      testText, "F0", "VERMELHO — GATE_FASE_PENDENTE: E6b HTTP/SQLite focal passou 8/8; PR revisado e demo ainda não foram entregues"];
+  }
   const complete = Boolean(evidence.owner && evidence.consumer && evidence.test);
   const ownerText = evidence.owner ? `${evidence.owner.file}:${evidence.owner.symbol}` : `PENDENTE: arquivo:símbolo; ${suggestedOwner(id)}`;
   const consumerText = evidence.consumer
@@ -946,7 +1140,7 @@ function rowFor(id, requirement, sources, tests) {
   const proof = proofByDecision.get(id) ?? `prova serial A6 em ${A6_HEAD} (ancestral direto do HEAD da worktree; A6 só é evidência para os arquivos que essa bateria executou)`;
   const state = complete && !pendingReason
     ? `VERDE — ${evidence.consumer?.runtimePhase ? `núcleo F0 provado; integração ${evidence.consumer.runtimePhase} não entregue; ` : ""}${proof}`
-    : `VERMELHO — PENDENTE_DE_MAPEAMENTO: ${pendingReason ?? missing.join(", ")}; esta linha não conclui ausência do produto`;
+    : `VERMELHO — ${residualClass.get(id) ?? "PENDENTE_DE_MAPEAMENTO"}: ${pendingReason ?? missing.join(", ")}; esta linha não conclui ausência do produto`;
   return [id, cleanSummary(entry.summary), contract, ownerText, consumerText, testText, phase.phase, state];
 }
 
@@ -965,8 +1159,8 @@ export function buildMatrix(root = defaultRoot) {
   const out = [
     "# Matriz de rastreabilidade F0 — R-34",
     "",
-    "> Base desta revisão C2-L1: `abf7940a49e82f45680c11c16bff04b4b745c90b` (L3 + L4 integradas; commit `ffeef6` da correção G-06 ainda não integrado). A6 `72ce726` é referência histórica somente para os arquivos executados naquela bateria; evidência L3/L4 é atribuída aos relatórios próprios. A revisão atual está em `docs/f0-fecha/C2-L1.md`.",
-    `> Estado observado na geração: ${green} VERDE com fonte, consumidor e teste rastreável; ${red} VERMELHO PENDENTE_DE_MAPEAMENTO; ${na} N-A com adiamento normativo, substituição ou checklist organizacional. N-A não significa implementado; VERMELHO tampouco prova produto ausente.`,
+    "> Base desta revisão C2-L1: `4c548f8abff4e1e2a337b865331a7fd6289774ee` (C2/E6b HTTP/SQLite, ConsultaPersistida, Flash durável, G-06, G-22, Q09 e prova D-W9-41). A bateria ampla integrada foi reportada PASS pelo root; o fechamento ainda depende do gate Q50, da prova D-W9-47 e da auditoria/PR/demo.",
+    `> Estado observado na geração: ${green} VERDE com fonte, consumidor e teste rastreável; ${red} VERMELHO com causa específica registrada; ${na} N-A por adiamento normativo, decomposição, substituição ou checklist organizacional. N-A não significa implementado; VERMELHO não equivale automaticamente a defeito de produto.`,
     "",
     "| Decisão | Resumo (≤12 palavras) | Contrato/fonte | Dono (arquivo:símbolo) | Consumidor (arquivo) | Teste observável (arquivo:nome) | Fase | Estado |",
     "|---|---|---|---|---|---|---|---|",
@@ -990,10 +1184,10 @@ export function buildMatrix(root = defaultRoot) {
     "- A6 executou em `72ce726`: 2.240/2.240 testes regulares, 240/240 red team, 41/41 W8, tsc, fronteiras e corpus; seu HEAD é ancestral do checkout desta worktree.",
     "- `PENDENTE_DE_MAPEAMENTO` é falha de rastreabilidade, não conclusão de que a funcionalidade está ausente. Vermelhos com causa confirmada descrevem a evidência específica; os demais exigem revisão em C.",
     "- `VERDE` exige símbolo, import/reexport ou contrato consumidor e teste com nome existente; isso não substitui revisão semântica do caso nem reataque após mudanças em C.",
-    "- `tests/ui/fechamento.test.tsx` prova a interação da UI sintética para Q17/Q18; não prova a montagem HTTP/SQLite de E6b. Q50 permanece VERMELHO: a prova 8/8 da preparação não está integrada/provada no HEAD desta matriz.",
-    "- `tests/f0-fecha/matriz.test.ts` verifica cobertura dos IDs, unicidade, referências e vínculo consumidor; não valida completude funcional da F0. A execução está registrada em `docs/f0-fecha/LUNA-1.md`.",
-    "- Q11 continua vermelho porque os testes de Maestro/ORK não demonstram chamada de produção entre ambos. Q50/E6b continua vermelho: a evidência L2 reportou conflito de labs de duas fontes falso antes da confirmação; a correção C2 ainda não foi provada nesta base.",
-    "- D-W9-78 continua vermelho até evidência integrada de modelo padrão e prazo visível na Flash. G-06/T-48 tem evidência parcial de banner e separação de templates, mas falta prova do gate em documento/folha operacional no percurso real.",
+    "- `tests/f0-fecha/consulta-completa.test.ts` e `docs/f0-fecha/C2-e6b-05.log` registram E6b HTTP/SQLite 8/8. Q50 permanece VERMELHO porque também exige PR revisado e demo de fase; E6b sozinha não fecha a decisão.",
+    "- `tests/f0-fecha/matriz.test.ts`: 2 testes estruturais passaram; o gate `red === 0` falhou com Q50 e D-W9-47, conforme `docs/f0-fecha/C2-L1.md`. O gate não valida completude funcional da F0.",
+    "- Q11 é VERDE para o núcleo F0: testes consumidores cobrem tabela Maestro e executor ORK separadamente conforme R-14/R-28; isso não afirma composição de runtime entre módulos.",
+    "- C2 integra ConsultaPersistida, Flash durável, CartaoTransversal, G-06, G-22 e Q09. Logs focais existem; a prova integral final e a demo/revisão exigidas pela missão ainda não passaram.",
     "",
   ].join("\n");
   return out;
@@ -1058,14 +1252,18 @@ export function validateMatrix(root = defaultRoot) {
       const planoFile = sources.find(file => file.rel === "src/orchestration/tipos.ts");
       const q11Bridge = id === "Q11" && ownerEntry && consumerEntry && planoFile
         && importsOwner(ownerEntry, planoFile, "Plano", sources) && importsOwner(consumerEntry, planoFile, "Plano", sources);
-      let g04Static = false;
-      if (["G-04", "T-46"].includes(id) && consumerPath === "package.json" && fs.existsSync(path.join(root, ".github/workflows/verify.yml"))) {
+      let staticGate = false;
+      if (["G-04", "T-46", "D-W5-09"].includes(id) && consumerPath === "package.json" && fs.existsSync(path.join(root, ".github/workflows/verify.yml"))) {
         const packageJson = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
         const workflow = fs.readFileSync(path.join(root, ".github/workflows/verify.yml"), "utf8");
-        g04Static = String(packageJson.scripts?.test ?? "").includes("vitest run") && workflow.includes("npm run verify");
+        staticGate = id === "D-W5-09"
+          ? String(packageJson.scripts?.["check:boundaries"] ?? "").includes("scripts/check-boundaries.mjs")
+            && String(packageJson.scripts?.verify ?? "").includes("npm run check:boundaries")
+            && workflow.includes("npm run verify")
+          : String(packageJson.scripts?.test ?? "").includes("vitest run") && workflow.includes("npm run verify");
       }
-      if (["G-04", "T-46"].includes(id) && !g04Static) errors.push(`${id}: gate estático não está ligado ao teste Vitest/CI`);
-      else if (!["G-04", "T-46"].includes(id)) {
+      if (["G-04", "T-46", "D-W5-09"].includes(id) && !staticGate) errors.push(`${id}: gate estático não está ligado ao runner/CI`);
+      else if (!["G-04", "T-46", "D-W5-09"].includes(id)) {
         const consumerLinked = Boolean(ownerEntry) && (consumerTest
           ? fs.readFileSync(path.join(root, consumerPath), "utf8").includes(symbol)
           : Boolean(consumerEntry && (q11Bridge || importsOwner(consumerEntry, ownerEntry, symbol, sources))));
@@ -1073,7 +1271,7 @@ export function validateMatrix(root = defaultRoot) {
       }
     }
     if (phase === "ORGANIZACIONAL" && !organizationalChecks.has(id)) errors.push(`${id}: checklist organizacional não permitido`);
-    if (phase === "F1+" && (!state.startsWith("N-A —") || !/(?:R-\d+|K-\d+|docs\/FECHAMENTO-F0)/.test(contract))) errors.push(`${id}: F1+ sem adiamento normativo rastreável`);
+    if (phase === "F1+" && (!state.startsWith("N-A —") || !/(?:R-\d+|K-\d+|docs\/FECHAMENTO-F0|FECHAMENTO-F0 §|PLANO-FINAL §F\d+)/.test(contract))) errors.push(`${id}: F1+ sem adiamento normativo rastreável`);
   }
   const gapSection = text.split("## Lacunas F0 — VERMELHO")[1]?.split("## Checklist organizacional")[0] ?? "";
   for (const row of rows.filter(candidate => candidate[7].startsWith("VERMELHO"))) {
