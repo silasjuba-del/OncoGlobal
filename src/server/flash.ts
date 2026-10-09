@@ -6,6 +6,7 @@ import { z } from "zod";
 import { Id } from "../contracts/base.js";
 import type { ClinicalEvent } from "../contracts/operacao.js";
 import { lerDraft, salvarDraft } from "../kernel/ledger/drafts.js";
+import { sqliteIdempotencia } from "../kernel/ledger/idempotencia.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
 import type { FlashVisao } from "../ui/api/porta.js";
 import { hashConteudoExibido } from "./sessao.js";
@@ -165,9 +166,32 @@ function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo, resumoCli
 export function prepararFinalizacaoFlash(db: DatabaseSync, agora: string, input: ContextoFlash & {
   plano: PlanoFlashEntradaTipo; idempotencyKey: string;
 }, resumoClinico: string | null = null): Resposta {
+  db.exec("SAVEPOINT flash_preparacao");
+  try {
+    const resultado = prepararDocumentosFlash(db, agora, input, resumoClinico);
+    if (resultado.status >= 400) db.exec("ROLLBACK TO flash_preparacao");
+    db.exec("RELEASE flash_preparacao");
+    return resultado;
+  } catch (erro) {
+    db.exec("ROLLBACK TO flash_preparacao"); db.exec("RELEASE flash_preparacao");
+    throw erro;
+  }
+}
+
+function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: ContextoFlash & {
+  plano: PlanoFlashEntradaTipo; idempotencyKey: string;
+}, resumoClinico: string | null): Resposta {
   if (input.plano.acoesMarcadas.length > 0 || input.plano.receitasMarcadas.length > 0)
     return { status: 409, body: { codigo: "ITENS_FLASH_SEM_DOCUMENTO" } };
-  const chave = sha(JSON.stringify([input.patientId, input.encounterId, input.tumorLotId, input.idempotencyKey]));
+  const payloadHash = hashConteudoExibido({ plano: input.plano, resumoClinico });
+  const chavePedido = `flash-preparar:${chaveContexto(input)}:${sha(input.idempotencyKey)}`;
+  const store = sqliteIdempotencia(db);
+  const reserva = store.reserve(chavePedido, payloadHash, agora);
+  if (reserva.registro.payloadHash !== payloadHash)
+    return { status: 409, body: { codigo: "IDEMPOTENCIA_CONFLITO" } };
+  // A identidade do artefato resiste a reload/nova sessão e nova chave após resposta perdida.
+  // Somente conteúdo e contexto exatamente iguais compartilham os mesmos documentos.
+  const chave = sha(JSON.stringify([chaveContexto(input), payloadHash]));
   const contexto = { encounterId: input.encounterId, tumorLotId: input.tumorLotId };
   const docs = montarDocumentos(chave, input.plano, resumoClinico);
   const draftsDocs = docs.map((d) => ({
@@ -203,6 +227,8 @@ export function prepararFinalizacaoFlash(db: DatabaseSync, agora: string, input:
       diagnostics: ["APAC_NAO_EMITIDA", "REVISAO_MEDICA_OBRIGATORIA"], revision: 0, criadoEm: agora });
 
   const evolucao = draftsDocs[0]!.payload;
+  store.set(chavePedido, { payloadHash,
+    resultado: { decisao: "EXECUTADA", motivoCodigo: "FLASH_PREPARADA", recibo: evolucao.documentId } }, agora);
   return { status: 200, body: {
     codigo: "FLASH_PREPARADA",
     registros: draftsDocs.map(({ payload }) => ({ id: payload.documentId, expectedRevision: 0 })),

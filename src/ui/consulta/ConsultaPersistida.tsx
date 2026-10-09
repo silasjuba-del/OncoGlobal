@@ -44,7 +44,8 @@ export function ConsultaPersistida({ porta, contexto }: { porta: PortaConsulta; 
     const atual = geracao.current;
     try { await acao(atual); }
     catch (erro) { if (atual === geracao.current) setMensagem(erro instanceof ErroPorta
-      ? `Operação não concluída (${erro.codigo}). Reabra o conteúdo para conferir.`
+      ? erro.message === "FLASH_JA_FINALIZADA" ? "Este conteúdo já foi finalizado. Reabra o histórico para conferir."
+        : `Operação não concluída (${erro.codigo}). Reabra o conteúdo para conferir.`
       : "Operação não concluída. O conteúdo permanece pendente de revisão."); }
     finally { if (atual === geracao.current) { emCurso.current = false; setOcupado(false); } }
   }
