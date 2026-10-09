@@ -1,0 +1,15 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal
+
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'eol.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'staged-id.txt', LF will be replaced by CRLF the next time Git touches it
+
+ Test Files  57 passed (57)
+      Tests  639 passed (639)
+   Start at  20:10:01
+   Duration  132.43s (tests 53%, environment 23%, import 17%, transform 6%, worker 1%)
+
+    Isolate  57 workers spawned · ~758ms startup each (spawn + environment, per file)
+             at least ~42.47s faster with isolate: false — reuses workers across files instead of one per file
+

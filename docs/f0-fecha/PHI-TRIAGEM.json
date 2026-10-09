@@ -2781,74 +2781,6 @@
       ]
     },
     {
-      "path": "docs/f0-fecha/Q50-ACEITE.json",
-      "sha256": "6d30473f3b9f871d2da15dbe866f82869766614bba7a832a3f640ef7925d1aa1",
-      "hashMode": "utf8-lf",
-      "items": [
-        {
-          "type": "telefone",
-          "line": 9,
-          "ordinal": 0,
-          "contextTag": "commit_hash_40_or_64_hex",
-          "status": "technical_token_false_positive",
-          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
-          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/Q50-ACEITE.json:9"
-        }
-      ]
-    },
-    {
-      "path": "docs/f0-fecha/inventario-final.json",
-      "sha256": "ed688bc6c8ae6eb4f256b4610876c0a14c5790c94604ae5f20879a360ab8af26",
-      "hashMode": "utf8-lf",
-      "items": [
-        {
-          "type": "telefone",
-          "line": 2,
-          "ordinal": 0,
-          "contextTag": "commit_hash_40_or_64_hex",
-          "status": "technical_token_false_positive",
-          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
-          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/inventario-final.json:2"
-        },
-        {
-          "type": "telefone",
-          "line": 120,
-          "ordinal": 0,
-          "contextTag": "commit_hash_40_or_64_hex",
-          "status": "technical_token_false_positive",
-          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
-          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/inventario-final.json:120"
-        },
-        {
-          "type": "telefone",
-          "line": 518,
-          "ordinal": 0,
-          "contextTag": "commit_hash_40_or_64_hex",
-          "status": "technical_token_false_positive",
-          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
-          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/inventario-final.json:518"
-        },
-        {
-          "type": "telefone",
-          "line": 556,
-          "ordinal": 0,
-          "contextTag": "commit_hash_40_or_64_hex",
-          "status": "technical_token_false_positive",
-          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
-          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/inventario-final.json:556"
-        },
-        {
-          "type": "telefone",
-          "line": 638,
-          "ordinal": 0,
-          "contextTag": "commit_hash_40_or_64_hex",
-          "status": "technical_token_false_positive",
-          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
-          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/inventario-final.json:638"
-        }
-      ]
-    },
-    {
       "path": "docs/f0-fecha/evidencias/D2-final/09-bloco.log",
       "sha256": "23e8cb9ef2668cba3baa16e4aebdcaddba5fbf982477af69ce7953120e0fe76c",
       "hashMode": "utf8-lf",
@@ -2915,6 +2847,31 @@
           "status": "synthetic_declared",
           "reason": "Endereço reservado sintético da configuração Git temporária citado no log de falha.",
           "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:27"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/inventario-final.json",
+      "hashMode": "utf8-lf",
+      "sha256": "43f7c0af779a4d7a188dc557a7fb18b6a37615150553df65e6db3778e7a5a113",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 518,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "reason": "Tokens completos de SHA no inventário final renovado; candidatos comparados e conferidos, sem identificador pessoal.",
+          "evidenceRef": "docs/f0-fecha/EQUIVALENCIA-FINAL.md; docs/f0-fecha/inventario-final.json:518"
+        },
+        {
+          "type": "telefone",
+          "line": 556,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "reason": "Tokens completos de SHA no inventário final renovado; candidatos comparados e conferidos, sem identificador pessoal.",
+          "evidenceRef": "docs/f0-fecha/EQUIVALENCIA-FINAL.md; docs/f0-fecha/inventario-final.json:556"
         }
       ]
     }

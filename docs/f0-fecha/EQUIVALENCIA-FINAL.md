@@ -1,6 +1,6 @@
 # Inventário final — equivalências e preservação
 
-Snapshot em `inventario-final.json`: 112 referências após fetch; 89 worktrees em LIMPEZA-WORKTREES.md. O ramo integrado contém origin/main por 7936820. Nenhum reset, merge ours, limpeza ou exclusão foi usado para ocultar diferenças.
+Snapshot em `inventario-final.json`: 119 referências após fetch e publicação dos branches fonte; 89 worktrees em LIMPEZA-WORKTREES.md. O ramo integrado contém origin/main por 7936820. Nenhum reset, merge ours, limpeza ou exclusão foi usado para ocultar diferenças.
 
 As referências antigas têm zero commits `git cherry +`, exceto GLM-21 e Kimi Q26, já justificadas individualmente em EQUIVALENCIA-A6.md. O ramo Astra original c0c0762 e os quatro closure estão cobertos. O WIP do Cursor permanece intacto e fora do commit, por D2.
 
@@ -13,6 +13,6 @@ As referências antigas têm zero commits `git cherry +`, exceto GLM-21 e Kimi Q
 | L1: 4c548f8 | Prova D41 já incorporada em f4c4cb0; equivalência por arquivo e prova focal D41-fonte.log. |
 | Claude: a37ed8e, bbd4644, 67f34f2, 77febdb, f18870e | Quatro relatórios finais importados em 1cbd76e; `git diff f18870e HEAD -- docs/f0-fecha/CLAUDE-*` nos quatro arquivos é vazio. Revisões intermediárias permanecem no ramo; nenhuma mutação clínica veio da auditoria. |
 
-Ramos remotos repetem as mesmas diferenças, não representam entregas adicionais. Os novos commits Luna 5 posteriores ao snapshot são incorporados por cherry-pick com origem registrada; renovar o inventário no fechamento. Diferenças de patch justificadas não são ancestralidade Git, e não se declara `git cherry` literalmente zerado.
+Ramos remotos repetem as mesmas diferenças, não representam entregas adicionais. Luna 5 c97b8d6 foi incorporada em 4621038 por cherry-pick -x. Inventário renovado em dc2e78c; fontes das Lunas, entrega seletiva e Claude publicadas. Diferenças de patch justificadas não são ancestralidade Git, e não se declara `git cherry` literalmente zerado.
 
 Nenhum `src` ou teste preexistente foi apagado. A revisão independente registrou conservação das rotas e provas adversariais. Logs vermelhos de diagnóstico permanecem ao lado das rodadas verdes; as contagens finais vêm da execução, não de soma de reataques.

@@ -1,5 +1,7 @@
 # Higiene de fim de linha e paridade de CI — L5
 
+> Relatório original da L5 abaixo é histórico. Fechamento atual: STATUS.md e PORTABILIDADE-PHI.md. No candidato dc2e78c, blocos locais cobrem 2.298 regulares + 240 redteam + 41 W8; CI verify cobre 2.452, incluindo 154 do redteam. União de ambos os formatos: 2.579 testes / 367 arquivos. O CI executou npm run verify; localmente foi usado o equivalente em blocos por limite de RAM, sem afirmar execução monolítica local. Binários revisados por arquivo/hash em REVISAO-BINARIOS.md, não por allowlist de pasta.
+
 ## Fim de linha
 
 Inspeção estática do worktree `f0/f0f-luna5` em 2026-10-09, por bytes, nas 1.206 fontes textuais com extensões TS/JS, JSON, Markdown, YAML, HTML, CSS, PowerShell, TXT, SQL, shell, TOML, XML, CSV e ENV. Resultado: 54 arquivos CRLF, 1.152 LF, 0 mistos e 0 sem terminador de linha. Binários foram excluídos dessa contagem.

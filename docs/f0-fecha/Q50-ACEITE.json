@@ -6,8 +6,8 @@
   "reviewer": "Claude",
   "reviewStatus": "SEM_ALTO_ABERTO",
   "reviewedCodeHead": "1b56427a176f7112e219eced2d2002dc3307a0f3",
-  "recordedPrHead": "7936820fdb0bf1f388a4861274372ce1e8c3b42b",
-  "recordedPrState": "DRAFT_PENDING_FINAL_CI",
+  "recordedPrHead": "dc2e78cf43901ed14d7ff7e8f6f09238e160bae3",
+  "recordedPrState": "CODE_CI_PASS_BEFORE_DOCUMENTARY_CLOSE",
   "scope": "Aceite documental Q50: PR existente, diff clínico revisado por Claude, demo real executada. Não presume CI verde, revisão humana GitHub, prontidão final nem merge. Delta de higiene tem relatório próprio e gates finais separados.",
   "evidence": [
     {
@@ -64,6 +64,32 @@
       "path": "docs/f0-fecha/demo/09-reabertura.png",
       "hashMode": "raw",
       "sha256": "f16d342d3f03f17b348b71b9681c6387b2036abaa6424fc50d667744fd14df31"
+    },
+    {
+      "path": "docs/f0-fecha/CLAUDE-REATAQUE-SCANNER-Q50.md",
+      "hashMode": "utf8-lf",
+      "sha256": "08ced487266a512be93fd2c4b364bc248eb62d18345aa7f02569b38e42f50a5b"
+    },
+    {
+      "path": "docs/f0-fecha/evidencias/D2-final-reataque/resultados.json",
+      "hashMode": "utf8-lf",
+      "sha256": "aa01845eb52c0fbfbcd200da9f62b550884afed5e4da0c2655d0778a35b3f92b"
+    },
+    {
+      "path": "docs/f0-fecha/E6b-final-1.log",
+      "hashMode": "utf8-lf",
+      "sha256": "5434603b1840ad24115bf3d3035544c82748ac0731d163b807977ac16171ba93"
+    },
+    {
+      "path": "docs/f0-fecha/E6b-final-2.log",
+      "hashMode": "utf8-lf",
+      "sha256": "b85bf2960f4345caf1cc67609be358067dd4ee4077bcb94cbaa4303484aef663"
+    },
+    {
+      "path": "docs/f0-fecha/E6b-final-3.log",
+      "hashMode": "utf8-lf",
+      "sha256": "804adc12f7f727cfd6d141b5f28ff1ee2f75925ca5edba40dcfd49d65a89cf43"
     }
-  ]
+  ],
+  "clinicalDeltaVerification": "git diff --name-only 1b56427 dc2e78c -- src corpus: vazio"
 }

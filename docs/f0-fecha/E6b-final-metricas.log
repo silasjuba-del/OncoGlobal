@@ -1,0 +1,18 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal
+
+stdout | tests/f0-fecha/consulta-completa.test.ts > F0 E6b · consulta completa com HTTP real e SQLite temporário > percorre kit sintético, vínculo explícito, evolução exibida e Flash assinada; reabre o SQLite e preserva a história
+[E6b-METRICAS] chamadas_http=18; acoes_de_tela_equivalentes=19; correcoes_requeridas=0; duracao_ms=1225
+
+ ✓ tests/f0-fecha/consulta-completa.test.ts > F0 E6b · consulta completa com HTTP real e SQLite temporário > percorre kit sintético, vínculo explícito, evolução exibida e Flash assinada; reabre o SQLite e preserva a história 1259ms
+ ✓ tests/f0-fecha/consulta-completa.test.ts > F0 E6b · consulta completa com HTTP real e SQLite temporário > mantém duas fontes contraditórias como CONFLITO e sem eleição automática antes de decisão 701ms
+ ✓ tests/f0-fecha/consulta-completa.test.ts > F0 E6b · consulta completa com HTTP real e SQLite temporário > preserva negação literal, data e unidade; ausência continua sem fato numérico inventado 218ms
+ ✓ tests/f0-fecha/consulta-completa.test.ts > F0 E6b · consulta completa com HTTP real e SQLite temporário > repete após falha percebida pelo cliente sem duplicar o evento nem a evolução 264ms
+ ✓ tests/f0-fecha/consulta-completa.test.ts > F0 E6b · consulta completa com HTTP real e SQLite temporário > recusa paciente trocado e conteúdo editado depois da exibição 543ms
+ ✓ tests/f0-fecha/consulta-completa.test.ts > F0 E6b · consulta completa com HTTP real e SQLite temporário > conclui revisão e Flash manualmente com o caminho de IA ausente 225ms
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  20:14:06
+   Duration  6.28s (tests 54%, transform 33%, import 12%)
+

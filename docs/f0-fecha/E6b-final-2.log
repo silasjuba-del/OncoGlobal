@@ -1,0 +1,13 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal
+
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  20:13:27
+   Duration  8.70s (tests 45%, transform 45%, import 10%)
+
+  Transform  transforming modules took 3.74s · 45% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

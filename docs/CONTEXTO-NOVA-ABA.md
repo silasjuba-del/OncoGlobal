@@ -2,6 +2,8 @@
 
 Atualizado em 09/10/2026. A missão vigente é `docs/ondas/F0-FECHAMENTO-ASTRA.md`, autorizada por D-W9-80. Astra é a integradora e única writer de `f0/w1-integrado`. O Dr. Silas faz o merge na main.
 
+Estado final: F0 pronta para merge humano no PR #4. Código dc2e78c passou a bateria integral, CI e E6b três vezes; entrega documental em RELATORIO-F0.md e f0-fecha/STATUS.md. Conferir o CI do último HEAD antes do merge.
+
 ## Raiz e estado vivo
 
 - Repositório: `C:\Users\silas\Projects\OncoGlobal`, origin `silasjuba-del/OncoGlobal`, branch `f0/w1-integrado`.

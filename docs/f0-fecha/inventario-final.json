@@ -1,5 +1,5 @@
 {
-  "base": "7936820fdb0bf1f388a4861274372ce1e8c3b42b",
+  "base": "dc2e78cf43901ed14d7ff7e8f6f09238e160bae3",
   "refs": [
     {
       "ramo": "refs/heads/closure/w10-fugu",
@@ -99,7 +99,7 @@
     },
     {
       "ramo": "refs/heads/f0/f0f-luna5",
-      "head": "3437f670de628a2b0d31d267e069ec2642c8f49c",
+      "head": "c97b8d6f0a8d710771fb9b8f14f119a1b87eeea4",
       "semEquivalente": 0,
       "commits": []
     },
@@ -117,7 +117,7 @@
     },
     {
       "ramo": "refs/heads/f0/w1-integrado",
-      "head": "7936820fdb0bf1f388a4861274372ce1e8c3b42b",
+      "head": "dc2e78cf43901ed14d7ff7e8f6f09238e160bae3",
       "semEquivalente": 0,
       "commits": []
     },
@@ -622,6 +622,62 @@
       ]
     },
     {
+      "ramo": "refs/remotes/origin/f0/f0f-claude",
+      "head": "f18870efe24f68a57bf6f2686c056e86a9a71c1e",
+      "semEquivalente": 5,
+      "commits": [
+        "+ a37ed8e81c4d852c17ace6c18bd6980ff443a7d5 F0F-CLAUDE: triagem dos 35 PHI pendentes da L5 (proposta, sem valores)",
+        "+ bbd46442e482658d72852ca42a851f656736e21d F0F-CLAUDE: verificacao da matriz R-34 da L1 (205/205 provas existem; 2 defeitos de forma)",
+        "+ 67f34f245ba6869fa7fa9f5056d07e576f1594b4 F0F-CLAUDE: registra revisao visual do Dr. Silas (webp sem dado de paciente)",
+        "+ 77febdbbbab9f697dd9b8febaa4a29658729a2be F0F-CLAUDE: reauditoria D1 (1b56427 aprovado) e revisao L1/L5 (merge seletivo da L1)",
+        "+ f18870efe24f68a57bf6f2686c056e86a9a71c1e F0F-CLAUDE: reauditoria D1 v2 (A3, gateway, OncoAssist, L5 35/35, fases L1); corrige falso defeito da matriz"
+      ]
+    },
+    {
+      "ramo": "refs/remotes/origin/f0/f0f-luna1",
+      "head": "8543c33e20d9924d2858f1496024fd6cf9192639",
+      "semEquivalente": 7,
+      "commits": [
+        "+ 74925dc33f9ff208e996cd9380b71378e0b5cb55 F0F-L01: matriz de rastreabilidade R-34",
+        "+ f21280379db3ac6c111890b61f3ab0633edd7ac7 F0F C1: corrigir faixa e proveniencia da caixa Flash sem mudar caixas anteriores",
+        "+ 2e0544c492f7bddf45bd16cc5bb37bbda422a7b9 F0F C2: conectar consulta HTTP, evidencia documental e assinatura do conteudo exibido",
+        "+ 9f8887c8bc97055c0e168e796affd518687b3019 F0F-C2-L01-WIP: reconciliar rastreabilidade R-34",
+        "+ 4c548f8abff4e1e2a337b865331a7fd6289774ee F0F C2: disponibilizar prova D41 integrada para rastreabilidade",
+        "+ 221def68f49983d0c5ef7c999b9a97cc42258dd9 F0F-L01: reconciliar matriz R34 C2 parcial",
+        "+ 8543c33e20d9924d2858f1496024fd6cf9192639 F0F-L01: provar núcleo de classes medicamentosas"
+      ]
+    },
+    {
+      "ramo": "refs/remotes/origin/f0/f0f-luna1-entrega",
+      "head": "f3b4343a04fbfd7fcd66c7577321c218ac64ca35",
+      "semEquivalente": 0,
+      "commits": []
+    },
+    {
+      "ramo": "refs/remotes/origin/f0/f0f-luna2",
+      "head": "76c0c3b2a16b2dfd8e8be1cb6566c89d309a69d0",
+      "semEquivalente": 0,
+      "commits": []
+    },
+    {
+      "ramo": "refs/remotes/origin/f0/f0f-luna3",
+      "head": "3b1b67bca862c6e4789f77e3f591e2a60faf1709",
+      "semEquivalente": 0,
+      "commits": []
+    },
+    {
+      "ramo": "refs/remotes/origin/f0/f0f-luna4",
+      "head": "8b1f1067f0ba69312c4a0cd31aaf63cb53f5f45c",
+      "semEquivalente": 0,
+      "commits": []
+    },
+    {
+      "ramo": "refs/remotes/origin/f0/f0f-luna5",
+      "head": "c97b8d6f0a8d710771fb9b8f14f119a1b87eeea4",
+      "semEquivalente": 0,
+      "commits": []
+    },
+    {
       "ramo": "refs/remotes/origin/f0/planejamento",
       "head": "1144eae98cf3b38dcb9f1c508ec59a5659b05fd1",
       "semEquivalente": 0,
@@ -635,7 +691,7 @@
     },
     {
       "ramo": "refs/remotes/origin/f0/w1-integrado",
-      "head": "7936820fdb0bf1f388a4861274372ce1e8c3b42b",
+      "head": "dc2e78cf43901ed14d7ff7e8f6f09238e160bae3",
       "semEquivalente": 0,
       "commits": []
     },
