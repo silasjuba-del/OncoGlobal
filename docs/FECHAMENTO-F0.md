@@ -52,6 +52,7 @@ Arquivos em conflito no merge da Astra:
 | **E4** | **Cursor.** Os 6 arquivos sem commit em `w10-cursor` viram commit do próprio Cursor (e entram por merge) ou são descartados | Dr. Silas decide; Cursor executa | Worktree limpo |
 | **E5** | **Planejamento.** Merge de `f0/planejamento` (PLN-039) | tech lead | Escopo só `docs/planejamento/**` |
 | **E6** | **Matriz R-34.** `docs/MATRIZ-RASTREABILIDADE-F0.md`: cada Q/A/D-W relevante à F0 → contrato → função dono → consumidor → teste. Lacuna = vermelho, com dono | agente Sonnet gera; tech lead confere | Sem linha vazia nas decisões da F0; lacunas listadas como fatia |
+| **E6b** | **Prova da consulta completa (parecer Codex 09/10).** Um teste ponta a ponta com caso sintético: kit documental → revisão → evolução → confirmação e assinatura → reabertura com histórico preservado. Na mesma jornada: documento contraditório continua sinalizado até a decisão; negação, data, unidade e ausência preservadas; repetir após falha não duplica; trocar de paciente ou editar o conteúdo invalida a confirmação anterior; o fluxo segue sem IA. Mede tempo e número de cliques/correções. É a base da demo E9 | agente Sonnet; tech lead confere | Os 6 critérios verdes num único arquivo; o que faltar vira item da E7 |
 | **E7** | **Bloqueantes da F0 que a matriz apontar** + pedidos de contrato da W12 (tipos PROVISORIO-W12, `fcMin`, retirar `ecog2ComTonturaCorta`, vertigem com histórico, tontura `null` no formulário) | tech lead + executores | Matriz sem vermelho da F0 |
 | **E8** | **Auditoria cruzada (Codex).** Revisão só leitura do diff `main...f0/w1-integrado`, nunca no arquivo de quem escreveu. Achados → correção → reataque | Codex; tech lead corrige | Zero achado ALTO aberto |
 | **E9** | **PR + demo.** PR `f0/w1-integrado → main` com resumo, evidência e matriz. Demo no app (salão, consulta, Flash, cartão transversal, APAC rascunho) com dados sintéticos | tech lead; Dr. Silas assiste | Dr. Silas aprova a demo e o merge |
@@ -65,6 +66,15 @@ Arquivos em conflito no merge da Astra:
 3. **Pouca RAM:** a verificação é sempre em blocos. Uma falha só sob carga é confirmada isolada antes de virar achado.
 4. **A matriz pode revelar lacunas de F0 escondidas** (E6 → E7). É esperado; nesse caso a data de fechamento anda.
 5. **O que NÃO é F0 e não trava:** a caixa do modelo padrão da Flash, o prazo do retorno na tela, as receitas na Flash, as 25 orientações do canal e os biomarcadores extras de pulmão. Entram como abertura da F1.
+
+## 4b. Parecer do Codex (09/10): o que entra agora e o que fica
+O parecer está registrado em `docs/w12/PARECER-CODEX-2026-10-09.md`.
+- **Entra na F0:** a prova da consulta completa (E6b). Ela coincide com o que a F0 já exige: demo no app (Q50) e "validar tudo" preso à versão exibida (A1/G-25).
+- **Entra na E11 (CANONICA, com ordem do Dr. Silas):**
+  - (1) a permissão dos agentes, porque a GOVERNANÇA diz "sem ferramentas" e a RAIZ admite LLM com ferramentas. Explicitar: extrator clínico = restrito; OncoAssist e orquestrador = permissões próprias;
+  - (2) a área de **evidência pendente** (documento recebido e extração não confirmada), separada do fato confirmado. No código ela já existe como rascunho/DraftEnvelope; falta escrever no SSOT.
+- **Gate antes de ligar qualquer LLM externa, não da F0:** (3) desidentificação verificável em texto livre, OCR, nome de arquivo, metadados e logs, com caminho manual quando falhar. A LLM segue desligada (D-W9-15/66).
+- **Fica para depois, por ordem do parecer:** roteador multi-modelo, capacidades proativas, grafo/vetores e medição de custo por tarefa (F1+).
 
 ## 5. Decisões do Dr. Silas
 - **D1.** Autorizar E0/E1: congelar e pedir à Astra que publique o ramo dela.
