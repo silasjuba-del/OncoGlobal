@@ -1,5 +1,7 @@
+import type { ResultadoIntervaloPosQt } from "../contracts/w12/regrasClinicas.js";
+export type { ResultadoIntervaloPosQt } from "../contracts/w12/regrasClinicas.js";
 // Q56, A4 · intervalo da última administração de QT até cirurgia ou RT sequencial.
-// PROVISORIO-W12: a FN-07 em prazos.ts continua dona do contrato SaidaIntervalo. Este módulo lê intervalos.v1.json.
+// A FN-07 em prazos.ts continua dona do contrato SaidaIntervalo. Este módulo lê intervalos.v1.json.
 // Datas civis já resolvidas. O fuso −03:00 é aplicado no barrel, com dataCivilNoOffset. Sem relógio.
 
 import { diferencaDiasCivis } from "./datas.js";
@@ -17,16 +19,6 @@ export interface EntradaIntervaloCivil {
   ultimaQt: string | null;
   dataAlvo: string | null;
   alvo: string;
-}
-
-export interface ResultadoIntervaloPosQt {
-  estado: "PASSA" | "AVISO" | "PENDENTE" | "NAO_APLICA";
-  dias: number | null;
-  motivo: string;
-  bloqueiaSalvar: false;
-  trava: false;
-  rulesetVersao: string;
-  fuso: string;
 }
 
 type Bruto = Record<string, unknown>;

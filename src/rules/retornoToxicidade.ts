@@ -1,26 +1,8 @@
+import type { EntradaRetornoToxicidade, MedicamentoRetorno, ResultadoRetornoToxicidade } from "../contracts/w12/regrasClinicas.js";
+export type { EntradaRetornoToxicidade, MedicamentoRetorno, ResultadoRetornoToxicidade } from "../contracts/w12/regrasClinicas.js";
 // W12-GROK-05 · cadeia do retorno: grau, plaquetas, E1 e alertas de suporte.
-// PROVISORIO-W12: publicar EntradaRetornoToxicidade e ResultadoRetornoToxicidade quando o contrato abrir.
 // Este módulo não importa outras regras. Limites e alertas já calculados entram por parâmetro.
 // Alerta nunca bloqueia, nunca altera a fila e nunca define dose ou causalidade.
-
-import type { ClasseMedicacao } from "../contracts/w10/prescricao.js";
-
-export interface MedicamentoRetorno {
-  nome: string;
-  classe: ClasseMedicacao | null;
-}
-
-export interface EntradaRetornoToxicidade {
-  pacienteId: string;
-  grau: number | null;
-  plaquetas: number | null;
-  dataPlaquetas: string | null;
-  horasDiarreia: number | null;
-  vomito: boolean | null;
-  medicamentos: readonly (string | MedicamentoRetorno)[] | null;
-  dm2: boolean | null;
-  tempDecimos: number | null;
-}
 
 export interface LimitesRetorno {
   rulesetId: string;
@@ -59,17 +41,6 @@ export interface AlertaRetorno {
 export interface AchadoRetorno {
   codigo: string;
   texto: string;
-}
-
-export interface ResultadoRetornoToxicidade {
-  pacienteId: string;
-  destino: "FILA_MEDICO" | "SEM_FILA";
-  motivos: AchadoRetorno[];
-  alertas: AlertaRetorno[];
-  pendencias: AchadoRetorno[];
-  bloqueiaSalvar: false;
-  confirmadoPeloMedico: false;
-  sugestao: true;
 }
 
 type Bruto = Record<string, unknown>;

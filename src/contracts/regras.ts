@@ -11,11 +11,11 @@ export const SalaoRuleset = z.object({
   header: RulesetHeader.and(z.object({ id: z.literal("salao-triagem") })),
   cortes: z.object({
     pasMax: z.number().int(), pasMin: z.number().int(),
-    fcMax: z.number().int(), fcMinNaoCorta: z.number().int(),
+    fcMax: z.number().int(), fcMin: z.number().int(),
     spo2Min: z.number().int(), tempDecimosMax: z.number().int(), hbDgDlMin: z.number().int(),
     ancMin: z.number().int(), plqMin: z.number().int(),
     grauCtcaeCorta: z.number().int(), grauCtcaeEmergencia: z.number().int(),
-    ecogCorta: z.array(z.number().int()), ecog2ComTonturaCorta: z.boolean(),
+    ecogCorta: z.array(z.number().int()),
   }),
   hemogramaValidadeDias: z.number().int(),
   frente: z.object({ recursos: z.array(z.string()), idadeAcimaDe: z.number().int() }).passthrough(),

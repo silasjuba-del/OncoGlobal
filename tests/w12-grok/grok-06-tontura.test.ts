@@ -9,7 +9,7 @@ import { ausente, ctxBase, triagemBase } from "../fixtures/triagem.js";
 import { salaoRuleset } from "../fixtures/rulesets.js";
 
 const json = JSON.parse(readFileSync("corpus/rulesets/salao-triagem.v1.json", "utf8")) as {
-  cortes: { ecog2ComTonturaCorta: boolean };
+  cortes: { fcMin: number };
   vertigem: { alertaSnc: string; bloqueiaSalvar: boolean };
 };
 const frase = lerAlertaVertigem(json);
@@ -20,8 +20,8 @@ const CAMPOS = [
 ] as const;
 
 describe("W12-GROK-06 tontura fora do corte", () => {
-  it("a chave ecog2ComTonturaCorta permanece no JSON e o código não emite naoCorte.ecog.tontura", () => {
-    expect(json.cortes.ecog2ComTonturaCorta).toBe(false);
+  it("o corte por tontura não faz parte do contrato e o código não emite naoCorte.ecog.tontura", () => {
+    expect(json.cortes).not.toHaveProperty("ecog2ComTonturaCorta");
     const r = avaliarTriagem(triagemBase({ ecog: { ...triagemBase().ecog, valor: 2 }, tontura: true }), ctxBase(), salaoRuleset);
     expect(r.cortes.map((m) => m.codigo)).not.toContain("corte.ecog.tontura");
     expect(r.naoCortes.map((m) => m.codigo)).not.toContain("naoCorte.ecog.tontura");
