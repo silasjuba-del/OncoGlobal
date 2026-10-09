@@ -12,7 +12,7 @@ import { confirmar } from "../../src/kernel/ledger/writeRouter.js";
 import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gateway.js";
 import { createSettingsService } from "../../src/config/settings.js";
 import { carregarCorpusServidor } from "../../src/server/corpus.js";
-import { CHAVE_CAIXA_MODELO_FLASH } from "../../src/server/flash.js";
+import { CHAVE_CAIXA_MODELO_FLASH, NUMERO_CAIXA_MODELO_FLASH } from "../../src/config/flash.js";
 import { criarServidorLocal } from "../../src/server/http.js";
 import { criarGerenciadorSessao } from "../../src/server/sessao.js";
 import { fonteSintetica } from "../fixtures/triagem.js";
@@ -20,7 +20,7 @@ import { fonteSintetica } from "../fixtures/triagem.js";
 const AGORA = "2026-10-08T12:00:00-03:00";
 const PACIENTE = "Paciente Teste 41";
 const ENCONTRO = "encontro-41";
-const NUMERO_MODELO = 9001;
+const NUMERO_MODELO = NUMERO_CAIXA_MODELO_FLASH;
 
 const dirs: string[] = [];
 const servers: Server[] = [];
@@ -54,14 +54,14 @@ async function ambiente(opts: { comSettings?: boolean } = {}) {
     ENVIAR_WHATSAPP: { executar: async () => { efeitos++; return { ok: true, recibo: "zap-teste" }; } },
     EXPORTAR_APAC: { executar: async () => { efeitos++; return { ok: true, recibo: "apac-teste" }; } },
   } });
-  const caixas = [...carregarCorpusServidor().caixasTodas, { numero: NUMERO_MODELO, chave: CHAVE_CAIXA_MODELO_FLASH,
-    nome: "Modelo padrão da Flash", significado: "Marcações iniciais da Consulta Flash (teste)",
-    ondeAparece: ["Consulta Flash"], tipo: "REGRA_CLINICA" as const, editavelPor: "MEDICO" as const }];
+  const caixas = carregarCorpusServidor().caixasTodas;
+  if (!caixas.some((caixa) => caixa.numero === NUMERO_MODELO && caixa.chave === CHAVE_CAIXA_MODELO_FLASH))
+    throw new Error("CAIXA_MODELO_FLASH_AUSENTE_DO_CORPUS");
   const settings = opts.comSettings === false ? undefined
     : createSettingsService({ rootDir: join(root, "config"), caixas, now: () => AGORA });
   if (settings) fechaveis.push(settings);
   const server = criarServidorLocal({ db, sessoes, gateway, agora: () => AGORA, log: (e) => logs.push(e),
-    ...(settings ? { settings, numeroCaixaModeloFlash: NUMERO_MODELO } : { configRootDir: join(root, "config-auto") }) });
+    ...(settings ? { settings } : { configRootDir: join(root, "config-auto") }) });
   servers.push(server);
   await new Promise<void>((resolve) => server.listening ? resolve() : server.once("listening", resolve));
   const address = server.address();

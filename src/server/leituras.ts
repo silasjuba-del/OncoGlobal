@@ -15,7 +15,7 @@ import type { SetorChat } from "../ui/api/porta.js";
 import { SalaoRuleset, type ContextoTriagem } from "../contracts/regras.js";
 import { avaliarCorteSalao, avaliarTriagem } from "../rules/triagem.js";
 import { ordenarFila } from "../rules/fila.js";
-import { antiglosa } from "../apac/antiglosa.js";
+import { antiglosa, CAMPOS_OBRIGATORIOS_PADRAO } from "../apac/antiglosa.js";
 import type { CaixaNumerada } from "../contracts/w10/clinico-w10.js";
 import type { TabelasSigtap } from "../apac/sigtap.js";
 import { avaliarSerieRecist, type RecistSerieInput } from "../rules/recist/index.js";
@@ -351,10 +351,20 @@ export function lerCanal(db: DatabaseSync) {
   });
   return { mensagens, estado: mensagens.length ? "PARCIAL" : rows.length ? "PENDENTE" : "FONTE_AUSENTE" };
 }
+export function validarCatalogoApac(caixas: readonly CaixaNumerada[]):
+  | { estado: "DISPONIVEL"; caixas: readonly CaixaNumerada[] }
+  | { estado: "PENDENTE" } {
+  const caixasApac = caixas.filter((caixa) => caixa.chave.startsWith("apac."));
+  const chaves = new Set(caixasApac.map((caixa) => caixa.chave));
+  if (!CAMPOS_OBRIGATORIOS_PADRAO.every((campo) => chaves.has(`apac.${campo}`))) return { estado: "PENDENTE" };
+  return { estado: "DISPONIVEL", caixas: caixasApac };
+}
+
 export function lerApacs(db: DatabaseSync, agora: string, config: {
   caixas: readonly CaixaNumerada[]; sigtap: TabelasSigtap; cnesConfigurado: string;
 }) {
   const all = eventos(db), apacs = apacTimeline(all);
+  const catalogoApac = validarCatalogoApac(config.caixas);
   const civil = dataCivilDoServico(agora, "-03:00");
   if (civil.estado !== "OK") return { hoje: null, itens: [], estado: "PENDENTE", codigo: civil.codigo };
   const lots = porTipo(all, "TumorLot", TumorLot), patients = porTipo(all, "Paciente", Paciente);
@@ -369,8 +379,8 @@ export function lerApacs(db: DatabaseSync, agora: string, config: {
     let prazo: ReturnType<typeof apacPrazo> | null = null;
     try { prazo = apacPrazo(apac.dataGeracaoApp, civil.dataCivil, null); } catch { /* malformed civil date stays pending */ }
     const doLote = apacs.filter((other) => other.competencia === apac.competencia);
-    const resultadoAntiglosa = config.caixas.length === 47
-      ? antiglosa(apac, { hoje: civil.dataCivil, sigtap: config.sigtap, caixas: config.caixas,
+    const resultadoAntiglosa = catalogoApac.estado === "DISPONIVEL"
+      ? antiglosa(apac, { hoje: civil.dataCivil, sigtap: config.sigtap, caixas: catalogoApac.caixas,
         cnesConfigurado: config.cnesConfigurado, apacsDoLote: doLote }) : null;
     return [{ apac, lote, nomePaciente: paciente.nome, patientId: paciente.patientId,
       encounterId: event.encounterId,

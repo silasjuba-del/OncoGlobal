@@ -127,6 +127,11 @@ function valorOuPendente(v: string | undefined): string {
 
 export function ConsultaFlash(props: ConsultaFlashProps) {
   const { cabecalho, exames, acoesHoje, receitas, apac, iaFala, retorno, tarefasRetorno } = props;
+  const [prazoRetorno, setPrazoRetorno] = useState(retorno.dias === null ? "" : String(retorno.dias));
+  const diasEditados = prazoRetorno.trim() === "" ? null : Number(prazoRetorno);
+  const prazoInvalido = diasEditados !== null
+    && (!Number.isInteger(diasEditados) || diasEditados < 1 || diasEditados > 3650);
+  const diasRetorno = prazoInvalido ? null : diasEditados;
 
   const [tarefas, setTarefas] = useState<MarcacaoTarefasRetorno>(() => {
     if (!tarefasRetorno || !tarefasRetorno.modeloPadraoSalvo) {
@@ -164,7 +169,7 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
       acoesMarcadas: acoesHoje.filter((a) => marcadas[`acao:${a.id}`] === true).map((a) => a.id),
       receitasMarcadas: receitas.filter((r) => marcadas[`receita:${r.id}`] === true).map((r) => r.id),
       apac: { ...apac, pendencias: [...apac.pendencias], emitir: false },
-      retorno: { ...retorno, examesAntesDoRetorno: [...retorno.examesAntesDoRetorno] },
+      retorno: { ...retorno, dias: diasRetorno, examesAntesDoRetorno: [...retorno.examesAntesDoRetorno] },
       ...(tarefasRetorno ? { tarefasRetorno: { ...tarefas } } : {}),
     };
   }
@@ -189,14 +194,21 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
           {valorOuPendente(cabecalho.cicloDia)}
         </p>
         <p>
-          RETORNO: {retorno.dias === null ? "PENDENTE" : `${retorno.dias} DIAS`}
+          RETORNO: {prazoInvalido ? "PRAZO INVÁLIDO" : diasRetorno === null ? "PENDENTE" : `${diasRetorno} DIAS`}
           {retorno.motivo ? ` · ${retorno.motivo}` : ""}
         </p>
+        <label>
+          Prazo do retorno (dias)
+          <input type="number" min={1} max={3650} step={1} aria-label="Prazo do retorno em dias"
+            value={prazoRetorno} onChange={(event) => setPrazoRetorno(event.target.value)}
+            aria-invalid={prazoInvalido} />
+        </label>
+        {prazoInvalido ? <p role="alert">Informe um número inteiro entre 1 e 3650 dias, ou deixe vazio para PENDENTE.</p> : null}
       </header>
 
       {tarefasRetorno ? (
         <TarefasRetorno
-          prazoDias={retorno.dias}
+          prazoDias={diasRetorno}
           marcadas={tarefas}
           modeloPadraoSalvo={tarefasRetorno.modeloPadraoSalvo}
           onAlternar={alternarTarefa}
@@ -276,10 +288,10 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
       </section>
 
       <footer>
-        <button type="button" disabled={props.ocupado === true} onClick={() => props.aoSalvarRascunho(montarPlano())}>
+        <button type="button" disabled={props.ocupado === true || prazoInvalido} onClick={() => props.aoSalvarRascunho(montarPlano())}>
           SALVAR RASCUNHO
         </button>
-        <button type="button" disabled={props.ocupado === true} onClick={() => props.aoFinalizar(montarPlano())}>
+        <button type="button" disabled={props.ocupado === true || prazoInvalido} onClick={() => props.aoFinalizar(montarPlano())}>
           FINALIZAR · IMPRIMIR · SAIR
         </button>
       </footer>

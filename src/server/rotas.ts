@@ -30,7 +30,8 @@ import { ClinicalFact as ClinicalFactContract, EncounterSegment, FactSourceType,
 import { AcaoRevisaoPedido, ClosureVinculoContato } from "../contracts/w10/closure.js";
 import { criarOncoassistJev } from "../app/oncoassist.js";
 import { detectarEmergencias } from "../rules/radsEmergencias.js";
-import { CHAVE_CAIXA_MODELO_FLASH, PlanoFlashEntrada, lerModeloFlash, prepararFinalizacaoFlash, salvarRascunhoFlash } from "./flash.js";
+import { PlanoFlashEntrada, lerModeloFlash, prepararFinalizacaoFlash, salvarRascunhoFlash } from "./flash.js";
+import { CHAVE_CAIXA_MODELO_FLASH } from "../config/flash.js";
 import { confrontarNomeIdentificador } from "../rules/w8/vinculoDocumento.js";
 import { normalizarDataCivil } from "../kernel/extracao/normalizacao.js";
 import { farmacosMencionados } from "../kernel/extracao/reconciliacao.js";
@@ -43,8 +44,6 @@ export interface ServidorDeps {
   settings?: SettingsService | null;
   configRootDir?: string;
   corpus?: ReturnType<typeof carregarCorpusServidor> | null;
-  /** PROVISORIO-W12: número da caixa do modelo padrão da Flash. Padrão: caixa `config.flash.modeloPadrao` do corpus, se existir. */
-  numeroCaixaModeloFlash?: number | null;
   oncoassistJev?: ReturnType<typeof criarOncoassistJev>;
   agora: () => string;
   log: (entry: { rota: string; codigo: string; status: number }) => void;
@@ -328,7 +327,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         tempDecimos: rawTriagem.tempDecimos.valor, hbDgDl: rawTriagem.hbDgDl.valor, anc: rawTriagem.anc.valor,
         plq: rawTriagem.plq.valor, coletaHemograma: rawTriagem.coletaHemograma.valor,
         ecog: rawTriagem.ecog.valor, grauCtcae: rawTriagem.grauCtcae.valor,
-        tontura: rawTriagem.tontura, recurso: rawTriagem.recurso, idadeAnos: rawTriagem.idadeAnos };
+        tontura: rawTriagem.tontura, vertigemHistoricoAnterior: rawTriagem.vertigemHistoricoAnterior ?? null,
+        vertigemInicioNovo: rawTriagem.vertigemInicioNovo ?? null, recurso: rawTriagem.recurso, idadeAnos: rawTriagem.idadeAnos };
       const contentHash = hashConteudoExibido(valores);
       const mesmoConteudo = !!existente
         && (existente.payload as { contentHash?: string } | null)?.contentHash === contentHash;
@@ -854,8 +854,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "carregarConsulta") {
       const parsed = z.object({ patientId: Id, tumorLotId: Id.nullable().optional() }).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
-      const numeroModelo = deps.numeroCaixaModeloFlash !== undefined ? deps.numeroCaixaModeloFlash
-        : deps.corpus?.caixasTodas.find((c) => c.chave === CHAVE_CAIXA_MODELO_FLASH)?.numero ?? null;
+      const numeroModelo = deps.corpus?.caixasTodas.find((c) => c.chave === CHAVE_CAIXA_MODELO_FLASH)?.numero ?? null;
       let modeloFlash = null as ReturnType<typeof lerModeloFlash>;
       if (numeroModelo !== null && deps.settings) {
         try { modeloFlash = lerModeloFlash(deps.settings.readBox(numeroModelo, sessao).value); } catch { modeloFlash = null; }
