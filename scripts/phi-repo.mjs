@@ -3,7 +3,7 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { inflateRawSync } from "node:zlib";
 import { join, relative, sep, resolve, isAbsolute } from "node:path";
-import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs";
+import { getDocument, OPS } from "pdfjs-dist/legacy/build/pdf.mjs";
 
 const EMAIL = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi;
 const CNS = /(?<!\d)(?:[12789]\d{14}|[12789]\d{2}(?:[ .-]\d{3}){4}|[12789]\d{2}[ .-]\d{4}[ .-]\d{4}[ .-]\d{4})(?!\d)/g;
@@ -15,6 +15,8 @@ const TEXT_DECODER = new TextDecoder("utf-8", { fatal: true });
 const MAX_ZIP_ENTRIES = 10_000;
 const MAX_ZIP_ENTRY_BYTES = 16 * 1024 * 1024;
 const MAX_ZIP_TOTAL_BYTES = 64 * 1024 * 1024;
+const XLSX_UNREAD_PARTS = ["comments", "headers_footers", "docProps", "embedded_images"];
+const OPERATIONAL_STORE_EXTENSIONS = new Set(["db", "sqlite", "sqlite3", "db-wal", "db-shm", "sqlite-wal", "sqlite-shm"]);
 
 const BRAZILIAN_DDDS = new Set([
   "11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22", "24", "27", "28",
@@ -363,6 +365,75 @@ function manifestAssetDisposition(manifest, path, fileHash, category, context) {
   return { status: "DISPOSED", applied: true, reason: file.reason };
 }
 
+function coverageReviewValid(manifest, path, fileHash, kind, required) {
+  const record = manifestFile(manifest, path);
+  if (!record || record.sha256 !== fileHash) return false;
+  const review = record.coverageReviews?.find((entry) => entry.kind === kind);
+  if (!review || review.sha256 !== fileHash || review.status !== "manual_review_complete"
+    || !review.evidenceRef || !review.reason) return false;
+  const declared = new Set(kind === "pdf_visual_review" ? review.pages ?? [] : review.parts ?? []);
+  return required.every((item) => declared.has(item));
+}
+
+function indexWorktreeEquivalent(indexBytes, worktreeBytes, path) {
+  if (indexBytes.equals(worktreeBytes)) return true;
+  const extension = path.toLowerCase().split(".").pop() ?? "";
+  if (NON_TEXT_EXTENSIONS.has(extension) || indexBytes.includes(0) || worktreeBytes.includes(0)) return false;
+  try {
+    const decoder = new TextDecoder("utf-8", { fatal: true, ignoreBOM: true });
+    const indexText = decoder.decode(indexBytes).replace(/\r\n/g, "\n");
+    const worktreeText = decoder.decode(worktreeBytes).replace(/\r\n/g, "\n");
+    return indexText === worktreeText;
+  } catch {
+    return false;
+  }
+}
+
+function readIndexEntries(root) {
+  const listing = execFileSync("git", ["ls-files", "--stage", "-z"], {
+    cwd: root, encoding: "buffer", shell: false, stdio: ["ignore", "pipe", "ignore"],
+  });
+  const entries = new Map();
+  for (const record of listing.toString("utf8").split("\0").filter(Boolean)) {
+    const tab = record.indexOf("\t");
+    if (tab < 0) continue;
+    const [mode, oid, stage] = record.slice(0, tab).split(" ");
+    const path = record.slice(tab + 1);
+    const existing = entries.get(path) ?? [];
+    existing.push({ mode, oid, stage, path });
+    entries.set(path, existing);
+  }
+  return entries;
+}
+
+function readIndexBlobs(root, entries) {
+  const objectIds = [...new Set([...entries.values()].flat()
+    .filter((entry) => entry.stage === "0" && entry.mode !== "120000" && entry.mode !== "160000")
+    .filter((entry) => !OPERATIONAL_STORE_EXTENSIONS.has((entry.path ?? "").toLowerCase().split(".").pop()))
+    .map((entry) => entry.oid))];
+  if (objectIds.length === 0) return new Map();
+  const output = execFileSync("git", ["cat-file", "--batch"], {
+    cwd: root,
+    input: Buffer.from(`${objectIds.join("\n")}\n`, "utf8"),
+    encoding: "buffer", shell: false, stdio: ["pipe", "pipe", "ignore"], maxBuffer: 512 * 1024 * 1024,
+  });
+  const blobs = new Map();
+  let offset = 0;
+  while (offset < output.length) {
+    const newline = output.indexOf(0x0a, offset);
+    if (newline < 0) throw new Error("git_batch_header_invalid");
+    const [oid, type, sizeText] = output.toString("ascii", offset, newline).split(" ");
+    const size = Number(sizeText);
+    if (type !== "blob" || !Number.isSafeInteger(size) || size < 0) throw new Error("git_batch_blob_invalid");
+    const start = newline + 1;
+    const end = start + size;
+    if (end >= output.length || output[end] !== 0x0a) throw new Error("git_batch_blob_truncated");
+    blobs.set(oid, output.subarray(start, end));
+    offset = end + 1;
+  }
+  return blobs;
+}
+
 function imageMagic(path, bytes) {
   if (/\.png$/i.test(path) && bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) return "png_signature";
   if (/\.jpe?g$/i.test(path) && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) return "jpeg_signature";
@@ -397,7 +468,14 @@ async function readPdfTextPages(bytes) {
       const content = await page.getTextContent();
       const text = content.items.map((item) => ("str" in item ? item.str : ""))
         .join(" ").replace(/\s+/g, " ").trim();
-      pages.push({ number, text });
+      const operatorList = await page.getOperatorList();
+      const imageOps = new Set([
+        OPS.paintImageMaskXObject, OPS.paintImageMaskXObjectGroup, OPS.paintImageXObject,
+        OPS.paintInlineImageXObject, OPS.paintInlineImageXObjectGroup, OPS.paintImageXObjectRepeat,
+        OPS.paintImageMaskXObjectRepeat,
+      ]);
+      const hasImages = operatorList.fnArray.some((operator) => imageOps.has(operator));
+      pages.push({ number, text, hasImages });
     }
     return pages;
   } finally {
@@ -410,11 +488,15 @@ export async function scanRepository(root, manifest = { files: [], protectedPath
   const seen = new Set();
   const protectedPaths = new Map((manifest.protectedPaths ?? []).map((entry) => [entry.path, entry]));
   let paths;
+  let indexEntries;
+  let indexBlobs;
   try {
     const listing = execFileSync("git", ["ls-files", "-z", "--cached", "--others", "--exclude-standard"], {
       cwd: root, encoding: "buffer", shell: false, stdio: ["ignore", "pipe", "ignore"],
     });
     paths = [...new Set(listing.toString("utf8").split("\0").filter(Boolean))];
+    indexEntries = readIndexEntries(root);
+    indexBlobs = readIndexBlobs(root, indexEntries);
   } catch {
     result.pending.push({ type: "git_inventory_failed", path: ".", status: "PENDENTE", reason: "publishable_inventory_unavailable" });
     result.unscanned.push({ type: "git_inventory", path: ".", status: "UNVERIFIED" });
@@ -459,7 +541,12 @@ export async function scanRepository(root, manifest = { files: [], protectedPath
       result.pending.push({ type: "path_outside_repository", path, status: "PENDENTE", reason: "physical_path_outside_repository" });
       continue;
     }
-    if (!stat.isFile()) continue;
+    if (!stat.isFile()) {
+      result.unscanned.push({ type: stat.isDirectory() ? "gitlink_or_directory" : "non_regular_file", path, status: "UNVERIFIED" });
+      result.pending.push({ type: stat.isDirectory() ? "gitlink_or_directory" : "non_regular_file", path, status: "PENDENTE", reason: "inventory_entry_not_regular_file" });
+      seen.add(path);
+      continue;
+    }
     seen.add(path);
     const protectedEntry = protectedPaths.get(path);
     if (protectedEntry?.doNotRead === true) {
@@ -467,14 +554,35 @@ export async function scanRepository(root, manifest = { files: [], protectedPath
       result.pending.push({ type: "protected_path_not_read", path, status: "PENDENTE", evidenceRef: protectedEntry.evidenceRef ?? null });
       continue;
     }
+    const extension = path.toLowerCase().split(".").pop() ?? "";
+    if (OPERATIONAL_STORE_EXTENSIONS.has(extension)) {
+      result.unscanned.push({ type: "operational_store_not_read", path, status: "UNVERIFIED" });
+      result.pending.push({ type: "operational_store_not_read", path, status: "PENDENTE", reason: "operational_database_excluded_from_scanner_content_reads" });
+      continue;
+    }
     const bytes = readFileSync(absolute);
+    const staged = indexEntries.get(path) ?? [];
+    if (staged.length > 1 || staged.some((entry) => entry.stage !== "0")) {
+      result.unscanned.push({ type: "index_conflict", path, status: "UNVERIFIED" });
+      result.pending.push({ type: "index_conflict", path, status: "PENDENTE", reason: "multiple_index_stages" });
+    } else if (staged.length === 1) {
+      try {
+        const indexBytes = indexBlobs.get(staged[0].oid);
+        if (!indexBytes) throw new Error("git_index_blob_missing");
+        if (!indexWorktreeEquivalent(indexBytes, bytes, path)) {
+          result.pending.push({ type: "git_index_worktree_mismatch", path, status: "PENDENTE", reason: "published_index_bytes_differ_from_scanned_worktree" });
+        }
+      } catch {
+        result.unscanned.push({ type: "index_blob_unavailable", path, status: "UNVERIFIED" });
+        result.pending.push({ type: "index_blob_unavailable", path, status: "PENDENTE", reason: "published_index_blob_not_read" });
+      }
+    }
     const fileHash = currentFileHash(bytes, path, manifest);
     if (fileHash === null) {
       result.unscanned.push({ type: "hash_mode_content_unsupported", path, status: "UNVERIFIED" });
       result.pending.push({ type: "manifest_hash_mode_invalid", path, status: "PENDENTE", reason: "utf8_lf_requires_text_content" });
       continue;
     }
-    const extension = path.toLowerCase().split(".").pop() ?? "";
 
       if (["png", "jpg", "jpeg", "webp", "gif", "bmp", "tif", "tiff"].includes(extension)) {
         const magic = imageMagic(path, bytes);
@@ -502,8 +610,15 @@ export async function scanRepository(root, manifest = { files: [], protectedPath
         try {
           const rows = extractXlsxRows(bytes);
           mergeResult(result, scanMappedLines(rows, path, fileHash, manifest));
+          if (coverageReviewValid(manifest, path, fileHash, "xlsx_unread_parts_review", XLSX_UNREAD_PARTS)) {
+            result.dispositionsApplied.push({ type: "xlsx_unread_parts_review", path, status: "manual_review_complete" });
+          } else {
+            result.unscanned.push({ type: "xlsx_unread_parts", path, status: "UNVERIFIED" });
+            result.pending.push({ type: "xlsx_unread_parts_review_required", path, status: "PENDENTE", reason: "comments_headers_footers_docprops_and_embedded_images_not_extracted" });
+          }
         } catch {
           result.unscanned.push({ type: "xlsx_unreadable", path, status: "UNVERIFIED" });
+          result.pending.push({ type: "xlsx_unreadable", path, status: "PENDENTE", reason: "xlsx_text_extraction_failed" });
         }
         continue;
       }
@@ -511,14 +626,23 @@ export async function scanRepository(root, manifest = { files: [], protectedPath
       if (extension === "pdf") {
         try {
           const pages = await readPdfTextPages(bytes);
-          if (pages.length === 0 || !pages.some((page) => page.text)) {
-            result.unscanned.push({ type: "pdf_sem_texto", path, status: "UNVERIFIED" });
+          if (pages.length === 0) {
+            result.unscanned.push({ type: "pdf_sem_paginas", path, status: "UNVERIFIED" });
+            result.pending.push({ type: "pdf_sem_paginas", path, status: "PENDENTE", reason: "pdf_page_count_unavailable" });
             continue;
+          }
+          const visualPages = pages.filter((page) => !page.text || page.hasImages).map((page) => page.number);
+          if (visualPages.length > 0 && coverageReviewValid(manifest, path, fileHash, "pdf_visual_review", visualPages)) {
+            result.dispositionsApplied.push({ type: "pdf_visual_review", path, status: "manual_review_complete" });
+          } else if (visualPages.length > 0) {
+            result.unscanned.push({ type: "pdf_visual_content", path, status: "UNVERIFIED" });
+            result.pending.push({ type: "pdf_visual_review_required", path, status: "PENDENTE", reason: "image_or_textless_pages_need_hash_bound_manual_review" });
           }
           const lines = pages.flatMap((page) => page.text.split(/\r?\n/).map((text, index) => ({ page: page.number, line: index + 1, text })));
           mergeResult(result, scanMappedLines(lines, path, fileHash, manifest));
         } catch {
           result.unscanned.push({ type: "pdf_ilegivel", path, status: "UNVERIFIED" });
+          result.pending.push({ type: "pdf_ilegivel", path, status: "PENDENTE", reason: "pdf_text_extraction_failed" });
         }
         continue;
       }
