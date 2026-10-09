@@ -16,7 +16,8 @@
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "json_sha256_field_64hex"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "corpus/fichas/pulmao-cpnpc/carboplatina-gemcitabina__nao-especificado.json",
@@ -31,7 +32,8 @@
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "json_sha256_field_64hex"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "corpus/fichas/pulmao-cpnpc/gemcitabina-monoterapia__nao-especificado.json",
@@ -46,7 +48,8 @@
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "json_sha256_field_64hex"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/CONTEXTO-NOVA-ABA.md",
@@ -61,7 +64,8 @@
           "reason": "Metadado público de autoria em handoff/contexto de fonte; disposição individualizada e hash-bound.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/design/oncochart/assets/annot.png",
@@ -148,7 +152,8 @@
           "reason": "Campo ID no mesmo prototipo HTML que declara a amostra Paciente Teste; excecao por hash/linha/token.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/design/prototipos/consulta.html",
@@ -163,7 +168,8 @@
           "reason": "Campo ID no prototipo HTML com declaracao de amostra ficticia no mesmo artifact; excecao por hash/linha/token.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/design/prototipos/impressos.html",
@@ -178,7 +184,8 @@
           "reason": "Campo ID adjacente a declaracao Paciente Teste no mesmo prototipo de impressos; excecao por hash/linha/token.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/f0-fecha/inventario-A2.json",
@@ -274,7 +281,8 @@
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/f0-fecha/inventario-A6.json",
@@ -298,7 +306,8 @@
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/f0-fecha/snapshot-pre-merge.json",
@@ -484,29 +493,40 @@
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/f0-fecha/STATUS.md",
-      "sha256": "7b23aee276fb6f028208218719ddb10c79f4aa322e48c5fb0be78d8c9d5d7a90",
+      "sha256": "8606f4221a3fca1d1e1254908bc693cd7752485337b09d46c039bec0f0ae77a9",
+      "hashMode": "utf8-lf",
       "items": [
         {
           "type": "telefone",
           "line": 28,
           "ordinal": 0,
+          "contextTag": null,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/f0-fecha/STATUS.md:28",
-          "reason": "Identificador numerico de run de CI explicitamente rotulado no registro A6; nao e telefone.",
-          "contextTag": null
+          "reason": "IDs de runs CI e código nativo Windows em relatório técnico revisado, não telefone.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/STATUS.md:28"
         },
         {
           "type": "telefone",
-          "line": 42,
+          "line": 44,
           "ordinal": 0,
+          "contextTag": null,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/f0-fecha/STATUS.md:42",
-          "reason": "Identificador numerico de run CI no registro de publicacao A6; nao telefone.",
-          "contextTag": null
+          "reason": "IDs de runs CI e código nativo Windows em relatório técnico revisado, não telefone.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/STATUS.md:44"
+        },
+        {
+          "type": "telefone",
+          "line": 68,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "IDs de runs CI e código nativo Windows em relatório técnico revisado, não telefone.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/STATUS.md:68"
         }
       ]
     },
@@ -523,7 +543,8 @@
           "reason": "Metadado público de autoria em handoff/contexto de fonte; disposição individualizada e hash-bound.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/ondas/W3-GROK.md",
@@ -538,7 +559,8 @@
           "reason": "Metadado público de autoria em handoff/contexto de fonte; disposição individualizada e hash-bound.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/ondas/W8-GLM.md",
@@ -580,7 +602,8 @@
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/planejamento/AUDITORIA-PRE-CODIGO-2026-10-07.md",
@@ -595,7 +618,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/planejamento/HANDOFF-NOVO-CHAT-W11-4.md",
@@ -619,7 +643,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md",
@@ -643,7 +668,8 @@
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/progresso/W10-RETOMADA-JEV-FUGU.md",
@@ -658,7 +684,8 @@
           "reason": "Codigo numerico de encerramento nativo de worker, explicitamente descrito no texto; nao e contato.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/progresso/W3-CODEX.md",
@@ -673,7 +700,8 @@
           "reason": "Codigo de crash de worker Windows em evidencia tecnica, nao telefone.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/progresso/W8-GLM.md",
@@ -715,7 +743,8 @@
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/progresso/W8-KIMI.md",
@@ -730,7 +759,8 @@
           "reason": "A mesma linha declara fixtures inventadas e descreve o vetor como Matricula.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/referencias/externos/manual-paciente-oncologico-2023.pdf",
@@ -846,7 +876,8 @@
           "reason": "Substring numerica do DOI de referencia bibliografica, sem campo de identidade.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/referencias/onco-referencia/auditoria/manifesto-originais.json",
@@ -861,7 +892,8 @@
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/referencias/onco-referencia/ONCO-REFERENCIA-COMPLETA.md",
@@ -885,7 +917,8 @@
           "reason": "Compilacao do mesmo DOI bibliografico; nao e CNS.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/referencias/ui-modelos/Triagem_QT_v20.html",
@@ -900,7 +933,8 @@
           "reason": "Inicializacao JavaScript com nome vazio; o matcher capturou nomes de outros campos vazios da mesma linha, nao nome de pessoa.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/w10/astra/REVISAO-ASTRA.md",
@@ -915,7 +949,8 @@
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/w5/CLAIMS.md",
@@ -993,7 +1028,8 @@
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/w5/P1-REGRAS.md",
@@ -1008,7 +1044,8 @@
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/w7/kit-preview/apac-html.png",
@@ -1050,7 +1087,8 @@
           "reason": "Factory local da porta fake: contato construido sem paciente ou vinculo, exclusivamente para demonstracao.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "src/ui/oncochart/fontes/geist-latin-wght-normal.woff2",
@@ -1110,7 +1148,8 @@
           "reason": "Nome de arquivo local identificador, versao e extensao HTML, gerado pelo executor e comparado como caminho/recibo; nao e email.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/closure-e2e/jornadas-salao-canal.test.ts",
@@ -1125,7 +1164,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/closure-luna2/read-gate.test.ts",
@@ -1140,7 +1180,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/cobertura/caso07-fixtures.test.ts",
@@ -1155,7 +1196,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/cobertura/caso07.test.ts",
@@ -1179,11 +1221,12 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/fixtures/caso07/03-documentos-pessoais-comprovante.txt",
-      "sha256": "07c277d9dafd241d65e10a639345fd92733b89d3a7d02f067c3db1fccc45ab24",
+      "sha256": "bee30e5f938761ca9caa44513e0394d319a455fdd49b6123ec7c61e6600bba5d",
       "items": [
         {
           "type": "cns",
@@ -1194,7 +1237,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/fixtures/caso07/esperado.json",
@@ -1209,7 +1253,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/fixtures/redteam/pacientes.ts",
@@ -1233,7 +1278,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/kernel/kernel.test.ts",
@@ -1284,7 +1330,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/modules/vinculo.test.ts",
@@ -1371,7 +1418,8 @@
           "reason": "Identificador inserido nos fixtures ANA/BIA ou contato() com nomes Paciente Teste; testes de resolucao/assertions no mesmo arquivo; excecao por ordinal/hash.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/muse/autoridades.test.ts",
@@ -1395,7 +1443,8 @@
           "reason": "Vetor CNS positivo/negativo dentro do teste que inclui o paciente de teste e asserts; excecao apenas aos tokens desse vetor.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/oncoassist-jev/oncoassist.test.ts",
@@ -1419,7 +1468,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/prompts/captura.test.ts",
@@ -1434,7 +1484,8 @@
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/prompts/docid.test.ts",
@@ -1449,7 +1500,8 @@
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/prompts/path-sitios.test.ts",
@@ -1464,7 +1516,8 @@
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/prompts/prompts.test.ts",
@@ -1506,7 +1559,8 @@
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/redteam/rt01-troca-laudo.adv.ts",
@@ -1521,7 +1575,8 @@
           "reason": "Identificador no mesmo objeto do nome Paciente Teste e asserts de troca de laudo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/redteam/rt02-homonimos.test.ts",
@@ -1545,7 +1600,8 @@
           "reason": "Identificador no objeto com nome Paciente Teste e asserts da prova de homonimia.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/redteam/rt12-harness-gateway.adv.ts",
@@ -1560,7 +1616,8 @@
           "reason": "Dicionario local DIC usado para construir vetores adversariais de URL/egress; fixture declarada pelo teste.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/redteam/rt12-harness-gateway.test.ts",
@@ -1620,7 +1677,8 @@
           "reason": "Dicionario literal DIC e vetores locais que exercitam desidentificar/g02PhiEgress, sem ingestao de cadastro externo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/rules-w8/caso07.test.ts",
@@ -1635,7 +1693,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/rules-w8/identificadores.test.ts",
@@ -1686,7 +1745,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/rules-w8/vinculoDocumento.test.ts",
@@ -1719,7 +1779,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/server/adv006-saida.test.ts",
@@ -1734,7 +1795,8 @@
           "reason": "Destino em dominio reservado .invalid; executor fake e prova de zero efeitos externos.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/server/leituras-http.test.ts",
@@ -1758,7 +1820,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/ui-telas/importar.test.tsx",
@@ -1773,7 +1836,8 @@
           "reason": "Vetor literal de mascara e identificador inserido por fireEvent sob token NOME_1; testa alerta e RAW, sem fetch nem cadastro externo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/ui/cabecalho.test.tsx",
@@ -1788,7 +1852,8 @@
           "reason": "Identificador no fixture de cabecalho com Paciente Teste e asserts UI.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/w10-cursor/cadastro.test.ts",
@@ -1821,7 +1886,8 @@
           "reason": "Vetor numerico literal repetido como entrada e expected de funcao pura de igualdade matricula/CNS; sem individuo ou cadastro associado.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/w10-entrega/gateway.test.ts",
@@ -1836,7 +1902,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/w10-grok/grok-11-manifesto.test.ts",
@@ -1851,7 +1918,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/w10-grok/grok-13-apac-snapshot.test.ts",
@@ -1902,7 +1970,8 @@
           "reason": "Factory local de emissao com esquema ESQ e vetores algoritmicos predeterminados de digito verificador valido/invalido; caso p1 demonstra bloqueio, sem cadastro externo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/w10-luna2/gateway-egress.test.ts",
@@ -1926,7 +1995,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/w11-adv/checkin-real.test.ts",
@@ -1950,7 +2020,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/w11-adv/fuzz-regras.test.ts",
@@ -1965,7 +2036,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/w11-adv/jev-adversarial.test.ts",
@@ -2052,7 +2124,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "tests/w11-adv/seguranca-phi.test.ts",
@@ -2418,7 +2491,8 @@
           "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
-      ]
+      ],
+      "hashMode": "utf8-lf"
     },
     {
       "path": "docs/referencias/ui-modelo-consulta.webp",
@@ -2427,6 +2501,212 @@
       "magic": "webp_signature",
       "evidenceRef": "docs/f0-fecha/C2-PHI-ASTRA.md:Confirmacao humana da origem da imagem",
       "reason": "Dr. Silas confirmou IMAGEM FICTICIA neste chat em 2026-10-09; Astra conferiu visualmente o arquivo correspondente a este hash. Referencia de layout, sem promocao de dado clinico.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json",
+      "sha256": "a6addb0fbf6f65708ee9f18ee32b70d842a9d7633b2fab18d4e1d73dd4b1f56c",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 143,
+          "ordinal": 0,
+          "contextTag": "json_sha256_field_64hex",
+          "status": "technical_token_false_positive",
+          "reason": "SHA de integridade ou exemplo de nome de arquivo no parecer independente; revisão linha a linha, sem dado de paciente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json:143"
+        },
+        {
+          "type": "telefone",
+          "line": 156,
+          "ordinal": 0,
+          "contextTag": "json_sha256_field_64hex",
+          "status": "technical_token_false_positive",
+          "reason": "SHA de integridade ou exemplo de nome de arquivo no parecer independente; revisão linha a linha, sem dado de paciente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json:156"
+        },
+        {
+          "type": "email",
+          "line": 201,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "SHA de integridade ou exemplo de nome de arquivo no parecer independente; revisão linha a linha, sem dado de paciente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json:201"
+        },
+        {
+          "type": "email",
+          "line": 214,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "SHA de integridade ou exemplo de nome de arquivo no parecer independente; revisão linha a linha, sem dado de paciente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json:214"
+        },
+        {
+          "type": "email",
+          "line": 227,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "SHA de integridade ou exemplo de nome de arquivo no parecer independente; revisão linha a linha, sem dado de paciente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json:227"
+        },
+        {
+          "type": "email",
+          "line": 240,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "SHA de integridade ou exemplo de nome de arquivo no parecer independente; revisão linha a linha, sem dado de paciente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json:240"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/CLAUDE-TRIAGEM-PHI.md",
+      "sha256": "654d2dab5da8ee86646395fac9b9a3d5bde23bbd3ac7a5ccb73f879708c7de6b",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "email",
+          "line": 12,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Exemplo de nome de arquivo citado na classificação técnica do parecer independente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/CLAUDE-TRIAGEM-PHI.md:12"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/evidencias/C1-L1/08-bloco.log",
+      "sha256": "36289cfcb3ccb684fa32d0a1552b5d631b4e448defca2dc5af6a4b86ba9fad75",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 17,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Código nativo de saída do processo Windows, não telefone.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/evidencias/C1-L1/08-bloco.log:17"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/evidencias/C1-L1/resultados.json",
+      "sha256": "618d2ac85b08cb1aa25e6d58d4ad72d690646a38e1ae0527aa7218abb750e6cc",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 70,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Código nativo de saída do processo Windows, não telefone.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/evidencias/C1-L1/resultados.json:70"
+        }
+      ]
+    },
+    {
+      "path": "tests/f0-fecha/phi-repo.test.ts",
+      "sha256": "2273b49afdd7073d7349143bceb0fdab39540b0d65916376194dd07c7a8e1437",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "email",
+          "line": 37,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Endereço reservado example.invalid apenas para configurar identidade Git dos repositórios temporários sintéticos.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; tests/f0-fecha/phi-repo.test.ts:37"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/demo/01-salao.png",
+      "sha256": "77343a68076f61941fdad3be3a19b1c161473ff7a2699823a1a28e2c08751721",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/02-conflito.png",
+      "sha256": "77be47fcd0a3bb535c2c741cb71f996264eb3196eafd1648f12d60355920e0f5",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/03-revisao.png",
+      "sha256": "b4656732d0848c51e63b3cc9a6034d67974252f2f9dee03df1ce83036bd1309a",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/04-cartao.png",
+      "sha256": "0e38bc5af4d46df1a94bcee27f8f49fa00644b34f009f7f21db7c9e05f0e0888",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/05-modelo.png",
+      "sha256": "08557eaecf97c1fc874f86a64ce8beac5f98b7777b0c23db8650ad6ea546f4d2",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/06-exibicao.png",
+      "sha256": "b70c66eb35f75d3d3210e303975cd659aa31826e0c42ac2bcfd81ce20e285e78",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/07-historico.png",
+      "sha256": "da80b84567d05bb63b0c4280beaa431c447b5bac56f262a36d1e94fa8283dcb0",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/08-apac.png",
+      "sha256": "b3489f132de05f576f6ef5c284434d2cb23014ca06abced6823785085883269f",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/09-reabertura.png",
+      "sha256": "f16d342d3f03f17b348b71b9681c6387b2036abaa6424fc50d667744fd14df31",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
       "items": []
     }
   ],

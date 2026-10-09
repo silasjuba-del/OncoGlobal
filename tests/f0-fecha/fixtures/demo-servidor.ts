@@ -11,6 +11,8 @@ import type { Sessao } from "../../../src/contracts/base.js";
 
 const patientId = "Paciente Teste 92", encounterId = "encontro-demo-f0-92", tumorLotId = "lote-demo-f0-92";
 const senha = "demo-f0-exclusivamente-sintetica";
+// A demo nunca herda a ativação de provider de outro projeto/processo.
+process.env.ONCOASSIST_JEV_ENABLED = "false";
 const port = Number(process.env.ONCOGLOBAL_API_PORT ?? "4197");
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("PORTA_DEMO_INVALIDA");
 const dataDir = mkdtempSync(join(tmpdir(), "oncoglobal-f0-demo-sintetica-"));
@@ -18,6 +20,7 @@ const agora = new Date().toISOString();
 const civil = dataCivilDoServico(agora, "-03:00");
 if (civil.estado !== "OK") throw new Error("DATA_DEMO_INVALIDA");
 const hoje = civil.dataCivil;
+const dataDocumental = hoje.split("-").reverse().join("/");
 const db = abrirLedger(join(dataDir, "ledger.sqlite"));
 const sessao: Sessao = { medicoId: "medico-demo-sintetico", crm: "CRM-TESTE-F0", emitidaEm: agora,
   expiraEm: new Date(Date.now() + 60 * 60_000).toISOString() };
@@ -56,11 +59,14 @@ async function post(rota: string, payload: unknown, token?: string) {
 }
 const login = await post("/login", { senha });
 if (typeof login.token !== "string") throw new Error("LOGIN_DEMO_INVALIDO");
+const statusIA = await post("/consulta/oncoassist/status", {}, login.token);
+if (statusIA.status !== "PENDENTE" || statusIA.motivo !== "DESABILITADO")
+  throw new Error("DEMO_EXIGE_IA_DESLIGADA");
 // Ingestão real HTTP, sem vínculo ou confirmação automática. A revisão será feita na interface.
 for (const fonte of [
-  { sourceId: "ap-demo-sintetico", sourceType: "pathology", texto: `${hoje} Histologia: carcinoma ductal invasivo sintético.` },
-  { sourceId: "lab-demo-sintetico", sourceType: "medical_note", texto: `${hoje} Creatinina 1,2 mg/dL. Sem proteinúria. TSH não consta.` },
-  { sourceId: "encaminhamento-demo-sintetico", sourceType: "nursing", texto: `${hoje} Creatinina 1,8 mg/dL. Documento sintético divergente.` },
+  { sourceId: "ap-demo-sintetico", sourceType: "pathology", texto: `${dataDocumental} Histologia: carcinoma ductal invasivo sintético.` },
+  { sourceId: "lab-demo-sintetico", sourceType: "medical_note", texto: `${dataDocumental} Creatinina 1,2 mg/dL. Sem proteinúria. TSH não consta.` },
+  { sourceId: "encaminhamento-demo-sintetico", sourceType: "nursing", texto: `${dataDocumental} Creatinina 1,8 mg/dL. Documento sintético divergente.` },
 ]) {
   await post("/consulta/extrair", { recordingId: `gravacao-${fonte.sourceId}`, sourceId: fonte.sourceId,
     sourceType: fonte.sourceType, rawTranscript: `Paciente: ${patientId}\n${fonte.texto}` }, login.token);
