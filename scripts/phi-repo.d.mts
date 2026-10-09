@@ -33,6 +33,15 @@ export interface PhiFileDisposition {
   path: string;
   sha256: string;
   hashMode?: HashMode;
+  coverageReviews?: Array<{
+    kind: "pdf_visual_review" | "xlsx_unread_parts_review";
+    sha256: string;
+    status: "manual_review_complete";
+    evidenceRef: string;
+    reason: string;
+    pages?: number[];
+    parts?: string[];
+  }>;
   category?: "synthetic_visual_review" | "technical_font_asset";
   magic?: string;
   evidenceRef?: string;

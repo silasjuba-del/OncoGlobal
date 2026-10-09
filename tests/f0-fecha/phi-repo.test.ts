@@ -39,6 +39,49 @@ function initGitRepo(): string {
   return root;
 }
 
+function minimalBlankPdf(): Buffer {
+  const objects = [
+    "<< /Type /Catalog /Pages 2 0 R >>",
+    "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+    "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 300 144] /Resources << >> /Contents 4 0 R >>",
+    "<< /Length 0 >>\nstream\n\nendstream",
+  ];
+  let pdf = "%PDF-1.4\n";
+  const offsets = [0];
+  for (let index = 0; index < objects.length; index += 1) {
+    offsets.push(Buffer.byteLength(pdf, "binary"));
+    pdf += `${index + 1} 0 obj\n${objects[index]}\nendobj\n`;
+  }
+  const xrefOffset = Buffer.byteLength(pdf, "binary");
+  pdf += `xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`;
+  pdf += offsets.slice(1).map((offset) => `${String(offset).padStart(10, "0")} 00000 n \n`).join("");
+  pdf += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF\n`;
+  return Buffer.from(pdf, "binary");
+}
+
+function minimalTextAndImagePdf(): Buffer {
+  const content = "BT /F1 12 Tf 10 20 Td (SAFE) Tj ET\nq 10 0 0 10 0 0 cm /Im0 Do Q";
+  const objects = [
+    "<< /Type /Catalog /Pages 2 0 R >>",
+    "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+    "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 300 144] /Resources << /Font << /F1 6 0 R >> /XObject << /Im0 5 0 R >> >> /Contents 4 0 R >>",
+    `<< /Length ${content.length} >>\nstream\n${content}\nendstream`,
+    `<< /Type /XObject /Subtype /Image /Width 1 /Height 1 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Length 3 >>\nstream\n\0\0\0\nendstream`,
+    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
+  ];
+  let pdf = "%PDF-1.4\n";
+  const offsets = [0];
+  for (let index = 0; index < objects.length; index += 1) {
+    offsets.push(Buffer.byteLength(pdf, "binary"));
+    pdf += `${index + 1} 0 obj\n${objects[index]}\nendobj\n`;
+  }
+  const xrefOffset = Buffer.byteLength(pdf, "binary");
+  pdf += `xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`;
+  pdf += offsets.slice(1).map((offset) => `${String(offset).padStart(10, "0")} 00000 n \n`).join("");
+  pdf += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefOffset}\n%%EOF\n`;
+  return Buffer.from(pdf, "binary");
+}
+
 function zip(entries: Array<[string, string]>): Buffer {
   const local: Buffer[] = [];
   const central: Buffer[] = [];
@@ -225,6 +268,52 @@ describe("scanner PHI do repositório", () => {
     } finally { rmSync(root, { recursive: true, force: true }); }
   });
 
+  it("falha fechado em gitlink e arquivo rastreado ausente", async () => {
+    const root = initGitRepo();
+    const nested = mkdtempSync(join(tmpdir(), "phi-subrepo-"));
+    try {
+      mkdirSync(join(root, "module"));
+      writeFileSync(join(nested, "module.txt"), "fixture");
+      execFileSync("git", ["init", "-q"], { cwd: nested, shell: false });
+      execFileSync("git", ["-C", nested, "config", "user.email", "test@example.invalid"], { shell: false });
+      execFileSync("git", ["-C", nested, "config", "user.name", "Test"], { shell: false });
+      execFileSync("git", ["-C", nested, "add", "module.txt"], { shell: false });
+      execFileSync("git", ["-C", nested, "commit", "-qm", "fixture"], { shell: false });
+      const oid = execFileSync("git", ["-C", nested, "rev-parse", "HEAD"], { encoding: "utf8", shell: false }).trim();
+      execFileSync("git", ["-C", root, "update-index", "--add", "--cacheinfo", `160000,${oid},module`], { shell: false });
+      writeFileSync(join(root, "removed.txt"), "fixture");
+      execFileSync("git", ["-C", root, "add", "removed.txt"], { shell: false });
+      rmSync(join(root, "removed.txt"));
+
+      const result = await scanRepository(root, { schemaVersion: 1, files: [], protectedPaths: [] });
+      expect(result.unscanned).toContainEqual({ type: "gitlink_or_directory", path: "module", status: "UNVERIFIED" });
+      expect(result.pending.map(({ type, path }) => ({ type, path }))).toContainEqual({ type: "gitlink_or_directory", path: "module" });
+      expect(result.pending.map(({ type, path }) => ({ type, path }))).toContainEqual({ type: "inventory_file_unavailable", path: "removed.txt" });
+    } finally {
+      rmSync(nested, { recursive: true, force: true });
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  it("compara blob do índice ao worktree e só tolera CRLF/LF equivalente em texto", async () => {
+    const root = initGitRepo();
+    try {
+      const stagedId = join(root, "staged-id.txt");
+      const eol = join(root, "eol.txt");
+      writeFileSync(stagedId, `CPF: ${syntheticCpf()}\n`);
+      writeFileSync(eol, "sem identificadores\n");
+      execFileSync("git", ["-C", root, "add", "staged-id.txt", "eol.txt"], { shell: false });
+      writeFileSync(stagedId, "texto neutro no worktree\n");
+      writeFileSync(eol, "sem identificadores\r\n");
+
+      const result = await scanRepository(root, { schemaVersion: 1, files: [], protectedPaths: [] });
+      expect(result.pending.map(({ type, path }) => ({ type, path }))).toContainEqual({
+        type: "git_index_worktree_mismatch", path: "staged-id.txt",
+      });
+      expect(result.pending.some(({ type, path }) => type === "git_index_worktree_mismatch" && path === "eol.txt")).toBe(false);
+    } finally { rmSync(root, { recursive: true, force: true }); }
+  });
+
   it("recusa diretório pai junction que resolve para fora do repositório", async () => {
     const root = initGitRepo();
     const outside = mkdtempSync(join(tmpdir(), "phi-outside-"));
@@ -262,6 +351,85 @@ describe("scanner PHI do repositório", () => {
     const rows = extractXlsxRows(workbook);
     expect(rows.map(({ line }) => line)).toEqual([4]);
     expect(findTextCandidates(rows[0]!.text, "protocolos.xlsx").map(({ type }) => type)).toContain("email");
+  });
+
+  it("exige revisão PDF vinculada ao SHA para página sem texto", async () => {
+    const root = initGitRepo();
+    try {
+      const bytes = minimalBlankPdf();
+      writeFileSync(join(root, "scan.pdf"), bytes);
+      const sha = sha256(bytes);
+      const base = { schemaVersion: 1 as const, files: [{ path: "scan.pdf", sha256: sha }], protectedPaths: [] };
+      const withoutReview = await scanRepository(root, base);
+      expect(withoutReview.unscanned).toContainEqual({ type: "pdf_visual_content", path: "scan.pdf", status: "UNVERIFIED" });
+      expect(withoutReview.pending.map(({ type }) => type)).toContain("pdf_visual_review_required");
+
+      const reviewed: PhiManifest = {
+        ...base,
+        files: [{ ...base.files[0]!, coverageReviews: [{
+          kind: "pdf_visual_review", sha256: sha, status: "manual_review_complete",
+          pages: [1], evidenceRef: "review fixture", reason: "Visual page reviewed in synthetic test.",
+        }] }],
+      };
+      const staleReview: PhiManifest = {
+        ...reviewed,
+        files: [{ ...reviewed.files[0]!, coverageReviews: [{ ...reviewed.files[0]!.coverageReviews![0]!, sha256: "0".repeat(64) }] }],
+      };
+      const stale = await scanRepository(root, staleReview);
+      expect(stale.pending.map(({ type }) => type)).toContain("pdf_visual_review_required");
+      const withReview = await scanRepository(root, reviewed);
+      expect(withReview.pending.some(({ type }) => type === "pdf_visual_review_required")).toBe(false);
+      expect(withReview.dispositionsApplied).toContainEqual({ type: "pdf_visual_review", path: "scan.pdf", status: "manual_review_complete" });
+    } finally { rmSync(root, { recursive: true, force: true }); }
+  });
+
+  it("exige revisão PDF vinculada ao SHA para imagem embutida em página com texto", async () => {
+    const root = initGitRepo();
+    try {
+      const bytes = minimalTextAndImagePdf();
+      writeFileSync(join(root, "mixed.pdf"), bytes);
+      const result = await scanRepository(root, {
+        schemaVersion: 1,
+        files: [{ path: "mixed.pdf", sha256: sha256(bytes) }],
+        protectedPaths: [],
+      });
+      expect(result.pending.map(({ type }) => type)).toContain("pdf_visual_review_required");
+      expect(result.unscanned).toContainEqual({ type: "pdf_visual_content", path: "mixed.pdf", status: "UNVERIFIED" });
+    } finally { rmSync(root, { recursive: true, force: true }); }
+  });
+
+  it("exige revisão hash-bound das partes XLSX ainda não extraídas", async () => {
+    const root = initGitRepo();
+    try {
+      const bytes = zip([
+        ["xl/sharedStrings.xml", "<sst><si><t>Dados de fixture</t></si></sst>"],
+        ["xl/worksheets/sheet1.xml", "<worksheet><sheetData><row r=\"1\"><c t=\"s\"><v>0</v></c></row></sheetData></worksheet>"],
+      ]);
+      writeFileSync(join(root, "workbook.xlsx"), bytes);
+      const sha = sha256(bytes);
+      const base = { schemaVersion: 1 as const, files: [{ path: "workbook.xlsx", sha256: sha }], protectedPaths: [] };
+      const withoutReview = await scanRepository(root, base);
+      expect(withoutReview.unscanned).toContainEqual({ type: "xlsx_unread_parts", path: "workbook.xlsx", status: "UNVERIFIED" });
+      expect(withoutReview.pending.map(({ type }) => type)).toContain("xlsx_unread_parts_review_required");
+
+      const reviewed: PhiManifest = {
+        ...base,
+        files: [{ ...base.files[0]!, coverageReviews: [{
+          kind: "xlsx_unread_parts_review", sha256: sha, status: "manual_review_complete",
+          parts: ["comments", "headers_footers", "docProps", "embedded_images"],
+          evidenceRef: "review fixture", reason: "Unextracted workbook parts reviewed in synthetic test.",
+        }] }],
+      };
+      const staleReview: PhiManifest = {
+        ...reviewed,
+        files: [{ ...reviewed.files[0]!, coverageReviews: [{ ...reviewed.files[0]!.coverageReviews![0]!, sha256: "0".repeat(64) }] }],
+      };
+      const stale = await scanRepository(root, staleReview);
+      expect(stale.pending.map(({ type }) => type)).toContain("xlsx_unread_parts_review_required");
+      const withReview = await scanRepository(root, reviewed);
+      expect(withReview.pending.some(({ type }) => type === "xlsx_unread_parts_review_required")).toBe(false);
+      expect(withReview.dispositionsApplied).toContainEqual({ type: "xlsx_unread_parts_review", path: "workbook.xlsx", status: "manual_review_complete" });
+    } finally { rmSync(root, { recursive: true, force: true }); }
   });
 
   it("mantém findings e arquivos não escaneados explícitos no repositório", async () => {
