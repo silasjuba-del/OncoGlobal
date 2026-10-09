@@ -1,139 +1,15 @@
-import { readdirSync, readFileSync, statSync } from "node:fs";
-import { join, relative, sep } from "node:path";
+import { deflateRawSync } from "node:zlib";
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { converterEntradaLocalAsync } from "../../src/leitura/caixa-unica.js";
-
-type FindingType = "cpf" | "cns" | "telefone" | "email" | "credencial_portal" | "nome_cabecalho_laudo";
-type Finding = { type: FindingType; path: string; line: number };
-
-const sinteticPatient = /^Paciente Teste \d{2}\b.*$/i;
-const emailPattern = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i;
-const cnsPattern = /(?<!\d)(?:[12789]\d{14}|[12789]\d{2}(?:[ .-]\d{3}){4}|[12789]\d{2}[ .-]\d{4}[ .-]\d{4}[ .-]\d{4})(?!\d)/;
-const cpfPattern = /(?:^|\D)(\d{3})[.\s-]?(\d{3})[.\s-]?(\d{3})[.\s-]?(\d{2})(?!\d)/g;
-const phoneCandidatePattern = /(?<!\d)(?:\+?55[ .-]*)?(?:\(([1-9]\d)\)|([1-9]\d))[ .-]*(9\d{4}|\d{4})[ .-]?(\d{4})(?!\d)/g;
-const brazilianDdds = new Set([
-  "11", "12", "13", "14", "15", "16", "17", "18", "19", "21", "22", "24", "27", "28",
-  "31", "32", "33", "34", "35", "37", "38", "41", "42", "43", "44", "45", "46", "47",
-  "48", "49", "51", "53", "54", "55", "61", "62", "63", "64", "65", "66", "67", "68",
-  "69", "71", "73", "74", "75", "77", "79", "81", "82", "83", "84", "85", "86", "87",
-  "88", "89", "91", "93", "94", "95", "96", "97", "98", "99",
-]);
-
-function cpfValido(digits: string): boolean {
-  if (digits.length !== 11 || /^(\d)\1{10}$/.test(digits)) return false;
-  const calculate = (slice: string, start: number) => {
-    const sum = [...slice].reduce((total, digit, index) => total + Number(digit) * (start - index), 0);
-    const remainder = (sum * 10) % 11;
-    return remainder === 10 ? 0 : remainder;
-  };
-  return calculate(digits.slice(0, 9), 10) === Number(digits[9])
-    && calculate(digits.slice(0, 10), 11) === Number(digits[10]);
-}
-
-function telefoneValido(match: RegExpMatchArray): boolean {
-  return brazilianDdds.has(match[1] ?? match[2] ?? "");
-}
-
-function lineFindings(line: string, lineNumber: number, path: string): Finding[] {
-  const found: Finding[] = [];
-  for (const match of line.matchAll(cpfPattern)) {
-    const digits = match.slice(1).join("");
-    if (cpfValido(digits)) found.push({ type: "cpf", path, line: lineNumber });
-  }
-  if (cnsPattern.test(line)) found.push({ type: "cns", path, line: lineNumber });
-  if ([...line.matchAll(phoneCandidatePattern)].some(telefoneValido)) {
-    found.push({ type: "telefone", path, line: lineNumber });
-  }
-  if (emailPattern.test(line)) found.push({ type: "email", path, line: lineNumber });
-
-  const headerField = line.match(/^\s*(?:paciente|nome(?:\s+do\s+paciente)?|identifica[cç][aã]o)\s*[:=]\s*(.*?)\s*$/i);
-  const candidateName = headerField?.[1]?.trim() ?? "";
-  const nameTokens = candidateName.match(/[A-Za-zÀ-ÿ]+/g) ?? [];
-  const documentLike = /\.(?:pdf|txt|md|csv|html?|json|log|ya?ml)$/i.test(path);
-  if (documentLike && headerField && nameTokens.length >= 2 && !/[{}<>]/.test(candidateName) && !sinteticPatient.test(candidateName)) {
-    found.push({ type: "nome_cabecalho_laudo", path, line: lineNumber });
-  }
-  return found;
-}
-
-function findPortalCredentials(lines: string[], path: string): Finding[] {
-  const findings: Finding[] = [];
-  for (let index = 0; index < lines.length; index += 1) {
-    const from = Math.max(0, index - 2);
-    const to = Math.min(lines.length, index + 3);
-    const context = lines.slice(from, to).join(" ");
-    const hasPortalContext = /portal.{0,80}(?:login|usu[aá]rio|user|senha|password|pass)|(?:login|usu[aá]rio|user|senha|password|pass).{0,80}portal/i.test(context)
-      || /portal/i.test(path);
-    const hasCredentialValue = /(?:portal[_\s-]*(?:login|usu[aá]rio|user|senha|password|pass)|(?:login|usu[aá]rio|user(?:name)?|senha|password|pass)(?:[_\s-]*(?:do[_\s-]*)?portal)?)\s*[:=]\s*\S/i.test(lines[index] ?? "");
-    if (hasPortalContext && hasCredentialValue) findings.push({ type: "credencial_portal", path, line: index + 1 });
-  }
-  return findings;
-}
-
-function scanText(text: string, path: string): Finding[] {
-  const lines = text.split(/\r?\n/);
-  return [
-    ...lines.flatMap((line, index) => lineFindings(line, index + 1, path)),
-    ...findPortalCredentials(lines, path),
-  ];
-}
-
-type Unscanned = { type: "pdf_sem_texto" | "imagem_raster" | "binario_opaco"; path: string };
-type RepositoryScan = { findings: Finding[]; unscanned: Unscanned[] };
-
-async function scanRepository(root: string): Promise<RepositoryScan> {
-  const findings: Finding[] = [];
-  const unscanned: Unscanned[] = [];
-  const visit = async (directory: string): Promise<void> => {
-    for (const name of readdirSync(directory)) {
-      if (name === "node_modules" || name === ".git") continue;
-      const absolute = join(directory, name);
-      const stat = statSync(absolute);
-      if (stat.isDirectory()) {
-        await visit(absolute);
-      } else if (stat.isFile()) {
-        const path = relative(root, absolute).split(sep).join("/");
-        const bytes = readFileSync(absolute);
-        if (/\.(?:png|jpe?g|webp|gif|bmp|tiff?)$/i.test(name)) {
-          unscanned.push({ type: "imagem_raster", path });
-          continue;
-        }
-        if (/\.pdf$/i.test(name)) {
-          try {
-            const result = await converterEntradaLocalAsync({
-              id: path,
-              tipo: "PDF_DIGITAL",
-              conteudo: bytes,
-              recebidoEm: "2026-10-09T00:00:00.000Z",
-            });
-            if (result.status !== "PRONTO" || result.documento.paginas.length === 0) {
-              unscanned.push({ type: "pdf_sem_texto", path });
-              continue;
-            }
-            for (const page of result.documento.paginas) {
-              findings.push(...scanText(page.texto, path));
-            }
-          } catch {
-            unscanned.push({ type: "pdf_sem_texto", path });
-          }
-          continue;
-        }
-        const text = new TextDecoder("utf-8", { fatal: true });
-        try {
-          if (bytes.includes(0)) {
-            unscanned.push({ type: "binario_opaco", path });
-          } else {
-            findings.push(...scanText(text.decode(bytes), path));
-          }
-        } catch {
-          unscanned.push({ type: "binario_opaco", path });
-        }
-      }
-    }
-  };
-  await visit(root);
-  return { findings, unscanned };
-}
+import {
+  extractXlsxRows,
+  findTextCandidates,
+  scanRepository,
+  scanText,
+  sha256,
+  type PhiDispositionItem,
+  type PhiManifest,
+} from "../../scripts/phi-repo.mjs";
 
 function syntheticCpf(): string {
   const digits = "529982247";
@@ -145,19 +21,67 @@ function syntheticCpf(): string {
   return `${digits}${digit(digits, 10)}${digit(digits + digit(digits, 10), 11)}`;
 }
 
+function manifestFor(path: string, text: string, items: PhiDispositionItem[]): PhiManifest {
+  return {
+    schemaVersion: 1 as const,
+    files: [{ path, sha256: sha256(Buffer.from(text, "utf8")), items }],
+  };
+}
+
+function zip(entries: Array<[string, string]>): Buffer {
+  const local: Buffer[] = [];
+  const central: Buffer[] = [];
+  let offset = 0;
+  for (const [name, content] of entries) {
+    const nameBytes = Buffer.from(name, "utf8");
+    const plain = Buffer.from(content, "utf8");
+    const compressed = deflateRawSync(plain);
+    const header = Buffer.alloc(30);
+    header.writeUInt32LE(0x04034b50, 0);
+    header.writeUInt16LE(20, 4);
+    header.writeUInt16LE(8, 8);
+    header.writeUInt32LE(compressed.length, 18);
+    header.writeUInt32LE(plain.length, 22);
+    header.writeUInt16LE(nameBytes.length, 26);
+    local.push(header, nameBytes, compressed);
+
+    const directory = Buffer.alloc(46);
+    directory.writeUInt32LE(0x02014b50, 0);
+    directory.writeUInt16LE(20, 4);
+    directory.writeUInt16LE(20, 6);
+    directory.writeUInt16LE(8, 10);
+    directory.writeUInt32LE(compressed.length, 20);
+    directory.writeUInt32LE(plain.length, 24);
+    directory.writeUInt16LE(nameBytes.length, 28);
+    directory.writeUInt32LE(offset, 42);
+    central.push(directory, nameBytes);
+    offset += header.length + nameBytes.length + compressed.length;
+  }
+  const centralBytes = Buffer.concat(central);
+  const end = Buffer.alloc(22);
+  end.writeUInt32LE(0x06054b50, 0);
+  end.writeUInt16LE(entries.length, 8);
+  end.writeUInt16LE(entries.length, 10);
+  end.writeUInt32LE(centralBytes.length, 12);
+  end.writeUInt32LE(offset, 16);
+  return Buffer.concat([...local, centralBytes, end]);
+}
+
 describe("scanner PHI do repositório", () => {
-  it("detecta exemplos positivos e rejeita padrões inválidos sem expor valores", () => {
+  it("detecta identificadores positivos e rejeita padrões inválidos", () => {
     const cpf = syntheticCpf();
     const positives = [
-      ["CPF", `CPF: ${cpf}`],
-      ["CNS", `CNS: ${"1" + "23456789012345"}`],
+      ["cpf", `CPF: ${cpf}`],
+      ["cns", `CNS: ${"1" + "23456789012345"}`],
       ["telefone", `Contato: ${"11" + "98765" + "4321"}`],
       ["email", `Contato: ${"teste" + "@example.com"}`],
       ["credencial_portal", ["Portal do paciente", `log${"in"}: ${"usuario" + "-teste"}`, `se${"nha"}: ${"segredo" + "-teste"}`].join(String.fromCharCode(10))],
       ["nome_cabecalho_laudo", "Paciente: Nome Sobrenome"],
     ] as const;
     for (const [type, sample] of positives) {
-      expect(scanText(sample, "laudo-sintetico.txt").map((finding) => finding.type)).toContain(type.toLowerCase());
+      const textHits = scanText(sample, "laudo-sintetico.txt").findings.map((candidate) => candidate.type);
+      const candidates = findTextCandidates(sample, "laudo-sintetico.txt").map((candidate) => candidate.type);
+      expect([...textHits, ...candidates]).toContain(type);
     }
 
     const negatives = [
@@ -167,20 +91,99 @@ describe("scanner PHI do repositório", () => {
       "Email: apenas-texto",
       "Portal do paciente\nstatus: indisponível",
     ];
-    for (const sample of negatives) expect(scanText(sample, "fixture-neutro.txt")).toEqual([]);
-    expect(scanText("Paciente: Paciente Teste 08", "laudo-sintetico.txt")).toEqual([]);
+    for (const sample of negatives) expect(scanText(sample, "fixture-neutro.txt").findings).toEqual([]);
+    expect(scanText("Paciente: Paciente Teste 08", "laudo-sintetico.txt").findings).toEqual([]);
   });
 
-  it("não encontra identificadores ou dados pessoais fora da allowlist sintética declarada", async () => {
-    const repositoryRoot = process.cwd();
-    const result = await scanRepository(repositoryRoot);
+  it("permite somente microprompt e hash token com hash e contexto exatos", () => {
+    const prompt = `arquivo: ${"resumo" + "@1.0.0.md"}`;
+    const promptCandidate = findTextCandidates(prompt, "docs/prompts/lista.md").find((candidate) => candidate.type === "email");
+    expect(promptCandidate?.contextTag).toBe("microprompt_version_filename");
+    const promptScan = scanText(prompt, "docs/prompts/lista.md", {
+      manifest: manifestFor("docs/prompts/lista.md", prompt, [{
+        type: "email", line: 1, ordinal: 0, contextTag: "microprompt_version_filename",
+        status: "technical_token_false_positive", evidenceRef: "docs/prompts/lista.md:1",
+        reason: "Identificador de microprompt no formato nome-versão-arquivo.",
+      }]),
+    });
+    expect(promptScan.findings).toEqual([]);
+    expect(promptScan.dispositionsApplied.map(({ status }) => status)).toEqual(["technical_token_false_positive"]);
+
+    const hashLine = `commit a${"11" + "98765" + "4321"}${"b".repeat(28)}`;
+    const hashCandidate = findTextCandidates(hashLine, "docs/commits.md").find((candidate) => candidate.type === "telefone");
+    expect(hashCandidate?.contextTag).toBe("commit_hash_40_or_64_hex");
+    const hashScan = scanText(hashLine, "docs/commits.md", {
+      manifest: manifestFor("docs/commits.md", hashLine, [{
+        type: "telefone", line: 1, ordinal: 0, contextTag: "commit_hash_40_or_64_hex",
+        status: "technical_token_false_positive", evidenceRef: "docs/commits.md:1",
+        reason: "O match telefônico está contido em token hexadecimal de commit.",
+      }]),
+    });
+    expect(hashScan.findings).toEqual([]);
+
+    const changed = hashLine.replace(/b$/, "c");
+    const stale = scanText(changed, "docs/commits.md", {
+      manifest: manifestFor("docs/commits.md", hashLine, [{
+        type: "telefone", line: 1, ordinal: 0, contextTag: "commit_hash_40_or_64_hex",
+        status: "technical_token_false_positive", evidenceRef: "docs/commits.md:1",
+        reason: "O match telefônico está contido em token hexadecimal de commit.",
+      }]),
+    });
+    expect(stale.findings.map(({ type, path, line }) => ({ type, path, line }))).toEqual([
+      { type: "telefone", path: "docs/commits.md", line: 1 },
+    ]);
+    expect(stale.pending.map(({ type, status }) => ({ type, status }))).toContainEqual({ type: "manifest_hash_mismatch", status: "PENDENTE" });
+
+    const manifestHash = `"sha256": "a${"11" + "98765" + "4321"}${"b".repeat(52)}"`;
+    expect(findTextCandidates(manifestHash, "docs/f0-fecha/PHI-TRIAGEM.json")).toEqual([]);
+
+    const sha256Line = `"hash": "a${"11" + "98765" + "4321"}${"b".repeat(52)}"`;
+    const sha256Candidate = findTextCandidates(sha256Line, "corpus/fichas/example.json").find((candidate) => candidate.type === "telefone");
+    expect(sha256Candidate?.contextTag).toBe("json_sha256_field_64hex");
+  });
+
+  it("mantém um segundo ID real-like sem disposição e só libera o token declarado", () => {
+    const cpf = syntheticCpf();
+    const text = `registro A: ${cpf}; registro B: ${cpf}`;
+    const scan = scanText(text, "tests/fixtures/escopo-controlado.txt", {
+      manifest: manifestFor("tests/fixtures/escopo-controlado.txt", text, [{
+        type: "cpf", line: 1, ordinal: 0, status: "synthetic_declared",
+        evidenceRef: "tests/fixtures/escopo-controlado.txt:1",
+        reason: "Um único campo foi declarado sintético neste fixture.",
+      }]),
+    });
+    expect(scan.dispositionsApplied.map(({ type, line }) => ({ type, line }))).toEqual([{ type: "cpf", line: 1 }]);
+    expect(scan.findings.map(({ type, path, line, ordinal }) => ({ type, path, line, ordinal }))).toEqual([
+      { type: "cpf", path: "tests/fixtures/escopo-controlado.txt", line: 1, ordinal: 1 },
+    ]);
+    expect(findTextCandidates(`CPF: ${cpf}`, "entrada-sem-declaracao.txt").map(({ type, line }) => ({ type, line })))
+      .toEqual([{ type: "cpf", line: 1 }]);
+  });
+
+  it("extrai apenas strings e valores armazenados de XLSX, sem executar fórmula ou macro", () => {
+    const email = `${"fixture"}${"@example.com"}`;
+    const workbook = zip([
+      ["xl/sharedStrings.xml", `<sst><si><t>Contato</t></si><si><t>${email}</t></si></sst>`],
+      ["xl/worksheets/sheet1.xml", '<worksheet><sheetData><row r="4"><c t="s"><v>0</v></c><c t="s"><v>1</v></c></row></sheetData></worksheet>'],
+    ]);
+    const rows = extractXlsxRows(workbook);
+    expect(rows.map(({ line }) => line)).toEqual([4]);
+    expect(findTextCandidates(rows[0]!.text, "protocolos.xlsx").map(({ type }) => type)).toContain("email");
+  });
+
+  it("mantém findings e arquivos não escaneados explícitos no repositório", async () => {
+    const manifest = JSON.parse(readFileSync("docs/f0-fecha/PHI-TRIAGEM.json", "utf8"));
+    const result = await scanRepository(process.cwd(), manifest);
     console.info("PHI_SCAN_SAFE=" + JSON.stringify({
-      findings: result.findings.map(({ type, path, line }) => ({ type, path, line })),
+      findings: result.findings.map(({ type, path, line, ordinal, contextTag, page }) => ({ type, path, line, ordinal, contextTag, page })),
       unscanned: result.unscanned,
+      dispositionsApplied: result.dispositionsApplied.map(({ type, path, line, ordinal, contextTag, page, status }) => ({ type, path, line, ordinal, contextTag, page, status })),
+      pending: result.pending.map(({ type, path, line, status, reason }) => ({ type, path, line, status, reason })),
     }));
     expect({
-      findings: result.findings.map(({ type, path, line }) => ({ type, path, line })),
-      unscanned: result.unscanned,
-    }).toEqual({ findings: [], unscanned: [] });
+      findings: result.findings.map(({ type, path, line, page }) => ({ type, path, line, page })),
+      unscanned: result.unscanned.map(({ type, path, status }) => ({ type, path, status })),
+      pending: result.pending.map(({ type, path, line, status, reason }) => ({ type, path, line, status, reason })),
+    }).toEqual({ findings: [], unscanned: [], pending: [] });
   });
 });
