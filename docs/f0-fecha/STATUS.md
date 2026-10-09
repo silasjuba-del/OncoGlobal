@@ -41,6 +41,10 @@ Portão B documental concluído: os cinco relatórios foram entregues. L1 `74925
 
 ## Fase C
 
+**Portão C1-L2/C2 PASS** no código `f5bd4a3`: rodada integral `evidencias/C1-L2-C2/` com TypeScript, fronteiras 299, corpus 125, **2.278 regulares/323 arquivos, 240 redteam/31 e 41 W8/9**, todos verdes na mesma rodada serial com forks. Integração L2 acompanhada das correções causais já preparadas; os commits originais e provas vermelhas foram preservados. A prova adicional D-W9-41 passou isoladamente (1/1 em D41-fonte.log), conferindo a redação corrigida e a preservação do texto original do PDF; não houve mudança de comportamento nessa adição de teste.
+
+L1 finaliza rastreabilidade respeitando o escopo de kernel F0 e as ampliações explícitas desta missão. Q50 continua condicionado a auditoria/PR/demo; não será marcado concluído só por existir teste. L5 foi corrigida na preparação: os candidatos do snapshot inicial foram triados individualmente. O Dr. Silas confirmou a imagem de referência como fictícia, e sua revisão foi vinculada ao hash; scanner da preparação passou 5/5 em C2-phi-revisado-17, mas ainda falta varredura no integrado após importar L5. A origem da imagem deixou de ser pendência humana.
+
 **Portão C1-L4 PASS** em `8d1781894ec5880da432397f1600420fa8a1b548`, rodada `evidencias/C1-L4-forks/`: TypeScript, fronteiras 295 e corpus 125; **2.248 regulares/313 arquivos, 240 redteam/31 e 41 W8/9**, todos passaram na mesma bateria integral serial, um worker e `--pool=forks`. As rodadas anteriores com interrupções nativas continuam preservadas; mudar o pool funcionou nesta rodada, mas a causa nativa não foi estabelecida. Configuração padrão do CI não mudou.
 
 Próxima integração: L2 e correções causais C2 já preparadas/testadas em worktree isolada (consulta HTTP, Flash com resumo revisado, retrato documental, antiglosa na tela, retomada persistente e gates). Uma nova bateria integral será exigida antes do próximo portão.
