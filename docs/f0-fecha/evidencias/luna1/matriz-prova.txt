@@ -1,0 +1,31 @@
+Comando de geração:
+node scripts/matriz-f0.mjs --write
+Saída:
+Matriz gravada em docs/MATRIZ-RASTREABILIDADE-F0.md
+
+Comando de validação final da estrutura (após corrigir pipes escapados/Q36):
+node scripts/matriz-f0.mjs
+Saída:
+Linhas=273/273; VERDE=114; VERMELHO=107; N-A=52
+
+Comando de prova L1 executado antes de acrescentar a asserção de fechamento:
+npx vitest run tests/f0-fecha/matriz.test.ts --no-file-parallelism --maxWorkers=1
+Saída final:
+Test Files  1 passed (1)
+Tests       2 passed (2)
+Duration    1.88s
+
+Primeira execução do mesmo comando, antes da correção:
+Test Files  1 failed (1)
+Tests       2 failed (2)
+Erros reportados: linha exigida ausente Q06, Q08, Q11, G-04; consumidor F0 não importava símbolo Q36.
+Correção: parser ignora pipe escapado Markdown; Q36 reclassificado F4 por R-22.
+
+Asserção de fechamento adicionada depois da execução acima:
+NOT_RUN. Ela exige result.red === 0; o estado atual é VERMELHO=107.
+
+Identidade da base:
+HEAD inicial: 369db84732ab5a46283a2356bd85eb656916f009
+Branch: f0/f0f-luna1
+origin https://github.com/silasjuba-del/OncoGlobal.git (fetch)
+origin https://github.com/silasjuba-del/OncoGlobal.git (push)
