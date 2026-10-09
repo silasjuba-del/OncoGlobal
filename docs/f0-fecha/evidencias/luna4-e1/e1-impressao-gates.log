@@ -1,0 +1,12 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-luna4
+
+
+ Test Files  8 passed (8)
+      Tests  62 passed (62)
+   Start at  17:04:34
+   Duration  7.15s (import 36%, transform 31%, tests 23%, worker 9%)
+
+    Isolate  8 workers spawned · ~502ms startup each (spawn + environment, per file)
+             at least ~3.51s faster with isolate: false — reuses workers across files instead of one per file
+
