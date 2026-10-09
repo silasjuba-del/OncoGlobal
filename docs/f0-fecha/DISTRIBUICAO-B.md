@@ -30,6 +30,8 @@ FormTriagem excluído desta faixa (pertence a L3). Servidor incluído para elimi
 
 Autorizada extensão `.tsx` para `tests/f0-fecha/flash-producao.test.tsx`, pois a prova inclui a interface React real. O relatório e a matriz devem usar esse caminho efetivo.
 
+Ampliação causal após teste servidor: `src/server/leituras.ts`, somente gate do catálogo de antiglosa em lerApacs. O guard antigo exigia exatamente 47 caixas; a nova caixa Flash torna 48 e desliga a avaliação. L4 deve validar chaves APAC necessárias com a lista canônica já existente, isolar caixas APAC e provar catálogo incompleto=PENDENTE. Não alterar a asserção existente de leituras-http nem trocar o número mágico por outro.
+
 ## L5 — estabilidade e higiene
 
 `tests/ui-telas/percursos.test.tsx` (somente esperas/timeouts), `tests/f0-fecha/phi-repo.test.ts`, `.gitattributes` se ausente, `docs/f0-fecha/HIGIENE.md`. Workflow CI somente leitura.

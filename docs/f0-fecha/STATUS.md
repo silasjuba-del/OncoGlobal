@@ -37,9 +37,13 @@ L2 entregue em `76c0c3b`: C1/C3/C4/C5 PASS na primeira rodada; C6 PASS isolado; 
 
 L1 (`/root/f0_luna1`) monta/revisa matriz sem testes ativos. L4 (`/root/f0_luna4`) tem TEST_SLOT exclusivo e verifica Flash. L5 (`/root/f0_luna5`) implementou scanner/higiene e aguarda turno de provas. L3 e L2 encerraram seus turnos, ramos limpos. Todas as Lunas têm modelo gpt-6-luna, sem push/merge por executora.
 
+Portão B documental concluído: os cinco relatórios foram entregues. L1 `74925dc`: matriz parcial 273 linhas (114 VERDE, 107 pendências de mapeamento, 52 N-A), fechamento ainda vermelho/NOT_RUN. L4 `68143f9`: Flash e correção APAC por chaves, tsc/fronteiras/corpus/UI/servidor PASS. L5 `8053d15`: três rodadas UI 69/69 PASS; scanner bloqueado por 180 candidatos a triar e 14 opacos, sem alegação de PHI real confirmado. A F0 não está pronta; C/D seguem abertos.
+
 ## Fase C
 
-PENDENTE.
+Integração no ramo principal PENDENTE do portão B. Preparação independente da Astra em `C:/Users/silas/Projects/OncoGlobal-wt/f0f-astra-c2`, ramo `f0/f0f-astra-c2`: base L4 `68143f9` (inclui L3), prova L2 `76c0c3b` incorporada sem alterar asserções. Dono único Astra. Nenhum teste/build será executado enquanto L5 detiver TEST_SLOT. Esta preparação não modifica os ramos das Lunas nem o código do integrado.
+
+Faixa Astra C2: composição real da UI e bootstrap local, compatibilidade de Triagem, reconciliação/decisão persistida, contratos/portas estritamente necessários, projeções de leitura e testes de regressão em tests/f0-fecha. Sem novas dependências, sem LLM externa, sem dados clínicos reais. O worktree adicional eleva o inventário de 87 para 88; permanece ativo, não é candidato de limpeza.
 
 ## Fase D
 
