@@ -247,3 +247,4 @@ A11. Backup: **só HD externo local, cifrado**; chave de recuperação fora do P
   3. transporte público gratuito;
   4. LOAS/BPC.
   Mais raro: laudo para judicialização de medicamento não fornecido pelo SUS. Usa os trials como base de qual fármaco pedir (Q48, minuta assinada pelo médico).
+- **D-W9-80 · Fechamento da F0 delegado (Dr. Silas, 2026-10-09):** "Congela e pode publicar." **Codex Astra é a orquestradora e o writer único de `f0/w1-integrado`** até a F0 ficar pronta para merge. Tem 5 Lunas executoras em modalidade GOAL e segue o prompt `docs/ondas/F0-FECHAMENTO-ASTRA.md`. A Astra faz todos os passos: integração sem perda, matriz, prova da consulta completa, correções, auditoria, PR, push e commit. **O Dr. Silas só faz o merge na `main`.** Claude fica em leitura no integrado (auditor cruzado). O ramo da Astra foi publicado (`c0c0762`). Backup do trabalho do Cursor sem commit em `C:\Users\silas\handoff\backup-cursor-2026-10-09\` (D2 pendente).
