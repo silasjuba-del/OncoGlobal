@@ -1,0 +1,12 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal
+
+
+ Test Files  9 passed (9)
+      Tests  41 passed (41)
+   Start at  17:01:06
+   Duration  8.30s (tests 55%, transform 29%, import 11%, worker 5%)
+
+    Isolate  9 workers spawned · ~477ms startup each (spawn + environment, per file)
+             at least ~3.81s faster with isolate: false — reuses workers across files instead of one per file
+

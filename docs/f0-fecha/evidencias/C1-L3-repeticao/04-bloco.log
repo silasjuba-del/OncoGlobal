@@ -1,0 +1,13 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal
+
+
+ Test Files  73 passed (73)
+      Tests  546 passed (546)
+   Start at  16:52:21
+   Duration  35.16s (import 69%, transform 16%, tests 10%, worker 5%)
+
+     Import  157 modules were evaluated 954 times · 11.49s total, 69% of tracked time
+             ~9.60s faster with isolate: false — shared modules are evaluated once per worker instead of once per file
+             learn more: https://vitest.dev/guide/improving-performance#test-isolation
+

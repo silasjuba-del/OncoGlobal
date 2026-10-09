@@ -41,6 +41,10 @@ Portão B documental concluído: os cinco relatórios foram entregues. L1 `74925
 
 ## Fase C
 
+C1-L3 integrada em `d342b549a2c00645e86f7e36ecc4f3e643aea1b4`. A Astra acrescentou compatibilidade de eventos antigos: novos campos de vertigem ausentes são lidos como `null`, sem alterar fonte persistida. Primeira rodada: blocos 05 e 08 interrompidos com código nativo -1073740791, sem asserção diagnóstica; ambos passaram isolados. Isso foi registrado como instabilidade, não como bateria verde. Repetição **integral no mesmo HEAD**, `evidencias/C1-L3-repeticao/`: TypeScript PASS, fronteiras 294, corpus 125, **2.244 regulares/312 arquivos, 240 redteam/31, 41 W8/9**, todos os blocos PASS. Causa das interrupções anteriores ainda desconhecida; logs originais preservados em C1-L3.
+
+Atualização de coordenação: os cinco relatórios B já foram recebidos. L4 executa agora a correção curta G-06/T-48 de destaque E1 na folha operacional, em faixa própria e com TEST_SLOT exclusivo. A preparação C2 da Astra reúne as provas L2/L5 e correções ainda não integradas; não é evidência de fechamento do integrado.
+
 Integração no ramo principal PENDENTE do portão B. Preparação independente da Astra em `C:/Users/silas/Projects/OncoGlobal-wt/f0f-astra-c2`, ramo `f0/f0f-astra-c2`: base L4 `68143f9` (inclui L3), prova L2 `76c0c3b` incorporada sem alterar asserções. Dono único Astra. Nenhum teste/build será executado enquanto L5 detiver TEST_SLOT. Esta preparação não modifica os ramos das Lunas nem o código do integrado.
 
 Faixa Astra C2: composição real da UI e bootstrap local, compatibilidade de Triagem, reconciliação/decisão persistida, contratos/portas estritamente necessários, projeções de leitura e testes de regressão em tests/f0-fecha. Sem novas dependências, sem LLM externa, sem dados clínicos reais. O worktree adicional eleva o inventário de 87 para 88; permanece ativo, não é candidato de limpeza.
