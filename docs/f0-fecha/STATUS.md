@@ -1,83 +1,42 @@
 # F0 — painel de fechamento
 
-Missão: `docs/ondas/F0-FECHAMENTO-ASTRA.md`, D-W9-80. Writer único do integrado: Codex nesta missão. Merge na main reservado ao Dr. Silas.
+**Estado atual: verificação final em andamento. PR #4 em rascunho.** Não está liberado para merge. Missão: `docs/ondas/F0-FECHAMENTO-ASTRA.md`, D-W9-80. Astra é writer único de `f0/w1-integrado`; merge na main exclusivo do Dr. Silas.
 
-## Base
+## Evidência e portões
 
-- Checkout: `C:/Users/silas/Projects/OncoGlobal`, `f0/w1-integrado`.
-- HEAD inicial: `f42b15fcd9fa87c73109c5b0e0133192712c8680`; checkout limpo antes dos registros desta missão; fetch executado.
-- A1 PASS. Evidência serial em `evidencias/A1-base/`; comandos e contagens reais em `resultados.json`.
-- TypeScript PASS; fronteiras 290; corpus 125. Regulares: 2.169 testes / 296 arquivos; W10 redteam: 226 / 28; W8: 41 / 9. Todos PASS, sem skips reportados.
-- Limite desta sessão: três executoras simultâneas além da orquestradora; cinco Lunas serão escalonadas em lotes após portão A. Testes sempre exclusivos, um worker.
+| Etapa | Resultado verificado |
+|---|---|
+| Base A1 | PASS: 2.169 regulares/296 arquivos, 226 redteam/28, 41 W8/9; TypeScript, fronteiras 290, corpus 125 |
+| Integração A6 | PASS em 72ce726: 2.240 regulares/311, 240 redteam/31, 41 W8/9; fronteiras 293, corpus 125 |
+| L3 | PASS integral na repetição no mesmo HEAD d342b54: 2.244 regulares/312; 240 redteam; 41 W8 |
+| L4 | PASS integral em 8d17818: 2.248 regulares/313; 240 redteam; 41 W8 |
+| L2 e correções C2 | PASS integral em f5bd4a3: 2.278 regulares/323; 240 redteam; 41 W8; fronteiras 299, corpus 125 |
+| Auditoria de escopo | M1/M2 corrigidos em 1b56427; 87 testes focais + E2E adicional PASS; Claude operacional aprovou reataque |
+| L1 | Importada por seis arquivos de 8543c33, entrega f3b4343. Bateria C1-L1 PARTIAL: Q50 legitimamente pendente, falha nativa de worker no bloco 08; isolado 3/3 PASS não substitui bateria completa |
+| L5 | Integrada; scanner focal 8/8 PASS em PHI-integrado-03.log. Auditoria complementar encontrou lacunas de cobertura em revisão pela Luna 5 |
+| D1 | Claude operacional: sem ALTO/MÉDIO no código clínico auditado; delta final de higiene com três MÉDIOS, em correção |
+| D2 | origin/main reconciliada por merge 7936820, sem mudança de conteúdo e sem conflito |
+| D3 | PASS: demo real HTTP/SQLite e navegador, nove capturas, assinatura e reabertura após recarga; ver ../F0-DEMO.md |
+| D4 | PR #4 aberto em rascunho; bateria final/CI pendentes |
 
-## Inventário
+## Integração sem perda
 
-A2 PASS: lista integral em `INVENTARIO-A2.md` e `inventario-A2.json`. Astra 44 commits; GLM 2; Kimi 1; planejamento 1. Ramos closure serão cobertos por A3. Nenhum worktree preexistente será limpo ou removido.
+Astra c0c0762 integrada por 06d404a, GLM-21 por ad01bba, GLM-22 por b15bb0d, Kimi Q26 por 1afc9b9, planejamento por 72ce726. Nenhuma rota sumiu. As três provas redteam originais permanecem; as versões adicionais Astra estão em arquivos próprios. EQUIVALENCIA-A6.md explica os dois patches não equivalentes no inventário inicial.
 
-## Fase A
+Cinco Lunas entregaram seus relatórios; a correção C2 preservou os commits originais e seus logs vermelhos. L1 foi importada por faixa para não antecipar a ancestry da L5. Os demais deltas foram integrados por merge/cherry-pick com origem registrada. Inventário final e justificativas acompanham a entrega.
 
-A0 PASS: missão, contexto, fechamento, decisões D-W9-56…80, parecer e resultado das dez fatias lidos. Resultado das dez fatias consultado no ramo `codex/w10-entrega-integrada`, pois ainda não existe no integrado.
-A1–A2 PASS; A3 PASS após correções documentadas em RESOLUCOES-A3.md. Bateria integral A3: blocos regulares 2.223 PASS / 10 FAIL (UI/Muse), depois reataque UI+closure UI 131/131; total regular reconciliado 2.233 testes / 309 arquivos. Redteam 240/240 (31 arquivos), W8 41/41. TypeScript, fronteiras 293 e corpus 125 PASS. Logs vermelhos preservados, correções e reataques separados.
+## Riscos e limites
 
-Rotas dos dois ramos: nenhuma ausente no comparativo. RT01/03/15 integrados intactos, versões Astra em três arquivos adicionais. Merge A3 publicado: `06d404a`.
+- Interrupções nativas esporádicas de Node/Vitest ocorreram com threads e forks. Causa não estabelecida; as baterias vermelhas estão preservadas. Rodada isolada verde não é fechamento.
+- F0 local monousuário, provider externo desligado. Corpus não curado permanece RASCUNHO. Não há autorização clínica automática.
+- Demo: ingestão inicial por HTTP, não upload PDF no navegador; pedido laboratorial com itens PENDENTE, sem impressão ou exportação. Grade de poltronas ilustrativa não comprova agendamento. Datas documentais da demo usam dia/mês/ano.
+- Baixos da auditoria: drafts legados sem contexto exigem revínculo; vinculação da impressão ao contexto selecionado e melhoria da apresentação/textos ficam para F1.
+- Scanner é uma verificação limitada da superfície Git; revisão de binários e hash não equivalem a anonimização universal nem prova de todo histórico Git.
 
-A4 PASS: GLM-21 `ad01bba`, GLM-22 `b15bb0d`, Kimi Q26 `1afc9b9`; 177/177 testes em 36 arquivos (A4-sobras.log). O conflito do ORK foi resolvido mantendo AsyncLocalStorage e o tratamento da rejeição tardia; nenhuma chamada duplicada de agente. Q26 acrescenta CADEIRA em qualquer idade e conserva as fronteiras já corrigidas de AMBULATORIAL.
+## Próximas fases / decisões humanas
 
-A5 PASS: planejamento `1144eae`, três arquivos, todos em `docs/planejamento/**`, merge `72ce726`.
+F1+: receitas na Flash, orientações do canal curadas, biomarcadores extras, jornadas clínicas completas CTCAE/RECIST, roteador de modelos, capacidades proativas, grafo/vetores e medição de custo. Modelo Flash e prazo editável foram incluídos por esta missão, apesar do adiamento original.
 
-A6 PASS em `72ce726`: TypeScript; fronteiras 293; corpus 125; **2.240/2.240 regulares em 311 arquivos; 240/240 redteam em 31; 41/41 W8 em 9**. Saídas completas em `evidencias/A6-portao/`. Todos os blocos passaram na mesma rodada serial. `inventario-A6.json` confirma só duas diferenças de patch justificadas em `EQUIVALENCIA-A6.md`; demais ramos cobertos. CI do código publicado em `1afc9b9` também PASS (run 37968146686); o HEAD com planejamento/evidências será publicado agora.
+D2: os seis arquivos antigos do Cursor continuam preservados, fora desta integração. D4: LIMPEZA-WORKTREES.md é somente proposta. D5: CANONICA-PATCH.md é somente proposta. Nenhum worktree removido e nenhum documento da CANONICA real alterado. Main e tag aguardam o Dr. Silas.
 
-## Fase B
-
-Portão A aprovado e publicado em `369db84732ab5a46283a2356bd85eb656916f009`. Cinco worktrees `C:/Users/silas/Projects/OncoGlobal-wt/f0f-luna1…5`, ramos `f0/f0f-luna1…5`, criados desse HEAD, com junction para node_modules existente. Faixas disjuntas em DISTRIBUICAO-B.md.
-
-L3 concluída em `3b1b67b`: tsc/fronteiras/corpus PASS, 759 + 6 testes PASS. L4 iniciou na worktree atualizada por fast-forward para esse commit (dependência de contratos); não houve merge no integrado.
-
-L2 entregue em `76c0c3b`: C1/C3/C4/C5 PASS na primeira rodada; C6 PASS isolado; E6b-2 FAIL de produto preservado. Prova final três vezes verdes NOT_RUN até correção causal. Detalhes em LACUNAS-C2.md.
-
-L1 (`/root/f0_luna1`) monta/revisa matriz sem testes ativos. L4 (`/root/f0_luna4`) tem TEST_SLOT exclusivo e verifica Flash. L5 (`/root/f0_luna5`) implementou scanner/higiene e aguarda turno de provas. L3 e L2 encerraram seus turnos, ramos limpos. Todas as Lunas têm modelo gpt-6-luna, sem push/merge por executora.
-
-Portão B documental concluído: os cinco relatórios foram entregues. L1 `74925dc`: matriz parcial 273 linhas (114 VERDE, 107 pendências de mapeamento, 52 N-A), fechamento ainda vermelho/NOT_RUN. L4 `68143f9`: Flash e correção APAC por chaves, tsc/fronteiras/corpus/UI/servidor PASS. L5 `8053d15`: três rodadas UI 69/69 PASS; scanner bloqueado por 180 candidatos a triar e 14 opacos, sem alegação de PHI real confirmado. A F0 não está pronta; C/D seguem abertos.
-
-## Fase C
-
-L1 integrada por faixa: ramo de entrega `f0/f0f-luna1-entrega@f3b4343`, conteúdo dos seis arquivos de `f0/f0f-luna1@8543c33`; nenhuma ancestry de L5 foi antecipada. A bateria `evidencias/C1-L1/` ficou PARTIAL: Q50 falhou legitimamente por faltar PR/demo; um worker nativo terminou em `identidade-http.test.ts` no bloco 08 (exit 3221226505), inclusive usando forks. Reataque isolado desse arquivo: 3/3 PASS, registrado como instabilidade, não como bateria limpa. Os demais blocos passaram. Uma rodada completa nova continua obrigatória.
-
-D1 foi complementada pelo Claude operacional em `f0/f0f-claude@f18870e`: `CLAUDE-REAUDITORIA-D1.md` aprova M1/M2 em `1b56427`, preservação A3, gateway, provider e revisão L1/L5, sem ALTO ou MÉDIO. Relatórios importados somente pela faixa documental. Observações baixas permanecem explícitas; o scanner precisa ser repetido no integrado final.
-
-**Portão C1-L2/C2 PASS** no código `f5bd4a3`: rodada integral `evidencias/C1-L2-C2/` com TypeScript, fronteiras 299, corpus 125, **2.278 regulares/323 arquivos, 240 redteam/31 e 41 W8/9**, todos verdes na mesma rodada serial com forks. Integração L2 acompanhada das correções causais já preparadas; os commits originais e provas vermelhas foram preservados. A prova adicional D-W9-41 passou isoladamente (1/1 em D41-fonte.log), conferindo a redação corrigida e a preservação do texto original do PDF; não houve mudança de comportamento nessa adição de teste.
-
-L1 finaliza rastreabilidade respeitando o escopo de kernel F0 e as ampliações explícitas desta missão. Q50 continua condicionado a auditoria/PR/demo; não será marcado concluído só por existir teste. L5 foi corrigida na preparação: os candidatos do snapshot inicial foram triados individualmente. O Dr. Silas confirmou a imagem de referência como fictícia, e sua revisão foi vinculada ao hash; scanner da preparação passou 5/5 em C2-phi-revisado-17, mas ainda falta varredura no integrado após importar L5. A origem da imagem deixou de ser pendência humana.
-
-**Portão C1-L4 PASS** em `8d1781894ec5880da432397f1600420fa8a1b548`, rodada `evidencias/C1-L4-forks/`: TypeScript, fronteiras 295 e corpus 125; **2.248 regulares/313 arquivos, 240 redteam/31 e 41 W8/9**, todos passaram na mesma bateria integral serial, um worker e `--pool=forks`. As rodadas anteriores com interrupções nativas continuam preservadas; mudar o pool funcionou nesta rodada, mas a causa nativa não foi estabelecida. Configuração padrão do CI não mudou.
-
-Próxima integração: L2 e correções causais C2 já preparadas/testadas em worktree isolada (consulta HTTP, Flash com resumo revisado, retrato documental, antiglosa na tela, retomada persistente e gates). Uma nova bateria integral será exigida antes do próximo portão.
-
-C1-L3 integrada em `d342b549a2c00645e86f7e36ecc4f3e643aea1b4`. A Astra acrescentou compatibilidade de eventos antigos: novos campos de vertigem ausentes são lidos como `null`, sem alterar fonte persistida. Primeira rodada: blocos 05 e 08 interrompidos com código nativo -1073740791, sem asserção diagnóstica; ambos passaram isolados. Isso foi registrado como instabilidade, não como bateria verde. Repetição **integral no mesmo HEAD**, `evidencias/C1-L3-repeticao/`: TypeScript PASS, fronteiras 294, corpus 125, **2.244 regulares/312 arquivos, 240 redteam/31, 41 W8/9**, todos os blocos PASS. Causa das interrupções anteriores ainda desconhecida; logs originais preservados em C1-L3.
-
-Atualização de coordenação: os cinco relatórios B já foram recebidos. L4 executa agora a correção curta G-06/T-48 de destaque E1 na folha operacional, em faixa própria e com TEST_SLOT exclusivo. A preparação C2 da Astra reúne as provas L2/L5 e correções ainda não integradas; não é evidência de fechamento do integrado.
-
-Integração no ramo principal PENDENTE do portão B. Preparação independente da Astra em `C:/Users/silas/Projects/OncoGlobal-wt/f0f-astra-c2`, ramo `f0/f0f-astra-c2`: base L4 `68143f9` (inclui L3), prova L2 `76c0c3b` incorporada sem alterar asserções. Dono único Astra. Nenhum teste/build será executado enquanto L5 detiver TEST_SLOT. Esta preparação não modifica os ramos das Lunas nem o código do integrado.
-
-Faixa Astra C2: composição real da UI e bootstrap local, compatibilidade de Triagem, reconciliação/decisão persistida, contratos/portas estritamente necessários, projeções de leitura e testes de regressão em tests/f0-fecha. Sem novas dependências, sem LLM externa, sem dados clínicos reais. O worktree adicional eleva o inventário de 87 para 88; permanece ativo, não é candidato de limpeza.
-
-## Fase D
-
-Nota C1-L4: merge original em `cac5a0f`. Primeira bateria integral preservada em `evidencias/C1-L4/`: 06-bloco interrompido nativamente (-1073740791), 08-bloco encontrou duas expectativas históricas de catálogo 47/16 incompatíveis com a nova caixa. Revisão da causa encontrou também faixa numérica inadequada (132) e falta de proveniência no glossário. Correção Astra: nova caixa Flash passa a 17 (configuração <100), fontes registradas; 47 caixas preexistentes conservadas. As duas provas agora exigem 48 totais/17 configurações/31 APAC e verificam explicitamente a caixa Flash. Nenhum teste removido; portão L4 permanece PENDENTE de reataque completo. Relatório LUNA-4 é histórico da entrega original, não sobrescrito.
-
-PENDENTE. Auditoria cruzada final ainda não executada. CI da base A6 `369db84`: PASS, run 37969265836. Proposta de CANONICA preparada em CANONICA-PATCH.md, não aplicada. Lista LIMPEZA-WORKTREES.md inventaria 87 árvores; nenhuma removida. PR final ainda não aberto; PR #2 permanece aberto até substituição comprovada.
-
-## Para o Dr. Silas
-
-- D2: WIP do Cursor preservado e fora da integração até ordem própria.
-- D4: limpeza será apenas proposta.
-- D5: CANONICA receberá apenas proposta de patch no repositório.
-- Merge na main: exclusivo do Dr. Silas após entrega comprovada.
-
-## Riscos
-
-- C1-L4 corrigido em `90cacc5`: todas as asserções executadas passaram, mas 10-bloco terminou nativamente (-1073740791). A bateria não é PASS. O mesmo bloco isolado com `--pool=forks` passou 64/64; isso é diagnóstico, não dispensa a rodada integral. O runner agora aceita `-Pool forks` para verificar a hipótese de instabilidade do modo threads, sempre um worker/arquivo e mantendo todos os testes. Configuração padrão do produto/CI não foi alterada.
-
-- Memória física livre muito baixa na abertura; verificações em série e um worker.
-- Contagens históricas não substituem a linha de base A1.
-- Documentos anteriores contêm atribuições de writer e nomes superados; D-W9-80 governa esta execução.
+Histórico integral deste painel antes da consolidação: commit 7936820; evidências brutas em `evidencias/`, relatórios LUNA-N.md, C2-*.md e auditorias. Este painel não substitui os logs.

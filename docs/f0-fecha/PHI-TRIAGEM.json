@@ -52,22 +52,6 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "docs/CONTEXTO-NOVA-ABA.md",
-      "sha256": "ee45d3517676463bd3cc08eb854aa62f094156a4f97b7fa3d22c17e389ceefd0",
-      "items": [
-        {
-          "type": "email",
-          "line": 37,
-          "ordinal": 0,
-          "status": "public_author_metadata",
-          "evidenceRef": "docs/CONTEXTO-NOVA-ABA.md:37; contexto de autoria/proveniência",
-          "reason": "Metadado público de autoria em handoff/contexto de fonte; disposição individualizada e hash-bound.",
-          "contextTag": null
-        }
-      ],
-      "hashMode": "utf8-lf"
-    },
-    {
       "path": "docs/design/oncochart/assets/annot.png",
       "sha256": "893f9af87f3bb669875a3813a3797c832b6e20ea0bbad195ad9ab3082d8c6742",
       "category": "synthetic_visual_review",
@@ -497,40 +481,6 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "docs/f0-fecha/STATUS.md",
-      "sha256": "8606f4221a3fca1d1e1254908bc693cd7752485337b09d46c039bec0f0ae77a9",
-      "hashMode": "utf8-lf",
-      "items": [
-        {
-          "type": "telefone",
-          "line": 28,
-          "ordinal": 0,
-          "contextTag": null,
-          "status": "technical_token_false_positive",
-          "reason": "IDs de runs CI e código nativo Windows em relatório técnico revisado, não telefone.",
-          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/STATUS.md:28"
-        },
-        {
-          "type": "telefone",
-          "line": 44,
-          "ordinal": 0,
-          "contextTag": null,
-          "status": "technical_token_false_positive",
-          "reason": "IDs de runs CI e código nativo Windows em relatório técnico revisado, não telefone.",
-          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/STATUS.md:44"
-        },
-        {
-          "type": "telefone",
-          "line": 68,
-          "ordinal": 0,
-          "contextTag": null,
-          "status": "technical_token_false_positive",
-          "reason": "IDs de runs CI e código nativo Windows em relatório técnico revisado, não telefone.",
-          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/STATUS.md:68"
-        }
-      ]
-    },
-    {
       "path": "docs/ondas/W3-CODEX.md",
       "sha256": "7addd8d58e0aebfd5012a44fa5b58215bc170080133ffa625f6f56d8846202a4",
       "items": [
@@ -776,6 +726,25 @@
           "reason": "Leitura local com layout preservado por pdfplumber: campo Nome seguido de linhas vazias antes do proximo rotulo. O extrator simples uniu rotulos e gerou falso nome.",
           "contextTag": null
         }
+      ],
+      "coverageReviews": [
+        {
+          "kind": "pdf_visual_review",
+          "sha256": "bf00163cdf23c4ae29423deaa8a5c0037b4f04b397542464626a21859150220c",
+          "status": "manual_review_complete",
+          "evidenceRef": "docs/f0-fecha/REVISAO-BINARIOS.md",
+          "reason": "Páginas renderizadas e abertas: formulário em branco ou material editorial público; não há laudo individual preenchido nas páginas revisadas.",
+          "pages": [
+            1,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            11
+          ]
+        }
       ]
     },
     {
@@ -851,6 +820,30 @@
           "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:pagina32; revisao layout L3 em 2026-10-09",
           "reason": "Contato no bloco da Ouvidoria institucional, apos horario; dominio coincide com site editorial impresso. Revisao local com layout preservado, nao dado de paciente.",
           "contextTag": null
+        }
+      ],
+      "coverageReviews": [
+        {
+          "kind": "pdf_visual_review",
+          "sha256": "03d26c2767c305fcdd91bf473e61b9c51f18332ca35b02805290d1faa017c6bc",
+          "status": "manual_review_complete",
+          "evidenceRef": "docs/f0-fecha/REVISAO-BINARIOS.md",
+          "reason": "Páginas renderizadas e abertas: formulário em branco ou material editorial público; não há laudo individual preenchido nas páginas revisadas.",
+          "pages": [
+            3,
+            4,
+            8,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            26,
+            29,
+            30,
+            31
+          ]
         }
       ]
     },
@@ -2614,7 +2607,7 @@
     },
     {
       "path": "tests/f0-fecha/phi-repo.test.ts",
-      "sha256": "2273b49afdd7073d7349143bceb0fdab39540b0d65916376194dd07c7a8e1437",
+      "sha256": "07f9fd2c28db5338c939d841dd9b54e2fc8b18766e272e64b00334ed8018f038",
       "hashMode": "utf8-lf",
       "items": [
         {
@@ -2623,8 +2616,17 @@
           "ordinal": 0,
           "contextTag": null,
           "status": "synthetic_declared",
-          "reason": "Endereço reservado example.invalid apenas para configurar identidade Git dos repositórios temporários sintéticos.",
+          "reason": "Endereço reservado example.invalid na identidade Git de repositórios temporários de teste, conferido nas duas linhas.",
           "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; tests/f0-fecha/phi-repo.test.ts:37"
+        },
+        {
+          "type": "email",
+          "line": 278,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Endereço reservado example.invalid na identidade Git de repositórios temporários de teste, conferido nas duas linhas.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; tests/f0-fecha/phi-repo.test.ts:278"
         }
       ]
     },
@@ -2708,6 +2710,143 @@
       "evidenceRef": "docs/F0-DEMO.md",
       "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
       "items": []
+    },
+    {
+      "path": "docs/referencias/apac-laudo-solicitacao-autorizacao.pdf",
+      "sha256": "3f17afd9128b0caa4b5934e1d5718b0d6b9ae2b3f28b38671ecad7e4349ad645",
+      "items": [],
+      "coverageReviews": [
+        {
+          "kind": "pdf_visual_review",
+          "sha256": "3f17afd9128b0caa4b5934e1d5718b0d6b9ae2b3f28b38671ecad7e4349ad645",
+          "status": "manual_review_complete",
+          "evidenceRef": "docs/f0-fecha/REVISAO-BINARIOS.md",
+          "reason": "Páginas renderizadas e abertas: formulário em branco ou material editorial público; não há laudo individual preenchido nas páginas revisadas.",
+          "pages": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.xlsx",
+      "sha256": "01a260383addc088509f55cbd44bfe7f453ca51f7c14d4cf4183a6bc67cda007",
+      "items": [],
+      "coverageReviews": [
+        {
+          "kind": "xlsx_unread_parts_review",
+          "sha256": "01a260383addc088509f55cbd44bfe7f453ca51f7c14d4cf4183a6bc67cda007",
+          "status": "manual_review_complete",
+          "evidenceRef": "docs/f0-fecha/REVISAO-BINARIOS.md",
+          "reason": "ZIP inspecionado: comments, headerFooter e mídia ausentes; docProps com gerador openpyxl e datas técnicas.",
+          "parts": [
+            "comments",
+            "headers_footers",
+            "docProps",
+            "embedded_images"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/AUDITORIA-CLAUDE-DELTA-FINAL.md",
+      "sha256": "7912a602fbe4c32e1f86ccfbf9121f8cbf4d94ca9e6b7dd112a87c5204b32ce0",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 3,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/AUDITORIA-CLAUDE-DELTA-FINAL.md:3"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/LIMPEZA-WORKTREES.md",
+      "sha256": "6764595ab164a4e7c7edc8988d40c86f99715f2115bff4555245f061520dba48",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 3,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/LIMPEZA-WORKTREES.md:3"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/Q50-ACEITE.json",
+      "sha256": "6d30473f3b9f871d2da15dbe866f82869766614bba7a832a3f640ef7925d1aa1",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 9,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/Q50-ACEITE.json:9"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/inventario-final.json",
+      "sha256": "ed688bc6c8ae6eb4f256b4610876c0a14c5790c94604ae5f20879a360ab8af26",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 2,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/inventario-final.json:2"
+        },
+        {
+          "type": "telefone",
+          "line": 120,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/inventario-final.json:120"
+        },
+        {
+          "type": "telefone",
+          "line": 518,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/inventario-final.json:518"
+        },
+        {
+          "type": "telefone",
+          "line": 556,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/inventario-final.json:556"
+        },
+        {
+          "type": "telefone",
+          "line": 638,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/inventario-final.json:638"
+        }
+      ]
     }
   ],
   "protectedPaths": []

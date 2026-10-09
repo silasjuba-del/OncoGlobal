@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -1073,7 +1074,8 @@ function evidenceFor(id, sources, tests) {
 
 function phaseEvidence(id, entry) {
   if (id === "G-21") return { phase: "F1+", why: "R-15 marca TrialMatch como futuro; Q48/R-13 mantém trials fora da v1" };
-  if (id === "T-35" || id === "T-36") return { phase: "F1+", why: "R-12 K-20: funcionalidade e testes CTCAE/RECIST passam a F1; F0 conserva stub tipado" };
+  if (id === "T-35") return { phase: "F1+", why: "R-12 K-20: jornada clínica CTCAE em F1; núcleo CTCAE v6 tipado e testado em F0, sem ativação clínica automática" };
+  if (id === "T-36") return { phase: "F1+", why: "R-12 K-20: jornada clínica RECIST em F1; núcleo tipado conservado em F0" };
   if (id.startsWith("FN-") || id.startsWith("G-") || id.startsWith("T-")) {
     return { phase: "F0", why: "docs/FECHAMENTO-F0.md §2 e PLANO-FINAL R-12/R-15/R-28" };
   }
@@ -1098,13 +1100,41 @@ function suggestedOwner(id) {
   return "sugerido Astra em C2 conforme a faixa funcional de R-28";
 }
 
-function rowFor(id, requirement, sources, tests) {
+function q50AcceptanceErrors(root) {
+  try {
+    const receipt = JSON.parse(fs.readFileSync(path.join(root, "docs/f0-fecha/Q50-ACEITE.json"), "utf8"));
+    const errors = [];
+    if (receipt.schemaVersion !== 1 || receipt.reviewStatus !== "SEM_ALTO_ABERTO" || receipt.reviewer !== "Claude"
+      || !/^https:\/\/github\.com\/silasjuba-del\/OncoGlobal\/pull\/\d+$/.test(receipt.prUrl)
+      || receipt.headBranch !== "f0/w1-integrado" || receipt.baseBranch !== "main"
+      || !/^[a-f0-9]{40}$/.test(receipt.reviewedCodeHead)) errors.push("recibo Q50 incompleto");
+    const refs = Array.isArray(receipt.evidence) ? receipt.evidence : [];
+    for (const required of ["docs/f0-fecha/CLAUDE-REAUDITORIA-D1.md", "docs/F0-DEMO.md"])
+      if (!refs.some(ref => ref.path === required)) errors.push(`evidência Q50 ausente: ${required}`);
+    if (refs.filter(ref => /^docs\/f0-fecha\/demo\/\d{2}-[^/]+\.png$/.test(ref.path)).length !== 9)
+      errors.push("Q50 exige as nove capturas revisadas");
+    for (const ref of refs) {
+      if (typeof ref.path !== "string" || !ref.path.startsWith("docs/") || ref.path.split("/").includes("..")
+        || !/^[a-f0-9]{64}$/.test(ref.sha256)) { errors.push("referência Q50 inválida"); continue; }
+      let bytes = fs.readFileSync(path.join(root, ref.path));
+      if (ref.hashMode === "utf8-lf") bytes = Buffer.from(new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(bytes).replaceAll("\r\n", "\n"));
+      else if (ref.hashMode !== "raw") { errors.push(`modo Q50 inválido: ${ref.path}`); continue; }
+      if (createHash("sha256").update(bytes).digest("hex") !== ref.sha256) errors.push(`evidência Q50 alterada: ${ref.path}`);
+    }
+    return errors;
+  } catch { return ["recibo ou evidência Q50 ausente/ilegível"]; }
+}
+
+function rowFor(id, requirement, sources, tests, root) {
   const entry = requirement.decisions.get(id) ?? requirement.plan.get(id) ?? { source: DECISIONS, line: 0, summary: `ID ${id} sem descrição literal na fonte principal` };
   const phase = phaseEvidence(id, entry);
   const evidence = evidenceFor(id, sources, tests);
   let contract = entry.line ? `${entry.source}#L${entry.line}` : `${entry.source} (referência literal ausente)`;
   if (id === "Q05") contract += "; docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md#L545 (SQLite local no escopo F0)";
   if (id === "Q11") contract += "; docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md#L427 (R-14) e contrato Plano compartilhado";
+  if (id === "D-W9-75") return [id, cleanSummary(entry.summary), `${contract}; ver D-W9-75a e D-W9-75b`,
+    "não se aplica: item-pai", "não se aplica: subitens com fase própria", "—", "F0",
+    "N-A — decomposição: 75a núcleo CTCAE F0; 75b canal F2, sem antecipar curadoria"];
   if (phase.phase === "ORGANIZACIONAL") {
     const check = organizationalChecks.get(id);
     return [id, cleanSummary(entry.summary), contract, "não se aplica: decisão de governança/referência documental", "docs/DECISOES.md", `checklist:${check}`, phase.phase, `N-A — ${phase.why}`];
@@ -1129,9 +1159,11 @@ function rowFor(id, requirement, sources, tests) {
   }
   if (id === "Q50") {
     const testText = multiTestEvidence.get(id).map(([file, title]) => `${file}:${title}`).join(" || ");
+    const pending = q50AcceptanceErrors(root);
     return [id, cleanSummary(entry.summary), `${contract}; PLANO-FINAL §5 exige testes positivos/negativos/borda + PR revisado + demo`,
       "não se aplica: gate de aceitação da fase", "não se aplica: PR e demo são evidência de fase",
-      testText, "F0", "VERMELHO — GATE_FASE_PENDENTE: E6b HTTP/SQLite focal passou 8/8; PR revisado e demo ainda não foram entregues"];
+      testText, "F0", pending.length ? `VERMELHO — GATE_FASE_PENDENTE: ${pending.join("; ")}`
+        : "VERDE — PR existente e diff revisado pelo Claude; demo executada; recibo Q50-ACEITE.json fixa os artefatos. CI e merge humano são portões separados, não presumidos por esta linha"];
   }
   const complete = Boolean(evidence.owner && evidence.consumer && evidence.test);
   const ownerText = evidence.owner ? `${evidence.owner.file}:${evidence.owner.symbol}` : `PENDENTE: arquivo:símbolo; ${suggestedOwner(id)}`;
@@ -1159,14 +1191,14 @@ export function buildMatrix(root = defaultRoot) {
   const requirement = requiredIds(root);
   const sources = productionSources(root);
   const tests = walk(path.join(root, "tests"), root, file => /\.(?:(?:test|spec)\.(?:ts|tsx|js|mjs)|adv\.ts)$/.test(file));
-  const rows = requirement.ids.map(id => rowFor(id, requirement, sources, tests));
+  const rows = requirement.ids.map(id => rowFor(id, requirement, sources, tests, root));
   const green = rows.filter(row => row[7].startsWith("VERDE")).length;
   const red = rows.filter(row => row[7].startsWith("VERMELHO")).length;
   const na = rows.length - green - red;
   const out = [
     "# Matriz de rastreabilidade F0 — R-34",
     "",
-    "> Base desta revisão C2-L1: `4c548f8abff4e1e2a337b865331a7fd6289774ee` (C2/E6b HTTP/SQLite, ConsultaPersistida, Flash durável, G-06, G-22, Q09 e prova D-W9-41). A bateria ampla integrada foi reportada PASS pelo root; o fechamento ainda depende do gate Q50, da prova D-W9-47 e da auditoria/PR/demo.",
+    "> Matriz final do integrado: C2/E6b HTTP/SQLite, ConsultaPersistida, Flash durável, G-06, G-22, Q09 e D-W9-41. Evidência vigente e limites de cada rodada em docs/f0-fecha/STATUS.md; aceite documental Q50 possui recibo próprio.",
     `> Estado observado na geração: ${green} VERDE com fonte, consumidor e teste rastreável; ${red} VERMELHO com causa específica registrada; ${na} N-A por adiamento normativo, decomposição, substituição ou checklist organizacional. N-A não significa implementado; VERMELHO não equivale automaticamente a defeito de produto.`,
     "",
     "| Decisão | Resumo (≤12 palavras) | Contrato/fonte | Dono (arquivo:símbolo) | Consumidor (arquivo) | Teste observável (arquivo:nome) | Fase | Estado |",
@@ -1191,10 +1223,10 @@ export function buildMatrix(root = defaultRoot) {
     "- A6 executou em `72ce726`: 2.240/2.240 testes regulares, 240/240 red team, 41/41 W8, tsc, fronteiras e corpus; seu HEAD é ancestral do checkout desta worktree.",
     "- `PENDENTE_DE_MAPEAMENTO` é falha de rastreabilidade, não conclusão de que a funcionalidade está ausente. Vermelhos com causa confirmada descrevem a evidência específica; os demais exigem revisão em C.",
     "- `VERDE` exige símbolo, import/reexport ou contrato consumidor e teste com nome existente; isso não substitui revisão semântica do caso nem reataque após mudanças em C.",
-    "- `tests/f0-fecha/consulta-completa.test.ts` e `docs/f0-fecha/C2-e6b-05.log` registram E6b HTTP/SQLite 8/8. Q50 permanece VERMELHO porque também exige PR revisado e demo de fase; E6b sozinha não fecha a decisão.",
-    "- `tests/f0-fecha/matriz.test.ts`: 2 testes estruturais passaram; o gate `red === 0` falhou com Q50 e D-W9-47, conforme `docs/f0-fecha/C2-L1.md`. O gate não valida completude funcional da F0.",
+    "- Q50 exige E6b e recibo verificável de PR, revisão independente e demo. O recibo fixa arquivos por SHA; não presume CI verde, merge realizado nem aprovação clínica. E6b sozinha não fecha a decisão.",
+    "- Falhas históricas da matriz foram preservadas em C2-L1 e C1-L1. O gate `red === 0` permanece obrigatório; é rastreabilidade, não substituto da bateria funcional final.",
     "- Q11 é VERDE para o núcleo F0: testes consumidores cobrem tabela Maestro e executor ORK separadamente conforme R-14/R-28; isso não afirma composição de runtime entre módulos.",
-    "- C2 integra ConsultaPersistida, Flash durável, CartaoTransversal, G-06, G-22 e Q09. Logs focais existem; a prova integral final e a demo/revisão exigidas pela missão ainda não passaram.",
+    "- C2 integra ConsultaPersistida, Flash durável, CartaoTransversal, G-06, G-22 e Q09. Demo real em docs/F0-DEMO.md; bateria integral, auditorias e CI devem ser conferidos em STATUS antes de merge.",
     "",
   ].join("\n");
   return out;
@@ -1250,6 +1282,12 @@ export function validateMatrix(root = defaultRoot) {
       }
     }
     if (phase === "F0" && state.startsWith("VERDE")) {
+      if (id === "Q50") {
+        errors.push(...q50AcceptanceErrors(root));
+        if (owner !== "não se aplica: gate de aceitação da fase" || consumer !== "não se aplica: PR e demo são evidência de fase")
+          errors.push("Q50: não representar aceite documental como consumidor de produto");
+        continue;
+      }
       if (owner.startsWith("PENDENTE") || consumer.startsWith("PENDENTE") || test.startsWith("PENDENTE")) errors.push(`${id}: VERDE F0 sem dono, consumidor e teste`);
       const [ownerFile, symbol] = owner.split(":");
       const ownerEntry = sources.find(file => file.rel === ownerFile);

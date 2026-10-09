@@ -1,41 +1,35 @@
-# CONTEXTO PARA NOVA ABA · OncoGlobal · atualizado 2026-10-07
+# Contexto para nova aba — OncoGlobal / OncoMind
 
-> Fase de eixo aberta: o writer único está em [`EIXO-CORRECAO.md`](EIXO-CORRECAO.md). Não abra outro executor para escrever neste ramo até o Dr. Silas fechar a fase. O Dr. Silas continua a autoridade clínica. Leia este arquivo, `docs/DECISOES.md` e o **documento-cerne** [`canonica/WORK-ARQUITETURA-CLINICA.md`](canonica/WORK-ARQUITETURA-CLINICA.md) (**D-W9-71**) antes de agir.
+Atualizado em 09/10/2026. A missão vigente é `docs/ondas/F0-FECHAMENTO-ASTRA.md`, autorizada por D-W9-80. Astra é a integradora e única writer de `f0/w1-integrado`. O Dr. Silas faz o merge na main.
 
-## 1. Projeto
-**OncoMind** = motor clínico deste repo (consulta do **Dr. Silas**, SUS/PB). **OncoGlobal** = só o nome-guarda-chuva (OncoMind + consultorio-docs + estatística HBem + QT HBem; legado Doctor_OS/Suite) — **D-W9-72**. WORK×STUDY **abolido**. OncoAssist = agente persistente no território OncoMind; Mesa fica em consultorio-docs.
-v1 monousuário, local no PC. Node 24 (`node:sqlite` WAL), TypeScript strict, Zod 4, Vitest 5, React 19 + Vite, `pdfjs-dist` (único acréscimo aprovado).
-- Repo `C:\Users\silas\Projects\OncoGlobal` (GitHub `silasjuba-del/OncoGlobal`, privado). Integração **`f0/w1-integrado`**. Base desta correção de eixo: `2690fe1`. Fase aberta: [`docs/EIXO-CORRECAO.md`](EIXO-CORRECAO.md) — writer único, sem integrar a entrega Astra.
-- Worktrees `C:\Users\silas\Projects\OncoGlobal-wt\<nome>`. CANONICA (`...\Oncomind\ONCOGLOBAL\ONCOMIND\CANONICA`): `ONCOGLOBAL-RAIZ-CANONICA.md` v1.0 + `SSOT-ONCOMIND-v1.md` v1.2 + `PLATFORM-GOVERNANCE.md`; só muda com ordem expressa (espelho em `docs/canonica/`).
-- Memória do Claude: `C:\Users\silas\.claude\projects\C--Users-silas-iCloudDrive-Oncomind-ONCOGLOBAL-ONCOMIND-CANONICA\memory\` — inclui **"registrar tudo"**: todo material do Dr. Silas vira registro no repo + commit/push, sempre desidentificado.
+## Raiz e estado vivo
 
-## 2. Regras que nunca mudam
-IA propõe, **código calcula**, médico decide e assina · ausente = PENDENTE (nunca VERDE/0) · conflito nunca some · app alerta e nunca bloqueia o clínico (bloqueia só artefato, saída de PHI e autoridade de IA) · junção de paciente **nunca automática** (caixa de revisão) · efeito externo só pelo gateway · só "Paciente Teste NN" nos testes · PC com pouca RAM: testes **em blocos**, `--no-file-parallelism`, nunca a suíte inteira · contratos em `src/contracts` só o tech lead.
-**Exceções de PHI:** A8 Plaud, A9 voz curta, A10 WhatsApp, **D-W9-66 kit PDF → LLM** (via gateway, `store:false`, volta à caixa de revisão). LLM ainda **desligada** (provider D-W9-15: OpenAI Luna GPT-6.1) até adaptador + gates.
+- Repositório: `C:\Users\silas\Projects\OncoGlobal`, origin `silasjuba-del/OncoGlobal`, branch `f0/w1-integrado`.
+- PR #4: https://github.com/silasjuba-del/OncoGlobal/pull/4 — consultar estado real e `docs/f0-fecha/STATUS.md` antes de afirmar prontidão.
+- OncoGlobal é o guarda-chuva; OncoMind é este motor clínico local; OncoAssist é a identidade do agente. consultorio-docs é outro projeto. WORK/STUDY foi abolido neste projeto (D-W9-72).
+- Cinco Lunas concluíram as fatias iniciais e reataques C2; não reintegrar cegamente ancestry de worktrees. L1 foi importada por faixa. Inventários/justificativas em `docs/f0-fecha/`.
+- origin/main reconciliada em 7936820. Nenhum merge nesta missão foi feito PARA main. Nenhuma tag criada.
 
-## 3. Decisões de hoje mais usadas (detalhe em DECISOES)
-Corte do salão: SpO₂<88, PAS<90 (ou >160), FC<50 (ou >120), Hb<8, Cr>1,5, febre **>37,8** estrita, N<1.500, PLQ<100.000, ECOG 3–4 · porta de ciclo = limiar de **bula**, não grau CTCAE · agenda: ≥5 h só até 12h, 5 inícios/30 min · dose: ajuste só −20/−30/−40; BSA **Mosteller** limitada a 1,40–2,20 m²; Calvert com ClCr ≤ 125; peso vale 30 dias · fichas: 5-FU 46 h sem bolus; antiemese ondansetrona + dexa + prometazina (sem NK1); cimetidina em taxano; hidratação Mg/K na cisplatina D1 e D8; SOnHe resolve divergências; Mayo 425; carbo semanal AUC 2; AT doxo 60; FLOT 5-FU 2.400; GEMOX oxali 100; temozolomida C1 150 → 200 · RECIST linfonodo: eixo curto ≥15 alvo, 10–15 não-alvo · nódulo <1 cm = indeterminado (TC em 4 meses) · lateralidade/anatomia×sexo/pTNM (D-W9-05/06/07) · 4 classes de medicação (PRÉ-QT, QT, PÓS-QT, NÃO ONCOLÓGICAS) · UI-alvo = **OncoChart** · SQLite v1 + estatística liberada · página do paciente v1 = WhatsApp · ExecSpec CKG = **proposta** (D-W9-64, aguardando: spec × implementação).
+## O que foi incorporado
 
-## 4. Estado em 2026-10-07 (corrigido nesta fase)
-**Integrado em `f0/w1-integrado` (`2690fe1`):** o que as ondas W1–W10 já mergearam neste ramo. Worktrees de Grok, Cursor, Fugu, Lunas e W2–W9 estão **atrás** deste commit (zero commits à frente). Não reintegrar.
-**Ainda fora, de propósito:** `codex/w10-entrega-integrada` (5 commits à frente, ancestral = este HEAD). Diff em `src/` revisado: não entra enquanto a revisão de extração puder gravar `CONFIRMADO` sem bundle exibido e a projeção puder marcar lab datado como VERDE. Detalhe em [`EIXO-CORRECAO.md`](EIXO-CORRECAO.md).
-**Docs de eixo:** `docs/planejamento/` (PLN-001…024), copiados de `f0/planejamento` para este ramo. São registro do Dr. Silas, não regra nova.
-**adv-w8:** os cinco sentinelas `SEM_IMPLEMENTACAO` encontram motor neste commit. O N19 agora chama `scripts/verificar-manifesto.mjs`. Red team amplo (`tests/redteam`) não foi recontado nesta fase — o mapa antigo está em `docs/w10/REDTEAM-DISTRIBUICAO.md`.
-**Consulta (menos clique):** `validar tudo` chama `exibirBundle` e só então `confirmar` (`src/ui/consulta/validarComExibicao.ts`). Confirmação bem-sucedida arma a impressão; Enter executa. Rotina: abrir → validar tudo → Enter.
+A entrega Astra c0c0762, sobras GLM/Kimi, planejamento aprovado, contratos W12, Flash com modelo persistido e prazo editável, revisão documental com vínculo explícito, reconciliação com conflito preservado, cartão transversal de fatos confirmados, assinatura presa ao conteúdo exibido, retomada durável e reabertura de histórico. Auditoria independente levou a correções de contexto paciente/encontro/lote e recibos antigos.
 
-## 5. Pendências abertas
-- **Cerne (D-W9-71/72) — ainda travam:** (1) C2 APAC A×C; (2) RT SIGTAP; (3) faturador episódio×paciente; (4) C1 dual febre. **Fechados:** nome (OncoMind solo) · MAESTRO/ORK.
-- Fugu rodada 2: bug "colo uterino" → cólon + lacunas L-01…15 do extrator + red team da faixa.
-- Decisões do Dr. Silas: chave de dedupe de exames (laboratório + nº + data de entrada); biomarcadores obrigatórios dos demais tumores (oferecido rascunho SBOC); CKG spec × implementação; INSS metastático; dexametasona D2–D3; interações (ativar item a item); red flags (texto final); fichas a conferir à mão.
-- Técnicas: RT-12c (READ no gateway, Luna L2); `ValidationRequirement` a promover a contrato; chave GLM (Z.AI) expirou; exportação SIA aguarda `Layout_Exportacao_APAC.pdf`.
-- Propostas de trabalho (ONCOASSIST-PROGRAMA-X-CODIGO.md): model router + cofre de chaves, gateway READ, persona do OncoAssist, custo por tarefa, conexões Drive/Agenda/Gmail desligadas.
+Leia a matriz normativa `docs/MATRIZ-RASTREABILIDADE-F0.md`, os relatórios Claude e `docs/F0-DEMO.md`. Há nove capturas reais de paciente/médico fictícios. A demonstração usa API HTTP/SQLite reais com provider desligado. Não comprova upload de PDF pelo navegador, impressão, exportação APAC nem jornada clínica de todas as funções. A grade de poltronas é ilustrativa.
 
-## 6. Onde está cada coisa
-Prompts de onda `docs/ondas/W10-*.md` · respostas aos executores `docs/w10/` · specs `docs/specs/` · modelos de documento `docs/referencias/modelos/01…11` · referências clínicas `docs/referencias/{evidencias,fornecedores,protocolos,onco-referencia,externos,rads}` · grafo `docs/referencias/ragGRAFO-oncologia/` (fonte em `C:\Users\silas\Projects\ragGRAFO\oncologia`) · aulas PRO 2026 e diretrizes SBOC ficam fora do git (caminhos em D-W9-49/53).
+## Regras permanentes
 
-## 7. Como trabalhar
-Executores externos em worktree próprio, faixa exclusiva, sem push; tech lead confere escopo, mergeia, verifica em blocos, registra em DECISOES e faz push. Equipe interna = agentes Sonnet em worktrees `w10-int-*`. Commits do tech lead terminam com `Co-Authored-By: <modelo da sessão> <noreply@anthropic.com>`. O Dr. Silas quer respostas curtas, em português, sem jargão; consultar só quando bloqueia (perguntas com opções).
+IA propõe, código calcula, médico decide e assina. Ausente é PENDENTE. Conflito preserva candidatos e fontes. Vínculo de paciente e promoção de fato exigem revisão explícita. Assinar apenas o conteúdo exibido, na versão e contexto corretos. Efeito externo somente pelo gateway. Não ativar modelo externo nem corpus RASCUNHO como parte do fechamento.
 
-## W11 (2026-10-08)
+CTCAE v6; decisões clínicas literais e fontes estão em `docs/DECISOES.md` e nos rulesets. Não inferir doses, estadiamento ou conduta a partir deste resumo. As exceções expressas de PHI A8/A9/A10/D-W9-66 continuam subordinadas aos seus gates; não são ativação geral do provider.
 
-Integrada a onda `f0/w11-claude` (HEAD da Astra + correções W11: plausibilidade de laboratório, RT-01/03/07/12/15, gate READ × WORLD_EFFECT, suíte "IA nunca no documento"). Red team 226/226. Ver `docs/planejamento/DIARIO.md` PLN-033.
+## Evidência e continuidade
+
+Baterias sempre em blocos seriais, um worker e `--no-file-parallelism`: `pwsh -NoProfile -File docs/f0-fecha/verificar-blocos.ps1 -Etapa <nome-unico> -Pool forks`. Instabilidade nativa já apareceu também com forks; preservar falhas e repetir integralmente quando necessário. Testes isolados não substituem bateria final.
+
+A1: 2.169 regulares, 226 redteam, 41 W8. A6: 2.240, 240, 41. C1-L2/C2: 2.278, 240, 41. Esses são snapshots históricos; usar STATUS e logs finais para o candidato atual. Scanner deve ler superfície publicável e revisar exceções por bytes/hash; não copiar hash novo para silenciar alteração sem revisão.
+
+## Limites e próximos passos humanos
+
+O WIP de seis arquivos do Cursor em `OncoGlobal-wt/w10-cursor` foi preservado. Backup já existente em `C:\Users\silas\handoff\backup-cursor-2026-10-09\`. Não limpar worktrees. `CANONICA-PATCH.md` é proposta, não aplicar na CANONICA sem ordem própria. `LIMPEZA-WORKTREES.md` é inventário/proposta, não autorização de remoção.
+
+Após gates e CI verdes, o Dr. Silas decide o merge do PR. Só depois cabem tag e verificação da main. F1+: receitas Flash, orientações curadas, biomarcadores adicionais, jornadas CTCAE/RECIST, modelos/proatividade/grafo/custos. Histórico anterior deste arquivo permanece em Git (7936820), sem restaurar as antigas atribuições de writer ou proibições de integração já superadas por D-W9-80.
