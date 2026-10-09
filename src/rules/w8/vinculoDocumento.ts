@@ -49,11 +49,14 @@ export interface EntradaConfrontoNome {
   nomeDocumento?: string | null;
   identificador?: { tipo: TipoIdentificadorClinico; valor: string } | null;
   cadastroNome?: string | null;
+  cadastroIdentificadores?: readonly { tipo: TipoIdentificadorClinico; valor: string }[];
 }
 
 export interface SaidaConfrontoNome {
   /** true quando o nome do documento diverge do cadastro do identificador: conflito visível. */
   excecao: boolean;
+  /** Compatibilidade documental; nunca executa vínculo de paciente. */
+  liga: boolean;
   motivo: string;
 }
 
@@ -69,7 +72,7 @@ function nomeComparavel(nome: string): string[] {
  * pelo identificador. Divergência ⇒ exceção de revisão; nunca escolhe um dos dois em silêncio.
  * Um nome é compatível quando os tokens são iguais ou um é subconjunto do outro (≥ 2 tokens).
  */
-export function confrontarNomeIdentificador(entrada: EntradaConfrontoNome): SaidaConfrontoNome {
+function confrontarNome(entrada: EntradaConfrontoNome): Omit<SaidaConfrontoNome, "liga"> {
   const documento = entrada.nomeDocumento ? nomeComparavel(entrada.nomeDocumento) : [];
   const cadastro = entrada.cadastroNome ? nomeComparavel(entrada.cadastroNome) : [];
   if (!documento.length || !cadastro.length) {
@@ -86,6 +89,32 @@ export function confrontarNomeIdentificador(entrada: EntradaConfrontoNome): Said
     excecao: true,
     motivo: `conflito de nome: nome impresso no documento diverge do cadastro vinculado por ${tipo} (revisão obrigatória, D-W9-34a)`,
   };
+}
+
+/** Confronto usado pelo vínculo explícito HTTP e pelo validador documental legado. */
+export function confrontarNomeIdentificador(entrada: EntradaConfrontoNome): SaidaConfrontoNome {
+  const nome = confrontarNome(entrada);
+  if (nome.excecao) return { ...nome, liga: false,
+    motivo: entrada.cadastroIdentificadores === undefined ? nome.motivo
+      : "conflito entre nome documental e nome do cadastro; revisão médica necessária" };
+  // Quando há cadastro completo, aplicar também a igualdade documental estrita
+  // e a validação por valor do identificador exigidas pelo vínculo HTTP F04.
+  if (entrada.cadastroIdentificadores !== undefined) {
+    if (entrada.nomeDocumento?.trim() && nomeComparavel(entrada.nomeDocumento).join(" ")
+      !== nomeComparavel(entrada.cadastroNome ?? "").join(" ")) {
+      return { liga: false, excecao: true, motivo: "conflito entre nome documental e nome do cadastro; revisão médica necessária" };
+    }
+    const id = entrada.identificador;
+    if (id) {
+      const match = entrada.cadastroIdentificadores.some((c) => c.tipo === id.tipo
+        && c.valor.replace(/\D/g, "") === id.valor.replace(/\D/g, ""));
+      const validado = vincularDocumentoAoPaciente({ tipoDocumento: "LAUDO_PRIMARIO", papelPessoa: "PACIENTE",
+        identificador: { valor: id.valor }, pacienteAlvo: { patientId: "confronto", identificadores: entrada.cadastroIdentificadores } });
+      if (!match || !validado.liga) return { liga: false, excecao: true,
+        motivo: "conflito entre identificador documental e cadastro; revisão médica necessária" };
+    }
+  }
+  return { ...nome, liga: true };
 }
 
 /**

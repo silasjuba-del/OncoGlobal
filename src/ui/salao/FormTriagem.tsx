@@ -84,6 +84,7 @@ export function FormTriagem({
   ruleset,
   contexto,
   fonte,
+  draftRevision = null,
   onSalvar,
 }: {
   patientId: string;
@@ -92,7 +93,8 @@ export function FormTriagem({
   ruleset: SalaoRuleset;
   contexto: ContextoTriagem;
   fonte: Fonte;
-  onSalvar: (triagem: Triagem) => void;
+  draftRevision?: number | null;
+  onSalvar: (triagem: Triagem, expectedRevision: number | null) => void | Promise<void>;
 }) {
   const [pas, setPas] = useState("");
   const [fc, setFc] = useState("");
@@ -130,11 +132,16 @@ export function FormTriagem({
     };
   }
 
-  function salvar() {
+  async function salvar() {
     // D-W9-03 · idade em branco nunca vira 0: segue como null (PENDENTE) e a regra manda à fila do médico.
     const triagem = montar(textoParaInteiro(idade));
-    onSalvar(triagem);
-    setResultado(avaliarTriagem(triagem, contexto, ruleset));
+    setResultado(null);
+    try {
+      await onSalvar(triagem, draftRevision);
+      setResultado(avaliarTriagem(triagem, contexto, ruleset));
+    } catch {
+      // Keep every entered value in place; TelaSalao presents the server error.
+    }
   }
 
   return (
@@ -142,7 +149,7 @@ export function FormTriagem({
       className="pilha"
       onSubmit={(e) => {
         e.preventDefault();
-        salvar();
+        void salvar();
       }}
     >
       <label>

@@ -629,6 +629,7 @@ export function criarPortaFalsa(): PortaConsulta {
         return {
           horario: linha.horario,
           patientId: linha.id,
+          encounterId: atual.consulta.encounterId,
           nome: atual.consulta.cabecalho.paciente.nome,
           prontuario: atual.prontuario,
           semaforo: atual.consulta.cabecalho.semaforo,
@@ -641,6 +642,9 @@ export function criarPortaFalsa(): PortaConsulta {
     };
   }
 
+  // Os cartões sintéticos já representam triagens salvas; expor sua revisão
+  // como a porta HTTP para permitir a decisão explícita sem pular o gate.
+  const revisoesTriagem = new Map(cartoes.map((c) => [c.entrada.patientId, 0]));
   function salao(): SalaoVisao {
     return {
       hoje: HOJE,
@@ -653,6 +657,9 @@ export function criarPortaFalsa(): PortaConsulta {
         encounterId: `en-${c.entrada.patientId.slice(3)}`,
         chegadaEm: c.entrada.chegadaEm,
         nome: c.nome,
+        draftId: `triagem-sintetica-${c.entrada.patientId}`,
+        revision: revisoesTriagem.get(c.entrada.patientId) ?? 0,
+        estadoRascunho: "RASCUNHO" as const,
       })),
       decisoes: decisoes.map((d) => ({ ...d })),
     };
@@ -729,6 +736,7 @@ export function criarPortaFalsa(): PortaConsulta {
 
     // [SERVIDOR_PENDENTE]
     async salvarTriagem(triagem: Triagem) {
+      revisoesTriagem.set(triagem.patientId, (revisoesTriagem.get(triagem.patientId) ?? -1) + 1);
       const resultado = avaliarTriagem(triagem, CONTEXTO, RULESET);
       const portao = avaliarCorteSalao(triagem, { pad: null, crCentesimos: null }, RULESET);
       const temCorte = resultado.cortes.length > 0 || portao.motivos.length > 0;

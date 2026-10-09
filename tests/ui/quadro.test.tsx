@@ -56,6 +56,7 @@ describe("quadro do salão", () => {
     expect(screen.getByText("motivo obrigatório")).toBeTruthy();
     fireEvent.change(screen.getByLabelText("Motivo"), { target: { value: "conduta do médico neste ciclo" } });
     fireEvent.click(screen.getByRole("button", { name: "confirmar liberação" }));
-    expect(onLiberar).toHaveBeenCalledWith("p-ecog4", "conduta do médico neste ciclo");
+    expect(onLiberar).toHaveBeenCalledWith("p-ecog4", "conduta do médico neste ciclo",
+      expect.stringMatching(/^salao-release-[0-9a-f-]{36}$/));
   });
 });

@@ -53,7 +53,7 @@ describe("triagem do salão", () => {
     expect(src).not.toMatch(/\b160\b|\b378\b|\b80\b/);
   });
 
-  it("PA 161 mostra FILA_MEDICO com o motivo e não impede salvar", () => {
+  it("PA 161 mostra FILA_MEDICO com o motivo e não impede salvar", async () => {
     const onSalvar = abrir();
     const botao = screen.getByRole("button", { name: "salvar triagem" });
     expect(botao.hasAttribute("disabled")).toBe(false);
@@ -61,37 +61,38 @@ describe("triagem do salão", () => {
     fireEvent.change(screen.getByLabelText("PA sistólica (mmHg)"), { target: { value: "161" } });
     fireEvent.click(botao);
     expect(onSalvar).toHaveBeenCalledTimes(1);
-    expect(screen.getByText("Destino: FILA_MEDICO")).toBeTruthy();
+    expect(await screen.findByText("Destino: FILA_MEDICO")).toBeTruthy();
     expect(screen.getByText("pressão arterial acima do limite")).toBeTruthy();
   });
 
-  it("37,9 °C mostra corte e 37,8 não", () => {
+  it("37,9 °C mostra corte e 37,8 não", async () => {
     abrir();
     preencherSeguros();
     fireEvent.change(screen.getByLabelText("Temperatura (°C)"), { target: { value: "37,8" } });
     fireEvent.click(screen.getByRole("button", { name: "salvar triagem" }));
+    await screen.findByText("Destino: SALAO");
     expect(screen.queryByText("temperatura acima do limite")).toBeNull();
 
     fireEvent.change(screen.getByLabelText("Temperatura (°C)"), { target: { value: "37,9" } });
     fireEvent.click(screen.getByRole("button", { name: "salvar triagem" }));
-    expect(screen.getByText("temperatura acima do limite")).toBeTruthy();
+    expect(await screen.findByText("temperatura acima do limite")).toBeTruthy();
   });
 
-  it("campo vazio aplicável mostra pendência", () => {
+  it("campo vazio aplicável mostra pendência", async () => {
     const onSalvar = abrir();
     preencherSeguros();
     fireEvent.change(screen.getByLabelText("Hemoglobina (g/dL)"), { target: { value: "" } });
     fireEvent.click(screen.getByRole("button", { name: "salvar triagem" }));
     expect(onSalvar).toHaveBeenCalledTimes(1);
-    expect(screen.getByText("hemoglobina ausente")).toBeTruthy();
+    expect(await screen.findByText("hemoglobina ausente")).toBeTruthy();
   });
-  it("idade vazia não vira 0: fica PENDENTE (null) e vai à fila do médico", () => {
+  it("idade vazia não vira 0: fica PENDENTE (null) e vai à fila do médico", async () => {
     const onSalvar = abrir();
     preencherSeguros();
     fireEvent.change(screen.getByLabelText("Idade (anos)"), { target: { value: "" } });
     fireEvent.click(screen.getByRole("button", { name: "salvar triagem" }));
     expect(onSalvar).toHaveBeenCalledTimes(1);
     expect(onSalvar.mock.calls[0]![0].idadeAnos).toBeNull();
-    expect(screen.getByText("idade ausente")).toBeTruthy();
+    expect(await screen.findByText("idade ausente")).toBeTruthy();
   });
 });

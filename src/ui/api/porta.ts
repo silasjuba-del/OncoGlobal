@@ -19,14 +19,7 @@ import type { LinhaTratamento } from "../../kernel/projections/historicoTratamen
 import type { AlertaPlaquetas } from "../../rules/plaquetasAlerta.js";
 import type { SaidaElegibilidadeCiclo } from "../../rules/elegibilidadeCiclo.js";
 
-export type CodigoPorta =
-  | "SESSAO_EXPIRADA"
-  | "SERVIDOR_PENDENTE"
-  | "PAYLOAD_INVALIDO"
-  | "PACIENTE_AUSENTE"
-  | "FONTE_ALTERADA"
-  | "CONTEXTO_CONSULTA_ALTERADO"
-  | "FLASH_RECUSADA";
+export type CodigoPorta = string;
 
 export class ErroPorta extends Error {
   /** `detalhe`: código devolvido pelo servidor (sem dado clínico), para mostrar ao médico. */
@@ -143,6 +136,7 @@ export interface ConsultaVisao {
 export interface ItemAgendaVisao {
   horario: string;
   patientId: string;
+  encounterId?: string | undefined;
   nome: string;
   prontuario: string;
   semaforo: Semaforo;
@@ -162,6 +156,9 @@ export interface PacienteTriagemVisao {
   encounterId: string;
   chegadaEm: string;
   nome: string;
+  draftId?: string | null | undefined;
+  revision?: number | null | undefined;
+  estadoRascunho?: "RASCUNHO" | "DECISAO_REGISTRADA" | null | undefined;
 }
 
 export interface DecisaoLiberacaoVisao {
@@ -191,6 +188,7 @@ export interface MensagemCanalVisao {
   redFlag: boolean;
   contatoId: string;
   patientId: string | null;
+  estadoVinculo?: "VINCULADO" | "SEM_VINCULO" | "CONFLITO" | "REVOGADO" | undefined;
   nomePaciente: string | null;
   candidatos: readonly CandidatoVinculoVisao[];
 }
@@ -243,6 +241,10 @@ export interface ChatSetorVisao {
 
 export interface PortaConsulta {
   carregarFonteRevisao?(draftId: string, signal?: AbortSignal): Promise<import("./revisaoExtracao.js").FonteRevisao>;
+  vincularFonteRevisao?(pedido: { exceptionId: string; acao: "LIGAR_PACIENTE"; patientId: string;
+    sourceId: string; draftId: string; expectedRevision: number; encounterId: string;
+    tumorLotId: string | null; idempotencyKey: string }, signal?: AbortSignal): Promise<{ codigo: "VINCULO_REVISTO"; revision: number }>;
+  reconciliarFontes?(draftIds: readonly string[], signal?: AbortSignal): Promise<import("./revisaoExtracao.js").ReconciliacaoProposta>;
   prepararRevisaoExtracao?(pedido: import("./revisaoExtracao.js").PedidoRevisaoExtracao, signal?: AbortSignal): Promise<import("./revisaoExtracao.js").RevisaoPreparada>;
   confirmarRevisaoExtracao?(pedido: import("./revisaoExtracao.js").PedidoRevisaoExtracao, signal?: AbortSignal): Promise<{ codigo: "GRAVADA" | "REPLAY" }>;
   /** W12-F4: SALVAR RASCUNHO da Flash. Grava rascunho, nunca assina. */
@@ -250,7 +252,10 @@ export interface PortaConsulta {
   /** W12-F4: FINALIZAR, passo 1. Gera os documentos em rascunho; a assinatura é validar com exibição. */
   prepararFinalizacaoFlash?(pedido: PedidoFinalizarFlash, signal?: AbortSignal): Promise<FlashPreparada>;
   oncoassistStatus?(signal?: AbortSignal): Promise<EstadoOncoassist>;
-  oncoassistFontes?(contexto: PedidoBundle, signal?: AbortSignal): Promise<FontesOncoassist>;
+  oncoassistFontes?(contexto: PedidoBundle, signal?: AbortSignal): Promise<{
+    fontes: FontesOncoassist["fontes"];
+    fontesSemVinculo?: FontesOncoassist["fontesSemVinculo"] | undefined;
+  }>;
   oncoassistClassificar?(pedido: PedidoBundle & { draftId: string }, signal?: AbortSignal): Promise<RespostaOncoassist>;
   login(senha: string): Promise<ResultadoLogin>;
   confirmar(bloco: ConfirmarBloco): Promise<ResultadoConfirmar>;
@@ -263,9 +268,11 @@ export interface PortaConsulta {
   // [SERVIDOR_PENDENTE]
   filaSalao(): Promise<SalaoVisao>;
   // [SERVIDOR_PENDENTE]
-  salvarTriagem(triagem: Triagem): Promise<SalaoVisao>;
+  salvarTriagem(triagem: Triagem, expectedRevision?: number | null): Promise<SalaoVisao>;
   // [SERVIDOR_PENDENTE]
-  liberarComCorte(patientId: string, motivo: string): Promise<SalaoVisao>;
+  liberarComCorte(patientId: string, motivo: string, contexto?: { encounterId: string; expectedRevision: number;
+    idempotencyKey: string }): Promise<SalaoVisao>;
+  selecionarContexto?(contexto: { patientId: string; encounterId: string; tumorLotId: string | null }): Promise<void>;
   // [SERVIDOR_PENDENTE]
   caixaCanal(): Promise<CaixaCanalVisao>;
   // [SERVIDOR_PENDENTE] o médico escolhe o candidato; a porta não liga por nome

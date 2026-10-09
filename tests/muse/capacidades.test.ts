@@ -6,8 +6,10 @@ it.each(["/consulta/salao/triagem", "/consulta/salao/liberar", "/consulta/canal/
     try {
       expect((await f.request(path, "POST", "{}", undefined, "application/json")).status).toBe(401);
       const res = await f.request(path, "POST", "{}", f.token, "application/json");
-      expect(res.status).toBe(501);
-      expect(JSON.parse(res.body)).toEqual({ codigo: "CAPACIDADE_PENDENTE", criaEventoClinico: false });
+      // F0 A3: capacidades implementadas; corpo vazio continua recusado sem efeito.
+      expect(res.status).toBe(400);
+      expect(JSON.parse(res.body)).toEqual({ codigo: "PAYLOAD_INVALIDO" });
       expect(f.db.prepare("SELECT * FROM operation").all()).toEqual([]);
+      expect(f.db.prepare("SELECT * FROM clinical_event").all()).toEqual([]);
     } finally { await f.close(); }
   });

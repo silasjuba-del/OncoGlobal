@@ -181,8 +181,12 @@ it("serve seis leituras HTTP do ledger com escopo por paciente/encontro e pendê
 
   const canal = await post("/consulta/canal", {});
   expect(canal.status).toBe(200);
-  expect(canal.data.mensagens).toMatchObject([{ mensagemId: "mensagem-41", patientId: patientA.patientId }]);
-  expect(canal.data.mensagens).toHaveLength(1);
+  expect(canal.data.mensagens).toHaveLength(3);
+  expect(canal.data.mensagens).toEqual(expect.arrayContaining([
+    expect.objectContaining({ mensagemId: "mensagem-41", patientId: patientA.patientId, estadoVinculo: "VINCULADO" }),
+    expect.objectContaining({ mensagemId: "mensagem-mismatch", patientId: null, nomePaciente: null, estadoVinculo: "CONFLITO" }),
+    expect.objectContaining({ mensagemId: "mensagem-revogada", patientId: null, nomePaciente: null, estadoVinculo: "REVOGADO" }),
+  ]));
 
   const apacs = await post("/consulta/apac", {});
   expect(apacs.status).toBe(200);

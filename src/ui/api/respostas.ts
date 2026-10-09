@@ -34,17 +34,20 @@ export const ConsultaResposta: z.ZodType<ConsultaVisao> = z.object({ hoje: DataC
     alertasVermelhos: z.array(Alerta) }),
 }).passthrough();
 export const AgendaResposta: z.ZodType<AgendaVisao> = z.object({ hoje: DataCivil, itens: z.array(z.object({
-  horario: Texto, patientId: Texto, nome: Texto, prontuario: Texto, semaforo: Semaforo,
+  horario: Texto, patientId: Texto, encounterId: Texto.optional(), nome: Texto, prontuario: Texto, semaforo: Semaforo,
   pendentes: Count, preConsultaPronta: z.boolean(), contatosDesdeUltima: Count, temE1: z.boolean(),
 })) });
 export const SalaoResposta: z.ZodType<SalaoVisao> = z.object({ hoje: DataCivil, ruleset: SalaoRuleset,
   contexto: ContextoTriagem, fonte: Fonte.nullable(), cartoes: z.array(z.object({ entrada: EntradaFila,
     destino: Destino, emergencia: z.boolean(), temCorte: z.boolean(), nome: Texto })),
-  pacientes: z.array(z.object({ patientId: Texto, encounterId: Texto, chegadaEm: Texto, nome: Texto })),
+  pacientes: z.array(z.object({ patientId: Texto, encounterId: Texto, chegadaEm: Texto, nome: Texto,
+    draftId: Texto.nullable().optional(), revision: z.number().int().nonnegative().nullable().optional(),
+    estadoRascunho: z.enum(["RASCUNHO", "DECISAO_REGISTRADA"]).nullable().optional() })),
   decisoes: z.array(z.object({ patientId: Texto, motivo: Texto })),
 }).passthrough();
 export const CanalResposta: z.ZodType<CaixaCanalVisao> = z.object({ mensagens: z.array(z.object({ mensagemId: Texto,
   texto: Texto, em: Texto, redFlag: z.boolean(), contatoId: Texto, patientId: Texto.nullable(), nomePaciente: Texto.nullable(),
+  estadoVinculo: z.enum(["VINCULADO", "SEM_VINCULO", "CONFLITO", "REVOGADO"]).optional(),
   candidatos: z.array(z.object({ patientId: Texto, nome: Texto })),
 })) });
 export const ApacResposta: z.ZodType<LotesApacVisao> = z.object({ hoje: DataCivil, itens: z.array(z.object({ apac: Apac,

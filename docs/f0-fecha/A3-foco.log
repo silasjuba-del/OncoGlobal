@@ -1,0 +1,56 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal
+
+ ❯ tests/closure-luna2/lab-origin.test.ts (7 tests | 1 failed) 28ms
+   ❯ F05 · unidade e proveniência declarada da hemoglobina (7)
+     × mantém o corte e sinaliza PENDENTE quando origem não concorda com hbDgDl 10ms
+ ❯ tests/kernel/extracao/homoglifo-regime.test.ts (7 tests | 1 failed) 44ms
+   ❯ H4 · regime planejado × prescrito gera CONFLICT com as duas versões (2)
+     × plano com fármaco diferente do prescrito vira conflito que preserva ambos 13ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/closure-luna2/lab-origin.test.ts > F05 · unidade e proveniência declarada da hemoglobina > mantém o corte e sinaliza PENDENTE quando origem não concorda com hbDgDl
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/closure-luna2/lab-origin.test.ts:47:93
+     45|       dataClinica: "2026-10-01",
+     46|     }), salaoRuleset);
+     47|     expect(result.corteSalao.motivos.some((item) => item.codigo === "c…
+       |                                                                                             ^
+     48|     expect(result.corteSalao.pendentes.some((item) => item.codigo === …
+     49|     expect(result.corteSalao.destino).toBe("FILA_MEDICO");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/kernel/extracao/homoglifo-regime.test.ts > H4 · regime planejado × prescrito gera CONFLICT com as duas versões > plano com fármaco diferente do prescrito vira conflito que preserva ambos
+AssertionError: expected 'planned_regimen != ordered_regimen: p…' to contain 'CISPLATINA'
+
+Expected: "CISPLATINA"
+Received: "planned_regimen != ordered_regimen: plano verbalizado × prescrição contemporânea divergentes"
+
+ ❯ tests/kernel/extracao/homoglifo-regime.test.ts:75:30
+     73|     const conflito = detectarConflitos([plano, prescricao]).find((c) =…
+     74|     expect(conflito?.kind).toBe("CONFLICT");
+     75|     expect(conflito?.reason).toContain("CISPLATINA");
+       |                              ^
+     76|     expect(conflito?.reason).toContain("CARBOPLATINA");
+     77|     expect(conflito?.factIds).toEqual([plano.id, prescricao.id]);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 21 passed (23)
+      Tests  2 failed | 146 passed (148)
+   Start at  14:19:23
+   Duration  45.30s (tests 57%, import 19%, environment 13%, transform 11%, worker 1%)
+
+    Isolate  23 workers spawned · ~443ms startup each (spawn + environment, per file)
+             at least ~9.74s faster with isolate: false — reuses workers across files instead of one per file
+

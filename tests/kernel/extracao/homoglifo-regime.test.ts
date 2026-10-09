@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { ClinicalFact } from "../../../src/kernel/extracao/tipos.js";
 import { detectarFarmaco, extratorDeterministico } from "../../../src/kernel/extracao/extrator.js";
 import { detectarConflitos } from "../../../src/kernel/extracao/reconciliacao.js";
+import { normalizarFatos } from "../../../src/kernel/extracao/normalizacao.js";
 
 const SIRIL_C = "с";
 
@@ -50,7 +51,11 @@ describe("H4 · extrator emite fármaco UNCERTAIN para grafia anômala em prescr
     expect(droga?.evidence).toBe("UNCERTAIN");
     expect(droga?.requiresConfirmation).toBe(true);
     expect(droga?.rawEvidence).toContain(`${SIRIL_C}isplatina`);
-    expect((droga?.value as Record<string, unknown>).normalizado).toBe("CISPLATINA");
+    // F0 A3: extrator conserva o literal; a etapa de normalização produz a sugestão.
+    expect(droga?.value).toBe(`${SIRIL_C}isplatina`);
+    const normalizado = normalizarFatos(fatos).find((f) => f.domain === "drug");
+    expect((normalizado?.value as Record<string, unknown>).normalizado).toBe("CISPLATINA");
+    expect(normalizado?.requiresConfirmation).toBe(true);
   });
 
   it("prescrição com grafia latina comum continua sem alerta", () => {

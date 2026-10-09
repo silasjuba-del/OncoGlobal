@@ -17,7 +17,9 @@ A2 PASS: lista integral em `INVENTARIO-A2.md` e `inventario-A2.json`. Astra 44 c
 ## Fase A
 
 A0 PASS: missão, contexto, fechamento, decisões D-W9-56…80, parecer e resultado das dez fatias lidos. Resultado das dez fatias consultado no ramo `codex/w10-entrega-integrada`, pois ainda não existe no integrado.
-A1–A2 PASS; A3 EM EXECUÇÃO; A4–A6 PENDENTES.
+A1–A2 PASS; A3 PASS após correções documentadas em RESOLUCOES-A3.md. Bateria integral A3: blocos regulares 2.223 PASS / 10 FAIL (UI/Muse), depois reataque UI+closure UI 131/131; total regular reconciliado 2.233 testes / 309 arquivos. Redteam 240/240 (31 arquivos), W8 41/41. TypeScript, fronteiras 293 e corpus 125 PASS. Logs vermelhos preservados, correções e reataques separados.
+
+Rotas dos dois ramos: nenhuma ausente no comparativo. RT01/03/15 integrados intactos, versões Astra em três arquivos adicionais. A4–A6 PENDENTES.
 
 ## Fase B
 

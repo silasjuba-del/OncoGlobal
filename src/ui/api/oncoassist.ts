@@ -5,7 +5,9 @@ export const EstadoOncoassist = z.object({
 });
 export const FontesOncoassist = z.object({ fontes: z.array(z.object({
   draftId: z.string(), rotulo: z.string(), criadoEm: z.string(),
-})) });
+})), fontesSemVinculo: z.array(z.object({ draftId: z.string(), sourceId: z.string(),
+  segmentId: z.string().nullable(), exceptionId: z.string().nullable(), rotulo: z.string(), criadoEm: z.string(), revision: z.number().int().nonnegative(),
+  textoOriginal: z.string() })).default([]) });
 export const RespostaOncoassist = z.discriminatedUnion("status", [
   z.object({ status: z.literal("PROPOSTA"), revisaoObrigatoria: z.literal(true),
     fonte: z.object({ id: z.string(), sha256: z.string() }),

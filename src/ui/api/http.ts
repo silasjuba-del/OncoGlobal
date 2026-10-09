@@ -1,8 +1,8 @@
 import { ActionIntent, ConfirmarBloco } from "../../contracts/operacao.js";
 import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
-import { FonteRevisao, RevisaoPreparada } from "./revisaoExtracao.js";
+import { FonteRevisao, ReconciliacaoProposta, RevisaoPreparada } from "./revisaoExtracao.js";
 import { AcaoResposta, AgendaResposta, ApacResposta, BundleResposta, CanalResposta, ChatResposta, ConfirmacaoResposta, ConsultaResposta, FlashPreparadaResposta, FlashRascunhoResposta, SalaoResposta } from "./respostas.js";
-import type { z } from "zod";
+import { z } from "zod";
 import {
   ErroPorta,
   type AcaoIntent,
@@ -63,7 +63,8 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   async function leitura<T>(caminho: string, corpo: unknown, schema: z.ZodType<T>): Promise<T> {
     const { status, json } = await enviar(caminho, corpo, true);
     const parsed = schema.safeParse(json);
-    if (status !== 200 || !parsed.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+    if (status !== 200) throw new ErroPorta(codigoDe(json, "PAYLOAD_INVALIDO"));
+    if (!parsed.success) throw new ErroPorta("PAYLOAD_INVALIDO");
     return parsed.data;
   }
 
@@ -89,6 +90,18 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
       const parsed = FonteRevisao.safeParse(json);
       if (status !== 200 || !parsed.success) throw new ErroPorta("PAYLOAD_INVALIDO");
       return parsed.data;
+    },
+    async vincularFonteRevisao(pedido, signal) {
+      const { status, json } = await enviar("/consulta/rascunho/revisar", pedido, true, signal);
+      const result = z.object({ codigo: z.literal("VINCULO_REVISTO"), revision: z.number().int().nonnegative() }).safeParse(json);
+      if (status !== 200 || !result.success) throw new ErroPorta(codigoDe(json, "PAYLOAD_INVALIDO"));
+      return result.data;
+    },
+    async reconciliarFontes(draftIds, signal) {
+      const { status, json } = await enviar("/consulta/rascunho/reconciliar", { draftIds: [...draftIds] }, true, signal);
+      const result = ReconciliacaoProposta.safeParse(json);
+      if (status !== 200 || !result.success) throw new ErroPorta(codigoDe(json, "PAYLOAD_INVALIDO"));
+      return result.data;
     },
     async prepararRevisaoExtracao(pedido, signal) {
       const { status, json } = await enviar("/consulta/rascunho/preparar-revisao", pedido, true, signal);
@@ -130,6 +143,11 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
         return { ok: true, expiraEm };
       }
       return { ok: false, expiraEm: null };
+    },
+
+    async selecionarContexto(contexto) {
+      const { status, json } = await enviar("/consulta/contexto/selecionar", contexto, true);
+      if (status !== 200) throw new ErroPorta(codigoDe(json, "PAYLOAD_INVALIDO"));
     },
 
     async confirmar(bloco: ConfirmarBloco): Promise<ResultadoConfirmar> {
@@ -175,13 +193,13 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     },
 
     // [SERVIDOR_PENDENTE]
-    async salvarTriagem(triagem) {
-      return leitura("/consulta/salao/triagem", triagem, SalaoResposta);
+    async salvarTriagem(triagem, expectedRevision = null) {
+      return leitura("/consulta/salao/triagem", { triagem, expectedRevision }, SalaoResposta);
     },
 
     // [SERVIDOR_PENDENTE]
-    async liberarComCorte(patientId, motivo) {
-      return leitura("/consulta/salao/liberar", { patientId, motivo }, SalaoResposta);
+    async liberarComCorte(patientId, motivo, contexto) {
+      return leitura("/consulta/salao/liberar", { patientId, ...(contexto ?? {}), motivo }, SalaoResposta);
     },
 
     // [SERVIDOR_PENDENTE]
@@ -191,7 +209,8 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
 
     // [SERVIDOR_PENDENTE]
     async pedirVinculo(contatoId, patientId) {
-      return leitura("/consulta/canal/vincular", { contatoId, patientId }, CanalResposta);
+      return leitura("/consulta/canal/vincular", { contatoId, patientId,
+        idempotencyKey: crypto.randomUUID() }, CanalResposta);
     },
 
     // [SERVIDOR_PENDENTE]

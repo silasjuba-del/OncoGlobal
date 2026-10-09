@@ -2,6 +2,7 @@ import type { ClinicalFact, EncounterSegment, FactDomain, FactEvidence } from ".
 import {
   DICIONARIO_FARMACO, normalizarFarmaco, normalizarLateralidade, normalizarSitioAnatomico,
 } from "./normalizacao.js";
+import { farmacosMencionados } from "./reconciliacao.js";
 
 const aliasesFarmacos = Object.keys(DICIONARIO_FARMACO)
   .sort((a, b) => b.length - a.length)
@@ -266,15 +267,14 @@ export const extratorDeterministico: Extrator = {
       if (segmento.sourceType === "prescription" && !negated) {
         const drug = raw.match(/\b(carboplatina|cisplatina|paclitaxel|docetaxel|oxaliplatina)\b/iu);
         if (drug) add("drug", drug[0]);
-        else {
-          // Grafia anômala (homóglifo/zero-width): fato UNCERTAIN com confirmação, nunca troca silenciosa.
-          const suspeito = raw.split(/\s+/u).flatMap((token) => {
-            const deteccao = detectarFarmaco(token);
-            return deteccao?.incerto ? [deteccao] : [];
-          })[0];
-          if (suspeito) {
-            add("drug", { raw: suspeito.raw, normalizado: suspeito.sugestao, incerto: true, motivo: suspeito.motivo },
-              "UNCERTAIN", true);
+        // A regex latina não vê "сisplatina" (cirílico) nem "cis\u200Bplatina".
+        // Procurar também quando há outro fármaco limpo na mesma linha.
+        // Apenas um candidato de dicionário com sinal explícito de adulteração
+        // entra aqui; o literal permanece na fonte e exige revisão médica.
+        for (const token of raw.matchAll(/[\p{L}\p{M}\p{Cf}\u180e]+/gu)) {
+          const candidato = normalizarFarmaco(token[0]);
+          if (candidato.suspeito && candidato.normalizado) {
+            add("drug", token[0], "UNCERTAIN", true);
           }
         }
         const cycle = raw.match(/\bciclo\s*(\d+)\b/iu);
@@ -292,6 +292,17 @@ export const extratorDeterministico: Extrator = {
       }
       const plan = raw.match(/^\s*(?:plano|conduta verbalizada)\s*:\s*(.+)/iu);
       if (plan) add("plan", plan[1]?.trim());
+      else if (segmento.sourceType === "plaud" || segmento.sourceType === "medical_note") {
+        // Apenas intenção futura literal na cláusula atual: o histórico depois
+        // de vírgula ("corrigi da outra vez...") permanece na fonte, não no plano.
+        const clausulaAtual = raw.split(/[,;]/u)[0]?.trim() ?? "";
+        const historico = /\b(?:anteriormente|antigamente|da outra vez|no ciclo anterior)\b/iu;
+        const futuro = /\b(?:vai|vou|vamos|iremos)\s+(?:fazer|receber|usar|iniciar)\b/iu;
+        if (futuro.test(clausulaAtual) && !historico.test(clausulaAtual)
+          && farmacosMencionados(clausulaAtual).length > 0) {
+          add("plan", clausulaAtual, "UNCERTAIN", true);
+        }
+      }
       }
       }
     }
