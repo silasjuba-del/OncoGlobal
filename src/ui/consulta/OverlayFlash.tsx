@@ -2,7 +2,12 @@ import { useEffect } from "react";
 import { ConsultaFlash, type ConsultaFlashProps } from "./ConsultaFlash.js";
 
 /** Overlay "Consulta Flash" com a Flash real dentro. Fecha por Esc ou pelos botões. */
-export function OverlayFlash({ flash, onFechar }: { flash: ConsultaFlashProps; onFechar: () => void }) {
+export function OverlayFlash({ flash, onFechar, erro = null }: {
+  flash: ConsultaFlashProps;
+  onFechar: () => void;
+  /** W12-F4: erro de salvar/finalizar. O overlay continua aberto e as marcações ficam como estão. */
+  erro?: string | null;
+}) {
   useEffect(() => {
     function k(e: KeyboardEvent) {
       if (e.key === "Escape") onFechar();
@@ -21,6 +26,7 @@ export function OverlayFlash({ flash, onFechar }: { flash: ConsultaFlashProps; o
           </button>
         </header>
         <div className="oc-ov-body">
+          {erro ? <p role="alert">{erro}</p> : null}
           <ConsultaFlash {...flash} />
         </div>
       </div>

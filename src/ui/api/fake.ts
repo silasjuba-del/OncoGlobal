@@ -663,6 +663,20 @@ export function criarPortaFalsa(): PortaConsulta {
   }
 
   return {
+    // W12-F4: o fake só devolve formas coerentes; não grava nada.
+    async salvarRascunhoFlash(pedido) {
+      return { codigo: "RASCUNHO_SALVO" as const, draftId: `flash-rascunho-${pedido.patientId}`,
+        revision: (pedido.expectedRevision ?? -1) + 1 };
+    },
+    async prepararFinalizacaoFlash() {
+      return {
+        registros: [{ id: "flash-doc-sintetico", expectedRevision: 0 }],
+        documentos: [{ documentId: "flash-doc-sintetico", documentVersion: 1, titulo: "Evolução da Consulta Flash",
+          tipoDocumento: "FLASH_EVOLUCAO" }],
+        alvoImpressao: null,
+      };
+    },
+
     async login(senha: string) {
       if (senha.trim().length === 0) return { ok: false, expiraEm: null };
       return { ok: true, expiraEm: "2026-10-05T20:00:00-03:00" };

@@ -57,6 +57,12 @@ export const ChatResposta: z.ZodType<ChatSetorVisao> = z.object({ setor: z.enum(
     texto: Texto, proposta: Texto.nullable(), chip: z.object({ estado: z.enum(["DISPONIVEL", "INDISPONIVEL", "DESCONHECIDO"]),
       origem: Texto.nullable(), data: Texto.nullable(), trava: z.literal(false), sugereTroca: z.literal(false), motivo: Texto }) }).nullable(),
 });
+export const FlashRascunhoResposta = z.object({ codigo: z.literal("RASCUNHO_SALVO"), draftId: Texto,
+  revision: Count });
+export const FlashPreparadaResposta = z.object({ codigo: z.literal("FLASH_PREPARADA"),
+  registros: z.array(z.object({ id: Texto, expectedRevision: Count })).min(1),
+  documentos: z.array(z.object({ documentId: Texto, documentVersion: z.number().int().positive(), titulo: Texto, tipoDocumento: Texto })).min(1),
+  alvoImpressao: z.object({ tipo: Texto, id: Texto, versao: z.number().int().positive() }).nullable() });
 export const BundleResposta = z.object({ patientId: Texto, encounterId: Texto,
   documentos: z.array(z.object({ draftId: Texto, documentId: Texto, documentVersion: z.number().int().positive(),
     conteudoHash: Texto.regex(/^[a-f0-9]{64}$/), conteudo: z.unknown() })) });

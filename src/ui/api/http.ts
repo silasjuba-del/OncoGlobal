@@ -1,7 +1,7 @@
 import { ActionIntent, ConfirmarBloco } from "../../contracts/operacao.js";
 import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
 import { FonteRevisao, RevisaoPreparada } from "./revisaoExtracao.js";
-import { AcaoResposta, AgendaResposta, ApacResposta, BundleResposta, CanalResposta, ChatResposta, ConfirmacaoResposta, ConsultaResposta, SalaoResposta } from "./respostas.js";
+import { AcaoResposta, AgendaResposta, ApacResposta, BundleResposta, CanalResposta, ChatResposta, ConfirmacaoResposta, ConsultaResposta, FlashPreparadaResposta, FlashRascunhoResposta, SalaoResposta } from "./respostas.js";
 import type { z } from "zod";
 import {
   ErroPorta,
@@ -68,6 +68,22 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   }
 
   return {
+    // W12-F4: o servidor recusa com um código (sem dado clínico); a UI mostra esse código e mantém o overlay.
+    async salvarRascunhoFlash(pedido, signal) {
+      const { status, json } = await enviar("/consulta/flash/rascunho", pedido, true, signal);
+      const parsed = FlashRascunhoResposta.safeParse(json);
+      if (status === 201 && parsed.success) return parsed.data;
+      throw new ErroPorta("FLASH_RECUSADA", codigoDe(json, "PAYLOAD_INVALIDO"));
+    },
+    async prepararFinalizacaoFlash(pedido, signal) {
+      const { status, json } = await enviar("/consulta/flash/preparar", pedido, true, signal);
+      const parsed = FlashPreparadaResposta.safeParse(json);
+      if (status === 200 && parsed.success) {
+        const { registros, documentos, alvoImpressao } = parsed.data;
+        return { registros, documentos, alvoImpressao };
+      }
+      throw new ErroPorta("FLASH_RECUSADA", codigoDe(json, "PAYLOAD_INVALIDO"));
+    },
     async carregarFonteRevisao(draftId, signal) {
       const { status, json } = await enviar("/consulta/rascunho", { draftId }, true, signal);
       const parsed = FonteRevisao.safeParse(json);

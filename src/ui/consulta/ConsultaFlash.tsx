@@ -80,6 +80,8 @@ export interface ConsultaFlashProps {
   linhaPontualizada?: boolean;
   aoSalvarRascunho: (plano: PlanoFlash) => void;
   aoFinalizar: (plano: PlanoFlash) => void;
+  /** W12-F4: enquanto o servidor responde, os botões ficam desativados (evita clique duplo). */
+  ocupado?: boolean;
 }
 
 /** Plano entregue ao chamador. Não emite nada: APAC sempre rascunho. */
@@ -274,10 +276,10 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
       </section>
 
       <footer>
-        <button type="button" onClick={() => props.aoSalvarRascunho(montarPlano())}>
+        <button type="button" disabled={props.ocupado === true} onClick={() => props.aoSalvarRascunho(montarPlano())}>
           SALVAR RASCUNHO
         </button>
-        <button type="button" onClick={() => props.aoFinalizar(montarPlano())}>
+        <button type="button" disabled={props.ocupado === true} onClick={() => props.aoFinalizar(montarPlano())}>
           FINALIZAR · IMPRIMIR · SAIR
         </button>
       </footer>

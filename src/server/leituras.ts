@@ -27,6 +27,7 @@ import { projetarHistoricoTratamento, type FatoSistemico } from "../kernel/proje
 import { labSeries } from "../kernel/projections/series.js";
 import { avaliarAlertaPlaquetas, type AlertaPlaquetas, type LimiarAlertaPlaquetas } from "../rules/plaquetasAlerta.js";
 import { elegibilidadeCiclo, type SinalElegibilidade } from "../rules/elegibilidadeCiclo.js";
+import { projetarFlash, rascunhoFlashDoContexto, type ModeloFlash } from "./flash.js";
 
 const RecistSerieSchema = z.object({
   patientId: z.string().min(1), tumorLotId: z.string().nullable(), episodioId: z.string().min(1),
@@ -153,7 +154,7 @@ export function lerPaciente(db: DatabaseSync, patientId: string) {
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value ?? null;
 }
 export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, sessao: Sessao,
-  tumorLotId?: string | null, config: { limiarPlaquetas?: LimiarAlertaPlaquetas | null } = {}) {
+  tumorLotId?: string | null, config: { limiarPlaquetas?: LimiarAlertaPlaquetas | null; modeloFlash?: ModeloFlash | null } = {}) {
   const all = eventos(db), paciente = porTipo(all, "Paciente", Paciente)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value;
   if (!paciente) return { codigo: "PACIENTE_NAO_ENCONTRADO" as const };
@@ -191,7 +192,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   // Extraction envelopes await explicit field-by-field medical reconciliation;
   // they must not enter the existing generic confirmation/signature bundle.
   const drafts = todosDrafts.filter((draft) => !(draft.payload && typeof draft.payload === "object"
-    && "kind" in draft.payload && ["EXTRACAO_RASCUNHO", "PRESCRICAO_RASCUNHO"].includes(String(draft.payload.kind)))
+    && "kind" in draft.payload && ["EXTRACAO_RASCUNHO", "PRESCRICAO_RASCUNHO", "FLASH_RASCUNHO", "FLASH_APAC_RASCUNHO"].includes(String(draft.payload.kind)))
     && draftNoEscopo(draft.payload));
   const docs = drafts.flatMap((draft) => {
     const payload = draft.payload;
@@ -292,6 +293,9 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     datasFixas: projetarDatasFixas(eventosDaConsulta, civil.dataCivil),
     historicoTratamento: historicoDaConsulta(eventosDaConsulta),
     alertaPlaquetas,
+    // W12-F4: Flash calculada do ledger; a data de referência é a do servidor, passada explicitamente.
+    flash: projetarFlash(eventosDaConsulta, civil.dataCivil, config.modeloFlash ?? null,
+      rascunhoFlashDoContexto(db, { patientId, encounterId: current.encounterId, tumorLotId: lote?.tumorLotId ?? null })),
     elegibilidade: elegibilidadeCiclo({ portaCiclo: null, triagem: null, ctcae: null, interacoes: null,
       funcaoOrganica: null, plaquetas: sinalPlaquetas(alertaPlaquetas) }),
   };
