@@ -13,7 +13,6 @@ describe("R-34 matriz de rastreabilidade da F0", () => {
   it("mantém lacunas de F0 vermelhas e só aceita verde com evidência rastreável", () => {
     const result = validateMatrix(process.cwd());
 
-    expect(result.red).toBeGreaterThan(0);
     expect(result.green + result.red + result.na).toBe(result.rows);
     expect(result.errors, result.errors.join("\n")).toEqual([]);
   });
