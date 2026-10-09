@@ -1,0 +1,2 @@
+COMMAND=node node_modules/typescript/bin/tsc --noEmit
+EXIT_CODE=0
