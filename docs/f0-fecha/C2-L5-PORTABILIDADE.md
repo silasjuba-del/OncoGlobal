@@ -21,3 +21,9 @@ Os testes adicionados cobrem: equivalência CRLF/LF apenas em `utf8-lf`; sensibi
 Com `TEST_SLOT` concedido, `npm run typecheck` passou. `npx vitest run tests/f0-fecha/phi-repo.test.ts --pool=forks --no-file-parallelism --maxWorkers=1` executou sete testes: seis passaram, incluindo os novos testes de portabilidade; o teste integral do repositório falhou na comparação de findings/pending já pendentes e na imagem protegida `docs/referencias/ui-modelo-consulta.webp`. Essa falha global não foi convertida em PASS nem corrigida nesta faixa.
 
 O diff estático passou em `git diff --check`. A bateria não executou UI, build ou suíte ampla. Esta correção não altera manifesto nem remove pendências.
+
+## Reataque: junction em diretório pai
+
+Antes de ler qualquer arquivo, o scanner agora compara `realpath` do arquivo com o `realpath` da raiz. Junctions/symlinks em diretórios pais que escapem da raiz geram `UNVERIFIED` e `PENDENTE`; o conteúdo não é lido. Symlink no próprio caminho final continua recusado por `lstat`.
+
+Na prova autorizada de reataque, `npm run typecheck` passou. O teste focado executou oito testes: sete passaram, incluindo a nova junction temporária apontando para outro diretório; a única falha continua sendo a asserção do scan global com candidatos pendentes e WEBP protegido. O teste remove a junction antes de apagar os dois diretórios temporários criados pela própria prova. `git diff --check` passou.
