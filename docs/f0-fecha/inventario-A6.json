@@ -1,0 +1,634 @@
+[
+  {
+    "ramo": "refs/heads/closure/w10-fugu",
+    "head": "f958437a755d0bb5bad41cbf2973507638f435be",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/closure/w10-luna1",
+    "head": "6d416d668027cba73c53c88e35a13b5accbdc1bd",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/closure/w10-luna2",
+    "head": "993201d687eacf0f525d8d9953bfaf191506c38f",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/closure/w10-luna3",
+    "head": "d6493a7f77b0699c28aa83c252d61c52c1244c20",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/codex/w10-entrega-integrada",
+    "head": "c0c076251e8c49099713c497d375f790fde243df",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/deepseek/v41-conclusao",
+    "head": "367825e4e0ae3f9a088256d24a745fd5b3705844",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/planejamento",
+    "head": "1144eae98cf3b38dcb9f1c508ec59a5659b05fd1",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w0-contratos",
+    "head": "80044bc5059bbe19f03baa2c4eb52020085b69e5",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w1-integrado",
+    "head": "72ce726e92bf059eb9bde394c0b070e9389fe85f",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w1-s02-regras-grok",
+    "head": "ab86077020aaae07f74de562ee0b1feef58db2cb",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w1-s04-kernel-claude",
+    "head": "7d1300904f5ed0218c6805270c6afb6de95e122c",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w1-s05-testes-kimi",
+    "head": "ef6758f709e899f6c94a02e1f7d644ce9406edc5",
+    "semEquivalente": 1,
+    "commits": [
+      "+ ef6758f709e899f6c94a02e1f7d644ce9406edc5 fix(testes): triagem conforme Q26 — CADEIRA/CAMA vao a FRENTE; borda de idade testada com AMBULATORIAL"
+    ]
+  },
+  {
+    "ramo": "refs/heads/f0/w1-s06-ci-sonnet",
+    "head": "288bb60afdf677dcd74f0138853271cdc7e0f0fc",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-astra",
+    "head": "7c7586c0c4b41ba035f9050b2cc0882456cc3d06",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-cursor",
+    "head": "9d8300876345019ec6e03e3361818e1d290ea6c8",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-fugu",
+    "head": "ffde1454d33736c7dbd8a58c6c07b94f8da7273b",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-grok",
+    "head": "17b8d78b9a959e34ea68afec103b270875924ec6",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-int-apac",
+    "head": "836107fd623a9157ab57c0ecc25aa9d916eb3447",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-int-copy",
+    "head": "28a9a17b584a06ede778f122b89bfbe89f44ffea",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-int-fichas",
+    "head": "56cd2a395aaa7e2b57afc76fdaf9fa68520548da",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-int-gates",
+    "head": "14fcef8c833ebbb6ed27d2b98c855763703e6161",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-int-prescricao",
+    "head": "b3de8d7cc08b46db6c35046bdd455fbf09dbe27b",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-luna1",
+    "head": "aec59c4bf80288746bda863b26ddfae84fdcb306",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-luna2",
+    "head": "b1e03309c9111830e8f661a8783aa9f7605ad175",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-luna3",
+    "head": "1de66bb6a5bef9dd8e3e9b6fe4638e8a284ba81e",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-luna4",
+    "head": "401fe5ab24cb3f7424134a174b70d7713927e1e2",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-luna5",
+    "head": "f5451230c10500e657227bd72f9f919b9bf3ad48",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-redteam",
+    "head": "374c1865fd8bcc34966dc8847b349fa852ee501c",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-claude",
+    "head": "474b0e644172b469190b5182ae53a424c6d42f86",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h1",
+    "head": "1fcb933fc02ab9e572b4399faae51ac0fb155962",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h10",
+    "head": "5a7919db4c25d840064bda19958c1f347c9a2d75",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h11",
+    "head": "380558e08f6bcd9587a463f5ad9328c58ec2972f",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h12",
+    "head": "37052a44725ed04af5bbff6f1a81928aa7f7a538",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h13",
+    "head": "2828d831f6820e690ee631506cd39bbd79535170",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h14",
+    "head": "a32b7625a918de8115f13bc6b0e15db29fb79301",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h15",
+    "head": "ce8af14651c655c33900fdf5ec3406e60cd3bbe3",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h16",
+    "head": "5e28ebc1f7f07e04f9464249e6c9ec4cc92ce20d",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h17",
+    "head": "ef11a11ef2b8673adf54c630a2f5cf7ce4ba2a72",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h18",
+    "head": "0abfe91a4888cfed62f594faa5a40ee8d28f4ebc",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h19",
+    "head": "01d8d82a28af5c6ba839ff593be4dbee03f6cdec",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h2",
+    "head": "dec623f26371c8093ff380778e5c47a0b1a82f66",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h20",
+    "head": "b3ebc49b333a71922555e6256b69fa366b834f80",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h21",
+    "head": "9f5fdcc2aeecac5d2a9920f502b833d7e3546f81",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h22",
+    "head": "6b8d2bbc7fac5c1c43429b3df4b990f8d123170f",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h23",
+    "head": "0c97deccf4dee2c3122c75995d8d00c80f6fa648",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h24",
+    "head": "9aaf6c1899dda0fe499a495953d3e0e568fb3d3b",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h25",
+    "head": "ac1659d1c75367e9d5009597be364eb1743f8d55",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h26",
+    "head": "df2cba7ba70f7ce9e94d190f02bfe226bd35800a",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h27",
+    "head": "89a39ebe0acbaf21aad5db7b44f988498c97418a",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h28",
+    "head": "e819faa6a066c071b95d5f8b867182192c3ca474",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h29",
+    "head": "a6cea3df02b7ce263cbd281cf358f4cf0d55133e",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h3",
+    "head": "e35835f6b71de2e2193200c6f842b935429be357",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h30",
+    "head": "0854b218559f213e883610a177fc0a5eb9095d62",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h4",
+    "head": "042a266adde3929b50c08d5e602bfb23ab563139",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h5",
+    "head": "c79746b4a9cb7aaf5415229c475e98db620790d2",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h6",
+    "head": "4d6c7db7fa4ce8aaef1fe3e40d6e1e242e7c6715",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h7",
+    "head": "a27c7d519ee2fe32ab324894b0fa0242259b6248",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h8",
+    "head": "7847920b5dbfe12464e4bb57f3c839418f12b087",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h9",
+    "head": "008354632a43fe5848a6f8873c7cb3603ee038b9",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w12-f1",
+    "head": "7a4f3975a65a376e1f6f397e0855b502bff7feba",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w12-f2",
+    "head": "479132ad93e33556438d056496efa4723cb04a44",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w12-f3",
+    "head": "1e36404bd6561636e0a6145acbcedab0a13bade4",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w12-f4",
+    "head": "1fcf85d271975c5d90f4c07254953251caa5106b",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w12-grok",
+    "head": "ca3c5a4156286b7ead6f23b5bcce26312b44ac57",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w2-cursor",
+    "head": "6702089db3f585695fb6702a1585a8a4b8985697",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w2-fugu",
+    "head": "f5a067cba87619ab550af49a59d624529d112626",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w2-glm",
+    "head": "bd1586b3d5ef94856dc48e0aa9d707d01daf7ee3",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w3-codex",
+    "head": "12b5dcd4ced28ca87f004c550c6bf7b68977ae30",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w3-grok",
+    "head": "b7e2b69a12ae7228b2fe2bef612371676b5818e3",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w5-dominio",
+    "head": "909d02cf948fbec22a9e210bd5256b6cc2eae565",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w5-e2e",
+    "head": "e5977aaa4b29c7e65f676829809340fa7061df7d",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w5-integrado",
+    "head": "386ec3b4b77388b172187ec212eaae63c04e5030",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w5-kernel",
+    "head": "30d42402885a93852808ed3df2eb1aa9bcadb6b4",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w5-red",
+    "head": "49b7b19add9c76c26aebe04dd40df605f49feec1",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w5-regras",
+    "head": "d357b96c4e8519b8264842478fd3f46465d0fb4e",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w6-cursor",
+    "head": "b30ceccc8920785cb0bc043ffe9902dcd843fc31",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w7-codex",
+    "head": "5ddde701b3d7bad3489eafe6998403903568a00a",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w8-antigravity",
+    "head": "e557035e9cdfac015f3a865c095a499a2cebbb2b",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w8-glm",
+    "head": "74f8d9ba4bfe00cc2615744e1141b93d6844d566",
+    "semEquivalente": 1,
+    "commits": [
+      "+ f3724b4204485a9b480f6f9b64fcd7b4ae9f94a1 W8-GLM-21: revisão dura — lote APAC e ork corrigidos com testes de borda"
+    ]
+  },
+  {
+    "ramo": "refs/heads/f0/w8-kimi",
+    "head": "e3cd6b2c54e0ee81f2ca1305b91efe6e9f45c820",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w8-muse",
+    "head": "f88d73d1a6f96d2b387ac3f7567481199ab37177",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w9-codex",
+    "head": "53665afdac33cad2b666ca68a368b6c2920b4928",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w9-cursor",
+    "head": "53665afdac33cad2b666ca68a368b6c2920b4928",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w9-grok",
+    "head": "53665afdac33cad2b666ca68a368b6c2920b4928",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/main",
+    "head": "c824826b5ab00651b50923ab5260a2118e3abb28",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/HEAD",
+    "head": "f2696991674cc3ecc34d505fb49318b5a2f46a2c",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/closure/w10-fugu",
+    "head": "f958437a755d0bb5bad41cbf2973507638f435be",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/closure/w10-luna1",
+    "head": "6d416d668027cba73c53c88e35a13b5accbdc1bd",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/closure/w10-luna2",
+    "head": "993201d687eacf0f525d8d9953bfaf191506c38f",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/closure/w10-luna3",
+    "head": "d6493a7f77b0699c28aa83c252d61c52c1244c20",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/codex/w10-entrega-integrada",
+    "head": "c0c076251e8c49099713c497d375f790fde243df",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/planejamento",
+    "head": "1144eae98cf3b38dcb9f1c508ec59a5659b05fd1",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w0-contratos",
+    "head": "08d01de81e3c85b8b2b98dda86ba836fc571b9e3",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w1-integrado",
+    "head": "1afc9b99b9c79a7e2c425dceb0e344a4aa8cac54",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w1-s05-testes-kimi",
+    "head": "ef6758f709e899f6c94a02e1f7d644ce9406edc5",
+    "semEquivalente": 1,
+    "commits": [
+      "+ ef6758f709e899f6c94a02e1f7d644ce9406edc5 fix(testes): triagem conforme Q26 — CADEIRA/CAMA vao a FRENTE; borda de idade testada com AMBULATORIAL"
+    ]
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w10-cursor",
+    "head": "9d8300876345019ec6e03e3361818e1d290ea6c8",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w12-f1",
+    "head": "7a4f3975a65a376e1f6f397e0855b502bff7feba",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w12-f2",
+    "head": "479132ad93e33556438d056496efa4723cb04a44",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w12-f3",
+    "head": "1e36404bd6561636e0a6145acbcedab0a13bade4",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w12-f4",
+    "head": "1fcf85d271975c5d90f4c07254953251caa5106b",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w12-grok",
+    "head": "ca3c5a4156286b7ead6f23b5bcce26312b44ac57",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w5-integrado",
+    "head": "aa99b8619bbb4584c5a7e6a3bfaa61864ad48b1f",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w8-glm",
+    "head": "74f8d9ba4bfe00cc2615744e1141b93d6844d566",
+    "semEquivalente": 1,
+    "commits": [
+      "+ f3724b4204485a9b480f6f9b64fcd7b4ae9f94a1 W8-GLM-21: revisão dura — lote APAC e ork corrigidos com testes de borda"
+    ]
+  },
+  {
+    "ramo": "refs/remotes/origin/main",
+    "head": "f2696991674cc3ecc34d505fb49318b5a2f46a2c",
+    "semEquivalente": 0,
+    "commits": []
+  }
+]

@@ -1,0 +1,176 @@
+[
+  {
+    "nome": "01-tsc",
+    "exe": "node",
+    "argumentos": [
+      "node_modules/typescript/bin/tsc",
+      "--noEmit"
+    ]
+  },
+  {
+    "nome": "02-fronteiras",
+    "exe": "node",
+    "argumentos": [
+      "scripts/check-boundaries.mjs"
+    ]
+  },
+  {
+    "nome": "03-corpus",
+    "exe": "node",
+    "argumentos": [
+      "scripts/validate-corpus.mjs"
+    ]
+  },
+  {
+    "nome": "04-bloco",
+    "exe": "node",
+    "argumentos": [
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "tests/rules/",
+      "tests/rules-conhecimento/",
+      "tests/rules-morfometria/",
+      "tests/rules-prescricao/",
+      "tests/rules-w8/",
+      "tests/modules/",
+      "tests/corpus/",
+      "tests/corpus-fichas/",
+      "tests/corpus-kit/",
+      "tests/contracts/",
+      "--no-file-parallelism",
+      "--maxWorkers=1"
+    ]
+  },
+  {
+    "nome": "05-bloco",
+    "exe": "node",
+    "argumentos": [
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "tests/kernel/",
+      "tests/projections/",
+      "tests/orchestration/",
+      "tests/leitura/",
+      "tests/ledger/",
+      "tests/identity/",
+      "tests/prompts/",
+      "--no-file-parallelism",
+      "--maxWorkers=1"
+    ]
+  },
+  {
+    "nome": "06-bloco",
+    "exe": "node",
+    "argumentos": [
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "tests/server/",
+      "tests/e2e/",
+      "tests/apac/",
+      "tests/apac-w10/",
+      "tests/app/",
+      "tests/backup/",
+      "tests/sistema/",
+      "tests/impressao/",
+      "tests/oncoassist-local/",
+      "tests/oncoassist-jev/",
+      "--no-file-parallelism",
+      "--maxWorkers=1"
+    ]
+  },
+  {
+    "nome": "07-bloco",
+    "exe": "node",
+    "argumentos": [
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "tests/ui/",
+      "tests/ui-telas/",
+      "tests/ui-copy/",
+      "tests/muse/",
+      "tests/w10-cursor/",
+      "--no-file-parallelism",
+      "--maxWorkers=1"
+    ]
+  },
+  {
+    "nome": "08-bloco",
+    "exe": "node",
+    "argumentos": [
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "tests/w10-grok/",
+      "tests/w10-luna2/",
+      "tests/w10-luna3/",
+      "tests/w10-luna4/",
+      "tests/w10-luna5/",
+      "tests/w12-grok/",
+      "tests/w10-eixo-orquestra/",
+      "tests/w10-eixo-servidor/",
+      "tests/w10-eixo-temporal/",
+      "tests/w10-entrega/",
+      "tests/w10-fugu/",
+      "tests/w10-fugu-eixo/",
+      "tests/w10-int-gates/",
+      "--no-file-parallelism",
+      "--maxWorkers=1"
+    ]
+  },
+  {
+    "nome": "09-bloco",
+    "exe": "node",
+    "argumentos": [
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "tests/w11-adv/",
+      "tests/w12-f1/",
+      "tests/w12-f2/",
+      "tests/w12-f3/",
+      "tests/w12-f4/",
+      "tests/w3/",
+      "tests/adv/",
+      "tests/cobertura/",
+      "--no-file-parallelism",
+      "--maxWorkers=1"
+    ]
+  },
+  {
+    "nome": "10-bloco",
+    "exe": "node",
+    "argumentos": [
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "tests/closure-e2e/",
+      "tests/closure-fugu/",
+      "tests/closure-luna1/",
+      "tests/closure-luna2/",
+      "tests/closure-root/",
+      "--no-file-parallelism",
+      "--maxWorkers=1"
+    ]
+  },
+  {
+    "nome": "redteam",
+    "exe": "node",
+    "argumentos": [
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "--config",
+      "tests/redteam/vitest.config.ts",
+      "--no-file-parallelism",
+      "--maxWorkers=1"
+    ]
+  },
+  {
+    "nome": "adv-w8",
+    "exe": "node",
+    "argumentos": [
+      "node_modules/vitest/vitest.mjs",
+      "run",
+      "--config",
+      "tests/adv-w8/vitest.config.ts",
+      "--no-file-parallelism",
+      "--maxWorkers=1"
+    ]
+  }
+]

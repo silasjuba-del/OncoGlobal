@@ -23,11 +23,13 @@ Rotas dos dois ramos: nenhuma ausente no comparativo. RT01/03/15 integrados inta
 
 A4 PASS: GLM-21 `ad01bba`, GLM-22 `b15bb0d`, Kimi Q26 `1afc9b9`; 177/177 testes em 36 arquivos (A4-sobras.log). O conflito do ORK foi resolvido mantendo AsyncLocalStorage e o tratamento da rejeição tardia; nenhuma chamada duplicada de agente. Q26 acrescenta CADEIRA em qualquer idade e conserva as fronteiras já corrigidas de AMBULATORIAL.
 
-A5: planejamento `1144eae`, três arquivos, todos em `docs/planejamento/**`. A6 EM EXECUÇÃO: nova bateria completa após A4/A5.
+A5 PASS: planejamento `1144eae`, três arquivos, todos em `docs/planejamento/**`, merge `72ce726`.
+
+A6 PASS em `72ce726`: TypeScript; fronteiras 293; corpus 125; **2.240/2.240 regulares em 311 arquivos; 240/240 redteam em 31; 41/41 W8 em 9**. Saídas completas em `evidencias/A6-portao/`. Todos os blocos passaram na mesma rodada serial. `inventario-A6.json` confirma só duas diferenças de patch justificadas em `EQUIVALENCIA-A6.md`; demais ramos cobertos. CI do código publicado em `1afc9b9` também PASS (run 37968146686); o HEAD com planejamento/evidências será publicado agora.
 
 ## Fase B
 
-PENDENTE do portão A. Nenhuma Luna despachada.
+Portão A aprovado. Preparação dos cinco worktrees a partir do commit deste registro. Faixas disjuntas em DISTRIBUICAO-B.md. Lote inicial L3/L2/L1; L4/L5 seguem conforme vagas. Testes exclusivos por TEST_SLOT.
 
 ## Fase C
 
