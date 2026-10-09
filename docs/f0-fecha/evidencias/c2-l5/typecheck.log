@@ -1,0 +1,6 @@
+COMMAND=node node_modules/typescript/bin/tsc --noEmit
+EXIT_CODE=1
+tests/f0-fecha/phi-repo.test.ts(95,7): error TS2322: Type '{ schemaVersion: 1; files: { path: string; sha256: string; items: Record<string, unknown>[]; }[]; }' is not assignable to type 'PhiManifest'.
+tests/f0-fecha/phi-repo.test.ts(108,7): error TS2322: Type '{ schemaVersion: 1; files: { path: string; sha256: string; items: Record<string, unknown>[]; }[]; }' is not assignable to type 'PhiManifest'.
+tests/f0-fecha/phi-repo.test.ts(118,7): error TS2322: Type '{ schemaVersion: 1; files: { path: string; sha256: string; items: Record<string, unknown>[]; }[]; }' is not assignable to type 'PhiManifest'.
+tests/f0-fecha/phi-repo.test.ts(141,7): error TS2322: Type '{ schemaVersion: 1; files: { path: string; sha256: string; items: Record<string, unknown>[]; }[]; }' is not assignable to type 'PhiManifest'.

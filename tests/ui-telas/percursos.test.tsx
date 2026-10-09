@@ -113,13 +113,13 @@ describe("percursos", () => {
     render(<Shell porta={porta} chaves={criarChaves()} />);
     clicar(await screen.findByRole("button", { name: "abrir Paciente Teste PR-VERDE" }), cliques);
     clicar(await screen.findByRole("button", { name: "validar tudo" }), cliques);
-    await waitFor(() => expect(exibir).toHaveBeenCalledTimes(1));
-    await waitFor(() => expect(confirmar).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(exibir).toHaveBeenCalledTimes(1), { timeout: 5_000 });
+    await waitFor(() => expect(confirmar).toHaveBeenCalledTimes(1), { timeout: 5_000 });
     expect(acao).not.toHaveBeenCalled();
     expect(await screen.findByText("Enter confirma a impressão")).toBeTruthy();
     expect(cliques).toEqual(["abrir Paciente Teste PR-VERDE", "validar tudo"]);
     fireEvent.keyDown(window, { key: "Enter" });
-    await waitFor(() => expect(acao).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(acao).toHaveBeenCalledTimes(1), { timeout: 5_000 });
     expect(acao.mock.calls[0]?.[0].verbo).toBe("IMPRIMIR");
     expect(ActionIntent.safeParse(acao.mock.calls[0]?.[0]).success).toBe(true);
   });
@@ -166,8 +166,8 @@ describe("percursos", () => {
     fireEvent.keyDown(campo, { key: "Enter" });
     await screen.findByRole("button", { name: "validar tudo" });
     fireEvent.keyDown(window, { key: "Enter", ctrlKey: true });
-    await waitFor(() => expect(exibir).toHaveBeenCalledTimes(1));
-    await waitFor(() => expect(confirmar).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(exibir).toHaveBeenCalledTimes(1), { timeout: 5_000 });
+    await waitFor(() => expect(confirmar).toHaveBeenCalledTimes(1), { timeout: 5_000 });
     exigirNomes(container);
   });
 });

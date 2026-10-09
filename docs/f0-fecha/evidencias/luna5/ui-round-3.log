@@ -1,0 +1,8 @@
+ROUND=3
+COMMAND=node node_modules/vitest/vitest.mjs run tests/ui-telas tests/ui --no-file-parallelism --maxWorkers=1
+EXIT_CODE=0
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-luna5
+ Test Files  23 passed (23)
+      Tests  69 passed (69)
+   Start at  15:57:06
+   Duration  253.79s (environment 54%, tests 16%, import 14%, transform 14%, worker 1%)
