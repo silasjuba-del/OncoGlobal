@@ -41,6 +41,10 @@ Portão B documental concluído: os cinco relatórios foram entregues. L1 `74925
 
 ## Fase C
 
+L1 integrada por faixa: ramo de entrega `f0/f0f-luna1-entrega@f3b4343`, conteúdo dos seis arquivos de `f0/f0f-luna1@8543c33`; nenhuma ancestry de L5 foi antecipada. A bateria `evidencias/C1-L1/` ficou PARTIAL: Q50 falhou legitimamente por faltar PR/demo; um worker nativo terminou em `identidade-http.test.ts` no bloco 08 (exit 3221226505), inclusive usando forks. Reataque isolado desse arquivo: 3/3 PASS, registrado como instabilidade, não como bateria limpa. Os demais blocos passaram. Uma rodada completa nova continua obrigatória.
+
+D1 foi complementada pelo Claude operacional em `f0/f0f-claude@f18870e`: `CLAUDE-REAUDITORIA-D1.md` aprova M1/M2 em `1b56427`, preservação A3, gateway, provider e revisão L1/L5, sem ALTO ou MÉDIO. Relatórios importados somente pela faixa documental. Observações baixas permanecem explícitas; o scanner precisa ser repetido no integrado final.
+
 **Portão C1-L2/C2 PASS** no código `f5bd4a3`: rodada integral `evidencias/C1-L2-C2/` com TypeScript, fronteiras 299, corpus 125, **2.278 regulares/323 arquivos, 240 redteam/31 e 41 W8/9**, todos verdes na mesma rodada serial com forks. Integração L2 acompanhada das correções causais já preparadas; os commits originais e provas vermelhas foram preservados. A prova adicional D-W9-41 passou isoladamente (1/1 em D41-fonte.log), conferindo a redação corrigida e a preservação do texto original do PDF; não houve mudança de comportamento nessa adição de teste.
 
 L1 finaliza rastreabilidade respeitando o escopo de kernel F0 e as ampliações explícitas desta missão. Q50 continua condicionado a auditoria/PR/demo; não será marcado concluído só por existir teste. L5 foi corrigida na preparação: os candidatos do snapshot inicial foram triados individualmente. O Dr. Silas confirmou a imagem de referência como fictícia, e sua revisão foi vinculada ao hash; scanner da preparação passou 5/5 em C2-phi-revisado-17, mas ainda falta varredura no integrado após importar L5. A origem da imagem deixou de ser pendência humana.

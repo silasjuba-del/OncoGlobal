@@ -1,0 +1,124 @@
+[
+  {
+    "resumo": [],
+    "exitCode": 0,
+    "segundos": 2.02,
+    "bloco": "01-tsc"
+  },
+  {
+    "resumo": [
+      "fronteiras ok (299 arquivos)"
+    ],
+    "exitCode": 0,
+    "segundos": 0.21,
+    "bloco": "02-fronteiras"
+  },
+  {
+    "resumo": [],
+    "exitCode": 0,
+    "segundos": 0.32,
+    "bloco": "03-corpus"
+  },
+  {
+    "resumo": [
+      " Test Files  74 passed (74)",
+      "      Tests  548 passed (548)",
+      "   Duration  26.58s (import 67%, transform 18%, tests 10%, worker 5%)"
+    ],
+    "exitCode": 0,
+    "segundos": 27.26,
+    "bloco": "04-bloco"
+  },
+  {
+    "resumo": [
+      " Test Files  36 passed (36)",
+      "      Tests  234 passed (234)",
+      "   Duration  16.10s (import 57%, tests 23%, transform 17%, worker 3%)"
+    ],
+    "exitCode": 0,
+    "segundos": 16.75,
+    "bloco": "05-bloco"
+  },
+  {
+    "resumo": [
+      " Test Files  36 passed (36)",
+      "      Tests  183 passed (183)",
+      "   Duration  34.54s (tests 39%, import 28%, environment 18%, transform 14%, worker 1%)"
+    ],
+    "exitCode": 0,
+    "segundos": 35.22,
+    "bloco": "06-bloco"
+  },
+  {
+    "resumo": [
+      " Test Files  48 passed (48)",
+      "      Tests  131 passed (131)",
+      "   Duration  83.85s (environment 56%, import 20%, tests 19%, transform 5%, worker 1%)"
+    ],
+    "exitCode": 0,
+    "segundos": 84.52,
+    "bloco": "07-bloco"
+  },
+  {
+    "resumo": [
+      "⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯",
+      "Vitest caught 1 unhandled error during the test run.",
+      "This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.",
+      "⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯",
+      "Error: [vitest-pool]: Worker forks emitted error.",
+      " ❯ EventEmitter.onTaskError node_modules/vitest/dist/chunks/index.DpLw24bj.js:11532:21",
+      "Caused by: Error: Worker exited unexpectedly with exit code 3221226505 during started state while running test file C:/Users/silas/Projects/OncoGlobal/tests/w10-luna2/identidade-http.test.ts",
+      " Test Files  62 passed (63)",
+      "      Tests  498 passed (499)",
+      "     Errors  1 error",
+      "   Duration  48.84s (tests 50%, import 39%, transform 9%, worker 2%)"
+    ],
+    "exitCode": 1,
+    "segundos": 49.54,
+    "bloco": "08-bloco"
+  },
+  {
+    "resumo": [
+      " ❯ tests/f0-fecha/matriz.test.ts (3 tests | 1 failed) 1381ms",
+      "⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯",
+      " FAIL  tests/f0-fecha/matriz.test.ts > R-34 matriz de rastreabilidade da F0 > só fecha R-34 quando não restar linha F0 vermelha ou pendente",
+      "AssertionError: linhas F0 vermelhas/pendentes impedem declarar a matriz fechada: expected 1 to be +0 // Object.is equality",
+      " Test Files  1 failed | 55 passed (56)",
+      "      Tests  1 failed | 624 passed (625)",
+      "   Duration  69.40s (tests 49%, environment 21%, import 19%, transform 10%, worker 1%)"
+    ],
+    "exitCode": 1,
+    "segundos": 70.37,
+    "bloco": "09-bloco"
+  },
+  {
+    "resumo": [
+      " Test Files  13 passed (13)",
+      "      Tests  64 passed (64)",
+      "   Duration  19.70s (tests 56%, import 20%, transform 16%, environment 7%, worker 1%)"
+    ],
+    "exitCode": 0,
+    "segundos": 20.41,
+    "bloco": "10-bloco"
+  },
+  {
+    "resumo": [
+      " Test Files  31 passed (31)",
+      "      Tests  240 passed (240)",
+      "   Duration  16.65s (import 45%, tests 34%, transform 19%, worker 2%)"
+    ],
+    "exitCode": 0,
+    "segundos": 17.29,
+    "bloco": "redteam"
+  },
+  {
+    "resumo": [
+      " Test Files  9 passed (9)",
+      "      Tests  41 passed (41)",
+      "   Duration  3.61s (tests 82%, import 8%, transform 6%, worker 4%)"
+    ],
+    "exitCode": 0,
+    "segundos": 4.21,
+    "bloco": "adv-w8"
+  }
+]
