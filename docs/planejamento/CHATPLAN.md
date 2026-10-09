@@ -378,3 +378,12 @@ M-AM  FLUXO CLÍNICO = NORTE DO APP (OPS-003, MARCO 2) → PLN-037   fontes/M-AM
       |AM5| OPS-006: resumo de 1ª vez nasce no chat (skill do Dr. Silas); bloco 1 ganha classificador de página, proveniência laudo×citação, máscara de segredos; F2 mostra origem laudo×encaminhador   REGISTRADO
       |AM4| Q1 REVISAR · Q2 Flash pontualizada + 1 clique (retorno+lab pré-selecionado ± imagem) · Q3 6 tumores · Q5 bula+literatura em RASCUNHO (D-W9-77)   DECIDIDO; Q4, Q6 e "mantendo a consulta"   PENDENTE
 ```
+
+```
+OPS-008  FECHAMENTO W12 (f0/w1-integrado@2e361a9) → PLN-038   DIARIO.md
+      |OP8.1| W12-GROK 01–10 + F1–F4 integrados; verificação verde (1 teste de teclado instável)   FEITO
+      |OP8.2| Glossário do modelo padrão da Flash = bloqueante para pré-marcação em produção   PENDENTE (próxima onda)
+      |OP8.3| Contratos PROVISORIO-W12 a publicar (6)   PENDENTE
+      |OP8.4| Revisão schema AP (lateralidade, COLORRETAL, CONFLITO, HER2 ultralow)   PENDENTE confirmação
+      |OP8.5| Dr. Silas: 25 orientações do canal · Q4 · Q6 · "mantendo a consulta" · retorno desmarcável · cólon=CCR · rótulos   PENDENTE
+```
