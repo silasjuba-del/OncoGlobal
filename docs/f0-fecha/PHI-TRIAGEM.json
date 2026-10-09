@@ -488,15 +488,15 @@
     },
     {
       "path": "docs/f0-fecha/STATUS.md",
-      "sha256": "d85f4504c9381f75c3aa1cf2921364a231bf235c962f59697fda8991ad09ca35",
+      "sha256": "7b23aee276fb6f028208218719ddb10c79f4aa322e48c5fb0be78d8c9d5d7a90",
       "items": [
         {
           "type": "telefone",
           "line": 28,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "docs/f0-fecha/STATUS.md:28; revisao contextual C2-L5 2026-10-09",
-          "reason": "Contexto parece commit/hash abreviado, mas git rev-parse --verify nao encontrou commit; nao suprimir sem objeto comprovado.",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/STATUS.md:28",
+          "reason": "Identificador numerico de run de CI explicitamente rotulado no registro A6; nao e telefone.",
           "contextTag": null
         }
       ]
@@ -644,9 +644,9 @@
           "type": "telefone",
           "line": 38,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "docs/progresso/W10-RETOMADA-JEV-FUGU.md:38; revisao contextual C2-L5 2026-10-09",
-          "reason": "Valor em documento de progresso/status sem token hash completo nem declaracao sintetica local; pendente.",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/progresso/W10-RETOMADA-JEV-FUGU.md:38",
+          "reason": "Codigo numerico de encerramento nativo de worker, explicitamente descrito no texto; nao e contato.",
           "contextTag": null
         }
       ]
@@ -659,9 +659,9 @@
           "type": "telefone",
           "line": 91,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "docs/progresso/W3-CODEX.md:91; revisao contextual C2-L5 2026-10-09",
-          "reason": "Valor em documento de progresso/status sem token hash completo nem declaracao sintetica local; pendente.",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/progresso/W3-CODEX.md:91",
+          "reason": "Codigo de crash de worker Windows em evidencia tecnica, nao telefone.",
           "contextTag": null
         }
       ]
@@ -716,9 +716,9 @@
           "type": "cns",
           "line": 42,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "docs/progresso/W8-KIMI.md:42; revisao contextual C2-L5 2026-10-09",
-          "reason": "Valor em documento de progresso/status sem token hash completo nem declaracao sintetica local; pendente.",
+          "status": "synthetic_declared",
+          "evidenceRef": "docs/progresso/W8-KIMI.md:42",
+          "reason": "A mesma linha declara fixtures inventadas e descreve o vetor como Matricula.",
           "contextTag": null
         }
       ]
@@ -732,9 +732,9 @@
           "line": 1,
           "ordinal": 0,
           "page": 2,
-          "status": "PENDENTE",
-          "evidenceRef": "docs/referencias/externos/manual-paciente-oncologico-2023.pdf:page2:1; revisao contextual C2-L5 2026-10-09",
-          "reason": "Manual externo, pagina de cabecalho; sem fonte que determine se o nome e autor, paciente ou outro rotulo. Revisao manual pendente.",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/referencias/externos/manual-paciente-oncologico-2023.pdf:pagina2; revisao layout L3 em 2026-10-09",
+          "reason": "Leitura local com layout preservado por pdfplumber: campo Nome seguido de linhas vazias antes do proximo rotulo. O extrator simples uniu rotulos e gerou falso nome.",
           "contextTag": null
         }
       ]
@@ -788,9 +788,9 @@
           "line": 1,
           "ordinal": 0,
           "page": 32,
-          "status": "PENDENTE",
-          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:page32:1; revisao contextual C2-L5 2026-10-09",
-          "reason": "Contexto fonte revisado sem declaracao explicita suficiente para sintese ou metadado publico; pendente.",
+          "status": "public_contact_metadata",
+          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:pagina32",
+          "reason": "Telefones publicos rotulados Central de Relacionamento e Ouvidoria no expediente institucional; revisao local por L3.",
           "contextTag": null
         },
         {
@@ -798,9 +798,9 @@
           "line": 1,
           "ordinal": 1,
           "page": 32,
-          "status": "PENDENTE",
-          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:page32:1; revisao contextual C2-L5 2026-10-09",
-          "reason": "Contexto fonte revisado sem declaracao explicita suficiente para sintese ou metadado publico; pendente.",
+          "status": "public_contact_metadata",
+          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:pagina32",
+          "reason": "Telefones publicos rotulados Central de Relacionamento e Ouvidoria no expediente institucional; revisao local por L3.",
           "contextTag": null
         },
         {
@@ -808,9 +808,9 @@
           "line": 1,
           "ordinal": 0,
           "page": 32,
-          "status": "PENDENTE",
-          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:page32:1; revisao contextual C2-L5 2026-10-09",
-          "reason": "Contexto fonte revisado sem declaracao explicita suficiente para sintese ou metadado publico; pendente.",
+          "status": "public_contact_metadata",
+          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:pagina32; revisao layout L3 em 2026-10-09",
+          "reason": "Contato no bloco da Ouvidoria institucional, apos horario; dominio coincide com site editorial impresso. Revisao local com layout preservado, nao dado de paciente.",
           "contextTag": null
         }
       ]
@@ -823,18 +823,18 @@
           "type": "telefone",
           "line": 501,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "docs/referencias/onco-referencia/07-tumor-packs-6-10.md:501; revisao contextual C2-L5 2026-10-09",
-          "reason": "Valor em material de referencia clinica sem declaracao sintetica local ou classificacao de identificador; pendente.",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/referencias/onco-referencia/07-tumor-packs-6-10.md:501",
+          "reason": "Substring numerica dentro do setid de URL bibliografica DailyMed, nao telefone.",
           "contextTag": null
         },
         {
           "type": "cns",
           "line": 638,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "docs/referencias/onco-referencia/07-tumor-packs-6-10.md:638; revisao contextual C2-L5 2026-10-09",
-          "reason": "Valor em material de referencia clinica sem declaracao sintetica local ou classificacao de identificador; pendente.",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/referencias/onco-referencia/07-tumor-packs-6-10.md:638",
+          "reason": "Substring numerica do DOI de referencia bibliografica, sem campo de identidade.",
           "contextTag": null
         }
       ]
@@ -862,18 +862,18 @@
           "type": "telefone",
           "line": 4282,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "docs/referencias/onco-referencia/ONCO-REFERENCIA-COMPLETA.md:4282; revisao contextual C2-L5 2026-10-09",
-          "reason": "Valor em material de referencia clinica sem declaracao sintetica local ou classificacao de identificador; pendente.",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/referencias/onco-referencia/07-tumor-packs-6-10.md:501; docs/referencias/onco-referencia/ONCO-REFERENCIA-COMPLETA.md:4282",
+          "reason": "Compilacao da mesma referencia DailyMed: match dentro de setid da URL.",
           "contextTag": null
         },
         {
           "type": "cns",
           "line": 4419,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "docs/referencias/onco-referencia/ONCO-REFERENCIA-COMPLETA.md:4419; revisao contextual C2-L5 2026-10-09",
-          "reason": "Valor em material de referencia clinica sem declaracao sintetica local ou classificacao de identificador; pendente.",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/referencias/onco-referencia/07-tumor-packs-6-10.md:638; docs/referencias/onco-referencia/ONCO-REFERENCIA-COMPLETA.md:4419",
+          "reason": "Compilacao do mesmo DOI bibliografico; nao e CNS.",
           "contextTag": null
         }
       ]
@@ -886,9 +886,9 @@
           "type": "nome_cabecalho_laudo",
           "line": 213,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "docs/referencias/ui-modelos/Triagem_QT_v20.html:213; revisao contextual C2-L5 2026-10-09",
-          "reason": "Modelo de triagem sem declaracao sintetica/placeholder ligada a este cabecalho; nao presumir que seja nome ficticio.",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/referencias/ui-modelos/Triagem_QT_v20.html:207-216; docs/referencias/ui-modelos/PADROES-UI.md:282",
+          "reason": "Inicializacao JavaScript com nome vazio; o matcher capturou nomes de outros campos vazios da mesma linha, nao nome de pessoa.",
           "contextTag": null
         }
       ]
@@ -1036,9 +1036,9 @@
           "type": "telefone",
           "line": 214,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "src/ui/api/fake.ts:214; revisao contextual C2-L5 2026-10-09",
-          "reason": "Modulo de API fake lido, mas nao foi demonstrada relacao deste campo com um registro Paciente Teste no mesmo contexto; pendente.",
+          "status": "synthetic_declared",
+          "evidenceRef": "src/ui/api/fake.ts:210-218",
+          "reason": "Factory local da porta fake: contato construido sem paciente ou vinculo, exclusivamente para demonstracao.",
           "contextTag": null
         }
       ]
@@ -1069,36 +1069,36 @@
           "type": "email",
           "line": 49,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/app/executores.test.ts:49; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
+          "reason": "Nome de arquivo local documentId@versao.html, gerado pelo executor e comparado como caminho/recibo; nao e email.",
           "contextTag": null
         },
         {
           "type": "email",
           "line": 50,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/app/executores.test.ts:50; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
+          "reason": "Nome de arquivo local documentId@versao.html, gerado pelo executor e comparado como caminho/recibo; nao e email.",
           "contextTag": null
         },
         {
           "type": "email",
           "line": 69,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/app/executores.test.ts:69; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
+          "reason": "Nome de arquivo local documentId@versao.html, gerado pelo executor e comparado como caminho/recibo; nao e email.",
           "contextTag": null
         },
         {
           "type": "email",
           "line": 70,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/app/executores.test.ts:70; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
+          "reason": "Nome de arquivo local documentId@versao.html, gerado pelo executor e comparado como caminho/recibo; nao e email.",
           "contextTag": null
         }
       ]
@@ -1546,9 +1546,9 @@
           "type": "cns",
           "line": 10,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/redteam/rt12-harness-gateway.adv.ts:10; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt12-harness-gateway.adv.ts:10,22-29",
+          "reason": "Dicionario local DIC usado para construir vetores adversariais de URL/egress; fixture declarada pelo teste.",
           "contextTag": null
         }
       ]
@@ -1561,54 +1561,54 @@
           "type": "cpf",
           "line": 17,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:17; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:15-18,29-36",
+          "reason": "Dicionario literal DIC e vetores locais que exercitam desidentificar/g02PhiEgress, sem ingestao de cadastro externo.",
           "contextTag": null
         },
         {
           "type": "cns",
           "line": 17,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:17; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:15-18,29-36",
+          "reason": "Dicionario literal DIC e vetores locais que exercitam desidentificar/g02PhiEgress, sem ingestao de cadastro externo.",
           "contextTag": null
         },
         {
           "type": "telefone",
           "line": 17,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:17; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:15-18,29-36",
+          "reason": "Dicionario literal DIC e vetores locais que exercitam desidentificar/g02PhiEgress, sem ingestao de cadastro externo.",
           "contextTag": null
         },
         {
           "type": "cns",
           "line": 29,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:29; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:15-18,29-36",
+          "reason": "Dicionario literal DIC e vetores locais que exercitam desidentificar/g02PhiEgress, sem ingestao de cadastro externo.",
           "contextTag": null
         },
         {
           "type": "telefone",
           "line": 29,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:29; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:15-18,29-36",
+          "reason": "Dicionario literal DIC e vetores locais que exercitam desidentificar/g02PhiEgress, sem ingestao de cadastro externo.",
           "contextTag": null
         },
         {
           "type": "email",
           "line": 30,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:30; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:15-18,29-36",
+          "reason": "Dicionario literal DIC e vetores locais que exercitam desidentificar/g02PhiEgress, sem ingestao de cadastro externo.",
           "contextTag": null
         }
       ]
@@ -1720,9 +1720,9 @@
           "type": "email",
           "line": 32,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/server/adv006-saida.test.ts:32; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/server/adv006-saida.test.ts:27-35",
+          "reason": "Destino em dominio reservado .invalid; executor fake e prova de zero efeitos externos.",
           "contextTag": null
         }
       ]
@@ -1759,9 +1759,9 @@
           "type": "cpf",
           "line": 16,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/ui-telas/importar.test.tsx:16; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/ui-telas/importar.test.tsx:12-28",
+          "reason": "Vetor literal de mascara e identificador inserido por fireEvent sob token NOME_1; testa alerta e RAW, sem fetch nem cadastro externo.",
           "contextTag": null
         }
       ]
@@ -1789,27 +1789,27 @@
           "type": "cns",
           "line": 17,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/w10-cursor/cadastro.test.ts:17; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-cursor/cadastro.test.ts:16-23",
+          "reason": "Vetor numerico literal repetido como entrada e expected de funcao pura de igualdade matricula/CNS; sem individuo ou cadastro associado.",
           "contextTag": null
         },
         {
           "type": "cns",
           "line": 17,
           "ordinal": 1,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/w10-cursor/cadastro.test.ts:17; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-cursor/cadastro.test.ts:16-23",
+          "reason": "Vetor numerico literal repetido como entrada e expected de funcao pura de igualdade matricula/CNS; sem individuo ou cadastro associado.",
           "contextTag": null
         },
         {
           "type": "cns",
           "line": 18,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/w10-cursor/cadastro.test.ts:18; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-cursor/cadastro.test.ts:16-23",
+          "reason": "Vetor numerico literal repetido como entrada e expected de funcao pura de igualdade matricula/CNS; sem individuo ou cadastro associado.",
           "contextTag": null
         }
       ]
@@ -1852,45 +1852,45 @@
           "type": "cns",
           "line": 31,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:31; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:17-34,48-69,178-183",
+          "reason": "Factory local de emissao com esquema ESQ e vetores algoritmicos predeterminados de digito verificador valido/invalido; caso p1 demonstra bloqueio, sem cadastro externo.",
           "contextTag": null
         },
         {
           "type": "cns",
           "line": 54,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:54; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:17-34,48-69,178-183",
+          "reason": "Factory local de emissao com esquema ESQ e vetores algoritmicos predeterminados de digito verificador valido/invalido; caso p1 demonstra bloqueio, sem cadastro externo.",
           "contextTag": null
         },
         {
           "type": "cns",
           "line": 60,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:60; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:17-34,48-69,178-183",
+          "reason": "Factory local de emissao com esquema ESQ e vetores algoritmicos predeterminados de digito verificador valido/invalido; caso p1 demonstra bloqueio, sem cadastro externo.",
           "contextTag": null
         },
         {
           "type": "cns",
           "line": 65,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:65; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:17-34,48-69,178-183",
+          "reason": "Factory local de emissao com esquema ESQ e vetores algoritmicos predeterminados de digito verificador valido/invalido; caso p1 demonstra bloqueio, sem cadastro externo.",
           "contextTag": null
         },
         {
           "type": "cns",
           "line": 179,
           "ordinal": 0,
-          "status": "PENDENTE",
-          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:179; revisao contextual C2-L5 2026-10-09",
-          "reason": "Bloco de teste lido; nao ha declaracao Paciente Teste vinculada a este token/ordinal. Nao classificado como sintetico apenas por estar em teste.",
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:17-34,48-69,178-183",
+          "reason": "Factory local de emissao com esquema ESQ e vetores algoritmicos predeterminados de digito verificador valido/invalido; caso p1 demonstra bloqueio, sem cadastro externo.",
           "contextTag": null
         }
       ]

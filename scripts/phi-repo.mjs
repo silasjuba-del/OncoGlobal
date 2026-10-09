@@ -363,6 +363,7 @@ async function readPdfTextPages(bytes) {
     useSystemFonts: false,
     useWorkerFetch: false,
     useWasm: false,
+    isEvalSupported: false,
     verbosity: 0,
   });
   const document = await task.promise;
