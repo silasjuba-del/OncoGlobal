@@ -1,4 +1,5 @@
-param([Parameter(Mandatory=$true)][string]$Etapa)
+param([Parameter(Mandatory=$true)][string]$Etapa,
+  [ValidateSet('threads','forks')][string]$Pool = 'threads')
 $ErrorActionPreference = 'Stop'
 $repoF0 = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 Set-Location -LiteralPath $repoF0
@@ -26,13 +27,13 @@ $indiceF0 = 4
 foreach ($grupoF0 in $gruposF0) {
   $pastasF0 = @($grupoF0 | Where-Object { Test-Path "tests/$_" } | ForEach-Object { "tests/$_/" })
   if ($pastasF0.Count -eq 0) { continue }
-  $tarefasF0 += @{ nome=('{0:d2}-bloco' -f $indiceF0); exe='node'; argumentos=@('node_modules/vitest/vitest.mjs','run') + $pastasF0 + @('--no-file-parallelism','--maxWorkers=1') }
+  $tarefasF0 += @{ nome=('{0:d2}-bloco' -f $indiceF0); exe='node'; argumentos=@('node_modules/vitest/vitest.mjs','run') + $pastasF0 + @('--no-file-parallelism','--maxWorkers=1',"--pool=$Pool") }
   $indiceF0++
 }
 $raizF0 = @(Get-ChildItem tests -File | Where-Object { $_.Name -match '\.(test|spec)\.[cm]?[jt]sx?$' } | ForEach-Object { "tests/$($_.Name)" })
-if ($raizF0.Count -gt 0) { $tarefasF0 += @{ nome='raiz'; exe='node'; argumentos=@('node_modules/vitest/vitest.mjs','run') + $raizF0 + @('--no-file-parallelism','--maxWorkers=1') } }
+if ($raizF0.Count -gt 0) { $tarefasF0 += @{ nome='raiz'; exe='node'; argumentos=@('node_modules/vitest/vitest.mjs','run') + $raizF0 + @('--no-file-parallelism','--maxWorkers=1',"--pool=$Pool") } }
 foreach ($adversarialF0 in @('redteam','adv-w8')) {
-  $tarefasF0 += @{ nome=$adversarialF0; exe='node'; argumentos=@('node_modules/vitest/vitest.mjs','run','--config',"tests/$adversarialF0/vitest.config.ts",'--no-file-parallelism','--maxWorkers=1') }
+  $tarefasF0 += @{ nome=$adversarialF0; exe='node'; argumentos=@('node_modules/vitest/vitest.mjs','run','--config',"tests/$adversarialF0/vitest.config.ts",'--no-file-parallelism','--maxWorkers=1',"--pool=$Pool") }
 }
 $resultadosF0 = @()
 git rev-parse HEAD | Set-Content -Encoding utf8 (Join-Path $evidenciaF0 'HEAD.txt')

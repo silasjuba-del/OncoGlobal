@@ -64,6 +64,8 @@ PENDENTE. Auditoria cruzada final ainda não executada. CI da base A6 `369db84`:
 
 ## Riscos
 
+- C1-L4 corrigido em `90cacc5`: todas as asserções executadas passaram, mas 10-bloco terminou nativamente (-1073740791). A bateria não é PASS. O mesmo bloco isolado com `--pool=forks` passou 64/64; isso é diagnóstico, não dispensa a rodada integral. O runner agora aceita `-Pool forks` para verificar a hipótese de instabilidade do modo threads, sempre um worker/arquivo e mantendo todos os testes. Configuração padrão do produto/CI não foi alterada.
+
 - Memória física livre muito baixa na abertura; verificações em série e um worker.
 - Contagens históricas não substituem a linha de base A1.
 - Documentos anteriores contêm atribuições de writer e nomes superados; D-W9-80 governa esta execução.
