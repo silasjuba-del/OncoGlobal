@@ -13,7 +13,7 @@ Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w12-grok`, branch `f0/w12-grok`.
 | GROK-07 intervalo de 30 dias | FEITA | W12-GROK-07 | Menos de 30 dias avisa. 30 exato passa. Concomitante planejada não entra. |
 | GROK-08 red flags do canal | FEITA | W12-GROK-08 | 25 orientações em RASCUNHO. Febre acima de 37,8. Negação não dispara. |
 | GROK-09 valor atual | FEITA | W12-GROK-09 | 180.000 em 21/07 e 20.000 em 04/08 elegem 20.000. Conflito na mesma hora não elege e não vira média. |
-| GROK-10 fechamento | | | |
+| GROK-10 fechamento | FEITA | W12-GROK-10 | Barrel exporta as regras da onda. Pureza e determinismo verdes. Fuzz, red team e adv-w8 só rodados. |
 
 ## GROK-01
 
@@ -188,5 +188,33 @@ Valores diferentes na mesma data e hora devolvem CONFLITO, com os dois candidato
 `npm run check:corpus` — `corpus ok (125 arquivos)`.
 
 `npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 60 files, 462 tests, exit 0.
+
+`npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.
+
+## GROK-10
+
+O barrel já exportava as funções das fatias 04 a 09. O teste de fechamento trava essa superfície: extração e sugestão de grau, retorno com toxicidade, vertigem, intervalo civil e com fuso, canal e valor atual.
+
+As regras novas (`ctcaeTexto`, `ctcaeClinico`, `retornoToxicidade`, `tontura`, `intervaloPosQt`, `canalRedflags`, `valorAtual` e o barrel) não contêm `node:fs`, `Date.now`, `new Date`, `Math.random` nem rede. `intervaloQt.ts` continua com `new Date` e não foi alterado. A mesma entrada devolve a mesma saída, e o JSON de entrada não muda. Nenhuma dessas saídas traz "liberado", "aprovado", "apto" ou `bloqueiaSalvar: true`.
+
+Provas só lidas, sem edição:
+
+`npx vitest run tests/w11-adv/fuzz-regras.test.ts --no-file-parallelism` — 1 file, 12 tests, exit 0. `bloqueiaSalvar` permanece falso.
+
+`npx vitest run --config tests/redteam/vitest.config.ts --no-file-parallelism` — 28 files, 226 tests, exit 0.
+
+`npx vitest run --config tests/adv-w8/vitest.config.ts --no-file-parallelism` — 9 files, 41 tests, exit 0.
+
+Nada foi enviado ao remoto.
+
+### Saídas
+
+`npx tsc --noEmit` — exit 0, sem diagnóstico.
+
+`npm run check:boundaries` — `fronteiras ok (289 arquivos)`.
+
+`npm run check:corpus` — `corpus ok (125 arquivos)`.
+
+`npx vitest run tests/w12-grok tests/rules tests/modules --no-file-parallelism` — 61 files, 465 tests, exit 0.
 
 `npx vitest run tests/w3/auditoria-regressao.test.ts` — 9 tests, exit 0.
