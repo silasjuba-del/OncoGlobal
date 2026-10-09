@@ -39,6 +39,16 @@ export function g05VerdeHonesto(cor: Semaforo, checksExecutados: boolean, penden
     : passa("G-05");
 }
 
+/** G-06 · emergência ativa exige destaque E1 somente na folha operacional do salão (K-12). */
+export function g06E1Destaque(entrada: {
+  templateId: string; emergenciaAtiva: boolean; destaqueE1Presente: boolean;
+}): Veredito {
+  if (entrada.templateId !== "folha-operacional-salao" || entrada.emergenciaAtiva !== true) return passa("G-06");
+  return entrada.destaqueE1Presente === true
+    ? passa("G-06")
+    : { gate: "G-06", decisao: "BLOQUEIA_ARTEFATO", motivo: "emergência ativa sem destaque E1 na folha operacional do salão" };
+}
+
 /** G-10 · dose calculada por LLM é proibida; menção literal com fonte é permitida (K-13). */
 export function g10DosePura(saidaAgente: Record<string, unknown>, origem: "LLM" | "FUNCAO_PURA"): Veredito {
   const temDoseCalculada = !saidaAgente || typeof saidaAgente !== "object" || "doseFinalMg" in saidaAgente || "doseCalculadaMg" in saidaAgente;
