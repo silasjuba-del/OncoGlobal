@@ -297,6 +297,15 @@ export const COPY_PT_BR = {
       "Mensagens do canal ficam guardadas só neste computador, com consentimento registrado",
     semDadosNaUrl: "Links de diretriz abrem sem nenhum dado do paciente",
   },
+  flashFechamento: {
+    rascunhoSalvo: "Rascunho da Consulta Flash salvo",
+    finalizada: "Consulta Flash finalizada e assinada pelo médico",
+    erroRascunho: "Não foi possível salvar o rascunho",
+    erroFinalizar: "Não foi possível finalizar",
+    salvando: "Salvando…",
+    finalizando: "Finalizando…",
+    marcacoesMantidas: "As marcações foram mantidas.",
+  },
   flashRetorno: {
     tituloTarefas: "Tarefas do retorno",
     retorno: "Retorno",

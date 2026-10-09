@@ -25,6 +25,7 @@ import { consultarGrafoLocal } from "../app/pesquisa/conhecimento.js";
 import { prepararRevisaoExtracao } from "../app/revisaoExtracao.js";
 import { criarOncoassistJev } from "../app/oncoassist.js";
 import { detectarEmergencias } from "../rules/radsEmergencias.js";
+import { CHAVE_CAIXA_MODELO_FLASH, PlanoFlashEntrada, lerModeloFlash, prepararFinalizacaoFlash, salvarRascunhoFlash } from "./flash.js";
 
 export interface ServidorDeps {
   db: DatabaseSync;
@@ -34,6 +35,8 @@ export interface ServidorDeps {
   settings?: SettingsService | null;
   configRootDir?: string;
   corpus?: ReturnType<typeof carregarCorpusServidor> | null;
+  /** PROVISORIO-W12: número da caixa do modelo padrão da Flash. Padrão: caixa `config.flash.modeloPadrao` do corpus, se existir. */
+  numeroCaixaModeloFlash?: number | null;
   oncoassistJev?: ReturnType<typeof criarOncoassistJev>;
   agora: () => string;
   log: (entry: { rota: string; codigo: string; status: number }) => void;
@@ -144,7 +147,8 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
   if (drafts.some((draft) => {
     const kind = draft?.payload && typeof draft.payload === "object" && "kind" in draft.payload
       ? draft.payload.kind : null;
-    return kind === "EXTRACAO_RASCUNHO" || kind === "PRESCRICAO_RASCUNHO" || kind === "EVOLUCAO_RASCUNHO";
+    return kind === "EXTRACAO_RASCUNHO" || kind === "PRESCRICAO_RASCUNHO" || kind === "EVOLUCAO_RASCUNHO"
+      || kind === "FLASH_RASCUNHO" || kind === "FLASH_APAC_RASCUNHO";
   })) return { status: 409, body: { codigo: "DRAFT_AINDA_RASCUNHO" } };
   const consulta = deps.sessoes.consultaSelecionada(token);
   if (consulta && (consulta.patientId !== contexto.patientId || consulta.encounterId !== contexto.encounterId
@@ -198,6 +202,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
             : req.url === "/consulta/oncoassist/status" ? "oncoassistStatus"
             : req.url === "/consulta/oncoassist/classificar-fonte" ? "oncoassistClassificar"
             : req.url === "/consulta/oncoassist/fontes" ? "oncoassistFontes"
+              : req.url === "/consulta/flash/rascunho" ? "rascunhoFlash"
+              : req.url === "/consulta/flash/preparar" ? "prepararFlash"
               : req.url === "/consulta/carregar" ? "carregarConsulta"
                 : req.url === "/consulta/agenda" ? "agenda"
                   : req.url === "/consulta/salao" ? "salao"
@@ -415,13 +421,35 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "carregarConsulta") {
       const parsed = z.object({ patientId: Id, tumorLotId: Id.nullable().optional() }).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
+      const numeroModelo = deps.numeroCaixaModeloFlash !== undefined ? deps.numeroCaixaModeloFlash
+        : deps.corpus?.caixasTodas.find((c) => c.chave === CHAVE_CAIXA_MODELO_FLASH)?.numero ?? null;
+      let modeloFlash = null as ReturnType<typeof lerModeloFlash>;
+      if (numeroModelo !== null && deps.settings) {
+        try { modeloFlash = lerModeloFlash(deps.settings.readBox(numeroModelo, sessao).value); } catch { modeloFlash = null; }
+      }
       const result = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao, parsed.data.tumorLotId,
-        { limiarPlaquetas: deps.corpus?.limiarPlaquetas ?? null });
+        { limiarPlaquetas: deps.corpus?.limiarPlaquetas ?? null, modeloFlash });
       if (!("codigo" in result)) deps.sessoes.selecionarConsulta(token, {
         patientId: result.patientId, encounterId: result.encounterId, tumorLotId: result.tumorLotId,
       });
       else deps.sessoes.selecionarConsulta(token, null);
       return reply("codigo" in result ? 404 : 200, "codigo" in result ? result.codigo : "CONSULTA_CARREGADA", result);
+    }
+    if (rota === "rascunhoFlash" || rota === "prepararFlash") {
+      const base = { patientId: Id, encounterId: Id, tumorLotId: Id.nullable(), plano: PlanoFlashEntrada };
+      const parsed = rota === "rascunhoFlash"
+        ? z.object({ ...base, expectedRevision: z.number().int().nonnegative().nullable() }).strict().safeParse(raw)
+        : z.object({ ...base, idempotencyKey: z.string().min(8) }).strict().safeParse(raw);
+      if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
+      const contexto = deps.sessoes.consultaSelecionada(token);
+      if (!contexto) return reply(409, "CONTEXTO_CONSULTA_NAO_SELECIONADO");
+      if (contexto.patientId !== parsed.data.patientId || contexto.encounterId !== parsed.data.encounterId
+        || (contexto.tumorLotId ?? null) !== parsed.data.tumorLotId)
+        return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
+      const result = "expectedRevision" in parsed.data
+        ? salvarRascunhoFlash(deps.db, deps.agora(), parsed.data)
+        : prepararFinalizacaoFlash(deps.db, deps.agora(), parsed.data);
+      return reply(result.status, String(result.body.codigo), result.body);
     }
     if (rota === "agenda") {
       const parsed = z.object({}).strict().safeParse(raw);
@@ -470,6 +498,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
           ? draft.payload.kind : null;
         const contexto = contextoDraft(draft.payload);
         return kind !== "EXTRACAO_RASCUNHO" && kind !== "PRESCRICAO_RASCUNHO"
+          && kind !== "FLASH_RASCUNHO" && kind !== "FLASH_APAC_RASCUNHO"
           && contexto?.encounterId === pedido.data.encounterId
           && contexto.tumorLotId === pedido.data.tumorLotId && payloadDocumento(draft.payload) !== null;
       }).map((draft) => draft.draftId);

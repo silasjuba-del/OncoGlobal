@@ -10,6 +10,7 @@ import type { EstadoFarmacia } from "../../modules/farmacia/estados.js";
 import type { DocumentoBundleVisao } from "../consulta/Bundle.js";
 import type { CabecalhoVisao } from "../consulta/viewmodels.js";
 import type { AlvoImpressao } from "../consulta/BarraFechamento.js";
+import type { PlanoFlash } from "../consulta/ConsultaFlash.js";
 import type { ItemDeltaVisao } from "../consulta/PainelDelta.js";
 import type { AfirmacaoVisao } from "../evidencia/CardEvidencia.js";
 import type { CartaoSalaoVisao } from "../salao/QuadroSalao.js";
@@ -24,10 +25,12 @@ export type CodigoPorta =
   | "PAYLOAD_INVALIDO"
   | "PACIENTE_AUSENTE"
   | "FONTE_ALTERADA"
-  | "CONTEXTO_CONSULTA_ALTERADO";
+  | "CONTEXTO_CONSULTA_ALTERADO"
+  | "FLASH_RECUSADA";
 
 export class ErroPorta extends Error {
-  constructor(readonly codigo: CodigoPorta) {
+  /** `detalhe`: código devolvido pelo servidor (sem dado clínico), para mostrar ao médico. */
+  constructor(readonly codigo: CodigoPorta, readonly detalhe?: string) {
     super(codigo);
   }
 }
@@ -66,6 +69,39 @@ export interface FlashVisao {
   modeloPadraoSalvo: boolean;
   laboratorioPreMarcado: boolean;
   imagemPreMarcada: boolean;
+  /** W12-F4 (opcional): rascunho da Flash já salvo (revisão corrente, para o próximo salvar). */
+  rascunho?: { draftId: string; revision: number };
+}
+
+/** W12-F4: contexto da consulta + plano exibido. A porta só entrega; o servidor decide o que grava. */
+export interface PedidoRascunhoFlash {
+  patientId: string;
+  encounterId: string;
+  tumorLotId: string | null;
+  plano: PlanoFlash;
+  /** null = ainda não existe rascunho salvo para este contexto. */
+  expectedRevision: number | null;
+}
+
+export interface ResultadoRascunhoFlash {
+  codigo: "RASCUNHO_SALVO";
+  draftId: string;
+  revision: number;
+}
+
+export interface PedidoFinalizarFlash {
+  patientId: string;
+  encounterId: string;
+  tumorLotId: string | null;
+  plano: PlanoFlash;
+  idempotencyKey: string;
+}
+
+/** Documentos em rascunho gerados do plano. Seguem para validar com exibição; nada está assinado ainda. */
+export interface FlashPreparada {
+  registros: readonly { id: string; expectedRevision: number }[];
+  documentos: readonly { documentId: string; documentVersion: number; titulo: string; tipoDocumento: string }[];
+  alvoImpressao: AlvoImpressao | null;
 }
 
 export interface ConsultaVisao {
@@ -209,6 +245,10 @@ export interface PortaConsulta {
   carregarFonteRevisao?(draftId: string, signal?: AbortSignal): Promise<import("./revisaoExtracao.js").FonteRevisao>;
   prepararRevisaoExtracao?(pedido: import("./revisaoExtracao.js").PedidoRevisaoExtracao, signal?: AbortSignal): Promise<import("./revisaoExtracao.js").RevisaoPreparada>;
   confirmarRevisaoExtracao?(pedido: import("./revisaoExtracao.js").PedidoRevisaoExtracao, signal?: AbortSignal): Promise<{ codigo: "GRAVADA" | "REPLAY" }>;
+  /** W12-F4: SALVAR RASCUNHO da Flash. Grava rascunho, nunca assina. */
+  salvarRascunhoFlash?(pedido: PedidoRascunhoFlash, signal?: AbortSignal): Promise<ResultadoRascunhoFlash>;
+  /** W12-F4: FINALIZAR, passo 1. Gera os documentos em rascunho; a assinatura é validar com exibição. */
+  prepararFinalizacaoFlash?(pedido: PedidoFinalizarFlash, signal?: AbortSignal): Promise<FlashPreparada>;
   oncoassistStatus?(signal?: AbortSignal): Promise<EstadoOncoassist>;
   oncoassistFontes?(contexto: PedidoBundle, signal?: AbortSignal): Promise<FontesOncoassist>;
   oncoassistClassificar?(pedido: PedidoBundle & { draftId: string }, signal?: AbortSignal): Promise<RespostaOncoassist>;
