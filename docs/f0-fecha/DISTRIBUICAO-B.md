@@ -6,6 +6,8 @@ Ativação somente depois do portão A. Cinco executoras gpt-6-luna, em lotes de
 
 `docs/MATRIZ-RASTREABILIDADE-F0.md`, `scripts/matriz-f0.mjs`, `tests/f0-fecha/matriz.test.ts`.
 
+Autorizado companion `scripts/matriz-f0.d.mts` para tipar o import do verificador no teste TypeScript.
+
 ## L2 — consulta completa
 
 `tests/f0-fecha/consulta-completa.test.ts`, `tests/f0-fecha/fixtures/**`. Produção só leitura; lacunas retornam à Astra, sem fabricar prova verde.
@@ -16,11 +18,17 @@ Ativação somente depois do portão A. Cinco executoras gpt-6-luna, em lotes de
 
 Ajuste de dependência: também possui `src/ui/salao/FormTriagem.tsx` e `tests/ui/triagem.test.tsx` para manter os produtores do contrato e o formulário sincronizados. O item L4(c), tontura sim/não/não sei (inicial null), passa para L3. As asserções clínicas existentes permanecem; fixtures de cenário conhecido podem informar explicitamente "não". Novos campos de vertigem ausentes nunca viram false/novo. Sem redefinir limiar.
 
+Ajuste solicitado por L3 e autorizado pela Astra: `tests/w12-grok/grok-06-tontura.test.ts`, somente schema local/asserção que exigia ecog2ComTonturaCorta no JSON. Remover a exigência obsoleta conforme D-W9-76, preservando expectativas clínicas.
+
 ## L4 — Flash e configuração real
 
 `corpus/glossario/caixas.v1.json`, `src/config/**`, `src/ui/consulta/**`, `src/ui/oncochart/Configuracoes.tsx` (nome real da tela), `src/ui/telas/TelaConfiguracoes*`, `src/ui/telas/TelaConsulta.tsx`, `src/server/flash.ts`, `src/server/rotas.ts`, `tests/f0-fecha/flash-producao.test.ts`.
 
+Incluídos antes do despacho: `src/ui/api/http.ts` e `src/ui/api/porta.ts`, somente métodos de configuração autenticada da caixa Flash; `tests/w12-f4/servidor-flash.test.ts`, somente setup da caixa (hoje adiciona chave artificial 9001, que colidirá com a caixa real). Preservar todas as asserções clínicas desse teste; usar o catálogo real sem número injetado de teste. Configuracoes recebe porta por prop, para a Astra montá-la no inicializador local em C2. Não trocar a tela por uma persistência só em estado React/localStorage.
+
 FormTriagem excluído desta faixa (pertence a L3). Servidor incluído para eliminar dependência de configuração de teste e preservar os campos novos de triagem no conteúdo/hash quando necessário. Nenhuma mudança de regra clínica. Portas/consumidores fora da faixa viram pedido concreto à Astra, não edição unilateral.
+
+Autorizada extensão `.tsx` para `tests/f0-fecha/flash-producao.test.tsx`, pois a prova inclui a interface React real. O relatório e a matriz devem usar esse caminho efetivo.
 
 ## L5 — estabilidade e higiene
 

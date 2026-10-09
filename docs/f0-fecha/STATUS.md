@@ -29,7 +29,13 @@ A6 PASS em `72ce726`: TypeScript; fronteiras 293; corpus 125; **2.240/2.240 regu
 
 ## Fase B
 
-Portão A aprovado. Preparação dos cinco worktrees a partir do commit deste registro. Faixas disjuntas em DISTRIBUICAO-B.md. Lote inicial L3/L2/L1; L4/L5 seguem conforme vagas. Testes exclusivos por TEST_SLOT.
+Portão A aprovado e publicado em `369db84732ab5a46283a2356bd85eb656916f009`. Cinco worktrees `C:/Users/silas/Projects/OncoGlobal-wt/f0f-luna1…5`, ramos `f0/f0f-luna1…5`, criados desse HEAD, com junction para node_modules existente. Faixas disjuntas em DISTRIBUICAO-B.md.
+
+L3 concluída em `3b1b67b`: tsc/fronteiras/corpus PASS, 759 + 6 testes PASS. L4 iniciou na worktree atualizada por fast-forward para esse commit (dependência de contratos); não houve merge no integrado.
+
+L2 entregue em `76c0c3b`: C1/C3/C4/C5 PASS na primeira rodada; C6 PASS isolado; E6b-2 FAIL de produto preservado. Prova final três vezes verdes NOT_RUN até correção causal. Detalhes em LACUNAS-C2.md.
+
+L1 (`/root/f0_luna1`) monta/revisa matriz sem testes ativos. L4 (`/root/f0_luna4`) tem TEST_SLOT exclusivo e verifica Flash. L5 (`/root/f0_luna5`) implementou scanner/higiene e aguarda turno de provas. L3 e L2 encerraram seus turnos, ramos limpos. Todas as Lunas têm modelo gpt-6-luna, sem push/merge por executora.
 
 ## Fase C
 
@@ -37,7 +43,7 @@ PENDENTE.
 
 ## Fase D
 
-PENDENTE. Auditoria cruzada e CI ainda não executados.
+PENDENTE. Auditoria cruzada final ainda não executada. CI da base A6 `369db84`: PASS, run 37969265836. Proposta de CANONICA preparada em CANONICA-PATCH.md, não aplicada. Lista LIMPEZA-WORKTREES.md inventaria 87 árvores; nenhuma removida. PR final ainda não aberto; PR #2 permanece aberto até substituição comprovada.
 
 ## Para o Dr. Silas
 
