@@ -37,7 +37,9 @@ PENDENTE.
 
 ## Fase D
 
-PENDENTE. Auditoria cruzada e CI ainda não executados.
+Nota C1-L4: merge original em `cac5a0f`. Primeira bateria integral preservada em `evidencias/C1-L4/`: 06-bloco interrompido nativamente (-1073740791), 08-bloco encontrou duas expectativas históricas de catálogo 47/16 incompatíveis com a nova caixa. Revisão da causa encontrou também faixa numérica inadequada (132) e falta de proveniência no glossário. Correção Astra: nova caixa Flash passa a 17 (configuração <100), fontes registradas; 47 caixas preexistentes conservadas. As duas provas agora exigem 48 totais/17 configurações/31 APAC e verificam explicitamente a caixa Flash. Nenhum teste removido; portão L4 permanece PENDENTE de reataque completo. Relatório LUNA-4 é histórico da entrega original, não sobrescrito.
+
+PENDENTE. Auditoria cruzada final ainda não executada. CI da base A6 `369db84`: PASS, run 37969265836. Proposta de CANONICA preparada em CANONICA-PATCH.md, não aplicada. Lista LIMPEZA-WORKTREES.md inventaria 87 árvores; nenhuma removida. PR final ainda não aberto; PR #2 permanece aberto até substituição comprovada.
 
 ## Para o Dr. Silas
 

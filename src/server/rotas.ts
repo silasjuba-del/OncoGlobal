@@ -34,7 +34,7 @@ import { PlanoFlashEntrada, lerModeloFlash, prepararFinalizacaoFlash, salvarRasc
 import { CHAVE_CAIXA_MODELO_FLASH } from "../config/flash.js";
 import { confrontarNomeIdentificador } from "../rules/w8/vinculoDocumento.js";
 import { normalizarDataCivil } from "../kernel/extracao/normalizacao.js";
-import { farmacosMencionados } from "../kernel/extracao/reconciliacao.js";
+import { farmacosMencionados, reconciliarCampos } from "../kernel/extracao/reconciliacao.js";
 
 export interface ServidorDeps {
   db: DatabaseSync;
@@ -625,14 +625,26 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       const targetFacts = resultado.facts.filter((fact) => targetSegments.has(fact.segmentId));
       const targetFactIds = new Set(targetFacts.map((fact) => fact.id));
       const conflitoEscopoSeguro = (item: { factIds: readonly string[]; segmentId: string | null }) =>
-        (item.segmentId !== null && targetSegments.has(item.segmentId))
+        (item.segmentId === null ? item.factIds.length > 0 : targetSegments.has(item.segmentId))
         && item.factIds.every((id) => targetFactIds.has(id));
       const repeticoes = resultado.deduplicacao.repeticoes.filter((item) =>
         [...item.fatoPrincipalIds, ...item.fatoRepetidoIds].every((id) => targetFactIds.has(id)));
       const versoesDiscordantes = resultado.deduplicacao.versoesDiscordantes.filter((item) =>
         item.factIds.every((id) => targetFactIds.has(id)));
-      const campos = Object.fromEntries(Object.entries(resultado.fields).filter(([key]) =>
-        [...targetSegments].some((segmentId) => key.startsWith(`${segmentId}::`))));
+      // Só neste ponto todos os segmentos foram vinculados por decisões persistidas
+      // ao mesmo paciente/encontro/data. O pipeline puro mantém fontes isoladas;
+      // esta borda autorizada pode confrontá-las sem confirmar nenhum fato.
+      const campos: ReturnType<typeof reconciliarCampos> = Object.fromEntries(Object.entries(reconciliarCampos(targetFacts)).map(([chave, campo]) =>
+        [chave, campo.conflict ? { ...campo, resolvedFactId: null } : campo]));
+      const conflitosCampos = Object.entries(campos).filter(([, campo]) => campo.conflict)
+        .map(([chave, campo]) => ({
+          id: `exc:CONFLICT:multifonte:${sha(JSON.stringify([contexto, chave,
+            campo.candidates.map((fato) => fato.id).sort()])).slice(0, 32)}`,
+          kind: "CONFLICT" as const, segmentId: null,
+          factIds: campo.candidates.map((fato) => fato.id),
+          sourceIds: [...new Set(campo.candidates.map((fato) => fato.sourceId))],
+          reason: `${chave}: fontes vinculadas divergem; decisão médica pendente, nenhum candidato eleito`,
+        }));
       return reply(200, "RECONCILIACAO_PROPOSTA", {
         codigo: "RECONCILIACAO_PROPOSTA", decisaoClinicaTomada: false,
         contexto: { patientId: contexto.patientId, encounterId: contexto.encounterId,
@@ -641,8 +653,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
           ({ draftId, sourceId, recordingId, segmentId, dataClinica })),
         segmentos: resultado.segments.filter((segment) => targetSegments.has(segment.id)),
         fatos: targetFacts, campos,
-        conflitos: resultado.conflitos.filter(conflitoEscopoSeguro),
-        excecoes: resultado.confirmationRequired.filter(conflitoEscopoSeguro),
+        conflitos: [...resultado.conflitos.filter(conflitoEscopoSeguro), ...conflitosCampos],
+        excecoes: [...resultado.confirmationRequired.filter(conflitoEscopoSeguro), ...conflitosCampos],
         deduplicacao: { repeticoes, versoesDiscordantes,
           fatoRepetidoIds: resultado.deduplicacao.fatoRepetidoIds.filter((id) => targetFactIds.has(id)) },
         timelines: resultado.timelines.filter((timeline) => timeline.patientId === contexto.patientId),
@@ -878,9 +890,11 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if (contexto.patientId !== parsed.data.patientId || contexto.encounterId !== parsed.data.encounterId
         || (contexto.tumorLotId ?? null) !== parsed.data.tumorLotId)
         return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
+      const consultaRevisada = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao, parsed.data.tumorLotId);
+      const resumoClinico = "codigo" in consultaRevisada ? null : consultaRevisada.resumoConfirmadoParaDocumento;
       const result = "expectedRevision" in parsed.data
         ? salvarRascunhoFlash(deps.db, deps.agora(), parsed.data)
-        : prepararFinalizacaoFlash(deps.db, deps.agora(), parsed.data);
+        : prepararFinalizacaoFlash(deps.db, deps.agora(), parsed.data, resumoClinico);
       return reply(result.status, String(result.body.codigo), result.body);
     }
     if (rota === "agenda") {

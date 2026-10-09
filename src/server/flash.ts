@@ -133,7 +133,7 @@ export function salvarRascunhoFlash(db: DatabaseSync, agora: string, input: Cont
 
 interface DocumentoFlash { documentId: string; titulo: string; tipoDocumento: string; texto: string; extra: Record<string, unknown> }
 
-function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo): DocumentoFlash[] {
+function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo, resumoClinico: string | null): DocumentoFlash[] {
   const lab = plano.tarefasRetorno?.laboratorio === true;
   const img = plano.tarefasRetorno?.imagem === true;
   const dias = plano.retorno.dias;
@@ -144,7 +144,7 @@ function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo): Document
   const itens = plano.retorno.examesAntesDoRetorno;
   const docs: DocumentoFlash[] = [
     { documentId: id("evolucao"), titulo: "Evolução da Consulta Flash", tipoDocumento: TIPO_DOC.evolucao,
-      texto: ["Consulta Flash: plano confirmado pelo médico.", `Retorno: ${prazo}.`,
+      texto: [...(resumoClinico ? [resumoClinico, ""] : []), "Consulta Flash: plano confirmado pelo médico.", `Retorno: ${prazo}.`,
         `Laboratório: ${lab ? "pedido gerado" : "não solicitado"}.`, `Imagem: ${img ? "pedido gerado" : "não solicitada"}.`,
         `${apac}.`].join("\n"), extra: {} },
   ];
@@ -164,12 +164,12 @@ function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo): Document
  */
 export function prepararFinalizacaoFlash(db: DatabaseSync, agora: string, input: ContextoFlash & {
   plano: PlanoFlashEntradaTipo; idempotencyKey: string;
-}): Resposta {
+}, resumoClinico: string | null = null): Resposta {
   if (input.plano.acoesMarcadas.length > 0 || input.plano.receitasMarcadas.length > 0)
     return { status: 409, body: { codigo: "ITENS_FLASH_SEM_DOCUMENTO" } };
   const chave = sha(JSON.stringify([input.patientId, input.encounterId, input.tumorLotId, input.idempotencyKey]));
   const contexto = { encounterId: input.encounterId, tumorLotId: input.tumorLotId };
-  const docs = montarDocumentos(chave, input.plano);
+  const docs = montarDocumentos(chave, input.plano, resumoClinico);
   const draftsDocs = docs.map((d) => ({
     doc: d,
     payload: {

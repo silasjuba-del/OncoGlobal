@@ -1,5 +1,5 @@
 import { readdirSync, readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, URL as NodeURL } from "node:url";
 import { z } from "zod";
 import { CaixaNumerada } from "../contracts/w10/clinico-w10.js";
 import { SalaoRuleset } from "../contracts/regras.js";
@@ -19,11 +19,11 @@ const FichaReceita = z.object({ consumivel: z.boolean().optional(), aprovadoMedi
 const ReceitasEnvelope = z.object({ consumivel: z.boolean(), fichas: z.array(FichaReceita) }).passthrough();
 
 function ler(relativo: string): unknown {
-  const caminho = fileURLToPath(new URL(`../../corpus/${relativo}`, import.meta.url));
+  const caminho = fileURLToPath(new NodeURL(`../../corpus/${relativo}`, import.meta.url));
   return JSON.parse(readFileSync(caminho, "utf8")) as unknown;
 }
 function lerTemplatesProtocolo() {
-  const root = new URL("../../corpus/fichas/", import.meta.url);
+  const root = new NodeURL("../../corpus/fichas/", import.meta.url);
   const dir = fileURLToPath(root);
   const encontrados: z.infer<typeof ProtocolTemplate>[] = [];
   const visitar = (path: string): void => {

@@ -1,0 +1,31 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-astra-c2
+
+ ❯ tests/f0-fecha/c2-apac-local.test.tsx (1 test | 1 failed) 411ms
+   × mantém achados e fontes da antiglosa HTTP visíveis no rascunho sem emitir APAC 408ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/f0-fecha/c2-apac-local.test.tsx > mantém achados e fontes da antiglosa HTTP visíveis no rascunho sem emitir APAC
+Error: PAYLOAD_INVALIDO
+ ❯ leitura src/ui/api/http.ts:70:32
+     68|     const parsed = schema.safeParse(json);
+     69|     if (status !== 200) throw new ErroPorta(codigoDe(json, "PAYLOAD_IN…
+     70|     if (!parsed.success) throw new ErroPorta("PAYLOAD_INVALIDO");
+       |                                ^
+     71|     return parsed.data;
+     72|   }
+ ❯ tests/f0-fecha/c2-apac-local.test.tsx:48:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 6 passed (7)
+      Tests  1 failed | 22 passed (23)
+   Start at  17:22:34
+   Duration  31.68s (tests 36%, transform 28%, import 18%, environment 18%)
+
+  Transform  transforming modules took 7.74s · 28% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

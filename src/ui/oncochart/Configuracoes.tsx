@@ -18,7 +18,9 @@ export function Configuracoes({
   onTema,
   onFechar,
   porta,
+  somenteFlash = false,
 }: {
+  somenteFlash?: boolean;
   tema: TemaOnco;
   onTema: (t: TemaOnco) => void;
   onFechar: () => void;
@@ -87,6 +89,29 @@ export function Configuracoes({
       String(g.n).includes(busca) ||
       g.nome.toLowerCase().includes(busca.toLowerCase()),
   );
+
+  const painelFlash = (<section aria-label="Modelo padrão da Consulta Flash" aria-busy={estadoFlash === "CARREGANDO" || salvandoFlash}>
+        <h3>Modelo padrão da Consulta Flash</h3>
+        <p>As opções marcadas são uma preferência editável do médico. A Consulta Flash continua revisável antes de qualquer assinatura.</p>
+        <label>
+          <input type="checkbox" aria-label="Pré-marcar laboratório na Consulta Flash"
+            checked={modeloFlash.laboratorio} disabled={estadoFlash !== "PRONTO" || salvandoFlash}
+            onChange={(e) => setModeloFlash((atual) => ({ ...atual, laboratorio: e.target.checked }))} />
+          Pré-marcar laboratório
+        </label>
+        <label>
+          <input type="checkbox" aria-label="Pré-marcar imagem na Consulta Flash"
+            checked={modeloFlash.imagem} disabled={estadoFlash !== "PRONTO" || salvandoFlash}
+            onChange={(e) => setModeloFlash((atual) => ({ ...atual, imagem: e.target.checked }))} />
+          Pré-marcar imagem
+        </label>
+        <button type="button" className="oc-btn-primary" onClick={() => void salvarModeloFlash()}
+          disabled={estadoFlash !== "PRONTO" || salvandoFlash || !porta?.alterarCaixaConfiguracao}>
+          {salvandoFlash ? "Salvando…" : "Salvar modelo Flash"}
+        </button>
+        <p aria-label="status configuração Flash" aria-live="polite">{mensagemFlash}</p>
+      </section>);
+  if (somenteFlash) return <section aria-label="Configurações da Consulta Flash">{painelFlash}</section>;
 
   return (
     <div className="oc-cfg" role="dialog" aria-label="Configurações">
@@ -194,27 +219,7 @@ export function Configuracoes({
         ) : null}
       </section>
 
-      <section aria-label="Modelo padrão da Consulta Flash" aria-busy={estadoFlash === "CARREGANDO" || salvandoFlash}>
-        <h3>Modelo padrão da Consulta Flash</h3>
-        <p>As opções marcadas são uma preferência editável do médico. A Consulta Flash continua revisável antes de qualquer assinatura.</p>
-        <label>
-          <input type="checkbox" aria-label="Pré-marcar laboratório na Consulta Flash"
-            checked={modeloFlash.laboratorio} disabled={estadoFlash !== "PRONTO" || salvandoFlash}
-            onChange={(e) => setModeloFlash((atual) => ({ ...atual, laboratorio: e.target.checked }))} />
-          Pré-marcar laboratório
-        </label>
-        <label>
-          <input type="checkbox" aria-label="Pré-marcar imagem na Consulta Flash"
-            checked={modeloFlash.imagem} disabled={estadoFlash !== "PRONTO" || salvandoFlash}
-            onChange={(e) => setModeloFlash((atual) => ({ ...atual, imagem: e.target.checked }))} />
-          Pré-marcar imagem
-        </label>
-        <button type="button" className="oc-btn-primary" onClick={() => void salvarModeloFlash()}
-          disabled={estadoFlash !== "PRONTO" || salvandoFlash || !porta?.alterarCaixaConfiguracao}>
-          {salvandoFlash ? "Salvando…" : "Salvar modelo Flash"}
-        </button>
-        <p aria-label="status configuração Flash" aria-live="polite">{mensagemFlash}</p>
-      </section>
+      {painelFlash}
 
       <section aria-label="Glossário de caixas">
         <h3>Glossário</h3>

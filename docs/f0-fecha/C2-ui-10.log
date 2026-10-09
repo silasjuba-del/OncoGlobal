@@ -1,0 +1,29 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-astra-c2
+
+ ❯ tests/f0-fecha/c2-apac-local.test.tsx (1 test | 1 failed) 918ms
+   × mantém achados e fontes da antiglosa HTTP visíveis no rascunho sem emitir APAC 914ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/f0-fecha/c2-apac-local.test.tsx > mantém achados e fontes da antiglosa HTTP visíveis no rascunho sem emitir APAC
+TypeError: actual value must be number or bigint, received "undefined"
+ ❯ tests/f0-fecha/c2-apac-local.test.tsx:54:27
+     52|   const resposta = await porta.lotesApac();
+     53|   const achados = resposta.itens[0]?.antiglosa?.achados;
+     54|   expect(achados?.length).toBeGreaterThan(0);
+       |                           ^
+     55|   render(<TelaApacLote porta={porta} chaves={criarChaves()} />);
+     56|   const painel = await screen.findByRole("region", { name: "Antiglosa …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  1 failed | 6 passed (7)
+   Start at  17:24:59
+   Duration  29.00s (environment 37%, transform 23%, tests 23%, import 16%)
+
+    Isolate  4 workers spawned · ~2.97s startup each (spawn + environment, per file)
+             at least ~8.90s faster with isolate: false — reuses workers across files instead of one per file
+

@@ -143,23 +143,23 @@ export function CartaoTransversal({ entrada }: { entrada: unknown }) {
   const nucleo = retrato.nucleo as unknown as Record<string, unknown>;
   const extensao = retrato.extensao as unknown as Record<string, unknown>;
   const specsDestaque = DESTAQUE.map((k) => CAMPOS_NUCLEO.find((s) => s.chave === k)).filter((s): s is CampoSpec => s !== undefined);
-  const tumor = retrato.extensao.tumor;
+  const tumor = retrato.extensao?.tumor ?? null;
 
   return (
-    <section aria-label={T.titulo} className="cartao" data-tumor={tumor}>
+    <section aria-label={T.titulo} className="cartao" data-tumor={tumor ?? "NAO_INFORMADO"}>
       <h3 style={{ margin: "0 0 0.5rem" }}>
-        {T.titulo} · {ROTULO_TUMOR[tumor]}
+        {T.titulo} · {tumor ? ROTULO_TUMOR[tumor] : "tipo de tumor NÃO INFORMADO"}
       </h3>
       <div data-destaque="topo" style={{ border: "2px solid var(--fg, currentColor)", marginBottom: "0.75rem" }}>
         <Grade titulo={T.destaque} grupo="destaque" specs={specsDestaque} dados={nucleo} />
       </div>
       <Grade titulo={T.gradeTitulo} grupo="nucleo" specs={CAMPOS_NUCLEO} dados={nucleo} />
-      <Grade
+      {tumor ? <Grade
         titulo={`${T.extensaoTitulo}: ${ROTULO_TUMOR[tumor]}`}
         grupo="extensao"
         specs={CAMPOS_EXTENSAO[tumor] ?? []}
         dados={extensao}
-      />
+      /> : <p>Extensão por tumor PENDENTE de classificação explícita.</p>}
     </section>
   );
 }

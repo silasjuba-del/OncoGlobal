@@ -1,0 +1,32 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-astra-c2
+
+ ❯ tests/f0-fecha/c2-apac-local.test.tsx (1 test | 1 failed) 31ms
+   × mantém achados e fontes da antiglosa HTTP visíveis no rascunho sem emitir APAC 26ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/f0-fecha/c2-apac-local.test.tsx > mantém achados e fontes da antiglosa HTTP visíveis no rascunho sem emitir APAC
+Error: ENOENT: no such file or directory, open 'C:\Users\silas\Projects\OncoGlobal-wt\f0f-astra-c2\src\server\undefined'
+ ❯ ler src/server/corpus.ts:23:21
+     21| function ler(relativo: string): unknown {
+     22|   const caminho = fileURLToPath(new URL(`../../corpus/${relativo}`, im…
+     23|   return JSON.parse(readFileSync(caminho, "utf8")) as unknown;
+       |                     ^
+     24| }
+     25| function lerTemplatesProtocolo() {
+ ❯ carregarCorpusServidor src/server/corpus.ts:56:45
+ ❯ tests/f0-fecha/c2-apac-local.test.tsx:21:10
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  17:26:42
+   Duration  5.85s (transform 52%, environment 29%, import 19%, tests 1%)
+
+  Transform  transforming modules took 2.83s · 52% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

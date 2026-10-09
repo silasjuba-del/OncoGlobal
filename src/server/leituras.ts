@@ -29,6 +29,8 @@ import { avaliarAlertaPlaquetas, type AlertaPlaquetas, type LimiarAlertaPlaqueta
 import { elegibilidadeCiclo, type SinalElegibilidade } from "../rules/elegibilidadeCiclo.js";
 import { projetarFlash, rascunhoFlashDoContexto, type ModeloFlash } from "./flash.js";
 import { projetarVinculosContato, type ContatoProjetado } from "../kernel/projections/vinculosContato.js";
+import { hashConteudoExibido } from "./sessao.js";
+import { projetarRetratoTransversal } from "./retratoTransversal.js";
 
 const RecistSerieSchema = z.object({
   patientId: z.string().min(1), tumorLotId: z.string().nullable(), episodioId: z.string().min(1),
@@ -256,6 +258,10 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
       ])].join("\n") : null;
   const resumoEvolucaoComConflitos = resumoEvolucao && textoConflitos
     ? `${resumoEvolucao}\n\n${textoConflitos}` : resumoEvolucao;
+  // Só resumos cuja revisão foi efetivamente registrada entram em novo documento.
+  const resumoRegistrado = evolucoesRascunho.filter((e) => e.revisaoRegistrada).map((e) => e.resumo).join("\n\n");
+  const resumoConfirmadoParaDocumento = resumoRegistrado
+    ? [resumoRegistrado, ...(textoConflitos ? [textoConflitos] : [])].join("\n\n") : null;
   const pendenciasLeitura = [
     "SNAPSHOT_DE_CAMPOS_NAO_PERSISTIDO", "ALERGIAS_NAO_CARREGADAS", "COMORBIDADES_NAO_CARREGADAS",
     "ALERTAS_NAO_PERSISTIDOS", "DELTA_ANTERIOR_NAO_PROJETADO",
@@ -268,6 +274,27 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   const eventosDaConsulta = all.filter((event) => event.patientId === patientId
     && (event.tumorLotId === null || event.tumorLotId === (lote?.tumorLotId ?? undefined)));
   const alertaPlaquetas = alertaPlaquetasDaConsulta(eventosDaConsulta, config.limiarPlaquetas ?? null);
+  let documentosComIntegridadePendente = 0;
+  const historicoDocumentos = eventosDaConsulta.filter((evento) => evento.tipo === "DOCUMENTO"
+    && evento.revisao === "ASSINADO").flatMap((evento) => {
+    const envelope = data(evento);
+    const corpo = envelope?.data && typeof envelope.data === "object" && !Array.isArray(envelope.data)
+      ? envelope.data as Record<string, unknown> : null;
+    const assinatura = envelope?.signature && typeof envelope.signature === "object"
+      ? envelope.signature as Record<string, unknown> : null;
+    if (!corpo || typeof corpo.documentId !== "string" || typeof corpo.texto !== "string"
+      || !assinatura || assinatura.documentId !== corpo.documentId
+      || assinatura.documentVersion !== corpo.documentVersion
+      || assinatura.serverActorId !== evento.criadoPor.id
+      || assinatura.documentHash !== hashConteudoExibido(corpo)) {
+      documentosComIntegridadePendente++; return [];
+    }
+    return [{ eventId: evento.eventId, documentId: corpo.documentId,
+      titulo: typeof corpo.titulo === "string" ? corpo.titulo : "Documento assinado",
+      texto: corpo.texto, assinadoEm: evento.criadoEm, autorId: evento.criadoPor.id,
+      encounterId: evento.encounterId }];
+  });
+  if (documentosComIntegridadePendente) pendenciasLeitura.push("DOCUMENTO_COM_INTEGRIDADE_PENDENTE");
   return {
     hoje: civil.dataCivil, patientId, encounterId: current.encounterId,
     tumorLotId: lote?.tumorLotId ?? null,
@@ -283,6 +310,10 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     alertas: [], delta: { temSnapshotAnterior: false, itens: [] }, evidencias: [],
     evolucoesRascunho,
     resumoEvolucao: resumoEvolucaoComConflitos,
+    resumoConfirmadoParaDocumento,
+    retratoTransversal: projetarRetratoTransversal({ patientId, tumorLotId: lote?.tumorLotId ?? null,
+      fatos: fatosRevisados }),
+    historicoDocumentos,
     conflitosRevisaoExtracao,
     fechamento: { blocoAtual: "EVOLUCAO" as const,
       registros: drafts.map((d) => ({ id: d.draftId, expectedRevision: d.revision })),

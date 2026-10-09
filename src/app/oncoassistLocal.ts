@@ -52,7 +52,7 @@ export async function iniciarOncoassistLocal(opcoes: OpcoesOncoassistLocal) {
   let fechado = false;
   const fecharDb = () => { if (!fechado) { fechado = true; db.close(); } };
   try {
-    const server = criarServidorLocal({ db, sessoes, gateway, agora, log: () => {},
+    const server = criarServidorLocal({ db, sessoes, gateway, agora, log: () => {}, configRootDir: opcoes.dataDir,
       oncoassistJev: criarOncoassistJev(),
     }, { host: "127.0.0.1", port: opcoes.port });
     server.once("close", fecharDb);

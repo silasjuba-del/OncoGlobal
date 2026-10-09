@@ -169,8 +169,9 @@ export const extratorDeterministico: Extrator = {
 
       // Somente rótulos literais ou termos diagnósticos de fonte documental; ausência = nada.
       if (!negated && segmento.sourceType === "pathology") {
-        const hist = raw.match(/\b(?:histologia|diagnóstico histológico)\s*:\s*([^.;]+)/iu);
-        if (hist) add("histology", hist[1]?.trim());
+        const hist = raw.match(/\b(?:histologia|diagnóstico (?:histológico|anatomopatológico))\s*:\s*([^.;]+)/iu);
+        const literal = hist?.[1]?.trim();
+        if (literal && !/^(?:não (?:sei|consta|informad[oa])|pendente)\b/iu.test(literal)) add("histology", literal);
       }
       const diagnosis = raw.match(/^\s*diagnóstico(?: oncológico)?\s*:\s*([^.;]+)/iu);
       if (diagnosis && !negated && !/\bNÃO SEI\b/iu.test(raw)) {

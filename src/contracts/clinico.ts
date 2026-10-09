@@ -77,8 +77,9 @@ export const Triagem = z.object({
   ecog: dado(z.number().int().min(0).max(4)),
   grauCtcae: dado(z.number().int().min(0).max(5)),
   tontura: z.boolean().nullable(), // D-W9-03 por analogia: desconhecido = null → PENDENTE, nunca false (simulação Astra PT91)
-  vertigemHistoricoAnterior: z.boolean().nullable(),
-  vertigemInicioNovo: z.boolean().nullable(),
+  // Eventos anteriores à W12 não têm essas chaves; ausência permanece desconhecida.
+  vertigemHistoricoAnterior: z.boolean().nullable().default(null),
+  vertigemInicioNovo: z.boolean().nullable().default(null),
   recurso: z.enum(["AMBULATORIAL", "CADEIRA", "CAMA"]),
   idadeAnos: z.number().int().min(0).nullable(), // D-W9-03 · null = PENDENTE; nunca 0
   chegadaEm: Instante,
