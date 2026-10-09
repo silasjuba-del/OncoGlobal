@@ -241,3 +241,9 @@ A11. Backup: **só HD externo local, cifrado**; chave de recuperação fora do P
   (b) **O retorno vai sempre na Consulta Flash**, com o prazo visível; não pode ser desmarcado. Laboratório e imagem continuam marcáveis, com pré-seleção só pelo modelo do médico.
   (c) **Colo uterino tem um só campo FIGO**: o estádio do núcleo. O campo duplicado saiu.
   Revisão do planejamento (PLN-037) aplicada ao schema AP: lateralidade e topografia no núcleo; CONFLITO sem origem geral; confiança BAIXA só com valor; HER2 de mama com "0 ultralow".
+- **D-W9-79 · Ordem dos laudos de perícia (Dr. Silas, 2026-10-09):**
+  1. afastamento laboral (INSS);
+  2. aposentadoria / afastamento permanente;
+  3. transporte público gratuito;
+  4. LOAS/BPC.
+  Mais raro: laudo para judicialização de medicamento não fornecido pelo SUS. Usa os trials como base de qual fármaco pedir (Q48, minuta assinada pelo médico).
