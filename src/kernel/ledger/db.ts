@@ -9,7 +9,23 @@ export function abrirLedger(caminho: string): DatabaseSync {
 }
 
 /** BEGIN IMMEDIATE serializes competing writers before checking revisions. */
+let proximoSavepoint = 0;
+
 export function transacao<T>(db: DatabaseSync, fn: () => T): T {
+  // Operações compostas podem reunir vários drafts em uma única unidade atômica.
+  if (db.isTransaction) {
+    const savepoint = `ledger_aninhado_${++proximoSavepoint}`;
+    db.exec(`SAVEPOINT ${savepoint}`);
+    try {
+      const result = fn();
+      db.exec(`RELEASE ${savepoint}`);
+      return result;
+    } catch (error) {
+      db.exec(`ROLLBACK TO ${savepoint}`);
+      db.exec(`RELEASE ${savepoint}`);
+      throw error;
+    }
+  }
   db.exec("BEGIN IMMEDIATE");
   try {
     const result = fn();
