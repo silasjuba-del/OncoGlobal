@@ -7,6 +7,9 @@ import { PainelOncoassist } from "./consulta/PainelOncoassist.js";
 import { RevisaoExtracaoLocal } from "./consulta/RevisaoExtracaoLocal.js";
 import { TelaSalao } from "./telas/TelaSalao.js";
 import { CaixaCanal } from "./telas/canal/CaixaCanal.js";
+import { ConsultaPersistida } from "./consulta/ConsultaPersistida.js";
+import { TelaApacLote } from "./telas/apac/TelaApacLote.js";
+import { Configuracoes } from "./oncochart/Configuracoes.js";
 
 const agendaSchema = z.object({ itens: z.array(z.object({ patientId: z.string().min(1), encounterId: z.string().min(1).optional(), nome: z.string(), horario: z.string() })) });
 const consultaSchema = z.object({ patientId: z.string().min(1), encounterId: z.string().min(1), tumorLotId: z.string().nullable() });
@@ -23,7 +26,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const [contexto, setContexto] = useState<PedidoBundle | null>(null);
   const [ocupado, setOcupado] = useState(false);
   const [mensagem, setMensagem] = useState("");
-  const [tela, setTela] = useState<"consulta" | "salao" | "canal">("consulta");
+  const [tela, setTela] = useState<"consulta" | "salao" | "canal" | "apac" | "config">("consulta");
   const geracao = useRef(0);
   const chaves = useMemo(() => criarChaves(), []);
   const pacienteAtivo = agenda.find((item) => item.patientId === contexto?.patientId);
@@ -82,7 +85,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     } finally { if (atual === geracao.current) setOcupado(false); }
   }
 
-  return <main aria-label="OncoAssist local" style={{ maxWidth: 720, margin: "2rem auto", padding: "1rem" }}>
+  return <main aria-label="OncoAssist local" style={{ maxWidth: 1200, margin: "2rem auto", padding: "1rem" }}>
     <h1>OncoAssist local</h1>
     <p>Documentos do servidor local. Sugestões aguardam revisão médica.</p>
     <a href="/">Voltar à demonstração</a>
@@ -104,14 +107,20 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         <button type="button" disabled={ocupado} onClick={() => setTela("consulta")}>Consulta</button>
         <button type="button" disabled={ocupado} onClick={() => setTela("salao")}>Salão</button>
         <button type="button" disabled={ocupado} onClick={() => setTela("canal")}>Canal</button>
+        <button type="button" disabled={ocupado} onClick={() => setTela("apac")}>APAC</button>
+        <button type="button" disabled={ocupado} onClick={() => setTela("config")}>Configurações Flash</button>
       </nav>
       {ocupado ? <p role="status">Abrindo consulta…</p> : null}
       {tela === "consulta" && contexto ? <div key={`${contexto.patientId}:${contexto.encounterId}:${contexto.tumorLotId ?? ""}`}>
         <RevisaoExtracaoLocal porta={porta} contexto={contexto}
           {...(pacienteAtivo ? { patientLabel: pacienteAtivo.nome } : {})} />
         <PainelOncoassist porta={porta} contexto={contexto} />
+        <ConsultaPersistida porta={porta} contexto={contexto} />
       </div> : null}
       {tela === "salao" ? <TelaSalao porta={porta} /> : null}
+      {tela === "apac" ? <TelaApacLote porta={porta} chaves={chaves} /> : null}
+      {tela === "config" ? <Configuracoes somenteFlash porta={porta} tema="dia"
+        onTema={() => {}} onFechar={() => setTela("consulta")} /> : null}
       {tela === "canal" ? <><p>Contexto ativo para vínculo: {pacienteAtivo
         ? `${pacienteAtivo.nome} · ${pacienteAtivo.patientId} · ${pacienteAtivo.encounterId}`
         : contexto ? `${contexto.patientId} · ${contexto.encounterId}` : "selecione na agenda"}</p>

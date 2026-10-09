@@ -1,0 +1,135 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-astra-c2
+
+ ❯ tests/f0-fecha/c2-consulta-local.test.tsx (2 tests | 1 failed) 3881ms
+   ❯ C2 · consulta local real e conteúdo visível antes de assinar (2)
+     × exibe textos reais, assina por HTTP e reabre o histórico persistido sem dados de demonstração 3141ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/f0-fecha/c2-consulta-local.test.tsx > C2 · consulta local real e conteúdo visível antes de assinar > exibe textos reais, assina por HTTP e reabre o histórico persistido sem dados de demonstração
+AssertionError: expected  to have a length of 2 but got +0
+
+Ignored nodes: comments, script, style
+<html>
+  <head />
+  <body>
+    <div>
+      <section
+        aria-label="Consulta persistida"
+      >
+        <h2>
+          Paciente Teste 92
+           · consulta local
+        </h2>
+        <p>
+          Encontro: 
+          encontro-teste-92
+           · 
+          2026-10-09
+        </p>
+        <p
+          aria-live="polite"
+        >
+          Consulta finalizada. Documentos assinados e preservados no histórico.
+        </p>
+        <h3>
+          Evolução revisada
+        </h3>
+        <pre
+          style="white-space: pre-wrap;"
+        >
+          Evolução PENDENTE de revisão.
+        </pre>
+        <p>
+          Cartão transversal PENDENTE de fonte estruturada.
+        </p>
+        <button
+          type="button"
+        >
+          Consulta Flash
+        </button>
+        <button
+          type="button"
+        >
+          Reabrir histórico
+        </button>
+        <section
+          aria-label="Histórico de documentos assinados"
+        >
+          <h3>
+            Histórico de documentos assinados
+          </h3>
+          <article>
+            <h4>
+              Evolução da Consulta Flash
+            </h4>
+            <p>
+              2026-10-09T12:00:00-03:00
+               · 
+              medico-teste-e6b
+               · 
+              encontro-teste-92
+            </p>
+            <pre
+              style="white-space: pre-wrap;"
+            >
+              Consulta Flash: plano confirmado pelo médico.
+Retorno: em 30 dias.
+Laboratório: não solicitado.
+Imagem: não solicitada.
+APAC: rascunho, não emitida.
+            </pre>
+          </article>
+          <article>
+            <h4>
+              Retorno
+            </h4>
+            <p>
+              2026-10-09T12:00:00-03:00
+               · 
+              medico-teste-e6b
+               · 
+              encontro-teste-92
+            </p>
+            <pre
+              style="white-space: pre-wrap;"
+            >
+              Retorno em 30 dias.
+            </pre>
+          </article>
+        </section>
+      </section>
+    </div>
+  </body>
+</html>
+
+- Expected
++ Received
+
+- 2
++ 0
+
+ ❯ tests/f0-fecha/c2-consulta-local.test.tsx:50:71
+     48|     await waitFor(() => expect(ambiente.eventos().filter((e) => e.revi…
+     49|     const historico = await screen.findByRole("region", { name: "Histó…
+     50|     await waitFor(() => expect(historico.querySelectorAll("article")).…
+       |                                                                       ^
+     51|     for (const texto of textos) expect(historico.textContent).toContai…
+     52|     fireEvent.click(screen.getByRole("button", { name: "Reabrir histór…
+ ❯ runWithExpensiveErrorDiagnosticsDisabled ../../OncoGlobal/node_modules/@testing-library/dom/dist/config.js:47:12
+ ❯ checkCallback ../../OncoGlobal/node_modules/@testing-library/dom/dist/wait-for.js:124:77
+ ❯ Timeout.checkRealTimersCallback ../../OncoGlobal/node_modules/@testing-library/dom/dist/wait-for.js:118:16
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  16:14:14
+   Duration  12.86s (tests 32%, environment 29%, transform 29%, import 9%)
+
+  Transform  transforming modules took 3.50s · 29% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

@@ -1,0 +1,9 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-astra-c2
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  16:18:13
+   Duration  10.52s (environment 43%, tests 25%, transform 21%, import 10%)
+

@@ -81,6 +81,13 @@ describe("F0 E6b · consulta completa com HTTP real e SQLite temporário", () =>
       expect(linked.data).toMatchObject({ codigo: "VINCULO_REVISTO", linkedPatientId: PACIENTE });
     }
 
+    const anatomopatologico = extractions.get("ap-e6b-92")!;
+    const histologia = anatomopatologico.facts.find((fact) => fact.domain === "histology");
+    expect(histologia).toBeDefined();
+    if (!histologia) throw new Error("AP_SEM_FATO_REVISAVEL");
+    const revisaoAp = await revisarFatos(ambiente, anatomopatologico, "e6b-review-ap-92", [histologia.id], false);
+    expect(await revisaoAp.fluxo.confirmar(revisaoAp.comprovante)).toMatchObject({ status: 200, data: { codigo: "GRAVADA" } });
+    acoesEquivalentes += 3;
     const laboratorio = extractions.get("laboratorio-e6b-92")!;
     const candidato = laboratorio.facts.find((fact) => fact.domain === "lab");
     expect(candidato).toBeDefined();
@@ -94,12 +101,16 @@ describe("F0 E6b · consulta completa com HTTP real e SQLite temporário", () =>
     expect(flash.confirmado).toMatchObject({ status: 200, data: { codigo: "GRAVADA" } });
     const signedEvolution = listarEventos(ambiente.db, PACIENTE).find((event) => {
       if (event.revisao !== "ASSINADO" || event.tipo !== "DOCUMENTO") return false;
-      const outer = event.payload as { data?: { tipoDocumento?: string } };
+      const outer = event.payload as { data?: { data?: { tipoDocumento?: string } } };
       const payload = outer.data?.data as { tipoDocumento?: string } | undefined;
       return payload?.tipoDocumento === "FLASH_EVOLUCAO";
     });
     expect(signedEvolution).toBeDefined();
     expect(signedEvolution?.criadoPor).toMatchObject({ tipo: "SESSAO", id: "medico-teste-e6b" });
+    const textoAssinado = (signedEvolution?.payload as { data?: { data?: { texto?: string } } }).data?.data?.texto;
+    expect(textoAssinado).toMatch(/carcinoma/i);
+    expect(textoAssinado).toMatch(/creatinina/i);
+    expect(textoAssinado).toContain("mg/dL");
     // This is an equivalent UI action estimate; HTTP requests are counted separately above.
     acoesEquivalentes += 3; // abrir Consulta Flash, finalizar o plano e reabrir a história
     const correcoes = 0; // nenhuma correção de conteúdo foi solicitada ou inventada nesta jornada

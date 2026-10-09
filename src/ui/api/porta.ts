@@ -57,6 +57,8 @@ export interface PedidoBundle {
   patientId: string;
   encounterId: string;
   tumorLotId: string | null;
+  /** Seleção explícita de documentos para exibição; omitida usa o fechamento atual. */
+  draftIds?: readonly string[];
 }
 
 export interface BundleExibidoVisao {
@@ -108,6 +110,9 @@ export interface FlashPreparada {
 }
 
 export interface ConsultaVisao {
+  resumoEvolucao?: string | null;
+  historicoDocumentos?: readonly { eventId: string; documentId: string; titulo: string;
+    texto: string; assinadoEm: string; autorId: string; encounterId: string }[];
   hoje: string;
   patientId: string;
   encounterId: string;
@@ -210,6 +215,8 @@ export interface CaixaCanalVisao {
 export type CampoOrigemApac = "estadiamentos" | "histologia" | "topografia" | "cid" | null;
 
 export interface ItemApacVisao {
+  antiglosa?: import("../../contracts/w10/clinico-w10.js").VereditoAntiglosa | null;
+  antiglosaEstado?: string;
   apac: Apac;
   lote: TumorLot;
   nomePaciente: string;

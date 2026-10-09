@@ -58,7 +58,7 @@ export async function abrirAmbiente(dir: string) {
     await new Promise<void>((resolve) => server.close(() => resolve()));
     db.close();
   };
-  return { dir, db, sessoes, token, request, close, chamadasHttp: () => chamadasHttp,
+  return { dir, db, sessoes, token, request, close, baseUrl: `http://127.0.0.1:${address.port}`, chamadasHttp: () => chamadasHttp,
     eventos: (patientId = PACIENTE) => listarEventos(db, patientId) };
 }
 

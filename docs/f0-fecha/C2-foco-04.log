@@ -1,0 +1,30 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-astra-c2
+
+ ❯ tests/f0-fecha/consulta-completa.test.ts (6 tests | 1 failed) 2800ms
+   ❯ F0 E6b · consulta completa com HTTP real e SQLite temporário (6)
+     × percorre kit sintético, vínculo explícito, evolução exibida e Flash assinada; reabre o SQLite e preserva a história 792ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/f0-fecha/consulta-completa.test.ts > F0 E6b · consulta completa com HTTP real e SQLite temporário > percorre kit sintético, vínculo explícito, evolução exibida e Flash assinada; reabre o SQLite e preserva a história
+AssertionError: expected undefined to be defined
+ ❯ tests/f0-fecha/consulta-completa.test.ts:86:24
+     84|     const anatomopatologico = extractions.get("ap-e6b-92")!;
+     85|     const histologia = anatomopatologico.facts.find((fact) => fact.dom…
+     86|     expect(histologia).toBeDefined();
+       |                        ^
+     87|     if (!histologia) throw new Error("AP_SEM_FATO_REVISAVEL");
+     88|     const revisaoAp = await revisarFatos(ambiente, anatomopatologico, …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 5 passed (6)
+      Tests  1 failed | 41 passed (42)
+   Start at  16:23:53
+   Duration  38.66s (tests 55%, environment 16%, transform 14%, import 14%)
+
+    Isolate  6 workers spawned · ~1.40s startup each (spawn + environment, per file)
+             at least ~6.99s faster with isolate: false — reuses workers across files instead of one per file
+

@@ -1,0 +1,961 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-astra-c2
+
+ ❯ tests/f0-fecha/c2-consulta-local.test.tsx (2 tests | 2 failed) 3621ms
+   ❯ C2 · consulta local real e conteúdo visível antes de assinar (2)
+     × exibe textos reais, assina por HTTP e reabre o histórico persistido sem dados de demonstração 1888ms
+     × não reexibe silenciosamente conteúdo alterado entre a prévia e o clique de assinatura 1730ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/f0-fecha/c2-consulta-local.test.tsx > C2 · consulta local real e conteúdo visível antes de assinar > exibe textos reais, assina por HTTP e reabre o histórico persistido sem dados de demonstração
+TestingLibraryElementError: Unable to find role="region" and name "Conteúdo para assinatura"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-label="Consulta persistida"
+    >
+      <h2>
+        Paciente Teste 92
+         · consulta local
+      </h2>
+      <p>
+        Encontro: 
+        encontro-teste-92
+         · 
+        2026-10-09
+      </p>
+      <p
+        aria-live="polite"
+      >
+        Operação não concluída. O conteúdo permanece pendente de revisão.
+      </p>
+      <h3>
+        Evolução revisada
+      </h3>
+      <pre
+        style="white-space: pre-wrap;"
+      >
+        Evolução PENDENTE de revisão.
+      </pre>
+      <p>
+        Cartão transversal PENDENTE de fonte estruturada.
+      </p>
+      <button
+        type="button"
+      >
+        Consulta Flash
+      </button>
+      <button
+        type="button"
+      >
+        Reabrir histórico
+      </button>
+      <section
+        aria-label="Consulta flash"
+        role="dialog"
+      >
+        <header>
+          <p>
+            <strong>
+              CONSULTA FLASH
+            </strong>
+          </p>
+          <p>
+            DX: 
+            PENDENTE
+             · TNM: 
+            PENDENTE
+             · Estádio:
+             
+            PENDENTE
+             · Biomarcador: 
+            PENDENTE
+          </p>
+          <p>
+            AP: 
+            PENDENTE
+             · MUC: 
+            PENDENTE
+             · Alergia:
+             
+            PENDENTE
+             · ECOG: 
+            PENDENTE
+          </p>
+          <p>
+            Tratamento: 
+            PENDENTE
+             · Linha: 
+            PENDENTE
+             · Ciclo/dia:
+             
+            PENDENTE
+          </p>
+          <p>
+            RETORNO: 
+            30 DIAS
+          </p>
+          <label>
+            Prazo do retorno (dias)
+            <input
+              aria-invalid="false"
+              aria-label="Prazo do retorno em dias"
+              max="3650"
+              min="1"
+              step="1"
+              type="number"
+              value="30"
+            />
+          </label>
+        </header>
+        <fieldset
+          aria-label="Tarefas do retorno"
+        >
+          <legend>
+            Tarefas do retorno
+          </legend>
+          <p
+            role="note"
+          >
+            Sem modelo padrão salvo: nada vem marcado
+          </p>
+          <ul>
+            <li
+              data-tarefa="retorno"
+            >
+              Retorno (30 dias)
+               · 
+              sempre incluído
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Laboratório
+              </label>
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Imagem (opcional)
+              </label>
+            </li>
+          </ul>
+        </fieldset>
+        <section
+          aria-label="Exames recentes"
+        >
+          <h2>
+            Exames recentes
+          </h2>
+          <p>
+            nenhum exame recente
+          </p>
+        </section>
+        <section
+          aria-label="Ações de hoje"
+        >
+          <h2>
+            Hoje
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="Receitas pré-selecionadas"
+        >
+          <h2>
+            Receitas pré-selecionadas
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="APAC e SIGTAP"
+        >
+          <h2>
+            APAC / SUS
+          </h2>
+          <p>
+            CID 
+            PENDENTE
+             · SIGTAP 
+            PENDENTE
+             · 
+            PENDENTE
+             ·
+             
+            <span
+              aria-label="estado da APAC"
+            >
+              APAC 
+              ! PENDENTE
+            </span>
+          </p>
+          <p>
+            Competência 
+            PENDENTE
+             ·
+             
+            sem pendências
+          </p>
+        </section>
+        <section
+          aria-label="IA fala"
+        >
+          <h2>
+            IA fala
+          </h2>
+          <ul />
+        </section>
+        <footer>
+          <button
+            type="button"
+          >
+            SALVAR RASCUNHO
+          </button>
+          <button
+            type="button"
+          >
+            FINALIZAR · IMPRIMIR · SAIR
+          </button>
+        </footer>
+      </section>
+      <section
+        aria-label="Histórico de documentos assinados"
+      >
+        <h3>
+          Histórico de documentos assinados
+        </h3>
+        <p>
+          Nenhum documento assinado neste histórico.
+        </p>
+      </section>
+    </section>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-label="Consulta persistida"
+    >
+      <h2>
+        Paciente Teste 92
+         · consulta local
+      </h2>
+      <p>
+        Encontro: 
+        encontro-teste-92
+         · 
+        2026-10-09
+      </p>
+      <p
+        aria-live="polite"
+      >
+        Operação não concluída. O conteúdo permanece pendente de revisão.
+      </p>
+      <h3>
+        Evolução revisada
+      </h3>
+      <pre
+        style="white-space: pre-wrap;"
+      >
+        Evolução PENDENTE de revisão.
+      </pre>
+      <p>
+        Cartão transversal PENDENTE de fonte estruturada.
+      </p>
+      <button
+        type="button"
+      >
+        Consulta Flash
+      </button>
+      <button
+        type="button"
+      >
+        Reabrir histórico
+      </button>
+      <section
+        aria-label="Consulta flash"
+        role="dialog"
+      >
+        <header>
+          <p>
+            <strong>
+              CONSULTA FLASH
+            </strong>
+          </p>
+          <p>
+            DX: 
+            PENDENTE
+             · TNM: 
+            PENDENTE
+             · Estádio:
+             
+            PENDENTE
+             · Biomarcador: 
+            PENDENTE
+          </p>
+          <p>
+            AP: 
+            PENDENTE
+             · MUC: 
+            PENDENTE
+             · Alergia:
+             
+            PENDENTE
+             · ECOG: 
+            PENDENTE
+          </p>
+          <p>
+            Tratamento: 
+            PENDENTE
+             · Linha: 
+            PENDENTE
+             · Ciclo/dia:
+             
+            PENDENTE
+          </p>
+          <p>
+            RETORNO: 
+            30 DIAS
+          </p>
+          <label>
+            Prazo do retorno (dias)
+            <input
+              aria-invalid="false"
+              aria-label="Prazo do retorno em dias"
+              max="3650"
+              min="1"
+              step="1"
+              type="number"
+              value="30"
+            />
+          </label>
+        </header>
+        <fieldset
+          aria-label="Tarefas do retorno"
+        >
+          <legend>
+            Tarefas do retorno
+          </legend>
+          <p
+            role="note"
+          >
+            Sem modelo padrão salvo: nada vem marcado
+          </p>
+          <ul>
+            <li
+              data-tarefa="retorno"
+            >
+              Retorno (30 dias)
+               · 
+              sempre incluído
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Laboratório
+              </label>
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Imagem (opcional)
+              </label>
+            </li>
+          </ul>
+        </fieldset>
+        <section
+          aria-label="Exames recentes"
+        >
+          <h2>
+            Exames recentes
+          </h2>
+          <p>
+            nenhum exame recente
+          </p>
+        </section>
+        <section
+          aria-label="Ações de hoje"
+        >
+          <h2>
+            Hoje
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="Receitas pré-selecionadas"
+        >
+          <h2>
+            Receitas pré-selecionadas
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="APAC e SIGTAP"
+        >
+          <h2>
+            APAC / SUS
+          </h2>
+          <p>
+            CID 
+            PENDENTE
+             · SIGTAP 
+            PENDENTE
+             · 
+            PENDENTE
+             ·
+             
+            <span
+              aria-label="estado da APAC"
+            >
+              APAC 
+              ! PENDENTE
+            </span>
+          </p>
+          <p>
+            Competência 
+            PENDENTE
+             ·
+             
+            sem pendências
+          </p>
+        </section>
+        <section
+          aria-label="IA fala"
+        >
+          <h2>
+            IA fala
+          </h2>
+          <ul />
+        </section>
+        <footer>
+          <button
+            type="button"
+          >
+            SALVAR RASCUNHO
+          </button>
+          <button
+            type="button"
+          >
+            FINALIZAR · IMPRIMIR · SAIR
+          </button>
+        </footer>
+      </section>
+      <section
+        aria-label="Histórico de documentos assinados"
+      >
+        <h3>
+          Histórico de documentos assinados
+        </h3>
+        <p>
+          Nenhum documento assinado neste histórico.
+        </p>
+      </section>
+    </section>
+  </div>
+</body>
+ ❯ waitForWrapper ../../OncoGlobal/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../OncoGlobal/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ preparar tests/f0-fecha/c2-consulta-local.test.tsx:34:17
+     32|   fireEvent.change(screen.getByLabelText("Prazo do retorno em dias"), …
+     33|   fireEvent.click(screen.getByRole("button", { name: "FINALIZAR · IMPR…
+     34|   return screen.findByRole("region", { name: "Conteúdo para assinatura…
+       |                 ^
+     35| }
+     36|
+ ❯ tests/f0-fecha/c2-consulta-local.test.tsx:41:28
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/f0-fecha/c2-consulta-local.test.tsx > C2 · consulta local real e conteúdo visível antes de assinar > não reexibe silenciosamente conteúdo alterado entre a prévia e o clique de assinatura
+TestingLibraryElementError: Unable to find role="region" and name "Conteúdo para assinatura"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-label="Consulta persistida"
+    >
+      <h2>
+        Paciente Teste 92
+         · consulta local
+      </h2>
+      <p>
+        Encontro: 
+        encontro-teste-92
+         · 
+        2026-10-09
+      </p>
+      <p
+        aria-live="polite"
+      >
+        Operação não concluída. O conteúdo permanece pendente de revisão.
+      </p>
+      <h3>
+        Evolução revisada
+      </h3>
+      <pre
+        style="white-space: pre-wrap;"
+      >
+        Evolução PENDENTE de revisão.
+      </pre>
+      <p>
+        Cartão transversal PENDENTE de fonte estruturada.
+      </p>
+      <button
+        type="button"
+      >
+        Consulta Flash
+      </button>
+      <button
+        type="button"
+      >
+        Reabrir histórico
+      </button>
+      <section
+        aria-label="Consulta flash"
+        role="dialog"
+      >
+        <header>
+          <p>
+            <strong>
+              CONSULTA FLASH
+            </strong>
+          </p>
+          <p>
+            DX: 
+            PENDENTE
+             · TNM: 
+            PENDENTE
+             · Estádio:
+             
+            PENDENTE
+             · Biomarcador: 
+            PENDENTE
+          </p>
+          <p>
+            AP: 
+            PENDENTE
+             · MUC: 
+            PENDENTE
+             · Alergia:
+             
+            PENDENTE
+             · ECOG: 
+            PENDENTE
+          </p>
+          <p>
+            Tratamento: 
+            PENDENTE
+             · Linha: 
+            PENDENTE
+             · Ciclo/dia:
+             
+            PENDENTE
+          </p>
+          <p>
+            RETORNO: 
+            30 DIAS
+          </p>
+          <label>
+            Prazo do retorno (dias)
+            <input
+              aria-invalid="false"
+              aria-label="Prazo do retorno em dias"
+              max="3650"
+              min="1"
+              step="1"
+              type="number"
+              value="30"
+            />
+          </label>
+        </header>
+        <fieldset
+          aria-label="Tarefas do retorno"
+        >
+          <legend>
+            Tarefas do retorno
+          </legend>
+          <p
+            role="note"
+          >
+            Sem modelo padrão salvo: nada vem marcado
+          </p>
+          <ul>
+            <li
+              data-tarefa="retorno"
+            >
+              Retorno (30 dias)
+               · 
+              sempre incluído
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Laboratório
+              </label>
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Imagem (opcional)
+              </label>
+            </li>
+          </ul>
+        </fieldset>
+        <section
+          aria-label="Exames recentes"
+        >
+          <h2>
+            Exames recentes
+          </h2>
+          <p>
+            nenhum exame recente
+          </p>
+        </section>
+        <section
+          aria-label="Ações de hoje"
+        >
+          <h2>
+            Hoje
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="Receitas pré-selecionadas"
+        >
+          <h2>
+            Receitas pré-selecionadas
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="APAC e SIGTAP"
+        >
+          <h2>
+            APAC / SUS
+          </h2>
+          <p>
+            CID 
+            PENDENTE
+             · SIGTAP 
+            PENDENTE
+             · 
+            PENDENTE
+             ·
+             
+            <span
+              aria-label="estado da APAC"
+            >
+              APAC 
+              ! PENDENTE
+            </span>
+          </p>
+          <p>
+            Competência 
+            PENDENTE
+             ·
+             
+            sem pendências
+          </p>
+        </section>
+        <section
+          aria-label="IA fala"
+        >
+          <h2>
+            IA fala
+          </h2>
+          <ul />
+        </section>
+        <footer>
+          <button
+            type="button"
+          >
+            SALVAR RASCUNHO
+          </button>
+          <button
+            type="button"
+          >
+            FINALIZAR · IMPRIMIR · SAIR
+          </button>
+        </footer>
+      </section>
+      <section
+        aria-label="Histórico de documentos assinados"
+      >
+        <h3>
+          Histórico de documentos assinados
+        </h3>
+        <p>
+          Nenhum documento assinado neste histórico.
+        </p>
+      </section>
+    </section>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-label="Consulta persistida"
+    >
+      <h2>
+        Paciente Teste 92
+         · consulta local
+      </h2>
+      <p>
+        Encontro: 
+        encontro-teste-92
+         · 
+        2026-10-09
+      </p>
+      <p
+        aria-live="polite"
+      >
+        Operação não concluída. O conteúdo permanece pendente de revisão.
+      </p>
+      <h3>
+        Evolução revisada
+      </h3>
+      <pre
+        style="white-space: pre-wrap;"
+      >
+        Evolução PENDENTE de revisão.
+      </pre>
+      <p>
+        Cartão transversal PENDENTE de fonte estruturada.
+      </p>
+      <button
+        type="button"
+      >
+        Consulta Flash
+      </button>
+      <button
+        type="button"
+      >
+        Reabrir histórico
+      </button>
+      <section
+        aria-label="Consulta flash"
+        role="dialog"
+      >
+        <header>
+          <p>
+            <strong>
+              CONSULTA FLASH
+            </strong>
+          </p>
+          <p>
+            DX: 
+            PENDENTE
+             · TNM: 
+            PENDENTE
+             · Estádio:
+             
+            PENDENTE
+             · Biomarcador: 
+            PENDENTE
+          </p>
+          <p>
+            AP: 
+            PENDENTE
+             · MUC: 
+            PENDENTE
+             · Alergia:
+             
+            PENDENTE
+             · ECOG: 
+            PENDENTE
+          </p>
+          <p>
+            Tratamento: 
+            PENDENTE
+             · Linha: 
+            PENDENTE
+             · Ciclo/dia:
+             
+            PENDENTE
+          </p>
+          <p>
+            RETORNO: 
+            30 DIAS
+          </p>
+          <label>
+            Prazo do retorno (dias)
+            <input
+              aria-invalid="false"
+              aria-label="Prazo do retorno em dias"
+              max="3650"
+              min="1"
+              step="1"
+              type="number"
+              value="30"
+            />
+          </label>
+        </header>
+        <fieldset
+          aria-label="Tarefas do retorno"
+        >
+          <legend>
+            Tarefas do retorno
+          </legend>
+          <p
+            role="note"
+          >
+            Sem modelo padrão salvo: nada vem marcado
+          </p>
+          <ul>
+            <li
+              data-tarefa="retorno"
+            >
+              Retorno (30 dias)
+               · 
+              sempre incluído
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Laboratório
+              </label>
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Imagem (opcional)
+              </label>
+            </li>
+          </ul>
+        </fieldset>
+        <section
+          aria-label="Exames recentes"
+        >
+          <h2>
+            Exames recentes
+          </h2>
+          <p>
+            nenhum exame recente
+          </p>
+        </section>
+        <section
+          aria-label="Ações de hoje"
+        >
+          <h2>
+            Hoje
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="Receitas pré-selecionadas"
+        >
+          <h2>
+            Receitas pré-selecionadas
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="APAC e SIGTAP"
+        >
+          <h2>
+            APAC / SUS
+          </h2>
+          <p>
+            CID 
+            PENDENTE
+             · SIGTAP 
+            PENDENTE
+             · 
+            PENDENTE
+             ·
+             
+            <span
+              aria-label="estado da APAC"
+            >
+              APAC 
+              ! PENDENTE
+            </span>
+          </p>
+          <p>
+            Competência 
+            PENDENTE
+             ·
+             
+            sem pendências
+          </p>
+        </section>
+        <section
+          aria-label="IA fala"
+        >
+          <h2>
+            IA fala
+          </h2>
+          <ul />
+        </section>
+        <footer>
+          <button
+            type="button"
+          >
+            SALVAR RASCUNHO
+          </button>
+          <button
+            type="button"
+          >
+            FINALIZAR · IMPRIMIR · SAIR
+          </button>
+        </footer>
+      </section>
+      <section
+        aria-label="Histórico de documentos assinados"
+      >
+        <h3>
+          Histórico de documentos assinados
+        </h3>
+        <p>
+          Nenhum documento assinado neste histórico.
+        </p>
+      </section>
+    </section>
+  </div>
+</body>
+ ❯ waitForWrapper ../../OncoGlobal/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../OncoGlobal/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ preparar tests/f0-fecha/c2-consulta-local.test.tsx:34:17
+     32|   fireEvent.change(screen.getByLabelText("Prazo do retorno em dias"), …
+     33|   fireEvent.click(screen.getByRole("button", { name: "FINALIZAR · IMPR…
+     34|   return screen.findByRole("region", { name: "Conteúdo para assinatura…
+       |                 ^
+     35| }
+     36|
+ ❯ tests/f0-fecha/c2-consulta-local.test.tsx:60:28
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  2 failed | 7 passed (9)
+   Start at  16:12:19
+   Duration  18.55s (tests 47%, transform 24%, environment 15%, import 14%)
+
+    Isolate  3 workers spawned · ~1.23s startup each (spawn + environment, per file)
+             at least ~2.47s faster with isolate: false — reuses workers across files instead of one per file
+

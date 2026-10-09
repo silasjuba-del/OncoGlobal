@@ -6,6 +6,7 @@ import { Semaforo, Destino, DeltaKind, DeltaDirecao, StatusCampo, Revisao, Evide
 import { ContextoTriagem, EntradaFila, SalaoRuleset } from "../../contracts/regras.js";
 import type { AgendaVisao, CaixaCanalVisao, ChatSetorVisao, ConsultaVisao, LotesApacVisao, SalaoVisao } from "./porta.js";
 import { ESTADOS_FARMACIA } from "../../modules/farmacia/estados.js";
+import { VereditoAntiglosa } from "../../contracts/w10/clinico-w10.js";
 
 const Texto = z.string();
 const Count = z.number().int().nonnegative();
@@ -19,6 +20,9 @@ const Afirmacao = z.object({ rotulo: Texto, valorTexto: Texto.nullable(), estado
   candidatos: z.array(z.object({ valorTexto: Texto, fontes: z.array(Fonte) })).optional()
 }).transform(({ candidatos, ...item }) => ({ ...item, ...(candidatos === undefined ? {} : { candidatos }) }));
 export const ConsultaResposta: z.ZodType<ConsultaVisao> = z.object({ hoje: DataCivil,
+  resumoEvolucao: Texto.nullable().default(null),
+  historicoDocumentos: z.array(z.object({ eventId: Texto, documentId: Texto, titulo: Texto,
+    texto: Texto, assinadoEm: Texto, autorId: Texto, encounterId: Texto })).default([]),
   patientId: Texto, encounterId: Texto, tumorLotId: Texto.nullable(),
   cabecalho: z.object({ hoje: DataCivil, paciente: Paciente, lotes: z.array(TumorLot), loteSelecionadoId: Texto.nullable(),
     episodio: TreatmentEpisode.nullable(), ciclo: Ciclo.nullable(), semaforo: Semaforo, pendentes: Count,
@@ -50,7 +54,11 @@ export const CanalResposta: z.ZodType<CaixaCanalVisao> = z.object({ mensagens: z
   estadoVinculo: z.enum(["VINCULADO", "SEM_VINCULO", "CONFLITO", "REVOGADO"]).optional(),
   candidatos: z.array(z.object({ patientId: Texto, nome: Texto })),
 })) });
-export const ApacResposta: z.ZodType<LotesApacVisao> = z.object({ hoje: DataCivil, itens: z.array(z.object({ apac: Apac,
+// A projeção do ledger acrescenta sua referência de evento; o contrato clínico continua estrito.
+const ApacProjetada = Apac.safeExtend({ eventId: Texto.optional() }).transform(({ eventId: _eventId, ...apac }) => apac);
+export const ApacResposta: z.ZodType<LotesApacVisao> = z.object({ hoje: DataCivil, itens: z.array(z.object({ apac: ApacProjetada,
+  antiglosa: VereditoAntiglosa.nullable().default(null),
+  antiglosaEstado: Texto.default("PENDENTE"),
   lote: TumorLot, nomePaciente: Texto, patientId: Texto, encounterId: Texto, ultimoAvisoEm: Texto.nullable(),
   campoOrigem: z.enum(["estadiamentos", "histologia", "topografia", "cid"]).nullable(), motivoNegativa: Texto.nullable(),
 })) });
