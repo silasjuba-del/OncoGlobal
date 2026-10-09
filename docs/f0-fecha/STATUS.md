@@ -41,6 +41,10 @@ Portão B documental concluído: os cinco relatórios foram entregues. L1 `74925
 
 ## Fase C
 
+**Portão C1-L4 PASS** em `8d1781894ec5880da432397f1600420fa8a1b548`, rodada `evidencias/C1-L4-forks/`: TypeScript, fronteiras 295 e corpus 125; **2.248 regulares/313 arquivos, 240 redteam/31 e 41 W8/9**, todos passaram na mesma bateria integral serial, um worker e `--pool=forks`. As rodadas anteriores com interrupções nativas continuam preservadas; mudar o pool funcionou nesta rodada, mas a causa nativa não foi estabelecida. Configuração padrão do CI não mudou.
+
+Próxima integração: L2 e correções causais C2 já preparadas/testadas em worktree isolada (consulta HTTP, Flash com resumo revisado, retrato documental, antiglosa na tela, retomada persistente e gates). Uma nova bateria integral será exigida antes do próximo portão.
+
 C1-L3 integrada em `d342b549a2c00645e86f7e36ecc4f3e643aea1b4`. A Astra acrescentou compatibilidade de eventos antigos: novos campos de vertigem ausentes são lidos como `null`, sem alterar fonte persistida. Primeira rodada: blocos 05 e 08 interrompidos com código nativo -1073740791, sem asserção diagnóstica; ambos passaram isolados. Isso foi registrado como instabilidade, não como bateria verde. Repetição **integral no mesmo HEAD**, `evidencias/C1-L3-repeticao/`: TypeScript PASS, fronteiras 294, corpus 125, **2.244 regulares/312 arquivos, 240 redteam/31, 41 W8/9**, todos os blocos PASS. Causa das interrupções anteriores ainda desconhecida; logs originais preservados em C1-L3.
 
 Atualização de coordenação: os cinco relatórios B já foram recebidos. L4 executa agora a correção curta G-06/T-48 de destaque E1 na folha operacional, em faixa própria e com TEST_SLOT exclusivo. A preparação C2 da Astra reúne as provas L2/L5 e correções ainda não integradas; não é evidência de fechamento do integrado.
