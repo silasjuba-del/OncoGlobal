@@ -350,6 +350,11 @@ const multiTestEvidence = new Map([
   ["D-W9-34a", [
     ["tests/f0-fecha/consulta-completa.test.ts", "percorre kit sintético, vínculo explícito, evolução exibida e Flash assinada; reabre o SQLite e preserva a história"],
   ]],
+  ["D-W9-47", [
+    ["tests/w10-grok/grok-09-suporte.test.ts", "os limiares e a classe vêm do ruleset"],
+    ["tests/w12-grok/grok-05-retorno.test.ts", "diarreia acima de 24 h com HAS alerta suspender; 24 h exato não alerta"],
+    ["tests/w10-grok/grok-08-semaforo.test.ts", "sem interação só com checagem completa e ruleset ativo, sem par casado"],
+  ]],
   ["D-W9-17", [
     ["tests/w10-cursor/config.test.tsx", "abre DIA|NOITE|PERSONALIZAR, caixa de número e glossário"],
     ["tests/f0-fecha/flash-producao.test.tsx", "Configurações lê e grava o modelo pela porta autenticada, sem persistência em estado local"],
@@ -412,7 +417,6 @@ const mappingPending = new Map([
   ["Q20", "os quatro bundles estão declarados e testados no módulo, mas nenhum consumidor de produção chama montarBundle no checkout"],
   ["Q50", "E6b HTTP/SQLite está integrada e passou 8/8; a condição normativa de Q50 ainda exige PR revisado e demo da fase (PLANO-FINAL §5), não entregues por esta faixa"],
   ["D-W9-14", "impressão usa a ação do servidor/gateway; não há prova observável de escolha/abertura da janela do sistema no percurso local real"],
-  ["D-W9-47", "ClasseMedicacao declara quatro classes e o semáforo as consome, mas falta teste observável que valide as quatro classes como conjunto"],
   ["D-W9-50", "fichas e testes registram comparações SOnHe; dose sem fonte mantém [VERIFICAR], sem extrapolar aprovação clínica geral"],
   ["D-W9-55", "arquitetura e mapa de componentes estão documentados; model router multi-LLM, READ externo e agentes não são alegados como runtime F0"],
   ["D-W9-59", "fichas têm conteúdo e testes estruturais; a confirmação de cada dose protocolar continua limitada às fontes e itens [VERIFICAR] registrados"],
@@ -423,7 +427,7 @@ const mappingPending = new Map([
   ["D-W9-65", "extração de PDF via LLM não está habilitada; D-W9-66 condiciona a ativação a provider, desidentificação e gates"],
   ["D-W9-66", "a exceção é autorizada sob condições, mas a LLM segue desligada até provider e gates; a prova é de contenção"],
 ]);
-const residualClass = new Map([["D-W9-47", "PENDENTE_DE_PROVA_DE_CLASSES"]]);
+const residualClass = new Map();
 const proofByDecision = new Map([
   ["Q46", "F0 estrutura/guard provados em tests/corpus/packs.test.ts: quatro packs incompletos carregam com protocolos inativos e SIGTAP [VERIFICAR]; curadoria clínica continua pendente"],
   ["A3", "contrato/projeção F0 e teste provam avaliações TNM distintas coexistem e conflito do mesmo tipo não é eleito; UI de seleção é F1/F4"],
@@ -434,6 +438,7 @@ const proofByDecision = new Map([
   ["D-W9-22c", "reconciliação/exibição E6b preserva conflitos sem eleição automática antes da revisão humana"],
   ["D-W9-22g", "teste de regras prova distinção entre triagem do ciclo e corte do salão; nenhum runtime de salão é alegado em F0"],
   ["D-W9-34a", "pipeline/E6b mantém vínculo explícito e não faz junção automática de paciente"],
+  ["D-W9-47", "classe é consumida em suporte, retorno e semáforo F0 com testes comportamentais; catálogo longitudinal/UI completa fica F1/F3"],
   ["D-W9-15", "F0 mantém o caminho externo fechado; provider real OpenAI/Responses é F1 segundo PLANO-FINAL §F1 e D-W9-66"],
   ["D-W9-41", "tests/f0-fecha/d41-fonte.test.ts verifica redação corrigida, frase original do PDF e preservação da proveniência no renderizador"],
   ["D-W9-74", "prova L3 C2 em `docs/f0-fecha/LUNA-3.md` e `evidencias/luna3/` (contrato, FormTriagem e regras W12)"],
@@ -591,6 +596,7 @@ decisionTest.set("D-W9-39", "tests/w10-grok/grok-04-agenda.test.ts");
 decisionTest.set("D-W9-43", "tests/w10-grok/grok-06-interval.test.ts");
 decisionTest.set("D-W9-47", "tests/w12-grok/grok-02-corpo.test.ts");
 decisionTest.delete("D-W9-47");
+decisionTest.set("D-W9-47", "tests/w10-grok/grok-09-suporte.test.ts");
 decisionTest.set("D-W9-51", "tests/w10-grok/grok-05-rads.test.ts");
 decisionTest.set("D-W9-57", "tests/rules-morfometria/index.test.ts");
 decisionTest.set("D-W9-52", "tests/rules-morfometria/index.test.ts");
@@ -689,6 +695,7 @@ const testTitleOverride = new Map([
   ["D-W9-18", "extrai o texto por página com hash dos bytes, sem rede"],
   ["D-W9-41", "D-W9-41 imprime a redação corrigida e conserva a frase original do PDF como proveniência"],
   ["D-W9-57", "anatomia média, máscara probabilística e modo desconhecido ⇒ recusado"],
+  ["D-W9-47", "os limiares e a classe vêm do ruleset"],
   ["D-W9-10", "CNES ausente fica pendente e outro número de 7 dígitos vale se for o configurado"],
   ["D-W9-12", "intenção não preenche finalidade ausente e código desconhecido não é mapeado"],
   ["D-W9-58", "extrai o texto por página com hash dos bytes, sem rede"],
