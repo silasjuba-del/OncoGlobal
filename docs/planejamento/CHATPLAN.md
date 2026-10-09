@@ -380,6 +380,17 @@ M-AM  FLUXO CLÍNICO = NORTE DO APP (OPS-003, MARCO 2) → PLN-037   fontes/M-AM
 ```
 
 ```
+M-AN  SPEAKL (GENSPARK) → ORDEM VOCAL → RASCUNHO DOCUMENTAL → REVISÃO → IMPRESSÃO → PLN-039   fontes/M-AN_PLN-039_speakl-voz-para-rascunho-e-impressao.md
+      |AN1| O texto inicial de “compile em comando de terminal” é requisito de tradução/roteamento da fala, não instrução para executar shell no computador do médico   INTERPRETAÇÃO
+      |AN2| Exemplo “vou pedir uma tomografia de tórax” → intenção REQUEST_EXAM_DRAFT; tipo de documento solicitação; exame TC; sítio tórax; campos clínicos ausentes permanecem PENDENTES   PROPOSTA
+      |AN3| Pipeline: SpeakL/STT → transcrição preservada → detectar ordem explícita/contexto/negação → criar ou atualizar cluster → preencher formulário tipado → renderizar documento médico versionado como RASCUNHO   DECIDIDO (coerente PLN-004/013/016/021/023)
+      |AN4| “Vou pedir” cria pedido documental, não imprime; prévia exibida → confirmação explícita do médico → impressão pelo Gateway e impressora escolhida   DECIDIDO (coerente PLN-021 e rota atual)
+      |AN5| Sem pedido genérico para “executar qualquer comando”: aceitar só intents e campos clínicos tipados/listados; desconhecido/ambíguo → mostrar transcrição e pedir correção; nunca executar texto arbitrário como shell   PROPOSTA
+      |AN6| SpeakL é informado como app de speech-to-text; integração concreta (API/SDK, compartilhamento, clipboard ou fluxo manual) não verificada   PENDENTE DE EVIDÊNCIA
+      |AN7| Não há integração SpeakL nem intent vocal ligado à rota documental; a impressão local, prévia e confirmação já existem   GAP PARCIAL
+```
+
+```
 OPS-008  FECHAMENTO W12 (f0/w1-integrado@2e361a9) → PLN-038   DIARIO.md
       |OP8.1| W12-GROK 01–10 + F1–F4 integrados; verificação verde (1 teste de teclado instável)   FEITO
       |OP8.2| Glossário do modelo padrão da Flash = bloqueante para pré-marcação em produção   PENDENTE (próxima onda)

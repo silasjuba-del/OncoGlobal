@@ -19,7 +19,11 @@ A2 PASS: lista integral em `INVENTARIO-A2.md` e `inventario-A2.json`. Astra 44 c
 A0 PASS: missão, contexto, fechamento, decisões D-W9-56…80, parecer e resultado das dez fatias lidos. Resultado das dez fatias consultado no ramo `codex/w10-entrega-integrada`, pois ainda não existe no integrado.
 A1–A2 PASS; A3 PASS após correções documentadas em RESOLUCOES-A3.md. Bateria integral A3: blocos regulares 2.223 PASS / 10 FAIL (UI/Muse), depois reataque UI+closure UI 131/131; total regular reconciliado 2.233 testes / 309 arquivos. Redteam 240/240 (31 arquivos), W8 41/41. TypeScript, fronteiras 293 e corpus 125 PASS. Logs vermelhos preservados, correções e reataques separados.
 
-Rotas dos dois ramos: nenhuma ausente no comparativo. RT01/03/15 integrados intactos, versões Astra em três arquivos adicionais. A4–A6 PENDENTES.
+Rotas dos dois ramos: nenhuma ausente no comparativo. RT01/03/15 integrados intactos, versões Astra em três arquivos adicionais. Merge A3 publicado: `06d404a`.
+
+A4 PASS: GLM-21 `ad01bba`, GLM-22 `b15bb0d`, Kimi Q26 `1afc9b9`; 177/177 testes em 36 arquivos (A4-sobras.log). O conflito do ORK foi resolvido mantendo AsyncLocalStorage e o tratamento da rejeição tardia; nenhuma chamada duplicada de agente. Q26 acrescenta CADEIRA em qualquer idade e conserva as fronteiras já corrigidas de AMBULATORIAL.
+
+A5: planejamento `1144eae`, três arquivos, todos em `docs/planejamento/**`. A6 EM EXECUÇÃO: nova bateria completa após A4/A5.
 
 ## Fase B
 
