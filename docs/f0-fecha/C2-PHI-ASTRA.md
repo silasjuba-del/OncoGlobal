@@ -4,7 +4,7 @@ Base: entrega L5 `8001655`, 35 candidatos textuais e um WEBP protegido pendentes
 
 ## Reavaliação de 23 ocorrências pela Astra
 
-- Quatro matches de e-mail em `tests/app/executores.test.ts` são nomes de arquivo de impressão `documentId@versao.html`. A construção está em `src/app/executores/imprimir.ts:79`; os testes comparam caminho e recibo. Disposição técnica, não declaração fictícia de um endereço.
+- Quatro matches de e-mail em `tests/app/executores.test.ts` são nomes de arquivo de impressão formados por identificador, versão e extensão HTML. A construção está em `src/app/executores/imprimir.ts:79`; os testes comparam caminho e recibo. Disposição técnica, não declaração fictícia de um endereço.
 - Os dicionários DIC de RT12 e o contato não vinculado da porta fake foram rastreados às factories e cenários locais pela revisão somente leitura de L2. ADV006 usa domínio reservado `.invalid`, executor fake e exige zero efeitos.
 - A Astra releu os testes de importação, cadastro e APAC: os tokens são vetores literais de máscara/igualdade/dígito verificador, incluindo pares válido/inválido e um caso p1 sem origem em cadastro externo. A disposição identifica precisamente cada vetor e sua finalidade; não conclui que validade de dígito comprova identidade e não estende a permissão a outros dados do arquivo.
 - O candidato de telefone em STATUS é um identificador de execução de CI explicitamente rotulado no registro A6. O SHA dessa versão de STATUS mudou por documentação da missão e foi revisto antes de atualizar o vínculo no manifesto; os demais 22 itens exigiram igualdade com o hash já revisado por L5.
@@ -22,3 +22,9 @@ Dez ocorrências receberam disposição individual, mantendo igualdade do hash. 
 L3 repetiu a extração local das páginas com pdfplumber, preservando layout. No manual do paciente, o campo Nome da página 2 está vazio até o próximo rótulo; a extração plana havia unido campos. No outro manual, o e-mail da página 32 pertence ao bloco da Ouvidoria e coincide com o domínio institucional impresso. Disposições técnicas/editoriais registradas por página/ordinal/hash, sem reproduzir identificadores.
 
 Os 35 candidatos do snapshot L5 têm agora justificativa individual. Isso não é ainda um scanner verde: o WEBP permanece protegido e a varredura do novo candidato, com seus arquivos/evidências adicionais, continua NOT_RUN até liberar o slot.
+
+## Confirmacao humana da origem da imagem
+
+Em 2026-10-09, respondendo à pergunta específica sobre `docs/referencias/ui-modelo-consulta.webp`, o Dr. Silas informou neste chat: **“IMAGEM FICTICIA”**. A Astra então inspecionou visualmente o arquivo e vinculou a confirmação ao SHA-256 `0f29e2889eff7253307490afe4a585bd661fcbc1fabee0ff2731f7565fdcad35`. Trata-se da referência visual de D-W5-07, já substituída como alvo de layout pelo OncoChart; nenhum dado ilustrativo foi promovido ao prontuário ou ao corpus clínico.
+
+A proteção pendente por caminho foi substituída por disposição visual específica desse hash. Alteração do arquivo exige nova revisão. A confirmação resolve a origem desse arquivo; não é aprovação geral de outras imagens nem dispensa o scanner final.

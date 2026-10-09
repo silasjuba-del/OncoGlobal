@@ -498,6 +498,15 @@
           "evidenceRef": "docs/f0-fecha/STATUS.md:28",
           "reason": "Identificador numerico de run de CI explicitamente rotulado no registro A6; nao e telefone.",
           "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 42,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/STATUS.md:42",
+          "reason": "Identificador numerico de run CI no registro de publicacao A6; nao telefone.",
+          "contextTag": null
         }
       ]
     },
@@ -1071,7 +1080,7 @@
           "ordinal": 0,
           "status": "technical_token_false_positive",
           "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
-          "reason": "Nome de arquivo local documentId@versao.html, gerado pelo executor e comparado como caminho/recibo; nao e email.",
+          "reason": "Nome de arquivo local identificador, versao e extensao HTML, gerado pelo executor e comparado como caminho/recibo; nao e email.",
           "contextTag": null
         },
         {
@@ -1080,7 +1089,7 @@
           "ordinal": 0,
           "status": "technical_token_false_positive",
           "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
-          "reason": "Nome de arquivo local documentId@versao.html, gerado pelo executor e comparado como caminho/recibo; nao e email.",
+          "reason": "Nome de arquivo local identificador, versao e extensao HTML, gerado pelo executor e comparado como caminho/recibo; nao e email.",
           "contextTag": null
         },
         {
@@ -1089,7 +1098,7 @@
           "ordinal": 0,
           "status": "technical_token_false_positive",
           "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
-          "reason": "Nome de arquivo local documentId@versao.html, gerado pelo executor e comparado como caminho/recibo; nao e email.",
+          "reason": "Nome de arquivo local identificador, versao e extensao HTML, gerado pelo executor e comparado como caminho/recibo; nao e email.",
           "contextTag": null
         },
         {
@@ -1098,7 +1107,7 @@
           "ordinal": 0,
           "status": "technical_token_false_positive",
           "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
-          "reason": "Nome de arquivo local documentId@versao.html, gerado pelo executor e comparado como caminho/recibo; nao e email.",
+          "reason": "Nome de arquivo local identificador, versao e extensao HTML, gerado pelo executor e comparado como caminho/recibo; nao e email.",
           "contextTag": null
         }
       ]
@@ -2410,14 +2419,16 @@
           "contextTag": null
         }
       ]
-    }
-  ],
-  "protectedPaths": [
+    },
     {
       "path": "docs/referencias/ui-modelo-consulta.webp",
-      "doNotRead": true,
-      "type": "manual_visual_review_required",
-      "evidenceRef": "C2-L5: solicitacao do usuario pendente; arquivo nao aberto, nao hasheado e nao liberado."
+      "sha256": "0f29e2889eff7253307490afe4a585bd661fcbc1fabee0ff2731f7565fdcad35",
+      "category": "synthetic_visual_review",
+      "magic": "webp_signature",
+      "evidenceRef": "docs/f0-fecha/C2-PHI-ASTRA.md:Confirmacao humana da origem da imagem",
+      "reason": "Dr. Silas confirmou IMAGEM FICTICIA neste chat em 2026-10-09; Astra conferiu visualmente o arquivo correspondente a este hash. Referencia de layout, sem promocao de dado clinico.",
+      "items": []
     }
-  ]
+  ],
+  "protectedPaths": []
 }
