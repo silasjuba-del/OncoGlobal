@@ -1,8 +1,8 @@
-import { readFileSync, lstatSync } from "node:fs";
+import { readFileSync, lstatSync, realpathSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { inflateRawSync } from "node:zlib";
-import { join, relative, sep, resolve } from "node:path";
+import { join, relative, sep, resolve, isAbsolute } from "node:path";
 import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs";
 
 const EMAIL = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi;
@@ -421,6 +421,12 @@ export async function scanRepository(root, manifest = { files: [], protectedPath
     return result;
   }
   const rootAbsolute = resolve(root);
+  let rootRealpath;
+  try { rootRealpath = realpathSync(rootAbsolute); } catch {
+    result.pending.push({ type: "repository_root_unavailable", path: ".", status: "PENDENTE", reason: "repository_realpath_unavailable" });
+    result.unscanned.push({ type: "repository_root_unavailable", path: ".", status: "UNVERIFIED" });
+    return result;
+  }
   for (const path of paths) {
     const absolute = resolve(rootAbsolute, path);
     const relativeToRoot = relative(rootAbsolute, absolute);
@@ -439,6 +445,18 @@ export async function scanRepository(root, manifest = { files: [], protectedPath
       seen.add(path);
       result.unscanned.push({ type: "symlink_not_followed", path, status: "UNVERIFIED" });
       result.pending.push({ type: "symlink_not_followed", path, status: "PENDENTE", reason: "symlink_target_not_read" });
+      continue;
+    }
+    let fileRealpath;
+    try { fileRealpath = realpathSync(absolute); } catch {
+      result.unscanned.push({ type: "path_realpath_unavailable", path, status: "UNVERIFIED" });
+      result.pending.push({ type: "path_realpath_unavailable", path, status: "PENDENTE", reason: "file_realpath_unavailable" });
+      continue;
+    }
+    const physicalRelative = relative(rootRealpath, fileRealpath);
+    if (physicalRelative === ".." || physicalRelative.startsWith(`..${sep}`) || isAbsolute(physicalRelative)) {
+      result.unscanned.push({ type: "path_outside_repository", path, status: "UNVERIFIED" });
+      result.pending.push({ type: "path_outside_repository", path, status: "PENDENTE", reason: "physical_path_outside_repository" });
       continue;
     }
     if (!stat.isFile()) continue;

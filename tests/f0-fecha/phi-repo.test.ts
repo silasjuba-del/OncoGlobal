@@ -1,5 +1,5 @@
 import { deflateRawSync } from "node:zlib";
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
@@ -223,6 +223,34 @@ describe("scanner PHI do repositório", () => {
       const failed = await scanRepository(join(root, "missing"), { schemaVersion: 1, files: [], protectedPaths: [] });
       expect(failed.pending.map(({ type }) => type)).toContain("git_inventory_failed");
     } finally { rmSync(root, { recursive: true, force: true }); }
+  });
+
+  it("recusa diretório pai junction que resolve para fora do repositório", async () => {
+    const root = initGitRepo();
+    const outside = mkdtempSync(join(tmpdir(), "phi-outside-"));
+    const docsPath = join(root, "docs");
+    let junctionCreated = false;
+    try {
+      mkdirSync(docsPath);
+      writeFileSync(join(docsPath, "arquivo.txt"), `CPF: ${syntheticCpf()}`);
+      execFileSync("git", ["-C", root, "add", "docs/arquivo.txt"], { shell: false });
+      rmSync(docsPath, { recursive: true, force: true });
+      writeFileSync(join(outside, "arquivo.txt"), `CPF: ${syntheticCpf()}`);
+      symlinkSync(outside, docsPath, "junction");
+      junctionCreated = true;
+
+      const result = await scanRepository(root, { schemaVersion: 1, files: [], protectedPaths: [] });
+      expect(result.findings).toEqual([]);
+      expect(result.unscanned).toContainEqual({ type: "path_outside_repository", path: "docs/arquivo.txt", status: "UNVERIFIED" });
+      expect(result.pending).toContainEqual(expect.objectContaining({
+        type: "path_outside_repository", path: "docs/arquivo.txt", status: "PENDENTE",
+        reason: "physical_path_outside_repository",
+      }));
+    } finally {
+      if (junctionCreated && existsSync(docsPath)) rmSync(docsPath, { recursive: false, force: true });
+      rmSync(outside, { recursive: true, force: true });
+      rmSync(root, { recursive: true, force: true });
+    }
   });
 
   it("extrai apenas strings e valores armazenados de XLSX, sem executar fórmula ou macro", () => {
