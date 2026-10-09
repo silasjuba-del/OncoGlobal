@@ -1,0 +1,12 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-astra-c2
+
+
+ Test Files  7 passed (7)
+      Tests  50 passed (50)
+   Start at  17:51:24
+   Duration  32.93s (tests 65%, import 14%, transform 13%, environment 9%)
+
+    Isolate  7 workers spawned · ~792ms startup each (spawn + environment, per file)
+             at least ~4.75s faster with isolate: false — reuses workers across files instead of one per file
+

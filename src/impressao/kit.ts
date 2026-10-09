@@ -1,5 +1,5 @@
 import { hashCanonico } from "../modules/tipos.js";
-import { g06E1Destaque } from "../kernel/harness/gates.js";
+import { g06E1Destaque } from "../modules/documentos/destaqueE1.js";
 import { CSS_IMPRESSAO_A4 } from "./estilo.js";
 
 export type OrigemTemplate = "TEXTO_FIXO" | "FATO_CONFIRMADO" | "DECISAO_MEDICA";

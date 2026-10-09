@@ -2,6 +2,7 @@
 // Efeito mínimo (K-xx / auditoria seção 9): nenhum gate bloqueia salvar rascunho; bloqueiam artefato, saída ou autoridade.
 export { g16Owner, lerCatalogoDonos } from "./ownership.js";
 export type { CatalogoDonos, DonoDeclarado, VereditoG16 } from "./ownership.js";
+export { g06E1Destaque } from "../../modules/documentos/destaqueE1.js";
 import type { Semaforo } from "../../contracts/index.js";
 import { contemPhiResidual, type DicionarioPaciente } from "../llm/desidentificar.js";
 import {
@@ -37,16 +38,6 @@ export function g05VerdeHonesto(cor: Semaforo, checksExecutados: boolean, penden
   return cor === "VERDE" && (checksExecutados !== true || !pendOk || pendenciasObrigatorias > 0)
     ? { gate: "G-05", decisao: "ALERTA", motivo: "VERDE indevido: rebaixado para PENDENTE (dado preservado)" }
     : passa("G-05");
-}
-
-/** G-06 · emergência ativa exige destaque E1 somente na folha operacional do salão (K-12). */
-export function g06E1Destaque(entrada: {
-  templateId: string; emergenciaAtiva: boolean; destaqueE1Presente: boolean;
-}): Veredito {
-  if (entrada.templateId !== "folha-operacional-salao" || entrada.emergenciaAtiva !== true) return passa("G-06");
-  return entrada.destaqueE1Presente === true
-    ? passa("G-06")
-    : { gate: "G-06", decisao: "BLOQUEIA_ARTEFATO", motivo: "emergência ativa sem destaque E1 na folha operacional do salão" };
 }
 
 /** G-10 · dose calculada por LLM é proibida; menção literal com fonte é permitida (K-13). */

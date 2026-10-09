@@ -1,0 +1,1246 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-astra-c2
+
+ ❯ tests/w12-f4/servidor-flash.test.ts (21 tests | 9 failed) 9603ms
+   ❯ W12-F4 · FINALIZAR (6)
+     × gera evolução, pedido de laboratório e retorno assinados; imagem não marcada não existe 375ms
+     × imagem marcada gera o pedido de imagem 297ms
+     × sem laboratório nem imagem: só evolução e retorno; prazo ausente fica PENDENTE e não vira número 578ms
+     × mesma intenção repetida não duplica: replay do plano já finalizado é recusado 442ms
+   ❯ W12-F4 · nada fora do exibido é assinado (4)
+     × documento preparado mas fora de documentosExibidos: 409 e nenhuma assinatura 566ms
+     × sem exibir o bundle: 409 BUNDLE_NAO_EXIBIDO 694ms
+     × documento alterado depois de exibido: 409 e nada assinado 464ms
+   ❯ W12-F4 · visão entrega a Flash do ledger (6)
+     × prazo do retorno vem do último plano registrado 571ms
+   ❯ W12-F4 · nenhum efeito externo (1)
+     × salvar e finalizar não executam impressão, e-mail, WhatsApp nem exportação; sem PHI no log 541ms
+ ❯ tests/f0-fecha/consulta-completa.test.ts (6 tests | 3 failed) 2618ms
+   ❯ F0 E6b · consulta completa com HTTP real e SQLite temporário (6)
+     × percorre kit sintético, vínculo explícito, evolução exibida e Flash assinada; reabre o SQLite e preserva a história 613ms
+     × recusa paciente trocado e conteúdo editado depois da exibição 645ms
+     × conclui revisão e Flash manualmente com o caminho de IA ausente 362ms
+ ❯ tests/f0-fecha/c2-consulta-local.test.tsx (3 tests | 3 failed) 6745ms
+   ❯ C2 · consulta local real e conteúdo visível antes de assinar (3)
+     × exibe textos reais, assina por HTTP e reabre o histórico persistido sem dados de demonstração 3429ms
+     × não reexibe silenciosamente conteúdo alterado entre a prévia e o clique de assinatura 2350ms
+     × reutiliza a mesma preparação após resposta perdida sem duplicar documentos 958ms
+ ❯ tests/f0-fecha/c2-flash-retomada.test.ts (3 tests | 3 failed) 2026ms
+   × retoma após reiniciar SQLite e sessão com nova chave sem duplicar preparação ou assinatura 850ms
+   × recusa a mesma chave com conteúdo diferente e permite plano novo com chave própria 532ms
+   × reverte toda a preparação e a reserva se uma gravação intermediária falhar 640ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 18 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/f0-fecha/c2-consulta-local.test.tsx > C2 · consulta local real e conteúdo visível antes de assinar > exibe textos reais, assina por HTTP e reabre o histórico persistido sem dados de demonstração
+TestingLibraryElementError: Unable to find role="region" and name "Conteúdo para assinatura"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-label="Consulta persistida"
+    >
+      <h2>
+        Paciente Teste 92
+         · consulta local
+      </h2>
+      <p>
+        2026-10-09
+         · Dados pendentes: 
+        8
+      </p>
+      <p
+        aria-live="polite"
+      >
+        Operação não concluída (FLASH_RECUSADA). Reabra o conteúdo para conferir.
+      </p>
+      <h3>
+        Evolução revisada
+      </h3>
+      <pre
+        style="white-space: pre-wrap;"
+      >
+        Evolução PENDENTE de revisão.
+      </pre>
+      <p>
+        Cartão transversal PENDENTE de fonte estruturada.
+      </p>
+      <button
+        type="button"
+      >
+        Consulta Flash
+      </button>
+      <button
+        type="button"
+      >
+        Reabrir histórico
+      </button>
+      <section
+        aria-label="Consulta flash"
+        role="dialog"
+      >
+        <header>
+          <p>
+            <strong>
+              CONSULTA FLASH
+            </strong>
+          </p>
+          <p>
+            DX: 
+            PENDENTE
+             · TNM: 
+            PENDENTE
+             · Estádio:
+             
+            PENDENTE
+             · Biomarcador: 
+            PENDENTE
+          </p>
+          <p>
+            AP: 
+            PENDENTE
+             · MUC: 
+            PENDENTE
+             · Alergia:
+             
+            PENDENTE
+             · ECOG: 
+            PENDENTE
+          </p>
+          <p>
+            Tratamento: 
+            PENDENTE
+             · Linha: 
+            PENDENTE
+             · Ciclo/dia:
+             
+            PENDENTE
+          </p>
+          <p>
+            RETORNO: 
+            30 DIAS
+          </p>
+          <label>
+            Prazo do retorno (dias)
+            <input
+              aria-invalid="false"
+              aria-label="Prazo do retorno em dias"
+              max="3650"
+              min="1"
+              step="1"
+              type="number"
+              value="30"
+            />
+          </label>
+        </header>
+        <fieldset
+          aria-label="Tarefas do retorno"
+        >
+          <legend>
+            Tarefas do retorno
+          </legend>
+          <p
+            role="note"
+          >
+            Sem modelo padrão salvo: nada vem marcado
+          </p>
+          <ul>
+            <li
+              data-tarefa="retorno"
+            >
+              Retorno (30 dias)
+               · 
+              sempre incluído
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Laboratório
+              </label>
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Imagem (opcional)
+              </label>
+            </li>
+          </ul>
+        </fieldset>
+        <section
+          aria-label="Exames recentes"
+        >
+          <h2>
+            Exames recentes
+          </h2>
+          <p>
+            nenhum exame recente
+          </p>
+        </section>
+        <section
+          aria-label="Ações de hoje"
+        >
+          <h2>
+            Hoje
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="Receitas pré-selecionadas"
+        >
+          <h2>
+            Receitas pré-selecionadas
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="APAC e SIGTAP"
+        >
+          <h2>
+            APAC / SUS
+          </h2>
+          <p>
+            CID 
+            PENDENTE
+             · SIGTAP 
+            PENDENTE
+             · 
+            PENDENTE
+             ·
+             
+            <span
+              aria-label="estado da APAC"
+            >
+              APAC 
+              ! PENDENTE
+            </span>
+          </p>
+          <p>
+            Competência 
+            PENDENTE
+             ·
+             
+            sem pendências
+          </p>
+        </section>
+        <section
+          aria-label="IA fala"
+        >
+          <h2>
+            IA fala
+          </h2>
+          <ul />
+        </section>
+        <footer>
+          <button
+            type="button"
+          >
+            SALVAR RASCUNHO
+          </button>
+          <button
+            type="button"
+          >
+            Revisar documentos para assinatura
+          </button>
+        </footer>
+      </section>
+      <section
+        aria-label="Histórico de documentos assinados"
+      >
+        <h3>
+          Histórico de documentos assinados
+        </h3>
+        <p>
+          Nenhum documento assinado neste histórico.
+        </p>
+      </section>
+    </section>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-label="Consulta persistida"
+    >
+      <h2>
+        Paciente Teste 92
+         · consulta local
+      </h2>
+      <p>
+        2026-10-09
+         · Dados pendentes: 
+        8
+      </p>
+      <p
+        aria-live="polite"
+      >
+        Operação não concluída (FLASH_RECUSADA). Reabra o conteúdo para conferir.
+      </p>
+      <h3>
+        Evolução revisada
+      </h3>
+      <pre
+        style="white-space: pre-wrap;"
+      >
+        Evolução PENDENTE de revisão.
+      </pre>
+      <p>
+        Cartão transversal PENDENTE de fonte estruturada.
+      </p>
+      <button
+        type="button"
+      >
+        Consulta Flash
+      </button>
+      <button
+        type="button"
+      >
+        Reabrir histórico
+      </button>
+      <section
+        aria-label="Consulta flash"
+        role="dialog"
+      >
+        <header>
+          <p>
+            <strong>
+              CONSULTA FLASH
+            </strong>
+          </p>
+          <p>
+            DX: 
+            PENDENTE
+             · TNM: 
+            PENDENTE
+             · Estádio:
+             
+            PENDENTE
+             · Biomarcador: 
+            PENDENTE
+          </p>
+          <p>
+            AP: 
+            PENDENTE
+             · MUC: 
+            PENDENTE
+             · Alergia:
+             
+            PENDENTE
+             · ECOG: 
+            PENDENTE
+          </p>
+          <p>
+            Tratamento: 
+            PENDENTE
+             · Linha: 
+            PENDENTE
+             · Ciclo/dia:
+             
+            PENDENTE
+          </p>
+          <p>
+            RETORNO: 
+            30 DIAS
+          </p>
+          <label>
+            Prazo do retorno (dias)
+            <input
+              aria-invalid="false"
+              aria-label="Prazo do retorno em dias"
+              max="3650"
+              min="1"
+              step="1"
+              type="number"
+              value="30"
+            />
+          </label>
+        </header>
+        <fieldset
+          aria-label="Tarefas do retorno"
+        >
+          <legend>
+            Tarefas do retorno
+          </legend>
+          <p
+            role="note"
+          >
+            Sem modelo padrão salvo: nada vem marcado
+          </p>
+          <ul>
+            <li
+              data-tarefa="retorno"
+            >
+              Retorno (30 dias)
+               · 
+              sempre incluído
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Laboratório
+              </label>
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Imagem (opcional)
+              </label>
+            </li>
+          </ul>
+        </fieldset>
+        <section
+          aria-label="Exames recentes"
+        >
+          <h2>
+            Exames recentes
+          </h2>
+          <p>
+            nenhum exame recente
+          </p>
+        </section>
+        <section
+          aria-label="Ações de hoje"
+        >
+          <h2>
+            Hoje
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="Receitas pré-selecionadas"
+        >
+          <h2>
+            Receitas pré-selecionadas
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="APAC e SIGTAP"
+        >
+          <h2>
+            APAC / SUS
+          </h2>
+          <p>
+            CID 
+            PENDENTE
+             · SIGTAP 
+            PENDENTE
+             · 
+            PENDENTE
+             ·
+             
+            <span
+              aria-label="estado da APAC"
+            >
+              APAC 
+              ! PENDENTE
+            </span>
+          </p>
+          <p>
+            Competência 
+            PENDENTE
+             ·
+             
+            sem pendências
+          </p>
+        </section>
+        <section
+          aria-label="IA fala"
+        >
+          <h2>
+            IA fala
+          </h2>
+          <ul />
+        </section>
+        <footer>
+          <button
+            type="button"
+          >
+            SALVAR RASCUNHO
+          </button>
+          <button
+            type="button"
+          >
+            Revisar documentos para assinatura
+          </button>
+        </footer>
+      </section>
+      <section
+        aria-label="Histórico de documentos assinados"
+      >
+        <h3>
+          Histórico de documentos assinados
+        </h3>
+        <p>
+          Nenhum documento assinado neste histórico.
+        </p>
+      </section>
+    </section>
+  </div>
+</body>
+ ❯ waitForWrapper ../../OncoGlobal/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../OncoGlobal/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ preparar tests/f0-fecha/c2-consulta-local.test.tsx:34:17
+     32|   fireEvent.change(screen.getByLabelText("Prazo do retorno em dias"), …
+     33|   fireEvent.click(screen.getByRole("button", { name: "Revisar document…
+     34|   return screen.findByRole("region", { name: "Conteúdo para assinatura…
+       |                 ^
+     35| }
+     36|
+ ❯ tests/f0-fecha/c2-consulta-local.test.tsx:41:28
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/18]⎯
+
+ FAIL  tests/f0-fecha/c2-consulta-local.test.tsx > C2 · consulta local real e conteúdo visível antes de assinar > não reexibe silenciosamente conteúdo alterado entre a prévia e o clique de assinatura
+TestingLibraryElementError: Unable to find role="region" and name "Conteúdo para assinatura"
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-label="Consulta persistida"
+    >
+      <h2>
+        Paciente Teste 92
+         · consulta local
+      </h2>
+      <p>
+        2026-10-09
+         · Dados pendentes: 
+        8
+      </p>
+      <p
+        aria-live="polite"
+      >
+        Operação não concluída (FLASH_RECUSADA). Reabra o conteúdo para conferir.
+      </p>
+      <h3>
+        Evolução revisada
+      </h3>
+      <pre
+        style="white-space: pre-wrap;"
+      >
+        Evolução PENDENTE de revisão.
+      </pre>
+      <p>
+        Cartão transversal PENDENTE de fonte estruturada.
+      </p>
+      <button
+        type="button"
+      >
+        Consulta Flash
+      </button>
+      <button
+        type="button"
+      >
+        Reabrir histórico
+      </button>
+      <section
+        aria-label="Consulta flash"
+        role="dialog"
+      >
+        <header>
+          <p>
+            <strong>
+              CONSULTA FLASH
+            </strong>
+          </p>
+          <p>
+            DX: 
+            PENDENTE
+             · TNM: 
+            PENDENTE
+             · Estádio:
+             
+            PENDENTE
+             · Biomarcador: 
+            PENDENTE
+          </p>
+          <p>
+            AP: 
+            PENDENTE
+             · MUC: 
+            PENDENTE
+             · Alergia:
+             
+            PENDENTE
+             · ECOG: 
+            PENDENTE
+          </p>
+          <p>
+            Tratamento: 
+            PENDENTE
+             · Linha: 
+            PENDENTE
+             · Ciclo/dia:
+             
+            PENDENTE
+          </p>
+          <p>
+            RETORNO: 
+            30 DIAS
+          </p>
+          <label>
+            Prazo do retorno (dias)
+            <input
+              aria-invalid="false"
+              aria-label="Prazo do retorno em dias"
+              max="3650"
+              min="1"
+              step="1"
+              type="number"
+              value="30"
+            />
+          </label>
+        </header>
+        <fieldset
+          aria-label="Tarefas do retorno"
+        >
+          <legend>
+            Tarefas do retorno
+          </legend>
+          <p
+            role="note"
+          >
+            Sem modelo padrão salvo: nada vem marcado
+          </p>
+          <ul>
+            <li
+              data-tarefa="retorno"
+            >
+              Retorno (30 dias)
+               · 
+              sempre incluído
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Laboratório
+              </label>
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Imagem (opcional)
+              </label>
+            </li>
+          </ul>
+        </fieldset>
+        <section
+          aria-label="Exames recentes"
+        >
+          <h2>
+            Exames recentes
+          </h2>
+          <p>
+            nenhum exame recente
+          </p>
+        </section>
+        <section
+          aria-label="Ações de hoje"
+        >
+          <h2>
+            Hoje
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="Receitas pré-selecionadas"
+        >
+          <h2>
+            Receitas pré-selecionadas
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="APAC e SIGTAP"
+        >
+          <h2>
+            APAC / SUS
+          </h2>
+          <p>
+            CID 
+            PENDENTE
+             · SIGTAP 
+            PENDENTE
+             · 
+            PENDENTE
+             ·
+             
+            <span
+              aria-label="estado da APAC"
+            >
+              APAC 
+              ! PENDENTE
+            </span>
+          </p>
+          <p>
+            Competência 
+            PENDENTE
+             ·
+             
+            sem pendências
+          </p>
+        </section>
+        <section
+          aria-label="IA fala"
+        >
+          <h2>
+            IA fala
+          </h2>
+          <ul />
+        </section>
+        <footer>
+          <button
+            type="button"
+          >
+            SALVAR RASCUNHO
+          </button>
+          <button
+            type="button"
+          >
+            Revisar documentos para assinatura
+          </button>
+        </footer>
+      </section>
+      <section
+        aria-label="Histórico de documentos assinados"
+      >
+        <h3>
+          Histórico de documentos assinados
+        </h3>
+        <p>
+          Nenhum documento assinado neste histórico.
+        </p>
+      </section>
+    </section>
+  </div>
+</body>
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <section
+      aria-label="Consulta persistida"
+    >
+      <h2>
+        Paciente Teste 92
+         · consulta local
+      </h2>
+      <p>
+        2026-10-09
+         · Dados pendentes: 
+        8
+      </p>
+      <p
+        aria-live="polite"
+      >
+        Operação não concluída (FLASH_RECUSADA). Reabra o conteúdo para conferir.
+      </p>
+      <h3>
+        Evolução revisada
+      </h3>
+      <pre
+        style="white-space: pre-wrap;"
+      >
+        Evolução PENDENTE de revisão.
+      </pre>
+      <p>
+        Cartão transversal PENDENTE de fonte estruturada.
+      </p>
+      <button
+        type="button"
+      >
+        Consulta Flash
+      </button>
+      <button
+        type="button"
+      >
+        Reabrir histórico
+      </button>
+      <section
+        aria-label="Consulta flash"
+        role="dialog"
+      >
+        <header>
+          <p>
+            <strong>
+              CONSULTA FLASH
+            </strong>
+          </p>
+          <p>
+            DX: 
+            PENDENTE
+             · TNM: 
+            PENDENTE
+             · Estádio:
+             
+            PENDENTE
+             · Biomarcador: 
+            PENDENTE
+          </p>
+          <p>
+            AP: 
+            PENDENTE
+             · MUC: 
+            PENDENTE
+             · Alergia:
+             
+            PENDENTE
+             · ECOG: 
+            PENDENTE
+          </p>
+          <p>
+            Tratamento: 
+            PENDENTE
+             · Linha: 
+            PENDENTE
+             · Ciclo/dia:
+             
+            PENDENTE
+          </p>
+          <p>
+            RETORNO: 
+            30 DIAS
+          </p>
+          <label>
+            Prazo do retorno (dias)
+            <input
+              aria-invalid="false"
+              aria-label="Prazo do retorno em dias"
+              max="3650"
+              min="1"
+              step="1"
+              type="number"
+              value="30"
+            />
+          </label>
+        </header>
+        <fieldset
+          aria-label="Tarefas do retorno"
+        >
+          <legend>
+            Tarefas do retorno
+          </legend>
+          <p
+            role="note"
+          >
+            Sem modelo padrão salvo: nada vem marcado
+          </p>
+          <ul>
+            <li
+              data-tarefa="retorno"
+            >
+              Retorno (30 dias)
+               · 
+              sempre incluído
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Laboratório
+              </label>
+            </li>
+            <li>
+              <label>
+                <input
+                  type="checkbox"
+                />
+                Imagem (opcional)
+              </label>
+            </li>
+          </ul>
+        </fieldset>
+        <section
+          aria-label="Exames recentes"
+        >
+          <h2>
+            Exames recentes
+          </h2>
+          <p>
+            nenhum exame recente
+          </p>
+        </section>
+        <section
+          aria-label="Ações de hoje"
+        >
+          <h2>
+            Hoje
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="Receitas pré-selecionadas"
+        >
+          <h2>
+            Receitas pré-selecionadas
+          </h2>
+          <ul />
+        </section>
+        <section
+          aria-label="APAC e SIGTAP"
+        >
+          <h2>
+            APAC / SUS
+          </h2>
+          <p>
+            CID 
+            PENDENTE
+             · SIGTAP 
+            PENDENTE
+             · 
+            PENDENTE
+             ·
+             
+            <span
+              aria-label="estado da APAC"
+            >
+              APAC 
+              ! PENDENTE
+            </span>
+          </p>
+          <p>
+            Competência 
+            PENDENTE
+             ·
+             
+            sem pendências
+          </p>
+        </section>
+        <section
+          aria-label="IA fala"
+        >
+          <h2>
+            IA fala
+          </h2>
+          <ul />
+        </section>
+        <footer>
+          <button
+            type="button"
+          >
+            SALVAR RASCUNHO
+          </button>
+          <button
+            type="button"
+          >
+            Revisar documentos para assinatura
+          </button>
+        </footer>
+      </section>
+      <section
+        aria-label="Histórico de documentos assinados"
+      >
+        <h3>
+          Histórico de documentos assinados
+        </h3>
+        <p>
+          Nenhum documento assinado neste histórico.
+        </p>
+      </section>
+    </section>
+  </div>
+</body>
+ ❯ waitForWrapper ../../OncoGlobal/node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ ../../OncoGlobal/node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ preparar tests/f0-fecha/c2-consulta-local.test.tsx:34:17
+     32|   fireEvent.change(screen.getByLabelText("Prazo do retorno em dias"), …
+     33|   fireEvent.click(screen.getByRole("button", { name: "Revisar document…
+     34|   return screen.findByRole("region", { name: "Conteúdo para assinatura…
+       |                 ^
+     35| }
+     36|
+ ❯ tests/f0-fecha/c2-consulta-local.test.tsx:60:28
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/18]⎯
+
+ FAIL  tests/f0-fecha/c2-consulta-local.test.tsx > C2 · consulta local real e conteúdo visível antes de assinar > reutiliza a mesma preparação após resposta perdida sem duplicar documentos
+AssertionError: expected [] to have a length of 2 but got +0
+
+- Expected
++ Received
+
+- 2
++ 0
+
+ ❯ tests/f0-fecha/c2-consulta-local.test.tsx:90:47
+     88|     const documentos = () => listarDrafts(ambiente.db, PACIENTE).filte…
+     89|       typeof (d.payload as Record<string, unknown>).documentId === "st…
+     90|     const antes = documentos(); expect(antes).toHaveLength(2);
+       |                                               ^
+     91|     fireEvent.click(screen.getByRole("button", { name: "Revisar docume…
+     92|     await screen.findByRole("region", { name: "Conteúdo para assinatur…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/18]⎯
+
+ FAIL  tests/f0-fecha/c2-flash-retomada.test.ts > retoma após reiniciar SQLite e sessão com nova chave sem duplicar preparação ou assinatura
+AssertionError: expected 500 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 500
+
+ ❯ tests/f0-fecha/c2-flash-retomada.test.ts:30:37
+     28|   let a = await abrir();
+     29|   const primeira = await finalizarFlash(a, "retomada-primeira");
+     30|   expect(primeira.preparada.status).toBe(200);
+       |                                     ^
+     31|   // A primeira resposta foi perdida pelo cliente; a tela e a sessão d…
+     32|   a = await reiniciar();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/18]⎯
+
+ FAIL  tests/f0-fecha/c2-flash-retomada.test.ts > recusa a mesma chave com conteúdo diferente e permite plano novo com chave própria
+AssertionError: expected 500 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 500
+
+ ❯ tests/f0-fecha/c2-flash-retomada.test.ts:57:27
+     55|   const a = await abrir();
+     56|   const original = await a.request("/consulta/flash/preparar", pedido(…
+     57|   expect(original.status).toBe(200);
+       |                           ^
+     58|   expect(await a.request("/consulta/flash/preparar", pedido("plano-ori…
+     59|     .toMatchObject({ status: 409, data: { codigo: "IDEMPOTENCIA_CONFLI…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/18]⎯
+
+ FAIL  tests/f0-fecha/c2-flash-retomada.test.ts > reverte toda a preparação e a reserva se uma gravação intermediária falhar
+AssertionError: expected 500 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 500
+
+ ❯ tests/f0-fecha/c2-flash-retomada.test.ts:76:94
+     74|   expect(a.db.prepare("SELECT COUNT(*) AS n FROM action_idempotency WH…
+     75|   a.db.exec("DROP TRIGGER falha_demo_preparacao");
+     76|   expect((await a.request("/consulta/flash/preparar", pedido("operacao…
+       |                                                                                              ^
+     77| });
+     78|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/18]⎯
+
+ FAIL  tests/f0-fecha/consulta-completa.test.ts > F0 E6b · consulta completa com HTTP real e SQLite temporário > percorre kit sintético, vínculo explícito, evolução exibida e Flash assinada; reabre o SQLite e preserva a história
+AssertionError: expected 500 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 500
+
+ ❯ assinarFlash tests/f0-fecha/consulta-completa.test.ts:38:28
+     36| async function assinarFlash(ambiente: Awaited<ReturnType<typeof abrirA…
+     37|   const { context, preparada } = await finalizarFlash(ambiente, key);
+     38|   expect(preparada.status).toBe(200);
+       |                            ^
+     39|   const exibicao = await ambiente.request<Record<string, any>>("/consu…
+     40|   expect(exibicao.status).toBe(200);
+ ❯ tests/f0-fecha/consulta-completa.test.ts:100:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/18]⎯
+
+ FAIL  tests/f0-fecha/consulta-completa.test.ts > F0 E6b · consulta completa com HTTP real e SQLite temporário > recusa paciente trocado e conteúdo editado depois da exibição
+AssertionError: expected 500 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 500
+
+ ❯ tests/f0-fecha/consulta-completa.test.ts:266:36
+    264|     await carregarConsulta(ambiente);
+    265|     const flash = await finalizarFlash(ambiente, "e6b-edit-flash-92");
+    266|     expect(flash.preparada.status).toBe(200);
+       |                                    ^
+    267|     const exibição = await ambiente.request<Record<string, any>>("/con…
+    268|     expect(exibição.status).toBe(200);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/18]⎯
+
+ FAIL  tests/f0-fecha/consulta-completa.test.ts > F0 E6b · consulta completa com HTTP real e SQLite temporário > conclui revisão e Flash manualmente com o caminho de IA ausente
+AssertionError: expected 500 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 500
+
+ ❯ assinarFlash tests/f0-fecha/consulta-completa.test.ts:38:28
+     36| async function assinarFlash(ambiente: Awaited<ReturnType<typeof abrirA…
+     37|   const { context, preparada } = await finalizarFlash(ambiente, key);
+     38|   expect(preparada.status).toBe(200);
+       |                            ^
+     39|   const exibicao = await ambiente.request<Record<string, any>>("/consu…
+     40|   expect(exibicao.status).toBe(200);
+ ❯ tests/f0-fecha/consulta-completa.test.ts:294:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/18]⎯
+
+ FAIL  tests/w12-f4/servidor-flash.test.ts > W12-F4 · FINALIZAR > gera evolução, pedido de laboratório e retorno assinados; imagem não marcada não existe
+AssertionError: expected 500 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 500
+
+ ❯ tests/w12-f4/servidor-flash.test.ts:152:25
+    150|     await f.carregar();
+    151|     const { prep, conf } = await f.finalizar(plano(), "flash-final-000…
+    152|     expect(prep.status).toBe(200);
+       |                         ^
+    153|     expect(conf!.status).toBe(200);
+    154|     expect(conf!.body.codigo).toBe("GRAVADA");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/18]⎯
+
+ FAIL  tests/w12-f4/servidor-flash.test.ts > W12-F4 · FINALIZAR > imagem marcada gera o pedido de imagem
+TypeError: Cannot read properties of null (reading 'body')
+ ❯ tests/w12-f4/servidor-flash.test.ts:170:18
+    168|     await f.carregar();
+    169|     const { conf } = await f.finalizar(plano({}, { retorno: true, labo…
+    170|     expect(conf!.body.codigo).toBe("GRAVADA");
+       |                  ^
+    171|     expect(f.tiposAssinados()).toEqual(["FLASH_EVOLUCAO", "FLASH_PEDID…
+    172|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/18]⎯
+
+ FAIL  tests/w12-f4/servidor-flash.test.ts > W12-F4 · FINALIZAR > sem laboratório nem imagem: só evolução e retorno; prazo ausente fica PENDENTE e não vira número
+TypeError: Cannot read properties of null (reading 'body')
+ ❯ tests/w12-f4/servidor-flash.test.ts:179:18
+    177|     const { conf } = await f.finalizar(plano({ retorno: { dias: null, …
+    178|       { retorno: true, laboratorio: false, imagem: false }), "flash-fi…
+    179|     expect(conf!.body.codigo).toBe("GRAVADA");
+       |                  ^
+    180|     expect(f.tiposAssinados()).toEqual(["FLASH_EVOLUCAO", "FLASH_RETOR…
+    181|     const retorno = f.assinados().map((e) => (e.payload as any).data.d…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/18]⎯
+
+ FAIL  tests/w12-f4/servidor-flash.test.ts > W12-F4 · FINALIZAR > mesma intenção repetida não duplica: replay do plano já finalizado é recusado
+AssertionError: expected 500 to be 409 // Object.is equality
+
+- Expected
++ Received
+
+- 409
++ 500
+
+ ❯ tests/w12-f4/servidor-flash.test.ts:192:27
+    190|     await f.finalizar(plano(), "flash-final-0004");
+    191|     const deNovo = await f.post("/consulta/flash/preparar", { ...f.ctx…
+    192|     expect(deNovo.status).toBe(409);
+       |                           ^
+    193|     expect(deNovo.body.codigo).toBe("FLASH_JA_FINALIZADA");
+    194|     expect(f.tiposAssinados()).toHaveLength(3);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/18]⎯
+
+ FAIL  tests/w12-f4/servidor-flash.test.ts > W12-F4 · nada fora do exibido é assinado > documento preparado mas fora de documentosExibidos: 409 e nenhuma assinatura
+TypeError: Cannot read properties of undefined (reading '0')
+ ❯ tests/w12-f4/servidor-flash.test.ts:247:42
+    245|     const docs = prep.body.documentos as { documentId: string; documen…
+    246|     const conf = await f.post("/consulta/confirmar", { ...f.ctx, bloco…
+    247|       documentosExibidos: [{ documentId: docs[0]!.documentId, document…
+       |                                          ^
+    248|       reconhecerAlertas: [], idempotencyKey: "flash-escopo-01" });
+    249|     expect(conf.status).toBe(409);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/18]⎯
+
+ FAIL  tests/w12-f4/servidor-flash.test.ts > W12-F4 · nada fora do exibido é assinado > sem exibir o bundle: 409 BUNDLE_NAO_EXIBIDO
+TypeError: Cannot read properties of undefined (reading 'map')
+ ❯ tests/w12-f4/servidor-flash.test.ts:259:48
+    257|     const prep = await f.post("/consulta/flash/preparar", { ...f.ctx, …
+    258|     const conf = await f.post("/consulta/confirmar", { ...f.ctx, bloco…
+    259|       documentosExibidos: prep.body.documentos.map((d: any) => ({ docu…
+       |                                                ^
+    260|       reconhecerAlertas: [], idempotencyKey: "flash-escopo-02" });
+    261|     expect(conf.body.codigo).toBe("BUNDLE_NAO_EXIBIDO");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/18]⎯
+
+ FAIL  tests/w12-f4/servidor-flash.test.ts > W12-F4 · nada fora do exibido é assinado > documento alterado depois de exibido: 409 e nada assinado
+TypeError: Cannot read properties of undefined (reading '0')
+ ❯ tests/w12-f4/servidor-flash.test.ts:270:83
+    268|     const prep = await f.post("/consulta/flash/preparar", { ...f.ctx, …
+    269|     await f.post("/consulta/bundle", f.ctx);
+    270|     const alvo = listarDrafts(f.db, PACIENTE).find((d) => d.draftId ==…
+       |                                                                                   ^
+    271|     salvarDraft(f.db, { ...alvo, revision: alvo.revision + 1, payload:…
+    272|     const conf = await f.post("/consulta/confirmar", { ...f.ctx, bloco…
+ ❯ tests/w12-f4/servidor-flash.test.ts:270:47
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/18]⎯
+
+ FAIL  tests/w12-f4/servidor-flash.test.ts > W12-F4 · visão entrega a Flash do ledger > prazo do retorno vem do último plano registrado
+AssertionError: expected null to be 30 // Object.is equality
+
+- Expected:
+30
+
++ Received:
+null
+
+ ❯ tests/w12-f4/servidor-flash.test.ts:327:57
+    325|     await f.carregar();
+    326|     await f.finalizar(plano({ retorno: { dias: 30, examesAntesDoRetorn…
+    327|     expect((await f.carregar()).body.flash.retornoDias).toBe(30);
+       |                                                         ^
+    328|     await f.finalizar(plano({ retorno: { dias: 21, examesAntesDoRetorn…
+    329|     expect((await f.carregar()).body.flash.retornoDias).toBe(21);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/18]⎯
+
+ FAIL  tests/w12-f4/servidor-flash.test.ts > W12-F4 · nenhum efeito externo > salvar e finalizar não executam impressão, e-mail, WhatsApp nem exportação; sem PHI no log
+TypeError: Cannot read properties of null (reading 'body')
+ ❯ tests/w12-f4/servidor-flash.test.ts:355:18
+    353|     await f.post("/consulta/flash/rascunho", { ...f.ctx, plano: plano(…
+    354|     const { conf } = await f.finalizar(plano(), "flash-efeito-0001");
+    355|     expect(conf!.body.codigo).toBe("GRAVADA");
+       |                  ^
+    356|     expect(f.efeitos()).toBe(0);
+    357|     expect(f.logs.some((l) => l.rota === "acao")).toBe(false);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/18]⎯
+
+
+ Test Files  4 failed | 1 passed (5)
+      Tests  18 failed | 18 passed (36)
+   Start at  17:49:55
+   Duration  34.64s (tests 65%, transform 17%, import 9%, environment 9%)
+
+    Isolate  5 workers spawned · ~989ms startup each (spawn + environment, per file)
+             at least ~3.95s faster with isolate: false — reuses workers across files instead of one per file
+
