@@ -32,18 +32,20 @@ export function TelaApacLote({
 }) {
   const [visao, setVisao] = useState<LotesApacVisao | null>(null);
   const [selecionadas, setSelecionadas] = useState<readonly string[]>([]);
+  const [erro, setErro] = useState<string | null>(null);
 
   useEffect(() => {
     let viva = true;
+    setVisao(null); setErro(null);
     porta.lotesApac().then((proxima) => {
       if (viva) setVisao(proxima);
-    });
+    }, () => { if (viva) setErro("APAC PENDENTE: não foi possível carregar os dados."); });
     return () => {
       viva = false;
     };
   }, [porta]);
 
-  if (!visao) return <p>carregando APAC</p>;
+  if (!visao) return <p role="status">{erro ?? "carregando APAC"}</p>;
   const hoje = visao.hoje;
 
   const lotes: { tumorLotId: string; itens: ItemApacVisao[] }[] = [];
@@ -102,6 +104,18 @@ export function TelaApacLote({
                 <p>Geração: {item.apac.dataGeracaoApp}</p>
                 <p>dias: {prazo.dias}</p>
                 <p>Estado: {estado}</p>
+                <section aria-label={`Antiglosa ${item.apac.apacId}`}>
+                  <h4>Antiglosa · conferência do rascunho</h4>
+                  {item.antiglosa ? <>
+                    <p>{item.antiglosa.exportavel ? "Conferência disponível; exportação depende da validação do servidor."
+                      : "Exportação bloqueada pelos achados abaixo. A consulta segue."}</p>
+                    <ul>{item.antiglosa.achados.map((achado, i) => <li key={`${achado.regraId}-${i}`}>
+                      {achado.motivo}<small> · Fonte: {achado.fonte}</small>
+                    </li>)}</ul>
+                    {item.antiglosaEstado === "AVALIADA_COM_TABELA_SIGTAP_AUSENTE"
+                      ? <p>Tabela SIGTAP da competência PENDENTE.</p> : null}
+                  </> : <p>Antiglosa PENDENTE de dados e catálogo.</p>}
+                </section>
                 {prazo.aviso ? <p>aviso D85</p> : null}
                 {bloqueada ? (
                   <>

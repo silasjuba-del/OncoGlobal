@@ -1,4 +1,7 @@
 export interface DocumentoBundleVisao {
+  draftId?: string;
+  conteudo?: unknown;
+  conteudoHash?: string;
   documentId: string;
   documentVersion: number;
   titulo: string;

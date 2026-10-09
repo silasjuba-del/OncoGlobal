@@ -82,6 +82,8 @@ export interface ConsultaFlashProps {
   aoFinalizar: (plano: PlanoFlash) => void;
   /** W12-F4: enquanto o servidor responde, os botões ficam desativados (evita clique duplo). */
   ocupado?: boolean;
+  /** A composição real prepara a revisão antes da assinatura. */
+  rotuloFinalizar?: string;
 }
 
 /** Plano entregue ao chamador. Não emite nada: APAC sempre rascunho. */
@@ -292,7 +294,7 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
           SALVAR RASCUNHO
         </button>
         <button type="button" disabled={props.ocupado === true || prazoInvalido} onClick={() => props.aoFinalizar(montarPlano())}>
-          FINALIZAR · IMPRIMIR · SAIR
+          {props.rotuloFinalizar ?? "FINALIZAR · IMPRIMIR · SAIR"}
         </button>
       </footer>
     </section>

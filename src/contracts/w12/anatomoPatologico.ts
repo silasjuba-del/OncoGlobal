@@ -122,7 +122,8 @@ export const RetratoTransversal = z.object({
   pacienteRef: Id,
   tumorIndice: z.literal(true),
   nucleo: NucleoAP,
-  extensao: ExtensaoTumor,
+  // A ausência de classificação explícita não permite escolher uma extensão por inferência.
+  extensao: ExtensaoTumor.nullable(),
 }).strict();
 export type RetratoTransversal = z.infer<typeof RetratoTransversal>;
 
