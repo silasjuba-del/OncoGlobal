@@ -7,6 +7,7 @@ export type DispositionStatus =
   | "technical_font_asset"
   | "synthetic_visual_review"
   | "PENDENTE";
+export type HashMode = "raw" | "utf8-lf";
 
 export interface PhiCandidate {
   type: PhiType;
@@ -31,6 +32,7 @@ export interface PhiDispositionItem {
 export interface PhiFileDisposition {
   path: string;
   sha256: string;
+  hashMode?: HashMode;
   category?: "synthetic_visual_review" | "technical_font_asset";
   magic?: string;
   evidenceRef?: string;
@@ -60,7 +62,7 @@ export interface PhiScanResult {
   pending: Array<{ type: string; path: string; line?: number; status: string; reason?: string; evidenceRef?: string | null }>;
 }
 
-export function sha256(bytes: Uint8Array | string): string;
+export function sha256(bytes: Uint8Array | string, hashMode?: HashMode, path?: string): string;
 export function findTextCandidates(text: string, path?: string): PhiCandidate[];
 export function scanText(text: string, path: string, options?: { sha256?: string; manifest?: PhiManifest }): PhiScanResult;
 export function extractXlsxRows(bytes: Uint8Array): Array<{ line: number; text: string }>;

@@ -1,5 +1,8 @@
 import { deflateRawSync } from "node:zlib";
-import { readFileSync } from "node:fs";
+import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { execFileSync } from "node:child_process";
 import { describe, expect, it } from "vitest";
 import {
   extractXlsxRows,
@@ -21,11 +24,19 @@ function syntheticCpf(): string {
   return `${digits}${digit(digits, 10)}${digit(digits + digit(digits, 10), 11)}`;
 }
 
-function manifestFor(path: string, text: string, items: PhiDispositionItem[]): PhiManifest {
+function manifestFor(path: string, text: string, items: PhiDispositionItem[], hashMode?: "raw" | "utf8-lf"): PhiManifest {
   return {
     schemaVersion: 1 as const,
-    files: [{ path, sha256: sha256(Buffer.from(text, "utf8")), items }],
+    files: [{ path, sha256: sha256(Buffer.from(text, "utf8"), hashMode), ...(hashMode ? { hashMode } : {}), items }],
   };
+}
+
+function initGitRepo(): string {
+  const root = mkdtempSync(join(tmpdir(), "phi-repo-"));
+  execFileSync("git", ["init", "-q"], { cwd: root, shell: false });
+  execFileSync("git", ["-C", root, "config", "user.email", "test@example.invalid"], { shell: false });
+  execFileSync("git", ["-C", root, "config", "user.name", "Test"], { shell: false });
+  return root;
 }
 
 function zip(entries: Array<[string, string]>): Buffer {
@@ -158,6 +169,60 @@ describe("scanner PHI do repositório", () => {
     ]);
     expect(findTextCandidates(`CPF: ${cpf}`, "entrada-sem-declaracao.txt").map(({ type, line }) => ({ type, line })))
       .toEqual([{ type: "cpf", line: 1 }]);
+  });
+
+  it("usa utf8-lf apenas quando declarado e mantém raw byte-sensitive", async () => {
+    const crlf = Buffer.from("linha 1\r\nlinha 2\r\n", "utf8");
+    const lf = Buffer.from("linha 1\nlinha 2\n", "utf8");
+    expect(sha256(crlf, "utf8-lf", "notes.txt")).toBe(sha256(lf, "utf8-lf", "notes.txt"));
+    expect(sha256(crlf)).not.toBe(sha256(lf));
+    const bomCrlf = Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), crlf]);
+    const bomLf = Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), lf]);
+    expect(sha256(bomCrlf, "utf8-lf", "notes.txt")).toBe(sha256(bomLf, "utf8-lf", "notes.txt"));
+    expect(sha256(bomLf, "utf8-lf", "notes.txt")).not.toBe(sha256(lf, "utf8-lf", "notes.txt"));
+    expect(() => sha256(crlf, "utf8-lf", "document.pdf")).toThrow("utf8_lf_not_supported_for_binary_format");
+
+    const root = initGitRepo();
+    try {
+      const candidate = `CPF: ${syntheticCpf()}\r\n`;
+      writeFileSync(join(root, "public.txt"), candidate);
+      const manifest = manifestFor("public.txt", candidate.replace(/\r\n/g, "\n"), [{
+        type: "cpf", line: 1, ordinal: 0, status: "synthetic_declared",
+        evidenceRef: "fixture declaration", reason: "Synthetic scanner fixture.",
+      }], "utf8-lf");
+      const matched = await scanRepository(root, manifest);
+      expect(matched.findings).toEqual([]);
+      writeFileSync(join(root, "public.txt"), `${candidate}CPF: ${syntheticCpf()}\r\n`);
+      const changed = await scanRepository(root, manifest);
+      expect(changed.findings.map(({ type }) => type)).toContain("cpf");
+      expect(changed.pending.some(({ type }) => type === "manifest_hash_mismatch")).toBe(true);
+
+      const rawManifest = manifestFor("public.txt", candidate.replace(/\r\n/g, "\n"), [{
+        type: "cpf", line: 1, ordinal: 0, status: "synthetic_declared",
+        evidenceRef: "fixture declaration", reason: "Synthetic scanner fixture.",
+      }]);
+      const rawMismatch = await scanRepository(root, rawManifest);
+      expect(rawMismatch.findings.map(({ type }) => type)).toContain("cpf");
+    } finally { rmSync(root, { recursive: true, force: true }); }
+  });
+
+  it("scaneia a superfície Git publicável: ignora build não rastreado, inclui rastreado ignorado e untracked público", async () => {
+    const root = initGitRepo();
+    try {
+      writeFileSync(join(root, ".gitignore"), "dist/\n");
+      mkdirSync(join(root, "dist"));
+      const id = syntheticCpf();
+      writeFileSync(join(root, "dist", "ignored.txt"), `CPF: ${id}`);
+      writeFileSync(join(root, "dist", "tracked.txt"), `CPF: ${id}`);
+      writeFileSync(join(root, "public.txt"), `CPF: ${id}`);
+      execFileSync("git", ["-C", root, "add", ".gitignore"], { shell: false });
+      execFileSync("git", ["-C", root, "add", "-f", "dist/tracked.txt"], { shell: false });
+      const scanned = await scanRepository(root, { schemaVersion: 1, files: [], protectedPaths: [] });
+      expect(scanned.findings.map(({ path }) => path).sort()).toEqual(["dist/tracked.txt", "public.txt"]);
+      expect(scanned.findings.some(({ path }) => path === "dist/ignored.txt")).toBe(false);
+      const failed = await scanRepository(join(root, "missing"), { schemaVersion: 1, files: [], protectedPaths: [] });
+      expect(failed.pending.map(({ type }) => type)).toContain("git_inventory_failed");
+    } finally { rmSync(root, { recursive: true, force: true }); }
   });
 
   it("extrai apenas strings e valores armazenados de XLSX, sem executar fórmula ou macro", () => {

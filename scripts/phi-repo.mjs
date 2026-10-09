@@ -1,7 +1,8 @@
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { readFileSync, lstatSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { inflateRawSync } from "node:zlib";
-import { join, relative, sep } from "node:path";
+import { join, relative, sep, resolve } from "node:path";
 import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs";
 
 const EMAIL = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi;
@@ -32,8 +33,30 @@ const SUPPRESSIBLE = new Set([
   "synthetic_visual_review",
 ]);
 
-export function sha256(bytes) {
-  return createHash("sha256").update(bytes).digest("hex");
+const NON_TEXT_EXTENSIONS = new Set(["pdf", "xlsx", "png", "jpg", "jpeg", "webp", "gif", "bmp", "tif", "tiff", "woff2"]);
+
+export function sha256(bytes, hashMode = "raw", path = "") {
+  let input = bytes;
+  if (hashMode === "utf8-lf") {
+    const extension = path.toLowerCase().split(".").pop() ?? "";
+    if (NON_TEXT_EXTENSIONS.has(extension)) throw new Error("utf8_lf_not_supported_for_binary_format");
+    const buffer = Buffer.isBuffer(bytes) ? bytes : Buffer.from(bytes);
+    if (buffer.includes(0)) throw new Error("utf8_lf_not_supported_for_binary_content");
+    const text = new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(buffer);
+    input = Buffer.from(text.replace(/\r\n/g, "\n"), "utf8");
+  } else if (hashMode !== "raw") {
+    throw new Error("unsupported_hash_mode");
+  }
+  return createHash("sha256").update(input).digest("hex");
+}
+
+function currentFileHash(bytes, path, manifest) {
+  const record = manifestFile(manifest, path);
+  try {
+    return sha256(bytes, record?.hashMode ?? "raw", path);
+  } catch {
+    return null;
+  }
 }
 
 function cpfValido(digits) {
@@ -385,27 +408,54 @@ export async function scanRepository(root, manifest = { files: [], protectedPath
   const result = emptyResult();
   const seen = new Set();
   const protectedPaths = new Map((manifest.protectedPaths ?? []).map((entry) => [entry.path, entry]));
-  const visit = async (directory) => {
-    for (const name of readdirSync(directory)) {
-      if (name === "node_modules" || name === ".git") continue;
-      const absolute = join(directory, name);
-      const stat = statSync(absolute);
-      if (stat.isDirectory()) {
-        await visit(absolute);
-        continue;
-      }
-      if (!stat.isFile()) continue;
-      const path = relative(root, absolute).split(sep).join("/");
+  let paths;
+  try {
+    const listing = execFileSync("git", ["ls-files", "-z", "--cached", "--others", "--exclude-standard"], {
+      cwd: root, encoding: "buffer", shell: false, stdio: ["ignore", "pipe", "ignore"],
+    });
+    paths = [...new Set(listing.toString("utf8").split("\0").filter(Boolean))];
+  } catch {
+    result.pending.push({ type: "git_inventory_failed", path: ".", status: "PENDENTE", reason: "publishable_inventory_unavailable" });
+    result.unscanned.push({ type: "git_inventory", path: ".", status: "UNVERIFIED" });
+    return result;
+  }
+  const rootAbsolute = resolve(root);
+  for (const path of paths) {
+    const absolute = resolve(rootAbsolute, path);
+    const relativeToRoot = relative(rootAbsolute, absolute);
+    if (relativeToRoot.startsWith(`..${sep}`) || relativeToRoot === "..") {
+      result.unscanned.push({ type: "path_outside_repository", path, status: "UNVERIFIED" });
+      result.pending.push({ type: "path_outside_repository", path, status: "PENDENTE", reason: "inventory_path_not_contained" });
+      continue;
+    }
+    let stat;
+    try { stat = lstatSync(absolute); } catch {
+      result.pending.push({ type: "inventory_file_unavailable", path, status: "PENDENTE", reason: "current_worktree_content_unavailable" });
+      result.unscanned.push({ type: "inventory_file_unavailable", path, status: "UNVERIFIED" });
+      continue;
+    }
+    if (stat.isSymbolicLink()) {
       seen.add(path);
-      const protectedEntry = protectedPaths.get(path);
-      if (protectedEntry?.doNotRead === true) {
-        result.unscanned.push({ type: protectedEntry.type ?? "manual_review", path, status: "PENDENTE" });
-        result.pending.push({ type: "protected_path_not_read", path, status: "PENDENTE", evidenceRef: protectedEntry.evidenceRef ?? null });
-        continue;
-      }
-      const bytes = readFileSync(absolute);
-      const fileHash = sha256(bytes);
-      const extension = name.toLowerCase().split(".").pop() ?? "";
+      result.unscanned.push({ type: "symlink_not_followed", path, status: "UNVERIFIED" });
+      result.pending.push({ type: "symlink_not_followed", path, status: "PENDENTE", reason: "symlink_target_not_read" });
+      continue;
+    }
+    if (!stat.isFile()) continue;
+    seen.add(path);
+    const protectedEntry = protectedPaths.get(path);
+    if (protectedEntry?.doNotRead === true) {
+      result.unscanned.push({ type: protectedEntry.type ?? "manual_review", path, status: "PENDENTE" });
+      result.pending.push({ type: "protected_path_not_read", path, status: "PENDENTE", evidenceRef: protectedEntry.evidenceRef ?? null });
+      continue;
+    }
+    const bytes = readFileSync(absolute);
+    const fileHash = currentFileHash(bytes, path, manifest);
+    if (fileHash === null) {
+      result.unscanned.push({ type: "hash_mode_content_unsupported", path, status: "UNVERIFIED" });
+      result.pending.push({ type: "manifest_hash_mode_invalid", path, status: "PENDENTE", reason: "utf8_lf_requires_text_content" });
+      continue;
+    }
+    const extension = path.toLowerCase().split(".").pop() ?? "";
 
       if (["png", "jpg", "jpeg", "webp", "gif", "bmp", "tif", "tiff"].includes(extension)) {
         const magic = imageMagic(path, bytes);
@@ -461,9 +511,7 @@ export async function scanRepository(root, manifest = { files: [], protectedPath
       } catch {
         result.unscanned.push({ type: "binario_opaco", path, status: "UNVERIFIED" });
       }
-    }
-  };
-  await visit(root);
+  }
   for (const entry of manifest.files ?? []) {
     if (!seen.has(entry.path)) result.pending.push({ type: "manifest_path_missing", path: entry.path, status: "PENDENTE" });
   }
