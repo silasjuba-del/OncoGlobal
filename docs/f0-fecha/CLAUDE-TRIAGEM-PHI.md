@@ -25,3 +25,6 @@ Proposta legível por máquina: `docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json` (path, s
 ## Fora do alcance do Claude
 - `docs/referencias/ui-modelo-consulta.webp` (caminho protegido, `doNotRead`) **continua PENDENTE**. Não foi aberto. Precisa de revisão visual do **Dr. Silas**: é a imagem de referência de layout da consulta (D-W5-07). Basta ele dizer "sem dado de paciente" ou "tem dado".
 - O scanner não detecta **nomes** escritos fora de campos rotulados. Esta triagem não afirma que o repositório não tem nomes reais em texto livre.
+
+## Revisão visual do Dr. Silas (2026-10-09)
+- `docs/referencias/ui-modelo-consulta.webp`: o Dr. Silas declarou, literalmente, **"SEM DADO DE PACIENTE"** ao responder no chat operacional do Claude. Status proposto: `public_ui_reference_reviewed`, ou o equivalente no manifesto, com `evidenceRef` = esta seção. O Claude não abriu o arquivo. O hash deve ser calculado pela Astra ao aplicar, para que uma mudança futura do arquivo volte a PENDENTE.

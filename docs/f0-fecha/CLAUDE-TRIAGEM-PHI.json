@@ -463,5 +463,17 @@
       "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:179",
       "revisor": "Claude (auditor cruzado, só leitura)"
     }
+  ],
+  "protegidos": [
+    {
+      "path": "docs/referencias/ui-modelo-consulta.webp",
+      "statusAnterior": "manual_visual_review_required",
+      "statusProposto": "human_visual_review_no_phi",
+      "revisor": "Dr. Silas",
+      "declaracao": "SEM DADO DE PACIENTE",
+      "data": "2026-10-09",
+      "evidenceRef": "docs/f0-fecha/CLAUDE-TRIAGEM-PHI.md#revisão-visual-do-dr-silas-2026-10-09",
+      "observacao": "arquivo não aberto pelo Claude; Astra calcula o sha256 ao aplicar"
+    }
   ]
 }
