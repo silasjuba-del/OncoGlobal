@@ -384,6 +384,6 @@ OPS-008  FECHAMENTO W12 (f0/w1-integrado@2e361a9) → PLN-038   DIARIO.md
       |OP8.1| W12-GROK 01–10 + F1–F4 integrados; verificação verde (1 teste de teclado instável)   FEITO
       |OP8.2| Glossário do modelo padrão da Flash = bloqueante para pré-marcação em produção   PENDENTE (próxima onda)
       |OP8.3| Contratos PROVISORIO-W12 a publicar (6)   PENDENTE
-      |OP8.4| Revisão schema AP (lateralidade, COLORRETAL, CONFLITO, HER2 ultralow)   PENDENTE confirmação
-      |OP8.5| Dr. Silas: 25 orientações do canal · Q4 · Q6 · "mantendo a consulta" · retorno desmarcável · cólon=CCR · rótulos   PENDENTE
+      |OP8.4| Revisão schema AP: 103b91b (lateralidade/topografia, CONFLITO, confiança, HER2 0_ULTRALOW) + 8e0e6ca D-W9-78 (COLORRETAL c/ subsítio, FIGO único, retorno sempre incluído)   FEITO; pulmão MET/RET/BRAF/NTRK/HER2   PRÓXIMA EXTENSÃO
+      |OP8.5| Dr. Silas: 25 orientações do canal · Q4 · Q6 · "mantendo a consulta" · rótulos   PENDENTE
 ```
