@@ -623,3 +623,11 @@ Regras: IA propõe, código calcula, médico decide e assina · ausente = PENDEN
 - Registrados 6 blocos + agrupamento funcional + eixos longitudinal/transversal; mapa ideia × código × lacuna e fatias F1–F8.
 - Decisões do operacional anotadas: D-W9-73 (CTCAE v6 pura, plaquetas 20.000 = G3), D-W9-74 (tontura boolean|null), D-W9-75 (texto livre → grau CTCAE sugerido; canal do paciente sem prescrição), D-W9-76 (só vertigem nova alerta SNC), D-W9-77 (Q1/Q2/Q3/Q5).
 - Nota: PLN-036 já usado (M-AL); este registro é PLN-037.
+
+## PLN-038 — 2026-10-08 — fechamento da onda W12 (OPS-008, f0/w1-integrado@2e361a9)
+
+- Integrados: W12-GROK 01–10, F1 (Flash pontualizada + Tarefas do retorno), F2 (cartão transversal + schema AP), F3, F4 (fechamento real da Flash: rascunho sem assinatura; Finalizar prepara evolução, pedidos e retorno e assina só o exibido via validarComExibicao; APAC só rascunho; dados do ledger).
+- Verificação relatada pelo operacional: tsc ok; fronteiras 290; corpus 125; regras/módulos 465; W11-adv+UI 490 (1 teste de teclado instável sob carga); F1–F4+e2e+server 115; red team 226/226; adv-w8 41/41.
+- Próxima onda (tech lead): publicar contratos PROVISORIO-W12 (ctcaeClinico, retornoToxicidade, intervaloPosQt, canalRedflags, valorAtual, vertigem); renomear fcMin; remover ecog2ComTonturaCorta; FormTriagem com tontura null; caixa do glossário do MODELO PADRÃO da Flash (bloqueante: sem ela nada vem pré-marcado em produção); campo de prazo do retorno na Flash; receitas/ações na Flash sem documento.
+- Revisão do schema AP (PLN-037 ↳ OPS-007): lateralidade/topografia, COLON→COLORRETAL, regras de CONFLITO/confiança, HER2 0_ULTRALOW — status de incorporação não confirmado.
+- Com o Dr. Silas: curadoria das 25 orientações do canal; Q4 perícia; Q6 classificações; "mantendo a consulta"; retorno desmarcável?; cólon = colorretal?; rótulos do cartão.
