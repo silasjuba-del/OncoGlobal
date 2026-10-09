@@ -7,7 +7,7 @@ Base: `f0/f0f-luna1` (HEAD `8543c33`), `docs/MATRIZ-RASTREABILIDADE-F0.md` (cabe
 - **A tarefa original ("mapear 107 linhas sem teste") ficou obsoleta.** A L1 já fez esse mapeamento na revisão C2-L1. **Não há lacuna de teste na F0 para o Cursor preencher.**
 - **Único VERMELHO: Q50**, o portão de fase (PR revisado + demo). Ele fecha sozinho na Fase D, quando o PR e a demo existirem. Não é falta de teste.
 
-## Defeitos de forma (pequenos; a correção é da L1 ou da Astra)
+## Defeitos de forma — CORRIGIDO na v2 da reauditoria: itens 1 e 2 NÃO são defeitos (checklist repetido de propósito; D-W9-75 já dividida)
 1. **D-W9-80 aparece duas vezes.** A 2ª linha está truncada, com colunas faltando: só "conferir autoridade, writer e etapas…". Remover a duplicata.
 2. **D-W9-75 está inteira como F1+ / N-A**, mas tem duas partes:
    - (a) "texto → grau CTCAE sugerido" **já está implementada e provada na F0**: `src/rules/index.ts:avaliarTextoCtcae`, teste `tests/w12-grok/grok-04-texto.test.ts`;
