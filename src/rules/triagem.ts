@@ -72,9 +72,9 @@ export function avaliarTriagem(t: Triagem, ctx: ContextoTriagem, rs: SalaoRulese
   const fc = t.fc.valor;
   if (pendenteSeNulo(fc, "fc", "frequência cardíaca ausente", ctx, rs, pendentes) && plausivel.fc) {
     if (fc > c.fcMax) cortes.push(mot("corte.fc.alta", "frequência cardíaca acima do limite", rs));
-    // FN-01 (Q21) congela FC baixa como anotação. O corte D-W9-37 vive em avaliarCorteSalao.
+    // D-W9-58 · FC < 50 corta (D-W9-37). O campo do contrato continua fcMinNaoCorta; igual ao limite passa.
     else if (fc < c.fcMinNaoCorta) {
-      naoCortes.push(mot("naoCorte.fc.baixa", "frequência cardíaca baixa, anotada", rs));
+      cortes.push(mot("corte.fc.baixa", "frequência cardíaca abaixo do limite", rs));
     }
   }
 
@@ -117,11 +117,12 @@ export function avaliarTriagem(t: Triagem, ctx: ContextoTriagem, rs: SalaoRulese
   if (pendenteSeNulo(ecog, "ecog", "ECOG ausente", ctx, rs, pendentes)) {
     if (c.ecogCorta.includes(ecog)) {
       cortes.push(mot("corte.ecog", "ECOG no limite de corte", rs));
-    } else if (ecog === 2 && t.tontura) {
-      if (c.ecog2ComTonturaCorta) cortes.push(mot("corte.ecog.tontura", "ECOG 2 com tontura", rs));
-      else naoCortes.push(mot("naoCorte.ecog.tontura", "ECOG 2 com tontura, anotado", rs));
     }
   }
+
+  // D-W9-76 · tontura não corta, não pesa no ECOG e não anota naoCorte. A chave ecog2ComTonturaCorta fica no JSON por causa do schema.
+  // D-W9-74 · null é desconhecido: PENDENTE, nunca false.
+  if (t.tontura === null) pendentes.push(mot("pendente.tontura", "tontura desconhecida; não vira ausência", rs));
 
   // D-W9-03 · idade decide a FRENTE; ausente é PENDENTE (nunca 0).
   if (t.idadeAnos === null) pendentes.push(mot("pendente.idadeAnos", "idade ausente", rs));
@@ -353,6 +354,7 @@ export function avaliarCorteSalao(t: Triagem, extra: SinaisExtraW10, rs: SalaoRu
   const tempMax = inteiroPortao(bloco, "tempDecimosMax", nome);
   const spo2Min = inteiroPortao(bloco, "spo2Min", nome);
   const pasMin = inteiroPortao(bloco, "pasMin", nome);
+  const pasMax = inteiroPortao(bloco, "pasMax", nome);
   const fcMin = inteiroPortao(bloco, "fcMin", nome);
   const hbMin = inteiroPortao(bloco, "hbDgDlMin", nome);
   const crMax = inteiroPortao(bloco, "crCentesimosMax", nome);
@@ -392,6 +394,14 @@ export function avaliarCorteSalao(t: Triagem, extra: SinaisExtraW10, rs: SalaoRu
     `PAS ${pas === null ? "" : pas} mmHg abaixo do limite do corte do salão`,
     decisaoPortao(bloco, "pas", nome), rs, motivos, pendentes,
   );
+  if (pas !== null && plausivel.pas && pas > pasMax) {
+    motivos.push(motivoPortao(
+      "corteSalao.pas.alta",
+      `PAS ${pas} mmHg acima do limite do corte do salão`,
+      decisaoPortao(bloco, "pasAlta", nome),
+      rs,
+    ));
+  }
   const fc = t.fc.valor;
   compararLimite(
     fc, plausivel.fc && fc !== null && fc < fcMin,

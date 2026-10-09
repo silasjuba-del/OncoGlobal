@@ -1,4 +1,4 @@
-// GLM-02 · lab-thresholds: header válido (G-17) e só os 3 analitos do salão ativos.
+// GLM-02 · lab-thresholds: header válido (G-17). D-W9-58 ativou CREAT (4 analitos do salão).
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
@@ -17,13 +17,14 @@ describe("lab-thresholds.v1.json", () => {
     expect(validarRuleset(json).ok).toBe(true);
   });
 
-  it("exatamente 3 analitos ativos: HB 80 dg/dL, ANC 1500/µL, PLQ 100000/µL (Q21–Q28)", () => {
+  it("exatamente 4 analitos ativos: HB, ANC, PLQ e CREAT 150 (D-W9-37/58)", () => {
     const ativos = json.analitos.filter((a) => a.ativo);
-    expect(ativos.map((a) => a.codigo).sort()).toEqual(["ANC", "HB", "PLQ"]);
+    expect(ativos.map((a) => a.codigo).sort()).toEqual(["ANC", "CREAT", "HB", "PLQ"]);
     const por = (cod: string) => ativos.find((a) => a.codigo === cod) as Analito;
     expect(por("HB")).toMatchObject({ unidadeCanonica: "dg/dL", limiarInferior: 80, limiarSuperior: null });
     expect(por("ANC")).toMatchObject({ unidadeCanonica: "/µL", limiarInferior: 1500, limiarSuperior: null });
     expect(por("PLQ")).toMatchObject({ unidadeCanonica: "/µL", limiarInferior: 100000, limiarSuperior: null });
+    expect(por("CREAT")).toMatchObject({ unidadeCanonica: "centésimos de mg/dL", limiarInferior: null, limiarSuperior: 150 });
     for (const a of ativos) expect(a.fonte.referencia).toContain("salao-triagem.v1");
   });
 

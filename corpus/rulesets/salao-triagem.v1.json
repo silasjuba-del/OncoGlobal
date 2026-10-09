@@ -1,6 +1,6 @@
 {
-  "header": { "id": "salao-triagem", "versao": "1.0.0", "vigenteDesde": "2026-10-05",
-    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "Q21-Q28 + A7 + K-10/K-11 + D-W9-22g + D-W9-37 + D-W9-38 + D-W9-41 (docs/DECISOES.md)", "trecho": null, "edicao": null }, "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-05" },
+  "header": { "id": "salao-triagem", "versao": "1.1.0", "vigenteDesde": "2026-10-08",
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "Q21-Q28 + A7 + K-10/K-11 + D-W9-22g + D-W9-37 + D-W9-38 + D-W9-41 + D-W9-58 + D-W9-76 (docs/DECISOES.md)", "trecho": null, "edicao": null }, "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-08" },
   "regra": "igual ao limite passa",
   "cortes": {
     "pasMax": 160, "pasMin": 90,
@@ -12,6 +12,11 @@
     "plqMin": 100000,
     "grauCtcaeCorta": 3, "grauCtcaeEmergencia": 4,
     "ecogCorta": [3, 4], "ecog2ComTonturaCorta": false
+  },
+  "vertigem": {
+    "decisao": "D-W9-76",
+    "bloqueiaSalvar": false,
+    "alertaSnc": "investigar SNC (metástase cerebral/cerebelar)"
   },
   "hemogramaValidadeDias": 7,
   "plausibilidade": {
@@ -37,7 +42,7 @@
   "aplicaSemMedicoSe": ["SEM_CORTE", "SEM_PENDENCIA", "PRESCRICAO_VIGENTE"],
   "ciclosLiberadosPorPrescricao": 2,
   "portoes": {
-    "nota": "Dois portões nomeados. Não fundir os objetos (D-W9-22g). Igual ao limite passa. Alerta: bloqueiaSalvar é false. header.versao permanece 1.0.0 porque a suíte FN-01 exige essa string. FC < 50 corta só em corteSalao (D-W9-37); cortes.fcMinNaoCorta da FN-01 continua anotando.",
+    "nota": "Dois portões nomeados. Não fundir os objetos (D-W9-22g). Igual ao limite passa. Alerta: bloqueiaSalvar é false. header.versao 1.1.0 (D-W9-58). FN-01 corta FC < cortes.fcMinNaoCorta (o nome do campo continua no contrato; o comportamento deixou de ser anotação). PAS > 160 está no corte do salão e na FN-01. FC > 120 continua só na FN-01: a triagem do ciclo tem teto próprio (110) e o portão corteSalao não absorve esse teto.",
     "triagemCiclo": {
       "nome": "triagem-do-ciclo",
       "decisao": "D-W9-22g",
@@ -62,16 +67,30 @@
       "tempDecimosMax": 378,
       "spo2Min": 88,
       "pasMin": 90,
+      "pasMax": 160,
       "fcMin": 50,
       "hbDgDlMin": 80,
       "crCentesimosMax": 150,
       "ancMin": 1500,
       "plqMin": 100000,
       "ecogCorta": [3, 4],
+      "fontes": {
+        "tempDecimosMax": "D-W9-37",
+        "spo2Min": "D-W9-37",
+        "pasMin": "D-W9-37",
+        "pasMax": "D-W9-37",
+        "fcMin": "D-W9-37",
+        "hbDgDlMin": "D-W9-37",
+        "crCentesimosMax": "D-W9-37",
+        "ancMin": "D-W9-37",
+        "plqMin": "D-W9-37",
+        "ecogCorta": "D-W9-37"
+      },
       "decisoes": {
         "temp": "D-W9-38",
         "spo2": "D-W9-37",
         "pas": "D-W9-41",
+        "pasAlta": "D-W9-37",
         "fc": "D-W9-37",
         "hb": "D-W9-37",
         "cr": "D-W9-37",

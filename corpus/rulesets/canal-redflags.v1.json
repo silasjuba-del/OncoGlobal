@@ -1,7 +1,8 @@
 {
-  "header": { "id": "canal-redflags", "versao": "1.0.0", "vigenteDesde": "2026-10-05",
-    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "candidatos do PLANO (FN-21); lista FINAL e textos das respostas fixas pendentes do Dr. Silas — pendência 0.8-3 [VERIFICAR]", "trecho": null, "edicao": null },
-    "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-05" },
+  "header": { "id": "canal-redflags", "versao": "1.1.0", "vigenteDesde": "2026-10-08",
+    "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "D-W9-28 + D-W9-38 + D-W9-75; candidatos FN-21 continuam inativos [VERIFICAR]", "trecho": "Orientações gerais em RASCUNHO. Febre estritamente acima de 37,8 °C. Sem dose, sem posologia, sem início de medicamento.", "edicao": null },
+    "curador": "Dr. Silas Negrão", "aprovadoEm": "2026-10-08" },
+  "fraseFinal": "Nada substitui a avaliação presencial do seu médico.",
   "nota": "esqueleto W2/GLM-04: nada ativo; nenhum texto de resposta fixa foi inventado — respostaFixaTemplateId só deixa de ser null quando o template correspondente existir aprovado",
   "redflags": [
     { "id": "febre-em-quimioterapia", "termo": "Febre em paciente em quimioterapia", "sinonimosPt": [], "respostaFixaTemplateId": null, "ativo": false, "fonte": "[VERIFICAR]" },
@@ -10,5 +11,32 @@
     { "id": "dor-toracica", "termo": "Dor torácica", "sinonimosPt": [], "respostaFixaTemplateId": null, "ativo": false, "fonte": "[VERIFICAR]" },
     { "id": "confusao", "termo": "Confusão mental", "sinonimosPt": [], "respostaFixaTemplateId": null, "ativo": false, "fonte": "[VERIFICAR]" },
     { "id": "vomito-incoercivel", "termo": "Vômito incoercível", "sinonimosPt": [], "respostaFixaTemplateId": null, "ativo": false, "fonte": "[VERIFICAR]" }
+  ],
+  "sinais": [
+    { "id": "redflag-01-febre", "termo": "Febre", "termos": ["febre"], "limiarDecimosExclusivo": 378, "orientacao": "Ir ao PS.", "status": "RASCUNHO", "fonte": "D-W9-28 + D-W9-38" },
+    { "id": "redflag-02-falta-de-ar", "termo": "Falta de ar", "termos": ["falta de ar", "dificuldade respiratória", "dispneia"], "limiarDecimosExclusivo": null, "orientacao": "Ir ao PS.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-03-alteracao-urinaria", "termo": "Alteração urinária", "termos": ["parar de urinar", "perder o controle da urina"], "limiarDecimosExclusivo": null, "orientacao": "Ir ao PS.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-04-alteracao-visual", "termo": "Alteração visual", "termos": ["visão dupla", "visão borrada"], "limiarDecimosExclusivo": null, "orientacao": "Ir ao PS.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-05-dor", "termo": "Dor", "termos": ["dor"], "limiarDecimosExclusivo": null, "orientacao": "Ir ao PS.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-06-sangramento", "termo": "Sangramento", "termos": ["sangramento"], "limiarDecimosExclusivo": null, "orientacao": "Ir ao PS.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-07-convulsao-confusao", "termo": "Convulsão ou confusão mental", "termos": ["convulsão", "confusão mental"], "limiarDecimosExclusivo": null, "orientacao": "Ir ao PS.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-08-fraqueza-pernas", "termo": "Fraqueza nas pernas", "termos": ["fraqueza nas pernas"], "limiarDecimosExclusivo": null, "orientacao": "Ir ao PS.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-09-vomito", "termo": "Náusea ou vômito", "termos": ["náusea", "vômito"], "limiarDecimosExclusivo": null, "orientacao": "Ir ao PS.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-10-diarreia", "termo": "Diarreia", "termos": ["diarreia"], "limiarDecimosExclusivo": null, "orientacao": "Hidratação e dieta antidiarreica. Alimentos a evitar. Sinais de gravidade a observar. Suspender anti-hipertensivos e diuréticos. Ir ao PS se houver sinal de gravidade.", "status": "RASCUNHO", "fonte": "D-W9-28 + D-W9-75" },
+    { "id": "redflag-11-constipacao", "termo": "Constipação", "termos": ["constipação", "prisão de ventre"], "limiarDecimosExclusivo": null, "orientacao": "Ir ao PS.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-12-inchaco", "termo": "Inchaço assimétrico de membro", "termos": ["inchaço"], "limiarDecimosExclusivo": null, "orientacao": "Ir ao PS.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-13-mucosite", "termo": "Mucosite ou aftas", "termos": ["mucosite", "afta", "aftas"], "limiarDecimosExclusivo": null, "orientacao": "Ir ao PS.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-14-placas", "termo": "Placas brancas na boca", "termos": ["sapinho", "placas brancas"], "limiarDecimosExclusivo": null, "orientacao": "Falar com o médico.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-15-ferida", "termo": "Ferida com sinais de infecção", "termos": ["ferida"], "limiarDecimosExclusivo": null, "orientacao": "Falar com o médico ou a enfermagem.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-16-picc", "termo": "Deslocamento ou saída do PICC", "termos": ["picc"], "limiarDecimosExclusivo": null, "orientacao": "Ir ao PS.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-17-infusao", "termo": "Dor ou formigamento no local da infusão", "termos": ["local da infusão"], "limiarDecimosExclusivo": null, "orientacao": "Avisar a enfermagem na hora.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-18-neuropatia", "termo": "Neuropatia", "termos": ["neuropatia"], "limiarDecimosExclusivo": null, "orientacao": "Falar com o médico.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-19-atraso-menstrual", "termo": "Atraso menstrual", "termos": ["atraso menstrual"], "limiarDecimosExclusivo": null, "orientacao": "Informar o médico ou a enfermagem.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-20-imuno-neuro", "termo": "Imunoterapia: cefaleia ou perda de força", "termos": ["cefaleia", "perda de força"], "limiarDecimosExclusivo": null, "orientacao": "Reportar à equipe.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-21-imuno-respiratorio", "termo": "Imunoterapia: falta de ar, dor torácica ou tosse", "termos": ["dor torácica", "tosse"], "limiarDecimosExclusivo": null, "orientacao": "Reportar à equipe.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-22-imuno-cansaco", "termo": "Imunoterapia: cansaço extremo ou intolerância ao clima", "termos": ["cansaço extremo", "intolerância a calor", "intolerância a frio"], "limiarDecimosExclusivo": null, "orientacao": "Reportar à equipe.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-23-imuno-figado", "termo": "Imunoterapia: dor no hipocôndrio ou icterícia", "termos": ["hipocôndrio", "icterícia"], "limiarDecimosExclusivo": null, "orientacao": "Reportar à equipe.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-24-imuno-digestivo", "termo": "Imunoterapia: sangue nas fezes ou artralgia", "termos": ["sangue nas fezes", "artralgia"], "limiarDecimosExclusivo": null, "orientacao": "Reportar à equipe.", "status": "RASCUNHO", "fonte": "D-W9-28" },
+    { "id": "redflag-25-triagem", "termo": "Sinais a relatar na triagem do salão", "termos": ["resfriado", "ardência ao urinar"], "limiarDecimosExclusivo": null, "orientacao": "Informar antes da infusão.", "status": "RASCUNHO", "fonte": "D-W9-28" }
   ]
 }
