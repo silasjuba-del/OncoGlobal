@@ -296,7 +296,8 @@ describe("W12-F4 · visão entrega a Flash do ledger", () => {
     const visao = await f.carregar();
     expect(visao.status).toBe(200);
     expect(visao.body.flash).toEqual({ exames: [], retornoDias: null, modeloPadraoSalvo: false,
-      laboratorioPreMarcado: false, imagemPreMarcada: false });
+      laboratorioPreMarcado: false, imagemPreMarcada: false, laboratorios: [], alergia: "Não informada", toxicidades: [],
+      avisos: [], sugestoesLaboratorio: [] });
   });
 
   it("sem serviço de configuração: continua sem modelo", async () => {
@@ -315,8 +316,8 @@ describe("W12-F4 · visão entrega a Flash do ledger", () => {
     f.persistir("ImagingReport", { dataClinica: "2026-12-31", nome: "Exame de data futura", fraseLaudo: "x" });
     const visao = await f.carregar();
     expect(visao.body.flash.exames).toEqual([
-      { data: "2026-10-01", nome: "TC de tórax", fraseLaudo: "sem lesão nova", situacao: "DENTRO_DO_LIMITE" },
-      { data: "2026-09-20", nome: "Biópsia de mama", fraseLaudo: "carcinoma invasivo de tipo não especial", situacao: "SEM_REFERENCIA" },
+      { data: "2026-10-01", nome: "TC de tórax", fraseLaudo: "sem lesão nova", situacao: "DENTRO_DO_LIMITE", eventId: "event-f4-3", sourceIds: ["fonte-f4-3"] },
+      { data: "2026-09-20", nome: "Biópsia de mama", fraseLaudo: "carcinoma invasivo de tipo não especial", situacao: "SEM_REFERENCIA", eventId: "event-f4-2", sourceIds: ["fonte-f4-2"] },
     ]);
   });
 

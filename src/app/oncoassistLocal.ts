@@ -7,6 +7,8 @@ import { criarGateway } from "../kernel/gateway/gateway.js";
 import { criarGerenciadorSessao } from "../server/sessao.js";
 import { criarServidorLocal } from "../server/http.js";
 import { criarOncoassistJev } from "./oncoassist.js";
+import { criarExecutorImprimir } from "./executores/imprimir.js";
+import { criarResolverDocumentoLedger } from "./executores/resolverDocumentoLedger.js";
 
 export interface OpcoesOncoassistLocal {
   dataDir: string;
@@ -45,7 +47,9 @@ export async function iniciarOncoassistLocal(opcoes: OpcoesOncoassistLocal) {
   const sessoes = criarGerenciadorSessao({ medicoId: opcoes.medicoId, crm: opcoes.crm,
     senha: opcoes.senha, duracaoMs: 8 * 60 * 60 * 1000, agora });
   const db = abrirLedger(arquivo);
-  const gateway = criarGateway({ agora, store: sqliteIdempotencia(db), executores: {},
+  const gateway = criarGateway({ agora, store: sqliteIdempotencia(db), executores: {
+    IMPRIMIR: criarExecutorImprimir({dataDir:opcoes.dataDir,agora,resolverDocumento:criarResolverDocumentoLedger(db)}),
+  },
     auditar: (e) => auditar(db, { ator: { tipo: "SISTEMA", id: "oncoassist-local" },
       ...e, politicaVersao: "oncoassist-local-v1" }),
   });

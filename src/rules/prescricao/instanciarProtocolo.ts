@@ -4,10 +4,8 @@
 // Reaproveitamento de FN-04: src/rules só pode importar src/contracts e não pode importar irmãos,
 // então a regra de arredondamento é COPIADA aqui (meio para cima em inteiros, uma única vez) e o teste
 // tests/rules-prescricao/instanciarProtocolo.test.ts prova equivalência com calcularDose (src/rules/dose.ts).
-// BSA: se `dados.bsaM2` vier null, é calculada por Mosteller (D-W9-61); em qualquer caso é LIMITADA a [1,40; 2,20] m² (D-W9-60), com aviso visível.
+// D-F0C-01: SC real, sem piso/teto; se ausente, calculada por Mosteller com peso real.
 // Calvert: dose(mg) = AUC × (ClCr + 25), com ClCr LIMITADO a 125 mL/min (D-W9-60), com aviso visível.
-export const BSA_MIN_M2 = 1.4;
-export const BSA_MAX_M2 = 2.2;
 export const CLCR_MAX_CALVERT = 125;
 
 /** D-W9-61 · Superfície corporal por Mosteller: √(altura cm × peso kg / 3600), em m², 2 casas. Ausente/inválido ⇒ null (PENDENTE). */
@@ -76,9 +74,7 @@ function calcular(item: PrescriptionItem, d: DadosCorporais): { dose: number | n
       if (!valido(d.pesoKg) || !valido(d.alturaCm)) return { dose: null, unidade: "mg", motivo: "mg/m² sem peso/altura" };
       const bsaBase = valido(d.bsaM2) ? d.bsaM2 : bsaMosteller(d.pesoKg, d.alturaCm);
       if (bsaBase === null) return { dose: null, unidade: "mg", motivo: "mg/m² sem superfície corporal" };
-      { const bsa = Math.min(BSA_MAX_M2, Math.max(BSA_MIN_M2, bsaBase));
-        const aviso = bsa !== bsaBase ? `BSA ${bsaBase} m² limitada a ${bsa} m² (D-W9-60)` : null;
-        return { dose: arredondaMeioParaCima(std * bsa), unidade: "mg", motivo: null, aviso }; }
+      return { dose: arredondaMeioParaCima(std * bsaBase), unidade: "mg", motivo: null, aviso: null };
     case "AUC":
       if (std === null) return { dose: null, unidade: "mg", motivo: "AUC alvo ausente na ficha" };
       if (d.clcr === null || !Number.isFinite(d.clcr) || d.clcr < 0) return { dose: null, unidade: "mg", motivo: "AUC (Calvert) sem clearance de creatinina" };

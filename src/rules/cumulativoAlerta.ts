@@ -101,3 +101,121 @@ export function avaliarCumulativoAlerta(...args: Parameters<typeof calcularcumul
   const achados = [r.achado];
   return { ...r, inputs_used: [...new Set(achados.flatMap((a) => a.inputs_used))], inputs_missing: [...new Set(achados.flatMap((a) => a.inputs_missing))] };
 }
+
+export interface AdministracaoExposicao {
+  adminId: string;
+  patientId: string;
+  episodioId: string;
+  droga: string;
+  status: "COMPLETA" | "PARCIAL" | "INTERROMPIDA" | "OMITIDA";
+  /** Dose efetivamente administrada, normalizada pela SC daquela administração. */
+  quantidadeEfetivaMgM2: number | null;
+  unidade: string;
+  fonte: string | null;
+  /** Instante efetivo. O adaptador as-of exige e valida este campo sem herdar criadoEm. */
+  realizadaEm?: string | null;
+}
+export interface EntradaExposicaoCumulativa {
+  patientId: string;
+  droga: string;
+  administracoes: readonly AdministracaoExposicao[];
+  historicoCompleto: boolean | null;
+  fonteCompletude: string | null;
+}
+export interface LimiteExposicaoCumulativa {
+  ativo: boolean;
+  regraId: string;
+  versao: string;
+  droga: string;
+  unidade: string;
+  maximo: number | null;
+  comparador: "GT" | "GTE";
+  fonte: string | null;
+}
+export interface ResultadoExposicaoCumulativa {
+  patientId: string;
+  droga: string;
+  estado: "AVISO" | "SEM_AVISO" | "PENDENTE";
+  totalConhecidoMgM2: number | null;
+  /** Só preenchido quando a completude longitudinal está documentada. */
+  totalMgM2: number | null;
+  unidade: "mg/m2";
+  adminIds: string[];
+  episodios: string[];
+  fontes: string[];
+  pendencias: string[];
+  regraVersao: string | null;
+  limiteFonte: string | null;
+  consultaSegue: true;
+}
+
+function decimalExposicao(n: number): { inteiro: bigint; casas: number } {
+  const [mantissa = "0", expoente = "0"] = n.toString().split("e");
+  const [inteira = "0", fracao = ""] = mantissa.split(".");
+  const casas = fracao.length - Number(expoente);
+  return casas < 0 ? { inteiro: BigInt(inteira + fracao) * 10n ** BigInt(-casas), casas: 0 }
+    : { inteiro: BigInt(inteira + fracao), casas };
+}
+
+/** F14: alcance paciente × droga entre episódios; não soma equivalência entre moléculas. */
+export function avaliarExposicaoCumulativa(e: EntradaExposicaoCumulativa, limite: LimiteExposicaoCumulativa | null): ResultadoExposicaoCumulativa {
+  const temFonte = (f: string | null): f is string => typeof f === "string" && f.trim().length > 0 && !f.includes("[VERIFICAR]");
+  const r: ResultadoExposicaoCumulativa = { patientId: e.patientId, droga: e.droga, estado: "PENDENTE", totalConhecidoMgM2: null,
+    totalMgM2: null, unidade: "mg/m2", adminIds: [], episodios: [], fontes: [], pendencias: [], regraVersao: limite?.versao ?? null,
+    limiteFonte: limite?.fonte ?? null, consultaSegue: true };
+  if (!e.patientId.trim() || !e.droga.trim()) return { ...r, pendencias: ["ESCOPO_AUSENTE"] };
+  const unicas = new Map<string, AdministracaoExposicao>();
+  const assinaturas = new Map<string, string>();
+  for (const a of e.administracoes) {
+    if (a.patientId !== e.patientId || a.droga !== e.droga) continue;
+    if (!a.adminId.trim() || !a.episodioId.trim() || !temFonte(a.fonte) || a.unidade !== "mg/m2" ||
+      typeof a.quantidadeEfetivaMgM2 !== "number" || !Number.isFinite(a.quantidadeEfetivaMgM2) || a.quantidadeEfetivaMgM2 < 0 ||
+      !["COMPLETA", "PARCIAL", "INTERROMPIDA", "OMITIDA"].includes(a.status) || (a.status === "OMITIDA" && a.quantidadeEfetivaMgM2 !== 0)) {
+      return { ...r, pendencias: [`ADMINISTRACAO_INVALIDA:${a.adminId}`] };
+    }
+    const assinatura = JSON.stringify([a.episodioId, a.status, a.quantidadeEfetivaMgM2, a.unidade, a.realizadaEm ?? null]);
+    if (assinaturas.has(a.adminId) && assinaturas.get(a.adminId) !== assinatura) return { ...r, pendencias: [`CONFLITO_ADMINISTRACAO:${a.adminId}`] };
+    assinaturas.set(a.adminId, assinatura);
+    unicas.set(a.adminId, a);
+    if (!r.fontes.includes(a.fonte)) r.fontes.push(a.fonte);
+  }
+  if (!unicas.size) return { ...r, pendencias: ["HISTORICO_AUSENTE"] };
+  const efetivas = [...unicas.values()].filter((a) => a.status !== "OMITIDA");
+  // Ordenação determinística para que replay e ordem de eventos não alterem a soma decimal.
+  efetivas.sort((a, b) => a.adminId < b.adminId ? -1 : a.adminId > b.adminId ? 1 : 0);
+  const decimais = efetivas.map((a) => decimalExposicao(a.quantidadeEfetivaMgM2!));
+  const casas = Math.max(0, ...decimais.map((d) => d.casas));
+  const somaInteira = decimais.reduce((soma, d) => soma + d.inteiro * 10n ** BigInt(casas - d.casas), 0n);
+  const total = Number(`${somaInteira}e-${casas}`);
+  if (!Number.isFinite(total)) return { ...r, pendencias: ["SOMA_INVALIDA"] };
+  r.totalConhecidoMgM2 = total;
+  r.adminIds = efetivas.map((a) => a.adminId);
+  r.episodios = [...new Set(efetivas.map((a) => a.episodioId))];
+  const completo = e.historicoCompleto === true && temFonte(e.fonteCompletude);
+  if (!completo) r.pendencias.push("HISTORICO_LONGITUDINAL_INCOMPLETO");
+  else { r.totalMgM2 = total; r.fontes.push(e.fonteCompletude!); }
+  if (!limite || limite.ativo !== true || !limite.regraId.trim() || !limite.versao.trim() || limite.droga !== e.droga ||
+    limite.unidade !== "mg/m2" || !temFonte(limite.fonte) || typeof limite.maximo !== "number" ||
+    !Number.isFinite(limite.maximo) || limite.maximo <= 0 || !["GT", "GTE"].includes(limite.comparador)) {
+    r.pendencias.push("LIMITE_CURADO_INCOMPATIVEL_OU_AUSENTE"); return r;
+  }
+  // Compara decimais exatos, evitando falso excesso por 0.1 + 0.2 > 0.3.
+  const maximo = decimalExposicao(limite.maximo);
+  const escala = Math.max(casas, maximo.casas);
+  const totalComparavel = somaInteira * 10n ** BigInt(escala - casas);
+  const maximoComparavel = maximo.inteiro * 10n ** BigInt(escala - maximo.casas);
+  const excedido = limite.comparador === "GTE" ? totalComparavel >= maximoComparavel : totalComparavel > maximoComparavel;
+  r.estado = excedido ? "AVISO" : completo ? "SEM_AVISO" : "PENDENTE";
+  return r;
+}
+
+export type ResultadoTotalExposicao = Omit<ResultadoExposicaoCumulativa, "estado" | "regraVersao" | "limiteFonte"> & {
+  estado: "TOTAL_DOCUMENTADO" | "PENDENTE";
+  comparacao: "NAO_REALIZADA";
+};
+/** Opt-in explícito: documenta a soma e sua completude, sem comparação ou conclusão de segurança. */
+export function calcularTotalExposicao(e: EntradaExposicaoCumulativa): ResultadoTotalExposicao {
+  const { estado: _estado, regraVersao: _versao, limiteFonte: _fonte, ...r } = avaliarExposicaoCumulativa(e, null);
+  const pendencias = r.pendencias.filter((p) => p !== "LIMITE_CURADO_INCOMPATIVEL_OU_AUSENTE");
+  return { ...r, pendencias, estado: pendencias.length ? "PENDENTE" : "TOTAL_DOCUMENTADO", comparacao: "NAO_REALIZADA" };
+}

@@ -31,6 +31,15 @@ import { projetarFlash, rascunhoFlashDoContexto, type ModeloFlash } from "./flas
 import { projetarVinculosContato, type ContatoProjetado } from "../kernel/projections/vinculosContato.js";
 import { hashConteudoExibido } from "./sessao.js";
 import { projetarRetratoTransversal } from "./retratoTransversal.js";
+import { projetarContextoClinico, projetarHistoricoClinico } from "./f0c/contextoClinico.js";
+import { avaliarConsulta, type EntradaAvaliacaoConsulta } from "./f0c/avaliacaoConsulta.js";
+import { coletarFontesSalao } from "./f0c/salao.js";
+import { projetarInstrumentosClinicos } from "./f0c/instrumentosClinicos.js";
+import type { RegraInstrumento } from "../contracts/f0c/instrumentos.js";
+import { projetarCondicionaisClinicas, type EntradaCondicionaisClinicas } from "./f0c/condicionaisClinicas.js";
+import { projetarIntervaloCiclo } from "./f0c/intervaloCiclo.js";
+import { avaliarInteracoesCondicionadasDaConsulta } from "./f0c/interacoesCondicionadas.js";
+import { projetarCumulativoClinico } from "./f0c/cumulativoClinico.js";
 
 const RecistSerieSchema = z.object({
   patientId: z.string().min(1), tumorLotId: z.string().nullable(), episodioId: z.string().min(1),
@@ -155,7 +164,11 @@ export function lerPaciente(db: DatabaseSync, patientId: string) {
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value ?? null;
 }
 export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, sessao: Sessao,
-  tumorLotId?: string | null, config: { limiarPlaquetas?: LimiarAlertaPlaquetas | null; modeloFlash?: ModeloFlash | null } = {}) {
+  tumorLotId?: string | null, config: { limiarPlaquetas?: LimiarAlertaPlaquetas | null; modeloFlash?: ModeloFlash | null;
+    templates?: readonly unknown[]; salaoRuleset?: unknown; interacoes?: EntradaAvaliacaoConsulta["interacoes"];
+    catalogo?: EntradaAvaliacaoConsulta["catalogo"]; feveRuleset?: EntradaAvaliacaoConsulta["feveRuleset"];
+    instrumentos?: readonly RegraInstrumento[];
+    condicionais?: {regras:EntradaCondicionaisClinicas["regras"];termos:NonNullable<EntradaCondicionaisClinicas["regrasTermos"]>} } = {}) {
   const all = eventos(db), paciente = porTipo(all, "Paciente", Paciente)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value;
   if (!paciente) return { codigo: "PACIENTE_NAO_ENCONTRADO" as const };
@@ -274,6 +287,38 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   const eventosDaConsulta = all.filter((event) => event.patientId === patientId
     && (event.tumorLotId === null || event.tumorLotId === (lote?.tumorLotId ?? undefined)));
   const alertaPlaquetas = alertaPlaquetasDaConsulta(eventosDaConsulta, config.limiarPlaquetas ?? null);
+  const contextoClinico = projetarContextoClinico({ eventos: all, patientId, tumorLotId: lote?.tumorLotId ?? null,
+    encounterId: current.encounterId, agora, episodio, ciclo: ciclos.at(-1) ?? null, ...(config.templates ? {templates:config.templates} : {}) });
+  const condicionais=projetarCondicionaisClinicas({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
+    encounterId:current.encounterId,agora,programados:ciclos.at(-1)?.itens.map(item=>item.droga) ?? null,
+    regras:config.condicionais?.regras ?? [],regrasTermos:config.condicionais?.termos ?? []});
+  const avisosCondicionais=condicionais.avaliacoes.filter(r=>r.estado==="AVISO").flatMap(r=>r.motivos);
+  const pendenciasCondicionais=condicionais.avaliacoes.filter(r=>r.estado==="PENDENTE").flatMap(r=>r.pendencias);
+  const intervalo=projetarIntervaloCiclo({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
+    encounterId:current.encounterId,agora,hoje:civil.dataCivil,episodio,ciclo:ciclos.at(-1) ?? null,templates:config.templates ?? []});
+  const interacoesCondicionadas=avaliarInteracoesCondicionadasDaConsulta({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
+    encounterId:current.encounterId,agora,regrasInteracoes:config.interacoes?.interacoes ?? [],...(config.catalogo?{catalogo:config.catalogo}:{})});
+  const avisosInteracoesCondicionadas=interacoesCondicionadas.resultados.filter(r=>r.estado==="AVISO");
+  const cumulativo=projetarCumulativoClinico({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
+    encounterId:current.encounterId,agora,limites:[],
+    programados:ciclos.at(-1)?.itens.map(item=>item.droga).filter(d=>d.trim().toLowerCase()==="doxorrubicina") ?? null});
+  const avaliacao = avaliarConsulta({ eventos: all, patientId, tumorLotId: lote?.tumorLotId ?? null,
+    encounterId:current.encounterId, agora, hoje:civil.dataCivil, paciente, episodio, ciclo:ciclos.at(-1) ?? null,
+    plaquetas:sinalPlaquetas(alertaPlaquetas), salaoRuleset:config.salaoRuleset,
+    ...(config.interacoes ? {interacoes:config.interacoes} : {}), ...(config.catalogo ? {catalogo:config.catalogo} : {}),
+    ...(config.feveRuleset ? {feveRuleset:config.feveRuleset} : {}),
+    ...(interacoesCondicionadas.resultados.length ? {interacoesCondicionadas:{
+      estado:avisosInteracoesCondicionadas.length?"VERMELHO" as const:interacoesCondicionadas.resultados.some(r=>r.estado==="PENDENTE")?"PENDENTE" as const:"VERDE" as const,
+      motivos:interacoesCondicionadas.resultados.filter(r=>r.estado!=="NAO_APLICAVEL").map(r=>({texto:r.motivo}))}} : {}),
+    ...(intervalo.aplicavel !== false ? {intervalo:{estado:intervalo.estado==="AVISO"?"VERMELHO" as const:intervalo.estado==="PENDENTE"?"PENDENTE" as const:"VERDE" as const,
+      motivos:intervalo.estado==="SEM_AVISO"?[]:[{texto:`Intervalo do ciclo: ${intervalo.motivo ?? "PENDENTE"}`} ]}} : {}),
+    ...(condicionais.avaliacoes.some(r=>r.estado!=="NAO_APLICAVEL") ? {condicionais:{
+      estado:avisosCondicionais.length ? "VERMELHO" as const : pendenciasCondicionais.length ? "PENDENTE" as const : "VERDE" as const,
+      motivos:[...avisosCondicionais,...pendenciasCondicionais].map(texto=>({texto}))}} : {}) });
+  pendenciasLeitura.push(...contextoClinico.pendencias);
+  const historicoClinico = projetarHistoricoClinico({ eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
+    encounterId:current.encounterId,agora });
+  const historicoSistemico = historicoDaConsulta(eventosDaConsulta);
   let documentosComIntegridadePendente = 0;
   const historicoDocumentos = eventosDaConsulta.filter((evento) => evento.tipo === "DOCUMENTO"
     && evento.revisao === "ASSINADO").flatMap((evento) => {
@@ -299,14 +344,16 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     hoje: civil.dataCivil, patientId, encounterId: current.encounterId,
     tumorLotId: lote?.tumorLotId ?? null,
     cabecalho: { hoje: civil.dataCivil, paciente, lotes, loteSelecionadoId: lote?.tumorLotId ?? null,
-      episodio, ciclo: ciclos.at(-1) ?? null, semaforo: "PENDENTE" as const,
+      episodio, ciclo: ciclos.at(-1) ?? null, semaforo: avaliacao.elegibilidade.cor,
       pendentes: pendenciasLeitura.length + pendenciasCampos, contatosDesdeUltima: (() => {
         const contacts = porTipo(all, "Contato", Contato);
         const projected = projetarVinculosContato(contacts, all);
         return contacts.map((x) => contatoUnico(x.value.contatoId, patientId, projected))
           .filter((x): x is Contato => x !== null);
       })(),
-      alergiasPaciente: [], comorbidadesPaciente: [] },
+      alergiasPaciente: contextoClinico.flash.alergia === "Não informada" ? [] : [contextoClinico.flash.alergia],
+      comorbidadesPaciente: Array.isArray(contextoClinico.campos.comorbidades.valor)
+        ? contextoClinico.campos.comorbidades.valor.filter((v):v is string=>typeof v === "string") : [] },
     alertas: [], delta: { temSnapshotAnterior: false, itens: [] }, evidencias: [],
     evolucoesRascunho,
     resumoEvolucao: resumoEvolucaoComConflitos,
@@ -321,13 +368,23 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     estado: "PARCIAL" as const, pendenciasLeitura,
     // W11-H22: calculados aqui, a partir do ledger, com a data do servidor passada explicitamente.
     datasFixas: projetarDatasFixas(eventosDaConsulta, civil.dataCivil),
-    historicoTratamento: historicoDaConsulta(eventosDaConsulta),
+    historicoTratamento: { ...historicoSistemico,
+      linhas:[...historicoSistemico.linhas,...historicoClinico.linhas].sort((a,b)=>(a.data ?? a.periodo?.inicio ?? "").localeCompare(b.data ?? b.periodo?.inicio ?? "")),
+      codigo:historicoSistemico.codigo ?? historicoClinico.codigo },
     alertaPlaquetas,
     // W12-F4: Flash calculada do ledger; a data de referência é a do servidor, passada explicitamente.
-    flash: projetarFlash(eventosDaConsulta, civil.dataCivil, config.modeloFlash ?? null,
+    flash: { ...projetarFlash(eventosDaConsulta, civil.dataCivil, config.modeloFlash ?? null,
       rascunhoFlashDoContexto(db, { patientId, encounterId: current.encounterId, tumorLotId: lote?.tumorLotId ?? null })),
-    elegibilidade: elegibilidadeCiclo({ portaCiclo: null, triagem: null, ctcae: null, interacoes: null,
-      funcaoOrganica: null, plaquetas: sinalPlaquetas(alertaPlaquetas) }),
+      ...contextoClinico.flash, avisos:[...avaliacao.avisosFlash,...avisosCondicionais,...avisosInteracoesCondicionadas.map(r=>r.motivo)],sugestoesLaboratorio:avaliacao.sugestoesLaboratorio },
+    elegibilidade: avaliacao.elegibilidade,
+    avaliacaoClinica: avaliacao,
+    condicionaisClinicas:condicionais,
+    interacoesCondicionadas,
+    intervaloCiclo:intervalo,
+    cumulativoClinico:cumulativo,
+    camposClinicos: contextoClinico.campos,
+    instrumentosClinicos:projetarInstrumentosClinicos({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
+      encounterId:current.encounterId,agora,regras:config.instrumentos ?? []}).avaliacoes,
   };
 }
 export function lerLotes(db: DatabaseSync, patientId: string) {
@@ -513,15 +570,21 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown)
     requisitosAplicaveis: ["pas", "fc", "spo2", "tempDecimos", "hbDgDl", "anc", "plq", "coletaHemograma", "ecog", "grauCtcae"] };
   const calculados = triagens.flatMap((p) => {
     if (!p.paciente || !p.fontes[0]) return [];
-    const base = avaliarTriagem(p.triagem, contexto, ruleset);
-    const portao = avaliarCorteSalao(p.triagem, { pad: null, crCentesimos: null }, ruleset);
+    const fontesSalao = coletarFontesSalao({eventos:allEvents,patientId:p.patientId,encounterId:p.encounterId,hoje:civil.dataCivil,agora});
+    const base = avaliarTriagem(p.triagem, {...contexto,prescricaoVigente:fontesSalao.prescricaoVigente}, ruleset);
+    const brutoPortao = avaliarCorteSalao(p.triagem, { pad: fontesSalao.pad, crCentesimos: fontesSalao.creatininaCentesimos }, ruleset);
+    // D-W9-82: ausência do dado não coletado no salão vira aviso, sem encaminhamento universal.
+    // Plausibilidade/conflito de dados presentes e os outros critérios não são suprimidos.
+    const portao = {...brutoPortao,pendentes:brutoPortao.pendentes.filter(m =>
+      !(fontesSalao.creatininaCentesimos === null && m.codigo === "pendente.corteSalao.cr.alta")
+      && !(fontesSalao.pad === null && m.codigo === "pendente.corteSalao.pad.alta"))};
     const temCorte = base.cortes.length > 0 || portao.motivos.length > 0;
     const temPendencia = base.pendentes.length > 0 || portao.pendentes.length > 0;
     const destino = temCorte || temPendencia ? "FILA_MEDICO" as const : base.destino;
     return [{ card: { entrada: { patientId: p.patientId, ecog: p.triagem.ecog.valor,
       recurso: p.triagem.recurso, idadeAnos: p.triagem.idadeAnos, chegadaEm: p.chegadaEm },
       destino, emergencia: base.emergencia, temCorte, nome: p.paciente.nome },
-      base, portao, fonte: p.fontes[0] }];
+      base, portao, fonte: p.fontes[0], avisos:fontesSalao.avisos.map(texto=>({patientId:p.patientId,texto})) }];
   });
   const ordenadas = ordenarFila(calculados.map((x) => x.card.entrada), ruleset);
   const byPatient = new Map(calculados.map((x) => [x.card.entrada.patientId, x.card]));
@@ -548,6 +611,7 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown)
   });
   return { hoje: civil.dataCivil, ruleset, contexto, fonte: calculados[0]?.fonte ?? null,
     cartoes, pacientes: pacientesOrdenados, decisoes: decisionesVisiveis,
+    avisos:calculados.flatMap(x=>x.avisos),
     estado: "PARCIAL" as const,
     pendencias: [...calculados.flatMap((x) => [...x.base.pendentes, ...x.portao.pendentes]),
       ...pacientesComTriagemDuplicada.map(() => ({ codigo: "TRIAGEM_DUPLICADA", estado: "PENDENTE" as const }))] };

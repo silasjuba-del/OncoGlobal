@@ -1,0 +1,266 @@
+{
+  "id": "classes-farmacos-f0c",
+  "versao": "1.1.0",
+  "escopo": "Recorte documental por pares e apresentações: membros explícitos, sem substring. Não comprova cobertura universal, exposição simultânea nem ausência de interação.",
+  "aliases": {
+    "capecitabina": [
+      "capecitabine"
+    ],
+    "varfarina": [
+      "warfarin"
+    ],
+    "fenitoína": [
+      "phenytoin"
+    ],
+    "brivudina": [
+      "brivudine"
+    ],
+    "fluorouracila": [
+      "fluorouracil",
+      "5-FU",
+      "5-fluorouracil"
+    ],
+    "tegafur": [],
+    "irinotecano": [
+      "irinotecan",
+      "Camptosar",
+      "irinotecano convencional"
+    ],
+    "docetaxel": [
+      "docetaxel IV"
+    ],
+    "cisplatina": [
+      "cisplatin"
+    ],
+    "carboplatina": [
+      "carboplatin"
+    ],
+    "pemetrexede": [
+      "pemetrexed",
+      "Alimta"
+    ],
+    "metotrexato": [
+      "methotrexate",
+      "MTX",
+      "metotrexato oral",
+      "metotrexato IV"
+    ],
+    "sulfametoxazol-trimetoprima": [
+      "sulfamethoxazole-trimethoprim",
+      "SMX-TMP",
+      "sulfametoxazol + trimetoprima",
+      "cotrimoxazol"
+    ],
+    "doxorrubicina": [
+      "doxorubicin"
+    ],
+    "trastuzumabe": [
+      "trastuzumab",
+      "Herceptin"
+    ],
+    "fenobarbital": [
+      "phenobarbital"
+    ],
+    "carbamazepina": [
+      "carbamazepine"
+    ],
+    "rifampicina": [
+      "rifampin",
+      "rifampicin"
+    ],
+    "rifabutina": [
+      "rifabutin"
+    ],
+    "erva-de-são-joão": [
+      "St. John's wort",
+      "Hypericum perforatum"
+    ],
+    "cetoconazol sistêmico": [
+      "cetoconazol oral",
+      "ketoconazole oral"
+    ],
+    "itraconazol": [
+      "itraconazole"
+    ],
+    "claritromicina": [
+      "clarithromycin"
+    ],
+    "indinavir": [],
+    "lopinavir": [],
+    "nefazodona": [
+      "nefazodone"
+    ],
+    "nelfinavir": [],
+    "ritonavir": [],
+    "saquinavir": [],
+    "telaprevir": [],
+    "voriconazol": [
+      "voriconazole"
+    ],
+    "atazanavir": [],
+    "genfibrozila": [
+      "gemfibrozil"
+    ],
+    "telitromicina": [
+      "telithromycin"
+    ],
+    "gentamicina sistêmica": [
+      "gentamicina IV",
+      "gentamicina IM",
+      "gentamicin injection"
+    ],
+    "amicacina sistêmica": [
+      "amicacina IV",
+      "amicacina IM",
+      "amikacin injection"
+    ],
+    "ibuprofeno": [
+      "ibuprofen",
+      "ibuprofeno oral"
+    ],
+    "ácido acetilsalicílico": [
+      "aspirin",
+      "AAS"
+    ],
+    "naproxeno": [
+      "naproxen"
+    ],
+    "vacina tríplice viral": [
+      "MMR"
+    ],
+    "vacina varicela": [
+      "varicella vaccine"
+    ],
+    "vacina febre amarela": [
+      "yellow fever vaccine"
+    ],
+    "vacina influenza viva intranasal": [
+      "LAIV"
+    ],
+    "vacina BCG": [
+      "BCG vaccine"
+    ]
+  },
+  "classes": {
+    "antagonista da vitamina K": [
+      "varfarina"
+    ],
+    "fluoropirimidinas listadas na bula Xeloda": [
+      "capecitabina",
+      "fluorouracila",
+      "tegafur"
+    ],
+    "indutores de CYP3A4 listados na bula Camptosar": [
+      "fenitoína",
+      "fenobarbital",
+      "carbamazepina",
+      "rifampicina",
+      "rifabutina",
+      "erva-de-são-joão"
+    ],
+    "inibidores de CYP3A4 ou UGT1A1 listados na bula Camptosar": [
+      "cetoconazol sistêmico",
+      "claritromicina",
+      "indinavir",
+      "itraconazol",
+      "lopinavir",
+      "nefazodona",
+      "nelfinavir",
+      "ritonavir",
+      "saquinavir",
+      "telaprevir",
+      "voriconazol",
+      "atazanavir",
+      "genfibrozila"
+    ],
+    "inibidores fortes de CYP3A4 listados na bula docetaxel": [
+      "cetoconazol sistêmico",
+      "itraconazol",
+      "claritromicina",
+      "atazanavir",
+      "indinavir",
+      "nefazodona",
+      "nelfinavir",
+      "ritonavir",
+      "saquinavir",
+      "telitromicina",
+      "voriconazol"
+    ],
+    "aminoglicosídeos sistêmicos verificados": [
+      "gentamicina sistêmica",
+      "amicacina sistêmica"
+    ],
+    "AINEs sistêmicos verificados": [
+      "ácido acetilsalicílico",
+      "ibuprofeno",
+      "naproxeno"
+    ],
+    "citotóxicos do recorte vacinal": [
+      "capecitabina",
+      "fluorouracila",
+      "irinotecano",
+      "docetaxel",
+      "cisplatina",
+      "metotrexato",
+      "doxorrubicina"
+    ],
+    "vacinas vivas verificadas": [
+      "vacina tríplice viral",
+      "vacina varicela",
+      "vacina febre amarela",
+      "vacina influenza viva intranasal",
+      "vacina BCG"
+    ]
+  },
+  "fonte": {
+    "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=007e3432-c8aa-2a76-52ba-c346924c08a7&version=15",
+    "secao": "7.2",
+    "verificadoEm": "2026-10-10"
+  },
+  "fontesClasses": {
+    "indutores de CYP3A4 listados na bula Camptosar": {
+      "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e518dfc6-7e93-4fee-a66c-51e1ab71c056",
+      "secao": "7.2; Revised4/2024"
+    },
+    "inibidores de CYP3A4 ou UGT1A1 listados na bula Camptosar": {
+      "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e518dfc6-7e93-4fee-a66c-51e1ab71c056",
+      "secao": "7.3; Revised4/2024"
+    },
+    "inibidores fortes de CYP3A4 listados na bula docetaxel": {
+      "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=654319ae-e5f9-4a6a-b566-201923153b6e",
+      "secao": "2.7; Revised8/2025; Alembic"
+    },
+    "fluoropirimidinas listadas na bula Xeloda": {
+      "referencia": "https://www.ema.europa.eu/en/documents/product-information/xeloda-epar-product-information_en.pdf",
+      "secao": "4.5"
+    },
+    "aminoglicosídeos sistêmicos verificados": {
+      "referencias": [
+        "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=51fffac8-fb6e-4f7f-b2de-440252781a42",
+        "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c0f57839-1c9b-49e5-8c7a-708e2d16495d"
+      ],
+      "secao": "DESCRIPTION; apresentações injetáveis sistêmicas"
+    },
+    "AINEs sistêmicos verificados": {
+      "referencia": "https://www.dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=0ef4913b-5dc3-45bc-9cef-58601f8d2a79&type=display",
+      "secao": "Warnings lista aspirin, ibuprofen, naproxen; não inclui tópicos"
+    },
+    "vacinas vivas verificadas": {
+      "referencia": "https://www.cdc.gov/vaccines/hcp/imz-best-practices/altered-immunocompetence.html",
+      "secao": "Safety of Live, Attenuated Viral and Bacterial Vaccines"
+    },
+    "citotóxicos do recorte vacinal": {
+      "referencia": "https://www.cdc.gov/vaccines/hcp/imz-best-practices/altered-immunocompetence.html",
+      "secao": "Other Immunosuppressive Drugs; regra permanece inativa sem exposição temporal"
+    }
+  },
+  "limites": [
+    "Não associar nomes de formulação lipossomal a nomes convencionais.",
+    "Gentamicina/amicacina sem via explícita não entram no grupo sistêmico.",
+    "Cetoconazol tópico não entra nas listas de inibição sistêmica.",
+    "Vacina recombinante ou inativada não é vacina viva.",
+    "Lista de AINEs é parcial; paracetamol não pertence.",
+    "Classes não ampliam regras inativas para alertas ativos."
+  ],
+  "verificadoEm": "2026-10-10"
+}

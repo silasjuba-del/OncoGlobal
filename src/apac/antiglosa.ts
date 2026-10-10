@@ -211,6 +211,9 @@ export function antiglosa(apac: Apac, ctx: ContextoAntiglosa): VereditoAntiglosa
       continue;
     }
     const proc = r.proc;
+    if (proc.instrumentosRegistro && !proc.instrumentosRegistro.includes(ehPrincipal ? "06" : "07")) {
+      add("AG-01",p.campo,"BLOQUEIA_EXPORTACAO",`Procedimento ${proc.codigo} não possui instrumento APAC ${ehPrincipal ? "principal" : "secundário"} nesta competência.`,F.sigtap);
+    }
     // AG-02 CID x procedimento (relacionamento ausente = não verificado, dito explicitamente)
     if (cid) {
       if (proc.cidsCompativeis === null)

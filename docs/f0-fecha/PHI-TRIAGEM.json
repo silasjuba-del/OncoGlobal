@@ -1675,7 +1675,7 @@
     },
     {
       "path": "tests/rules-w8/caso07.test.ts",
-      "sha256": "e48253330ec84297e68547f88b130ddd99f24bf8022c50cf4df55f43ddb83250",
+      "sha256": "78b6253d84c0e1480f86a9cadee03787330114f73e114f1c1d2d03283114f3f0",
       "items": [
         {
           "type": "cns",
@@ -2607,7 +2607,7 @@
     },
     {
       "path": "tests/f0-fecha/phi-repo.test.ts",
-      "sha256": "07f9fd2c28db5338c939d841dd9b54e2fc8b18766e272e64b00334ed8018f038",
+      "sha256": "60dc236d0eb43c9ff748a77e8dea9872ac74f1fa10eae1ca8a6f1fb141191ebe",
       "hashMode": "utf8-lf",
       "items": [
         {
@@ -2874,6 +2874,15 @@
           "evidenceRef": "docs/f0-fecha/EQUIVALENCIA-FINAL.md; docs/f0-fecha/inventario-final.json:556"
         }
       ]
+    },
+    {
+      "path": "corpus/f0c/sigtap/fontes/TabelaUnificada_202609_v2610050950.zip",
+      "sha256": "e2f1a210d8de4148f946e74f18b7726d4bc8145c97f48c2338874851789a03df",
+      "category": "official_public_archive",
+      "magic": "zip_local_header",
+      "evidenceRef": "corpus/f0c/sigtap/README.md",
+      "reason": "Tabela Unificada SIGTAP pública de setembro/2026, hash pinado; não é prontuário.",
+      "items": []
     }
   ],
   "protectedPaths": []

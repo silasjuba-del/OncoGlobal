@@ -647,6 +647,17 @@ export async function scanRepository(root, manifest = { files: [], protectedPath
         continue;
       }
 
+      if (extension === "zip") {
+        const magic = bytes.length >= 4 && bytes.readUInt32LE(0) === 0x04034b50;
+        const disposition = manifestAssetDisposition(manifest, path, fileHash, "official_public_archive", (file) => magic && file.magic === "zip_local_header");
+        if (disposition.applied) result.dispositionsApplied.push({ type: "official_public_archive", path, status: "DISPOSED" });
+        else {
+          result.unscanned.push({ type: "arquivo_zip", path, status: "UNVERIFIED" });
+          result.pending.push({ type: "official_public_archive", path, status: disposition.status, reason: disposition.reason });
+        }
+        continue;
+      }
+
       try {
         if (bytes.includes(0)) throw new Error("binary_content");
         const text = TEXT_DECODER.decode(bytes);

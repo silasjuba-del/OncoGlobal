@@ -14,7 +14,7 @@ afterEach(async () => {
   for (const ambiente of ambientes.splice(0)) { await ambiente.close(); removerDiretorio(ambiente.dir); }
 });
 
-async function abrir() {
+async function abrir(aoAbrirApac?: () => void) {
   const ambiente = await abrirAmbiente(criarDiretorio()); ambientes.push(ambiente);
   cadastrarPaciente(ambiente);
   const transporte = globalThis.fetch;
@@ -22,7 +22,7 @@ async function abrir() {
     transporte(typeof input === "string" && input.startsWith("/") ? `${ambiente.baseUrl}${input}` : input, init));
   const porta = criarPortaHttp({ onSessaoExpirada: () => {} });
   expect((await porta.login(SENHA)).ok).toBe(true);
-  render(<ConsultaPersistida porta={porta} contexto={contexto} />);
+  render(<ConsultaPersistida porta={porta} contexto={contexto} {...(aoAbrirApac ? { aoAbrirApac } : {})} />);
   await screen.findByRole("button", { name: "Consulta Flash" });
   return ambiente;
 }
@@ -34,23 +34,24 @@ async function preparar() {
   return screen.findByRole("region", { name: "Conteúdo para assinatura" });
 }
 
+// F0C: evolução + retorno + conjunto de impressão são três documentos exibidos e assinados.
 describe("C2 · consulta local real e conteúdo visível antes de assinar", () => {
   it("exibe textos reais, assina por HTTP e reabre o histórico persistido sem dados de demonstração", async () => {
     const ambiente = await abrir();
     expect(ambiente.eventos().filter((e) => e.revisao === "ASSINADO")).toHaveLength(0);
     const exibicao = await preparar();
-    expect(exibicao.querySelectorAll("article")).toHaveLength(2);
+    expect(exibicao.querySelectorAll("article")).toHaveLength(3);
     expect(exibicao.textContent).toContain("30");
     expect(ambiente.eventos().filter((e) => e.revisao === "ASSINADO")).toHaveLength(0);
     const textos = [...exibicao.querySelectorAll("pre")].map((p) => p.textContent);
     expect(textos.every((t) => t && t.length > 10)).toBe(true);
     fireEvent.click(within(exibicao).getByRole("button", { name: "Confirmar e assinar conteúdo exibido" }));
-    await waitFor(() => expect(ambiente.eventos().filter((e) => e.revisao === "ASSINADO")).toHaveLength(2));
-    await waitFor(() => expect(screen.getByRole("region", { name: "Histórico de documentos assinados" }).querySelectorAll("article")).toHaveLength(2));
+    await waitFor(() => expect(ambiente.eventos().filter((e) => e.revisao === "ASSINADO")).toHaveLength(3));
+    await waitFor(() => expect(screen.getByRole("region", { name: "Histórico de documentos assinados" }).querySelectorAll("article")).toHaveLength(3));
     const historico = screen.getByRole("region", { name: "Histórico de documentos assinados" });
     for (const texto of textos) expect(historico.textContent).toContain(texto!);
     fireEvent.click(screen.getByRole("button", { name: "Reabrir histórico" }));
-    await waitFor(() => expect(screen.getByRole("region", { name: "Histórico de documentos assinados" }).querySelectorAll("article")).toHaveLength(2));
+    await waitFor(() => expect(screen.getByRole("region", { name: "Histórico de documentos assinados" }).querySelectorAll("article")).toHaveLength(3));
     const src = readFileSync("src/ui/consulta/ConsultaPersistida.tsx", "utf8");
     expect(src).not.toMatch(/cadastroSintetico|timelineSintetica|prescricaoSintetica|api\/fake/);
   });
@@ -87,10 +88,32 @@ describe("C2 · consulta local real e conteúdo visível antes de assinar", () =
     await screen.findByText(/Operação não concluída/);
     const documentos = () => listarDrafts(ambiente.db, PACIENTE).filter((d) =>
       typeof (d.payload as Record<string, unknown>).documentId === "string").map((d) => d.draftId).sort();
-    const antes = documentos(); expect(antes).toHaveLength(2);
+    const antes = documentos(); expect(antes).toHaveLength(3);
     fireEvent.click(screen.getByRole("button", { name: "Revisar documentos para assinatura" }));
     await screen.findByRole("region", { name: "Conteúdo para assinatura" });
     expect(documentos()).toEqual(antes);
     expect(ambiente.eventos().filter((e) => e.revisao === "ASSINADO")).toHaveLength(0);
   });
+
+  it("calcula instrumento como rascunho, abre APAC e não reassina quando a impressão falha", async () => {
+    const aoAbrirApac = vi.fn();
+    const ambiente = await abrir(aoAbrirApac);
+    expect(screen.getByRole("region", { name: "Instrumentos clínicos" })).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Calcular" }));
+    expect((await screen.findByLabelText("Resultado do instrumento")).textContent).toMatch(/rascunho/);
+    expect(screen.getByLabelText("Resultado do instrumento").textContent).toMatch(/kpsDocumentado/);
+    expect(ambiente.eventos().filter((e) => e.revisao === "ASSINADO")).toHaveLength(0);
+    fireEvent.click(screen.getByRole("button", { name: "Consulta Flash" }));
+    fireEvent.click(screen.getByRole("button", { name: "Abrir APAC ↗" }));
+    expect(aoAbrirApac).toHaveBeenCalledTimes(1);
+    fireEvent.change(screen.getByLabelText("Prazo do retorno em dias"), { target: { value: "30" } });
+    fireEvent.click(screen.getByRole("button", { name: "Revisar documentos para assinatura" }));
+    const exibicao = await screen.findByRole("region", { name: "Conteúdo para assinatura" });
+    fireEvent.click(within(exibicao).getByRole("button", { name: "Confirmar e assinar conteúdo exibido" }));
+    await waitFor(() => expect(ambiente.eventos().filter((e) => e.revisao === "ASSINADO")).toHaveLength(3));
+    expect(await screen.findByRole("button", { name: "Solicitar impressão novamente" })).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Solicitar impressão novamente" }));
+    await waitFor(() => expect(ambiente.eventos().filter((e) => e.revisao === "ASSINADO")).toHaveLength(3));
+  });
 });
+

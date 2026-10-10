@@ -1,0 +1,472 @@
+{
+  "id": "condicionais-f0c",
+  "versao": "1.1.0",
+  "nota": "Somente alertas para revisão. Fontes oficiais consultadas2026-10-10. Elenco limitado às drogas explícitas; não declara cobertura universal. Sem bloqueio, autorização ou ajuste automático.",
+  "regras": [
+    {
+      "id": "DPYD",
+      "versao": "1.0.0",
+      "tipo": "DPYD",
+      "ativo": true,
+      "drogas": [
+        "capecitabina",
+        "capecitabine",
+        "fluorouracil",
+        "5-FU"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://www.fda.gov/drugs/resources-information-approved-drugs/safety-labeling-update-capecitabine-and-fluorouracil-5-fu-risks-associated-dihydropyrimidine",
+        "trecho": "test patients for genetic variants of DPYD prior to initiating treatment",
+        "conferidoEm": "2026-10-10"
+      },
+      "nota": "Desconhecido permanece PENDENTE. A exceção de necessidade de tratamento imediato é decisão médica; o aviso não bloqueia consulta."
+    },
+    {
+      "id": "ALERGIA_OXALIPLATINA",
+      "versao": "1.0.0",
+      "tipo": "ALERGIA",
+      "ativo": true,
+      "drogas": [
+        "oxaliplatina",
+        "oxaliplatin"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7dc8dfb1-dec8-43b3-b2ea-05eac054b2c6",
+        "trecho": "hypersensitivity reactions to platinum-based drugs",
+        "conferidoEm": "2026-10-10"
+      },
+      "alergenos": [
+        "oxaliplatina",
+        "oxaliplatin",
+        "cisplatina",
+        "cisplatin",
+        "carboplatina",
+        "carboplatin",
+        "platina"
+      ]
+    },
+    {
+      "id": "ALERGIA_CARBOPLATINA",
+      "versao": "1.0.0",
+      "tipo": "ALERGIA",
+      "ativo": true,
+      "drogas": [
+        "carboplatina",
+        "carboplatin"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5abfcb87-bb02-4384-9c9d-7d0e3e809311",
+        "trecho": "severe allergic reactions to cisplatin or other platinum-containing compounds",
+        "conferidoEm": "2026-10-10"
+      },
+      "alergenos": [
+        "cisplatina",
+        "cisplatin",
+        "carboplatina",
+        "carboplatin",
+        "oxaliplatina",
+        "oxaliplatin",
+        "platina",
+        "manitol",
+        "mannitol"
+      ],
+      "nota": "Revisão da alergia; gravidade e formulação devem ser conferidas, sem suspensão automática."
+    },
+    {
+      "id": "ALERGIA_CISPLATINA",
+      "versao": "1.0.0",
+      "tipo": "ALERGIA",
+      "ativo": true,
+      "drogas": [
+        "cisplatina",
+        "cisplatin"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a440f077-46f6-4688-a209-65bce38d1c92",
+        "trecho": "severe hypersensitivity to cisplatin",
+        "conferidoEm": "2026-10-10"
+      },
+      "alergenos": [
+        "cisplatina",
+        "cisplatin"
+      ]
+    },
+    {
+      "id": "ALERGIA_DOCETAXEL",
+      "versao": "1.0.0",
+      "tipo": "ALERGIA",
+      "ativo": true,
+      "drogas": [
+        "docetaxel"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2992d633-08fa-44f3-b14d-41700f24686b",
+        "trecho": "polysorbate 80",
+        "conferidoEm": "2026-10-10"
+      },
+      "alergenos": [
+        "docetaxel",
+        "polissorbato 80",
+        "polysorbate 80"
+      ]
+    },
+    {
+      "id": "ALERGIA_PACLITAXEL",
+      "versao": "1.0.0",
+      "tipo": "ALERGIA",
+      "ativo": true,
+      "drogas": [
+        "paclitaxel"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=a1eb16b4-285b-4e81-9c4e-1244d4a52af8&version=3",
+        "trecho": "Anaphylaxis and severe hypersensitivity reactions",
+        "conferidoEm": "2026-10-10"
+      },
+      "alergenos": [
+        "paclitaxel",
+        "polyoxyl 35 castor oil",
+        "óleo de rícino polioxietilado"
+      ]
+    },
+    {
+      "id": "ALERGIA_NAB_PACLITAXEL",
+      "versao": "1.0.0",
+      "tipo": "ALERGIA",
+      "ativo": true,
+      "drogas": [
+        "nab-paclitaxel"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=4df3fda6-0b29-420e-ab91-81441ce914ed&version=5",
+        "trecho": "Cross-hypersensitivity",
+        "conferidoEm": "2026-10-10"
+      },
+      "alergenos": [
+        "nab-paclitaxel",
+        "paclitaxel",
+        "docetaxel",
+        "taxano"
+      ],
+      "nota": "Não extrapolar automaticamente a contraindicação entre formulações; revisão clínica da reação prévia."
+    },
+    {
+      "id": "DOCETAXEL_HEPATICO",
+      "versao": "1.0.0",
+      "tipo": "DOCETAXEL_HEPATICO",
+      "ativo": true,
+      "drogas": [
+        "docetaxel"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2992d633-08fa-44f3-b14d-41700f24686b",
+        "trecho": "bilirubin > upper limit of normal (ULN)",
+        "conferidoEm": "2026-10-10"
+      },
+      "parametros": {
+        "bilirrubinaLsn": 1,
+        "transaminasesLsn": 1.5,
+        "fosfataseLsn": 2.5
+      },
+      "nota": "Bilirrubina >LSN OU AST/ALT >1.5xLSN concomitante FA >2.5xLSN. Transaminase isolada elevada também requer revisão individual conforme seção5.2, sem dose automática."
+    },
+    {
+      "id": "IRINOTECANO_HEPATICO",
+      "versao": "1.0.0",
+      "tipo": "IRINOTECANO_HEPATICO",
+      "ativo": true,
+      "drogas": [
+        "irinotecano",
+        "irinotecan"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7a30d551-9ea7-47ea-9073-f541bff457a3",
+        "trecho": "serum bilirubin >2.0 mg/dL",
+        "conferidoEm": "2026-10-10"
+      },
+      "parametros": {
+        "bilirrubinaMgDl": 2,
+        "transaminasesSemMetastaseLsn": 3,
+        "transaminasesComMetastaseLsn": 5
+      },
+      "nota": "Limites da população estudada: não equivalem a dose recomendada nem a contraindicação universal."
+    },
+    {
+      "id": "BEVACIZUMABE_PA",
+      "versao": "1.0.0",
+      "tipo": "BEVACIZUMABE_PA",
+      "ativo": true,
+      "drogas": [
+        "bevacizumabe",
+        "bevacizumab"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=939b5d1f-9fb2-4499-80ef-0607aa6b114e",
+        "trecho": "Withhold if not medically controlled",
+        "conferidoEm": "2026-10-10"
+      },
+      "nota": "Exige avaliação explícita de hipertensão grave não controlada. Não introduz número arbitrário de PA."
+    },
+    {
+      "id": "BEVACIZUMABE_PROTEINURIA",
+      "versao": "1.0.0",
+      "tipo": "BEVACIZUMABE_PROTEINURIA",
+      "ativo": true,
+      "drogas": [
+        "bevacizumabe",
+        "bevacizumab"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=939b5d1f-9fb2-4499-80ef-0607aa6b114e",
+        "trecho": "greater than or equal to 2 grams per 24 hours",
+        "conferidoEm": "2026-10-10"
+      },
+      "parametros": {
+        "proteinaG24h": 2
+      },
+      "nota": "Somente proteína total em g/24h. Não converter relação proteína/creatinina ou fita em g/24h. Síndrome nefrótica também exige revisão."
+    },
+    {
+      "id": "BEVACIZUMABE_CIRURGIA",
+      "versao": "1.0.0",
+      "tipo": "BEVACIZUMABE_CIRURGIA",
+      "ativo": true,
+      "drogas": [
+        "bevacizumabe",
+        "bevacizumab"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=939b5d1f-9fb2-4499-80ef-0607aa6b114e",
+        "trecho": "28 days following major surgery",
+        "conferidoEm": "2026-10-10"
+      },
+      "parametros": {
+        "janelaDias": 28
+      },
+      "nota": "Janela mínima28d antes de cirurgia eletiva e após cirurgia maior, com cicatrização adequada; avaliação não aciona pausa ou retomada."
+    },
+    {
+      "id": "GESTACAO_DOCETAXEL",
+      "versao": "1.0.0",
+      "tipo": "GESTACAO",
+      "ativo": true,
+      "drogas": [
+        "docetaxel"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2992d633-08fa-44f3-b14d-41700f24686b",
+        "trecho": "can cause fetal harm",
+        "conferidoEm": "2026-10-10"
+      },
+      "nota": "Somente quando aplicabilidade reprodutiva for explícita; não inferir a partir de sexo cadastral ou idade."
+    },
+    {
+      "id": "GESTACAO_IRINOTECANO",
+      "versao": "1.0.0",
+      "tipo": "GESTACAO",
+      "ativo": true,
+      "drogas": [
+        "irinotecano",
+        "irinotecan"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7a30d551-9ea7-47ea-9073-f541bff457a3",
+        "trecho": "can cause fetal harm",
+        "conferidoEm": "2026-10-10"
+      },
+      "nota": "Somente quando aplicabilidade reprodutiva for explícita; não inferir a partir de sexo cadastral ou idade."
+    },
+    {
+      "id": "GESTACAO_BEVACIZUMABE",
+      "versao": "1.0.0",
+      "tipo": "GESTACAO",
+      "ativo": true,
+      "drogas": [
+        "bevacizumabe",
+        "bevacizumab"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=939b5d1f-9fb2-4499-80ef-0607aa6b114e",
+        "trecho": "may cause fetal harm",
+        "conferidoEm": "2026-10-10"
+      },
+      "nota": "Somente quando aplicabilidade reprodutiva for explícita; não inferir a partir de sexo cadastral ou idade."
+    },
+    {
+      "id": "GESTACAO_OXALIPLATINA",
+      "versao": "1.0.0",
+      "tipo": "GESTACAO",
+      "ativo": true,
+      "drogas": [
+        "oxaliplatina",
+        "oxaliplatin"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7dc8dfb1-dec8-43b3-b2ea-05eac054b2c6",
+        "trecho": "can cause fetal harm",
+        "conferidoEm": "2026-10-10"
+      },
+      "nota": "Somente quando aplicabilidade reprodutiva for explícita; não inferir a partir de sexo cadastral ou idade."
+    },
+    {
+      "id": "GESTACAO_CISPLATINA",
+      "versao": "1.0.0",
+      "tipo": "GESTACAO",
+      "ativo": true,
+      "drogas": [
+        "cisplatina",
+        "cisplatin"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=a440f077-46f6-4688-a209-65bce38d1c92",
+        "trecho": "can cause fetal harm",
+        "conferidoEm": "2026-10-10"
+      },
+      "nota": "Somente quando aplicabilidade reprodutiva for explícita; não inferir a partir de sexo cadastral ou idade."
+    },
+    {
+      "id": "GESTACAO_CARBOPLATINA",
+      "versao": "1.0.0",
+      "tipo": "GESTACAO",
+      "ativo": true,
+      "drogas": [
+        "carboplatina",
+        "carboplatin"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5abfcb87-bb02-4384-9c9d-7d0e3e809311",
+        "trecho": "may cause fetal harm",
+        "conferidoEm": "2026-10-10"
+      },
+      "nota": "Somente quando aplicabilidade reprodutiva for explícita; não inferir a partir de sexo cadastral ou idade."
+    },
+    {
+      "id": "GESTACAO_PACLITAXEL",
+      "versao": "1.0.0",
+      "tipo": "GESTACAO",
+      "ativo": true,
+      "drogas": [
+        "paclitaxel"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=a1eb16b4-285b-4e81-9c4e-1244d4a52af8&version=3",
+        "trecho": "can cause fetal harm",
+        "conferidoEm": "2026-10-10"
+      },
+      "nota": "Somente quando aplicabilidade reprodutiva for explícita; não inferir a partir de sexo cadastral ou idade."
+    },
+    {
+      "id": "GESTACAO_NAB_PACLITAXEL",
+      "versao": "1.0.0",
+      "tipo": "GESTACAO",
+      "ativo": true,
+      "drogas": [
+        "nab-paclitaxel"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=4df3fda6-0b29-420e-ab91-81441ce914ed&version=5",
+        "trecho": "can cause fetal harm",
+        "conferidoEm": "2026-10-10"
+      },
+      "nota": "Somente quando aplicabilidade reprodutiva for explícita; não inferir a partir de sexo cadastral ou idade."
+    },
+    {
+      "id": "GESTACAO_CAPECITABINA",
+      "versao": "1.0.0",
+      "tipo": "GESTACAO",
+      "ativo": true,
+      "drogas": [
+        "capecitabina",
+        "capecitabine"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=007e3432-c8aa-2a76-52ba-c346924c08a7&version=15",
+        "trecho": "can cause fetal harm",
+        "conferidoEm": "2026-10-10"
+      },
+      "nota": "Somente quando aplicabilidade reprodutiva for explícita; não inferir a partir de sexo cadastral ou idade."
+    },
+    {
+      "id": "GESTACAO_FLUOROURACIL",
+      "versao": "1.0.0",
+      "tipo": "GESTACAO",
+      "ativo": true,
+      "drogas": [
+        "fluorouracil",
+        "5-FU"
+      ],
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=697816ce-dc05-4943-b7f0-2f0b125e93b7",
+        "trecho": "can cause fetal harm",
+        "conferidoEm": "2026-10-10"
+      },
+      "nota": "Somente quando aplicabilidade reprodutiva for explícita; não inferir a partir de sexo cadastral ou idade."
+    }
+  ],
+  "termos": [
+    {
+      "id": "MAO_PE",
+      "ativo": true,
+      "ctcaeVersao": "6.0",
+      "nomeCtcae": "Palmar-plantar erythrodysesthesia syndrome",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dctd.cancer.gov/research/ctep-trials/for-sites/adverse-events/ctcae-v6.pdf",
+        "trecho": "Palmar-plantar erythrodysesthesia syndrome",
+        "conferidoEm": "2026-10-10",
+        "pagina": 297,
+        "edicao": "CTCAE v6.0 (MedDRA 28.0), publicado em 2025-07-22"
+      },
+      "nota": "Termo e graus disponíveis conferidos diretamente no PDF NCI v6, página 297. Somente grau documentado: não inferir por narrativa nem automatizar conduta; Flash sem grau.",
+      "grausDisponiveis": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "REACAO_INFUSIONAL",
+      "ativo": true,
+      "ctcaeVersao": "6.0",
+      "nomeCtcae": "Infusion related reaction",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dctd.cancer.gov/research/ctep-trials/for-sites/adverse-events/ctcae-v6.pdf",
+        "trecho": "Infusion related reaction",
+        "conferidoEm": "2026-10-10",
+        "pagina": 138,
+        "edicao": "CTCAE v6.0 (MedDRA 28.0), publicado em 2025-07-22"
+      },
+      "nota": "Termo e graus disponíveis conferidos diretamente no PDF NCI v6, página 138. Somente grau documentado: não inferir por narrativa nem automatizar conduta; Flash sem grau.",
+      "grausDisponiveis": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  ]
+}

@@ -89,8 +89,6 @@ export async function carregarFicha(
 
 /* ───────────── RT-08c · dose por base (código, nunca LLM; CANONICA §6) ───────────── */
 
-const BSA_MIN = 1.4;
-const BSA_MAX = 2.2;
 const CLCR_MAX = 125;
 const meioParaCima = (x: number): number => Math.floor(Math.round(x * 1e6) / 1e6 + 0.5);
 const pos = (n: number | null | undefined): n is number => typeof n === "number" && Number.isFinite(n) && n > 0;
@@ -124,9 +122,8 @@ export function calcularDosePorBase(e: EntradaDose): SaidaDose {
       const f = [!pos(e.mgM2) && "mgM2", !pos(e.pesoKg) && "pesoKg", !pos(e.alturaCm) && "alturaCm"].filter((x): x is string => x !== false);
       if (f.length) return pend(f);
       const base = pos(e.bsaM2) ? e.bsaM2 : Math.round(Math.sqrt((e.alturaCm! * e.pesoKg!) / 3600) * 100) / 100;
-      const bsa = Math.min(BSA_MAX, Math.max(BSA_MIN, base));
-      return { estado: "PRONTO", doseMg: meioParaCima(e.mgM2! * bsa), pendente: null,
-        aviso: bsa !== base ? `BSA ${base} m² limitada a ${bsa} m² (D-W9-60)` : null };
+      // D-F0C-01: SC real, sem piso/teto automático.
+      return { estado: "PRONTO", doseMg: meioParaCima(e.mgM2! * base), pendente: null, aviso: null };
     }
     case "AUC": {
       if (!pos(e.auc)) return pend(["auc"]);

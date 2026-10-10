@@ -15,9 +15,10 @@ import type { ChavesIntencao } from "../api/chaves.js";
 import { ID } from "../api/fake.js";
 import { ErroPorta, type AcaoIntent, type ConsultaVisao, type PortaConsulta } from "../api/porta.js";
 import type { PlanoFlash } from "../consulta/ConsultaFlash.js";
+import { conferirPreviewFlash, type DocumentoPreviewFlash } from "../consulta/previewFlash.js";
+import type { FlashPreparada } from "../api/porta.js";
 import { COPY_PT_BR } from "../copy/pt-BR.js";
 import { AbasChart, type AbaChart } from "../oncochart/AbasChart.js";
-import { cadastroSintetico } from "../oncochart/cadastro-sintetico.js";
 import { CaixaRevisao } from "../oncochart/CaixaRevisao.js";
 import {
   montarRevisaoSintetica,
@@ -33,7 +34,8 @@ import { PatientHeader } from "../oncochart/PatientHeader.js";
 import { PrescricaoPainel } from "../oncochart/PrescricaoPainel.js";
 import { prescricaoSintetica } from "../oncochart/prescricao-visao.js";
 import { Timeline2D } from "../oncochart/Timeline2D.js";
-import { timelineSintetica } from "../oncochart/timeline-visao.js";
+import { timelineDaConsulta } from "../oncochart/timelineDaConsulta.js";
+import { InstrumentosClinicos } from "../clinico/InstrumentosClinicos.js";
 
 // @ts-expect-error folha CSS pura, resolvida pelo Vite
 import "./consulta.css";
@@ -77,6 +79,10 @@ export function TelaConsulta({
   const [flashErro, setFlashErro] = useState<string | null>(null);
   const [avisoFlash, setAvisoFlash] = useState<string | null>(null);
   const flashRevisao = useRef<number | null>(null);
+  const contextoAtivo = useRef("");
+  contextoAtivo.current = JSON.stringify([patientId, visao?.encounterId ?? null, loteId]);
+  const [previewFlash, setPreviewFlash] = useState<{ preparada: FlashPreparada; documentos: DocumentoPreviewFlash[];
+    chave: string; contexto: { patientId: string; encounterId: string; tumorLotId: string | null }; selo: string } | null>(null);
   const impressao = useRef<AcaoIntent | null>(null);
   const impressaoEnviada = useRef(false);
   const chaveValidar = chaves.novaChaveIntencao(`validar:${patientId}`);
@@ -108,12 +114,15 @@ export function TelaConsulta({
     flashRevisao.current = visao?.flash?.rascunho?.revision ?? null;
   }, [visao]);
 
+  useEffect(() => { setPreviewFlash(null); setFlashOcupado(false); }, [patientId, loteId]);
+
   const chart = useMemo(() => {
     if (!visao) return null;
     const cabecalho = { ...visao.cabecalho, loteSelecionadoId: loteId };
     return montarCabecalhoChart(
       cabecalho,
-      cadastroSintetico(patientId, cabecalho.paciente.nascimento),
+      {convenio:null,matricula:null,cns:cabecalho.paciente.identificadores.find(i=>i.tipo==="CNS")?.valor ?? null,
+        dataHoraAtendimento:null,nascimento:cabecalho.paciente.nascimento,profissao:null,mae:null,responsavel:null,cidadeUf:null,endereco:null,obs:null},
       { ecog: null, biomarcadores: [] },
     );
   }, [visao, loteId, patientId]);
@@ -154,7 +163,7 @@ export function TelaConsulta({
     return () => window.removeEventListener("keydown", noTeclado);
   }, [porta]);
 
-  if (!visao || !chart) {
+  if (!visao || visao.patientId !== patientId || !chart) {
     return (
       <main aria-label="Consulta pronta" className="tela-consulta">
         <p>{sessaoExpirada ? "sessão expirada — entre de novo" : "carregando consulta"}</p>
@@ -180,14 +189,18 @@ export function TelaConsulta({
     }
     setFlashOcupado(true);
     setFlashErro(null);
+    const seloSalvar = contextoAtivo.current;
     void porta.salvarRascunhoFlash({ ...contextoFlash, plano, expectedRevision: flashRevisao.current }).then(
       (r) => {
+        if (contextoAtivo.current !== seloSalvar) return;
         flashRevisao.current = r.revision;
+        setVisao(v => v?.flash ? {...v,flash:{...v.flash,rascunho:{draftId:r.draftId,revision:r.revision,plano}}} : v);
         setFlashOcupado(false);
         setAvisoFlash(CF.rascunhoSalvo);
         setOverlay(null);
       },
       (erro: unknown) => {
+        if (contextoAtivo.current !== seloSalvar) return;
         setFlashOcupado(false);
         if (erro instanceof ErroPorta && erro.codigo === "SESSAO_EXPIRADA") setSessaoExpirada(true);
         setFlashErro(textoErroFlash(CF.erroRascunho, erro));
@@ -214,44 +227,64 @@ export function TelaConsulta({
     setFlashOcupado(true);
     setFlashErro(null);
     const chave = chaves.novaChaveIntencao(`flash-finalizar:${patientId}:${loteId ?? ""}:${JSON.stringify(plano)}`);
+    const selo = contextoAtivo.current;
     void (async () => {
       const preparada = await porta.prepararFinalizacaoFlash!({ ...contextoFlash, plano, idempotencyKey: chave });
-      const resultado = await validarComExibicao(porta, contextoFlash, {
-        ...contextoFlash,
-        bloco: "TUDO",
-        registros: preparada.registros.map((r) => ({ id: r.id, expectedRevision: r.expectedRevision })),
-        documentosExibidos: preparada.documentos.map((d) => ({ documentId: d.documentId, documentVersion: d.documentVersion })),
-        reconhecerAlertas: [],
-        idempotencyKey: chave,
-      });
-      if (resultado.codigo !== "REPLAY" && !confirmacaoPreparouImpressao(resultado.codigo)) {
-        throw new ErroPorta("FLASH_RECUSADA", resultado.codigo);
-      }
-      return preparada;
+      if (contextoAtivo.current !== selo) return null;
+      const bundle = await porta.exibirBundle({ ...contextoFlash, draftIds: preparada.registros.map((r) => r.id) });
+      const documentos = conferirPreviewFlash(preparada, bundle, contextoFlash);
+      return { preparada, documentos };
     })().then(
-      (preparada) => {
+      (preview) => {
+        if (contextoAtivo.current !== selo || preview === null) return;
         setFlashOcupado(false);
-        setAvisoFlash(CF.finalizada);
+        setPreviewFlash({ ...preview, chave, contexto: contextoFlash, selo });
+        setAvisoFlash("Revise os documentos preparados. Ainda não assinados.");
         setOverlay(null);
-        // Impressão: só arma o fluxo que já existe (Enter confirma, janela do sistema). TODO UI: abrir direto a janela de impressão.
-        if (preparada.alvoImpressao) {
-          impressao.current = {
-            verbo: "IMPRIMIR",
-            objeto: { tipo: preparada.alvoImpressao.tipo, id: preparada.alvoImpressao.id, versao: preparada.alvoImpressao.versao },
-            escopo: { patientId: visao.patientId, encounterId: visao.encounterId },
-            destino: null,
-            idempotencyKey: chaveImprimir,
-          };
-          impressaoEnviada.current = false;
-          setImpressaoArmada(true);
-        }
       },
       (erro: unknown) => {
+        if (contextoAtivo.current !== selo) return;
         setFlashOcupado(false);
         if (erro instanceof ErroPorta && erro.codigo === "SESSAO_EXPIRADA") setSessaoExpirada(true);
         setFlashErro(textoErroFlash(CF.erroFinalizar, erro));
       },
     );
+  };
+
+  const confirmarFlashExibida = () => {
+    const exibido = previewFlash;
+    if (!exibido || flashOcupado || exibido.selo !== contextoAtivo.current) return;
+    setFlashOcupado(true);
+    void porta.confirmar({ ...exibido.contexto, bloco: "TUDO", registros: [...exibido.preparada.registros],
+      documentosExibidos: exibido.documentos.map(({ documentId, documentVersion }) => ({ documentId, documentVersion })),
+      reconhecerAlertas: [], idempotencyKey: `${exibido.chave}:confirmar` }).then((resultado) => {
+        if (exibido.selo !== contextoAtivo.current) return;
+        if (resultado.codigo !== "REPLAY" && !confirmacaoPreparouImpressao(resultado.codigo)) throw new ErroPorta("FLASH_RECUSADA", resultado.codigo);
+        setFlashOcupado(false); setPreviewFlash(null); setAvisoFlash(CF.finalizada);
+        if (exibido.preparada.alvoImpressao) {
+          const alvo = exibido.preparada.alvoImpressao;
+          impressao.current = {
+            verbo: "IMPRIMIR",
+            objeto: { tipo: alvo.tipo, id: alvo.id, versao: alvo.versao },
+            escopo: { patientId: exibido.contexto.patientId, encounterId: exibido.contexto.encounterId },
+            destino: null,
+            idempotencyKey: `${exibido.chave}:imprimir`,
+          };
+          // O clique confirma o conjunto já exibido e solicita sua impressão pelo gateway existente.
+          impressaoEnviada.current = true;
+          setImpressaoArmada(false);
+          void porta.acao(impressao.current).then(r => {
+            if (r.decisao !== "EXECUTADA" && r.decisao !== "REPLAY") throw new Error("IMPRESSAO_PENDENTE");
+          }).catch(() => {
+            if (exibido.selo === contextoAtivo.current) setAvisoFlash("Documentos assinados; impressão pendente. Reabra pelo histórico.");
+          });
+        }
+      }).catch((erro: unknown) => {
+        if (exibido.selo !== contextoAtivo.current) return;
+        setFlashOcupado(false);
+        if (erro instanceof ErroPorta && erro.codigo === "SESSAO_EXPIRADA") setSessaoExpirada(true);
+        setAvisoFlash(textoErroFlash(CF.erroFinalizar, erro));
+      });
   };
 
   const temHidronefrose = /hidronefrose/i.test(revisao?.origemRotulo ?? "");
@@ -296,6 +329,12 @@ export function TelaConsulta({
       {sessaoExpirada ? <p>sessão expirada — entre de novo</p> : null}
       {acaoRevisao ? <p className="oc-flash-status" role="status">{acaoRevisao}</p> : null}
       {avisoFlash ? <p className="oc-flash-status" role="status" aria-label="status da Consulta Flash">{avisoFlash}</p> : null}
+      {previewFlash ? <section aria-label="Revisão dos documentos Flash">
+        {previewFlash.documentos.map((d) => <article key={d.documentId}><h3>{d.titulo}</h3>
+          <pre style={{ whiteSpace: "pre-wrap" }}>{d.texto}</pre></article>)}
+        <button type="button" disabled={flashOcupado} onClick={confirmarFlashExibida}>CONFIRMAR E IMPRIMIR</button>
+        <button type="button" disabled={flashOcupado} onClick={() => setPreviewFlash(null)}>Continuar sem assinar</button>
+      </section> : null}
       {fonteAberta ? <p className="oc-flash-status" role="status">fonte: {fonteAberta}</p> : null}
       <PatientHeader
         chart={chart}
@@ -311,7 +350,7 @@ export function TelaConsulta({
         <CartaoTransversal entrada={visao.retratoTransversal} />
       ) : null}
       <Timeline2D
-        visao={timelineSintetica(patientId, visao.hoje)}
+        visao={timelineDaConsulta(visao)}
         onVer3d={() => setJornada3d(true)}
       />
       <PainelOncoassist key={`${patientId}:${visao.encounterId}:${loteId ?? ""}`} porta={porta}
@@ -377,7 +416,19 @@ export function TelaConsulta({
             return <PrescricaoPainel inicial={prescricaoSintetica()} />;
           }
           if (atual === "clin") {
-            return <p className="oc-aba-placeholder">Dados clínicos — painéis nas fatias seguintes</p>;
+            return <>
+              <section aria-label="Instrumentos registrados"><h3>Instrumentos registrados</h3>
+                {!visao.instrumentosClinicos?.length ? <p>Nenhum instrumento estruturado registrado nesta consulta.</p>
+                  : visao.instrumentosClinicos.map(i=><article key={i.instrumento}><h4>{i.instrumento}</h4>
+                    <p>{i.avaliacao.estado} · {i.avaliacao.escore ?? "PENDENTE"} · {i.avaliacao.classificacao ?? "sem classificação"}</p>
+                    <p>{i.avaliacao.pendencias.join("; ")}</p><p>Fonte: {i.avaliacao.fonteRegra ?? "PENDENTE"}</p></article>)}
+              </section>
+              <InstrumentosClinicos key={`${patientId}:${visao.encounterId}:${loteId ?? ""}`} ocupado={flashOcupado || selecionandoLote}
+                aoAvaliar={async (pedido) => {
+                  if (!porta.avaliarInstrumento) throw new Error("Cálculo autenticado indisponível nesta tela.");
+                  return porta.avaliarInstrumento({ patientId, encounterId: visao.encounterId, tumorLotId: loteId }, pedido);
+                }} />
+            </>;
           }
           return <p className="oc-aba-placeholder">Evolução — rascunho também na Visão geral</p>;
         }}
@@ -520,7 +571,7 @@ export function TelaConsulta({
       ) : null}
       {jornada3d ? (
         <Jornada3D
-          visao={timelineSintetica(patientId, visao.hoje)}
+          visao={timelineDaConsulta(visao)}
           onFechar={() => setJornada3d(false)}
           onAbrirTc={() => {
             setJornada3d(false);

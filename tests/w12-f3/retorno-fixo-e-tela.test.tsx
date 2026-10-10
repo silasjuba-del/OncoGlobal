@@ -61,7 +61,7 @@ describe("W12-F3 retorno fixo", () => {
   it("plano tem retorno true mesmo sem modelo padrão salvo", () => {
     const aoFinalizar = vi.fn();
     render(<ConsultaFlash {...props({ aoFinalizar })} />);
-    fireEvent.click(screen.getByRole("button", { name: "FINALIZAR · IMPRIMIR · SAIR" }));
+    fireEvent.click(screen.getByRole("button", { name: "REVISAR · IMPRIMIR" }));
     expect((aoFinalizar.mock.calls[0]?.[0] as PlanoFlash).tarefasRetorno).toEqual({
       retorno: true,
       laboratorio: false,
@@ -70,18 +70,19 @@ describe("W12-F3 retorno fixo", () => {
   });
 });
 
+// F0-COMPLEMENTO: Flash essencial substitui tarefas genéricas por LAB/RAD/QT explícitos.
 describe("W12-F3 tela", () => {
   it("com dados fake: cartão transversal na tela; Flash mostra linha pontualizada e tarefas", async () => {
     render(<TelaConsulta patientId={ID.multi} porta={criarPortaFalsa()} chaves={criarChaves()} />);
     fireEvent.click(await screen.findByRole("button", { name: "Consulta Flash" }));
     expect(screen.getByLabelText("Retrato transversal do tumor-índice")).toBeTruthy();
     await waitFor(() =>
-      expect(screen.getByLabelText("Achados-chave").textContent).toContain("Biópsia de mama: carcinoma invasivo de tipo não especial"),
+      expect(screen.getByLabelText("Biópsia e imagem").textContent).toContain("Biópsia de mama: carcinoma invasivo de tipo não especial"),
     );
-    expect(screen.getByText("Tarefas do retorno")).toBeTruthy();
-    expect(screen.getByText(/^Retorno \(30 dias\)/)).toBeTruthy();
+    expect(screen.getByLabelText("Solicitações laboratoriais")).toBeTruthy();
+    expect((screen.getByLabelText("Prazo do retorno em dias") as HTMLInputElement).value).toBe("30");
     expect(screen.queryByRole("checkbox", { name: /^Retorno/ })).toBeNull();
-    expect(screen.getByRole("button", { name: "FINALIZAR · IMPRIMIR · SAIR" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "REVISAR · IMPRIMIR" })).toBeTruthy();
   });
 
   it("sem retrato: sem cartão", async () => {
@@ -90,3 +91,4 @@ describe("W12-F3 tela", () => {
     expect(screen.queryByLabelText("Retrato transversal do tumor-índice")).toBeNull();
   });
 });
+

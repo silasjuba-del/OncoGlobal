@@ -301,7 +301,7 @@ describe("AG-10 · Teste ponta a ponta do Paciente Teste 07 (sintético)", () =>
     expect(resumoCintilo.resumo2.naoOncologicos).toBe("degenerativo");
   });
 
-  it("G-09: interações com o ruleset oficial retornam PENDENTE sem inventar 'sem interação'", () => {
+  it("F0-COMPLEMENTO: par curado do ruleset oficial retorna VERMELHO", () => {
     const rulesetInteracoes: RulesetInteracoes = JSON.parse(
       readFileSync(join(process.cwd(), "corpus", "rulesets", "interacoes.v1.json"), "utf8"),
     );
@@ -311,7 +311,7 @@ describe("AG-10 · Teste ponta a ponta do Paciente Teste 07 (sintético)", () =>
       "varfarina",
       rulesetInteracoes,
     );
-    expect(res.estado).toBe("PENDENTE");
-    expect(res.regraAtiva).toBe(false);
+    expect(res.estado).toBe("VERMELHO");
+    expect(res.regraAtiva).toBe(true);
   });
 });

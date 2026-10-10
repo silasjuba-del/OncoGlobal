@@ -21,6 +21,8 @@ import type { carregarCorpusServidor } from "./corpus.js";
 import { parserLinha } from "../rules/prescricao/parserLinha.js";
 import { classificarDocumento } from "../rules/prescricao/classificarDocumento.js";
 import { instanciarProtocolo } from "../rules/prescricao/instanciarProtocolo.js";
+import { rotearItemReceita } from "../rules/prescricao/receituarioEspecial.js";
+import { lerConfiguracaoServico, NUMERO_CAIXA_RECEITUARIO_ESPECIAL } from "../config/servico.js";
 import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
 import { projetarEstatisticaLedger } from "../estatistica/index.js";
 import { consultarGrafoLocal } from "../app/pesquisa/conhecimento.js";
@@ -35,6 +37,7 @@ import { CHAVE_CAIXA_MODELO_FLASH } from "../config/flash.js";
 import { confrontarNomeIdentificador } from "../rules/w8/vinculoDocumento.js";
 import { normalizarDataCivil } from "../kernel/extracao/normalizacao.js";
 import { farmacosMencionados, reconciliarCampos } from "../kernel/extracao/reconciliacao.js";
+import { AvaliacaoInstrumentoRequest, avaliarInstrumentoEstruturado } from "./f0c/instrumentosClinicos.js";
 
 export interface ServidorDeps {
   db: DatabaseSync;
@@ -47,6 +50,19 @@ export interface ServidorDeps {
   oncoassistJev?: ReturnType<typeof criarOncoassistJev>;
   agora: () => string;
   log: (entry: { rota: string; codigo: string; status: number }) => void;
+}
+type SessaoLeitura = Parameters<NonNullable<ServidorDeps["settings"]>["readBox"]>[1];
+/** Mesmas caixas e corpus na leitura da consulta e na preparação dos documentos. */
+function opcoesLeituraConsulta(deps: ServidorDeps, sessao: SessaoLeitura) {
+  const numeroModelo = deps.corpus?.caixasTodas.find((c) => c.chave === CHAVE_CAIXA_MODELO_FLASH)?.numero ?? null;
+  let modeloFlash = null as ReturnType<typeof lerModeloFlash>;
+  if (numeroModelo !== null && deps.settings) {
+    try { modeloFlash = lerModeloFlash(deps.settings.readBox(numeroModelo, sessao).value); } catch { modeloFlash = null; }
+  }
+  return { limiarPlaquetas: deps.corpus?.limiarPlaquetas ?? null, modeloFlash,
+    templates: deps.corpus?.templatesProtocolo ?? [], salaoRuleset: deps.salaoRuleset,
+    interacoes: deps.corpus?.interacoes, catalogo: deps.corpus?.catalogoInteracoes, feveRuleset: deps.corpus?.feveRuleset,
+    instrumentos: deps.corpus?.instrumentos ?? [], ...(deps.corpus?.condicionais ? { condicionais: deps.corpus.condicionais } : {}) };
 }
 const sha = (s: string) => createHash("sha256").update(s).digest("hex");
 const ExibirBundle = z.object({
@@ -251,6 +267,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
             : req.url === "/consulta/oncoassist/fontes" ? "oncoassistFontes"
               : req.url === "/consulta/flash/rascunho" ? "rascunhoFlash"
               : req.url === "/consulta/flash/preparar" ? "prepararFlash"
+              : req.url === "/consulta/instrumento/avaliar" ? "avaliarInstrumento"
               : req.url === "/consulta/carregar" ? "carregarConsulta"
                 : req.url === "/consulta/agenda" ? "agenda"
                   : req.url === "/consulta/salao" ? "salao"
@@ -782,6 +799,16 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       return reply(200, "ESTATISTICA_DERIVADA", projetarEstatisticaLedger(deps.db,
         parsed.data.periodoClinico ? { periodoClinico: parsed.data.periodoClinico } : undefined));
     }
+    if (rota === "avaliarInstrumento") {
+      const parsed=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable(),pedido:AvaliacaoInstrumentoRequest}).strict().safeParse(raw);
+      if(!parsed.success)return reply(400,"PAYLOAD_INVALIDO");
+      const atual=deps.sessoes.consultaSelecionada(token);
+      if(!atual || atual.patientId!==parsed.data.patientId || atual.encounterId!==parsed.data.encounterId
+        || (atual.tumorLotId ?? null)!==parsed.data.tumorLotId)return reply(409,"CONTEXTO_CONSULTA_ALTERADO");
+      const regras=deps.corpus?.instrumentos.filter(r=>r.id===parsed.data.pedido.instrumento) ?? [];
+      const resultado=avaliarInstrumentoEstruturado(parsed.data.pedido,regras.length===1 ? regras[0]! : null);
+      return reply(200,"INSTRUMENTO_CALCULADO",{resultado,gravado:false,assinado:false});
+    }
     if (rota === "rascunhoPrescricao") {
       const parsed = z.object({ patientId: Id, encounterId: Id, tumorLotId: Id.nullable(),
         templateId: z.string().min(1).optional(), expression: z.string().min(1).max(5000).optional() })
@@ -796,8 +823,12 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if (parsed.data.templateId) {
         const template = deps.corpus?.templatesProtocolo.find((t) => t.templateId === parsed.data.templateId);
         if (!template) return reply(404, "TEMPLATE_NAO_ENCONTRADO");
+        const consultaCorporal=lerConsulta(deps.db,contexto.patientId,deps.agora(),sessao,contexto.tumorLotId);
+        const dadosCorporais="codigo" in consultaCorporal
+          ? { pesoKg:null,alturaCm:null,bsaM2:null,clcr:null,medidoEm:null }
+          : consultaCorporal.avaliacaoClinica.dadosCorporais;
         const instanciacao = hoje.estado === "OK"
-          ? instanciarProtocolo(template, { pesoKg: null, alturaCm: null, bsaM2: null, clcr: null, medidoEm: null })
+          ? instanciarProtocolo(template, dadosCorporais)
           : { ok: false as const, recusa: { codigo: "DADOS_CORPORAIS_PENDENTES", motivo: hoje.codigo } };
         const itens = instanciacao.ok ? instanciacao.itens.map((item) => item.item) : [];
         const seguranca = { resultado: "NOT_EVALUABLE" as const,
@@ -817,18 +848,23 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       }
       const quickLine = parserLinha(parsed.data.expression!);
       const classificacao = classificarDocumento(quickLine.parsed.drug ?? "", deps.corpus?.regulatorio ?? null);
+      let configuracaoReceituario=lerConfiguracaoServico(null);
+      try { configuracaoReceituario=lerConfiguracaoServico(deps.settings?.readBox(NUMERO_CAIXA_RECEITUARIO_ESPECIAL,sessao).value); }
+      catch { /* Recurso do serviço não comprovado: permanece falso. */ }
+      const receituario=rotearItemReceita({id:"linha-manual",medicamento:quickLine.parsed.drug ?? ""},
+        configuracaoReceituario,deps.corpus?.controlados ?? []);
       const seguranca = { resultado: "NOT_EVALUABLE" as const,
         motivos: [{ codigo: "SEM_ITEM_E_REQUISITO_TIPADO",
           texto: "linha em rascunho sem item validado e sem requisitos de segurança declarados",
           fonte: "prescricao local: fonte/manual" }] };
       const saved = salvarDraft(deps.db, { draftId: randomUUID(), patientId: contexto.patientId,
         sourceId: "linha-manual-de-prescricao", rawRef: "proposta-prescricao-local",
-        payload: { kind: "PRESCRICAO_RASCUNHO", contexto, quickLine, classificacao, seguranca,
+        payload: { kind: "PRESCRICAO_RASCUNHO", contexto, quickLine, classificacao, seguranca,receituario,
           status: "RASCUNHO", assinada: false },
         diagnostics: [...quickLine.pendencias, ...(classificacao.estado === "PENDENTE" ? ["CLASSIFICACAO_DOCUMENTAL_PENDENTE"] : []),
           "SEGURANCA_NAO_AVALIAVEL", "REVISAO_MEDICA_OBRIGATORIA"], revision: 0, criadoEm: deps.agora() });
       return reply(201, "PRESCRICAO_RASCUNHO_SALVA", { draftId: saved.draftId, quickLine,
-        classificacao, seguranca, assina: false, exporta: false });
+        classificacao, seguranca, receituario, assina: false, exporta: false });
     }
     if (["lerPerfil", "salvarPerfil", "lerCaixa", "alterarCaixa", "historicoConfig"].includes(rota)) {
       if (!deps.settings) return reply(503, "CONFIGURACAO_INDISPONIVEL");
@@ -871,13 +907,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     if (rota === "carregarConsulta") {
       const parsed = z.object({ patientId: Id, tumorLotId: Id.nullable().optional() }).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
-      const numeroModelo = deps.corpus?.caixasTodas.find((c) => c.chave === CHAVE_CAIXA_MODELO_FLASH)?.numero ?? null;
-      let modeloFlash = null as ReturnType<typeof lerModeloFlash>;
-      if (numeroModelo !== null && deps.settings) {
-        try { modeloFlash = lerModeloFlash(deps.settings.readBox(numeroModelo, sessao).value); } catch { modeloFlash = null; }
-      }
       const result = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao, parsed.data.tumorLotId,
-        { limiarPlaquetas: deps.corpus?.limiarPlaquetas ?? null, modeloFlash });
+        opcoesLeituraConsulta(deps, sessao));
       if (!("codigo" in result)) deps.sessoes.selecionarConsulta(token, {
         patientId: result.patientId, encounterId: result.encounterId, tumorLotId: result.tumorLotId,
       });
@@ -895,12 +926,17 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if (contexto.patientId !== parsed.data.patientId || contexto.encounterId !== parsed.data.encounterId
         || (contexto.tumorLotId ?? null) !== parsed.data.tumorLotId)
         return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
-      const consultaRevisada = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao, parsed.data.tumorLotId);
+      const consultaRevisada = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao, parsed.data.tumorLotId,
+        opcoesLeituraConsulta(deps, sessao));
       if ("codigo" in consultaRevisada) return reply(409, consultaRevisada.codigo);
       const resumoClinico = consultaRevisada.resumoConfirmadoParaDocumento;
       const result = "expectedRevision" in parsed.data
         ? salvarRascunhoFlash(deps.db, deps.agora(), parsed.data)
-        : prepararFinalizacaoFlash(deps.db, deps.agora(), parsed.data, resumoClinico);
+        : prepararFinalizacaoFlash(deps.db, deps.agora(), parsed.data, resumoClinico,
+          consultaRevisada.cabecalho.episodio && consultaRevisada.cabecalho.ciclo
+            ? { protocolo: consultaRevisada.cabecalho.episodio.esquemaId,
+              ciclo: consultaRevisada.cabecalho.ciclo.numero,
+              ciclosPrevistos: consultaRevisada.flash.ciclosPrevistos ?? null } : null);
       return reply(result.status, String(result.body.codigo), result.body);
     }
     if (rota === "agenda") {
@@ -928,7 +964,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
       const cnes = deps.settings?.readProfile(sessao).perfil.instituicao.cnes ?? "";
       const result = lerApacs(deps.db, deps.agora(), { caixas: deps.corpus?.caixasTodas ?? [],
-        sigtap: {}, cnesConfigurado: cnes });
+        sigtap: deps.corpus?.sigtap ?? {}, cnesConfigurado: cnes });
       return reply(200, result.estado === "FONTE_AUSENTE" ? "FONTE_APAC_AUSENTE" : "APAC_CARREGADA", result);
     }
     if (rota === "chat") {

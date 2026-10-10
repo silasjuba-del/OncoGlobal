@@ -41,7 +41,7 @@ describe("FN-16 / T-34 · semáforo de interações medicamentosas", () => {
     const semaforo = await fn16();
     if (!semaforo) return;
     const rsAtivo = { interacoes: [{ drogaA: "capecitabina", drogaBouClasse: "varfarina",
-      ativo: true, fonte: { tipo: "LITERATURA", trecho: "trecho que sustenta (K-27)" } }] };
+      ativo: true, fonte: { tipo: "LITERATURA", referencia: "fonte sintética", trecho: "trecho que sustenta (K-27)" } }] };
     expect(semaforo({ medicamentos: ["capecitabina", "varfarina"] }, rsAtivo).estado).toBe("VERMELHO");
   });
 

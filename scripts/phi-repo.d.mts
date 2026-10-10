@@ -42,7 +42,7 @@ export interface PhiFileDisposition {
     pages?: number[];
     parts?: string[];
   }>;
-  category?: "synthetic_visual_review" | "technical_font_asset";
+  category?: "synthetic_visual_review" | "technical_font_asset" | "official_public_archive";
   magic?: string;
   evidenceRef?: string;
   reason?: string;

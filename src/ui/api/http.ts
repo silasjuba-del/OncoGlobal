@@ -3,6 +3,7 @@ import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoas
 import { FonteRevisao, ReconciliacaoProposta, RevisaoPreparada } from "./revisaoExtracao.js";
 import { AcaoResposta, AgendaResposta, ApacResposta, BundleResposta, CanalResposta, ChatResposta, ConfirmacaoResposta, ConsultaResposta, FlashPreparadaResposta, FlashRascunhoResposta, SalaoResposta } from "./respostas.js";
 import { z } from "zod";
+import { ResultadoInstrumentoSchema } from "../../contracts/f0c/resultadoInstrumento.js";
 import {
   ErroPorta,
   type AcaoIntent,
@@ -72,6 +73,12 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   }
 
   return {
+    async avaliarInstrumento(contexto,pedido) {
+      const r=await enviar("/consulta/instrumento/avaliar",{...contexto,pedido},true);
+      const parsed=z.object({resultado:ResultadoInstrumentoSchema,gravado:z.literal(false),assinado:z.literal(false)}).safeParse(r.json);
+      if(r.status!==200 || !parsed.success)throw new ErroPorta(codigoDe(r.json,"PAYLOAD_INVALIDO"));
+      return parsed.data.resultado;
+    },
     async lerCaixaConfiguracao(numero) {
       const { status, json } = await enviar("/config/caixa/ler", { numero }, true);
       const parsed = CaixaConfiguracaoResposta.safeParse(json);
