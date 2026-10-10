@@ -84,6 +84,7 @@ export interface FlashVisao {
   alergia?: string;
   toxicidades?: readonly string[];
   avisos?: readonly string[];
+  parciaisCumulativos?: readonly string[];
   sugestoesLaboratorio?: readonly string[];
   modeloSolicitacoes?: {laboratorio:string[];imagem:string[]};
   laboratorios?: readonly { data: string; nome: string; fraseLaudo?: string;

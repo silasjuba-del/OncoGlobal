@@ -62,6 +62,7 @@ function opcoesLeituraConsulta(deps: ServidorDeps, sessao: SessaoLeitura) {
   return { limiarPlaquetas: deps.corpus?.limiarPlaquetas ?? null, modeloFlash,
     templates: deps.corpus?.templatesProtocolo ?? [], salaoRuleset: deps.salaoRuleset,
     interacoes: deps.corpus?.interacoes, catalogo: deps.corpus?.catalogoInteracoes, feveRuleset: deps.corpus?.feveRuleset,
+    tetosCumulativos: deps.corpus?.tetosCumulativos ?? [],
     instrumentos: deps.corpus?.instrumentos ?? [], ...(deps.corpus?.condicionais ? { condicionais: deps.corpus.condicionais } : {}) };
 }
 const sha = (s: string) => createHash("sha256").update(s).digest("hex");

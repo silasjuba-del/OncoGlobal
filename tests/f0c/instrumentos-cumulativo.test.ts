@@ -80,7 +80,7 @@ describe("F14: exposição longitudinal normalizada mg/m2", () => {
   it("atravessa episódios da mesma droga/paciente, inclui dose parcial e não dose prescrita", () => {
     const r = avaliarExposicaoCumulativa(entrada([admin("a", 60), { ...admin("b", 30, "ep2"), status: "PARCIAL" },
       { ...admin("c", 500), patientId: "outro" }, { ...admin("d", 500), droga: "outra" }]), limite);
-    expect(r).toMatchObject({ estado: "SEM_AVISO", totalMgM2: 90, episodios: ["ep1", "ep2"], adminIds: ["a", "b"] });
+    expect(r).toMatchObject({ estado: "ALARANJADO", totalMgM2: 90, episodios: ["ep1", "ep2"], adminIds: ["a", "b"] });
   });
   it("replay idêntico não duplica; conflito de dose/episódio fica pendente", () => {
     const a = admin("a", 60);
@@ -91,7 +91,7 @@ describe("F14: exposição longitudinal normalizada mg/m2", () => {
   });
   it("histórico incompleto não declara segurança e pode avisar excesso já demonstrado", () => {
     expect(avaliarExposicaoCumulativa({ ...entrada([admin("a", 60)]), historicoCompleto: false }, limite))
-      .toMatchObject({ estado: "PENDENTE", totalMgM2: null, totalConhecidoMgM2: 60 });
+      .toMatchObject({ estado: "ALARANJADO", totalMgM2: null, totalConhecidoMgM2: 60 });
     expect(avaliarExposicaoCumulativa({ ...entrada([admin("a", 120)]), historicoCompleto: false }, limite))
       .toMatchObject({ estado: "AVISO", totalMgM2: null, totalConhecidoMgM2: 120, pendencias: ["HISTORICO_LONGITUDINAL_INCOMPLETO"] });
   });

@@ -13,7 +13,7 @@ export type OrigemElegibilidade =
   | "interacoes"
   | "plaquetas"
   | "funcaoOrganica"
-  | "intercorrencia" | "emergencia" | "feve" | "basal" | "condicionais" | "intervalo";
+  | "intercorrencia" | "emergencia" | "feve" | "basal" | "condicionais" | "intervalo" | "cumulativo";
 
 export interface MotivoEntradaElegibilidade {
   texto: string;
@@ -41,6 +41,8 @@ export interface EntradasElegibilidadeCiclo {
   basal?: SinalElegibilidade | null;
   condicionais?: SinalElegibilidade | null;
   intervalo?: SinalElegibilidade | null;
+  /** Opcional. Só o teto atingido entra, na cor vermelha já existente. Item parcial não usa este farol. */
+  cumulativo?: SinalElegibilidade | null;
 }
 
 export interface MotivoElegibilidadeCiclo {
@@ -64,7 +66,7 @@ const ORDEM: readonly OrigemElegibilidade[] = [
   "plaquetas",
   "funcaoOrganica",
   "intercorrencia",
-  "emergencia", "feve", "basal", "condicionais", "intervalo",
+  "emergencia", "feve", "basal", "condicionais", "intervalo", "cumulativo",
 ];
 
 const ROTULO_NIVEL: Record<NivelMotivoElegibilidade, string> = {

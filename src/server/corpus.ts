@@ -16,6 +16,7 @@ import { carregarCompetenciaSigtap, type TabelasSigtap } from "../apac/sigtap.js
 import type { RegraInstrumento } from "../contracts/f0c/instrumentos.js";
 import type { RegraCondicional, RegraTermoComplementar } from "../contracts/f0c/condicionais.js";
 import type { EntradaControlado } from "../rules/prescricao/receituarioEspecial.js";
+import { lerTetosCumulativos } from "../rules/f0c/tetosCumulativos.js";
 
 const CaixaEnvelope = z.object({ schemaVersion: z.string(), versao: z.string(), caixas: z.array(CaixaNumerada) }).strict();
 const EntradaRegulatoria = z.object({ nomes: z.array(z.string()), tipo: PrescriptionDocumentType, fonte: z.string() }).strict();
@@ -86,6 +87,7 @@ export function carregarCorpusServidor() {
     interacoes: ler("rulesets/interacoes.v1.json") as RulesetSemaforo,
     catalogoInteracoes: ler("f0c/classes-farmacos.v1.json") as CatalogoInteracoes,
     feveRuleset: lerAlertaFeve(ler("rulesets/salao-feve.v1.json")),
+    tetosCumulativos: lerTetosCumulativos(ler("rulesets/cumulativo-tetos.v1.json")),
     sigtap, sigtapEstado,
     instrumentos: (ler("f0c/instrumentos.v1.json") as {instrumentos:RegraInstrumento[]}).instrumentos,
     condicionais: ler("f0c/condicionais.v1.json") as {regras:RegraCondicional[];termos:RegraTermoComplementar[]},

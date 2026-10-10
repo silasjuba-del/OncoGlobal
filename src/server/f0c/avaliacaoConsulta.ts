@@ -42,6 +42,7 @@ export interface EntradaAvaliacaoConsulta {
   condicionais?: SinalElegibilidade;
   intervalo?: SinalElegibilidade;
   interacoesCondicionadas?: SinalElegibilidade;
+  cumulativo?: SinalElegibilidade;
 }
 
 /** A avaliação consome o mesmo ledger da consulta; dado ausente continua com motivo explícito. */
@@ -131,6 +132,7 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     feve: !i.ciclo ? pend("esquema do ciclo não definido para avaliar FEVE") : feve
       ? sinal(feve.estado === "ALERTA" ? "VERMELHO" : feve.estado === "PENDENTE" || feve.pendentes.length ? "PENDENTE" : "VERDE",[...feve.motivos,...feve.pendentes].map(m=>m.texto)) : pend("regra FEVE indisponível"),
     ...(hbv.aplicavel ? {basal: hbv.faltantes.length ? pend(`HBV: verificar ${hbv.faltantes.join(", ")}`) : sinal("VERDE",[])} : {}),
+    ...(i.cumulativo ? {cumulativo: i.cumulativo} : {}),
   });
   const pesoAnterior = peso ? pesos.find(p=>Date.parse(p.data)<Date.parse(peso.data)) : null;
   const variacaoPeso = peso && pesoAnterior && pesoAnterior.kg>0 ? Math.abs(peso.kg-pesoAnterior.kg)/pesoAnterior.kg : null;
@@ -142,7 +144,8 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     ...(interacoes.estado === "VERMELHO" ? [interacoes.motivo] : []),
     ...(grau !== null && grau >= 2 ? ["Toxicidade registrada: revisar antes da decisão do ciclo"] : []),
     ...(feve?.estado === "ALERTA" ? feve.motivos.map(m=>m.texto) : []),
-    ...(hbv.faltantes.length ? [`Verificar sorologias: ${hbv.faltantes.join(", ")}`] : [])];
+    ...(hbv.faltantes.length ? [`Verificar sorologias: ${hbv.faltantes.join(", ")}`] : []),
+    ...(i.cumulativo?.estado === "VERMELHO" ? i.cumulativo.motivos.map(m => m.texto) : [])];
   const sugestoesLaboratorio = [...(interacoes.achados.some(a=>key(a.drogaA).includes("capecitabina") && key(a.drogaBouClasse).includes("varfarina")) ? ["INR"] : []),...hbv.faltantes];
   return { elegibilidade, renal, dadosCorporais, variacaoPeso, criticos, hbv, interacoes, emergencia, avisosFlash, sugestoesLaboratorio,
     lembrete: elegibilidade.motivos.map(m=>m.texto).filter((t,index,a)=>a.indexOf(t)===index).join("; ") };

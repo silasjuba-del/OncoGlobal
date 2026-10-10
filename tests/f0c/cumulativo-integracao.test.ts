@@ -41,7 +41,7 @@ describe("F14: exposição cumulativa do ledger sem teto inventado", () => {
     expect(ambigua.avaliacoes[0]?.avaliacao.totalConhecidoMgM2).toBe(90);
     expect(ambigua.avaliacoes[0]?.avaliacao.pendencias).toContain("LIMITE_AMBIGUO");
     const separado = projetarCumulativoClinico({ ...base, eventos: [evento("a")], programados: ["droga-sem-historico", "droga-sintetica"], limites: [limite] });
-    expect(separado.avaliacoes[1]?.avaliacao.estado).toBe("SEM_AVISO");
+    expect(separado.avaliacoes[1]?.avaliacao.estado).toBe("ALARANJADO");
   });
   it("exposição é longitudinal do paciente, mantém origem de lote e consulta anteriores", () => {
     const antigo = evento("antigo", dados(), { tumorLotId: "outro-lote-do-mesmo-paciente", encounterId: "consulta-antiga" });

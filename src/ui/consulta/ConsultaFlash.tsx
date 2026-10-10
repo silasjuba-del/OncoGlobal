@@ -17,6 +17,7 @@ export interface ConsultaFlashProps {
   laboratorios?: readonly ExameRecenteFlash[];
   toxicidades?: readonly string[];
   avisos?: readonly string[];
+  parciaisCumulativos?: readonly string[];
   sugestoesLaboratorio?: readonly string[];
   pacienteNome?: string;
   hoje?: string;
@@ -83,6 +84,7 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
       <section className="flash-linha" aria-label="Tratamento vigente"><h3>QT</h3><p><strong>{presente(c.tratamentoAtual)} · ciclo {presente(c.cicloDia)}</strong> <small>Previsto · último administrado: {presente(c.ultimoAdministrado)}</small></p></section>
       <section className="flash-seguranca" aria-label="Toxicidades e alergia"><div><strong>TOX</strong> {props.toxicidades?.length ? props.toxicidades.join(" · ") : "Sem sintomas registrados"}</div><div><strong>ALERGIA</strong> {c.alergia?.trim() || "Não informada"}</div></section>
       {props.avisos?.length ? <p role="alert" aria-label="Lembretes agrupados">{props.avisos.join("; ")}</p> : null}
+      {props.parciaisCumulativos?.length ? <p className="flash-alaranjado" data-cor="ALARANJADO">{props.parciaisCumulativos.join("; ")}</p> : null}
       {props.sugestoesLaboratorio?.length ? <button type="button" onClick={() => setOutrosLab(atual =>
         [...new Set([...limparOutros(atual),...props.sugestoesLaboratorio!])].join("; "))}>
         Incluir exames sugeridos: {props.sugestoesLaboratorio.join(", ")}</button> : null}

@@ -1,14 +1,14 @@
 import { z } from "zod";
 import type { ClinicalEvent } from "../../contracts/operacao.js";
 import { dadosDoEvento, eventosVigentes, projetarSnapshot } from "../../kernel/projections/snapshot.js";
-import { avaliarExposicaoCumulativa, calcularTotalExposicao, type EntradaExposicaoCumulativa,
+import { avaliarTetosExposicao, calcularTotalExposicao, chaveDroga, type EntradaExposicaoCumulativa,
   type LimiteExposicaoCumulativa } from "../../rules/cumulativoAlerta.js";
 
 const id = z.string().trim().min(1);
 const fonte = id.nullable();
 const administracao = z.object({ adminId: id, patientId: id, episodioId: id, droga: id,
   status: z.enum(["COMPLETA", "PARCIAL", "INTERROMPIDA", "OMITIDA"]), quantidadeEfetivaMgM2: z.number().finite().nonnegative().nullable(),
-  unidade: z.literal("mg/m2"), fonte, realizadaEm: id.nullable().optional() }).strict();
+  unidade: z.enum(["mg/m2", "U", "U/m2"]), fonte, realizadaEm: id.nullable().optional() }).strict();
 const instanteEfetivo = z.iso.datetime({ offset: true }).refine((s) => Number.isFinite(Date.parse(s)));
 
 /** Snapshot explícito de uma droga: dose já normalizada por administração; não faz conversão mg→mg/m². */
@@ -47,13 +47,13 @@ export function projetarCumulativoClinico(i: EntradaCumulativoClinico) {
   for (const e of eventosVigentes(eventos)) {
     const parsed = ExposicaoCumulativaDados.safeParse(dadosDoEvento(e)?.valor);
     if (!parsed.success || parsed.data.patientId !== i.patientId) { invalidos.push(e.eventId); continue; }
-    grupos.set(parsed.data.droga, [...(grupos.get(parsed.data.droga) ?? []), e]);
+    grupos.set(chaveDroga(parsed.data.droga), [...(grupos.get(chaveDroga(parsed.data.droga)) ?? []), e]);
   }
   if (invalidos.length) pendencias.push("FATOS_CUMULATIVOS_INVALIDOS");
   const pendenciasEntrada = [...pendencias];
   const drogas = [...new Set((i.programados ?? []).filter((d) => d.trim()))];
   const avaliacoes = drogas.map((droga) => {
-    const originais = grupos.get(droga) ?? [];
+    const originais = grupos.get(chaveDroga(droga)) ?? [];
     // A cópia só permite ao projetor aplicar sua política de conflito/substituição ao alcance longitudinal.
     // Metadados originais são mantidos em origens; nenhum evento do ledger é alterado.
     const vista = originais.map((e) => ({ ...e, tumorLotId: i.tumorLotId, encounterId: i.encounterId,
@@ -96,11 +96,12 @@ export function projetarCumulativoClinico(i: EntradaCumulativoClinico) {
     }
     const entrada: EntradaExposicaoCumulativa = { ...dados, administracoes,
       historicoCompleto: temporalIncompleto ? false : dados.historicoCompleto };
-    const limites = i.limites.filter((l) => l.droga === droga);
+    const limites = i.limites.filter((l) => chaveDroga(l.droga) === chaveDroga(droga));
     const apenasTotal = i.somenteTotal === true;
-    const resultado = apenasTotal ? calcularTotalExposicao(entrada) : avaliarExposicaoCumulativa(entrada, limites.length === 1 ? limites[0]! : null);
-    if (!apenasTotal && limites.length > 1) locais.push("LIMITE_AMBIGUO");
-    const faltouLimite = !apenasTotal && (limites.length !== 1 || resultado.pendencias.includes("LIMITE_CURADO_INCOMPATIVEL_OU_AUSENTE"));
+    const unidades = limites.map((l) => l.unidade);
+    const resultado = apenasTotal ? calcularTotalExposicao(entrada) : avaliarTetosExposicao(entrada, limites);
+    if (!apenasTotal && new Set(unidades).size !== unidades.length) locais.push("LIMITE_AMBIGUO");
+    const faltouLimite = !apenasTotal && (limites.length === 0 || resultado.pendencias.includes("LIMITE_CURADO_INCOMPATIVEL_OU_AUSENTE"));
     if (faltouLimite) locais.push("PENDENTE_LIMITE");
     const avaliacao = { ...resultado, pendencias: [...new Set([...locais, ...resultado.pendencias])] };
     pendencias.push(...avaliacao.pendencias.map((p) => `${droga}:${p}`));

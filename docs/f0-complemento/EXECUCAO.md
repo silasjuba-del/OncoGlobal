@@ -123,3 +123,10 @@ Jornada no Edge, banco temporário novo, `OncoassistLocal` → `ConsultaPersisti
 | C5 | PASS | recuperação de falha provada no teste; no browser a impressão concluiu |
 | N12 | PARTIAL | percurso de produção sintético feito; faltam falha visual, troca de paciente, alergia, TOX e varfarina na mesma navegação |
 | C11 | PASS | 21 dias desde a assinatura |
+
+## D-F0C-08 — tetos e amarelo, 2026-10-10
+
+Dr. Silas fechou os tetos: doxorrubicina 550 mg/m², epirrubicina 900 mg/m², mitoxantrona 140 mg/m², bleomicina 400 U e 200 U/m², cisplatina 300 mg/m², oxaliplatina 850 mg/m². Cada droga no próprio teto. Chegar no teto acende vermelho e não bloqueia. Item parcial acende alaranjado, separado do farol verde, vermelho e pendente. Dado ausente continua pendente. Lipossomal e o corte de 100 U ficam de fora.
+
+Os itens que a matriz ainda marca PARTIAL permanecem amarelos: atenção, sem virar verde e sem segurar o teto. A regra está em `corpus/rulesets/cumulativo-tetos.v1.json`. Prova focal: `tests/f0c/tetos-cumulativos.test.ts`. Typecheck passou. A suíte inteira não foi reexecutada nesta gravação.
+

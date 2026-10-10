@@ -40,6 +40,7 @@ import { projetarCondicionaisClinicas, type EntradaCondicionaisClinicas } from "
 import { projetarIntervaloCiclo } from "./f0c/intervaloCiclo.js";
 import { avaliarInteracoesCondicionadasDaConsulta } from "./f0c/interacoesCondicionadas.js";
 import { projetarCumulativoClinico } from "./f0c/cumulativoClinico.js";
+import { chaveDroga, type LimiteExposicaoCumulativa } from "../rules/cumulativoAlerta.js";
 
 const RecistSerieSchema = z.object({
   patientId: z.string().min(1), tumorLotId: z.string().nullable(), episodioId: z.string().min(1),
@@ -168,6 +169,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     templates?: readonly unknown[]; salaoRuleset?: unknown; interacoes?: EntradaAvaliacaoConsulta["interacoes"];
     catalogo?: EntradaAvaliacaoConsulta["catalogo"]; feveRuleset?: EntradaAvaliacaoConsulta["feveRuleset"];
     instrumentos?: readonly RegraInstrumento[];
+    tetosCumulativos?: readonly LimiteExposicaoCumulativa[];
     condicionais?: {regras:EntradaCondicionaisClinicas["regras"];termos:NonNullable<EntradaCondicionaisClinicas["regrasTermos"]>} } = {}) {
   const all = eventos(db), paciente = porTipo(all, "Paciente", Paciente)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value;
@@ -299,9 +301,19 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   const interacoesCondicionadas=avaliarInteracoesCondicionadasDaConsulta({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
     encounterId:current.encounterId,agora,regrasInteracoes:config.interacoes?.interacoes ?? [],...(config.catalogo?{catalogo:config.catalogo}:{})});
   const avisosInteracoesCondicionadas=interacoesCondicionadas.resultados.filter(r=>r.estado==="AVISO");
+  const tetos=config.tetosCumulativos ?? [];
+  const drogasCiclo=ciclos.at(-1)?.itens.map(item=>item.droga).filter(d=>d.trim()) ?? [];
+  const vigiadas=[...new Set(drogasCiclo.filter(d=>tetos.some(t=>chaveDroga(t.droga)===chaveDroga(d))))];
   const cumulativo=projetarCumulativoClinico({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
-    encounterId:current.encounterId,agora,limites:[],
-    programados:ciclos.at(-1)?.itens.map(item=>item.droga).filter(d=>d.trim().toLowerCase()==="doxorrubicina") ?? null});
+    encounterId:current.encounterId,agora,limites:tetos.filter(t=>vigiadas.some(d=>chaveDroga(t.droga)===chaveDroga(d))),
+    programados:vigiadas});
+  const sinalCumulativo=(() => {
+    const avisos=cumulativo.avaliacoes.filter(a=>a.avaliacao.estado==="AVISO");
+    if (!avisos.length) return undefined;
+    return {estado:"VERMELHO" as const,motivos:avisos.map(a=>({texto:`${a.droga}: dose acumulada chegou no teto. Revisão médica, sem bloqueio.`}))};
+  })();
+  const parciaisCumulativos=cumulativo.avaliacoes.filter(a=>a.avaliacao.estado==="ALARANJADO")
+    .map(a=>`${a.droga}: item parcial, abaixo do teto.`);
   const avaliacao = avaliarConsulta({ eventos: all, patientId, tumorLotId: lote?.tumorLotId ?? null,
     encounterId:current.encounterId, agora, hoje:civil.dataCivil, paciente, episodio, ciclo:ciclos.at(-1) ?? null,
     plaquetas:sinalPlaquetas(alertaPlaquetas), salaoRuleset:config.salaoRuleset,
@@ -312,6 +324,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
       motivos:interacoesCondicionadas.resultados.filter(r=>r.estado!=="NAO_APLICAVEL").map(r=>({texto:r.motivo}))}} : {}),
     ...(intervalo.aplicavel !== false ? {intervalo:{estado:intervalo.estado==="AVISO"?"VERMELHO" as const:intervalo.estado==="PENDENTE"?"PENDENTE" as const:"VERDE" as const,
       motivos:intervalo.estado==="SEM_AVISO"?[]:[{texto:`Intervalo do ciclo: ${intervalo.motivo ?? "PENDENTE"}`} ]}} : {}),
+    ...(sinalCumulativo ? {cumulativo:sinalCumulativo} : {}),
     ...(condicionais.avaliacoes.some(r=>r.estado!=="NAO_APLICAVEL") ? {condicionais:{
       estado:avisosCondicionais.length ? "VERMELHO" as const : pendenciasCondicionais.length ? "PENDENTE" as const : "VERDE" as const,
       motivos:[...avisosCondicionais,...pendenciasCondicionais].map(texto=>({texto}))}} : {}) });
@@ -375,7 +388,8 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     // W12-F4: Flash calculada do ledger; a data de referência é a do servidor, passada explicitamente.
     flash: { ...projetarFlash(eventosDaConsulta, civil.dataCivil, config.modeloFlash ?? null,
       rascunhoFlashDoContexto(db, { patientId, encounterId: current.encounterId, tumorLotId: lote?.tumorLotId ?? null })),
-      ...contextoClinico.flash, avisos:[...avaliacao.avisosFlash,...avisosCondicionais,...avisosInteracoesCondicionadas.map(r=>r.motivo)],sugestoesLaboratorio:avaliacao.sugestoesLaboratorio },
+      ...contextoClinico.flash, avisos:[...avaliacao.avisosFlash,...avisosCondicionais,...avisosInteracoesCondicionadas.map(r=>r.motivo)],sugestoesLaboratorio:avaliacao.sugestoesLaboratorio,
+      ...(parciaisCumulativos.length ? {parciaisCumulativos} : {}) },
     elegibilidade: avaliacao.elegibilidade,
     avaliacaoClinica: avaliacao,
     condicionaisClinicas:condicionais,

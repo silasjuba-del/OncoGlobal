@@ -44,6 +44,7 @@ describe("C-03 Dado<T>", () => {
   it("semáforo só tem 3 cores (Q10)", () => {
     expect(Semaforo.options).toEqual(["VERDE", "VERMELHO", "PENDENTE"]);
     expect(Semaforo.safeParse("AMARELO").success).toBe(false);
+    expect(Semaforo.safeParse("ALARANJADO").success).toBe(false);
   });
 });
 

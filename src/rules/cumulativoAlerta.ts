@@ -135,11 +135,12 @@ export interface LimiteExposicaoCumulativa {
 export interface ResultadoExposicaoCumulativa {
   patientId: string;
   droga: string;
-  estado: "AVISO" | "SEM_AVISO" | "PENDENTE";
+  /** AVISO = chegou no teto. ALARANJADO = item parcial abaixo do teto, fora do semáforo geral. PENDENTE = dado ausente. */
+  estado: "AVISO" | "ALARANJADO" | "SEM_AVISO" | "PENDENTE";
   totalConhecidoMgM2: number | null;
   /** Só preenchido quando a completude longitudinal está documentada. */
   totalMgM2: number | null;
-  unidade: "mg/m2";
+  unidade: "mg/m2" | "U" | "U/m2";
   adminIds: string[];
   episodios: string[];
   fontes: string[];
@@ -157,6 +158,15 @@ function decimalExposicao(n: number): { inteiro: bigint; casas: number } {
     : { inteiro: BigInt(inteira + fracao), casas };
 }
 
+const UNIDADES_EXPOSICAO = ["mg/m2", "U", "U/m2"] as const;
+
+export function chaveDroga(nome: string): string {
+  const base = nome.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  if (base === "epirubicina") return "epirrubicina";
+  if (base === "doxorubicina") return "doxorrubicina";
+  return base;
+}
+
 /** F14: alcance paciente × droga entre episódios; não soma equivalência entre moléculas. */
 export function avaliarExposicaoCumulativa(e: EntradaExposicaoCumulativa, limite: LimiteExposicaoCumulativa | null): ResultadoExposicaoCumulativa {
   const temFonte = (f: string | null): f is string => typeof f === "string" && f.trim().length > 0 && !f.includes("[VERIFICAR]");
@@ -167,8 +177,9 @@ export function avaliarExposicaoCumulativa(e: EntradaExposicaoCumulativa, limite
   const unicas = new Map<string, AdministracaoExposicao>();
   const assinaturas = new Map<string, string>();
   for (const a of e.administracoes) {
-    if (a.patientId !== e.patientId || a.droga !== e.droga) continue;
-    if (!a.adminId.trim() || !a.episodioId.trim() || !temFonte(a.fonte) || a.unidade !== "mg/m2" ||
+    if (a.patientId !== e.patientId || chaveDroga(a.droga) !== chaveDroga(e.droga)) continue;
+    if (limite && (UNIDADES_EXPOSICAO as readonly string[]).includes(a.unidade) && a.unidade !== limite.unidade) continue;
+    if (!a.adminId.trim() || !a.episodioId.trim() || !temFonte(a.fonte) || !(UNIDADES_EXPOSICAO as readonly string[]).includes(a.unidade) ||
       typeof a.quantidadeEfetivaMgM2 !== "number" || !Number.isFinite(a.quantidadeEfetivaMgM2) || a.quantidadeEfetivaMgM2 < 0 ||
       !["COMPLETA", "PARCIAL", "INTERROMPIDA", "OMITIDA"].includes(a.status) || (a.status === "OMITIDA" && a.quantidadeEfetivaMgM2 !== 0)) {
       return { ...r, pendencias: [`ADMINISTRACAO_INVALIDA:${a.adminId}`] };
@@ -194,19 +205,42 @@ export function avaliarExposicaoCumulativa(e: EntradaExposicaoCumulativa, limite
   const completo = e.historicoCompleto === true && temFonte(e.fonteCompletude);
   if (!completo) r.pendencias.push("HISTORICO_LONGITUDINAL_INCOMPLETO");
   else { r.totalMgM2 = total; r.fontes.push(e.fonteCompletude!); }
-  if (!limite || limite.ativo !== true || !limite.regraId.trim() || !limite.versao.trim() || limite.droga !== e.droga ||
-    limite.unidade !== "mg/m2" || !temFonte(limite.fonte) || typeof limite.maximo !== "number" ||
+  if (!limite || limite.ativo !== true || !limite.regraId.trim() || !limite.versao.trim() || chaveDroga(limite.droga) !== chaveDroga(e.droga) ||
+    !(UNIDADES_EXPOSICAO as readonly string[]).includes(limite.unidade) || !temFonte(limite.fonte) || typeof limite.maximo !== "number" ||
     !Number.isFinite(limite.maximo) || limite.maximo <= 0 || !["GT", "GTE"].includes(limite.comparador)) {
     r.pendencias.push("LIMITE_CURADO_INCOMPATIVEL_OU_AUSENTE"); return r;
   }
+  r.unidade = limite.unidade as ResultadoExposicaoCumulativa["unidade"];
   // Compara decimais exatos, evitando falso excesso por 0.1 + 0.2 > 0.3.
   const maximo = decimalExposicao(limite.maximo);
   const escala = Math.max(casas, maximo.casas);
   const totalComparavel = somaInteira * 10n ** BigInt(escala - casas);
   const maximoComparavel = maximo.inteiro * 10n ** BigInt(escala - maximo.casas);
   const excedido = limite.comparador === "GTE" ? totalComparavel >= maximoComparavel : totalComparavel > maximoComparavel;
-  r.estado = excedido ? "AVISO" : completo ? "SEM_AVISO" : "PENDENTE";
+  const itemParcial = efetivas.some((a) => a.status === "PARCIAL") || !completo;
+  r.estado = excedido ? "AVISO" : itemParcial ? "ALARANJADO" : "SEM_AVISO";
   return r;
+}
+
+/** Vários tetos da mesma droga só são válidos em unidades diferentes. Qualquer um atingido acende o alarme. */
+export function avaliarTetosExposicao(e: EntradaExposicaoCumulativa, limites: readonly LimiteExposicaoCumulativa[]): ResultadoExposicaoCumulativa {
+  if (limites.length === 0) return avaliarExposicaoCumulativa(e, null);
+  const unidades = limites.map((l) => l.unidade);
+  if (new Set(unidades).size !== unidades.length) {
+    const r = avaliarExposicaoCumulativa(e, null);
+    return { ...r, pendencias: [...new Set([...r.pendencias, "LIMITE_AMBIGUO"])] };
+  }
+  const partes = limites.map((l) => avaliarExposicaoCumulativa(e, l));
+  const estado = partes.some((p) => p.estado === "AVISO") ? "AVISO"
+    : partes.some((p) => p.estado === "PENDENTE") ? "PENDENTE"
+    : partes.some((p) => p.estado === "ALARANJADO") ? "ALARANJADO"
+    : "SEM_AVISO";
+  const base = partes.find((p) => p.estado === estado) ?? partes[0]!;
+  return { ...base, estado, consultaSegue: true,
+    pendencias: [...new Set(partes.flatMap((p) => p.pendencias))],
+    fontes: [...new Set(partes.flatMap((p) => p.fontes))],
+    adminIds: [...new Set(partes.flatMap((p) => p.adminIds))],
+    episodios: [...new Set(partes.flatMap((p) => p.episodios))] };
 }
 
 export type ResultadoTotalExposicao = Omit<ResultadoExposicaoCumulativa, "estado" | "regraVersao" | "limiteFonte"> & {

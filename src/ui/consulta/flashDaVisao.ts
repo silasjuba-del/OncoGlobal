@@ -32,6 +32,7 @@ export function montarPropsFlash(visao: ConsultaVisao, _chart: CabecalhoChart | 
     },
     exames: f?.exames ?? [], laboratorios: f?.laboratorios ?? [], toxicidades: f?.toxicidades ?? [],
     avisos:f?.avisos ?? [], sugestoesLaboratorio:f?.sugestoesLaboratorio ?? [],
+    ...(f?.parciaisCumulativos?.length ? {parciaisCumulativos:f.parciaisCumulativos} : {}),
     ...(f?.rascunho?.plano ? {planoInicial: f.rascunho.plano} : {}),
     ...(f?.modeloSolicitacoes ? {modeloSolicitacoes:f.modeloSolicitacoes} : {}),
     acoesHoje: [], receitas: [],
