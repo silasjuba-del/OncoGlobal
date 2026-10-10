@@ -22,9 +22,9 @@ async function abrir(aoAbrirApac?: () => void) {
     transporte(typeof input === "string" && input.startsWith("/") ? `${ambiente.baseUrl}${input}` : input, init));
   const porta = criarPortaHttp({ onSessaoExpirada: () => {} });
   expect((await porta.login(SENHA)).ok).toBe(true);
-  render(<ConsultaPersistida porta={porta} contexto={contexto} {...(aoAbrirApac ? { aoAbrirApac } : {})} />);
+  const view = render(<ConsultaPersistida porta={porta} contexto={contexto} {...(aoAbrirApac ? { aoAbrirApac } : {})} />);
   await screen.findByRole("button", { name: "Consulta Flash" });
-  return ambiente;
+  return Object.assign(ambiente, { rerender: view.rerender, porta });
 }
 
 async function preparar() {
@@ -109,11 +109,32 @@ describe("C2 · consulta local real e conteúdo visível antes de assinar", () =
     fireEvent.change(screen.getByLabelText("Prazo do retorno em dias"), { target: { value: "30" } });
     fireEvent.click(screen.getByRole("button", { name: "Revisar documentos para assinatura" }));
     const exibicao = await screen.findByRole("region", { name: "Conteúdo para assinatura" });
+    const acoes: Array<{ verbo?: string; idempotencyKey?: string; objeto?: { id?: string; versao?: number } }> = [];
+    const transporte = globalThis.fetch;
+    vi.stubGlobal("fetch", async (input: Parameters<typeof fetch>[0], init?: Parameters<typeof fetch>[1]) => {
+      if (typeof input === "string" && input.endsWith("/acao") && typeof init?.body === "string")
+        acoes.push(JSON.parse(init.body) as typeof acoes[number]);
+      return transporte(input, init);
+    });
     fireEvent.click(within(exibicao).getByRole("button", { name: "Confirmar e assinar conteúdo exibido" }));
     await waitFor(() => expect(ambiente.eventos().filter((e) => e.revisao === "ASSINADO")).toHaveLength(3));
-    expect(await screen.findByRole("button", { name: "Solicitar impressão novamente" })).toBeTruthy();
+    const repetir = await screen.findByRole("button", { name: "Solicitar impressão novamente" });
+    await waitFor(() => {
+      expect((repetir as HTMLButtonElement).disabled).toBe(false);
+      expect(screen.getByRole("region", { name: "Histórico de documentos assinados" }).querySelectorAll("article")).toHaveLength(3);
+    });
+    expect(acoes).toHaveLength(1);
+    const primeira = acoes[0]!;
+    expect(primeira.verbo).toBe("IMPRIMIR");
+    expect(primeira.objeto?.id).toBeTruthy();
+    expect(primeira.objeto?.versao).toBeGreaterThan(0);
     fireEvent.click(screen.getByRole("button", { name: "Solicitar impressão novamente" }));
-    await waitFor(() => expect(ambiente.eventos().filter((e) => e.revisao === "ASSINADO")).toHaveLength(3));
+    await waitFor(() => expect(acoes).toHaveLength(2));
+    expect(acoes[1]).toEqual(primeira);
+    expect(ambiente.eventos().filter((e) => e.revisao === "ASSINADO")).toHaveLength(3);
+    ambiente.rerender(<ConsultaPersistida porta={ambiente.porta} contexto={{ patientId: "paciente-troca-sintetica", encounterId: "consulta-troca", tumorLotId: null }} />);
+    await waitFor(() => expect(screen.queryByRole("button", { name: "Solicitar impressão novamente" })).toBeNull());
+    expect(acoes).toHaveLength(2);
   });
 });
 

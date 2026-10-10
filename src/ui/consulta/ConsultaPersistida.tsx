@@ -27,7 +27,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: Po
 
   useEffect(() => {
     const atual = ++geracao.current;
-    emCurso.current = false; setOcupado(false); setVisao(null); setPreview(null); setFlash(false);
+    emCurso.current = false; setOcupado(false); setPreview(null); setFlash(false);
     tentativaPreparacao.current = null;
     void porta.carregarConsulta(patientId, tumorLotId).then((bruto) => {
       if (atual !== geracao.current) return;
@@ -160,22 +160,24 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: Po
     });
   }
 
-  if (!visao) return <section aria-label="Consulta persistida"><p aria-live="polite">
+  const visaoPronta = visao && visao.patientId === patientId && visao.encounterId === encounterId
+    && visao.tumorLotId === tumorLotId ? visao : null;
+  if (!visaoPronta) return <section aria-label="Consulta persistida"><p aria-live="polite">
     {mensagem || "Carregando consulta persistida…"}</p></section>;
   const propsFlash: ConsultaFlashProps = {
-    ...montarPropsFlash(visao, null, preparar, salvar),
+    ...montarPropsFlash(visaoPronta, null, preparar, salvar),
     ...(aoAbrirApac ? {aoAbrirApac} : {}),
     ocupado, rotuloFinalizar: "Revisar documentos para assinatura", aoSalvarRascunho: salvar, aoFinalizar: preparar,
   };
   return <section aria-label="Consulta persistida">
-    <h2>{visao.cabecalho.paciente.nome} · consulta local</h2>
-    <p>{visao.hoje} · Dados pendentes: {visao.cabecalho.pendentes}</p>
-    {visao.alertas.filter((a) => a.presentationOverride).map((a) =>
+    <h2>{visaoPronta.cabecalho.paciente.nome} · consulta local</h2>
+    <p>{visaoPronta.hoje} · Dados pendentes: {visaoPronta.cabecalho.pendentes}</p>
+    {visaoPronta.alertas.filter((a) => a.presentationOverride).map((a) =>
       <aside role="alert" data-banner="e1" key={a.alertaId}><strong>Emergência E1</strong><p>{a.texto}</p></aside>)}
     {mensagem ? <p aria-live="polite">{mensagem}</p> : null}
     <h3>Evolução revisada</h3>
-    <pre style={{ whiteSpace: "pre-wrap" }}>{visao.resumoEvolucao ?? "Evolução PENDENTE de revisão."}</pre>
-    {visao.retratoTransversal ? <CartaoTransversal entrada={visao.retratoTransversal} />
+    <pre style={{ whiteSpace: "pre-wrap" }}>{visaoPronta.resumoEvolucao ?? "Evolução PENDENTE de revisão."}</pre>
+    {visaoPronta.retratoTransversal ? <CartaoTransversal entrada={visaoPronta.retratoTransversal} />
       : <p>Cartão transversal PENDENTE de fonte estruturada.</p>}
     <button type="button" disabled={ocupado} onClick={() => { setPreview(null); setFlash(true); }}>Consulta Flash</button>
     <button type="button" disabled={ocupado} onClick={() => setVersao((v) => v + 1)}>Reabrir histórico</button>
@@ -197,8 +199,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: Po
       <button type="button" disabled={ocupado} onClick={repetirImpressao}>Solicitar impressão novamente</button>
     </p> : null}
     <section aria-label="Histórico de documentos assinados"><h3>Histórico de documentos assinados</h3>
-      {(visao.historicoDocumentos ?? []).length === 0 ? <p>Nenhum documento assinado neste histórico.</p>
-        : visao.historicoDocumentos!.map((doc) => <article key={doc.eventId}>
+      {(visaoPronta.historicoDocumentos ?? []).length === 0 ? <p>Nenhum documento assinado neste histórico.</p>
+        : visaoPronta.historicoDocumentos!.map((doc) => <article key={doc.eventId}>
           <h4>{doc.titulo}</h4><p>{doc.assinadoEm} · {doc.autorId} · {doc.encounterId}</p>
           <pre style={{ whiteSpace: "pre-wrap" }}>{doc.texto}</pre>
         </article>)}
