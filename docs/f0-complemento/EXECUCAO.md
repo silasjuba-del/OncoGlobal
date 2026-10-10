@@ -108,4 +108,18 @@ Jornada automatizada que passou nesta suíte: `tests/f0c/flash-jornada.test.tsx`
 | N11 | PARTIAL | pendências agrupadas no código; cliques não medidos |
 | N12 | PARTIAL | jornada HTTP/SQLite passou; browser e demo `OncoassistLocal` não executados |
 
-F0-COMPLEMENTO não está fechado: N12 sem browser e vários itens PARTIAL. O prazo do salão de 21 dias passou na prova focal `salao-fontes` (12/12); a suíte integral não foi repetida depois dessa decisão.
+F0-COMPLEMENTO não está fechado: vários itens PARTIAL permanecem. O prazo do salão de 21 dias passou na prova focal `salao-fontes` (12/12).
+
+### Rodada da recuperação de impressão — `d96cedf`
+
+A recarga da mesma consulta não apaga mais a visão, então o botão “Solicitar impressão novamente” continua utilizável depois da falha. Trocar paciente/consulta descarta essa intenção. `tests/f0-fecha/c2-consulta-local.test.tsx` confere assinatura única (3 documentos), repetição com o mesmo id, versão e chave, e ausência do botão após a troca.
+
+Checks do PR #6 nesse SHA, evento `pull_request`, run https://github.com/silasjuba-del/OncoGlobal/actions/runs/38081685911 : typecheck + fronteiras + testes SUCCESS; provas adversariais W10 e W8 SUCCESS. O evento `push` do mesmo SHA também passou: https://github.com/silasjuba-del/OncoGlobal/actions/runs/38081680941
+
+Jornada no Edge, banco temporário novo, `OncoassistLocal` → `ConsultaPersistida`, LLM desligada pelo demo: agenda do Paciente Teste 92, Flash, HMG, TC de tórax, decisão de ciclo, retorno 30 dias, rascunho salvo, conteúdo exibido, três documentos no histórico. Recarga da página, novo login e reabertura mantiveram os três. A impressão do servidor de produção concluiu, então o botão de recuperação não apareceu nesse percurso. Alergia, TOX, capecitabina/varfarina e troca de paciente não entraram nessa navegação visual.
+
+| ID | Estado nesta nota | Limite que permanece |
+|---|---|---|
+| C5 | PASS | recuperação de falha provada no teste; no browser a impressão concluiu |
+| N12 | PARTIAL | percurso de produção sintético feito; faltam falha visual, troca de paciente, alergia, TOX e varfarina na mesma navegação |
+| C11 | PASS | 21 dias desde a assinatura |
