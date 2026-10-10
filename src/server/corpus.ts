@@ -1,11 +1,14 @@
 import { readdirSync, readFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, URL as NodeURL } from "node:url";
 import { z } from "zod";
 import { CaixaNumerada } from "../contracts/w10/clinico-w10.js";
 import { SalaoRuleset } from "../contracts/regras.js";
 import { PrescriptionDocumentType } from "../contracts/w10/prescricao.js";
 import { ProtocolTemplate } from "../contracts/w10/prescricao.js";
 import type { TabelaRegulatoria } from "../rules/prescricao/classificarDocumento.js";
+import { RulesetHeader } from "../contracts/agentes.js";
+import { lerRadsEmergencias } from "../rules/radsEmergencias.js";
+import { lerLimiarAlertaPlaquetas, type LimiarAlertaPlaquetas } from "../rules/plaquetasAlerta.js";
 
 const CaixaEnvelope = z.object({ schemaVersion: z.string(), versao: z.string(), caixas: z.array(CaixaNumerada) }).strict();
 const EntradaRegulatoria = z.object({ nomes: z.array(z.string()), tipo: PrescriptionDocumentType, fonte: z.string() }).strict();
@@ -16,11 +19,11 @@ const FichaReceita = z.object({ consumivel: z.boolean().optional(), aprovadoMedi
 const ReceitasEnvelope = z.object({ consumivel: z.boolean(), fichas: z.array(FichaReceita) }).passthrough();
 
 function ler(relativo: string): unknown {
-  const caminho = fileURLToPath(new URL(`../../corpus/${relativo}`, import.meta.url));
+  const caminho = fileURLToPath(new NodeURL(`../../corpus/${relativo}`, import.meta.url));
   return JSON.parse(readFileSync(caminho, "utf8")) as unknown;
 }
 function lerTemplatesProtocolo() {
-  const root = new URL("../../corpus/fichas/", import.meta.url);
+  const root = new NodeURL("../../corpus/fichas/", import.meta.url);
   const dir = fileURLToPath(root);
   const encontrados: z.infer<typeof ProtocolTemplate>[] = [];
   const visitar = (path: string): void => {
@@ -56,8 +59,14 @@ export function carregarCorpusServidor() {
   const table: TabelaRegulatoria = { versao: regulatorio.versao, fonte: regulatorio.fonte,
     entradas: regulatorio.entradas as TabelaRegulatoria["entradas"] };
   const receitasElegiveis = filtrarReceitasConsumiveis(ler("receitas/comuns.v1.json"));
+  const radsInput = ler("rulesets/rads-emergencias.v1.json");
+  RulesetHeader.parse((radsInput as { header?: unknown }).header);
+  const rads = lerRadsEmergencias(radsInput);
+  // W11-H22: limiar do alerta de plaquetas. Ausente ou inválido = alerta PENDENTE na visão, nunca silêncio.
+  let limiarPlaquetas: LimiarAlertaPlaquetas | null = null;
+  try { limiarPlaquetas = lerLimiarAlertaPlaquetas(ler("rulesets/lab-thresholds.v1.json")); } catch { /* PENDENTE na visão */ }
   return { caixas: caixaEnvelope.caixas.filter((c) => c.chave.startsWith("config.")),
     caixasTodas: caixaEnvelope.caixas, ruleset, regulatorio: table, receitasElegiveis,
-    templatesProtocolo: lerTemplatesProtocolo(),
+    templatesProtocolo: lerTemplatesProtocolo(), rads, limiarPlaquetas,
     versoes: { caixas: caixaEnvelope.versao, regulatorio: table.versao, ruleset: ruleset.header.versao } };
 }

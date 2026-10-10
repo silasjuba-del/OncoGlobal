@@ -1,0 +1,212 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal
+
+ ❯ tests/server/server.test.ts (6 tests | 2 failed) 1215ms
+   × G-25 rejeita assinatura fora do bundle; validação grava N eventos e não imprime 186ms
+   × A13 assina só o conteúdo exato exibido; draft alterado após exibição → 409 160ms
+ ❯ tests/server/reautoria-confirmacao.test.ts (8 tests | 7 failed) 1211ms
+   × reauditoria: rejeita fato-oculto atomicamente 151ms
+   × reauditoria: rejeita documento-oculto atomicamente 131ms
+   × reauditoria: rejeita desmarcado atomicamente 136ms
+   × reauditoria: rejeita duplicado atomicamente 130ms
+   × reauditoria: rejeita lote atomicamente 131ms
+   × reauditoria: rejeita alias atomicamente 146ms
+   × fato genérico exibido e selecionado pode ser confirmado, sem assinatura documental 122ms
+ ❯ tests/server/bundle.test.ts (6 tests | 4 failed) 936ms
+   × ADV-002 · bundle deve ser exibido por rota real antes de qualquer confirmação (K-25/A13) 237ms
+   × W4-03 · login → bundle → confirmar usa hash servidor e grava assinatura sem imprimir 138ms
+   × W4-03/A13 · draft alterado depois da exibição não é assinado 135ms
+   × W4-03/G-25 · documento fora do bundle segue rejeitado 126ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 13 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/server/bundle.test.ts > ADV-002 · bundle deve ser exibido por rota real antes de qualquer confirmação (K-25/A13)
+AssertionError: expected 409 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 409
+
+ ❯ tests/server/bundle.test.ts:28:22
+     26|     const r = await f.request("/consulta/bundle", "POST", JSON.stringi…
+     27|       f.token, "application/json");
+     28|     expect(r.status).toBe(200);
+       |                      ^
+     29|     expect(r.body).toContain("doc-bundle");
+     30|     expect(r.body).toMatch(/[a-f0-9]{64}/);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/15]⎯
+
+ FAIL  tests/server/bundle.test.ts > W4-03 · login → bundle → confirmar usa hash servidor e grava assinatura sem imprimir
+AssertionError: expected 409 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 409
+
+ ❯ tests/server/bundle.test.ts:54:22
+     52|     const r = await f.request("/consulta/bundle", "POST", JSON.stringi…
+     53|       f.token, "application/json");
+     54|     expect(r.status).toBe(200);
+       |                      ^
+     55|     const result = JSON.parse(r.body) as { documentos: { documentId: s…
+     56|       documentVersion: number; conteudoHash: string; conteudo: unknown…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/15]⎯
+
+ FAIL  tests/server/bundle.test.ts > W4-03/A13 · draft alterado depois da exibição não é assinado
+AssertionError: expected 409 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 409
+
+ ❯ tests/server/bundle.test.ts:77:45
+     75|     salvarDraft(f.db, draft());
+     76|     expect((await f.request("/consulta/bundle", "POST", JSON.stringify…
+     77|       f.token, "application/json")).status).toBe(200);
+       |                                             ^
+     78|     salvarDraft(f.db, { ...draft(), revision: 1,
+     79|       payload: { ...draft().payload, texto: "texto sintético alterado"…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/15]⎯
+
+ FAIL  tests/server/bundle.test.ts > W4-03/G-25 · documento fora do bundle segue rejeitado
+AssertionError: expected 409 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 409
+
+ ❯ tests/server/bundle.test.ts:110:45
+    108|     salvarDraft(f.db, draft());
+    109|     expect((await f.request("/consulta/bundle", "POST", JSON.stringify…
+    110|       f.token, "application/json")).status).toBe(200);
+       |                                             ^
+    111|     const r = await f.request("/consulta/confirmar", "POST",
+    112|       JSON.stringify(confirmar("bundle-forjado-01", "doc-nao-exibido")…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/15]⎯
+
+ FAIL  tests/server/reautoria-confirmacao.test.ts > reauditoria: rejeita fato-oculto atomicamente
+ FAIL  tests/server/reautoria-confirmacao.test.ts > reauditoria: rejeita documento-oculto atomicamente
+ FAIL  tests/server/reautoria-confirmacao.test.ts > reauditoria: rejeita desmarcado atomicamente
+ FAIL  tests/server/reautoria-confirmacao.test.ts > reauditoria: rejeita duplicado atomicamente
+ FAIL  tests/server/reautoria-confirmacao.test.ts > reauditoria: rejeita lote atomicamente
+ FAIL  tests/server/reautoria-confirmacao.test.ts > reauditoria: rejeita alias atomicamente
+AssertionError: expected 409 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 409
+
+ ❯ tests/server/reautoria-confirmacao.test.ts:20:29
+     18|         ? { campo: "sintetico", valor: "não exibido" } : cenario === "…
+     19|       const bundle = await post("/consulta/bundle", { ...scope, draftI…
+     20|       expect(bundle.status).toBe(200);
+       |                             ^
+     21|       const registros = cenario === "vazio" || cenario === "alias" ? […
+     22|         : cenario === "duplicado" ? [{ id: "visivel", expectedRevision…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/15]⎯
+
+ FAIL  tests/server/reautoria-confirmacao.test.ts > fato genérico exibido e selecionado pode ser confirmado, sem assinatura documental
+AssertionError: expected 409 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 409
+
+ ❯ tests/server/reautoria-confirmacao.test.ts:44:27
+     42|     salvarDraft(f.db, envelope("fato", { campo: "sintetico", valor: "r…
+     43|     const bundle = await post("/consulta/bundle", { ...scope, draftIds…
+     44|     expect(bundle.status).toBe(200);
+       |                           ^
+     45|     const exibidos = JSON.parse(bundle.body).documentos;
+     46|     expect(exibidos[0].conteudo).toEqual({ campo: "sintetico", valor: …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/15]⎯
+
+ FAIL  tests/server/server.test.ts > G-25 rejeita assinatura fora do bundle; validação grava N eventos e não imprime
+AssertionError: expected 409 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 409
+
+ ❯ tests/server/server.test.ts:66:67
+     64|   // Positive path must actually display both facts through the HTTP r…
+     65|   expect((await f.post("/consulta/bundle", { patientId: "Paciente Test…
+     66|     tumorLotId: "t1", draftIds: ["d1", "d2"] }, f.token)).status).toBe…
+       |                                                                   ^
+     67|   const payload = { patientId: "Paciente Teste 01", tumorLotId: "t1", …
+     68|     bloco: "TUDO", registros: [{ id: "d1", expectedRevision: 0 }, { id…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/15]⎯
+
+ FAIL  tests/server/server.test.ts > G-25 rejeita assinatura fora do bundle; validação grava N eventos e não imprime
+Error: EPERM, Permission denied: \\?\C:\Users\silas\AppData\Local\Temp\oncoglobal-http-ee9onq '\\?\C:\Users\silas\AppData\Local\Temp\oncoglobal-http-ee9onq'
+ ❯ tests/server/server.test.ts:17:37
+     15| afterEach(async () => {
+     16|   await Promise.all(servers.splice(0).map((server) => new Promise<void…
+     17|   for (const dir of dirs.splice(0)) rmSync(dir, { force: true, recursi…
+       |                                     ^
+     18| });
+     19| async function fixture() {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/15]⎯
+
+ FAIL  tests/server/server.test.ts > A13 assina só o conteúdo exato exibido; draft alterado após exibição → 409
+AssertionError: expected 409 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 409
+
+ ❯ tests/server/server.test.ts:127:64
+    125|   salvarDraft(f.db, draft);
+    126|   expect((await f.post("/consulta/bundle", { patientId: "Paciente Test…
+    127|     tumorLotId: "t1", draftIds: ["doc-d"] }, f.token)).status).toBe(20…
+       |                                                                ^
+    128|   const payload = (rev: number, key: string) => ({ patientId: "Pacient…
+    129|     bloco: "TUDO", registros: [{ id: "doc-d", expectedRevision: rev }],
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/15]⎯
+
+ FAIL  tests/server/server.test.ts > A13 assina só o conteúdo exato exibido; draft alterado após exibição → 409
+Error: EPERM, Permission denied: \\?\C:\Users\silas\AppData\Local\Temp\oncoglobal-http-Qn9vdT '\\?\C:\Users\silas\AppData\Local\Temp\oncoglobal-http-Qn9vdT'
+ ❯ tests/server/server.test.ts:17:37
+     15| afterEach(async () => {
+     16|   await Promise.all(servers.splice(0).map((server) => new Promise<void…
+     17|   for (const dir of dirs.splice(0)) rmSync(dir, { force: true, recursi…
+       |                                     ^
+     18| });
+     19| async function fixture() {
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/15]⎯
+
+
+ Test Files  3 failed | 14 passed (17)
+      Tests  13 failed | 74 passed (87)
+   Start at  18:46:15
+   Duration  34.92s (tests 66%, import 18%, transform 10%, environment 6%)
+
+    Isolate  17 workers spawned · ~300ms startup each (spawn + environment, per file)
+             at least ~4.79s faster with isolate: false — reuses workers across files instead of one per file
+

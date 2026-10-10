@@ -2,11 +2,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { abrirLedger } from "../../src/kernel/ledger/db.js";
-// @ts-expect-error script .mjs sem declaração neste worktree
-import { criarBackup } from "../../scripts/backup.mjs";
-// @ts-expect-error script .mjs sem declaração neste worktree
-import { restaurarBackup } from "../../scripts/backup-restore.mjs";
+import { abrirLedger } from "../../src/kernel/ledger/db.js";import { criarBackup } from "../../scripts/backup.mjs";import { restaurarBackup } from "../../scripts/backup-restore.mjs";
 
 const dirs: string[] = [];
 afterEach(() => { for (const dir of dirs.splice(0)) rmSync(dir, { recursive: true, force: true }); });

@@ -2,10 +2,10 @@
 // Regra: chave = laboratório + número do exame + data de entrada; NUNCA a data impressa no
 // topo. D1: páginas idênticas ⇒ um exame. D2: reimpressão com cabeçalho de extração
 // diferente ⇒ um exame. D3: mesmo diagnóstico, materiais/datas diferentes ⇒ dois exames.
-// ESTADO: SEM_IMPLEMENTACAO + DEPENDE_W7 — não existe função de dedupe em src/ (a leitura
-// de documentos é faixa Codex W7: src/leitura/**; DOMINIO/Fugu W5 ficou com a chave em
-// aberto na MATRIZ). O esperado do caso 07 (8 páginas → 6 exames únicos) não tem como ser
-// verificado sem esse motor.
+// ESTADO 2026-10-07: o gate de presença passa. O motor que o teste resolve é
+// src/modules/documentos/dedupe.ts (unicos/duplicatas; chave laboratorio+numeroExame+dataEntrada).
+// Não trocar por src/rules/w8/dedupeExame.ts: o contrato é outro. Título SEM_IMPLEMENTACAO
+// permanece histórico; a asserção not.toBeNull() não foi afrouxada.
 import { describe, expect, it } from "vitest";
 
 interface ResultadoDedupe { unicos: number; duplicatas: { paginas: string[] }[] }

@@ -1,37 +1,37 @@
 {
- "nos": 2746,
- "arestas": 8024,
- "por_tipo": {
-  "fonte": 96,
-  "tema": 46,
-  "tumor": 73,
-  "diagnostico": 157,
-  "estadiamento": 106,
-  "biomarcador": 104,
-  "cenario": 286,
-  "trial": 737,
-  "regime": 803,
-  "farmaco": 312,
-  "achado": 26
- },
- "por_relacao": {
-  "FONTE": 2981,
-  "DIAGNOSTICA_POR": 160,
-  "ESTADIA_POR": 106,
-  "TEM_CENARIO": 295,
-  "EXIGE_BIOMARCADOR": 230,
-  "USA_FARMACO": 1665,
-  "TRATA_COM": 908,
-  "SUSTENTADO_POR": 757,
-  "TESTOU": 801,
-  "ALERTA": 27,
-  "MANEJA": 94
- },
- "fundidos": {
-  "biomarcador": 23,
-  "farmaco": 216,
-  "trial": 4,
-  "regime": 1
- },
- "orfas": 0
+  "nos": 2971,
+  "arestas": 9347,
+  "por_tipo": {
+    "achado": 26,
+    "biomarcador": 108,
+    "cenario": 309,
+    "diagnostico": 170,
+    "estadiamento": 123,
+    "farmaco": 314,
+    "fonte": 100,
+    "regime": 918,
+    "tema": 46,
+    "trial": 784,
+    "tumor": 73
+  },
+  "por_relacao": {
+    "ALERTA": 27,
+    "DIAGNOSTICA_POR": 173,
+    "ESTADIA_POR": 123,
+    "EXIGE_BIOMARCADOR": 273,
+    "FONTE": 3539,
+    "MANEJA": 94,
+    "SUSTENTADO_POR": 876,
+    "TEM_CENARIO": 318,
+    "TESTOU": 920,
+    "TRATA_COM": 1011,
+    "USA_FARMACO": 1993
+  },
+  "fundidos": {
+    "biomarcador": 23,
+    "farmaco": 216,
+    "trial": 4,
+    "regime": 1
+  },
+  "orfas": 0
 }

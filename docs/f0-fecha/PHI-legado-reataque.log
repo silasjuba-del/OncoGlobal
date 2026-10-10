@@ -1,0 +1,12 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal
+
+warning: in the working copy of '.gitignore', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'eol.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'staged-id.txt', LF will be replaced by CRLF the next time Git touches it
+
+ Test Files  2 passed (2)
+      Tests  59 passed (59)
+   Start at  20:05:57
+   Duration  27.12s (tests 88%, transform 8%, import 5%)
+

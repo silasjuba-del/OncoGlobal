@@ -9,7 +9,7 @@ export const OFFSET_SERVICO = "-03:00";
 
 // ── Unidades ─────────────────────────────────────────────────────────────────
 /** Unidades canônicas aceitas pela normalização de laboratório. */
-export const UNIDADES_CANONICAS = ["mg/dL", "g/dL", "mm³", "×10³/µL", "°C"] as const;
+export const UNIDADES_CANONICAS = ["mg/dL", "g/dL", "mm³", "×10³/µL", "°C", "ng/mL"] as const;
 export type UnidadeCanonica = (typeof UNIDADES_CANONICAS)[number];
 
 const ALIAS_UNIDADE: Readonly<Record<string, UnidadeCanonica>> = {
@@ -18,6 +18,7 @@ const ALIAS_UNIDADE: Readonly<Record<string, UnidadeCanonica>> = {
   "x10³/µl": "×10³/µL", "×10³/µl": "×10³/µL", "10³/µl": "×10³/µL", "10^3/ul": "×10³/µL",
   "mil/mm3": "×10³/µL", "mil/mm³": "×10³/µL", "x10^3/ul": "×10³/µL",
   "c": "°C", "°c": "°C", "ºc": "°C",
+  "ng/ml": "ng/mL",
 };
 
 /** Unidade em forma canônica; null quando o texto não é reconhecido (PENDENTE, não adivinha). */
@@ -55,7 +56,12 @@ export function normalizarLab(valor: {
 }): LabNormalizado {
   const marker = typeof valor.marker === "string" ? valor.marker.trim() : "";
   const unidade = normalizarUnidade(typeof valor.unit === "string" ? valor.unit : null);
-  const numero = numeroDecimal(valor.value);
+  // Ponto como separador de milhar só é inequívoco aqui para contagem de plaquetas.
+  // Mantemos a regra restrita ao marcador e preservamos o literal original em `raw`.
+  const plaquetas = /^plaquetas?$/iu.test(marker.normalize("NFD").replace(/\p{Diacritic}/gu, ""));
+  const numero = plaquetas && typeof valor.value === "string" && /^\d{1,3}(?:\.\d{3})+$/.test(valor.value.trim())
+    ? numeroDecimal(valor.value.replace(/\./g, ""))
+    : numeroDecimal(valor.value);
   const raw = typeof valor.raw === "string" ? valor.raw
     : (numero === null ? null : `${String(valor.value)} ${String(valor.unit ?? "")}`.trim());
   const normalizado = unidade !== null && numero !== null;
@@ -136,7 +142,7 @@ const ALIAS_ORGAO_LOCAL: Readonly<Record<string, string>> = {
   mama: "mama", mamao: "mama", mamaria: "mama", mamario: "mama",
   prostata: "prostata", prostatica: "prostata", prostatico: "prostata",
   pulmao: "pulmao", pulmonar: "pulmao", broncogenico: "pulmao",
-  colon: "colon", colo: "colon", colorretal: "colon", reto: "reto",
+  colon: "colon", colorretal: "colon", reto: "reto",
   estomago: "estomago", gastrico: "estomago", esofago: "esofago",
   pancreas: "pancreas", pancreatico: "pancreas", figado: "figado", hepatico: "figado",
   cabeca: "cabeca-e-pescoco", pescoco: "cabeca-e-pescoco", orofaringe: "orofaringe",
@@ -158,6 +164,10 @@ export function orgaoCanonico(texto: string | null | undefined): string {
 /** Sítio canônico só quando reconhecido pela tabela; caso contrário null (PENDENTE). */
 export function normalizarSitioAnatomico(texto: string | null | undefined): string | null {
   if (typeof texto !== "string" || !texto.trim()) return null;
+  const chave = texto.normalize("NFD").replace(/\p{Diacritic}/gu, "")
+    .trim().toLocaleLowerCase("pt-BR").replace(/\s+/g, " ");
+  // "colo" sozinho também designa cólon; o complemento anatômico é obrigatório.
+  if (chave === "colo uterino" || chave === "colo do utero") return "utero";
   const canonico = orgaoCanonico(texto);
   return canonico in ALIAS_ORGAO_LOCAL || Object.values(ALIAS_ORGAO_LOCAL).includes(canonico)
     ? canonico : null;
@@ -173,6 +183,7 @@ export const DICIONARIO_FARMACO: Readonly<Record<string, string>> = {
   doxorrubicina: "DOXORRUBICINA", ciclofosfamida: "CICLOFOSFAMIDA", metotrexato: "METOTREXATO",
   temozolomida: "TEMOZOLOMIDA", pemetrexede: "PEMETREXEDE", vinorelbina: "VINORELBINA",
   trastuzumabe: "TRASTUZUMABE", bevacizumabe: "BEVACIZUMABE", ifosfamida: "IFOSFAMIDA",
+  prednisona: "PREDNISONA",
   topotecana: "TOPOTECANA", leucovorina: "LEUCOVORINA", mesna: "MESNA",
 };
 
@@ -184,10 +195,30 @@ export interface FarmacoNormalizado {
   /** true quando o nome só casa por aproximação fonética (⇒ INFERRED, com confiança). */
   incerto: boolean;
   confidence: number;
+  /** Conteúdo invisível ou homóglifo: apenas candidato para revisão, nunca EXPLICIT. */
+  suspeito?: true;
 }
 
 function semAcento(chave: string): string {
   return chave.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase("pt-BR").trim();
+}
+
+// Substituições usadas SOMENTE para procurar um candidato, jamais para corrigir o
+// texto de origem. Scripts mistos e formatadores invisíveis são sempre suspeitos.
+const HOMOGLIFOS: Readonly<Record<string, string>> = {
+  "а": "a", "е": "e", "і": "i", "о": "o", "р": "p", "с": "c",
+  "х": "x", "у": "y", "ο": "o", "α": "a", "ι": "i", "ρ": "p",
+  "ν": "v", "ϲ": "c",
+};
+const INVISIVEIS = /[\p{Cf}\u034f\u180e]/gu;
+const OUTRO_SCRIPT = /[\p{Script=Cyrillic}\p{Script=Greek}]/u;
+
+function chaveVisualSuspeita(texto: string): string | null {
+  if (!INVISIVEIS.test(texto) && !OUTRO_SCRIPT.test(texto)) return null;
+  INVISIVEIS.lastIndex = 0;
+  const visivel = texto.toLocaleLowerCase("pt-BR").replace(INVISIVEIS, "")
+    .replace(/[\p{Script=Cyrillic}\p{Script=Greek}]/gu, (char) => HOMOGLIFOS[char] ?? "?");
+  return semAcento(visivel);
 }
 
 function distancia(a: string, b: string): number {
@@ -206,6 +237,13 @@ function distancia(a: string, b: string): number {
 
 /** Normalização de fármaco com proveniência: exato ⇒ EXPLICIT; aproximado ⇒ INFERRED incerto. */
 export function normalizarFarmaco(texto: string): FarmacoNormalizado {
+  const visual = chaveVisualSuspeita(texto);
+  if (visual !== null) {
+    // Não usamos distância de edição neste ramo: um formatador ou alfabeto estranho
+    // por si só não autoriza converter uma palavra arbitrária em medicamento.
+    return { raw: texto, normalizado: DICIONARIO_FARMACO[visual] ?? null,
+      incerto: true, confidence: 0.5, suspeito: true };
+  }
   const chave = semAcento(texto);
   const exato = DICIONARIO_FARMACO[chave];
   if (exato) return { raw: texto.trim(), normalizado: exato, incerto: false, confidence: 1 };
@@ -278,7 +316,22 @@ function valorDe(fact: ClinicalFact): Record<string, unknown> {
  * `rawEvidence`/`raw`. Fato que não normaliza mantém o literal e fica sem resolução.
  */
 export function normalizarFatos(fatos: readonly ClinicalFact[]): readonly ClinicalFact[] {
-  return fatos.map((fact) => {
+  return fatos.map((original) => {
+    let fact = original;
+    if (original.date !== undefined) {
+      const data = normalizarDataCivil(original.date);
+      if (data === null) {
+        // A data literal continua em rawEvidence; sem data clínica válida não há ordenação.
+        const { date, ...semData } = original;
+        void date;
+        fact = { ...semData, requiresConfirmation: true };
+      } else {
+        fact = { ...original, date: data };
+      }
+    } else if (original.domain === "lab" || original.domain === "imaging") {
+      // Sem data clínica de exame não se cria ordem longitudinal por hora de captura.
+      fact = { ...original, requiresConfirmation: true };
+    }
     if (fact.domain === "lab") {
       const v = valorDe(fact);
       const normalizado = normalizarLab({
@@ -320,6 +373,17 @@ export function normalizarFatos(fatos: readonly ClinicalFact[]): readonly Clinic
       const raw = typeof fact.value === "string" ? fact.value : String(valorDe(fact).raw ?? "");
       if (!raw) return fact;
       const farmaco = normalizarFarmaco(raw);
+      if (farmaco.suspeito) {
+        return {
+          ...fact,
+          raw: farmaco.raw,
+          value: { ...valorDe(fact), raw: farmaco.raw, normalizado: farmaco.normalizado,
+            incerto: true, suspeito: true },
+          evidence: "UNCERTAIN",
+          confidence: Math.min(fact.confidence, farmaco.confidence),
+          requiresConfirmation: true,
+        };
+      }
       if (farmaco.normalizado === null) return comRaw(fact, raw);
       return {
         ...fact,

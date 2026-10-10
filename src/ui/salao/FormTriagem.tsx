@@ -84,6 +84,7 @@ export function FormTriagem({
   ruleset,
   contexto,
   fonte,
+  draftRevision = null,
   onSalvar,
 }: {
   patientId: string;
@@ -92,7 +93,8 @@ export function FormTriagem({
   ruleset: SalaoRuleset;
   contexto: ContextoTriagem;
   fonte: Fonte;
-  onSalvar: (triagem: Triagem) => void;
+  draftRevision?: number | null;
+  onSalvar: (triagem: Triagem, expectedRevision: number | null) => void | Promise<void>;
 }) {
   const [pas, setPas] = useState("");
   const [fc, setFc] = useState("");
@@ -104,7 +106,7 @@ export function FormTriagem({
   const [coleta, setColeta] = useState("");
   const [ecog, setEcog] = useState("");
   const [grau, setGrau] = useState("");
-  const [tontura, setTontura] = useState(false);
+  const [tontura, setTontura] = useState<boolean | null>(null);
   const [recurso, setRecurso] = useState<Recurso>("AMBULATORIAL");
   const [idade, setIdade] = useState("");
   const [resultado, setResultado] = useState<ReturnType<typeof avaliarTriagem> | null>(null);
@@ -124,17 +126,24 @@ export function FormTriagem({
       ecog: dadoNumero(textoParaInteiro(ecog), fonte),
       grauCtcae: dadoNumero(textoParaInteiro(grau), fonte),
       tontura,
+      vertigemHistoricoAnterior: null,
+      vertigemInicioNovo: null,
       recurso,
       idadeAnos,
       chegadaEm,
     };
   }
 
-  function salvar() {
+  async function salvar() {
     // D-W9-03 · idade em branco nunca vira 0: segue como null (PENDENTE) e a regra manda à fila do médico.
     const triagem = montar(textoParaInteiro(idade));
-    onSalvar(triagem);
-    setResultado(avaliarTriagem(triagem, contexto, ruleset));
+    setResultado(null);
+    try {
+      await onSalvar(triagem, draftRevision);
+      setResultado(avaliarTriagem(triagem, contexto, ruleset));
+    } catch {
+      // Keep every entered value in place; TelaSalao presents the server error.
+    }
   }
 
   return (
@@ -142,7 +151,7 @@ export function FormTriagem({
       className="pilha"
       onSubmit={(e) => {
         e.preventDefault();
-        salvar();
+        void salvar();
       }}
     >
       <label>
@@ -190,8 +199,13 @@ export function FormTriagem({
         <input value={idade} onChange={(e) => setIdade(e.target.value)} />
       </label>
       <label>
-        <input type="checkbox" checked={tontura} onChange={(e) => setTontura(e.target.checked)} />
         Tontura
+        <select aria-label="Tontura" value={tontura === null ? "NAO_SEI" : tontura ? "SIM" : "NAO"}
+          onChange={(e) => setTontura(e.target.value === "NAO_SEI" ? null : e.target.value === "SIM")}>
+          <option value="NAO_SEI">Não sei</option>
+          <option value="SIM">Sim</option>
+          <option value="NAO">Não</option>
+        </select>
       </label>
       <label>
         Recurso

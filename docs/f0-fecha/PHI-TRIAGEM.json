@@ -1,0 +1,2880 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-09",
+  "purpose": "Disposicoes por caminho+SHA-256+tipo/linha/ordinal/pagina+evidencia; hash diferente invalida excecao.",
+  "files": [
+    {
+      "path": "corpus/fichas/esofago/carboplatina-paclitaxel-21-21-dias__nao-especificado.json",
+      "sha256": "1d7c659f235e5e792850a681d31e64d31b623090bebb838d61744bd9e1fccafd",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 7,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/fichas/esofago/carboplatina-paclitaxel-21-21-dias__nao-especificado.json:7",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "json_sha256_field_64hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "corpus/fichas/pulmao-cpnpc/carboplatina-gemcitabina__nao-especificado.json",
+      "sha256": "26af286322884606de59d180f252924bf830164261c010f149d40e2373d8ec47",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 7,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/fichas/pulmao-cpnpc/carboplatina-gemcitabina__nao-especificado.json:7",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "json_sha256_field_64hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "corpus/fichas/pulmao-cpnpc/gemcitabina-monoterapia__nao-especificado.json",
+      "sha256": "ed6bd3a24707986e69eb438eec5732527b9cef4da14dfc521390b54063c57f9f",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 7,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/fichas/pulmao-cpnpc/gemcitabina-monoterapia__nao-especificado.json:7",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "json_sha256_field_64hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/design/oncochart/assets/annot.png",
+      "sha256": "893f9af87f3bb669875a3813a3797c832b6e20ea0bbad195ad9ab3082d8c6742",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/design/oncochart/DECISAO-UI-ALVO.md:3",
+      "reason": "Revisao visual root: crop do mock ficticio; sem alegacao universal de anonimato.",
+      "items": []
+    },
+    {
+      "path": "docs/design/oncochart/assets/crop-header.png",
+      "sha256": "e41b629780a98b193e03157a01f78bdf30eb2e076d58ad573c2ebbf9f5b120ee",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/design/oncochart/DECISAO-UI-ALVO.md:3",
+      "reason": "Revisao visual root: crop do mock ficticio; sem alegacao universal de anonimato.",
+      "items": []
+    },
+    {
+      "path": "docs/design/oncochart/assets/crop-right.png",
+      "sha256": "87cb5d21bb0726f5e867fa1fdeee773156ba869ae757720427200c30e87ce66b",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/design/oncochart/DECISAO-UI-ALVO.md:3",
+      "reason": "Revisao visual root: crop do mock ficticio; sem alegacao universal de anonimato.",
+      "items": []
+    },
+    {
+      "path": "docs/design/oncochart/assets/crop-timeline.png",
+      "sha256": "3beeecca12706bac18b458fd13d773552f7d6b4272d550853458732c7eca2054",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/design/oncochart/DECISAO-UI-ALVO.md:3",
+      "reason": "Revisao visual root: crop do mock ficticio; sem alegacao universal de anonimato.",
+      "items": []
+    },
+    {
+      "path": "docs/design/oncochart/assets/ct-abdome.jpg",
+      "sha256": "8550da8965873bf7104ce9557a267b7ece3c30f1d3cbeadfaa5143df3fab7049",
+      "category": "synthetic_visual_review",
+      "magic": "jpeg_signature",
+      "evidenceRef": "docs/design/oncochart/README.md:144",
+      "reason": "Revisao visual root: placeholder CT sem identificacao visivel; nao afirma anonimato universal.",
+      "items": []
+    },
+    {
+      "path": "docs/design/oncochart/assets/ct-torax.jpg",
+      "sha256": "3ef79b483fdad6d3b2ce5f0f918c237ea2617aac2867e39930f2bcf9ad001192",
+      "category": "synthetic_visual_review",
+      "magic": "jpeg_signature",
+      "evidenceRef": "docs/design/oncochart/README.md:144",
+      "reason": "Revisao visual root: placeholder CT sem identificacao visivel; nao afirma anonimato universal.",
+      "items": []
+    },
+    {
+      "path": "docs/design/oncochart/assets/ref.png",
+      "sha256": "756053a9410456062a683531d98b2931554cca75efa991fe8a4d2ebd0b93b630",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/design/oncochart/DECISAO-UI-ALVO.md:3",
+      "reason": "Revisao visual root: rodape de demonstracao/dados ficticios; sem alegacao universal de anonimato.",
+      "items": []
+    },
+    {
+      "path": "docs/design/prototipos/apac.html",
+      "sha256": "989b0a5486ec46611158255188f99b50685771392370637b863d21b1ae0b3dec",
+      "items": [
+        {
+          "type": "cns",
+          "line": 163,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "docs/design/prototipos/apac.html:46,117,123,129,142,143",
+          "reason": "Campo ID no mesmo prototipo HTML que declara a amostra Paciente Teste; excecao por hash/linha/token.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 169,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "docs/design/prototipos/apac.html:46,163,166,169",
+          "reason": "Campo ID no mesmo prototipo HTML que declara a amostra Paciente Teste; excecao por hash/linha/token.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/design/prototipos/consulta.html",
+      "sha256": "ae74c3f693016d4e1bacf3c5c6ca49254e5d6e9ef2fe7d619b859be7da89cd8d",
+      "items": [
+        {
+          "type": "cns",
+          "line": 318,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "docs/design/prototipos/consulta.html:173,279,437,486",
+          "reason": "Campo ID no prototipo HTML com declaracao de amostra ficticia no mesmo artifact; excecao por hash/linha/token.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/design/prototipos/impressos.html",
+      "sha256": "5848e99e341fade9cbe41d01b6d7535a4b337a1c352b8315aea6261c6890ca52",
+      "items": [
+        {
+          "type": "cns",
+          "line": 216,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "docs/design/prototipos/impressos.html:32,193,215",
+          "reason": "Campo ID adjacente a declaracao Paciente Teste no mesmo prototipo de impressos; excecao por hash/linha/token.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/f0-fecha/inventario-A2.json",
+      "sha256": "cf7ed4c47ced6803804bdc6c7b53c539c87b3f9fbad528b996c4b9715aed83c0",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 26,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/inventario-A2.json:26",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 51,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/inventario-A2.json:51",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 66,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/inventario-A2.json:66",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 95,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/inventario-A2.json:95",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 546,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/inventario-A2.json:546",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 585,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/inventario-A2.json:585",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 643,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/inventario-A2.json:643",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 668,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/inventario-A2.json:668",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 683,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/inventario-A2.json:683",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 712,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/inventario-A2.json:712",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/f0-fecha/inventario-A6.json",
+      "sha256": "cb81f2612710d2ccc5b805f56d32000acb3dce7454b0c462d6a2b3a8fe70ca41",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 450,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/inventario-A6.json:450",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 488,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/inventario-A6.json:488",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/f0-fecha/snapshot-pre-merge.json",
+      "sha256": "5d04baa7cb0572b153dbdbf4595597feda80c8d9b5bcbb1ed979b91d763f27e8",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 37,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:37",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 38,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:38",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 96,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:96",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 144,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:144",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 153,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:153",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 167,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:167",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 191,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:191",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 207,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:207",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 212,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:212",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 355,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:355",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 431,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:431",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 435,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:435",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 463,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:463",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 506,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:506",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 553,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:553",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 562,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:562",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 576,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:576",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 600,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:600",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 616,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:616",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 621,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/f0-fecha/snapshot-pre-merge.json:621",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/ondas/W3-CODEX.md",
+      "sha256": "7addd8d58e0aebfd5012a44fa5b58215bc170080133ffa625f6f56d8846202a4",
+      "items": [
+        {
+          "type": "email",
+          "line": 17,
+          "ordinal": 0,
+          "status": "public_author_metadata",
+          "evidenceRef": "docs/ondas/W3-CODEX.md:17; contexto de autoria/proveniência",
+          "reason": "Metadado público de autoria em handoff/contexto de fonte; disposição individualizada e hash-bound.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/ondas/W3-GROK.md",
+      "sha256": "b1344107e0ea228627aca39a4bd3a0c6d5b398de40ebf88366c14850370aaee4",
+      "items": [
+        {
+          "type": "email",
+          "line": 2,
+          "ordinal": 0,
+          "status": "public_author_metadata",
+          "evidenceRef": "docs/ondas/W3-GROK.md:2; contexto de autoria/proveniência",
+          "reason": "Metadado público de autoria em handoff/contexto de fonte; disposição individualizada e hash-bound.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/ondas/W8-GLM.md",
+      "sha256": "6cf49c11143d8a98f008ab6b16f91c26bad626f35f6eebee349181dbd68dfa8e",
+      "items": [
+        {
+          "type": "email",
+          "line": 8,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/W8-GLM.md:8",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        },
+        {
+          "type": "email",
+          "line": 11,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/W8-GLM.md:11",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        },
+        {
+          "type": "email",
+          "line": 14,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/W8-GLM.md:14",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        },
+        {
+          "type": "email",
+          "line": 17,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/W8-GLM.md:17",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/planejamento/AUDITORIA-PRE-CODIGO-2026-10-07.md",
+      "sha256": "5cab02b2916da5e8c27a2982706d5cd6f56fc72b58a94b13b3527bcd1fe79ae9",
+      "items": [
+        {
+          "type": "cns",
+          "line": 45,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "docs/planejamento/AUDITORIA-PRE-CODIGO-2026-10-07.md:45; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/planejamento/HANDOFF-NOVO-CHAT-W11-4.md",
+      "sha256": "95be7cfa9bccc76714efa0dcce301bb2b0e4d731e344bb249228b9f17fa1993d",
+      "items": [
+        {
+          "type": "email",
+          "line": 30,
+          "ordinal": 0,
+          "status": "public_author_metadata",
+          "evidenceRef": "docs/planejamento/HANDOFF-NOVO-CHAT-W11-4.md:30; contexto de autoria/proveniência",
+          "reason": "Metadado público de autoria em handoff/contexto de fonte; disposição individualizada e hash-bound.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 64,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "docs/planejamento/HANDOFF-NOVO-CHAT-W11-4.md:7,61,64; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md",
+      "sha256": "cba53c40c8318f7f23a1fa26edf025945dd4b86c30c3fe667b6a9e2b7938c2c4",
+      "items": [
+        {
+          "type": "email",
+          "line": 207,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md:207",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        },
+        {
+          "type": "email",
+          "line": 207,
+          "ordinal": 1,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md:207",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/progresso/W10-RETOMADA-JEV-FUGU.md",
+      "sha256": "abd4befad9b799ea2e50c91bf663fc1f549c502a3097d28c370fe151088774a5",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 38,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/progresso/W10-RETOMADA-JEV-FUGU.md:38",
+          "reason": "Codigo numerico de encerramento nativo de worker, explicitamente descrito no texto; nao e contato.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/progresso/W3-CODEX.md",
+      "sha256": "d32d761bc5ed35c0d851c669056573d8ff14a3522c102315e926c8fe5ed5a60d",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 91,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/progresso/W3-CODEX.md:91",
+          "reason": "Codigo de crash de worker Windows em evidencia tecnica, nao telefone.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/progresso/W8-GLM.md",
+      "sha256": "ec9f7088b8ba95445fc7d61598e09181343d96e2d1a7725589bb901b7d12b4ef",
+      "items": [
+        {
+          "type": "email",
+          "line": 22,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/progresso/W8-GLM.md:22",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        },
+        {
+          "type": "email",
+          "line": 22,
+          "ordinal": 1,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/progresso/W8-GLM.md:22",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        },
+        {
+          "type": "email",
+          "line": 22,
+          "ordinal": 2,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/progresso/W8-GLM.md:22",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        },
+        {
+          "type": "email",
+          "line": 22,
+          "ordinal": 3,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/progresso/W8-GLM.md:22",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/progresso/W8-KIMI.md",
+      "sha256": "01b4442faafb815d6a21151ec7666b56971daa70a5e23ce153151a1d2db7d7b3",
+      "items": [
+        {
+          "type": "cns",
+          "line": 42,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "docs/progresso/W8-KIMI.md:42",
+          "reason": "A mesma linha declara fixtures inventadas e descreve o vetor como Matricula.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/referencias/externos/manual-paciente-oncologico-2023.pdf",
+      "sha256": "bf00163cdf23c4ae29423deaa8a5c0037b4f04b397542464626a21859150220c",
+      "items": [
+        {
+          "type": "nome_cabecalho_laudo",
+          "line": 1,
+          "ordinal": 0,
+          "page": 2,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/referencias/externos/manual-paciente-oncologico-2023.pdf:pagina2; revisao layout L3 em 2026-10-09",
+          "reason": "Leitura local com layout preservado por pdfplumber: campo Nome seguido de linhas vazias antes do proximo rotulo. O extrator simples uniu rotulos e gerou falso nome.",
+          "contextTag": null
+        }
+      ],
+      "coverageReviews": [
+        {
+          "kind": "pdf_visual_review",
+          "sha256": "bf00163cdf23c4ae29423deaa8a5c0037b4f04b397542464626a21859150220c",
+          "status": "manual_review_complete",
+          "evidenceRef": "docs/f0-fecha/REVISAO-BINARIOS.md",
+          "reason": "Páginas renderizadas e abertas: formulário em branco ou material editorial público; não há laudo individual preenchido nas páginas revisadas.",
+          "pages": [
+            1,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf",
+      "sha256": "03d26c2767c305fcdd91bf473e61b9c51f18332ca35b02805290d1faa017c6bc",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 1,
+          "ordinal": 0,
+          "page": 3,
+          "status": "public_contact_metadata",
+          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:page3; rotulo editorial telefone/tel; referencia externa",
+          "reason": "Contato editorial de manual externo com rótulo explícito; não é dado de paciente.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 1,
+          "ordinal": 1,
+          "page": 3,
+          "status": "public_contact_metadata",
+          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:page3; rotulo editorial telefone/tel; referencia externa",
+          "reason": "Contato editorial de manual externo com rótulo explícito; não é dado de paciente.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 1,
+          "ordinal": 2,
+          "page": 3,
+          "status": "public_contact_metadata",
+          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:page3; rotulo editorial telefone/tel; referencia externa",
+          "reason": "Contato editorial de manual externo com rótulo explícito; não é dado de paciente.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 1,
+          "ordinal": 3,
+          "page": 3,
+          "status": "public_contact_metadata",
+          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:page3; rotulo editorial telefone/tel; referencia externa",
+          "reason": "Contato editorial de manual externo com rótulo explícito; não é dado de paciente.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 1,
+          "ordinal": 0,
+          "page": 32,
+          "status": "public_contact_metadata",
+          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:pagina32",
+          "reason": "Telefones publicos rotulados Central de Relacionamento e Ouvidoria no expediente institucional; revisao local por L3.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 1,
+          "ordinal": 1,
+          "page": 32,
+          "status": "public_contact_metadata",
+          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:pagina32",
+          "reason": "Telefones publicos rotulados Central de Relacionamento e Ouvidoria no expediente institucional; revisao local por L3.",
+          "contextTag": null
+        },
+        {
+          "type": "email",
+          "line": 1,
+          "ordinal": 0,
+          "page": 32,
+          "status": "public_contact_metadata",
+          "evidenceRef": "docs/referencias/externos/manual-quimioterapia-orientacoes.pdf:pagina32; revisao layout L3 em 2026-10-09",
+          "reason": "Contato no bloco da Ouvidoria institucional, apos horario; dominio coincide com site editorial impresso. Revisao local com layout preservado, nao dado de paciente.",
+          "contextTag": null
+        }
+      ],
+      "coverageReviews": [
+        {
+          "kind": "pdf_visual_review",
+          "sha256": "03d26c2767c305fcdd91bf473e61b9c51f18332ca35b02805290d1faa017c6bc",
+          "status": "manual_review_complete",
+          "evidenceRef": "docs/f0-fecha/REVISAO-BINARIOS.md",
+          "reason": "Páginas renderizadas e abertas: formulário em branco ou material editorial público; não há laudo individual preenchido nas páginas revisadas.",
+          "pages": [
+            3,
+            4,
+            8,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            26,
+            29,
+            30,
+            31
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/referencias/onco-referencia/07-tumor-packs-6-10.md",
+      "sha256": "c4a35c5348d136cedc254322c5df26eb06b90f35bb59163f3850ed67ac0b03c5",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 501,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/referencias/onco-referencia/07-tumor-packs-6-10.md:501",
+          "reason": "Substring numerica dentro do setid de URL bibliografica DailyMed, nao telefone.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 638,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/referencias/onco-referencia/07-tumor-packs-6-10.md:638",
+          "reason": "Substring numerica do DOI de referencia bibliografica, sem campo de identidade.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/referencias/onco-referencia/auditoria/manifesto-originais.json",
+      "sha256": "0467f8a9f21daaa3c0828549419ee6cd97ab86ba840c944074a4b7c390875dd1",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 11,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/referencias/onco-referencia/auditoria/manifesto-originais.json:11",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/referencias/onco-referencia/ONCO-REFERENCIA-COMPLETA.md",
+      "sha256": "23bbb69400b071c637db9504412293a92e91034e9217ca0476a3faec311f9795",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 4282,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/referencias/onco-referencia/07-tumor-packs-6-10.md:501; docs/referencias/onco-referencia/ONCO-REFERENCIA-COMPLETA.md:4282",
+          "reason": "Compilacao da mesma referencia DailyMed: match dentro de setid da URL.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 4419,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/referencias/onco-referencia/07-tumor-packs-6-10.md:638; docs/referencias/onco-referencia/ONCO-REFERENCIA-COMPLETA.md:4419",
+          "reason": "Compilacao do mesmo DOI bibliografico; nao e CNS.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/referencias/ui-modelos/Triagem_QT_v20.html",
+      "sha256": "ca6ebced715ac543fe07daeba118d6aae79c2f1cf1641cc03d9e8bcb6deb831e",
+      "items": [
+        {
+          "type": "nome_cabecalho_laudo",
+          "line": 213,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/referencias/ui-modelos/Triagem_QT_v20.html:207-216; docs/referencias/ui-modelos/PADROES-UI.md:282",
+          "reason": "Inicializacao JavaScript com nome vazio; o matcher capturou nomes de outros campos vazios da mesma linha, nao nome de pessoa.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/w10/astra/REVISAO-ASTRA.md",
+      "sha256": "275acc883d34abc250574c6e6113129d970ce3f37a0917c05c02fcb36a723588",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 140,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/w10/astra/REVISAO-ASTRA.md:140",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/w5/CLAIMS.md",
+      "sha256": "0bc7b0e0a2a1cc887e43bfc96384d572b4854d69cfbe2f471c08ddfadb5c1f18",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 87,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/w5/CLAIMS.md:87",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 88,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/w5/CLAIMS.md:88",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 132,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/w5/CLAIMS.md:132",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 133,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/w5/CLAIMS.md:133",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 134,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/w5/CLAIMS.md:134",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 135,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/w5/CLAIMS.md:135",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 136,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/w5/CLAIMS.md:136",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        },
+        {
+          "type": "telefone",
+          "line": 137,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/w5/CLAIMS.md:137",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/w5/P1-REGRAS.md",
+      "sha256": "3caf6a944c3917674b0395e856e1b156832f7673a38268534d470e1ad2bfd6b2",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 126,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/w5/P1-REGRAS.md:126",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "commit_hash_40_or_64_hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "docs/w7/kit-preview/apac-html.png",
+      "sha256": "0c04a6d1fe0b1d769584d542dcbc723d177bf97b6a2acd2730a4ab662aa2f978",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/w7/COMO-EXECUTAR.md:48",
+      "reason": "Revisao visual root: formulario PENDENTE/vazio, rascunho sem paciente.",
+      "items": []
+    },
+    {
+      "path": "docs/w7/kit-preview/apac-pg1.png",
+      "sha256": "b430ef2b5157b4788aba6b1b798b6c0a0e10b19f8bbeac3ee3e5148242d36f35",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/ondas/ADENDO-W6-W7.md:74",
+      "reason": "Revisao visual root: formulario oficial vazio; sem identificadores de paciente.",
+      "items": []
+    },
+    {
+      "path": "docs/w7/kit-preview/workspace-pesquisa.png",
+      "sha256": "28a9549331080759063ebdfb6504641c49b097c5915a49e27867ba86a1e9182c",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/w7/COMO-EXECUTAR.md:57",
+      "reason": "Revisao visual root: estudo marcado como ficticio e paciente de teste; sem alegacao universal de anonimato.",
+      "items": []
+    },
+    {
+      "path": "src/ui/api/fake.ts",
+      "sha256": "c4d52f55492d121136fa4ed0100b74d44952a66d19c80ddfdb0897641af10f08",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 214,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "src/ui/api/fake.ts:210-218",
+          "reason": "Factory local da porta fake: contato construido sem paciente ou vinculo, exclusivamente para demonstracao.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "src/ui/oncochart/fontes/geist-latin-wght-normal.woff2",
+      "sha256": "0cbbe6286a00f356e98980783cc950a9b693751e04aedfb97d9526ff6dc2b316",
+      "category": "technical_font_asset",
+      "magic": "wOF2",
+      "evidenceRef": "src/ui/oncochart/tokens.css; src/ui/oncochart/fontes/OFL-geist.txt",
+      "reason": "WOFF2 local de fonte importada pelo design system; classificado por magic, hash e proveniencia do codigo.",
+      "items": []
+    },
+    {
+      "path": "src/ui/oncochart/fontes/geist-mono-latin-wght-normal.woff2",
+      "sha256": "e9fb088eeacced307860d82ceedb0ae9ad2ebfa07a7c0a7279c8c961dd9d5fd3",
+      "category": "technical_font_asset",
+      "magic": "wOF2",
+      "evidenceRef": "src/ui/oncochart/tokens.css; src/ui/oncochart/fontes/OFL-geist.txt",
+      "reason": "WOFF2 local de fonte importada pelo design system; classificado por magic, hash e proveniencia do codigo.",
+      "items": []
+    },
+    {
+      "path": "tests/app/executores.test.ts",
+      "sha256": "b4e2d9cd5cb794efaabdc0e60c065c052b44ee73a2e44f0969cd525e32f6939c",
+      "items": [
+        {
+          "type": "email",
+          "line": 49,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
+          "reason": "Nome de arquivo local identificador, versao e extensao HTML, gerado pelo executor e comparado como caminho/recibo; nao e email.",
+          "contextTag": null
+        },
+        {
+          "type": "email",
+          "line": 50,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
+          "reason": "Nome de arquivo local identificador, versao e extensao HTML, gerado pelo executor e comparado como caminho/recibo; nao e email.",
+          "contextTag": null
+        },
+        {
+          "type": "email",
+          "line": 69,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
+          "reason": "Nome de arquivo local identificador, versao e extensao HTML, gerado pelo executor e comparado como caminho/recibo; nao e email.",
+          "contextTag": null
+        },
+        {
+          "type": "email",
+          "line": 70,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "src/app/executores/imprimir.ts:79; tests/app/executores.test.ts:18-27,49-50,69-70",
+          "reason": "Nome de arquivo local identificador, versao e extensao HTML, gerado pelo executor e comparado como caminho/recibo; nao e email.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/closure-e2e/jornadas-salao-canal.test.ts",
+      "sha256": "bf4bec1f07a86bf1a38aebb7b52755b38b54ce5787f8bdd7084dbcc0f248a921",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 181,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/closure-e2e/jornadas-salao-canal.test.ts:180,182,183; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/closure-luna2/read-gate.test.ts",
+      "sha256": "c80e4b94b4174f6d0fdc7220ef5f1e77c27049672f31fdaf466ea35ef47f7df9",
+      "items": [
+        {
+          "type": "cns",
+          "line": 15,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/closure-luna2/read-gate.test.ts:5,15; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/cobertura/caso07-fixtures.test.ts",
+      "sha256": "28ba60673ba3fd41e78a669286c8c17c8c60938fd05a92c82b3fb06dd874f2c7",
+      "items": [
+        {
+          "type": "cns",
+          "line": 59,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/cobertura/caso07-fixtures.test.ts:2,55; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/cobertura/caso07.test.ts",
+      "sha256": "4fcb530056d940ec19d5ccf86663496e53922cde25921a0df44b80c17eff3cb0",
+      "items": [
+        {
+          "type": "cns",
+          "line": 24,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/cobertura/caso07.test.ts:2,23,24,28; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "email",
+          "line": 79,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/cobertura/caso07.test.ts:2,82; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/fixtures/caso07/03-documentos-pessoais-comprovante.txt",
+      "sha256": "bee30e5f938761ca9caa44513e0394d319a455fdd49b6123ec7c61e6600bba5d",
+      "items": [
+        {
+          "type": "cns",
+          "line": 9,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/fixtures/caso07/03-documentos-pessoais-comprovante.txt:1,3,6,10; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/fixtures/caso07/esperado.json",
+      "sha256": "efeed4eadeeffc725cc032d575522df6a0c6e04599a415df63f1c7b007273dc7",
+      "items": [
+        {
+          "type": "cns",
+          "line": 15,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/fixtures/caso07/esperado.json:3,10,18; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/fixtures/redteam/pacientes.ts",
+      "sha256": "12f37e8aeb8b46448631bf81bf0d80cd5e72136c1817f6f6b02b77a5d0d21675",
+      "items": [
+        {
+          "type": "cns",
+          "line": 8,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/fixtures/redteam/pacientes.ts:1,7,9,11; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 10,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/fixtures/redteam/pacientes.ts:1,7,9,11; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/kernel/kernel.test.ts",
+      "sha256": "30f469ee6be6ea10c532e387eb9bd44284f1a72918f06196f02a4a4cdcb1247b",
+      "items": [
+        {
+          "type": "cpf",
+          "line": 9,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/kernel/kernel.test.ts:8,10; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 19,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/kernel/kernel.test.ts:8,10,23; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 20,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/kernel/kernel.test.ts:8,10,23; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 23,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/kernel/kernel.test.ts:8,10,23; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "email",
+          "line": 23,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/kernel/kernel.test.ts:8,10,23; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/modules/vinculo.test.ts",
+      "sha256": "8b13e5503c0fe68b59a0fb9bee65135dbff4733b09a3918020abedbcbb2e69e4",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 8,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/modules/vinculo.test.ts:6-31,37-84",
+          "reason": "Identificador inserido nos fixtures ANA/BIA ou contato() com nomes Paciente Teste; testes de resolucao/assertions no mesmo arquivo; excecao por ordinal/hash.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 9,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/modules/vinculo.test.ts:6-31,37-84",
+          "reason": "Identificador inserido nos fixtures ANA/BIA ou contato() com nomes Paciente Teste; testes de resolucao/assertions no mesmo arquivo; excecao por ordinal/hash.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 17,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/modules/vinculo.test.ts:6-31,37-84",
+          "reason": "Identificador inserido nos fixtures ANA/BIA ou contato() com nomes Paciente Teste; testes de resolucao/assertions no mesmo arquivo; excecao por ordinal/hash.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 26,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/modules/vinculo.test.ts:6-31,37-84",
+          "reason": "Identificador inserido nos fixtures ANA/BIA ou contato() com nomes Paciente Teste; testes de resolucao/assertions no mesmo arquivo; excecao por ordinal/hash.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 41,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/modules/vinculo.test.ts:6-31,37-84",
+          "reason": "Identificador inserido nos fixtures ANA/BIA ou contato() com nomes Paciente Teste; testes de resolucao/assertions no mesmo arquivo; excecao por ordinal/hash.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 43,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/modules/vinculo.test.ts:6-31,37-84",
+          "reason": "Identificador inserido nos fixtures ANA/BIA ou contato() com nomes Paciente Teste; testes de resolucao/assertions no mesmo arquivo; excecao por ordinal/hash.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 54,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/modules/vinculo.test.ts:6-31,37-84",
+          "reason": "Identificador inserido nos fixtures ANA/BIA ou contato() com nomes Paciente Teste; testes de resolucao/assertions no mesmo arquivo; excecao por ordinal/hash.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 74,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/modules/vinculo.test.ts:6-31,37-84",
+          "reason": "Identificador inserido nos fixtures ANA/BIA ou contato() com nomes Paciente Teste; testes de resolucao/assertions no mesmo arquivo; excecao por ordinal/hash.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 77,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/modules/vinculo.test.ts:6-31,37-84",
+          "reason": "Identificador inserido nos fixtures ANA/BIA ou contato() com nomes Paciente Teste; testes de resolucao/assertions no mesmo arquivo; excecao por ordinal/hash.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/muse/autoridades.test.ts",
+      "sha256": "c8335a817df71f811b6517f6f82cd5bd60208562992727156a0eabe4d7ab2546",
+      "items": [
+        {
+          "type": "cns",
+          "line": 19,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/muse/autoridades.test.ts:19-26,22-25",
+          "reason": "Vetor CNS positivo/negativo dentro do teste que inclui o paciente de teste e asserts; excecao apenas aos tokens desse vetor.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 19,
+          "ordinal": 1,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/muse/autoridades.test.ts:19-26,22-25",
+          "reason": "Vetor CNS positivo/negativo dentro do teste que inclui o paciente de teste e asserts; excecao apenas aos tokens desse vetor.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/oncoassist-jev/oncoassist.test.ts",
+      "sha256": "ac4588ae997de0d49220b96dd1dabeedba6e6aeb017cfff76d95b8f40f924a5f",
+      "items": [
+        {
+          "type": "email",
+          "line": 8,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/oncoassist-jev/oncoassist.test.ts:7,8,9; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "email",
+          "line": 61,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/oncoassist-jev/oncoassist.test.ts:7,8,9,61; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/prompts/captura.test.ts",
+      "sha256": "a84eed1bdc711922f867ab45295c61baea600230c3628b4bdd3ef8b2fd581d61",
+      "items": [
+        {
+          "type": "email",
+          "line": 6,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "tests/prompts/captura.test.ts:6",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/prompts/docid.test.ts",
+      "sha256": "6f38f24e37d690f32cabbe88817ec29846ded339b645cd16fe140071dd79ed80",
+      "items": [
+        {
+          "type": "email",
+          "line": 6,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "tests/prompts/docid.test.ts:6",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/prompts/path-sitios.test.ts",
+      "sha256": "ca6ad9ee1bee60e54b965238100e8fee1fb9dfd2944a6def5ff57b9d5f0fae36",
+      "items": [
+        {
+          "type": "email",
+          "line": 6,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "tests/prompts/path-sitios.test.ts:6",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/prompts/prompts.test.ts",
+      "sha256": "6952d7e1abe0a0880413836b64e706cee7a2ab04df25651f195126f077f1ef11",
+      "items": [
+        {
+          "type": "email",
+          "line": 33,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "tests/prompts/prompts.test.ts:33",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        },
+        {
+          "type": "email",
+          "line": 64,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "tests/prompts/prompts.test.ts:64",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        },
+        {
+          "type": "email",
+          "line": 65,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "tests/prompts/prompts.test.ts:65",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        },
+        {
+          "type": "email",
+          "line": 66,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "tests/prompts/prompts.test.ts:66",
+          "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
+          "contextTag": "microprompt_version_filename"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/redteam/rt01-troca-laudo.adv.ts",
+      "sha256": "15ab42c82e393785bab45411645e16c27bf8d275aba26ab212856e49ff8ef903",
+      "items": [
+        {
+          "type": "cns",
+          "line": 60,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt01-troca-laudo.adv.ts:59-64",
+          "reason": "Identificador no mesmo objeto do nome Paciente Teste e asserts de troca de laudo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/redteam/rt02-homonimos.test.ts",
+      "sha256": "e512cca7af3a282d640283b081378315ce5e35738aa825ee15b71b09c3ce5b27",
+      "items": [
+        {
+          "type": "cns",
+          "line": 109,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt02-homonimos.test.ts:108-126",
+          "reason": "Identificador no objeto com nome Paciente Teste e asserts da prova de homonimia.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 114,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt02-homonimos.test.ts:113-126",
+          "reason": "Identificador no objeto com nome Paciente Teste e asserts da prova de homonimia.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/redteam/rt12-harness-gateway.adv.ts",
+      "sha256": "ca5bcfb69f5071318d1fe9c2bb119764e1cc105e6ea0b12f9263d8abf119b748",
+      "items": [
+        {
+          "type": "cns",
+          "line": 10,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt12-harness-gateway.adv.ts:10,22-29",
+          "reason": "Dicionario local DIC usado para construir vetores adversariais de URL/egress; fixture declarada pelo teste.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/redteam/rt12-harness-gateway.test.ts",
+      "sha256": "71de1ed8298ee4ddeb18a7ddc8cadec3b706b0f3f70c32b47ab37fed54bb7e14",
+      "items": [
+        {
+          "type": "cpf",
+          "line": 17,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:15-18,29-36",
+          "reason": "Dicionario literal DIC e vetores locais que exercitam desidentificar/g02PhiEgress, sem ingestao de cadastro externo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 17,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:15-18,29-36",
+          "reason": "Dicionario literal DIC e vetores locais que exercitam desidentificar/g02PhiEgress, sem ingestao de cadastro externo.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 17,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:15-18,29-36",
+          "reason": "Dicionario literal DIC e vetores locais que exercitam desidentificar/g02PhiEgress, sem ingestao de cadastro externo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 29,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:15-18,29-36",
+          "reason": "Dicionario literal DIC e vetores locais que exercitam desidentificar/g02PhiEgress, sem ingestao de cadastro externo.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 29,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:15-18,29-36",
+          "reason": "Dicionario literal DIC e vetores locais que exercitam desidentificar/g02PhiEgress, sem ingestao de cadastro externo.",
+          "contextTag": null
+        },
+        {
+          "type": "email",
+          "line": 30,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/redteam/rt12-harness-gateway.test.ts:15-18,29-36",
+          "reason": "Dicionario literal DIC e vetores locais que exercitam desidentificar/g02PhiEgress, sem ingestao de cadastro externo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/rules-w8/caso07.test.ts",
+      "sha256": "e48253330ec84297e68547f88b130ddd99f24bf8022c50cf4df55f43ddb83250",
+      "items": [
+        {
+          "type": "cns",
+          "line": 23,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/rules-w8/caso07.test.ts:21,22,23,28; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/rules-w8/identificadores.test.ts",
+      "sha256": "036864b5afeeff0bb11db6bb4af131d9cd7fd59bf6d915a40437bb513099229f",
+      "items": [
+        {
+          "type": "cpf",
+          "line": 9,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/rules-w8/identificadores.test.ts:8,9,10,11,12; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 11,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/rules-w8/identificadores.test.ts:8,9,10,11,12,15,16; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 12,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/rules-w8/identificadores.test.ts:8,9,10,11,12,15,16; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cpf",
+          "line": 17,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/rules-w8/identificadores.test.ts:8,9,10,12,15,16,18; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 25,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/rules-w8/identificadores.test.ts:8,9,10,23,24,26; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/rules-w8/vinculoDocumento.test.ts",
+      "sha256": "7671f95a209b2b4b4f53a07504c9fd72f325d35e083061d11afb468f4c23d86c",
+      "items": [
+        {
+          "type": "cpf",
+          "line": 5,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/rules-w8/vinculoDocumento.test.ts:4,5,6,7; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 7,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/rules-w8/vinculoDocumento.test.ts:4,5,6,7,12; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cpf",
+          "line": 68,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/rules-w8/vinculoDocumento.test.ts:4,5,6,7,68; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/server/adv006-saida.test.ts",
+      "sha256": "05f43e618b62773d43ec5e883a871b5539a239c2e5d6601f6f51660dae76ba43",
+      "items": [
+        {
+          "type": "email",
+          "line": 32,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/server/adv006-saida.test.ts:27-35",
+          "reason": "Destino em dominio reservado .invalid; executor fake e prova de zero efeitos externos.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/server/leituras-http.test.ts",
+      "sha256": "674406e44f13daab3612a96a497f5e72f81f5ca5f6cd2b147b1835cacf0346bc",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 88,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/server/leituras-http.test.ts:93; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 100,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/server/leituras-http.test.ts:98,105; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/ui-telas/importar.test.tsx",
+      "sha256": "264be5855f7c95741fc1b98414b9672084c5f9409fce7f526037ab79eb0268ac",
+      "items": [
+        {
+          "type": "cpf",
+          "line": 16,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/ui-telas/importar.test.tsx:12-28",
+          "reason": "Vetor literal de mascara e identificador inserido por fireEvent sob token NOME_1; testa alerta e RAW, sem fetch nem cadastro externo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/ui/cabecalho.test.tsx",
+      "sha256": "bda1ddb07cc2b6bf5388784b688e6d5df28368760344c1b9d75d204ef807122f",
+      "items": [
+        {
+          "type": "cns",
+          "line": 56,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/ui/cabecalho.test.tsx:55-57,142-165",
+          "reason": "Identificador no fixture de cabecalho com Paciente Teste e asserts UI.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/w10-cursor/cadastro.test.ts",
+      "sha256": "cd05cc2b5d9b7a50496ed5882d49318b84904f51c6b8996fa9a82066a1730f29",
+      "items": [
+        {
+          "type": "cns",
+          "line": 17,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-cursor/cadastro.test.ts:16-23",
+          "reason": "Vetor numerico literal repetido como entrada e expected de funcao pura de igualdade matricula/CNS; sem individuo ou cadastro associado.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 17,
+          "ordinal": 1,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-cursor/cadastro.test.ts:16-23",
+          "reason": "Vetor numerico literal repetido como entrada e expected de funcao pura de igualdade matricula/CNS; sem individuo ou cadastro associado.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 18,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-cursor/cadastro.test.ts:16-23",
+          "reason": "Vetor numerico literal repetido como entrada e expected de funcao pura de igualdade matricula/CNS; sem individuo ou cadastro associado.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/w10-entrega/gateway.test.ts",
+      "sha256": "f1401a1fb1ced3b88dd614dfe3439f75a8d69e45b71853e6b68d40c06219b8b9",
+      "items": [
+        {
+          "type": "email",
+          "line": 10,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-entrega/gateway.test.ts:9; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/w10-grok/grok-11-manifesto.test.ts",
+      "sha256": "efbd3b86a575c0b1809eea560db4eb1f479cf30c452f41a374ec0d2ab30e1e4d",
+      "items": [
+        {
+          "type": "email",
+          "line": 66,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-grok/grok-11-manifesto.test.ts:1,67; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/w10-grok/grok-13-apac-snapshot.test.ts",
+      "sha256": "95f6d24d634e80576239e70cc7f9e5287499acd8519b8f4c3a22f0a55a347959",
+      "items": [
+        {
+          "type": "cns",
+          "line": 31,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:17-34,48-69,178-183",
+          "reason": "Factory local de emissao com esquema ESQ e vetores algoritmicos predeterminados de digito verificador valido/invalido; caso p1 demonstra bloqueio, sem cadastro externo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 54,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:17-34,48-69,178-183",
+          "reason": "Factory local de emissao com esquema ESQ e vetores algoritmicos predeterminados de digito verificador valido/invalido; caso p1 demonstra bloqueio, sem cadastro externo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 60,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:17-34,48-69,178-183",
+          "reason": "Factory local de emissao com esquema ESQ e vetores algoritmicos predeterminados de digito verificador valido/invalido; caso p1 demonstra bloqueio, sem cadastro externo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 65,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:17-34,48-69,178-183",
+          "reason": "Factory local de emissao com esquema ESQ e vetores algoritmicos predeterminados de digito verificador valido/invalido; caso p1 demonstra bloqueio, sem cadastro externo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 179,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-grok/grok-13-apac-snapshot.test.ts:17-34,48-69,178-183",
+          "reason": "Factory local de emissao com esquema ESQ e vetores algoritmicos predeterminados de digito verificador valido/invalido; caso p1 demonstra bloqueio, sem cadastro externo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/w10-luna2/gateway-egress.test.ts",
+      "sha256": "e7a0c0505dc3fe79fd29f35ce92d96b6922a848f487a05c1d5405b8da5b0a00f",
+      "items": [
+        {
+          "type": "email",
+          "line": 16,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-luna2/gateway-egress.test.ts:12,16,21,23,52-62,69-99",
+          "reason": "Destino de transporte dummy criado pela funcao de evidencia no teste com usuario Paciente Teste; excecao so ao token/ordinal.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 94,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w10-luna2/gateway-egress.test.ts:94; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/w11-adv/checkin-real.test.ts",
+      "sha256": "bdd761f72c13be6ddec0d7b11ca5623d38e00c6a280aa65af24eee93006b1d33",
+      "items": [
+        {
+          "type": "cns",
+          "line": 20,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w11-adv/checkin-real.test.ts:2,20,21; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 53,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w11-adv/checkin-real.test.ts:2,53,54; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/w11-adv/fuzz-regras.test.ts",
+      "sha256": "db3640d599fe87d433cfe68bc71add10a31375db0d91ad69c5e1ee41fec203a2",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 42,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w11-adv/fuzz-regras.test.ts:1; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/w11-adv/jev-adversarial.test.ts",
+      "sha256": "7e20dddf694731cbe53a85e6c9da6e1b5812445016ea77e66907d1acaa9400a8",
+      "items": [
+        {
+          "type": "cpf",
+          "line": 6,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w11-adv/jev-adversarial.test.ts:6,7,8; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cpf",
+          "line": 48,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w11-adv/jev-adversarial.test.ts:6,7,8; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 48,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w11-adv/jev-adversarial.test.ts:6,7,8; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 49,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w11-adv/jev-adversarial.test.ts:6,7,8; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cpf",
+          "line": 56,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w11-adv/jev-adversarial.test.ts:6,7,8,56; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cpf",
+          "line": 56,
+          "ordinal": 1,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w11-adv/jev-adversarial.test.ts:6,7,8,56; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 56,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w11-adv/jev-adversarial.test.ts:6,7,8,56; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "cns",
+          "line": 57,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w11-adv/jev-adversarial.test.ts:6,7,8,56; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        },
+        {
+          "type": "telefone",
+          "line": 57,
+          "ordinal": 0,
+          "status": "synthetic_declared",
+          "evidenceRef": "tests/w11-adv/jev-adversarial.test.ts:6,7,8,56; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
+          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "tests/w11-adv/seguranca-phi.test.ts",
+      "sha256": "a0871be3bb60211e7ac1c1ff180bc88aa7be8e2a9564942ff93ed80ec6f0b743",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "cpf",
+          "line": 49,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:49"
+        },
+        {
+          "type": "cpf",
+          "line": 50,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:50"
+        },
+        {
+          "type": "cpf",
+          "line": 50,
+          "ordinal": 1,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:50"
+        },
+        {
+          "type": "cns",
+          "line": 51,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:51"
+        },
+        {
+          "type": "cns",
+          "line": 51,
+          "ordinal": 1,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:51"
+        },
+        {
+          "type": "cns",
+          "line": 52,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:52"
+        },
+        {
+          "type": "cns",
+          "line": 52,
+          "ordinal": 1,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:52"
+        },
+        {
+          "type": "cns",
+          "line": 52,
+          "ordinal": 2,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:52"
+        },
+        {
+          "type": "cns",
+          "line": 52,
+          "ordinal": 3,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:52"
+        },
+        {
+          "type": "cns",
+          "line": 53,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:53"
+        },
+        {
+          "type": "cns",
+          "line": 53,
+          "ordinal": 1,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:53"
+        },
+        {
+          "type": "cns",
+          "line": 53,
+          "ordinal": 2,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:53"
+        },
+        {
+          "type": "cns",
+          "line": 53,
+          "ordinal": 3,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:53"
+        },
+        {
+          "type": "cns",
+          "line": 53,
+          "ordinal": 4,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:53"
+        },
+        {
+          "type": "cns",
+          "line": 54,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:54"
+        },
+        {
+          "type": "cns",
+          "line": 54,
+          "ordinal": 1,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:54"
+        },
+        {
+          "type": "cns",
+          "line": 54,
+          "ordinal": 2,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:54"
+        },
+        {
+          "type": "cns",
+          "line": 54,
+          "ordinal": 3,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:54"
+        },
+        {
+          "type": "telefone",
+          "line": 55,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:55"
+        },
+        {
+          "type": "telefone",
+          "line": 55,
+          "ordinal": 1,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:55"
+        },
+        {
+          "type": "telefone",
+          "line": 55,
+          "ordinal": 2,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:55"
+        },
+        {
+          "type": "telefone",
+          "line": 56,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:56"
+        },
+        {
+          "type": "telefone",
+          "line": 56,
+          "ordinal": 1,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:56"
+        },
+        {
+          "type": "telefone",
+          "line": 56,
+          "ordinal": 2,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:56"
+        },
+        {
+          "type": "email",
+          "line": 57,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:57"
+        },
+        {
+          "type": "email",
+          "line": 57,
+          "ordinal": 1,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:57"
+        },
+        {
+          "type": "email",
+          "line": 57,
+          "ordinal": 2,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:57"
+        },
+        {
+          "type": "email",
+          "line": 57,
+          "ordinal": 3,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:57"
+        },
+        {
+          "type": "email",
+          "line": 58,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:58"
+        },
+        {
+          "type": "email",
+          "line": 58,
+          "ordinal": 1,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:58"
+        },
+        {
+          "type": "email",
+          "line": 58,
+          "ordinal": 2,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:58"
+        },
+        {
+          "type": "email",
+          "line": 59,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:59"
+        },
+        {
+          "type": "email",
+          "line": 66,
+          "ordinal": 0,
+          "contextTag": "microprompt_version_filename",
+          "status": "technical_token_false_positive",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:66"
+        },
+        {
+          "type": "email",
+          "line": 255,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:255"
+        },
+        {
+          "type": "cpf",
+          "line": 285,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:285"
+        },
+        {
+          "type": "cns",
+          "line": 286,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:286"
+        },
+        {
+          "type": "telefone",
+          "line": 287,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:287"
+        },
+        {
+          "type": "email",
+          "line": 288,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:288"
+        },
+        {
+          "type": "cpf",
+          "line": 322,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:322"
+        },
+        {
+          "type": "cpf",
+          "line": 329,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Fixtures e lista SINTETICOS originais preservadas; inserção do helper moveu as linhas, sem novos identificadores literais.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; tests/w11-adv/seguranca-phi.test.ts:329"
+        }
+      ]
+    },
+    {
+      "path": "docs/referencias/ui-modelo-consulta.webp",
+      "sha256": "0f29e2889eff7253307490afe4a585bd661fcbc1fabee0ff2731f7565fdcad35",
+      "category": "synthetic_visual_review",
+      "magic": "webp_signature",
+      "evidenceRef": "docs/f0-fecha/C2-PHI-ASTRA.md:Confirmacao humana da origem da imagem",
+      "reason": "Dr. Silas confirmou IMAGEM FICTICIA neste chat em 2026-10-09; Astra conferiu visualmente o arquivo correspondente a este hash. Referencia de layout, sem promocao de dado clinico.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json",
+      "sha256": "a6addb0fbf6f65708ee9f18ee32b70d842a9d7633b2fab18d4e1d73dd4b1f56c",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 143,
+          "ordinal": 0,
+          "contextTag": "json_sha256_field_64hex",
+          "status": "technical_token_false_positive",
+          "reason": "SHA de integridade ou exemplo de nome de arquivo no parecer independente; revisão linha a linha, sem dado de paciente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json:143"
+        },
+        {
+          "type": "telefone",
+          "line": 156,
+          "ordinal": 0,
+          "contextTag": "json_sha256_field_64hex",
+          "status": "technical_token_false_positive",
+          "reason": "SHA de integridade ou exemplo de nome de arquivo no parecer independente; revisão linha a linha, sem dado de paciente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json:156"
+        },
+        {
+          "type": "email",
+          "line": 201,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "SHA de integridade ou exemplo de nome de arquivo no parecer independente; revisão linha a linha, sem dado de paciente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json:201"
+        },
+        {
+          "type": "email",
+          "line": 214,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "SHA de integridade ou exemplo de nome de arquivo no parecer independente; revisão linha a linha, sem dado de paciente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json:214"
+        },
+        {
+          "type": "email",
+          "line": 227,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "SHA de integridade ou exemplo de nome de arquivo no parecer independente; revisão linha a linha, sem dado de paciente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json:227"
+        },
+        {
+          "type": "email",
+          "line": 240,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "SHA de integridade ou exemplo de nome de arquivo no parecer independente; revisão linha a linha, sem dado de paciente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json:240"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/CLAUDE-TRIAGEM-PHI.md",
+      "sha256": "654d2dab5da8ee86646395fac9b9a3d5bde23bbd3ac7a5ccb73f879708c7de6b",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "email",
+          "line": 12,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Exemplo de nome de arquivo citado na classificação técnica do parecer independente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/CLAUDE-TRIAGEM-PHI.md:12"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/evidencias/C1-L1/08-bloco.log",
+      "sha256": "36289cfcb3ccb684fa32d0a1552b5d631b4e448defca2dc5af6a4b86ba9fad75",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 17,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Código nativo de saída do processo Windows, não telefone.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/evidencias/C1-L1/08-bloco.log:17"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/evidencias/C1-L1/resultados.json",
+      "sha256": "618d2ac85b08cb1aa25e6d58d4ad72d690646a38e1ae0527aa7218abb750e6cc",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 70,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Código nativo de saída do processo Windows, não telefone.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/evidencias/C1-L1/resultados.json:70"
+        }
+      ]
+    },
+    {
+      "path": "tests/f0-fecha/phi-repo.test.ts",
+      "sha256": "07f9fd2c28db5338c939d841dd9b54e2fc8b18766e272e64b00334ed8018f038",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "email",
+          "line": 37,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Endereço reservado example.invalid na identidade Git de repositórios temporários de teste, conferido nas duas linhas.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; tests/f0-fecha/phi-repo.test.ts:37"
+        },
+        {
+          "type": "email",
+          "line": 278,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Endereço reservado example.invalid na identidade Git de repositórios temporários de teste, conferido nas duas linhas.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; tests/f0-fecha/phi-repo.test.ts:278"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/demo/01-salao.png",
+      "sha256": "77343a68076f61941fdad3be3a19b1c161473ff7a2699823a1a28e2c08751721",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/02-conflito.png",
+      "sha256": "77be47fcd0a3bb535c2c741cb71f996264eb3196eafd1648f12d60355920e0f5",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/03-revisao.png",
+      "sha256": "b4656732d0848c51e63b3cc9a6034d67974252f2f9dee03df1ce83036bd1309a",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/04-cartao.png",
+      "sha256": "0e38bc5af4d46df1a94bcee27f8f49fa00644b34f009f7f21db7c9e05f0e0888",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/05-modelo.png",
+      "sha256": "08557eaecf97c1fc874f86a64ce8beac5f98b7777b0c23db8650ad6ea546f4d2",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/06-exibicao.png",
+      "sha256": "b70c66eb35f75d3d3210e303975cd659aa31826e0c42ac2bcfd81ce20e285e78",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/07-historico.png",
+      "sha256": "da80b84567d05bb63b0c4280beaa431c447b5bac56f262a36d1e94fa8283dcb0",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/08-apac.png",
+      "sha256": "b3489f132de05f576f6ef5c284434d2cb23014ca06abced6823785085883269f",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/f0-fecha/demo/09-reabertura.png",
+      "sha256": "f16d342d3f03f17b348b71b9681c6387b2036abaa6424fc50d667744fd14df31",
+      "category": "synthetic_visual_review",
+      "magic": "png_signature",
+      "evidenceRef": "docs/F0-DEMO.md",
+      "reason": "Captura da demo local com Paciente Teste 92, médico e textos sintéticos; aberta e inspecionada pela Astra em 09/10/2026.",
+      "items": []
+    },
+    {
+      "path": "docs/referencias/apac-laudo-solicitacao-autorizacao.pdf",
+      "sha256": "3f17afd9128b0caa4b5934e1d5718b0d6b9ae2b3f28b38671ecad7e4349ad645",
+      "items": [],
+      "coverageReviews": [
+        {
+          "kind": "pdf_visual_review",
+          "sha256": "3f17afd9128b0caa4b5934e1d5718b0d6b9ae2b3f28b38671ecad7e4349ad645",
+          "status": "manual_review_complete",
+          "evidenceRef": "docs/f0-fecha/REVISAO-BINARIOS.md",
+          "reason": "Páginas renderizadas e abertas: formulário em branco ou material editorial público; não há laudo individual preenchido nas páginas revisadas.",
+          "pages": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.xlsx",
+      "sha256": "01a260383addc088509f55cbd44bfe7f453ca51f7c14d4cf4183a6bc67cda007",
+      "items": [],
+      "coverageReviews": [
+        {
+          "kind": "xlsx_unread_parts_review",
+          "sha256": "01a260383addc088509f55cbd44bfe7f453ca51f7c14d4cf4183a6bc67cda007",
+          "status": "manual_review_complete",
+          "evidenceRef": "docs/f0-fecha/REVISAO-BINARIOS.md",
+          "reason": "ZIP inspecionado: comments, headerFooter e mídia ausentes; docProps com gerador openpyxl e datas técnicas.",
+          "parts": [
+            "comments",
+            "headers_footers",
+            "docProps",
+            "embedded_images"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/AUDITORIA-CLAUDE-DELTA-FINAL.md",
+      "sha256": "7912a602fbe4c32e1f86ccfbf9121f8cbf4d94ca9e6b7dd112a87c5204b32ce0",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 3,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/AUDITORIA-CLAUDE-DELTA-FINAL.md:3"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/LIMPEZA-WORKTREES.md",
+      "sha256": "6764595ab164a4e7c7edc8988d40c86f99715f2115bff4555245f061520dba48",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 3,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "reason": "Token completo de SHA de commit ou integridade no inventário/recibo/relatório técnico, conferido individualmente.",
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/LIMPEZA-WORKTREES.md:3"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/evidencias/D2-final/09-bloco.log",
+      "sha256": "23e8cb9ef2668cba3baa16e4aebdcaddba5fbf982477af69ce7953120e0fe76c",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "email",
+          "line": 21,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:21"
+        },
+        {
+          "type": "email",
+          "line": 22,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:22"
+        },
+        {
+          "type": "email",
+          "line": 23,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:23"
+        },
+        {
+          "type": "email",
+          "line": 24,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:24"
+        },
+        {
+          "type": "email",
+          "line": 25,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "technical_token_false_positive",
+          "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:25"
+        },
+        {
+          "type": "email",
+          "line": 26,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Endereço reservado sintético da configuração Git temporária citado no log de falha.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:26"
+        },
+        {
+          "type": "email",
+          "line": 27,
+          "ordinal": 0,
+          "contextTag": null,
+          "status": "synthetic_declared",
+          "reason": "Endereço reservado sintético da configuração Git temporária citado no log de falha.",
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:27"
+        }
+      ]
+    },
+    {
+      "path": "docs/f0-fecha/inventario-final.json",
+      "hashMode": "utf8-lf",
+      "sha256": "43f7c0af779a4d7a188dc557a7fb18b6a37615150553df65e6db3778e7a5a113",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 518,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "reason": "Tokens completos de SHA no inventário final renovado; candidatos comparados e conferidos, sem identificador pessoal.",
+          "evidenceRef": "docs/f0-fecha/EQUIVALENCIA-FINAL.md; docs/f0-fecha/inventario-final.json:518"
+        },
+        {
+          "type": "telefone",
+          "line": 556,
+          "ordinal": 0,
+          "contextTag": "commit_hash_40_or_64_hex",
+          "status": "technical_token_false_positive",
+          "reason": "Tokens completos de SHA no inventário final renovado; candidatos comparados e conferidos, sem identificador pessoal.",
+          "evidenceRef": "docs/f0-fecha/EQUIVALENCIA-FINAL.md; docs/f0-fecha/inventario-final.json:556"
+        }
+      ]
+    }
+  ],
+  "protectedPaths": []
+}

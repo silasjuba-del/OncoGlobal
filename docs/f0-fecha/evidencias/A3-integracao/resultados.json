@@ -1,0 +1,140 @@
+[
+  {
+    "exitCode": 0,
+    "resumo": [],
+    "segundos": 8.8,
+    "bloco": "01-tsc"
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      "fronteiras ok (293 arquivos)"
+    ],
+    "segundos": 0.86,
+    "bloco": "02-fronteiras"
+  },
+  {
+    "exitCode": 0,
+    "resumo": [],
+    "segundos": 0.67,
+    "bloco": "03-corpus"
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  71 passed (71)",
+      "      Tests  537 passed (537)",
+      "   Duration  48.81s (import 68%, transform 16%, tests 11%, worker 5%)"
+    ],
+    "segundos": 50.51,
+    "bloco": "04-bloco"
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  35 passed (35)",
+      "      Tests  233 passed (233)",
+      "   Duration  22.51s (import 58%, tests 24%, transform 14%, worker 4%)"
+    ],
+    "segundos": 23.24,
+    "bloco": "05-bloco"
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  36 passed (36)",
+      "      Tests  183 passed (183)",
+      "   Duration  57.54s (tests 39%, import 28%, environment 22%, transform 10%, worker 1%)"
+    ],
+    "segundos": 58.31,
+    "bloco": "06-bloco"
+  },
+  {
+    "exitCode": 1,
+    "resumo": [
+      " ❯ tests/ui-telas/percursos.test.tsx (4 tests | 1 failed) 2632ms",
+      " ❯ tests/muse/capacidades.test.ts (3 tests | 3 failed) 1010ms",
+      " ❯ tests/ui-telas/salao.test.tsx (3 tests | 1 failed) 871ms",
+      " ❯ tests/ui/triagem.test.tsx (5 tests | 4 failed) 960ms",
+      " ❯ tests/ui/quadro.test.tsx (2 tests | 1 failed) 492ms",
+      "⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯",
+      " FAIL  tests/muse/capacidades.test.ts > capacidade /consulta/salao/triagem é explícita, autenticada e não fabrica persistência",
+      " FAIL  tests/muse/capacidades.test.ts > capacidade /consulta/salao/liberar é explícita, autenticada e não fabrica persistência",
+      " FAIL  tests/muse/capacidades.test.ts > capacidade /consulta/canal/vincular é explícita, autenticada e não fabrica persistência",
+      "AssertionError: expected 400 to be 501 // Object.is equality",
+      " FAIL  tests/ui/quadro.test.tsx > quadro do salão > liberar com corte exige motivo e não sai sem ele",
+      "AssertionError: expected \"vi.fn()\" to be called with arguments: [ 'p-ecog4', …(1) ]",
+      " FAIL  tests/ui/triagem.test.tsx > triagem do salão > PA 161 mostra FILA_MEDICO com o motivo e não impede salvar",
+      "TestingLibraryElementError: Unable to find an element with the text: Destino: FILA_MEDICO. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.",
+      " ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19",
+      " FAIL  tests/ui/triagem.test.tsx > triagem do salão > 37,9 °C mostra corte e 37,8 não",
+      "TestingLibraryElementError: Unable to find an element with the text: temperatura acima do limite. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.",
+      " ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19",
+      " FAIL  tests/ui/triagem.test.tsx > triagem do salão > campo vazio aplicável mostra pendência",
+      "TestingLibraryElementError: Unable to find an element with the text: hemoglobina ausente. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.",
+      " ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19",
+      " FAIL  tests/ui/triagem.test.tsx > triagem do salão > idade vazia não vira 0: fica PENDENTE (null) e vai à fila do médico",
+      "TestingLibraryElementError: Unable to find an element with the text: idade ausente. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.",
+      " ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19",
+      " FAIL  tests/ui-telas/percursos.test.tsx > percursos > salão: triagem, quadro na ordem da fila e liberar com motivo",
+      "TestingLibraryElementError: Unable to find an element with the text: conduta deste ciclo. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.",
+      " FAIL  tests/ui-telas/salao.test.tsx > tela do salão > liberar sem motivo não envia; com motivo registra a decisão do médico",
+      "AssertionError: expected \"liberarComCorte\" to be called with arguments: [ Array(2) ]",
+      " Test Files  5 failed | 43 passed (48)",
+      "      Tests  10 failed | 120 passed (130)",
+      "   Duration  150.09s (environment 55%, import 20%, tests 20%, transform 4%, worker 1%)"
+    ],
+    "segundos": 151.18,
+    "bloco": "07-bloco"
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  63 passed (63)",
+      "      Tests  499 passed (499)",
+      "   Duration  49.38s (tests 61%, import 30%, transform 7%, worker 2%)"
+    ],
+    "segundos": 50.22,
+    "bloco": "08-bloco"
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  43 passed (43)",
+      "      Tests  587 passed (587)",
+      "   Duration  69.97s (tests 45%, environment 27%, import 20%, transform 7%, worker 1%)"
+    ],
+    "segundos": 70.77,
+    "bloco": "09-bloco"
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  13 passed (13)",
+      "      Tests  64 passed (64)",
+      "   Duration  43.02s (tests 60%, import 19%, transform 16%, environment 4%, worker 1%)"
+    ],
+    "segundos": 43.6,
+    "bloco": "10-bloco"
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  31 passed (31)",
+      "      Tests  240 passed (240)",
+      "   Duration  33.04s (import 54%, tests 28%, transform 15%, worker 3%)"
+    ],
+    "segundos": 33.85,
+    "bloco": "redteam"
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  9 passed (9)",
+      "      Tests  41 passed (41)",
+      "   Duration  2.96s (tests 70%, import 15%, transform 8%, worker 7%)"
+    ],
+    "segundos": 3.67,
+    "bloco": "adv-w8"
+  }
+]

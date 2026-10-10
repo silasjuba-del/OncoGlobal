@@ -39,8 +39,15 @@ export default defineConfig(async () => {
   // executado a partir da raiz do projeto. So a propria raiz controlada a inclui.
   const raizFixture = process.cwd().replace(/\\/g, "/").replace(/\/+$/, "")
     .endsWith(`/${PASTA_FIXTURE}`);
+  const apiPort = process.env.ONCOGLOBAL_API_PORT;
+  if (apiPort !== undefined && (!/^\d{1,5}$/.test(apiPort) || Number(apiPort) < 1 || Number(apiPort) > 65535))
+    throw new Error("ONCOGLOBAL_API_PORT_INVALIDA");
+  const target = apiPort ? `http://127.0.0.1:${Number(apiPort)}` : undefined;
   return {
     plugins,
+    build: { outDir: "dist/ui", rollupOptions: { input: { demonstracao: "index.html", oncoassist: "oncoassist.html" } } },
+    ...(target ? { server: { host: "127.0.0.1", proxy: { "/login": { target }, "/consulta": { target },
+      "/config": { target }, "/acao": { target } } } } : {}),
     test: {
       // Preserva o exclude padrao; filtro explicito habilita apenas o reataque real,
       // exceto se o comando for executado na propria fixture controlada.
@@ -54,6 +61,8 @@ export default defineConfig(async () => {
       maxWorkers: 1,
       // npm run verify termina em `npm test` sem flag CLI; ainda assim, um arquivo por vez.
       fileParallelism: false,
+      // Sob carga (2.000+ testes num worker) varreduras e percursos de UI passam de 5s.
+      testTimeout: 30_000,
     },
   };
 });

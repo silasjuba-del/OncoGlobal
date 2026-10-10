@@ -1,0 +1,1044 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal
+
+ ❯ tests/ui-telas/percursos.test.tsx (4 tests | 1 failed) 2632ms
+   ❯ percursos (4)
+     × salão: triagem, quadro na ordem da fila e liberar com motivo 1254ms
+ ❯ tests/muse/capacidades.test.ts (3 tests | 3 failed) 1010ms
+   × capacidade /consulta/salao/triagem é explícita, autenticada e não fabrica persistência 436ms
+   × capacidade /consulta/salao/liberar é explícita, autenticada e não fabrica persistência 285ms
+   × capacidade /consulta/canal/vincular é explícita, autenticada e não fabrica persistência 284ms
+ ❯ tests/ui-telas/salao.test.tsx (3 tests | 1 failed) 871ms
+   ❯ tela do salão (3)
+     × liberar sem motivo não envia; com motivo registra a decisão do médico 500ms
+ ❯ tests/ui/triagem.test.tsx (5 tests | 4 failed) 960ms
+   ❯ triagem do salão (5)
+     × PA 161 mostra FILA_MEDICO com o motivo e não impede salvar 533ms
+     × 37,9 °C mostra corte e 37,8 não 170ms
+     × campo vazio aplicável mostra pendência 131ms
+     × idade vazia não vira 0: fica PENDENTE (null) e vai à fila do médico 114ms
+ ❯ tests/ui/quadro.test.tsx (2 tests | 1 failed) 492ms
+   ❯ quadro do salão (2)
+     × liberar com corte exige motivo e não sai sem ele 389ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 10 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/muse/capacidades.test.ts > capacidade /consulta/salao/triagem é explícita, autenticada e não fabrica persistência
+ FAIL  tests/muse/capacidades.test.ts > capacidade /consulta/salao/liberar é explícita, autenticada e não fabrica persistência
+ FAIL  tests/muse/capacidades.test.ts > capacidade /consulta/canal/vincular é explícita, autenticada e não fabrica persistência
+AssertionError: expected 400 to be 501 // Object.is equality
+
+- Expected
++ Received
+
+- 501
++ 400
+
+ ❯ tests/muse/capacidades.test.ts:9:26
+      7|       expect((await f.request(path, "POST", "{}", undefined, "applicat…
+      8|       const res = await f.request(path, "POST", "{}", f.token, "applic…
+      9|       expect(res.status).toBe(501);
+       |                          ^
+     10|       expect(JSON.parse(res.body)).toEqual({ codigo: "CAPACIDADE_PENDE…
+     11|       expect(f.db.prepare("SELECT * FROM operation").all()).toEqual([]…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/10]⎯
+
+ FAIL  tests/ui/quadro.test.tsx > quadro do salão > liberar com corte exige motivo e não sai sem ele
+AssertionError: expected "vi.fn()" to be called with arguments: [ 'p-ecog4', …(1) ]
+
+Received:
+
+  1st vi.fn() call:
+
+  [
+    "p-ecog4",
+    "conduta do médico neste ciclo",
++   "salao-release-e987c27a-4a46-4bf0-b62f-d55636e375f6",
+  ]
+
+
+Number of calls: 1
+
+ ❯ tests/ui/quadro.test.tsx:59:23
+     57|     fireEvent.change(screen.getByLabelText("Motivo"), { target: { valu…
+     58|     fireEvent.click(screen.getByRole("button", { name: "confirmar libe…
+     59|     expect(onLiberar).toHaveBeenCalledWith("p-ecog4", "conduta do médi…
+       |                       ^
+     60|   });
+     61| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/10]⎯
+
+ FAIL  tests/ui/triagem.test.tsx > triagem do salão > PA 161 mostra FILA_MEDICO com o motivo e não impede salvar
+TestingLibraryElementError: Unable to find an element with the text: Destino: FILA_MEDICO. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="pilha"
+    >
+      <label>
+        PA sistólica (mmHg)
+        <input
+          value="161"
+        />
+      </label>
+      <label>
+        Frequência cardíaca (bpm)
+        <input
+          value="78"
+        />
+      </label>
+      <label>
+        Saturação (%)
+        <input
+          value="98"
+        />
+      </label>
+      <label>
+        Temperatura (°C)
+        <input
+          value="36,5"
+        />
+      </label>
+      <label>
+        Hemoglobina (g/dL)
+        <input
+          value="12,0"
+        />
+      </label>
+      <label>
+        Neutrófilos (/µL)
+        <input
+          value="3000"
+        />
+      </label>
+      <label>
+        Plaquetas (/µL)
+        <input
+          value="210000"
+        />
+      </label>
+      <label>
+        Coleta do hemograma
+        <input
+          value="2026-10-01"
+        />
+      </label>
+      <label>
+        ECOG
+        <input
+          value="1"
+        />
+      </label>
+      <label>
+        Grau CTCAE
+        <input
+          value="0"
+        />
+      </label>
+      <label>
+        Idade (anos)
+        <input
+          value="60"
+        />
+      </label>
+      <label>
+        <input
+          type="checkbox"
+        />
+        Tontura
+      </label>
+      <label>
+        Recurso
+        <select>
+          <option
+            value="AMBULATORIAL"
+          >
+            AMBULATORIAL
+          </option>
+          <option
+            value="CADEIRA"
+          >
+            CADEIRA
+          </option>
+          <option
+            value="CAMA"
+          >
+            CAMA
+          </option>
+        </select>
+      </label>
+      <button
+        type="submit"
+      >
+        salvar triagem
+      </button>
+      <p>
+        sem avaliação
+      </p>
+    </form>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/ui/triagem.test.tsx:64:19
+     62|     fireEvent.click(botao);
+     63|     expect(onSalvar).toHaveBeenCalledTimes(1);
+     64|     expect(screen.getByText("Destino: FILA_MEDICO")).toBeTruthy();
+       |                   ^
+     65|     expect(screen.getByText("pressão arterial acima do limite")).toBeT…
+     66|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/10]⎯
+
+ FAIL  tests/ui/triagem.test.tsx > triagem do salão > 37,9 °C mostra corte e 37,8 não
+TestingLibraryElementError: Unable to find an element with the text: temperatura acima do limite. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="pilha"
+    >
+      <label>
+        PA sistólica (mmHg)
+        <input
+          value="120"
+        />
+      </label>
+      <label>
+        Frequência cardíaca (bpm)
+        <input
+          value="78"
+        />
+      </label>
+      <label>
+        Saturação (%)
+        <input
+          value="98"
+        />
+      </label>
+      <label>
+        Temperatura (°C)
+        <input
+          value="37,9"
+        />
+      </label>
+      <label>
+        Hemoglobina (g/dL)
+        <input
+          value="12,0"
+        />
+      </label>
+      <label>
+        Neutrófilos (/µL)
+        <input
+          value="3000"
+        />
+      </label>
+      <label>
+        Plaquetas (/µL)
+        <input
+          value="210000"
+        />
+      </label>
+      <label>
+        Coleta do hemograma
+        <input
+          value="2026-10-01"
+        />
+      </label>
+      <label>
+        ECOG
+        <input
+          value="1"
+        />
+      </label>
+      <label>
+        Grau CTCAE
+        <input
+          value="0"
+        />
+      </label>
+      <label>
+        Idade (anos)
+        <input
+          value="60"
+        />
+      </label>
+      <label>
+        <input
+          type="checkbox"
+        />
+        Tontura
+      </label>
+      <label>
+        Recurso
+        <select>
+          <option
+            value="AMBULATORIAL"
+          >
+            AMBULATORIAL
+          </option>
+          <option
+            value="CADEIRA"
+          >
+            CADEIRA
+          </option>
+          <option
+            value="CAMA"
+          >
+            CAMA
+          </option>
+        </select>
+      </label>
+      <button
+        type="submit"
+      >
+        salvar triagem
+      </button>
+      <p>
+        sem avaliação
+      </p>
+    </form>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/ui/triagem.test.tsx:77:19
+     75|     fireEvent.change(screen.getByLabelText("Temperatura (°C)"), { targ…
+     76|     fireEvent.click(screen.getByRole("button", { name: "salvar triagem…
+     77|     expect(screen.getByText("temperatura acima do limite")).toBeTruthy…
+       |                   ^
+     78|   });
+     79|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/10]⎯
+
+ FAIL  tests/ui/triagem.test.tsx > triagem do salão > campo vazio aplicável mostra pendência
+TestingLibraryElementError: Unable to find an element with the text: hemoglobina ausente. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="pilha"
+    >
+      <label>
+        PA sistólica (mmHg)
+        <input
+          value="120"
+        />
+      </label>
+      <label>
+        Frequência cardíaca (bpm)
+        <input
+          value="78"
+        />
+      </label>
+      <label>
+        Saturação (%)
+        <input
+          value="98"
+        />
+      </label>
+      <label>
+        Temperatura (°C)
+        <input
+          value="36,5"
+        />
+      </label>
+      <label>
+        Hemoglobina (g/dL)
+        <input
+          value=""
+        />
+      </label>
+      <label>
+        Neutrófilos (/µL)
+        <input
+          value="3000"
+        />
+      </label>
+      <label>
+        Plaquetas (/µL)
+        <input
+          value="210000"
+        />
+      </label>
+      <label>
+        Coleta do hemograma
+        <input
+          value="2026-10-01"
+        />
+      </label>
+      <label>
+        ECOG
+        <input
+          value="1"
+        />
+      </label>
+      <label>
+        Grau CTCAE
+        <input
+          value="0"
+        />
+      </label>
+      <label>
+        Idade (anos)
+        <input
+          value="60"
+        />
+      </label>
+      <label>
+        <input
+          type="checkbox"
+        />
+        Tontura
+      </label>
+      <label>
+        Recurso
+        <select>
+          <option
+            value="AMBULATORIAL"
+          >
+            AMBULATORIAL
+          </option>
+          <option
+            value="CADEIRA"
+          >
+            CADEIRA
+          </option>
+          <option
+            value="CAMA"
+          >
+            CAMA
+          </option>
+        </select>
+      </label>
+      <button
+        type="submit"
+      >
+        salvar triagem
+      </button>
+      <p>
+        sem avaliação
+      </p>
+    </form>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/ui/triagem.test.tsx:86:19
+     84|     fireEvent.click(screen.getByRole("button", { name: "salvar triagem…
+     85|     expect(onSalvar).toHaveBeenCalledTimes(1);
+     86|     expect(screen.getByText("hemoglobina ausente")).toBeTruthy();
+       |                   ^
+     87|   });
+     88|   it("idade vazia não vira 0: fica PENDENTE (null) e vai à fila do méd…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/10]⎯
+
+ FAIL  tests/ui/triagem.test.tsx > triagem do salão > idade vazia não vira 0: fica PENDENTE (null) e vai à fila do médico
+TestingLibraryElementError: Unable to find an element with the text: idade ausente. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <form
+      class="pilha"
+    >
+      <label>
+        PA sistólica (mmHg)
+        <input
+          value="120"
+        />
+      </label>
+      <label>
+        Frequência cardíaca (bpm)
+        <input
+          value="78"
+        />
+      </label>
+      <label>
+        Saturação (%)
+        <input
+          value="98"
+        />
+      </label>
+      <label>
+        Temperatura (°C)
+        <input
+          value="36,5"
+        />
+      </label>
+      <label>
+        Hemoglobina (g/dL)
+        <input
+          value="12,0"
+        />
+      </label>
+      <label>
+        Neutrófilos (/µL)
+        <input
+          value="3000"
+        />
+      </label>
+      <label>
+        Plaquetas (/µL)
+        <input
+          value="210000"
+        />
+      </label>
+      <label>
+        Coleta do hemograma
+        <input
+          value="2026-10-01"
+        />
+      </label>
+      <label>
+        ECOG
+        <input
+          value="1"
+        />
+      </label>
+      <label>
+        Grau CTCAE
+        <input
+          value="0"
+        />
+      </label>
+      <label>
+        Idade (anos)
+        <input
+          value=""
+        />
+      </label>
+      <label>
+        <input
+          type="checkbox"
+        />
+        Tontura
+      </label>
+      <label>
+        Recurso
+        <select>
+          <option
+            value="AMBULATORIAL"
+          >
+            AMBULATORIAL
+          </option>
+          <option
+            value="CADEIRA"
+          >
+            CADEIRA
+          </option>
+          <option
+            value="CAMA"
+          >
+            CAMA
+          </option>
+        </select>
+      </label>
+      <button
+        type="submit"
+      >
+        salvar triagem
+      </button>
+      <p>
+        sem avaliação
+      </p>
+    </form>
+  </div>
+</body>
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ tests/ui/triagem.test.tsx:95:19
+     93|     expect(onSalvar).toHaveBeenCalledTimes(1);
+     94|     expect(onSalvar.mock.calls[0]![0].idadeAnos).toBeNull();
+     95|     expect(screen.getByText("idade ausente")).toBeTruthy();
+       |                   ^
+     96|   });
+     97| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/10]⎯
+
+ FAIL  tests/ui-telas/percursos.test.tsx > percursos > salão: triagem, quadro na ordem da fila e liberar com motivo
+TestingLibraryElementError: Unable to find an element with the text: conduta deste ciclo. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div>
+      <section
+        aria-label="Comandos"
+        class="pilha"
+      >
+        <button
+          type="button"
+        >
+          comandos
+        </button>
+      </section>
+      <section
+        aria-label="Salão"
+        class="pilha"
+      >
+        <label>
+          Paciente em triagem
+          <select
+            aria-label="Paciente em triagem"
+          >
+            <option
+              value="pt-verde"
+            >
+              Paciente Teste
+               
+              pt-verde
+            </option>
+            <option
+              value="pt-e1"
+            >
+              Paciente Teste 04
+               
+              pt-e1
+            </option>
+            <option
+              value="pt-vermelho"
+            >
+              Paciente Teste
+               
+              pt-vermelho
+            </option>
+          </select>
+        </label>
+        <p
+          role="alert"
+        >
+          Salve e recarregue a triagem antes de registrar a liberação.
+        </p>
+        <section
+          aria-label="Triagem em 5 passos"
+          class="oc-tri5"
+        >
+          <ol
+            aria-label="Passos"
+            class="oc-tri5-steps"
+          >
+            <li
+              data-ativo="1"
+            >
+              1
+              . 
+              Identificação
+            </li>
+            <li
+              data-ativo="0"
+            >
+              2
+              . 
+              Sinais
+            </li>
+            <li
+              data-ativo="0"
+            >
+              3
+              . 
+              Lab
+            </li>
+            <li
+              data-ativo="0"
+            >
+              4
+              . 
+              ECOG
+            </li>
+            <li
+              data-ativo="0"
+            >
+              5
+              . 
+              CTCAE
+            </li>
+          </ol>
+          <div
+            aria-label="Passo Identificação"
+            role="group"
+          >
+            <label>
+              Nome
+              <input
+                aria-label="Nome na triagem"
+                value="Paciente Teste"
+              />
+            </label>
+          </div>
+          <div
+            class="oc-tri5-nav"
+          >
+            <button
+              disabled=""
+              type="button"
+            >
+              Voltar
+            </button>
+            <button
+              class="oc-btn-primary"
+              type="button"
+            >
+              Próximo: 
+              Sinais
+               →
+            </button>
+          </div>
+        </section>
+        <div
+          class="colunas"
+        >
+          <form
+            class="pilha"
+          >
+            <label>
+              PA sistólica (mmHg)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Frequência cardíaca (bpm)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Saturação (%)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Temperatura (°C)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Hemoglobina (g/dL)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Neutrófilos (/µL)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Plaquetas (/µL)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Coleta do hemograma
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              ECOG
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Grau CTCAE
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Idade (anos)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              <input
+                type="checkbox"
+              />
+              Tontura
+            </label>
+            <label>
+              Recurso
+              <select>
+                <option
+                  value="AMBULATORIAL"
+                >
+                  AMBULATORIAL
+                </option>
+                <option
+       ...
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div>
+      <section
+        aria-label="Comandos"
+        class="pilha"
+      >
+        <button
+          type="button"
+        >
+          comandos
+        </button>
+      </section>
+      <section
+        aria-label="Salão"
+        class="pilha"
+      >
+        <label>
+          Paciente em triagem
+          <select
+            aria-label="Paciente em triagem"
+          >
+            <option
+              value="pt-verde"
+            >
+              Paciente Teste
+               
+              pt-verde
+            </option>
+            <option
+              value="pt-e1"
+            >
+              Paciente Teste 04
+               
+              pt-e1
+            </option>
+            <option
+              value="pt-vermelho"
+            >
+              Paciente Teste
+               
+              pt-vermelho
+            </option>
+          </select>
+        </label>
+        <p
+          role="alert"
+        >
+          Salve e recarregue a triagem antes de registrar a liberação.
+        </p>
+        <section
+          aria-label="Triagem em 5 passos"
+          class="oc-tri5"
+        >
+          <ol
+            aria-label="Passos"
+            class="oc-tri5-steps"
+          >
+            <li
+              data-ativo="1"
+            >
+              1
+              . 
+              Identificação
+            </li>
+            <li
+              data-ativo="0"
+            >
+              2
+              . 
+              Sinais
+            </li>
+            <li
+              data-ativo="0"
+            >
+              3
+              . 
+              Lab
+            </li>
+            <li
+              data-ativo="0"
+            >
+              4
+              . 
+              ECOG
+            </li>
+            <li
+              data-ativo="0"
+            >
+              5
+              . 
+              CTCAE
+            </li>
+          </ol>
+          <div
+            aria-label="Passo Identificação"
+            role="group"
+          >
+            <label>
+              Nome
+              <input
+                aria-label="Nome na triagem"
+                value="Paciente Teste"
+              />
+            </label>
+          </div>
+          <div
+            class="oc-tri5-nav"
+          >
+            <button
+              disabled=""
+              type="button"
+            >
+              Voltar
+            </button>
+            <button
+              class="oc-btn-primary"
+              type="button"
+            >
+              Próximo: 
+              Sinais
+               →
+            </button>
+          </div>
+        </section>
+        <div
+          class="colunas"
+        >
+          <form
+            class="pilha"
+          >
+            <label>
+              PA sistólica (mmHg)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Frequência cardíaca (bpm)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Saturação (%)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Temperatura (°C)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Hemoglobina (g/dL)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Neutrófilos (/µL)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Plaquetas (/µL)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Coleta do hemograma
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              ECOG
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Grau CTCAE
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              Idade (anos)
+              <input
+                value=""
+              />
+            </label>
+            <label>
+              <input
+                type="checkbox"
+              />
+              Tontura
+            </label>
+            <label>
+              Recurso
+              <select>
+                <option
+                  value="AMBULATORIAL"
+                >
+                  AMBULATORIAL
+                </option>
+                <option
+       ...
+ ❯ waitForWrapper node_modules/@testing-library/dom/dist/wait-for.js:163:27
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+ ❯ tests/ui-telas/percursos.test.tsx:153:25
+    151|     fireEvent.change(screen.getByLabelText("Motivo"), { target: { valu…
+    152|     clicar(screen.getByRole("button", { name: "confirmar liberação" })…
+    153|     expect(await screen.findByText("conduta deste ciclo")).toBeTruthy(…
+       |                         ^
+    154|     expect(cliques).toEqual(["liberar mesmo com corte", "confirmar lib…
+    155|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/10]⎯
+
+ FAIL  tests/ui-telas/salao.test.tsx > tela do salão > liberar sem motivo não envia; com motivo registra a decisão do médico
+AssertionError: expected "liberarComCorte" to be called with arguments: [ Array(2) ]
+
+Number of calls: 0
+
+ ❯ tests/ui-telas/salao.test.tsx:35:21
+     33|     fireEvent.change(screen.getByLabelText("Motivo"), { target: { valu…
+     34|     fireEvent.click(screen.getByRole("button", { name: "confirmar libe…
+     35|     expect(liberar).toHaveBeenCalledWith(ID.vermelho, "conduta deste c…
+       |                     ^
+     36|     expect(await screen.findByText("conduta deste ciclo")).toBeTruthy(…
+     37|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/10]⎯
+
+
+ Test Files  5 failed | 43 passed (48)
+      Tests  10 failed | 120 passed (130)
+   Start at  14:24:14
+   Duration  150.09s (environment 55%, import 20%, tests 20%, transform 4%, worker 1%)
+
+    Isolate  48 workers spawned · ~1.85s startup each (spawn + environment, per file)
+             at least ~86.98s faster with isolate: false — reuses workers across files instead of one per file
+

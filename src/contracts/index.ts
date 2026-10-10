@@ -6,3 +6,4 @@ export * from "./operacao.js";
 export * from "./agentes.js";
 export * from "./regras.js";
 export * from "./w10/index.js";
+export * from "./w12/index.js";

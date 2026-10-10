@@ -1,4 +1,5 @@
 import { hashCanonico } from "../modules/tipos.js";
+import { g06E1Destaque } from "../modules/documentos/destaqueE1.js";
 import { CSS_IMPRESSAO_A4 } from "./estilo.js";
 
 export type OrigemTemplate = "TEXTO_FIXO" | "FATO_CONFIRMADO" | "DECISAO_MEDICA";
@@ -27,6 +28,8 @@ export interface EntradaKit {
   datasCiclos?: readonly [string?, string?, string?, string?];
   modeloEmBranco?: boolean; assinatura?: { documentId: string; documentVersion: number; documentHash: string } | null;
   alertasOperacionais?: readonly string[]; folhaOperacionalSalao?: boolean;
+  /** Sinal explícito já validado; o renderer não detecta nem decide emergência por texto. */
+  emergenciaAtiva?: boolean;
   verificacaoAcentuacao?: { necessaria: true; fonte: string };
 }
 export interface ResultadoImpressaoKit { html: string; templateId: string; versao: string; hash: string; status: "ASSINADO" | "RASCUNHO" | "MODELO_EM_BRANCO"; motivoAssinatura: "REFERENCIA_COMPATIVEL" | "SEM_ASSINATURA" | "ID_VERSAO_OU_HASH_DIVERGENTE"; verificacaoAcentuacao?: { necessaria: true; fonte: string }; }
@@ -94,11 +97,25 @@ function corpo(template: KitTemplate, i: EntradaKit): string {
 }
 
 export function renderizarKit(template: KitTemplate, entrada: EntradaKit): ResultadoImpressaoKit {
-  const base = { template, templateId: template.id, versao: template.versao, documentId: entrada.documentId ?? template.id, documentVersion: entrada.documentVersion ?? Number(template.versao.split(".")[0]), cabecalho: entrada.cabecalho, medico: entrada.medico, paciente: entrada.paciente, dataImpressao: entrada.dataImpressao ?? "", valores: entrada.valores ?? {}, itensSelecionados: entrada.itensSelecionados ?? [], exames: entrada.exames ?? [], examesAdicionais: entrada.examesAdicionais ?? [], datasCiclos: entrada.datasCiclos ?? [], prazo: entrada.prazoAfastamento ?? "", inicio: entrada.dataInicioAfastamento ?? "", modeloEmBranco: entrada.modeloEmBranco === true };
+  const folhaOperacional = template.id === "folha-operacional-salao";
+  const emergenciaAtiva = entrada.emergenciaAtiva === true;
+  const alertasOperacionais = entrada.alertasOperacionais ?? [];
+  const alertasE1 = alertasOperacionais.filter((alerta) => typeof alerta === "string" && alerta.trim().length > 0);
+  const destaqueE1Presente = folhaOperacional && entrada.folhaOperacionalSalao === true
+    && emergenciaAtiva && alertasE1.length > 0;
+  const gateE1 = g06E1Destaque({ templateId: template.id, emergenciaAtiva, destaqueE1Presente });
+  if (gateE1.decisao === "BLOQUEIA_ARTEFATO") throw new Error("G-06_E1_DESTAQUE_AUSENTE");
+  const base = { template, templateId: template.id, versao: template.versao, documentId: entrada.documentId ?? template.id, documentVersion: entrada.documentVersion ?? Number(template.versao.split(".")[0]), cabecalho: entrada.cabecalho, medico: entrada.medico, paciente: entrada.paciente, dataImpressao: entrada.dataImpressao ?? "", valores: entrada.valores ?? {}, itensSelecionados: entrada.itensSelecionados ?? [], exames: entrada.exames ?? [], examesAdicionais: entrada.examesAdicionais ?? [], datasCiclos: entrada.datasCiclos ?? [], prazo: entrada.prazoAfastamento ?? "", inicio: entrada.dataInicioAfastamento ?? "", modeloEmBranco: entrada.modeloEmBranco === true,
+    ...(folhaOperacional ? { emergenciaAtiva, folhaOperacionalSalao: entrada.folhaOperacionalSalao === true,
+      alertasOperacionais: entrada.folhaOperacionalSalao === true ? alertasOperacionais : [] } : {}) };
   const hash = hashCanonico(base);
   const assinaturaOk = entrada.assinatura?.documentId === base.documentId && entrada.assinatura.documentVersion === base.documentVersion && entrada.assinatura.documentHash === hash;
   const status = entrada.modeloEmBranco ? "MODELO_EM_BRANCO" : assinaturaOk ? "ASSINADO" : "RASCUNHO";
-  const alerta = template.id === "folha-operacional-salao" && entrada.folhaOperacionalSalao ? (entrada.alertasOperacionais ?? []).map(a => `<div class="operacional">${esc(a)}</div>`).join("") : "";
+  const alerta = folhaOperacional && entrada.folhaOperacionalSalao === true
+    ? emergenciaAtiva
+      ? `<section class="operacional e1-destaque" aria-label="E1 — Emergência ativa"><strong>E1 — EMERGÊNCIA ATIVA</strong>${alertasE1.map(a => `<div>${esc(a)}</div>`).join("")}</section>`
+      : alertasOperacionais.map(a => `<div class="operacional">${esc(a)}</div>`).join("")
+    : "";
   const stamp = status === "RASCUNHO" ? '<div class="rascunho">RASCUNHO — NÃO VÁLIDO</div>' : status === "MODELO_EM_BRANCO" ? '<div class="rascunho">MODELO EM BRANCO</div>' : "";
   const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(template.id)}</title><style>${CSS_IMPRESSAO_A4}</style></head><body><main class="documento">${cabecalho(entrada)}${stamp}${corpo(template, entrada)}${alerta}<footer class="rodape">id: ${esc(base.documentId)} · versão: ${base.documentVersion} · hash: ${esc(hash)}</footer></main></body></html>`;
   const motivoAssinatura = assinaturaOk ? "REFERENCIA_COMPATIVEL" : entrada.assinatura ? "ID_VERSAO_OU_HASH_DIVERGENTE" : "SEM_ASSINATURA";

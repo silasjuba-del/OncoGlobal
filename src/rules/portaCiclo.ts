@@ -1,5 +1,5 @@
-// D-W9-22a · porta de ciclo lê limiar de bula do protocolo. Grau CTCAE só candidata toxicidade.
-// PROVISORIO-W10: trocar ProtocoloCiclo / LabsCiclo por src/contracts/w10/ quando a ficha publicar os limiares.
+// D-W9-22a · porta de ciclo lê LimiaresBula. Grau CTCAE só candidata toxicidade.
+import type { LimiaresBula } from "../contracts/w10/prescricao.js";
 
 export interface FaixaCtcae {
   grau: number;
@@ -180,19 +180,42 @@ function nomeLab(codigo: LimiarBula["codigo"]): string {
   }
 }
 
+/** Converte a bula publicada (D-W9-22a) nos mínimos que a porta compara. Null = limiar não declarado. */
+export function limiaresDaBula(bula: LimiaresBula): LimiarBula[] {
+  const lista: LimiarBula[] = [];
+  if (bula.neutrofilosMin !== null) lista.push({ codigo: "anc", minimo: bula.neutrofilosMin });
+  if (bula.plaquetasMin !== null) lista.push({ codigo: "plq", minimo: bula.plaquetasMin });
+  if (bula.clcrMinMlMin !== null) lista.push({ codigo: "clearance", minimo: bula.clcrMinMlMin });
+  if (bula.fevePctMin !== null) lista.push({ codigo: "feve", minimo: bula.fevePctMin });
+  return lista;
+}
+
+function entradaPorta(entrada: ProtocoloCiclo | LimiaresBula): {
+  limiares: readonly LimiarBula[];
+  portaPorGrau: ProtocoloCiclo["portaPorGrau"];
+  fonte: string | null;
+} {
+  if ("neutrofilosMin" in entrada) {
+    return { limiares: limiaresDaBula(entrada), portaPorGrau: null, fonte: entrada.fonte };
+  }
+  return { limiares: entrada.limiares, portaPorGrau: entrada.portaPorGrau ?? null, fonte: null };
+}
+
 /**
- * Porta do ciclo. Só os mínimos declarados no protocolo. Igual ao mínimo passa.
- * `portaPorGrau` é ignorado de propósito (D-W9-22a).
+ * Porta do ciclo. O limiar vem de `LimiaresBula` (ou do protocolo provisório, mesmo corpo).
+ * Igual ao mínimo passa. `portaPorGrau` é ignorado de propósito (D-W9-22a).
  */
-export function portaCiclo(labs: LabsCiclo, protocolo: ProtocoloCiclo, rs: SalaoCtcae): ResultadoPortaCiclo {
+export function portaCiclo(labs: LabsCiclo, protocolo: ProtocoloCiclo | LimiaresBula, rs: SalaoCtcae): ResultadoPortaCiclo {
   const motivos: MotivoPorta[] = [];
   const pendentes: MotivoPorta[] = [];
   const decisao = rs.decisaoPorta;
-  if (protocolo.portaPorGrau != null && !Number.isInteger(protocolo.portaPorGrau.grauMinimo)) {
+  const entrada = entradaPorta(protocolo);
+  const sufixoFonte = entrada.fonte === null ? "" : `; fonte: ${entrada.fonte}`;
+  if (entrada.portaPorGrau != null && !Number.isInteger(entrada.portaPorGrau.grauMinimo)) {
     throw new Error("portaPorGrau.grauMinimo não é inteiro");
   }
 
-  if (protocolo.limiares.length === 0) {
+  if (entrada.limiares.length === 0) {
     pendentes.push(motivo(
       "pendente.portaCiclo.limiares",
       "protocolo sem limiar de bula; grau CTCAE não abre a porta",
@@ -201,7 +224,7 @@ export function portaCiclo(labs: LabsCiclo, protocolo: ProtocoloCiclo, rs: Salao
     ));
   }
 
-  for (const limiar of protocolo.limiares) {
+  for (const limiar of entrada.limiares) {
     if (!rs.codigosPorta.includes(limiar.codigo)) {
       pendentes.push(motivo(
         "pendente.portaCiclo.codigo",
@@ -236,7 +259,7 @@ export function portaCiclo(labs: LabsCiclo, protocolo: ProtocoloCiclo, rs: Salao
     if (valor < limiar.minimo) {
       motivos.push(motivo(
         `portaCiclo.${limiar.codigo}.abaixo`,
-        `${nomeLab(limiar.codigo)} ${valor} abaixo do limiar de bula ${limiar.minimo}`,
+        `${nomeLab(limiar.codigo)} ${valor} abaixo do limiar de bula ${limiar.minimo}${sufixoFonte}`,
         decisao,
         rs,
       ));

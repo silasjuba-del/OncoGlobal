@@ -1,0 +1,112 @@
+[
+  {
+    "segundos": 1.69,
+    "resumo": [],
+    "exitCode": 0,
+    "bloco": "01-tsc"
+  },
+  {
+    "segundos": 0.12,
+    "resumo": [
+      "fronteiras ok (299 arquivos)"
+    ],
+    "exitCode": 0,
+    "bloco": "02-fronteiras"
+  },
+  {
+    "segundos": 0.16,
+    "resumo": [],
+    "exitCode": 0,
+    "bloco": "03-corpus"
+  },
+  {
+    "segundos": 16.97,
+    "resumo": [
+      " Test Files  74 passed (74)",
+      "      Tests  548 passed (548)",
+      "   Duration  16.53s (import 71%, transform 15%, tests 10%, worker 5%)"
+    ],
+    "exitCode": 0,
+    "bloco": "04-bloco"
+  },
+  {
+    "segundos": 12.74,
+    "resumo": [
+      " Test Files  36 passed (36)",
+      "      Tests  234 passed (234)",
+      "   Duration  12.30s (import 56%, tests 22%, transform 19%, worker 3%)"
+    ],
+    "exitCode": 0,
+    "bloco": "05-bloco"
+  },
+  {
+    "segundos": 26.28,
+    "resumo": [
+      " Test Files  36 passed (36)",
+      "      Tests  183 passed (183)",
+      "   Duration  25.59s (tests 39%, import 27%, environment 19%, transform 14%, worker 1%)"
+    ],
+    "exitCode": 0,
+    "bloco": "06-bloco"
+  },
+  {
+    "segundos": 71.71,
+    "resumo": [
+      " Test Files  48 passed (48)",
+      "      Tests  131 passed (131)",
+      "   Duration  71.19s (environment 56%, import 20%, tests 20%, transform 4%, worker 1%)"
+    ],
+    "exitCode": 0,
+    "bloco": "07-bloco"
+  },
+  {
+    "segundos": 60.5,
+    "resumo": [
+      " Test Files  63 passed (63)",
+      "      Tests  499 passed (499)",
+      "   Duration  59.57s (tests 53%, import 36%, transform 9%, worker 2%)"
+    ],
+    "exitCode": 0,
+    "bloco": "08-bloco"
+  },
+  {
+    "segundos": 134.17,
+    "resumo": [
+      " Test Files  57 passed (57)",
+      "      Tests  639 passed (639)",
+      "   Duration  132.43s (tests 53%, environment 23%, import 17%, transform 6%, worker 1%)"
+    ],
+    "exitCode": 0,
+    "bloco": "09-bloco"
+  },
+  {
+    "segundos": 32.89,
+    "resumo": [
+      " Test Files  13 passed (13)",
+      "      Tests  64 passed (64)",
+      "   Duration  32.04s (tests 50%, import 26%, transform 13%, environment 11%, worker 1%)"
+    ],
+    "exitCode": 0,
+    "bloco": "10-bloco"
+  },
+  {
+    "segundos": 26.33,
+    "resumo": [
+      " Test Files  31 passed (31)",
+      "      Tests  240 passed (240)",
+      "   Duration  25.25s (import 46%, tests 31%, transform 20%, worker 2%)"
+    ],
+    "exitCode": 0,
+    "bloco": "redteam"
+  },
+  {
+    "segundos": 6.84,
+    "resumo": [
+      " Test Files  9 passed (9)",
+      "      Tests  41 passed (41)",
+      "   Duration  5.90s (tests 85%, import 7%, transform 5%, worker 3%)"
+    ],
+    "exitCode": 0,
+    "bloco": "adv-w8"
+  }
+]

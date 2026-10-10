@@ -424,6 +424,15 @@
         "src/apac/campos.ts"
       ],
       "chave": "apac.procedimentosSecundarios"
+    },
+    {
+      "numero": 17,
+      "origens": [
+        "src/config/flash.ts",
+        "src/server/flash.ts",
+        "src/ui/oncochart/Configuracoes.tsx"
+      ],
+      "chave": "config.flash.modeloPadrao"
     }
   ]
 }

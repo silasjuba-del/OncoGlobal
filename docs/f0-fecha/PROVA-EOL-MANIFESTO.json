@@ -1,0 +1,327 @@
+[
+  {
+    "path": "corpus/fichas/esofago/carboplatina-paclitaxel-21-21-dias__nao-especificado.json",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "corpus/fichas/pulmao-cpnpc/carboplatina-gemcitabina__nao-especificado.json",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "corpus/fichas/pulmao-cpnpc/gemcitabina-monoterapia__nao-especificado.json",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/CONTEXTO-NOVA-ABA.md",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/design/prototipos/apac.html",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/design/prototipos/consulta.html",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/design/prototipos/impressos.html",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/f0-fecha/inventario-A2.json",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/f0-fecha/inventario-A6.json",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/f0-fecha/snapshot-pre-merge.json",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/f0-fecha/STATUS.md",
+    "rawIgual": false,
+    "normalizadoLFIgual": false
+  },
+  {
+    "path": "docs/ondas/W3-CODEX.md",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/ondas/W3-GROK.md",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/ondas/W8-GLM.md",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/planejamento/AUDITORIA-PRE-CODIGO-2026-10-07.md",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/planejamento/HANDOFF-NOVO-CHAT-W11-4.md",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/progresso/W10-RETOMADA-JEV-FUGU.md",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/progresso/W3-CODEX.md",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/progresso/W8-GLM.md",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/progresso/W8-KIMI.md",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/referencias/onco-referencia/07-tumor-packs-6-10.md",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/referencias/onco-referencia/auditoria/manifesto-originais.json",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/referencias/onco-referencia/ONCO-REFERENCIA-COMPLETA.md",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/referencias/ui-modelos/Triagem_QT_v20.html",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/w10/astra/REVISAO-ASTRA.md",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/w5/CLAIMS.md",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "docs/w5/P1-REGRAS.md",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "src/ui/api/fake.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/app/executores.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/closure-e2e/jornadas-salao-canal.test.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/closure-luna2/read-gate.test.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/cobertura/caso07-fixtures.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/cobertura/caso07.test.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/fixtures/caso07/03-documentos-pessoais-comprovante.txt",
+    "rawIgual": true,
+    "normalizadoLFIgual": false
+  },
+  {
+    "path": "tests/fixtures/caso07/esperado.json",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/fixtures/redteam/pacientes.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/kernel/kernel.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/modules/vinculo.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/muse/autoridades.test.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/oncoassist-jev/oncoassist.test.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/prompts/captura.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/prompts/docid.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/prompts/path-sitios.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/prompts/prompts.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/redteam/rt01-troca-laudo.adv.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/redteam/rt02-homonimos.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/redteam/rt12-harness-gateway.adv.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/redteam/rt12-harness-gateway.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/rules-w8/caso07.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/rules-w8/identificadores.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/rules-w8/vinculoDocumento.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/server/adv006-saida.test.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/server/leituras-http.test.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/ui-telas/importar.test.tsx",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/ui/cabecalho.test.tsx",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/w10-cursor/cadastro.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/w10-entrega/gateway.test.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/w10-grok/grok-11-manifesto.test.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/w10-grok/grok-13-apac-snapshot.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/w10-luna2/gateway-egress.test.ts",
+    "rawIgual": false,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/w11-adv/checkin-real.test.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/w11-adv/fuzz-regras.test.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/w11-adv/jev-adversarial.test.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  },
+  {
+    "path": "tests/w11-adv/seguranca-phi.test.ts",
+    "rawIgual": true,
+    "normalizadoLFIgual": true
+  }
+]

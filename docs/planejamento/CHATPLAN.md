@@ -266,3 +266,135 @@ M-AB  MODELO DE ORIENTAÇÃO NUTRICIONAL (PDF, 1 pág.) + 8 KITS DE 1ª CONSULTA
       |AB3| Sem texto do Dr. Silas junto: não diz se é para (a) virar modelo de orientação na base, (b) servir de padrão visual dos documentos, (c) outra coisa   PENDENTE
       |AB4| 8 PDFs de "Pacientes primeira consulta" (kits reais; nomes nos nomes de arquivo) anexados SEM instrução. NÃO lidos pelo planejamento; PHI não entra no repositório   PENDENTE (Dr. Silas diz o que fazer)
 ```
+
+```
+M-AC  ⚠ CAUTION/ATTENTION (Dr. Silas: "GRAVAR MEMORIZAR REGISTRAR"): (1) REGRA PARA O CURSOR e (2) MODELO DE RESUMO DE CASO "PRONTUÁRIO DRIVE" (3 seções) → PLN-025   fontes/M-AC_PLN-025_modelo-resumo-caso-prontuario-drive.md
+      |AC1| CURSOR CODING = NÃO PRODUZIR DOCUMENTOS EM PASTAS (executor Cursor só entrega código/testes; relatório vai na resposta do chat, não em arquivo no repositório)   DECIDIDO ⚠ REGRA FIXA — entra em todo prompt para Cursor
+      |AC2| Gatilho "PRONTUÁRIO DRIVE: [NOME]" → pesquisar no Drive conectado e gerar prontuário oncológico estruturado, pronto para revisão médica   DECIDIDO (modelo)
+      |AC3| REGRA CENTRAL: não inventar; dado ausente = campo VAZIO após os dois pontos; nunca "não informado/não consta/ausente", salvo negativo declarado no documento   DECIDIDO ⚠ (tensão com "ausente = PENDENTE" resolvida em PLN-025: vazio no papel, PENDENTE no estado interno)
+      |AC4| Seção 1 DADOS ANAGRÁFICOS (15 campos); Seção 2 DADOS CLÍNICOS (antecedentes, medicações, alergias, cirurgias, histórico familiar, vacinação, ECOG); Seção 3 DADOS ONCOLÓGICOS   DECIDIDO
+      |AC5| Título diagnóstico obrigatório: TIPO DE NEOPLASIA — TNM — ESTÁDIO — SUBTIPO (maiúsculas, negrito, fonte maior; campo ausente fica vazio no título); depois 12 campos (topografia … protocolo)   DECIDIDO
+      |AC6| EXAMES E LAUDOS: "DATA — TIPO: resumo oncológico" (só topografia, dimensões, invasão, linfonodos, metástases; sem descrição técnica radiológica; achados não oncológicos só citados ao final)   DECIDIDO
+      |AC7| LABORATORIAIS + CTCAE (se em QT): hemograma, renal, hepática, marcadores, outros   DECIDIDO
+      |AC8| CONDUTA [VAZIA]: campo livre para decisão médica; não preencher, não sugerir prescrição, não inserir tratamento sem validação   DECIDIDO ⚠
+      |AC9| OBSERVAÇÕES/PENDÊNCIAS: dados ausentes, divergências, pendências APAC/biomarcadores/estadiamento/confirmação diagnóstica/glosa   DECIDIDO
+      |AC10| ATUALIZAÇÕES CIENTÍFICAS / ESTUDO DIÁRIO: estudos relevantes ao tipo/subtipo/cenário, formato "NOME: braços; desfecho; ganho em meses, % de redução, HR"; não vira recomendação; sem aplicabilidade direta → "atualização educacional, sem implicar disponibilidade no SUS"   DECIDIDO (formato) — números devem vir de fonte verificada   PENDENTE (origem dos dados)
+      |AC11| Existem dois modelos de resumo de caso: W1 de 5 blocos (skill SILAS NEGRÃO / Plaud W1) e este de 3 seções   PENDENTE (qual é o canônico, ou o W1 é a saída da skill e este é o do Drive?)
+```
+
+```
+M-AD  ⚠ COMPLEMENTO DO PRONTUÁRIO DRIVE: HISTÓRICO DE TRATAMENTO (sistêmico por ciclo, cirurgia, radioterapia) → PLN-026   fontes/M-AD_PLN-026_historico-de-tratamento.md   (continua M-AC)
+      |AD1| Nova seção obrigatória: HISTÓRICO DE TRATAMENTO ("faltou algo importante")   DECIDIDO
+      |AD2| Sistêmico, uma linha por CICLO: DATA — CICLO n — PROTOCOLO (— DOSE %) + OBSERVAÇÃO (ex.: 03/04/25: ciclo 1 cisplatina + vinorelbina, dose 80%; ciclo 2: neutropenia febril, atrasou 2 semanas; ciclo 3: má tolerância, perda de 4 kg em 3 semanas)   DECIDIDO
+      |AD3| "COLOCANDO SEMPRE A OBSERVAÇÃO": toda linha leva OBS (toxicidade, atraso, tolerância, pós-operatório…)   DECIDIDO ⚠
+      |AD4| Cirurgia: DATA — CIRURGIA (tipo, ex.: mastectomia radical esquerda + esvaziamento axilar) = OBS pós-op   DECIDIDO
+      |AD5| Radioterapia: DATA INÍCIO E FIM (período) — RADIOTERAPIA (frações | dose | topografia | médico responsável | local) (ex.: 02/05/2024 até 15/06/2024: 15 frações em membro inferior esquerdo com boost, total 54 Gy | [Médico RT] | [Serviço de RT] — João Pessoa)   DECIDIDO
+      |AD6| Posição da seção dentro dos 3 blocos de M-AC (sugestão: bloco 3, depois de "Protocolo:" e antes de EXAMES E LAUDOS)   PENDENTE
+      |AD7| Regra do campo vazio (M-AC/AC3) vale: ciclo sem data, protocolo ou dose fica vazio; as linhas 2 e 3 do exemplo vieram só com a observação   DECIDIDO (consistente) — formato exato de linha incompleta   PENDENTE
+```
+
+```
+M-AE  ⚠ MODELO DE APAC = IMPORTANTE: "SEPARE CADA CAIXA E ORIENTE O AGENTE ONDE ALOCAR" (2 anexos: modelo nutricional já registrado + laudo APAC real, 2 páginas) → PLN-027   docs/planejamento/APAC-MAPA-DE-CAIXAS.md
+      |AE1| Pedido: mapa de cada caixa da APAC com orientação de onde alocar cada dado (páginas 1 e 2)   FEITO (APAC-MAPA-DE-CAIXAS.md)
+      |AE2| Laudo APAC real lido SEM copiar dado identificável (nome, CNS, CPF, endereço, telefone, mãe, prontuário, documentos do médico)   REGISTRADO
+      |AE3| Página 2 (Dados complementares: oncologia 56–64, QT 65–72, RT 73–83, nefrologia 84–87) NÃO existe no código (só página 1)   LACUNA
+      |AE4| 10 anomalias do laudo real (CID de mama em tumor de próstata; RT preenchida sem RT; 3 "tratamentos anteriores" com a mesma data; AUC 1,5 × ficha AUC 2; código SIGTAP 0304020087 não achado na tabela local; executante preenchido × código em branco…)   PENDENTE (Dr. Silas valida)
+      |AE5| Prontuário Drive (M-AC/M-AD) não tem 7 dados que a APAC exige (prontuário, raça/cor, etnia, UF, CEP, responsável, IBGE)   LACUNA
+```
+
+```
+M-AF  DUAS REFERÊNCIAS: STF TEMA 6 (medicamento fora do SUS) + MANUAL SOnHe 2024 ("GUIA DO SONHE = PACIENTES PARTICULAR = ÚTIL VARIAÇÃO COM FÁRMACOS QUE NÃO TEM NO SUS") → PLN-028   fontes/M-AF_PLN-028_stf-tema6-e-manual-sonhe-2024.md
+      |AF1| Trilha PARTICULAR/saúde suplementar: o manual do SOnHe vale para paciente particular e para variações com fármacos que NÃO existem no SUS   DECIDIDO (Dr. Silas)
+      |AF2| Acesso por 3 trilhas: SUS (CONITEC/RENAME/PCDT/SBOC) · particular/suplementar (SOnHe) · judicial (Tema 6) — "clinicamente indicado ≠ SUS ≠ instituição" ganha uma 4ª coluna: particular   PROPOSTA do planejamento — PENDENTE
+      |AF3| STF Tema 6: 6 requisitos cumulativos para conceder fármaco fora das listas (negativa administrativa; ilegalidade/mora da Conitec; sem substituto no SUS/PCDT; evidência de alto nível; imprescindibilidade com laudo que descreva o tratamento já realizado; incapacidade financeira)   MATERIAL — liga à capacidade "laudo para judicialização" (Q48)
+      |AF4| Manual SOnHe: 412 páginas, sumário por tumor + suporte (dor, náusea/vômito, neutropenia febril); só capa/créditos/apresentação/sumário lidos   PARCIAL
+      |AF5| Manual SOnHe não é cópia no repositório: referência + extração com fonte/página, revisada pelo Dr. Silas antes da base   PROPOSTA (PLN-023)
+```
+
+```
+M-AG  RESUMO DE ESTUDO "CÂNCERES GINECOLÓGICOS" (PDF de 33 pág., declara "elaborado com assistência de IA") → PLN-029   fontes/M-AG_PLN-029_resumo-canceres-ginecologicos-ia.md
+      |AG1| Material de estudo (ovário, endométrio, colo) com tabela de estudos, 20 flashcards, 10 questões e 10 referências   MATERIAL (sem instrução do Dr. Silas)
+      |AG2| Achado: atribuições e números de vários estudos NÃO batem (RUBY/GARNET/KEYNOTE-868/KEYNOTE-826/PRIMA/GOG-0218/SOLO-1) e há erros de FIGO do colo; alguns são inconsistências internas do próprio PDF   ALERTA — conferir fonte primária
+      |AG3| Regra proposta: documento de estudo gerado por IA NÃO entra na base como fonte; vale só como pista de busca; números só de fonte primária revisada pelo Dr. Silas (PLN-023/025)   PENDENTE (Dr. Silas decide)
+```
+
+```
+M-AI  AVISOS CURTOS DO DR. SILAS: (1) "receitas-50-ja-validadas" (texto de memória colado) · (2) "CURSOR CODANDO" → PLN-030
+      |AI1| As 50 receitas de clínica médica (INT-MED, `docs/biblioteca/50-modelos-receitas.md`) já foram auditadas várias vezes: NÃO reauditar; OncoAssist tem COMORB-INTER   DECIDIDO ⚠ — gravado na memória (feedback_receitas_50_validadas.md)
+      |AI2| Essa biblioteca NÃO existe neste repositório (conferido); o exemplo com tramadol de PLN-021 NÃO é dessa biblioteca   REGISTRADO
+      |AI3| "CURSOR CODANDO": o Cursor está em execução (worktree `w10-cursor` com alterações em `src/ui/*`); lembrar a regra AC1 (sem documentos em pastas) e não tocar código   AVISO
+```
+
+```
+M-AH  DOCUMENTO FINAL DE ARQUITETURA CLÍNICA "OncoGlobal WORK" (datado 5 out 2026, outro chat; 19 seções) → PLN-030   fontes/M-AH_PLN-030_documento-final-arquitetura-clinica-work.md
+      |AH1| Funde 3 fontes (planejamento OncoGlobal LAB, chat da esteira A-B-C-D-E, modelos do serviço QT Hospital do Bem); conflitos C1–C6 declarados   MATERIAL (anterior às decisões de 06–07/10)
+      |AH2| C1 Febre (≥37,8 × >37,8)   JÁ DECIDIDO: D-W9-38 febre estritamente > 37,8 °C em tudo (corte, red flag, prescrições)   RESOLVIDO
+      |AH3| C2 Classe clínica × finalidade APAC   JÁ DECIDIDO: Bloco 9 nº 33 = campo separado da intenção clínica, o médico escolhe 1×, nenhum mapa automático (= opção C do doc)   RESOLVIDO
+      |AH4| C6 Redução de dose: 3 botões 20|30|40%   JÁ DECIDIDO (Bloco 8 nº 29, sobre a dose aplicada no ciclo anterior)   RESOLVIDO
+      |AH5| Semáforo sem amarelo (VERDE/VERMELHO/PENDENTE)   JÁ DECIDIDO (nº 10)   CONFLITA com PLN-006 I2/I3 (🟡 e 4 níveis de interação)   PENDENTE
+      |AH6| Prazos 15/45 dias   SUPERADO por nº 56/A4: 30 dias da última QT até cirurgia ou RT sequencial   SUPERADO
+      |AH7| CTCAE na tabela do doc é v5 (plaquetas G4 < 25.000)   CONFLITA com D-W9-67 (v6 pura; 20.000 = G3)   PENDENTE
+      |AH8| "Receita de sintomáticos: nunca tramadol; dexametasona D-1 e D+1 (nunca D+2); dipirona/paracetamol SOS só para dor"   REGRA DO SERVIÇO (QT) × exemplo de PLN-021 (tramadol)   PENDENTE
+      |AH9| FOLFOX/FOLFIRI no serviço SUS: D1+D2 ~6 h, sem bomba   CONFLITA com D-W9-59(a) (5-FU 46 h com bomba; "D1 e D2, 8 h, sem bomba" não vira ficha)   PENDENTE
+      |AH10| MAESTRO planeja × ORK executa (pendência 5 do doc)   RESPOSTA: DECISOES nº 11 e PLN-010 — Maestro = tabela de planos fixos (LLM só em pergunta livre); ORK executa, entrega microprompt e supervisiona; ORK-2 = Harness clínico + OncoChief   RESOLVIDO
+      |AH11| Nome do território (WORK/OncoGlobal; "oncomind" sai?)   PENDENTE
+      |AH12| Terceiro modelo de "resumo de caso" (seção 18): anagráficos · clínicos gerais · oncológicos · exames cronológicos · conduta · pendências · trials + medicação SUS   PENDENTE (junta-se a W1 de 5 blocos e ao PRONTUÁRIO DRIVE; qual é o canônico?)
+```
+
+```
+M-AJ  RESPOSTAS ÀS 6 DECISÕES DE PLN-030 + "RESUMO UI (LONGO)" → PLN-031   fontes/M-AJ_PLN-031_respostas-e-template-resumo-longo.md
+      |AJ1| 1 — SIM: semáforo de 3 cores (sem amarelo) também em elegibilidade e interação; "revisar" = VERMELHO com motivo; níveis (atenção/importante/contraindicação) vão no texto   DECIDIDO (fecha AH5; corrige PLN-006 I2/I3)
+      |AJ2| 2 — CTCAE 6: tabela v5 do documento de 5/out é substituída pela v6; corte conferido na tabela oficial v6 pelo operacional   DECIDIDO (fecha AH7; reafirma D-W9-67)
+      |AJ3| 3 — FOLFOX em DOIS TIPOS: COM PORT-A-CATH e SEM PORT-A-CATH ("PORTH/PORHCATH")   DECIDIDO (fecha AH9 em parte; ver PLN-031: doses do tipo sem port e FOLFIRI/FOLFOXIRI/FLOT)   PENDENTE (doses e demais esquemas)
+      |AJ4| 4 — Tramadol é RECEITA ESPECIAL, SÓ SE TIVER (o serviço dispuser de receituário especial)   DECIDIDO (fecha AH8): item "controlado" só é oferecido se houver receituário especial configurado
+      |AJ5| 5 — Nome do território: ONCOGLOBAL — WORK   DECIDIDO (fecha AH11; "oncomind" fora do nome do território)
+      |AJ6| 6 — "RESUMO UI (LONGO)" = TEMPLATE PADRÃO — RESUMO ONCOLÓGICO LONGITUDINAL (anagráficos · resumo operacional · clínicos · oncológicos com cTNM/pTNM/ypTNM · timeline · laboratório · tratamento atual com status · CTCAE · alergias · contraindicações · CD vazia · histórico pregresso · IA FALA · trials/evidências · bloco SUS/CONITEC/APAC/SIGTAP)   DECIDIDO (fecha AH12/AC11 para a UI)
+      |AJ7| Regra MEMORY_OS → oncoMed: o bloco regulatório persiste como UMA unidade (CID + dx/estágio/biomarcador + SIGTAP + finalidade/enquadramento + prioridade + competência + proveniência); mudança de estágio, linha ou intenção cria NOVA versão sem apagar a anterior   DECIDIDO
+      |AJ8| "IA FALA — REVISÃO CLÍNICA" (sugestões, pendências, erros/conflitos, lacunas, pearls, pitfalls, caution, NÃO SEI) é superfície da UI, nunca do documento impresso   DECIDIDO (coerente com PLN-023)
+```
+
+```
+M-AK  CONSULTA FLASH — "ONE CLICK, BYE-BYE, NEXT" → PLN-031   fontes/M-AK_PLN-031_consulta-flash-one-click.md
+      |AK1| Modal mínimo que encerra a consulta: header imutável (DX+TNM+ESTÁDIO+BIOMARCADOR / AP+MUC+ALERGIA+ECOG / TTO+LINHA+CICLO) → exames recentes → ações de hoje → receitas/documentos pré-selecionados → APAC/SIGTAP   DECIDIDO (estrutura)
+      |AK2| Chip APAC/SIGTAP operacional: CID · SIGTAP · finalidade · APAC válida · competência · pendências; estados ✓ VERDE / ! PENDENTE / × VERMELHO (sem quinze estados)   DECIDIDO
+      |AK3| Clique final FINALIZAR·IMPRIMIR·SAIR em cadeia: validar → confirmar CD → evolução → atualizar tratamento → gerar/renovar APAC → SIGTAP → receitas/exames/encaminhamentos → retorno → snapshot assinado → imprimir lote → fechar paciente → próximo da fila   DECIDIDO (intenção) — 7 pontos a alinhar com decisões anteriores (ver PLN-031)   PENDENTE
+      |AK4| RETORNO como objeto operacional: prazo + motivo + exames necessários antes do retorno (gera agenda + pedidos)   DECIDIDO (sugestão do texto; liga a PLN-012 cat. 7)
+      |AK5| Itens PRÉ-MARCADOS (☑ liberar tratamento, ☑ receitas) × regra "sugestões desmarcadas salvo ordem médica" (PLN-006 H4) e "nunca 'liberado' sem ato médico" (I2)   PENDENTE
+```
+
+```
+M-AL  PEDIDO: AUDITORIA READ_ONLY ANTES DE CODAR → PLN-032   docs/planejamento/AUDITORIA-PRE-CODIGO-2026-10-07.md
+      |AL1| Auditoria feita só com leitura; tsc/testes NÃO executados   FEITO
+      |AL2| Nome do território: ONCOGLOBAL — WORK (PLN-031) × D-W9-72 (OncoMind solo; WORK×STUDY abolido)   PENDENTE
+      |AL3| Jev (@typesafe-ai/sdk) × D-W9-15 (provedor único)   PENDENTE
+      |AL4| Quem escreve em f0/w1-integrado; Cursor como tech lead × regra "sem documentos em pastas"   PENDENTE
+```
+
+```
+M-AM  FLUXO CLÍNICO = NORTE DO APP (OPS-003, MARCO 2) → PLN-037   fontes/M-AM_PLN-037_fluxo-clinico-norte.md
+      |AM1| 6 blocos (entrada/resumo · exames · consulta · prescrição · documentos · segurança) + UI de agrupamento funcional + eixos longitudinal/transversal   REGISTRADO
+      |AM2| Lacunas duras: perícia INSS/LOAS/BPC; comorbidade×droga; fluoxetina×tamoxifeno; modelo biopatológico transversal   PENDENTE
+      |AM3| Fatias F1–F8 propostas (UI primeiro, backend leve)   PROPOSTO
+      |AM5| OPS-006: resumo de 1ª vez nasce no chat (skill do Dr. Silas); bloco 1 ganha classificador de página, proveniência laudo×citação, máscara de segredos; F2 mostra origem laudo×encaminhador   REGISTRADO
+      |AM4| Q1 REVISAR · Q2 Flash pontualizada + 1 clique (retorno+lab pré-selecionado ± imagem) · Q3 6 tumores · Q5 bula+literatura em RASCUNHO (D-W9-77)   DECIDIDO; Q4, Q6 e "mantendo a consulta"   PENDENTE
+```
+
+```
+M-AN  SPEAKL (GENSPARK) → ORDEM VOCAL → RASCUNHO DOCUMENTAL → REVISÃO → IMPRESSÃO → PLN-039   fontes/M-AN_PLN-039_speakl-voz-para-rascunho-e-impressao.md
+      |AN1| O texto inicial de “compile em comando de terminal” é requisito de tradução/roteamento da fala, não instrução para executar shell no computador do médico   INTERPRETAÇÃO
+      |AN2| Exemplo “vou pedir uma tomografia de tórax” → intenção REQUEST_EXAM_DRAFT; tipo de documento solicitação; exame TC; sítio tórax; campos clínicos ausentes permanecem PENDENTES   PROPOSTA
+      |AN3| Pipeline: SpeakL/STT → transcrição preservada → detectar ordem explícita/contexto/negação → criar ou atualizar cluster → preencher formulário tipado → renderizar documento médico versionado como RASCUNHO   DECIDIDO (coerente PLN-004/013/016/021/023)
+      |AN4| “Vou pedir” cria pedido documental, não imprime; prévia exibida → confirmação explícita do médico → impressão pelo Gateway e impressora escolhida   DECIDIDO (coerente PLN-021 e rota atual)
+      |AN5| Sem pedido genérico para “executar qualquer comando”: aceitar só intents e campos clínicos tipados/listados; desconhecido/ambíguo → mostrar transcrição e pedir correção; nunca executar texto arbitrário como shell   PROPOSTA
+      |AN6| SpeakL é informado como app de speech-to-text; integração concreta (API/SDK, compartilhamento, clipboard ou fluxo manual) não verificada   PENDENTE DE EVIDÊNCIA
+      |AN7| Não há integração SpeakL nem intent vocal ligado à rota documental; a impressão local, prévia e confirmação já existem   GAP PARCIAL
+```
+
+```
+OPS-008  FECHAMENTO W12 (f0/w1-integrado@2e361a9) → PLN-038   DIARIO.md
+      |OP8.1| W12-GROK 01–10 + F1–F4 integrados; verificação verde (1 teste de teclado instável)   FEITO
+      |OP8.2| Glossário do modelo padrão da Flash = bloqueante para pré-marcação em produção   PENDENTE (próxima onda)
+      |OP8.3| Contratos PROVISORIO-W12 a publicar (6)   PENDENTE
+      |OP8.4| Revisão schema AP: 103b91b (lateralidade/topografia, CONFLITO, confiança, HER2 0_ULTRALOW) + 8e0e6ca D-W9-78 (COLORRETAL c/ subsítio, FIGO único, retorno sempre incluído)   FEITO; pulmão MET/RET/BRAF/NTRK/HER2   PRÓXIMA EXTENSÃO
+      |OP8.5| Dr. Silas: 25 orientações do canal · Q4 · Q6 · "mantendo a consulta" · rótulos   PENDENTE
+```

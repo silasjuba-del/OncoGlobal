@@ -14,6 +14,8 @@ export interface EmergenciaRads {
   minimoElos: number;
   obrigatorios: readonly string[];
   elos: readonly EloEmergencia[];
+  /** Se qualquer elo de exclusão aparece (não negado), a cadeia não alerta (ex.: infecção vs imuno). */
+  exclusoes?: readonly EloEmergencia[];
 }
 
 export interface RulesetRads {
@@ -119,6 +121,16 @@ export function lerRadsEmergencias(json: unknown): RulesetRads {
     for (const id of obrigatorios) if (!ids.has(id)) throw new Error(`obrigatorio ${id} fora dos elos`);
     const minimo = inteiroPositivo(o.minimoElos, "minimoElos");
     if (minimo > elos.length) throw new Error("minimoElos acima da cadeia");
+    let exclusoes: EloEmergencia[] | undefined;
+    if (o.exclusoes !== undefined) {
+      if (!Array.isArray(o.exclusoes)) throw new Error("exclusoes inválidas");
+      exclusoes = o.exclusoes.map((item) => {
+        const e = objeto(item, "exclusao");
+        const sins = e.sinonimos;
+        if (!Array.isArray(sins) || sins.length === 0) throw new Error("sinonimos de exclusao ausentes");
+        return { id: texto(e.id, "exclusao.id"), sinonimos: sins.map((s) => texto(s, "sinonimo")) };
+      });
+    }
     return {
       linha: inteiroPositivo(o.linha, "linha"),
       categoria: texto(o.categoria, "categoria"),
@@ -127,6 +139,7 @@ export function lerRadsEmergencias(json: unknown): RulesetRads {
       minimoElos: minimo,
       obrigatorios,
       elos,
+      ...(exclusoes !== undefined && exclusoes.length > 0 ? { exclusoes } : {}),
     };
   });
   return {
@@ -277,6 +290,7 @@ export function detectarEmergencias(laudoTexto: string, rs: RulesetRads): Result
   const spans = spansNegacao(folded, rs.negacoes, rs.alcanceNegacao);
   const alertas: AlertaEmergencia[] = [];
   for (const emerg of rs.emergencias) {
+    if ((emerg.exclusoes ?? []).some((elo) => ocorrencias(folded, elo, spans).length > 0)) continue;
     const grupos = emerg.elos.map((elo) => ocorrencias(folded, elo, spans));
     const combo = combina(
       grupos,

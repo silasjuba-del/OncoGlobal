@@ -1,0 +1,9 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  18:27:56
+   Duration  621ms (transform 71%, import 20%, worker 5%, tests 4%)
+

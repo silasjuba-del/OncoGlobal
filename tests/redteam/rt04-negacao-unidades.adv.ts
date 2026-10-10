@@ -3,6 +3,7 @@
 // Dono provável: src/kernel/extracao/extrator.ts (Fugu).
 import { describe, expect, it } from "vitest";
 import { extratorDeterministico } from "../../src/kernel/extracao/extrator.js";
+import { executarPipelineExtracao } from "../../src/orchestration/pipeline-extracao.js";
 import { LAUDO_INCERTEZA } from "../fixtures/redteam/laudos.js";
 
 const extrair = (rawTranscript: string, sourceType: "imaging_report" | "plaud" = "imaging_report") =>
@@ -12,25 +13,38 @@ const extrair = (rawTranscript: string, sourceType: "imaging_report" | "plaud" =
     rawTranscript, boundaryConfidence: null, boundaryReviewRequired: false, patientId: null,
   });
 
-describe("RT-04 · incerteza vira fato; unidade fora da lista some", () => {
-  it("PROVA DE FALHA (S1): 'não se pode excluir' não é negação reconhecida — achado sai como positivo", () => {
-    const fatos = extrair("não se pode excluir recidiva: nódulo em L4 medindo 8 mm.");
+describe("RT-04 · regressões de incerteza e unidade", () => {
+  it("preserva nódulo com 'não se pode excluir' como candidato incerto, sem resolução", () => {
+    const texto = "não se pode excluir recidiva: nódulo em L4 medindo 8 mm.";
+    const fatos = extrair(texto);
     const imagem = fatos.find((f) => f.domain === "imaging");
-    expect(imagem,
-      "'não se pode excluir' não está na lista de negação do extrator: o nódulo entra como " +
-      "achado EXPLICIT de confiança 1, sem requiresConfirmation. Especificação RT-04: negação/" +
-      "incerteza nunca vira achado positivo sem alerta.")
-      .toBeUndefined();
+    expect(imagem).toMatchObject({
+      evidence: "UNCERTAIN", requiresConfirmation: true,
+      rawEvidence: texto,
+      value: { siteRaw: "L4", measureRaw: "8", unit: "mm" },
+    });
+    const pipeline = executarPipelineExtracao({
+      recordingId: "rt04-excluir", sourceId: "doc-adv", sourceType: "imaging_report", rawTranscript: texto,
+    });
+    expect(pipeline.fields["imaging:L4"]).toMatchObject({ resolvedFactId: null, conflict: false });
+    expect(pipeline.fields["imaging:L4"]?.candidates).toHaveLength(1);
   });
 
-  it("PROVA DE FALHA (S1): 'sugestivo de'/'compatível com'/'provável' não marcam UNCERTAIN nem confirmação", () => {
+  it("preserva 'sugestivo de' como candidato incerto, sem resolução no pipeline", () => {
     const fatos = extrair(LAUDO_INCERTEZA);
     const sugestivo = fatos.find((f) => f.domain === "imaging" &&
       /sugestivo/iu.test(f.rawEvidence));
-    expect(sugestivo,
-      "'Lesão em L2 medindo 12 mm sugestivo de metástase' vira achado EXPLICIT requiresConfirmation=false; " +
-      "a especificação exige incerteza propagada (UNCERTAIN/DERIVED com regra) — nunca fato firme.")
-      .toBeUndefined();
+    expect(sugestivo).toMatchObject({
+      evidence: "UNCERTAIN", requiresConfirmation: true,
+      rawEvidence: "Lesão em L2 medindo 12 mm sugestivo de metástase.",
+      value: { siteRaw: "L2", measureRaw: "12", unit: "mm" },
+    });
+    const pipeline = executarPipelineExtracao({
+      recordingId: "rt04-sugestivo", sourceId: "doc-adv", sourceType: "imaging_report",
+      rawTranscript: LAUDO_INCERTEZA,
+    });
+    expect(pipeline.fields["imaging:L2"]).toMatchObject({ resolvedFactId: null, conflict: false });
+    expect(pipeline.fields["imaging:L2"]?.candidates).toHaveLength(1);
   });
 
   it("PROVA DE FALHA (S1): 'compatível com' no rótulo diagnóstico vira fato EXPLICIT firme", () => {
@@ -49,16 +63,13 @@ describe("RT-04 · incerteza vira fato; unidade fora da lista some", () => {
       .toBeDefined();
   });
 
-  it("PROVA DE FALHA (S2): '1.400' (milhar × decimal) em documento nunca é sinalizado como ambíguo", () => {
+  it("preserva literalmente PSA 1.400, sem interpretar como milhar ou decimal", () => {
     const fatos = extrair("PSA: 1.400 ng/mL");
     const lab = fatos.find((f) => f.domain === "lab");
-    expect((lab?.value as { value?: string } | undefined)?.value).toBe("1.400");
-    // O ponto de milhar brasileiro exige confirmação explícita (1.400 × 1,400 × 1,4):
-    const ambiguidadeSinalizada = lab !== undefined &&
-      (lab.requiresConfirmation === true || lab.evidence === "UNCERTAIN");
-    expect(ambiguidadeSinalizada,
-      "PSA '1.400 ng/mL' extraído como valor literal sem sinal de ambiguidade decimal/milhar " +
-      "(fora do Plaud nem exige confirmação). RT-04 exige PENDENTE + confirmação.")
-      .toBe(true);
+    expect(lab).toMatchObject({
+      evidence: "UNCERTAIN", requiresConfirmation: true,
+      rawEvidence: "PSA: 1.400 ng/mL",
+      value: { value: null, raw: "1.400 ng/mL", unit: "ng/mL" },
+    });
   });
 });

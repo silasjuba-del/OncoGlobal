@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { z } from "zod";
 import { ActionIntent, ConfirmarBloco, type Alerta } from "../../contracts/operacao.js";
-import { Bundle, type DocumentoBundleVisao } from "./Bundle.js";
+import { Bundle, marcadoInicialmente, type DocumentoBundleVisao } from "./Bundle.js";
 
 type Confirmar = z.infer<typeof ConfirmarBloco>;
 type Bloco = Confirmar["bloco"];
@@ -16,7 +16,7 @@ export interface AlvoImpressao {
 function marcacaoInicial(documentos: readonly DocumentoBundleVisao[]): Readonly<Record<string, boolean>> {
   const marcados: Record<string, boolean> = {};
   for (const d of documentos) {
-    if (d.visivel) marcados[d.documentId] = d.preMarcado;
+    if (d.visivel) marcados[d.documentId] = marcadoInicialmente(d);
   }
   return marcados;
 }
@@ -61,6 +61,7 @@ export function BarraFechamento({
   chaveImpressao,
   onValidar,
   onImprimir,
+  ocupado = false,
 }: {
   patientId: string;
   tumorLotId: string | null;
@@ -75,11 +76,13 @@ export function BarraFechamento({
   chaveImpressao: string;
   onValidar: (payload: Confirmar) => void;
   onImprimir: (intent: IntentImprimir) => void;
+  ocupado?: boolean;
 }) {
   const [marcados, setMarcados] = useState(() => marcacaoInicial(documentos));
   const [aviso, setAviso] = useState<string | null>(null);
 
   function entregar(bloco: Bloco) {
+    if (ocupado) return;
     const payload = montarConfirmarBloco({
       patientId,
       tumorLotId,
@@ -149,9 +152,13 @@ export function BarraFechamento({
         </section>
       ) : null}
       {aviso ? <p>{aviso}</p> : null}
-      <button type="button" onClick={() => entregar(blocoAtual)}>validar bloco</button>
-      <button type="button" onClick={() => entregar("TUDO")}>validar tudo</button>
-      <button type="button" onClick={imprimir}>imprimir</button>
+      <button type="button" disabled={ocupado} onClick={() => entregar("TUDO")}>
+        validar tudo
+      </button>
+      <button type="button" disabled={ocupado} onClick={() => entregar(blocoAtual)}>
+        validar bloco
+      </button>
+      <button type="button" disabled={ocupado} onClick={imprimir}>imprimir</button>
     </section>
   );
 }

@@ -1,0 +1,116 @@
+[
+  {
+    "exitCode": 0,
+    "resumo": [],
+    "bloco": "01-tsc",
+    "segundos": 2.27
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      "fronteiras ok (299 arquivos)"
+    ],
+    "bloco": "02-fronteiras",
+    "segundos": 0.23
+  },
+  {
+    "exitCode": 0,
+    "resumo": [],
+    "bloco": "03-corpus",
+    "segundos": 0.32
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  74 passed (74)",
+      "      Tests  548 passed (548)",
+      "   Duration  27.48s (import 68%, transform 17%, tests 9%, worker 5%)"
+    ],
+    "bloco": "04-bloco",
+    "segundos": 28.18
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  36 passed (36)",
+      "      Tests  234 passed (234)",
+      "   Duration  16.39s (import 56%, tests 23%, transform 18%, worker 3%)"
+    ],
+    "bloco": "05-bloco",
+    "segundos": 17.05
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  36 passed (36)",
+      "      Tests  183 passed (183)",
+      "   Duration  36.24s (tests 38%, import 28%, environment 20%, transform 13%, worker 1%)"
+    ],
+    "bloco": "06-bloco",
+    "segundos": 36.94
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  48 passed (48)",
+      "      Tests  131 passed (131)",
+      "   Duration  85.35s (environment 56%, import 21%, tests 18%, transform 5%, worker 1%)"
+    ],
+    "bloco": "07-bloco",
+    "segundos": 86.01
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  63 passed (63)",
+      "      Tests  499 passed (499)",
+      "   Duration  38.82s (tests 52%, import 37%, transform 9%, worker 2%)"
+    ],
+    "bloco": "08-bloco",
+    "segundos": 39.54
+  },
+  {
+    "exitCode": 1,
+    "resumo": [
+      " ❯ tests/w11-adv/seguranca-phi.test.ts (45 tests | 1 failed) 4786ms",
+      "⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯",
+      " FAIL  tests/w11-adv/seguranca-phi.test.ts > W11-H30 · (a) varredura de PHI no repositório > só aparecem CPF, CNS, telefone e e-mail sintéticos já declarados",
+      "AssertionError: expected [ …(7) ] to deeply equal []",
+      " Test Files  1 failed | 56 passed (57)",
+      "      Tests  1 failed | 637 passed (638)",
+      "   Duration  102.17s (tests 53%, environment 21%, import 18%, transform 7%, worker 1%)"
+    ],
+    "bloco": "09-bloco",
+    "segundos": 102.94
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  13 passed (13)",
+      "      Tests  64 passed (64)",
+      "   Duration  26.19s (tests 54%, import 21%, transform 16%, environment 8%, worker 1%)"
+    ],
+    "bloco": "10-bloco",
+    "segundos": 27.12
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  31 passed (31)",
+      "      Tests  240 passed (240)",
+      "   Duration  24.29s (import 46%, tests 34%, transform 18%, worker 2%)"
+    ],
+    "bloco": "redteam",
+    "segundos": 25.3
+  },
+  {
+    "exitCode": 0,
+    "resumo": [
+      " Test Files  9 passed (9)",
+      "      Tests  41 passed (41)",
+      "   Duration  5.00s (tests 82%, import 8%, transform 6%, worker 3%)"
+    ],
+    "bloco": "adv-w8",
+    "segundos": 5.83
+  }
+]

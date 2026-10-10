@@ -1,51 +1,50 @@
-// RT-10 · MEMORY_OS (S0) — FALHAS reais: nada produz TEMPORAL_CONFLICT (PET antes do
-// diagnóstico nunca é flagrado); historicalMetastaticDisease aceita true→false no schema;
-// TNM sobrescrito via supersede apaga o valor antigo (stageHistory não existe na projeção).
-// Dono provável: contracts/w10/clinico-w10.ts (tech lead) + kernel/projections (equipe interna).
+// RT-10 · MEMORY_OS — reataque de cronologia, monotonicidade e projeção de stageHistory.
 import { describe, expect, it } from "vitest";
 import { PatientTimeline, validarMonotonicidade } from "../../src/contracts/w10/clinico-w10.js";
 import { eventosVigentes, projetarSnapshot } from "../../src/kernel/projections/snapshot.js";
 import type { ClinicalEvent } from "../../src/contracts/operacao.js";
+import type { ClinicalFact, FactDomain, FactSourceType } from "../../src/kernel/extracao/tipos.js";
+import { conflitoCronologia } from "../../src/kernel/extracao/reconciliacao.js";
 
 const em = "2030-01-01T12:00:00Z";
-const evento = (id: string, campo: string, valor: unknown, criadoEm = em,
-  supersedesEventId: string | null = null): ClinicalEvent => ({
-  eventId: id, operationId: `op-${id}`, eventIndex: 0, patientId: "Paciente Teste 07",
-  tumorLotId: "tumor-07", encounterId: "enc-07", criadoEm, tipo: "FATO",
-  revisao: "CONFIRMADO", criadoPor: { tipo: "SESSAO", id: "medico-teste" }, fontes: [],
-  supersedesEventId, payload: { reviewDecisionId: `rd-${id}`, data: { campo, valor } },
-});
+function evento(id: string, campo: string, valor: unknown, criadoEm = em,
+  supersedesEventId: string | null = null, options: {
+    patientId?: string; tumorLotId?: string | null; encounterId?: string; revisao?: ClinicalEvent["revisao"];
+    dataClinica?: string; sourceIds?: string[];
+  } = {}): ClinicalEvent {
+  const { patientId = "Paciente Teste 07", tumorLotId = "tumor-07", encounterId = "enc-07",
+    revisao = "CONFIRMADO", dataClinica, sourceIds = [] } = options;
+  return {
+    eventId: id, operationId: `op-${id}`, eventIndex: 0, patientId,
+    tumorLotId, encounterId, criadoEm, tipo: "FATO", revisao,
+    criadoPor: { tipo: "SESSAO", id: "medico-teste" },
+    fontes: sourceIds.map((sourceId) => ({ sourceId, classe: "DOCUMENT", localizador: null,
+      dataClinica: dataClinica ?? null, dataCaptura: criadoEm, versao: "1", contentHash: `hash-${sourceId}` })),
+    supersedesEventId,
+    payload: { reviewDecisionId: `rd-${id}`, data: { campo, valor, ...(dataClinica ? { dataClinica } : {}) } },
+  };
+}
 const projetar = (eventos: readonly ClinicalEvent[]) =>
   projetarSnapshot(eventos, "Paciente Teste 07", "tumor-07", "enc-07", "v1");
 
-async function produtorTemporal(): Promise<((entrada: unknown) => unknown) | null> {
-  for (const caminho of ["../../src/orchestration/pipeline-extracao.js", "../../src/kernel/projections/snapshot.js"]) {
-    const mod = (await import(caminho)) as Record<string, unknown>;
-    const fn = mod["detectarConflitoTemporal"] ?? mod["validarTemporal"] ?? mod["checarOrdemTemporal"];
-    if (typeof fn === "function") return fn as (entrada: unknown) => unknown;
-  }
-  return null;
+function fatoTemporal(id: string, domain: FactDomain, sourceType: FactSourceType, date: string): ClinicalFact {
+  return { id, segmentId: "seg-rt10", patientCandidateId: null, domain, value: { synthetic: true }, sourceType,
+    evidence: "EXPLICIT", sourceId: `source-${id}`, rawEvidence: "trecho sintético", date,
+    confidence: 1, requiresConfirmation: false };
 }
 
 describe("RT-10 · ordem temporal e monotonicidade", () => {
-  it("SEM_IMPLEMENTACAO: produtor de TEMPORAL_CONFLICT existe (evento antes do diagnóstico)", async () => {
-    const fn = await produtorTemporal();
-    expect(fn,
-      "ExceptionKind.TEMPORAL_CONFLICT existe só como enum (kernel tipos + contrato w10): nenhum " +
-      "código emite a exceção. PIPELINE §5.6 exige: evento que exige diagnóstico antes da data do " +
-      "diagnóstico → TEMPORAL_CONFLICT (ex.: PET 02/25 × diagnóstico 11/25). " +
-      "Dono provável: kernel/projections + orchestration (Fugu/equipe interna).")
-      .toBeTypeOf("function");
-  });
-
-  it("PET de 02/2030 antes do diagnóstico de 11/2030 gera exceção TEMPORAL_CONFLICT", async () => {
-    const fn = await produtorTemporal();
-    if (!fn) return;
-    const saida = fn({
-      diagnosticoEm: "2030-11-10",
-      eventos: [{ tipo: "ImagingStudy", campo: "PET", data: "2030-02-15" }],
-    }) as { conflitos?: { kind?: string }[] };
-    expect(saida.conflitos?.[0]?.kind).toBe("TEMPORAL_CONFLICT");
+  it("reconcilia PET anterior ao diagnóstico como TEMPORAL_CONFLICT pelo contrato de ClinicalFact", () => {
+    const conflito = conflitoCronologia([
+      fatoTemporal("diagnostico-2030", "diagnosis", "medical_note", "2030-11-10"),
+      fatoTemporal("pet-2030", "imaging", "imaging_report", "2030-02-15"),
+    ]);
+    expect(conflito).toMatchObject({ kind: "TEMPORAL_CONFLICT", factIds: ["pet-2030", "diagnostico-2030"] });
+    expect(conflito?.sourceIds).toEqual(["source-pet-2030", "source-diagnostico-2030"]);
+    expect(conflitoCronologia([
+      fatoTemporal("diagnostico-2030b", "diagnosis", "medical_note", "2030-02-10"),
+      fatoTemporal("pet-depois", "imaging", "imaging_report", "2030-02-15"),
+    ])).toBeNull();
   });
 
   it("PROVA DE FALHA (S0): historicalMetastaticDisease true→false é aceito pelo schema sem bloqueio", () => {
@@ -68,19 +67,25 @@ describe("RT-10 · ordem temporal e monotonicidade", () => {
       .toBe(false);
   });
 
-  it("PROVA DE FALHA (S0): TNM sobrescrito por supersede — o valor antigo some da projeção (sem stageHistory)", () => {
-    const velho = evento("e1", "TNM", "cT2N0M0");
-    const novo = { ...evento("e2", "TNM", "cT3N1M0", "2030-02-01T12:00:00Z"), supersedesEventId: "e1" };
+  it("snapshot preserva exatamente os TNM do horizonte, incluindo supersedido, com fontes e revisão", () => {
+    const velho = evento("e1", "TNM", "cT2N0M0", em, null,
+      { dataClinica: "2030-01-01", sourceIds: ["doc-e1"] });
+    const novo = evento("e2", "TNM", "cT3N1M0", "2030-02-01T12:00:00Z", "e1",
+      { dataClinica: "2030-02-01", sourceIds: ["doc-e2"] });
+    const raw = evento("e-raw", "TNM", "cT4N2M1", "2030-01-20T12:00:00Z", null,
+      { revisao: "RAW", dataClinica: "2030-01-20", sourceIds: ["doc-raw"] });
+    const otherPatient = evento("e-other-patient", "TNM", "pT4N2M1", "2030-01-25T12:00:00Z", null,
+      { patientId: "Paciente Teste 99", dataClinica: "2030-01-25", sourceIds: ["doc-other-patient"] });
+    const otherLot = evento("e-other-lot", "TNM", "pT4N2M1", "2030-01-26T12:00:00Z", null,
+      { tumorLotId: "tumor-99", dataClinica: "2030-01-26", sourceIds: ["doc-other-lot"] });
+    const afterHorizon = evento("e-future", "TNM", "pT4N2M1", "2030-03-01T12:00:00Z", null,
+      { encounterId: "enc-08", dataClinica: "2030-03-01", sourceIds: ["doc-future"] });
     expect(eventosVigentes([velho, novo]).map((e) => e.eventId)).toEqual(["e2"]);
-    const saida = projetar([velho, novo]);
-    const campo = saida.campos.TNM;
-    // O histórico (D-W9-33 §5.7 / A3: avaliações coexistem) precisaria estar acessível:
-    const historico = (campo as { stageHistory?: unknown[] } | undefined)?.stageHistory;
-    expect(historico,
-      "A correção por supersede é legítima, mas a projeção não preserva o estádio anterior em " +
-      "stageHistory: o cT2N0M0 original fica inacessível (só sobrevive no ledger bruto). " +
-      "PIPELINE §5.7 exige stageHistory[] imutável. Dono: kernel/projections + contracts.")
-      .toBeDefined();
-    expect(historico?.length).toBeGreaterThanOrEqual(2);
+    const saida = projetar([velho, novo, raw, otherPatient, otherLot, afterHorizon]);
+    expect(saida.stageHistory).toEqual([
+      { valor: "cT2N0M0", eventId: "e1", data: "2030-01-01", sourceIds: ["doc-e1"], revisaoOriginal: "CONFIRMADO", superseded: true },
+      { valor: "cT3N1M0", eventId: "e2", data: "2030-02-01", sourceIds: ["doc-e2"], revisaoOriginal: "CONFIRMADO", superseded: false },
+    ]);
+    expect(saida.stageHistory).toHaveLength(2);
   });
 });

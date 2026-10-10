@@ -1,4 +1,6 @@
 # SSOT — ONCOGLOBAL / ONCOMIND
+
+> **D-W9-72 (2026-10-07):** OncoGlobal = guarda-chuva; OncoMind = projeto solo; **WORK×STUDY abolido**. Trechos abaixo que ainda falam WORK/STUDY como bipartição ficam **históricos** até patch canônico completo.
 ## Fonte Única de Verdade · Documento Canônico
 
 **Autoridade:** Dr. Silas Negrão — Patos, Paraíba, Brasil

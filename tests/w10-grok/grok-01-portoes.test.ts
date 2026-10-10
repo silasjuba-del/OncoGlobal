@@ -98,12 +98,16 @@ describe("GROK-01 corte do salão — fronteira (igual passa)", () => {
     expect(r.bloqueiaSalvar).toBe(false);
     expect(r.portao).toBe("CORTE_SALAO");
     expect(r.decisao).toBe("D-W9-37");
-    expect(r.rulesetVersao).toBe("1.0.0");
+    expect(r.rulesetVersao).toBe("1.1.0");
   });
 
   it("creatinina 151 cita 1,51 mg/dL; 0 presente não vira ausente", () => {
     expect(salao({}, { pad: 80, crCentesimos: 151 }).motivos[0]?.texto).toContain("1,51 mg/dL");
-    passa(salao({}, { pad: 80, crCentesimos: 0 }));
+    // RT-07: 0 presente nao vira ausente (nao some), mas creatinina 0 e implausivel: PENDENTE por plausibilidade, nunca SALAO.
+    const zero = salao({}, { pad: 80, crCentesimos: 0 });
+    expect(zero.destino).toBe("FILA_MEDICO");
+    expect(zero.pendentes.map((m) => m.codigo)).toContain("pendente.plausibilidade.cr");
+    expect(zero.pendentes.map((m) => m.codigo)).not.toContain("pendente.corteSalao.cr.alta");
   });
 
   it("ausente é PENDENTE, nunca corte nem SALAO", () => {
@@ -236,20 +240,22 @@ describe("GROK-01 idade e destino continuam os da FN-02", () => {
   });
 });
 
-describe("GROK-01 a FN-01 congelada não absorve o corte novo", () => {
-  it("FC 49 segue anotado, sem corte, nos dois módulos", () => {
+describe("GROK-01 / D-W9-58 a FN-01 corta FC < 50", () => {
+  it("FC 49 corta nos dois módulos; FC 50 passa", () => {
     for (const avaliar of [avaliarTriagem, triagemIndex]) {
-      const r = avaliar(triagemBase({ fc: presente(49) }), ctxBase(), salaoRuleset);
-      expect(r.destino).toBe("SALAO");
-      expect(r.cortes).toEqual([]);
-      expect(r.naoCortes.map((m) => m.codigo)).toContain("naoCorte.fc.baixa");
+      const baixo = avaliar(triagemBase({ fc: presente(49) }), ctxBase(), salaoRuleset);
+      expect(baixo.destino).toBe("FILA_MEDICO");
+      expect(baixo.cortes.map((m) => m.codigo)).toContain("corte.fc.baixa");
+      expect(baixo.naoCortes.map((m) => m.codigo)).not.toContain("naoCorte.fc.baixa");
+      expect(avaliar(triagemBase({ fc: presente(50) }), ctxBase(), salaoRuleset).cortes).toEqual([]);
     }
   });
 
-  it("PAS 161 continua corte da FN-01 e não do portão D-W9-37", () => {
+  it("PAS 161 corta a FN-01 e o corte do salão (1.1.0); o ciclo corta pelo teto próprio", () => {
     const legado = avaliarTriagem(triagemBase({ pas: presente(161) }), ctxBase(), salaoRuleset);
     expect(legado.cortes.map((m) => m.codigo)).toContain("corte.pas.alta");
-    passa(salao({ pas: presente(161) }));
+    corta(salao({ pas: presente(161) }), "corteSalao.pas.alta", "D-W9-37");
+    passa(salao({ pas: presente(160) }));
     corta(ciclo({ pas: presente(161) }), "triagemCiclo.pas.alta", "D-W9-22g");
   });
 });

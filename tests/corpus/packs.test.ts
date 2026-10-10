@@ -5,6 +5,7 @@ import { describe, expect, it } from "vitest";
 import { validarRuleset } from "../../src/kernel/corpus/loader.js";
 
 const packs = ["pulmao", "mama", "colorretal", "prostata"];
+const vazios = ["pulmao", "mama", "colorretal"];
 const carregar = (id: string): unknown =>
   JSON.parse(readFileSync(fileURLToPath(new URL(`../../corpus/packs/${id}.v1.json`, import.meta.url)), "utf8"));
 
@@ -28,8 +29,8 @@ describe("packs lote 1 (pulmao, mama, colorretal, prostata)", () => {
     }
   });
 
-  it("estrutura TumorPack completa (R-22) com conteúdo clínico vazio", () => {
-    for (const id of packs) {
+  it("estrutura TumorPack: pulmão/mama/colorretal vazios; próstata com kit D-W9-67", () => {
+    for (const id of vazios) {
       const p = carregar(id) as Record<string, unknown>;
       for (const campo of ["cid", "labsBaseline", "labsFollowup", "biomarcadores", "roteiroAnamnese"])
         expect(p[campo], `${id}.${campo}`).toEqual([]);
@@ -38,6 +39,30 @@ describe("packs lote 1 (pulmao, mama, colorretal, prostata)", () => {
       expect(p.estadiamento).toEqual({ sistema: "[VERIFICAR]", edicao: "[VERIFICAR]" });
       expect((p.protocolos as { ativo: boolean }[]).every((x) => x.ativo === false)).toBe(true);
     }
+    const pr = carregar("prostata") as {
+      cid: unknown[];
+      labsBaseline: { id: string; ativo: boolean }[];
+      labsFollowup: unknown[];
+      biomarcadores: unknown[];
+      roteiroAnamnese: unknown[];
+      imagem: { baseline: { id: string; ativo: boolean }[]; resposta: unknown[]; seguimento: unknown[] };
+      intervalos: Record<string, unknown>;
+      estadiamento: { sistema: string; edicao: string };
+      protocolos: { ativo: boolean }[];
+    };
+    expect(pr.cid).toEqual([]);
+    expect(pr.labsFollowup).toEqual([]);
+    expect(pr.biomarcadores).toEqual([]);
+    expect(pr.roteiroAnamnese).toEqual([]);
+    expect(pr.intervalos).toEqual({});
+    expect(pr.estadiamento).toEqual({ sistema: "[VERIFICAR]", edicao: "[VERIFICAR]" });
+    expect(pr.protocolos.every((x) => x.ativo === false)).toBe(true);
+    expect(pr.labsBaseline.map((l) => l.id)).toEqual(["psat", "fosfatase-alcalina", "calcio", "testosterona"]);
+    expect(pr.labsBaseline.every((l) => l.ativo === true)).toBe(true);
+    expect(pr.imagem.baseline.map((i) => i.id)).toEqual(["cintilografia-ossea", "rmn-pelve"]);
+    expect(pr.imagem.baseline.every((i) => i.ativo === true)).toBe(true);
+    expect(pr.imagem.resposta).toEqual([]);
+    expect(pr.imagem.seguimento).toEqual([]);
   });
 
   it("nenhum campo dose numérico em nenhum pack (LLM/FN-04 calcula; corpus não carrega dose)", () => {

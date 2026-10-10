@@ -9,9 +9,10 @@ const draft = (patient = patientId) => ({
   draftId: "draft-bundle", patientId: patient, sourceId: "sintetico",
   rawRef: "opaco-teste", diagnostics: [], revision: 0, criadoEm: "2026-10-05T12:00:00Z",
   payload: { documentId: "doc-bundle", documentVersion: 1,
+    contexto: { encounterId, tumorLotId: "tumor-teste" },
     documentHash: "hash-declarado-teste", texto: "documento sintético" },
 });
-const pedidoBundle = () => ({ patientId, encounterId, draftIds: ["draft-bundle"] });
+const pedidoBundle = () => ({ patientId, encounterId, tumorLotId: "tumor-teste", draftIds: ["draft-bundle"] });
 const confirmar = (key: string, docId = "doc-bundle", rev = 0) => ({
   patientId, tumorLotId: "tumor-teste", encounterId, bloco: "TUDO",
   registros: [{ id: "draft-bundle", expectedRevision: rev }],

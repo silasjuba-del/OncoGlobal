@@ -57,9 +57,19 @@ it("vincula apenas EXTRAÇÃO_RASCUNHO não vinculada a paciente existente e con
     const vinculo = await post(f, "/consulta/rascunho/revisar", {
       draftId: "extracao-sem-vinculo-71", expectedRevision: 0, patientId: pacienteB,
     });
-    expect(vinculo.status).toBe(200);
-    expect(lerDraft(f.db, "extracao-sem-vinculo-71")).toMatchObject({ patientId: pacienteB, revision: 1 });
-    expect((vinculo.data as { criaEventoClinico: boolean }).criaEventoClinico).toBe(false);
+    expect(vinculo.status).toBe(409);
+    expect(lerDraft(f.db, "extracao-sem-vinculo-71")).toMatchObject({ patientId: null, revision: 0 });
+    const extracao = await post(f, "/consulta/extrair", {
+      recordingId: "gravacao-identidade-71", sourceId: "fonte-identidade-71",
+      sourceType: "medical_note", rawTranscript: "Diagnóstico: adenocarcinoma. Sem evidência de metástases.",
+    });
+    expect(extracao.status).toBe(201);
+    const real = await post(f, "/consulta/rascunho/revisar", {
+      draftId: extracao.data.draftId, expectedRevision: 0, patientId: pacienteB,
+    });
+    expect(real.status).toBe(200);
+    expect(lerDraft(f.db, extracao.data.draftId)).toMatchObject({ patientId: pacienteB, revision: 1 });
+    expect((real.data as { criaEventoClinico: boolean }).criaEventoClinico).toBe(false);
 
     salvarRascunho(f, { draftId: "extracao-sem-vinculo-72", patientId: null,
       payload: { kind: "EXTRACAO_RASCUNHO", input: { sourceType: "medical_note" }, state: {} } });

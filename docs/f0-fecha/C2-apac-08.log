@@ -1,0 +1,37 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal-wt/f0f-astra-c2
+
+ ❯ tests/f0-fecha/c2-apac-local.test.tsx (1 test | 1 failed) 822ms
+   × mantém achados e fontes da antiglosa HTTP visíveis no rascunho sem emitir APAC 817ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/f0-fecha/c2-apac-local.test.tsx > mantém achados e fontes da antiglosa HTTP visíveis no rascunho sem emitir APAC
+AssertionError: [{"code":"unrecognized_keys","keys":["eventId"],"path":["itens",0,"apac"],"message":"Unrecognized key: \"eventId\""}]: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/f0-fecha/c2-apac-local.test.tsx:51:94
+     49|   const bruto = await ambiente.request("/consulta/apac", {});
+     50|   const validacao = ApacResposta.safeParse(bruto.data);
+     51|   expect(validacao.success, validacao.success ? "" : JSON.stringify(va…
+       |                                                                                              ^
+     52|   const resposta = await porta.lotesApac();
+     53|   const achados = resposta.itens[0]?.antiglosa?.achados;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  17:23:56
+   Duration  10.33s (transform 42%, environment 29%, import 20%, tests 8%)
+
+  Transform  transforming modules took 4.20s · 42% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

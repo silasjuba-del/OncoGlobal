@@ -6,11 +6,7 @@ import { abrirLedger } from "../../src/kernel/ledger/db.js";
 import { confirmar } from "../../src/kernel/ledger/writeRouter.js";
 import { salvarDraft } from "../../src/kernel/ledger/drafts.js";
 import { listarEventos } from "../../src/kernel/ledger/ledger.js";
-import { lerCache, reconstruir } from "../../src/kernel/projections/reconstruir.js";
-// @ts-expect-error native .mjs scripts intentionally have no declaration in this worktree
-import { criarBackup } from "../../scripts/backup.mjs";
-// @ts-expect-error native .mjs scripts intentionally have no declaration in this worktree
-import { restaurarBackup } from "../../scripts/backup-restore.mjs";
+import { lerCache, reconstruir } from "../../src/kernel/projections/reconstruir.js";import { criarBackup } from "../../scripts/backup.mjs";import { restaurarBackup } from "../../scripts/backup-restore.mjs";
 
 const dirs: string[] = [];
 afterEach(() => { for (const dir of dirs.splice(0)) rmSync(dir, { recursive: true, force: true }); });

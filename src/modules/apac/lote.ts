@@ -53,10 +53,13 @@ export function montarApacBatch(
   // D-W5-10: lote diário pode ter vários pacientes, mas UMA competência. Sem critério explícito,
   // a competência do lote é a do primeiro item elegível; os demais meses vão para o lote deles.
   let competenciaLote = criterio.competencia;
+  // Só um item plenamente elegível (com competência) elege a competência do lote;
+  // item sem competência é excluído depois e não interrompe a eleição.
   for (const item of itens) {
     const motivo = motivoExclusao(item, criterio, repetidos);
-    if (motivo === null && competenciaLote === null && item.competencia) competenciaLote = item.competencia;
-    if (motivo === null) break;
+    if (motivo !== null || !item.competencia) continue;
+    if (competenciaLote === null) competenciaLote = item.competencia;
+    break;
   }
   for (const item of itens) {
     let motivo = motivoExclusao(item, criterio, repetidos);

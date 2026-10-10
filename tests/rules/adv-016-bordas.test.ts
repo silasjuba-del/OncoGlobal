@@ -16,12 +16,12 @@ describe("F6 · cortes decididos, sem criar limiar clínico novo", () => {
     expect(avaliar({ pas: presente(90) }).cortes.some((m) => m.codigo === "corte.pas.baixa")).toBe(false);
     expect(avaliar({ pas: presente(89) }).cortes.some((m) => m.codigo === "corte.pas.baixa")).toBe(true);
   });
-  it("ADV-016 · RESISTIU: FC 120 passa, 121 corta e 49 só anota", () => {
+  it("ADV-016 · D-W9-58: FC 120 passa, 121 corta, 50 passa e 49 corta", () => {
+    // Antes (Q21): FC 49 só anotava em naoCortes. D-W9-37/58 autorizou o corte.
     expect(avaliar({ fc: presente(120) }).cortes).toHaveLength(0);
     expect(avaliar({ fc: presente(121) }).cortes.some((m) => m.codigo === "corte.fc.alta")).toBe(true);
-    expect(avaliar({ fc: presente(49) })).toMatchObject({ cortes: [], naoCortes: [
-      expect.objectContaining({ codigo: "naoCorte.fc.baixa" }),
-    ] });
+    expect(avaliar({ fc: presente(50) }).cortes).toHaveLength(0);
+    expect(avaliar({ fc: presente(49) }).cortes.some((m) => m.codigo === "corte.fc.baixa")).toBe(true);
   });
   it("ADV-016 · RESISTIU: Hb 80 passa e 79 corta (dg/dL)", () => {
     expect(avaliar({ hbDgDl: presente(80) }).cortes.some((m) => m.codigo === "corte.hb.baixa")).toBe(false);

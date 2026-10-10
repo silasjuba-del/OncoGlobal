@@ -1,3 +1,4 @@
+import { RulesetHeader } from "./rulesetHeader.mjs";
 // Assinaturas das funções puras FN-01…FN-09 e schemas dos rulesets (W0 · contrato-primeiro).
 // Implementação: src/rules/** (E3 Grok). Testes: tests/rules/** (E5 Kimi). Ninguém muda este arquivo sem o tech lead.
 import { z } from "zod";
@@ -7,14 +8,14 @@ import { Destino, Semaforo } from "./estados.js";
 
 // ── Rulesets (espelham corpus/rulesets/*.v1.json; o teste carrega o JSON e faz parse) ──
 export const SalaoRuleset = z.object({
-  header: z.object({ id: z.literal("salao-triagem"), versao: z.string() }).passthrough(),
+  header: RulesetHeader.and(z.object({ id: z.literal("salao-triagem") })),
   cortes: z.object({
     pasMax: z.number().int(), pasMin: z.number().int(),
-    fcMax: z.number().int(), fcMinNaoCorta: z.number().int(),
+    fcMax: z.number().int(), fcMin: z.number().int(),
     spo2Min: z.number().int(), tempDecimosMax: z.number().int(), hbDgDlMin: z.number().int(),
     ancMin: z.number().int(), plqMin: z.number().int(),
     grauCtcaeCorta: z.number().int(), grauCtcaeEmergencia: z.number().int(),
-    ecogCorta: z.array(z.number().int()), ecog2ComTonturaCorta: z.boolean(),
+    ecogCorta: z.array(z.number().int()),
   }),
   hemogramaValidadeDias: z.number().int(),
   frente: z.object({ recursos: z.array(z.string()), idadeAcimaDe: z.number().int() }).passthrough(),
@@ -24,7 +25,7 @@ export const SalaoRuleset = z.object({
 export type SalaoRuleset = z.infer<typeof SalaoRuleset>;
 
 export const DoseRuleset = z.object({
-  header: z.object({ id: z.literal("dose"), versao: z.string() }).passthrough(),
+  header: RulesetHeader.and(z.object({ id: z.literal("dose") })),
   reducoesPct: z.array(z.number().int()),
   semPesoConsecutivosVermelho: z.number().int(),
   AC: z.object({ ciclosComMedico: z.array(z.number().int()) }).passthrough(),
@@ -32,7 +33,7 @@ export const DoseRuleset = z.object({
 export type DoseRuleset = z.infer<typeof DoseRuleset>;
 
 export const PrazosRuleset = z.object({
-  header: z.object({ id: z.literal("prazos"), versao: z.string() }).passthrough(),
+  header: RulesetHeader.and(z.object({ id: z.literal("prazos") })),
   intervaloPosQtDias: z.number().int(),
 }).passthrough();
 export type PrazosRuleset = z.infer<typeof PrazosRuleset>;

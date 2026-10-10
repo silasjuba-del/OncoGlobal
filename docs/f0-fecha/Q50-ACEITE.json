@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "prUrl": "https://github.com/silasjuba-del/OncoGlobal/pull/4",
+  "headBranch": "f0/w1-integrado",
+  "baseBranch": "main",
+  "reviewer": "Claude",
+  "reviewStatus": "SEM_ALTO_ABERTO",
+  "reviewedCodeHead": "1b56427a176f7112e219eced2d2002dc3307a0f3",
+  "recordedPrHead": "dc2e78cf43901ed14d7ff7e8f6f09238e160bae3",
+  "recordedPrState": "CODE_CI_PASS_BEFORE_DOCUMENTARY_CLOSE",
+  "scope": "Aceite documental Q50: PR existente, diff clínico revisado por Claude, demo real executada. Não presume CI verde, revisão humana GitHub, prontidão final nem merge. Delta de higiene tem relatório próprio e gates finais separados.",
+  "evidence": [
+    {
+      "path": "docs/f0-fecha/CLAUDE-REAUDITORIA-D1.md",
+      "hashMode": "utf8-lf",
+      "sha256": "7f346b04344f28f9a0696ee522a7d66686a9bfc504358288cbc4f9df938f0d01"
+    },
+    {
+      "path": "docs/F0-DEMO.md",
+      "hashMode": "utf8-lf",
+      "sha256": "0cadc3aecc0703cca1690c49f2e9a3ee83b27c52d91018bb4321e9bd34a9d1d7"
+    },
+    {
+      "path": "docs/f0-fecha/demo/01-salao.png",
+      "hashMode": "raw",
+      "sha256": "77343a68076f61941fdad3be3a19b1c161473ff7a2699823a1a28e2c08751721"
+    },
+    {
+      "path": "docs/f0-fecha/demo/02-conflito.png",
+      "hashMode": "raw",
+      "sha256": "77be47fcd0a3bb535c2c741cb71f996264eb3196eafd1648f12d60355920e0f5"
+    },
+    {
+      "path": "docs/f0-fecha/demo/03-revisao.png",
+      "hashMode": "raw",
+      "sha256": "b4656732d0848c51e63b3cc9a6034d67974252f2f9dee03df1ce83036bd1309a"
+    },
+    {
+      "path": "docs/f0-fecha/demo/04-cartao.png",
+      "hashMode": "raw",
+      "sha256": "0e38bc5af4d46df1a94bcee27f8f49fa00644b34f009f7f21db7c9e05f0e0888"
+    },
+    {
+      "path": "docs/f0-fecha/demo/05-modelo.png",
+      "hashMode": "raw",
+      "sha256": "08557eaecf97c1fc874f86a64ce8beac5f98b7777b0c23db8650ad6ea546f4d2"
+    },
+    {
+      "path": "docs/f0-fecha/demo/06-exibicao.png",
+      "hashMode": "raw",
+      "sha256": "b70c66eb35f75d3d3210e303975cd659aa31826e0c42ac2bcfd81ce20e285e78"
+    },
+    {
+      "path": "docs/f0-fecha/demo/07-historico.png",
+      "hashMode": "raw",
+      "sha256": "da80b84567d05bb63b0c4280beaa431c447b5bac56f262a36d1e94fa8283dcb0"
+    },
+    {
+      "path": "docs/f0-fecha/demo/08-apac.png",
+      "hashMode": "raw",
+      "sha256": "b3489f132de05f576f6ef5c284434d2cb23014ca06abced6823785085883269f"
+    },
+    {
+      "path": "docs/f0-fecha/demo/09-reabertura.png",
+      "hashMode": "raw",
+      "sha256": "f16d342d3f03f17b348b71b9681c6387b2036abaa6424fc50d667744fd14df31"
+    },
+    {
+      "path": "docs/f0-fecha/CLAUDE-REATAQUE-SCANNER-Q50.md",
+      "hashMode": "utf8-lf",
+      "sha256": "08ced487266a512be93fd2c4b364bc248eb62d18345aa7f02569b38e42f50a5b"
+    },
+    {
+      "path": "docs/f0-fecha/evidencias/D2-final-reataque/resultados.json",
+      "hashMode": "utf8-lf",
+      "sha256": "aa01845eb52c0fbfbcd200da9f62b550884afed5e4da0c2655d0778a35b3f92b"
+    },
+    {
+      "path": "docs/f0-fecha/E6b-final-1.log",
+      "hashMode": "utf8-lf",
+      "sha256": "5434603b1840ad24115bf3d3035544c82748ac0731d163b807977ac16171ba93"
+    },
+    {
+      "path": "docs/f0-fecha/E6b-final-2.log",
+      "hashMode": "utf8-lf",
+      "sha256": "b85bf2960f4345caf1cc67609be358067dd4ee4077bcb94cbaa4303484aef663"
+    },
+    {
+      "path": "docs/f0-fecha/E6b-final-3.log",
+      "hashMode": "utf8-lf",
+      "sha256": "804adc12f7f727cfd6d141b5f28ff1ee2f75925ca5edba40dcfd49d65a89cf43"
+    }
+  ],
+  "clinicalDeltaVerification": "git diff --name-only 1b56427 dc2e78c -- src corpus: vazio"
+}

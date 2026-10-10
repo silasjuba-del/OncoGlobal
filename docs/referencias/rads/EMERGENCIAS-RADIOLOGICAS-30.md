@@ -1,8 +1,8 @@
-# Catálogo de emergências oncológicas radiológicas (30) · cadeias de palavras-chave
+# Catálogo de emergências oncológicas radiológicas (31) · cadeias de palavras-chave
 
-> Fonte: Dr. Silas, 2026-10-06 (sessão Claude "estatística - H.bem") — D-W9-51. Base do alerta RADS: o laudo é varrido pela **cadeia** (sequência de achados), não por palavra solta. Achado da cadeia ⇒ ALERTA VERMELHO com trecho do laudo; médico confirma. Nunca diagnóstico automático.
+> Fonte: Dr. Silas, 2026-10-06 (D-W9-51) + correções 2026-10-07 (D-W9-68). Base do alerta RADS: o laudo é varrido pela **cadeia** (sequência de achados), não por palavra solta. Achado da cadeia ⇒ ALERTA VERMELHO com trecho do laudo; médico confirma. Nunca diagnóstico automático. **Exclusões** (infecção vs imuno, pneumoperitônio na tiflite, pneumotórax no derrame) anulam a cadeia quando presentes sem negação.
 
-| # | Categoria | Emergência | Modalidade preferencial | Cadeia de palavras-chave no laudo |
+| # | Categoria | Emergência | Modalidade preferencial | Cadeia / exclusões |
 |---|---|---|---|---|
 | 1 | Compressão | Compressão medular metastática | RM coluna total | massa epidural → apagamento do saco dural → compressão → mielopatia |
 | 2 | Compressão | Síndrome de veia cava superior | TC tórax +C | massa mediastinal → estenose/trombo de VCS → colaterais → edema |
@@ -24,19 +24,21 @@
 | 18 | Vascular | Ruptura de CHC/hemoperitônio | TC trifásica | CHC exofítico → hematoma sentinela → blush arterial → hemoperitônio |
 | 19 | Vascular | Hemoptise maciça | angio-TC tórax | cavitação → erosão vascular → hipertrofia de artérias brônquicas |
 | 20 | Vascular | Trombose mesentérica/portal | angio-TC abdome | falha em porta/VMS → espessamento de alças → pneumatose → gás portal |
-| 21 | Vascular | Blowout carotídeo/pseudoaneurisma | angio-TC cervical | pseudoaneurisma → extravasamento ativo → hematoma → leito irradiado |
-| 22 | Infecciosa | Colite neutropênica (tiflite) | TC abdome | espessamento cecal → densificação pericecal → pneumatose → sem pneumoperitônio |
+| 21 | Vascular | Blowout carotídeo/pseudoaneurisma | angio-TC cervical | pseudoaneurisma → extravasamento/hematoma → **leito irradiado (obrigatório)** |
+| 22 | Infecciosa | Colite neutropênica (tiflite) | TC abdome | espessamento cecal → pericecal/pneumatose → **neutropenia**; **exclui** se pneumoperitônio |
 | 23 | Infecciosa | Pionefrose/pielonefrite enfisematosa | TC abdome | hidronefrose → debris/gás parenquimatoso → perda de nefrograma |
 | 24 | Infecciosa | Abscesso hepático/colangite supurativa | TC trifásica | coleções coalescentes → realce em alvo/periférico → gás intralesional |
 | 25 | Infecciosa | Aspergilose angioinvasiva | TC tórax | nódulos com halo em vidro fosco → cavitação → crescente aéreo |
 | 26 | Infecciosa | Fasceíte necrosante/Fournier | TC pélvica/perineal | gás em planos fasciais → espessamento → coleções dissecantes |
-| 27 | Tratamento | Fratura patológica iminente | RX/TC | lesões líticas → afilamento cortical → SINS (coluna)/Mirels (ossos longos) |
-| 28 | Tratamento | Pneumonite imunomediada/actínica | TC tórax | vidro fosco → padrão OP → sem coleção → limites do campo de RT |
-| 29 | Tratamento | Colite imunomediada | TC abdome | espessamento mucoso contínuo → sinal do alvo → ingurgitamento vascular |
-| 30 | Tratamento | Derrame pleural maligno sob tensão | RX/TC tórax | opacidade hemitorácica total → desvio mediastinal contralateral → atelectasia |
+| 27 | Tratamento | Fratura patológica iminente | RX/TC | lesão lítica/blástica → afilamento cortical → **SINS (coluna)** / **Mirels (ossos longos)** |
+| 28 | Tratamento | Pneumonite imunomediada/actínica | TC tórax | vidro fosco → OP / campo RT; **exclui** coleção, abscesso, foco infeccioso |
+| 29 | Tratamento | Colite imunomediada | TC abdome | espessamento mucoso → sinal do alvo → ingurgitamento; **exclui** abscesso / C. difficile / pneumoperitônio |
+| 30 | Tratamento | Derrame pleural maligno | RX/TC tórax | derrame / opacidade → nódulos pleurais e/ou desvio / atelectasia; **exclui** pneumotórax |
+| 31 | Tratamento | Pneumotórax hipertensivo | RX/TC tórax | pneumotórax → desvio mediastinal (± colapso de câmaras) |
 
 ## Regras de uso (tech lead)
-- Combina com INTERVAL_PROGRESSION (D-W9-43) e com a auditoria ACR (`docs/referencias/evidencias/`): ACR sugere o exame; esta tabela reconhece a emergência no laudo.
+- Combina com INTERVAL_PROGRESSION (D-W9-43) e com a auditoria ACR (`docs/referencias/evidencias/`): ACR sugere o exame (F2_CANDIDATE); esta tabela reconhece a emergência no laudo.
 - Negação no laudo ("sem sinais de", "não há") anula o elo da cadeia (teste obrigatório com o laudo sintético PT08 de crânio = negativo).
 - Lateralidade e nível (ex.: L5 à esquerda, rim direito) são extraídos junto (D-W9-05).
 - Hidronefrose unilateral (PT08) cai na linha 7 como ALERTA; a "hidronefrose bilateral" do chat de arquitetura é agravante.
+- Linha 27: PT08 com lesão lítica/blástica em L5 alerta com um elo; SINS/Mirels reforçam quando citados.

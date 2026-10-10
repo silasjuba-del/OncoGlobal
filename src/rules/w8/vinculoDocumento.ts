@@ -1,3 +1,5 @@
+import { cpfValido } from "./identificadores.js";
+import { cnsValido } from "../cns.js";
 // AG-02 · Vínculo de documento ao paciente (lições I3–I5)
 // Regras puras: comprovante de terceiro, acompanhante e médicos solicitante/assistente
 // nunca ligam paciente nem preenchem dados. Só identificador exato VÁLIDO POR VALOR liga.
@@ -25,12 +27,15 @@ export type TipoIdentificadorClinico = "CNS" | "CPF" | "PRONTUARIO";
 export interface EntradaVinculoDocumento {
   tipoDocumento: TipoDocumentoVinculo;
   papelPessoa?: PapelPessoaDocumento;
+  /** Nome impresso no documento; quando presente é conferido contra o cadastro (D-W9-34a). */
+  nomeDocumento?: string | null;
   identificador?: {
     rotulo?: string | null;
     valor: string;
   } | null;
   pacienteAlvo?: {
     patientId: string;
+    nome?: string | null;
     identificadores: readonly { tipo: TipoIdentificadorClinico; valor: string }[];
   } | null;
 }
@@ -40,24 +45,76 @@ export interface SaidaVinculoDocumento {
   motivo: string;
 }
 
-function cpfValido(raw: string): boolean {
-  const d = (raw ?? "").replace(/\D/g, "");
-  if (d.length !== 11 || /^(\d)\1{10}$/.test(d)) return false;
-  const dv = (n: number) => {
-    let s = 0;
-    for (let i = 0; i < n; i++) s += Number(d[i]) * (n + 1 - i);
-    const r = (s * 10) % 11;
-    return r === 10 ? 0 : r;
-  };
-  return dv(9) === Number(d[9]) && dv(10) === Number(d[10]);
+export interface EntradaConfrontoNome {
+  nomeDocumento?: string | null;
+  identificador?: { tipo: TipoIdentificadorClinico; valor: string } | null;
+  cadastroNome?: string | null;
+  cadastroIdentificadores?: readonly { tipo: TipoIdentificadorClinico; valor: string }[];
 }
 
-function cnsValido(raw: string): boolean {
-  const d = (raw ?? "").replace(/\D/g, "");
-  if (d.length !== 15 || !/^[1-9]/.test(d)) return false;
-  let s = 0;
-  for (let i = 0; i < 15; i++) s += Number(d[i]) * (15 - i);
-  return s % 11 === 0;
+export interface SaidaConfrontoNome {
+  /** true quando o nome do documento diverge do cadastro do identificador: conflito visível. */
+  excecao: boolean;
+  /** Compatibilidade documental; nunca executa vínculo de paciente. */
+  liga: boolean;
+  motivo: string;
+}
+
+/** Nome em forma comparável: sem acento, caixa, pontuação ou espaço duplicado. */
+function nomeComparavel(nome: string): string[] {
+  return nome.normalize("NFD").replace(/\p{Diacritic}/gu, "")
+    .toLocaleUpperCase("pt-BR").replace(/[^A-Z0-9 ]/g, " ")
+    .split(/\s+/).filter(Boolean);
+}
+
+/**
+ * Confronta o nome impresso no documento com o nome do cadastro do paciente ligado
+ * pelo identificador. Divergência ⇒ exceção de revisão; nunca escolhe um dos dois em silêncio.
+ * Um nome é compatível quando os tokens são iguais ou um é subconjunto do outro (≥ 2 tokens).
+ */
+function confrontarNome(entrada: EntradaConfrontoNome): Omit<SaidaConfrontoNome, "liga"> {
+  const documento = entrada.nomeDocumento ? nomeComparavel(entrada.nomeDocumento) : [];
+  const cadastro = entrada.cadastroNome ? nomeComparavel(entrada.cadastroNome) : [];
+  if (!documento.length || !cadastro.length) {
+    return { excecao: false, motivo: "nome ausente em documento ou cadastro: confronto de nome não aplicável" };
+  }
+  const menor = documento.length <= cadastro.length ? documento : cadastro;
+  const maior = menor === documento ? cadastro : documento;
+  const conjunto = new Set(maior);
+  const mesmoNome = documento.join(" ") === cadastro.join(" ");
+  const compativel = mesmoNome || (menor.length >= 2 && menor.every((token) => conjunto.has(token)));
+  if (compativel) return { excecao: false, motivo: "nome do documento compatível com o cadastro" };
+  const tipo = entrada.identificador?.tipo ?? "identificador";
+  return {
+    excecao: true,
+    motivo: `conflito de nome: nome impresso no documento diverge do cadastro vinculado por ${tipo} (revisão obrigatória, D-W9-34a)`,
+  };
+}
+
+/** Confronto usado pelo vínculo explícito HTTP e pelo validador documental legado. */
+export function confrontarNomeIdentificador(entrada: EntradaConfrontoNome): SaidaConfrontoNome {
+  const nome = confrontarNome(entrada);
+  if (nome.excecao) return { ...nome, liga: false,
+    motivo: entrada.cadastroIdentificadores === undefined ? nome.motivo
+      : "conflito entre nome documental e nome do cadastro; revisão médica necessária" };
+  // Quando há cadastro completo, aplicar também a igualdade documental estrita
+  // e a validação por valor do identificador exigidas pelo vínculo HTTP F04.
+  if (entrada.cadastroIdentificadores !== undefined) {
+    if (entrada.nomeDocumento?.trim() && nomeComparavel(entrada.nomeDocumento).join(" ")
+      !== nomeComparavel(entrada.cadastroNome ?? "").join(" ")) {
+      return { liga: false, excecao: true, motivo: "conflito entre nome documental e nome do cadastro; revisão médica necessária" };
+    }
+    const id = entrada.identificador;
+    if (id) {
+      const match = entrada.cadastroIdentificadores.some((c) => c.tipo === id.tipo
+        && c.valor.replace(/\D/g, "") === id.valor.replace(/\D/g, ""));
+      const validado = vincularDocumentoAoPaciente({ tipoDocumento: "LAUDO_PRIMARIO", papelPessoa: "PACIENTE",
+        identificador: { valor: id.valor }, pacienteAlvo: { patientId: "confronto", identificadores: entrada.cadastroIdentificadores } });
+      if (!match || !validado.liga) return { liga: false, excecao: true,
+        motivo: "conflito entre identificador documental e cadastro; revisão médica necessária" };
+    }
+  }
+  return { ...nome, liga: true };
 }
 
 /**
@@ -144,6 +201,15 @@ export function vincularDocumentoAoPaciente(
       liga: false,
       motivo: `identificador ${tipoPorValor} válido por valor não coincide com nenhum identificador do paciente alvo`,
     };
+  }
+
+  const confronto = confrontarNomeIdentificador({
+    nomeDocumento: entrada.nomeDocumento ?? null,
+    identificador: { tipo: tipoPorValor, valor: entrada.identificador.valor },
+    cadastroNome: entrada.pacienteAlvo.nome ?? null,
+  });
+  if (confronto.excecao) {
+    return { liga: false, motivo: confronto.motivo };
   }
 
   return {

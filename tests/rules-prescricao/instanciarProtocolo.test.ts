@@ -1,3 +1,4 @@
+import { doseRuleset } from "../fixtures/rulesets.js";
 import { describe, expect, it } from "vitest";
 import { arredondaMeioParaCima, instanciarProtocolo, type DadosCorporais } from "../../src/rules/prescricao/instanciarProtocolo.js";
 import { calcularDose } from "../../src/rules/dose.js";
@@ -7,7 +8,7 @@ import { item, template } from "./_fixtures.js";
 const dados = (o: Partial<DadosCorporais> = {}): DadosCorporais => ({
   pesoKg: 70, alturaCm: 170, bsaM2: 1.8, clcr: 80, medidoEm: "2026-10-06T08:00:00-03:00", ...o,
 });
-const rs: DoseRuleset = { header: { id: "dose", versao: "teste" }, reducoesPct: [0, 20, 30, 40], semPesoConsecutivosVermelho: 2, AC: { ciclosComMedico: [] } };
+const rs: DoseRuleset = { header: doseRuleset.header, reducoesPct: [0, 20, 30, 40], semPesoConsecutivosVermelho: 2, AC: { ciclosComMedico: [] } };
 
 const tpl = () => template([
   item({ drug: "Ondansetrona", classe: "PRE_QT", sequence: 1, doseBasis: "FIXED", standardDose: 16, unit: "mg" }),

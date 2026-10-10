@@ -2,7 +2,7 @@
 import { describe, expect, it } from "vitest";
 import { avaliarTriagem, decidirDestino } from "../../src/rules/index.js";
 import { ausente, ctxBase, presente, triagemBase } from "../fixtures/triagem.js";
-import { RULESET_VERSAO, salaoRuleset } from "../fixtures/rulesets.js";
+import { salaoRuleset } from "../fixtures/rulesets.js";
 
 const avaliar = (over: Parameters<typeof triagemBase>[0], ctxOver: Parameters<typeof ctxBase>[0] = {}) =>
   avaliarTriagem(triagemBase(over), ctxBase(ctxOver), salaoRuleset);
@@ -22,11 +22,13 @@ describe("FN-01 cortes vitais e exames (igual passa, inteiros nas bordas — K-1
     expect(avaliar({ fc: presente(120) }).destino).toBe("SALAO");
     expect(avaliar({ fc: presente(121) }).destino).toBe("FILA_MEDICO");
   });
-  it("FC 49 → SALAO com anotação em naoCortes (FC<50 não corta)", () => {
+  it("FC 50 → SALAO; FC 49 → FILA_MEDICO (D-W9-58: FC<50 corta; igual passa)", () => {
+    expect(avaliar({ fc: presente(50) }).destino).toBe("SALAO");
+    expect(avaliar({ fc: presente(50) }).cortes).toHaveLength(0);
     const r = avaliar({ fc: presente(49) });
-    expect(r.destino).toBe("SALAO");
-    expect(r.cortes).toHaveLength(0);
-    expect(r.naoCortes.length).toBeGreaterThan(0);
+    expect(r.destino).toBe("FILA_MEDICO");
+    expect(r.cortes.map((m) => m.codigo)).toContain("corte.fc.baixa");
+    expect(r.naoCortes.map((m) => m.codigo)).not.toContain("naoCorte.fc.baixa");
   });
   it("SpO2 88 → SALAO; SpO2 87 → FILA_MEDICO", () => {
     expect(avaliar({ spo2: presente(88) }).destino).toBe("SALAO");
@@ -64,11 +66,15 @@ describe("FN-01 grau CTCAE e ECOG", () => {
     expect(r.destino).toBe("FILA_MEDICO");
     expect(r.emergencia).toBe(true);
   });
-  it("ECOG 2 + tontura → SALAO com anotação em naoCortes", () => {
-    const r = avaliar({ ecog: presente(2), tontura: true });
-    expect(r.destino).toBe("SALAO");
-    expect(r.cortes).toHaveLength(0);
-    expect(r.naoCortes.length).toBeGreaterThan(0);
+  // D-W9-76 · tontura deixa de ser critério. ECOG 2 com tontura não corta e não anota naoCorte.
+  it("ECOG 2 + tontura → SALAO sem anotação de tontura (D-W9-76)", () => {
+    const com = avaliar({ ecog: presente(2), tontura: true });
+    const sem = avaliar({ ecog: presente(2), tontura: false });
+    expect(com.destino).toBe("SALAO");
+    expect(com.cortes).toHaveLength(0);
+    expect(com.naoCortes.map((m) => m.codigo)).not.toContain("naoCorte.ecog.tontura");
+    expect(com.destino).toBe(sem.destino);
+    expect(com.cortes).toEqual(sem.cortes);
   });
   it("ECOG 3 → FILA_MEDICO; ECOG 4 → FILA_MEDICO", () => {
     expect(avaliar({ ecog: presente(3) }).destino).toBe("FILA_MEDICO");
@@ -136,8 +142,9 @@ describe("FN-01/FN-02 destino (Q26, N08)", () => {
     expect(avaliar({ idadeAnos: 60 }).pendentes).toHaveLength(0);
     expect(decidirDestino({ temCorte: false, temPendencia: false, recurso: "AMBULATORIAL", idadeAnos: null }, salaoRuleset)).toBe("FILA_MEDICO");
   });
-  it("saída carrega rulesetVersao 1.0.0", () => {
-    expect(avaliar({}).rulesetVersao).toBe(RULESET_VERSAO);
+  it("saída carrega rulesetVersao 1.1.0 (D-W9-58)", () => {
+    expect(avaliar({}).rulesetVersao).toBe("1.1.0");
+    expect(avaliar({}).rulesetVersao).toBe(salaoRuleset.header.versao);
   });
 });
 
@@ -150,10 +157,12 @@ describe("FN-02 decidirDestino (função pura isolada)", () => {
     expect(decidirDestino({ temCorte: false, temPendencia: true, recurso: "CAMA", idadeAnos: 60 }, salaoRuleset)).toBe("FILA_MEDICO"));
   it("AMBULATORIAL sem corte e sem pendência → SALAO", () =>
     expect(decidirDestino({ temCorte: false, temPendencia: false, recurso: "AMBULATORIAL", idadeAnos: 60 }, salaoRuleset)).toBe("SALAO"));
-  it("idade 81 AMBULATORIAL → FRENTE; idade 80 → SALAO", () => {
+  it("idade 81 AMBULATORIAL → FRENTE; idade 80 → SALAO (igual NÃO passa na idade)", () => {
     expect(decidirDestino({ temCorte: false, temPendencia: false, recurso: "AMBULATORIAL", idadeAnos: 81 }, salaoRuleset)).toBe("FRENTE");
     expect(decidirDestino({ temCorte: false, temPendencia: false, recurso: "AMBULATORIAL", idadeAnos: 80 }, salaoRuleset)).toBe("SALAO");
   });
+  it("CADEIRA sem corte e sem pendência → FRENTE em qualquer idade (Q26)", () =>
+    expect(decidirDestino({ temCorte: false, temPendencia: false, recurso: "CADEIRA", idadeAnos: 60 }, salaoRuleset)).toBe("FRENTE"));
 });
 
 describe("FN-01 qtPodeIniciarSemMedico (Q21)", () => {

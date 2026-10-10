@@ -1,0 +1,828 @@
+[
+  {
+    "ramo": "refs/heads/closure/w10-fugu",
+    "head": "f958437a755d0bb5bad41cbf2973507638f435be",
+    "semEquivalente": 3,
+    "commits": [
+      "+ 5cce33f12986c039b76d4f6c58a560a1d621597f W10-FUGU-F01: conservar farmacos visualmente suspeitos para revisao",
+      "+ 9b033506d40649cdb4f1a3d88bdf169dea826e48 W10-FUGU-F02: marcar reingestao de laudos preservando fontes e versoes",
+      "+ f958437a755d0bb5bad41cbf2973507638f435be W10-FUGU-F03: confrontar plano verbalizado com prescricao contextual"
+    ]
+  },
+  {
+    "ramo": "refs/heads/closure/w10-luna1",
+    "head": "6d416d668027cba73c53c88e35a13b5accbdc1bd",
+    "semEquivalente": 20,
+    "commits": [
+      "+ c80c87f2b0560f3e2932e3bba9af42fd91f7cd24 feat(closure): contratos compartilhados e projeção de vínculo explícito",
+      "+ 940141b8c181322b07987b94a8ac5c396e8be0f3 feat(closure): implement F04 F07 F08 server journeys",
+      "+ 62ccf37f937fc53a78b1498737e2b0ac077aeedb feat(closure): review patient identity before linking sources",
+      "+ ca05867c0e18bec0687dc596f651cf57d515af4d feat(closure): connect the salon draft and release flow",
+      "+ 6e5f09bc5b4bd6b957ead9454fb280334783b3f4 feat(closure): expose explicit channel contact linking",
+      "+ 535b91c9750f19e968c9efe371bd3ec61b1b71d7 feat(closure): connect local clinical screens to HTTP",
+      "+ 541b8b9a43b62acc0ebb0687327ba0049cc1bd74 test(closure): add F04 and salon persistence regressions",
+      "+ 7920a91c2a2cc4fa5b78921ad3d55df25827e95d docs(closure): record Luna 1 handoff and SHAs",
+      "+ 4834bfa5f97b2d8d9a4687348fc342ee661df4bf fix(closure): close draft payload object correctly",
+      "+ dc9367141269b672c7c1ff6ed88084a0551ef4a0 fix(closure): restore strict typecheck compatibility",
+      "+ c2b500a7ccbed236c4ff096bdfa7a5ce7f67d8c3 fix(closure): keep salon decisions global across tumor lots",
+      "+ 51accf4ba80cf92529ac88e80b6f787b338cbe9c W10-FUGU-F01: conservar farmacos visualmente suspeitos para revisao",
+      "+ 9d90d097d5d714f70df6a8ec90333e6ed7484b35 W10-FUGU-F02: marcar reingestao de laudos preservando fontes e versoes",
+      "+ d6635e8ed22428e89bcee7b99b53e5c41a1e6482 W10-FUGU-F03: confrontar plano verbalizado com prescricao contextual",
+      "+ cce3c5785a62a3b0663ea990299e4341c7c09ce0 feat(closure): reconcile persisted extraction sources",
+      "+ 4b8a15aa461779acb8a2a8c26bf0d8da3600fc45 feat(closure): show segment-scoped source reconciliation",
+      "+ 5dfc329d71ad174b2a87cf887a04c897afe70130 test(closure): cover source reconciliation and segment links",
+      "+ 609b38ef4f6b3c0455e17a00a778dcded80d289e fix(test): close reconciliation proposal assertion",
+      "+ cbc20b8f1f66c24b66eb246d0a0c21621c90b669 fix(closure): preserve salon duplicates and source scope",
+      "+ 6d416d668027cba73c53c88e35a13b5accbdc1bd fix canal patient projection conflicts"
+    ]
+  },
+  {
+    "ramo": "refs/heads/closure/w10-luna2",
+    "head": "993201d687eacf0f525d8d9953bfaf191506c38f",
+    "semEquivalente": 13,
+    "commits": [
+      "+ 79888e2a3037b0b443e454e837383893ac91b619 fix(backup): snapshot all local SQLite stores with manifest",
+      "+ ddfb25dc4885bfc64e9b5dbd28b05595720c60f0 feat(gateway): authorize offline READ separately from effects",
+      "+ 6ae9d45a208d98d1bb05d9eeecd72ebcff11f119 test(backup): exercise snapshots with active WAL",
+      "+ 1e92bf2ba5a929780caf13468cd310b456a8f1cd fix(triage): surface laboratory unit provenance conflicts",
+      "+ e0f3e9f1c4f8720e387ef304201133a485587b2a fix(gateway): keep READ metadata local and enforce G02",
+      "+ 4d75b9ebb4ec490db2b9b4ddfe9699efe45a5729 docs(w10): record Luna 2 closure evidence and blockers",
+      "+ ee7886407688011c62d9cfc700559cc42059f5a3 docs(w10): fix closure report whitespace",
+      "+ f9b136f29bc570c1215298622d22e3c766670be3 feat(closure): contratos compartilhados e projeção de vínculo explícito",
+      "+ ddb2f0a8c626f5c89bbe6ca25d89dc98dfdfb387 fix(closure): use canonical READ and lab schemas",
+      "+ af899da51ad218014e5759aa2b2a90c625b0f11d fix(gateway): omit undefined optional READ fields",
+      "+ ebdeb2195b161023c51ccd66727b79168b07c5ad fix(closure): type backup scripts and scope READ by territory",
+      "+ 73ad6426d15c355117da0be1f707215264d707e2 fix(triage): preserve Hb conflict diagnosis",
+      "+ 993201d687eacf0f525d8d9953bfaf191506c38f fix(backup): reject nonportable manifest paths"
+    ]
+  },
+  {
+    "ramo": "refs/heads/closure/w10-luna3",
+    "head": "d6493a7f77b0699c28aa83c252d61c52c1244c20",
+    "semEquivalente": 9,
+    "commits": [
+      "+ 8bcd78f4310b5c46e818568c8a42ca718c737187 test(w10): add salon and channel closure journeys",
+      "+ b5b2edf6c15134cd98673590d42b97bd284c4ed8 test(w10): align closure journeys with canonical decisions",
+      "+ 9954fbc8ad697665f11f4c7bc0a1999135758f65 test(w10): distinguish draft create revision from update",
+      "+ 4780705eb9b22055be0a895e583177ad7341fbb2 test(w10): cover salon first-use UI journey",
+      "+ c716aa717fdb2235e333b8a0b235cca1bd8aa571 test(w10): diagnose salon UI load failures",
+      "+ b0374625cabd8092ab26a2c5a887065d7bdf9258 test(w10): expose salon response contract errors",
+      "+ 0b0390d238c76ef030c3f89c4d9fd4262be80236 test(w10): provide salon corpus fixture in jsdom",
+      "+ eee6cd6eb4fd6bd67ec7a3c5b62e70fd3c3a3fe7 test(w10): target current red-team APIs",
+      "+ d6493a7f77b0699c28aa83c252d61c52c1244c20 test(w10): guard optional RT01 fixture names"
+    ]
+  },
+  {
+    "ramo": "refs/heads/codex/w10-entrega-integrada",
+    "head": "c0c076251e8c49099713c497d375f790fde243df",
+    "semEquivalente": 44,
+    "commits": [
+      "+ 4421812a68b4a596d4d6dcc9fb279f0271b5057f feat(closure): contratos compartilhados e projeção de vínculo explícito",
+      "+ 5f0aa0515258d9187bd148942660e99182acc109 fix(backup): snapshot all local SQLite stores with manifest",
+      "+ 517746e402d7b262220804103910009ea8568946 feat(gateway): authorize offline READ separately from effects",
+      "+ a6236cee7611fbe1effd652ddbdcf7d8f25052f2 test(backup): exercise snapshots with active WAL",
+      "+ 7ed14e7f1ac24190102a4d1d5882b0236b042051 fix(triage): surface laboratory unit provenance conflicts",
+      "+ f11a0c0e7a49a130107aa9bbc9a3f21678792907 fix(gateway): keep READ metadata local and enforce G02",
+      "+ cd3a8340fcc80d7868706b55b8b5655d36e660c0 docs(w10): record Luna 2 closure evidence and blockers",
+      "+ fcd07fce7f22889ca6c109bdffa36f6507448dea docs(w10): fix closure report whitespace",
+      "+ 61c8c5b1cf45a5a49bb857ef564e77423edbfca2 fix(closure): use canonical READ and lab schemas",
+      "+ acf0c299c3421db6145dbc3d2f24d12a73b62127 feat(closure): implement F04 F07 F08 server journeys",
+      "+ bc00886d0c6fd71d4dfdba6debf3796fa86fdc37 feat(closure): review patient identity before linking sources",
+      "+ fbb98f8e751f9ccd26181c3a147dde8217f21fca feat(closure): connect the salon draft and release flow",
+      "+ 59a8c602dfffe0db1d8acff39f994a42a05bec1c feat(closure): expose explicit channel contact linking",
+      "+ b19b2f5219d803a4003ee1687360ecd807d22eea feat(closure): connect local clinical screens to HTTP",
+      "+ 80495e72fe7762c0cad6fe04216b01f621a513c3 test(closure): add F04 and salon persistence regressions",
+      "+ 1553877811d9750a41a065878ac561dcc2f2c417 docs(closure): record Luna 1 handoff and SHAs",
+      "+ 03d3848792b4e93c1752c2162c51a0d2858cca93 test(w10): add salon and channel closure journeys",
+      "+ 79fa75b9f25877cc8f5eda40c648b9d571f2b1ee fix(closure): close draft payload object correctly",
+      "+ 169261ddce26b62cea70ee960b29403872ee0c37 fix(gateway): omit undefined optional READ fields",
+      "+ eff8bb9183951fed0e946ce95b4050aeeb6f59c4 fix(closure): restore strict typecheck compatibility",
+      "+ f71040c62a95d083dea704bc6933431ade703105 fix(closure): type backup scripts and scope READ by territory",
+      "+ ab4fda7a32f5f74e925cbe8879cefe3cb7eaf894 fix(closure): keep salon decisions global across tumor lots",
+      "+ 603335946c993849a4bb256ba68ef1f821a42718 fix(triage): preserve Hb conflict diagnosis",
+      "+ a0c8be017ab8fa8f3e8e343ec4be22d26ecc2650 test(w10): align closure journeys with canonical decisions",
+      "+ fc054d1e132ab3da43d05e9ce85648c30dc870f1 W10-FUGU-F01: conservar farmacos visualmente suspeitos para revisao",
+      "+ 1622d8a3d05cad346558aaf4c9cb60bd90402786 W10-FUGU-F02: marcar reingestao de laudos preservando fontes e versoes",
+      "+ 5597e0494c4db59cf75df07b923c9cba87098e65 W10-FUGU-F03: confrontar plano verbalizado com prescricao contextual",
+      "+ 299b4da03964e845caf8bbe6cb0ff0057d530ccd test(w10): distinguish draft create revision from update",
+      "+ 8cde7e0f66815cb018747ffe018002c0b1a07f6c test(w10): cover salon first-use UI journey",
+      "+ 7b0c3217b54d2ef570dd4a338a2cd490507cfc66 fix(w10): align closure types without weakening assertions",
+      "+ 69c873f5cf745b8c95b8324d16ca912c448393f3 test(w10): diagnose salon UI load failures",
+      "+ bb5d81acf058c5cb08ed191fec657ffee94abbb7 fix(backup): reject nonportable manifest paths",
+      "+ 40577ee81aaace098eaa20622169a983f3c8e441 test(w10): expose salon response contract errors",
+      "+ db26fc6cde03601be99b826e344a9db239d5d61f test(w10): provide salon corpus fixture in jsdom",
+      "+ 88e6fc13a32d7fc90c957f05c7d1eda37bc4deef feat(closure): reconcile persisted extraction sources",
+      "+ 97bcdb1973254f31bbec12a0f7afde95bf58a4ba feat(closure): show segment-scoped source reconciliation",
+      "+ 735c0af2e386c584f23ab605c6c2c1680e6955cc test(closure): cover source reconciliation and segment links",
+      "+ 249a3210845de439286b8e3eb37200fe541d3c61 fix(test): close reconciliation proposal assertion",
+      "+ 9b6f41649ebabccbb2d2241de84290b893bb29f7 test(w10): target current red-team APIs",
+      "+ 9b78f0297f1a5e7b81563feb75e196a83d567ac3 test(w10): guard optional RT01 fixture names",
+      "+ af56a63f248163ac1c610cc03fddea29c6383598 test(w10): verify persisted review and reject malformed source",
+      "+ a28ed28a4929b84a3487301b1947a02a91d9deac fix(closure): preserve salon duplicates and source scope",
+      "+ fdf0d538ab363ab6049f219f29fc424a1bae6315 fix canal patient projection conflicts",
+      "+ c0c076251e8c49099713c497d375f790fde243df docs(w10): record ten-slice delivery and residual clinical risks"
+    ]
+  },
+  {
+    "ramo": "refs/heads/deepseek/v41-conclusao",
+    "head": "367825e4e0ae3f9a088256d24a745fd5b3705844",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/planejamento",
+    "head": "1144eae98cf3b38dcb9f1c508ec59a5659b05fd1",
+    "semEquivalente": 1,
+    "commits": [
+      "+ 1144eae98cf3b38dcb9f1c508ec59a5659b05fd1 docs(planejamento): PLN-039 SpeakL voz para documento e impressao"
+    ]
+  },
+  {
+    "ramo": "refs/heads/f0/w0-contratos",
+    "head": "80044bc5059bbe19f03baa2c4eb52020085b69e5",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w1-integrado",
+    "head": "f42b15fcd9fa87c73109c5b0e0133192712c8680",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w1-s02-regras-grok",
+    "head": "ab86077020aaae07f74de562ee0b1feef58db2cb",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w1-s04-kernel-claude",
+    "head": "7d1300904f5ed0218c6805270c6afb6de95e122c",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w1-s05-testes-kimi",
+    "head": "ef6758f709e899f6c94a02e1f7d644ce9406edc5",
+    "semEquivalente": 1,
+    "commits": [
+      "+ ef6758f709e899f6c94a02e1f7d644ce9406edc5 fix(testes): triagem conforme Q26 — CADEIRA/CAMA vao a FRENTE; borda de idade testada com AMBULATORIAL"
+    ]
+  },
+  {
+    "ramo": "refs/heads/f0/w1-s06-ci-sonnet",
+    "head": "288bb60afdf677dcd74f0138853271cdc7e0f0fc",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-astra",
+    "head": "7c7586c0c4b41ba035f9050b2cc0882456cc3d06",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-cursor",
+    "head": "9d8300876345019ec6e03e3361818e1d290ea6c8",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-fugu",
+    "head": "ffde1454d33736c7dbd8a58c6c07b94f8da7273b",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-grok",
+    "head": "17b8d78b9a959e34ea68afec103b270875924ec6",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-int-apac",
+    "head": "836107fd623a9157ab57c0ecc25aa9d916eb3447",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-int-copy",
+    "head": "28a9a17b584a06ede778f122b89bfbe89f44ffea",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-int-fichas",
+    "head": "56cd2a395aaa7e2b57afc76fdaf9fa68520548da",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-int-gates",
+    "head": "14fcef8c833ebbb6ed27d2b98c855763703e6161",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-int-prescricao",
+    "head": "b3de8d7cc08b46db6c35046bdd455fbf09dbe27b",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-luna1",
+    "head": "aec59c4bf80288746bda863b26ddfae84fdcb306",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-luna2",
+    "head": "b1e03309c9111830e8f661a8783aa9f7605ad175",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-luna3",
+    "head": "1de66bb6a5bef9dd8e3e9b6fe4638e8a284ba81e",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-luna4",
+    "head": "401fe5ab24cb3f7424134a174b70d7713927e1e2",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-luna5",
+    "head": "f5451230c10500e657227bd72f9f919b9bf3ad48",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w10-redteam",
+    "head": "374c1865fd8bcc34966dc8847b349fa852ee501c",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-claude",
+    "head": "474b0e644172b469190b5182ae53a424c6d42f86",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h1",
+    "head": "1fcb933fc02ab9e572b4399faae51ac0fb155962",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h10",
+    "head": "5a7919db4c25d840064bda19958c1f347c9a2d75",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h11",
+    "head": "380558e08f6bcd9587a463f5ad9328c58ec2972f",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h12",
+    "head": "37052a44725ed04af5bbff6f1a81928aa7f7a538",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h13",
+    "head": "2828d831f6820e690ee631506cd39bbd79535170",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h14",
+    "head": "a32b7625a918de8115f13bc6b0e15db29fb79301",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h15",
+    "head": "ce8af14651c655c33900fdf5ec3406e60cd3bbe3",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h16",
+    "head": "5e28ebc1f7f07e04f9464249e6c9ec4cc92ce20d",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h17",
+    "head": "ef11a11ef2b8673adf54c630a2f5cf7ce4ba2a72",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h18",
+    "head": "0abfe91a4888cfed62f594faa5a40ee8d28f4ebc",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h19",
+    "head": "01d8d82a28af5c6ba839ff593be4dbee03f6cdec",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h2",
+    "head": "dec623f26371c8093ff380778e5c47a0b1a82f66",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h20",
+    "head": "b3ebc49b333a71922555e6256b69fa366b834f80",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h21",
+    "head": "9f5fdcc2aeecac5d2a9920f502b833d7e3546f81",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h22",
+    "head": "6b8d2bbc7fac5c1c43429b3df4b990f8d123170f",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h23",
+    "head": "0c97deccf4dee2c3122c75995d8d00c80f6fa648",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h24",
+    "head": "9aaf6c1899dda0fe499a495953d3e0e568fb3d3b",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h25",
+    "head": "ac1659d1c75367e9d5009597be364eb1743f8d55",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h26",
+    "head": "df2cba7ba70f7ce9e94d190f02bfe226bd35800a",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h27",
+    "head": "89a39ebe0acbaf21aad5db7b44f988498c97418a",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h28",
+    "head": "e819faa6a066c071b95d5f8b867182192c3ca474",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h29",
+    "head": "a6cea3df02b7ce263cbd281cf358f4cf0d55133e",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h3",
+    "head": "e35835f6b71de2e2193200c6f842b935429be357",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h30",
+    "head": "0854b218559f213e883610a177fc0a5eb9095d62",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h4",
+    "head": "042a266adde3929b50c08d5e602bfb23ab563139",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h5",
+    "head": "c79746b4a9cb7aaf5415229c475e98db620790d2",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h6",
+    "head": "4d6c7db7fa4ce8aaef1fe3e40d6e1e242e7c6715",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h7",
+    "head": "a27c7d519ee2fe32ab324894b0fa0242259b6248",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h8",
+    "head": "7847920b5dbfe12464e4bb57f3c839418f12b087",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w11-h9",
+    "head": "008354632a43fe5848a6f8873c7cb3603ee038b9",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w12-f1",
+    "head": "7a4f3975a65a376e1f6f397e0855b502bff7feba",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w12-f2",
+    "head": "479132ad93e33556438d056496efa4723cb04a44",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w12-f3",
+    "head": "1e36404bd6561636e0a6145acbcedab0a13bade4",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w12-f4",
+    "head": "1fcf85d271975c5d90f4c07254953251caa5106b",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w12-grok",
+    "head": "ca3c5a4156286b7ead6f23b5bcce26312b44ac57",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w2-cursor",
+    "head": "6702089db3f585695fb6702a1585a8a4b8985697",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w2-fugu",
+    "head": "f5a067cba87619ab550af49a59d624529d112626",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w2-glm",
+    "head": "bd1586b3d5ef94856dc48e0aa9d707d01daf7ee3",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w3-codex",
+    "head": "12b5dcd4ced28ca87f004c550c6bf7b68977ae30",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w3-grok",
+    "head": "b7e2b69a12ae7228b2fe2bef612371676b5818e3",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w5-dominio",
+    "head": "909d02cf948fbec22a9e210bd5256b6cc2eae565",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w5-e2e",
+    "head": "e5977aaa4b29c7e65f676829809340fa7061df7d",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w5-integrado",
+    "head": "386ec3b4b77388b172187ec212eaae63c04e5030",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w5-kernel",
+    "head": "30d42402885a93852808ed3df2eb1aa9bcadb6b4",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w5-red",
+    "head": "49b7b19add9c76c26aebe04dd40df605f49feec1",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w5-regras",
+    "head": "d357b96c4e8519b8264842478fd3f46465d0fb4e",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w6-cursor",
+    "head": "b30ceccc8920785cb0bc043ffe9902dcd843fc31",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w7-codex",
+    "head": "5ddde701b3d7bad3489eafe6998403903568a00a",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w8-antigravity",
+    "head": "e557035e9cdfac015f3a865c095a499a2cebbb2b",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w8-glm",
+    "head": "74f8d9ba4bfe00cc2615744e1141b93d6844d566",
+    "semEquivalente": 2,
+    "commits": [
+      "+ f3724b4204485a9b480f6f9b64fcd7b4ae9f94a1 W8-GLM-21: revisão dura — lote APAC e ork corrigidos com testes de borda",
+      "+ 74f8d9ba4bfe00cc2615744e1141b93d6844d566 W8-GLM-22: AG-19 sem referência de microprompt pendurada + invariante de existência"
+    ]
+  },
+  {
+    "ramo": "refs/heads/f0/w8-kimi",
+    "head": "e3cd6b2c54e0ee81f2ca1305b91efe6e9f45c820",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w8-muse",
+    "head": "f88d73d1a6f96d2b387ac3f7567481199ab37177",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w9-codex",
+    "head": "53665afdac33cad2b666ca68a368b6c2920b4928",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w9-cursor",
+    "head": "53665afdac33cad2b666ca68a368b6c2920b4928",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/f0/w9-grok",
+    "head": "53665afdac33cad2b666ca68a368b6c2920b4928",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/heads/main",
+    "head": "c824826b5ab00651b50923ab5260a2118e3abb28",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/HEAD",
+    "head": "f2696991674cc3ecc34d505fb49318b5a2f46a2c",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/closure/w10-fugu",
+    "head": "f958437a755d0bb5bad41cbf2973507638f435be",
+    "semEquivalente": 3,
+    "commits": [
+      "+ 5cce33f12986c039b76d4f6c58a560a1d621597f W10-FUGU-F01: conservar farmacos visualmente suspeitos para revisao",
+      "+ 9b033506d40649cdb4f1a3d88bdf169dea826e48 W10-FUGU-F02: marcar reingestao de laudos preservando fontes e versoes",
+      "+ f958437a755d0bb5bad41cbf2973507638f435be W10-FUGU-F03: confrontar plano verbalizado com prescricao contextual"
+    ]
+  },
+  {
+    "ramo": "refs/remotes/origin/closure/w10-luna1",
+    "head": "6d416d668027cba73c53c88e35a13b5accbdc1bd",
+    "semEquivalente": 20,
+    "commits": [
+      "+ c80c87f2b0560f3e2932e3bba9af42fd91f7cd24 feat(closure): contratos compartilhados e projeção de vínculo explícito",
+      "+ 940141b8c181322b07987b94a8ac5c396e8be0f3 feat(closure): implement F04 F07 F08 server journeys",
+      "+ 62ccf37f937fc53a78b1498737e2b0ac077aeedb feat(closure): review patient identity before linking sources",
+      "+ ca05867c0e18bec0687dc596f651cf57d515af4d feat(closure): connect the salon draft and release flow",
+      "+ 6e5f09bc5b4bd6b957ead9454fb280334783b3f4 feat(closure): expose explicit channel contact linking",
+      "+ 535b91c9750f19e968c9efe371bd3ec61b1b71d7 feat(closure): connect local clinical screens to HTTP",
+      "+ 541b8b9a43b62acc0ebb0687327ba0049cc1bd74 test(closure): add F04 and salon persistence regressions",
+      "+ 7920a91c2a2cc4fa5b78921ad3d55df25827e95d docs(closure): record Luna 1 handoff and SHAs",
+      "+ 4834bfa5f97b2d8d9a4687348fc342ee661df4bf fix(closure): close draft payload object correctly",
+      "+ dc9367141269b672c7c1ff6ed88084a0551ef4a0 fix(closure): restore strict typecheck compatibility",
+      "+ c2b500a7ccbed236c4ff096bdfa7a5ce7f67d8c3 fix(closure): keep salon decisions global across tumor lots",
+      "+ 51accf4ba80cf92529ac88e80b6f787b338cbe9c W10-FUGU-F01: conservar farmacos visualmente suspeitos para revisao",
+      "+ 9d90d097d5d714f70df6a8ec90333e6ed7484b35 W10-FUGU-F02: marcar reingestao de laudos preservando fontes e versoes",
+      "+ d6635e8ed22428e89bcee7b99b53e5c41a1e6482 W10-FUGU-F03: confrontar plano verbalizado com prescricao contextual",
+      "+ cce3c5785a62a3b0663ea990299e4341c7c09ce0 feat(closure): reconcile persisted extraction sources",
+      "+ 4b8a15aa461779acb8a2a8c26bf0d8da3600fc45 feat(closure): show segment-scoped source reconciliation",
+      "+ 5dfc329d71ad174b2a87cf887a04c897afe70130 test(closure): cover source reconciliation and segment links",
+      "+ 609b38ef4f6b3c0455e17a00a778dcded80d289e fix(test): close reconciliation proposal assertion",
+      "+ cbc20b8f1f66c24b66eb246d0a0c21621c90b669 fix(closure): preserve salon duplicates and source scope",
+      "+ 6d416d668027cba73c53c88e35a13b5accbdc1bd fix canal patient projection conflicts"
+    ]
+  },
+  {
+    "ramo": "refs/remotes/origin/closure/w10-luna2",
+    "head": "993201d687eacf0f525d8d9953bfaf191506c38f",
+    "semEquivalente": 13,
+    "commits": [
+      "+ 79888e2a3037b0b443e454e837383893ac91b619 fix(backup): snapshot all local SQLite stores with manifest",
+      "+ ddfb25dc4885bfc64e9b5dbd28b05595720c60f0 feat(gateway): authorize offline READ separately from effects",
+      "+ 6ae9d45a208d98d1bb05d9eeecd72ebcff11f119 test(backup): exercise snapshots with active WAL",
+      "+ 1e92bf2ba5a929780caf13468cd310b456a8f1cd fix(triage): surface laboratory unit provenance conflicts",
+      "+ e0f3e9f1c4f8720e387ef304201133a485587b2a fix(gateway): keep READ metadata local and enforce G02",
+      "+ 4d75b9ebb4ec490db2b9b4ddfe9699efe45a5729 docs(w10): record Luna 2 closure evidence and blockers",
+      "+ ee7886407688011c62d9cfc700559cc42059f5a3 docs(w10): fix closure report whitespace",
+      "+ f9b136f29bc570c1215298622d22e3c766670be3 feat(closure): contratos compartilhados e projeção de vínculo explícito",
+      "+ ddb2f0a8c626f5c89bbe6ca25d89dc98dfdfb387 fix(closure): use canonical READ and lab schemas",
+      "+ af899da51ad218014e5759aa2b2a90c625b0f11d fix(gateway): omit undefined optional READ fields",
+      "+ ebdeb2195b161023c51ccd66727b79168b07c5ad fix(closure): type backup scripts and scope READ by territory",
+      "+ 73ad6426d15c355117da0be1f707215264d707e2 fix(triage): preserve Hb conflict diagnosis",
+      "+ 993201d687eacf0f525d8d9953bfaf191506c38f fix(backup): reject nonportable manifest paths"
+    ]
+  },
+  {
+    "ramo": "refs/remotes/origin/closure/w10-luna3",
+    "head": "d6493a7f77b0699c28aa83c252d61c52c1244c20",
+    "semEquivalente": 9,
+    "commits": [
+      "+ 8bcd78f4310b5c46e818568c8a42ca718c737187 test(w10): add salon and channel closure journeys",
+      "+ b5b2edf6c15134cd98673590d42b97bd284c4ed8 test(w10): align closure journeys with canonical decisions",
+      "+ 9954fbc8ad697665f11f4c7bc0a1999135758f65 test(w10): distinguish draft create revision from update",
+      "+ 4780705eb9b22055be0a895e583177ad7341fbb2 test(w10): cover salon first-use UI journey",
+      "+ c716aa717fdb2235e333b8a0b235cca1bd8aa571 test(w10): diagnose salon UI load failures",
+      "+ b0374625cabd8092ab26a2c5a887065d7bdf9258 test(w10): expose salon response contract errors",
+      "+ 0b0390d238c76ef030c3f89c4d9fd4262be80236 test(w10): provide salon corpus fixture in jsdom",
+      "+ eee6cd6eb4fd6bd67ec7a3c5b62e70fd3c3a3fe7 test(w10): target current red-team APIs",
+      "+ d6493a7f77b0699c28aa83c252d61c52c1244c20 test(w10): guard optional RT01 fixture names"
+    ]
+  },
+  {
+    "ramo": "refs/remotes/origin/codex/w10-entrega-integrada",
+    "head": "c0c076251e8c49099713c497d375f790fde243df",
+    "semEquivalente": 44,
+    "commits": [
+      "+ 4421812a68b4a596d4d6dcc9fb279f0271b5057f feat(closure): contratos compartilhados e projeção de vínculo explícito",
+      "+ 5f0aa0515258d9187bd148942660e99182acc109 fix(backup): snapshot all local SQLite stores with manifest",
+      "+ 517746e402d7b262220804103910009ea8568946 feat(gateway): authorize offline READ separately from effects",
+      "+ a6236cee7611fbe1effd652ddbdcf7d8f25052f2 test(backup): exercise snapshots with active WAL",
+      "+ 7ed14e7f1ac24190102a4d1d5882b0236b042051 fix(triage): surface laboratory unit provenance conflicts",
+      "+ f11a0c0e7a49a130107aa9bbc9a3f21678792907 fix(gateway): keep READ metadata local and enforce G02",
+      "+ cd3a8340fcc80d7868706b55b8b5655d36e660c0 docs(w10): record Luna 2 closure evidence and blockers",
+      "+ fcd07fce7f22889ca6c109bdffa36f6507448dea docs(w10): fix closure report whitespace",
+      "+ 61c8c5b1cf45a5a49bb857ef564e77423edbfca2 fix(closure): use canonical READ and lab schemas",
+      "+ acf0c299c3421db6145dbc3d2f24d12a73b62127 feat(closure): implement F04 F07 F08 server journeys",
+      "+ bc00886d0c6fd71d4dfdba6debf3796fa86fdc37 feat(closure): review patient identity before linking sources",
+      "+ fbb98f8e751f9ccd26181c3a147dde8217f21fca feat(closure): connect the salon draft and release flow",
+      "+ 59a8c602dfffe0db1d8acff39f994a42a05bec1c feat(closure): expose explicit channel contact linking",
+      "+ b19b2f5219d803a4003ee1687360ecd807d22eea feat(closure): connect local clinical screens to HTTP",
+      "+ 80495e72fe7762c0cad6fe04216b01f621a513c3 test(closure): add F04 and salon persistence regressions",
+      "+ 1553877811d9750a41a065878ac561dcc2f2c417 docs(closure): record Luna 1 handoff and SHAs",
+      "+ 03d3848792b4e93c1752c2162c51a0d2858cca93 test(w10): add salon and channel closure journeys",
+      "+ 79fa75b9f25877cc8f5eda40c648b9d571f2b1ee fix(closure): close draft payload object correctly",
+      "+ 169261ddce26b62cea70ee960b29403872ee0c37 fix(gateway): omit undefined optional READ fields",
+      "+ eff8bb9183951fed0e946ce95b4050aeeb6f59c4 fix(closure): restore strict typecheck compatibility",
+      "+ f71040c62a95d083dea704bc6933431ade703105 fix(closure): type backup scripts and scope READ by territory",
+      "+ ab4fda7a32f5f74e925cbe8879cefe3cb7eaf894 fix(closure): keep salon decisions global across tumor lots",
+      "+ 603335946c993849a4bb256ba68ef1f821a42718 fix(triage): preserve Hb conflict diagnosis",
+      "+ a0c8be017ab8fa8f3e8e343ec4be22d26ecc2650 test(w10): align closure journeys with canonical decisions",
+      "+ fc054d1e132ab3da43d05e9ce85648c30dc870f1 W10-FUGU-F01: conservar farmacos visualmente suspeitos para revisao",
+      "+ 1622d8a3d05cad346558aaf4c9cb60bd90402786 W10-FUGU-F02: marcar reingestao de laudos preservando fontes e versoes",
+      "+ 5597e0494c4db59cf75df07b923c9cba87098e65 W10-FUGU-F03: confrontar plano verbalizado com prescricao contextual",
+      "+ 299b4da03964e845caf8bbe6cb0ff0057d530ccd test(w10): distinguish draft create revision from update",
+      "+ 8cde7e0f66815cb018747ffe018002c0b1a07f6c test(w10): cover salon first-use UI journey",
+      "+ 7b0c3217b54d2ef570dd4a338a2cd490507cfc66 fix(w10): align closure types without weakening assertions",
+      "+ 69c873f5cf745b8c95b8324d16ca912c448393f3 test(w10): diagnose salon UI load failures",
+      "+ bb5d81acf058c5cb08ed191fec657ffee94abbb7 fix(backup): reject nonportable manifest paths",
+      "+ 40577ee81aaace098eaa20622169a983f3c8e441 test(w10): expose salon response contract errors",
+      "+ db26fc6cde03601be99b826e344a9db239d5d61f test(w10): provide salon corpus fixture in jsdom",
+      "+ 88e6fc13a32d7fc90c957f05c7d1eda37bc4deef feat(closure): reconcile persisted extraction sources",
+      "+ 97bcdb1973254f31bbec12a0f7afde95bf58a4ba feat(closure): show segment-scoped source reconciliation",
+      "+ 735c0af2e386c584f23ab605c6c2c1680e6955cc test(closure): cover source reconciliation and segment links",
+      "+ 249a3210845de439286b8e3eb37200fe541d3c61 fix(test): close reconciliation proposal assertion",
+      "+ 9b6f41649ebabccbb2d2241de84290b893bb29f7 test(w10): target current red-team APIs",
+      "+ 9b78f0297f1a5e7b81563feb75e196a83d567ac3 test(w10): guard optional RT01 fixture names",
+      "+ af56a63f248163ac1c610cc03fddea29c6383598 test(w10): verify persisted review and reject malformed source",
+      "+ a28ed28a4929b84a3487301b1947a02a91d9deac fix(closure): preserve salon duplicates and source scope",
+      "+ fdf0d538ab363ab6049f219f29fc424a1bae6315 fix canal patient projection conflicts",
+      "+ c0c076251e8c49099713c497d375f790fde243df docs(w10): record ten-slice delivery and residual clinical risks"
+    ]
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/planejamento",
+    "head": "1144eae98cf3b38dcb9f1c508ec59a5659b05fd1",
+    "semEquivalente": 1,
+    "commits": [
+      "+ 1144eae98cf3b38dcb9f1c508ec59a5659b05fd1 docs(planejamento): PLN-039 SpeakL voz para documento e impressao"
+    ]
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w0-contratos",
+    "head": "08d01de81e3c85b8b2b98dda86ba836fc571b9e3",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w1-integrado",
+    "head": "f42b15fcd9fa87c73109c5b0e0133192712c8680",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w1-s05-testes-kimi",
+    "head": "ef6758f709e899f6c94a02e1f7d644ce9406edc5",
+    "semEquivalente": 1,
+    "commits": [
+      "+ ef6758f709e899f6c94a02e1f7d644ce9406edc5 fix(testes): triagem conforme Q26 — CADEIRA/CAMA vao a FRENTE; borda de idade testada com AMBULATORIAL"
+    ]
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w10-cursor",
+    "head": "9d8300876345019ec6e03e3361818e1d290ea6c8",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w12-f1",
+    "head": "7a4f3975a65a376e1f6f397e0855b502bff7feba",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w12-f2",
+    "head": "479132ad93e33556438d056496efa4723cb04a44",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w12-f3",
+    "head": "1e36404bd6561636e0a6145acbcedab0a13bade4",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w12-f4",
+    "head": "1fcf85d271975c5d90f4c07254953251caa5106b",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w12-grok",
+    "head": "ca3c5a4156286b7ead6f23b5bcce26312b44ac57",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w5-integrado",
+    "head": "aa99b8619bbb4584c5a7e6a3bfaa61864ad48b1f",
+    "semEquivalente": 0,
+    "commits": []
+  },
+  {
+    "ramo": "refs/remotes/origin/f0/w8-glm",
+    "head": "74f8d9ba4bfe00cc2615744e1141b93d6844d566",
+    "semEquivalente": 2,
+    "commits": [
+      "+ f3724b4204485a9b480f6f9b64fcd7b4ae9f94a1 W8-GLM-21: revisão dura — lote APAC e ork corrigidos com testes de borda",
+      "+ 74f8d9ba4bfe00cc2615744e1141b93d6844d566 W8-GLM-22: AG-19 sem referência de microprompt pendurada + invariante de existência"
+    ]
+  },
+  {
+    "ramo": "refs/remotes/origin/main",
+    "head": "f2696991674cc3ecc34d505fb49318b5a2f46a2c",
+    "semEquivalente": 0,
+    "commits": []
+  }
+]

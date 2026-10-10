@@ -565,6 +565,15 @@
       ],
       "tipo": "LISTA",
       "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 17,
+      "chave": "config.flash.modeloPadrao",
+      "nome": "Modelo padrão da Consulta Flash",
+      "significado": "Marcações iniciais de laboratório e imagem na Consulta Flash, configuradas pelo médico.",
+      "ondeAparece": ["configurações", "Consulta Flash"],
+      "tipo": "REGRA_CLINICA",
+      "editavelPor": "MEDICO"
     }
   ]
 }

@@ -11,7 +11,11 @@ describe("W10-LUNA3 corpus", () => {
     const catalog = json("corpus/glossario/caixas.v1.json");
     const sources = json("corpus/glossario/fontes.v1.json");
     expect(catalog.schemaVersion).toBe("caixas.v1");
-    expect(catalog.caixas).toHaveLength(47);
+    expect(catalog.caixas).toHaveLength(48);
+    // As 47 caixas anteriores conservam números/chaves; Flash ocupa a próxima caixa de configuração.
+    expect(catalog.caixas.filter((item: { chave: string }) => item.chave !== "config.flash.modeloPadrao")).toHaveLength(47);
+    expect(catalog.caixas.find((item: { chave: string }) => item.chave === "config.flash.modeloPadrao"))
+      .toMatchObject({ numero: 17, tipo: "REGRA_CLINICA", editavelPor: "MEDICO" });
     const numbers = new Set<number>();
     const keys = new Set<string>();
     for (const item of catalog.caixas) {
@@ -24,7 +28,7 @@ describe("W10-LUNA3 corpus", () => {
       if (item.numero < 100) expect(item.chave).toMatch(/^config\./);
       else expect(item.chave).toMatch(/^apac\./);
     }
-    expect(catalog.caixas.filter((item: { chave: string }) => item.chave.startsWith("config."))).toHaveLength(16);
+    expect(catalog.caixas.filter((item: { chave: string }) => item.chave.startsWith("config."))).toHaveLength(17);
     expect(catalog.caixas.filter((item: { chave: string }) => item.chave.startsWith("apac."))).toHaveLength(31);
     expect(keys.has("config.preferencias.tema")).toBe(true);
     expect(keys.has("config.preferencias.layoutPersonalizado")).toBe(true);

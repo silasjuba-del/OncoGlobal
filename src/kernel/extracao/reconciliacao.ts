@@ -20,7 +20,7 @@ const HIERARQUIA: Readonly<Record<FactDomain, readonly FactSourceType[]>> = {
   cycle: ["prescription", "administration", "medical_note", "nursing", "plaud"],
   symptom: ["plaud", "nursing", "medical_note", "imaging_report", "pathology"],
   toxicity: ["plaud", "nursing", "medical_note", "pathology"],
-  lab: ["medical_note", "nursing", "administration", "plaud", "pathology"],
+  lab: ["lab_feed", "medical_note", "nursing", "administration", "plaud", "pathology"],
   imaging: ["imaging_report", "medical_note", "nursing", "plaud", "pathology"],
   procedure: ["pathology", "administration", "medical_note", "nursing", "plaud"],
   plan: ["medical_note", "prescription", "nursing", "plaud", "administration"],
@@ -69,6 +69,7 @@ export function chaveDoFato(fact: ClinicalFact): string {
     typeof valor === "string" && valor.trim() ? `:${valor.trim().toLocaleUpperCase("pt-BR")}` : "";
   switch (fact.domain) {
     case "biomarker": return `biomarker${sufixo(v.marker)}`;
+    // A data clínica é aplicada por reconciliarCampos; não usar captura como exame.
     case "lab": return `lab${sufixo(v.marker)}`;
     case "drug": return `drug${sufixo(v.normalizado ?? v.raw ?? fact.value)}`;
     case "imaging": return `imaging${sufixo(v.sitioCanonico ?? v.siteRaw)}`;
@@ -104,12 +105,13 @@ export function reconciliarCampo(domain: FactDomain, candidatos: readonly Clinic
     && [...valoresAbaixo].some((valor) => !valoresTopo.has(valor));
   const conflict = divergenciaInterna || divergenciaHierarquica;
   const eleito = noTopo[0] ?? null;
+  const exigeRevisao = eleito !== null && (eleito.evidence !== "EXPLICIT" || eleito.requiresConfirmation);
   return {
     domain,
     candidates: ordenados,
     // conflito entre fontes do mesmo nível não é decidido por id: fica para o médico
     // e fato sem valor utilizável não resolve o campo (ausência ≠ valor)
-    resolvedFactId: divergenciaInterna || eleito === null || valorNaoResolvivel(eleito)
+    resolvedFactId: divergenciaInterna || eleito === null || exigeRevisao || valorNaoResolvivel(eleito)
       ? null : eleito.id,
     conflict,
     hierarquia: HIERARQUIA_TEXTO[domain],
@@ -120,7 +122,17 @@ export function reconciliarCampo(domain: FactDomain, candidatos: readonly Clinic
 export function reconciliarCampos(fatos: readonly ClinicalFact[]): Readonly<Record<string, ReconciledField>> {
   const grupos = new Map<string, ClinicalFact[]>();
   for (const fact of fatos) {
-    const chave = chaveDoFato(fact);
+    let chave = chaveDoFato(fact);
+    if (fact.domain === "lab") {
+      const dia = fact.date?.trim() ?? "";
+      const dataCompleta = /^\d{4}-\d{2}-\d{2}$/.test(dia)
+        && !Number.isNaN(Date.parse(`${dia}T00:00:00Z`))
+        && new Date(`${dia}T00:00:00Z`).toISOString().slice(0, 10) === dia;
+      // Precisa de data clínica exata para comparar resultados entre fontes.
+      // Sem data não inferimos série e mantemos a chave preexistente do campo;
+      // divergências do mesmo marcador continuam agrupadas e visíveis.
+      if (dataCompleta) chave = `${chave}:data:${dia}`;
+    }
     const atual = grupos.get(chave);
     if (atual) atual.push(fact); else grupos.set(chave, [fact]);
   }
@@ -143,13 +155,27 @@ export interface TratamentoReconciliado {
   readonly conflitoPlanejadoOrdenado: boolean;
 }
 
+/** Somente o chamador com vínculo persistido e encontro/data explícitos pode comparar segmentos distintos. */
+export interface ContextoConfrontoTratamento {
+  readonly mesmoPacienteEEncontroConfirmados?: true;
+  readonly dataClinicaPorSegmento?: Readonly<Record<string, string>>;
+}
+
+const NOMES_CANONICOS = new Set(Object.values(DICIONARIO_FARMACO));
+function nomeCanonicoDoFato(fato: ClinicalFact): string | null {
+  const v = typeof fato.value === "object" && fato.value !== null
+    ? fato.value as Record<string, unknown> : {};
+  const declarado = typeof v.normalizado === "string" ? v.normalizado.trim().toLocaleUpperCase("pt-BR") : null;
+  if (declarado && NOMES_CANONICOS.has(declarado)) return declarado;
+  const literal = typeof fato.value === "string" ? fato.value : null;
+  const chave = literal?.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase("pt-BR").trim();
+  return chave ? DICIONARIO_FARMACO[chave] ?? null : null;
+}
+
 function nomesDeFarmaco(fatos: readonly ClinicalFact[], fonte: FactSourceType): string[] {
-  return fatos.filter((f) => f.domain === "drug" && f.sourceType === fonte)
-    .map((f) => {
-      const v = typeof f.value === "object" && f.value !== null ? f.value as Record<string, unknown> : {};
-      const nome = v.normalizado ?? v.raw ?? f.value;
-      return typeof nome === "string" ? nome.trim().toLocaleUpperCase("pt-BR") : "";
-    }).filter(Boolean);
+  return fatos.filter((f) => f.domain === "drug" && f.sourceType === fonte
+    && f.evidence === "EXPLICIT" && !f.requiresConfirmation)
+    .map(nomeCanonicoDoFato).filter((nome): nome is string => nome !== null);
 }
 
 /** Fármacos citados em texto livre, por casamento no dicionário local (sem adivinhar). */
@@ -162,26 +188,75 @@ export function farmacosMencionados(texto: string): string[] {
   return [...achados].sort();
 }
 
-const RETIRADA = /\b(?:retir\w*|suspend\w*|nao usar|sem)\b/iu;
+const RETIRADA = /\b(?:retir\w*|suspend\w*|n[aã]o\s+(?:vai\s+fazer|usar)|sem)\b/iu;
+
+function intencoesDoPlano(fato: ClinicalFact): { propostos: string[]; retirados: string[] } {
+  const texto = typeof fato.value === "string" ? fato.value : "";
+  const propostos = new Set<string>();
+  const retirados = new Set<string>();
+  for (const clausula of texto.split(/[,;]|\s+e\s+(?=(?:inici|retir|suspend)\w*)/iu)) {
+    // Uma menção explicitamente histórica não é conduta atual.
+    if (/\b(?:anteriormente|antigamente|da outra vez|no ciclo anterior)\b/iu.test(clausula)) continue;
+    const destino = RETIRADA.test(clausula) ? retirados : propostos;
+    for (const nome of farmacosMencionados(clausula)) destino.add(nome);
+  }
+  return { propostos: [...propostos], retirados: [...retirados] };
+}
+
+function fontesContemporaneas(
+  plano: ClinicalFact, prescricao: ClinicalFact, contexto: ContextoConfrontoTratamento,
+): boolean {
+  if (plano.segmentId !== prescricao.segmentId && !contexto.mesmoPacienteEEncontroConfirmados) return false;
+  const dataPlanoBruta = plano.date ?? contexto.dataClinicaPorSegmento?.[plano.segmentId];
+  const dataPrescricaoBruta = prescricao.date ?? contexto.dataClinicaPorSegmento?.[prescricao.segmentId];
+  const dataPlano = normalizarDataCivil(dataPlanoBruta);
+  const dataPrescricao = normalizarDataCivil(dataPrescricaoBruta);
+  if ((dataPlanoBruta && !dataPlano) || (dataPrescricaoBruta && !dataPrescricao)) return false;
+  if (dataPlano || dataPrescricao) return dataPlano !== null && dataPlano === dataPrescricao;
+  return true; // mesma fala, ou fontes do mesmo paciente/encontro já confirmadas pelo chamador
+}
+
+function divergenciasTratamento(
+  fatos: readonly ClinicalFact[], contexto: ContextoConfrontoTratamento,
+): readonly { plano: ClinicalFact; prescritos: readonly ClinicalFact[] }[] {
+  const prescricoes = fatos.filter((f) => f.domain === "drug" && f.sourceType === "prescription"
+    && f.evidence === "EXPLICIT" && !f.requiresConfirmation && nomeCanonicoDoFato(f) !== null);
+  return fatos.filter((f) => f.domain === "plan").flatMap((plano) => {
+    const { propostos, retirados } = intencoesDoPlano(plano);
+    if (!propostos.length && !retirados.length) return [];
+    const contemporaneos = prescricoes.filter((f) => fontesContemporaneas(plano, f, contexto));
+    if (!contemporaneos.length) return []; // prescrição ausente ≠ prescrição discordante
+    const nomes = contemporaneos.map((f) => nomeCanonicoDoFato(f)!);
+    const retiradaAindaPrescrita = contemporaneos.filter((f) => retirados.includes(nomeCanonicoDoFato(f)!));
+    const regimeDiferente = propostos.length && (propostos.some((nome) => !nomes.includes(nome))
+      || nomes.some((nome) => !propostos.includes(nome))) ? contemporaneos : [];
+    const afetados = [...new Map([...retiradaAindaPrescrita, ...regimeDiferente].map((f) => [f.id, f])).values()];
+    return afetados.length ? [{ plano, prescritos: afetados }] : [];
+  });
+}
 
 /** Separa o tratamento realizado em proposto → prescrito → administrado → suspenso → concluído. */
-export function reconciliarTratamento(fatos: readonly ClinicalFact[]): TratamentoReconciliado {
-  const plano = fatos.filter((f) => f.domain === "plan")
-    .map((f) => (typeof f.value === "string" ? f.value : "")).filter(Boolean);
+export function reconciliarTratamento(
+  fatos: readonly ClinicalFact[], contexto: ContextoConfrontoTratamento = {},
+): TratamentoReconciliado {
+  // Estados longitudinais não podem promover uma fala UNCERTAIN só porque
+  // o vínculo do paciente foi confirmado; o conflito continua na caixa.
+  const plano = fatos.filter((f) => f.domain === "plan"
+    && f.evidence === "EXPLICIT" && !f.requiresConfirmation);
+  const intencoes = plano.map(intencoesDoPlano);
   const prescrito = nomesDeFarmaco(fatos, "prescription");
   const administrado = nomesDeFarmaco(fatos, "administration");
-  const retirados = plano.filter((t) => RETIRADA.test(t)).flatMap(farmacosMencionados);
+  const retirados = intencoes.flatMap((item) => item.retirados);
   const suspenso = new Set(retirados);
-  const conflito = retirados.some((nome) => prescrito.includes(nome));
-  const concluido = fatos.some((f) => f.domain === "plan" && /\bconclu\w*|termin\w*/iu.test(String(f.value)))
+  const concluido = plano.some((f) => /\bconclu\w*|termin\w*/iu.test(String(f.value)))
     ? ["TRATAMENTO"] : [];
   return {
-    proposto: plano.flatMap(farmacosMencionados).filter((n) => !suspenso.has(n)),
+    proposto: [...new Set(intencoes.flatMap((item) => item.propostos))].filter((n) => !suspenso.has(n)),
     prescrito,
     administrado,
     suspensoAdiado: [...suspenso].sort(),
     concluido,
-    conflitoPlanejadoOrdenado: conflito,
+    conflitoPlanejadoOrdenado: divergenciasTratamento(fatos, contexto).length > 0,
   };
 }
 
@@ -364,18 +439,52 @@ export function conflitoSitio(fatos: readonly ClinicalFact[]): ReviewException |
 }
 
 /** Conflito planejado × ordenado (ex.: "retiro carbo" com carboplatina prescrita). */
-export function conflitoPlanejadoOrdenado(fatos: readonly ClinicalFact[]): ReviewException | null {
-  const tratamento = reconciliarTratamento(fatos);
-  if (!tratamento.conflitoPlanejadoOrdenado) return null;
-  const plano = fatos.find((f) => f.domain === "plan")!;
-  const prescricao = fatos.filter((f) => f.domain === "drug" && f.sourceType === "prescription");
+export function conflitoPlanejadoOrdenado(
+  fatos: readonly ClinicalFact[], contexto: ContextoConfrontoTratamento = {},
+): ReviewException | null {
+  const divergencias = divergenciasTratamento(fatos, contexto);
+  if (!divergencias.length) return null;
+  const afetados = [...new Map(divergencias.flatMap(({ plano, prescritos }) =>
+    [plano, ...prescritos]).map((f) => [f.id, f])).values()];
+  const primeiroPlano = divergencias[0]!.plano;
+  const planejados = [...new Set(divergencias.flatMap(({ plano }) => {
+    const intencoes = intencoesDoPlano(plano);
+    return [...intencoes.propostos, ...intencoes.retirados];
+  }))];
+  const prescritos = [...new Set(divergencias.flatMap(({ prescritos }) => prescritos
+    .map(nomeCanonicoDoFato).filter((nome): nome is string => nome !== null)))];
   return {
-    id: novoId("CONFLICT", plano.segmentId, 8),
+    id: novoId("CONFLICT", primeiroPlano.segmentId, 8),
     kind: "CONFLICT",
-    segmentId: plano.segmentId,
-    factIds: [plano, ...prescricao].map((f) => f.id),
-    reason: "planned_regimen != ordered_regimen: retirada verbalizada × fármaco prescrito",
-    sourceIds: [...new Set([plano, ...prescricao].map((f) => f.sourceId))],
+    segmentId: primeiroPlano.segmentId,
+    factIds: afetados.map((f) => f.id),
+    reason: `planned_regimen != ordered_regimen: plano verbalizado [${planejados.join(", ")}] × prescrição contemporânea [${prescritos.join(", ")}] divergentes`,
+    sourceIds: [...new Set(afetados.map((f) => f.sourceId))],
+  };
+}
+
+/**
+ * Regime planejado (plano/fala, já sem o suspenso) × regime ordenado (prescrição) divergentes.
+ * As duas versões ficam preservadas no conflito; nenhuma é escolhida em silêncio.
+ */
+export function conflitoRegimePlanejadoPrescrito(fatos: readonly ClinicalFact[]): ReviewException | null {
+  const tratamento = reconciliarTratamento(fatos);
+  const canonico = (nome: string): string => farmacosMencionados(nome)[0] ?? nome;
+  const planejado = [...new Set(tratamento.proposto.map(canonico))].sort();
+  const prescrito = [...new Set(tratamento.prescrito.map(canonico))].sort();
+  if (!planejado.length || !prescrito.length) return null;
+  const divergente = planejado.length !== prescrito.length || planejado.some((nome) => !prescrito.includes(nome));
+  if (!divergente) return null;
+  const planos = fatos.filter((f) => f.domain === "plan");
+  const prescricoes = fatos.filter((f) => f.domain === "drug" && f.sourceType === "prescription");
+  const primeiro = planos[0]!;
+  return {
+    id: novoId("CONFLICT", primeiro.segmentId, 9),
+    kind: "CONFLICT",
+    segmentId: primeiro.segmentId,
+    factIds: [...planos, ...prescricoes].map((f) => f.id),
+    reason: `planned_regimen != ordered_regimen: planejado [${planejado.join(", ")}] × prescrito [${prescrito.join(", ")}]`,
+    sourceIds: [...new Set([...planos, ...prescricoes].map((f) => f.sourceId))],
   };
 }
 
@@ -390,5 +499,6 @@ export function detectarConflitos(fatos: readonly ClinicalFact[]): readonly Revi
     conflitoCronologia(fatos),
     conflitoSitio(fatos),
     conflitoPlanejadoOrdenado(fatos),
+    conflitoRegimePlanejadoPrescrito(fatos),
   ].filter((e): e is ReviewException => e !== null);
 }

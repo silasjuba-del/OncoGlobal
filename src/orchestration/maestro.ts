@@ -25,6 +25,7 @@ const TABELA: Readonly<Record<string, Plano>> = Object.freeze({
 });
 
 export function maestro(evento: string): Plano | null {
+  if (!Object.hasOwn(TABELA, evento)) return null;
   const selected = TABELA[evento];
   return selected ? { evento, passos: selected.passos.map((p) => ({ ...p, dependsOn: [...p.dependsOn] })) } : null;
 }

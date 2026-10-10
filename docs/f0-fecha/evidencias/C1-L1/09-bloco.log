@@ -1,0 +1,37 @@
+
+ RUN  v5.0.3 C:/Users/silas/Projects/OncoGlobal
+
+ ❯ tests/f0-fecha/matriz.test.ts (3 tests | 1 failed) 1381ms
+   ❯ R-34 matriz de rastreabilidade da F0 (3)
+     × só fecha R-34 quando não restar linha F0 vermelha ou pendente 422ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/f0-fecha/matriz.test.ts > R-34 matriz de rastreabilidade da F0 > só fecha R-34 quando não restar linha F0 vermelha ou pendente
+AssertionError: linhas F0 vermelhas/pendentes impedem declarar a matriz fechada: expected 1 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ tests/f0-fecha/matriz.test.ts:23:91
+     21|     const result = validateMatrix(process.cwd());
+     22|
+     23|     expect(result.red, "linhas F0 vermelhas/pendentes impedem declarar…
+       |                                                                                           ^
+     24|   });
+     25| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 55 passed (56)
+      Tests  1 failed | 624 passed (625)
+   Start at  19:10:47
+   Duration  69.40s (tests 49%, environment 21%, import 19%, transform 10%, worker 1%)
+
+    Isolate  56 workers spawned · ~413ms startup each (spawn + environment, per file)
+             at least ~22.72s faster with isolate: false — reuses workers across files instead of one per file
+

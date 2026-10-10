@@ -1,11 +1,21 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { BannerE1 } from "../consulta/BannerE1.js";
 import { BarraFechamento } from "../consulta/BarraFechamento.js";
+import { CartaoTransversal } from "../consulta/CartaoTransversal.js";
+import { montarPropsFlash } from "../consulta/flashDaVisao.js";
+import { OverlayFlash } from "../consulta/OverlayFlash.js";
 import { PainelDelta } from "../consulta/PainelDelta.js";
+import {
+  confirmacaoPreparouImpressao,
+  validarComExibicao,
+} from "../consulta/validarComExibicao.js";
+import { PainelOncoassist } from "../consulta/PainelOncoassist.js";
 import { CardEvidencia } from "../evidencia/CardEvidencia.js";
 import type { ChavesIntencao } from "../api/chaves.js";
 import { ID } from "../api/fake.js";
 import { ErroPorta, type AcaoIntent, type ConsultaVisao, type PortaConsulta } from "../api/porta.js";
+import type { PlanoFlash } from "../consulta/ConsultaFlash.js";
+import { COPY_PT_BR } from "../copy/pt-BR.js";
 import { AbasChart, type AbaChart } from "../oncochart/AbasChart.js";
 import { cadastroSintetico } from "../oncochart/cadastro-sintetico.js";
 import { CaixaRevisao } from "../oncochart/CaixaRevisao.js";
@@ -48,6 +58,9 @@ export function TelaConsulta({
 }) {
   const [visao, setVisao] = useState<ConsultaVisao | null>(null);
   const [loteId, setLoteId] = useState<string | null>(null);
+  const [selecionandoLote, setSelecionandoLote] = useState(false);
+  const pacienteAtual = useRef(patientId);
+  pacienteAtual.current = patientId;
   const [sessaoExpirada, setSessaoExpirada] = useState(false);
   const [impressaoArmada, setImpressaoArmada] = useState(false);
   const [jornada3d, setJornada3d] = useState(false);
@@ -58,6 +71,12 @@ export function TelaConsulta({
   const [viewer, setViewer] = useState(false);
   const [overlay, setOverlay] = useState<OverlayId>(null);
   const [mic, setMic] = useState(false);
+  const [statusFechamento, setStatusFechamento] = useState<string | null>(null);
+  const [validando, setValidando] = useState(false);
+  const [flashOcupado, setFlashOcupado] = useState(false);
+  const [flashErro, setFlashErro] = useState<string | null>(null);
+  const [avisoFlash, setAvisoFlash] = useState<string | null>(null);
+  const flashRevisao = useRef<number | null>(null);
   const impressao = useRef<AcaoIntent | null>(null);
   const impressaoEnviada = useRef(false);
   const chaveValidar = chaves.novaChaveIntencao(`validar:${patientId}`);
@@ -65,6 +84,10 @@ export function TelaConsulta({
 
   useEffect(() => {
     let viva = true;
+    setSelecionandoLote(false);
+    impressao.current = null;
+    impressaoEnviada.current = false;
+    setImpressaoArmada(false);
     porta.carregarConsulta(patientId).then(
       (proxima) => {
         if (!viva) return;
@@ -80,6 +103,10 @@ export function TelaConsulta({
       viva = false;
     };
   }, [patientId, porta]);
+
+  useEffect(() => {
+    flashRevisao.current = visao?.flash?.rascunho?.revision ?? null;
+  }, [visao]);
 
   const chart = useMemo(() => {
     if (!visao) return null;
@@ -136,6 +163,97 @@ export function TelaConsulta({
   }
 
   const cabecalho = { ...visao.cabecalho, loteSelecionadoId: loteId };
+
+  const CF = COPY_PT_BR.flashFechamento;
+  const contextoFlash = { patientId: visao.patientId, encounterId: visao.encounterId, tumorLotId: loteId };
+  const textoErroFlash = (base: string, erro: unknown): string => {
+    const detalhe = erro instanceof ErroPorta ? (erro.detalhe ?? erro.codigo) : "FALHA_INESPERADA";
+    return `${base}: ${detalhe}. ${CF.marcacoesMantidas}`;
+  };
+
+  /** SALVAR RASCUNHO: só grava rascunho. Nunca assina. Erro mantém o overlay aberto e as marcações. */
+  const salvarRascunhoFlash = (plano: PlanoFlash) => {
+    if (flashOcupado) return;
+    if (!porta.salvarRascunhoFlash) {
+      setFlashErro(textoErroFlash(CF.erroRascunho, new ErroPorta("SERVIDOR_PENDENTE")));
+      return;
+    }
+    setFlashOcupado(true);
+    setFlashErro(null);
+    void porta.salvarRascunhoFlash({ ...contextoFlash, plano, expectedRevision: flashRevisao.current }).then(
+      (r) => {
+        flashRevisao.current = r.revision;
+        setFlashOcupado(false);
+        setAvisoFlash(CF.rascunhoSalvo);
+        setOverlay(null);
+      },
+      (erro: unknown) => {
+        setFlashOcupado(false);
+        if (erro instanceof ErroPorta && erro.codigo === "SESSAO_EXPIRADA") setSessaoExpirada(true);
+        setFlashErro(textoErroFlash(CF.erroRascunho, erro));
+        // Revisão defasada: recarrega a visão para pegar a revisão corrente; a tela e o overlay continuam como estão.
+        if (erro instanceof ErroPorta && erro.detalhe === "REVISAO_RASCUNHO_CONFLITANTE") {
+          void porta.carregarConsulta(patientId, loteId).then((proxima) => {
+            if (pacienteAtual.current === patientId) flashRevisao.current = proxima.flash?.rascunho?.revision ?? null;
+          }, () => undefined);
+        }
+      },
+    );
+  };
+
+  /**
+   * FINALIZAR: o médico confirma o plano exibido. O servidor gera os documentos em rascunho e o caminho de
+   * sempre (exibir bundle + confirmar) assina SÓ o que foi exibido. Nenhum envio externo.
+   */
+  const finalizarFlash = (plano: PlanoFlash) => {
+    if (flashOcupado) return;
+    if (!porta.prepararFinalizacaoFlash) {
+      setFlashErro(textoErroFlash(CF.erroFinalizar, new ErroPorta("SERVIDOR_PENDENTE")));
+      return;
+    }
+    setFlashOcupado(true);
+    setFlashErro(null);
+    const chave = chaves.novaChaveIntencao(`flash-finalizar:${patientId}:${loteId ?? ""}:${JSON.stringify(plano)}`);
+    void (async () => {
+      const preparada = await porta.prepararFinalizacaoFlash!({ ...contextoFlash, plano, idempotencyKey: chave });
+      const resultado = await validarComExibicao(porta, contextoFlash, {
+        ...contextoFlash,
+        bloco: "TUDO",
+        registros: preparada.registros.map((r) => ({ id: r.id, expectedRevision: r.expectedRevision })),
+        documentosExibidos: preparada.documentos.map((d) => ({ documentId: d.documentId, documentVersion: d.documentVersion })),
+        reconhecerAlertas: [],
+        idempotencyKey: chave,
+      });
+      if (resultado.codigo !== "REPLAY" && !confirmacaoPreparouImpressao(resultado.codigo)) {
+        throw new ErroPorta("FLASH_RECUSADA", resultado.codigo);
+      }
+      return preparada;
+    })().then(
+      (preparada) => {
+        setFlashOcupado(false);
+        setAvisoFlash(CF.finalizada);
+        setOverlay(null);
+        // Impressão: só arma o fluxo que já existe (Enter confirma, janela do sistema). TODO UI: abrir direto a janela de impressão.
+        if (preparada.alvoImpressao) {
+          impressao.current = {
+            verbo: "IMPRIMIR",
+            objeto: { tipo: preparada.alvoImpressao.tipo, id: preparada.alvoImpressao.id, versao: preparada.alvoImpressao.versao },
+            escopo: { patientId: visao.patientId, encounterId: visao.encounterId },
+            destino: null,
+            idempotencyKey: chaveImprimir,
+          };
+          impressaoEnviada.current = false;
+          setImpressaoArmada(true);
+        }
+      },
+      (erro: unknown) => {
+        setFlashOcupado(false);
+        if (erro instanceof ErroPorta && erro.codigo === "SESSAO_EXPIRADA") setSessaoExpirada(true);
+        setFlashErro(textoErroFlash(CF.erroFinalizar, erro));
+      },
+    );
+  };
+
   const temHidronefrose = /hidronefrose/i.test(revisao?.origemRotulo ?? "");
 
   function onDock(acao: AcaoDock) {
@@ -177,17 +295,27 @@ export function TelaConsulta({
     <main aria-label="Consulta pronta" className="tela-consulta pilha" style={{ position: "relative" }}>
       {sessaoExpirada ? <p>sessão expirada — entre de novo</p> : null}
       {acaoRevisao ? <p className="oc-flash-status" role="status">{acaoRevisao}</p> : null}
+      {avisoFlash ? <p className="oc-flash-status" role="status" aria-label="status da Consulta Flash">{avisoFlash}</p> : null}
       {fonteAberta ? <p className="oc-flash-status" role="status">fonte: {fonteAberta}</p> : null}
       <PatientHeader
         chart={chart}
         semaforo={cabecalho.semaforo}
-        onFlash={() => setOverlay("flash")}
+        onFlash={() => {
+          setFlashErro(null);
+          setAvisoFlash(null);
+          setOverlay("flash");
+        }}
         onEditarTnm={() => setOverlay("dx")}
       />
+      {visao.retratoTransversal !== undefined && visao.retratoTransversal !== null ? (
+        <CartaoTransversal entrada={visao.retratoTransversal} />
+      ) : null}
       <Timeline2D
         visao={timelineSintetica(patientId, visao.hoje)}
         onVer3d={() => setJornada3d(true)}
       />
+      <PainelOncoassist key={`${patientId}:${visao.encounterId}:${loteId ?? ""}`} porta={porta}
+        contexto={{ patientId, encounterId: visao.encounterId, tumorLotId: loteId }} />
       <button type="button" className="oc-btn-primary" style={{ alignSelf: "flex-start" }} onClick={() => setViewer(true)}>
         Abrir TC
       </button>
@@ -260,8 +388,19 @@ export function TelaConsulta({
           <select
             aria-label="Tumor / lote"
             value={loteId ?? ""}
+            disabled={selecionandoLote}
             onChange={(e) => {
-              if (e.target.value) setLoteId(e.target.value);
+              const escolhido = e.target.value;
+              if (!escolhido) return;
+              setSelecionandoLote(true);
+              impressao.current = null;
+              setImpressaoArmada(false);
+              void porta.carregarConsulta(patientId, escolhido).then((proxima) => {
+                if (pacienteAtual.current !== patientId) return;
+                setVisao(proxima); setLoteId(proxima.cabecalho.loteSelecionadoId);
+              }, () => {
+                if (pacienteAtual.current === patientId) setAcaoRevisao("Não foi possível selecionar o lote. Reabra a consulta.");
+              }).finally(() => { if (pacienteAtual.current === patientId) setSelecionandoLote(false); });
             }}
           >
             {cabecalho.lotes.map((l) => (
@@ -298,8 +437,46 @@ export function TelaConsulta({
           autorExibido={visao.fechamento.autorExibido}
           alvoImpressao={visao.fechamento.alvoImpressao}
           chaveImpressao={chaveImprimir}
+          ocupado={validando}
           onValidar={(payload) => {
-            void porta.confirmar(payload);
+            if (validando) return;
+            setValidando(true);
+            setStatusFechamento("exibindo e validando");
+            void validarComExibicao(
+              porta,
+              {
+                patientId: visao.patientId,
+                encounterId: visao.encounterId,
+                tumorLotId: loteId,
+              },
+              payload,
+            ).then(
+              (resultado) => {
+                setValidando(false);
+                setStatusFechamento(resultado.codigo);
+                if (
+                  confirmacaoPreparouImpressao(resultado.codigo)
+                  && visao.fechamento.alvoImpressao
+                ) {
+                  const alvo = visao.fechamento.alvoImpressao;
+                  impressao.current = {
+                    verbo: "IMPRIMIR",
+                    objeto: { tipo: alvo.tipo, id: alvo.id, versao: alvo.versao },
+                    escopo: { patientId: visao.patientId, encounterId: visao.encounterId },
+                    destino: null,
+                    idempotencyKey: chaveImprimir,
+                  };
+                  impressaoEnviada.current = false;
+                  setImpressaoArmada(true);
+                }
+              },
+              (erro: unknown) => {
+                setValidando(false);
+                setStatusFechamento(
+                  erro instanceof ErroPorta ? erro.codigo : "FALHA_VALIDACAO",
+                );
+              },
+            );
           }}
           onImprimir={(intent) => {
             impressao.current = intent;
@@ -307,6 +484,9 @@ export function TelaConsulta({
             setImpressaoArmada(true);
           }}
         />
+        {statusFechamento ? (
+          <p role="status" aria-label="status do fechamento">{statusFechamento}</p>
+        ) : null}
         {impressaoArmada ? (
           <p role="status">
             Enter confirma a impressão
@@ -349,8 +529,22 @@ export function TelaConsulta({
         />
       ) : null}
       <Dock gravando={mic} onAcao={onDock} />
+      {overlay === "flash" ? (
+        <OverlayFlash
+          flash={{
+            ...montarPropsFlash(visao, chart, finalizarFlash, salvarRascunhoFlash),
+            ocupado: flashOcupado,
+          }}
+          erro={flashErro}
+          onFechar={() => {
+            if (flashOcupado) return;
+            setFlashErro(null);
+            setOverlay(null);
+          }}
+        />
+      ) : null}
       <OverlayAtivo
-        id={overlay}
+        id={overlay === "flash" ? null : overlay}
         onFechar={() => setOverlay(null)}
         onAbrirPaleta={() => setOverlay("interacoes")}
       />

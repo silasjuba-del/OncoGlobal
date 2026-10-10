@@ -1,3 +1,4 @@
+import { doseRuleset } from "../fixtures/rulesets.js";
 import { describe, expect, it } from "vitest";
 import { aplicarAjuste } from "../../src/rules/prescricao/aplicarAjuste.js";
 import { calcularDose } from "../../src/rules/dose.js";
@@ -5,7 +6,7 @@ import type { DoseRuleset } from "../../src/contracts/regras.js";
 import { PrescriptionItem } from "../../src/contracts/w10/prescricao.js";
 import { item } from "./_fixtures.js";
 
-const rs: DoseRuleset = { header: { id: "dose", versao: "teste" }, reducoesPct: [0, 20, 30, 40], semPesoConsecutivosVermelho: 2, AC: { ciclosComMedico: [] } };
+const rs: DoseRuleset = { header: doseRuleset.header, reducoesPct: [0, 20, 30, 40], semPesoConsecutivosVermelho: 2, AC: { ciclosComMedico: [] } };
 const base = item({ drug: "Docetaxel", doseBasis: "MG_M2", standardDose: 75, calculatedDose: 135, prescribedDose: 135 });
 
 describe("W10-INT-PRESC-03 · aplicarAjuste", () => {

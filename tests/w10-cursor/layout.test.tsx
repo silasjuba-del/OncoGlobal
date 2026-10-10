@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { App } from "../../src/ui/App.js";
 import { revelarTema } from "../../src/ui/oncochart/revelacao.js";
@@ -62,14 +62,16 @@ describe("casca OncoChart", () => {
   }, 30_000);
 
   it("Ctrl K e a busca abrem a mesma paleta de comandos", async () => {
-    render(<App />);
+    // A agenda assíncrona monta a BarraComando e seu listener num efeito.
+    // Aguardar esse commit antes de disparar uma única tecla, inclusive sob carga.
+    await act(async () => { render(<App />); });
     await screen.findByRole("region", { name: "Agenda do dia" }, lento);
     fireEvent.keyDown(window, { key: "k", ctrlKey: true });
-    expect(screen.getByRole("dialog", { name: "Barra de comando" })).toBeTruthy();
+    expect(await screen.findByRole("dialog", { name: "Barra de comando" }, lento)).toBeTruthy();
     fireEvent.keyDown(window, { key: "k", ctrlKey: true });
-    expect(screen.queryByRole("dialog", { name: "Barra de comando" })).toBeNull();
+    await waitFor(() => expect(screen.queryByRole("dialog", { name: "Barra de comando" })).toBeNull(), lento);
     fireEvent.click(screen.getByRole("button", { name: "Buscar" }));
-    expect(screen.getByLabelText("Comando")).toBeTruthy();
+    expect(await screen.findByLabelText("Comando", {}, lento)).toBeTruthy();
   }, 30_000);
 
   it("declara tokens oklch, motion e a grade no CSS, com Geist local", () => {
