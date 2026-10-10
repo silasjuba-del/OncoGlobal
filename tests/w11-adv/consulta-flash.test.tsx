@@ -6,7 +6,7 @@ import {
   marcadoInicialFlash,
   type ConsultaFlashProps,
   type ItemFlash,
-  type PlanoFlash,
+
 } from "../../src/ui/consulta/ConsultaFlash.js";
 
 afterEach(() => {
@@ -69,89 +69,56 @@ function checkbox(nome: string): HTMLInputElement {
   return screen.getByRole("checkbox", { name: nome }) as HTMLInputElement;
 }
 
-describe("w11-h24 consulta flash (one click)", () => {
-  it("1. header imutável mostra DX, AP, tratamento e retorno", () => {
+// F0-COMPLEMENTO: Flash final é revisão essencial LAB/RAD/QT; receitas e APAC ficam nas telas próprias.
+describe("Flash essencial · invariantes adversariais", () => {
+  it("mantém diagnóstico, TNM, alergia e ciclo sem trazer a consulta grande", () => {
     render(<ConsultaFlash {...props()} />);
-    expect(screen.getByText(/DX: Carcinoma mamário NST/)).toBeTruthy();
-    expect(screen.getByText(/TNM: cT2N1M0/)).toBeTruthy();
-    expect(screen.getByText(/Biomarcador: RE90 RP40 HER2-/)).toBeTruthy();
-    expect(screen.getByText(/MUC: Losartana, Metformina/)).toBeTruthy();
-    expect(screen.getByText(/Alergia: Dipirona/)).toBeTruthy();
-    expect(screen.getByText(/Ciclo\/dia: C3D1/)).toBeTruthy();
-    expect(screen.getByText(/RETORNO: 21 DIAS/)).toBeTruthy();
+    expect(screen.getByLabelText("Revisão rápida").textContent).toContain("TNM cT2N1M0");
+    expect(screen.getByLabelText("Toxicidades e alergia").textContent).toContain("Dipirona");
+    expect(screen.getByLabelText("Tratamento vigente").textContent).toContain("C3D1");
+    expect(screen.queryByText(/MUC: Losartana/)).toBeNull();
+    expect((screen.getByLabelText("Prazo do retorno em dias") as HTMLInputElement).value).toBe("21");
   });
-
-  it("2. campo ausente aparece como PENDENTE", () => {
-    render(<ConsultaFlash {...props({ cabecalho: {} })} />);
-    expect(screen.getByText(/DX: PENDENTE/)).toBeTruthy();
-    expect(screen.getByText(/ECOG: PENDENTE/)).toBeTruthy();
+  it("ausência é PENDENTE, nunca ausência presumida de alergia", () => {
+    render(<ConsultaFlash {...props({cabecalho:{}})} />);
+    expect(screen.getByLabelText("Revisão rápida").textContent).toContain("TNM PENDENTE");
+    expect(screen.getByLabelText("Toxicidades e alergia").textContent).toContain("Não informada");
   });
-
-  it("3. exame mostra a frase do laudo e 'dentro do limite', nunca LIBERA nem ESTÁVEL", () => {
+  it("preserva frase do laudo sem classificação de liberação", () => {
     render(<ConsultaFlash {...props()} />);
-    expect(screen.getByText(/Sem evidência de progressão/)).toBeTruthy();
-    expect(screen.getByText(/dentro do limite/)).toBeTruthy();
-    const textoTodo = document.body.textContent ?? "";
-    expect(textoTodo).not.toMatch(/\bLIBERA\b/);
-    expect(textoTodo).not.toMatch(/\bESTÁVEL\b/);
-  });
-
-  it("4. 'Liberar tratamento' nasce desmarcada mesmo com preMarcado e origem do médico", () => {
-    render(<ConsultaFlash {...props()} />);
-    expect(checkbox("Liberar tratamento").checked).toBe(false);
-    expect(marcadoInicialFlash(ACOES[0] as ItemFlash)).toBe(false);
-  });
-
-  it("5. receitas pré-marcam só quando origem é MODELO_MEDICO", () => {
-    render(<ConsultaFlash {...props()} />);
-    expect(checkbox("Ondansetrona").checked).toBe(true);
-    expect(checkbox("Dexametasona").checked).toBe(false);
-    expect(checkbox("Analgesia").checked).toBe(false);
-    expect(checkbox("Solicitar HMG").checked).toBe(false);
-  });
-
-  it("6. chip APAC mostra os três estados operacionais", () => {
-    const { unmount } = render(<ConsultaFlash {...props()} />);
-    expect(screen.getByLabelText("estado da APAC").textContent).toBe("APAC ✓ VERDE");
-    unmount();
-
-    const pend = render(
-      <ConsultaFlash {...props({ apac: { ...props().apac, estado: "PENDENTE", pendencias: ["laudo anexo"] } })} />,
-    );
-    expect(screen.getByLabelText("estado da APAC").textContent).toBe("APAC ! PENDENTE");
-    expect(screen.getByText(/pendências: laudo anexo/)).toBeTruthy();
-    pend.unmount();
-
-    render(<ConsultaFlash {...props({ apac: { ...props().apac, estado: "INCOMPATIVEL" } })} />);
-    expect(screen.getByLabelText("estado da APAC").textContent).toBe("APAC × VERMELHO");
-  });
-
-  it("7. finalizar entrega plano sem emitir APAC e sem executar efeitos", () => {
-    const aoFinalizar = vi.fn();
-    const aoSalvarRascunho = vi.fn();
-    render(<ConsultaFlash {...props({ aoFinalizar, aoSalvarRascunho })} />);
-    fireEvent.click(checkbox("Receita suporte"));
-    fireEvent.click(screen.getByRole("button", { name: "FINALIZAR · IMPRIMIR · SAIR" }));
-    expect(aoSalvarRascunho).not.toHaveBeenCalled();
-    expect(aoFinalizar).toHaveBeenCalledTimes(1);
-    const plano = aoFinalizar.mock.calls[0]?.[0] as PlanoFlash;
-    expect(plano.apac.emitir).toBe(false);
-    expect(plano.acoesMarcadas).toEqual([]);
-    expect(plano.receitasMarcadas).toEqual(["ondansetrona"]);
-    expect(plano.retorno.dias).toBe(21);
-  });
-
-  it("8. salvar rascunho entrega plano e não chama finalizar", () => {
-    const aoFinalizar = vi.fn();
-    const aoSalvarRascunho = vi.fn();
-    render(<ConsultaFlash {...props({ aoFinalizar, aoSalvarRascunho })} />);
-    fireEvent.click(screen.getByRole("button", { name: "SALVAR RASCUNHO" }));
-    expect(aoFinalizar).not.toHaveBeenCalled();
-    expect(aoSalvarRascunho).toHaveBeenCalledTimes(1);
-  });
-
-  it("9. texto da tela não contém vocabulário de liberação/aprovação", () => {
-    render(<ConsultaFlash {...props()} />);
+    expect(screen.getByLabelText("Biópsia e imagem").textContent).toContain("Sem evidência de progressão");
     expect(document.body.textContent ?? "").not.toMatch(PROIBIDAS_MAQUINA);
+  });
+  it("decisão QT nasce desmarcada mesmo com ação legada preMarcada", () => {
+    render(<ConsultaFlash {...props()} />);
+    expect(checkbox("Liberar ciclo C3D1").checked).toBe(false);
+    expect(marcadoInicialFlash(ACOES[0]!)).toBe(false);
+  });
+  it("receitas legadas não entram silenciosamente no plano", () => {
+    const p=props(); render(<ConsultaFlash {...p} />);
+    expect(screen.queryByRole("checkbox",{name:"Ondansetrona"})).toBeNull();
+    fireEvent.click(screen.getByRole("button",{name:"REVISAR · IMPRIMIR"}));
+    expect(p.aoFinalizar).toHaveBeenCalledWith(expect.objectContaining({receitasMarcadas:[],acoesMarcadas:[]}));
+  });
+  it("APAC é acessada somente por ação própria e nunca emitida pela Flash", () => {
+    const abrir=vi.fn(), p=props({aoAbrirApac:abrir}); render(<ConsultaFlash {...p} />);
+    expect(screen.queryByLabelText("estado da APAC")).toBeNull();
+    fireEvent.click(screen.getByRole("button",{name:"Abrir APAC ↗"})); expect(abrir).toHaveBeenCalledTimes(1);
+    fireEvent.click(screen.getByRole("button",{name:"REVISAR · IMPRIMIR"}));
+    expect(p.aoFinalizar).toHaveBeenCalledWith(expect.objectContaining({apac:expect.objectContaining({emitir:false})}));
+  });
+  it("revisar entrega somente seleção explícita sem emitir efeitos", () => {
+    const p=props(); render(<ConsultaFlash {...p} />); fireEvent.click(checkbox("HMG"));
+    fireEvent.click(screen.getByRole("button",{name:"REVISAR · IMPRIMIR"}));
+    expect(p.aoSalvarRascunho).not.toHaveBeenCalled();
+    expect(p.aoFinalizar).toHaveBeenCalledTimes(1);
+    expect(p.aoFinalizar).toHaveBeenCalledWith(expect.objectContaining({solicitacoes:{laboratorio:["HMG"],imagem:[]},decisaoQt:{solicitarCiclo:false,data:null}}));
+  });
+  it("salvar não prepara assinatura e ocupado impede reenvio", () => {
+    const p=props(); const {rerender}=render(<ConsultaFlash {...p} />);
+    fireEvent.click(screen.getByRole("button",{name:"SALVAR RASCUNHO"}));
+    expect(p.aoSalvarRascunho).toHaveBeenCalledTimes(1); expect(p.aoFinalizar).not.toHaveBeenCalled();
+    rerender(<ConsultaFlash {...p} ocupado />);
+    fireEvent.click(screen.getByRole("button",{name:"SALVAR RASCUNHO"})); expect(p.aoSalvarRascunho).toHaveBeenCalledTimes(1);
   });
 });

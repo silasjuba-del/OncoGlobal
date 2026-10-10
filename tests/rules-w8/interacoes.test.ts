@@ -11,13 +11,13 @@ const CAMINHO_RULESET = join(process.cwd(), "corpus", "rulesets", "interacoes.v1
 const rulesetReal: RulesetInteracoes = JSON.parse(readFileSync(CAMINHO_RULESET, "utf8"));
 
 describe("AG-09 · Interações medicamentosas sem fonte = PENDENTE (norma G-09)", () => {
-  it("com o ruleset real interacoes.v1.json (todas inativas), qualquer par avaliado sai PENDENTE", () => {
-    // Par presente no corpus mas com ativo: false
+  it("F0-COMPLEMENTO: par aprovado vermelho, demais pares pendentes", () => {
+    // Par curado e aprovado diretamente pelo médico
     const res1 = avaliarInteracaoMedicamentosa("capecitabina", "varfarina", rulesetReal);
-    expect(res1.estado).toBe("PENDENTE");
+    expect(res1.estado).toBe("VERMELHO");
     expect(res1.severidade).toBeNull();
-    expect(res1.regraAtiva).toBe(false);
-    expect(res1.motivo).toContain("não verificado");
+    expect(res1.regraAtiva).toBe(true);
+    expect(res1.motivo).toContain("interação ativa");
     expect(res1.motivo).not.toContain("sem interação");
 
     // Outro par presente no corpus
@@ -33,7 +33,6 @@ describe("AG-09 · Interações medicamentosas sem fonte = PENDENTE (norma G-09)
 
   it("G-09: NUNCA retorna VERDE nem 'sem interação' na ausência de regra ativa curada", () => {
     const pares = [
-      ["capecitabina", "varfarina"],
       ["paracetamol", "dipirona"],
       ["pembrolizumabe", "prednisona"],
     ];

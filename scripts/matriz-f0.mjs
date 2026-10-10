@@ -354,7 +354,7 @@ const multiTestEvidence = new Map([
   ["D-W9-47", [
     ["tests/w10-grok/grok-09-suporte.test.ts", "os limiares e a classe vêm do ruleset"],
     ["tests/w12-grok/grok-05-retorno.test.ts", "diarreia acima de 24 h com HAS alerta suspender; 24 h exato não alerta"],
-    ["tests/w10-grok/grok-08-semaforo.test.ts", "sem interação só com checagem completa e ruleset ativo, sem par casado"],
+    ["tests/w10-grok/grok-08-semaforo.test.ts", "F0-COMPLEMENTO: boolean de checagem e regra alheia não provam cobertura"],
   ]],
   ["D-W9-17", [
     ["tests/w10-cursor/config.test.tsx", "abre DIA|NOITE|PERSONALIZAR, caixa de número e glossário"],
@@ -748,7 +748,7 @@ const testTitleOverride = new Map([
   ["D-W9-77", "copia histologia literal de AP com fonte e mantém os demais campos ausentes, salvo TNM literal prefixado"],
   ["D-W9-78", "retoma após reiniciar SQLite e sessão com nova chave sem duplicar preparação ou assinatura"],
   ["D-W9-34d", "hidratação com Mg/K (pré) e KCl (pós) em cada dia de cisplatina; manitol junto"],
-  ["D-W9-77d", "o catálogo importado continua todo inativo e não acrescenta par com TKI"],
+  ["D-W9-77d", "F0-COMPLEMENTO preserva34 legados e ativa somente novos pares com suporte aplicável"],
   ["D-W9-22", "neutrófilos 1499 ficam abaixo da bula 1500; 1500 passa; grau não abre a porta"],
   ["G-11", "T-28/29/N03 valida completude só na emissão; NEGADA e comprovante sobrevivem"],
   ["G-12", "G-12 nenhuma conversão de intenção em finalidade no código"],

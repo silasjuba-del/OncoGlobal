@@ -18,6 +18,7 @@ import type { DatasFixas } from "../../kernel/projections/datasFixas.js";
 import type { LinhaTratamento } from "../../kernel/projections/historicoTratamento.js";
 import type { AlertaPlaquetas } from "../../rules/plaquetasAlerta.js";
 import type { SaidaElegibilidadeCiclo } from "../../rules/elegibilidadeCiclo.js";
+import type { ResultadoInstrumento } from "../../contracts/f0c/instrumentos.js";
 
 export type CodigoPorta = string;
 
@@ -75,7 +76,18 @@ export interface FlashVisao {
   laboratorioPreMarcado: boolean;
   imagemPreMarcada: boolean;
   /** W12-F4 (opcional): rascunho da Flash já salvo (revisão corrente, para o próximo salvar). */
-  rascunho?: { draftId: string; revision: number };
+  rascunho?: { draftId: string; revision: number; plano?: PlanoFlash };
+  protocolo?: string;
+  cicloAtual?: number;
+  ciclosPrevistos?: number;
+  ultimoAdministrado?: string;
+  alergia?: string;
+  toxicidades?: readonly string[];
+  avisos?: readonly string[];
+  sugestoesLaboratorio?: readonly string[];
+  modeloSolicitacoes?: {laboratorio:string[];imagem:string[]};
+  laboratorios?: readonly { data: string; nome: string; fraseLaudo?: string;
+    situacao: "DENTRO_DO_LIMITE" | "FORA_DO_LIMITE" | "SEM_REFERENCIA" }[];
 }
 
 /** W12-F4: contexto da consulta + plano exibido. A porta só entrega; o servidor decide o que grava. */
@@ -110,6 +122,7 @@ export interface FlashPreparada {
 }
 
 export interface ConsultaVisao {
+  instrumentosClinicos?: readonly {instrumento:string;avaliacao:ResultadoInstrumento}[];
   resumoEvolucao?: string | null;
   historicoDocumentos?: readonly { eventId: string; documentId: string; titulo: string;
     texto: string; assinadoEm: string; autorId: string; encounterId: string }[];
@@ -182,6 +195,7 @@ export interface DecisaoLiberacaoVisao {
 }
 
 export interface SalaoVisao {
+  avisos?: readonly {patientId:string;texto:string}[];
   hoje: string;
   ruleset: SalaoRuleset;
   contexto: ContextoTriagem;
@@ -257,6 +271,7 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  avaliarInstrumento?(contexto:{patientId:string;encounterId:string;tumorLotId:string|null},pedido:unknown):Promise<ResultadoInstrumento>;
   /** Configuração global autenticada; ausente quando a porta não oferece persistência. */
   lerCaixaConfiguracao?(numero: number): Promise<CaixaConfiguracaoFlash>;
   alterarCaixaConfiguracao?(pedido: { numero: number; valorNovo: unknown; expectedRevision: number; operationId: string }): Promise<AlteracaoConfiguracaoFlash>;

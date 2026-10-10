@@ -84,10 +84,13 @@ afterEach(async () => { await harness.dispose(); });
 describe("W10 Luna5 · configurações pela API HTTP real", () => {
   it("carrega o corpus compartilhado, nega leitura sem sessão e retorna o tema DIA por default", async () => {
     const corpus = carregarCorpusServidor();
-    expect(corpus.caixasTodas).toHaveLength(48);
-    expect(corpus.caixas).toHaveLength(17);
+    expect(corpus.caixasTodas).toHaveLength(49);
+    expect(corpus.caixas).toHaveLength(18);
     expect(corpus.caixas.find((box) => box.chave === "config.flash.modeloPadrao"))
       .toMatchObject({ numero: 17, tipo: "REGRA_CLINICA", editavelPor: "MEDICO" });
+    // F0C: caixa18 do serviço foi adicionada; APAC permanece com31 campos.
+    expect(corpus.caixas.find((box) => box.chave === "config.servico.receituarioEspecial"))
+      .toMatchObject({ numero: 18, tipo: "REGRA_CLINICA", editavelPor: "MEDICO" });
     expect(corpus.caixasTodas.filter((box) => box.chave.startsWith("apac."))).toHaveLength(31);
 
     const unauthorized = await harness.post("/config/perfil", {});
@@ -184,3 +187,4 @@ describe("W10 Luna5 · configurações pela API HTTP real", () => {
     expect(JSON.stringify(harness.logs)).not.toContain("estabelecimento-sintético");
   });
 });
+

@@ -433,6 +433,11 @@
         "src/ui/oncochart/Configuracoes.tsx"
       ],
       "chave": "config.flash.modeloPadrao"
+    },
+    {
+      "numero": 18,
+      "origens": ["src/config/servico.ts", "src/contracts/w11/configuracaoServico.ts", "src/ui/oncochart/Configuracoes.tsx"],
+      "chave": "config.servico.receituarioEspecial"
     }
   ]
 }

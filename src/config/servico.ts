@@ -8,3 +8,7 @@ export function lerConfiguracaoServico(valorCru: unknown): ConfiguracaoServico {
   const r = ConfiguracaoServicoSchema.safeParse(valorCru);
   return r.success ? r.data : { ...CONFIGURACAO_SERVICO_PADRAO };
 }
+/** Preferência do serviço persistida na caixa autenticada; não é escolha por paciente. */
+export const CHAVE_CAIXA_RECEITUARIO_ESPECIAL = "config.servico.receituarioEspecial";
+export const NUMERO_CAIXA_RECEITUARIO_ESPECIAL = 18;
+

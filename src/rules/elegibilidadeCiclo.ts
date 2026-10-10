@@ -13,7 +13,7 @@ export type OrigemElegibilidade =
   | "interacoes"
   | "plaquetas"
   | "funcaoOrganica"
-  | "intercorrencia";
+  | "intercorrencia" | "emergencia" | "feve" | "basal" | "condicionais" | "intervalo";
 
 export interface MotivoEntradaElegibilidade {
   texto: string;
@@ -36,6 +36,11 @@ export interface EntradasElegibilidadeCiclo {
   funcaoOrganica: SinalElegibilidade | null;
   /** Opcional: quando não informada, não entra no cruzamento. Quando informada, segue as mesmas regras. */
   intercorrencia?: SinalElegibilidade | null;
+  emergencia?: SinalElegibilidade | null;
+  feve?: SinalElegibilidade | null;
+  basal?: SinalElegibilidade | null;
+  condicionais?: SinalElegibilidade | null;
+  intervalo?: SinalElegibilidade | null;
 }
 
 export interface MotivoElegibilidadeCiclo {
@@ -48,6 +53,7 @@ export interface SaidaElegibilidadeCiclo {
   cor: CorElegibilidade;
   motivos: MotivoElegibilidadeCiclo[];
   rotulo: string;
+  cobertura?: { avaliadas: number; pendentes: number; total: number };
 }
 
 const ORDEM: readonly OrigemElegibilidade[] = [
@@ -58,6 +64,7 @@ const ORDEM: readonly OrigemElegibilidade[] = [
   "plaquetas",
   "funcaoOrganica",
   "intercorrencia",
+  "emergencia", "feve", "basal", "condicionais", "intervalo",
 ];
 
 const ROTULO_NIVEL: Record<NivelMotivoElegibilidade, string> = {
@@ -88,11 +95,15 @@ export function elegibilidadeCiclo(entradas: EntradasElegibilidadeCiclo): SaidaE
   const motivos: MotivoElegibilidadeCiclo[] = [];
   let temVermelho = false;
   let temPendente = false;
+  let total = 0;
+  let pendentes = 0;
 
   for (const origem of ORDEM) {
     const sinal = sinalDe(entradas, origem);
     if (sinal === undefined) continue;
+    total++;
     if (sinal === null) {
+      pendentes++;
       temPendente = true;
       motivos.push({ origem, texto: "dado ausente para esta entrada" });
       continue;
@@ -107,6 +118,7 @@ export function elegibilidadeCiclo(entradas: EntradasElegibilidadeCiclo): SaidaE
       continue;
     }
     if (sinal.estado === "PENDENTE") {
+      pendentes++;
       temPendente = true;
       const textos = motivosDe(origem, sinal);
       if (textos.length === 0) motivos.push({ origem, texto: "pendente sem descrição" });
@@ -114,6 +126,8 @@ export function elegibilidadeCiclo(entradas: EntradasElegibilidadeCiclo): SaidaE
     }
   }
 
+  if (total === 0) temPendente = true;
   const cor: CorElegibilidade = temVermelho ? "VERMELHO" : temPendente ? "PENDENTE" : "VERDE";
-  return { cor, motivos: cor === "VERDE" ? [] : motivos, rotulo: ROTULO[cor] };
+  return { cor, motivos: cor === "VERDE" ? [] : motivos, rotulo: ROTULO[cor],
+    cobertura: { avaliadas: total - pendentes, pendentes, total } };
 }

@@ -9,6 +9,7 @@ interface Interacao {
   mecanismo: string | null; severidade: string | null; monitorizacao: string | null; notaManejo: string | null;
   fonte: { tipo: string; referencia: string; trecho: string | null; edicao: string | null };
   fonteVersao: string | null; verificadoEm: string | null; ativo: boolean;
+  regraId?: string; motivoInativo?: string;
 }
 const arquivo = fileURLToPath(new URL("../../corpus/rulesets/interacoes.v1.json", import.meta.url));
 const json = JSON.parse(readFileSync(arquivo, "utf8")) as { interacoes: Interacao[] };
@@ -27,15 +28,20 @@ describe("interacoes.v1.json", () => {
     expect(pares).toContain("capecitabina×varfarina");
     expect(pares.filter((p) => p.includes("TKI")).length).toBe(2);
     expect(pares).toContain("ribociclibe×antiemético 5-HT3");
-    for (const i of json.interacoes) {
+    for (const i of json.interacoes.filter((item) => !item.ativo && !item.regraId)) {
       for (const campo of ["mecanismo", "severidade", "monitorizacao", "notaManejo", "fonteVersao", "verificadoEm"] as const)
         expect(i[campo]).toBeNull();
     }
   });
 
-  it("nenhuma interação está ativa sem fonte com trecho (todas inativas)", () => {
+  it("nenhuma interação ativa sem referência, trecho e edição; temporalidade limita novos pares", () => {
     expect(ativasSemFonteComTrecho(json.interacoes)).toEqual([]);
-    expect(json.interacoes.every((i) => !i.ativo)).toBe(true);
-    expect(json.interacoes.every((i) => i.fonte.referencia === "[VERIFICAR]")).toBe(true);
+    expect(json.interacoes.filter((i) => i.ativo)).toHaveLength(8);
+    for (const item of json.interacoes.filter(i => i.ativo)) {
+      expect(item.fonte.referencia).toMatch(/^https:\/\//); expect(item.fonte.edicao).toBeTruthy();
+      expect(item.fonteVersao).toBeTruthy(); expect(item.verificadoEm).toBeTruthy();
+    }
+    for (const item of json.interacoes.filter(i => i.regraId && !i.ativo)) expect(item.motivoInativo).toBeTruthy();
+    expect(json.interacoes.filter((i) => !i.ativo && !i.regraId).every((i) => i.fonte.referencia === "[VERIFICAR]")).toBe(true);
   });
 });

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { NUMERO_CAIXA_MODELO_FLASH } from "../../config/flash.js";
+import { NUMERO_CAIXA_MODELO_FLASH, LABS_MODELO_FLASH, RAD_MODELO_FLASH, lerModeloFlashConfigurado, type ModeloFlash } from "../../config/flash.js";
+import { NUMERO_CAIXA_RECEITUARIO_ESPECIAL, lerConfiguracaoServico } from "../../config/servico.js";
 import type { PortaConsulta } from "../api/porta.js";
 import type { TemaOnco } from "./tema.js";
 
@@ -19,8 +20,11 @@ export function Configuracoes({
   onFechar,
   porta,
   somenteFlash = false,
+  incluirServico = false,
 }: {
   somenteFlash?: boolean;
+  /** Caixa 18 autenticada, sem abrir a tela demonstrativa com CNES fixo. */
+  incluirServico?: boolean;
   tema: TemaOnco;
   onTema: (t: TemaOnco) => void;
   onFechar: () => void;
@@ -32,7 +36,13 @@ export function Configuracoes({
   const [busca, setBusca] = useState("");
   const [cnes] = useState("2605473");
   const [personalizar, setPersonalizar] = useState(false);
-  const [modeloFlash, setModeloFlash] = useState({ laboratorio: false, imagem: false });
+  const [modeloFlash, setModeloFlash] = useState<ModeloFlash>({ laboratorio: false, imagem: false });
+  const [outrosLab, setOutrosLab] = useState("");
+  const [outrosRad, setOutrosRad] = useState("");
+  const [especial, setEspecial] = useState(false);
+  const [revisaoServico, setRevisaoServico] = useState<number | null>(null);
+  const [servicoOcupado, setServicoOcupado] = useState(false);
+  const [mensagemServico, setMensagemServico] = useState("Carregando configuração do serviço…");
   const [revisaoFlash, setRevisaoFlash] = useState<number | null>(null);
   const [estadoFlash, setEstadoFlash] = useState<"CARREGANDO" | "PRONTO" | "ERRO">("CARREGANDO");
   const [mensagemFlash, setMensagemFlash] = useState("Carregando configuração autenticada…");
@@ -40,6 +50,8 @@ export function Configuracoes({
 
   useEffect(() => {
     let ativa = true;
+    setEstadoFlash("CARREGANDO"); setRevisaoFlash(null);
+    setMensagemFlash("Carregando configuração autenticada…");
     if (!porta?.lerCaixaConfiguracao) {
       setEstadoFlash("ERRO");
       setMensagemFlash("Persistência autenticada indisponível nesta tela.");
@@ -47,15 +59,15 @@ export function Configuracoes({
     }
     void porta.lerCaixaConfiguracao(NUMERO_CAIXA_MODELO_FLASH).then(({ revision, value }) => {
       if (!ativa) return;
-      if (value !== null && (!value || typeof value !== "object" || Array.isArray(value)
-        || Object.keys(value).length !== 2 || !Object.hasOwn(value, "laboratorio") || !Object.hasOwn(value, "imagem")
-        || typeof (value as Record<string, unknown>).laboratorio !== "boolean"
-        || typeof (value as Record<string, unknown>).imagem !== "boolean")) {
+      const modelo=lerModeloFlashConfigurado(value);
+      if (value !== null && !modelo) {
         setEstadoFlash("ERRO");
         setMensagemFlash("Valor armazenado inválido; modelo não foi carregado.");
         return;
       }
-      if (value && typeof value === "object") setModeloFlash(value as { laboratorio: boolean; imagem: boolean });
+      setModeloFlash(modelo ?? {laboratorio:false,imagem:false});
+      setOutrosLab(modelo?.solicitacoes?.laboratorio.filter(x=>!LABS_MODELO_FLASH.includes(x)).join("; ") ?? "");
+      setOutrosRad(modelo?.solicitacoes?.imagem.filter(x=>!RAD_MODELO_FLASH.includes(x)).join("; ") ?? "");
       setRevisaoFlash(revision);
       setEstadoFlash("PRONTO");
       setMensagemFlash(value === null ? "Sem modelo salvo; nada será pré-marcado." : "Modelo salvo carregado.");
@@ -67,14 +79,42 @@ export function Configuracoes({
     return () => { ativa = false; };
   }, [porta]);
 
+  useEffect(()=>{
+    let ativa=true; setRevisaoServico(null); setEspecial(false);
+    if(!porta?.lerCaixaConfiguracao || !(incluirServico || !somenteFlash)) return ()=>{ativa=false;};
+    void porta.lerCaixaConfiguracao(NUMERO_CAIXA_RECEITUARIO_ESPECIAL).then(({revision,value})=>{
+      if(!ativa) return; setEspecial(lerConfiguracaoServico(value).servicoTemReceituarioEspecial);
+      setRevisaoServico(revision); setMensagemServico("Configuração do serviço carregada.");
+    },()=>{if(ativa) setMensagemServico("Não foi possível carregar a configuração do serviço.");});
+    return ()=>{ativa=false;};
+  },[porta,somenteFlash,incluirServico]);
+
+  async function salvarServico() {
+    if(revisaoServico===null || servicoOcupado || !porta?.alterarCaixaConfiguracao) return;
+    setServicoOcupado(true);
+    try {
+      const r=await porta.alterarCaixaConfiguracao({numero:NUMERO_CAIXA_RECEITUARIO_ESPECIAL,
+        valorNovo:{servicoTemReceituarioEspecial:especial},expectedRevision:revisaoServico,
+        operationId:`servico-receituario-${Date.now()}-${++sequenciaOperacaoFlash}`});
+      setRevisaoServico(r.revision);setMensagemServico("Configuração do serviço gravada.");
+    } catch(e) {setMensagemServico(e instanceof Error ? `Não foi possível gravar: ${e.message}` : "Falha ao gravar configuração.");}
+    finally{setServicoOcupado(false);}
+  }
+
   async function salvarModeloFlash() {
     if (!porta?.alterarCaixaConfiguracao || revisaoFlash === null || salvandoFlash) return;
     setSalvandoFlash(true);
     try {
+      const outros=(texto:string)=>texto.split(";").map(x=>x.trim()).filter(Boolean);
+      const laboratorio=[...new Set([...(modeloFlash.solicitacoes?.laboratorio ?? []).filter(x=>LABS_MODELO_FLASH.includes(x)),...outros(outrosLab)])];
+      const imagem=[...new Set([...(modeloFlash.solicitacoes?.imagem ?? []).filter(x=>RAD_MODELO_FLASH.includes(x)),...outros(outrosRad)])];
+      const novo:ModeloFlash={laboratorio:laboratorio.length>0,imagem:imagem.length>0,solicitacoes:{laboratorio,imagem}};
+      if(!lerModeloFlashConfigurado(novo)) throw new Error("Use até 50 itens por seção, com até 200 caracteres por item.");
       const alteracao = await porta.alterarCaixaConfiguracao({ numero: NUMERO_CAIXA_MODELO_FLASH,
-        valorNovo: modeloFlash, expectedRevision: revisaoFlash,
+        valorNovo: novo, expectedRevision: revisaoFlash,
         operationId: `flash-modelo-${Date.now()}-${++sequenciaOperacaoFlash}` });
       setRevisaoFlash(alteracao.revision);
+      setModeloFlash(novo);
       setMensagemFlash(alteracao.estado === "REPLAY" ? "Modelo já estava salvo." : "Modelo Flash gravado no servidor.");
     } catch (erro) {
       setMensagemFlash(erro instanceof Error ? `Não foi possível gravar: ${erro.message}` : "Não foi possível gravar o modelo.");
@@ -93,25 +133,27 @@ export function Configuracoes({
   const painelFlash = (<section aria-label="Modelo padrão da Consulta Flash" aria-busy={estadoFlash === "CARREGANDO" || salvandoFlash}>
         <h3>Modelo padrão da Consulta Flash</h3>
         <p>As opções marcadas são uma preferência editável do médico. A Consulta Flash continua revisável antes de qualquer assinatura.</p>
-        <label>
-          <input type="checkbox" aria-label="Pré-marcar laboratório na Consulta Flash"
-            checked={modeloFlash.laboratorio} disabled={estadoFlash !== "PRONTO" || salvandoFlash}
-            onChange={(e) => setModeloFlash((atual) => ({ ...atual, laboratorio: e.target.checked }))} />
-          Pré-marcar laboratório
-        </label>
-        <label>
-          <input type="checkbox" aria-label="Pré-marcar imagem na Consulta Flash"
-            checked={modeloFlash.imagem} disabled={estadoFlash !== "PRONTO" || salvandoFlash}
-            onChange={(e) => setModeloFlash((atual) => ({ ...atual, imagem: e.target.checked }))} />
-          Pré-marcar imagem
-        </label>
+        <p>Selecione os exames exatos. QT nunca é pré-marcada pelo modelo.</p>
+        {modeloFlash.solicitacoes===undefined && (modeloFlash.laboratorio || modeloFlash.imagem) && <p>O modelo antigo não identificava exames. Escolha os itens para atualizar.</p>}
+        {([['laboratorio',LABS_MODELO_FLASH,'LAB'],['imagem',RAD_MODELO_FLASH,'RAD']] as const).map(([grupo,itens,titulo])=><fieldset key={grupo} disabled={estadoFlash!=="PRONTO" || salvandoFlash}>
+          <legend>{titulo}</legend>
+          {itens.map(exame=><label key={exame}><input type="checkbox" aria-label={`Modelo ${exame}`} checked={modeloFlash.solicitacoes?.[grupo].includes(exame) ?? false}
+            onChange={e=>setModeloFlash(atual=>{const listas=atual.solicitacoes ?? {laboratorio:[],imagem:[]};return {...atual,solicitacoes:{...listas,[grupo]:e.target.checked ? [...listas[grupo],exame] : listas[grupo].filter(x=>x!==exame)}};})}/>{exame}</label>)}
+          <label>Outros<input aria-label={`Modelo outros ${titulo}`} value={grupo==='laboratorio' ? outrosLab : outrosRad} onChange={e=>grupo==='laboratorio' ? setOutrosLab(e.target.value) : setOutrosRad(e.target.value)} placeholder="Médico escreve; separe por ;" maxLength={2000}/></label>
+        </fieldset>)}
         <button type="button" className="oc-btn-primary" onClick={() => void salvarModeloFlash()}
           disabled={estadoFlash !== "PRONTO" || salvandoFlash || !porta?.alterarCaixaConfiguracao}>
           {salvandoFlash ? "Salvando…" : "Salvar modelo Flash"}
         </button>
         <p aria-label="status configuração Flash" aria-live="polite">{mensagemFlash}</p>
       </section>);
-  if (somenteFlash) return <section aria-label="Configurações da Consulta Flash">{painelFlash}</section>;
+  const painelServico = (<section aria-label="Configuração do receituário especial">
+        <h3>Receituário especial</h3>
+        <label><input type="checkbox" aria-label="Serviço possui receituário especial" checked={especial} disabled={revisaoServico===null || servicoOcupado} onChange={e=>setEspecial(e.target.checked)}/>Serviço possui receituário especial</label>
+        <button type="button" disabled={revisaoServico===null || servicoOcupado || !porta?.alterarCaixaConfiguracao} onClick={()=>void salvarServico()}>Salvar configuração do serviço</button>
+        <p aria-label="status configuração serviço" aria-live="polite">{mensagemServico}</p>
+      </section>);
+  if (somenteFlash) return <section aria-label="Configurações da Consulta Flash">{painelFlash}{incluirServico ? painelServico : null}</section>;
 
   return (
     <div className="oc-cfg" role="dialog" aria-label="Configurações">
@@ -220,6 +262,7 @@ export function Configuracoes({
       </section>
 
       {painelFlash}
+      {painelServico}
 
       <section aria-label="Glossário de caixas">
         <h3>Glossário</h3>
@@ -254,3 +297,4 @@ export function Configuracoes({
     </div>
   );
 }
+

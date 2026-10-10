@@ -115,11 +115,11 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         <RevisaoExtracaoLocal porta={porta} contexto={contexto}
           {...(pacienteAtivo ? { patientLabel: pacienteAtivo.nome } : {})} />
         <PainelOncoassist porta={porta} contexto={contexto} />
-        <ConsultaPersistida porta={porta} contexto={contexto} />
+        <ConsultaPersistida porta={porta} contexto={contexto} aoAbrirApac={() => setTela("apac")} />
       </div> : null}
       {tela === "salao" ? <TelaSalao porta={porta} /> : null}
       {tela === "apac" ? <TelaApacLote porta={porta} chaves={chaves} /> : null}
-      {tela === "config" ? <Configuracoes somenteFlash porta={porta} tema="dia"
+      {tela === "config" ? <Configuracoes somenteFlash incluirServico porta={porta} tema="dia"
         onTema={() => {}} onFechar={() => setTela("consulta")} /> : null}
       {tela === "canal" ? <><p>Contexto ativo para vínculo: {pacienteAtivo
         ? `${pacienteAtivo.nome} · ${pacienteAtivo.patientId} · ${pacienteAtivo.encounterId}`

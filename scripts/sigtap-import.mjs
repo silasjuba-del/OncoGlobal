@@ -82,3 +82,56 @@ if (fileURLToPath(import.meta.url) === process.argv[1] || process.argv[1]?.endsW
   }, null, 2) + "\n");
   console.log(`${resultado.procedimentos.length} procedimentos -> ${destino}`);
 }
+
+/** Lê os offsets do layout que acompanha a própria competência oficial. Não assume posição fixa. */
+function registrosOficiais(arquivos, nome, competencia) {
+  const layout = arquivos[nome.replace('.txt', '_layout.txt')];
+  const fonte = arquivos[nome];
+  if (typeof layout !== 'string' || typeof fonte !== 'string') throw new Error(`FONTE_OFICIAL_AUSENTE:${nome}`);
+  const colunas = layout.split(/[\r\n]+/).filter(x => x.trim()).slice(1).map(l => {
+    const [campo, tamanho, inicio, fim] = l.split(',');
+    const a = Number(inicio), b = Number(fim);
+    if (!campo || !Number.isInteger(a) || !Number.isInteger(b) || a < 1 || b < a || b-a+1 !== Number(tamanho)) throw new Error('LAYOUT_OFICIAL_INVALIDO');
+    return { campo, a: a-1, b };
+  });
+  if (!colunas.length) throw new Error('LAYOUT_OFICIAL_VAZIO');
+  const largura = Math.max(...colunas.map(c => c.b));
+  return fonte.split(/[\r\n]+/).filter(x => x.trim()).map(l => {
+    if (l.length !== largura) throw new Error(`LARGURA_OFICIAL_DIVERGENTE:${nome}`);
+    const r = Object.fromEntries(colunas.map(c => [c.campo, l.slice(c.a,c.b).trimEnd()]));
+    if (r.DT_COMPETENCIA !== competencia.replace('-','')) throw new Error(`COMPETENCIA_FONTE_DIVERGENTE:${nome}`);
+    return r;
+  });
+}
+
+/** Arquivos oficiais decodificados Windows-1252, incluindo layouts; somente grupo03.04 formas02–08. */
+export function parseSigtapOficial(arquivos, competencia) {
+  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(competencia)) throw new Error('COMPETENCIA_INVALIDA');
+  const procedimentos = registrosOficiais(arquivos, 'tb_procedimento.txt', competencia);
+  const cids = registrosOficiais(arquivos, 'rl_procedimento_cid.txt', competencia);
+  const registros = registrosOficiais(arquivos, 'rl_procedimento_registro.txt', competencia);
+  const financiamento = registrosOficiais(arquivos, 'tb_financiamento.txt', competencia);
+  const numero = (v, campo) => {
+    if (!/^\d+$/.test(v)) throw new Error(`ATRIBUTO_OFICIAL_INVALIDO:${campo}`);
+    const n = Number(v); if (!Number.isSafeInteger(n)) throw new Error(`NUMERO_OFICIAL_INVALIDO:${campo}`); return n;
+  };
+  const selecionados = procedimentos.filter(p => /^03040[2-8]/.test(p.CO_PROCEDIMENTO));
+  const codigos = new Set();
+  const itens = selecionados.map(p => {
+    const codigo = p.CO_PROCEDIMENTO;
+    if (!/^\d{10}$/.test(codigo) || codigos.has(codigo) || !p.NO_PROCEDIMENTO) throw new Error('PROCEDIMENTO_OFICIAL_INVALIDO');
+    codigos.add(codigo);
+    const fin = financiamento.find(f => f.CO_FINANCIAMENTO === p.CO_FINANCIAMENTO);
+    if (!fin) throw new Error('FINANCIAMENTO_OFICIAL_AUSENTE');
+    return { codigo, nome: p.NO_PROCEDIMENTO, sexo: p.TP_SEXO === 'M' || p.TP_SEXO === 'F' ? p.TP_SEXO : p.TP_SEXO === 'I' ? 'AMBOS' : null,
+      idadeMinMeses: null, idadeMaxMeses: null,
+      idadeMinimaOriginal: p.VL_IDADE_MINIMA, idadeMaximaOriginal: p.VL_IDADE_MAXIMA,
+      cidsCompativeis: [...new Set(cids.filter(c => c.CO_PROCEDIMENTO === codigo && c.ST_PRINCIPAL === 'S').map(c => c.CO_CID))].sort(),
+      finalidadeDoGrupo: null, modalidade: 'QT',
+      financiamentoCodigo: p.CO_FINANCIAMENTO, financiamentoNome: fin.NO_FINANCIAMENTO,
+      valorSaCentavos: numero(p.VL_SA, 'VL_SA'),
+      instrumentosRegistro: [...new Set(registros.filter(r => r.CO_PROCEDIMENTO === codigo).map(r => r.CO_REGISTRO))].sort(),
+    };
+  });
+  return { competencia, procedimentos: itens };
+}

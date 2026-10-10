@@ -9,6 +9,13 @@ import type { TabelaRegulatoria } from "../rules/prescricao/classificarDocumento
 import { RulesetHeader } from "../contracts/agentes.js";
 import { lerRadsEmergencias } from "../rules/radsEmergencias.js";
 import { lerLimiarAlertaPlaquetas, type LimiarAlertaPlaquetas } from "../rules/plaquetasAlerta.js";
+import { lerAlertaFeve } from "../rules/alertaFeve.js";
+import type { RulesetSemaforo } from "../rules/semaforoInteracoes.js";
+import type { CatalogoInteracoes } from "../contracts/f0c/interacoes.js";
+import { carregarCompetenciaSigtap, type TabelasSigtap } from "../apac/sigtap.js";
+import type { RegraInstrumento } from "../contracts/f0c/instrumentos.js";
+import type { RegraCondicional, RegraTermoComplementar } from "../contracts/f0c/condicionais.js";
+import type { EntradaControlado } from "../rules/prescricao/receituarioEspecial.js";
 
 const CaixaEnvelope = z.object({ schemaVersion: z.string(), versao: z.string(), caixas: z.array(CaixaNumerada) }).strict();
 const EntradaRegulatoria = z.object({ nomes: z.array(z.string()), tipo: PrescriptionDocumentType, fonte: z.string() }).strict();
@@ -53,6 +60,14 @@ export function filtrarReceitasConsumiveis(input: unknown) {
 
 /** Load the checked-in, versioned local corpus. No default table is fabricated. */
 export function carregarCorpusServidor() {
+  let sigtap: TabelasSigtap = {};
+  let sigtapEstado = "PENDENTE";
+  try {
+    const carga = carregarCompetenciaSigtap(ler("f0c/sigtap/2026-09.json"),
+      readFileSync(new NodeURL("../../corpus/f0c/sigtap/fontes/TabelaUnificada_202609_v2610050950.zip",import.meta.url)));
+    if (carga.ativo) { sigtap = {[carga.tabela.competencia]:carga.tabela}; sigtapEstado = "FONTE_OFICIAL_CONFERIDA"; }
+    else sigtapEstado = carga.codigo;
+  } catch { /* Fonte ausente/corrompida mantém APAC pendente, nunca usa outra competência. */ }
   const caixaEnvelope = CaixaEnvelope.parse(ler("glossario/caixas.v1.json"));
   const ruleset = SalaoRuleset.parse(ler("rulesets/salao-triagem.v1.json"));
   const regulatorio = RegulacaoEnvelope.parse(ler("regulatorio/tabela-ativa.v1.json"));
@@ -68,5 +83,12 @@ export function carregarCorpusServidor() {
   return { caixas: caixaEnvelope.caixas.filter((c) => c.chave.startsWith("config.")),
     caixasTodas: caixaEnvelope.caixas, ruleset, regulatorio: table, receitasElegiveis,
     templatesProtocolo: lerTemplatesProtocolo(), rads, limiarPlaquetas,
+    interacoes: ler("rulesets/interacoes.v1.json") as RulesetSemaforo,
+    catalogoInteracoes: ler("f0c/classes-farmacos.v1.json") as CatalogoInteracoes,
+    feveRuleset: lerAlertaFeve(ler("rulesets/salao-feve.v1.json")),
+    sigtap, sigtapEstado,
+    instrumentos: (ler("f0c/instrumentos.v1.json") as {instrumentos:RegraInstrumento[]}).instrumentos,
+    condicionais: ler("f0c/condicionais.v1.json") as {regras:RegraCondicional[];termos:RegraTermoComplementar[]},
+    controlados:(ler("regulatorio/medicamentos-controlados.v1.json") as {entradas:EntradaControlado[]}).entradas,
     versoes: { caixas: caixaEnvelope.versao, regulatorio: table.versao, ruleset: ruleset.header.versao } };
 }

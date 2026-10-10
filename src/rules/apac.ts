@@ -75,7 +75,8 @@ export interface ResultadoPrazo {
 /** FN-12. Day thresholds are administrative decisions Q20/Q35, never a clinical cutoff. */
 export function apacPrazo(dataGeracao: string, hoje: string, ultimoAvisoEm: string | null): ResultadoPrazo {
   const dias = diasCivis(dataGeracao, hoje);
-  return { dias, aviso: dias >= 85 && dias < 90 && ultimoAvisoEm === null,
+  // F0-COMPLEMENTO corrige aviso perdido D90+.
+  return { dias, aviso: dias >= 85 && ultimoAvisoEm === null,
     estado: dias >= 90 ? "VENCIDA" : "RASCUNHO",
     faturamentoPodeEmitir: dias >= 0 && dias < 90, consultaSegue: true };
 }

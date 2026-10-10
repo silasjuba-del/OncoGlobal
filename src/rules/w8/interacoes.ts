@@ -3,8 +3,9 @@
 // Lê o ruleset interacoes.v1.json injetado.
 // Par sem regra ativa com fonte → PENDENTE ("não verificado"), NUNCA "sem interação" ou "VERDE".
 // Regra ativa com fonte → alerta com severidade da fonte.
-// Nenhuma regra ativa hoje: teste prova que tudo sai PENDENTE.
+// F0-COMPLEMENTO: somente pares curados podem ser ativados.
 
+import { casaTermoFarmaco, referenciaComTrecho, type CatalogoInteracoes } from "../../contracts/f0c/interacoes.js";
 import type { Semaforo } from "../../contracts/estados.js";
 
 export interface RegraInteracaoItem {
@@ -41,22 +42,6 @@ export interface SaidaAvaliacaoInteracao {
   fonteReferencia: string | null;
 }
 
-function normalizarDroga(s?: string | null): string {
-  if (!s) return "";
-  return s
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-}
-
-function casaDrogaOuClasse(termoRegra: string, drogaConsulta: string): boolean {
-  const r = normalizarDroga(termoRegra);
-  const c = normalizarDroga(drogaConsulta);
-  if (!r || !c) return false;
-  return r === c || c.includes(r) || r.includes(c);
-}
-
 /**
  * G-09: Avalia se existe regra ativa e referenciada de interação medicamentosa entre duas drogas.
  * Invariante clínica: se não houver regra ativa curada com literatura, retorna SEMPRE PENDENTE
@@ -66,6 +51,7 @@ export function avaliarInteracaoMedicamentosa(
   droga1: string,
   droga2: string,
   ruleset: RulesetInteracoes,
+  catalogo?: CatalogoInteracoes,
 ): SaidaAvaliacaoInteracao {
   const d1 = droga1?.trim() || "droga_1";
   const d2 = droga2?.trim() || "droga_2";
@@ -73,28 +59,24 @@ export function avaliarInteracaoMedicamentosa(
   const regras = ruleset?.interacoes ?? [];
 
   // Procura por regras cadastradas (em qualquer ordem)
-  const regraEncontrada = regras.find((item) => {
+  const casadas = regras.filter((item) => {
     const direta =
-      casaDrogaOuClasse(item.drogaA, d1) && casaDrogaOuClasse(item.drogaBouClasse, d2);
+      casaTermoFarmaco(item.drogaA, d1, catalogo) && casaTermoFarmaco(item.drogaBouClasse, d2, catalogo);
     const inversa =
-      casaDrogaOuClasse(item.drogaA, d2) && casaDrogaOuClasse(item.drogaBouClasse, d1);
+      casaTermoFarmaco(item.drogaA, d2, catalogo) && casaTermoFarmaco(item.drogaBouClasse, d1, catalogo);
     return direta || inversa;
   });
 
-  // Só vira alerta se a regra estiver formalmente ativa e tiver fonte bibliográfica comprovada
-  const temFonteValida =
-    regraEncontrada?.fonte?.referencia &&
-    regraEncontrada.fonte.referencia.trim() !== "" &&
-    regraEncontrada.fonte.referencia !== "[VERIFICAR]";
-
-  if (regraEncontrada && regraEncontrada.ativo === true && temFonteValida) {
-    const sev = regraEncontrada.severidade || "MODERADA";
+  // Uma semente inativa anterior não esconde outra regra curada aplicável.
+  const regraEncontrada = casadas.find((item) => item.ativo === true && referenciaComTrecho(item.fonte));
+  if (regraEncontrada) {
+    const sev = regraEncontrada.severidade || null;
     return {
       drogaA: d1,
       drogaB: d2,
       estado: "VERMELHO",
       severidade: sev,
-      motivo: `interação ativa detectada: ${regraEncontrada.drogaA} + ${regraEncontrada.drogaBouClasse} (severidade ${sev})`,
+      motivo: `interação ativa detectada: ${regraEncontrada.drogaA} + ${regraEncontrada.drogaBouClasse} (severidade ${sev ?? "não classificada"})`,
       regraAtiva: true,
       fonteReferencia: regraEncontrada.fonte!.referencia!,
     };

@@ -29,6 +29,21 @@ function* objetos(valor) {
   }
 }
 
+function fonteComTrecho(f) {
+  return typeof f === "object" && f !== null && !Array.isArray(f) &&
+    ((typeof f.trecho === "string" && f.trecho.trim().length > 0 && !f.trecho.includes("[VERIFICAR]")) || f.tipo === "DECISAO_MEDICA");
+}
+
+/** A evidência pode estar no próprio item ou na regra que o contém. Objeto ativo sem nenhuma das duas continua falha. */
+function* objetosComFonte(valor, herdada = false) {
+  if (Array.isArray(valor)) { for (const v of valor) yield* objetosComFonte(v, herdada); return; }
+  if (typeof valor === "object" && valor !== null) {
+    const propria = fonteComTrecho(valor.fonte);
+    yield { valor, fonteCoberta: propria || herdada };
+    for (const v of Object.values(valor)) yield* objetosComFonte(v, propria || herdada);
+  }
+}
+
 const contarVerificar = (valor) => {
   let n = 0;
   for (const o of objetos(valor))
@@ -54,13 +69,10 @@ for (const arquivo of walk(CORPUS)) {
   errosHeader.forEach((e) => problemas.push(`${rel}: ${e}`));
 
   let ativos = 0;
-  for (const o of objetos(json)) {
+  for (const { valor: o, fonteCoberta } of objetosComFonte(json)) {
     if (o.ativo !== true) continue;
     ativos++;
-    const f = o.fonte;
-    const fonteOk = typeof f === "object" && f !== null && !Array.isArray(f) &&
-      ((typeof f.trecho === "string" && f.trecho.trim().length > 0 && !f.trecho.includes("[VERIFICAR]")) || f.tipo === "DECISAO_MEDICA");
-    if (!fonteOk) problemas.push(`${rel}: item ativo sem fonte com trecho (ou DECISAO_MEDICA) — K-27`);
+    if (!fonteCoberta) problemas.push(`${rel}: item ativo sem fonte com trecho (ou DECISAO_MEDICA) — K-27`);
   }
   linhas.push([rel, json.header === undefined ? "—" : errosHeader.length ? "INVÁLIDO" : "ok", contarVerificar(json), ativos]);
 }

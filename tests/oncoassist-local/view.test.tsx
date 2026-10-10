@@ -44,6 +44,11 @@ describe("modo local explícito OncoAssist", () => {
     expect(f.porta.carregarConsulta).toHaveBeenCalledWith(paciente);
     expect(screen.queryByText("Abrir TC")).toBeNull();
     expect(screen.queryByLabelText("Senha do servidor")).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Configurações Flash" }));
+    expect(await screen.findByRole("checkbox", { name: "Serviço possui receituário especial" })).toBeTruthy();
+    expect(screen.queryByLabelText("CNES")).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "APAC" }));
+    expect(screen.queryByLabelText("CNES")).toBeNull();
   });
   it("login recusado não carrega agenda nem retém senha no campo", async () => {
     const f = fixture(); f.porta.login.mockResolvedValue({ ok: false, expiraEm: null });

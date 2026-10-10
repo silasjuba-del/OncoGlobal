@@ -25,8 +25,9 @@ describe("FN-12 / T-30: prazo APAC em dias civis (D-W5-02)", () => {
   });
 
   it("borda: D90 mesmo sem aviso previo vence para faturamento, consulta segue", () => {
+    // F0-COMPLEMENTO corrige aviso perdido D90+.
     expect(apacPrazo(geracao, "2024-03-31", null)).toEqual({
-      dias: 90, aviso: false, estado: "VENCIDA",
+      dias: 90, aviso: true, estado: "VENCIDA",
       faturamentoPodeEmitir: false, consultaSegue: true,
     });
   });

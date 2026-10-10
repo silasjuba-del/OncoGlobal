@@ -44,7 +44,7 @@ export const ContextoTriagem = z.object({
   hoje: DataCivil,
   prescricaoVigente: z.object({ documentId: z.string(), ciclosCobertos: z.number().int(), validaAte: DataCivil }).strict().nullable(),
   /** requisitos aplicáveis (K-10): só eles geram pendência quando ausentes */
-  requisitosAplicaveis: z.array(z.enum(["pas", "fc", "spo2", "tempDecimos", "hbDgDl", "anc", "plq", "coletaHemograma", "ecog", "grauCtcae"])),
+  requisitosAplicaveis: z.array(z.enum(["pas", "fc", "spo2", "tempDecimos", "hbDgDl", "anc", "plq", "coletaHemograma", "ecog", "grauCtcae"])).min(1),
 }).strict();
 export type ContextoTriagem = z.infer<typeof ContextoTriagem>;
 
