@@ -37,15 +37,45 @@ describe("fontes salão readonly",()=>{
   const r=coletarFontesSalao({...entrada,eventos:[]});
   expect(r.prescricaoVigente).toBeNull();expect(r.avisos).toContain("PRESCRICAO_CICLO_AUSENTE_OU_AMBIGUO");
  });
- it("documento íntegro ligado ao episódio ainda exige contrato de prazo; hash adulterado é recusado",()=>{
+ it("documento íntegro vale 21 dias contados da assinatura; hash adulterado é recusado",()=>{
   const ep={...evento("ep","TreatmentEpisode",{episodioId:"episodio",tumorLotId:"lote",modalidade:"QT",intencao:"ADJUVANTE",intentModifier:null,linha:1,esquemaId:"esquema",inicio:presente("2026-10-01"),fim:presente("2026-11-01")}),tumorLotId:"lote"};
   const ciclo={...evento("ci","Ciclo",{cicloId:"ciclo",episodioId:"episodio",numero:1,previstoEm:"2026-10-10",pesoKg:presente(70),origemPeso:"MEDIDO",ciclosSemPesoConsecutivos:0,prescricaoRef:{documentId:"rx",documentVersion:1},itens:[],comMedico:true}),tumorLotId:"lote"};
   const corpo={documentId:"rx",documentVersion:1,texto:"Prescrição sintética",contexto:{patientId:entrada.patientId,tumorLotId:"lote",episodioId:"episodio"}};
   const assinatura={documentId:"rx",documentVersion:1,serverActorId:"medico-sintetico",documentHash:hashConteudoExibido(corpo)};
   const doc={...evento("doc","DOCUMENTO",{data:corpo,signature:assinatura}),tumorLotId:"lote",revisao:"ASSINADO" as const};
   const r=coletarFontesSalao({...entrada,eventos:[ep,ciclo,doc]});
-  expect(r.prescricaoVigente).toBeNull();expect(r.avisos).toContain("PRESCRICAO_PRAZO_SEM_CONTRATO");
+  expect(r.prescricaoVigente).toEqual({documentId:"rx",ciclosCobertos:1,validaAte:"2026-10-30"});
+  expect(r.avisos).not.toContain("PRESCRICAO_PRAZO_SEM_CONTRATO");
   const adulterado={...doc,payload:{data:{data:{...corpo,texto:"Adulterado"},signature:assinatura}}};
   expect(coletarFontesSalao({...entrada,eventos:[ep,ciclo,adulterado]}).avisos).toContain("PRESCRICAO_INTEGRIDADE_OU_CONTEXTO_PENDENTE");
+ });
+ it("no 21º dia decorrido a prescrição sai de vigência; o 20º ainda vale",()=>{
+  const base=(criadoEm:string,hoje:string,agora:string)=>{
+   const ep={...evento("ep","TreatmentEpisode",{episodioId:"episodio",tumorLotId:"lote",modalidade:"QT",intencao:"ADJUVANTE",intentModifier:null,linha:1,esquemaId:"esquema",inicio:presente("2026-08-01"),fim:presente("2026-12-01")}),tumorLotId:"lote"};
+   const ciclo={...evento("ci","Ciclo",{cicloId:"ciclo",episodioId:"episodio",numero:1,previstoEm:hoje,pesoKg:presente(70),origemPeso:"MEDIDO",ciclosSemPesoConsecutivos:0,prescricaoRef:{documentId:"rx",documentVersion:1},itens:[],comMedico:true}),tumorLotId:"lote"};
+   const corpo={documentId:"rx",documentVersion:1,texto:"Prescrição sintética",contexto:{patientId:entrada.patientId,tumorLotId:"lote",episodioId:"episodio"}};
+   const assinatura={documentId:"rx",documentVersion:1,serverActorId:"medico-sintetico",documentHash:hashConteudoExibido(corpo)};
+   const doc={...evento("doc","DOCUMENTO",{data:corpo,signature:assinatura}),tumorLotId:"lote",revisao:"ASSINADO" as const,criadoEm};
+   return coletarFontesSalao({...entrada,hoje,agora,eventos:[ep,ciclo,doc]});
+  };
+  const noVigesimo=base("2026-09-20T10:00:00-03:00","2026-10-10","2026-10-10T12:00:00-03:00");
+  expect(noVigesimo.prescricaoVigente?.validaAte).toBe("2026-10-10");
+  const noVigesimoPrimeiro=base("2026-09-20T10:00:00-03:00","2026-10-11","2026-10-11T12:00:00-03:00");
+  expect(noVigesimoPrimeiro.prescricaoVigente).toBeNull();
+  expect(noVigesimoPrimeiro.avisos).toContain("PRESCRICAO_FORA_DO_PRAZO");
+ });
+ it("assinatura sem instante civil ou no futuro não vira prazo",()=>{
+  const ep={...evento("ep","TreatmentEpisode",{episodioId:"episodio",tumorLotId:"lote",modalidade:"QT",intencao:"ADJUVANTE",intentModifier:null,linha:1,esquemaId:"esquema",inicio:presente("2026-10-01"),fim:presente("2026-11-01")}),tumorLotId:"lote"};
+  const ciclo={...evento("ci","Ciclo",{cicloId:"ciclo",episodioId:"episodio",numero:1,previstoEm:"2026-10-10",pesoKg:presente(70),origemPeso:"MEDIDO",ciclosSemPesoConsecutivos:0,prescricaoRef:{documentId:"rx",documentVersion:1},itens:[],comMedico:true}),tumorLotId:"lote"};
+  const corpo={documentId:"rx",documentVersion:1,texto:"Prescrição sintética",contexto:{patientId:entrada.patientId,tumorLotId:"lote",episodioId:"episodio"}};
+  const assinatura={documentId:"rx",documentVersion:1,serverActorId:"medico-sintetico",documentHash:hashConteudoExibido(corpo)};
+  const semHora={...evento("doc","DOCUMENTO",{data:corpo,signature:assinatura}),tumorLotId:"lote",revisao:"ASSINADO" as const,criadoEm:"2026-10-10"};
+  expect(coletarFontesSalao({...entrada,eventos:[ep,ciclo,semHora]}).avisos).toContain("PRESCRICAO_ASSINATURA_SEM_DATA_CIVIL");
+  const aindaNaoExiste={...evento("doc","DOCUMENTO",{data:corpo,signature:assinatura}),tumorLotId:"lote",revisao:"ASSINADO" as const,criadoEm:"2026-10-10T18:00:00-03:00"};
+  const invisivel=coletarFontesSalao({...entrada,eventos:[ep,ciclo,aindaNaoExiste]});
+  expect(invisivel.prescricaoVigente).toBeNull();
+  expect(invisivel.avisos).toContain("PRESCRICAO_ASSINADA_AUSENTE_OU_AMBIGUA");
+  const diaAindaNaoChegou={...evento("doc","DOCUMENTO",{data:corpo,signature:assinatura}),tumorLotId:"lote",revisao:"ASSINADO" as const,criadoEm:"2026-10-10T10:00:00-03:00"};
+  expect(coletarFontesSalao({...entrada,hoje:"2026-10-09",agora:"2026-10-10T12:00:00-03:00",eventos:[ep,ciclo,diaAindaNaoChegou]}).avisos).toContain("PRESCRICAO_ASSINATURA_FUTURA");
  });
 });

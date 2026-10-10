@@ -19,6 +19,7 @@ Início pela F05: aviso de APAC perdido após o dia 89, já delimitado na audito
 | D-F0C-04 | G2 / Flash | “Sim, alerta sem decisão automática” | G2 presente alerta o médico; não determina redução/adiamento. Na Flash só aparecem toxicidades apresentadas, sem grau. |
 | D-F0C-05 | HBV | “Incluir o lembrete agora” | HBsAg, anti-HBc e anti-HBs: lembrete neste complemento, sem bloqueio do atendimento. |
 | D-F0C-06 | Novos críticos | “NA:  < 125 E 145 < \| K: < 3 E > 6 \| CA TOTAL: < 8 E > 12 SOMENTE ESTES GERAM AVISO” | Interpretado e comunicado: Na <125 ou >145; K <3 ou >6; Ca total <8 ou >12. Limites estritos. Somente esses três na ampliação N5; não ativar novos avisos de Mg/glicose/bilirrubina/INR. |
+| D-F0C-07 | Prazo do salão | “prazo salão 21 dias” | Contados da assinatura do documento. O dia civil da assinatura entra. No 21º dia decorrido deixa de valer. Sem prazo próprio na ficha da droga. |
 
 D-F0C-06 não remove alertas já decididos de plaquetas, interações ou outras categorias. É o recorte da pergunta sobre os novos valores críticos laboratoriais. Antes de executar a comparação, o contrato deve exigir analito/unidade conhecida, conversão e proveniência; valores desconhecidos/conflitantes não entram como normais. Cálcio solicitado é TOTAL, não corrigido por albumina. A resposta não especifica uma nova fórmula de correção.
 

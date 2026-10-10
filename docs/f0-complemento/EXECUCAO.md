@@ -43,11 +43,11 @@ HEAD testado: `bab0889aa5875c140f76833da759d0969620d3d2`, branch `codex/f0c-inic
 - Assinatura usa o bundle já exibido. A impressão é outra ação do gateway: HTML local, sem prova de impressão física. Falha de impressão deixa botão de nova solicitação e não repete a assinatura.
 - Carregar consulta e preparar documentos usam a mesma `opcoesLeituraConsulta` (modelo Flash, interações, FEVE, condicionais, instrumentos). A caixa 18 entra na linha manual de receita, não na montagem dos documentos da Flash.
 - Cumulativo sem limite devolve subtotal conhecido e pendência de limite. Histórico incompleto não vira total definitivo. Não há sugestão de imagem por sintoma nem teto de dose acumulada inventado.
-- `coletarFontesSalao` emite `PRESCRICAO_PRAZO_SEM_CONTRATO` porque ciclo e ordem clínica não persistem prazo. Não há validade infinita nem data fabricada.
+- `coletarFontesSalao` aplica D-F0C-07: 21 dias civis contados do instante da assinatura. O dia da assinatura entra; no 21º dia decorrido a prescrição sai de vigência. Assinatura sem data civil ou futura não vira prazo. Texto livre continua sem valor de contrato.
 
-### Item F — pergunta clínica indispensável
+### Item F — decisão registrada
 
-Qual prazo, em horas ou dias contados da assinatura, a prescrição vale para o salão quando o documento não traz contrato de validade? Enquanto isso não existir, o salão permanece com aviso e sem prazo inventado.
+Dr. Silas, 2026-10-10: prazo do salão = 21 dias, contados da assinatura. Não há prazo próprio por droga.
 
 ### Prova desta rodada
 
@@ -92,7 +92,7 @@ Jornada automatizada que passou nesta suíte: `tests/f0c/flash-jornada.test.tsx`
 | C8 | PARTIAL | caixa 18 grava e reabre; receituário fora da Flash não percorrido |
 | C9 | PARTIAL | callback APAC ligado e clicado em `c2-consulta-local`; página `OncoassistLocal` não aberta no browser |
 | C10 | PARTIAL | projeção real no teste de timeline; linha compacta da Flash é outra superfície |
-| C11 | BLOCKED | `PRESCRICAO_PRAZO_SEM_CONTRATO`; falta a decisão de prazo do item F |
+| C11 | PASS | D-F0C-07; `tests/f0c/salao-fontes.test.ts` 12/12 em 2026-10-10 |
 | C12 | PASS | `tests/f0c/apac-aviso.test.ts` dentro dos 270 |
 | C13 | PARTIAL | `sigtap-zip` e competência nos 270; não é o SIGTAP nacional inteiro |
 | N1 | PASS | Mosteller sem piso/teto, Calvert 125, CG com peso real em `clinica.test.ts` |
@@ -108,4 +108,4 @@ Jornada automatizada que passou nesta suíte: `tests/f0c/flash-jornada.test.tsx`
 | N11 | PARTIAL | pendências agrupadas no código; cliques não medidos |
 | N12 | PARTIAL | jornada HTTP/SQLite passou; browser e demo `OncoassistLocal` não executados |
 
-F0-COMPLEMENTO não está fechado: falha de PHI por worktree não commitado, item F sem prazo, N12 sem browser e vários itens PARTIAL/BLOCKED.
+F0-COMPLEMENTO não está fechado: N12 sem browser e vários itens PARTIAL. O prazo do salão de 21 dias passou na prova focal `salao-fontes` (12/12); a suíte integral não foi repetida depois dessa decisão.

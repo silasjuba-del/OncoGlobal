@@ -3,8 +3,14 @@ import type { ContextoTriagem } from "../../contracts/regras.js";
 import { Ciclo, TreatmentEpisode } from "../../contracts/clinico.js";
 import { dadosDoEvento, eventosVigentes } from "../../kernel/projections/snapshot.js";
 import { labSeries } from "../../kernel/projections/series.js";
+import { dataCivilDoServico } from "../../kernel/gateway/tempo.js";
 import { avaliarValidadeExame } from "../../rules/f0c/clinica.js";
 import { hashConteudoExibido } from "../sessao.js";
+
+/** D-F0C-07 · Dr. Silas, 2026-10-10: prazo do salão = 21 dias contados da assinatura.
+ * O dia civil da assinatura entra. Quando os dias decorridos chegam a 21, deixa de valer.
+ * Não cobre prazo próprio de ficha de droga: esse contrato ainda não existe no documento. */
+export const PRAZO_PRESCRICAO_SALAO_DIAS = 21;
 
 const objeto = (v: unknown): Record<string, unknown> | null => v && typeof v === "object" && !Array.isArray(v) ? v as Record<string, unknown> : null;
 const nome = (v: string) => v.normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase();
@@ -72,8 +78,33 @@ export function coletarFontesSalao(i: EntradaFontesSalao): FontesSalao {
     || contexto.patientId!==i.patientId || contexto.tumorLotId!==ce.tumorLotId || contexto.episodioId!==ciclo.episodioId) {
     saida.avisos.push("PRESCRICAO_INTEGRIDADE_OU_CONTEXTO_PENDENTE"); return saida;
   }
-  // ClinicalOrder e Ciclo não persistem prazo. Campo livre no texto não constitui contrato de validade.
-  saida.avisos.push("PRESCRICAO_PRAZO_SEM_CONTRATO");
+  // ClinicalOrder e Ciclo não persistem prazo. Campo livre no texto não constitui contrato.
+  // D-F0C-07: 21 dias civis a partir do instante do DOCUMENTO assinado. ciclosCobertos=1
+  // registra o único ciclo ligado por prescricaoRef, não uma cobertura de ciclos futuros.
+  const fuso = fusoDoInstante(i.agora);
+  const assinadaEm = fuso ? dataCivilDoServico(documento.criadoEm, fuso) : { estado: "PENDENTE" as const, codigo: "FUSO_INVALIDO" as const };
+  if (assinadaEm.estado !== "OK") { saida.avisos.push("PRESCRICAO_ASSINATURA_SEM_DATA_CIVIL"); return saida; }
+  if (Date.parse(documento.criadoEm) > agora || assinadaEm.dataCivil > i.hoje) {
+    saida.avisos.push("PRESCRICAO_ASSINATURA_FUTURA"); return saida;
+  }
+  const validaAte = somarDiasCivis(assinadaEm.dataCivil, PRAZO_PRESCRICAO_SALAO_DIAS - 1);
+  if (validaAte < i.hoje) { saida.avisos.push("PRESCRICAO_FORA_DO_PRAZO"); return saida; }
+  saida.prescricaoVigente = { documentId: String(corpo.documentId), ciclosCobertos: 1, validaAte };
   return saida;
+}
+
+function fusoDoInstante(instante: string): string | null {
+  const marca = /(?:Z|[+-]\d{2}:\d{2})$/i.exec(instante);
+  if (!marca) return null;
+  return marca[0]!.toUpperCase() === "Z" ? "+00:00" : marca[0]!;
+}
+
+function somarDiasCivis(iso: string, dias: number): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso);
+  if (!m) throw new Error("DATA_INVALIDA");
+  const dt = new Date(Date.UTC(Number(m[1]), Number(m[2]) - 1, Number(m[3]) + dias));
+  const mes = String(dt.getUTCMonth() + 1).padStart(2, "0");
+  const dia = String(dt.getUTCDate()).padStart(2, "0");
+  return `${dt.getUTCFullYear()}-${mes}-${dia}`;
 }
 
