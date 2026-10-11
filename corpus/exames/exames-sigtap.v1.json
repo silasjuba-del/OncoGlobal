@@ -4,200 +4,237 @@
     "versao": "1.0.0",
     "vigenteDesde": "2026-10-11",
     "curador": "Dr. Silas Negrão",
-    "aprovadoEm": "PENDENTE (RASCUNHO, não aprovado)",
+    "aprovadoEm": "2026-10-11",
     "fonte": {
-      "tipo": "NORMA",
-      "referencia": "corpus/f0c/sigtap/fontes/TabelaUnificada_202609_v2610050950.zip, tb_procedimento",
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-F1-02 (lista aprovada 2026-10-11); códigos e nomes do SIGTAP 09/2026, corpus/f0c/sigtap/fontes/TabelaUnificada_202609_v2610050950.zip, tb_procedimento",
       "trecho": null,
-      "edicao": "2026-09"
+      "edicao": null
     }
   },
-  "status": "RASCUNHO",
+  "status": "APROVADO_LISTA",
   "competencia": "2026-09",
-  "nota": "Nomes copiados do ZIP oficial por script. sigtap null = sem código no SIGTAP 09/2026. Contraste é campo do pedido. Só segmentos de uso oncológico prático. Promoção a VERIFICADO: Dr. Silas.",
-  "categorias": {
+  "nota": "Nomes copiados do ZIP oficial por script. sigtap null = sem código no SIGTAP 09/2026. Contraste é campo do pedido. Só segmentos de uso oncológico prático. Lista aprovada pelo Dr. Silas em 2026-10-11 (proposta Claude + lista do Dr. Silas). Seção = categoria; tópico = subgrupo. Item sem código fica SEM_CODIGO_SUS.",
+  "secoes": {
     "imagem": [
       {
         "id": "TC_CRANIO",
+        "topico": "TC",
         "nome": "TOMOGRAFIA COMPUTADORIZADA DO CRANIO",
         "sigtap": "0206010079",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TC_PESCOCO",
+        "topico": "TC",
         "nome": "TOMOGRAFIA COMPUTADORIZADA DO PESCOCO",
         "sigtap": "0206010052",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TC_TORAX",
+        "topico": "TC",
         "nome": "TOMOGRAFIA COMPUTADORIZADA DE TORAX",
         "sigtap": "0206020031",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TC_ABDOMEN_SUPERIOR",
+        "topico": "TC",
         "nome": "TOMOGRAFIA COMPUTADORIZADA DE ABDOMEN SUPERIOR",
         "sigtap": "0206030010",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TC_PELVE",
+        "topico": "TC",
         "nome": "TOMOGRAFIA COMPUTADORIZADA DE PELVE / BACIA / ABDOMEN INFERIOR",
         "sigtap": "0206030037",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TC_COLUNA_CERVICAL",
+        "topico": "TC",
         "nome": "TOMOGRAFIA COMPUTADORIZADA DE COLUNA CERVICAL C/ OU S/ CONTRASTE",
         "sigtap": "0206010010",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TC_COLUNA_TORACICA",
+        "topico": "TC",
         "nome": "TOMOGRAFIA COMPUTADORIZADA DE COLUNA TORACICA C/ OU S/ CONTRASTE",
         "sigtap": "0206010036",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TC_COLUNA_LOMBAR",
+        "topico": "TC",
         "nome": "TOMOGRAFIA COMPUTADORIZADA DE COLUNA LOMBO-SACRA C/ OU S/ CONTRASTE",
         "sigtap": "0206010028",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "CONTRASTE_TC",
+        "topico": "TC",
         "nome": "CONTRASTE PARA TOMOGRAFIA COMPUTADORIZADA",
         "sigtap": "0206030045",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "campo do pedido (angio, uro, TEP)"
       },
       {
         "id": "RM_CRANIO",
+        "topico": "RM",
         "nome": "RESSONANCIA MAGNETICA DE CRANIO",
         "sigtap": "0207010064",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "RM_COLUNA_CERVICAL",
+        "topico": "RM",
         "nome": "RESSONANCIA MAGNETICA DE COLUNA CERVICAL/PESCOÇO",
         "sigtap": "0207010030",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "RM_COLUNA_TORACICA",
+        "topico": "RM",
         "nome": "RESSONANCIA MAGNETICA DE COLUNA TORACICA",
         "sigtap": "0207010056",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "RM_COLUNA_LOMBAR",
+        "topico": "RM",
         "nome": "RESSONANCIA MAGNETICA DE COLUNA LOMBO-SACRA",
         "sigtap": "0207010048",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "RM_MAMA",
+        "topico": "RM",
         "nome": "RESSONÂNCIA MAGNÉTICA DA MAMA",
         "sigtap": "0207020060",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "RM_ABDOMEN_SUPERIOR",
+        "topico": "RM",
         "nome": "RESSONANCIA MAGNETICA DE ABDOMEN SUPERIOR",
         "sigtap": "0207030014",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "RM_PELVE",
+        "topico": "RM",
         "nome": "RESSONANCIA MAGNETICA DE BACIA / PELVE / ABDOMEN INFERIOR",
         "sigtap": "0207030022",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "reto, colo"
       },
       {
         "id": "RM_PROSTATA_MP",
+        "topico": "RM",
         "nome": "RESSONÂNCIA MAGNÉTICA MULTIPARAMÉTRICA DA PRÓSTATA",
         "sigtap": "0207030057",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "COLANGIO_RM",
+        "topico": "RM",
         "nome": "RESSONANCIA MAGNETICA DE VIAS BILIARES/COLANGIORRESSONANCIA",
         "sigtap": "0207030049",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "ANGIO_RM_ENCEFALO",
+        "topico": "RM",
+        "nome": "ANGIORESSONANCIA CEREBRAL",
+        "sigtap": "0207010013",
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "CONTRASTE_RM",
+        "topico": "RM",
         "nome": "CONTRASTE PARA RESSONÂNCIA MAGNÉTICA",
         "sigtap": "0206030053",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "campo do pedido"
       },
       {
         "id": "USG_TIREOIDE",
+        "topico": "USG",
         "nome": "ULTRASSONOGRAFIA DE TIREOIDE",
         "sigtap": "0205020127",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "USG_ABDOMEN_SUPERIOR",
+        "topico": "USG",
         "nome": "ULTRASSONOGRAFIA DE ABDÔMEN SUPERIOR",
         "sigtap": "0205020038",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "USG_ABDOMEN_TOTAL",
+        "topico": "USG",
         "nome": "ULTRASSONOGRAFIA DE ABDOMEN TOTAL",
         "sigtap": "0205020046",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "USG_RINS_VIAS",
+        "topico": "USG",
         "nome": "ULTRASSONOGRAFIA DE APARELHO URINÁRIO",
         "sigtap": "0205020054",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "USG_PELVICA",
+        "topico": "USG",
         "nome": "ULTRASSONOGRAFIA PELVICA (GINECOLOGICA)",
         "sigtap": "0205020160",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "USG_TRANSVAGINAL",
+        "topico": "USG",
         "nome": "ULTRASSONOGRAFIA TRANSVAGINAL",
         "sigtap": "0205020186",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "USG_PROSTATA_TRANSRETAL",
+        "topico": "USG",
         "nome": "ULTRASSONOGRAFIA DE PROSTATA (VIA TRANSRETAL)",
         "sigtap": "0205020119",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "USG_BOLSA_ESCROTAL",
+        "topico": "USG",
         "nome": "ULTRASSONOGRAFIA DE BOLSA ESCROTAL",
         "sigtap": "0205020070",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "USG_TORAX",
+        "topico": "USG",
         "nome": "ULTRASSONOGRAFIA DE TORAX (EXTRACARDIACA)",
         "sigtap": "0205020135",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "derrame pleural"
       },
       {
         "id": "USG_MAMAS_BILATERAL",
+        "topico": "USG",
         "nome": "ULTRASSONOGRAFIA MAMARIA BILATERAL",
         "sigtap": "0205020097",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "inclui axilas na prática"
       },
       {
         "id": "USG_AXILAS",
+        "topico": "USG",
         "nome": "USG de axilas",
         "sigtap": null,
         "status": "SEM_CODIGO_SUS",
@@ -205,55 +242,71 @@
       },
       {
         "id": "USG_DOPPLER_VASOS",
+        "topico": "USG",
         "nome": "ULTRASSONOGRAFIA DOPPLER COLORIDO DE VASOS",
         "sigtap": "0205010040",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "região no texto do pedido (TVP, cervical)"
       },
       {
         "id": "MAMOGRAFIA_DIAGNOSTICA",
+        "topico": "MAMOGRAFIA",
         "nome": "MAMOGRAFIA",
         "sigtap": "0204030030",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "MAMOGRAFIA_RASTREAMENTO",
+        "topico": "MAMOGRAFIA",
+        "nome": "MAMOGRAFIA BILATERAL PARA RASTREAMENTO",
+        "sigtap": "0204030188",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "50-74 a, bienal, SISCAN"
       },
       {
         "id": "RX_TORAX_PA_PERFIL",
+        "topico": "RX",
         "nome": "RADIOGRAFIA DE TORAX (PA E PERFIL)",
         "sigtap": "0204030153",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "DENSITOMETRIA_OSSEA",
+        "topico": "DENSITOMETRIA",
         "nome": "DENSITOMETRIA OSSEA DUO-ENERGETICA DE COLUNA (VERTEBRAS LOMBARES E/OU FEMUR)",
         "sigtap": "0204060028",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "IA, ADT, corticoide"
       }
     ],
     "medicina_nuclear": [
       {
         "id": "CINTILOGRAFIA_OSSEA",
+        "topico": "MEDICINA_NUCLEAR",
         "nome": "CINTILOGRAFIA DE ESQUELETO (CORPO INTEIRO)",
         "sigtap": "0208050027",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "alternativa 0208050035 com fluxo"
       },
       {
         "id": "PCI_IODO",
+        "topico": "MEDICINA_NUCLEAR",
         "nome": "CINTILOGRAFIA P/ PESQUISA DO CORPO INTEIRO",
         "sigtap": "0208030042",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "pesquisa de corpo inteiro, tireoide"
       },
       {
         "id": "PET_CT_FDG",
+        "topico": "MEDICINA_NUCLEAR",
         "nome": "TOMOGRAFIA POR EMISSÃO DE PÓSITRONS (PET-CT)",
         "sigtap": "0206010095",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "indicações Conitec"
       },
       {
         "id": "PET_PSMA",
+        "topico": "MEDICINA_NUCLEAR",
         "nome": "PET-PSMA",
         "sigtap": null,
         "status": "SEM_CODIGO_SUS",
@@ -261,6 +314,7 @@
       },
       {
         "id": "PET_DOTATATE",
+        "topico": "MEDICINA_NUCLEAR",
         "nome": "PET com gálio-DOTATATE",
         "sigtap": null,
         "status": "SEM_CODIGO_SUS",
@@ -268,6 +322,7 @@
       },
       {
         "id": "OCTREOSCAN",
+        "topico": "MEDICINA_NUCLEAR",
         "nome": "Octreoscan",
         "sigtap": null,
         "status": "SEM_CODIGO_SUS",
@@ -277,54 +332,71 @@
     "endoscopia": [
       {
         "id": "EDA",
+        "topico": "ENDOSCOPIA",
         "nome": "ESOFAGOGASTRODUODENOSCOPIA",
         "sigtap": "0209010037",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "COLONOSCOPIA",
+        "topico": "ENDOSCOPIA",
         "nome": "COLONOSCOPIA (COLOSCOPIA)",
         "sigtap": "0209010029",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "RETOSSIGMOIDOSCOPIA",
+        "topico": "ENDOSCOPIA",
         "nome": "RETOSSIGMOIDOSCOPIA",
         "sigtap": "0209010053",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "CPRE",
+        "topico": "ENDOSCOPIA",
         "nome": "COLANGIOPANCREATOGRAFIA RETROGRADA (VIA ENDOSCÓPICA)",
         "sigtap": "0209010010",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "BRONCOSCOPIA",
+        "topico": "ENDOSCOPIA",
         "nome": "BRONCOSCOPIA (BRONCOFIBROSCOPIA)",
         "sigtap": "0209040017",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "CISTOSCOPIA",
+        "topico": "ENDOSCOPIA",
         "nome": "CISTOSCOPIA E/OU URETEROSCOPIA E/OU URETROSCOPIA",
         "sigtap": "0209020016",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "LARINGOSCOPIA",
+        "topico": "ENDOSCOPIA",
         "nome": "LARINGOSCOPIA",
         "sigtap": "0209040025",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "VIDEOLARINGOSCOPIA",
+        "topico": "ENDOSCOPIA",
         "nome": "VIDEOLARINGOSCOPIA",
         "sigtap": "0209040041",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "VIDEONASOLARINGOSCOPIA",
+        "topico": "ENDOSCOPIA",
+        "nome": "Videonasolaringoscopia",
+        "sigtap": null,
+        "status": "SEM_CODIGO_SUS",
+        "notas": "sem código SUS; próximo: videolaringoscopia"
       },
       {
         "id": "HISTEROSCOPIA_DIAGNOSTICA",
+        "topico": "ENDOSCOPIA",
         "nome": "Histeroscopia diagnóstica",
         "sigtap": null,
         "status": "SEM_CODIGO_SUS",
@@ -334,476 +406,551 @@
     "funcao_orgao": [
       {
         "id": "ECOCARDIOGRAMA",
+        "topico": "FUNCAO_ORGAO",
         "nome": "ECOCARDIOGRAFIA TRANSTORACICA",
         "sigtap": "0205010032",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "FEVE: antraciclina, anti-HER2"
       },
       {
         "id": "VENTRICULOGRAFIA_MUGA",
+        "topico": "FUNCAO_ORGAO",
         "nome": "CINTILOGRAFIA SINCRONIZADA DE CAMARAS CARDIACAS EM SITUACAO DE REPOUSO (VENTRICULOGRAFIA)",
         "sigtap": "0208010084",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "FEVE, alternativa ao eco"
       },
       {
         "id": "ECG",
+        "topico": "FUNCAO_ORGAO",
         "nome": "ELETROCARDIOGRAMA",
         "sigtap": "0211020036",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "QTc"
       },
       {
         "id": "ESPIROMETRIA",
+        "topico": "FUNCAO_ORGAO",
         "nome": "ESPIROMETRIA OU PROVA DE FUNCAO PULMONAR COMPLETA COM BRONCODILATADOR",
         "sigtap": "0211080055",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "bleomicina"
       },
       {
         "id": "AUDIOMETRIA_TONAL",
+        "topico": "FUNCAO_ORGAO",
         "nome": "AUDIOMETRIA TONAL LIMIAR (VIA AEREA / OSSEA)",
         "sigtap": "0211070041",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "cisplatina"
       }
     ],
     "biopsia_patologia": [
       {
         "id": "BIOPSIA_PERCUTANEA_GUIADA",
+        "topico": "COLETA",
         "nome": "BIOPSIA PERCUTÂNEA ORIENTADA POR TOMOGRAFIA COMPUTADORIZADA / ULTRASSONOGRAFIA / RESSONÂNCIA MAGNÉTICA / RAIO X",
         "sigtap": "0201010542",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "BIOPSIA_GANGLIO",
+        "topico": "COLETA",
         "nome": "BIOPSIA DE GANGLIO LINFATICO",
         "sigtap": "0201010224",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "BIOPSIA_MAMA",
+        "topico": "COLETA",
         "nome": "BIOPSIA/EXERESE DE NÓDULO DE MAMA",
         "sigtap": "0201010569",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "PAAF_TIREOIDE",
+        "topico": "COLETA",
         "nome": "BIOPSIA DE TIREOIDE OU PARATIREOIDE - PAAF",
         "sigtap": "0201010470",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "BIOPSIA_PLEURA",
+        "topico": "COLETA",
         "nome": "BIOPSIA DE PLEURA (POR ASPIRAÇÃO/AGULHA / PLEUROSCOPIA)",
         "sigtap": "0201010402",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "BIOPSIA_FIGADO_PUNCAO",
+        "topico": "COLETA",
         "nome": "BIOPSIA DE FIGADO POR PUNCAO",
         "sigtap": "0201010216",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "BIOPSIA_MEDULA",
+        "topico": "COLETA",
         "nome": "BIOPSIA DE MEDULA OSSEA",
         "sigtap": "0201010275",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "MIELOGRAMA",
+        "topico": "COLETA",
         "nome": "MIELOGRAMA",
         "sigtap": "0202090191",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "ANATOMOPATOLOGICO",
+        "topico": "PATOLOGIA",
         "nome": "EXAME ANATOMO-PATOLÓGICO PARA CONGELAMENTO / PARAFINA POR PEÇA CIRURGICA OU POR BIOPSIA (EXCETO COLO UTERINO E MAMA)",
         "sigtap": "0203020030",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "ANATOMOPATOLOGICO_MAMA_BIOPSIA",
+        "topico": "PATOLOGIA",
         "nome": "EXAME ANATOMOPATOLOGICO DE MAMA - BIOPSIA",
         "sigtap": "0203020065",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "IMUNOHISTOQUIMICA",
+        "topico": "PATOLOGIA",
         "nome": "IMUNOHISTOQUIMICA DE NEOPLASIAS MALIGNAS (POR MARCADOR)",
         "sigtap": "0203020049",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "por marcador"
       },
       {
         "id": "HER2_QUANTIFICACAO",
+        "topico": "PATOLOGIA",
         "nome": "QUANTIFICAÇÃO/AMPLIFICAÇÃO DO HER-2",
         "sigtap": "0202100049",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "FISH",
+        "topico": "PATOLOGIA",
         "nome": "FISH EM METÁFASE OU NÚCLEO INTERFÁSICO, POR DOENÇA",
         "sigtap": "0202100090",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "IMUNOFENOTIPAGEM",
+        "topico": "PATOLOGIA",
         "nome": "IMUNOFENOTIPAGEM DE HEMOPATIAS MALIGNAS (POR MARCADOR)",
         "sigtap": "0202030237",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       }
     ],
     "labs_ciclo": [
       {
         "id": "HEMOGRAMA",
+        "topico": "HEMATOLOGIA",
         "nome": "HEMOGRAMA COMPLETO",
         "sigtap": "0202020380",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "CREATININA",
+        "topico": "RENAL",
         "nome": "DOSAGEM DE CREATININA",
         "sigtap": "0202010317",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "UREIA",
+        "topico": "RENAL",
         "nome": "DOSAGEM DE UREIA",
         "sigtap": "0202010694",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TGO",
+        "topico": "HEPATICO",
         "nome": "DOSAGEM DE TRANSAMINASE GLUTAMICO-OXALACETICA (TGO)",
         "sigtap": "0202010643",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TGP",
+        "topico": "HEPATICO",
         "nome": "DOSAGEM DE TRANSAMINASE GLUTAMICO-PIRUVICA (TGP)",
         "sigtap": "0202010651",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "BILIRRUBINA",
+        "topico": "HEPATICO",
         "nome": "DOSAGEM DE BILIRRUBINA TOTAL E FRACOES",
         "sigtap": "0202010201",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "FOSFATASE_ALCALINA",
+        "topico": "HEPATICO",
         "nome": "DOSAGEM DE FOSFATASE ALCALINA",
         "sigtap": "0202010422",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "GAMA_GT",
+        "topico": "HEPATICO",
         "nome": "DOSAGEM DE GAMA-GLUTAMIL-TRANSFERASE (GAMA GT)",
         "sigtap": "0202010465",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "SODIO",
+        "topico": "ELETROLITOS_METABOLICO",
         "nome": "DOSAGEM DE SODIO",
         "sigtap": "0202010635",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "POTASSIO",
+        "topico": "ELETROLITOS_METABOLICO",
         "nome": "DOSAGEM DE POTASSIO",
         "sigtap": "0202010600",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "MAGNESIO",
+        "topico": "ELETROLITOS_METABOLICO",
         "nome": "DOSAGEM DE MAGNESIO",
         "sigtap": "0202010562",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "CALCIO",
+        "topico": "ELETROLITOS_METABOLICO",
         "nome": "DOSAGEM DE CALCIO",
         "sigtap": "0202010210",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "CALCIO_IONICO",
+        "topico": "ELETROLITOS_METABOLICO",
         "nome": "DOSAGEM DE CALCIO IONIZAVEL",
         "sigtap": "0202010228",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "FOSFORO",
+        "topico": "ELETROLITOS_METABOLICO",
         "nome": "DOSAGEM DE FOSFORO",
         "sigtap": "0202010430",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "ACIDO_URICO",
+        "topico": "ELETROLITOS_METABOLICO",
         "nome": "DOSAGEM DE ACIDO URICO",
         "sigtap": "0202010120",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "lise tumoral"
       },
       {
         "id": "DHL",
+        "topico": "ELETROLITOS_METABOLICO",
         "nome": "DOSAGEM DE DESIDROGENASE LATICA",
         "sigtap": "0202010368",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "PROTEINAS_TOTAIS_FRACOES",
+        "topico": "HEPATICO",
         "nome": "DOSAGEM DE PROTEINAS TOTAIS E FRACOES",
         "sigtap": "0202010627",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "albumina"
       },
       {
         "id": "GLICEMIA",
+        "topico": "ELETROLITOS_METABOLICO",
         "nome": "DOSAGEM DE GLICOSE",
         "sigtap": "0202010473",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TAP",
+        "topico": "HEMATOLOGIA",
         "nome": "DETERMINAÇÃO DE TEMPO E ATIVIDADE DA PROTROMBINA (TAP)",
         "sigtap": "0202020142",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TTPA",
+        "topico": "HEMATOLOGIA",
         "nome": "DETERMINAÇÃO DE TEMPO DE TROMBOPLASTINA PARCIAL ATIVADA (TTP ATIVADA)",
         "sigtap": "0202020134",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "URINA_TIPO_I",
+        "topico": "RENAL",
         "nome": "ANALISE DE CARACTERES FISICOS, ELEMENTOS E SEDIMENTO DA URINA",
         "sigtap": "0202050017",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "PROTEINURIA_24H",
+        "topico": "RENAL",
         "nome": "DOSAGEM DE PROTEINAS (URINA DE 24 HORAS)",
         "sigtap": "0202050114",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "bevacizumabe"
       },
       {
         "id": "CLEARANCE_CREATININA",
+        "topico": "RENAL",
         "nome": "CLEARANCE DE CREATININA",
         "sigtap": "0202050025",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       }
     ],
     "labs_suporte": [
       {
         "id": "HBA1C",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE HEMOGLOBINA GLICOSILADA",
         "sigtap": "0202010503",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "COLESTEROL_TOTAL",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE COLESTEROL TOTAL",
         "sigtap": "0202010295",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "COLESTEROL_HDL",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE COLESTEROL HDL",
         "sigtap": "0202010279",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "COLESTEROL_LDL",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE COLESTEROL LDL",
         "sigtap": "0202010287",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TRIGLICERIDEOS",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE TRIGLICERIDEOS",
         "sigtap": "0202010678",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "AMILASE",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE AMILASE",
         "sigtap": "0202010180",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "LIPASE",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE LIPASE",
         "sigtap": "0202010554",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "FIBRINOGENIO",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE FIBRINOGENIO",
         "sigtap": "0202020290",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "PCR",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE PROTEINA C REATIVA",
         "sigtap": "0202030202",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "BNP",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE PEPTÍDEOS NATRIURÉTICOS TIPO B (BNP E NT-PROBNP)",
         "sigtap": "0202010791",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TROPONINA",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE TROPONINA",
         "sigtap": "0202031209",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "FERRITINA",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE FERRITINA",
         "sigtap": "0202010384",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "FERRO_SERICO",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE FERRO SERICO",
         "sigtap": "0202010392",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TRANSFERRINA",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE TRANSFERRINA",
         "sigtap": "0202010660",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "VITAMINA_B12",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE VITAMINA B12",
         "sigtap": "0202010708",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "FOLATO",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE FOLATO",
         "sigtap": "0202010406",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "VITAMINA_D",
+        "topico": "LABS_SUPORTE",
         "nome": "DOSAGEM DE 25 HIDROXIVITAMINA D",
         "sigtap": "0202010767",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "RETICULOCITOS",
+        "topico": "LABS_SUPORTE",
         "nome": "CONTAGEM DE RETICULOCITOS",
         "sigtap": "0202020037",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       }
     ],
     "sorologias_pre_qt": [
       {
         "id": "HBSAG",
+        "topico": "SOROLOGIAS_PRE_QT",
         "nome": "PESQUISA LABORATORIAL DE ANTÍGENO DE SUPERFÍCIE DO VÍRUS DA HEPATITE B (HBSAG) PARA POPULAÇÃO GERAL (EXCETO GESTANTE, PARCEIRO OU PARCERIA)",
         "sigtap": "0202031446",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "ANTI_HBC_TOTAL",
+        "topico": "SOROLOGIAS_PRE_QT",
         "nome": "PESQUISA DE ANTICORPOS IGG E IGM CONTRA ANTIGENO CENTRAL DO VIRUS DA HEPATITE B (ANTI-HBC-TOTAL)",
         "sigtap": "0202030784",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "ANTI_HBS",
+        "topico": "SOROLOGIAS_PRE_QT",
         "nome": "PESQUISA DE ANTICORPOS CONTRA ANTIGENO DE SUPERFICIE DO VIRUS DA HEPATITE B (ANTI-HBS)",
         "sigtap": "0202030636",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "ANTI_HCV",
+        "topico": "SOROLOGIAS_PRE_QT",
         "nome": "PESQUISA LABORATORIAL DE ANTICORPOS CONTRA O VÍRUS DA HEPATITE C (ANTI-HCV) PARA POPULAÇÃO GERAL (EXCETO GESTANTE, PARCEIRO OU PARCERIA)",
         "sigtap": "0202031470",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "HIV",
+        "topico": "SOROLOGIAS_PRE_QT",
         "nome": "PESQUISA LABORATORIAL DE ANTÍGENOS DE HIV E/OU ANTICORPOS ANTI-HIV-1 OU ANTI-HIV-2 PARA POPULAÇÃO GERAL (EXCETO GESTANTE, PARCEIRO OU PARCERIA)",
         "sigtap": "0202031500",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       }
     ],
     "endocrino": [
       {
         "id": "TSH",
+        "topico": "ENDOCRINO",
         "nome": "DOSAGEM DE HORMONIO TIREOESTIMULANTE (TSH)",
         "sigtap": "0202060250",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "T4_LIVRE",
+        "topico": "ENDOCRINO",
         "nome": "DOSAGEM DE TIROXINA LIVRE (T4 LIVRE)",
         "sigtap": "0202060381",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "CORTISOL",
+        "topico": "ENDOCRINO",
         "nome": "DOSAGEM DE CORTISOL",
         "sigtap": "0202060136",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "imunoterapia"
       },
       {
         "id": "PTH",
+        "topico": "ENDOCRINO",
         "nome": "DOSAGEM DE PARATORMONIO",
         "sigtap": "0202060276",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "FSH",
+        "topico": "ENDOCRINO",
         "nome": "DOSAGEM DE HORMONIO FOLICULO-ESTIMULANTE (FSH)",
         "sigtap": "0202060233",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "LH",
+        "topico": "ENDOCRINO",
         "nome": "DOSAGEM DE HORMONIO LUTEINIZANTE (LH)",
         "sigtap": "0202060241",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "ESTRADIOL",
+        "topico": "ENDOCRINO",
         "nome": "DOSAGEM DE ESTRADIOL",
         "sigtap": "0202060160",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "TESTOSTERONA_TOTAL",
+        "topico": "ENDOCRINO",
         "nome": "DOSAGEM DE TESTOSTERONA",
         "sigtap": "0202060349",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "notas": "castração"
       },
       {
         "id": "TESTOSTERONA_LIVRE",
+        "topico": "ENDOCRINO",
         "nome": "DOSAGEM DE TESTOSTERONA LIVRE",
         "sigtap": "0202060357",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       }
     ],
     "marcadores_tumorais": [
       {
         "id": "CEA",
+        "topico": "MARCADORES_TUMORAIS",
         "nome": "PESQUISA DE ANTIGENO CARCINOEMBRIONARIO (CEA)",
         "sigtap": "0202030962",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "tumores": [
           "colon",
           "reto",
@@ -813,27 +960,30 @@
       },
       {
         "id": "PSA_TOTAL",
+        "topico": "MARCADORES_TUMORAIS",
         "nome": "DOSAGEM DE ANTIGENO PROSTATICO ESPECIFICO (PSA)",
         "sigtap": "0202030105",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "tumores": [
           "prostata"
         ]
       },
       {
         "id": "CA125",
+        "topico": "MARCADORES_TUMORAIS",
         "nome": "DOSAGEM DO ANTÍGENO CA 125",
         "sigtap": "0202031217",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "tumores": [
           "ovario"
         ]
       },
       {
         "id": "AFP",
+        "topico": "MARCADORES_TUMORAIS",
         "nome": "DOSAGEM DE ALFA-FETOPROTEINA",
         "sigtap": "0202030091",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "tumores": [
           "figado",
           "germinativo"
@@ -841,9 +991,10 @@
       },
       {
         "id": "BETA_HCG",
+        "topico": "MARCADORES_TUMORAIS",
         "nome": "DOSAGEM DE GONADOTROFINA CORIONICA HUMANA (HCG, BETA HCG)",
         "sigtap": "0202060217",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "tumores": [
           "germinativo",
           "trofoblastico"
@@ -851,36 +1002,40 @@
       },
       {
         "id": "TIREOGLOBULINA",
+        "topico": "MARCADORES_TUMORAIS",
         "nome": "DOSAGEM DE TIREOGLOBULINA",
         "sigtap": "0202060365",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "tumores": [
           "tireoide"
         ]
       },
       {
         "id": "CALCITONINA",
+        "topico": "MARCADORES_TUMORAIS",
         "nome": "DOSAGEM DE CALCITONINA",
         "sigtap": "0202060128",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "tumores": [
           "tireoide_medular"
         ]
       },
       {
         "id": "ACIDO_5HIAA",
+        "topico": "MARCADORES_TUMORAIS",
         "nome": "DOSAGEM DE ACIDO 5-HIDROXI-INDOL-ACETICO (SEROTONINA)",
         "sigtap": "0202060071",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "tumores": [
           "neuroendocrino"
         ]
       },
       {
         "id": "BETA2_MICROGLOBULINA",
+        "topico": "MARCADORES_TUMORAIS",
         "nome": "DOSAGEM DE BETA-2-MICROGLOBULINA",
         "sigtap": "0202030113",
-        "status": "RASCUNHO",
+        "status": "VERIFICADO_SIGTAP",
         "tumores": [
           "mieloma",
           "linfoma"
@@ -888,6 +1043,7 @@
       },
       {
         "id": "CA153",
+        "topico": "MARCADORES_TUMORAIS",
         "nome": "CA 15-3",
         "sigtap": null,
         "status": "SEM_CODIGO_SUS",
@@ -898,6 +1054,7 @@
       },
       {
         "id": "CA199",
+        "topico": "MARCADORES_TUMORAIS",
         "nome": "CA 19-9",
         "sigtap": null,
         "status": "SEM_CODIGO_SUS",
@@ -909,6 +1066,7 @@
       },
       {
         "id": "PSA_LIVRE",
+        "topico": "MARCADORES_TUMORAIS",
         "nome": "PSA livre",
         "sigtap": null,
         "status": "SEM_CODIGO_SUS",
@@ -921,21 +1079,24 @@
     "mieloma": [
       {
         "id": "ELETROFORESE_PROTEINAS",
+        "topico": "MIELOMA",
         "nome": "ELETROFORESE DE PROTEINAS",
         "sigtap": "0202010724",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "IMUNOELETROFORESE",
+        "topico": "MIELOMA",
         "nome": "IMUNOELETROFORESE DE PROTEINAS",
         "sigtap": "0202030229",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       },
       {
         "id": "CADEIAS_LEVES",
+        "topico": "MIELOMA",
         "nome": "PESQUISA DE CADEIAS LEVES KAPPA E LAMBDA",
         "sigtap": "0202050181",
-        "status": "RASCUNHO"
+        "status": "VERIFICADO_SIGTAP"
       }
     ]
   }
