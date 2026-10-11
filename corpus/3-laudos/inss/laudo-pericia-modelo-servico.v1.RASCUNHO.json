@@ -1,0 +1,291 @@
+{
+  "header": {
+    "id": "laudo-pericia-modelo-servico",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Modelo do serviço: C:/Users/silas/OneDrive/ONCOMED/Dev-oncoMed/Templates/[C] Template - Laudo para Pericia Medica.docx (15/04/2026), convertido pelo Claude em 11/10/2026 por ordem do Dr. Silas",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "papel": "Modelo de forma (ordem das seções e campos) do laudo pericial do serviço. Complementa, sem substituir, corpus/3-laudos/inss/laudo-inss.v1.RASCUNHO.json (base legal) e corpus/templates/kit/relatorio-pericial.v1.json.",
+  "cabecalho": {
+    "origem": "CONFIG",
+    "campos": [
+      {
+        "id": "servico.nome",
+        "rotulo": "Serviço"
+      },
+      {
+        "id": "medico.nome",
+        "rotulo": "Médico"
+      },
+      {
+        "id": "medico.crm",
+        "rotulo": "CRM/UF"
+      },
+      {
+        "id": "medico.rqe",
+        "rotulo": "RQE"
+      }
+    ],
+    "nota": "O modelo original traz 'HOSPITAL DO BEM | CRM-SP XXXXX' fixo. Serviço e registro do médico saem de configuração, nunca de texto fixo.",
+    "pendencia": "DECISAO_DR_SILAS: serviço e CRM/UF oficiais (SP × PB)"
+  },
+  "secoes": [
+    {
+      "id": "identificacao",
+      "titulo": "Identificação do paciente",
+      "campos": [
+        {
+          "id": "paciente.nome",
+          "rotulo": "Nome completo",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "prontuario.identificacao.nome"
+        },
+        {
+          "id": "paciente.nascimento",
+          "rotulo": "Data de nascimento",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "prontuario.identificacao.nascimento"
+        },
+        {
+          "id": "paciente.cpf",
+          "rotulo": "CPF",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "prontuario.identificacao.cpf"
+        },
+        {
+          "id": "paciente.cns",
+          "rotulo": "Cartão Nacional de Saúde",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "prontuario.identificacao.cns",
+          "nota": "Acrescentado: ausente no modelo; o SUS identifica pelo CNS."
+        },
+        {
+          "id": "paciente.rg",
+          "rotulo": "RG",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "prontuario.identificacao.rg"
+        },
+        {
+          "id": "paciente.endereco",
+          "rotulo": "Endereço",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "prontuario.identificacao.endereco"
+        }
+      ]
+    },
+    {
+      "id": "destino",
+      "titulo": "Destinatário e finalidade",
+      "campos": [
+        {
+          "id": "destinatario",
+          "rotulo": "Destinatário",
+          "origem": "DECISAO_MEDICA",
+          "opcoes": [
+            "INSS — Perícia Médica Federal",
+            "Caixa (FGTS)",
+            "Receita Federal (isenção de IR)",
+            "Outro"
+          ],
+          "nota": "Acrescentado: ausente no modelo."
+        },
+        {
+          "id": "finalidade",
+          "rotulo": "Finalidade",
+          "origem": "DECISAO_MEDICA"
+        }
+      ]
+    },
+    {
+      "id": "diagnostico",
+      "titulo": "Diagnóstico",
+      "campos": [
+        {
+          "id": "dx.descricao",
+          "rotulo": "Diagnóstico oncológico",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "tumor.diagnostico"
+        },
+        {
+          "id": "dx.cid10",
+          "rotulo": "CID-10",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "tumor.cid10"
+        },
+        {
+          "id": "dx.estadiamento",
+          "rotulo": "Estadiamento (sistema e edição)",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "tumor.estadiamento"
+        },
+        {
+          "id": "dx.data",
+          "rotulo": "Data do diagnóstico (laudo patológico)",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "patologia.dataLaudo"
+        },
+        {
+          "id": "dx.sitioPrimario",
+          "rotulo": "Sítio primário",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "tumor.sitio"
+        },
+        {
+          "id": "dx.metastases",
+          "rotulo": "Metástases",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "tumor.metastases"
+        }
+      ]
+    },
+    {
+      "id": "tratamento",
+      "titulo": "Histórico clínico e tratamento",
+      "campos": [
+        {
+          "id": "hist.resumo",
+          "rotulo": "Resumo da evolução e tratamentos",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "resumoLongitudinal.texto",
+          "nota": "Gerado do resumo longitudinal (AJ6); o médico confere."
+        },
+        {
+          "id": "trat.atual",
+          "rotulo": "Tratamento atual",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "prescricao.vigente.esquema"
+        },
+        {
+          "id": "trat.ciclos",
+          "rotulo": "Ciclos realizados",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "prescricao.vigente.ciclosRealizados"
+        },
+        {
+          "id": "trat.resposta",
+          "rotulo": "Resposta ao tratamento",
+          "origem": "DECISAO_MEDICA"
+        }
+      ]
+    },
+    {
+      "id": "funcional",
+      "titulo": "Situação funcional",
+      "campos": [
+        {
+          "id": "ecog",
+          "rotulo": "ECOG",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "consulta.ecog",
+          "opcoes": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "id": "toxicidades",
+          "rotulo": "Toxicidades limitantes vigentes (CTCAE v6)",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "toxicidade.vigente",
+          "nota": "Acrescentado: liga ao pilar 5-ctcae-acao."
+        },
+        {
+          "id": "data.inicioDoenca",
+          "rotulo": "Data de início da doença (DID)",
+          "origem": "DECISAO_MEDICA",
+          "nota": "Acrescentado: ausente no modelo."
+        },
+        {
+          "id": "data.inicioIncapacidade",
+          "rotulo": "Data de início da incapacidade (DII)",
+          "origem": "DECISAO_MEDICA",
+          "nota": "Acrescentado: ausente no modelo."
+        },
+        {
+          "id": "capacidadeLaborativa",
+          "rotulo": "Capacidade laborativa",
+          "origem": "DECISAO_MEDICA",
+          "opcoes": [
+            "Mantida",
+            "Parcialmente comprometida",
+            "Ausente"
+          ]
+        },
+        {
+          "id": "periodoIncapacidade",
+          "rotulo": "Período de incapacidade estimado",
+          "origem": "DECISAO_MEDICA"
+        },
+        {
+          "id": "acompanhante",
+          "rotulo": "Necessita de acompanhante permanente?",
+          "origem": "DECISAO_MEDICA",
+          "opcoes": [
+            "sim",
+            "não"
+          ],
+          "nota": "Acrescentado: ausente no modelo."
+        },
+        {
+          "id": "prognostico",
+          "rotulo": "Prognóstico",
+          "origem": "DECISAO_MEDICA"
+        }
+      ]
+    },
+    {
+      "id": "conclusao",
+      "titulo": "Conclusão",
+      "campos": [
+        {
+          "id": "conclusao",
+          "rotulo": "Conclusão",
+          "origem": "DECISAO_MEDICA",
+          "nota": "O app nunca escreve a conclusão pericial."
+        }
+      ]
+    }
+  ],
+  "assinatura": {
+    "id": "assinatura",
+    "origem": "CONFIG",
+    "campos": [
+      "medico.nome",
+      "medico.crm",
+      "medico.rqe",
+      "local",
+      "data",
+      "assinatura_carimbo"
+    ]
+  },
+  "portas": {
+    "consome": [
+      "prontuario.identificacao",
+      "tumor",
+      "patologia",
+      "prescricao.vigente",
+      "toxicidade.vigente",
+      "resumoLongitudinal"
+    ],
+    "oferece": [
+      "documento.laudoPericial"
+    ]
+  },
+  "pendencias": [
+    "Validade do documento por finalidade: DECISAO_DR_SILAS.",
+    "Base legal: herdar de laudo-inss.v1.RASCUNHO.json (não duplicar aqui)."
+  ]
+}

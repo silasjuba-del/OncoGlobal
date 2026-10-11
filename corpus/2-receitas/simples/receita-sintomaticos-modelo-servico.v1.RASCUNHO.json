@@ -1,0 +1,175 @@
+{
+  "header": {
+    "id": "receita-sintomaticos-modelo-servico",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Modelo do serviço: C:/Users/silas/OneDrive/ONCOMED/Dev-oncoMed/Templates/[C] Template - Receita de Sintomaticos.docx (15/04/2026), convertido pelo Claude em 11/10/2026 por ordem do Dr. Silas",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "papel": "Forma da receita do serviço. O modelo original é só linhas em branco; aqui cada item vira estrutura ligada a classe, interação e contraindicação. Nenhuma droga ou dose nasce deste arquivo.",
+  "cabecalho": {
+    "origem": "CONFIG",
+    "campos": [
+      {
+        "id": "servico.nome",
+        "rotulo": "Serviço"
+      },
+      {
+        "id": "medico.nome",
+        "rotulo": "Médico"
+      },
+      {
+        "id": "medico.crm",
+        "rotulo": "CRM/UF"
+      },
+      {
+        "id": "medico.rqe",
+        "rotulo": "RQE"
+      }
+    ],
+    "nota": "O modelo original traz 'HOSPITAL DO BEM | CRM-SP XXXXX' fixo. Serviço e registro do médico saem de configuração, nunca de texto fixo.",
+    "pendencia": "DECISAO_DR_SILAS: serviço e CRM/UF oficiais (SP × PB)"
+  },
+  "campos": [
+    {
+      "id": "paciente.nome",
+      "rotulo": "Paciente",
+      "origem": "FATO_CONFIRMADO",
+      "porta": "prontuario.identificacao.nome"
+    },
+    {
+      "id": "paciente.nascimento",
+      "rotulo": "Data de nascimento",
+      "origem": "FATO_CONFIRMADO",
+      "porta": "prontuario.identificacao.nascimento"
+    },
+    {
+      "id": "paciente.endereco",
+      "rotulo": "Endereço",
+      "origem": "FATO_CONFIRMADO",
+      "porta": "prontuario.identificacao.endereco",
+      "nota": "Acrescentado: obrigatório em receita de controle especial (Portaria SVS/MS 344/98)."
+    },
+    {
+      "id": "prontuario.numero",
+      "rotulo": "Prontuário",
+      "origem": "FATO_CONFIRMADO",
+      "porta": "prontuario.numero"
+    },
+    {
+      "id": "dx.cid10",
+      "rotulo": "Diagnóstico (CID)",
+      "origem": "FATO_CONFIRMADO",
+      "porta": "tumor.cid10"
+    },
+    {
+      "id": "data",
+      "rotulo": "Data",
+      "origem": "CONFIG"
+    }
+  ],
+  "itemPrescricao": {
+    "campos": [
+      {
+        "id": "droga",
+        "rotulo": "Medicamento (genérico)",
+        "origem": "DECISAO_MEDICA",
+        "porta": "2-receitas/classes (id da classe)"
+      },
+      {
+        "id": "apresentacao",
+        "rotulo": "Apresentação",
+        "origem": "DECISAO_MEDICA"
+      },
+      {
+        "id": "via",
+        "rotulo": "Via",
+        "origem": "DECISAO_MEDICA",
+        "opcoes": [
+          "VO",
+          "SL",
+          "SC",
+          "IM",
+          "EV",
+          "tópica",
+          "retal"
+        ]
+      },
+      {
+        "id": "posologia",
+        "rotulo": "Dose e intervalo",
+        "origem": "DECISAO_MEDICA"
+      },
+      {
+        "id": "duracao",
+        "rotulo": "Duração / uso contínuo",
+        "origem": "DECISAO_MEDICA",
+        "nota": "Acrescentado: ausente no modelo."
+      },
+      {
+        "id": "quantidade",
+        "rotulo": "Quantidade a dispensar",
+        "origem": "DECISAO_MEDICA"
+      },
+      {
+        "id": "controle344",
+        "rotulo": "Lista de controle especial",
+        "origem": "FATO_CONFIRMADO",
+        "porta": "2-receitas/classes.controle344",
+        "nota": "Define o tipo de receituário (comum, C1, B1, A)."
+      },
+      {
+        "id": "orientacao",
+        "rotulo": "Orientação ao paciente (1 frase)",
+        "origem": "DECISAO_MEDICA"
+      }
+    ],
+    "agrupamento": [
+      "via oral",
+      "endovenosa / subcutânea"
+    ]
+  },
+  "checagemAntesDeImprimir": [
+    "4-interacoes-contraindicacoes (droga × medicamentos reconciliados)",
+    "4-interacoes-contraindicacoes (droga × comorbidade, alergia, função renal/hepática)",
+    "prescricao.proposta (esquema de QT vigente)"
+  ],
+  "assinatura": {
+    "id": "assinatura",
+    "origem": "CONFIG",
+    "campos": [
+      "medico.nome",
+      "medico.crm",
+      "medico.rqe",
+      "local",
+      "data",
+      "assinatura_carimbo"
+    ]
+  },
+  "portas": {
+    "consome": [
+      "2-receitas/classes",
+      "4-interacoes-contraindicacoes",
+      "medicamentos.reconciliados",
+      "alergias",
+      "lab.CREATININA/CLEARANCE"
+    ],
+    "oferece": [
+      "documento.receita",
+      "medicamentos.reconciliados (novo item)"
+    ]
+  },
+  "pendencias": [
+    "Receituário separado por lista de controle especial (C1/B1/A): regra de impressão.",
+    "Doses de sintomáticos só com fonte (frente de receitas; 50 receitas externas em NO-GO do Codex)."
+  ]
+}

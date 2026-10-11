@@ -1,0 +1,486 @@
+{
+  "header": {
+    "id": "resumo-prontuario-modelo-servico",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Modelo do serviço: C:/Users/silas/OneDrive/ONCOMED/Dev-oncoMed/Templates/[C] Template - Resumo para Prontuario Medico.docx (15/04/2026), convertido pelo Claude em 11/10/2026 por ordem do Dr. Silas",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "papel": "Esqueleto do resumo do caso. É a fonte de campos do pedido de imagem com resumo do caso (corpus/1-exames/rads/pedido-imagem-resumo-caso.v1.RASCUNHO.json, D-F1-04) e do PRONTUÁRIO DRIVE em 3 seções (identificação, clínico atual, documentos).",
+  "cabecalho": {
+    "origem": "CONFIG",
+    "campos": [
+      {
+        "id": "servico.nome",
+        "rotulo": "Serviço"
+      },
+      {
+        "id": "medico.nome",
+        "rotulo": "Médico"
+      },
+      {
+        "id": "medico.crm",
+        "rotulo": "CRM/UF"
+      },
+      {
+        "id": "medico.rqe",
+        "rotulo": "RQE"
+      }
+    ],
+    "nota": "O modelo original traz 'HOSPITAL DO BEM | CRM-SP XXXXX' fixo. Serviço e registro do médico saem de configuração, nunca de texto fixo.",
+    "pendencia": "DECISAO_DR_SILAS: serviço e CRM/UF oficiais (SP × PB)"
+  },
+  "secoes": [
+    {
+      "id": "identificacao",
+      "titulo": "Identificação",
+      "campos": [
+        {
+          "id": "paciente.nome",
+          "rotulo": "Nome",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "prontuario.identificacao.nome"
+        },
+        {
+          "id": "paciente.nascimento",
+          "rotulo": "Data de nascimento",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "prontuario.identificacao.nascimento"
+        },
+        {
+          "id": "paciente.cns",
+          "rotulo": "CNS",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "prontuario.identificacao.cns",
+          "nota": "Substitui 'Plano de saúde / Convênio' do modelo (contexto SUS)."
+        },
+        {
+          "id": "prontuario.numero",
+          "rotulo": "Prontuário",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "prontuario.numero"
+        },
+        {
+          "id": "consulta.data",
+          "rotulo": "Data da consulta",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "consulta.data"
+        }
+      ]
+    },
+    {
+      "id": "tumor",
+      "titulo": "Diagnóstico",
+      "campos": [
+        {
+          "id": "dx.descricao",
+          "rotulo": "Diagnóstico oncológico",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "tumor.diagnostico"
+        },
+        {
+          "id": "dx.estadiamento",
+          "rotulo": "Estadiamento (sistema e edição)",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "tumor.estadiamento"
+        },
+        {
+          "id": "dx.cid10",
+          "rotulo": "CID-10",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "tumor.cid10"
+        },
+        {
+          "id": "tumor.pack",
+          "rotulo": "Pack do tumor aplicado",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "6-pack-tumor (id)",
+          "nota": "Liga o resumo ao pack: o que falta do pack aparece como pendência."
+        }
+      ]
+    },
+    {
+      "id": "clinico",
+      "titulo": "Dados clínicos",
+      "campos": [
+        {
+          "id": "comorbidades",
+          "rotulo": "Comorbidades (estruturadas)",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "comorbidades",
+          "opcoes": [
+            "HAS",
+            "DM",
+            "Cardiopatia",
+            "DPOC",
+            "DRC",
+            "Hepatopatia",
+            "Outra"
+          ]
+        },
+        {
+          "id": "medicamentos",
+          "rotulo": "Medicamentos em uso (reconciliados)",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "medicamentos.reconciliados"
+        },
+        {
+          "id": "alergias",
+          "rotulo": "Alergias",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "alergias"
+        },
+        {
+          "id": "cirurgias",
+          "rotulo": "Cirurgias prévias",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "historico.cirurgias"
+        },
+        {
+          "id": "historiaFamiliar",
+          "rotulo": "História familiar oncológica",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "historico.familiar"
+        },
+        {
+          "id": "ecog",
+          "rotulo": "ECOG",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "consulta.ecog",
+          "opcoes": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "id": "antropometria",
+          "rotulo": "Peso, altura e superfície corporal",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "consulta.antropometria",
+          "nota": "Acrescentado: necessário para dose e para o alerta de peso."
+        },
+        {
+          "id": "tratamentosPrevios",
+          "rotulo": "Linhas de tratamento prévias",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "resumoLongitudinal.linhas",
+          "nota": "Acrescentado."
+        },
+        {
+          "id": "doseCumulativa",
+          "rotulo": "Dose acumulada (antraciclina, platina, bleomicina)",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "rulesets/cumulativo-tetos",
+          "nota": "Acrescentado (D-F0C-08)."
+        },
+        {
+          "id": "segurancaBasal",
+          "rotulo": "FEVE, sorologias HBV, DPYD",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "4-interacoes-contraindicacoes / labs-por-esquema",
+          "nota": "Acrescentado: pendências basais pré-QT agrupadas (L10)."
+        },
+        {
+          "id": "toxicidadeVigente",
+          "rotulo": "Toxicidade vigente (CTCAE v6)",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "toxicidade.vigente",
+          "nota": "Acrescentado."
+        }
+      ]
+    },
+    {
+      "id": "patologia",
+      "titulo": "Anatomopatológico e molecular",
+      "campos": [
+        {
+          "id": "ap.data",
+          "rotulo": "Data e número do laudo",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "patologia.laudo"
+        },
+        {
+          "id": "ap.resultado",
+          "rotulo": "Resultado (subtipo, grau)",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "patologia.subtipo"
+        },
+        {
+          "id": "ap.marcadores",
+          "rotulo": "Marcadores",
+          "origem": "FATO_CONFIRMADO",
+          "porta": "patologia.marcadores[]",
+          "estrutura": {
+            "alvo": "texto",
+            "metodo": [
+              "H&E",
+              "IHQ",
+              "FISH/CISH",
+              "PCR",
+              "NGS"
+            ],
+            "resultado": "texto",
+            "data": "data",
+            "laboratorio": "texto"
+          },
+          "nota": "O modelo tinha 'Imuno-histoquímica' e 'Biologia molecular/NGS' em uma linha cada; aqui é um item por marcador e método."
+        }
+      ]
+    },
+    {
+      "id": "imagem",
+      "titulo": "Exames de imagem",
+      "tabela": [
+        {
+          "catalogoId": "TC_TORAX",
+          "rotulo": "TC de tórax",
+          "campos": [
+            "data",
+            "resumoLaudo"
+          ],
+          "porta": "exames.realizados[TC_TORAX]"
+        },
+        {
+          "catalogoId": "TC_ABDOMEN_SUPERIOR",
+          "rotulo": "TC de abdome",
+          "campos": [
+            "data",
+            "resumoLaudo"
+          ],
+          "porta": "exames.realizados[TC_ABDOMEN_SUPERIOR]"
+        },
+        {
+          "catalogoId": "TC_PELVE",
+          "rotulo": "TC de pelve",
+          "campos": [
+            "data",
+            "resumoLaudo"
+          ],
+          "porta": "exames.realizados[TC_PELVE]"
+        },
+        {
+          "catalogoId": "RM_CRANIO",
+          "rotulo": "RM (região a definir)",
+          "campos": [
+            "data",
+            "resumoLaudo"
+          ],
+          "porta": "exames.realizados[RM_CRANIO]"
+        },
+        {
+          "catalogoId": "PET_CT_FDG",
+          "rotulo": "PET-CT",
+          "campos": [
+            "data",
+            "resumoLaudo"
+          ],
+          "porta": "exames.realizados[PET_CT_FDG]"
+        },
+        {
+          "catalogoId": "CINTILOGRAFIA_OSSEA",
+          "rotulo": "Cintilografia óssea",
+          "campos": [
+            "data",
+            "resumoLaudo"
+          ],
+          "porta": "exames.realizados[CINTILOGRAFIA_OSSEA]"
+        }
+      ]
+    },
+    {
+      "id": "laboratorio",
+      "titulo": "Exames laboratoriais",
+      "tabela": [
+        {
+          "catalogoId": "HEMOGRAMA",
+          "campos": [
+            "resultado",
+            "unidade",
+            "referencia",
+            "data"
+          ],
+          "porta": "labs[HEMOGRAMA]"
+        },
+        {
+          "catalogoId": "UREIA",
+          "campos": [
+            "resultado",
+            "unidade",
+            "referencia",
+            "data"
+          ],
+          "porta": "labs[UREIA]"
+        },
+        {
+          "catalogoId": "CREATININA",
+          "campos": [
+            "resultado",
+            "unidade",
+            "referencia",
+            "data"
+          ],
+          "porta": "labs[CREATININA]"
+        },
+        {
+          "catalogoId": "TGO",
+          "campos": [
+            "resultado",
+            "unidade",
+            "referencia",
+            "data"
+          ],
+          "porta": "labs[TGO]"
+        },
+        {
+          "catalogoId": "TGP",
+          "campos": [
+            "resultado",
+            "unidade",
+            "referencia",
+            "data"
+          ],
+          "porta": "labs[TGP]"
+        },
+        {
+          "catalogoId": "BILIRRUBINA",
+          "campos": [
+            "resultado",
+            "unidade",
+            "referencia",
+            "data"
+          ],
+          "porta": "labs[BILIRRUBINA]"
+        },
+        {
+          "catalogoId": "FOSFATASE_ALCALINA",
+          "campos": [
+            "resultado",
+            "unidade",
+            "referencia",
+            "data"
+          ],
+          "porta": "labs[FOSFATASE_ALCALINA]"
+        },
+        {
+          "catalogoId": "GAMA_GT",
+          "campos": [
+            "resultado",
+            "unidade",
+            "referencia",
+            "data"
+          ],
+          "porta": "labs[GAMA_GT]"
+        },
+        {
+          "catalogoId": null,
+          "rotulo": "Marcador tumoral (por pack)",
+          "porta": "6-pack-tumor.marcadores"
+        }
+      ]
+    },
+    {
+      "id": "conduta",
+      "titulo": "Conduta",
+      "campos": [
+        {
+          "id": "conduta.estadiamentoDefinitivo",
+          "rotulo": "Estadiamento definitivo",
+          "origem": "DECISAO_MEDICA"
+        },
+        {
+          "id": "conduta.intencao",
+          "rotulo": "Intenção",
+          "origem": "DECISAO_MEDICA",
+          "opcoes": [
+            "Curativa",
+            "Neoadjuvante",
+            "Adjuvante",
+            "Paliativa",
+            "Melhor suporte"
+          ]
+        },
+        {
+          "id": "conduta.protocolo",
+          "rotulo": "Protocolo proposto",
+          "origem": "DECISAO_MEDICA",
+          "porta": "fichas (id) → prescricao.proposta",
+          "nota": "Escolha por id de ficha; dispara a avaliação de segurança da prescrição proposta (D-F1-07)."
+        },
+        {
+          "id": "conduta.exames",
+          "rotulo": "Exames a solicitar",
+          "origem": "DECISAO_MEDICA",
+          "porta": "1-exames (ids do catálogo)"
+        },
+        {
+          "id": "conduta.encaminhamentos",
+          "rotulo": "Encaminhamentos",
+          "origem": "DECISAO_MEDICA",
+          "porta": "8-encaminhamentos",
+          "opcoes": [
+            "Cirurgia oncológica",
+            "Radioterapia",
+            "Mastologia",
+            "Cuidados paliativos",
+            "Nutrição",
+            "Psico-oncologia",
+            "Outro"
+          ]
+        },
+        {
+          "id": "retorno",
+          "rotulo": "Retorno e próximo ciclo",
+          "origem": "DECISAO_MEDICA",
+          "porta": "datasFixas / agenda"
+        }
+      ]
+    }
+  ],
+  "assinatura": {
+    "id": "assinatura",
+    "origem": "CONFIG",
+    "campos": [
+      "medico.nome",
+      "medico.crm",
+      "medico.rqe",
+      "local",
+      "data",
+      "assinatura_carimbo"
+    ]
+  },
+  "portas": {
+    "consome": [
+      "prontuario",
+      "tumor",
+      "6-pack-tumor",
+      "patologia",
+      "exames",
+      "labs",
+      "medicamentos.reconciliados",
+      "comorbidades",
+      "toxicidade.vigente",
+      "cumulativo-tetos"
+    ],
+    "oferece": [
+      "resumo.caso → 1-exames/rads/pedido-imagem-resumo-caso",
+      "resumo.caso → 3-laudos (campos de diagnóstico e tratamento)",
+      "resumo.caso → 8-encaminhamentos"
+    ]
+  },
+  "pendencias": [
+    "Região da RM e do PET por pack.",
+    "Marcadores por tumor vindos do pack."
+  ]
+}

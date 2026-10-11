@@ -1,0 +1,198 @@
+{
+  "header": {
+    "id": "sinais-alarme-modelo-servico",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Modelo do serviço: C:/Users/silas/OneDrive/ONCOMED/Dev-oncoMed/Templates/[C] Template - Sinais de Alarme.docx (15/04/2026), convertido pelo Claude em 11/10/2026 por ordem do Dr. Silas",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "papel": "Lista do modelo do serviço, para conferência com o consolidado (sinais-alarme-consolidado.v1.RASCUNHO.json). Não é fonte nova de corte: febre segue D-W9-38 e as saídas ao paciente seguem a regra SAMU 192 / PS agora.",
+  "cabecalho": {
+    "origem": "CONFIG",
+    "campos": [
+      {
+        "id": "servico.nome",
+        "rotulo": "Serviço"
+      },
+      {
+        "id": "medico.nome",
+        "rotulo": "Médico"
+      },
+      {
+        "id": "medico.crm",
+        "rotulo": "CRM/UF"
+      },
+      {
+        "id": "medico.rqe",
+        "rotulo": "RQE"
+      }
+    ],
+    "nota": "O modelo original traz 'HOSPITAL DO BEM | CRM-SP XXXXX' fixo. Serviço e registro do médico saem de configuração, nunca de texto fixo.",
+    "pendencia": "DECISAO_DR_SILAS: serviço e CRM/UF oficiais (SP × PB)"
+  },
+  "campos": [
+    {
+      "id": "paciente.nome",
+      "rotulo": "Paciente",
+      "origem": "FATO_CONFIRMADO",
+      "porta": "prontuario.identificacao.nome"
+    },
+    {
+      "id": "protocolo",
+      "rotulo": "Protocolo",
+      "origem": "FATO_CONFIRMADO",
+      "porta": "prescricao.vigente.esquema"
+    },
+    {
+      "id": "data",
+      "rotulo": "Data",
+      "origem": "CONFIG"
+    }
+  ],
+  "sinaisPS": [
+    {
+      "id": "SM-01",
+      "texto": "Febre acima de 37,8 °C durante ou depois da quimioterapia",
+      "estado": "CORRIGIDO",
+      "original": "Febre ≥ 38,0 °C",
+      "fonte": "D-W9-38 (febre = estritamente > 37,8 °C)"
+    },
+    {
+      "id": "SM-02",
+      "texto": "Calafrios fortes ou tremores com febre",
+      "estado": "MANTIDO"
+    },
+    {
+      "id": "SM-03",
+      "texto": "Falta de ar forte ou dor no peito",
+      "estado": "MANTIDO"
+    },
+    {
+      "id": "SM-04",
+      "texto": "Sangramento forte: urina vermelha, fezes pretas, vômito com sangue, sangramento vaginal intenso",
+      "estado": "MANTIDO"
+    },
+    {
+      "id": "SM-05",
+      "texto": "Confusão, sonolência fora do normal ou convulsão",
+      "estado": "MANTIDO"
+    },
+    {
+      "id": "SM-06",
+      "texto": "Dor forte que não passa com os remédios de costume",
+      "estado": "MANTIDO",
+      "nota": "Modelo usava 'EVA ≥ 8': escala removida do texto ao paciente."
+    },
+    {
+      "id": "SM-07",
+      "texto": "Vômitos sem conseguir beber líquidos ou tomar os remédios",
+      "estado": "CORRIGIDO",
+      "original": "(> 24 h)",
+      "nota": "Prazo de 24 h removido: não esperar 24 h para procurar o PS. PENDENTE aprovação."
+    },
+    {
+      "id": "SM-08",
+      "texto": "Diarreia muitas vezes ao dia, com sangue, ou com tontura ao levantar",
+      "estado": "PENDENTE",
+      "original": "Diarreia aquosa > 6 episódios/dia ou com sangue",
+      "nota": "Corte numérico deve seguir CTCAE v6 (grau 3 = ≥ 7 acima do habitual) e o consolidado; decisão do Dr. Silas."
+    },
+    {
+      "id": "SM-09",
+      "texto": "Perna inchada, vermelha, quente ou dolorida de um lado só",
+      "estado": "MANTIDO"
+    },
+    {
+      "id": "SM-10",
+      "texto": "Coceira no corpo todo, inchaço no rosto ou falta de ar durante a infusão",
+      "estado": "MANTIDO",
+      "nota": "Durante a infusão o evento é da equipe do salão, não do paciente em casa."
+    }
+  ],
+  "sinaisContatoServico": {
+    "estado": "PENDENTE_DECISAO",
+    "nota": "O modelo tem um segundo nível 'contato via WhatsApp em 24–48 h'. A regra do canal (D-F1, canal do paciente) admite só duas saídas ao paciente (SAMU 192 / PS agora); o resto vira alerta ao médico. O red team do GLM (HS-3) pede prazo máximo explícito para qualquer saída fora do par.",
+    "itens": [
+      {
+        "id": "SC-01",
+        "texto": "Febre entre 37,5 e 37,9 °C",
+        "estado": "CONFLITO",
+        "motivo": "Sobrepõe o corte D-W9-38: 37,9 °C já é febre (> 37,8). Remover a faixa ou redefinir como 'até 37,8 °C'."
+      },
+      {
+        "id": "SC-02",
+        "texto": "Náusea e vômito que atrapalham comer e tomar remédios",
+        "estado": "PENDENTE"
+      },
+      {
+        "id": "SC-03",
+        "texto": "Diarreia 3 a 5 vezes por dia, sem sangue e sem tontura",
+        "estado": "PENDENTE"
+      },
+      {
+        "id": "SC-04",
+        "texto": "Feridas na boca que atrapalham comer",
+        "estado": "PENDENTE",
+        "nota": "Modelo dizia 'mucosite grau 2–3': grau 3 não é para esperar 24–48 h."
+      },
+      {
+        "id": "SC-05",
+        "texto": "Dor que vem piorando",
+        "estado": "PENDENTE"
+      },
+      {
+        "id": "SC-06",
+        "texto": "Formigamento ou fraqueza nas mãos e pés piorando",
+        "estado": "PENDENTE",
+        "nota": "Fraqueza nova nas pernas pode ser compressão medular: PS (ver HS-3)."
+      },
+      {
+        "id": "SC-07",
+        "texto": "Pele ou olhos amarelados",
+        "estado": "PENDENTE"
+      },
+      {
+        "id": "SC-08",
+        "texto": "Inchaço ou dor no local da veia ou do cateter",
+        "estado": "PENDENTE"
+      },
+      {
+        "id": "SC-09",
+        "texto": "Dúvidas sobre remédios",
+        "estado": "PENDENTE"
+      }
+    ]
+  },
+  "horario": {
+    "origem": "CONFIG",
+    "campos": [
+      "canal.horario",
+      "ps.telefone"
+    ],
+    "nota": "Modelo: WhatsApp seg–sex 08–18 h; fora do horário, PS. Telefones saem de configuração."
+  },
+  "portas": {
+    "consome": [
+      "D-W9-38",
+      "7-orientacoes/sinais-alarme/sinais-alarme-consolidado",
+      "prescricao.vigente (sinais específicos do protocolo)",
+      "canal-redflags"
+    ],
+    "oferece": [
+      "documento.sinaisAlarme"
+    ]
+  },
+  "pendencias": [
+    "Decidir o segundo nível (contato com o serviço) e o prazo máximo.",
+    "Sinais específicos por protocolo: ligar à ficha do esquema, não ao texto livre."
+  ]
+}
