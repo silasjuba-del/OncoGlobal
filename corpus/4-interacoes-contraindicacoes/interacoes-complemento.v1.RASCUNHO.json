@@ -1,0 +1,491 @@
+{
+  "header": {
+    "id": "interacoes-complemento",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.1 (revisão Claude + verificação médica Codex 11/10/2026); bulas citadas por item",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "nota": "Propostas de severidade/monitorização/conduta para as 37 interações inativas de corpus/rulesets/interacoes.v1.json e itens novos. Severidade é PROPOSTA de curadoria do serviço, não tradução automática de bula. Nenhuma regra aqui ativa alerta sem aprovação item a item (D-F1-05). Interação de molécula nomeada não se estende à classe inteira.",
+  "fusoesPendentesCodex": [
+    {
+      "par": "capecitabina × varfarina",
+      "nota": "2 registros (1 ativo). Manter o ativo; fonte mais específica no item INAT-04 deste rascunho."
+    },
+    {
+      "par": "capecitabina × fenitoína",
+      "nota": "2 registros inativos; fundir mantendo escopo e fontes distintas."
+    },
+    {
+      "par": "fluoropirimidinas × brivudina",
+      "nota": "2 registros; manter o de escopo Xeloda + o geral com alias."
+    },
+    {
+      "par": "doxorrubicina × trastuzumabe",
+      "nota": "2 registros inativos; nenhum vira ativo por efeito da fusão."
+    }
+  ],
+  "itens": [
+    {
+      "id": "INAT-01",
+      "par": "tamoxifeno × inibidores fortes de CYP2D6 (paroxetina, fluoxetina, bupropiona)",
+      "propostaSeveridade": "GRAVE",
+      "severidade": null,
+      "monitorizacao": null,
+      "conduta": "Rever antidepressivo com o prescritor; não trocar automaticamente sem indicação, risco de retirada e demais interações.",
+      "propostaAlerta": true,
+      "motivoAlerta": "Perda de eficácia do tamoxifeno é clínica e evitável trocando o antidepressivo.",
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "notaPendencia": "Fonte originalmente citada (SmPC HPRA / espelho bula ANVISA) sem URL/versionamento suficiente; NÃO VERIFICÁVEL na rodada Codex M1-1. Localizar bula profissional ANVISA do tamoxifeno antes de promover."
+    },
+    {
+      "id": "INAT-02",
+      "par": "capecitabina × varfarina e outros cumarínicos",
+      "propostaSeveridade": "GRAVE",
+      "monitorizacao": "INR frequente durante o uso e após a suspensão, conforme evolução",
+      "conduta": "Monitorar INR; há relatos de sangramento inclusive até 1 mês após o fim da capecitabina — risco não é zero após esse prazo.",
+      "propostaAlerta": true,
+      "motivoAlerta": "Sangramento potencialmente fatal, previsível com INR.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed Xeloda §§5.2 e 7.2 (setid e702d84d-7162-4751-bf37-d724cc7e45a5), acesso 11/10/2026",
+        "trecho": "Altered coagulation parameters and/or bleeding, including death",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "INAT-03",
+      "par": "capecitabina × fenitoína",
+      "propostaSeveridade": null,
+      "monitorizacao": null,
+      "conduta": null,
+      "propostaAlerta": false,
+      "motivoAlerta": "Sem fonte verificada nesta rodada; alerta só liga com fonte.",
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "notaPendencia": "Bula Xeloda ANVISA/DailyMed §7 menciona elevação de fenitoína; extrair trecho literal antes de propor severidade."
+    },
+    {
+      "id": "INAT-04",
+      "par": "fluoropirimidinas (5-FU, capecitabina, tegafur) × brivudina",
+      "propostaSeveridade": "GRAVE",
+      "monitorizacao": "Não se aplica: coadministração proibida",
+      "conduta": "NÃO coadministrar, inclusive entre ciclos. Iniciar fluoropirimidina só ≥4 semanas APÓS o fim da brivudina (regra unidirecional, não intervalo genérico).",
+      "propostaAlerta": true,
+      "motivoAlerta": "Toxicidade potencialmente fatal por inibição irreversível da DPD.",
+      "fonte": {
+        "tipo": "NORMA",
+        "referencia": "EMA DHPC brivudine 2020 + AEMPS MUH (FV) 9/2017",
+        "trecho": "potentially fatal toxicity if administered shortly or same time",
+        "edicao": "DHPC 2020"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "INAT-05",
+      "par": "capecitabina × alopurinol",
+      "propostaSeveridade": null,
+      "monitorizacao": null,
+      "conduta": null,
+      "propostaAlerta": false,
+      "motivoAlerta": "Sem fonte verificada.",
+      "fonte": null,
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "id": "INAT-06",
+      "par": "pazopanibe × IBP/antagonistas H2 (NÃO extrapolar a todo TKI)",
+      "propostaSeveridade": "MODERADA",
+      "monitorizacao": null,
+      "conduta": "Evitar supressores de acidez; se inevitável, considerar antiácido de curta ação separado por algumas horas.",
+      "propostaAlerta": false,
+      "motivoAlerta": "Reduz exposição, com alternativa simples de manejo.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed Votrient §7.4 (setid eeaaaf38-fb86-4d9f-a19d-0f61daac2fd7), acesso 11/10/2026",
+        "trecho": "consider short-acting antacid in place of proton pump inhibitors",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "INAT-07",
+      "par": "erlotinibe × IBP / antagonista H2 / antiácido (regras distintas por classe)",
+      "propostaSeveridade": "MODERADA",
+      "monitorizacao": null,
+      "conduta": "Evitar IBP. Com H2: erlotinibe 10 h APÓS a dose anterior do H2 E ≥2 h ANTES da seguinte. Com antiácido: separar por algumas horas (a regra 2h/10h NÃO vale para antiácido).",
+      "propostaAlerta": false,
+      "motivoAlerta": "Perda de eficácia evitável com horário, sem risco imediato.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed erlotinibe §§2 e 7 (setid 2c4c7353-b81c-4651-8aac-6d15e88145af), acesso 11/10/2026",
+        "trecho": "10 hours after... and at least 2 hours before",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "INAT-08",
+      "par": "gefitinibe × supressores de acidez",
+      "propostaSeveridade": null,
+      "monitorizacao": null,
+      "conduta": null,
+      "propostaAlerta": false,
+      "motivoAlerta": "Sem fonte verificada; não herdar a regra do erlotinibe/pazopanibe.",
+      "fonte": null,
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "id": "INAT-09",
+      "par": "ribociclibe × fármacos que prolongam QT",
+      "propostaSeveridade": "GRAVE",
+      "monitorizacao": "Iniciar só se QTcF <450 ms; ECG basal, ~D14 do ciclo 1 e conforme indicação; K/Ca/P/Mg basais e nos 6 primeiros ciclos",
+      "conduta": "Corrigir eletrólitos; manejo de QTcF >480/500 ms conforme tabela 4 da bula por indicação e recorrência. Evitar tamoxifeno e outros prolongadores de QT.",
+      "propostaAlerta": true,
+      "motivoAlerta": "Torsades prevenível com ECG/eletrólitos programados.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed Kisqali §§2.2, 5.3–5.4 (setid aaeaef94-f3f5-4367-8ea2-b181d7be2da8), acesso 11/10/2026",
+        "trecho": "Avoid using KISQALI with drugs known to prolong QT interval",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "INAT-10",
+      "par": "osimertinibe × fármacos que prolongam QT",
+      "propostaSeveridade": "GRAVE",
+      "monitorizacao": "ECG e eletrólitos periódicos nos grupos de risco; intervalo fixo não estabelecido na fonte",
+      "conduta": "QTc >500 ms em ≥2 ECGs: interromper e manejar conforme bula. Não importar o limiar inicial do ribociclibe.",
+      "propostaAlerta": true,
+      "motivoAlerta": "Prolongamento grave exige interrupção formal.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed Tagrisso §§2.5, 5.2–5.3 (setid 5e81b4a7-b971-45e1-9c31-29cea8c87ce7), acesso 11/10/2026",
+        "trecho": " QTc >500 ms ",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "INAT-11",
+      "par": "TKI prolongadores de QT (pazopanibe, sunitinibe) × outros prolongadores de QT",
+      "propostaSeveridade": "MODERADA",
+      "monitorizacao": "ECG/eletrólitos quando houver fatores de risco acumulados",
+      "conduta": "Revisar a lista de medicamentos do paciente por prolongadores de QT; substituir quando possível.",
+      "propostaAlerta": false,
+      "motivoAlerta": "Classe heterogênea; regra por molécula (ver INAT-09/10), não universal.",
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "notaPendencia": "Pazopanibe e sunitinibe citados em rótulo; extrair trecho específico por molécula antes de propor severidade."
+    },
+    {
+      "id": "INAT-12",
+      "par": "ondansetrona × medicamentos/condições que prolongam QT",
+      "propostaSeveridade": "MODERADA",
+      "monitorizacao": "Corrigir hipocalemia/hipomagnesemia; ECG quando fatores de risco acumulados",
+      "conduta": "Adulto com CINV: dose única IV ≤16 mg infundida em ≥15 min. NÃO é dose de pós-operatório, nem via oral, nem limite universal de população.",
+      "propostaAlerta": false,
+      "motivoAlerta": "Dose-dependente e corrigível; teto IV já previsto na prescrição padrão.",
+      "fonte": {
+        "tipo": "NORMA",
+        "referencia": "MHRA Drug Safety Update ago/2012; bula brasileira da apresentação pendente",
+        "trecho": "dose única IV máxima 16 mg, infusão ≥15 min",
+        "edicao": "2012-08"
+      },
+      "pendencia": "PARCIAL"
+    },
+    {
+      "id": "INAT-13",
+      "par": "irinotecano × inibidores fortes de CYP3A4/UGT1A1",
+      "propostaSeveridade": "GRAVE",
+      "monitorizacao": null,
+      "conduta": "Evitar associação salvo ausência de alternativa; retirar inibidor forte ≥1 semana antes. Não confundir interação com genótipo UGT1A1.",
+      "propostaAlerta": true,
+      "motivoAlerta": "Neutropenia grave por ↑SN-38, previsível pela lista de medicamentos.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed irinotecano §§7.2–7.3 (setid 7a30d551-9ea7-47ea-9073-f541bff457a3), acesso 11/10/2026",
+        "trecho": "unless there are no therapeutic alternatives",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "INAT-14",
+      "par": "irinotecano × indutores fortes de CYP3A4 (fenitoína, carbamazepina, rifampicina etc.)",
+      "propostaSeveridade": "GRAVE",
+      "monitorizacao": null,
+      "conduta": "Considerar substituição do indutor ≥2 semanas antes do início, conforme bula.",
+      "propostaAlerta": true,
+      "motivoAlerta": "Perda de eficácia silenciosa.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed irinotecano §7.3 (mesma setid), acesso 11/10/2026",
+        "trecho": "avoid strong CYP3A inducers",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "INAT-15",
+      "par": "cisplatina × aminoglicosídeos e outros ototóxicos (ex.: vancomicina)",
+      "propostaSeveridade": "GRAVE",
+      "monitorizacao": "Função renal; audição conforme indicação",
+      "conduta": "Revisar necessidade do aminoglicosídeo; não extrapolar automaticamente à carboplatina sem ficha própria.",
+      "propostaAlerta": true,
+      "motivoAlerta": "Nefro/ototoxicidade aditiva cumulativa.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed cisplatina §§5.1 e 5.5 (setid 76aea034-6d58-4390-a164-36aa09c1f101), acesso 11/10/2026",
+        "trecho": "potentiated by aminoglycoside antibiotics",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "INAT-16",
+      "par": "pemetrexede × ibuprofeno (e AINEs)",
+      "propostaSeveridade": "MODERADA",
+      "monitorizacao": "ClCr antes de cada ciclo",
+      "conduta": "Se ClCr 45–79 mL/min: evitar ibuprofeno 2 dias antes, NO DIA e 2 dias após; se inevitável, intensificar monitorização hematológica/renal/GI. Outros AINEs exigem avaliação própria.",
+      "propostaAlerta": true,
+      "motivoAlerta": "Corte renal objetivo e janela prática de manejo.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed pemetrexede §§2.5 e 7 (setid 4cc1574b-3d2f-489b-9ad3-55695bb97200), acesso 11/10/2026",
+        "trecho": "2 days before, the day of, and 2 days following",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "INAT-17",
+      "par": "paclitaxel × clopidogrel",
+      "propostaSeveridade": null,
+      "monitorizacao": null,
+      "conduta": null,
+      "propostaAlerta": false,
+      "motivoAlerta": "Sem fonte verificada.",
+      "fonte": null,
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "id": "INAT-18",
+      "par": "docetaxel × inibidores fortes de CYP3A4",
+      "propostaSeveridade": null,
+      "monitorizacao": null,
+      "conduta": null,
+      "propostaAlerta": false,
+      "motivoAlerta": "Sem fonte verificada (bula Taxotere citada no registro original; trecho não extraído).",
+      "fonte": null,
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "id": "INAT-19",
+      "par": "doxorrubicina × trastuzumabe",
+      "propostaSeveridade": "GRAVE",
+      "monitorizacao": "FEVE basal e serial conforme protocolo",
+      "conduta": "A sequência importa: evitar antraciclina, se possível, por até 7 meses após suspener trastuzumabe; se usada, monitorar função cardíaca estreitamente. Uso sequencial não é automaticamente seguro.",
+      "propostaAlerta": true,
+      "motivoAlerta": "Cardiotoxicidade aditiva com janela temporal definida em bula.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed Herceptin §7 (setid 492dbdb2-077e-4064-bff3-372d6af0a7a2), acesso 11/10/2026",
+        "trecho": "highest in patients receiving Herceptin with anthracycline",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "INAT-20",
+      "par": "tamoxifeno × varfarina/cumarínicos",
+      "propostaSeveridade": "GRAVE",
+      "monitorizacao": "TP/INR de perto",
+      "conduta": "Contraindicado no cenário de redução de incidência/DCIS; no câncer invasivo, análise de risco individual + monitorização do INR.",
+      "propostaAlerta": true,
+      "motivoAlerta": "Sangramento com INR monitorável.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed tamoxifeno, Contraindications/Drug Interactions (setid 8d731e7e-3b04-49a2-a0f6-3779422174cc), acesso 11/10/2026",
+        "trecho": "significant increase in anticoagulant effect",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "INAT-21",
+      "par": "tamoxifeno × anastrozol (IA)",
+      "propostaSeveridade": "MODERADA",
+      "monitorizacao": null,
+      "conduta": "Não coadministrar; outros inibidores de aromatase exigem fonte específica.",
+      "propostaAlerta": false,
+      "motivoAlerta": "Sem benefício; associação evitável.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed tamoxifeno (mesma setid), acesso 11/10/2026",
+        "trecho": "should not be coadministered with anastrozole",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "INAT-22",
+      "par": "erlotinibe × varfarina/cumarínicos [ACRESCENTADO]",
+      "propostaSeveridade": "GRAVE",
+      "monitorizacao": "TP/INR regularmente",
+      "conduta": "Monitorar INR e revisar anticoagulação; não aplicar regra única a todos os TKI/anticoagulantes.",
+      "propostaAlerta": true,
+      "motivoAlerta": "Hemorragia grave/fatal descrita em bula.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed erlotinibe §5.9 (setid 2c4c7353-b81c-4651-8aac-6d15e88145af), acesso 11/10/2026",
+        "trecho": "Severe and fatal hemorrhage",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "INAT-23",
+      "par": "TKI (classe) × inibidores fortes de CYP3A4; osimertinibe/sunitinibe/cabozantinibe/palbociclibe/abiraterona × inibidores/indutores específicos",
+      "propostaSeveridade": null,
+      "monitorizacao": null,
+      "conduta": null,
+      "propostaAlerta": false,
+      "motivoAlerta": "Registro genérico por classe; sem fonte por molécula não se propõe severidade única.",
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "notaPendencia": "Desmembrar por molécula e extrair trecho de cada bula (Taxotere, Tagrisso §7, Sutent, Cabometyx, Ibrance, Zytiga, Xtandi, Lynparza) na próxima rodada."
+    },
+    {
+      "id": "INAT-24",
+      "par": "abiraterona × espironolactona",
+      "propostaSeveridade": null,
+      "monitorizacao": null,
+      "conduta": null,
+      "propostaAlerta": false,
+      "motivoAlerta": "Sem fonte verificada.",
+      "fonte": null,
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "id": "INAT-25",
+      "par": "enzalutamida × substratos de CYP3A4/CYP2C9/CYP2C19",
+      "propostaSeveridade": null,
+      "monitorizacao": null,
+      "conduta": null,
+      "propostaAlerta": false,
+      "motivoAlerta": "Sem fonte verificada.",
+      "fonte": null,
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "id": "INAT-26",
+      "par": "olaparibe × inibidores fortes/moderados de CYP3A",
+      "propostaSeveridade": null,
+      "monitorizacao": null,
+      "conduta": null,
+      "propostaAlerta": false,
+      "motivoAlerta": "Sem fonte verificada.",
+      "fonte": null,
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "id": "INAT-27",
+      "par": "inibidores de checkpoint (anti-PD-1/PD-L1) × corticosteroide sistêmico basal",
+      "propostaSeveridade": null,
+      "monitorizacao": "Registrar indicação e dose equivalente de prednisona",
+      "conduta": "Não impor desmame automático; não retirar reposição nem tratamento necessário de toxicidade imune.",
+      "propostaAlerta": false,
+      "motivoAlerta": "Associação observacional; severidade como interação uniforme não validada (REVIEW_REQUIRED).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "De Giglio et al., Cancers 2020, DOI 10.3390/cancers12102827 (coorte)",
+        "trecho": "corticosteroids ... worse survival",
+        "edicao": "2020"
+      },
+      "pendencia": "REVIEW_REQUIRED"
+    },
+    {
+      "id": "INAT-28",
+      "par": "inibidores de checkpoint × antibióticos sistêmicos próximos ao início",
+      "propostaSeveridade": null,
+      "monitorizacao": null,
+      "conduta": null,
+      "propostaAlerta": false,
+      "motivoAlerta": "Associação observacional; não converter em causalidade.",
+      "fonte": null,
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "id": "INAT-29",
+      "par": "citotóxicos/imunossupressores × vacinas vivas",
+      "propostaSeveridade": "GRAVE",
+      "monitorizacao": null,
+      "conduta": "Adiar vacina viva durante imunossupressão; após QT convencional, aguardar ≥3 meses E recuperação imunológica. Anti-B e transplante têm regras distintas; não liberar pela passagem de 3 meses.",
+      "propostaAlerta": true,
+      "motivoAlerta": "Doença vacinal evitável com agenda.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "CDC, Best Practices — Altered Immunocompetence, acesso 11/10/2026",
+        "trecho": "Live, attenuated vaccines should not be administered for at least 3 months",
+        "edicao": "página vigente 2026"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "NOVO-01",
+      "par": "metotrexato (baixa dose) × SMX-TMP",
+      "propostaSeveridade": null,
+      "monitorizacao": null,
+      "conduta": null,
+      "propostaAlerta": false,
+      "motivoAlerta": "Pedido do prompt mestre §11.1; sem fonte verificada nesta rodada.",
+      "fonte": null,
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "id": "NOVO-02",
+      "par": "metotrexato (baixa dose) × AINEs",
+      "propostaSeveridade": null,
+      "monitorizacao": null,
+      "conduta": null,
+      "propostaAlerta": false,
+      "motivoAlerta": "Sem fonte verificada nesta rodada.",
+      "fonte": null,
+      "pendencia": "SEM_FONTE"
+    }
+  ],
+  "resumoCuradoria": {
+    "totalPropostas": 31,
+    "comFonte": 17,
+    "semFonte": 14,
+    "reviewRequired": 1,
+    "propostaAlertaTrue": 12,
+    "nota": "17 itens com fonte (16 plenos + 1 PARCIAL/REVIEW_REQUIRED); 14 SEM_FONTE. Os demais pares das 37 inativas estão agrupados em INAT-23 (classe TKI×CYP3A4 e variantes por molécula) para desmembramento na próxima rodada; nenhum registro foi perdido."
+  },
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "LITERATURA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.1 (revisão Claude + verificação médica Codex 11/10/2026); bulas citadas por item",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  }
+}

@@ -1,0 +1,1677 @@
+{
+  "header": {
+    "id": "pack-tireoide",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "SBOC 2026 — Tireoide: carcinoma diferenciado e anaplásico v5 + Tireoide: carcinoma medular v5",
+      "trecho": "apoiar as decisões clínicas no tratamento de carcinomas de tireoide",
+      "edicao": "v5 2026"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Carcinoma de tireoide",
+    "cid10": [
+      "C73"
+    ],
+    "subtipos": [
+      "diferenciado (papilífero, folicular, oncocítico)",
+      "anaplásico",
+      "medular (esporádico ou MEN2A/2B)"
+    ],
+    "cenarios": [
+      "diferenciado_localizado",
+      "diferenciado_iodorrefratario",
+      "anaplasico_IVA",
+      "anaplasico_IVB",
+      "anaplasico_IVC",
+      "medular_inicial",
+      "medular_avancado_metastatico"
+    ],
+    "limitesAplicabilidade": "SBOC cobre sobretudo terapia sistêmica. Dose de radioiodo, extensão cirúrgica do CDT e alvo de TSH por risco não constam da SBOC (ver pendências). Pouco diferenciado não detalhado."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "USG_TIREOIDE",
+        "rotulo": "USG de pescoço/tireoide",
+        "indicacao": "universal",
+        "quando": "Estadiamento inicial do CDT",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "geralmente indica-se exclusivamente ultrassom de pescoço",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Catálogo tem USG de tireoide; SBOC diz ultrassom de pescoço."
+      },
+      {
+        "catalogoId": "TC_PESCOCO",
+        "rotulo": "TC de pescoço (ou RM)",
+        "indicacao": "condicional",
+        "quando": "CDT avançado com suspeita de invasão local; recidiva iodorrefratária; medular em todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "suspeita de invasão de estruturas locais, indica-se TC ou RM de pescoço",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "indicacao": "condicional",
+        "quando": "CDT recidivado iodorrefratário; medular se calcitonina >500 pg/mL",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "Já na doença recidivada iodorrefratária, indica-se TC ou RM de pescoço e TC de",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT FDG",
+        "indicacao": "condicional",
+        "quando": "CDT iodorrefratário (pode); anaplásico (preferencial)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 9,
+          "trecho": "Preferencial: PET/CT;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_CRANIO",
+        "rotulo": "RM de crânio",
+        "indicacao": "condicional",
+        "quando": "Anaplásico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 9,
+          "trecho": "RM crânio.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CINTILOGRAFIA_OSSEA",
+        "rotulo": "Cintilografia óssea",
+        "indicacao": "condicional",
+        "quando": "Anaplásico sem PET/CT; medular com calcitonina >500 pg/mL",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "tórax, RM de abdome e cintilografia óssea se calcitonina superior a 500",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_ABDOMEN_SUPERIOR",
+        "rotulo": "RM de abdome",
+        "indicacao": "condicional",
+        "quando": "Medular com calcitonina >500 pg/mL ou suspeita de doença à distância",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "tórax, RM de abdome e cintilografia óssea se calcitonina superior a 500",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_DOTATATE",
+        "rotulo": "PET/CT Gálio-DOTATATE",
+        "indicacao": "condicional",
+        "quando": "Medular, estadiamento à distância se disponível",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "Considerar estadiamento à distância com PET/CT Gálio-69 DOTATATE,",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Texto SBOC diz 'Gálio-69' (provável erro de digitação de Gálio-68). Item do catálogo SEM_CODIGO_SUS."
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "PAAF",
+          "quando": "Nódulo tireoidiano suspeito",
+          "catalogoId": "PAAF_TIREOIDE",
+          "fonte": null,
+          "pendencia": "SEM_FONTE"
+        },
+        {
+          "tipo": "core",
+          "quando": "Suspeita de anaplásico: diagnóstico rápido; diferenciar de CEC de laringe, sarcoma e linfoma",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 9,
+            "trecho": "mas deve ser feito rapidamente, devido ao caráter agressivo e fatal",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "tipo histológico",
+        "extensão extratireoidiana (microscópica/macroscópica)",
+        "multifocalidade",
+        "invasão vascular (número de vasos)",
+        "margens (R0/R1/R2)",
+        "número e tamanho de LFN e extensão extranodal",
+        "componente pouco diferenciado/alto grau"
+      ],
+      "molecular": [
+        {
+          "alvo": "BRAF V600E",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "CDT iodorrefratário/avançado",
+          "consequencia": "Opção de dabrafenibe ± trametinibe ou vemurafenibe em linhas subsequentes",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 6,
+            "trecho": "Testagem somática - idealmente por NGS (incluindo DNA e RNA):",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "Fusão NTRK1-3",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "CDT iodorrefratário/avançado",
+          "consequencia": "Larotrectinibe em 1ª linha",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 6,
+            "trecho": "Fusão de NTRK1-3;",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "FISH",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "Fusão RET",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "CDT iodorrefratário/avançado",
+          "consequencia": "Selpercatinibe em 1ª linha (dose não informada para CDT na SBOC)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 6,
+            "trecho": "Fusão de RET;",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "FISH",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "BRAF V600E",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "Anaplásico (todos os casos, fluxo rápido)",
+          "consequencia": "IVB: considerar BRAF/MEK neoadjuvante; IVC: BRAF/MEK preferencial",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 9,
+            "trecho": "deve ser pesquisada (por NGS ou IHQ) em todos os casos",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "BRAF V600E",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "universal",
+          "cenario": "Anaplásico (alternativa à IHQ)",
+          "consequencia": "Igual à linha anterior",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 9,
+            "trecho": "deve ser pesquisada (por NGS ou IHQ) em todos os casos",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "RET germinativo",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "universal",
+          "cenario": "Medular (todos), sangue ou swab bucal",
+          "consequencia": "Diagnóstico de MEN2 e rastreio familiar; ~6% dos 'esporádicos' têm RET germinativo",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 6,
+            "trecho": "Realização de teste genético germinativo para o gene RET em todos os",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "RET somático",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "Medular avançado ou metastático (lâminas/blocos)",
+          "consequencia": "Seleciona selpercatinibe",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 7,
+            "trecho": "A testagem para mutação somática de RET, com as análises de lâminas",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Germinativo CDT (PTEN, APC, DICER1 etc.)",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "Só com suspeita clínica de síndrome hereditária",
+          "consequencia": "Não testar rotineiramente",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 6,
+            "trecho": "Não recomendamos a testagem germinativa rotineira em todos os pacientes",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+      "pagina": 4,
+      "trecho": "Estadiamento (AJCC 8ª edição)",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "USG_TIREOIDE",
+        "rotulo": "USG de pescoço",
+        "cenario": "CDT inicial",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "geralmente indica-se exclusivamente ultrassom de pescoço",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CALCITONINA",
+        "rotulo": "Calcitonina sérica",
+        "cenario": "Medular (investigação inicial)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "Pesquisa de marcadores tumorais (calcitonina e CEA);",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CEA",
+        "rotulo": "CEA",
+        "cenario": "Medular (investigação inicial)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "Pesquisa de marcadores tumorais (calcitonina e CEA);",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PTH",
+        "rotulo": "PTH (excluir hiperparatireoidismo — MEN2)",
+        "cenario": "Medular",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "Exclusão de hiperparatireoidismo primário e feocromocitoma",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "rotulo": "Cálcio sérico (excluir hiperparatireoidismo)",
+        "cenario": "Medular",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "Exclusão de hiperparatireoidismo primário e feocromocitoma",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "Metanefrinas plasmáticas/urinárias (excluir feocromocitoma)",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "cenario": "Medular",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "Exclusão de hiperparatireoidismo primário e feocromocitoma",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PESCOCO",
+        "rotulo": "TC/RM de pescoço",
+        "cenario": "Medular (todos)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "TC/RM do pescoço em todos os pacientes, acompanhadas de TC de",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "CDT ≤55 anos",
+        "conduta": "Estádio I se M0; II se M1",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 5,
+          "trecho": "≤ 55 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "CDT risco ATA 2025 (alto >30%, intermediário-alto 16-30%, intermediário-baixo 10-15%, baixo <10%)",
+        "conduta": "Orienta radioiodo, intensidade do seguimento e grau de supressão do TSH",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 7,
+          "trecho": "orientar decisões sobre radioiodoterapia, intensidade do seguimento e grau de supressão do TSH",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "CDT iodorrefratário",
+        "conduta": "≥1 lesão sem captação de I-131; ou progressão em 12 meses após iodo; ou dose cumulativa >600 mCi",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "Pelo menos uma lesão mensurável sem captação de iodo-131;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Anaplásico IVA / IVB / IVC",
+        "conduta": "IVA: cirurgia + RT/QT; IVB: idem se possível, BRAF/MEK neoadjuvante se V600E; IVC: BRAF/MEK se V600E, senão QT paliativa",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 12,
+          "trecho": "Cirurgia seguida de RT concomitante à QT (cisplatina, doxorrubicina ou paclitaxel)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Medular avançado",
+        "conduta": "Sistêmico só se progressão clinicamente significativa (RECIST), sintomas ou risco de complicação",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 7,
+          "trecho": "O tratamento sistêmico deve ser iniciado apenas se houver:",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "TIREOGLOBULINA",
+          "uso": "CDT: apoio à decisão de radioiodo (baixo risco com Tg <1 ng/mL e USG negativa: geralmente sem RAI, ATA 2025) e seguimento",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026/slides-pro-2026/57 - Aula 57 - Tireoide",
+            "pagina": 21,
+            "trecho": "intratireoidianos de baixo risco com Tg <1 ng/mL e",
+            "estado": "INFERIDO"
+          }
+        },
+        {
+          "catalogoId": "CALCITONINA",
+          "uso": "Medular: estadiamento (>500 pg/mL amplia imagem) e seguimento",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 6,
+            "trecho": "tórax, RM de abdome e cintilografia óssea se calcitonina superior a 500",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "CEA",
+          "uso": "Medular: estadiamento e seguimento",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 11,
+            "trecho": "Calcitonina e CEA:",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "TSH",
+          "uso": "CDT iodorrefratário: manter TSH suprimido (<0,1)",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 10,
+            "trecho": "Manter TSH suprimido (<0,1)",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "calcitonina no CDT (sem fonte de uso)",
+        "testagem germinativa rotineira no CDT"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "CDT iodorrefratário de baixo volume e oligossintomático",
+        "intencao": "paliativa",
+        "modalidades": [
+          "seguimento clínico exclusivo",
+          "TSH suprimido"
+        ],
+        "criterio": "Baixo volume e poucos sintomas",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 10,
+          "trecho": "Seguimento clínico exclusivo se baixo volume de doença",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "CDT iodorrefratário selecionado",
+        "intencao": "paliativa",
+        "modalidades": [
+          "metastasectomia",
+          "terapias ablativas"
+        ],
+        "criterio": "Casos selecionados",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 10,
+          "trecho": "Metastasectomia ou terapias ablativas em casos selecionados",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "CDT iodorrefratário progressivo",
+        "intencao": "paliativa",
+        "modalidades": [
+          "inibidor de tirosina-quinase",
+          "terapia dirigida por alvo (BRAF, NTRK, RET)"
+        ],
+        "criterio": "Progressão; escolha por alvo molecular",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 10,
+          "trecho": "Terapia sistêmica SEM mutação dirigida:",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "CDT baixo risco ≤2 cm (cT1N0M0)",
+        "intencao": "curativa",
+        "modalidades": [
+          "lobectomia",
+          "vigilância ativa em microcarcinoma ≤1 cm de baixo risco"
+        ],
+        "criterio": "ATA 2025 (via aula PRO)",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/57 - Aula 57 - Tireoide",
+          "pagina": 21,
+          "trecho": "Lobectomia: recomendado para tumores ≤2 cm",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "cenario": "Anaplásico IVA",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia",
+          "RT concomitante à QT"
+        ],
+        "criterio": "Dados retrospectivos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 12,
+          "trecho": "Cirurgia seguida de RT concomitante à QT (cisplatina, doxorrubicina ou paclitaxel)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Anaplásico IVC",
+        "intencao": "paliativa",
+        "modalidades": [
+          "inibidor BRAF/MEK se V600E",
+          "QT paliativa (paclitaxel + carboplatina, paclitaxel semanal, doxorrubicina) se sem mutação"
+        ],
+        "criterio": "Status BRAF",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 12,
+          "trecho": "preferencialmente inibidor de BRAF/MEK",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Medular inicial",
+        "intencao": "curativa",
+        "modalidades": [
+          "tireoidectomia total + esvaziamento central bilateral (VI)",
+          "esvaziamento lateral se LFN II-V",
+          "RT adjuvante se T4 ou margens positivas"
+        ],
+        "criterio": "Doença multifocal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 7,
+          "trecho": "Tireoidectomia total com esvaziamento cervical central bilateral (nível VI)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Medular avançado de baixo volume",
+        "intencao": "paliativa",
+        "modalidades": [
+          "seguimento clínico exclusivo"
+        ],
+        "criterio": "Baixo volume ou assintomático",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 7,
+          "trecho": "Se baixo volume de doença ou evolução assintomática/oligossintomática.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "tireoide-cdt-lenvatinibe",
+        "nome": "Lenvatinibe",
+        "cenario": "CDT iodorrefratário progressivo",
+        "linha": "1ª linha (sem alvo ou BRAF V600E); subsequente após NTRK/RET",
+        "drogas": [
+          {
+            "droga": "Lenvatinibe",
+            "dose": 24,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "contínuo (SBOC: continuamente); ciclo de 28 dias é convenção de registro/dispensação"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 42, de 19/09/2024 (DOU 20/09/2024, s.1, p.147) — decisão de NÃO incorporar; ementa via IELS nº 178 SES-SP",
+            "pagina": null,
+            "trecho": "o sorafenibe e lenvatinibe para o tratamento de indivíduos com diagnóstico de carcinoma",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Não incorporado no SUS para CDT localmente avançado/metastático refratário ao iodo, progressivo. Alternativa SUS: seguimento, TSH suprimido, terapias locais; conferir atualização Conitec."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 10,
+          "trecho": "Lenvatinibe 24 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "tireoide-cdt-sorafenibe",
+        "nome": "Sorafenibe",
+        "cenario": "CDT iodorrefratário progressivo",
+        "linha": "1ª linha (sem alvo)",
+        "drogas": [
+          {
+            "droga": "Sorafenibe",
+            "dose": 400,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 2x/dia",
+            "observacao": "contínuo (SBOC: continuamente); ciclo de 28 dias é convenção de registro/dispensação"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 42, de 19/09/2024 (DOU 20/09/2024, s.1, p.147) — decisão de NÃO incorporar; ementa via IELS nº 178 SES-SP",
+            "pagina": null,
+            "trecho": "o sorafenibe e lenvatinibe para o tratamento de indivíduos com diagnóstico de carcinoma",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Não incorporado no SUS para CDT localmente avançado/metastático refratário ao iodo, progressivo. Alternativa SUS: seguimento, TSH suprimido, terapias locais; conferir atualização Conitec."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 10,
+          "trecho": "Sorafenibe 400 mg VO 2x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "tireoide-cdt-cabozantinibe",
+        "nome": "Cabozantinibe",
+        "cenario": "CDT iodorrefratário progressivo",
+        "linha": "subsequente, após lenvatinibe ou sorafenibe",
+        "drogas": [
+          {
+            "droga": "Cabozantinibe",
+            "dose": 60,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "contínuo (SBOC: continuamente); ciclo de 28 dias é convenção de registro/dispensação"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 10,
+          "trecho": "Cabozantinibe 60 mg VO 1x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "tireoide-cdt-dabrafenibe-trametinibe",
+        "nome": "Dabrafenibe + trametinibe (BRAF V600E)",
+        "cenario": "CDT iodorrefratário BRAF V600E",
+        "linha": "subsequente",
+        "drogas": [
+          {
+            "droga": "Dabrafenibe",
+            "dose": 150,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 2x/dia",
+            "observacao": "contínuo (SBOC: continuamente); ciclo de 28 dias é convenção de registro/dispensação"
+          },
+          {
+            "droga": "Trametinibe",
+            "dose": 2,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "contínuo (SBOC: continuamente); ciclo de 28 dias é convenção de registro/dispensação"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 10,
+          "trecho": "Dabrafenibe 150 mg VO 2x/ dia + Trametinibe 2 mg VO 1x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "tireoide-cdt-dabrafenibe",
+        "nome": "Dabrafenibe monoterapia (BRAF V600E)",
+        "cenario": "CDT iodorrefratário BRAF V600E",
+        "linha": "subsequente",
+        "drogas": [
+          {
+            "droga": "Dabrafenibe",
+            "dose": 150,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 2x/dia",
+            "observacao": "contínuo (SBOC: continuamente); ciclo de 28 dias é convenção de registro/dispensação"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 10,
+          "trecho": "Dabrafenibe 150 mg VO 2x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "tireoide-cdt-vemurafenibe",
+        "nome": "Vemurafenibe (BRAF V600E)",
+        "cenario": "CDT iodorrefratário BRAF V600E",
+        "linha": "subsequente",
+        "drogas": [
+          {
+            "droga": "Vemurafenibe",
+            "dose": 960,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 2x/dia",
+            "observacao": "contínuo (SBOC: continuamente); ciclo de 28 dias é convenção de registro/dispensação"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 10,
+          "trecho": "Vemurafenibe 960 mg VO 2x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "tireoide-cdt-larotrectinibe",
+        "nome": "Larotrectinibe (fusão NTRK1-3)",
+        "cenario": "CDT iodorrefratário com fusão NTRK",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Larotrectinibe",
+            "dose": 100,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 2x/dia",
+            "observacao": "contínuo (SBOC: continuamente); ciclo de 28 dias é convenção de registro/dispensação"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 10,
+          "trecho": "Larotrectinibe 100 mg VO 2x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "tireoide-medular-selpercatinibe",
+        "nome": "Selpercatinibe (RET mutado)",
+        "cenario": "Medular avançado/metastático com mutação RET",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Selpercatinibe",
+            "dose": 160,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 12/12h",
+            "observacao": "contínuo (SBOC: continuamente); ciclo de 28 dias é convenção de registro/dispensação"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Selpercatinibe 160 mg 12/12 horas VO",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "tireoide-medular-vandetanibe",
+        "nome": "Vandetanibe",
+        "cenario": "Medular avançado/metastático sem RET ou sem acesso a selpercatinibe",
+        "linha": "1ª linha alternativa",
+        "drogas": [
+          {
+            "droga": "Vandetanibe",
+            "dose": 300,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "contínuo (SBOC: continuamente); ciclo de 28 dias é convenção de registro/dispensação"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Vandetanibe 300 mg/dia VO",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "tireoide-medular-cabozantinibe",
+        "nome": "Cabozantinibe (comprimido)",
+        "cenario": "Medular avançado/metastático sem RET ou sem acesso a selpercatinibe",
+        "linha": "1ª linha alternativa",
+        "drogas": [
+          {
+            "droga": "Cabozantinibe",
+            "dose": 60,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "contínuo (SBOC: continuamente); ciclo de 28 dias é convenção de registro/dispensação; comprimido — não intercambiar com cápsula 140 mg"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Cabozantinibe 60 mg/dia VO",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "SBOC: droga não aprovada no Brasil para carcinoma medular."
+      },
+      {
+        "id": "tireoide-medular-dacarbazina",
+        "nome": "Dacarbazina",
+        "cenario": "Medular avançado — progressão rápida, pós-TKI ou TKI indisponível",
+        "linha": "QT citotóxica",
+        "drogas": [
+          {
+            "droga": "Dacarbazina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Dacarbazina (DTIC) 1.000 mg/m² EV D1 a cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "tireoide-medular-dtic-5fu",
+        "nome": "Dacarbazina + 5-FU",
+        "cenario": "Medular avançado — progressão rápida, pós-TKI ou TKI indisponível",
+        "linha": "QT citotóxica",
+        "drogas": [
+          {
+            "droga": "Dacarbazina",
+            "dose": 250,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluorouracila (5-FU)",
+            "dose": 450,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "DTIC 250 mg/m² + 5-FU 450 mg/m² EV D1 a D5",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "tireoide-medular-cvd",
+        "nome": "Ciclofosfamida + vincristina + dacarbazina",
+        "cenario": "Medular avançado — progressão rápida, pós-TKI ou TKI indisponível",
+        "linha": "QT citotóxica",
+        "drogas": [
+          {
+            "droga": "Ciclofosfamida",
+            "dose": 750,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Vincristina",
+            "dose": 1.4,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Dacarbazina",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D2",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Ciclofosfamida 750 mg/m² EV D1 + Vincristina 1,4 mg/m² EV D1 + DTIC",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "tireoide-medular-doxorrubicina",
+        "nome": "Doxorrubicina",
+        "cenario": "Medular avançado — progressão rápida, pós-TKI ou TKI indisponível",
+        "linha": "QT citotóxica",
+        "drogas": [
+          {
+            "droga": "Doxorrubicina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Doxorrubicina 60 mg/m² EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "Radioiodoterapia (I-131) adjuvante/ablação no CDT",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "não se aplica (dose em mCi)",
+        "pendencia": "SEM_FONTE",
+        "observacao": "SBOC não traz atividade de I-131; doses em mCi citadas na aula PRO aparecem só em casos clínicos. Não estimar.",
+        "fonte": null
+      },
+      {
+        "cenario": "Anaplásico IVA/IVB — RT concomitante à QT pós-cirurgia",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "cisplatina, doxorrubicina ou paclitaxel (doses não informadas)",
+        "pendencia": "SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 12,
+          "trecho": "Cirurgia seguida de RT concomitante à QT (cisplatina, doxorrubicina ou paclitaxel)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Medular — RT adjuvante (T4 ou margens positivas)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "nenhuma",
+        "pendencia": "SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 7,
+          "trecho": "Considerar RT adjuvante caso se identifique doença T4",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Tireoidectomia total + esvaziamento cervical central bilateral (nível VI)",
+        "quando": "Medular inicial",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 7,
+          "trecho": "Tireoidectomia total com esvaziamento cervical central bilateral (nível VI)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Esvaziamento cervical lateral ipsi ou bilateral",
+        "quando": "Medular com LFN II-V ou doença central volumosa",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 7,
+          "trecho": "deve-se considerar a realização de esvaziamento cervical",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Lobectomia",
+        "quando": "CDT ≤2 cm (cT1N0M0) — ATA 2025 via aula PRO",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/57 - Aula 57 - Tireoide",
+          "pagina": 21,
+          "trecho": "Lobectomia: recomendado para tumores ≤2 cm",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "procedimento": "Cirurgia seguida de RT + QT",
+        "quando": "Anaplásico IVA e IVB ressecável",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 12,
+          "trecho": "Cirurgia seguida de RT concomitante à QT (cisplatina, doxorrubicina ou paclitaxel)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "Fusão RET (CDT)",
+        "opcao": "Selpercatinibe em 1ª linha",
+        "evidencia": "Respostas altas e sustentadas (SBOC)",
+        "sus": "DADO_AUSENTE",
+        "observacao": "Dose não informada para CDT na SBOC; não transferir a dose do medular.",
+        "pendencia": "DOSE_SEM_FONTE_CDT",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 11,
+          "trecho": "Tumores com fusão de RET apresentam respostas altas e sustentadas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "BRAF V600E (anaplásico IVB)",
+        "opcao": "Inibidor BRAF/MEK neoadjuvante",
+        "evidencia": "ROAR (fase II), Zafereo et al.",
+        "sus": "DADO_AUSENTE",
+        "pendencia": "DOSE_SEM_FONTE_ANAPLASICO",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 12,
+          "trecho": "considerar inibidor de BRAF/MEK neoadjuvante",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "BRAF V600E (anaplásico IVC)",
+        "opcao": "Inibidor BRAF/MEK preferencial",
+        "evidencia": "ROAR: resposta 56%, SG mediana 14,5 m",
+        "sus": "DADO_AUSENTE",
+        "pendencia": "DOSE_SEM_FONTE_ANAPLASICO",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 12,
+          "trecho": "preferencialmente inibidor de BRAF/MEK",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "Mutação RET (medular)",
+        "opcao": "Selpercatinibe 160 mg 12/12h",
+        "evidencia": "LIBRETTO-531 (SLP HR 0,28 vs cabozantinibe/vandetanibe)",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Selpercatinibe 160 mg 12/12 horas VO",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "Fusão NTRK1-3 (CDT)",
+        "opcao": "Larotrectinibe 100 mg 2x/dia",
+        "evidencia": "Alta taxa de resposta em tumores sólidos NTRK+",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 10,
+          "trecho": "Larotrectinibe 100 mg VO 2x/dia",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": "TKIs orais: SEM_FONTE no pack",
+      "riscoNeutropeniaFebril": "SEM_FONTE",
+      "outros": [
+        "Medular com diarreia hormonal: loperamida ou análogo de somatostatina",
+        "Metástase óssea: bisfosfonato ou denosumabe"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+        "pagina": 7,
+        "trecho": "Bisfosfonados ou denosumabe no caso de metástases ósseas e agentes",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "SELECT",
+        "nct": "NCT01321554",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CDT refratário ao I-131",
+        "bracos": "Lenvatinibe vs placebo",
+        "desfecho": "SLP",
+        "resultado": "18,3 vs 3,6 m; HR 0,21",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT01321554",
+          "pagina": null,
+          "trecho": "Trial of Lenvatinib (E7080) in 131I-Refractory Differentiated Thyroid Cancer",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "LIBRETTO-531",
+        "nct": "NCT04211337",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Medular RET-mutado sem TKI prévio",
+        "bracos": "Selpercatinibe vs cabozantinibe ou vandetanibe",
+        "desfecho": "SLP",
+        "resultado": "HR 0,28; SLP 1 ano 86,8% vs 65,7%",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT04211337",
+          "pagina": null,
+          "trecho": "A Study of Selpercatinib (LY3527723) in Participants With RET-Mutant Medullary",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ZETA",
+        "nct": "NCT00410761",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Medular avançado",
+        "bracos": "Vandetanibe vs placebo",
+        "desfecho": "SLP",
+        "resultado": "HR 0,46",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00410761",
+          "pagina": null,
+          "trecho": "An Efficacy Study Comparing ZD6474 to Placebo in Medullary Thyroid Cancer",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "Medular, 2-3 meses pós-operatório",
+        "exames": [
+          "CALCITONINA",
+          "CEA"
+        ],
+        "periodicidade": "Primeira dosagem",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 11,
+          "trecho": "Primeira dosagem 2-3 meses após a cirurgia;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Medular, anos 1-2 e depois",
+        "exames": [
+          "CALCITONINA",
+          "CEA",
+          "USG_TIREOIDE"
+        ],
+        "periodicidade": "Semestral por 2 anos, depois anual; USG cervical em cada visita",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 11,
+          "trecho": "Na sequência, semestral por 02 anos e em seguida anual;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Medular com elevação de marcadores",
+        "exames": [
+          "TC_PESCOCO",
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR"
+        ],
+        "periodicidade": "TC de tórax e abdome especialmente se calcitonina ≥150 pg/mL",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 11,
+          "trecho": "especialmente se calcitonina ≥ 150 pg/mL",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "MEN2",
+        "exames": [
+          "PTH",
+          "CALCIO"
+        ],
+        "periodicidade": "Anual (feocromocitoma e hiperparatireoidismo)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 11,
+          "trecho": "Rastreamento anual de feocromocitoma e hiperparatireoidismo se evidência de MEN2.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "CDT",
+        "exames": [
+          "TIREOGLOBULINA",
+          "TSH",
+          "USG_TIREOIDE"
+        ],
+        "periodicidade": "SEM_FONTE no pack (SBOC não detalha seguimento do CDT)",
+        "pendencia": "SEM_FONTE",
+        "fonte": null
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "CALCIO",
+      "CALCITONINA",
+      "CEA",
+      "CINTILOGRAFIA_OSSEA",
+      "IMUNOHISTOQUIMICA",
+      "PAAF_TIREOIDE",
+      "PET_CT_FDG",
+      "PET_DOTATATE",
+      "PTH",
+      "RM_ABDOMEN_SUPERIOR",
+      "RM_CRANIO",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PESCOCO",
+      "TC_TORAX",
+      "TIREOGLOBULINA",
+      "TSH",
+      "USG_TIREOIDE",
+      "MOLECULAR_PCR_MUTACAO",
+      "SEQUENCIAMENTO_AMPLICON",
+      "FISH"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "Vandetanibe",
+        "com": "drogas que prolongam QT",
+        "ref": null
+      },
+      {
+        "droga": "Lenvatinibe",
+        "com": "anti-hipertensivos (monitorar PA)",
+        "ref": null
+      },
+      {
+        "droga": "Selpercatinibe",
+        "com": "IBP/antiácidos e inibidores de CYP3A",
+        "ref": null
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "TKI anti-VEGF",
+        "termosCTCAEv6": [
+          "Hypertension",
+          "Proteinuria",
+          "Diarrhea",
+          "Palmar-plantar erythrodysesthesia syndrome",
+          "Fatigue"
+        ]
+      },
+      {
+        "classe": "QT prolongado (vandetanibe/selpercatinibe)",
+        "termosCTCAEv6": [
+          "Electrocardiogram QT corrected interval prolonged"
+        ]
+      },
+      {
+        "classe": "BRAF/MEK",
+        "termosCTCAEv6": [
+          "Fever",
+          "Rash maculo-papular",
+          "Ejection fraction decreased"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "anti-hipertensivo para TKI",
+      "loperamida (diarreia hormonal do medular)",
+      "levotiroxina com TSH suprimido no iodorrefratário"
+    ],
+    "orientacoes": [
+      "aferição de PA domiciliar em TKI",
+      "ECG basal e seriado com vandetanibe/selpercatinibe",
+      "aconselhamento genético familiar no medular (RET)"
+    ],
+    "encaminhamentos": [
+      "cirurgia de cabeça e pescoço",
+      "endocrinologia",
+      "medicina nuclear",
+      "oncogenética"
+    ],
+    "laudos": [
+      "APAC de quimioterapia (C73)",
+      "solicitação de teste RET germinativo"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "CDT iodorrefratário progressivo sem alvo molecular",
+        "y": "diretriz: lenvatinibe 24 mg/dia (ou sorafenibe 400 mg 2x/dia)",
+        "z": "No SUS não incorporados (Portaria SECTICS 42/2024): seguimento, TSH suprimido, terapias locais",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 10,
+          "trecho": "Lenvatinibe 24 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Carcinoma anaplásico de tireoide",
+        "y": "BRAF V600E por NGS ou IHQ em todos, em fluxo rápido",
+        "z": "IVC mutado: inibidor BRAF/MEK; sem mutação: QT paliativa",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 9,
+          "trecho": "deve ser pesquisada (por NGS ou IHQ) em todos os casos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Carcinoma medular de tireoide",
+        "y": "calcitonina >500 pg/mL ou suspeita de doença à distância",
+        "z": "TC de tórax, RM de abdome e cintilografia óssea, além de TC/RM de pescoço; RET germinativo em todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "tórax, RM de abdome e cintilografia óssea se calcitonina superior a 500",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Medular avançado progressivo/sintomático",
+        "y": "mutação RET presente",
+        "z": "Selpercatinibe 160 mg VO 12/12h; sem RET: vandetanibe 300 mg/dia ou cabozantinibe 60 mg/dia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Selpercatinibe 160 mg 12/12 horas VO",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    "SEM_FONTE: atividade de I-131 (mCi) por risco ATA e alvo de TSH por risco — SBOC não traz; buscar ATA 2025/SBEM.",
+    "SEM_FONTE: indicação de PAAF (Bethesda/TI-RADS) e extensão cirúrgica do CDT (só aula PRO: lobectomia ≤2 cm).",
+    "SEM_FONTE: doses de QT no anaplásico (paclitaxel + carboplatina, paclitaxel semanal, doxorrubicina) e de BRAF/MEK no anaplásico — protocolos não entraram.",
+    "SEM_FONTE: dose de selpercatinibe na fusão RET do CDT (não transferida do medular).",
+    "SEM_FONTE: dose e fracionamento de RT no anaplásico e no medular adjuvante.",
+    "SUS: lenvatinibe/sorafenibe não incorporados (Portaria 42/2024); selpercatinibe, vandetanibe, cabozantinibe, larotrectinibe e BRAF/MEK sem dado SUS no pack.",
+    "Catálogo: sem ids para NGS, RET germinativo, metanefrinas e USG de pescoço (usado USG_TIREOIDE).",
+    "Seguimento do CDT (tireoglobulina, anti-Tg, TSH, USG) sem fonte SBOC."
+  ],
+  "conflitos": [
+    {
+      "tema": "Cabozantinibe no medular: dose e formulação",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+        "pagina": 8,
+        "trecho": "Cabozantinibe 60 mg/dia VO",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+        "pagina": 9,
+        "trecho": "A dosagem da cápsula é 140 mg por dia.",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "60 mg/dia em comprimido; nunca intercambiar mg a mg com a cápsula de 140 mg; SBOC informa não aprovação no Brasil para medular"
+    },
+    {
+      "tema": "Radiofármaco do PET DOTATATE",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+        "pagina": 6,
+        "trecho": "Considerar estadiamento à distância com PET/CT Gálio-69 DOTATATE,",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Catálogo de exames OncoGlobal (PET_DOTATATE: 'PET com gálio-DOTATATE')",
+        "pagina": null,
+        "trecho": "PET com gálio-DOTATATE",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Tratar como PET/CT 68Ga-DOTATATE; registrar provável erro de digitação na SBOC"
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (agente curador, rascunho)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+      "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
+      "Onco PRO 2026/slides-pro-2026/57 - Aula 57 - Tireoide",
+      "Portaria SECTICS/MS 42/2024 (web, IELS 178)",
+      "ClinicalTrials.gov API v2"
+    ],
+    "aprovacaoClinica": null
+  }
+}

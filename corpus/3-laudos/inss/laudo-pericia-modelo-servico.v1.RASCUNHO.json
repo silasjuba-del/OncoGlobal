@@ -287,5 +287,9 @@
   "pendencias": [
     "Validade do documento por finalidade: DECISAO_DR_SILAS.",
     "Base legal: herdar de laudo-inss.v1.RASCUNHO.json (não duplicar aqui)."
-  ]
+  ],
+  "validade": {
+    "valor": null,
+    "pendencia": "DECISAO_DR_SILAS: validade do documento por finalidade"
+  }
 }

@@ -1,0 +1,108 @@
+{
+  "header": {
+    "id": "laudo-oxigenio",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "destinatario": "Secretaria de Saúde / serviço autorizador (APAC de O2 domiciliar)",
+  "finalidade": "Autorização de oxigenoterapia domiciliar prolongada (ODP).",
+  "baseLegal": [
+    {
+      "norma": "Portaria SAS/MS nº 292/2012",
+      "artigo": null,
+      "trecho": "norma federal de ODP (citada em fontes oficiais secundárias)",
+      "vigencia": "histórica",
+      "estado": "NÃO LOCALIZADA em texto integral",
+      "pendencia": "SEM_FONTE (URL BVS retorna 404; anexo da Consolidação 2/2017 não confirmado)"
+    },
+    {
+      "norma": "PCDT/Conitec de ODP",
+      "artigo": null,
+      "trecho": null,
+      "vigencia": null,
+      "estado": "NÃO LOCALIZADO (relatório histórico Conitec 2012 encontrado; portaria de incorporação vigente não)",
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "norma": "Critérios clínicos citados em protocolo oficial (SES-DF)",
+      "artigo": null,
+      "trecho": "PaO2 < 55 mmHg ou SaO2 < 88%; uso ≥15 horas diárias",
+      "vigencia": "protocolo de referência",
+      "estado": "CITADA (protocolo SES-DF)",
+      "pendencia": "PARCIAL — confirmar na norma federal vigente"
+    }
+  ],
+  "requisitosConteudo": {
+    "fatoConfirmado": [
+      "Identificação, CID",
+      "Gasometria/saturação documentadas (repouso, ar ambiente)",
+      "Doença pulmonar/hipoxemia documentada"
+    ],
+    "decisaoMedica": [
+      "Indicação de ODP com fluxo prescrito e horas/dia (≥15 h conforme critério citado)",
+      "Necessidade de concentrador × cilindro (conforme oferta do serviço)",
+      "NUNCA indicação universal para dispneia sem hipoxemia documentada"
+    ]
+  },
+  "documentosAnexos": [
+    "gasometria ou oximetria",
+    "espirometria/imagens quando pertinentes"
+  ],
+  "proibicoesTextoFixo": [
+    "Indicar O2 sem exame que documente hipoxemia",
+    "Fluxo universal"
+  ],
+  "observacoes": "Pior prioridade normativa deste conjunto: nenhuma norma federal integral localizada (Loop 1 e 2 + audit). Impacto: laudo sai com base legal PENDENTE — o app marca pendência, não bloqueia.",
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO + NORMA_INTEGRAL_PENDENTE",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "NORMA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "assinatura": {
+    "origem": "CONFIG",
+    "campos": [
+      "medico.nome",
+      "medico.crm_uf",
+      "medico.rqe",
+      "local",
+      "data",
+      "assinatura_carimbo"
+    ],
+    "fonte": "relatorio-pericial.v1 + Res. CFM 2.381/2024 (identificação mínima do médico; texto oficial PENDENTE de reabertura)"
+  },
+  "validade": {
+    "valor": null,
+    "pendencia": "DECISAO_DR_SILAS: validade do documento por finalidade"
+  },
+  "portas": {
+    "consome": [
+      "prontuario.identificacao",
+      "tumor (CID, data do diagnóstico, estadiamento)",
+      "resumoLongitudinal",
+      "prescricao.vigente",
+      "templates/resumo-prontuario-modelo-servico"
+    ],
+    "oferece": [
+      "documento.laudo-oxigenio"
+    ]
+  }
+}

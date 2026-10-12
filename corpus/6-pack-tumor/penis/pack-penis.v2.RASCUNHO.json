@@ -1,0 +1,1740 @@
+{
+  "header": {
+    "id": "pack-penis",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Pênis v3 (versão para colaboração), arquivo Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf",
+      "trecho": "apoiar as decisões clínicas no tratamento de tumores de pênis",
+      "edicao": "v3 2026 (publicação 30/04/2026; arquivo nomeado 2025)"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Carcinoma epidermoide (espinocelular) de pênis",
+    "cid10": [
+      "C60.0",
+      "C60.1",
+      "C60.2",
+      "C60.8",
+      "C60.9",
+      "D07.4"
+    ],
+    "subtipos": [
+      "CEC usual (HPV-independente)",
+      "basaloide (HPV-dependente)",
+      "verrucoso/warty (condilomatoso)",
+      "papilar",
+      "verrucoso queratinizante (Buschke-Löwenstein)",
+      "adenoescamoso/sarcomatoide",
+      "neoplasia intraepitelial peniana (Tis/NIP/PeIN)"
+    ],
+    "cenarios": [
+      "localizado_Ta_Tis",
+      "localizado_T1a",
+      "localizado_T1b_T2",
+      "localizado_T2extenso_T3_T4",
+      "linfonodal_cN0_por_risco",
+      "linfonodal_cN1",
+      "locorregional_avancado_cN2_cN3_pelvico",
+      "adjuvante_pos_linfadenectomia",
+      "metastatico",
+      "recorrencia_local_inoperavel"
+    ],
+    "limitesAplicabilidade": "Somente carcinoma espinocelular de pênis em adultos. Não se aplica a melanoma, sarcoma, linfoma ou metástase para o pênis. Subtipos histológicos vêm da aula PRO (CURSO); a SBOC 2026 não os detalha. Estadiamento AJCC 8ª edição conforme tabela da SBOC; não transferir cortes de outras edições. Pack propõe; médico decide."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": null,
+        "rotulo": "USG de regiões inguinais (guia para PAAF de linfonodo)",
+        "indicacao": "condicional",
+        "quando": "T1b de risco alto ou T2 cN0, onde houver acesso, como alternativa à biópsia dinâmica do linfonodo sentinela",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 9,
+          "trecho": "Biópsia do LFN sentinela ou punção por agulha fina guiada por ultrassonografia",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "outra",
+          "quando": "Biópsia da lesão peniana antes de qualquer tratamento (incisional ou excisional, conforme lesão)",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026 — Aula 71 Pênis (texto: fontes/pro26/71_-_Aula_71_-_Pênis_-_Visão_geral_e_tratamento_da_doença_localizada_e_avançada.txt)",
+            "pagina": 21,
+            "trecho": "Biópsia obrigatória antes de qualquer tratamento sistêmico.",
+            "estado": "INFERIDO"
+          }
+        },
+        {
+          "tipo": "PAAF",
+          "quando": "Linfonodo inguinal suspeito (palpável ou à imagem) ou cN0 de risco (T1b alto risco/T2) guiada por USG",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+            "pagina": 7,
+            "trecho": "Em casos de LFN suspeitos prosseguir investigação invasiva.",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "cirurgica",
+          "quando": "Biópsia dinâmica do linfonodo sentinela em T1b de risco alto ou T2 cN0, onde houver acesso; se positiva, esvaziamento inguinal bilateral",
+          "catalogoId": "BIOPSIA_GANGLIO",
+          "observacao": "Linfocintilografia/radiofármaco do sentinela sem id no catálogo (pendência SEM_ID_NO_CATALOGO).",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+            "pagina": 9,
+            "trecho": "biópsia dinâmica do LFN sentinela",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "cirurgica",
+          "quando": "Peça de penectomia/ressecção e de linfadenectomia inguinal/pélvica",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+            "pagina": 4,
+            "trecho": "T1b Tumor com ILV e/ou IPN ou alto grau",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "Tipo/subtipo histológico (CEC usual, basaloide, verrucoso, papilar, sarcomatoide etc.)",
+        "Grau histológico G1–G3 (alto grau = grau 3 ou sarcomatoide)",
+        "Invasão linfovascular (ILV) e perineural (IPN) — definem T1a × T1b",
+        "Profundidade/estrutura invadida: lâmina própria/derme, corpo esponjoso, corpo cavernoso/túnica albugínea, uretra, estruturas adjacentes",
+        "Margens cirúrgicas",
+        "Linfadenectomia: número de LFN examinados e positivos, lateralidade, maior dimensão (> 4 cm), extensão extracapsular/extranodal, LFN pélvicos",
+        "p16 por IHQ quando solicitado (marcador substituto de HPV)"
+      ],
+      "molecular": [
+        {
+          "alvo": "p16 (substituto de HPV)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "Classificação HPV-dependente × independente; caracterização de NIP e de subtipo",
+          "consequencia": "Prognóstica/classificatória; não altera a escolha de tratamento na SBOC 2026",
+          "disponivelSUS": "sim",
+          "observacao": "IHQ de neoplasias malignas tem código SIGTAP (por marcador).",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026 — Aula 71 Pênis (texto: fontes/pro26/71_-_Aula_71_-_Pênis_-_Visão_geral_e_tratamento_da_doença_localizada_e_avançada.txt)",
+            "pagina": 7,
+            "trecho": "p16 IHQ positivo (marcador surrogate)",
+            "estado": "INFERIDO"
+          }
+        },
+        {
+          "alvo": "PD-L1",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "pesquisa",
+          "cenario": "Doença avançada, apenas no contexto de ensaio clínico com imunoterapia",
+          "consequencia": "Sem uso assistencial de rotina; imunoterapia só em estudo clínico",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+            "pagina": 14,
+            "trecho": "40 a 60% dos tumores de pênis expressam PD-L1 em algumas séries",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Carga mutacional tumoral (TMB)",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "pesquisa",
+          "cenario": "Doença avançada; exploratório (HERCULES)",
+          "consequencia": "Sem uso assistencial de rotina",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+            "pagina": 14,
+            "trecho": "chegando a 75% na população com alta carga mutacional tumoral (TMB high)",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição (2017), conforme tabela da SBOC 2026",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+      "pagina": 16,
+      "trecho": "AJCC Cancer Staging Manual [Internet]. 8th ed.",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome (ou RM)",
+        "cenario": "LFN não palpáveis e ≥ T1b; LFN palpáveis; LFN positivo ou doença à distância",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 7,
+          "trecho": "Não palpáveis e ≥ T1b: TC ou RM de abdome/pelve",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve (ou RM)",
+        "cenario": "LFN não palpáveis e ≥ T1b; LFN palpáveis; LFN positivo ou doença à distância",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 7,
+          "trecho": "Não palpáveis e ≥ T1b: TC ou RM de abdome/pelve",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_ABDOMEN_SUPERIOR",
+        "rotulo": "RM de abdome (alternativa à TC)",
+        "cenario": "Mesmos cenários da TC de abdome/pelve",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 7,
+          "trecho": "TC ou RM de abdome/pelve + TC ou RX de toráx",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM de pelve (alternativa à TC)",
+        "cenario": "Mesmos cenários da TC de abdome/pelve",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 7,
+          "trecho": "TC ou RM de abdome/pelve + TC ou RX de toráx",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax (ou RX)",
+        "cenario": "≥ T1b com LFN não palpáveis; LFN palpáveis; LFN positivo ou doença à distância",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 7,
+          "trecho": "TC ou RM de abdome/pelve + TC ou RX de toráx",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RX_TORAX_PA_PERFIL",
+        "rotulo": "RX de tórax (alternativa à TC)",
+        "cenario": "Mesmos cenários da TC de tórax",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 7,
+          "trecho": "TC ou RM de abdome/pelve + TC ou RX de toráx",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CINTILOGRAFIA_OSSEA",
+        "rotulo": "Cintilografia óssea",
+        "cenario": "LFN palpáveis/positivos ou doença à distância com dor óssea e/ou fosfatase alcalina elevada",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 7,
+          "trecho": "Considerar cintilografia óssea em caso de dor óssea e/ou aumento de fosfatase alcalina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FOSFATASE_ALCALINA",
+        "rotulo": "Fosfatase alcalina (gatilho para cintilografia)",
+        "cenario": "LFN palpáveis/positivos ou doença à distância",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 7,
+          "trecho": "Considerar cintilografia óssea em caso de dor óssea e/ou aumento de fosfatase alcalina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT com FDG",
+        "cenario": "LFN palpáveis ou positivos/doença à distância, se houver acesso; não rotineiro no estadiamento inicial",
+        "indicacao": "condicional",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "observacao": "Código SIGTAP existe (0206010095), mas a incorporação do PET-CT no SUS é restrita a indicações específicas; cobertura para pênis não confirmada. Alternativa SUS: TC/RM abdome-pelve + TC de tórax."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 7,
+          "trecho": "Considerar PET/CT com FDG caso exista acesso.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+        "rotulo": "PAAF/biópsia guiada de LFN suspeito",
+        "cenario": "LFN suspeito ao exame ou à imagem",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 7,
+          "trecho": "Em casos de LFN suspeitos prosseguir investigação invasiva.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BIOPSIA_GANGLIO",
+        "rotulo": "Biópsia dinâmica de linfonodo sentinela / biópsia de LFN",
+        "cenario": "T1b de risco alto ou T2 cN0, onde houver acesso",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 9,
+          "trecho": "em pacientes com T1b de risco alto ou T2",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "Ta/Tis (estádio 0a/0is)",
+        "conduta": "Preservação de órgão: 5-FU tópico ou imiquimode tópico (preferenciais); laser, Mohs ou ressecção do epitélio acometido. Linfonodos: observação.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 8,
+          "trecho": "Para pacientes com Ta ou Tis, devem ser utilizadas técnicas de preservação de órgão.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "T1a N0 (estádio I)",
+        "conduta": "Penectomia parcial (preferencial); alternativas: ressecção epitelial, Mohs, RT/braquiterapia, laser. Linfonodos: observação.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 8,
+          "trecho": "T1a: Opção preferencial: - Penectomia parcial",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "T1b/T2 N0 (estádio IIa)",
+        "conduta": "Penectomia total ou parcial (parcial só se apto a seguimento de perto); inoperável: RT ou RT + QT. Linfonodos: linfadenectomia inguinal bilateral eletiva (ou BLS dinâmica/PAAF-USG se disponível).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 8,
+          "trecho": "Penectomia parcial (preferencial apenas em pacientes aptos a seguimento de perto)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "T2 extenso, T3 e T4 N0 (estádios IIa/IIb/IV)",
+        "conduta": "Penectomia total; parcial em casos selecionados; inoperável: RT ou RT + QT. Linfonodos: linfadenectomia inguinal bilateral eletiva.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 8,
+          "trecho": "T2 extenso, T3 e T4: Opção preferencial: - Penectomia total",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "cN1 (estádio IIIa)",
+        "conduta": "Investigação invasiva do LFN; linfadenectomia inguinal (no curso: unilateral ± biópsia contralateral); esvaziamento pélvico se ≥ 2 LFN inguinais positivos e/ou extensão extracapsular.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026 — Aula 71 Pênis (texto: fontes/pro26/71_-_Aula_71_-_Pênis_-_Visão_geral_e_tratamento_da_doença_localizada_e_avançada.txt)",
+          "pagina": 15,
+          "trecho": "N1 Linfadenectomia inguinal unilateral (± biópsia contralateral)",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "grupo": "cN2 volumoso/bilateral, cN3 ou LFN pélvico (estádios IIIb/IV)",
+        "conduta": "Considerar QT neoadjuvante (TIP preferencial; TPF alternativa) seguida de cirurgia linfonodal inguinal/pélvica conforme resposta.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 11,
+          "trecho": "Considerar QT neoadjuvante nos seguintes cenários",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Pós-linfadenectomia de alto risco (pélvico, extranodal, inguinal bilateral, ≥ 4 LFN, LFN > 4 cm, margens +)",
+        "conduta": "Considerar QT adjuvante (TIP), associada ou não à RT.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 11,
+          "trecho": "Considerar QT adjuvante (associada ou não à RT) nos seguintes cenários",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "M1 ou irressecável, ECOG PS 0–1",
+        "conduta": "QT à base de cisplatina (cisplatina + 5-FU, TIP ou TPF); carboplatina + paclitaxel se ClCr < 50 mL/min; considerar cirurgia de consolidação após resposta/estabilidade; estudo clínico se disponível.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 13,
+          "trecho": "Carboplatina + Paclitaxel (clearance de creatinina < 50 mL/min)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "M1, ECOG PS > 1",
+        "conduta": "Suporte paliativo exclusivo.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 13,
+          "trecho": "Suporte paliativo exclusivo está indicado naqueles pacientes com ECOG PS > 1.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [],
+      "naoPedirDeRotina": [
+        "Nenhum marcador tumoral sérico é recomendado pela SBOC 2026 para câncer de pênis (CEA, PSA e outros sem indicação nesta diretriz)."
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "localizado_Ta_Tis",
+        "intencao": "curativa",
+        "modalidades": [
+          "5-FU tópico",
+          "imiquimode tópico",
+          "ressecção à laser",
+          "cirurgia micrográfica de Mohs",
+          "ressecção parcial/total do epitélio acometido"
+        ],
+        "criterio": "Ta ou Tis: preservação de órgão; LFN em observação",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 8,
+          "trecho": "Para pacientes com Ta ou Tis, devem ser utilizadas técnicas de preservação de órgão.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "localizado_T1a",
+        "intencao": "curativa",
+        "modalidades": [
+          "penectomia parcial (preferencial)",
+          "ressecção epitelial",
+          "Mohs",
+          "RT/braquiterapia",
+          "laser"
+        ],
+        "criterio": "T1a N0; RT externa/braquiterapia em tumores < 4 cm G1–G2 selecionados",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 9,
+          "trecho": "tumores < 4 cm e G1 ou G2, considerar como opção RT externa",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "localizado_T1b_T2",
+        "intencao": "curativa",
+        "modalidades": [
+          "penectomia total",
+          "penectomia parcial (se seguimento de perto)",
+          "RT ou RT + QT se inoperável"
+        ],
+        "criterio": "T1b/T2 N0",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 8,
+          "trecho": "Penectomia parcial (preferencial apenas em pacientes aptos a seguimento de perto)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "localizado_T2extenso_T3_T4",
+        "intencao": "curativa",
+        "modalidades": [
+          "penectomia total",
+          "penectomia parcial (selecionados)",
+          "RT ou RT + QT se inoperável"
+        ],
+        "criterio": "T2 extenso, T3, T4 N0",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 8,
+          "trecho": "T2 extenso, T3 e T4: Opção preferencial: - Penectomia total",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "linfonodal_cN0_por_risco",
+        "intencao": "curativa",
+        "modalidades": [
+          "observação (Ta, Tis, T1a)",
+          "linfadenectomia inguinal bilateral eletiva (T1b–T4)",
+          "BLS dinâmica ou PAAF guiada por USG se disponível (T1b alto risco/T2)"
+        ],
+        "criterio": "Após tratamento local; doença oculta em 10–20% dos cN0 dissecados",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 9,
+          "trecho": "a incidência de acometimento após o procedimento varia entre 10 e 20%",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "linfonodal_cN1",
+        "intencao": "curativa",
+        "modalidades": [
+          "investigação invasiva do LFN",
+          "linfadenectomia inguinal",
+          "esvaziamento pélvico se ≥ 2 LFN ou extracapsular"
+        ],
+        "criterio": "LFN inguinal móvel, palpável, unilateral",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 9,
+          "trecho": "Em pacientes com pelo menos 2 LFN inguinais comprometidos e/ou extravasamento extracapsular",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "locorregional_avancado_cN2_cN3_pelvico",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT neoadjuvante (TIP preferencial; TPF alternativa)",
+          "linfadenectomia inguinal/pélvica após resposta"
+        ],
+        "criterio": "Primário irressecável; LFN inguinal volumoso ou bilateral; LFN pélvico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 11,
+          "trecho": "QT neoadjuvante deve ser indicada em cenários de cirurgia não factível",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "adjuvante_pos_linfadenectomia",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT adjuvante (TIP)",
+          "± RT"
+        ],
+        "criterio": "LFN pélvico, extensão extranodal, inguinal bilateral, ≥ 4 LFN, LFN > 4 cm, margens acometidas",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 11,
+          "trecho": "Considerar QT adjuvante (associada ou não à RT) nos seguintes cenários",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT à base de cisplatina",
+          "carboplatina + paclitaxel se ClCr < 50 mL/min",
+          "suporte paliativo exclusivo se ECOG PS > 1",
+          "estudo clínico",
+          "cirurgia de consolidação após resposta/estabilidade"
+        ],
+        "criterio": "ECOG PS 0–1 para QT",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 13,
+          "trecho": "Considerar cirurgia de consolidação nos pacientes que apresentaram resposta completa, parcial ou estável",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "recorrencia_local_inoperavel",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT + RT"
+        ],
+        "criterio": "Não candidato a cirurgia, recorrência local ou doença metastática",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 13,
+          "trecho": "QT + RT pode ser considerado para os pacientes não candidatos a cirurgia",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "penis-cisplatina-5fu",
+        "nome": "Cisplatina + 5-FU",
+        "cenario": "metastatico",
+        "linha": "1ª linha paliativa",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC p.13: \"Cisplatina 75 mg/m² EV D1\""
+          },
+          {
+            "droga": "fluoruracila (5-FU)",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D4",
+            "observacao": "Infusão contínua em bomba de 96 h. SBOC p.13: \"5-FU 1.000 mg/m² EV (bomba de infusão de 96h) D1 a D4\""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "Não descrita na SBOC 2026; hidratação e antiemese conforme bula e protocolo institucional (pendência SEM_FONTE local).",
+        "ajusteObrigatorio": "ECOG PS 0–1 para QT (PS > 1: suporte paliativo exclusivo). Função renal antes de cada ciclo (CI-01); se ClCr < 50 mL/min usar carboplatina + paclitaxel. Audiometria se sintomas (cisplatina ototóxica, INAT-15).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "observacao": "QT paliativa faturada por APAC de procedimento; código SIGTAP específico para pênis não conferido nesta curadoria.",
+          "fonte": null,
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 13,
+          "trecho": "A cada 4 semanas- 5-FU 1.000 mg/m² EV",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "penis-tip-paliativo",
+        "nome": "TIP (paclitaxel + ifosfamida + cisplatina)",
+        "cenario": "metastatico",
+        "linha": "1ª linha paliativa",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC p.13: \"Paclitaxel 175 mg/m² EV D1\""
+          },
+          {
+            "droga": "ifosfamida",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D3",
+            "observacao": "SBOC p.13: \"Ifosfamida 1.200 mg/m² EV D1 a D3\". Mesna e hidratação obrigatórias (bula FDA)."
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D3",
+            "observacao": "SBOC p.13: \"Cisplatina 25 mg/m² D1 a D3\" — a via não está escrita na SBOC; via EV pela bula: \"Cisplatin is administered by slow intravenous infusion.\" (rótulo FDA)."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Mesna com ifosfamida e hidratação ≥ 2 L/dia (bula FDA da ifosfamida); dose da mesna não consta na SBOC (pendência SEM_FONTE). Pré-medicação do paclitaxel conforme bula/protocolo institucional.",
+        "ajusteObrigatorio": "ECOG PS 0–1. Função renal (cisplatina CI-01; ifosfamida nefrotóxica — boxed warning FDA). Monitorar encefalopatia por ifosfamida e hemograma por ciclo.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "observacao": "QT paliativa faturada por APAC de procedimento; código SIGTAP específico não conferido.",
+          "fonte": null,
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 13,
+          "trecho": "A cada 3 semanas- Cisplatina 25 mg/m² D1 a D3",
+          "estado": "VERIFICADO"
+        },
+        "fonteBula": [
+          {
+            "tipo": "BULA",
+            "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:ifosfamide&limit=1 (rótulo FDA, set_id 91e433a9-6800-43a6-ac13-a49a04a5aecd)",
+            "pagina": null,
+            "trecho": "Administer mesna with Ifosfamide for Injection to reduce the incidence",
+            "estado": "VERIFICADO"
+          },
+          {
+            "tipo": "BULA",
+            "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:cisplatin&limit=1 (rótulo FDA, set_id 00396546-6a80-4b9f-a5f8-c22c1d1bb173)",
+            "pagina": null,
+            "trecho": "Cisplatin is administered by slow intravenous infusion.",
+            "estado": "VERIFICADO"
+          }
+        ]
+      },
+      {
+        "id": "penis-tpf-paliativo",
+        "nome": "TPF (docetaxel + cisplatina + 5-FU)",
+        "cenario": "metastatico",
+        "linha": "1ª linha paliativa",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC p.13: \"Cisplatina 75 mg/m² EV D1\""
+          },
+          {
+            "droga": "docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC p.13: \"Docetaxel 75 mg/m² EV D1\""
+          },
+          {
+            "droga": "fluoruracila (5-FU)",
+            "dose": 750,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D4",
+            "observacao": "Infusão contínua em bomba de 96 h. SBOC p.13: \"5-FU 750 mg/m² EV (bomba de infusão de 96h) D1 a D4\""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Não descrita na SBOC 2026; pré-medicação do docetaxel e antiemese conforme bula/protocolo institucional (pendência SEM_FONTE local).",
+        "ajusteObrigatorio": "ECOG PS 0–1. Toxicidade elevada na série neoadjuvante (52% não completaram 4 ciclos). Função renal (CI-01); docetaxel × inibidores fortes de CYP3A4 (INAT-18).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "observacao": "QT paliativa faturada por APAC de procedimento; código SIGTAP específico não conferido.",
+          "fonte": null,
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 13,
+          "trecho": "A cada 3 semanas- Docetaxel 75 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "penis-carboplatina-paclitaxel-paliativo",
+        "nome": "Carboplatina + paclitaxel (ClCr < 50 mL/min)",
+        "cenario": "metastatico",
+        "linha": "1ª linha paliativa (inelegível à cisplatina por função renal)",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC p.13: \"Carboplatina AUC 5 EV D1\". Dose em mg pela fórmula de Calvert (CI-04)."
+          },
+          {
+            "droga": "paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC p.13: \"Paclitaxel 175 mg/m² EV D1\""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Pré-medicação do paclitaxel conforme bula/protocolo institucional (não descrita na SBOC).",
+        "ajusteObrigatorio": "Indicado quando clearance de creatinina < 50 mL/min. Calvert com ClCr (CI-04). Paclitaxel × clopidogrel (INAT-17).",
+        "fichaId": "FICHA.prostata.carboplatina-paclitaxel-21-21-dias__nao-especificado@1.0.0",
+        "observacao": "Ficha reutilizada porque as doses coincidem (paclitaxel 175 mg/m² + carboplatina AUC 5, 21 dias); a ficha está nomeada para próstata — conferir antes de liberar.",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "observacao": "QT paliativa faturada por APAC de procedimento; código SIGTAP específico não conferido.",
+          "fonte": null,
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 13,
+          "trecho": "Carboplatina + Paclitaxel (clearance de creatinina < 50 mL/min)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "penis-cisplatina-gemcitabina-paliativo",
+        "nome": "Cisplatina + gemcitabina",
+        "cenario": "metastatico",
+        "linha": "1ª linha paliativa (citada nas considerações)",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "SBOC p.14 cita o esquema sem dose; não transferir dose de outro tumor.",
+            "pendencia": "SEM_FONTE"
+          },
+          {
+            "droga": "gemcitabina",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "SBOC p.14 cita o esquema sem dose; não transferir dose de outro tumor.",
+            "pendencia": "SEM_FONTE"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "pendencia": "SEM_FONTE",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "observacao": "Status não conferido.",
+          "fonte": null,
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 14,
+          "trecho": "cisplatina e gemcitabina, TPF (cisplatina, docetaxel e 5-FU)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "penis-paclitaxel-semanal-2linha",
+        "nome": "Paclitaxel semanal",
+        "cenario": "metastatico",
+        "linha": "2ª linha paliativa",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "SBOC p.14 cita paclitaxel semanal em 2ª linha (resposta 30%) sem dose.",
+            "pendencia": "SEM_FONTE"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "pendencia": "SEM_FONTE",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "observacao": "Status não conferido.",
+          "fonte": null,
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 14,
+          "trecho": "Dados de 2ª linha somente com paclitaxel semanal e taxa de resposta de 30%.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "penis-tip-neoadjuvante",
+        "nome": "TIP neoadjuvante",
+        "cenario": "locorregional_avancado_cN2_cN3_pelvico",
+        "linha": "neoadjuvante (preferencial)",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "SBOC p.11 indica TIP neoadjuvante sem dose; as doses da p.13 são do cenário metastático e não foram transferidas.",
+            "pendencia": "SEM_FONTE"
+          },
+          {
+            "droga": "ifosfamida",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "Idem; mesna obrigatória pela bula.",
+            "pendencia": "SEM_FONTE"
+          },
+          {
+            "droga": "cisplatina",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "Idem.",
+            "pendencia": "SEM_FONTE"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "Mesna com ifosfamida (bula FDA).",
+        "ajusteObrigatorio": "Reavaliar com imagem após QT; cirurgia linfonodal conforme resposta.",
+        "fichaId": null,
+        "pendencia": "SEM_FONTE",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "observacao": "Status não conferido.",
+          "fonte": null,
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 11,
+          "trecho": "Preferencial: TIP",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "penis-tpf-neoadjuvante",
+        "nome": "TPF neoadjuvante",
+        "cenario": "locorregional_avancado_cN2_cN3_pelvico",
+        "linha": "neoadjuvante (alternativa)",
+        "drogas": [
+          {
+            "droga": "docetaxel",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "SBOC p.11 indica TPF neoadjuvante sem dose; doses da p.13 (metastático) não transferidas.",
+            "pendencia": "SEM_FONTE"
+          },
+          {
+            "droga": "cisplatina",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "Idem.",
+            "pendencia": "SEM_FONTE"
+          },
+          {
+            "droga": "fluoruracila (5-FU)",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "Idem.",
+            "pendencia": "SEM_FONTE"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Toxicidade elevada: 52% não completaram os 4 ciclos propostos na série citada.",
+        "fichaId": null,
+        "pendencia": "SEM_FONTE",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "observacao": "Status não conferido.",
+          "fonte": null,
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 11,
+          "trecho": "com 52% dos pacientes não conseguindo completar os 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "penis-tip-adjuvante",
+        "nome": "TIP adjuvante",
+        "cenario": "adjuvante_pos_linfadenectomia",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "SBOC p.11 indica TIP adjuvante sem dose; doses da p.13 (metastático) não transferidas.",
+            "pendencia": "SEM_FONTE"
+          },
+          {
+            "droga": "ifosfamida",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "Idem; mesna obrigatória pela bula.",
+            "pendencia": "SEM_FONTE"
+          },
+          {
+            "droga": "cisplatina",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "Idem.",
+            "pendencia": "SEM_FONTE"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "Mesna com ifosfamida (bula FDA).",
+        "ajusteObrigatorio": "Pode associar RT (benefício sugerido em pN3/pélvico, dados retrospectivos).",
+        "fichaId": null,
+        "pendencia": "SEM_FONTE",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "observacao": "Status não conferido.",
+          "fonte": null,
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 12,
+          "trecho": "consideramos adequado extrapolar os princípios dos benefícios demonstrados no cenário neoadjuvante",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "localizado_T1a (tumores < 4 cm, G1–G2 selecionados)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "não",
+        "modalidade": "RT externa ou braquiterapia (preservação peniana 65–90%)",
+        "pendencia": "SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 9,
+          "trecho": "tumores < 4 cm e G1 ou G2, considerar como opção RT externa",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "localizado T1b–T4 inoperável",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "RT exclusiva ou RT + QT (agente não especificado na SBOC)",
+        "pendencia": "SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 8,
+          "trecho": "Pacientes inoperáveis: - RT ou RT + QT",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "adjuvante pN3 (extracapsular ou pélvico) após cirurgia",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "associada à QT (benefício sugerido por estudos retrospectivos)",
+        "pendencia": "SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 12,
+          "trecho": "a adição de RT à QT pode trazer benefício clínico",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "recorrencia_local_inoperavel / metastático",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "QT + RT (agente não especificado)",
+        "pendencia": "SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 13,
+          "trecho": "QT + RT pode ser considerado para os pacientes não candidatos a cirurgia",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Ressecção à laser, cirurgia micrográfica de Mohs ou ressecção parcial/total do epitélio acometido",
+        "quando": "Ta/Tis (outras opções) e T1a (alternativas); Mohs preferível em lesões superficiais do corpo proximal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 9,
+          "trecho": "A cirurgia micrográfica de Mohs é uma alternativa à ressecção local ampliada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Penectomia parcial",
+        "quando": "T1a (preferencial); T1b/T2 se apto a seguimento de perto; T3–T4 de pequeno volume selecionados em centro experiente",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 8,
+          "trecho": "Penectomia parcial (preferencial apenas em pacientes aptos a seguimento de perto)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Penectomia total",
+        "quando": "T1b/T2 (preferencial); T2 extenso, T3 e T4 (preferencial)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 8,
+          "trecho": "T2 extenso, T3 e T4: Opção preferencial: - Penectomia total",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Observação linfonodal",
+        "quando": "Ta, Tis e T1a após tratamento local",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 9,
+          "trecho": "Ta, Tis e T1a: observação",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Linfadenectomia inguinal bilateral eletiva",
+        "quando": "T1b–T4 cN0 após tratamento local",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 9,
+          "trecho": "T1b-T4: linfadenectomia inguinal bilateral eletiva",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Biópsia dinâmica do LFN sentinela ou PAAF guiada por USG",
+        "quando": "T1b de risco alto ou T2 cN0, se disponível; se positiva, esvaziamento inguinal bilateral",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 9,
+          "trecho": "Se LFN positivo, seguir com esvaziamento inguinal bilateral",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Esvaziamento (linfadenectomia) pélvico",
+        "quando": "≥ 2 LFN inguinais comprometidos e/ou extravasamento extracapsular",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 9,
+          "trecho": "Em pacientes com pelo menos 2 LFN inguinais comprometidos e/ou extravasamento extracapsular",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Cirurgia de consolidação",
+        "quando": "Doença avançada com resposta completa, parcial ou estável após tratamento sistêmico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 13,
+          "trecho": "Considerar cirurgia de consolidação nos pacientes que apresentaram resposta completa, parcial ou estável",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "PD-L1 / HPV / TMB alto (doença avançada)",
+        "opcao": "Imunoterapia (pembrolizumabe ou cemiplimabe) + QT à base de platina somente em ensaio clínico",
+        "evidencia": "Fase II: HERCULES (pembrolizumabe + platina, TRO 39,4%; 75% em TMB alto); EPIC-A (cemiplimabe + cisplatina, TRO 51,7%)",
+        "sus": "DADO_AUSENTE — sem recomendação assistencial na SBOC 2026; alternativa SUS: QT à base de platina",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 14,
+          "trecho": "estudo brasileiro de fase II, Hercules (LACOG 0218), avaliou a combinação de pembrolizumabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "EGFR",
+        "opcao": "Inibidores de EGFR (ex.: cetuximabe) não indicados de rotina",
+        "evidencia": "Resultados modestos no tratamento paliativo",
+        "sus": "DADO_AUSENTE — alternativa SUS: QT à base de platina",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 14,
+          "trecho": "a adição de inibidores do EGFR no tratamento paliativo mostrou resultados modestos",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": null,
+      "riscoNeutropeniaFebril": null,
+      "outros": [
+        "Ifosfamida: mesna e hidratação ≥ 2 L/dia; monitorar encefalopatia, nefrotoxicidade e cistite hemorrágica (bula FDA, boxed warning).",
+        "Cisplatina: função renal, eletrólitos e audição (bula FDA; INAT-15; CI-01).",
+        "Linfadenectomia inguinal/pélvica: cuidados com ferida e linfedema.",
+        "Classificação de emetogenicidade e de risco de neutropenia febril não consta na SBOC de pênis (pendência SEM_FONTE)."
+      ],
+      "pendencia": "SEM_FONTE",
+      "fonte": {
+        "tipo": "BULA",
+        "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:ifosfamide&limit=1 (rótulo FDA, set_id 91e433a9-6800-43a6-ac13-a49a04a5aecd)",
+        "pagina": null,
+        "trecho": "Administer mesna with Ifosfamide for Injection to reduce the incidence",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "HERCULES (LACOG 0218)",
+        "nct": "NCT04224740",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CEC de pênis localmente avançado ou metastático, 1ª linha (33 pacientes)",
+        "bracos": "Pembrolizumabe + QT à base de platina (braço único, fase II)",
+        "desfecho": "Taxa de resposta objetiva",
+        "resultado": "TRO 39,4% (investigador); 75% em TMB alto",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT04224740",
+          "pagina": null,
+          "trecho": "Pembrolizumab Combined With Cisplatin-based Chemotherapy as First-line Systemic Therapy",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "EPIC-A",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "populacao": "Carcinoma de pênis localmente avançado ou metastático (29 analisados)",
+        "bracos": "Cemiplimabe + QT à base de cisplatina, seguida de manutenção com cemiplimabe (fase II)",
+        "desfecho": "TRO e benefício clínico",
+        "resultado": "Benefício clínico 62%; TRO 51,7%",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 14,
+          "trecho": "a taxa de benefício clínico foi de 62% e a TRO, 51,7%",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "Fase II TIP neoadjuvante (Pagliaro, J Clin Oncol 2010)",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "populacao": "Doença avançada/locorregional",
+        "bracos": "TIP neoadjuvante seguido de cirurgia",
+        "desfecho": "Resposta objetiva, ypN0, SG",
+        "resultado": "65% de resposta objetiva; 10% ypN0; SG 5 anos 50% nos respondedores × 8% na progressão",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 11,
+          "trecho": "65% de resposta objetiva, 10% de ypN0 pós cirurgia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "Fase II TPF (CRUK/09/001)",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "populacao": "Pênis localmente avançado ou metastático",
+        "bracos": "Docetaxel + cisplatina + 5-FU",
+        "desfecho": "Resposta",
+        "resultado": "Ver referência 28 da SBOC; série neoadjuvante com 44% de resposta e toxicidade elevada",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 11,
+          "trecho": "com 52% dos pacientes não conseguindo completar os 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "Primário com preservação peniana — 5 anos",
+        "exames": [],
+        "periodicidade": "Exame físico a cada 3 meses (1º–2º ano) e 6 meses (3º–5º ano); repetir biópsia se tratamento local/laser para Cis",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 15,
+          "trecho": "Dependerá do tratamento inicial empregado e da presença de LFN inguinais comprometidos.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Primário com amputação — 5 anos",
+        "exames": [],
+        "periodicidade": "Exame físico a cada 3 meses (1º–2º ano) e 1 ano (3º–5º ano)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 15,
+          "trecho": "Amputação 3 meses 1 ano Exame físico 5 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Linfonodal: vigilância ativa — 5 anos",
+        "exames": [],
+        "periodicidade": "Exame físico a cada 3 meses (1º–2º ano) e 6 meses (3º–5º ano)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 15,
+          "trecho": "Vigilância ativa 3 meses 6 meses Exame físico 5 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Linfonodal: pN0 — 5 anos",
+        "exames": [],
+        "periodicidade": "Exame físico a cada 3 meses (1º–2º ano) e 1 ano (3º–5º ano); USG inguinal com biópsia opcional (sem id no catálogo)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 15,
+          "trecho": "USG com biópsia é opcional",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Linfonodal: pN+ — 5 anos (imagem preferencialmente para pN2–N3)",
+        "exames": [
+          "RM_ABDOMEN_SUPERIOR",
+          "RM_PELVE",
+          "TC_TORAX",
+          "RX_TORAX_PA_PERFIL"
+        ],
+        "periodicidade": "Exame físico 3 meses (1º–2º ano) e 6 meses (3º–5º ano); RM de abdome e pelve a cada 3 meses no 1º ano e 6 meses no 2º ano; TC/RX de tórax a cada 6 meses (leitura da tabela ambígua para 3º–5º ano)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 15,
+          "trecho": "* Indicação preferencialmente para pN2-N3.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "BIOPSIA_GANGLIO",
+      "IMUNOHISTOQUIMICA",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "RM_ABDOMEN_SUPERIOR",
+      "RM_PELVE",
+      "TC_TORAX",
+      "RX_TORAX_PA_PERFIL",
+      "CINTILOGRAFIA_OSSEA",
+      "FOSFATASE_ALCALINA",
+      "PET_CT_FDG"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "cisplatina",
+        "com": "ototóxicos",
+        "ref": "INAT-15"
+      },
+      {
+        "droga": "cisplatina",
+        "com": "insuficiência renal",
+        "ref": "CI-01"
+      },
+      {
+        "droga": "carboplatina",
+        "com": "dose por Calvert",
+        "ref": "CI-04"
+      },
+      {
+        "droga": "paclitaxel",
+        "com": "clopidogrel",
+        "ref": "INAT-17"
+      },
+      {
+        "droga": "docetaxel",
+        "com": "inibidores fortes de CYP3A4",
+        "ref": "INAT-18"
+      },
+      {
+        "droga": "citotóxicos (todos os esquemas)",
+        "com": "vacinas de vírus vivo",
+        "ref": "INAT-29"
+      },
+      {
+        "droga": "pembrolizumabe/cemiplimabe (apenas em ensaio)",
+        "com": "corticoide basal",
+        "ref": "INAT-27"
+      },
+      {
+        "droga": "pembrolizumabe/cemiplimabe (apenas em ensaio)",
+        "com": "antibiótico",
+        "ref": "INAT-28"
+      },
+      {
+        "droga": "pembrolizumabe/cemiplimabe (apenas em ensaio)",
+        "com": "doença autoimune/transplante",
+        "ref": "CI-08"
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "Nefrotoxicidade (cisplatina, ifosfamida)",
+        "termosCTCAEv6": [
+          "Acute kidney injury",
+          "Creatinine increased",
+          "Hypomagnesemia"
+        ]
+      },
+      {
+        "classe": "Ototoxicidade (cisplatina)",
+        "termosCTCAEv6": [
+          "Hearing impaired",
+          "Tinnitus"
+        ]
+      },
+      {
+        "classe": "Urotoxicidade/neurotoxicidade (ifosfamida)",
+        "termosCTCAEv6": [
+          "Cystitis noninfective",
+          "Hematuria",
+          "Encephalopathy"
+        ]
+      },
+      {
+        "classe": "Mielotoxicidade",
+        "termosCTCAEv6": [
+          "Neutrophil count decreased",
+          "Febrile neutropenia",
+          "Anemia",
+          "Platelet count decreased"
+        ]
+      },
+      {
+        "classe": "Neuropatia (taxanos, cisplatina)",
+        "termosCTCAEv6": [
+          "Peripheral sensory neuropathy"
+        ]
+      },
+      {
+        "classe": "Mucosa/TGI (5-FU infusional, docetaxel)",
+        "termosCTCAEv6": [
+          "Oral mucositis",
+          "Diarrhea",
+          "Nausea",
+          "Vomiting"
+        ]
+      },
+      {
+        "classe": "Pós-linfadenectomia inguinal",
+        "termosCTCAEv6": [
+          "Lymphedema",
+          "Wound infection",
+          "Wound dehiscence"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "antiemese para esquema com cisplatina",
+      "mesna + hidratação com ifosfamida",
+      "pré-medicação de taxano",
+      "reposição de magnésio/eletrólitos com cisplatina"
+    ],
+    "orientacoes": [
+      "Seguimento de perto é condição para preservação peniana (penectomia parcial/terapias locais).",
+      "Autoexame das virilhas e retorno precoce se nódulo inguinal.",
+      "Cuidados com ferida e prevenção de linfedema após linfadenectomia inguinal.",
+      "Vacina HPV no SUS para meninos e meninas de 9 a 14 anos (prevenção; não trata lesão existente) — fonte: aula PRO p.19.",
+      "Infusor de 5-FU por 96 h: cuidados com cateter e bomba."
+    ],
+    "encaminhamentos": [
+      "encaminhamento-cirurgia-oncologica",
+      "encaminhamento-radioterapia",
+      "urologia",
+      "cuidados paliativos"
+    ],
+    "laudos": [
+      "laudo-inss",
+      "laudo-afastamento",
+      "laudo-loas",
+      "laudo-transporte",
+      "laudo-judicial"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "Tumor ≥ T1b com linfonodos inguinais não palpáveis",
+        "y": "TC ou RM de abdome/pelve + TC ou RX de tórax",
+        "z": "LFN suspeito à imagem → investigação invasiva (PAAF/biópsia)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 7,
+          "trecho": "Não palpáveis e ≥ T1b: TC ou RM de abdome/pelve",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "T1b–T4 cN0 após tratamento do primário",
+        "y": "Linfadenectomia inguinal bilateral eletiva; BLS dinâmica ou PAAF-USG se disponível (T1b alto risco/T2)",
+        "z": "Se LFN positivo → esvaziamento inguinal bilateral",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 9,
+          "trecho": "Se LFN positivo, seguir com esvaziamento inguinal bilateral",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "≥ 2 LFN inguinais comprometidos e/ou extravasamento extracapsular",
+        "y": "Esvaziamento pélvico",
+        "z": "Se pélvico/extranodal/bilateral/≥ 4 LFN/LFN > 4 cm/margens + → considerar QT adjuvante (TIP) ± RT",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 9,
+          "trecho": "Em pacientes com pelo menos 2 LFN inguinais comprometidos e/ou extravasamento extracapsular",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "LFN inguinal volumoso ou bilateral, LFN pélvico ou primário irressecável",
+        "y": "QT neoadjuvante (TIP preferencial; TPF alternativa)",
+        "z": "Cirurgia após resposta; SG 5 anos 50% nos respondedores × 8% na progressão",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 11,
+          "trecho": "Considerar QT neoadjuvante nos seguintes cenários",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Doença metastática com clearance de creatinina < 50 mL/min",
+        "y": "Carboplatina AUC 5 + paclitaxel 175 mg/m² D1 a cada 21 dias no lugar da cisplatina",
+        "z": "Evita nefrotoxicidade da cisplatina; dose de carboplatina por Calvert",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 13,
+          "trecho": "Carboplatina + Paclitaxel (clearance de creatinina < 50 mL/min)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Doença metastática com ECOG PS > 1",
+        "y": "Suporte paliativo exclusivo",
+        "z": "QT não indicada",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 13,
+          "trecho": "Suporte paliativo exclusivo está indicado naqueles pacientes com ECOG PS > 1.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Dor óssea e/ou fosfatase alcalina elevada com LFN palpável/positivo",
+        "y": "Cintilografia óssea",
+        "z": "Define M1 ósseo e muda intenção para paliativa",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+          "pagina": 7,
+          "trecho": "Considerar cintilografia óssea em caso de dor óssea e/ou aumento de fosfatase alcalina",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    "Doses de TIP/TPF neoadjuvante e de TIP adjuvante ausentes na SBOC 2026 (doses só na p.13, cenário metastático) — SEM_FONTE.",
+    "Doses de cisplatina + gemcitabina e de paclitaxel semanal (2ª linha) não constam na SBOC — SEM_FONTE.",
+    "Via da cisplatina no TIP não escrita na SBOC (p.13); preenchida como EV pela bula FDA.",
+    "Dose de mesna no TIP não consta na SBOC; usar bula/protocolo institucional.",
+    "Doses e fracionamento de RT/braquiterapia (primário, inoperável, adjuvante, paliativo) e agente da QT concomitante ausentes na SBOC — SEM_FONTE.",
+    "Doses de 5-FU tópico e imiquimode tópico (Ta/Tis) ausentes na SBOC — não incluídos como protocolo.",
+    "Conduta específica para cN1 vem só da aula PRO (CURSO/INFERIDO); SBOC não detalha cN1 isoladamente.",
+    "USG inguinal e linfocintilografia do linfonodo sentinela sem id no catálogo (SEM_ID_NO_CATALOGO).",
+    "Cobertura SUS de PET-CT FDG para pênis e códigos APAC de QT para C60 não conferidos (DADO_AUSENTE).",
+    "Tabela de seguimento (SBOC p.15) para pN+ tem leitura ambígua quanto à imagem no 3º–5º ano.",
+    "SBOC p.14 numera HERCULES como ref. 33 e EPIC-A como ref. 34, mas a lista de referências (p.18) inverte (33 = EPIC-A; 34 = HERCULES).",
+    "NCT de EPIC-A e do fase II TIP (Pagliaro) não verificados.",
+    "fichaId do carboplatina + paclitaxel aponta para ficha nomeada de próstata (doses iguais) — conferir.",
+    "Emetogenicidade e risco de neutropenia febril sem fonte local."
+  ],
+  "conflitos": [
+    {
+      "tema": "Limiar de função renal para carboplatina + paclitaxel",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+        "pagina": 13,
+        "trecho": "Carboplatina + Paclitaxel (clearance de creatinina < 50 mL/min)",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — Aula 71 Pênis (texto: fontes/pro26/71_-_Aula_71_-_Pênis_-_Visão_geral_e_tratamento_da_doença_localizada_e_avançada.txt)",
+        "pagina": 16,
+        "trecho": "Clearance > 50 mL/min Carboplatina + Paclitaxel",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "SBOC: carboplatina + paclitaxel quando ClCr < 50 mL/min (a própria aula, p.21, também diz < 50; p.16 parece erro de digitação)."
+    },
+    {
+      "tema": "Estratégia linfonodal em T1b–T2 cN0",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+        "pagina": 9,
+        "trecho": "T1b-T4: linfadenectomia inguinal bilateral eletiva",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — Aula 71 Pênis (texto: fontes/pro26/71_-_Aula_71_-_Pênis_-_Visão_geral_e_tratamento_da_doença_localizada_e_avançada.txt)",
+        "pagina": 21,
+        "trecho": "Biópsia do linfonodo sentinela é preferível à linfadenectomia eletiva em T1b–T2 N0.",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "SBOC: linfadenectomia inguinal bilateral eletiva como padrão; BLS dinâmica ou PAAF-USG apenas onde disponível, com esvaziamento bilateral se positiva."
+    },
+    {
+      "tema": "Definição de N1",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+        "pagina": 5,
+        "trecho": "pN1 ≤ 2 LFN inguinais unilaterais sem extensão extracapsular",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — Aula 71 Pênis (texto: fontes/pro26/71_-_Aula_71_-_Pênis_-_Visão_geral_e_tratamento_da_doença_localizada_e_avançada.txt)",
+        "pagina": 12,
+        "trecho": "N1 Metástase em um único linfonodo inguinal unilateral",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Usar a tabela AJCC 8 transcrita pela SBOC (cN e pN separados)."
+    },
+    {
+      "tema": "Esquema de ifosfamida",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
+        "pagina": 13,
+        "trecho": "Ifosfamida 1.200 mg/m² EV D1 a D3",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:ifosfamide&limit=1",
+        "pagina": null,
+        "trecho": "1.2 grams per m2 per day for 5 consecutive days",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Bula FDA refere-se a tumor de testículo; para pênis manter a SBOC (D1–D3 no TIP), com mesna e hidratação da bula."
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (curadoria assistida, Opus 5.5)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt (21 págs., lida inteira)",
+      "fontes/pro26/71_-_Aula_71_-_Pênis_-_Visão_geral_e_tratamento_da_doença_localizada_e_avançada.txt (22 págs.)",
+      "docs/ondas/F1-PACK-ESQUEMA-V2.md",
+      "corpus/exames/exames-sigtap.v1.json",
+      "https://api.fda.gov/drug/label.json?search=openfda.generic_name:ifosfamide&limit=1",
+      "https://api.fda.gov/drug/label.json?search=openfda.generic_name:cisplatin&limit=1",
+      "https://clinicaltrials.gov/api/v2/studies/NCT04224740",
+      "https://clinicaltrials.gov/api/v2/studies?query.term=EPIC-A+cemiplimab+penile (sem resultado)"
+    ],
+    "aprovacaoClinica": null
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "header": {
+    "id": "encaminhamento-cirurgia-oncologica",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "estrutura comum §15 + prazos/prioridade (consolidado §3.3)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "destinoNoSus": "Serviço de cirurgia oncológica via regulação (SISREG)",
+  "motivosListaFechada": [
+    "avaliação de ressecabilidade com intenção curativa",
+    "estadiamento cirúrgico (ex.: linfadenectomia, laparoscopia+citologia no gástrico — pack gástrico ESMO 2022 rec 3c)",
+    "resecção de recorrência",
+    "cirurgia paliativa (obstrução, sangramento, dor)",
+    "avaliação de complicação operatória"
+  ],
+  "estrutura": {
+    "fatoConfirmado": [
+      "diagnóstico (CID) e data",
+      "estadiamento (sistema + edição + data)",
+      "AP/IHQ e biomarcadores do tumor (pack correspondente)",
+      "imagens com data",
+      "tratamento já realizado e em curso (QT/RT neoadjuvante com datas)",
+      "condições clínicas pertinentes (cirurgia prévia, anticoagulação, performance)"
+    ],
+    "decisaoMedica": [
+      "pergunta cirúrgica específica (ex.: 'ressecável? necessita neoadjuvância?')",
+      "urgência com critério"
+    ]
+  },
+  "urgencia": {
+    "eletivo": "avaliação eletiva de ressecabilidade",
+    "prioritario": "dentro dos 60 dias da Lei 12.732/2012 para 1º tratamento",
+    "urgente": "obstrução, perfuração, hemorragia, compressão medular em investigação — emergência real, não regulação comum"
+  },
+  "prioridadeEstatuto": "Lei 14.238/2021 art. 4º §2º (prioridade, respeitada a precedência dos casos mais graves).",
+  "documentosQueSeguem": [
+    "AP/IHQ completo",
+    "imagens",
+    "relatório de comorbidades/medicações"
+  ],
+  "proibicoes": [
+    "Marcar urgência sem critério descrito",
+    "Concluir ressecabilidade no lugar do cirurgião",
+    "Fluxo municipal inventado"
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "NORMA",
+      "referencia": "estrutura comum §15 + prazos/prioridade (consolidado §3.3)",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "packs": [
+    "pack-gastrico",
+    "pack-colorretal",
+    "pack-pancreas",
+    "pack-chc",
+    "pack-vias-biliares",
+    "pack-esofago",
+    "pack-sarcomas",
+    "pack-melanoma",
+    "pack-ovario",
+    "pack-endometrio",
+    "pack-rim",
+    "pack-bexiga"
+  ],
+  "portas": {
+    "consome": [
+      "templates/resumo-prontuario-modelo-servico (resumo do caso)",
+      "tumor",
+      "patologia",
+      "exames.realizados",
+      "prescricao.vigente"
+    ],
+    "oferece": [
+      "documento.encaminhamento-cirurgia-oncologica",
+      "agenda (retorno pós-encaminhamento)"
+    ]
+  }
+}

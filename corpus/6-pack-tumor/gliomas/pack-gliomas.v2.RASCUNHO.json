@@ -1,0 +1,1479 @@
+{
+  "header": {
+    "id": "pack-gliomas",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "SBOC 2026 — Sistema nervoso central: gliomas v5",
+      "trecho": "apoiar as decisões clínicas no tratamento de gliomas",
+      "edicao": "v5 2026"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Gliomas difusos do tipo adulto (SNC)",
+    "cid10": [
+      "C71"
+    ],
+    "subtipos": [
+      "astrocitoma IDH-mutado graus 2, 3, 4",
+      "oligodendroglioma IDH-mutado e 1p/19q codeletado graus 2, 3",
+      "glioblastoma IDH-selvagem grau 4 (inclui astrocitoma IDH-selvagem com TERT, EGFR ou +7/-10)"
+    ],
+    "cenarios": [
+      "idh_mutado_grau2_adjuvante",
+      "astrocitoma_idh_mutado_grau3_4",
+      "oligodendroglioma_grau3",
+      "glioblastoma_idh_selvagem",
+      "recorrente_baixo_grau",
+      "recorrente_alto_grau"
+    ],
+    "limitesAplicabilidade": "Não cobre gliomas pediátricos, glioma de linha média H3K27M além da classificação, ependimomas, meningiomas, linfoma de SNC nem metástases cerebrais."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "indicacao": "universal",
+        "catalogoId": "RM_CRANIO",
+        "rotulo": "RM de crânio com contraste (T1, T2, FLAIR, T1 pós-contraste, DWI, perfusão, SWI)",
+        "quando": "Avaliação inicial; espectroscopia opcional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "RM do crânio com contraste, incluindo as sequências T1, T2, T2 Flair,",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "universal",
+        "catalogoId": "CONTRASTE_RM",
+        "rotulo": "Contraste para RM",
+        "quando": "Junto à RM de crânio",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "RM do crânio com contraste, incluindo as sequências T1, T2, T2 Flair,",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "cirurgica",
+          "quando": "Ressecção máxima segura preferencial, mesmo em achado incidental",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 8,
+            "trecho": "A ressecção maxima segura é a recomendação preferencial nos pacientes",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "outra",
+          "quando": "Biópsia estereotáxica ou ressecção subtotal se ressecção completa não for segura (área eloquente)",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 8,
+            "trecho": "Deve-se proceder com biópsia ou ressecção subtotal caso a ressecção completa",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "tipo celular",
+        "anaplasia",
+        "vascularização/proliferação microvascular",
+        "necrose (padrão e extensão)",
+        "atividade mitótica",
+        "diagnóstico integrado OMS 2021 (NOS/NEC quando avaliação molecular incompleta)",
+        "IHQ: GFAP, IDH1, ATRX, p53, Ki67, H3K27M conforme suspeita"
+      ],
+      "molecular": [
+        {
+          "alvo": "IDH1 R132H, ATRX, p53, H3K27M (painel IHQ)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "Todo glioma difuso",
+          "consequencia": "Classifica IDH-mutado vs selvagem e orienta o organograma molecular",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 6,
+            "trecho": "GFAP , AE1/AE3, IDH1, ATRX, p53, Ki67, H3K27M, H3G34 e H3K27me.",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "IDH1 e IDH2 (mutações não-R132H)",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "IDH1 não expresso por IHQ e idade <55 anos ou glioma difuso prévio",
+          "consequencia": "Evita classificar como IDH-selvagem um IDH-mutado não-R132H",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 6,
+            "trecho": "Sequenciamento (NGS) para IDH1 e IDH2 é recomendado em pacientes com",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "Codeleção 1p/19q",
+          "metodo": "FISH/CISH",
+          "catalogoId": "FISH",
+          "quandoPedir": "condicional",
+          "cenario": "Glioma IDH-mutado com ATRX preservado (suspeita de oligodendroglioma)",
+          "consequencia": "Confirma oligodendroglioma (graus 2-3)",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 6,
+            "trecho": "Pesquisa da codeleção 1p/19q é recomendada para confirmar diagnóstico",
+            "estado": "VERIFICADO"
+          },
+          "fonteMetodo": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026/slides-pro-2026/75 - Aula 75 - Gliomas - Parte 1",
+            "pagina": 25,
+            "trecho": "Avaliação por FISH ou NGS",
+            "estado": "INFERIDO"
+          }
+        },
+        {
+          "alvo": "Codeleção 1p/19q",
+          "metodo": "NGS",
+          "catalogoId": "FISH",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "Alternativa ao FISH",
+          "consequencia": "Idem",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 6,
+            "trecho": "Pesquisa da codeleção 1p/19q é recomendada para confirmar diagnóstico",
+            "estado": "VERIFICADO"
+          },
+          "fonteMetodo": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026/slides-pro-2026/75 - Aula 75 - Gliomas - Parte 1",
+            "pagina": 25,
+            "trecho": "Avaliação por FISH ou NGS",
+            "estado": "INFERIDO"
+          },
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "Metilação do promotor de MGMT",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO; METODO_SEM_FONTE (SBOC e aula não especificam PCR metilação-específica × pirossequenciamento)",
+          "quandoPedir": "universal",
+          "cenario": "Glioblastoma",
+          "consequencia": "Prognóstico e benefício da TMZ; KPS <60: metilado → TMZ isolada, não metilado → RT isolada",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 6,
+            "trecho": "Pesquisa da metilação da região promotora de MGMT é recomendada em",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Mutação do promotor de TERT / amplificação de EGFR / +7/-10",
+          "metodo": "outro",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "SEM_ID_NO_CATALOGO; METODO_SEM_FONTE",
+          "quandoPedir": "condicional",
+          "cenario": "Astrocitoma IDH-selvagem sem critérios histológicos de grau 4",
+          "consequencia": "Qualquer uma reclassifica como glioblastoma IDH-selvagem",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 15,
+            "trecho": "mutação de TERT, amplificação de EGFR",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "BRAF V600E",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "Considerar na recorrência",
+          "consequencia": "Dabrafenibe + trametinibe",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 6,
+            "trecho": "Pesquisa de BRAF-V600E pode ser avaliada por IHQ e sequenciamento.",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "BRAF V600E",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "Considerar na recorrência",
+          "consequencia": "Dabrafenibe + trametinibe",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 6,
+            "trecho": "Pesquisa de BRAF-V600E pode ser avaliada por IHQ e sequenciamento.",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "Fusões NTRK",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "Recorrência; NÃO usar IHQ (falso positivo)",
+          "consequencia": "Larotrectinibe",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 6,
+            "trecho": "devem ser avaliadas por NGS, não por IHQ",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "FISH",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "CDKN2A/B (perda homozigótica)",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO; METODO_SEM_FONTE",
+          "quandoPedir": "condicional",
+          "cenario": "Astrocitoma IDH-mutado",
+          "consequencia": "Perda homozigótica = grau 4",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 4,
+            "trecho": "IDH1, IDH2, ATRX, p53, CDKN2A/B",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "outro",
+    "edicao": "Classificação OMS 2021 do SNC (sem TNM)",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 4,
+      "trecho": "Para tumores primários do SNC não se aplica o estadiamento baseado no",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "RM_CRANIO",
+        "rotulo": "RM de crânio multiparamétrica",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "RM do crânio com contraste, incluindo as sequências T1, T2, T2 Flair,",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma completo",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Hemograma completo;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TAP",
+        "rotulo": "Coagulograma (TAP)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Coagulograma;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TTPA",
+        "rotulo": "Coagulograma (TTPA)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Coagulograma;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Função renal",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Bioquímica (incluindo eletrólitos e funções hepática e renal).",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGO",
+        "rotulo": "Função hepática (TGO)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Bioquímica (incluindo eletrólitos e funções hepática e renal).",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "rotulo": "Função hepática (TGP)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Bioquímica (incluindo eletrólitos e funções hepática e renal).",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "SODIO",
+        "rotulo": "Eletrólitos (sódio)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Bioquímica (incluindo eletrólitos e funções hepática e renal).",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "POTASSIO",
+        "rotulo": "Eletrólitos (potássio)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Bioquímica (incluindo eletrólitos e funções hepática e renal).",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "IDH-mutado grau 2, resíduo, sem indicação imediata de RT/QT",
+        "conduta": "Vorasidenibe 40 mg/dia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Vorasidenibe 40 mg 1X/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IDH-mutado grau 2 com progressão rápida",
+        "conduta": "RT → PCV 6 ciclos (preferencial) ou RT → TMZ 12 ciclos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "RT seguido de PCV por 6 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Astrocitoma IDH-mutado graus 3-4",
+        "conduta": "RT 59,4 Gy → TMZ adjuvante 12 ciclos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "RT (59,4 Gy/30 frações) seguido de Temozolomida adjuvante 12 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Oligodendroglioma grau 3",
+        "conduta": "RT 60 Gy → PCV 6 ciclos (ou TMZ 12 ciclos)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "RT (60 Gy) seguido de PCV 6 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Glioblastoma IDH-selvagem <70 anos e/ou KPS ≥60",
+        "conduta": "RT + TMZ concomitante → TMZ adjuvante 6 ciclos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "RT 3D ou IMRT + Temozolomida concomitante, seguida de Temozolomida",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Glioblastoma ≥70 anos e KPS ≥60",
+        "conduta": "RT 40 Gy/15 fr + TMZ → TMZ 6-12 ciclos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "RT hipofracionada (40 Gy/15 frações) + Temozolomida concomitante,",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Glioblastoma ECOG 3-4 ou KPS <60",
+        "conduta": "MGMT metilado: TMZ 6-12 ciclos; não metilado: RT 40/15 ou 25/5; ou suporte",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "MGMT metilado: Temozolomida adjuvante 6 a 12 ciclos",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [],
+      "naoPedirDeRotina": [
+        "marcadores tumorais séricos (sem papel em gliomas)"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "Cirurgia inicial",
+        "intencao": "curativa",
+        "modalidades": [
+          "ressecção máxima segura",
+          "biópsia/ressecção parcial se área eloquente"
+        ],
+        "criterio": "Segurança neurológica; extensão da ressecção é prognóstica (RANO resect)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "A ressecção maxima segura é a recomendação preferencial nos pacientes",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Glioma IDH-mutado grau 2 após ressecção sem resíduo",
+        "intencao": "curativa",
+        "modalidades": [
+          "vorasidenibe",
+          "observação se perfil molecular completo"
+        ],
+        "criterio": "Assintomático/estável",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Observação clinica somente se sem evidência de doença residual e com",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Recorrência de baixo grau tratado com RT/QT",
+        "intencao": "paliativa",
+        "modalidades": [
+          "troca de QT (PCV, TMZ, platina)",
+          "dabrafenibe + trametinibe (BRAF V600E)",
+          "larotrectinibe (NTRK)",
+          "reirradiação"
+        ],
+        "criterio": "Reirradiação se RT >2 anos ou lesão fora do campo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Mudança de regime quimioterápico, caso haja progressão em vigência de",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Glioblastoma recorrente",
+        "intencao": "paliativa",
+        "modalidades": [
+          "reabordagem (intervalo ≥6 meses)",
+          "QT isolada (TMZ, lomustina, PCV, carmustina, platina)",
+          "bevacizumabe + QT",
+          "reirradiação",
+          "suporte"
+        ],
+        "criterio": "PS, intervalo livre, possibilidade de ressecção total",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Cirurgia com ressecção macroscópica total, especialmente se intervalo livre de",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "gliomas-tmz-concomitante-rt",
+        "nome": "Temozolomida concomitante à RT",
+        "cenario": "concomitante à RT — glioblastoma; astrocitoma IDH-mutado grau 4 (discutir)",
+        "linha": "concomitante",
+        "drogas": [
+          {
+            "droga": "Temozolomida",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D42 (até D49), diariamente incluindo fins de semana",
+            "observacao": "contínuo durante toda a RT"
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": 1,
+        "premedicacao": "Antiemético 30-60 min antes; tomar 1 h antes ou 2 h após refeições; profilaxia para pneumocistose (PCP).",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Temozolomida 75 mg/m²/dia VO diariamente (incluindo fins de semana)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gliomas-tmz-adjuvante-c1",
+        "nome": "Temozolomida adjuvante — ciclo 1 (GBM)",
+        "cenario": "adjuvante — glioblastoma (início 4 semanas após RT)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Temozolomida",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1 a D5",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 1,
+        "premedicacao": "Antiemético 30-60 min antes.",
+        "ajusteObrigatorio": null,
+        "fichaId": "FICHA.gliomas.temozolomida-monoterapia-ciclo-1__adjuvante@1.0.0",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Temozolomida 150 mg/m² VO D1 a D5 C1; escalonar para 200 mg/m²",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gliomas-tmz-adjuvante-c2",
+        "nome": "Temozolomida adjuvante — ciclos 2 em diante (GBM)",
+        "cenario": "adjuvante — glioblastoma",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Temozolomida",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1 a D5",
+            "observacao": "escalonar para 200 se boa tolerância ao C1"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 5,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": "FICHA.gliomas.temozolomida-monoterapia-ciclos-2-em-diante__adjuvante@1.0.0",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Temozolomida 150 mg/m² VO D1 a D5 C1; escalonar para 200 mg/m²",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Total 6 ciclos (Stupp); até 12 ciclos em idosos (Perry). Sem benefício além de 6 ciclos (GEINO 14-01, SBOC p.15)."
+      },
+      {
+        "id": "gliomas-tmz-adjuvante-catnon",
+        "nome": "Temozolomida adjuvante — astrocitoma IDH-mutado grau 3 (CATNON)",
+        "cenario": "adjuvante — astrocitoma IDH-mutado graus 3-4; IDH-mutado grau 2 e oligodendroglioma (alternativa ao PCV)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Temozolomida",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1 a D5",
+            "observacao": "SBOC: 150-200 mg/m²"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 12,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Temozolomida 150–200 mg/m² VO D1 a D5",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gliomas-pcv",
+        "nome": "PCV (procarbazina, lomustina, vincristina)",
+        "cenario": "adjuvante pós-RT — IDH-mutado grau 2 e oligodendroglioma grau 3; recorrência",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Lomustina",
+            "dose": 110,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Procarbazina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D8 a D21",
+            "observacao": ""
+          },
+          {
+            "droga": "Vincristina",
+            "dose": 1.4,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D8, D29",
+            "observacao": "dose máxima 2 mg/dia"
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": 6,
+        "premedicacao": "Antiemético 30-60 min antes da lomustina; dieta pobre em tiramina e sem álcool com procarbazina.",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 15,
+            "trecho": "A procarbazina e a lomustina não são mais produzidas no Brasil.",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Indisponibilidade de produção nacional."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Lomustina (CCNU)* 110 mg/m² VO D1",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Intervalo SBOC: a cada 6 a 8 semanas. SBOC: procarbazina e lomustina não são mais produzidas no Brasil; na indisponibilidade de lomustina, substituir por carmustina."
+      },
+      {
+        "id": "gliomas-carmustina",
+        "nome": "Carmustina (BCNU)",
+        "cenario": "recorrência; substituto da lomustina",
+        "linha": "recorrência",
+        "drogas": [
+          {
+            "droga": "Carmustina",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC: 150-200 mg/m² dose única; vesicante"
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": 6,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Carmustina 150–200 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gliomas-vorasidenibe",
+        "nome": "Vorasidenibe",
+        "cenario": "adjuvante — glioma IDH-mutado grau 2 pós-cirurgia sem indicação imediata de RT/QT",
+        "linha": "adjuvante (postergação de RT/QT)",
+        "drogas": [
+          {
+            "droga": "Vorasidenibe",
+            "dose": 40,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "2 h antes da refeição e aguardar 1 h; contínuo até progressão"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Vorasidenibe 40 mg/dia VO continuamente Continuamente, a cada 4 semanas",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Aprovado no Brasil em agosto de 2025 para este cenário (SBOC p.10)."
+      },
+      {
+        "id": "gliomas-bevacizumabe",
+        "nome": "Bevacizumabe (± QT)",
+        "cenario": "recorrência — glioma de alto grau (edema, dependência de corticoide)",
+        "linha": "recorrência",
+        "drogas": [
+          {
+            "droga": "Bevacizumabe",
+            "dose": 5,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativa SBOC: 10 mg/kg a cada 4 semanas"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Monitorar PA, proteinúria, sangramento e trombose.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Bevacizumabe 5 mg/kg EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gliomas-dabrafenibe-trametinibe",
+        "nome": "Dabrafenibe + trametinibe (BRAF V600E)",
+        "cenario": "recorrência — glioma BRAF V600E",
+        "linha": "recorrência",
+        "drogas": [
+          {
+            "droga": "Dabrafenibe",
+            "dose": 150,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 2x/dia",
+            "observacao": ""
+          },
+          {
+            "droga": "Trametinibe",
+            "dose": 2,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Dabrafenibe 150 mg VO 2×/dia Trametinibe 2 mg VO 1×/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gliomas-larotrectinibe",
+        "nome": "Larotrectinibe (fusão NTRK)",
+        "cenario": "recorrência — glioma com fusão NTRK",
+        "linha": "recorrência",
+        "drogas": [
+          {
+            "droga": "Larotrectinibe",
+            "dose": 100,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 2x/dia",
+            "observacao": "adulto/SC ≥1 m²; evitar toranja"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "A dose recomendada para adultos é de 100 mg, duas vezes por dia.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "Glioblastoma IDH-selvagem <70 anos e/ou KPS ≥60 (+ TMZ concomitante)",
+        "doseTotalGy": 60,
+        "fracoes": 30,
+        "concomitante": "Temozolomida 75 mg/m²/dia",
+        "observacao": "SBOC recomenda 'RT 3D ou IMRT' sem dose explícita; 60 Gy/30 fr aparece na aula PRO e como braço de estudos na SBOC (p.14-15).",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/76 - Aula 76 - Gliomas - Parte 2",
+          "pagina": 11,
+          "trecho": "Radioterapia 60 Gy (30 frações) ou 40 Gy com hipofracionamento (15 frações)",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "cenario": "Glioblastoma ≥70 anos e KPS ≥60 (+ TMZ concomitante)",
+        "doseTotalGy": 40,
+        "fracoes": 15,
+        "concomitante": "Temozolomida",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "RT hipofracionada (40 Gy/15 frações) + Temozolomida concomitante,",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Glioblastoma KPS <60, MGMT não metilado — RT isolada",
+        "doseTotalGy": 40,
+        "fracoes": 15,
+        "concomitante": "nenhuma",
+        "observacao": "Alternativa SBOC: 25 Gy/5 frações.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "RT isolada (40 Gy/15 frações ou 25 Gy/5 frações)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Glioblastoma KPS <60, MGMT não metilado — RT isolada curta",
+        "doseTotalGy": 25,
+        "fracoes": 5,
+        "concomitante": "nenhuma",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "RT isolada (40 Gy/15 frações ou 25 Gy/5 frações)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Astrocitoma IDH-mutado graus 3-4 (→ TMZ adjuvante)",
+        "doseTotalGy": 59.4,
+        "fracoes": null,
+        "concomitante": "nenhuma (TMZ concomitante só discutir no grau 4)",
+        "observacao": "SBOC: 59,4 Gy/30 frações; aula PRO: 59,4 Gy em 33 frações (1,8 Gy/fr). Frações em conflito.",
+        "pendencia": "FRACIONAMENTO_CONFLITANTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "RT (59,4 Gy/30 frações) seguido de Temozolomida adjuvante 12 ciclos",
+          "estado": "CONFLITANTE"
+        }
+      },
+      {
+        "cenario": "Oligodendroglioma IDH-mutado 1p/19q codeletado grau 3 (→ PCV ou TMZ)",
+        "doseTotalGy": 60,
+        "fracoes": null,
+        "concomitante": "nenhuma",
+        "pendencia": "FRACIONAMENTO_SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "RT (60 Gy) seguido de PCV 6 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Glioma IDH-mutado grau 2 com indicação de RT (→ PCV ou TMZ)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "nenhuma",
+        "pendencia": "SEM_FONTE",
+        "observacao": "SBOC cita 50-54 Gy apenas no contexto do estudo de RT isolada precoce (EORTC 22845); não registrado como recomendação.",
+        "fonte": null
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Ressecção máxima segura (supramáxima se <65 anos no GBM, conforme RANO resect)",
+        "quando": "Diagnóstico inicial",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "A ressecção maxima segura é a recomendação preferencial nos pacientes",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Reabordagem com ressecção macroscópica total",
+        "quando": "Recorrência com intervalo livre ≥6 meses, bom PS, sem envolvimento ependimário",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Cirurgia com ressecção macroscópica total, especialmente se intervalo livre de",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "IDH1/IDH2 mutado (grau 2, residual)",
+        "opcao": "Vorasidenibe 40 mg/dia",
+        "evidencia": "INDIGO: SLP 27,7 vs 11,1 m (HR 0,39)",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Vorasidenibe 40 mg 1X/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "MGMT metilado (GBM KPS <60)",
+        "opcao": "Temozolomida isolada 6-12 ciclos",
+        "evidencia": "NOA-08, Nordic",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "MGMT metilado: Temozolomida adjuvante 6 a 12 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "BRAF V600E (recorrência)",
+        "opcao": "Dabrafenibe + trametinibe",
+        "evidencia": "ROAR: resposta 50% em baixo grau",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Dabrafenibe e trametinibe nos pacientes com mutação BRAF-V600E;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "Fusão NTRK (recorrência)",
+        "opcao": "Larotrectinibe 100 mg 2x/dia",
+        "evidencia": "Resposta 30%; controle em 24 semanas 73%",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "A dose recomendada para adultos é de 100 mg, duas vezes por dia.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": "TMZ: antiemético 30-60 min antes da dose (SBOC p.18)",
+      "riscoNeutropeniaFebril": "SEM_FONTE",
+      "outros": [
+        "Profilaxia para pneumocistose durante TMZ concomitante",
+        "Anticonvulsivantes conforme crises (avaliar interações)",
+        "Corticoide para edema (menor dose eficaz)"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 18,
+        "trecho": "Recomenda-se utilizar antiemético 30-60 minutos",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "EORTC/NCIC (Stupp)",
+        "nct": "NCT00006353",
+        "nctEstado": "VERIFICADO",
+        "populacao": "GBM 18-70 anos",
+        "bracos": "RT vs RT + TMZ concomitante e adjuvante",
+        "desfecho": "SG",
+        "resultado": "14,6 vs 12,1 m (HR 0,63); 2 anos 27% vs 11%",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00006353",
+          "pagina": null,
+          "trecho": "Radiation Therapy With or Without Temozolomide in Treating Patients With Newly Diagnosed Glioblastoma",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "INDIGO",
+        "nct": "NCT04164901",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Glioma grau 2 IDH1/2 mutado residual/recorrente",
+        "bracos": "Vorasidenibe vs placebo",
+        "desfecho": "SLP",
+        "resultado": "27,7 vs 11,1 m (HR 0,39)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT04164901",
+          "pagina": null,
+          "trecho": "Study of Vorasidenib (AG-881) in Participants With Residual or Recurrent Grade 2 Glioma",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CATNON",
+        "nct": "NCT00626990",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Glioma anaplásico sem codeleção 1p/19q",
+        "bracos": "RT ± TMZ concomitante ± TMZ adjuvante",
+        "desfecho": "SG",
+        "resultado": "Benefício da TMZ adjuvante (82,3 vs 46,9 m); concomitante sem benefício",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00626990",
+          "pagina": null,
+          "trecho": "Phase III Trial of Anaplastic Glioma Without 1p/19q Loss of Heterozygosity",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "RTOG 9802",
+        "nct": "NCT00003375",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Glioma de baixo grau de alto risco",
+        "bracos": "RT vs RT → PCV",
+        "desfecho": "SG",
+        "resultado": "13,3 vs 7,8 anos (HR 0,59)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00003375",
+          "pagina": null,
+          "trecho": "Observation or Radiation Therapy With or Without Combination Chemotherapy",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "Todos",
+        "exames": [],
+        "periodicidade": "História e exame neurológico a cada 3-6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "História e exame neurológico, com ênfase em novos sintomas, a cada 3-6 meses.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Glioblastoma/astrocitoma IDH-selvagem",
+        "exames": [
+          "RM_CRANIO",
+          "CONTRASTE_RM"
+        ],
+        "periodicidade": "RM a cada 2-3 meses (critérios RANO; atenção a pseudoprogressão nos 3 primeiros meses pós-RT/TMZ)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "GBM/Astrocitoma IDH-selvagem A cada 2-3 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Oligodendroglioma graus 2-3 após RT + QT",
+        "exames": [
+          "RM_CRANIO",
+          "CONTRASTE_RM"
+        ],
+        "periodicidade": "Pelo menos a cada 6-9 meses até progressão",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Após RT + QT: pelo menos a cada 6-9 meses até",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Astrocitoma IDH-mutado grau 3 após RT + QT",
+        "exames": [
+          "RM_CRANIO",
+          "CONTRASTE_RM"
+        ],
+        "periodicidade": "Pelo menos a cada 6 meses até progressão",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Após RT + QT: pelo menos a cada 6 meses até",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Astrocitoma IDH-mutado recorrente",
+        "exames": [
+          "RM_CRANIO",
+          "CONTRASTE_RM"
+        ],
+        "periodicidade": "A cada 2-3 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "IDH-mutado, graus 2 e 3 A cada 2-3 meses",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "CONTRASTE_RM",
+      "CREATININA",
+      "FISH",
+      "HEMOGRAMA",
+      "IMUNOHISTOQUIMICA",
+      "POTASSIO",
+      "RM_CRANIO",
+      "SODIO",
+      "TAP",
+      "TGO",
+      "TGP",
+      "TTPA",
+      "MOLECULAR_PCR_MUTACAO",
+      "SEQUENCIAMENTO_AMPLICON"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "Temozolomida",
+        "com": "valproato (reduz depuração)",
+        "ref": null
+      },
+      {
+        "droga": "Dabrafenibe",
+        "com": "anticonvulsivantes indutores de CYP3A4 (fenitoína, carbamazepina)",
+        "ref": null
+      },
+      {
+        "droga": "Procarbazina",
+        "com": "alimentos ricos em tiramina, álcool, IMAO/antidepressivos",
+        "ref": null
+      },
+      {
+        "droga": "Vorasidenibe",
+        "com": "indutores/inibidores de CYP1A2",
+        "ref": null
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "mielotoxicidade por alquilante",
+        "termosCTCAEv6": [
+          "Platelet count decreased",
+          "Neutrophil count decreased",
+          "Lymphocyte count decreased"
+        ]
+      },
+      {
+        "classe": "neurológicos",
+        "termosCTCAEv6": [
+          "Seizure",
+          "Cognitive disturbance",
+          "Headache"
+        ]
+      },
+      {
+        "classe": "bevacizumabe",
+        "termosCTCAEv6": [
+          "Hypertension",
+          "Proteinuria",
+          "Thromboembolic event",
+          "Intracranial hemorrhage"
+        ]
+      },
+      {
+        "classe": "vorasidenibe",
+        "termosCTCAEv6": [
+          "Alanine aminotransferase increased",
+          "Aspartate aminotransferase increased"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "antiemético pré-TMZ",
+      "profilaxia de pneumocistose (sulfametoxazol-trimetoprima) na TMZ concomitante",
+      "anticonvulsivante não indutor quando possível"
+    ],
+    "orientacoes": [
+      "TMZ em jejum (1 h antes ou 2 h após refeição)",
+      "dieta sem tiramina com procarbazina",
+      "não dirigir após crise convulsiva",
+      "sinais de hipertensão intracraniana"
+    ],
+    "encaminhamentos": [
+      "neurocirurgia",
+      "radioterapia",
+      "neurologia",
+      "cuidados paliativos",
+      "reabilitação"
+    ],
+    "laudos": [
+      "APAC de quimioterapia (C71)",
+      "laudo com diagnóstico integrado OMS 2021 (IDH, 1p/19q, MGMT)"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "Glioblastoma IDH-selvagem",
+        "y": "<70 anos e/ou KPS ≥60",
+        "z": "RT + temozolomida 75 mg/m²/dia → TMZ 150 mg/m² D1-D5 no C1 e 200 mg/m² nos ciclos 2-6, a cada 28 dias",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Temozolomida 150 mg/m² VO D1 a D5 C1; escalonar para 200 mg/m²",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Glioblastoma IDH-selvagem",
+        "y": "≥70 anos e KPS ≥60",
+        "z": "RT 40 Gy/15 frações + TMZ concomitante → TMZ 6-12 ciclos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "RT hipofracionada (40 Gy/15 frações) + Temozolomida concomitante,",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Glioblastoma com ECOG 3-4 ou KPS <60",
+        "y": "status de metilação do MGMT",
+        "z": "Metilado: TMZ isolada 6-12 ciclos; não metilado: RT 40 Gy/15 fr ou 25 Gy/5 fr; ou suporte",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "MGMT metilado: Temozolomida adjuvante 6 a 12 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Glioma difuso com IHQ IDH1 negativa",
+        "y": "idade <55 anos ou glioma difuso prévio",
+        "z": "Sequenciamento (NGS) de IDH1 e IDH2",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Sequenciamento (NGS) para IDH1 e IDH2 é recomendado em pacientes com",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Glioma IDH-mutado grau 2 operado com resíduo",
+        "y": "sem indicação imediata de RT/QT",
+        "z": "Vorasidenibe 40 mg VO 1x/dia contínuo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Vorasidenibe 40 mg 1X/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    "Método de MGMT, TERT e CDKN2A/B não especificado (SBOC/aula) — definir com patologia; catálogo sem ids moleculares além de FISH/IHQ.",
+    "Fracionamento da RT no astrocitoma IDH-mutado graus 3-4 em conflito (30 × 33 frações); oligodendroglioma grau 3 (60 Gy) sem fracionamento.",
+    "SEM_FONTE: dose de RT no glioma IDH-mutado grau 2 com indicação de RT (só contexto de estudo).",
+    "GBM <70 anos: 60 Gy/30 fr vem da aula PRO (INFERIDO); SBOC não explicita dose.",
+    "Lomustina e procarbazina não produzidas no Brasil: PCV depende de importação; substituto carmustina (SBOC).",
+    "SUS: temozolomida, vorasidenibe, bevacizumabe, BRAF/MEK e larotrectinibe sem dado de incorporação verificado no pack.",
+    "Doses de reirradiação, de TMZ em regime metronômico (RESCUE 50 mg/m²) e de platina na recorrência não registradas como protocolo (contexto de estudo ou sem dose)."
+  ],
+  "conflitos": [
+    {
+      "tema": "Fracionamento da RT no astrocitoma IDH-mutado graus 3-4",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 12,
+        "trecho": "RT (59,4 Gy/30 frações) seguido de Temozolomida adjuvante 12 ciclos",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026/slides-pro-2026/76 - Aula 76 - Gliomas - Parte 2",
+        "pagina": 20,
+        "trecho": "59,4 Gy em 33 frações",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Manter 59,4 Gy e deixar frações em aberto para o radio-oncologista; 33 frações (1,8 Gy/fr) é a forma clássica e menos intensa por fração"
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (agente curador, rascunho)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+      "Onco PRO 2026/slides-pro-2026/75 - Aula 75 - Gliomas - Parte 1",
+      "Onco PRO 2026/slides-pro-2026/76 - Aula 76 - Gliomas - Parte 2",
+      "ClinicalTrials.gov API v2"
+    ],
+    "aprovacaoClinica": null
+  }
+}

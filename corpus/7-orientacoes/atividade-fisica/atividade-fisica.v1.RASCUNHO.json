@@ -1,0 +1,91 @@
+{
+  "header": {
+    "id": "atividade-fisica",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.3 [CODEX M1-2]",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "publico": "PACIENTE — linguagem simples",
+  "secoes": [
+    {
+      "id": "durante-tratamento",
+      "texto": "Mova-se todos os dias, na medida do possível. Caminhada leve conta. Faça pausas quando cansar. Não fique o dia inteiro deitado. Se sentir tontura, falta de ar ou dor no peito, pare e avise a equipe."
+    },
+    {
+      "id": "apos-tratamento",
+      "texto": "Tente chegar a 150 minutos por semana de atividade moderada (caminhada rápida, por exemplo), somados aos poucos. Faça exercícios de força 2 vezes por semana, com orientação.",
+      "fontes": [
+        "ACSM/Patel 2019 (MSSE 51(11):2391-402, PMID 31626056)",
+        "Schmitz 2010 (MSSE 42(7):1409-26, PMID 20559064)"
+      ]
+    }
+  ],
+  "precaucoes": [
+    {
+      "id": "plaqueocitopenia",
+      "regra": "Plaquetas muito baixas: evitar exercício intenso; cortes numéricos citáveis na literatura variam (<20.000 a <50.000/mm³ como contraindicação em pesquisas; ACSM GETP é pago)",
+      "fonte": "BMC Stem Cell Transplant survey (PMC9420674)",
+      "estado": "COM RESSALVA — não fixar número único sem fonte primária aberta"
+    },
+    {
+      "id": "anemia-sintomatica",
+      "regra": "Anemia com sintoma (falta de ar, tontura ao esforço): adiar esforço até avaliar",
+      "estado": "COM RESSALVA"
+    },
+    {
+      "id": "metastase-ossea",
+      "regra": "Osso com metástase: NÃO aumentar carga no membro afetado (risco de fratura); exercício possível com avaliação individual",
+      "fonte": "Diretriz 2022 'Exercise Recommendation for People With Bone Metastases' (via napier-repository.worktribe.com)"
+    },
+    {
+      "id": "neuropatia-queda",
+      "regra": "Mãos/pés formigando: cuidado com escada e peso; risco de queda"
+    }
+  ],
+  "proibicoes": [
+    "Corte numérico sem fonte/população/atividade definidas",
+    "Prescrever intensidade sem avaliação",
+    "Texto ao paciente sem aprovação"
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO_APLICACAO_PACIENTE",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DIRETRIZ",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.3 [CODEX M1-2]",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "portas": {
+    "consome": [
+      "labs[HEMOGRAMA] (plaquetas, hemoglobina)",
+      "tumor.metastases (ossea)",
+      "toxicidade.vigente (neuropatia, fadiga)"
+    ],
+    "oferece": [
+      "documento.orientacaoAtividade"
+    ],
+    "gatilhos": [
+      "início do tratamento",
+      "seguimento pós-tratamento"
+    ],
+    "exclusoes": [
+      "plaquetas baixas e anemia sintomática: cortes numéricos com ressalva de fonte no próprio arquivo",
+      "metástase óssea com risco de fratura: sem carga no membro acometido"
+    ]
+  }
+}

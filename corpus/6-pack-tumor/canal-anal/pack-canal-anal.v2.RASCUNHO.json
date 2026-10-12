@@ -1,0 +1,1564 @@
+{
+  "header": {
+    "id": "pack-canal-anal",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Canal anal v3 (versão para colaboração)",
+      "trecho": "Estadiamento (AJCC 8ª edição)",
+      "edicao": "SBOC 2026 v3"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Carcinoma espinocelular (CEC) do canal anal",
+    "cid10": [
+      "C21.0",
+      "C21.1",
+      "C21.2",
+      "C21.8"
+    ],
+    "subtipos": [
+      "CEC de canal anal",
+      "CEC de margem anal (mesmo manejo na SBOC)",
+      "HIV positivo"
+    ],
+    "cenarios": [
+      "localizado_T1N0_bem_diferenciado",
+      "localizado_qtrt_definitiva",
+      "avaliacao_resposta",
+      "resgate_cirurgico",
+      "metastatico_ou_recorrente"
+    ],
+    "limitesAplicabilidade": "Somente CEC. Adenocarcinoma de canal anal segue o pack colorretal (reto) por decisão médica; neuroendócrinos e melanoma anal fora do escopo.",
+    "fonte": {
+      "tipo": "CURSO",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/17 - Aula 17 - Câncer de Canal Anal.pdf",
+      "pagina": 6,
+      "trecho": "Carcinoma Escamoso: 80%",
+      "estado": "INFERIDO"
+    }
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "indicacao": "universal",
+        "quando": "estadiamento",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "TC de tórax e abdome",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome",
+        "indicacao": "universal",
+        "quando": "estadiamento",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "TC de tórax e abdome",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM de pelve",
+        "indicacao": "universal",
+        "quando": "estadiamento locorregional e avaliação de resposta",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "RM de pelve",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET-CT FDG",
+        "indicacao": "condicional",
+        "quando": "se disponível, complementa estadiamento linfonodal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "PET/CT FDG (se disponível)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [
+      {
+        "catalogoId": null,
+        "rotulo": "Anuscopia com toque retal",
+        "indicacao": "universal",
+        "quando": "diagnóstico, avaliação de resposta e seguimento",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Toque retal + Anuscopia + TC tórax e abdome + RM de pelve",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RETOSSIGMOIDOSCOPIA",
+        "rotulo": "Retoscopia/colonoscopia",
+        "indicacao": "condicional",
+        "quando": "avaliação endoscópica complementar (curso PRO)",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/17 - Aula 17 - Câncer de Canal Anal.pdf",
+          "pagina": 8,
+          "trecho": "Retoscopia / Colonoscopia",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "outra",
+          "quando": "biópsia do tumor primário",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 5,
+            "trecho": "Biopsia do tumor primário",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "PAAF",
+          "quando": "linfonodo regional suspeito (define campo de RT)",
+          "catalogoId": "BIOPSIA_GANGLIO",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/17 - Aula 17 - Câncer de Canal Anal.pdf",
+            "pagina": 8,
+            "trecho": "Biopsia / PAAF de linfonodos regionais suspeitos",
+            "estado": "INFERIDO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "tipo histológico (CEC)",
+        "grau de diferenciação",
+        "tamanho (T por dimensão em cm)",
+        "margens se excisão (> 1 mm para T1N0 bem diferenciado)"
+      ],
+      "laudoFonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 8,
+        "trecho": "pode ser considerada ressecção cirúrgica com margens livres (>1 mm)",
+        "estado": "VERIFICADO"
+      },
+      "molecular": [
+        {
+          "alvo": "PD-L1",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "pesquisa",
+          "cenario": "doença avançada",
+          "consequencia": "resposta a pembrolizumabe maior se PD-L1 positivo (KEYNOTE-158); não condiciona indicação na SBOC",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 11,
+            "trecho": "A taxa de resposta objetiva foi maior para",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "DPYD (deficiência de DPD)",
+          "metodo": "PCR",
+          "catalogoId": null,
+          "quandoPedir": "universal",
+          "cenario": "antes de 5-FU/capecitabina",
+          "consequencia": "deficiência total: contraindicação; parcial: redução de dose",
+          "disponivelSUS": "DADO_AUSENTE",
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 14,
+            "trecho": "recomenda-se a pesquisa de deficiência de DPD em todos os pacientes candidatos",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    },
+    "laboratorio": [
+      {
+        "catalogoId": "HIV",
+        "rotulo": "Sorologia HIV (com consentimento)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Sorologia para HIV, após consentimento do paciente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HBSAG",
+        "rotulo": "HBsAg",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/17 - Aula 17 - Câncer de Canal Anal.pdf",
+          "pagina": 8,
+          "trecho": "Sorologias: HIV, HBV, HCV",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": "ANTI_HCV",
+        "rotulo": "Anti-HCV",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/17 - Aula 17 - Câncer de Canal Anal.pdf",
+          "pagina": 8,
+          "trecho": "Sorologias: HIV, HBV, HCV",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "CD4 e carga viral (se HIV+)",
+        "indicacao": "condicional",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/17 - Aula 17 - Câncer de Canal Anal.pdf",
+          "pagina": 8,
+          "trecho": "Pacientes HIV positivo devem ser avaliados para carga viral e",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "avaliacaoClinica": [
+      {
+        "item": "Palpação inguinal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Palpação da região inguinal",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "item": "Mulheres: avaliação ginecológica; homens: avaliação urológica (outras lesões por HPV)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Mulheres: avaliação ginecológica;",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 3,
+      "trecho": "Estadiamento (AJCC 8ª edição)",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "TC de tórax e abdome",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "TC de tórax e abdome",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM de pelve",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "RM de pelve",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET-CT FDG",
+        "cenario": "se disponível",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "PET/CT FDG (se disponível)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HIV",
+        "rotulo": "Sorologia HIV",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Sorologia para HIV, após consentimento do paciente",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "T1N0M0 bem diferenciado, sem acometer esfíncter",
+        "conduta": "Considerar excisão com margem > 1 mm (NE baixo/FR fraca); senão QT/RT.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "pode ser considerada ressecção cirúrgica com margens livres (>1 mm)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Estádios I–III (localizado)",
+        "conduta": "QT/RT definitiva com mitomicina + 5-FU (alternativa cisplatina + 5-FU).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Mitomicina 12 mg/m² (dose máxima 20 mg) D1 + 5-FU 1.000 mg/m²/24h",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "T2N0",
+        "conduta": "QT/RT com duas drogas (mais resposta completa, menos colostomia).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "tratamento otimizado com RT e QT com duas drogas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Estádio IV com baixo volume sistêmico e sintomas locais",
+        "conduta": "QT/RT para controle local, nos moldes da doença localizada.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "pode ser considerada QT + RT com intuito de controle",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Estádio IV / recorrente",
+        "conduta": "1ª linha carboplatina + paclitaxel; 2ª linha anti-PD-1 ou QT.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Carboplatina AUC 5 D1 + Paclitaxel 80 mg/m² D1, D8 e D15 EV",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "agrupamentoTNM": "0 Tis N0; I T1N0; IIA T2N0; IIB T3N0; IIIA T1–2 N1; IIIB T4N0; IIIC T3–4 N1; IV M1",
+    "agrupamentoFonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 5,
+      "trecho": "IIIA T1/T2 N1 M0",
+      "estado": "VERIFICADO"
+    },
+    "marcadores": {
+      "uteis": [],
+      "naoPedirDeRotina": [
+        "marcadores tumorais séricos (sem indicação nas fontes)"
+      ],
+      "pendencia": "SEM_FONTE: nenhuma fonte indica marcador sérico"
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "localizado_qtrt_definitiva",
+        "intencao": "curativa",
+        "modalidades": [
+          "RT",
+          "QT concomitante"
+        ],
+        "criterio": "Padrão para estádios I–III; HIV+ deve receber doses habituais sempre que possível.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "é recomendado o tratamento combinado com doses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "avaliacao_resposta",
+        "intencao": "curativa",
+        "modalidades": [
+          "toque retal",
+          "anuscopia",
+          "TC",
+          "RM"
+        ],
+        "criterio": "8–12 semanas após a QT/RT; sem RC e sem progressão: reavaliar em 4 semanas e seguir trimestralmente até RC (pode levar até 26 semanas).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "8-12 semanas após o término da QT + RT;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "resgate_cirurgico",
+        "intencao": "curativa",
+        "modalidades": [
+          "amputação abdominoperineal"
+        ],
+        "criterio": "Progressão ou persistência após 6–12 meses com biópsia positiva.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Cirurgia de resgate (amputação abdominoperineal) em caso de progressão",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico_ou_recorrente",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT",
+          "imunoterapia (2ª linha)",
+          "manejo multidisciplinar de oligometástase"
+        ],
+        "criterio": "Imunoterapia + QT em 1ª linha segue experimental.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "O uso de imunoterapia combinada à QT no tratamento de 1ª linha",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "canal-anal-mmc12-5fu-rt",
+        "nome": "Mitomicina 12 mg/m² (máx. 20 mg) D1 + 5-FU infusional + RT",
+        "cenario": "localizado_qtrt_definitiva",
+        "linha": "definitivo (concomitante à RT)",
+        "drogas": [
+          {
+            "droga": "Mitomicina",
+            "dose": 12,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "dose máxima 20 mg"
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 24 h)",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D4 e D29-D32",
+            "observacao": "mg/m²/24 h, bomba de infusão"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": 1,
+        "esquema": "Curso único concomitante à RT (D1–D32). RT: dose total não informada pela SBOC (curso PRO: 50,4 Gy — INFERIDO).",
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina, se disponível (SBOC). HIV com CD4 < 200 ou idoso com comorbidades: considerar reduzir dose, 5-FU + RT ou RT isolada.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304040053",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE DE RETO/ CANAL ANAL/ MARGEM ANAL",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Mitomicina 12 mg/m² (dose máxima 20 mg) D1 + 5-FU 1.000 mg/m²/24h",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "canal-anal-mmc10x2-5fu-rt",
+        "nome": "Mitomicina 10 mg/m² D1 e D29 + 5-FU infusional + RT",
+        "cenario": "localizado_qtrt_definitiva",
+        "linha": "definitivo (concomitante à RT)",
+        "drogas": [
+          {
+            "droga": "Mitomicina",
+            "dose": 10,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D29",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 24 h)",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D4 e D29-D32",
+            "observacao": "mg/m²/24 h"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": 1,
+        "esquema": "Curso único concomitante à RT (D1–D32). RT: dose total não informada pela SBOC (curso PRO: 50,4 Gy — INFERIDO).",
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina, se disponível (SBOC).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304040053",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE DE RETO/ CANAL ANAL/ MARGEM ANAL",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Mitomicina 10 mg/m² D1 e D29 + 5-FU 1.000 mg/m²/24h",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "canal-anal-mmc-capecitabina-rt",
+        "nome": "Mitomicina + capecitabina (substitui 5-FU) + RT",
+        "cenario": "localizado_qtrt_definitiva",
+        "linha": "definitivo (concomitante à RT)",
+        "drogas": [
+          {
+            "droga": "Mitomicina",
+            "dose": 12,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "dose máxima 20 mg (esquema de mitomicina conforme 1ª escolha)"
+          },
+          {
+            "droga": "Capecitabina",
+            "dose": 825,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "12/12h nos dias de RT",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "esquema": "Capecitabina em todos os dias de RT; mitomicina conforme esquema escolhido.",
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina, se disponível (SBOC).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304040053",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE DE RETO/ CANAL ANAL/ MARGEM ANAL",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "substituição do 5-FU por Capecitabina 825 mg/m² 12/12h VO nos dias de RT",
+          "estado": "CONFLITANTE"
+        },
+        "observacao": "Força de recomendação diverge entre o texto (NE moderado/FR forte) e o fluxograma (NE muito baixo/FR fraca) — ver conflitos."
+      },
+      {
+        "id": "canal-anal-cisplatina-5fu-rt",
+        "nome": "Cisplatina + 5-FU infusional + RT (mitomicina indisponível ou contraindicada)",
+        "cenario": "localizado_qtrt_definitiva",
+        "linha": "definitivo (concomitante à RT)",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D29",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 24 h)",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D4 e D29-D32",
+            "observacao": "mg/m²/24 h"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": 1,
+        "esquema": "Curso único concomitante à RT (D1–D32). RT: dose total não informada pela SBOC (curso PRO: 50,4 Gy — INFERIDO).",
+        "premedicacao": "Hidratação e antiemese para cisplatina conforme protocolo institucional.",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina, se disponível (SBOC). Função renal/audição (CI-01, INAT-15).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304040053",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE DE RETO/ CANAL ANAL/ MARGEM ANAL",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Cisplatina 60 mg/m² D1 e D29 + 5-FU 1.000 mg/m²/24h",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "canal-anal-cisplatina-capecitabina-rt",
+        "nome": "Cisplatina + capecitabina + RT",
+        "cenario": "localizado_qtrt_definitiva",
+        "linha": "definitivo (concomitante à RT)",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D29",
+            "observacao": ""
+          },
+          {
+            "droga": "Capecitabina",
+            "dose": 825,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "12/12h nos dias de RT",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "esquema": "NE muito baixo/FR fraca.",
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina, se disponível (SBOC).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304040053",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE DE RETO/ CANAL ANAL/ MARGEM ANAL",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Cisplatina 60 mg/m² D1 e D29 EV + Capecitabina 825 mg/m² 12/12 h",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "canal-anal-carboplatina-paclitaxel",
+        "nome": "Carboplatina + paclitaxel semanal (preferencial)",
+        "cenario": "metastatico_ou_recorrente",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Calvert (CI-04)"
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "observacao": "Curso PRO (POD1UM-303) cita 6 ciclos — INFERIDO; SBOC não fixa número.",
+        "premedicacao": "Pré-medicação de paclitaxel conforme bula.",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020192",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE DE CANAL ANAL/ MARGEM ANAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Carboplatina AUC 5 D1 + Paclitaxel 80 mg/m² D1, D8 e D15 EV",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "canal-anal-cisplatina-5fu-met",
+        "nome": "Cisplatina + 5-FU infusional (metastático)",
+        "cenario": "metastatico_ou_recorrente",
+        "linha": "1ª linha (alternativa)",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 24 h)",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D4",
+            "observacao": "mg/m²/24 h"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina, se disponível (SBOC).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020192",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE DE CANAL ANAL/ MARGEM ANAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Cisplatina 60 mg/m² D1 + 5-FU 1.000 mg/m²/24h",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "canal-anal-folficis",
+        "nome": "FOLFICIS",
+        "cenario": "metastatico_ou_recorrente",
+        "linha": "1ª linha (alternativa)",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 24 h)",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D2",
+            "observacao": "mg/m²/24 h"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina, se disponível (SBOC).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020192",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE DE CANAL ANAL/ MARGEM ANAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "FOLFICIS (Cisplatina 40 mg/m² D1 + 5-FU 400 mg/m² D1 + 5-FU",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "canal-anal-dcf-modificado",
+        "nome": "DCF modificado (+ filgrastima profilática)",
+        "cenario": "metastatico_ou_recorrente_PS_bom_alta_resposta",
+        "linha": "1ª linha (alternativa)",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 24 h)",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D2",
+            "observacao": "mg/m²/24 h"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "Pré-medicação de docetaxel conforme bula.",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina, se disponível (SBOC). Profilaxia primária de neutropenia febril com filgrastima.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020192",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE DE CANAL ANAL/ MARGEM ANAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "DCF modificado (Docetaxel 40 mg/m² D1 + Cisplatina 40 mg/m² D1 +",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "canal-anal-nivolumabe",
+        "nome": "Nivolumabe",
+        "cenario": "metastatico_ou_recorrente",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Nivolumabe",
+            "dose": 3,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Ver INAT-27/INAT-28.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Sem aprovação Anvisa no canal anal. Alternativa SUS: paclitaxel isolado, FOLFIRI ou mitomicina + 5-FU (APAC avançado).",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 10,
+            "trecho": "não existe aprovação pela agência regulatória (Anvisa)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Nivolumabe 3 mg/kg EV a cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "canal-anal-pembrolizumabe",
+        "nome": "Pembrolizumabe",
+        "cenario": "metastatico_ou_recorrente",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Ver INAT-27/INAT-28.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Sem aprovação Anvisa no canal anal. Alternativa SUS: paclitaxel isolado, FOLFIRI ou mitomicina + 5-FU (APAC avançado).",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 10,
+            "trecho": "não existe aprovação pela agência regulatória (Anvisa)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Pembrolizumabe 200 mg EV a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "canal-anal-2l-qt",
+        "nome": "QT de 2ª linha sem imunoterapia: paclitaxel, FOLFIRI ou mitomicina + 5-FU",
+        "cenario": "metastatico_ou_recorrente",
+        "linha": "2ª linha",
+        "drogas": [],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "pendencia": "SEM_FONTE: SBOC não traz doses dessas opções no canal anal; doses de outros tumores não são transferidas.",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020192",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE DE CANAL ANAL/ MARGEM ANAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "QT com paclitaxel em monoterapia, Folfiri ou mitomicina mais 5-FU",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "localizado_qtrt_definitiva",
+        "doseTotalGy": 50.4,
+        "fracoes": null,
+        "concomitante": "mitomicina + 5-FU (ou cisplatina + 5-FU / capecitabina)",
+        "pendencia": "SEM_FONTE na SBOC: dose e fracionamento de RT; valor do curso PRO (ACT II) — INFERIDO",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/17 - Aula 17 - Câncer de Canal Anal.pdf",
+          "pagina": 13,
+          "trecho": "RT 50,4 Gy e MMC 12mg/m² D1",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "cenario": "RT exclusiva (HIV CD4 < 200, frágil)",
+        "doseTotalGy": null,
+        "doseTotalFaixa": "50–60 Gy (curso PRO)",
+        "fracoes": null,
+        "concomitante": "nenhum",
+        "pendencia": "SEM_FONTE na SBOC; faixa do curso — INFERIDO",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/17 - Aula 17 - Câncer de Canal Anal.pdf",
+          "pagina": 13,
+          "trecho": "RT definitiva RT 50-60 Gy",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Excisão local com margem > 1 mm",
+        "quando": "T1N0 bem diferenciado sem acometer esfíncter",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "pode ser considerada ressecção cirúrgica com margens livres (>1 mm)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Amputação abdominoperineal de resgate",
+        "quando": "progressão ou persistência comprovada por biópsia após 6–12 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Cirurgia de resgate (amputação abdominoperineal) em caso de progressão",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Metastasectomia/ablação/SBRT em oligometástase",
+        "quando": "casos selecionados, discussão multidisciplinar",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "pode ser discutido manejo multidisciplinar",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "HIV+ com CD4 < 200 ou idoso com múltiplas comorbidades",
+        "opcao": "considerar redução de dose, 5-FU + RT ou RT isolada",
+        "evidencia": "NE muito baixo/FR forte",
+        "sus": "sim (APAC)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Pacientes HIV+ com CD4 < 200;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "Mitomicina indisponível ou contraindicada",
+        "opcao": "cisplatina 60 mg/m² D1 e D29 + 5-FU",
+        "evidencia": "NE alto/FR forte",
+        "sus": "sim (APAC)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Cisplatina 60 mg/m² D1 e D29 + 5-FU 1.000 mg/m²/24h",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": null,
+      "riscoNeutropeniaFebril": "DCF modificado: profilaxia primária com filgrastima.",
+      "outros": [
+        "Dilatadores vaginais após QT/RT (a partir de ~4 semanas, ≥ 3x/semana, até 3 anos); lubrificante/estrógeno tópico individualizado.",
+        "Pesquisa de DPD antes de fluoropirimidina, se disponível."
+      ],
+      "pendencia": "SEM_FONTE: emetogenicidade por esquema.",
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 10,
+        "trecho": "Considerar profilaxia primária para neutropenia febril com alguma formulação de filgrastima",
+        "estado": "VERIFICADO"
+      },
+      "fontesAdicionais": [
+        {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Prevenção da estenose vaginal pós-quimiorradiação com dilatadores",
+          "estado": "VERIFICADO"
+        }
+      ]
+    },
+    "ensaios": [
+      {
+        "nome": "ACT II",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "populacao": "CEC canal anal localizado (HIV+ excluídos)",
+        "bracos": "RT + 5-FU com mitomicina × cisplatina",
+        "desfecho": "resposta completa em 26 semanas",
+        "resultado": "90,5% × 89,6%",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "A taxa de resposta completa em 6 meses foi de 90,5%",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "InterAACT",
+        "nct": "NCT02051868",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CEC anal metastático/recidiva irressecável",
+        "bracos": "cisplatina + 5-FU × carboplatina + paclitaxel",
+        "desfecho": "TRO",
+        "resultado": "57,1% × 59%; SG numericamente maior com carbo/pacli (20 × 12,3 meses)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "A SG foi numericamente maior no braço de carboplatina/paclitaxel",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "POD1UM-303/InterAACT-2",
+        "nct": "NCT04472429",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CEC anal avançado 1ª linha",
+        "bracos": "carboplatina-paclitaxel ± retifanlimabe",
+        "desfecho": "SLP",
+        "resultado": "9,3 × 7,4 meses; SG sem significância",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "O grupo retifanlimabe teve aumento em taxa de resposta (55,8% versus 44,2%)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "KEYNOTE-158 (coorte anal)",
+        "nct": "NCT02628067",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CEC anal avançado pré-tratado",
+        "bracos": "pembrolizumabe",
+        "desfecho": "TRO",
+        "resultado": "15% PD-L1+ × 3% PD-L1−",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "A taxa de resposta objetiva foi maior para",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "3 anos — exame clínico",
+        "exames": [],
+        "periodicidade": "toque retal e palpação inguinal a cada 3–6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Exame clínico com toque retal e palpação de LFN inguinais a cada 3-6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "3 anos — anuscopia",
+        "exames": [],
+        "periodicidade": "a cada 6–12 meses (anuscopia sem id no catálogo)",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Anuscopia a cada 6-12 meses por 3 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "3 anos — imagem",
+        "exames": [
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "TC_PELVE"
+        ],
+        "periodicidade": "anual",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "TC de tórax, abdómen e pelve a cada 12 meses anualmente por 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Localmente avançado — 1º ano",
+        "exames": [
+          "RM_PELVE"
+        ],
+        "periodicidade": "seguimento intensivo com RM de pelve (frequência não definida)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "seguimento intensivo com RM de pelve nos primeiros 12 meses",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "ANTI_HCV",
+      "BIOPSIA_GANGLIO",
+      "HBSAG",
+      "HIV",
+      "IMUNOHISTOQUIMICA",
+      "PET_CT_FDG",
+      "RETOSSIGMOIDOSCOPIA",
+      "RM_PELVE",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "TC_TORAX"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "5-FU / capecitabina",
+        "com": "brivudina (interação fatal; intervalo mínimo de 4 semanas)",
+        "ref": "INAT-04"
+      },
+      {
+        "droga": "capecitabina",
+        "com": "varfarina e cumarínicos",
+        "ref": "INAT-02"
+      },
+      {
+        "droga": "cisplatina",
+        "com": "aminoglicosídeos e outros ototóxicos",
+        "ref": "INAT-15"
+      },
+      {
+        "droga": "cisplatina",
+        "com": "insuficiência renal",
+        "ref": "CI-01"
+      },
+      {
+        "droga": "carboplatina",
+        "com": "dose por Calvert (ClCr)",
+        "ref": "CI-04"
+      },
+      {
+        "droga": "nivolumabe / pembrolizumabe",
+        "com": "corticoide basal / antibióticos",
+        "ref": "INAT-27"
+      },
+      {
+        "droga": "5-FU / capecitabina",
+        "com": "deficiência de DPD",
+        "ref": "CI-10"
+      },
+      {
+        "droga": "antirretrovirais (HIV+)",
+        "com": "quimioterapia — checar interações caso a caso",
+        "ref": null
+      }
+    ],
+    "interacoesFonte": {
+      "tipo": "BULA",
+      "referencia": "EMA — Xeloda (capecitabina) EPAR Product Information, SmPC seções 4.3/4.5 (https://www.ema.europa.eu/en/documents/product-information/xeloda-epar-product-information_en.pdf)",
+      "pagina": null,
+      "trecho": "Brivudine must not be administered concomitantly with capecitabine",
+      "estado": "VERIFICADO"
+    },
+    "ctcaeAcao": [
+      {
+        "classe": "fluoropirimidina",
+        "termosCTCAEv6": [
+          "Diarrhea",
+          "Mucositis oral",
+          "Neutrophil count decreased"
+        ]
+      },
+      {
+        "classe": "platina",
+        "termosCTCAEv6": [
+          "Acute kidney injury",
+          "Hearing impaired",
+          "Nausea"
+        ]
+      },
+      {
+        "classe": "taxano",
+        "termosCTCAEv6": [
+          "Peripheral sensory neuropathy",
+          "Neutrophil count decreased"
+        ]
+      },
+      {
+        "classe": "imunoterapia (ICI)",
+        "termosCTCAEv6": [
+          "Colitis",
+          "Hypothyroidism",
+          "Pneumonitis"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "cuidados com radiodermatite perineal",
+      "analgesia",
+      "dilatador vaginal",
+      "filgrastima (DCF modificado)"
+    ],
+    "orientacoes": [
+      "sinais-alarme-consolidado",
+      "dieta-por-toxicidade"
+    ],
+    "encaminhamentos": [
+      "radioterapia",
+      "cirurgia-oncologica (resgate)",
+      "ginecologia/urologia (lesões por HPV)",
+      "infectologia (HIV)",
+      "cuidados-paliativos"
+    ],
+    "laudos": [
+      "APAC de quimioterapia (SIGTAP 0304040053; 0304020192)"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "CEC de canal anal localizado (I–III)",
+        "y": "mitomicina disponível, sem contraindicação",
+        "z": "RT + mitomicina 12 mg/m² (máx. 20 mg) D1 + 5-FU 1.000 mg/m²/24h D1–4 e D29–32",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Mitomicina 12 mg/m² (dose máxima 20 mg) D1 + 5-FU 1.000 mg/m²/24h",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CEC de canal anal localizado",
+        "y": "mitomicina indisponível ou contraindicada",
+        "z": "RT + cisplatina 60 mg/m² D1 e D29 + 5-FU",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Cisplatina 60 mg/m² D1 e D29 + 5-FU 1.000 mg/m²/24h",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CEC de canal anal em QT/RT",
+        "y": "HIV+ com CD4 < 200 ou idoso com múltiplas comorbidades",
+        "z": "considerar reduzir dose, 5-FU + RT ou RT isolada",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Pacientes HIV+ com CD4 < 200;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Avaliação 8–12 semanas após QT/RT",
+        "y": "sem resposta completa e sem progressão",
+        "z": "reavaliar em 4 semanas e seguir trimestralmente; RC pode surgir até 26 semanas; resgate só com biópsia positiva após 6–12 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "pode-se levar até 26 semanas para que a resposta completa seja observada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Candidato a 5-FU/capecitabina",
+        "y": "brivudina concomitante ou nas últimas 4 semanas",
+        "z": "não coadministrar; aguardar 4 semanas",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "EMA — Xeloda (capecitabina) EPAR Product Information, SmPC seções 4.3/4.5 (https://www.ema.europa.eu/en/documents/product-information/xeloda-epar-product-information_en.pdf)",
+          "pagina": null,
+          "trecho": "at least a 4-week waiting period between end of treatment with brivudine",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CEC anal metastático, 1ª linha",
+        "y": "PS adequado",
+        "z": "carboplatina AUC 5 D1 + paclitaxel 80 mg/m² D1, D8, D15 a cada 28 dias",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Carboplatina AUC 5 D1 + Paclitaxel 80 mg/m² D1, D8 e D15 EV",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    "SEM_FONTE: dose e fracionamento da RT (SBOC não informa; 50,4 Gy só do curso PRO).",
+    "SEM_FONTE: doses de paclitaxel, FOLFIRI e mitomicina + 5-FU na 2ª linha.",
+    "SEM_FONTE: emetogenicidade por esquema.",
+    "SEM_ID_NO_CATALOGO: anuscopia, CD4/carga viral, DPYD.",
+    "SUS: imunoterapia sem aprovação Anvisa no canal anal; QT por APAC (0304040053/0304020192).",
+    "Adenocarcinoma de canal anal: confirmar com o médico se segue o pack colorretal."
+  ],
+  "conflitos": [
+    {
+      "tema": "Capecitabina em substituição ao 5-FU — força da recomendação",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 7,
+        "trecho": "substituição do 5-FU por Capecitabina 825 mg/m² 12/12h VO nos dias de RT",
+        "estado": "VERIFICADO"
+      },
+      "fonteADetalhe": "Texto: NE moderado/FR forte",
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 9,
+        "trecho": "*5-FU pode ser substituído por capecitabina (NE muito baixo/FR fraca)",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Preferir 5-FU infusional; capecitabina como alternativa quando infusão não for viável."
+    },
+    {
+      "tema": "Cisplatina + 5-FU na doença metastática — nível de evidência",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 10,
+        "trecho": "D1 a D4 EV a cada 3 semanas",
+        "estado": "VERIFICADO"
+      },
+      "fonteADetalhe": "Texto: NE moderado/FR fraca",
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 12,
+        "trecho": "CDDP + 5-FU",
+        "estado": "VERIFICADO"
+      },
+      "fonteBDetalhe": "Fluxograma: NE alto/FR fraca; DCF modificado texto NE moderado/FR forte × fluxograma NE alto/FR fraca",
+      "escolhaSeguranca": "Sem impacto em dose; carboplatina + paclitaxel segue preferencial."
+    },
+    {
+      "tema": "Agrupamento TNM",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Canal-anal-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 5,
+        "trecho": "IIIA T1/T2 N1 M0",
+        "estado": "VERIFICADO"
+      },
+      "fonteADetalhe": "AJCC 8ª: IIA T2N0, IIB T3N0, IIIA T1–2N1, IIIB T4N0, IIIC T3–4N1",
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/17 - Aula 17 - Câncer de Canal Anal.pdf",
+        "pagina": 8,
+        "trecho": "II T2 N0 ou T1-2 N1",
+        "estado": "INFERIDO"
+      },
+      "fonteBDetalhe": "Curso PRO agrupa T1–2 N1 como II e T3–4 N0–1 como III",
+      "escolhaSeguranca": "Usar o agrupamento AJCC 8ª da SBOC."
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (agente curador, Opus 5.5) sob demanda do Dr. Silas Negrão",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC 2026 Canal anal v3 (pp. 1–14)",
+      "Onco PRO 2026 aula 17 (pp. 3–15)",
+      "EMA Xeloda SmPC",
+      "ClinicalTrials.gov API v2 (3 NCT verificados)",
+      "SIGTAP 2026-09"
+    ],
+    "aprovacaoClinica": null
+  }
+}

@@ -1,0 +1,2611 @@
+{
+  "header": {
+    "id": "ctcae-acao-v2",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Bulas FDA via openFDA (set_id e data efetiva por célula), SITC 2021 irAE, SBOC 2026; termos conferidos no CSV CTCAE v6 local (docs/referencias/onco-referencia/02-ctcae-v6.csv)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "substitui": [
+    "ctcae-acao"
+  ],
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "nota": "Matriz classe × droga × termo CTCAE v6 × grau → ação PROPOSTA. O médico decide; nada bloqueia. Correção do HARD_STOP do red team: a ação não carrega mais percentual no nome. percentualReduzido = número da bula (quanto se tira); percentualAdministrado = 100 − reduzido (quanto se dá); quando a bula fala em mg/m² ou níveis, usa-se nivelDose e o percentual fica null (não se calcula percentual que a bula não diz). Sem fonte: acao null + pendencia SEM_FONTE. Regra de uma droga nunca transferida para outra da mesma classe. Graus de várias bulas usam versões antigas do NCI CTC (v1.0/v2/v4) — o mapeamento para v6 está anotado e é PROPOSTA do curador.",
+  "acoesPossiveis": [
+    "MANTER",
+    "ADIAR",
+    "REDUZIR_DOSE",
+    "SUSPENDER",
+    "SUSPENDER_DEFINITIVO",
+    "CONSULTA"
+  ],
+  "semanticaAcoes": {
+    "MANTER": "seguir sem mudança de dose (pode haver ajuste de infusão ou suporte)",
+    "ADIAR": "postergar o próximo ciclo até o critério de retomada",
+    "REDUZIR_DOSE": "retomar/seguir com dose menor (percentual ou nível da bula)",
+    "SUSPENDER": "interromper temporariamente (withhold/omit/hold) até o critério de retomada",
+    "SUSPENDER_DEFINITIVO": "descontinuar permanentemente",
+    "CONSULTA": "a fonte manda individualizar — decisão médica sem regra numérica"
+  },
+  "campos": {
+    "percentualReduzido": "número da bula; null se a bula não o fixa",
+    "percentualAdministrado": "100 − percentualReduzido; null se aquele for null",
+    "nivelDose": "níveis/mg/m² literais da bula (ex.: '−1 nível', '100 → 75 mg/m²')",
+    "retomada": "condição de retomada da fonte",
+    "suporte": "receita/orientação curta (vínculo por id aos pilares 2/7/8 fica para a integração)"
+  },
+  "celulas": [
+    {
+      "classe": "taxano",
+      "droga": "paclitaxel",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "pré-ciclo: ANC <1500/mm³ (ou PLQ <100.000)",
+      "acao": "ADIAR",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Repetir o ciclo só com ANC ≥1500 e PLQ ≥100.000 (tumores sólidos).",
+      "suporte": "Hemograma antes de cada ciclo.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed paclitaxel injection (Alembic), set_id 0c12c77c-5fd4-48dc-a318-e96892233992, eff 2024-06-24, acesso 11/10/2026",
+        "secao": "DOSAGE AND ADMINISTRATION",
+        "trecho": "should not be repeated until the neutrophil count is at least 1,500 cells/mm 3",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "taxano",
+      "droga": "paclitaxel",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "4 com duração ≥7 dias (ANC <500 por ≥1 semana)",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 20,
+      "percentualAdministrado": 80,
+      "nivelDose": null,
+      "retomada": "Ciclos subsequentes com dose 20% menor.",
+      "suporte": "Avaliar G-CSF conforme protocolo do serviço.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed paclitaxel injection (Alembic), set_id 0c12c77c-5fd4-48dc-a318-e96892233992, eff 2024-06-24, acesso 11/10/2026",
+        "secao": "DOSAGE AND ADMINISTRATION",
+        "trecho": "neutrophil <500 cells/mm 3 for a week or longer",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Bula: 'dosage reduced by 20% for subsequent courses' (mesma frase cobre neuropatia grave)."
+    },
+    {
+      "classe": "taxano",
+      "droga": "paclitaxel",
+      "termoCTCAEv6": "Peripheral sensory neuropathy",
+      "grau": "3 (\"severe\" na bula)",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 20,
+      "percentualAdministrado": 80,
+      "nivelDose": null,
+      "retomada": "Ciclos subsequentes com dose 20% menor.",
+      "suporte": "Orientar sinais de neuropatia; reavaliar a cada ciclo.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed paclitaxel injection (Alembic), set_id 0c12c77c-5fd4-48dc-a318-e96892233992, eff 2024-06-24, acesso 11/10/2026",
+        "secao": "DOSAGE AND ADMINISTRATION",
+        "trecho": "severe peripheral neuropathy during paclitaxel therapy should have dosage reduced by 20%",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Bula usa 'severe', não grau CTCAE; mapeamento para G3 é PROPOSTA do curador."
+    },
+    {
+      "classe": "taxano",
+      "droga": "paclitaxel",
+      "termoCTCAEv6": "Allergic reaction",
+      "grau": "3-4 (hipersensibilidade grave)",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Não reexpor.",
+      "suporte": "Pré-medicação obrigatória (dexametasona, difenidramina, anti-H2) antes de todo ciclo.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed paclitaxel injection (Alembic), set_id 0c12c77c-5fd4-48dc-a318-e96892233992, eff 2024-06-24, acesso 11/10/2026",
+        "secao": "BOXED WARNING",
+        "trecho": "severe hypersensitivity reactions to paclitaxel should not be rechallenged with the drug",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "taxano",
+      "droga": "paclitaxel",
+      "termoCTCAEv6": "Blood bilirubin increased",
+      "grau": "infusão 3h: bilirrubina 1,26–2 × LSN (TGO/TGP <10 × LSN)",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "175 → 135 mg/m²",
+      "retomada": "Recomendação para o 1º ciclo; seguintes conforme tolerância.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed paclitaxel injection (Alembic), set_id 0c12c77c-5fd4-48dc-a318-e96892233992, eff 2024-06-24, acesso 11/10/2026",
+        "secao": "TABLE 17 (hepatic impairment)",
+        "trecho": "<10 x ULN and 1.26 to 2 x ULN 135 mg/m 2",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Bula expressa em mg/m² (não em %); percentual não calculado para não inventar número."
+    },
+    {
+      "classe": "taxano",
+      "droga": "paclitaxel",
+      "termoCTCAEv6": "Blood bilirubin increased",
+      "grau": "infusão 3h: bilirrubina 2,01–5 × LSN",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "175 → 90 mg/m²",
+      "retomada": "1º ciclo; seguintes conforme tolerância.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed paclitaxel injection (Alembic), set_id 0c12c77c-5fd4-48dc-a318-e96892233992, eff 2024-06-24, acesso 11/10/2026",
+        "secao": "TABLE 17 (hepatic impairment)",
+        "trecho": "<10 x ULN and 2.01 to 5 x ULN 90 mg/m 2",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "taxano",
+      "droga": "paclitaxel",
+      "termoCTCAEv6": "Blood bilirubin increased",
+      "grau": "TGO/TGP ≥10 × LSN ou bilirrubina >5 × LSN (infusão 3h)",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Não recomendado.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed paclitaxel injection (Alembic), set_id 0c12c77c-5fd4-48dc-a318-e96892233992, eff 2024-06-24, acesso 11/10/2026",
+        "secao": "TABLE 17 (hepatic impairment)",
+        "trecho": "≥10 x ULN or >5.0 x ULN Not recommended",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "taxano",
+      "droga": "docetaxel",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "pré-ciclo: ANC <1500/mm³",
+      "acao": "ADIAR",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Não administrar até ANC ≥1500.",
+      "suporte": "Hemograma antes de cada ciclo.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed docetaxel injection (Mylan), set_id 2992d633-08fa-44f3-b14d-41700f24686b, eff 2026-04-15, acesso 11/10/2026",
+        "secao": "BOXED WARNING",
+        "trecho": "patients with neutrophil counts of < 1500 cells/mm 3",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "taxano",
+      "droga": "docetaxel",
+      "termoCTCAEv6": "Febrile neutropenia",
+      "grau": "3-4 (ou ANC <500 por >1 semana) — mama, dose inicial 100 mg/m²",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "100 → 75 mg/m²; se recorrer 75 → 55 mg/m² ou descontinuar",
+      "retomada": "Ajustar no ciclo seguinte após recuperação.",
+      "suporte": "G-CSF conforme protocolo.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed docetaxel injection (Mylan), set_id 2992d633-08fa-44f3-b14d-41700f24686b, eff 2026-04-15, acesso 11/10/2026",
+        "secao": "2.7 Dosage Adjustments — Breast Cancer",
+        "trecho": "dosage adjusted from 100 mg/m 2 to 75 mg/m 2",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Bula expressa em mg/m²; percentual não calculado."
+    },
+    {
+      "classe": "taxano",
+      "droga": "docetaxel",
+      "termoCTCAEv6": "Febrile neutropenia",
+      "grau": "3-4 — CPNPC monoterapia 75 mg/m²",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "75 → 55 mg/m²",
+      "retomada": "Suspender até resolução e retomar com 55 mg/m².",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed docetaxel injection (Mylan), set_id 2992d633-08fa-44f3-b14d-41700f24686b, eff 2026-04-15, acesso 11/10/2026",
+        "secao": "2.7 Dosage Adjustments — NSCLC",
+        "trecho": "withheld until resolution of the toxicity and then resumed at 55 mg/m 2",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "taxano",
+      "droga": "docetaxel",
+      "termoCTCAEv6": "Peripheral sensory neuropathy",
+      "grau": "≥3",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Descontinuar inteiramente (mama metastática e CPNPC).",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed docetaxel injection (Mylan), set_id 2992d633-08fa-44f3-b14d-41700f24686b, eff 2026-04-15, acesso 11/10/2026",
+        "secao": "2.7 Dosage Adjustments",
+        "trecho": "≥ grade 3 peripheral neuropathy should have docetaxel injection treatment discontinued entirely",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "taxano",
+      "droga": "docetaxel",
+      "termoCTCAEv6": "Peripheral sensory neuropathy",
+      "grau": "2 (\"moderate neurosensory\") — adjuvante mama / próstata",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "75 → 60 mg/m²; se persistir a 60, descontinuar",
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed docetaxel injection (Mylan), set_id 2992d633-08fa-44f3-b14d-41700f24686b, eff 2026-04-15, acesso 11/10/2026",
+        "secao": "2.7 Dosage Adjustments — adjuvant breast",
+        "trecho": "moderate neurosensory signs and/or symptoms",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "taxano",
+      "droga": "docetaxel",
+      "termoCTCAEv6": "Mucositis oral",
+      "grau": "3-4 — adjuvante mama (TAC)",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "75 → 60 mg/m²",
+      "retomada": null,
+      "suporte": "Higiene oral; analgesia tópica.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed docetaxel injection (Mylan), set_id 2992d633-08fa-44f3-b14d-41700f24686b, eff 2026-04-15, acesso 11/10/2026",
+        "secao": "2.7 Dosage Adjustments — adjuvant breast",
+        "trecho": "grade 3 or 4 stomatitis should have their Docetaxel Injection dose decreased",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "taxano",
+      "droga": "docetaxel",
+      "termoCTCAEv6": "Diarrhea",
+      "grau": "3 — esquema TCF/TPF (com cisplatina e 5-FU)",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 20,
+      "percentualAdministrado": 80,
+      "nivelDose": null,
+      "retomada": "1º episódio: reduzir 5-FU 20%; 2º episódio: reduzir docetaxel 20%.",
+      "suporte": "Loperamida; hidratação.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed docetaxel injection (Mylan), set_id 2992d633-08fa-44f3-b14d-41700f24686b, eff 2026-04-15, acesso 11/10/2026",
+        "secao": "Table 1 (TCF/TPF)",
+        "trecho": "Diarrhea grade 3 First episode: reduce fluorouracil dose by 20%",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Os 20% do 1º episódio são do 5-FU, não do docetaxel."
+    },
+    {
+      "classe": "taxano",
+      "droga": "docetaxel",
+      "termoCTCAEv6": "Diarrhea",
+      "grau": "4 — esquema TCF/TPF",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 20,
+      "percentualAdministrado": 80,
+      "nivelDose": null,
+      "retomada": "1º episódio: reduzir docetaxel e 5-FU 20%; 2º episódio: descontinuar.",
+      "suporte": "Avaliar internação/hidratação IV.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed docetaxel injection (Mylan), set_id 2992d633-08fa-44f3-b14d-41700f24686b, eff 2026-04-15, acesso 11/10/2026",
+        "secao": "Table 1 (TCF/TPF)",
+        "trecho": "Diarrhea grade 4 First episode: reduce docetaxel injection and fluorouracil doses by 20%",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "taxano",
+      "droga": "docetaxel",
+      "termoCTCAEv6": "Blood bilirubin increased",
+      "grau": ">LSN (ou TGO/TGP >1,5 × LSN com FA >2,5 × LSN)",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Evitar uso; dosar bilirrubina, TGO/TGP e FA antes de cada ciclo.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed docetaxel injection (Mylan), set_id 2992d633-08fa-44f3-b14d-41700f24686b, eff 2026-04-15, acesso 11/10/2026",
+        "secao": "BOXED WARNING",
+        "trecho": "Avoid the use of docetaxel injection in patients with bilirubin",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "taxano",
+      "droga": "docetaxel",
+      "termoCTCAEv6": "Allergic reaction",
+      "grau": "3-4 (hipersensibilidade grave)",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Interromper infusão imediatamente; história de reação grave contraindica reexposição.",
+      "suporte": "Pré-medicação com corticoide oral.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed docetaxel injection (Mylan), set_id 2992d633-08fa-44f3-b14d-41700f24686b, eff 2026-04-15, acesso 11/10/2026",
+        "secao": "BOXED WARNING",
+        "trecho": "Hypersensitivity reactions require immediate discontinuation of the docetaxel injection infusion",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "taxano",
+      "droga": "nab-paclitaxel",
+      "termoCTCAEv6": "Peripheral sensory neuropathy",
+      "grau": "3-4 — pâncreas (com gencitabina)",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "−1 nível",
+      "retomada": "Suspender até ≤G1; retomar no nível de dose inferior (gencitabina sem redução).",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ABRAXANE, set_id 24d10449-2936-4cd3-b7db-a7683db721e4, eff 2022-10-31, acesso 11/10/2026",
+        "secao": "Dose Modifications — Pancreas",
+        "trecho": "Peripheral Neuropathy: Grade 3 or 4 Withhold until improves to ≤ Grade 1",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "taxano",
+      "droga": "nab-paclitaxel",
+      "termoCTCAEv6": "Diarrhea",
+      "grau": "3 (ou mucosite G3) — pâncreas",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "−1 nível",
+      "retomada": "Suspender até ≤G1; retomar no nível inferior.",
+      "suporte": "Loperamida; hidratação.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ABRAXANE, set_id 24d10449-2936-4cd3-b7db-a7683db721e4, eff 2022-10-31, acesso 11/10/2026",
+        "secao": "Dose Modifications — Pancreas",
+        "trecho": "Grade 3 mucositis or diarrhea Withhold until improves to ≤ Grade 1",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "capecitabina",
+      "termoCTCAEv6": "Diarrhea",
+      "grau": "2",
+      "acao": "SUSPENDER",
+      "percentualReduzido": 0,
+      "percentualAdministrado": 100,
+      "nivelDose": null,
+      "retomada": "Suspender até G0-1. Retomar: 1ª ocorrência 100%; 2ª 75%; 3ª 50%; 4ª descontinuar.",
+      "suporte": "Loperamida; hidratação oral; orientar retorno se ≥4 evacuações/dia acima do basal.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed XELODA, set_id e702d84d-7162-4751-bf37-d724cc7e45a5, eff 2026-02-05, acesso 11/10/2026",
+        "secao": "2.5 Table 1",
+        "trecho": "Grade 2 1st appearance Withhold until resolved to grade 0-1. 100%",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Percentuais da bula são da DOSE ATUAL ('Percent of Current Dose'); percentualReduzido aqui = 1ª ocorrência."
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "capecitabina",
+      "termoCTCAEv6": "Diarrhea",
+      "grau": "3",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 25,
+      "percentualAdministrado": 75,
+      "nivelDose": null,
+      "retomada": "Suspender até G0-1. Retomar: 1ª ocorrência 75%; 2ª 50%; 3ª descontinuar.",
+      "suporte": "Loperamida; hidratação; avaliar IV.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed XELODA, set_id e702d84d-7162-4751-bf37-d724cc7e45a5, eff 2026-02-05, acesso 11/10/2026",
+        "secao": "2.5 Table 1",
+        "trecho": "Grade 3 1st appearance Withhold until resolved to grade 0-1. 75%",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "capecitabina",
+      "termoCTCAEv6": "Diarrhea",
+      "grau": "4",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Descontinuar OU, a critério médico, suspender até G0-1 e retomar a 50%.",
+      "suporte": "Internação/hidratação IV.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed XELODA, set_id e702d84d-7162-4751-bf37-d724cc7e45a5, eff 2026-02-05, acesso 11/10/2026",
+        "secao": "2.5 Table 1",
+        "trecho": "Grade 4 1st appearance Permanently discontinue OR Withhold until resolved to grade 0-1",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Alternativa da bula: retomar a 50% (percentualReduzido 50)."
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "capecitabina",
+      "termoCTCAEv6": "Palmar-plantar erythrodysesthesia syndrome",
+      "grau": "2",
+      "acao": "SUSPENDER",
+      "percentualReduzido": 0,
+      "percentualAdministrado": 100,
+      "nivelDose": null,
+      "retomada": "Suspender até G0-1. Retomar: 1ª 100%; 2ª 75%; 3ª 50%; 4ª descontinuar.",
+      "suporte": "Emoliente com ureia; evitar calor/atrito.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed XELODA, set_id e702d84d-7162-4751-bf37-d724cc7e45a5, eff 2026-02-05, acesso 11/10/2026",
+        "secao": "2.5 Table 1 / 5.8 PPES",
+        "trecho": "Withhold XELODA then resume at same or reduced dose",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "capecitabina",
+      "termoCTCAEv6": "Palmar-plantar erythrodysesthesia syndrome",
+      "grau": "3",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 25,
+      "percentualAdministrado": 75,
+      "nivelDose": null,
+      "retomada": "Suspender até G0-1. Retomar: 1ª 75%; 2ª 50%; 3ª descontinuar.",
+      "suporte": "Emoliente com ureia; analgesia; evitar calor/atrito.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed XELODA, set_id e702d84d-7162-4751-bf37-d724cc7e45a5, eff 2026-02-05, acesso 11/10/2026",
+        "secao": "2.5 Table 1",
+        "trecho": "Grade 3 1st appearance Withhold until resolved to grade 0-1. 75%",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "CTCAE v6 PPE não tem G4."
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "capecitabina",
+      "termoCTCAEv6": "Mucositis oral",
+      "grau": "3",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 25,
+      "percentualAdministrado": 75,
+      "nivelDose": null,
+      "retomada": "Suspender até G0-1. Retomar: 1ª 75%; 2ª 50%; 3ª descontinuar.",
+      "suporte": "Bochechos; analgesia tópica.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed XELODA, set_id e702d84d-7162-4751-bf37-d724cc7e45a5, eff 2026-02-05, acesso 11/10/2026",
+        "secao": "2.5 Table 1 (reações adversas em geral)",
+        "trecho": "Grade 3 1st appearance Withhold until resolved to grade 0-1. 75%",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Tabela 1 é genérica para reações adversas; mucosite não é citada nominalmente."
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "capecitabina",
+      "termoCTCAEv6": "Blood bilirubin increased",
+      "grau": "3-4",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Retomar quando ≤G2 (<3 × LSN), com o percentual da coluna 3 da Tabela 1.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed XELODA, set_id e702d84d-7162-4751-bf37-d724cc7e45a5, eff 2026-02-05, acesso 11/10/2026",
+        "secao": "2.5 Hyperbilirubinemia",
+        "trecho": "may resume treatment once the event is Grade 2 or less",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "capecitabina",
+      "termoCTCAEv6": "Creatinine increased",
+      "grau": "ClCr 30–50 mL/min (Cockcroft-Gault)",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 25,
+      "percentualAdministrado": 75,
+      "nivelDose": null,
+      "retomada": "Dose inicial 25% menor; ClCr <30 sem dose estabelecida.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed XELODA, set_id e702d84d-7162-4751-bf37-d724cc7e45a5, eff 2026-02-05, acesso 11/10/2026",
+        "secao": "2.7 Renal Impairment",
+        "trecho": "Reduce the dose of XELODA by 25% for patients with creatinine clearance",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "capecitabina",
+      "termoCTCAEv6": "n/a (farmacogenética DPYD)",
+      "grau": "deficiência completa de DPD",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Evitar uso; nenhuma dose comprovadamente segura.",
+      "suporte": "Testar DPYD antes de iniciar, salvo urgência.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed XELODA, set_id e702d84d-7162-4751-bf37-d724cc7e45a5, eff 2026-02-05, acesso 11/10/2026",
+        "secao": "2.1 / 5.1 DPD Deficiency",
+        "trecho": "Avoid use of XELODA in patients known to have certain homozygous",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "capecitabina",
+      "termoCTCAEv6": "n/a (farmacogenética DPYD)",
+      "grau": "deficiência parcial de DPD",
+      "acao": "CONSULTA",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Individualizar dose conforme tolerância e intenção do tratamento.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed XELODA, set_id e702d84d-7162-4751-bf37-d724cc7e45a5, eff 2026-02-05, acesso 11/10/2026",
+        "secao": "2.1 DPD Deficiency",
+        "trecho": "individualize the dosage and modify based on tolerability and intent",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Bula não fixa percentual; não inventar."
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "fluorouracil",
+      "termoCTCAEv6": "Diarrhea",
+      "grau": "3-4",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Suspender; ao melhorar para G1, retomar com dose reduzida.",
+      "suporte": "Loperamida; hidratação.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed fluorouracil injection (Xiromed), set_id 19735014-c6fb-0a05-c330-2e9389c71216, eff 2026-02-19, acesso 11/10/2026",
+        "secao": "2.6 Dose Modifications",
+        "trecho": "Grade 3 or 4 diarrhea",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Bula não especifica o percentual de redução."
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "fluorouracil",
+      "termoCTCAEv6": "Palmar-plantar erythrodysesthesia syndrome",
+      "grau": "2-3",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Suspender; ao melhorar para G1, retomar com dose reduzida.",
+      "suporte": "Emoliente com ureia.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed fluorouracil injection (Xiromed), set_id 19735014-c6fb-0a05-c330-2e9389c71216, eff 2026-02-19, acesso 11/10/2026",
+        "secao": "2.6 Dose Modifications",
+        "trecho": "Grade 2 or 3 palmar-plantar erythrodysesthesia (hand-foot syndrome)",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Percentual não especificado na bula."
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "fluorouracil",
+      "termoCTCAEv6": "Mucositis oral",
+      "grau": "3-4",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Suspender; ao melhorar para G1, retomar com dose reduzida.",
+      "suporte": "Bochechos; analgesia; hidratação.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed fluorouracil injection (Xiromed), set_id 19735014-c6fb-0a05-c330-2e9389c71216, eff 2026-02-19, acesso 11/10/2026",
+        "secao": "2.6 Dose Modifications",
+        "trecho": "Grade 3 or 4 mucositis",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Percentual não especificado na bula."
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "fluorouracil",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "4",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Suspender; ao melhorar para G1, retomar com dose reduzida.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed fluorouracil injection (Xiromed), set_id 19735014-c6fb-0a05-c330-2e9389c71216, eff 2026-02-19, acesso 11/10/2026",
+        "secao": "2.6 Dose Modifications",
+        "trecho": "Grade 4 myelosuppression",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Percentual não especificado na bula."
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "fluorouracil",
+      "termoCTCAEv6": "n/a (farmacogenética DPYD)",
+      "grau": "toxicidade precoce/grave sugestiva de deficiência de DPD",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Suspender ou descontinuar definitivamente conforme início, duração e gravidade.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed fluorouracil injection (Xiromed), set_id 19735014-c6fb-0a05-c330-2e9389c71216, eff 2026-02-19, acesso 11/10/2026",
+        "secao": "5.1 DPD",
+        "trecho": "Withhold or permanently discontinue fluorouracil based on clinical assessment",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "fluoropirimidinas (classe, diretriz)",
+      "termoCTCAEv6": "n/a (farmacogenética DPYD)",
+      "grau": "variante DPYD identificada",
+      "acao": "CONSULTA",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Contraindicação absoluta ou redução de dose, conforme variante.",
+      "suporte": "Pesquisar DPD antes de iniciar, se teste disponível (FR fraca).",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Diretrizes SBOC 2026 — Cólon doença avançada v3 (versão para colaboração)",
+        "pagina": "25",
+        "trecho": "implicaria em contraindicação absoluta de uso desta ou indicação de redução de dose",
+        "estado": "TRECHO_LITERAL_CONFERIDO_TEXTO_LOCAL"
+      },
+      "nota": "Diretriz brasileira de classe (não é bula); 14 palavras."
+    },
+    {
+      "classe": "platina",
+      "droga": "oxaliplatina",
+      "termoCTCAEv6": "Peripheral sensory neuropathy",
+      "grau": "2 persistente — adjuvante cólon",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "130 → 75 mg/m² (considerar)",
+      "retomada": null,
+      "suporte": "Evitar frio nas neuropatias agudas.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed oxaliplatin injection (Meitheal), set_id 11377169-7986-45b1-8298-6f0533efa3c3, eff 2024-10-03, acesso 11/10/2026",
+        "secao": "Table 1 (adjuvant)",
+        "trecho": "Persistent Grade 2 Consider reducing oxaliplatin injection dose to 75 mg/m 2",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "platina",
+      "droga": "oxaliplatina",
+      "termoCTCAEv6": "Peripheral sensory neuropathy",
+      "grau": "2 persistente — CCR avançado",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "85 → 65 mg/m² (considerar)",
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed oxaliplatin injection (Meitheal), set_id 11377169-7986-45b1-8298-6f0533efa3c3, eff 2024-10-03, acesso 11/10/2026",
+        "secao": "Table 2 (advanced CRC)",
+        "trecho": "Persistent Grade 2 Consider reducing oxaliplatin injection dose to 65 mg/m 2",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "platina",
+      "droga": "oxaliplatina",
+      "termoCTCAEv6": "Peripheral sensory neuropathy",
+      "grau": "3 persistente",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Bula: 'considerar descontinuar'.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed oxaliplatin injection (Meitheal), set_id 11377169-7986-45b1-8298-6f0533efa3c3, eff 2024-10-03, acesso 11/10/2026",
+        "secao": "Tables 1-2",
+        "trecho": "Persistent Grade 3 Consider discontinuing oxaliplatin injection",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "platina",
+      "droga": "oxaliplatina",
+      "termoCTCAEv6": "Peripheral sensory neuropathy",
+      "grau": "4",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Descontinuar.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed oxaliplatin injection (Meitheal), set_id 11377169-7986-45b1-8298-6f0533efa3c3, eff 2024-10-03, acesso 11/10/2026",
+        "secao": "Tables 1-2",
+        "trecho": "Grade 4 Discontinue oxaliplatin injection",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "platina",
+      "droga": "oxaliplatina",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "4 (ou neutropenia febril)",
+      "acao": "ADIAR",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "adjuvante → 75 mg/m²; avançado → 65 mg/m²",
+      "retomada": "Adiar até ANC ≥1,5 × 10⁹/L e PLQ ≥75 × 10⁹/L; depois reduzir.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed oxaliplatin injection (Meitheal), set_id 11377169-7986-45b1-8298-6f0533efa3c3, eff 2024-10-03, acesso 11/10/2026",
+        "secao": "Tables 1-2 (myelosuppression)",
+        "trecho": "Delay the next dose until neutrophils greater than or equal to 1.5",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "platina",
+      "droga": "oxaliplatina",
+      "termoCTCAEv6": "Thrombocytopenia",
+      "grau": "3-4",
+      "acao": "ADIAR",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "adjuvante → 75 mg/m²; avançado → 65 mg/m²",
+      "retomada": "Adiar até ANC ≥1,5 e PLQ ≥75 × 10⁹/L; depois reduzir.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed oxaliplatin injection (Meitheal), set_id 11377169-7986-45b1-8298-6f0533efa3c3, eff 2024-10-03, acesso 11/10/2026",
+        "secao": "Tables 1-2 (myelosuppression)",
+        "trecho": "Grade 3 to 4 thrombocytopenia",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Linha da tabela compartilha a conduta com neutropenia G4."
+    },
+    {
+      "classe": "platina",
+      "droga": "oxaliplatina",
+      "termoCTCAEv6": "Diarrhea",
+      "grau": "3-4 (TGI)",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "oxali → 75 (adj) / 65 (avançado) mg/m²; 5-FU bolus 300 + IC 500 mg/m²",
+      "retomada": "Após recuperação.",
+      "suporte": "Loperamida; hidratação.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed oxaliplatin injection (Meitheal), set_id 11377169-7986-45b1-8298-6f0533efa3c3, eff 2024-10-03, acesso 11/10/2026",
+        "secao": "Tables 1-2 (GI)",
+        "trecho": "After recovery, reduce oxaliplatin injection dose to 75 mg/m 2",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "platina",
+      "droga": "oxaliplatina",
+      "termoCTCAEv6": "Allergic reaction",
+      "grau": "qualquer reação de hipersensibilidade",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Descontinuar imediata e permanentemente.",
+      "suporte": "Tratar a reação (protocolo de anafilaxia).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed oxaliplatin injection (Meitheal), set_id 11377169-7986-45b1-8298-6f0533efa3c3, eff 2024-10-03, acesso 11/10/2026",
+        "secao": "5.1 Hypersensitivity",
+        "trecho": "Immediately and permanently discontinue oxaliplatin for hypersensitivity reactions",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "platina",
+      "droga": "cisplatina",
+      "termoCTCAEv6": "Creatinine increased",
+      "grau": "creatinina sérica ≥1,5 mg/dL (ou ureia ≥25 mg/dL)",
+      "acao": "ADIAR",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Não repetir o ciclo até creatinina <1,5 mg/dL e/ou ureia <25 mg/dL.",
+      "suporte": "Hidratação pré e pós; dosar Mg e eletrólitos.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed cisplatin injection (Sagent, bula formato antigo), set_id 00396546-6a80-4b9f-a5f8-c22c1d1bb173, eff 2024-01-20, acesso 11/10/2026",
+        "secao": "DOSAGE AND ADMINISTRATION",
+        "trecho": "should not be given until the serum creatinine is below 1.5 mg/100 mL",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Bula PLR 2026 (WG Critical Care §2.5) diz apenas 'consider alternative treatments or dose reductions' para ClCr reduzido."
+    },
+    {
+      "classe": "platina",
+      "droga": "cisplatina",
+      "termoCTCAEv6": "Hearing impaired",
+      "grau": "qualquer alteração audiométrica",
+      "acao": "ADIAR",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Próximas doses só com acuidade auditiva normal à audiometria.",
+      "suporte": "Audiometria basal e seriada.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed cisplatin injection (Sagent, bula formato antigo), set_id 00396546-6a80-4b9f-a5f8-c22c1d1bb173, eff 2024-01-20, acesso 11/10/2026",
+        "secao": "DOSAGE AND ADMINISTRATION",
+        "trecho": "should not be given until an audiometric analysis indicates that auditory acuity",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Bula PLR atual: 'consider audiometric and vestibular function monitoring' — conduta mais branda; médico decide."
+    },
+    {
+      "classe": "platina",
+      "droga": "cisplatina",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "pré-ciclo: PLQ <100.000 ou leucócitos <4.000",
+      "acao": "ADIAR",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Repetir só com PLQ ≥100.000 e leucócitos ≥4.000.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed cisplatin injection (Sagent, bula formato antigo), set_id 00396546-6a80-4b9f-a5f8-c22c1d1bb173, eff 2024-01-20, acesso 11/10/2026",
+        "secao": "DOSAGE AND ADMINISTRATION",
+        "trecho": "platelets ≥ 100,000/mm 3 , WBC ≥ 4,000/mm 3",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "platina",
+      "droga": "cisplatina",
+      "termoCTCAEv6": "Peripheral sensory neuropathy",
+      "grau": "3-4",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Bula: 'considerar descontinuação permanente'.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed cisplatin for injection (WG Critical Care, formato PLR), set_id 508496cb-3441-46b3-a4fe-e0d440e6adc6, eff 2026-06-24, acesso 11/10/2026",
+        "secao": "2.5 Dose Modifications",
+        "trecho": "Consider permanent discontinuation for Grade 3-4 neuropathy",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "platina",
+      "droga": "carboplatina",
+      "termoCTCAEv6": "Thrombocytopenia",
+      "grau": "pré-ciclo: PLQ <100.000 (ou neutrófilos <2.000)",
+      "acao": "ADIAR",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Não repetir até neutrófilos ≥2.000 e PLQ ≥100.000.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed carboplatin injection (Apotex), set_id 1c275825-0275-4c73-b650-e4c1519f13b8, eff 2024-01-07, acesso 11/10/2026",
+        "secao": "DOSAGE AND ADMINISTRATION",
+        "trecho": "should not be repeated until the neutrophil count is at least 2,000",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "platina",
+      "droga": "carboplatina",
+      "termoCTCAEv6": "Thrombocytopenia",
+      "grau": "nadir PLQ <50.000 (ou neutrófilos <500) no ciclo anterior",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 25,
+      "percentualAdministrado": 75,
+      "nivelDose": null,
+      "retomada": "Próximo ciclo a 75% (vale também para ciclofosfamida em combinação).",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed carboplatin injection (Apotex), set_id 1c275825-0275-4c73-b650-e4c1519f13b8, eff 2024-01-07, acesso 11/10/2026",
+        "secao": "Dose Adjustment Recommendations",
+        "trecho": "< 50,000 < 500 75%",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Bula: 'Adjusted Dose' 75% = dose administrada 75%."
+    },
+    {
+      "classe": "inibidor de topoisomerase I",
+      "droga": "irinotecano",
+      "termoCTCAEv6": "Diarrhea",
+      "grau": "2 (durante o ciclo, esquemas combinados com 5-FU/LV)",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "−1 nível",
+      "retomada": "Omitir até basal; retomar −1 nível. Novo ciclo só sem antidiarreico há ≥24 h.",
+      "suporte": "Loperamida 4 mg + 2 mg a cada 2 h até 12 h sem diarreia (máx. 48 h).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed CAMPTOSAR, set_id e518dfc6-7e93-4fee-a66c-51e1ab71c056, eff 2026-05-12, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "Omit dose until resolved to baseline, then ↓ 1 dose level",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Graus da bula pela NCI CTC v1.0 (4–6 evacuações/dia acima do basal = G2)."
+    },
+    {
+      "classe": "inibidor de topoisomerase I",
+      "droga": "irinotecano",
+      "termoCTCAEv6": "Diarrhea",
+      "grau": "3 (7–9 evacuações/dia acima do basal)",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "−1 nível",
+      "retomada": "Omitir até basal; retomar −1 nível; próximo ciclo −1 nível.",
+      "suporte": "Loperamida; hidratação; antibiótico se febre/neutropenia.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed CAMPTOSAR, set_id e518dfc6-7e93-4fee-a66c-51e1ab71c056, eff 2026-05-12, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "3 (7–9 stools/day > pretx) Omit dose until resolved to baseline",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "inibidor de topoisomerase I",
+      "droga": "irinotecano",
+      "termoCTCAEv6": "Diarrhea",
+      "grau": "4 (≥10 evacuações/dia acima do basal)",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "−2 níveis",
+      "retomada": "Omitir até basal; retomar −2 níveis.",
+      "suporte": "Avaliar internação.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed CAMPTOSAR, set_id e518dfc6-7e93-4fee-a66c-51e1ab71c056, eff 2026-05-12, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "Omit dose until resolved to baseline, then ↓ 2 dose levels",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "inibidor de topoisomerase I",
+      "droga": "irinotecano",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "3 (500–999/mm³)",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "−1 nível",
+      "retomada": "Omitir até ≤G2; retomar −1 nível. Novo ciclo só com granulócitos ≥1500 e PLQ ≥100.000.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed CAMPTOSAR, set_id e518dfc6-7e93-4fee-a66c-51e1ab71c056, eff 2026-05-12, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "3 (500 to 999/mm 3 ) Omit dose until resolved to ≤ grade 2",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "inibidor de topoisomerase I",
+      "droga": "irinotecano",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "4 (<500/mm³)",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "−2 níveis",
+      "retomada": "Omitir até ≤G2; retomar −2 níveis.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed CAMPTOSAR, set_id e518dfc6-7e93-4fee-a66c-51e1ab71c056, eff 2026-05-12, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "Omit dose until resolved to ≤ grade 2, then ↓ 2 dose levels",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "inibidor de topoisomerase I",
+      "droga": "irinotecano",
+      "termoCTCAEv6": "Febrile neutropenia",
+      "grau": "3+",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "−2 níveis",
+      "retomada": "Omitir até resolver; retomar −2 níveis.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed CAMPTOSAR, set_id e518dfc6-7e93-4fee-a66c-51e1ab71c056, eff 2026-05-12, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "Neutropenic fever Omit dose until resolved, then ↓ 2 dose levels",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "inibidor de topoisomerase I",
+      "droga": "irinotecano",
+      "termoCTCAEv6": "n/a (farmacogenética UGT1A1)",
+      "grau": "homozigoto UGT1A1*28 ou *6 (ou *6/*28)",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "−1 nível na dose inicial (considerar)",
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed CAMPTOSAR, set_id e518dfc6-7e93-4fee-a66c-51e1ab71c056, eff 2026-05-12, acesso 11/10/2026",
+        "secao": "2.3 Reduced UGT1A1 Activity",
+        "trecho": "consider a reduction in the starting dose by at least one level",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antraciclina",
+      "droga": "doxorrubicina",
+      "termoCTCAEv6": "Blood bilirubin increased",
+      "grau": "bilirrubina total 1,2–3 mg/dL",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 50,
+      "percentualAdministrado": 50,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed doxorubicin HCl injection (Pfizer), set_id 00634b2b-4e48-4178-8877-28582af894ad, eff 2026-04-30, acesso 11/10/2026",
+        "secao": "2.4 Table 1",
+        "trecho": "1.2–3 mg/dL 50%",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Coluna da bula chama-se 'Dosage Modification'; leitura como REDUÇÃO apoiada em §8.6 ('Reduce the dose'). Corrige v1."
+    },
+    {
+      "classe": "antraciclina",
+      "droga": "doxorrubicina",
+      "termoCTCAEv6": "Blood bilirubin increased",
+      "grau": "bilirrubina total 3,1–5 mg/dL",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 75,
+      "percentualAdministrado": 25,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed doxorubicin HCl injection (Pfizer), set_id 00634b2b-4e48-4178-8877-28582af894ad, eff 2026-04-30, acesso 11/10/2026",
+        "secao": "2.4 Table 1",
+        "trecho": "3.1–5 mg/dL 75%",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "ACHADO: v1 citava '→ 25%' como trecho; a bula diz 75% (redução) ⇒ administrar 25%. Confirmar com o médico."
+    },
+    {
+      "classe": "antraciclina",
+      "droga": "doxorrubicina",
+      "termoCTCAEv6": "Blood bilirubin increased",
+      "grau": ">5 mg/dL ou Child-Pugh C",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Não iniciar; descontinuar.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed doxorubicin HCl injection (Pfizer), set_id 00634b2b-4e48-4178-8877-28582af894ad, eff 2026-04-30, acesso 11/10/2026",
+        "secao": "2.4 Table 1",
+        "trecho": "Greater than 5 mg/dL Do not initiate Doxorubicin Hydrochloride Injection",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antraciclina",
+      "droga": "doxorrubicina",
+      "termoCTCAEv6": "Left ventricular dysfunction",
+      "grau": "sinais ou sintomas de cardiomiopatia",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Descontinuar.",
+      "suporte": "Ecocardiograma basal e seriado; dose cumulativa >550 mg/m² eleva risco.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed doxorubicin HCl injection (Pfizer), set_id 00634b2b-4e48-4178-8877-28582af894ad, eff 2026-04-30, acesso 11/10/2026",
+        "secao": "2.3 Dosage Modifications",
+        "trecho": "Discontinue Doxorubicin Hydrochloride Injection in patients who develop signs or symptoms of cardiomyopathy",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antraciclina",
+      "droga": "epirrubicina",
+      "termoCTCAEv6": "Blood bilirubin increased",
+      "grau": "bilirrubina 1,2–3 mg/dL ou TGO 2–4 × LSN",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 50,
+      "percentualAdministrado": 50,
+      "nivelDose": null,
+      "retomada": "Dose inicial = 1/2 da recomendada.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ELLENCE, set_id 0a03c798-a652-4895-b29c-3b521a89ba42, eff 2026-07-24, acesso 11/10/2026",
+        "secao": "2.3 Hepatic Impairment",
+        "trecho": "1/2 of recommended starting dose",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antraciclina",
+      "droga": "epirrubicina",
+      "termoCTCAEv6": "Blood bilirubin increased",
+      "grau": "bilirrubina >3 mg/dL ou TGO >4 × LSN",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 75,
+      "percentualAdministrado": 25,
+      "nivelDose": null,
+      "retomada": "Dose inicial = 1/4 da recomendada.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ELLENCE, set_id 0a03c798-a652-4895-b29c-3b521a89ba42, eff 2026-07-24, acesso 11/10/2026",
+        "secao": "2.3 Hepatic Impairment",
+        "trecho": "1/4 of recommended starting dose",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antraciclina",
+      "droga": "epirrubicina",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "nadir ANC <250/mm³, PLQ <50.000, NF ou não-hematológica G3-4",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 25,
+      "percentualAdministrado": 75,
+      "nivelDose": null,
+      "retomada": "D1 seguinte a 75%; adiar até PLQ ≥100.000, ANC ≥1500 e não-hematológica ≤G1.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ELLENCE, set_id 0a03c798-a652-4895-b29c-3b521a89ba42, eff 2026-07-24, acesso 11/10/2026",
+        "secao": "2.3 Dose Modifications",
+        "trecho": "Reduce ELLENCE Day 1 dose in subsequent cycles to 75%",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antraciclina",
+      "droga": "epirrubicina",
+      "termoCTCAEv6": "Left ventricular dysfunction",
+      "grau": "sinais ou sintomas de cardiomiopatia",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Descontinuar.",
+      "suporte": "Ecocardiograma seriado.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ELLENCE, set_id 0a03c798-a652-4895-b29c-3b521a89ba42, eff 2026-07-24, acesso 11/10/2026",
+        "secao": "2.3 Cardiac Toxicity",
+        "trecho": "Discontinue ELLENCE in patients who develop signs or symptoms of cardiomyopathy",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-HER2",
+      "droga": "trastuzumabe",
+      "termoCTCAEv6": "Left ventricular dysfunction",
+      "grau": "queda absoluta FEVE ≥16% OU FEVE <LIN com queda ≥10%",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Suspender ≥4 semanas; retomar se em 4–8 semanas FEVE normal e queda ≤15%. Descontinuar se >8 semanas ou >3 suspensões.",
+      "suporte": "Ecocardiograma basal e periódico.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed HERCEPTIN, set_id 492dbdb2-077e-4064-bff3-372d6af0a7a2, eff 2026-05-29, acesso 11/10/2026",
+        "secao": "2.5 Cardiomyopathy",
+        "trecho": "Withhold Herceptin dosing for at least 4 weeks",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Termo v6 'Left ventricular dysfunction' absorve 'Ejection fraction decreased' da v5."
+    },
+    {
+      "classe": "anti-HER2",
+      "droga": "trastuzumabe",
+      "termoCTCAEv6": "Left ventricular dysfunction",
+      "grau": "declínio persistente >8 semanas ou >3 suspensões",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed HERCEPTIN, set_id 492dbdb2-077e-4064-bff3-372d6af0a7a2, eff 2026-05-29, acesso 11/10/2026",
+        "secao": "2.5 Cardiomyopathy",
+        "trecho": "Permanently discontinue Herceptin for a persistent (> 8 weeks) LVEF decline",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-HER2",
+      "droga": "trastuzumabe",
+      "termoCTCAEv6": "Infusion related reaction",
+      "grau": "grave ou risco de vida",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": "Leve/moderada: reduzir velocidade; dispneia/hipotensão: interromper.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed HERCEPTIN, set_id 492dbdb2-077e-4064-bff3-372d6af0a7a2, eff 2026-05-29, acesso 11/10/2026",
+        "secao": "2.5 Infusion Reactions",
+        "trecho": "Discontinue Herceptin for severe or life-threatening infusion reactions",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-HER2",
+      "droga": "trastuzumabe",
+      "termoCTCAEv6": "Left ventricular dysfunction",
+      "grau": "FEVE 40–49% assintomática",
+      "acao": "CONSULTA",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Continuidade com vigilância cardiológica (IIa-B).",
+      "suporte": null,
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "ESC 2022 cardio-oncologia, tabela 25 (herdado do v1)",
+        "secao": "tabela 25",
+        "trecho": "asymptomatic... may be considered",
+        "estado": "HERDADO_V1_NAO_REVERIFICADO"
+      }
+    },
+    {
+      "classe": "antimetabólito",
+      "droga": "pemetrexede",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "pré-ciclo: ANC <1500 ou PLQ <100.000",
+      "acao": "ADIAR",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Adiar até ANC ≥1500, PLQ ≥100.000 e não-hematológica G0-2.",
+      "suporte": "Ácido fólico + B12 + dexametasona conforme bula.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ALIMTA, set_id f5a860f3-37ec-429c-ae04-9c88d7c55c08, eff 2023-05-19, acesso 11/10/2026",
+        "secao": "2.6",
+        "trecho": "absolute neutrophil count (ANC) is 1500 cells/mm 3 or higher",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antimetabólito",
+      "droga": "pemetrexede",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "nadir ANC <500 (PLQ ≥50.000) ou PLQ <50.000 sem sangramento",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 25,
+      "percentualAdministrado": 75,
+      "nivelDose": null,
+      "retomada": "Próximo ciclo a 75% da dose anterior; descontinuar se G3-4 recorrente após 2 reduções.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ALIMTA, set_id f5a860f3-37ec-429c-ae04-9c88d7c55c08, eff 2023-05-19, acesso 11/10/2026",
+        "secao": "2.6 Table 1",
+        "trecho": "Platelet count less than 50,000/mm 3 without bleeding. 75% of previous dose",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Graus da bula pela NCI CTCAE v2."
+    },
+    {
+      "classe": "antimetabólito",
+      "droga": "pemetrexede",
+      "termoCTCAEv6": "Thrombocytopenia",
+      "grau": "PLQ <50.000 com sangramento",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 50,
+      "percentualAdministrado": 50,
+      "nivelDose": null,
+      "retomada": "Próximo ciclo a 50% da dose anterior.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ALIMTA, set_id f5a860f3-37ec-429c-ae04-9c88d7c55c08, eff 2023-05-19, acesso 11/10/2026",
+        "secao": "2.6 Table 1",
+        "trecho": "Platelet count less than 50,000/mm 3 with bleeding 50% of previous dose",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antimetabólito",
+      "droga": "pemetrexede",
+      "termoCTCAEv6": "Mucositis oral",
+      "grau": "3-4",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 50,
+      "percentualAdministrado": 50,
+      "nivelDose": null,
+      "retomada": "Próximo ciclo a 50% da dose anterior.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ALIMTA, set_id f5a860f3-37ec-429c-ae04-9c88d7c55c08, eff 2023-05-19, acesso 11/10/2026",
+        "secao": "2.6 Table 1",
+        "trecho": "Grade 3 or 4 mucositis 50% of previous dose",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antimetabólito",
+      "droga": "pemetrexede",
+      "termoCTCAEv6": "Diarrhea",
+      "grau": "3-4 (ou que exija internação)",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 25,
+      "percentualAdministrado": 75,
+      "nivelDose": null,
+      "retomada": "Próximo ciclo a 75% da dose anterior.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ALIMTA, set_id f5a860f3-37ec-429c-ae04-9c88d7c55c08, eff 2023-05-19, acesso 11/10/2026",
+        "secao": "2.6 Table 1",
+        "trecho": "Diarrhea requiring hospitalization 75% of previous dose",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antimetabólito",
+      "droga": "pemetrexede",
+      "termoCTCAEv6": "Creatinine increased",
+      "grau": "ClCr <45 mL/min",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Suspender até ClCr ≥45 mL/min.",
+      "suporte": "Evitar AINE perto da dose.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ALIMTA, set_id f5a860f3-37ec-429c-ae04-9c88d7c55c08, eff 2023-05-19, acesso 11/10/2026",
+        "secao": "2.6 Table 1",
+        "trecho": "Withhold until creatinine clearance is 45 mL/min or greater",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antimetabólito",
+      "droga": "pemetrexede",
+      "termoCTCAEv6": "Peripheral sensory neuropathy",
+      "grau": "3-4",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ALIMTA, set_id f5a860f3-37ec-429c-ae04-9c88d7c55c08, eff 2023-05-19, acesso 11/10/2026",
+        "secao": "2.6 Table 1",
+        "trecho": "Grade 3 or 4 neurologic toxicity Permanently discontinue",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antimetabólito",
+      "droga": "pemetrexede",
+      "termoCTCAEv6": "Pneumonitis",
+      "grau": "pneumonite intersticial",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ALIMTA, set_id f5a860f3-37ec-429c-ae04-9c88d7c55c08, eff 2023-05-19, acesso 11/10/2026",
+        "secao": "2.6 Table 1",
+        "trecho": "Interstitial Pneumonitis [see Warnings and Precautions ( 5.4 )] Permanently discontinue",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antimetabólito",
+      "droga": "gencitabina",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "dia do tratamento (pâncreas/CPNPC): ANC 500–999 ou PLQ 50.000–99.999",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 25,
+      "percentualAdministrado": 75,
+      "nivelDose": null,
+      "retomada": "Administrar 75% da dose plena.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed gemcitabine injection (Mylan), set_id 06dd9d40-74fc-4409-93b1-a46be7126331, eff 2024-11-11, acesso 11/10/2026",
+        "secao": "Table 4",
+        "trecho": "500 to 999 Or 50,000 to 99,999 75% of full dose",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antimetabólito",
+      "droga": "gencitabina",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "dia do tratamento (pâncreas/CPNPC): ANC <500 ou PLQ <50.000",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Omitir a dose (hold).",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed gemcitabine injection (Mylan), set_id 06dd9d40-74fc-4409-93b1-a46be7126331, eff 2024-11-11, acesso 11/10/2026",
+        "secao": "Table 4",
+        "trecho": "Less than 500 Or Less than 50,000 Hold",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antimetabólito",
+      "droga": "gencitabina",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "D8 mama: ANC 1000–1199 ou PLQ 50.000–75.000",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 25,
+      "percentualAdministrado": 75,
+      "nivelDose": null,
+      "retomada": "75% da dose plena no D8.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed gemcitabine injection (Mylan), set_id 06dd9d40-74fc-4409-93b1-a46be7126331, eff 2024-11-11, acesso 11/10/2026",
+        "secao": "Table 3 (breast)",
+        "trecho": "1000 to 1199 Or 50,000 to 75,000 75% of full dose",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antimetabólito",
+      "droga": "gencitabina",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "D8 ovário: ANC 1000–1499 ou PLQ 75.000–99.999",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 50,
+      "percentualAdministrado": 50,
+      "nivelDose": null,
+      "retomada": "50% da dose plena no D8.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed gemcitabine injection (Mylan), set_id 06dd9d40-74fc-4409-93b1-a46be7126331, eff 2024-11-11, acesso 11/10/2026",
+        "secao": "Table 1 (ovarian)",
+        "trecho": "1000 to 1499 Or 75,000 to 99,999 50% of full dose",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antimetabólito",
+      "droga": "gencitabina",
+      "termoCTCAEv6": "n/a (não-hematológica G3-4 exceto alopecia/náusea/vômito)",
+      "grau": "3-4",
+      "acao": "SUSPENDER",
+      "percentualReduzido": 50,
+      "percentualAdministrado": 50,
+      "nivelDose": null,
+      "retomada": "Suspender OU reduzir 50% até resolver.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed gemcitabine injection (Mylan), set_id 06dd9d40-74fc-4409-93b1-a46be7126331, eff 2024-11-11, acesso 11/10/2026",
+        "secao": "2.5 Non-Hematologic",
+        "trecho": "Withhold Gemcitabine Injection or reduce dose by 50%",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "antimetabólito",
+      "droga": "gencitabina",
+      "termoCTCAEv6": "Pneumonitis",
+      "grau": "dispneia inexplicada ou toxicidade pulmonar grave",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed gemcitabine injection (Mylan), set_id 06dd9d40-74fc-4409-93b1-a46be7126331, eff 2024-11-11, acesso 11/10/2026",
+        "secao": "2.5 Non-Hematologic",
+        "trecho": "Unexplained dyspnea or evidence of severe pulmonary toxicity",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe / nivolumabe (anti-PD-1, classe — diretriz)",
+      "termoCTCAEv6": "n/a (irAE em geral)",
+      "grau": "1",
+      "acao": "MANTER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Monitorar piora.",
+      "suporte": "Exames de seguimento irAE (hemograma, creatinina, TGO/TGP/bilirrubinas, glicose, TSH/T4L, cortisol).",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Brahmer JR et al. SITC clinical practice guideline on ICI-related adverse events. J Immunother Cancer 2021;9:e002435 (PMC8237720), acesso 11/10/2026",
+        "secao": "General principles",
+        "trecho": "should be monitored for worsening symptoms, but may continue ICI therapy",
+        "estado": "TRECHO_VIA_WEBFETCH_CONFERIR_NO_PDF"
+      },
+      "nota": "Exames de suporte também listados na aula Onco PRO 2026 nº 91, pág. 17 (sem conduta por grau)."
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe",
+      "termoCTCAEv6": "Pneumonitis",
+      "grau": "2",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Retomar se G0-1 após desmame do corticoide; descontinuar se sem resolução em 12 semanas ou prednisona >10 mg/dia.",
+      "suporte": "Prednisona 1–2 mg/kg/dia até ≤G1, depois desmame.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed KEYTRUDA (IV), set_id 9333c79b-d487-4538-a9f0-71b91a02b287, eff 2026-07-10, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "Pneumonitis Grade 2 Withhold Resume in patients with complete or partial resolution",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe",
+      "termoCTCAEv6": "Pneumonitis",
+      "grau": "3-4",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": "Corticoide sistêmico 1–2 mg/kg/dia.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed KEYTRUDA (IV), set_id 9333c79b-d487-4538-a9f0-71b91a02b287, eff 2026-07-10, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "Grade 3 or 4 Permanently discontinue Colitis",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe",
+      "termoCTCAEv6": "Colitis",
+      "grau": "2-3",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Retomar após G0-1 e desmame.",
+      "suporte": "Prednisona 1–2 mg/kg/dia; excluir infecção.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed KEYTRUDA (IV), set_id 9333c79b-d487-4538-a9f0-71b91a02b287, eff 2026-07-10, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "Colitis Grade 2 or 3 Withhold",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe",
+      "termoCTCAEv6": "Colitis",
+      "grau": "4",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": "Corticoide IV.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed KEYTRUDA (IV), set_id 9333c79b-d487-4538-a9f0-71b91a02b287, eff 2026-07-10, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "Grade 4 Permanently discontinue Hepatitis",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe",
+      "termoCTCAEv6": "Alanine aminotransferase increased",
+      "grau": "TGO/TGP >3–8 × LSN ou BT >1,5–3 × LSN (sem tumor hepático)",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Retomar após G0-1 e desmame.",
+      "suporte": "Corticoide; TGO/TGP semanal.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed KEYTRUDA (IV), set_id 9333c79b-d487-4538-a9f0-71b91a02b287, eff 2026-07-10, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "AST or ALT increases to more than 3 and up to 8 times ULN",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Hepatite imunomediada não é termo do CSV v6 local; usado o laboratorial (ALT/AST)."
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe",
+      "termoCTCAEv6": "Alanine aminotransferase increased",
+      "grau": "TGO/TGP >8 × LSN ou BT >3 × LSN (sem tumor hepático)",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": "Metilprednisolona.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed KEYTRUDA (IV), set_id 9333c79b-d487-4538-a9f0-71b91a02b287, eff 2026-07-10, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "AST or ALT increases to more than 8 times ULN",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe",
+      "termoCTCAEv6": "Hypothyroidism",
+      "grau": "3-4 (endocrinopatia)",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Suspender até estabilidade clínica ou descontinuar conforme gravidade.",
+      "suporte": "Reposição hormonal conforme indicação.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed KEYTRUDA (IV), set_id 9333c79b-d487-4538-a9f0-71b91a02b287, eff 2026-07-10, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "Withhold until clinically stable or permanently discontinue depending on severity",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Mesma regra da bula para Hyperthyroidism, Adrenal insufficiency, Hypophysitis e Diabetes G3-4."
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe / nivolumabe (classe — diretriz)",
+      "termoCTCAEv6": "Hypothyroidism",
+      "grau": "qualquer (estável em reposição)",
+      "acao": "MANTER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Continuar a imunoterapia assim que estável.",
+      "suporte": "Levotiroxina 1,5–1,6 µg/kg/dia.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Brahmer JR et al. SITC clinical practice guideline on ICI-related adverse events. J Immunother Cancer 2021;9:e002435 (PMC8237720), acesso 11/10/2026",
+        "secao": "Endocrine — thyroid",
+        "trecho": "immunotherapy should generally be continued as soon as patients are stable",
+        "estado": "TRECHO_VIA_WEBFETCH_CONFERIR_NO_PDF"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe / nivolumabe (classe — diretriz)",
+      "termoCTCAEv6": "Adrenal insufficiency",
+      "grau": "sintomática",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Suspender temporariamente e iniciar reposição de corticoide.",
+      "suporte": "Hidrocortisona de reposição.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Brahmer JR et al. SITC clinical practice guideline on ICI-related adverse events. J Immunother Cancer 2021;9:e002435 (PMC8237720), acesso 11/10/2026",
+        "secao": "Endocrine — adrenal",
+        "trecho": "immunotherapy should be temporarily withheld and steroid replacement therapy should be started",
+        "estado": "TRECHO_VIA_WEBFETCH_CONFERIR_NO_PDF"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe / nivolumabe (classe — diretriz)",
+      "termoCTCAEv6": "Hypophysitis",
+      "grau": "sintomas agudos",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Interromper e dar corticoide; manutenção com hidrocortisona 10–12 mg/m²/dia.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Brahmer JR et al. SITC clinical practice guideline on ICI-related adverse events. J Immunother Cancer 2021;9:e002435 (PMC8237720), acesso 11/10/2026",
+        "secao": "Endocrine — hypophysitis",
+        "trecho": "immunotherapy should be interrupted and corticosteroids administered",
+        "estado": "TRECHO_VIA_WEBFETCH_CONFERIR_NO_PDF"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe",
+      "termoCTCAEv6": "Creatinine increased",
+      "grau": "2-3 (nefrite com disfunção renal)",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Retomar após G0-1 e desmame.",
+      "suporte": "Corticoide; suspender nefrotóxicos.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed KEYTRUDA (IV), set_id 9333c79b-d487-4538-a9f0-71b91a02b287, eff 2026-07-10, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "Grade 2 or 3 increased blood creatinine Withhold",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe",
+      "termoCTCAEv6": "Creatinine increased",
+      "grau": "4 (nefrite)",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed KEYTRUDA (IV), set_id 9333c79b-d487-4538-a9f0-71b91a02b287, eff 2026-07-10, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "Grade 4 increased blood creatinine Permanently discontinue",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe",
+      "termoCTCAEv6": "Rash maculo-papular",
+      "grau": "SJS/TEN/DRESS suspeito",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Confirmado: descontinuar definitivamente.",
+      "suporte": "Dermatologia.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed KEYTRUDA (IV), set_id 9333c79b-d487-4538-a9f0-71b91a02b287, eff 2026-07-10, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "Suspected SJS, TEN, or DRESS Withhold",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Dermatite não-exfoliativa segue a regra geral: G3 suspender, G4 descontinuar ('In general, withhold... Grade 3')."
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe",
+      "termoCTCAEv6": "Rash maculo-papular",
+      "grau": "3",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Retomar após ≤G1 e desmame.",
+      "suporte": "Corticoide tópico/sistêmico.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed KEYTRUDA (IV), set_id 9333c79b-d487-4538-a9f0-71b91a02b287, eff 2026-07-10, acesso 11/10/2026",
+        "secao": "2.x Dosage Modifications (regra geral)",
+        "trecho": "In general, withhold KEYTRUDA for severe (Grade 3) immune-mediated adverse reactions",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe",
+      "termoCTCAEv6": "Infusion related reaction",
+      "grau": "1-2",
+      "acao": "MANTER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Interromper ou reduzir velocidade de infusão.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed KEYTRUDA (IV), set_id 9333c79b-d487-4538-a9f0-71b91a02b287, eff 2026-07-10, acesso 11/10/2026",
+        "secao": "Table 2",
+        "trecho": "Grade 1 or 2 Interrupt or slow the rate of infusion",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe",
+      "termoCTCAEv6": "Infusion related reaction",
+      "grau": "3-4",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed KEYTRUDA (IV), set_id 9333c79b-d487-4538-a9f0-71b91a02b287, eff 2026-07-10, acesso 11/10/2026",
+        "secao": "Table 2 (infusion-related)",
+        "trecho": "Interrupt or slow the rate of infusion Grade 3 or 4 Permanently discontinue",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "nivolumabe",
+      "termoCTCAEv6": "Colitis",
+      "grau": "2-3 (monoterapia)",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Retomar após G0-1 e desmame.",
+      "suporte": "Corticoide.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed OPDIVO (IV), set_id f570b9c4-6846-4de2-abfa-4d0a4ae4e394, eff 2026-08-12, acesso 11/10/2026",
+        "secao": "Table 3",
+        "trecho": "Grade 2 or 3 Withhold a Grade 4 Permanently discontinue",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "nivolumabe + ipilimumabe",
+      "termoCTCAEv6": "Colitis",
+      "grau": "3-4 (combinação com ipilimumabe)",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": "Corticoide IV; infliximabe/vedolizumabe se refratário.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed OPDIVO (IV), set_id f570b9c4-6846-4de2-abfa-4d0a4ae4e394, eff 2026-08-12, acesso 11/10/2026",
+        "secao": "Table 4 (with ipilimumab)",
+        "trecho": "ipilimumab Colitis Grade 2 Withhold a Grade 3 or 4 Permanently discontinue",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Diferente da monoterapia (G3 = suspender). Não transferir para pembrolizumabe."
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "nivolumabe",
+      "termoCTCAEv6": "Pneumonitis",
+      "grau": "3-4",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": "Corticoide sistêmico.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed OPDIVO (IV), set_id f570b9c4-6846-4de2-abfa-4d0a4ae4e394, eff 2026-08-12, acesso 11/10/2026",
+        "secao": "Table 3",
+        "trecho": "Pneumonitis Grade 2 Withhold a Grades 3 or 4 Permanently discontinue",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "nivolumabe",
+      "termoCTCAEv6": "Alanine aminotransferase increased",
+      "grau": "TGO/TGP >3–8 × LSN ou BT >1,5–3 × LSN (monoterapia, sem tumor hepático)",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Retomar após G0-1 e desmame.",
+      "suporte": "Corticoide.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed OPDIVO (IV), set_id f570b9c4-6846-4de2-abfa-4d0a4ae4e394, eff 2026-08-12, acesso 11/10/2026",
+        "secao": "Table 3",
+        "trecho": "AST/ALT increases to >3 and ≤8 times ULN",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "nivolumabe",
+      "termoCTCAEv6": "Creatinine increased",
+      "grau": "2-3 (nefrite)",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Retomar após G0-1 e desmame.",
+      "suporte": "Corticoide.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed OPDIVO (IV), set_id f570b9c4-6846-4de2-abfa-4d0a4ae4e394, eff 2026-08-12, acesso 11/10/2026",
+        "secao": "Table 3",
+        "trecho": "Grade 2 or 3 increased blood creatinine Withhold a",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-EGFR",
+      "droga": "cetuximabe",
+      "termoCTCAEv6": "Rash maculo-papular",
+      "grau": "3-4, 1ª ocorrência",
+      "acao": "ADIAR",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "400/250 → 250 mg/m² semanal",
+      "retomada": "Adiar 1–2 semanas; se melhorar continuar a 250 mg/m²; sem melhora, descontinuar.",
+      "suporte": "Doxiciclina/minociclina, hidratante, fotoproteção.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ERBITUX, set_id 8bc6397e-4bd8-4d37-a007-a327e4da34d9, eff 2026-04-16, acesso 11/10/2026",
+        "secao": "Table 1",
+        "trecho": "Delay infusion 1 to 2 weeks; if condition improves, continue at 250 mg/m 2",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Bula cita 'acneiform rash' (NCI CTC v2). CTCAE v6: 'Rash acneiform' excluído → 'Rash maculo-papular' (nota 'Pustular drug eruption')."
+    },
+    {
+      "classe": "anti-EGFR",
+      "droga": "cetuximabe",
+      "termoCTCAEv6": "Rash maculo-papular",
+      "grau": "3-4, 2ª ocorrência",
+      "acao": "ADIAR",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "→ 200 mg/m²",
+      "retomada": "Adiar 1–2 semanas; continuar a 200 mg/m² se melhorar.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ERBITUX, set_id 8bc6397e-4bd8-4d37-a007-a327e4da34d9, eff 2026-04-16, acesso 11/10/2026",
+        "secao": "Table 1",
+        "trecho": "if condition improves, continue at 200 mg/m 2",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-EGFR",
+      "droga": "cetuximabe",
+      "termoCTCAEv6": "Rash maculo-papular",
+      "grau": "3-4, 3ª ocorrência",
+      "acao": "ADIAR",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": "→ 150 mg/m²",
+      "retomada": "Adiar 1–2 semanas; continuar a 150 mg/m² se melhorar.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ERBITUX, set_id 8bc6397e-4bd8-4d37-a007-a327e4da34d9, eff 2026-04-16, acesso 11/10/2026",
+        "secao": "Table 1",
+        "trecho": "if condition improves, continue at 150 mg/m 2",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-EGFR",
+      "droga": "cetuximabe",
+      "termoCTCAEv6": "Rash maculo-papular",
+      "grau": "3-4, 4ª ocorrência",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ERBITUX, set_id 8bc6397e-4bd8-4d37-a007-a327e4da34d9, eff 2026-04-16, acesso 11/10/2026",
+        "secao": "Table 1",
+        "trecho": "4 th occurrence; Grade 3 or 4 Discontinue ERBITUX",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-EGFR",
+      "droga": "cetuximabe",
+      "termoCTCAEv6": "Infusion related reaction",
+      "grau": "1-2",
+      "acao": "MANTER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Reduzir velocidade de infusão em 50%.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ERBITUX, set_id 8bc6397e-4bd8-4d37-a007-a327e4da34d9, eff 2026-04-16, acesso 11/10/2026",
+        "secao": "Table 1",
+        "trecho": "Grade 1 or 2 Reduce the infusion rate by 50%",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-EGFR",
+      "droga": "cetuximabe",
+      "termoCTCAEv6": "Infusion related reaction",
+      "grau": "3-4",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ERBITUX, set_id 8bc6397e-4bd8-4d37-a007-a327e4da34d9, eff 2026-04-16, acesso 11/10/2026",
+        "secao": "Table 1",
+        "trecho": "Grade 3 or 4 Immediately and permanently, discontinue ERBITUX",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-EGFR",
+      "droga": "cetuximabe",
+      "termoCTCAEv6": "Hypomagnesemia",
+      "grau": "qualquer",
+      "acao": "CONSULTA",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Bula não prevê suspensão por hipomagnesemia.",
+      "suporte": "Dosar Mg, K e Ca durante e após; repor.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed ERBITUX, set_id 8bc6397e-4bd8-4d37-a007-a327e4da34d9, eff 2026-04-16, acesso 11/10/2026",
+        "secao": "5.6 Hypomagnesemia",
+        "trecho": "Monitor serum electrolytes, including serum magnesium, potassium, and calcium",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-EGFR",
+      "droga": "panitumumabe",
+      "termoCTCAEv6": "Rash maculo-papular",
+      "grau": "3, 1ª ocorrência",
+      "acao": "SUSPENDER",
+      "percentualReduzido": 0,
+      "percentualAdministrado": 100,
+      "nivelDose": null,
+      "retomada": "Suspender 1–2 doses; se <G3, reiniciar na dose original.",
+      "suporte": "Doxiciclina, hidratante, fotoproteção.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed VECTIBIX, set_id e0fa4bca-f245-4d92-ae29-b0c630a315c2, eff 2026-06-23, acesso 11/10/2026",
+        "secao": "2.x Dermatologic Toxicity",
+        "trecho": "reinitiate Vectibix at the original dose",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-EGFR",
+      "droga": "panitumumabe",
+      "termoCTCAEv6": "Rash maculo-papular",
+      "grau": "3, 2ª ocorrência",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 20,
+      "percentualAdministrado": 80,
+      "nivelDose": null,
+      "retomada": "Suspender 1–2 doses; se <G3, reiniciar a 80% da dose original.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed VECTIBIX, set_id e0fa4bca-f245-4d92-ae29-b0c630a315c2, eff 2026-06-23, acesso 11/10/2026",
+        "secao": "2.x Dermatologic Toxicity",
+        "trecho": "reinitiate Vectibix at 80% of the original dose",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-EGFR",
+      "droga": "panitumumabe",
+      "termoCTCAEv6": "Rash maculo-papular",
+      "grau": "3, 3ª ocorrência",
+      "acao": "REDUZIR_DOSE",
+      "percentualReduzido": 40,
+      "percentualAdministrado": 60,
+      "nivelDose": null,
+      "retomada": "Suspender 1–2 doses; se <G3, reiniciar a 60% da dose original.",
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed VECTIBIX, set_id e0fa4bca-f245-4d92-ae29-b0c630a315c2, eff 2026-06-23, acesso 11/10/2026",
+        "secao": "2.x Dermatologic Toxicity",
+        "trecho": "reinitiate Vectibix at 60% of the original dose",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-EGFR",
+      "droga": "panitumumabe",
+      "termoCTCAEv6": "Rash maculo-papular",
+      "grau": "4 (ou G3 na 4ª ocorrência / sem recuperação)",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed VECTIBIX, set_id e0fa4bca-f245-4d92-ae29-b0c630a315c2, eff 2026-06-23, acesso 11/10/2026",
+        "secao": "2.x Dermatologic Toxicity",
+        "trecho": "Permanently discontinue Vectibix following the occurrence of a Grade 4 dermatologic reaction",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-EGFR",
+      "droga": "panitumumabe",
+      "termoCTCAEv6": "Hypomagnesemia",
+      "grau": "qualquer",
+      "acao": "CONSULTA",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Bula não prevê suspensão por hipomagnesemia.",
+      "suporte": "Monitorar Mg/Ca antes, durante e até 8 semanas após; repor.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed VECTIBIX, set_id e0fa4bca-f245-4d92-ae29-b0c630a315c2, eff 2026-06-23, acesso 11/10/2026",
+        "secao": "5.3 Electrolyte Depletion",
+        "trecho": "Replete magnesium and other electrolytes as appropriate",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-VEGF",
+      "droga": "bevacizumabe",
+      "termoCTCAEv6": "Hypertension",
+      "grau": "grave não controlada com tratamento",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Retomar quando controlada.",
+      "suporte": "Anti-hipertensivo; aferição a cada consulta.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed AVASTIN, set_id 939b5d1f-9fb2-4499-80ef-0607aa6b114e, eff 2025-01-06, acesso 11/10/2026",
+        "secao": "Table 1",
+        "trecho": "Withhold Avastin if not controlled with medical management; resume once controlled",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-VEGF",
+      "droga": "bevacizumabe",
+      "termoCTCAEv6": "Hypertension",
+      "grau": "crise hipertensiva / encefalopatia hipertensiva",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed AVASTIN, set_id 939b5d1f-9fb2-4499-80ef-0607aa6b114e, eff 2025-01-06, acesso 11/10/2026",
+        "secao": "Table 1",
+        "trecho": "Hypertensive crisis Hypertensive encephalopathy Discontinue Avastin",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-VEGF",
+      "droga": "bevacizumabe",
+      "termoCTCAEv6": "Urinary protein increased",
+      "grau": "proteinúria ≥2 g/24 h sem síndrome nefrótica",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Retomar quando <2 g/24 h.",
+      "suporte": "Fita/relação proteína-creatinina antes dos ciclos.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed AVASTIN, set_id 939b5d1f-9fb2-4499-80ef-0607aa6b114e, eff 2025-01-06, acesso 11/10/2026",
+        "secao": "Table 1",
+        "trecho": "Withhold Avastin until proteinuria less than 2 grams per 24 hours",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "'Proteinuria' foi excluído na v6 → 'Urinary protein increased' (MedDRA 10046553); termo AUSENTE no CSV local de 55 registros — conferir no XLSX oficial."
+    },
+    {
+      "classe": "anti-VEGF",
+      "droga": "bevacizumabe",
+      "termoCTCAEv6": "Urinary protein increased",
+      "grau": "síndrome nefrótica",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed AVASTIN, set_id 939b5d1f-9fb2-4499-80ef-0607aa6b114e, eff 2025-01-06, acesso 11/10/2026",
+        "secao": "Table 1",
+        "trecho": "Nephrotic syndrome Discontinue Avastin",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-VEGF",
+      "droga": "bevacizumabe",
+      "termoCTCAEv6": "Venous thromboembolism",
+      "grau": "4",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": "Anticoagulação conforme protocolo.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed AVASTIN, set_id 939b5d1f-9fb2-4499-80ef-0607aa6b114e, eff 2025-01-06, acesso 11/10/2026",
+        "secao": "Table 1",
+        "trecho": "Venous thromboembolism, Grade 4 Discontinue Avastin",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      }
+    },
+    {
+      "classe": "anti-VEGF",
+      "droga": "bevacizumabe",
+      "termoCTCAEv6": "Epistaxis",
+      "grau": "hemorragia G3-4",
+      "acao": "SUSPENDER_DEFINITIVO",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed AVASTIN, set_id 939b5d1f-9fb2-4499-80ef-0607aa6b114e, eff 2025-01-06, acesso 11/10/2026",
+        "secao": "Table 1",
+        "trecho": "Hemorrhage [see Warnings and Precautions (5.3) ]. Grade 3 or 4 Discontinue Avastin",
+        "estado": "TRECHO_LITERAL_CONFERIDO_OPENFDA"
+      },
+      "nota": "Bula fala de hemorragia em geral; Epistaxis é o termo hemorrágico disponível no CSV local."
+    },
+    {
+      "classe": "TKI (por molécula)",
+      "droga": "osimertinibe",
+      "termoCTCAEv6": "Electrocardiogram QT corrected interval prolonged",
+      "grau": "QTc >500 ms em ≥2 ECGs",
+      "acao": "SUSPENDER",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Retomar conforme bula após correção.",
+      "suporte": "ECG e eletrólitos.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed Tagrisso §2.5 (herdado do v1; openFDA não retornou osimertinibe nesta rodada)",
+        "secao": "2.5",
+        "trecho": "withhold",
+        "estado": "HERDADO_V1_NAO_REVERIFICADO"
+      }
+    },
+    {
+      "classe": "TKI (por molécula)",
+      "droga": "ribociclibe",
+      "termoCTCAEv6": "Electrocardiogram QT corrected interval prolonged",
+      "grau": "QTcF ≥450 ms antes de iniciar; >480/500 durante",
+      "acao": "CONSULTA",
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": "Manejo pela tabela 4 da bula.",
+      "suporte": "ECG basal, D14 C1 e início C2.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed Kisqali tabela 4 §§2.2/5.3 (herdado do v1)",
+        "secao": "tabela 4",
+        "trecho": "QTcF <450 ms",
+        "estado": "HERDADO_V1_NAO_REVERIFICADO"
+      }
+    },
+    {
+      "classe": "TKI (por molécula)",
+      "droga": "pazopanibe / sunitinibe",
+      "termoCTCAEv6": "Hypertension",
+      "grau": "2-3",
+      "acao": null,
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "nota": "Tabelas de modificação por molécula não extraídas nesta rodada."
+    },
+    {
+      "classe": "TKI (por molécula)",
+      "droga": "TKI EGFR (erlotinibe/gefitinibe/osimertinibe)",
+      "termoCTCAEv6": "Rash maculo-papular",
+      "grau": "2-3",
+      "acao": null,
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "nota": "Não extraído; não transferir regra de cetuximabe/panitumumabe."
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "pembrolizumabe / nivolumabe",
+      "termoCTCAEv6": "Rash maculo-papular",
+      "grau": "1-2",
+      "acao": null,
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "nota": "Bulas só regulam G3/SJS; SITC não deu regra literal para G1-2 no trecho lido."
+    },
+    {
+      "classe": "imunoterapia (ICI anti-PD-1)",
+      "droga": "anti-PD-1",
+      "termoCTCAEv6": "Hyperglycemia",
+      "grau": "2",
+      "acao": null,
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "nota": "Conduta de DM imunomediado G2 não extraída (bula só fala G3-4)."
+    },
+    {
+      "classe": "platina",
+      "droga": "cisplatina",
+      "termoCTCAEv6": "Tinnitus",
+      "grau": "1-4",
+      "acao": null,
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "nota": "Bula sem conduta por grau de zumbido."
+    },
+    {
+      "classe": "anti-HER2",
+      "droga": "pertuzumabe / T-DM1 / T-DXd",
+      "termoCTCAEv6": "Left ventricular dysfunction",
+      "grau": "qualquer",
+      "acao": null,
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "nota": "Bulas próprias não extraídas; não transferir regra do trastuzumabe."
+    },
+    {
+      "classe": "inibidor de topoisomerase I",
+      "droga": "irinotecano",
+      "termoCTCAEv6": "Blood bilirubin increased",
+      "grau": "qualquer",
+      "acao": null,
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "nota": "Ajuste hepático da Camptosar não extraído nesta rodada."
+    },
+    {
+      "classe": "fluoropirimidina",
+      "droga": "capecitabina",
+      "termoCTCAEv6": "Neutrophil count decreased",
+      "grau": "3-4",
+      "acao": null,
+      "percentualReduzido": null,
+      "percentualAdministrado": null,
+      "nivelDose": null,
+      "retomada": null,
+      "suporte": null,
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "nota": "Bula remete à Tabela 1 por ocorrência; extrair trecho específico §5.9 antes de propor percentual."
+    }
+  ],
+  "resumoCuradoria": {
+    "celulasTotal": 132,
+    "celulasComFonte": 124,
+    "celulasNulas": 8,
+    "drogasCobertas": [
+      "paclitaxel",
+      "docetaxel",
+      "nab-paclitaxel",
+      "capecitabina",
+      "fluorouracil",
+      "fluoropirimidinas (classe, diretriz)",
+      "oxaliplatina",
+      "cisplatina",
+      "carboplatina",
+      "irinotecano",
+      "doxorrubicina",
+      "epirrubicina",
+      "trastuzumabe",
+      "pemetrexede",
+      "gencitabina",
+      "pembrolizumabe / nivolumabe (anti-PD-1, classe — diretriz)",
+      "pembrolizumabe",
+      "pembrolizumabe / nivolumabe (classe — diretriz)",
+      "nivolumabe",
+      "nivolumabe + ipilimumabe",
+      "cetuximabe",
+      "panitumumabe",
+      "bevacizumabe",
+      "osimertinibe",
+      "ribociclibe"
+    ],
+    "estadosFonte": {
+      "TRECHO_LITERAL_CONFERIDO_OPENFDA": "trecho conferido por script contra o texto openFDA baixado em 11/10/2026",
+      "TRECHO_LITERAL_CONFERIDO_TEXTO_LOCAL": "trecho conferido no texto local da diretriz SBOC",
+      "TRECHO_VIA_WEBFETCH_CONFERIR_NO_PDF": "trecho obtido por leitura automatizada do PMC; conferir no PDF antes de aprovar",
+      "HERDADO_V1_NAO_REVERIFICADO": "célula do v1 mantida sem nova verificação"
+    },
+    "achados": [
+      "v1 doxorrubicina: trecho '3.1 - 5 mg/dL → 25%' não é literal; bula Pfizer 2026 Tabela 1 diz '3.1–5 mg/dL 75%' (redução). Corrigido: reduzido 75 / administrado 25.",
+      "v1 header/termos: 'Urinary protein increased' ausente no CSV v6 local — usado conforme regra M4-1/A16, pendente conferência no XLSX oficial.",
+      "Nivolumabe+ipilimumabe: colite G3 = descontinuar (monoterapia e pembrolizumabe: suspender). Não unificar a classe.",
+      "Cisplatina: bula formato antigo exige audiometria normal e creatinina <1,5 para repetir; bula PLR 2026 só diz 'considerar' — divergência entre bulas do mesmo fármaco.",
+      "Aula Onco PRO 2026 nº 91 não traz conduta por grau em texto (tabelas são imagem); usada só para exames de seguimento.",
+      "ASCO 2021 e ESMO 2022 irAE: acesso 403 nesta rodada; usado SITC 2021 (PMC)."
+    ]
+  },
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "Claude (curadoria F1, v2)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "notaConvencao": "'substitui', 'status', 'consultavel' e 'alerta' ficam no nível raiz porque o contrato RulesetHeader é .strict() (campos extras no header quebram validate-corpus). aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO."
+  }
+}

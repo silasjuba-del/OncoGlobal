@@ -1,0 +1,2638 @@
+{
+  "header": {
+    "id": "pack-rim",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), arquivo Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+      "trecho": "Esta diretriz tem como objetivo apoiar as decisões clínicas no tratamento",
+      "edicao": "v3 2026"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Carcinoma de células renais (rim)",
+    "cid10": [
+      "C64"
+    ],
+    "subtipos": [
+      "células claras (CCRcc)",
+      "papilífero",
+      "cromófobo",
+      "ductos coletores (Bellini)",
+      "medular",
+      "translocação MiT (TFE3/TFEB)",
+      "componente sarcomatoide (qualquer subtipo)",
+      "CCR associado a VHL / HLRCC (FH)"
+    ],
+    "cenarios": [
+      "localizado",
+      "adjuvante",
+      "metastatico_celulas_claras",
+      "metastatico_nao_celulas_claras",
+      "metastatico_sarcomatoide",
+      "segunda_linha",
+      "nefrectomia_citorredutora",
+      "seguimento"
+    ],
+    "limitesAplicabilidade": "Adultos com carcinoma de células renais (C64). Exclui carcinoma urotelial da pelve renal (C65) e tumores renais pediátricos. Ductos coletores: tratamento sistêmico como carcinoma urotelial (ver pack de bexiga). Cirurgia, ablação e vigilância ativa da doença localizada não são cobertas pela diretriz SBOC 2026 de rim: fonte usada = DDT CONITEC 2022. Pack propõe; médico decide."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome com contraste (avaliação da massa renal)",
+        "indicacao": "universal",
+        "quando": "massa renal suspeita; TC ou RM de abdome e pelve com contraste",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "TC ou RM de abdomen e pelve com contraste",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve com contraste",
+        "indicacao": "universal",
+        "quando": "junto com abdome",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "TC ou RM de abdomen e pelve com contraste",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CONTRASTE_TC",
+        "rotulo": "Contraste iodado para TC",
+        "indicacao": "universal",
+        "quando": "exames com contraste são preferenciais",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "os exames com contraste são preferenciais",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_ABDOMEN_SUPERIOR",
+        "rotulo": "RM de abdome com contraste",
+        "indicacao": "condicional",
+        "quando": "alternativa à TC ou se contraindicação ao contraste iodado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Se contra indicação ao contraste: TC tórax sem contraste e RM abdomen",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM de pelve com contraste",
+        "indicacao": "condicional",
+        "quando": "junto com RM de abdome",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Se contra indicação ao contraste: TC tórax sem contraste e RM abdomen",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CONTRASTE_RM",
+        "rotulo": "Contraste para RM (gadolínio)",
+        "indicacao": "condicional",
+        "quando": "quando RM for o método escolhido",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Se contra indicação ao contraste: TC tórax sem contraste e RM abdomen",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "cirurgica",
+          "quando": "Bom PS, expectativa de vida longa e risco cirúrgico mínimo: nefrectomia parcial ou radical sem biópsia prévia é o padrão",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 20,
+            "trecho": "Em pacientes com bom performance status, com expectativa de vida longa",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "core",
+          "quando": "Somente quando o resultado alterar a conduta: suspeita de linfoma/abscesso/metástase; metastático sem indicação de citorredutora; candidatos a vigilância ativa ou ablação. Mínimo 2 fragmentos, agulha ≥16G, guiada por USG ou TC",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 20,
+            "trecho": "deve ser indicada apenas quando o resultado puder alterar a conduta terapêutica",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "core",
+          "quando": "Metástase sem indicação de nefrectomia citorredutora: biópsia para histologia e definição do tratamento sistêmico",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 20,
+            "trecho": "Em casos de neoplasia metastática sem indicação de nefrectomia citorredutora",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "Tipo histológico (classificação OMS)",
+        "Grau nucleolar OMS/ISUP (não aplicável ao cromófobo)",
+        "Presença de componente sarcomatoide e/ou rabdoide",
+        "Necrose tumoral",
+        "Invasão angiolinfática microscópica",
+        "Invasão capsular e do sistema coletor; invasão da gordura perirrenal/seio renal e da veia renal (pT, AJCC 8ª)",
+        "Margens cirúrgicas",
+        "Linfonodos examinados/comprometidos (pN)"
+      ],
+      "molecular": [
+        {
+          "alvo": "Subtipo e diagnósticos diferenciais (ex.: TFE3 em translocação MiT; perda SMARCB1/INI1 no carcinoma medular)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "histologia não células claras ou duvidosa",
+          "consequencia": "define subtipo e linha sistêmica (não células claras × células claras)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026 — Aula 63 Rim: visão geral e estadiamento (63 - Aula 63 - Rim - Visão geral, estadiamento.pdf)",
+            "pagina": 10,
+            "trecho": "IHQ: TFE3+ (Xp11)",
+            "estado": "INFERIDO"
+          }
+        },
+        {
+          "alvo": "Fumarato hidratase (FH) — síndrome HLRCC",
+          "metodo": "outro",
+          "catalogoId": null,
+          "rotulo": "Teste germinativo/IHQ FH para HLRCC",
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "carcinoma papilífero, sobretudo com suspeita de HLRCC",
+          "consequencia": "opção bevacizumabe + erlotinibe na doença metastática",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 17,
+            "trecho": "mutação no gene Fumarato Hidratase (FH)",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "VHL germinativo e outras síndromes hereditárias (painel germinativo)",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "rotulo": "Painel germinativo para CCR hereditário",
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "< 46 anos, lesões bilaterais/multifocais ou histologia não células claras",
+          "consequencia": "aconselhamento genético; belzutifan em VHL localizado (SBOC p10)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026 — Aula 63 Rim: visão geral e estadiamento (63 - Aula 63 - Rim - Visão geral, estadiamento.pdf)",
+            "pagina": 12,
+            "trecho": "< 46 anos ou lesões bilaterais/ multifocais",
+            "estado": "INFERIDO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição (2017)",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 4,
+      "trecho": "T1 Tumor ≤ 7 cm, limitado ao rim",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax sem contraste",
+        "cenario": "todos ao diagnóstico",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "TC de tórax sem contraste",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome com contraste",
+        "cenario": "todos ao diagnóstico",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "TC ou RM de abdomen e pelve com contraste",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve com contraste",
+        "cenario": "todos ao diagnóstico",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "TC ou RM de abdomen e pelve com contraste",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CONTRASTE_TC",
+        "rotulo": "Contraste iodado",
+        "cenario": "todos ao diagnóstico",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "os exames com contraste são preferenciais",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_ABDOMEN_SUPERIOR",
+        "rotulo": "RM de abdome com contraste",
+        "cenario": "contraindicação ao contraste iodado",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Se contra indicação ao contraste: TC tórax sem contraste e RM abdomen",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM de pelve com contraste",
+        "cenario": "contraindicação ao contraste iodado",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Se contra indicação ao contraste: TC tórax sem contraste e RM abdomen",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CONTRASTE_RM",
+        "rotulo": "Contraste para RM",
+        "cenario": "contraindicação ao contraste iodado",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Se contra indicação ao contraste: TC tórax sem contraste e RM abdomen",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CINTILOGRAFIA_OSSEA",
+        "rotulo": "Cintilografia óssea",
+        "cenario": "suspeita de doença óssea",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Cintilografia óssea se suspeita de doença óssea",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_CRANIO",
+        "rotulo": "RM de crânio",
+        "cenario": "suspeita de doença no SNC",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "RM de crânio se suspeita de doença SNC",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT FDG",
+        "cenario": "fora da rotina; sítios duvidosos ou oligometastático candidato a metastasectomia. Cobertura SUS para rim: DADO_AUSENTE — alternativa SUS: TC/RM e cintilografia óssea",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "PET/CT FDG: não faz parte da rotina de avaliação inicial",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "SUS_DADO_AUSENTE"
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma completo (Hb, neutrófilos, plaquetas — IMDC)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Hemograma completo;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "DHL",
+        "rotulo": "DHL (MSKCC)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "DHL;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Função renal — creatinina",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Função renal;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "UREIA",
+        "rotulo": "Função renal — ureia",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Função renal;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "SODIO",
+        "rotulo": "Eletrólitos — sódio",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Eletrólitos;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "POTASSIO",
+        "rotulo": "Eletrólitos — potássio",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Eletrólitos;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGO",
+        "rotulo": "Função hepática — TGO",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Função hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "rotulo": "Função hepática — TGP",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Função hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BILIRRUBINA",
+        "rotulo": "Função hepática — bilirrubinas",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Função hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FOSFATASE_ALCALINA",
+        "rotulo": "Fosfatase alcalina",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+          "pagina": 23,
+          "trecho": "creatinina, proteína C reativa (PCR), cálcio, albumina, desidrogenase láctica (DHL) e fosfatase alcalina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "rotulo": "Cálcio sérico (corrigir pela albumina — IMDC/MSKCC)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Cálcio sérico;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PROTEINAS_TOTAIS_FRACOES",
+        "rotulo": "Albumina (para correção do cálcio)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Albumina.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "Estádio I-II (T1-T2 N0 M0)",
+        "conduta": "Cirurgia (nefrectomia parcial preferencial; radical se parcial inviável); T1a pequeno em idoso/comorbido: vigilância ativa ou ablação. Seguimento sem adjuvante.",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+          "pagina": 27,
+          "trecho": "a nefrectomia parcial coloca-se como tratamento preferencial no tratamento da doença localizada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Localizado ressecado de alto risco (UISS alto) e/ou N+ ressecado",
+        "conduta": "Discutir adjuvância (pembrolizumabe preferencial na SBOC; vigilância como alternativa; no SUS a DDT não indica adjuvante).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Grupo prognóstico de doença localizada (UISS) de risco alto e/ou doença",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Estádio IV / metastático",
+        "conduta": "Estratificar por IMDC (ou MSKCC) e histologia; tratamento sistêmico de 1ª linha; nefrectomia citorredutora e metastasectomia em casos selecionados.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Risco intermediário 1 ou 2 critérios prognósticos",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "DHL",
+          "uso": "Critério MSKCC (DHL > 1,5 × LSN) — prognóstico, não diagnóstico",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "DHL > 1,5 LSN",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "CALCIO",
+          "uso": "Critério IMDC/MSKCC (cálcio > LSN, corrigido pela albumina)",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "Cálcio sérico elevado (> LSN, corrigido pela albumina)",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "Marcadores tumorais séricos (CEA, CA 19-9, CA 125 etc.): a diretriz SBOC não os inclui no estadiamento do CCR (p8)"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "localizado",
+        "intencao": "curativa",
+        "modalidades": [
+          "nefrectomia parcial",
+          "nefrectomia radical",
+          "vigilância ativa",
+          "ablação (crioablação/radiofrequência)"
+        ],
+        "criterio": "Cirurgia preferencial; vigilância ativa ou ablação para lesões pequenas em idosos/comorbidos",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+          "pagina": 26,
+          "trecho": "O tratamento das neoplasias renais malignas localizadas é preferencialmente o cirúrgico.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "adjuvante",
+        "intencao": "curativa",
+        "modalidades": [
+          "imunoterapia (pembrolizumabe)",
+          "vigilância",
+          "TKI (sunitinibe, FR fraca)"
+        ],
+        "criterio": "UISS alto risco e/ou N+ ressecado, CCRcc; decisão compartilhada. SUS: DDT sem indicação de adjuvante → vigilância",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "o uso do pembrolizumabe adjuvante deve ser considerado como tratamento padrão",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico_celulas_claras",
+        "intencao": "paliativa",
+        "modalidades": [
+          "IO + TKI",
+          "IO + IO",
+          "TKI isolado",
+          "vigilância ativa"
+        ],
+        "criterio": "Por risco IMDC/MSKCC. Sem acesso a IO (SUS): pazopanibe ou sunitinibe",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "pode-se considerar TKI isolado com:",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "vigilancia_ativa_metastatico",
+        "intencao": "paliativa",
+        "modalidades": [
+          "vigilância ativa"
+        ],
+        "criterio": "Casos selecionados, baixo volume e assintomáticos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Vigilância ativa: para casos selecionados de pacientes com baixo volume",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico_nao_celulas_claras",
+        "intencao": "paliativa",
+        "modalidades": [
+          "TKI",
+          "IO + IO",
+          "IO",
+          "bevacizumabe + erlotinibe (HLRCC)"
+        ],
+        "criterio": "Papilífero/cromófobo; preferir estudo clínico quando disponível",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Carcinoma tipo papilífero ou cromófobo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "ductos_coletores",
+        "intencao": "paliativa",
+        "modalidades": [
+          "quimioterapia como carcinoma urotelial"
+        ],
+        "criterio": "Ver pack bexiga (urotelial avançado)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Tratamento sistêmico deve ser semelhante aos carcinomas uroteliais",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico_sarcomatoide",
+        "intencao": "paliativa",
+        "modalidades": [
+          "IO + IO",
+          "IO + TKI"
+        ],
+        "criterio": "Componente sarcomatoide em qualquer subtipo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Carcinomas com componente sarcomatóide",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "segunda_linha",
+        "intencao": "paliativa",
+        "modalidades": [
+          "TKI",
+          "IO",
+          "TKI + mTOR"
+        ],
+        "criterio": "Conforme tratamento prévio (IO ou anti-VEGFR isolado)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Pacientes previamente tratados com imunoterapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "terceira_linha_e_subsequentes",
+        "intencao": "paliativa",
+        "modalidades": [
+          "opção de 1ª/2ª linha não usada"
+        ],
+        "criterio": "Bom PS após falha da 2ª linha",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "consideramos a administração de alguma das opções de 1ª ou 2ª linha",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "nefrectomia_citorredutora",
+        "intencao": "paliativa",
+        "modalidades": [
+          "nefrectomia citorredutora"
+        ],
+        "criterio": "Bom PS e baixo volume e/ou boa resposta ao tratamento inicial; não parece beneficiar sarcomatoide",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "considerado em casos selecionados de pacientes com bom performance clínico",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "rim-pembrolizumabe-adjuvante",
+        "nome": "Pembrolizumabe adjuvante (1 ano)",
+        "cenario": "adjuvante (pós-nefrectomia, UISS alto risco e/ou N+ ressecado; CCRcc)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "a cada 3 semanas por 1 ano (SBOC). Aula PRO 64 p15: 17 ciclos (CURSO, INFERIDO)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Decisão compartilhada com o paciente sobre benefício e toxicidade imunomediada (SBOC p10)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 30,
+            "trecho": "Não há indicação clínica de tratamento sistêmico com finalidade adjuvante",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Pembrolizumabe 200 mg EV a cada 3 semanas por 1 ano",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-sunitinibe-4-2-adjuvante",
+        "nome": "Sunitinibe adjuvante esquema 4/2 (1 ano) — opção alternativa",
+        "cenario": "adjuvante (pós-nefrectomia, UISS alto risco e/ou N+ ressecado; CCRcc)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "sunitinibe",
+            "dose": 50,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28",
+            "observacao": "1x/dia por 4 semanas a cada 6 semanas, por 1 ano"
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "NE alto/FR fraca na SBOC; aula PRO 64 desaconselha TKI adjuvante (ver conflitos)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 30,
+            "trecho": "Não há indicação clínica de tratamento sistêmico com finalidade adjuvante",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Sunitinibe 50 mg VO 1x/dia por 4 semanas a cada 6 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-belzutifan-vhl-localizado",
+        "nome": "Belzutifan — CCR localizado em síndrome de Von Hippel-Lindau",
+        "cenario": "localizado (VHL, sem indicação de cirurgia imediata)",
+        "linha": "doença localizada VHL",
+        "drogas": [
+          {
+            "droga": "belzutifan",
+            "dose": 120,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28",
+            "observacao": "1x/dia continuamente. SBOC: uso contínuo; cicloDias 28 é convenção de registro do pack, não consta da fonte"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Status ANVISA/SUS não confirmado nesta curadoria (SBOC p15 cita ausência de aprovação ANVISA no cenário metastático)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Bezultifan 120 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-pembrolizumabe-axitinibe-1l",
+        "nome": "Pembrolizumabe + axitinibe",
+        "cenario": "metastático células claras, qualquer risco IMDC",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "a cada 3 semanas"
+          },
+          {
+            "droga": "axitinibe",
+            "dose": 5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D21",
+            "observacao": "2x/dia continuamente"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 32,
+            "trecho": "estes medicamentos tiveram decisão desfavorável a incorporação no SUS",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Axitinibe 5 mg VO 2x/dia continuamente + Pembrolizumabe 200 mg EV a",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-nivolumabe-cabozantinibe-1l",
+        "nome": "Nivolumabe + cabozantinibe",
+        "cenario": "metastático células claras, qualquer risco IMDC",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "nivolumabe",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "a cada 2 semanas"
+          },
+          {
+            "droga": "cabozantinibe",
+            "dose": 40,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "1x/dia continuamente"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 32,
+            "trecho": "Conitec recomendou a não incorporação desses medicamentos para o tratamento",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Nivolumabe 240 mg EV a cada 2 semanas + Cabozantinibe 40 mg VO",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-lenvatinibe-pembrolizumabe-1l",
+        "nome": "Lenvatinibe + pembrolizumabe",
+        "cenario": "metastático células claras, qualquer risco IMDC",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "lenvatinibe",
+            "dose": 20,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D21",
+            "observacao": "contínuo"
+          },
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "a cada 3 semanas"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Lenvatinibe 20 mg VO contínuo + Pembrolizumabe 200 mg IV a cada 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-ipilimumabe-nivolumabe-1l",
+        "nome": "Ipilimumabe + nivolumabe (indução x4) seguido de nivolumabe",
+        "cenario": "metastático células claras; risco IMDC intermediário/alto (FR forte) ou baixo (NE moderado/FR fraca)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "ipilimumabe",
+            "dose": 1,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "indução: a cada 3 semanas por 4 ciclos"
+          },
+          {
+            "droga": "nivolumabe",
+            "dose": 3,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "indução: a cada 3 semanas por 4 ciclos"
+          },
+          {
+            "droga": "nivolumabe",
+            "dose": 3,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "manutenção a cada 2 semanas (ou dose fixa 240 mg a cada 2 semanas ou 480 mg a cada 4 semanas)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Fase de manutenção com nivolumabe após os 4 ciclos de indução, até progressão ou toxicidade (CI-08)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 32,
+            "trecho": "estes medicamentos tiveram decisão desfavorável a incorporação no SUS",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Ipilimumabe 1 mg/kg EV D1 + Nivolumabe 3 mg/kg EV a cada 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-pazopanibe-1l",
+        "nome": "Pazopanibe isolado",
+        "cenario": "metastático células claras; sem acesso a IO, baixo PS, distância ou baixo volume (SUS: opção incorporada)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "pazopanibe",
+            "dose": 800,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28",
+            "observacao": "1x/dia continuamente. SBOC: uso contínuo; cicloDias 28 é convenção de registro do pack, não consta da fonte"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Hepatotoxicidade: monitorar função hepática basal e regularmente (bula FDA); evitar IBP (INAT-06)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 30,
+            "trecho": "incorporação, ao SUS, do cloridrato de pazopanibe e do malato de sunitinibe",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Pazopanibe 800 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-sunitinibe-4-2-1l",
+        "nome": "Sunitinibe esquema 4/2",
+        "cenario": "metastático células claras; sem acesso a IO, baixo PS, distância ou baixo volume (SUS: opção incorporada)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "sunitinibe",
+            "dose": 50,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28",
+            "observacao": "1x/dia por 4 semanas a cada 6 semanas"
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Monitorar função hepática a cada ciclo e tireoide (bula FDA)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 30,
+            "trecho": "incorporação, ao SUS, do cloridrato de pazopanibe e do malato de sunitinibe",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Esquema 4/2: 50 mg VO 1x/dia por 4 semanas a cada 6",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-sunitinibe-2-1-1l",
+        "nome": "Sunitinibe esquema 2/1",
+        "cenario": "metastático células claras; sem acesso a IO, baixo PS, distância ou baixo volume (SUS: opção incorporada)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "sunitinibe",
+            "dose": 50,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "1x/dia por 2 semanas a cada 3 semanas"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "SBOC p12: eficácia semelhante ao 4/2 com toxicidade menor",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 30,
+            "trecho": "incorporação, ao SUS, do cloridrato de pazopanibe e do malato de sunitinibe",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Esquema 2/1: 50 mg VO 1x/dia por 2 semanas a cada 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-cabozantinibe-1l",
+        "nome": "Cabozantinibe isolado",
+        "cenario": "metastático células claras, risco IMDC intermediário/alto",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "cabozantinibe",
+            "dose": 60,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28",
+            "observacao": "1x/dia continuamente. SBOC: uso contínuo; cicloDias 28 é convenção de registro do pack, não consta da fonte"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 32,
+            "trecho": "estes medicamentos tiveram decisão desfavorável a incorporação no SUS",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Cabozantinibe 60 mg/dia VO continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-cabozantinibe-2l",
+        "nome": "Cabozantinibe",
+        "cenario": "metastático células claras, pós-IO ou pós-anti-VEGFR",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "cabozantinibe",
+            "dose": 60,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28",
+            "observacao": "1x/dia continuamente. SBOC: uso contínuo; cicloDias 28 é convenção de registro do pack, não consta da fonte"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 32,
+            "trecho": "Conitec recomendou a não incorporação desses medicamentos para o tratamento",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Cabozantinibe 60 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-axitinibe-2l",
+        "nome": "Axitinibe",
+        "cenario": "metastático células claras, pós-IO ou pós-anti-VEGFR",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "axitinibe",
+            "dose": 5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28",
+            "observacao": "2x/dia; pode aumentar para 10 mg 2x/dia conforme eficácia e tolerância. SBOC: uso contínuo; cicloDias 28 é convenção de registro do pack, não consta da fonte"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Axitinibe 5 mg VO 2×/dia (a dose poderá ser aumentada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-lenvatinibe-everolimo-2l",
+        "nome": "Lenvatinibe + everolimo",
+        "cenario": "metastático células claras, pós-IO ou pós-anti-VEGFR (preferencial após nivolumabe + cabozantinibe)",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "lenvatinibe",
+            "dose": 18,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28",
+            "observacao": "1x/dia continuamente. SBOC: uso contínuo; cicloDias 28 é convenção de registro do pack, não consta da fonte"
+          },
+          {
+            "droga": "everolimo",
+            "dose": 5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28",
+            "observacao": "1x/dia continuamente"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Lenvatinibe 18 mg VO 1x/dia + Everolimo 5 mg VO 1x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-nivolumabe-2l",
+        "nome": "Nivolumabe",
+        "cenario": "metastático células claras, pós-anti-VEGFR isolado",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "nivolumabe",
+            "dose": 3,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "a cada 2 semanas"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 32,
+            "trecho": "Conitec recomendou a não incorporação desses medicamentos para o tratamento",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Nivolumabe 3 mg/kg EV a cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-everolimo-2l",
+        "nome": "Everolimo isolado",
+        "cenario": "metastático células claras, pós-nivolumabe + cabozantinibe (opção)",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "everolimo",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "SBOC p14 (fluxograma) cita everolimo NE alto/FR fraca sem dose; não transferir dose de outro esquema",
+            "pendencia": "SEM_FONTE"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 32,
+            "trecho": "(mTOR) – everolimo, tensirolimo",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Everolimo (NE alto/FR fraca)",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "SEM_FONTE"
+      },
+      {
+        "id": "rim-ncc-cabozantinibe-1l",
+        "nome": "Cabozantinibe — papilífero/cromófobo",
+        "cenario": "metastático não células claras (papilífero ou cromófobo)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "cabozantinibe",
+            "dose": 60,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28",
+            "observacao": "1x/dia. SBOC: uso contínuo; cicloDias 28 é convenção de registro do pack, não consta da fonte"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 32,
+            "trecho": "Conitec recomendou a não incorporação desses medicamentos para o tratamento",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Cabozantinibe 60 mg VO 1x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-ncc-ipilimumabe-nivolumabe-1l",
+        "nome": "Ipilimumabe + nivolumabe (indução x4) seguido de nivolumabe",
+        "cenario": "metastático não células claras (papilífero ou cromófobo)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "ipilimumabe",
+            "dose": 1,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "indução: a cada 3 semanas por 4 ciclos"
+          },
+          {
+            "droga": "nivolumabe",
+            "dose": 3,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "indução: a cada 3 semanas por 4 ciclos"
+          },
+          {
+            "droga": "nivolumabe",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "manutenção a cada 2 semanas (ou 480 mg a cada 4 semanas)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Fase de manutenção com nivolumabe após os 4 ciclos de indução, até progressão ou toxicidade (CI-08)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 32,
+            "trecho": "estes medicamentos tiveram decisão desfavorável a incorporação no SUS",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "seguido de Nivolumabe 240 mg EV a cada 2 semanas ou 480 mg",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-ncc-sunitinibe-4-2-1l",
+        "nome": "Sunitinibe 4/2 — papilífero/cromófobo",
+        "cenario": "metastático não células claras (papilífero ou cromófobo)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "sunitinibe",
+            "dose": 50,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28",
+            "observacao": "1x/dia por 4 semanas a cada 6 semanas"
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Incorporação formal CONITEC (Rel. 406) é para células claras; DDT lista antiangiogênicos para CCRm em geral",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 32,
+            "trecho": "antiangiogênicos (sunitinibe, sorafenibe, pazopanibe e bevacizumabe)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Esquema 4/2: 50 mg VO 1x/dia por 4 semanas a cada 6",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-ncc-sunitinibe-2-1-1l",
+        "nome": "Sunitinibe 2/1 — papilífero/cromófobo",
+        "cenario": "metastático não células claras (papilífero ou cromófobo)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "sunitinibe",
+            "dose": 50,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "1x/dia por 2 semanas a cada 3 semanas"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 32,
+            "trecho": "antiangiogênicos (sunitinibe, sorafenibe, pazopanibe e bevacizumabe)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Esquema 2/1: 50 mg VO 1x/dia por 2 semanas a cada 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-ncc-bevacizumabe-erlotinibe-1l",
+        "nome": "Bevacizumabe + erlotinibe — papilífero / HLRCC (FH)",
+        "cenario": "metastático não células claras papilífero, principalmente HLRCC",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "bevacizumabe",
+            "dose": 10,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "a cada 2 semanas"
+          },
+          {
+            "droga": "erlotinibe",
+            "dose": 150,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "1x/dia continuamente"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Bevacizumabe 10 mg/kg EV a cada 2 semanas + Erlotinibe 150 mg VO",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-ncc-pembrolizumabe-1l",
+        "nome": "Pembrolizumabe — não células claras",
+        "cenario": "metastático não células claras (papilífero ou cromófobo)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "a cada 3 semanas"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Pembrolizumabe 200 mg EV a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-sarcomatoide-ipilimumabe-nivolumabe-1l",
+        "nome": "Ipilimumabe + nivolumabe (indução x4) seguido de nivolumabe",
+        "cenario": "metastático com componente sarcomatoide",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "ipilimumabe",
+            "dose": 1,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "indução: a cada 3 semanas por 4 ciclos"
+          },
+          {
+            "droga": "nivolumabe",
+            "dose": 3,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "indução: a cada 3 semanas por 4 ciclos"
+          },
+          {
+            "droga": "nivolumabe",
+            "dose": 3,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "manutenção a cada 2 semanas (ou dose fixa 240 mg a cada 2 semanas ou 480 mg a cada 4 semanas)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Fase de manutenção com nivolumabe após os 4 ciclos de indução, até progressão ou toxicidade (CI-08)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 32,
+            "trecho": "estes medicamentos tiveram decisão desfavorável a incorporação no SUS",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Ipilimumabe 1 mg/kg EV D1 + Nivolumabe 3 mg/kg EV a cada 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-sarcomatoide-pembrolizumabe-axitinibe-1l",
+        "nome": "Pembrolizumabe + axitinibe — sarcomatoide",
+        "cenario": "metastático com componente sarcomatoide",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "a cada 3 semanas"
+          },
+          {
+            "droga": "axitinibe",
+            "dose": 5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D21",
+            "observacao": "2x/dia continuamente"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 32,
+            "trecho": "estes medicamentos tiveram decisão desfavorável a incorporação no SUS",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Axitinibe 5 mg VO 2x/dia continuamente + Pembrolizumabe 200 mg EV a",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-sarcomatoide-cabozantinibe-nivolumabe-1l",
+        "nome": "Cabozantinibe + nivolumabe — sarcomatoide",
+        "cenario": "metastático com componente sarcomatoide",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "cabozantinibe",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "SBOC p17 cita a combinação sem dose neste cenário; não transferir dose do cenário células claras",
+            "pendencia": "SEM_FONTE"
+          },
+          {
+            "droga": "nivolumabe",
+            "dose": null,
+            "unidade": null,
+            "via": null,
+            "dias": null,
+            "observacao": "idem",
+            "pendencia": "SEM_FONTE"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+            "pagina": 32,
+            "trecho": "Conitec recomendou a não incorporação desses medicamentos para o tratamento",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Cabozantinibe + Nivolumabe",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "SEM_FONTE"
+      },
+      {
+        "id": "rim-sarcomatoide-lenvatinibe-pembrolizumabe-1l",
+        "nome": "Lenvatinibe + pembrolizumabe — sarcomatoide",
+        "cenario": "metastático com componente sarcomatoide",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "lenvatinibe",
+            "dose": 20,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D21",
+            "observacao": "contínuo"
+          },
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "a cada 3 semanas"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Lenvatinibe 20 mg VO contínuo + Pembrolizumabe 200 mg IV a cada 3",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "paliativa (dor/sangramento do primário, metástases ósseas ou cerebrais)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+          "pagina": 29,
+          "trecho": "A radioterapia externa pode ser empregada para controle de sintomas locais",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "SEM_FONTE (dose/fracionamento não constam da fonte)"
+      },
+      {
+        "cenario": "SBRT do primário inoperável sem opção ablativa (experimental)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026 — Aula 64 Rim: doença localizada (64 - Aula 64 - Rim - Doença localizada.pdf)",
+          "pagina": 9,
+          "trecho": "Dose ablativa em 1 a 5 frações",
+          "estado": "INFERIDO"
+        },
+        "pendencia": "SEM_FONTE (dose total não informada; fracionamento 1-5 apenas na aula PRO)"
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Nefrectomia parcial",
+        "quando": "Preferencial na doença localizada sempre que tecnicamente viável (inclusive T1b e T2 selecionados); obrigatória-preferida em rim único, múltiplos tumores ou função renal limítrofe",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+          "pagina": 27,
+          "trecho": "a nefrectomia parcial coloca-se como tratamento preferencial no tratamento da doença localizada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Nefrectomia radical",
+        "quando": "Quando localização impede cirurgia poupadora de néfrons com segurança, ou acometimento de veia cava/adrenal ou linfonodomegalia retroperitoneal",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+          "pagina": 27,
+          "trecho": "A nefrectomia radical deve ser reservada para os casos em que",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Linfadenectomia",
+        "quando": "Maior risco de acometimento extrarrenal ou linfonodos aumentados na imagem/cirurgia",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+          "pagina": 28,
+          "trecho": "A linfadenectomia deve ser realizada em caso de maior risco de acometimento extra-renal",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Ablação percutânea (crioablação ou radiofrequência)",
+        "quando": "Tumores corticais ≤ 3 cm, alto risco cirúrgico, rim único, função renal comprometida, hereditário ou múltiplos bilaterais; biópsia recomendada antes",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+          "pagina": 26,
+          "trecho": "tumores corticais de pequena dimensão, inferiores ou iguais a 3 cm",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Vigilância ativa (doença localizada)",
+        "quando": "T1a, em especial < 2 cm, ou idoso/comorbido com baixa expectativa de vida; TC ou RM seriada (semestral)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+          "pagina": 28,
+          "trecho": "Esta estratégia é apropriada para casos de tumor T1a",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Nefrectomia citorredutora",
+        "quando": "Casos selecionados: bom PS e baixo volume e/ou boa resposta ao tratamento inicial",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "considerado em casos selecionados de pacientes com bom performance clínico",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Metastasectomia",
+        "quando": "Oligometastático (1 a 3 sítios) com bom PS",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "casos selecionados de pacientes oligometastáticos (1 a 3 sítios de metástases)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "VHL germinativo com CCR localizado (sem indicação de cirurgia imediata)",
+        "opcao": "Belzutifan 120 mg VO 1x/dia contínuo",
+        "evidencia": "NE alto/FR forte (SBOC)",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Bezultifan 120 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "FH mutado / HLRCC (papilífero)",
+        "opcao": "Bevacizumabe + erlotinibe",
+        "evidencia": "NE baixo/FR forte (SBOC)",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "mutação no gene Fumarato Hidratase (FH)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "Componente sarcomatoide",
+        "opcao": "Ipilimumabe + nivolumabe (preferencial) ou IO + TKI",
+        "evidencia": "NE moderado/FR forte (SBOC)",
+        "sus": "nao (DDT p32)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Carcinomas com componente sarcomatóide",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": null,
+      "riscoNeutropeniaFebril": null,
+      "outros": [
+        "TKI anti-VEGFR: monitorar pressão arterial (bula pazopanibe)",
+        "TKI: monitorar função tireoidiana basal e periódica (bulas sunitinibe e pazopanibe)",
+        "Pazopanibe: preferir antiácido de curta ação a IBP/anti-H2 (INAT-06)"
+      ],
+      "fonte": {
+        "tipo": "BULA",
+        "referencia": "openFDA label pazopanib (effective 20251124): https://api.fda.gov/drug/label.json?search=openfda.generic_name:pazopanib&limit=1",
+        "pagina": null,
+        "trecho": "Monitor blood pressure and manage as appropriate",
+        "estado": "VERIFICADO"
+      },
+      "pendencia": "SEM_FONTE para emetogenicidade e risco de neutropenia febril"
+    },
+    "ensaios": [
+      {
+        "nome": "KEYNOTE-564",
+        "nct": "NCT03142334",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCR ressecado, risco intermediário-alto/alto ou M1 NED",
+        "bracos": "pembrolizumabe 200 mg q3s x 1 ano vs placebo",
+        "desfecho": "SLD (primário); SG",
+        "resultado": "Redução de 28% no risco de recidiva/morte; SG HR 0,62 (SBOC p9)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03142334",
+          "pagina": null,
+          "trecho": "Pembrolizumab (MK-3475) as Monotherapy in the Adjuvant Treatment of Renal Cell Carcinoma",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CheckMate 214",
+        "nct": "NCT02231749",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCRcc avançado, virgem de tratamento",
+        "bracos": "ipilimumabe + nivolumabe vs sunitinibe",
+        "desfecho": "SLP, SG, TRO (intermediário/alto)",
+        "resultado": "Benefício em SG; risco favorável: SLP numericamente inferior, SG numericamente superior (SBOC p12)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02231749",
+          "pagina": null,
+          "trecho": "Nivolumab Combined With Ipilimumab Versus Sunitinib",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "KEYNOTE-426",
+        "nct": "NCT02853331",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCR avançado, 1ª linha",
+        "bracos": "pembrolizumabe + axitinibe vs sunitinibe",
+        "desfecho": "SLP e SG",
+        "resultado": "Benefício em SLP e SG (SBOC p12)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02853331",
+          "pagina": null,
+          "trecho": "Pembrolizumab (MK-3475) in Combination With Axitinib Versus Sunitinib Monotherapy",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CheckMate 9ER",
+        "nct": "NCT03141177",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCR avançado, 1ª linha",
+        "bracos": "nivolumabe + cabozantinibe vs sunitinibe",
+        "desfecho": "SLP; SG",
+        "resultado": "Benefício em SLP e SG (SBOC p12)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03141177",
+          "pagina": null,
+          "trecho": "Nivolumab Combined With Cabozantinib Compared to Sunitinib",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CLEAR",
+        "nct": "NCT02811861",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCR avançado, 1ª linha",
+        "bracos": "lenvatinibe + pembrolizumabe ou lenvatinibe + everolimo vs sunitinibe",
+        "desfecho": "SLP; SG",
+        "resultado": "Benefício em SLP e SG para lenvatinibe + pembrolizumabe (SBOC p12)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02811861",
+          "pagina": null,
+          "trecho": "Lenvatinib/Everolimus or Lenvatinib/Pembrolizumab Versus Sunitinib Alone",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "METEOR",
+        "nct": "NCT01865747",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCR metastático pós-antiangiogênico",
+        "bracos": "cabozantinibe vs everolimo",
+        "desfecho": "SLP; SG",
+        "resultado": "SLP HR 0,51; SG HR 0,66 (SBOC p15)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT01865747",
+          "pagina": null,
+          "trecho": "A Study of Cabozantinib (XL184) vs Everolimus",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CARMENA",
+        "nct": "NCT00930033",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCRcc metastático de novo candidato a citorredução",
+        "bracos": "nefrectomia + sunitinibe vs sunitinibe isolado",
+        "desfecho": "SG (não inferioridade)",
+        "resultado": "Sunitinibe isolado não inferior (aula PRO 65 p10; SBOC p16 cita o estudo)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00930033",
+          "pagina": null,
+          "trecho": "Clinical Trial to Assess the Importance of Nephrectomy",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "COMPARZ",
+        "nct": "NCT00720941",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCR localmente avançado/metastático, 1ª linha",
+        "bracos": "pazopanibe vs sunitinibe",
+        "desfecho": "SLP (não inferioridade)",
+        "resultado": "Pazopanibe não inferior ao sunitinibe (SBOC p12)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00720941",
+          "pagina": null,
+          "trecho": "Pazopanib Versus Sunitinib in the Treatment of Locally Advanced",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "Estádio I pós-tratamento",
+        "exames": [
+          "TC_ABDOMEN_SUPERIOR",
+          "RM_ABDOMEN_SUPERIOR",
+          "RX_TORAX_PA_PERFIL",
+          "TC_TORAX"
+        ],
+        "periodicidade": "Consulta anual; TC ou RM abdominal 3-12 meses após cirurgia e depois anual até 5 anos; RX ou TC de tórax anual por ≥5 anos; mais rigoroso se margens positivas/alto grau/sarcomatoide",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 21,
+          "trecho": "TC ou RM abdominal basal (preferencial) dentro de 3 a 12 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Estádio II pós-tratamento",
+        "exames": [
+          "TC_ABDOMEN_SUPERIOR",
+          "RM_ABDOMEN_SUPERIOR",
+          "RX_TORAX_PA_PERFIL",
+          "TC_TORAX"
+        ],
+        "periodicidade": "Consulta semestral; TC ou RM abdominal a cada 6 meses por 2 anos, depois anual até 5 anos; RX ou TC de tórax anual por ≥5 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 21,
+          "trecho": "TC ou RM abdominal basal (preferencial), a cada 6 meses por 2 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Estádio III pós-tratamento",
+        "exames": [
+          "TC_ABDOMEN_SUPERIOR",
+          "RM_ABDOMEN_SUPERIOR",
+          "USG_ABDOMEN_TOTAL",
+          "TC_TORAX",
+          "HEMOGRAMA",
+          "CREATININA",
+          "CALCIO",
+          "TGO",
+          "TGP"
+        ],
+        "periodicidade": "Consulta e painel metabólico a cada 3-6 meses por 3 anos, depois anual até 5 anos; TC/RM abdominal basal 3-6 meses e depois a cada 3-6 meses por ≥3 anos (USG categoria 2B); TC de tórax basal 3-6 meses e depois a cada 3-6 meses por ≥3 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "TC de tórax basal dentro de 3 a 6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Recaída / estádio IV / irressecável",
+        "exames": [
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "TC_PELVE",
+          "RM_CRANIO",
+          "RM_COLUNA_CERVICAL",
+          "RM_COLUNA_TORACICA",
+          "RM_COLUNA_LOMBAR",
+          "CINTILOGRAFIA_OSSEA"
+        ],
+        "periodicidade": "Consultas e imagem a cada 6-16 semanas conforme terapia; RM (ou TC) de crânio no início e conforme clínica; RM de coluna e cintilografia conforme indicação",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "Exames de imagem de acompanhamento a cada 6–16 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Em uso de sunitinibe (a cada ciclo)",
+        "exames": [
+          "TGO",
+          "TGP",
+          "BILIRRUBINA",
+          "TSH",
+          "T4_LIVRE",
+          "ECG",
+          "ECOCARDIOGRAMA"
+        ],
+        "periodicidade": "Função hepática basal e a cada ciclo; tireoide basal e periódica; ECG se risco de QT; FEVE basal/periódica a considerar",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "openFDA label sunitinib malate (effective 20240910): https://api.fda.gov/drug/label.json?search=openfda.generic_name:sunitinib&limit=1",
+          "pagina": null,
+          "trecho": "Monitor liver function tests at baseline, during each cycle, and as clinically indicated",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Em uso de pazopanibe",
+        "exames": [
+          "TGO",
+          "TGP",
+          "BILIRRUBINA",
+          "TSH",
+          "T4_LIVRE",
+          "URINA_TIPO_I",
+          "PROTEINURIA_24H",
+          "ECG"
+        ],
+        "periodicidade": "Função hepática basal e regular; tireoide basal e durante; urina tipo I basal e periódica com proteinúria 24 h se indicado; ECG se risco de QT",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "openFDA label pazopanib (effective 20251124): https://api.fda.gov/drug/label.json?search=openfda.generic_name:pazopanib&limit=1",
+          "pagina": null,
+          "trecho": "Perform baseline and periodic urinalysis during treatment",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "CONTRASTE_TC",
+      "RM_ABDOMEN_SUPERIOR",
+      "RM_PELVE",
+      "CONTRASTE_RM",
+      "ANATOMOPATOLOGICO",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "IMUNOHISTOQUIMICA",
+      "TC_TORAX",
+      "CINTILOGRAFIA_OSSEA",
+      "RM_CRANIO",
+      "PET_CT_FDG",
+      "HEMOGRAMA",
+      "DHL",
+      "CREATININA",
+      "UREIA",
+      "SODIO",
+      "POTASSIO",
+      "TGO",
+      "TGP",
+      "BILIRRUBINA",
+      "FOSFATASE_ALCALINA",
+      "CALCIO",
+      "PROTEINAS_TOTAIS_FRACOES",
+      "RX_TORAX_PA_PERFIL",
+      "USG_ABDOMEN_TOTAL",
+      "RM_COLUNA_CERVICAL",
+      "RM_COLUNA_TORACICA",
+      "RM_COLUNA_LOMBAR",
+      "TSH",
+      "T4_LIVRE",
+      "ECG",
+      "ECOCARDIOGRAMA",
+      "URINA_TIPO_I",
+      "PROTEINURIA_24H"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "pazopanibe",
+        "com": "inibidores de bomba de prótons / anti-H2",
+        "ref": "INAT-06"
+      },
+      {
+        "droga": "pazopanibe, sunitinibe",
+        "com": "fármacos que prolongam QT",
+        "ref": "INAT-11"
+      },
+      {
+        "droga": "sunitinibe, pazopanibe, axitinibe, cabozantinibe",
+        "com": "indutores/inibidores fortes de CYP3A4",
+        "ref": "INAT-23"
+      },
+      {
+        "droga": "erlotinibe",
+        "com": "inibidores de bomba de prótons",
+        "ref": "INAT-07"
+      },
+      {
+        "droga": "erlotinibe",
+        "com": "varfarina",
+        "ref": "INAT-22"
+      },
+      {
+        "droga": "pembrolizumabe, nivolumabe, ipilimumabe",
+        "com": "corticoide basal",
+        "ref": "INAT-27"
+      },
+      {
+        "droga": "pembrolizumabe, nivolumabe, ipilimumabe",
+        "com": "antibiótico",
+        "ref": "INAT-28"
+      },
+      {
+        "droga": "pembrolizumabe, nivolumabe, ipilimumabe",
+        "com": "doença autoimune ativa / transplante",
+        "ref": "CI-08"
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "TKI anti-VEGFR (sunitinibe, pazopanibe, axitinibe, cabozantinibe, lenvatinibe)",
+        "termosCTCAEv6": [
+          "Hypertension",
+          "Palmar-plantar erythrodysesthesia syndrome",
+          "Diarrhea",
+          "Proteinuria",
+          "Hypothyroidism",
+          "Alanine aminotransferase increased",
+          "Electrocardiogram QT corrected interval prolonged",
+          "Fatigue",
+          "Oral mucositis"
+        ]
+      },
+      {
+        "classe": "Inibidores de checkpoint (pembrolizumabe, nivolumabe, ipilimumabe)",
+        "termosCTCAEv6": [
+          "Colitis",
+          "Pneumonitis",
+          "Hepatitis",
+          "Hypothyroidism",
+          "Hyperthyroidism",
+          "Adrenal insufficiency",
+          "Rash maculo-papular"
+        ]
+      },
+      {
+        "classe": "Inibidor de mTOR (everolimo)",
+        "termosCTCAEv6": [
+          "Pneumonitis",
+          "Hyperglycemia",
+          "Oral mucositis"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "anti-hipertensivo para hipertensão por TKI",
+      "creme hidratante com ureia / cuidados síndrome mão-pé",
+      "antidiarreico (loperamida)",
+      "levotiroxina se hipotireoidismo"
+    ],
+    "orientacoes": [
+      "TKI oral: tomar no mesmo horário, aferir pressão arterial em casa",
+      "Sunitinibe: respeitar semanas de pausa do esquema 4/2 ou 2/1",
+      "Imunoterapia: reportar diarreia, tosse/dispneia, icterícia, fadiga intensa (toxicidade imunomediada)",
+      "Pazopanibe: evitar omeprazol e similares sem orientação"
+    ],
+    "encaminhamentos": [
+      "urologia",
+      "encaminhamento-cirurgia-oncologica",
+      "encaminhamento-radioterapia",
+      "genetica (aconselhamento genético)"
+    ],
+    "laudos": [
+      "laudo-inss",
+      "laudo-afastamento",
+      "laudo-loas",
+      "laudo-transporte",
+      "laudo-judicial"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "CCR metastático antes da 1ª linha sistêmica",
+        "y": "Contar critérios IMDC: KPS < 80%; intervalo diagnóstico-tratamento < 1 ano; Hb < LIN; cálcio > LSN corrigido pela albumina; neutrófilos > LSN; plaquetas > LSN (HEMOGRAMA, CALCIO, PROTEINAS_TOTAIS_FRACOES)",
+        "z": "0 critérios = risco baixo; 1-2 = intermediário; ≥ 3 = alto → define o braço de 1ª linha",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Risco intermediário 1 ou 2 critérios prognósticos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CCRcc metastático de 1ª linha sem acesso a imunoterapia (realidade SUS), qualquer risco",
+        "y": "Pazopanibe 800 mg VO 1x/dia contínuo ou sunitinibe 50 mg VO 4/2 ou 2/1",
+        "z": "Opções incorporadas ao SUS (CONITEC); combinações com IO tiveram decisão desfavorável à incorporação",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+          "pagina": 30,
+          "trecho": "incorporação, ao SUS, do cloridrato de pazopanibe e do malato de sunitinibe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CCRcc ressecado de alto risco (UISS alto) e/ou N+ ressecado",
+        "y": "Discutir pembrolizumabe 200 mg EV q3s por 1 ano com decisão compartilhada",
+        "z": "SBOC: tratamento padrão; no SUS a DDT não indica adjuvante → vigilância como alternativa",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Pembrolizumabe 200 mg EV a cada 3 semanas por 1 ano",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Massa renal pequena em vigilância ativa (TC ou RM seriada)",
+        "y": "Medir crescimento linear e diâmetro a cada exame",
+        "z": "Crescimento > 0,5 cm/ano, duplicação < 12 meses, sintomas ou diâmetro ≥ 4 cm → indicar intervenção",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+          "pagina": 29,
+          "trecho": "crescimento maior que 0,5 cm/ano",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Suspeita clínica de doença óssea ou de SNC no estadiamento",
+        "y": "Solicitar CINTILOGRAFIA_OSSEA e/ou RM_CRANIO",
+        "z": "Não solicitar de rotina sem suspeita; PET/CT FDG fora da rotina",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Cintilografia óssea se suspeita de doença óssea",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Metastático com bom PS, baixo volume e/ou boa resposta ao tratamento inicial",
+        "y": "Discutir nefrectomia citorredutora com urologia",
+        "z": "Componente sarcomatoide: citorredução não parece oferecer benefício",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "considerado em casos selecionados de pacientes com bom performance clínico",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Paciente em pazopanibe com uso de IBP/anti-H2",
+        "y": "Revisar antiácido (INAT-06)",
+        "z": "Preferir antiácido de curta ação no lugar de IBP/anti-H2",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "openFDA label pazopanib (effective 20251124): https://api.fda.gov/drug/label.json?search=openfda.generic_name:pazopanib&limit=1",
+          "pagina": null,
+          "trecho": "Consider short-acting antacids in place of proton pump inhibitors (PPIs)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    "SUS: lenvatinibe + pembrolizumabe, axitinibe isolado, lenvatinibe + everolimo, bevacizumabe + erlotinibe, pembrolizumabe em não células claras e belzutifan = DADO_AUSENTE (não avaliados na DDT 2022).",
+    "Portaria Conjunta SAES/SECTICS nº 20/2022 (publicação da DDT) citada em busca web, não aberta; fonte normativa usada = Relatório CONITEC nº 755 (jul/2022). Relatório nº 406 (incorporação sunitinibe/pazopanibe) não aberto diretamente — citado pela DDT p30.",
+    "Doses SEM_FONTE: cabozantinibe + nivolumabe no sarcomatoide; everolimo isolado em 2ª linha; avelumabe + axitinibe (citado no fluxograma p14, não incluído).",
+    "Uso contínuo VO registrado com cicloDias 28 por convenção do pack (não consta da SBOC).",
+    "Bula ANVISA não consultada; monitorização laboratorial por rótulo FDA (openFDA).",
+    "PET/CT FDG: cobertura SUS para CCR = DADO_AUSENTE.",
+    "Teste germinativo (VHL/FH/painel) e IHQ específica de FH sem id no catálogo.",
+    "RT paliativa e SBRT sem dose/fracionamento com fonte.",
+    "Emetogenicidade e risco de neutropenia febril sem fonte.",
+    "Ductos coletores: depende do pack bexiga (urotelial avançado).",
+    "Vigilância ativa localizada: DDT (semestral) × aula PRO (3-6 meses no 1º ano) — intervalo a confirmar pelo médico."
+  ],
+  "conflitos": [
+    {
+      "tema": "Critério de cálcio no IMDC/MSKCC",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 7,
+        "trecho": "Cálcio sérico elevado (> LSN, corrigido pela albumina)",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — Aula 65 Rim: doença avançada (65 - Aula 65 - Rim - Doença avançada.pdf)",
+        "pagina": 4,
+        "trecho": "Cálcio sérico >10 mg/dL",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Usar SBOC (> LSN corrigido pela albumina), concordante com DDT p25"
+    },
+    {
+      "tema": "Critério de anemia no IMDC/MSKCC",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 7,
+        "trecho": "Presença de anemia (Hb < LIN)",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — Aula 65 Rim: doença avançada (65 - Aula 65 - Rim - Doença avançada.pdf)",
+        "pagina": 4,
+        "trecho": "Anemia (Hb < LSN)",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Usar SBOC (Hb < LIN); aula PRO provavelmente com erro de digitação"
+    },
+    {
+      "tema": "Sunitinibe adjuvante",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 9,
+        "trecho": "Sunitinibe 50 mg VO 1x/dia por 4 semanas a cada 6 semanas",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — Aula 64 Rim: doença localizada (64 - Aula 64 - Rim - Doença localizada.pdf)",
+        "pagina": 12,
+        "trecho": "adjuvância com TKI NÃO é recomendada",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Não propor TKI adjuvante por padrão (sem ganho de SG); manter como alternativa SBOC FR fraca só por decisão médica"
+    },
+    {
+      "tema": "Indicação de adjuvância (SBOC × SUS)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 10,
+        "trecho": "o uso do pembrolizumabe adjuvante deve ser considerado como tratamento padrão",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "NORMA",
+        "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+        "pagina": 30,
+        "trecho": "Não há indicação clínica de tratamento sistêmico com finalidade adjuvante",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "No SUS: vigilância (opção SBOC alternativa); pembrolizumabe adjuvante fora da cobertura SUS, decisão compartilhada"
+    },
+    {
+      "tema": "Biópsia antes de vigilância ativa da massa renal",
+      "fonteA": {
+        "tipo": "NORMA",
+        "referencia": "CONITEC/MS — Diretrizes Diagnósticas e Terapêuticas do Carcinoma de Células Renais, Relatório nº 755 (jul/2022), https://www.gov.br/conitec/pt-br/midias/relatorios/2022/ddt-carcinoma-de-celulas-renais",
+        "pagina": 20,
+        "trecho": "deve ser indicada apenas quando o resultado puder alterar a conduta terapêutica",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — Aula 64 Rim: doença localizada (64 - Aula 64 - Rim - Doença localizada.pdf)",
+        "pagina": 4,
+        "trecho": "Se suspeita por imagem, nao há necessidade de biópsia.",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Considerar biópsia em candidatos a vigilância ativa ou ablação quando alterar conduta (DDT); médico decide"
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (curadoria assistida, Opus 5.5)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "fontes/sboc/Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.txt (31 pág., integral)",
+      "fontes/pro26/63_-_Aula_63_-_Rim_-_Visão_geral_estadiamento.txt",
+      "fontes/pro26/64_-_Aula_64_-_Rim_-_Doença_localizada.txt",
+      "fontes/pro26/65_-_Aula_65_-_Rim_-_Doença_avançada.txt",
+      "CONITEC Relatório nº 755 — DDT Carcinoma de Células Renais (2022), PDF baixado de gov.br/conitec",
+      "openFDA labels: sunitinib, pazopanib",
+      "ClinicalTrials.gov API v2: NCT03142334, NCT02231749, NCT02853331, NCT03141177, NCT02811861, NCT01865747, NCT00930033, NCT00720941",
+      "corpus/exames/exames-sigtap.v1.json"
+    ],
+    "aprovacaoClinica": null
+  }
+}

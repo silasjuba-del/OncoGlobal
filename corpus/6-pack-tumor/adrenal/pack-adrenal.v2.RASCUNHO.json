@@ -1,0 +1,1077 @@
+{
+  "header": {
+    "id": "pack-adrenal",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "SBOC 2026 — Adrenal: carcinoma, feocromocitoma e paraganglioma v3",
+      "trecho": "apoiar as decisões clínicas no tratamento de carcinomas da adrenal",
+      "edicao": "v3 2026"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Carcinoma do córtex da adrenal (CCA), feocromocitoma e paraganglioma",
+    "cid10": [
+      "C74.0",
+      "C74.1",
+      "C74.9",
+      "C75.5"
+    ],
+    "subtipos": [
+      "CCA convencional, oncocítico, mixoide, sarcomatoide",
+      "CCA funcionante (cortisol, andrógenos, estrógenos, aldosterona) ou não funcionante",
+      "feocromocitoma",
+      "paraganglioma"
+    ],
+    "cenarios": [
+      "cca_inicial_I_III",
+      "cca_metastatico_IV",
+      "feo_pgl_localizado",
+      "feo_pgl_recidivado_irressecavel"
+    ],
+    "limitesAplicabilidade": "Não cobre adenoma/incidentaloma benigno nem neuroblastoma. SBOC usa estadiamento MacFarlane/Sullivan; aula PRO usa ENSAT (ver conflitos)."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "indicacao": "universal",
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "quando": "Estadiamento do CCA",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "TC de tórax;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "universal",
+        "catalogoId": "RM_ABDOMEN_SUPERIOR",
+        "rotulo": "RM de abdome",
+        "quando": "Estadiamento do CCA",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "RM de abdome e pelve.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "universal",
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM de pelve",
+        "quando": "Estadiamento do CCA",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "RM de abdome e pelve.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": "CINTILOGRAFIA_OSSEA",
+        "rotulo": "Cintilografia óssea",
+        "quando": "Complementar (aula PRO)",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 15,
+          "trecho": "TCs tórax + TC/RM abdome/pelve (+ Cint. Óssea)",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT",
+        "quando": "Dúvida de malignidade; impacto não estabelecido (aula PRO)",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 15,
+          "trecho": "PET CT: cada vez mais solicitado",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "cirurgica",
+          "quando": "Ressecção oncológica (preferencial via aberta; minimamente invasiva opção nos estádios I-II)",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+            "pagina": 16,
+            "trecho": "Doença Localizada: Ressecção Oncológica – preferencial via aberta",
+            "estado": "INFERIDO"
+          }
+        },
+        {
+          "tipo": "core",
+          "quando": "Biópsia percutânea de massa adrenal: indicação não abordada nas fontes; excluir feocromocitoma antes de qualquer punção",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "fonte": null,
+          "pendencia": "SEM_FONTE"
+        }
+      ],
+      "laudoDeveConter": [
+        "critérios de Weiss (carcinoma ≥3) ou Lin-Weiss-Bisceglia nos oncocíticos",
+        "Ki67 (≤10% vs >10%)",
+        "índice mitótico (/50 CGA)",
+        "margens (R0/R1/R2)",
+        "invasão capsular/vascular, ruptura tumoral",
+        "tamanho (>8 cm)",
+        "IHQ: alfa-inibina, melan-A, SF-1"
+      ],
+      "molecular": [
+        {
+          "alvo": "Painel IHQ de origem cortical (alfa-inibina, melan-A, SF-1) e Ki67",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "CCA",
+          "consequencia": "Confirma origem; Ki67 define risco para mitotano adjuvante",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+            "pagina": 14,
+            "trecho": "IHQ: alfa-inibina, melan A, SF-1",
+            "estado": "INFERIDO"
+          }
+        },
+        {
+          "alvo": "TP53 germinativo (Li-Fraumeni)",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "CCA (indicação de avaliação genética)",
+          "consequencia": "Encaminhamento oncogenético; rastreio (protocolo de Toronto)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 8,
+            "trecho": "Carcinoma adrenocortical, carcinoma de plexo coroide",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Genes germinativos de feo/PGL (RET, VHL, NF1, SDHB, SDHA, SDHAF2, SDHC, SDHD, TMEM127, MAX, FH, MDH2)",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "universal",
+          "cenario": "Feocromocitoma e paraganglioma",
+          "consequencia": "Síndromes familiares (MEN2, VHL, NF1); SDHB associa-se a maior agressividade e resposta à temozolomida",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 9,
+            "trecho": "é realizada para a detecção de síndromes familiares como MEN2A, MEN2B,",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "outro",
+    "edicao": "MacFarlane modificado por Sullivan (SBOC v3)",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+      "pagina": 5,
+      "trecho": "Estádio MacFarlane1 Modificado por Sullivan2",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "CORTISOL",
+        "rotulo": "Cortisol (com ACTH e supressão com dexametasona)",
+        "cenario": "CCA — 60% funcionantes",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 13,
+          "trecho": "Cortisol, ACTH, Teste stress com Dexametasona, S-DHEA",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "ACTH",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "cenario": "CCA",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 13,
+          "trecho": "Cortisol, ACTH, Teste stress com Dexametasona, S-DHEA",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "Teste de supressão com dexametasona",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "cenario": "CCA",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 13,
+          "trecho": "Cortisol, ACTH, Teste stress com Dexametasona, S-DHEA",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "S-DHEA",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "cenario": "CCA",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 13,
+          "trecho": "Cortisol, ACTH, Teste stress com Dexametasona, S-DHEA",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "Androstenediona e 17-hidroxiprogesterona",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "cenario": "CCA",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 13,
+          "trecho": "Androstenediona, Testosterona, 17- Hidroxiprogesterona",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": "TESTOSTERONA_TOTAL",
+        "rotulo": "Testosterona",
+        "cenario": "CCA",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 13,
+          "trecho": "Androstenediona, Testosterona, 17- Hidroxiprogesterona",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": "ESTRADIOL",
+        "rotulo": "Estradiol (homens e mulheres menopausadas)",
+        "cenario": "CCA",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 13,
+          "trecho": "Estradiol (homens e mulheres menopausadas)",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": "POTASSIO",
+        "rotulo": "Potássio (com sódio, aldosterona e renina)",
+        "cenario": "CCA",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 13,
+          "trecho": "Sodio, Potassio, Aldosterona e Renina",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": "SODIO",
+        "rotulo": "Sódio",
+        "cenario": "CCA",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 13,
+          "trecho": "Sodio, Potassio, Aldosterona e Renina",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "Aldosterona e renina",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "cenario": "CCA",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 13,
+          "trecho": "Sodio, Potassio, Aldosterona e Renina",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "Metanefrinas e normetanefrinas (urina 24 h) ou metanefrinas plasmáticas",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "cenario": "Feo/PGL suspeito ou confirmado; excluir feocromocitoma em toda massa adrenal",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 9,
+          "trecho": "devem ser dosadas metanefrinas e normetanefrinas na urina 24 horas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "cenario": "CCA",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 6,
+          "trecho": "TC de tórax;",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "CCA estádios I-III",
+        "conduta": "Ressecção + mitotano adjuvante com aumento gradual de dose",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 7,
+          "trecho": "Ressecção cirúrgica seguida de tratamento adjuvante com mitotano, aumento",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "CCA I-III baixo risco (R0 e Ki67 ≤10%)",
+        "conduta": "Parece não se beneficiar do mitotano adjuvante (ADIUVO): observação é opção",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 7,
+          "trecho": "margens negativas e Ki67 ≤ 10%",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "CCA III ou ressecção incompleta",
+        "conduta": "RT adjuvante pode ser considerada",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 7,
+          "trecho": "Para pacientes estádios III ou submetidos a ressecção incompleta, a",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "CCA IV",
+        "conduta": "Cirurgia sempre que possível + EDP-mitotano",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Tratamento cirúrgico sempre que possível e tratamento sistêmico com mitotano",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Feo/PGL localizado",
+        "conduta": "Cirurgia após bloqueio alfa-adrenérgico; sem adjuvância sistêmica",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Não está indicado o tratamento sistêmico adjuvante.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Feo/PGL irressecável",
+        "conduta": "I-131-MIBG terapêutico (repetível a cada 90 dias); alternativas CVD, temozolomida, antiangiogênicos, cabozantinibe, belzutifano",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Se doença irressecável, tratamento sistêmico com I131-MIBG, em doses terapêuticas,",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "CORTISOL",
+          "uso": "CCA funcionante: diagnóstico hormonal e seguimento sob mitotano",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+            "pagina": 19,
+            "trecho": "potássio, cortisol urinário 24h, ACTH, Renina, CTF e Tg, TSH/T4L, testosterona",
+            "estado": "INFERIDO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "marcadores tumorais séricos (CEA, CA 19-9) sem fonte de uso"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "CCA localizado",
+        "intencao": "curativa",
+        "modalidades": [
+          "ressecção oncológica (via aberta preferencial)",
+          "linfadenectomia de LFN suspeitos",
+          "mitotano adjuvante (alto risco)",
+          "RT adjuvante selecionada"
+        ],
+        "criterio": "Alto risco: Ki67 >10%, R1/R2, ruptura, >8 cm, invasão vascular",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 20,
+          "trecho": "Doença de alto risco: Ki67 >10% ou 20 mit / 50 CGA, ressecção incompleta",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "cenario": "CCA metastático",
+        "intencao": "paliativa",
+        "modalidades": [
+          "cirurgia quando possível",
+          "EDP + mitotano"
+        ],
+        "criterio": "FIRM-ACT",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Tratamento cirúrgico sempre que possível e tratamento sistêmico com mitotano",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Feocromocitoma/paraganglioma",
+        "intencao": "curativa",
+        "modalidades": [
+          "bloqueio alfa (fenoxibenzamina, doxazosina ou prazosina) pré-operatório",
+          "betabloqueador após o bloqueio alfa",
+          "cirurgia"
+        ],
+        "criterio": "Todos os operados",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Realizar no pré-operatório bloqueio adrenérgico (fenoxibenzamina, doxazosina ou prazosina)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Feo/PGL recidivado",
+        "intencao": "paliativa",
+        "modalidades": [
+          "cirurgia de recidiva",
+          "I-131-MIBG",
+          "CVD",
+          "temozolomida ± talidomida/capecitabina",
+          "sunitinibe/everolimo",
+          "cabozantinibe",
+          "belzutifano"
+        ],
+        "criterio": "Ressecabilidade",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Em caso de recidiva, tratamento cirúrgico.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "adrenal-cca-mitotano-adjuvante",
+        "nome": "Mitotano adjuvante",
+        "cenario": "adjuvante — CCA estádios I-III de alto risco",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Mitotano",
+            "dose": 1000,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, diário (dividido em 3-4 tomadas)",
+            "observacao": "aula PRO: iniciar 1 g/dia, 3 g/dia em 1 semana, até 6 g/dia em 4-12 semanas (máx. 12 g/dia), guiado por mitotanemia 14-20 mcg/mL; duração 3-5 anos"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "Glicocorticoide em dose fisiológica durante todo o uso de mitotano (SBOC p.7).",
+        "ajusteObrigatorio": "Titulação por mitotanemia (a cada 2-3 semanas no início, depois 4-6 semanas); risco de insuficiência adrenal. Esquema de titulação vem da aula PRO (INFERIDO).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 19,
+          "trecho": "Iniciar com 1 g/d e aumentar para 3 g/d em 01 semana.",
+          "estado": "INFERIDO"
+        },
+        "observacao": "SBOC recomenda mitotano adjuvante com aumento gradual sem fixar dose; números da aula PRO."
+      },
+      {
+        "id": "adrenal-cca-edp-mitotano",
+        "nome": "EDP + mitotano (FIRM-ACT)",
+        "cenario": "metastático — CCA estádio IV",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Doxorrubicina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": "via não escrita na SBOC (conferir)"
+          },
+          {
+            "droga": "Etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2 a D4",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D3, D4",
+            "observacao": ""
+          },
+          {
+            "droga": "Mitotano",
+            "dose": 1000,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "SBOC: 1 a 4 g/dia; titular"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "Glicocorticoide fisiológico com mitotano.",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "doxorrubicina 20 mg/m² D1 e D8 e mitotano 1 a 4 g VO 1x/dia",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "VIA_DOXORRUBICINA_CONFERIR"
+      },
+      {
+        "id": "adrenal-pgl-belzutifano",
+        "nome": "Belzutifano",
+        "cenario": "paraganglioma localmente avançado ou metastático",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "Belzutifano",
+            "dose": 120,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "contínuo (SBOC: 1x/dia); ciclo de 28 dias é convenção de registro"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 9,
+          "trecho": "Dose: 120 mg VO, 1 vez ao dia.",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "SBOC grafa 'Bezultifano'. Dose informada no texto do LITESPARK-015 (SBOC p.9)."
+      },
+      {
+        "id": "adrenal-feo-sunitinibe",
+        "nome": "Sunitinibe",
+        "cenario": "feocromocitoma/paraganglioma metastático progressivo",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "Sunitinibe",
+            "dose": 50,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "4 semanas de uso a cada 6 semanas"
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 9,
+          "trecho": "sunitinibe, 50 mg/dia por 4 semanas a cada 6 semanas",
+          "estado": "INFERIDO"
+        },
+        "observacao": "Dose do estudo citado pela SBOC (contexto de evidência, não tabela de recomendação)."
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "CCA estádio III ou ressecção incompleta — RT adjuvante",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "mitotano",
+        "pendencia": "SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 7,
+          "trecho": "Para pacientes estádios III ou submetidos a ressecção incompleta, a",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Feo/PGL irressecável — I-131-MIBG terapêutico",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "nenhuma (atividade em mCi, repetível a cada 90 dias)",
+        "pendencia": "SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "que pode ser repetido a cada 90 dias",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Adrenalectomia oncológica (aberta preferencial; minimamente invasiva nos estádios I-II) com linfadenectomia de LFN suspeitos",
+        "quando": "CCA localizado",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 16,
+          "trecho": "Linfadenectomia é recomendada para linfonodos acometidos e suspeitos",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "procedimento": "Cirurgia após bloqueio alfa-adrenérgico",
+        "quando": "Feocromocitoma/paraganglioma",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Realizar no pré-operatório bloqueio adrenérgico (fenoxibenzamina, doxazosina ou prazosina)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Cirurgia da doença metastática/recidiva",
+        "quando": "CCA IV sempre que possível; feo/PGL recidivado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Tratamento cirúrgico sempre que possível e tratamento sistêmico com mitotano",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "SDHB mutado (feo/PGL)",
+        "opcao": "Temozolomida (isolada ou com capecitabina/talidomida)",
+        "evidencia": "Estudos pequenos; mais efetiva em SDHB",
+        "sus": "DADO_AUSENTE",
+        "pendencia": "DOSE_SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 9,
+          "trecho": "parece mais efetiva nos pacientes com mutação SDHB.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "Ki67 ≤10% e R0 (CCA)",
+        "opcao": "Observação (sem benefício do mitotano adjuvante)",
+        "evidencia": "ADIUVO: SLR 79% vs 75%",
+        "sus": "não se aplica",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 7,
+          "trecho": "margens negativas e Ki67 ≤ 10%",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "Feo/PGL irressecável após 1 linha",
+        "opcao": "Cabozantinibe",
+        "evidencia": "CABINET (SLP 8,5 vs 4 m; HR 0,38)",
+        "sus": "DADO_AUSENTE",
+        "pendencia": "DOSE_SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "Cabozantinibe NE MODERADO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": "EDP: SEM_FONTE no pack",
+      "riscoNeutropeniaFebril": "SEM_FONTE",
+      "outros": [
+        "Reposição de glicocorticoide com mitotano",
+        "Bloqueio alfa antes de betabloqueio no feocromocitoma",
+        "Manejo da síndrome de Cushing/hiperandrogenismo"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+        "pagina": 7,
+        "trecho": "Para pacientes em uso de mitotano, deve-se recomendar o uso de",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "FIRM-ACT",
+        "nct": "NCT00094497",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCA localmente avançado/metastático",
+        "bracos": "EDP + mitotano vs estreptozocina + mitotano",
+        "desfecho": "SG",
+        "resultado": "Resposta 23% vs 9%; SLP 5 vs 2 m; sem ganho de SG",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00094497",
+          "pagina": null,
+          "trecho": "Trial in Locally Advanced and Metastatic Adrenocortical Carcinoma Treatment",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ADIUVO",
+        "nct": "NCT00777244",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCA I-III, R0, Ki67 ≤10%",
+        "bracos": "Mitotano adjuvante vs observação",
+        "desfecho": "SLR",
+        "resultado": "79% vs 75% (HR 0,74; IC 0,30-1,85)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00777244",
+          "pagina": null,
+          "trecho": "Efficacy of Adjuvant Mitotane Treatment (ADIUVO)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "Durante mitotano",
+        "exames": [
+          "HEMOGRAMA",
+          "TGO",
+          "TGP",
+          "SODIO",
+          "POTASSIO",
+          "CORTISOL",
+          "COLESTEROL_TOTAL",
+          "TRIGLICERIDEOS",
+          "TSH",
+          "T4_LIVRE",
+          "TESTOSTERONA_TOTAL"
+        ],
+        "periodicidade": "Acompanhamento laboratorial periódico + mitotanemia (a cada 2-3 semanas no início; depois 4-6 semanas). ACTH, renina e mitotanemia sem id no catálogo.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 19,
+          "trecho": "potássio, cortisol urinário 24h, ACTH, Renina, CTF e Tg, TSH/T4L, testosterona",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "periodo": "CCA pós-ressecção",
+        "exames": [
+          "TC_TORAX",
+          "RM_ABDOMEN_SUPERIOR"
+        ],
+        "periodicidade": "SEM_FONTE (SBOC não define seguimento)",
+        "pendencia": "SEM_FONTE",
+        "fonte": null
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "CINTILOGRAFIA_OSSEA",
+      "COLESTEROL_TOTAL",
+      "CORTISOL",
+      "ESTRADIOL",
+      "HEMOGRAMA",
+      "IMUNOHISTOQUIMICA",
+      "PET_CT_FDG",
+      "POTASSIO",
+      "RM_ABDOMEN_SUPERIOR",
+      "RM_PELVE",
+      "SODIO",
+      "T4_LIVRE",
+      "TC_TORAX",
+      "TESTOSTERONA_TOTAL",
+      "TGO",
+      "TGP",
+      "TRIGLICERIDEOS",
+      "TSH"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "Mitotano",
+        "com": "indutor potente de CYP3A4 (reduz níveis de muitas drogas, inclusive sunitinibe e glicocorticoides)",
+        "ref": null
+      },
+      {
+        "droga": "Mitotano",
+        "com": "espironolactona (antagoniza efeito)",
+        "ref": null
+      },
+      {
+        "droga": "Sunitinibe",
+        "com": "inibidores/indutores de CYP3A4",
+        "ref": null
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "mitotano",
+        "termosCTCAEv6": [
+          "Adrenal insufficiency",
+          "Nausea",
+          "Fatigue",
+          "Confusion",
+          "Ataxia",
+          "Hypercholesterolemia"
+        ]
+      },
+      {
+        "classe": "EDP",
+        "termosCTCAEv6": [
+          "Febrile neutropenia",
+          "Acute kidney injury",
+          "Nausea"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "hidrocortisona/prednisona fisiológica com mitotano",
+      "alfa-bloqueador pré-operatório no feocromocitoma"
+    ],
+    "orientacoes": [
+      "sinais de insuficiência adrenal sob mitotano",
+      "mitotano com alimentos gordurosos (absorção) — conferir bula",
+      "evitar betabloqueador antes do alfa-bloqueio"
+    ],
+    "encaminhamentos": [
+      "cirurgia oncológica/urologia",
+      "endocrinologia",
+      "medicina nuclear (MIBG)",
+      "oncogenética (Li-Fraumeni, SDHx, VHL, MEN2)"
+    ],
+    "laudos": [
+      "APAC de quimioterapia (C74)",
+      "solicitação de mitotanemia"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "CCA estádio I-III ressecado",
+        "y": "alto risco (Ki67 >10%, R1/R2, ruptura, >8 cm, invasão vascular)",
+        "z": "Mitotano adjuvante com titulação por mitotanemia por 3-5 anos + glicocorticoide fisiológico; baixo risco (R0, Ki67 ≤10%): observação",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 7,
+          "trecho": "Ressecção cirúrgica seguida de tratamento adjuvante com mitotano, aumento",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CCA estádio IV",
+        "y": "condição para QT",
+        "z": "EDP (etoposídeo 100 mg/m² D2-D4, cisplatina 40 mg/m² D3-D4, doxorrubicina 20 mg/m² D1 e D8) + mitotano 1-4 g/dia a cada 28 dias",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "doxorrubicina 20 mg/m² D1 e D8 e mitotano 1 a 4 g VO 1x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Massa adrenal suspeita de feocromocitoma/paraganglioma",
+        "y": "antes de cirurgia ou punção",
+        "z": "Metanefrinas urinárias 24 h ou plasmáticas e aconselhamento genético; bloqueio alfa pré-operatório",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 9,
+          "trecho": "devem ser dosadas metanefrinas e normetanefrinas na urina 24 horas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CCA (60% funcionantes)",
+        "y": "avaliação hormonal inicial",
+        "z": "Cortisol, ACTH, supressão com dexametasona, S-DHEA, androgênios, estradiol, sódio/potássio, aldosterona/renina e metanefrinas",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+          "pagina": 13,
+          "trecho": "Cortisol, ACTH, Teste stress com Dexametasona, S-DHEA",
+          "estado": "INFERIDO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    "Dose do mitotano adjuvante: SBOC não fixa; titulação vem da aula PRO (INFERIDO). Conflito de teto com a SBOC metastática (1-4 g/dia).",
+    "Via da doxorrubicina no EDP não escrita na SBOC.",
+    "SEM_FONTE: doses de I-131-MIBG, CVD, temozolomida, everolimo e cabozantinibe em feo/PGL.",
+    "SEM_FONTE: dose de RT adjuvante no CCA e seguimento pós-ressecção.",
+    "SEM_FONTE: indicação/contraindicação de biópsia percutânea de massa adrenal.",
+    "Catálogo: sem ids para ACTH, S-DHEA, aldosterona, renina, metanefrinas, teste com dexametasona e mitotanemia.",
+    "SUS: mitotano, belzutifano, cabozantinibe, sunitinibe sem dado de incorporação no pack."
+  ],
+  "conflitos": [
+    {
+      "tema": "Sistema de estadiamento do CCA",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+        "pagina": 5,
+        "trecho": "Estádio MacFarlane1 Modificado por Sullivan2",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+        "pagina": 15,
+        "trecho": "EC Estadiamento ENSAT",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Registrar pelo sistema da SBOC e anotar o equivalente ENSAT (T3-4 ou N1 = III; M1 = IV)"
+    },
+    {
+      "tema": "Teto de dose do mitotano",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+        "pagina": 8,
+        "trecho": "doxorrubicina 20 mg/m² D1 e D8 e mitotano 1 a 4 g VO 1x/dia",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+        "pagina": 19,
+        "trecho": "Dose máxima de 12 g/d – 3 a 4 tomadas durante o dia",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Usar a faixa da SBOC (1-4 g/dia) como referência e titular por mitotanemia; doses acima só com nível sérico e decisão médica"
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (agente curador, rascunho)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+      "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
+      "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf (p.8, Li-Fraumeni)",
+      "ClinicalTrials.gov API v2"
+    ],
+    "aprovacaoClinica": null
+  }
+}

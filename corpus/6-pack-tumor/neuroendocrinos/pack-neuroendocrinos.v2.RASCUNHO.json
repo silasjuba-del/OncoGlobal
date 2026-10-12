@@ -1,0 +1,1693 @@
+{
+  "header": {
+    "id": "pack-neuroendocrinos",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretriz SBOC 2025 — TNE bem diferenciados: gastrointestinal; Diretriz SBOC 2026 — TNE pulmonares v3",
+      "trecho": "Os tumores neuroendócrinos (TNEs) pulmonares são classificados de acordo com a Organização Mundial",
+      "edicao": "SBOC 2025 (GI) / SBOC 2026 v3 (pulmão)"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Tumores neuroendócrinos bem diferenciados gastroenteropancreáticos (GEP-NET) e pulmonares (carcinoide típico/atípico)",
+    "cid10": [
+      "C16",
+      "C17",
+      "C18",
+      "C19",
+      "C20",
+      "C25.4",
+      "C34",
+      "C26"
+    ],
+    "subtipos": [
+      "gástrico tipos I–III",
+      "duodenal",
+      "intestino delgado (midgut)",
+      "apêndice",
+      "cólon",
+      "reto",
+      "pâncreas (pNET)",
+      "pulmonar: carcinoide típico",
+      "pulmonar: carcinoide atípico",
+      "funcionante (síndrome carcinoide)",
+      "não funcionante"
+    ],
+    "cenarios": [
+      "localizado_ressecavel",
+      "metastatico_ressecavel",
+      "metastatico_hepatico_irressecavel_locorregional",
+      "metastatico_irressecavel_sistemico",
+      "funcionante"
+    ],
+    "limitesAplicabilidade": "Carcinoma neuroendócrino pouco diferenciado (CPPC, CNGC, CNE G3 extrapulmonar), feocromocitoma/paraganglioma e carcinoma medular de tireoide fora do escopo (CNE só registrado como pendência). TNE pancreático: SBOC disponível não cobre; conduta apoiada no curso PRO e bulas (INFERIDO).",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 7,
+      "trecho": "Carcinoide atípico Presente (focal) 2-10 mitoses/2 mm²",
+      "estado": "VERIFICADO"
+    }
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "indicacao": "universal",
+        "quando": "estadiamento (exceto TNE gástrico tipo I < 2 cm)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 7,
+          "trecho": "TC tórax e abdome total",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome",
+        "indicacao": "universal",
+        "quando": "estadiamento",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 7,
+          "trecho": "TC tórax e abdome total",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve",
+        "indicacao": "universal",
+        "quando": "estadiamento (parte de 'abdome total')",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 7,
+          "trecho": "TC tórax e abdome total",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_DOTATATE",
+        "rotulo": "PET-CT com Ga-68 DOTATATE",
+        "indicacao": "universal",
+        "quando": "estadiamento; obrigatório antes de PRRT e de ressecção hepática",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 7,
+          "trecho": "PET/CT Gálio-68",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "OCTREOSCAN",
+        "rotulo": "Octreoscan",
+        "indicacao": "condicional",
+        "quando": "alternativa ao PET-Ga68 para comprovar SSTR2 (em desuso)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "nos casos com expressão de SSTR2 através de octreoscan ou PET/CT-Ga 68",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_ABDOMEN_SUPERIOR",
+        "rotulo": "RM de fígado (contraste hepatoespecífico)",
+        "indicacao": "condicional",
+        "quando": "antes de ressecção de metástases hepáticas",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 10,
+          "trecho": "RM de fígado com Primovist",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET-CT FDG",
+        "indicacao": "condicional",
+        "quando": "tumores de maior grau/sem SSTR (curso PRO)",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/20 - Aula 20 - Tumores Neuroendócrinos- Conceitos Iniciais.pdf",
+          "pagina": 9,
+          "trecho": "Para tumores com receptores GLUT (sem recep. somatostatina)",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": "ECOCARDIOGRAMA",
+        "rotulo": "Ecocardiograma",
+        "indicacao": "condicional",
+        "quando": "5-HIAA urinário acima do normal (cardiopatia carcinoide)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 7,
+          "trecho": "Se 5-HIAA acima do valor superior da normalidade: ecocardiograma",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [
+      {
+        "catalogoId": "EDA",
+        "rotulo": "EDA",
+        "indicacao": "condicional",
+        "quando": "TNE gástrico/duodenal; seguimento de gástrico com hipergastrinemia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 16,
+          "trecho": "EDA semestralmente por 3 anos e, após, anualmente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "COLONOSCOPIA",
+        "rotulo": "Colonoscopia/proctoscopia",
+        "indicacao": "condicional",
+        "quando": "TNE de cólon e reto",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 16,
+          "trecho": "devem ser avaliados com proctoscopia e RM de pelve ou USG endorretal",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "outra",
+          "quando": "biópsia do primário ou de metástase (endoscópica, percutânea ou cirúrgica)",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+            "pagina": 9,
+            "trecho": "Ressecção cirúrgica do tumor primário",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "diferenciação (bem × pouco diferenciado)",
+        "grau OMS",
+        "Ki-67 (%)",
+        "índice mitótico (mitoses/2 mm²)",
+        "necrose (pulmão: típico × atípico)",
+        "tamanho e invasão (T)",
+        "linfonodos",
+        "margens",
+        "apêndice: invasão do mesoapêndice > 3 mm e invasão angiolinfática"
+      ],
+      "laudoFonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 7,
+        "trecho": "recomenda-se sua utilização como ferramenta complementar na prática clínica",
+        "estado": "VERIFICADO"
+      },
+      "grauGI": "G1 Ki-67 < 3%; G2 3–20%; > 20% (curso PRO/OMS 2022 — INFERIDO)",
+      "grauGIFonte": {
+        "tipo": "CURSO",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/20 - Aula 20 - Tumores Neuroendócrinos- Conceitos Iniciais.pdf",
+        "pagina": 6,
+        "trecho": "<3% 3 a 20% > 20%",
+        "estado": "INFERIDO"
+      },
+      "molecular": [
+        {
+          "alvo": "Ki-67",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "todo TNE",
+          "consequencia": "graduação; escolha entre SSA, everolimo, PRRT ou QT",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "recomenda-se sua utilização como ferramenta complementar na prática clínica",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Expressão de SSTR2 (imagem funcional)",
+          "metodo": "outro",
+          "catalogoId": "PET_DOTATATE",
+          "quandoPedir": "universal",
+          "cenario": "doença avançada",
+          "consequencia": "indica SSA e é obrigatória para PRRT",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 10,
+            "trecho": "O uso de PRRT com 177Lu-DOTATATE pode ser considerado em TNE pulmonares SSTR-positivos",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 4,
+      "trecho": "AJCC (8ª edição)",
+      "estado": "VERIFICADO"
+    },
+    "notaEdicao": "Pulmão: AJCC 8ª (SBOC 2026). GI: tabelas TNM específicas por sítio na SBOC 2025 sem edição declarada; 8ª pelo curso PRO (INFERIDO).",
+    "fonteGI": {
+      "tipo": "CURSO",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/20 - Aula 20 - Tumores Neuroendócrinos- Conceitos Iniciais.pdf",
+      "pagina": 8,
+      "trecho": "AJCC 8th edition",
+      "estado": "INFERIDO"
+    },
+    "exames": [
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "cenario": "todos (exceto gástrico tipo I < 2 cm)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 7,
+          "trecho": "TC tórax e abdome total",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 7,
+          "trecho": "TC tórax e abdome total",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_DOTATATE",
+        "rotulo": "PET-CT Ga-68",
+        "cenario": "todos (exceto gástrico tipo I < 2 cm)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 7,
+          "trecho": "PET/CT Gálio-68",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ACIDO_5HIAA",
+        "rotulo": "5-HIAA em urina de 24 h",
+        "cenario": "intestino delgado ou primário desconhecido (mesmo assintomático)",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 7,
+          "trecho": "Dosagem de 5-HIAA em urina 24h",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "TNE gástrico tipo I < 2 cm",
+        "conduta": "Sem necessidade de estadiamento; ressecção endoscópica.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 7,
+          "trecho": "Sem necessidade estadiamento se lesões < 2 cm.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "TNE GI localizado",
+        "conduta": "Ressecção do primário conforme sítio; sem adjuvância.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 9,
+          "trecho": "Não há indicação para tratamento adjuvante",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "TNE GI metastático ressecável (G1, indolente)",
+        "conduta": "Ressecção do primário + metastasectomia; sem adjuvância.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 10,
+          "trecho": "Ressecção cirúrgica do tumor primário + metastasectomia (para tumores G1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "TNE GI metastático irressecável",
+        "conduta": "Vigilância ativa, SSA, everolimo, Lu-177 após SSA, QT nos politratados.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 13,
+          "trecho": "Observação com vigilância ativa",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "TNE pulmonar localizado",
+        "conduta": "Lobectomia ou segmentectomia com linfadenectomia; sublobar em carcinoide típico periférico < 2 cm; sem adjuvância.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "o tratamento cirúrgico de escolha é lobectomia ou segmentectomia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "TNE pulmonar metastático indolente, baixo volume",
+        "conduta": "Observação clínica.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "a observação clínica pode ser considerada",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "ACIDO_5HIAA",
+          "uso": "diagnóstico de síndrome carcinoide; define vigilância em G1 assintomático; rastreio de cardiopatia",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+            "pagina": 13,
+            "trecho": "Em pacientes assintomáticos bioquimicamente inertes (5-HIAA em urina 24 horas normal)",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "Cromogranina A no acompanhamento (curso PRO)"
+      ],
+      "naoPedirFonte": {
+        "tipo": "CURSO",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/20 - Aula 20 - Tumores Neuroendócrinos- Conceitos Iniciais.pdf",
+        "pagina": 9,
+        "trecho": "Cromogranina A é bastante específica, mas alto custo e muitos interferentes",
+        "estado": "INFERIDO"
+      }
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "localizado_ressecavel",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia por sítio"
+        ],
+        "criterio": "Sem adjuvância (GI e pulmão).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Não é recomendado nenhum tipo de tratamento adjuvante",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico_hepatico_irressecavel_locorregional",
+        "intencao": "paliativa",
+        "modalidades": [
+          "SSA antes de procedimento (funcionantes)",
+          "citorredução",
+          "embolização",
+          "radiofrequência",
+          "Y-90 (sem aprovação Anvisa)",
+          "transplante (selecionados)"
+        ],
+        "criterio": "Síndrome carcinoide controlada antes de qualquer intervenção; cardiopatia carcinoide contraindica terapia hepática.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 10,
+          "trecho": "estarem com síndrome carcinoide controlada ANTES de qualquer procedimento",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico_irressecavel_sistemico",
+        "intencao": "paliativa",
+        "modalidades": [
+          "vigilância",
+          "SSA",
+          "everolimo",
+          "Lu-177",
+          "TKI",
+          "QT"
+        ],
+        "criterio": "Vigilância em G1 assintomático com 5-HIAA normal e indolente, reavaliando a cada 3–6 meses.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 13,
+          "trecho": "seguimento clínico em intervalos curtos (3 a 6 meses)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "funcionante",
+        "intencao": "paliativa",
+        "modalidades": [
+          "SSA mantido indefinidamente"
+        ],
+        "criterio": "SSA é a 1ª opção no funcionante.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "recomendamos tratamento com análogo da somatostatina (octreotide ou lanreotide)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "net-octreotida-lar",
+        "nome": "Octreotida LAR 30 mg (antitumoral/controle de síndrome)",
+        "cenario": "gep_net_bem_diferenciado_irressecavel",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Octreotida LAR",
+            "dose": 30,
+            "unidade": "mg",
+            "via": "IM",
+            "dias": "D1",
+            "observacao": "glúteo; intervalo de 4 semanas (bula)"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "CONITEC não incorporou a octreotida LAR para sintomas de TNE GEP funcionais (2024). Alternativa SUS: lanreotida (funcionantes sintomáticos) ou APAC de TNE avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 5, de 05/03/2024 (Relatório CONITEC nº 876): incorpora lanreotida e não incorpora octreotida LAR para sintomas de TNE GEP funcionais — citada em parecer TJRJ 1969/2025; não conferida no DOU",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do SUS, o acetato de octreotida de liberação prolongada",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 13,
+          "trecho": "octreotide LAR 30 mg ou lanreotide 120 mg a cada 28 dias",
+          "estado": "VERIFICADO"
+        },
+        "fonteVia": {
+          "tipo": "BULA",
+          "referencia": "FDA/DailyMed Sandostatin LAR Depot (octreotida) set_id d0b7fe9e-7000-4b79-ba3b-291ce92c14f9, seção 2",
+          "pagina": null,
+          "trecho": "administered intramuscularly (IM) in the gluteal region at 4-week intervals",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "net-lanreotida",
+        "nome": "Lanreotida 120 mg",
+        "cenario": "gep_net_bem_diferenciado_irressecavel",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Lanreotida",
+            "dose": 120,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D1",
+            "observacao": "subcutânea profunda (bula)"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "nota": "Incorporada (2024) para sintomas de TNE GEP funcionais; uso antitumoral em não funcionantes não coberto por essa incorporação.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 5, de 05/03/2024 (Relatório CONITEC nº 876): incorpora lanreotida e não incorpora octreotida LAR para sintomas de TNE GEP funcionais — citada em parecer TJRJ 1969/2025; não conferida no DOU",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do SUS, o acetato de octreotida de liberação prolongada",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 13,
+          "trecho": "octreotide LAR 30 mg ou lanreotide 120 mg a cada 28 dias",
+          "estado": "VERIFICADO"
+        },
+        "fonteVia": {
+          "tipo": "BULA",
+          "referencia": "FDA/DailyMed Somatuline Depot (lanreotida) set_id 6e4a41fd-a753-4362-87ee-8cc56ed3660d, seção 2.1",
+          "pagina": null,
+          "trecho": "GEP-NETs: 120 mg every 4 weeks.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "net-everolimo",
+        "nome": "Everolimo isolado",
+        "cenario": "net_bem_diferenciado_nao_funcionante_GEP_ou_pulmonar",
+        "linha": "1ª linha ou após SSA",
+        "drogas": [
+          {
+            "droga": "Everolimo",
+            "dose": 10,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": "reduzir para 5 mg/dia já em evento adverso G2 (SBOC)"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Infecções graves em até 20% com uso prolongado; interações CYP3A4 (INAT-23).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "nota": "Incorporação CONITEC não verificada. Alternativa SUS: APAC de TNE avançado (0304020117).",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          },
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 14,
+          "trecho": "redução de dose para 5 mg/dia",
+          "estado": "VERIFICADO"
+        },
+        "fonteDose": {
+          "tipo": "BULA",
+          "referencia": "FDA/DailyMed Afinitor (everolimo) set_id 2150f73a-179b-4afc-b8ce-67c85cc72f04, seção 2.3",
+          "pagina": null,
+          "trecho": "NET : 10 mg orally once daily.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "net-everolimo-octreotida",
+        "nome": "Everolimo + octreotida LAR (funcionantes)",
+        "cenario": "gep_net_funcionante_progressao",
+        "linha": "linhas posteriores",
+        "drogas": [
+          {
+            "droga": "Everolimo",
+            "dose": 10,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": ""
+          },
+          {
+            "droga": "Octreotida LAR",
+            "dose": 30,
+            "unidade": "mg",
+            "via": "IM",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Interações CYP3A4 (INAT-23).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "nota": "Não verificado; octreotida LAR não incorporada (2024).",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          },
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 13,
+          "trecho": "O uso do everolimo 10 mg ao dia combinado com octreotide LAR 30",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "net-lutecio-177-dotatato",
+        "nome": "Lu-177 DOTATATO (PRRT) + octreotida LAR",
+        "cenario": "gep_net_SSTR_positivo_progressao_SSA",
+        "linha": "2ª linha (1ª linha em G2–G3 Ki-67 10–55%: NETTER-2)",
+        "drogas": [
+          {
+            "droga": "Lutécio Lu-177 dotatato",
+            "dose": 7.4,
+            "unidade": "GBq",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "200 mCi; total de 4 doses; aminoácidos EV 30 min antes até ≥ 3 h depois"
+          },
+          {
+            "droga": "Octreotida LAR",
+            "dose": 30,
+            "unidade": "mg",
+            "via": "IM",
+            "dias": "4–24 h após cada dose de Lu-177",
+            "observacao": "manter a cada 4 semanas após o PRRT (bula)"
+          }
+        ],
+        "cicloDias": 56,
+        "numeroCiclos": 4,
+        "premedicacao": "Antiemético antes da solução de aminoácidos (bula).",
+        "ajusteObrigatorio": "Exige SSTR2 comprovado (PET-DOTATATE ou octreoscan); hemograma e função renal.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "nota": "Incorporação CONITEC não verificada; produção restrita a centros específicos.",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          },
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "FDA/DailyMed Lutathera (lutécio Lu-177 dotatato) set_id 72d1a024-00b7-418a-b36e-b2cb48f2ab55, seções 2.2–2.3",
+          "pagina": null,
+          "trecho": "Administer 7.4 GBq (200 mCi) every 8 weeks",
+          "estado": "VERIFICADO"
+        },
+        "fonteIndicacao": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 13,
+          "trecho": "Radioisótopo Lutécio–177 após progressão com análogo",
+          "estado": "VERIFICADO"
+        },
+        "fonteOctreotida": {
+          "tipo": "BULA",
+          "referencia": "FDA/DailyMed Lutathera (lutécio Lu-177 dotatato) set_id 72d1a024-00b7-418a-b36e-b2cb48f2ab55, seções 2.2–2.3",
+          "pagina": null,
+          "trecho": "Administer long-acting octreotide 30 mg intramuscularly 4 to 24 hours after each LUTATHERA dose",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "net-sunitinibe-pnet",
+        "nome": "Sunitinibe (TNE pancreático)",
+        "cenario": "pnet_bem_diferenciado_progressivo",
+        "linha": "após SSA",
+        "drogas": [
+          {
+            "droga": "Sunitinibe",
+            "dose": 37.5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "QT longo (INAT-11); CYP3A4 (INAT-23).",
+        "fichaId": null,
+        "observacao": "Indicação em pNET vem do curso PRO (fluxograma) e do estudo de fase III de Raymond 2011; SBOC 2025 GI não cobre pâncreas.",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "nota": "Não verificado para pNET. Alternativa SUS: APAC de TNE avançado.",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          },
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "FDA/DailyMed Sutent (sunitinibe) set_id 43a4d7f8-48ae-4a63-9108-2fa8e3ea9d9c, seção 2.3",
+          "pagina": null,
+          "trecho": "for pancreatic neuroendocrine tumors (pNET) is 37.5 mg taken orally once daily",
+          "estado": "VERIFICADO"
+        },
+        "fonteIndicacao": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/21 - Aula 21 - Tumores Neuroendócrinos- Tratamento Sistêmico.pdf",
+          "pagina": 17,
+          "trecho": "11,4 x 5,5 meses",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "id": "net-cabozantinibe",
+        "nome": "Cabozantinibe",
+        "cenario": "net_bem_diferenciado_pretratado_pancreatico_ou_extrapancreatico",
+        "linha": "após SSA e ≥ 1 linha",
+        "drogas": [
+          {
+            "droga": "Cabozantinibe",
+            "dose": 60,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": "jejum (bula); suspender 3 semanas antes de cirurgia"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "CYP3A4 (INAT-23).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Sem aprovação Anvisa para TNE (SBOC 2025). Alternativa SUS: APAC de TNE avançado.",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+            "pagina": 14,
+            "trecho": "não está aprovado pela Anvisa para esta indicação",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "cabozantinibe na dose de 60 mg",
+          "estado": "VERIFICADO"
+        },
+        "fonteDose": {
+          "tipo": "BULA",
+          "referencia": "FDA/DailyMed Cabometyx (cabozantinibe) set_id 3850cce2-6137-42e5-a792-d318c4a4b3b5, seção 2.2",
+          "pagina": null,
+          "trecho": "DTC, pNET, epNET",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "net-captem",
+        "nome": "Capecitabina + temozolamida (CAPTEM)",
+        "cenario": "net_agressivo_ou_pnet",
+        "linha": "variável",
+        "drogas": [],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "DPD antes de capecitabina.",
+        "fichaId": null,
+        "pendencia": "SEM_FONTE: SBOC e curso citam o esquema (TR 30%; E2211) sem dose.",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020117",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO APUDOMA/TUMOR NEUROENDÓCRINO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Temozolamida + capecitabina: TR 30%",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "net-capox",
+        "nome": "Capecitabina + oxaliplatina (TNE)",
+        "cenario": "net_politratado",
+        "linha": "linhas posteriores",
+        "drogas": [],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "DPD antes de capecitabina.",
+        "fichaId": null,
+        "pendencia": "SEM_FONTE: dose não informada no contexto de TNE; doses do colorretal não são transferidas.",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020117",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO APUDOMA/TUMOR NEUROENDÓCRINO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 13,
+          "trecho": "capecitabina combinada a oxaliplatina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "net-temozolamida",
+        "nome": "Temozolamida isolada",
+        "cenario": "net_pulmonar_agressivo",
+        "linha": "variável",
+        "drogas": [],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "pendencia": "SEM_FONTE: dose não informada.",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020117",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO APUDOMA/TUMOR NEUROENDÓCRINO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Temozolamida isolada: TR 14%",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "net-platina-etoposideo-cne",
+        "nome": "Platina + etoposídeo (carcinoma neuroendócrino pouco diferenciado)",
+        "cenario": "carcinoma_neuroendocrino_G3",
+        "linha": "1ª linha",
+        "drogas": [],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "pendencia": "SEM_FONTE: dose não informada nas fontes de TNE; não transferir do pulmão pequenas células.",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020117",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO APUDOMA/TUMOR NEUROENDÓCRINO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/21 - Aula 21 - Tumores Neuroendócrinos- Tratamento Sistêmico.pdf",
+          "pagina": 6,
+          "trecho": "Platina + Etoposídeo",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "id": "net-ssa-pulmonar",
+        "nome": "Análogo de somatostatina em TNE pulmonar SSTR2+",
+        "cenario": "net_pulmonar_metastatico_SSTR2_positivo",
+        "linha": "1ª linha",
+        "drogas": [],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "pendencia": "SEM_FONTE: SBOC pulmonar não traz dose; bula da lanreotida é para GEP-NET (não transferir).",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "nota": "Não verificado. Alternativa SUS: APAC de TNE avançado.",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          },
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "nos casos com expressão de SSTR2 através de octreoscan ou PET/CT-Ga 68",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [],
+    "radioterapiaNota": "PRRT (Lu-177) listada em protocolos; RT externa não abordada pelas fontes.",
+    "cirurgia": [
+      {
+        "procedimento": "Ressecção endoscópica (gástrico)",
+        "quando": "< 2 cm com hipergastrinemia (tipos I–II; tipo III se < 1 cm)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 9,
+          "trecho": "Ressecção endoscópica: lesões < 2 cm com hipergastrinemia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Duodenopancreatectomia",
+        "quando": "TNE duodenal (escolha)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 9,
+          "trecho": "Duodenopancreatectomia: tratamento de escolha.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Enterectomia + linfadenectomia regional",
+        "quando": "intestino delgado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 9,
+          "trecho": "Enterectomia + linfadenectomia regional.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Apendicectomia / hemicolectomia direita",
+        "quando": "< 2 cm: apendicectomia; > 2 cm ou > 1 cm com fatores desfavoráveis: hemicolectomia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 9,
+          "trecho": "Hemicolectomia direita: lesões > 2 cm ou >1 cm com características",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Colectomia + linfadenectomia",
+        "quando": "cólon",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 9,
+          "trecho": "Colectomia + linfadenectomia.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Ressecção local (reto)",
+        "quando": "< 1 cm; 1–2 cm avaliar camada muscular/linfonodos; > 2 cm cirurgia convencional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 9,
+          "trecho": "Ressecção local: lesões < 1 cm.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Pancreatectomia (GDP/corpo-caudal) ou enucleação",
+        "quando": "pNET funcionante ou ≥ 2 cm (curso PRO)",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/20 - Aula 20 - Tumores Neuroendócrinos- Conceitos Iniciais.pdf",
+          "pagina": 20,
+          "trecho": "Funcionantes ou ≥2 cm",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "procedimento": "Lobectomia/segmentectomia com dissecção linfonodal",
+        "quando": "TNE pulmonar localizado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "o tratamento cirúrgico de escolha é lobectomia ou segmentectomia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Transplante hepático",
+        "quando": "< 55 anos, bem diferenciado (Ki-67 < 10%), primário ressecado, só fígado, estável ≥ 6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 11,
+          "trecho": "incluindo pacientes jovens (< 55 anos) com tumores bem diferenciados",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "SSTR2 positivo + progressão a SSA (GEP-NET)",
+        "opcao": "Lu-177 DOTATATO + octreotida",
+        "evidencia": "NE alto/FR forte",
+        "sus": "não verificado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 13,
+          "trecho": "Radioisótopo Lutécio–177 após progressão com análogo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "TNE pulmonar sem SSTR2 ou progressão a SSA",
+        "opcao": "everolimo",
+        "evidencia": "NE alto/FR forte",
+        "sus": "não verificado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "está recomendado o uso de everolimo, baseado no estudo Radiant-4",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "Pré-tratado (SSA ± everolimo)",
+        "opcao": "cabozantinibe",
+        "evidencia": "NE alto/FR forte (CABINET)",
+        "sus": "sem aprovação Anvisa",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "configurando uma opção terapêutica em linhas subsequentes",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": null,
+      "riscoNeutropeniaFebril": null,
+      "pendencia": "SEM_FONTE: emetogenicidade por esquema.",
+      "outros": [
+        "Funcionante: SSA e controle da síndrome carcinoide antes de qualquer procedimento (prevenção de crise carcinoide).",
+        "Cardiopatia carcinoide contraindica terapias dirigidas ao fígado.",
+        "Everolimo: infecções graves em até 20%; reduzir para 5 mg/dia já em G2.",
+        "PRRT: aminoácidos EV, hemograma (risco de neoplasia mieloide < 2%) e função renal."
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+        "pagina": 11,
+        "trecho": "pacientes com cardiopatia carcinoide tem contraindicação a terapias direcionadas ao fígado",
+        "estado": "VERIFICADO"
+      },
+      "fontesAdicionais": [
+        {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 14,
+          "trecho": "infecções graves em até 20% dos casos",
+          "estado": "VERIFICADO"
+        },
+        {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/21 - Aula 21 - Tumores Neuroendócrinos- Tratamento Sistêmico.pdf",
+          "pagina": 29,
+          "trecho": "Acompanhar hemograma para citopenias – risco mielodisplasia < 2%",
+          "estado": "INFERIDO"
+        }
+      ]
+    },
+    "ensaios": [
+      {
+        "nome": "PROMID",
+        "nct": "NCT00171873",
+        "nctEstado": "VERIFICADO",
+        "populacao": "TNE midgut metastático",
+        "bracos": "octreotida LAR × placebo",
+        "desfecho": "TTP",
+        "resultado": "14,3 × 6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 13,
+          "trecho": "Promid: 14,3 versus 6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CLARINET",
+        "nct": "NCT00353496",
+        "nctEstado": "VERIFICADO",
+        "populacao": "GEP-NET não funcionante",
+        "bracos": "lanreotida × placebo",
+        "desfecho": "SLP",
+        "resultado": "não atingida × 18 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 13,
+          "trecho": "Clarinet: SLP mediana não atingida versus 18 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "RADIANT-3",
+        "nct": "NCT00510068",
+        "nctEstado": "VERIFICADO",
+        "populacao": "pNET progressivo",
+        "bracos": "everolimo × placebo",
+        "desfecho": "SLP",
+        "resultado": "11,0 × 4,6 meses (curso)",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/21 - Aula 21 - Tumores Neuroendócrinos- Tratamento Sistêmico.pdf",
+          "pagina": 15,
+          "trecho": "11,0 x 4,6 meses",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "nome": "RADIANT-4",
+        "nct": "NCT01524783",
+        "nctEstado": "VERIFICADO",
+        "populacao": "TNE não funcionante GI/pulmão",
+        "bracos": "everolimo × placebo",
+        "desfecho": "SLP",
+        "resultado": "11 × 3,9 meses; HR 0,48 (SBOC pulmão) — SBOC GI 2025 traz HR 0,73 (ver conflitos)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "(11 versus 3,9 meses; HR 0,48)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "NETTER-1",
+        "nct": "NCT01578239",
+        "nctEstado": "VERIFICADO",
+        "populacao": "midgut SSTR+ refratário a octreotida 30 mg",
+        "bracos": "Lu-177 + octreotida 30 × octreotida 60 mg",
+        "desfecho": "SLP",
+        "resultado": "redução de 79% no risco de progressão",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 14,
+          "trecho": "redução de 79% no risco de progressão de doença",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "NETTER-2",
+        "nct": "NCT03972488",
+        "nctEstado": "VERIFICADO",
+        "populacao": "GEP-NET G2–G3 1ª linha",
+        "bracos": "Lu-177 + octreotida × octreotida 60 mg",
+        "desfecho": "SLP",
+        "resultado": "22,8 × 8,5 meses (curso); SBOC GI traz 14,3 × 8,5 (ver conflitos)",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/21 - Aula 21 - Tumores Neuroendócrinos- Tratamento Sistêmico.pdf",
+          "pagina": 28,
+          "trecho": "Lu177-DOTATATE 22,8 meses HR 0,27",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "nome": "CABINET (Alliance A021602)",
+        "nct": "NCT03375320",
+        "nctEstado": "VERIFICADO",
+        "populacao": "TNE pancreático e extrapancreático pré-tratado",
+        "bracos": "cabozantinibe 60 mg × placebo",
+        "desfecho": "SLP",
+        "resultado": "extrapancreático 8,4 × 3,9 meses (HR 0,38)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "cabozantinibe na dose de 60 mg",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "E2211",
+        "nct": "NCT01824875",
+        "nctEstado": "VERIFICADO",
+        "populacao": "pNET avançado",
+        "bracos": "temozolamida ± capecitabina",
+        "desfecho": "SLP",
+        "resultado": "23,2 × 15,1 meses (curso)",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/21 - Aula 21 - Tumores Neuroendócrinos- Tratamento Sistêmico.pdf",
+          "pagina": 23,
+          "trecho": "(ganhou SLP 23,2 x 15,1 m) 39,7% 58,7 m",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "nome": "SPINET",
+        "nct": "NCT02683941",
+        "nctEstado": "VERIFICADO",
+        "populacao": "TNE pulmonar SSTR2+",
+        "bracos": "lanreotida × placebo",
+        "desfecho": "SLP",
+        "resultado": "negativo (16,6 × 13,6 meses)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "O estudo Spinet avaliou o uso de lanreotide em tumores carcinoides",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "GI ressecado",
+        "exames": [
+          "TC_ABDOMEN_SUPERIOR",
+          "RM_ABDOMEN_SUPERIOR"
+        ],
+        "periodicidade": "TC ou RM de abdome 3–12 meses após a ressecção; depois a cada 6–12 meses até 10 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 16,
+          "trecho": "a cada 6 a 12 meses até completar 10 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Apêndice < 2 cm ou reto < 1 cm ressecados",
+        "exames": [],
+        "periodicidade": "sem seguimento",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 16,
+          "trecho": "apêndice com menos de 2 cm ou de reto com menos de 1 cm",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Reto 1–2 cm",
+        "exames": [
+          "COLONOSCOPIA",
+          "RM_PELVE"
+        ],
+        "periodicidade": "proctoscopia + RM de pelve (ou USG endorretal) 6–12 meses após; depois se indicado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 16,
+          "trecho": "devem ser avaliados com proctoscopia e RM de pelve ou USG endorretal",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Gástrico com hipergastrinemia",
+        "exames": [
+          "EDA"
+        ],
+        "periodicidade": "semestral por 3 anos; depois anual",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 16,
+          "trecho": "EDA semestralmente por 3 anos e, após, anualmente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Doença metastática",
+        "exames": [
+          "TC_ABDOMEN_SUPERIOR",
+          "RM_ABDOMEN_SUPERIOR"
+        ],
+        "periodicidade": "TC ou RM a cada 3–6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 16,
+          "trecho": "TC ou RM a cada 3 a 6 meses",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ACIDO_5HIAA",
+      "ANATOMOPATOLOGICO",
+      "COLONOSCOPIA",
+      "ECOCARDIOGRAMA",
+      "EDA",
+      "IMUNOHISTOQUIMICA",
+      "OCTREOSCAN",
+      "PET_CT_FDG",
+      "PET_DOTATATE",
+      "RM_ABDOMEN_SUPERIOR",
+      "RM_PELVE",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "TC_TORAX"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "everolimo, sunitinibe, cabozantinibe",
+        "com": "inibidores/indutores de CYP3A4",
+        "ref": "INAT-23"
+      },
+      {
+        "droga": "sunitinibe",
+        "com": "outros prolongadores de QT",
+        "ref": "INAT-11"
+      },
+      {
+        "droga": "capecitabina (CAPTEM/CAPOX)",
+        "com": "brivudina (interação fatal)",
+        "ref": "INAT-04"
+      },
+      {
+        "droga": "capecitabina",
+        "com": "deficiência de DPD",
+        "ref": "CI-10"
+      },
+      {
+        "droga": "everolimo/imunossupressores",
+        "com": "vacinas vivas",
+        "ref": "INAT-29"
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "TKI (por molécula)",
+        "termosCTCAEv6": [
+          "Mucositis oral",
+          "Hypertension",
+          "Diarrhea",
+          "Pneumonitis"
+        ]
+      },
+      {
+        "classe": "fluoropirimidina",
+        "termosCTCAEv6": [
+          "Diarrhea",
+          "Palmar-plantar erythrodysesthesia syndrome"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "octreotida de ação curta para sintomas (bula Lutathera)",
+      "antiemético antes da solução de aminoácidos do PRRT",
+      "bochecho/cuidado de estomatite (everolimo)"
+    ],
+    "orientacoes": [
+      "sinais-alarme-consolidado",
+      "dieta-por-toxicidade"
+    ],
+    "encaminhamentos": [
+      "cirurgia-oncologica",
+      "medicina nuclear (PET-Ga68/PRRT)",
+      "oncogenetica (suspeita de NEM1/VHL/NF1)",
+      "cardiologia (cardiopatia carcinoide)",
+      "nutricao"
+    ],
+    "laudos": [
+      "APAC de quimioterapia de TNE avançado (SIGTAP 0304020117)",
+      "judicializacao-drogas (octreotida LAR, everolimo, PRRT)"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "GEP-NET bem diferenciado irressecável com SSTR2 positivo (PET-DOTATATE)",
+        "y": "progressão a análogo de somatostatina",
+        "z": "Lu-177 DOTATATO 7,4 GBq a cada 8 semanas × 4 + octreotida LAR",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 13,
+          "trecho": "Radioisótopo Lutécio–177 após progressão com análogo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "TNE funcionante (síndrome carcinoide)",
+        "y": "procedimento planejado (cirurgia, embolização, ablação)",
+        "z": "SSA e síndrome controlada antes do procedimento",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 10,
+          "trecho": "estarem com síndrome carcinoide controlada ANTES de qualquer procedimento",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "TNE de intestino delgado ou primário desconhecido",
+        "y": "5-HIAA urinário acima do normal",
+        "z": "ecocardiograma (cardiopatia carcinoide)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 7,
+          "trecho": "Se 5-HIAA acima do valor superior da normalidade: ecocardiograma",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Paciente em everolimo",
+        "y": "evento adverso grau 2",
+        "z": "reduzir para 5 mg/dia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 14,
+          "trecho": "redução de dose para 5 mg/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "TNE GI G1 assintomático, 5-HIAA normal, indolente",
+        "y": "doença irressecável",
+        "z": "vigilância ativa com reavaliação a cada 3–6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+          "pagina": 13,
+          "trecho": "seguimento clínico em intervalos curtos (3 a 6 meses)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "TNE pulmonar metastático",
+        "y": "sem SSTR2 ou progressão a SSA",
+        "z": "everolimo 10 mg/dia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "está recomendado o uso de everolimo, baseado no estudo Radiant-4",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Indicação de PRRT",
+        "y": "sem comprovação de SSTR2",
+        "z": "não indicar; comprovar por octreoscan ou PET-Ga68",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "O uso de PRRT com 177Lu-DOTATATE pode ser considerado em TNE pulmonares SSTR-positivos",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    "Fonte SBOC GEP-NET disponível é a edição 2025 (arquivo 'Neuroendócrino pulmão .pdf' contém a diretriz GI); buscar SBOC 2026 GI e diretriz de TNE pancreático.",
+    "SEM_FONTE: doses de CAPTEM, CAPOX, temozolamida, platina + etoposídeo, interferon e SSA no TNE pulmonar.",
+    "SEM_FONTE: seguimento do TNE pulmonar (SBOC 2026 não traz seção).",
+    "SEM_FONTE: emetogenicidade por esquema.",
+    "SUS: confirmar no DOU a Portaria SECTICS/MS nº 5/2024; verificar CONITEC para everolimo, sunitinibe e Lu-177.",
+    "pNET: indicação de sunitinibe/everolimo/CAPTEM apoiada no curso PRO + bulas (INFERIDO); validar com ENETS/NCCN."
+  ],
+  "conflitos": [
+    {
+      "tema": "RADIANT-4 — HR da SLP",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+        "pagina": 14,
+        "trecho": "(HR 0,73; p=0,07)",
+        "estado": "CONFLITANTE"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 10,
+        "trecho": "(11 versus 3,9 meses; HR 0,48)",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Usar HR 0,48 (SBOC 2026 e publicação original); o 0,73 da SBOC 2025 parece ser o HR de SG interina."
+    },
+    {
+      "tema": "NETTER-2 — SLP do braço Lu-177",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+        "pagina": 14,
+        "trecho": "A mediana de SLP foi de 14,3 versus 8,5 meses",
+        "estado": "CONFLITANTE"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/21 - Aula 21 - Tumores Neuroendócrinos- Tratamento Sistêmico.pdf",
+        "pagina": 28,
+        "trecho": "Lu177-DOTATATE 22,8 meses HR 0,27",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Sem impacto em dose; registrar 22,8 × 8,5 meses (publicação Lancet 2024) e corrigir na revisão da SBOC."
+    },
+    {
+      "tema": "RADIANT-3/RADIANT-4 — números no próprio curso",
+      "fonteA": {
+        "tipo": "CURSO",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/21 - Aula 21 - Tumores Neuroendócrinos- Tratamento Sistêmico.pdf",
+        "pagina": 9,
+        "trecho": "11,4 x 5,4 meses",
+        "estado": "INFERIDO"
+      },
+      "fonteADetalhe": "Tabela p.9 (RADIANT-3 11,4 × 5,4; RADIANT-4 11,0 × 3,9)",
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/21 - Aula 21 - Tumores Neuroendócrinos- Tratamento Sistêmico.pdf",
+        "pagina": 15,
+        "trecho": "11,0 x 4,6 meses",
+        "estado": "INFERIDO"
+      },
+      "fonteBDetalhe": "Tabela p.15 (RADIANT-3 11,0 × 4,6; RADIANT-4 14,0 × 5,5)",
+      "escolhaSeguranca": "Usar RADIANT-3 11,0 × 4,6 e RADIANT-4 11 × 3,9 (coincidem com SBOC 2026)."
+    },
+    {
+      "tema": "Definição de carcinoma neuroendócrino",
+      "fonteA": {
+        "tipo": "CURSO",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/21 - Aula 21 - Tumores Neuroendócrinos- Tratamento Sistêmico.pdf",
+        "pagina": 37,
+        "trecho": "Ki67 > 55%",
+        "estado": "INFERIDO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/20 - Aula 20 - Tumores Neuroendócrinos- Conceitos Iniciais.pdf",
+        "pagina": 6,
+        "trecho": "<3% 3 a 20% > 20%",
+        "estado": "INFERIDO"
+      },
+      "fonteBDetalhe": "OMS: CNE é pouco diferenciado (morfologia), em geral Ki-67 > 20%; 55% é corte de conduta em TNE G3",
+      "escolhaSeguranca": "Definir CNE pela morfologia pouco diferenciada, não por Ki-67 > 55%."
+    },
+    {
+      "tema": "Octreotida LAR — dose",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Neuroendócrino pulmão .pdf [conteúdo real: Diretriz SBOC 2025 — Tumores neuroendócrinos bem diferenciados: gastrointestinal]",
+        "pagina": 13,
+        "trecho": "octreotide LAR 30 mg ou lanreotide 120 mg a cada 28 dias",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "FDA/DailyMed Sandostatin LAR Depot (octreotida) set_id d0b7fe9e-7000-4b79-ba3b-291ce92c14f9, seção 2",
+        "pagina": null,
+        "trecho": "administered intramuscularly (IM) in the gluteal region at 4-week intervals",
+        "estado": "VERIFICADO"
+      },
+      "fonteBDetalhe": "Bula FDA para sintomas de carcinoide inicia com 20 mg; 30 mg é a dose antitumoral do PROMID",
+      "escolhaSeguranca": "30 mg a cada 28 dias para controle tumoral (SBOC); titulação para sintomas conforme bula."
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (agente curador, Opus 5.5) sob demanda do Dr. Silas Negrão",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC 2025 TNE bem diferenciados GI (arquivo 'Neuroendócrino pulmão .pdf', pp. 1–16)",
+      "SBOC 2026 TNE pulmonares v3 (pp. 1–10)",
+      "Onco PRO 2026 aulas 20–21",
+      "Bulas FDA: Lutathera, Somatuline Depot, Sandostatin LAR, Afinitor, Sutent, Cabometyx",
+      "ClinicalTrials.gov API v2 (9 NCT verificados)",
+      "CONITEC Relatório 876/Portaria SECTICS 5/2024 (via pareceres)",
+      "SIGTAP 2026-09"
+    ],
+    "aprovacaoClinica": null
+  }
+}

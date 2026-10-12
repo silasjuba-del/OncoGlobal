@@ -1,0 +1,2181 @@
+{
+  "header": {
+    "id": "pack-sarcomas",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "SBOC 2026 — Sarcomas de partes moles v6 + Sarcomas ósseos v5",
+      "trecho": "apoiar as decisões clínicas no tratamento de sarcomas de partes moles",
+      "edicao": "v6 2026 (partes moles) / v5 2026 (ósseos)"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Sarcomas de partes moles e sarcomas ósseos (adulto)",
+    "cid10": [
+      "C49",
+      "C48.0",
+      "C40",
+      "C41"
+    ],
+    "subtipos": [
+      "partes moles: pleomórfico indiferenciado, lipossarcoma mixoide, sinovial, MPNST, leiomiossarcoma, mixofibrossarcoma, epitelioide, angiossarcoma, alveolar, tumor fibroso solitário, DFSP, PEComa",
+      "ósseos: osteossarcoma, sarcoma de Ewing, condrossarcoma, cordoma, tumor de células gigantes, pleomórfico indiferenciado ósseo"
+    ],
+    "cenarios": [
+      "partes_moles_localizado",
+      "partes_moles_avancado",
+      "partes_moles_histologias_especiais",
+      "osteossarcoma_localizado",
+      "osteossarcoma_recorrente",
+      "ewing_localizado_metastatico",
+      "ewing_recorrente",
+      "condrossarcoma",
+      "cordoma",
+      "tcg_osseo"
+    ],
+    "limitesAplicabilidade": "Exclui GIST, sarcomas uterinos e Kaposi (outros packs). Doses pediátricas não cobertas. Tratamento deve ocorrer em centro de referência."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "indicacao": "universal",
+        "catalogoId": null,
+        "rotulo": "USG da área suspeita (partes moles)",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "quando": "Avaliação inicial de massa de partes moles",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Avaliação inicial com USG da área suspeita de tumor de partes moles;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": null,
+        "rotulo": "RM do segmento acometido (extremidade/osso)",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "quando": "Suspeita de sarcoma de partes moles de extremidade; todo sarcoma ósseo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Em caso de suspeita de sarcomas de partes moles de extremidades",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": null,
+        "rotulo": "RX do sítio primário em 2 planos",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "quando": "Sarcoma ósseo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "RX do sítio primário em 2 planos;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "quando": "Partes moles >5 cm, profundo, grau intermediário/alto; retroperitônio; todo sarcoma ósseo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Em tumores > 5 cm, profundos, intermediário a alto grau realizar TC de tórax;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": "RX_TORAX_PA_PERFIL",
+        "rotulo": "RX de tórax",
+        "quando": "Partes moles <5 cm, superficial, baixo grau",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Em tumores < 5 cm, superficiais e baixo grau realizar RX de tórax;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome",
+        "quando": "Retroperitônio; lipossarcoma mixoide alto grau, leiomiossarcoma, epitelioide, angiossarcoma",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Nos sarcomas de retroperitônio, realizar TC de tórax, abdome e pelve com",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve",
+        "quando": "Retroperitônio e histologias de risco",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Nos sarcomas de retroperitônio, realizar TC de tórax, abdome e pelve com",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": "RM_COLUNA_TORACICA",
+        "rotulo": "RM de coluna total (torácica; associar cervical e lombar)",
+        "quando": "Lipossarcoma mixoide de alto grau",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "A realização de RM de coluna total deve ser considerada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": "RM_CRANIO",
+        "rotulo": "RM de crânio",
+        "quando": "Angiossarcoma, sarcoma alveolar de partes moles, células claras",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "considerar RM de crânio no estadiamento;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": "CINTILOGRAFIA_OSSEA",
+        "rotulo": "Cintilografia óssea",
+        "quando": "Osteossarcoma e sarcoma de Ewing",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Cintilografia (Osteossarcoma e Sarcoma de Ewing);",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT FDG",
+        "quando": "Sarcoma de Ewing (preferido à cintilografia); sem consenso em partes moles",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "PET/CT, quando disponível (Sarcoma de Ewing).",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "core",
+          "quando": "Padrão: múltiplos fragmentos com agulha 14G-16G guiada por imagem (≥2), trajeto planejado pelo cirurgião e ressecado na cirurgia",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "Múltiplas biópsias percutâneas com agulha grossa com agulhas 14G a 16G.",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "excisional",
+          "quando": "Lesão <3 cm superficial (acima da fáscia)",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "Biópsia excisional para lesões menores que 3,0 cm",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "PAAF",
+          "quando": "NÃO recomendada para patologia tecidual",
+          "catalogoId": null,
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 9,
+            "trecho": "A aspiração por agulha fina não é recomendada para patologia tecidual;",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "core",
+          "quando": "Sarcoma ósseo: core guiado por imagem pela equipe que fará a ressecção",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 8,
+            "trecho": "uma biópsia com agulha grossa, realizada sob orientação de imagem,",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "outra",
+          "quando": "Ewing: biópsia/aspirado de medula óssea não obrigatório se PET/CT realizado",
+          "catalogoId": "BIOPSIA_MEDULA",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 13,
+            "trecho": "Biópsias e aspirados de medula óssea (de locais distantes das lesões metas -",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "tipo histológico (OMS 2020)",
+        "grau (G1-G3)",
+        "tamanho tumoral (ósseo: 3 dimensões em mm)",
+        "margens R0/R1/R2 e distância em mm",
+        "percentual de tumor viável/necrose pós-QT (Picci/Huvos)",
+        "revisão por patologista de centro de referência"
+      ],
+      "molecular": [
+        {
+          "alvo": "Fusão EWSR1 (EWSR1-FLI1, EWSR1-ERG)",
+          "metodo": "FISH/CISH",
+          "catalogoId": "FISH",
+          "quandoPedir": "universal",
+          "cenario": "Suspeita de sarcoma de Ewing / células redondas",
+          "consequencia": "Confirmação obrigatória; distingue de CIC, BCOR e EWSR1 não-ETS",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 13,
+            "trecho": "A confirmação molecular é obrigatória para a distinção entre Sarcoma de Ewing",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Painel histotipo-específico (hibridização in situ/sequenciamento)",
+          "metodo": "FISH/CISH",
+          "catalogoId": "FISH",
+          "quandoPedir": "condicional",
+          "cenario": "Partes moles, por patologista experiente em centro de referência",
+          "consequencia": "Classificação histológica",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 9,
+            "trecho": "técnicas moleculares convencionais como hibridização in situ e sequenciamento",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Painel IHQ diagnóstico",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "Todos",
+          "consequencia": "Diagnóstico diferencial",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 9,
+            "trecho": "Avaliação histopatológica e imuno-histoquímica além de técnicas moleculares",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Fusão NTRK",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "Partes moles avançado",
+          "consequencia": "Larotrectinibe",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 14,
+            "trecho": "Fusão NTRK Larotrectinibe",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "FISH",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "MSI-H/dMMR/TMB >10",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "Osteossarcoma recorrente",
+          "consequencia": "Pembrolizumabe",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 12,
+            "trecho": "Pacientes MSI-H/dMMR/TMB>10",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "TP53 germinativo (Li-Fraumeni) e outros genes",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "<46 anos, AYA 15-39, múltiplos primários, sarcoma pós-RT, história familiar",
+          "consequencia": "Encaminhamento oncogenético com aconselhamento",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 8,
+            "trecho": "Sarcoma diagnosticado antes dos 46 anos;",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª (partes moles e ósseo)",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 16,
+      "trecho": "AJCC cancer staging manual. Eight edition",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "cenario": "partes moles >5 cm/profundo/alto grau; ósseo",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "TC e RX de tórax;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FOSFATASE_ALCALINA",
+        "rotulo": "Fosfatase alcalina",
+        "cenario": "Osteossarcoma e Ewing (basal)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "deve incluir níveis de fosfatase alcalina e DHL",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "DHL",
+        "rotulo": "DHL",
+        "cenario": "Osteossarcoma e Ewing (basal)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "deve incluir níveis de fosfatase alcalina e DHL",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "Partes moles alto grau, profundo, >5 cm",
+        "conduta": "Cirurgia (margens 1-2 cm) + RT pré ou pós-operatória; QT peri-operatória em discussão multidisciplinar",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "A RT pré-operatória ou adjuvante está indicada nos casos de sarcoma de alto",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Partes moles avançado",
+        "conduta": "Time multidisciplinar; doxorrubicina base de 1ª linha; combinação com ifosfamida se sintomático/alto volume e KPS >70%",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "A combinação de ifosfamida e doxorrubicina deve ser priorizada em pacientes",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Osteossarcoma alto grau",
+        "conduta": "QT perioperatória + cirurgia; MAP até 25 anos, cisplatina + doxorrubicina acima de 25",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "O tratamento curativo do osteossarcoma de alto grau consiste em QT e",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Sarcoma de Ewing",
+        "conduta": "VDC/IE alternado (até 9 ciclos de indução), controle local, consolidação: 14-17 ciclos totais",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "A duração geral do tratamento é de 14 a 17 ciclos de QT alternados",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Condrossarcoma convencional",
+        "conduta": "Cirurgia com margens amplas (grau II-III, pelve, axial); curetagem em atípico de ossos longos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Os condrossarcomas de grau superior (graus II-III) e todos os condrossarcomas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "TCG ósseo irressecável/metastático",
+        "conduta": "Denosumabe é o padrão",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Denosumabe é o tratamento padrão em TCG irressecável ou metastá -",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "FOSFATASE_ALCALINA",
+          "uso": "Basal em osteossarcoma e Ewing",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "deve incluir níveis de fosfatase alcalina e DHL",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "DHL",
+          "uso": "Basal em osteossarcoma e Ewing",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "deve incluir níveis de fosfatase alcalina e DHL",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "PET/CT no estadiamento de partes moles (sem consenso)"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "Partes moles localizado",
+        "intencao": "curativa",
+        "modalidades": [
+          "ressecção 3D em centro de referência, margens 1-2 cm",
+          "ampliação se margem comprometida",
+          "RT pré ou pós-operatória",
+          "QT peri-operatória selecionada"
+        ],
+        "criterio": "Alto grau, profundo, >5 cm para RT",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "preferencialmente com margens de 1 a 2 cm de tecido normal",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Retroperitônio",
+        "intencao": "curativa",
+        "modalidades": [
+          "ressecção em bloco",
+          "RT neoadjuvante sem benefício comprovado (discussão)"
+        ],
+        "criterio": "Heterogeneidade",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Nos sarcomas de retroperitônio, a recomendação é de discussão multidisciplinar",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Partes moles — metástase pulmonar metacrônica",
+        "intencao": "paliativa",
+        "modalidades": [
+          "metastasectomia"
+        ],
+        "criterio": "Primário controlado, curso indolente, SLR >12 meses, ressecção completa possível, sem doença extrapulmonar",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Sobrevida livre de recorrência maior do que 12 meses;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Osteossarcoma metastático primário",
+        "intencao": "curativa",
+        "modalidades": [
+          "mesmos princípios do localizado",
+          "metastasectomia pulmonar"
+        ],
+        "criterio": "Discussão multidisciplinar",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Pacientes com osteossarcoma metastático primário devem ser tratados com",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Ewing — controle local",
+        "intencao": "curativa",
+        "modalidades": [
+          "excisão completa preferida",
+          "RT definitiva se cirurgia inviável/mórbida",
+          "RT adjuvante (volume >200 mL, má resposta, margens inadequadas, pelve não sacral)"
+        ],
+        "criterio": "Multidisciplinar",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "A excisão cirúrgica completa, quando viável, é considerada a melhor modalidade",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Cordoma",
+        "intencao": "curativa",
+        "modalidades": [
+          "ressecção em bloco R0",
+          "RT adjuvante (base de crânio, cervical; sacral R1)",
+          "imatinibe na doença avançada"
+        ],
+        "criterio": "Localização",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "A ressecção em bloco R0 é o tratamento recomendado da doença primária locali-",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "sarcomas-pm-ai-d1d5-periop",
+        "nome": "Doxorrubicina + ifosfamida D1-D5 (neo/adjuvante)",
+        "cenario": "neoadjuvante ou adjuvante — partes moles (histologias selecionadas)",
+        "linha": "perioperatória",
+        "drogas": [
+          {
+            "droga": "Ifosfamida",
+            "dose": 1800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "SBOC: 1,8 g/m²"
+          },
+          {
+            "droga": "Doxorrubicina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": "G-CSF (fator estimulador de colônias) previsto no esquema SBOC",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Ifosfamida 1,8 g/m² EV D1 a D5 Doxorrubicina 25 mg/m² EV D1 a D3",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Histologias: pleomórfico indiferenciado AG, lipossarcoma mixoide AG, sinovial, MPNST, leiomiossarcoma AG, mixofibrossarcoma AG, epitelioide. Mesna conforme protocolo institucional (sem fonte no pack)."
+      },
+      {
+        "id": "sarcomas-pm-ai-d1d3-periop",
+        "nome": "Doxorrubicina + ifosfamida D1-D3 (neo/adjuvante)",
+        "cenario": "neoadjuvante ou adjuvante — partes moles (histologias selecionadas)",
+        "linha": "perioperatória",
+        "drogas": [
+          {
+            "droga": "Ifosfamida",
+            "dose": 3000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": "SBOC: 3,0 g/m²"
+          },
+          {
+            "droga": "Doxorrubicina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": "G-CSF (fator estimulador de colônias) previsto no esquema SBOC",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Ifosfamida 3,0 g/m² EV D1 a D3 Doxorrubicina 25 mg/m² EV D1 a D3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-pm-ei-periop",
+        "nome": "Epirrubicina + ifosfamida (neo/adjuvante)",
+        "cenario": "neoadjuvante ou adjuvante — partes moles (histologias selecionadas)",
+        "linha": "perioperatória",
+        "drogas": [
+          {
+            "droga": "Ifosfamida",
+            "dose": 3000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": "SBOC: 3,0 g/m²"
+          },
+          {
+            "droga": "Epirrubicina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D2",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": "G-CSF (fator estimulador de colônias) previsto no esquema SBOC",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Ifosfamida 3,0 g/m² EV D1 a D3 Epirrubicina 60 mg/m² EV D1 e D2",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-pm-ai-paliativo",
+        "nome": "Doxorrubicina + ifosfamida (paliativo)",
+        "cenario": "paliativo — partes moles avançado",
+        "linha": "1ª linha (sintomático, alto volume, KPS >70%)",
+        "drogas": [
+          {
+            "droga": "Ifosfamida",
+            "dose": 3000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": "SBOC: 3,0 g/m²"
+          },
+          {
+            "droga": "Doxorrubicina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "G-CSF (fator estimulador de colônias) previsto no esquema SBOC",
+        "ajusteObrigatorio": "Dose mínima por ciclo: doxorrubicina 60 mg/m² e ifosfamida 6 g/m² (SBOC p.12). Respeitar dose acumulada de antraciclina.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Ifosfamida 3,0 g/m² EV D1 a D3 Doxorrubicina 25 mg/m² EV D1 a D3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-pm-doxo-dtic",
+        "nome": "Doxorrubicina + dacarbazina",
+        "cenario": "paliativo — partes moles avançado (preferência em leiomiossarcoma)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Doxorrubicina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Dacarbazina",
+            "dose": 750,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC: 750-1.000 mg/m²"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Doxorrubicina 60 mg/m² EV D1 Dacarbazina 750-1.000 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-pm-doxorrubicina",
+        "nome": "Doxorrubicina monoterapia",
+        "cenario": "paliativo — partes moles avançado",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Doxorrubicina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC: 60-75 mg/m²; mínimo 60 mg/m² por ciclo"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Doxorrubicina 60-75 mg/m² EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-pm-doxo-lipossomal",
+        "nome": "Doxorrubicina lipossomal",
+        "cenario": "paliativo — partes moles avançado",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Doxorrubicina lipossomal",
+            "dose": 30,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC: 30-40 mg/m²"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Doxorrubicina lipossomal 30-40 mg/m² EV D1 A cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-pm-ifosfamida",
+        "nome": "Ifosfamida monoterapia",
+        "cenario": "paliativo — partes moles avançado (antraciclina não permitida; sinovial)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Ifosfamida",
+            "dose": 3000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": "SBOC: 3,0 g/m²"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Ifosfamida 3,0 g/m² EV D1 a D3 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-pm-gem-doce",
+        "nome": "Gencitabina + docetaxel",
+        "cenario": "paliativo — partes moles avançado",
+        "linha": "linhas posteriores",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 675,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": "SBOC: 675-900 mg/m²"
+          },
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D8",
+            "observacao": "SBOC: 75-100 mg/m²"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "G-CSF (fator estimulador de colônias) previsto no esquema SBOC",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Gencitabina 675-900 mg/m² EV D1 e D8 Docetaxel 75-100 mg/m² EV D8",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-pm-pazopanibe",
+        "nome": "Pazopanibe",
+        "cenario": "paliativo — partes moles avançado (não lipossarcoma; alveolar, tumor fibroso solitário, angiossarcoma)",
+        "linha": "linhas posteriores",
+        "drogas": [
+          {
+            "droga": "Pazopanibe",
+            "dose": 800,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "contínuo (SBOC: continuamente); ciclo de 28 dias é convenção de registro"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Pazopanibe 800 mg VO 1x/dia Continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-pm-eribulina",
+        "nome": "Eribulina",
+        "cenario": "paliativo — partes moles avançado",
+        "linha": "linhas posteriores",
+        "drogas": [
+          {
+            "droga": "Eribulina",
+            "dose": 1.4,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Eribulina 1,4 mg/m² EV D1 e D8 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-pm-dacarbazina",
+        "nome": "Dacarbazina monoterapia",
+        "cenario": "paliativo — partes moles avançado",
+        "linha": "linhas posteriores",
+        "drogas": [
+          {
+            "droga": "Dacarbazina",
+            "dose": 850,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC: 850-1.800 mg/m²"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Dacarbazina 850-1.800 mg/m² EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-osteo-ap-neoadjuvante",
+        "nome": "Cisplatina + doxorrubicina (osteossarcoma >25 anos) — pré-operatório",
+        "cenario": "neoadjuvante — osteossarcoma, adulto >25 anos",
+        "linha": "perioperatória (fase pré)",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D2",
+            "observacao": ""
+          },
+          {
+            "droga": "Doxorrubicina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Cisplatina 50 mg/m² EV D1 e D2 Doxorrubicina 25 mg/m² EV D1 a D3",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "SBOC: 6 ciclos; na neoadjuvância, 3 antes e 3 após a cirurgia."
+      },
+      {
+        "id": "sarcomas-osteo-ap-adjuvante",
+        "nome": "Cisplatina + doxorrubicina (osteossarcoma >25 anos) — pós-operatório",
+        "cenario": "adjuvante — osteossarcoma, adulto >25 anos",
+        "linha": "perioperatória (fase pós)",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D2",
+            "observacao": ""
+          },
+          {
+            "droga": "Doxorrubicina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Cisplatina 50 mg/m² EV D1 e D2 Doxorrubicina 25 mg/m² EV D1 a D3",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "3 ciclos após neoadjuvância; se adjuvante exclusivo, total de 6 ciclos (SBOC p.12)."
+      },
+      {
+        "id": "sarcomas-osteo-ap-metastatico",
+        "nome": "Cisplatina + doxorrubicina — osteossarcoma metastático 1ª linha",
+        "cenario": "metastático — osteossarcoma, adulto >25 anos",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D2",
+            "observacao": ""
+          },
+          {
+            "droga": "Doxorrubicina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Cisplatina 50 mg/m² EV D1 e D2 Doxorrubicina 25 mg/m² EV D1 a D3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-osteo-map-pre",
+        "nome": "MAP pré-operatório (osteossarcoma <25 anos)",
+        "cenario": "neoadjuvante — osteossarcoma <25 anos",
+        "linha": "perioperatória (fase pré)",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D2 das semanas 0 e 5",
+            "observacao": ""
+          },
+          {
+            "droga": "Doxorrubicina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3 das semanas 0 e 5",
+            "observacao": ""
+          },
+          {
+            "droga": "Metotrexato (alta dose)",
+            "dose": 12000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 das semanas 3, 4, 8 e 9",
+            "observacao": "SBOC: 12 g/m²"
+          }
+        ],
+        "cicloDias": 35,
+        "numeroCiclos": 2,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Metotrexato em alta dose exige resgate com leucovorina, hidratação/alcalinização e dosagem sérica — SEM_FONTE no pack (conferir bula/protocolo institucional). HD-MTX pode ser difícil em adultos.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Cisplatina 60 mg/m² EV D1 e D2 Doxorrubicina 25 mg/m² EV D1 a D3",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "cicloDias 35 = bloco de 5 semanas do cronograma SBOC (semanas 0-9)."
+      },
+      {
+        "id": "sarcomas-osteo-map-pos",
+        "nome": "MAP pós-operatório (osteossarcoma <25 anos)",
+        "cenario": "adjuvante — osteossarcoma <25 anos",
+        "linha": "perioperatória (fase pós)",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D2 das semanas 12 e 17",
+            "observacao": ""
+          },
+          {
+            "droga": "Doxorrubicina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3 das semanas 12, 17, 22 e 27",
+            "observacao": ""
+          },
+          {
+            "droga": "Metotrexato (alta dose)",
+            "dose": 12000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 das semanas 15, 16, 20, 21, 25, 26, 30, 31",
+            "observacao": "SBOC: 12 g/m²"
+          }
+        ],
+        "cicloDias": 35,
+        "numeroCiclos": 4,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Resgate com leucovorina e monitorização de MTX sérico — SEM_FONTE no pack.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Cisplatina + Doxo: semanas 12 e 17",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Sem benefício em modificar o pós-operatório (ifosfamida/etoposídeo) em maus respondedores (SBOC p.10)."
+      },
+      {
+        "id": "sarcomas-osteo-ie-recorrente",
+        "nome": "Ifosfamida + etoposídeo (osteossarcoma recorrente)",
+        "cenario": "recorrente — osteossarcoma",
+        "linha": "recorrência",
+        "drogas": [
+          {
+            "droga": "Ifosfamida",
+            "dose": 1800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "SBOC: 1,8 g/m²"
+          },
+          {
+            "droga": "Etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Ifosfamida 1,8 g/m² EV D1 a D5 Etoposídeo 100 mg/m² EV D1 a D5",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-osteo-ice-recorrente",
+        "nome": "Ifosfamida + etoposídeo + carboplatina (osteossarcoma recorrente)",
+        "cenario": "recorrente — osteossarcoma",
+        "linha": "recorrência",
+        "drogas": [
+          {
+            "droga": "Ifosfamida",
+            "dose": 1800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D4",
+            "observacao": "SBOC: 1,8 g/m²"
+          },
+          {
+            "droga": "Etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D4",
+            "observacao": ""
+          },
+          {
+            "droga": "Carboplatina",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D2",
+            "observacao": "unidade mg/m² conforme SBOC (não AUC)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Ifosfamida 1,8 g/m² EV D1 a D4 Etoposídeo 100 mg/m² EV D1 a D4",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-osteo-gem-doce",
+        "nome": "Gencitabina + docetaxel (osteossarcoma recorrente)",
+        "cenario": "recorrente — osteossarcoma",
+        "linha": "recorrência",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 675,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": "SBOC: 675-900 mg/m²"
+          },
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D8",
+            "observacao": "SBOC: 75-100 mg/m²"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Gencitabina 675-900 mg/m² EV D1 e D8 Docetaxel 75-100 mg/m² EV D8",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-osteo-pembrolizumabe",
+        "nome": "Pembrolizumabe (MSI-H/dMMR/TMB >10)",
+        "cenario": "recorrente — osteossarcoma com MSI-H/dMMR/TMB-H",
+        "linha": "recorrência",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Pembrolizumabe 200 mg EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-ewing-vdc",
+        "nome": "VDC (alternado com IE) — sarcoma de Ewing",
+        "cenario": "Ewing localizado ou metastático — indução/consolidação",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Vincristina",
+            "dose": 2,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Doxorrubicina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Ciclofosfamida",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "Vincristina 2 mg EV D1 Doxorrubicina 75 mg/m² EV D1 Ciclofosfamida 1.200 mg/m²",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "SBOC: a cada 2 ou 3 semanas; dose densa (14 dias) melhora SLE em adultos jovens (NE moderado). Alterna com IE; 14-17 ciclos no total."
+      },
+      {
+        "id": "sarcomas-ewing-ie",
+        "nome": "IE (alternado com VDC) — sarcoma de Ewing",
+        "cenario": "Ewing localizado ou metastático — indução/consolidação",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Ifosfamida",
+            "dose": 1800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "SBOC: 1,8 g/m²"
+          },
+          {
+            "droga": "Etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "Ifosfamida 1,8 g/m² EV D1 a D5 Etoposídeo 100 mg/m² EV D1 a D5",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "A cada 2 ou 3 semanas (SBOC)."
+      },
+      {
+        "id": "sarcomas-ewing-ciclo-topo",
+        "nome": "Ciclofosfamida + topotecano — Ewing recorrente",
+        "cenario": "recorrente — Ewing",
+        "linha": "recorrência",
+        "drogas": [
+          {
+            "droga": "Ciclofosfamida",
+            "dose": 250,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "Topotecano",
+            "dose": 0.75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "Ciclofosfamida 250 mg/m² EV D1 a D5 Topotecano 0,75 mg/m² EV D1 a D5",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-ewing-ifo-altas-doses",
+        "nome": "Ifosfamida em altas doses — Ewing",
+        "cenario": "recorrente — Ewing",
+        "linha": "recorrência",
+        "drogas": [
+          {
+            "droga": "Ifosfamida",
+            "dose": 3000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "SBOC: 3 g/m²"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "Ifosfamida 3 g/m² EV D1 a D5 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-ewing-gem-doce",
+        "nome": "Gencitabina + docetaxel — Ewing",
+        "cenario": "recorrente — Ewing",
+        "linha": "recorrência",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 675,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": ""
+          },
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D8",
+            "observacao": "SBOC: 75-100 mg/m²"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "Gencitabina 675 mg/m² EV D1 e D8 Docetaxel 75-100 mg/m² EV D8",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "Partes moles — RT pré ou pós-operatória (alto grau, profundo, >5 cm)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "nenhuma (QT + RT neoadjuvante factível em extremidades)",
+        "pendencia": "SEM_FONTE",
+        "observacao": "Cirurgia 4-8 semanas após RT neoadjuvante; RT adjuvante 4-8 semanas após cirurgia.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "A RT pré-operatória ou adjuvante está indicada nos casos de sarcoma de alto",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Retroperitônio — RT neoadjuvante (braço do ensaio STRASS; benefício não comprovado)",
+        "doseTotalGy": 50.4,
+        "fracoes": 28,
+        "concomitante": "nenhuma",
+        "observacao": "Dose do ensaio citado na aula PRO; SBOC recomenda discussão por incerteza de benefício.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026/slides-pro-2026/78 - Aula 78 - Sarcomas de Partes Moles",
+          "pagina": 49,
+          "trecho": "Dose 50,4Gy em 28 frações",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "cenario": "Ewing — RT adjuvante (volume >200 mL, má resposta, margens inadequadas)",
+        "doseTotalGy": 45,
+        "fracoes": null,
+        "concomitante": "QT sistêmica do protocolo",
+        "observacao": "SBOC: 45-60 Gy; fracionamento não informado. doseTotalGy registra o limite inferior da faixa.",
+        "pendencia": "FRACIONAMENTO_SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "A dose de RT adjuvante (45-60 Gy) reduz significativamente a recorrência local",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Osteossarcoma irressecável / condrossarcoma de base de crânio / cordoma (altas doses)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "nenhuma",
+        "pendencia": "SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "A RT em altas doses é recomendada para condrossarcomas da base do",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Ressecção 3D com margens de 1-2 cm em centro de referência",
+        "quando": "Partes moles localizado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "preferencialmente com margens de 1 a 2 cm de tecido normal",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Amputação/desarticulação",
+        "quando": "Invasão de estruturas nobres com chance de cura, ou controle de sintomas",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Cirurgia de amputação ou desarticulação do membro deve ser indicada nos casos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Cirurgia com salvamento de membro e margens claras",
+        "quando": "Osteossarcoma",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "A maioria dos pacientes deve ser considerada candidata ao salvamento do",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Curetagem ± adjuvante local",
+        "quando": "Tumor cartilaginoso atípico de ossos longos; TCG selecionado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Tumores cartilaginosos atípicos nos ossos longos dos membros podem ser tra -",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Ressecção em bloco R0",
+        "quando": "Cordoma localizado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "A ressecção em bloco R0 é o tratamento recomendado da doença primária locali-",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "Fusão NTRK (partes moles)",
+        "opcao": "Larotrectinibe",
+        "evidencia": "NE alto/FR forte (SBOC)",
+        "sus": "DADO_AUSENTE",
+        "pendencia": "DOSE_SEM_FONTE_NO_CAPITULO",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Fusão NTRK Larotrectinibe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "Sarcoma alveolar de partes moles",
+        "opcao": "Pazopanibe ou atezolizumabe",
+        "evidencia": "NE moderado",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Atezolizumabe NE MODERADO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "Dermatofibrossarcoma protuberans",
+        "opcao": "Imatinibe",
+        "evidencia": "NE baixo",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Dermatofibrossarcoma protuberans Imatinibe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "TCG ósseo irressecável/metastático",
+        "opcao": "Denosumabe",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "DADO_AUSENTE",
+        "pendencia": "DOSE_SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Denosumabe é o tratamento padrão em TCG irressecável ou metastá -",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": "SEM_FONTE no pack",
+      "riscoNeutropeniaFebril": "Alto nos esquemas com ifosfamida + antraciclina e gencitabina + docetaxel: G-CSF previsto pela SBOC",
+      "outros": [
+        "Mesna com ifosfamida (conferir bula)",
+        "Dose acumulada de antraciclina",
+        "Leucovorina com MTX alta dose"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 11,
+        "trecho": "Fator estimulador de colônicas de",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "EORTC 62012",
+        "nct": "NCT00061984",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Partes moles avançado 1ª linha",
+        "bracos": "Doxorrubicina vs doxorrubicina + ifosfamida",
+        "desfecho": "SG",
+        "resultado": "Sem ganho de SG com a combinação (base da priorização por sintomas/volume)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00061984",
+          "pagina": null,
+          "trecho": "Doxorubicin With or Without Ifosfamide and Pegfilgrastim",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "STRASS",
+        "nct": "NCT01344018",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Sarcoma retroperitoneal não metastático",
+        "bracos": "Cirurgia ± RT pré-operatória",
+        "desfecho": "SLR abdominal",
+        "resultado": "Benefício não comprovado na população geral (SBOC: discussão multidisciplinar)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT01344018",
+          "pagina": null,
+          "trecho": "Surgery With or Without Radiation Therapy in Untreated Nonmetastatic Retroperitoneal Sarcoma",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "EURAMOS-1",
+        "nct": "NCT00134030",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Osteossarcoma ressecável",
+        "bracos": "MAP vs MAPIE (maus respondedores); MAP ± interferon (bons)",
+        "desfecho": "SLE",
+        "resultado": "Sem benefício em modificar o pós-operatório",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00134030",
+          "pagina": null,
+          "trecho": "Combination Chemotherapy, PEG-Interferon Alfa-2b, and Surgery in Treating Patients With Osteosarcoma",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "Partes moles estádio I",
+        "exames": [
+          "RX_TORAX_PA_PERFIL"
+        ],
+        "periodicidade": "RX tórax a cada 3 meses por 3 anos, depois a cada 6 meses até 5 anos; RM ou TC do sítio a cada 3-4 meses por 3 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "RX de tórax a cada 3 meses nos primeiros 3 anos,",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Partes moles estádios II e III",
+        "exames": [
+          "TC_TORAX"
+        ],
+        "periodicidade": "TC tórax a cada 3-4 meses por 3 anos, a cada 6 meses até 5 anos, anual até 8-10 anos; RM/TC do sítio idem",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "TC de tórax a cada 3-4 meses nos primeiros 3 anos,",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Ósseo alto grau",
+        "exames": [
+          "RX_TORAX_PA_PERFIL",
+          "TC_TORAX"
+        ],
+        "periodicidade": "A cada 3 meses por 2 anos; 6 meses do 3º ao 5º ano; 6-12 meses dos anos 5-10; RX do local primário (sem id no catálogo)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "cada 3 meses durante os primeiros 2 anos; a cada 6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Ósseo baixo grau",
+        "exames": [
+          "RX_TORAX_PA_PERFIL"
+        ],
+        "periodicidade": "A cada 6 meses por 2 anos e depois anual",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Nos sarcomas ósseos de baixo grau, a frequência das consultas",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "BIOPSIA_MEDULA",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "CINTILOGRAFIA_OSSEA",
+      "DHL",
+      "FISH",
+      "FOSFATASE_ALCALINA",
+      "IMUNOHISTOQUIMICA",
+      "PET_CT_FDG",
+      "RM_COLUNA_TORACICA",
+      "RM_CRANIO",
+      "RX_TORAX_PA_PERFIL",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "TC_TORAX",
+      "MOLECULAR_PCR_MUTACAO"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "Ifosfamida",
+        "com": "aprepitanto/CYP3A4 (neurotoxicidade)",
+        "ref": null
+      },
+      {
+        "droga": "Metotrexato",
+        "com": "AINEs, IBP, sulfametoxazol-trimetoprima, penicilinas",
+        "ref": null
+      },
+      {
+        "droga": "Pazopanibe",
+        "com": "IBP/antiácidos e inibidores de CYP3A4",
+        "ref": null
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "mielotoxicidade",
+        "termosCTCAEv6": [
+          "Febrile neutropenia",
+          "Neutrophil count decreased",
+          "Platelet count decreased"
+        ]
+      },
+      {
+        "classe": "ifosfamida",
+        "termosCTCAEv6": [
+          "Encephalopathy",
+          "Hematuria",
+          "Acute kidney injury"
+        ]
+      },
+      {
+        "classe": "antraciclina",
+        "termosCTCAEv6": [
+          "Heart failure",
+          "Ejection fraction decreased"
+        ]
+      },
+      {
+        "classe": "MTX alta dose",
+        "termosCTCAEv6": [
+          "Acute kidney injury",
+          "Mucositis oral",
+          "Alanine aminotransferase increased"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "G-CSF profilático nos esquemas indicados pela SBOC",
+      "mesna com ifosfamida",
+      "leucovorina com MTX alta dose"
+    ],
+    "orientacoes": [
+      "tratamento em centro de referência em sarcoma",
+      "fisioterapia/reabilitação pós-cirúrgica",
+      "ecocardiograma basal com antraciclina"
+    ],
+    "encaminhamentos": [
+      "centro de referência em sarcoma",
+      "ortopedia oncológica",
+      "radioterapia",
+      "oncogenética (Li-Fraumeni)"
+    ],
+    "laudos": [
+      "APAC de quimioterapia (C40-C41, C49)",
+      "revisão de lâmina em centro de referência"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "Sarcoma de partes moles localizado",
+        "y": "alto grau, profundo e >5 cm",
+        "z": "Ressecção 3D com margens 1-2 cm + RT pré ou pós-operatória (dose sem fonte no pack)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "A RT pré-operatória ou adjuvante está indicada nos casos de sarcoma de alto",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Partes moles avançado, 1ª linha",
+        "y": "sintomático, alto volume e KPS >70%",
+        "z": "Doxorrubicina + ifosfamida (3 g/m² D1-D3 + 25 mg/m² D1-D3, G-CSF); demais: doxorrubicina 60-75 mg/m² (mínimo 60)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "A combinação de ifosfamida e doxorrubicina deve ser priorizada em pacientes",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Osteossarcoma de alto grau",
+        "y": "adulto >25 anos",
+        "z": "Cisplatina 50 mg/m² D1-D2 + doxorrubicina 25 mg/m² D1-D3 a cada 21 dias, 6 ciclos (3 pré + 3 pós); até 25 anos: MAP",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "O esquema padrão em adultos acima de 25 anos é cisplatina e doxorru -",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Suspeita de sarcoma de Ewing",
+        "y": "confirmação molecular (fusão EWSR1) obrigatória",
+        "z": "VDC alternado com IE, 14-17 ciclos, com controle local após indução",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "A confirmação molecular é obrigatória para a distinção entre Sarcoma de Ewing",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    "SEM_FONTE: dose/fracionamento da RT pré e pós-operatória em partes moles (SBOC não traz).",
+    "SEM_FONTE: fracionamento da RT adjuvante no Ewing (SBOC: 45-60 Gy).",
+    "SEM_FONTE: mesna, hidratação e resgate com leucovorina (MTX alta dose) — conferir bula/protocolo institucional.",
+    "Trabectedina e gencitabina + dacarbazina NÃO entraram como protocolo por inconsistência na SBOC (ver conflitos).",
+    "SEM_FONTE: doses de larotrectinibe (sarcoma), imatinibe (DFSP, cordoma), denosumabe (TCG), regorafenibe — capítulo não traz.",
+    "SUS: nenhum dado de incorporação verificado para este pack.",
+    "Catálogo: sem ids para USG de partes moles, RM de membro, RX de segmento ósseo, NGS e testes germinativos."
+  ],
+  "conflitos": [
+    {
+      "tema": "Trabectedina: unidade de dose",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 13,
+        "trecho": "Trabectedina Trabectedina 1,5 g/m²",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026/slides-pro-2026/78 - Aula 78 - Sarcomas de Partes Moles",
+        "pagina": 26,
+        "trecho": "trabectedina 1,3mg/m2",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Não registrar protocolo; SBOC traz '1,5 g/m²' (provável erro de unidade: mg/m²). Conferir bula antes de qualquer uso."
+    },
+    {
+      "tema": "Gencitabina + dacarbazina: dias × intervalo",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 13,
+        "trecho": "Gencitabina 1.800 mg/m² EV D1 e D15 Dacarbazina 500 mg/m² EV D1 e D15",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 13,
+        "trecho": "A cada 2 semanas",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Não registrar protocolo (D1 e D15 com intervalo de 2 semanas é incoerente); conferir referência original"
+    },
+    {
+      "tema": "Doxorrubicina + dacarbazina: número de ciclos na linha paliativa",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 13,
+        "trecho": "Dacarbazina 750-1.000 mg/m² EV D1 A cada 3 semanas, 3 ciclos",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 13,
+        "trecho": "Dacarbazina 900-1.000 mg/m² EV D1",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Registrar 1ª linha com a menor dose (750 mg/m²) e 3 ciclos como na tabela; reavaliar com o curador"
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (agente curador, rascunho)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+      "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
+      "Onco PRO 2026/slides-pro-2026/78 - Aula 78 - Sarcomas de Partes Moles",
+      "Onco PRO 2026/slides-pro-2026/79 - Aula 79 - Sarcomas Ósseos",
+      "ClinicalTrials.gov API v2"
+    ],
+    "aprovacaoClinica": null
+  }
+}

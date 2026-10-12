@@ -1,0 +1,3121 @@
+{
+  "header": {
+    "id": "pack-mama",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Mama: estadiamento v7, neoadjuvância v8, adjuvância v7, metastática v6 (versões finais)",
+      "trecho": "O estadiamento clínico e patológico deve seguir a 8ª edição do AJCC",
+      "edicao": "SBOC 2026"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [
+    "pack-mama-v1-glm"
+  ],
+  "identidade": {
+    "tumor": "Câncer de mama (carcinoma invasivo e CDIS)",
+    "cid10": [
+      "C50",
+      "D05"
+    ],
+    "subtipos": [
+      "RH+/HER2- (luminal)",
+      "HER2+ (RH+ ou RH-)",
+      "Triplo-negativo (inclui ER-low <10%)",
+      "HER2-low/ultra-low (subgrupo terapêutico do HER2-negativo metastático)"
+    ],
+    "cenarios": [
+      "localizado_adjuvante",
+      "localizado_neoadjuvante",
+      "localmente_avancado",
+      "metastatico",
+      "cdis"
+    ],
+    "limitesAplicabilidade": "Adulto, mulher ou homem. Não cobre sarcoma/filoides, linfoma de mama, gestação (aula PRO 41 não incorporada) nem doses de fármacos sem aprovação Anvisa. Doses de cada cenário não se transferem entre cenários. Pack propõe; médico decide."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "MAMOGRAFIA_DIAGNOSTICA",
+        "rotulo": "Mamografia bilateral",
+        "indicacao": "universal",
+        "quando": "Estadiamento locorregional ao diagnóstico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 5,
+          "trecho": "estão indicados a mamografia bilateral e o ultrassom de mamas e axilas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "USG_MAMAS_BILATERAL",
+        "rotulo": "USG de mamas",
+        "indicacao": "universal",
+        "quando": "Estadiamento locorregional ao diagnóstico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 5,
+          "trecho": "estão indicados a mamografia bilateral e o ultrassom de mamas e axilas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "USG_AXILAS",
+        "rotulo": "USG de axilas (sem código SIGTAP próprio no catálogo)",
+        "indicacao": "universal",
+        "quando": "Avaliação axilar; guia PAAF/core de linfonodo suspeito",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 6,
+          "trecho": "a ultrassonografia é o exame recomendado, podendo guiar a realização de",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_MAMA",
+        "rotulo": "RM de mamas",
+        "indicacao": "condicional",
+        "quando": "Jovem com mama densa, lobular, multicêntrico, primário oculto, plano neoadjuvante, discrepância clínico-radiológica",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 6,
+          "trecho": "A RM de mamas deve também ser considerada no estadiamento em casos de",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "core",
+          "quando": "Confirmação diagnóstica, guiada por USG ou estereotaxia",
+          "catalogoId": "BIOPSIA_MAMA",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+            "pagina": 5,
+            "trecho": "a biópsia por agulha grossa ( core biopsy) é o exame mais comum",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "PAAF",
+          "quando": "Linfonodo axilar suspeito (PAAF ou core guiada por USG)",
+          "catalogoId": "BIOPSIA_GANGLIO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+            "pagina": 25,
+            "trecho": "recomenda-se a aspiração com agulha fina guiada por USG ou uma biópsia",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "outra",
+          "quando": "Clipagem/marcador da lesão antes de neoadjuvância",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+            "pagina": 25,
+            "trecho": "considerar colocar um marcador na lesão inicial para assegurar a sua localização",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "core",
+          "quando": "Primeira recidiva metastática ou sem histologia prévia: biópsia do sítio metastático com nova IHQ",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+            "pagina": 5,
+            "trecho": "Biopsia do sítio metastático;",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "Tipo histológico (OMS)",
+        "Grau histológico combinado (G1-G3) / grau nuclear no CDIS",
+        "Tamanho tumoral e margens",
+        "Invasão angiolinfática",
+        "RE e RP (% e intensidade)",
+        "HER2 (IHQ 0/1+/2+/3+; ISH se 2+)",
+        "Ki-67 (%)",
+        "TILs em triplo-negativo e HER2+",
+        "Linfonodos: número examinado, comprometidos, micro/macrometástase",
+        "Pós-neoadjuvância: resposta patológica (RPC sim/não, carga residual)"
+      ],
+      "molecular": [
+        {
+          "alvo": "RE / RP",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "Todo carcinoma invasivo e CDIS",
+          "consequencia": "RH+ (≥1%): hormonioterapia; RE 1-10% (ER-low) com HER2-: conduzir como triplo-negativo",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+            "pagina": 5,
+            "trecho": "realizar um estudo de IHQ para avaliação de RE, RP , HER2 e Ki67",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "HER2",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "Todo carcinoma invasivo",
+          "consequencia": "3+: HER2+ (anti-HER2); 2+: ISH obrigatória; 1+ ou 2+/ISH-: HER2-low (T-DXd na doença metastática)",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+            "pagina": 5,
+            "trecho": "realizar um estudo de IHQ para avaliação de RE, RP , HER2 e Ki67",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "HER2 (amplificação)",
+          "metodo": "FISH/CISH",
+          "catalogoId": "HER2_QUANTIFICACAO",
+          "quandoPedir": "condicional",
+          "cenario": "HER2 IHQ 2+ (indeterminado)",
+          "consequencia": "Amplificado: HER2+; FISH indeterminado: considerar HER2-negativo para estadiamento prognóstico",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+            "pagina": 5,
+            "trecho": "Em casos de resultado HER2 indeterminado (2+), deve ser realizada a hibridização",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Ki-67",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "Doença inicial RH+/HER2-",
+          "consequencia": "Ki-67 ≥20% é fator de risco: entra nos critérios de QT adjuvante, abemaciclibe (1-3 LFN) e ribociclibe (N0 T≥2 cm)",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+            "pagina": 6,
+            "trecho": "Ki67 ≥ 20%",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "PD-L1 (CPS, clone 22C3)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "Triplo-negativo metastático (1ª linha); NÃO pedir na doença inicial",
+          "consequencia": "CPS ≥10: pembrolizumabe + QT; CPS <10: QT, Dato-DXd ou iPARP se gBRCA",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+            "pagina": 23,
+            "trecho": "PD-L1 CPS ≥ 10 (independente do BRCA1/2)",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "BRCA1/2 e PALB2 germinativos",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "Critérios de aconselhamento genético (≤50 anos, triplo-negativo, masculino, história familiar) ou candidata a iPARP",
+          "consequencia": "gBRCA+ de alto risco: olaparibe adjuvante 1 ano; metastático HER2-: olaparibe ou talazoparibe",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+            "pagina": 5,
+            "trecho": "Pesquisa de mutação germinativa em BRCA1/2 e PALB2;",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "PIK3CA / AKT1 / PTEN",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "Metastático RE+/HER2- (tecido ou ctDNA; PCR aceitável para PIK3CA)",
+          "consequencia": "PIK3CAm com recidiva ≤12 meses da HT adjuvante: fulvestranto + palbociclibe + inavolisibe; pós-iCDK: capivasertibe + fulvestranto",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+            "pagina": 5,
+            "trecho": "Pesquisa de mutação PIK3CA, AKT e PTEN em tumores RE+/HER2-;",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "ESR1",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "pesquisa",
+          "cenario": "Metastático RE+/HER2- após iCDK4/6 (ctDNA)",
+          "consequencia": "Informativo: elacestranto e imlunestranto sem aprovação Anvisa e fora das recomendações SBOC 2026",
+          "disponivelSUS": "nao",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+            "pagina": 14,
+            "trecho": "A medicação não está nas recomendações da diretriz porque não possui aprovação",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "HER2-low / ultra-low",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "Metastático RE+ e triplo-negativo",
+          "consequencia": "HER2 1+ ou 2+/ISH-: trastuzumabe deruxtecana",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+            "pagina": 5,
+            "trecho": "Pesquisa do status de HER2 low/ultra low em tumores RE+",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição (anatômico + prognóstico clínico e patológico)",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+      "pagina": 6,
+      "trecho": "O estadiamento clínico e patológico deve seguir a 8ª edição do AJCC",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma",
+        "cenario": "Todos, antes de cirurgia/terapia sistêmica",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 6,
+          "trecho": "Recomenda-se uma avaliação mínima do sangue (hemograma completo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGO",
+        "rotulo": "Função hepática",
+        "cenario": "Todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 6,
+          "trecho": "testes de função hepática e renal, níveis de fosfatase alcalina e cálcio)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "rotulo": "Função hepática",
+        "cenario": "Todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 6,
+          "trecho": "testes de função hepática e renal, níveis de fosfatase alcalina e cálcio)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Função renal",
+        "cenario": "Todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 6,
+          "trecho": "testes de função hepática e renal, níveis de fosfatase alcalina e cálcio)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FOSFATASE_ALCALINA",
+        "rotulo": "Fosfatase alcalina",
+        "cenario": "Todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 6,
+          "trecho": "testes de função hepática e renal, níveis de fosfatase alcalina e cálcio)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "rotulo": "Cálcio",
+        "cenario": "Todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 6,
+          "trecho": "testes de função hepática e renal, níveis de fosfatase alcalina e cálcio)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax com contraste",
+        "cenario": "Estádio II-III localmente avançado, plano neoadjuvante, ou sintoma respiratório; metastático",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 7,
+          "trecho": "TC de tórax com contraste;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome com contraste (ou RM)",
+        "cenario": "Estádio II-III localmente avançado, plano neoadjuvante, ou sintoma/alteração hepática",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 7,
+          "trecho": "TC de abdome e pelve com contraste ou RM com contraste;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve com contraste",
+        "cenario": "Idem",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 7,
+          "trecho": "TC de abdome e pelve com contraste ou RM com contraste;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CINTILOGRAFIA_OSSEA",
+        "rotulo": "Cintilografia óssea",
+        "cenario": "Estádio II-III localmente avançado/neoadjuvante; dor óssea ou FA elevada",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 7,
+          "trecho": "Cintilografia óssea ou PET/CT-FDG;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT-FDG",
+        "cenario": "Métodos convencionais inconclusivos; pode substituir na doença localmente avançada",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 7,
+          "trecho": "O PET/CT-FDG deve ser considerado quando os métodos convencionais forem inconclusivos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_CRANIO",
+        "rotulo": "RM de crânio com contraste",
+        "cenario": "Sintoma neurológico; considerar em triplo-negativo e HER2+ localmente avançados",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 7,
+          "trecho": "RM de crânio (em pacientes com sinais e sintomas neurológicos e con",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ECOCARDIOGRAMA",
+        "rotulo": "Ecocardiograma (FEVE)",
+        "cenario": "Antes de antraciclina, trastuzumabe ± pertuzumabe ou T-DM1",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 25,
+          "trecho": "recomendamos a avaliação da função cardíaca, com ecocardiograma doppler",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "VENTRICULOGRAFIA_MUGA",
+        "rotulo": "Cintilografia sincronizada (MUGA)",
+        "cenario": "Alternativa ao ecocardiograma",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 23,
+          "trecho": "que pode ser realizada com ecocardiograma doppler ou cintilo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BETA_HCG",
+        "rotulo": "Beta-HCG",
+        "cenario": "Potencial fértil, antes de iniciar tratamento",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 23,
+          "trecho": "Recomenda-se coletar teste de beta-HCG para pacientes com potencial fértil",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "Estádio I/IIA assintomático",
+        "conduta": "Sem imagem sistêmica de rotina; seguir para cirurgia ou neoadjuvância conforme subtipo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 6,
+          "trecho": "Não estão indicados exames de imagem rotineiramente para câncer de mama",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Estádio IIB-III ou plano neoadjuvante",
+        "conduta": "TC tórax/abdome/pelve + cintilografia óssea (ou PET/CT)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 7,
+          "trecho": "ou em pacientes que receberão tratamento neoadjuvante",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Triplo-negativo ≥1 cm ou N+; HER2+ estádio II-III",
+        "conduta": "Neoadjuvância preferencial; T1a/T1b: cirurgia upfront",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 6,
+          "trecho": "recomendamos neoadjuvância como estratégia preferencial em câncer",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Localmente avançado (>5 cm, parede, pele, LFN fusionados, supraclavicular) ou inflamatório",
+        "conduta": "QT neoadjuvante padrão",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 6,
+          "trecho": "Neste cenário, e nos carcinomas inflamatórios, a QT neoadjuvante é conside",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Estádio IV",
+        "conduta": "Tratamento sistêmico por subtipo; biópsia do sítio metastático quando possível",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 5,
+          "trecho": "Biopsia do sítio metastático;",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [],
+      "naoPedirDeRotina": [
+        "CEA e CA 15-3 no estadiamento (SBOC 2026 Mama estadiamento p.7: sem indicação)",
+        "PD-L1 na doença inicial (sem impacto terapêutico)"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "RH+/HER2- localizado — adjuvante",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia",
+          "QT conforme risco clínico/genômico",
+          "hormonioterapia",
+          "iCDK4/6 se alto risco",
+          "RT"
+        ],
+        "criterio": "QT se LFN+ (exceto pós-menopausa 1-3 LFN com baixo risco genômico) ou N0 de alto risco clínico/genômico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 6,
+          "trecho": "Tumores RH-positivo HER2-negativo com LFN positivo (1+ LFN com",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "RH+/HER2- alto risco — neoadjuvante",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT com antraciclina e taxano (preferir dose-densa)",
+          "cirurgia",
+          "HT"
+        ],
+        "criterio": "Alto risco; evitar QT neoadjuvante automática em pós-menopausa até cN1",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 7,
+          "trecho": "Recomendamos a QT neoadjuvante com um esquema contendo antracíclico e",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "RH+/HER2- pós-menopausa luminal A-like — HT neoadjuvante",
+        "intencao": "curativa",
+        "modalidades": [
+          "inibidor de aromatase ≥6 meses",
+          "cirurgia"
+        ],
+        "criterio": "Grau 1-2, RE forte, RP+, Ki-67 baixo; não na pré-menopausa fora de estudo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 12,
+          "trecho": "Considerar IA neoadjuvante em:",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Triplo-negativo estádio II-III — neoadjuvante",
+        "intencao": "curativa",
+        "modalidades": [
+          "KEYNOTE-522 (preferencial)",
+          "AC→T com carboplatina se sem pembrolizumabe",
+          "cirurgia",
+          "adjuvância guiada pela resposta"
+        ],
+        "criterio": "Tumor >2 cm ou N+",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 14,
+          "trecho": "recomenda-se tratamento com QT + imunoterapia, consistindo em pem",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Triplo-negativo — doença residual pós-neoadjuvância",
+        "intencao": "curativa",
+        "modalidades": [
+          "capecitabina 8 ciclos",
+          "olaparibe se gBRCA",
+          "pembrolizumabe se usado na neo"
+        ],
+        "criterio": "Sem RPC",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 18,
+          "trecho": "Capecitabina 8 ciclos (Create-X)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "HER2+ estádio II-III — neoadjuvante",
+        "intencao": "curativa",
+        "modalidades": [
+          "TCHP (preferencial)",
+          "THP/ACTH(P)/TH",
+          "cirurgia",
+          "anti-HER2 até 1 ano"
+        ],
+        "criterio": "Tumor >2 cm ou localmente avançado; T1c discutir",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 17,
+          "trecho": "o protocolo preferencial no tratamento neoadjuvante para doença HER2 positiva é a combinação",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "HER2+ — adjuvante (cirurgia upfront ou pós-neo)",
+        "intencao": "curativa",
+        "modalidades": [
+          "AC→TH, TCH, TH (<2 cm N0)",
+          "T-DM1 se doença residual",
+          "trastuzumabe ± pertuzumabe até 1 ano se RPC"
+        ],
+        "criterio": "Conforme RPC e status linfonodal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 19,
+          "trecho": "T-DM1 por 14 ciclos NE AL TO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Metastático RH+/HER2-",
+        "intencao": "paliativa",
+        "modalidades": [
+          "IA + iCDK4/6 (1ª linha)",
+          "fulvestranto + palbociclibe + inavolisibe se PIK3CAm e recidiva ≤12 meses",
+          "capivasertibe + fulvestranto",
+          "everolimo + HT",
+          "iPARP se gBRCA",
+          "T-DXd se HER2-low",
+          "QT se crise visceral ou refratária"
+        ],
+        "criterio": "Sensibilidade endócrina, biomarcadores e linhas prévias",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 8,
+          "trecho": "Para os casos que não se enquadrem no critério acima: IA + iCDK4/6",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Metastático HER2+",
+        "intencao": "paliativa",
+        "modalidades": [
+          "trastuzumabe + pertuzumabe + taxano (1ª linha)",
+          "T-DXd (2ª linha)",
+          "T-DM1, trastuzumabe/lapatinibe + capecitabina"
+        ],
+        "criterio": "Recidiva >6 meses após trastuzumabe adjuvante para 1ª linha THP; <6 meses: T-DXd",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 17,
+          "trecho": "Trastuzumabe + Pertuzumabe + Taxano NE AL TO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Metastático triplo-negativo",
+        "intencao": "paliativa",
+        "modalidades": [
+          "pembrolizumabe + QT se CPS ≥10",
+          "QT/Dato-DXd se CPS <10",
+          "iPARP se gBRCA",
+          "sacituzumabe govitecana 2ª linha",
+          "T-DXd se HER2-low"
+        ],
+        "criterio": "PD-L1 CPS, gBRCA, HER2-low",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 25,
+          "trecho": "Para escolha da 1ª linha de tratamento do câncer de mama triplo-ne",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "CDIS",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia conservadora + RT ou mastectomia",
+          "tamoxifeno ou anastrozol se RH+"
+        ],
+        "criterio": "Margem ≥2 mm na conservadora; sem anti-HER2",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 21,
+          "trecho": "O tratamento padrão é a ressecção cirúrgica completa",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "G-CSF profilático obrigatório no esquema dose-densa. ECO antes da antraciclina.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-acdd-adjuvante",
+        "nome": "ACdd (dose-densa) — adjuvante",
+        "cenario": "Adjuvante (RH+/HER2- e triplo-negativo; fase AC do ACdd→T)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Doxorrubicina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Ciclofosfamida",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Filgrastim",
+            "dose": 300,
+            "unidade": "mcg",
+            "via": "SC",
+            "dias": "D3-D10",
+            "observacao": "ou pegfilgrastim 6 mg SC D2 (SBOC)"
+          }
+        ],
+        "cicloDias": 14,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 9,
+          "trecho": "A cada 2 semanas, por 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.mama.ac-t-fase-ac__neo-adjuvante@1.0.0",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-ac-adjuvante",
+        "nome": "AC (dose-padrão) — adjuvante",
+        "cenario": "Adjuvante (fase AC do AC→T ou AC isolado em ≤2 cm N0)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Doxorrubicina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Ciclofosfamida",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 9,
+          "trecho": "A cada 3 semanas, por 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 12,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.mama.ac-t-fase-t-paclitaxel-semanal__adjuvante@1.0.0",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-paclitaxel-semanal-adjuvante",
+        "nome": "Paclitaxel semanal (T) — adjuvante",
+        "cenario": "Adjuvante, após AC/ACdd",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 9,
+          "trecho": "Semanalmente, por 12 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "SBOC: com suporte de G-CSF; 4 a 6 ciclos.",
+        "fichaId": "FICHA.mama.tc__neo-adjuvante@1.0.0",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-tc-adjuvante",
+        "nome": "TC — adjuvante",
+        "cenario": "Adjuvante RH+/HER2- (≤2 cm N0 ou contraindicação a antraciclina)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Ciclofosfamida",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 10,
+          "trecho": "A cada 3 semanas, por 4 a 6 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-cmf-classico-adjuvante",
+        "nome": "CMF clássico — adjuvante",
+        "cenario": "Adjuvante, baixo risco (≤2 cm N0)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Ciclofosfamida",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": ""
+          },
+          {
+            "droga": "Metotrexato",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          },
+          {
+            "droga": "5-Fluorouracil",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 9,
+          "trecho": "A cada 4 semanas, por 6 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "SBOC: a cada 3-4 semanas, por 6 ciclos (ciclo de 21 dias registrado; 28 dias é alternativa).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-carbo-paclitaxel-semanal-adjuvante-tn",
+        "nome": "Carboplatina + paclitaxel semanal — adjuvante (triplo-negativo)",
+        "cenario": "Adjuvante triplo-negativo operado upfront",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          },
+          {
+            "droga": "Carboplatina",
+            "dose": 2,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 9,
+          "trecho": "A cada 3-4 semanas, por 6 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 8,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-capecitabina-residual-tn",
+        "nome": "Capecitabina — doença residual pós-neoadjuvância (CREATE-X)",
+        "cenario": "Adjuvante pós-neoadjuvância sem RPC (triplo-negativo)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 2000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "Dose diária total. CREATE-X usou 2.500; SBOC recomenda reduzir para 2.000 na população ocidental."
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 18,
+          "trecho": "devendo a dose ser idealmente reduzida para 2.000 mg/m²",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Uso contínuo por 1 ano; ciclo não se aplica.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-olaparibe-adjuvante",
+        "nome": "Olaparibe adjuvante (OlympiA)",
+        "cenario": "Adjuvante gBRCA1/2 de alto risco (TN ou RH+/HER2-)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Olaparibe",
+            "dose": 300,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "2x/dia contínuo",
+            "observacao": "por 1 ano"
+          }
+        ],
+        "cicloDias": null,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 12,
+          "trecho": "Olaparibe 300 mg 2x/dia continuamente por 1 ano",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Uso contínuo; avaliação ginecológica anual, antecipar se sangramento.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-tamoxifeno-adjuvante",
+        "nome": "Tamoxifeno adjuvante",
+        "cenario": "Adjuvante RH+ (pré ou pós-menopausa; homem: preferido)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Tamoxifeno",
+            "dose": 20,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": "5 a 10 anos"
+          }
+        ],
+        "cicloDias": null,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 12,
+          "trecho": "Tamoxifeno 20 mg VO 1x/dia continuamente por 5 a 10 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Densitometria antes e a cada 1-2 anos.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-anastrozol-adjuvante",
+        "nome": "Anastrozol adjuvante",
+        "cenario": "Adjuvante RH+ pós-menopausa (ou pré com supressão ovariana)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Anastrozol",
+            "dose": 1,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": "5 a 10 anos"
+          }
+        ],
+        "cicloDias": null,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 12,
+          "trecho": "Anastrozol 1 mg VO 1x/dia continuamente por 5 a 10 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-letrozol-adjuvante",
+        "nome": "Letrozol adjuvante",
+        "cenario": "Adjuvante RH+ pós-menopausa",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Letrozol",
+            "dose": 2.5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": "5 a 10 anos"
+          }
+        ],
+        "cicloDias": null,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 12,
+          "trecho": "Letrozol 2,5 mg VO 1x/dia continuamente por 5 a 10 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-exemestano-adjuvante",
+        "nome": "Exemestano adjuvante",
+        "cenario": "Adjuvante RH+ pós-menopausa ou pré com supressão ovariana",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Exemestano",
+            "dose": 25,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": "5 a 10 anos"
+          }
+        ],
+        "cicloDias": null,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 12,
+          "trecho": "Exemestano 25 mg VO 1x/dia continuamente por 5 a 10 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-gosserrelina-supressao-adjuvante",
+        "nome": "Gosserrelina (supressão ovariana) adjuvante",
+        "cenario": "Adjuvante RH+ pré-menopausa de risco elevado, com TMX ou IA",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Gosserrelina",
+            "dose": 3.6,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D1",
+            "observacao": "ou 10,8 mg SC a cada 3 meses; por 2 a 5 anos"
+          }
+        ],
+        "cicloDias": 28,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 12,
+          "trecho": "Gosserrelina 3,6 mg SC D1 a cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-abemaciclibe-adjuvante",
+        "nome": "Abemaciclibe + HT adjuvante (monarchE)",
+        "cenario": "Adjuvante RH+/HER2- alto risco (≥4 LFN, ou 1-3 LFN + T≥5 cm/G3/Ki-67≥20%)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Abemaciclibe",
+            "dose": 150,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "2x/dia contínuo",
+            "observacao": "por 2 anos, com TMX ou IA ± supressão ovariana"
+          }
+        ],
+        "cicloDias": null,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 12,
+          "trecho": "Abemaciclibe 150 mg VO 2x/dia continuamente por 2 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-ribociclibe-adjuvante",
+        "nome": "Ribociclibe + IA adjuvante (NATALEE)",
+        "cenario": "Adjuvante RH+/HER2- alto risco (N+ ou N0 T≥2 cm com G3/Ki-67≥20%/alto risco genômico)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Ribociclibe",
+            "dose": 400,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D21",
+            "observacao": "por 3 anos + IA ± supressão ovariana; não associar a TMX"
+          }
+        ],
+        "cicloDias": 28,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 12,
+          "trecho": "Ribociclibe 400 mg VO 1x/dia D1 a D21 a cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 12,
+        "premedicacao": "",
+        "ajusteObrigatorio": "FEVE basal e a cada 3 meses; suspender se queda absoluta ≥16% ou abaixo do LIN com queda ≥10% (bula trastuzumabe); SBOC: pausa de 4 semanas.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 19, de 25/07/2012 (via CONASS CI nº 279/2012)",
+            "pagina": null,
+            "trecho": "incorporado o medicamento trastuzumabe no SUS para o tratamento do câncer de mama inicial",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "mama-acdd-th-adjuvante-fase-th",
+        "nome": "TH (paclitaxel semanal + trastuzumabe semanal) — adjuvante",
+        "cenario": "Adjuvante HER2+ (após AC; ou isolado em <2 cm N0)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "semanal por 12 semanas"
+          },
+          {
+            "droga": "Trastuzumabe",
+            "dose": 4,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 do C1 (ataque)",
+            "observacao": ""
+          },
+          {
+            "droga": "Trastuzumabe",
+            "dose": 2,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 a partir do C2 (semanal)",
+            "observacao": "após 12 semanas: 6 mg/kg a cada 3 semanas até 1 ano"
+          }
+        ],
+        "cicloDias": 7,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 11,
+          "trecho": "Semanalmente, por 12 semanas e manter trastuzumabe 6 mg/kg EV D1 a",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "FEVE basal e a cada 3 meses; suspender se queda absoluta ≥16% ou abaixo do LIN com queda ≥10% (bula trastuzumabe); SBOC: pausa de 4 semanas.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 19, de 25/07/2012 (via CONASS CI nº 279/2012)",
+            "pagina": null,
+            "trecho": "incorporado o medicamento trastuzumabe no SUS para o tratamento do câncer de mama inicial",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "mama-tch-adjuvante",
+        "nome": "TCH — adjuvante",
+        "cenario": "Adjuvante HER2+ (contraindicação a antraciclina)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Carboplatina",
+            "dose": 6,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Trastuzumabe",
+            "dose": 8,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 do C1 (ataque)",
+            "observacao": ""
+          },
+          {
+            "droga": "Trastuzumabe",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 a partir do C2",
+            "observacao": "manter até completar 1 ano"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 11,
+          "trecho": "A cada 3 semanas, por 6 ciclos e manter trastuzumabe até completar 1 ano",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 14,
+        "premedicacao": "",
+        "ajusteObrigatorio": "FEVE antes e periodicamente (bula). Regra SUS (nota técnica SC 2025, não lida no original): FEVE ≥55% no mês anterior.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 98, de 09/09/2022; Relatório CONITEC 751 (estádio III com doença residual)",
+            "pagina": null,
+            "trecho": "incorporar, no âmbito do Sistema Único de Saúde - SUS, o trastuzumabe entansina",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "mama-tdm1-residual",
+        "nome": "T-DM1 adjuvante — doença residual HER2+ (KATHERINE)",
+        "cenario": "Adjuvante pós-neoadjuvância HER2+ sem RPC",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Trastuzumabe entansina",
+            "dose": 3.6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 11,
+          "trecho": "Trastuzumabe entansina 3,6 mg/kg EV D1 por 14 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "FEVE basal e a cada 3 meses; suspender se queda absoluta ≥16% ou abaixo do LIN com queda ≥10% (bula trastuzumabe); SBOC: pausa de 4 semanas. SC alternativo: 600 mg SC a cada 3 semanas.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 19, de 25/07/2012 (via CONASS CI nº 279/2012)",
+            "pagina": null,
+            "trecho": "incorporado o medicamento trastuzumabe no SUS para o tratamento do câncer de mama inicial",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "mama-trastuzumabe-manutencao-adjuvante",
+        "nome": "Trastuzumabe q3s — completar 1 ano (adjuvante)",
+        "cenario": "Adjuvante HER2+ após QT (inclui RPC pós-neo)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Trastuzumabe",
+            "dose": 8,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 do C1 (ataque, se não iniciado)",
+            "observacao": ""
+          },
+          {
+            "droga": "Trastuzumabe",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 a partir do C2",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 10,
+          "trecho": "A cada 3 semanas, até completar 1 ano",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "FEVE basal e a cada 3 meses; suspender se queda absoluta ≥16% ou abaixo do LIN com queda ≥10% (bula trastuzumabe); SBOC: pausa de 4 semanas.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Pertuzumabe incorporado só no metastático (Portaria 57/2017); adjuvante não verificado — alternativa SUS: trastuzumabe isolado",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-pertuzumabe-adjuvante",
+        "nome": "Pertuzumabe + trastuzumabe — adjuvante (LFN+)",
+        "cenario": "Adjuvante HER2+ com LFN positivo",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Pertuzumabe",
+            "dose": 840,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 do C1 (ataque)",
+            "observacao": ""
+          },
+          {
+            "droga": "Pertuzumabe",
+            "dose": 420,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 a partir do C2",
+            "observacao": ""
+          },
+          {
+            "droga": "Trastuzumabe",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ataque 8 mg/kg no C1 se não iniciado"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 10,
+          "trecho": "Pertuzumabe 840 mg EV D1 (dose de ataque no C1)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-tamoxifeno-cdis",
+        "nome": "Tamoxifeno — CDIS RH+",
+        "cenario": "CDIS RH+ após cirurgia conservadora",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Tamoxifeno",
+            "dose": 20,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": "por 5 anos; alternativa 10 mg em dias alternados por 3 anos"
+          }
+        ],
+        "cicloDias": null,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 21,
+          "trecho": "Tamoxifeno 20 mg/dia por 5 anos ou 5 mg/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "G-CSF obrigatório. ECO antes.",
+        "fichaId": "FICHA.mama.ac-t-fase-ac__neo-adjuvante@1.0.0",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-acdd-neoadjuvante",
+        "nome": "ACdd — neoadjuvante (preferencial)",
+        "cenario": "Neoadjuvante RH+/HER2- alto risco e triplo-negativo sem pembrolizumabe",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Doxorrubicina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Ciclofosfamida",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Filgrastima",
+            "dose": 300,
+            "unidade": "mcg",
+            "via": "SC",
+            "dias": "D2-D10",
+            "observacao": "ou pegfilgrastim 6 mg SC D2"
+          }
+        ],
+        "cicloDias": 14,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 8,
+          "trecho": "Filgrastima 300 mcg SC D2-D10 ou",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 12,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-paclitaxel-semanal-neoadjuvante",
+        "nome": "Paclitaxel semanal — neoadjuvante",
+        "cenario": "Neoadjuvante após (ou antes de) AC",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 8,
+          "trecho": "por 12 semanas- Paclitaxel 80 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 12,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.mama.ac-ct-fase-ct-carboplatina-paclitaxel-semanal__neo-adjuvante@1.0.0",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-cat-neoadjuvante",
+        "nome": "CaT (carboplatina AUC2 + paclitaxel semanal) — neoadjuvante",
+        "cenario": "Neoadjuvante triplo-negativo (sem pembrolizumabe), com AC",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Carboplatina",
+            "dose": 2,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 8,
+          "trecho": "Carboplatina AUC 2 EV D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "TSH/T4L e função hepática basais e periódicos (irAE).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC — Relatório preliminar CP 39/2026 (pembrolizumabe neoadjuvante TNBC); sem decisão final localizada",
+            "pagina": null,
+            "trecho": "Este documento é uma versão preliminar e poderá sofrer alteração após a consulta pública",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "mama-keynote522-fase1-neoadjuvante",
+        "nome": "KEYNOTE-522 fase 1 (carboplatina + paclitaxel + pembrolizumabe)",
+        "cenario": "Neoadjuvante triplo-negativo estádio II-III",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativa: AUC 1,5 EV D1, D8 e D15"
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          },
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 10,
+          "trecho": "Carboplatina AUC 5 EV D1 ou AUC 1,5 EV",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "ECO antes da antraciclina; AC pode ser a cada 2 semanas (dose-densa) com G-CSF.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC — Relatório preliminar CP 39/2026 (pembrolizumabe neoadjuvante TNBC); sem decisão final localizada",
+            "pagina": null,
+            "trecho": "Este documento é uma versão preliminar e poderá sofrer alteração após a consulta pública",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "mama-keynote522-fase2-neoadjuvante",
+        "nome": "KEYNOTE-522 fase 2 (AC/EC + pembrolizumabe)",
+        "cenario": "Neoadjuvante triplo-negativo estádio II-III",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Doxorrubicina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou epirrubicina 90 mg/m2"
+          },
+          {
+            "droga": "Ciclofosfamida",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "manter a cada 3 semanas mesmo se AC dose-densa"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 10,
+          "trecho": "A cada 3 semanas, 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "FEVE basal e a cada 3 meses; suspender se queda absoluta ≥16% ou abaixo do LIN com queda ≥10% (bula trastuzumabe); SBOC: pausa de 4 semanas. SBOC: 6-9 ciclos.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Trastuzumabe incorporado (Portaria 18/19-2012); pertuzumabe neoadjuvante não verificado — alternativa SUS: TCH ou AC→TH",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-tchp-neoadjuvante",
+        "nome": "TCHP — neoadjuvante (preferencial HER2+)",
+        "cenario": "Neoadjuvante HER2+ >2 cm ou localmente avançado",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativa: paclitaxel 80 mg/m2 D1 e D8"
+          },
+          {
+            "droga": "Carboplatina",
+            "dose": 6,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Trastuzumabe",
+            "dose": 8,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 do C1 (ataque)",
+            "observacao": ""
+          },
+          {
+            "droga": "Trastuzumabe",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 a partir do C2",
+            "observacao": ""
+          },
+          {
+            "droga": "Pertuzumabe",
+            "dose": 840,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 do C1 (ataque)",
+            "observacao": ""
+          },
+          {
+            "droga": "Pertuzumabe",
+            "dose": 420,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 a partir do C2",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 9,
+          "trecho": "A cada 3 semanas, por 6-9",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "FEVE basal e a cada 3 meses; suspender se queda absoluta ≥16% ou abaixo do LIN com queda ≥10% (bula trastuzumabe); SBOC: pausa de 4 semanas.",
+        "fichaId": "FICHA.mama.ac-th-fase-th-paclitaxel-semanal-trastuzumabe__neo-adjuvante@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 19, de 25/07/2012 (via CONASS CI nº 279/2012)",
+            "pagina": null,
+            "trecho": "incorporado o medicamento trastuzumabe no SUS para o tratamento do câncer de mama inicial",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "mama-th-neoadjuvante",
+        "nome": "TH (paclitaxel semanal + trastuzumabe q3s) — neoadjuvante",
+        "cenario": "Neoadjuvante HER2+ (frágeis/baixo risco ou fase T do AC→TH)",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": "semanal por 12 semanas"
+          },
+          {
+            "droga": "Trastuzumabe",
+            "dose": 8,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 do C1 (ataque)",
+            "observacao": ""
+          },
+          {
+            "droga": "Trastuzumabe",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 a partir do C2",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 10,
+          "trecho": "A cada 3 semanas, por 6",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Hemograma antes de cada ciclo (neutropenia). Pré/perimenopausa: associar supressão ovariana.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 73, de 06/12/2021; Relatório CONITEC 678 (avançado/metastático RH+/HER2-) — texto da portaria não lido diretamente",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "id": "mama-letrozol-palbociclibe-met",
+        "nome": "Letrozol + palbociclibe — 1ª linha metastática",
+        "cenario": "Metastático RH+/HER2- (1ª linha, sem IA prévio ou >12 meses)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Palbociclibe",
+            "dose": 125,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D21",
+            "observacao": ""
+          },
+          {
+            "droga": "Letrozol",
+            "dose": 2.5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=89a142d5-7e61-48bf-9e77-e2cd124c4792 (IBRANCE (palbociclibe) — rótulo FDA; openFDA consultado 2026-10-11)",
+          "pagina": null,
+          "trecho": "125 mg once daily taken with or without food for 21 days",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "ECG (QTc), hemograma e função hepática conforme bula.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 73, de 06/12/2021; Relatório CONITEC 678 (avançado/metastático RH+/HER2-) — texto da portaria não lido diretamente",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "id": "mama-letrozol-ribociclibe-met",
+        "nome": "Letrozol + ribociclibe — 1ª linha metastática",
+        "cenario": "Metastático RH+/HER2- (1ª linha)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Ribociclibe",
+            "dose": 600,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D21",
+            "observacao": "dose do metastático (≠ 400 mg da adjuvância)"
+          },
+          {
+            "droga": "Letrozol",
+            "dose": 2.5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=aaeaef94-f3f5-4367-8ea2-b181d7be2da8 (KISQALI (ribociclibe) — rótulo FDA; openFDA consultado 2026-10-11)",
+          "pagina": null,
+          "trecho": "Recommended starting dose: 600 mg orally (three 200 mg tablets)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Glicemia/HbA1c basal e periódica (hiperglicemia).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Capivasertibe: CONITEC não verificado",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-fulvestranto-capivasertibe-met",
+        "nome": "Capivasertibe + fulvestranto (CAPItello-291)",
+        "cenario": "Metastático RH+/HER2- com alteração PIK3CA/AKT1/PTEN, progressão após >12 meses de iCDK4/6",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Capivasertibe",
+            "dose": 400,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "12/12h, 4 dias sim / 3 dias não, semanal",
+            "observacao": ""
+          },
+          {
+            "droga": "Fulvestranto",
+            "dose": 500,
+            "unidade": "mg",
+            "via": "IM",
+            "dias": "D1, D15 e D29; depois D1 a cada 28 dias",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 10,
+          "trecho": "Capivasertibe 400 mg VO",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "FEVE basal e a cada 3 meses; suspender se queda absoluta ≥16% ou abaixo do LIN com queda ≥10% (bula trastuzumabe); SBOC: pausa de 4 semanas. Paclitaxel semanal é alternativa ao docetaxel (SBOC p.18, sem dose explícita).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 57, de 04/12/2017; Relatório CONITEC 319 (restrito a metástase visceral, condicionado a preço)",
+            "pagina": null,
+            "trecho": "Incorporar o pertuzumabe no tratamento do câncer de mama HER2-positivo metastático em primeira linha",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "mama-thp-docetaxel-met",
+        "nome": "Trastuzumabe + pertuzumabe + docetaxel (CLEOPATRA) — 1ª linha",
+        "cenario": "Metastático HER2+ 1ª linha (sem trastuzumabe prévio ou recidiva >6 meses)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Pertuzumabe",
+            "dose": 840,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 do C1 (ataque)",
+            "observacao": ""
+          },
+          {
+            "droga": "Pertuzumabe",
+            "dose": 420,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 a partir do C2",
+            "observacao": ""
+          },
+          {
+            "droga": "Trastuzumabe",
+            "dose": 8,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 do C1 (ataque)",
+            "observacao": ""
+          },
+          {
+            "droga": "Trastuzumabe",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 a partir do C2",
+            "observacao": ""
+          },
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "≥6 ciclos se resposta; HP até progressão"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=17f85d17-ab71-4f5b-9fe3-0b8c822f69ff (PERJETA (pertuzumabe) — rótulo FDA; openFDA consultado 2026-10-11)",
+          "pagina": null,
+          "trecho": "When administered with PERJETA, the recommended initial dose of docetaxel is 75 mg/m",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Ajuste por ClCr conforme bula; atenção a síndrome mão-pé.",
+        "fichaId": "FICHA.mama.capecitabina-monoterapia__paliativo-metastatico@1.0.0",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-capecitabina-met",
+        "nome": "Capecitabina monoterapia — metastático",
+        "cenario": "Metastático HER2- com indicação de QT (refratária a antraciclina/taxano)",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "2x/dia D1-D14",
+            "observacao": "bula: 1.000 ou 1.250 mg/m2 2x/dia; registrado o menor"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=e702d84d-7162-4751-bf37-d724cc7e45a5 (XELODA (capecitabina) — rótulo FDA; openFDA consultado 2026-10-11)",
+          "pagina": null,
+          "trecho": "Single agent: 1,000 mg/m 2 or 1,250 mg/m 2 twice daily orally",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.mama.capecitabina-docetaxel-xt__paliativo-metastatico@1.0.0",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "mama-docetaxel-capecitabina-met",
+        "nome": "Docetaxel + capecitabina (XT) — metastático",
+        "cenario": "Metastático HER2- (combinação em situações específicas)",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "2x/dia D1-D14",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=e702d84d-7162-4751-bf37-d724cc7e45a5 (XELODA (capecitabina) — rótulo FDA; openFDA consultado 2026-10-11)",
+          "pagina": null,
+          "trecho": "in combination with docetaxel at 75 mg/m 2 administered intravenously on day 1",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "Pós-cirurgia conservadora (invasivo e CDIS)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "",
+        "pendencia": "SEM_FONTE",
+        "observacao": "SBOC indica RT após conservadora; dose/fracionamento não constam nas diretrizes lidas.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 5,
+          "trecho": "ela é indicada após cirurgia conservadora",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Triplo-negativo refratário/irressecável pós-neo",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "capecitabina radiossensibilizante (dose não especificada)",
+        "pendencia": "SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 13,
+          "trecho": "RT + QT",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Cirurgia conservadora + RT ou mastectomia; BLS conforme axila",
+        "quando": "Doença localizada",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 21,
+          "trecho": "seja cirurgia conservadora seguida de RT da mama total ou mastectomia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Cirurgia upfront",
+        "quando": "Triplo-negativo e HER2+ T1a/T1b",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 13,
+          "trecho": "Tumores T1a e T1b: cirurgia upfront e discussão sobre tratamento adjuvante",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "HER2+ (IHQ 3+ ou ISH amplificado)",
+        "opcao": "Trastuzumabe ± pertuzumabe; T-DM1 se residual; T-DXd 2ª linha metastática",
+        "evidencia": "NE alto/FR forte (SBOC)",
+        "sus": "Trastuzumabe sim (2012); pertuzumabe metastático parcial (2017, visceral); T-DM1 residual estádio III sim (2022)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 17,
+          "trecho": "Trastuzumabe-deruxtecana NE AL TO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "gBRCA1/2 (alto risco, inicial)",
+        "opcao": "Olaparibe adjuvante 1 ano",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 18,
+          "trecho": "Olaparibe 1 ano NE AL TO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "gBRCA1/2 (metastático HER2-)",
+        "opcao": "Olaparibe ou talazoparibe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 10,
+          "trecho": "Olaparibe ou Talazoparibe NE AL TO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "PIK3CAm + resistência endócrina (recidiva ≤12 meses da HT adjuvante)",
+        "opcao": "Fulvestranto + palbociclibe + inavolisibe (1ª linha)",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 8,
+          "trecho": "Fulvestranto + Palbociclibe + Inavolisibe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "PIK3CA/AKT1/PTEN pós-iCDK4/6",
+        "opcao": "Capivasertibe + fulvestranto (alpelisibe se capivasertibe indisponível)",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 16,
+          "trecho": "Alpelisibe é opção se capivasertibe não estiver disponível.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "HER2-low (1+ ou 2+/ISH-) ou ultra-low",
+        "opcao": "Trastuzumabe deruxtecana",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 10,
+          "trecho": "Trastuzumabe deruxtecana NE AL TO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "PD-L1 CPS ≥10 (triplo-negativo metastático)",
+        "opcao": "Pembrolizumabe + QT (paclitaxel, nab-paclitaxel ou carboplatina + gencitabina); pembrolizumabe 200 mg q3s ou 400 mg q6s (bula)",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=9333c79b-d487-4538-a9f0-71b91a02b287 (KEYTRUDA IV (pembrolizumabe) — rótulo FDA; openFDA consultado 2026-10-11)",
+          "pagina": null,
+          "trecho": "TNBC: 200 mg every 3 weeks or 400 mg every 6 weeks",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "ESR1 mutado",
+        "opcao": "Sem opção aprovada no Brasil (elacestranto/imlunestranto fora da diretriz)",
+        "evidencia": "—",
+        "sus": "nao",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 14,
+          "trecho": "A medicação não está nas recomendações da diretriz porque não possui aprovação",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "MSI-H/dMMR, TMB-H, NTRK",
+        "opcao": "Terapia guiada por biomarcador (3ª linha em diante)",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 22,
+          "trecho": "Biomarcadores positivos (MSI-H,",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": "AC/ACdd: alto risco emetogênico (seguir receitas do serviço); taxanos e carboplatina AUC2 semanal: risco menor — classificação não consta nas diretrizes SBOC de mama lidas",
+      "riscoNeutropeniaFebril": "Esquemas dose-densa (ACdd, Tdd) e TC exigem G-CSF profilático (SBOC)",
+      "outros": [
+        "Inibidor de osteólise (ácido zoledrônico 4 mg EV a cada 6 meses ou denosumabe 60 mg SC a cada 6 meses) na HT adjuvante pós-menopausa ou com supressão ovariana",
+        "GnRHa concomitante à QT em pré-menopausa para proteção ovariana; encaminhar preservação de fertilidade",
+        "Exercício aeróbico e resistido durante tratamento curativo"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+        "pagina": 12,
+        "trecho": "Ácido zoledrônico 4 mg EV D1 a cada 6 meses",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "KEYNOTE-522",
+        "nct": "NCT03036488",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Triplo-negativo estádio II-III",
+        "bracos": "QT neo + pembrolizumabe → pembrolizumabe adjuvante vs placebo",
+        "desfecho": "RPC e SLE; SG",
+        "resultado": "SG 60 meses 86,6% vs 81,7%",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 14,
+          "trecho": "a sobrevida global estimada em 60 meses foi de 86,6% no grupo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "KATHERINE",
+        "nct": "NCT01772472",
+        "nctEstado": "VERIFICADO",
+        "populacao": "HER2+ com doença residual pós-neo",
+        "bracos": "T-DM1 vs trastuzumabe",
+        "desfecho": "SLDi; SG",
+        "resultado": "SG 7 anos 89,1% vs 84,4%",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 20,
+          "trecho": "89,1% versus 84,4%; HR 0,66",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "OlympiA",
+        "nct": "NCT02032823",
+        "nctEstado": "VERIFICADO",
+        "populacao": "gBRCA HER2- alto risco",
+        "bracos": "Olaparibe 1 ano vs placebo",
+        "desfecho": "SLDi; SG",
+        "resultado": "Benefício 3,4% em 4 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 18,
+          "trecho": "89,8% versus 86,4%; HR",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "monarchE",
+        "nct": "NCT03155997",
+        "nctEstado": "VERIFICADO",
+        "populacao": "RH+/HER2- alto risco",
+        "bracos": "Abemaciclibe + HT vs HT",
+        "desfecho": "SLDi; SG",
+        "resultado": "SG HR 0,842",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 15,
+          "trecho": "SG (HR 0,842; 86,8% versus 85,0%, +1,8 pp)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "NATALEE",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "populacao": "RH+/HER2- risco alto/intermediário",
+        "bracos": "Ribociclibe + IA vs IA",
+        "desfecho": "SLDi",
+        "resultado": "+4,5% SLDi em 5 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 15,
+          "trecho": "mostrou ganho de 4,5% em SLDi em relação ao grupo controle",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "APHINITY",
+        "nct": "NCT01358877",
+        "nctEstado": "VERIFICADO",
+        "populacao": "HER2+ adjuvante",
+        "bracos": "Pertuzumabe + trastuzumabe + QT vs placebo",
+        "desfecho": "SLDi; SG",
+        "resultado": "Benefício concentrado em LFN+",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 20,
+          "trecho": "O benefício foi mais relevante no subgrupo LFN-positivo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CLEOPATRA",
+        "nct": "NCT00567190",
+        "nctEstado": "VERIFICADO",
+        "populacao": "HER2+ metastático 1ª linha",
+        "bracos": "Pertuzumabe + trastuzumabe + docetaxel vs placebo",
+        "desfecho": "SLP; SG",
+        "resultado": "SG 56,5 vs 40,8 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 18,
+          "trecho": "SG (56,5 versus 40,8 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "INAVO120",
+        "nct": "NCT04191499",
+        "nctEstado": "VERIFICADO",
+        "populacao": "RH+/HER2- PIK3CAm com resistência endócrina",
+        "bracos": "Inavolisibe + palbociclibe + fulvestranto vs placebo",
+        "desfecho": "SLP; SG",
+        "resultado": "SLP 15 vs 7,3 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 10,
+          "trecho": "15 versus 7,3 meses; HR 0,43",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CAPItello-291",
+        "nct": "NCT04305496",
+        "nctEstado": "VERIFICADO",
+        "populacao": "RH+/HER2- pós-IA",
+        "bracos": "Capivasertibe + fulvestranto vs placebo",
+        "desfecho": "SLP",
+        "resultado": "SLP 7,2 vs 3,6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 13,
+          "trecho": "A SLP mediana foi de 7,2 e 3,6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "DESTINY-Breast04",
+        "nct": "NCT03734029",
+        "nctEstado": "VERIFICADO",
+        "populacao": "HER2-low metastático",
+        "bracos": "T-DXd vs QT",
+        "desfecho": "SLP; SG",
+        "resultado": "SG 23,9 vs 17,5 meses (RH+)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 15,
+          "trecho": "foi de 23,9 e 17,5 meses, respectivamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CREATE-X",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "populacao": "HER2- residual pós-neo",
+        "bracos": "Capecitabina vs observação",
+        "desfecho": "SLD; SG",
+        "resultado": "TN: +8,5% em 5 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 18,
+          "trecho": "o ganho absoluto em 5 anos com capecitabina foi de",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "Anos 1-3",
+        "exames": [
+          "MAMOGRAFIA_DIAGNOSTICA"
+        ],
+        "periodicidade": "Consulta a cada 3-6 meses; mamografia ≥6 meses após RT e depois anual",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 23,
+          "trecho": "A cada 3-6 meses nos primeiros 3 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Anos 4-5",
+        "exames": [
+          "MAMOGRAFIA_DIAGNOSTICA"
+        ],
+        "periodicidade": "Consulta a cada 6-12 meses; mamografia anual",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 23,
+          "trecho": "depois a cada 6-12 meses nos 2 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Após 5 anos",
+        "exames": [
+          "MAMOGRAFIA_DIAGNOSTICA"
+        ],
+        "periodicidade": "Anual; avaliação ginecológica anual",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 23,
+          "trecho": "Mamografia é o único exame de imagem necessário",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Durante IA ou supressão ovariana",
+        "exames": [
+          "DENSITOMETRIA_OSSEA"
+        ],
+        "periodicidade": "Antes da HT e a cada 1-2 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 21,
+          "trecho": "feita antes do início da terapia endócrina e seguir a cada 1-2 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Durante trastuzumabe",
+        "exames": [
+          "ECOCARDIOGRAMA"
+        ],
+        "periodicidade": "0, 3, 6, 9 e 12 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+          "pagina": 20,
+          "trecho": "deve ser realizado 0, 3, 6, 9 e 12 meses de trata",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "BETA_HCG",
+      "BIOPSIA_GANGLIO",
+      "BIOPSIA_MAMA",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "CALCIO",
+      "CINTILOGRAFIA_OSSEA",
+      "CREATININA",
+      "DENSITOMETRIA_OSSEA",
+      "ECOCARDIOGRAMA",
+      "FOSFATASE_ALCALINA",
+      "HEMOGRAMA",
+      "HER2_QUANTIFICACAO",
+      "IMUNOHISTOQUIMICA",
+      "MAMOGRAFIA_DIAGNOSTICA",
+      "PET_CT_FDG",
+      "RM_CRANIO",
+      "RM_MAMA",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "TC_TORAX",
+      "TGO",
+      "TGP",
+      "USG_AXILAS",
+      "USG_MAMAS_BILATERAL",
+      "VENTRICULOGRAFIA_MUGA",
+      "MOLECULAR_PCR_MUTACAO",
+      "SEQUENCIAMENTO_AMPLICON"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "Tamoxifeno",
+        "com": "Inibidores potentes de CYP2D6 (paroxetina, fluoxetina, bupropiona)",
+        "ref": ""
+      },
+      {
+        "droga": "Ribociclibe",
+        "com": "Fármacos que prolongam QTc e inibidores/indutores fortes de CYP3A4",
+        "ref": ""
+      },
+      {
+        "droga": "Palbociclibe / abemaciclibe",
+        "com": "Inibidores/indutores fortes de CYP3A4",
+        "ref": ""
+      },
+      {
+        "droga": "Capecitabina",
+        "com": "Varfarina, fenitoína",
+        "ref": ""
+      },
+      {
+        "droga": "Antraciclina",
+        "com": "Trastuzumabe (cardiotoxicidade aditiva; sequenciar)",
+        "ref": ""
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "Cardiotoxicidade anti-HER2/antraciclina",
+        "termosCTCAEv6": [
+          "Ejection fraction decreased",
+          "Heart failure",
+          "Left ventricular dysfunction"
+        ]
+      },
+      {
+        "classe": "Mielotoxicidade",
+        "termosCTCAEv6": [
+          "Neutrophil count decreased",
+          "Febrile neutropenia",
+          "Anemia",
+          "Platelet count decreased"
+        ]
+      },
+      {
+        "classe": "Neurotoxicidade de taxano",
+        "termosCTCAEv6": [
+          "Peripheral sensory neuropathy"
+        ]
+      },
+      {
+        "classe": "Fluoropirimidina oral",
+        "termosCTCAEv6": [
+          "Palmar-plantar erythrodysesthesia syndrome",
+          "Diarrhea"
+        ]
+      },
+      {
+        "classe": "iCDK4/6 / inibidor PI3K-AKT",
+        "termosCTCAEv6": [
+          "Neutrophil count decreased",
+          "Diarrhea",
+          "Hyperglycemia"
+        ]
+      },
+      {
+        "classe": "Imunoterapia (pembrolizumabe)",
+        "termosCTCAEv6": [
+          "Hypothyroidism",
+          "Colitis",
+          "Pneumonitis",
+          "Hepatitis",
+          "Adrenal insufficiency"
+        ]
+      },
+      {
+        "classe": "T-DXd",
+        "termosCTCAEv6": [
+          "Pneumonitis",
+          "Nausea"
+        ]
+      },
+      {
+        "classe": "Hormonioterapia",
+        "termosCTCAEv6": [
+          "Hot flashes",
+          "Arthralgia",
+          "Thromboembolic event",
+          "Uterine hemorrhage"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "Antiemese de alto risco (AC)",
+      "G-CSF profilático (dose-densa, TC)",
+      "Pré-medicação de taxano",
+      "Loção/creme ureia para mão-pé (capecitabina)"
+    ],
+    "orientacoes": [
+      "Sinais de neutropenia febril",
+      "Contracepção não hormonal durante o tratamento",
+      "Sangramento vaginal em uso de tamoxifeno: avisar",
+      "Exercício físico durante o tratamento"
+    ],
+    "encaminhamentos": [
+      "Aconselhamento genético (critérios SBOC)",
+      "Preservação de fertilidade (pré-menopausa)",
+      "Cardio-oncologia se queda de FEVE",
+      "Mastologia/cirurgia",
+      "Radioterapia"
+    ],
+    "laudos": [
+      "APAC quimioterapia (finalidade adjuvante/neoadjuvante/paliativa)",
+      "Laudo para trastuzumabe/pertuzumabe/T-DM1 conforme PCDT (Portaria Conjunta SAES/SECTICS nº 17/2024 — não lida)"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "HER2 IHQ 2+",
+        "y": "ISH (FISH/CISH)",
+        "z": "Amplificado = HER2+ (anti-HER2); não amplificado = HER2-low",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-estadiamento-v7-VERSaO-FINAL.pdf",
+          "pagina": 5,
+          "trecho": "Em casos de resultado HER2 indeterminado (2+), deve ser realizada a hibridização",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Triplo-negativo pós-neoadjuvância sem RPC",
+        "y": "gBRCA",
+        "z": "Capecitabina 8 ciclos; se gBRCA+: olaparibe 1 ano; manter pembrolizumabe se usado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 13,
+          "trecho": "Capecitabina 8",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "HER2+ pós-neoadjuvância",
+        "y": "RPC e cN inicial",
+        "z": "Residual: T-DM1 14 ciclos; RPC cN0: trastuzumabe; RPC cN+: trastuzumabe + pertuzumabe (até 1 ano)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+          "pagina": 16,
+          "trecho": "Doença residual",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "RH+/HER2- metastático com indicação de terapia-alvo",
+        "y": "PIK3CA + intervalo desde HT adjuvante",
+        "z": "PIK3CAm e recidiva ≤12 meses: fulvestranto + palbociclibe + inavolisibe; demais: IA + iCDK4/6",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 8,
+          "trecho": "Para pacientes com mutação de PIK3CA e recidiva durante ou até 1 ano",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Trastuzumabe em curso",
+        "y": "FEVE a cada 3 meses",
+        "z": "Queda ≥16% absoluta, ou abaixo do LIN com queda ≥10%: suspender e repetir em 4 semanas",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=492dbdb2-077e-4064-bff3-372d6af0a7a2 (HERCEPTIN (trastuzumabe) — rótulo FDA; openFDA consultado 2026-10-11)",
+          "pagina": null,
+          "trecho": "Withhold Herceptin for ≥ 16% absolute decrease in LVEF from pre-treatment values",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Triplo-negativo metastático 1ª linha",
+        "y": "PD-L1 CPS (22C3)",
+        "z": "CPS ≥10: pembrolizumabe + QT; CPS <10 sem gBRCA: QT ou Dato-DXd; gBRCA: iPARP",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
+          "pagina": 23,
+          "trecho": "PD-L1 CPS ≥ 10 (independente do",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    "SEM_FONTE: doses de RT (mama/parede/drenagens) não constam nas diretrizes SBOC lidas.",
+    "SEM_FONTE: doses de pembrolizumabe + QT parceira, T-DXd, sacituzumabe, Dato-DXd, everolimo, olaparibe/talazoparibe no metastático — SBOC metastática v6 não traz tabela de doses; buscar bula ANVISA antes de criar protocolos.",
+    "SEM_FONTE: paclitaxel semanal no metastático (SBOC p.24 cita regime semanal sem dose).",
+    "SUS: status CONITEC de ACdd/AC/T/TC/CMF (citotóxicos via APAC) não verificado documentalmente; iCDK4/6 só por fonte secundária (Portaria 73/2021, texto não lido).",
+    "SUS: pembrolizumabe TNBC neoadjuvante em CP 39/2026 sem decisão final localizada; alternativa SUS: AC→T com carboplatina.",
+    "NATALEE: NCT não confirmado na API (número testado retornou vazio).",
+    "Emetogenicidade: classificação formal (MASCC/ASCO) não está nas fontes SBOC lidas.",
+    "PCDT Câncer de Mama (Portaria Conjunta SAES/SECTICS nº 17/2024) não lido no original.",
+    "Aula PRO 41 (mama na gestação) não incorporada."
+  ],
+  "conflitos": [
+    {
+      "tema": "Paclitaxel no TCHP neoadjuvante",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+        "pagina": 9,
+        "trecho": "Paclitaxel 80 mg/m2 EV D1 e D8 ou",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=17f85d17-ab71-4f5b-9fe3-0b8c822f69ff (PERJETA (pertuzumabe) — rótulo FDA; openFDA consultado 2026-10-11)",
+        "pagina": null,
+        "trecho": "Neoadjuvant: Administer PERJETA, trastuzumab or trastuzumab hyaluronidase-oysk, and chemotherapy preoperatively",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Registrado docetaxel 75 mg/m2 como droga principal (presente em SBOC e bula); paclitaxel D1/D8 só como observação."
+    },
+    {
+      "tema": "Monitorização de FEVE com trastuzumabe",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+        "pagina": 20,
+        "trecho": "deve ser realizado 0, 3, 6, 9 e 12 meses de trata",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=492dbdb2-077e-4064-bff3-372d6af0a7a2 (HERCEPTIN (trastuzumabe) — rótulo FDA; openFDA consultado 2026-10-11)",
+        "pagina": null,
+        "trecho": "LVEF measurements every 6 months for at least 2 years following completion",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Usar o mais restritivo: a cada 3 meses no tratamento e a cada 6 meses por 2 anos após adjuvância (bula). Não citar classe/nível ESC 2022."
+    },
+    {
+      "tema": "Duração do pegfilgrastim/filgrastim no ACdd",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
+        "pagina": 9,
+        "trecho": "Filgrastim 300 mcg SC D3-D10 ou Pegfilgrastim 6 mg SC D2",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
+        "pagina": 8,
+        "trecho": "Filgrastima 300 mcg SC D2-D10 ou",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Divergência D3-D10 (adjuvância) × D2-D10 (neo) mantida por cenário, sem transferência."
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (Opus 5.5) — curador de rascunho; aprovação clínica pendente",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC 2026 Mama estadiamento v7 (págs. 4-25)",
+      "SBOC 2026 Mama neoadjuvante v8 (págs. 4-17)",
+      "SBOC 2026 Mama localizada/adjuvância v7 (págs. 4-23)",
+      "SBOC 2026 Mama metastática v6 (págs. 4-26)",
+      "Onco PRO 2026 Aula 35 (pág. 11) — apoio",
+      "Rótulos FDA via openFDA: Herceptin, Perjeta, Keytruda IV, Xeloda, Ibrance, Kisqali, Femara",
+      "ClinicalTrials.gov API v2 (NCTs listados)",
+      "CONITEC/Portarias via busca web (fontes secundárias; ver referências)"
+    ],
+    "aprovacaoClinica": null
+  }
+}

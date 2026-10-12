@@ -1,0 +1,66 @@
+{
+  "header": {
+    "id": "encaminhamento-cuidados-paliativos",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Onco PRO 2026 aulas 89–90 (dispneia, sedação paliativa, dor) — apoio; critérios de motivo = lista do serviço, PENDENTE aprovação",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "estrutura": {
+    "fatoConfirmado": [
+      "diagnóstico (CID) e data",
+      "estadiamento (sistema e edição)",
+      "tratamento realizado e em curso",
+      "ECOG",
+      "medicamentos em uso",
+      "exames recentes com data"
+    ],
+    "decisaoMedica": [
+      "motivo (lista fechada)",
+      "pergunta clínica",
+      "urgência com critério"
+    ]
+  },
+  "portas": {
+    "consome": [
+      "templates/resumo-prontuario-modelo-servico",
+      "tumor",
+      "toxicidade.vigente",
+      "consulta.ecog"
+    ],
+    "oferece": [
+      "documento.encaminhamento"
+    ]
+  },
+  "proibicoes": [
+    "conduta do especialista escrita pelo app",
+    "semáforo ou cor no documento (D-F1-01)"
+  ],
+  "destinoNoSus": "Equipe/ambulatório de cuidados paliativos via regulação local",
+  "motivosListaFechada": [
+    "dor de difícil controle",
+    "dispneia refratária",
+    "sintomas múltiplos não controlados",
+    "doença metastática com declínio funcional (ECOG ≥ 3)",
+    "planejamento de cuidados e diretivas antecipadas",
+    "suporte à família"
+  ],
+  "urgencia": {
+    "eletivo": "planejamento de cuidados",
+    "prioritario": "sintoma não controlado com analgesia/suporte padrão",
+    "urgente": "sintoma refratário com sofrimento intenso: contato direto"
+  },
+  "packs": "todos (transversal)",
+  "pendencias": [
+    "Critérios de motivo e de urgência: aprovação do Dr. Silas."
+  ]
+}

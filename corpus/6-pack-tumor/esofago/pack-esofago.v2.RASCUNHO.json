@@ -1,0 +1,2362 @@
+{
+  "header": {
+    "id": "pack-esofago",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Esôfago v4 (Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf)",
+      "trecho": "Esta diretriz tem como objetivo apoiar as decisões clínicas no tratamento de esôfago",
+      "edicao": "v4, 2026 (publicação 29/04/2026, versão para colaboração)"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Câncer de esôfago e da junção esofagogástrica (JEG)",
+    "cid10": [
+      "C15"
+    ],
+    "subtipos": [
+      "carcinoma de células escamosas (CEC)",
+      "adenocarcinoma (esôfago distal/JEG)"
+    ],
+    "cenarios": [
+      "inicial_cT1N0",
+      "localmente_avancado_ressecavel",
+      "irressecavel_T4b",
+      "metastatico_CEC",
+      "metastatico_adenocarcinoma"
+    ],
+    "limitesAplicabilidade": "Adulto com carcinoma de esôfago/JEG. Adenocarcinoma metastático de esôfago/JEG segue o pack gástrico (SBOC remete à diretriz de estômago). Siewert III é tratado como gástrico. Não cobre tumores neuroendócrinos, GIST ou sarcomas. Pack propõe; médico decide.",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 23,
+      "trecho": "Consultar Diretriz de câncer de estômago – doença metastática",
+      "estado": "VERIFICADO"
+    }
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax com contraste",
+        "indicacao": "universal",
+        "quando": "estadiamento inicial",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "TC de tórax e abdome com contraste oral e endovenoso",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome com contraste",
+        "indicacao": "universal",
+        "quando": "estadiamento inicial",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "TC de tórax e abdome com contraste oral e endovenoso",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT",
+        "indicacao": "condicional",
+        "quando": "casos não metastáticos: estadiamento, planejamento e avaliação de resposta",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "PET/CT: recomendado em casos não metastáticos, com papel relevante no estadiamento",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [
+      {
+        "catalogoId": "EDA",
+        "rotulo": "Endoscopia digestiva alta com biópsias múltiplas (idealmente 6–8 fragmentos); topografia e Siewert na JEG",
+        "indicacao": "universal",
+        "quando": "diagnóstico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "EDA com biópsias múltiplas (idealmente ≥ 6-8 amostras representativas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "Ecoendoscopia",
+        "indicacao": "condicional",
+        "quando": "sem M1, preferencialmente na suspeita de T1 ou T2",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Ecoendoscopia: indicada na ausência de doença metastática M1",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "SEM_ID_NO_CATALOGO"
+      },
+      {
+        "catalogoId": "BRONCOSCOPIA",
+        "rotulo": "Broncoscopia",
+        "indicacao": "condicional",
+        "quando": "tumor de esôfago médio/proximal (acima da carina), sem M1 evidente",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Broncoscopia: indicada para tumores localizados no esôfago médio e proximal",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "Laparoscopia diagnóstica",
+        "indicacao": "condicional",
+        "quando": "adenocarcinoma de JEG cT3/cT4 ou cN+, sem M1 nas tomografias (doença peritoneal oculta)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Laparoscopia diagnóstica: indicada em adenocarcinomas localmente avançados",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "SEM_ID_NO_CATALOGO"
+      }
+    ],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "endoscopica",
+          "quando": "biópsias múltiplas na EDA diagnóstica",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 11,
+            "trecho": "EDA com biópsias múltiplas (idealmente ≥ 6-8 amostras representativas",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "tipo histológico (CEC × adenocarcinoma)",
+        "grau histológico",
+        "profundidade de invasão (T1a mucosa × T1b submucosa) em ressecção endoscópica",
+        "invasão linfovascular",
+        "margens",
+        "tamanho tumoral (> 2 cm é fator de alto risco)"
+      ],
+      "laudoFonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 13,
+        "trecho": "Invasão linfovascular; Histologia pouco diferenciada; Margem positiva; Tamanho > 2 cm.",
+        "estado": "VERIFICADO"
+      },
+      "molecular": [
+        {
+          "alvo": "MMR/MSI",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "todos os pacientes",
+          "consequencia": "MSI-H/dMMR orienta imunoterapia na doença avançada",
+          "disponivelSUS": "parcial",
+          "notaSUS": "IHQ por marcador tem código SIGTAP (0203020049); cobertura do painel MMR não confirmada",
+          "metodosAlternativos": [
+            "PCR",
+            "NGS"
+          ],
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 11,
+            "trecho": "Testagem, em todos os pacientes, de instabilidade de microssatélites (MSI)",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "PD-L1 (CPS para CEC/adeno; TPS e TAP conforme droga)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "suspeita ou confirmação de doença avançada/metastática; e na peça com doença residual após QT/RT neoadjuvante (nivolumabe adjuvante se CPS ≥ 1)",
+          "consequencia": "define imunoterapia de 1ª linha (CPS ≥ 10 pembrolizumabe; TPS ≥ 1% nivolumabe; TAP ≥ 5% tislelizumabe)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 11,
+            "trecho": "IHQ para PD-L1 em casos com suspeita ou confirmação de doença avançada/metastática",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "HER2",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "adenocarcinoma avançado/metastático; IHQ 2+ confirmar por hibridização in situ (FISH/HER2_QUANTIFICACAO) — ver pack gástrico",
+          "consequencia": "trastuzumabe (pack gástrico)",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 11,
+            "trecho": "Teste de HER2 e Claudina 18.2 (CLDN18.2) em pacientes com adenocarcinoma avançado",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Claudina 18.2",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "adenocarcinoma avançado/metastático",
+          "consequencia": "zolbetuximabe (pack gástrico)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 11,
+            "trecho": "Teste de HER2 e Claudina 18.2 (CLDN18.2) em pacientes com adenocarcinoma avançado",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "DPYD (deficiência de DPD)",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "todos os candidatos a fluoropirimidina, se o teste estiver disponível, antes do início",
+          "consequencia": "deficiência total: contraindicação absoluta; parcial: redução de dose (sem percentual na fonte)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 23,
+            "trecho": "recomenda-se a pesquisa de deficiência de DPD em todos os pacientes candidatos",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição (TNM clínico, patológico e pós-neoadjuvância distintos para CEC e adenocarcinoma)",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 25,
+      "trecho": "AMERICAN JOINT COMMITTEE ON CANCER. AJCC Cancer Staging Manual. 8. ed.",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma completo",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "avaliar anemia ferropriva",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Hemograma completo (avaliar propedêutica para anemia ferropriva); Função hepática; Função renal.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGO",
+        "rotulo": "TGO (função hepática)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "basal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Hemograma completo (avaliar propedêutica para anemia ferropriva); Função hepática; Função renal.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "rotulo": "TGP (função hepática)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "basal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Hemograma completo (avaliar propedêutica para anemia ferropriva); Função hepática; Função renal.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BILIRRUBINA",
+        "rotulo": "Bilirrubinas (função hepática)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "basal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Hemograma completo (avaliar propedêutica para anemia ferropriva); Função hepática; Função renal.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FOSFATASE_ALCALINA",
+        "rotulo": "Fosfatase alcalina (função hepática)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "basal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Hemograma completo (avaliar propedêutica para anemia ferropriva); Função hepática; Função renal.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Creatinina (função renal)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "basal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Hemograma completo (avaliar propedêutica para anemia ferropriva); Função hepática; Função renal.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "UREIA",
+        "rotulo": "Ureia (função renal)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "basal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Hemograma completo (avaliar propedêutica para anemia ferropriva); Função hepática; Função renal.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FERRITINA",
+        "rotulo": "Ferritina",
+        "cenario": "estadiamento",
+        "indicacao": "condicional",
+        "quando": "propedêutica de anemia ferropriva se anemia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Hemograma completo (avaliar propedêutica para anemia ferropriva); Função hepática; Função renal.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FERRO_SERICO",
+        "rotulo": "Ferro sérico",
+        "cenario": "estadiamento",
+        "indicacao": "condicional",
+        "quando": "propedêutica de anemia ferropriva se anemia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Hemograma completo (avaliar propedêutica para anemia ferropriva); Função hepática; Função renal.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "cTis ou cT1a de baixo risco",
+        "conduta": "ressecção endoscópica em bloco",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "cTis ou cT1a de baixo risco: ressecção endoscópica em bloco",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "cT1a de alto risco (invasão linfovascular, pouco diferenciado, margem positiva, > 2 cm) ou cT1b",
+        "conduta": "esofagectomia com linfadenectomia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "cT1a de alto risco ou cT1b (invasão submucosa): esofagectomia com linfadenectomia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "esôfago cervical (cT1a alto risco/cT1b) ou inelegível à cirurgia",
+        "conduta": "QT/RT definitiva",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Tumores esôfago cervical (cT1a de alto risco ou cT1b) ou inelegíveis para cirurgia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "CEC localmente avançado (cT2-T4 ou cN1-3 M0) de esôfago médio/inferior",
+        "conduta": "QT/RT neoadjuvante → esofagectomia; avaliar adjuvância se doença residual",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Tumores de esôfago médio/inferior: QT/RT neoadjuvante seguido de esofagectomia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "CEC localmente avançado cervical ou inelegível",
+        "conduta": "QT/RT definitiva",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Tumores de esôfago cervical ou inelegíveis para cirurgia: QT/RT definitivas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Adenocarcinoma localmente avançado, PS 0–1",
+        "conduta": "QT perioperatória (FLOT + durvalumabe) com cirurgia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "QT neoadjuvante (Flot + Durvalumabe) seguida de cirurgia e QT adjuvante",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Doença irressecável (T4b)",
+        "conduta": "QT/RT definitiva",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Doença irressecável (T4b) RT/QT definitiva",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "CEC metastático PD-L1 positivo",
+        "conduta": "QT (platina + 5-FU) + imunoterapia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "PD-L1 positivo: QT (platina + 5-FU) + imunoterapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "CEC metastático PD-L1 negativo",
+        "conduta": "QT (platina + 5-FU)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "PD-L1 negativo: QT (platina + 5-FU).",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Adenocarcinoma metastático",
+        "conduta": "seguir pack gástrico (doença avançada)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "Consultar Diretriz de câncer de estômago – doença metastática",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [],
+      "naoPedirDeRotina": [
+        "CEA e CA 19-9: a diretriz SBOC 2026 de esôfago não os inclui no estadiamento nem no seguimento"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "inicial_cT1N0",
+        "intencao": "curativa",
+        "modalidades": [
+          "ressecção endoscópica",
+          "esofagectomia",
+          "QT/RT definitiva (cervical/inelegível)"
+        ],
+        "criterio": "cTis/cT1a baixo risco × alto risco/cT1b",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "cTis ou cT1a de baixo risco: ressecção endoscópica em bloco",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "localmente_avancado_ressecavel (CEC)",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT/RT neoadjuvante",
+          "esofagectomia",
+          "nivolumabe adjuvante se doença residual e CPS ≥ 1"
+        ],
+        "criterio": "cT2-T4 ou cN1-3, M0",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "A QT/RT pré-operatória é a abordagem preferida para pacientes com CEC",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "localmente_avancado_ressecavel (adenocarcinoma)",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT perioperatória (FLOT ± durvalumabe)",
+          "esofagectomia"
+        ],
+        "criterio": "cT2-T4 ou cN1-3, M0; CROSS permanece opção válida (comorbidades/menor toxicidade)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "embora o Cross ainda seja uma opção válida, especialmente em casos de comorbidades",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "irressecavel_T4b ou recusa/inelegível",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT/RT definitiva"
+        ],
+        "criterio": "T4b, inelegível ou recusa de cirurgia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "A QT/RT definitiva deve ser reservada para pacientes com doença irressecável",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico_CEC",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT platina + fluoropirimidina ± imunoterapia",
+          "2ª linha: imunoterapia ou taxano/irinotecano"
+        ],
+        "criterio": "PD-L1 (CPS/TPS/TAP)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Regimes à base de fluoropirimidina (como 5-fluorouracil ou capecitabina) combinados com platinas",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "esofago-qtrt-definitiva-carboplatina-paclitaxel",
+        "nome": "Carboplatina + paclitaxel semanal concomitante à RT definitiva",
+        "cenario": "irressecavel_T4b / inelegível / cervical",
+        "linha": "definitivo (concomitante à RT 50,4 Gy)",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "semanal durante a RT"
+          },
+          {
+            "droga": "Carboplatina",
+            "dose": 2,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "semanal durante a RT"
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.esofago.carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt@1.0.0",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "via": null,
+          "nota": "No cadastro SIGTAP 2026-09 local há QT de esôfago avançado (0304020176) e QT prévia (0304040118); procedimento para QT concomitante definitiva não identificado.",
+          "pendencia": "SUS_PROCEDIMENTO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304040118",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DE ESÔFAGO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Paclitaxel 50 mg/m² EV D1 Carboplatina AUC 2 EV D1 Semanalmente durante a RT",
+          "estado": "VERIFICADO"
+        },
+        "numeroCiclosNota": "semanal durante toda a RT (número de semanas = duração da RT)",
+        "radioterapiaAssociada": "50,4 Gy (5.040 cGy) em 1,8 Gy/fração",
+        "esquemaPreferencialDefinitivo": true,
+        "fontePreferencia": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "tem sido o preferencial na combinação com RT como tratamento definitivo",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-qtrt-definitiva-cisplatina-5fu",
+        "nome": "Cisplatina + 5-FU concomitante à RT definitiva (Herskovic/RTOG 85-01)",
+        "cenario": "irressecavel_T4b / inelegível / cervical",
+        "linha": "definitivo (concomitante à RT 50,4 Gy)",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU (infusão contínua)",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D4",
+            "observacao": "dose por dia, infusão contínua; nas semanas 1 e 5 da RT"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "via": null,
+          "nota": "Procedimento SIGTAP específico para QT/RT definitiva de esôfago não identificado no cadastro local.",
+          "pendencia": "SUS_PROCEDIMENTO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304040118",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DE ESÔFAGO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Cisplatina 75 mg/m² EV D1 5-FU 1.000 mg/m²/dia EV D1 ao D4",
+          "estado": "VERIFICADO"
+        },
+        "numeroCiclosFonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "O regime padrão para QT/RT definitiva é quatro ciclos de cisplatina e 5-FU",
+          "estado": "VERIFICADO"
+        },
+        "calendario": "ciclos concomitantes nas semanas 1 e 5 da RT; demais ciclos como consolidação",
+        "radioterapiaAssociada": "50,4 Gy em 1,8 Gy/fração",
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-qtrt-definitiva-mfolfox4",
+        "nome": "mFOLFOX4 concomitante à RT definitiva (PRODIGE5/ACCORD17)",
+        "cenario": "irressecavel_T4b / inelegível / cervical",
+        "linha": "definitivo",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Folinato de cálcio",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 1600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "infusão contínua de 46 h"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "via": null,
+          "nota": "Procedimento SIGTAP específico para QT/RT definitiva de esôfago não identificado no cadastro local.",
+          "pendencia": "SUS_PROCEDIMENTO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304040118",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DE ESÔFAGO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "concomitantes à RT, seguidos de 3 ciclos após a RT (total 6 ciclos)",
+          "estado": "VERIFICADO"
+        },
+        "fonteDoses": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Oxaliplatina 85 mg/m² EV D1 Folinato de cálcio 200 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "radioterapiaAssociada": "50,4 Gy em 1,8 Gy/fração (no PRODIGE5: 50 Gy em 25 frações)",
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-neoadjuvante-cross",
+        "nome": "CROSS — carboplatina + paclitaxel semanal com RT pré-operatória 41,4 Gy",
+        "cenario": "localmente_avancado_ressecavel (CEC; adenocarcinoma como alternativa ao FLOT)",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "semanal durante a RT"
+          },
+          {
+            "droga": "Carboplatina",
+            "dose": 2,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "semanal durante a RT"
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.esofago.carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304040118 (forma 03.04.04, quimioterapia prévia; valor fixo; drogas a critério do serviço)",
+          "nota": "Confirmar regras de compatibilidade da forma de organização no SIGTAP vigente.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304040118",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DE ESÔFAGO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Paclitaxel 50 mg/m² EV D1 Carboplatina AUC 2 EV D1 Semanalmente durante a RT",
+          "estado": "VERIFICADO"
+        },
+        "radioterapiaAssociada": "41,4 Gy (dose do CROSS; NÃO usar 50,4 Gy, que é da QT/RT definitiva)",
+        "fonteRT": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "combinação de carboplatina e paclitaxel com RT (41,4 Gy)",
+          "estado": "VERIFICADO"
+        },
+        "numeroCiclosNota": "semanal durante a RT; número de semanas não informado na SBOC — pendência",
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-neoadjuvante-cisplatina-5fu-rt",
+        "nome": "Cisplatina + 5-FU concomitante à RT pré-operatória (CALGB 9781) — não é CROSS",
+        "cenario": "localmente_avancado_ressecavel",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU (infusão contínua)",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D4",
+            "observacao": "dose por dia; semanas 1 e 5 da RT"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 2,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304040118 (quimioterapia prévia; valor fixo)",
+          "nota": "Confirmar no SIGTAP vigente.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304040118",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DE ESÔFAGO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Cisplatina 75 mg/m² EV D1 5-FU 1.000 mg/m²/dia EV D1 ao D4",
+          "estado": "VERIFICADO"
+        },
+        "radioterapiaAssociada": null,
+        "pendenciaRT": "SEM_FONTE: a SBOC não informa a dose de RT pré-operatória para este esquema; não transferir 50,4 Gy (definitiva) nem 41,4 Gy (CROSS)",
+        "nota": "Esquema citado como combinação possível no contexto neoadjuvante (CALGB 9781); a tabela reutiliza as doses do esquema definitivo.",
+        "fonteContexto": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "Uma combinação possível no contexto neoadjuvante é fluorouracil com cisplatina.",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-neoadjuvante-mfolfox4-rt",
+        "nome": "mFOLFOX4 concomitante à RT pré-operatória",
+        "cenario": "localmente_avancado_ressecavel",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Folinato de cálcio",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 1600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304040118 (quimioterapia prévia; valor fixo)",
+          "nota": "Confirmar no SIGTAP vigente.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304040118",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DE ESÔFAGO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Oxaliplatina 85 mg/m² EV D1 Folinato de cálcio 200 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "radioterapiaAssociada": null,
+        "pendenciaRT": "SEM_FONTE: dose de RT pré-operatória não informada para este esquema",
+        "numeroCiclosNota": "a tabela SBOC p.17 repete '3 ciclos após a RT (total 6)', calendário do PRODIGE5 definitivo; número no pré-operatório a definir pelo médico",
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-adjuvante-nivolumabe",
+        "nome": "Nivolumabe adjuvante (CheckMate 577) — doença residual após QT/RT neoadjuvante + cirurgia, PD-L1 CPS ≥ 1",
+        "cenario": "localmente_avancado_ressecavel (pós QT/RT neoadjuvante e esofagectomia)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Nivolumabe (semanas 1–16)",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "a cada 2 semanas por 16 semanas"
+          },
+          {
+            "droga": "Nivolumabe (semana 17 até completar 12 meses)",
+            "dose": 480,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "a cada 4 semanas"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "via": null,
+          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
+          "alternativaSUS": "seguimento clínico-radiológico (sem adjuvância incorporada identificada)",
+          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "não localizada",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "240 mg a cada 2 semanas por 16 semanas seguido de 480 mg",
+          "estado": "VERIFICADO"
+        },
+        "duracaoTotal": "12 meses",
+        "criterio": "doença residual patológica + PD-L1 CPS ≥ 1",
+        "cicloDiasNota": "14 dias na fase 1; 28 dias na fase 2",
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-perioperatorio-flot",
+        "nome": "FLOT perioperatório (FLOT4/ESOPEC)",
+        "cenario": "localmente_avancado_ressecavel (adenocarcinoma)",
+        "linha": "perioperatório (neoadjuvante + adjuvante)",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Folinato de cálcio",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Docetaxel",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 24 h",
+            "dose": 2600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "infusão contínua de 24 h; sem bolus"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 8,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.esofago.flot__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC 0304040118 (quimioterapia prévia) para a fase pré-operatória; fase pós-operatória sem procedimento adjuvante de esôfago identificado no cadastro local",
+          "nota": "Confirmar no SIGTAP vigente.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304040118",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DE ESÔFAGO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "A cada 2 semanas, sendo 4 ciclos pré- e 4 ciclos pós-operatórios",
+          "estado": "VERIFICADO"
+        },
+        "fonteDoses": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Docetaxel 50 mg/m² EV D1 5-FU 2.600 mg/m² EV D1 (infusão contínua de 24h)",
+          "estado": "VERIFICADO"
+        },
+        "alertaFicha": "a ficha vinculada traz 5-FU 2.400 mg/m²; a SBOC traz 2.600 mg/m² — ver conflitos",
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-perioperatorio-flot-durvalumabe",
+        "nome": "FLOT + durvalumabe perioperatório (MATTERHORN)",
+        "cenario": "localmente_avancado_ressecavel (adenocarcinoma, PS 0–1)",
+        "linha": "perioperatório",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Folinato de cálcio",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Docetaxel",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 24 h",
+            "dose": 2600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Durvalumabe",
+            "dose": 1500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "a cada 4 semanas concomitante ao FLOT; depois 10 ciclos mensais"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 8,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "via": null,
+          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
+          "alternativaSUS": "FLOT perioperatório sem durvalumabe",
+          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "não localizada",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "FLOT a cada 2 semanas, 4 ciclos pré- e 4 ciclos pós-operatórios",
+          "estado": "VERIFICADO"
+        },
+        "fonteDurvalumabe": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Durvalumabe 1.500 mg 4/4 semanas concomitante ao FLOT, seguido de 10 ciclos mensais",
+          "estado": "VERIFICADO"
+        },
+        "numeroCiclosNota": "8 ciclos de FLOT (q14); durvalumabe q28 durante o FLOT e depois 10 ciclos",
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-paliativo-1l-pembrolizumabe-cisplatina-5fu",
+        "nome": "Pembrolizumabe + cisplatina + 5-FU (KEYNOTE-590)",
+        "cenario": "metastatico_CEC (PD-L1 CPS ≥ 10)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU (infusão contínua)",
+            "dose": 800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": "dose por dia"
+          },
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "via": null,
+          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
+          "alternativaSUS": "cisplatina + 5-FU (procedimento 0304020176)",
+          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "não localizada",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Cisplatina 80 mg/m² EV D1 5-FU 800 mg/m²/dia EV D1 ao D5",
+          "estado": "VERIFICADO"
+        },
+        "manutencao": "pembrolizumabe até 35 ciclos (~2 anos) ou progressão/toxicidade",
+        "fonteManutencao": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "seguido de manutenção com pembrolizumabe até 35 ciclos",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-paliativo-1l-nivolumabe-cisplatina-5fu",
+        "nome": "Nivolumabe + cisplatina + 5-FU (CheckMate 648)",
+        "cenario": "metastatico_CEC (PD-L1 TPS ≥ 1%)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU (infusão contínua)",
+            "dose": 800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": "dose por dia"
+          },
+          {
+            "droga": "Nivolumabe",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 e D15",
+            "observacao": "ou 480 mg D1"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "via": null,
+          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
+          "alternativaSUS": "cisplatina + 5-FU (procedimento 0304020176)",
+          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "não localizada",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Nivolumabe 240 mg EV D1 e D15 (ou 480 mg EV D1)",
+          "estado": "CONFLITANTE"
+        },
+        "pendencia": "CONFLITANTE",
+        "notaConflito": "SBOC p.20 diz 'a cada 3 semanas' com nivolumabe D1 e D15 — calendário internamente inconsistente; cicloDias deixado nulo até conferência no protocolo do estudo",
+        "doseVerificada": false
+      },
+      {
+        "id": "esofago-paliativo-1l-tislelizumabe-qt",
+        "nome": "Tislelizumabe + platina + fluoropirimidina/paclitaxel (RATIONALE-306)",
+        "cenario": "metastatico_CEC (PD-L1 TAP ≥ 5%)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Tislelizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina (ou oxaliplatina 130 mg/m²)",
+            "dose": null,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "fonte dá faixa 60–80 mg/m²"
+          },
+          {
+            "droga": "5-FU (ou capecitabina 1.000 mg/m² VO 2x/dia D1–D14, ou paclitaxel 175 mg/m²)",
+            "dose": null,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": "fonte dá faixa 750–800 mg/m²/dia"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "via": null,
+          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
+          "alternativaSUS": "cisplatina + 5-FU (procedimento 0304020176)",
+          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "não localizada",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Cisplatina 60-80 mg/m² EV D1 ou Oxaliplatina 130 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "FAIXA_NA_FONTE",
+        "manutencao": "tislelizumabe até 35 ciclos",
+        "doseVerificada": false
+      },
+      {
+        "id": "esofago-paliativo-1l-nivolumabe-ipilimumabe",
+        "nome": "Nivolumabe + ipilimumabe (CheckMate 648)",
+        "cenario": "metastatico_CEC (PD-L1 TPS ≥ 1%)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Nivolumabe",
+            "dose": 3,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1, D15, D28",
+            "observacao": "SBOC escreve D28; ver conflitos"
+          },
+          {
+            "droga": "Ipilimumabe",
+            "dose": 1,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "via": null,
+          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
+          "alternativaSUS": "cisplatina + 5-FU (procedimento 0304020176)",
+          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "não localizada",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Nivolumabe 3 mg/kg EV D1, D15 e D28 Ipilimumabe 1 mg/kg EV D1",
+          "estado": "VERIFICADO"
+        },
+        "duracao": "até progressão/toxicidade",
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-paliativo-1l-cisplatina-5fu",
+        "nome": "Cisplatina + 5-FU (PD-L1 negativo)",
+        "cenario": "metastatico_CEC (PD-L1 negativo)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU (infusão contínua)",
+            "dose": 800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": "dose por dia"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020176 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Esquema citotóxico dentro do procedimento de QT paliativa de esôfago.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020176",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DE ESÔFAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Cisplatina 80 mg/m² EV D1 5-FU 800 mg/m²/dia EV D1 ao D5",
+          "estado": "INFERIDO"
+        },
+        "nota": "A SBOC recomenda 'QT (platina + 5-FU)' para PD-L1 negativo sem tabelar doses próprias; doses do backbone da tabela de 1ª linha (mesmo cenário). Confirmar.",
+        "doseVerificada": false,
+        "pendencia": "FONTE_INFERIDO"
+      },
+      {
+        "id": "esofago-paliativo-2l-pembrolizumabe",
+        "nome": "Pembrolizumabe monoterapia (KEYNOTE-181)",
+        "cenario": "metastatico_CEC (CPS ≥ 10)",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 35,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "via": null,
+          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
+          "alternativaSUS": "paclitaxel, docetaxel ou irinotecano (procedimento 0304020176)",
+          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "não localizada",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "Pembrolizumabe 200 mg EV D1 A cada 3 semanas, por 35 ciclos",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-paliativo-2l-nivolumabe",
+        "nome": "Nivolumabe monoterapia (ATTRACTION-3)",
+        "cenario": "metastatico_CEC",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Nivolumabe",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 35,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "via": null,
+          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
+          "alternativaSUS": "paclitaxel, docetaxel ou irinotecano (procedimento 0304020176)",
+          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "não localizada",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "Nivolumabe 240 mg EV D1 A cada 2 semanas, por 35 ciclos",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-paliativo-2l-tislelizumabe",
+        "nome": "Tislelizumabe monoterapia (RATIONALE-302)",
+        "cenario": "metastatico_CEC",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Tislelizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 35,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "via": null,
+          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
+          "alternativaSUS": "paclitaxel, docetaxel ou irinotecano (procedimento 0304020176)",
+          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "não localizada",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "Tislelizumabe 200 mg EV D1 A cada 3 semanas, por 35 ciclos",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-paliativo-2l-paclitaxel-semanal",
+        "nome": "Paclitaxel semanal",
+        "cenario": "metastatico_CEC",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": null,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": "fonte dá faixa 80–100 mg/m²"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020176 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT paliativa de esôfago.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020176",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DE ESÔFAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "Paclitaxel 80-100 mg/m² EV D1, D8 e D15 A cada 4 semanas",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "FAIXA_NA_FONTE",
+        "doseVerificada": false
+      },
+      {
+        "id": "esofago-paliativo-2l-docetaxel",
+        "nome": "Docetaxel monoterapia",
+        "cenario": "metastatico_CEC",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.esofago.docetaxel-monoterapia__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020176 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT paliativa de esôfago.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020176",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DE ESÔFAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "Docetaxel 75 mg/m² EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "esofago-paliativo-2l-irinotecano",
+        "nome": "Irinotecano monoterapia",
+        "cenario": "metastatico_CEC",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Irinotecano",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.esofago.irinotecano-monoterapia__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020176 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT paliativa de esôfago.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020176",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DE ESÔFAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "Irinotecano 150 mg/m² EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        },
+        "alertaFicha": "a ficha vinculada traz 350 mg/m² a cada 21 dias; a SBOC traz 150 mg/m² a cada 14 dias — ver conflitos",
+        "doseVerificada": true
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "QT/RT definitiva",
+        "doseTotalGy": 50.4,
+        "fracoes": 28,
+        "fracoesNota": "derivado: 50,4 Gy ÷ 1,8 Gy/fração",
+        "concomitante": "carboplatina+paclitaxel semanal, cisplatina+5-FU ou mFOLFOX4",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "considerando RT com dose de 5.040 cGy, 1,8 Gy/fração",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "QT/RT neoadjuvante CROSS",
+        "doseTotalGy": 41.4,
+        "fracoes": null,
+        "pendencia": "SEM_FONTE (fracionamento não informado na SBOC)",
+        "concomitante": "carboplatina AUC 2 + paclitaxel 50 mg/m² semanal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "combinação de carboplatina e paclitaxel com RT (41,4 Gy)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "QT/RT neoadjuvante com cisplatina+5-FU ou mFOLFOX4",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "pendencia": "SEM_FONTE",
+        "concomitante": "cisplatina+5-FU ou mFOLFOX4",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": null,
+          "pagina": null,
+          "trecho": null,
+          "estado": "DADO_AUSENTE"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "ressecção endoscópica em bloco",
+        "quando": "displasia de alto grau/cTis/cT1a sem fatores de alto risco",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "A ressecção endoscópica (RE) em bloco é o tratamento de escolha",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "esofagectomia com linfadenectomia",
+        "quando": "cT1a alto risco/cT1b; após neoadjuvância no localmente avançado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "cT1a de alto risco ou cT1b (invasão submucosa): esofagectomia com linfadenectomia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "vigilância ativa com cirurgia de resgate (SANO)",
+        "quando": "resposta clínica completa após QT/RT neoadjuvante, em centro com protocolo estruturado e decisão compartilhada",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "a vigilância ativa pode ser considerada como alternativa à esofagectomia",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "PD-L1 CPS ≥ 10 (CEC metastático)",
+        "opcao": "QT + pembrolizumabe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "CPS ≥10 /long-arrow-alt-right QT + Pembrolizumabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "PD-L1 TPS ≥ 1% (CEC metastático)",
+        "opcao": "QT + nivolumabe ou nivolumabe + ipilimumabe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "TPS ≥ 1% /long-arrow-alt-right QT + Nivolumabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "PD-L1 TAP ≥ 5% (CEC metastático)",
+        "opcao": "QT + tislelizumabe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "TAP ≥ 5% /long-arrow-alt-right QT + Tislelizumabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "doença residual após QT/RT neo + cirurgia, PD-L1 CPS ≥ 1",
+        "opcao": "nivolumabe adjuvante 1 ano",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Nivolumabe adjuvante (se PD-L1 CPS ≥ 1 e doença residual)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": null,
+      "riscoNeutropeniaFebril": null,
+      "pendencia": "SEM_FONTE (a diretriz de esôfago não classifica emetogenicidade nem risco de NF; usar corpus de suporte)",
+      "outros": [
+        "avaliação e aconselhamento nutricional individualizados; considerar gastrostomia/jejunostomia conforme o tratamento",
+        "intervenção para cessação do tabagismo",
+        "investigar histórico familiar (síndromes hereditárias)",
+        "discussão em equipe interdisciplinar"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 12,
+        "trecho": "avaliar gastrostomia ou jejunostomia a depender do tratamento proposto",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "CROSS",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "nctFonte": null,
+        "populacao": "esôfago/JEG T2–T3 N0–1 M0",
+        "bracos": "carboplatina+paclitaxel+RT 41,4 Gy → cirurgia × cirurgia",
+        "desfecho": "SG",
+        "resultado": "SG mediana 49 × 24 meses (HR 0,66)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "A mediana de SG foi de 49 meses no grupo tratado com QT/RT",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CheckMate 577",
+        "nct": "NCT02743494",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT02743494 (consultado 2026-10-11)",
+        "populacao": "doença residual após QT/RT neo + esofagectomia",
+        "bracos": "nivolumabe × placebo por até 1 ano",
+        "desfecho": "SLD",
+        "resultado": "SLD 22,4 × 11,0 meses (HR 0,69); SG sem significância",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "demonstrado ganho significativo em SLD (22,4 versus 11,0 meses; HR 0,69)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ESOPEC",
+        "nct": "NCT02509286",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT02509286 (consultado 2026-10-11)",
+        "populacao": "adenocarcinoma ressecável de esôfago/JEG",
+        "bracos": "FLOT perioperatório × CROSS",
+        "desfecho": "SG",
+        "resultado": "SG 3 anos 57,4% × 50,7% (HR 0,70)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "a taxa de SG em 3 anos foi maior no grupo Flot",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "MATTERHORN",
+        "nct": "NCT04592913",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT04592913 (consultado 2026-10-11)",
+        "populacao": "adenocarcinoma gástrico/JEG ressecável",
+        "bracos": "FLOT + durvalumabe × FLOT + placebo",
+        "desfecho": "SLE",
+        "resultado": "SLE 2 anos 67,4% × 58,5% (HR 0,71); SG HR 0,78",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "A sobrevida livre de eventos em dois anos foi de 67,4%",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "KEYNOTE-590",
+        "nct": "NCT03189719",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT03189719 (consultado 2026-10-11)",
+        "populacao": "carcinoma avançado de esôfago/JEG, 1ª linha",
+        "bracos": "pembrolizumabe + CF × CF",
+        "desfecho": "SG/SLP",
+        "resultado": "CEC CPS ≥ 10: SG 13,9 × 8,8 meses (HR 0,57)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "O Keynote-590, estudo de fase III, investigou o uso de pembrolizumabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CheckMate 648",
+        "nct": "NCT03143153",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT03143153 (consultado 2026-10-11)",
+        "populacao": "CEC avançado, 1ª linha",
+        "bracos": "nivolumabe + CF × nivolumabe + ipilimumabe × CF",
+        "desfecho": "SG/SLP",
+        "resultado": "PD-L1 ≥ 1%: SG 15,4 × 9,1 meses (nivo+QT)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 21,
+          "trecho": "O CheckMate 648 foi um estudo de fase 3 que incluiu pacientes",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "RATIONALE-306",
+        "nct": "NCT03783442",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT03783442 (consultado 2026-10-11)",
+        "populacao": "CEC avançado, 1ª linha",
+        "bracos": "tislelizumabe + QT × placebo + QT",
+        "desfecho": "SG",
+        "resultado": "SG 17,2 × 10,6 meses (HR 0,66)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 21,
+          "trecho": "No Rationale-306, um estudo de fase III, randomizado, duplo-cego",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "PRODIGE5/ACCORD17",
+        "nct": "NCT00861094",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT00861094 (consultado 2026-10-11)",
+        "populacao": "câncer de esôfago localizado para QT/RT definitiva",
+        "bracos": "mFOLFOX4 × 5-FU + cisplatina com RT 50 Gy",
+        "desfecho": "SLP",
+        "resultado": "SLP 9,7 × 9,4 meses (HR 0,93)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "Ambos os grupos receberam RT com a dose de 50 Gy em 25 frações",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "FLOT4",
+        "nct": "NCT01216644",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT01216644 (consultado 2026-10-11)",
+        "populacao": "adenocarcinoma gástrico/JEG ressecável",
+        "bracos": "FLOT × ECF/ECX perioperatório",
+        "desfecho": "SG",
+        "resultado": "SG 50 × 35 meses (HR 0,77)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "O regime Flot demonstrou superioridade em SG 50 versus 35 meses",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "sem esofagectomia prévia (ASCO)",
+        "exames": [
+          "EDA",
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR"
+        ],
+        "periodicidade": "EDA a cada 3–12 meses; TC a cada 6–12 meses (exceto Tis e T1a)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "EDA a cada 3-12 meses TC a cada 6-12 meses (exceto Tis e T1a)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "pós-esofagectomia (ASCO)",
+        "exames": [
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "EDA"
+        ],
+        "periodicidade": "TC a cada 6–12 meses por 5 anos; EDA se indicada",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "TC a cada 6 - 12 meses por 5 anos EDA se indicada",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "BILIRRUBINA",
+      "BRONCOSCOPIA",
+      "CREATININA",
+      "EDA",
+      "FERRITINA",
+      "FERRO_SERICO",
+      "FOSFATASE_ALCALINA",
+      "HEMOGRAMA",
+      "IMUNOHISTOQUIMICA",
+      "PET_CT_FDG",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_TORAX",
+      "TGO",
+      "TGP",
+      "UREIA"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "5-FU/capecitabina",
+        "com": "brivudina",
+        "ref": "INAT-04"
+      },
+      {
+        "droga": "capecitabina",
+        "com": "varfarina/cumarínicos",
+        "ref": "INAT-02"
+      },
+      {
+        "droga": "cisplatina",
+        "com": "aminoglicosídeos/ototóxicos",
+        "ref": "INAT-15"
+      },
+      {
+        "droga": "paclitaxel",
+        "com": "clopidogrel",
+        "ref": "INAT-17"
+      },
+      {
+        "droga": "docetaxel",
+        "com": "inibidores fortes de CYP3A4",
+        "ref": "INAT-18"
+      },
+      {
+        "droga": "irinotecano",
+        "com": "inibidores/indutores fortes de CYP3A4/UGT1A1",
+        "ref": "INAT-13"
+      },
+      {
+        "droga": "anti-PD-1/PD-L1",
+        "com": "corticosteroide sistêmico basal; antibiótico próximo ao início",
+        "ref": "INAT-27"
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "fluoropirimidina",
+        "termosCTCAEv6": [
+          "Diarrhea",
+          "Mucositis oral",
+          "Palmar-plantar erythrodysesthesia syndrome"
+        ]
+      },
+      {
+        "classe": "platina",
+        "termosCTCAEv6": [
+          "Creatinine increased",
+          "Hearing impaired",
+          "Peripheral sensory neuropathy"
+        ]
+      },
+      {
+        "classe": "taxano",
+        "termosCTCAEv6": [
+          "Peripheral sensory neuropathy",
+          "Neutrophil count decreased"
+        ]
+      },
+      {
+        "classe": "irinotecano",
+        "termosCTCAEv6": [
+          "Diarrhea",
+          "Neutrophil count decreased"
+        ]
+      },
+      {
+        "classe": "imunoterapia (ICI)",
+        "termosCTCAEv6": [
+          "Colitis",
+          "Pneumonitis",
+          "Hypothyroidism",
+          "Hepatitis"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "receita-sintomaticos-modelo-servico"
+    ],
+    "orientacoes": [
+      "dieta-por-tumor (esofago-estomago)",
+      "sinais-alarme-consolidado"
+    ],
+    "encaminhamentos": [
+      "encaminhamento-cirurgia-oncologica",
+      "encaminhamento-radioterapia",
+      "nutrição (avaliação nutricional/gastrostomia)",
+      "programa de cessação do tabagismo",
+      "oncogenética se história familiar sugestiva"
+    ],
+    "laudos": [
+      "laudo-nutricao"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "CEC de esôfago médio/inferior cT2-4 ou cN+ M0, candidato a cirurgia",
+        "y": "QT/RT neoadjuvante (carboplatina AUC 2 + paclitaxel 50 mg/m² semanal com RT 41,4 Gy) → esofagectomia",
+        "z": "se doença residual na peça e PD-L1 CPS ≥ 1: nivolumabe adjuvante por 12 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "QT/RT neoadjuvante seguido de esofagectomia e avaliar adjuvância se doença residual",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "adenocarcinoma de esôfago/JEG localmente avançado, PS 0–1",
+        "y": "FLOT + durvalumabe 4 ciclos pré e 4 pós-operatórios",
+        "z": "durvalumabe 1.500 mg mensal por mais 10 ciclos; SUS sem durvalumabe identificado → FLOT isolado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "QT neoadjuvante (Flot + Durvalumabe) seguida de cirurgia e QT adjuvante",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CEC de esôfago metastático, 1ª linha",
+        "y": "pedir PD-L1 (CPS/TPS/TAP)",
+        "z": "PD-L1 positivo: QT + imunoterapia; PD-L1 negativo: platina + 5-FU",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "PD-L1 positivo: QT (platina + 5-FU) + imunoterapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "paciente candidato a fluoropirimidina",
+        "y": "pesquisar deficiência de DPD antes do início, se disponível",
+        "z": "deficiência total contraindica; parcial pede redução de dose",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "o que implicaria em contraindicação absoluta de uso desta ou indicação de redução",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    "SEM_FONTE: fracionamento da RT do CROSS (41,4 Gy) e número de semanas de carboplatina/paclitaxel neoadjuvante",
+    "SEM_FONTE: dose de RT para cisplatina+5-FU e mFOLFOX4 neoadjuvantes",
+    "CONFLITANTE: calendário de nivolumabe + CF (cicloDias nulo)",
+    "FAIXA_NA_FONTE: tislelizumabe + QT (cisplatina 60–80; 5-FU 750–800) e paclitaxel 2ª linha (80–100 mg/m²)",
+    "INFERIDO: doses de cisplatina+5-FU isolado (PD-L1 negativo) tomadas do backbone da tabela de 1ª linha",
+    "SEM_ID_NO_CATALOGO: ecoendoscopia, laparoscopia diagnóstica, genotipagem DPYD",
+    "SUS_INCORPORACAO_A_CONFIRMAR: imunoterapias (pembrolizumabe, nivolumabe, tislelizumabe, ipilimumabe, durvalumabe)",
+    "SUS_PROCEDIMENTO_A_CONFIRMAR: QT concomitante da QT/RT definitiva e QT adjuvante de esôfago sem procedimento identificado no cadastro SIGTAP local",
+    "SEM_FONTE: emetogenicidade e risco de neutropenia febril por esquema (não constam na diretriz)",
+    "CROSS sem NCT (registro holandês); nctEstado NAO_VERIFICADO",
+    "Fichas do serviço divergentes (FLOT 5-FU 2.400; irinotecano 350 q21) — decisão do Dr. Silas"
+  ],
+  "conflitos": [
+    {
+      "tema": "Dose de RT na QT/RT neoadjuvante",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 13,
+        "trecho": "considerando RT com dose de 5.040 cGy, 1,8 Gy/fração",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 15,
+        "trecho": "combinação de carboplatina e paclitaxel com RT (41,4 Gy)",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "50,4 Gy fica restrito à QT/RT definitiva; CROSS neoadjuvante = 41,4 Gy. A tabela de doença localmente avançada (p.17) reaproveita os esquemas definitivos sem dose de RT: para cisplatina+5-FU e mFOLFOX4 neoadjuvantes, RT = null (SEM_FONTE). Cisplatina+5-FU não é 'CROSS-like'."
+    },
+    {
+      "tema": "Calendário de nivolumabe + cisplatina + 5-FU",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 20,
+        "trecho": "Nivolumabe 240 mg EV D1 e D15 (ou 480 mg EV D1)",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 20,
+        "trecho": "A cada 3 semanas, por 6 ciclos, seguido de manutenção com nivoluambe",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Nivolumabe D1 e D15 em ciclo de 21 dias é inconsistente; cicloDias = null até conferência no protocolo CheckMate 648 pelo médico."
+    },
+    {
+      "tema": "Nivolumabe + ipilimumabe: D28",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 20,
+        "trecho": "Nivolumabe 3 mg/kg EV D1, D15 e D28 Ipilimumabe 1 mg/kg EV D1",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "ENSAIO",
+        "referencia": "CheckMate 648 (NCT03143153) — esquema a cada 2 semanas não conferido em texto aberto nesta sessão",
+        "pagina": null,
+        "trecho": null,
+        "estado": "DADO_AUSENTE"
+      },
+      "escolhaSeguranca": "Mantido como na SBOC; conferir se D28 deveria ser D29 (intervalo de 14 dias)."
+    },
+    {
+      "tema": "Ficha FLOT do serviço × SBOC (5-FU)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 17,
+        "trecho": "Docetaxel 50 mg/m² EV D1 5-FU 2.600 mg/m² EV D1 (infusão contínua de 24h)",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "NORMA",
+        "referencia": "corpus/fichas/esofago/flot__nao-especificado.json",
+        "pagina": null,
+        "trecho": "Fluoruracila (5-FU) infusional 2400 mg/m² d1",
+        "estado": "CONFLITANTE"
+      },
+      "escolhaSeguranca": "Pack registra 2.600 mg/m² (SBOC); ficha não editada (fora do WRITE_SET). Médico decide qual vale no serviço."
+    },
+    {
+      "tema": "Ficha irinotecano do serviço × SBOC",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 22,
+        "trecho": "Irinotecano 150 mg/m² EV D1 A cada 2 semanas",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "NORMA",
+        "referencia": "corpus/fichas/esofago/irinotecano-monoterapia__nao-especificado.json",
+        "pagina": null,
+        "trecho": "Irinotecano 350 mg/m² d1, intervalo 21 dias",
+        "estado": "CONFLITANTE"
+      },
+      "escolhaSeguranca": "Pack registra 150 mg/m² q14 (SBOC). Ficha 350 mg/m² q21 não tem respaldo nesta diretriz."
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (curador oncológico, rascunho para validação do Dr. Silas)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC 2026 Esôfago v4 (texto integral, 30 p.)",
+      "Onco PRO 2026 aulas 02–03 (não usadas para dose)",
+      "SIGTAP 2026-09 (corpus/f0c/sigtap)",
+      "ClinicalTrials.gov API v2 (NCTs listados)",
+      "corpus/fichas/esofago/*"
+    ],
+    "aprovacaoClinica": null
+  }
+}

@@ -1,0 +1,351 @@
+{
+  "header": {
+    "id": "sinais-alarme-consolidado",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-W9-28 (25 sinais) + D-W9-38 (febre estritamente >37,8 °C) + D-W9-41; unificação das 3 representações existentes",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "origens": {
+    "redflags/sinais-alarme.v1.json": "25 sinais estruturados (consumível pelo motor; status RASCUNHO, D-W9-28/38)",
+    "templates/kit/sinais-alarme.v1.json": "cartela impressa do kit (texto integral aprovado D-W5-05, kit-oncologia-2026-05.pdf p.2)",
+    "templates/sinais-alarme.v1.json": "esqueleto W2/GLM-07 sem itens clínicos (2 seções vazias — nada a perder)"
+  },
+  "saidasPermitidas": [
+    "SAMU_192",
+    "PS_AGORA"
+  ],
+  "regraFebre": {
+    "corte": "> 37,8 °C ESTRITO (37,8 exato NÃO dispara)",
+    "fonte": "D-W9-38",
+    "nota": "Gatilho operacional; NÃO é definição diagnóstica de neutropenia febril (IDSA-tabela: ≥38,3 única ou ≥38,0 ≥1 h — Infection/PMC13323198; extração literal da IDSA primária permanece pendente)."
+  },
+  "correspondencia": [
+    {
+      "consolidado": "SA-01 Febre/calafrios",
+      "origem": [
+        "redflag-01-febre",
+        "kit 'FEBRE ACIMA DE 37,8°C OU CALAFRIOS'"
+      ],
+      "gatilho": "temperatura acima de 37,8 °C ou calafrios/tremores",
+      "orientacao": "PS AGORA (levar os exames)",
+      "fonte": "D-W9-38/41",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-02 Falta de ar súbita / dor no peito / dor ao respirar",
+      "origem": [
+        "redflag-02-falta-de-ar",
+        "kit 'Falta de ar súbita, dor ao respirar, dor no peito'"
+      ],
+      "gatilho": "início súbito",
+      "orientacao": "SAMU 192",
+      "fonte": "D-W9-28",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-03 Alteração urinária",
+      "origem": [
+        "redflag-03-alteracao-urinaria",
+        "kit 'Dor ao urinar, urina turva, sangue na urina ou cheiro forte'",
+        "kit 'Pouca urina'"
+      ],
+      "gatilho": "parar de urinar, perder o controle, dor/ardência, urina turva ou com sangue",
+      "orientacao": "PS AGORA",
+      "fonte": "D-W9-28",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-04 Alteração visual / fala / convulsão / confusão",
+      "origem": [
+        "redflag-04-alteracao-visual",
+        "redflag-07-convulsao-confusao",
+        "kit 'Convulsão, desmaio, confusão, dificuldade para falar ou fraqueza em um lado do corpo'",
+        "kit 'Fraqueza intensa, sonolência ou confusão mental'"
+      ],
+      "gatilho": "qualquer episódio",
+      "orientacao": "SAMU 192",
+      "fonte": "D-W9-28",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-05 Dor nova ou que não melhora",
+      "origem": [
+        "redflag-05-dor",
+        "kit 'Dor forte que não melhora com remédio prescrito'"
+      ],
+      "gatilho": "localização ou intensidade anormal",
+      "orientacao": "PS AGORA",
+      "fonte": "D-W9-28",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-06 Sangramento que não para",
+      "origem": [
+        "redflag-06-sangramento",
+        "kit 'Sangramento que não para… vômitos com sangue'",
+        "kit 'Manchas roxas extensas ou pontinhos vermelhos'"
+      ],
+      "gatilho": "qualquer local, persistente/prolongado",
+      "orientacao": "SAMU 192",
+      "fonte": "D-W9-28",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-07 Fraqueza nas pernas",
+      "origem": [
+        "redflag-08-fraqueza-pernas"
+      ],
+      "gatilho": "diminuição de força",
+      "orientacao": "PS AGORA (compressão medular até excluir)",
+      "fonte": "D-W9-28",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-08 Vômitos que impedem líquidos / sinais de desidratação",
+      "origem": [
+        "redflag-09-vomitos-sem-liquidos",
+        "kit 'vômitos repetidos ou sinais de desidratação'"
+      ],
+      "gatilho": "não consegue ingerir líquidos",
+      "orientacao": "PS AGORA (hidratação venosa — D-W9-28)",
+      "fonte": "D-W9-28",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-09 Diarreia >24 h ou com vômito",
+      "origem": [
+        "redflag-10-diarreia"
+      ],
+      "gatilho": "mais de 24 h; com vômito associado → PS para hidratação",
+      "orientacao": "PS AGORA",
+      "fonte": "D-W9-28 (suspender anti-hipertensivo conforme decisão local)",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-10 Constipação >48 h",
+      "origem": [
+        "redflag-11-constipacao"
+      ],
+      "gatilho": "ausência de evacuações por mais de 48 horas",
+      "orientacao": "CONTATO_SERVIÇO_HOJE (até 24 h) → PS AGORA se dor forte, vômitos, febre > 37,8 °C ou piora",
+      "fonte": "D-W9-28",
+      "estado": "PROPOSTA_PENDENTE_APROVACAO",
+      "ressalva": "Saída 'contato' precisa de regra aprovada — hoje só 2 saídas (SAMU/PS); decidir com Dr. Silas",
+      "orientacaoOriginal": "CONTATO_SERVIÇO → PS se acompanhado de dor/vômito",
+      "pendencia": "HS-3: saída fora do par SAMU/PS só vale com aprovação do Dr. Silas; até lá, na dúvida, PS (D-W9-28)."
+    },
+    {
+      "consolidado": "SA-11 Inchaço de uma perna só, doloroso",
+      "origem": [
+        "redflag-12-inchaco-assimetrico",
+        "kit 'inchaço nas pernas'"
+      ],
+      "gatilho": "assimétrico, persistente, doloroso",
+      "orientacao": "PS AGORA (TEV até excluir)",
+      "fonte": "D-W9-28",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-12 Mucosite que impede alimentação",
+      "origem": [
+        "redflag-13-mucosite-alimentacao",
+        "kit 'Feridas na boca, dor de garganta, placas brancas ou dificuldade para engolir'"
+      ],
+      "gatilho": "interferindo na alimentação",
+      "orientacao": "PS AGORA",
+      "fonte": "D-W9-28",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-13 Placas brancas na boca (sapinho)",
+      "origem": [
+        "redflag-14-placas-brancas"
+      ],
+      "gatilho": "presença",
+      "orientacao": "CONTATO_SERVIÇO_HOJE (até 24 h) → PS AGORA se dor forte, vômitos, febre > 37,8 °C ou piora",
+      "estado": "PROPOSTA_PENDENTE_APROVACAO",
+      "ressalva": "idem SA-10",
+      "orientacaoOriginal": "CONTATO_SERVIÇO",
+      "pendencia": "HS-3: saída fora do par SAMU/PS só vale com aprovação do Dr. Silas; até lá, na dúvida, PS (D-W9-28)."
+    },
+    {
+      "consolidado": "SA-14 Ferida/cateter com sinal de infecção",
+      "origem": [
+        "redflag-15-ferida-infectada",
+        "kit 'Dor, vermelhidão, calor local, secreção ou pus em cateter, ferida ou acesso venoso'"
+      ],
+      "gatilho": "vermelhidão, calor, secreção",
+      "orientacao": "PS AGORA",
+      "fonte": "D-W9-28",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-15 Deslocamento/saída de PICC",
+      "origem": [
+        "redflag-16-deslocamento-picc"
+      ],
+      "gatilho": "qualquer",
+      "orientacao": "PS AGORA",
+      "fonte": "D-W9-28",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-16 Dor/formigamento no local da infusão (extravasamento)",
+      "origem": [
+        "redflag-17-dor-infusao"
+      ],
+      "gatilho": "durante a aplicação no salão",
+      "orientacao": "PARAR_INFUSAO_E_ACIONAR_EQUIPE (regra do salão)",
+      "estado": "APROVADO_LOCAL",
+      "nota": "Ação da equipe do salão durante a infusão; não é orientação ao paciente em casa."
+    },
+    {
+      "consolidado": "SA-17 Neuropatia: surgimento/piora de alteração de sensibilidade",
+      "origem": [
+        "redflag-18-neuropatia"
+      ],
+      "gatilho": "mãos/pés",
+      "orientacao": "CONTATO_SERVIÇO_HOJE (até 24 h) → PS AGORA se fraqueza nova nas pernas, perda de controle de urina/fezes ou dor nas costas forte",
+      "estado": "PROPOSTA_PENDENTE_APROVACAO",
+      "orientacaoOriginal": "RELATAR_NA_CONSULTA",
+      "pendencia": "HS-3: saída fora do par SAMU/PS só vale com aprovação do Dr. Silas; até lá, na dúvida, PS (D-W9-28)."
+    },
+    {
+      "consolidado": "SA-18 Atraso menstrual durante a QT",
+      "origem": [
+        "redflag-19-atraso-menstrual"
+      ],
+      "gatilho": "qualquer atraso",
+      "orientacao": "CONTATO_SERVIÇO_HOJE (até 24 h) → PS AGORA se dor forte, vômitos, febre > 37,8 °C ou piora",
+      "estado": "PROPOSTA_PENDENTE_APROVACAO",
+      "orientacaoOriginal": "CONTATO_SERVIÇO (beta-hCG)",
+      "pendencia": "HS-3: saída fora do par SAMU/PS só vale com aprovação do Dr. Silas; até lá, na dúvida, PS (D-W9-28)."
+    },
+    {
+      "consolidado": "SA-19 Imunoterapia: sintoma neurológico",
+      "origem": [
+        "redflag-20-imuno-neurologico"
+      ],
+      "gatilho": "cefaleia, perda de força/sensibilidade",
+      "orientacao": "PS AGORA",
+      "fonte": "D-W9-28",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-20 Imunoterapia: sintoma respiratório",
+      "origem": [
+        "redflag-21-imuno-respiratorio",
+        "kit 'Tosse associada a falta de ar, dor no peito'"
+      ],
+      "gatilho": "falta de ar, dor torácica, tosse",
+      "orientacao": "PS AGORA",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-21 Imunoterapia: sintoma tireoidiano",
+      "origem": [
+        "redflag-22-imuno-tireoide"
+      ],
+      "gatilho": "cansaço extremo, intolerância a calor/frio",
+      "orientacao": "CONTATO_SERVIÇO_HOJE (até 24 h) → PS AGORA se dor forte, vômitos, febre > 37,8 °C ou piora",
+      "estado": "PROPOSTA_PENDENTE_APROVACAO",
+      "orientacaoOriginal": "CONTATO_SERVIÇO (TSH)",
+      "pendencia": "HS-3: saída fora do par SAMU/PS só vale com aprovação do Dr. Silas; até lá, na dúvida, PS (D-W9-28)."
+    },
+    {
+      "consolidado": "SA-22 Imunoterapia: sintoma hepático",
+      "origem": [
+        "redflag-23-imuno-hepatico"
+      ],
+      "gatilho": "dor em hipocôndrio direito, icterícia",
+      "orientacao": "PS AGORA",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-23 Imunoterapia: diarreia com sangue / artralgia",
+      "origem": [
+        "redflag-24-imuno-digestivo"
+      ],
+      "gatilho": "qualquer",
+      "orientacao": "PS AGORA",
+      "estado": "APROVADO_LOCAL"
+    },
+    {
+      "consolidado": "SA-24 Sinais a relatar na triagem do salão",
+      "origem": [
+        "redflag-25-sinais-triagem"
+      ],
+      "gatilho": "febre, resfriado, diarreia, ardência ao urinar",
+      "orientacao": "CONTATO_SERVIÇO_HOJE (até 24 h) → PS AGORA se dor forte, vômitos, febre > 37,8 °C ou piora",
+      "estado": "PROPOSTA_PENDENTE_APROVACAO",
+      "orientacaoOriginal": "RELATAR_NA_TRIAGEM (não é emergência)",
+      "pendencia": "HS-3: saída fora do par SAMU/PS só vale com aprovação do Dr. Silas; até lá, na dúvida, PS (D-W9-28)."
+    },
+    {
+      "consolidado": "SA-25 Na dúvida, não espere",
+      "origem": [
+        "kit 'NA DÚVIDA, NÃO ESPERE' (parágrafo fixo da cartela)"
+      ],
+      "gatilho": "qualquer dúvida durante a QT",
+      "orientacao": "PS AGORA — 'infecções podem evoluir rapidamente; leve documento, medicamentos e exames'",
+      "fonte": "D-W5-05 (cartela impressa aprovada)",
+      "estado": "APROVADO_LOCAL"
+    }
+  ],
+  "correspondenciaKitSomente": [
+    {
+      "item": "Tosse com queda do estado geral",
+      "origem": "kit (sinais de infecção)",
+      "mapeadoPara": "SA-04/SA-24 conforme contexto",
+      "estado": "PRESERVADO_NO_TEXTO_DA_CARTELA"
+    },
+    {
+      "item": "Inchaço no corpo / pouca urina (retenção)",
+      "origem": "kit",
+      "mapeadoPara": "SA-03",
+      "estado": "PRESERVADO"
+    }
+  ],
+  "resumo": {
+    "sinaisDistintosConsolidados": 25,
+    "deRedflags": 25,
+    "extrasDoKitAbsorvidos": 4,
+    "secoesTemplatesSemConteudo": "2 seções vazias do esqueleto W2/GLM-07 — nada perdido",
+    "contagemHonestidade": "'2 seções + 1 campo + 25 sinais' NÃO prova 28 sinais distintos: a correspondência acima é a prova item a item (25 distintos + parágrafo fixo da cartela).",
+    "pendencias": [
+      "Decidir saída para SA-10/SA-13/SA-17/SA-18/SA-21/SA-24 (contato/triagem/relato) fora do par SAMU/PS — pergunta ao Dr. Silas",
+      "textoFinalAprovado segue false até decisão"
+    ]
+  },
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO (texto final ao paciente só após aprovação — redflags.v1 já prevê textoFinalAprovado:false)",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-W9-28 (25 sinais) + D-W9-38 (febre estritamente >37,8 °C) + D-W9-41; unificação das 3 representações existentes",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "HS-3 red team GLM",
+      "acao": "saídas sem prazo viraram 'contato com o serviço HOJE (até 24 h)' com gatilho explícito para PS; estado PROPOSTA_PENDENTE_APROVACAO"
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "header": {
+    "id": "classes-farmacologicas",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "veredicto Codex 11/10/2026 (S01 RDC 1.036/2026; S02 zolpidem; ATC OMS 2026; EMA/MHRA) — somente os fatos VERIFICADOS entram com valor; o resto fica null",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "nota": "Lista por classe farmacológica (as 11 do prompt §9.6). Regra da auditoria: NÃO inferir controle especial por classe terapêutica; NÃO afirmar oferta SUS/FP sem fonte por apresentação. Campos: generico, apresentacaoSus (null até RENAME conferido), controleEspecial (fonte), tipoReceita, vinculos.",
+  "classes": [
+    {
+      "classe": "antiemeticos",
+      "exemplos": [
+        "ondansetrona",
+        "metoclopramida",
+        "domperidona"
+      ],
+      "fatosVerificados": [
+        {
+          "fato": "Ondansetrona injetável, adulto CINV: dose única IV máxima 16 mg, infusão ≥15 min",
+          "fonte": "MHRA DSU ago/2012 (S16)",
+          "ressalva": "PONV usa dose IV própria de 4 mg — não confundir (N11)"
+        },
+        {
+          "fato": "Domperidona: máximo 30 mg/dia e ≤7 dias (restrição europeia para náusea/vômito)",
+          "fonte": "EMA 2014 (S15)",
+          "ressalva": "Não valida gastroparesia nem bula BR"
+        }
+      ]
+    },
+    {
+      "classe": "analgésicos-escada-OMS",
+      "exemplos": [
+        "dipirona",
+        "paracetamol",
+        "AINEs"
+      ],
+      "fatosVerificados": [
+        {
+          "fato": "Classe terapêutica NÃO é lista regulatória (tramadol declarado C1 em B era erro)",
+          "fonte": "RDC 1.036/2026 anexo vigente (S01)"
+        }
+      ]
+    },
+    {
+      "classe": "opioides",
+      "exemplos": [
+        "tramadol",
+        "morfina",
+        "codeína"
+      ],
+      "fatosVerificados": [
+        {
+          "fato": "Tramadol: lista A2 (exceção de dispensação até 100 mg/unidade), NÃO C1",
+          "fonte": "RDC 1.036/2026 (S01, achado N08)",
+          "ressalva": "Morfina/codeína: conferir no anexo antes de preencher"
+        }
+      ]
+    },
+    {
+      "classe": "laxativos",
+      "exemplos": [
+        "lactulose",
+        "bisacodil"
+      ],
+      "fatosVerificados": [],
+      "pendencia": "SEM_FONTE — apresentação RENAME/tipo de receita por apresentação"
+    },
+    {
+      "classe": "antidiarreicos",
+      "exemplos": [
+        "loperamida"
+      ],
+      "fatosVerificados": [],
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "classe": "corticoides",
+      "exemplos": [
+        "prednisona",
+        "dexametasona"
+      ],
+      "fatosVerificados": [
+        {
+          "fato": "'Dobrar dose por indutor' NÃO é regra automática (B:191 INCERTA)",
+          "fonte": "veredicto Codex"
+        }
+      ]
+    },
+    {
+      "classe": "anticoagulantes",
+      "exemplos": [
+        "varfarina",
+        "enoxaparina",
+        "rivaroxabana",
+        "apixabana",
+        "acenocumarol"
+      ],
+      "fatosVerificados": [
+        {
+          "fato": "Acenocumarol ATC B01AA07",
+          "fonte": "OMS ATC 2026 (B06, CONFIRMADA)"
+        }
+      ],
+      "vinculo": "INAT-02 capecitabina×varfarina; INAT-20/22"
+    },
+    {
+      "classe": "antimicrobianos",
+      "exemplos": [
+        "SMX-TMP",
+        "ciprofloxacino",
+        "ceftriaxona"
+      ],
+      "fatosVerificados": [
+        {
+          "fato": "SMX-TMP: regime PJP do PCDT HIV (TMP 15-20 mg/kg/dia, 21 d) NÃO transfere automaticamente ao oncológico",
+          "fonte": "PCDT HIV módulo 2 (S05, N02)"
+        }
+      ],
+      "vinculo": "NOVO-01 MTX×SMX-TMP (SEM_FONTE ainda)"
+    },
+    {
+      "classe": "protetores-gastricos",
+      "exemplos": [
+        "omeprazol",
+        "pantoprazol"
+      ],
+      "fatosVerificados": [],
+      "vinculo": "INAT-06/07/08 TKI×supressores de acidez"
+    },
+    {
+      "classe": "estimulantes-apetite",
+      "exemplos": [
+        "megestrol"
+      ],
+      "fatosVerificados": [],
+      "pendencia": "SEM_FONTE — balanço risco/benefício exige indicação"
+    },
+    {
+      "classe": "g-csf",
+      "exemplos": [
+        "filgrastim"
+      ],
+      "fatosVerificados": [],
+      "pendencia": "SEM_FONTE — APAC/procedimento, fora do recorte de receita simples"
+    },
+    {
+      "classe": "farmacos-oncologicos (contexto)",
+      "nota": "As 14 classes oncológicas ausentes dos arquivos externos (antimetabólitos, alquilantes, platinas, taxanos, antraciclinas, topoisomerase, vinca, TKI, mAbs, ICI, CDK4/6, PARP, L02 hormonioterapia, ADC) ficam mapeadas nos packs/interações — NÃO viram ficha de receita ambulatorial comum",
+      "fatosVerificados": []
+    }
+  ],
+  "controleEspecialReferencia": {
+    "norma": "Portaria 344/98 → sucedida pelo anexo vigente RDC/ANVISA (RDC 1.036/2026 apontada pela auditoria como anexo vigente)",
+    "fatosConfirmadosNoAnexo": [
+      "carbamazepina: C1 (A01/B20)",
+      "zolpidem: B1, notificação azul, desde 01/08/2024 (S02)",
+      "fenobarbital: B1, receita especial 2 vias (N08)"
+    ],
+    "correcoesRegistradas": [
+      "Metotrexato NÃO é C1 (rótulo errado em 2 lugares do arquivo externo — N07; retirar atribuição federal indevida)",
+      "Tramadol A2 com exceção ≤100 mg/unidade (N08)"
+    ]
+  },
+  "resumo": {
+    "classesNoEscopo": 11,
+    "comFatoVerificado": 6,
+    "somenteEstrutura": 5,
+    "atcConfirmados": 9
+  },
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "NORMA",
+      "referencia": "veredicto Codex 11/10/2026 (S01 RDC 1.036/2026; S02 zolpidem; ATC OMS 2026; EMA/MHRA) — somente os fatos VERIFICADOS entram com valor; o resto fica null",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  }
+}

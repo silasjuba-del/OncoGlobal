@@ -1,0 +1,1383 @@
+{
+  "header": {
+    "id": "pack-gist",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — GIST (tumor estromal gastrointestinal) v5 (versão para colaboração)",
+      "trecho": "várias classificações de risco foram propostas para avaliar o risco de recidiva",
+      "edicao": "SBOC 2026 v5"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Tumor estromal gastrointestinal (GIST)",
+    "cid10": [
+      "C15",
+      "C16",
+      "C17",
+      "C18",
+      "C20",
+      "C26",
+      "C48",
+      "C49"
+    ],
+    "subtipos": [
+      "KIT éxon 11",
+      "KIT éxon 9",
+      "KIT éxons 13/17",
+      "PDGFRA (incl. D842V)",
+      "KIT/PDGFRA selvagem: SDH deficiente",
+      "KIT/PDGFRA selvagem: NF1, BRAF V600E, NTRK"
+    ],
+    "cenarios": [
+      "localizado_ressecavel",
+      "localmente_avancado",
+      "metastatico"
+    ],
+    "limitesAplicabilidade": "Adultos. CID por sítio primário (estômago mais frequente); SIGTAP aceita CIDs do trato digestivo. Sarcomas não-GIST e GIST pediátrico fora do escopo.",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 5,
+      "trecho": "A maioria dos GISTs em adultos apresenta mutações em KIT",
+      "estado": "VERIFICADO"
+    }
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome com contraste",
+        "indicacao": "universal",
+        "quando": "localização do primário e extensão",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "TC de abdome e pelve com contraste é o exame mais importante",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve com contraste",
+        "indicacao": "universal",
+        "quando": "extensão da doença",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "TC de abdome e pelve com contraste é o exame mais importante",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CONTRASTE_TC",
+        "rotulo": "Contraste para TC",
+        "indicacao": "universal",
+        "quando": "junto às TCs",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "TC de abdome e pelve com contraste é o exame mais importante",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM de pelve",
+        "indicacao": "condicional",
+        "quando": "GIST retal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "RM pode ser considerada no caso de GIST retal",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET-CT FDG",
+        "indicacao": "condicional",
+        "quando": "localmente avançado/irressecável e avaliação de resposta",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "PET/CT pode ser útil nos casos de doença localmente avançada",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [
+      {
+        "catalogoId": "EDA",
+        "rotulo": "EDA",
+        "indicacao": "condicional",
+        "quando": "lesões gástricas/esofágicas/duodenais",
+        "pendencia": "SEM_FONTE: SBOC não cita EDA isoladamente",
+        "fonte": {
+          "tipo": null,
+          "referencia": null,
+          "pagina": null,
+          "trecho": null,
+          "estado": "DADO_AUSENTE"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "Ultrassom endoscópico (± biópsia guiada)",
+        "indicacao": "condicional",
+        "quando": "lesão gástrica < 2 cm em seguimento exclusivo; biópsia guiada",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "A USG endoscópica tem papel na avaliação de lesões gástricas menores de 2 cm",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "core",
+          "quando": "lesão suspeita > 2 cm, dúvida diagnóstica ou antes de neoadjuvância (guiada por USG/TC/USE); alta suspeição pode ir direto à ressecção",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 6,
+            "trecho": "Lesões suspeitas > 2 cm devem ser submetidas a biópsia por agulha.",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "cirurgica",
+          "quando": "peça de ressecção",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 8,
+            "trecho": "Ressecção completa da lesão primária sem dissecção linfonodal",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "localização anatômica",
+        "tamanho do tumor",
+        "índice mitótico (em 50 CGA / 5 mm²)",
+        "ruptura tumoral",
+        "status da margem",
+        "IHQ CD117 e DOG-1"
+      ],
+      "laudoFonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 7,
+        "trecho": "localização anatômica, tamanho do tumor, atividade mitótica, ruptura do tumor",
+        "estado": "VERIFICADO"
+      },
+      "molecular": [
+        {
+          "alvo": "CD117 (KIT) e DOG-1",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "diagnóstico",
+          "consequencia": "confirma GIST (> 90%); negatividade não exclui mutação",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "positividade para CD117 e/ou Dog-1 em mais de 90% dos casos",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "KIT/PDGFRA (sequenciamento ou NGS)",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "quandoPedir": "universal",
+          "cenario": "todos; obrigatório antes de adjuvância (alto risco) e de neoadjuvância",
+          "consequencia": "D842V: sem imatinibe; éxon 9: 800 mg/dia; selvagem: pesquisar SDHB",
+          "disponivelSUS": "DADO_AUSENTE",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 8,
+            "trecho": "o perfil molecular de KIT e PDGFRA é recomendado antes do início",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "SDHB",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "KIT/PDGFRA selvagem",
+          "consequencia": "SDH deficiente: imatinibe não é 1ª linha (sunitinibe/regorafenibe)",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "realizar a pesquisa de SDHB por imuno-histoquímica",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "NGS amplo (NTRK, BRAF, NF1)",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "quandoPedir": "condicional",
+          "cenario": "selvagem com SDH preservado",
+          "consequencia": "larotrectinibe (NTRK); dabrafenibe + trametinibe (BRAF)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "realizar o sequenciamento genético NGS amplo",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "outro",
+    "edicao": "Estratificação de risco (tamanho × índice mitótico × sítio × ruptura); AJCC raramente usado",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 4,
+      "trecho": "várias classificações de risco foram propostas para avaliar o risco de recidiva",
+      "estado": "VERIFICADO"
+    },
+    "tabelaRisco": {
+      "estado": "CONFLITANTE",
+      "nota": "A tabela da SBOC repete 'gástrico 2–5 cm/> 5 mitoses' e 'gástrico 5–10 cm/≤ 5 mitoses' como intermediário E alto, e põe '≤ 5 cm, 6–10 mitoses' no intermediário. No NIH modificado (Joensuu) as linhas de alto risco são de sítio NÃO gástrico e a linha intermediária é '≤ 2 cm, 6–10 mitoses'. Não usar a tabela para decidir adjuvância sem conferência médica (nomograma/heat map).",
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 4,
+        "trecho": "Intermediário 2 a 5 > 5 Gástrico",
+        "estado": "CONFLITANTE"
+      }
+    },
+    "exames": [
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome com contraste",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "TC de abdome e pelve com contraste é o exame mais importante",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve com contraste",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "TC de abdome e pelve com contraste é o exame mais importante",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "Localizado — muito baixo/baixo risco",
+        "conduta": "Ressecção completa sem linfadenectomia; sem adjuvância. R1 microscópico de baixo risco sem doença residual: observação.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "A observação vigilante é aceitável nesses casos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Localizado — risco intermediário",
+        "conduta": "Adjuvância discutida em reunião multidisciplinar.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "deve ser discutida em reunião multidisciplinar",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Localizado — alto risco (recorrência estimada > 40%) com mutação sensível",
+        "conduta": "Imatinibe 400 mg/dia por ≥ 3 anos.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "risco de recorrência acima de 40% são aplicáveis à adjuvancia com Imatinibe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "PDGFRA D842V (qualquer risco)",
+        "conduta": "Sem adjuvância.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Tratamento adjuvante não é recomendado para os portadores de GIST com mutação D842V",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "KIT/PDGFRA selvagem localizado",
+        "conduta": "Somente seguimento por imagem.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Pacientes com GIST sem mutação em KIT/PDGFRA são somente acompanhados com exames de imagem",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Localmente avançado com cirurgia mórbida e mutação sensível",
+        "conduta": "Imatinibe neoadjuvante 6–12 meses → cirurgia → completar ≥ 3 anos.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "imatinibe neoadjuvante na dose de 400 mg VO 1x por dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Metastático",
+        "conduta": "Imatinibe 400 mg/dia (800 mg se éxon 9); sequência sunitinibe → regorafenibe.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "devem receber imatinibe 400 mg VO 1x por dia até progressão",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [],
+      "naoPedirDeRotina": [
+        "marcadores tumorais séricos"
+      ],
+      "pendencia": "SEM_FONTE: SBOC não indica marcadores séricos"
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "localizado_ressecavel",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia",
+          "imatinibe adjuvante (alto risco)"
+        ],
+        "criterio": "Ressecção completa sem linfadenectomia.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Ressecção completa da lesão primária sem dissecção linfonodal",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "localmente_avancado",
+        "intencao": "curativa",
+        "modalidades": [
+          "imatinibe neoadjuvante",
+          "cirurgia",
+          "imatinibe adjuvante"
+        ],
+        "criterio": "Sem reavaliação de risco após neoadjuvância.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Não há papel para reavaliação de risco após o uso de terapia neoadjuvante.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico",
+        "intencao": "paliativa",
+        "modalidades": [
+          "TKI sequencial",
+          "cirurgia/tratamento local em progressão limitada"
+        ],
+        "criterio": "Recidiva após adjuvância: reintroduzir imatinibe em dose de 1ª linha; recidiva em 3–6 meses do fim: discutir troca.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "recomenda-se reintroduzir o imatinibe utilizando doses de 1ª linha",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "gist-imatinibe-adjuvante",
+        "nome": "Imatinibe adjuvante 400 mg/dia por ≥ 3 anos",
+        "cenario": "localizado_alto_risco_mutacao_sensivel",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Imatinibe",
+            "dose": 400,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": "mínimo 3 anos; risco muito elevado (ex.: ruptura): discutir prolongar"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 39,
+        "duracao": "≥ 3 anos (39 ciclos de 28 dias)",
+        "premedicacao": "",
+        "ajusteObrigatorio": "Exige perfil KIT/PDGFRA antes; não usar em PDGFRA D842V nem em KIT/PDGFRA selvagem. Tomar com refeição e um copo grande de água (bula). Interações CYP3A4 (INAT-23).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050334",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR DO ESTROMA GASTRO INTESTINAL",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "devem receber pelo menos 3 anos de tratamento adjuvante, na dose de 400 mg",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gist-imatinibe-neoadjuvante",
+        "nome": "Imatinibe neoadjuvante 400 mg/dia por 6–12 meses",
+        "cenario": "localmente_avancado_cirurgia_morbida",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Imatinibe",
+            "dose": 400,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": "6 a 12 meses; depois completar ≥ 3 anos no total no pós-operatório"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Confirmação molecular de subtipo sensível é imprescindível. Tomar com refeição e um copo grande de água (bula). Interações CYP3A4 (INAT-23).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050334",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR DO ESTROMA GASTRO INTESTINAL",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "imatinibe neoadjuvante na dose de 400 mg VO 1x por dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gist-imatinibe-400-metastatico",
+        "nome": "Imatinibe 400 mg/dia (avançado/metastático)",
+        "cenario": "metastatico_KIT_PDGFRA_exceto_D842V",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Imatinibe",
+            "dose": 400,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": "até progressão ou toxicidade"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Tomar com refeição e um copo grande de água (bula). Interações CYP3A4 (INAT-23).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020311",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO TUMOR DO ESTROMA GASTROINTESTINAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "devem receber imatinibe 400 mg VO 1x por dia até progressão",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gist-imatinibe-800",
+        "nome": "Imatinibe 800 mg/dia (éxon 9 ou progressão com 400 mg)",
+        "cenario": "metastatico_KIT_exon9_ou_progressao_400",
+        "linha": "1ª linha (éxon 9) / escalonamento",
+        "drogas": [
+          {
+            "droga": "Imatinibe",
+            "dose": 400,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 12/12h",
+            "observacao": "total 800 mg/dia em 2 tomadas (bula); SBOC escreve '800 mg 1x por dia' — ver conflitos"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Tomar com refeição e um copo grande de água (bula). Interações CYP3A4 (INAT-23).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020311",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO TUMOR DO ESTROMA GASTROINTESTINAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "FDA/DailyMed Gleevec (imatinibe) set_id 211ef2da-2868-4a77-8055-1cb2cd78e24b, seções 2.1/2.10/2.11",
+          "pagina": null,
+          "trecho": "a dose of 800 mg should be administered as 400 mg twice a day",
+          "estado": "VERIFICADO"
+        },
+        "fonteIndicacao": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "a dose de 800 mg VO 1x por dia deve ser considerada",
+          "estado": "CONFLITANTE"
+        }
+      },
+      {
+        "id": "gist-sunitinibe-4-2",
+        "nome": "Sunitinibe 50 mg/dia esquema 4/2",
+        "cenario": "metastatico_progressao_ou_intolerancia_imatinibe",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Sunitinibe",
+            "dose": 50,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "2 semanas de descanso"
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "QT longo (INAT-11); CYP3A4 (INAT-23); hipertensão e tireoide.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "nota": "CONITEC recomendou incorporar (Registro de Deliberação nº 1.035/2025, set/2025); portaria de incorporação e oferta efetiva não conferidas. Enquanto isso: APAC de GIST avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório de Recomendação nº 1035/2025 — sunitinibe GIST após falha ao imatinibe (gov.br/conitec)",
+            "pagina": null,
+            "trecho": "recomendar a incorporação do sunitinibe para o tratamento de indivíduos com tumor",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "sunitinibe 50 mg VO 1x por dia por 4 semanas",
+          "estado": "VERIFICADO"
+        },
+        "fonteDose": {
+          "tipo": "BULA",
+          "referencia": "FDA/DailyMed Sutent (sunitinibe) set_id 43a4d7f8-48ae-4a63-9108-2fa8e3ea9d9c, seção 2.1",
+          "pagina": null,
+          "trecho": "50 mg orally once daily for the first 4 weeks of each 6-week cycle",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gist-sunitinibe-continuo",
+        "nome": "Sunitinibe 37,5 mg/dia contínuo",
+        "cenario": "metastatico_progressao_ou_intolerancia_imatinibe",
+        "linha": "2ª linha (alternativa)",
+        "drogas": [
+          {
+            "droga": "Sunitinibe",
+            "dose": 37.5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "QT longo (INAT-11); CYP3A4 (INAT-23).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "nota": "CONITEC recomendou incorporar (Registro de Deliberação nº 1.035/2025, set/2025); portaria de incorporação e oferta efetiva não conferidas. Enquanto isso: APAC de GIST avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório de Recomendação nº 1035/2025 — sunitinibe GIST após falha ao imatinibe (gov.br/conitec)",
+            "pagina": null,
+            "trecho": "recomendar a incorporação do sunitinibe para o tratamento de indivíduos com tumor",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "37,5 mg VO 1x por dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gist-regorafenibe",
+        "nome": "Regorafenibe 160 mg/dia 3/1",
+        "cenario": "metastatico_progressao_imatinibe_e_sunitinibe",
+        "linha": "3ª linha",
+        "drogas": [
+          {
+            "droga": "Regorafenibe",
+            "dose": 160,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D21, 1x/dia",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "CYP3A4 (INAT-23); síndrome mão-pé, hipertensão, hepatotoxicidade (bula).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "CONITEC recomendou não incorporar (set/2025). Alternativa SUS: suporte clínico/APAC de GIST avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório Final nº 1036/2025 — regorafenibe GIST (gov.br/conitec)",
+            "pagina": null,
+            "trecho": "recomendar a não incorporação do regorafenibe",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "160 mg VO 1x por dia durante 3 semanas a cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gist-ripretinibe",
+        "nome": "Ripretinibe 150 mg/dia",
+        "cenario": "metastatico_apos_3_ou_mais_TKI",
+        "linha": "4ª linha",
+        "drogas": [
+          {
+            "droga": "Ripretinibe",
+            "dose": 150,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": "redução para 100 mg/dia por toxicidade (bula)"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "observacao": "Não consta da SBOC 2026; indicação pelo INVICTUS (NCT03353753) e bula FDA. Registro Anvisa não verificado.",
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "nota": "Registro Anvisa e CONITEC não verificados. Alternativa SUS: suporte clínico / APAC.",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          },
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "FDA/DailyMed Qinlock (ripretinibe) set_id 9f18e462-03dd-4296-a02a-a0577e3ee78d, seção 2.1",
+          "pagina": null,
+          "trecho": "The recommended dosage of QINLOCK is 150 mg orally once daily",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gist-larotrectinibe",
+        "nome": "Larotrectinibe (fusão NTRK)",
+        "cenario": "metastatico_fusao_NTRK",
+        "linha": "qualquer linha",
+        "drogas": [
+          {
+            "droga": "Larotrectinibe",
+            "dose": 100,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 12/12h",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "nota": "Não verificado.",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          },
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "(larotrectinibe 100 mg VO 2x por dia)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gist-dabrafenibe-trametinibe",
+        "nome": "Dabrafenibe + trametinibe (BRAF V600E)",
+        "cenario": "metastatico_BRAF_V600E",
+        "linha": "qualquer linha",
+        "drogas": [
+          {
+            "droga": "Dabrafenibe",
+            "dose": 150,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 12/12h",
+            "observacao": ""
+          },
+          {
+            "droga": "Trametinibe",
+            "dose": 2,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "nota": "Não verificado.",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          },
+          "pendencia": "SEM_FONTE"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "150 mg VO 2x por dia e trametinibe 2 mg por dia",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [],
+    "radioterapiaNota": "Fontes não indicam RT no GIST.",
+    "cirurgia": [
+      {
+        "procedimento": "Ressecção completa sem linfadenectomia",
+        "quando": "doença localizada",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Ressecção completa da lesão primária sem dissecção linfonodal",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Cirurgia/tratamento local na doença metastática (mantendo o TKI)",
+        "quando": "progressão limitada, individualizado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Cirurgia ou tratamentos locais na doença metastática",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "KIT éxon 9 (metastático)",
+        "opcao": "imatinibe 800 mg/dia (400 mg 12/12h)",
+        "evidencia": "NE moderado/FR fraca",
+        "sus": "sim (APAC)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "a dose de 800 mg VO 1x por dia deve ser considerada",
+          "estado": "CONFLITANTE"
+        }
+      },
+      {
+        "seAlvo": "PDGFRA D842V",
+        "opcao": "sem adjuvância; sem tratamento dedicado no Brasil (avapritinibe indisponível)",
+        "evidencia": "NE alto/FR forte (não adjuvar)",
+        "sus": "não",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "GIST com mutação de PDGFRA D842V não tem tratamento dedicado",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "SDH deficiente",
+        "opcao": "sunitinibe ou regorafenibe em vez de imatinibe na 1ª linha",
+        "evidencia": "NE baixo/FR fraca",
+        "sus": "sunitinibe: recomendado pela CONITEC (2025); regorafenibe: não incorporado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Imatinibe não deve ser a primeira linha em GIST SDH deficiente.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "Fusão NTRK",
+        "opcao": "larotrectinibe 100 mg 12/12h",
+        "evidencia": "NE alto/FR forte",
+        "sus": "não verificado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "(larotrectinibe 100 mg VO 2x por dia)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "BRAF V600E",
+        "opcao": "dabrafenibe 150 mg 12/12h + trametinibe 2 mg/dia",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "não verificado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "150 mg VO 2x por dia e trametinibe 2 mg por dia",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": null,
+      "riscoNeutropeniaFebril": null,
+      "pendencia": "SEM_FONTE: emetogenicidade/NF não classificadas (TKI orais).",
+      "outros": [
+        "Imatinibe com refeição e copo grande de água; 800 mg/dia em 2 tomadas.",
+        "Resposta: RECIST ou critérios de Choi (redução de 10% no tamanho ou de 15% na atenuação)."
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 10,
+        "trecho": "redução de 10% no tamanho ou redução de 15% na atenuação",
+        "estado": "VERIFICADO"
+      },
+      "fontesAdicionais": [
+        {
+          "tipo": "BULA",
+          "referencia": "FDA/DailyMed Gleevec (imatinibe) set_id 211ef2da-2868-4a77-8055-1cb2cd78e24b, seções 2.1/2.10/2.11",
+          "pagina": null,
+          "trecho": "a dose of 800 mg should be administered as 400 mg twice a day",
+          "estado": "VERIFICADO"
+        }
+      ]
+    },
+    "ensaios": [
+      {
+        "nome": "SSG XVIII/AIO",
+        "nct": "NCT00116935",
+        "nctEstado": "VERIFICADO",
+        "populacao": "GIST alto risco ressecado",
+        "bracos": "imatinibe 12 × 36 meses",
+        "desfecho": "SLR",
+        "resultado": "36 meses superior (base do 'pelo menos 3 anos')",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "devem receber pelo menos 3 anos de tratamento adjuvante, na dose de 400 mg",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ImadGist (fase III, 3 × 6 anos)",
+        "nct": "NCT02260505",
+        "nctEstado": "VERIFICADO",
+        "populacao": "GIST alto risco após 3 anos de imatinibe",
+        "bracos": "manter × interromper",
+        "desfecho": "SLD",
+        "resultado": "SLD 6 anos 72% × 42% (HR informado 0,08 — conferir)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "(72% versus 42% em seis anos; HR 0,08)",
+          "estado": "CONFLITANTE"
+        }
+      },
+      {
+        "nome": "SSG XXII (3 × 5 anos)",
+        "nct": "NCT02413736",
+        "nctEstado": "VERIFICADO",
+        "populacao": "GIST alto risco",
+        "bracos": "3 × 5 anos de imatinibe",
+        "desfecho": "SLR",
+        "resultado": "em andamento/não citado pela SBOC",
+        "fonte": {
+          "tipo": null,
+          "referencia": null,
+          "pagina": null,
+          "trecho": null,
+          "estado": "DADO_AUSENTE"
+        },
+        "pendencia": "SEM_FONTE para resultado"
+      },
+      {
+        "nome": "EORTC 62005",
+        "nct": "NCT00009906",
+        "nctEstado": "VERIFICADO",
+        "populacao": "GIST metastático",
+        "bracos": "imatinibe 400 × 800 mg",
+        "desfecho": "SLP",
+        "resultado": "benefício de 800 mg no éxon 9",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "a dose de 800 mg VO 1x por dia deve ser considerada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "Sunitinibe pós-imatinibe (A6181004)",
+        "nct": "NCT00075218",
+        "nctEstado": "VERIFICADO",
+        "populacao": "GIST refratário/intolerante a imatinibe",
+        "bracos": "sunitinibe × placebo",
+        "desfecho": "TTP",
+        "resultado": "padrão de 2ª linha",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "sunitinibe 50 mg VO 1x por dia por 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "GRID",
+        "nct": "NCT01271712",
+        "nctEstado": "VERIFICADO",
+        "populacao": "GIST após imatinibe e sunitinibe",
+        "bracos": "regorafenibe × placebo",
+        "desfecho": "SLP",
+        "resultado": "padrão de 3ª linha",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "160 mg VO 1x por dia durante 3 semanas a cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "INVICTUS",
+        "nct": "NCT03353753",
+        "nctEstado": "VERIFICADO",
+        "populacao": "GIST após ≥ 3 TKI",
+        "bracos": "ripretinibe × placebo",
+        "desfecho": "SLP",
+        "resultado": "base da indicação em 4ª linha (bula)",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "FDA/DailyMed Qinlock (ripretinibe) set_id 9f18e462-03dd-4296-a02a-a0577e3ee78d, seção 2.1",
+          "pagina": null,
+          "trecho": "The recommended dosage of QINLOCK is 150 mg orally once daily",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "Alto risco — durante adjuvância",
+        "exames": [
+          "TC_ABDOMEN_SUPERIOR",
+          "TC_PELVE"
+        ],
+        "periodicidade": "TC ou RM de abdome total a cada 3–6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "TC ou RM de abdome total a cada 3 a 6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Alto risco — após o fim da adjuvância",
+        "exames": [
+          "TC_ABDOMEN_SUPERIOR",
+          "TC_PELVE"
+        ],
+        "periodicidade": "a cada 3 meses por 2 anos, depois a cada 6 meses até 5 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "a cada 3 meses por 2 anos, depois a cada 6 meses até 5",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Baixo risco",
+        "exames": [
+          "TC_ABDOMEN_SUPERIOR",
+          "TC_PELVE"
+        ],
+        "periodicidade": "a cada 6–12 meses por 5 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "abdome total a cada 6 a 12 meses por 5 anos",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "CONTRASTE_TC",
+      "EDA",
+      "IMUNOHISTOQUIMICA",
+      "PET_CT_FDG",
+      "RM_PELVE",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "MOLECULAR_PCR_MUTACAO",
+      "SEQUENCIAMENTO_AMPLICON"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "imatinibe, sunitinibe, regorafenibe, ripretinibe, dabrafenibe/trametinibe, larotrectinibe",
+        "com": "inibidores/indutores de CYP3A4",
+        "ref": "INAT-23"
+      },
+      {
+        "droga": "sunitinibe",
+        "com": "outros prolongadores de QT",
+        "ref": "INAT-11"
+      },
+      {
+        "droga": "imatinibe",
+        "com": "gestação",
+        "ref": "CI-09"
+      },
+      {
+        "droga": "TKI",
+        "com": "vacinas vivas (se imunossupressão)",
+        "ref": "INAT-29"
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "TKI (por molécula)",
+        "termosCTCAEv6": [
+          "Edema limbs",
+          "Periorbital edema",
+          "Diarrhea",
+          "Hypertension",
+          "Palmar-plantar erythrodysesthesia syndrome",
+          "Hypothyroidism",
+          "Anemia"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "antidiarreico",
+      "diurético para edema (imatinibe) conforme avaliação",
+      "creme para mão-pé (sunitinibe/regorafenibe)"
+    ],
+    "orientacoes": [
+      "sinais-alarme-consolidado",
+      "dieta-por-toxicidade"
+    ],
+    "encaminhamentos": [
+      "cirurgia-oncologica",
+      "oncogenetica (GIST SDH deficiente, NF1, jovens)",
+      "nutricao",
+      "cuidados-paliativos"
+    ],
+    "laudos": [
+      "APAC de quimioterapia de GIST (SIGTAP 0304050334; 0304020311)",
+      "judicializacao-drogas (regorafenibe, ripretinibe)"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "GIST ressecado de alto risco (recorrência > 40%)",
+        "y": "mutação KIT/PDGFRA sensível ao imatinibe",
+        "z": "imatinibe 400 mg/dia por pelo menos 3 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "devem receber pelo menos 3 anos de tratamento adjuvante, na dose de 400 mg",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "GIST com PDGFRA D842V",
+        "y": "qualquer risco",
+        "z": "sem adjuvância com imatinibe",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Tratamento adjuvante não é recomendado para os portadores de GIST com mutação D842V",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "GIST metastático KIT éxon 9",
+        "y": "1ª linha",
+        "z": "imatinibe 800 mg/dia dividido em 400 mg 12/12h",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "FDA/DailyMed Gleevec (imatinibe) set_id 211ef2da-2868-4a77-8055-1cb2cd78e24b, seções 2.1/2.10/2.11",
+          "pagina": null,
+          "trecho": "a dose of 800 mg should be administered as 400 mg twice a day",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "GIST KIT/PDGFRA selvagem",
+        "y": "SDHB ausente na IHQ (SDH deficiente)",
+        "z": "não usar imatinibe na 1ª linha; sunitinibe ou regorafenibe",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Imatinibe não deve ser a primeira linha em GIST SDH deficiente.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Recidiva metastática após término do imatinibe adjuvante",
+        "y": "fora da janela de 3–6 meses do fim",
+        "z": "reintroduzir imatinibe em dose de 1ª linha",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "recomenda-se reintroduzir o imatinibe utilizando doses de 1ª linha",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "GIST metastático em imatinibe",
+        "y": "progressão confirmada ou intolerância",
+        "z": "sunitinibe 50 mg 4/2 ou 37,5 mg contínuo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "sunitinibe 50 mg VO 1x por dia por 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "GIST com fusão NTRK",
+        "y": "doença avançada",
+        "z": "larotrectinibe 100 mg 12/12h",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "(larotrectinibe 100 mg VO 2x por dia)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    "Tabela de risco da SBOC com erros (gástrico × não gástrico; ≤ 5 cm × ≤ 2 cm) — exigir conferência médica antes de decidir adjuvância.",
+    "HR 0,08 (6 × 3 anos de imatinibe) na SBOC p.8 parece improvável — conferir publicação.",
+    "SEM_ID_NO_CATALOGO: sequenciamento KIT/PDGFRA, NGS, ultrassom endoscópico.",
+    "SUS: confirmar portaria de incorporação do sunitinibe (Deliberação 1.035/2025) e PCDT GIST 2025; ripretinibe sem verificação Anvisa/CONITEC.",
+    "SEM_FONTE: TC de tórax no estadiamento e EDA não citados pela SBOC."
+  ],
+  "conflitos": [
+    {
+      "tema": "Imatinibe 800 mg — tomada única × dividida",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 9,
+        "trecho": "a dose de 800 mg VO 1x por dia deve ser considerada",
+        "estado": "CONFLITANTE"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "FDA/DailyMed Gleevec (imatinibe) set_id 211ef2da-2868-4a77-8055-1cb2cd78e24b, seções 2.1/2.10/2.11",
+        "pagina": null,
+        "trecho": "a dose of 800 mg should be administered as 400 mg twice a day",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Seguir a bula: 400 mg 12/12h."
+    },
+    {
+      "tema": "Tabela de estratificação de risco",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 4,
+        "trecho": "Intermediário 2 a 5 > 5 Gástrico",
+        "estado": "CONFLITANTE"
+      },
+      "fonteADetalhe": "Linhas gástricas repetidas em intermediário e alto; '≤ 5 cm, 6–10 mitoses' como intermediário",
+      "fonteB": {
+        "tipo": null,
+        "referencia": null,
+        "pagina": null,
+        "trecho": null,
+        "estado": "DADO_AUSENTE"
+      },
+      "fonteBDetalhe": "NIH modificado (Joensuu 2008): alto risco inclui 2–5 cm/> 5 mitoses e 5–10 cm/≤ 5 mitoses de sítio NÃO gástrico; intermediário inclui ≤ 2 cm/6–10 mitoses (fonte não aberta nesta curadoria)",
+      "escolhaSeguranca": "Não automatizar a classificação; o médico usa nomograma/heat map."
+    },
+    {
+      "tema": "Duração estendida do imatinibe — magnitude do efeito",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 8,
+        "trecho": "(72% versus 42% em seis anos; HR 0,08)",
+        "estado": "CONFLITANTE"
+      },
+      "fonteB": {
+        "tipo": null,
+        "referencia": null,
+        "pagina": null,
+        "trecho": null,
+        "estado": "DADO_AUSENTE"
+      },
+      "fonteBDetalhe": "HR incompatível com a diferença absoluta descrita; publicação não aberta",
+      "escolhaSeguranca": "Manter 'pelo menos 3 anos'; prolongar só após discussão multidisciplinar."
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (agente curador, Opus 5.5) sob demanda do Dr. Silas Negrão",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC 2026 GIST v5 (pp. 1–11)",
+      "Bulas FDA: Gleevec, Sutent, Qinlock",
+      "CONITEC Relatórios 1035/2025 (sunitinibe) e 1036/2025 (regorafenibe)",
+      "ClinicalTrials.gov API v2 (8 NCT verificados)",
+      "SIGTAP 2026-09"
+    ],
+    "aprovacaoClinica": null
+  }
+}

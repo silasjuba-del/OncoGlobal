@@ -1,0 +1,1070 @@
+{
+  "header": {
+    "id": "pack-ldgcb",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "PCDT Linfoma Difuso de Grandes Células B no adulto — Portaria SAS/MS nº 956/2014",
+      "trecho": "Quimioterapia de 1ª linha",
+      "edicao": "PCDT 2014 (vigente)"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Linfoma difuso de grandes células B (LDGCB), adulto",
+    "cid10": [
+      "C83.3"
+    ],
+    "subtipos": [
+      "LDGCB SOE (de novo)",
+      "LDGCB transformado de linfoma indolente",
+      "linfoma B de alto grau (double/triple hit) — conduta própria",
+      "linfoma primário do SNC — excluído do R-CHOP no PCDT"
+    ],
+    "cenarios": [
+      "localizado_I_II",
+      "avancado_III_IV",
+      "recaido_refratario",
+      "paliativo_3a_linha"
+    ],
+    "limitesAplicabilidade": "Adultos ≥18 anos com LDGCB CD20+. Linfoma primário do SNC, Burkitt, alto grau double/triple hit e PTLD têm condutas próprias (citados no curso) e não estão estruturados. PCDT de 2014: revisão da Conitec sobre rituximabe em manutenção/resgate e TCTH alogênico em consulta pública (2026)."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET-CT FDG (ou TC tóraco-abdômino-pélvica)",
+        "indicacao": "universal",
+        "quando": "Estadiamento inicial; curso: PET-CT preferencial",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014 — https://www.gov.br/saude/pt-br/assuntos/pcdt/arquivos/2014/ddt_linfomadifusob_26092014.pdf",
+          "pagina": 6,
+          "trecho": "Tomografia computadorizada (TC) tóraco-abdômino-pélvica ou Tomografia por emissão de pósitrons (PET-CT)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax (se sem PET-CT)",
+        "indicacao": "condicional",
+        "quando": "Se PET-CT indisponível",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 6,
+          "trecho": "Tomografia computadorizada (TC) tóraco-abdômino-pélvica ou Tomografia por emissão de pósitrons (PET-CT)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome (se sem PET-CT)",
+        "indicacao": "condicional",
+        "quando": "Se PET-CT indisponível",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 6,
+          "trecho": "Tomografia computadorizada (TC) tóraco-abdômino-pélvica ou Tomografia por emissão de pósitrons (PET-CT)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve (se sem PET-CT)",
+        "indicacao": "condicional",
+        "quando": "Se PET-CT indisponível",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 6,
+          "trecho": "Tomografia computadorizada (TC) tóraco-abdômino-pélvica ou Tomografia por emissão de pósitrons (PET-CT)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_CRANIO",
+        "rotulo": "RM de crânio",
+        "indicacao": "condicional",
+        "quando": "Suspeita de acometimento do SNC",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas",
+          "pagina": 19,
+          "trecho": "Se suspeiat de SNC, realizar RNM",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "excisional",
+          "quando": "Biópsia do tumor (excisional preferencial; core aceitável; PAAF não)",
+          "catalogoId": "BIOPSIA_GANGLIO",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "PCDT LDGCB 2014",
+            "pagina": 6,
+            "trecho": "O diagnóstico de LDGC B é estabelecido pela biopsia do tumor",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "core",
+          "quando": "Quando excisional inviável",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas",
+            "pagina": 18,
+            "trecho": "Core Biopsy é aceitável (Agulha grossa por RI)",
+            "estado": "INFERIDO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "Antígenos B (CD19, CD20, CD22, CD79a), CD45, IgM de superfície",
+        "Positividade de CD20 (condição para rituximabe e para auditoria SUS)",
+        "Exclusão de linfoma primário do SNC e de transformação de linfoma indolente"
+      ],
+      "molecular": [
+        {
+          "alvo": "CD20 / CD19 / CD22 / CD79a / CD45",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "diagnóstico",
+          "consequencia": "CD20+ habilita R-CHOP",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "PCDT LDGCB 2014",
+            "pagina": 6,
+            "trecho": "identificação de antígenos de linfócitos B (CD 19, 20, 22 e 79a)",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Painel B por citometria de fluxo (alternativa à IHQ)",
+          "metodo": "outro",
+          "catalogoId": "IMUNOFENOTIPAGEM",
+          "quandoPedir": "condicional",
+          "cenario": "diagnóstico",
+          "consequencia": "Confirma linhagem B",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "PCDT LDGCB 2014",
+            "pagina": 6,
+            "trecho": "ao exame imuno-histoquímico ou de citometria de fluxo",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Rearranjos MYC/BCL2/BCL6 (alto grau double/triple hit)",
+          "metodo": "FISH/CISH",
+          "catalogoId": "FISH",
+          "quandoPedir": "condicional",
+          "cenario": "suspeita de linfoma B de alto grau",
+          "consequencia": "Muda esquema (R-DA-EPOCH / R-CODOX-M-IVAC no curso)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "pendencia": "SEM_FONTE para indicação do FISH no PCDT",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas",
+            "pagina": 23,
+            "trecho": "Linfoma B Alto Grau (Double/Triple Hit)",
+            "estado": "INFERIDO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "Lugano",
+    "edicao": "Ann Arbor (TNM/UICC) no PCDT 2014; Lugano no curso; IPI/R-IPI",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "PCDT LDGCB 2014",
+      "pagina": 6,
+      "trecho": "Classificação de Tumores Malignos – UICC (Ann Arbor)",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma com plaquetas",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 6,
+          "trecho": "Hemograma completo com contagem de plaquetas e reticulócitos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RETICULOCITOS",
+        "rotulo": "Reticulócitos",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 6,
+          "trecho": "Hemograma completo com contagem de plaquetas e reticulócitos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "Teste de Coombs",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 6,
+          "trecho": "Teste de Coombs",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "DHL",
+        "rotulo": "LDH (entra no IPI)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 6,
+          "trecho": "Desidrogenase lática sérica",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BETA2_MICROGLOBULINA",
+        "rotulo": "Beta-2-microglobulina",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 6,
+          "trecho": "Beta-2-microglobulina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HBSAG",
+        "rotulo": "HBsAg (antes do rituximabe)",
+        "cenario": "pré-rituximabe",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA rituximabe (Truxima) — openFDA set_id 9af3ddc7-4217-417a-ac89-8704edc5bc44 (2026-07-13)",
+          "pagina": null,
+          "trecho": "Screen all patients for HBV infection by measuring HBsAg and anti-HBc",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ANTI_HBC_TOTAL",
+        "rotulo": "Anti-HBc total (antes do rituximabe)",
+        "cenario": "pré-rituximabe",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA rituximabe (Truxima) — openFDA set_id 9af3ddc7-4217-417a-ac89-8704edc5bc44",
+          "pagina": null,
+          "trecho": "Screen all patients for HBV infection by measuring HBsAg and anti-HBc",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ANTI_HCV",
+        "rotulo": "Anti-HCV",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 6,
+          "trecho": "Exame sorológico para hepatite do tipo B e C",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HIV",
+        "rotulo": "Anti-HIV",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 6,
+          "trecho": "Exame sorológico para HIV",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BIOPSIA_MEDULA",
+        "rotulo": "Biópsia de medula óssea",
+        "cenario": "estadiamento (PCDT 2014; curso: só se sem PET-CT)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 6,
+          "trecho": "Biopsia de medula óssea",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CITOLOGIA_LIQUIDOS",
+        "rotulo": "Exame do líquor (citologia ± citometria)",
+        "pendencia": "FATURAMENTO_A_CONFIRMAR",
+        "cenario": "infiltração de medula óssea, SNC ou cabeça e pescoço",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 6,
+          "trecho": "Exame do líquor em caso de infiltração linfomatosa da medula óssea, SNC",
+          "estado": "VERIFICADO"
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+      },
+      {
+        "catalogoId": "ECOCARDIOGRAMA",
+        "rotulo": "Ecocardiograma (antraciclina)",
+        "cenario": "pré-CHOP",
+        "indicacao": "condicional",
+        "pendencia": "SEM_FONTE no PCDT LDGCB",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas",
+          "pagina": 20,
+          "trecho": "R-CHOP Rituximabe (AntiCD20) / Ciclofosfamida/Doxorrubicina/",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "IPI: idade >60, EC III–IV, >1 sítio extranodal, PS ≥2, LDH > normal — 0–1 baixo; 2 int-baixo; 3 int-alto; 4–5 alto",
+        "conduta": "Registrar IPI/R-IPI para prognóstico",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 7,
+          "trecho": "recomenda-se registrar o número de fatores de risco segundo o Índice Prognóstico Internacional (IPI)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "R-IPI: 0 = baixo; 1–2 = intermediário; 3–5 = alto",
+        "conduta": "Agrupamento para pacientes tratados com rituximabe",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 8,
+          "trecho": "um agrupamento mais simples fornece boa discriminação prognóstica",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "EC I–II",
+        "conduta": "R-CHOP x3 → PET-CT; RC: +1 R-CHOP ou RT; Deauville 4: +3 R-CHOP ou RT; Deauville 5: nova biópsia",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas",
+          "pagina": 20,
+          "trecho": "+ 1 RCHOP ou RDT Nova biópsia",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "grupo": "EC III–IV",
+        "conduta": "R-CHOP (ou R-Pola-CHP) x6 com PET-CT interino e final",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas",
+          "pagina": 21,
+          "trecho": "R-CHOP ou R-Pola-CHP x3",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "DHL",
+          "uso": "IPI e seguimento",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "PCDT LDGCB 2014",
+            "pagina": 13,
+            "trecho": "hemograma e dosagem de desidrogenase lática sérica",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "BETA2_MICROGLOBULINA",
+          "uso": "estadiamento inicial",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "PCDT LDGCB 2014",
+            "pagina": 6,
+            "trecho": "Beta-2-microglobulina",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "PET-CT no seguimento de paciente em remissão completa",
+        "Imagem de rotina no seguimento sem achado clínico"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "avancado_III_IV ou I–II com sintomas B ou bulky >7,5 cm",
+        "intencao": "curativa",
+        "modalidades": [
+          "imunoquimioterapia R-CHOP"
+        ],
+        "criterio": "CD20+, de novo, sem tratamento prévio, HIV negativo e sem hepatite B/C ativa (PCDT)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 9,
+          "trecho": "em estágio III ou IV, ou em estádio I ou II com sintomas B",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "localizado_I_II sem critérios do R-CHOP no PCDT",
+        "intencao": "curativa",
+        "modalidades": [
+          "CHOP",
+          "radioterapia a critério do serviço"
+        ],
+        "criterio": "PCDT reserva R-CHOP para B/bulky no I–II; curso usa R-CHOP em todos",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 9,
+          "trecho": "o CHOP deve ser considerado o de escolha",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "recaido_refratario",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT de 2ª linha (DHAP, ESHAP, EPOCH, ICE, MINE)",
+          "TCTH autólogo se quimiossensível"
+        ],
+        "criterio": "sem resposta após C4, sem RC após C8, progressão ou 1ª recidiva",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 9,
+          "trecho": "utilizando-se esquemas terapêuticos como DHAP, ESHAP, EPOCH, ICE, MINE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "paliativo_3a_linha",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT de 3ª linha não usada antes"
+        ],
+        "criterio": "Zubrod 0–2",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 10,
+          "trecho": "Indicada com intuito paliativo em casos selecionados",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "ldgcb-r-chop21",
+        "nome": "R-CHOP-21",
+        "cenario": "avancado_III_IV | I–II com sintomas B ou bulky >7,5 cm",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "rituximabe",
+            "dose": 375,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "antes dos demais quimioterápicos"
+          },
+          {
+            "droga": "ciclofosfamida",
+            "dose": 750,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "doxorrubicina",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "vincristina",
+            "dose": 1.4,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "máximo 2 mg"
+          },
+          {
+            "droga": "prednisona",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1 a D5",
+            "observacao": "PCDT LDGCB; outros documentos usam 100 mg fixos — ver conflitos"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "Pré-medicação do rituximabe conforme bula (antitérmico/anti-histamínico); profilaxia HBV conforme sorologia",
+        "ajusteObrigatorio": "6 ciclos se RC no C4; até 8 se sem RC após C4 ou doença residual após C6; suspender se sem resposta após C4 ou progressão. Rastreio HBsAg e anti-HBc antes do 1º rituximabe.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "PCDT Linfoma de Hodgkin 2020, seção Regulação (rituximabe adquirido pelo MS)",
+            "pagina": 39,
+            "trecho": "do rituximabe para a quimioterapia do linfoma folifcular e do linfoma difuso",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 9,
+          "trecho": "rituximabe (375mg/m2 – EV – D1 – antes dos demais quimioterápicos)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "ldgcb-chop21",
+        "nome": "CHOP-21",
+        "cenario": "1ª linha quando rituximabe não indicado pelo PCDT (ex.: HIV+, I–II sem B/bulky) ou contraindicado",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "ciclofosfamida",
+            "dose": 750,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "doxorrubicina",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "vincristina",
+            "dose": 1.4,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "máximo 2 mg"
+          },
+          {
+            "droga": "prednisona",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1 a D5",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Até 8 ciclos se sem RC após C4 ou residual após C6; pode ser substituído por CHOP-14.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "PCDT LDGCB 2014",
+            "pagina": 8,
+            "trecho": "Intervalo de 21 dias",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 8,
+          "trecho": "Prednisona – 40mg/m2 – VO – D1 a D5",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "ldgcb-pola-r-chp",
+        "nome": "Polatuzumabe vedotina + R-CHP",
+        "cenario": "avancado (IPI 2–5) — diretriz internacional",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "polatuzumabe vedotina",
+            "dose": 1.8,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "1ª infusão em 90 min"
+          },
+          {
+            "droga": "rituximabe",
+            "dose": 375,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "ciclofosfamida",
+            "dose": 750,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "doxorrubicina",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "prednisona",
+            "dose": 100,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1 a D5",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "Anti-histamínico e antitérmico antes do polatuzumabe (bula)",
+        "ajusteObrigatorio": "Neuropatia periférica: reduzir polatuzumabe para 1,4 e depois 1 mg/kg (bula).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "pendencia": "não consta no PCDT 2014; incorporação não verificada",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "PCDT LDGCB 2014 (1ª linha só CHOP/R-CHOP)",
+            "pagina": 9,
+            "trecho": "o CHOP deve ser considerado o de escolha",
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA POLIVY — openFDA set_id 20a16ab2-f338-4abb-9dcd-254bd949a2bc (2026-08-24), seções 2.1 e 14 (POLARIX)",
+          "pagina": null,
+          "trecho": "prednisone 100 mg orally once daily on Days 1–5 for 6 cycles",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "LDGCB (PCDT): sem uso estabelecido; a critério do serviço. Curso: consolidação em EC I–II após R-CHOP",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "pendencia": "SEM_FONTE (dose)",
+        "concomitante": "não",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 11,
+          "trecho": "A radioterapia não é uma modalidade terapêutica de uso estabelecido para doentes",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Biópsia (diagnóstico; nova biópsia em recidiva >1 ano ou Deauville 5)",
+        "quando": "Recidiva após 1 ano do tratamento",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 12,
+          "trecho": "recomenda-se a repetição da biópsia para confirmar o tipo histopatológico do linfoma",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "TCTH autólogo",
+        "quando": "Recidiva sensível à 2ª linha, apto",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 10,
+          "trecho": "A indicação de TCTH autólogo se faz para doentes com recidiva sensível",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "CD20+",
+        "opcao": "Rituximabe associado ao CHOP",
+        "evidencia": "PCDT: aumento de RC, SLD e SG",
+        "sus": "sim (fornecido pelo MS)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 9,
+          "trecho": "diagnóstico histopatológico de LDGC B CD 20 positivo de novo",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": null,
+      "riscoNeutropeniaFebril": null,
+      "outros": [
+        "G-CSF: reservado para neutropenia intensa fora do nadir que impede o ciclo; profilático se repetir em 2 ciclos consecutivos (PCDT)",
+        "Profilaxia de SNC com QT intratecal: estádio IV, massa paravertebral, acometimento primário de sítios na cabeça (PCDT, evidência inconsistente)",
+        "Rastreio e profilaxia de reativação de HBV antes do rituximabe (bula)"
+      ],
+      "pendencia": "SEM_FONTE (emetogenicidade/NF; dose da QT intratecal; CNS-IPI)",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "PCDT LDGCB 2014",
+        "pagina": 10,
+        "trecho": "Reservado para os casos de doentes intensamente neutropênicos, em intervalo de quimioterapia",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "POLARIX",
+        "nct": "NCT03274492",
+        "nctEstado": "VERIFICADO",
+        "populacao": "LDGCB não tratado, 18–80 anos, IPI 2–5",
+        "bracos": "Pola-R-CHP × R-CHOP, 6 ciclos + 2 de rituximabe",
+        "desfecho": "SLP",
+        "resultado": "Base do registro FDA de Pola-R-CHP",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA POLIVY seção 14; ClinicalTrials.gov API v2 NCT03274492 (COMPLETED)",
+          "pagina": null,
+          "trecho": "a randomized double-blind, placebo-controlled, multicenter trial",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "anos 1–2",
+        "exames": [
+          "HEMOGRAMA",
+          "DHL",
+          "TSH"
+        ],
+        "periodicidade": "a cada 3 meses (TSH só se RT cervical)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 13,
+          "trecho": "A cada 3 meses, por dois anos e semestral no terceiro ano",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "ano 3",
+        "exames": [
+          "HEMOGRAMA",
+          "DHL"
+        ],
+        "periodicidade": "semestral",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 13,
+          "trecho": "A cada 3 meses, por dois anos e semestral no terceiro ano",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "anos 4–5",
+        "exames": [
+          "HEMOGRAMA",
+          "DHL",
+          "TSH"
+        ],
+        "periodicidade": "semestral (TSH anual se RT cervical)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 13,
+          "trecho": "A cada 6 meses, no quarto e quinto ano de seguimento",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "PET_CT_FDG",
+      "TC_TORAX",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "RM_CRANIO",
+      "BIOPSIA_GANGLIO",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "IMUNOHISTOQUIMICA",
+      "IMUNOFENOTIPAGEM",
+      "FISH",
+      "HEMOGRAMA",
+      "RETICULOCITOS",
+      "DHL",
+      "BETA2_MICROGLOBULINA",
+      "HBSAG",
+      "ANTI_HBC_TOTAL",
+      "ANTI_HCV",
+      "HIV",
+      "BIOPSIA_MEDULA",
+      "ECOCARDIOGRAMA",
+      "TSH",
+      "CITOLOGIA_LIQUIDOS"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "vincristina",
+        "com": "azóis (itraconazol, voriconazol, posaconazol)",
+        "ref": null
+      },
+      {
+        "droga": "doxorrubicina",
+        "com": "trastuzumabe/outras cardiotóxicas; dose cumulativa",
+        "ref": null
+      },
+      {
+        "droga": "rituximabe",
+        "com": "vacinas de vírus vivo",
+        "ref": null
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "infusional (rituximabe)",
+        "termosCTCAEv6": [
+          "Reação relacionada à infusão"
+        ]
+      },
+      {
+        "classe": "hepática (reativação HBV)",
+        "termosCTCAEv6": [
+          "Infecção por hepatite B",
+          "Aumento de ALT"
+        ]
+      },
+      {
+        "classe": "hematológica",
+        "termosCTCAEv6": [
+          "Neutropenia febril",
+          "Contagem de neutrófilos diminuída"
+        ]
+      },
+      {
+        "classe": "neurológica (vincristina/polatuzumabe)",
+        "termosCTCAEv6": [
+          "Neuropatia periférica sensitiva",
+          "Constipação"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "antiemético conforme esquema",
+      "pré-medicação do rituximabe",
+      "profilaxia antiviral HBV se HBsAg+ ou anti-HBc+ (dose SEM_FONTE)"
+    ],
+    "orientacoes": [
+      "sinais de reação infusional",
+      "sinais de neutropenia febril",
+      "vacina influenza anual e pneumocócica a cada 5 anos no seguimento (PCDT p.13)"
+    ],
+    "encaminhamentos": [
+      "radioterapia",
+      "cuidados-paliativos",
+      "centro de TCTH (recaída sensível)",
+      "nutricao"
+    ],
+    "laudos": [
+      "APAC 03.04.06.022-4 (LDGCB 1ª linha) ou 03.04.06.013-5; 2ª linha 03.04.06.011-9; 3ª linha 03.04.06.012-7"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "LDGCB CD20+ de novo, EC III–IV ou I–II com B/bulky >7,5 cm",
+        "y": "HIV negativo e sem hepatite B/C ativa (PCDT)",
+        "z": "R-CHOP-21, 6 a 8 ciclos",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 9,
+          "trecho": "com resultado de exame sorológico negativo para HIV",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Plano com rituximabe",
+        "y": "antes da 1ª dose",
+        "z": "HBsAg + anti-HBc (HBSAG, ANTI_HBC_TOTAL)",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA rituximabe (Truxima), seção 2.1",
+          "pagina": null,
+          "trecho": "Screen all patients for HBV infection by measuring HBsAg and anti-HBc",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "LDGCB EC IV, massa paravertebral ou sítio primário na cabeça",
+        "y": "tratamento inicial ou recidiva",
+        "z": "considerar QT intratecal profilática (+ líquor)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 11,
+          "trecho": "em casos de estádio IV, massa paravertebral e acometimento primário de sítios na cabeça",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Sem resposta após C4 ou progressão em 1ª linha",
+        "y": "apto a TCTH",
+        "z": "QT de 2ª linha (DHAP/ESHAP/ICE/EPOCH/MINE) → TCTH autólogo se quimiossensível",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT LDGCB 2014",
+          "pagina": 9,
+          "trecho": "Indicada em caso de ausência de resposta após o 4º ciclo",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    "Coombs e líquor sem catalogoId (SEM_ID_NO_CATALOGO)",
+    "CNS-IPI e dose/esquema da profilaxia intratecal ou metotrexato EV: SEM_FONTE aberta lida",
+    "Profilaxia antiviral de HBV (droga/dose/duração): SEM_FONTE aberta lida",
+    "Doses dos esquemas de 2ª linha (DHAP, ESHAP, ICE, EPOCH, MINE): não constam no PCDT LDGCB 2014 — não transcritos",
+    "CAR-T, glofitamabe, epcoritamabe, tafasitamabe+lenalidomida (curso/NCCN): sem incorporação SUS verificada e sem dose lida",
+    "Pola-R-CHP: incorporação SUS não verificada",
+    "Dose de RT de consolidação: SEM_FONTE",
+    "PCDT de 2014 em revisão (consultas públicas Conitec 2026 sobre rituximabe manutenção/resgate e TCTH alogênico)"
+  ],
+  "conflitos": [
+    {
+      "tema": "Prednisona no CHOP",
+      "fonteA": {
+        "tipo": "DIRETRIZ",
+        "referencia": "PCDT LDGCB 2014",
+        "pagina": 8,
+        "trecho": "Prednisona – 40mg/m2 – VO – D1 a D5",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "Bula FDA POLIVY (POLARIX, braço R-CHOP/R-CHP)",
+        "pagina": null,
+        "trecho": "prednisone 100 mg orally once daily on Days 1–5 for 6 cycles",
+        "estado": "CONFLITANTE"
+      },
+      "escolhaSeguranca": "Mantido 40 mg/m2 do PCDT vigente; 100 mg fixos é alternativa aceita no PCDT preliminar de LF 2026 ('40 mg/m2 ou 100 mg'). Médico escolhe."
+    },
+    {
+      "tema": "Rituximabe em HIV+",
+      "fonteA": {
+        "tipo": "DIRETRIZ",
+        "referencia": "PCDT LDGCB 2014",
+        "pagina": 5,
+        "trecho": "Não se recomenda o uso de Rituximabe em doentes de LDGC B",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026, Aula 80",
+        "pagina": 21,
+        "trecho": "R-CHOP ou R-Pola-CHP x3",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Registrado o critério do PCDT (HIV negativo) como regra SUS; diretrizes atuais podem divergir — decisão médica com infectologia."
+    },
+    {
+      "tema": "Indicação de R-CHOP em EC I–II sem B/bulky",
+      "fonteA": {
+        "tipo": "DIRETRIZ",
+        "referencia": "PCDT LDGCB 2014",
+        "pagina": 9,
+        "trecho": "em estágio III ou IV, ou em estádio I ou II com sintomas B",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026, Aula 80",
+        "pagina": 20,
+        "trecho": "R-CHOP x3",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "SUS: R-CHOP pelo critério do PCDT; demais I–II recebem CHOP. Diretriz internacional usa R-CHOP para todos."
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (agente curador, Opus 5.5) — rascunho para revisão",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "PCDT LDGCB 2014 (Portaria SAS/MS 956/2014) — íntegra",
+      "PCDT Linfoma de Hodgkin 2020 (seção Regulação, rituximabe fornecido pelo MS)",
+      "Bula FDA rituximabe (Truxima), POLIVY (openFDA)",
+      "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas (págs. 17–24)",
+      "ClinicalTrials.gov API v2 — NCT03274492"
+    ],
+    "aprovacaoClinica": null
+  }
+}

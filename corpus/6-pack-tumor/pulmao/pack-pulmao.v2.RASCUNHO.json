@@ -1,0 +1,4866 @@
+{
+  "header": {
+    "id": "pack-pulmao",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 e doença avançada v5 (versões para colaboração), arquivos -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.pdf e -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+      "trecho": "Esta diretriz tem como objetivo apoiar as decisões clínicas no tratamento",
+      "edicao": "v4/v5 2026"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [
+    "pack-pulmao-v1-glm"
+  ],
+  "identidade": {
+    "tumor": "Câncer de pulmão (CPNPC e CPPC)",
+    "cid10": [
+      "C34"
+    ],
+    "subtipos": [
+      "CPNPC não escamoso (adenocarcinoma)",
+      "CPNPC escamoso (CEC)",
+      "CPPC (carcinoma de pequenas células)"
+    ],
+    "cenarios": [
+      "rastreamento",
+      "localizado_ressecado",
+      "ressecavel_neoadjuvante",
+      "localmente_avancado_irressecavel",
+      "metastatico_com_driver",
+      "metastatico_sem_driver",
+      "segunda_linha",
+      "cppc_limitado",
+      "cppc_extenso"
+    ],
+    "limitesAplicabilidade": "Adultos com CPNPC (SBOC 2026 v4/v5) e CPPC (sem diretriz SBOC nas fontes: apenas Onco PRO 2026 aula 50 e bula FDA para imunoterápicos; doses de QT do CPPC ausentes). Carcinoides pulmonares (típico/atípico) seguem a diretriz SBOC 2026 de TNE pulmonares e estão fora deste pack, exceto a classificação OMS usada no laudo. Mesotelioma e timoma fora do escopo. Pack propõe; médico decide."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax com contraste",
+        "indicacao": "universal",
+        "quando": "Suspeita de neoplasia de pulmão; estadiamento",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "TC de tórax e abdome total com contraste",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CONTRASTE_TC",
+        "rotulo": "Contraste iodado para TC",
+        "indicacao": "universal",
+        "quando": "Junto às TCs de estadiamento",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "TC de tórax e abdome total com contraste",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RX_TORAX_PA_PERFIL",
+        "rotulo": "Radiografia de tórax",
+        "indicacao": "condicional",
+        "quando": "Achado inicial; não substitui TC (SBOC cita RX apenas em estudo de seguimento)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 21,
+          "trecho": "submetidos à cirurgia com intenção curativa para realizarem seguimento com RX de tórax",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [
+      {
+        "catalogoId": "BRONCOSCOPIA",
+        "rotulo": "Broncoscopia (com EBUS/EUS quando disponível)",
+        "indicacao": "universal",
+        "quando": "Diagnóstico e estadiamento; EBUS/EUS preferencial para mediastino",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "A avaliação invasiva poderá tanto ser realizada por EBUS/EUS, preferencialmente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "Mediastinoscopia",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "indicacao": "condicional",
+        "quando": "Suspeita clínica forte com EBUS/EUS negativo ou EBUS indisponível",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "seguir investigação com mediastinoscopia em caso de EBUS/EUS negativo",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "endoscopica",
+          "quando": "Lesão central ou linfonodo mediastinal acessível (broncoscopia/EBUS)",
+          "catalogoId": "BRONCOSCOPIA",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 10,
+            "trecho": "Recomendada para tumores centrais, tumores periféricos ≥3,0 cm ou cN1",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "core",
+          "quando": "Lesão periférica: biópsia transtorácica guiada",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026, 42_-_Aula_42_-_Câncer_de_Pulmão_-_Visão_Geral_e_Conceitos.txt",
+            "pagina": 23,
+            "trecho": "Broncoscopia EBUS Biópsia Transtorácica Toracoscopia",
+            "estado": "INFERIDO"
+          }
+        },
+        {
+          "tipo": "outra",
+          "quando": "Derrame pleural suspeito: toracocentese diagnóstica e/ou pleuroscopia",
+          "catalogoId": "BIOPSIA_PLEURA",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 11,
+            "trecho": "Para pacientes com derrame pleural suspeito para acometimento neoplásico.",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "outra",
+          "quando": "Biópsia líquida (ctDNA) quando tecido indisponível/insuficiente; se negativa, retornar ao tecido",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 6,
+            "trecho": "deve-se proceder a avaliação molecular no material tecidual",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "Tipo histológico: adenocarcinoma × carcinoma escamoso × pequenas células (define pemetrexede, painel molecular e esquema)",
+        "IHQ de diferenciação: TTF1, Napsina A, CK7 (adenocarcinoma); p40, p63, CK5/6 (escamoso); cromogranina, CD56, sinaptofisina, Ki-67 (CPPC) — fonte Onco PRO 2026 aula 42 p.11 (CURSO)",
+        "Tumor neuroendócrino: necrose e contagem mitótica por 2 mm² (carcinoide típico < 2; atípico 2-10; CPPC/CNGC > 10) e Ki-67 complementar — SBOC TNE pulmão p.7",
+        "PD-L1 por IHQ com escore TPS (%)",
+        "HER2 por IHQ (SBOC: para todo CPNPC avançado)",
+        "Suficiência do material para NGS (DNA e RNA)",
+        "Peça cirúrgica: margens, pT, pN (número de estações/linfonodos), invasão pleural visceral, invasão vascular"
+      ],
+      "molecular": [
+        {
+          "alvo": "EGFR (del19, L858R; também ex20ins e T790M na progressão)",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "universal",
+          "cenario": "CPNPC avançado não escamoso (e CEC em não fumante/jovem/< 15 maços-ano); ressecado IB-IIIA e III irressecável para decidir osimertinibe",
+          "consequencia": "del19/L858R: osimertinibe (adjuvante 3 anos; pós-QTRT; 1ª linha ± QT ou amivantamabe+lazertinibe); ex20ins: carboplatina+pemetrexede+amivantamabe; T790M pós-TKI 1ª/2ª geração: osimertinibe. Positivo exclui QT-IO neoadjuvante e durvalumabe de consolidação.",
+          "disponivelSUS": "DADO_AUSENTE",
+          "observacao": "PCR é método usual para EGFR, mas a SBOC 2026 recomenda NGS; PCR não citado na fonte.",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 6,
+            "trecho": "mutações de EGFR, BRAF, MET skipping 14, KRAS, HER2",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "ALK (fusão)",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "universal",
+          "cenario": "CPNPC avançado não escamoso; ressecado IB (≥ 4 cm)-IIIA para alectinibe adjuvante",
+          "consequencia": "Alectinibe adjuvante 2 anos; avançado: alectinibe, brigatinibe ou lorlatinibe (crizotinibe opção). Positivo exclui QT-IO neoadjuvante e durvalumabe de consolidação.",
+          "disponivelSUS": "DADO_AUSENTE",
+          "observacao": "IHQ e FISH (catalogoId IMUNOHISTOQUIMICA/FISH) são métodos alternativos usuais para ALK, não citados na SBOC 2026 (DADO_AUSENTE).",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 6,
+            "trecho": "fusões de ALK, ROS1, RET e NTRK para todos os pacientes com histologia não-escamosa",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "FISH",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "ROS1 (fusão)",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "CPNPC avançado não escamoso (painel NGS com RNA)",
+          "consequencia": "Crizotinibe 250 mg VO 12/12h (SBOC: fora do rol ANS).",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 6,
+            "trecho": "fusões de ALK, ROS1, RET e NTRK para todos os pacientes com histologia não-escamosa",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "FISH",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "BRAF V600E",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "CPNPC avançado não escamoso",
+          "consequencia": "Dabrafenibe + trametinibe ou encorafenibe + binimetinibe.",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 6,
+            "trecho": "mutações de EGFR, BRAF, MET skipping 14, KRAS, HER2",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "KRAS G12C",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "CPNPC avançado não escamoso",
+          "consequencia": "Sotorasibe 960 mg/dia na 2ª linha ou mais, após platina ± IO; 1ª linha segue sem driver.",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 6,
+            "trecho": "mutações de EGFR, BRAF, MET skipping 14, KRAS, HER2",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "MET skipping éxon 14",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "CPNPC avançado não escamoso (RNA melhora detecção)",
+          "consequencia": "Capmatinibe ou tepotinibe em 1ª linha ou subsequentes.",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 6,
+            "trecho": "mutações de EGFR, BRAF, MET skipping 14, KRAS, HER2",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "RET (fusão)",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "CPNPC avançado não escamoso",
+          "consequencia": "Selpercatinibe 160 mg VO 12/12h em 1ª linha.",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 6,
+            "trecho": "fusões de ALK, ROS1, RET e NTRK para todos os pacientes com histologia não-escamosa",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "FISH",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "NTRK 1/2/3 (fusão)",
+          "metodo": "NGS",
+          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "CPNPC avançado não escamoso",
+          "consequencia": "Larotrectinibe 100 mg VO 12/12h.",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 6,
+            "trecho": "fusões de ALK, ROS1, RET e NTRK para todos os pacientes com histologia não-escamosa",
+            "estado": "VERIFICADO"
+          },
+          "catalogoIdAlternativo": "FISH",
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "alvo": "HER2 (mutação)",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "CPNPC avançado não escamoso",
+          "consequencia": "Trastuzumabe-deruxtecana 5,4 mg/kg após tratamento prévio.",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 6,
+            "trecho": "mutações de EGFR, BRAF, MET skipping 14, KRAS, HER2",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "HER2 (superexpressão)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "Todo CPNPC avançado",
+          "consequencia": "IHQ 3+: trastuzumabe-deruxtecana 5,4 mg/kg em pacientes previamente tratados.",
+          "disponivelSUS": "DADO_AUSENTE",
+          "observacao": "Procedimento genérico de IHQ existe no catálogo; cobertura SUS do anticorpo HER2 em pulmão não verificada.",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 22,
+            "trecho": "esta é uma opção de tratamento para os pacientes previamente tratados com IHQ 3+.",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "PD-L1",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "Todo CPNPC avançado; ressecado II-IIIA (atezolizumabe adjuvante exige ≥ 1%)",
+          "clone": null,
+          "clonePendencia": "SEM_FONTE: SBOC 2026 não especifica clone; SP142/SP263 aparecem apenas em slides de ensaios (aula SBOC Aknar Calabrich), sem recomendação",
+          "escore": "TPS (tumor proportion score, %); cortes < 1%, 1-49%, ≥ 50%",
+          "consequencia": "Sem driver: TPS ≥ 50% → IO monoterapia (pembrolizumabe, atezolizumabe, cemiplimabe; FR forte) ou QT-IO; 1-49% → QT-IO ou pembrolizumabe mono (FR fraca); < 1%/desconhecido → QT-IO. Adjuvante: atezolizumabe se ≥ 1% (especialmente ≥ 50%). Durvalumabe de consolidação independe de PD-L1. CPPC: sem implicação clínica.",
+          "disponivelSUS": "DADO_AUSENTE",
+          "observacao": "Procedimento genérico IMUNOHISTOQUIMICA no catálogo; cobertura do anticorpo PD-L1 não verificada.",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 6,
+            "trecho": "expressão de PD-L1 e HER2 por imuno- histoquímica para todos CPNPC",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "9ª edição (CPNPC); CPPC também classificado como limitado × extenso (VALSG)",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+      "pagina": 8,
+      "trecho": "Agrupamento TNM (AJCC 9ª edição)",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax com contraste",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "TC de tórax e abdome total com contraste",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome com contraste",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "TC de tórax e abdome total com contraste",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve (doença IV sem PET/CT)",
+        "cenario": "metastático sem PET/CT disponível",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 5,
+          "trecho": "substituir por TC de tórax, abdome e pelve e acrescentar cintilografia óssea",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_CRANIO",
+        "rotulo": "RM de encéfalo",
+        "cenario": "obrigatória se sintomas; sugerida para todos, especialmente II-IV",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "Obrigatória para pacientes sintomáticos e sugerida para todos os pacientes",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_CRANIO",
+        "rotulo": "TC de crânio com contraste (se RM indisponível)",
+        "cenario": "RM indisponível",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026, 42_-_Aula_42_-_Câncer_de_Pulmão_-_Visão_Geral_e_Conceitos.txt",
+          "pagina": 25,
+          "trecho": "TC de crânio com contraste se indisponível",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT com FDG",
+        "cenario": "candidatos a tratamento curativo (cirurgia ou RT); recomendado no EC IV",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Recomendado especialmente para pacientes com suspeita de doença localizada e candidatos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CINTILOGRAFIA_OSSEA",
+        "rotulo": "Cintilografia óssea",
+        "cenario": "sintomas ósseos ou sem PET/CT",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Apenas em casos de sintomas ósseos ou suspeita de acometimento esquelético",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BRONCOSCOPIA",
+        "rotulo": "Avaliação invasiva do mediastino (EBUS/EUS)",
+        "cenario": "tumor central, periférico ≥ 3 cm, cN1 ou mediastino suspeito",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Recomendada para tumores centrais, tumores periféricos ≥3,0 cm ou cN1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BIOPSIA_PLEURA",
+        "rotulo": "Toracocentese diagnóstica e/ou pleuroscopia",
+        "cenario": "derrame pleural suspeito",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Toracocentese diagnóstica e/ou pleuroscopia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ESPIROMETRIA",
+        "rotulo": "Prova de função pulmonar",
+        "cenario": "candidatos à cirurgia",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Para pacientes candidatos a tratamento cirúrgico.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma completo",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Hemograma completo;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Função renal",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Funções renal e hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "UREIA",
+        "rotulo": "Função renal",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Funções renal e hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGO",
+        "rotulo": "Função hepática",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Funções renal e hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "rotulo": "Função hepática",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Funções renal e hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BILIRRUBINA",
+        "rotulo": "Função hepática",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Funções renal e hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "SODIO",
+        "rotulo": "Eletrólitos",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Eletrólitos;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "POTASSIO",
+        "rotulo": "Eletrólitos",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Eletrólitos;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "MAGNESIO",
+        "rotulo": "Eletrólitos",
+        "cenario": "todos (cisplatina)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Eletrólitos;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "rotulo": "Eletrólitos",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Eletrólitos;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "GLICEMIA",
+        "rotulo": "Glicemia",
+        "cenario": "doença avançada",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 5,
+          "trecho": "Glicemia;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HBSAG",
+        "rotulo": "Sorologia hepatite B",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Sorologia para hepatite B.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ANTI_HBC_TOTAL",
+        "rotulo": "Sorologia hepatite B",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Sorologia para hepatite B.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ANTI_HCV",
+        "rotulo": "Sorologia hepatite C",
+        "cenario": "candidatos a IO, se suspeita clínica",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Sorologias para hepatite B, hepatite C e HIV apenas se suspeita clinica;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HIV",
+        "rotulo": "Sorologia HIV",
+        "cenario": "candidatos a IO, se suspeita clínica",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Sorologias para hepatite B, hepatite C e HIV apenas se suspeita clinica;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TSH",
+        "rotulo": "Perfil hormonal pré-IO",
+        "cenario": "candidatos a IO",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 5,
+          "trecho": "TSH, T4 livre, ACTH, cortisol, sorologias HIV e hepatites, amilase, lipase e urina I.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "T4_LIVRE",
+        "rotulo": "Perfil hormonal pré-IO",
+        "cenario": "candidatos a IO",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 5,
+          "trecho": "TSH, T4 livre, ACTH, cortisol, sorologias HIV e hepatites, amilase, lipase e urina I.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CORTISOL",
+        "rotulo": "Perfil hormonal pré-IO",
+        "cenario": "candidatos a IO",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 5,
+          "trecho": "TSH, T4 livre, ACTH, cortisol, sorologias HIV e hepatites, amilase, lipase e urina I.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "ACTH",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "cenario": "candidatos a IO",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 5,
+          "trecho": "TSH, T4 livre, ACTH, cortisol, sorologias HIV e hepatites, amilase, lipase e urina I.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "AMILASE",
+        "rotulo": "Amilase pré-IO",
+        "cenario": "candidatos a IO",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 5,
+          "trecho": "TSH, T4 livre, ACTH, cortisol, sorologias HIV e hepatites, amilase, lipase e urina I.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "LIPASE",
+        "rotulo": "Lipase pré-IO",
+        "cenario": "candidatos a IO",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 5,
+          "trecho": "TSH, T4 livre, ACTH, cortisol, sorologias HIV e hepatites, amilase, lipase e urina I.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "URINA_TIPO_I",
+        "rotulo": "Urina I pré-IO",
+        "cenario": "candidatos a IO",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 5,
+          "trecho": "TSH, T4 livre, ACTH, cortisol, sorologias HIV e hepatites, amilase, lipase e urina I.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "Rastreamento",
+        "conduta": "TC de tórax de baixa dose anual, 50-80 anos, ≥ 20 anos-maço, tabagista ativo ou cessação < 15 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 4,
+          "trecho": "Rastreamento anual com TC de tórax com baixa dose de radiação",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IA ressecado",
+        "conduta": "Apenas seguimento; sem tratamento sistêmico adjuvante",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "Não há evidência atual de benefício de tratamento sistêmico adjuvante para estádio IA",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IB ressecado (≥ 3 cm) EGFR del19/L858R",
+        "conduta": "Considerar osimertinibe adjuvante 3 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "Pode-se considerar tratamento adjuvante com osimertinibe 80 mg/dia VO por 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IIA-IIIA ressecado (e IIIA/IIIB pN2 incidental)",
+        "conduta": "QT adjuvante com platina × 4; depois osimertinibe (EGFR) ou alectinibe (ALK, discute-se omitir QT) ou atezolizumabe (PD-L1 ≥ 1%) / pembrolizumabe (FR fraca)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Deverão ser submetidos a QT adjuvante conforme os esquemas sugeridos anteriormente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IIA-IIIB ressecável (N0-N2) sem EGFR/ALK",
+        "conduta": "QT-IO neoadjuvante seguida de cirurgia (preferível à cirurgia inicial); neoadjuvância não é terapia de conversão",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "favorece-se tratamento neoadjuvante com quimio-imunoterapia seguido de cirurgia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Ressecável com EGFR/ALK",
+        "conduta": "N0-N1: cirurgia + adjuvante; N2: cirurgia + QT adjuvante + osimertinibe (ou QT neoadjuvante sem IO)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 18,
+          "trecho": "Para pacientes com mutação de EGFR ou ALK e doença N0-N1, favorece-se",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "I inoperável",
+        "conduta": "SBRT 3 a 8 sessões",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 18,
+          "trecho": "considerar SBRT, em 3 a 8 sessões",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "II irressecável/inoperável",
+        "conduta": "Tratar como estádio III irressecável (FR fraca)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 18,
+          "trecho": "recomendamos considerar tratamento conforme descrito para estádio III irressecável",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IIIA/IIIB irressecável e IIIC",
+        "conduta": "QTRT definitiva; durvalumabe 12 meses (sem EGFR/ALK) ou osimertinibe (EGFR); sem QT de consolidação",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 18,
+          "trecho": "O tratamento padrão para os casos irressecáveis é a QTRT definitiva",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IIIA sulco superior (Pancoast)",
+        "conduta": "QTRT neoadjuvante seguida de cirurgia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "QTRT neoadjuvante seguida de cirurgia é o tratamento padrão neste cenário",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IV",
+        "conduta": "Aguardar painel molecular; driver → terapia-alvo; sem driver → conforme PD-L1 e histologia; cuidados paliativos precoces",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 6,
+          "trecho": "Sempre que possível, aguardar o resultado dos testes moleculares para decidir",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "CPPC limitado (I-III, um hemitórax) × extenso (IV)",
+        "conduta": "Limitado: QTRT concomitante ± durvalumabe de consolidação; extenso: platina + etoposídeo + IO",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026, 50_-_Aula_50_-_Câncer_de_Pulmão_de_Pequenas_Células.txt",
+          "pagina": 11,
+          "trecho": "O sistema VALSG classifica o CPPC como LIMITADO x EXTENSO",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [],
+      "naoPedirDeRotina": [
+        "Marcadores séricos (CEA etc.): não citados pela SBOC 2026 para CPNPC/CPPC — DADO_AUSENTE; não há base nas fontes para pedido de rotina"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "localizado_ressecado",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia",
+          "QT adjuvante",
+          "terapia-alvo adjuvante",
+          "IO adjuvante"
+        ],
+        "criterio": "pT/pN, EGFR, ALK, PD-L1",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "Considerar algum dos regimes de QT adjuvante abaixo:",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "ressecavel_neoadjuvante",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT-IO neoadjuvante",
+          "cirurgia",
+          "IO adjuvante"
+        ],
+        "criterio": "IIA-IIIB ressecável, sem EGFR/ALK, discussão multidisciplinar",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "favorece-se tratamento neoadjuvante com quimio-imunoterapia seguido de cirurgia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "localmente_avancado_irressecavel",
+        "intencao": "curativa",
+        "modalidades": [
+          "QTRT concomitante",
+          "durvalumabe",
+          "osimertinibe"
+        ],
+        "criterio": "III irressecável/inoperável; QT de indução 1-2 ciclos aceitável se fila de RT",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "é aceitável realizar a QTRT precedida por 1 ou 2 ciclos de QT isolada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico_com_driver",
+        "intencao": "paliativa",
+        "modalidades": [
+          "terapia-alvo"
+        ],
+        "criterio": "EGFR, ALK, ROS1, BRAF V600E, NTRK, MET ex14, RET (1ª linha); KRAS G12C, HER2 (após tratamento prévio); evitar IO antes da terapia-alvo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 6,
+          "trecho": "evitar as toxicidades relacionadas ao uso de terapia alvo após exposição à imunoterapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico_sem_driver",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT-IO",
+          "IO monoterapia"
+        ],
+        "criterio": "PD-L1 (TPS) e histologia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "PD-L1 ≥ 50% Mesmas opções de PD-L1 < 1%",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "segunda_linha",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT",
+          "IO (se não usada)",
+          "antiangiogênico"
+        ],
+        "criterio": "Tratamento prévio, histologia, PS; não repetir anti-PD-(L)1",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "a terapia subsequente não deve incluir esquemas com estes medicamentos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "cppc_limitado",
+        "intencao": "curativa",
+        "modalidades": [
+          "QTRT concomitante",
+          "durvalumabe de consolidação"
+        ],
+        "criterio": "VALSG limitado; sem diretriz SBOC nas fontes",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026, 50_-_Aula_50_-_Câncer_de_Pulmão_de_Pequenas_Células.txt",
+          "pagina": 15,
+          "trecho": "Acréscimo de Imunoterapia de consolidação após QRDT",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "cenario": "cppc_extenso",
+        "intencao": "paliativa",
+        "modalidades": [
+          "platina + etoposídeo + IO",
+          "2ª linha: tarlatamabe/topotecano/lurbinectedina (sem dose nas fontes)"
+        ],
+        "criterio": "VALSG extenso; sem diretriz SBOC nas fontes",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026, 50_-_Aula_50_-_Câncer_de_Pulmão_de_Pequenas_Células.txt",
+          "pagina": 21,
+          "trecho": "Associação de imunoterapia ao doublet de platina",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "pulmao-adj-cisplatina-vinorelbina-28d",
+        "nome": "Cisplatina + vinorelbina (opção 1, 28 dias)",
+        "cenario": "adjuvante — CPNPC ressecado IIA-IIIA (e IIIB pN2 incidental)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": ""
+          },
+          {
+            "droga": "vinorelbina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15, D22",
+            "observacao": "via EV não escrita na tabela SBOC; via conforme bula FDA (vinorelbina injetável): \"25 to 30 mg/m 2 as an intravenous injection or infusion once weekly\""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Cisplatina 50 mg/m² EV D1 e D8 Vinorelbina 25 mg/m² D1, D8, D15, D22",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "SBOC também lista opção 2 (cisplatina 100 D1 + vinorelbina 30 semanal, 28 d) e opção 3 em faixa (cisplatina 75-80 D1 + vinorelbina 25-30 D1, D8, 21 d), não convertidas em linha por faixa de dose."
+      },
+      {
+        "id": "pulmao-adj-cisplatina-vinorelbina-100",
+        "nome": "Cisplatina 100 + vinorelbina 30 (opção 2, 28 dias)",
+        "cenario": "adjuvante — CPNPC ressecado IIA-IIIA",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "vinorelbina",
+            "dose": 30,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15, D22",
+            "observacao": "via EV não escrita na tabela SBOC; via conforme bula FDA (vinorelbina injetável): \"25 to 30 mg/m 2 as an intravenous injection or infusion once weekly\""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Cisplatina 100 mg/m² EV D1 Vinorelbina 30 mg/m² D1, D8, D15, D22",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-adj-cisplatina-docetaxel",
+        "nome": "Cisplatina + docetaxel",
+        "cenario": "adjuvante — CPNPC ressecado IIA-IIIA",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); docetaxel × inibidores CYP3A4 (INAT-18)",
+        "fichaId": "FICHA.pulmao-cpnpc.cisplatina-docetaxel__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Docetaxel 75 mg/m² EV D1 A cada 3 semanas, 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-adj-cisplatina-gencitabina",
+        "nome": "Cisplatina + gencitabina",
+        "cenario": "adjuvante — CPNPC ressecado IIA-IIIA",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "gencitabina",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Gencitabina 1.200 mg/m² EV D1, D8 A cada 3 semanas, 4 ciclos",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "fichaId null: fichas existentes usam gencitabina 1000 e cisplatina 80 (não batem com a SBOC adjuvante)."
+      },
+      {
+        "id": "pulmao-adj-cisplatina-pemetrexede",
+        "nome": "Cisplatina + pemetrexede (não escamoso)",
+        "cenario": "adjuvante — CPNPC não escamoso ressecado IIA-IIIA",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "pemetrexede",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "via EV conforme bula FDA (pemetrexede): \"500 mg/m 2 as an intravenous infusion over 10 minutes\""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "CDDP + Pemetrexede (apenas histologia não-escamosa) Isolado Cisplatina 75 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "fichaId null: ficha cisplatina-pemetrexede usa cisplatina 80 e cenário paliativo."
+      },
+      {
+        "id": "pulmao-adj-carboplatina-paclitaxel",
+        "nome": "Carboplatina + paclitaxel (contraindicação à cisplatina)",
+        "cenario": "adjuvante — CPNPC ressecado IIA-IIIA, contraindicação à cisplatina",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": 6,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "paclitaxel",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Dose de carboplatina por AUC (Calvert, CI-04); paclitaxel × clopidogrel (INAT-17)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Carboplatina AUC 6 EV D1 Paclitaxel 200 mg/m² EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Dose igual à FICHA.pulmao-cpnpc.carboplatina-paclitaxel-21-21-dias, mas a ficha é de cenário paliativo-metastático; fichaId null para não transferir cenário."
+      },
+      {
+        "id": "pulmao-adj-osimertinibe",
+        "nome": "Osimertinibe adjuvante (EGFR del19/L858R)",
+        "cenario": "adjuvante — CPNPC ressecado IB (≥ 3 cm) a IIIA com EGFR del19/L858R, após QT adjuvante",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "osimertinibe",
+            "dose": 80,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "diariamente, contínuo",
+            "observacao": "duração 3 anos"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Não associar a QT concomitante (INAT-10); Revisar interações CYP3A4 (INAT-23)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia adjuvante isolada",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Osimertinibe 80 mg/dia VO Diariamente por 3 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-adj-alectinibe",
+        "nome": "Alectinibe adjuvante (ALK)",
+        "cenario": "adjuvante — CPNPC ressecado com rearranjo ALK (ALINA: IB ≥ 4 cm a IIIA)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "alectinibe",
+            "dose": 600,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "12/12h, contínuo",
+            "observacao": "4 comprimidos de 150 mg por tomada; duração 2 anos"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia adjuvante isolada",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Alectinibe 150 mg 4 comprimidos VO 12/12h Diariamente durante 2 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-adj-atezolizumabe",
+        "nome": "Atezolizumabe adjuvante (PD-L1 ≥ 1%)",
+        "cenario": "adjuvante — CPNPC ressecado II-IIIA, PD-L1 ≥ 1%, sem EGFR/ALK, após QT adjuvante",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "atezolizumabe",
+            "dose": 1200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 16,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Seguimento após QT adjuvante",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Atezolizumabe 1.200 mg EV D1 A cada 3 semanas, por 16 ciclos (12 meses)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-adj-pembrolizumabe-pos-qt",
+        "nome": "Pembrolizumabe adjuvante após QT adjuvante",
+        "cenario": "adjuvante — CPNPC ressecado II-IIIA sem EGFR/ALK, independente de PD-L1 (FR fraca)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "duração 54 semanas"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Seguimento após QT adjuvante",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "Pembrolizumabe 200 mg EV D1 a cada 3 semanas Por 54 semanas",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Opção 2 SBOC (400 mg a cada 6 semanas) grafada \"EC\" na fonte; ver conflitos."
+      },
+      {
+        "id": "pulmao-neo-platina-pemetrexede-durvalumabe",
+        "nome": "Platina + pemetrexede + durvalumabe neoadjuvante (não escamoso)",
+        "cenario": "neoadjuvante — CPNPC ressecável IIA-IIIB (N0-N2), não escamoso, sem EGFR/ALK",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou carboplatina"
+          },
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativa à cisplatina; fonte: AUC 5 ou 6"
+          },
+          {
+            "droga": "pemetrexede",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "durvalumabe",
+            "dose": 1500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Durvalumabe 1.500 mg EV D1 A cada 3 semanas, 4 ciclos;",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Fase adjuvante pós-cirurgia é protocolo separado (pulmao-adj-durvalumabe-pos-neo)."
+      },
+      {
+        "id": "pulmao-neo-platina-gencitabina-durvalumabe",
+        "nome": "Platina + gencitabina (ou paclitaxel) + durvalumabe neoadjuvante (escamoso)",
+        "cenario": "neoadjuvante — CPNPC ressecável IIA-IIIB (N0-N2), escamoso, sem EGFR/ALK",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou carboplatina"
+          },
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativa à cisplatina; fonte: AUC 5-6"
+          },
+          {
+            "droga": "gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": "ou paclitaxel 175-200 mg/m² EV D1 (faixa na fonte)"
+          },
+          {
+            "droga": "durvalumabe",
+            "dose": 1500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Gencitabina 1.000 mg/m² EV D1 e D8 ou Paclitaxel 175-200 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-adj-durvalumabe-pos-neo",
+        "nome": "Durvalumabe adjuvante após neoadjuvância com durvalumabe",
+        "cenario": "adjuvante — após QT-durvalumabe neoadjuvante e cirurgia (AEGEAN)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "durvalumabe",
+            "dose": 1500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "por 12 meses"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Seguimento",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "seguido de Durvalumabe a cada 4 semanas por 12 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-neo-platina-pemetrexede-nivolumabe",
+        "nome": "Platina + pemetrexede + nivolumabe neoadjuvante (não escamoso)",
+        "cenario": "neoadjuvante — CPNPC ressecável, não escamoso, sem EGFR/ALK",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou carboplatina"
+          },
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativa; fonte: AUC 5-6"
+          },
+          {
+            "droga": "pemetrexede",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "nivolumabe",
+            "dose": 360,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Pemetrexede 500 mg/m² EV D1 Nivolumabe 360 mg EV D1",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Tabela SBOC: 4 ciclos (CheckMate 77T); texto SBOC descreve CheckMate 816 com 3 ciclos — ver conflitos."
+      },
+      {
+        "id": "pulmao-neo-platina-gencitabina-nivolumabe",
+        "nome": "Platina + gencitabina (ou paclitaxel) + nivolumabe neoadjuvante (escamoso)",
+        "cenario": "neoadjuvante — CPNPC ressecável, escamoso, sem EGFR/ALK",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou carboplatina"
+          },
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativa; fonte: AUC 5-6"
+          },
+          {
+            "droga": "gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": "ou paclitaxel 175-200 mg/m² EV D1"
+          },
+          {
+            "droga": "nivolumabe",
+            "dose": 360,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "CDDP/Carboplatina + Gencitabina + Nivolumabe (apenas histologia escamosa)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-adj-nivolumabe-pos-neo",
+        "nome": "Nivolumabe adjuvante após neoadjuvância com nivolumabe",
+        "cenario": "adjuvante — após QT-nivolumabe neoadjuvante e cirurgia (CheckMate 77T)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "nivolumabe",
+            "dose": 480,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "por 12 meses"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Seguimento",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "seguido de Nivolumabe 480 mg a cada 4 semanas por 12 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-neo-cisplatina-pemetrexede-pembrolizumabe",
+        "nome": "Cisplatina + pemetrexede + pembrolizumabe neoadjuvante (não escamoso)",
+        "cenario": "neoadjuvante — CPNPC ressecável, não escamoso, sem EGFR/ALK (KEYNOTE-671)",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "pemetrexede",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "CDDP + Pemetrexede + Pembrolizumabe (apenas histologia não-escamosa)",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Tabela SBOC sem número de ciclos; 4 ciclos pelo texto SBOC p.17 (\"a cada 3 semanas por 4 ciclos seguido de cirurgia\")."
+      },
+      {
+        "id": "pulmao-neo-cisplatina-gencitabina-pembrolizumabe",
+        "nome": "Cisplatina + gencitabina + pembrolizumabe neoadjuvante (escamoso)",
+        "cenario": "neoadjuvante — CPNPC ressecável, escamoso, sem EGFR/ALK (KEYNOTE-671)",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": ""
+          },
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "pembrolizumabe a cada 3 semanas por 4 ciclos seguido de cirurgia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-adj-pembrolizumabe-pos-neo",
+        "nome": "Pembrolizumabe adjuvante após neoadjuvância com pembrolizumabe",
+        "cenario": "adjuvante — após QT-pembrolizumabe neoadjuvante e cirurgia (KEYNOTE-671)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 13,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Seguimento",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "Opção 3 Pembrolizumabe 200 mg EV D1 a cada 3 semanas Por 13 ciclos",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Associação da opção 3 (13 ciclos) ao KEYNOTE-671 é inferência do redator; SBOC não liga explicitamente."
+      },
+      {
+        "id": "pulmao-qtrt-cisplatina-etoposideo",
+        "nome": "Cisplatina + etoposídeo concomitante à RT (SWOG 9416)",
+        "cenario": "definitivo — CPNPC III irressecável/inoperável (QTRT)",
+        "linha": "definitivo",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D29, D36",
+            "observacao": ""
+          },
+          {
+            "droga": "etoposídeo",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": null,
+            "dias": "D1 a D5 e D29 a D33",
+            "observacao": "via não escrita na fonte",
+            "pendencia": "SEM_FONTE"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": 1,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Cisplatina 50 mg/m² EV D1, D8, D29 e D36",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Ciclo único concomitante à RT; seguir de durvalumabe (sem EGFR/ALK) ou osimertinibe (EGFR)."
+      },
+      {
+        "id": "pulmao-qtrt-carboplatina-paclitaxel-semanal",
+        "nome": "Carboplatina + paclitaxel semanal concomitante à RT",
+        "cenario": "definitivo — CPNPC III irressecável/inoperável (QTRT)",
+        "linha": "definitivo",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": 2,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "paclitaxel",
+            "dose": 45,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "fonte: faixa 45-50 mg/m²"
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Dose de carboplatina por AUC (Calvert, CI-04)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Carboplatina AUC 2 EV D1 Paclitaxel 45-50 mg/m² EV D1 Semanalmente",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Semanal durante toda a RT; fichas carbo-paclitaxel existentes não se aplicam (doses diferentes)."
+      },
+      {
+        "id": "pulmao-qtrt-cisplatina-pemetrexede",
+        "nome": "Cisplatina + pemetrexede concomitante à RT (não escamoso)",
+        "cenario": "definitivo — CPNPC III irressecável, não escamoso (QTRT)",
+        "linha": "definitivo",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "pemetrexede",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "via EV conforme bula FDA (pemetrexede): \"500 mg/m 2 as an intravenous infusion over 10 minutes\""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "A cada 3 semanas, 3 ciclos concomitantes à RT",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-qtrt-carboplatina-diaria-idoso",
+        "nome": "Carboplatina diária concomitante à RT (idosos > 70 anos)",
+        "cenario": "definitivo — CPNPC III irressecável em idoso > 70 anos (QTRT)",
+        "linha": "definitivo",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": 30,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5 (segunda a sexta)",
+            "observacao": "nas primeiras 4 semanas de RT"
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal; hemograma semanal",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Carboplatina 30 mg/m² EV D1 a D5 De segunda à sexta-feira",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-consolidacao-durvalumabe",
+        "nome": "Durvalumabe de consolidação pós-QTRT (PACIFIC)",
+        "cenario": "consolidação — CPNPC III irressecável sem progressão após QTRT, sem EGFR/ALK, independente de PD-L1",
+        "linha": "consolidação",
+        "drogas": [
+          {
+            "droga": "durvalumabe",
+            "dose": 1500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "por 12 meses"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos; vigiar pneumonite pós-RT",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Seguimento após QTRT",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Durvalumabe 1.500 mg EV D1 A cada 4 semanas, por 12 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-consolidacao-osimertinibe",
+        "nome": "Osimertinibe pós-QTRT (EGFR, LAURA)",
+        "cenario": "consolidação — CPNPC III irressecável EGFR del19/L858R sem progressão após QTRT",
+        "linha": "consolidação",
+        "drogas": [
+          {
+            "droga": "osimertinibe",
+            "dose": 80,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "diariamente, contínuo",
+            "observacao": "até progressão"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Seguimento após QTRT",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 19,
+          "trecho": "uso de osimertinibe 80 mg/dia até progressão",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "SBOC: aprovação Anvisa para esta indicação ainda aguardada (p.19)."
+      },
+      {
+        "id": "pulmao-1l-platina-pemetrexede-pembrolizumabe",
+        "nome": "Platina + pemetrexede + pembrolizumabe (não escamoso)",
+        "cenario": "paliativo — CPNPC IV não escamoso sem driver, qualquer PD-L1",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou cisplatina 75 mg/m²"
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativa à carboplatina"
+          },
+          {
+            "droga": "pemetrexede",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou 400 mg a cada 6 semanas"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia (ex.: carboplatina + pemetrexede)",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "Pembrolizumabe 200 mg EV D1 a cada 3 semanas por 4 ciclos",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Manutenção com pembrolizumabe + pemetrexede até total de 35 ciclos."
+      },
+      {
+        "id": "pulmao-1l-carboplatina-paclitaxel-pembrolizumabe",
+        "nome": "Carboplatina + paclitaxel (ou nab-paclitaxel) + pembrolizumabe (escamoso)",
+        "cenario": "paliativo — CPNPC IV escamoso sem driver, qualquer PD-L1",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": 6,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "paclitaxel",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou nab-paclitaxel 100 mg/m² D1, D8, D15"
+          },
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Dose de carboplatina por AUC (Calvert, CI-04); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia (carboplatina + paclitaxel)",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Carboplatina AUC 6 + Paclitaxel 200 mg/m² (ou Nab-Paclitaxel 100 mg/m²",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Manutenção com pembrolizumabe até total de 35 ciclos."
+      },
+      {
+        "id": "pulmao-1l-carboplatina-paclitaxel-bevacizumabe-atezolizumabe",
+        "nome": "Carboplatina + paclitaxel + bevacizumabe + atezolizumabe (não escamoso)",
+        "cenario": "paliativo — CPNPC IV não escamoso sem driver, qualquer PD-L1",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": 6,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "paclitaxel",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "bevacizumabe",
+            "dose": 15,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "atezolizumabe",
+            "dose": 1200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Dose de carboplatina por AUC (Calvert, CI-04); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos; bevacizumabe: PA e proteinúria",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "Carboplatina AUC 6 + Paclitaxel 200 mg/m² + Bevacizumabe 15 mg/kg +",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Manutenção com atezolizumabe + bevacizumabe."
+      },
+      {
+        "id": "pulmao-1l-pembrolizumabe-mono",
+        "nome": "Pembrolizumabe monoterapia",
+        "cenario": "paliativo — CPNPC IV sem driver, PD-L1 TPS ≥ 50% (FR forte) ou 1-49% (FR fraca)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou 400 mg a cada 6 semanas por 18 ciclos"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 35,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Pembrolizumabe 200 mg EV D1 a cada 3 semanas por 35 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-1l-atezolizumabe-mono",
+        "nome": "Atezolizumabe monoterapia",
+        "cenario": "paliativo — CPNPC IV sem driver, PD-L1 ≥ 50%",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "atezolizumabe",
+            "dose": 1200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativas SBOC: 1.680 mg a cada 4 semanas ou 1.875 mg SC a cada 3 semanas; via EV para 1.200 mg pela tabela de 2ª linha SBOC p.12"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Atezolizumabe 1.200 mg a cada 3 semanas ou 1.680 mg",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-1l-cemiplimabe-mono",
+        "nome": "Cemiplimabe monoterapia",
+        "cenario": "paliativo — CPNPC IV sem driver, PD-L1 ≥ 50%",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "cemiplimabe",
+            "dose": 350,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "até 3 anos"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Cemiplimabe 350 mg EV D1 a cada 3 semanas por até 3 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-2l-docetaxel",
+        "nome": "Docetaxel monoterapia",
+        "cenario": "paliativo — CPNPC IV, progressão após platina ± IO",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Docetaxel × CYP3A4 (INAT-18); função hepática",
+        "fichaId": "FICHA.pulmao-cpnpc.docetaxel-monoterapia__paliativo-metastatico@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 12,
+          "trecho": "Docetaxel 75 mg/m² EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-2l-docetaxel-ramucirumabe",
+        "nome": "Docetaxel + ramucirumabe",
+        "cenario": "paliativo — CPNPC IV, progressão após platina ± IO",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "ramucirumabe",
+            "dose": 10,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "INAT-18; PA e proteinúria",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Docetaxel monoterapia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 12,
+          "trecho": "Docetaxel 75 mg/m² + Ramucirumabe 10 mg/kg EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-2l-docetaxel-nintedanibe",
+        "nome": "Docetaxel + nintedanibe (não escamoso)",
+        "cenario": "paliativo — CPNPC IV não escamoso, progressão após platina",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "nintedanibe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "12/12h D2 a D21",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "INAT-18; função hepática",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Docetaxel monoterapia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 12,
+          "trecho": "Nintedanibe 200 mg VO 12/12h D2 a D21 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-2l-nivolumabe",
+        "nome": "Nivolumabe (sem IO prévia)",
+        "cenario": "paliativo — CPNPC IV, progressão após platina, sem IO na 1ª linha",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "nivolumabe",
+            "dose": 480,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativa SBOC: 3 mg/kg a cada 2 semanas"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Docetaxel monoterapia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 12,
+          "trecho": "Nivolumabe 480 mg EV D1 a cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-2l-atezolizumabe",
+        "nome": "Atezolizumabe (sem IO prévia)",
+        "cenario": "paliativo — CPNPC IV, progressão após platina, sem IO na 1ª linha",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "atezolizumabe",
+            "dose": 1200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Docetaxel monoterapia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 12,
+          "trecho": "Atezolizumabe 1.200 mg EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-2l-carboplatina-pemetrexede-pos-io",
+        "nome": "Carboplatina + pemetrexede após IO isolada (não escamoso)",
+        "cenario": "paliativo — CPNPC IV não escamoso, progressão após IO monoterapia",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "pemetrexede",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Dose de carboplatina por AUC (Calvert, CI-04); ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16)",
+        "fichaId": "FICHA.pulmao-cpnpc.carboplatina-pemetrexede-nao-escamoso__paliativo-metastatico@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 12,
+          "trecho": "Previamente tratados com imunoterapia isolada: Carboplatina AUC 5 + Pemetrexede 500 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "SEM_FONTE: intervalo do ciclo não escrito nesta linha da SBOC (dose bate com a ficha)"
+      },
+      {
+        "id": "pulmao-2l-pemetrexede-mono",
+        "nome": "Pemetrexede monoterapia (não escamoso)",
+        "cenario": "paliativo — CPNPC IV não escamoso, não exposto a pemetrexede",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "pemetrexede",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 12,
+          "trecho": "Pemetrexede 500 mg/m² EV D1 a cada 3 semanas (histologia não-escamosa)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-egfr-1l-osimertinibe",
+        "nome": "Osimertinibe (EGFR del19/L858R)",
+        "cenario": "paliativo — CPNPC IV EGFR del19/L858R",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "osimertinibe",
+            "dose": 80,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23); ECG (QT)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "TKI-EGFR de 1ª geração se disponível no serviço, ou QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Osimertinibe 80 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-egfr-1l-platina-pemetrexede-osimertinibe",
+        "nome": "Platina + pemetrexede + osimertinibe (FLAURA2)",
+        "cenario": "paliativo — CPNPC IV EGFR del19/L858R",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou cisplatina 75 mg/m²"
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativa"
+          },
+          {
+            "droga": "pemetrexede",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "osimertinibe",
+            "dose": 80,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia D1 a D21",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16); INAT-10",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Osimertinibe 80 mg VO 1x/dia D1 a D21 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Manutenção com pemetrexede + osimertinibe."
+      },
+      {
+        "id": "pulmao-egfr-1l-amivantamabe-lazertinibe",
+        "nome": "Amivantamabe + lazertinibe (MARIPOSA)",
+        "cenario": "paliativo — CPNPC IV EGFR del19/L858R",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "amivantamabe",
+            "dose": 1050,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 semanal × 4, depois a cada 2 semanas a partir da semana 5",
+            "observacao": "1.400 mg se ≥ 80 kg"
+          },
+          {
+            "droga": "lazertinibe",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Amivantamabe 1.050 mg (para pacientes < 80 kg) ou 1.400 mg (para",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-egfr-1l-gefitinibe",
+        "nome": "Gefitinibe",
+        "cenario": "paliativo — CPNPC IV EGFR del19/L858R",
+        "linha": "1ª linha (opção)",
+        "drogas": [
+          {
+            "droga": "gefitinibe",
+            "dose": 250,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Antiácidos/IBP (INAT-08)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Gefitinibe 250 mg VO 1x/dia continuamente.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-egfr-1l-erlotinibe",
+        "nome": "Erlotinibe",
+        "cenario": "paliativo — CPNPC IV EGFR del19/L858R",
+        "linha": "1ª linha (opção)",
+        "drogas": [
+          {
+            "droga": "erlotinibe",
+            "dose": 150,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "IBP (INAT-07); varfarina (INAT-22)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Erlotinibe 150 mg VO 1x/dia continuamente.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-egfr-1l-afatinibe",
+        "nome": "Afatinibe",
+        "cenario": "paliativo — CPNPC IV EGFR del19/L858R",
+        "linha": "1ª linha (opção)",
+        "drogas": [
+          {
+            "droga": "afatinibe",
+            "dose": 40,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Afatinibe 40 mg VO 1x/dia continuamente.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-egfr-ex20-carboplatina-pemetrexede-amivantamabe",
+        "nome": "Carboplatina + pemetrexede + amivantamabe (EGFR inserção éxon 20; ou 2ª linha pós-osimertinibe)",
+        "cenario": "paliativo — CPNPC IV EGFR ex20ins (1ª linha) ou EGFR sensível após osimertinibe",
+        "linha": "1ª linha (ex20ins) / 2ª linha",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "4 ciclos"
+          },
+          {
+            "droga": "pemetrexede",
+            "dose": 500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "unidade grafada \"mg\" na fonte (provável mg/m²); até progressão",
+            "pendencia": "SEM_FONTE: unidade ambígua"
+          },
+          {
+            "droga": "amivantamabe",
+            "dose": null,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "semanal × 4, depois a cada 3 semanas",
+            "observacao": "Fonte: \"1.400 (1.750 mg se 80 kg)\" ... \"a cada 3 ciclos\" — ambíguo",
+            "pendencia": "SEM_FONTE"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "Carboplatina AUC 5 EV D1 a cada 3 semanas por 4 ciclos",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "Dose de amivantamabe ambígua na SBOC (limiar de peso sem sinal, \"a cada 3 ciclos\"); confirmar em bula antes de uso."
+      },
+      {
+        "id": "pulmao-alk-1l-alectinibe",
+        "nome": "Alectinibe (ALK)",
+        "cenario": "paliativo — CPNPC IV ALK+",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "alectinibe",
+            "dose": 600,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "12/12h, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23); CPK e função hepática",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia (platina + pemetrexede)",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 18,
+          "trecho": "Alectinibe 600 mg VO 12/12h continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-alk-1l-brigatinibe",
+        "nome": "Brigatinibe (ALK)",
+        "cenario": "paliativo — CPNPC IV ALK+",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "brigatinibe",
+            "dose": 90,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia D1 a D7",
+            "observacao": "lead-in"
+          },
+          {
+            "droga": "brigatinibe",
+            "dose": 180,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia a partir do D8, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 18,
+          "trecho": "Brigatinibe 90 mg/dia VO D1 a D7, seguido de 180 mg VO",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-alk-1l-lorlatinibe",
+        "nome": "Lorlatinibe (ALK)",
+        "cenario": "paliativo — CPNPC IV ALK+ (1ª linha ou após 2ª geração)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "lorlatinibe",
+            "dose": 100,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23); perfil lipídico",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 18,
+          "trecho": "Lorlatinibe 100 mg VO 1x/dia, continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-alk-ros1-crizotinibe",
+        "nome": "Crizotinibe (ALK opção; ROS1 preferencial)",
+        "cenario": "paliativo — CPNPC IV ROS1+ (preferencial) ou ALK+ (opção, FR fraca)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "crizotinibe",
+            "dose": 250,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "12/12h, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23); ECG",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Crizotinibe 250 mg VO 12/12 hs continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-braf-dabrafenibe-trametinibe",
+        "nome": "Dabrafenibe + trametinibe (BRAF V600E)",
+        "cenario": "paliativo — CPNPC IV BRAF V600E",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "dabrafenibe",
+            "dose": 150,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "12/12h, contínuo",
+            "observacao": ""
+          },
+          {
+            "droga": "trametinibe",
+            "dose": 2,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Ecocardiograma (FEVE) e avaliação oftalmológica; febre",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Dabrafenibe 150 mg VO 12/12hs + Trametinibe 2 mg VO 1x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-braf-encorafenibe-binimetinibe",
+        "nome": "Encorafenibe + binimetinibe (BRAF V600E)",
+        "cenario": "paliativo — CPNPC IV BRAF V600E",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "encorafenibe",
+            "dose": 450,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia, contínuo",
+            "observacao": ""
+          },
+          {
+            "droga": "binimetinibe",
+            "dose": 45,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "12/12h, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Ecocardiograma (FEVE); avaliação oftalmológica",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Encorafenibe 450 mg VO 1x/dia + Binimetinibe 45 mg VO 12/12h",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-ntrk-larotrectinibe",
+        "nome": "Larotrectinibe (fusão NTRK)",
+        "cenario": "paliativo — CPNPC IV fusão NTRK",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "larotrectinibe",
+            "dose": 100,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "12/12h, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Larotrectinibe 100 mg VO 12/12h continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-met-capmatinibe",
+        "nome": "Capmatinibe (MET éxon 14)",
+        "cenario": "paliativo — CPNPC IV MET skipping éxon 14",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "capmatinibe",
+            "dose": 400,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "12/12h, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23); edema periférico, função hepática",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Capmatinibe 400 mg VO 12/12 h continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-met-tepotinibe",
+        "nome": "Tepotinibe (MET éxon 14)",
+        "cenario": "paliativo — CPNPC IV MET skipping éxon 14",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "tepotinibe",
+            "dose": 500,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Edema, creatinina, albumina",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Tepotinibe 500 mg VO 1 x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-ret-selpercatinibe",
+        "nome": "Selpercatinibe (fusão RET)",
+        "cenario": "paliativo — CPNPC IV fusão RET",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "selpercatinibe",
+            "dose": 160,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "12/12h, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23); PA, ECG (QT), função hepática",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Selpercatinibe 160 mg VO 12/12h continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-kras-g12c-sotorasibe",
+        "nome": "Sotorasibe (KRAS G12C)",
+        "cenario": "paliativo — CPNPC IV KRAS G12C após platina ± IO",
+        "linha": "2ª linha ou mais",
+        "drogas": [
+          {
+            "droga": "sotorasibe",
+            "dose": 960,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia, contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função hepática; Revisar interações CYP3A4 (INAT-23)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Docetaxel monoterapia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Sotorasibe 960 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-her2-trastuzumabe-deruxtecana",
+        "nome": "Trastuzumabe-deruxtecana (HER2 mutado ou IHQ 3+)",
+        "cenario": "paliativo — CPNPC IV HER2 mutado ou superexpresso, após tratamento prévio",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "trastuzumabe-deruxtecana",
+            "dose": 5.4,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Vigilância de doença pulmonar intersticial; ecocardiograma (FEVE)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Docetaxel monoterapia",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Trastuzumabe-deruxtecana 5,4 mg/kg EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pulmao-cppc-extenso-platina-etoposideo-atezolizumabe",
+        "nome": "Carboplatina + etoposídeo + atezolizumabe (CPPC extenso, IMpower133)",
+        "cenario": "paliativo — CPPC doença extensa",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": null,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "pendencia": "SEM_FONTE"
+          },
+          {
+            "droga": "etoposídeo",
+            "dose": null,
+            "unidade": "mg/m2",
+            "via": null,
+            "dias": null,
+            "observacao": "",
+            "pendencia": "SEM_FONTE"
+          },
+          {
+            "droga": "atezolizumabe",
+            "dose": 1200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "bula FDA: 840 mg/2 sem, 1200 mg/3 sem ou 1680 mg/4 sem; antes da QT no mesmo dia"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos; Dose de carboplatina por AUC (Calvert, CI-04)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Carboplatina ou cisplatina + etoposídeo sem IO",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:atezolizumab&limit=1",
+          "pagina": null,
+          "trecho": "Administer TECENTRIQ as 840 mg every 2 weeks, 1200 mg every 3 weeks",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "Sem diretriz SBOC de CPPC nas fontes; doses de carboplatina/etoposídeo SEM_FONTE (não transferir doses do CPNPC); nº de ciclos de indução não conferido.",
+        "observacao": "Indicação do cenário: Onco PRO 2026 aula 50 p.21 (\"Associação de imunoterapia ao doublet de platina\", IMpower 133)."
+      },
+      {
+        "id": "pulmao-cppc-extenso-platina-etoposideo-durvalumabe",
+        "nome": "Carboplatina/cisplatina + etoposídeo + durvalumabe (CPPC extenso, CASPIAN)",
+        "cenario": "paliativo — CPPC doença extensa",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": null,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou cisplatina",
+            "pendencia": "SEM_FONTE"
+          },
+          {
+            "droga": "etoposídeo",
+            "dose": null,
+            "unidade": "mg/m2",
+            "via": null,
+            "dias": null,
+            "observacao": "",
+            "pendencia": "SEM_FONTE"
+          },
+          {
+            "droga": "durvalumabe",
+            "dose": 1500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "com QT a cada 3 semanas; depois 1.500 mg a cada 4 semanas em monoterapia (bula FDA, peso ≥ 30 kg)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Carboplatina ou cisplatina + etoposídeo sem IO",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:durvalumab&limit=1",
+          "pagina": null,
+          "trecho": "With etoposide and either carboplatin or cisplatin, administer IMFINZI 1,500 mg every 3 weeks",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "Doses de platina/etoposídeo SEM_FONTE."
+      },
+      {
+        "id": "pulmao-cppc-limitado-qtrt-platina-etoposideo",
+        "nome": "Platina + etoposídeo concomitante à RT (CPPC limitado)",
+        "cenario": "definitivo — CPPC doença limitada",
+        "linha": "definitivo",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": null,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": null,
+            "observacao": "",
+            "pendencia": "SEM_FONTE"
+          },
+          {
+            "droga": "etoposídeo",
+            "dose": null,
+            "unidade": "mg/m2",
+            "via": null,
+            "dias": null,
+            "observacao": "",
+            "pendencia": "SEM_FONTE"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026, 50_-_Aula_50_-_Câncer_de_Pulmão_de_Pequenas_Células.txt",
+          "pagina": 14,
+          "trecho": "Quimiorradioterapia concomitante como padrão de tratamento",
+          "estado": "INFERIDO"
+        },
+        "pendencia": "Doses SEM_FONTE: a dose de cisplatina+etoposídeo com RT da SBOC é de CPNPC (SWOG 9416) e não pode ser transferida ao CPPC."
+      },
+      {
+        "id": "pulmao-cppc-limitado-consolidacao-durvalumabe",
+        "nome": "Durvalumabe de consolidação pós-QTRT (CPPC limitado, ADRIATIC)",
+        "cenario": "consolidação — CPPC limitado sem progressão após QTRT",
+        "linha": "consolidação",
+        "drogas": [
+          {
+            "droga": "durvalumabe",
+            "dose": 1500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "peso ≥ 30 kg; até 24 meses (bula FDA)"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos; vigiar pneumonite pós-RT",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "alternativaSUS": "Seguimento após QTRT",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:durvalumab&limit=1",
+          "pagina": null,
+          "trecho": "Weight ≥ 30 kg: 1,500 mg every 4 weeks",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Cenário apoiado em Onco PRO 2026 aula 50 p.15 (\"Acréscimo de Imunoterapia de consolidação após QRDT\")."
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "CPNPC III irressecável — QTRT definitiva",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "Esquemas QTRT deste pack",
+        "tecnica": "fracionamento convencional, IMRT preferencial",
+        "pendencia": "SEM_FONTE: dose em Gy não escrita na SBOC",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "o fracionamento convencional deverá ser contemplado, com técnica de IMRT",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "CPNPC I inoperável — SBRT",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "não",
+        "observacao": "3 a 8 sessões conforme localização e volume; sem tratamento eletivo de drenagens",
+        "pendencia": "SEM_FONTE: dose em Gy",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 18,
+          "trecho": "considerar SBRT, em 3 a 8 sessões",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "CPNPC inelegível a QTRT concomitante",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "não (QT de indução seguida de RT isolada)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "podem ser tratados com QT de indução seguida de RT isolada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "CPNPC pN2 após cirurgia",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "não",
+        "observacao": "RT adjuvante não indicada; discutir em margem comprometida ou extravasamento capsular",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 18,
+          "trecho": "Não há indicação de RT adjuvante para tratamento de doença N2",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Pancoast — QTRT neoadjuvante",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "QT dos esquemas descritos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "QTRT neoadjuvante seguida de cirurgia é o tratamento padrão neste cenário",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "CPPC limitado — QTRT concomitante",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "platina + etoposídeo (doses SEM_FONTE)",
+        "pendencia": "SEM_FONTE",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026, 50_-_Aula_50_-_Câncer_de_Pulmão_de_Pequenas_Células.txt",
+          "pagina": 14,
+          "trecho": "Quimiorradioterapia concomitante como padrão de tratamento",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Ressecção pulmonar anatômica com intenção curativa (cirurgião oncológico/torácico)",
+        "quando": "I-II e III ressecável; N2 de estação única e não volumoso; T4N2 discutível",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "mais apropriada para acometimento linfonodal mediastinal de estação única e não volumoso",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Cirurgia após QT-IO neoadjuvante",
+        "quando": "IIA-IIIB ressecável sem EGFR/ALK; não usar neoadjuvância como conversão",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "Tratamento neoadjuvante não deve ser usado como terapia de conversão",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Carcinoide pulmonar: lobectomia ou segmentectomia (fora do escopo principal)",
+        "quando": "TNE pulmonar localizado — ver diretriz SBOC TNE pulmão",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Tumores neuroendócrinos: pulmão v3 (colaboração), Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "o tratamento cirúrgico de escolha é lobectomia ou segmentectomia",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "EGFR del19/L858R",
+        "opcao": "Osimertinibe (adjuvante, pós-QTRT, 1ª linha); 1ª linha alternativas: osimertinibe+QT, amivantamabe+lazertinibe, gefitinibe/erlotinibe/afatinibe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Osimertinibe 80 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "EGFR T790M (pós-TKI 1ª/2ª geração)",
+        "opcao": "Osimertinibe 2ª linha",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "se mutação T790M positiva e uso de TKI-EGFR 1ª ou 2ª geração",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "EGFR ex20ins",
+        "opcao": "Carboplatina + pemetrexede + amivantamabe (1ª linha); amivantamabe isolado 2ª linha",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "EGFR (inserção no éxon 20)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "ALK",
+        "opcao": "Alectinibe (adjuvante 2 anos; avançado), brigatinibe, lorlatinibe; crizotinibe opção",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 18,
+          "trecho": "Alectinibe 600 mg VO 12/12h continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "ROS1",
+        "opcao": "Crizotinibe",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "DADO_AUSENTE (SBOC: fora do rol ANS)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Crizotinibe 250 mg VO 12/12 hs continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "BRAF V600E",
+        "opcao": "Dabrafenibe + trametinibe; encorafenibe + binimetinibe",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Dabrafenibe 150 mg VO 12/12hs + Trametinibe 2 mg VO 1x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "NTRK",
+        "opcao": "Larotrectinibe",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Larotrectinibe 100 mg VO 12/12h continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "MET ex14",
+        "opcao": "Capmatinibe ou tepotinibe",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Capmatinibe 400 mg VO 12/12 h continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "RET",
+        "opcao": "Selpercatinibe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Selpercatinibe 160 mg VO 12/12h continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "KRAS G12C",
+        "opcao": "Sotorasibe após platina ± IO",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE (SBOC: se disponível fora do rol ANS)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Sotorasibe 960 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "HER2 mutado ou IHQ 3+",
+        "opcao": "Trastuzumabe-deruxtecana 5,4 mg/kg após tratamento prévio",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Trastuzumabe-deruxtecana 5,4 mg/kg EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "PD-L1 TPS ≥ 50% (sem driver)",
+        "opcao": "Pembrolizumabe, atezolizumabe ou cemiplimabe monoterapia; ou QT-IO",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Cemiplimabe 350 mg EV D1 a cada 3 semanas por até 3 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "PD-L1 ≥ 1% ressecado II-IIIA (sem EGFR/ALK)",
+        "opcao": "Atezolizumabe adjuvante 16 ciclos após QT",
+        "evidencia": "NE alto/FR forte (IIB-IIIA) / FR fraca (IIA)",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "especialmente em pacientes com alta expressão de PD-L1 (TPS ≥ 50%)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": "SEM_FONTE nas diretrizes lidas (classificar por droga conforme protocolo antiemético institucional)",
+      "riscoNeutropeniaFebril": "SEM_FONTE",
+      "outros": [
+        "Cessação do tabagismo",
+        "Avaliação funcional/geriátrica se ≥ 70 anos",
+        "Avaliação nutricional e psicossocial",
+        "Assistência de enfermagem e farmacêutica",
+        "Vacinação contra influenza, pneumococo e COVID-19",
+        "Cuidados paliativos precoces na doença avançada (A p.7)"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 11,
+        "trecho": "Realizar vacinação contra influenza, pneumococo e COVID-19.",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "PACIFIC",
+        "nct": "NCT02125461",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CPNPC III irressecável sem progressão após QTRT",
+        "bracos": "durvalumabe × placebo",
+        "desfecho": "SLP/SG",
+        "resultado": "Base do durvalumabe de consolidação 12 meses (SBOC L p.18)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02125461",
+          "pagina": null,
+          "trecho": "Following Concurrent Chemoradiation in Patients With Stage III Unresectable Non-Small Cell Lung Cancer",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ADAURA",
+        "nct": "NCT02511106",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CPNPC IB-IIIA ressecado EGFR+",
+        "bracos": "osimertinibe × placebo, 3 anos",
+        "desfecho": "SLD",
+        "resultado": "SBOC: HR SLD 0,22; HR SG 0,49 (L p.16)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02511106",
+          "pagina": null,
+          "trecho": "AZD9291 Versus Placebo in Patients With Stage IB-IIIA Non-small Cell Lung Carcinoma",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ALINA",
+        "nct": "NCT03456076",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CPNPC ALK+ IB (≥ 4 cm)-IIIA ressecado",
+        "bracos": "alectinibe × QT com platina",
+        "desfecho": "SLD",
+        "resultado": "SBOC: HR SLD 0,24; SG imatura (L p.16)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03456076",
+          "pagina": null,
+          "trecho": "Adjuvant Alectinib Versus Adjuvant Platinum-Based Chemotherapy",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "LAURA",
+        "nct": "NCT03521154",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CPNPC III irressecável EGFR+ sem progressão pós-QTRT",
+        "bracos": "osimertinibe × placebo",
+        "desfecho": "SLP",
+        "resultado": "SBOC: livres de progressão em 12 meses 74% × 22% (L p.19)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03521154",
+          "pagina": null,
+          "trecho": "Effects of Osimertinib Following Chemoradiation in Patients With Stage III Unresectable",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CheckMate 816",
+        "nct": "NCT02998528",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CPNPC IB (4 cm)-IIIA ressecável",
+        "bracos": "nivolumabe + QT × QT neoadjuvante, 3 ciclos",
+        "desfecho": "RPC e SLE",
+        "resultado": "SBOC: RPC 24% × 2,2%; SG 5 anos 65,4% × 55% (L p.17)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02998528",
+          "pagina": null,
+          "trecho": "Nivolumab Plus Chemotherapy Versus Chemotherapy Alone in Early Stage Non-Small Cell Lung Cancer",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "KEYNOTE-671",
+        "nct": "NCT03425643",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CPNPC II-IIIB (T3-4N2) ressecável",
+        "bracos": "pembrolizumabe + QT neoadjuvante → pembrolizumabe adjuvante × placebo",
+        "desfecho": "SLE e SG",
+        "resultado": "SBOC: SLE 24 meses 62,4% × 40,6% (HR 0,58) (L p.17)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03425643",
+          "pagina": null,
+          "trecho": "Pembrolizumab (MK-3475) With Platinum Doublet Chemotherapy as Neoadjuvant/Adjuvant Therapy",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "IMpower133",
+        "nct": "NCT02763579",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CPPC extenso sem tratamento prévio",
+        "bracos": "carboplatina + etoposídeo ± atezolizumabe",
+        "desfecho": "SG",
+        "resultado": "PRO 50 p.22: SG 12 meses 51,7% × 38,2% (CURSO)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02763579",
+          "pagina": null,
+          "trecho": "Carboplatin Plus Etoposide With or Without Atezolizumab",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ADRIATIC",
+        "nct": "NCT03703297",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CPPC limitado sem progressão após QTRT",
+        "bracos": "durvalumabe ± tremelimumabe × placebo",
+        "desfecho": "SG/SLP",
+        "resultado": "PRO 50 p.16: ganho de SG da ordem de 22 meses (CURSO)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03703297",
+          "pagina": null,
+          "trecho": "Limited Stage Small-Cell Lung Cancer in Patients Who Have Not Progressed",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "AEGEAN",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "populacao": "CPNPC ressecável",
+        "bracos": "durvalumabe + QT neoadjuvante → durvalumabe adjuvante × placebo",
+        "desfecho": "SLE/RPC",
+        "resultado": "SBOC: RPC 17,2% × 4,3% (L p.17)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "A resposta patológica completa foi significativamente maior com durvalumabe",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "Anos 1-2 (pós-tratamento curativo)",
+        "exames": [
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "CONTRASTE_TC",
+          "RM_CRANIO"
+        ],
+        "periodicidade": "a cada 3 a 6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 21,
+          "trecho": "RM de crânio a cada 3 a 6 meses nos primeiros 2",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Anos 3-5",
+        "exames": [
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "CONTRASTE_TC",
+          "RM_CRANIO"
+        ],
+        "periodicidade": "a cada 6 a 12 meses, conforme estádio e risco molecular",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 21,
+          "trecho": "depois a cada 6 s 12 meses do 3º ao 5º ano de seguimento",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Estádio IIA ressecado (alternativa SBOC)",
+        "exames": [
+          "TC_TORAX",
+          "CONTRASTE_TC"
+        ],
+        "periodicidade": "a cada 6 meses por 2 a 3 anos (FR fraca)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "TC de tórax com contraste cada 6 meses por 2 a 3 anos",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "TC_TORAX",
+      "CONTRASTE_TC",
+      "RX_TORAX_PA_PERFIL",
+      "BRONCOSCOPIA",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "BIOPSIA_PLEURA",
+      "IMUNOHISTOQUIMICA",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "RM_CRANIO",
+      "TC_CRANIO",
+      "PET_CT_FDG",
+      "CINTILOGRAFIA_OSSEA",
+      "ESPIROMETRIA",
+      "HEMOGRAMA",
+      "CREATININA",
+      "UREIA",
+      "TGO",
+      "TGP",
+      "BILIRRUBINA",
+      "SODIO",
+      "POTASSIO",
+      "MAGNESIO",
+      "CALCIO",
+      "GLICEMIA",
+      "HBSAG",
+      "ANTI_HBC_TOTAL",
+      "ANTI_HCV",
+      "HIV",
+      "TSH",
+      "T4_LIVRE",
+      "CORTISOL",
+      "AMILASE",
+      "LIPASE",
+      "URINA_TIPO_I",
+      "MOLECULAR_PCR_MUTACAO",
+      "SEQUENCIAMENTO_AMPLICON",
+      "FISH"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "osimertinibe",
+        "com": "quimioterapia",
+        "ref": "INAT-10"
+      },
+      {
+        "droga": "erlotinibe",
+        "com": "IBP",
+        "ref": "INAT-07"
+      },
+      {
+        "droga": "erlotinibe",
+        "com": "varfarina",
+        "ref": "INAT-22"
+      },
+      {
+        "droga": "gefitinibe",
+        "com": "antiácidos",
+        "ref": "INAT-08"
+      },
+      {
+        "droga": "TKIs (alectinibe, brigatinibe, lorlatinibe, crizotinibe, capmatinibe, selpercatinibe, larotrectinibe)",
+        "com": "indutores/inibidores CYP3A4",
+        "ref": "INAT-23"
+      },
+      {
+        "droga": "cisplatina",
+        "com": "ototóxicos",
+        "ref": "INAT-15"
+      },
+      {
+        "droga": "cisplatina",
+        "com": "disfunção renal",
+        "ref": "CI-01"
+      },
+      {
+        "droga": "pemetrexede",
+        "com": "AINE",
+        "ref": "INAT-16"
+      },
+      {
+        "droga": "pemetrexede",
+        "com": "ClCr < 45 mL/min",
+        "ref": "CI-02"
+      },
+      {
+        "droga": "carboplatina",
+        "com": "cálculo de dose (Calvert)",
+        "ref": "CI-04"
+      },
+      {
+        "droga": "paclitaxel",
+        "com": "clopidogrel",
+        "ref": "INAT-17"
+      },
+      {
+        "droga": "docetaxel",
+        "com": "inibidores fortes CYP3A4",
+        "ref": "INAT-18"
+      },
+      {
+        "droga": "anti-PD-1/PD-L1 (pembrolizumabe, nivolumabe, atezolizumabe, durvalumabe, cemiplimabe)",
+        "com": "corticoide basal",
+        "ref": "INAT-27"
+      },
+      {
+        "droga": "anti-PD-1/PD-L1",
+        "com": "antibiótico",
+        "ref": "INAT-28"
+      },
+      {
+        "droga": "anti-PD-1/PD-L1",
+        "com": "doença autoimune ativa/transplante",
+        "ref": "CI-08"
+      },
+      {
+        "droga": "citotóxicos",
+        "com": "vacinas vivas",
+        "ref": "INAT-29"
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "Imunorrelacionados (IO)",
+        "termosCTCAEv6": [
+          "Pneumonitis",
+          "Colitis",
+          "Hepatitis",
+          "Hypothyroidism",
+          "Hyperthyroidism",
+          "Adrenal insufficiency",
+          "Rash maculo-papular"
+        ]
+      },
+      {
+        "classe": "Pneumonite pós-RT / TKI / T-DXd",
+        "termosCTCAEv6": [
+          "Pneumonitis"
+        ]
+      },
+      {
+        "classe": "TKI-EGFR",
+        "termosCTCAEv6": [
+          "Rash acneiform",
+          "Diarrhea",
+          "Paronychia",
+          "Electrocardiogram QT corrected interval prolonged"
+        ]
+      },
+      {
+        "classe": "Platina",
+        "termosCTCAEv6": [
+          "Acute kidney injury",
+          "Tinnitus",
+          "Hearing impaired",
+          "Nausea",
+          "Vomiting",
+          "Peripheral sensory neuropathy"
+        ]
+      },
+      {
+        "classe": "Mielotoxicidade",
+        "termosCTCAEv6": [
+          "Febrile neutropenia",
+          "Neutrophil count decreased",
+          "Platelet count decreased",
+          "Anemia"
+        ]
+      },
+      {
+        "classe": "Inibidores de MET",
+        "termosCTCAEv6": [
+          "Edema limbs",
+          "Creatinine increased"
+        ]
+      },
+      {
+        "classe": "Antiangiogênicos",
+        "termosCTCAEv6": [
+          "Hypertension",
+          "Proteinuria"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "Antiemético para esquema com cisplatina",
+      "Ácido fólico e vitamina B12 antes de pemetrexede (conforme bula)",
+      "Pré-medicação de taxano (paclitaxel/docetaxel) conforme bula",
+      "Corticoide para evento imunorrelacionado conforme grau"
+    ],
+    "orientacoes": [
+      "Cessação do tabagismo",
+      "Vacinação (influenza, pneumococo, COVID-19)",
+      "Sinais de toxicidade imunorrelacionada (tosse/dispneia nova, diarreia, icterícia)",
+      "Uso correto de TKI oral e interações (IBP, antiácidos)",
+      "Febre durante QT: procurar serviço"
+    ],
+    "encaminhamentos": [
+      "encaminhamento-cirurgia-oncologica",
+      "encaminhamento-radioterapia",
+      "pneumologia",
+      "cuidados paliativos",
+      "nutrição",
+      "psicologia",
+      "geriatria"
+    ],
+    "laudos": [
+      "laudo-inss",
+      "laudo-afastamento",
+      "laudo-loas",
+      "laudo-oxigenio",
+      "laudo-transporte",
+      "laudo-nutricao",
+      "laudo-judicial",
+      "laudo-fgts"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "CPNPC IV sem driver com PD-L1 TPS ≥ 50%",
+        "y": "Pembrolizumabe, atezolizumabe ou cemiplimabe em monoterapia (ou QT-IO)",
+        "z": "Monoterapia com FR forte; em TPS 1-49% pembrolizumabe mono tem FR fraca",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Pembrolizumabe 200 mg EV D1 a cada 3 semanas por 35 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CPNPC avançado não escamoso (ou CEC em não fumante/jovem/< 15 maços-ano)",
+        "y": "NGS amplo (DNA+RNA) para EGFR, ALK, ROS1, BRAF, KRAS, MET ex14, RET, NTRK, HER2 + PD-L1 e HER2 por IHQ",
+        "z": "Aguardar resultado antes da 1ª linha para não expor a IO antes de terapia-alvo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 6,
+          "trecho": "Recomenda-se a testagem com um painel amplo de alterações genômicas somáticas por NGS",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CPNPC ressecado IB (≥ 3 cm) a IIIA com EGFR del19/L858R",
+        "y": "Osimertinibe 80 mg/dia VO por 3 anos após QT adjuvante (QT mantida se ≥ 4 cm)",
+        "z": "ADAURA: HR SLD 0,22 e HR SG 0,49",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "Tratamento adjuvante com osimertinibe por 3 anos para tumores com",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CPNPC III irressecável sem EGFR/ALK sem progressão após QTRT",
+        "y": "Durvalumabe 1.500 mg a cada 4 semanas por 12 meses",
+        "z": "Indicação independe da expressão de PD-L1",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 19,
+          "trecho": "o tratamento de manutenção com durvalumabe por 12 meses, independentemente do nível",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Biópsia líquida (ctDNA) sem alteração detectada",
+        "y": "Repetir avaliação molecular em tecido",
+        "z": "ctDNA negativo não exclui driver",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 6,
+          "trecho": "deve-se proceder a avaliação molecular no material tecidual",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CPNPC ressecável com EGFR ou ALK e N0-N1",
+        "y": "Cirurgia seguida de adjuvante (não QT-IO neoadjuvante)",
+        "z": "FR forte",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 18,
+          "trecho": "Para pacientes com mutação de EGFR ou ALK e doença N0-N1, favorece-se",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CPNPC avançado KRAS G12C após platina ± IO",
+        "y": "Sotorasibe 960 mg VO 1x/dia",
+        "z": "CodeBreaK 200: TR 28% × 13% vs docetaxel",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "Sotorasibe 960 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    "Clone de PD-L1 (22C3/SP263/SP142/28-8) não especificado em nenhuma fonte SBOC lida: definir com patologia do serviço (SEM_FONTE).",
+    "NGS, PCR e biópsia líquida sem catalogoId (SEM_ID_NO_CATALOGO); status SUS dos testes moleculares não verificado (DADO_AUSENTE).",
+    "Status CONITEC/SIGTAP de todos os TKIs e imunoterápicos não verificado (DADO_AUSENTE); alternativa SUS registrada em cada protocolo.",
+    "CPPC: não há diretriz SBOC de CPPC entre as fontes; doses de platina/etoposídeo (limitado e extenso) SEM_FONTE; durvalumabe/atezolizumabe por bula FDA. Buscar diretriz SBOC de CPPC ou bula ANVISA.",
+    "Dose em Gy da QTRT definitiva e da SBRT não escrita na SBOC (SEM_FONTE).",
+    "Etoposídeo (QTRT SWOG 9416): via não escrita na fonte (SEM_FONTE).",
+    "Amivantamabe (ex20ins / pós-osimertinibe): dose ambígua na SBOC p.15-16 — dose null.",
+    "Carboplatina + pemetrexede pós-IO: intervalo de ciclo não escrito na linha SBOC.",
+    "Arquivos fonte com rótulo enganoso: Pulmão_2_.txt e Pulmão_2_2.txt (idênticos exceto nome) são transcrição (Anotar.app, 22/11/2025) da aula Onco PRO 42, não diretriz SBOC; Neuroendócrino_pulmão_.txt é a diretriz SBOC 2025 de TNE bem diferenciados gastrointestinais. Não usados para dose.",
+    "Diretriz SBOC 2026 TNE pulmonares não trata CPPC (só classifica); carcinoides fora do escopo deste pack.",
+    "Emetogenicidade e risco de neutropenia febril sem fonte nas diretrizes lidas.",
+    "Opção 3 de cisplatina + vinorelbina (faixas 75-80/25-30) e doses em faixa (paclitaxel 175-200, carboplatina AUC 5-6) registradas pelo limite inferior com faixa em observação; médico decide."
+  ],
+  "conflitos": [
+    {
+      "tema": "Nivolumabe neoadjuvante: número de ciclos e fase adjuvante",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 17,
+        "trecho": "nivolumabe 360 mg a cada 21 dias por 3 ciclos",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 13,
+        "trecho": "Nivolumabe 360 mg EV D1 A cada 3 semanas, 4 ciclos;",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "São dois estudos (CheckMate 816: 3 ciclos sem adjuvante; CheckMate 77T: 4 ciclos + nivolumabe 480 mg/4 sem por 12 meses). Pack registra a tabela (4 ciclos) e o adjuvante em protocolo separado; médico escolhe o desenho e não mistura."
+    },
+    {
+      "tema": "Pembrolizumabe adjuvante: duração e via",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 14,
+        "trecho": "Pembrolizumabe 200 mg EV D1 a cada 3 semanas Por 54 semanas",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 14,
+        "trecho": "Pembrolizumabe 400 mg EC D1 a cada 6 semanas",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "\"EC\" lido como erro tipográfico de EV — opção 400 mg não convertida em linha até confirmação. 54 semanas atribuído ao adjuvante pós-QT; 13 ciclos ao adjuvante pós-neoadjuvância (inferência)."
+    },
+    {
+      "tema": "Osimertinibe pós-QTRT (LAURA): diretriz × registro",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 19,
+        "trecho": "uso de osimertinibe 80 mg/dia até progressão",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 19,
+        "trecho": "a aprovação da Anvisa para essa indicação de osimertinibe ainda é aguardada",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Manter no pack como recomendação SBOC; uso depende de registro/acesso; alternativa: seguimento."
+    },
+    {
+      "tema": "Edição do estadiamento",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 8,
+        "trecho": "Agrupamento TNM (AJCC 9ª edição)",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Tumores neuroendócrinos: pulmão v3 (colaboração), Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 4,
+        "trecho": "AJCC (8ª edição)1",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "CPNPC: AJCC 9ª (SBOC 2026 CPNPC). Atenção: ensaios adjuvantes usaram TNM 7ª (SBOC L p.16); não transferir cortes entre edições."
+    },
+    {
+      "tema": "Número de ciclos de QT adjuvante",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 11,
+        "trecho": "Docetaxel 75 mg/m² EV D1 A cada 3 semanas, 4 ciclos",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026, 43_-_Aula_43_-_CPNPC_-_Doença_localizada_-_Neoadjuvância_Adjuvância.txt",
+        "pagina": 14,
+        "trecho": "QT adjuvante 1-4 ciclos baseados em cisplatina",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Usar SBOC: 4 ciclos."
+    },
+    {
+      "tema": "Osimertinibe adjuvante: limiar de tamanho no IB e QT prévia",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 14,
+        "trecho": "para tumores estádio IB (tumores ≥ 3 cm) com mutação ativadora",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 16,
+        "trecho": "recomendamos manter a QT adjuvante para pacientes com tumores ≥ 4,0 cm).",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Osimertinibe a partir de IB ≥ 3 cm; QT adjuvante prévia para tumores ≥ 4 cm (inclui todos IIA+)."
+    },
+    {
+      "tema": "Amivantamabe com carboplatina + pemetrexede (dose)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 16,
+        "trecho": "1.400 (1.750 mg se 80 kg) semanalmente por 4 semanas",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "Bula amivantamabe não consultada nesta redação",
+        "pagina": null,
+        "trecho": null,
+        "estado": "DADO_AUSENTE"
+      },
+      "escolhaSeguranca": "Dose null; confirmar em bula antes de usar."
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (curadoria assistida, Opus 5.5)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "fontes/sboc/-Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt (integral)",
+      "fontes/sboc/-Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt (integral)",
+      "fontes/sboc/Diretrizes-SBOC-2026-NET-pulmonares-v3-VERSAO-PARA-COLABORACAO.txt (integral; não inclui tratamento de CPPC)",
+      "fontes/sboc/Neuroendócrino_pulmão_.txt (verificado: é TNE gastrointestinal 2025)",
+      "fontes/sboc/Pulmão_2_.txt e Pulmão_2_2.txt (verificado: transcrição da aula PRO 42)",
+      "fontes/sboc/Aula_3_._TORA_CICOS_-_..._AKNAR_FREIRE_DE_CARVALHO_CALABRICH.txt (busca de clone PD-L1)",
+      "fontes/pro26/42 a 50 (aulas Onco PRO 2026, pulmão; 50 = CPPC)",
+      "openFDA: durvalumab, atezolizumab, pemetrexed, vinorelbine",
+      "ClinicalTrials.gov API v2: NCT02125461, NCT02511106, NCT03456076, NCT03521154, NCT02998528, NCT03425643, NCT02763579, NCT03703297",
+      "corpus/6-pack-tumor/pulmao/pulmao.v1.RASCUNHO.json (somente leitura)",
+      "corpus/exames/exames-sigtap.v1.json"
+    ],
+    "aprovacaoClinica": null
+  }
+}

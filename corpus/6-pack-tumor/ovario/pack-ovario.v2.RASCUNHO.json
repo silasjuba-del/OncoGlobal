@@ -1,0 +1,2851 @@
+{
+  "header": {
+    "id": "pack-ovario",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Ovário epitelial v3 e Ovário germinativo v4 (versões para colaboração); SBOC 2025 Ovário epitelial v10 (comparação)",
+      "trecho": "Carboplatina AUC 5-6 + Paclitaxel 175 mg/m² EV D1 a cada 3",
+      "edicao": "SBOC 2026 (epitelial v3; germinativo v4)"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Câncer de ovário, tuba uterina e peritônio primário — epitelial e germinativo (cenários separados)",
+    "cid10": [
+      "C56",
+      "C57.0",
+      "C48.1",
+      "C48.2"
+    ],
+    "subtipos": [
+      "EPITELIAL: seroso de alto grau",
+      "EPITELIAL: endometrioide (G1-G3)",
+      "EPITELIAL: células claras",
+      "EPITELIAL: mucinoso",
+      "EPITELIAL: seroso de baixo grau",
+      "EPITELIAL: carcinossarcoma",
+      "EPITELIAL: borderline",
+      "GERMINATIVO: disgerminoma",
+      "GERMINATIVO: teratoma imaturo",
+      "GERMINATIVO: seio endodérmico (yolk sac)",
+      "GERMINATIVO: carcinoma embrionário / coriocarcinoma / misto"
+    ],
+    "cenarios": [
+      "epitelial_inicial_adjuvante",
+      "epitelial_avancado_citorreducao_primaria",
+      "epitelial_neoadjuvante_intervalo",
+      "epitelial_manutencao",
+      "epitelial_recidiva_platino_sensivel",
+      "epitelial_recidiva_platino_resistente",
+      "germinativo_inicial",
+      "germinativo_avancado_recidiva"
+    ],
+    "limitesAplicabilidade": "Epitelial e germinativo NUNCA compartilham protocolo ou dose. Não cobre tumores do cordão sexual-estroma (granulosa) além de marcadores, nem HIPEC (sem dose). SBOC 2026 epitelial v3 e germinativo v4 são versões para colaboração. Pack propõe; médico decide."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC (ou RM) de abdome total",
+        "indicacao": "universal",
+        "quando": "EPITELIAL: estadiamento",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "RM ou TC de abdome total;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC (ou RM) de pelve",
+        "indicacao": "universal",
+        "quando": "EPITELIAL: estadiamento (abdome total)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "RM ou TC de abdome total;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "indicacao": "universal",
+        "quando": "EPITELIAL: estadiamento",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "TC de tórax;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "USG_TRANSVAGINAL",
+        "rotulo": "USG pélvica transvaginal",
+        "indicacao": "universal",
+        "quando": "GERMINATIVO: avaliação inicial",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Ultrassonografia abdominal e pélvica transvaginal.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "USG_ABDOMEN_TOTAL",
+        "rotulo": "USG abdominal",
+        "indicacao": "universal",
+        "quando": "GERMINATIVO: avaliação inicial",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Ultrassonografia abdominal e pélvica transvaginal.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "TC ou RM de abdome e pelve",
+        "indicacao": "universal",
+        "quando": "GERMINATIVO: estadiamento",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "TC ou RM de abdome e pelve.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [
+      {
+        "catalogoId": "EDA",
+        "rotulo": "EDA",
+        "indicacao": "condicional",
+        "quando": "EPITELIAL: se necessário, especialmente mucinoso",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Avaliação endoscópica (EDA e/ou colonoscopia), se necessário, especialmente em",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "COLONOSCOPIA",
+        "rotulo": "Colonoscopia",
+        "indicacao": "condicional",
+        "quando": "EPITELIAL: se necessário, especialmente mucinoso",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Avaliação endoscópica (EDA e/ou colonoscopia), se necessário, especialmente em",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "cirurgica",
+          "quando": "EPITELIAL: citorredução/estadiamento cirúrgico com congelação",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 9,
+            "trecho": "deve ser realizada biópsia de conge",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "core",
+          "quando": "EPITELIAL: biópsia guiada por imagem antes de QT neoadjuvante (preferível para teste somático de BRCA)",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 8,
+            "trecho": "biópsia guiada por imagem em pacientes virgens de tratamento",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "cirurgica",
+          "quando": "GERMINATIVO: salpingo-ooforectomia unilateral preservadora; evitar ruptura",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 9,
+            "trecho": "que consiste em salpingo-ooforectomia unilateral com preservação do ovário",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "Tipo histológico OMS e grau (seroso alto × baixo grau; endometrioide/mucinoso G1-3; células claras e carcinossarcoma = alto grau)",
+        "Padrão de invasão no mucinoso (expansivo × infiltrativo)",
+        "Citologia do lavado/ascite",
+        "Superfície/cápsula (rota antes ou durante cirurgia)",
+        "Implantes peritoneais e omento",
+        "Linfonodos",
+        "Doença residual (citorredução completa/ótima/subótima)",
+        "GERMINATIVO: SALL4, OCT3/4, SOX2; FISH 12p em casos difíceis"
+      ],
+      "molecular": [
+        {
+          "alvo": "BRCA1/2 germinativo",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "universal",
+          "cenario": "EPITELIAL não mucinoso (mandatório); seroso de baixo grau só para aconselhamento",
+          "consequencia": "BRCAm: olaparibe manutenção (± bevacizumabe); aconselhamento familiar",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "BRCA2 é mandatória para pacientes com carcinomas epiteliais",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "BRCA1/2 somático (tumoral)",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "EPITELIAL não mucinoso, sempre que possível",
+          "consequencia": "sBRCAm também prediz benefício de iPARP",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "A avaliação complementar quanto à presença de mutações somáticas em",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "HRD (p.ex. Myriad myChoice CDx, score ≥42)",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "EPITELIAL BRCA selvagem",
+          "consequencia": "HRD: olaparibe + bevacizumabe ou niraparibe; HRP: bevacizumabe ou niraparibe",
+          "disponivelSUS": "nao",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 8,
+            "trecho": "a pesquisa do status da deficiência de recombinação homóloga (HRD) é desejável",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "HER2",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "EPITELIAL platino-resistente",
+          "consequencia": "HER2 3+ (padrão gástrico): T-DXd 5,4 mg/kg",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 20,
+            "trecho": "(se HER2 IHQ 3+",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Receptor de folato alfa (FRα, Ventana FOLR1)",
+          "metodo": "IHQ",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "EPITELIAL seroso alto grau platino-resistente",
+          "consequencia": "≥75% células com ≥2+: mirvetuximabe 6 mg/kg (peso ideal)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 20,
+            "trecho": "tivo para receptor de folato alfa (FRα) com ≥75% das células tumorais",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "PD-L1 (CPS)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "EPITELIAL platino-resistente",
+          "consequencia": "CPS ≥1: pembrolizumabe + paclitaxel semanal ± bevacizumabe",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 20,
+            "trecho": "(se PD-L1 CPS ≥1)",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "SALL4 / OCT3/4 / SOX2",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "GERMINATIVO: diagnóstico diferencial",
+          "consequencia": "Disgerminoma SALL4+/OCT3/4+; seio endodérmico SALL4+; embrionário +/+/+",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 9,
+            "trecho": "Marcadores IHQ: como SALL4 e OCT3/4, que são amplamente utilizados",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Cromossomo 12p",
+          "metodo": "FISH/CISH",
+          "catalogoId": "FISH",
+          "quandoPedir": "condicional",
+          "cenario": "GERMINATIVO: casos difíceis",
+          "consequencia": "Confirmação diagnóstica",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 9,
+            "trecho": "Hibridização in situ fluorescente do cromossomo 12p para confirmação",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "FIGO",
+    "edicao": "FIGO 2014 / AJCC 8ª edição (ovário, tuba e peritônio)",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 4,
+      "trecho": "Estadiamento (AJCC 8ª edição/FIGO)1,2",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma",
+        "cenario": "Epitelial e germinativo",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Hemograma;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Função renal",
+        "cenario": "Epitelial e germinativo",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Funções renal e hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGO",
+        "rotulo": "Função hepática",
+        "cenario": "Epitelial e germinativo",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Funções renal e hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "rotulo": "Função hepática",
+        "cenario": "Epitelial e germinativo",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Funções renal e hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "SODIO",
+        "rotulo": "Eletrólitos",
+        "cenario": "Epitelial",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Eletrólitos;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "POTASSIO",
+        "rotulo": "Eletrólitos",
+        "cenario": "Epitelial",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Eletrólitos;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CA125",
+        "rotulo": "CA-125",
+        "cenario": "Epitelial (germinativo: diferencial)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "CA-125;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CEA",
+        "rotulo": "CEA",
+        "cenario": "Epitelial mucinoso",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "CEA (na histologia mucinosa).",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "AFP",
+        "rotulo": "AFP",
+        "cenario": "Germinativo",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "AFP;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BETA_HCG",
+        "rotulo": "Beta-HCG",
+        "cenario": "Germinativo",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "bHCG;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "DHL",
+        "rotulo": "DHL",
+        "cenario": "Germinativo",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "DHL;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "Inibina B (diagnóstico diferencial)",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "cenario": "Germinativo",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Inibina B (para diagnóstico diferencial);",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RX_TORAX_PA_PERFIL",
+        "rotulo": "RX ou TC de tórax",
+        "cenario": "Germinativo (TC se avançado)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "RX de tórax ou TC de tórax (no caso de doença avançada).",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ESPIROMETRIA",
+        "rotulo": "Função pulmonar",
+        "cenario": "Germinativo com indicação de bleomicina",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Avaliar solicitar função pulmonar em pacientes com indicação para uso de",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "EPITELIAL alto grau IA (G1/G2) ou IB (G1)",
+        "conduta": "Observação",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Estádios IA (G1/G2) ou IB (G1): Observação;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "EPITELIAL IA G3, IB G2/G3, IC, II",
+        "conduta": "QT baseada em platina 3-6 ciclos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "QT baseada em platina 3-6 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "EPITELIAL III-IV ressecável",
+        "conduta": "Citorredução primária + QT platina q3s 6-8 ciclos ± bevacizumabe + manutenção por BRCA/HRD",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "QT baseada em platina a cada 3 semanas 6 a 8 ciclos (preferencial)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "EPITELIAL III-IV irressecável",
+        "conduta": "QT neoadjuvante 3-6 ciclos → citorredução de intervalo → 2-3 ciclos (total 6-8); considerar HIPEC estádio III",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "QT neoadjuvante 3-6 ciclos seguida de citorredução de intervalo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "GERMINATIVO disgerminoma I bem estadiado; teratoma imaturo IA G1",
+        "conduta": "Sem QT adjuvante",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Disgerminoma estádio I com cirurgia de estadiamento adequada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "GERMINATIVO não-disgerminoma I; seio endodérmico/embrionário qualquer estádio",
+        "conduta": "BEP (omitir bleomicina >40 anos)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Indicada (esquema BEP* preferencial)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "GERMINATIVO avançado",
+        "conduta": "Citorredução sem procedimentos mórbidos + BEP 3 (ressecado) ou 4 ciclos (residual)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Esquema BEP 3 ciclos (para maiores de 40 anos, omitir bleomi",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "CA125",
+          "uso": "EPITELIAL: diagnóstico; dúvida de resposta na neoadjuvância; seguimento se imagem pouco disponível",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 16,
+            "trecho": "CA-125 se dúvidas de resposta",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "CEA",
+          "uso": "EPITELIAL mucinoso ao diagnóstico",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 8,
+            "trecho": "CEA (na histologia mucinosa).",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "AFP",
+          "uso": "GERMINATIVO: diagnóstico, resposta e recidiva",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 16,
+            "trecho": "Avaliação de resposta durante a QT e de recidiva;",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "BETA_HCG",
+          "uso": "GERMINATIVO: diagnóstico, resposta e recidiva",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 13,
+            "trecho": "com marcadores normais (AFP e BHCG)",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "DHL",
+          "uso": "GERMINATIVO: resposta e recidiva",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 16,
+            "trecho": "Desidrogenase lática;",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "Elevação isolada de CA-125 não indica tratamento (estreitar seguimento)"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "EPITELIAL inicial pós-estadiamento cirúrgico",
+        "intencao": "curativa",
+        "modalidades": [
+          "observação ou QT platina 3-6 ciclos conforme estádio/histologia"
+        ],
+        "criterio": "Estádio, grau e histologia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Estádios IA (G3) ou IB (G2/G3) ou IC (G1/G2/G3) ou II",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "EPITELIAL III-IV — citorredução primária + QT adjuvante",
+        "intencao": "curativa",
+        "modalidades": [
+          "citorredução completa",
+          "carboplatina + paclitaxel ± bevacizumabe",
+          "manutenção (olaparibe, olaparibe + bevacizumabe, niraparibe, bevacizumabe)"
+        ],
+        "criterio": "BRCA/HRD e resposta à platina",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Fluxograma para tratamento de tumores",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "EPITELIAL III-IV — neoadjuvante + intervalo",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT neoadjuvante 3-6 ciclos",
+          "citorredução de intervalo ± HIPEC",
+          "QT adjuvante 2-3 ciclos",
+          "manutenção"
+        ],
+        "criterio": "Irressecável ao diagnóstico; imagem após ciclo 3",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "avaliação por imagem após ciclo 3 para identificação de eventual refrata",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "EPITELIAL recidiva platino-sensível (>6 meses)",
+        "intencao": "paliativa",
+        "modalidades": [
+          "dupla com platina ± bevacizumabe",
+          "manutenção com iPARP ou bevacizumabe"
+        ],
+        "criterio": "iPARP prévio, BRCA, necessidade de resposta",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "QT recidiva platino-sensível",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "EPITELIAL recidiva platino-resistente/refratária",
+        "intencao": "paliativa",
+        "modalidades": [
+          "monoterapia sem platina ± bevacizumabe",
+          "mirvetuximabe (FRα alto)",
+          "T-DXd (HER2 3+)",
+          "pembrolizumabe + paclitaxel ± bevacizumabe (CPS ≥1)"
+        ],
+        "criterio": "Biomarcadores",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "QT recidiva platino-resistente/refratária",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "EPITELIAL seroso de baixo grau",
+        "intencao": "curativa",
+        "modalidades": [
+          "observação/QT platina",
+          "terapia endócrina de manutenção (IA preferencial)"
+        ],
+        "criterio": "Estádio; sem iPARP",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Não está indicado o uso de iPARP nestas pacientes.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "EPITELIAL borderline",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia conservadora"
+        ],
+        "criterio": "Sem QT se implantes não invasores; implantes invasivos = seroso baixo grau",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 24,
+          "trecho": "A QT adjuvante não está indicada para tumores que apresentam implantes",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "GERMINATIVO inicial",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia preservadora de fertilidade",
+          "BEP adjuvante quando indicado"
+        ],
+        "criterio": "Histologia e estadiamento adequado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Cirurgia (preservadora de fertilidade ou não)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "GERMINATIVO avançado/recidiva",
+        "intencao": "curativa",
+        "modalidades": [
+          "citorredução",
+          "BEP 3-4 ciclos ou VeIP",
+          "2ª linha TIP/VeIP/VAC/QT alta dose + TMO"
+        ],
+        "criterio": "Ressecção, marcadores, platino-sensibilidade",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "mesmo na doença avançada, a",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-carbo-pacli-adjuvante",
+        "nome": "EPITELIAL — Carboplatina + paclitaxel q21 (adjuvante pós-citorredução)",
+        "cenario": "EPITELIAL adjuvante (inicial 3-6 ciclos; III-IV 6-8 ciclos)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC: AUC 5-6; registrado o menor"
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Carboplatina AUC 5-6 + Paclitaxel 175 mg/m² EV D1 a cada 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 3,
+        "premedicacao": "",
+        "ajusteObrigatorio": "3-6 ciclos antes da cirurgia; imagem após o ciclo 3; total 6-8 ciclos com a fase pós-operatória.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-carbo-pacli-neoadjuvante",
+        "nome": "EPITELIAL — Carboplatina + paclitaxel q21 (neoadjuvante)",
+        "cenario": "EPITELIAL III-IV irressecável, antes da citorredução de intervalo",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC: AUC 5-6"
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "QT neoadjuvante 3-6 ciclos seguida de citorredução de intervalo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-carbo-docetaxel-adjuvante",
+        "nome": "EPITELIAL — Carboplatina + docetaxel q21",
+        "cenario": "EPITELIAL adjuvante (alternativa ao paclitaxel)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC: AUC 5-6"
+          },
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Carboplatina AUC 5-6 + Docetaxel 75 mg/m² EV D1 a cada 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-carbo-pacli-bev15-adjuvante",
+        "nome": "EPITELIAL — Carboplatina + paclitaxel + bevacizumabe 15 mg/kg q21",
+        "cenario": "EPITELIAL III-IV adjuvante (BRCAwt/HRP, seguir com bevacizumabe de manutenção)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC: AUC 5-6"
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Bevacizumabe",
+            "dose": 15,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Carboplatina AUC 5-6 + Paclitaxel 175 mg/m² + Bevacizumabe 15",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 3,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente. Ver conflito com SBOC 2025 v10.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-carbo-pacli-dd-bev7-5-neoadjuvante",
+        "nome": "EPITELIAL — Carboplatina q21 + paclitaxel semanal + bevacizumabe 7,5 mg/kg (ICON8B)",
+        "cenario": "EPITELIAL neoadjuvante com bevacizumabe (regime preferencial quando usar bevacizumabe na neo)",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC: AUC 5-6"
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          },
+          {
+            "droga": "Bevacizumabe",
+            "dose": 7.5,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "+ Bevacizumabe 7,5 mg/kg EV D1 a cada 3 semanas (em pacientes",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-carbo-pacli-semanal-fragil",
+        "nome": "EPITELIAL — Carboplatina AUC2 + paclitaxel 60 semanal (frágeis)",
+        "cenario": "EPITELIAL 1ª linha em paciente frágil",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 2,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Carboplatina AUC 2 + Paclitaxel 60 mg/m² EV D1, D8 e D15 a cada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente. Se QT foi dose-densa com 7,5 mg/kg, manter 7,5 mg/kg.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-bev15-manutencao",
+        "nome": "EPITELIAL — Bevacizumabe 15 mg/kg manutenção",
+        "cenario": "EPITELIAL manutenção após QT + bevacizumabe (BRCAwt/HRP)",
+        "linha": "manutenção",
+        "drogas": [
+          {
+            "droga": "Bevacizumabe",
+            "dose": 15,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Bevacizumabe 15 mg/kg EV a cada 3 semanas (uso em pacientes em que",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Hemograma mensal (mielotoxicidade; risco de SMD/LMA).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 45, de 04/10/2024; Relatório CONITEC 914 (manutenção 1ª linha, seroso/endometrioide alto grau, FIGO III-IV, BRCAm, sensível a platina)",
+            "pagina": null,
+            "trecho": "Torna pública a decisão de incorporar, no âmbito do Sistema Único de Saúde -",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "ovario-epit-olaparibe-manutencao-1l",
+        "nome": "EPITELIAL — Olaparibe manutenção 1ª linha (SOLO-1)",
+        "cenario": "EPITELIAL alto grau III-IV BRCAm com resposta à platina",
+        "linha": "manutenção",
+        "drogas": [
+          {
+            "droga": "Olaparibe",
+            "dose": 300,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "12/12h contínuo",
+            "observacao": "2 comprimidos de 150 mg; por 24 meses"
+          }
+        ],
+        "cicloDias": null,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Olaparibe 150 mg 2 comprimidos VO 12/12h continuamente por 24",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Hemograma mensal (mielotoxicidade; risco de SMD/LMA). Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Olaparibe incorporado só em monoterapia BRCAm (Portaria SECTICS 45/2024); combinação com bevacizumabe e HRD não verificados",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-olaparibe-bev-manutencao-1l",
+        "nome": "EPITELIAL — Olaparibe + bevacizumabe manutenção (PAOLA-1)",
+        "cenario": "EPITELIAL III-IV BRCAm ou HRD, bevacizumabe usado com a QT",
+        "linha": "manutenção",
+        "drogas": [
+          {
+            "droga": "Olaparibe",
+            "dose": 300,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "12/12h contínuo",
+            "observacao": "2 comprimidos de 150 mg; por 24 meses"
+          },
+          {
+            "droga": "Bevacizumabe",
+            "dose": 15,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 a cada 3 semanas",
+            "observacao": "por 15 meses"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "meses + Bevacizumabe 15 mg/kg a cada 3 semanas por 15 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Hemograma mensal (mielotoxicidade; risco de SMD/LMA). PA (niraparibe).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Niraparibe: Relatório CONITEC 953/2024 sem decisão final localizada",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-niraparibe-manutencao-1l",
+        "nome": "EPITELIAL — Niraparibe manutenção 1ª linha (PRIMA)",
+        "cenario": "EPITELIAL III-IV com resposta à platina, sem bevacizumabe (BRCAm, HRD alto risco ou HRP)",
+        "linha": "manutenção",
+        "drogas": [
+          {
+            "droga": "Niraparibe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": "300 mg/dia se peso ≥77 kg e plaquetas ≥150.000/µL; por 36 meses"
+          }
+        ],
+        "cicloDias": null,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Niraparibe, 200 a 300 mg VO 1x ao dia contínuamente, por 36 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-carbo-pacli-recidiva-ps",
+        "nome": "EPITELIAL — Carboplatina AUC5 + paclitaxel (recidiva platino-sensível)",
+        "cenario": "EPITELIAL recidiva platino-sensível",
+        "linha": "recidiva platino-sensível",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Carboplatina AUC 5 + Paclitaxel 175 mg/m2 EV no D1 a cada 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-carbo-dlp-recidiva-ps",
+        "nome": "EPITELIAL — Carboplatina + doxorrubicina lipossomal (recidiva platino-sensível)",
+        "cenario": "EPITELIAL recidiva platino-sensível",
+        "linha": "recidiva platino-sensível",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Doxorrubicina lipossomal peguilada",
+            "dose": 30,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Carboplatina AUC 5 + Doxorrubicina lipossomal 30 mg/m² a cada 4",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-carbo-gem-recidiva-ps",
+        "nome": "EPITELIAL — Carboplatina + gencitabina (recidiva platino-sensível)",
+        "cenario": "EPITELIAL recidiva platino-sensível",
+        "linha": "recidiva platino-sensível",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC: AUC 5-6"
+          },
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Carboplatina AUC 5-6 no D1 + Gencitabina 1.000 mg/m² no D1 e D8 EV",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Hemograma mensal (mielotoxicidade; risco de SMD/LMA).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Incorporação SUS (2024) restrita à 1ª linha BRCAm",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-olaparibe-manutencao-recidiva",
+        "nome": "EPITELIAL — Olaparibe manutenção pós-recidiva platino-sensível",
+        "cenario": "EPITELIAL resposta à platina na recidiva, sem iPARP prévio",
+        "linha": "manutenção (recidiva)",
+        "drogas": [
+          {
+            "droga": "Olaparibe",
+            "dose": 300,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "12/12h contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "manutenção com Olaparibe 300 mg VO 12/12h continua",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-dlp-pr",
+        "nome": "EPITELIAL — Doxorrubicina lipossomal ± bevacizumabe (platino-resistente)",
+        "cenario": "EPITELIAL platino-resistente/refratário",
+        "linha": "recidiva platino-resistente",
+        "drogas": [
+          {
+            "droga": "Doxorrubicina lipossomal peguilada",
+            "dose": 30,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC: 30-40 mg/m2; registrado o menor"
+          },
+          {
+            "droga": "Bevacizumabe",
+            "dose": 10,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 e D15",
+            "observacao": "opcional; alternativa 15 mg/kg a cada 3 semanas"
+          }
+        ],
+        "cicloDias": 28,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Doxorrubicina lipossomal peguilado 30-40 mg/m² EV a cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-paclitaxel-semanal-pr",
+        "nome": "EPITELIAL — Paclitaxel semanal ± bevacizumabe (platino-resistente)",
+        "cenario": "EPITELIAL platino-resistente",
+        "linha": "recidiva platino-resistente",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": ""
+          },
+          {
+            "droga": "Bevacizumabe",
+            "dose": 10,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "a cada 2 semanas",
+            "observacao": "opcional; ou 15 mg/kg a cada 3 semanas"
+          }
+        ],
+        "cicloDias": 7,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Paclitaxel 80 mg/m² EV semanalmente ± Bevacizumabe 10 mg/kg EV a cada 2",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-topotecano-pr",
+        "nome": "EPITELIAL — Topotecano D1-D5 ± bevacizumabe (platino-resistente)",
+        "cenario": "EPITELIAL platino-resistente",
+        "linha": "recidiva platino-resistente",
+        "drogas": [
+          {
+            "droga": "Topotecano",
+            "dose": 1.25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          },
+          {
+            "droga": "Bevacizumabe",
+            "dose": 15,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "opcional; ou 10 mg/kg a cada 2 semanas"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Topotecano 1,25 mg/m² do D1 ao D5 EV a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-gencitabina-pr",
+        "nome": "EPITELIAL — Gencitabina D1, D8, D15 (platino-resistente)",
+        "cenario": "EPITELIAL platino-resistente",
+        "linha": "recidiva platino-resistente",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Gencitabina 1.000 mg/m² no D1, D8 e D15 EV a cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-vinorelbina-pr",
+        "nome": "EPITELIAL — Vinorelbina semanal (platino-resistente)",
+        "cenario": "EPITELIAL platino-resistente",
+        "linha": "recidiva platino-resistente",
+        "drogas": [
+          {
+            "droga": "Vinorelbina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Vinorelbina 25 mg/m² EV semanalmente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-ciclofosfamida-oral-pr",
+        "nome": "EPITELIAL — Ciclofosfamida oral contínua (platino-resistente)",
+        "cenario": "EPITELIAL platino-resistente",
+        "linha": "recidiva platino-resistente",
+        "drogas": [
+          {
+            "droga": "Ciclofosfamida",
+            "dose": 50,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Ciclofosfamida oral 50 mg/dia VO continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-etoposideo-oral-pr",
+        "nome": "EPITELIAL — Etoposídeo oral (platino-resistente)",
+        "cenario": "EPITELIAL platino-resistente",
+        "linha": "recidiva platino-resistente",
+        "drogas": [
+          {
+            "droga": "Etoposídeo",
+            "dose": 50,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia D1-D14",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Etoposídeo oral 50 mg/dia VO do D1 ao D14 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-tamoxifeno-pr",
+        "nome": "EPITELIAL — Tamoxifeno (platino-resistente)",
+        "cenario": "EPITELIAL platino-resistente",
+        "linha": "recidiva platino-resistente",
+        "drogas": [
+          {
+            "droga": "Tamoxifeno",
+            "dose": 20,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Tamoxifeno 20 mg/dia VO continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Vigiar pneumonite/DPI.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-tdxd-her2",
+        "nome": "EPITELIAL — Trastuzumabe deruxtecana (HER2 3+)",
+        "cenario": "EPITELIAL platino-resistente HER2 IHQ 3+ (padrão gástrico)",
+        "linha": "recidiva platino-resistente",
+        "drogas": [
+          {
+            "droga": "Trastuzumabe deruxtecana",
+            "dose": 5.4,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Trastuzumabe deruxtecana 5,4 mg/kg EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Toxicidade ocular: avaliação oftalmológica e colírios conforme bula.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-mirvetuximabe-fra",
+        "nome": "EPITELIAL — Mirvetuximabe soravtansina (FRα alto)",
+        "cenario": "EPITELIAL seroso alto grau platino-resistente FRα ≥75% ≥2+",
+        "linha": "recidiva platino-resistente",
+        "drogas": [
+          {
+            "droga": "Mirvetuximabe soravtansina",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "peso corporal ideal"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Mirvetuximabe 6 mg/kg (peso corporal ideal) EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "TSH/T4L e função hepática (irAE). Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-epit-pembro-pacli-pr",
+        "nome": "EPITELIAL — Pembrolizumabe + paclitaxel semanal ± bevacizumabe (KEYNOTE-B96)",
+        "cenario": "EPITELIAL platino-resistente PD-L1 CPS ≥1",
+        "linha": "recidiva platino-resistente",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 400,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 a cada 6 semanas",
+            "observacao": ""
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          },
+          {
+            "droga": "Bevacizumabe",
+            "dose": 10,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 a cada 2 semanas",
+            "observacao": "opcional"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Pembrolizumabe 400 mg EV D1 a cada 6 semanas + Paclitaxel 80",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 3,
+        "premedicacao": "",
+        "ajusteObrigatorio": "3 ciclos se ressecado; 4 se doença residual macroscópica. Função pulmonar antes da bleomicina; função renal/magnésio.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-germ-bep",
+        "nome": "GERMINATIVO — BEP",
+        "cenario": "GERMINATIVO adjuvante (estádio inicial indicado) e avançado 1ª linha",
+        "linha": "adjuvante / 1ª linha",
+        "drogas": [
+          {
+            "droga": "Bleomicina",
+            "dose": 30,
+            "unidade": "UI",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": "SBOC grafa 30U; omitir se >40 anos; pode omitir no 4º ciclo"
+          },
+          {
+            "droga": "Etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Bleomicina 30U EV D1, D8 e D15",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal; encefalopatia por ifosfamida.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-germ-veip",
+        "nome": "GERMINATIVO — VeIP",
+        "cenario": "GERMINATIVO 1ª linha com doença residual (alternativa ao BEP 4) e 2ª linha",
+        "linha": "1ª linha / 2ª linha",
+        "drogas": [
+          {
+            "droga": "Vimblastina",
+            "dose": 0.1,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 e D2",
+            "observacao": "dose máxima 18,5 mg/m2"
+          },
+          {
+            "droga": "Ifosfamida",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          },
+          {
+            "droga": "Mesna",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Vimblastina 0,1 mg/kg EV D1 e",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 3,
+        "premedicacao": "",
+        "ajusteObrigatorio": "3 a 4 ciclos; G-CSF obrigatório.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-germ-tip",
+        "nome": "GERMINATIVO — TIP",
+        "cenario": "GERMINATIVO 2ª linha (recidiva platino-sensível) ou marcadores elevados pós-1ª linha",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 250,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 (infusão contínua 24 h)",
+            "observacao": ""
+          },
+          {
+            "droga": "Ifosfamida",
+            "dose": 1500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2-D5",
+            "observacao": ""
+          },
+          {
+            "droga": "Mesna",
+            "dose": 300,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "3x/dia D2-D5",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2-D6",
+            "observacao": ""
+          },
+          {
+            "droga": "Filgrastima",
+            "dose": 300,
+            "unidade": "mcg",
+            "via": "SC",
+            "dias": "D7-D13",
+            "observacao": "ou pegfilgrastim 6 mg SC D6"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Paclitaxel 250 mg/m² EV (contínuo de 24h) D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-germ-carbo-etoposideo",
+        "nome": "GERMINATIVO — Carboplatina + etoposídeo",
+        "cenario": "GERMINATIVO (esquema listado pela SBOC; indicação no fluxograma não especificada — usar em discussão)",
+        "linha": "não especificada",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "dose em mg/m2 (não AUC)"
+          },
+          {
+            "droga": "Etoposídeo",
+            "dose": 120,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D3",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Carboplatina 400 mg/m² EV D1 A cada 4 semanas,",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-germ-gem-pacli",
+        "nome": "GERMINATIVO — Gencitabina + paclitaxel",
+        "cenario": "GERMINATIVO refratário ou não candidato a QT em altas doses",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Gencitabina 1.000 mg/m² EV D1, D8 e D15",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "id": "ovario-germ-gemox",
+        "nome": "GERMINATIVO — Gencitabina + oxaliplatina",
+        "cenario": "GERMINATIVO refratário ou não candidato a QT em altas doses",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Oxaliplatina 130 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "GERMINATIVO disgerminoma (casos selecionados)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "",
+        "pendencia": "SEM_FONTE",
+        "observacao": "Impacto negativo na fertilidade; dose não especificada.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "O disgerminoma é altamente sensível à RT, mas esta deve ser indicada",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "EPITELIAL: citorredução completa por cirurgião especialista + estadiamento cirúrgico padrão (lavado, omentectomia, HTA + SOB, biópsias)",
+        "quando": "Inicial e III-IV ressecável",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Citorredução completa sempre que possível, preferencialmente por cirurgião/ã",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "EPITELIAL: sem linfadenectomia sistemática em III-IVA com LFN clinicamente normais",
+        "quando": "Alto grau avançado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "não deve ser realizada de rotina nos subtipos de alto grau",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "EPITELIAL: citorredução de intervalo ± HIPEC (estádio III, completa/ótima)",
+        "quando": "Após 3-6 ciclos neoadjuvantes",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Considerar opção de QT IP hipertérmica (Hipec) em pacientes estádio III",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "GERMINATIVO: salpingo-ooforectomia unilateral preservadora; não biopsiar ovário contralateral normal",
+        "quando": "Sempre que possível, inclusive avançado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Não deve ser realizada biópsia do ovário contralateral, caso seja macroscopica",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "BRCAm (germinativo ou somático)",
+        "opcao": "EPITELIAL: olaparibe 24 meses (± bevacizumabe) ou niraparibe 36 meses",
+        "evidencia": "NE alto/FR forte",
+        "sus": "olaparibe monoterapia 1ª linha BRCAm incorporado (Portaria SECTICS 45/2024)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "meses (uso em pacientes BRCAm) NE AL TO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "HRD (BRCAwt)",
+        "opcao": "EPITELIAL: olaparibe + bevacizumabe ou niraparibe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "nao verificado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "BRCAm ou HRDb",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "HRP",
+        "opcao": "EPITELIAL: bevacizumabe ou niraparibe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "BRCAwt",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "FRα alto",
+        "opcao": "EPITELIAL platino-resistente: mirvetuximabe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "(se alta expressão FRα)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "HER2 3+",
+        "opcao": "EPITELIAL: T-DXd",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "(se HER2 3+)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "PD-L1 CPS ≥1",
+        "opcao": "EPITELIAL platino-resistente: pembrolizumabe + paclitaxel ± bevacizumabe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "(se PD-L1 CPS ≥ 1)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": "Carboplatina: moderado; cisplatina (BEP/VeIP/TIP): alto — classificação não consta nas SBOC ovário lidas",
+      "riscoNeutropeniaFebril": "TIP com G-CSF obrigatório (SBOC); dose-densa e regimes semanais com mielotoxicidade",
+      "outros": [
+        "Função pulmonar antes de bleomicina",
+        "Aconselhamento oncogenético para todo epitelial",
+        "Preservação de fertilidade no germinativo"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 10,
+        "trecho": "Filgrastima 300 mcg SC D7 A D13 ou",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "SOLO-1",
+        "nct": "NCT01844986",
+        "nctEstado": "VERIFICADO",
+        "populacao": "BRCAm III-IV, resposta à platina",
+        "bracos": "Olaparibe vs placebo",
+        "desfecho": "SLP; SG",
+        "resultado": "HR SLP 0,30; SG 7 anos favorável",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "SLP e redução do risco de recidiva e óbito em 70% com o iPARP",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "PAOLA-1",
+        "nct": "NCT02477644",
+        "nctEstado": "VERIFICADO",
+        "populacao": "III-IV pós-platina + bevacizumabe",
+        "bracos": "Olaparibe + bevacizumabe vs placebo + bevacizumabe",
+        "desfecho": "SLP",
+        "resultado": "BRCAm HR 0,31; HRD HR 0,43",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "(37,2 versus 21,7 meses; HR 0,31)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "PRIMA",
+        "nct": "NCT02655016",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Avançado com resposta à platina",
+        "bracos": "Niraparibe vs placebo 36 meses",
+        "desfecho": "SLP",
+        "resultado": "Global HR 0,66; sem diferença de SG",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Não houve diferença em SG na população geral ou em qualquer subgrupo.30",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ICON8B",
+        "nct": "NCT01654146",
+        "nctEstado": "VERIFICADO",
+        "populacao": "1ª linha de alto risco",
+        "bracos": "Paclitaxel semanal dose-densa + bevacizumabe vs q3s",
+        "desfecho": "SG",
+        "resultado": "SG 49,8 vs 39,6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "demonstrou melhora de SG (49,8 versus 39,6",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "MIRASOL",
+        "nct": "NCT04209855",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Seroso alto grau platino-resistente FRα alto",
+        "bracos": "Mirvetuximabe vs QT",
+        "desfecho": "SLP; SG",
+        "resultado": "SG 16,46 vs 12,75 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "SG mediana de 16,46 meses com MIRV",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "KEYNOTE-B96",
+        "nct": "NCT05116189",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Platino-resistente",
+        "bracos": "Pembrolizumabe/placebo + paclitaxel ± bevacizumabe",
+        "desfecho": "SG",
+        "resultado": "SG 17,7 vs 14,0 meses (ITT)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "SG na população por intenção de tratar de 17,7 versus 14,0 meses",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "EPITELIAL anos 1-2",
+        "exames": [
+          "CA125"
+        ],
+        "periodicidade": "Consulta a cada 3-4 meses; CA-125 por consulta se inicialmente elevado e imagem pouco disponível; TC se indicado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 25,
+          "trecho": "Consultas a cada 3-4 meses por 2 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "EPITELIAL anos 3-5",
+        "exames": [],
+        "periodicidade": "A cada 6 meses; depois anual",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 25,
+          "trecho": "posteriormente, a cada 6 meses por 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "GERMINATIVO 1º ano",
+        "exames": [
+          "AFP",
+          "BETA_HCG",
+          "DHL",
+          "USG_PELVICA",
+          "RX_TORAX_PA_PERFIL",
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "TC_PELVE"
+        ],
+        "periodicidade": "Exame clínico mensal; USG a cada 2 meses; marcadores a cada 2 semanas nos primeiros 6 meses e depois mensais; RX a cada 2 meses; TC no 1º, 3º e 12º mês",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Cerca de 75% das recidivas em pacientes com tumores germinativos ocorrem no",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "GERMINATIVO 2º-3º ano",
+        "exames": [
+          "AFP",
+          "BETA_HCG",
+          "DHL",
+          "USG_PELVICA",
+          "RX_TORAX_PA_PERFIL"
+        ],
+        "periodicidade": "2º ano: clínica e marcadores a cada 2 meses, USG/RX a cada 4 meses; 3º ano: clínica a cada 3 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Sugerimos a seguinte conduta:32",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "AFP",
+      "ANATOMOPATOLOGICO",
+      "BETA_HCG",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "CA125",
+      "CEA",
+      "COLONOSCOPIA",
+      "CREATININA",
+      "DHL",
+      "EDA",
+      "ESPIROMETRIA",
+      "FISH",
+      "HEMOGRAMA",
+      "IMUNOHISTOQUIMICA",
+      "POTASSIO",
+      "RM_PELVE",
+      "RX_TORAX_PA_PERFIL",
+      "SODIO",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "TC_TORAX",
+      "TGO",
+      "TGP",
+      "USG_ABDOMEN_TOTAL",
+      "USG_PELVICA",
+      "USG_TRANSVAGINAL"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "Olaparibe / niraparibe",
+        "com": "Inibidores/indutores fortes de CYP3A4 (olaparibe)",
+        "ref": ""
+      },
+      {
+        "droga": "Cisplatina (BEP/VeIP/TIP)",
+        "com": "Nefro/ototóxicos (aminoglicosídeos)",
+        "ref": ""
+      },
+      {
+        "droga": "Bleomicina",
+        "com": "Oxigênio em alta FiO2 (anestesia) — toxicidade pulmonar",
+        "ref": ""
+      },
+      {
+        "droga": "Ifosfamida",
+        "com": "Inibidores de CYP3A4 (encefalopatia)",
+        "ref": ""
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "iPARP",
+        "termosCTCAEv6": [
+          "Anemia",
+          "Platelet count decreased",
+          "Neutrophil count decreased",
+          "Myelodysplastic syndrome",
+          "Nausea",
+          "Fatigue"
+        ]
+      },
+      {
+        "classe": "Bevacizumabe",
+        "termosCTCAEv6": [
+          "Hypertension",
+          "Proteinuria",
+          "Small intestinal perforation",
+          "Gastrointestinal fistula"
+        ]
+      },
+      {
+        "classe": "Carboplatina/paclitaxel",
+        "termosCTCAEv6": [
+          "Neutrophil count decreased",
+          "Peripheral sensory neuropathy",
+          "Infusion related reaction"
+        ]
+      },
+      {
+        "classe": "Mirvetuximabe",
+        "termosCTCAEv6": [
+          "Blurred vision",
+          "Keratitis",
+          "Dry eye"
+        ]
+      },
+      {
+        "classe": "Bleomicina",
+        "termosCTCAEv6": [
+          "Pneumonitis",
+          "Pulmonary fibrosis"
+        ]
+      },
+      {
+        "classe": "Cisplatina/ifosfamida (germinativo)",
+        "termosCTCAEv6": [
+          "Acute kidney injury",
+          "Hypomagnesemia",
+          "Hearing impaired",
+          "Encephalopathy",
+          "Cystitis noninfective"
+        ]
+      },
+      {
+        "classe": "Doxorrubicina lipossomal",
+        "termosCTCAEv6": [
+          "Palmar-plantar erythrodysesthesia syndrome",
+          "Mucositis oral"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "Antiemese (carboplatina moderado; cisplatina alto)",
+      "Pré-medicação de taxano",
+      "Mesna com ifosfamida",
+      "G-CSF no TIP",
+      "Colírio lubrificante/corticoide conforme bula do mirvetuximabe"
+    ],
+    "orientacoes": [
+      "Aconselhamento genético e cascata familiar se BRCAm",
+      "Hemograma mensal com iPARP",
+      "Toxicidade ocular com mirvetuximabe",
+      "Contracepção e fertilidade no germinativo"
+    ],
+    "encaminhamentos": [
+      "Oncogenética (todo epitelial)",
+      "Oncoginecologia cirúrgica (citorredução)",
+      "Reprodução humana (germinativo jovem)",
+      "Patologia de referência (germinativo: segunda opinião)",
+      "Centro de TMO (germinativo refratário — QT alta dose)"
+    ],
+    "laudos": [
+      "APAC quimioterapia",
+      "Laudo de teste BRCA para olaparibe (condição da Portaria SECTICS 45/2024)"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "EPITELIAL alto grau III-IV com resposta à platina",
+        "y": "BRCA e HRD (+ uso de bevacizumabe na QT)",
+        "z": "BRCAm: olaparibe (± bevacizumabe) ou niraparibe; HRD: olaparibe + bevacizumabe ou niraparibe; HRP: bevacizumabe ou niraparibe",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Manutenção com: ",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "EPITELIAL recidiva",
+        "y": "Intervalo desde a última platina",
+        "z": ">6 meses: dupla com platina ± manutenção; <6 meses: monoterapia ± bevacizumabe ou alvo por biomarcador; progressão durante: refratária",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Recidiva após 6 meses do término da terapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "EPITELIAL platino-resistente",
+        "y": "FRα, HER2 e PD-L1",
+        "z": "FRα ≥75% ≥2+: mirvetuximabe; HER2 3+: T-DXd; CPS ≥1: pembrolizumabe + paclitaxel ± bevacizumabe",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "Recidiva",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "GERMINATIVO estádio I",
+        "y": "Histologia e estadiamento adequado",
+        "z": "Disgerminoma I bem estadiado ou teratoma imaturo IA G1: sem QT; não-disgerminoma: BEP (sem bleomicina >40 anos)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Não-disgerminomas estádio I;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "GERMINATIVO pós-QT 1ª linha",
+        "y": "Massa residual + AFP/bHCG",
+        "z": "Marcadores normais: cirurgia ou observação (teratoma); elevados: TIP ou QT alta dose + TMO",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Doença radiológica residual + marcadores elevados (AFP/bHCG) após QT",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    "GERMINATIVO VAC: SBOC p.10 grafa dactinomicina 300 mg/m² D1-D5 (provável erro de unidade) — protocolo NÃO criado; confirmar dose em bula/literatura antes de uso.",
+    "GERMINATIVO EP (disgerminoma selecionado, 3 ciclos): doses não especificadas na SBOC — SEM_FONTE.",
+    "GERMINATIVO BEC (carboplatina 300 mg/m² + etoposídeo + bleomicina 10U): listado sem indicação no fluxograma — não criado.",
+    "HIPEC: droga/dose não especificadas — SEM_FONTE.",
+    "Mucinoso: oxaliplatina + fluoropirimidina citada sem dose — SEM_FONTE.",
+    "Terapia endócrina de manutenção no seroso de baixo grau/endometrioide G1: sem dose (IA preferencial).",
+    "Inibina B sem código no catálogo (SEM_ID_NO_CATALOGO); testes BRCA/HRD/FRα idem.",
+    "SUS: niraparibe (Relatório 953/2024) sem decisão final localizada; bevacizumabe ovário não verificado; PCDT ovário em consulta pública (CP 84/2026).",
+    "SBOC 2026 epitelial v3 e germinativo v4 são versões para colaboração."
+  ],
+  "conflitos": [
+    {
+      "tema": "Paclitaxel dose-densa semanal na 1ª linha (com ou sem bevacizumabe)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2025---Ovario-epitelial-v10-FINAL.pdf",
+        "pagina": 16,
+        "trecho": "(benefício da dose densa parece ser restrito a populações orientais)",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 16,
+        "trecho": "favorecer o regime de paclitaxel em dose densa) NE AL TO/FR FORTE",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Seguir a edição mais recente (SBOC 2026 v3, ICON8B: dose-densa + bevacizumabe 7,5 mg/kg na neoadjuvância), mantendo q21 como esquema-padrão; v3 ainda é versão para colaboração."
+    },
+    {
+      "tema": "Dose de bevacizumabe (7,5 × 15 mg/kg)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 16,
+        "trecho": "Bevacizumabe 7,5 mg/kg EV D1 a cada 3 semanas (se utilizado com QT",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 16,
+        "trecho": "Carboplatina AUC 5-6 + Paclitaxel 175 mg/m² + Bevacizumabe 15",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Dose vinculada ao regime: 7,5 mg/kg com paclitaxel semanal; 15 mg/kg com paclitaxel q21. Não trocar entre regimes."
+    },
+    {
+      "tema": "Dactinomicina no VAC (germinativo)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 10,
+        "trecho": "Dactinomicina 300 mg/m²",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Unidade usual de dactinomicina em mcg (não verificada nesta curadoria)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "CONFLITANTE"
+      },
+      "escolhaSeguranca": "Não registrar dose; protocolo VAC fora do pack até verificação em bula."
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (Opus 5.5) — curador de rascunho; aprovação clínica pendente",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC 2026 Ovário epitelial v3 (págs. 4-25)",
+      "SBOC 2025 Ovário epitelial v10 (págs. 16-19, comparação)",
+      "SBOC 2026 Ovário germinativo v4 (págs. 3-17)",
+      "Onco PRO 2026 Aulas 22-24 (consulta de apoio)",
+      "ClinicalTrials.gov API v2",
+      "CONITEC via busca web (Portaria SECTICS 45/2024)"
+    ],
+    "aprovacaoClinica": null
+  }
+}

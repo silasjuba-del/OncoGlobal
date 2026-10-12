@@ -1,0 +1,132 @@
+{
+  "header": {
+    "id": "laudo-inss",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2 (auditoria 11/10/2026)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "destinatario": "INSS — Perícia Médica Federal",
+  "finalidade": "Subsidiar benefício por incapacidade (auxílio por incapacidade temporária ou aposentadoria por incapacidade permanente).",
+  "baseLegal": [
+    {
+      "norma": "Lei 8.213/1991",
+      "artigo": "art. 42, §1º",
+      "trecho": "verificação da condição de incapacidade mediante exame médico-pericial a cargo da Previdência Social",
+      "vigencia": "vigente",
+      "estado": "CITADA (snippet Planalto)",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE"
+    },
+    {
+      "norma": "Lei 8.213/1991",
+      "artigo": "art. 59",
+      "trecho": "O auxílio-doença será devido ao segurado que, havendo cumprido o período de carência exigido",
+      "vigencia": "vigente",
+      "estado": "CITADA",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE"
+    },
+    {
+      "norma": "Lei 8.213/1991",
+      "artigo": "art. 25, I",
+      "trecho": "auxílio-doença e aposentadoria por invalidez: 12 (doze) contribuições mensais",
+      "vigencia": "vigente",
+      "estado": "CITADA",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE"
+    },
+    {
+      "norma": "Lei 8.213/1991",
+      "artigo": "art. 101",
+      "trecho": "obrigados, sob pena de suspensão do benefício, a submeter-se a exame médico a cargo da Previdência Social",
+      "vigencia": "vigente",
+      "estado": "CONFIRMADA (Planalto, auditada 11/10/2026)",
+      "pendencia": null
+    },
+    {
+      "norma": "Decreto 3.048/1999",
+      "artigo": "art. 78, §2º",
+      "trecho": "O auxílio por incapacidade temporária cessa pela recuperação da capacidade para o trabalho",
+      "vigencia": "vigente",
+      "estado": "LOCALIZADA (Planalto/JusBrasil)",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE"
+    }
+  ],
+  "requisitosConteudo": {
+    "fatoConfirmado": [
+      "Identificação completa do paciente (o app preenche)",
+      "CID-10 da neoplasia",
+      "Data do diagnóstico",
+      "Estadiamento (quando pertinente)",
+      "Tratamentos realizados e datas (cirurgia/QT/RT/objetivo)",
+      "Limitações funcionais documentadas (o médico descreve com base no exame)",
+      "Comorbidades pertinentes"
+    ],
+    "decisaoMedica": [
+      "Prognóstico funcional em palavras claras",
+      "Prazo estimado de incapacidade (temporária × indefinida)",
+      "Necessidade de reabilitação profissional, se houver",
+      "Conclusão pericial NUNCA é texto fixo"
+    ]
+  },
+  "documentosAnexos": [
+    "laudo anatomopatológico",
+    "relatório de tratamentos",
+    "exames que fundamentam limitação"
+  ],
+  "proibicoesTextoFixo": [
+    "Declarar incapacidade permanente como texto fixo",
+    "Afirmar direito ao benefício (decisão é da perícia)",
+    "Prazo universal de afastamento",
+    "Usar siglas DPI/DPSC (não existem na IN 128/2022 — correção auditada)"
+  ],
+  "observacoes": "Regra local F1: o laudo nunca bloqueia atendimento; pendência documental não trava o serviço. Modelos de perguntas ao INSS fora do escopo deste arquivo.",
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "NORMA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2 (auditoria 11/10/2026)",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "assinatura": {
+    "origem": "CONFIG",
+    "campos": [
+      "medico.nome",
+      "medico.crm_uf",
+      "medico.rqe",
+      "local",
+      "data",
+      "assinatura_carimbo"
+    ],
+    "fonte": "relatorio-pericial.v1 + Res. CFM 2.381/2024 (identificação mínima do médico; texto oficial PENDENTE de reabertura)"
+  },
+  "validade": {
+    "valor": null,
+    "pendencia": "DECISAO_DR_SILAS: validade do documento por finalidade"
+  },
+  "portas": {
+    "consome": [
+      "prontuario.identificacao",
+      "tumor (CID, data do diagnóstico, estadiamento)",
+      "resumoLongitudinal",
+      "prescricao.vigente",
+      "templates/resumo-prontuario-modelo-servico"
+    ],
+    "oferece": [
+      "documento.laudo-inss"
+    ]
+  }
+}

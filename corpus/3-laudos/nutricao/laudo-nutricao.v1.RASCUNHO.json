@@ -1,0 +1,100 @@
+{
+  "header": {
+    "id": "laudo-nutricao",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "destinatario": "CEAF/Serviço de dispensação (APAC-LME) — atenção farmacêutica",
+  "finalidade": "Solicitação de terapia nutricional enteral domiciliar e/ou suplemento via LME/APAC. DISTINTO da orientação nutricional de pilar 7.",
+  "baseLegal": [
+    {
+      "norma": "Portaria de Consolidação GM/MS nº 2/2017",
+      "artigo": "Anexo XXVIII (CEAF)",
+      "trecho": "fórmulas enterais via APAC/LME",
+      "vigencia": "vigente (alterada pela Portaria GM/MS 13/2020)",
+      "estado": "CITADA",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE (audit: INCERTA — não aberta)"
+    },
+    {
+      "norma": "Portaria GM/MS nº 13/2020",
+      "artigo": null,
+      "trecho": "Cada LME poderá corresponder a até 2 APAC de 3 competências ou até 6 APAC de 1 competência",
+      "vigencia": "vigente",
+      "estado": "CITADA (BVSMS)",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE"
+    }
+  ],
+  "requisitosConteudo": {
+    "fatoConfirmado": [
+      "Identificação, CID",
+      "Condição que impede/limita a via oral (disfagia, obstrução, síndrome anoréxica-caquexia documentada)",
+      "Avaliação nutricional objetiva (peso, IMC, perda percentual)"
+    ],
+    "decisaoMedica": [
+      "Produto e volume/posologia indicados (com nome do produto do elenco, quando houver)",
+      "Via de administração e duração",
+      "NUNCA indicação universal de dieta enteral para todo paciente com câncer"
+    ]
+  },
+  "documentosAnexos": [
+    "avaliação nutricional",
+    "documentos que comprovem a limitação da via oral"
+  ],
+  "proibicoesTextoFixo": [
+    "Indicar o mesmo produto/volume para todos",
+    "Prescrever sem avaliação nutricional registrada"
+  ],
+  "observacoes": "Requisitos de elegibilidade específicos do CEAF (CID elegíveis, prazo de vigência da APAC) requerem leitura integral do Anexo XXVIII — pendência registrada.",
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "NORMA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "assinatura": {
+    "origem": "CONFIG",
+    "campos": [
+      "medico.nome",
+      "medico.crm_uf",
+      "medico.rqe",
+      "local",
+      "data",
+      "assinatura_carimbo"
+    ],
+    "fonte": "relatorio-pericial.v1 + Res. CFM 2.381/2024 (identificação mínima do médico; texto oficial PENDENTE de reabertura)"
+  },
+  "validade": {
+    "valor": null,
+    "pendencia": "DECISAO_DR_SILAS: validade do documento por finalidade"
+  },
+  "portas": {
+    "consome": [
+      "prontuario.identificacao",
+      "tumor (CID, data do diagnóstico, estadiamento)",
+      "resumoLongitudinal",
+      "prescricao.vigente",
+      "templates/resumo-prontuario-modelo-servico"
+    ],
+    "oferece": [
+      "documento.laudo-nutricao"
+    ]
+  }
+}

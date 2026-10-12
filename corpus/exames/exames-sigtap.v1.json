@@ -1,7 +1,7 @@
 {
   "header": {
     "id": "exames-sigtap",
-    "versao": "1.0.0",
+    "versao": "1.1.0",
     "vigenteDesde": "2026-10-11",
     "curador": "Dr. Silas Negrão",
     "aprovadoEm": "2026-10-11",
@@ -14,7 +14,7 @@
   },
   "status": "APROVADO_LISTA",
   "competencia": "2026-09",
-  "nota": "Nomes copiados do ZIP oficial por script. sigtap null = sem código no SIGTAP 09/2026. Contraste é campo do pedido. Só segmentos de uso oncológico prático. Lista aprovada pelo Dr. Silas em 2026-10-11 (proposta Claude + lista do Dr. Silas). Seção = categoria; tópico = subgrupo. Item sem código fica SEM_CODIGO_SUS.",
+  "nota": "Nomes copiados do ZIP oficial por script. sigtap null = sem código no SIGTAP 09/2026. Contraste é campo do pedido. Só segmentos de uso oncológico prático. Lista aprovada pelo Dr. Silas em 2026-10-11 (proposta Claude + lista do Dr. Silas). Seção = categoria; tópico = subgrupo. Item sem código fica SEM_CODIGO_SUS. v1.1.0 (2026-10-11, Claude, autorizado pelo Dr. Silas no /goal de fechamento): +23 itens para os packs v2 (patologia de colo/mama, citologia, molecular SIGTAP 0202100081/0202100111/0202100243, linfocintilografia, colposcopia). Nomes copiados do ZIP 09/2026.",
   "secoes": {
     "imagem": [
       {
@@ -277,6 +277,20 @@
         "sigtap": "0204060028",
         "status": "VERIFICADO_SIGTAP",
         "notas": "IA, ADT, corticoide"
+      },
+      {
+        "id": "UROGRAFIA_VENOSA",
+        "topico": "RX",
+        "nome": "UROGRAFIA VENOSA",
+        "sigtap": "0204050189",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "RX_TORAX_PA",
+        "topico": "RX",
+        "nome": "RADIOGRAFIA DE TORAX (PA)",
+        "sigtap": "0204030170",
+        "status": "VERIFICADO_SIGTAP"
       }
     ],
     "medicina_nuclear": [
@@ -327,6 +341,22 @@
         "sigtap": null,
         "status": "SEM_CODIGO_SUS",
         "notas": "sem código SUS"
+      },
+      {
+        "id": "LINFOCINTILOGRAFIA",
+        "topico": "MEDICINA_NUCLEAR",
+        "nome": "LINFOCINTILOGRAFIA",
+        "sigtap": "0208080040",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "linfonodo sentinela"
+      },
+      {
+        "id": "CINTILOGRAFIA_RENAL",
+        "topico": "MEDICINA_NUCLEAR",
+        "nome": "CINTILOGRAFIA RENAL/RENOGRAMA (QUALITATIVA E/OU QUANTITATIVA)",
+        "sigtap": "0208040056",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "função renal diferencial"
       }
     ],
     "endoscopia": [
@@ -401,6 +431,13 @@
         "sigtap": null,
         "status": "SEM_CODIGO_SUS",
         "notas": "sem código SUS; só a cirúrgica 0209030011"
+      },
+      {
+        "id": "COLPOSCOPIA",
+        "topico": "ENDOSCOPIA",
+        "nome": "COLPOSCOPIA",
+        "sigtap": "0211040029",
+        "status": "VERIFICADO_SIGTAP"
       }
     ],
     "funcao_orgao": [
@@ -544,6 +581,93 @@
         "nome": "IMUNOFENOTIPAGEM DE HEMOPATIAS MALIGNAS (POR MARCADOR)",
         "sigtap": "0202030237",
         "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "BIOPSIA_COLO_UTERINO",
+        "topico": "COLETA",
+        "nome": "BIOPSIA DO COLO UTERINO",
+        "sigtap": "0201010666",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "PAAF_MAMA",
+        "topico": "COLETA",
+        "nome": "PUNÇÃO ASPIRATIVA DE MAMA POR AGULHA FINA",
+        "sigtap": "0201010585",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "CORE_MAMA",
+        "topico": "COLETA",
+        "nome": "PUNÇÃO DE MAMA POR AGULHA GROSSA",
+        "sigtap": "0201010607",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "biópsia por agulha grossa"
+      },
+      {
+        "id": "BIOPSIA_PULMAO_ASPIRACAO",
+        "topico": "COLETA",
+        "nome": "BIOPSIA DE PULMAO POR ASPIRACAO",
+        "sigtap": "0201010429",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "BIOPSIA_PELE_PARTES_MOLES",
+        "topico": "COLETA",
+        "nome": "BIOPSIA DE PELE E PARTES MOLES",
+        "sigtap": "0201010372",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "BIOPSIA_LESAO_PARTES_MOLES",
+        "topico": "COLETA",
+        "nome": "BIOPSIA DE LESAO DE PARTES MOLES (POR AGULHA / CEU ABERTO)",
+        "sigtap": "0201010267",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "sarcomas"
+      },
+      {
+        "id": "ANATOMOPATOLOGICO_COLO_BIOPSIA",
+        "topico": "PATOLOGIA",
+        "nome": "EXAME ANATOMO-PATOLOGICO DO COLO UTERINO - BIOPSIA",
+        "sigtap": "0203020081",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "ANATOMOPATOLOGICO_COLO_PECA",
+        "topico": "PATOLOGIA",
+        "nome": "EXAME ANATOMO-PATOLOGICO DO COLO UTERINO - PECA CIRURGICA",
+        "sigtap": "0203020022",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "ANATOMOPATOLOGICO_MAMA_PECA",
+        "topico": "PATOLOGIA",
+        "nome": "EXAME ANATOMOPATOLOGICO DE MAMA - PECA CIRURGICA",
+        "sigtap": "0203020073",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "CITOPATOLOGICO_CERVICOVAGINAL",
+        "topico": "PATOLOGIA",
+        "nome": "EXAME CITOPATOLÓGICO CERVICO-VAGINAL/MICROFLORA",
+        "sigtap": "0203010019",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "CITOPATOLOGICO_MAMA",
+        "topico": "PATOLOGIA",
+        "nome": "EXAME CITOPATOLOGICO DE MAMA",
+        "sigtap": "0203010043",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "CITOLOGIA_LIQUIDOS",
+        "topico": "PATOLOGIA",
+        "nome": "EXAME DE CITOLOGIA (EXCETO CERVICO-VAGINAL E DE MAMA)",
+        "sigtap": "0203010035",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "derrame pleural, ascite, liquor (exceto cervicovaginal e mama)"
       }
     ],
     "labs_ciclo": [
@@ -1096,6 +1220,53 @@
         "topico": "MIELOMA",
         "nome": "PESQUISA DE CADEIAS LEVES KAPPA E LAMBDA",
         "sigtap": "0202050181",
+        "status": "VERIFICADO_SIGTAP"
+      }
+    ],
+    "molecular": [
+      {
+        "id": "MOLECULAR_PCR_MUTACAO",
+        "topico": "MOLECULAR",
+        "nome": "IDENTIFICAÇÃO DE MUTAÇÃO/REARRANJOS POR PCR, PCR SENSÍVEL A METILAÇÃO, qPCR E qPCR SENSÍVEL A METILAÇÃO",
+        "sigtap": "0202100081",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "PCR/qPCR para mutação ou rearranjo (ex.: EGFR, KRAS, BRAF, MGMT por metilação): confirmar elegibilidade de faturamento por indicação"
+      },
+      {
+        "id": "SEQUENCIAMENTO_AMPLICON",
+        "topico": "MOLECULAR",
+        "nome": "IDENTIFICAÇÂO DE MUTAÇÃO POR SEQUENCIAMENTO POR AMPLICON ATÉ 500 PARES DE BASES",
+        "sigtap": "0202100111",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "sequenciamento por amplicon até 500 pb: confirmar elegibilidade por indicação"
+      },
+      {
+        "id": "FISH_MIELOMA",
+        "topico": "MOLECULAR",
+        "nome": "TESTE CITOGENÈTICO POR HIBRIDIZAÇÃO IN SITU POR FLUORESCÊNCIA (FISH) PARA MIELOMA MÚLTIPLO",
+        "sigtap": "0202100243",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "CARIOTIPO_MEDULA",
+        "topico": "MOLECULAR",
+        "nome": "DETERMINACAO DE CARIOTIPO EM MEDULA OSSEA E VILOSIDADES CORIONICAS (C/ TECNICA DE BANDAS)",
+        "sigtap": "0202100022",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "BCR_ABL_MOLECULAR",
+        "topico": "MOLECULAR",
+        "nome": "DIAGNÓSTICO DE LEUCEMIA CROMOSSOMA PHILADELPHIA POSITIVO POR TÉCNICA MOLECULAR",
+        "sigtap": "0202100219",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "leucemia Ph+"
+      },
+      {
+        "id": "HPV_MOLECULAR",
+        "topico": "MOLECULAR",
+        "nome": "EXAME MOLECULAR DE DETECÇÂO DE HPV",
+        "sigtap": "0202100251",
         "status": "VERIFICADO_SIGTAP"
       }
     ]
