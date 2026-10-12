@@ -142,9 +142,12 @@ if (EXCECOES.length > TETO_EXCECOES) restantes.push(`exceções acima do teto ap
 for (const ex of EXCECOES) {
   if (!PARES_APROVADOS.has(chave(ex))) restantes.push(`exceção fora da relação aprovada (scripts/fronteiras-excecoes-aprovadas.json): ${chave(ex)}`);
 }
+// Fechamento de fase: só a fase do manifesto é conhecida, e no fechamento NENHUMA exceção pode sobrar, qualquer que seja o prazo escrito.
+if (FECHAR_FASE && FECHAR_FASE !== aprovadas.prazo) restantes.push(`fase de fechamento desconhecida: ${FECHAR_FASE} (manifesto: ${aprovadas.prazo})`);
 for (const ex of EXCECOES) {
-  if (FECHAR_FASE && ex.expira === FECHAR_FASE) restantes.push(`exceção vencida no fechamento de ${FECHAR_FASE}: ${chave(ex)}`);
+  if (FECHAR_FASE) restantes.push(`exceção vencida no fechamento de ${FECHAR_FASE}: ${chave(ex)}`);
   else if (!ex.expira) restantes.push(`exceção sem prazo: ${chave(ex)}`);
+  else if (ex.expira !== aprovadas.prazo) restantes.push(`exceção com prazo fora do manifesto (${ex.expira} ≠ ${aprovadas.prazo}): ${chave(ex)}`);
   else if (!usadas.has(chave(ex))) restantes.push(`exceção não usada (remova da lista): ${chave(ex)}`);
 }
 if (restantes.length) { console.error("FRONTEIRAS VIOLADAS:\n" + restantes.join("\n")); process.exit(1); }

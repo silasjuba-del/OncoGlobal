@@ -60,14 +60,18 @@ L14 ENCONTRO EXPLÍCITO. Todo comando e toda leitura recebem patientId, encounte
     PROIBIDO inferir "encontro atual" pelo último evento gravado (`at(-1)`).
 L15 ESTÍMULO TÉCNICO ≠ FATO CLÍNICO. Vencimento, ativação de biblioteca, conclusão de execução circulam na tabela
     `estimulo_tecnico` (ator SISTEMA), NUNCA em `clinical_event`. Nunca promovem candidato a fato. Nunca aparecem como fato.
-L16 TETO DE 5 DIMENSÕES DE ESTADO (Q9). Estado novo é PEDIDO registrado em RELATORIO-F1.md, nunca criado.
+L16 TETO DE 5 ESTADOS POR DIMENSÃO (Q9; R-09). Cada dimensão (D1…D12) tem no máximo 5 estados. Estado novo é PEDIDO registrado em RELATORIO-F1.md, nunca criado.
 L17 CTCAE v6 PURA (Q45, D-W9-73). Nenhum corte da v5. Conferência de fonte/licença é tarefa, não escolha.
 L18 VOZ FORA DA F1 (aceite F1, DECISOES.md:265). Não implementar NOVA-3 nem Plaud. Não reabrir.
 L19 SETORES ASSISTENCIAIS (salão, farmácia, APAC, canal) NA F1 = preparação contratual e uso local monousuário (D-F1-13).
     PROIBIDO declarar multiusuário, setor remoto, WhatsApp, túnel ou operação real liberados.
 L20 LEI DE AUTORIA: não commitar trabalho de outro escritor sem autorização. Dois escritores nunca no mesmo arquivo.
+    AUTORIA EFETIVA: a linha de coautoria do commit nomeia quem escreveu de fato o conteúdo (Fable 5.1 planejador, o agente Sonnet
+    executor, ou o Codex), nunca uma assinatura genérica; etapa executada por agente leva a coautoria do agente.
 L21 REGISTRAR TUDO: toda decisão do Dr. Silas vira registro em DECISOES.md (só o Fable escreve lá) + commit + push.
-    Commits terminam com a linha padrão de coautoria do Claude Code (Co-Authored-By: Claude Fable 5.1, endereço noreply do domínio anthropic.com).
+    Commits terminam com a linha de coautoria do autor efetivo (Co-Authored-By: <modelo>, endereço noreply do domínio anthropic.com).
+L23 POSSE ÚNICA DO CORPUS: só a S3c escreve em corpus/ (exceto corpus/manifesto/** = S3 e corpus/prompts/** = S11). Setores da Onda 1
+    NÃO escrevem corpus: pedem a parcela ao S3c, que publica a versão; o setor consome pela biblioteca ativa.
 L22 SEM DOCUMENTO SOLTO. Agentes mecânicos não criam .md. Documentação só a prevista no WRITE_SET da fatia.
 
 ══════════════════════════════════════════════════════════════════════════════
@@ -131,9 +135,12 @@ ONDA 2 (integração):
      BIBLIOTECA_ATIVADA, FATO_VENCIDO, ADMINISTRACAO_REGISTRADA) · disparo SÓ após commit efetivo · execução persistida em execucao_tecnica
      · etapa final sempre roda · PRONTO exige VisaoIntegrada com cobertura (parcial = PRONTO com lacunas, nunca silencioso)
      · publicação tardia (após timeout) descartada e registrada · dependência por domínio e contexto · reconferência na assinatura.
- S5b CASO-GUIA (fio de ouro; antes de abrir S4-B/D/E e a Onda 3): agenda → encontro explícito → exame novo pela caixa → candidato →
-     confirmação → Maestro/ORK → laboratório e interações → visão integrada → resumo com referências → pedido assinado → med novo
-     reconciliado → reabertura só do dependente → documento assinado preservado. Demo gravada; ≤5 cliques; zero PHI fora.
+ S5b CASO-GUIA = FATIA VERTICAL MÍNIMA (antes de abrir S4-B/D/E e a Onda 3): agenda → encontro explícito → PDF digital de laboratório
+     pela extração já existente (src/leitura/caixa-unica.ts + drafts) → candidato → confirmação → Maestro/ORK → laboratório e interações →
+     visão integrada (rota de leitura da S6; bloco mínimo na tela existente) → resumo com referências → pedido assinado (modules/documentos +
+     executor IMPRIMIR já composto) → med novo reconciliado → reabertura só do dependente → documento assinado preservado.
+     FIXTURE INTEIRAMENTE SINTÉTICA (paciente, datas e valores fictícios; nunca "retorno real desidentificado"). Não exige tela R-17
+     completa, OCR nem dutos (Onda 3). Demo gravada; ≤5 cliques; zero PHI fora; scanner PHI sem achado sobre a fixture.
  S7  Tumor → investigação (requisitos do pack × fatos e pedidos; propostas com fonte, sem duplicar; imagem com resumo do caso D-F1-04).
 ONDA 3 (depois de S5b; paralelo; faixas disjuntas):
  S8  Consulta integrada (check-in c/ encounterId, pré-consulta c/ delta, tela R-17 c/ visão integrada no topo, síntese OncoAssist c/ citações
@@ -229,9 +236,9 @@ Modo de trabalho: Fable planeja, agentes mecânicos executam, testes adversariai
 ══════════════════════════════════════════════════════════════════════════════
 9. PERGUNTAS ABERTAS (só o Dr. Silas responde; não avance sobre elas)
 ══════════════════════════════════════════════════════════════════════════════
-1. Escopo da S10: manter preparação contratual monousuária (registrado) ou antecipar operação real? Recomendação: manter.
-2. Caso-guia da demo F1 (S5b): confirma o caso proposto (retorno de QT, creatinina nova acima da anterior, medicamento sintomático novo
-   com interação de classe registrada, pedido assinado, reabertura só do dependente) ou prefere outro retorno real desidentificado?
+1. Cenário do caso-guia (S5b), a ser construído como FIXTURE SINTÉTICA: confirma o cenário proposto (quimioterapia em curso, creatinina
+   nova acima da anterior, medicamento sintomático novo com interação de classe registrada, pedido assinado, reabertura só do dependente)
+   ou prefere outro cenário típico? É a única pergunta aberta. O escopo assistencial (L19) já está fixado e não se pergunta de novo.
 
 PRIMEIRA AÇÃO AO LER ISTO: montar o quadro de 7 blocos da S0 (não da S1) e apresentá-lo ao Dr. Silas. Não abra worktree. Não escreva código.
 ```

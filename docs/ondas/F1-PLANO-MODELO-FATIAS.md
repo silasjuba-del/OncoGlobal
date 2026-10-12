@@ -1,7 +1,15 @@
-# F1: modelo de plano, fatias e etapas (v4, proposta para aprovação)
+# F1: modelo de plano, fatias e etapas (v5, proposta para aprovação)
 
 Data: 2026-10-12. Autor: Fable (planejamento). Orquestrador da execução: Codex-Fugu. Executores: agentes mecânicos com WRITE_SET fechado (D-F1-21).
-Estado: **PROPOSTA v4**. Nenhuma fatia começa sem o quadro de 7 blocos aprovado pelo Dr. Silas (§6). Este documento não inicia código.
+Estado: **PROPOSTA v5**. Base: `f1/integrado` em `fbecedb` (PR #7 mergeado pelo Dr. Silas em 12/10). Nenhuma fatia começa sem o quadro de 7 blocos aprovado pelo Dr. Silas (§6). Este documento não inicia código.
+
+O que mudou na v5 (3ª revisão do Codex, `handoff/2026-10-12_codex-revisao-plano-f1-v4.md`):
+- S0 com faixa completa (`salao.ts`, cliente e contrato do `carregar`) e mapa explícito: 6 grupos de correção na S0, o 7º (ORK) na S6;
+- S6 cobre a queda entre o commit clínico e o disparo técnico: enfileiramento durável na mesma transação e recuperação determinística no boot; `estimulo_tecnico` (estímulos) e `execucao_tecnica` (runs) harmonizados;
+- S5-E1 compara paciente, encontro, lote, proposta e versões, com ataques de divergência por campo;
+- S5b vira fatia vertical mínima com reúso comprovado e fixture inteiramente sintética;
+- WRITE_SETs sem sobreposição: `leituras.ts` na S1; S3 enumera os arquivos pela relação aprovada; S3c sem `manifesto/` e `prompts/`; S4 não escreve corpus; S11 com a composição do gateway;
+- §7 só com a pergunta do cenário da demo (o escopo assistencial já está fixado).
 
 O que mudou na v4:
 - aplica os 9 ajustes da 2ª revisão do Codex (`handoff/2026-10-12_codex-revisao-plano-f1-v3.md`);
@@ -107,7 +115,7 @@ Nenhum adaptador tem regra clínica. Canal novo é um adaptador antes do normali
 Setores são funções puras, executadas pelo ORK como passos. A LLM fica em três usos, com microprompt versionado e os 2 portões: extração na ingestão (FN-24), síntese em prosa de fatos confirmados, reformulação sem PHI. Não se cria agente onde uma regra versionada resolve.
 
 ### 2.4 Estímulos técnicos (sistema nervoso autônomo)
-O ledger clínico exige revisão humana e ator `SESSAO` (`ledger.ts:46-52`). Isso é regra, não falha. Então: vencimento de exame, ativação de versão da biblioteca, conclusão de uma execução e reabertura de avaliação circulam em `estimulo_tecnico` (tabela própria, append-only, ator `SISTEMA`, com `correlacao {patientId?, encounterId?, revisaoEntrada, regras@versao, biblioteca@versao}`). O Maestro os recebe como eventos. Eles **nunca** entram em `clinical_event`, nunca promovem candidato a fato e nunca aparecem como fato ao médico. A execução de um run do ORK é persistida ali para retomada e auditoria.
+O ledger clínico exige revisão humana e ator `SESSAO` (`ledger.ts:46-52`). Isso é regra, não falha. Então: vencimento de exame, ativação de versão da biblioteca, conclusão de uma execução e reabertura de avaliação circulam em `estimulo_tecnico` (tabela própria, append-only, ator `SISTEMA`, com `correlacao {patientId?, encounterId?, revisaoEntrada, regras@versao, biblioteca@versao}`). O Maestro os recebe como eventos. Eles **nunca** entram em `clinical_event`, nunca promovem candidato a fato e nunca aparecem como fato ao médico. Os runs do ORK são persistidos em `execucao_tecnica` (tabela irmã, também append-only), para retomada e auditoria; `estimulo_tecnico` guarda só os estímulos.
 
 ### 2.5 Retrato (contrato mínimo)
 - `patientId`, `revisao` (hash do **conteúdo canônico**: eventos de entrada e versões; **`geradoEm` fica fora do hash**), `versaoProjecao`, `geradoEm`.
@@ -151,7 +159,8 @@ Remover uma exceção é permitido a quem corrige o import (a relação aprovada
 ### Onda 0: fundação
 
 **S0 · Contratos temporais e integridade da leitura** (os 7 achados confirmados da auditoria externa)
-- WRITE_SET: `src/app/oncoassistLocal.ts` (só `agora`), `src/server/leituras.ts`, `src/server/f0c/contextoClinico.ts`, `src/server/rotas.ts` (só `/consulta/carregar` e `lerApacs`), `src/contracts/f1/relogio.ts` (novo), `tests/f1/s0/**`, `tests/adv/f1-s0-*.adv.ts`.
+- WRITE_SET: `src/app/oncoassistLocal.ts` (só `agora`), `src/server/leituras.ts`, `src/server/f0c/contextoClinico.ts`, `src/server/f0c/salao.ts` (só receber o fuso injetado), `src/server/rotas.ts` (só `/consulta/carregar` e `lerApacs`), `src/contracts/f1/relogio.ts` (novo), `src/contracts/f1/consultaCarregar.ts` (novo: pedido com `encounterId`), `src/ui/api/porta.ts` (só o cliente do `carregar`), `tests/f1/s0/**`, `tests/adv/f1-s0-*.adv.ts`.
+- Mapa dos 7 achados: **S0** corrige os grupos 1 (payload), 2 (encontro), 3 (lote), 4 (fuso), 5 (delta e pendências) e 6 (`lerApacs`); o grupo 7 (ORK: `PRONTO` com um `ok` e timeout sem cancelar) é corrigido na **S6-E2/E3**, e a S0 não o exige.
 - E1: relógio do serviço: `agora()` devolve instante com `-03:00` (D-W5-01); `salao.ts` e `leituras.ts` passam a receber o mesmo fuso injetado. Adversarial: assinatura às 23:30 −03:00 mantém o dia civil e os 21 dias.
 - E2: encontro explícito: `/consulta/carregar` recebe `encounterId` (ou abre um novo por comando); `current` deixa de ser `at(-1)`. Adversarial: correção de encontro antigo não muda a consulta ativa.
 - E3: dados do paciente independentes do tumor: alergias, comorbidades e medicamentos saem do filtro de lote. Adversarial: alergia gravada no lote A aparece no lote B.
@@ -160,7 +169,7 @@ Remover uma exceção é permitido a quem corrige o import (a relação aprovada
 - Aceite: 7 testes adversariais, um por achado; matriz F0 e adversariais W8/W10 sem regressão.
 
 **S1 · Comandos, envelope e contrato da Tarefa** (depois da S0)
-- WRITE_SET: `src/kernel/comandos/**` (novo), `src/contracts/envelope.ts`, `src/contracts/f1/tarefa.ts`, `src/server/rotas.ts`, `src/server/autorizacao.ts`, `src/server/flash.ts` (só import), `src/app/oncoassistLocal.ts`, `scripts/check-boundaries.mjs` (só remoção de exceções pagas), `tests/f1/s1/**`, `tests/adv/f1-s1-*.adv.ts`.
+- WRITE_SET: `src/kernel/comandos/**` (novo), `src/contracts/envelope.ts`, `src/contracts/f1/tarefa.ts`, `src/server/rotas.ts`, `src/server/leituras.ts` (só os pontos de leitura chamados pelos comandos), `src/server/autorizacao.ts`, `src/server/flash.ts` (só import), `src/app/oncoassistLocal.ts`, `scripts/check-boundaries.mjs` (só remoção de exceções pagas), `tests/f1/s1/**`, `tests/adv/f1-s1-*.adv.ts`.
 - E1: registro `tipo@versao → schema`; versão desconhecida vira pendência.
 - E2: comandos `confirmarBloco`, `registrarFato`, `proporPrescricao`, `assinarPrescricao` (reconfere revisões), `vincularContato` (reusa `modules/canal/vinculo.ts`), `registrarAdministracao`, `registrarTarefa`. Todos exigem `patientId`, `encounterId` e, quando aplicável, `tumorLotId`.
 - E3: estrangular os 5 `confirmar()`, com teste de equivalência por ponto.
@@ -178,7 +187,7 @@ Remover uma exceção é permitido a quem corrige o import (a relação aprovada
 - Aceite: reconstrução byte a byte do conteúdo canônico; alergia nos dois tumores; fato do tumor A não vaza para o B; snapshot antigo intacto; adversarial de hash estável com `geradoEm` diferente.
 
 **S3 · Biblioteca: loader e fronteiras** (E1 em paralelo com S0/S1; E2 a E5 depois da S2)
-- WRITE_SET: `src/kernel/corpus/**`, `corpus/manifesto/**` (novo), `scripts/check-boundaries.mjs`, `scripts/fronteiras-excecoes-aprovadas.json` (só leitura; nunca cresce), os arquivos das exceções restantes, `tests/f1/s3/**`, `tests/adv/f1-s3-*.adv.ts`.
+- WRITE_SET: `src/kernel/corpus/**`, `corpus/manifesto/**` (novo), `scripts/check-boundaries.mjs`, `scripts/fronteiras-excecoes-aprovadas.json` (só leitura; nunca cresce), os arquivos do campo `arquivo` da relação aprovada que ainda constem em `EXCECOES` no início da S3 (o quadro de 7 blocos da S3 lista cada um pelo nome), `tests/f1/s3/**`, `tests/adv/f1-s3-*.adv.ts`.
 - E1: loader dos 8 pilares, com manifesto, hashes, curadoria (`RASCUNHO`/aprovado/obsoleto), ativação atômica, volta à última versão válida (D-F1-14), e emissão do estímulo `BIBLIOTECA_ATIVADA` (§2.4).
 - E2: conferência de fonte e licença do CTCAE v6 (já decidido: v6 pura, Q45 e D-W9-73).
 - E3: duto de conhecimento: pacote exportado do Genspark validado, importado e em revisão; nada de paciente sai; trials não geram elegibilidade.
@@ -187,14 +196,15 @@ Remover uma exceção é permitido a quem corrige o import (a relação aprovada
 - Aceite: pacote inválido rejeitado; versão anterior recuperada; offline; zero exceções; adversarial: pacote com hash certo e conteúdo trocado é rejeitado.
 
 **S3c · Curadoria do corpus** (contínua; responsável: Codex-Fugu redige, Dr. Silas revisa e aprova)
-- WRITE_SET: `corpus/**`, `scripts/validate-corpus.mjs`, `docs/ondas/F1-CORPUS-DECISOES-PENDENTES.md`, `tests/corpus/**`. Registro em `DECISOES.md` só pelo Fable.
+- WRITE_SET: `corpus/{1-exames,2-receitas,3-laudos,4-interacoes-contraindicacoes,5-ctcae-acao,6-pack-tumor,7-orientacoes,8-encaminhamentos}/**`, `corpus/fichas/**`, `corpus/rulesets/**`, `scripts/validate-corpus.mjs`, `docs/ondas/F1-CORPUS-DECISOES-PENDENTES.md`, `tests/corpus/**`. **Fora:** `corpus/manifesto/**` (S3) e `corpus/prompts/**` (S11). Registro em `DECISOES.md` só pelo Fable.
+- Entrega serial ao corpus: os setores da Onda 1 **não escrevem** em `corpus/`; pedem a parcela ao S3c, que publica a versão, e consomem pela biblioteca ativa.
 - Percurso obrigatório por item: divergência detectada (pelo validador ou pela reconciliação do S3-E2) → correção com fonte → revisão médica (registro D-F1-xx) → publicação versionada → ativação (`consultavel` e, só com aprovação item a item, `alerta`).
 - Primeiro item: fichas FOLFOX e FOLFIRI paliativas com bolus de 5-FU (D-F1-16), hoje divergentes.
 - Validador: migração `ativo` → `consultavel` / `alerta`, mantendo estados provisórios (D-F1-16, 17, 20).
 - Aceite: zero divergência entre decisões e corpus na ativação; item sem aprovação nunca alerta.
 
 ### Onda 1: setores (depois de S2-E5 e S3-E1; faixas disjuntas, até 5 em paralelo)
-Cada setor: `src/modules/setores/<setor>/**`, `tests/f1/s4-<setor>/**`, `tests/adv/f1-s4-<setor>-*.adv.ts`, e a parcela do corpus listada no quadro de 7 blocos da fatia (arquivo por arquivo; "parcela correspondente" não vale como faixa). Saída comum: `AchadosSetor@1 {setor, correlacao, entradas@revisao, regras@versao, cobertura {avaliados, semRegraAprovada}, achados[], lacunas[]}`.
+Cada setor: `src/modules/setores/<setor>/**`, `tests/f1/s4-<setor>/**`, `tests/adv/f1-s4-<setor>-*.adv.ts`. Nenhum setor escreve em `corpus/`: a parcela de biblioteca de que precisa é pedida ao S3c e nomeada, arquivo por arquivo, no quadro de 7 blocos da fatia. Saída comum: `AchadosSetor@1 {setor, correlacao, entradas@revisao, regras@versao, cobertura {avaliados, semRegraAprovada}, achados[], lacunas[]}`.
 
 Ordem clínica de prioridade: **S4-A (laboratório + imagem) e S4-C (comorbidades + interações) primeiro**, porque são os cruzamentos mais frequentes de segurança (função orgânica × droga × medicamento em uso × comorbidade) e sustentam o caso-guia (S5b). Depois S4-E, S4-D, S4-B.
 
@@ -210,7 +220,7 @@ Ordem clínica de prioridade: **S4-A (laboratório + imagem) e S4-C (comorbidade
 
 **S5 · Reconciliador e visão integrada**
 - WRITE_SET: `src/modules/reconciliador/**`, `tests/f1/s5/**`, `tests/adv/f1-s5-*.adv.ts`.
-- E1: junta os `AchadosSetor` da mesma revisão **e as falhas do run** (`missing`, `error`, `unattempted`, timeout) como lacunas. Revisão divergente vira "desatualizado".
+- E1: junta os `AchadosSetor` **e as falhas do run** (`missing`, `error`, `unattempted`, timeout) como lacunas. Antes de juntar, confere em cada resultado o envelope de correlação completo: `patientId`, `encounterId`, `tumorLotId` aplicável, `propostaId@revisao`, `fatos@revisao`, `regras@versao`, `biblioteca@versao`. Qualquer campo divergente marca o resultado como "desatualizado" e o exclui da visão atual. Adversarial: um ataque por campo divergente.
 - E2: achados cruzados com cadeia de causa; combinações vêm da biblioteca aprovada.
 - E3: avaliação da prescrição proposta antes do ciclo 1, com cobertura e lacunas; não muda dose.
 - E4: agrupamento anti-fadiga (L10) sem esconder risco.
@@ -219,7 +229,7 @@ Ordem clínica de prioridade: **S4-A (laboratório + imagem) e S4-C (comorbidade
 **S6 · Sistema nervoso no runtime: Maestro/ORK, estímulos e reavaliação**
 - WRITE_SET: `src/orchestration/**` (acrescentar e ligar; tabela fixa e executor supervisionado não mudam de natureza), `src/kernel/orquestracao/estimulos/**` (novo), `src/kernel/ledger/schema.ts` (só a tabela `estimulo_tecnico` e `execucao_tecnica`), `src/kernel/comandos/disparo.ts` (gancho pós-commit, serial com S1), `src/app/oncoassistLocal.ts` (composição), `src/server/rotas.ts` (entrega da `VisaoIntegrada` à consulta), `src/modules/reconciliador/dependencias/**`, `tests/f1/s6/**`, `tests/adv/f1-s6-*.adv.ts`.
 - E0: tabela do Maestro com os eventos da F1 (`FATO_CONFIRMADO`, `PRESCRICAO_PROPOSTA`, `MED_RECONCILIADO`, `EXAME_CORRIGIDO`, `BIBLIOTECA_ATIVADA`, `FATO_VENCIDO`, `ADMINISTRACAO_REGISTRADA`) mapeados para setores e `RECONCILIADOR`. Planos atuais e testes Q11, G-15, RT-09 intactos.
-- E1: ORK no runtime: disparo **só após commit efetivo** do comando, com correlação e revisão de entrada; execução persistida em `execucao_tecnica` para retomada; replay do mesmo `operationId` não dispara de novo.
+- E1: ORK no runtime: a linha de `execucao_tecnica` (estado `PENDENTE`, com correlação e revisão de entrada) é gravada **na mesma transação** do commit clínico; o disparo lê essa fila. No boot e após queda, a recuperação é determinística: toda `PENDENTE` é processada em ordem. Replay do mesmo `operationId` não cria nova linha. Adversarial: queda simulada entre o commit e o disparo deixa a operação `PENDENTE` e ela é processada na retomada, uma única vez.
 - E2: **etapa final**: o passo `RECONCILIADOR` recebe todos os resultados, inclusive falhas e timeouts, e sempre roda. O estado `PRONTO` passa a exigir que a etapa final tenha produzido `VisaoIntegrada` com cobertura; resultado parcial é `PRONTO` com lacunas declaradas, nunca `PRONTO` silencioso. Os 5 estados de run não mudam (teto Q9).
 - E3: **publicação tardia barrada**: resultado de agente que chega depois do timeout é descartado e registrado; nunca entra na visão nem no ledger.
 - E4: dependência por domínio e contexto (o primeiro med novo e o fato antes ausente também disparam).
@@ -227,10 +237,12 @@ Ordem clínica de prioridade: **S4-A (laboratório + imagem) e S4-C (comorbidade
 - E6: reconferência de revisões em `assinarPrescricao`.
 - Aceite: `LAB=error` ainda produz visão com lacuna "laboratório indisponível"; resultado após timeout não aparece; evento fora da tabela não executa; `{"state": ...}` no texto não muda estado; replay não duplica execução; matriz F0 verde em Q11 e G-15.
 
-**S5b · Caso-guia (fio de ouro)** (depois de S4-A, S4-C, S5 e S6; antes de abrir S4-B/D/E e a Onda 3)
-- Um retorno real, desidentificado, percorre tudo: agenda → encontro explícito → exame novo chega pela caixa → candidato → confirmação → Maestro/ORK → laboratório e interações → visão integrada → resumo principal com referências → pedido assinado → medicamento novo reconciliado → reabertura só do que depende → documento assinado preservado.
-- Proposta de caso (a confirmar pelo Dr. Silas, §7): paciente em quimioterapia com esquema que exige função renal (sem dose no fixture), creatinina nova acima da anterior, medicamento sintomático novo com interação de classe registrada na biblioteca aprovada, pedido de exames de controle, retorno marcado. Nenhum valor clínico inventado: o fixture usa só fatos e referências à biblioteca aprovada.
-- Aceite: demo gravada; ≤5 cliques no retorno; nenhuma lista solta por setor; lacunas visíveis; nenhum byte de PHI fora.
+**S5b · Caso-guia: fatia vertical mínima** (depois de S4-A, S4-C, S5 e S6; antes de abrir S4-B/D/E e a Onda 3)
+- WRITE_SET: `tests/f1/s5b/**` (fixture sintética e percurso), `tests/adv/f1-s5b-*.adv.ts`, `src/ui/consulta/VisaoIntegradaMinima.tsx` (novo, bloco único na tela existente), `docs/ondas/F1-CASO-GUIA.md`.
+- **Reúso comprovado, sem adiantar a Onda 3:** agenda e check-in já existem (`contracts/w11/cadastroCheckin.ts`, leitura de agenda); a entrada do exame usa a extração determinística de PDF digital já existente (`src/leitura/caixa-unica.ts`) e os `drafts` do kernel; a visão integrada chega pela rota de leitura entregue na S6; o pedido assinado usa `modules/documentos` e a impressão pelo executor `IMPRIMIR` já composto em `oncoassistLocal.ts`. O que não existe (tela R-17 completa, caixa universal com OCR, dutos) fica na Onda 3; o caso-guia não os exige.
+- Percurso: agenda → encontro explícito → PDF digital de laboratório na caixa → candidato → confirmação → Maestro/ORK → laboratório e interações → visão integrada → resumo com referências → pedido assinado → medicamento novo reconciliado → reabertura só do que depende → documento assinado preservado.
+- **Fixture inteiramente sintética** (regra do repositório): paciente, datas e valores fictícios, modelados num retorno típico. Cenário proposto (a confirmar, §7): quimioterapia em curso com esquema que exige função renal (sem dose no fixture), creatinina nova acima da anterior, medicamento sintomático novo com interação de classe registrada na biblioteca aprovada, pedido de exames de controle, retorno marcado. Nenhum valor clínico inventado como regra: o fixture referencia só itens aprovados da biblioteca.
+- Aceite: demo gravada; ≤5 cliques no retorno; nenhuma lista solta por setor; lacunas visíveis; nenhum byte de PHI fora; scanner PHI sem achado sobre a fixture.
 
 **S7 · Caminho tumor → investigação** (depois de S3 e S5)
 - WRITE_SET: `src/modules/investigacao/**`, `tests/f1/s7/**`, `tests/adv/f1-s7-*.adv.ts`.
@@ -254,7 +266,7 @@ Ordem clínica de prioridade: **S4-A (laboratório + imagem) e S4-C (comorbidade
 - Não declara setores remotos, multiusuário, WhatsApp nem operação real (D-F1-13).
 
 **S11 · Caixa universal, OCR e LLM**
-- WRITE_SET: `src/modules/caixa/**`, `src/leitura/**`, `src/kernel/extracao/**`, `src/kernel/llm/**` (adaptador D-W9-15 e os 2 portões), `corpus/prompts/**` (microprompts versionados), `package.json` e lockfile (`tesseract.js`), `src/server/rotas.ts` (só upload, depois da S10), `tests/f1/s11/**`, `tests/adv/f1-s11-*.adv.ts`.
+- WRITE_SET: `src/modules/caixa/**`, `src/leitura/**`, `src/kernel/extracao/**`, `src/kernel/llm/**` (adaptador D-W9-15 e os 2 portões), `src/kernel/gateway/**` (só o registro dos executores novos `OCR_LOCAL` e `LLM_EXTRACAO`), `src/app/oncoassistLocal.ts` (só a composição desses executores; hoje só `IMPRIMIR` é injetado; depois da S6), `corpus/prompts/**` (microprompts versionados), `package.json` e lockfile (`tesseract.js`), `src/server/rotas.ts` (só upload, depois da S10), `tests/f1/s11/**`, `tests/adv/f1-s11-*.adv.ts`.
 - Caixa → AG-02 → FN-25; OCR local; extratores LAB, RADS, PATH, CHEMO, SYMPTOM → candidatos → confirmação → disparo.
 - **Dois aceites separados:** (a) saída ordinária: zero byte de PHI em chamada externa (G-02 em log); (b) exceção documental D-W9-66: só pelo gateway, provider com `store:false`, efeito registrado, texto de volta ao PC e à caixa de revisão; jamais para o Genspark.
 
@@ -294,6 +306,5 @@ ACEITE: testes positivo, negativo, borda e adversarial, nomeados; prova; demo
 WRITE_SET: arquivos permitidos (um a um) · PROIBIDO: arquivos vedados · POSSE SERIAL: ordem nos comuns
 ```
 
-## 7. Perguntas ao Dr. Silas antes da Onda 0
-1. **Escopo da S10:** manter salão, farmácia e APAC como preparação contratual com uso local monousuário (como registrado) ou antecipar operação real? Recomendação: manter.
-2. **Caso-guia da demo F1 (S5b):** confirma o caso proposto (retorno de QT, creatinina nova, medicamento sintomático novo com interação registrada, pedido assinado, reabertura) ou prefere outro retorno real desidentificado? Esta é a única pergunta nova.
+## 7. Pergunta ao Dr. Silas antes da Onda 0
+1. **Cenário do caso-guia (S5b):** confirma o cenário proposto (quimioterapia em curso, creatinina nova, medicamento sintomático novo com interação registrada, pedido assinado, reabertura), a ser construído como fixture inteiramente sintética, ou prefere outro cenário típico? É a única pergunta aberta. O escopo assistencial (preparação monousuária) já está fixado e não se rediscute.

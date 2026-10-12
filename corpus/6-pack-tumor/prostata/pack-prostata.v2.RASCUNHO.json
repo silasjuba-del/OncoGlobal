@@ -591,7 +591,7 @@
       },
       {
         "grupo": "mHSPC alto volume",
-        "conduta": "Doença visceral ou ≥ 4 lesões ósseas com ≥ 1 fora do esqueleto axial: TDA + ARPI ou triplete (docetaxel + abiraterona ou darolutamida).",
+        "conduta": "Doença visceral ou ≥ 4 lesões ósseas com ≥ 1 fora da coluna vertebral e da pelve (critério operacional fixado em D-F1-20, 49A; a SBOC p.10 escreve 'fora do esqueleto axial'): TDA + ARPI ou triplete (docetaxel + abiraterona ou darolutamida).",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",

@@ -15,8 +15,17 @@ function verificarSnippet(snippet: string) {
   try {
     mkdirSync(join(dir, "scripts"));
     mkdirSync(join(dir, "src", "rules"), { recursive: true });
-    copyFileSync(scanner, join(dir, "scripts", "check-boundaries.mjs"));
-    copyFileSync(aprovadas, join(dir, "scripts", "fronteiras-excecoes-aprovadas.json"));
+    // Cópia SEM dívida: EXCECOES vazia e relação aprovada vazia, para que a única violação possível seja o vetor testado
+    // (com a dívida real copiada, "FRONTEIRAS VIOLADAS" sairia por "exceção não usada" e o teste não provaria nada).
+    const codigo = readFileSync(scanner, "utf8");
+    const inicio = codigo.indexOf("const EXCECOES = [");
+    const fim = codigo.indexOf("\n];", inicio);
+    if (inicio < 0 || fim < 0) throw new Error("EXCECOES_NAO_ENCONTRADA");
+    writeFileSync(join(dir, "scripts", "check-boundaries.mjs"),
+      codigo.slice(0, inicio) + "const EXCECOES = [" + codigo.slice(fim), "utf8");
+    const manifesto = JSON.parse(readFileSync(aprovadas, "utf8")) as { prazo: string };
+    writeFileSync(join(dir, "scripts", "fronteiras-excecoes-aprovadas.json"),
+      JSON.stringify({ aprovadoEm: "fixture", origem: "ADV-013", prazo: manifesto.prazo, pares: [] }), "utf8");
     writeFileSync(join(dir, "src", "rules", "probe.ts"), snippet, "utf8");
     const result = spawnSync(process.execPath, [join(dir, "scripts", "check-boundaries.mjs")],
       { cwd: dir, encoding: "utf8", timeout: 10_000 });
@@ -32,6 +41,12 @@ function verificarSnippet(snippet: string) {
 }
 
 describe("F9 · varredura estática bounded com fonte sintética inerte", () => {
+  it("ADV-013 · controle limpo: sem rede e sem dívida, o scanner passa com 0 exceções", () => {
+    const result = verificarSnippet("export {};\n");
+    expect(result.status, result.output).toBe(0);
+    expect(result.output).toContain("0 exceções");
+  });
+
   for (const [vetor, codigo] of [
     ["fetch por propriedade computada", 'void globalThis["fetch"]("https://example.invalid");'],
     ["cliente WebSocket", 'void new WebSocket("wss://example.invalid");'],
@@ -41,6 +56,10 @@ describe("F9 · varredura estática bounded com fonte sintética inerte", () => 
       const result = verificarSnippet(codigo!);
       expect(result.status).toBe(1);
       expect(result.output).toContain("FRONTEIRAS VIOLADAS");
+      // Poder de prova: a violação apontada é a do vetor, e não ruído de dívida copiada.
+      expect(result.output).toContain("src/rules/probe.ts usa rede fora do gateway/llm (INV-05)");
+      expect(result.output).not.toContain("exceção não usada");
+      expect(result.output).not.toContain("fora da relação aprovada");
     });
   }
 });

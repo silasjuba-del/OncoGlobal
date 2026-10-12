@@ -107,35 +107,26 @@ describe("pré-F1 · fronteiras com dívida explícita", () => {
     expect(n).toBeLessThanOrEqual(54);
   });
 
-  it("remover uma exceção junto com a correção do import continua verde", () => {
-    const result = verificar((dir) => {
-      const script = join(dir, "scripts/check-boundaries.mjs");
-      writeFileSync(script, readFileSync(script, "utf8")
-        .split("\n").filter((l) => !(l.includes('arquivo: "src/server/http.ts"') && l.includes("src/config/settings.js"))).join("\n"));
-      const http = join(dir, "src/server/http.ts");
-      writeFileSync(http, readFileSync(http, "utf8")
-        .split("\n").filter((l) => !(l.startsWith("import") && l.includes("config/settings.js"))).join("\n"));
-    });
-    expect(result.status, result.output).toBe(0);
-    expect(Number(/(\d+) exceções datadas/.exec(result.output)?.[1])).toBeLessThan(54);
+  it("fixture sintética: no fechamento, exceção com prazo diferente do manifesto também vence", () => {
+    const r = verificarSintetico({ arquivos: violaA, excecoes: [{ ...A, expira: "F1-S4", motivo: "sintético" }], aprovadas: [A], args: ["--fechar-fase=F1-S3"] });
+    expect(r.status).toBe(1);
+    expect(r.output).toContain("exceção vencida no fechamento de F1-S3");
   });
 
-  it("rejeita exceção nova acima do teto, mesmo cobrindo uma violação real", () => {
-    const result = verificar((dir) => {
-      writeFileSync(join(dir, "src/server/probe.ts"), "import '../kernel/ledger/ledger.js';\n");
-      const script = join(dir, "scripts/check-boundaries.mjs");
-      writeFileSync(script, readFileSync(script, "utf8").replace("const EXCECOES = [",
-        'const EXCECOES = [\n  { arquivo: "src/server/probe.ts", import: "src/kernel/ledger/ledger.js", expira: "F1-S3", motivo: "probe" },'));
-    });
-    expect(result.status).toBe(1);
-    expect(result.output).toContain("acima do teto aprovado");
+  it("fixture sintética: prazo fora do manifesto falha mesmo sem fechamento", () => {
+    const r = verificarSintetico({ arquivos: violaA, excecoes: [{ ...A, expira: "F1-S4", motivo: "sintético" }], aprovadas: [A] });
+    expect(r.status).toBe(1);
+    expect(r.output).toContain("exceção com prazo fora do manifesto (F1-S4 ≠ F1-S3)");
   });
 
-  it("no fechamento da F1-S3 nenhuma exceção com esse prazo pode sobrar", () => {
-    const result = verificar(() => {}, ["--fechar-fase=F1-S3"]);
-    expect(result.status).toBe(1);
-    expect(result.output).toContain("exceção vencida no fechamento de F1-S3");
+  it("fixture sintética: fase de fechamento desconhecida falha", () => {
+    const r = verificarSintetico({ arquivos: { "src/contracts/base.ts": "export {};\n" }, excecoes: [], aprovadas: [A], args: ["--fechar-fase=F1-S9"] });
+    expect(r.status).toBe(1);
+    expect(r.output).toContain("fase de fechamento desconhecida: F1-S9 (manifesto: F1-S3)");
   });
+
+  // Redução, inclusão após redução e fechamento são provados só nas fixtures sintéticas acima:
+  // os testes contra a árvore real não podem depender do tamanho da dívida, que só encolhe até zero.
 
   it.each([
     ["server", "src/server/probe.ts", "../kernel/ledger/ledger.js", "ledger só pelo kernel"],
