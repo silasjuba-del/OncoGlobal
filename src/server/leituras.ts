@@ -78,15 +78,29 @@ const ChatMessage = z.object({
   autor: z.string().min(1), texto: z.string(),
 }).strict();
 
-function eventos(db: DatabaseSync) {
-  return db.prepare("SELECT * FROM clinical_event").all().flatMap((row) => {
+/** Pendência de integridade do ledger: evento gravado que não passa no contrato. Sem payload clínico. */
+export interface PendenciaIntegridade { eventoId: string; patientId: string | null; tipo: string | null; motivo: "JSON_INVALIDO" | "CONTRATO_INVALIDO"; }
+
+/** Pré-F1 (auditoria A4): nada some em silêncio. Evento malformado sai da projeção, mas fica registrado como pendência. */
+export function lerEventosComIntegridade(db: DatabaseSync) {
+  const pendenciasIntegridade: PendenciaIntegridade[] = [];
+  const itens = db.prepare("SELECT * FROM clinical_event").all().flatMap((row) => {
+    const eventoId = String(row.eventId ?? `${String(row.operationId ?? "?")}#${String(row.eventIndex ?? "?")}`);
+    const patientId = row.patientId == null ? null : String(row.patientId);
+    const tipo = row.tipo == null ? null : String(row.tipo);
+    let bruto: unknown;
     try {
-      return [ClinicalEvent.parse({ ...row, payload: JSON.parse(String(row.payload)),
-        fontes: JSON.parse(String(row.fontes)), criadoPor: JSON.parse(String(row.criadoPor)) })];
-    } catch { return []; }
+      bruto = { ...row, payload: JSON.parse(String(row.payload)), fontes: JSON.parse(String(row.fontes)), criadoPor: JSON.parse(String(row.criadoPor)) };
+    } catch { pendenciasIntegridade.push({ eventoId, patientId, tipo, motivo: "JSON_INVALIDO" }); return []; }
+    const parsed = ClinicalEvent.safeParse(bruto);
+    if (!parsed.success) { pendenciasIntegridade.push({ eventoId, patientId, tipo, motivo: "CONTRATO_INVALIDO" }); return []; }
+    return [parsed.data];
   }).sort((a, b) => Date.parse(a.criadoEm) - Date.parse(b.criadoEm)
     || a.operationId.localeCompare(b.operationId) || a.eventIndex - b.eventIndex);
+  return { itens, pendenciasIntegridade };
 }
+
+function eventos(db: DatabaseSync) { return lerEventosComIntegridade(db).itens; }
 function data(e: ReturnType<typeof eventos>[number]) { return dadosDoEvento(e); }
 function valorCandidatoResumo(value: unknown): string {
   if (typeof value === "string") return value;
@@ -171,7 +185,10 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     instrumentos?: readonly RegraInstrumento[];
     tetosCumulativos?: readonly LimiteExposicaoCumulativa[];
     condicionais?: {regras:EntradaCondicionaisClinicas["regras"];termos:NonNullable<EntradaCondicionaisClinicas["regrasTermos"]>} } = {}) {
-  const all = eventos(db), paciente = porTipo(all, "Paciente", Paciente)
+  const leitura = lerEventosComIntegridade(db);
+  const pendenciasIntegridade = leitura.pendenciasIntegridade
+    .filter((p) => p.patientId === patientId || p.patientId === null);
+  const all = leitura.itens, paciente = porTipo(all, "Paciente", Paciente)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value;
   if (!paciente) return { codigo: "PACIENTE_NAO_ENCONTRADO" as const };
   const patientEvents = eventosVigentes(all.filter((e) => e.patientId === patientId));
@@ -278,6 +295,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   const resumoConfirmadoParaDocumento = resumoRegistrado
     ? [resumoRegistrado, ...(textoConflitos ? [textoConflitos] : [])].join("\n\n") : null;
   const pendenciasLeitura = [
+    ...(pendenciasIntegridade.length ? ["EVENTO_COM_INTEGRIDADE_PENDENTE"] : []),
     "SNAPSHOT_DE_CAMPOS_NAO_PERSISTIDO", "ALERGIAS_NAO_CARREGADAS", "COMORBIDADES_NAO_CARREGADAS",
     "ALERTAS_NAO_PERSISTIDOS", "DELTA_ANTERIOR_NAO_PROJETADO",
     ...(!lote ? [loteAmbiguo ? "TUMOR_LOT_AMBIGUO_NO_ENCONTRO" : "TUMOR_LOT_NAO_ENCONTRADO"] : []),
@@ -354,6 +372,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   });
   if (documentosComIntegridadePendente) pendenciasLeitura.push("DOCUMENTO_COM_INTEGRIDADE_PENDENTE");
   return {
+    pendenciasIntegridade,
     hoje: civil.dataCivil, patientId, encounterId: current.encounterId,
     tumorLotId: lote?.tumorLotId ?? null,
     cabecalho: { hoje: civil.dataCivil, paciente, lotes, loteSelecionadoId: lote?.tumorLotId ?? null,
