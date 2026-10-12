@@ -1548,7 +1548,62 @@
           "trecho": "Pembrolizumabe 200 mg EV D1 a cada 3 semanas Por 54 semanas",
           "estado": "VERIFICADO"
         },
-        "observacao": "Opção 2 SBOC (400 mg a cada 6 semanas) grafada \"EC\" na fonte; ver conflitos."
+        "observacao": "Opção 400 mg a cada 6 semanas em pulmao-adj-pembrolizumabe-400-q6s (D-F1-17 51A)."
+      },
+      {
+        "id": "pulmao-adj-pembrolizumabe-400-q6s",
+        "nome": "Pembrolizumabe 400 mg a cada 6 semanas — adjuvante após QT adjuvante",
+        "cenario": "adjuvante — CPNPC ressecado II-IIIA sem EGFR/ALK, independente de PD-L1 (FR fraca)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "pembrolizumabe",
+            "dose": 400,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Por 54 semanas (SBOC opção 2; 9 ciclos). 'EC' da SBOC = erro de grafia de EV.",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22PEMBROLIZUMAB%22 — KEYTRUDA IV, set_id 9333c79b-d487-4538-a9f0-71b91a02b287 (effective 2026-07-10)",
+              "pagina": null,
+              "trecho": "NSCLC: 200 mg every 3 weeks or 400 mg every 6 weeks.",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": 9,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Seguimento após QT adjuvante"
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 51A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Alternativa posológica ao pulmao-adj-pembrolizumabe-pos-qt. Bula FDA (adjuvante NSCLC): até 12 meses. 9 ciclos = 54 semanas ÷ 6 (cálculo).",
+        "fonteSBOC": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "Pembrolizumabe 400 mg EC D1 a cada 6 semanas Por 54 semanas",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "pulmao-neo-platina-pemetrexede-durvalumabe",
@@ -1721,7 +1776,7 @@
       },
       {
         "id": "pulmao-neo-platina-pemetrexede-nivolumabe",
-        "nome": "Platina + pemetrexede + nivolumabe neoadjuvante (não escamoso)",
+        "nome": "Platina + pemetrexede + nivolumabe neoadjuvante (não escamoso, CheckMate 77T: 4 ciclos + adjuvante)",
         "cenario": "neoadjuvante — CPNPC ressecável, não escamoso, sem EGFR/ALK",
         "linha": "neoadjuvante",
         "drogas": [
@@ -1782,11 +1837,92 @@
           "trecho": "Pemetrexede 500 mg/m² EV D1 Nivolumabe 360 mg EV D1",
           "estado": "VERIFICADO"
         },
-        "observacao": "Tabela SBOC: 4 ciclos (CheckMate 77T); texto SBOC descreve CheckMate 816 com 3 ciclos — ver conflitos."
+        "observacao": "CheckMate 77T: 4 ciclos neoadjuvantes seguidos de pulmao-adj-nivolumabe-pos-neo. CheckMate 816 (3 ciclos, sem adjuvante) em protocolo separado (pulmao-neo-platina-pemetrexede-nivolumabe-cm816) — D-F1-17 50A.",
+        "ensaio": "CheckMate 77T"
+      },
+      {
+        "id": "pulmao-neo-platina-pemetrexede-nivolumabe-cm816",
+        "nome": "Platina + pemetrexede + nivolumabe neoadjuvante (não escamoso, CheckMate 816: 3 ciclos, sem adjuvante)",
+        "cenario": "neoadjuvante — CPNPC ressecável, não escamoso, sem EGFR/ALK",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou carboplatina"
+          },
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativa; fonte: AUC 5-6"
+          },
+          {
+            "droga": "pemetrexede",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "nivolumabe",
+            "dose": 360,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+              "pagina": 17,
+              "trecho": "nivolumabe 360 mg a cada 21 dias por 3 ciclos",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina"
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 50A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "observacao": "CheckMate 816: 3 ciclos neoadjuvantes, sem nivolumabe adjuvante. Não misturar com o desenho 77T (pulmao-neo-platina-pemetrexede-nivolumabe).",
+        "ensaio": "CheckMate 816",
+        "fonteNumeroCiclos": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "nivolumabe 360 mg a cada 21 dias por 3 ciclos",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "pulmao-neo-platina-gencitabina-nivolumabe",
-        "nome": "Platina + gencitabina (ou paclitaxel) + nivolumabe neoadjuvante (escamoso)",
+        "nome": "Platina + gencitabina (ou paclitaxel) + nivolumabe neoadjuvante (escamoso, CheckMate 77T: 4 ciclos + adjuvante)",
         "cenario": "neoadjuvante — CPNPC ressecável, escamoso, sem EGFR/ALK",
         "linha": "neoadjuvante",
         "drogas": [
@@ -1846,6 +1982,88 @@
           "pagina": 13,
           "trecho": "CDDP/Carboplatina + Gencitabina + Nivolumabe (apenas histologia escamosa)",
           "estado": "VERIFICADO"
+        },
+        "ensaio": "CheckMate 77T",
+        "observacao": "CheckMate 77T: 4 ciclos neoadjuvantes seguidos de pulmao-adj-nivolumabe-pos-neo. CheckMate 816 (3 ciclos, sem adjuvante) em protocolo separado (pulmao-neo-platina-gencitabina-nivolumabe-cm816) — D-F1-17 50A."
+      },
+      {
+        "id": "pulmao-neo-platina-gencitabina-nivolumabe-cm816",
+        "nome": "Platina + gencitabina (ou paclitaxel) + nivolumabe neoadjuvante (escamoso, CheckMate 816: 3 ciclos, sem adjuvante)",
+        "cenario": "neoadjuvante — CPNPC ressecável, escamoso, sem EGFR/ALK",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou carboplatina"
+          },
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativa; fonte: AUC 5-6"
+          },
+          {
+            "droga": "gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": "ou paclitaxel 175-200 mg/m² EV D1"
+          },
+          {
+            "droga": "nivolumabe",
+            "dose": 360,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+              "pagina": 17,
+              "trecho": "nivolumabe 360 mg a cada 21 dias por 3 ciclos",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina"
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 50A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "ensaio": "CheckMate 816",
+        "observacao": "CheckMate 816: 3 ciclos neoadjuvantes, sem nivolumabe adjuvante. Não misturar com o desenho 77T (pulmao-neo-platina-gencitabina-nivolumabe).",
+        "fonteNumeroCiclos": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "nivolumabe 360 mg a cada 21 dias por 3 ciclos",
+          "estado": "VERIFICADO"
         }
       },
       {
@@ -1886,7 +2104,8 @@
           "pagina": 13,
           "trecho": "seguido de Nivolumabe 480 mg a cada 4 semanas por 12 meses",
           "estado": "VERIFICADO"
-        }
+        },
+        "observacao": "Só no desenho CheckMate 77T (após 4 ciclos). Não usar após o desenho CheckMate 816."
       },
       {
         "id": "pulmao-neo-cisplatina-pemetrexede-pembrolizumabe",
@@ -5021,11 +5240,24 @@
   "pendencias": [
     {
       "texto": "Clone de PD-L1 (22C3/SP263/SP142/28-8) não especificado em nenhuma fonte SBOC lida: definir com patologia do serviço (SEM_FONTE).",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 CPNPC localizado e avançado",
         "Onco PRO 2026 aulas 42, 45"
-      ]
+      ],
+      "classeAnterior": "DECISAO_CLINICA_DR_SILAS",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Clone de PD-L1 fora do adjuvante definido com a patologia do serviço.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 53A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "resolucao": "Clone de PD-L1 fora do adjuvante definido com a patologia do serviço."
     },
     {
       "texto": "NGS, PCR e biópsia líquida sem catalogoId (SEM_ID_NO_CATALOGO); status SUS dos testes moleculares não verificado (DADO_AUSENTE).",
@@ -5069,10 +5301,23 @@
     },
     {
       "texto": "Opção 3 de cisplatina + vinorelbina (faixas 75-80/25-30) e doses em faixa (paclitaxel 175-200, carboplatina AUC 5-6) registradas pelo limite inferior com faixa em observação; médico decide.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 CPNPC localizado p.13"
-      ]
+      ],
+      "classeAnterior": "DECISAO_CLINICA_DR_SILAS",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Doses em faixa registradas pelo limite inferior (faixa mantida em observação).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 52A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "resolucao": "Doses em faixa registradas pelo limite inferior (faixa mantida em observação)."
     }
   ],
   "conflitos": [
@@ -5093,7 +5338,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "São dois estudos (CheckMate 816: 3 ciclos sem adjuvante; CheckMate 77T: 4 ciclos + nivolumabe 480 mg/4 sem por 12 meses). Pack registra a tabela (4 ciclos) e o adjuvante em protocolo separado; médico escolhe o desenho e não mistura.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "CheckMate 816 (3 ciclos, sem adjuvante) e CheckMate 77T (4 ciclos + nivolumabe adjuvante 480 mg q4s por 12 meses) em protocolos separados.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 50A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Pembrolizumabe adjuvante: duração e via",
@@ -5112,7 +5367,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "\"EC\" lido como erro tipográfico de EV — opção 400 mg não convertida em linha até confirmação. 54 semanas atribuído ao adjuvante pós-QT; 13 ciclos ao adjuvante pós-neoadjuvância (inferência).",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Criar a opção pembrolizumabe 400 mg EV a cada 6 semanas no adjuvante (bula FDA); 'EC' = EV.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 51A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Osimertinibe pós-QTRT (LAURA): diretriz × registro",
@@ -5232,7 +5497,8 @@
       "openFDA: durvalumab, atezolizumab, pemetrexed, vinorelbine",
       "ClinicalTrials.gov API v2: NCT02125461, NCT02511106, NCT03456076, NCT03521154, NCT02998528, NCT03425643, NCT02763579, NCT03703297",
       "corpus/6-pack-tumor/pulmao/pulmao.v1.RASCUNHO.json (somente leitura)",
-      "corpus/exames/exames-sigtap.v1.json"
+      "corpus/exames/exames-sigtap.v1.json",
+      "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22PEMBROLIZUMAB%22 — KEYTRUDA IV, set_id 9333c79b-d487-4538-a9f0-71b91a02b287 (effective 2026-07-10)"
     ],
     "aprovacaoClinica": null,
     "notasFontes": [
@@ -5300,6 +5566,30 @@
       "por": "Claude",
       "achado": "Conferência MOC 2026 item 2",
       "acao": "PD-L1 adjuvante: clones 22C3 ou SP142 (1 entradas)"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 50A (Dr. Silas)",
+      "acao": "criados pulmao-neo-platina-pemetrexede-nivolumabe-cm816 e pulmao-neo-platina-gencitabina-nivolumabe-cm816 (3 ciclos); originais rotulados CheckMate 77T"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 51A (Dr. Silas)",
+      "acao": "criado pulmao-adj-pembrolizumabe-400-q6s (400 mg EV q42, 9 ciclos/54 semanas; bula FDA + SBOC p. 14)"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 52A (Dr. Silas)",
+      "acao": "doses em faixa pelo limite inferior ratificadas; pendência fechada"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 53A (Dr. Silas)",
+      "acao": "clone de PD-L1 (fora do adjuvante): definido com a patologia; pendência fechada"
     }
   ]
 }

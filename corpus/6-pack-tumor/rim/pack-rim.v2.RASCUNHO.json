@@ -2639,10 +2639,11 @@
     },
     {
       "texto": "Bula ANVISA não consultada; monitorização laboratorial por rótulo FDA (openFDA).",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "openFDA (pazopanibe, sunitinibe, cabozantinibe, Afinitor, Bavencio, Inlyta)"
-      ]
+      ],
+      "resolucao": "Bula FDA provisória (1A); vigilância no baixo risco (D-F1-15)."
     },
     {
       "texto": "PET/CT FDG: cobertura SUS para CCR = DADO_AUSENTE.",
@@ -2684,10 +2685,11 @@
     },
     {
       "texto": "Vigilância ativa localizada: DDT (semestral) × aula PRO (3-6 meses no 1º ano) — intervalo a confirmar pelo médico.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "DDT 2022 (semestral) × aula PRO (3-6 meses no 1º ano)"
-      ]
+      ],
+      "resolucao": "Bula FDA provisória (1A); vigilância no baixo risco (D-F1-15)."
     },
     {
       "texto": "Observação vigilante (T1a, expectativa de vida limitada): intervalo de imagem não consta do MOC nem do DDT lido.",
@@ -2789,7 +2791,17 @@
         "estado": "INFERIDO"
       },
       "escolhaSeguranca": "Considerar biópsia em candidatos a vigilância ativa ou ablação quando alterar conduta (DDT); médico decide",
-      "decisaoNecessaria": false
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Bula FDA provisória (1A); vigilância no baixo risco (D-F1-15).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Everolimo 2ª linha: cenário do rótulo × cenário do pack",

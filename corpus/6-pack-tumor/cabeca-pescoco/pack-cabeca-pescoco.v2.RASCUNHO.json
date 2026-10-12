@@ -2182,11 +2182,12 @@
   "pendencias": [
     {
       "texto": "Catálogo v1.1 sem RM de face (usado RM_COLUNA_CERVICAL a conferir), sem hibridização in situ para HPV/EBV (EBER) e sem PD-L1 específico (usado IMUNOHISTOQUIMICA). Inclusão no catálogo depende de aprovação D-F1-02.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "corpus/exames/exames-sigtap.v1.json (164 ids)",
         "SIGTAP 09/2026 procs"
-      ]
+      ],
+      "resolucao": "Exigir hibridização in situ (EBER/HPV) quando indicada (10B); sem código SUS próprio, pedir por outra via."
     },
     {
       "texto": "Emetogenicidade e profilaxia de NF por esquema não vêm da SBOC; a classificação por droga (MASCC/ESMO 2023, PMC10937211) deve ser aplicada pelo módulo de suporte, não copiada no pack.",
@@ -2216,7 +2217,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "625 mg/m² 2x/dia (menor dose, a do estudo citado)",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "625 mg/m² 2x/dia (9A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Edição AJCC",

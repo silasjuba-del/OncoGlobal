@@ -1542,10 +1542,11 @@
     },
     {
       "texto": "Adenocarcinoma de canal anal: confirmar com o médico se segue o pack colorretal.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 canal anal"
-      ]
+      ],
+      "resolucao": "Adenocarcinoma de canal anal segue o pack colorretal/reto (11A)."
     }
   ],
   "conflitos": [

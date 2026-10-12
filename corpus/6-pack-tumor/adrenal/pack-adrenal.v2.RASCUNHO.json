@@ -1197,12 +1197,13 @@
   "pendencias": [
     {
       "texto": "Mitotano adjuvante: SBOC não fixa dose; titulação do curso (INFERIDO) e bula FDA (Lysodren, doença inoperável: início 2-6 g/dia) divergem da faixa SBOC 1-4 g/dia. Titulação por mitotanemia = decisão médica.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC adrenal 2026",
         "Onco PRO aula 19",
         "openFDA Lysodren"
-      ]
+      ],
+      "resolucao": "Faixa SBOC 1–4 g/dia titulada por mitotanemia (2A)."
     },
     {
       "texto": "Everolimo entrou (10 mg/dia, NCT01152827, INFERIDO). Seguem sem dose: I-131-MIBG (aceno de medicina nuclear; produto FDA descontinuado), CVD e temozolomida no feo/PGL metastático (sem bula na indicação; ensaio aberto de TMZ é neoadjuvante — cenário diferente, não transferido) e cabozantinibe (NCT02302833 não informa dose no registro).",
@@ -1232,11 +1233,12 @@
     },
     {
       "texto": "Teste com dexametasona mapeado para CORTISOL. Seguem sem id: ACTH, S-DHEA, androstenediona, 17-OH-progesterona, aldosterona, renina, metanefrinas e mitotanemia (códigos SIGTAP anotados nos itens).",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "catálogo v1.1",
         "SIGTAP 09/2026"
-      ]
+      ],
+      "resolucao": "Catecolaminas em urina de 24 h ou RM em T2 pelo SUS, e metanefrinas por outra via quando disponível (3A+B)."
     },
     {
       "texto": "EDP-mitotano: APAC 03.04.02.012-5. Mitotano adjuvante: sem procedimento. Belzutifano, sunitinibe, everolimo e cabozantinibe no feo/PGL: sem demanda nem portaria na Conitec.",
@@ -1285,7 +1287,17 @@
         "estado": "INFERIDO"
       },
       "escolhaSeguranca": "Usar a faixa da SBOC (1-4 g/dia) como referência e titular por mitotanemia; doses acima só com nível sérico e decisão médica",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Faixa SBOC 1–4 g/dia titulada por mitotanemia (2A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     }
   ],
   "curadoria": {

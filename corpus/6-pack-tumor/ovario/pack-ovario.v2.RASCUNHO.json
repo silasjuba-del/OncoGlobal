@@ -992,6 +992,184 @@
         }
       },
       {
+        "id": "ovario-epit-mucinoso-capox-adjuvante",
+        "nome": "EPITELIAL mucinoso — CAPOX (doses do pack colorretal)",
+        "cenario": "EPITELIAL mucinoso — adjuvante após citorredução (IA infiltrativo a IV, quando QT indicada)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Dose copiada de colorretal-capox-adj-4c (D-F1-17 42A).",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 17,
+              "trecho": "Oxaliplatina 130 mg/m² EV D1",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14, 12/12h",
+            "observacao": "Dose copiada de colorretal-capox-adj-4c (D-F1-17 42A).",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 17,
+              "trecho": "Capecitabina 1.000 mg/m² VO 12/12h D1 a D14",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Número de ciclos: SBOC p. 15 dá 3–6 ciclos de QT com platina (IC–II) ou 6 ciclos (III–IV) para o esquema com carboplatina; para CAPOX/mFOLFOX6 em ovário não há número — decisão médica. Função renal (capecitabina); neuropatia (oxaliplatina).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050202",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050202 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 42A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "fonteIndicacao": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "oxaliplatina associado a fluoropirimidinas, aos moldes de tratamento de tumores gastrointestinais",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "ovario-epit-mucinoso-mfolfox6-adjuvante",
+        "nome": "EPITELIAL mucinoso — mFOLFOX6 (doses do pack colorretal)",
+        "cenario": "EPITELIAL mucinoso — adjuvante após citorredução (IA infiltrativo a IV, quando QT indicada)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Dose copiada de colorretal-mfolfox6-adj (D-F1-17 42A).",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 17,
+              "trecho": "Esquema mFolfox6 12 ciclos Oxaliplatina 85 mg/m² EV D1",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 17,
+              "trecho": "Leucovorin 400 mg/m² EV D1",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 17,
+              "trecho": "Fluorouracil 400 mg/m² EV (bolus) D1",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 46 h)",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 (bomba de 46 h)",
+            "observacao": "",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 17,
+              "trecho": "Fluorouracil 2.400 mg/m² EV (bomba de infusão de 46h) D1",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Número de ciclos: SBOC p. 15 dá 3–6 ciclos de QT com platina (IC–II) ou 6 ciclos (III–IV) para o esquema com carboplatina; para CAPOX/mFOLFOX6 em ovário não há número — decisão médica. Neuropatia (oxaliplatina); DPD conforme serviço.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050202",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050202 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 42A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "fonteIndicacao": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "oxaliplatina associado a fluoropirimidinas, aos moldes de tratamento de tumores gastrointestinais",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
         "numeroCiclos": 6,
         "premedicacao": "",
         "ajusteObrigatorio": "Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente.",
@@ -2159,6 +2337,80 @@
         "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
       },
       {
+        "id": "ovario-germ-ep-disgerminoma",
+        "nome": "GERMINATIVO — EP × 3 (disgerminoma selecionado)",
+        "cenario": "GERMINATIVO — disgerminoma estádio IB não adequadamente estadiado a IVA, pacientes selecionadas (minimizar toxicidade da bleomicina)",
+        "linha": "adjuvante / 1ª linha",
+        "drogas": [
+          {
+            "droga": "Etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": "Dose do EP do pack de testículo (D-F1-17 41A).",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 9,
+              "trecho": "EP Etoposídeo 100 mg/m² EV D1 a D5",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": "Dose diária (total 100 mg/m² por ciclo). Dose do EP do pack de testículo (D-F1-17 41A).",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 9,
+              "trecho": "Cisplatina 20 mg/m² EV D1 a D5 Periodicidade: a cada 3 semanas",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal, magnésio e audiometria se sintomas (cisplatina).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060160",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060160 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 41A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "fonteIndicacao": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Esquema EP 3 ciclos.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
         "numeroCiclos": null,
         "premedicacao": "",
         "ajusteObrigatorio": "Função renal; encefalopatia por ifosfamida.",
@@ -2299,6 +2551,96 @@
         },
         "derivadoDe": "ovario-germ-veip",
         "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "id": "ovario-germ-vac",
+        "nome": "GERMINATIVO — VAC (vincristina, dactinomicina, ciclofosfamida) — dose de dactinomicina PENDENTE",
+        "cenario": "GERMINATIVO recidivado (2ª linha, após platina com intervalo > 4 semanas)",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Vincristina",
+            "dose": 1.5,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "semanal por 8 a 12 semanas",
+            "observacao": "máximo de 2 mg por dose",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 10,
+              "trecho": "Vincristina 1,5 mg/m² (máximo de 2 mg) EV semanalmente",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Dactinomicina",
+            "dose": null,
+            "unidade": null,
+            "via": "EV",
+            "dias": "D1 a D5",
+            "pendencia": "SEM_FONTE",
+            "observacao": "SBOC p. 10 grafa '300 mg/m²' (erro: dose letal). Provável 300 mcg/m²/dia (0,3 mg/m²), mas sem fonte literal. Bula FDA sem indicação em ovário. Não prescrever pelo pack.",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 10,
+              "trecho": "Dactinomicina 300 mg/m² EV D1 a D5",
+              "estado": "CONFLITANTE"
+            }
+          },
+          {
+            "droga": "Ciclofosfamida",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 10,
+              "trecho": "Ciclofosfamida 150 mg/m² EV D1 a D5",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "PROTOCOLO INCOMPLETO: não usar até a dose de dactinomicina ter fonte (pendência). Referência original: Slayton RE et al., GOG, Cancer 1985 (PMID 2988740).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060160",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060160 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 40B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "fonteSBOC": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Esquema TIP; Esquema VeIP; Esquema VAC;",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "numeroCiclos": 3,
@@ -3176,34 +3518,64 @@
   },
   "pendencias": [
     {
-      "texto": "GERMINATIVO VAC: SBOC p.10 grafa dactinomicina 300 mg/m² D1-D5 (provável erro de unidade) — protocolo NÃO criado; confirmar dose em bula/literatura antes de uso.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "texto": "GERMINATIVO VAC: protocolo ovario-germ-vac criado (D-F1-17 40B), mas a dose de dactinomicina segue SEM_FONTE (SBOC p.10 grafa 300 mg/m², erro). Precisa da dose literal (Slayton/GOG 1985 texto completo, bula ANVISA ou NCCN).",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
       "buscasFeitas": [
         "SBOC 2026 Ovario germinativo p.10: 'Dactinomicina 300 mg/m² EV D1 a D5' (erro de unidade provavel); nao ha outra versao SBOC germinativo no INDICE",
         "PRO aula 24 p.21: cita VAC sem dose",
-        "rotulo FDA dactinomicina: sem indicacao ovario germinativo (doses de testiculo/GTN/Wilms nao transferidas)"
+        "rotulo FDA dactinomicina: sem indicacao ovario germinativo (doses de testiculo/GTN/Wilms nao transferidas)",
+        "openFDA dactinomicina (set_id 2aaca42a…, 2020-11-13): Wilms 45 mcg/kg; rabdo 15 mcg/kg D1-5; Ewing 1.250 mcg/m²; testículo 1.000 mcg/m²; GTN 12 mcg/kg — sem ovário",
+        "PubMed 2988740 (Slayton, GOG, Cancer 1985) e 2996746 (Gershenson, MDACC, Cancer 1985): abstracts sem dose",
+        "Europe PMC full text (VAC + ovário germinativo): só série japonesa (PMC1968864) com dactinomicina 0,5 mg/m² D1-5 — regime diferente, não usado",
+        "ClinicalTrials.gov (ovarian germ cell + dactinomycin): só ensaios pediátricos multiagente, sem VAC"
       ],
       "observacao": "Provavel intencao 300 mcg/m2 (0,3 mg/m2) D1-5 q4s, mas sem fonte literal. Vincristina 1,5 mg/m2 (max 2 mg) semanal x8-12 sem e ciclofosfamida 150 mg/m2 D1-5 q4s estao na mesma tabela SBOC p.10."
     },
     {
       "texto": "GERMINATIVO EP (disgerminoma selecionado, 3 ciclos): doses não especificadas na SBOC — SEM_FONTE.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 germinativo p.14: 'Esquema EP 3 ciclos' sem tabela propria",
         "SBOC p.10: tabela BEP (etoposideo 100 mg/m2 D1-5 + cisplatina 20 mg/m2 D1-5 q21) - regime diferente, nao transferido",
         "PRO aula 24 p.20: doses do BEP; p.12 'EP se >40 anos' sem dose propria"
       ],
-      "observacao": "Candidato para aprovacao: mesmas doses de E e P da tabela BEP (SBOC p.10), 3 ciclos q21."
+      "observacao": "Candidato para aprovacao: mesmas doses de E e P da tabela BEP (SBOC p.10), 3 ciclos q21.",
+      "classeAnterior": "DECISAO_CLINICA_DR_SILAS",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "EP × 3 no disgerminoma com as doses do EP do pack de testículo (SBOC testículo p. 9). Protocolo ovario-germ-ep-disgerminoma.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 41A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "resolucao": "EP × 3 no disgerminoma com as doses do EP do pack de testículo (SBOC testículo p. 9). Protocolo ovario-germ-ep-disgerminoma."
     },
     {
       "texto": "Mucinoso: oxaliplatina + fluoropirimidina citada sem dose — SEM_FONTE.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026/2025/antiga epitelial p.15: 'oxaliplatina associado a fluoropirimidinas, aos moldes de tratamento de tumores gastrointestinais' sem dose",
         "PRO aula 24 p.7-8: sem dose",
         "rotulos FDA oxaliplatina/capecitabina: so colorretal - transferencia proibida"
       ],
-      "observacao": "SBOC remete a esquemas GI (CAPOX/FOLFOX); usar dose GI exige aprovacao explicita."
+      "observacao": "SBOC remete a esquemas GI (CAPOX/FOLFOX); usar dose GI exige aprovacao explicita.",
+      "classeAnterior": "DECISAO_CLINICA_DR_SILAS",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Mucinoso com CAPOX ou mFOLFOX6 copiando as doses do pack colorretal (SBOC cólon localizado p. 17). Protocolos ovario-epit-mucinoso-capox-adjuvante e ovario-epit-mucinoso-mfolfox6-adjuvante.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 42A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "resolucao": "Mucinoso com CAPOX ou mFOLFOX6 copiando as doses do pack colorretal (SBOC cólon localizado p. 17). Protocolos ovario-epit-mucinoso-capox-adjuvante e ovario-epit-mucinoso-mfolfox6-adjuvante."
     },
     {
       "texto": "Terapia endócrina de manutenção no seroso de baixo grau/endometrioide G1: sem dose (IA preferencial).",
@@ -3227,6 +3599,13 @@
       "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
       "buscasFeitas": [
         "acervo local SBOC: só versões para colaboração 2026 (epitelial v3, germinativo v4); epitelial 2025 v10 FINAL também lida"
+      ]
+    },
+    {
+      "texto": "Mucinoso (CAPOX/mFOLFOX6): número de ciclos em ovário sem fonte — decisão médica (SBOC p. 15 só para o esquema com carboplatina).",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC 2026 epitelial p.15"
       ]
     }
   ],
@@ -3279,14 +3658,25 @@
         "estado": "VERIFICADO"
       },
       "fonteB": {
-        "tipo": "DIRETRIZ",
-        "referencia": "Unidade usual de dactinomicina em mcg (não verificada nesta curadoria)",
+        "tipo": "BULA",
+        "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22dactinomycin%22&limit=1 (set_id 2aaca42a-3b79-4151-a727-83253556a540, effective 2020-11-13)",
         "pagina": null,
-        "trecho": null,
+        "trecho": "Rhabdomyosarcoma: The recommended dose is 15 mcg/kg intravenously once daily for 5 days",
         "estado": "CONFLITANTE"
       },
       "escolhaSeguranca": "Não registrar dose; protocolo VAC fora do pack até verificação em bula.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Buscar a dose correta do VAC e criar o protocolo com fonte. Busca feita: dose de dactinomicina sem fonte literal; protocolo ovario-germ-vac criado com dactinomicina = null (SEM_FONTE). '300 mg/m²' da SBOC tratado como erro.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 40B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "fonteBDetalhe": "Bula FDA: unidade em mcg em todas as indicações; sem indicação em tumor germinativo de ovário (doses de outros tumores não transferidas)."
     }
   ],
   "curadoria": {
@@ -3301,7 +3691,12 @@
       "CONITEC via busca web (Portaria SECTICS 45/2024)",
       "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
       "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
-      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR",
+      "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22dactinomycin%22&limit=1 (set_id 2aaca42a-3b79-4151-a727-83253556a540, effective 2020-11-13)",
+      "PubMed 2988740 (Slayton, GOG 1985)",
+      "PubMed 2996746 (Gershenson 1985)",
+      "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.pdf p.9",
+      "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf p.17"
     ],
     "aprovacaoClinica": null,
     "rodada2": {
@@ -3336,6 +3731,24 @@
       "por": "Claude",
       "achado": "Codex 2026-10-11 (veredito entrega final): cenários misturados no mesmo protocolo",
       "acao": "ovario-germ-veip dividido em ovario-germ-veip-1l-residual, ovario-germ-veip-2l"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 40B (Dr. Silas)",
+      "acao": "criado ovario-germ-vac (vincristina 1,5 mg/m² semanal máx. 2 mg + ciclofosfamida 150 mg/m² D1-5, q28; dactinomicina null/SEM_FONTE). Erro SBOC: dactinomicina '300 mg/m²'"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 41A (Dr. Silas)",
+      "acao": "criado ovario-germ-ep-disgerminoma (etoposídeo 100 + cisplatina 20 mg/m² D1-5 q21 ×3; doses do EP de testículo por decisão)"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 42A (Dr. Silas)",
+      "acao": "criados ovario-epit-mucinoso-capox-adjuvante e ovario-epit-mucinoso-mfolfox6-adjuvante (doses do pack colorretal por decisão); nº de ciclos null"
     }
   ]
 }

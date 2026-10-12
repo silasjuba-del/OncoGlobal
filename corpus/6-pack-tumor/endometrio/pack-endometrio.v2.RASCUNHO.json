@@ -490,7 +490,7 @@
         "intencao": "curativa",
         "modalidades": [
           "QT ± RT (PORTEC-3 ou GOG-258)",
-          "considerar IO + QT se dMMR (ESGO 2025)"
+          "IO + QT se dMMR (ESGO 2025): RUBY ou NRG-GY018 — protocolos endometrio-dmmr-iii-iv-*"
         ],
         "criterio": "Alto risco",
         "fonte": {
@@ -499,6 +499,16 @@
           "pagina": 13,
           "trecho": "O tratamento inicial deve ser a cirurgia e as pacientes são candidatas a",
           "estado": "VERIFICADO"
+        },
+        "decisao": {
+          "texto": "IO + QT incorporada para dMMR III–IV.",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 20B",
+            "pagina": null,
+            "trecho": null,
+            "estado": "VERIFICADO"
+          }
         }
       },
       {
@@ -1320,6 +1330,288 @@
         }
       },
       {
+        "id": "endometrio-dmmr-iii-iv-carbo-pacli-dostarlimabe",
+        "nome": "Carboplatina + paclitaxel + dostarlimabe (RUBY) — dMMR III–IV primário, fase de combinação",
+        "cenario": "adjuvante/primário avançado dMMR III–IV (ESGO 2025)",
+        "linha": "1ª linha (primário avançado)",
+        "criterio": "dMMR/MSI-H, estádio III–IV primário (ressecado com doença residual/alto risco ou não ressecável). RUBY e NRG-GY018 incluíram estádio III–IV primário e recorrência; IIIA–IIIC1 exigiam doença mensurável/avaliável ou histologia especial (NCT03981796).",
+        "drogas": [
+          {
+            "droga": "Dostarlimabe",
+            "dose": 500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Antes da QT no mesmo dia",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22JEMPERLI%22&limit=1 (set_id 095eab9f-545a-4f12-bfb7-19477fb901a5, effective 2025-09-02)",
+              "pagina": null,
+              "trecho": "500 mg every 3 weeks for 6 cycles followed by 1,000 mg monotherapy",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Endometrio-v6-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 13,
+              "trecho": "carboplatina AUC 5 + paclitaxel 175 mg/m² a cada 3 semanas por 6 ciclos",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Endometrio-v6-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 13,
+              "trecho": "carboplatina AUC 5 + paclitaxel 175 mg/m² a cada 3 semanas por 6 ciclos",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "Pré-medicação de paclitaxel conforme protocolo institucional.",
+        "ajusteObrigatorio": "Após 6 ciclos: endometrio-dmmr-iii-iv-dostarlimabe-manutencao (1.000 mg q6s, até 3 anos no total). irAE: TSH/T4L, função hepática e glicemia.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "CP SCTIE/MS nº 104/2026 aberta até 26/10/2026; recomendação preliminar desfavorável. Alternativa SUS: carboplatina + paclitaxel.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Consulta Pública SCTIE/MS nº 104, de 02/10/2026 (DOU 06/10/2026; término 26/10/2026); relatório preliminar — https://www.gov.br/conitec/pt-br/assuntos/participacao-social/consultas-publicas/vigentes",
+            "pagina": null,
+            "trecho": "recomendação preliminar desfavorável à incorporação no SUS do dostarlimabe",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 20B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "ensaio": {
+          "nome": "RUBY",
+          "nct": "NCT03981796",
+          "nctEstado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "endometrio-dmmr-iii-iv-dostarlimabe-manutencao",
+        "nome": "Dostarlimabe — manutenção após RUBY (dMMR III–IV primário)",
+        "cenario": "adjuvante/primário avançado dMMR III–IV (ESGO 2025)",
+        "linha": "manutenção de 1ª linha",
+        "criterio": "dMMR/MSI-H, estádio III–IV primário (ressecado com doença residual/alto risco ou não ressecável). RUBY e NRG-GY018 incluíram estádio III–IV primário e recorrência; IIIA–IIIC1 exigiam doença mensurável/avaliável ou histologia especial (NCT03981796).",
+        "drogas": [
+          {
+            "droga": "Dostarlimabe",
+            "dose": 1000,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22JEMPERLI%22&limit=1 (set_id 095eab9f-545a-4f12-bfb7-19477fb901a5, effective 2025-09-02)",
+              "pagina": null,
+              "trecho": "followed by 1,000 mg monotherapy every 6 weeks for all cycles thereafter",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Até progressão, toxicidade inaceitável ou 3 anos no total (bula FDA). irAE.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "CP SCTIE/MS nº 104/2026 aberta até 26/10/2026; recomendação preliminar desfavorável. Alternativa SUS: carboplatina + paclitaxel.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Consulta Pública SCTIE/MS nº 104, de 02/10/2026 (DOU 06/10/2026; término 26/10/2026); relatório preliminar — https://www.gov.br/conitec/pt-br/assuntos/participacao-social/consultas-publicas/vigentes",
+            "pagina": null,
+            "trecho": "recomendação preliminar desfavorável à incorporação no SUS do dostarlimabe",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 20B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "ensaio": {
+          "nome": "RUBY",
+          "nct": "NCT03981796",
+          "nctEstado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "endometrio-dmmr-iii-iv-carbo-pacli-pembro",
+        "nome": "Carboplatina + paclitaxel + pembrolizumabe (NRG-GY018/KEYNOTE-868) — dMMR III–IV primário, fase de combinação",
+        "cenario": "adjuvante/primário avançado dMMR III–IV (ESGO 2025)",
+        "linha": "1ª linha (primário avançado)",
+        "criterio": "dMMR/MSI-H, estádio III–IV primário (ressecado com doença residual/alto risco ou não ressecável). RUBY e NRG-GY018 incluíram estádio III–IV primário e recorrência; IIIA–IIIC1 exigiam doença mensurável/avaliável ou histologia especial (NCT03981796).",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Endometrio-v6-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 13,
+              "trecho": "carboplatina AUC 5 + paclitaxel 175 mg/m² a cada 3 semanas por 6 ciclos",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "SBOC",
+              "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Endometrio-v6-VERSAO-PARA-COLABORACAO.pdf",
+              "pagina": 13,
+              "trecho": "carboplatina AUC 5 + paclitaxel 175 mg/m² a cada 3 semanas por 6 ciclos",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Antes da QT no mesmo dia",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22PEMBROLIZUMAB%22 — KEYTRUDA IV, set_id 9333c79b-d487-4538-a9f0-71b91a02b287 (effective 2026-07-10)",
+              "pagina": null,
+              "trecho": "Endometrial Carcinoma: 200 mg every 3 weeks or 400 mg every 6 weeks",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "Pré-medicação de paclitaxel conforme protocolo institucional.",
+        "ajusteObrigatorio": "6 ciclos (até 10 se DE/RP com doença mensurável, a critério médico — NRG-GY018). Depois: endometrio-dmmr-iii-iv-pembro-manutencao. irAE.",
+        "numeroCiclosFonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03914612 (NRG-GY018, braço II)",
+          "pagina": null,
+          "trecho": "Treatment repeats every 3 weeks for 6 cycles",
+          "estado": "VERIFICADO"
+        },
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (endométrio) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020184 — decisão do serviço. Alternativa SUS: carboplatina + paclitaxel (endometrio-carbo-pacli-1l).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (endométrio) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 20B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "ensaio": {
+          "nome": "NRG-GY018 / KEYNOTE-868",
+          "nct": "NCT03914612",
+          "nctEstado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "endometrio-dmmr-iii-iv-pembro-manutencao",
+        "nome": "Pembrolizumabe — manutenção após NRG-GY018 (dMMR III–IV primário)",
+        "cenario": "adjuvante/primário avançado dMMR III–IV (ESGO 2025)",
+        "linha": "manutenção de 1ª linha",
+        "criterio": "dMMR/MSI-H, estádio III–IV primário (ressecado com doença residual/alto risco ou não ressecável). RUBY e NRG-GY018 incluíram estádio III–IV primário e recorrência; IIIA–IIIC1 exigiam doença mensurável/avaliável ou histologia especial (NCT03981796).",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 400,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22PEMBROLIZUMAB%22 — KEYTRUDA IV, set_id 9333c79b-d487-4538-a9f0-71b91a02b287 (effective 2026-07-10)",
+              "pagina": null,
+              "trecho": "Endometrial Carcinoma: 200 mg every 3 weeks or 400 mg every 6 weeks",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": 14,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Até 14 ciclos de manutenção (NRG-GY018), progressão ou toxicidade; bula FDA: até 24 meses no total. irAE.",
+        "numeroCiclosFonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03914612 (NRG-GY018, braço II, fase de manutenção)",
+          "pagina": null,
+          "trecho": "Treatment repeats every 6 weeks for up to 14 cycles",
+          "estado": "VERIFICADO"
+        },
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (endométrio) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020184 — decisão do serviço. Alternativa SUS: carboplatina + paclitaxel (endometrio-carbo-pacli-1l).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (endométrio) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 20B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "ensaio": {
+          "nome": "NRG-GY018 / KEYNOTE-868",
+          "nct": "NCT03914612",
+          "nctEstado": "VERIFICADO"
+        }
+      },
+      {
         "numeroCiclos": 6,
         "premedicacao": "",
         "ajusteObrigatorio": "Máximo de 6 ciclos de combinação (bula Imfinzi); depois durvalumabe 1.500 mg a cada 4 semanas. Em pMMR, olaparibe + durvalumabe depende da bula ANVISA. irAE.",
@@ -1410,6 +1702,75 @@
           "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22IMFINZI%22&limit=1",
           "pagina": null,
           "trecho": "followed by IMFINZI 1,500 mg every 4 weeks as a single agent",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "endometrio-durvalumabe-olaparibe-manutencao-1l-pmmr",
+        "nome": "Durvalumabe + olaparibe — manutenção após DUO-E (pMMR) — PROVISÓRIO",
+        "cenario": "III-IV primário ou recorrente pMMR, após 6 ciclos de carboplatina + paclitaxel + durvalumabe sem progressão",
+        "linha": "manutenção de 1ª linha",
+        "provisorio": true,
+        "drogas": [
+          {
+            "droga": "Durvalumabe",
+            "dose": 1500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Bula FDA aprova a manutenção só em dMMR; uso em pMMR pela SBOC p. 14 (DUO-E).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22IMFINZI%22&limit=1",
+              "pagina": null,
+              "trecho": "followed by IMFINZI 1,500 mg every 4 weeks as a single agent",
+              "estado": "INFERIDO"
+            }
+          },
+          {
+            "droga": "Olaparibe",
+            "dose": 300,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "2x/dia, contínuo",
+            "observacao": "PROVISÓRIO: dose da bula FDA de outras indicações (ovário/mama/próstata/pâncreas); sem indicação endometrial em bula. Decisão D-F1-17 19A. Conferir bula ANVISA.",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22LYNPARZA%22&limit=1 (set_id 741ff3e3-dc1a-45a6-84e5-2481b27131aa, effective 2025-07-10)",
+              "pagina": null,
+              "trecho": "Recommended dosage is 300 mg taken orally twice daily",
+              "estado": "INFERIDO"
+            }
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "PROVISÓRIO (dose de olaparibe transferida da bula de outra indicação por decisão médica). Hemograma mensal (olaparibe); irAE (durvalumabe). Fase de combinação: carboplatina + paclitaxel + durvalumabe como em endometrio-carbo-pacli-durvalumabe-1l-dmmr.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de durvalumabe (endométrio) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020184 — decisão do serviço.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para durvalumabe (endométrio) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 19A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "fonteIndicacao": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Endometrio-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "ou sem iPARP na manutenção (Durvalumabe/Olaparibe)",
           "estado": "VERIFICADO"
         }
       },
@@ -1957,13 +2318,26 @@
   "pendencias": [
     {
       "texto": "Olaparibe + durvalumabe manutenção (DUO-E, pMMR): dose de olaparibe sem fonte para endométrio.",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 e Endometrio.txt: olaparibe citado sem dose",
         "ClinicalTrials NCT04269200: braco 'Olaparib tablets' sem dose; descriptionModule sem dose",
         "rotulo FDA Lynparza: sem indicacao endometrial (300 mg 12/12h e de outros tumores - nao transferido)",
         "PRO aula 29 p.3: 'Durvalumabe apenas se dMMR; s. aprov. olaparibe'"
-      ]
+      ],
+      "classeAnterior": "DEPENDE_BULA_ANVISA",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Olaparibe 300 mg VO 2x/dia no DUO-E (pMMR), marcado PROVISÓRIO (dose de bula de outra indicação). Protocolo endometrio-durvalumabe-olaparibe-manutencao-1l-pmmr.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 19A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "resolucao": "Olaparibe 300 mg VO 2x/dia no DUO-E (pMMR), marcado PROVISÓRIO (dose de bula de outra indicação). Protocolo endometrio-durvalumabe-olaparibe-manutencao-1l-pmmr."
     },
     {
       "texto": "SEM_FONTE: doses e fracionamento de braquiterapia e RT pélvica.",
@@ -1975,11 +2349,24 @@
     },
     {
       "texto": "IO + QT adjuvante em dMMR III/IV (ESGO 2025, KEYNOTE-B21 subgrupo) sem dose na SBOC — não criado protocolo.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC endométrio 2026 v6: sem dose para IO adjuvante",
         "KEYNOTE-B21: benefício só em subgrupo dMMR (fora da SBOC)"
-      ]
+      ],
+      "classeAnterior": "DECISAO_CLINICA_DR_SILAS",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Criados protocolos de IO + QT para dMMR III–IV primário (ESGO 2025): RUBY (dostarlimabe) e NRG-GY018/KEYNOTE-868 (pembrolizumabe), doses da bula FDA/registro do ensaio.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 20B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "resolucao": "Criados protocolos de IO + QT para dMMR III–IV primário (ESGO 2025): RUBY (dostarlimabe) e NRG-GY018/KEYNOTE-868 (pembrolizumabe), doses da bula FDA/registro do ensaio."
     },
     {
       "texto": "SBOC endométrio 2026 v6 é versão para colaboração.",
@@ -2046,7 +2433,13 @@
       "ClinicalTrials.gov API v2",
       "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
       "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
-      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR",
+      "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22LYNPARZA%22&limit=1 (set_id 741ff3e3-dc1a-45a6-84e5-2481b27131aa, effective 2025-07-10)",
+      "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22JEMPERLI%22&limit=1 (set_id 095eab9f-545a-4f12-bfb7-19477fb901a5, effective 2025-09-02)",
+      "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22PEMBROLIZUMAB%22 — KEYTRUDA IV, set_id 9333c79b-d487-4538-a9f0-71b91a02b287 (effective 2026-07-10)",
+      "https://clinicaltrials.gov/api/v2/studies/NCT03981796 (RUBY)",
+      "https://clinicaltrials.gov/api/v2/studies/NCT03914612 (NRG-GY018)",
+      "https://clinicaltrials.gov/api/v2/studies/NCT04269200 (DUO-E)"
     ],
     "aprovacaoClinica": null,
     "rodada2": {
@@ -2089,6 +2482,18 @@
       "por": "Claude",
       "achado": "Conferência MOC 2026 item 8",
       "acao": "fulvestranto 250 mg ratificado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 19A (Dr. Silas)",
+      "acao": "criado endometrio-durvalumabe-olaparibe-manutencao-1l-pmmr (olaparibe 300 mg VO 12/12h PROVISÓRIO + durvalumabe 1.500 mg q28)"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 20B (Dr. Silas)",
+      "acao": "criados endometrio-dmmr-iii-iv-carbo-pacli-dostarlimabe, -dostarlimabe-manutencao, -carbo-pacli-pembro, -pembro-manutencao (cenário adjuvante/primário avançado dMMR III–IV)"
     }
   ]
 }

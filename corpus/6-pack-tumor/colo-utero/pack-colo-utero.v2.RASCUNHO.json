@@ -1918,17 +1918,19 @@
     },
     {
       "texto": "SEM_FONTE: p16/HPV na SBOC colo 2026 — não incluído (não usar p16 como critério de estadiamento).",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC colo 2026 v4, Colo-do-utero.txt e Câncer_de_Colo_Uterino.txt: p16 não usado no estadiamento"
-      ]
+      ],
+      "resolucao": "p16/HPV só no diagnóstico, nunca no estadiamento (12A)."
     },
     {
       "texto": "KEYNOTE-A18: SG imatura na versão SBOC; atualização não incorporada.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC colo 2026 v4 (SG imatura); atualização de SG fora da SBOC exige decisão de incorporar fonte externa"
-      ]
+      ],
+      "resolucao": "Aguardar atualização SBOC (13A)."
     },
     {
       "texto": "SBOC colo 2026 v4 é versão para colaboração — revisar ao sair a final.",

@@ -1879,12 +1879,13 @@
   "pendencias": [
     {
       "texto": "FAIXA_NA_FONTE: oxaliplatina 85–100 mg/m² no GEMOX",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 vias biliares p.19",
         "Onco PRO 2026 aula 09 (85 mg/m² D2 q14 — outro calendário)"
       ],
-      "nota": "Registrado o limite inferior (85 mg/m²)."
+      "nota": "Registrado o limite inferior (85 mg/m²).",
+      "resolucao": "Oxaliplatina 85 mg/m² (44A)."
     },
     {
       "texto": "SEM_FONTE: número de ciclos do GemCis sem IO; dose de RT adjuvante; método de obtenção histológica; esquemas neoadjuvantes",

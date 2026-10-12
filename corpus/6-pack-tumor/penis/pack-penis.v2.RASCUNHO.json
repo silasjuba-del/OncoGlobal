@@ -626,6 +626,112 @@
     ],
     "protocolos": [
       {
+        "id": "penis-5fu-creme-ta-tis",
+        "nome": "Fluoruracila creme 5% tópica (Ta/Tis)",
+        "cenario": "localizado_Ta_Tis",
+        "linha": "tratamento local de preservação de órgão",
+        "drogas": [
+          {
+            "droga": "Fluoruracila creme 5%",
+            "dose": 5,
+            "unidade": "% creme (camada suficiente para cobrir a lesão)",
+            "via": "topica",
+            "dias": "2x/dia por 3 a 6 semanas (até 10 a 12 semanas)",
+            "observacao": "Posologia da bula FDA para carcinoma basocelular superficial (indicação mais próxima; sem indicação em pênis). Aplicar com luva ou aplicador não metálico; lavar as mãos.",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22FLUOROURACIL%22+AND+openfda.route:%22TOPICAL%22 — Fluorouracil Cream 5%, set_id 06475bd8-66d9-4f88-90e4-b367480dab39 (effective 2021-11-04)",
+              "pagina": null,
+              "trecho": "Apply cream twice daily in an amount sufficient to cover the lesions.",
+              "estado": "INFERIDO"
+            }
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": 1,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Bula FDA (sBCC): continuar por pelo menos 3 a 6 semanas; até 10 a 12 semanas. Seguimento clínico/biópsia para confirmar resposta.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "observacao": "Uso tópico ambulatorial; cobertura SUS (APAC/RENAME) não verificada.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 45A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "fonteIndicacao": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Para pacientes com Ta ou Tis, devem ser utilizadas técnicas de preservação de órgão.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "penis-imiquimode-creme-ta-tis",
+        "nome": "Imiquimode creme 5% tópico (Ta/Tis)",
+        "cenario": "localizado_Ta_Tis",
+        "linha": "tratamento local de preservação de órgão",
+        "drogas": [
+          {
+            "droga": "Imiquimode creme 5%",
+            "dose": 5,
+            "unidade": "% creme (1 sachê por aplicação)",
+            "via": "topica",
+            "dias": "1x/dia ao deitar, 5x/semana por 6 semanas",
+            "observacao": "Posologia da bula FDA para carcinoma basocelular superficial; a bula exclui pele anogenital nessa indicação (para verruga genital: 3x/semana até 16 semanas). Uso em pênis = off-label.",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22IMIQUIMOD%22 — Imiquimod Cream 5%, set_id 47d3045f-a145-4095-bb8a-c67ba1ff3bda (effective 2025-07-29)",
+              "pagina": null,
+              "trecho": "Apply once daily before bedtime 5 times per week for a full 6 weeks",
+              "estado": "INFERIDO"
+            }
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": 1,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Lavar a área e secar 10 min antes; reação local intensa: pausar. Off-label em pele genital (bula FDA). Seguimento clínico/biópsia.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "observacao": "Uso tópico ambulatorial; cobertura SUS (APAC/RENAME) não verificada.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 45A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "fonteIndicacao": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Para pacientes com Ta ou Tis, devem ser utilizadas técnicas de preservação de órgão.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
         "id": "penis-cisplatina-5fu",
         "nome": "Cisplatina + 5-FU",
         "cenario": "metastatico",
@@ -1972,10 +2078,23 @@
     },
     {
       "texto": "Doses de 5-FU tópico e imiquimode tópico (Ta/Tis) ausentes na SBOC — não incluídos como protocolo.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2025 pênis: sem dose tópica"
-      ]
+      ],
+      "classeAnterior": "DECISAO_CLINICA_DR_SILAS",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Incluídos 5-FU creme e imiquimode creme para Ta/Tis com posologia da bula FDA (penis-5fu-creme-ta-tis, penis-imiquimode-creme-ta-tis).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 45A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "resolucao": "Incluídos 5-FU creme e imiquimode creme para Ta/Tis com posologia da bula FDA (penis-5fu-creme-ta-tis, penis-imiquimode-creme-ta-tis)."
     },
     {
       "texto": "Conduta específica para cN1 vem só da aula PRO (CURSO/INFERIDO); SBOC não detalha cN1 isoladamente.",
@@ -2018,6 +2137,14 @@
       "buscasFeitas": [
         "SBOC pênis 2025: sem classificação",
         "ASCO 2020 Emetic Risk Chart inacessível a partir deste ambiente"
+      ]
+    },
+    {
+      "texto": "5-FU creme e imiquimode creme (Ta/Tis): unidade '% creme' e via 'topica' fora do enum numérico usual; cobertura SUS não verificada; bula FDA do imiquimode exclui pele anogenital no sBCC (off-label).",
+      "classe": "DEPENDE_BULA_ANVISA",
+      "buscasFeitas": [
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22FLUOROURACIL%22+AND+openfda.route:%22TOPICAL%22 — Fluorouracil Cream 5%, set_id 06475bd8-66d9-4f88-90e4-b367480dab39 (effective 2021-11-04)",
+        "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22IMIQUIMOD%22 — Imiquimod Cream 5%, set_id 47d3045f-a145-4095-bb8a-c67ba1ff3bda (effective 2025-07-29)"
       ]
     }
   ],
@@ -2113,7 +2240,9 @@
       "https://clinicaltrials.gov/api/v2/studies?query.term=EPIC-A+cemiplimab+penile (sem resultado)",
       "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
       "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
-      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR",
+      "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22FLUOROURACIL%22+AND+openfda.route:%22TOPICAL%22 — Fluorouracil Cream 5%, set_id 06475bd8-66d9-4f88-90e4-b367480dab39 (effective 2021-11-04)",
+      "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22IMIQUIMOD%22 — Imiquimod Cream 5%, set_id 47d3045f-a145-4095-bb8a-c67ba1ff3bda (effective 2025-07-29)"
     ],
     "aprovacaoClinica": null,
     "rodada2": {
@@ -2158,6 +2287,12 @@
       "por": "Claude",
       "achado": "Conferência MOC 2026 item 3",
       "acao": "seguimento do MOC acrescentado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 45A (Dr. Silas)",
+      "acao": "criados penis-5fu-creme-ta-tis (5% 2x/dia 3-6 sem) e penis-imiquimode-creme-ta-tis (5% 5x/sem × 6 sem), posologia de bula FDA (sBCC)"
     }
   ]
 }
