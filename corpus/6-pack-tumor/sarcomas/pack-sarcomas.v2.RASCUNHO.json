@@ -1048,6 +1048,16 @@
           "pagina": 13,
           "trecho": "Doxorrubicina 60 mg/m² EV D1 Dacarbazina 750-1.000 mg/m² EV D1",
           "estado": "VERIFICADO"
+        },
+        "decisao": {
+          "texto": "DTIC 750 mg/m², 3 ciclos.",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 55A",
+            "pagina": null,
+            "trecho": null,
+            "estado": "VERIFICADO"
+          }
         }
       },
       {
@@ -1331,6 +1341,74 @@
         }
       },
       {
+        "id": "sarcomas-pm-gem-dtic",
+        "nome": "Gencitabina (taxa fixa) + dacarbazina",
+        "cenario": "paliativo — partes moles avançado previamente tratado",
+        "linha": "2ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 (taxa fixa 10 mg/m²/min = 180 min)",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "García-del-Muro X et al. J Clin Oncol 2011;29(18):2528-33 (GEIS), PMID 21606430 — abstract PubMed",
+              "pagina": null,
+              "trecho": "fixed-dose rate gemcitabine (10 mg/m2/min) at 1800 mg/m2",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Dacarbazina",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, após a gencitabina",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "García-del-Muro X et al. J Clin Oncol 2011;29(18):2528-33 (GEIS), PMID 21606430 — abstract PubMed",
+              "pagina": null,
+              "trecho": "followed by DTIC at 500 mg/m2 every 2 weeks",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "Antiemético (dacarbazina).",
+        "ajusteObrigatorio": "Hemograma antes de cada ciclo (granulocitopenia foi o evento grave mais comum). Até progressão ou toxicidade. SBOC p. 13 grafa 'D1 e D15' a cada 2 semanas — erro; vale D1 a cada 14 dias (ensaio original).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.029-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA DE PARTES MOLES - DOENÇA INOPERÁVEL, METASTÁTICA OU RECIDIVADA",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 54B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "fonteSBOC": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Gencitabina 1.800 mg/m² EV D1 e D15 Dacarbazina 500 mg/m² EV D1 e D15",
+          "estado": "CONFLITANTE"
+        }
+      },
+      {
         "id": "sarcomas-pm-trabectedina",
         "nome": "Trabectedina",
         "cenario": "paliativo — lipossarcoma ou leiomiossarcoma irressecável/metastático após antraciclina",
@@ -1546,7 +1624,7 @@
         "cicloDias": 35,
         "numeroCiclos": 2,
         "premedicacao": null,
-        "ajusteObrigatorio": "Metotrexato em alta dose exige resgate com leucovorina, hidratação/alcalinização e dosagem sérica — SEM_FONTE no pack (conferir bula/protocolo institucional). HD-MTX pode ser difícil em adultos.",
+        "ajusteObrigatorio": "Metotrexato em alta dose exige resgate com leucovorina, hidratação/alcalinização e dosagem sérica — por protocolo institucional (D-F1-17 56A; protocolo institucional a criar). HD-MTX pode ser difícil em adultos.",
         "fichaId": null,
         "sus": {
           "disponivel": "sim",
@@ -2750,22 +2828,47 @@
       ]
     },
     {
-      "texto": "Mesna (proporção 20% × 3) e resgate com leucovorina preenchidos pela bula FDA. Falta só o protocolo de hidratação/alcalinização do MTX em alta dose (bula ANVISA ou protocolo institucional).",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "texto": "MTX em alta dose: hidratação/alcalinização por protocolo institucional (D-F1-17 56A) — criar protocolo institucional. Mesna e resgate com leucovorina já preenchidos pela bula FDA.",
+      "classe": "TAREFA_CURADORIA",
       "buscasFeitas": [
         "Bula FDA MESNEX",
         "Bula FDA leucovorina",
         "SBOC sarcomas ósseos"
-      ]
+      ],
+      "classeAnterior": "DEPENDE_BULA_ANVISA",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Hidratação/alcalinização do MTX em alta dose por protocolo institucional.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 56A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "texto": "Trabectedina entrou pela bula FDA. Gencitabina + dacarbazina segue fora: SBOC traz D1 e D15 com intervalo de 2 semanas (incoerente) e não há bula/ensaio aberto lido — curador decide se busca a referência original.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC partes moles p.13",
         "Onco PRO aula 78",
         "openFDA"
-      ]
+      ],
+      "classeAnterior": "DECISAO_CLINICA_DR_SILAS",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Gencitabina + dacarbazina criada (sarcomas-pm-gem-dtic) com a referência original (PMID 21606430).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 54B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "resolucao": "Gencitabina + dacarbazina criada (sarcomas-pm-gem-dtic) com a referência original (PMID 21606430)."
     },
     {
       "texto": "Larotrectinibe, imatinibe (DFSP) e denosumabe (TCG) com dose da bula FDA na indicação. Seguem sem dose: imatinibe no cordoma e regorafenibe no osteossarcoma (sem indicação em bula FDA; dependem de bula ANVISA ou ensaio).",
@@ -2779,11 +2882,12 @@
     },
     {
       "texto": "Sem id no catálogo v1.1: USG de partes moles, RM de membro, RX de segmento ósseo, NGS/TMB e testes germinativos (códigos SIGTAP anotados nos itens). Inclusão depende de D-F1-02.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "catálogo v1.1",
         "SIGTAP 09/2026"
-      ]
+      ],
+      "resolucao": "Catálogo v1.3 inclui RM de membros, USG de articulação/partes moles e RX de segmentos (57A/60A); NGS/germinativos sem código SUS (59A)."
     },
     {
       "texto": "Imatinibe no cordoma: sem fonte no MOC 2026 e na bula.",
@@ -2835,7 +2939,24 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "Não registrar protocolo (D1 e D15 com intervalo de 2 semanas é incoerente); conferir referência original",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Buscar a referência original e criar o protocolo. Confirmado no abstract (García-del-Muro, JCO 2011): gencitabina 1.800 mg/m² em taxa fixa (180 min) + DTIC 500 mg/m² D1 a cada 2 semanas. 'D1 e D15' da SBOC = erro.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 54B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "fonteC": {
+        "tipo": "ENSAIO",
+        "referencia": "García-del-Muro X et al. J Clin Oncol 2011;29(18):2528-33 (GEIS), PMID 21606430 — abstract PubMed",
+        "pagina": null,
+        "trecho": "followed by DTIC at 500 mg/m2 every 2 weeks",
+        "estado": "VERIFICADO"
+      }
     },
     {
       "tema": "Doxorrubicina + dacarbazina: número de ciclos na linha paliativa",
@@ -2854,7 +2975,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "Registrar 1ª linha com a menor dose (750 mg/m²) e 3 ciclos como na tabela; reavaliar com o curador",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Doxorrubicina + DTIC com DTIC 750 mg/m² e 3 ciclos.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 55A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     }
   ],
   "curadoria": {
@@ -2870,7 +3001,8 @@
       "Bulas FDA YONDELIS, VITRAKVI, Gleevec, XGEVA, MESNEX, Leucovorin (openFDA)",
       "ClinicalTrials.gov API v2 NCT02520128",
       "Portaria SCTIE/MS 72/2021",
-      "Painel de Demandas Conitec 15/06/2026"
+      "Painel de Demandas Conitec 15/06/2026",
+      "PubMed 21606430 — García-del-Muro, JCO 2011 (abstract)"
     ],
     "aprovacaoClinica": null,
     "rodadaPendencias": [
@@ -2926,6 +3058,24 @@
       "por": "Claude",
       "achado": "Decisão do Dr. Silas",
       "acao": "imatinibe no cordoma: uso off-label registrado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 54B (Dr. Silas)",
+      "acao": "criado sarcomas-pm-gem-dtic (gencitabina 1.800 mg/m² taxa fixa 180 min + DTIC 500 mg/m² D1 q14); erro SBOC 'D1 e D15' registrado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 55A (Dr. Silas)",
+      "acao": "sarcomas-pm-doxo-dtic: DTIC 750 mg/m² × 3 ciclos ratificado; conflito fechado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 56A (Dr. Silas)",
+      "acao": "MTX alta dose: hidratação/alcalinização por protocolo institucional; pendência 'criar protocolo institucional'"
     }
   ]
 }

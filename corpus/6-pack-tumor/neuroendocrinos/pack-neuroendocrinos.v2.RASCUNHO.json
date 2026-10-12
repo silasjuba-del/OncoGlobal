@@ -1633,11 +1633,12 @@
     },
     {
       "texto": "pNET: indicação de sunitinibe/everolimo/CAPTEM apoiada no curso PRO + bulas (INFERIDO); validar com ENETS/NCCN.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2025 GEP-NET",
         "Onco PRO 2026 aula 21"
-      ]
+      ],
+      "resolucao": "Provisório até validação ENETS/NCCN (39A)."
     }
   ],
   "conflitos": [

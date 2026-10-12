@@ -4096,26 +4096,29 @@
     },
     {
       "texto": "Edição AJCC: SBOC 2026 não declara; 8ª vem do curso (INFERIDO).",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 cólon localizado/avançado e reto",
         "Onco PRO 2026 aula 12"
-      ]
+      ],
+      "resolucao": "AJCC 8ª edição (17A)."
     },
     {
       "texto": "Fichas institucionais FOLFOX e FOLFIRI paliativas sem bolus de 5-FU 400 mg/m²; ficha FOLFOXIRI com LV 400 — revisar fichas (fora do WRITE_SET).",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "corpus/fichas/colon-reto",
         "SBOC 2026"
-      ]
+      ],
+      "resolucao": "Sem bolus, leucovorina 200 (TRIBE) (14A)."
     },
     {
       "texto": "deGramont '1.200 mg/m² 46 h' da SBOC (p.12) omitido até esclarecimento.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 cólon localizado p.12"
-      ]
+      ],
+      "resolucao": "LV5FU2 fora até esclarecer (18A)."
     }
   ],
   "conflitos": [
@@ -4138,7 +4141,17 @@
       },
       "fonteBDetalhe": "Ficha: LV 400, sem bolus, 5-FU 3.200 46 h (FOLFOXIRI clássico/TRIBE não usa bolus)",
       "escolhaSeguranca": "Omitir o bolus no pack (menor exposição a 5-FU); LV e bolus para decisão do médico.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Sem bolus, leucovorina 200 (TRIBE) (14A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "mFOLFOX6 e FOLFIRI — bolus de 5-FU 400 mg/m²",
@@ -4207,7 +4220,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "Pack usa o esquema do CheckMate-8HW descrito na própria SBOC p.17 (indução de 4 doses e depois nivolumabe 480 mg q4s). O médico confirma.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Esquema CheckMate-8HW (16A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Capecitabina — 1.000 × 1.250 mg/m² 12/12h",
@@ -4246,7 +4269,17 @@
       },
       "fonteBDetalhe": "O LV5FU2 original usa 600 mg/m² em 22 h D1–D2; 1.200 em 46 h pode ser dose diária mal transcrita",
       "escolhaSeguranca": "Esquema não entra no pack; usar o deGramont modificado.",
-      "decisaoNecessaria": false
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "LV5FU2 fora até esclarecer (18A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     }
   ],
   "curadoria": {

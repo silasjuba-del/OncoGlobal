@@ -1432,7 +1432,7 @@
             "dose": 3,
             "unidade": "mg/kg",
             "via": "EV",
-            "dias": "D1, D15, D28",
+            "dias": "D1, D15, D29",
             "observacao": "SBOC escreve D28; ver conflitos"
           },
           {
@@ -1466,11 +1466,11 @@
           "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
           "pagina": 20,
           "trecho": "Nivolumabe 3 mg/kg EV D1, D15 e D28 Ipilimumabe 1 mg/kg EV D1",
-          "estado": "CONFLITANTE"
+          "estado": "VERIFICADO"
         },
         "duracao": "até progressão/toxicidade",
-        "doseVerificada": false,
-        "calendarioExecutavel": false,
+        "doseVerificada": true,
+        "calendarioExecutavel": true,
         "motivoCalendario": "dúvida D28/D29 declarada na própria fonte"
       },
       {
@@ -2306,19 +2306,21 @@
     },
     {
       "texto": "FAIXA_NA_FONTE: tislelizumabe + QT (cisplatina 60–80; 5-FU 750–800) e paclitaxel 2ª linha (80–100 mg/m²)",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 esôfago p.20/22",
         "bula FDA TEVIMBRA (mesmas faixas)"
       ],
-      "nota": "Doses registradas pelo limite inferior da faixa; escolha final do médico."
+      "nota": "Doses registradas pelo limite inferior da faixa; escolha final do médico.",
+      "resolucao": "Limite inferior (24A)."
     },
     {
       "texto": "INFERIDO: doses de cisplatina+5-FU isolado (PD-L1 negativo) tomadas do backbone da tabela de 1ª linha",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 esôfago p.20-22 (CF isolado sem tabela própria)"
-      ]
+      ],
+      "resolucao": "Backbone 80/800 (25A)."
     },
     {
       "texto": "SEM_ID_NO_CATALOGO: ecoendoscopia, laparoscopia diagnóstica, genotipagem DPYD",
@@ -2366,11 +2368,12 @@
     },
     {
       "texto": "Fichas do serviço divergentes (FLOT 5-FU 2.400; irinotecano 350 q21) — decisão do Dr. Silas",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "corpus/fichas",
         "SBOC 2026 esôfago"
-      ]
+      ],
+      "resolucao": "FLOT 2.400/46 h; irinotecano pela SBOC (D-F1-16)."
     }
   ],
   "conflitos": [
@@ -2391,7 +2394,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "50,4 Gy fica restrito à QT/RT definitiva; CROSS neoadjuvante = 41,4 Gy. A tabela de doença localmente avançada (p.17) reaproveita os esquemas definitivos sem dose de RT: para cisplatina+5-FU e mFOLFOX4 neoadjuvantes, RT = null (SEM_FONTE). Cisplatina+5-FU não é 'CROSS-like'.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Radioterapia é aceno geral; mantida a separação 41,4 Gy (CROSS) × 50,4 Gy (definitiva).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Calendário de nivolumabe + cisplatina + 5-FU",
@@ -2437,7 +2450,7 @@
         "estado": "DADO_AUSENTE"
       },
       "escolhaSeguranca": "Mantido como na SBOC; conferir se D28 deveria ser D29 (intervalo de 14 dias).",
-      "decisaoNecessaria": true,
+      "decisaoNecessaria": false,
       "resolucao": "Bula FDA OPDIVO dá nivolumabe 3 mg/kg a cada 2 semanas com ipilimumabe 1 mg/kg a cada 6 semanas (D1, D15, D29); campo 'dias' mantido como na SBOC até o médico confirmar.",
       "fonteC": {
         "tipo": "BULA",
@@ -2445,6 +2458,16 @@
         "pagina": null,
         "trecho": "3 mg/kg every 2 weeks or 360 mg every 3 weeks with ipilimumab 1",
         "estado": "VERIFICADO"
+      },
+      "decisao": {
+        "texto": "D29, intervalo de 14 dias (21A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
       }
     },
     {
@@ -2466,10 +2489,10 @@
       "escolhaSeguranca": "Pack registra 2.600 mg/m² (SBOC); ficha não editada (fora do WRITE_SET). Médico decide qual vale no serviço.",
       "decisaoNecessaria": false,
       "decisao": {
-        "texto": "FLOT: 2.400 mg/m² em 46 h (serviço). Irinotecano: seguir a SBOC.",
+        "texto": "FLOT 2.400/46 h; irinotecano pela SBOC (D-F1-16).",
         "fonte": {
           "tipo": "DECISAO_MEDICA",
-          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
           "pagina": null,
           "trecho": null,
           "estado": "VERIFICADO"
@@ -2495,10 +2518,10 @@
       "escolhaSeguranca": "Pack registra 150 mg/m² q14 (SBOC). Ficha 350 mg/m² q21 não tem respaldo nesta diretriz.",
       "decisaoNecessaria": false,
       "decisao": {
-        "texto": "FLOT: 2.400 mg/m² em 46 h (serviço). Irinotecano: seguir a SBOC.",
+        "texto": "FLOT 2.400/46 h; irinotecano pela SBOC (D-F1-16).",
         "fonte": {
           "tipo": "DECISAO_MEDICA",
-          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
           "pagina": null,
           "trecho": null,
           "estado": "VERIFICADO"
@@ -2543,6 +2566,12 @@
       "por": "Claude",
       "achado": "Codex 2026-10-11 (veredito entrega final): A04 conflito declarado mantido como VERIFICADO",
       "acao": "fonte.estado → CONFLITANTE; doseVerificada → false"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "D-F1-17",
+      "acao": "nivolumabe + ipilimumabe: D29 (21A)"
     }
   ]
 }

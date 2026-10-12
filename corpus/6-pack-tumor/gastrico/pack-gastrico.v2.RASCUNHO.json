@@ -805,7 +805,14 @@
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1",
-            "observacao": "faixa na fonte 75–100 mg/m² (SBOC p.7); registrado o limite inferior — médico escolhe na faixa"
+            "observacao": "faixa na fonte 75–100 mg/m² (SBOC p.7); registrado o limite inferior — médico escolhe na faixa",
+            "fonteDose": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "5-FU infusão contínua",
@@ -1966,14 +1973,6 @@
             "observacao": ""
           },
           {
-            "droga": "5-FU bolus",
-            "dose": 400,
-            "unidade": "mg/m2",
-            "via": "EV",
-            "dias": "D1",
-            "observacao": "presente só na tabela de doença avançada — ver conflitos"
-          },
-          {
             "droga": "5-FU infusão contínua 46 h",
             "dose": 2400,
             "unidade": "mg/m2",
@@ -2015,9 +2014,9 @@
           "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
           "pagina": 8,
           "trecho": "5-Fluorouracil 400 mg/m² EV (bolus) D1 5-Fluorouracil 2.600 mg/m² EV",
-          "estado": "CONFLITANTE"
+          "estado": "VERIFICADO"
         },
-        "doseVerificada": false,
+        "doseVerificada": true,
         "pendencia": "FONTE_CONFLITANTE",
         "notaServico": "Dose do serviço: 5-FU 2.400 mg/m² em 46 h (decisão do Dr. Silas, D-F1-16); SBOC/MOC: 2.600 mg/m² em 24 h."
       },
@@ -3445,20 +3444,22 @@
   "pendencias": [
     {
       "texto": "CONFLITANTE: FLOT paliativo com 5-FU bolus 400 mg/m² (só na tabela de doença avançada)",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 estômago avançado p.8",
         "SBOC 2025 v7",
         "Onco PRO 2026 aula 05"
-      ]
+      ],
+      "resolucao": "FLOT paliativo sem bolus, igual ao perioperatório (26A)."
     },
     {
       "texto": "FAIXA_NA_FONTE: cisplatina 75–100 mg/m² no CF perioperatório",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 estômago localizado p.7"
       ],
-      "nota": "Registrado o limite inferior (75 mg/m²)."
+      "nota": "Registrado o limite inferior (75 mg/m²).",
+      "resolucao": "Cisplatina 75 mg/m² (27A)."
     },
     {
       "texto": "SEM_ID_NO_CATALOGO: ecoendoscopia, videolaparoscopia com citologia, NTRK, DPYD",
@@ -3490,18 +3491,20 @@
     },
     {
       "texto": "Fichas do serviço divergentes da SBOC (FLOT 5-FU 2.400; mDCF institucional; irinotecano 180 q14)",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "corpus/fichas",
         "SBOC 2026 estômago"
-      ]
+      ],
+      "resolucao": "FLOT 2.400/46 h; irinotecano pela SBOC; mDCF de Shah com cisplatina no D3 (D-F1-15/16)."
     },
     {
       "texto": "Pembrolizumabe + QT e tislelizumabe + QT descritos com CAPOX como exemplo; a SBOC permite qualquer fluoropirimidina + platina",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 estômago avançado p.8-9"
-      ]
+      ],
+      "resolucao": "Qualquer fluoropirimidina + platina (29A)."
     }
   ],
   "conflitos": [
@@ -3588,10 +3591,10 @@
       "escolhaSeguranca": "Protocolo paliativo marcado CONFLITANTE (doseVerificada=false). O FLOT perioperatório não tem bolus; não transferir entre cenários — médico decide.",
       "decisaoNecessaria": false,
       "decisao": {
-        "texto": "FLOT: 2.400 mg/m² em 46 h (serviço). Irinotecano: seguir a SBOC.",
+        "texto": "FLOT paliativo sem bolus, igual ao perioperatório (26A).",
         "fonte": {
           "tipo": "DECISAO_MEDICA",
-          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
           "pagina": null,
           "trecho": null,
           "estado": "VERIFICADO"
@@ -3636,10 +3639,10 @@
       "escolhaSeguranca": "Pack registra a SBOC (5-FU 400 bolus D1 + 1.000 mg/m²/dia D1–D2); ficha institucional preservada para decisão do Dr. Silas.",
       "decisaoNecessaria": false,
       "decisao": {
-        "texto": "Cisplatina no D3 (esquema de Shah, MOC).",
+        "texto": "FLOT 2.400/46 h; irinotecano pela SBOC; mDCF de Shah com cisplatina no D3 (D-F1-15/16).",
         "fonte": {
           "tipo": "DECISAO_MEDICA",
-          "referencia": "Dr. Silas Negrão, 2026-10-12 (fechamento do tópico corpus F1)",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
           "pagina": null,
           "trecho": null,
           "estado": "VERIFICADO"
@@ -3665,10 +3668,10 @@
       "escolhaSeguranca": "Pack registra doses SBOC; fichas não editadas.",
       "decisaoNecessaria": false,
       "decisao": {
-        "texto": "FLOT: 2.400 mg/m² em 46 h (serviço). Irinotecano: seguir a SBOC.",
+        "texto": "FLOT 2.400/46 h; irinotecano pela SBOC; mDCF de Shah com cisplatina no D3 (D-F1-15/16).",
         "fonte": {
           "tipo": "DECISAO_MEDICA",
-          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
           "pagina": null,
           "trecho": null,
           "estado": "VERIFICADO"
@@ -3712,7 +3715,17 @@
       },
       "detalhe": "MOC (Shah): docetaxel 40 D1, cisplatina 40 D3, bolus 5-FU 400 + leucovorin 400 + 5-FU 2.000 em 48 h, a cada 14 dias. Pack (SBOC): cisplatina D2; 5-FU 1.000/dia D1–D2 (= 2.000 em 48 h).",
       "escolhaSeguranca": "Doses totais coincidem; diverge o dia da cisplatina (D2 × D3). Manter a SBOC até decisão.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Cisplatina no D3 (esquema de Shah).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-15)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     }
   ],
   "curadoria": {
@@ -3783,6 +3796,12 @@
       "por": "Claude",
       "achado": "Decisão do Dr. Silas",
       "acao": "mDCF: cisplatina 40 mg/m² no D3"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "D-F1-17",
+      "acao": "FLOT paliativo sem bolus (26A)"
     }
   ]
 }

@@ -1562,10 +1562,11 @@
   "pendencias": [
     {
       "texto": "Doses de atezolizumabe, bevacizumabe, durvalumabe, tremelimumabe, regorafenibe, cabozantinibe e ramucirumabe vindas de rótulo FDA (openFDA); bula ANVISA não consultada",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "openFDA (rótulos citados nos protocolos)"
-      ]
+      ],
+      "resolucao": "Bula FDA provisória até conferência ANVISA (1A, D-F1-16)."
     },
     {
       "texto": "SEM_FONTE: dose de SBRT e de RT paliativa",

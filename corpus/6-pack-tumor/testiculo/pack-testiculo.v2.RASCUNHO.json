@@ -3201,24 +3201,27 @@
     },
     {
       "texto": "Carboplatina AUC 7 × 2 ciclos: não citada na SBOC 2026 (só dose única) — não incluída",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 v3: só dose única"
-      ]
+      ],
+      "resolucao": "Resolvido pelo MOC 2026 (conferência)."
     },
     {
       "texto": "BEP × 2 no não seminoma EC I: citado só no curso (aula 70 pág. 9); SBOC 2026 recomenda BEP × 1 — não incluído como protocolo",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 v3: BEP ×1; aula 70 p.9: BEP ×2"
-      ]
+      ],
+      "resolucao": "Resolvido pelo MOC 2026 (conferência)."
     },
     {
       "texto": "Esquema de intensificação GETUG-13 (alto risco com declínio desfavorável): sem doses na SBOC — não incluído como protocolo",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 v3: sem doses do GETUG-13 (NCT00104676 no pack); esquema de centro de referência"
-      ]
+      ],
+      "resolucao": "Resolvido pelo MOC 2026 (conferência)."
     },
     {
       "texto": "Frações das RT de 20 Gy e 30-36 Gy não especificadas na SBOC — SEM_FONTE",
@@ -3229,17 +3232,19 @@
     },
     {
       "texto": "USG de bolsa escrotal, orquiectomia inguinal, painel IHQ, i(12p) e DLCO só têm apoio do curso (INFERIDO); SBOC 2026 não os cita",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 v3, Testiculo_sboc.txt, Testiculos-1.txt: itens não citados; apoio só do curso"
-      ]
+      ],
+      "resolucao": "Condicionais, provisórios (58A)."
     },
     {
       "texto": "Audiometria (cisplatina) e ajuste renal da bleomicina apoiados em rótulo FDA (openFDA); bula ANVISA não consultada",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "PROVISORIA_BULA_FDA",
       "buscasFeitas": [
         "openFDA cisplatina e bleomicina"
-      ]
+      ],
+      "resolucao": "Bula FDA provisória (resposta 1)."
     },
     {
       "texto": "DLCO sem id próprio no catálogo; mapeado em ESPIROMETRIA (prova de função pulmonar completa)",
@@ -3266,10 +3271,11 @@
     },
     {
       "texto": "Seguimento SBOC pág. 25 não estratifica por histologia nem por modalidade de tratamento (vigilância × QT)",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 p.25: tabela única de seguimento"
-      ]
+      ],
+      "resolucao": "Resolvido pelo MOC 2026 (conferência)."
     }
   ],
   "conflitos": [

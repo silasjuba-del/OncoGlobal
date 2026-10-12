@@ -35,7 +35,8 @@
       "localizado_neoadjuvante",
       "localmente_avancado",
       "metastatico",
-      "cdis"
+      "cdis",
+      "gestacao"
     ],
     "limitesAplicabilidade": "Adulto, mulher ou homem. Não cobre sarcoma/filoides, linfoma de mama, gestação (aula PRO 41 não incorporada) nem doses de fármacos sem aprovação Anvisa. Doses de cada cenário não se transferem entre cenários. Pack propõe; médico decide."
   },
@@ -781,6 +782,34 @@
           "pagina": 21,
           "trecho": "O tratamento padrão é a ressecção cirúrgica completa",
           "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Câncer de mama na gestação (diagnóstico na gestação, no 1º ano pós-parto ou na lactação)",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia em qualquer trimestre",
+          "QT a partir do 2º trimestre (após 14 semanas)",
+          "RT adiada para o pós-parto",
+          "anti-HER2, hormonioterapia, anti-PD-(L)1, iPARP e ADC após o parto"
+        ],
+        "criterio": "Mesma indicação da não gestante por subtipo e estádio, respeitando a idade gestacional. Sem doses específicas na aula: usar os protocolos do pack com peso real.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\slides-pro-2026\\Módulo 4 - Câncer de Mama\\41 - Aula 41 - Câncer de Mama na Gestação.pdf",
+          "pagina": 4,
+          "trecho": "A partir do segundo trimestre (12-14 semanas), vários agentes podem ser administrados",
+          "estado": "INFERIDO"
+        },
+        "decisao": {
+          "texto": "Incorporar câncer de mama na gestação a partir da aula PRO 41 (CURSO/INFERIDO), sem doses novas.",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 35A",
+            "pagina": null,
+            "trecho": null,
+            "estado": "VERIFICADO"
+          }
         }
       }
     ],
@@ -3547,6 +3576,129 @@
           "estado": "VERIFICADO"
         }
       }
+    ],
+    "gestacao": [
+      {
+        "tema": "Definição",
+        "texto": "Diagnóstico durante a gestação, no primeiro ano pós-parto ou durante a lactação.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\slides-pro-2026\\Módulo 4 - Câncer de Mama\\41 - Aula 41 - Câncer de Mama na Gestação.pdf",
+          "pagina": 2,
+          "trecho": "Câncer de mama diagnosticado durante a gestação, no primeiro ano pós-parto",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "tema": "Imagem",
+        "texto": "US, RM sem contraste (evitar gadolínio), mamografia, RX de tórax e TC de crânio/tórax são seguros; cintilografia óssea, TC de abdome/pelve e PET-CT são de alto risco fetal — evitar ou usar só sem alternativa.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\slides-pro-2026\\Módulo 4 - Câncer de Mama\\41 - Aula 41 - Câncer de Mama na Gestação.pdf",
+          "pagina": 3,
+          "trecho": "PET-CT 10–50 mGy Estadiamento ALTO Evitar na gestação",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "tema": "Cirurgia",
+        "texto": "Pode ser feita em qualquer momento; após 20 semanas, deslocar o útero para a esquerda. Linfonodo sentinela com Tc-99m; não usar corante azul.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\slides-pro-2026\\Módulo 4 - Câncer de Mama\\41 - Aula 41 - Câncer de Mama na Gestação.pdf",
+          "pagina": 4,
+          "trecho": "Linfonodo sentinela pode ser feito com Tc -99 (não usar corante",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "tema": "Quimioterapia — janela",
+        "texto": "Nunca antes de 14 semanas (1º trimestre: 22% de anomalias congênitas). Suspender 3 a 4 semanas antes da data prevista do parto.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\slides-pro-2026\\Módulo 4 - Câncer de Mama\\41 - Aula 41 - Câncer de Mama na Gestação.pdf",
+          "pagina": 5,
+          "trecho": "Nunca usar quimioterápicos antes de 14 semanas!",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "tema": "Quimioterapia — dose",
+        "texto": "Calcular a dose pelo peso real.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\slides-pro-2026\\Módulo 4 - Câncer de Mama\\41 - Aula 41 - Câncer de Mama na Gestação.pdf",
+          "pagina": 5,
+          "trecho": "Dose dos quimioterápicos: utilizar o peso real para o cálculo",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "tema": "Permitidos (2º e 3º trimestres)",
+        "texto": "AC (esquema de 1ª linha), taxanos, platinas (preferir carboplatina), alcaloides da vinca, inibidores de topoisomerase, corticoide (preferir metilprednisolona/prednisolona) e G-CSF.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\slides-pro-2026\\Módulo 4 - Câncer de Mama\\41 - Aula 41 - Câncer de Mama na Gestação.pdf",
+          "pagina": 5,
+          "trecho": "Doxorrubicina e ciclofosfamida (AC) Esquema de 1ª linha",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "tema": "Proibidos",
+        "texto": "Metotrexato; anti-HER2 (trastuzumabe e outros); anti-PD-(L)1 (se essencial, só entre 12 e 32 semanas); tamoxifeno, inibidores de aromatase e análogos de GnRH; antiangiogênicos; conjugados droga-anticorpo; inibidores de PARP.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\slides-pro-2026\\Módulo 4 - Câncer de Mama\\41 - Aula 41 - Câncer de Mama na Gestação.pdf",
+          "pagina": 5,
+          "trecho": "Terapias anti-HER2 Oligodrâmnio, hipoplasia pulmonar, morte fetal",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "tema": "Radioterapia",
+        "texto": "Evitar ao máximo durante a gestação; só em casos muito específicos (acima do diafragma no 1º e 2º trimestres, com proteção pélvica).",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\slides-pro-2026\\Módulo 4 - Câncer de Mama\\41 - Aula 41 - Câncer de Mama na Gestação.pdf",
+          "pagina": 4,
+          "trecho": "Deve ser evitada ao máximo durante a gestação!",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "tema": "Obstetrícia",
+        "texto": "Interrupção eletiva ou antecipação do parto não melhora o desfecho oncológico; US fetal a cada 3 a 4 semanas; pode ser necessário induzir com 37 semanas.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\slides-pro-2026\\Módulo 4 - Câncer de Mama\\41 - Aula 41 - Câncer de Mama na Gestação.pdf",
+          "pagina": 6,
+          "trecho": "Não melhora os desfechos do câncer de mama gestacional",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "tema": "Amamentação",
+        "texto": "Não amamentar durante QT, trastuzumabe, lapatinibe ou terapia endócrina.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\slides-pro-2026\\Módulo 4 - Câncer de Mama\\41 - Aula 41 - Câncer de Mama na Gestação.pdf",
+          "pagina": 6,
+          "trecho": "Não se recomenda amamentar durante tratamento com quimioterapia, trastuzumabe, lapatinibe",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "tema": "Gestação após câncer RH+ (POSITIVE)",
+        "texto": "Interrupção temporária da hormonioterapia adjuvante (após 18–30 meses, por até 2 anos) para engravidar não aumentou recidiva em 5 anos.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\slides-pro-2026\\Módulo 4 - Câncer de Mama\\41 - Aula 41 - Câncer de Mama na Gestação.pdf",
+          "pagina": 7,
+          "trecho": "a interrupção temporária da TE para gestação NÃO aumentou o risco",
+          "estado": "INFERIDO"
+        }
+      }
     ]
   },
   "ligacoes": {
@@ -3796,18 +3948,32 @@
     },
     {
       "texto": "Aula PRO 41 (mama na gestação) não incorporada.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "Escopo: incorporar ou não mama na gestação ao pack v2"
-      ]
+      ],
+      "classeAnterior": "DECISAO_CLINICA_DR_SILAS",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Câncer de mama na gestação incorporado (tratamento.cenarios + tratamento.gestacao) a partir da aula PRO 41, CURSO/INFERIDO, sem doses novas.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 35A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "resolucao": "Câncer de mama na gestação incorporado (tratamento.cenarios + tratamento.gestacao) a partir da aula PRO 41, CURSO/INFERIDO, sem doses novas."
     },
     {
       "texto": "Doses dos protocolos metastáticos novos vêm de rótulo FDA/ensaio; conferir bula ANVISA das apresentações disponíveis.",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "PROVISORIA_BULA_FDA",
       "buscasFeitas": [
         "openFDA (Keytruda, Enhertu, Trodelvy, Datroway, Lynparza, Talzenna)",
         "ClinicalTrials.gov NCT02819518"
-      ]
+      ],
+      "resolucao": "Doses de bula FDA provisórias até a bula ANVISA (resposta 1)."
     }
   ],
   "conflitos": [
@@ -3883,7 +4049,8 @@
       "CONITEC/Portarias via busca web (fontes secundárias; ver referências)",
       "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
       "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
-      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR",
+      "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\slides-pro-2026\\Módulo 4 - Câncer de Mama\\41 - Aula 41 - Câncer de Mama na Gestação.pdf"
     ],
     "aprovacaoClinica": null,
     "rodada2": {
@@ -3920,6 +4087,12 @@
       "por": "Claude",
       "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
       "acao": "2 vínculos rebaixados a catalogoIdCandidato"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 35A (Dr. Silas)",
+      "acao": "cenário 'gestacao' incorporado (aula PRO 41, Módulo 4; CURSO/INFERIDO): janela de QT ≥ 14 semanas, permitidos/proibidos, imagem, RT, amamentação; sem doses novas"
     }
   ]
 }

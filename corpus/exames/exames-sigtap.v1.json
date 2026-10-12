@@ -1,7 +1,7 @@
 {
   "header": {
     "id": "exames-sigtap",
-    "versao": "1.2.0",
+    "versao": "1.3.0",
     "vigenteDesde": "2026-10-11",
     "curador": "Dr. Silas Negrão",
     "aprovadoEm": "2026-10-11",
@@ -14,7 +14,7 @@
   },
   "status": "APROVADO_LISTA",
   "competencia": "2026-09",
-  "nota": "Nomes copiados do ZIP oficial por script. sigtap null = sem código no SIGTAP 09/2026. Contraste é campo do pedido. Só segmentos de uso oncológico prático. Lista aprovada pelo Dr. Silas em 2026-10-11 (proposta Claude + lista do Dr. Silas). Seção = categoria; tópico = subgrupo. Item sem código fica SEM_CODIGO_SUS. v1.1.0 (2026-10-11, Claude, autorizado pelo Dr. Silas no /goal de fechamento): +23 itens para os packs v2 (patologia de colo/mama, citologia, molecular SIGTAP 0202100081/0202100111/0202100243, linfocintilografia, colposcopia). Nomes copiados do ZIP 09/2026. v1.2.0 (2026-10-11): +22 itens (labs de hematologia/imunologia, endócrino da adrenal, líquor, elastografia, laparoscopia) e lista semCodigoSUSConfirmado.",
+  "nota": "Nomes copiados do ZIP oficial por script. sigtap null = sem código no SIGTAP 09/2026. Contraste é campo do pedido. Só segmentos de uso oncológico prático. Lista aprovada pelo Dr. Silas em 2026-10-11 (proposta Claude + lista do Dr. Silas). Seção = categoria; tópico = subgrupo. Item sem código fica SEM_CODIGO_SUS. v1.1.0 (2026-10-11, Claude, autorizado pelo Dr. Silas no /goal de fechamento): +23 itens para os packs v2 (patologia de colo/mama, citologia, molecular SIGTAP 0202100081/0202100111/0202100243, linfocintilografia, colposcopia). Nomes copiados do ZIP 09/2026. v1.2.0 (2026-10-11): +22 itens (labs de hematologia/imunologia, endócrino da adrenal, líquor, elastografia, laparoscopia) e lista semCodigoSUSConfirmado. v1.3.0 (2026-10-12, D-F1-17 respostas 38A/57A/60A): +9 itens (RM de membros, USG de articulação/partes moles, RX de segmentos, metanefrinas sem código).",
   "secoes": {
     "imagem": [
       {
@@ -297,6 +297,65 @@
         "topico": "USG",
         "nome": "ELASTOGRAFIA HEPÁTICA ULTRASSÔNICA",
         "sigtap": "0205020224",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "RM_MEMBRO_SUPERIOR",
+        "topico": "RM",
+        "nome": "RESSONANCIA MAGNETICA DE MEMBRO SUPERIOR (UNILATERAL)",
+        "sigtap": "0207020027",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "sarcomas de partes moles/ósseos"
+      },
+      {
+        "id": "RM_MEMBRO_INFERIOR",
+        "topico": "RM",
+        "nome": "RESSONANCIA MAGNETICA DE MEMBRO INFERIOR (UNILATERAL)",
+        "sigtap": "0207030030",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "sarcomas de partes moles/ósseos"
+      },
+      {
+        "id": "USG_ARTICULACAO_PARTES_MOLES",
+        "topico": "USG",
+        "nome": "ULTRASSONOGRAFIA DE ARTICULACAO",
+        "sigtap": "0205020062",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "USG de partes moles e de cadeia linfonodal superficial (melanoma, sarcoma): único código SIGTAP aproximado; confirmar faturamento"
+      },
+      {
+        "id": "RX_BRACO",
+        "topico": "RX",
+        "nome": "RADIOGRAFIA DE BRACO",
+        "sigtap": "0204040051",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "RX_ANTEBRACO",
+        "topico": "RX",
+        "nome": "RADIOGRAFIA DE ANTEBRACO",
+        "sigtap": "0204040019",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "RX_COXA",
+        "topico": "RX",
+        "nome": "RADIOGRAFIA DE COXA",
+        "sigtap": "0204060117",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "RX_PERNA",
+        "topico": "RX",
+        "nome": "RADIOGRAFIA DE PERNA",
+        "sigtap": "0204060168",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "RX_BACIA",
+        "topico": "RX",
+        "nome": "RADIOGRAFIA DE BACIA",
+        "sigtap": "0204060095",
         "status": "VERIFICADO_SIGTAP"
       }
     ],
@@ -1228,6 +1287,14 @@
         "sigtap": "0202010244",
         "status": "VERIFICADO_SIGTAP",
         "notas": "feocromocitoma/paraganglioma: metanefrinas fracionadas não têm código próprio no SIGTAP 09/2026"
+      },
+      {
+        "id": "METANEFRINAS_SEM_CODIGO",
+        "topico": "ENDOCRINO",
+        "nome": "Metanefrinas plasmáticas ou urinárias fracionadas",
+        "sigtap": null,
+        "status": "SEM_CODIGO_SUS",
+        "notas": "Sem código SUS: pedir por outra via (D-F1-17, 3B)"
       }
     ],
     "marcadores_tumorais": [

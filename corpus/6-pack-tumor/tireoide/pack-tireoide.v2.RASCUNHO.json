@@ -2036,11 +2036,12 @@
     },
     {
       "texto": "RET germinativo/somático mapeados para MOLECULAR_PCR_MUTACAO (alt. SEQUENCIAMENTO_AMPLICON). Seguem sem id: painel NGS amplo, painel germinativo multigene, metanefrinas e anti-Tg; USG de pescoço usa USG_TIREOIDE.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "catálogo v1.1",
         "SIGTAP 09/2026"
-      ]
+      ],
+      "resolucao": "Registrar como sem código SUS; pedir por outra via (59A)."
     }
   ],
   "conflitos": [

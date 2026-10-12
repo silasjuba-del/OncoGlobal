@@ -2343,10 +2343,11 @@
     },
     {
       "texto": "Olaparibe: dose de bula FDA (openFDA); bula ANVISA não consultada",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "PROVISORIA_BULA_FDA",
       "buscasFeitas": [
         "openFDA LYNPARZA"
-      ]
+      ],
+      "resolucao": "Bula FDA provisória (resposta 1)."
     },
     {
       "texto": "SEM_FONTE: emetogenicidade/risco de NF por esquema",
@@ -2415,7 +2416,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "Mantido 48 h no pack de pâncreas conforme a fonte do tumor; registrar para padronização da ficha do serviço.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Serviço trabalha com 46 h em bomba ou D1–D2 com 8 h/dia (43A); a fonte do tumor (48 h) fica como referência.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     }
   ],
   "curadoria": {

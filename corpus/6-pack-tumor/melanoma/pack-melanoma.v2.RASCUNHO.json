@@ -1660,12 +1660,13 @@
   "pendencias": [
     {
       "texto": "BRAF V600 mapeado para MOLECULAR_PCR_MUTACAO (alt. SEQUENCIAMENTO_AMPLICON), faturamento por indicação a confirmar. Método (PCR × NGS × IHQ VE1, que não detecta V600K) não definido pela SBOC — escolha com a patologia.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC Melanoma 2026 p.12",
         "DDT Melanoma 2022",
         "catálogo v1.1"
-      ]
+      ],
+      "resolucao": "BRAF por PCR ou NGS; não usar IHQ VE1 isolada (37A)."
     },
     {
       "texto": "RT adjuvante preenchida (48 Gy/20 fr, ensaio, INFERIDO); SBRT segue sem dose — RT fora do escopo de oncologia clínica.",
@@ -1684,11 +1685,12 @@
     },
     {
       "texto": "USG de cadeia linfonodal de drenagem sem id no catálogo v1.1 (só USG_AXILAS). Inclusão depende de D-F1-02.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "catálogo v1.1",
         "SIGTAP 09/2026"
-      ]
+      ],
+      "resolucao": "Incluir no catálogo (38A)."
     }
   ],
   "conflitos": [
@@ -1709,7 +1711,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "Registrar como opção da diretriz não coberta pela DDT do SUS; decisão médica caso a caso",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Opção da diretriz fora da DDT/SUS, caso a caso (36A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     }
   ],
   "curadoria": {

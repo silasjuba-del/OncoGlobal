@@ -1079,7 +1079,7 @@
             "unidade": "mg",
             "via": "intravesical",
             "dias": "semanal x 6 semanas, depois mensal x 10 meses",
-            "observacao": "2 g na fonte; texto da SBOC grafa 'IV' sob o título 'Tratamentos intravesicais' (ver conflitos)."
+            "observacao": "2 g na fonte; via intravesical confirmada pelo Dr. Silas (D-F1-17 6A) — 'IV' da SBOC p. 16 é erro de grafia."
           }
         ],
         "cicloDias": 7,
@@ -1132,7 +1132,7 @@
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1",
-            "observacao": "Se ClCr 40-59 mL/min a SBOC lista 35 mg/m² D1 e D8 (ver conflitos sobre elegibilidade)."
+            "observacao": "ClCr < 60 mL/min = inelegível (D-F1-17 4A). A dose fracionada da SBOC (35 mg/m² D1 e D8 se ClCr 40-59) não é padrão: só caso a caso, por decisão médica individual."
           },
           {
             "droga": "durvalumabe",
@@ -2565,7 +2565,7 @@
       },
       {
         "id": "bexiga-met-erdafitinibe",
-        "nome": "Erdafitinibe (FGFR3 mutado ou fusão FGFR2/3)",
+        "nome": "Erdafitinibe (alteração de FGFR2 ou FGFR3)",
         "cenario": "Doença avançada com alteração de FGFR, após 1ª linha",
         "linha": "2ª linha ou posterior",
         "drogas": [
@@ -2581,7 +2581,7 @@
         "cicloDias": 28,
         "numeroCiclos": null,
         "premedicacao": "",
-        "ajusteObrigatorio": "Fósforo sérico (escalonamento 8 → 9 mg); avaliação oftalmológica. Rótulo FDA restringe a alterações de FGFR3 (ver conflitos).",
+        "ajusteObrigatorio": "Fósforo sérico (escalonamento 8 → 9 mg); avaliação oftalmológica. Elegível com alteração de FGFR2 ou FGFR3 (mutação ou fusão) pela SBOC (D-F1-17 5B); o rótulo FDA cita só FGFR3.",
         "fichaId": null,
         "sus": {
           "disponivel": "nao",
@@ -2742,7 +2742,7 @@
     ],
     "biomarcadorTratamento": [
       {
-        "seAlvo": "FGFR3 mutado (R248C, S249C, G370C, Y373C) ou fusão FGFR2/3",
+        "seAlvo": "Alteração de FGFR2 ou FGFR3 (mutação, ex. FGFR3 R248C/S249C/G370C/Y373C, ou fusão FGFR2/3)",
         "opcao": "Erdafitinibe 8-9 mg/dia VO",
         "evidencia": "NE moderado/FR forte (SBOC p. 29)",
         "sus": "nao — erdafitinibe sem avaliação CONITEC (INFERIDO)",
@@ -2752,6 +2752,16 @@
           "pagina": 25,
           "trecho": "FGFR3 R248C, S249C, G370C e Y373C, bem como as fusões FGFR3-TACC3",
           "estado": "VERIFICADO"
+        },
+        "decisao": {
+          "texto": "FGFR2 ou FGFR3 (SBOC), não só FGFR3.",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 5B",
+            "pagina": null,
+            "trecho": null,
+            "estado": "VERIFICADO"
+          }
         }
       },
       {
@@ -3380,19 +3390,33 @@
   "pendencias": [
     {
       "texto": "Trato urinário superior (pelve renal/ureter) não coberto pela SBOC 2026: sem doses, sem protocolo; buscar diretriz específica (NCCN/EAU UTUC; POUT para adjuvância).",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2024/2025/2026 bexiga: TUS não coberto; incluir NCCN/EAU UTUC exige decisão de escopo"
-      ]
+      ],
+      "classeAnterior": "DECISAO_CLINICA_DR_SILAS",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Trato urinário superior fica fora deste pack; terá pack próprio futuro (UTUC, EAU/NCCN).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 7A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "resolucao": "Trato urinário superior fica fora deste pack; terá pack próprio futuro (UTUC, EAU/NCCN)."
     },
     {
       "texto": "BCG: dose depende da cepa (SBOC 120 mg/40 mg EORTC × aula PRO Connaught 81 mg/Tice 50 mg); esquema de indução/manutenção sem fonte SBOC — conferir bula da cepa disponível no SUS.",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "PROVISORIA_BULA_FDA",
       "buscasFeitas": [
         "SBOC 2026 p.16",
         "openFDA TICE BCG",
         "aula PRO 66 p.18"
-      ]
+      ],
+      "resolucao": "Dose do MOC (81 mg ×6 + manutenção) como provisória até a bula da cepa (D-F1-16, resposta 1)."
     },
     {
       "texto": "Pemetrexede e nab-paclitaxel em 2ª linha: doses SEM_FONTE.",
@@ -3409,19 +3433,21 @@
     },
     {
       "texto": "PD-L1: corte e clone para pembrolizumabe 1ª linha não definidos na SBOC; conferir bula ANVISA (aula PRO: CPS ≥ 10 para pembrolizumabe).",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "PROVISORIA_BULA_FDA",
       "buscasFeitas": [
         "SBOC 2026 bexiga: sem corte",
         "aula PRO: CPS ≥10 (a confirmar)"
-      ]
+      ],
+      "resolucao": "Regra da bula: CPS ≥ 10 para pembrolizumabe em monoterapia; provisório até a bula ANVISA (D-F1-16 resposta 1; MOC item 13)."
     },
     {
       "texto": "Seguimento pós-cistectomia, pós-trimodal e da doença avançada: periodicidade sem fonte na SBOC 2026.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "fontes/sboc/SBOC 2026 p.8/30, Bexiga.txt p.23, Bexiga_2.txt p.26-27: periodicidade só para NMIBC",
         "fontes/pro26/67 p.16: 'Seguimento com cistoscopia' (trimodal) sem intervalo; 66 p.20 só NMIBC"
-      ]
+      ],
+      "resolucao": "Seguimento caso a caso (8A)."
     },
     {
       "texto": "Emetogenicidade dos esquemas não descrita na SBOC de bexiga.",
@@ -3458,6 +3484,22 @@
       "buscasFeitas": [
         "SBOC bexiga 2024/2025/2026: nº de ciclos de MVACdd na doença avançada não definido"
       ]
+    },
+    {
+      "texto": "Criar pack UTUC (trato urinário superior: pelve renal/ureter) com base EAU/NCCN — decisão D-F1-17 7A.",
+      "classe": "TAREFA_CURADORIA",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Pack próprio futuro para UTUC (EAU/NCCN).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 7A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "buscasFeitas": []
     }
   ],
   "conflitos": [
@@ -3554,7 +3596,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "Pelo critério de Galsky (SBOC p. 10), ClCr < 60 mL/min = inelegível. A dose fracionada da tabela (35 mg/m² D1, D8 se ClCr 40-59) fica como decisão médica individual, não como padrão do pack. Aula PRO p. 14 também cita split-dose em TFG 40-60 como caso limítrofe.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "ClCr < 60 mL/min = inelegível à cisplatina (Galsky/SBOC p. 10). Dose fracionada (35 mg/m² D1 e D8) só caso a caso, por decisão médica individual — não é padrão do pack.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 4A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Alvo do erdafitinibe",
@@ -3573,7 +3625,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "Alteração de FGFR3 (mutação ou fusão) atende às duas fontes; fusão isolada de FGFR2 só por decisão médica após conferir bula ANVISA.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Erdafitinibe para alteração de FGFR2 OU FGFR3 (mutação ou fusão), conforme SBOC; não restrito a FGFR3.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 5B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Dose da BCG",
@@ -3592,13 +3654,23 @@
         "estado": "INFERIDO"
       },
       "escolhaSeguranca": "MOC: 81 mg por 6 semanas + manutenção. Não substitui a bula da cepa (NÃO VERIFICADA).",
-      "decisaoNecessaria": true,
+      "decisaoNecessaria": false,
       "fonteC": {
         "tipo": "DIRETRIZ",
         "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
         "pagina": null,
         "trecho": null,
         "estado": "INFERIDO"
+      },
+      "decisao": {
+        "texto": "Dose do MOC (81 mg ×6 + manutenção) como provisória até a bula da cepa (D-F1-16, resposta 1).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
       }
     },
     {
@@ -3618,7 +3690,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "Via intravesical (o item está sob 'Tratamentos intravesicais' e a referência 13 é de gencitabina intravesical); 'IV' tratado como erro de grafia. Confirmar com o médico.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Gencitabina 2 g pós-BCG = via intravesical ('IV' da SBOC é erro de grafia).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 6A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Pembrolizumabe no NMIBC não responsivo a BCG — população",
@@ -3781,6 +3863,30 @@
       "por": "Claude",
       "achado": "Conferência MOC 2026 item 14",
       "acao": "BCG 81 mg ×6 + manutenção (MOC) preenchido; bula da cepa pendente"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 5B (Dr. Silas)",
+      "acao": "erdafitinibe: elegibilidade ampliada para alteração de FGFR2 ou FGFR3 (SBOC p. 27); conflito 'Alvo do erdafitinibe' fechado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 6A (Dr. Silas)",
+      "acao": "bexiga-nmibc-gencitabina-intravesical: via intravesical confirmada; conflito fechado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 4A (Dr. Silas)",
+      "acao": "ClCr < 60 = inelegível à cisplatina; dose fracionada rebaixada a decisão caso a caso; conflito fechado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 7A (Dr. Silas)",
+      "acao": "pendência de escopo do TUS fechada; nova pendência 'criar pack UTUC (EAU/NCCN)'"
     }
   ]
 }

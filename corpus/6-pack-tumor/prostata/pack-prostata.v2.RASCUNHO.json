@@ -2421,7 +2421,15 @@
             "unidade": "mg",
             "via": "VO",
             "dias": "D1-D28 (contínuo)",
-            "observacao": "1x/dia continuamente conforme SBOC p.16 (difere de abiraterona isolada no mCRPC, 2x/dia — ver pendências)."
+            "observacao": "1x/dia continuamente conforme SBOC p.16 (difere de abiraterona isolada no mCRPC, 2x/dia — ver pendências).",
+            "frequencia": "5 mg 2x/dia (12/12 h)",
+            "fonteDose": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
           }
         ],
         "cicloDias": 28,
@@ -3760,10 +3768,11 @@
   "pendencias": [
     {
       "texto": "Doses de agonistas/antagonistas LHRH tiradas de bula FDA (openFDA); confirmar com bula ANVISA das apresentações disponíveis no serviço. Indicação de bula = câncer de próstata avançado; uso com RT no localizado sustentado pela SBOC (classe e duração).",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "PROVISORIA_BULA_FDA",
       "buscasFeitas": [
         "openFDA leuprolida/gosserrelina/degarelix (já usados)"
-      ]
+      ],
+      "resolucao": "Bula FDA provisória (resposta 1)."
     },
     {
       "texto": "Abiraterona no localizado alto risco (STAMPEDE): dose não informada pela SBOC neste cenário e sem aprovação Anvisa — drogas com dose null (SEM_FONTE).",
@@ -3777,11 +3786,12 @@
     },
     {
       "texto": "Olaparibe + abiraterona: SBOC p.16 traz prednisona 5 mg 1x/dia, enquanto abiraterona isolada no mCRPC usa 5 mg 2x/dia (p.15) — confirmar com bula ANVISA do Lynparza. Bula FDA: 5 mg 2x/dia — registrado em conflitos.",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "openFDA Lynparza (set_id 741ff3e3-dc1a-45a6-84e5-2481b27131aa)",
         "SBOC próstata avançada 2026 p.16"
-      ]
+      ],
+      "resolucao": "Prednisona 5 mg 2x/dia (48A)."
     },
     {
       "texto": "Definição de alto risco mHSPC (SBOC p.10) impressa como 'Gleason > 8' e '3 lesões ósseas' — conferir com o PDF/LATITUDE (Gleason ≥ 8, ≥ 3 lesões). Texto extraído do PDF confirma a grafia da SBOC (p.10).",
@@ -3935,7 +3945,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "Testar BRCA/HRR antes; priorizar a combinação nos portadores de BRCA/HRR (maior benefício); em HRR proficiente, decisão médica.",
-      "decisaoNecessaria": false
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Prednisona 5 mg 2x/dia (48A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Definição de recidiva bioquímica pós-prostatectomia",
@@ -3973,7 +3993,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "Pack só preenche o esquema 21/21 da SBOC; quinzenal fica com dose null (SEM_FONTE) até fonte SBOC/bula. Rodada 2: dose 50 mg/m² preenchida como CURSO/INFERIDO (aula PRO; esquema PROSTY NCT00255606) — validar antes do uso.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Opção provisória (47A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Prednisona com olaparibe + abiraterona (PROpel)",
@@ -3992,7 +4022,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "Dose do pack mantida como na SBOC (verificada); a bula FDA e a abiraterona isolada usam 5 mg 2x/dia. Conferir bula ANVISA do Lynparza antes do uso.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Prednisona 5 mg 2x/dia (48A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     }
   ],
   "curadoria": {
@@ -4042,6 +4082,12 @@
       "por": "Claude",
       "achado": "Decisão do Dr. Silas",
       "acao": "decisão \"baixo risco\" registrada para a vigilância"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "D-F1-17",
+      "acao": "prednisona 5 mg 2x/dia com olaparibe + abiraterona (48A)"
     }
   ]
 }

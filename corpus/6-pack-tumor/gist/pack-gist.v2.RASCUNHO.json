@@ -309,6 +309,32 @@
           "trecho": "TC de abdome e pelve com contraste é o exame mais importante",
           "estado": "VERIFICADO"
         }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "EDA",
+        "rotulo": "EDA",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
       }
     ],
     "gruposConduta": [
@@ -1381,11 +1407,12 @@
   "pendencias": [
     {
       "texto": "Tabela de risco da SBOC com erros (gástrico × não gástrico; ≤ 5 cm × ≤ 2 cm) — exigir conferência médica antes de decidir adjuvância.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 GIST",
         "Onco PRO 2026 aula 77"
-      ]
+      ],
+      "resolucao": "AFIP da Aula 77 corrigida (D-F1-15)."
     },
     {
       "texto": "HR 0,08 (6 × 3 anos de imatinibe) na SBOC p.8 parece improvável — conferir publicação.",
@@ -1417,11 +1444,12 @@
     },
     {
       "texto": "SEM_FONTE: TC de tórax no estadiamento e EDA não citados pela SBOC.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2026 GIST",
         "Onco PRO 2026 aula 77"
-      ]
+      ],
+      "resolucao": "TC de tórax e EDA de rotina no estadiamento (30B)."
     }
   ],
   "conflitos": [

@@ -294,3 +294,71 @@ Registro do pedido do Dr. Silas: biblioteca no Segundo Cérebro do Genspark, exc
 Fechar somente com evidência de: capacidades reais do Genspark; importação de pacote válido e rejeição de inválido; recuperação da versão anterior; funcionamento offline; busca por tumor/cenário; links até fonte e fato; avaliação da prescrição proposta antes do ciclo 1; reavaliação após medicamento novo; conflito de laudos preservado; separação entre dois tumores do mesmo paciente; não duplicação de pedidos; nenhuma saída de prontuário ao Genspark; permissões por setor quando implementadas. Medir latência, falhas, versão desatualizada, cobertura de regras, pendências e duplicidades com denominadores explícitos, sem metas numéricas inventadas. Prova documental, teste isolado, integração e demonstração no aplicativo são estados diferentes. Este registro autoriza o planejamento documental; implementação, credenciais, abertura de túnel, publicação e promoção clínica exigem suas tarefas e portões próprios.
 - **D-F1-15 · Fechamento do corpus F1 (Dr. Silas, 2026-10-12).** (1) mDCF gástrico com cisplatina 40 mg/m² no **D3** (esquema de Shah). (2) Ifosfamida no colo do útero em ciclo de **28 dias**. (3) GIST: estratificação de risco AFIP/Miettinen da Aula 77 do Onco PRO 2026, com as correções do AFIP clássico (gástrico 5–10 cm com >5 mitoses = 55%; jejuno/íleo = 85%), ou o NIH modificado da SBOC; imatinibe adjuvante 400 mg/dia por 3 anos no alto risco; a tabela com erro do MOC não é usada. (4) Imatinibe no cordoma: usado **off-label**, dose por decisão médica. (5) Rim e próstata: vigilância e observação aplicáveis ao **baixo risco** (intervalo numérico ainda não fixado). (6) A conferência do MOC Tumores Sólidos 2026 foi aplicada (`docs/ondas/F1-MOC-2026-CONFERENCIA.md`). O tópico de documentação do corpus está **fechado**; a próxima etapa é a fase F1, depois das auditorias que o Dr. Silas vai apresentar.
 - **D-F1-16 · Respostas às perguntas do corpus, 1ª rodada (Dr. Silas, 2026-10-12).** (1) As doses e as regras de monitorização tiradas da bula FDA ficam **provisórias** até a conferência na bula ANVISA. (15) mFOLFOX6 e FOLFIRI paliativos **COM bolus** de 5-FU 400 mg/m², o que revoga a omissão do D-W9-50; as fichas devem ser alinhadas. (22) FLOT com **5-FU 2.400 mg/m² em 46 h** (dose do serviço, mantém D-W9-59); a SBOC/MOC traz 2.600 em 24 h. (23 e 28) Irinotecano no esôfago e no gástrico **segue a SBOC** (esôfago 150 mg/m² a cada 14 dias); as fichas devem ser alinhadas. (43) A infusão de 5-FU **não** foi padronizada para todos os packs. Resposta registrada ao pé da letra: "com infusão 46 e D1 e D2 por 8 horas" (interpretação a confirmar). Ainda não foram editadas: as fichas `corpus/fichas` de FOLFOX e FOLFIRI paliativos, FLOT e irinotecano de esôfago e gástrico.
+- **D-F1-17 · Respostas às perguntas do corpus, 2ª rodada (Dr. Silas, 2026-10-12).**
+  - **(43A) Infusão de 5-FU:** o serviço trabalha com duas opções: 46 h em bomba, ou D1 e D2 com 8 horas por dia, sem bomba.
+  - **Adrenal:**
+    - (2A) Mitotano na faixa SBOC de 1–4 g/dia, titulado por mitotanemia.
+    - (3A+B) Catecolaminas em urina de 24 h ou RM em T2 pelo SUS, e metanefrinas por outra via.
+  - **Bexiga:**
+    - (4A) ClCr < 60 = inelegível à cisplatina.
+    - (5B) Erdafitinibe para FGFR2 ou FGFR3.
+    - (6A) Gencitabina 2 g intravesical.
+    - (7A) Pack próprio para o trato urinário superior.
+    - (8A) Seguimento caso a caso.
+  - **Cabeça e pescoço e anal:**
+    - (9A) Capecitabina metronômica 625 mg/m².
+    - (10B) Exigir hibridização in situ (EBER/HPV).
+    - (11A) Adenocarcinoma anal segue o pack colorretal.
+  - **Colo do útero:**
+    - (12A) p16 só no diagnóstico.
+    - (13A) KEYNOTE-A18 aguarda a SBOC.
+  - **Colorretal:**
+    - (14A) FOLFOXIRI sem bolus, LV 200.
+    - (16A) CheckMate-8HW.
+    - (17A) AJCC 8ª edição.
+    - (18A) LV5FU2 fora.
+  - **Endométrio:**
+    - (19A) Olaparibe 300 mg 2x/dia, provisório.
+    - (20B) Criar o protocolo de IO + QT no dMMR III/IV.
+  - **Esôfago e gástrico:**
+    - (21A) Nivolumabe + ipilimumabe no D29.
+    - (24A) Faixas pelo limite inferior.
+    - (25A) Backbone 80/800.
+    - (26A) FLOT paliativo sem bolus.
+    - (27A) Cisplatina 75 mg/m².
+    - (29A) Qualquer fluoropirimidina + platina.
+  - **GIST:** (30B) TC de tórax e EDA de rotina.
+  - **Gliomas:**
+    - (31B) Temozolomida no SUS = sim.
+    - (32A) Método molecular definido com a patologia.
+    - (33A) Carmustina como alternativa, mantendo o PCV.
+    - (34B) Criar a temozolomida protraída.
+  - **Mama:** (35A) Incorporar o câncer de mama na gestação.
+  - **Melanoma:**
+    - (36A) IIB/IIC caso a caso.
+    - (37A) BRAF por PCR ou NGS, sem VE1 isolada.
+    - (38A) USG de cadeia linfonodal no catálogo.
+  - **Neuroendócrinos:** (39A) pNET provisório.
+  - **Ovário:**
+    - (40B) Buscar a dose do VAC e criar o protocolo.
+    - (41A) EP com as doses do testículo.
+    - (42A) Mucinoso com CAPOX ou FOLFOX do colorretal.
+  - **Vias biliares:** (44A) Oxaliplatina 85 mg/m² no GEMOX.
+  - **Pênis:** (45A) Incluir 5-FU tópico e imiquimode.
+  - **Próstata:**
+    - (47A) Docetaxel quinzenal provisório.
+    - (48A) Prednisona 5 mg 2x/dia com olaparibe + abiraterona.
+  - **Pulmão:**
+    - (50A) CheckMate 816 e 77T separados.
+    - (51A) Pembrolizumabe 400 mg a cada 6 semanas.
+    - (52A) Limite inferior.
+    - (53A) Clone de PD-L1 com a patologia.
+  - **Sarcomas:**
+    - (54B) Buscar a referência de gencitabina + DTIC e criar o protocolo.
+    - (55A) DTIC 750 mg/m², 3 ciclos.
+    - (56A) MTX em alta dose com protocolo institucional.
+    - (57A) RM de membros e RX de segmentos no catálogo.
+  - **Testículo:** (58A) Exames do curso como condicionais.
+  - **Tireoide:** (59A) Anti-Tg e painéis NGS sem código SUS.
+  - **Catálogo:** (60A) Catálogo v1.3.
+  - **Pendentes de resposta:** 46 (pênis, conduta em cN1) e 49 (critério de alto risco no mHSPC).

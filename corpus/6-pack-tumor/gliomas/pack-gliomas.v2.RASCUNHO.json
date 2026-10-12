@@ -205,7 +205,17 @@
             "estado": "VERIFICADO"
           },
           "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
-          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO",
+          "metodoDefinicao": {
+            "texto": "Método definido com a patologia do serviço.",
+            "fonte": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 32A",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          }
         },
         {
           "alvo": "Mutação do promotor de TERT / amplificação de EGFR / +7/-10",
@@ -224,7 +234,17 @@
             "estado": "VERIFICADO"
           },
           "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
-          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO",
+          "metodoDefinicao": {
+            "texto": "Método definido com a patologia do serviço.",
+            "fonte": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 32A",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          }
         },
         {
           "alvo": "BRAF V600E",
@@ -303,6 +323,16 @@
               "SBOC Gliomas 2026",
               "catálogo v1.1"
             ]
+          },
+          "metodoDefinicao": {
+            "texto": "Método definido com a patologia do serviço.",
+            "fonte": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 32A",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
           }
         }
       ]
@@ -617,7 +647,7 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "parcial",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "DIRETRIZ",
             "referencia": "DDT Tumor Cerebral no Adulto — Portaria Conjunta SAES/SCTIE nº 7, de 13/04/2020 (gov.br/conitec ddt-tumorcerebraladulto.pdf)",
@@ -625,7 +655,17 @@
             "trecho": "A TMZ é administrada diariamente (7 dias por semana) durante a radioterapia",
             "estado": "VERIFICADO"
           },
-          "observacao": "DDT 2020 (p.16-17) recomenda TMZ concomitante e adjuvante; SIGTAP 03.04.02.032-0 cobre QT 'isolada ou per ou pós radioterapia' na doença inoperável (primária ou recidivada). A Portaria SCTIE/MS nº 35/2014 não incorporou TMZ no adjuvante de glioma de alto grau (compra centralizada) — no ressecado, o acesso depende do enquadramento da APAC no serviço."
+          "observacao": "DDT 2020 (p.16-17) recomenda TMZ concomitante e adjuvante; SIGTAP 03.04.02.032-0 cobre QT 'isolada ou per ou pós radioterapia' na doença inoperável (primária ou recidivada). A Portaria SCTIE/MS nº 35/2014 não incorporou TMZ no adjuvante de glioma de alto grau (compra centralizada) — no ressecado, o acesso depende do enquadramento da APAC no serviço.",
+          "decisao": {
+            "texto": "TMZ no SUS = sim.",
+            "fonte": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 31B",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -656,7 +696,7 @@
         "ajusteObrigatorio": null,
         "fichaId": "FICHA.gliomas.temozolomida-monoterapia-ciclo-1__adjuvante@1.0.0",
         "sus": {
-          "disponivel": "parcial",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "DIRETRIZ",
             "referencia": "DDT Tumor Cerebral no Adulto — Portaria Conjunta SAES/SCTIE nº 7, de 13/04/2020 (gov.br/conitec ddt-tumorcerebraladulto.pdf)",
@@ -664,7 +704,17 @@
             "trecho": "A TMZ é administrada diariamente (7 dias por semana) durante a radioterapia",
             "estado": "VERIFICADO"
           },
-          "observacao": "DDT 2020 (p.16-17) recomenda TMZ concomitante e adjuvante; SIGTAP 03.04.02.032-0 cobre QT 'isolada ou per ou pós radioterapia' na doença inoperável (primária ou recidivada). A Portaria SCTIE/MS nº 35/2014 não incorporou TMZ no adjuvante de glioma de alto grau (compra centralizada) — no ressecado, o acesso depende do enquadramento da APAC no serviço."
+          "observacao": "DDT 2020 (p.16-17) recomenda TMZ concomitante e adjuvante; SIGTAP 03.04.02.032-0 cobre QT 'isolada ou per ou pós radioterapia' na doença inoperável (primária ou recidivada). A Portaria SCTIE/MS nº 35/2014 não incorporou TMZ no adjuvante de glioma de alto grau (compra centralizada) — no ressecado, o acesso depende do enquadramento da APAC no serviço.",
+          "decisao": {
+            "texto": "TMZ no SUS = sim.",
+            "fonte": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 31B",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -695,7 +745,7 @@
         "ajusteObrigatorio": null,
         "fichaId": "FICHA.gliomas.temozolomida-monoterapia-ciclos-2-em-diante__adjuvante@1.0.0",
         "sus": {
-          "disponivel": "parcial",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "DIRETRIZ",
             "referencia": "DDT Tumor Cerebral no Adulto — Portaria Conjunta SAES/SCTIE nº 7, de 13/04/2020 (gov.br/conitec ddt-tumorcerebraladulto.pdf)",
@@ -703,7 +753,17 @@
             "trecho": "A TMZ é administrada diariamente (7 dias por semana) durante a radioterapia",
             "estado": "VERIFICADO"
           },
-          "observacao": "DDT 2020 (p.16-17) recomenda TMZ concomitante e adjuvante; SIGTAP 03.04.02.032-0 cobre QT 'isolada ou per ou pós radioterapia' na doença inoperável (primária ou recidivada). A Portaria SCTIE/MS nº 35/2014 não incorporou TMZ no adjuvante de glioma de alto grau (compra centralizada) — no ressecado, o acesso depende do enquadramento da APAC no serviço."
+          "observacao": "DDT 2020 (p.16-17) recomenda TMZ concomitante e adjuvante; SIGTAP 03.04.02.032-0 cobre QT 'isolada ou per ou pós radioterapia' na doença inoperável (primária ou recidivada). A Portaria SCTIE/MS nº 35/2014 não incorporou TMZ no adjuvante de glioma de alto grau (compra centralizada) — no ressecado, o acesso depende do enquadramento da APAC no serviço.",
+          "decisao": {
+            "texto": "TMZ no SUS = sim.",
+            "fonte": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 31B",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -735,7 +795,7 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "parcial",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "DIRETRIZ",
             "referencia": "DDT Tumor Cerebral no Adulto — Portaria Conjunta SAES/SCTIE nº 7, de 13/04/2020 (gov.br/conitec ddt-tumorcerebraladulto.pdf)",
@@ -743,7 +803,17 @@
             "trecho": "A TMZ é administrada diariamente (7 dias por semana) durante a radioterapia",
             "estado": "VERIFICADO"
           },
-          "observacao": "DDT 2020 (p.16-17) recomenda TMZ concomitante e adjuvante; SIGTAP 03.04.02.032-0 cobre QT 'isolada ou per ou pós radioterapia' na doença inoperável (primária ou recidivada). A Portaria SCTIE/MS nº 35/2014 não incorporou TMZ no adjuvante de glioma de alto grau (compra centralizada) — no ressecado, o acesso depende do enquadramento da APAC no serviço."
+          "observacao": "DDT 2020 (p.16-17) recomenda TMZ concomitante e adjuvante; SIGTAP 03.04.02.032-0 cobre QT 'isolada ou per ou pós radioterapia' na doença inoperável (primária ou recidivada). A Portaria SCTIE/MS nº 35/2014 não incorporou TMZ no adjuvante de glioma de alto grau (compra centralizada) — no ressecado, o acesso depende do enquadramento da APAC no serviço.",
+          "decisao": {
+            "texto": "TMZ no SUS = sim.",
+            "fonte": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 31B",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -809,7 +879,21 @@
         },
         "observacao": "Intervalo SBOC: a cada 6 a 8 semanas. SBOC: procarbazina e lomustina não são mais produzidas no Brasil; na indisponibilidade de lomustina, substituir por carmustina.",
         "derivadoDe": "gliomas-pcv",
-        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários).",
+        "alternativa": {
+          "protocolo": "gliomas-carmustina",
+          "texto": "Carmustina permitida como alternativa ao PCV (indisponibilidade de lomustina/procarbazina).",
+          "decisao": {
+            "texto": "Manter PCV e permitir carmustina como alternativa.",
+            "fonte": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 33A",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          }
+        }
       },
       {
         "id": "gliomas-pcv-recorrencia",
@@ -867,7 +951,21 @@
         },
         "observacao": "Intervalo SBOC: a cada 6 a 8 semanas. SBOC: procarbazina e lomustina não são mais produzidas no Brasil; na indisponibilidade de lomustina, substituir por carmustina.",
         "derivadoDe": "gliomas-pcv",
-        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários).",
+        "alternativa": {
+          "protocolo": "gliomas-carmustina",
+          "texto": "Carmustina permitida como alternativa ao PCV (indisponibilidade de lomustina/procarbazina).",
+          "decisao": {
+            "texto": "Manter PCV e permitir carmustina como alternativa.",
+            "fonte": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 33A",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          }
+        }
       },
       {
         "id": "gliomas-carmustina",
@@ -905,6 +1003,59 @@
           "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
           "pagina": 18,
           "trecho": "Carmustina 150–200 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gliomas-tmz-protraida-recorrencia",
+        "nome": "Temozolomida protraída (dose contínua 50 mg/m²/dia — RESCUE)",
+        "cenario": "recorrência — glioma de alto grau (preferência MGMT metilado / intervalo longo desde a TMZ)",
+        "linha": "recorrência",
+        "drogas": [
+          {
+            "droga": "Temozolomida",
+            "dose": 50,
+            "unidade": "mg/m2/dia",
+            "via": "VO",
+            "dias": "D1-D28, diária contínua",
+            "observacao": "Até 1 ano ou progressão (RESCUE).",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "Perry JR et al. J Clin Oncol 2010;28(12):2051-7 (RESCUE), PMID 20308655 — abstract PubMed",
+              "pagina": null,
+              "trecho": "continuous dose-intense TMZ 50 mg/m(2)/d for up to 1 year",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "Antiemético conforme necessidade.",
+        "ajusteObrigatorio": "Hemograma antes de cada ciclo; profilaxia de P. jirovecii conforme protocolo institucional. Duração: até 1 ano ou progressão (RESCUE). Ciclo de 28 dias pela decisão D-F1-17 34B (o abstract informa dose contínua, sem ciclo).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.032-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE TUMOR DO SISTEMA NERVOSO CENTRAL",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); SIGTAP 03.04.02.032-0 cobre QT na doença recidivada. TMZ no SUS = sim (D-F1-17 31B)."
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 34B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "fonteSBOC": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "O estudo de fase II Rescue avaliou temozo-lamida 50 mg/m²/dia de forma contínua",
           "estado": "VERIFICADO"
         }
       },
@@ -1590,12 +1741,25 @@
   "pendencias": [
     {
       "texto": "MGMT (PCR metilação-específica) e TERT mapeados para MOLECULAR_PCR_MUTACAO (alt. SEQUENCIAMENTO_AMPLICON), faturamento a confirmar. Método exato e CDKN2A/B (deleção) seguem para definição com a patologia.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC Gliomas 2026 p.6",
         "Onco PRO aulas 75-76",
         "catálogo v1.1"
-      ]
+      ],
+      "classeAnterior": "DECISAO_CLINICA_DR_SILAS",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Método de MGMT, TERT e CDKN2A/B definido com a patologia do serviço.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 32A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "resolucao": "Método de MGMT, TERT e CDKN2A/B definido com a patologia do serviço."
     },
     {
       "texto": "Fracionamento 59,4 Gy (30 × 33 fr) e oligodendroglioma grau 3 sem frações — RT fora do escopo de oncologia clínica; DDT 2020 (p.16) admite 1,8-2 Gy/dia.",
@@ -1608,14 +1772,27 @@
     },
     {
       "texto": "PCV depende de importação de lomustina/procarbazina (SBOC p.15); substituição por carmustina é decisão do médico/serviço.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC Gliomas p.15",
         "DDT 2020 p.13"
-      ]
+      ],
+      "classeAnterior": "DECISAO_CLINICA_DR_SILAS",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Manter PCV e permitir carmustina como alternativa quando lomustina/procarbazina indisponíveis.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 33A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "resolucao": "Manter PCV e permitir carmustina como alternativa quando lomustina/procarbazina indisponíveis."
     },
     {
-      "texto": "TMZ: parcial (DDT 2020 + APAC 03.04.02.032-0; Portaria SCTIE 35/2014 negou incorporação adjuvante). Carmustina: APAC. Larotrectinibe: não incorporado (Portaria SCTIE 72/2021). Vorasidenibe, bevacizumabe e BRAF/MEK: sem demanda nem portaria na Conitec.",
+      "texto": "TMZ: sim (D-F1-17 31B; DDT 2020 + APAC 03.04.02.032-0). Carmustina: APAC. Larotrectinibe: não incorporado (Portaria SCTIE 72/2021). Vorasidenibe, bevacizumabe e BRAF/MEK: sem demanda nem portaria na Conitec.",
       "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
       "buscasFeitas": [
         "Painel de Demandas Conitec (exportação 15/06/2026)",
@@ -1624,13 +1801,24 @@
       ]
     },
     {
-      "texto": "Reirradiação (aceno de RT), TMZ em dose protraída 50 mg/m² (DDT 2020 p.17 e SBOC citam a dose sem dias/ciclo) e platina na recorrência ficam fora como protocolo.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "texto": "Reirradiação (aceno de RT) e platina na recorrência ficam fora como protocolo. TMZ protraída 50 mg/m² resolvida por D-F1-17 34B (gliomas-tmz-protraida-recorrencia).",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC Gliomas p.16-17",
         "DDT 2020 p.17",
         "Onco PRO aula 76"
-      ]
+      ],
+      "resolucaoParcial": {
+        "texto": "TMZ protraída 50 mg/m² VO diária contínua na recorrência, ciclo de 28 dias (RESCUE).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 34B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "resolucao": "Radioterapia é aceno geral; platina na recorrência fora do pack."
     }
   ],
   "conflitos": [
@@ -1651,7 +1839,17 @@
         "estado": "INFERIDO"
       },
       "escolhaSeguranca": "Manter 59,4 Gy e deixar frações em aberto para o radio-oncologista; 33 frações (1,8 Gy/fr) é a forma clássica e menos intensa por fração",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Radioterapia é aceno geral: frações definidas pelo radio-oncologista.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Temozolomida adjuvante no SUS",
@@ -1670,7 +1868,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "Registrar como 'parcial': diretriz SUS de 2020 recomenda; incorporação centralizada negada em 2014. Médico confirma o enquadramento de APAC no serviço.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Temozolomida no SUS = 'sim' (APAC de QT do SNC; DDT 2020).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 31B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     }
   ],
   "curadoria": {
@@ -1684,7 +1892,8 @@
       "DDT Tumor Cerebral no Adulto — Portaria Conjunta SAES/SCTIE nº 7, de 13/04/2020 (gov.br/conitec ddt-tumorcerebraladulto.pdf)",
       "SIGTAP competência 09/2026",
       "Portaria SCTIE/MS 72/2021",
-      "Painel de Demandas Conitec 15/06/2026"
+      "Painel de Demandas Conitec 15/06/2026",
+      "PubMed 20308655 — Perry JR, RESCUE, J Clin Oncol 2010 (abstract)"
     ],
     "aprovacaoClinica": null,
     "rodadaPendencias": [
@@ -1710,6 +1919,30 @@
       "por": "Claude",
       "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
       "acao": "6 vínculos rebaixados a catalogoIdCandidato"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 31B (Dr. Silas)",
+      "acao": "sus.disponivel de todos os protocolos de temozolomida = sim; conflito fechado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 32A (Dr. Silas)",
+      "acao": "método de MGMT/TERT/CDKN2A: definido com a patologia; pendência fechada"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 33A (Dr. Silas)",
+      "acao": "PCV mantido; carmustina registrada como alternativa nos dois protocolos PCV"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 34B (Dr. Silas)",
+      "acao": "criado gliomas-tmz-protraida-recorrencia (TMZ 50 mg/m²/dia VO contínua, ciclo 28 dias; RESCUE PMID 20308655 + SBOC p. 16)"
     }
   ]
 }
