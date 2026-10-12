@@ -13,6 +13,8 @@ const patientId = "Paciente Teste 92", encounterId = "encontro-demo-f0-92", tumo
 const senha = "demo-f0-exclusivamente-sintetica";
 // A demo nunca herda a ativação de provider de outro projeto/processo.
 process.env.ONCOASSIST_JEV_ENABLED = "false";
+process.env.ONCOASSIST_OPENAI_ENABLED = "false";
+process.env.ONCOASSIST_OPENAI_DOCUMENTS_ENABLED = "false";
 const port = Number(process.env.ONCOGLOBAL_API_PORT ?? "4197");
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("PORTA_DEMO_INVALIDA");
 const dataDir = mkdtempSync(join(tmpdir(), "oncoglobal-f0-demo-sintetica-"));
