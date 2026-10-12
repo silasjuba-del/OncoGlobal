@@ -13,6 +13,76 @@ const RULES = [
   { from: "src/leitura/", forbid: ["src/"], allow: ["src/contracts/", "src/rules/", "src/modules/", "src/kernel/projections/", "src/leitura/"], why: "leitura pura: eventos/projeções entram por parâmetro" },
   { from: "src/impressao/", forbid: ["src/"], allow: ["src/contracts/", "src/modules/", "src/impressao/"], why: "impressão pura: documento entra, HTML sai" },
   { from: "src/modules/", forbid: ["src/"], allow: ["src/contracts/", "src/modules/", "src/rules/"], why: "módulos de domínio puros: só contratos, regras e módulos" },
+  // Pré-F1 (auditoria consolidada A2/A3): fronteiras para as camadas que antes só tinham vigilância de rede.
+  { from: "src/server/", forbid: ["src/"], allow: ["src/kernel/", "src/contracts/", "src/modules/", "src/rules/", "src/server/"], why: "servidor: kernel, contratos, módulos e regras" },
+  { from: "src/app/", forbid: ["src/"], allow: ["src/contracts/", "src/modules/", "src/rules/", "src/app/"], why: "app segue a regra de módulos" },
+  { from: "src/orchestration/", forbid: ["src/"], allow: ["src/contracts/", "src/modules/", "src/rules/", "src/orchestration/"], why: "orquestração segue a regra de módulos" },
+  { from: "src/apac/", forbid: ["src/"], allow: ["src/contracts/", "src/modules/", "src/rules/", "src/apac/"], why: "apac segue a regra de módulos" },
+];
+// Exceções geradas em 2026-10-12 a partir das violações existentes no início da F1 (auditoria consolidada pré-F1).
+// Cada uma vence na fatia F1-S3; corrigir o import e remover a linha.
+// Relação aprovada no pré-F1 (2026-10-12): controla o PERTENCIMENTO, não só a quantidade. A lista só encolhe.
+const aprovadas = JSON.parse(readFileSync(new URL("./fronteiras-excecoes-aprovadas.json", import.meta.url), "utf8"));
+const chaveAprovada = (x) => `${x.arquivo} → ${x.import}`;
+const PARES_APROVADOS = new Set(aprovadas.pares.map(chaveAprovada));
+const TETO_EXCECOES = aprovadas.pares.length;
+// `--fechar-fase=F1-S3`: no fechamento da fatia, nenhuma exceção com esse prazo pode sobrar.
+const FECHAR_FASE = process.argv.find((a) => a.startsWith("--fechar-fase="))?.slice("--fechar-fase=".length) ?? null;
+const EXCECOES = [
+  { arquivo: "src/app/estudio/servidor.ts", import: "src/server/sessao.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/estudio/servidor.ts", import: "src/kernel/gateway/gateway.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/estudio/servidor.ts", import: "src/impressao/kit.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/estudio/servidor.ts", import: "src/impressao/apacLaudo.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/executores/desabilitados.ts", import: "src/kernel/gateway/gateway.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/executores/imprimir.ts", import: "src/kernel/gateway/gateway.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/executores/resolverDocumentoLedger.ts", import: "src/kernel/projections/snapshot.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/executores/resolverDocumentoLedger.ts", import: "src/server/sessao.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/oncoassist.ts", import: "src/kernel/llm/desidentificar.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/oncoassist.ts", import: "src/kernel/llm/jev/sdk.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/oncoassist.ts", import: "src/kernel/llm/jev/contrato.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/oncoassistLocal.ts", import: "src/kernel/ledger/db.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/oncoassistLocal.ts", import: "src/kernel/ledger/ledger.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/oncoassistLocal.ts", import: "src/kernel/ledger/idempotencia.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/oncoassistLocal.ts", import: "src/kernel/gateway/gateway.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/oncoassistLocal.ts", import: "src/server/sessao.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/oncoassistLocal.ts", import: "src/server/http.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/oncoboard/index.ts", import: "src/kernel/llm/desidentificar.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/app/revisaoExtracao.ts", import: "src/kernel/extracao/normalizacao.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
+  { arquivo: "src/orchestration/pipeline-extracao.ts", import: "src/kernel/extracao/tipos.js", expira: "F1-S3", motivo: "orquestração segue a regra de módulos" },
+  { arquivo: "src/orchestration/pipeline-extracao.ts", import: "src/kernel/extracao/segmenter.js", expira: "F1-S3", motivo: "orquestração segue a regra de módulos" },
+  { arquivo: "src/orchestration/pipeline-extracao.ts", import: "src/kernel/extracao/patient-resolver.js", expira: "F1-S3", motivo: "orquestração segue a regra de módulos" },
+  { arquivo: "src/orchestration/pipeline-extracao.ts", import: "src/kernel/extracao/extrator.js", expira: "F1-S3", motivo: "orquestração segue a regra de módulos" },
+  { arquivo: "src/orchestration/pipeline-extracao.ts", import: "src/kernel/extracao/normalizacao.js", expira: "F1-S3", motivo: "orquestração segue a regra de módulos" },
+  { arquivo: "src/orchestration/pipeline-extracao.ts", import: "src/kernel/extracao/reconciliacao.js", expira: "F1-S3", motivo: "orquestração segue a regra de módulos" },
+  { arquivo: "src/orchestration/pipeline-extracao.ts", import: "src/kernel/extracao/deduplicacao.js", expira: "F1-S3", motivo: "orquestração segue a regra de módulos" },
+  { arquivo: "src/orchestration/pipeline-extracao.ts", import: "src/kernel/extracao/eventoRevisao.js", expira: "F1-S3", motivo: "orquestração segue a regra de módulos" },
+  { arquivo: "src/orchestration/pipeline-extracao.ts", import: "src/kernel/extracao/safety.js", expira: "F1-S3", motivo: "orquestração segue a regra de módulos" },
+  { arquivo: "src/orchestration/pipeline-extracao.ts", import: "src/kernel/extracao/caixaRevisao.js", expira: "F1-S3", motivo: "orquestração segue a regra de módulos" },
+  { arquivo: "src/orchestration/pipeline-extracao.ts", import: "src/kernel/extracao/biomarcadores.js", expira: "F1-S3", motivo: "orquestração segue a regra de módulos" },
+  { arquivo: "src/orchestration/pipeline-extracao.ts", import: "src/kernel/projections/radiologia.js", expira: "F1-S3", motivo: "orquestração segue a regra de módulos" },
+  { arquivo: "src/orchestration/pipeline-extracao.ts", import: "src/kernel/projections/timelinePaciente.js", expira: "F1-S3", motivo: "orquestração segue a regra de módulos" },
+  { arquivo: "src/rules/f0c/tetosCumulativos.ts", import: "src/rules/cumulativoAlerta.js", expira: "F1-S3", motivo: "violação pré-existente em f1/integrado (commit dos tetos de dose acumulada); src/rules intocável neste PR" },
+  { arquivo: "src/server/autorizacao.ts", import: "src/kernel/ledger/ledger.js", expira: "F1-S3", motivo: "ledger só pelo kernel" },
+  { arquivo: "src/server/corpus.ts", import: "src/apac/sigtap.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/flash.ts", import: "src/ui/consulta/ConsultaFlash.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/flash.ts", import: "src/ui/api/porta.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/flash.ts", import: "src/config/flash.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/flash.ts", import: "src/kernel/ledger/drafts.js", expira: "F1-S3", motivo: "ledger só pelo kernel" },
+  { arquivo: "src/server/http.ts", import: "src/config/settings.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/leituras.ts", import: "src/ui/api/porta.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/leituras.ts", import: "src/apac/antiglosa.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/leituras.ts", import: "src/apac/sigtap.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/leituras.ts", import: "src/kernel/ledger/drafts.js", expira: "F1-S3", motivo: "ledger só pelo kernel" },
+  { arquivo: "src/server/rotas.ts", import: "src/orchestration/pipeline-extracao.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/rotas.ts", import: "src/config/settings.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/rotas.ts", import: "src/config/servico.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/rotas.ts", import: "src/estatistica/index.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/rotas.ts", import: "src/app/pesquisa/conhecimento.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/rotas.ts", import: "src/app/revisaoExtracao.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/rotas.ts", import: "src/app/oncoassist.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/rotas.ts", import: "src/config/flash.js", expira: "F1-S3", motivo: "servidor: kernel, contratos, módulos e regras" },
+  { arquivo: "src/server/rotas.ts", import: "src/kernel/ledger/drafts.js", expira: "F1-S3", motivo: "ledger só pelo kernel" },
+  { arquivo: "src/server/rotas.ts", import: "src/kernel/ledger/ledger.js", expira: "F1-S3", motivo: "ledger só pelo kernel" },
 ];
 const NET = /from\s+["'](node:https?|node:net|undici|axios|node-fetch)["']|\bfetch\b|\[\s*[\"'`]fetch[\"'`]\s*\]|new\s+WebSocket|\bWebSocket\b|XMLHttpRequest|EventSource|sendBeacon|\bimport\s*\((?!\s*[\"'`][^\"'`]*[\"'`]\s*\)\s*\.[A-Z])|\brequire\s*\(|[\"'`]node:(dgram|tls|http2)[\"'`]/;  // CP-002: inclui acesso computado, WebSocket, import()/require dinâmicos
 // src/server/** é servidor de ENTRADA em 127.0.0.1: pode node:http; nunca cliente de saída.
@@ -48,6 +118,9 @@ for (const file of files) {
         erros.push(`${rel} → ${imp} (${r.why})`);
     }
   }
+  // Pré-F1 (A3): só o kernel usa o ledger diretamente (ledger.js / drafts.js).
+  if (!rel.startsWith("src/kernel/")) for (const imp of imports)
+    if (/^src\/kernel\/ledger\/(ledger|drafts)\.js$/.test(imp)) erros.push(`${rel} → ${imp} (ledger só pelo kernel)`);
   // src/app/** é a raiz de composição: pode subir servidor de ENTRADA local, nunca rede de saída.
   const servidor = rel.startsWith("src/server/") || rel.startsWith("src/app/");
   const uiApi = rel.startsWith("src/ui/api/");
@@ -56,5 +129,25 @@ for (const file of files) {
   else if (!servidor && !rel.startsWith("src/kernel/gateway/") && !rel.startsWith("src/kernel/llm/") && NET.test(code))
     erros.push(`${rel} usa rede fora do gateway/llm (INV-05)`);
 }
-if (erros.length) { console.error("FRONTEIRAS VIOLADAS:\n" + erros.join("\n")); process.exit(1); }
-console.log(`fronteiras ok (${files.length} arquivos)`);
+// Exceções datadas (pré-F1): cada uma nomeada e com prazo. A lista só encolhe: exceção sem prazo, ou que não é
+// mais necessária, falha a bateria (remova-a quando o import for corrigido).
+const chave = (x) => `${x.arquivo} → ${x.import}`;
+const usadas = new Set();
+const restantes = [...new Set(erros)].filter((e) => {
+  const ex = EXCECOES.find((x) => e.startsWith(`${chave(x)} (`));
+  if (!ex) return true;
+  usadas.add(chave(ex)); return false;
+});
+if (EXCECOES.length > TETO_EXCECOES) restantes.push(`exceções acima do teto aprovado (${EXCECOES.length} > ${TETO_EXCECOES}): a lista só encolhe`);
+for (const ex of EXCECOES) {
+  if (!PARES_APROVADOS.has(chave(ex))) restantes.push(`exceção fora da relação aprovada (scripts/fronteiras-excecoes-aprovadas.json): ${chave(ex)}`);
+}
+for (const ex of EXCECOES) {
+  if (FECHAR_FASE && ex.expira === FECHAR_FASE) restantes.push(`exceção vencida no fechamento de ${FECHAR_FASE}: ${chave(ex)}`);
+  else if (!ex.expira) restantes.push(`exceção sem prazo: ${chave(ex)}`);
+  else if (!usadas.has(chave(ex))) restantes.push(`exceção não usada (remova da lista): ${chave(ex)}`);
+}
+if (restantes.length) { console.error("FRONTEIRAS VIOLADAS:\n" + restantes.join("\n")); process.exit(1); }
+console.log(EXCECOES.length === 0
+  ? `fronteiras ok (${files.length} arquivos; 0 exceções)`
+  : `fronteiras ok (${files.length} arquivos; ${EXCECOES.length} exceções datadas, prazo ${[...new Set(EXCECOES.map((x) => x.expira))].join(", ")})`);

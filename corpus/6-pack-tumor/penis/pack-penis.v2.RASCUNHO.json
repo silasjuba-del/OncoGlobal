@@ -2098,10 +2098,11 @@
     },
     {
       "texto": "Conduta específica para cN1 vem só da aula PRO (CURSO/INFERIDO); SBOC não detalha cN1 isoladamente.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2025 pênis: cN1 não detalhado"
-      ]
+      ],
+      "resolucao": "Provisória (46A): conduta cN1 da aula PRO aceita como provisória até fonte SBOC/diretriz; permanece RASCUNHO e não gera alerta."
     },
     {
       "texto": "USG inguinal e linfocintilografia do linfonodo sentinela sem id no catálogo (SEM_ID_NO_CATALOGO).",
@@ -2295,6 +2296,12 @@
       "por": "Claude",
       "achado": "Decisão D-F1-17 item 45A (Dr. Silas)",
       "acao": "criados penis-5fu-creme-ta-tis (5% 2x/dia 3-6 sem) e penis-imiquimode-creme-ta-tis (5% 5x/sem × 6 sem), posologia de bula FDA (sBCC)"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-20 item 46A (Dr. Silas)",
+      "acao": "conduta cN1 (aula PRO) aceita como provisória; pendência resolvida"
     }
   ]
 }
