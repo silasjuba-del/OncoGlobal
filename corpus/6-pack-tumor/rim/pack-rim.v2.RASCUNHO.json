@@ -2691,7 +2691,8 @@
     },
     {
       "texto": "Observação vigilante (T1a, expectativa de vida limitada): intervalo de imagem não consta do MOC nem do DDT lido.",
-      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA"
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "resolucao": "Dr. Silas (2026-10-12): \"RIM E PRÓSTATA = BAIXO RISCO\" — vigilância/observação aplicável ao baixo risco. Intervalo numérico de imagem/PSA não fixado pelo Dr. Silas; registrar quando definido."
     }
   ],
   "conflitos": [
@@ -2866,6 +2867,12 @@
       "por": "Claude",
       "achado": "Conferência MOC 2026 item 9",
       "acao": "observação vigilante: intervalo MANTER_PENDENTE"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão do Dr. Silas",
+      "acao": "decisão \"baixo risco\" registrada para a vigilância"
     }
   ]
 }

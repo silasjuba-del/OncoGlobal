@@ -396,6 +396,85 @@
         "marcadores tumorais séricos"
       ],
       "pendencia": "SEM_FONTE: SBOC não indica marcadores séricos"
+    },
+    "estratificacaoRisco": {
+      "sistema": "AFIP/Miettinen (risco de recidiva em %), variáveis: tamanho, mitoses (corte 5/50 CGA ≈ 5/5 mm²), sítio; rotura tumoral eleva o risco de forma independente",
+      "tabela": [
+        {
+          "tamanho": "≤2 cm",
+          "mitoses": "≤5/50",
+          "gastrico": 0,
+          "jejunoIleo": 0,
+          "duodeno": 0,
+          "reto": 0
+        },
+        {
+          "tamanho": "2–5",
+          "mitoses": "≤5/50",
+          "gastrico": 1.9,
+          "jejunoIleo": 4.3,
+          "duodeno": 8.3,
+          "reto": 8.5
+        },
+        {
+          "tamanho": "5–10",
+          "mitoses": "≤5/50",
+          "gastrico": 3.6,
+          "jejunoIleo": 24,
+          "duodeno": 34,
+          "reto": 57
+        },
+        {
+          "tamanho": ">10",
+          "mitoses": "≤5/50",
+          "gastrico": 12,
+          "jejunoIleo": 52,
+          "duodeno": 34,
+          "reto": 57
+        },
+        {
+          "tamanho": "≤2",
+          "mitoses": ">5/50",
+          "gastrico": 0,
+          "jejunoIleo": 50,
+          "duodeno": null,
+          "reto": 52
+        },
+        {
+          "tamanho": "2–5",
+          "mitoses": ">5/50",
+          "gastrico": 16,
+          "jejunoIleo": 73,
+          "duodeno": 50,
+          "reto": 52
+        },
+        {
+          "tamanho": "5–10",
+          "mitoses": ">5/50",
+          "gastrico": 55,
+          "jejunoIleo": 85,
+          "duodeno": 86,
+          "reto": 71
+        },
+        {
+          "tamanho": ">10",
+          "mitoses": ">5/50",
+          "gastrico": 86,
+          "jejunoIleo": 90,
+          "duodeno": 86,
+          "reto": 71
+        }
+      ],
+      "notaTabela": "Valores do slide da Aula 77, com duas correções pelo AFIP clássico: gástrico 5–10 cm com >5 mitoses = 55% (o slide repete 86%) e jejuno/íleo 5–10 cm com >5 mitoses = 85% (o slide traz 90%). Conferir na publicação original antes de promover.",
+      "alternativaSBOC": "NIH modificado (Joensuu): muito baixo ≤2 cm e ≤5 mitoses; baixo 2–5 cm e ≤5; intermediário gástrico 2–5 cm com >5 ou gástrico 5–10 cm com ≤5; alto: rotura, >10 cm, >10 mitoses, >5 cm com >5 mitoses, não gástrico pequeno com muitas mitoses ou 5–10 cm mesmo com poucas mitoses. Heat map contínuo: adjuvância acima de ~40%.",
+      "conduta": "Imatinibe adjuvante 400 mg/dia por 3 anos no alto risco; intermediário caso a caso; PDGFRA D842V não recebe imatinibe.",
+      "fonte": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026, Aula 77 (GIST, Módulo 8): AFIP/Miettinen citado como Joensuu, Lancet Oncol 2012",
+        "pagina": 13,
+        "trecho": null,
+        "estado": "INFERIDO"
+      }
     }
   },
   "tratamento": {
@@ -1404,13 +1483,23 @@
       },
       "fonteBDetalhe": "HR incompatível com a diferença absoluta descrita; publicação não aberta",
       "escolhaSeguranca": "Não decidir 3 anos de imatinibe pela célula de alto risco não gástrico da tabela do MOC/SBOC (cap. 41, Joensuu com erro: faixa correta 2,1–5 cm; linha intermediária incoerente).",
-      "decisaoNecessaria": true,
+      "decisaoNecessaria": false,
       "fonteC": {
         "tipo": "DIRETRIZ",
         "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
         "pagina": null,
         "trecho": null,
         "estado": "INFERIDO"
+      },
+      "decisao": {
+        "texto": "Usar a estratificação AFIP/Miettinen (Aula 77) com as correções do AFIP clássico, ou o NIH modificado da SBOC; 3 anos de imatinibe no alto risco. Não usar a célula com erro da tabela do MOC.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (fechamento do tópico corpus F1)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
       }
     }
   ],
@@ -1442,6 +1531,12 @@
       "por": "Claude",
       "achado": "Conferência MOC 2026 item 5",
       "acao": "tabela de risco do MOC com erro registrada; não automatizar"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão do Dr. Silas",
+      "acao": "estratificação de risco AFIP (Aula 77) incorporada; 3 anos no alto risco"
     }
   ]
 }

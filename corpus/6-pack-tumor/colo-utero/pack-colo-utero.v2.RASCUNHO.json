@@ -1956,13 +1956,23 @@
         "estado": "CONFLITANTE"
       },
       "escolhaSeguranca": "MANTER_PENDENTE: o próprio MOC diverge (recomendação a cada 3 semanas × citação do GOG a cada 4 semanas).",
-      "decisaoNecessaria": true,
+      "decisaoNecessaria": false,
       "fonteC": {
         "tipo": "DIRETRIZ",
         "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
         "pagina": null,
         "trecho": null,
         "estado": "INFERIDO"
+      },
+      "decisao": {
+        "texto": "Ciclo de 28 dias.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (fechamento do tópico corpus F1)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
       }
     },
     {
@@ -2024,6 +2034,12 @@
       "por": "Claude",
       "achado": "Conferência MOC 2026 item 7",
       "acao": "ifosfamida: MOC diverge internamente; mantido pendente"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão do Dr. Silas",
+      "acao": "ifosfamida no colo: ciclo de 28 dias"
     }
   ]
 }

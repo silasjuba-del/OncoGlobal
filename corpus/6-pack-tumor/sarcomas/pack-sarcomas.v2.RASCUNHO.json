@@ -2196,6 +2196,42 @@
           "trecho": null,
           "estado": "INFERIDO"
         }
+      },
+      {
+        "id": "sarcomas-cordoma-imatinibe-offlabel",
+        "nome": "Imatinibe (off-label)",
+        "cenario": "cordoma irressecável ou metastático",
+        "linha": "conforme decisão médica",
+        "drogas": [
+          {
+            "droga": "Imatinibe",
+            "dose": null,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo",
+            "observacao": "Uso off-label aceito na prática do serviço (Dr. Silas). Dose: decisão médica; sem fonte em MOC/bula."
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "offLabel": true,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "uso off-label, sem incorporação para a indicação",
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (fechamento do tópico corpus F1)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "DOSE_DECISAO_MEDICA"
       }
     ],
     "radioterapia": [
@@ -2733,12 +2769,13 @@
     },
     {
       "texto": "Larotrectinibe, imatinibe (DFSP) e denosumabe (TCG) com dose da bula FDA na indicação. Seguem sem dose: imatinibe no cordoma e regorafenibe no osteossarcoma (sem indicação em bula FDA; dependem de bula ANVISA ou ensaio).",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "Bula FDA VITRAKVI, Gleevec, XGEVA, Stivarga (sem indicação sarcoma)",
         "SBOC partes moles p.14",
         "SBOC ósseos p.18"
-      ]
+      ],
+      "resolucao": "Usa-se off-label (Dr. Silas, 2026-10-12); protocolo sarcomas-cordoma-imatinibe-offlabel, dose por decisão médica."
     },
     {
       "texto": "Sem id no catálogo v1.1: USG de partes moles, RM de membro, RX de segmento ósseo, NGS/TMB e testes germinativos (códigos SIGTAP anotados nos itens). Inclusão depende de D-F1-02.",
@@ -2750,7 +2787,8 @@
     },
     {
       "texto": "Imatinibe no cordoma: sem fonte no MOC 2026 e na bula.",
-      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA"
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "resolucao": "Usa-se off-label (Dr. Silas, 2026-10-12); protocolo sarcomas-cordoma-imatinibe-offlabel, dose por decisão médica."
     }
   ],
   "conflitos": [
@@ -2882,6 +2920,12 @@
       "por": "Claude",
       "achado": "Conferência MOC 2026 item 21",
       "acao": "regorafenibe em sarcoma ósseo com fonte MOC; imatinibe no cordoma sem fonte"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão do Dr. Silas",
+      "acao": "imatinibe no cordoma: uso off-label registrado"
     }
   ]
 }

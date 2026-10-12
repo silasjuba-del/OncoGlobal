@@ -25,3 +25,11 @@ Para cada item: o veredito recebido, o que foi aplicado nos packs v2 e o estado.
 | 21 | Sarcoma ósseo | AJUSTAR | Regorafenibe 160 mg D1–D21 a cada 28 dias (ensaio citado no MOC) entrou como protocolo. Imatinibe no cordoma continua sem fonte. |
 
 Imagem da tabela de risco do GIST enviada junto: `C:\Users\silas\.aside\u\0\sessions\2026-10-11_NbWzTq5AwL5wZvYg\tmp\repl-display-issDK5c7qYeH65pz.jpeg` (fora do repositório).
+
+## Decisões de fechamento (Dr. Silas, 12/10/2026, D-F1-15)
+
+- mDCF: cisplatina no D3.
+- Ifosfamida no colo: 28 dias.
+- GIST: tabela AFIP da Aula 77, corrigida (55% e 85%), ou o NIH modificado da SBOC; 3 anos de imatinibe no alto risco.
+- Imatinibe no cordoma: off-label, dose por decisão médica.
+- Rim e próstata: vigilância no baixo risco.

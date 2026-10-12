@@ -1856,7 +1856,7 @@
             "dose": 40,
             "unidade": "mg/m2",
             "via": "EV",
-            "dias": "D2",
+            "dias": "D3",
             "observacao": ""
           },
           {
@@ -3578,7 +3578,17 @@
         "estado": "CONFLITANTE"
       },
       "escolhaSeguranca": "Pack registra a SBOC (5-FU 400 bolus D1 + 1.000 mg/m²/dia D1–D2); ficha institucional preservada para decisão do Dr. Silas.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Cisplatina no D3 (esquema de Shah, MOC).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (fechamento do tópico corpus F1)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Fichas FLOT e irinotecano × SBOC",
@@ -3701,6 +3711,12 @@
       "por": "Claude",
       "achado": "Conferência MOC 2026 item 4",
       "acao": "mDCF de Shah registrado como conflito (dia da cisplatina); FLOT 2.600 em 24 h já é o valor do pack"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão do Dr. Silas",
+      "acao": "mDCF: cisplatina 40 mg/m² no D3"
     }
   ]
 }

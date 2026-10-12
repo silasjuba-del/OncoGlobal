@@ -3814,10 +3814,11 @@
     },
     {
       "texto": "Intervalo do PSA no seguimento pós-prostatectomia não especificado pela SBOC.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC próstata localizado 2026: sem intervalo de PSA pós-prostatectomia"
-      ]
+      ],
+      "resolucao": "Dr. Silas (2026-10-12): \"RIM E PRÓSTATA = BAIXO RISCO\" — vigilância/observação aplicável ao baixo risco. Intervalo numérico de imagem/PSA não fixado pelo Dr. Silas; registrar quando definido."
     },
     {
       "texto": "Unidades kBq/kg e GBq (radiofármacos) fora do enum de unidade do esquema v2.",
@@ -3836,7 +3837,8 @@
     },
     {
       "texto": "Tabela de PSA no seguimento: não localizada no MOC 2026 (conferência 2026-10-12).",
-      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA"
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "resolucao": "Dr. Silas (2026-10-12): \"RIM E PRÓSTATA = BAIXO RISCO\" — vigilância/observação aplicável ao baixo risco. Intervalo numérico de imagem/PSA não fixado pelo Dr. Silas; registrar quando definido."
     }
   ],
   "conflitos": [
@@ -4033,5 +4035,13 @@
       ],
       "correcoes": []
     }
-  }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão do Dr. Silas",
+      "acao": "decisão \"baixo risco\" registrada para a vigilância"
+    }
+  ]
 }

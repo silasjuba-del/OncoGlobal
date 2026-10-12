@@ -34,7 +34,6 @@ Fonte: campos `conflitos` (com `decisaoNecessaria: true`) e `pendencias` (classe
 
 ## colo-utero
 
-- **Conflito:** Intervalo da ifosfamida em 2ª linha — escolha de segurança registrada: MANTER_PENDENTE: o próprio MOC diverge (recomendação a cada 3 semanas × citação do GOG a cada 4 semanas).
 - **DECISAO_CLINICA_DR_SILAS:** SEM_FONTE: p16/HPV na SBOC colo 2026 — não incluído (não usar p16 como critério de estadiamento).
 - **DECISAO_CLINICA_DR_SILAS:** KEYNOTE-A18: SG imatura na versão SBOC; atualização não incorporada.
 
@@ -65,7 +64,6 @@ Fonte: campos `conflitos` (com `decisaoNecessaria: true`) e `pendencias` (classe
 ## gastrico
 
 - **Conflito:** FLOT paliativo com 5-FU bolus — escolha de segurança registrada: Protocolo paliativo marcado CONFLITANTE (doseVerificada=false). O FLOT perioperatório não tem bolus; não transferir entre cenários — médico decide.
-- **Conflito:** Ficha mDCF institucional × SBOC — escolha de segurança registrada: Pack registra a SBOC (5-FU 400 bolus D1 + 1.000 mg/m²/dia D1–D2); ficha institucional preservada para decisão do Dr. Silas.
 - **Conflito:** Fichas FLOT e irinotecano × SBOC — escolha de segurança registrada: Pack registra doses SBOC; fichas não editadas.
 - **Conflito:** mDCF: dia da cisplatina e 5-FU (SBOC × MOC/Shah) — escolha de segurança registrada: Doses totais coincidem; diverge o dia da cisplatina (D2 × D3). Manter a SBOC até decisão.
 - **DECISAO_CLINICA_DR_SILAS:** CONFLITANTE: FLOT paliativo com 5-FU bolus 400 mg/m² (só na tabela de doença avançada)
@@ -75,7 +73,6 @@ Fonte: campos `conflitos` (com `decisaoNecessaria: true`) e `pendencias` (classe
 
 ## gist
 
-- **Conflito:** Duração estendida do imatinibe — magnitude do efeito — escolha de segurança registrada: Não decidir 3 anos de imatinibe pela célula de alto risco não gástrico da tabela do MOC/SBOC (cap. 41, Joensuu com erro: faixa correta 2,1–5 cm; linha intermediária incoerente).
 - **DECISAO_CLINICA_DR_SILAS:** Tabela de risco da SBOC com erros (gástrico × não gástrico; ≤ 5 cm × ≤ 2 cm) — exigir conferência médica antes de decidir adjuvância.
 - **DECISAO_CLINICA_DR_SILAS:** SEM_FONTE: TC de tórax no estadiamento e EDA não citados pela SBOC.
 
@@ -127,7 +124,6 @@ Fonte: campos `conflitos` (com `decisaoNecessaria: true`) e `pendencias` (classe
 - **DEPENDE_BULA_ANVISA:** Doses de agonistas/antagonistas LHRH tiradas de bula FDA (openFDA); confirmar com bula ANVISA das apresentações disponíveis no serviço. Indicação de bula = câncer de próstata avançado; uso com RT no localizado sustentado pela SBOC (classe e duração).
 - **DEPENDE_BULA_ANVISA:** Olaparibe + abiraterona: SBOC p.16 traz prednisona 5 mg 1x/dia, enquanto abiraterona isolada no mCRPC usa 5 mg 2x/dia (p.15) — confirmar com bula ANVISA do Lynparza. Bula FDA: 5 mg 2x/dia — registrado em conflitos.
 - **DECISAO_CLINICA_DR_SILAS:** Definição de alto risco mHSPC (SBOC p.10) impressa como 'Gleason > 8' e '3 lesões ósseas' — conferir com o PDF/LATITUDE (Gleason ≥ 8, ≥ 3 lesões). Texto extraído do PDF confirma a grafia da SBOC (p.10).
-- **DECISAO_CLINICA_DR_SILAS:** Intervalo do PSA no seguimento pós-prostatectomia não especificado pela SBOC.
 
 ## pulmao
 
@@ -147,7 +143,6 @@ Fonte: campos `conflitos` (com `decisaoNecessaria: true`) e `pendencias` (classe
 - **Conflito:** Doxorrubicina + dacarbazina: número de ciclos na linha paliativa — escolha de segurança registrada: Registrar 1ª linha com a menor dose (750 mg/m²) e 3 ciclos como na tabela; reavaliar com o curador
 - **DEPENDE_BULA_ANVISA:** Mesna (proporção 20% × 3) e resgate com leucovorina preenchidos pela bula FDA. Falta só o protocolo de hidratação/alcalinização do MTX em alta dose (bula ANVISA ou protocolo institucional).
 - **DECISAO_CLINICA_DR_SILAS:** Trabectedina entrou pela bula FDA. Gencitabina + dacarbazina segue fora: SBOC traz D1 e D15 com intervalo de 2 semanas (incoerente) e não há bula/ensaio aberto lido — curador decide se busca a referência original.
-- **DEPENDE_BULA_ANVISA:** Larotrectinibe, imatinibe (DFSP) e denosumabe (TCG) com dose da bula FDA na indicação. Seguem sem dose: imatinibe no cordoma e regorafenibe no osteossarcoma (sem indicação em bula FDA; dependem de bula ANVISA ou ensaio).
 - **DECISAO_CLINICA_DR_SILAS:** Sem id no catálogo v1.1: USG de partes moles, RM de membro, RX de segmento ósseo, NGS/TMB e testes germinativos (códigos SIGTAP anotados nos itens). Inclusão depende de D-F1-02.
 
 ## testiculo
