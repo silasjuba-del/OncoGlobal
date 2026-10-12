@@ -37,10 +37,12 @@ function verificarSintetico(o: { arquivos: Record<string, string>; excecoes: Exc
     mkdirSync(join(dir, "scripts"), { recursive: true });
     const script = join(dir, "scripts/check-boundaries.mjs");
     const codigo = readFileSync(join(root, "scripts/check-boundaries.mjs"), "utf8");
-    const ini = codigo.indexOf("const EXCECOES = [");
-    const fim = codigo.indexOf("\n];", ini);
-    if (ini < 0 || fim < 0) throw new Error("MARCADOR_EXCECOES_AUSENTE");
-    writeFileSync(script, codigo.slice(0, ini) + "const EXCECOES = " + JSON.stringify(o.excecoes) + ";" + codigo.slice(fim + 3));
+    // Limite no próprio terminador da declaração: [] e arrays multilinha,
+    // sem avançar até o ] de COMPOSICAO ou de qualquer outra política.
+    const declaracao = /const EXCECOES\s*=\s*\[[\s\S]*?\]\s*;/.exec(codigo);
+    if (!declaracao || declaracao.index === undefined) throw new Error("MARCADOR_EXCECOES_AUSENTE");
+    const ini = declaracao.index, fim = ini + declaracao[0].length;
+    writeFileSync(script, codigo.slice(0, ini) + "const EXCECOES = " + JSON.stringify(o.excecoes) + ";" + codigo.slice(fim));
     writeFileSync(join(dir, "scripts/fronteiras-excecoes-aprovadas.json"),
       JSON.stringify({ aprovadoEm: "2026-10-12", origem: "sintético", prazo: "F1-S3", pares: o.aprovadas }));
     const run = spawnSync(process.execPath, [script, ...(o.args ?? [])], { cwd: dir, encoding: "utf8", timeout: 10_000 });
@@ -61,17 +63,17 @@ const violaA = { "src/server/probe.ts": "import '../kernel/ledger/ledger.js';\n"
 const violaB = { "src/app/probe.ts": "import '../kernel/projections/snapshot.js';\n", "src/kernel/projections/snapshot.ts": "export {};\n" };
 const violaC = { "src/orchestration/probe.ts": "import '../kernel/projections/snapshot.js';\n", "src/kernel/projections/snapshot.ts": "export {};\n" };
 
-describe("pré-F1 · fronteiras com dívida explícita", () => {
+describe("F1-S3 · fronteiras fechadas sem exceções", () => {
   it("fixture sintética: zero exceções e zero violações passa", () => {
     const r = verificarSintetico({ arquivos: { "src/modules/x/a.ts": "import '../../contracts/base.js';\n", "src/contracts/base.ts": "export {};\n" }, excecoes: [], aprovadas: [] });
     expect(r.status, r.output).toBe(0);
     expect(r.output).toContain("0 exceções");
   });
 
-  it("fixture sintética: subconjunto da relação aprovada passa", () => {
+  it("fixture sintética: nem subconjunto historicamente aprovado reabre exceções", () => {
     const r = verificarSintetico({ arquivos: violaA, excecoes: [exc(A)], aprovadas: [A, B] });
-    expect(r.status, r.output).toBe(0);
-    expect(r.output).toContain("1 exceções datadas");
+    expect(r.status).toBe(1);
+    expect(r.output).toContain("F1-S3 encerrada exige 0 exceções, independentemente do manifesto");
   });
 
   it("fixture sintética: troca de exceção com contagem constante falha", () => {
@@ -99,13 +101,11 @@ describe("pré-F1 · fronteiras com dívida explícita", () => {
     expect(r.output).toContain("0 exceções");
   });
 
-  it("aceita a dívida aprovada (no máximo o manifesto) e permite que ela encolha até zero", () => {
-    const teto = (JSON.parse(readFileSync(join(root, "scripts/fronteiras-excecoes-aprovadas.json"), "utf8")) as { pares: unknown[] }).pares.length;
+  it("árvore real exige dívida zero mesmo mantendo manifesto histórico", () => {
     const result = verificar();
     expect(result.status, result.output).toBe(0);
     const n = Number(/(\d+) exceções/.exec(result.output)?.[1]);
-    expect(n).toBeGreaterThanOrEqual(0);
-    expect(n).toBeLessThanOrEqual(teto);
+    expect(n).toBe(0);
   });
 
   it("fixture sintética: no fechamento, exceção com prazo diferente do manifesto também vence", () => {

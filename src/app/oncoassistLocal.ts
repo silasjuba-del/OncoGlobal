@@ -1,14 +1,16 @@
+import { instanteDoServico } from "../contracts/f1/relogio.js";
 import { existsSync, statSync } from "node:fs";
 import { isAbsolute, resolve } from "node:path";
 import { abrirLedger } from "../kernel/ledger/db.js";
-import { auditar } from "../kernel/ledger/ledger.js";
+import { auditar } from "../kernel/comandos/portas.js";
 import { sqliteIdempotencia } from "../kernel/ledger/idempotencia.js";
 import { criarGateway } from "../kernel/gateway/gateway.js";
 import { criarGerenciadorSessao } from "../server/sessao.js";
 import { criarServidorLocal } from "../server/http.js";
-import { criarOncoassistJev } from "./oncoassist.js";
-import { criarExecutorImprimir } from "./executores/imprimir.js";
-import { criarResolverDocumentoLedger } from "./executores/resolverDocumentoLedger.js";
+import { criarOncoassistJev } from "../kernel/llm/jev/oncoassist.js";
+import { criarExecutorImprimir } from "../kernel/gateway/executores/imprimir.js";
+import { criarResolverDocumentoLedger } from "../kernel/ledger/documentos.js";
+import { criarRuntimeExtracaoLlm } from "../kernel/llm/openai/runtime.js";
 
 export interface OpcoesOncoassistLocal {
   dataDir: string;
@@ -43,13 +45,18 @@ export async function iniciarOncoassistLocal(opcoes: OpcoesOncoassistLocal) {
     throw new Error("CONFIGURACAO_LOCAL_INVALIDA");
   const arquivo = resolve(opcoes.dataDir, "ledger.sqlite");
   if (!existsSync(arquivo) || !statSync(arquivo).isFile()) throw new Error("LEDGER_LOCAL_AUSENTE");
-  const agora = () => new Date().toISOString();
+  const agora = () => instanteDoServico();
   const sessoes = criarGerenciadorSessao({ medicoId: opcoes.medicoId, crm: opcoes.crm,
     senha: opcoes.senha, duracaoMs: 8 * 60 * 60 * 1000, agora });
   const db = abrirLedger(arquivo);
+  const extracaoLlm = criarRuntimeExtracaoLlm({ auditar: e => auditar(db, { ator: { tipo: "SISTEMA", id: "llm-extracao" },
+    acaoPedida: "LLM_EXTRACAO", decisao: e.status === "PROPOSTA" ? "PERMITIDA" : "NEGADA", motivoCodigo: e.codigo,
+    em: agora(), politicaVersao: e.promptId }) });
   const gateway = criarGateway({ agora, store: sqliteIdempotencia(db), executores: {
     IMPRIMIR: criarExecutorImprimir({dataDir:opcoes.dataDir,agora,resolverDocumento:criarResolverDocumentoLedger(db)}),
+    LLM_EXTRACAO: extracaoLlm.executor,
   },
+    validarExtracaoLlm: extracaoLlm.validarExtracaoLlm,
     auditar: (e) => auditar(db, { ator: { tipo: "SISTEMA", id: "oncoassist-local" },
       ...e, politicaVersao: "oncoassist-local-v1" }),
   });
@@ -57,6 +64,7 @@ export async function iniciarOncoassistLocal(opcoes: OpcoesOncoassistLocal) {
   const fecharDb = () => { if (!fechado) { fechado = true; db.close(); } };
   try {
     const server = criarServidorLocal({ db, sessoes, gateway, agora, log: () => {}, configRootDir: opcoes.dataDir,
+      extracaoLlm,
       oncoassistJev: criarOncoassistJev(),
     }, { host: "127.0.0.1", port: opcoes.port });
     server.once("close", fecharDb);

@@ -15,7 +15,7 @@ it("sem ativo usa mais recente; divergência na mesma data permanece pendente",(
  expect(selecionarEstadiamentoFlash([novo,{...novo,grupo:"II"}])).toBeUndefined();
 });
 it("adapta TNM com valores do contrato sem duplicar T/N/M e sem tomar outro lote",async()=>{
- const v=await criarPortaFalsa().carregarConsulta(ID.multi);
+ const v=await criarPortaFalsa().carregarConsulta(ID.multi, undefined, "en-multi");
  const lote=v.cabecalho.lotes[0]!;
  const atual={...v,tumorLotId:lote.tumorLotId,cabecalho:{...v.cabecalho,loteSelecionadoId:lote.tumorLotId,lotes:[{...lote,estadiamentos:[est("est-teste","2026-10-01","III",true)]}]}};
  expect(montarPropsFlash(atual,null,()=>{},()=>{}).cabecalho).toMatchObject({tnm:"pT3N1M0",estadio:"III"});

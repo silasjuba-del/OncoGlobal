@@ -11,14 +11,14 @@ function evento(id: string, tipo: string, data: unknown, extra: Partial<Clinical
 }
 const lab = (id: string, valor: number, data = "2026-10-09", extra: Partial<ClinicalEvent> = {}) =>
   evento(id, "LabResult", { campo: "creatinina", valor, unidade: "mg/dL", data, sourceId: id }, extra);
-it("filtra paciente, lote, RAW e futuro, preservando conflito de laboratório e fonte sem fraseLaudo", () => {
+it("filtra paciente, RAW e futuro; função orgânica atravessa lotes, preservando conflito de laboratório e fonte sem fraseLaudo", () => {
   const r = projetarContextoClinico({ ...base, eventos: [lab("a", 1), lab("b", 2), lab("antigo", .8, "2026-10-01"),
     lab("estranho", 20, "2026-10-09", { patientId: "outro" }), lab("outro-lote", 50, "2026-10-09", { tumorLotId: "lote-b" }),
     lab("raw", 99, "2026-10-09", { revisao: "RAW" }), lab("futuro", 3, "2026-10-11") ] });
-  expect(r.flash.laboratorios.map(x => x.eventId)).toEqual(["a", "b"]);
+  expect(r.flash.laboratorios.map(x => x.eventId)).toEqual(["a", "b", "outro-lote"]);
   expect(r.flash.laboratorios.every(x => x.conflito && x.situacao === "SEM_REFERENCIA")).toBe(true);
   expect(r.flash.laboratorios[0]?.sourceIds).toEqual(["a"]);
-  expect(r.laboratoriosFonte).toHaveLength(3);
+  expect(r.laboratoriosFonte).toHaveLength(4);
   expect(r.pendencias).toContain("LABORATORIOS_DIVERGENTES");
 });
 it("não transforma vazio em negação e preserva negação explícita, conflito e fontes", () => {

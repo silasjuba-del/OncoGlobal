@@ -12,7 +12,7 @@ import { lerLimiarAlertaPlaquetas, type LimiarAlertaPlaquetas } from "../rules/p
 import { lerAlertaFeve } from "../rules/alertaFeve.js";
 import type { RulesetSemaforo } from "../rules/semaforoInteracoes.js";
 import type { CatalogoInteracoes } from "../contracts/f0c/interacoes.js";
-import { carregarCompetenciaSigtap, type TabelasSigtap } from "../apac/sigtap.js";
+import { carregarCompetenciaSigtap, type TabelasSigtap } from "../modules/apac/sigtap.js";
 import type { RegraInstrumento } from "../contracts/f0c/instrumentos.js";
 import type { RegraCondicional, RegraTermoComplementar } from "../contracts/f0c/condicionais.js";
 import type { EntradaControlado } from "../rules/prescricao/receituarioEspecial.js";

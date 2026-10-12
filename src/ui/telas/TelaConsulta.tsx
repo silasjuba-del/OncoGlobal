@@ -36,6 +36,8 @@ import { prescricaoSintetica } from "../oncochart/prescricao-visao.js";
 import { Timeline2D } from "../oncochart/Timeline2D.js";
 import { timelineDaConsulta } from "../oncochart/timelineDaConsulta.js";
 import { InstrumentosClinicos } from "../clinico/InstrumentosClinicos.js";
+import { ConsultaResposta, type ConsultaIntegrada } from "../api/respostas.js";
+import { VisaoIntegradaMinima } from "../consulta/VisaoIntegradaMinima.js";
 
 // @ts-expect-error folha CSS pura, resolvida pelo Vite
 import "./consulta.css";
@@ -58,7 +60,7 @@ export function TelaConsulta({
   chaves: ChavesIntencao;
   onChart?: (chart: CabecalhoChart | null) => void;
 }) {
-  const [visao, setVisao] = useState<ConsultaVisao | null>(null);
+  const [visao, setVisao] = useState<ConsultaIntegrada | null>(null);
   const [loteId, setLoteId] = useState<string | null>(null);
   const [selecionandoLote, setSelecionandoLote] = useState(false);
   const pacienteAtual = useRef(patientId);
@@ -90,15 +92,22 @@ export function TelaConsulta({
 
   useEffect(() => {
     let viva = true;
+    setVisao(null);
     setSelecionandoLote(false);
     impressao.current = null;
     impressaoEnviada.current = false;
     setImpressaoArmada(false);
-    porta.carregarConsulta(patientId).then(
+    porta.agendaDoDia().then(agenda => {
+      const encontros = agenda.itens.filter(item => item.patientId === patientId);
+      if (encontros.length !== 1) throw new ErroPorta("ENCONTRO_EXPLICITO_OBRIGATORIO");
+      return porta.carregarConsulta(patientId, undefined, encontros[0]!.encounterId);
+    }).then(
       (proxima) => {
         if (!viva) return;
-        setVisao(proxima);
-        setLoteId(proxima.cabecalho.loteSelecionadoId);
+        const resposta = ConsultaResposta.safeParse(proxima);
+        if (!resposta.success || resposta.data.patientId !== patientId) { setVisao(null); return; }
+        setVisao(resposta.data);
+        setLoteId(resposta.data.cabecalho.loteSelecionadoId);
       },
       (erro: unknown) => {
         if (!viva) return;
@@ -117,7 +126,7 @@ export function TelaConsulta({
   useEffect(() => { setPreviewFlash(null); setFlashOcupado(false); }, [patientId, loteId]);
 
   const chart = useMemo(() => {
-    if (!visao) return null;
+    if (!visao || visao.patientId !== patientId) return null;
     const cabecalho = { ...visao.cabecalho, loteSelecionadoId: loteId };
     return montarCabecalhoChart(
       cabecalho,
@@ -206,7 +215,7 @@ export function TelaConsulta({
         setFlashErro(textoErroFlash(CF.erroRascunho, erro));
         // Revisão defasada: recarrega a visão para pegar a revisão corrente; a tela e o overlay continuam como estão.
         if (erro instanceof ErroPorta && erro.detalhe === "REVISAO_RASCUNHO_CONFLITANTE") {
-          void porta.carregarConsulta(patientId, loteId).then((proxima) => {
+          void porta.carregarConsulta(patientId, loteId, visao?.encounterId).then((proxima) => {
             if (pacienteAtual.current === patientId) flashRevisao.current = proxima.flash?.rascunho?.revision ?? null;
           }, () => undefined);
         }
@@ -326,6 +335,8 @@ export function TelaConsulta({
 
   return (
     <main aria-label="Consulta pronta" className="tela-consulta pilha" style={{ position: "relative" }}>
+      <VisaoIntegradaMinima {...(!selecionandoLote && visao.retrato ? {retrato:visao.retrato}: {})}
+        {...(!selecionandoLote && visao.visaoIntegrada ? {visao:visao.visaoIntegrada}: {})} />
       {sessaoExpirada ? <p>sessão expirada — entre de novo</p> : null}
       {acaoRevisao ? <p className="oc-flash-status" role="status">{acaoRevisao}</p> : null}
       {avisoFlash ? <p className="oc-flash-status" role="status" aria-label="status da Consulta Flash">{avisoFlash}</p> : null}
@@ -446,9 +457,13 @@ export function TelaConsulta({
               setSelecionandoLote(true);
               impressao.current = null;
               setImpressaoArmada(false);
-              void porta.carregarConsulta(patientId, escolhido).then((proxima) => {
+              void porta.carregarConsulta(patientId, escolhido, visao?.encounterId).then((proxima) => {
                 if (pacienteAtual.current !== patientId) return;
-                setVisao(proxima); setLoteId(proxima.cabecalho.loteSelecionadoId);
+                const resposta = ConsultaResposta.safeParse(proxima);
+                if (!resposta.success || resposta.data.patientId !== patientId || resposta.data.tumorLotId !== escolhido) {
+                  setVisao(null); setAcaoRevisao("Contexto divergente. Reabra a consulta."); return;
+                }
+                setVisao(resposta.data); setLoteId(resposta.data.cabecalho.loteSelecionadoId);
               }, () => {
                 if (pacienteAtual.current === patientId) setAcaoRevisao("Não foi possível selecionar o lote. Reabra a consulta.");
               }).finally(() => { if (pacienteAtual.current === patientId) setSelecionandoLote(false); });

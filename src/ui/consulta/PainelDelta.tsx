@@ -1,15 +1,10 @@
+import type { ItemDeltaVisao } from '../../contracts/api/delta.js';
+export type { ItemDeltaVisao } from '../../contracts/api/delta.js';
 import type { DeltaDirecao, DeltaKind, Semaforo } from "../../contracts/estados.js";
 import { classeSemaforo } from "../tema/temas.js";
 
 /** Visão de um item do delta. `direcao` só existe quando a regra clínica a trouxe (K-17). */
-export interface ItemDeltaVisao {
-  id: string;
-  rotulo: string;
-  kind: DeltaKind;
-  estado: Semaforo;
-  direcao?: DeltaDirecao;
-  candidatos?: readonly { rotulo: string; valorTexto: string }[];
-}
+
 
 function seta(direcao: DeltaDirecao): string {
   return direcao === "MELHOR" ? "↑ MELHOR" : "↓ PIOR";

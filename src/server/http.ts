@@ -1,7 +1,10 @@
 import { createServer, type Server } from "node:http";
 import { rotear, type ServidorDeps } from "./rotas.js";
-import { createSettingsService } from "../config/settings.js";
+import { createSettingsService } from "../kernel/config/settings.js";
 import { carregarCorpusServidor } from "./corpus.js";
+import { criarMotorF1 } from "../kernel/orquestracao/runtime.js";
+import { referenciaBibliotecaAtiva } from "./biblioteca.js";
+import { carregarConfigMotor } from "../kernel/corpus/configMotor.js";
 
 /** Loopback only; a caller cannot override the bind address. */
 export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; port?: number } = {}): Server {
@@ -18,8 +21,11 @@ export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; 
   const runtimeDeps: ServidorDeps = { ...deps, settings,
     corpus,
     salaoRuleset: deps.salaoRuleset === undefined ? corpus?.ruleset ?? null : deps.salaoRuleset };
+  const configMotor=carregarConfigMotor();
+  runtimeDeps.motorF1=deps.motorF1??criarMotorF1(deps.db,deps.agora,()=>({...configMotor,biblioteca:referenciaBibliotecaAtiva(deps.db)??configMotor.biblioteca}));
+  void runtimeDeps.motorF1.processar().catch(()=>deps.log({rota:"motor-f1",codigo:"RECUPERACAO_PENDENTE",status:503}));
   const server = createServer((req, res) => {
-    void rotear(runtimeDeps, req, res).catch(() => {
+    void rotear(runtimeDeps, req, res).then(()=>runtimeDeps.motorF1?.processar()).catch(() => {
       // The router handles expected failures; this fallback remains PHI-free.
       runtimeDeps.log({ rota: "desconhecida", codigo: "ERRO_INTERNO", status: 500 });
       if (!res.headersSent) res.writeHead(500);

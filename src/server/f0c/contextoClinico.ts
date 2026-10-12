@@ -5,7 +5,7 @@ import type { ClinicalEvent } from "../../contracts/operacao.js";
 import { ProtocolTemplate } from "../../contracts/w10/prescricao.js";
 import { ClinicalFact } from "../../contracts/w10/extracao.js";
 import { administrations, labSeries } from "../../kernel/projections/series.js";
-import { dadosDoEvento, eventosVigentes, projetarSnapshot, type ValorProjetado } from "../../kernel/projections/snapshot.js";
+import { dadosDoEvento, escopoDoEvento, eventosVigentes, projetarSnapshot, type ValorProjetado } from "../../kernel/projections/snapshot.js";
 import { projetarHistoricoTratamento, type FatoTratamento } from "../../kernel/projections/historicoTratamento.js";
 
 const dia = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(s => {
@@ -19,7 +19,7 @@ export interface EntradaContextoClinico {
 }
 function noEscopo(i: EntradaContextoClinico) {
   const instante = Date.parse(i.agora);
-  return i.eventos.filter(e => e.patientId === i.patientId && (e.tumorLotId === i.tumorLotId || e.tumorLotId === null)
+  return i.eventos.filter(e => e.patientId === i.patientId && (escopoDoEvento(e) === "PACIENTE" || e.tumorLotId === i.tumorLotId || e.tumorLotId === null)
     && Number.isFinite(Date.parse(e.criadoEm)) && Date.parse(e.criadoEm) <= instante);
 }
 const fontes = (e: ClinicalEvent) => [...new Set([...e.fontes.map(f => f.sourceId),
@@ -48,7 +48,7 @@ export function projetarContextoClinico(i: EntradaContextoClinico) {
   const atuais = projetarSnapshot(fatos.filter(e => e.encounterId === i.encounterId), i.patientId, i.tumorLotId, i.encounterId, "f0c-tox-v1");
   const campo = (nome: string) => {
     const v = (nome === "toxicidades" ? atuais : snapshot).campos[nome] ?? { valor: null, eventIds: [], estado: "PENDENTE" as const };
-    return { ...v, sourceIds: [...new Set(v.eventIds.flatMap(id => { const e = escopo.find(e => e.eventId === id); return e ? fontes(e) : []; }))] };
+    return { ...v, escopo: nome === "toxicidades" ? "TUMOR" as const : "PACIENTE" as const, sourceIds: [...new Set(v.eventIds.flatMap(id => { const e = escopo.find(e => e.eventId === id); return e ? fontes(e) : []; }))] };
   };
   const campos = { alergias: campo("alergias"), comorbidades: campo("comorbidades"), toxicidades: campo("toxicidades"), medicamentos: campo("medicamentos") };
   const pontos = labSeries(escopo).filter(p => Number.isFinite(p.valor) && dia.safeParse(p.data).success && p.data <= hoje);

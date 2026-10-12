@@ -85,7 +85,7 @@ it("serve seis leituras HTTP do ledger com escopo por paciente/encontro e pendê
   persistir(patientA.patientId, "encontro-41", "AgendaEntry", {
     patientId: patientA.patientId, encounterId: "encontro-41", horario: "09:00", data: "2026-10-07",
   }, null, []);
-  const contato = { contatoId: "contato-41", canal: "WHATSAPP_SERVICO", endereco: "5511999990001",
+  const contato = { contatoId: "contato-41", canal: "WHATSAPP_SERVICO", endereco: "endereco-sintetico-41",
     patientId: patientA.patientId, relacao: "PACIENTE", vinculadoEm: agora(), revogadoEm: null };
   persistir(patientA.patientId, "encontro-41", "Contato", contato, null, []);
   persistir(patientA.patientId, "encontro-41", "CanalMessage", {
@@ -97,7 +97,7 @@ it("serve seis leituras HTTP do ledger com escopo por paciente/encontro e pendê
     texto: "não pode cruzar o envelope", em: agora(), redFlag: false,
   }, loteB.tumorLotId, [fonteSintetica("canal-mismatch")]);
   const contatoB = { ...contato, contatoId: "contato-revogado-42", patientId: patientB.patientId,
-    endereco: "5511999990042" };
+    endereco: "endereco-sintetico-42" };
   persistir(patientB.patientId, "encontro-42", "Contato", contatoB, loteB.tumorLotId, []);
   persistir(patientB.patientId, "encontro-42", "Contato", { ...contatoB, revogadoEm: agora() }, loteB.tumorLotId, []);
   persistir(patientB.patientId, "encontro-42", "CanalMessage", { mensagemId: "mensagem-revogada",
@@ -115,7 +115,7 @@ it("serve seis leituras HTTP do ledger com escopo por paciente/encontro e pendê
   persistir(patientA.patientId, "encontro-41", "ChatMessage", { mensagemId: "chat-41",
     patientId: patientA.patientId, encounterId: "encontro-41", setor: "MEDICO", autor: "médico", texto: "nota sintética" });
 
-  const consultaA = await post("/consulta/carregar", { patientId: patientA.patientId });
+  const consultaA = await post("/consulta/carregar", { patientId: patientA.patientId, encounterId: "encontro-41" });
   expect(consultaA.status).toBe(200);
   expect(consultaA.data.cabecalho.paciente.patientId).toBe(patientA.patientId);
   expect(consultaA.data.cabecalho.lotes).toEqual([]);
@@ -124,11 +124,11 @@ it("serve seis leituras HTTP do ledger com escopo por paciente/encontro e pendê
   const chatA = await post("/consulta/chat", { setor: "MEDICO" });
   expect(chatA.data.patientId).toBe(patientA.patientId);
   expect(chatA.data.mensagens).toMatchObject([{ mensagemId: "chat-41", texto: "nota sintética" }]);
-  const failedSelection = await post("/consulta/carregar", { patientId: "Paciente Teste 99" });
+  const failedSelection = await post("/consulta/carregar", { patientId: "Paciente Teste 99", encounterId: "encontro-99" });
   expect(failedSelection.status).toBe(404);
   const chatAfterFailedSelection = await post("/consulta/chat", { setor: "MEDICO" });
   expect(chatAfterFailedSelection.status).toBe(409);
-  await post("/consulta/carregar", { patientId: patientA.patientId });
+  await post("/consulta/carregar", { patientId: patientA.patientId, encounterId: "encontro-41" });
 
   const prescription = await post("/consulta/prescricao/rascunho", { patientId: patientA.patientId,
     encounterId: "encontro-41", tumorLotId: null, expression: "ONDANSETRONA 8 MG VO 8/8H SE NÁUSEA" });
@@ -139,7 +139,7 @@ it("serve seis leituras HTTP do ledger com escopo por paciente/encontro e pendê
   const transferPrescription = await post("/consulta/rascunho/revisar", { draftId: prescriptionId,
     expectedRevision: 0, patientId: patientB.patientId });
   expect(transferPrescription.status).toBe(409);
-  await post("/consulta/carregar", { patientId: patientB.patientId });
+  await post("/consulta/carregar", { patientId: patientB.patientId, encounterId: "encontro-42" });
   const staleTabPrescription = await post("/consulta/prescricao/rascunho", { patientId: patientA.patientId,
     encounterId: "encontro-41", tumorLotId: null, expression: "ONDANSETRONA 8 MG VO 8/8H SE NÁUSEA" });
   expect(staleTabPrescription.status).toBe(409);
@@ -191,7 +191,7 @@ it("serve seis leituras HTTP do ledger com escopo por paciente/encontro e pendê
   const apacs = await post("/consulta/apac", {});
   expect(apacs.status).toBe(200);
   expect(apacs.data.itens).toMatchObject([{ patientId: patientB.patientId, apac: { apacId: "apac-42" }, antiglosa: { exportavel: false } }]);
-  const consultaB = await post("/consulta/carregar", { patientId: patientB.patientId });
+  const consultaB = await post("/consulta/carregar", { patientId: patientB.patientId, encounterId: "encontro-42" });
   expect(consultaB.status).toBe(200);
   expect(consultaB.data.cabecalho.episodio.episodioId).toBe("episodio-42");
   expect(consultaB.data.estado).toBe("PARCIAL"); // incomplete CID/source never blocks the consultation.
@@ -202,9 +202,9 @@ it("serve seis leituras HTTP do ledger com escopo por paciente/encontro e pendê
   const chatB = await post("/consulta/chat", { setor: "SECRETARIA" });
   expect(chatB.data.patientId).toBe(patientB.patientId);
 
-  const missing = await post("/consulta/carregar", { patientId: "Paciente Teste 99" });
+  const missing = await post("/consulta/carregar", { patientId: "Paciente Teste 99", encounterId: "encontro-99" });
   expect(missing.status).toBe(404);
-  const offsetOrder = await post("/consulta/carregar", { patientId: patientC.patientId });
+  const offsetOrder = await post("/consulta/carregar", { patientId: patientC.patientId, encounterId: "encontro-43-atual" });
   expect(offsetOrder.data.encounterId).toBe("encontro-43-atual");
   expect(offsetOrder.data.cabecalho.paciente.nome).toBe("Paciente Teste 43 atual");
   await new Promise<void>((resolve) => server.close(() => resolve()));

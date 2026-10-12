@@ -122,7 +122,7 @@ describe("closure F04 · vínculo documental explicitamente revisado", () => {
     } finally { await ambiente.close(); }
   });
 
-  it("preserva o comando legado como identidade apenas sem selecionar consulta nem confirmar fatos", async () => {
+  it("preserva o comando legado após selecionar encontro explicitamente sem confirmar fatos", async () => {
     const ambiente = await ambienteHttp();
     try {
       cadastrarPaciente(ambiente, "Maria Alves de Souza");
@@ -130,12 +130,14 @@ describe("closure F04 · vínculo documental explicitamente revisado", () => {
         recordingId: "recording-sintetico-legacy", sourceId: "documento-sintetico-legacy", sourceType: "medical_note",
         rawTranscript: "Resumo sintético sem identificador ou nome documental.",
       });
+      const contexto = {patientId: PACIENTE, encounterId: ENCONTRO, tumorLotId: null};
+      expect(await post(ambiente, "/consulta/contexto/selecionar", contexto)).toMatchObject({status: 200});
       const response = await post<{ codigo: string; fatosConfirmados: number }>(ambiente,
         "/consulta/rascunho/revisar", { draftId: extracted.data.draftId, expectedRevision: 0, patientId: PACIENTE });
       expect(response).toMatchObject({ status: 200, data: { codigo: "VINCULO_REVISTO", fatosConfirmados: 0 } });
-      expect(ambiente.sessoes.consultaSelecionada(ambiente.token)).toBeNull();
+      expect(ambiente.sessoes.consultaSelecionada(ambiente.token)).toEqual(contexto);
       expect(lerDraft(ambiente.db, extracted.data.draftId)).toMatchObject({ patientId: PACIENTE,
-        payload: { patientLinkReview: { patientId: PACIENTE, tumorLotId: null, identityOnly: true,
+        payload: { patientLinkReview: { patientId: PACIENTE, tumorLotId: null, identityOnly: false,
           segmentId: expect.any(String) } } });
       expect(ambiente.db.prepare("SELECT COUNT(*) AS n FROM clinical_event WHERE tipo='FATO'").get()).toMatchObject({ n: 0 });
     } finally { await ambiente.close(); }

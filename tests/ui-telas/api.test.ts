@@ -51,7 +51,7 @@ describe("porta falsa", () => {
     expect(ActionIntent.safeParse(intent).success).toBe(true);
     const confirmado = await porta.confirmar(bloco);
     const executado = await porta.acao(intent);
-    expect(confirmado.codigo).toBe("CONFIRMADO");
+    expect(confirmado.codigo).toBe("GRAVADA");
     expect(executado.decisao).toBe("EXECUTADA");
     expect(JSON.stringify(bloco)).not.toContain("medicoId");
     expect(JSON.stringify(intent)).not.toContain("medicoId");
@@ -76,12 +76,12 @@ describe("porta falsa", () => {
       "PR-MULTI",
       "PR-CANAL",
     ]);
-    const verde = await porta.carregarConsulta(ID.verde);
-    const vermelho = await porta.carregarConsulta(ID.vermelho);
-    const pendente = await porta.carregarConsulta(ID.pendente);
-    const e1 = await porta.carregarConsulta(ID.e1);
-    const multi = await porta.carregarConsulta(ID.multi);
-    const canal = await porta.carregarConsulta(ID.canal);
+    const verde = await porta.carregarConsulta(ID.verde, undefined, "en-verde");
+    const vermelho = await porta.carregarConsulta(ID.vermelho, undefined, "en-vermelho");
+    const pendente = await porta.carregarConsulta(ID.pendente, undefined, "en-pendente");
+    const e1 = await porta.carregarConsulta(ID.e1, undefined, "en-e1");
+    const multi = await porta.carregarConsulta(ID.multi, undefined, "en-multi");
+    const canal = await porta.carregarConsulta(ID.canal, undefined, "en-canal");
     expect(verde.cabecalho.semaforo).toBe("VERDE");
     expect(vermelho.cabecalho.semaforo).toBe("VERMELHO");
     expect(vermelho.fechamento.alertasVermelhos.length).toBeGreaterThan(0);

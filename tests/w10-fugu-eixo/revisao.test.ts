@@ -83,7 +83,7 @@ function quantidadeFatos(ambiente: Ambiente): number {
 
 async function extrairEVincular(ambiente: Ambiente): Promise<{ selecao: Selecao; fato: FatoExtraido }> {
   const consulta = await post<{ patientId: string; encounterId: string }>(
-    ambiente, "/consulta/carregar", { patientId: PACIENTE });
+    ambiente, "/consulta/carregar", { patientId: PACIENTE, encounterId: ENCONTRO });
   expect(consulta.status).toBe(200);
   expect(consulta.data).toMatchObject({ patientId: PACIENTE, encounterId: ENCONTRO });
 
@@ -204,7 +204,7 @@ describe("W10 FUGU-EIXO-02 · revisão de extração por HTTP real", () => {
 
       const login = await post<{ token: string }>(ambiente, "/login", { senha: SENHA }, "");
       expect(login.status).toBe(200);
-      expect((await post(ambiente, "/consulta/carregar", { patientId: PACIENTE }, login.data.token)).status)
+      expect((await post(ambiente, "/consulta/carregar", { patientId: PACIENTE, encounterId: ENCONTRO }, login.data.token)).status)
         .toBe(200);
       const outraSessao = await post<Codigo>(ambiente, "/consulta/rascunho/revisar", {
         ...selecao, comprovanteExibicao: comprovante,
@@ -213,7 +213,7 @@ describe("W10 FUGU-EIXO-02 · revisão de extração por HTTP real", () => {
       expect(quantidadeFatos(ambiente)).toBe(0);
 
       semearPaciente(ambiente, "43");
-      expect((await post(ambiente, "/consulta/carregar", { patientId: OUTRO_PACIENTE })).status).toBe(200);
+      expect((await post(ambiente, "/consulta/carregar", { patientId: OUTRO_PACIENTE, encounterId: "encontro-teste-43" })).status).toBe(200);
       const consultaTrocada = await post<Codigo>(ambiente, "/consulta/rascunho/revisar", {
         ...selecao, comprovanteExibicao: comprovante,
       });
@@ -221,7 +221,7 @@ describe("W10 FUGU-EIXO-02 · revisão de extração por HTTP real", () => {
         status: 409, data: { codigo: "PACIENTE_FORA_DA_CONSULTA_SELECIONADA" },
       });
       expect(quantidadeFatos(ambiente)).toBe(0);
-      expect((await post(ambiente, "/consulta/carregar", { patientId: PACIENTE })).status).toBe(200);
+      expect((await post(ambiente, "/consulta/carregar", { patientId: PACIENTE, encounterId: ENCONTRO })).status).toBe(200);
       const exibicaoRevogada = await post<Codigo>(ambiente, "/consulta/rascunho/revisar", {
         ...selecao, comprovanteExibicao: comprovante,
       });

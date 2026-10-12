@@ -55,7 +55,7 @@ async function ambiente() {
   const carregar = async (patientId: string) => {
     const r = await fetch(`http://127.0.0.1:${address.port}/consulta/carregar`, { method: "POST",
       headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ patientId }) });
+      body: JSON.stringify({ patientId, encounterId: `encontro-${patientId.slice(-2)}` }) });
     return { status: r.status, body: await r.json() as Record<string, any> };
   };
   const paciente = (patientId: string) => ({ patientId, identificadores: [], nome: `Paciente ${patientId}`,

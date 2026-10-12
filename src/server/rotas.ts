@@ -1,3 +1,10 @@
+import { PrescriptionItem } from "../contracts/w10/prescricao.js";
+import { rotearBiblioteca } from "./biblioteca.js";
+import { rotearDutos, referenciaSigtapDuto } from "./dutos.js";
+import { executarExtracaoLlm } from "./extracaoLlm.js";
+import type { criarRuntimeExtracaoLlm } from "../kernel/llm/openai/runtime.js";
+import { processarUploadLocal } from "./upload.js";
+import { ConsultaCarregar } from "../contracts/f1/consultaCarregar.js";
 import { createHash, randomUUID } from "node:crypto";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import type { DatabaseSync } from "node:sqlite";
@@ -5,39 +12,40 @@ import { z } from "zod";
 import { DataCivil, Id, type Fonte } from "../contracts/base.js";
 import { Contato, Triagem } from "../contracts/clinico.js";
 import { ActionIntent, ConfirmarBloco, type ConfirmarBloco as Confirmar } from "../contracts/operacao.js";
-import { lerDraft, listarDrafts, salvarDraft } from "../kernel/ledger/drafts.js";
+import { lerDraft, listarDrafts, salvarDraft } from "../kernel/comandos/portas.js";
 import { sqliteIdempotencia } from "../kernel/ledger/idempotencia.js";
-import { confirmar } from "../kernel/ledger/writeRouter.js";
-import { listarEventos } from "../kernel/ledger/ledger.js";
+import { proporPrescricao, executarConfirmacao as confirmar } from "../kernel/comandos/index.js";
+import { listarEventos } from "../kernel/comandos/portas.js";
 import { g25EscopoAssinatura } from "../kernel/harness/gates.js";
 import type { criarGateway } from "../kernel/gateway/gateway.js";
 import { autorizarSaida } from "./autorizacao.js";
 import { hashConteudoExibido, type GerenciadorSessao } from "./sessao.js";
-import { executarPipelineExtracao, type ExtractionInput } from "../orchestration/pipeline-extracao.js";
+import { executarPipelineExtracao, type ExtractionInput } from "../kernel/extracao/pipeline.js";
 import { g07Lateralidade, g08AnatomiaSexo, g09PtDeBiopsia } from "../kernel/harness/gates.js";
 import { lerAgenda, lerApacs, lerCanal, lerConsulta, lerLotes, lerMensagensChat, lerPaciente, lerRecist, lerSalao, lerTriagens } from "./leituras.js";
-import type { SettingsService } from "../config/settings.js";
+import type { SettingsService } from "../kernel/config/settings.js";
 import type { carregarCorpusServidor } from "./corpus.js";
 import { parserLinha } from "../rules/prescricao/parserLinha.js";
 import { classificarDocumento } from "../rules/prescricao/classificarDocumento.js";
 import { instanciarProtocolo } from "../rules/prescricao/instanciarProtocolo.js";
 import { rotearItemReceita } from "../rules/prescricao/receituarioEspecial.js";
-import { lerConfiguracaoServico, NUMERO_CAIXA_RECEITUARIO_ESPECIAL } from "../config/servico.js";
+import { lerConfiguracaoServico, NUMERO_CAIXA_RECEITUARIO_ESPECIAL } from "../contracts/configServico.js";
 import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
-import { projetarEstatisticaLedger } from "../estatistica/index.js";
-import { consultarGrafoLocal } from "../app/pesquisa/conhecimento.js";
-import { prepararRevisaoExtracao } from "../app/revisaoExtracao.js";
+import { projetarEstatisticaLedger } from "../kernel/projections/estatistica.js";
+import { consultarGrafoLocal } from "../kernel/corpus/conhecimento.js";
+import { prepararRevisaoExtracao } from "../kernel/extracao/prepararRevisao.js";
 import { ClinicalFact as ClinicalFactContract, EncounterSegment, FactSourceType,
   ReviewAction, ReviewException } from "../contracts/w10/extracao.js";
 import { AcaoRevisaoPedido, ClosureVinculoContato } from "../contracts/w10/closure.js";
-import { criarOncoassistJev } from "../app/oncoassist.js";
+import { criarOncoassistJev } from "../kernel/llm/jev/oncoassist.js";
 import { detectarEmergencias } from "../rules/radsEmergencias.js";
 import { PlanoFlashEntrada, lerModeloFlash, prepararFinalizacaoFlash, salvarRascunhoFlash } from "./flash.js";
-import { CHAVE_CAIXA_MODELO_FLASH } from "../config/flash.js";
+import { CHAVE_CAIXA_MODELO_FLASH } from "../contracts/configFlash.js";
 import { confrontarNomeIdentificador } from "../rules/w8/vinculoDocumento.js";
 import { normalizarDataCivil } from "../kernel/extracao/normalizacao.js";
 import { farmacosMencionados, reconciliarCampos } from "../kernel/extracao/reconciliacao.js";
 import { AvaliacaoInstrumentoRequest, avaliarInstrumentoEstruturado } from "./f0c/instrumentosClinicos.js";
+import type { criarMotorF1 } from "../kernel/orquestracao/runtime.js";
 
 export interface ServidorDeps {
   db: DatabaseSync;
@@ -48,6 +56,8 @@ export interface ServidorDeps {
   configRootDir?: string;
   corpus?: ReturnType<typeof carregarCorpusServidor> | null;
   oncoassistJev?: ReturnType<typeof criarOncoassistJev>;
+  motorF1?:ReturnType<typeof criarMotorF1>;
+  extracaoLlm?:ReturnType<typeof criarRuntimeExtracaoLlm>;
   agora: () => string;
   log: (entry: { rota: string; codigo: string; status: number }) => void;
 }
@@ -83,11 +93,11 @@ function send(res: ServerResponse, status: number, object: unknown) {
     "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" });
   res.end(JSON.stringify(object));
 }
-async function body(req: IncomingMessage): Promise<unknown> {
+async function body(req: IncomingMessage,limite=1_000_000): Promise<unknown> {
   let value = "";
   for await (const chunk of req) {
     value += String(chunk);
-    if (value.length > 1_000_000) throw new Error("BODY_TOO_LARGE");
+    if (value.length > limite) throw new Error("BODY_TOO_LARGE");
   }
   try {
     return JSON.parse(value);
@@ -189,6 +199,11 @@ function exibirBundle(deps: ServidorDeps, token: string,
   return { status: 200, body: { patientId: input.patientId, encounterId: input.encounterId, documentos } };
 }
 
+/** Revisão é conteúdo do Retrato; o relógio só fornece a data de emissão. */
+function revisaoDocumentosFlash(deps:ServidorDeps,contexto:{patientId:string;encounterId:string;tumorLotId:string|null}):string {
+  return deps.motorF1?.retrato(contexto).revisao ?? hashConteudoExibido(listarEventos(deps.db,contexto.patientId));
+}
+
 /** ConfirmarBloco is strict; all clinical contents are fetched from local drafts, not HTTP input. */
 function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { status: number; body: unknown } {
   const sessao = deps.sessoes.obter(token)!;
@@ -229,8 +244,16 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
       && x.documentVersion === doc.documentVersion && x.conteudoHash === hashes[i]
       && x.draftId === drafts[i]!.draftId));
   if (alterado) return { status: 409, body: { codigo: "CONTEUDO_ALTERADO_APOS_EXIBICAO" } };
-  const em = deps.db.prepare("SELECT criadoEm FROM operation WHERE operationId=?")
-    .get(input.idempotencyKey)?.criadoEm as string | undefined ?? deps.agora();
+  const operacaoExistente = deps.db.prepare("SELECT criadoEm FROM operation WHERE operationId=?").get(input.idempotencyKey);
+  const em = operacaoExistente?.criadoEm as string | undefined ?? deps.agora();
+  if(!operacaoExistente) {
+    const revisaoAtual=revisaoDocumentosFlash(deps,contexto);
+    const vencido=drafts.some(d=>{
+      const p=d!.payload as Record<string,unknown>,meta=p.preparacaoS9;
+      return meta&&typeof meta==="object"&&"revisao" in meta&&meta.revisao!==revisaoAtual;
+    });
+    if(vencido)return {status:409,body:{codigo:"REVISAO_FATOS_ALTERADA"}};
+  }
   const reviewDecisionId = sha(JSON.stringify({ input, medicoId: sessao.medicoId }));
   const registros = input.registros.map((r, i) => {
     const doc = docs[i];
@@ -245,17 +268,71 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
         : draft.payload,
       fontes: [], revisao: selected ? "ASSINADO" as const : "CONFIRMADO" as const };
   });
-  const result = confirmar(deps.db, { operationId: input.idempotencyKey,
-    patientId: input.patientId, tumorLotId: input.tumorLotId, encounterId: input.encounterId,
-    reviewDecisionId, sessao, em, registros });
-  return { status: result.estado === "NEGADA" ? 409 : 200,
-    body: { codigo: result.estado, resultRef: result.resultRef } };
+  // Marcador e tarefa pertencem à mesma operação da assinatura e não são HTTP input.
+  const referencias = z.object({documentId:Id,documentVersion:z.number().int().positive()}).strict();
+  const tarefaRefSchema=z.object({tarefaId:Id,contexto:z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable()}).strict(),
+    documentoRef:referencias,pedidosRef:z.array(referencias).min(1),dataAlvo:DataCivil,motivo:z.string().nullable()}).strict();
+  let tarefaReferenciaInvalida=false;
+  const tarefas=drafts.flatMap(d=>{
+    const p=d!.payload as Record<string,unknown>;
+    if(p.tarefasRetornoS9===undefined)return [];
+    if(!Array.isArray(p.tarefasRetornoS9)){tarefaReferenciaInvalida=true;return [];}
+    return p.tarefasRetornoS9.flatMap(t=>{const r=tarefaRefSchema.safeParse(t);if(!r.success){tarefaReferenciaInvalida=true;return [];}return[r.data];});
+  });
+  if(tarefaReferenciaInvalida)return {status:409,body:{codigo:"TAREFA_REFERENCIA_INVALIDA"}};
+  if(tarefas.some(t=>t.contexto.patientId!==contexto.patientId||t.contexto.encounterId!==contexto.encounterId||t.contexto.tumorLotId!==contexto.tumorLotId
+    ||[t.documentoRef,...t.pedidosRef].some(ref=>!escolhidos.some(d=>d.documentId===ref.documentId&&d.documentVersion===ref.documentVersion))))
+    return {status:409,body:{codigo:"TAREFA_DOCUMENTO_NAO_SELECIONADO"}};
+  for(const d of drafts) {
+    const p=d!.payload as Record<string,unknown>;
+    if(p.tipoDocumento!=="FLASH_CONJUNTO_IMPRESSAO")continue;
+    if(!Array.isArray(p.documentosIncluidos))return {status:409,body:{codigo:"CONJUNTO_REFERENCIA_INVALIDA"}};
+    const conjunto=p.documentosIncluidos.map(ref=>referencias.passthrough().safeParse(ref));
+    if(conjunto.some(ref=>!ref.success)||conjunto.some(ref=>ref.success&&!escolhidos.some(e=>e.documentId===ref.data.documentId&&e.documentVersion===ref.data.documentVersion)))
+      return {status:409,body:{codigo:"CONJUNTO_DOCUMENTO_NAO_SELECIONADO"}};
+  }
+  const auxiliares:{draftId:string;eventId:string;tipo:string;payload:unknown}[]=[];
+  if(drafts.some(d=>String((d!.payload as Record<string,unknown>).tipoDocumento).startsWith("FLASH_"))) {
+    const civil=dataCivilDoServico(em,"-03:00");
+    if(civil.estado!=="OK")return {status:409,body:{codigo:civil.codigo}};
+    auxiliares.push({draftId:`flash-consulta-confirmada-${sha(input.idempotencyKey)}`,eventId:sha(`${input.idempotencyKey}:consulta-confirmada`),tipo:"ConsultaConfirmada",
+      payload:{dataClinica:civil.dataCivil,documentoIds:escolhidos}});
+  }
+  const vistos=new Set<string>();
+  for(const t of tarefas) {
+    if(vistos.has(t.tarefaId))continue;vistos.add(t.tarefaId);
+    const existente=listarEventos(deps.db,input.patientId).find(e=>e.tipo==="Tarefa"&&e.payload&&typeof e.payload==="object"&&"data" in e.payload
+      &&e.payload.data&&typeof e.payload.data==="object"&&"tarefaId" in e.payload.data&&e.payload.data.tarefaId===t.tarefaId);
+    if(existente&&existente.operationId!==input.idempotencyKey)continue;
+    const indice=refs.findIndex(d=>d.documentId===t.documentoRef.documentId&&d.documentVersion===t.documentoRef.documentVersion);
+    auxiliares.push({draftId:`flash-tarefa-assinada-${sha(t.tarefaId)}`,eventId:sha(`${input.idempotencyKey}:tarefa:${t.tarefaId}`),tipo:"Tarefa",
+      payload:{tarefaId:t.tarefaId,...contexto,operationId:input.idempotencyKey,titulo:"Retorno e exames de controle",responsavel:sessao.medicoId,
+        prazo:null,estado:"CONFIRMADA",recebidoEm:null,criadoPor:sessao.medicoId,substituiTarefaId:null,dataAlvo:t.dataAlvo,pedidoRefs:t.pedidosRef,
+        retornoRef:t.documentoRef,geradaPorEventoId:registros[indice]!.eventId,rulesetVersao:"documentos-consulta@1"}});
+  }
+  deps.db.exec("SAVEPOINT flash_assinatura");
+  try {
+    for(const a of auxiliares) {
+      if(!lerDraft(deps.db,a.draftId))salvarDraft(deps.db,{draftId:a.draftId,patientId:input.patientId,sourceId:"flash-assinatura",rawRef:"referencia-local",payload:a.payload,diagnostics:[],revision:0,criadoEm:em});
+    }
+    const result=confirmar(deps.db,{operationId:input.idempotencyKey,patientId:input.patientId,tumorLotId:input.tumorLotId,encounterId:input.encounterId,
+      reviewDecisionId,sessao,em,registros:[...registros,...auxiliares.map(a=>({...a,expectedRevision:0,fontes:[],revisao:"CONFIRMADO" as const}))]});
+    if(result.estado==="NEGADA")deps.db.exec("ROLLBACK TO flash_assinatura");
+    deps.db.exec("RELEASE flash_assinatura");
+    return {status:result.estado==="NEGADA"?409:200,body:{codigo:result.estado,resultRef:result.resultRef}};
+  } catch(error) {deps.db.exec("ROLLBACK TO flash_assinatura");deps.db.exec("RELEASE flash_assinatura");throw error;}
+
 }
 
 export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: ServerResponse): Promise<void> {
   const rota = req.url === "/login" ? "login"
     : req.url === "/consulta/bundle" ? "bundle"
       : req.url === "/consulta/confirmar" ? "confirmar"
+        : req.url === "/consulta/llm/extrair" ? "extracaoLlm"
+        : ["/biblioteca/importar","/biblioteca/curar","/biblioteca/ativar","/biblioteca/rollback","/biblioteca/consultar","/biblioteca/estado"].includes(req.url??"") ? req.url!
+        : ["/farmacia/enviar","/farmacia/conferir","/salao/registrar-administracao","/apac/validar-emissao","/chat/aceitar-decisao","/tarefas/receber","/tarefas/concluir"].includes(req.url??"") ? req.url!
+        : req.url === "/consulta/upload" ? "upload"
+        : req.url === "/consulta/prescricao/propor" ? "proporPrescricao"
         : req.url === "/consulta/extrair" ? "extrair"
           : req.url === "/consulta/prescricao/rascunho" ? "rascunhoPrescricao"
           : req.url === "/consulta/rascunho" ? "rascunho"
@@ -306,7 +383,23 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     // A rota de efeito externo não aceita JSON sob um tipo de mídia diferente.
     // O gate de autenticação continua anterior a esta checagem.
     if (rota === "acao" && !contentTypeJson(req)) return reply(415, "CONTENT_TYPE_INVALIDO");
-    const raw = await body(req);
+    const raw = await body(req,rota === "upload" ? 11_300_000 : 1_000_000);
+    if(rota === "extracaoLlm"){const result=await executarExtracaoLlm(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
+    const biblioteca=rotearBiblioteca(deps,token,rota,raw,sessao);if(biblioteca)return reply(biblioteca.status,String((biblioteca.body as {codigo?:string}).codigo??"BIBLIOTECA_CONSULTADA"),biblioteca.body);
+    const duto=rotearDutos(deps,token,rota,raw,sessao);if(duto)return reply(duto.status,String((duto.body as {codigo?:string}).codigo??"DUTO_PROCESSADO"),duto.body);
+    if(rota === "upload"){const result=await processarUploadLocal(deps,token,sessao,raw);return reply(result.status,String(result.body.codigo),result.body);}
+    if(rota === "proporPrescricao"){
+      const parsed=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable(),id:Id,operationId:Id,expectedRevision:z.number().int().nonnegative().nullable(),itens:z.array(PrescriptionItem).min(1)}).strict().safeParse(raw);
+      if(!parsed.success)return reply(400,"PAYLOAD_INVALIDO");
+      const ctx=deps.sessoes.consultaSelecionada(token);
+      if(!ctx||ctx.patientId!==parsed.data.patientId||ctx.encounterId!==parsed.data.encounterId||(ctx.tumorLotId??null)!==parsed.data.tumorLotId)return reply(409,"CONTEXTO_CONSULTA_ALTERADO");
+      if(parsed.data.itens.some(i=>i.source!=="MANUAL"))return reply(409,"PROPOSTA_MANUAL_EXIGE_ORIGEM_MANUAL");
+      const contextoProposta={...ctx,tumorLotId:ctx.tumorLotId??null};
+      const r=deps.motorF1?.retrato(contextoProposta);if(!r)return reply(409,"RETRATO_INDISPONIVEL");
+      const revisao=sha(JSON.stringify([r.revisao,parsed.data.itens]));
+      const salvo=proporPrescricao(deps.db,{schema:"PrescricaoProposta@1",id:parsed.data.id,revisao,correlacao:{...contextoProposta,operationId:parsed.data.operationId,revisaoFatos:r.revisao,regras:r.regras,biblioteca:r.biblioteca,proposta:{id:parsed.data.id,revisao}},templateId:null,templateVersao:null,itens:parsed.data.itens,estado:"DRAFT"},sessao,deps.agora(),parsed.data.expectedRevision);
+      return reply(201,"PROPOSTA_SALVA",{draftId:salvo.draftId,revision:salvo.revision,revisao,assina:false,exporta:false});
+    }
     if (rota === "selecionarContexto") {
       const parsed = z.object({ patientId: Id, encounterId: Id, tumorLotId: Id.nullable() }).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
@@ -532,6 +625,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         dataClinica: string; source: ExtractionInput; factIds: string[] };
       const fontesValidadas: FonteValidada[] = [];
       const confirmacoes: ReturnType<typeof ReviewAction.parse>[] = [];
+      const confirmacoesFonte: NonNullable<ExtractionInput['confirmacoesFonte']>[number][] = [];
       const eventosPersistidos = listarEventos(deps.db, contexto.patientId);
       for (const draftId of parsed.data.draftIds) {
         const draft = lerDraft(deps.db, draftId);
@@ -618,13 +712,30 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         const validDates = [...new Set(clinicalDates.filter((value): value is string => value !== null))];
         if (!dateFacts.length || validDates.length !== 1 || clinicalDates.some((value) => value === null))
           return reply(409, "DATA_CLINICA_PENDENTE", { codigo: "DATA_CLINICA_PENDENTE", draftId });
+        const identitySchema = z.object({ tipo: z.enum(["PATOLOGIA_IHQ", "IMAGEM", "OUTRO"]),
+          laboratorio: z.string().nullable().optional(), numeroExame: z.string().nullable().optional(),
+          dataEntrada: z.string().nullable().optional(), servico: z.string().nullable().optional(),
+          registro: z.string().nullable().optional(), dataExame: z.string().nullable().optional(),
+          versao: z.string().trim().min(1).nullable().optional() });
+        const identity = input.examIdentity === undefined ? null : identitySchema.safeParse(input.examIdentity);
+        if (identity && !identity.success) return reply(409, "VERSAO_FONTE_PENDENTE", { codigo: "VERSAO_FONTE_PENDENTE", draftId });
+        const examIdentity = identity?.success ? { tipo: identity.data.tipo,
+          laboratorio: identity.data.laboratorio ?? null, numeroExame: identity.data.numeroExame ?? null,
+          dataEntrada: identity.data.dataEntrada ?? null, servico: identity.data.servico ?? null,
+          registro: identity.data.registro ?? null, dataExame: identity.data.dataExame ?? null,
+          ...(identity.data.versao == null ? {} : { versao: identity.data.versao }) } : undefined;
         const page = Number.isInteger(input.page) ? input.page as number : undefined;
         fontesValidadas.push({ draftId, sourceId: input.sourceId, recordingId: input.recordingId,
           segmentId: segment.id, dataClinica: validDates[0]!, factIds: factsForSegment.map((fact) => fact.id),
           source: { recordingId: input.recordingId, sourceId: input.sourceId, sourceType: sourceType.data,
             rawTranscript: input.rawTranscript, contexto: { encounterId: contexto.encounterId, dataClinica: validDates[0]! },
-            ...(page === undefined ? {} : { page }) } });
+            ...(page === undefined ? {} : { page }),
+            ...(examIdentity === undefined ? {} : { examIdentity }) } });
         confirmacoes.push(action.data);
+        confirmacoesFonte.push({ exceptionId: exception.id, segmentId: segment.id,
+          sourceId: input.sourceId, recordingId: input.recordingId, contentHash: sha(input.rawTranscript),
+          sourceVersion: examIdentity?.versao?.trim() || 'legado@1', patientId: contexto.patientId,
+          reviewDecisionId: event.eventId });
       }
       if (new Set(fontesValidadas.map((item) => item.recordingId)).size !== fontesValidadas.length)
         return reply(409, "RECORDING_ID_COLLISION", { codigo: "RECORDING_ID_COLLISION", draftIds: parsed.data.draftIds });
@@ -635,7 +746,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if (!principal) return reply(409, "FONTES_INSUFICIENTES");
       let resultado: ReturnType<typeof executarPipelineExtracao>;
       try {
-        const inputPipeline: ExtractionInput = { ...principal, additionalSources: adicionais, confirmacoes };
+        const inputPipeline: ExtractionInput = { ...principal, additionalSources: adicionais, confirmacoes, confirmacoesFonte };
         resultado = executarPipelineExtracao(inputPipeline);
       } catch (error) {
         const codigo = error instanceof Error && /recordingId distintos/i.test(error.message)
@@ -824,7 +935,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if (parsed.data.templateId) {
         const template = deps.corpus?.templatesProtocolo.find((t) => t.templateId === parsed.data.templateId);
         if (!template) return reply(404, "TEMPLATE_NAO_ENCONTRADO");
-        const consultaCorporal=lerConsulta(deps.db,contexto.patientId,deps.agora(),sessao,contexto.tumorLotId);
+        const consultaCorporal=lerConsulta(deps.db,contexto.patientId,deps.agora(),sessao,contexto.tumorLotId,{encounterId:contexto.encounterId});
         const dadosCorporais="codigo" in consultaCorporal
           ? { pesoKg:null,alturaCm:null,bsaM2:null,clcr:null,medidoEm:null }
           : consultaCorporal.avaliacaoClinica.dadosCorporais;
@@ -906,15 +1017,19 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       return reply(200, "HISTORICO_CARREGADO", { itens: deps.settings.readHistory(sessao) });
     }
     if (rota === "carregarConsulta") {
-      const parsed = z.object({ patientId: Id, tumorLotId: Id.nullable().optional() }).strict().safeParse(raw);
+      const parsed = ConsultaCarregar.safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
+      let leituraInicial: Parameters<NonNullable<NonNullable<Parameters<typeof lerConsulta>[5]>["aoLer"]>>[0] | undefined;
       const result = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao, parsed.data.tumorLotId,
-        opcoesLeituraConsulta(deps, sessao));
+        { ...opcoesLeituraConsulta(deps, sessao), encounterId: parsed.data.encounterId,aoLer:leitura=>{leituraInicial=leitura;} });
       if (!("codigo" in result)) deps.sessoes.selecionarConsulta(token, {
         patientId: result.patientId, encounterId: result.encounterId, tumorLotId: result.tumorLotId,
       });
       else deps.sessoes.selecionarConsulta(token, null);
-      return reply("codigo" in result ? 404 : 200, "codigo" in result ? result.codigo : "CONSULTA_CARREGADA", result);
+      const integrado = !("codigo" in result) && deps.motorF1
+        ? await deps.motorF1.consultar({patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},leituraInicial) : null;
+      return reply("codigo" in result ? 404 : 200, "codigo" in result ? result.codigo : "CONSULTA_CARREGADA",
+        integrado ? {...result,retrato:integrado.retrato,...(integrado.visaoIntegrada?{visaoIntegrada:integrado.visaoIntegrada}:{})}:result);
     }
     if (rota === "rascunhoFlash" || rota === "prepararFlash") {
       const base = { patientId: Id, encounterId: Id, tumorLotId: Id.nullable(), plano: PlanoFlashEntrada };
@@ -928,16 +1043,39 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         || (contexto.tumorLotId ?? null) !== parsed.data.tumorLotId)
         return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
       const consultaRevisada = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao, parsed.data.tumorLotId,
-        opcoesLeituraConsulta(deps, sessao));
+        {...opcoesLeituraConsulta(deps, sessao),encounterId:parsed.data.encounterId});
       if ("codigo" in consultaRevisada) return reply(409, consultaRevisada.codigo);
       const resumoClinico = consultaRevisada.resumoConfirmadoParaDocumento;
+      const contextoS9={patientId:parsed.data.patientId,encounterId:parsed.data.encounterId,tumorLotId:parsed.data.tumorLotId};
+      const revisaoS9=revisaoDocumentosFlash(deps,contextoS9);
+      const capturadoEm=listarEventos(deps.db,parsed.data.patientId).filter(e=>e.encounterId===parsed.data.encounterId)
+        .sort((a,b)=>Date.parse(a.criadoEm)-Date.parse(b.criadoEm))[0]?.criadoEm ?? deps.agora();
+      const civilS9=dataCivilDoServico(deps.agora(),"-03:00");
+      if(civilS9.estado!=="OK")return reply(409,civilS9.codigo);
+      const hashDecisao=hashConteudoExibido({contexto:contextoS9,plano:parsed.data.plano,revisao:revisaoS9});
+      if("idempotencyKey" in parsed.data) {
+        const eventosAssinados=listarEventos(deps.db,parsed.data.patientId).filter(e=>e.tipo==="DOCUMENTO"&&e.revisao==="ASSINADO");
+        const finalizada=listarDrafts(deps.db,parsed.data.patientId).some(d=>{
+          if(d.revision===0||!d.payload||typeof d.payload!=="object")return false;
+          const p=d.payload as Record<string,unknown>,meta=p.preparacaoS9;
+          if(!meta||typeof meta!=="object"||!("revisao" in meta)||typeof meta.revisao!=="string"||!Array.isArray(p.fontes))return false;
+          const anterior=hashConteudoExibido({contexto:contextoS9,plano:parsed.data!.plano,revisao:meta.revisao});
+          return p.fontes.some(f=>f&&typeof f==="object"&&"contentHash" in f&&f.contentHash===anterior)
+            &&eventosAssinados.some(e=>e.payload&&typeof e.payload==="object"&&"data" in e.payload&&e.payload.data&&typeof e.payload.data==="object"&&"data" in e.payload.data
+              &&e.payload.data.data&&typeof e.payload.data.data==="object"&&"documentId" in e.payload.data.data&&e.payload.data.data.documentId===p.documentId);
+        });
+        if(finalizada)return reply(409,"FLASH_JA_FINALIZADA");
+      }
+      const fonteS9={fonte:{sourceId:`flash-decisao:${hashDecisao}`,classe:"MANUAL" as const,localizador:null,
+        dataClinica:civilS9.dataCivil,dataCaptura:capturadoEm,versao:"s9-flash@1",contentHash:hashDecisao},
+        dataReferencia:civilS9.dataCivil,revisao:revisaoS9};
       const result = "expectedRevision" in parsed.data
         ? salvarRascunhoFlash(deps.db, deps.agora(), parsed.data)
         : prepararFinalizacaoFlash(deps.db, deps.agora(), parsed.data, resumoClinico,
           consultaRevisada.cabecalho.episodio && consultaRevisada.cabecalho.ciclo
             ? { protocolo: consultaRevisada.cabecalho.episodio.esquemaId,
               ciclo: consultaRevisada.cabecalho.ciclo.numero,
-              ciclosPrevistos: consultaRevisada.flash.ciclosPrevistos ?? null } : null);
+              ciclosPrevistos: consultaRevisada.flash.ciclosPrevistos ?? null } : null,fonteS9);
       return reply(result.status, String(result.body.codigo), result.body);
     }
     if (rota === "agenda") {
@@ -1105,7 +1243,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         let selected = deps.sessoes.consultaSelecionada(token);
         let replayIdentityOnly = false;
         if (!selected && isLegacyLink && draft.patientId === parsed.data.patientId) {
-          const resolved = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao);
+          if (typeof link?.encounterId !== "string") return reply(409, "CONTEXTO_CONSULTA_NAO_SELECIONADO");
+          const resolved = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao, null, {encounterId:link.encounterId});
           if (!("codigo" in resolved)) {
             selected = { patientId: parsed.data.patientId, encounterId: resolved.encounterId, tumorLotId: null };
             replayIdentityOnly = true;
@@ -1145,10 +1284,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         let identityOnly = false;
         if (!consultaVinculo) {
           if (!isLegacyLink) return reply(409, "CONTEXTO_CONSULTA_NAO_SELECIONADO");
-          const resolvida = lerConsulta(deps.db, parsed.data.patientId, deps.agora(), sessao);
-          if ("codigo" in resolvida) return reply(409, "ESCOPO_IDENTIDADE_NAO_DISPONIVEL");
-          consultaVinculo = { patientId: parsed.data.patientId, encounterId: resolvida.encounterId, tumorLotId: null };
-          identityOnly = true;
+          return reply(409, "CONTEXTO_CONSULTA_NAO_SELECIONADO");
         }
         if (consultaVinculo.patientId !== parsed.data.patientId)
           return reply(409, "PACIENTE_FORA_DA_CONSULTA_SELECIONADA");
@@ -1387,13 +1523,14 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     }
     const parsed = ActionIntent.safeParse(raw);
     if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
-    const autorizacao = autorizarSaida(deps.db, parsed.data);
+    const autorizacao = autorizarSaida(deps.db, parsed.data,competencia=>referenciaSigtapDuto(deps.corpus,competencia));
     if (!autorizacao.ok) return reply(409, autorizacao.codigo);
     // Uma rota /acao nunca usa a idempotencia volátil do caller: o ledger local
     // conserva a reserva OUTCOME_UNKNOWN antes do executor, inclusive após reiniciar.
     const result = await deps.gateway.withStore(sqliteIdempotencia(deps.db)).executar(parsed.data, sessao);
     return reply(result.decisao === "NEGADA" ? 409 : 200, result.motivoCodigo, result);
   } catch (error) {
+    if(error instanceof Error && error.message === "BODY_TOO_LARGE")return reply(413,"UPLOAD_EXCESSIVO");
     if (error instanceof JsonInvalido) return reply(400, "JSON_INVALIDO");
     if (error instanceof Error && error.message === "CONTEXTO_PACIENTE_OBRIGATORIO")
       return reply(409, "CONTEXTO_PACIENTE_OBRIGATORIO");

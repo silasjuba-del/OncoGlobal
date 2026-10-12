@@ -15,7 +15,9 @@
     "verify": "npm run typecheck && npm run check:boundaries && npm run check:corpus && npm test",
     "ui:dev": "vite",
     "oncoassist:local": "node scripts/iniciar-oncoassist.mjs",
-    "ui:build": "vite build"
+    "ui:build": "vite build",
+    "test:f1": "vitest run --config tests/adv/vitest.f1.config.ts",
+    "verify:f1": "npm run check:boundaries:fechar-f1-s3 && npm run test:f1"
   },
   "repository": {
     "type": "git",
@@ -28,10 +30,12 @@
   },
   "homepage": "https://github.com/silasjuba-del/OncoGlobal#readme",
   "dependencies": {
+    "@tesseract.js-data/por": "^1.0.0",
     "@typesafe-ai/sdk": "0.6.0",
     "pdfjs-dist": "^6.4.299",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
+    "tesseract.js": "^7.0.0",
     "zod": "^4.6.5"
   },
   "devDependencies": {

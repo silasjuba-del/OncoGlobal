@@ -48,9 +48,9 @@ async function gravarSerieReal(db: Parameters<typeof salvarDraft>[0], sourceTarg
   const series = serieRecist(sourceTargetId);
   const registros = [
     { draftId: "draft-imagem-baseline", eventId: "evento-imagem-baseline", tipo: "FATO",
-      payload: { dadoSintetico: "imagem-base" }, fontes: fontes.slice(0, 3), revisao: "CONFIRMADO" as const },
+      payload: { campo: "imagem", valor: "imagem-base" }, fontes: fontes.slice(0, 3), revisao: "CONFIRMADO" as const },
     { draftId: "draft-imagem-atual", eventId: "evento-imagem-atual", tipo: "FATO",
-      payload: { dadoSintetico: "imagem-atual" }, fontes: fontes.slice(3), revisao: "CONFIRMADO" as const },
+      payload: { campo: "imagem", valor: "imagem-atual" }, fontes: fontes.slice(3), revisao: "CONFIRMADO" as const },
     { draftId: "draft-serie-recist", eventId: "evento-serie-recist", tipo: "RecistSerie",
       payload: series, fontes, revisao: "CONFIRMADO" as const },
   ];

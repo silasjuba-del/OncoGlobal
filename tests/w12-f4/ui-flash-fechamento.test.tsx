@@ -58,7 +58,7 @@ describe("W12-F4 UI", () => {
     fireEvent.click(await screen.findByRole("button",{name:"Consulta Flash"}));
     fireEvent.click(await screen.findByRole("button",{name:"SALVAR RASCUNHO"}));
     tela.rerender(<TelaConsulta patientId={ID.verde} porta={base} chaves={chaves} />);
-    await waitFor(()=>expect(carregar).toHaveBeenCalledWith(ID.verde));
+    await waitFor(()=>expect(carregar).toHaveBeenCalledWith(ID.verde,undefined,"en-verde"));
     await act(async()=>{ await Promise.resolve(); });
     if(!screen.queryByRole("dialog",{name:"Consulta Flash"})) fireEvent.click(screen.getByRole("button",{name:"Consulta Flash"}));
     fireEvent.change(await screen.findByLabelText("Outros LAB"),{target:{value:"CEA"}});

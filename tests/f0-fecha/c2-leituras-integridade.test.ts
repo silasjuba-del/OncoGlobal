@@ -37,7 +37,7 @@ it("projeta AP confirmado apenas do paciente, encontro e lote selecionados, pres
   gravar("FATO", fato("outro-lote", "Texto de outro lote"), "outro-lote");
   gravar("FATO", fato("antigo", "Texto de outro encontro"), lote, { encounterId: "encontro-anterior" });
   gravar("FATO", fato("correto", "Carcinoma sintético literal"), lote);
-  const primeira = await ambiente.request("/consulta/carregar", { patientId: PACIENTE, tumorLotId: lote });
+  const primeira = await ambiente.request("/consulta/carregar", { encounterId: ENCONTRO, patientId: PACIENTE, tumorLotId: lote });
   expect(primeira.status).toBe(200);
   const retrato = RetratoTransversal.parse(primeira.data.retratoTransversal);
   expect(retrato.nucleo.histologia).toMatchObject({ estado: "VALOR", valor: "Carcinoma sintético literal",
@@ -46,7 +46,7 @@ it("projeta AP confirmado apenas do paciente, encontro e lote selecionados, pres
   expect(retrato.nucleo.estadio.estado).toBe("NAO_INFORMADO");
   expect(JSON.stringify(retrato)).not.toMatch(/Texto de outro/);
   gravar("FATO", fato("discordante", "Outro carcinoma sintético literal"), lote);
-  const segunda = await ambiente.request("/consulta/carregar", { patientId: PACIENTE, tumorLotId: lote });
+  const segunda = await ambiente.request("/consulta/carregar", { encounterId: ENCONTRO, patientId: PACIENTE, tumorLotId: lote });
   expect(segunda.data.retratoTransversal.nucleo.histologia).toMatchObject({ estado: "CONFLITO", valor: null,
     candidatos: expect.arrayContaining([expect.objectContaining({ valor: "Carcinoma sintético literal" }),
       expect.objectContaining({ valor: "Outro carcinoma sintético literal" })]) });
@@ -56,9 +56,9 @@ it("não apresenta como assinado um documento com hash de conteúdo divergente",
   ambiente = await abrirAmbiente(criarDiretorio()); cadastrarPaciente(ambiente);
   gravar("DOCUMENTO", { data: { documentId: "doc-corrompido-sintetico", documentVersion: 1,
     texto: "Texto sintético adulterado" }, signature: { documentId: "doc-corrompido-sintetico",
-    documentVersion: 1, documentHash: "hash-nao-correspondente", serverActorId: "medico-teste-e6b" } },
+    documentVersion: 1, documentHash: "hash-nao-correspondente", reviewDecisionId: "revisao-sintetica", serverActorId: "medico-teste-e6b" } },
   null, { revisao: "ASSINADO" });
-  const leitura = await ambiente.request("/consulta/carregar", { patientId: PACIENTE });
+  const leitura = await ambiente.request("/consulta/carregar", { encounterId: ENCONTRO, patientId: PACIENTE });
   expect(leitura.data.historicoDocumentos).toEqual([]);
   expect(leitura.data.pendenciasLeitura).toContain("DOCUMENTO_COM_INTEGRIDADE_PENDENTE");
   expect(ambiente.eventos().some((e) => e.tipo === "DOCUMENTO")).toBe(true);

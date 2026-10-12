@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, sep } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -18,11 +18,11 @@ function verificarSnippet(snippet: string) {
     // Cópia SEM dívida: EXCECOES vazia e relação aprovada vazia, para que a única violação possível seja o vetor testado
     // (com a dívida real copiada, "FRONTEIRAS VIOLADAS" sairia por "exceção não usada" e o teste não provaria nada).
     const codigo = readFileSync(scanner, "utf8");
-    const inicio = codigo.indexOf("const EXCECOES = [");
-    const fim = codigo.indexOf("\n];", inicio);
-    if (inicio < 0 || fim < 0) throw new Error("EXCECOES_NAO_ENCONTRADA");
+    const declaracao = /const EXCECOES\s*=\s*\[[\s\S]*?\]\s*;/.exec(codigo);
+    if (!declaracao || declaracao.index === undefined) throw new Error("EXCECOES_NAO_ENCONTRADA");
+    const inicio = declaracao.index, fim = inicio + declaracao[0].length;
     writeFileSync(join(dir, "scripts", "check-boundaries.mjs"),
-      codigo.slice(0, inicio) + "const EXCECOES = [" + codigo.slice(fim), "utf8");
+      codigo.slice(0, inicio) + "const EXCECOES = [];" + codigo.slice(fim), "utf8");
     const manifesto = JSON.parse(readFileSync(aprovadas, "utf8")) as { prazo: string };
     writeFileSync(join(dir, "scripts", "fronteiras-excecoes-aprovadas.json"),
       JSON.stringify({ aprovadoEm: "fixture", origem: "ADV-013", prazo: manifesto.prazo, pares: [] }), "utf8");

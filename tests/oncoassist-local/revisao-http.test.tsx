@@ -36,14 +36,14 @@ it("UI → HTTP real → revisão exibida → ledger: exige seleção e segundo 
   const post = async (path: string, data: unknown) => (await fetch(path, { method: "POST",
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify(data) })).json();
   try {
-    await post("/consulta/carregar", { patientId: contexto.patientId });
+    await post("/consulta/carregar", { patientId: contexto.patientId, encounterId: contexto.encounterId });
     const raw = "01/09/2026 Creatinina 1,2 mg/dL; Hb 11,2 g/dL";
     const extracted = await post("/consulta/extrair", { sourceId: "fonte-95", recordingId: "gravacao-95",
       sourceType: "medical_note", rawTranscript: raw }) as { draftId: string };
     await post("/consulta/rascunho/revisar", { draftId: extracted.draftId, patientId: contexto.patientId, expectedRevision: 0 });
     const porta = criarPortaHttp({ onSessaoExpirada: () => {} });
     await porta.login(senha);
-    await porta.carregarConsulta(contexto.patientId);
+    await porta.carregarConsulta(contexto.patientId, undefined, contexto.encounterId);
     const fatos = () => listarEventos(db, contexto.patientId).filter((e) => e.tipo === "FATO");
     const { rerender } = render(<RevisaoExtracaoLocal porta={porta} contexto={contexto} />);
     await screen.findByRole("option", { name: "Fonte local 1" });
@@ -57,7 +57,7 @@ it("UI → HTTP real → revisão exibida → ledger: exige seleção e segundo 
     await screen.findByRole("button", { name: "Confirmar revisão exibida" });
     expect(screen.getByLabelText("Conteúdo preparado para revisão").textContent).toContain("fonte-95");
     expect(fatos()).toHaveLength(0);
-    const apenasPreparada = await porta.carregarConsulta(contexto.patientId);
+    const apenasPreparada = await porta.carregarConsulta(contexto.patientId, undefined, contexto.encounterId);
     expect(apenasPreparada).toMatchObject({ resumoEvolucao: null,
       evolucoesRascunho: [expect.objectContaining({ somentePreparada: true, revisaoRegistrada: false })] });
     expect(JSON.stringify(apenasPreparada)).not.toContain("fato revisado explicitamente pelo médico");
@@ -71,7 +71,7 @@ it("UI → HTTP real → revisão exibida → ledger: exige seleção e segundo 
     expect(fatos()).toHaveLength(2);
     expect(new Set(fatos().map((f) => f.operationId)).size).toBe(1);
     expect(fatos().every((f) => f.fontes[0]?.sourceId === "fonte-95")).toBe(true);
-    const reaberta = await porta.carregarConsulta(contexto.patientId);
+    const reaberta = await porta.carregarConsulta(contexto.patientId, undefined, contexto.encounterId);
     expect(JSON.stringify(reaberta)).toContain("Creatinina");
     expect(reaberta).toMatchObject({ resumoEvolucao: expect.not.stringContaining("Fato não selecionado") });
     rerender(<RevisaoExtracaoLocal porta={porta} contexto={{ ...contexto, encounterId: "outro" }} />);

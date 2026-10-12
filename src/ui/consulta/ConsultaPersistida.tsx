@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import type { AcaoIntent, ConsultaVisao, FlashPreparada, PedidoBundle, PortaConsulta } from "../api/porta.js";
 import { ErroPorta } from "../api/porta.js";
-import { ConsultaResposta } from "../api/respostas.js";
+import { ConsultaResposta, type ConsultaIntegrada } from "../api/respostas.js";
+import { VisaoIntegradaMinima } from "./VisaoIntegradaMinima.js";
 import { ConsultaFlash, type ConsultaFlashProps, type PlanoFlash } from "./ConsultaFlash.js";
 import { montarPropsFlash } from "./flashDaVisao.js";
 import { CartaoTransversal } from "./CartaoTransversal.js";
@@ -13,7 +14,7 @@ type Preview = { preparacao: FlashPreparada; documentos: DocumentoPreview[]; ope
 
 /** Composição HTTP real. Nenhum cadastro, prescrição ou histórico de demonstração. */
 export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: PortaConsulta; contexto: PedidoBundle; aoAbrirApac?:()=>void }) {
-  const [visao, setVisao] = useState<ConsultaVisao | null>(null);
+  const [visao, setVisao] = useState<ConsultaIntegrada | null>(null);
   const [flash, setFlash] = useState(false);
   const [preview, setPreview] = useState<Preview | null>(null);
   const [mensagem, setMensagem] = useState("");
@@ -27,9 +28,10 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: Po
 
   useEffect(() => {
     const atual = ++geracao.current;
+    setVisao(null); setMensagem("");
     emCurso.current = false; setOcupado(false); setPreview(null); setFlash(false);
     tentativaPreparacao.current = null;
-    void porta.carregarConsulta(patientId, tumorLotId).then((bruto) => {
+    void porta.carregarConsulta(patientId, tumorLotId, encounterId).then((bruto) => {
       if (atual !== geracao.current) return;
       const r = ConsultaResposta.safeParse(bruto);
       if (!r.success || r.data.patientId !== patientId || r.data.encounterId !== encounterId
@@ -160,6 +162,20 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: Po
     });
   }
 
+  function reimprimir(doc: NonNullable<ConsultaIntegrada["historicoDocumentos"]>[number]) {
+    const intent: AcaoIntent = {verbo:"IMPRIMIR",objeto:{tipo:"DOCUMENTO",id:doc.documentId,versao:doc.documentVersion},
+      escopo:{patientId,encounterId:doc.encounterId},destino:null,idempotencyKey:crypto.randomUUID()};
+    setImpressaoPendente(intent);
+    void executar(async(atual)=>{
+      const resposta=await porta.acao(intent);
+      if(atual!==geracao.current)return;
+      if(resposta.decisao!=="EXECUTADA"&&resposta.decisao!=="REPLAY") {
+        setImpressaoPendente(intent);setMensagem("Documento já assinado. Reimpressão pendente; o conteúdo será preservado.");return;
+      }
+      setImpressaoPendente(null);setMensagem("Reimpressão solicitada para a versão assinada original. Isso não comprova impressão física.");
+    });
+  }
+
   const visaoPronta = visao && visao.patientId === patientId && visao.encounterId === encounterId
     && visao.tumorLotId === tumorLotId ? visao : null;
   if (!visaoPronta) return <section aria-label="Consulta persistida"><p aria-live="polite">
@@ -175,6 +191,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: Po
     {visaoPronta.alertas.filter((a) => a.presentationOverride).map((a) =>
       <aside role="alert" data-banner="e1" key={a.alertaId}><strong>Emergência E1</strong><p>{a.texto}</p></aside>)}
     {mensagem ? <p aria-live="polite">{mensagem}</p> : null}
+    <VisaoIntegradaMinima {...(visaoPronta.retrato ? {retrato:visaoPronta.retrato}: {})}
+      {...(visaoPronta.visaoIntegrada ? {visao:visaoPronta.visaoIntegrada}: {})} />
     <h3>Evolução revisada</h3>
     <pre style={{ whiteSpace: "pre-wrap" }}>{visaoPronta.resumoEvolucao ?? "Evolução PENDENTE de revisão."}</pre>
     {visaoPronta.retratoTransversal ? <CartaoTransversal entrada={visaoPronta.retratoTransversal} />
@@ -201,8 +219,9 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: Po
     <section aria-label="Histórico de documentos assinados"><h3>Histórico de documentos assinados</h3>
       {(visaoPronta.historicoDocumentos ?? []).length === 0 ? <p>Nenhum documento assinado neste histórico.</p>
         : visaoPronta.historicoDocumentos!.map((doc) => <article key={doc.eventId}>
-          <h4>{doc.titulo}</h4><p>{doc.assinadoEm} · {doc.autorId} · {doc.encounterId}</p>
+          <h4>{doc.titulo} · versão {doc.documentVersion}</h4><p>{doc.assinadoEm} · {doc.autorId} · consulta {doc.encounterId} · tumor {doc.tumorLotId ?? "não selecionado"}</p>
           <pre style={{ whiteSpace: "pre-wrap" }}>{doc.texto}</pre>
+          <button type="button" disabled={ocupado} onClick={()=>reimprimir(doc)}>Reimprimir versão {doc.documentVersion} · {doc.titulo}</button>
         </article>)}
     </section>
   </section>;

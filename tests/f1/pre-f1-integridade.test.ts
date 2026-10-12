@@ -29,7 +29,7 @@ function inserir(db: DatabaseSync, id: string, overrides: {
     encounterId, tipo, payload, fontes, revisao, criadoEm, criadoPor, supersedesEventId)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
     .run(id, `op-${id}`, 0, overrides.patientId ?? PACIENTE, null, "encontro-sintetico", overrides.tipo ?? "FATO",
-      overrides.payload ?? "{}", overrides.fontes ?? "[]", "CONFIRMADO", overrides.criadoEm ?? AGORA,
+      overrides.payload ?? JSON.stringify({data:{campo:"fixture",valor:"sintético"}}), overrides.fontes ?? "[]", "CONFIRMADO", overrides.criadoEm ?? AGORA,
       overrides.criadoPor ?? JSON.stringify({ tipo: "SISTEMA", id: "sistema-sintetico" }), null);
 }
 
@@ -67,7 +67,7 @@ describe("pré-F1 · integridade do ledger na leitura", () => {
   it("consulta HTTP expõe a pendência só para seu paciente e lê o ledger uma vez", async () => {
     ambiente = await abrirAmbiente(criarDiretorio());
     cadastrarPaciente(ambiente); cadastrarPaciente(ambiente, "93");
-    const carregar = (patientId: string) => ambiente!.request("/consulta/carregar", { patientId });
+    const carregar = (patientId: string) => ambiente!.request("/consulta/carregar", { patientId, encounterId: patientId === PACIENTE ? "encontro-teste-92" : "encontro-teste-93" });
     const antes = await carregar(PACIENTE);
     inserir(ambiente.db, "corrupcao-do-paciente", { payload: "{ conteúdo sintético corrompido" });
     const prepare = vi.spyOn(ambiente.db, "prepare");
@@ -93,13 +93,13 @@ describe("pré-F1 · integridade do ledger na leitura", () => {
     cadastrarPaciente(ambiente, "93");
     // O único cadastro deste paciente está corrompido (escrita direta, fora do WriteRouter).
     inserir(ambiente.db, "cadastro-corrompido", { tipo: "Paciente", payload: "{ conteúdo sintético corrompido" });
-    const r = await ambiente.request("/consulta/carregar", { patientId: PACIENTE });
+    const r = await ambiente.request("/consulta/carregar", { patientId: PACIENTE, encounterId: "encontro-teste-92" });
     expect(r.status).toBe(404);
     expect(r.data.pendenciasIntegridade).toEqual([
       expect.objectContaining({ patientId: PACIENTE, tipo: "Paciente", motivo: "JSON_INVALIDO" }),
     ]);
     expect(JSON.stringify(r.data)).not.toContain("conteúdo sintético corrompido");
-    const outro = await ambiente.request("/consulta/carregar", { patientId: OUTRO_PACIENTE });
+    const outro = await ambiente.request("/consulta/carregar", { patientId: OUTRO_PACIENTE, encounterId: "encontro-teste-93" });
     expect(outro.status).toBe(200);
     expect(outro.data.pendenciasIntegridade).toEqual([]);
   });

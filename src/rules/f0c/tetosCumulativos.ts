@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { RulesetHeader } from "../../contracts/rulesetHeader.mjs";
-import type { LimiteExposicaoCumulativa } from "../cumulativoAlerta.js";
+import type { LimiteExposicaoCumulativa } from "../../contracts/f0c/exposicaoCumulativa.js";
 
 const Fonte = z.object({
   tipo: z.literal("DECISAO_MEDICA"),

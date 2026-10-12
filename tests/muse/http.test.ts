@@ -6,18 +6,18 @@ it.each(["carregarConsulta", "agendaDoDia", "filaSalao", "caixaCanal", "lotesApa
   "%s rejeita HTTP 200 com forma incompleta", async (metodo) => {
     vi.stubGlobal("fetch", vi.fn(async () => new Response(JSON.stringify({ codigo: "OK" }), { status: 200 })));
     const porta = criarPortaHttp({ onSessaoExpirada: () => {} });
-    const call = () => metodo === "carregarConsulta" ? porta.carregarConsulta(ID.verde)
+    const call = () => metodo === "carregarConsulta" ? porta.carregarConsulta(ID.verde, undefined, "en-verde")
       : metodo === "chatSetor" ? porta.chatSetor("MEDICO") : porta[metodo]();
     await expect(call()).rejects.toMatchObject({ codigo: "PAYLOAD_INVALIDO" });
   });
 it("consulta completa é validada; semáforo desconhecido e nested payload inválido são recusados", async () => {
-  const real = await criarPortaFalsa().carregarConsulta(ID.verde);
+  const real = await criarPortaFalsa().carregarConsulta(ID.verde, undefined, "en-verde");
   let corpo: unknown = real;
   vi.stubGlobal("fetch", vi.fn(async () => new Response(JSON.stringify(corpo), { status: 200 })));
   const porta = criarPortaHttp({ onSessaoExpirada: () => {} });
-  expect((await porta.carregarConsulta(ID.verde)).patientId).toBe(ID.verde);
+  expect((await porta.carregarConsulta(ID.verde, undefined, "en-verde")).patientId).toBe(ID.verde);
   corpo = { ...real, cabecalho: { ...real.cabecalho, semaforo: "AZUL" } };
-  await expect(porta.carregarConsulta(ID.verde)).rejects.toMatchObject({ codigo: "PAYLOAD_INVALIDO" });
+  await expect(porta.carregarConsulta(ID.verde, undefined, "en-verde")).rejects.toMatchObject({ codigo: "PAYLOAD_INVALIDO" });
 });
 it("HTTP 200 vazio nunca vira confirmação nem execução fictícia", async () => {
   vi.stubGlobal("fetch", vi.fn(async () => new Response("{}", { status: 200 })));

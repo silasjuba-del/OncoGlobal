@@ -108,7 +108,7 @@ export type ConfirmarBloco = z.infer<typeof ConfirmarBloco>;
 
 // ── C-17 ActionIntent (AGE; ROE-0: falta verbo/objeto/escopo ⇒ NO_ACTION) ────
 export const ActionIntent = z.object({
-  verbo: z.enum(["IMPRIMIR", "ENVIAR_WHATSAPP", "ENVIAR_EMAIL", "AGENDAR", "EXPORTAR_APAC", "BACKUP_LOCAL"]),
+  verbo: z.enum(["IMPRIMIR", "ENVIAR_WHATSAPP", "ENVIAR_EMAIL", "AGENDAR", "EXPORTAR_APAC", "BACKUP_LOCAL", "OCR_LOCAL", "LLM_EXTRACAO"]),
   objeto: z.object({ tipo: z.string().min(1), id: Id, versao: z.number().int().min(1) }).strict(),
   escopo: z.object({ patientId: Id.nullable(), encounterId: Id.nullable() }).strict(),
   destino: z.string().nullable(),

@@ -73,6 +73,13 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   }
 
   return {
+    async uploadDocumentoLocal(pedido,signal) {
+      const {status,json}=await enviar("/consulta/upload",pedido,true,signal);
+      const parsed=z.object({codigo:z.enum(["RASCUNHO_SALVO","REPLAY"]),draftId:z.string().min(1),revision:z.number().int().nonnegative(),
+        linkedPatientId:z.string().nullable(),requiresMedicalReview:z.literal(true),conversionStatus:z.enum(["PRONTO","PENDENTE"]).optional(),motivo:z.string().nullable().optional()}).safeParse(json);
+      if((status===201||status===200)&&parsed.success){const {conversionStatus,motivo,...r}=parsed.data;return {...r,...(conversionStatus===undefined?{}:{conversionStatus}),...(motivo===undefined?{}:{motivo})};}
+      throw new ErroPorta("UPLOAD_RECUSADO",codigoDe(json,"UPLOAD_INVALIDO"));
+    },
     async avaliarInstrumento(contexto,pedido) {
       const r=await enviar("/consulta/instrumento/avaliar",{...contexto,pedido},true);
       const parsed=z.object({resultado:ResultadoInstrumentoSchema,gravado:z.literal(false),assinado:z.literal(false)}).safeParse(r.json);
@@ -200,8 +207,9 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     },
 
     // [SERVIDOR_PENDENTE]
-    async carregarConsulta(patientId, tumorLotId) {
-      return leitura("/consulta/carregar", { patientId, ...(tumorLotId === undefined ? {} : { tumorLotId }) }, ConsultaResposta);
+    async carregarConsulta(patientId, tumorLotId, encounterId) {
+      if (!encounterId) throw new ErroPorta("ENCONTRO_EXPLICITO_OBRIGATORIO");
+      return leitura("/consulta/carregar", { patientId, encounterId, ...(tumorLotId === undefined ? {} : { tumorLotId }) }, ConsultaResposta);
     },
 
     // [SERVIDOR_PENDENTE]

@@ -1,8 +1,26 @@
+import { createHash } from "node:crypto";
 // RT-15 · caso completo: contradicções entre fala e prescrição exigem escopo e revisão.
 import { describe, expect, it } from "vitest";
 import { executarPipelineExtracao, type ExtractionInput } from "../../src/orchestration/pipeline-extracao.js";
 import type { ReviewAction } from "../../src/kernel/extracao/tipos.js";
 import { PLAUD_CONTRADICOES, PRESCRICAO_CARBO } from "../fixtures/redteam/laudos.js";
+
+/** Fixtures representam ações e provas já persistidas no ledger, sem alterar o motor. */
+function executarComProvas(input: ExtractionInput): ReturnType<typeof executarPipelineExtracao> {
+  if (!input.confirmacoes?.length) return executarPipelineExtracao(input);
+  const preliminar = executarPipelineExtracao({ ...input, confirmacoes: [], confirmacoesFonte: [] });
+  const fontes = [input, ...(input.additionalSources ?? [])];
+  const confirmacoesFonte = input.confirmacoes.flatMap((acao, indice) => {
+    const segment = preliminar.segments.find((s) => `exc:UNLINKED_PATIENT:${s.id}` === acao.exceptionId);
+    const fonte = fontes.find((f) => f.recordingId === segment?.recordingId && f.sourceId === segment?.sourceId);
+    if (!segment || !fonte || !acao.patientId) return [];
+    return [{ exceptionId: acao.exceptionId, segmentId: segment.id, sourceId: fonte.sourceId,
+      recordingId: fonte.recordingId, patientId: acao.patientId, reviewDecisionId: `review-persistido:${indice}`,
+      contentHash: createHash("sha256").update(fonte.rawTranscript).digest("hex"),
+      sourceVersion: fonte.examIdentity?.versao?.trim() || "legado@1" }];
+  });
+  return executarPipelineExtracao({ ...input, confirmacoesFonte });
+}
 
 const em = "2030-01-03T10:00:00-03:00";
 const contexto = { encounterId: "encontro-rt15-sintetico", dataClinica: "03/01/2030" };
@@ -22,7 +40,7 @@ function decisoes(state: ReturnType<typeof executarPipelineExtracao>, patientByS
 
 describe("RT-15 · não reconciliar plano e ordem sem autorização e contexto equivalentes", () => {
   it("sem ações de vínculo persistidas, não cruza as fontes nem inventa paciente", () => {
-    const state = executarPipelineExtracao(input);
+    const state = executarComProvas(input);
     expect(state.exceptions.some((item) => item.reason.includes("planned_regimen"))).toBe(false);
     expect(state.segments.every((segment) => segment.patientId === null)).toBe(true);
     expect(state.facts.every((fact) => fact.patientCandidateId === null)).toBe(true);
@@ -31,7 +49,7 @@ describe("RT-15 · não reconciliar plano e ordem sem autorização e contexto e
   });
 
   it("ReviewAction com exceção inventada ou alvo divergente não autoriza confronto entre fontes", () => {
-    const unlinked = executarPipelineExtracao(input);
+    const unlinked = executarComProvas(input);
     const valid = decisoes(unlinked, { "fala-rt15": "Paciente Teste 10", "prescricao-rt15": "Paciente Teste 10" });
     const [fala, prescricao] = valid;
     expect(fala).toBeDefined();
@@ -41,15 +59,15 @@ describe("RT-15 · não reconciliar plano e ordem sem autorização e contexto e
       { ...input, confirmacoes: decisoes(unlinked, { "fala-rt15": "Paciente Teste 10", "prescricao-rt15": "Paciente Teste 11" }) },
     ];
     for (const variante of variantes) {
-      const state = executarPipelineExtracao(variante);
+      const state = executarComProvas(variante);
       expect(state.exceptions.some((item) => item.reason.includes("planned_regimen"))).toBe(false);
       expect(state.facts).toHaveLength(unlinked.facts.length);
     }
   });
 
   it("com duas decisões explícitas no mesmo paciente/encontro/data, mantém conflito e os dois candidatos", () => {
-    const unlinked = executarPipelineExtracao(input);
-    const state = executarPipelineExtracao({ ...input, confirmacoes: decisoes(unlinked, {
+    const unlinked = executarComProvas(input);
+    const state = executarComProvas({ ...input, confirmacoes: decisoes(unlinked, {
       "fala-rt15": "Paciente Teste 10", "prescricao-rt15": "Paciente Teste 10",
     }) });
     const plano = state.facts.find((fact) => fact.domain === "plan");
@@ -66,7 +84,7 @@ describe("RT-15 · não reconciliar plano e ordem sem autorização e contexto e
   });
 
   it("mesmo vínculo não cruza uma prescrição de outro encontro ou data clínica", () => {
-    const unlinked = executarPipelineExtracao(input);
+    const unlinked = executarComProvas(input);
     const confirmacoes = decisoes(unlinked, { "fala-rt15": "Paciente Teste 10", "prescricao-rt15": "Paciente Teste 10" });
     const prescricao = input.additionalSources![0]!;
     const variants: ExtractionInput[] = [
@@ -78,7 +96,7 @@ describe("RT-15 · não reconciliar plano e ordem sem autorização e contexto e
         contexto: { ...contexto, dataClinica: "31/02/2030" } }] },
     ];
     for (const variant of variants) {
-      const state = executarPipelineExtracao(variant);
+      const state = executarComProvas(variant);
       expect(state.exceptions.some((item) => item.reason.includes("planned_regimen"))).toBe(false);
       expect(state.facts).toHaveLength(unlinked.facts.length);
     }

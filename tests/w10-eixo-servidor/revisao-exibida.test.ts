@@ -41,7 +41,7 @@ async function fixture(oncoassistJev?: ServidorDeps["oncoassistJev"]) {
       eventId: "paciente-event-91", tipo: "Paciente", fontes: [], revisao: "CONFIRMADO",
       payload: { patientId: PATIENT, nome: PATIENT, identificadores: [{ tipo: "PRONTUARIO", valor: "sintetico-91" }],
         nascimento: null, sexoCadastral: "NAO_INFORMADO", divergencia: false } }] });
-  await request("/consulta/carregar", { patientId: PATIENT });
+  await request("/consulta/carregar", { encounterId: CONTEXTO.encounterId, patientId: PATIENT });
   const extracted = await request("/consulta/extrair", { sourceId: "laudo-91", recordingId: "gravacao-91",
     sourceType: "medical_note", rawTranscript: "01/09/2026 creatinina 1,2 mg/dL; Hb 11,2 g/dL" });
   expect(extracted.status).toBe(201);
@@ -79,10 +79,11 @@ describe("G25 · revisão da extração exige conteúdo preparado e exibido na m
     app.advance();
     const confirm = { ...app.pedido, comprovanteExibicao: prepared.data.comprovanteExibicao };
     expect((await app.request("/consulta/rascunho/revisar", confirm)).status).toBe(200);
-    expect(app.reviewed()).toHaveLength(2);
-    expect(app.reviewed().every((event) => event.tipo === "FATO")).toBe(true);
+    expect(app.reviewed()).toHaveLength(3);
+    expect(app.reviewed().filter((event) => event.tipo === "FATO")).toHaveLength(2);
+    expect(app.reviewed().filter((event) => event.tipo === "ReviewDecision")).toHaveLength(1);
     expect((await app.request("/consulta/rascunho/revisar", confirm)).data.codigo).toBe("REPLAY");
-    expect(app.reviewed()).toHaveLength(2);
+    expect(app.reviewed()).toHaveLength(3);
   });
 
   it("nega prova forjada e seleção diferente da mostrada", async () => {
@@ -136,8 +137,9 @@ describe("G25 · revisão da extração exige conteúdo preparado e exibido na m
     expect(prepared.status).toBe(200);
     expect((await app.request("/consulta/rascunho/revisar", { ...app.pedido,
       comprovanteExibicao: prepared.data.comprovanteExibicao })).status).toBe(200);
-    expect(app.reviewed()).toHaveLength(2);
+    expect(app.reviewed()).toHaveLength(3);
     expect(app.reviewed().every((event) => event.tipo === "ReviewDecision")).toBe(true);
+    expect(app.reviewed().filter((event) => event.tipo === "FATO")).toHaveLength(0);
   });
 });
 
@@ -225,7 +227,7 @@ it("seleciona lote no servidor, reprojeta a consulta inteira e nega lote de outr
       payload: { kind: "EVOLUCAO_RASCUNHO", contexto: { patientId, tumorLotId, encounterId: CONTEXTO.encounterId },
         resumo: `Resumo sintético ${tumorLotId}` }, diagnostics: [], revision: 0, criadoEm: NOW });
   }
-  const first = await app.request("/consulta/carregar", { patientId: PATIENT, tumorLotId: "lote-a-91" });
+  const first = await app.request("/consulta/carregar", { encounterId: CONTEXTO.encounterId, patientId: PATIENT, tumorLotId: "lote-a-91" });
   expect(first.status).toBe(200);
   expect(first.data.tumorLotId).toBe("lote-a-91");
   expect(first.data.cabecalho.loteSelecionadoId).toBe("lote-a-91");
@@ -235,15 +237,15 @@ it("seleciona lote no servidor, reprojeta a consulta inteira e nega lote de outr
   const scopeA = { ...CONTEXTO, tumorLotId: "lote-a-91" };
   expect(app.sessoes.consultaSelecionada(app.token)).toEqual(scopeA);
   app.sessoes.registrarBundleExibido(app.token, scopeA, []);
-  const second = await app.request("/consulta/carregar", { patientId: PATIENT, tumorLotId: "lote-b-91" });
+  const second = await app.request("/consulta/carregar", { encounterId: CONTEXTO.encounterId, patientId: PATIENT, tumorLotId: "lote-b-91" });
   expect(second.data.resumoEvolucao).toContain("lote-b-91");
   expect(second.data.resumoEvolucao).not.toContain("lote-a-91");
   expect(app.sessoes.bundleExibido(app.token, scopeA)).toBeNull();
   expect(app.sessoes.consultaSelecionada(app.token)?.tumorLotId).toBe("lote-b-91");
-  const unselected = await app.request("/consulta/carregar", { patientId: PATIENT, tumorLotId: null });
+  const unselected = await app.request("/consulta/carregar", { encounterId: CONTEXTO.encounterId, patientId: PATIENT, tumorLotId: null });
   expect(unselected.data.tumorLotId).toBeNull();
   expect(unselected.data.resumoEvolucao).toBeNull();
-  const foreign = await app.request("/consulta/carregar", { patientId: PATIENT, tumorLotId: "lote-c-92" });
+  const foreign = await app.request("/consulta/carregar", { encounterId: CONTEXTO.encounterId, patientId: PATIENT, tumorLotId: "lote-c-92" });
   expect(foreign).toMatchObject({ status: 404, data: { codigo: "TUMOR_LOT_FORA_DO_PACIENTE" } });
   expect(app.sessoes.consultaSelecionada(app.token)).toBeNull();
 });

@@ -1,4 +1,6 @@
 import type { Plano } from "./tipos.js";
+import { SetorClinico } from "../contracts/f1/achadosSetor.js";
+import { TipoEstimulo } from "../contracts/f1/estimuloTecnico.js";
 
 const plano = (evento: string, waves: readonly (readonly string[])[]): Plano => {
   const passos = waves.flatMap((wave, idx) => wave.map((id) => ({
@@ -9,6 +11,7 @@ const plano = (evento: string, waves: readonly (readonly string[])[]): Plano => 
 
 /** R-14 deterministic event table. No text/LLM can alter the ACTIVE_SET. */
 const TABELA: Readonly<Record<string, Plano>> = Object.freeze({
+  ...Object.fromEntries(TipoEstimulo.options.map(evento => [evento, plano(evento, [SetorClinico.options, ["RECONCILIADOR"]])])),
   LAB_CHEGOU: plano("LAB_CHEGOU", [["LAB"], ["INTERACTION", "EMERGENCY"], ["DELTA"]]),
   RADS_CHEGOU: plano("RADS_CHEGOU", [["RADS"], ["EMERGENCY"], ["DELTA"]]),
   PATH_CHEGOU: plano("PATH_CHEGOU", [["PATH"], ["DELTA"]]),

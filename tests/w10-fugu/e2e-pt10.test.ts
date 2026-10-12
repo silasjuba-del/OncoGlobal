@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { executarPipelineExtracao } from "../../src/orchestration/pipeline-extracao.js";
@@ -48,6 +49,9 @@ describe("FUGU-12 · ponta a ponta com o Modelo 10 (PT10 sintético)", () => {
     const vinculo = semDecisao.caixaRevisao.itens.find((i) => i.kind === "UNLINKED_PATIENT")!;
     const comDecisao = executarPipelineExtracao({
       ...entrada,
+      confirmacoesFonte: [{ exceptionId: vinculo.id, segmentId: vinculo.segmentId!, sourceId: entrada.sourceId,
+        recordingId: entrada.recordingId, contentHash: createHash("sha256").update(entrada.rawTranscript).digest("hex"),
+        sourceVersion: "legado@1", patientId: "P07", reviewDecisionId: "review-persisted-07" }],
       confirmacoes: [{
         exceptionId: vinculo.id, acao: "LIGAR_PACIENTE", medicoId: "medico-teste",
         em: "2026-10-07T09:00:00-03:00", patientId: "P07",

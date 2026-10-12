@@ -1,3 +1,4 @@
+import { FUSO_SERVICO } from "../../contracts/f1/relogio.js";
 import type { ClinicalEvent } from "../../contracts/operacao.js";
 import type { ContextoTriagem } from "../../contracts/regras.js";
 import { Ciclo, TreatmentEpisode } from "../../contracts/clinico.js";
@@ -14,7 +15,7 @@ export const PRAZO_PRESCRICAO_SALAO_DIAS = 21;
 
 const objeto = (v: unknown): Record<string, unknown> | null => v && typeof v === "object" && !Array.isArray(v) ? v as Record<string, unknown> : null;
 const nome = (v: string) => v.normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase();
-export interface EntradaFontesSalao { eventos: readonly ClinicalEvent[]; patientId: string; encounterId: string; hoje: string; agora: string }
+export interface EntradaFontesSalao { eventos: readonly ClinicalEvent[]; patientId: string; encounterId: string; hoje: string; agora: string; offsetServico?: string }
 export interface FontesSalao {
   creatininaCentesimos: number | null; pad: number | null; prescricaoVigente: ContextoTriagem["prescricaoVigente"]; avisos: string[];
   creatininaObservada?: {valor: number; unidade: string; data: string; sourceId: string};
@@ -81,7 +82,7 @@ export function coletarFontesSalao(i: EntradaFontesSalao): FontesSalao {
   // ClinicalOrder e Ciclo não persistem prazo. Campo livre no texto não constitui contrato.
   // D-F0C-07: 21 dias civis a partir do instante do DOCUMENTO assinado. ciclosCobertos=1
   // registra o único ciclo ligado por prescricaoRef, não uma cobertura de ciclos futuros.
-  const fuso = fusoDoInstante(i.agora);
+  const fuso = i.offsetServico ?? FUSO_SERVICO;
   const assinadaEm = fuso ? dataCivilDoServico(documento.criadoEm, fuso) : { estado: "PENDENTE" as const, codigo: "FUSO_INVALIDO" as const };
   if (assinadaEm.estado !== "OK") { saida.avisos.push("PRESCRICAO_ASSINATURA_SEM_DATA_CIVIL"); return saida; }
   if (Date.parse(documento.criadoEm) > agora || assinadaEm.dataCivil > i.hoje) {
@@ -91,12 +92,6 @@ export function coletarFontesSalao(i: EntradaFontesSalao): FontesSalao {
   if (validaAte < i.hoje) { saida.avisos.push("PRESCRICAO_FORA_DO_PRAZO"); return saida; }
   saida.prescricaoVigente = { documentId: String(corpo.documentId), ciclosCobertos: 1, validaAte };
   return saida;
-}
-
-function fusoDoInstante(instante: string): string | null {
-  const marca = /(?:Z|[+-]\d{2}:\d{2})$/i.exec(instante);
-  if (!marca) return null;
-  return marca[0]!.toUpperCase() === "Z" ? "+00:00" : marca[0]!;
 }
 
 function somarDiasCivis(iso: string, dias: number): string {

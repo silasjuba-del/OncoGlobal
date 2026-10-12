@@ -1,3 +1,5 @@
+import type { LimiteExposicaoCumulativa } from '../contracts/f0c/exposicaoCumulativa.js';
+export type { LimiteExposicaoCumulativa } from '../contracts/f0c/exposicaoCumulativa.js';
 type SaidaInterna = Omit<CumulativoResult, "inputs_used" | "inputs_missing">;
 type Achado = import("./tipos-w3.js").Achado;
 type AdministracaoCumulativo = import("./tipos-w3.js").AdministracaoCumulativo;
@@ -122,16 +124,7 @@ export interface EntradaExposicaoCumulativa {
   historicoCompleto: boolean | null;
   fonteCompletude: string | null;
 }
-export interface LimiteExposicaoCumulativa {
-  ativo: boolean;
-  regraId: string;
-  versao: string;
-  droga: string;
-  unidade: string;
-  maximo: number | null;
-  comparador: "GT" | "GTE";
-  fonte: string | null;
-}
+
 export interface ResultadoExposicaoCumulativa {
   patientId: string;
   droga: string;

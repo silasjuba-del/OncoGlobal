@@ -3,16 +3,17 @@
 import { createHash } from "node:crypto";
 import type { DatabaseSync } from "node:sqlite";
 import { z } from "zod";
-import { Id } from "../contracts/base.js";
+import { Id, Fonte, DataCivil } from "../contracts/base.js";
+import { prepararDocumentosConsulta, type EntradaDocumentosConsulta, type DocumentosConsultaPreparados, type ReferenciaTarefaRetorno } from "../modules/documentos/consulta.js";
 import type { ClinicalEvent } from "../contracts/operacao.js";
-import { lerDraft, salvarDraft } from "../kernel/ledger/drafts.js";
+import { lerDraft, salvarDraft } from "../kernel/comandos/portas.js";
 import { sqliteIdempotencia } from "../kernel/ledger/idempotencia.js";
 import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
-import type { PlanoFlash } from "../ui/consulta/ConsultaFlash.js";
-import type { FlashVisao } from "../ui/api/porta.js";
+import type { PlanoFlash } from "../contracts/api/flash.js";
+import type { FlashVisao } from "../contracts/api/porta.js";
 import { hashConteudoExibido } from "./sessao.js";
-import { lerModeloFlashConfigurado, type ModeloFlash } from "../config/flash.js";
-export type { ModeloFlash } from "../config/flash.js";
+import { lerModeloFlashConfigurado, type ModeloFlash } from "../contracts/configFlash.js";
+export type { ModeloFlash } from "../contracts/configFlash.js";
 
 /** Tipos de evento que carregam laudo com frase (data.dataClinica, data.fraseLaudo, data.nome). */
 const TIPOS_EXAME_COM_LAUDO = new Set(["Biopsy", "ImagingReport", "ExameLaudo", "LabResult"]);
@@ -128,7 +129,13 @@ function planoParaVisao(plano: PlanoFlashEntradaTipo): PlanoFlash {
 }
 
 export interface ContextoFlash { patientId: string; encounterId: string; tumorLotId: string | null }
-interface Resposta { status: number; body: Record<string, unknown> }
+interface Resposta { status: number; body: Record<string, unknown>; preparacaoDocumentos?: DocumentosConsultaPreparados }
+/** Fonte/versão resolvidas pelo servidor; jamais desserializar esta porta a partir do HTTP. */
+export interface FonteDocumentosFlash {
+  fonte: Fonte; dataReferencia: string; revisao: string;
+  medicamentos?: NonNullable<EntradaDocumentosConsulta["decisao"]>["medicamentos"];
+}
+
 
 const sha = (s: string) => createHash("sha256").update(s).digest("hex");
 const chaveContexto = (c: ContextoFlash) => sha(JSON.stringify([c.patientId, c.encounterId, c.tumorLotId]));
@@ -210,10 +217,10 @@ function montarDocumentos(chave: string, plano: PlanoFlashEntradaTipo, resumoCli
  */
 export function prepararFinalizacaoFlash(db: DatabaseSync, agora: string, input: ContextoFlash & {
   plano: PlanoFlashEntradaTipo; idempotencyKey: string;
-}, resumoClinico: string | null = null, contextoQt: ContextoQtFlash | null = null): Resposta {
+}, resumoClinico: string | null = null, contextoQt: ContextoQtFlash | null = null, fonteDocumentos?: FonteDocumentosFlash): Resposta {
   db.exec("SAVEPOINT flash_preparacao");
   try {
-    const resultado = prepararDocumentosFlash(db, agora, input, resumoClinico, contextoQt);
+    const resultado = prepararDocumentosFlash(db, agora, input, resumoClinico, contextoQt, fonteDocumentos);
     if (resultado.status >= 400) db.exec("ROLLBACK TO flash_preparacao");
     db.exec("RELEASE flash_preparacao");
     return resultado;
@@ -225,9 +232,12 @@ export function prepararFinalizacaoFlash(db: DatabaseSync, agora: string, input:
 
 function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: ContextoFlash & {
   plano: PlanoFlashEntradaTipo; idempotencyKey: string;
-}, resumoClinico: string | null, contextoQt: ContextoQtFlash | null): Resposta {
-  if (input.plano.acoesMarcadas.length > 0 || input.plano.receitasMarcadas.length > 0)
+}, resumoClinico: string | null, contextoQt: ContextoQtFlash | null, fonteDocumentos?: FonteDocumentosFlash): Resposta {
+  const medicamentos = fonteDocumentos?.medicamentos ?? [];
+  if (input.plano.acoesMarcadas.length > 0 || input.plano.receitasMarcadas.some(id => !medicamentos.some(m => m.id === id)))
     return { status: 409, body: { codigo: "ITENS_FLASH_SEM_DOCUMENTO" } };
+  if (fonteDocumentos && (!Fonte.safeParse(fonteDocumentos.fonte).success || !DataCivil.safeParse(fonteDocumentos.dataReferencia).success || !fonteDocumentos.revisao.trim()))
+    return { status: 409, body: { codigo: "FONTE_DOCUMENTOS_INVALIDA" } };
   if (input.plano.decisaoQt?.solicitarCiclo && !input.plano.decisaoQt.data)
     return { status: 409, body: { codigo: "DATA_CICLO_PENDENTE" } };
   if (input.plano.decisaoQt?.solicitarCiclo && (!contextoQt || !contextoQt.protocolo.trim()
@@ -236,6 +246,7 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
       || contextoQt.ciclosPrevistos < contextoQt.ciclo))))
     return { status: 409, body: { codigo: "QT_SEM_CONTEXTO" } };
   const payloadHash = hashConteudoExibido({ plano: input.plano, resumoClinico,
+    ...(fonteDocumentos ? {fonteDocumentos} : {}),
     ...(input.plano.decisaoQt?.solicitarCiclo ? { contextoQt } : {}) });
   const chavePedido = `flash-preparar:${chaveContexto(input)}:${sha(input.idempotencyKey)}`;
   const store = sqliteIdempotencia(db);
@@ -247,6 +258,48 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
   const chave = sha(JSON.stringify([chaveContexto(input), payloadHash]));
   const contexto = { encounterId: input.encounterId, tumorLotId: input.tumorLotId };
   const docs = montarDocumentos(chave, input.plano, resumoClinico, contextoQt);
+  let preparacaoDocumentos: DocumentosConsultaPreparados | undefined;
+  if (fonteDocumentos) {
+    const contextoCompleto = {patientId: input.patientId, ...contexto};
+    const essencial = input.plano.solicitacoes !== undefined || input.plano.decisaoQt !== undefined;
+    const lab = input.plano.solicitacoes?.laboratorio ?? (essencial ? [] : input.plano.retorno.examesAntesDoRetorno);
+    const imagem = input.plano.solicitacoes?.imagem ?? [];
+    const pedidos = [...lab.map((exame,i)=>({id:`laboratorio_${i}`,exame,indicacao:null})),
+      ...imagem.map((exame,i)=>({id:`imagem_${i}`,exame,indicacao:resumoClinico}))];
+    preparacaoDocumentos = prepararDocumentosConsulta({ contexto:contextoCompleto,
+      operationId:input.idempotencyKey,revisao:fonteDocumentos.revisao,dataReferencia:fonteDocumentos.dataReferencia,
+      fuso:"America/Fortaleza", materiais:[], decisao:{decisaoId:`flash-decisao-${chave}`,contexto:contextoCompleto,
+        revisao:"CONFIRMADO",origem:"DECISAO_MEDICA",fontes:[fonteDocumentos.fonte],
+        medicamentos:medicamentos.filter(m=>input.plano.receitasMarcadas.includes(m.id)),pedidos,
+        retorno:{dias:input.plano.retorno.dias,motivo:input.plano.retorno.motivo ?? null,tarefaId:`flash-tarefa-${chave.slice(0,20)}`}} });
+    const mapaDocumentos = new Map<string,string>();
+    for (const d of docs) {
+      d.extra={...d.extra,fontes:[fonteDocumentos.fonte],preparacaoS9:{revisao:fonteDocumentos.revisao,documentos:[]}};
+      const gerados = preparacaoDocumentos.documentos.filter(g=>
+        d.tipoDocumento===TIPO_DOC.retorno ? g.tipoDocumento==="RETORNO"
+        : d.tipoDocumento===TIPO_DOC.laboratorio ? g.tipoDocumento==="PEDIDO_EXAME" && lab.some(exame=>g.texto.includes(`Exame: ${exame}\n`))
+        : d.tipoDocumento===TIPO_DOC.imagem ? g.tipoDocumento==="PEDIDO_EXAME" && imagem.some(exame=>g.texto.includes(`Exame: ${exame}\n`)) : false);
+      if (!gerados.length) continue;
+      d.texto=gerados.map(g=>g.texto).join("\n\n");
+      for(const g of gerados)if(!mapaDocumentos.has(g.documentId))mapaDocumentos.set(g.documentId,d.documentId);
+      d.extra={...d.extra,fontes:[fonteDocumentos.fonte],preparacaoS9:{revisao:fonteDocumentos.revisao,documentos:gerados.map(g=>({documentId:g.documentId,documentHash:g.documentHash,templateRef:g.templateRef}))}};
+    }
+    for(const receita of preparacaoDocumentos.documentos.filter(d=>d.tipoDocumento==="RECEITA")) {
+      const documentId=`flash-receita-${chave.slice(0,20)}`;
+      docs.push({documentId,titulo:receita.titulo,tipoDocumento:"FLASH_RECEITA",texto:receita.texto,extra:{fontes:receita.fontes,preparacaoS9:{revisao:fonteDocumentos.revisao,documentos:[{documentId:receita.documentId,documentHash:receita.documentHash,templateRef:receita.templateRef}]}}});
+      mapaDocumentos.set(receita.documentId,documentId);
+    }
+    const tarefas:ReferenciaTarefaRetorno[]=preparacaoDocumentos.tarefas.flatMap(t=>{
+      const documentId=mapaDocumentos.get(t.documentoRef.documentId);
+      const pedidosRef=[...new Set(t.pedidosRef.map(p=>mapaDocumentos.get(p.documentId)).filter((id):id is string=>id!==undefined))].map(documentId=>({documentId,documentVersion:1 as const}));
+      return documentId&&pedidosRef.length?[{...t,documentoRef:{documentId,documentVersion:1 as const},pedidosRef}]:[];
+    });
+    preparacaoDocumentos={...preparacaoDocumentos,tarefas};
+    const retorno=docs.find(d=>d.tipoDocumento===TIPO_DOC.retorno);
+    if(retorno)retorno.extra={...retorno.extra,tarefasRetornoS9:tarefas};
+    const conjunto=docs.find(d=>d.tipoDocumento===TIPO_DOC.conjunto);
+    if(conjunto){const incluidos=docs.filter(d=>d!==conjunto);conjunto.texto=incluidos.map(d=>`${d.titulo}\n${d.texto}`).join("\n\n---\n\n");conjunto.extra={...conjunto.extra,documentosIncluidos:incluidos.map(d=>({documentId:d.documentId,documentVersion:1,titulo:d.titulo}))};}
+  }
   const draftsDocs = docs.map((d) => ({
     doc: d,
     payload: {
@@ -284,7 +337,7 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
   const conjunto = draftsDocs.find(({ payload }) => payload.tipoDocumento === TIPO_DOC.conjunto)?.payload;
   store.set(chavePedido, { payloadHash,
     resultado: { decisao: "EXECUTADA", motivoCodigo: "FLASH_PREPARADA", recibo: evolucao.documentId } }, agora);
-  return { status: 200, body: {
+  return { status: 200, ...(preparacaoDocumentos ? {preparacaoDocumentos} : {}), body: {
     codigo: "FLASH_PREPARADA",
     registros: draftsDocs.map(({ payload }) => ({ id: payload.documentId, expectedRevision: 0 })),
     documentos: draftsDocs.map(({ payload }) => ({ documentId: payload.documentId, documentVersion: 1,
