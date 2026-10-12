@@ -646,23 +646,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Cadastro SIGTAP 2026-09 local só mostra QT de pâncreas avançado (0304020052); procedimento para QT neoadjuvante de pâncreas não identificado.",
-          "pendencia": {
-            "texto": "Sem procedimento SIGTAP de QT neoadjuvante/adjuvante para este tumor (só QT avançada).",
-            "classe": "DEPENDE_MOTOR_CODIGO",
-            "buscasFeitas": [
-              "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
-            ]
-          },
+          "disponivel": "parcial",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
-            "pagina": null,
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): só existe APAC de doença avançada (0304020052); não há procedimento adjuvante/neoadjuvante para o CID",
             "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
             "estado": "VERIFICADO"
-          }
+          },
+          "observacao": "Drogas convencionais disponíveis, mas sem procedimento APAC específico para o cenário perioperatório: depende de regra local de faturamento."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -759,23 +750,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Cadastro SIGTAP 2026-09 local só mostra QT de pâncreas avançado (0304020052); procedimento para QT neoadjuvante de pâncreas não identificado.",
-          "pendencia": {
-            "texto": "Sem procedimento SIGTAP de QT neoadjuvante/adjuvante para este tumor (só QT avançada).",
-            "classe": "DEPENDE_MOTOR_CODIGO",
-            "buscasFeitas": [
-              "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
-            ]
-          },
+          "disponivel": "parcial",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
-            "pagina": null,
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): só existe APAC de doença avançada (0304020052); não há procedimento adjuvante/neoadjuvante para o CID",
             "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
             "estado": "VERIFICADO"
-          }
+          },
+          "observacao": "Drogas convencionais disponíveis, mas sem procedimento APAC específico para o cenário perioperatório: depende de regra local de faturamento."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -841,23 +823,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Cadastro SIGTAP 2026-09 local só mostra QT de pâncreas avançado (0304020052); procedimento para QT adjuvante de pâncreas não identificado.",
-          "pendencia": {
-            "texto": "Sem procedimento SIGTAP de QT neoadjuvante/adjuvante para este tumor (só QT avançada).",
-            "classe": "DEPENDE_MOTOR_CODIGO",
-            "buscasFeitas": [
-              "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
-            ]
-          },
+          "disponivel": "parcial",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
-            "pagina": null,
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): só existe APAC de doença avançada (0304020052); não há procedimento adjuvante/neoadjuvante para o CID",
             "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
             "estado": "VERIFICADO"
-          }
+          },
+          "observacao": "Drogas convencionais disponíveis, mas sem procedimento APAC específico para o cenário perioperatório: depende de regra local de faturamento."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -912,23 +885,14 @@
         "ajusteObrigatorio": "",
         "fichaId": "FICHA.pancreas.gemcitabina-capecitabina__nao-especificado@1.0.0",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Cadastro SIGTAP 2026-09 local só mostra QT de pâncreas avançado (0304020052); procedimento para QT adjuvante de pâncreas não identificado.",
-          "pendencia": {
-            "texto": "Sem procedimento SIGTAP de QT neoadjuvante/adjuvante para este tumor (só QT avançada).",
-            "classe": "DEPENDE_MOTOR_CODIGO",
-            "buscasFeitas": [
-              "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
-            ]
-          },
+          "disponivel": "parcial",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
-            "pagina": null,
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): só existe APAC de doença avançada (0304020052); não há procedimento adjuvante/neoadjuvante para o CID",
             "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
             "estado": "VERIFICADO"
-          }
+          },
+          "observacao": "Drogas convencionais disponíveis, mas sem procedimento APAC específico para o cenário perioperatório: depende de regra local de faturamento."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -962,23 +926,14 @@
         "ajusteObrigatorio": "",
         "fichaId": "FICHA.pancreas.gemcitabina-monoterapia__adjuvante@1.0.0",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Cadastro SIGTAP 2026-09 local só mostra QT de pâncreas avançado (0304020052); procedimento para QT adjuvante de pâncreas não identificado.",
-          "pendencia": {
-            "texto": "Sem procedimento SIGTAP de QT neoadjuvante/adjuvante para este tumor (só QT avançada).",
-            "classe": "DEPENDE_MOTOR_CODIGO",
-            "buscasFeitas": [
-              "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
-            ]
-          },
+          "disponivel": "parcial",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
-            "pagina": null,
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): só existe APAC de doença avançada (0304020052); não há procedimento adjuvante/neoadjuvante para o CID",
             "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
             "estado": "VERIFICADO"
-          }
+          },
+          "observacao": "Drogas convencionais disponíveis, mas sem procedimento APAC específico para o cenário perioperatório: depende de regra local de faturamento."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1034,23 +989,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Cadastro SIGTAP 2026-09 local só mostra QT de pâncreas avançado (0304020052); procedimento para QT adjuvante de pâncreas não identificado.",
-          "pendencia": {
-            "texto": "Sem procedimento SIGTAP de QT neoadjuvante/adjuvante para este tumor (só QT avançada).",
-            "classe": "DEPENDE_MOTOR_CODIGO",
-            "buscasFeitas": [
-              "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
-            ]
-          },
+          "disponivel": "parcial",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
-            "pagina": null,
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): só existe APAC de doença avançada (0304020052); não há procedimento adjuvante/neoadjuvante para o CID",
             "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
             "estado": "VERIFICADO"
-          }
+          },
+          "observacao": "Drogas convencionais disponíveis, mas sem procedimento APAC específico para o cenário perioperatório: depende de regra local de faturamento."
         },
         "fonte": {
           "tipo": "SBOC",

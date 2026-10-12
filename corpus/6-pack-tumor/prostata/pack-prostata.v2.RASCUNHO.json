@@ -2969,21 +2969,12 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "pendencia": {
-            "texto": "Alendronato na perda óssea induzida por TDA: indicação fora da oncologia (PCDT de osteoporose); não verificado nesta rodada.",
-            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
-            "buscasFeitas": [
-              "planilha Recomendações da Conitec (oncologia): sem registro",
-              "SIGTAP 03.04: sem procedimento compatível"
-            ]
-          },
+          "disponivel": "sim",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP 2026-09 / planilha Recomendações da Conitec",
-            "pagina": null,
+            "referencia": "RENAME / Programa Farmácia Popular (alendronato de sódio 70 mg) — conferir elenco vigente",
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           }
         },
         "fonte": {

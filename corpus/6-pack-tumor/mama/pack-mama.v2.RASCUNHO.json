@@ -1854,22 +1854,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "pendencia": {
-            "texto": "CDIS (CID D05) não consta entre os CID compatíveis dos procedimentos APAC de hormonioterapia de mama (somente C50x) no SIGTAP 2026-09.",
-            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
-            "buscasFeitas": [
-              "SIGTAP 2026-09: CIDs de 0304050040/0121/0113 = C500-C506",
-              "planilha Recomendações da Conitec: sem registro para CDIS"
-            ]
-          },
+          "disponivel": "parcial",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json) — 0304050040 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
-            "pagina": null,
-            "trecho": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
-            "estado": "DADO_AUSENTE"
-          }
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): CID D05 não consta das APAC de hormonioterapia de mama",
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "observacao": "Tamoxifeno é droga de baixo custo; a via de dispensação no CDIS depende de regra local."
         },
         "id": "mama-tamoxifeno-cdis",
         "nome": "Tamoxifeno — CDIS RH+",

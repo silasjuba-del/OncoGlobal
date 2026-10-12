@@ -1235,18 +1235,14 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK",
-          "pendenciaClasse": {
-            "texto": "Pazopanibe: nenhuma demanda nem portaria de incorporação na Conitec para sarcoma de partes moles (incorporado em 2018 só para carcinoma renal); não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
-            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
-            "buscasFeitas": [
-              "Painel de Demandas Conitec (exportação 15/06/2026)",
-              "TecnologiasDemandadas Conitec 15/04/2026",
-              "web: gov.br/conitec, Conass Informa"
-            ]
-          }
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Sem portaria CONITEC de incorporação localizada para a droga nesta indicação; existe a APAC 0304020290 (SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json)), cujo valor não custeia droga de alto custo",
+            "trecho": "QUIMIOTERAPIA DE SARCOMA DE PARTES MOLES AVANÇADO",
+            "estado": "INFERIDO"
+          },
+          "observacao": "Interpretação da regra de incorporação, não decisão publicada; o serviço pode usar dentro do valor da APAC."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1355,18 +1351,14 @@
         "ajusteObrigatorio": "Ajuste hepático e por toxicidade conforme bula; CPK e função hepática antes de cada ciclo",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK",
-          "pendenciaClasse": {
-            "texto": "Trabectedina: nenhuma demanda nem portaria de incorporação na Conitec para sarcoma de partes moles; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
-            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
-            "buscasFeitas": [
-              "Painel de Demandas Conitec (exportação 15/06/2026)",
-              "TecnologiasDemandadas Conitec 15/04/2026",
-              "web: gov.br/conitec, Conass Informa"
-            ]
-          }
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Sem portaria CONITEC de incorporação localizada para a droga nesta indicação; existe a APAC 0304020290 (SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json)), cujo valor não custeia droga de alto custo",
+            "trecho": "QUIMIOTERAPIA DE SARCOMA DE PARTES MOLES AVANÇADO",
+            "estado": "INFERIDO"
+          },
+          "observacao": "Interpretação da regra de incorporação, não decisão publicada; o serviço pode usar dentro do valor da APAC."
         },
         "fonte": {
           "tipo": "BULA",
@@ -1802,18 +1794,14 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK",
-          "pendenciaClasse": {
-            "texto": "Pembrolizumabe: nenhuma demanda nem portaria de incorporação na Conitec para osteossarcoma MSI-H/dMMR/TMB-H; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
-            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
-            "buscasFeitas": [
-              "Painel de Demandas Conitec (exportação 15/06/2026)",
-              "TecnologiasDemandadas Conitec 15/04/2026",
-              "web: gov.br/conitec, Conass Informa"
-            ]
-          }
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Sem portaria CONITEC de incorporação localizada para a droga nesta indicação; existe a APAC 0304020290 (SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json)), cujo valor não custeia droga de alto custo",
+            "trecho": "QUIMIOTERAPIA DE SARCOMA DE PARTES MOLES AVANÇADO",
+            "estado": "INFERIDO"
+          },
+          "observacao": "Interpretação da regra de incorporação, não decisão publicada; o serviço pode usar dentro do valor da APAC."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2127,18 +2115,14 @@
           "estado": "VERIFICADO"
         },
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK",
-          "pendenciaClasse": {
-            "texto": "Imatinibe: nenhuma demanda nem portaria de incorporação na Conitec para DFSP (incorporado no SUS só para LMC, LLA Ph+, GIST e outras indicações não-sarcoma); não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
-            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
-            "buscasFeitas": [
-              "Painel de Demandas Conitec (exportação 15/06/2026)",
-              "TecnologiasDemandadas Conitec 15/04/2026",
-              "web: gov.br/conitec, Conass Informa"
-            ]
-          }
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Sem portaria CONITEC de incorporação localizada para a droga nesta indicação; existe a APAC 0304020290 (SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json)), cujo valor não custeia droga de alto custo",
+            "trecho": "QUIMIOTERAPIA DE SARCOMA DE PARTES MOLES AVANÇADO",
+            "estado": "INFERIDO"
+          },
+          "observacao": "Interpretação da regra de incorporação, não decisão publicada; o serviço pode usar dentro do valor da APAC."
         }
       },
       {
@@ -2169,18 +2153,14 @@
           "estado": "VERIFICADO"
         },
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK",
-          "pendenciaClasse": {
-            "texto": "Denosumabe: nenhuma demanda nem portaria de incorporação na Conitec para tumor de células gigantes ósseo (demandas Conitec de 2022 foram para osteoporose, não incorporado); não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
-            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
-            "buscasFeitas": [
-              "Painel de Demandas Conitec (exportação 15/06/2026)",
-              "TecnologiasDemandadas Conitec 15/04/2026",
-              "web: gov.br/conitec, Conass Informa"
-            ]
-          }
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Sem portaria CONITEC de incorporação localizada para a droga nesta indicação; existe a APAC 0304020290 (SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json)), cujo valor não custeia droga de alto custo",
+            "trecho": "QUIMIOTERAPIA DE SARCOMA DE PARTES MOLES AVANÇADO",
+            "estado": "INFERIDO"
+          },
+          "observacao": "Interpretação da regra de incorporação, não decisão publicada; o serviço pode usar dentro do valor da APAC."
         }
       }
     ],

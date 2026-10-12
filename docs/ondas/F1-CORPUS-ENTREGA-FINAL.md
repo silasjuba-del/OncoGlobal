@@ -41,7 +41,7 @@ Esta entrega é uma **biblioteca RASCUNHO completa e auditada**. Tudo está com 
 Esquema único: `docs/ondas/F1-PACK-ESQUEMA-V2.md`.
 
 - **"Com dose e fonte":** todas as doses do protocolo preenchidas, com fonte VERIFICADO ou INFERIDO. Os INFERIDO não são clinicamente verificados.
-- **Status SUS:** preenchido em **600 de 633** protocolos, com portaria, relatório ou procedimento APAC.
+- **Status SUS:** preenchido em **633 de 633** protocolos (portaria CONITEC, procedimento APAC do SIGTAP 09/2026 ou, quando não há avaliação CONITEC, "não" INFERIDO com a regra explicada). Pâncreas e vias biliares perioperatórios: SIGTAP só tem APAC de doença avançada (verificado).
 - **Pendências:** todas classificadas. Nenhuma ficou como texto solto.
 
 | Pack | Protocolos | Com dose e fonte | NCT verificados | Fórmulas X+Y=Z | Pendências (classificadas) | Conflitos |

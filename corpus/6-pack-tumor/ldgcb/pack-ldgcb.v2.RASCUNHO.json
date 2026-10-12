@@ -697,23 +697,12 @@
         "ajusteObrigatorio": "Neuropatia periférica: reduzir polatuzumabe para 1,4 e depois 1 mg/kg (bula).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "PCDT LDGCB 2014 (1ª linha só CHOP/R-CHOP)",
-            "pagina": 9,
-            "trecho": "o CHOP deve ser considerado o de escolha",
-            "estado": "DADO_AUSENTE"
-          },
-          "pendenciaClasse": {
-            "texto": "Polatuzumabe vedotina: nenhuma demanda nem portaria na Conitec; não consta do PCDT 2014.",
-            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
-            "buscasFeitas": [
-              "Painel de Demandas Conitec (exportação 15/06/2026)",
-              "TecnologiasDemandadas Conitec 15/04/2026",
-              "web: gov.br/conitec, Conass Informa"
-            ]
+            "tipo": "NORMA",
+            "referencia": "Sem portaria CONITEC de incorporação localizada para a droga nesta indicação",
+            "trecho": null,
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
