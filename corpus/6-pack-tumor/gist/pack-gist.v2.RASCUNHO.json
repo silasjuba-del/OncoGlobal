@@ -1403,8 +1403,15 @@
         "estado": "DADO_AUSENTE"
       },
       "fonteBDetalhe": "HR incompatível com a diferença absoluta descrita; publicação não aberta",
-      "escolhaSeguranca": "Manter 'pelo menos 3 anos'; prolongar só após discussão multidisciplinar.",
-      "decisaoNecessaria": true
+      "escolhaSeguranca": "Não decidir 3 anos de imatinibe pela célula de alto risco não gástrico da tabela do MOC/SBOC (cap. 41, Joensuu com erro: faixa correta 2,1–5 cm; linha intermediária incoerente).",
+      "decisaoNecessaria": true,
+      "fonteC": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "INFERIDO"
+      }
     }
   ],
   "curadoria": {
@@ -1429,6 +1436,12 @@
       "por": "Claude",
       "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
       "acao": "1 vínculos rebaixados a catalogoIdCandidato"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 5",
+      "acao": "tabela de risco do MOC com erro registrada; não automatizar"
     }
   ]
 }

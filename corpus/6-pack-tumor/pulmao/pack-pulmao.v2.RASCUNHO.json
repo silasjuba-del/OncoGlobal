@@ -380,6 +380,18 @@
             "pagina": 6,
             "trecho": "expressão de PD-L1 e HER2 por imuno- histoquímica para todos CPNPC",
             "estado": "VERIFICADO"
+          },
+          "clonesAceitosAdjuvante": [
+            "22C3",
+            "SP142"
+          ],
+          "notaClone": "Adjuvante: MOC aceita TC por 22C3 ou SP142. Nos demais cenários o par droga–clone não foi relido.",
+          "fonteClone": {
+            "tipo": "DIRETRIZ",
+            "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
           }
         }
       ]
@@ -5282,6 +5294,12 @@
       "por": "Claude",
       "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
       "acao": "8 vínculos rebaixados a catalogoIdCandidato"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 2",
+      "acao": "PD-L1 adjuvante: clones 22C3 ou SP142 (1 entradas)"
     }
   ]
 }

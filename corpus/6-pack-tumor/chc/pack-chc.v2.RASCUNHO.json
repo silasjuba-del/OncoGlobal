@@ -602,7 +602,16 @@
           "trecho": "Recomenda- se a realização de endoscopia digestiva alta para investigar a presença",
           "estado": "VERIFICADO"
         },
-        "doseVerificada": true
+        "doseVerificada": true,
+        "fontesAdicionais": [
+          {
+            "tipo": "DIRETRIZ",
+            "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        ]
       },
       {
         "id": "chc-1l-durvalumabe-tremelimumabe",
@@ -665,7 +674,16 @@
           "trecho": "followed by IMFINZI as a single agent every 4 weeks",
           "estado": "VERIFICADO"
         },
-        "doseVerificada": true
+        "doseVerificada": true,
+        "fontesAdicionais": [
+          {
+            "tipo": "DIRETRIZ",
+            "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        ]
       },
       {
         "id": "chc-1l-nivolumabe-ipilimumabe",
@@ -901,7 +919,16 @@
           "trecho": "há evidência de alto nível para o uso de regorafe- nibe",
           "estado": "VERIFICADO"
         },
-        "doseVerificada": true
+        "doseVerificada": true,
+        "fontesAdicionais": [
+          {
+            "tipo": "DIRETRIZ",
+            "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        ]
       },
       {
         "id": "chc-2l-cabozantinibe",
@@ -950,7 +977,16 @@
           "trecho": "cabozantinibe NE AL TO/FR FORTE",
           "estado": "VERIFICADO"
         },
-        "doseVerificada": true
+        "doseVerificada": true,
+        "fontesAdicionais": [
+          {
+            "tipo": "DIRETRIZ",
+            "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        ]
       },
       {
         "id": "chc-2l-ramucirumabe",
@@ -998,7 +1034,16 @@
           "trecho": "alfafetoproteína ≥400 ng/mL, ramucirumabe NE AL TO/FR FORTE",
           "estado": "VERIFICADO"
         },
-        "doseVerificada": true
+        "doseVerificada": true,
+        "fontesAdicionais": [
+          {
+            "tipo": "DIRETRIZ",
+            "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        ]
       }
     ],
     "radioterapia": [
@@ -1620,5 +1665,13 @@
         }
       ]
     }
-  }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 17",
+      "acao": "doses do MOC coincidem com as do pack (bula FDA); bula ANVISA NÃO VERIFICADA"
+    }
+  ]
 }

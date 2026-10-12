@@ -1302,7 +1302,7 @@
       {
         "id": "rim-lenvatinibe-everolimo-2l",
         "nome": "Lenvatinibe + everolimo",
-        "cenario": "metastático células claras, pós-IO ou pós-anti-VEGFR (preferencial após nivolumabe + cabozantinibe)",
+        "cenario": "metastático células claras após IO + TKI (opções do MOC: cabozantinibe 60 mg, lenvatinibe 18 mg + everolimo 5 mg, ou axitinibe)",
         "linha": "2ª linha",
         "drogas": [
           {
@@ -1344,7 +1344,16 @@
           "pagina": 14,
           "trecho": "Lenvatinibe 18 mg VO 1x/dia + Everolimo 5 mg VO 1x/dia",
           "estado": "VERIFICADO"
-        }
+        },
+        "fontesAdicionais": [
+          {
+            "tipo": "DIRETRIZ",
+            "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        ]
       },
       {
         "id": "rim-nivolumabe-2l",
@@ -1385,10 +1394,10 @@
         }
       },
       {
-        "id": "rim-everolimo-2l",
+        "id": "rim-everolimo-3l",
         "nome": "Everolimo isolado",
-        "cenario": "metastático células claras, pós-nivolumabe + cabozantinibe (opção)",
-        "linha": "2ª linha",
+        "cenario": "metastático células claras: 3ª ou 4ª linha, ou intolerância à combinação com lenvatinibe",
+        "linha": "3ª ou 4ª linha",
         "drogas": [
           {
             "droga": "everolimo",
@@ -1427,7 +1436,16 @@
           "pagina": 14,
           "trecho": "Everolimo (NE alto/FR fraca)",
           "estado": "VERIFICADO"
-        }
+        },
+        "fontesAdicionais": [
+          {
+            "tipo": "DIRETRIZ",
+            "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        ]
       },
       {
         "id": "rim-ncc-cabozantinibe-1l",
@@ -2670,6 +2688,10 @@
       "buscasFeitas": [
         "DDT 2022 (semestral) × aula PRO (3-6 meses no 1º ano)"
       ]
+    },
+    {
+      "texto": "Observação vigilante (T1a, expectativa de vida limitada): intervalo de imagem não consta do MOC nem do DDT lido.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA"
     }
   ],
   "conflitos": [
@@ -2784,8 +2806,15 @@
         "trecho": "RCC : 10 mg orally once daily.",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Dose 10 mg/dia do rótulo (CCR avançado após TKI anti-VEGFR) registrada; pack usa após nivolumabe + cabozantinibe (cabozantinibe é TKI anti-VEGFR). Médico confirma equivalência de cenário.",
-      "decisaoNecessaria": true
+      "escolhaSeguranca": "Everolimo isolado vai para 3ª/4ª linha ou intolerância (MOC); após IO + TKI: cabozantinibe, lenvatinibe + everolimo ou axitinibe.",
+      "decisaoNecessaria": false,
+      "fonteC": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "INFERIDO"
+      }
     }
   ],
   "curadoria": {
@@ -2824,5 +2853,19 @@
       ],
       "correcoes": []
     }
-  }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 6",
+      "acao": "everolimo 10 mg movido para 3ª/4ª linha; cenários pós-IO+TKI pelo MOC"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 9",
+      "acao": "observação vigilante: intervalo MANTER_PENDENTE"
+    }
+  ]
 }

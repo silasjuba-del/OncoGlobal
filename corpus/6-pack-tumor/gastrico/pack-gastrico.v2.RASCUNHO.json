@@ -3617,6 +3617,26 @@
       },
       "escolhaSeguranca": "Doses idênticas entre 2025 v7 e 2026 v5; 2026 acrescenta tislelizumabe. Usada a 2026.",
       "decisaoNecessaria": false
+    },
+    {
+      "tema": "mDCF: dia da cisplatina e 5-FU (SBOC × MOC/Shah)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 8,
+        "trecho": "Docetaxel 40 mg/m² EV D1 Cisplatina 40 mg/m² EV D2",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "INFERIDO"
+      },
+      "detalhe": "MOC (Shah): docetaxel 40 D1, cisplatina 40 D3, bolus 5-FU 400 + leucovorin 400 + 5-FU 2.000 em 48 h, a cada 14 dias. Pack (SBOC): cisplatina D2; 5-FU 1.000/dia D1–D2 (= 2.000 em 48 h).",
+      "escolhaSeguranca": "Doses totais coincidem; diverge o dia da cisplatina (D2 × D3). Manter a SBOC até decisão.",
+      "decisaoNecessaria": true
     }
   ],
   "curadoria": {
@@ -3675,6 +3695,12 @@
       "por": "Claude",
       "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
       "acao": "1 vínculos rebaixados a catalogoIdCandidato"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 4",
+      "acao": "mDCF de Shah registrado como conflito (dia da cisplatina); FLOT 2.600 em 24 h já é o valor do pack"
     }
   ]
 }

@@ -3833,6 +3833,10 @@
         "SBOC próstata avançada 2026: sem antiemese/profilaxia de NF",
         "openFDA docetaxel e Jevtana: pré-medicação apenas"
       ]
+    },
+    {
+      "texto": "Tabela de PSA no seguimento: não localizada no MOC 2026 (conferência 2026-10-12).",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA"
     }
   ],
   "conflitos": [

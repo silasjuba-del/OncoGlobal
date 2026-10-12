@@ -1955,8 +1955,15 @@
         "trecho": null,
         "estado": "CONFLITANTE"
       },
-      "escolhaSeguranca": "Protocolo registra 28 dias (SBOC, intervalo maior = mais seguro); ficha do serviço usa 21 dias — revisar ficha.",
-      "decisaoNecessaria": true
+      "escolhaSeguranca": "MANTER_PENDENTE: o próprio MOC diverge (recomendação a cada 3 semanas × citação do GOG a cada 4 semanas).",
+      "decisaoNecessaria": true,
+      "fonteC": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "INFERIDO"
+      }
     },
     {
       "tema": "Cisplatina × carboplatina na 1ª linha",
@@ -2010,5 +2017,13 @@
       ],
       "correcoes": []
     }
-  }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 7",
+      "acao": "ifosfamida: MOC diverge internamente; mantido pendente"
+    }
+  ]
 }

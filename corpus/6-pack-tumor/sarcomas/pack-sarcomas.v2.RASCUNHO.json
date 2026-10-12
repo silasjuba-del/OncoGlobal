@@ -2162,6 +2162,40 @@
           },
           "observacao": "Interpretação da regra de incorporação, não decisão publicada; o serviço pode usar dentro do valor da APAC."
         }
+      },
+      {
+        "id": "sarcomas-osseo-regorafenibe",
+        "nome": "Regorafenibe",
+        "cenario": "sarcoma ósseo/osteossarcoma recidivado ou metastático após QT padrão",
+        "linha": "2ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "Regorafenibe",
+            "dose": 160,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1–D21",
+            "observacao": "dose do ensaio citado no MOC, não de bula para esta indicação"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Sem portaria CONITEC de incorporação localizada para a indicação",
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
       }
     ],
     "radioterapia": [
@@ -2713,6 +2747,10 @@
         "catálogo v1.1",
         "SIGTAP 09/2026"
       ]
+    },
+    {
+      "texto": "Imatinibe no cordoma: sem fonte no MOC 2026 e na bula.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA"
     }
   ],
   "conflitos": [
@@ -2838,6 +2876,12 @@
       "por": "Claude",
       "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
       "acao": "1 vínculos rebaixados a catalogoIdCandidato"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 21",
+      "acao": "regorafenibe em sarcoma ósseo com fonte MOC; imatinibe no cordoma sem fonte"
     }
   ]
 }

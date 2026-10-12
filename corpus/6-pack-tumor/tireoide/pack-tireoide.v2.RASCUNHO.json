@@ -2098,8 +2098,15 @@
         "trecho": "Lobectomia: recomendado para tumores ≤2 cm",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Regra SUS (PCDT 2014): tireoidectomia total >1 cm; lobectomia até 2 cm (ATA 2025 via curso; PCDT cita MSKCC até 4 cm) só por decisão do cirurgião/médico. PCDT em revisão (CP Conitec 88/2026).",
-      "decisaoNecessaria": true
+      "escolhaSeguranca": "Corte do MOC: >1 e <4 cm sem extensão e cN0 → tireoidectomia total ou lobectomia; total obrigatória se >4 cm, T4 ou N1; lobectomia também em <1 cm de baixo risco. Substitui o corte de 2 cm da aula PRO.",
+      "decisaoNecessaria": false,
+      "fonteC": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "INFERIDO"
+      }
     }
   ],
   "curadoria": {
@@ -2136,6 +2143,12 @@
       "por": "Claude",
       "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
       "acao": "6 vínculos rebaixados a catalogoIdCandidato"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 10",
+      "acao": "corte de lobectomia ajustado para 4 cm (MOC)"
     }
   ]
 }

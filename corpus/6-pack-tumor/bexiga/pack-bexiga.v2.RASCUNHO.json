@@ -840,11 +840,11 @@
         "drogas": [
           {
             "droga": "BCG",
-            "dose": null,
-            "unidade": null,
+            "dose": 81,
+            "unidade": "mg",
             "via": "intravesical",
             "dias": "indução semanal ×6; manutenção 3 instilações semanais nos meses 3, 6 e 12 (1 ano)",
-            "observacao": "SBOC p. 16-17: dose de 1/3 (40 mg) durante um ano para risco intermediário; esquema de indução/manutenção não detalhado na SBOC. Aula PRO: indução 6 semanas + manutenção 3 semanas nos meses 3-6-12 (CURSO, INFERIDO). Dose varia por cepa — seguir bula da cepa disponível. Rodada 2: SBOC dá a fração da dose (1/3 = 40 mg; plena = 120 mg) sem cepa; TICE (bula FDA): 1 frasco (~50 mg) em 50 mL; Connaught 81 mg (aula PRO). Dose numérica não gravada.",
+            "observacao": "Dose do MOC (cepa usada no livro); a dose depende da cepa disponível — bula da cepa NÃO VERIFICADA.",
             "pendencia": {
               "texto": "Dose da BCG depende da cepa disponível no serviço (SBOC 120 mg/40 mg sem cepa; TICE 1 frasco ~50 mg; Connaught 81 mg).",
               "classe": "DEPENDE_BULA_ANVISA",
@@ -891,6 +891,13 @@
           "pagina": 16,
           "trecho": "A dose de 1/3 (40 mg) durante um ano",
           "estado": "VERIFICADO"
+        },
+        "fonteDose": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
         }
       },
       {
@@ -901,11 +908,11 @@
         "drogas": [
           {
             "droga": "BCG",
-            "dose": null,
-            "unidade": null,
+            "dose": 81,
+            "unidade": "mg",
             "via": "intravesical",
             "dias": "indução semanal ×6; manutenção 3 instilações semanais nos meses 3, 6, 12, 18, 24 e 30 (até 3 anos)",
-            "observacao": "SBOC p. 16: EORTC indica dose full (120 mg) por 3 anos no alto risco; duração conforme custo e disponibilidade. Esquema de indução/manutenção não detalhado na SBOC; aula PRO: indução 6 semanas + manutenção meses 3-6-12-18-24-30 (CURSO, INFERIDO). Dose varia por cepa — seguir bula. Rodada 2: SBOC dá a fração da dose (1/3 = 40 mg; plena = 120 mg) sem cepa; TICE (bula FDA): 1 frasco (~50 mg) em 50 mL; Connaught 81 mg (aula PRO). Dose numérica não gravada.",
+            "observacao": "Dose do MOC (cepa usada no livro); a dose depende da cepa disponível — bula da cepa NÃO VERIFICADA.",
             "pendencia": {
               "texto": "Dose da BCG depende da cepa disponível no serviço (SBOC 120 mg/40 mg sem cepa; TICE 1 frasco ~50 mg; Connaught 81 mg).",
               "classe": "DEPENDE_BULA_ANVISA",
@@ -952,6 +959,13 @@
           "pagina": 16,
           "trecho": "A Eortc indica a dose full (120 mg) durante 3 anos",
           "estado": "VERIFICADO"
+        },
+        "fonteDose": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
         }
       },
       {
@@ -3011,6 +3025,51 @@
           "trecho": "Método de primeira linha para estadiamento inicial e seguimento",
           "estado": "VERIFICADO"
         }
+      },
+      {
+        "periodo": "bexiga preservada: primeiros 18 meses",
+        "exames": [
+          "CISTOSCOPIA",
+          "CITOLOGIA_LIQUIDOS"
+        ],
+        "periodicidade": "a cada 3 meses",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "periodo": "bexiga preservada: 18 meses seguintes",
+        "exames": [
+          "CISTOSCOPIA",
+          "CITOLOGIA_LIQUIDOS"
+        ],
+        "periodicidade": "a cada 6 meses",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "periodo": "bexiga preservada: até o ano 5",
+        "exames": [
+          "CISTOSCOPIA",
+          "CITOLOGIA_LIQUIDOS"
+        ],
+        "periodicidade": "anual; urotomografia anual (TC_ABDOMEN_SUPERIOR + TC_PELVE com contraste)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
       }
     ]
   },
@@ -3532,8 +3591,15 @@
         "trecho": "BCG Connaught 81mg ou Tice BCG 50mg + SF 50mL via SVD por 2h",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Dose depende da cepa; nenhuma dose numérica gravada no protocolo — seguir a bula da cepa disponível.",
-      "decisaoNecessaria": true
+      "escolhaSeguranca": "MOC: 81 mg por 6 semanas + manutenção. Não substitui a bula da cepa (NÃO VERIFICADA).",
+      "decisaoNecessaria": true,
+      "fonteC": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "INFERIDO"
+      }
     },
     {
       "tema": "Via da gencitabina 2 g no NMIBC pós-BCG",
@@ -3589,8 +3655,15 @@
         "trecho": "APROVADO PELA ANVISA CPS ≥10",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Exigir PD-L1 positivo pelo corte da bula ANVISA (aula cita CPS ≥ 10, a confirmar); sem corte confirmado, preferir EV + pembrolizumabe ou gencitabina + carboplatina.",
-      "decisaoNecessaria": true
+      "escolhaSeguranca": "Regra = bula ANVISA: monoterapia em inelegível à cisplatina exige PD-L1 (CPS ≥ 10 para pembrolizumabe). O MOC diz independente de PD-L1; não copiar o livro.",
+      "decisaoNecessaria": false,
+      "fonteC": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "INFERIDO"
+      }
     },
     {
       "tema": "Intervalo da GC neoadjuvante",
@@ -3684,6 +3757,30 @@
       "por": "Claude",
       "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
       "acao": "2 vínculos rebaixados a catalogoIdCandidato"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 3",
+      "acao": "seguimento do MOC acrescentado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 11",
+      "acao": "POUT RATIFICADO (cisplatina 70 D1 + gencitabina 1.000 D1/D8 q21 ×4 se ClCr ≥50; carboplatina AUC 4,5–5 se ClCr 30–49)"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 13",
+      "acao": "PD-L1 na 1ª linha inelegível: mantida a restrição da bula"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 14",
+      "acao": "BCG 81 mg ×6 + manutenção (MOC) preenchido; bula da cepa pendente"
     }
   ]
 }

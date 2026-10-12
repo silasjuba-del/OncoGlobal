@@ -6,16 +6,14 @@ Fonte: campos `conflitos` (com `decisaoNecessaria: true`) e `pendencias` (classe
 
 - **Conflito:** Teto de dose do mitotano — escolha de segurança registrada: Usar a faixa da SBOC (1-4 g/dia) como referência e titular por mitotanemia; doses acima só com nível sérico e decisão médica
 - **DECISAO_CLINICA_DR_SILAS:** Mitotano adjuvante: SBOC não fixa dose; titulação do curso (INFERIDO) e bula FDA (Lysodren, doença inoperável: início 2-6 g/dia) divergem da faixa SBOC 1-4 g/dia. Titulação por mitotanemia = decisão médica.
-- **DECISAO_CLINICA_DR_SILAS:** Biópsia percutânea de massa adrenal: sem regra nas fontes lidas — decisão do médico (risco de crise adrenérgica no feocromocitoma não excluído e de semeadura no CCA).
 - **DECISAO_CLINICA_DR_SILAS:** Teste com dexametasona mapeado para CORTISOL. Seguem sem id: ACTH, S-DHEA, androstenediona, 17-OH-progesterona, aldosterona, renina, metanefrinas e mitotanemia (códigos SIGTAP anotados nos itens).
 
 ## bexiga
 
 - **Conflito:** Cisplatina fracionada no NIAGARA com ClCr 40-59 × critério de inelegibilidade ClCr < 60 — escolha de segurança registrada: Pelo critério de Galsky (SBOC p. 10), ClCr < 60 mL/min = inelegível. A dose fracionada da tabela (35 mg/m² D1, D8 se ClCr 40-59) fica como decisão médica individual, não como padrão do pack. Aula PRO p. 14 também cita split-dose em TFG 40-6
 - **Conflito:** Alvo do erdafitinibe — escolha de segurança registrada: Alteração de FGFR3 (mutação ou fusão) atende às duas fontes; fusão isolada de FGFR2 só por decisão médica após conferir bula ANVISA.
-- **Conflito:** Dose da BCG — escolha de segurança registrada: Dose depende da cepa; nenhuma dose numérica gravada no protocolo — seguir a bula da cepa disponível.
+- **Conflito:** Dose da BCG — escolha de segurança registrada: MOC: 81 mg por 6 semanas + manutenção. Não substitui a bula da cepa (NÃO VERIFICADA).
 - **Conflito:** Via da gencitabina 2 g no NMIBC pós-BCG — escolha de segurança registrada: Via intravesical (o item está sob 'Tratamentos intravesicais' e a referência 13 é de gencitabina intravesical); 'IV' tratado como erro de grafia. Confirmar com o médico.
-- **Conflito:** Corte de PD-L1 para pembrolizumabe 1ª linha em inelegível à cisplatina — escolha de segurança registrada: Exigir PD-L1 positivo pelo corte da bula ANVISA (aula cita CPS ≥ 10, a confirmar); sem corte confirmado, preferir EV + pembrolizumabe ou gencitabina + carboplatina.
 - **DECISAO_CLINICA_DR_SILAS:** Trato urinário superior (pelve renal/ureter) não coberto pela SBOC 2026: sem doses, sem protocolo; buscar diretriz específica (NCCN/EAU UTUC; POUT para adjuvância).
 - **DEPENDE_BULA_ANVISA:** BCG: dose depende da cepa (SBOC 120 mg/40 mg EORTC × aula PRO Connaught 81 mg/Tice 50 mg); esquema de indução/manutenção sem fonte SBOC — conferir bula da cepa disponível no SUS.
 - **DEPENDE_BULA_ANVISA:** PD-L1: corte e clone para pembrolizumabe 1ª linha não definidos na SBOC; conferir bula ANVISA (aula PRO: CPS ≥ 10 para pembrolizumabe).
@@ -36,7 +34,7 @@ Fonte: campos `conflitos` (com `decisaoNecessaria: true`) e `pendencias` (classe
 
 ## colo-utero
 
-- **Conflito:** Intervalo da ifosfamida em 2ª linha — escolha de segurança registrada: Protocolo registra 28 dias (SBOC, intervalo maior = mais seguro); ficha do serviço usa 21 dias — revisar ficha.
+- **Conflito:** Intervalo da ifosfamida em 2ª linha — escolha de segurança registrada: MANTER_PENDENTE: o próprio MOC diverge (recomendação a cada 3 semanas × citação do GOG a cada 4 semanas).
 - **DECISAO_CLINICA_DR_SILAS:** SEM_FONTE: p16/HPV na SBOC colo 2026 — não incluído (não usar p16 como critério de estadiamento).
 - **DECISAO_CLINICA_DR_SILAS:** KEYNOTE-A18: SG imatura na versão SBOC; atualização não incorporada.
 
@@ -51,7 +49,6 @@ Fonte: campos `conflitos` (com `decisaoNecessaria: true`) e `pendencias` (classe
 
 ## endometrio
 
-- **Conflito:** Dose de fulvestranto — escolha de segurança registrada: Manter 250 mg q4s apenas no endométrio (SBOC); 500 mg é da mama. Não transferir entre tumores; validar com o médico.
 - **DEPENDE_BULA_ANVISA:** Olaparibe + durvalumabe manutenção (DUO-E, pMMR): dose de olaparibe sem fonte para endométrio.
 - **DECISAO_CLINICA_DR_SILAS:** IO + QT adjuvante em dMMR III/IV (ESGO 2025, KEYNOTE-B21 subgrupo) sem dose na SBOC — não criado protocolo.
 
@@ -70,6 +67,7 @@ Fonte: campos `conflitos` (com `decisaoNecessaria: true`) e `pendencias` (classe
 - **Conflito:** FLOT paliativo com 5-FU bolus — escolha de segurança registrada: Protocolo paliativo marcado CONFLITANTE (doseVerificada=false). O FLOT perioperatório não tem bolus; não transferir entre cenários — médico decide.
 - **Conflito:** Ficha mDCF institucional × SBOC — escolha de segurança registrada: Pack registra a SBOC (5-FU 400 bolus D1 + 1.000 mg/m²/dia D1–D2); ficha institucional preservada para decisão do Dr. Silas.
 - **Conflito:** Fichas FLOT e irinotecano × SBOC — escolha de segurança registrada: Pack registra doses SBOC; fichas não editadas.
+- **Conflito:** mDCF: dia da cisplatina e 5-FU (SBOC × MOC/Shah) — escolha de segurança registrada: Doses totais coincidem; diverge o dia da cisplatina (D2 × D3). Manter a SBOC até decisão.
 - **DECISAO_CLINICA_DR_SILAS:** CONFLITANTE: FLOT paliativo com 5-FU bolus 400 mg/m² (só na tabela de doença avançada)
 - **DECISAO_CLINICA_DR_SILAS:** FAIXA_NA_FONTE: cisplatina 75–100 mg/m² no CF perioperatório
 - **DECISAO_CLINICA_DR_SILAS:** Fichas do serviço divergentes da SBOC (FLOT 5-FU 2.400; mDCF institucional; irinotecano 180 q14)
@@ -77,7 +75,7 @@ Fonte: campos `conflitos` (com `decisaoNecessaria: true`) e `pendencias` (classe
 
 ## gist
 
-- **Conflito:** Duração estendida do imatinibe — magnitude do efeito — escolha de segurança registrada: Manter 'pelo menos 3 anos'; prolongar só após discussão multidisciplinar.
+- **Conflito:** Duração estendida do imatinibe — magnitude do efeito — escolha de segurança registrada: Não decidir 3 anos de imatinibe pela célula de alto risco não gástrico da tabela do MOC/SBOC (cap. 41, Joensuu com erro: faixa correta 2,1–5 cm; linha intermediária incoerente).
 - **DECISAO_CLINICA_DR_SILAS:** Tabela de risco da SBOC com erros (gástrico × não gástrico; ≤ 5 cm × ≤ 2 cm) — exigir conferência médica antes de decidir adjuvância.
 - **DECISAO_CLINICA_DR_SILAS:** SEM_FONTE: TC de tórax no estadiamento e EDA não citados pela SBOC.
 
@@ -140,7 +138,6 @@ Fonte: campos `conflitos` (com `decisaoNecessaria: true`) e `pendencias` (classe
 
 ## rim
 
-- **Conflito:** Everolimo 2ª linha: cenário do rótulo × cenário do pack — escolha de segurança registrada: Dose 10 mg/dia do rótulo (CCR avançado após TKI anti-VEGFR) registrada; pack usa após nivolumabe + cabozantinibe (cabozantinibe é TKI anti-VEGFR). Médico confirma equivalência de cenário.
 - **DEPENDE_BULA_ANVISA:** Bula ANVISA não consultada; monitorização laboratorial por rótulo FDA (openFDA).
 - **DECISAO_CLINICA_DR_SILAS:** Vigilância ativa localizada: DDT (semestral) × aula PRO (3-6 meses no 1º ano) — intervalo a confirmar pelo médico.
 
@@ -164,7 +161,6 @@ Fonte: campos `conflitos` (com `decisaoNecessaria: true`) e `pendencias` (classe
 
 ## tireoide
 
-- **Conflito:** Limite de tamanho para lobectomia no CDT — escolha de segurança registrada: Regra SUS (PCDT 2014): tireoidectomia total >1 cm; lobectomia até 2 cm (ATA 2025 via curso; PCDT cita MSKCC até 4 cm) só por decisão do cirurgião/médico. PCDT em revisão (CP Conitec 88/2026).
 - **DECISAO_CLINICA_DR_SILAS:** RET germinativo/somático mapeados para MOLECULAR_PCR_MUTACAO (alt. SEQUENCIAMENTO_AMPLICON). Seguem sem id: painel NGS amplo, painel germinativo multigene, metanefrinas e anti-Tg; USG de pescoço usa USG_TIREOIDE.
 
 ## vias-biliares

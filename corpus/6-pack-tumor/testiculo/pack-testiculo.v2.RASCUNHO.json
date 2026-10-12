@@ -954,6 +954,21 @@
           "trecho": "Epirrubicina + Cisplatina (máximo 4 ciclos)",
           "estado": "VERIFICADO"
         }
+      },
+      {
+        "cenario": "Mau prognóstico com queda inadequada de marcadores após o 1º ciclo",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT intensificada (GETUG-13)"
+        ],
+        "criterio": "Intensificação conforme GETUG-13 citado no MOC; não é rotina. Doses do esquema intensificado: conferir no capítulo/estudo.",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
       }
     ],
     "protocolos": [
@@ -973,7 +988,7 @@
           }
         ],
         "cicloDias": null,
-        "numeroCiclos": 1,
+        "numeroCiclos": "1 ou 2",
         "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
         "ajusteObrigatorio": "Calvert (CI-04): dose em mg = AUC alvo × (TFG + 25). SBOC cita apenas 1 ciclo (dose única); 2 ciclos não citados.",
         "fichaId": null,
@@ -1000,7 +1015,17 @@
           "pagina": 9,
           "trecho": "Carboplatina AUC 7 EV D1 Periodicidade: dose única",
           "estado": "VERIFICADO"
-        }
+        },
+        "fontesAdicionais": [
+          {
+            "tipo": "DIRETRIZ",
+            "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        ],
+        "notaCiclos": "MOC: carboplatina AUC 7 por 1 ou 2 ciclos no seminoma I."
       },
       {
         "id": "testiculo-bep-x1-adjuvante-ec1-nao-seminoma",
@@ -1061,7 +1086,17 @@
           "pagina": 11,
           "trecho": "Opção preferencial: BEP 1 ciclo após a orquiectomia",
           "estado": "VERIFICADO"
-        }
+        },
+        "criterioAplicacao": "Não seminoma estádio I com invasão vascular e má adesão ao seguimento (MOC).",
+        "fontesAdicionais": [
+          {
+            "tipo": "DIRETRIZ",
+            "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        ]
       },
       {
         "id": "testiculo-bep-x2-adjuvante-pos-rplnd",
@@ -2777,6 +2812,54 @@
           "trecho": "Monitoramento de PA, glicemia e perfil lipídico",
           "estado": "VERIFICADO"
         }
+      },
+      {
+        "periodo": "anos 1–2",
+        "exames": [
+          "AFP",
+          "BETA_HCG",
+          "DHL"
+        ],
+        "periodicidade": "a cada 3 meses",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "periodo": "anos 3–4",
+        "exames": [
+          "AFP",
+          "BETA_HCG",
+          "DHL"
+        ],
+        "periodicidade": "a cada 6 meses",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "periodo": "ano 5",
+        "exames": [
+          "AFP",
+          "BETA_HCG",
+          "DHL"
+        ],
+        "periodicidade": "anual",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
       }
     ]
   },
@@ -3369,5 +3452,19 @@
       ],
       "correcoes": []
     }
-  }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 3",
+      "acao": "seguimento do MOC acrescentado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 12",
+      "acao": "AUC 7 ×1–2 e GETUG-13 (intensificação no mau prognóstico) com fonte MOC"
+    }
+  ]
 }

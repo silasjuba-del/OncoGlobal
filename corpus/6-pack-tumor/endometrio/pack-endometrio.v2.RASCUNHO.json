@@ -2006,8 +2006,15 @@
         "trecho": "FASLODEX 500 mg should be administered intramuscularly into the buttocks",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Manter 250 mg q4s apenas no endométrio (SBOC); 500 mg é da mama. Não transferir entre tumores; validar com o médico.",
-      "decisaoNecessaria": true
+      "escolhaSeguranca": "RATIFICADO 250 mg IM mensal no endométrio (MOC: fase II, resposta 11–16%); não usar 500 mg da mama.",
+      "decisaoNecessaria": false,
+      "fonteC": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "INFERIDO"
+      }
     },
     {
       "tema": "Carboplatina AUC na 1ª linha",
@@ -2076,6 +2083,12 @@
       "por": "Claude",
       "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
       "acao": "1 vínculos rebaixados a catalogoIdCandidato"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 8",
+      "acao": "fulvestranto 250 mg ratificado"
     }
   ]
 }

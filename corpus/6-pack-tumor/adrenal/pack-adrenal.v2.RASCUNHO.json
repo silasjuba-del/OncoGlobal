@@ -1179,6 +1179,18 @@
           "trecho": "Cortisol, ACTH, Teste stress com Dexametasona, S-DHEA",
           "estado": "INFERIDO"
         }
+      },
+      {
+        "x": "massa adrenal com indicação de punção",
+        "y": "feocromocitoma não excluído",
+        "z": "pedir CATECOLAMINAS (urina 24 h) ou RM com T2 antes da punção",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
       }
     ]
   },
@@ -1211,11 +1223,12 @@
     },
     {
       "texto": "Biópsia percutânea de massa adrenal: sem regra nas fontes lidas — decisão do médico (risco de crise adrenérgica no feocromocitoma não excluído e de semeadura no CCA).",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_FONTE_MOC",
       "buscasFeitas": [
         "SBOC adrenal 2026",
         "Onco PRO aula 19"
-      ]
+      ],
+      "resolucao": "RATIFICADO (MOC): antes de punção percutânea, afastar feocromocitoma por catecolaminas e metabólitos na urina de 24 h (CATECOLAMINAS) ou RM com hipersinal em T2. Semeadura do carcinoma cortical: não consta do trecho."
     },
     {
       "texto": "Teste com dexametasona mapeado para CORTISOL. Seguem sem id: ACTH, S-DHEA, androstenediona, 17-OH-progesterona, aldosterona, renina, metanefrinas e mitotanemia (códigos SIGTAP anotados nos itens).",
@@ -1299,5 +1312,13 @@
         "notas": []
       }
     ]
-  }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 1",
+      "acao": "exclusão bioquímica de feocromocitoma antes da punção RATIFICADA"
+    }
+  ]
 }

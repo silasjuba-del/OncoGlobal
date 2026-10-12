@@ -1683,6 +1683,30 @@
           "trecho": "* Indicação preferencialmente para pN2-N3.",
           "estado": "VERIFICADO"
         }
+      },
+      {
+        "periodo": "anos 1–2 (cirurgia conservadora ou RT)",
+        "exames": [],
+        "periodicidade": "avaliação clínica a cada 2 meses",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "periodo": "depois dos 2 anos",
+        "exames": [],
+        "periodicidade": "trimestral e depois semestral",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
       }
     ]
   },
@@ -2127,5 +2151,13 @@
       ],
       "correcoes": []
     }
-  }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 3",
+      "acao": "seguimento do MOC acrescentado"
+    }
+  ]
 }

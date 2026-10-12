@@ -4291,6 +4291,12 @@
       "por": "Claude",
       "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
       "acao": "3 vínculos rebaixados a catalogoIdCandidato"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 4",
+      "acao": "FOLFIRI irinotecano 180 e bolus de 400 no FOLFOX6/FOLFIRI conferem com o MOC (já eram os valores do pack); fichas institucionais sem bolus seguem D-W9-50"
     }
   ]
 }
