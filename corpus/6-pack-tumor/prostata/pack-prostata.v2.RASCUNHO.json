@@ -3887,7 +3887,7 @@
         "trecho": null,
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "O grupo 'mHSPC alto volume' usa o critério fixado pelo médico (≥ 1 lesão fora da coluna vertebral e da pelve, CHAARTED). A grafia da SBOC ('fora do esqueleto axial') fica preservada aqui como fonte histórica; as duas formulações descrevem o mesmo critério e não mudam conduta.",
+      "escolhaSeguranca": "O grupo 'mHSPC alto volume' usa o critério fixado pelo médico (≥ 1 lesão fora da coluna vertebral e da pelve, CHAARTED). A grafia da SBOC ('fora do esqueleto axial') fica preservada aqui como redação histórica, sem juízo de equivalência: vale o critério aprovado pelo médico.",
       "decisaoNecessaria": false,
       "decisao": {
         "texto": "Alto volume CHAARTED: visceral OU ≥ 4 lesões ósseas com ≥ 1 fora da coluna vertebral e da pelve (49A).",

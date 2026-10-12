@@ -135,7 +135,8 @@ ONDA 2 (integração):
  S5  Reconciliador e visão integrada.
  S6  Sistema nervoso no runtime: tabela do Maestro com eventos F1 (FATO_CONFIRMADO, PRESCRICAO_PROPOSTA, MED_RECONCILIADO, EXAME_CORRIGIDO,
      BIBLIOTECA_ATIVADA, FATO_VENCIDO, ADMINISTRACAO_REGISTRADA) · disparo SÓ após commit efetivo · execução persistida em execucao_tecnica
-     · etapa final sempre roda · PRONTO exige VisaoIntegrada com cobertura (parcial = PRONTO com lacunas, nunca silencioso)
+     · etapa final sempre roda · SÓ nos planos clínicos F1 (terminam em RECONCILIADOR) PRONTO exige VisaoIntegrada com cobertura
+       (parcial = PRONTO com lacunas, nunca silencioso); planos legados e testes Q11/G-15/RT-09 mantêm a semântica atual
      · publicação tardia (após timeout) descartada e registrada · dependência por domínio e contexto · reconferência na assinatura.
  S5b CASO-GUIA = FATIA VERTICAL MÍNIMA (antes de abrir S4-B/D/E e a Onda 3): agenda → encontro explícito → PDF digital de laboratório
      pela extração já existente (src/leitura/caixa-unica.ts + drafts) → candidato → confirmação → Maestro/ORK → laboratório e interações →
@@ -156,9 +157,12 @@ ONDA 3 (depois de S5b; paralelo; faixas disjuntas):
      versionados em corpus/prompts; 2 portões. DOIS aceites: (a) saída ordinária zero PHI (G-02 em log); (b) exceção D-W9-66 com gateway,
      store:false, registro, retorno à caixa de revisão. Jamais Genspark.
  S12 Fechamento: red team A12–A19, matriz F1, PHI, latências CRIT-5, demo do caso-guia, RELATORIO-F1.md. Espera S0–S11.
-DEPENDÊNCIAS: S0→S1→S2→Onda1(S4-A∥S4-C)→S5→S6→S5b→(S4-E∥S4-D∥S4-B)→Onda3→S12. S3-E1∥S0/S1; S3-E2..E5 após S2; S3c contínua; S7 após S3 e S5.
-POSSE SERIAL DOS ARQUIVOS COMUNS: rotas.ts e leituras.ts: S0→S1→S2→S6→S8→S10→S11 · flash.ts: S1→S2 · check-boundaries.mjs: S1 (só remover
-exceções pagas)→S3 · oncoassistLocal.ts: S0 (agora)→S1→S6 · package.json/lockfile: S11 · schema.ts do ledger: S6 (só tabelas técnicas).
+DEPENDÊNCIAS: S0→S1→S2→Onda1(S4-A∥S4-C)→S5→S6→S5b→(S4-E∥S4-D∥S4-B)→Onda3→S12. S3-E1 loader∥S0/S1 mas emissão após S1-E6;
+S3-E2..E5 após S2; S3c contínua; S7 após S3 e S5. Onda 3: S8-base∥S9∥S10→S11→S8-síntese→S12.
+POSSE SERIAL DOS ARQUIVOS COMUNS (a tabela completa está no plano §4.1 e vence esta linha): rotas.ts e leituras.ts: S0→S1→S2→S3→S6→S5b→S8→S10→S11 ·
+flash.ts: S1→S2→S3 · check-boundaries.mjs: S1 (só remover exceções pagas)→S3 · oncoassistLocal.ts: S0 (agora)→S1→S3→S6→S11 ·
+orchestration/pipeline-extracao.ts: S3→S6 · ui/api: S0→S5b→S8→S11 · schema.ts do ledger: S1 (2 tabelas técnicas)→S6 · writeRouter.ts: S1 (gancho) ·
+contracts/operacao.ts: S11 (verbos novos, com decisão) · package.json/lockfile: S11. A S3 entrega cada arquivo antes do próximo escritor.
 
 ══════════════════════════════════════════════════════════════════════════════
 5. PROTOCOLO POR FATIA (obrigatório; pular passo = reprovar)
@@ -190,8 +194,9 @@ P6 BATERIA POR PR (toda verde, saída real colada no PR):
    adversariais W8 e W10 quando a faixa tocar regra, servidor ou orquestração · npm run verify completo antes do PR.
    Para o PHI: `git add` dos arquivos novos antes do scanner (índice = árvore).
 P7 PR para f1/integrado com: diff resumido por etapa, WRITE_SET respeitado (prova: `git diff --name-only` ⊆ WRITE_SET), lista de aceites
-   com o nome do teste que prova cada um, pendências com classe, pedidos de estado/contrato (não criados), e a frase
-   "🤖 Generated with [Claude Code](https://claude.com/claude-code)".
+   com o nome do teste que prova cada um, pendências com classe, pedidos de estado/contrato (não criados), e a linha de atribuição
+   da ferramenta EFETIVAMENTE usada (Claude Code → "🤖 Generated with [Claude Code](https://claude.com/claude-code)"; Codex → a
+   atribuição própria do Codex; nunca a de outra ferramenta).
 P8 REVISÃO CRUZADA: handoff em C:\Users\silas\handoff\<data>_codex-para-claude_<fatia>.md + ULTIMO.md apontando. Fable revisa em leitura.
    Merge SÓ pelo Dr. Silas. Nunca merge próprio. Nunca auto-merge.
 P9 ENCERRAMENTO DE FATIA: RELATORIO parcial em docs/ondas/F1-Sx-RELATORIO.md (único documento permitido por fatia) com: o que entrou,
