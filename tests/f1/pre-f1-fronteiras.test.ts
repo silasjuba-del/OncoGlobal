@@ -120,6 +120,12 @@ describe("pré-F1 · fronteiras com dívida explícita", () => {
     expect(r.output).toContain("exceção com prazo fora do manifesto (F1-S4 ≠ F1-S3)");
   });
 
+  it("fixture sintética: --fechar-fase sem valor falha em vez de virar 'sem fechamento'", () => {
+    const r = verificarSintetico({ arquivos: violaA, excecoes: [exc(A)], aprovadas: [A], args: ["--fechar-fase="] });
+    expect(r.status).toBe(1);
+    expect(r.output).toContain("--fechar-fase sem valor");
+  });
+
   it("fixture sintética: fase de fechamento desconhecida falha", () => {
     const r = verificarSintetico({ arquivos: { "src/contracts/base.ts": "export {};\n" }, excecoes: [], aprovadas: [A], args: ["--fechar-fase=F1-S9"] });
     expect(r.status).toBe(1);

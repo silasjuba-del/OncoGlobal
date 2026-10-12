@@ -593,10 +593,10 @@
         "grupo": "mHSPC alto volume",
         "conduta": "Doença visceral ou ≥ 4 lesões ósseas com ≥ 1 fora da coluna vertebral e da pelve (critério operacional fixado em D-F1-20, 49A; a SBOC p.10 escreve 'fora do esqueleto axial'): TDA + ARPI ou triplete (docetaxel + abiraterona ou darolutamida).",
         "fonte": {
-          "tipo": "SBOC",
-          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
-          "pagina": 10,
-          "trecho": "Presença de doença visceral ou 4+ lesões ósseas, sendo uma fora do esqueleto axial",
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-20, 49A); grafia SBOC p.10 preservada em conflitos: 'Critério operacional de alto volume no mHSPC'",
+          "pagina": null,
+          "trecho": null,
           "estado": "VERIFICADO"
         }
       },
@@ -3871,6 +3871,35 @@
     }
   ],
   "conflitos": [
+    {
+      "tema": "Critério operacional de alto volume no mHSPC",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 10,
+        "trecho": "Presença de doença visceral ou 4+ lesões ósseas, sendo uma fora do esqueleto axial",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "DECISAO_MEDICA",
+        "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-20, 49A)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "O grupo 'mHSPC alto volume' usa o critério fixado pelo médico (≥ 1 lesão fora da coluna vertebral e da pelve, CHAARTED). A grafia da SBOC ('fora do esqueleto axial') fica preservada aqui como fonte histórica; as duas formulações descrevem o mesmo critério e não mudam conduta.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Alto volume CHAARTED: visceral OU ≥ 4 lesões ósseas com ≥ 1 fora da coluna vertebral e da pelve (49A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-20)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
     {
       "tema": "Dose de rádio-223",
       "fonteA": {

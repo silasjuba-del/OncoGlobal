@@ -10,6 +10,7 @@ O que mudou na v5 (3ª revisão do Codex, `handoff/2026-10-12_codex-revisao-plan
 - S5b vira fatia vertical mínima com reúso comprovado e fixture inteiramente sintética;
 - WRITE_SETs sem sobreposição: `leituras.ts` na S1; S3 enumera os arquivos pela relação aprovada; S3c sem `manifesto/` e `prompts/`; S4 não escreve corpus; S11 com a composição do gateway;
 - §7 só com a pergunta do cenário da demo (o escopo assistencial já está fixado).
+- Revisão 2 da v5 (Codex local sobre `fce5f42` + Codex GitHub no PR #8): S0 com `http.ts`, consumidores do `carregarConsulta` e o filtro de `snapshot.ts`; aceite da S0 com 6 adversariais; S1-E6 ponto transacional e `EstimuloTecnico@1` antes da S6; `PRONTO` com visão exigido só nos planos clínicos F1; S3 entrega os arquivos de exceção antes de S6; S5b com entrada do PDF e montagem na tela; S11 com os verbos novos em `ActionIntent`; síntese da S8 depois da S11.
 
 O que mudou na v4:
 - aplica os 9 ajustes da 2ª revisão do Codex (`handoff/2026-10-12_codex-revisao-plano-f1-v3.md`);
@@ -153,20 +154,21 @@ Toda troca carrega `patientId`, `encounterId`, `tumorLotId` (quando aplicável),
 
 ### 4.1 Regra de faixa
 Cada fatia declara `WRITE_SET`. Os **arquivos comuns** têm posse serial, nesta ordem, e só um escritor por vez:
-`src/server/rotas.ts` e `src/server/leituras.ts`: S0 → S1 → S2 → S6 → S8 · `src/server/flash.ts`: S1 (import do ledger) → S2 · `scripts/check-boundaries.mjs`: S1 (só remover linhas de EXCECOES) → S3 · `src/app/oncoassistLocal.ts`: S0 (fuso) → S1 → S6 (composição) · `package.json`/lockfile: S11.
+`src/server/rotas.ts` e `src/server/leituras.ts`: S0 → S1 → S2 → S3 (pagar exceções) → S6 → S5b (só `/consulta/extrair` e a rota de leitura) → S8 → S10 → S11 · `src/server/flash.ts`: S1 (import do ledger) → S2 · `scripts/check-boundaries.mjs`: S1 (só remover linhas de EXCECOES) → S3 · `src/app/oncoassistLocal.ts`: S0 (fuso) → S1 → **S3 (pagar exceções)** → S6 (composição) → S11 (executores) · `src/orchestration/pipeline-extracao.ts`: **S3 (pagar exceções)** → S6 · `src/ui/api/{porta,http,fake,respostas}.ts`: S0 → S5b → S8 → S11 · `src/kernel/ledger/schema.ts`: S6 · `src/contracts/operacao.ts`: S11 (só verbos novos, com decisão registrada) · `package.json`/lockfile: S11.
+A S3 entrega cada arquivo de exceção paga **antes** do próximo escritor dele; o quadro de 7 blocos da S3 lista a ordem.
 Remover uma exceção é permitido a quem corrige o import (a relação aprovada é teto e pertencimento; `scripts/fronteiras-excecoes-aprovadas.json`). O integrador de cada onda é o Codex-Fugu.
 
 ### Onda 0: fundação
 
 **S0 · Contratos temporais e integridade da leitura** (os 7 achados confirmados da auditoria externa)
-- WRITE_SET: `src/app/oncoassistLocal.ts` (só `agora`), `src/server/leituras.ts`, `src/server/f0c/contextoClinico.ts`, `src/server/f0c/salao.ts` (só receber o fuso injetado), `src/server/rotas.ts` (só `/consulta/carregar` e `lerApacs`), `src/contracts/f1/relogio.ts` (novo), `src/contracts/f1/consultaCarregar.ts` (novo: pedido com `encounterId`), `src/ui/api/porta.ts` (só o cliente do `carregar`), `tests/f1/s0/**`, `tests/adv/f1-s0-*.adv.ts`.
+- WRITE_SET: `src/app/oncoassistLocal.ts` (só `agora`), `src/server/leituras.ts`, `src/server/f0c/contextoClinico.ts`, `src/server/f0c/salao.ts` (só receber o fuso injetado), `src/server/rotas.ts` (só `/consulta/carregar` e `lerApacs`), `src/contracts/f1/relogio.ts` (novo), `src/contracts/f1/consultaCarregar.ts` (novo: pedido com `encounterId`), `src/ui/api/porta.ts`, `src/ui/api/http.ts` e `src/ui/api/fake.ts` (só a assinatura de `carregarConsulta` com `encounterId`), `src/ui/consulta/ConsultaPersistida.tsx`, `src/ui/telas/TelaConsulta.tsx` e `src/ui/OncoassistLocal.tsx` (só o ponto de chamada de `carregarConsulta`), `tests/f1/s0/**`, `tests/adv/f1-s0-*.adv.ts`.
 - Mapa dos 7 achados: **S0** corrige os grupos 1 (payload), 2 (encontro), 3 (lote), 4 (fuso), 5 (delta e pendências) e 6 (`lerApacs`); o grupo 7 (ORK: `PRONTO` com um `ok` e timeout sem cancelar) é corrigido na **S6-E2/E3**, e a S0 não o exige.
 - E1: relógio do serviço: `agora()` devolve instante com `-03:00` (D-W5-01); `salao.ts` e `leituras.ts` passam a receber o mesmo fuso injetado. Adversarial: assinatura às 23:30 −03:00 mantém o dia civil e os 21 dias.
 - E2: encontro explícito: `/consulta/carregar` recebe `encounterId` (ou abre um novo por comando); `current` deixa de ser `at(-1)`. Adversarial: correção de encontro antigo não muda a consulta ativa.
-- E3: dados do paciente independentes do tumor: alergias, comorbidades e medicamentos saem do filtro de lote. Adversarial: alergia gravada no lote A aparece no lote B.
+- E3: dados do paciente independentes do tumor: alergias, comorbidades e medicamentos saem do filtro de lote em `contextoClinico.ts` **e** no filtro de escopo de `src/kernel/projections/snapshot.ts` (entra na WRITE_SET só para esse filtro; o restante do snapshot é da S2). Projeção explícita: `escopo: "PACIENTE"` para esses três domínios e para função orgânica e exposições; `escopo: "TUMOR"` para o resto. Adversarial: alergia gravada no lote A aparece no lote B.
 - E4: payload fora do schema do tipo vira pendência `PAYLOAD_FORA_DO_CONTRATO` com `eventoId`, `tipo` e `schema`, sem conteúdo; `porTipo` não descarta em silêncio. Ponte até o registro `tipo@versao` da S1.
 - E5: `delta` calculado e pendências fixas removidas quando o campo já é projetado; `lerApacs` com `ultimoAvisoEm` real e rótulo da antiglosa fiel à configuração.
-- Aceite: 7 testes adversariais, um por achado; matriz F0 e adversariais W8/W10 sem regressão.
+- Aceite: 6 testes adversariais, um por grupo corrigido na S0 (o 7º, do ORK, fica no aceite da S6); matriz F0 e adversariais W8/W10 sem regressão.
 
 **S1 · Comandos, envelope e contrato da Tarefa** (depois da S0)
 - WRITE_SET: `src/kernel/comandos/**` (novo), `src/contracts/envelope.ts`, `src/contracts/f1/tarefa.ts`, `src/server/rotas.ts`, `src/server/leituras.ts` (só os pontos de leitura chamados pelos comandos), `src/server/autorizacao.ts`, `src/server/flash.ts` (só import), `src/app/oncoassistLocal.ts`, `scripts/check-boundaries.mjs` (só remoção de exceções pagas), `tests/f1/s1/**`, `tests/adv/f1-s1-*.adv.ts`.
@@ -175,6 +177,7 @@ Remover uma exceção é permitido a quem corrige o import (a relação aprovada
 - E3: estrangular os 5 `confirmar()`, com teste de equivalência por ponto.
 - E4: contrato `Tarefa` (D12, EV-T1 a EV-T6).
 - E5: pagar as exceções de ledger/drafts fora do kernel e remover as linhas correspondentes.
+- E6: **ponto transacional de emissão**: o WriteRouter ganha o gancho `aoCommitar(fn)` que escreve, **na mesma transação** do `clinical_event`, as linhas técnicas que a S6 vai consumir (`execucao_tecnica` PENDENTE); e o contrato `EstimuloTecnico@1` (`src/contracts/f1/estimuloTecnico.ts`) é publicado aqui, para a S3-E1 emitir `BIBLIOTECA_ATIVADA` antes de existir a infraestrutura da S6. Até a S6, os estímulos ficam gravados e não disparam nada.
 - Aceite: replay não duplica; envelope inválido recusado; zero `confirmar()` direto; adversarial de replay e de envelope forjado.
 
 **S2 · Retrato e contratos comuns** (depois da S1)
@@ -188,7 +191,7 @@ Remover uma exceção é permitido a quem corrige o import (a relação aprovada
 
 **S3 · Biblioteca: loader e fronteiras** (E1 em paralelo com S0/S1; E2 a E5 depois da S2)
 - WRITE_SET: `src/kernel/corpus/**`, `corpus/manifesto/**` (novo), `scripts/check-boundaries.mjs`, `scripts/fronteiras-excecoes-aprovadas.json` (só leitura; nunca cresce), os arquivos do campo `arquivo` da relação aprovada que ainda constem em `EXCECOES` no início da S3 (o quadro de 7 blocos da S3 lista cada um pelo nome), `tests/f1/s3/**`, `tests/adv/f1-s3-*.adv.ts`.
-- E1: loader dos 8 pilares, com manifesto, hashes, curadoria (`RASCUNHO`/aprovado/obsoleto), ativação atômica, volta à última versão válida (D-F1-14), e emissão do estímulo `BIBLIOTECA_ATIVADA` (§2.4).
+- E1: loader dos 8 pilares, com manifesto, hashes, curadoria (`RASCUNHO`/aprovado/obsoleto), ativação atômica, volta à última versão válida (D-F1-14), e emissão do estímulo `BIBLIOTECA_ATIVADA` pelo contrato `EstimuloTecnico@1` da S1-E6 (§2.4); o estímulo fica gravado e só é consumido a partir da S6.
 - E2: conferência de fonte e licença do CTCAE v6 (já decidido: v6 pura, Q45 e D-W9-73).
 - E3: duto de conhecimento: pacote exportado do Genspark validado, importado e em revisão; nada de paciente sai; trials não geram elegibilidade.
 - E4: índice de aplicabilidade por tumor, histologia, estádio, biomarcador e linha.
@@ -230,7 +233,7 @@ Ordem clínica de prioridade: **S4-A (laboratório + imagem) e S4-C (comorbidade
 - WRITE_SET: `src/orchestration/**` (acrescentar e ligar; tabela fixa e executor supervisionado não mudam de natureza), `src/kernel/orquestracao/estimulos/**` (novo), `src/kernel/ledger/schema.ts` (só a tabela `estimulo_tecnico` e `execucao_tecnica`), `src/kernel/comandos/disparo.ts` (gancho pós-commit, serial com S1), `src/app/oncoassistLocal.ts` (composição), `src/server/rotas.ts` (entrega da `VisaoIntegrada` à consulta), `src/modules/reconciliador/dependencias/**`, `tests/f1/s6/**`, `tests/adv/f1-s6-*.adv.ts`.
 - E0: tabela do Maestro com os eventos da F1 (`FATO_CONFIRMADO`, `PRESCRICAO_PROPOSTA`, `MED_RECONCILIADO`, `EXAME_CORRIGIDO`, `BIBLIOTECA_ATIVADA`, `FATO_VENCIDO`, `ADMINISTRACAO_REGISTRADA`) mapeados para setores e `RECONCILIADOR`. Planos atuais e testes Q11, G-15, RT-09 intactos.
 - E1: ORK no runtime: a linha de `execucao_tecnica` (estado `PENDENTE`, com correlação e revisão de entrada) é gravada **na mesma transação** do commit clínico; o disparo lê essa fila. No boot e após queda, a recuperação é determinística: toda `PENDENTE` é processada em ordem. Replay do mesmo `operationId` não cria nova linha. Adversarial: queda simulada entre o commit e o disparo deixa a operação `PENDENTE` e ela é processada na retomada, uma única vez.
-- E2: **etapa final**: o passo `RECONCILIADOR` recebe todos os resultados, inclusive falhas e timeouts, e sempre roda. O estado `PRONTO` passa a exigir que a etapa final tenha produzido `VisaoIntegrada` com cobertura; resultado parcial é `PRONTO` com lacunas declaradas, nunca `PRONTO` silencioso. Os 5 estados de run não mudam (teto Q9).
+- E2: **etapa final**: o passo `RECONCILIADOR` recebe todos os resultados, inclusive falhas e timeouts, e sempre roda. **Só nos planos clínicos da F1** (os que terminam no passo `RECONCILIADOR`), `PRONTO` exige que a etapa final tenha produzido `VisaoIntegrada` com cobertura; resultado parcial é `PRONTO` com lacunas declaradas, nunca `PRONTO` silencioso. Os planos legados da tabela e os testes Q11, G-15 e RT-09 mantêm a semântica atual. Os 5 estados de run não mudam (teto Q9).
 - E3: **publicação tardia barrada**: resultado de agente que chega depois do timeout é descartado e registrado; nunca entra na visão nem no ledger.
 - E4: dependência por domínio e contexto (o primeiro med novo e o fato antes ausente também disparam).
 - E5: gatilhos técnicos (§2.4): vencimento temporal e troca de versão da biblioteca entram como estímulos, não como fatos.
@@ -238,8 +241,9 @@ Ordem clínica de prioridade: **S4-A (laboratório + imagem) e S4-C (comorbidade
 - Aceite: `LAB=error` ainda produz visão com lacuna "laboratório indisponível"; resultado após timeout não aparece; evento fora da tabela não executa; `{"state": ...}` no texto não muda estado; replay não duplica execução; matriz F0 verde em Q11 e G-15.
 
 **S5b · Caso-guia: fatia vertical mínima** (depois de S4-A, S4-C, S5 e S6; antes de abrir S4-B/D/E e a Onda 3)
-- WRITE_SET: `tests/f1/s5b/**` (fixture sintética e percurso), `tests/adv/f1-s5b-*.adv.ts`, `src/ui/consulta/VisaoIntegradaMinima.tsx` (novo, bloco único na tela existente), `docs/ondas/F1-CASO-GUIA.md`.
+- WRITE_SET: `tests/f1/s5b/**` (fixture sintética e percurso), `tests/adv/f1-s5b-*.adv.ts`, `src/ui/consulta/VisaoIntegradaMinima.tsx` (novo), `src/ui/consulta/ConsultaPersistida.tsx` (só a montagem do bloco), `src/ui/api/respostas.ts`, `src/ui/api/porta.ts`, `src/ui/api/http.ts` e `src/ui/api/fake.ts` (só o contrato e o cliente de leitura da `VisaoIntegrada`, rota entregue na S6), `docs/ondas/F1-CASO-GUIA.md`.
 - **Reúso comprovado, sem adiantar a Onda 3:** agenda e check-in já existem (`contracts/w11/cadastroCheckin.ts`, leitura de agenda); a entrada do exame usa a extração determinística de PDF digital já existente (`src/leitura/caixa-unica.ts`) e os `drafts` do kernel; a visão integrada chega pela rota de leitura entregue na S6; o pedido assinado usa `modules/documentos` e a impressão pelo executor `IMPRIMIR` já composto em `oncoassistLocal.ts`. O que não existe (tela R-17 completa, caixa universal com OCR, dutos) fica na Onda 3; o caso-guia não os exige.
+- Entrada do PDF: `converterEntradaLocalAsync` (`src/leitura/caixa-unica.ts`) existe mas não é chamado no runtime, e `/consulta/extrair` só recebe texto. A S5b liga o mínimo: `src/server/rotas.ts` (só `/consulta/extrair` aceitando PDF digital pelo conversor existente) e um botão de envio no bloco mínimo; esses arquivos passam depois à S8 e à S11. A prova é pelo percurso real na interface, não só por teste de unidade.
 - Percurso: agenda → encontro explícito → PDF digital de laboratório na caixa → candidato → confirmação → Maestro/ORK → laboratório e interações → visão integrada → resumo com referências → pedido assinado → medicamento novo reconciliado → reabertura só do que depende → documento assinado preservado.
 - **Fixture inteiramente sintética** (regra do repositório): paciente, datas e valores fictícios, modelados num retorno típico. Cenário proposto (a confirmar, §7): quimioterapia em curso com esquema que exige função renal (sem dose no fixture), creatinina nova acima da anterior, medicamento sintomático novo com interação de classe registrada na biblioteca aprovada, pedido de exames de controle, retorno marcado. Nenhum valor clínico inventado como regra: o fixture referencia só itens aprovados da biblioteca.
 - Aceite: demo gravada; ≤5 cliques no retorno; nenhuma lista solta por setor; lacunas visíveis; nenhum byte de PHI fora; scanner PHI sem achado sobre a fixture.
@@ -252,7 +256,7 @@ Ordem clínica de prioridade: **S4-A (laboratório + imagem) e S4-C (comorbidade
 
 **S8 · Consulta integrada**
 - WRITE_SET: `src/modules/consulta/**`, `src/ui/consulta/**`, `src/ui/telas/TelaConsulta.tsx`, `src/ui/api/**` (cliente HTTP da `VisaoIntegrada`), `src/server/rotas.ts` (só rota de leitura da visão), `tests/f1/s8/**`, `tests/adv/f1-s8-*.adv.ts`.
-- Check-in (reusa `contracts/w11/cadastroCheckin.ts`, agora com `encounterId`); pré-consulta com delta; tela R-17 com visão integrada no topo; síntese OncoAssist com citações, só de fatos confirmados, pelos 2 portões; Flash sem semáforo.
+- Check-in (reusa `contracts/w11/cadastroCheckin.ts`, agora com `encounterId`); pré-consulta com delta; tela R-17 com visão integrada no topo; Flash sem semáforo. A **síntese OncoAssist** com citações (só de fatos confirmados, pelos 2 portões) **depende do adaptador e dos portões da S11**: entra como última etapa da S8, depois de S11 entregar `kernel/llm`.
 - Aceite: ≤5 cliques; troca de paciente invalida contexto; síntese sem afirmação sem citação.
 
 **S9 · Documentos**
@@ -266,7 +270,7 @@ Ordem clínica de prioridade: **S4-A (laboratório + imagem) e S4-C (comorbidade
 - Não declara setores remotos, multiusuário, WhatsApp nem operação real (D-F1-13).
 
 **S11 · Caixa universal, OCR e LLM**
-- WRITE_SET: `src/modules/caixa/**`, `src/leitura/**`, `src/kernel/extracao/**`, `src/kernel/llm/**` (adaptador D-W9-15 e os 2 portões), `src/kernel/gateway/**` (só o registro dos executores novos `OCR_LOCAL` e `LLM_EXTRACAO`), `src/app/oncoassistLocal.ts` (só a composição desses executores; hoje só `IMPRIMIR` é injetado; depois da S6), `corpus/prompts/**` (microprompts versionados), `package.json` e lockfile (`tesseract.js`), `src/server/rotas.ts` (só upload, depois da S10), `tests/f1/s11/**`, `tests/adv/f1-s11-*.adv.ts`.
+- WRITE_SET: `src/modules/caixa/**`, `src/leitura/**`, `src/kernel/extracao/**`, `src/kernel/llm/**` (adaptador D-W9-15 e os 2 portões), `src/contracts/operacao.ts` (só os verbos novos `OCR_LOCAL` e `LLM_EXTRACAO` em `ActionIntent`, com decisão D-F1-xx registrada antes; o registro do gateway é `Partial<Record<Verbo, Executor>>`, então sem o verbo não há porta), `src/kernel/gateway/**` (registro dos executores novos), `src/app/oncoassistLocal.ts` (só a composição desses executores; hoje só `IMPRIMIR` é injetado; depois da S6), `corpus/prompts/**` (microprompts versionados), `package.json` e lockfile (`tesseract.js`), `src/server/rotas.ts` (só upload, depois da S10), `tests/f1/s11/**`, `tests/adv/f1-s11-*.adv.ts`.
 - Caixa → AG-02 → FN-25; OCR local; extratores LAB, RADS, PATH, CHEMO, SYMPTOM → candidatos → confirmação → disparo.
 - **Dois aceites separados:** (a) saída ordinária: zero byte de PHI em chamada externa (G-02 em log); (b) exceção documental D-W9-66: só pelo gateway, provider com `store:false`, efeito registrado, texto de volta ao PC e à caixa de revisão; jamais para o Genspark.
 

@@ -69,7 +69,9 @@ L20 LEI DE AUTORIA: não commitar trabalho de outro escritor sem autorização. 
     AUTORIA EFETIVA: a linha de coautoria do commit nomeia quem escreveu de fato o conteúdo (Fable 5.1 planejador, o agente Sonnet
     executor, ou o Codex), nunca uma assinatura genérica; etapa executada por agente leva a coautoria do agente.
 L21 REGISTRAR TUDO: toda decisão do Dr. Silas vira registro em DECISOES.md (só o Fable escreve lá) + commit + push.
-    Commits terminam com a linha de coautoria do autor efetivo (Co-Authored-By: <modelo>, endereço noreply do domínio anthropic.com).
+    Commits terminam com a linha de coautoria do autor efetivo (Co-Authored-By: <modelo> <endereço noreply do PRÓPRIO provedor>):
+    modelo Claude → endereço noreply do domínio anthropic.com; Codex → a identidade noreply que a OpenAI publica para o Codex.
+    Nunca atribuir a um provedor o trabalho do outro. Sem e-mail literal em .md (o scanner PHI acusa).
 L23 POSSE ÚNICA DO CORPUS: só a S3c escreve em corpus/ (exceto corpus/manifesto/** = S3 e corpus/prompts/** = S11). Setores da Onda 1
     NÃO escrevem corpus: pedem a parcela ao S3c, que publica a versão; o setor consome pela biblioteca ativa.
 L22 SEM DOCUMENTO SOLTO. Agentes mecânicos não criam .md. Documentação só a prevista no WRITE_SET da fatia.

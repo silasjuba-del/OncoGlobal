@@ -27,7 +27,9 @@ const chaveAprovada = (x) => `${x.arquivo} → ${x.import}`;
 const PARES_APROVADOS = new Set(aprovadas.pares.map(chaveAprovada));
 const TETO_EXCECOES = aprovadas.pares.length;
 // `--fechar-fase=F1-S3`: no fechamento da fatia, nenhuma exceção com esse prazo pode sobrar.
-const FECHAR_FASE = process.argv.find((a) => a.startsWith("--fechar-fase="))?.slice("--fechar-fase=".length) ?? null;
+// Presença da opção e valor são checados em separado: `--fechar-fase=` vazio (variável não definida) não pode virar "sem fechamento".
+const ARG_FECHAR = process.argv.find((a) => a.startsWith("--fechar-fase")) ?? null;
+const FECHAR_FASE = ARG_FECHAR ? ARG_FECHAR.slice("--fechar-fase=".length) : null;
 const EXCECOES = [
   { arquivo: "src/app/estudio/servidor.ts", import: "src/server/sessao.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
   { arquivo: "src/app/estudio/servidor.ts", import: "src/kernel/gateway/gateway.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
@@ -143,7 +145,8 @@ for (const ex of EXCECOES) {
   if (!PARES_APROVADOS.has(chave(ex))) restantes.push(`exceção fora da relação aprovada (scripts/fronteiras-excecoes-aprovadas.json): ${chave(ex)}`);
 }
 // Fechamento de fase: só a fase do manifesto é conhecida, e no fechamento NENHUMA exceção pode sobrar, qualquer que seja o prazo escrito.
-if (FECHAR_FASE && FECHAR_FASE !== aprovadas.prazo) restantes.push(`fase de fechamento desconhecida: ${FECHAR_FASE} (manifesto: ${aprovadas.prazo})`);
+if (ARG_FECHAR !== null && !FECHAR_FASE) restantes.push("--fechar-fase sem valor: informe a fase do manifesto (ex.: --fechar-fase=F1-S3)");
+else if (FECHAR_FASE && FECHAR_FASE !== aprovadas.prazo) restantes.push(`fase de fechamento desconhecida: ${FECHAR_FASE} (manifesto: ${aprovadas.prazo})`);
 for (const ex of EXCECOES) {
   if (FECHAR_FASE) restantes.push(`exceção vencida no fechamento de ${FECHAR_FASE}: ${chave(ex)}`);
   else if (!ex.expira) restantes.push(`exceção sem prazo: ${chave(ex)}`);
