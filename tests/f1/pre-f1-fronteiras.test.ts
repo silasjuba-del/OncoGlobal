@@ -99,12 +99,13 @@ describe("pré-F1 · fronteiras com dívida explícita", () => {
     expect(r.output).toContain("0 exceções");
   });
 
-  it("aceita a dívida aprovada (no máximo 54 exceções) e permite que ela encolha", () => {
+  it("árvore real: passa com dívida entre zero e o teto do manifesto (nunca um número fixo)", () => {
     const result = verificar();
     expect(result.status, result.output).toBe(0);
+    const manifesto = JSON.parse(readFileSync(join(root, "scripts/fronteiras-excecoes-aprovadas.json"), "utf8")) as { pares: Par[] };
     const n = Number(/(\d+) exceções/.exec(result.output)?.[1]);
     expect(n).toBeGreaterThanOrEqual(0);
-    expect(n).toBeLessThanOrEqual(54);
+    expect(n).toBeLessThanOrEqual(manifesto.pares.length);
   });
 
   it("fixture sintética: no fechamento, exceção com prazo diferente do manifesto também vence", () => {
@@ -145,15 +146,17 @@ describe("pré-F1 · fronteiras com dívida explícita", () => {
     expect(result.output).not.toContain("exceção não usada");
   });
 
-  it.each(["sem prazo", "não usada"])("rejeita exceção %s", (caso) => {
-    const result = verificar((dir) => {
-      const script = join(dir, "scripts/check-boundaries.mjs");
-      const code = readFileSync(script, "utf8");
-      writeFileSync(script, caso === "sem prazo"
-        ? code.replace('expira: "F1-S3"', 'expira: ""')
-        : code.replace('arquivo: "src/app/estudio/servidor.ts"', 'arquivo: "src/app/nao-existe.ts"'));
-    });
-    expect(result.status).toBe(1);
-    expect(result.output).toContain(`exceção ${caso}`);
+  // "sem prazo" e "não usada" em fixture sintética: não dependem de uma exceção real específica
+  // (a antiga mutação de `src/app/estudio/servidor.ts` quebraria assim que a S1 pagasse essa dívida).
+  it("fixture sintética: exceção sem prazo falha", () => {
+    const r = verificarSintetico({ arquivos: violaA, excecoes: [{ ...A, expira: "", motivo: "sintético" }], aprovadas: [A] });
+    expect(r.status).toBe(1);
+    expect(r.output).toContain("exceção sem prazo");
+  });
+
+  it("fixture sintética: exceção não usada falha (a lista só encolhe junto com a correção do import)", () => {
+    const r = verificarSintetico({ arquivos: { "src/contracts/base.ts": "export {};\n" }, excecoes: [exc(A)], aprovadas: [A] });
+    expect(r.status).toBe(1);
+    expect(r.output).toContain("exceção não usada");
   });
 });
