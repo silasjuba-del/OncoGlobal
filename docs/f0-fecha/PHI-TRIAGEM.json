@@ -3016,7 +3016,7 @@
     },
     {
       "path": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
-      "sha256": "117d8ccdf2c66e876736627c7f4b90e83fab9e78a4677d74499e0af3b3cdda8e",
+      "sha256": "b1f4aa7e60cd39de93ea347627bbf3be30cab82352b0069589f6aaacc2863f24",
       "hashMode": "utf8-lf",
       "items": [
         {
@@ -3025,28 +3025,28 @@
           "ordinal": 0,
           "status": "technical_token_false_positive",
           "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json:707",
-          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente. Revista por Claude em 2026-10-12 na integração com f1/integrado 2f1e795: mesmo UUID set_id, hash e linha atualizados."
         }
       ]
     },
     {
       "path": "corpus/6-pack-tumor/sarcomas/pack-sarcomas.v2.RASCUNHO.json",
-      "sha256": "7df5b1f176c910606ec995474d061c381f93218ff39988abb704b875174f4559",
+      "sha256": "6a7a42e9f0324ccb7935a3a048b9a147bd537f5b93d9a99871becb491a256472",
       "hashMode": "utf8-lf",
       "items": [
         {
           "type": "telefone",
-          "line": 2479,
+          "line": 2557,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/sarcomas/pack-sarcomas.v2.RASCUNHO.json:2479",
-          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/sarcomas/pack-sarcomas.v2.RASCUNHO.json:2557",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente. Revista por Claude em 2026-10-12 na integração com f1/integrado 2f1e795: mesmo UUID set_id, hash e linha atualizados."
         }
       ]
     },
     {
       "path": "corpus/6-pack-tumor/tireoide/pack-tireoide.v2.RASCUNHO.json",
-      "sha256": "231fea2eac24ebad8b00028ff68553a0c3ef82d28c18e6237837a17c2faef69a",
+      "sha256": "d8ebc30222354a05e227b67efa26b40e9bc11f267964b815b5a6fe3146d8b9d0",
       "hashMode": "utf8-lf",
       "items": [
         {
@@ -3055,7 +3055,7 @@
           "ordinal": 0,
           "status": "technical_token_false_positive",
           "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/tireoide/pack-tireoide.v2.RASCUNHO.json:1395",
-          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente. Revista por Claude em 2026-10-12 na integração com f1/integrado 2f1e795: mesmo UUID set_id, hash e linha atualizados."
         }
       ]
     },
