@@ -1066,12 +1066,23 @@
             "observacao": ""
           },
           {
-            "droga": "5-FU infusão contínua 24 h",
-            "dose": 2600,
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1",
-            "observacao": "infusão contínua de 24 h; sem bolus"
+            "observacao": "infusão contínua de 24 h; sem bolus",
+            "referenciaSBOC": {
+              "dose": 2600,
+              "droga": "5-FU infusão contínua 24 h"
+            },
+            "fonteDose": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
           }
         ],
         "cicloDias": 14,
@@ -1110,7 +1121,8 @@
         "fases": [
           "pré-operatória (4 ciclos)",
           "pós-operatória (4 ciclos)"
-        ]
+        ],
+        "notaServico": "Dose do serviço: 5-FU 2.400 mg/m² em 46 h (decisão do Dr. Silas, D-F1-16); SBOC/MOC: 2.600 mg/m² em 24 h."
       },
       {
         "id": "esofago-perioperatorio-flot-durvalumabe",
@@ -1143,12 +1155,23 @@
             "observacao": ""
           },
           {
-            "droga": "5-FU infusão contínua 24 h",
-            "dose": 2600,
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1",
-            "observacao": ""
+            "observacao": "",
+            "referenciaSBOC": {
+              "dose": 2600,
+              "droga": "5-FU infusão contínua 24 h"
+            },
+            "fonteDose": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "Durvalumabe",
@@ -1199,7 +1222,8 @@
           "manutenção com durvalumabe"
         ],
         "calendarioExecutavel": false,
-        "motivoCalendario": "FLOT q14 + durvalumabe q28: calendário por componente; não usar repetidor uniforme"
+        "motivoCalendario": "FLOT q14 + durvalumabe q28: calendário por componente; não usar repetidor uniforme",
+        "notaServico": "Dose do serviço: 5-FU 2.400 mg/m² em 46 h (decisão do Dr. Silas, D-F1-16); SBOC/MOC: 2.600 mg/m² em 24 h."
       },
       {
         "id": "esofago-paliativo-1l-pembrolizumabe-cisplatina-5fu",
@@ -2440,7 +2464,17 @@
         "estado": "CONFLITANTE"
       },
       "escolhaSeguranca": "Pack registra 2.600 mg/m² (SBOC); ficha não editada (fora do WRITE_SET). Médico decide qual vale no serviço.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "FLOT: 2.400 mg/m² em 46 h (serviço). Irinotecano: seguir a SBOC.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Ficha irinotecano do serviço × SBOC",
@@ -2459,7 +2493,17 @@
         "estado": "CONFLITANTE"
       },
       "escolhaSeguranca": "Pack registra 150 mg/m² q14 (SBOC). Ficha 350 mg/m² q21 não tem respaldo nesta diretriz.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "FLOT: 2.400 mg/m² em 46 h (serviço). Irinotecano: seguir a SBOC.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     }
   ],
   "curadoria": {

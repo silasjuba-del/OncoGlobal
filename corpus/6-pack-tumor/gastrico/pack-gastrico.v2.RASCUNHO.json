@@ -631,12 +631,23 @@
             "observacao": ""
           },
           {
-            "droga": "5-FU infusão 24 h",
-            "dose": 2600,
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1",
-            "observacao": ""
+            "observacao": "",
+            "referenciaSBOC": {
+              "dose": 2600,
+              "droga": "5-FU infusão 24 h"
+            },
+            "fonteDose": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "Durvalumabe",
@@ -694,7 +705,8 @@
           "manutenção com durvalumabe"
         ],
         "calendarioExecutavel": false,
-        "motivoCalendario": "FLOT q14 + durvalumabe q28: calendário por componente; não usar repetidor uniforme"
+        "motivoCalendario": "FLOT q14 + durvalumabe q28: calendário por componente; não usar repetidor uniforme",
+        "notaServico": "Dose do serviço: 5-FU 2.400 mg/m² em 46 h (decisão do Dr. Silas, D-F1-16); SBOC/MOC: 2.600 mg/m² em 24 h."
       },
       {
         "id": "gastrico-perioperatorio-flot",
@@ -727,12 +739,23 @@
             "observacao": ""
           },
           {
-            "droga": "5-FU infusão 24 h",
-            "dose": 2600,
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1",
-            "observacao": "sem bolus"
+            "observacao": "sem bolus",
+            "referenciaSBOC": {
+              "dose": 2600,
+              "droga": "5-FU infusão 24 h"
+            },
+            "fonteDose": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
           }
         ],
         "cicloDias": 14,
@@ -767,7 +790,8 @@
           "estado": "VERIFICADO"
         },
         "fichaNota": "ficha FLOT existente é paliativa (estomago-jeg/flot__paliativo-metastatico) e traz 5-FU 2.400 — não vinculada",
-        "doseVerificada": true
+        "doseVerificada": true,
+        "notaServico": "Dose do serviço: 5-FU 2.400 mg/m² em 46 h (decisão do Dr. Silas, D-F1-16); SBOC/MOC: 2.600 mg/m² em 24 h."
       },
       {
         "id": "gastrico-perioperatorio-cisplatina-5fu",
@@ -1950,12 +1974,23 @@
             "observacao": "presente só na tabela de doença avançada — ver conflitos"
           },
           {
-            "droga": "5-FU infusão 24 h",
-            "dose": 2600,
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1",
-            "observacao": ""
+            "observacao": "",
+            "referenciaSBOC": {
+              "dose": 2600,
+              "droga": "5-FU infusão 24 h"
+            },
+            "fonteDose": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
           }
         ],
         "cicloDias": 14,
@@ -1983,7 +2018,8 @@
           "estado": "CONFLITANTE"
         },
         "doseVerificada": false,
-        "pendencia": "FONTE_CONFLITANTE"
+        "pendencia": "FONTE_CONFLITANTE",
+        "notaServico": "Dose do serviço: 5-FU 2.400 mg/m² em 46 h (decisão do Dr. Silas, D-F1-16); SBOC/MOC: 2.600 mg/m² em 24 h."
       },
       {
         "id": "gastrico-paliativo-1l-capox-zolbetuximabe",
@@ -3494,6 +3530,16 @@
         "pagina": null,
         "trecho": "in combination with FLOT chemotherapy every 4 weeks for up to 2 cycles",
         "estado": "VERIFICADO"
+      },
+      "decisao": {
+        "texto": "FLOT: 2.400 mg/m² em 46 h (serviço). Irinotecano: seguir a SBOC.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
       }
     },
     {
@@ -3540,7 +3586,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "Protocolo paliativo marcado CONFLITANTE (doseVerificada=false). O FLOT perioperatório não tem bolus; não transferir entre cenários — médico decide.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "FLOT: 2.400 mg/m² em 46 h (serviço). Irinotecano: seguir a SBOC.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "PD-L1 para pembrolizumabe (CPS > 1 × ≥ 1)",
@@ -3607,7 +3663,17 @@
         "estado": "CONFLITANTE"
       },
       "escolhaSeguranca": "Pack registra doses SBOC; fichas não editadas.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "FLOT: 2.400 mg/m² em 46 h (serviço). Irinotecano: seguir a SBOC.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "SBOC 2025 × 2026 (doença avançada)",

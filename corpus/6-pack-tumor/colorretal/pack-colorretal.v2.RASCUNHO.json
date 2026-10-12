@@ -4158,7 +4158,17 @@
       },
       "fonteBDetalhe": "Fichas sem a linha de bolus",
       "escolhaSeguranca": "Pack registra o esquema SBOC; fichas marcadas para revisão; prescrição pela ficha exige conferência manual do bolus.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "COM bolus de 5-FU 400 mg/m² (fichas a alinhar).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Esquema Mayo — dose de 5-FU",
