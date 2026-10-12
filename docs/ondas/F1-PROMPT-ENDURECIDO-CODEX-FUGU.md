@@ -67,7 +67,7 @@ L19 SETORES ASSISTENCIAIS (salão, farmácia, APAC, canal) NA F1 = preparação 
     PROIBIDO declarar multiusuário, setor remoto, WhatsApp, túnel ou operação real liberados.
 L20 LEI DE AUTORIA: não commitar trabalho de outro escritor sem autorização. Dois escritores nunca no mesmo arquivo.
 L21 REGISTRAR TUDO: toda decisão do Dr. Silas vira registro em DECISOES.md (só o Fable escreve lá) + commit + push.
-    Commits terminam com: Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+    Commits terminam com a linha padrão de coautoria do Claude Code (Co-Authored-By: Claude Fable 5.1, endereço noreply do domínio anthropic.com).
 L22 SEM DOCUMENTO SOLTO. Agentes mecânicos não criam .md. Documentação só a prevista no WRITE_SET da fatia.
 
 ══════════════════════════════════════════════════════════════════════════════
