@@ -3410,12 +3410,13 @@
     },
     {
       "texto": "BCG: dose depende da cepa (SBOC 120 mg/40 mg EORTC × aula PRO Connaught 81 mg/Tice 50 mg); esquema de indução/manutenção sem fonte SBOC — conferir bula da cepa disponível no SUS.",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "PROVISORIA_BULA_FDA",
       "buscasFeitas": [
         "SBOC 2026 p.16",
         "openFDA TICE BCG",
         "aula PRO 66 p.18"
-      ]
+      ],
+      "resolucao": "Dose do MOC (81 mg ×6 + manutenção) como provisória até a bula da cepa (D-F1-16, resposta 1)."
     },
     {
       "texto": "Pemetrexede e nab-paclitaxel em 2ª linha: doses SEM_FONTE.",
@@ -3432,19 +3433,21 @@
     },
     {
       "texto": "PD-L1: corte e clone para pembrolizumabe 1ª linha não definidos na SBOC; conferir bula ANVISA (aula PRO: CPS ≥ 10 para pembrolizumabe).",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "PROVISORIA_BULA_FDA",
       "buscasFeitas": [
         "SBOC 2026 bexiga: sem corte",
         "aula PRO: CPS ≥10 (a confirmar)"
-      ]
+      ],
+      "resolucao": "Regra da bula: CPS ≥ 10 para pembrolizumabe em monoterapia; provisório até a bula ANVISA (D-F1-16 resposta 1; MOC item 13)."
     },
     {
       "texto": "Seguimento pós-cistectomia, pós-trimodal e da doença avançada: periodicidade sem fonte na SBOC 2026.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "fontes/sboc/SBOC 2026 p.8/30, Bexiga.txt p.23, Bexiga_2.txt p.26-27: periodicidade só para NMIBC",
         "fontes/pro26/67 p.16: 'Seguimento com cistoscopia' (trimodal) sem intervalo; 66 p.20 só NMIBC"
-      ]
+      ],
+      "resolucao": "Seguimento caso a caso (8A)."
     },
     {
       "texto": "Emetogenicidade dos esquemas não descrita na SBOC de bexiga.",
@@ -3651,13 +3654,23 @@
         "estado": "INFERIDO"
       },
       "escolhaSeguranca": "MOC: 81 mg por 6 semanas + manutenção. Não substitui a bula da cepa (NÃO VERIFICADA).",
-      "decisaoNecessaria": true,
+      "decisaoNecessaria": false,
       "fonteC": {
         "tipo": "DIRETRIZ",
         "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
         "pagina": null,
         "trecho": null,
         "estado": "INFERIDO"
+      },
+      "decisao": {
+        "texto": "Dose do MOC (81 mg ×6 + manutenção) como provisória até a bula da cepa (D-F1-16, resposta 1).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
       }
     },
     {

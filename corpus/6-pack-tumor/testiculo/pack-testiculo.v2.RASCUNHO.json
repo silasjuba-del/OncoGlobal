@@ -3240,10 +3240,11 @@
     },
     {
       "texto": "Audiometria (cisplatina) e ajuste renal da bleomicina apoiados em rótulo FDA (openFDA); bula ANVISA não consultada",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "PROVISORIA_BULA_FDA",
       "buscasFeitas": [
         "openFDA cisplatina e bleomicina"
-      ]
+      ],
+      "resolucao": "Bula FDA provisória (resposta 1)."
     },
     {
       "texto": "DLCO sem id próprio no catálogo; mapeado em ESPIROMETRIA (prova de função pulmonar completa)",

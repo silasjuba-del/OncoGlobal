@@ -3715,7 +3715,17 @@
       },
       "detalhe": "MOC (Shah): docetaxel 40 D1, cisplatina 40 D3, bolus 5-FU 400 + leucovorin 400 + 5-FU 2.000 em 48 h, a cada 14 dias. Pack (SBOC): cisplatina D2; 5-FU 1.000/dia D1–D2 (= 2.000 em 48 h).",
       "escolhaSeguranca": "Doses totais coincidem; diverge o dia da cisplatina (D2 × D3). Manter a SBOC até decisão.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Cisplatina no D3 (esquema de Shah).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-15)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     }
   ],
   "curadoria": {

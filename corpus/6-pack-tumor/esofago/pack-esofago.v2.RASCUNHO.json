@@ -2394,7 +2394,17 @@
         "estado": "VERIFICADO"
       },
       "escolhaSeguranca": "50,4 Gy fica restrito à QT/RT definitiva; CROSS neoadjuvante = 41,4 Gy. A tabela de doença localmente avançada (p.17) reaproveita os esquemas definitivos sem dose de RT: para cisplatina+5-FU e mFOLFOX4 neoadjuvantes, RT = null (SEM_FONTE). Cisplatina+5-FU não é 'CROSS-like'.",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Radioterapia é aceno geral; mantida a separação 41,4 Gy (CROSS) × 50,4 Gy (definitiva).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Calendário de nivolumabe + cisplatina + 5-FU",

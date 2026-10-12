@@ -3768,10 +3768,11 @@
   "pendencias": [
     {
       "texto": "Doses de agonistas/antagonistas LHRH tiradas de bula FDA (openFDA); confirmar com bula ANVISA das apresentações disponíveis no serviço. Indicação de bula = câncer de próstata avançado; uso com RT no localizado sustentado pela SBOC (classe e duração).",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "PROVISORIA_BULA_FDA",
       "buscasFeitas": [
         "openFDA leuprolida/gosserrelina/degarelix (já usados)"
-      ]
+      ],
+      "resolucao": "Bula FDA provisória (resposta 1)."
     },
     {
       "texto": "Abiraterona no localizado alto risco (STAMPEDE): dose não informada pela SBOC neste cenário e sem aprovação Anvisa — drogas com dose null (SEM_FONTE).",

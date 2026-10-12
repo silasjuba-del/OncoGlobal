@@ -3968,11 +3968,12 @@
     },
     {
       "texto": "Doses dos protocolos metastáticos novos vêm de rótulo FDA/ensaio; conferir bula ANVISA das apresentações disponíveis.",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "PROVISORIA_BULA_FDA",
       "buscasFeitas": [
         "openFDA (Keytruda, Enhertu, Trodelvy, Datroway, Lynparza, Talzenna)",
         "ClinicalTrials.gov NCT02819518"
-      ]
+      ],
+      "resolucao": "Doses de bula FDA provisórias até a bula ANVISA (resposta 1)."
     }
   ],
   "conflitos": [

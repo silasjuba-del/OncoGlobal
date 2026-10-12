@@ -1802,7 +1802,7 @@
     },
     {
       "texto": "Reirradiação (aceno de RT) e platina na recorrência ficam fora como protocolo. TMZ protraída 50 mg/m² resolvida por D-F1-17 34B (gliomas-tmz-protraida-recorrencia).",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC Gliomas p.16-17",
         "DDT 2020 p.17",
@@ -1817,7 +1817,8 @@
           "trecho": null,
           "estado": "VERIFICADO"
         }
-      }
+      },
+      "resolucao": "Radioterapia é aceno geral; platina na recorrência fora do pack."
     }
   ],
   "conflitos": [
@@ -1838,7 +1839,17 @@
         "estado": "INFERIDO"
       },
       "escolhaSeguranca": "Manter 59,4 Gy e deixar frações em aberto para o radio-oncologista; 33 frações (1,8 Gy/fr) é a forma clássica e menos intensa por fração",
-      "decisaoNecessaria": true
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Radioterapia é aceno geral: frações definidas pelo radio-oncologista.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
     },
     {
       "tema": "Temozolomida adjuvante no SUS",

@@ -2119,10 +2119,11 @@
     },
     {
       "texto": "Tabela de seguimento (SBOC p.15) para pN+ tem leitura ambígua quanto à imagem no 3º–5º ano.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "SBOC 2025 pênis p.15"
-      ]
+      ],
+      "resolucao": "Seguimento do MOC 2026 aplicado (conferência)."
     },
     {
       "texto": "fichaId do carboplatina + paclitaxel aponta para ficha nomeada de próstata (doses iguais) — conferir.",
@@ -2141,11 +2142,12 @@
     },
     {
       "texto": "5-FU creme e imiquimode creme (Ta/Tis): unidade '% creme' e via 'topica' fora do enum numérico usual; cobertura SUS não verificada; bula FDA do imiquimode exclui pele anogenital no sBCC (off-label).",
-      "classe": "DEPENDE_BULA_ANVISA",
+      "classe": "PROVISORIA_BULA_FDA",
       "buscasFeitas": [
         "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22FLUOROURACIL%22+AND+openfda.route:%22TOPICAL%22 — Fluorouracil Cream 5%, set_id 06475bd8-66d9-4f88-90e4-b367480dab39 (effective 2021-11-04)",
         "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22IMIQUIMOD%22 — Imiquimod Cream 5%, set_id 47d3045f-a145-4095-bb8a-c67ba1ff3bda (effective 2025-07-29)"
-      ]
+      ],
+      "resolucao": "Bula FDA provisória (resposta 1); uso anogenital do imiquimode é off-label, anotado no protocolo."
     }
   ],
   "conflitos": [

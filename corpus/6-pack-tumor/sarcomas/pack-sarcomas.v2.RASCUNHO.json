@@ -2882,11 +2882,12 @@
     },
     {
       "texto": "Sem id no catálogo v1.1: USG de partes moles, RM de membro, RX de segmento ósseo, NGS/TMB e testes germinativos (códigos SIGTAP anotados nos itens). Inclusão depende de D-F1-02.",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "catálogo v1.1",
         "SIGTAP 09/2026"
-      ]
+      ],
+      "resolucao": "Catálogo v1.3 inclui RM de membros, USG de articulação/partes moles e RX de segmentos (57A/60A); NGS/germinativos sem código SUS (59A)."
     },
     {
       "texto": "Imatinibe no cordoma: sem fonte no MOC 2026 e na bula.",
