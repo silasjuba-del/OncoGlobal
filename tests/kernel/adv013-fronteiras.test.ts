@@ -6,6 +6,8 @@ import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 const scanner = fileURLToPath(new URL("../../scripts/check-boundaries.mjs", import.meta.url));
+// Pré-F1: o scanner lê a relação aprovada de exceções ao lado dele; a cópia isolada precisa levá-la junto.
+const aprovadas = fileURLToPath(new URL("../../scripts/fronteiras-excecoes-aprovadas.json", import.meta.url));
 
 function verificarSnippet(snippet: string) {
   // Corpus sintético isolado no diretório temporário: nunca edita src/ do repo.
@@ -14,6 +16,7 @@ function verificarSnippet(snippet: string) {
     mkdirSync(join(dir, "scripts"));
     mkdirSync(join(dir, "src", "rules"), { recursive: true });
     copyFileSync(scanner, join(dir, "scripts", "check-boundaries.mjs"));
+    copyFileSync(aprovadas, join(dir, "scripts", "fronteiras-excecoes-aprovadas.json"));
     writeFileSync(join(dir, "src", "rules", "probe.ts"), snippet, "utf8");
     const result = spawnSync(process.execPath, [join(dir, "scripts", "check-boundaries.mjs")],
       { cwd: dir, encoding: "utf8", timeout: 10_000 });

@@ -601,6 +601,17 @@
         }
       },
       {
+        "grupo": "mHSPC alto risco (LATITUDE)",
+        "conduta": "Classificação prognóstica complementar ao volume: ≥ 2 de 3 — Gleason ≥ 8, ≥ 3 lesões ósseas, metástase visceral mensurável. Não substitui o volume CHAARTED na decisão de intensificação; ~10% dos casos são discordantes (alto volume + alto risco = pior prognóstico; baixo + baixo = melhor). Fatores adicionais (não substituem): doença de novo vs metacrônica; M1c > M1b > M1a; LDH alta, albumina baixa, ALP alta, CRP alta, Hb baixa; grade group 5; PS ruim e dor intensa.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-20)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      {
         "grupo": "mHSPC baixo volume",
         "conduta": "TDA + ARPI (abiraterona, enzalutamida, apalutamida); benefício do docetaxel controverso.",
         "fonte": {
@@ -3795,9 +3806,17 @@
     },
     {
       "texto": "Definição de alto risco mHSPC (SBOC p.10) impressa como 'Gleason > 8' e '3 lesões ósseas' — conferir com o PDF/LATITUDE (Gleason ≥ 8, ≥ 3 lesões). Texto extraído do PDF confirma a grafia da SBOC (p.10).",
-      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
       "buscasFeitas": [
         "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4 p.10"
+      ],
+      "resolucao": "Alto risco mHSPC (49A, LATITUDE): ≥ 2 de 3 — Gleason ≥ 8, ≥ 3 lesões ósseas, metástase visceral mensurável. A grafia '> 8' da SBOC p.10 fica superada pela decisão médica (≥ 8)."
+    },
+    {
+      "texto": "Artigos originais CHAARTED e LATITUDE não estão no repo; critérios registrados por decisão médica (D-F1-20); anexar fonte primária com página quando disponível.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "repo OncoGlobal: sem PDF/texto de CHAARTED e LATITUDE em fontes/"
       ]
     },
     {
@@ -4088,6 +4107,12 @@
       "por": "Claude",
       "achado": "D-F1-17",
       "acao": "prednisona 5 mg 2x/dia com olaparibe + abiraterona (48A)"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-20 item 49 (Dr. Silas)",
+      "acao": "alto risco mHSPC (LATITUDE ≥ 2 de 3) registrado como grupo complementar ao volume CHAARTED; pendência de grafia '> 8' resolvida; pendência de fonte primária adicionada"
     }
   ]
 }

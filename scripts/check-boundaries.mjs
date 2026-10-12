@@ -21,8 +21,11 @@ const RULES = [
 ];
 // Exceções geradas em 2026-10-12 a partir das violações existentes no início da F1 (auditoria consolidada pré-F1).
 // Cada uma vence na fatia F1-S3; corrigir o import e remover a linha.
-// Teto da dívida aprovada no pré-F1 (2026-10-12): a lista só encolhe; incluir exceção nova falha a bateria.
-const TETO_EXCECOES = 54;
+// Relação aprovada no pré-F1 (2026-10-12): controla o PERTENCIMENTO, não só a quantidade. A lista só encolhe.
+const aprovadas = JSON.parse(readFileSync(new URL("./fronteiras-excecoes-aprovadas.json", import.meta.url), "utf8"));
+const chaveAprovada = (x) => `${x.arquivo} → ${x.import}`;
+const PARES_APROVADOS = new Set(aprovadas.pares.map(chaveAprovada));
+const TETO_EXCECOES = aprovadas.pares.length;
 // `--fechar-fase=F1-S3`: no fechamento da fatia, nenhuma exceção com esse prazo pode sobrar.
 const FECHAR_FASE = process.argv.find((a) => a.startsWith("--fechar-fase="))?.slice("--fechar-fase=".length) ?? null;
 const EXCECOES = [
@@ -137,9 +140,14 @@ const restantes = [...new Set(erros)].filter((e) => {
 });
 if (EXCECOES.length > TETO_EXCECOES) restantes.push(`exceções acima do teto aprovado (${EXCECOES.length} > ${TETO_EXCECOES}): a lista só encolhe`);
 for (const ex of EXCECOES) {
+  if (!PARES_APROVADOS.has(chave(ex))) restantes.push(`exceção fora da relação aprovada (scripts/fronteiras-excecoes-aprovadas.json): ${chave(ex)}`);
+}
+for (const ex of EXCECOES) {
   if (FECHAR_FASE && ex.expira === FECHAR_FASE) restantes.push(`exceção vencida no fechamento de ${FECHAR_FASE}: ${chave(ex)}`);
   else if (!ex.expira) restantes.push(`exceção sem prazo: ${chave(ex)}`);
   else if (!usadas.has(chave(ex))) restantes.push(`exceção não usada (remova da lista): ${chave(ex)}`);
 }
 if (restantes.length) { console.error("FRONTEIRAS VIOLADAS:\n" + restantes.join("\n")); process.exit(1); }
-console.log(`fronteiras ok (${files.length} arquivos; ${EXCECOES.length} exceções datadas, prazo ${[...new Set(EXCECOES.map((x) => x.expira))].join(", ")})`);
+console.log(EXCECOES.length === 0
+  ? `fronteiras ok (${files.length} arquivos; 0 exceções)`
+  : `fronteiras ok (${files.length} arquivos; ${EXCECOES.length} exceções datadas, prazo ${[...new Set(EXCECOES.map((x) => x.expira))].join(", ")})`);
