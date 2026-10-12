@@ -10,6 +10,7 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "check:boundaries": "node scripts/check-boundaries.mjs",
+    "check:boundaries:fechar-f1-s3": "node scripts/check-boundaries.mjs --fechar-fase=F1-S3",
     "check:corpus": "node scripts/validate-corpus.mjs",
     "verify": "npm run typecheck && npm run check:boundaries && npm run check:corpus && npm test",
     "ui:dev": "vite",

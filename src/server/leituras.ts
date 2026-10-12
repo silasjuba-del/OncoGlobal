@@ -186,11 +186,12 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     tetosCumulativos?: readonly LimiteExposicaoCumulativa[];
     condicionais?: {regras:EntradaCondicionaisClinicas["regras"];termos:NonNullable<EntradaCondicionaisClinicas["regrasTermos"]>} } = {}) {
   const leitura = lerEventosComIntegridade(db);
-  const pendenciasIntegridade = leitura.pendenciasIntegridade
-    .filter((p) => p.patientId === patientId || p.patientId === null);
+  // Só as pendências com identidade deste paciente; evento sem patientId é diagnóstico global, nunca de todos os prontuários.
+  const pendenciasIntegridade = leitura.pendenciasIntegridade.filter((p) => p.patientId === patientId);
   const all = leitura.itens, paciente = porTipo(all, "Paciente", Paciente)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value;
-  if (!paciente) return { codigo: "PACIENTE_NAO_ENCONTRADO" as const };
+  // Cadastro corrompido não some: o 404 leva o diagnóstico, sem reconstruir identidade pelo payload inválido.
+  if (!paciente) return { codigo: "PACIENTE_NAO_ENCONTRADO" as const, pendenciasIntegridade };
   const patientEvents = eventosVigentes(all.filter((e) => e.patientId === patientId));
   const current = patientEvents.at(-1);
   if (!current) return { codigo: "CONSULTA_NAO_ENCONTRADA" as const };

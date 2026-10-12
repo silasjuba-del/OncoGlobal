@@ -21,6 +21,10 @@ const RULES = [
 ];
 // Exceções geradas em 2026-10-12 a partir das violações existentes no início da F1 (auditoria consolidada pré-F1).
 // Cada uma vence na fatia F1-S3; corrigir o import e remover a linha.
+// Teto da dívida aprovada no pré-F1 (2026-10-12): a lista só encolhe; incluir exceção nova falha a bateria.
+const TETO_EXCECOES = 54;
+// `--fechar-fase=F1-S3`: no fechamento da fatia, nenhuma exceção com esse prazo pode sobrar.
+const FECHAR_FASE = process.argv.find((a) => a.startsWith("--fechar-fase="))?.slice("--fechar-fase=".length) ?? null;
 const EXCECOES = [
   { arquivo: "src/app/estudio/servidor.ts", import: "src/server/sessao.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
   { arquivo: "src/app/estudio/servidor.ts", import: "src/kernel/gateway/gateway.js", expira: "F1-S3", motivo: "app segue a regra de módulos" },
@@ -131,8 +135,10 @@ const restantes = [...new Set(erros)].filter((e) => {
   if (!ex) return true;
   usadas.add(chave(ex)); return false;
 });
+if (EXCECOES.length > TETO_EXCECOES) restantes.push(`exceções acima do teto aprovado (${EXCECOES.length} > ${TETO_EXCECOES}): a lista só encolhe`);
 for (const ex of EXCECOES) {
-  if (!ex.expira) restantes.push(`exceção sem prazo: ${chave(ex)}`);
+  if (FECHAR_FASE && ex.expira === FECHAR_FASE) restantes.push(`exceção vencida no fechamento de ${FECHAR_FASE}: ${chave(ex)}`);
+  else if (!ex.expira) restantes.push(`exceção sem prazo: ${chave(ex)}`);
   else if (!usadas.has(chave(ex))) restantes.push(`exceção não usada (remova da lista): ${chave(ex)}`);
 }
 if (restantes.length) { console.error("FRONTEIRAS VIOLADAS:\n" + restantes.join("\n")); process.exit(1); }
