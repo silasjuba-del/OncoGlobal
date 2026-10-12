@@ -1,13 +1,18 @@
-# F1: modelo de plano, fatias e etapas (v2, proposta para aprovação)
+# F1: modelo de plano, fatias e etapas (v3, proposta para aprovação)
 
 Data: 2026-10-12. Autor: Claude. Orquestrador da execução: Codex-Fugu.
-Estado: **PROPOSTA v2**. Nenhuma fatia começa sem o quadro de 7 blocos aprovado pelo Dr. Silas (§6). Este documento não inicia código.
-O que mudou da v1:
+Estado: **PROPOSTA v3**. Nenhuma fatia começa sem o quadro de 7 blocos aprovado pelo Dr. Silas (§6). Este documento não inicia código.
+O que mudou na v3 (D-F1-19):
+- Maestro e ORK mantidos de forma peremptória como o cerne do processo. São o sistema nervoso do app (§0.1) e entram no runtime na S6.
+- Os setores são órgãos: cada um com anatomia própria, todos ligados pelo sangue (ledger e projeções) e pelos nervos (rotas, trilhas e dutos).
+- Três adoções: porta única de entrada (§2.1), mapa de núcleo e satélites (§2.2), mais domínio e menos agentes (§2.3).
+
+O que mudou na v2:
 - incorpora a D-F1-18 (o paciente é um só, o software tem vários setores);
 - aplica a revisão do Codex (`C:\Users\silas\handoff\2026-10-12_codex-revisao-pr7-plano-f1.md`);
 - incorpora o relatório do Genspark (`docs/ondas/F1-GENSPARK-RELATORIO-2026-10-12.md`).
 
-Fontes: PLANO-FINAL v1.1 (§F1 e R-17 a R-22); D-F1-01 a D-F1-18; D-W9-82; aceite da proposta F1 (`DECISOES.md:265`: voz fora, OCR local, 2 portões da LLM).
+Fontes: PLANO-FINAL v1.1 (§F1 e R-17 a R-22); D-F1-01 a D-F1-19; D-W9-82; aceite da proposta F1 (`DECISOES.md:265`: voz fora, OCR local, 2 portões da LLM).
 
 ---
 
@@ -32,6 +37,21 @@ Fontes: PLANO-FINAL v1.1 (§F1 e R-17 a R-22); D-F1-01 a D-F1-18; D-W9-82; aceit
 - **O Reconciliador cruza os setores** sobre o mesmo `patientId` e a mesma `revisao`. Ele produz `AchadoIntegrado` com a cadeia de causa. Exemplo de forma, sem regra inventada: "função renal [lab] + droga nefrotóxica proposta [tratamento] + AINE em uso [interações] + DRC [comorbidade]" sai como um achado só, com os 4 fatos citados.
 - **O médico vê o paciente inteiro.** Achados integrados aparecem primeiro, depois o detalhe por setor (um clique, com link ao fato). Nunca mostrar listas soltas por setor para ele juntar de cabeça.
 - **Lacuna é visível.** Setor sem dado, com dado vencido ou sem regra aprovada aparece como lacuna na visão integrada, nunca como "normal".
+
+## 0.1 Anatomia do app: órgãos, sangue e nervos (D-F1-19)
+
+| Corpo | App | Função | Onde está |
+|---|---|---|---|
+| **Órgãos** | os 7 setores clínicos + os setores assistenciais (farmácia, salão, APAC, agenda, documentos) | cada um tem função e responsabilidade próprias, em anatomia separada; nunca faz o trabalho de outro | `src/modules/setores/**`, `src/modules/<duto>/**` |
+| **Sangue** | ledger append-only + Retrato (projeções) | leva o mesmo dado do paciente a todos os órgãos; ninguém guarda sangue próprio | `src/kernel/ledger`, `src/kernel/projections` |
+| **Sistema nervoso central** | **Maestro**: tabela fixa de planos por evento (R-14, Q11), sem LLM | decide quais órgãos reagem a cada estímulo e em que ordem (ondas e dependências) | `src/orchestration/maestro.ts` |
+| **Nervos motores e reflexos** | **ORK**: executa o plano, entrega o microprompt quando há agente, supervisiona, repete e marca falha (`missing`/`error`/`unattempted`) | nenhum órgão chama outro; texto nunca muda estado (G-15); reentrada proibida | `src/orchestration/ork.ts` |
+| **Vasos e nervos periféricos** | rotas, trilhas e dutos (comandos do kernel, portas tipadas §3) | caminho fixo e tipado de cada sinal, com envelope de correlação | `src/kernel/comandos`, contratos |
+| **Integração** | Reconciliador | junta as respostas dos órgãos numa visão única para o médico | `src/modules/reconciliador` |
+| **Decisão** | o médico | conduta e assinatura | sessão + AGE |
+
+Fluxo: o estímulo (evento no ledger) chega ao **Maestro**, que escolhe o plano. O **ORK** aciona os órgãos (setores) na ordem. Cada órgão lê o sangue (Retrato) e devolve `AchadosSetor`. O **Reconciliador** integra e monta a **visão integrada** para o médico.
+Hoje Maestro e ORK estão provados por testes (Q11, G-15, RT-09), mas não estão ligados ao runtime. A F1 faz essa ligação na S6 sem mudar a natureza deles: tabela fixa e executor supervisionado.
 
 ## 1. Leis que valem em toda fatia
 
@@ -58,6 +78,29 @@ Um processo Node, SQLite com ledger append-only, projeções puras. Sem barramen
 | Reconciliador | cruza setores; achado integrado; lacunas | — | `reconciliar(achados[], retrato) → VisaoIntegrada` |
 | Dutos | estado próprio por setor assistencial, responsável e correlação | `modules/farmacia`, `estoque`, `documentos`, `apac`, `canal` | ligar por portas (§3), em uso local monousuário |
 | Gateway | impressão e envio externo | stub e FN-24 | sem mudança estrutural |
+| Maestro/ORK | tabela de planos por evento; execução supervisionada | provados por testes, fora do runtime | ligados ao runtime na S6, com os eventos novos da F1 na tabela |
+
+### 2.1 Porta única de entrada
+Toda entrada segue o mesmo caminho: texto, print, PDF (OCR local), Plaud e voz (depois da F1), canal do paciente (F2) e sistemas externos.
+**normalizador → rascunho/envelope `tipo@versao` → confirmação quando exigida → ledger → Maestro/ORK → setores → Reconciliador → UI e documentos.**
+Nenhum adaptador tem regra clínica própria. Um canal novo é só um adaptador a mais antes do normalizador (R-18: "mesma porta").
+
+### 2.2 Núcleo e satélites
+- **Núcleo:** contratos, ledger, envelope, comandos, regras, validação, assinatura, persistência, Maestro/ORK e gateway.
+- **Satélites:** consulta, setores clínicos, reconciliador, documentos, salão, farmácia, APAC, agenda, canal, impressão e caixa.
+- **Regras de fronteira** (no `check-boundaries`, S3-E5):
+  - satélite importa só o núcleo e os contratos;
+  - satélite nunca importa outro satélite (a troca vai por evento ou porta);
+  - só o núcleo toca o ledger;
+  - só o gateway fala com o exterior.
+
+### 2.3 Mais domínio, menos agentes
+- Os setores são **funções puras de domínio, não agentes de LLM.** O ORK os executa como passos do plano, com a mesma supervisão.
+- A LLM fica restrita a três usos, sempre com microprompt versionado entregue pelo ORK e pelos 2 portões:
+  - extração na ingestão (com FN-24);
+  - síntese em prosa a partir de fatos confirmados;
+  - reformulação sem PHI.
+- Não se cria agente novo onde uma regra versionada resolve.
 
 ### Retrato (contrato mínimo)
 - `patientId`, `revisao` (sequência ou hash dos eventos de entrada), `versaoProjecao`, `geradoEm`.
@@ -143,12 +186,14 @@ Cada setor: `src/modules/setores/<setor>/**` + `tests/f1/s4-<setor>/**` + a fati
 - E4: priorização e agrupamento anti-fadiga (L10), sem esconder risco.
 - Aceite: um achado de dois setores aparece uma vez, com os dois fatos; setor sem cobertura aparece como lacuna; resposta da revisão N−1 não aparece como atual.
 
-**S6 · Reavaliação por evento**
-- WRITE_SET: `src/modules/reconciliador/dependencias/**`, `tests/f1/s6/**`.
+**S6 · Sistema nervoso no runtime: Maestro/ORK e reavaliação por evento**
+- WRITE_SET: `src/orchestration/**` (Maestro e ORK, só para acrescentar e ligar; a tabela continua fixa e o executor continua supervisionado), `src/modules/reconciliador/dependencias/**`, `tests/f1/s6/**`.
+- E0: a tabela do Maestro ganha os eventos da F1, mapeados para os setores e o `RECONCILIADOR`. Exemplos: `PRESCRICAO_PROPOSTA`, `MED_RECONCILIADO`, `EXAME_CORRIGIDO`, `BIBLIOTECA_ATIVADA`, `FATO_VENCIDO`. Os planos atuais e os testes Q11, G-15 e RT-09 ficam intactos.
+- E0b: o ORK passa a executar os setores reais no runtime, a partir do ledger. A falha de um órgão aparece como lacuna na visão integrada (`missing`/`error`), nunca como silêncio.
 - E1: dependência por **domínio e contexto**, não só pelos IDs já consumidos. Assim o primeiro med novo e o fato antes ausente também disparam.
 - E2: gatilhos: exame novo, corrigido ou retirado; med; comorbidade; toxicidade; dose; esquema; administração; troca de versão da biblioteca; vencimento temporal.
 - E3: nova conferência de revisões no `assinarPrescricao`.
-- Aceite: med novo reabre só o que depende; biblioteca nova invalida o que depende dela; exame vencido reabre a avaliação.
+- Aceite: med novo reabre só o que depende; biblioteca nova invalida o que depende dela; exame vencido reabre a avaliação; evento fora da tabela não executa nada; texto com `{"state": ...}` não muda estado (G-15); a matriz F0 continua verde em Q11 e G-15.
 
 **S7 · Caminho tumor → investigação** (depois da S3 e da S5)
 - WRITE_SET: `src/modules/investigacao/**`, `tests/f1/s7/**`.
@@ -195,7 +240,7 @@ Cada setor: `src/modules/setores/<setor>/**` + `tests/f1/s4-<setor>/**` + a fati
 ```
 S1 ─▶ S2 ─▶ S3(E2–E5)          S3(E1 loader) ∥ S1
           └─▶ Onda 1: S4-A ∥ S4-B ∥ S4-C ∥ S4-D ∥ S4-E   (precisam de S2 e S3-E1)
-                        └─▶ S5 ─▶ S6
+                        └─▶ S5 ─▶ S6 (Maestro/ORK no runtime)
                              └─▶ S7 (precisa também de S3)
                                   └─▶ Onda 3: S8 ∥ S9 ∥ S10 ∥ S11 ─▶ S12
 ```
