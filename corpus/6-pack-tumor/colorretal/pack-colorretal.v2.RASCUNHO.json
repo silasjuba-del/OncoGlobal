@@ -220,12 +220,12 @@
         {
           "alvo": "PIK3CA",
           "metodo": "PCR",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "catalogoId": null,
           "quandoPedir": "universal",
           "cenario": "estádios II–III",
           "consequencia": "mutado: AAS 160 mg/dia por 3 anos",
           "disponivelSUS": "DADO_AUSENTE",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "fonte": {
             "tipo": "SBOC",
             "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
@@ -233,18 +233,18 @@
             "trecho": "incluir pesquisa de deficiência de enzimas de reparo e pesquisa de PI3KCA",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "KRAS/NRAS (éxons 2–4), BRAF V600E, incluindo KRAS G12C",
           "metodo": "PCR",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "catalogoId": null,
           "quandoPedir": "condicional",
           "cenario": "doença metastática",
           "consequencia": "define anti-EGFR (RAS/BRAF selvagem), encorafenibe+cetuximabe (BRAF V600E), sotorasibe+panitumumabe (G12C)",
           "disponivelSUS": "DADO_AUSENTE",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "fonte": {
             "tipo": "SBOC",
             "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
@@ -252,8 +252,8 @@
             "trecho": "Na doença metastática é recomendada a pesquisa de painel mais amplo de biomarcadores",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "HER2",
@@ -274,12 +274,12 @@
         {
           "alvo": "Fusão NTRK",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "catalogoId": null,
           "quandoPedir": "condicional",
           "cenario": "metastático refratário",
           "consequencia": "larotrectinibe",
           "disponivelSUS": "DADO_AUSENTE",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "fonte": {
             "tipo": "SBOC",
             "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
@@ -287,8 +287,8 @@
             "trecho": "Fusão de NTRK presente:",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "FISH",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "DPYD (deficiência de DPD)",
@@ -1315,13 +1315,73 @@
         "nome": "TNT: indução mFOLFIRINOX 6 ciclos → QT/RT → TME → FOLFOX/CAPOX (PRODIGE-23)",
         "cenario": "reto_localmente_avancado_alto_risco",
         "linha": "neoadjuvante total",
-        "drogas": [],
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01804790 (PRODIGE 23) — https://clinicaltrials.gov/api/v2/studies/NCT01804790, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "oxaliplatin: 85 mg/m² in 2 hours at D1 irinotecan: 180 mg/m²",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Irinotecano",
+            "dose": 180,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01804790 (PRODIGE 23) — https://clinicaltrials.gov/api/v2/studies/NCT01804790, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "oxaliplatin: 85 mg/m² in 2 hours at D1 irinotecan: 180 mg/m²",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01804790 (PRODIGE 23) — https://clinicaltrials.gov/api/v2/studies/NCT01804790, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "folinic acid: 400 mg/m² simultaneously in 2 hours at D1",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "5-FU infusão contínua 48 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "sem bolus (PRODIGE 23)",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01804790 (PRODIGE 23) — https://clinicaltrials.gov/api/v2/studies/NCT01804790, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "2400 mg/m² continuous infusion during 48 hours (1200 mg/m² at D1 and D2)",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
         "cicloDias": 14,
         "numeroCiclos": 6,
         "premedicacao": "",
         "ajusteObrigatorio": "DPD; UGT1A1 não exigido pela fonte.",
         "fichaId": null,
-        "pendencia": "SEM_FONTE: doses do mFOLFIRINOX no reto não estão na SBOC Reto 2026; o FOLFIRINOX do cólon metastático (com bolus) não é transferido.",
         "sus": {
           "disponivel": "sim",
           "fonte": {
@@ -1338,20 +1398,91 @@
           "pagina": 20,
           "trecho": "QT de indução com mFolfirinox por 3 meses (6 ciclos)",
           "estado": "VERIFICADO"
-        }
+        },
+        "doseVerificada": true,
+        "notaDose": "Doses do braço experimental do PRODIGE 23 (registro ClinicalTrials.gov), não transferidas do cólon metastático."
       },
       {
         "id": "colorretal-reto-qt-neo-seletiva-prospect",
         "nome": "QT neoadjuvante seletiva (modelo PROSPECT): FOLFOX x6 ou CAPOX x4 → TME",
         "cenario": "reto_localmente_avancado_sem_risco_pMMR",
         "linha": "neoadjuvante",
-        "drogas": [],
-        "cicloDias": null,
-        "numeroCiclos": null,
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "FOLFOX × 6",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01515787 (PROSPECT) — https://clinicaltrials.gov/api/v2/studies/NCT01515787, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "Oxaliplatin 85 mg/m\\^2 IV over 2 hours on day 1, leucovorin 400 mg/m\\^2",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01515787 (PROSPECT) — https://clinicaltrials.gov/api/v2/studies/NCT01515787, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "Oxaliplatin 85 mg/m\\^2 IV over 2 hours on day 1, leucovorin 400 mg/m\\^2",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01515787 (PROSPECT) — https://clinicaltrials.gov/api/v2/studies/NCT01515787, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "5-fluorouracil 400 mg/m\\^2 bolus over 5-15 minutes then 2400 mg/m\\^2",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "46–48 h",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01515787 (PROSPECT) — https://clinicaltrials.gov/api/v2/studies/NCT01515787, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "5-fluorouracil 400 mg/m\\^2 bolus over 5-15 minutes then 2400 mg/m\\^2",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 6,
         "premedicacao": "",
         "ajusteObrigatorio": "Proibido em dMMR (SBOC).",
         "fichaId": null,
-        "pendencia": "SEM_FONTE: doses não explicitadas na diretriz de Reto.",
+        "pendencia": {
+          "texto": "Doses do CAPOX × 4 (alternativa) não descritas no registro do PROSPECT nem na SBOC Reto.",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "SBOC 2026 Reto p.17",
+            "ClinicalTrials.gov NCT01515787",
+            "Onco PRO 2026 aula 16"
+          ]
+        },
         "sus": {
           "disponivel": "sim",
           "fonte": {
@@ -1368,20 +1499,36 @@
           "pagina": 17,
           "trecho": "Folfox (x 6 ciclos) ou Capox (x 4 ciclos)",
           "estado": "VERIFICADO"
-        }
+        },
+        "notaDose": "Doses do FOLFOX do braço PROSPECT (registro ClinicalTrials.gov)."
       },
       {
-        "id": "colorretal-reto-dmmr-anti-pd1",
+        "id": "colorretal-reto-dmmr-anti-pd1-neoadjuvante",
         "nome": "Anti-PD-1 por 6 meses (reto médio-baixo dMMR localmente avançado)",
-        "cenario": "reto_localmente_avancado_dMMR",
+        "cenario": "reto_localmente_avancado_dMMR_neoadjuvante",
         "linha": "neoadjuvante / definitivo",
-        "drogas": [],
-        "cicloDias": null,
-        "numeroCiclos": null,
+        "drogas": [
+          {
+            "droga": "Dostarlimabe",
+            "dose": 500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "6 meses (9 ciclos de 21 dias); sem aprovação no Brasil neste cenário",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT04165772 (dostarlimabe em dMMR localmente avançado) — https://clinicaltrials.gov/api/v2/studies/NCT04165772, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "TSR-042/Dostarlimab at a dose of 500mg IV, over 30 minutes Q 3 weeks",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 9,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
-        "pendencia": "SEM_FONTE: droga e dose não definidas na SBOC (estudo com dostarlimabe); PRO aula 16 cita dostarlimabe 500 mg sem intervalo.",
         "sus": {
           "disponivel": "nao",
           "nota": "Sem aprovação no Brasil nesse cenário. Alternativa SUS: protocolo pMMR (QT/RT ± QT), evitando QT pré-operatória exclusiva.",
@@ -1399,7 +1546,73 @@
           "pagina": 22,
           "trecho": "Imunoterapia com um anti-PD-1 durante seis meses é recomendada",
           "estado": "VERIFICADO"
-        }
+        },
+        "fonteCiclos": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT04165772 (dostarlimabe em dMMR localmente avançado) — https://clinicaltrials.gov/api/v2/studies/NCT04165772, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "up to 6 months (9, 21-day cycles) of PD-1 blockade",
+          "estado": "VERIFICADO"
+        },
+        "notaDose": "SBOC recomenda anti-PD-1 sem nomear droga; registro do estudo (dostarlimabe). Médico confirma a droga disponível.",
+        "derivadoDe": "colorretal-reto-dmmr-anti-pd1",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "id": "colorretal-reto-dmmr-anti-pd1-definitivo",
+        "nome": "Anti-PD-1 por 6 meses (reto médio-baixo dMMR localmente avançado)",
+        "cenario": "reto_localmente_avancado_dMMR_definitivo_nao_operatorio",
+        "linha": "neoadjuvante / definitivo",
+        "drogas": [
+          {
+            "droga": "Dostarlimabe",
+            "dose": 500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "6 meses (9 ciclos de 21 dias); sem aprovação no Brasil neste cenário",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT04165772 (dostarlimabe em dMMR localmente avançado) — https://clinicaltrials.gov/api/v2/studies/NCT04165772, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "TSR-042/Dostarlimab at a dose of 500mg IV, over 30 minutes Q 3 weeks",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 9,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Sem aprovação no Brasil nesse cenário. Alternativa SUS: protocolo pMMR (QT/RT ± QT), evitando QT pré-operatória exclusiva.",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 22,
+            "trecho": "imunoterapia não está aprovada no Brasil para o tratamento inicial",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "Imunoterapia com um anti-PD-1 durante seis meses é recomendada",
+          "estado": "VERIFICADO"
+        },
+        "fonteCiclos": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT04165772 (dostarlimabe em dMMR localmente avançado) — https://clinicaltrials.gov/api/v2/studies/NCT04165772, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "up to 6 months (9, 21-day cycles) of PD-1 blockade",
+          "estado": "VERIFICADO"
+        },
+        "notaDose": "SBOC recomenda anti-PD-1 sem nomear droga; registro do estudo (dostarlimabe). Médico confirma a droga disponível.",
+        "derivadoDe": "colorretal-reto-dmmr-anti-pd1",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
       },
       {
         "premedicacao": "",
@@ -1462,7 +1675,8 @@
           "pagina": 5,
           "trecho": "5-Fluorouracil 2.400 mg/m² EV (bomba de infusão de 46h) D1",
           "estado": "VERIFICADO"
-        }
+        },
+        "observacaoCenario": "Uso perioperatório (metástase hepática ressecável) deve ser protocolo próprio; este registro é do cenário metastático paliativo."
       },
       {
         "premedicacao": "",
@@ -1905,10 +2119,42 @@
         "ajusteObrigatorio": "Somente RAS selvagem.",
         "fichaId": null,
         "id": "colorretal-mfolfox6-panitumumabe",
-        "nome": "mFOLFOX6 ou FOLFIRI + panitumumabe",
+        "nome": "mFOLFOX6 + panitumumabe",
         "cenario": "metastatico_RAS_BRAF_selvagem_lado_esquerdo",
         "linha": "1ª linha",
         "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 46 h)",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
           {
             "droga": "Panitumumabe",
             "dose": 6,
@@ -1937,7 +2183,84 @@
           "pagina": 7,
           "trecho": "Panitumumabe 6 mg/kg EV D1 A cada 2 semanas",
           "estado": "VERIFICADO"
-        }
+        },
+        "composicaoDe": [
+          "colorretal-mfolfox6-met"
+        ]
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Somente RAS selvagem.",
+        "fichaId": null,
+        "id": "colorretal-folfiri-panitumumabe",
+        "nome": "FOLFIRI + panitumumabe",
+        "cenario": "metastatico_RAS_BRAF_selvagem_lado_esquerdo",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Irinotecano",
+            "dose": 180,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 46 h)",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Panitumumabe",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "somado ao doublet"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Anticorpo não incorporado ao SUS para CCRm (1ª linha). Alternativa SUS: o mesmo doublet de QT sem anticorpo, via APAC de QT do cólon/reto avançado. Uso do anticorpo só se o CACON/UNACON o custear dentro da APAC.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório de Recomendação nº 754/2022 (bevacizumabe, cetuximabe, panitumumabe 1ª linha CCRm); decisão final citada em parecer TJRJ 0806/2025 — portaria não conferida no DOU",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, os anticorpos monoclonais",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Panitumumabe 6 mg/kg EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        },
+        "composicaoDe": [
+          "colorretal-folfiri-met"
+        ]
       },
       {
         "premedicacao": "",
@@ -2218,16 +2541,15 @@
         "cicloDias": 14,
         "numeroCiclos": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada nesta curadoria. Alternativa SUS: FOLFIRI isolado (APAC 2ª linha).",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "PCDT Adenocarcinoma de Cólon e Reto — Portaria Conjunta SAES/SCTIE nº 25, de 17/11/2025 (DOU nº 236, 11/12/2025) — https://www.gov.br/conitec/pt-br/midias/protocolos/adenocarcinoma-de-colon-e-de-reto-pcdt",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "por não terem sido avaliados pela Conitec para tratamento de adenocarcinoma",
+            "estado": "VERIFICADO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "PCDT não preconiza (não avaliado pela CONITEC). Alternativa SUS: QT da APAC de 2ª linha."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2258,16 +2580,15 @@
         "cicloDias": 14,
         "numeroCiclos": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada nesta curadoria. Alternativa SUS: FOLFIRI isolado (APAC 2ª linha).",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "PCDT Adenocarcinoma de Cólon e Reto — Portaria Conjunta SAES/SCTIE nº 25, de 17/11/2025 (DOU nº 236, 11/12/2025) — https://www.gov.br/conitec/pt-br/midias/protocolos/adenocarcinoma-de-colon-e-de-reto-pcdt",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "por não terem sido avaliados pela Conitec para tratamento de adenocarcinoma",
+            "estado": "VERIFICADO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "PCDT não preconiza (não avaliado pela CONITEC). Alternativa SUS: QT da APAC de 2ª linha."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2400,16 +2721,15 @@
         "cicloDias": 28,
         "numeroCiclos": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada nesta curadoria. Alternativa SUS: suporte clínico ou retratamento com QT (APAC).",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "PCDT Adenocarcinoma de Cólon e Reto — Portaria Conjunta SAES/SCTIE nº 25, de 17/11/2025 (DOU nº 236, 11/12/2025) — https://www.gov.br/conitec/pt-br/midias/protocolos/adenocarcinoma-de-colon-e-de-reto-pcdt",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "por não terem sido avaliados pela Conitec para tratamento de adenocarcinoma",
+            "estado": "VERIFICADO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "PCDT não preconiza (não avaliado pela CONITEC). Alternativa SUS: QT da APAC de 2ª linha."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2440,16 +2760,15 @@
         "cicloDias": 28,
         "numeroCiclos": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada nesta curadoria. Alternativa SUS: suporte clínico ou retratamento com QT (APAC).",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "PCDT Adenocarcinoma de Cólon e Reto — Portaria Conjunta SAES/SCTIE nº 25, de 17/11/2025 (DOU nº 236, 11/12/2025) — https://www.gov.br/conitec/pt-br/midias/protocolos/adenocarcinoma-de-colon-e-de-reto-pcdt",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "por não terem sido avaliados pela Conitec para tratamento de adenocarcinoma",
+            "estado": "VERIFICADO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "PCDT não preconiza (não avaliado pela CONITEC). Alternativa SUS: QT da APAC de 2ª linha."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2488,16 +2807,15 @@
         "cicloDias": 28,
         "numeroCiclos": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada nesta curadoria. Alternativa SUS: suporte clínico ou retratamento com QT (APAC).",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "PCDT Adenocarcinoma de Cólon e Reto — Portaria Conjunta SAES/SCTIE nº 25, de 17/11/2025 (DOU nº 236, 11/12/2025) — https://www.gov.br/conitec/pt-br/midias/protocolos/adenocarcinoma-de-colon-e-de-reto-pcdt",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "por não terem sido avaliados pela Conitec para tratamento de adenocarcinoma",
+            "estado": "VERIFICADO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "PCDT não preconiza (não avaliado pela CONITEC). Alternativa SUS: QT da APAC de 2ª linha."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2536,16 +2854,15 @@
         "cicloDias": 28,
         "numeroCiclos": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada nesta curadoria. Alternativa SUS: QT convencional por APAC.",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2584,16 +2901,15 @@
         "cicloDias": 28,
         "numeroCiclos": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada nesta curadoria. Alternativa SUS: mFOLFOX6 ± QT por APAC.",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2624,16 +2940,15 @@
         "cicloDias": 21,
         "numeroCiclos": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada nesta curadoria. Alternativa SUS: QT convencional por APAC.",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 74/2023 (publ. 29/12/2023), Relatório CONITEC nº 863; citado no PCDT Cólon e Reto 2025 — https://www.gov.br/conitec/pt-br/midias/protocolos/adenocarcinoma-de-colon-e-de-reto-pcdt",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "não foi incorporado para o tratamento de pacientes com câncer de cólon e reto",
+            "estado": "VERIFICADO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Não incorporado (dMMR/MSI-H 1ª linha). Alternativa SUS: QT da APAC 1ª linha."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2664,16 +2979,15 @@
         "cicloDias": 14,
         "numeroCiclos": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada nesta curadoria. Alternativa SUS: QT convencional por APAC.",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2721,16 +3035,15 @@
         "numeroCiclos": 4,
         "observacao": "Indução q21d x4, depois nivolumabe 480 mg q28d. A tabela de doses da SBOC (p.8) traz outro intervalo — ver conflitos.",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada nesta curadoria. Alternativa SUS: QT convencional por APAC.",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2761,16 +3074,15 @@
         "cicloDias": 21,
         "numeroCiclos": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada nesta curadoria. Alternativa SUS: QT convencional por APAC.",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2809,16 +3121,15 @@
         "cicloDias": 14,
         "numeroCiclos": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada nesta curadoria. Alternativa SUS: QT convencional por APAC.",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
         },
         "fonte": {
           "tipo": "BULA",
@@ -2856,16 +3167,15 @@
         "cicloDias": 28,
         "numeroCiclos": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada nesta curadoria. Alternativa SUS: QT convencional por APAC.",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 72/2021 (publ. 07/12/2021), Relatório CONITEC nº 679 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2021/20211207_portaria_72.pdf",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "o larotrectinibe para o tratamento de adultos e crianças com tumores sólidos",
+            "estado": "VERIFICADO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Não incorporado para adultos. Só o subgrupo pediátrico foi incorporado (Portaria SECTICS/MS nº 71/2025)."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2881,14 +3191,20 @@
         "cenario": "reto_qtrt_curso_longo",
         "doseTotalGy": 50.4,
         "doseTotalFaixa": "50–50,4 Gy",
-        "fracoes": null,
-        "pendencia": "SEM_FONTE: fracionamento não informado pela SBOC",
+        "fracoes": 28,
         "concomitante": "capecitabina 825 mg/m² 12/12h nos dias de RT ou 5-FU 225 mg/m²/dia IC (ou 5-FU bolus semanas 1 e 5)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
           "pagina": 17,
           "trecho": "RT 50–50,4 Gy associada a:",
+          "estado": "VERIFICADO"
+        },
+        "fonteFracoes": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT00349076 (CAO/ARO/AIO-04) — https://clinicaltrials.gov/api/v2/studies/NCT00349076, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "28 fractions; single dose: 1,8 Gy once per day",
           "estado": "VERIFICADO"
         }
       },
@@ -3741,16 +4057,66 @@
     ]
   },
   "pendencias": [
-    "SEM_FONTE: doses de FOLFOX/CAPOX de consolidação e de mFOLFOX/CAPOX do PROSPECT no reto (SBOC Reto não traz).",
-    "SEM_FONTE: doses do mFOLFIRINOX de indução (PRODIGE-23) no reto.",
-    "SEM_FONTE: droga/dose/intervalo do anti-PD-1 no reto dMMR.",
-    "SEM_FONTE: fracionamento da RT longa (50–50,4 Gy) no reto.",
-    "SEM_FONTE: emetogenicidade e risco de neutropenia febril por esquema.",
-    "SEM_ID_NO_CATALOGO: PIK3CA, RAS/BRAF, NTRK, DPYD, ctDNA, ultrassom endoscópico retal.",
-    "SUS: confirmar no DOU a portaria final do Relatório CONITEC 754/2022 (anticorpos 1ª linha) e verificar CONITEC para imunoterapia, encorafenibe, T-DXd, sotorasibe, regorafenibe, trifluridina/tipiracila.",
-    "Edição AJCC: SBOC 2026 não declara; 8ª vem do curso (INFERIDO).",
-    "Fichas institucionais FOLFOX e FOLFIRI paliativas sem bolus de 5-FU 400 mg/m²; ficha FOLFOXIRI com LV 400 — revisar fichas (fora do WRITE_SET).",
-    "deGramont '1.200 mg/m² 46 h' da SBOC (p.12) omitido até esclarecimento."
+    {
+      "texto": "SEM_FONTE: doses de FOLFOX/CAPOX de consolidação e de mFOLFOX/CAPOX do PROSPECT no reto (SBOC Reto não traz).",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC 2026 Reto p.13/17",
+        "Onco PRO 2026 aula 16",
+        "ClinicalTrials.gov NCT02008656 (OPRA, sem doses no registro)",
+        "ClinicalTrials.gov NCT01515787 (PROSPECT)"
+      ],
+      "nota": "FOLFOX do PROSPECT resolvido; restam doses do FOLFOX/CAPOX de consolidação (TNT) e do CAPOX do PROSPECT."
+    },
+    {
+      "texto": "SEM_FONTE: emetogenicidade e risco de neutropenia febril por esquema.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC 2026 cólon/reto",
+        "Onco PRO 2026 aulas 87-88"
+      ]
+    },
+    {
+      "texto": "SEM_ID_NO_CATALOGO: PIK3CA, RAS/BRAF, NTRK, DPYD, ctDNA, ultrassom endoscópico retal.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json (164 ids)"
+      ]
+    },
+    {
+      "texto": "SUS: confirmar no DOU a portaria final do Relatório CONITEC 754/2022 (anticorpos 1ª linha) e verificar CONITEC para imunoterapia, encorafenibe, T-DXd, sotorasibe, regorafenibe, trifluridina/tipiracila.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Planilha CONITEC 15/06/2026",
+        "Painel de Demandas CONITEC",
+        "busca gov.br/conitec",
+        "DOU (portarias citadas)"
+      ],
+      "nota": "sus.disponivel preenchido em todos os protocolos com portaria/relatório quando existe. Sem avaliação CONITEC (registrado 'nao', INFERIDO): encorafenibe-cetuximabe, encorafenibe-cetuximabe-mfolfox6, nivolumabe, nivolumabe-ipilimumabe, trastuzumabe-deruxtecana, sotorasibe-panitumumabe."
+    },
+    {
+      "texto": "Edição AJCC: SBOC 2026 não declara; 8ª vem do curso (INFERIDO).",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026 cólon localizado/avançado e reto",
+        "Onco PRO 2026 aula 12"
+      ]
+    },
+    {
+      "texto": "Fichas institucionais FOLFOX e FOLFIRI paliativas sem bolus de 5-FU 400 mg/m²; ficha FOLFOXIRI com LV 400 — revisar fichas (fora do WRITE_SET).",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "corpus/fichas/colon-reto",
+        "SBOC 2026"
+      ]
+    },
+    {
+      "texto": "deGramont '1.200 mg/m² 46 h' da SBOC (p.12) omitido até esclarecimento.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026 cólon localizado p.12"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -3771,7 +4137,8 @@
         "estado": "VERIFICADO"
       },
       "fonteBDetalhe": "Ficha: LV 400, sem bolus, 5-FU 3.200 46 h (FOLFOXIRI clássico/TRIBE não usa bolus)",
-      "escolhaSeguranca": "Omitir o bolus no pack (menor exposição a 5-FU); LV e bolus para decisão do médico."
+      "escolhaSeguranca": "Omitir o bolus no pack (menor exposição a 5-FU); LV e bolus para decisão do médico.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "mFOLFOX6 e FOLFIRI — bolus de 5-FU 400 mg/m²",
@@ -3790,7 +4157,8 @@
         "estado": "VERIFICADO"
       },
       "fonteBDetalhe": "Fichas sem a linha de bolus",
-      "escolhaSeguranca": "Pack registra o esquema SBOC; fichas marcadas para revisão; prescrição pela ficha exige conferência manual do bolus."
+      "escolhaSeguranca": "Pack registra o esquema SBOC; fichas marcadas para revisão; prescrição pela ficha exige conferência manual do bolus.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Esquema Mayo — dose de 5-FU",
@@ -3808,7 +4176,8 @@
         "trecho": "MAYO CLINIC: 5-FU 370mg/m2 D1-D5 q28d (x 6)",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Vale a SBOC (425 mg/m², igual à ficha e à aula 14 do próprio curso); 370 mg/m² é a dose do QUASAR semanal."
+      "escolhaSeguranca": "Vale a SBOC (425 mg/m², igual à ficha e à aula 14 do próprio curso); 370 mg/m² é a dose do QUASAR semanal.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Nivolumabe + ipilimumabe — intervalo",
@@ -3827,7 +4196,8 @@
         "trecho": "nivolumabe 240 mg + ipilimumabe 1 mg/kg a cada 3 semanas por 4 doses",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Pack usa o esquema do CheckMate-8HW descrito na própria SBOC p.17 (indução de 4 doses e depois nivolumabe 480 mg q4s). O médico confirma."
+      "escolhaSeguranca": "Pack usa o esquema do CheckMate-8HW descrito na própria SBOC p.17 (indução de 4 doses e depois nivolumabe 480 mg q4s). O médico confirma.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Capecitabina — 1.000 × 1.250 mg/m² 12/12h",
@@ -3845,7 +4215,8 @@
         "trecho": "dose original do estudo ter sido de 1.250 mg/m² VO 12/12h",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "1.000 mg/m² 12/12h (menor dose, prática recomendada pela SBOC)."
+      "escolhaSeguranca": "1.000 mg/m² 12/12h (menor dose, prática recomendada pela SBOC).",
+      "decisaoNecessaria": false
     },
     {
       "tema": "deGramont 'não modificado' — 5-FU 1.200 mg/m² em 46 h",
@@ -3864,7 +4235,8 @@
         "estado": "VERIFICADO"
       },
       "fonteBDetalhe": "O LV5FU2 original usa 600 mg/m² em 22 h D1–D2; 1.200 em 46 h pode ser dose diária mal transcrita",
-      "escolhaSeguranca": "Esquema não entra no pack; usar o deGramont modificado."
+      "escolhaSeguranca": "Esquema não entra no pack; usar o deGramont modificado.",
+      "decisaoNecessaria": false
     }
   ],
   "curadoria": {
@@ -3882,6 +4254,43 @@
       "CONITEC Relatório 754/2022 (via pareceres TJRJ/TJMG)",
       "Fichas corpus/fichas/colon-reto e reto"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "reducaoPendencias20261011": {
+      "data": "2026-10-11",
+      "resolvidas": [
+        {
+          "pendencia": "SEM_FONTE: doses do mFOLFIRINOX de indução (PRODIGE-23) no reto.",
+          "como": "PRODIGE 23 (NCT01804790): oxaliplatina 85, irinotecano 180, LV 400, 5-FU 2.400 mg/m² 48 h, q14 × 6."
+        },
+        {
+          "pendencia": "SEM_FONTE: droga/dose/intervalo do anti-PD-1 no reto dMMR.",
+          "como": "Dostarlimabe 500 mg q3s × 9 (NCT04165772)."
+        },
+        {
+          "pendencia": "SEM_FONTE: fracionamento da RT longa (50–50,4 Gy) no reto.",
+          "como": "50,4 Gy em 28 frações de 1,8 Gy (CAO/ARO/AIO-04, NCT00349076)."
+        }
+      ]
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): A02 combinação representada só pelo anticorpo",
+      "acao": "doublet copiado dos protocolos-base do mesmo pack (mesma fonte SBOC) + panitumumabe; FOLFIRI separado"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): cenários misturados no mesmo protocolo",
+      "acao": "colorretal-reto-dmmr-anti-pd1 dividido em colorretal-reto-dmmr-anti-pd1-neoadjuvante, colorretal-reto-dmmr-anti-pd1-definitivo"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "3 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
 }

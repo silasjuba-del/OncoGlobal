@@ -122,8 +122,8 @@
         {
           "alvo": "IDH1 e IDH2 (mutações não-R132H)",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "IDH1 não expresso por IHQ e idade <55 anos ou glioma difuso prévio",
           "consequencia": "Evita classificar como IDH-selvagem um IDH-mutado não-R132H",
@@ -135,8 +135,8 @@
             "trecho": "Sequenciamento (NGS) para IDH1 e IDH2 é recomendado em pacientes com",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "Codeleção 1p/19q",
@@ -159,13 +159,14 @@
             "pagina": 25,
             "trecho": "Avaliação por FISH ou NGS",
             "estado": "INFERIDO"
-          }
+          },
+          "faturamentoNaoDemonstrado": true
         },
         {
           "alvo": "Codeleção 1p/19q",
           "metodo": "NGS",
-          "catalogoId": "FISH",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "Alternativa ao FISH",
           "consequencia": "Idem",
@@ -184,13 +185,14 @@
             "trecho": "Avaliação por FISH ou NGS",
             "estado": "INFERIDO"
           },
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "FISH"
         },
         {
           "alvo": "Metilação do promotor de MGMT",
           "metodo": "outro",
           "catalogoId": null,
-          "pendencia": "SEM_ID_NO_CATALOGO; METODO_SEM_FONTE (SBOC e aula não especificam PCR metilação-específica × pirossequenciamento)",
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "universal",
           "cenario": "Glioblastoma",
           "consequencia": "Prognóstico e benefício da TMZ; KPS <60: metilado → TMZ isolada, não metilado → RT isolada",
@@ -201,13 +203,15 @@
             "pagina": 6,
             "trecho": "Pesquisa da metilação da região promotora de MGMT é recomendada em",
             "estado": "VERIFICADO"
-          }
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "Mutação do promotor de TERT / amplificação de EGFR / +7/-10",
           "metodo": "outro",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "SEM_ID_NO_CATALOGO; METODO_SEM_FONTE",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "Astrocitoma IDH-selvagem sem critérios histológicos de grau 4",
           "consequencia": "Qualquer uma reclassifica como glioblastoma IDH-selvagem",
@@ -219,8 +223,8 @@
             "trecho": "mutação de TERT, amplificação de EGFR",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "BRAF V600E",
@@ -241,8 +245,8 @@
         {
           "alvo": "BRAF V600E",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "Considerar na recorrência",
           "consequencia": "Dabrafenibe + trametinibe",
@@ -254,14 +258,14 @@
             "trecho": "Pesquisa de BRAF-V600E pode ser avaliada por IHQ e sequenciamento.",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "Fusões NTRK",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "Recorrência; NÃO usar IHQ (falso positivo)",
           "consequencia": "Larotrectinibe",
@@ -273,8 +277,8 @@
             "trecho": "devem ser avaliadas por NGS, não por IHQ",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "FISH",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "CDKN2A/B (perda homozigótica)",
@@ -291,6 +295,14 @@
             "pagina": 4,
             "trecho": "IDH1, IDH2, ATRX, p53, CDKN2A/B",
             "estado": "VERIFICADO"
+          },
+          "pendenciaClasse": {
+            "texto": "CDKN2A/B (perda homozigótica) é deleção, não mutação pontual: método (FISH × NGS/MLPA) não definido pela SBOC; FISH genérico existe no catálogo.",
+            "classe": "DECISAO_CLINICA_DR_SILAS",
+            "buscasFeitas": [
+              "SBOC Gliomas 2026",
+              "catálogo v1.1"
+            ]
           }
         }
       ]
@@ -605,9 +617,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Tumor Cerebral no Adulto — Portaria Conjunta SAES/SCTIE nº 7, de 13/04/2020 (gov.br/conitec ddt-tumorcerebraladulto.pdf)",
+            "pagina": 17,
+            "trecho": "A TMZ é administrada diariamente (7 dias por semana) durante a radioterapia",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "DDT 2020 (p.16-17) recomenda TMZ concomitante e adjuvante; SIGTAP 03.04.02.032-0 cobre QT 'isolada ou per ou pós radioterapia' na doença inoperável (primária ou recidivada). A Portaria SCTIE/MS nº 35/2014 não incorporou TMZ no adjuvante de glioma de alto grau (compra centralizada) — no ressecado, o acesso depende do enquadramento da APAC no serviço."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -638,9 +656,15 @@
         "ajusteObrigatorio": null,
         "fichaId": "FICHA.gliomas.temozolomida-monoterapia-ciclo-1__adjuvante@1.0.0",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Tumor Cerebral no Adulto — Portaria Conjunta SAES/SCTIE nº 7, de 13/04/2020 (gov.br/conitec ddt-tumorcerebraladulto.pdf)",
+            "pagina": 17,
+            "trecho": "A TMZ é administrada diariamente (7 dias por semana) durante a radioterapia",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "DDT 2020 (p.16-17) recomenda TMZ concomitante e adjuvante; SIGTAP 03.04.02.032-0 cobre QT 'isolada ou per ou pós radioterapia' na doença inoperável (primária ou recidivada). A Portaria SCTIE/MS nº 35/2014 não incorporou TMZ no adjuvante de glioma de alto grau (compra centralizada) — no ressecado, o acesso depende do enquadramento da APAC no serviço."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -671,9 +695,15 @@
         "ajusteObrigatorio": null,
         "fichaId": "FICHA.gliomas.temozolomida-monoterapia-ciclos-2-em-diante__adjuvante@1.0.0",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Tumor Cerebral no Adulto — Portaria Conjunta SAES/SCTIE nº 7, de 13/04/2020 (gov.br/conitec ddt-tumorcerebraladulto.pdf)",
+            "pagina": 17,
+            "trecho": "A TMZ é administrada diariamente (7 dias por semana) durante a radioterapia",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "DDT 2020 (p.16-17) recomenda TMZ concomitante e adjuvante; SIGTAP 03.04.02.032-0 cobre QT 'isolada ou per ou pós radioterapia' na doença inoperável (primária ou recidivada). A Portaria SCTIE/MS nº 35/2014 não incorporou TMZ no adjuvante de glioma de alto grau (compra centralizada) — no ressecado, o acesso depende do enquadramento da APAC no serviço."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -705,9 +735,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Tumor Cerebral no Adulto — Portaria Conjunta SAES/SCTIE nº 7, de 13/04/2020 (gov.br/conitec ddt-tumorcerebraladulto.pdf)",
+            "pagina": 17,
+            "trecho": "A TMZ é administrada diariamente (7 dias por semana) durante a radioterapia",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "DDT 2020 (p.16-17) recomenda TMZ concomitante e adjuvante; SIGTAP 03.04.02.032-0 cobre QT 'isolada ou per ou pós radioterapia' na doença inoperável (primária ou recidivada). A Portaria SCTIE/MS nº 35/2014 não incorporou TMZ no adjuvante de glioma de alto grau (compra centralizada) — no ressecado, o acesso depende do enquadramento da APAC no serviço."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -718,9 +754,9 @@
         }
       },
       {
-        "id": "gliomas-pcv",
+        "id": "gliomas-pcv-adjuvante",
         "nome": "PCV (procarbazina, lomustina, vincristina)",
-        "cenario": "adjuvante pós-RT — IDH-mutado grau 2 e oligodendroglioma grau 3; recorrência",
+        "cenario": "adjuvante pós-RT — IDH-mutado grau 2 e oligodendroglioma grau 3",
         "linha": "adjuvante",
         "drogas": [
           {
@@ -754,15 +790,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "parcial",
           "fonte": {
-            "tipo": "SBOC",
-            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
-            "pagina": 15,
-            "trecho": "A procarbazina e a lomustina não são mais produzidas no Brasil.",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.032-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE TUMOR DO SISTEMA NERVOSO CENTRAL",
             "estado": "VERIFICADO"
           },
-          "observacao": "Indisponibilidade de produção nacional."
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. DDT 2020 recomenda PCV após RT no baixo grau (p.13). Lomustina e procarbazina não são produzidas no Brasil (SBOC p.15) — depende de importação."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -771,7 +807,67 @@
           "trecho": "Lomustina (CCNU)* 110 mg/m² VO D1",
           "estado": "VERIFICADO"
         },
-        "observacao": "Intervalo SBOC: a cada 6 a 8 semanas. SBOC: procarbazina e lomustina não são mais produzidas no Brasil; na indisponibilidade de lomustina, substituir por carmustina."
+        "observacao": "Intervalo SBOC: a cada 6 a 8 semanas. SBOC: procarbazina e lomustina não são mais produzidas no Brasil; na indisponibilidade de lomustina, substituir por carmustina.",
+        "derivadoDe": "gliomas-pcv",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "id": "gliomas-pcv-recorrencia",
+        "nome": "PCV (procarbazina, lomustina, vincristina)",
+        "cenario": "recorrência",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Lomustina",
+            "dose": 110,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Procarbazina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D8 a D21",
+            "observacao": ""
+          },
+          {
+            "droga": "Vincristina",
+            "dose": 1.4,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D8, D29",
+            "observacao": "dose máxima 2 mg/dia"
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": 6,
+        "premedicacao": "Antiemético 30-60 min antes da lomustina; dieta pobre em tiramina e sem álcool com procarbazina.",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.032-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE TUMOR DO SISTEMA NERVOSO CENTRAL",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. DDT 2020 recomenda PCV após RT no baixo grau (p.13). Lomustina e procarbazina não são produzidas no Brasil (SBOC p.15) — depende de importação."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Lomustina (CCNU)* 110 mg/m² VO D1",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Intervalo SBOC: a cada 6 a 8 semanas. SBOC: procarbazina e lomustina não são mais produzidas no Brasil; na indisponibilidade de lomustina, substituir por carmustina.",
+        "derivadoDe": "gliomas-pcv",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
       },
       {
         "id": "gliomas-carmustina",
@@ -794,9 +890,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.032-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE TUMOR DO SISTEMA NERVOSO CENTRAL",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. DDT 2020 (p.17): nitrosureia (carmustina) na recidiva."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -829,7 +931,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Vorasidenibe: nenhuma demanda nem portaria de incorporação na Conitec para glioma IDH-mutado; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -863,7 +974,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Bevacizumabe: nenhuma demanda nem portaria de incorporação na Conitec para glioma de alto grau recorrente (citado como opção no DDT 2020, p.17, mas sem demanda/portaria de incorporação); não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -904,7 +1024,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Dabrafenibe + trametinibe: nenhuma demanda nem portaria de incorporação na Conitec para glioma BRAF V600E; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -935,9 +1064,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 72, de 06/12/2021 (DOU 07/12/2021, s.1, p.160) — cópia BVS SES-SP U_PT-MS-SCTIE-72_061221.pdf",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, o larotrectinibe",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Não incorporado em adultos (Portaria SCTIE/MS 72/2021)."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -954,13 +1089,20 @@
         "doseTotalGy": 60,
         "fracoes": 30,
         "concomitante": "Temozolomida 75 mg/m²/dia",
-        "observacao": "SBOC recomenda 'RT 3D ou IMRT' sem dose explícita; 60 Gy/30 fr aparece na aula PRO e como braço de estudos na SBOC (p.14-15).",
+        "observacao": "SBOC recomenda 'RT 3D ou IMRT' sem dose explícita; 60 Gy/30 fr aparece na aula PRO e como braço de estudos na SBOC (p.14-15). DDT 2020 (p.16) confirma 60 Gy a 1,8-2 Gy/fração.",
         "fonte": {
           "tipo": "CURSO",
           "referencia": "Onco PRO 2026/slides-pro-2026/76 - Aula 76 - Gliomas - Parte 2",
           "pagina": 11,
           "trecho": "Radioterapia 60 Gy (30 frações) ou 40 Gy com hipofracionamento (15 frações)",
           "estado": "INFERIDO"
+        },
+        "fonteDiretriz": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Tumor Cerebral no Adulto — Portaria Conjunta SAES/SCTIE nº 7, de 13/04/2020 (gov.br/conitec ddt-tumorcerebraladulto.pdf)",
+          "pagina": 16,
+          "trecho": "Dose: 60 Gy (1,8 a 2 Gy / dia – 5 dias/semana)",
+          "estado": "VERIFICADO"
         }
       },
       {
@@ -1016,6 +1158,14 @@
           "pagina": 12,
           "trecho": "RT (59,4 Gy/30 frações) seguido de Temozolomida adjuvante 12 ciclos",
           "estado": "CONFLITANTE"
+        },
+        "pendenciaClasse": {
+          "texto": "Fracionamento de RT — aceno geral.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC",
+            "DDT 2020"
+          ]
         }
       },
       {
@@ -1030,16 +1180,29 @@
           "pagina": 13,
           "trecho": "RT (60 Gy) seguido de PCV 6 ciclos",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "Fracionamento de RT — aceno geral.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC",
+            "DDT 2020"
+          ]
         }
       },
       {
         "cenario": "Glioma IDH-mutado grau 2 com indicação de RT (→ PCV ou TMZ)",
-        "doseTotalGy": null,
-        "fracoes": null,
+        "doseTotalGy": 54,
+        "fracoes": 30,
         "concomitante": "nenhuma",
-        "pendencia": "SEM_FONTE",
-        "observacao": "SBOC cita 50-54 Gy apenas no contexto do estudo de RT isolada precoce (EORTC 22845); não registrado como recomendação.",
-        "fonte": null
+        "observacao": "DDT 2020: RT 54 Gy/30 fr seguida de PCV por 6 ciclos (dose usual 50,4-54 Gy a 1,8 Gy/dia). SBOC cita 50-54 Gy.",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Tumor Cerebral no Adulto — Portaria Conjunta SAES/SCTIE nº 7, de 13/04/2020 (gov.br/conitec ddt-tumorcerebraladulto.pdf)",
+          "pagina": 13,
+          "trecho": "radioterapia 54 Gy em 30 frações associado a quimioterapia com PCV",
+          "estado": "VERIFICADO"
+        }
       }
     ],
     "cirurgia": [
@@ -1437,13 +1600,50 @@
     ]
   },
   "pendencias": [
-    "Método de MGMT, TERT e CDKN2A/B não especificado (SBOC/aula) — definir com patologia; catálogo sem ids moleculares além de FISH/IHQ.",
-    "Fracionamento da RT no astrocitoma IDH-mutado graus 3-4 em conflito (30 × 33 frações); oligodendroglioma grau 3 (60 Gy) sem fracionamento.",
-    "SEM_FONTE: dose de RT no glioma IDH-mutado grau 2 com indicação de RT (só contexto de estudo).",
-    "GBM <70 anos: 60 Gy/30 fr vem da aula PRO (INFERIDO); SBOC não explicita dose.",
-    "Lomustina e procarbazina não produzidas no Brasil: PCV depende de importação; substituto carmustina (SBOC).",
-    "SUS: temozolomida, vorasidenibe, bevacizumabe, BRAF/MEK e larotrectinibe sem dado de incorporação verificado no pack.",
-    "Doses de reirradiação, de TMZ em regime metronômico (RESCUE 50 mg/m²) e de platina na recorrência não registradas como protocolo (contexto de estudo ou sem dose)."
+    {
+      "texto": "MGMT (PCR metilação-específica) e TERT mapeados para MOLECULAR_PCR_MUTACAO (alt. SEQUENCIAMENTO_AMPLICON), faturamento a confirmar. Método exato e CDKN2A/B (deleção) seguem para definição com a patologia.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC Gliomas 2026 p.6",
+        "Onco PRO aulas 75-76",
+        "catálogo v1.1"
+      ]
+    },
+    {
+      "texto": "Fracionamento 59,4 Gy (30 × 33 fr) e oligodendroglioma grau 3 sem frações — RT fora do escopo de oncologia clínica; DDT 2020 (p.16) admite 1,8-2 Gy/dia.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "SBOC Gliomas p.12-13",
+        "Onco PRO aula 76",
+        "DDT Tumor Cerebral 2020"
+      ]
+    },
+    {
+      "texto": "PCV depende de importação de lomustina/procarbazina (SBOC p.15); substituição por carmustina é decisão do médico/serviço.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC Gliomas p.15",
+        "DDT 2020 p.13"
+      ]
+    },
+    {
+      "texto": "TMZ: parcial (DDT 2020 + APAC 03.04.02.032-0; Portaria SCTIE 35/2014 negou incorporação adjuvante). Carmustina: APAC. Larotrectinibe: não incorporado (Portaria SCTIE 72/2021). Vorasidenibe, bevacizumabe e BRAF/MEK: sem demanda nem portaria na Conitec.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Painel de Demandas Conitec (exportação 15/06/2026)",
+        "TecnologiasDemandadas Conitec 15/04/2026",
+        "web: gov.br/conitec, Conass Informa"
+      ]
+    },
+    {
+      "texto": "Reirradiação (aceno de RT), TMZ em dose protraída 50 mg/m² (DDT 2020 p.17 e SBOC citam a dose sem dias/ciclo) e platina na recorrência ficam fora como protocolo.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC Gliomas p.16-17",
+        "DDT 2020 p.17",
+        "Onco PRO aula 76"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -1462,7 +1662,27 @@
         "trecho": "59,4 Gy em 33 frações",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Manter 59,4 Gy e deixar frações em aberto para o radio-oncologista; 33 frações (1,8 Gy/fr) é a forma clássica e menos intensa por fração"
+      "escolhaSeguranca": "Manter 59,4 Gy e deixar frações em aberto para o radio-oncologista; 33 frações (1,8 Gy/fr) é a forma clássica e menos intensa por fração",
+      "decisaoNecessaria": true
+    },
+    {
+      "tema": "Temozolomida adjuvante no SUS",
+      "fonteA": {
+        "tipo": "DIRETRIZ",
+        "referencia": "DDT Tumor Cerebral no Adulto — Portaria Conjunta SAES/SCTIE nº 7, de 13/04/2020 (gov.br/conitec ddt-tumorcerebraladulto.pdf)",
+        "pagina": 17,
+        "trecho": "A TMZ é administrada diariamente (7 dias por semana) durante a radioterapia",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "NORMA",
+        "referencia": "Painel de Demandas Conitec (exportação 15/06/2026) — Temozolomida, pós-operatório de gliomas de alto grau (decisão 26/09/2014, Portaria SCTIE/MS 35/2014)",
+        "pagina": null,
+        "trecho": "Processo encerrado: decisão de não incorporação no SUS",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Registrar como 'parcial': diretriz SUS de 2020 recomenda; incorporação centralizada negada em 2014. Médico confirma o enquadramento de APAC no serviço.",
+      "decisaoNecessaria": true
     }
   ],
   "curadoria": {
@@ -1472,8 +1692,36 @@
       "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Gliomas-v5-VERSAO-PARA-COLABORACAO.pdf",
       "Onco PRO 2026/slides-pro-2026/75 - Aula 75 - Gliomas - Parte 1",
       "Onco PRO 2026/slides-pro-2026/76 - Aula 76 - Gliomas - Parte 2",
-      "ClinicalTrials.gov API v2"
+      "ClinicalTrials.gov API v2",
+      "DDT Tumor Cerebral no Adulto — Portaria Conjunta SAES/SCTIE nº 7, de 13/04/2020 (gov.br/conitec ddt-tumorcerebraladulto.pdf)",
+      "SIGTAP competência 09/2026",
+      "Portaria SCTIE/MS 72/2021",
+      "Painel de Demandas Conitec 15/06/2026"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-11",
+        "redator": "Claude (agente curador)",
+        "resolvidas": 2,
+        "classificadas": 5,
+        "susPreenchidos": 7,
+        "notas": []
+      }
+    ]
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): cenários misturados no mesmo protocolo",
+      "acao": "gliomas-pcv dividido em gliomas-pcv-adjuvante, gliomas-pcv-recorrencia"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "6 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
 }

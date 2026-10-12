@@ -117,6 +117,13 @@
           "pagina": 7,
           "trecho": "Avaliação de LFN de cadeia de drenagem através de USG pode ser",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "USG de cadeia linfonodal sem id no catálogo (USG_AXILAS cobre só axila).",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1"
+          ]
         }
       }
     ],
@@ -162,8 +169,8 @@
         {
           "alvo": "BRAF V600 (E/K)",
           "metodo": "PCR",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "SEM_ID_NO_CATALOGO; METODO_NAO_ESPECIFICADO_SBOC",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "universal",
           "cenario": "Estádio III e doença avançada/irressecável",
           "consequencia": "Mutado: opção BRAF/MEK adjuvante (III) e na doença avançada; não muda a preferência por imunoterapia em 1ª linha",
@@ -175,14 +182,14 @@
             "trecho": "todo paciente com melanoma estádio III deve ser submetido à investigação",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "BRAF V600 (E/K)",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "SEM_ID_NO_CATALOGO; METODO_NAO_ESPECIFICADO_SBOC",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "universal",
           "cenario": "Doença avançada/irressecável (permite KIT, NRAS, NTRK no mesmo painel)",
           "consequencia": "Idem; painel também detecta fusões NTRK (larotrectinibe)",
@@ -194,8 +201,8 @@
             "trecho": "Todos os pacientes com melanoma avançado/irressecável devem ser",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "BRAF V600E",
@@ -217,8 +224,8 @@
         {
           "alvo": "KIT, NRAS, fusões NTRK",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "Estádio IV, quando disponível",
           "consequencia": "NTRK: larotrectinibe; KIT/NRAS sem drogas aprovadas",
@@ -230,8 +237,8 @@
             "trecho": "A pesquisa de mutações adicionais como KIT, NRAS e fusões de NTRK",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         }
       ]
     }
@@ -499,15 +506,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
             "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
             "pagina": 29,
             "trecho": "no SUS da alfainterferona para a quimioterapia adjuvante do melanoma cutâneo",
-            "estado": "VERIFICADO"
+            "estado": "INFERIDO"
           },
-          "observacao": "DDT 2022 contempla alfainterferona adjuvante no estádio III; anti-PD-1 e BRAF/MEK adjuvantes não constam como incorporados."
+          "observacao": "DDT 2022: a única adjuvância incorporada é a alfainterferona (estádio III); anti-PD-1 e BRAF/MEK foram incorporados só para 1ª linha do melanoma avançado não cirúrgico/metastático (Portarias SCTIE 2020). Alternativa SUS: alfainterferona (III) ou seguimento."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -539,15 +546,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
             "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
             "pagina": 29,
             "trecho": "no SUS da alfainterferona para a quimioterapia adjuvante do melanoma cutâneo",
-            "estado": "VERIFICADO"
+            "estado": "INFERIDO"
           },
-          "observacao": "DDT 2022 contempla alfainterferona adjuvante no estádio III; anti-PD-1 e BRAF/MEK adjuvantes não constam como incorporados."
+          "observacao": "DDT 2022: a única adjuvância incorporada é a alfainterferona (estádio III); anti-PD-1 e BRAF/MEK foram incorporados só para 1ª linha do melanoma avançado não cirúrgico/metastático (Portarias SCTIE 2020). Alternativa SUS: alfainterferona (III) ou seguimento."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -578,15 +585,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
             "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
             "pagina": 29,
             "trecho": "no SUS da alfainterferona para a quimioterapia adjuvante do melanoma cutâneo",
-            "estado": "VERIFICADO"
+            "estado": "INFERIDO"
           },
-          "observacao": "DDT 2022 contempla alfainterferona adjuvante no estádio III; anti-PD-1 e BRAF/MEK adjuvantes não constam como incorporados."
+          "observacao": "DDT 2022: a única adjuvância incorporada é a alfainterferona (estádio III); anti-PD-1 e BRAF/MEK foram incorporados só para 1ª linha do melanoma avançado não cirúrgico/metastático (Portarias SCTIE 2020). Alternativa SUS: alfainterferona (III) ou seguimento."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -625,15 +632,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
             "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
             "pagina": 29,
             "trecho": "no SUS da alfainterferona para a quimioterapia adjuvante do melanoma cutâneo",
-            "estado": "VERIFICADO"
+            "estado": "INFERIDO"
           },
-          "observacao": "DDT 2022 contempla alfainterferona adjuvante no estádio III; anti-PD-1 e BRAF/MEK adjuvantes não constam como incorporados."
+          "observacao": "DDT 2022: a única adjuvância incorporada é a alfainterferona (estádio III); anti-PD-1 e BRAF/MEK foram incorporados só para 1ª linha do melanoma avançado não cirúrgico/metastático (Portarias SCTIE 2020). Alternativa SUS: alfainterferona (III) ou seguimento."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -713,15 +720,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
             "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
             "pagina": 29,
             "trecho": "no SUS da alfainterferona para a quimioterapia adjuvante do melanoma cutâneo",
-            "estado": "VERIFICADO"
+            "estado": "INFERIDO"
           },
-          "observacao": "DDT 2022 contempla alfainterferona adjuvante no estádio III; anti-PD-1 e BRAF/MEK adjuvantes não constam como incorporados."
+          "observacao": "DDT 2022: a única adjuvância incorporada é a alfainterferona (estádio III); anti-PD-1 e BRAF/MEK foram incorporados só para 1ª linha do melanoma avançado não cirúrgico/metastático (Portarias SCTIE 2020). Alternativa SUS: alfainterferona (III) ou seguimento."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -809,7 +816,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Nivolumabe + relatlimabe: nenhuma demanda nem portaria de incorporação na Conitec para melanoma avançado (a incorporação de 2020 cobre anti-PD-1 em monoterapia); não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1098,9 +1114,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 72, de 06/12/2021 (DOU 07/12/2021, s.1, p.160) — cópia BVS SES-SP U_PT-MS-SCTIE-72_061221.pdf",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, o larotrectinibe",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Não incorporado para tumores sólidos NTRK em adultos (Portaria SCTIE/MS 72/2021); a reavaliação de 2025 tratou só da população pediátrica."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1131,9 +1153,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.023-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO MELANOMA MALIGNO (DOENÇA METASTÁTICA, RECIDIVADA OU LOCO-REGIONAL AVANÇADA)",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1142,7 +1170,13 @@
           "trecho": "Dacarbazina 1.000 mg/m² a cada 3 semanas",
           "estado": "VERIFICADO"
         },
-        "pendencia": "VIA_CONFERIR_BULA"
+        "fonteVia": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Dacarbazine for Injection (openFDA set_id 0d81315c-7021-4091-b703-ad135390c936, 2025-09-22)",
+          "pagina": null,
+          "trecho": "250 mg/square meter body surface/day I.V. for 5 days",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "melanoma-av-cvd",
@@ -1181,9 +1215,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.023-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO MELANOMA MALIGNO (DOENÇA METASTÁTICA, RECIDIVADA OU LOCO-REGIONAL AVANÇADA)",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1222,9 +1262,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.023-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO MELANOMA MALIGNO (DOENÇA METASTÁTICA, RECIDIVADA OU LOCO-REGIONAL AVANÇADA)",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1238,17 +1284,23 @@
     "radioterapia": [
       {
         "cenario": "RT adjuvante após linfadenectomia (III selecionado)",
-        "doseTotalGy": null,
-        "fracoes": null,
+        "doseTotalGy": 48,
+        "fracoes": 20,
         "concomitante": "nenhuma",
-        "pendencia": "SEM_FONTE",
-        "observacao": "Melhora controle local sem ganho de SLR/SG, com mais linfedema (SBOC p.15).",
+        "observacao": "Melhora controle local sem ganho de SLR/SG, com mais linfedema (SBOC p.15). Dose de referência do ensaio ANZMTG/TROG 02.01 (NCT00287196, COMPLETED), estado INFERIDO.",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
           "pagina": 12,
           "trecho": "RT para pacientes selecionados com base na localização, tamanho, número",
           "estado": "VERIFICADO"
+        },
+        "fonteFracionamento": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov API v2 NCT00287196 (COMPLETED)",
+          "pagina": null,
+          "trecho": "48 Gy reference dose in 20 fractions at 5 fractions per week",
+          "estado": "INFERIDO"
         }
       },
       {
@@ -1263,6 +1315,13 @@
           "pagina": 16,
           "trecho": "Na doença oligometastática, discutir em time multidisciplinar possibilidade de",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "SBRT/RT em oligometástase ou SNC sem dose — aceno de RT.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC Melanoma p.16"
+          ]
         }
       }
     ],
@@ -1306,7 +1365,7 @@
         "seAlvo": "BRAF V600 (estádio III)",
         "opcao": "Dabrafenibe + trametinibe adjuvante 12 meses",
         "evidencia": "COMBI-AD (SLR HR 0,52)",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao (DDT 2022: adjuvância incorporada só com alfainterferona)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
@@ -1332,7 +1391,7 @@
         "seAlvo": "Fusão NTRK",
         "opcao": "Larotrectinibe",
         "evidencia": "Raro",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao (Portaria SCTIE/MS 72/2021)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
@@ -1350,7 +1409,15 @@
         "Pirexia com BRAF/MEK"
       ],
       "fonte": null,
-      "pendencia": "SEM_FONTE"
+      "pendencia": "SEM_FONTE",
+      "pendenciaClasse": {
+        "texto": "Emetogenicidade/NF por esquema via módulo de suporte (MASCC/ESMO 2023, PMC10937211).",
+        "classe": "DEPENDE_MOTOR_CODIGO",
+        "buscasFeitas": [
+          "SBOC Melanoma",
+          "MASCC/ESMO 2023"
+        ]
+      }
     },
     "ensaios": [
       {
@@ -1442,6 +1509,13 @@
           "pagina": 21,
           "trecho": "Considerar ultrassonografia da cadeia nodal a cada 4 meses durante os",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "USG linfonodal de seguimento sem id no catálogo.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1"
+          ]
         }
       },
       {
@@ -1588,12 +1662,38 @@
     ]
   },
   "pendencias": [
-    "Método de pesquisa de BRAF V600 não especificado pela SBOC (PCR, NGS ou IHQ VE1) — definir com patologia; catálogo sem id de PCR/NGS.",
-    "SEM_FONTE: dose/fracionamento de RT adjuvante e SBRT.",
-    "Via da dacarbazina não escrita na linha da SBOC (conferir bula).",
-    "SUS: adjuvância com anti-PD-1 ou BRAF/MEK não consta na DDT 2022 (só alfainterferona no estádio III); relatlimabe, encorafenibe/binimetinibe sem dado.",
-    "Duração em ciclos das adjuvâncias de 12 meses não convertida.",
-    "Catálogo: sem id de USG de cadeia linfonodal."
+    {
+      "texto": "BRAF V600 mapeado para MOLECULAR_PCR_MUTACAO (alt. SEQUENCIAMENTO_AMPLICON), faturamento por indicação a confirmar. Método (PCR × NGS × IHQ VE1, que não detecta V600K) não definido pela SBOC — escolha com a patologia.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC Melanoma 2026 p.12",
+        "DDT Melanoma 2022",
+        "catálogo v1.1"
+      ]
+    },
+    {
+      "texto": "RT adjuvante preenchida (48 Gy/20 fr, ensaio, INFERIDO); SBRT segue sem dose — RT fora do escopo de oncologia clínica.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "SBOC",
+        "ClinicalTrials.gov NCT00287196"
+      ]
+    },
+    {
+      "texto": "Adjuvâncias são de 12 meses (SBOC); a conversão em número de ciclos depende do intervalo escolhido (14, 21 ou 28 dias) e deve ser calculada pelo motor a partir de 'duração 12 meses', não fixada à mão.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC Melanoma 2026"
+      ]
+    },
+    {
+      "texto": "USG de cadeia linfonodal de drenagem sem id no catálogo v1.1 (só USG_AXILAS). Inclusão depende de D-F1-02.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "catálogo v1.1",
+        "SIGTAP 09/2026"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -1612,7 +1712,8 @@
         "trecho": "terapias adjuvantes ainda não são estabelecidas como de rotina",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Registrar como opção da diretriz não coberta pela DDT do SUS; decisão médica caso a caso"
+      "escolhaSeguranca": "Registrar como opção da diretriz não coberta pela DDT do SUS; decisão médica caso a caso",
+      "decisaoNecessaria": true
     }
   ],
   "curadoria": {
@@ -1623,8 +1724,33 @@
       "Onco PRO 2026/slides-pro-2026/72 - Aula 72 - Melanoma - Visão Geral e Manejo da Doença Localizada",
       "Onco PRO 2026/slides-pro-2026/73 - Aula 73 - Melanoma - Doença Avançada",
       "DDT Melanoma Cutâneo Conitec 2022 (PDF lido)",
-      "ClinicalTrials.gov API v2"
+      "ClinicalTrials.gov API v2",
+      "SIGTAP competência 09/2026",
+      "Portaria SCTIE/MS 72/2021",
+      "Bula FDA Dacarbazine (openFDA)",
+      "ClinicalTrials.gov API v2 NCT00287196",
+      "Painel de Demandas Conitec 15/06/2026"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-11",
+        "redator": "Claude (agente curador)",
+        "resolvidas": 2,
+        "classificadas": 4,
+        "susPreenchidos": 9,
+        "notas": [
+          "Relatlimabe sem demanda na Conitec (classificado no próprio protocolo)."
+        ]
+      }
+    ]
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "3 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
 }

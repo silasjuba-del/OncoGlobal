@@ -112,7 +112,7 @@
         }
       },
       {
-        "catalogoId": null,
+        "catalogoId": "VIDEOLAPAROSCOPIA",
         "rotulo": "Videolaparoscopia",
         "indicacao": "condicional",
         "quando": "localizado com fatores de mau prognóstico, conforme disponibilidade",
@@ -123,22 +123,22 @@
           "trecho": "Videolaparoscopia Conforme disponibilidade em casos selecionados§",
           "estado": "VERIFICADO"
         },
-        "pendencia": "SEM_ID_NO_CATALOGO"
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
       }
     ],
     "patologico": {
       "obtencao": [
         {
-          "tipo": "outra",
-          "quando": "confirmação histológica do primário ou de metástase (método não especificado na SBOC; ecoendoscopia com punção sem id no catálogo)",
+          "tipo": "PAAF",
+          "quando": "confirmação histológica do primário: PAAF guiada por ecoendoscopia (sem id de ecoendoscopia no catálogo); biópsia prévia cada vez mais favorecida mesmo em lesão ressecável",
           "catalogoId": "ANATOMOPATOLOGICO",
-          "pendencia": "SEM_FONTE (método de obtenção não descrito na diretriz)",
+          "pendencia": "SEM_ID_NO_CATALOGO (ecoendoscopia)",
           "fonte": {
-            "tipo": "SBOC",
-            "referencia": null,
-            "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "tipo": "CURSO",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/06 - Aula 06 - Câncer de Pâncreas- Conceitos Iniciais.pdf",
+            "pagina": 13,
+            "trecho": "EUS (Endoscopic Ultrasound): pode auxiliar em PAAF",
+            "estado": "INFERIDO"
           }
         },
         {
@@ -220,8 +220,8 @@
         {
           "alvo": "KRAS",
           "metodo": "PCR",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "sem alterações na triagem IHQ",
           "consequencia": "KRAS selvagem (~10%) justifica NGS amplo/RNAseq",
@@ -233,8 +233,8 @@
             "trecho": "a avaliação do KRAS por PCR pode ser recomendada — cerca de 10%",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "painel amplo DNA/RNA",
@@ -649,7 +649,13 @@
           "disponivel": "DADO_AUSENTE",
           "via": null,
           "nota": "Cadastro SIGTAP 2026-09 local só mostra QT de pâncreas avançado (0304020052); procedimento para QT neoadjuvante de pâncreas não identificado.",
-          "pendencia": "SUS_PROCEDIMENTO_A_CONFIRMAR",
+          "pendencia": {
+            "texto": "Sem procedimento SIGTAP de QT neoadjuvante/adjuvante para este tumor (só QT avançada).",
+            "classe": "DEPENDE_MOTOR_CODIGO",
+            "buscasFeitas": [
+              "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
+            ]
+          },
           "fonte": {
             "tipo": "NORMA",
             "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
@@ -703,18 +709,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "mFOLFIRINOX ou gencitabina (nab-paclitaxel sem incorporação identificada)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "mFOLFIRINOX ou gencitabina (nab-paclitaxel sem incorporação identificada)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -758,7 +762,13 @@
           "disponivel": "DADO_AUSENTE",
           "via": null,
           "nota": "Cadastro SIGTAP 2026-09 local só mostra QT de pâncreas avançado (0304020052); procedimento para QT neoadjuvante de pâncreas não identificado.",
-          "pendencia": "SUS_PROCEDIMENTO_A_CONFIRMAR",
+          "pendencia": {
+            "texto": "Sem procedimento SIGTAP de QT neoadjuvante/adjuvante para este tumor (só QT avançada).",
+            "classe": "DEPENDE_MOTOR_CODIGO",
+            "buscasFeitas": [
+              "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
+            ]
+          },
           "fonte": {
             "tipo": "NORMA",
             "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
@@ -774,7 +784,15 @@
           "trecho": "Considerar Gencitabina + Cisplatina (pacientes HRD) NE BAIXO/FR FORTE",
           "estado": "DADO_AUSENTE"
         },
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "Doses de gencitabina + cisplatina neoadjuvante (HRD) não tabeladas.",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "SBOC 2026 v4 e 2025 v6 pâncreas",
+            "Onco PRO 2026 aula 07",
+            "ClinicalTrials.gov NCT01585805 (gem 600 + cis 25 D3/D10 q21 — doença avançada, cenário diferente; não transferido)"
+          ]
+        },
         "nota": "SBOC indica o esquema sem tabelar doses; não transferir doses de vias biliares (ABC-02)",
         "doseVerificada": false
       },
@@ -818,7 +836,7 @@
           }
         ],
         "cicloDias": 14,
-        "numeroCiclos": null,
+        "numeroCiclos": 12,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
@@ -826,7 +844,13 @@
           "disponivel": "DADO_AUSENTE",
           "via": null,
           "nota": "Cadastro SIGTAP 2026-09 local só mostra QT de pâncreas avançado (0304020052); procedimento para QT adjuvante de pâncreas não identificado.",
-          "pendencia": "SUS_PROCEDIMENTO_A_CONFIRMAR",
+          "pendencia": {
+            "texto": "Sem procedimento SIGTAP de QT neoadjuvante/adjuvante para este tumor (só QT avançada).",
+            "classe": "DEPENDE_MOTOR_CODIGO",
+            "buscasFeitas": [
+              "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
+            ]
+          },
           "fonte": {
             "tipo": "NORMA",
             "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
@@ -850,7 +874,14 @@
           "trecho": "randomizados para 6 meses de Folfirinox modificado ad- juvante",
           "estado": "VERIFICADO"
         },
-        "doseVerificada": true
+        "doseVerificada": true,
+        "fonteCiclos": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT01526135 (PRODIGE 24) — https://clinicaltrials.gov/api/v2/studies/NCT01526135, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "mFolfirinox every 14 days, 12 cycles, 24 weeks.",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "pancreas-adjuvante-gencitabina-capecitabina",
@@ -876,7 +907,7 @@
           }
         ],
         "cicloDias": 28,
-        "numeroCiclos": null,
+        "numeroCiclos": 6,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": "FICHA.pancreas.gemcitabina-capecitabina__nao-especificado@1.0.0",
@@ -884,7 +915,13 @@
           "disponivel": "DADO_AUSENTE",
           "via": null,
           "nota": "Cadastro SIGTAP 2026-09 local só mostra QT de pâncreas avançado (0304020052); procedimento para QT adjuvante de pâncreas não identificado.",
-          "pendencia": "SUS_PROCEDIMENTO_A_CONFIRMAR",
+          "pendencia": {
+            "texto": "Sem procedimento SIGTAP de QT neoadjuvante/adjuvante para este tumor (só QT avançada).",
+            "classe": "DEPENDE_MOTOR_CODIGO",
+            "buscasFeitas": [
+              "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
+            ]
+          },
           "fonte": {
             "tipo": "NORMA",
             "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
@@ -901,7 +938,8 @@
           "estado": "VERIFICADO"
         },
         "duracao": "6 meses",
-        "doseVerificada": true
+        "doseVerificada": true,
+        "numeroCiclosNota": "derivado: 6 meses (SBOC) ÷ ciclos de 28 dias"
       },
       {
         "id": "pancreas-adjuvante-gencitabina",
@@ -919,7 +957,7 @@
           }
         ],
         "cicloDias": 28,
-        "numeroCiclos": null,
+        "numeroCiclos": 6,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": "FICHA.pancreas.gemcitabina-monoterapia__adjuvante@1.0.0",
@@ -927,7 +965,13 @@
           "disponivel": "DADO_AUSENTE",
           "via": null,
           "nota": "Cadastro SIGTAP 2026-09 local só mostra QT de pâncreas avançado (0304020052); procedimento para QT adjuvante de pâncreas não identificado.",
-          "pendencia": "SUS_PROCEDIMENTO_A_CONFIRMAR",
+          "pendencia": {
+            "texto": "Sem procedimento SIGTAP de QT neoadjuvante/adjuvante para este tumor (só QT avançada).",
+            "classe": "DEPENDE_MOTOR_CODIGO",
+            "buscasFeitas": [
+              "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
+            ]
+          },
           "fonte": {
             "tipo": "NORMA",
             "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
@@ -944,7 +988,14 @@
           "estado": "VERIFICADO"
         },
         "duracao": "6 meses",
-        "doseVerificada": true
+        "doseVerificada": true,
+        "fonteCiclos": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT01526135 (PRODIGE 24) — https://clinicaltrials.gov/api/v2/studies/NCT01526135, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "(= 1 cycle) repeated 6 times (i.e., 6 cycles) during 24 weeks",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "pancreas-adjuvante-5fu-lv",
@@ -978,7 +1029,7 @@
           }
         ],
         "cicloDias": 14,
-        "numeroCiclos": null,
+        "numeroCiclos": 12,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
@@ -986,7 +1037,13 @@
           "disponivel": "DADO_AUSENTE",
           "via": null,
           "nota": "Cadastro SIGTAP 2026-09 local só mostra QT de pâncreas avançado (0304020052); procedimento para QT adjuvante de pâncreas não identificado.",
-          "pendencia": "SUS_PROCEDIMENTO_A_CONFIRMAR",
+          "pendencia": {
+            "texto": "Sem procedimento SIGTAP de QT neoadjuvante/adjuvante para este tumor (só QT avançada).",
+            "classe": "DEPENDE_MOTOR_CODIGO",
+            "buscasFeitas": [
+              "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
+            ]
+          },
           "fonte": {
             "tipo": "NORMA",
             "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
@@ -1003,7 +1060,8 @@
           "estado": "VERIFICADO"
         },
         "duracao": "6 meses",
-        "doseVerificada": true
+        "doseVerificada": true,
+        "numeroCiclosNota": "derivado: 6 meses (SBOC) ÷ ciclos de 14 dias"
       },
       {
         "id": "pancreas-inducao-mfolfirinox",
@@ -1246,18 +1304,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "gencitabina monoterapia ou FOLFIRINOX (procedimento 0304020052)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "gencitabina monoterapia ou FOLFIRINOX (procedimento 0304020052)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1317,55 +1373,81 @@
         "drogas": [
           {
             "droga": "Irinotecano lipossomal",
-            "dose": null,
+            "dose": 50,
             "unidade": "mg/m2",
             "via": "EV",
-            "dias": null,
-            "observacao": ""
+            "dias": "D1",
+            "observacao": "não substituir por irinotecano convencional",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "ONIVYDE 50 mg/m 2 as an intravenous infusion over 90 minutes, followed by oxaliplatin",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "Oxaliplatina",
-            "dose": null,
+            "dose": 60,
             "unidade": "mg/m2",
             "via": "EV",
-            "dias": null,
-            "observacao": ""
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "ONIVYDE 50 mg/m 2 as an intravenous infusion over 90 minutes, followed by oxaliplatin",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "Leucovorin",
-            "dose": null,
+            "dose": 400,
             "unidade": "mg/m2",
             "via": "EV",
-            "dias": null,
-            "observacao": ""
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "leucovorin 400 mg/m 2 intravenously over 30 minutes, followed by fluorouracil 2400 mg/m 2",
+              "estado": "VERIFICADO"
+            }
           },
           {
-            "droga": "5-FU",
-            "dose": null,
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
             "unidade": "mg/m2",
             "via": "EV",
-            "dias": null,
-            "observacao": ""
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "leucovorin 400 mg/m 2 intravenously over 30 minutes, followed by fluorouracil 2400 mg/m 2",
+              "estado": "VERIFICADO"
+            }
           }
         ],
-        "cicloDias": null,
+        "cicloDias": 14,
         "numeroCiclos": null,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "FOLFIRINOX (procedimento 0304020052)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "FOLFIRINOX (procedimento 0304020052)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1374,8 +1456,7 @@
           "trecho": "Nalirifox (NE alto/FR forte)",
           "estado": "DADO_AUSENTE"
         },
-        "pendencia": "SEM_FONTE",
-        "nota": "SBOC não tabela doses; e afirma que o irinotecano lipossomal não está disponível no Brasil",
+        "nota": "Doses da bula FDA (NAPOLI-3). SBOC: irinotecano lipossomal não disponível no Brasil — usar alternativa SUS.",
         "fonteDisponibilidade": {
           "tipo": "SBOC",
           "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
@@ -1383,7 +1464,14 @@
           "trecho": "É importante lembrar que o irinotecano lipossomal não está disponível no Brasil.",
           "estado": "VERIFICADO"
         },
-        "doseVerificada": false
+        "doseVerificada": true,
+        "fonteDose": {
+          "tipo": "BULA",
+          "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+          "pagina": null,
+          "trecho": "every 2 weeks",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "pancreas-manutencao-olaparibe",
@@ -1406,18 +1494,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "vigilância ou manutenção com fluoropirimidina",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "vigilância ou manutenção com fluoropirimidina"
         },
         "fonte": {
           "tipo": "BULA",
@@ -1566,39 +1652,66 @@
         "drogas": [
           {
             "droga": "Irinotecano lipossomal",
-            "dose": null,
+            "dose": 70,
             "unidade": "mg/m2",
             "via": "EV",
-            "dias": null,
-            "observacao": ""
+            "dias": "D1",
+            "observacao": "homozigoto UGT1A1*28: iniciar 50 mg/m² (bula)",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "Patients randomized to ONIVYDE/FU/LV received ONIVYDE 70 mg/m 2 as an intravenous infusion",
+              "estado": "VERIFICADO"
+            }
           },
           {
-            "droga": "5-FU/LV",
-            "dose": null,
+            "droga": "Leucovorin",
+            "dose": 400,
             "unidade": "mg/m2",
             "via": "EV",
-            "dias": null,
-            "observacao": ""
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "followed by leucovorin 400 mg/m 2 intravenously over 30 minutes, followed by fluorouracil 2400",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "followed by leucovorin 400 mg/m 2 intravenously over 30 minutes, followed by fluorouracil 2400",
+              "estado": "VERIFICADO"
+            }
           }
         ],
-        "cicloDias": null,
+        "cicloDias": 14,
         "numeroCiclos": null,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "FOLFIRINOX ou FOLFOX de 2ª linha (procedimento 0304020052)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "FOLFIRINOX ou FOLFOX de 2ª linha (procedimento 0304020052)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1607,9 +1720,8 @@
           "trecho": "- Nal-IRI + 5-FU/LV (NE alto/FR forte)",
           "estado": "DADO_AUSENTE"
         },
-        "pendencia": "SEM_FONTE",
-        "nota": "doses não tabeladas; irinotecano lipossomal indisponível no Brasil segundo a própria SBOC",
-        "doseVerificada": false
+        "nota": "Doses da bula FDA (NAPOLI-1). Irinotecano lipossomal indisponível no Brasil segundo a SBOC.",
+        "doseVerificada": true
       },
       {
         "id": "pancreas-paliativo-2l-folfox",
@@ -1619,30 +1731,66 @@
         "drogas": [
           {
             "droga": "Oxaliplatina",
-            "dose": null,
+            "dose": 85,
             "unidade": "mg/m2",
             "via": "EV",
-            "dias": null,
-            "observacao": ""
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01121848 (PANCREOX — mFOLFOX6 em 2ª linha de pâncreas) — https://clinicaltrials.gov/api/v2/studies/NCT01121848, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "Day 1: Oxaliplatin 85 mg/m2 (given as a 2-hour infusion)",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "Leucovorin",
-            "dose": null,
+            "dose": 400,
             "unidade": "mg/m2",
             "via": "EV",
-            "dias": null,
-            "observacao": ""
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01121848 (PANCREOX — mFOLFOX6 em 2ª linha de pâncreas) — https://clinicaltrials.gov/api/v2/studies/NCT01121848, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "Day 1: LV 400 mg/m2 (given as a 2-hour infusion simultaneous to oxaliplatin)",
+              "estado": "VERIFICADO"
+            }
           },
           {
-            "droga": "5-FU",
-            "dose": null,
+            "droga": "5-FU bolus",
+            "dose": 400,
             "unidade": "mg/m2",
             "via": "EV",
-            "dias": null,
-            "observacao": ""
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01121848 (PANCREOX — mFOLFOX6 em 2ª linha de pâncreas) — https://clinicaltrials.gov/api/v2/studies/NCT01121848, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "bolus IV 400 mg/m2 dose on Day 1 followed by 2400 mg/m2 continuous infusion",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01121848 (PANCREOX — mFOLFOX6 em 2ª linha de pâncreas) — https://clinicaltrials.gov/api/v2/studies/NCT01121848, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "bolus IV 400 mg/m2 dose on Day 1 followed by 2400 mg/m2 continuous infusion",
+              "estado": "VERIFICADO"
+            }
           }
         ],
-        "cicloDias": null,
+        "cicloDias": 14,
         "numeroCiclos": null,
         "premedicacao": "",
         "ajusteObrigatorio": "",
@@ -1666,9 +1814,15 @@
           "trecho": "- FOLFOX (NE moderado/FR forte)",
           "estado": "DADO_AUSENTE"
         },
-        "pendencia": "SEM_FONTE",
-        "nota": "a diretriz de pâncreas não tabela doses de FOLFOX; não transferir de outro tumor",
-        "doseVerificada": false
+        "nota": "Doses do braço mFOLFOX6 do ensaio PANCREOX (pâncreas, 2ª linha pós-gencitabina); não transferidas de outro tumor.",
+        "doseVerificada": true,
+        "fonteCiclo": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT01121848 (PANCREOX — mFOLFOX6 em 2ª linha de pâncreas) — https://clinicaltrials.gov/api/v2/studies/NCT01121848, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "This chemotherapy regimen will be administered each two weeks.",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "pancreas-paliativo-2l-gencitabina-nab-paclitaxel",
@@ -1699,18 +1853,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "gencitabina monoterapia (procedimento 0304020052)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "gencitabina monoterapia (procedimento 0304020052)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1727,7 +1879,15 @@
         "cenario": "QT+RT neoadjuvante (ressecável alto risco/borderline/LA respondedor)",
         "doseTotalGy": null,
         "fracoes": null,
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC 2026 pâncreas p.12/15",
+            "Onco PRO 2026 aula 07"
+          ],
+          "nota": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11); fracionamento não buscado."
+        },
         "concomitante": "gencitabina ou capecitabina; preferir RT de curso longo convencional à SBRT",
         "fonte": {
           "tipo": "SBOC",
@@ -1741,7 +1901,15 @@
         "cenario": "QT+RT definitiva (LA estável com sintomas locais ou intolerância à QT)",
         "doseTotalGy": null,
         "fracoes": null,
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC 2026 pâncreas p.12/15",
+            "Onco PRO 2026 aula 07"
+          ],
+          "nota": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11); fracionamento não buscado."
+        },
         "concomitante": "não especificado",
         "fonte": {
           "tipo": "SBOC",
@@ -2032,7 +2200,8 @@
       "TGP",
       "UREIA",
       "MOLECULAR_PCR_MUTACAO",
-      "SEQUENCIAMENTO_AMPLICON"
+      "SEQUENCIAMENTO_AMPLICON",
+      "VIDEOLAPAROSCOPIA"
     ],
     "interacoesConsultar": [
       {
@@ -2171,16 +2340,77 @@
     ]
   },
   "pendencias": [
-    "SEM_FONTE: doses de gencitabina + cisplatina (HRD), NALIRIFOX, nal-IRI + 5-FU/LV e FOLFOX de 2ª linha (não tabeladas na SBOC de pâncreas)",
-    "SEM_FONTE: doses/fracionamento de QT+RT neoadjuvante e definitiva",
-    "SEM_FONTE: método de obtenção histológica (ecoendoscopia com punção não descrita; sem id no catálogo)",
-    "SEM_ID_NO_CATALOGO: BRCA germinativo (NGS), KRAS (PCR), NGS amplo/RNAseq, DPYD, videolaparoscopia",
-    "CA 19-9: catalogoId CA199 existe, mas sem código SIGTAP",
-    "SUS_PROCEDIMENTO_A_CONFIRMAR: QT neoadjuvante/adjuvante de pâncreas sem procedimento no cadastro SIGTAP local (só 0304020052 avançado)",
-    "SUS_INCORPORACAO_A_CONFIRMAR: nab-paclitaxel, olaparibe, irinotecano lipossomal, T-DXd",
-    "Olaparibe: dose de bula FDA (openFDA); bula ANVISA não consultada",
-    "Duração em meses (6 meses) sem número de ciclos explícito na fonte para adjuvância",
-    "SEM_FONTE: emetogenicidade/risco de NF por esquema"
+    {
+      "texto": "SEM_FONTE: doses de gencitabina + cisplatina (HRD), NALIRIFOX, nal-IRI + 5-FU/LV e FOLFOX de 2ª linha (não tabeladas na SBOC de pâncreas)",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC 2026/2025 pâncreas",
+        "Onco PRO 2026 aula 07",
+        "bula FDA ONIVYDE",
+        "ClinicalTrials.gov NCT01121848, NCT01585805"
+      ],
+      "nota": "NALIRIFOX e nal-IRI resolvidos (bula FDA ONIVYDE); FOLFOX 2ª linha resolvido (PANCREOX NCT01121848). Resta gencitabina + cisplatina neoadjuvante (HRD)."
+    },
+    {
+      "texto": "SEM_FONTE: doses/fracionamento de QT+RT neoadjuvante e definitiva",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "SBOC 2026 pâncreas p.12/15",
+        "Onco PRO 2026 aula 07"
+      ],
+      "nota": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11); fracionamento não buscado."
+    },
+    {
+      "texto": "SEM_ID_NO_CATALOGO: BRCA germinativo (NGS), KRAS (PCR), NGS amplo/RNAseq, DPYD, videolaparoscopia",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json (164 ids)"
+      ],
+      "nota": "Depende de ampliação do catálogo de exames."
+    },
+    {
+      "texto": "CA 19-9: catalogoId CA199 existe, mas sem código SIGTAP",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json"
+      ],
+      "nota": "Código SIGTAP do CA 19-9 é atributo do catálogo, não do pack."
+    },
+    {
+      "texto": "SUS_PROCEDIMENTO_A_CONFIRMAR: QT neoadjuvante/adjuvante de pâncreas sem procedimento no cadastro SIGTAP local (só 0304020052 avançado)",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
+      ],
+      "nota": "Não há procedimento SIGTAP de QT neoadjuvante/adjuvante deste tumor; enquadramento depende da regra anti-glosa."
+    },
+    {
+      "texto": "SUS_INCORPORACAO_A_CONFIRMAR: nab-paclitaxel, olaparibe, irinotecano lipossomal, T-DXd",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Planilha CONITEC 15/06/2026",
+        "Painel de Demandas CONITEC",
+        "busca gov.br/conitec",
+        "DOU (portarias citadas)"
+      ],
+      "nota": "sus.disponivel preenchido em todos os protocolos com portaria/relatório quando existe. Sem avaliação CONITEC (registrado 'nao', INFERIDO): neoadjuvante-gencitabina-nab-paclitaxel, paliativo-1l-gencitabina-nab-paclitaxel, paliativo-1l-nalirifox, manutencao-olaparibe, paliativo-2l-nal-iri-5fu, paliativo-2l-gencitabina-nab-paclitaxel."
+    },
+    {
+      "texto": "Olaparibe: dose de bula FDA (openFDA); bula ANVISA não consultada",
+      "classe": "DEPENDE_BULA_ANVISA",
+      "buscasFeitas": [
+        "openFDA LYNPARZA"
+      ]
+    },
+    {
+      "texto": "SEM_FONTE: emetogenicidade/risco de NF por esquema",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC 2026 pâncreas",
+        "Onco PRO 2026 aulas 87-88"
+      ],
+      "nota": "Classificação por droga vem do módulo de suporte."
+    }
   ],
   "conflitos": [
     {
@@ -2199,7 +2429,9 @@
         "trecho": "É importante lembrar que o irinotecano lipossomal não está disponível no Brasil.",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "NALIRIFOX e nal-IRI registrados sem dose e com alternativa SUS (FOLFIRINOX/FOLFOX/gencitabina)."
+      "escolhaSeguranca": "NALIRIFOX e nal-IRI registrados sem dose e com alternativa SUS (FOLFIRINOX/FOLFOX/gencitabina).",
+      "decisaoNecessaria": false,
+      "resolucao": "Doses de NALIRIFOX e nal-IRI preenchidas pela bula FDA; indisponibilidade no Brasil mantida — usar FOLFIRINOX/FOLFOX/gencitabina (APAC 0304020052)."
     },
     {
       "tema": "SBOC 2025 v6 × 2026 v4",
@@ -2217,7 +2449,8 @@
         "trecho": "Folfirinox tradicional Oxaliplatina 85 mg/m² EV D1 A cada 2 semanas Irinotecano 180",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Sem divergência de dose entre as edições; usada a 2026. FOLFIRINOX tradicional contém oxaliplatina 85 mg/m² D1."
+      "escolhaSeguranca": "Sem divergência de dose entre as edições; usada a 2026. FOLFIRINOX tradicional contém oxaliplatina 85 mg/m² D1.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Duração da infusão de 5-FU (48 h na SBOC pâncreas × 46 h na SBOC vias biliares)",
@@ -2235,7 +2468,8 @@
         "trecho": "5-FU 2.400 mg/m² EV D1 (46h)",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Mantido 48 h no pack de pâncreas conforme a fonte do tumor; registrar para padronização da ficha do serviço."
+      "escolhaSeguranca": "Mantido 48 h no pack de pâncreas conforme a fonte do tumor; registrar para padronização da ficha do serviço.",
+      "decisaoNecessaria": true
     }
   ],
   "curadoria": {
@@ -2249,6 +2483,27 @@
       "ClinicalTrials.gov API v2",
       "corpus/fichas/pancreas/*"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "reducaoPendencias20261011": {
+      "data": "2026-10-11",
+      "resolvidas": [
+        {
+          "pendencia": "SEM_FONTE: método de obtenção histológica (ecoendoscopia com punção não descrita; sem id no catálogo)",
+          "como": "PAAF guiada por ecoendoscopia (Onco PRO 2026 aula 06 p.13, CURSO, INFERIDO); ecoendoscopia segue sem id no catálogo."
+        },
+        {
+          "pendencia": "Duração em meses (6 meses) sem número de ciclos explícito na fonte para adjuvância",
+          "como": "PRODIGE 24 (NCT01526135): mFOLFIRINOX 12 ciclos, gencitabina 6 ciclos; gem-cape (6) e 5-FU/LV (12) derivados de 6 meses ÷ intervalo."
+        }
+      ]
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "1 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
 }

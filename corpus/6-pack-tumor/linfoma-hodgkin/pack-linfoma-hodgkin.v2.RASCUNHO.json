@@ -18,9 +18,20 @@
   "substitui": [],
   "identidade": {
     "tumor": "Linfoma de Hodgkin (adulto)",
-    "cid10": ["C81"],
-    "subtipos": ["clássico (esclerose nodular, celularidade mista, rico em linfócitos, depleção linfocitária)", "predomínio linfocitário nodular (NLPHL)"],
-    "cenarios": ["localizado_favoravel", "localizado_desfavoravel", "avancado", "recaido_refratario", "pos_TCTH_autologo"],
+    "cid10": [
+      "C81"
+    ],
+    "subtipos": [
+      "clássico (esclerose nodular, celularidade mista, rico em linfócitos, depleção linfocitária)",
+      "predomínio linfocitário nodular (NLPHL)"
+    ],
+    "cenarios": [
+      "localizado_favoravel",
+      "localizado_desfavoravel",
+      "avancado",
+      "recaido_refratario",
+      "pos_TCTH_autologo"
+    ],
     "limitesAplicabilidade": "Adultos (≥18 anos no PCDT preliminar 2026; ≥19 anos no PCDT 2020). Gestantes, idosos frágeis, HIV e NLPHL têm condutas próprias no PCDT e não estão detalhados nos protocolos deste pack. Pediatria fora do escopo."
   },
   "diagnostico": {
@@ -30,42 +41,78 @@
         "rotulo": "PET-CT FDG de corpo inteiro (estadiamento inicial)",
         "indicacao": "universal",
         "quando": "Ao diagnóstico, antes do tratamento",
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020 — https://www.gov.br/conitec/pt-br/midias/protocolos/20201230_pcdt_linfoma-de-hodgkin.pdf", "pagina": 7, "trecho": "de corpo inteiro é o exame considerado padrão ouro para a avaliação inicial", "estado": "VERIFICADO" }
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020 — https://www.gov.br/conitec/pt-br/midias/protocolos/20201230_pcdt_linfoma-de-hodgkin.pdf",
+          "pagina": 7,
+          "trecho": "de corpo inteiro é o exame considerado padrão ouro para a avaliação inicial",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "catalogoId": "TC_PESCOCO",
         "rotulo": "TC com contraste de pescoço (se PET-CT indisponível)",
         "indicacao": "condicional",
         "quando": "Somente se PET-CT indisponível; associar TC de tórax e abdome e biópsia de medula",
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 7, "trecho": "tomografia computadorizada (TC) com contraste do pescoço, tórax e abdômen", "estado": "VERIFICADO" }
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 7,
+          "trecho": "tomografia computadorizada (TC) com contraste do pescoço, tórax e abdômen",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "catalogoId": "TC_TORAX",
         "rotulo": "TC com contraste de tórax (se PET-CT indisponível)",
         "indicacao": "condicional",
         "quando": "Somente se PET-CT indisponível",
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 7, "trecho": "tomografia computadorizada (TC) com contraste do pescoço, tórax e abdômen", "estado": "VERIFICADO" }
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 7,
+          "trecho": "tomografia computadorizada (TC) com contraste do pescoço, tórax e abdômen",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "catalogoId": "TC_ABDOMEN_SUPERIOR",
         "rotulo": "TC com contraste de abdome (se PET-CT indisponível)",
         "indicacao": "condicional",
         "quando": "Somente se PET-CT indisponível; o curso acrescenta pelve (TC_PELVE)",
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 7, "trecho": "tomografia computadorizada (TC) com contraste do pescoço, tórax e abdômen", "estado": "VERIFICADO" }
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 7,
+          "trecho": "tomografia computadorizada (TC) com contraste do pescoço, tórax e abdômen",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "catalogoId": "TC_PELVE",
         "rotulo": "TC de pelve (se PET-CT indisponível)",
         "indicacao": "condicional",
         "quando": "Somente se PET-CT indisponível",
-        "fonte": { "tipo": "CURSO", "referencia": "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas", "pagina": 7, "trecho": "Se indisponível – TC pescoço, tórax, abdome, pelve e biópsia de medula óssea", "estado": "INFERIDO" }
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas",
+          "pagina": 7,
+          "trecho": "Se indisponível – TC pescoço, tórax, abdome, pelve e biópsia de medula óssea",
+          "estado": "INFERIDO"
+        }
       },
       {
         "catalogoId": "RX_TORAX_PA_PERFIL",
         "rotulo": "Radiografia de tórax (se PET-CT indisponível)",
         "indicacao": "condicional",
         "quando": "Somente se PET-CT indisponível",
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 7, "trecho": "uma radiografia simples de tórax e uma tomografia computadorizada (TC) com contraste", "estado": "VERIFICADO" }
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 7,
+          "trecho": "uma radiografia simples de tórax e uma tomografia computadorizada (TC) com contraste",
+          "estado": "VERIFICADO"
+        }
       }
     ],
     "endoscopicos": [],
@@ -75,13 +122,25 @@
           "tipo": "excisional",
           "quando": "Padrão: biópsia excisional de linfonodo suspeito, com material para histopatologia e IHQ",
           "catalogoId": "BIOPSIA_GANGLIO",
-          "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026) — https://www.gov.br/conitec/pt-br/midias/consultas/relatorios/2026/relatorio-preliminar-pcdt-linfoma-de-hodgkin-no-adulto-cp-80/@@display-file/file", "pagina": 8, "trecho": "biópsia excisional de um linfonodo para exame histopatológico com imuno-histoquímica é o procedimento padrão", "estado": "VERIFICADO" }
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026) — https://www.gov.br/conitec/pt-br/midias/consultas/relatorios/2026/relatorio-preliminar-pcdt-linfoma-de-hodgkin-no-adulto-cp-80/@@display-file/file",
+            "pagina": 8,
+            "trecho": "biópsia excisional de um linfonodo para exame histopatológico com imuno-histoquímica é o procedimento padrão",
+            "estado": "VERIFICADO"
+          }
         },
         {
           "tipo": "core",
           "quando": "Aceitável quando excisional inviável (agulha grossa guiada); PAAF não é opção",
           "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
-          "fonte": { "tipo": "CURSO", "referencia": "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas", "pagina": 6, "trecho": "PAAF não é uma opção (nunca em linfoproliferações)", "estado": "INFERIDO" }
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas",
+            "pagina": 6,
+            "trecho": "PAAF não é uma opção (nunca em linfoproliferações)",
+            "estado": "INFERIDO"
+          }
         }
       ],
       "laudoDeveConter": [
@@ -98,7 +157,13 @@
           "cenario": "diagnóstico",
           "consequencia": "Distingue LH clássico de NLPHL (conduta distinta); CD30 é alvo do brentuximabe",
           "disponivelSUS": "sim",
-          "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 7, "trecho": "manchas consistentemente positivas para CD30 e CD15, ocasionalmente positivas para CD20", "estado": "VERIFICADO" }
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "PCDT Linfoma de Hodgkin 2020",
+            "pagina": 7,
+            "trecho": "manchas consistentemente positivas para CD30 e CD15, ocasionalmente positivas para CD20",
+            "estado": "VERIFICADO"
+          }
         }
       ]
     }
@@ -106,49 +171,447 @@
   "estadiamento": {
     "sistema": "Lugano",
     "edicao": "Lugano (Ann Arbor modificado/Cotswolds); resposta por Deauville 5 pontos",
-    "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 9, "trecho": "Outra opção para proceder ao estadiamento é utilizar a classificação de Lugano", "estado": "VERIFICADO" },
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "PCDT Linfoma de Hodgkin 2020",
+      "pagina": 9,
+      "trecho": "Outra opção para proceder ao estadiamento é utilizar a classificação de Lugano",
+      "estado": "VERIFICADO"
+    },
     "exames": [
-      { "catalogoId": "PET_CT_FDG", "rotulo": "PET-CT basal", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 7, "trecho": "de corpo inteiro é o exame considerado padrão ouro para a avaliação inicial", "estado": "VERIFICADO" } },
-      { "catalogoId": "BIOPSIA_MEDULA", "rotulo": "Biópsia de medula óssea — apenas se sem PET-CT", "cenario": "estadiamento sem PET-CT", "indicacao": "condicional", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 7, "trecho": "biópsia da medula óssea não é indicada em pacientes submetidos à avaliação por PET-CT", "estado": "VERIFICADO" } },
-      { "catalogoId": "HEMOGRAMA", "rotulo": "Hemograma com plaquetas", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "Hemograma completo e contagem de plaquetas", "estado": "VERIFICADO" } },
-      { "catalogoId": null, "rotulo": "VHS (velocidade de hemossedimentação)", "pendencia": "SEM_ID_NO_CATALOGO", "cenario": "todos (define risco no estádio I–II)", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "determinação da velocidade de hemossedimentação (VHS)", "estado": "VERIFICADO" } },
-      { "catalogoId": "PCR", "rotulo": "Proteína C reativa", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "dosagem de proteína C reativa (PCR), fosfatase alcalina (FA), lactato desidrogenase (LDH)", "estado": "VERIFICADO" } },
-      { "catalogoId": "FOSFATASE_ALCALINA", "rotulo": "Fosfatase alcalina", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "dosagem de proteína C reativa (PCR), fosfatase alcalina (FA), lactato desidrogenase (LDH)", "estado": "VERIFICADO" } },
-      { "catalogoId": "DHL", "rotulo": "LDH", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "dosagem de proteína C reativa (PCR), fosfatase alcalina (FA), lactato desidrogenase (LDH)", "estado": "VERIFICADO" } },
-      { "catalogoId": "TGO", "rotulo": "Enzimas hepáticas (TGO)", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "lactato desidrogenase (LDH), enzimas hepáticas e albumina", "estado": "VERIFICADO" } },
-      { "catalogoId": "TGP", "rotulo": "Enzimas hepáticas (TGP)", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "lactato desidrogenase (LDH), enzimas hepáticas e albumina", "estado": "VERIFICADO" } },
-      { "catalogoId": "PROTEINAS_TOTAIS_FRACOES", "rotulo": "Albumina (proteínas totais e frações) — entra no IPS", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "lactato desidrogenase (LDH), enzimas hepáticas e albumina", "estado": "VERIFICADO" } },
-      { "catalogoId": "HBSAG", "rotulo": "HBsAg", "cenario": "pré-tratamento", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "exame sorológico para hepatites B e C, HIV e sífilis", "estado": "VERIFICADO" } },
-      { "catalogoId": "ANTI_HBC_TOTAL", "rotulo": "Anti-HBc total (rastreamento de HBV)", "cenario": "pré-tratamento", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "rastreamento da hepatite B (HBV) e de infecção latente por tuberculose", "estado": "VERIFICADO" } },
-      { "catalogoId": "ANTI_HCV", "rotulo": "Anti-HCV", "cenario": "pré-tratamento", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "exame sorológico para hepatites B e C, HIV e sífilis", "estado": "VERIFICADO" } },
-      { "catalogoId": "HIV", "rotulo": "Anti-HIV", "cenario": "pré-tratamento", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "exame sorológico para hepatites B e C, HIV e sífilis", "estado": "VERIFICADO" } },
-      { "catalogoId": null, "rotulo": "Sorologia para sífilis", "pendencia": "SEM_ID_NO_CATALOGO", "cenario": "pré-tratamento", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "exame sorológico para hepatites B e C, HIV e sífilis", "estado": "VERIFICADO" } },
-      { "catalogoId": null, "rotulo": "Rastreio de tuberculose latente (PT/IGRA)", "pendencia": "SEM_ID_NO_CATALOGO", "cenario": "pré-tratamento", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "rastreamento da hepatite B (HBV) e de infecção latente por tuberculose", "estado": "VERIFICADO" } },
-      { "catalogoId": "BETA_HCG", "rotulo": "β-hCG (mulheres em idade fértil)", "cenario": "pré-tratamento", "indicacao": "condicional", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "teste para gravidez – dosagem de gonadotrofina coriônica βHCG", "estado": "VERIFICADO" } },
-      { "catalogoId": "ESPIROMETRIA", "rotulo": "Prova de função pulmonar (bleomicina)", "cenario": "pré-ABVD/BEACOPP", "indicacao": "condicional", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "provas de função pulmonar e ecocardiograma, devem ser considerados", "estado": "VERIFICADO" } },
-      { "catalogoId": "ECOCARDIOGRAMA", "rotulo": "Ecocardiograma (antraciclina)", "cenario": "pré-ABVD/BEACOPP", "indicacao": "condicional", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "provas de função pulmonar e ecocardiograma, devem ser considerados", "estado": "VERIFICADO" } }
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET-CT basal",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 7,
+          "trecho": "de corpo inteiro é o exame considerado padrão ouro para a avaliação inicial",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BIOPSIA_MEDULA",
+        "rotulo": "Biópsia de medula óssea — apenas se sem PET-CT",
+        "cenario": "estadiamento sem PET-CT",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 7,
+          "trecho": "biópsia da medula óssea não é indicada em pacientes submetidos à avaliação por PET-CT",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma com plaquetas",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "Hemograma completo e contagem de plaquetas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "VHS",
+        "rotulo": "VHS (velocidade de hemossedimentação)",
+        "cenario": "todos (define risco no estádio I–II)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "determinação da velocidade de hemossedimentação (VHS)",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "VHS (velocidade de hemossedimentação): sem id no catálogo v1.1; SIGTAP 02.02.02.015-0.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
+      },
+      {
+        "catalogoId": "PCR",
+        "rotulo": "Proteína C reativa",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "dosagem de proteína C reativa (PCR), fosfatase alcalina (FA), lactato desidrogenase (LDH)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FOSFATASE_ALCALINA",
+        "rotulo": "Fosfatase alcalina",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "dosagem de proteína C reativa (PCR), fosfatase alcalina (FA), lactato desidrogenase (LDH)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "DHL",
+        "rotulo": "LDH",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "dosagem de proteína C reativa (PCR), fosfatase alcalina (FA), lactato desidrogenase (LDH)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGO",
+        "rotulo": "Enzimas hepáticas (TGO)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "lactato desidrogenase (LDH), enzimas hepáticas e albumina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "rotulo": "Enzimas hepáticas (TGP)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "lactato desidrogenase (LDH), enzimas hepáticas e albumina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PROTEINAS_TOTAIS_FRACOES",
+        "rotulo": "Albumina (proteínas totais e frações) — entra no IPS",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "lactato desidrogenase (LDH), enzimas hepáticas e albumina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HBSAG",
+        "rotulo": "HBsAg",
+        "cenario": "pré-tratamento",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "exame sorológico para hepatites B e C, HIV e sífilis",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ANTI_HBC_TOTAL",
+        "rotulo": "Anti-HBc total (rastreamento de HBV)",
+        "cenario": "pré-tratamento",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "rastreamento da hepatite B (HBV) e de infecção latente por tuberculose",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ANTI_HCV",
+        "rotulo": "Anti-HCV",
+        "cenario": "pré-tratamento",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "exame sorológico para hepatites B e C, HIV e sífilis",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HIV",
+        "rotulo": "Anti-HIV",
+        "cenario": "pré-tratamento",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "exame sorológico para hepatites B e C, HIV e sífilis",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "SIFILIS_NAO_TREPONEMICO",
+        "rotulo": "Sorologia para sífilis",
+        "cenario": "pré-tratamento",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "exame sorológico para hepatites B e C, HIV e sífilis",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "Sorologia para sífilis: sem id no catálogo v1.1; SIGTAP 02.02.03.111-0 (teste não treponêmico).",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
+      },
+      {
+        "catalogoId": "IGRA",
+        "rotulo": "Rastreio de tuberculose latente (PT/IGRA)",
+        "cenario": "pré-tratamento",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "rastreamento da hepatite B (HBV) e de infecção latente por tuberculose",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "Rastreio de tuberculose latente (PT/IGRA): sem id no catálogo v1.1; SIGTAP 02.02.03.024-5 (PT) e 02.02.03.136-5 (IGRA).",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
+      },
+      {
+        "catalogoId": "BETA_HCG",
+        "rotulo": "β-hCG (mulheres em idade fértil)",
+        "cenario": "pré-tratamento",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "teste para gravidez – dosagem de gonadotrofina coriônica βHCG",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ESPIROMETRIA",
+        "rotulo": "Prova de função pulmonar (bleomicina)",
+        "cenario": "pré-ABVD/BEACOPP",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "provas de função pulmonar e ecocardiograma, devem ser considerados",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ECOCARDIOGRAMA",
+        "rotulo": "Ecocardiograma (antraciclina)",
+        "cenario": "pré-ABVD/BEACOPP",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 8,
+          "trecho": "provas de função pulmonar e ecocardiograma, devem ser considerados",
+          "estado": "VERIFICADO"
+        }
+      }
     ],
     "gruposConduta": [
-      { "grupo": "Doença localizada favorável (I–II sem fatores de risco GHSG/EORTC/NCCN)", "conduta": "ABVD x2 + radioterapia de campo envolvido; adaptar à PET-CT pós-C2", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 11, "trecho": "Doença localizada sem fatores de riscos ou favorável", "estado": "VERIFICADO" } },
-      { "grupo": "Doença localizada desfavorável (I–II com fatores: massa mediastinal, VHS, >2–3 áreas, extranodal, idade ≥50 EORTC)", "conduta": "ABVD x4 + radioterapia; adaptar à PET-CT", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 11, "trecho": "Doença localizada com fatores de riscos ou desfavorável", "estado": "VERIFICADO" } },
-      { "grupo": "Doença avançada (III–IV); estratificar por IPS (7 fatores)", "conduta": "ABVD x6 (ou ABVD x2 → AVD x4 se PET-2 negativa); BEACOPP escalonado em selecionados (IPS ≥4 e <60 anos)", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 13, "trecho": "Sete fatores foram relacionados a uma menor sobrevida", "estado": "VERIFICADO" } },
-      { "grupo": "Recaída/refratário (refratário = sem resposta ou progressão até 90 dias)", "conduta": "Resgate com esquema à base de platina + TCTH autólogo se apto; brentuximabe se recaída/refratário pós-TCTH", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)", "pagina": 21, "trecho": "Doença refratária é definida como não resposta ou progressão durante a quimioterapia", "estado": "VERIFICADO" } }
+      {
+        "grupo": "Doença localizada favorável (I–II sem fatores de risco GHSG/EORTC/NCCN)",
+        "conduta": "ABVD x2 + radioterapia de campo envolvido; adaptar à PET-CT pós-C2",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 11,
+          "trecho": "Doença localizada sem fatores de riscos ou favorável",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Doença localizada desfavorável (I–II com fatores: massa mediastinal, VHS, >2–3 áreas, extranodal, idade ≥50 EORTC)",
+        "conduta": "ABVD x4 + radioterapia; adaptar à PET-CT",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 11,
+          "trecho": "Doença localizada com fatores de riscos ou desfavorável",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Doença avançada (III–IV); estratificar por IPS (7 fatores)",
+        "conduta": "ABVD x6 (ou ABVD x2 → AVD x4 se PET-2 negativa); BEACOPP escalonado em selecionados (IPS ≥4 e <60 anos)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 13,
+          "trecho": "Sete fatores foram relacionados a uma menor sobrevida",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Recaída/refratário (refratário = sem resposta ou progressão até 90 dias)",
+        "conduta": "Resgate com esquema à base de platina + TCTH autólogo se apto; brentuximabe se recaída/refratário pós-TCTH",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)",
+          "pagina": 21,
+          "trecho": "Doença refratária é definida como não resposta ou progressão durante a quimioterapia",
+          "estado": "VERIFICADO"
+        }
+      }
     ],
     "marcadores": {
       "uteis": [
-        { "catalogoId": "DHL", "uso": "avaliação basal e metabólica", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "dosagem de proteína C reativa (PCR), fosfatase alcalina (FA), lactato desidrogenase (LDH)", "estado": "VERIFICADO" } },
-        { "catalogoId": "PROTEINAS_TOTAIS_FRACOES", "uso": "albumina <4,0 g/dL é fator do IPS", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 13, "trecho": "albumina sérica inferior a 4,0 g/dL", "estado": "VERIFICADO" } }
+        {
+          "catalogoId": "DHL",
+          "uso": "avaliação basal e metabólica",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "PCDT Linfoma de Hodgkin 2020",
+            "pagina": 8,
+            "trecho": "dosagem de proteína C reativa (PCR), fosfatase alcalina (FA), lactato desidrogenase (LDH)",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "PROTEINAS_TOTAIS_FRACOES",
+          "uso": "albumina <4,0 g/dL é fator do IPS",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "PCDT Linfoma de Hodgkin 2020",
+            "pagina": 13,
+            "trecho": "albumina sérica inferior a 4,0 g/dL",
+            "estado": "VERIFICADO"
+          }
+        }
       ],
-      "naoPedirDeRotina": ["Biópsia de medula óssea quando há PET-CT de estadiamento", "Imagem de rotina em assintomático no seguimento"]
+      "naoPedirDeRotina": [
+        "Biópsia de medula óssea quando há PET-CT de estadiamento",
+        "Imagem de rotina em assintomático no seguimento"
+      ]
     }
   },
   "tratamento": {
     "cenarios": [
-      { "cenario": "localizado_favoravel", "intencao": "curativa", "modalidades": ["quimioterapia", "radioterapia"], "criterio": "I–II sem fatores de risco", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)", "pagina": 16, "trecho": "tratamento da doença localizada sem fatores de risco é de dois ciclos de ABVD", "estado": "VERIFICADO" } },
-      { "cenario": "localizado_desfavoravel", "intencao": "curativa", "modalidades": ["quimioterapia", "radioterapia"], "criterio": "I–II com fatores de risco", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)", "pagina": 16, "trecho": "a terapia se baseia em quatro ciclos de ABVD seguidos de radioterapia", "estado": "VERIFICADO" } },
-      { "cenario": "avancado", "intencao": "curativa", "modalidades": ["quimioterapia", "radioterapia de doença residual"], "criterio": "III–IV", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)", "pagina": 17, "trecho": "O tratamento consiste em 6 ciclos de ABVD e, caso haja doença residual", "estado": "VERIFICADO" } },
-      { "cenario": "recaido_refratario", "intencao": "curativa", "modalidades": ["quimioterapia de resgate à base de platina", "TCTH autólogo"], "criterio": "recaída após RC ou refratariedade", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)", "pagina": 21, "trecho": "esquemas de poliquimioterapia à base de platina (Quadro 7),31,32, seguidos por um TCPH", "estado": "VERIFICADO" } },
-      { "cenario": "pos_TCTH_autologo", "intencao": "paliativa", "modalidades": ["brentuximabe vedotina"], "criterio": "refratário ou recaído após TCTH autólogo (incorporado SUS, Portaria SCTIE 12/2019)", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)", "pagina": 22, "trecho": "Pacientes refratários ou com recidivas após o TCPH devem ser tratados com brentuximabe", "estado": "VERIFICADO" } }
+      {
+        "cenario": "localizado_favoravel",
+        "intencao": "curativa",
+        "modalidades": [
+          "quimioterapia",
+          "radioterapia"
+        ],
+        "criterio": "I–II sem fatores de risco",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)",
+          "pagina": 16,
+          "trecho": "tratamento da doença localizada sem fatores de risco é de dois ciclos de ABVD",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "localizado_desfavoravel",
+        "intencao": "curativa",
+        "modalidades": [
+          "quimioterapia",
+          "radioterapia"
+        ],
+        "criterio": "I–II com fatores de risco",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)",
+          "pagina": 16,
+          "trecho": "a terapia se baseia em quatro ciclos de ABVD seguidos de radioterapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "avancado",
+        "intencao": "curativa",
+        "modalidades": [
+          "quimioterapia",
+          "radioterapia de doença residual"
+        ],
+        "criterio": "III–IV",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)",
+          "pagina": 17,
+          "trecho": "O tratamento consiste em 6 ciclos de ABVD e, caso haja doença residual",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "recaido_refratario",
+        "intencao": "curativa",
+        "modalidades": [
+          "quimioterapia de resgate à base de platina",
+          "TCTH autólogo"
+        ],
+        "criterio": "recaída após RC ou refratariedade",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)",
+          "pagina": 21,
+          "trecho": "esquemas de poliquimioterapia à base de platina (Quadro 7),31,32, seguidos por um TCPH",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "pos_TCTH_autologo",
+        "intencao": "paliativa",
+        "modalidades": [
+          "brentuximabe vedotina"
+        ],
+        "criterio": "refratário ou recaído após TCTH autólogo (incorporado SUS, Portaria SCTIE 12/2019)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)",
+          "pagina": 22,
+          "trecho": "Pacientes refratários ou com recidivas após o TCPH devem ser tratados com brentuximabe",
+          "estado": "VERIFICADO"
+        }
+      }
     ],
     "protocolos": [
       {
@@ -157,18 +620,62 @@
         "cenario": "localizado_favoravel | localizado_desfavoravel | avancado (1ª linha)",
         "linha": "1ª linha",
         "drogas": [
-          { "droga": "doxorrubicina", "dose": 25, "unidade": "mg/m2", "via": "EV", "dias": "D1 e D15", "observacao": "" },
-          { "droga": "bleomicina", "dose": 10, "unidade": "UI", "via": "EV", "dias": "D1 e D15", "observacao": "10 UI/m2 (unidade por m2). Omitir (AVD) após PET-2 negativa na doença avançada e em idosos após C2" },
-          { "droga": "vimblastina", "dose": 6, "unidade": "mg/m2", "via": "EV", "dias": "D1 e D15", "observacao": "" },
-          { "droga": "dacarbazina", "dose": 375, "unidade": "mg/m2", "via": "EV", "dias": "D1 e D15", "observacao": "PCDT preliminar 2026 grafa 365 mg/m2 — ver conflitos" }
+          {
+            "droga": "doxorrubicina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D15",
+            "observacao": ""
+          },
+          {
+            "droga": "bleomicina",
+            "dose": 10,
+            "unidade": "UI/m2",
+            "via": "EV",
+            "dias": "D1 e D15",
+            "observacao": "10 UI/m2 (unidade por m2). Omitir (AVD) após PET-2 negativa na doença avançada e em idosos após C2"
+          },
+          {
+            "droga": "vimblastina",
+            "dose": 6,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D15",
+            "observacao": ""
+          },
+          {
+            "droga": "dacarbazina",
+            "dose": 375,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D15",
+            "observacao": "PCDT preliminar 2026 grafa 365 mg/m2 — ver conflitos"
+          }
         ],
         "cicloDias": 28,
         "numeroCiclos": null,
         "premedicacao": "",
         "ajusteObrigatorio": "Bleomicina: omitir se >80 anos/frágil, ClCr ≤5 mL/min, tabagismo ativo ou doença pulmonar significativa (PCDT 2026, p.15). Nº de ciclos conforme cenário: 2 (favorável), 4 (desfavorável), 6 (avançado).",
         "fichaId": null,
-        "sus": { "disponivel": "sim", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 15, "trecho": "Dacarbazina 375 mg /m2 D1 e D15 IV", "estado": "VERIFICADO" } },
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020, Figura 1 (p.15); confirmado em bula FDA ADCETRIS (braço ABVD do ECHELON-1)", "pagina": 15, "trecho": "Intervalo entre os ciclos: 28 dias", "estado": "VERIFICADO" }
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "PCDT Linfoma de Hodgkin 2020",
+            "pagina": 15,
+            "trecho": "Dacarbazina 375 mg /m2 D1 e D15 IV",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020, Figura 1 (p.15); confirmado em bula FDA ADCETRIS (braço ABVD do ECHELON-1)",
+          "pagina": 15,
+          "trecho": "Intervalo entre os ciclos: 28 dias",
+          "estado": "VERIFICADO"
+        },
+        "duracaoPorCenario": "PENDENTE: número de ciclos por estádio e resposta ao PET (não definir duração única)"
       },
       {
         "id": "linfoma-hodgkin-beacopp-escalonado",
@@ -176,21 +683,85 @@
         "cenario": "localizado_desfavoravel com PET-2 Deauville 4 | avancado em selecionados (IPS ≥4 e <60 anos)",
         "linha": "1ª linha (intensificação)",
         "drogas": [
-          { "droga": "bleomicina", "dose": 10, "unidade": "UI", "via": "EV", "dias": "D8", "observacao": "10 UI/m2" },
-          { "droga": "etoposídeo", "dose": 200, "unidade": "mg/m2", "via": "EV", "dias": "D1 a D3", "observacao": "" },
-          { "droga": "doxorrubicina", "dose": 35, "unidade": "mg/m2", "via": "EV", "dias": "D1", "observacao": "" },
-          { "droga": "ciclofosfamida", "dose": 1250, "unidade": "mg/m2", "via": "EV", "dias": "D1", "observacao": "" },
-          { "droga": "vincristina", "dose": 1.4, "unidade": "mg/m2", "via": "EV", "dias": "D8", "observacao": "máximo 2 mg" },
-          { "droga": "procarbazina", "dose": 100, "unidade": "mg/m2", "via": "VO", "dias": "D1 a D7", "observacao": "PCDT preliminar 2026 grafa 'mg2/m' (tipográfico); PCDT 2020 legível: 100 mg/m2" },
-          { "droga": "prednisona", "dose": 40, "unidade": "mg/m2", "via": "VO", "dias": "D1 a D14", "observacao": "" }
+          {
+            "droga": "bleomicina",
+            "dose": 10,
+            "unidade": "UI/m2",
+            "via": "EV",
+            "dias": "D8",
+            "observacao": "10 UI/m2"
+          },
+          {
+            "droga": "etoposídeo",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": ""
+          },
+          {
+            "droga": "doxorrubicina",
+            "dose": 35,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "ciclofosfamida",
+            "dose": 1250,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "vincristina",
+            "dose": 1.4,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D8",
+            "observacao": "máximo 2 mg"
+          },
+          {
+            "droga": "procarbazina",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1 a D7",
+            "observacao": "PCDT preliminar 2026 grafa 'mg2/m' (tipográfico); PCDT 2020 legível: 100 mg/m2"
+          },
+          {
+            "droga": "prednisona",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1 a D14",
+            "observacao": ""
+          }
         ],
         "cicloDias": 21,
         "numeroCiclos": null,
         "premedicacao": "G-CSF a partir do D8, SC (parte do esquema)",
         "ajusteObrigatorio": "Somente em centro com suporte apropriado; <60 anos. Não usar na gestação.",
         "fichaId": null,
-        "sus": { "disponivel": "sim", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 15, "trecho": "Ciclofosfamida 1250 mg/m2 D1 IV", "estado": "VERIFICADO" } },
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020, Figura 1 (p.15); idem Apêndice 1 do PCDT preliminar 2026 (p.40)", "pagina": 15, "trecho": "Intervalo entre os ciclos: 21 dias", "estado": "VERIFICADO" }
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "PCDT Linfoma de Hodgkin 2020",
+            "pagina": 15,
+            "trecho": "Ciclofosfamida 1250 mg/m2 D1 IV",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020, Figura 1 (p.15); idem Apêndice 1 do PCDT preliminar 2026 (p.40)",
+          "pagina": 15,
+          "trecho": "Intervalo entre os ciclos: 21 dias",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "linfoma-hodgkin-bv-avd",
@@ -198,18 +769,61 @@
         "cenario": "avancado (III–IV) — diretriz internacional",
         "linha": "1ª linha",
         "drogas": [
-          { "droga": "brentuximabe vedotina", "dose": 1.2, "unidade": "mg/kg", "via": "EV", "dias": "D1 e D15", "observacao": "máximo 120 mg/dose; até 12 doses" },
-          { "droga": "doxorrubicina", "dose": 25, "unidade": "mg/m2", "via": "EV", "dias": "D1 e D15", "observacao": "" },
-          { "droga": "vimblastina", "dose": 6, "unidade": "mg/m2", "via": "EV", "dias": "D1 e D15", "observacao": "" },
-          { "droga": "dacarbazina", "dose": 375, "unidade": "mg/m2", "via": "EV", "dias": "D1 e D15", "observacao": "" }
+          {
+            "droga": "brentuximabe vedotina",
+            "dose": 1.2,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 e D15",
+            "observacao": "máximo 120 mg/dose; até 12 doses"
+          },
+          {
+            "droga": "doxorrubicina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D15",
+            "observacao": ""
+          },
+          {
+            "droga": "vimblastina",
+            "dose": 6,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D15",
+            "observacao": ""
+          },
+          {
+            "droga": "dacarbazina",
+            "dose": 375,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D15",
+            "observacao": ""
+          }
         ],
         "cicloDias": 28,
         "numeroCiclos": 6,
         "premedicacao": "",
         "ajusteObrigatorio": "Evitar brentuximabe em insuficiência renal grave e hepática moderada/grave (bula).",
         "fichaId": null,
-        "sus": { "disponivel": "nao", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)", "pagina": 22, "trecho": "Pacientes refratários ou com recidivas após o TCPH devem ser tratados com brentuximabe", "estado": "VERIFICADO" } },
-        "fonte": { "tipo": "BULA", "referencia": "Bula FDA ADCETRIS — openFDA set_id 3904f8dd-1aef-3490-e48f-bd55f32ed67f (2025-11-11), seção 14 (ECHELON-1)", "pagina": null, "trecho": "Days 1 and 15 of each 28-day cycle for up to 6 cycles", "estado": "VERIFICADO" }
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)",
+            "pagina": 22,
+            "trecho": "Pacientes refratários ou com recidivas após o TCPH devem ser tratados com brentuximabe",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA ADCETRIS — openFDA set_id 3904f8dd-1aef-3490-e48f-bd55f32ed67f (2025-11-11), seção 14 (ECHELON-1)",
+          "pagina": null,
+          "trecho": "Days 1 and 15 of each 28-day cycle for up to 6 cycles",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "linfoma-hodgkin-brentuximabe-pos-tcth",
@@ -217,82 +831,473 @@
         "cenario": "pos_TCTH_autologo",
         "linha": "3ª linha (procedimento SUS 03.04.06.004-6)",
         "drogas": [
-          { "droga": "brentuximabe vedotina", "dose": 1.8, "unidade": "mg/kg", "via": "EV", "dias": "D1 (infusão 30 min)", "observacao": "mínimo 8 e máximo 16 ciclos; bula: máximo 180 mg/dose" }
+          {
+            "droga": "brentuximabe vedotina",
+            "dose": 1.8,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 (infusão 30 min)",
+            "observacao": "mínimo 8 e máximo 16 ciclos; bula: máximo 180 mg/dose"
+          }
         ],
         "cicloDias": 21,
         "numeroCiclos": 16,
         "premedicacao": "",
         "ajusteObrigatorio": "Insuficiência renal grave ou hepática: dose inicial 1,2 mg/kg (PCDT). Não administrar em bolus.",
         "fichaId": null,
-        "sus": { "disponivel": "sim", "fonte": { "tipo": "NORMA", "referencia": "PCDT Linfoma de Hodgkin 2020 (Portaria SCTIE/MS nº 12/2019)", "pagina": 40, "trecho": "O brentuximabe vedotina foi incorporado no SUS para o tratamento de pacientes", "estado": "VERIFICADO" } },
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)", "pagina": 22, "trecho": "A dose recomendada de BV é 1,8 mg/kg, administrada como uma infusão intravenosa", "estado": "VERIFICADO" }
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "PCDT Linfoma de Hodgkin 2020 (Portaria SCTIE/MS nº 12/2019)",
+            "pagina": 40,
+            "trecho": "O brentuximabe vedotina foi incorporado no SUS para o tratamento de pacientes",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)",
+          "pagina": 22,
+          "trecho": "A dose recomendada de BV é 1,8 mg/kg, administrada como uma infusão intravenosa",
+          "estado": "VERIFICADO"
+        }
       }
     ],
     "radioterapia": [
-      { "cenario": "localizado_favoravel após ABVD x2 com PET-CT negativa", "doseTotalGy": 20, "fracoes": null, "concomitante": "não (sequencial)", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020, Figura 5", "pagina": 22, "trecho": "NODAL 20Gy", "estado": "VERIFICADO" } },
-      { "cenario": "localizado_desfavoravel / PET-CT positiva", "doseTotalGy": 30, "fracoes": null, "concomitante": "não (sequencial)", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020, Figura 6", "pagina": 23, "trecho": "NODAL 30Gy", "estado": "VERIFICADO" } },
-      { "cenario": "avancado com doença residual >2,5 cm ou PET-CT positiva", "doseTotalGy": null, "fracoes": null, "pendencia": "SEM_FONTE", "concomitante": "não", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 20, "trecho": "caso haja doença residual superior a 2,5 cm, o paciente deve ser submetido", "estado": "VERIFICADO" } }
+      {
+        "cenario": "localizado_favoravel após ABVD x2 com PET-CT negativa",
+        "doseTotalGy": 20,
+        "fracoes": null,
+        "concomitante": "não (sequencial)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020, Figura 5",
+          "pagina": 22,
+          "trecho": "NODAL 20Gy",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "localizado_desfavoravel / PET-CT positiva",
+        "doseTotalGy": 30,
+        "fracoes": null,
+        "concomitante": "não (sequencial)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020, Figura 6",
+          "pagina": 23,
+          "trecho": "NODAL 30Gy",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "avancado com doença residual >2,5 cm ou PET-CT positiva",
+        "doseTotalGy": 30,
+        "fracoes": null,
+        "concomitante": "não",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 20,
+          "trecho": "caso haja doença residual superior a 2,5 cm, o paciente deve ser submetido",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Após 6 ciclos de ABVD com doença residual >2,5 cm: RT em campo envolvido ou nodal 30 Gy (PCDT 2020, Figura 4). Fracionamento não informado (aceno de RT).",
+        "fonteDose": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020, Figura 4 (fluxograma da doença avançada)",
+          "pagina": 20,
+          "trecho": "Radioterapia em campo envolvido ou nodal (30 Gy)",
+          "estado": "VERIFICADO"
+        }
+      }
     ],
     "cirurgia": [
-      { "procedimento": "Biópsia excisional de linfonodo (diagnóstico); sem papel terapêutico", "quando": "Diagnóstico e confirmação de refratariedade (Deauville 4 sem queda de SUV ou 5)", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)", "pagina": 19, "trecho": "Deve-se realizar uma nova biópsia nos pacientes que apresentarem", "estado": "VERIFICADO" } }
+      {
+        "procedimento": "Biópsia excisional de linfonodo (diagnóstico); sem papel terapêutico",
+        "quando": "Diagnóstico e confirmação de refratariedade (Deauville 4 sem queda de SUV ou 5)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)",
+          "pagina": 19,
+          "trecho": "Deve-se realizar uma nova biópsia nos pacientes que apresentarem",
+          "estado": "VERIFICADO"
+        }
+      }
     ],
     "biomarcadorTratamento": [
-      { "seAlvo": "CD30+", "opcao": "Brentuximabe vedotina", "evidencia": "Incorporado apenas pós-TCTH autólogo; 1ª linha (A+AVD) fora do SUS", "sus": "parcial", "fonte": { "tipo": "NORMA", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 40, "trecho": "linfoma de Hodgkin refratário ou recidivado após transplante de células-tronco hematopoéticas", "estado": "VERIFICADO" } }
+      {
+        "seAlvo": "CD30+",
+        "opcao": "Brentuximabe vedotina",
+        "evidencia": "Incorporado apenas pós-TCTH autólogo; 1ª linha (A+AVD) fora do SUS",
+        "sus": "parcial",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 40,
+          "trecho": "linfoma de Hodgkin refratário ou recidivado após transplante de células-tronco hematopoéticas",
+          "estado": "VERIFICADO"
+        }
+      }
     ],
     "suporte": {
       "emetogenicidade": null,
       "riscoNeutropeniaFebril": null,
-      "outros": ["G-CSF faz parte do BEACOPP (a partir do D8)", "Planejamento reprodutivo antes do tratamento", "Emetogenicidade e risco de NF: SEM_FONTE nas fontes abertas lidas"],
+      "outros": [
+        "G-CSF faz parte do BEACOPP (a partir do D8)",
+        "Planejamento reprodutivo antes do tratamento",
+        "Emetogenicidade e risco de NF: SEM_FONTE nas fontes abertas lidas"
+      ],
       "pendencia": "SEM_FONTE (emetogenicidade/NF)",
-      "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 8, "trecho": "deve ser oferecido a pacientes em idade reprodutiva o planejamento reprodutivo", "estado": "VERIFICADO" }
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "PCDT Linfoma de Hodgkin 2020",
+        "pagina": 8,
+        "trecho": "deve ser oferecido a pacientes em idade reprodutiva o planejamento reprodutivo",
+        "estado": "VERIFICADO"
+      },
+      "pendenciaClasse": {
+        "texto": "Emetogenicidade/NF via módulo de suporte.",
+        "classe": "DEPENDE_MOTOR_CODIGO",
+        "buscasFeitas": [
+          "MASCC/ESMO 2023"
+        ]
+      }
     },
     "ensaios": [
-      { "nome": "ECHELON-1", "nct": "NCT01712490", "nctEstado": "VERIFICADO", "populacao": "LH clássico EC III–IV não tratado", "bracos": "A+AVD × ABVD", "desfecho": "SLP modificada", "resultado": "Base do registro FDA de A+AVD em EC III–IV", "fonte": { "tipo": "BULA", "referencia": "Bula FDA ADCETRIS seção 14; ClinicalTrials.gov API v2 NCT01712490 (COMPLETED)", "pagina": null, "trecho": "evaluated in a randomized, open-label, 2-arm, multicenter trial", "estado": "VERIFICADO" } }
+      {
+        "nome": "ECHELON-1",
+        "nct": "NCT01712490",
+        "nctEstado": "VERIFICADO",
+        "populacao": "LH clássico EC III–IV não tratado",
+        "bracos": "A+AVD × ABVD",
+        "desfecho": "SLP modificada",
+        "resultado": "Base do registro FDA de A+AVD em EC III–IV",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA ADCETRIS seção 14; ClinicalTrials.gov API v2 NCT01712490 (COMPLETED)",
+          "pagina": null,
+          "trecho": "evaluated in a randomized, open-label, 2-arm, multicenter trial",
+          "estado": "VERIFICADO"
+        }
+      }
     ],
     "seguimento": [
-      { "periodo": "pós-tratamento, suspeita de recidiva", "exames": ["PET_CT_FDG", "TC_TORAX"], "periodicidade": "somente se suspeita clínica (não rotina em assintomático)", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 37, "trecho": "a imagem radiológica não deve ser realizada rotineiramente em pacientes assintomáticos", "estado": "VERIFICADO" } },
-      { "periodo": "pós-RT cervical", "exames": ["TSH"], "periodicidade": "anual", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 38, "trecho": "TSH) seja medido uma vez por ano em pacientes submetidos a radioterapia", "estado": "VERIFICADO" } },
-      { "periodo": "pós-QT + RT mediastinal ≥20 Gy", "exames": ["ECG", "ECOCARDIOGRAMA"], "periodicidade": "rastreio de cardiopatia (periodicidade SEM_FONTE)", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 37, "trecho": "devem ser submetidos a eletrocardiografia, ecocardiografia e a um exame", "estado": "VERIFICADO" } },
-      { "periodo": "12 meses após RT pulmonar/mediastinal", "exames": ["ESPIROMETRIA"], "periodicidade": "uma vez aos 12 meses", "fonte": { "tipo": "DIRETRIZ", "referencia": "PCDT Linfoma de Hodgkin 2020", "pagina": 38, "trecho": "testes de função pulmonar, incluindo a medição da capacidade de difusão, 12 meses", "estado": "VERIFICADO" } }
+      {
+        "periodo": "pós-tratamento, suspeita de recidiva",
+        "exames": [
+          "PET_CT_FDG",
+          "TC_TORAX"
+        ],
+        "periodicidade": "somente se suspeita clínica (não rotina em assintomático)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 37,
+          "trecho": "a imagem radiológica não deve ser realizada rotineiramente em pacientes assintomáticos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "pós-RT cervical",
+        "exames": [
+          "TSH"
+        ],
+        "periodicidade": "anual",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 38,
+          "trecho": "TSH) seja medido uma vez por ano em pacientes submetidos a radioterapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "pós-QT + RT mediastinal ≥20 Gy",
+        "exames": [
+          "ECG",
+          "ECOCARDIOGRAMA"
+        ],
+        "periodicidade": "rastreio de cardiopatia (periodicidade SEM_FONTE)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 37,
+          "trecho": "devem ser submetidos a eletrocardiografia, ecocardiografia e a um exame",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "12 meses após RT pulmonar/mediastinal",
+        "exames": [
+          "ESPIROMETRIA"
+        ],
+        "periodicidade": "uma vez aos 12 meses",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Linfoma de Hodgkin 2020",
+          "pagina": 38,
+          "trecho": "testes de função pulmonar, incluindo a medição da capacidade de difusão, 12 meses",
+          "estado": "VERIFICADO"
+        }
+      }
     ]
   },
   "ligacoes": {
-    "exames": ["PET_CT_FDG", "TC_PESCOCO", "TC_TORAX", "TC_ABDOMEN_SUPERIOR", "TC_PELVE", "RX_TORAX_PA_PERFIL", "BIOPSIA_GANGLIO", "BIOPSIA_PERCUTANEA_GUIADA", "IMUNOHISTOQUIMICA", "BIOPSIA_MEDULA", "HEMOGRAMA", "PCR", "FOSFATASE_ALCALINA", "DHL", "TGO", "TGP", "PROTEINAS_TOTAIS_FRACOES", "HBSAG", "ANTI_HBC_TOTAL", "ANTI_HCV", "HIV", "BETA_HCG", "ESPIROMETRIA", "ECOCARDIOGRAMA", "ECG", "TSH"],
+    "exames": [
+      "PET_CT_FDG",
+      "TC_PESCOCO",
+      "TC_TORAX",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "RX_TORAX_PA_PERFIL",
+      "BIOPSIA_GANGLIO",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "IMUNOHISTOQUIMICA",
+      "BIOPSIA_MEDULA",
+      "HEMOGRAMA",
+      "PCR",
+      "FOSFATASE_ALCALINA",
+      "DHL",
+      "TGO",
+      "TGP",
+      "PROTEINAS_TOTAIS_FRACOES",
+      "HBSAG",
+      "ANTI_HBC_TOTAL",
+      "ANTI_HCV",
+      "HIV",
+      "BETA_HCG",
+      "ESPIROMETRIA",
+      "ECOCARDIOGRAMA",
+      "ECG",
+      "TSH",
+      "VHS",
+      "SIFILIS_NAO_TREPONEMICO",
+      "IGRA"
+    ],
     "interacoesConsultar": [
-      { "droga": "bleomicina", "com": "oxigênio em alta FiO2 / G-CSF", "ref": null },
-      { "droga": "vimblastina/vincristina", "com": "inibidores fortes de CYP3A4 (azóis)", "ref": null },
-      { "droga": "procarbazina", "com": "álcool, alimentos com tiramina, IMAO", "ref": null }
+      {
+        "droga": "bleomicina",
+        "com": "oxigênio em alta FiO2 / G-CSF",
+        "ref": null
+      },
+      {
+        "droga": "vimblastina/vincristina",
+        "com": "inibidores fortes de CYP3A4 (azóis)",
+        "ref": null
+      },
+      {
+        "droga": "procarbazina",
+        "com": "álcool, alimentos com tiramina, IMAO",
+        "ref": null
+      }
     ],
     "ctcaeAcao": [
-      { "classe": "pulmonar (bleomicina)", "termosCTCAEv6": ["Pneumonite", "Dispneia"] },
-      { "classe": "hematológica", "termosCTCAEv6": ["Neutropenia febril", "Contagem de neutrófilos diminuída"] },
-      { "classe": "neurológica (vimblastina/brentuximabe)", "termosCTCAEv6": ["Neuropatia periférica sensitiva", "Neuropatia periférica motora"] },
-      { "classe": "cardíaca (antraciclina)", "termosCTCAEv6": ["Insuficiência cardíaca", "Fração de ejeção diminuída"] }
+      {
+        "classe": "pulmonar (bleomicina)",
+        "termosCTCAEv6": [
+          "Pneumonite",
+          "Dispneia"
+        ]
+      },
+      {
+        "classe": "hematológica",
+        "termosCTCAEv6": [
+          "Neutropenia febril",
+          "Contagem de neutrófilos diminuída"
+        ]
+      },
+      {
+        "classe": "neurológica (vimblastina/brentuximabe)",
+        "termosCTCAEv6": [
+          "Neuropatia periférica sensitiva",
+          "Neuropatia periférica motora"
+        ]
+      },
+      {
+        "classe": "cardíaca (antraciclina)",
+        "termosCTCAEv6": [
+          "Insuficiência cardíaca",
+          "Fração de ejeção diminuída"
+        ]
+      }
     ],
-    "suporteReceitas": ["antiemético conforme esquema", "G-CSF (BEACOPP)"],
-    "orientacoes": ["planejamento reprodutivo antes da QT/RT", "sinais de toxicidade pulmonar (bleomicina)", "vacinação conforme CRIE"],
-    "encaminhamentos": ["radioterapia", "cuidados-paliativos", "psico-oncologia", "nutricao", "centro de TCTH (recaída)"],
-    "laudos": ["APAC quimioterapia 03.04.06.001-1 (1ª linha), 03.04.06.003-8 (2ª), 03.04.06.004-6 (3ª)"],
+    "suporteReceitas": [
+      "antiemético conforme esquema",
+      "G-CSF (BEACOPP)"
+    ],
+    "orientacoes": [
+      "planejamento reprodutivo antes da QT/RT",
+      "sinais de toxicidade pulmonar (bleomicina)",
+      "vacinação conforme CRIE"
+    ],
+    "encaminhamentos": [
+      "radioterapia",
+      "cuidados-paliativos",
+      "psico-oncologia",
+      "nutricao",
+      "centro de TCTH (recaída)"
+    ],
+    "laudos": [
+      "APAC quimioterapia 03.04.06.001-1 (1ª linha), 03.04.06.003-8 (2ª), 03.04.06.004-6 (3ª)"
+    ],
     "formulasXYZ": [
-      { "x": "LH EC I–II favorável após ABVD x2", "y": "PET-CT interina Deauville 1–3", "z": "radioterapia nodal/campo envolvido 20 Gy (sem ciclos extras)", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)", "pagina": 18, "trecho": "Em caso de PET-CT negativa realiza-se radioterapia", "estado": "VERIFICADO" } },
-      { "x": "LH EC III–IV após ABVD x2", "y": "PET-CT interina negativa", "z": "AVD x4 (omitir bleomicina)", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)", "pagina": 20, "trecho": "quatro ciclos complementares aos dois ciclos iniciais de ABVD serão sem a bleomicina (AVD)", "estado": "VERIFICADO" } },
-      { "x": "PET-CT com Deauville 4 sem queda de SUV ou Deauville 5", "y": "qualquer estádio", "z": "nova biópsia; se positiva, tratar como refratário", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)", "pagina": 19, "trecho": "Os pacientes com resultado positivo ao exame histopatológico do material de biópsia", "estado": "VERIFICADO" } },
-      { "x": "Recaída ou refratariedade após TCTH autólogo", "y": "CD30+ (LH clássico)", "z": "brentuximabe 1,8 mg/kg a cada 21 dias, 8 a 16 ciclos (SUS)", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)", "pagina": 22, "trecho": "devem receber um mínimo de oito doses e até um máximo de 16 ciclos", "estado": "VERIFICADO" } }
+      {
+        "x": "LH EC I–II favorável após ABVD x2",
+        "y": "PET-CT interina Deauville 1–3",
+        "z": "radioterapia nodal/campo envolvido 20 Gy (sem ciclos extras)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)",
+          "pagina": 18,
+          "trecho": "Em caso de PET-CT negativa realiza-se radioterapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "LH EC III–IV após ABVD x2",
+        "y": "PET-CT interina negativa",
+        "z": "AVD x4 (omitir bleomicina)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)",
+          "pagina": 20,
+          "trecho": "quatro ciclos complementares aos dois ciclos iniciais de ABVD serão sem a bleomicina (AVD)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "PET-CT com Deauville 4 sem queda de SUV ou Deauville 5",
+        "y": "qualquer estádio",
+        "z": "nova biópsia; se positiva, tratar como refratário",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)",
+          "pagina": 19,
+          "trecho": "Os pacientes com resultado positivo ao exame histopatológico do material de biópsia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Recaída ou refratariedade após TCTH autólogo",
+        "y": "CD30+ (LH clássico)",
+        "z": "brentuximabe 1,8 mg/kg a cada 21 dias, 8 a 16 ciclos (SUS)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026)",
+          "pagina": 22,
+          "trecho": "devem receber um mínimo de oito doses e até um máximo de 16 ciclos",
+          "estado": "VERIFICADO"
+        }
+      }
     ]
   },
   "pendencias": [
-    "VHS, sífilis e PT/IGRA sem catalogoId (SEM_ID_NO_CATALOGO)",
-    "Dose/fracionamento de RT na doença avançada residual: SEM_FONTE",
-    "Emetogenicidade e risco de neutropenia febril por esquema: SEM_FONTE",
-    "Nivolumabe-AVD, BrECADD, pembrolizumabe-GVD e manutenção com brentuximabe pós-TCTH citados no curso (NCCN) sem fonte aberta de dose lida e sem incorporação SUS — não entraram como protocolo",
-    "Esquemas de resgate (ICE, DHAP, GDP, GEMOX, DHAOX, IGEV, ESHAP) têm dose apenas no PCDT preliminar 2026 (Apêndice 1, p.40–41); não transcritos aguardando versão final",
-    "PCDT 2026 está em consulta pública; reconferir doses quando publicado",
-    "NLPHL, gestante, idoso e HIV: condutas do PCDT não estruturadas neste pack"
+    {
+      "texto": "VHS, sorologia de sífilis e PT/IGRA sem id no catálogo v1.1 (códigos SIGTAP anotados). Inclusão depende de D-F1-02.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "catálogo v1.1",
+        "SIGTAP 09/2026"
+      ]
+    },
+    {
+      "texto": "Emetogenicidade/NF por esquema via módulo de suporte (MASCC/ESMO 2023).",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "PCDT LH 2020/2026",
+        "MASCC/ESMO 2023 (PMC10937211)"
+      ]
+    },
+    {
+      "texto": "Esquemas internacionais sem incorporação SUS. Nota: brentuximabe vedotina em 1ª linha do LHc avançado (18-59 anos) está 'Em análise' na Conitec (demanda de 22/05/2026).",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Painel de Demandas Conitec 15/06/2026",
+        "Onco PRO aula 80"
+      ]
+    },
+    {
+      "texto": "Resgate de linfoma não buscado (orientação do Dr. Silas). Doses existem no Apêndice 1 do PCDT preliminar 2026 (p.40-41), algumas incompletas (dia/via).",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "PCDT LH preliminar 2026 p.40-41"
+      ]
+    },
+    {
+      "texto": "Reconferir doses quando o PCDT 2026 for publicado.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Conitec CP 80/2026"
+      ]
+    },
+    {
+      "texto": "Populações especiais não estruturadas.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "PCDT LH 2020/2026"
+      ]
+    }
   ],
   "conflitos": [
-    { "tema": "Dacarbazina no ABVD", "fonteA": { "tipo": "DIRETRIZ", "referencia": "PCDT 2020 (Fig. 1) e bula FDA ADCETRIS (braço ABVD)", "pagina": 15, "trecho": "Dacarbazina 375 mg /m2 D1 e D15 IV", "estado": "VERIFICADO" }, "fonteB": { "tipo": "DIRETRIZ", "referencia": "PCDT preliminar 2026, Apêndice 1", "pagina": 40, "trecho": "D – dacarbazina 365 mg/m2 D1 e D15 IV", "estado": "CONFLITANTE" }, "escolhaSeguranca": "Adotado 375 mg/m2 (PCDT vigente + bula, duas fontes concordantes); 365 provável erro tipográfico do texto preliminar. Médico confirma." },
-    { "tema": "Ciclofosfamida no BEACOPP padrão", "fonteA": { "tipo": "DIRETRIZ", "referencia": "PCDT 2020 (Fig. 1)", "pagina": 15, "trecho": "Ciclofosfamida 650mg/m2 D1 IV", "estado": "VERIFICADO" }, "fonteB": { "tipo": "DIRETRIZ", "referencia": "PCDT preliminar 2026, Apêndice 1", "pagina": 40, "trecho": "C –ciclofosfamida 350 mg/m2 D1 IV", "estado": "CONFLITANTE" }, "escolhaSeguranca": "BEACOPP padrão não incluído como protocolo até a versão final; se usado, conferir com o PCDT vigente (650 mg/m2)." },
-    { "tema": "1ª linha avançada: A+AVD/Nivo-AVD (curso/NCCN) × ABVD/BEACOPPesc (PCDT SUS)", "fonteA": { "tipo": "CURSO", "referencia": "Onco PRO 2026, Aula 80", "pagina": 10, "trecho": "2 ciclos ABVD ou 2 ciclos Bv-AVD (A+AVD)", "estado": "INFERIDO" }, "fonteB": { "tipo": "DIRETRIZ", "referencia": "PCDT preliminar 2026", "pagina": 17, "trecho": "O tratamento consiste em 6 ciclos de ABVD e, caso haja doença residual", "estado": "VERIFICADO" }, "escolhaSeguranca": "No SUS, ABVD (± BEACOPPesc em selecionados). A+AVD registrado como diretriz internacional, não SUS." }
+    {
+      "tema": "Dacarbazina no ABVD",
+      "fonteA": {
+        "tipo": "DIRETRIZ",
+        "referencia": "PCDT 2020 (Fig. 1) e bula FDA ADCETRIS (braço ABVD)",
+        "pagina": 15,
+        "trecho": "Dacarbazina 375 mg /m2 D1 e D15 IV",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "DIRETRIZ",
+        "referencia": "PCDT preliminar 2026, Apêndice 1",
+        "pagina": 40,
+        "trecho": "D – dacarbazina 365 mg/m2 D1 e D15 IV",
+        "estado": "CONFLITANTE"
+      },
+      "escolhaSeguranca": "Adotado 375 mg/m2 (PCDT vigente + bula, duas fontes concordantes); 365 provável erro tipográfico do texto preliminar. Médico confirma.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Ciclofosfamida no BEACOPP padrão",
+      "fonteA": {
+        "tipo": "DIRETRIZ",
+        "referencia": "PCDT 2020 (Fig. 1)",
+        "pagina": 15,
+        "trecho": "Ciclofosfamida 650mg/m2 D1 IV",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "DIRETRIZ",
+        "referencia": "PCDT preliminar 2026, Apêndice 1",
+        "pagina": 40,
+        "trecho": "C –ciclofosfamida 350 mg/m2 D1 IV",
+        "estado": "CONFLITANTE"
+      },
+      "escolhaSeguranca": "BEACOPP padrão não incluído como protocolo até a versão final; se usado, conferir com o PCDT vigente (650 mg/m2).",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "1ª linha avançada: A+AVD/Nivo-AVD (curso/NCCN) × ABVD/BEACOPPesc (PCDT SUS)",
+      "fonteA": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026, Aula 80",
+        "pagina": 10,
+        "trecho": "2 ciclos ABVD ou 2 ciclos Bv-AVD (A+AVD)",
+        "estado": "INFERIDO"
+      },
+      "fonteB": {
+        "tipo": "DIRETRIZ",
+        "referencia": "PCDT preliminar 2026",
+        "pagina": 17,
+        "trecho": "O tratamento consiste em 6 ciclos de ABVD e, caso haja doença residual",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "No SUS, ABVD (± BEACOPPesc em selecionados). A+AVD registrado como diretriz internacional, não SUS.",
+      "decisaoNecessaria": false
+    }
   ],
   "curadoria": {
     "redator": "Claude (agente curador, Opus 5.5) — rascunho para revisão",
@@ -302,8 +1307,56 @@
       "Relatório preliminar PCDT Linfoma de Hodgkin no adulto, CP 80/2026",
       "Bula FDA ADCETRIS (openFDA, 2025-11-11)",
       "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas (págs. 4–16)",
-      "ClinicalTrials.gov API v2 — NCT01712490"
+      "ClinicalTrials.gov API v2 — NCT01712490",
+      "Painel de Demandas Conitec 15/06/2026",
+      "SIGTAP competência 09/2026"
     ],
-    "aprovacaoClinica": null
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-11",
+        "redator": "Claude (agente curador)",
+        "resolvidas": 1,
+        "classificadas": 6,
+        "susPreenchidos": 0,
+        "notas": []
+      }
+    ]
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "protocolo": "linfoma-hodgkin-abvd",
+      "campo": "drogas[bleomicina].unidade",
+      "de": "UI",
+      "para": "UI/m2",
+      "motivo": "Erro de transcrição: PCDT LH 2026 Apêndice 1 (p.40) traz 'bleomicina 10 UI/m2'; com 'UI' o motor calcularia dose fixa de 10 UI. Dose numérica mantida.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026), Apêndice 1",
+        "pagina": 40,
+        "trecho": "B – bleomicina 10 UI/m2 D1 e D15 IV",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "data": "2026-10-11",
+      "protocolo": "linfoma-hodgkin-beacopp-escalonado",
+      "campo": "drogas[bleomicina].unidade",
+      "de": "UI",
+      "para": "UI/m2",
+      "motivo": "Erro de transcrição: PCDT LH 2026 Apêndice 1 (p.40) traz 'bleomicina 10 UI/m2'; com 'UI' o motor calcularia dose fixa de 10 UI. Dose numérica mantida.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Relatório preliminar PCDT Linfoma de Hodgkin (CP 80/2026), Apêndice 1",
+        "pagina": 40,
+        "trecho": "B – bleomicina 10 UI/m2 D1 e D15 IV",
+        "estado": "VERIFICADO"
+      }
+    }
+  ],
+  "escopo": {
+    "classe": "ACENO_GERAL_ONCO_HEMATOLOGIA",
+    "nota": "Foco do OncoGlobal é oncologia clínica (Dr. Silas, 2026-10-11). Pack de hematologia mantido como aceno geral: conteúdo preservado, sem aprofundamento nem prioridade de curadoria."
   }
 }

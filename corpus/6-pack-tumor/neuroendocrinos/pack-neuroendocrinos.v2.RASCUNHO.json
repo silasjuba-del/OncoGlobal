@@ -622,16 +622,15 @@
         "ajusteObrigatorio": "Infecções graves em até 20% com uso prolongado; interações CYP3A4 (INAT-23).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada. Alternativa SUS: APAC de TNE avançado (0304020117).",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -677,16 +676,15 @@
         "ajusteObrigatorio": "Interações CYP3A4 (INAT-23).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Não verificado; octreotida LAR não incorporada (2024).",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 5, de 05/03/2024 (DOU nº 46, 07/03/2024), Relatório CONITEC nº 876 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2024/portaria-sectics-ms-no-5-de-5-de-marco-de-2024",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "Não incorporar, no âmbito do SUS, o acetato de octreotida de liberação prolongada",
+            "estado": "VERIFICADO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Octreotida LAR não incorporada; everolimo sem avaliação CONITEC em TNE."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -725,16 +723,15 @@
         "ajusteObrigatorio": "Exige SSTR2 comprovado (PET-DOTATATE ou octreoscan); hemograma e função renal.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Incorporação CONITEC não verificada; produção restrita a centros específicos.",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
         },
         "fonte": {
           "tipo": "BULA",
@@ -780,16 +777,15 @@
         "fichaId": null,
         "observacao": "Indicação em pNET vem do curso PRO (fluxograma) e do estudo de fase III de Raymond 2011; SBOC 2025 GI não cobre pâncreas.",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Não verificado para pNET. Alternativa SUS: APAC de TNE avançado.",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
         },
         "fonte": {
           "tipo": "BULA",
@@ -977,24 +973,38 @@
         "nome": "Análogo de somatostatina em TNE pulmonar SSTR2+",
         "cenario": "net_pulmonar_metastatico_SSTR2_positivo",
         "linha": "1ª linha",
-        "drogas": [],
-        "cicloDias": null,
+        "drogas": [
+          {
+            "droga": "Lanreotida (autogel)",
+            "dose": 120,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D1",
+            "observacao": "injeção subcutânea profunda a cada 28 dias até progressão; estudo SPINET encerrado precocemente (TERMINATED)",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT02683941 (SPINET — lanreotida em TNE pulmonar) — https://clinicaltrials.gov/api/v2/studies/NCT02683941, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "120mg every 28 days until disease progression, death, or unacceptable toxicity",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 28,
         "numeroCiclos": null,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
-        "pendencia": "SEM_FONTE: SBOC pulmonar não traz dose; bula da lanreotida é para GEP-NET (não transferir).",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Não verificado. Alternativa SUS: APAC de TNE avançado.",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 5, de 05/03/2024 (DOU nº 46, 07/03/2024), Relatório CONITEC nº 876 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2024/portaria-sectics-ms-no-5-de-5-de-marco-de-2024",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "Não incorporar, no âmbito do SUS, o acetato de octreotida de liberação prolongada",
+            "estado": "INFERIDO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Lanreotida incorporada só para sintomas de TNE GEP funcionais (mesma portaria); TNE pulmonar não contemplado. Alternativa SUS: APAC 0304020117."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1002,7 +1012,8 @@
           "pagina": 9,
           "trecho": "nos casos com expressão de SSTR2 através de octreoscan ou PET/CT-Ga 68",
           "estado": "VERIFICADO"
-        }
+        },
+        "notaDose": "Dose do braço do ensaio SPINET (TNE pulmonar), não transferida do GEP-NET."
       }
     ],
     "radioterapia": [],
@@ -1573,12 +1584,61 @@
     ]
   },
   "pendencias": [
-    "Fonte SBOC GEP-NET disponível é a edição 2025 (arquivo 'Neuroendócrino pulmão .pdf' contém a diretriz GI); buscar SBOC 2026 GI e diretriz de TNE pancreático.",
-    "SEM_FONTE: doses de CAPTEM, CAPOX, temozolamida, platina + etoposídeo, interferon e SSA no TNE pulmonar.",
-    "SEM_FONTE: seguimento do TNE pulmonar (SBOC 2026 não traz seção).",
-    "SEM_FONTE: emetogenicidade por esquema.",
-    "SUS: confirmar no DOU a Portaria SECTICS/MS nº 5/2024; verificar CONITEC para everolimo, sunitinibe e Lu-177.",
-    "pNET: indicação de sunitinibe/everolimo/CAPTEM apoiada no curso PRO + bulas (INFERIDO); validar com ENETS/NCCN."
+    {
+      "texto": "Fonte SBOC GEP-NET disponível é a edição 2025 (arquivo 'Neuroendócrino pulmão .pdf' contém a diretriz GI); buscar SBOC 2026 GI e diretriz de TNE pancreático.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "scratchpad/fontes/sboc/INDICE.tsv (65 arquivos)",
+        "pasta SBOC/diretrizes local"
+      ],
+      "nota": "Não há SBOC 2026 GEP-NET nem diretriz de TNE pancreático entre as fontes locais."
+    },
+    {
+      "texto": "SEM_FONTE: doses de CAPTEM, CAPOX, temozolamida, platina + etoposídeo, interferon e SSA no TNE pulmonar.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC 2026 TNE pulmonares p.9-10",
+        "Onco PRO 2026 aulas 20-21",
+        "ClinicalTrials.gov NCT02683941 (SPINET)"
+      ],
+      "nota": "SSA no TNE pulmonar resolvido (lanreotida 120 mg q28, SPINET); demais esquemas sem dose específica de pulmão — doses do GEP-NET não transferidas."
+    },
+    {
+      "texto": "SEM_FONTE: seguimento do TNE pulmonar (SBOC 2026 não traz seção).",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC 2026 TNE pulmonares",
+        "Onco PRO 2026 aula 21"
+      ]
+    },
+    {
+      "texto": "SEM_FONTE: emetogenicidade por esquema.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC 2026 TNE",
+        "Onco PRO 2026 aulas 87-88"
+      ],
+      "nota": "Classificação por droga vem do módulo de suporte."
+    },
+    {
+      "texto": "SUS: confirmar no DOU a Portaria SECTICS/MS nº 5/2024; verificar CONITEC para everolimo, sunitinibe e Lu-177.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Planilha CONITEC 15/06/2026",
+        "Painel de Demandas CONITEC",
+        "busca gov.br/conitec",
+        "DOU (portarias citadas)"
+      ],
+      "nota": "sus.disponivel preenchido em todos os protocolos com portaria/relatório quando existe. Sem avaliação CONITEC (registrado 'nao', INFERIDO): net-everolimo, net-lutecio-177-dotatato, net-sunitinibe-pnet."
+    },
+    {
+      "texto": "pNET: indicação de sunitinibe/everolimo/CAPTEM apoiada no curso PRO + bulas (INFERIDO); validar com ENETS/NCCN.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2025 GEP-NET",
+        "Onco PRO 2026 aula 21"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -1597,7 +1657,8 @@
         "trecho": "(11 versus 3,9 meses; HR 0,48)",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Usar HR 0,48 (SBOC 2026 e publicação original); o 0,73 da SBOC 2025 parece ser o HR de SG interina."
+      "escolhaSeguranca": "Usar HR 0,48 (SBOC 2026 e publicação original); o 0,73 da SBOC 2025 parece ser o HR de SG interina.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "NETTER-2 — SLP do braço Lu-177",
@@ -1615,7 +1676,8 @@
         "trecho": "Lu177-DOTATATE 22,8 meses HR 0,27",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Sem impacto em dose; registrar 22,8 × 8,5 meses (publicação Lancet 2024) e corrigir na revisão da SBOC."
+      "escolhaSeguranca": "Sem impacto em dose; registrar 22,8 × 8,5 meses (publicação Lancet 2024) e corrigir na revisão da SBOC.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "RADIANT-3/RADIANT-4 — números no próprio curso",
@@ -1635,7 +1697,8 @@
         "estado": "INFERIDO"
       },
       "fonteBDetalhe": "Tabela p.15 (RADIANT-3 11,0 × 4,6; RADIANT-4 14,0 × 5,5)",
-      "escolhaSeguranca": "Usar RADIANT-3 11,0 × 4,6 e RADIANT-4 11 × 3,9 (coincidem com SBOC 2026)."
+      "escolhaSeguranca": "Usar RADIANT-3 11,0 × 4,6 e RADIANT-4 11 × 3,9 (coincidem com SBOC 2026).",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Definição de carcinoma neuroendócrino",
@@ -1654,7 +1717,8 @@
         "estado": "INFERIDO"
       },
       "fonteBDetalhe": "OMS: CNE é pouco diferenciado (morfologia), em geral Ki-67 > 20%; 55% é corte de conduta em TNE G3",
-      "escolhaSeguranca": "Definir CNE pela morfologia pouco diferenciada, não por Ki-67 > 55%."
+      "escolhaSeguranca": "Definir CNE pela morfologia pouco diferenciada, não por Ki-67 > 55%.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Octreotida LAR — dose",
@@ -1673,7 +1737,8 @@
         "estado": "VERIFICADO"
       },
       "fonteBDetalhe": "Bula FDA para sintomas de carcinoide inicia com 20 mg; 30 mg é a dose antitumoral do PROMID",
-      "escolhaSeguranca": "30 mg a cada 28 dias para controle tumoral (SBOC); titulação para sintomas conforme bula."
+      "escolhaSeguranca": "30 mg a cada 28 dias para controle tumoral (SBOC); titulação para sintomas conforme bula.",
+      "decisaoNecessaria": false
     }
   ],
   "curadoria": {
@@ -1688,6 +1753,10 @@
       "CONITEC Relatório 876/Portaria SECTICS 5/2024 (via pareceres)",
       "SIGTAP 2026-09"
     ],
-    "aprovacaoClinica": null
+    "aprovacaoClinica": null,
+    "reducaoPendencias20261011": {
+      "data": "2026-10-11",
+      "resolvidas": []
+    }
   }
 }

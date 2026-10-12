@@ -201,8 +201,8 @@
         {
           "alvo": "FGFR3 (mutações R248C, S249C, G370C, Y373C) e fusões FGFR2/FGFR3",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "metastatico",
           "consequencia": "Alteração presente: erdafitinibe após 1ª linha (SBOC p. 27/29)",
@@ -214,14 +214,14 @@
             "trecho": "Recomenda-se, quando disponível, a realização de testes moleculares para alterações em FGFR2/FGFR3",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "FGFR2/FGFR3 (mutação/fusão) — alternativa por PCR",
           "metodo": "PCR",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "metastatico",
           "consequencia": "Mesma consequência do NGS; PCR cobre painel restrito de alterações",
@@ -233,8 +233,8 @@
             "trecho": "FGFR2/3 (NGS, FISH ou PCR) – Mutação / Fusão*.",
             "estado": "INFERIDO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "Fusões FGFR2/FGFR3 — alternativa por FISH",
@@ -250,7 +250,8 @@
             "pagina": 6,
             "trecho": "FGFR2/3 (NGS, FISH ou PCR) – Mutação / Fusão*.",
             "estado": "INFERIDO"
-          }
+          },
+          "faturamentoNaoDemonstrado": true
         },
         {
           "alvo": "HER2 (IHQ, critérios de escore do câncer gástrico)",
@@ -772,37 +773,55 @@
         "drogas": [
           {
             "droga": "mitomicina C",
-            "dose": null,
-            "unidade": null,
+            "dose": 40,
+            "unidade": "mg",
             "via": "intravesical",
-            "dias": null,
+            "dias": "dose única em até 24 h da RTU (40 mg em 40 mL de SF 0,9%)",
             "observacao": "SBOC não define dose; aula PRO cita gencitabina 2 g ou mitomicina C (CURSO, INFERIDO). Instilar em até 24 h, manter 1-2 h, não instilar se perfuração.",
-            "pendencia": "SEM_FONTE"
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02695771 (Bladder Instillation Comparison Study, fase 3, concluído)",
+              "pagina": null,
+              "trecho": "Mitomycin C 40 mg in 40 mL of 0.9% sodium chloride",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "gencitabina",
-            "dose": null,
-            "unidade": null,
+            "dose": 2000,
+            "unidade": "mg",
             "via": "intravesical",
-            "dias": null,
+            "dias": "dose única em até 24 h da RTU (2 g em 100 mL de SF 0,9%)",
             "observacao": "Alternativa equivalente (SBOC p. 16); dose SEM_FONTE na SBOC.",
-            "pendencia": "SEM_FONTE"
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02695771",
+              "pagina": null,
+              "trecho": "Gemcitabine 2 grams in 100 mL of 0.9% sodium chloride",
+              "estado": "VERIFICADO"
+            }
           }
         ],
         "cicloDias": null,
         "numeroCiclos": 1,
         "premedicacao": "",
-        "ajusteObrigatorio": "Não instilar se perfuração vesical.",
+        "ajusteObrigatorio": "Não instilar se perfuração vesical. Doses do ensaio fase 3 NCT02695771 (SBOC sem dose).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050016",
+              "nome": "QUIMIOTERAPIA INTRA-VESICAL"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050016 QUIMIOTERAPIA INTRA-VESICAL. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA INTRA-VESICAL",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -824,9 +843,24 @@
             "dose": null,
             "unidade": null,
             "via": "intravesical",
-            "dias": null,
-            "observacao": "SBOC p. 16-17: dose de 1/3 (40 mg) durante um ano para risco intermediário; esquema de indução/manutenção não detalhado na SBOC. Aula PRO: indução 6 semanas + manutenção 3 semanas nos meses 3-6-12 (CURSO, INFERIDO). Dose varia por cepa — seguir bula da cepa disponível.",
-            "pendencia": "SEM_FONTE"
+            "dias": "indução semanal ×6; manutenção 3 instilações semanais nos meses 3, 6 e 12 (1 ano)",
+            "observacao": "SBOC p. 16-17: dose de 1/3 (40 mg) durante um ano para risco intermediário; esquema de indução/manutenção não detalhado na SBOC. Aula PRO: indução 6 semanas + manutenção 3 semanas nos meses 3-6-12 (CURSO, INFERIDO). Dose varia por cepa — seguir bula da cepa disponível. Rodada 2: SBOC dá a fração da dose (1/3 = 40 mg; plena = 120 mg) sem cepa; TICE (bula FDA): 1 frasco (~50 mg) em 50 mL; Connaught 81 mg (aula PRO). Dose numérica não gravada.",
+            "pendencia": {
+              "texto": "Dose da BCG depende da cepa disponível no serviço (SBOC 120 mg/40 mg sem cepa; TICE 1 frasco ~50 mg; Connaught 81 mg).",
+              "classe": "DEPENDE_BULA_ANVISA",
+              "buscasFeitas": [
+                "SBOC 2026 bexiga p.16",
+                "openFDA TICE BCG (set_id c9b74876-e665-442b-87ad-b7333bc9a67a)",
+                "aula PRO 66 p.18"
+              ]
+            },
+            "esquemaFonte": {
+              "tipo": "CURSO",
+              "referencia": "fontes/pro26/66_-_Aula_66_-_Bexiga_-_Visão_geral_NMIBC.txt",
+              "pagina": 18,
+              "trecho": "BCG por 1 ano: Indução (6 sem) + Manutenção (3 sem nos meses 3-6-",
+              "estado": "INFERIDO"
+            }
           }
         ],
         "cicloDias": null,
@@ -835,14 +869,20 @@
         "ajusteObrigatorio": "Contraindicações absolutas: 2 primeiras semanas pós-RTU, hematúria macroscópica, cateterização uretral traumática, ITU sintomática.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304050016",
+              "nome": "QUIMIOTERAPIA INTRA-VESICAL"
+            }
+          ],
+          "observacao": "BCG intravesical sem avaliação CONITEC; acesso pela rede de atenção oncológica (fonte secundária: Nota Técnica SES-SP nº 06/2015, assistência farmacêutica). Procedimento intravesical com CID C67x compatível. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050016 QUIMIOTERAPIA INTRA-VESICAL. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA INTRA-VESICAL",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -864,9 +904,24 @@
             "dose": null,
             "unidade": null,
             "via": "intravesical",
-            "dias": null,
-            "observacao": "SBOC p. 16: EORTC indica dose full (120 mg) por 3 anos no alto risco; duração conforme custo e disponibilidade. Esquema de indução/manutenção não detalhado na SBOC; aula PRO: indução 6 semanas + manutenção meses 3-6-12-18-24-30 (CURSO, INFERIDO). Dose varia por cepa — seguir bula.",
-            "pendencia": "SEM_FONTE"
+            "dias": "indução semanal ×6; manutenção 3 instilações semanais nos meses 3, 6, 12, 18, 24 e 30 (até 3 anos)",
+            "observacao": "SBOC p. 16: EORTC indica dose full (120 mg) por 3 anos no alto risco; duração conforme custo e disponibilidade. Esquema de indução/manutenção não detalhado na SBOC; aula PRO: indução 6 semanas + manutenção meses 3-6-12-18-24-30 (CURSO, INFERIDO). Dose varia por cepa — seguir bula. Rodada 2: SBOC dá a fração da dose (1/3 = 40 mg; plena = 120 mg) sem cepa; TICE (bula FDA): 1 frasco (~50 mg) em 50 mL; Connaught 81 mg (aula PRO). Dose numérica não gravada.",
+            "pendencia": {
+              "texto": "Dose da BCG depende da cepa disponível no serviço (SBOC 120 mg/40 mg sem cepa; TICE 1 frasco ~50 mg; Connaught 81 mg).",
+              "classe": "DEPENDE_BULA_ANVISA",
+              "buscasFeitas": [
+                "SBOC 2026 bexiga p.16",
+                "openFDA TICE BCG (set_id c9b74876-e665-442b-87ad-b7333bc9a67a)",
+                "aula PRO 66 p.18"
+              ]
+            },
+            "esquemaFonte": {
+              "tipo": "CURSO",
+              "referencia": "fontes/pro26/66_-_Aula_66_-_Bexiga_-_Visão_geral_NMIBC.txt",
+              "pagina": 18,
+              "trecho": "BCG por 1-3 anos: Indução (6 sem) + Manutenção (meses 3-6-12-18-24-",
+              "estado": "INFERIDO"
+            }
           }
         ],
         "cicloDias": null,
@@ -875,14 +930,20 @@
         "ajusteObrigatorio": "Mesmas contraindicações absolutas da BCG (SBOC p. 14).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304050016",
+              "nome": "QUIMIOTERAPIA INTRA-VESICAL"
+            }
+          ],
+          "observacao": "BCG intravesical sem avaliação CONITEC; acesso pela rede de atenção oncológica (fonte secundária: Nota Técnica SES-SP nº 06/2015, assistência farmacêutica). Procedimento intravesical com CID C67x compatível. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050016 QUIMIOTERAPIA INTRA-VESICAL. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA INTRA-VESICAL",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -914,14 +975,14 @@
         "ajusteObrigatorio": "Até 24 meses; manejo de eventos imunomediados.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status de incorporação SUS/CONITEC não verificado. Alternativa SUS: quimioterapia citotóxica baseada em platina conforme elegibilidade (GC ou gencitabina + carboplatina). Para NMIBC, alternativa: cistectomia radical.",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (NMIBC não responsivo a BCG) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304050016 — decisão do serviço. Alternativa SUS: cistectomia ou gencitabina ± docetaxel intravesical.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (NMIBC não responsivo a BCG) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -943,34 +1004,38 @@
             "dose": 1000,
             "unidade": "mg",
             "via": "intravesical",
-            "dias": null,
-            "observacao": "1 g na fonte. Frequência da indução não informada na SBOC; manutenção mensal por 12-24 meses.",
-            "pendencia": "SEM_FONTE"
+            "dias": "semanal ×6 (indução), depois mensal (manutenção)",
+            "observacao": "1 g na fonte. Frequência da indução não informada na SBOC; manutenção mensal por 12-24 meses."
           },
           {
             "droga": "docetaxel",
             "dose": 37.5,
             "unidade": "mg",
             "via": "intravesical",
-            "dias": null,
-            "observacao": "Instilação sequencial após gencitabina. Frequência da indução não informada na SBOC.",
-            "pendencia": "SEM_FONTE"
+            "dias": "semanal ×6 após a gencitabina (indução), depois mensal",
+            "observacao": "Instilação sequencial após gencitabina. Frequência da indução não informada na SBOC."
           }
         ],
-        "cicloDias": null,
-        "numeroCiclos": null,
+        "cicloDias": 7,
+        "numeroCiclos": 6,
         "premedicacao": "",
-        "ajusteObrigatorio": "Esquema de indução a definir pelo médico/urologista (SEM_FONTE na SBOC).",
+        "ajusteObrigatorio": "Indução semanal ×6 seguida de manutenção mensal (24 meses no ensaio NCT07322263; SBOC: 12-24 meses).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050016",
+              "nome": "QUIMIOTERAPIA INTRA-VESICAL"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050016 QUIMIOTERAPIA INTRA-VESICAL. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA INTRA-VESICAL",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -978,6 +1043,13 @@
           "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
           "pagina": 16,
           "trecho": "Gencitabina 1 g + Docetaxel 37,5 mg seguido de manutenção mensal por 12-24 meses",
+          "estado": "VERIFICADO"
+        },
+        "esquemaFonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT07322263 (GEM/DOCE em NMIBC AR BCG-não responsivo, fase 2)",
+          "pagina": null,
+          "trecho": "6-week induction phase (weekly instillations), followed by a 24-month maintenance phase (monthly instillations)",
           "estado": "VERIFICADO"
         }
       },
@@ -1002,14 +1074,20 @@
         "ajusteObrigatorio": "Manutenção mensal por 10 meses após a indução.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050016",
+              "nome": "QUIMIOTERAPIA INTRA-VESICAL"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050016 QUIMIOTERAPIA INTRA-VESICAL. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA INTRA-VESICAL",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1057,14 +1135,14 @@
         "ajusteObrigatorio": "Elegibilidade à cisplatina (formulaXYZ). Após cistectomia: protocolo adjuvante bexiga-mibc-adj-durvalumabe.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status de incorporação SUS/CONITEC não verificado. Alternativa SUS: quimioterapia citotóxica baseada em platina conforme elegibilidade (GC ou MVACdd neoadjuvante).",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de durvalumabe perioperatório (NIAGARA) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304040070 — decisão do serviço. Durvalumabe incorporado só no CPNPC estádio III (Portaria SECTICS nº 21/2024). Alternativa SUS: GC neoadjuvante.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para durvalumabe perioperatório (NIAGARA) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1120,14 +1198,20 @@
         "ajusteObrigatorio": "Elegibilidade à cisplatina. 3 a 6 ciclos (SBOC p. 19-20: pelo menos 3 e no máximo 6).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1167,14 +1251,20 @@
         "ajusteObrigatorio": "Doses da tabela geral de GC (SBOC p. 11); SBOC p. 19 cita NCCN com 4 ciclos a cada 21 dias (ver protocolo 21 dias e conflitos).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1214,14 +1304,20 @@
         "ajusteObrigatorio": "Alternativa da tabela de GC (SBOC p. 11); 4 ciclos (SBOC p. 19).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1253,14 +1349,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status de incorporação SUS/CONITEC não verificado. Alternativa SUS: quimioterapia citotóxica baseada em platina conforme elegibilidade (GC ou gencitabina + carboplatina).",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de durvalumabe perioperatório (NIAGARA) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304040070 — decisão do serviço. Durvalumabe incorporado só no CPNPC estádio III (Portaria SECTICS nº 21/2024). Alternativa SUS: GC neoadjuvante.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para durvalumabe perioperatório (NIAGARA) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1292,14 +1388,14 @@
         "ajusteObrigatorio": "Duração total de 1 ano.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status de incorporação SUS/CONITEC não verificado. Alternativa SUS: quimioterapia citotóxica baseada em platina conforme elegibilidade (GC ou gencitabina + carboplatina).",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de nivolumabe adjuvante (urotelial) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304040070 — decisão do serviço.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para nivolumabe adjuvante (urotelial) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1339,14 +1435,20 @@
         "ajusteObrigatorio": "Sem contraindicação (ECOG ≥ 2, neuropatia ≥ G2, ClCr < 60 mL/min); > 70 anos: IVCF-20 (SBOC p. 21). Doses da tabela geral de GC (SBOC p. 11).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "Sem procedimento adjuvante específico de bexiga no subgrupo 03.04.05; 0304040070 (subgrupo 03.04.04) com CID C67x compatível. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1402,14 +1504,20 @@
         "ajusteObrigatorio": "3 a 4 ciclos (SBOC p. 21). Mesmos critérios de elegibilidade da QT adjuvante.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "Sem procedimento adjuvante específico de bexiga no subgrupo 03.04.05; 0304040070 (subgrupo 03.04.04) com CID C67x compatível. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1441,14 +1549,20 @@
         "ajusteObrigatorio": "Elegibilidade à cisplatina; reavaliação com citologia + RTU após 40-45 Gy.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "QT concomitante à RT; procedimento bexiga-específico (subgrupo 03.04.04) aplicado por compatibilidade de CID. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1488,14 +1602,20 @@
         "ajusteObrigatorio": "Curso único concomitante à RT (dias referidos ao calendário da RT).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "QT concomitante à RT; procedimento bexiga-específico (subgrupo 03.04.04) aplicado por compatibilidade de CID. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1527,14 +1647,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "QT concomitante à RT; procedimento bexiga-específico (subgrupo 03.04.04) aplicado por compatibilidade de CID. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1574,14 +1700,14 @@
         "ajusteObrigatorio": "Dose máxima de EV 125 mg por aplicação. Monitorar pele, neuropatia periférica e glicemia.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status de incorporação SUS/CONITEC não verificado. Alternativa SUS: quimioterapia citotóxica baseada em platina conforme elegibilidade (GC ou gencitabina + carboplatina).",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de enfortumabe vedotina + pembrolizumabe nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para enfortumabe vedotina + pembrolizumabe nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1621,14 +1747,20 @@
         "ajusteObrigatorio": "4 a 6 ciclos. Sem progressão após 4-6 ciclos: manutenção com avelumabe (protocolo bexiga-met-avelumabe-manutencao).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1684,14 +1816,20 @@
         "ajusteObrigatorio": "Número de ciclos no cenário avançado não definido na SBOC; manutenção com avelumabe após QT de platina sem progressão.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1739,14 +1877,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status de incorporação SUS/CONITEC não verificado. Alternativa SUS: quimioterapia citotóxica baseada em platina conforme elegibilidade (GC ou gencitabina + carboplatina).",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de nivolumabe (urotelial) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para nivolumabe (urotelial) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1786,14 +1924,20 @@
         "ajusteObrigatorio": "4 a 6 ciclos. Carboplatina por Calvert (CI-04). Sem progressão após 4-6 ciclos: avelumabe.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1825,14 +1969,14 @@
         "ajusteObrigatorio": "Só para quem não progrediu à QT; benefício independente de PD-L1 (SBOC p. 26).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status de incorporação SUS/CONITEC não verificado. Alternativa SUS: observação após QT de platina.",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de avelumabe nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para avelumabe nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1864,14 +2008,14 @@
         "ajusteObrigatorio": "Corte de PD-L1 não definido na SBOC (ver conflitos).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status de incorporação SUS/CONITEC não verificado. Alternativa SUS: quimioterapia citotóxica baseada em platina conforme elegibilidade (GC ou gencitabina + carboplatina).",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (urotelial) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (urotelial) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1903,14 +2047,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status de incorporação SUS/CONITEC não verificado. Alternativa SUS: quimioterapia citotóxica baseada em platina conforme elegibilidade (taxano ou vinflunina).",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (urotelial) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (urotelial) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1942,14 +2086,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status de incorporação SUS/CONITEC não verificado. Alternativa SUS: quimioterapia citotóxica baseada em platina conforme elegibilidade (GC ou gencitabina + carboplatina).",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de atezolizumabe (urotelial) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para atezolizumabe (urotelial) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1968,28 +2112,42 @@
         "drogas": [
           {
             "droga": "durvalumabe",
-            "dose": null,
-            "unidade": null,
+            "dose": 10,
+            "unidade": "mg/kg",
             "via": "EV",
-            "dias": null,
-            "observacao": "SBOC lista a opção (p. 27) mas não traz dose para monoterapia no cenário avançado; dose 1.500 mg da tabela é do esquema NIAGARA e não é transferida.",
-            "pendencia": "SEM_FONTE"
+            "dias": "D1 a cada 2 semanas, até 12 meses",
+            "observacao": "Coorte urotelial do Study 1108 (NCT01693562). Indicação retirada nos EUA (rótulo FDA atual sem 2ª linha urotelial); 1.500 mg da SBOC é do NIAGARA — não transferido.",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT01693562 (Study 1108, coorte de expansão UC)",
+              "pagina": null,
+              "trecho": "MEDI4736 10 mg/kg Q2W in the dose-expansion phase for maximum of 12 months",
+              "estado": "VERIFICADO"
+            },
+            "pendencia": {
+              "texto": "Indicação de 2ª linha urotelial retirada nos EUA; conferir registro ANVISA antes do uso.",
+              "classe": "DEPENDE_BULA_ANVISA",
+              "buscasFeitas": [
+                "openFDA Imfinzi (2026-08-31): sem 2ª linha urotelial",
+                "CT.gov NCT01693562"
+              ]
+            }
           }
         ],
-        "cicloDias": null,
+        "cicloDias": 14,
         "numeroCiclos": null,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status de incorporação SUS/CONITEC não verificado. Alternativa SUS: quimioterapia citotóxica baseada em platina conforme elegibilidade (GC ou gencitabina + carboplatina).",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de durvalumabe (urotelial avançado) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para durvalumabe (urotelial avançado) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2021,14 +2179,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status de incorporação SUS/CONITEC não verificado. Alternativa SUS: quimioterapia citotóxica baseada em platina conforme elegibilidade (taxano ou vinflunina).",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de enfortumabe vedotina nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para enfortumabe vedotina nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2060,14 +2218,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Registro/disponibilidade no Brasil e no SUS não verificados.",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de vinflunina nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para vinflunina nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2086,28 +2244,40 @@
         "drogas": [
           {
             "droga": "paclitaxel",
-            "dose": null,
-            "unidade": null,
+            "dose": 175,
+            "unidade": "mg/m2",
             "via": "EV",
-            "dias": null,
-            "observacao": "SBOC não traz dose. Aula PRO cita paclitaxel 175 mg/m² a cada 3 semanas como braço comparador do KEYNOTE-045 (CURSO, INFERIDO).",
-            "pendencia": "SEM_FONTE"
+            "dias": "D1",
+            "observacao": "Braço de escolha do médico do TROPiCS-04 (pós-platina e pós-anti-PD-(L)1); apoio: braço controle do KEYNOTE-045 (NCT02256436).",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT04527991 (TROPiCS-04, braço de escolha do médico; pós-platina E pós-anti-PD-(L)1)",
+              "pagina": null,
+              "trecho": "Paclitaxel 175 mg/m^2 IV on Day 1 of every 21-day cycle",
+              "estado": "VERIFICADO"
+            }
           }
         ],
-        "cicloDias": null,
+        "cicloDias": 21,
         "numeroCiclos": null,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2126,28 +2296,40 @@
         "drogas": [
           {
             "droga": "docetaxel",
-            "dose": null,
-            "unidade": null,
+            "dose": 75,
+            "unidade": "mg/m2",
             "via": "EV",
-            "dias": null,
-            "observacao": "SBOC não traz dose. Aula PRO cita docetaxel 75 mg/m² a cada 3 semanas como braço comparador (CURSO, INFERIDO). Ficha de pulmão não transferida.",
-            "pendencia": "SEM_FONTE"
+            "dias": "D1",
+            "observacao": "Braço de escolha do médico do TROPiCS-04 (pós-platina e pós-anti-PD-(L)1); apoio: braço controle do KEYNOTE-045 (NCT02256436).",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT04527991 (TROPiCS-04)",
+              "pagina": null,
+              "trecho": "Docetaxel 75 mg/m^2 IV on Day 1 of every 21-day cycle",
+              "estado": "VERIFICADO"
+            }
           }
         ],
-        "cicloDias": null,
+        "cicloDias": 21,
         "numeroCiclos": null,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2171,7 +2353,16 @@
             "via": "EV",
             "dias": null,
             "observacao": "SBOC não traz dose; sem indicação urotelial em bula FDA consultada.",
-            "pendencia": "SEM_FONTE"
+            "pendencia": {
+              "texto": "Dose sem fonte no urotelial avançado.",
+              "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+              "buscasFeitas": [
+                "fontes/sboc/SBOC 2024/2025/2026 Bexiga: só citação p.27 (refs 58-60), sem dose",
+                "Rótulo FDA pemetrexede: sem indicação urotelial (já registrado no pack)",
+                "https://clinicaltrials.gov/api/v2/studies/NCT00035061 (fase 2 pemetrexede em CU recorrente): intervenção sem dose no registro",
+                "CT.gov 'pemetrexed urothelial/bladder': só combinações"
+              ]
+            }
           }
         ],
         "cicloDias": null,
@@ -2180,14 +2371,20 @@
         "ajusteObrigatorio": "CI-02 (ClCr < 45) e INAT-16 (AINE) se vier a ser usado.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2211,7 +2408,15 @@
             "via": "EV",
             "dias": null,
             "observacao": "SBOC não traz dose.",
-            "pendencia": "SEM_FONTE"
+            "pendencia": {
+              "texto": "Dose sem fonte no urotelial avançado.",
+              "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+              "buscasFeitas": [
+                "fontes/sboc/SBOC Bexiga: sem dose",
+                "CT.gov 'nab-paclitaxel urothelial', 'ABI-007 urothelial', 'nab-paclitaxel transitional cell': só combinações/1ª linha/perioperatório",
+                "Rótulo FDA de nab-paclitaxel não consultado (não teria indicação urotelial; não transferir)"
+              ]
+            }
           }
         ],
         "cicloDias": null,
@@ -2220,14 +2425,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de paclitaxel ligado à albumina (urotelial) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para paclitaxel ligado à albumina (urotelial) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2267,14 +2472,20 @@
         "ajusteObrigatorio": "CI-04 (Calvert); INAT-17 (clopidogrel).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2314,14 +2525,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Custeio por APAC de quimioterapia; código SIGTAP específico não verificado nesta curadoria.",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2353,14 +2570,14 @@
         "ajusteObrigatorio": "Fósforo sérico (escalonamento 8 → 9 mg); avaliação oftalmológica. Rótulo FDA restringe a alterações de FGFR3 (ver conflitos).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status de incorporação SUS/CONITEC não verificado. Alternativa SUS: QT de 2ª linha (taxano, carboplatina + paclitaxel).",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de erdafitinibe nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para erdafitinibe nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2392,14 +2609,14 @@
         "ajusteObrigatorio": "Confirmar HER2 IHQ 3+; vigiar doença pulmonar intersticial.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status de incorporação SUS/CONITEC não verificado. Alternativa SUS: QT de 2ª linha.",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de trastuzumabe deruxtecana (urotelial) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para trastuzumabe deruxtecana (urotelial) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2514,7 +2731,7 @@
         "seAlvo": "FGFR3 mutado (R248C, S249C, G370C, Y373C) ou fusão FGFR2/3",
         "opcao": "Erdafitinibe 8-9 mg/dia VO",
         "evidencia": "NE moderado/FR forte (SBOC p. 29)",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — erdafitinibe sem avaliação CONITEC (INFERIDO)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
@@ -2527,7 +2744,7 @@
         "seAlvo": "HER2 IHQ 3+",
         "opcao": "Trastuzumabe deruxtecana 5,4 mg/kg a cada 3 semanas",
         "evidencia": "NE moderado/FR forte (SBOC p. 29)",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — T-DXd sem avaliação CONITEC (INFERIDO)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
@@ -2540,7 +2757,7 @@
         "seAlvo": "PD-L1 positivo em inelegível à cisplatina",
         "opcao": "Pembrolizumabe 1ª linha",
         "evidencia": "NE alto/FR forte (SBOC p. 25), base em fase II",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — pembrolizumabe/atezolizumabe sem avaliação CONITEC para urotelial (INFERIDO); alternativa SUS: gencitabina + carboplatina (APAC 0304020400)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
@@ -2699,8 +2916,8 @@
       },
       {
         "nome": "EV-303/KEYNOTE-905 e EV-304/KEYNOTE-B15 (EV + pembrolizumabe perioperatório)",
-        "nct": null,
-        "nctEstado": "NAO_VERIFICADO",
+        "nct": "NCT03924895",
+        "nctEstado": "VERIFICADO",
         "populacao": "MIBC candidato à cistectomia, elegível e inelegível à cisplatina",
         "bracos": "EV + pembrolizumabe perioperatório × padrão",
         "desfecho": "RPC, SLE, SG",
@@ -2711,12 +2928,24 @@
           "pagina": 20,
           "trecho": "essa abordagem terapêutica ainda não possui aprovação regulatória pela Anvisa no Brasil",
           "estado": "VERIFICADO"
-        }
+        },
+        "registros": [
+          {
+            "nome": "EV-303/KEYNOTE-905",
+            "nct": "NCT03924895",
+            "estado": "VERIFICADO"
+          },
+          {
+            "nome": "EV-304/KEYNOTE-B15",
+            "nct": "NCT04700124",
+            "estado": "VERIFICADO"
+          }
+        ]
       },
       {
         "nome": "IMvigor011 (atezolizumabe adjuvante guiado por ctDNA)",
-        "nct": null,
-        "nctEstado": "NAO_VERIFICADO",
+        "nct": "NCT04660344",
+        "nctEstado": "VERIFICADO",
         "populacao": "MIBC pós-cistectomia ctDNA positivo",
         "bracos": "Atezolizumabe × placebo",
         "desfecho": "SLD, SG",
@@ -2767,7 +2996,14 @@
           "TC_PELVE"
         ],
         "periodicidade": "Periodicidade não definida na SBOC 2026 (SEM_FONTE); TC é o método de seguimento citado; trimodal exige cistoscopia de seguimento (aula PRO)",
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "Periodicidade do seguimento pós-cistectomia/pós-trimodal/doença avançada sem fonte.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "fontes/sboc/SBOC 2026 p.8/30, Bexiga.txt p.23, Bexiga_2.txt p.26-27: periodicidade só para NMIBC",
+            "fontes/pro26/67 p.16: 'Seguimento com cistoscopia' (trimodal) sem intervalo; 66 p.20 só NMIBC"
+          ]
+        },
         "fonte": {
           "tipo": "SBOC",
           "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
@@ -3083,20 +3319,87 @@
     ]
   },
   "pendencias": [
-    "Trato urinário superior (pelve renal/ureter) não coberto pela SBOC 2026: sem doses, sem protocolo; buscar diretriz específica (NCCN/EAU UTUC; POUT para adjuvância).",
-    "BCG: dose depende da cepa (SBOC 120 mg/40 mg EORTC × aula PRO Connaught 81 mg/Tice 50 mg); esquema de indução/manutenção sem fonte SBOC — conferir bula da cepa disponível no SUS.",
-    "QT intravesical dose única (mitomicina C/gencitabina/doxorrubicina): dose SEM_FONTE.",
-    "Gencitabina + docetaxel intravesical: frequência da indução SEM_FONTE.",
-    "Durvalumabe 2ª linha, paclitaxel, docetaxel, pemetrexede e nab-paclitaxel em 2ª linha: doses SEM_FONTE na SBOC.",
-    "PD-L1: corte e clone para pembrolizumabe 1ª linha não definidos na SBOC; conferir bula ANVISA (aula PRO: CPS ≥ 10 para pembrolizumabe).",
-    "Status SUS/CONITEC de imunoterapias, EV, erdafitinibe, T-DXd e vinflunina não verificado (DADO_AUSENTE). PET/CT FDG para bexiga sem cobertura SUS verificada.",
-    "Seguimento pós-cistectomia, pós-trimodal e da doença avançada: periodicidade sem fonte na SBOC 2026.",
-    "Emetogenicidade dos esquemas não descrita na SBOC de bexiga.",
-    "Sem id no catálogo: citologia urinária, NGS/PCR de FGFR, ctDNA (SEM_ID_NO_CATALOGO).",
-    "Via 'intravesical' fora do enum do esquema v2 (EV|VO|SC|IM) — necessário ampliar o enum; filgrastima (mcg) mantida em premedicação por não caber no enum de unidade.",
-    "Ficha FICHA.pulmao-cpnpc.carboplatina-gemcitabina tem a mesma dose do esquema de bexiga (gem 1000 D1, D8 + carbo AUC5), mas não foi ligada (tumor diferente); avaliar ficha própria de bexiga.",
-    "Número de ciclos de MVACdd na doença avançada não definido na SBOC.",
-    "Fontes conferidas: SBOC 2024 (Bexiga.txt) e 2025 (Bexiga_2.txt) têm as mesmas doses da 2026; diferenças são de texto/recomendação (ver conflitos)."
+    {
+      "texto": "Trato urinário superior (pelve renal/ureter) não coberto pela SBOC 2026: sem doses, sem protocolo; buscar diretriz específica (NCCN/EAU UTUC; POUT para adjuvância).",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2024/2025/2026 bexiga: TUS não coberto; incluir NCCN/EAU UTUC exige decisão de escopo"
+      ]
+    },
+    {
+      "texto": "BCG: dose depende da cepa (SBOC 120 mg/40 mg EORTC × aula PRO Connaught 81 mg/Tice 50 mg); esquema de indução/manutenção sem fonte SBOC — conferir bula da cepa disponível no SUS.",
+      "classe": "DEPENDE_BULA_ANVISA",
+      "buscasFeitas": [
+        "SBOC 2026 p.16",
+        "openFDA TICE BCG",
+        "aula PRO 66 p.18"
+      ]
+    },
+    {
+      "texto": "Pemetrexede e nab-paclitaxel em 2ª linha: doses SEM_FONTE.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "fontes/sboc/SBOC 2024/2025/2026 Bexiga: só citação p.27 (refs 58-60), sem dose",
+        "Rótulo FDA pemetrexede: sem indicação urotelial (já registrado no pack)",
+        "https://clinicaltrials.gov/api/v2/studies/NCT00035061 (fase 2 pemetrexede em CU recorrente): intervenção sem dose no registro",
+        "CT.gov 'pemetrexed urothelial/bladder': só combinações",
+        "fontes/sboc/SBOC Bexiga: sem dose",
+        "CT.gov 'nab-paclitaxel urothelial', 'ABI-007 urothelial', 'nab-paclitaxel transitional cell': só combinações/1ª linha/perioperatório",
+        "Rótulo FDA de nab-paclitaxel não consultado (não teria indicação urotelial; não transferir)"
+      ]
+    },
+    {
+      "texto": "PD-L1: corte e clone para pembrolizumabe 1ª linha não definidos na SBOC; conferir bula ANVISA (aula PRO: CPS ≥ 10 para pembrolizumabe).",
+      "classe": "DEPENDE_BULA_ANVISA",
+      "buscasFeitas": [
+        "SBOC 2026 bexiga: sem corte",
+        "aula PRO: CPS ≥10 (a confirmar)"
+      ]
+    },
+    {
+      "texto": "Seguimento pós-cistectomia, pós-trimodal e da doença avançada: periodicidade sem fonte na SBOC 2026.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "fontes/sboc/SBOC 2026 p.8/30, Bexiga.txt p.23, Bexiga_2.txt p.26-27: periodicidade só para NMIBC",
+        "fontes/pro26/67 p.16: 'Seguimento com cistoscopia' (trimodal) sem intervalo; 66 p.20 só NMIBC"
+      ]
+    },
+    {
+      "texto": "Emetogenicidade dos esquemas não descrita na SBOC de bexiga.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC bexiga 2024/2025/2026: sem classificação",
+        "ASCO 2020 Emetic Risk Chart inacessível a partir deste ambiente"
+      ]
+    },
+    {
+      "texto": "Sem id no catálogo: citologia urinária, NGS/PCR de FGFR, ctDNA (SEM_ID_NO_CATALOGO).",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json v1.1: sem citologia urinária, FGFR, ctDNA"
+      ]
+    },
+    {
+      "texto": "Via 'intravesical' fora do enum do esquema v2 (EV|VO|SC|IM) — necessário ampliar o enum; filgrastima (mcg) mantida em premedicação por não caber no enum de unidade.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "docs/ondas/F1-PACK-ESQUEMA-V2.md: enum de unidade sem mcg para filgrastima"
+      ]
+    },
+    {
+      "texto": "Ficha FICHA.pulmao-cpnpc.carboplatina-gemcitabina tem a mesma dose do esquema de bexiga (gem 1000 D1, D8 + carbo AUC5), mas não foi ligada (tumor diferente); avaliar ficha própria de bexiga.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/fichas: sem ficha de bexiga para gencitabina + carboplatina"
+      ]
+    },
+    {
+      "texto": "Número de ciclos de MVACdd na doença avançada não definido na SBOC.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC bexiga 2024/2025/2026: nº de ciclos de MVACdd na doença avançada não definido"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -3115,7 +3418,8 @@
         "trecho": "Cis+Gem+Durvalumabe → cistectomia → Durvalumabe 2 anos",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "SBOC: 8 ciclos a cada 4 semanas (igual ao desenho do NIAGARA descrito na SBOC p. 20)."
+      "escolhaSeguranca": "SBOC: 8 ciclos a cada 4 semanas (igual ao desenho do NIAGARA descrito na SBOC p. 20).",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Dose do avelumabe de manutenção",
@@ -3133,7 +3437,8 @@
         "trecho": "Avelumabe 10 mg/kg q2s",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "SBOC: 800 mg dose fixa a cada 2 semanas; 10 mg/kg é a dose do estudo citada na aula."
+      "escolhaSeguranca": "SBOC: 800 mg dose fixa a cada 2 semanas; 10 mg/kg é a dose do estudo citada na aula.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Unidade do enfortumabe vedotina em monoterapia",
@@ -3151,7 +3456,8 @@
         "trecho": "Enfortumabevedotin: 1,25mg/m² D1, D8 e D15 q28d.",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "mg/kg (SBOC e rótulo FDA), com teto de 125 mg; 'mg/m²' da aula tratado como erro de digitação."
+      "escolhaSeguranca": "mg/kg (SBOC e rótulo FDA), com teto de 125 mg; 'mg/m²' da aula tratado como erro de digitação.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Número de ciclos de MVACdd neoadjuvante",
@@ -3169,7 +3475,8 @@
         "trecho": "ddMVAC × 4 ciclos → cistectomia",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "SBOC: 3 a 6 ciclos; decisão médica dentro do intervalo."
+      "escolhaSeguranca": "SBOC: 3 a 6 ciclos; decisão médica dentro do intervalo.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Cisplatina fracionada no NIAGARA com ClCr 40-59 × critério de inelegibilidade ClCr < 60",
@@ -3187,7 +3494,8 @@
         "trecho": "Durvalumabe 1.500 mg EV D1",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Pelo critério de Galsky (SBOC p. 10), ClCr < 60 mL/min = inelegível. A dose fracionada da tabela (35 mg/m² D1, D8 se ClCr 40-59) fica como decisão médica individual, não como padrão do pack. Aula PRO p. 14 também cita split-dose em TFG 40-60 como caso limítrofe."
+      "escolhaSeguranca": "Pelo critério de Galsky (SBOC p. 10), ClCr < 60 mL/min = inelegível. A dose fracionada da tabela (35 mg/m² D1, D8 se ClCr 40-59) fica como decisão médica individual, não como padrão do pack. Aula PRO p. 14 também cita split-dose em TFG 40-60 como caso limítrofe.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Alvo do erdafitinibe",
@@ -3205,7 +3513,8 @@
         "trecho": "Confirm the presence of FGFR3 genetic alterations in tumor specimens",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Alteração de FGFR3 (mutação ou fusão) atende às duas fontes; fusão isolada de FGFR2 só por decisão médica após conferir bula ANVISA."
+      "escolhaSeguranca": "Alteração de FGFR3 (mutação ou fusão) atende às duas fontes; fusão isolada de FGFR2 só por decisão médica após conferir bula ANVISA.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Dose da BCG",
@@ -3223,7 +3532,8 @@
         "trecho": "BCG Connaught 81mg ou Tice BCG 50mg + SF 50mL via SVD por 2h",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Dose depende da cepa; nenhuma dose numérica gravada no protocolo — seguir a bula da cepa disponível."
+      "escolhaSeguranca": "Dose depende da cepa; nenhuma dose numérica gravada no protocolo — seguir a bula da cepa disponível.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Via da gencitabina 2 g no NMIBC pós-BCG",
@@ -3241,7 +3551,8 @@
         "trecho": "Tratamentos intravesicais:",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Via intravesical (o item está sob 'Tratamentos intravesicais' e a referência 13 é de gencitabina intravesical); 'IV' tratado como erro de grafia. Confirmar com o médico."
+      "escolhaSeguranca": "Via intravesical (o item está sob 'Tratamentos intravesicais' e a referência 13 é de gencitabina intravesical); 'IV' tratado como erro de grafia. Confirmar com o médico.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Pembrolizumabe no NMIBC não responsivo a BCG — população",
@@ -3259,7 +3570,8 @@
         "trecho": "grau sem Tis, desde que sejam inelegíveis para cistectomia.",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "SBOC 2026 (recusa ou inelegibilidade), limitado ao que a bula no Brasil aprova: CIS com ou sem papilífero (SBOC 2026 p. 17)."
+      "escolhaSeguranca": "SBOC 2026 (recusa ou inelegibilidade), limitado ao que a bula no Brasil aprova: CIS com ou sem papilífero (SBOC 2026 p. 17).",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Corte de PD-L1 para pembrolizumabe 1ª linha em inelegível à cisplatina",
@@ -3277,7 +3589,8 @@
         "trecho": "APROVADO PELA ANVISA CPS ≥10",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Exigir PD-L1 positivo pelo corte da bula ANVISA (aula cita CPS ≥ 10, a confirmar); sem corte confirmado, preferir EV + pembrolizumabe ou gencitabina + carboplatina."
+      "escolhaSeguranca": "Exigir PD-L1 positivo pelo corte da bula ANVISA (aula cita CPS ≥ 10, a confirmar); sem corte confirmado, preferir EV + pembrolizumabe ou gencitabina + carboplatina.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Intervalo da GC neoadjuvante",
@@ -3295,7 +3608,27 @@
         "trecho": "Guideline do NCCN recomenda GC por 4 ciclos a cada 21 dias",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Ambos registrados como protocolos separados (28 dias padrão e 21 dias com cisplatina fracionada, da própria tabela SBOC); escolha médica."
+      "escolhaSeguranca": "Ambos registrados como protocolos separados (28 dias padrão e 21 dias com cisplatina fracionada, da própria tabela SBOC); escolha médica.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Docetaxel intravesical 37,5 × 37 mg",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 16,
+        "trecho": "Gencitabina 1 g + Docetaxel 37,5 mg seguido de manutenção mensal por",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "ENSAIO",
+        "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT07322263",
+        "pagina": null,
+        "trecho": "Gemcitabine (1000mg) followed by Docetaxel (37 mg)",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Mantida a dose da SBOC (37,5 mg); diferença irrelevante, esquema de frequência do ensaio usado.",
+      "decisaoNecessaria": false
     }
   ],
   "curadoria": {
@@ -3311,8 +3644,46 @@
       "corpus/exames/exames-sigtap.v1.json",
       "https://api.fda.gov/drug/label.json?search=openfda.brand_name:BALVERSA&limit=1",
       "https://api.fda.gov/drug/label.json?search=openfda.brand_name:PADCEV&limit=1",
-      "https://clinicaltrials.gov/api/v2/studies/ (NCT03732677, NCT04223856, NCT02632409, NCT02603432, NCT03036098, NCT03390504, NCT01812369, NCT02625961)"
+      "https://clinicaltrials.gov/api/v2/studies/ (NCT03732677, NCT04223856, NCT02632409, NCT02603432, NCT03036098, NCT03390504, NCT01812369, NCT02625961)",
+      "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
+      "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "rodada2": {
+      "data": "2026-10-11",
+      "redator": "Claude (Opus 5.5) — redução de pendências e conflitos; aprovação clínica pendente",
+      "pendenciasResolvidas": [
+        {
+          "texto": "QT intravesical dose única (mitomicina C/gencitabina/doxorrubicina): dose SEM_FONTE.",
+          "resolucao": "Mitomicina C 40 mg ou gencitabina 2 g, dose única (ensaio fase 3 NCT02695771)."
+        },
+        {
+          "texto": "Gencitabina + docetaxel intravesical: frequência da indução SEM_FONTE.",
+          "resolucao": "Indução semanal ×6 e manutenção mensal (NCT07322263, BCG-não responsivo)."
+        },
+        {
+          "texto": "Durvalumabe 2ª linha, paclitaxel, docetaxel, pemetrexede e nab-paclitaxel em 2ª linha: durvalumabe, paclitaxel e docetaxel",
+          "resolucao": "Durvalumabe 10 mg/kg q2s (Study 1108; com ressalva de registro); paclitaxel 175 e docetaxel 75 mg/m² q21 (TROPiCS-04/KEYNOTE-045). Pemetrexede e nab-paclitaxel seguem classificados."
+        },
+        {
+          "texto": "Status SUS/CONITEC de imunoterapias, EV, erdafitinibe, T-DXd e vinflunina não verificado (DADO_AUSENTE). PET/CT FDG para bexiga sem cobertura SUS verificada.",
+          "resolucao": "Status SUS preenchido: QT via APAC 0304020400/0304040070/0304050016; imunoterapias, EV, erdafitinibe, T-DXd e vinflunina sem avaliação CONITEC; BCG parcial (fonte secundária)."
+        },
+        {
+          "texto": "Fontes conferidas: SBOC 2024 (Bexiga.txt) e 2025 (Bexiga_2.txt) têm as mesmas doses da 2026; diferenças são de texto/recomendação (ver conflitos).",
+          "resolucao": "Informativo (fontes conferidas) — não é pendência."
+        }
+      ],
+      "correcoes": []
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "2 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
 }

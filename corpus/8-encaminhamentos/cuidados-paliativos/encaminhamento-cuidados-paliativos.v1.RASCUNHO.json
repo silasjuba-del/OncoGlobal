@@ -59,7 +59,11 @@
     "prioritario": "sintoma não controlado com analgesia/suporte padrão",
     "urgente": "sintoma refratário com sofrimento intenso: contato direto"
   },
-  "packs": "todos (transversal)",
+  "packs": {
+    "tipo": "TRANSVERSAL",
+    "aplicaA": "TODOS_OS_PACKS",
+    "nota": "contrato: o motor oferece este encaminhamento em qualquer pack (Codex 2026-10-11 pediu contrato explícito em vez de texto)"
+  },
   "pendencias": [
     "Critérios de motivo e de urgência: aprovação do Dr. Silas."
   ]

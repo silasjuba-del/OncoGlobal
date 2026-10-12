@@ -18,9 +18,21 @@
   "substitui": [],
   "identidade": {
     "tumor": "Linfoma folicular (LF), adulto",
-    "cid10": ["C82"],
-    "subtipos": ["LF clássico / graus 1, 2 e 3A", "LF grau 3B (linfoma folicular de grandes células B) — tratar como LDGCB", "LF transformado — tratar como linfoma agressivo"],
-    "cenarios": ["estagio_inicial_I_II_contiguo", "avancado_assintomatico", "avancado_sintomatico", "recaido_refratario", "transformado"],
+    "cid10": [
+      "C82"
+    ],
+    "subtipos": [
+      "LF clássico / graus 1, 2 e 3A",
+      "LF grau 3B (linfoma folicular de grandes células B) — tratar como LDGCB",
+      "LF transformado — tratar como linfoma agressivo"
+    ],
+    "cenarios": [
+      "estagio_inicial_I_II_contiguo",
+      "avancado_assintomatico",
+      "avancado_sintomatico",
+      "recaido_refratario",
+      "transformado"
+    ],
     "limitesAplicabilidade": "Adultos ≥18 anos. LF grau 3B e LF transformado seguem o pack LDGCB. Rituximabe em monoterapia para assintomático NÃO incorporado (Conitec, 130ª reunião, 2024)."
   },
   "diagnostico": {
@@ -30,42 +42,78 @@
         "rotulo": "PET-CT FDG (preferencial; obrigatório antes de RT em estádio I/II)",
         "indicacao": "universal",
         "quando": "Estadiamento; confirmar doença localizada antes de RT de campo envolvido",
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026) — https://www.gov.br/conitec/pt-br/midias/consultas/relatorios/2026/relatorio-preliminar-pcdt-do-linfoma-folicular-cp-78/@@display-file/file", "pagina": 14, "trecho": "Um exame de PET-CT é obrigatório para confirmar a doença localizada em estágio", "estado": "VERIFICADO" }
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026) — https://www.gov.br/conitec/pt-br/midias/consultas/relatorios/2026/relatorio-preliminar-pcdt-do-linfoma-folicular-cp-78/@@display-file/file",
+          "pagina": 14,
+          "trecho": "Um exame de PET-CT é obrigatório para confirmar a doença localizada em estágio",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "catalogoId": "TC_PESCOCO",
         "rotulo": "TC de pescoço com contraste",
         "indicacao": "universal",
         "quando": "Estadiamento (TC de pescoço, tórax, abdome e pelve)",
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 14, "trecho": "TC de pescoço, tórax, abdome e pelve, com uso de contraste intravenoso", "estado": "VERIFICADO" }
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 14,
+          "trecho": "TC de pescoço, tórax, abdome e pelve, com uso de contraste intravenoso",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "catalogoId": "TC_TORAX",
         "rotulo": "TC de tórax com contraste",
         "indicacao": "universal",
         "quando": "Estadiamento",
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 14, "trecho": "TC de pescoço, tórax, abdome e pelve, com uso de contraste intravenoso", "estado": "VERIFICADO" }
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 14,
+          "trecho": "TC de pescoço, tórax, abdome e pelve, com uso de contraste intravenoso",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "catalogoId": "TC_ABDOMEN_SUPERIOR",
         "rotulo": "TC de abdome com contraste",
         "indicacao": "universal",
         "quando": "Estadiamento",
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 14, "trecho": "TC de pescoço, tórax, abdome e pelve, com uso de contraste intravenoso", "estado": "VERIFICADO" }
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 14,
+          "trecho": "TC de pescoço, tórax, abdome e pelve, com uso de contraste intravenoso",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "catalogoId": "TC_PELVE",
         "rotulo": "TC de pelve com contraste",
         "indicacao": "universal",
         "quando": "Estadiamento",
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 14, "trecho": "TC de pescoço, tórax, abdome e pelve, com uso de contraste intravenoso", "estado": "VERIFICADO" }
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 14,
+          "trecho": "TC de pescoço, tórax, abdome e pelve, com uso de contraste intravenoso",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "catalogoId": "RM_CRANIO",
         "rotulo": "RM de crânio com gadolínio",
         "indicacao": "condicional",
         "quando": "Suspeita de acometimento do SNC (com citologia do líquor)",
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 14, "trecho": "A RM é o exame de imagem de escolha quando há suspeita de acometimento", "estado": "VERIFICADO" }
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 14,
+          "trecho": "A RM é o exame de imagem de escolha quando há suspeita de acometimento",
+          "estado": "VERIFICADO"
+        }
       }
     ],
     "endoscopicos": [],
@@ -75,13 +123,25 @@
           "tipo": "excisional",
           "quando": "Preferencial (core aceitável; PAAF não)",
           "catalogoId": "BIOPSIA_GANGLIO",
-          "fonte": { "tipo": "CURSO", "referencia": "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas", "pagina": 27, "trecho": "Biópsia excsional preferencial", "estado": "INFERIDO" }
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas",
+            "pagina": 27,
+            "trecho": "Biópsia excsional preferencial",
+            "estado": "INFERIDO"
+          }
         },
         {
           "tipo": "core",
           "quando": "Aceitável; risco de amostrar só área difusa/interfolicular — revisão por hematopatologista",
           "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
-          "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 10, "trecho": "Biópsias por agulha podem obter espécimes que consistem apenas de áreas difusas", "estado": "VERIFICADO" }
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+            "pagina": 10,
+            "trecho": "Biópsias por agulha podem obter espécimes que consistem apenas de áreas difusas",
+            "estado": "VERIFICADO"
+          }
         }
       ],
       "laudoDeveConter": [
@@ -98,7 +158,13 @@
           "cenario": "diagnóstico",
           "consequencia": "Confirma LF e diferencia de LZM, LCM, LLC",
           "disponivelSUS": "sim",
-          "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 9, "trecho": "diagnóstico, normalmente, é baseado no padrão de crescimento histopatológico, imuno-histoquímica compatível", "estado": "VERIFICADO" }
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+            "pagina": 9,
+            "trecho": "diagnóstico, normalmente, é baseado no padrão de crescimento histopatológico, imuno-histoquímica compatível",
+            "estado": "VERIFICADO"
+          }
         },
         {
           "alvo": "t(14;18) IGH::BCL2",
@@ -108,7 +174,13 @@
           "cenario": "incerteza diagnóstica (ex.: BCL2 negativo)",
           "consequencia": "Apoia diagnóstico; não muda tratamento",
           "disponivelSUS": "parcial",
-          "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 9, "trecho": "detectada por PCR ou por FISH, utilizando uma sonda para o gene BCL2", "estado": "VERIFICADO" }
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+            "pagina": 9,
+            "trecho": "detectada por PCR ou por FISH, utilizando uma sonda para o gene BCL2",
+            "estado": "VERIFICADO"
+          }
         },
         {
           "alvo": "Imunofenotipagem de sangue (se linfocitose) ou medula",
@@ -118,7 +190,13 @@
           "cenario": "linfocitose ou suspeita de baixo envolvimento medular",
           "consequencia": "Estadiamento",
           "disponivelSUS": "sim",
-          "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 15, "trecho": "Hemograma, se possível com imunofenotipagem por citometria de fluxo quando houver linfocitose", "estado": "VERIFICADO" }
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+            "pagina": 15,
+            "trecho": "Hemograma, se possível com imunofenotipagem por citometria de fluxo quando houver linfocitose",
+            "estado": "VERIFICADO"
+          }
         }
       ]
     }
@@ -126,46 +204,389 @@
   "estadiamento": {
     "sistema": "Lugano",
     "edicao": "Lugano (derivada de Ann Arbor); bulky >6 cm no PCDT preliminar 2026; FLIPI, PRIMA-PI, POD24",
-    "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 11, "trecho": "O estadiamento clínico do LF é realizado usando a classificação de Lugano", "estado": "VERIFICADO" },
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+      "pagina": 11,
+      "trecho": "O estadiamento clínico do LF é realizado usando a classificação de Lugano",
+      "estado": "VERIFICADO"
+    },
     "exames": [
-      { "catalogoId": "HEMOGRAMA", "rotulo": "Hemograma", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 15, "trecho": "Hemograma, se possível com imunofenotipagem por citometria de fluxo quando houver linfocitose", "estado": "VERIFICADO" } },
-      { "catalogoId": "UREIA", "rotulo": "Ureia", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 15, "trecho": "dosagem de ureia, creatinina, sódio, potássio, cálcio, albumina, ácido úrico", "estado": "VERIFICADO" } },
-      { "catalogoId": "CREATININA", "rotulo": "Creatinina", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 15, "trecho": "dosagem de ureia, creatinina, sódio, potássio, cálcio, albumina, ácido úrico", "estado": "VERIFICADO" } },
-      { "catalogoId": "ACIDO_URICO", "rotulo": "Ácido úrico", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 15, "trecho": "dosagem de ureia, creatinina, sódio, potássio, cálcio, albumina, ácido úrico", "estado": "VERIFICADO" } },
-      { "catalogoId": "DHL", "rotulo": "LDH (FLIPI)", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 12, "trecho": "Nível de desidrogenase láctica (DHL) acima do limite superior da normalidade", "estado": "VERIFICADO" } },
-      { "catalogoId": "BETA2_MICROGLOBULINA", "rotulo": "Beta-2-microglobulina (PRIMA-PI/FLIPI2)", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 15, "trecho": "Dosagem sérica de beta-2 microglobulina, imunoglobulinas e quantificação da banda monoclonal", "estado": "VERIFICADO" } },
-      { "catalogoId": "ELETROFORESE_PROTEINAS", "rotulo": "Quantificação de banda monoclonal, se presente", "cenario": "condicional", "indicacao": "condicional", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 15, "trecho": "Dosagem sérica de beta-2 microglobulina, imunoglobulinas e quantificação da banda monoclonal", "estado": "VERIFICADO" } },
-      { "catalogoId": "HBSAG", "rotulo": "HBsAg (antes do rituximabe)", "cenario": "pré-rituximabe", "indicacao": "universal", "fonte": { "tipo": "BULA", "referencia": "Bula FDA rituximabe (Truxima) — openFDA set_id 9af3ddc7-4217-417a-ac89-8704edc5bc44 (2026-07-13)", "pagina": null, "trecho": "Screen all patients for HBV infection by measuring HBsAg and anti-HBc", "estado": "VERIFICADO" } },
-      { "catalogoId": "ANTI_HBC_TOTAL", "rotulo": "Anti-HBc total (antes do rituximabe)", "cenario": "pré-rituximabe", "indicacao": "universal", "fonte": { "tipo": "BULA", "referencia": "Bula FDA rituximabe (Truxima)", "pagina": null, "trecho": "Screen all patients for HBV infection by measuring HBsAg and anti-HBc", "estado": "VERIFICADO" } },
-      { "catalogoId": "ANTI_HCV", "rotulo": "Anti-HCV", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 15, "trecho": "Testes sorológicos para a hepatite B e C", "estado": "VERIFICADO" } },
-      { "catalogoId": "HIV", "rotulo": "Anti-HIV", "cenario": "todos", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 15, "trecho": "Teste sorológico para HIV", "estado": "VERIFICADO" } },
-      { "catalogoId": "BETA_HCG", "rotulo": "Teste de gravidez (mulheres em idade fértil)", "cenario": "pré-tratamento", "indicacao": "condicional", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 15, "trecho": "Teste de gravidez, nas mulheres em idade fértil", "estado": "VERIFICADO" } },
-      { "catalogoId": "BIOPSIA_MEDULA", "rotulo": "Biópsia de medula óssea (PET não substitui no LF; necessária ao PRIMA-PI)", "cenario": "estadiamento quando muda conduta", "indicacao": "condicional", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 14, "trecho": "não substitui para esta finalidade a biópsia deste tecido", "estado": "VERIFICADO" } },
-      { "catalogoId": "RX_TORAX_PA_PERFIL", "rotulo": "Radiografia de tórax (rastreio de TB antes do rituximabe)", "cenario": "pré-rituximabe", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 26, "trecho": "A radiografia simples de tórax deve ser realizada para excluir a possibilidade de TB", "estado": "VERIFICADO" } },
-      { "catalogoId": null, "rotulo": "Prova tuberculínica ou IGRA (ILTB, antes do rituximabe)", "pendencia": "SEM_ID_NO_CATALOGO", "cenario": "pré-rituximabe", "indicacao": "universal", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 26, "trecho": "deve-se realizar a prova tuberculínica (PT, com o derivado proteico purificado", "estado": "VERIFICADO" } }
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 15,
+          "trecho": "Hemograma, se possível com imunofenotipagem por citometria de fluxo quando houver linfocitose",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "UREIA",
+        "rotulo": "Ureia",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 15,
+          "trecho": "dosagem de ureia, creatinina, sódio, potássio, cálcio, albumina, ácido úrico",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Creatinina",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 15,
+          "trecho": "dosagem de ureia, creatinina, sódio, potássio, cálcio, albumina, ácido úrico",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ACIDO_URICO",
+        "rotulo": "Ácido úrico",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 15,
+          "trecho": "dosagem de ureia, creatinina, sódio, potássio, cálcio, albumina, ácido úrico",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "DHL",
+        "rotulo": "LDH (FLIPI)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 12,
+          "trecho": "Nível de desidrogenase láctica (DHL) acima do limite superior da normalidade",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BETA2_MICROGLOBULINA",
+        "rotulo": "Beta-2-microglobulina (PRIMA-PI/FLIPI2)",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 15,
+          "trecho": "Dosagem sérica de beta-2 microglobulina, imunoglobulinas e quantificação da banda monoclonal",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ELETROFORESE_PROTEINAS",
+        "rotulo": "Quantificação de banda monoclonal, se presente",
+        "cenario": "condicional",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 15,
+          "trecho": "Dosagem sérica de beta-2 microglobulina, imunoglobulinas e quantificação da banda monoclonal",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HBSAG",
+        "rotulo": "HBsAg (antes do rituximabe)",
+        "cenario": "pré-rituximabe",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA rituximabe (Truxima) — openFDA set_id 9af3ddc7-4217-417a-ac89-8704edc5bc44 (2026-07-13)",
+          "pagina": null,
+          "trecho": "Screen all patients for HBV infection by measuring HBsAg and anti-HBc",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ANTI_HBC_TOTAL",
+        "rotulo": "Anti-HBc total (antes do rituximabe)",
+        "cenario": "pré-rituximabe",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA rituximabe (Truxima)",
+          "pagina": null,
+          "trecho": "Screen all patients for HBV infection by measuring HBsAg and anti-HBc",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ANTI_HCV",
+        "rotulo": "Anti-HCV",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 15,
+          "trecho": "Testes sorológicos para a hepatite B e C",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HIV",
+        "rotulo": "Anti-HIV",
+        "cenario": "todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 15,
+          "trecho": "Teste sorológico para HIV",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BETA_HCG",
+        "rotulo": "Teste de gravidez (mulheres em idade fértil)",
+        "cenario": "pré-tratamento",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 15,
+          "trecho": "Teste de gravidez, nas mulheres em idade fértil",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BIOPSIA_MEDULA",
+        "rotulo": "Biópsia de medula óssea (PET não substitui no LF; necessária ao PRIMA-PI)",
+        "cenario": "estadiamento quando muda conduta",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 14,
+          "trecho": "não substitui para esta finalidade a biópsia deste tecido",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RX_TORAX_PA_PERFIL",
+        "rotulo": "Radiografia de tórax (rastreio de TB antes do rituximabe)",
+        "cenario": "pré-rituximabe",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 26,
+          "trecho": "A radiografia simples de tórax deve ser realizada para excluir a possibilidade de TB",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "IGRA",
+        "rotulo": "Prova tuberculínica ou IGRA (ILTB, antes do rituximabe)",
+        "cenario": "pré-rituximabe",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 26,
+          "trecho": "deve-se realizar a prova tuberculínica (PT, com o derivado proteico purificado",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "PT/IGRA sem id no catálogo v1.1; SIGTAP 02.02.03.024-5 (PT) e 02.02.03.136-5 (IGRA).",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
+      }
     ],
     "gruposConduta": [
-      { "grupo": "FLIPI (idade >60, EC III–IV, Hb <12 g/dL, LDH > LSN, ≥4 sítios nodais): 0–1 baixo; 2 intermediário; 3–5 alto", "conduta": "Prognóstico; não decide sozinho o início do tratamento", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 12, "trecho": "Segundo o FLIPI, deve-se somar 1 ponto para cada fator de risco presente", "estado": "VERIFICADO" } },
-      { "grupo": "Estágio I–II contíguo", "conduta": "Radioterapia de campo envolvido (padrão; potencialmente curativa); espera vigilante em selecionados", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 17, "trecho": "a irradiação linfonodal é o tratamento padrão nos estágios iniciais", "estado": "VERIFICADO" } },
-      { "grupo": "Avançado assintomático (sem GELF/BNLI)", "conduta": "Espera vigilante", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 18, "trecho": "Na ausência dessas condições, a conduta recomendada é a espera vigilante", "estado": "VERIFICADO" } },
-      { "grupo": "Avançado sintomático (GELF: massa >7 cm, ≥3 sítios >3 cm, sintomas B, esplenomegalia sintomática >16 cm, derrame, leucemização >5x10³/µL, citopenias, LDH/β2M elevados)", "conduta": "Imunoquimioterapia (R-CHOP, R-CVP ou rituximabe isolado em frágeis)", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 18, "trecho": "Grande carga tumoral: maior massa nodal ou extranodal com maior diâmetro acima", "estado": "VERIFICADO" } },
-      { "grupo": "POD24 (progressão <24 meses após imunoquimioterapia)", "conduta": "Pior prognóstico; considerar TCPH autólogo", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 23, "trecho": "No caso específico de pacientes com POD24, o TCPH autólogo deve ser considerado", "estado": "VERIFICADO" } }
+      {
+        "grupo": "FLIPI (idade >60, EC III–IV, Hb <12 g/dL, LDH > LSN, ≥4 sítios nodais): 0–1 baixo; 2 intermediário; 3–5 alto",
+        "conduta": "Prognóstico; não decide sozinho o início do tratamento",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 12,
+          "trecho": "Segundo o FLIPI, deve-se somar 1 ponto para cada fator de risco presente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Estágio I–II contíguo",
+        "conduta": "Radioterapia de campo envolvido (padrão; potencialmente curativa); espera vigilante em selecionados",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 17,
+          "trecho": "a irradiação linfonodal é o tratamento padrão nos estágios iniciais",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Avançado assintomático (sem GELF/BNLI)",
+        "conduta": "Espera vigilante",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 18,
+          "trecho": "Na ausência dessas condições, a conduta recomendada é a espera vigilante",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Avançado sintomático (GELF: massa >7 cm, ≥3 sítios >3 cm, sintomas B, esplenomegalia sintomática >16 cm, derrame, leucemização >5x10³/µL, citopenias, LDH/β2M elevados)",
+        "conduta": "Imunoquimioterapia (R-CHOP, R-CVP ou rituximabe isolado em frágeis)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 18,
+          "trecho": "Grande carga tumoral: maior massa nodal ou extranodal com maior diâmetro acima",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "POD24 (progressão <24 meses após imunoquimioterapia)",
+        "conduta": "Pior prognóstico; considerar TCPH autólogo",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 23,
+          "trecho": "No caso específico de pacientes com POD24, o TCPH autólogo deve ser considerado",
+          "estado": "VERIFICADO"
+        }
+      }
     ],
     "marcadores": {
       "uteis": [
-        { "catalogoId": "DHL", "uso": "FLIPI e critério GELF modificado; elevação súbita sugere transformação", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 19, "trecho": "DHL ou beta-2 microglobulina acima dos limites superiores de referência", "estado": "VERIFICADO" } },
-        { "catalogoId": "BETA2_MICROGLOBULINA", "uso": "PRIMA-PI (>3 mg/L = alto risco)", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 13, "trecho": "Alto Risco PRIMA-PI – Beta-2 microglobulina > 3 mg/L", "estado": "VERIFICADO" } }
+        {
+          "catalogoId": "DHL",
+          "uso": "FLIPI e critério GELF modificado; elevação súbita sugere transformação",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+            "pagina": 19,
+            "trecho": "DHL ou beta-2 microglobulina acima dos limites superiores de referência",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "BETA2_MICROGLOBULINA",
+          "uso": "PRIMA-PI (>3 mg/L = alto risco)",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+            "pagina": 13,
+            "trecho": "Alto Risco PRIMA-PI – Beta-2 microglobulina > 3 mg/L",
+            "estado": "VERIFICADO"
+          }
+        }
       ],
-      "naoPedirDeRotina": ["Citogenética/molecular de medula na rotina", "Monitorização de IgH/BCL2 no seguimento", "Imagem de rotina no seguimento sem suspeita de recaída"]
+      "naoPedirDeRotina": [
+        "Citogenética/molecular de medula na rotina",
+        "Monitorização de IgH/BCL2 no seguimento",
+        "Imagem de rotina no seguimento sem suspeita de recaída"
+      ]
     }
   },
   "tratamento": {
     "cenarios": [
-      { "cenario": "estagio_inicial_I_II_contiguo", "intencao": "curativa", "modalidades": ["radioterapia de campo envolvido"], "criterio": "doença localizada confirmada por PET-CT", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 17, "trecho": "a radioterapia pode ser uma alternativa terapêutica curativa se usada isoladamente", "estado": "VERIFICADO" } },
-      { "cenario": "avancado_assintomatico", "intencao": "paliativa", "modalidades": ["espera vigilante"], "criterio": "sem critérios GELF/BNLI; rituximabe isolado não incorporado nesse cenário", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 18, "trecho": "deliberaram pela não incorporação do rituximabe em monoterapia para pacientes com LF assintomático", "estado": "VERIFICADO" } },
-      { "cenario": "avancado_sintomatico", "intencao": "paliativa", "modalidades": ["imunoquimioterapia"], "criterio": "GELF/BNLI presentes", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 19, "trecho": "Sempre que possível, recomenda-se a utilização de esquemas contendo rituximabe", "estado": "VERIFICADO" } },
-      { "cenario": "recaido_refratario", "intencao": "paliativa", "modalidades": ["lenalidomida + rituximabe", "R-CHOP/R-CVP", "resgate com platina + TCPH autólogo"], "criterio": "nova biópsia para excluir transformação", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 21, "trecho": "a associação de rituximabe e lenalidomida constitui uma opção terapêutica recomendada", "estado": "VERIFICADO" } },
-      { "cenario": "transformado", "intencao": "curativa", "modalidades": ["esquema com antraciclina se não recebida", "resgate de linfoma agressivo", "TCPH autólogo"], "criterio": "biópsia confirma transformação", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 23, "trecho": "tratados com esquemas quimioterápicos com antraciclina – caso não a tenham recebido", "estado": "VERIFICADO" } }
+      {
+        "cenario": "estagio_inicial_I_II_contiguo",
+        "intencao": "curativa",
+        "modalidades": [
+          "radioterapia de campo envolvido"
+        ],
+        "criterio": "doença localizada confirmada por PET-CT",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 17,
+          "trecho": "a radioterapia pode ser uma alternativa terapêutica curativa se usada isoladamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "avancado_assintomatico",
+        "intencao": "paliativa",
+        "modalidades": [
+          "espera vigilante"
+        ],
+        "criterio": "sem critérios GELF/BNLI; rituximabe isolado não incorporado nesse cenário",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 18,
+          "trecho": "deliberaram pela não incorporação do rituximabe em monoterapia para pacientes com LF assintomático",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "avancado_sintomatico",
+        "intencao": "paliativa",
+        "modalidades": [
+          "imunoquimioterapia"
+        ],
+        "criterio": "GELF/BNLI presentes",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 19,
+          "trecho": "Sempre que possível, recomenda-se a utilização de esquemas contendo rituximabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "recaido_refratario",
+        "intencao": "paliativa",
+        "modalidades": [
+          "lenalidomida + rituximabe",
+          "R-CHOP/R-CVP",
+          "resgate com platina + TCPH autólogo"
+        ],
+        "criterio": "nova biópsia para excluir transformação",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 21,
+          "trecho": "a associação de rituximabe e lenalidomida constitui uma opção terapêutica recomendada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "transformado",
+        "intencao": "curativa",
+        "modalidades": [
+          "esquema com antraciclina se não recebida",
+          "resgate de linfoma agressivo",
+          "TCPH autólogo"
+        ],
+        "criterio": "biópsia confirma transformação",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 23,
+          "trecho": "tratados com esquemas quimioterápicos com antraciclina – caso não a tenham recebido",
+          "estado": "VERIFICADO"
+        }
+      }
     ],
     "protocolos": [
       {
@@ -174,19 +595,69 @@
         "cenario": "avancado_sintomatico | recaido_refratario",
         "linha": "1ª linha (ou recaída)",
         "drogas": [
-          { "droga": "rituximabe", "dose": 375, "unidade": "mg/m2", "via": "EV", "dias": "D1", "observacao": "antes da quimioterapia" },
-          { "droga": "ciclofosfamida", "dose": 750, "unidade": "mg/m2", "via": "EV", "dias": "D1", "observacao": "" },
-          { "droga": "doxorrubicina", "dose": 50, "unidade": "mg/m2", "via": "EV", "dias": "D1", "observacao": "" },
-          { "droga": "vincristina", "dose": 1.4, "unidade": "mg/m2", "via": "EV", "dias": "D1", "observacao": "máximo 2 mg" },
-          { "droga": "prednisona", "dose": 40, "unidade": "mg/m2", "via": "VO", "dias": "D1 a D5", "observacao": "ou 100 mg fixos (fonte)" }
+          {
+            "droga": "rituximabe",
+            "dose": 375,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "antes da quimioterapia"
+          },
+          {
+            "droga": "ciclofosfamida",
+            "dose": 750,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "doxorrubicina",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "vincristina",
+            "dose": 1.4,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "máximo 2 mg"
+          },
+          {
+            "droga": "prednisona",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1 a D5",
+            "observacao": "ou 100 mg fixos (fonte)"
+          }
         ],
         "cicloDias": 21,
         "numeroCiclos": null,
         "premedicacao": "Pré-medicação do rituximabe (bula)",
         "ajusteObrigatorio": "Máximo de 8 ciclos (DDT 2014). Rastreio HBV e TB antes do rituximabe.",
         "fichaId": null,
-        "sus": { "disponivel": "sim", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Quadro 1", "pagina": 20, "trecho": "R-CHOP (rituximabe, ciclofosfamida, doxorrubicina, vincristina e prednisona)", "estado": "VERIFICADO" } },
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Apêndice 2", "pagina": 99, "trecho": "Rituximabe: 375 mg/m2 IV no D1 (administrado antes da quimioterapia)", "estado": "VERIFICADO" }
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Quadro 1",
+            "pagina": 20,
+            "trecho": "R-CHOP (rituximabe, ciclofosfamida, doxorrubicina, vincristina e prednisona)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Apêndice 2",
+          "pagina": 99,
+          "trecho": "Rituximabe: 375 mg/m2 IV no D1 (administrado antes da quimioterapia)",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "linfoma-folicular-r-cvp",
@@ -194,18 +665,61 @@
         "cenario": "avancado_sintomatico | recaido_refratario",
         "linha": "1ª linha (ou recaída)",
         "drogas": [
-          { "droga": "rituximabe", "dose": 375, "unidade": "mg/m2", "via": "EV", "dias": "D1", "observacao": "antes da quimioterapia" },
-          { "droga": "ciclofosfamida", "dose": 750, "unidade": "mg/m2", "via": "EV", "dias": "D1", "observacao": "fonte: 750 a 1000 mg/m2" },
-          { "droga": "vincristina", "dose": 1.4, "unidade": "mg/m2", "via": "EV", "dias": "D1", "observacao": "máximo 2 mg" },
-          { "droga": "prednisona", "dose": 100, "unidade": "mg", "via": "VO", "dias": "D1 a D5", "observacao": "" }
+          {
+            "droga": "rituximabe",
+            "dose": 375,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "antes da quimioterapia"
+          },
+          {
+            "droga": "ciclofosfamida",
+            "dose": 750,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "fonte: 750 a 1000 mg/m2"
+          },
+          {
+            "droga": "vincristina",
+            "dose": 1.4,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "máximo 2 mg"
+          },
+          {
+            "droga": "prednisona",
+            "dose": 100,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1 a D5",
+            "observacao": ""
+          }
         ],
         "cicloDias": 21,
         "numeroCiclos": null,
         "premedicacao": "Pré-medicação do rituximabe (bula)",
         "ajusteObrigatorio": "Máximo de 8 ciclos (DDT 2014).",
         "fichaId": null,
-        "sus": { "disponivel": "sim", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Quadro 1", "pagina": 20, "trecho": "R-CVP (rituximabe + ciclofosfamida, vincristina e prednisona)", "estado": "VERIFICADO" } },
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Apêndice 2", "pagina": 99, "trecho": "Ciclofosfamida: 750 a 1000 mg/m 2 IV no D1", "estado": "VERIFICADO" }
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Quadro 1",
+            "pagina": 20,
+            "trecho": "R-CVP (rituximabe + ciclofosfamida, vincristina e prednisona)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Apêndice 2",
+          "pagina": 99,
+          "trecho": "Ciclofosfamida: 750 a 1000 mg/m 2 IV no D1",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "linfoma-folicular-rituximabe-mono",
@@ -213,15 +727,37 @@
         "cenario": "avancado_sintomatico em frágeis | recaída em frágeis",
         "linha": "1ª linha ou recaída",
         "drogas": [
-          { "droga": "rituximabe", "dose": 375, "unidade": "mg/m2", "via": "EV", "dias": "D1 semanal", "observacao": "PCDT preliminar 2026: 8 semanas; DDT 2014: 4 semanas; bula: 4 ou 8 doses — ver conflitos" }
+          {
+            "droga": "rituximabe",
+            "dose": 375,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": "PCDT preliminar 2026: 8 semanas; DDT 2014: 4 semanas; bula: 4 ou 8 doses — ver conflitos"
+          }
         ],
         "cicloDias": 7,
         "numeroCiclos": null,
         "premedicacao": "Pré-medicação do rituximabe (bula)",
         "ajusteObrigatorio": "Não indicado em assintomático (não incorporado).",
         "fichaId": null,
-        "sus": { "disponivel": "sim", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Quadro 1", "pagina": 20, "trecho": "Pode ser considerado principalmente em pacientes frágeis ou clinicamente incapazes", "estado": "VERIFICADO" } },
-        "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Apêndice 2", "pagina": 99, "trecho": "Rituximabe: 375 mg/m 2 IV 1x por semana", "estado": "VERIFICADO" }
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Quadro 1",
+            "pagina": 20,
+            "trecho": "Pode ser considerado principalmente em pacientes frágeis ou clinicamente incapazes",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Apêndice 2",
+          "pagina": 99,
+          "trecho": "Rituximabe: 375 mg/m 2 IV 1x por semana",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "linfoma-folicular-r2",
@@ -229,28 +765,114 @@
         "cenario": "recaido_refratario (previamente tratado)",
         "linha": "2ª linha ou posterior",
         "drogas": [
-          { "droga": "lenalidomida", "dose": 20, "unidade": "mg", "via": "VO", "dias": "D1 a D21", "observacao": "ajustar por ClCr (bula)" },
-          { "droga": "rituximabe", "dose": 375, "unidade": "mg/m2", "via": "EV", "dias": "C1: D1, D8, D15, D22; C2–C5: D1", "observacao": "" }
+          {
+            "droga": "lenalidomida",
+            "dose": 20,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1 a D21",
+            "observacao": "ajustar por ClCr (bula)"
+          },
+          {
+            "droga": "rituximabe",
+            "dose": 375,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "C1: D1, D8, D15, D22; C2–C5: D1",
+            "observacao": ""
+          }
         ],
         "cicloDias": 28,
         "numeroCiclos": 12,
         "premedicacao": "Pré-medicação do rituximabe; tromboprofilaxia conforme risco (SEM_FONTE aberta lida para esquema)",
         "ajusteObrigatorio": "Ajuste de lenalidomida por função renal e citopenias (bula). Contracepção/REMS.",
         "fichaId": null,
-        "sus": { "disponivel": "sim", "fonte": { "tipo": "NORMA", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Apêndice 1 (Relatório Conitec nº 905)", "pagina": 45, "trecho": "A lenalidomida em combinação com rituximabe foi recentemente incorporado ao SUS", "estado": "VERIFICADO" } },
-        "fonte": { "tipo": "BULA", "referencia": "Bula FDA lenalidomida — openFDA set_id 1b2716cf-24b4-4157-a218-58ede63917bd (2026-05-27); idem PCDT preliminar 2026 Apêndice 2 p.99", "pagina": null, "trecho": "20 mg once daily orally on Days 1 to 21 of repeated 28-day cycles", "estado": "VERIFICADO" }
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Apêndice 1 (Relatório Conitec nº 905)",
+            "pagina": 45,
+            "trecho": "A lenalidomida em combinação com rituximabe foi recentemente incorporado ao SUS",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA lenalidomida — openFDA set_id 1b2716cf-24b4-4157-a218-58ede63917bd (2026-05-27); idem PCDT preliminar 2026 Apêndice 2 p.99",
+          "pagina": null,
+          "trecho": "20 mg once daily orally on Days 1 to 21 of repeated 28-day cycles",
+          "estado": "VERIFICADO"
+        }
       }
     ],
     "radioterapia": [
-      { "cenario": "estagio_inicial_I_II_contiguo (campo envolvido)", "doseTotalGy": 24, "fracoes": 12, "concomitante": "não", "observacao": "fonte: 4 a 24 Gy em 12 frações; 4 Gy em 2 frações para paliação/retratamento", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 17, "trecho": "A dose recomendada é de 4 a 24 Gy em 12 frações", "estado": "VERIFICADO" } },
-      { "cenario": "paliativo / retratamento", "doseTotalGy": 4, "fracoes": 2, "concomitante": "não", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 17, "trecho": "como 4 Gy em duas frações, são empregadas para paliação ou retratamento", "estado": "VERIFICADO" } }
+      {
+        "cenario": "estagio_inicial_I_II_contiguo (campo envolvido)",
+        "doseTotalGy": 24,
+        "fracoes": 12,
+        "concomitante": "não",
+        "observacao": "fonte: 4 a 24 Gy em 12 frações; 4 Gy em 2 frações para paliação/retratamento",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 17,
+          "trecho": "A dose recomendada é de 4 a 24 Gy em 12 frações",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "paliativo / retratamento",
+        "doseTotalGy": 4,
+        "fracoes": 2,
+        "concomitante": "não",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 17,
+          "trecho": "como 4 Gy em duas frações, são empregadas para paliação ou retratamento",
+          "estado": "VERIFICADO"
+        }
+      }
     ],
     "cirurgia": [
-      { "procedimento": "Nova biópsia na recaída/progressão", "quando": "Sempre que possível, para excluir transformação", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 21, "trecho": "é altamente recomendável a repetição da biópsia e do estudo histopatológico", "estado": "VERIFICADO" } },
-      { "procedimento": "TCPH autólogo", "quando": "Recaída quimiossensível; POD24; nunca em 1ª linha fora de estudo", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 23, "trecho": "o TCPH deve ser considerado entre as opções padrão para pacientes com LF recaído", "estado": "VERIFICADO" } }
+      {
+        "procedimento": "Nova biópsia na recaída/progressão",
+        "quando": "Sempre que possível, para excluir transformação",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 21,
+          "trecho": "é altamente recomendável a repetição da biópsia e do estudo histopatológico",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "TCPH autólogo",
+        "quando": "Recaída quimiossensível; POD24; nunca em 1ª linha fora de estudo",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 23,
+          "trecho": "o TCPH deve ser considerado entre as opções padrão para pacientes com LF recaído",
+          "estado": "VERIFICADO"
+        }
+      }
     ],
     "biomarcadorTratamento": [
-      { "seAlvo": "CD20+", "opcao": "Rituximabe (1ª linha com QT; R² na recaída)", "evidencia": "PCDT preliminar 2026", "sus": "sim", "fonte": { "tipo": "NORMA", "referencia": "PCDT Linfoma de Hodgkin 2020, Regulação (rituximabe adquirido pelo MS)", "pagina": 39, "trecho": "do rituximabe para a quimioterapia do linfoma folifcular e do linfoma difuso", "estado": "VERIFICADO" } }
+      {
+        "seAlvo": "CD20+",
+        "opcao": "Rituximabe (1ª linha com QT; R² na recaída)",
+        "evidencia": "PCDT preliminar 2026",
+        "sus": "sim",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "PCDT Linfoma de Hodgkin 2020, Regulação (rituximabe adquirido pelo MS)",
+          "pagina": 39,
+          "trecho": "do rituximabe para a quimioterapia do linfoma folifcular e do linfoma difuso",
+          "estado": "VERIFICADO"
+        }
+      }
     ],
     "suporte": {
       "emetogenicidade": null,
@@ -261,55 +883,441 @@
         "QT intratecal profilática não recomendada no LF (exceto transformado conforme subtipo)"
       ],
       "pendencia": "SEM_FONTE (emetogenicidade/NF; profilaxia antiviral HBV)",
-      "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 27, "trecho": "Recomenda-se o início do uso de rituximabe após quatro semanas do início", "estado": "VERIFICADO" }
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+        "pagina": 27,
+        "trecho": "Recomenda-se o início do uso de rituximabe após quatro semanas do início",
+        "estado": "VERIFICADO"
+      },
+      "profilaxiaHBV": {
+        "texto": "Profilaxia de reativação de HBV com anti-CD20 (HBsAg+ ou anti-HBc+ de risco): antiviral de alta barreira (entecavir, tenofovir disoproxila ou alafenamida) durante o tratamento e por ≥12 meses após o último anti-CD20 (ASCO PCO, INFERIDO); entecavir 0,5 mg VO 1x/dia (bula, virgem de nucleosídeo; ajuste renal). Escolha/duração final: médico + hepatologia.",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "ASCO Provisional Clinical Opinion Update — Hepatitis B Virus Screening and Management for Patients with Cancer Prior to Therapy (PMC11828660), tabela de diretrizes",
+          "pagina": null,
+          "trecho": "at least 12 mos for patients receiving anti-CD20 therapies",
+          "estado": "INFERIDO"
+        },
+        "fonteDose": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Entecavir (openFDA set_id 007a6ad8-4d23-4543-ae48-c651cac7dd7b, 2019-11-24)",
+          "pagina": null,
+          "trecho": "Nucleoside-inhibitor-treatment-naïve with compensated liver disease (greater than or equal to 16 years old): 0.5 mg once daily",
+          "estado": "VERIFICADO"
+        }
+      },
+      "tromboprofilaxiaLenalidomida": {
+        "texto": "Tromboprofilaxia recomendada com lenalidomida; regime (AAS × anticoagulante) escolhido pelo risco individual — a bula não fixa droga/dose.",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Lenalidomide (openFDA set_id 1b2716cf-24b4-4157-a218-58ede63917bd, 2026-05-27)",
+          "pagina": null,
+          "trecho": "Thromboprophylaxis is recommended and the choice of regimen should be based on",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "Droga/dose da tromboprofilaxia com lenalidomida não fixada em bula.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "Bula FDA lenalidomida",
+            "PCDT LF 2026"
+          ]
+        }
+      },
+      "pendenciaClasse": {
+        "texto": "Emetogenicidade/NF via módulo de suporte.",
+        "classe": "DEPENDE_MOTOR_CODIGO",
+        "buscasFeitas": [
+          "MASCC/ESMO 2023"
+        ]
+      }
     },
     "ensaios": [
-      { "nome": "GALLIUM", "nct": "NCT01332968", "nctEstado": "VERIFICADO", "populacao": "LNH indolente avançado não tratado", "bracos": "obinutuzumabe + QT × rituximabe + QT, seguidos de manutenção", "desfecho": "SLP", "resultado": "Obinutuzumabe não avaliado pela Conitec — fora do SUS", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do LF (CP 78/2026); ClinicalTrials.gov API v2 NCT01332968 (COMPLETED)", "pagina": 20, "trecho": "O medicamento obinutuzumabe não é preconizado por este Protocolo", "estado": "VERIFICADO" } },
-      { "nome": "PRIMA", "nct": "NCT00140582", "nctEstado": "VERIFICADO", "populacao": "LF avançado respondedor à imunoquimioterapia", "bracos": "manutenção com rituximabe × observação", "desfecho": "SLP", "resultado": "Ganho de SLP sem benefício consistente em SG; manutenção não preconizada no SUS", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do LF (CP 78/2026); ClinicalTrials.gov API v2 NCT00140582 (COMPLETED)", "pagina": 20, "trecho": "sem demonstração consistente de benefício em sobrevida global", "estado": "VERIFICADO" } },
-      { "nome": "AUGMENT", "nct": "NCT01938001", "nctEstado": "VERIFICADO", "populacao": "LF/LZM recaído ou refratário", "bracos": "rituximabe + lenalidomida × rituximabe + placebo", "desfecho": "SLP", "resultado": "Base do R² (incorporado SUS)", "fonte": { "tipo": "BULA", "referencia": "Bula FDA lenalidomida, seção 2.4; ClinicalTrials.gov API v2 NCT01938001 (COMPLETED)", "pagina": null, "trecho": "FL or MZL: 20 mg once daily orally on Days 1 to 21", "estado": "VERIFICADO" } }
+      {
+        "nome": "GALLIUM",
+        "nct": "NCT01332968",
+        "nctEstado": "VERIFICADO",
+        "populacao": "LNH indolente avançado não tratado",
+        "bracos": "obinutuzumabe + QT × rituximabe + QT, seguidos de manutenção",
+        "desfecho": "SLP",
+        "resultado": "Obinutuzumabe não avaliado pela Conitec — fora do SUS",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do LF (CP 78/2026); ClinicalTrials.gov API v2 NCT01332968 (COMPLETED)",
+          "pagina": 20,
+          "trecho": "O medicamento obinutuzumabe não é preconizado por este Protocolo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "PRIMA",
+        "nct": "NCT00140582",
+        "nctEstado": "VERIFICADO",
+        "populacao": "LF avançado respondedor à imunoquimioterapia",
+        "bracos": "manutenção com rituximabe × observação",
+        "desfecho": "SLP",
+        "resultado": "Ganho de SLP sem benefício consistente em SG; manutenção não preconizada no SUS",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do LF (CP 78/2026); ClinicalTrials.gov API v2 NCT00140582 (COMPLETED)",
+          "pagina": 20,
+          "trecho": "sem demonstração consistente de benefício em sobrevida global",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "AUGMENT",
+        "nct": "NCT01938001",
+        "nctEstado": "VERIFICADO",
+        "populacao": "LF/LZM recaído ou refratário",
+        "bracos": "rituximabe + lenalidomida × rituximabe + placebo",
+        "desfecho": "SLP",
+        "resultado": "Base do R² (incorporado SUS)",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA lenalidomida, seção 2.4; ClinicalTrials.gov API v2 NCT01938001 (COMPLETED)",
+          "pagina": null,
+          "trecho": "FL or MZL: 20 mg once daily orally on Days 1 to 21",
+          "estado": "VERIFICADO"
+        }
+      }
     ],
     "seguimento": [
-      { "periodo": "espera vigilante", "exames": ["HEMOGRAMA", "CREATININA", "TGO", "TGP", "DHL"], "periodicidade": "a cada 4–6 semanas inicialmente; alongar se estável após 3 visitas", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 27, "trecho": "A consulta de acompanhamento pode ser feita a cada 4 a 6 semanas", "estado": "VERIFICADO" } },
-      { "periodo": "1º ano após tratamento", "exames": ["HEMOGRAMA", "UREIA", "CREATININA", "TGO", "TGP", "BILIRRUBINA", "DHL"], "periodicidade": "pelo menos a cada 3 meses; depois individualizado; indefinido", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 28, "trecho": "anamnese e exame clínico, pelo menos, a cada três meses no primeiro ano", "estado": "VERIFICADO" } },
-      { "periodo": "pós-RT cervical", "exames": ["TSH"], "periodicidade": "anual", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 28, "trecho": "A função da tireoide deve ser avaliada anualmente em pacientes que se submeteram", "estado": "VERIFICADO" } }
+      {
+        "periodo": "espera vigilante",
+        "exames": [
+          "HEMOGRAMA",
+          "CREATININA",
+          "TGO",
+          "TGP",
+          "DHL"
+        ],
+        "periodicidade": "a cada 4–6 semanas inicialmente; alongar se estável após 3 visitas",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 27,
+          "trecho": "A consulta de acompanhamento pode ser feita a cada 4 a 6 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "1º ano após tratamento",
+        "exames": [
+          "HEMOGRAMA",
+          "UREIA",
+          "CREATININA",
+          "TGO",
+          "TGP",
+          "BILIRRUBINA",
+          "DHL"
+        ],
+        "periodicidade": "pelo menos a cada 3 meses; depois individualizado; indefinido",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 28,
+          "trecho": "anamnese e exame clínico, pelo menos, a cada três meses no primeiro ano",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "pós-RT cervical",
+        "exames": [
+          "TSH"
+        ],
+        "periodicidade": "anual",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 28,
+          "trecho": "A função da tireoide deve ser avaliada anualmente em pacientes que se submeteram",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "apacSigtap": [
+      {
+        "procedimento": "03.04.03.023-6",
+        "nome": "QUIMIOTERAPIA DE LINFOMA FOLICULAR- 1ª LINHA",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.03.023-6",
+          "pagina": null,
+          "trecho": "QUIMIOTERAPIA DE LINFOMA FOLICULAR- 1ª LINHA",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "03.04.03.024-4",
+        "nome": "QUIMIOTERAPIA DE LINFOMA FOLICULAR - 2ª LINHA",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.03.024-4",
+          "pagina": null,
+          "trecho": "QUIMIOTERAPIA DE 2º LINHA PARA CONTROLE TEMPORÁRIO DO LINFOMA FOLICULAR",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "03.04.03.016-3 / 03.04.03.017-1",
+        "nome": "QT de LNH de baixo grau 1ª/2ª linha (excludente com os de LF)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.03.016-3",
+          "pagina": null,
+          "trecho": "QUIMIOTERAPIA DE LINFOMA NÃO HODGKIN DE BAIXO GRAU DE MALIGNIDADE (1ª LINHA)",
+          "estado": "VERIFICADO"
+        }
+      }
     ]
   },
   "ligacoes": {
-    "exames": ["PET_CT_FDG", "TC_PESCOCO", "TC_TORAX", "TC_ABDOMEN_SUPERIOR", "TC_PELVE", "RM_CRANIO", "BIOPSIA_GANGLIO", "BIOPSIA_PERCUTANEA_GUIADA", "IMUNOHISTOQUIMICA", "FISH", "IMUNOFENOTIPAGEM", "HEMOGRAMA", "UREIA", "CREATININA", "ACIDO_URICO", "DHL", "BETA2_MICROGLOBULINA", "ELETROFORESE_PROTEINAS", "HBSAG", "ANTI_HBC_TOTAL", "ANTI_HCV", "HIV", "BETA_HCG", "BIOPSIA_MEDULA", "RX_TORAX_PA_PERFIL", "TGO", "TGP", "BILIRRUBINA", "TSH"],
+    "exames": [
+      "PET_CT_FDG",
+      "TC_PESCOCO",
+      "TC_TORAX",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "RM_CRANIO",
+      "BIOPSIA_GANGLIO",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "IMUNOHISTOQUIMICA",
+      "FISH",
+      "IMUNOFENOTIPAGEM",
+      "HEMOGRAMA",
+      "UREIA",
+      "CREATININA",
+      "ACIDO_URICO",
+      "DHL",
+      "BETA2_MICROGLOBULINA",
+      "ELETROFORESE_PROTEINAS",
+      "HBSAG",
+      "ANTI_HBC_TOTAL",
+      "ANTI_HCV",
+      "HIV",
+      "BETA_HCG",
+      "BIOPSIA_MEDULA",
+      "RX_TORAX_PA_PERFIL",
+      "TGO",
+      "TGP",
+      "BILIRRUBINA",
+      "TSH",
+      "IGRA"
+    ],
     "interacoesConsultar": [
-      { "droga": "lenalidomida", "com": "digoxina; agentes eritropoéticos/estrogênios (trombose)", "ref": null },
-      { "droga": "vincristina", "com": "azóis (CYP3A4)", "ref": null },
-      { "droga": "rituximabe", "com": "vacinas de vírus vivo", "ref": null }
+      {
+        "droga": "lenalidomida",
+        "com": "digoxina; agentes eritropoéticos/estrogênios (trombose)",
+        "ref": null
+      },
+      {
+        "droga": "vincristina",
+        "com": "azóis (CYP3A4)",
+        "ref": null
+      },
+      {
+        "droga": "rituximabe",
+        "com": "vacinas de vírus vivo",
+        "ref": null
+      }
     ],
     "ctcaeAcao": [
-      { "classe": "infusional (rituximabe)", "termosCTCAEv6": ["Reação relacionada à infusão"] },
-      { "classe": "hematológica", "termosCTCAEv6": ["Contagem de neutrófilos diminuída", "Contagem de plaquetas diminuída"] },
-      { "classe": "tromboembólica (lenalidomida)", "termosCTCAEv6": ["Evento tromboembólico"] },
-      { "classe": "infecciosa", "termosCTCAEv6": ["Infecção por hepatite B", "Infecção pulmonar"] }
+      {
+        "classe": "infusional (rituximabe)",
+        "termosCTCAEv6": [
+          "Reação relacionada à infusão"
+        ]
+      },
+      {
+        "classe": "hematológica",
+        "termosCTCAEv6": [
+          "Contagem de neutrófilos diminuída",
+          "Contagem de plaquetas diminuída"
+        ]
+      },
+      {
+        "classe": "tromboembólica (lenalidomida)",
+        "termosCTCAEv6": [
+          "Evento tromboembólico"
+        ]
+      },
+      {
+        "classe": "infecciosa",
+        "termosCTCAEv6": [
+          "Infecção por hepatite B",
+          "Infecção pulmonar"
+        ]
+      }
     ],
-    "suporteReceitas": ["pré-medicação do rituximabe", "tratamento de ILTB quando indicado (Manual de TB do MS)"],
-    "orientacoes": ["espera vigilante: retornar antes se sintomas B, crescimento rápido de linfonodos", "contracepção e REMS com lenalidomida", "aconselhamento sobre fertilidade"],
-    "encaminhamentos": ["radioterapia", "centro de TCPH (recaída/POD24)", "cuidados-paliativos", "psico-oncologia"],
-    "laudos": ["APAC de quimioterapia de linfoma não Hodgkin de baixo grau (código SIGTAP: SEM_FONTE nas fontes lidas)"],
+    "suporteReceitas": [
+      "pré-medicação do rituximabe",
+      "tratamento de ILTB quando indicado (Manual de TB do MS)"
+    ],
+    "orientacoes": [
+      "espera vigilante: retornar antes se sintomas B, crescimento rápido de linfonodos",
+      "contracepção e REMS com lenalidomida",
+      "aconselhamento sobre fertilidade"
+    ],
+    "encaminhamentos": [
+      "radioterapia",
+      "centro de TCPH (recaída/POD24)",
+      "cuidados-paliativos",
+      "psico-oncologia"
+    ],
+    "laudos": [
+      "APAC de quimioterapia de linfoma não Hodgkin de baixo grau (código SIGTAP: SEM_FONTE nas fontes lidas)"
+    ],
     "formulasXYZ": [
-      { "x": "LF avançado (II não contíguo–IV)", "y": "sem critério GELF/BNLI", "z": "espera vigilante (sem rituximabe isolado no SUS)", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 18, "trecho": "Na ausência dessas condições, a conduta recomendada é a espera vigilante", "estado": "VERIFICADO" } },
-      { "x": "LF estágio I–II contíguo confirmado por PET-CT", "y": "indicação de tratamento", "z": "RT de campo envolvido 24 Gy/12 frações", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 17, "trecho": "A dose recomendada é de 4 a 24 Gy em 12 frações", "estado": "VERIFICADO" } },
-      { "x": "LF recaído/refratário previamente tratado", "y": "transformação excluída por biópsia", "z": "R² (lenalidomida 20 mg D1–21 + rituximabe), 12 ciclos de 28 dias", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Apêndice 2", "pagina": 99, "trecho": "Intervalo entre os ciclos: 28 dias. Número de ciclos: 12", "estado": "VERIFICADO" } },
-      { "x": "Plano com rituximabe", "y": "antes da 1ª dose", "z": "HBsAg + anti-HBc + RX de tórax + PT/IGRA", "fonte": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)", "pagina": 26, "trecho": "Antes do início do uso de rituximabe e com objetivo de realizar o planejamento", "estado": "VERIFICADO" } }
+      {
+        "x": "LF avançado (II não contíguo–IV)",
+        "y": "sem critério GELF/BNLI",
+        "z": "espera vigilante (sem rituximabe isolado no SUS)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 18,
+          "trecho": "Na ausência dessas condições, a conduta recomendada é a espera vigilante",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "LF estágio I–II contíguo confirmado por PET-CT",
+        "y": "indicação de tratamento",
+        "z": "RT de campo envolvido 24 Gy/12 frações",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 17,
+          "trecho": "A dose recomendada é de 4 a 24 Gy em 12 frações",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "LF recaído/refratário previamente tratado",
+        "y": "transformação excluída por biópsia",
+        "z": "R² (lenalidomida 20 mg D1–21 + rituximabe), 12 ciclos de 28 dias",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026), Apêndice 2",
+          "pagina": 99,
+          "trecho": "Intervalo entre os ciclos: 28 dias. Número de ciclos: 12",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Plano com rituximabe",
+        "y": "antes da 1ª dose",
+        "z": "HBsAg + anti-HBc + RX de tórax + PT/IGRA",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Relatório preliminar PCDT do Linfoma Folicular (CP 78/2026)",
+          "pagina": 26,
+          "trecho": "Antes do início do uso de rituximabe e com objetivo de realizar o planejamento",
+          "estado": "VERIFICADO"
+        }
+      }
     ]
   },
   "pendencias": [
-    "PT/IGRA sem catalogoId (SEM_ID_NO_CATALOGO)",
-    "Código SIGTAP da APAC de LNH baixo grau não confirmado nas fontes lidas",
-    "Doses de R-ICE, R-DHAP, R-GDP, R-GemOx existem só no PCDT preliminar 2026 (p.99–100) — não transcritas até versão final",
-    "R-bendamustina, O-CHOP/O-benda, manutenção com rituximabe/obinutuzumabe, CAR-T, epcoritamabe, zanubrutinibe (curso/NCCN): fora do PCDT/SUS; doses não transcritas",
-    "Profilaxia antiviral HBV e tromboprofilaxia com lenalidomida: SEM_FONTE aberta lida",
-    "PCDT 2026 em consulta pública — reconferir quando publicado"
+    {
+      "texto": "PT/IGRA sem id no catálogo (SIGTAP 02.02.03.024-5 / 02.02.03.136-5); inclusão depende de D-F1-02.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "catálogo v1.1",
+        "SIGTAP 09/2026"
+      ]
+    },
+    {
+      "texto": "Resgate de linfoma não buscado (orientação do Dr. Silas). Apêndice 2 do PCDT preliminar 2026 (p.99-100) traz doses, algumas sem via (etoposídeo, cisplatina do R-GDP, dexametasona).",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "PCDT LF preliminar 2026 p.99-100"
+      ]
+    },
+    {
+      "texto": "Esquemas fora do PCDT/SUS — aceno geral.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "PCDT/DDT vigentes e preliminares 2026",
+        "Onco PRO aula 80/82"
+      ]
+    },
+    {
+      "texto": "HBV preenchido (ASCO PCO + bula entecavir). Tromboprofilaxia com lenalidomida: bula exige, mas regime fica por risco individual.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "Bula FDA lenalidomida",
+        "ASCO PCO HBV (PMC11828660)"
+      ]
+    },
+    {
+      "texto": "Reconferir quando o PCDT 2026 for publicado.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Conitec CP 78/2026"
+      ]
+    }
   ],
   "conflitos": [
-    { "tema": "Manutenção com anti-CD20 após indução", "fonteA": { "tipo": "CURSO", "referencia": "Onco PRO 2026, Aula 80", "pagina": 31, "trecho": "Manutenção por 2 anos (Rituximabe ou Obinotuzumabe)", "estado": "INFERIDO" }, "fonteB": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do LF (CP 78/2026)", "pagina": 20, "trecho": "Este Protocolo não preconiza a monoterapia de manutenção com rituximabe", "estado": "VERIFICADO" }, "escolhaSeguranca": "SUS: sem manutenção (DDT 2014 e PCDT 2026 concordam). Bula FDA prevê manutenção a cada 8 semanas por 12 doses — registrado apenas como referência internacional." },
-    { "tema": "Duração do rituximabe em monoterapia", "fonteA": { "tipo": "DIRETRIZ", "referencia": "DDT Linfoma Folicular 2014 — https://www.gov.br/saude/pt-br/assuntos/pcdt/arquivos/2014/ddt_linfomafolicular_10102014.pdf", "pagina": 30, "trecho": "375mg/m2 de superfície corpórea semanal por quatro semanas", "estado": "VERIFICADO" }, "fonteB": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do LF (CP 78/2026), Apêndice 2", "pagina": 99, "trecho": "Duração do tratamento: 8 semanas", "estado": "CONFLITANTE" }, "escolhaSeguranca": "Ambas dentro da bula ('once weekly for 4 or 8 doses'). Número de doses deixado em aberto (numeroCiclos null) para decisão médica." },
-    { "tema": "1ª linha: R-bendamustina/obinutuzumabe (curso) × R-CHOP/R-CVP (SUS)", "fonteA": { "tipo": "CURSO", "referencia": "Onco PRO 2026, Aula 80", "pagina": 31, "trecho": "6x R-CHOP / R-Bendamustina / O+CHOP / O+Benda)", "estado": "INFERIDO" }, "fonteB": { "tipo": "DIRETRIZ", "referencia": "Relatório preliminar PCDT do LF (CP 78/2026)", "pagina": 20, "trecho": "O medicamento obinutuzumabe não é preconizado por este Protocolo", "estado": "VERIFICADO" }, "escolhaSeguranca": "SUS: R-CHOP, R-CVP ou rituximabe isolado (frágeis)." }
+    {
+      "tema": "Manutenção com anti-CD20 após indução",
+      "fonteA": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026, Aula 80",
+        "pagina": 31,
+        "trecho": "Manutenção por 2 anos (Rituximabe ou Obinotuzumabe)",
+        "estado": "INFERIDO"
+      },
+      "fonteB": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Relatório preliminar PCDT do LF (CP 78/2026)",
+        "pagina": 20,
+        "trecho": "Este Protocolo não preconiza a monoterapia de manutenção com rituximabe",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "SUS: sem manutenção (DDT 2014 e PCDT 2026 concordam). Bula FDA prevê manutenção a cada 8 semanas por 12 doses — registrado apenas como referência internacional.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Duração do rituximabe em monoterapia",
+      "fonteA": {
+        "tipo": "DIRETRIZ",
+        "referencia": "DDT Linfoma Folicular 2014 — https://www.gov.br/saude/pt-br/assuntos/pcdt/arquivos/2014/ddt_linfomafolicular_10102014.pdf",
+        "pagina": 30,
+        "trecho": "375mg/m2 de superfície corpórea semanal por quatro semanas",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Relatório preliminar PCDT do LF (CP 78/2026), Apêndice 2",
+        "pagina": 99,
+        "trecho": "Duração do tratamento: 8 semanas",
+        "estado": "CONFLITANTE"
+      },
+      "escolhaSeguranca": "Ambas dentro da bula ('once weekly for 4 or 8 doses'). Número de doses deixado em aberto (numeroCiclos null) para decisão médica.",
+      "decisaoNecessaria": true
+    },
+    {
+      "tema": "1ª linha: R-bendamustina/obinutuzumabe (curso) × R-CHOP/R-CVP (SUS)",
+      "fonteA": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026, Aula 80",
+        "pagina": 31,
+        "trecho": "6x R-CHOP / R-Bendamustina / O+CHOP / O+Benda)",
+        "estado": "INFERIDO"
+      },
+      "fonteB": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Relatório preliminar PCDT do LF (CP 78/2026)",
+        "pagina": 20,
+        "trecho": "O medicamento obinutuzumabe não é preconizado por este Protocolo",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "SUS: R-CHOP, R-CVP ou rituximabe isolado (frágeis).",
+      "decisaoNecessaria": false
+    }
   ],
   "curadoria": {
     "redator": "Claude (agente curador, Opus 5.5) — rascunho para revisão",
@@ -320,8 +1328,25 @@
       "PCDT Linfoma de Hodgkin 2020 (Regulação — rituximabe fornecido pelo MS)",
       "Bulas FDA rituximabe (Truxima) e lenalidomida (openFDA)",
       "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas (págs. 25–33)",
-      "ClinicalTrials.gov API v2 — NCT01332968, NCT00140582, NCT01938001"
+      "ClinicalTrials.gov API v2 — NCT01332968, NCT00140582, NCT01938001",
+      "SIGTAP competência 09/2026",
+      "ASCO PCO HBV (PMC11828660)",
+      "Bulas FDA Entecavir e Lenalidomide (openFDA)"
     ],
-    "aprovacaoClinica": null
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-11",
+        "redator": "Claude (agente curador)",
+        "resolvidas": 1,
+        "classificadas": 5,
+        "susPreenchidos": 0,
+        "notas": []
+      }
+    ]
+  },
+  "escopo": {
+    "classe": "ACENO_GERAL_ONCO_HEMATOLOGIA",
+    "nota": "Foco do OncoGlobal é oncologia clínica (Dr. Silas, 2026-10-11). Pack de hematologia mantido como aceno geral: conteúdo preservado, sem aprofundamento nem prioridade de curadoria."
   }
 }

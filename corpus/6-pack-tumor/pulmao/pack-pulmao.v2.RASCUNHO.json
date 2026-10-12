@@ -177,8 +177,8 @@
         {
           "alvo": "EGFR (del19, L858R; também ex20ins e T790M na progressão)",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "universal",
           "cenario": "CPNPC avançado não escamoso (e CEC em não fumante/jovem/< 15 maços-ano); ressecado IB-IIIA e III irressecável para decidir osimertinibe",
           "consequencia": "del19/L858R: osimertinibe (adjuvante 3 anos; pós-QTRT; 1ª linha ± QT ou amivantamabe+lazertinibe); ex20ins: carboplatina+pemetrexede+amivantamabe; T790M pós-TKI 1ª/2ª geração: osimertinibe. Positivo exclui QT-IO neoadjuvante e durvalumabe de consolidação.",
@@ -191,14 +191,14 @@
             "trecho": "mutações de EGFR, BRAF, MET skipping 14, KRAS, HER2",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "ALK (fusão)",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "universal",
           "cenario": "CPNPC avançado não escamoso; ressecado IB (≥ 4 cm)-IIIA para alectinibe adjuvante",
           "consequencia": "Alectinibe adjuvante 2 anos; avançado: alectinibe, brigatinibe ou lorlatinibe (crizotinibe opção). Positivo exclui QT-IO neoadjuvante e durvalumabe de consolidação.",
@@ -211,14 +211,14 @@
             "trecho": "fusões de ALK, ROS1, RET e NTRK para todos os pacientes com histologia não-escamosa",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "FISH",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "ROS1 (fusão)",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "CPNPC avançado não escamoso (painel NGS com RNA)",
           "consequencia": "Crizotinibe 250 mg VO 12/12h (SBOC: fora do rol ANS).",
@@ -230,14 +230,14 @@
             "trecho": "fusões de ALK, ROS1, RET e NTRK para todos os pacientes com histologia não-escamosa",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "FISH",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "BRAF V600E",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "CPNPC avançado não escamoso",
           "consequencia": "Dabrafenibe + trametinibe ou encorafenibe + binimetinibe.",
@@ -249,14 +249,14 @@
             "trecho": "mutações de EGFR, BRAF, MET skipping 14, KRAS, HER2",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "KRAS G12C",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "CPNPC avançado não escamoso",
           "consequencia": "Sotorasibe 960 mg/dia na 2ª linha ou mais, após platina ± IO; 1ª linha segue sem driver.",
@@ -268,14 +268,14 @@
             "trecho": "mutações de EGFR, BRAF, MET skipping 14, KRAS, HER2",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "MET skipping éxon 14",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "CPNPC avançado não escamoso (RNA melhora detecção)",
           "consequencia": "Capmatinibe ou tepotinibe em 1ª linha ou subsequentes.",
@@ -287,14 +287,14 @@
             "trecho": "mutações de EGFR, BRAF, MET skipping 14, KRAS, HER2",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "RET (fusão)",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "CPNPC avançado não escamoso",
           "consequencia": "Selpercatinibe 160 mg VO 12/12h em 1ª linha.",
@@ -306,14 +306,14 @@
             "trecho": "fusões de ALK, ROS1, RET e NTRK para todos os pacientes com histologia não-escamosa",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "FISH",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "NTRK 1/2/3 (fusão)",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "CPNPC avançado não escamoso",
           "consequencia": "Larotrectinibe 100 mg VO 12/12h.",
@@ -325,8 +325,8 @@
             "trecho": "fusões de ALK, ROS1, RET e NTRK para todos os pacientes com histologia não-escamosa",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "FISH",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "HER2 (mutação)",
@@ -761,9 +761,8 @@
         }
       },
       {
-        "catalogoId": null,
+        "catalogoId": "ACTH",
         "rotulo": "ACTH",
-        "pendencia": "SEM_ID_NO_CATALOGO",
         "cenario": "candidatos a IO",
         "indicacao": "condicional",
         "fonte": {
@@ -772,7 +771,8 @@
           "pagina": 5,
           "trecho": "TSH, T4 livre, ACTH, cortisol, sorologias HIV e hepatites, amilase, lipase e urina I.",
           "estado": "VERIFICADO"
-        }
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
       },
       {
         "catalogoId": "AMILASE",
@@ -1121,12 +1121,13 @@
         "fichaId": null,
         "sus": {
           "disponivel": "sim",
+          "via": "APAC 0304050172",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050172",
             "pagina": null,
-            "trecho": null,
-            "estado": "INFERIDO"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA PULMONAR DE CÉLULAS NÃO PEQUENAS (ADJUVANTE)",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1168,12 +1169,13 @@
         "fichaId": null,
         "sus": {
           "disponivel": "sim",
+          "via": "APAC 0304050172",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050172",
             "pagina": null,
-            "trecho": null,
-            "estado": "INFERIDO"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA PULMONAR DE CÉLULAS NÃO PEQUENAS (ADJUVANTE)",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1214,12 +1216,13 @@
         "fichaId": "FICHA.pulmao-cpnpc.cisplatina-docetaxel__nao-especificado@1.0.0",
         "sus": {
           "disponivel": "sim",
+          "via": "APAC 0304050172",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050172",
             "pagina": null,
-            "trecho": null,
-            "estado": "INFERIDO"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA PULMONAR DE CÉLULAS NÃO PEQUENAS (ADJUVANTE)",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1260,12 +1263,13 @@
         "fichaId": null,
         "sus": {
           "disponivel": "sim",
+          "via": "APAC 0304050172",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050172",
             "pagina": null,
-            "trecho": null,
-            "estado": "INFERIDO"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA PULMONAR DE CÉLULAS NÃO PEQUENAS (ADJUVANTE)",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1307,12 +1311,13 @@
         "fichaId": null,
         "sus": {
           "disponivel": "sim",
+          "via": "APAC 0304050172",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050172",
             "pagina": null,
-            "trecho": null,
-            "estado": "INFERIDO"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA PULMONAR DE CÉLULAS NÃO PEQUENAS (ADJUVANTE)",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1354,12 +1359,13 @@
         "fichaId": null,
         "sus": {
           "disponivel": "sim",
+          "via": "APAC 0304050172",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050172",
             "pagina": null,
-            "trecho": null,
-            "estado": "INFERIDO"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA PULMONAR DE CÉLULAS NÃO PEQUENAS (ADJUVANTE)",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1392,15 +1398,16 @@
         "ajusteObrigatorio": "Não associar a QT concomitante (INAT-10); Revisar interações CYP3A4 (INAT-23)",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia adjuvante isolada",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia adjuvante isolada"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1431,15 +1438,16 @@
         "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23)",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia adjuvante isolada",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia adjuvante isolada"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1470,15 +1478,16 @@
         "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Seguimento após QT adjuvante",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Seguimento após QT adjuvante"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1509,15 +1518,16 @@
         "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Seguimento após QT adjuvante",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Seguimento após QT adjuvante"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1573,15 +1583,16 @@
         "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1637,15 +1648,16 @@
         "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1676,15 +1688,16 @@
         "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Seguimento",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Seguimento"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1739,15 +1752,16 @@
         "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1803,15 +1817,16 @@
         "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1842,15 +1857,16 @@
         "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Seguimento",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Seguimento"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1897,15 +1913,16 @@
         "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1953,15 +1970,16 @@
         "ajusteObrigatorio": "Função renal antes de cada ciclo (CI-01); audiometria se sintomas (INAT-15); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Cirurgia seguida de QT adjuvante com platina"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1992,15 +2010,16 @@
         "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Seguimento",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Seguimento"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2029,10 +2048,16 @@
             "droga": "etoposídeo",
             "dose": 50,
             "unidade": "mg/m2",
-            "via": null,
+            "via": "EV",
             "dias": "D1 a D5 e D29 a D33",
-            "observacao": "via não escrita na fonte",
-            "pendencia": "SEM_FONTE"
+            "observacao": "via conforme registro do SWOG 9416 (NCT00002642)",
+            "fonteVia": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT00002642 (SWOG-9416) — https://clinicaltrials.gov/api/v2/studies/NCT00002642, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "50 mg/m2, IV Days 1-5",
+              "estado": "VERIFICADO"
+            }
           }
         ],
         "cicloDias": null,
@@ -2211,15 +2236,16 @@
         "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos; vigiar pneumonite pós-RT",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Seguimento após QTRT",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Portaria SECTICS/MS nº 21, de 18/04/2024 (DOU nº 77, 22/04/2024), Relatório CONITEC nº 885 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2024/portaria-sectics-ms-no-21-de-18-de-abril-de-2024",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o durvalumabe para o tratamento de pacientes com câncer de pulmão",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Incorporado para consolidação após QTRT no CPNPC estádio III irressecável; conferir critérios do PCDT/portaria.",
+          "alternativaSUS": "Seguimento após QTRT"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2250,15 +2276,16 @@
         "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23)",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Seguimento após QTRT",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Seguimento após QTRT"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2314,15 +2341,16 @@
         "ajusteObrigatorio": "ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia (ex.: carboplatina + pemetrexede)",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Portaria SECTICS/MS nº 71, de 20/12/2023 (DOU nº 243, 22/12/2023), Relatório CONITEC nº 859 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2023/portaria-sectics-ms-no-72-e-retificacao.pdf",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o pembrolizumabe como tratamento de primeira linha para câncer de pulmão",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado (1ª linha CPNPC). Reavaliação PD-L1 ≥ 50% em CP 40/2026, recomendação preliminar desfavorável.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia (ex.: carboplatina + pemetrexede)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2370,15 +2398,16 @@
         "ajusteObrigatorio": "Dose de carboplatina por AUC (Calvert, CI-04); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia (carboplatina + paclitaxel)",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Portaria SECTICS/MS nº 71, de 20/12/2023 (DOU nº 243, 22/12/2023), Relatório CONITEC nº 859 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2023/portaria-sectics-ms-no-72-e-retificacao.pdf",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o pembrolizumabe como tratamento de primeira linha para câncer de pulmão",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado (1ª linha CPNPC). Reavaliação PD-L1 ≥ 50% em CP 40/2026, recomendação preliminar desfavorável.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia (carboplatina + paclitaxel)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2434,15 +2463,16 @@
         "ajusteObrigatorio": "Dose de carboplatina por AUC (Calvert, CI-04); Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos; bevacizumabe: PA e proteinúria",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2474,15 +2504,16 @@
         "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Portaria SECTICS/MS nº 71, de 20/12/2023 (DOU nº 243, 22/12/2023), Relatório CONITEC nº 859 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2023/portaria-sectics-ms-no-72-e-retificacao.pdf",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o pembrolizumabe como tratamento de primeira linha para câncer de pulmão",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado (1ª linha CPNPC). Reavaliação PD-L1 ≥ 50% em CP 40/2026, recomendação preliminar desfavorável.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2513,15 +2544,16 @@
         "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2552,15 +2584,16 @@
         "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2592,12 +2625,13 @@
         "fichaId": "FICHA.pulmao-cpnpc.docetaxel-monoterapia__paliativo-metastatico@1.0.0",
         "sus": {
           "disponivel": "sim",
+          "via": "APAC 0304020214",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020214",
             "pagina": null,
-            "trecho": null,
-            "estado": "INFERIDO"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA PULMONAR DE CÉLULAS NÃO PEQUENAS AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2637,15 +2671,16 @@
         "ajusteObrigatorio": "INAT-18; PA e proteinúria",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Docetaxel monoterapia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Docetaxel monoterapia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2684,15 +2719,16 @@
         "ajusteObrigatorio": "INAT-18; função hepática",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Docetaxel monoterapia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Docetaxel monoterapia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2723,15 +2759,16 @@
         "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Docetaxel monoterapia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Docetaxel monoterapia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2762,15 +2799,16 @@
         "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Docetaxel monoterapia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Docetaxel monoterapia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2803,19 +2841,20 @@
             "observacao": ""
           }
         ],
-        "cicloDias": null,
+        "cicloDias": 21,
         "numeroCiclos": null,
         "premedicacao": "",
         "ajusteObrigatorio": "Dose de carboplatina por AUC (Calvert, CI-04); ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16)",
         "fichaId": "FICHA.pulmao-cpnpc.carboplatina-pemetrexede-nao-escamoso__paliativo-metastatico@1.0.0",
         "sus": {
           "disponivel": "sim",
+          "via": "APAC 0304020214",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020214",
             "pagina": null,
-            "trecho": null,
-            "estado": "INFERIDO"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA PULMONAR DE CÉLULAS NÃO PEQUENAS AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2825,7 +2864,13 @@
           "trecho": "Previamente tratados com imunoterapia isolada: Carboplatina AUC 5 + Pemetrexede 500 mg/m² EV D1",
           "estado": "VERIFICADO"
         },
-        "pendencia": "SEM_FONTE: intervalo do ciclo não escrito nesta linha da SBOC (dose bate com a ficha)"
+        "fonteCiclo": {
+          "tipo": "BULA",
+          "referencia": "Rótulo FDA PEMRYDI RTU (pemetrexed) (openFDA/DailyMed set_id 0f006b06-ab85-423d-ba0c-dfc3fc25844e), seção 2, acesso 2026-10-11; bula ANVISA não consultada",
+          "pagina": null,
+          "trecho": "on Day 1 of each 21-day cycle",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "pulmao-2l-pemetrexede-mono",
@@ -2849,12 +2894,13 @@
         "fichaId": null,
         "sus": {
           "disponivel": "sim",
+          "via": "APAC 0304020214",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SUS — quimioterapia antineoplásica custeada por APAC-Onco (Tabela SIGTAP); procedimento específico não conferido nesta redação",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020214",
             "pagina": null,
-            "trecho": null,
-            "estado": "INFERIDO"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA PULMONAR DE CÉLULAS NÃO PEQUENAS AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2886,15 +2932,16 @@
         "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23); ECG (QT)",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "TKI-EGFR de 1ª geração se disponível no serviço, ou QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "TKI-EGFR de 1ª geração se disponível no serviço, ou QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2949,15 +2996,16 @@
         "ajusteObrigatorio": "ClCr ≥ 45 mL/min (CI-02); suplementação de ácido fólico e B12 conforme bula; evitar AINE (INAT-16); INAT-10",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2997,15 +3045,16 @@
         "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23)",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3036,15 +3085,15 @@
         "ajusteObrigatorio": "Antiácidos/IBP (INAT-08)",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Portaria SCTIE/MS nº 52/2013 (publ. 08/11/2013), Relatório CONITEC nº 62; DDT Câncer de Pulmão (Portaria SAS nº 957/2014) — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2013/pt51a53-2013.pdf",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "Fica incorporado o gefitinibe para o tratamento do câncer de pulmão",
+            "estado": "VERIFICADO"
+          },
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3075,15 +3124,15 @@
         "ajusteObrigatorio": "IBP (INAT-07); varfarina (INAT-22)",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Portaria SCTIE/MS nº 51/2013 (publ. 08/11/2013), Relatório CONITEC nº 63; DDT Câncer de Pulmão (Portaria SAS nº 957/2014) — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2013/pt51a53-2013.pdf",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "Fica incorporado o cloridrato de erlotinibe para o tratamento do câncer de pulmão",
+            "estado": "VERIFICADO"
+          },
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3114,15 +3163,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3133,10 +3183,10 @@
         }
       },
       {
-        "id": "pulmao-egfr-ex20-carboplatina-pemetrexede-amivantamabe",
+        "id": "pulmao-egfr-ex20-carboplatina-pemetrexede-amivantamabe-ex20ins-1l",
         "nome": "Carboplatina + pemetrexede + amivantamabe (EGFR inserção éxon 20; ou 2ª linha pós-osimertinibe)",
-        "cenario": "paliativo — CPNPC IV EGFR ex20ins (1ª linha) ou EGFR sensível após osimertinibe",
-        "linha": "1ª linha (ex20ins) / 2ª linha",
+        "cenario": "paliativo — CPNPC IV EGFR ex20ins (1ª linha)",
+        "linha": "1ª linha",
         "drogas": [
           {
             "droga": "carboplatina",
@@ -3149,20 +3199,47 @@
           {
             "droga": "pemetrexede",
             "dose": 500,
-            "unidade": "mg",
+            "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1",
-            "observacao": "unidade grafada \"mg\" na fonte (provável mg/m²); até progressão",
-            "pendencia": "SEM_FONTE: unidade ambígua"
+            "observacao": "até progressão",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA RYBREVANT (amivantamab-vmjw) IV (openFDA/DailyMed set_id 1466c070-9f97-4fa4-a955-6a6b59981fb8), seções 2.4 e 14, acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "pemetrexed at 500 mg/m 2 once every 3 weeks until disease progression",
+              "estado": "VERIFICADO"
+            }
           },
           {
-            "droga": "amivantamabe",
-            "dose": null,
+            "droga": "amivantamabe (semanas 1–4)",
+            "dose": 1400,
             "unidade": "mg",
             "via": "EV",
-            "dias": "semanal × 4, depois a cada 3 semanas",
-            "observacao": "Fonte: \"1.400 (1.750 mg se 80 kg)\" ... \"a cada 3 ciclos\" — ambíguo",
-            "pendencia": "SEM_FONTE"
+            "dias": "semanal: semana 1 dividida em D1 e D2, depois D8, D15, D22",
+            "observacao": "peso < 80 kg; se ≥ 80 kg: 1.750 mg",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA RYBREVANT (amivantamab-vmjw) IV (openFDA/DailyMed set_id 1466c070-9f97-4fa4-a955-6a6b59981fb8), seções 2.4 e 14, acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "Less than 80 kg Weeks 1–4 1,400 mg Week 7 onwards 1,750 mg",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "amivantamabe (a partir da semana 7)",
+            "dose": 1750,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 a cada 3 semanas",
+            "observacao": "peso < 80 kg; se ≥ 80 kg: 2.100 mg; até progressão",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA RYBREVANT (amivantamab-vmjw) IV (openFDA/DailyMed set_id 1466c070-9f97-4fa4-a955-6a6b59981fb8), seções 2.4 e 14, acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "Less than 80 kg Weeks 1–4 1,400 mg Week 7 onwards 1,750 mg",
+              "estado": "VERIFICADO"
+            }
           }
         ],
         "cicloDias": 21,
@@ -3171,15 +3248,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3188,7 +3266,99 @@
           "trecho": "Carboplatina AUC 5 EV D1 a cada 3 semanas por 4 ciclos",
           "estado": "VERIFICADO"
         },
-        "pendencia": "Dose de amivantamabe ambígua na SBOC (limiar de peso sem sinal, \"a cada 3 ciclos\"); confirmar em bula antes de uso."
+        "doseVerificada": true,
+        "observacaoDose": "SBOC p.16 ambígua ('a cada 3 ciclos', limiar de peso sem sinal); doses e calendário conforme bula FDA (PAPILLON). Ordem: pemetrexede, carboplatina, amivantamabe.",
+        "derivadoDe": "pulmao-egfr-ex20-carboplatina-pemetrexede-amivantamabe",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "id": "pulmao-egfr-ex20-carboplatina-pemetrexede-amivantamabe-pos-osimertinibe",
+        "nome": "Carboplatina + pemetrexede + amivantamabe (EGFR inserção éxon 20; ou 2ª linha pós-osimertinibe)",
+        "cenario": "paliativo — CPNPC IV EGFR sensível após osimertinibe",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "4 ciclos"
+          },
+          {
+            "droga": "pemetrexede",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "até progressão",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA RYBREVANT (amivantamab-vmjw) IV (openFDA/DailyMed set_id 1466c070-9f97-4fa4-a955-6a6b59981fb8), seções 2.4 e 14, acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "pemetrexed at 500 mg/m 2 once every 3 weeks until disease progression",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "amivantamabe (semanas 1–4)",
+            "dose": 1400,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "semanal: semana 1 dividida em D1 e D2, depois D8, D15, D22",
+            "observacao": "peso < 80 kg; se ≥ 80 kg: 1.750 mg",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA RYBREVANT (amivantamab-vmjw) IV (openFDA/DailyMed set_id 1466c070-9f97-4fa4-a955-6a6b59981fb8), seções 2.4 e 14, acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "Less than 80 kg Weeks 1–4 1,400 mg Week 7 onwards 1,750 mg",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "amivantamabe (a partir da semana 7)",
+            "dose": 1750,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 a cada 3 semanas",
+            "observacao": "peso < 80 kg; se ≥ 80 kg: 2.100 mg; até progressão",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA RYBREVANT (amivantamab-vmjw) IV (openFDA/DailyMed set_id 1466c070-9f97-4fa4-a955-6a6b59981fb8), seções 2.4 e 14, acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "Less than 80 kg Weeks 1–4 1,400 mg Week 7 onwards 1,750 mg",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença avançada v5 (colaboração), -Pulmao-avancada-v5-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "Carboplatina AUC 5 EV D1 a cada 3 semanas por 4 ciclos",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true,
+        "observacaoDose": "SBOC p.16 ambígua ('a cada 3 ciclos', limiar de peso sem sinal); doses e calendário conforme bula FDA (PAPILLON). Ordem: pemetrexede, carboplatina, amivantamabe.",
+        "derivadoDe": "pulmao-egfr-ex20-carboplatina-pemetrexede-amivantamabe",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
       },
       {
         "id": "pulmao-alk-1l-alectinibe",
@@ -3211,15 +3381,16 @@
         "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23); CPK e função hepática",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia (platina + pemetrexede)",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Portaria SECTICS/MS nº 28, de 05/05/2025 (DOU nº 84, 07/05/2025), Relatório CONITEC nº 993 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-28-de-5-de-maio-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "de não incorporar o lorlatinibe e o alectinibe para o tratamento",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado (ALK 1ª linha). Alternativa SUS: brigatinibe (mesma portaria).",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia (platina + pemetrexede)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3258,15 +3429,16 @@
         "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23)",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Portaria SECTICS/MS nº 28, de 05/05/2025 (DOU nº 84, 07/05/2025), Relatório CONITEC nº 993 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-28-de-5-de-maio-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "Incorporar, no âmbito do Sistema Único de Saúde - SUS, o brigatinibe",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Incorporado para CPNPC ALK+ (1ª linha).",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3297,15 +3469,16 @@
         "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23); perfil lipídico",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Portaria SECTICS/MS nº 28, de 05/05/2025 (DOU nº 84, 07/05/2025), Relatório CONITEC nº 993 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-28-de-5-de-maio-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "de não incorporar o lorlatinibe e o alectinibe para o tratamento",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado (ALK 1ª linha; 2ª linha também não — Portaria SECTICS nº 29/2025). Alternativa SUS: brigatinibe.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3336,15 +3509,16 @@
         "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23); ECG",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Portaria SECTICS/MS nº 86, de 19/10/2025 (DOU nº 201, 21/10/2025), Relatório CONITEC nº 1052 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-86-de-19-de-outubro-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "Excluir, no âmbito do Sistema Único de Saúde - SUS, o crizotinibe",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Excluído do SUS em 2025 para ALK (substituído pelo brigatinibe); ROS1 nunca avaliado pela CONITEC.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3383,15 +3557,16 @@
         "ajusteObrigatorio": "Ecocardiograma (FEVE) e avaliação oftalmológica; febre",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3430,15 +3605,16 @@
         "ajusteObrigatorio": "Ecocardiograma (FEVE); avaliação oftalmológica",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3469,15 +3645,16 @@
         "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23)",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Portaria SCTIE/MS nº 72/2021 (publ. 07/12/2021), Relatório CONITEC nº 679 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2021/20211207_portaria_72.pdf",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o larotrectinibe para o tratamento de adultos e crianças com tumores sólidos",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado para adultos. Só o subgrupo pediátrico foi incorporado (Portaria SECTICS/MS nº 71/2025).",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3508,15 +3685,16 @@
         "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23); edema periférico, função hepática",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3547,15 +3725,16 @@
         "ajusteObrigatorio": "Edema, creatinina, albumina",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3586,15 +3765,16 @@
         "ajusteObrigatorio": "Revisar interações CYP3A4 (INAT-23); PA, ECG (QT), função hepática",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT dupla com platina (cisplatina ou carboplatina) conforme histologia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3625,15 +3805,16 @@
         "ajusteObrigatorio": "Função hepática; Revisar interações CYP3A4 (INAT-23)",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Docetaxel monoterapia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Docetaxel monoterapia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3664,15 +3845,16 @@
         "ajusteObrigatorio": "Vigilância de doença pulmonar intersticial; ecocardiograma (FEVE)",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Docetaxel monoterapia",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Docetaxel monoterapia"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -3690,21 +3872,33 @@
         "drogas": [
           {
             "droga": "carboplatina",
-            "dose": null,
+            "dose": 5,
             "unidade": "AUC",
             "via": "EV",
             "dias": "D1",
-            "observacao": "",
-            "pendencia": "SEM_FONTE"
+            "observacao": "ciclos 1–4 (indução); dose do braço do ensaio IMpower133 — SBOC sem diretriz de CPPC",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT02763579 (IMpower133) — https://clinicaltrials.gov/api/v2/studies/NCT02763579, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "target AUC of 5 mg/mL/min was administered on Day 1 of each 21-day cycle",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "etoposídeo",
-            "dose": null,
+            "dose": 100,
             "unidade": "mg/m2",
-            "via": null,
-            "dias": null,
-            "observacao": "",
-            "pendencia": "SEM_FONTE"
+            "via": "EV",
+            "dias": "D1, D2, D3",
+            "observacao": "ciclos 1–4 (indução); braço do ensaio IMpower133. Bula FDA do etoposídeo (CPPC, combinação): 35 mg/m²/dia × 4 dias a 50 mg/m²/dia × 5 dias",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT02763579 (IMpower133) — https://clinicaltrials.gov/api/v2/studies/NCT02763579, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "Etoposide intravenous infusion was administered at a dose of 100 mg/m\\^2",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "atezolizumabe",
@@ -3716,20 +3910,21 @@
           }
         ],
         "cicloDias": 21,
-        "numeroCiclos": null,
+        "numeroCiclos": 4,
         "premedicacao": "",
         "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos; Dose de carboplatina por AUC (Calvert, CI-04)",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Carboplatina ou cisplatina + etoposídeo sem IO",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Carboplatina ou cisplatina + etoposídeo sem IO"
         },
         "fonte": {
           "tipo": "BULA",
@@ -3738,8 +3933,24 @@
           "trecho": "Administer TECENTRIQ as 840 mg every 2 weeks, 1200 mg every 3 weeks",
           "estado": "VERIFICADO"
         },
-        "pendencia": "Sem diretriz SBOC de CPPC nas fontes; doses de carboplatina/etoposídeo SEM_FONTE (não transferir doses do CPNPC); nº de ciclos de indução não conferido.",
-        "observacao": "Indicação do cenário: Onco PRO 2026 aula 50 p.21 (\"Associação de imunoterapia ao doublet de platina\", IMpower 133)."
+        "observacao": "Indicação do cenário: Onco PRO 2026 aula 50 p.21 (\"Associação de imunoterapia ao doublet de platina\", IMpower 133).",
+        "numeroCiclosNota": "4 ciclos de indução (QT + atezolizumabe); depois atezolizumabe 1.200 mg D1 a cada 21 dias até progressão/toxicidade (IMpower133).",
+        "fonteCiclos": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT02763579 (IMpower133) — https://clinicaltrials.gov/api/v2/studies/NCT02763579, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "during the induction phase (Cycles 1-4)",
+          "estado": "VERIFICADO"
+        },
+        "fonteBulaEtoposideo": {
+          "tipo": "BULA",
+          "referencia": "Rótulo FDA Etoposide injection (openFDA/DailyMed set_id 0dddbe44-b4f4-431f-9011-8a54abbd4cbf), Dosage and Administration, acesso 2026-10-11; bula ANVISA não consultada",
+          "pagina": null,
+          "trecho": "35 mg/m 2 /day for 4 days to 50 mg/m 2 /day",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true,
+        "observacaoDose": "Doses de carboplatina/etoposídeo da descrição de braços do ensaio pivotal (ClinicalTrials.gov), não de diretriz brasileira; médico confere."
       },
       {
         "id": "pulmao-cppc-extenso-platina-etoposideo-durvalumabe",
@@ -3749,21 +3960,33 @@
         "drogas": [
           {
             "droga": "carboplatina",
-            "dose": null,
+            "dose": 5,
             "unidade": "AUC",
             "via": "EV",
             "dias": "D1",
-            "observacao": "ou cisplatina",
-            "pendencia": "SEM_FONTE"
+            "observacao": "faixa no CASPIAN AUC 5–6 (registrado o limite inferior); alternativa: cisplatina 75–80 mg/m² D1. 4 ciclos",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA IMFINZI (durvalumab) (openFDA/DailyMed set_id 8baba4ea-2855-42fa-9bd9-5a7548d4cec3), seção 14 CASPIAN/ADRIATIC, acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "carboplatin (AUC 5 or 6 mg/mL/min) or cisplatin (75-80 mg/m 2 )",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "etoposídeo",
-            "dose": null,
+            "dose": 80,
             "unidade": "mg/m2",
-            "via": null,
-            "dias": null,
-            "observacao": "",
-            "pendencia": "SEM_FONTE"
+            "via": "EV",
+            "dias": "D1, D2, D3",
+            "observacao": "faixa no CASPIAN 80–100 mg/m² (registrado o limite inferior); 4 ciclos",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA IMFINZI (durvalumab) (openFDA/DailyMed set_id 8baba4ea-2855-42fa-9bd9-5a7548d4cec3), seção 14 CASPIAN/ADRIATIC, acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "etoposide (80-100 mg/m 2 ) intravenously on Days 1, 2, and 3",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "durvalumabe",
@@ -3775,20 +3998,21 @@
           }
         ],
         "cicloDias": 21,
-        "numeroCiclos": null,
+        "numeroCiclos": 4,
         "premedicacao": "",
         "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Carboplatina ou cisplatina + etoposídeo sem IO",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "Carboplatina ou cisplatina + etoposídeo sem IO"
         },
         "fonte": {
           "tipo": "BULA",
@@ -3797,7 +4021,16 @@
           "trecho": "With etoposide and either carboplatin or cisplatin, administer IMFINZI 1,500 mg every 3 weeks",
           "estado": "VERIFICADO"
         },
-        "pendencia": "Doses de platina/etoposídeo SEM_FONTE."
+        "numeroCiclosNota": "4 ciclos de QT + durvalumabe a cada 21 dias; depois durvalumabe 1.500 mg a cada 4 semanas até progressão (CASPIAN, bula FDA).",
+        "fonteCiclos": {
+          "tipo": "BULA",
+          "referencia": "Rótulo FDA IMFINZI (durvalumab) (openFDA/DailyMed set_id 8baba4ea-2855-42fa-9bd9-5a7548d4cec3), seção 14 CASPIAN/ADRIATIC, acesso 2026-10-11; bula ANVISA não consultada",
+          "pagina": null,
+          "trecho": "of each 21-day cycle for 4 cycles",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true,
+        "observacaoDose": "Faixas de dose do ensaio CASPIAN conforme bula FDA; registrado o limite inferior — escolha na faixa é decisão do médico."
       },
       {
         "id": "pulmao-cppc-limitado-qtrt-platina-etoposideo",
@@ -3807,25 +4040,37 @@
         "drogas": [
           {
             "droga": "cisplatina",
-            "dose": null,
+            "dose": 80,
             "unidade": "mg/m2",
             "via": "EV",
-            "dias": null,
-            "observacao": "",
-            "pendencia": "SEM_FONTE"
+            "dias": "D1",
+            "observacao": "alternativa: carboplatina AUC 5 D1 (mesmo ensaio)",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT00632853 (CALGB 30610) — https://clinicaltrials.gov/api/v2/studies/NCT00632853, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "Cisplatin 80 mg/m2 IV on day 1 OR Carboplatin AUC 5 IV day 1",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "etoposídeo",
-            "dose": null,
+            "dose": 100,
             "unidade": "mg/m2",
-            "via": null,
-            "dias": null,
+            "via": "EV",
+            "dias": "D1, D2, D3",
             "observacao": "",
-            "pendencia": "SEM_FONTE"
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT00632853 (CALGB 30610) — https://clinicaltrials.gov/api/v2/studies/NCT00632853, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "Etoposide 100 mg/m2 IV on days 1, 2, and 3, every 21 days",
+              "estado": "VERIFICADO"
+            }
           }
         ],
-        "cicloDias": null,
-        "numeroCiclos": null,
+        "cicloDias": 21,
+        "numeroCiclos": 4,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
@@ -3846,7 +4091,16 @@
           "trecho": "Quimiorradioterapia concomitante como padrão de tratamento",
           "estado": "INFERIDO"
         },
-        "pendencia": "Doses SEM_FONTE: a dose de cisplatina+etoposídeo com RT da SBOC é de CPNPC (SWOG 9416) e não pode ser transferida ao CPPC."
+        "fonteCiclos": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT00632853 (CALGB 30610) — https://clinicaltrials.gov/api/v2/studies/NCT00632853, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "Chemotherapy (every 21 days for 4 cycles, for a total of 12 weeks)",
+          "estado": "VERIFICADO"
+        },
+        "radioterapiaAssociada": "45 Gy em 30 frações de 1,5 Gy 2x/dia (3 semanas) ou 60–66 Gy 1x/dia (6 semanas) — ver radioterapia",
+        "doseVerificada": true,
+        "observacaoDose": "Doses da descrição de braços do ensaio CALGB 30610 (CPPC limitado), não transferidas do CPNPC."
       },
       {
         "id": "pulmao-cppc-limitado-consolidacao-durvalumabe",
@@ -3869,15 +4123,16 @@
         "ajusteObrigatorio": "Excluir autoimunidade ativa/transplante (CI-08); TSH/T4 livre e função hepática periódicos; vigiar pneumonite pós-RT",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "alternativaSUS": "Seguimento após QTRT",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "Status de incorporação CONITEC/SIGTAP não verificado nesta redação",
+            "referencia": "Portaria SECTICS/MS nº 21, de 18/04/2024 (DOU nº 77, 22/04/2024), Relatório CONITEC nº 885 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2024/portaria-sectics-ms-no-21-de-18-de-abril-de-2024",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o durvalumabe para o tratamento de pacientes com câncer de pulmão",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Incorporado para consolidação após QTRT no CPNPC estádio III irressecável; conferir critérios do PCDT/portaria.",
+          "alternativaSUS": "Seguimento após QTRT"
         },
         "fonte": {
           "tipo": "BULA",
@@ -3892,18 +4147,25 @@
     "radioterapia": [
       {
         "cenario": "CPNPC III irressecável — QTRT definitiva",
-        "doseTotalGy": null,
-        "fracoes": null,
+        "doseTotalGy": 60,
+        "fracoes": 30,
         "concomitante": "Esquemas QTRT deste pack",
         "tecnica": "fracionamento convencional, IMRT preferencial",
-        "pendencia": "SEM_FONTE: dose em Gy não escrita na SBOC",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
           "pagina": 20,
           "trecho": "o fracionamento convencional deverá ser contemplado, com técnica de IMRT",
           "estado": "VERIFICADO"
-        }
+        },
+        "fonteDose": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT00533949 (RTOG 0617) — https://clinicaltrials.gov/api/v2/studies/NCT00533949, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "once-daily, 2 Gy fractions, given in 30 fractions over the course of 6 weeks",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "60 Gy/30 frações é o braço padrão do RTOG 0617 (74 Gy não superior). SBOC exige fracionamento convencional e IMRT."
       },
       {
         "cenario": "CPNPC I inoperável — SBRT",
@@ -3911,7 +4173,15 @@
         "fracoes": null,
         "concomitante": "não",
         "observacao": "3 a 8 sessões conforme localização e volume; sem tratamento eletivo de drenagens",
-        "pendencia": "SEM_FONTE: dose em Gy",
+        "pendencia": {
+          "texto": "Dose em Gy da SBRT: SBOC indica 3 a 8 sessões conforme localização e volume, sem dose.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC 2026 CPNPC localizado p.18",
+            "Onco PRO 2026 aulas 42-44 (sem dose de SBRT)"
+          ],
+          "notaAceno": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11); fracionamento não buscado."
+        },
         "fonte": {
           "tipo": "SBOC",
           "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
@@ -3931,6 +4201,15 @@
           "pagina": 20,
           "trecho": "podem ser tratados com QT de indução seguida de RT isolada",
           "estado": "VERIFICADO"
+        },
+        "pendencia": {
+          "texto": "Dose da RT isolada após QT de indução não escrita na SBOC nem no curso.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC 2026 CPNPC localizado p.20",
+            "Onco PRO 2026 aula 44"
+          ],
+          "notaAceno": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11); fracionamento não buscado."
         }
       },
       {
@@ -3938,7 +4217,7 @@
         "doseTotalGy": null,
         "fracoes": null,
         "concomitante": "não",
-        "observacao": "RT adjuvante não indicada; discutir em margem comprometida ou extravasamento capsular",
+        "observacao": "RT adjuvante não indicada; discutir em margem comprometida ou extravasamento capsular Dose nula por não haver indicação de RT neste cenário (não é pendência).",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
@@ -3949,29 +4228,52 @@
       },
       {
         "cenario": "Pancoast — QTRT neoadjuvante",
-        "doseTotalGy": null,
-        "fracoes": null,
-        "concomitante": "QT dos esquemas descritos",
+        "doseTotalGy": 45,
+        "fracoes": 25,
+        "concomitante": "cisplatina 50 mg/m² D1, D8 + etoposídeo 50 mg/m² D1–D5, 2 ciclos de 28 dias (SWOG 9416)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "Diretrizes SBOC 2026 — Pulmão: não pequenas células, doença localizada e localmente avançada v4 (colaboração), -Pulmao-NPC-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
           "pagina": 20,
           "trecho": "QTRT neoadjuvante seguida de cirurgia é o tratamento padrão neste cenário",
           "estado": "VERIFICADO"
+        },
+        "fracoesNota": "derivado: 1,8 Gy/dia, 5 dias/semana, 5 semanas",
+        "fonteDose": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT00002642 (SWOG-9416) — https://clinicaltrials.gov/api/v2/studies/NCT00002642, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "180 cGy per day, Days 1-5, weekly for 5 weeks",
+          "estado": "VERIFICADO"
         }
       },
       {
         "cenario": "CPPC limitado — QTRT concomitante",
-        "doseTotalGy": null,
-        "fracoes": null,
-        "concomitante": "platina + etoposídeo (doses SEM_FONTE)",
-        "pendencia": "SEM_FONTE",
+        "doseTotalGy": 45,
+        "fracoes": 30,
+        "concomitante": "cisplatina 80 mg/m² D1 (ou carboplatina AUC 5) + etoposídeo 100 mg/m² D1–D3 a cada 21 dias, 4 ciclos (CALGB 30610)",
         "fonte": {
           "tipo": "CURSO",
           "referencia": "Onco PRO 2026, 50_-_Aula_50_-_Câncer_de_Pulmão_de_Pequenas_Células.txt",
           "pagina": 14,
           "trecho": "Quimiorradioterapia concomitante como padrão de tratamento",
           "estado": "INFERIDO"
+        },
+        "fracoesNota": "derivado: 45 Gy em frações de 1,5 Gy 2x/dia",
+        "alternativa": "60–66 Gy 1x/dia em 6 semanas (aceito no ADRIATIC)",
+        "fonteDose": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT00632853 (CALGB 30610) — https://clinicaltrials.gov/api/v2/studies/NCT00632853, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "XRT: 45 Gy BID (1.5 Gy/fx)",
+          "estado": "VERIFICADO"
+        },
+        "fonteAlternativa": {
+          "tipo": "BULA",
+          "referencia": "Rótulo FDA IMFINZI (durvalumab) (openFDA/DailyMed set_id 8baba4ea-2855-42fa-9bd9-5a7548d4cec3), seção 14 CASPIAN/ADRIATIC, acesso 2026-10-11; bula ANVISA não consultada",
+          "pagina": null,
+          "trecho": "60-66 Gy once daily over 6 weeks or 45 Gy twice daily",
+          "estado": "VERIFICADO"
         }
       }
     ],
@@ -4437,7 +4739,8 @@
       "URINA_TIPO_I",
       "MOLECULAR_PCR_MUTACAO",
       "SEQUENCIAMENTO_AMPLICON",
-      "FISH"
+      "FISH",
+      "ACTH"
     ],
     "interacoesConsultar": [
       {
@@ -4704,18 +5007,61 @@
     ]
   },
   "pendencias": [
-    "Clone de PD-L1 (22C3/SP263/SP142/28-8) não especificado em nenhuma fonte SBOC lida: definir com patologia do serviço (SEM_FONTE).",
-    "NGS, PCR e biópsia líquida sem catalogoId (SEM_ID_NO_CATALOGO); status SUS dos testes moleculares não verificado (DADO_AUSENTE).",
-    "Status CONITEC/SIGTAP de todos os TKIs e imunoterápicos não verificado (DADO_AUSENTE); alternativa SUS registrada em cada protocolo.",
-    "CPPC: não há diretriz SBOC de CPPC entre as fontes; doses de platina/etoposídeo (limitado e extenso) SEM_FONTE; durvalumabe/atezolizumabe por bula FDA. Buscar diretriz SBOC de CPPC ou bula ANVISA.",
-    "Dose em Gy da QTRT definitiva e da SBRT não escrita na SBOC (SEM_FONTE).",
-    "Etoposídeo (QTRT SWOG 9416): via não escrita na fonte (SEM_FONTE).",
-    "Amivantamabe (ex20ins / pós-osimertinibe): dose ambígua na SBOC p.15-16 — dose null.",
-    "Carboplatina + pemetrexede pós-IO: intervalo de ciclo não escrito na linha SBOC.",
-    "Arquivos fonte com rótulo enganoso: Pulmão_2_.txt e Pulmão_2_2.txt (idênticos exceto nome) são transcrição (Anotar.app, 22/11/2025) da aula Onco PRO 42, não diretriz SBOC; Neuroendócrino_pulmão_.txt é a diretriz SBOC 2025 de TNE bem diferenciados gastrointestinais. Não usados para dose.",
-    "Diretriz SBOC 2026 TNE pulmonares não trata CPPC (só classifica); carcinoides fora do escopo deste pack.",
-    "Emetogenicidade e risco de neutropenia febril sem fonte nas diretrizes lidas.",
-    "Opção 3 de cisplatina + vinorelbina (faixas 75-80/25-30) e doses em faixa (paclitaxel 175-200, carboplatina AUC 5-6) registradas pelo limite inferior com faixa em observação; médico decide."
+    {
+      "texto": "Clone de PD-L1 (22C3/SP263/SP142/28-8) não especificado em nenhuma fonte SBOC lida: definir com patologia do serviço (SEM_FONTE).",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026 CPNPC localizado e avançado",
+        "Onco PRO 2026 aulas 42, 45"
+      ]
+    },
+    {
+      "texto": "NGS, PCR e biópsia líquida sem catalogoId (SEM_ID_NO_CATALOGO); status SUS dos testes moleculares não verificado (DADO_AUSENTE).",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json (164 ids)",
+        "SIGTAP 2026-09"
+      ],
+      "nota": "Depende de ampliação do catálogo de exames; status SUS dos testes moleculares sem procedimento SIGTAP específico localizado."
+    },
+    {
+      "texto": "Status CONITEC/SIGTAP de todos os TKIs e imunoterápicos não verificado (DADO_AUSENTE); alternativa SUS registrada em cada protocolo.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Planilha CONITEC 15/06/2026",
+        "Painel de Demandas CONITEC",
+        "busca gov.br/conitec",
+        "DOU (portarias citadas)"
+      ],
+      "nota": "sus.disponivel preenchido em todos os protocolos com portaria/relatório quando existe. Sem avaliação CONITEC (registrado 'nao', INFERIDO): adj-osimertinibe, adj-alectinibe, adj-atezolizumabe, adj-pembrolizumabe-pos-qt, neo-platina-pemetrexede-durvalumabe, neo-platina-gencitabina-durvalumabe, adj-durvalumabe-pos-neo, neo-platina-pemetrexede-nivolumabe, neo-platina-gencitabina-nivolumabe, adj-nivolumabe-pos-neo, neo-cisplatina-pemetrexede-pembrolizumabe, neo-cisplatina-gencitabina-pembrolizumabe, adj-pembrolizumabe-pos-neo, consolidacao-osimertinibe, 1l-carboplatina-paclitaxel-bevacizumabe-atezolizumabe, 1l-atezolizumabe-mono, 1l-cemiplimabe-mono, 2l-docetaxel-ramucirumabe, 2l-docetaxel-nintedanibe, 2l-nivolumabe, 2l-atezolizumabe, egfr-1l-osimertinibe, egfr-1l-platina-pemetrexede-osimertinibe, egfr-1l-amivantamabe-lazertinibe, egfr-1l-afatinibe, egfr-ex20-carboplatina-pemetrexede-amivantamabe, braf-dabrafenibe-trametinibe, braf-encorafenibe-binimetinibe, met-capmatinibe, met-tepotinibe, ret-selpercatinibe, kras-g12c-sotorasibe, her2-trastuzumabe-deruxtecana, cppc-extenso-platina-etoposideo-atezolizumabe, cppc-extenso-platina-etoposideo-durvalumabe."
+    },
+    {
+      "texto": "Dose em Gy da QTRT definitiva e da SBRT não escrita na SBOC (SEM_FONTE).",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "SBOC 2026 CPNPC p.18/20",
+        "Onco PRO 2026 aulas 43-44",
+        "ClinicalTrials.gov NCT00533949 (RTOG 0617)"
+      ],
+      "nota": "QTRT definitiva resolvida (60 Gy/30 fr, RTOG 0617); resta a dose da SBRT (depende de localização/volume).",
+      "notaAceno": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11); fracionamento não buscado."
+    },
+    {
+      "texto": "Emetogenicidade e risco de neutropenia febril sem fonte nas diretrizes lidas.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC 2026 pulmão (localizado e avançado)",
+        "Onco PRO 2026 aulas 87 e 88 (sem tabela por esquema)"
+      ],
+      "nota": "Classificação por droga deve vir do módulo de suporte (antiemese/risco de NF), não do pack."
+    },
+    {
+      "texto": "Opção 3 de cisplatina + vinorelbina (faixas 75-80/25-30) e doses em faixa (paclitaxel 175-200, carboplatina AUC 5-6) registradas pelo limite inferior com faixa em observação; médico decide.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026 CPNPC localizado p.13"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -4734,7 +5080,8 @@
         "trecho": "Nivolumabe 360 mg EV D1 A cada 3 semanas, 4 ciclos;",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "São dois estudos (CheckMate 816: 3 ciclos sem adjuvante; CheckMate 77T: 4 ciclos + nivolumabe 480 mg/4 sem por 12 meses). Pack registra a tabela (4 ciclos) e o adjuvante em protocolo separado; médico escolhe o desenho e não mistura."
+      "escolhaSeguranca": "São dois estudos (CheckMate 816: 3 ciclos sem adjuvante; CheckMate 77T: 4 ciclos + nivolumabe 480 mg/4 sem por 12 meses). Pack registra a tabela (4 ciclos) e o adjuvante em protocolo separado; médico escolhe o desenho e não mistura.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Pembrolizumabe adjuvante: duração e via",
@@ -4752,7 +5099,8 @@
         "trecho": "Pembrolizumabe 400 mg EC D1 a cada 6 semanas",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "\"EC\" lido como erro tipográfico de EV — opção 400 mg não convertida em linha até confirmação. 54 semanas atribuído ao adjuvante pós-QT; 13 ciclos ao adjuvante pós-neoadjuvância (inferência)."
+      "escolhaSeguranca": "\"EC\" lido como erro tipográfico de EV — opção 400 mg não convertida em linha até confirmação. 54 semanas atribuído ao adjuvante pós-QT; 13 ciclos ao adjuvante pós-neoadjuvância (inferência).",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Osimertinibe pós-QTRT (LAURA): diretriz × registro",
@@ -4770,7 +5118,8 @@
         "trecho": "a aprovação da Anvisa para essa indicação de osimertinibe ainda é aguardada",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Manter no pack como recomendação SBOC; uso depende de registro/acesso; alternativa: seguimento."
+      "escolhaSeguranca": "Manter no pack como recomendação SBOC; uso depende de registro/acesso; alternativa: seguimento.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Edição do estadiamento",
@@ -4788,7 +5137,8 @@
         "trecho": "AJCC (8ª edição)1",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "CPNPC: AJCC 9ª (SBOC 2026 CPNPC). Atenção: ensaios adjuvantes usaram TNM 7ª (SBOC L p.16); não transferir cortes entre edições."
+      "escolhaSeguranca": "CPNPC: AJCC 9ª (SBOC 2026 CPNPC). Atenção: ensaios adjuvantes usaram TNM 7ª (SBOC L p.16); não transferir cortes entre edições.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Número de ciclos de QT adjuvante",
@@ -4806,7 +5156,8 @@
         "trecho": "QT adjuvante 1-4 ciclos baseados em cisplatina",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Usar SBOC: 4 ciclos."
+      "escolhaSeguranca": "Usar SBOC: 4 ciclos.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Osimertinibe adjuvante: limiar de tamanho no IB e QT prévia",
@@ -4824,7 +5175,8 @@
         "trecho": "recomendamos manter a QT adjuvante para pacientes com tumores ≥ 4,0 cm).",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Osimertinibe a partir de IB ≥ 3 cm; QT adjuvante prévia para tumores ≥ 4 cm (inclui todos IIA+)."
+      "escolhaSeguranca": "Osimertinibe a partir de IB ≥ 3 cm; QT adjuvante prévia para tumores ≥ 4 cm (inclui todos IIA+).",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Amivantamabe com carboplatina + pemetrexede (dose)",
@@ -4842,7 +5194,16 @@
         "trecho": null,
         "estado": "DADO_AUSENTE"
       },
-      "escolhaSeguranca": "Dose null; confirmar em bula antes de usar."
+      "escolhaSeguranca": "Dose null; confirmar em bula antes de usar.",
+      "decisaoNecessaria": false,
+      "resolucao": "Resolvido pela bula FDA RYBREVANT: semanas 1–4 1.400 mg (≥ 80 kg 1.750), a partir da semana 7 1.750 mg (≥ 80 kg 2.100) a cada 3 semanas; 'a cada 3 ciclos' da SBOC lido como erro tipográfico de 'a cada 3 semanas'.",
+      "fonteC": {
+        "tipo": "BULA",
+        "referencia": "Rótulo FDA RYBREVANT (amivantamab-vmjw) IV (openFDA/DailyMed set_id 1466c070-9f97-4fa4-a955-6a6b59981fb8), seções 2.4 e 14, acesso 2026-10-11; bula ANVISA não consultada",
+        "pagina": null,
+        "trecho": "Less than 80 kg Weeks 1–4 1,400 mg Week 7 onwards 1,750 mg",
+        "estado": "VERIFICADO"
+      }
     }
   ],
   "curadoria": {
@@ -4861,6 +5222,66 @@
       "corpus/6-pack-tumor/pulmao/pulmao.v1.RASCUNHO.json (somente leitura)",
       "corpus/exames/exames-sigtap.v1.json"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "notasFontes": [
+      "Arquivos fonte com rótulo enganoso: Pulmão_2_.txt e Pulmão_2_2.txt (idênticos exceto nome) são transcrição (Anotar.app, 22/11/2025) da aula Onco PRO 42, não diretriz SBOC; Neuroendócrino_pulmão_.txt é a diretriz SBOC 2025 de TNE bem diferenciados gastrointestinais. Não usados para dose.",
+      "Diretriz SBOC 2026 TNE pulmonares não trata CPPC (só classifica); carcinoides fora do escopo deste pack."
+    ],
+    "reducaoPendencias20261011": {
+      "data": "2026-10-11",
+      "resolvidas": [
+        {
+          "pendencia": "CPPC: não há diretriz SBOC de CPPC entre as fontes; doses de platina/etoposídeo (limitado e extenso) SEM_FONTE; durvalumabe/atezolizumabe por bula FDA. Buscar diretriz SBOC de CPPC ou bula ANVISA.",
+          "como": "Doses preenchidas: IMpower133 (NCT02763579, braços), CASPIAN (bula FDA IMFINZI seção 14), CALGB 30610 (NCT00632853) para o limitado; faixa da bula FDA do etoposídeo registrada."
+        },
+        {
+          "pendencia": "Etoposídeo (QTRT SWOG 9416): via não escrita na fonte (SEM_FONTE).",
+          "como": "Via EV conforme registro SWOG-9416 (NCT00002642: '50 mg/m2, IV Days 1-5')."
+        },
+        {
+          "pendencia": "Amivantamabe (ex20ins / pós-osimertinibe): dose ambígua na SBOC p.15-16 — dose null.",
+          "como": "Doses por peso e calendário conforme bula FDA RYBREVANT (seção 2.4)."
+        },
+        {
+          "pendencia": "Carboplatina + pemetrexede pós-IO: intervalo de ciclo não escrito na linha SBOC.",
+          "como": "cicloDias 21 conforme bula FDA do pemetrexede ('Day 1 of each 21-day cycle')."
+        },
+        {
+          "pendencia": "Arquivos fonte com rótulo enganoso: Pulmão_2_.txt e Pulmão_2_2.txt (idênticos exceto nome) são transcrição (Anotar.app, 22/11/2025) da aula Onco PRO 42, não diretriz SBOC; Neuroendócrino_pulmão_.txt é a diretriz SBOC 2025 de TNE bem diferenciados gastrointestinais. Não usados para dose.",
+          "como": "Nota de proveniência (não é pendência clínica); mantida em curadoria.notasFontes."
+        },
+        {
+          "pendencia": "Diretriz SBOC 2026 TNE pulmonares não trata CPPC (só classifica); carcinoides fora do escopo deste pack.",
+          "como": "Nota de escopo (não é pendência clínica); mantida em curadoria.notasFontes."
+        }
+      ]
+    }
+  },
+  "correcoes": [
+    {
+      "campo": "pulmao-egfr-ex20-carboplatina-pemetrexede-amivantamabe.pemetrexede.unidade",
+      "antes": "mg",
+      "depois": "mg/m2",
+      "motivo": "SBOC p.16 grafa '500 mg' (sem /m²); bula FDA do amivantamabe (PAPILLON) e do pemetrexede: 500 mg/m².",
+      "fonte": {
+        "tipo": "BULA",
+        "referencia": "Rótulo FDA RYBREVANT (amivantamab-vmjw) IV (openFDA/DailyMed set_id 1466c070-9f97-4fa4-a955-6a6b59981fb8), seções 2.4 e 14, acesso 2026-10-11; bula ANVISA não consultada",
+        "pagina": null,
+        "trecho": "pemetrexed at 500 mg/m 2 once every 3 weeks until disease progression",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): cenários misturados no mesmo protocolo",
+      "acao": "pulmao-egfr-ex20-carboplatina-pemetrexede-amivantamabe dividido em pulmao-egfr-ex20-carboplatina-pemetrexede-amivantamabe-ex20ins-1l, pulmao-egfr-ex20-carboplatina-pemetrexede-amivantamabe-pos-osimertinibe"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "8 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
 }

@@ -49,6 +49,13 @@
           "pagina": 4,
           "trecho": "Os exames recomendados incluem ressonância nuclear magnética (RNM) e tomografia computadorizada (TC) de baixa",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "TC de corpo inteiro de baixa dose (tórax, coluna, pelve e áreas sintomáticas): sem id de corpo inteiro no catálogo v1.1.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1"
+          ]
         }
       },
       {
@@ -102,6 +109,13 @@
           "pagina": 4,
           "trecho": "RNM de corpo inteiro é obrigatória no caso da TC de corpo inteiro negativa",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "RM de corpo inteiro (se TC de corpo inteiro negativa): sem id de corpo inteiro no catálogo v1.1.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1"
+          ]
         }
       },
       {
@@ -167,7 +181,7 @@
         {
           "alvo": "Painel mínimo t(4;14), del(17p13), t(14;16); ampliado 1q+, t(11;14)",
           "metodo": "FISH/CISH",
-          "catalogoId": "FISH",
+          "catalogoId": "FISH_MIELOMA",
           "quandoPedir": "universal",
           "cenario": "diagnóstico (R-ISS) e recidiva",
           "consequencia": "Define R-ISS III/alto risco; orienta momento do TCTH e escolha do esquema",
@@ -179,7 +193,8 @@
             "pagina": 4,
             "trecho": "A avaliação citogenética é obrigatória para o diagnóstico",
             "estado": "VERIFICADO"
-          }
+          },
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: SIGTAP 02.02.10.024-3 (FISH para mieloma múltiplo)"
         },
         {
           "alvo": "Plasmócitos clonais (imunofenotipagem)",
@@ -321,9 +336,8 @@
         }
       },
       {
-        "catalogoId": null,
+        "catalogoId": "IGG",
         "rotulo": "Dosagem de imunoglobulinas IgA, IgM, IgG, IgE",
-        "pendencia": "SEM_ID_NO_CATALOGO",
         "cenario": "triagem",
         "indicacao": "universal",
         "fonte": {
@@ -332,7 +346,16 @@
           "pagina": 4,
           "trecho": "dosagem sérica de imunoglobulinas (IgA, IgM, IgG e IgE)",
           "estado": "VERIFICADO"
-        }
+        },
+        "pendenciaClasse": {
+          "texto": "Dosagem de imunoglobulinas IgA, IgM, IgG, IgE: sem id no catálogo v1.1; SIGTAP 02.02.03.015-6/016-4/017-2/018-0 (IgA, IgE, IgG, IgM).",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
       },
       {
         "catalogoId": "PROTEINAS_TOTAIS_FRACOES",
@@ -387,9 +410,8 @@
         }
       },
       {
-        "catalogoId": null,
+        "catalogoId": "VHS",
         "rotulo": "VHS",
-        "pendencia": "SEM_ID_NO_CATALOGO",
         "cenario": "suspeita apoiada",
         "indicacao": "universal",
         "fonte": {
@@ -398,7 +420,16 @@
           "pagina": 4,
           "trecho": "beta-2 microglobulina, proteína C reativa (PCR), velocidade de hemossedimentação (VHS)",
           "estado": "VERIFICADO"
-        }
+        },
+        "pendenciaClasse": {
+          "texto": "VHS: sem id no catálogo v1.1; SIGTAP 02.02.02.015-0.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
       },
       {
         "catalogoId": "PROTEINURIA_24H",
@@ -555,6 +586,14 @@
           "pagina": 4,
           "trecho": "recomenda-se a dosagem da viscosidade sérica",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "Viscosidade sérica (proteína M >5 g/dL ou sintomas) — na falta, fundo de olho: sem id no catálogo v1.1; SIGTAP sem código localizado.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
         }
       },
       {
@@ -569,6 +608,14 @@
           "pagina": 4,
           "trecho": "fibrinogênio, d-dímero, bilirrubina total (BT) e frações",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "D-dímero: sem id no catálogo v1.1; SIGTAP sem código localizado na busca.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
         }
       }
     ],
@@ -759,7 +806,12 @@
             "unidade": "mg",
             "via": "VO",
             "dias": "diário (D1–D28)",
-            "observacao": "escalonamento: 50 mg D1–14 e 100 mg D15–28 até 200 mg/dia (GEM05MENOS65)"
+            "observacao": "escalonamento: 50 mg D1–14 e 100 mg D15–28 até 200 mg/dia (GEM05MENOS65)",
+            "titulacao": {
+              "inicio": "PENDENTE: dose inicial (50 ou 100 mg) conforme fonte",
+              "alvo": 200,
+              "regra": "escalonamento: 50 mg D1–14 e 100 mg D15–28 até 200 mg/dia (GEM05MENOS65)"
+            }
           },
           {
             "droga": "dexametasona",
@@ -791,7 +843,9 @@
           "pagina": 47,
           "trecho": "D 40 mg VO dias 1-4, dias 9-12 em 6 ciclos de 4 semanas",
           "estado": "VERIFICADO"
-        }
+        },
+        "calendarioExecutavel": false,
+        "motivoCalendario": "titulação da talidomida estava só em observação"
       },
       {
         "id": "mieloma-melfalano-200-tcth",
@@ -947,7 +1001,7 @@
           }
         ],
         "cicloDias": 28,
-        "numeroCiclos": 24,
+        "numeroCiclos": null,
         "premedicacao": "Vitamina D 400 UI/dia VO + cálcio 500 mg/dia VO (iniciar após normalizar cálcio se hipercalcemia)",
         "ajusteObrigatorio": "ClCr <30 mL/min: não usar bisfosfonato (DDT). Ajuste por ClCr conforme bula. Monitorar creatinina e eletrólitos mensalmente. Alternativa: pamidronato 90 mg EV mensal em 4 h.",
         "fichaId": null,
@@ -967,6 +1021,103 @@
           "pagina": 14,
           "trecho": "dose de 4 mg deve ser administrada por via intravenosa, uma vez ao mês",
           "estado": "VERIFICADO"
+        },
+        "duracao": "mensal; duração por decisão clínica (não converter em 24 ciclos de 28 dias)"
+      },
+      {
+        "id": "mieloma-vcd-cybord-21d",
+        "nome": "VCd / CyBorD (bortezomibe + ciclofosfamida oral + dexametasona)",
+        "cenario": "indução — elegível a TCTH autólogo",
+        "linha": "1ª linha (indução)",
+        "drogas": [
+          {
+            "droga": "bortezomibe",
+            "dose": 1.3,
+            "unidade": "mg/m2",
+            "via": "SC",
+            "dias": "D1, D4, D8, D11",
+            "observacao": "DDT Quadro 4: 1,3 mg/m² EV ou SC"
+          },
+          {
+            "droga": "ciclofosfamida",
+            "dose": 300,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1, D8, D15",
+            "observacao": "DDT Quadro 4: 300 mg/m² VO 1x/semana"
+          },
+          {
+            "droga": "dexametasona",
+            "dose": 20,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1, D2, D4, D5, D8, D9, D11, D12",
+            "observacao": "dose do ensaio (DDT Quadro 4 cita 40 mg); médico escolhe"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Neuropatia periférica: ajuste do bortezomibe conforme bula; profilaxia antiviral",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.03.025-2",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE MIELOMA MÚLTIPLO  1ª LINHA",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Bortezomibe incorporado (2020; DDT 2023); ciclofosfamida e dexametasona na APAC."
+        },
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov API v2 NCT01539083 (COMPLETED), braço VCD de indução; doses de bortezomibe e ciclofosfamida concordam com DDT MM 2023, Quadro 4 (p.13)",
+          "pagina": null,
+          "trecho": "cyclophosphamide 300 mg/m^2 orally on Days 1, 8, and 15",
+          "estado": "INFERIDO"
+        },
+        "nct": "NCT01539083",
+        "nctEstado": "VERIFICADO"
+      },
+      {
+        "id": "mieloma-lenalidomida-manutencao",
+        "nome": "Lenalidomida — manutenção pós-TCTH autólogo",
+        "cenario": "manutenção após TCTH autólogo (recém-diagnosticado)",
+        "linha": "manutenção",
+        "drogas": [
+          {
+            "droga": "lenalidomida",
+            "dose": 10,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "iniciar após recuperação hematológica (NAA ≥1.000/mcL e/ou plaquetas ≥75.000/mcL); após 3 ciclos pode subir a 15 mg/dia se tolerado (bula)"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Ajuste renal pela bula; tromboprofilaxia recomendada; programa de prevenção de gravidez",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 26, de 28/05/2026 — via Conass Informa nº 99/2026 (conass.org.br/?p=56979); Relatório Conitec nº 1098",
+            "pagina": null,
+            "trecho": "Incorporar, no âmbito do Sistema Único de Saúde – SUS, a lenalidomida",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Incorporada para manutenção pós-TCTH 'conforme Protocolo Clínico do MS' — DDT 2023 ainda não atualizada; dispensação local pode não estar implantada."
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Lenalidomide (openFDA set_id 1b2716cf-24b4-4157-a218-58ede63917bd, 2026-05-27), seção 2.1",
+          "pagina": null,
+          "trecho": "MM maintenance therapy following auto-HSCT: 10 mg once daily continuously on Days 1 to 28",
+          "estado": "VERIFICADO"
         }
       }
     ],
@@ -984,6 +1135,14 @@
           "pagina": 14,
           "trecho": "baixas doses de radiação (até 30 Gy) podem ser usadas para paliação",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "RT em mieloma/plasmocitoma — aceno de RT.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "DDT MM 2023",
+            "Onco PRO aula 82"
+          ]
         }
       },
       {
@@ -999,6 +1158,14 @@
           "pagina": 22,
           "trecho": "RDT – ISRT – 40-50Gy",
           "estado": "INFERIDO"
+        },
+        "pendenciaClasse": {
+          "texto": "RT em mieloma/plasmocitoma — aceno de RT.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "DDT MM 2023",
+            "Onco PRO aula 82"
+          ]
         }
       }
     ],
@@ -1060,6 +1227,33 @@
         "pagina": 15,
         "trecho": "deverão receber profilaxia com aciclovir, a fim de reduzir o risco de reativação",
         "estado": "VERIFICADO"
+      },
+      "antiviral": {
+        "texto": "Bula do bortezomibe: considerar profilaxia antiviral para herpes-zóster; DDT 2023 (p.15) indica aciclovir com bortezomibe/TCTH. Dose do aciclovir profilático não fixada em bula nem na DDT.",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Bortezomib (openFDA set_id 04aafa6a-a50d-4a47-a831-be8e8bb992ac, 2024-07-22)",
+          "pagina": null,
+          "trecho": "Consider using antiviral prophylaxis in subjects being treated with bortezomib",
+          "estado": "VERIFICADO"
+        }
+      },
+      "tromboprofilaxiaIMiD": {
+        "texto": "Talidomida: considerar tromboprofilaxia conforme fatores de risco individuais (bula); regime não fixado.",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Thalidomide (openFDA set_id 2eda833b-1357-4ed4-a093-194524fcb061, 2023-03-24)",
+          "pagina": null,
+          "trecho": "Consider thromboprophylaxis based on an assessment of individual patients' underlying risk factors",
+          "estado": "VERIFICADO"
+        }
+      },
+      "pendenciaClasse": {
+        "texto": "Emetogenicidade/NF via módulo de suporte; doses de aciclovir/tromboprofilaxia = decisão médica.",
+        "classe": "DEPENDE_MOTOR_CODIGO",
+        "buscasFeitas": [
+          "MASCC/ESMO 2023"
+        ]
       }
     },
     "ensaios": [
@@ -1121,6 +1315,28 @@
           "estado": "VERIFICADO"
         }
       }
+    ],
+    "apacSigtap": [
+      {
+        "procedimento": "03.04.03.025-2",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.03.025-2",
+          "pagina": null,
+          "trecho": "QUIMIOTERAPIA DE MIELOMA MÚLTIPLO  1ª LINHA",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "03.04.03.026-0",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.03.026-0",
+          "pagina": null,
+          "trecho": "QUIMIOTERAPIA DE 2ª LINHA PARA CONTROLE TEMPORÁRIO DE MIELOMA MÚLTIPLO",
+          "estado": "VERIFICADO"
+        }
+      }
     ]
   },
   "ligacoes": {
@@ -1161,7 +1377,10 @@
       "CLEARANCE_CREATININA",
       "SODIO",
       "POTASSIO",
-      "CARIOTIPO_MEDULA"
+      "CARIOTIPO_MEDULA",
+      "FISH_MIELOMA",
+      "IGG",
+      "VHS"
     ],
     "interacoesConsultar": [
       {
@@ -1302,15 +1521,52 @@
     ]
   },
   "pendencias": [
-    "catalogoId FISH_MIELOMA não existe: usado FISH genérico (painel t(4;14), del17p, t(14;16), 1q+, t(11;14) a especificar no pedido)",
-    "Sem catalogoId: TC de corpo inteiro baixa dose, RM de corpo inteiro, imunoglobulinas IgA/IgG/IgM/IgE, VHS, viscosidade sérica, D-dímero, cariótipo",
-    "Código SIGTAP da APAC de mieloma não confirmado nas fontes lidas",
-    "Dose de aciclovir profilático e esquema de tromboprofilaxia com talidomida: SEM_FONTE aberta lida",
-    "CyBorD (ciclofosfamida oral 300 mg/m2 semanal + bortezomibe + dexametasona): DDT dá dose e frequência mas não dias/ciclo — não entrou como protocolo",
-    "VRd, Dara-VRd/Isa-VRd, DRd, KRd, DKd, PVd, teclistamabe, talquetamabe, cilta-cel (curso/NCCN): não incorporados (lenalidomida 16/2022 e 21/2022; daratumumabe 18/2022) — doses não transcritas",
-    "Manutenção com talidomida: dose/duração não especificadas na DDT (50–200 mg/dia, 'conforme tolerância')",
-    "RT paliativa: DDT dá teto 'até 30 Gy' sem fracionamento",
-    "Amiloidose AL e plasmocitoma: fora do escopo da DDT; dados apenas do curso"
+    {
+      "texto": "Cariótipo já mapeado (CARIOTIPO_MEDULA). Seguem sem id: TC e RM de corpo inteiro, imunoglobulinas, VHS, viscosidade e D-dímero (códigos SIGTAP anotados quando existem).",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "catálogo v1.1",
+        "SIGTAP 09/2026"
+      ]
+    },
+    {
+      "texto": "Indicação de antiviral e de tromboprofilaxia com IMiD sustentada por bula (FDA) e DDT; dose do aciclovir e regime antitrombótico não fixados em fonte pública lida.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "DDT MM 2023 p.15",
+        "Bula FDA bortezomibe, talidomida, aciclovir (sem indicação profilática)"
+      ]
+    },
+    {
+      "texto": "Esquemas de indução/recidiva internacionais (anti-CD38, VRd, KRd, biespecíficos, CAR-T) não transcritos — aceno de hematologia. Status SUS corrigido: lenalidomida manutenção pós-TCTH incorporada (Portaria SCTIE 26/2026); carfilzomibe incorporado para R/R após 1 linha (Portaria SECTICS 65/2023); daratumumabe e lenalidomida em outras indicações seguem não incorporados (2022/2023).",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Painel de Demandas Conitec 15/06/2026",
+        "Conass Informa 99/2026",
+        "DDT MM 2023"
+      ]
+    },
+    {
+      "texto": "DDT dá faixa 50-200 mg/dia 'conforme tolerância' sem duração — dose individual pelo médico.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "DDT MM 2023 Quadro 4"
+      ]
+    },
+    {
+      "texto": "RT paliativa (até 30 Gy, sem fracionamento) — aceno de RT.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "DDT MM 2023 p.14"
+      ]
+    },
+    {
+      "texto": "Amiloidose AL e plasmocitoma fora do escopo da DDT — aceno de hematologia.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Onco PRO aula 82"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -1329,7 +1585,8 @@
         "trecho": "o medicamento não foi incorporado ao SUS para esta indicação",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "SUS: VTd (ou outra tripla com bortezomibe) → melfalano 200 → TCTH. Esquemas com anti-CD38/lenalidomida registrados só como diretriz internacional."
+      "escolhaSeguranca": "SUS: VTd (ou outra tripla com bortezomibe) → melfalano 200 → TCTH. Esquemas com anti-CD38/lenalidomida registrados só como diretriz internacional.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Manutenção pós-TCTH: lenalidomida ≥2 anos (curso) × talidomida (SUS)",
@@ -1347,7 +1604,15 @@
         "trecho": "A talidomida é o imunomodulador disponível no âmbito do SUS",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "SUS: talidomida; lenalidomida não incorporada (Portaria SCTIE 21/2022)."
+      "escolhaSeguranca": "Atualizado 2026-10-11: lenalidomida foi INCORPORADA para manutenção pós-TCTH (Portaria SCTIE/MS 26/2026). SUS passa a ter talidomida (DDT 2023) e lenalidomida (protocolo mieloma-lenalidomida-manutencao); confirmar implantação local e atualização da DDT.",
+      "fonteC": {
+        "tipo": "NORMA",
+        "referencia": "Portaria SCTIE/MS nº 26, de 28/05/2026 — via Conass Informa nº 99/2026 (conass.org.br/?p=56979); Relatório Conitec nº 1098",
+        "pagina": null,
+        "trecho": "Incorporar, no âmbito do Sistema Único de Saúde – SUS, a lenalidomida",
+        "estado": "VERIFICADO"
+      },
+      "decisaoNecessaria": true
     },
     {
       "tema": "Intervalo do ácido zoledrônico",
@@ -1365,7 +1630,8 @@
         "trecho": "4 mg infused over no less than 15 minutes every 3 to 4 weeks",
         "estado": "CONFLITANTE"
       },
-      "escolhaSeguranca": "Adotado mensal (28 dias), dentro da faixa da bula e alinhado à DDT; ajuste renal pela bula."
+      "escolhaSeguranca": "Adotado mensal (28 dias), dentro da faixa da bula e alinhado à DDT; ajuste renal pela bula.",
+      "decisaoNecessaria": false
     }
   ],
   "curadoria": {
@@ -1375,8 +1641,69 @@
       "DDT Mieloma Múltiplo 2023 (Portaria Conjunta 27/2023) — seções 1–6 e tabelas de evidência do Apêndice (p.47–48, 61)",
       "Bulas FDA bortezomibe, THALOMID, ácido zoledrônico (openFDA)",
       "Onco PRO 2026, Módulo 9, Aula 82 — Mieloma múltiplo (págs. 1–31)",
-      "ClinicalTrials.gov API v2 — NCT00111319"
+      "ClinicalTrials.gov API v2 — NCT00111319",
+      "Portaria SCTIE/MS 26/2026 (Conass Informa 99/2026)",
+      "Painel de Demandas Conitec 15/06/2026",
+      "Bulas FDA Lenalidomide, Bortezomib, Thalidomide (openFDA)",
+      "ClinicalTrials.gov API v2 NCT01539083",
+      "SIGTAP competência 09/2026"
     ],
-    "aprovacaoClinica": null
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-11",
+        "redator": "Claude (agente curador)",
+        "resolvidas": 3,
+        "classificadas": 6,
+        "susPreenchidos": 2,
+        "notas": []
+      }
+    ]
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "local": "conflitos[1].escolhaSeguranca e pendências",
+      "de": "SUS: talidomida; lenalidomida não incorporada (Portaria SCTIE 21/2022).",
+      "para": "Atualizado 2026-10-11: lenalidomida foi INCORPORADA para manutenção pós-TCTH (Portaria SCTIE/MS 26/2026). SUS passa a ter talidomida (DDT 2023) e lenalidomida (protocolo mieloma-lenalidomida-manutencao); confirmar implantação local e atualização da DDT.",
+      "motivo": "Status SUS desatualizado: Portaria SCTIE/MS nº 26, de 28/05/2026, incorporou a lenalidomida na manutenção pós-TCTH (a Portaria SCTIE 21/2022 de não incorporação foi superada).",
+      "fonte": {
+        "tipo": "NORMA",
+        "referencia": "Portaria SCTIE/MS nº 26, de 28/05/2026 — via Conass Informa nº 99/2026 (conass.org.br/?p=56979); Relatório Conitec nº 1098",
+        "pagina": null,
+        "trecho": "Incorporar, no âmbito do Sistema Único de Saúde – SUS, a lenalidomida",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "data": "2026-10-11",
+      "local": "pendências (lista de não incorporados)",
+      "de": "KRd/DKd citados como não incorporados",
+      "para": "Carfilzomibe incorporado para MM recidivado/refratário após 1 terapia prévia (Portaria SECTICS/MS nº 65, de 09/11/2023); esquemas com carfilzomibe seguem sem protocolo no pack (aceno de hematologia) e fora da DDT 2023.",
+      "motivo": "Status SUS do carfilzomibe omitido/errado no pack.",
+      "fonte": {
+        "tipo": "NORMA",
+        "referencia": "Painel de Demandas Conitec (exportação 15/06/2026) — Carfilzomibe, MM recidivado/refratário após uma terapia prévia (decisão 13/11/2023)",
+        "pagina": null,
+        "trecho": "Processo encerrado: decisão de incorporação no SUS",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): A03 titulação da talidomida",
+      "acao": "campo titulacao estruturado; calendarioExecutavel false"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): A05 duração do zoledrônico",
+      "acao": "numeroCiclos null; duração explícita"
+    }
+  ],
+  "escopo": {
+    "classe": "ACENO_GERAL_ONCO_HEMATOLOGIA",
+    "nota": "Foco do OncoGlobal é oncologia clínica (Dr. Silas, 2026-10-11). Pack de hematologia mantido como aceno geral: conteúdo preservado, sem aprofundamento nem prioridade de curadoria."
   }
 }

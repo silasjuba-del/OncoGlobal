@@ -210,12 +210,12 @@
         {
           "alvo": "KIT/PDGFRA (sequenciamento ou NGS)",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
+          "catalogoId": null,
           "quandoPedir": "universal",
           "cenario": "todos; obrigatório antes de adjuvância (alto risco) e de neoadjuvância",
           "consequencia": "D842V: sem imatinibe; éxon 9: 800 mg/dia; selvagem: pesquisar SDHB",
           "disponivelSUS": "DADO_AUSENTE",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "fonte": {
             "tipo": "SBOC",
             "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-GIST-v5-VERSAO-PARA-COLABORACAO.pdf",
@@ -223,8 +223,8 @@
             "trecho": "o perfil molecular de KIT e PDGFRA é recomendado antes do início",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "SDHB",
@@ -632,15 +632,15 @@
         "ajusteObrigatorio": "QT longo (INAT-11); CYP3A4 (INAT-23); hipertensão e tireoide.",
         "fichaId": null,
         "sus": {
-          "disponivel": "parcial",
-          "nota": "CONITEC recomendou incorporar (Registro de Deliberação nº 1.035/2025, set/2025); portaria de incorporação e oferta efetiva não conferidas. Enquanto isso: APAC de GIST avançado.",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "CONITEC Relatório de Recomendação nº 1035/2025 — sunitinibe GIST após falha ao imatinibe (gov.br/conitec)",
+            "referencia": "Portaria SECTICS/MS nº 69, de 30/09/2025 (DOU nº 187, 01/10/2025), Relatório CONITEC nº 1035 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-69-de-30-de-setembro-de-2025",
             "pagina": null,
-            "trecho": "recomendar a incorporação do sunitinibe para o tratamento de indivíduos com tumor",
+            "trecho": "o sunitinibe para o tratamento de indivíduos com tumor do estroma gastrointestinal",
             "estado": "VERIFICADO"
-          }
+          },
+          "nota": "Incorporado após falha ao imatinibe (a planilha CONITEC descreve a indicação de forma diferente; vale a portaria)."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -678,15 +678,15 @@
         "ajusteObrigatorio": "QT longo (INAT-11); CYP3A4 (INAT-23).",
         "fichaId": null,
         "sus": {
-          "disponivel": "parcial",
-          "nota": "CONITEC recomendou incorporar (Registro de Deliberação nº 1.035/2025, set/2025); portaria de incorporação e oferta efetiva não conferidas. Enquanto isso: APAC de GIST avançado.",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "CONITEC Relatório de Recomendação nº 1035/2025 — sunitinibe GIST após falha ao imatinibe (gov.br/conitec)",
+            "referencia": "Portaria SECTICS/MS nº 69, de 30/09/2025 (DOU nº 187, 01/10/2025), Relatório CONITEC nº 1035 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-69-de-30-de-setembro-de-2025",
             "pagina": null,
-            "trecho": "recomendar a incorporação do sunitinibe para o tratamento de indivíduos com tumor",
+            "trecho": "o sunitinibe para o tratamento de indivíduos com tumor do estroma gastrointestinal",
             "estado": "VERIFICADO"
-          }
+          },
+          "nota": "Incorporado após falha ao imatinibe (a planilha CONITEC descreve a indicação de forma diferente; vale a portaria)."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -718,14 +718,14 @@
         "fichaId": null,
         "sus": {
           "disponivel": "nao",
-          "nota": "CONITEC recomendou não incorporar (set/2025). Alternativa SUS: suporte clínico/APAC de GIST avançado.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "CONITEC Relatório Final nº 1036/2025 — regorafenibe GIST (gov.br/conitec)",
+            "referencia": "Portaria SECTICS/MS nº 75, de 24/09/2025 (DOU nº 184, 26/09/2025), Relatório CONITEC nº 1036 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-75-de-24-de-setembro-de-2025",
             "pagina": null,
-            "trecho": "recomendar a não incorporação do regorafenibe",
+            "trecho": "o regorafenibe para o tratamento de indivíduos com tumor do estroma gastrointestinal",
             "estado": "VERIFICADO"
-          }
+          },
+          "nota": "Não incorporado (a planilha CONITEC cita a Portaria 74/2025 por erro). Alternativa SUS: suporte clínico/APAC de GIST avançado."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -757,16 +757,15 @@
         "fichaId": null,
         "observacao": "Não consta da SBOC 2026; indicação pelo INVICTUS (NCT03353753) e bula FDA. Registro Anvisa não verificado.",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Registro Anvisa e CONITEC não verificados. Alternativa SUS: suporte clínico / APAC.",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
         },
         "fonte": {
           "tipo": "BULA",
@@ -797,16 +796,15 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Não verificado.",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 72/2021 (publ. 07/12/2021), Relatório CONITEC nº 679 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2021/20211207_portaria_72.pdf",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "o larotrectinibe para o tratamento de adultos e crianças com tumores sólidos",
+            "estado": "VERIFICADO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Não incorporado para adultos. Só o subgrupo pediátrico foi incorporado (Portaria SECTICS/MS nº 71/2025)."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -845,16 +843,15 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "nota": "Não verificado.",
+          "disponivel": "nao",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "pendencia": "SEM_FONTE"
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1303,11 +1300,50 @@
     ]
   },
   "pendencias": [
-    "Tabela de risco da SBOC com erros (gástrico × não gástrico; ≤ 5 cm × ≤ 2 cm) — exigir conferência médica antes de decidir adjuvância.",
-    "HR 0,08 (6 × 3 anos de imatinibe) na SBOC p.8 parece improvável — conferir publicação.",
-    "SEM_ID_NO_CATALOGO: sequenciamento KIT/PDGFRA, NGS, ultrassom endoscópico.",
-    "SUS: confirmar portaria de incorporação do sunitinibe (Deliberação 1.035/2025) e PCDT GIST 2025; ripretinibe sem verificação Anvisa/CONITEC.",
-    "SEM_FONTE: TC de tórax no estadiamento e EDA não citados pela SBOC."
+    {
+      "texto": "Tabela de risco da SBOC com erros (gástrico × não gástrico; ≤ 5 cm × ≤ 2 cm) — exigir conferência médica antes de decidir adjuvância.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026 GIST",
+        "Onco PRO 2026 aula 77"
+      ]
+    },
+    {
+      "texto": "HR 0,08 (6 × 3 anos de imatinibe) na SBOC p.8 parece improvável — conferir publicação.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "PubMed 22453568 (SSG XVIII: 3 × 1 ano, HR SLR 0,46)",
+        "ClinicalTrials.gov NCT02413736 (SSG XXII: 5 × 3 anos, sem resultado publicado)"
+      ],
+      "nota": "Nenhuma publicação de 6 × 3 anos com HR 0,08 localizada; não usar o número."
+    },
+    {
+      "texto": "SEM_ID_NO_CATALOGO: sequenciamento KIT/PDGFRA, NGS, ultrassom endoscópico.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json (164 ids)"
+      ],
+      "nota": "Depende de ampliação do catálogo de exames."
+    },
+    {
+      "texto": "SUS: confirmar portaria de incorporação do sunitinibe (Deliberação 1.035/2025) e PCDT GIST 2025; ripretinibe sem verificação Anvisa/CONITEC.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Planilha CONITEC 15/06/2026",
+        "Painel de Demandas CONITEC",
+        "busca gov.br/conitec",
+        "DOU (portarias citadas)"
+      ],
+      "nota": "sus.disponivel preenchido em todos os protocolos com portaria/relatório quando existe. Sem avaliação CONITEC (registrado 'nao', INFERIDO): ripretinibe, dabrafenibe-trametinibe."
+    },
+    {
+      "texto": "SEM_FONTE: TC de tórax no estadiamento e EDA não citados pela SBOC.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026 GIST",
+        "Onco PRO 2026 aula 77"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -1326,7 +1362,8 @@
         "trecho": "a dose of 800 mg should be administered as 400 mg twice a day",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Seguir a bula: 400 mg 12/12h."
+      "escolhaSeguranca": "Seguir a bula: 400 mg 12/12h.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Tabela de estratificação de risco",
@@ -1346,7 +1383,8 @@
         "estado": "DADO_AUSENTE"
       },
       "fonteBDetalhe": "NIH modificado (Joensuu 2008): alto risco inclui 2–5 cm/> 5 mitoses e 5–10 cm/≤ 5 mitoses de sítio NÃO gástrico; intermediário inclui ≤ 2 cm/6–10 mitoses (fonte não aberta nesta curadoria)",
-      "escolhaSeguranca": "Não automatizar a classificação; o médico usa nomograma/heat map."
+      "escolhaSeguranca": "Não automatizar a classificação; o médico usa nomograma/heat map.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Duração estendida do imatinibe — magnitude do efeito",
@@ -1365,7 +1403,8 @@
         "estado": "DADO_AUSENTE"
       },
       "fonteBDetalhe": "HR incompatível com a diferença absoluta descrita; publicação não aberta",
-      "escolhaSeguranca": "Manter 'pelo menos 3 anos'; prolongar só após discussão multidisciplinar."
+      "escolhaSeguranca": "Manter 'pelo menos 3 anos'; prolongar só após discussão multidisciplinar.",
+      "decisaoNecessaria": true
     }
   ],
   "curadoria": {
@@ -1378,6 +1417,18 @@
       "ClinicalTrials.gov API v2 (8 NCT verificados)",
       "SIGTAP 2026-09"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "reducaoPendencias20261011": {
+      "data": "2026-10-11",
+      "resolvidas": []
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "1 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
 }

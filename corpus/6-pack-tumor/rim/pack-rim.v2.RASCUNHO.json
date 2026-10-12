@@ -859,13 +859,14 @@
         "ajusteObrigatorio": "Status ANVISA/SUS não confirmado nesta curadoria (SBOC p15 cita ausência de aprovação ANVISA no cenário metastático)",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de belzutifan nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para belzutifan nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -997,13 +998,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de lenvatinibe + pembrolizumabe (rim) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020168 — decisão do serviço. Pembrolizumabe + axitinibe e ipilimumabe + nivolumabe: não incorporados (Portaria SCTIE/MS nº 55/2021). Alternativa SUS: sunitinibe ou pazopanibe (Portaria SCTIE nº 91/2018).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para lenvatinibe + pembrolizumabe (rim) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1279,13 +1281,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de axitinibe (monoterapia) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020168 — decisão do serviço. DDT 2022 admite antiangiogênico ou outra classe após refratariedade, via APAC.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para axitinibe (monoterapia) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1325,13 +1328,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de lenvatinibe + everolimo (rim) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020168 — decisão do serviço.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para lenvatinibe + everolimo (rim) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1388,18 +1392,24 @@
         "drogas": [
           {
             "droga": "everolimo",
-            "dose": null,
-            "unidade": null,
-            "via": null,
-            "dias": null,
-            "observacao": "SBOC p14 (fluxograma) cita everolimo NE alto/FR fraca sem dose; não transferir dose de outro esquema",
-            "pendencia": "SEM_FONTE"
+            "dose": 10,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": "Rótulo FDA Afinitor: CCR avançado após sunitinibe ou sorafenibe; pack: após nivolumabe + cabozantinibe (ver conflitos).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22AFINITOR%22&limit=1 (Afinitor 2026-06-01, set_id 2150f73a-179b-4afc-b8ce-67c85cc72f04)",
+              "pagina": null,
+              "trecho": "RCC : 10 mg orally once daily.",
+              "estado": "VERIFICADO"
+            }
           }
         ],
-        "cicloDias": null,
+        "cicloDias": 28,
         "numeroCiclos": null,
         "premedicacao": "",
-        "ajusteObrigatorio": "",
+        "ajusteObrigatorio": "Uso contínuo; cicloDias 28 por convenção do pack. Glicemia, lipídios, estomatite, pneumonite (bula).",
         "fichaId": null,
         "sus": {
           "disponivel": "parcial",
@@ -1417,8 +1427,7 @@
           "pagina": 14,
           "trecho": "Everolimo (NE alto/FR fraca)",
           "estado": "VERIFICADO"
-        },
-        "pendencia": "SEM_FONTE"
+        }
       },
       {
         "id": "rim-ncc-cabozantinibe-1l",
@@ -1617,13 +1626,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de bevacizumabe + erlotinibe (CCR papilífero/HLRCC) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020168 — decisão do serviço.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para bevacizumabe + erlotinibe (CCR papilífero/HLRCC) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1655,13 +1665,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (CCR não células claras) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020168 — decisão do serviço.",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (CCR não células claras) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1780,24 +1791,36 @@
         "drogas": [
           {
             "droga": "cabozantinibe",
-            "dose": null,
-            "unidade": null,
-            "via": null,
-            "dias": null,
-            "observacao": "SBOC p17 cita a combinação sem dose neste cenário; não transferir dose do cenário células claras",
-            "pendencia": "SEM_FONTE"
+            "dose": 40,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": "Rótulo FDA Cabometyx: CCR avançado 1ª linha com nivolumabe (CheckMate 9ER); componente sarcomatoide é subgrupo do mesmo ensaio/indicação.",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22CABOMETYX%22&limit=1 (CABOMETYX 2025-10-19, set_id 3850cce2-6137-42e5-a792-d318c4a4b3b5)",
+              "pagina": null,
+              "trecho": "40 mg orally, once daily with: 240 mg nivolumab every 2 weeks",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "nivolumabe",
-            "dose": null,
-            "unidade": null,
-            "via": null,
-            "dias": null,
-            "observacao": "idem",
-            "pendencia": "SEM_FONTE"
+            "dose": 240,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 a cada 2 semanas",
+            "observacao": "Alternativa da bula: 480 mg a cada 4 semanas.",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22CABOMETYX%22&limit=1 (CABOMETYX 2025-10-19, set_id 3850cce2-6137-42e5-a792-d318c4a4b3b5)",
+              "pagina": null,
+              "trecho": "40 mg orally, once daily with: 240 mg nivolumab every 2 weeks",
+              "estado": "VERIFICADO"
+            }
           }
         ],
-        "cicloDias": null,
+        "cicloDias": 14,
         "numeroCiclos": null,
         "premedicacao": "",
         "ajusteObrigatorio": "",
@@ -1818,8 +1841,7 @@
           "pagina": 17,
           "trecho": "Cabozantinibe + Nivolumabe",
           "estado": "VERIFICADO"
-        },
-        "pendencia": "SEM_FONTE"
+        }
       },
       {
         "id": "rim-sarcomatoide-lenvatinibe-pembrolizumabe-1l",
@@ -1850,13 +1872,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de lenvatinibe + pembrolizumabe (rim) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020168 — decisão do serviço. Pembrolizumabe + axitinibe e ipilimumabe + nivolumabe: não incorporados (Portaria SCTIE/MS nº 55/2021). Alternativa SUS: sunitinibe ou pazopanibe (Portaria SCTIE nº 91/2018).",
           "fonte": {
-            "tipo": null,
-            "referencia": null,
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para lenvatinibe + pembrolizumabe (rim) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1864,6 +1887,67 @@
           "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
           "pagina": 17,
           "trecho": "Lenvatinibe 20 mg VO contínuo + Pembrolizumabe 200 mg IV a cada 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "rim-avelumabe-axitinibe-1l",
+        "nome": "Avelumabe + axitinibe (JAVELIN Renal 101)",
+        "cenario": "metastático células claras (citado no fluxograma SBOC p.14)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "avelumabe",
+            "dose": 800,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 a cada 2 semanas",
+            "observacao": "Pré-medicação (anti-histamínico + paracetamol) nas 4 primeiras infusões (bula).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=spl_product_data_elements:avelumab&limit=1 (BAVENCIO 2026-08-25, set_id 5cd725a1-2fa4-408a-a651-57a7b84b2118)",
+              "pagina": null,
+              "trecho": "800 mg every 2 weeks in combination with axitinib 5 mg orally twice daily",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "axitinibe",
+            "dose": 5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "2x/dia contínuo",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22axitinib%22&limit=1 (INLYTA 2025-02-19, set_id 84137882-e000-47da-bd5b-fa76ab3c76f9)",
+              "pagina": null,
+              "trecho": "INLYTA 5 mg orally twice daily with avelumab 800 mg every 2 weeks",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "Anti-histamínico e paracetamol antes das 4 primeiras infusões de avelumabe (bula FDA Bavencio).",
+        "ajusteObrigatorio": "Pressão arterial, TSH, função hepática (hepatotoxicidade da combinação; bula).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de avelumabe + axitinibe (rim) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020168 — decisão do serviço. Alternativa SUS: sunitinibe ou pazopanibe (Portaria SCTIE nº 91/2018).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para avelumabe + axitinibe (rim) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=spl_product_data_elements:avelumab&limit=1 (BAVENCIO 2026-08-25, set_id 5cd725a1-2fa4-408a-a651-57a7b84b2118)",
+          "pagina": null,
+          "trecho": "800 mg every 2 weeks in combination with axitinib 5 mg orally twice daily",
           "estado": "VERIFICADO"
         }
       }
@@ -1881,7 +1965,13 @@
           "trecho": "A radioterapia externa pode ser empregada para controle de sintomas locais",
           "estado": "VERIFICADO"
         },
-        "pendencia": "SEM_FONTE (dose/fracionamento não constam da fonte)"
+        "pendencia": {
+          "texto": "SEM_FONTE (dose/fracionamento não constam da fonte)",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ]
+        }
       },
       {
         "cenario": "SBRT do primário inoperável sem opção ablativa (experimental)",
@@ -1895,7 +1985,13 @@
           "trecho": "Dose ablativa em 1 a 5 frações",
           "estado": "INFERIDO"
         },
-        "pendencia": "SEM_FONTE (dose total não informada; fracionamento 1-5 apenas na aula PRO)"
+        "pendencia": {
+          "texto": "SEM_FONTE (dose total não informada; fracionamento 1-5 apenas na aula PRO)",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ]
+        }
       }
     ],
     "cirurgia": [
@@ -1982,7 +2078,7 @@
         "seAlvo": "VHL germinativo com CCR localizado (sem indicação de cirurgia imediata)",
         "opcao": "Belzutifan 120 mg VO 1x/dia contínuo",
         "evidencia": "NE alto/FR forte (SBOC)",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — belzutifan sem avaliação CONITEC (INFERIDO)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
@@ -1995,7 +2091,7 @@
         "seAlvo": "FH mutado / HLRCC (papilífero)",
         "opcao": "Bevacizumabe + erlotinibe",
         "evidencia": "NE baixo/FR forte (SBOC)",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — bevacizumabe + erlotinibe sem avaliação CONITEC para rim (INFERIDO)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "Diretrizes SBOC 2026 — Rim v3 (versão para colaboração), Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
@@ -2516,17 +2612,65 @@
     ]
   },
   "pendencias": [
-    "SUS: lenvatinibe + pembrolizumabe, axitinibe isolado, lenvatinibe + everolimo, bevacizumabe + erlotinibe, pembrolizumabe em não células claras e belzutifan = DADO_AUSENTE (não avaliados na DDT 2022).",
-    "Portaria Conjunta SAES/SECTICS nº 20/2022 (publicação da DDT) citada em busca web, não aberta; fonte normativa usada = Relatório CONITEC nº 755 (jul/2022). Relatório nº 406 (incorporação sunitinibe/pazopanibe) não aberto diretamente — citado pela DDT p30.",
-    "Doses SEM_FONTE: cabozantinibe + nivolumabe no sarcomatoide; everolimo isolado em 2ª linha; avelumabe + axitinibe (citado no fluxograma p14, não incluído).",
-    "Uso contínuo VO registrado com cicloDias 28 por convenção do pack (não consta da SBOC).",
-    "Bula ANVISA não consultada; monitorização laboratorial por rótulo FDA (openFDA).",
-    "PET/CT FDG: cobertura SUS para CCR = DADO_AUSENTE.",
-    "Teste germinativo (VHL/FH/painel) e IHQ específica de FH sem id no catálogo.",
-    "RT paliativa e SBRT sem dose/fracionamento com fonte.",
-    "Emetogenicidade e risco de neutropenia febril sem fonte.",
-    "Ductos coletores: depende do pack bexiga (urotelial avançado).",
-    "Vigilância ativa localizada: DDT (semestral) × aula PRO (3-6 meses no 1º ano) — intervalo a confirmar pelo médico."
+    {
+      "texto": "Uso contínuo VO registrado com cicloDias 28 por convenção do pack (não consta da SBOC).",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "docs/ondas/F1-PACK-ESQUEMA-V2.md: cicloDias obrigatório; VO contínuo sem ciclo na SBOC"
+      ]
+    },
+    {
+      "texto": "Bula ANVISA não consultada; monitorização laboratorial por rótulo FDA (openFDA).",
+      "classe": "DEPENDE_BULA_ANVISA",
+      "buscasFeitas": [
+        "openFDA (pazopanibe, sunitinibe, cabozantinibe, Afinitor, Bavencio, Inlyta)"
+      ]
+    },
+    {
+      "texto": "PET/CT FDG: cobertura SUS para CCR = DADO_AUSENTE.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SIGTAP pinado 2026-09 cobre só 03.04 (sem procedimentos de imagem)",
+        "planilha Recomendações da Conitec: sem PET-CT para CCR"
+      ]
+    },
+    {
+      "texto": "Teste germinativo (VHL/FH/painel) e IHQ específica de FH sem id no catálogo.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json v1.1: sem painel germinativo VHL/FH nem IHQ FH"
+      ]
+    },
+    {
+      "texto": "RT paliativa e SBRT sem dose/fracionamento com fonte.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+      ],
+      "informacaoJaLocalizada": "SBRT do primário inoperável: 26 Gy/1 fr (≤4 cm) ou 42 Gy/3 fr (>4 cm) — FASTRACK II, NCT02613819"
+    },
+    {
+      "texto": "Emetogenicidade e risco de neutropenia febril sem fonte.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC rim 2026 v3 e DDT 2022: sem classificação",
+        "ASCO 2020 Emetic Risk Chart inacessível a partir deste ambiente"
+      ]
+    },
+    {
+      "texto": "Ductos coletores: depende do pack bexiga (urotelial avançado).",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "ligação entre packs (rim → bexiga) a cargo do motor"
+      ]
+    },
+    {
+      "texto": "Vigilância ativa localizada: DDT (semestral) × aula PRO (3-6 meses no 1º ano) — intervalo a confirmar pelo médico.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "DDT 2022 (semestral) × aula PRO (3-6 meses no 1º ano)"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -2545,7 +2689,8 @@
         "trecho": "Cálcio sérico >10 mg/dL",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Usar SBOC (> LSN corrigido pela albumina), concordante com DDT p25"
+      "escolhaSeguranca": "Usar SBOC (> LSN corrigido pela albumina), concordante com DDT p25",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Critério de anemia no IMDC/MSKCC",
@@ -2563,7 +2708,8 @@
         "trecho": "Anemia (Hb < LSN)",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Usar SBOC (Hb < LIN); aula PRO provavelmente com erro de digitação"
+      "escolhaSeguranca": "Usar SBOC (Hb < LIN); aula PRO provavelmente com erro de digitação",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Sunitinibe adjuvante",
@@ -2581,7 +2727,8 @@
         "trecho": "adjuvância com TKI NÃO é recomendada",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Não propor TKI adjuvante por padrão (sem ganho de SG); manter como alternativa SBOC FR fraca só por decisão médica"
+      "escolhaSeguranca": "Não propor TKI adjuvante por padrão (sem ganho de SG); manter como alternativa SBOC FR fraca só por decisão médica",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Indicação de adjuvância (SBOC × SUS)",
@@ -2599,7 +2746,8 @@
         "trecho": "Não há indicação clínica de tratamento sistêmico com finalidade adjuvante",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "No SUS: vigilância (opção SBOC alternativa); pembrolizumabe adjuvante fora da cobertura SUS, decisão compartilhada"
+      "escolhaSeguranca": "No SUS: vigilância (opção SBOC alternativa); pembrolizumabe adjuvante fora da cobertura SUS, decisão compartilhada",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Biópsia antes de vigilância ativa da massa renal",
@@ -2617,7 +2765,27 @@
         "trecho": "Se suspeita por imagem, nao há necessidade de biópsia.",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Considerar biópsia em candidatos a vigilância ativa ou ablação quando alterar conduta (DDT); médico decide"
+      "escolhaSeguranca": "Considerar biópsia em candidatos a vigilância ativa ou ablação quando alterar conduta (DDT); médico decide",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Everolimo 2ª linha: cenário do rótulo × cenário do pack",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2026-Rim-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 14,
+        "trecho": "Everolimo (NE alto/FR fraca)",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22AFINITOR%22&limit=1 (Afinitor 2026-06-01, set_id 2150f73a-179b-4afc-b8ce-67c85cc72f04)",
+        "pagina": null,
+        "trecho": "RCC : 10 mg orally once daily.",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Dose 10 mg/dia do rótulo (CCR avançado após TKI anti-VEGFR) registrada; pack usa após nivolumabe + cabozantinibe (cabozantinibe é TKI anti-VEGFR). Médico confirma equivalência de cenário.",
+      "decisaoNecessaria": true
     }
   ],
   "curadoria": {
@@ -2631,8 +2799,30 @@
       "CONITEC Relatório nº 755 — DDT Carcinoma de Células Renais (2022), PDF baixado de gov.br/conitec",
       "openFDA labels: sunitinib, pazopanib",
       "ClinicalTrials.gov API v2: NCT03142334, NCT02231749, NCT02853331, NCT03141177, NCT02811861, NCT01865747, NCT00930033, NCT00720941",
-      "corpus/exames/exames-sigtap.v1.json"
+      "corpus/exames/exames-sigtap.v1.json",
+      "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
+      "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
     ],
-    "aprovacaoClinica": null
+    "aprovacaoClinica": null,
+    "rodada2": {
+      "data": "2026-10-11",
+      "redator": "Claude (Opus 5.5) — redução de pendências e conflitos; aprovação clínica pendente",
+      "pendenciasResolvidas": [
+        {
+          "texto": "SUS: lenvatinibe + pembrolizumabe, axitinibe isolado, lenvatinibe + everolimo, bevacizumabe + erlotinibe, pembrolizumabe em não células claras e belzutifan = DADO_AUSENTE (não avaliados na DDT 2022).",
+          "resolucao": "Todos sem avaliação CONITEC localizada → 'nao' (INFERIDO, Lei 8.080 art. 19-Q); alternativa SUS sunitinibe/pazopanibe."
+        },
+        {
+          "texto": "Portaria Conjunta SAES/SECTICS nº 20/2022 (publicação da DDT) citada em busca web, não aberta; fonte normativa usada = Relatório CONITEC nº 755 (jul/2022). Relatório nº 406 (incorporação sunitinibe/pazopanibe) não aberto diretamente — citado pela DDT p30.",
+          "resolucao": "Portaria SCTIE nº 91/2018 aberta no DOU (sunitinibe/pazopanibe); DDT (Portaria Conjunta SAES/SCTIE nº 20/2022) lida em gov.br/conitec."
+        },
+        {
+          "texto": "Doses SEM_FONTE: cabozantinibe + nivolumabe no sarcomatoide; everolimo isolado em 2ª linha; avelumabe + axitinibe (citado no fluxograma p14, não incluído).",
+          "resolucao": "Cabozantinibe 40 mg + nivolumabe 240 mg q2s (bula Cabometyx); everolimo 10 mg/dia (bula Afinitor); avelumabe 800 mg q2s + axitinibe 5 mg 2x/dia (bulas Bavencio/Inlyta) — protocolo novo."
+        }
+      ],
+      "correcoes": []
+    }
   }
 }

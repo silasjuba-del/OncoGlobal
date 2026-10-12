@@ -44,7 +44,7 @@
         "HER2_QUANTIFICACAO",
         "FISH"
       ],
-      "molecularSemCodigoSUS": "Molecular no SIGTAP 09/2026: MOLECULAR_PCR_MUTACAO (0202100081, PCR/qPCR de mutação ou rearranjo), SEQUENCIAMENTO_AMPLICON (0202100111), FISH (0202100090), HER2_QUANTIFICACAO (0202100049). A elegibilidade de faturamento por indicação deve ser confirmada; NGS de painel amplo não tem código próprio."
+      "molecularSemCodigoSUS": "Codex 2026-10-11 (auditoria): no SIGTAP 09/2026, 0202100081 (PCR/qPCR) e 0202100111 (Sanger por amplicon, até 500 pb) são APAC secundário com compatibilidades de doenças raras; não equivalem a NGS e não têm faturamento oncológico demonstrado. NGS de painel não tem código. HER2 (0202100049) e FISH (0202100090) existem, mas a via de faturamento por indicação deve ser confirmada."
     },
     {
       "tumor": "colorretal",
@@ -62,11 +62,9 @@
       },
       "catalogoIds": [
         "ANATOMOPATOLOGICO",
-        "IMUNOHISTOQUIMICA",
-        "MOLECULAR_PCR_MUTACAO",
-        "SEQUENCIAMENTO_AMPLICON"
+        "IMUNOHISTOQUIMICA"
       ],
-      "molecularSemCodigoSUS": "Molecular no SIGTAP 09/2026: MOLECULAR_PCR_MUTACAO (0202100081, PCR/qPCR de mutação ou rearranjo), SEQUENCIAMENTO_AMPLICON (0202100111), FISH (0202100090), HER2_QUANTIFICACAO (0202100049). A elegibilidade de faturamento por indicação deve ser confirmada; NGS de painel amplo não tem código próprio."
+      "molecularSemCodigoSUS": "Codex 2026-10-11 (auditoria): no SIGTAP 09/2026, 0202100081 (PCR/qPCR) e 0202100111 (Sanger por amplicon, até 500 pb) são APAC secundário com compatibilidades de doenças raras; não equivalem a NGS e não têm faturamento oncológico demonstrado. NGS de painel não tem código. HER2 (0202100049) e FISH (0202100090) existem, mas a via de faturamento por indicação deve ser confirmada."
     },
     {
       "tumor": "pulmao (CPNPC)",
@@ -92,11 +90,9 @@
       "ressalva": "Recomendação × disponibilidade SUS × requisito do protocolo = campos distintos.",
       "catalogoIds": [
         "ANATOMOPATOLOGICO",
-        "IMUNOHISTOQUIMICA",
-        "MOLECULAR_PCR_MUTACAO",
-        "SEQUENCIAMENTO_AMPLICON"
+        "IMUNOHISTOQUIMICA"
       ],
-      "molecularSemCodigoSUS": "Molecular no SIGTAP 09/2026: MOLECULAR_PCR_MUTACAO (0202100081, PCR/qPCR de mutação ou rearranjo), SEQUENCIAMENTO_AMPLICON (0202100111), FISH (0202100090), HER2_QUANTIFICACAO (0202100049). A elegibilidade de faturamento por indicação deve ser confirmada; NGS de painel amplo não tem código próprio."
+      "molecularSemCodigoSUS": "Codex 2026-10-11 (auditoria): no SIGTAP 09/2026, 0202100081 (PCR/qPCR) e 0202100111 (Sanger por amplicon, até 500 pb) são APAC secundário com compatibilidades de doenças raras; não equivalem a NGS e não têm faturamento oncológico demonstrado. NGS de painel não tem código. HER2 (0202100049) e FISH (0202100090) existem, mas a via de faturamento por indicação deve ser confirmada."
     },
     {
       "tumor": "gastrico",
@@ -116,7 +112,7 @@
         "ANATOMOPATOLOGICO",
         "IMUNOHISTOQUIMICA"
       ],
-      "molecularSemCodigoSUS": "Molecular no SIGTAP 09/2026: MOLECULAR_PCR_MUTACAO (0202100081, PCR/qPCR de mutação ou rearranjo), SEQUENCIAMENTO_AMPLICON (0202100111), FISH (0202100090), HER2_QUANTIFICACAO (0202100049). A elegibilidade de faturamento por indicação deve ser confirmada; NGS de painel amplo não tem código próprio."
+      "molecularSemCodigoSUS": "Codex 2026-10-11 (auditoria): no SIGTAP 09/2026, 0202100081 (PCR/qPCR) e 0202100111 (Sanger por amplicon, até 500 pb) são APAC secundário com compatibilidades de doenças raras; não equivalem a NGS e não têm faturamento oncológico demonstrado. NGS de painel não tem código. HER2 (0202100049) e FISH (0202100090) existem, mas a via de faturamento por indicação deve ser confirmada."
     },
     {
       "tumor": "prostata",
@@ -136,7 +132,7 @@
         "ANATOMOPATOLOGICO",
         "IMUNOHISTOQUIMICA"
       ],
-      "molecularSemCodigoSUS": "Molecular no SIGTAP 09/2026: MOLECULAR_PCR_MUTACAO (0202100081, PCR/qPCR de mutação ou rearranjo), SEQUENCIAMENTO_AMPLICON (0202100111), FISH (0202100090), HER2_QUANTIFICACAO (0202100049). A elegibilidade de faturamento por indicação deve ser confirmada; NGS de painel amplo não tem código próprio."
+      "molecularSemCodigoSUS": "Codex 2026-10-11 (auditoria): no SIGTAP 09/2026, 0202100081 (PCR/qPCR) e 0202100111 (Sanger por amplicon, até 500 pb) são APAC secundário com compatibilidades de doenças raras; não equivalem a NGS e não têm faturamento oncológico demonstrado. NGS de painel não tem código. HER2 (0202100049) e FISH (0202100090) existem, mas a via de faturamento por indicação deve ser confirmada."
     }
   ],
   "proibicoes": [

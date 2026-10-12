@@ -838,13 +838,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050202",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050202 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-epit-carbo-pacli-adjuvante",
@@ -884,13 +891,20 @@
         "ajusteObrigatorio": "3-6 ciclos antes da cirurgia; imagem após o ciclo 3; total 6-8 ciclos com a fase pós-operatória.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040142",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040142 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA - 1ª LINHA",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-epit-carbo-pacli-neoadjuvante",
@@ -930,13 +944,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050202",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050202 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-epit-carbo-docetaxel-adjuvante",
@@ -976,13 +997,14 @@
         "ajusteObrigatorio": "Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de bevacizumabe (ovário) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304050202 — decisão do serviço. Alternativa SUS: carboplatina + paclitaxel sem bevacizumabe.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para bevacizumabe (ovário) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "ovario-epit-carbo-pacli-bev15-adjuvante",
@@ -1030,13 +1052,14 @@
         "ajusteObrigatorio": "Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente. Ver conflito com SBOC 2025 v10.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de bevacizumabe (ovário) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304040142 — decisão do serviço. Alternativa SUS: carboplatina + paclitaxel neoadjuvante sem bevacizumabe.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para bevacizumabe (ovário) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "ovario-epit-carbo-pacli-dd-bev7-5-neoadjuvante",
@@ -1084,13 +1107,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050202",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050202 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DA TUBA UTERINA",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-epit-carbo-pacli-semanal-fragil",
@@ -1130,13 +1160,14 @@
         "ajusteObrigatorio": "Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente. Se QT foi dose-densa com 7,5 mg/kg, manter 7,5 mg/kg.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de bevacizumabe (ovário) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Não citado no relatório preliminar do PCDT de ovário (CP 84/2026).",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para bevacizumabe (ovário) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "ovario-epit-bev15-manutencao",
@@ -1206,13 +1237,14 @@
         "ajusteObrigatorio": "Hemograma mensal (mielotoxicidade; risco de SMD/LMA). Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de olaparibe + bevacizumabe nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Olaparibe incorporado só em monoterapia, 1ª linha BRCAm (Portaria SECTICS/MS nº 45/2024).",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "Olaparibe incorporado só em monoterapia BRCAm (Portaria SECTICS 45/2024); combinação com bevacizumabe e HRD não verificados",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para olaparibe + bevacizumabe nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "ovario-epit-olaparibe-bev-manutencao-1l",
@@ -1252,13 +1284,14 @@
         "ajusteObrigatorio": "Hemograma mensal (mielotoxicidade; risco de SMD/LMA). PA (niraparibe).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Avaliado só no subgrupo BRCAm; população HRD/BRCA selvagem não avaliada. Alternativa SUS para BRCAm: olaparibe (Portaria SECTICS/MS nº 45/2024).",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "Niraparibe: Relatório CONITEC 953/2024 sem decisão final localizada",
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 5, de 31/01/2025; Relatório nº 953 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-5-de-31-de-janeiro-de-2025-610286696",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "Torna pública a decisão de não incorporar, no âmbito do Sistema Único de Saúde",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-epit-niraparibe-manutencao-1l",
@@ -1290,13 +1323,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020281",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA)"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020281 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA). Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-epit-carbo-pacli-recidiva-ps",
@@ -1336,13 +1376,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020281",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA)"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020281 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA). Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-epit-carbo-dlp-recidiva-ps",
@@ -1382,13 +1429,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020281",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA)"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020281 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA). Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-epit-carbo-gem-recidiva-ps",
@@ -1428,13 +1482,14 @@
         "ajusteObrigatorio": "Hemograma mensal (mielotoxicidade; risco de SMD/LMA).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de olaparibe (manutenção na recidiva) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020281 — decisão do serviço.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "Incorporação SUS (2024) restrita à 1ª linha BRCAm",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para olaparibe (manutenção na recidiva) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "ovario-epit-olaparibe-manutencao-recidiva",
@@ -1466,13 +1521,20 @@
         "ajusteObrigatorio": "Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304020281",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA)"
+            }
+          ],
+          "observacao": "Quimioterápico via APAC; bevacizumabe (opcional no protocolo) sem incorporação para ovário. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020281 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA). Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª",
+            "estado": "INFERIDO"
           }
         },
         "id": "ovario-epit-dlp-pr",
@@ -1512,13 +1574,20 @@
         "ajusteObrigatorio": "Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304020281",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA)"
+            }
+          ],
+          "observacao": "Quimioterápico via APAC; bevacizumabe (opcional no protocolo) sem incorporação para ovário. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020281 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA). Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª",
+            "estado": "INFERIDO"
           }
         },
         "id": "ovario-epit-paclitaxel-semanal-pr",
@@ -1558,13 +1627,20 @@
         "ajusteObrigatorio": "Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304020281",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA)"
+            }
+          ],
+          "observacao": "Quimioterápico via APAC; bevacizumabe (opcional no protocolo) sem incorporação para ovário. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020281 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA). Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª",
+            "estado": "INFERIDO"
           }
         },
         "id": "ovario-epit-topotecano-pr",
@@ -1604,13 +1680,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020281",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA)"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020281 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA). Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-epit-gencitabina-pr",
@@ -1642,13 +1725,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020281",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA)"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020281 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA). Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-epit-vinorelbina-pr",
@@ -1680,13 +1770,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020281",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA)"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020281 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA). Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-epit-ciclofosfamida-oral-pr",
@@ -1718,13 +1815,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020281",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA)"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020281 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA). Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-epit-etoposideo-oral-pr",
@@ -1756,13 +1860,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020281",
+              "nome": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA)"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020281 QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª LINHA). Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE NEOPLASIA MALIGNA EPITELIAL DE OVÁRIO OU DE TUBA UTERINA AVANÇADA - 2ª",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-epit-tamoxifeno-pr",
@@ -1794,13 +1905,14 @@
         "ajusteObrigatorio": "Vigiar pneumonite/DPI.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de trastuzumabe deruxtecana (ovário) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020281 — decisão do serviço.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para trastuzumabe deruxtecana (ovário) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "ovario-epit-tdxd-her2",
@@ -1832,13 +1944,14 @@
         "ajusteObrigatorio": "Toxicidade ocular: avaliação oftalmológica e colírios conforme bula.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de mirvetuximabe soravtansina nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020281 — decisão do serviço.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para mirvetuximabe soravtansina nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "ovario-epit-mirvetuximabe-fra",
@@ -1870,13 +1983,14 @@
         "ajusteObrigatorio": "TSH/T4L e função hepática (irAE). Bevacizumabe: PA, proteinúria; evitar com obstrução/perfuração intestinal ou cirurgia recente.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (ovário) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020281 — decisão do serviço.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (ovário) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "ovario-epit-pembro-pacli-pr",
@@ -1924,18 +2038,25 @@
         "ajusteObrigatorio": "3 ciclos se ressecado; 4 se doença residual macroscópica. Função pulmonar antes da bleomicina; função renal/magnésio.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060160",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060160 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO",
+            "estado": "VERIFICADO"
           }
         },
-        "id": "ovario-germ-bep",
+        "id": "ovario-germ-bep-adjuvante",
         "nome": "GERMINATIVO — BEP",
-        "cenario": "GERMINATIVO adjuvante (estádio inicial indicado) e avançado 1ª linha",
+        "cenario": "GERMINATIVO adjuvante (estádio inicial indicado)",
         "linha": "adjuvante / 1ª linha",
         "drogas": [
           {
@@ -1970,7 +2091,72 @@
           "pagina": 10,
           "trecho": "Bleomicina 30U EV D1, D8 e D15",
           "estado": "VERIFICADO"
-        }
+        },
+        "derivadoDe": "ovario-germ-bep",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "numeroCiclos": 3,
+        "premedicacao": "",
+        "ajusteObrigatorio": "3 ciclos se ressecado; 4 se doença residual macroscópica. Função pulmonar antes da bleomicina; função renal/magnésio.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060160",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060160 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "ovario-germ-bep-avancado",
+        "nome": "GERMINATIVO — BEP",
+        "cenario": "GERMINATIVO avançado 1ª linha",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Bleomicina",
+            "dose": 30,
+            "unidade": "UI",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": "SBOC grafa 30U; omitir se >40 anos; pode omitir no 4º ciclo"
+          },
+          {
+            "droga": "Etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Bleomicina 30U EV D1, D8 e D15",
+          "estado": "VERIFICADO"
+        },
+        "derivadoDe": "ovario-germ-bep",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
       },
       {
         "numeroCiclos": null,
@@ -1978,19 +2164,26 @@
         "ajusteObrigatorio": "Função renal; encefalopatia por ifosfamida.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060160",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060160 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO",
+            "estado": "VERIFICADO"
           }
         },
-        "id": "ovario-germ-veip",
+        "id": "ovario-germ-veip-1l-residual",
         "nome": "GERMINATIVO — VeIP",
-        "cenario": "GERMINATIVO 1ª linha com doença residual (alternativa ao BEP 4) e 2ª linha",
-        "linha": "1ª linha / 2ª linha",
+        "cenario": "GERMINATIVO 1ª linha com doença residual (alternativa ao BEP ×4)",
+        "linha": "1ª linha",
         "drogas": [
           {
             "droga": "Vimblastina",
@@ -2032,7 +2225,80 @@
           "pagina": 10,
           "trecho": "Vimblastina 0,1 mg/kg EV D1 e",
           "estado": "VERIFICADO"
-        }
+        },
+        "derivadoDe": "ovario-germ-veip",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal; encefalopatia por ifosfamida.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060160",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060160 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "ovario-germ-veip-2l",
+        "nome": "GERMINATIVO — VeIP",
+        "cenario": "GERMINATIVO 2ª linha",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Vimblastina",
+            "dose": 0.1,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 e D2",
+            "observacao": "dose máxima 18,5 mg/m2"
+          },
+          {
+            "droga": "Ifosfamida",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          },
+          {
+            "droga": "Mesna",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Vimblastina 0,1 mg/kg EV D1 e",
+          "estado": "VERIFICADO"
+        },
+        "derivadoDe": "ovario-germ-veip",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
       },
       {
         "numeroCiclos": 3,
@@ -2040,13 +2306,20 @@
         "ajusteObrigatorio": "3 a 4 ciclos; G-CSF obrigatório.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060160",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060160 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-germ-tip",
@@ -2110,13 +2383,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060160",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060160 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-germ-carbo-etoposideo",
@@ -2156,13 +2436,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060160",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060160 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-germ-gem-pacli",
@@ -2202,13 +2489,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060160",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060160 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO",
+            "estado": "VERIFICADO"
           }
         },
         "id": "ovario-germ-gemox",
@@ -2241,6 +2535,112 @@
           "trecho": "Oxaliplatina 130 mg/m² EV D1",
           "estado": "VERIFICADO"
         }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Número de ciclos não informado pela SBOC. Função pulmonar (bleomicina).",
+        "fichaId": null,
+        "id": "ovario-germ-bec",
+        "nome": "GERMINATIVO — Bleomicina + etoposídeo + carboplatina (BEC)",
+        "cenario": "GERMINATIVO (esquema listado pela SBOC; indicação no fluxograma não especificada — usar em discussão)",
+        "linha": "não especificada",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 300,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "dose em mg/m2 (não AUC)"
+          },
+          {
+            "droga": "Etoposídeo",
+            "dose": 120,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D3",
+            "observacao": ""
+          },
+          {
+            "droga": "Bleomicina",
+            "dose": 10,
+            "unidade": "UI",
+            "via": "EV",
+            "dias": "D2, D9 e D16",
+            "observacao": "SBOC grafa '10U'"
+          }
+        ],
+        "cicloDias": 21,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060160",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060160 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE OVÁRIO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-germinativo-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Carboplatina 300 mg/m² EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 1,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Somente em centro com experiência em HIPEC; hidratação e nefroproteção conforme protocolo institucional.",
+        "fichaId": null,
+        "id": "ovario-epit-hipec-cisplatina-intervalo",
+        "nome": "HIPEC com cisplatina na citorredução de intervalo (OVHIPEC-1)",
+        "cenario": "EPITELIAL III após QT neoadjuvante, na citorredução de intervalo",
+        "linha": "intraoperatório (dose única)",
+        "drogas": [
+          {
+            "droga": "Cisplatina (HIPEC)",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "intraperitoneal",
+            "dias": "dose única ao final da citorredução",
+            "observacao": "Via intraperitoneal hipertérmica (fora do enum de via do esquema v2). Temperatura, duração e tiossulfato não constam do registro."
+          }
+        ],
+        "cicloDias": null,
+        "sus": {
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304080063",
+              "nome": "QUIMIOTERAPIA INTRACAVITARIA"
+            }
+          ],
+          "observacao": "Procedimento de quimioterapia intracavitária com CID C786 (peritônio secundário) compatível; HIPEC não tem procedimento próprio. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304080063 QUIMIOTERAPIA INTRACAVITARIA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA INTRACAVITARIA",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00426257",
+          "pagina": null,
+          "trecho": "hyperthermic perfusion of the abdominal cavity with cisplatin 100 mg/m2",
+          "estado": "VERIFICADO"
+        }
       }
     ],
     "radioterapia": [
@@ -2249,7 +2649,13 @@
         "doseTotalGy": null,
         "fracoes": null,
         "concomitante": "",
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ]
+        },
         "observacao": "Impacto negativo na fertilidade; dose não especificada.",
         "fonte": {
           "tipo": "SBOC",
@@ -2324,7 +2730,7 @@
         "seAlvo": "HRD (BRCAwt)",
         "opcao": "EPITELIAL: olaparibe + bevacizumabe ou niraparibe",
         "evidencia": "NE alto/FR forte",
-        "sus": "nao verificado",
+        "sus": "nao — niraparibe não incorporado (Portaria SECTICS/MS nº 5/2025, avaliado só BRCAm); olaparibe + bevacizumabe sem avaliação",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
@@ -2337,7 +2743,7 @@
         "seAlvo": "HRP",
         "opcao": "EPITELIAL: bevacizumabe ou niraparibe",
         "evidencia": "NE alto/FR forte",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — bevacizumabe sem avaliação CONITEC para ovário (INFERIDO); alternativa SUS: carboplatina + paclitaxel",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
@@ -2350,7 +2756,7 @@
         "seAlvo": "FRα alto",
         "opcao": "EPITELIAL platino-resistente: mirvetuximabe",
         "evidencia": "NE alto/FR forte",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — mirvetuximabe sem avaliação CONITEC (INFERIDO)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
@@ -2363,7 +2769,7 @@
         "seAlvo": "HER2 3+",
         "opcao": "EPITELIAL: T-DXd",
         "evidencia": "NE moderado/FR forte",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — T-DXd sem avaliação CONITEC (INFERIDO)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
@@ -2376,7 +2782,7 @@
         "seAlvo": "PD-L1 CPS ≥1",
         "opcao": "EPITELIAL platino-resistente: pembrolizumabe + paclitaxel ± bevacizumabe",
         "evidencia": "NE alto/FR forte",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — pembrolizumabe sem avaliação CONITEC para ovário (INFERIDO)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Ovario-epitelial-v3-VERSAO-PARA-COLABORACAO.pdf",
@@ -2769,15 +3175,60 @@
     ]
   },
   "pendencias": [
-    "GERMINATIVO VAC: SBOC p.10 grafa dactinomicina 300 mg/m² D1-D5 (provável erro de unidade) — protocolo NÃO criado; confirmar dose em bula/literatura antes de uso.",
-    "GERMINATIVO EP (disgerminoma selecionado, 3 ciclos): doses não especificadas na SBOC — SEM_FONTE.",
-    "GERMINATIVO BEC (carboplatina 300 mg/m² + etoposídeo + bleomicina 10U): listado sem indicação no fluxograma — não criado.",
-    "HIPEC: droga/dose não especificadas — SEM_FONTE.",
-    "Mucinoso: oxaliplatina + fluoropirimidina citada sem dose — SEM_FONTE.",
-    "Terapia endócrina de manutenção no seroso de baixo grau/endometrioide G1: sem dose (IA preferencial).",
-    "Inibina B sem código no catálogo (SEM_ID_NO_CATALOGO); testes BRCA/HRD/FRα idem.",
-    "SUS: niraparibe (Relatório 953/2024) sem decisão final localizada; bevacizumabe ovário não verificado; PCDT ovário em consulta pública (CP 84/2026).",
-    "SBOC 2026 epitelial v3 e germinativo v4 são versões para colaboração."
+    {
+      "texto": "GERMINATIVO VAC: SBOC p.10 grafa dactinomicina 300 mg/m² D1-D5 (provável erro de unidade) — protocolo NÃO criado; confirmar dose em bula/literatura antes de uso.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026 Ovario germinativo p.10: 'Dactinomicina 300 mg/m² EV D1 a D5' (erro de unidade provavel); nao ha outra versao SBOC germinativo no INDICE",
+        "PRO aula 24 p.21: cita VAC sem dose",
+        "rotulo FDA dactinomicina: sem indicacao ovario germinativo (doses de testiculo/GTN/Wilms nao transferidas)"
+      ],
+      "observacao": "Provavel intencao 300 mcg/m2 (0,3 mg/m2) D1-5 q4s, mas sem fonte literal. Vincristina 1,5 mg/m2 (max 2 mg) semanal x8-12 sem e ciclofosfamida 150 mg/m2 D1-5 q4s estao na mesma tabela SBOC p.10."
+    },
+    {
+      "texto": "GERMINATIVO EP (disgerminoma selecionado, 3 ciclos): doses não especificadas na SBOC — SEM_FONTE.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026 germinativo p.14: 'Esquema EP 3 ciclos' sem tabela propria",
+        "SBOC p.10: tabela BEP (etoposideo 100 mg/m2 D1-5 + cisplatina 20 mg/m2 D1-5 q21) - regime diferente, nao transferido",
+        "PRO aula 24 p.20: doses do BEP; p.12 'EP se >40 anos' sem dose propria"
+      ],
+      "observacao": "Candidato para aprovacao: mesmas doses de E e P da tabela BEP (SBOC p.10), 3 ciclos q21."
+    },
+    {
+      "texto": "Mucinoso: oxaliplatina + fluoropirimidina citada sem dose — SEM_FONTE.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026/2025/antiga epitelial p.15: 'oxaliplatina associado a fluoropirimidinas, aos moldes de tratamento de tumores gastrointestinais' sem dose",
+        "PRO aula 24 p.7-8: sem dose",
+        "rotulos FDA oxaliplatina/capecitabina: so colorretal - transferencia proibida"
+      ],
+      "observacao": "SBOC remete a esquemas GI (CAPOX/FOLFOX); usar dose GI exige aprovacao explicita."
+    },
+    {
+      "texto": "Terapia endócrina de manutenção no seroso de baixo grau/endometrioide G1: sem dose (IA preferencial).",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC 2026/2025/antiga epitelial p.13: '*Tamoxifeno, anastrozol, fulvestranto' sem dose",
+        "SBOC 2026 epitelial (platino-resistente): Tamoxifeno 20 mg/dia - cenario diferente, nao transferido",
+        "PRO aula 24 p.5: 'Terapia endocrina de manutencao apos QT adjuvante' sem dose",
+        "rotulo FDA letrozol: so mama"
+      ]
+    },
+    {
+      "texto": "Inibina B sem código no catálogo (SEM_ID_NO_CATALOGO); testes BRCA/HRD/FRα idem.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json v1.1 (164 ids): sem inibina B, BRCA/HRD, FRα"
+      ]
+    },
+    {
+      "texto": "SBOC 2026 epitelial v3 e germinativo v4 são versões para colaboração.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "acervo local SBOC: só versões para colaboração 2026 (epitelial v3, germinativo v4); epitelial 2025 v10 FINAL também lida"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -2796,7 +3247,8 @@
         "trecho": "favorecer o regime de paclitaxel em dose densa) NE AL TO/FR FORTE",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Seguir a edição mais recente (SBOC 2026 v3, ICON8B: dose-densa + bevacizumabe 7,5 mg/kg na neoadjuvância), mantendo q21 como esquema-padrão; v3 ainda é versão para colaboração."
+      "escolhaSeguranca": "Seguir a edição mais recente (SBOC 2026 v3, ICON8B: dose-densa + bevacizumabe 7,5 mg/kg na neoadjuvância), mantendo q21 como esquema-padrão; v3 ainda é versão para colaboração.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Dose de bevacizumabe (7,5 × 15 mg/kg)",
@@ -2814,7 +3266,8 @@
         "trecho": "Carboplatina AUC 5-6 + Paclitaxel 175 mg/m² + Bevacizumabe 15",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Dose vinculada ao regime: 7,5 mg/kg com paclitaxel semanal; 15 mg/kg com paclitaxel q21. Não trocar entre regimes."
+      "escolhaSeguranca": "Dose vinculada ao regime: 7,5 mg/kg com paclitaxel semanal; 15 mg/kg com paclitaxel q21. Não trocar entre regimes.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Dactinomicina no VAC (germinativo)",
@@ -2832,7 +3285,8 @@
         "trecho": null,
         "estado": "CONFLITANTE"
       },
-      "escolhaSeguranca": "Não registrar dose; protocolo VAC fora do pack até verificação em bula."
+      "escolhaSeguranca": "Não registrar dose; protocolo VAC fora do pack até verificação em bula.",
+      "decisaoNecessaria": true
     }
   ],
   "curadoria": {
@@ -2844,8 +3298,44 @@
       "SBOC 2026 Ovário germinativo v4 (págs. 3-17)",
       "Onco PRO 2026 Aulas 22-24 (consulta de apoio)",
       "ClinicalTrials.gov API v2",
-      "CONITEC via busca web (Portaria SECTICS 45/2024)"
+      "CONITEC via busca web (Portaria SECTICS 45/2024)",
+      "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
+      "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "rodada2": {
+      "data": "2026-10-11",
+      "redator": "Claude (Opus 5.5) — redução de pendências e conflitos; aprovação clínica pendente",
+      "pendenciasResolvidas": [
+        {
+          "texto": "GERMINATIVO BEC (carboplatina 300 mg/m² + etoposídeo + bleomicina 10U): listado sem indicação no fluxograma — não criado.",
+          "resolucao": "Protocolo ovario-germ-bec criado com doses da SBOC 2026 p.11 (q21); nº de ciclos e indicação seguem não informados pela SBOC."
+        },
+        {
+          "texto": "HIPEC: droga/dose não especificadas — SEM_FONTE.",
+          "resolucao": "Cisplatina 100 mg/m² intraperitoneal hipertérmica (OVHIPEC-1, NCT00426257) — protocolo ovario-epit-hipec-cisplatina-intervalo."
+        },
+        {
+          "texto": "SUS: niraparibe (Relatório 953/2024) sem decisão final localizada; bevacizumabe ovário não verificado; PCDT ovário em consulta pública (CP 84/2026).",
+          "resolucao": "Niraparibe 1ª linha BRCAm: não incorporado (Portaria SECTICS/MS nº 5/2025). Bevacizumabe: sem avaliação CONITEC. PCDT de ovário em CP 84/2026 (sem bevacizumabe no relatório preliminar)."
+        }
+      ],
+      "correcoes": []
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): cenários misturados no mesmo protocolo",
+      "acao": "ovario-germ-bep dividido em ovario-germ-bep-adjuvante, ovario-germ-bep-avancado"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): cenários misturados no mesmo protocolo",
+      "acao": "ovario-germ-veip dividido em ovario-germ-veip-1l-residual, ovario-germ-veip-2l"
+    }
+  ]
 }

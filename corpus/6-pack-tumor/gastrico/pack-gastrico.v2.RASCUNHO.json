@@ -129,7 +129,7 @@
         "pendencia": "SEM_ID_NO_CATALOGO"
       },
       {
-        "catalogoId": null,
+        "catalogoId": "VIDEOLAPAROSCOPIA",
         "rotulo": "Videolaparoscopia com citologia de lavado peritoneal",
         "indicacao": "condicional",
         "quando": "N+, cT3/T4 e M0",
@@ -140,7 +140,7 @@
           "trecho": "Videolaparoscopia com citologia de lavado peritoneal: se N+, cT3/T4 e M0.",
           "estado": "VERIFICADO"
         },
-        "pendencia": "SEM_ID_NO_CATALOGO"
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
       }
     ],
     "patologico": {
@@ -272,8 +272,8 @@
         {
           "alvo": "NTRK (fusão)",
           "metodo": "outro",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "opcional; quando larotrectinibe acessível",
           "consequencia": "larotrectinibe",
@@ -285,8 +285,8 @@
             "trecho": "quando larotrectinibe está acessível aos pacientes com fusão de NTRK",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "FISH",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "DPYD (deficiência de DPD)",
@@ -644,27 +644,26 @@
             "unidade": "mg",
             "via": "EV",
             "dias": "D1",
-            "observacao": "a cada 4 semanas; depois 10 ciclos de manutenção"
+            "observacao": "a cada 4 semanas; depois 10 ciclos de manutenção",
+            "intervaloDias": 28
           }
         ],
         "cicloDias": 14,
-        "numeroCiclos": null,
+        "numeroCiclos": 8,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "FLOT perioperatório (procedimentos 0304040177/0304050253)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "FLOT perioperatório (procedimentos 0304040177/0304050253)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -673,7 +672,7 @@
           "trecho": "Docetaxel 50 mg/m² EV D1 + Oxaliplatina 85 mg/m² EV D1 +",
           "estado": "VERIFICADO"
         },
-        "numeroCiclosNota": "SBOC estômago: '2 ciclos pré- e 2 ciclos pós-cirurgia' (ciclos de 28 dias do durvalumabe); SBOC esôfago: FLOT 4 pré + 4 pós — ver conflitos",
+        "numeroCiclosNota": "8 ciclos de FLOT a cada 14 dias (4 pré + 4 pós) = 2 + 2 ciclos de durvalumabe a cada 4 semanas; depois durvalumabe 1.500 mg a cada 4 semanas por 10 ciclos. Leituras '2+2' (estômago) e '4+4' (esôfago) são equivalentes.",
         "fonteCalendario": {
           "tipo": "SBOC",
           "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
@@ -681,8 +680,21 @@
           "trecho": "2 ciclos pré- e 2 ciclos pós-cirurgia, seguido por durvalumabe a cada 4 semanas",
           "estado": "VERIFICADO"
         },
-        "pendencia": "CONFLITANTE",
-        "doseVerificada": true
+        "doseVerificada": true,
+        "fonteCiclosBula": {
+          "tipo": "BULA",
+          "referencia": "Rótulo FDA IMFINZI (durvalumab) (openFDA/DailyMed set_id 8baba4ea-2855-42fa-9bd9-5a7548d4cec3), seção 2 (GC/GEJC ressecável), acesso 2026-10-11; bula ANVISA não consultada",
+          "pagina": null,
+          "trecho": "in combination with FLOT chemotherapy every 4 weeks for up to 2 cycles",
+          "estado": "VERIFICADO"
+        },
+        "fases": [
+          "pré-operatória",
+          "pós-operatória",
+          "manutenção com durvalumabe"
+        ],
+        "calendarioExecutavel": false,
+        "motivoCalendario": "FLOT q14 + durvalumabe q28: calendário por componente; não usar repetidor uniforme"
       },
       {
         "id": "gastrico-perioperatorio-flot",
@@ -765,11 +777,11 @@
         "drogas": [
           {
             "droga": "Cisplatina",
-            "dose": null,
+            "dose": 75,
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1",
-            "observacao": "fonte dá faixa 75–100 mg/m²"
+            "observacao": "faixa na fonte 75–100 mg/m² (SBOC p.7); registrado o limite inferior — médico escolhe na faixa"
           },
           {
             "droga": "5-FU infusão contínua",
@@ -804,7 +816,7 @@
           "trecho": "Cisplatina 75-100 mg/m² EV D1 + 5-FU 800 mg/m²/dia EV D1 a D5",
           "estado": "VERIFICADO"
         },
-        "pendencia": "FAIXA_NA_FONTE",
+        "pendencia": "FAIXA_NA_FONTE: limite inferior registrado (DECISAO_CLINICA_DR_SILAS)",
         "calendario": "2–3 ciclos pré e 3–4 pós (total 6)",
         "doseVerificada": false
       },
@@ -1066,7 +1078,7 @@
             "observacao": "dose por dia"
           }
         ],
-        "cicloDias": null,
+        "cicloDias": 14,
         "numeroCiclos": 9,
         "premedicacao": "",
         "ajusteObrigatorio": "",
@@ -1090,9 +1102,14 @@
           "trecho": "Leucovorin 100 mg/m² EV D1 e D2 + 5-FU 400 mg/m² EV",
           "estado": "VERIFICADO"
         },
-        "pendencia": "SEM_FONTE",
-        "notaCiclo": "SBOC informa 9 ciclos sem intervalo entre ciclos; cicloDias nulo",
-        "doseVerificada": false
+        "doseVerificada": true,
+        "fonteCiclo": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT01640782 (ITACA-S) — https://clinicaltrials.gov/api/v2/studies/NCT01640782, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "22h continuous infusion on days 1 and 2, every 2 weeks for 9 administrations",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "gastrico-adjuvante-macdonald",
@@ -1564,18 +1581,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "FOLFOX (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Portaria SECTICS/MS nº 30, de 01/05/2025 (DOU nº 84, 07/05/2025), Relatório CONITEC nº 999 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-30-de-1o-de-maio-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o nivolumabe para o tratamento de adultos com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado. Alternativa SUS: mesma QT sem nivolumabe (APAC 0304020044).",
+          "alternativaSUS": "FOLFOX (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1623,18 +1638,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "CAPOX (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Portaria SECTICS/MS nº 30, de 01/05/2025 (DOU nº 84, 07/05/2025), Relatório CONITEC nº 999 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-30-de-1o-de-maio-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o nivolumabe para o tratamento de adultos com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado. Alternativa SUS: mesma QT sem nivolumabe (APAC 0304020044).",
+          "alternativaSUS": "CAPOX (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1682,18 +1695,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "CAPOX (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "CAPOX (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1741,18 +1752,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "CAPOX (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "CAPOX (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2021,18 +2030,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "CAPOX (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "CAPOX (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2091,31 +2098,36 @@
           },
           {
             "droga": "Zolbetuximabe (a partir do ciclo 2)",
-            "dose": 600,
+            "dose": 400,
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1",
-            "observacao": ""
+            "observacao": "a cada 14 dias com FOLFOX (bula FDA); 600 mg/m² a cada 21 dias só com CAPOX",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA VYLOY (zolbetuximab-clzb) (openFDA/DailyMed set_id e7695a21-abb6-47ac-93f8-0ece5a9c4409), seção 2, acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "600 mg/m 2 every 3 weeks or 400 mg/m 2 every 2 weeks",
+              "estado": "VERIFICADO"
+            }
           }
         ],
-        "cicloDias": null,
+        "cicloDias": 14,
         "numeroCiclos": null,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "FOLFOX (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "FOLFOX (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2124,9 +2136,8 @@
           "trecho": "Folfox (como descrito acima) + Zolbetuximabe 800 mg/m² EV D1 (ciclo 1)",
           "estado": "CONFLITANTE"
         },
-        "pendencia": "CONFLITANTE",
-        "notaConflito": "SBOC p.8 indica 'A cada 21 dias' para FOLFOX + zolbetuximabe, mas FOLFOX é q14 — calendário a conferir",
-        "doseVerificada": false
+        "notaConflito": "Resolvido pela bula FDA VYLOY: com FOLFOX (q14), manutenção 400 mg/m² a cada 2 semanas.",
+        "doseVerificada": true
       },
       {
         "id": "gastrico-paliativo-1l-trastuzumabe-xp",
@@ -2173,18 +2184,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "capecitabina + cisplatina sem trastuzumabe (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Portaria SECTICS/MS nº 33, de 12/05/2025 (DOU nº 90, 15/05/2025), Relatório CONITEC nº 998 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-33-de-12-de-maio-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o trastuzumabe para o tratamento de adultos com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Incorporado para estômago/JEG HER2+ (1ª linha), com QT na APAC 0304020044.",
+          "alternativaSUS": "capecitabina + cisplatina sem trastuzumabe (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2247,18 +2256,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "CAPOX sem trastuzumabe (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Portaria SECTICS/MS nº 33, de 12/05/2025 (DOU nº 90, 15/05/2025), Relatório CONITEC nº 998 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-33-de-12-de-maio-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o trastuzumabe para o tratamento de adultos com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Incorporado para estômago/JEG HER2+ (1ª linha), com QT na APAC 0304020044.",
+          "alternativaSUS": "CAPOX sem trastuzumabe (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2330,18 +2337,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "FOLFOX sem trastuzumabe (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Portaria SECTICS/MS nº 33, de 12/05/2025 (DOU nº 90, 15/05/2025), Relatório CONITEC nº 998 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-33-de-12-de-maio-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o trastuzumabe para o tratamento de adultos com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Incorporado para estômago/JEG HER2+ (1ª linha), com QT na APAC 0304020044.",
+          "alternativaSUS": "FOLFOX sem trastuzumabe (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2405,18 +2410,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "CAPOX (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "parcial",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Portaria SECTICS/MS nº 33, de 12/05/2025 (DOU nº 90, 15/05/2025), Relatório CONITEC nº 998 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-33-de-12-de-maio-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o trastuzumabe para o tratamento de adultos com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Trastuzumabe + CAPOX incorporados; pembrolizumabe sem avaliação CONITEC no estômago (não fornecido).",
+          "alternativaSUS": "CAPOX (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2456,18 +2459,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "paclitaxel semanal (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Portaria SECTICS/MS nº 27, de 01/05/2025 (DOU nº 84), Relatório CONITEC nº 997 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-27-de-1o-de-maio-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o ramucirumabe para adultos diagnosticados com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado. Alternativa SUS: paclitaxel isolado (APAC 0304020044).",
+          "alternativaSUS": "paclitaxel semanal (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2540,18 +2541,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "paclitaxel, docetaxel ou irinotecano (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Portaria SECTICS/MS nº 27, de 01/05/2025 (DOU nº 84), Relatório CONITEC nº 997 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-27-de-1o-de-maio-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o ramucirumabe para adultos diagnosticados com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado. Alternativa SUS: paclitaxel isolado (APAC 0304020044).",
+          "alternativaSUS": "paclitaxel, docetaxel ou irinotecano (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2666,18 +2665,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "QT de 2ª linha (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT de 2ª linha (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2709,18 +2706,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "paclitaxel ± ramucirumabe/QT 2ª linha (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "paclitaxel ± ramucirumabe/QT 2ª linha (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2752,18 +2747,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "suporte clínico ou QT não usada (procedimento 0304020044)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "suporte clínico ou QT não usada (procedimento 0304020044)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2796,18 +2789,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "QT de linha subsequente",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Portaria SCTIE/MS nº 72/2021 (publ. 07/12/2021), Relatório CONITEC nº 679 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2021/20211207_portaria_72.pdf",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o larotrectinibe para o tratamento de adultos e crianças com tumores sólidos",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado para adultos. Só o subgrupo pediátrico foi incorporado (Portaria SECTICS/MS nº 71/2025).",
+          "alternativaSUS": "QT de linha subsequente"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -2824,8 +2815,7 @@
       {
         "cenario": "QT+RT adjuvante MacDonald (cirurgia subótima)",
         "doseTotalGy": 45,
-        "fracoes": null,
-        "pendencia": "SEM_FONTE (fracionamento)",
+        "fracoes": 25,
         "concomitante": "5-FU/leucovorin bolus (ciclos 2 e 3)",
         "fonte": {
           "tipo": "SBOC",
@@ -2833,13 +2823,19 @@
           "pagina": 10,
           "trecho": "4.500 cGy em 5 semanas",
           "estado": "VERIFICADO"
+        },
+        "fonteFracoes": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT00188266 — https://clinicaltrials.gov/api/v2/studies/NCT00188266, acesso 2026-10-11 — seção de descrição, referência ao estudo SWOG/INT-0116",
+          "pagina": null,
+          "trecho": "concurrent radiation (4500 cGy/25 fractions) versus surgery alone",
+          "estado": "VERIFICADO"
         }
       },
       {
         "cenario": "RT após FOLFOX/CapOx adjuvante (cirurgia subótima)",
-        "doseTotalGy": null,
-        "fracoes": null,
-        "pendencia": "SEM_FONTE",
+        "doseTotalGy": 45,
+        "fracoes": 25,
         "concomitante": "fluoropirimidina",
         "fonte": {
           "tipo": "SBOC",
@@ -2847,7 +2843,15 @@
           "pagina": 10,
           "trecho": "A cada 2 semanas, por 4 a 6 meses, seguido de RT com fluoropirimidina",
           "estado": "VERIFICADO"
-        }
+        },
+        "fonteDose": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT00407186 (CRITICS) — https://clinicaltrials.gov/api/v2/studies/NCT00407186, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "45 Gy in 25 fracions (5 days/week)",
+          "estado": "INFERIDO"
+        },
+        "observacao": "QT/RT pós-operatória gástrica após QT (CRITICS: capecitabina + cisplatina concomitantes); mesmo alvo/dose do INT-0116. Estado INFERIDO por diferença de cenário (CRITICS = após QT perioperatória)."
       }
     ],
     "cirurgia": [
@@ -3244,7 +3248,8 @@
       "UREIA",
       "VITAMINA_B12",
       "MOLECULAR_PCR_MUTACAO",
-      "FISH"
+      "FISH",
+      "VIDEOLAPAROSCOPIA"
     ],
     "interacoesConsultar": [
       {
@@ -3402,16 +3407,66 @@
     ]
   },
   "pendencias": [
-    "CONFLITANTE: número de ciclos de FLOT no FLOT + durvalumabe (estômago '2+2' × esôfago '4+4')",
-    "CONFLITANTE: FOLFOX + zolbetuximabe 'a cada 21 dias' (cicloDias nulo)",
-    "CONFLITANTE: FLOT paliativo com 5-FU bolus 400 mg/m² (só na tabela de doença avançada)",
-    "FAIXA_NA_FONTE: cisplatina 75–100 mg/m² no CF perioperatório",
-    "SEM_FONTE: intervalo entre ciclos do de Gramont adjuvante; fracionamento da RT adjuvante (45 Gy) e dose de RT após FOLFOX/CapOx",
-    "SEM_ID_NO_CATALOGO: ecoendoscopia, videolaparoscopia com citologia, NTRK, DPYD",
-    "SUS_INCORPORACAO_A_CONFIRMAR: nivolumabe, pembrolizumabe, tislelizumabe, durvalumabe, zolbetuximabe, trastuzumabe (gástrico), ramucirumabe, T-DXd, trifluridina/tipiracila, larotrectinibe",
-    "SEM_FONTE: emetogenicidade e risco de NF por esquema",
-    "Fichas do serviço divergentes da SBOC (FLOT 5-FU 2.400; mDCF institucional; irinotecano 180 q14)",
-    "Pembrolizumabe + QT e tislelizumabe + QT descritos com CAPOX como exemplo; a SBOC permite qualquer fluoropirimidina + platina"
+    {
+      "texto": "CONFLITANTE: FLOT paliativo com 5-FU bolus 400 mg/m² (só na tabela de doença avançada)",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026 estômago avançado p.8",
+        "SBOC 2025 v7",
+        "Onco PRO 2026 aula 05"
+      ]
+    },
+    {
+      "texto": "FAIXA_NA_FONTE: cisplatina 75–100 mg/m² no CF perioperatório",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026 estômago localizado p.7"
+      ],
+      "nota": "Registrado o limite inferior (75 mg/m²)."
+    },
+    {
+      "texto": "SEM_ID_NO_CATALOGO: ecoendoscopia, videolaparoscopia com citologia, NTRK, DPYD",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json (164 ids)"
+      ],
+      "nota": "Depende de ampliação do catálogo de exames."
+    },
+    {
+      "texto": "SUS_INCORPORACAO_A_CONFIRMAR: nivolumabe, pembrolizumabe, tislelizumabe, durvalumabe, zolbetuximabe, trastuzumabe (gástrico), ramucirumabe, T-DXd, trifluridina/tipiracila, larotrectinibe",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Planilha CONITEC 15/06/2026",
+        "Painel de Demandas CONITEC",
+        "busca gov.br/conitec",
+        "DOU (portarias citadas)"
+      ],
+      "nota": "sus.disponivel preenchido em todos os protocolos com portaria/relatório quando existe. Sem avaliação CONITEC (registrado 'nao', INFERIDO): perioperatorio-flot-durvalumabe, paliativo-1l-capox-pembrolizumabe, paliativo-1l-capox-tislelizumabe, paliativo-1l-capox-zolbetuximabe, paliativo-1l-folfox-zolbetuximabe, paliativo-2l-pembrolizumabe-msi, paliativo-2l-trastuzumabe-deruxtecana, paliativo-3l-trifluridina-tipiracila."
+    },
+    {
+      "texto": "SEM_FONTE: emetogenicidade e risco de NF por esquema",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC 2026 estômago",
+        "Onco PRO 2026 aulas 87-88"
+      ],
+      "nota": "Classificação por droga vem do módulo de suporte."
+    },
+    {
+      "texto": "Fichas do serviço divergentes da SBOC (FLOT 5-FU 2.400; mDCF institucional; irinotecano 180 q14)",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "corpus/fichas",
+        "SBOC 2026 estômago"
+      ]
+    },
+    {
+      "texto": "Pembrolizumabe + QT e tislelizumabe + QT descritos com CAPOX como exemplo; a SBOC permite qualquer fluoropirimidina + platina",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026 estômago avançado p.8-9"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -3430,7 +3485,16 @@
         "trecho": "FLOT a cada 2 semanas, 4 ciclos pré- e 4 ciclos pós-operatórios",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Interpretação: '2 ciclos' do capítulo de estômago = ciclos de 28 dias do durvalumabe (= 4 FLOT). Pack não fixa numeroCiclos; médico confirma. 2025 (v7 localizado) não tinha este esquema."
+      "escolhaSeguranca": "Interpretação: '2 ciclos' do capítulo de estômago = ciclos de 28 dias do durvalumabe (= 4 FLOT). Pack não fixa numeroCiclos; médico confirma. 2025 (v7 localizado) não tinha este esquema.",
+      "decisaoNecessaria": false,
+      "resolucao": "Bula FDA IMFINZI: 2 ciclos de durvalumabe (q4s) = 4 FLOT (q14) em cada fase; numeroCiclos = 8 FLOT.",
+      "fonteC": {
+        "tipo": "BULA",
+        "referencia": "Rótulo FDA IMFINZI (durvalumab) (openFDA/DailyMed set_id 8baba4ea-2855-42fa-9bd9-5a7548d4cec3), seção 2 (GC/GEJC ressecável), acesso 2026-10-11; bula ANVISA não consultada",
+        "pagina": null,
+        "trecho": "in combination with FLOT chemotherapy every 4 weeks for up to 2 cycles",
+        "estado": "VERIFICADO"
+      }
     },
     {
       "tema": "FOLFOX + zolbetuximabe — intervalo",
@@ -3448,7 +3512,16 @@
         "trecho": "(bomba de infusão contínua de 46h) D1 A cada 2 semanas",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "cicloDias = null para FOLFOX + zolbetuximabe; CAPOX + zolbetuximabe (q21) mantido."
+      "escolhaSeguranca": "cicloDias = null para FOLFOX + zolbetuximabe; CAPOX + zolbetuximabe (q21) mantido.",
+      "decisaoNecessaria": false,
+      "resolucao": "Bula FDA VYLOY: 400 mg/m² a cada 2 semanas com FOLFOX; cicloDias = 14.",
+      "fonteC": {
+        "tipo": "BULA",
+        "referencia": "Rótulo FDA VYLOY (zolbetuximab-clzb) (openFDA/DailyMed set_id e7695a21-abb6-47ac-93f8-0ece5a9c4409), seção 2, acesso 2026-10-11; bula ANVISA não consultada",
+        "pagina": null,
+        "trecho": "600 mg/m 2 every 3 weeks or 400 mg/m 2 every 2 weeks",
+        "estado": "VERIFICADO"
+      }
     },
     {
       "tema": "FLOT paliativo com 5-FU bolus",
@@ -3466,7 +3539,8 @@
         "trecho": "Ácido folínico 200 mg/m² EV D1 + 5-FU 2.600 mg/m² EV D1 em 24h",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Protocolo paliativo marcado CONFLITANTE (doseVerificada=false). O FLOT perioperatório não tem bolus; não transferir entre cenários — médico decide."
+      "escolhaSeguranca": "Protocolo paliativo marcado CONFLITANTE (doseVerificada=false). O FLOT perioperatório não tem bolus; não transferir entre cenários — médico decide.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "PD-L1 para pembrolizumabe (CPS > 1 × ≥ 1)",
@@ -3484,7 +3558,8 @@
         "trecho": "Pembrolizumabe + QT (HER2 negativo e PD-L1 ≥ 1)",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Usar CPS ≥ 1 (tabela e fluxograma), com preferência por CPS ≥ 5 conforme texto."
+      "escolhaSeguranca": "Usar CPS ≥ 1 (tabela e fluxograma), com preferência por CPS ≥ 5 conforme texto.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Ficha mDCF institucional × SBOC",
@@ -3502,7 +3577,8 @@
         "trecho": "Fluoruracila (5-FU) infusional 600 mg/m² d1-d2",
         "estado": "CONFLITANTE"
       },
-      "escolhaSeguranca": "Pack registra a SBOC (5-FU 400 bolus D1 + 1.000 mg/m²/dia D1–D2); ficha institucional preservada para decisão do Dr. Silas."
+      "escolhaSeguranca": "Pack registra a SBOC (5-FU 400 bolus D1 + 1.000 mg/m²/dia D1–D2); ficha institucional preservada para decisão do Dr. Silas.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Fichas FLOT e irinotecano × SBOC",
@@ -3520,7 +3596,8 @@
         "trecho": "Irinotecano 180 mg/m² d1 q14; FLOT 5-FU 2400 mg/m²",
         "estado": "CONFLITANTE"
       },
-      "escolhaSeguranca": "Pack registra doses SBOC; fichas não editadas."
+      "escolhaSeguranca": "Pack registra doses SBOC; fichas não editadas.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "SBOC 2025 × 2026 (doença avançada)",
@@ -3538,7 +3615,8 @@
         "trecho": "Tislelizumabe + QT (HER2 negativo e TAP ≥ 5)",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Doses idênticas entre 2025 v7 e 2026 v5; 2026 acrescenta tislelizumabe. Usada a 2026."
+      "escolhaSeguranca": "Doses idênticas entre 2025 v7 e 2026 v5; 2026 acrescenta tislelizumabe. Usada a 2026.",
+      "decisaoNecessaria": false
     }
   ],
   "curadoria": {
@@ -3553,6 +3631,50 @@
       "corpus/fichas/estomago-jeg/*",
       "gastrico.v1.RASCUNHO.json (substituído, não editado)"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "reducaoPendencias20261011": {
+      "data": "2026-10-11",
+      "resolvidas": [
+        {
+          "pendencia": "CONFLITANTE: número de ciclos de FLOT no FLOT + durvalumabe (estômago '2+2' × esôfago '4+4')",
+          "como": "Bula FDA IMFINZI: durvalumabe a cada 4 semanas por até 2 ciclos pré e 2 pós = 4 + 4 FLOT q14; numeroCiclos = 8."
+        },
+        {
+          "pendencia": "CONFLITANTE: FOLFOX + zolbetuximabe 'a cada 21 dias' (cicloDias nulo)",
+          "como": "Bula FDA VYLOY: com FOLFOX q14, manutenção 400 mg/m² a cada 2 semanas; cicloDias = 14 (ver correcoes)."
+        },
+        {
+          "pendencia": "SEM_FONTE: intervalo entre ciclos do de Gramont adjuvante; fracionamento da RT adjuvante (45 Gy) e dose de RT após FOLFOX/CapOx",
+          "como": "de Gramont q14 (ITACA-S, NCT01640782); RT 45 Gy/25 fr (INT-0116 citado em NCT00188266); RT após FOLFOX/CapOx 45 Gy/25 fr (CRITICS NCT00407186, INFERIDO)."
+        }
+      ]
+    }
+  },
+  "correcoes": [
+    {
+      "campo": "gastrico-paliativo-1l-folfox-zolbetuximabe.zolbetuximabe(manutenção)",
+      "antes": "600 mg/m2 (SBOC: a cada 21 dias)",
+      "depois": "400 mg/m2 a cada 14 dias",
+      "motivo": "FOLFOX é q14; a bula FDA VYLOY prevê 400 mg/m² a cada 2 semanas (ou 600 mg/m² a cada 3 semanas). A SBOC p.8 aplica 600 mg/m² 'a cada 21 dias' ao FOLFOX, calendário incompatível.",
+      "fonte": {
+        "tipo": "BULA",
+        "referencia": "Rótulo FDA VYLOY (zolbetuximab-clzb) (openFDA/DailyMed set_id e7695a21-abb6-47ac-93f8-0ece5a9c4409), seção 2, acesso 2026-10-11; bula ANVISA não consultada",
+        "pagina": null,
+        "trecho": "600 mg/m 2 every 3 weeks or 400 mg/m 2 every 2 weeks",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): A03 calendário FLOT/durvalumabe",
+      "acao": "intervaloDias 28 no durvalumabe; calendarioExecutavel false; fases explícitas"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "1 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
 }

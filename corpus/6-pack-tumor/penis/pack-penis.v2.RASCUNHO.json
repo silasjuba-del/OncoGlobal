@@ -654,10 +654,21 @@
         "ajusteObrigatorio": "ECOG PS 0–1 para QT (PS > 1: suporte paliativo exclusivo). Função renal antes de cada ciclo (CI-01); se ClCr < 50 mL/min usar carboplatina + paclitaxel. Audiometria se sintomas (cisplatina ototóxica, INAT-15).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "QT paliativa faturada por APAC de procedimento; código SIGTAP específico para pênis não conferido nesta curadoria.",
-          "fonte": null,
-          "pendencia": "SEM_FONTE"
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020370",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020370 QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO",
+            "estado": "VERIFICADO"
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -696,18 +707,44 @@
             "via": "EV",
             "dias": "D1-D3",
             "observacao": "SBOC p.13: \"Cisplatina 25 mg/m² D1 a D3\" — a via não está escrita na SBOC; via EV pela bula: \"Cisplatin is administered by slow intravenous infusion.\" (rótulo FDA)."
+          },
+          {
+            "droga": "mesna",
+            "dose": 240,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D3, em bolus na hora 0, 4 h e 8 h de cada dose de ifosfamida",
+            "observacao": "Regra da bula: 20% da dose de ifosfamida (p/p) por bolus, 60%/dia; ifosfamida 1.200 mg/m² → 240 mg/m² ×3/dia (derivação aritmética).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22mesna%22&limit=1 (MESNEX 2025-12-10, set_id 1dd69e84-616d-fb77-e063-6394a90af2f4)",
+              "pagina": null,
+              "trecho": "dosage equal to 20% of the ifosfamide dosage weight by weight (w/w)",
+              "estado": "INFERIDO"
+            }
           }
         ],
         "cicloDias": 21,
         "numeroCiclos": null,
-        "premedicacao": "Mesna com ifosfamida e hidratação ≥ 2 L/dia (bula FDA da ifosfamida); dose da mesna não consta na SBOC (pendência SEM_FONTE). Pré-medicação do paclitaxel conforme bula/protocolo institucional.",
+        "premedicacao": "Mesna com ifosfamida e hidratação ≥ 2 L/dia (bula FDA da ifosfamida); mesna 20% da ifosfamida ×3/dia (bula Mesnex/FDA). Pré-medicação do paclitaxel conforme bula/protocolo institucional.",
         "ajusteObrigatorio": "ECOG PS 0–1. Função renal (cisplatina CI-01; ifosfamida nefrotóxica — boxed warning FDA). Monitorar encefalopatia por ifosfamida e hemograma por ciclo.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "QT paliativa faturada por APAC de procedimento; código SIGTAP específico não conferido.",
-          "fonte": null,
-          "pendencia": "SEM_FONTE"
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020370",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020370 QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO",
+            "estado": "VERIFICADO"
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -770,10 +807,21 @@
         "ajusteObrigatorio": "ECOG PS 0–1. Toxicidade elevada na série neoadjuvante (52% não completaram 4 ciclos). Função renal (CI-01); docetaxel × inibidores fortes de CYP3A4 (INAT-18).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "QT paliativa faturada por APAC de procedimento; código SIGTAP específico não conferido.",
-          "fonte": null,
-          "pendencia": "SEM_FONTE"
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020370",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020370 QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO",
+            "estado": "VERIFICADO"
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -813,10 +861,21 @@
         "fichaId": "FICHA.prostata.carboplatina-paclitaxel-21-21-dias__nao-especificado@1.0.0",
         "observacao": "Ficha reutilizada porque as doses coincidem (paclitaxel 175 mg/m² + carboplatina AUC 5, 21 dias); a ficha está nomeada para próstata — conferir antes de liberar.",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "QT paliativa faturada por APAC de procedimento; código SIGTAP específico não conferido.",
-          "fonte": null,
-          "pendencia": "SEM_FONTE"
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020370",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020370 QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO",
+            "estado": "VERIFICADO"
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -834,21 +893,33 @@
         "drogas": [
           {
             "droga": "cisplatina",
-            "dose": null,
-            "unidade": null,
-            "via": null,
-            "dias": null,
-            "observacao": "SBOC p.14 cita o esquema sem dose; não transferir dose de outro tumor.",
-            "pendencia": "SEM_FONTE"
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D15 (1 h)",
+            "observacao": "Fase II NCT00210041 (CEC de pênis irressecável/metastático).",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00210041 (fase 2 gencitabina-cisplatina, CEC de pênis localmente avançado irressecável/metastático)",
+              "pagina": null,
+              "trecho": "Cisplatin 50 mg/m²/day 1 h IV infusion at Day 1 / Day 15",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "gemcitabina",
-            "dose": null,
-            "unidade": null,
-            "via": null,
-            "dias": null,
-            "observacao": "SBOC p.14 cita o esquema sem dose; não transferir dose de outro tumor.",
-            "pendencia": "SEM_FONTE"
+            "dose": 1250,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D15 (30 min)",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00210041 (fase 2 gencitabina-cisplatina, CEC de pênis localmente avançado irressecável/metastático)",
+              "pagina": null,
+              "trecho": "Gemzar IV infusion 30 minutes Day 1/ Day 15 1250 mg/m²/j",
+              "estado": "VERIFICADO"
+            }
           }
         ],
         "cicloDias": null,
@@ -856,19 +927,37 @@
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
-        "pendencia": "SEM_FONTE",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status não conferido.",
-          "fonte": null,
-          "pendencia": "SEM_FONTE"
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020370",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020370 QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO",
+            "estado": "VERIFICADO"
+          }
         },
         "fonte": {
-          "tipo": "SBOC",
-          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
-          "pagina": 14,
-          "trecho": "cisplatina e gemcitabina, TPF (cisplatina, docetaxel e 5-FU)",
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00210041 (fase 2 gencitabina-cisplatina, CEC de pênis localmente avançado irressecável/metastático)",
+          "pagina": null,
+          "trecho": "Gemzar IV infusion 30 minutes Day 1/ Day 15 1250 mg/m²/j",
           "estado": "VERIFICADO"
+        },
+        "pendencia": {
+          "texto": "Duração do ciclo não consta no registro NCT00210041 (D1 e D15) — cicloDias não preenchido.",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "https://clinicaltrials.gov/api/v2/studies/NCT00210041",
+            "SBOC 2025 pênis p.14: sem dose"
+          ]
         }
       },
       {
@@ -884,7 +973,15 @@
             "via": null,
             "dias": null,
             "observacao": "SBOC p.14 cita paclitaxel semanal em 2ª linha (resposta 30%) sem dose.",
-            "pendencia": "SEM_FONTE"
+            "pendencia": {
+              "texto": "Dose do paclitaxel semanal em 2ª linha sem fonte para pênis.",
+              "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+              "buscasFeitas": [
+                "fontes/sboc/SBOC 2025 Pênis p.14: só 'paclitaxel semanal', sem dose (ref 29)",
+                "CT.gov 'penile paclitaxel': só NCT02279576 (pazopanibe + paclitaxel semanal, combinação — não transferir)",
+                "fontes/pro26/71: sem dose"
+              ]
+            }
           }
         ],
         "cicloDias": null,
@@ -892,12 +989,22 @@
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
-        "pendencia": "SEM_FONTE",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status não conferido.",
-          "fonte": null,
-          "pendencia": "SEM_FONTE"
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020370",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020370 QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO",
+            "estado": "VERIFICADO"
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -915,49 +1022,99 @@
         "drogas": [
           {
             "droga": "paclitaxel",
-            "dose": null,
-            "unidade": null,
-            "via": null,
-            "dias": null,
-            "observacao": "SBOC p.11 indica TIP neoadjuvante sem dose; as doses da p.13 são do cenário metastático e não foram transferidas.",
-            "pendencia": "SEM_FONTE"
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 (3 h)",
+            "observacao": "Fase II MD Anderson (Pagliaro), neoadjuvante TanyN2-3M0.",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00512096 (MD Anderson, Pagliaro — TIP neoadjuvante)",
+              "pagina": null,
+              "trecho": "Paclitaxel 175 mg/m^2 IV Day 1",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "ifosfamida",
-            "dose": null,
-            "unidade": null,
-            "via": null,
-            "dias": null,
-            "observacao": "Idem; mesna obrigatória pela bula.",
-            "pendencia": "SEM_FONTE"
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D3",
+            "observacao": "Mesna obrigatória.",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00512096 (MD Anderson, Pagliaro — TIP neoadjuvante)",
+              "pagina": null,
+              "trecho": "Ifosfamide 1200 mg/m^2 IV Days 1-3",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "cisplatina",
-            "dose": null,
-            "unidade": null,
-            "via": null,
-            "dias": null,
-            "observacao": "Idem.",
-            "pendencia": "SEM_FONTE"
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D3",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00512096 (MD Anderson, Pagliaro — TIP neoadjuvante)",
+              "pagina": null,
+              "trecho": "Cisplatin 25 mg/m^2 IV Days 1-3",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "mesna",
+            "dose": 240,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D3, em bolus na hora 0, 4 h e 8 h de cada dose de ifosfamida",
+            "observacao": "Regra da bula: 20% da dose de ifosfamida (p/p) por bolus, 60%/dia; ifosfamida 1.200 mg/m² → 240 mg/m² ×3/dia (derivação aritmética).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22mesna%22&limit=1 (MESNEX 2025-12-10, set_id 1dd69e84-616d-fb77-e063-6394a90af2f4)",
+              "pagina": null,
+              "trecho": "dosage equal to 20% of the ifosfamide dosage weight by weight (w/w)",
+              "estado": "INFERIDO"
+            }
           }
         ],
-        "cicloDias": null,
-        "numeroCiclos": null,
+        "cicloDias": 21,
+        "numeroCiclos": 4,
         "premedicacao": "Mesna com ifosfamida (bula FDA).",
         "ajusteObrigatorio": "Reavaliar com imagem após QT; cirurgia linfonodal conforme resposta.",
         "fichaId": null,
-        "pendencia": "SEM_FONTE",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status não conferido.",
-          "fonte": null,
-          "pendencia": "SEM_FONTE"
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304020370",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO"
+            }
+          ],
+          "observacao": "Único procedimento de pênis é o de doença avançada; sem procedimento neoadjuvante/adjuvante específico (CID C60x compatível). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020370 QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO",
+            "estado": "INFERIDO"
+          }
         },
         "fonte": {
-          "tipo": "SBOC",
-          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
-          "pagina": 11,
-          "trecho": "Preferencial: TIP",
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00512096 (MD Anderson, Pagliaro — TIP neoadjuvante)",
+          "pagina": null,
+          "trecho": "Paclitaxel 175 mg/m^2 IV Day 1",
+          "estado": "VERIFICADO"
+        },
+        "numeroCiclosFonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00512096",
+          "pagina": null,
+          "trecho": "It will be repeated for a total of 4 times; once every 21 days",
           "estado": "VERIFICADO"
         }
       },
@@ -969,49 +1126,77 @@
         "drogas": [
           {
             "droga": "docetaxel",
-            "dose": null,
-            "unidade": null,
-            "via": null,
-            "dias": null,
-            "observacao": "SBOC p.11 indica TPF neoadjuvante sem dose; doses da p.13 (metastático) não transferidas.",
-            "pendencia": "SEM_FONTE"
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Penile TPF (ISRCTN78108737), fase II com população mista (localmente avançado e metastático); difere do TPF metastático da SBOC p.13 — não misturar.",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ISRCTN78108737 (Penile TPF, ICR-CTSU/2008/10016) — https://www.isrctn.com/ISRCTN78108737",
+              "pagina": null,
+              "trecho": "docetaxel 75 mg/m2 day 1 + cisplatin 60 mg/m2 day 1",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "cisplatina",
-            "dose": null,
-            "unidade": null,
-            "via": null,
-            "dias": null,
-            "observacao": "Idem.",
-            "pendencia": "SEM_FONTE"
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ISRCTN78108737 (Penile TPF, ICR-CTSU/2008/10016) — https://www.isrctn.com/ISRCTN78108737",
+              "pagina": null,
+              "trecho": "docetaxel 75 mg/m2 day 1 + cisplatin 60 mg/m2 day 1",
+              "estado": "VERIFICADO"
+            }
           },
           {
             "droga": "fluoruracila (5-FU)",
-            "dose": null,
-            "unidade": null,
-            "via": null,
-            "dias": null,
-            "observacao": "Idem.",
-            "pendencia": "SEM_FONTE"
+            "dose": 750,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ISRCTN78108737 (Penile TPF, ICR-CTSU/2008/10016) — https://www.isrctn.com/ISRCTN78108737",
+              "pagina": null,
+              "trecho": "5FU 750 mg/m2 days 1-5 with a cycle of 21 days",
+              "estado": "VERIFICADO"
+            }
           }
         ],
-        "cicloDias": null,
-        "numeroCiclos": null,
+        "cicloDias": 21,
+        "numeroCiclos": 3,
         "premedicacao": "",
         "ajusteObrigatorio": "Toxicidade elevada: 52% não completaram os 4 ciclos propostos na série citada.",
         "fichaId": null,
-        "pendencia": "SEM_FONTE",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status não conferido.",
-          "fonte": null,
-          "pendencia": "SEM_FONTE"
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304020370",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO"
+            }
+          ],
+          "observacao": "Único procedimento de pênis é o de doença avançada; sem procedimento neoadjuvante/adjuvante específico (CID C60x compatível). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020370 QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO",
+            "estado": "INFERIDO"
+          }
         },
         "fonte": {
-          "tipo": "SBOC",
-          "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
-          "pagina": 11,
-          "trecho": "com 52% dos pacientes não conseguindo completar os 4 ciclos",
+          "tipo": "ENSAIO",
+          "referencia": "ISRCTN78108737 (Penile TPF, ICR-CTSU/2008/10016) — https://www.isrctn.com/ISRCTN78108737",
+          "pagina": null,
+          "trecho": "docetaxel 75 mg/m2 day 1 + cisplatin 60 mg/m2 day 1",
           "estado": "VERIFICADO"
         }
       },
@@ -1028,7 +1213,15 @@
             "via": null,
             "dias": null,
             "observacao": "SBOC p.11 indica TIP adjuvante sem dose; doses da p.13 (metastático) não transferidas.",
-            "pendencia": "SEM_FONTE"
+            "pendencia": {
+              "texto": "Dose do TIP adjuvante sem fonte (SBOC só no metastático; NCT02817958 sem doses).",
+              "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+              "buscasFeitas": [
+                "fontes/sboc/SBOC 2025 Pênis p.11-13: doses só no cenário metastático (p.13)",
+                "https://clinicaltrials.gov/api/v2/studies/NCT02817958 braço A (TIP adjuvante): '4 cycles every 21 days', sem doses",
+                "fontes/pro26/71: sem doses"
+              ]
+            }
           },
           {
             "droga": "ifosfamida",
@@ -1037,7 +1230,15 @@
             "via": null,
             "dias": null,
             "observacao": "Idem; mesna obrigatória pela bula.",
-            "pendencia": "SEM_FONTE"
+            "pendencia": {
+              "texto": "Dose do TIP adjuvante sem fonte (SBOC só no metastático; NCT02817958 sem doses).",
+              "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+              "buscasFeitas": [
+                "fontes/sboc/SBOC 2025 Pênis p.11-13: doses só no cenário metastático (p.13)",
+                "https://clinicaltrials.gov/api/v2/studies/NCT02817958 braço A (TIP adjuvante): '4 cycles every 21 days', sem doses",
+                "fontes/pro26/71: sem doses"
+              ]
+            }
           },
           {
             "droga": "cisplatina",
@@ -1046,26 +1247,51 @@
             "via": null,
             "dias": null,
             "observacao": "Idem.",
-            "pendencia": "SEM_FONTE"
+            "pendencia": {
+              "texto": "Dose do TIP adjuvante sem fonte (SBOC só no metastático; NCT02817958 sem doses).",
+              "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+              "buscasFeitas": [
+                "fontes/sboc/SBOC 2025 Pênis p.11-13: doses só no cenário metastático (p.13)",
+                "https://clinicaltrials.gov/api/v2/studies/NCT02817958 braço A (TIP adjuvante): '4 cycles every 21 days', sem doses",
+                "fontes/pro26/71: sem doses"
+              ]
+            }
           }
         ],
-        "cicloDias": null,
-        "numeroCiclos": null,
+        "cicloDias": 21,
+        "numeroCiclos": 4,
         "premedicacao": "Mesna com ifosfamida (bula FDA).",
         "ajusteObrigatorio": "Pode associar RT (benefício sugerido em pN3/pélvico, dados retrospectivos).",
         "fichaId": null,
-        "pendencia": "SEM_FONTE",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "observacao": "Status não conferido.",
-          "fonte": null,
-          "pendencia": "SEM_FONTE"
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304020370",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO"
+            }
+          ],
+          "observacao": "Único procedimento de pênis é o de doença avançada; sem procedimento neoadjuvante/adjuvante específico (CID C60x compatível). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020370 QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE PÊNIS AVANÇADO",
+            "estado": "INFERIDO"
+          }
         },
         "fonte": {
           "tipo": "SBOC",
           "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
           "pagina": 12,
           "trecho": "consideramos adequado extrapolar os princípios dos benefícios demonstrados no cenário neoadjuvante",
+          "estado": "VERIFICADO"
+        },
+        "numeroCiclosFonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02817958",
+          "pagina": null,
+          "trecho": "adjuvant chemotherapy TIP modified bilateral lymphadenectomy 4 cycles every 21 days",
           "estado": "VERIFICADO"
         }
       }
@@ -1077,7 +1303,13 @@
         "fracoes": null,
         "concomitante": "não",
         "modalidade": "RT externa ou braquiterapia (preservação peniana 65–90%)",
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ]
+        },
         "fonte": {
           "tipo": "SBOC",
           "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
@@ -1091,7 +1323,13 @@
         "doseTotalGy": null,
         "fracoes": null,
         "concomitante": "RT exclusiva ou RT + QT (agente não especificado na SBOC)",
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ]
+        },
         "fonte": {
           "tipo": "SBOC",
           "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
@@ -1105,7 +1343,14 @@
         "doseTotalGy": null,
         "fracoes": null,
         "concomitante": "associada à QT (benefício sugerido por estudos retrospectivos)",
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ],
+          "informacaoJaLocalizada": "InPACT (NCT02305654): virilhas até 54 Gy/25 fr, pelve 45 Gy, com cisplatina 40 mg/m² semanal"
+        },
         "fonte": {
           "tipo": "SBOC",
           "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
@@ -1119,7 +1364,13 @@
         "doseTotalGy": null,
         "fracoes": null,
         "concomitante": "QT + RT (agente não especificado)",
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ]
+        },
         "fonte": {
           "tipo": "SBOC",
           "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
@@ -1224,7 +1475,7 @@
         "seAlvo": "PD-L1 / HPV / TMB alto (doença avançada)",
         "opcao": "Imunoterapia (pembrolizumabe ou cemiplimabe) + QT à base de platina somente em ensaio clínico",
         "evidencia": "Fase II: HERCULES (pembrolizumabe + platina, TRO 39,4%; 75% em TMB alto); EPIC-A (cemiplimabe + cisplatina, TRO 51,7%)",
-        "sus": "DADO_AUSENTE — sem recomendação assistencial na SBOC 2026; alternativa SUS: QT à base de platina",
+        "sus": "nao (sem tratamento-alvo incorporado; INFERIDO) — sem recomendação assistencial na SBOC 2026; alternativa SUS: QT à base de platina",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
@@ -1237,7 +1488,7 @@
         "seAlvo": "EGFR",
         "opcao": "Inibidores de EGFR (ex.: cetuximabe) não indicados de rotina",
         "evidencia": "Resultados modestos no tratamento paliativo",
-        "sus": "DADO_AUSENTE — alternativa SUS: QT à base de platina",
+        "sus": "nao (sem tratamento-alvo incorporado; INFERIDO) — alternativa SUS: QT à base de platina",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.pdf (texto: fontes/sboc/Diretrizes-SBOC-2025-Penis-v3-VERSAO-PARA-COLABORACAO.txt)",
@@ -1256,7 +1507,14 @@
         "Linfadenectomia inguinal/pélvica: cuidados com ferida e linfedema.",
         "Classificação de emetogenicidade e de risco de neutropenia febril não consta na SBOC de pênis (pendência SEM_FONTE)."
       ],
-      "pendencia": "SEM_FONTE",
+      "pendencia": {
+        "texto": "Emetogenicidade e risco de neutropenia febril sem fonte local.",
+        "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+        "buscasFeitas": [
+          "SBOC pênis 2025: sem classificação",
+          "ASCO 2020 Emetic Risk Chart inacessível a partir deste ambiente"
+        ]
+      },
       "fonte": {
         "tipo": "BULA",
         "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:ifosfamide&limit=1 (rótulo FDA, set_id 91e433a9-6800-43a6-ac13-a49a04a5aecd)",
@@ -1296,12 +1554,26 @@
           "pagina": 14,
           "trecho": "a taxa de benefício clínico foi de 62% e a TRO, 51,7%",
           "estado": "VERIFICADO"
+        },
+        "registroAlternativo": {
+          "id": "ISRCTN95561634",
+          "estado": "VERIFICADO",
+          "url": "https://www.isrctn.com/ISRCTN95561634",
+          "titulo": "EPIC Trial — cemiplimab alone or with standard chemotherapy, locally advanced or metastatic penile carcinoma"
+        },
+        "nctPendencia": {
+          "texto": "EPIC não tem NCT; registro ISRCTN95561634 (cemiplimabe ± QT) confere com a descrição do pack.",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "CT.gov query.term=EPIC-A penile",
+            "CT.gov query.term=cemiplimab penile"
+          ]
         }
       },
       {
         "nome": "Fase II TIP neoadjuvante (Pagliaro, J Clin Oncol 2010)",
-        "nct": null,
-        "nctEstado": "NAO_VERIFICADO",
+        "nct": "NCT00512096",
+        "nctEstado": "VERIFICADO",
         "populacao": "Doença avançada/locorregional",
         "bracos": "TIP neoadjuvante seguido de cirurgia",
         "desfecho": "Resposta objetiva, ypN0, SG",
@@ -1312,7 +1584,8 @@
           "pagina": 11,
           "trecho": "65% de resposta objetiva, 10% de ypN0 pós cirurgia",
           "estado": "VERIFICADO"
-        }
+        },
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT00512096 (MD Anderson, PI Pagliaro)"
       },
       {
         "nome": "Fase II TPF (CRUK/09/001)",
@@ -1328,6 +1601,20 @@
           "pagina": 11,
           "trecho": "com 52% dos pacientes não conseguindo completar os 4 ciclos",
           "estado": "VERIFICADO"
+        },
+        "registroAlternativo": {
+          "id": "ISRCTN78108737",
+          "estado": "VERIFICADO",
+          "url": "https://www.isrctn.com/ISRCTN78108737",
+          "titulo": "Penile TPF (ICR-CTSU/2008/10016)"
+        },
+        "nctPendencia": {
+          "texto": "TPF pênis sem NCT; ISRCTN78108737 (Penile TPF) identificado pelo acrônimo — código CRUK/09/001 não aparece no registro.",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "CT.gov query.term=penile docetaxel cisplatin fluorouracil",
+            "ISRCTN 'Penile TPF'"
+          ]
         }
       }
     ],
@@ -1633,20 +1920,82 @@
     ]
   },
   "pendencias": [
-    "Doses de TIP/TPF neoadjuvante e de TIP adjuvante ausentes na SBOC 2026 (doses só na p.13, cenário metastático) — SEM_FONTE.",
-    "Doses de cisplatina + gemcitabina e de paclitaxel semanal (2ª linha) não constam na SBOC — SEM_FONTE.",
-    "Via da cisplatina no TIP não escrita na SBOC (p.13); preenchida como EV pela bula FDA.",
-    "Dose de mesna no TIP não consta na SBOC; usar bula/protocolo institucional.",
-    "Doses e fracionamento de RT/braquiterapia (primário, inoperável, adjuvante, paliativo) e agente da QT concomitante ausentes na SBOC — SEM_FONTE.",
-    "Doses de 5-FU tópico e imiquimode tópico (Ta/Tis) ausentes na SBOC — não incluídos como protocolo.",
-    "Conduta específica para cN1 vem só da aula PRO (CURSO/INFERIDO); SBOC não detalha cN1 isoladamente.",
-    "USG inguinal e linfocintilografia do linfonodo sentinela sem id no catálogo (SEM_ID_NO_CATALOGO).",
-    "Cobertura SUS de PET-CT FDG para pênis e códigos APAC de QT para C60 não conferidos (DADO_AUSENTE).",
-    "Tabela de seguimento (SBOC p.15) para pN+ tem leitura ambígua quanto à imagem no 3º–5º ano.",
-    "SBOC p.14 numera HERCULES como ref. 33 e EPIC-A como ref. 34, mas a lista de referências (p.18) inverte (33 = EPIC-A; 34 = HERCULES).",
-    "NCT de EPIC-A e do fase II TIP (Pagliaro) não verificados.",
-    "fichaId do carboplatina + paclitaxel aponta para ficha nomeada de próstata (doses iguais) — conferir.",
-    "Emetogenicidade e risco de neutropenia febril sem fonte local."
+    {
+      "texto": "Doses do TIP adjuvante (4 ciclos q21 conforme NCT02817958) sem fonte.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "fontes/sboc/SBOC 2025 Pênis p.11-13: doses só no cenário metastático (p.13)",
+        "https://clinicaltrials.gov/api/v2/studies/NCT02817958 braço A (TIP adjuvante): '4 cycles every 21 days', sem doses",
+        "fontes/pro26/71: sem doses"
+      ]
+    },
+    {
+      "texto": "Paclitaxel semanal em 2ª linha: dose sem fonte; cisplatina + gencitabina: duração do ciclo sem fonte.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "fontes/sboc/SBOC 2025 Pênis p.14: só 'paclitaxel semanal', sem dose (ref 29)",
+        "CT.gov 'penile paclitaxel': só NCT02279576 (pazopanibe + paclitaxel semanal, combinação — não transferir)",
+        "fontes/pro26/71: sem dose",
+        "https://clinicaltrials.gov/api/v2/studies/NCT00210041"
+      ]
+    },
+    {
+      "texto": "Doses e fracionamento de RT/braquiterapia (primário, inoperável, adjuvante, paliativo) e agente da QT concomitante ausentes na SBOC — SEM_FONTE.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+      ]
+    },
+    {
+      "texto": "Doses de 5-FU tópico e imiquimode tópico (Ta/Tis) ausentes na SBOC — não incluídos como protocolo.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2025 pênis: sem dose tópica"
+      ]
+    },
+    {
+      "texto": "Conduta específica para cN1 vem só da aula PRO (CURSO/INFERIDO); SBOC não detalha cN1 isoladamente.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2025 pênis: cN1 não detalhado"
+      ]
+    },
+    {
+      "texto": "USG inguinal e linfocintilografia do linfonodo sentinela sem id no catálogo (SEM_ID_NO_CATALOGO).",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json v1.1: sem USG inguinal e linfocintilografia"
+      ]
+    },
+    {
+      "texto": "Cobertura SUS de PET-CT FDG para pênis não verificada.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SIGTAP pinado 2026-09 cobre só 03.04 (sem imagem)"
+      ]
+    },
+    {
+      "texto": "Tabela de seguimento (SBOC p.15) para pN+ tem leitura ambígua quanto à imagem no 3º–5º ano.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2025 pênis p.15"
+      ]
+    },
+    {
+      "texto": "fichaId do carboplatina + paclitaxel aponta para ficha nomeada de próstata (doses iguais) — conferir.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/fichas: ficha nomeada de próstata com doses iguais"
+      ]
+    },
+    {
+      "texto": "Emetogenicidade e risco de neutropenia febril sem fonte local.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC pênis 2025: sem classificação",
+        "ASCO 2020 Emetic Risk Chart inacessível a partir deste ambiente"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -1665,7 +2014,8 @@
         "trecho": "Clearance > 50 mL/min Carboplatina + Paclitaxel",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "SBOC: carboplatina + paclitaxel quando ClCr < 50 mL/min (a própria aula, p.21, também diz < 50; p.16 parece erro de digitação)."
+      "escolhaSeguranca": "SBOC: carboplatina + paclitaxel quando ClCr < 50 mL/min (a própria aula, p.21, também diz < 50; p.16 parece erro de digitação).",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Estratégia linfonodal em T1b–T2 cN0",
@@ -1683,7 +2033,8 @@
         "trecho": "Biópsia do linfonodo sentinela é preferível à linfadenectomia eletiva em T1b–T2 N0.",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "SBOC: linfadenectomia inguinal bilateral eletiva como padrão; BLS dinâmica ou PAAF-USG apenas onde disponível, com esvaziamento bilateral se positiva."
+      "escolhaSeguranca": "SBOC: linfadenectomia inguinal bilateral eletiva como padrão; BLS dinâmica ou PAAF-USG apenas onde disponível, com esvaziamento bilateral se positiva.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Definição de N1",
@@ -1701,7 +2052,8 @@
         "trecho": "N1 Metástase em um único linfonodo inguinal unilateral",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Usar a tabela AJCC 8 transcrita pela SBOC (cN e pN separados)."
+      "escolhaSeguranca": "Usar a tabela AJCC 8 transcrita pela SBOC (cN e pN separados).",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Esquema de ifosfamida",
@@ -1719,7 +2071,8 @@
         "trecho": "1.2 grams per m2 per day for 5 consecutive days",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Bula FDA refere-se a tumor de testículo; para pênis manter a SBOC (D1–D3 no TIP), com mesna e hidratação da bula."
+      "escolhaSeguranca": "Bula FDA refere-se a tumor de testículo; para pênis manter a SBOC (D1–D3 no TIP), com mesna e hidratação da bula.",
+      "decisaoNecessaria": false
     }
   ],
   "curadoria": {
@@ -1733,8 +2086,46 @@
       "https://api.fda.gov/drug/label.json?search=openfda.generic_name:ifosfamide&limit=1",
       "https://api.fda.gov/drug/label.json?search=openfda.generic_name:cisplatin&limit=1",
       "https://clinicaltrials.gov/api/v2/studies/NCT04224740",
-      "https://clinicaltrials.gov/api/v2/studies?query.term=EPIC-A+cemiplimab+penile (sem resultado)"
+      "https://clinicaltrials.gov/api/v2/studies?query.term=EPIC-A+cemiplimab+penile (sem resultado)",
+      "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
+      "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
     ],
-    "aprovacaoClinica": null
+    "aprovacaoClinica": null,
+    "rodada2": {
+      "data": "2026-10-11",
+      "redator": "Claude (Opus 5.5) — redução de pendências e conflitos; aprovação clínica pendente",
+      "pendenciasResolvidas": [
+        {
+          "texto": "Doses de TIP/TPF neoadjuvante ausentes na SBOC 2026 (doses só na p.13, cenário metastático) — SEM_FONTE.",
+          "resolucao": "TIP neoadjuvante (Pagliaro, NCT00512096: 175/1200 D1-3/25 D1-3, q21 ×4) e TPF neoadjuvante (ISRCTN78108737: 75/60/750 D1-5, q21 ×3). TIP adjuvante segue classificado."
+        },
+        {
+          "texto": "Doses de cisplatina + gemcitabina não constam na SBOC — SEM_FONTE.",
+          "resolucao": "Cisplatina 50 + gencitabina 1.250 mg/m² D1 e D15 (NCT00210041); duração do ciclo segue sem fonte."
+        },
+        {
+          "texto": "Via da cisplatina no TIP não escrita na SBOC (p.13); preenchida como EV pela bula FDA.",
+          "resolucao": "Via EV confirmada no registro NCT00512096 (\"Cisplatin 25 mg/m^2 IV Days 1-3\") e na bula FDA."
+        },
+        {
+          "texto": "Dose de mesna no TIP não consta na SBOC; usar bula/protocolo institucional.",
+          "resolucao": "Mesna 240 mg/m² ×3/dia (20% da ifosfamida; bula Mesnex/FDA) em TIP neoadjuvante e paliativo."
+        },
+        {
+          "texto": "códigos APAC de QT para C60 não conferidos (DADO_AUSENTE).",
+          "resolucao": "APAC 0304020370 (avançado); neo/adjuvante: parcial (sem procedimento específico)."
+        },
+        {
+          "texto": "SBOC p.14 numera HERCULES como ref. 33 e EPIC-A como ref. 34, mas a lista de referências (p.18) inverte (33 = EPIC-A; 34 = HERCULES).",
+          "resolucao": "Divergência interna da SBOC registrada; EPIC = ISRCTN95561634 confere com a descrição do pack."
+        },
+        {
+          "texto": "NCT de EPIC-A e do fase II TIP (Pagliaro) não verificados.",
+          "resolucao": "Pagliaro = NCT00512096; EPIC = ISRCTN95561634 (sem NCT); TPF = ISRCTN78108737 (sem NCT)."
+        }
+      ],
+      "correcoes": []
+    }
   }
 }

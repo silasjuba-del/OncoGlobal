@@ -1,7 +1,7 @@
 {
   "header": {
     "id": "exames-sigtap",
-    "versao": "1.1.0",
+    "versao": "1.2.0",
     "vigenteDesde": "2026-10-11",
     "curador": "Dr. Silas Negrão",
     "aprovadoEm": "2026-10-11",
@@ -14,7 +14,7 @@
   },
   "status": "APROVADO_LISTA",
   "competencia": "2026-09",
-  "nota": "Nomes copiados do ZIP oficial por script. sigtap null = sem código no SIGTAP 09/2026. Contraste é campo do pedido. Só segmentos de uso oncológico prático. Lista aprovada pelo Dr. Silas em 2026-10-11 (proposta Claude + lista do Dr. Silas). Seção = categoria; tópico = subgrupo. Item sem código fica SEM_CODIGO_SUS. v1.1.0 (2026-10-11, Claude, autorizado pelo Dr. Silas no /goal de fechamento): +23 itens para os packs v2 (patologia de colo/mama, citologia, molecular SIGTAP 0202100081/0202100111/0202100243, linfocintilografia, colposcopia). Nomes copiados do ZIP 09/2026.",
+  "nota": "Nomes copiados do ZIP oficial por script. sigtap null = sem código no SIGTAP 09/2026. Contraste é campo do pedido. Só segmentos de uso oncológico prático. Lista aprovada pelo Dr. Silas em 2026-10-11 (proposta Claude + lista do Dr. Silas). Seção = categoria; tópico = subgrupo. Item sem código fica SEM_CODIGO_SUS. v1.1.0 (2026-10-11, Claude, autorizado pelo Dr. Silas no /goal de fechamento): +23 itens para os packs v2 (patologia de colo/mama, citologia, molecular SIGTAP 0202100081/0202100111/0202100243, linfocintilografia, colposcopia). Nomes copiados do ZIP 09/2026. v1.2.0 (2026-10-11): +22 itens (labs de hematologia/imunologia, endócrino da adrenal, líquor, elastografia, laparoscopia) e lista semCodigoSUSConfirmado.",
   "secoes": {
     "imagem": [
       {
@@ -291,6 +291,13 @@
         "nome": "RADIOGRAFIA DE TORAX (PA)",
         "sigtap": "0204030170",
         "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "ELASTOGRAFIA_HEPATICA",
+        "topico": "USG",
+        "nome": "ELASTOGRAFIA HEPÁTICA ULTRASSÔNICA",
+        "sigtap": "0205020224",
+        "status": "VERIFICADO_SIGTAP"
       }
     ],
     "medicina_nuclear": [
@@ -438,6 +445,21 @@
         "nome": "COLPOSCOPIA",
         "sigtap": "0211040029",
         "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "LAPAROSCOPIA",
+        "topico": "ENDOSCOPIA",
+        "nome": "LAPAROSCOPIA",
+        "sigtap": "0209010045",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "estadiamento/diagnóstico (citologia de lavado peritoneal: CITOLOGIA_LIQUIDOS)"
+      },
+      {
+        "id": "VIDEOLAPAROSCOPIA",
+        "topico": "ENDOSCOPIA",
+        "nome": "VIDEOLAPAROSCOPIA",
+        "sigtap": "0209010061",
+        "status": "VERIFICADO_SIGTAP"
       }
     ],
     "funcao_orgao": [
@@ -573,7 +595,8 @@
         "topico": "PATOLOGIA",
         "nome": "FISH EM METÁFASE OU NÚCLEO INTERFÁSICO, POR DOENÇA",
         "sigtap": "0202100090",
-        "status": "VERIFICADO_SIGTAP"
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "APAC secundário; compatibilidades encontradas com avaliações de doenças raras (Codex 2026-10-11). Método disponível no catálogo NÃO comprova faturamento oncológico por indicação. Não equivale a NGS."
       },
       {
         "id": "IMUNOFENOTIPAGEM",
@@ -668,6 +691,21 @@
         "sigtap": "0203010035",
         "status": "VERIFICADO_SIGTAP",
         "notas": "derrame pleural, ascite, liquor (exceto cervicovaginal e mama)"
+      },
+      {
+        "id": "LIQUOR_CELULAS",
+        "topico": "PATOLOGIA",
+        "nome": "CONTAGEM GLOBAL DE CÉLULAS NO LÍQUOR",
+        "sigtap": "0202090060",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "contagem global de células no líquor"
+      },
+      {
+        "id": "LIQUOR_CELULAS_ESPECIFICA",
+        "topico": "PATOLOGIA",
+        "nome": "CONTAGEM ESPECÍFICA DE CÉLULAS NO LIQUOR",
+        "sigtap": "0202090051",
+        "status": "VERIFICADO_SIGTAP"
       }
     ],
     "labs_ciclo": [
@@ -962,6 +1000,73 @@
         "nome": "CONTAGEM DE RETICULOCITOS",
         "sigtap": "0202020037",
         "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "VHS",
+        "topico": "HEMATOLOGIA",
+        "nome": "DETERMINAÇÃO DE VELOCIDADE DE HEMOSSEDIMENTAÇÃO (VHS)",
+        "sigtap": "0202020150",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "COOMBS_DIRETO",
+        "topico": "HEMATOLOGIA",
+        "nome": "TESTE DIRETO DE ANTIGLOBULINA HUMANA (TAD)",
+        "sigtap": "0202020541",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "anemia hemolítica autoimune (linfomas, LLC)"
+      },
+      {
+        "id": "IGG",
+        "topico": "IMUNOLOGIA",
+        "nome": "DOSAGEM DE IMUNOGLOBULINA G (IGG)",
+        "sigtap": "0202030172",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "IGA",
+        "topico": "IMUNOLOGIA",
+        "nome": "DOSAGEM DE IMUNOGLOBULINA A (IGA)",
+        "sigtap": "0202030156",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "IGM",
+        "topico": "IMUNOLOGIA",
+        "nome": "DOSAGEM DE IMUNOGLOBULINA M (IGM)",
+        "sigtap": "0202030180",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "CD4_CD8",
+        "topico": "IMUNOLOGIA",
+        "nome": "CONTAGEM DE LINFOCITOS CD4/CD8",
+        "sigtap": "0202030024",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "HIV+"
+      },
+      {
+        "id": "HIV_CARGA_VIRAL",
+        "topico": "IMUNOLOGIA",
+        "nome": "QUANTIFICAÇÃO DE RNA DO HIV-1",
+        "sigtap": "0202031071",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "HIV+"
+      },
+      {
+        "id": "IGRA",
+        "topico": "IMUNOLOGIA",
+        "nome": "TESTE DE LIBERAÇÃO DE INTERFERON-GAMA PARA ILTB (IGRA)",
+        "sigtap": "0202031365",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "tuberculose latente antes de imunossupressão"
+      },
+      {
+        "id": "SIFILIS_NAO_TREPONEMICO",
+        "topico": "IMUNOLOGIA",
+        "nome": "TESTE NÃO TREPONEMICO P/ DETECÇÃO DE SIFILIS PARA POPULAÇÃO GERAL (EXCETO GESTANTE, PARCEIRO OU PARCERIA)",
+        "sigtap": "0202031110",
+        "status": "VERIFICADO_SIGTAP"
       }
     ],
     "sorologias_pre_qt": [
@@ -1066,6 +1171,63 @@
         "nome": "DOSAGEM DE TESTOSTERONA LIVRE",
         "sigtap": "0202060357",
         "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "ACTH",
+        "topico": "ENDOCRINO",
+        "nome": "DOSAGEM DE ADRENOCORTICOTROFICO (ACTH)",
+        "sigtap": "0202060080",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "ALDOSTERONA",
+        "topico": "ENDOCRINO",
+        "nome": "DOSAGEM DE ALDOSTERONA",
+        "sigtap": "0202060098",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "RENINA",
+        "topico": "ENDOCRINO",
+        "nome": "DOSAGEM DE RENINA",
+        "sigtap": "0202060314",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "ANDROSTENEDIONA",
+        "topico": "ENDOCRINO",
+        "nome": "DOSAGEM DE ANDROSTENEDIONA",
+        "sigtap": "0202060110",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "DHEAS",
+        "topico": "ENDOCRINO",
+        "nome": "DOSAGEM DE SULFATO DE HIDROEPIANDROSTERONA (DHEAS)",
+        "sigtap": "0202060330",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "HIDROXIPROGESTERONA_17",
+        "topico": "ENDOCRINO",
+        "nome": "DOSAGEM DE 17-ALFA-HIDROXIPROGESTERONA",
+        "sigtap": "0202060047",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "SUPRESSAO_CORTISOL_DEXAMETASONA",
+        "topico": "ENDOCRINO",
+        "nome": "TESTE DE SUPRESSAO DO CORTISOL APOS DEXAMETASONA",
+        "sigtap": "0202060446",
+        "status": "VERIFICADO_SIGTAP"
+      },
+      {
+        "id": "CATECOLAMINAS",
+        "topico": "ENDOCRINO",
+        "nome": "DOSAGEM DE CATECOLAMINAS",
+        "sigtap": "0202010244",
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "feocromocitoma/paraganglioma: metanefrinas fracionadas não têm código próprio no SIGTAP 09/2026"
       }
     ],
     "marcadores_tumorais": [
@@ -1230,7 +1392,7 @@
         "nome": "IDENTIFICAÇÃO DE MUTAÇÃO/REARRANJOS POR PCR, PCR SENSÍVEL A METILAÇÃO, qPCR E qPCR SENSÍVEL A METILAÇÃO",
         "sigtap": "0202100081",
         "status": "VERIFICADO_SIGTAP",
-        "notas": "PCR/qPCR para mutação ou rearranjo (ex.: EGFR, KRAS, BRAF, MGMT por metilação): confirmar elegibilidade de faturamento por indicação"
+        "notas": "APAC secundário; compatibilidades encontradas com avaliações de doenças raras (Codex 2026-10-11). Método disponível no catálogo NÃO comprova faturamento oncológico por indicação. Não equivale a NGS."
       },
       {
         "id": "SEQUENCIAMENTO_AMPLICON",
@@ -1238,14 +1400,15 @@
         "nome": "IDENTIFICAÇÂO DE MUTAÇÃO POR SEQUENCIAMENTO POR AMPLICON ATÉ 500 PARES DE BASES",
         "sigtap": "0202100111",
         "status": "VERIFICADO_SIGTAP",
-        "notas": "sequenciamento por amplicon até 500 pb: confirmar elegibilidade por indicação"
+        "notas": "APAC secundário; compatibilidades encontradas com avaliações de doenças raras (Codex 2026-10-11). Método disponível no catálogo NÃO comprova faturamento oncológico por indicação. Não equivale a NGS. Sanger bidirecional até 500 pb."
       },
       {
         "id": "FISH_MIELOMA",
         "topico": "MOLECULAR",
         "nome": "TESTE CITOGENÈTICO POR HIBRIDIZAÇÃO IN SITU POR FLUORESCÊNCIA (FISH) PARA MIELOMA MÚLTIPLO",
         "sigtap": "0202100243",
-        "status": "VERIFICADO_SIGTAP"
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "Específico para mieloma (CID C90.0); BPA individualizado/AIH especial."
       },
       {
         "id": "CARIOTIPO_MEDULA",
@@ -1267,8 +1430,30 @@
         "topico": "MOLECULAR",
         "nome": "EXAME MOLECULAR DE DETECÇÂO DE HPV",
         "sigtap": "0202100251",
-        "status": "VERIFICADO_SIGTAP"
+        "status": "VERIFICADO_SIGTAP",
+        "notas": "Rastreamento de câncer do colo (material cervicovaginal). Não serve para confirmar HPV em tumor de orofaringe (Codex 2026-10-11)."
       }
+    ]
+  },
+  "semCodigoSUSConfirmado": {
+    "data": "2026-10-11",
+    "fonte": "busca no ZIP SIGTAP 09/2026 pinado (tb_procedimento)",
+    "itens": [
+      "NGS de painel amplo (DNA/RNA)",
+      "TMB",
+      "HRD",
+      "ctDNA / biópsia líquida",
+      "painel germinativo multigênico (BRCA1/2, PALB2, Lynch, TP53, feo/PGL)",
+      "DPYD (genotipagem) / atividade de DPD",
+      "metanefrinas plasmáticas ou urinárias fracionadas",
+      "ecoendoscopia (ultrassom endoscópico)",
+      "anuscopia",
+      "mediastinoscopia (procedimento cirúrgico, fora do grupo 02)",
+      "TC/RM de corpo inteiro",
+      "viscosidade sérica",
+      "inibina B",
+      "D-dímero",
+      "receptor de folato alfa (FRα)"
     ]
   }
 }

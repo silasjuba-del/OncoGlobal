@@ -214,8 +214,8 @@
         {
           "alvo": "POLE",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "Quando mudaria a adjuvância: p53 aberrante, IB/II, LVSI substancial ou grau 3",
           "consequencia": "POLEmut estádio I-II: IAm, risco baixo — observação (descalonamento)",
@@ -227,8 +227,8 @@
             "trecho": "Pesquisa de POLE por NGS nas pacientes para as quais esta informação mudaria",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         }
       ]
     }
@@ -560,13 +560,20 @@
         "ajusteObrigatorio": "Função renal, magnésio, audição. Seguir com 4 ciclos de carboplatina + paclitaxel.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Não há procedimento adjuvante específico para corpo uterino no subgrupo 03.04.05 do SIGTAP; 0304020184 é de doença avançada (CID C54x compatível). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "INFERIDO"
           }
         },
         "id": "endometrio-cisplatina-qtrt-adjuvante",
@@ -598,13 +605,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Não há procedimento adjuvante específico para corpo uterino no subgrupo 03.04.05 do SIGTAP; 0304020184 é de doença avançada (CID C54x compatível). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "INFERIDO"
           }
         },
         "id": "endometrio-carbo-pacli-pos-qtrt-adjuvante",
@@ -644,13 +658,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Não há procedimento adjuvante específico para corpo uterino no subgrupo 03.04.05 do SIGTAP; 0304020184 é de doença avançada (CID C54x compatível). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "INFERIDO"
           }
         },
         "id": "endometrio-carbo-pacli-adjuvante-qt-isolada",
@@ -685,18 +706,19 @@
         }
       },
       {
-        "numeroCiclos": null,
+        "numeroCiclos": 6,
         "premedicacao": "",
-        "ajusteObrigatorio": "TSH/T4L, função hepática e glicemia basais e periódicos (irAE). Número de ciclos de QT não explicitado na SBOC para este cenário.",
+        "ajusteObrigatorio": "TSH/T4L, função hepática e glicemia basais e periódicos (irAE). Fase de combinação 6 ciclos (até 10 se DE/RP com doença mensurável, a critério médico); manutenção com pembrolizumabe a cada 6 semanas por até 14 ciclos (NRG-GY018).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (endométrio) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020184 — decisão do serviço. Alternativa SUS: carboplatina + paclitaxel (endometrio-carbo-pacli-1l).",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (endométrio) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "endometrio-carbo-pacli-pembro-1l",
@@ -736,6 +758,13 @@
           "pagina": null,
           "trecho": "or 400 mg every 6 weeks in combination with carboplatin and paclitaxel",
           "estado": "VERIFICADO"
+        },
+        "numeroCiclosFonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03914612 (NRG-GY018, braço II)",
+          "pagina": null,
+          "trecho": "Treatment repeats every 3 weeks for 6 cycles",
+          "estado": "VERIFICADO"
         }
       },
       {
@@ -744,13 +773,20 @@
         "ajusteObrigatorio": "Intervalo q21 e número de ciclos inferidos do esquema adjuvante GOG-258 (não transferir sem revisão).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "VERIFICADO"
           }
         },
         "id": "endometrio-carbo-pacli-1l",
@@ -790,13 +826,14 @@
         "ajusteObrigatorio": "TSH/T4L, função hepática e glicemia basais e periódicos (irAE).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (endométrio dMMR, 2ª linha) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020184 — decisão do serviço.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (endométrio dMMR, 2ª linha) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "endometrio-pembrolizumabe-2l-dmmr",
@@ -828,13 +865,14 @@
         "ajusteObrigatorio": "TSH/T4L, função hepática e glicemia basais e periódicos (irAE).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de dostarlimabe (2ª linha) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020184 — decisão do serviço. Dostarlimabe 1ª linha com QT em CP SCTIE/MS nº 104/2026 (recomendação preliminar desfavorável).",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para dostarlimabe (2ª linha) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "endometrio-dostarlimabe-2l-dmmr",
@@ -874,13 +912,14 @@
         "ajusteObrigatorio": "TSH/T4L, função hepática e glicemia basais e periódicos (irAE). PA, proteinúria e função tireoidiana (lenvatinibe).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de lenvatinibe + pembrolizumabe (endométrio) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020184 — decisão do serviço. Alternativa SUS: doxorrubicina ou paclitaxel (2ª linha).",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para lenvatinibe + pembrolizumabe (endométrio) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "endometrio-lenvatinibe-pembro-2l-pmmr",
@@ -920,13 +959,14 @@
         "ajusteObrigatorio": "Vigiar pneumonite/DPI.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de trastuzumabe deruxtecana (endométrio HER2 3+) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020184 — decisão do serviço.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para trastuzumabe deruxtecana (endométrio HER2 3+) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "endometrio-tdxd-her2-2l",
@@ -958,13 +998,20 @@
         "ajusteObrigatorio": "Risco tromboembólico.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020036",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020036 HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "id": "endometrio-medroxiprogesterona-paliativa",
@@ -996,13 +1043,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020036",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020036 HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "id": "endometrio-megestrol-paliativo",
@@ -1034,13 +1088,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020036",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020036 HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "id": "endometrio-tamoxifeno-mpa-alternado",
@@ -1080,13 +1141,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020036",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020036 HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO",
+            "estado": "VERIFICADO"
           }
         },
         "id": "endometrio-fulvestranto-paliativo",
@@ -1118,13 +1186,20 @@
         "ajusteObrigatorio": "Histeroscopia com biópsia + RM a cada 3 meses; sem RC em 12 meses: cirurgia padrão.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304020036",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO"
+            }
+          ],
+          "observacao": "Procedimento de hormonioterapia de doença avançada; preservação de fertilidade não é doença avançada. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020036 HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE ENDOMÉTRIO AVANÇADO",
+            "estado": "INFERIDO"
           }
         },
         "id": "endometrio-mpa-fertilidade",
@@ -1149,6 +1224,284 @@
           "trecho": "acetato de medroxiprogesterona (400-600 mg/dia)",
           "estado": "VERIFICADO"
         }
+      },
+      {
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Após 6 ciclos: dostarlimabe 1.000 mg a cada 6 semanas até 3 anos (ver endometrio-dostarlimabe-manutencao-1l). irAE.",
+        "fichaId": null,
+        "id": "endometrio-carbo-pacli-dostarlimabe-1l",
+        "nome": "Carboplatina + paclitaxel + dostarlimabe (RUBY) — 1ª linha, fase de combinação",
+        "cenario": "III-IV primário ou recorrente (rótulo FDA: dMMR/MSI-H e população geral conforme bula)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Dostarlimabe",
+            "dose": 500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Antes da QT no mesmo dia"
+          },
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "CP SCTIE/MS nº 104/2026 aberta até 26/10/2026; recomendação preliminar desfavorável. Alternativa SUS: carboplatina + paclitaxel.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Consulta Pública SCTIE/MS nº 104, de 02/10/2026 (DOU 06/10/2026; término 26/10/2026); relatório preliminar — https://www.gov.br/conitec/pt-br/assuntos/participacao-social/consultas-publicas/vigentes",
+            "pagina": null,
+            "trecho": "recomendação preliminar desfavorável à incorporação no SUS do dostarlimabe",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22JEMPERLI%22&limit=1 (set_id 095eab9f-545a-4f12-bfb7-19477fb901a5)",
+          "pagina": null,
+          "trecho": "500 mg every 3 weeks for 6 cycles followed by 1,000 mg monotherapy",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Até progressão ou 3 anos no total. irAE.",
+        "fichaId": null,
+        "id": "endometrio-dostarlimabe-manutencao-1l",
+        "nome": "Dostarlimabe — manutenção após RUBY",
+        "cenario": "Após 6 ciclos de carboplatina + paclitaxel + dostarlimabe",
+        "linha": "manutenção de 1ª linha",
+        "drogas": [
+          {
+            "droga": "Dostarlimabe",
+            "dose": 1000,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 42,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "CP SCTIE/MS nº 104/2026, recomendação preliminar desfavorável.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Consulta Pública SCTIE/MS nº 104, de 02/10/2026 (DOU 06/10/2026; término 26/10/2026); relatório preliminar — https://www.gov.br/conitec/pt-br/assuntos/participacao-social/consultas-publicas/vigentes",
+            "pagina": null,
+            "trecho": "recomendação preliminar desfavorável à incorporação no SUS do dostarlimabe",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22JEMPERLI%22&limit=1 (set_id 095eab9f-545a-4f12-bfb7-19477fb901a5)",
+          "pagina": null,
+          "trecho": "followed by 1,000 mg monotherapy every 6 weeks for all cycles thereafter",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Máximo de 6 ciclos de combinação (bula Imfinzi); depois durvalumabe 1.500 mg a cada 4 semanas. Em pMMR, olaparibe + durvalumabe depende da bula ANVISA. irAE.",
+        "fichaId": null,
+        "id": "endometrio-carbo-pacli-durvalumabe-1l-dmmr",
+        "nome": "Carboplatina + paclitaxel + durvalumabe (DUO-E) — 1ª linha dMMR, fase de combinação",
+        "cenario": "III-IV primário ou recorrente dMMR (indicação do rótulo FDA)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Durvalumabe",
+            "dose": 1120,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Peso <30 kg: 15 mg/kg (bula)"
+          },
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC p.16: AUC 5-6 com imunoterapia; registrado o menor (DUO-E não informa a dose da QT)"
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC p.16"
+          }
+        ],
+        "cicloDias": 21,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de durvalumabe (endométrio) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020184 — decisão do serviço. Durvalumabe incorporado só no CPNPC estádio III (Portaria SECTICS nº 21/2024).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para durvalumabe (endométrio) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22IMFINZI%22&limit=1",
+          "pagina": null,
+          "trecho": "IMFINZI 1,120 mg in combination with carboplatin and paclitaxel every 3 weeks",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Até progressão ou toxicidade. irAE.",
+        "fichaId": null,
+        "id": "endometrio-durvalumabe-manutencao-1l-dmmr",
+        "nome": "Durvalumabe — manutenção após DUO-E (dMMR)",
+        "cenario": "Após 6 ciclos de carboplatina + paclitaxel + durvalumabe, dMMR",
+        "linha": "manutenção de 1ª linha",
+        "drogas": [
+          {
+            "droga": "Durvalumabe",
+            "dose": 1500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de durvalumabe (endométrio) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020184 — decisão do serviço.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para durvalumabe (endométrio) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22IMFINZI%22&limit=1",
+          "pagina": null,
+          "trecho": "followed by IMFINZI 1,500 mg every 4 weeks as a single agent",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Dose cumulativa máxima 500 mg/m² (KEYNOTE-775); FEVE basal.",
+        "fichaId": null,
+        "id": "endometrio-doxorrubicina-2l",
+        "nome": "Doxorrubicina — 2ª linha",
+        "cenario": "Avançado/recorrente após platina",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Doxorrubicina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03517449",
+          "pagina": null,
+          "trecho": "doxorubicin 60 milligram per square meter (mg/m^2) administered by IV on Day 1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Hemograma semanal; neuropatia.",
+        "fichaId": null,
+        "id": "endometrio-paclitaxel-2l",
+        "nome": "Paclitaxel D1, D8, D15 a cada 28 dias — 2ª linha",
+        "cenario": "Avançado/recorrente após platina",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03517449",
+          "pagina": null,
+          "trecho": "paclitaxel 80 mg/m^2 administered by IV on a 28-day cycle: 3 weeks",
+          "estado": "VERIFICADO"
+        }
       }
     ],
     "radioterapia": [
@@ -1158,7 +1511,13 @@
         "fracoes": null,
         "concomitante": "",
         "observacao": "Braquiterapia vaginal; dose não especificada na SBOC.",
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ]
+        },
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Endometrio-v6-VERSAO-PARA-COLABORACAO.pdf",
@@ -1172,7 +1531,13 @@
         "doseTotalGy": null,
         "fracoes": null,
         "concomitante": "cisplatina 50 mg/m² ×2 no alto risco (PORTEC-3)",
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ]
+        },
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Endometrio-v6-VERSAO-PARA-COLABORACAO.pdf",
@@ -1211,7 +1576,7 @@
         "seAlvo": "dMMR/MSI-H",
         "opcao": "1ª linha: carboplatina + paclitaxel + pembrolizumabe/dostarlimabe/durvalumabe; 2ª linha: pembrolizumabe ou dostarlimabe",
         "evidencia": "NE alto/FR forte (1ª linha)",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — pembrolizumabe, dostarlimabe e durvalumabe sem incorporação (dostarlimabe 1ª linha: CP SCTIE/MS nº 104/2026, preliminar desfavorável); alternativa SUS: carboplatina + paclitaxel (APAC 0304020184)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Endometrio-v6-VERSAO-PARA-COLABORACAO.pdf",
@@ -1224,7 +1589,7 @@
         "seAlvo": "pMMR",
         "opcao": "Carboplatina + paclitaxel + IO ± olaparibe + durvalumabe manutenção; 2ª linha lenvatinibe + pembrolizumabe",
         "evidencia": "NE alto/FR forte",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — lenvatinibe + pembrolizumabe sem avaliação CONITEC (INFERIDO); alternativa SUS: carboplatina + paclitaxel / doxorrubicina",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Endometrio-v6-VERSAO-PARA-COLABORACAO.pdf",
@@ -1237,7 +1602,7 @@
         "seAlvo": "HER2 3+ (padrão gástrico)",
         "opcao": "Trastuzumabe deruxtecana 5,4 mg/kg",
         "evidencia": "NE moderado/FR forte",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — T-DXd sem avaliação CONITEC (INFERIDO)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Endometrio-v6-VERSAO-PARA-COLABORACAO.pdf",
@@ -1276,7 +1641,7 @@
         "seAlvo": "NSMP RH+ baixo grau",
         "opcao": "Hormonioterapia paliativa em doença indolente",
         "evidencia": "NE moderado/FR forte",
-        "sus": "DADO_AUSENTE",
+        "sus": "sim — hormonioterapia via APAC 0304020036 (SIGTAP 2026-09)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Endometrio-v6-VERSAO-PARA-COLABORACAO.pdf",
@@ -1321,8 +1686,8 @@
       },
       {
         "nome": "GOG-258",
-        "nct": null,
-        "nctEstado": "NAO_VERIFICADO",
+        "nct": "NCT00942357",
+        "nctEstado": "VERIFICADO",
         "populacao": "III-IVA",
         "bracos": "QT-RT → QT vs QT ×6",
         "desfecho": "SLP",
@@ -1333,7 +1698,8 @@
           "pagina": 13,
           "trecho": "não houve diferenças em termo de SLP",
           "estado": "VERIFICADO"
-        }
+        },
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT00942357 (org ID GOG-0258; consultado 2026-10-11)"
       },
       {
         "nome": "NRG-GY018",
@@ -1589,14 +1955,39 @@
     ]
   },
   "pendencias": [
-    "SEM_FONTE: doses de dostarlimabe e durvalumabe em combinação com QT na 1ª linha (SBOC só cita os agentes); olaparibe + durvalumabe manutenção sem dose.",
-    "SEM_FONTE: doses de doxorrubicina e paclitaxel em monoterapia na 2ª linha.",
-    "SEM_FONTE: doses e fracionamento de braquiterapia e RT pélvica.",
-    "Número de ciclos de carboplatina/paclitaxel + IO na 1ª linha não explicitado na SBOC.",
-    "IO + QT adjuvante em dMMR III/IV (ESGO 2025, KEYNOTE-B21 subgrupo) sem dose na SBOC — não criado protocolo.",
-    "SUS: nenhum status CONITEC verificado para endométrio (IO, lenvatinibe, T-DXd, iPARP).",
-    "GOG-258 e KEYNOTE-775: NCT não verificado na API.",
-    "SBOC endométrio 2026 v6 é versão para colaboração."
+    {
+      "texto": "Olaparibe + durvalumabe manutenção (DUO-E, pMMR): dose de olaparibe sem fonte para endométrio.",
+      "classe": "DEPENDE_BULA_ANVISA",
+      "buscasFeitas": [
+        "SBOC 2026 e Endometrio.txt: olaparibe citado sem dose",
+        "ClinicalTrials NCT04269200: braco 'Olaparib tablets' sem dose; descriptionModule sem dose",
+        "rotulo FDA Lynparza: sem indicacao endometrial (300 mg 12/12h e de outros tumores - nao transferido)",
+        "PRO aula 29 p.3: 'Durvalumabe apenas se dMMR; s. aprov. olaparibe'"
+      ]
+    },
+    {
+      "texto": "SEM_FONTE: doses e fracionamento de braquiterapia e RT pélvica.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+      ],
+      "informacaoJaLocalizada": "RT pélvica 48,6 Gy com cisplatina (SBOC antiga Endometrio.txt p.14); 46 Gy/23 fr (aula PRO 28 p.7, PORTEC-2)"
+    },
+    {
+      "texto": "IO + QT adjuvante em dMMR III/IV (ESGO 2025, KEYNOTE-B21 subgrupo) sem dose na SBOC — não criado protocolo.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC endométrio 2026 v6: sem dose para IO adjuvante",
+        "KEYNOTE-B21: benefício só em subgrupo dMMR (fora da SBOC)"
+      ]
+    },
+    {
+      "texto": "SBOC endométrio 2026 v6 é versão para colaboração.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "acervo local SBOC: só versão para colaboração v6 de 2026"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -1615,7 +2006,8 @@
         "trecho": "FASLODEX 500 mg should be administered intramuscularly into the buttocks",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Manter 250 mg q4s apenas no endométrio (SBOC); 500 mg é da mama. Não transferir entre tumores; validar com o médico."
+      "escolhaSeguranca": "Manter 250 mg q4s apenas no endométrio (SBOC); 500 mg é da mama. Não transferir entre tumores; validar com o médico.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Carboplatina AUC na 1ª linha",
@@ -1633,7 +2025,8 @@
         "trecho": "carboplatina AUC 5-6 + paclitaxel 175 mg/m² + filgrastima a cada 3",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Registrar AUC 5 (menor da faixa); AUC 6 a critério médico."
+      "escolhaSeguranca": "Registrar AUC 5 (menor da faixa); AUC 6 a critério médico.",
+      "decisaoNecessaria": false
     }
   ],
   "curadoria": {
@@ -1643,8 +2036,46 @@
       "SBOC 2026 Endométrio v6 (págs. 3-18)",
       "Onco PRO 2026 Aulas 27-29 (consulta de apoio)",
       "Rótulo FDA Keytruda IV e Faslodex (openFDA)",
-      "ClinicalTrials.gov API v2"
+      "ClinicalTrials.gov API v2",
+      "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
+      "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "rodada2": {
+      "data": "2026-10-11",
+      "redator": "Claude (Opus 5.5) — redução de pendências e conflitos; aprovação clínica pendente",
+      "pendenciasResolvidas": [
+        {
+          "texto": "SEM_FONTE: doses de dostarlimabe e durvalumabe em combinação com QT na 1ª linha (SBOC só cita os agentes); olaparibe + durvalumabe manutenção sem dose.",
+          "resolucao": "Dostarlimabe (bula Jemperli) e durvalumabe (bula Imfinzi, dMMR) com CP: 4 protocolos novos. Olaparibe + durvalumabe pMMR: classificado DEPENDE_BULA_ANVISA."
+        },
+        {
+          "texto": "SEM_FONTE: doses de doxorrubicina e paclitaxel em monoterapia na 2ª linha.",
+          "resolucao": "Doxorrubicina 60 mg/m² q21 e paclitaxel 80 mg/m² D1, D8, D15 q28 (braço controle KEYNOTE-775, NCT03517449)."
+        },
+        {
+          "texto": "Número de ciclos de carboplatina/paclitaxel + IO na 1ª linha não explicitado na SBOC.",
+          "resolucao": "6 ciclos (NRG-GY018, NCT03914612; RUBY e DUO-E pelas bulas)."
+        },
+        {
+          "texto": "SUS: nenhum status CONITEC verificado para endométrio (IO, lenvatinibe, T-DXd, iPARP).",
+          "resolucao": "Status SUS preenchido para todos os protocolos (APAC 0304020184/0304020036; IO sem incorporação; dostarlimabe em CP 104/2026)."
+        },
+        {
+          "texto": "GOG-258 e KEYNOTE-775: NCT não verificado na API.",
+          "resolucao": "GOG-258 = NCT00942357; KEYNOTE-775 = NCT03517449 (registros abertos)."
+        }
+      ],
+      "correcoes": []
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "1 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
 }

@@ -126,7 +126,15 @@
           "quando": "Biópsia percutânea de massa adrenal: indicação não abordada nas fontes; excluir feocromocitoma antes de qualquer punção",
           "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
           "fonte": null,
-          "pendencia": "SEM_FONTE"
+          "pendencia": "SEM_FONTE",
+          "pendenciaClasse": {
+            "texto": "Indicação/contraindicação de biópsia percutânea de massa adrenal não descrita nas fontes lidas.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "SBOC adrenal 2026",
+              "Onco PRO aula 19"
+            ]
+          }
         }
       ],
       "laudoDeveConter": [
@@ -170,6 +178,13 @@
             "pagina": 8,
             "trecho": "Carcinoma adrenocortical, carcinoma de plexo coroide",
             "estado": "VERIFICADO"
+          },
+          "pendenciaClasse": {
+            "texto": "Painel germinativo sem id no catálogo.",
+            "classe": "DECISAO_CLINICA_DR_SILAS",
+            "buscasFeitas": [
+              "catálogo v1.1"
+            ]
           }
         },
         {
@@ -187,6 +202,13 @@
             "pagina": 9,
             "trecho": "é realizada para a detecção de síndromes familiares como MEN2A, MEN2B,",
             "estado": "VERIFICADO"
+          },
+          "pendenciaClasse": {
+            "texto": "Painel germinativo sem id no catálogo.",
+            "classe": "DECISAO_CLINICA_DR_SILAS",
+            "buscasFeitas": [
+              "catálogo v1.1"
+            ]
           }
         }
       ]
@@ -214,12 +236,13 @@
           "pagina": 13,
           "trecho": "Cortisol, ACTH, Teste stress com Dexametasona, S-DHEA",
           "estado": "INFERIDO"
-        }
+        },
+        "pendencia": "CONFERIR_EQUIVALENCIA_CATALOGO",
+        "mapeamentoCatalogo": "Claude 2026-10-11: teste = dosagem de cortisol sérico após dexametasona (id CORTISOL); a dexametasona é prescrição, não exame"
       },
       {
-        "catalogoId": null,
+        "catalogoId": "ACTH",
         "rotulo": "ACTH",
-        "pendencia": "SEM_ID_NO_CATALOGO",
         "cenario": "CCA",
         "indicacao": "universal",
         "fonte": {
@@ -228,12 +251,20 @@
           "pagina": 13,
           "trecho": "Cortisol, ACTH, Teste stress com Dexametasona, S-DHEA",
           "estado": "INFERIDO"
-        }
+        },
+        "pendenciaClasse": {
+          "texto": "ACTH: sem id no catálogo v1.1; SIGTAP 02.02.06.008-0. Inclusão depende de D-F1-02.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026 procs"
+          ]
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
       },
       {
-        "catalogoId": null,
+        "catalogoId": "SUPRESSAO_CORTISOL_DEXAMETASONA",
         "rotulo": "Teste de supressão com dexametasona",
-        "pendencia": "SEM_ID_NO_CATALOGO",
         "cenario": "CCA",
         "indicacao": "universal",
         "fonte": {
@@ -242,12 +273,20 @@
           "pagina": 13,
           "trecho": "Cortisol, ACTH, Teste stress com Dexametasona, S-DHEA",
           "estado": "INFERIDO"
-        }
+        },
+        "pendenciaClasse": {
+          "texto": "Teste de supressão com dexametasona: sem id no catálogo v1.1; SIGTAP só tem catecolaminas (02.02.01.024-4). Inclusão depende de D-F1-02.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026 procs"
+          ]
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
       },
       {
-        "catalogoId": null,
+        "catalogoId": "DHEAS",
         "rotulo": "S-DHEA",
-        "pendencia": "SEM_ID_NO_CATALOGO",
         "cenario": "CCA",
         "indicacao": "universal",
         "fonte": {
@@ -256,12 +295,20 @@
           "pagina": 13,
           "trecho": "Cortisol, ACTH, Teste stress com Dexametasona, S-DHEA",
           "estado": "INFERIDO"
-        }
+        },
+        "pendenciaClasse": {
+          "texto": "S-DHEA: sem id no catálogo v1.1; SIGTAP 02.02.06.014-4 (DHEA; sulfato não distinto). Inclusão depende de D-F1-02.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026 procs"
+          ]
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
       },
       {
-        "catalogoId": null,
+        "catalogoId": "HIDROXIPROGESTERONA_17",
         "rotulo": "Androstenediona e 17-hidroxiprogesterona",
-        "pendencia": "SEM_ID_NO_CATALOGO",
         "cenario": "CCA",
         "indicacao": "universal",
         "fonte": {
@@ -270,7 +317,16 @@
           "pagina": 13,
           "trecho": "Androstenediona, Testosterona, 17- Hidroxiprogesterona",
           "estado": "INFERIDO"
-        }
+        },
+        "pendenciaClasse": {
+          "texto": "Androstenediona e 17-hidroxiprogesterona: sem id no catálogo v1.1; SIGTAP 02.02.06.011-0 e 02.02.06.004-7. Inclusão depende de D-F1-02.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026 procs"
+          ]
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
       },
       {
         "catalogoId": "TESTOSTERONA_TOTAL",
@@ -325,9 +381,8 @@
         }
       },
       {
-        "catalogoId": null,
+        "catalogoId": "RENINA",
         "rotulo": "Aldosterona e renina",
-        "pendencia": "SEM_ID_NO_CATALOGO",
         "cenario": "CCA",
         "indicacao": "universal",
         "fonte": {
@@ -336,7 +391,16 @@
           "pagina": 13,
           "trecho": "Sodio, Potassio, Aldosterona e Renina",
           "estado": "INFERIDO"
-        }
+        },
+        "pendenciaClasse": {
+          "texto": "Aldosterona e renina: sem id no catálogo v1.1; SIGTAP 02.02.06.009-8 e 02.02.06.031-4. Inclusão depende de D-F1-02.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026 procs"
+          ]
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
       },
       {
         "catalogoId": null,
@@ -350,6 +414,14 @@
           "pagina": 9,
           "trecho": "devem ser dosadas metanefrinas e normetanefrinas na urina 24 horas",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "Metanefrinas e normetanefrinas (urina 24 h) ou metanefrinas plasmáticas: sem id no catálogo v1.1; SIGTAP só tem catecolaminas (02.02.01.024-4). Inclusão depende de D-F1-02.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026 procs"
+          ]
         }
       },
       {
@@ -552,7 +624,17 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Mitotano adjuvante: não há procedimento SIGTAP de QT adjuvante do carcinoma de adrenal (só paliativa 03.04.02.012-5) nem demanda na Conitec.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "SIGTAP 09/2026",
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "CURSO",
@@ -575,7 +657,7 @@
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1, D8",
-            "observacao": "via não escrita na SBOC (conferir)"
+            "observacao": "via EV: bula ('For Intravenous Use Only')"
           },
           {
             "droga": "Etoposídeo",
@@ -608,9 +690,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.012-5",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALITIVA DO CARCINOMA DE ADRENAL (DOENÇA METASTÁTICA RECIDIVADA OU LOCO -REGIONAL AVANÇADA)",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Mitotano dentro da APAC paliativa (fornecimento pelo serviço)."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -619,7 +707,13 @@
           "trecho": "doxorrubicina 20 mg/m² D1 e D8 e mitotano 1 a 4 g VO 1x/dia",
           "estado": "VERIFICADO"
         },
-        "pendencia": "VIA_DOXORRUBICINA_CONFERIR"
+        "fonteVia": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Doxorubicin HCl (openFDA set_id 00634b2b-4e48-4178-8877-28582af894ad, 2026-04-30)",
+          "pagina": null,
+          "trecho": "For Intravenous Use Only",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "adrenal-pgl-belzutifano",
@@ -644,7 +738,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Belzutifano: nenhuma demanda nem portaria de incorporação na Conitec para paraganglioma/feocromocitoma; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -678,7 +781,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Sunitinibe: nenhuma demanda nem portaria de incorporação na Conitec para feocromocitoma/paraganglioma (incorporado só para carcinoma renal 2018 e GIST 2025); não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -688,6 +800,50 @@
           "estado": "INFERIDO"
         },
         "observacao": "Dose do estudo citado pela SBOC (contexto de evidência, não tabela de recomendação)."
+      },
+      {
+        "id": "adrenal-feo-everolimo",
+        "nome": "Everolimo",
+        "cenario": "feocromocitoma/paraganglioma metastático progressivo",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "Everolimo",
+            "dose": 10,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "contínuo"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Ajuste hepático e por toxicidade (estomatite, pneumonite) conforme bula",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Everolimo: nenhuma demanda nem portaria de incorporação na Conitec para feocromocitoma/paraganglioma; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
+        },
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov API v2 NCT01152827 (COMPLETED) — RAD001 em feocromocitoma",
+          "pagina": null,
+          "trecho": "RAD001 10 mg daily po medication",
+          "estado": "INFERIDO"
+        },
+        "nct": "NCT01152827",
+        "nctEstado": "VERIFICADO"
       }
     ],
     "radioterapia": [
@@ -703,6 +859,13 @@
           "pagina": 7,
           "trecho": "Para pacientes estádios III ou submetidos a ressecção incompleta, a",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "Dose da RT adjuvante do CCA — aceno de RT.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC adrenal p.7"
+          ]
         }
       },
       {
@@ -717,6 +880,13 @@
           "pagina": 8,
           "trecho": "que pode ser repetido a cada 90 dias",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "Atividade de I-131-MIBG — aceno de medicina nuclear.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC adrenal p.8"
+          ]
         }
       }
     ],
@@ -881,7 +1051,15 @@
         ],
         "periodicidade": "SEM_FONTE (SBOC não define seguimento)",
         "pendencia": "SEM_FONTE",
-        "fonte": null
+        "fonte": null,
+        "pendenciaClasse": {
+          "texto": "Seguimento pós-ressecção do CCA não definido pela SBOC.",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "SBOC adrenal 2026",
+            "Onco PRO aula 19"
+          ]
+        }
       }
     ]
   },
@@ -906,7 +1084,12 @@
       "TGO",
       "TGP",
       "TRIGLICERIDEOS",
-      "TSH"
+      "TSH",
+      "ACTH",
+      "SUPRESSAO_CORTISOL_DEXAMETASONA",
+      "DHEAS",
+      "HIDROXIPROGESTERONA_17",
+      "RENINA"
     ],
     "interacoesConsultar": [
       {
@@ -1017,13 +1200,57 @@
     ]
   },
   "pendencias": [
-    "Dose do mitotano adjuvante: SBOC não fixa; titulação vem da aula PRO (INFERIDO). Conflito de teto com a SBOC metastática (1-4 g/dia).",
-    "Via da doxorrubicina no EDP não escrita na SBOC.",
-    "SEM_FONTE: doses de I-131-MIBG, CVD, temozolomida, everolimo e cabozantinibe em feo/PGL.",
-    "SEM_FONTE: dose de RT adjuvante no CCA e seguimento pós-ressecção.",
-    "SEM_FONTE: indicação/contraindicação de biópsia percutânea de massa adrenal.",
-    "Catálogo: sem ids para ACTH, S-DHEA, aldosterona, renina, metanefrinas, teste com dexametasona e mitotanemia.",
-    "SUS: mitotano, belzutifano, cabozantinibe, sunitinibe sem dado de incorporação no pack."
+    {
+      "texto": "Mitotano adjuvante: SBOC não fixa dose; titulação do curso (INFERIDO) e bula FDA (Lysodren, doença inoperável: início 2-6 g/dia) divergem da faixa SBOC 1-4 g/dia. Titulação por mitotanemia = decisão médica.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC adrenal 2026",
+        "Onco PRO aula 19",
+        "openFDA Lysodren"
+      ]
+    },
+    {
+      "texto": "Everolimo entrou (10 mg/dia, NCT01152827, INFERIDO). Seguem sem dose: I-131-MIBG (aceno de medicina nuclear; produto FDA descontinuado), CVD e temozolomida no feo/PGL metastático (sem bula na indicação; ensaio aberto de TMZ é neoadjuvante — cenário diferente, não transferido) e cabozantinibe (NCT02302833 não informa dose no registro).",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC adrenal p.8-9",
+        "openFDA",
+        "ClinicalTrials.gov NCT02302833, NCT05885386, NCT04400474, NCT01152827"
+      ]
+    },
+    {
+      "texto": "RT adjuvante do CCA: aceno de RT (ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA). Seguimento pós-ressecção: SBOC e curso não definem intervalo.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC adrenal 2026",
+        "Onco PRO aula 19"
+      ]
+    },
+    {
+      "texto": "Biópsia percutânea de massa adrenal: sem regra nas fontes lidas — decisão do médico (risco de crise adrenérgica no feocromocitoma não excluído e de semeadura no CCA).",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC adrenal 2026",
+        "Onco PRO aula 19"
+      ]
+    },
+    {
+      "texto": "Teste com dexametasona mapeado para CORTISOL. Seguem sem id: ACTH, S-DHEA, androstenediona, 17-OH-progesterona, aldosterona, renina, metanefrinas e mitotanemia (códigos SIGTAP anotados nos itens).",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "catálogo v1.1",
+        "SIGTAP 09/2026"
+      ]
+    },
+    {
+      "texto": "EDP-mitotano: APAC 03.04.02.012-5. Mitotano adjuvante: sem procedimento. Belzutifano, sunitinibe, everolimo e cabozantinibe no feo/PGL: sem demanda nem portaria na Conitec.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Painel de Demandas Conitec (exportação 15/06/2026)",
+        "TecnologiasDemandadas Conitec 15/04/2026",
+        "web: gov.br/conitec, Conass Informa"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -1042,7 +1269,8 @@
         "trecho": "EC Estadiamento ENSAT",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Registrar pelo sistema da SBOC e anotar o equivalente ENSAT (T3-4 ou N1 = III; M1 = IV)"
+      "escolhaSeguranca": "Registrar pelo sistema da SBOC e anotar o equivalente ENSAT (T3-4 ou N1 = III; M1 = IV)",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Teto de dose do mitotano",
@@ -1060,7 +1288,8 @@
         "trecho": "Dose máxima de 12 g/d – 3 a 4 tomadas durante o dia",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Usar a faixa da SBOC (1-4 g/dia) como referência e titular por mitotanemia; doses acima só com nível sérico e decisão médica"
+      "escolhaSeguranca": "Usar a faixa da SBOC (1-4 g/dia) como referência e titular por mitotanemia; doses acima só com nível sérico e decisão médica",
+      "decisaoNecessaria": true
     }
   ],
   "curadoria": {
@@ -1070,8 +1299,22 @@
       "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
       "Onco PRO 2026/slides-pro-2026/19 - Aula 19 - Câncer Adrenocortical, Paraganglioma e Feocromocitoma",
       "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf (p.8, Li-Fraumeni)",
-      "ClinicalTrials.gov API v2"
+      "ClinicalTrials.gov API v2",
+      "SIGTAP competência 09/2026",
+      "Bula FDA Doxorubicin (openFDA)",
+      "ClinicalTrials.gov API v2 NCT01152827, NCT02302833",
+      "Painel de Demandas Conitec 15/06/2026"
     ],
-    "aprovacaoClinica": null
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-11",
+        "redator": "Claude (agente curador)",
+        "resolvidas": 1,
+        "classificadas": 6,
+        "susPreenchidos": 1,
+        "notas": []
+      }
+    ]
   }
 }

@@ -243,17 +243,17 @@
         }
       },
       {
-        "catalogoId": null,
+        "catalogoId": "CD4_CD8",
         "rotulo": "CD4 e carga viral (se HIV+)",
         "indicacao": "condicional",
-        "pendencia": "SEM_ID_NO_CATALOGO",
         "fonte": {
           "tipo": "CURSO",
           "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/17 - Aula 17 - Câncer de Canal Anal.pdf",
           "pagina": 8,
           "trecho": "Pacientes HIV positivo devem ser avaliados para carga viral e",
           "estado": "INFERIDO"
-        }
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
       }
     ],
     "avaliacaoClinica": [
@@ -1025,7 +1025,14 @@
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
-        "pendencia": "SEM_FONTE: SBOC não traz doses dessas opções no canal anal; doses de outros tumores não são transferidas.",
+        "pendencia": {
+          "texto": "SEM_FONTE: SBOC não traz doses dessas opções no canal anal; doses de outros tumores não são transferidas.",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "SBOC 2026 canal anal p.10",
+            "Onco PRO 2026 aula 17 (paclitaxel 80 só no InterAACT 1ª linha com carboplatina)"
+          ]
+        },
         "sus": {
           "disponivel": "sim",
           "fonte": {
@@ -1051,7 +1058,15 @@
         "doseTotalGy": 50.4,
         "fracoes": null,
         "concomitante": "mitomicina + 5-FU (ou cisplatina + 5-FU / capecitabina)",
-        "pendencia": "SEM_FONTE na SBOC: dose e fracionamento de RT; valor do curso PRO (ACT II) — INFERIDO",
+        "pendencia": {
+          "texto": "SEM_FONTE na SBOC: dose e fracionamento de RT; valor do curso PRO (ACT II) — INFERIDO",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC 2026 canal anal",
+            "Onco PRO 2026 aula 17"
+          ],
+          "nota": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11)."
+        },
         "fonte": {
           "tipo": "CURSO",
           "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/17 - Aula 17 - Câncer de Canal Anal.pdf",
@@ -1066,7 +1081,15 @@
         "doseTotalFaixa": "50–60 Gy (curso PRO)",
         "fracoes": null,
         "concomitante": "nenhum",
-        "pendencia": "SEM_FONTE na SBOC; faixa do curso — INFERIDO",
+        "pendencia": {
+          "texto": "SEM_FONTE na SBOC; faixa do curso — INFERIDO",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC 2026 canal anal",
+            "Onco PRO 2026 aula 17"
+          ],
+          "nota": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11)."
+        },
         "fonte": {
           "tipo": "CURSO",
           "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/17 - Aula 17 - Câncer de Canal Anal.pdf",
@@ -1301,7 +1324,8 @@
       "RM_PELVE",
       "TC_ABDOMEN_SUPERIOR",
       "TC_PELVE",
-      "TC_TORAX"
+      "TC_TORAX",
+      "CD4_CD8"
     ],
     "interacoesConsultar": [
       {
@@ -1481,12 +1505,48 @@
     ]
   },
   "pendencias": [
-    "SEM_FONTE: dose e fracionamento da RT (SBOC não informa; 50,4 Gy só do curso PRO).",
-    "SEM_FONTE: doses de paclitaxel, FOLFIRI e mitomicina + 5-FU na 2ª linha.",
-    "SEM_FONTE: emetogenicidade por esquema.",
-    "SEM_ID_NO_CATALOGO: anuscopia, CD4/carga viral, DPYD.",
-    "SUS: imunoterapia sem aprovação Anvisa no canal anal; QT por APAC (0304040053/0304020192).",
-    "Adenocarcinoma de canal anal: confirmar com o médico se segue o pack colorretal."
+    {
+      "texto": "SEM_FONTE: dose e fracionamento da RT (SBOC não informa; 50,4 Gy só do curso PRO).",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "SBOC 2026 canal anal",
+        "Onco PRO 2026 aula 17"
+      ],
+      "nota": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11)."
+    },
+    {
+      "texto": "SEM_FONTE: doses de paclitaxel, FOLFIRI e mitomicina + 5-FU na 2ª linha.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC 2026 canal anal p.10",
+        "Onco PRO 2026 aula 17"
+      ],
+      "nota": "Doses de outros tumores/linhas não transferidas."
+    },
+    {
+      "texto": "SEM_FONTE: emetogenicidade por esquema.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC 2026 canal anal",
+        "Onco PRO 2026 aulas 87-88"
+      ],
+      "nota": "Classificação por droga vem do módulo de suporte."
+    },
+    {
+      "texto": "SEM_ID_NO_CATALOGO: anuscopia, CD4/carga viral, DPYD.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json (164 ids)"
+      ],
+      "nota": "Depende de ampliação do catálogo de exames."
+    },
+    {
+      "texto": "Adenocarcinoma de canal anal: confirmar com o médico se segue o pack colorretal.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026 canal anal"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -1506,7 +1566,8 @@
         "trecho": "*5-FU pode ser substituído por capecitabina (NE muito baixo/FR fraca)",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Preferir 5-FU infusional; capecitabina como alternativa quando infusão não for viável."
+      "escolhaSeguranca": "Preferir 5-FU infusional; capecitabina como alternativa quando infusão não for viável.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Cisplatina + 5-FU na doença metastática — nível de evidência",
@@ -1526,7 +1587,8 @@
         "estado": "VERIFICADO"
       },
       "fonteBDetalhe": "Fluxograma: NE alto/FR fraca; DCF modificado texto NE moderado/FR forte × fluxograma NE alto/FR fraca",
-      "escolhaSeguranca": "Sem impacto em dose; carboplatina + paclitaxel segue preferencial."
+      "escolhaSeguranca": "Sem impacto em dose; carboplatina + paclitaxel segue preferencial.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Agrupamento TNM",
@@ -1546,7 +1608,8 @@
         "estado": "INFERIDO"
       },
       "fonteBDetalhe": "Curso PRO agrupa T1–2 N1 como II e T3–4 N0–1 como III",
-      "escolhaSeguranca": "Usar o agrupamento AJCC 8ª da SBOC."
+      "escolhaSeguranca": "Usar o agrupamento AJCC 8ª da SBOC.",
+      "decisaoNecessaria": false
     }
   ],
   "curadoria": {
@@ -1559,6 +1622,15 @@
       "ClinicalTrials.gov API v2 (3 NCT verificados)",
       "SIGTAP 2026-09"
     ],
-    "aprovacaoClinica": null
+    "aprovacaoClinica": null,
+    "reducaoPendencias20261011": {
+      "data": "2026-10-11",
+      "resolvidas": [
+        {
+          "pendencia": "SUS: imunoterapia sem aprovação Anvisa no canal anal; QT por APAC (0304040053/0304020192).",
+          "como": "Já registrado nos protocolos (sus.disponivel preenchido: QT por APAC 0304040053/0304020192; IO 'nao' sem aprovação Anvisa)."
+        }
+      ]
+    }
   }
 }

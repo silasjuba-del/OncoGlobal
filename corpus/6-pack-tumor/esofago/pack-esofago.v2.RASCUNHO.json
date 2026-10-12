@@ -125,7 +125,7 @@
         }
       },
       {
-        "catalogoId": null,
+        "catalogoId": "LAPAROSCOPIA",
         "rotulo": "Laparoscopia diagnóstica",
         "indicacao": "condicional",
         "quando": "adenocarcinoma de JEG cT3/cT4 ou cN+, sem M1 nas tomografias (doença peritoneal oculta)",
@@ -136,7 +136,7 @@
           "trecho": "Laparoscopia diagnóstica: indicada em adenocarcinomas localmente avançados",
           "estado": "VERIFICADO"
         },
-        "pendencia": "SEM_ID_NO_CATALOGO"
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
       }
     ],
     "patologico": {
@@ -630,16 +630,15 @@
         "ajusteObrigatorio": "",
         "fichaId": "FICHA.esofago.carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt@1.0.0",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "No cadastro SIGTAP 2026-09 local há QT de esôfago avançado (0304020176) e QT prévia (0304040118); procedimento para QT concomitante definitiva não identificado.",
-          "pendencia": "SUS_PROCEDIMENTO_A_CONFIRMAR",
+          "disponivel": "sim",
+          "via": "APAC 0304040118 (forma 03.04.04)",
+          "nota": "Único procedimento não-avançado de esôfago no SIGTAP; enquadramento da QT/RT definitiva depende da regra anti-glosa (finalidade do grupo não importada).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304040118",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304040118",
             "pagina": null,
             "trecho": "QUIMIOTERAPIA DE CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DE ESÔFAGO",
-            "estado": "VERIFICADO"
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -690,16 +689,15 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Procedimento SIGTAP específico para QT/RT definitiva de esôfago não identificado no cadastro local.",
-          "pendencia": "SUS_PROCEDIMENTO_A_CONFIRMAR",
+          "disponivel": "sim",
+          "via": "APAC 0304040118 (forma 03.04.04)",
+          "nota": "Único procedimento não-avançado de esôfago no SIGTAP; enquadramento da QT/RT definitiva depende da regra anti-glosa (finalidade do grupo não importada).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304040118",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304040118",
             "pagina": null,
             "trecho": "QUIMIOTERAPIA DE CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DE ESÔFAGO",
-            "estado": "VERIFICADO"
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -765,16 +763,15 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Procedimento SIGTAP específico para QT/RT definitiva de esôfago não identificado no cadastro local.",
-          "pendencia": "SUS_PROCEDIMENTO_A_CONFIRMAR",
+          "disponivel": "sim",
+          "via": "APAC 0304040118 (forma 03.04.04)",
+          "nota": "Único procedimento não-avançado de esôfago no SIGTAP; enquadramento da QT/RT definitiva depende da regra anti-glosa (finalidade do grupo não importada).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304040118",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304040118",
             "pagina": null,
             "trecho": "QUIMIOTERAPIA DE CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DE ESÔFAGO",
-            "estado": "VERIFICADO"
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -818,7 +815,7 @@
           }
         ],
         "cicloDias": 7,
-        "numeroCiclos": null,
+        "numeroCiclos": 5,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": "FICHA.esofago.carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt@1.0.0",
@@ -850,7 +847,14 @@
           "estado": "VERIFICADO"
         },
         "numeroCiclosNota": "semanal durante a RT; número de semanas não informado na SBOC — pendência",
-        "doseVerificada": true
+        "doseVerificada": true,
+        "fonteCiclos": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/03 - Aula 03 - Câncer de Esôfago- Tratamento da Doença Localizada e Avançada.pdf",
+          "pagina": 8,
+          "trecho": "Paclitaxel 50mg/m² semanal (x 5)",
+          "estado": "INFERIDO"
+        }
       },
       {
         "id": "esofago-neoadjuvante-cisplatina-5fu-rt",
@@ -1008,18 +1012,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "seguimento clínico-radiológico (sem adjuvância incorporada identificada)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Portaria SECTICS/MS nº 55, de 28/07/2025 (DOU nº 142, 30/07/2025), Relatório CONITEC nº 1017 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-55-de-28-de-julho-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o nivolumabe para o tratamento adjuvante de pacientes adultos",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado. Alternativa SUS: seguimento.",
+          "alternativaSUS": "seguimento clínico-radiológico (sem adjuvância incorporada identificada)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1104,7 +1106,11 @@
           "estado": "VERIFICADO"
         },
         "alertaFicha": "a ficha vinculada traz 5-FU 2.400 mg/m²; a SBOC traz 2.600 mg/m² — ver conflitos",
-        "doseVerificada": true
+        "doseVerificada": true,
+        "fases": [
+          "pré-operatória (4 ciclos)",
+          "pós-operatória (4 ciclos)"
+        ]
       },
       {
         "id": "esofago-perioperatorio-flot-durvalumabe",
@@ -1150,7 +1156,8 @@
             "unidade": "mg",
             "via": "EV",
             "dias": "D1",
-            "observacao": "a cada 4 semanas concomitante ao FLOT; depois 10 ciclos mensais"
+            "observacao": "a cada 4 semanas concomitante ao FLOT; depois 10 ciclos mensais",
+            "intervaloDias": 28
           }
         ],
         "cicloDias": 14,
@@ -1159,18 +1166,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "FLOT perioperatório sem durvalumabe",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "FLOT perioperatório sem durvalumabe"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1187,7 +1192,14 @@
           "estado": "VERIFICADO"
         },
         "numeroCiclosNota": "8 ciclos de FLOT (q14); durvalumabe q28 durante o FLOT e depois 10 ciclos",
-        "doseVerificada": true
+        "doseVerificada": true,
+        "fases": [
+          "pré-operatória",
+          "pós-operatória",
+          "manutenção com durvalumabe"
+        ],
+        "calendarioExecutavel": false,
+        "motivoCalendario": "FLOT q14 + durvalumabe q28: calendário por componente; não usar repetidor uniforme"
       },
       {
         "id": "esofago-paliativo-1l-pembrolizumabe-cisplatina-5fu",
@@ -1226,18 +1238,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "cisplatina + 5-FU (procedimento 0304020176)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Portaria SECTICS/MS nº 57, de 28/07/2025 (DOU nº 142, 30/07/2025), Relatório CONITEC nº 1018 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-57-de-28-de-julho-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o nivolumabe e o pembrolizumabe para o tratamento de primeira linha",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporados (1ª linha esôfago). Pembrolizumabe CPS ≥ 10 em reavaliação (CP 38/2026, preliminar desfavorável).",
+          "alternativaSUS": "cisplatina + 5-FU (procedimento 0304020176)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1287,24 +1297,22 @@
             "observacao": "ou 480 mg D1"
           }
         ],
-        "cicloDias": null,
+        "cicloDias": 28,
         "numeroCiclos": 6,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "cisplatina + 5-FU (procedimento 0304020176)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Portaria SECTICS/MS nº 57, de 28/07/2025 (DOU nº 142, 30/07/2025), Relatório CONITEC nº 1018 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-57-de-28-de-julho-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o nivolumabe e o pembrolizumabe para o tratamento de primeira linha",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporados (1ª linha esôfago). Pembrolizumabe CPS ≥ 10 em reavaliação (CP 38/2026, preliminar desfavorável).",
+          "alternativaSUS": "cisplatina + 5-FU (procedimento 0304020176)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1313,9 +1321,15 @@
           "trecho": "Nivolumabe 240 mg EV D1 e D15 (ou 480 mg EV D1)",
           "estado": "CONFLITANTE"
         },
-        "pendencia": "CONFLITANTE",
-        "notaConflito": "SBOC p.20 diz 'a cada 3 semanas' com nivolumabe D1 e D15 — calendário internamente inconsistente; cicloDias deixado nulo até conferência no protocolo do estudo",
-        "doseVerificada": false
+        "notaConflito": "Resolvido: CheckMate 648 usa ciclo de 4 semanas (nivolumabe 240 mg D1 e D15; cisplatina D1; 5-FU D1–D5); o 'a cada 3 semanas' da SBOC p.20 não se aplica.",
+        "doseVerificada": true,
+        "fonteCalendario": {
+          "tipo": "BULA",
+          "referencia": "Rótulo FDA OPDIVO (nivolumab) IV (openFDA/DailyMed set_id f570b9c4-6846-4de2-abfa-4d0a4ae4e394), seções 2 e 14 (CheckMate 648), acesso 2026-10-11; bula ANVISA não consultada",
+          "pagina": null,
+          "trecho": "cisplatin 80 mg/m 2 intravenously on day 1 (of a 4-week cycle)",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "esofago-paliativo-1l-tislelizumabe-qt",
@@ -1333,19 +1347,19 @@
           },
           {
             "droga": "Cisplatina (ou oxaliplatina 130 mg/m²)",
-            "dose": null,
+            "dose": 60,
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1",
-            "observacao": "fonte dá faixa 60–80 mg/m²"
+            "observacao": "faixa na fonte 60–80 mg/m² (SBOC p.20 e bula FDA); registrado o limite inferior — médico escolhe na faixa"
           },
           {
             "droga": "5-FU (ou capecitabina 1.000 mg/m² VO 2x/dia D1–D14, ou paclitaxel 175 mg/m²)",
-            "dose": null,
+            "dose": 750,
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1-D5",
-            "observacao": "fonte dá faixa 750–800 mg/m²/dia"
+            "observacao": "dose por dia; faixa na fonte 750–800 mg/m²/dia (SBOC p.20 e bula FDA); registrado o limite inferior"
           }
         ],
         "cicloDias": 21,
@@ -1354,18 +1368,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "cisplatina + 5-FU (procedimento 0304020176)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "cisplatina + 5-FU (procedimento 0304020176)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1374,9 +1386,16 @@
           "trecho": "Cisplatina 60-80 mg/m² EV D1 ou Oxaliplatina 130 mg/m² EV D1",
           "estado": "VERIFICADO"
         },
-        "pendencia": "FAIXA_NA_FONTE",
+        "pendencia": "FAIXA_NA_FONTE: limite inferior registrado (DECISAO_CLINICA_DR_SILAS)",
         "manutencao": "tislelizumabe até 35 ciclos",
-        "doseVerificada": false
+        "doseVerificada": false,
+        "fonteFaixa": {
+          "tipo": "BULA",
+          "referencia": "Rótulo FDA TEVIMBRA (tislelizumab) (openFDA/DailyMed set_id 08ef1e3e-496f-4b0b-94ee-fbba3cc1985a), seção 14, acesso 2026-10-11; bula ANVISA não consultada",
+          "pagina": null,
+          "trecho": "fluorouracil [750 to 800 mg/m 2 IV, on Days 1 to 5]",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "esofago-paliativo-1l-nivolumabe-ipilimumabe",
@@ -1407,28 +1426,28 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "cisplatina + 5-FU (procedimento 0304020176)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Portaria SECTICS/MS nº 57, de 28/07/2025 (DOU nº 142, 30/07/2025), Relatório CONITEC nº 1018 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-57-de-28-de-julho-de-2025",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "o nivolumabe e o pembrolizumabe para o tratamento de primeira linha",
+            "estado": "INFERIDO"
+          },
+          "nota": "Nivolumabe não incorporado na 1ª linha de esôfago; combinação com ipilimumabe não citada nominalmente (INFERIDO).",
+          "alternativaSUS": "cisplatina + 5-FU (procedimento 0304020176)"
         },
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
           "pagina": 20,
           "trecho": "Nivolumabe 3 mg/kg EV D1, D15 e D28 Ipilimumabe 1 mg/kg EV D1",
-          "estado": "VERIFICADO"
+          "estado": "CONFLITANTE"
         },
         "duracao": "até progressão/toxicidade",
-        "doseVerificada": true
+        "doseVerificada": false,
+        "calendarioExecutavel": false,
+        "motivoCalendario": "dúvida D28/D29 declarada na própria fonte"
       },
       {
         "id": "esofago-paliativo-1l-cisplatina-5fu",
@@ -1502,18 +1521,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "paclitaxel, docetaxel ou irinotecano (procedimento 0304020176)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "paclitaxel, docetaxel ou irinotecano (procedimento 0304020176)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1545,18 +1562,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "paclitaxel, docetaxel ou irinotecano (procedimento 0304020176)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "paclitaxel, docetaxel ou irinotecano (procedimento 0304020176)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1588,18 +1603,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "paclitaxel, docetaxel ou irinotecano (procedimento 0304020176)",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "paclitaxel, docetaxel ou irinotecano (procedimento 0304020176)"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1618,11 +1631,11 @@
         "drogas": [
           {
             "droga": "Paclitaxel",
-            "dose": null,
+            "dose": 80,
             "unidade": "mg/m2",
             "via": "EV",
             "dias": "D1, D8, D15",
-            "observacao": "fonte dá faixa 80–100 mg/m²"
+            "observacao": "faixa na fonte 80–100 mg/m² (SBOC p.22); registrado o limite inferior — médico escolhe na faixa"
           }
         ],
         "cicloDias": 28,
@@ -1649,7 +1662,7 @@
           "trecho": "Paclitaxel 80-100 mg/m² EV D1, D8 e D15 A cada 4 semanas",
           "estado": "VERIFICADO"
         },
-        "pendencia": "FAIXA_NA_FONTE",
+        "pendencia": "FAIXA_NA_FONTE: limite inferior registrado (DECISAO_CLINICA_DR_SILAS)",
         "doseVerificada": false
       },
       {
@@ -1754,8 +1767,7 @@
       {
         "cenario": "QT/RT neoadjuvante CROSS",
         "doseTotalGy": 41.4,
-        "fracoes": null,
-        "pendencia": "SEM_FONTE (fracionamento não informado na SBOC)",
+        "fracoes": 23,
         "concomitante": "carboplatina AUC 2 + paclitaxel 50 mg/m² semanal",
         "fonte": {
           "tipo": "SBOC",
@@ -1763,13 +1775,28 @@
           "pagina": 15,
           "trecho": "combinação de carboplatina e paclitaxel com RT (41,4 Gy)",
           "estado": "VERIFICADO"
+        },
+        "fonteFracoes": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/03 - Aula 03 - Câncer de Esôfago- Tratamento da Doença Localizada e Avançada.pdf",
+          "pagina": 8,
+          "trecho": "(RT 41,4 Gy em 23 frações)",
+          "estado": "INFERIDO"
         }
       },
       {
         "cenario": "QT/RT neoadjuvante com cisplatina+5-FU ou mFOLFOX4",
         "doseTotalGy": null,
         "fracoes": null,
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "Dose de RT para QT/RT neoadjuvante com cisplatina+5-FU ou mFOLFOX4 não escrita; SBOC p.17 reaproveita os esquemas da QT/RT definitiva (50,4 Gy) e o CROSS usa 41,4 Gy.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC 2026 esôfago p.13, 15, 17",
+            "Onco PRO 2026 aula 03 (só CROSS 41,4 Gy/23 fr e RTOG 8501 50 Gy)"
+          ],
+          "notaAceno": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11); fracionamento não buscado."
+        },
         "concomitante": "cisplatina+5-FU ou mFOLFOX4",
         "fonte": {
           "tipo": "SBOC",
@@ -2094,7 +2121,8 @@
       "TC_TORAX",
       "TGO",
       "TGP",
-      "UREIA"
+      "UREIA",
+      "LAPAROSCOPIA"
     ],
     "interacoesConsultar": [
       {
@@ -2243,17 +2271,83 @@
     ]
   },
   "pendencias": [
-    "SEM_FONTE: fracionamento da RT do CROSS (41,4 Gy) e número de semanas de carboplatina/paclitaxel neoadjuvante",
-    "SEM_FONTE: dose de RT para cisplatina+5-FU e mFOLFOX4 neoadjuvantes",
-    "CONFLITANTE: calendário de nivolumabe + CF (cicloDias nulo)",
-    "FAIXA_NA_FONTE: tislelizumabe + QT (cisplatina 60–80; 5-FU 750–800) e paclitaxel 2ª linha (80–100 mg/m²)",
-    "INFERIDO: doses de cisplatina+5-FU isolado (PD-L1 negativo) tomadas do backbone da tabela de 1ª linha",
-    "SEM_ID_NO_CATALOGO: ecoendoscopia, laparoscopia diagnóstica, genotipagem DPYD",
-    "SUS_INCORPORACAO_A_CONFIRMAR: imunoterapias (pembrolizumabe, nivolumabe, tislelizumabe, ipilimumabe, durvalumabe)",
-    "SUS_PROCEDIMENTO_A_CONFIRMAR: QT concomitante da QT/RT definitiva e QT adjuvante de esôfago sem procedimento identificado no cadastro SIGTAP local",
-    "SEM_FONTE: emetogenicidade e risco de neutropenia febril por esquema (não constam na diretriz)",
-    "CROSS sem NCT (registro holandês); nctEstado NAO_VERIFICADO",
-    "Fichas do serviço divergentes (FLOT 5-FU 2.400; irinotecano 350 q21) — decisão do Dr. Silas"
+    {
+      "texto": "SEM_FONTE: dose de RT para cisplatina+5-FU e mFOLFOX4 neoadjuvantes",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "SBOC 2026 esôfago p.13, 15, 17",
+        "Onco PRO 2026 aula 03"
+      ],
+      "notaAceno": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11); fracionamento não buscado."
+    },
+    {
+      "texto": "FAIXA_NA_FONTE: tislelizumabe + QT (cisplatina 60–80; 5-FU 750–800) e paclitaxel 2ª linha (80–100 mg/m²)",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026 esôfago p.20/22",
+        "bula FDA TEVIMBRA (mesmas faixas)"
+      ],
+      "nota": "Doses registradas pelo limite inferior da faixa; escolha final do médico."
+    },
+    {
+      "texto": "INFERIDO: doses de cisplatina+5-FU isolado (PD-L1 negativo) tomadas do backbone da tabela de 1ª linha",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC 2026 esôfago p.20-22 (CF isolado sem tabela própria)"
+      ]
+    },
+    {
+      "texto": "SEM_ID_NO_CATALOGO: ecoendoscopia, laparoscopia diagnóstica, genotipagem DPYD",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json (164 ids)"
+      ],
+      "nota": "Depende de ampliação do catálogo de exames."
+    },
+    {
+      "texto": "SUS_INCORPORACAO_A_CONFIRMAR: imunoterapias (pembrolizumabe, nivolumabe, tislelizumabe, ipilimumabe, durvalumabe)",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Planilha CONITEC 15/06/2026",
+        "Painel de Demandas CONITEC",
+        "busca gov.br/conitec",
+        "DOU (portarias citadas)"
+      ],
+      "nota": "sus.disponivel preenchido em todos os protocolos com portaria/relatório quando existe. Sem avaliação CONITEC (registrado 'nao', INFERIDO): perioperatorio-flot-durvalumabe, paliativo-1l-tislelizumabe-qt, paliativo-2l-pembrolizumabe, paliativo-2l-nivolumabe, paliativo-2l-tislelizumabe."
+    },
+    {
+      "texto": "SUS_PROCEDIMENTO_A_CONFIRMAR: QT concomitante da QT/RT definitiva e QT adjuvante de esôfago sem procedimento identificado no cadastro SIGTAP local",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
+      ],
+      "nota": "QT/RT definitiva registrada em 0304040118 (forma 03.04.04) como INFERIDO; QT adjuvante sem procedimento específico. Enquadramento depende da regra anti-glosa (finalidade do grupo não importada)."
+    },
+    {
+      "texto": "SEM_FONTE: emetogenicidade e risco de neutropenia febril por esquema (não constam na diretriz)",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC 2026 esôfago",
+        "Onco PRO 2026 aulas 87-88"
+      ],
+      "nota": "Classificação por droga vem do módulo de suporte."
+    },
+    {
+      "texto": "CROSS sem NCT (registro holandês); nctEstado NAO_VERIFICADO",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "ClinicalTrials.gov (busca CROSS esophageal neoadjuvant)"
+      ],
+      "nota": "CROSS foi registrado no registro holandês (NTR), sem NCT."
+    },
+    {
+      "texto": "Fichas do serviço divergentes (FLOT 5-FU 2.400; irinotecano 350 q21) — decisão do Dr. Silas",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "corpus/fichas",
+        "SBOC 2026 esôfago"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -2272,7 +2366,8 @@
         "trecho": "combinação de carboplatina e paclitaxel com RT (41,4 Gy)",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "50,4 Gy fica restrito à QT/RT definitiva; CROSS neoadjuvante = 41,4 Gy. A tabela de doença localmente avançada (p.17) reaproveita os esquemas definitivos sem dose de RT: para cisplatina+5-FU e mFOLFOX4 neoadjuvantes, RT = null (SEM_FONTE). Cisplatina+5-FU não é 'CROSS-like'."
+      "escolhaSeguranca": "50,4 Gy fica restrito à QT/RT definitiva; CROSS neoadjuvante = 41,4 Gy. A tabela de doença localmente avançada (p.17) reaproveita os esquemas definitivos sem dose de RT: para cisplatina+5-FU e mFOLFOX4 neoadjuvantes, RT = null (SEM_FONTE). Cisplatina+5-FU não é 'CROSS-like'.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Calendário de nivolumabe + cisplatina + 5-FU",
@@ -2290,7 +2385,16 @@
         "trecho": "A cada 3 semanas, por 6 ciclos, seguido de manutenção com nivoluambe",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Nivolumabe D1 e D15 em ciclo de 21 dias é inconsistente; cicloDias = null até conferência no protocolo CheckMate 648 pelo médico."
+      "escolhaSeguranca": "Nivolumabe D1 e D15 em ciclo de 21 dias é inconsistente; cicloDias = null até conferência no protocolo CheckMate 648 pelo médico.",
+      "decisaoNecessaria": false,
+      "resolucao": "Bula FDA OPDIVO: CheckMate 648 em ciclo de 4 semanas; cicloDias = 28.",
+      "fonteC": {
+        "tipo": "BULA",
+        "referencia": "Rótulo FDA OPDIVO (nivolumab) IV (openFDA/DailyMed set_id f570b9c4-6846-4de2-abfa-4d0a4ae4e394), seções 2 e 14 (CheckMate 648), acesso 2026-10-11; bula ANVISA não consultada",
+        "pagina": null,
+        "trecho": "cisplatin 80 mg/m 2 intravenously on day 1 (of a 4-week cycle)",
+        "estado": "VERIFICADO"
+      }
     },
     {
       "tema": "Nivolumabe + ipilimumabe: D28",
@@ -2308,7 +2412,16 @@
         "trecho": null,
         "estado": "DADO_AUSENTE"
       },
-      "escolhaSeguranca": "Mantido como na SBOC; conferir se D28 deveria ser D29 (intervalo de 14 dias)."
+      "escolhaSeguranca": "Mantido como na SBOC; conferir se D28 deveria ser D29 (intervalo de 14 dias).",
+      "decisaoNecessaria": true,
+      "resolucao": "Bula FDA OPDIVO dá nivolumabe 3 mg/kg a cada 2 semanas com ipilimumabe 1 mg/kg a cada 6 semanas (D1, D15, D29); campo 'dias' mantido como na SBOC até o médico confirmar.",
+      "fonteC": {
+        "tipo": "BULA",
+        "referencia": "Rótulo FDA OPDIVO (nivolumab) IV (openFDA/DailyMed set_id f570b9c4-6846-4de2-abfa-4d0a4ae4e394), seções 2 e 14 (CheckMate 648), acesso 2026-10-11; bula ANVISA não consultada",
+        "pagina": null,
+        "trecho": "3 mg/kg every 2 weeks or 360 mg every 3 weeks with ipilimumab 1",
+        "estado": "VERIFICADO"
+      }
     },
     {
       "tema": "Ficha FLOT do serviço × SBOC (5-FU)",
@@ -2326,7 +2439,8 @@
         "trecho": "Fluoruracila (5-FU) infusional 2400 mg/m² d1",
         "estado": "CONFLITANTE"
       },
-      "escolhaSeguranca": "Pack registra 2.600 mg/m² (SBOC); ficha não editada (fora do WRITE_SET). Médico decide qual vale no serviço."
+      "escolhaSeguranca": "Pack registra 2.600 mg/m² (SBOC); ficha não editada (fora do WRITE_SET). Médico decide qual vale no serviço.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Ficha irinotecano do serviço × SBOC",
@@ -2344,7 +2458,8 @@
         "trecho": "Irinotecano 350 mg/m² d1, intervalo 21 dias",
         "estado": "CONFLITANTE"
       },
-      "escolhaSeguranca": "Pack registra 150 mg/m² q14 (SBOC). Ficha 350 mg/m² q21 não tem respaldo nesta diretriz."
+      "escolhaSeguranca": "Pack registra 150 mg/m² q14 (SBOC). Ficha 350 mg/m² q21 não tem respaldo nesta diretriz.",
+      "decisaoNecessaria": true
     }
   ],
   "curadoria": {
@@ -2357,6 +2472,33 @@
       "ClinicalTrials.gov API v2 (NCTs listados)",
       "corpus/fichas/esofago/*"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "reducaoPendencias20261011": {
+      "data": "2026-10-11",
+      "resolvidas": [
+        {
+          "pendencia": "SEM_FONTE: fracionamento da RT do CROSS (41,4 Gy) e número de semanas de carboplatina/paclitaxel neoadjuvante",
+          "como": "23 frações e 5 semanas (paclitaxel/carboplatina semanal ×5) pela aula Onco PRO 2026 nº 03 p.8 (CURSO, INFERIDO)."
+        },
+        {
+          "pendencia": "CONFLITANTE: calendário de nivolumabe + CF (cicloDias nulo)",
+          "como": "cicloDias 28 pela bula FDA OPDIVO (CheckMate 648, 'of a 4-week cycle')."
+        }
+      ]
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): A03 calendário FLOT/durvalumabe",
+      "acao": "intervaloDias 28 no durvalumabe; calendarioExecutavel false; fases explícitas"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): A04 conflito declarado mantido como VERIFICADO",
+      "acao": "fonte.estado → CONFLITANTE; doseVerificada → false"
+    }
+  ]
 }

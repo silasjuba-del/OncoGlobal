@@ -56,6 +56,14 @@
           "pagina": 6,
           "trecho": "Avaliação inicial com USG da área suspeita de tumor de partes moles;",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "USG de partes moles sem id no catálogo.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
         }
       },
       {
@@ -70,6 +78,14 @@
           "pagina": 6,
           "trecho": "Em caso de suspeita de sarcomas de partes moles de extremidades",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "RM de membro sem id no catálogo; SIGTAP 02.07.02.002-7 (membro superior) e 02.07.03.003-0 (membro inferior).",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
         }
       },
       {
@@ -84,6 +100,14 @@
           "pagina": 7,
           "trecho": "RX do sítio primário em 2 planos;",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "RX de segmento ósseo sem id; SIGTAP 02.04.06.016-8 (perna), 02.04.04.005-1 (braço) etc.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
         }
       },
       {
@@ -278,7 +302,8 @@
             "pagina": 13,
             "trecho": "A confirmação molecular é obrigatória para a distinção entre Sarcoma de Ewing",
             "estado": "VERIFICADO"
-          }
+          },
+          "faturamentoNaoDemonstrado": true
         },
         {
           "alvo": "Painel histotipo-específico (hibridização in situ/sequenciamento)",
@@ -294,7 +319,8 @@
             "pagina": 9,
             "trecho": "técnicas moleculares convencionais como hibridização in situ e sequenciamento",
             "estado": "VERIFICADO"
-          }
+          },
+          "faturamentoNaoDemonstrado": true
         },
         {
           "alvo": "Painel IHQ diagnóstico",
@@ -315,8 +341,8 @@
         {
           "alvo": "Fusão NTRK",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "Partes moles avançado",
           "consequencia": "Larotrectinibe",
@@ -328,8 +354,8 @@
             "trecho": "Fusão NTRK Larotrectinibe",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "FISH",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "MSI-H/dMMR/TMB >10",
@@ -346,6 +372,13 @@
             "pagina": 12,
             "trecho": "Pacientes MSI-H/dMMR/TMB>10",
             "estado": "VERIFICADO"
+          },
+          "pendenciaClasse": {
+            "texto": "MSI/dMMR por IHQ cabe em IMUNOHISTOQUIMICA; TMB exige NGS sem id.",
+            "classe": "DECISAO_CLINICA_DR_SILAS",
+            "buscasFeitas": [
+              "catálogo v1.1"
+            ]
           }
         },
         {
@@ -363,6 +396,13 @@
             "pagina": 8,
             "trecho": "Sarcoma diagnosticado antes dos 46 anos;",
             "estado": "VERIFICADO"
+          },
+          "pendenciaClasse": {
+            "texto": "Teste germinativo TP53/painel sem id no catálogo.",
+            "classe": "DECISAO_CLINICA_DR_SILAS",
+            "buscasFeitas": [
+              "catálogo v1.1"
+            ]
           }
         }
       ]
@@ -621,9 +661,9 @@
     ],
     "protocolos": [
       {
-        "id": "sarcomas-pm-ai-d1d5-periop",
+        "id": "sarcomas-pm-ai-d1d5-periop-neoadjuvante",
         "nome": "Doxorrubicina + ifosfamida D1-D5 (neo/adjuvante)",
-        "cenario": "neoadjuvante ou adjuvante — partes moles (histologias selecionadas)",
+        "cenario": "neoadjuvante — partes moles (histologias selecionadas)",
         "linha": "perioperatória",
         "drogas": [
           {
@@ -649,9 +689,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.05.022-9",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA ADJUVANTE DE SARCOMA DE PARTES MOLES DE EXTREMIDADES TUMOR COM MAIS DE 5 CM",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Há procedimento só para adjuvância de extremidades (>5 cm, G2-G3, IIB-IV M0); neoadjuvância e sítios não-extremidade sem procedimento específico."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -660,12 +706,64 @@
           "trecho": "Ifosfamida 1,8 g/m² EV D1 a D5 Doxorrubicina 25 mg/m² EV D1 a D3",
           "estado": "VERIFICADO"
         },
-        "observacao": "Histologias: pleomórfico indiferenciado AG, lipossarcoma mixoide AG, sinovial, MPNST, leiomiossarcoma AG, mixofibrossarcoma AG, epitelioide. Mesna conforme protocolo institucional (sem fonte no pack)."
+        "observacao": "Histologias: pleomórfico indiferenciado AG, lipossarcoma mixoide AG, sinovial, MPNST, leiomiossarcoma AG, mixofibrossarcoma AG, epitelioide. Mesna conforme protocolo institucional (sem fonte no pack).",
+        "derivadoDe": "sarcomas-pm-ai-d1d5-periop",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
       },
       {
-        "id": "sarcomas-pm-ai-d1d3-periop",
+        "id": "sarcomas-pm-ai-d1d5-periop-adjuvante",
+        "nome": "Doxorrubicina + ifosfamida D1-D5 (neo/adjuvante)",
+        "cenario": "adjuvante — partes moles (histologias selecionadas)",
+        "linha": "perioperatória",
+        "drogas": [
+          {
+            "droga": "Ifosfamida",
+            "dose": 1800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "SBOC: 1,8 g/m²"
+          },
+          {
+            "droga": "Doxorrubicina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": "G-CSF (fator estimulador de colônias) previsto no esquema SBOC",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.05.022-9",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA ADJUVANTE DE SARCOMA DE PARTES MOLES DE EXTREMIDADES TUMOR COM MAIS DE 5 CM",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Há procedimento só para adjuvância de extremidades (>5 cm, G2-G3, IIB-IV M0); neoadjuvância e sítios não-extremidade sem procedimento específico."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Ifosfamida 1,8 g/m² EV D1 a D5 Doxorrubicina 25 mg/m² EV D1 a D3",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Histologias: pleomórfico indiferenciado AG, lipossarcoma mixoide AG, sinovial, MPNST, leiomiossarcoma AG, mixofibrossarcoma AG, epitelioide. Mesna conforme protocolo institucional (sem fonte no pack).",
+        "derivadoDe": "sarcomas-pm-ai-d1d5-periop",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "id": "sarcomas-pm-ai-d1d3-periop-neoadjuvante",
         "nome": "Doxorrubicina + ifosfamida D1-D3 (neo/adjuvante)",
-        "cenario": "neoadjuvante ou adjuvante — partes moles (histologias selecionadas)",
+        "cenario": "neoadjuvante — partes moles (histologias selecionadas)",
         "linha": "perioperatória",
         "drogas": [
           {
@@ -691,9 +789,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.05.022-9",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA ADJUVANTE DE SARCOMA DE PARTES MOLES DE EXTREMIDADES TUMOR COM MAIS DE 5 CM",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Há procedimento só para adjuvância de extremidades (>5 cm, G2-G3, IIB-IV M0); neoadjuvância e sítios não-extremidade sem procedimento específico."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -701,12 +805,63 @@
           "pagina": 11,
           "trecho": "Ifosfamida 3,0 g/m² EV D1 a D3 Doxorrubicina 25 mg/m² EV D1 a D3",
           "estado": "VERIFICADO"
-        }
+        },
+        "derivadoDe": "sarcomas-pm-ai-d1d3-periop",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
       },
       {
-        "id": "sarcomas-pm-ei-periop",
+        "id": "sarcomas-pm-ai-d1d3-periop-adjuvante",
+        "nome": "Doxorrubicina + ifosfamida D1-D3 (neo/adjuvante)",
+        "cenario": "adjuvante — partes moles (histologias selecionadas)",
+        "linha": "perioperatória",
+        "drogas": [
+          {
+            "droga": "Ifosfamida",
+            "dose": 3000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": "SBOC: 3,0 g/m²"
+          },
+          {
+            "droga": "Doxorrubicina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": "G-CSF (fator estimulador de colônias) previsto no esquema SBOC",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.05.022-9",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA ADJUVANTE DE SARCOMA DE PARTES MOLES DE EXTREMIDADES TUMOR COM MAIS DE 5 CM",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Há procedimento só para adjuvância de extremidades (>5 cm, G2-G3, IIB-IV M0); neoadjuvância e sítios não-extremidade sem procedimento específico."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Ifosfamida 3,0 g/m² EV D1 a D3 Doxorrubicina 25 mg/m² EV D1 a D3",
+          "estado": "VERIFICADO"
+        },
+        "derivadoDe": "sarcomas-pm-ai-d1d3-periop",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "id": "sarcomas-pm-ei-periop-neoadjuvante",
         "nome": "Epirrubicina + ifosfamida (neo/adjuvante)",
-        "cenario": "neoadjuvante ou adjuvante — partes moles (histologias selecionadas)",
+        "cenario": "neoadjuvante — partes moles (histologias selecionadas)",
         "linha": "perioperatória",
         "drogas": [
           {
@@ -732,9 +887,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.05.022-9",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA ADJUVANTE DE SARCOMA DE PARTES MOLES DE EXTREMIDADES TUMOR COM MAIS DE 5 CM",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Há procedimento só para adjuvância de extremidades (>5 cm, G2-G3, IIB-IV M0); neoadjuvância e sítios não-extremidade sem procedimento específico."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -742,7 +903,58 @@
           "pagina": 11,
           "trecho": "Ifosfamida 3,0 g/m² EV D1 a D3 Epirrubicina 60 mg/m² EV D1 e D2",
           "estado": "VERIFICADO"
-        }
+        },
+        "derivadoDe": "sarcomas-pm-ei-periop",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "id": "sarcomas-pm-ei-periop-adjuvante",
+        "nome": "Epirrubicina + ifosfamida (neo/adjuvante)",
+        "cenario": "adjuvante — partes moles (histologias selecionadas)",
+        "linha": "perioperatória",
+        "drogas": [
+          {
+            "droga": "Ifosfamida",
+            "dose": 3000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3",
+            "observacao": "SBOC: 3,0 g/m²"
+          },
+          {
+            "droga": "Epirrubicina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D2",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": "G-CSF (fator estimulador de colônias) previsto no esquema SBOC",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.05.022-9",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA ADJUVANTE DE SARCOMA DE PARTES MOLES DE EXTREMIDADES TUMOR COM MAIS DE 5 CM",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Há procedimento só para adjuvância de extremidades (>5 cm, G2-G3, IIB-IV M0); neoadjuvância e sítios não-extremidade sem procedimento específico."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Ifosfamida 3,0 g/m² EV D1 a D3 Epirrubicina 60 mg/m² EV D1 e D2",
+          "estado": "VERIFICADO"
+        },
+        "derivadoDe": "sarcomas-pm-ei-periop",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
       },
       {
         "id": "sarcomas-pm-ai-paliativo",
@@ -773,9 +985,15 @@
         "ajusteObrigatorio": "Dose mínima por ciclo: doxorrubicina 60 mg/m² e ifosfamida 6 g/m² (SBOC p.12). Respeitar dose acumulada de antraciclina.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.029-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA DE PARTES MOLES - DOENÇA INOPERÁVEL, METASTÁTICA OU RECIDIVADA",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -814,9 +1032,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.029-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA DE PARTES MOLES - DOENÇA INOPERÁVEL, METASTÁTICA OU RECIDIVADA",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -847,9 +1071,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.029-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA DE PARTES MOLES - DOENÇA INOPERÁVEL, METASTÁTICA OU RECIDIVADA",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -880,9 +1110,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.029-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA DE PARTES MOLES - DOENÇA INOPERÁVEL, METASTÁTICA OU RECIDIVADA",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -913,9 +1149,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.029-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA DE PARTES MOLES - DOENÇA INOPERÁVEL, METASTÁTICA OU RECIDIVADA",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -954,9 +1196,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.029-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA DE PARTES MOLES - DOENÇA INOPERÁVEL, METASTÁTICA OU RECIDIVADA",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -989,7 +1237,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Pazopanibe: nenhuma demanda nem portaria de incorporação na Conitec para sarcoma de partes moles (incorporado em 2018 só para carcinoma renal); não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1020,9 +1277,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.029-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA DE PARTES MOLES - DOENÇA INOPERÁVEL, METASTÁTICA OU RECIDIVADA",
+            "estado": "INFERIDO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Eribulina: custo pode exceder o valor da APAC; sem demanda própria na Conitec."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1053,15 +1316,63 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.029-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA DE PARTES MOLES - DOENÇA INOPERÁVEL, METASTÁTICA OU RECIDIVADA",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
           "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
           "pagina": 13,
           "trecho": "Dacarbazina 850-1.800 mg/m² EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-pm-trabectedina",
+        "nome": "Trabectedina",
+        "cenario": "paliativo — lipossarcoma ou leiomiossarcoma irressecável/metastático após antraciclina",
+        "linha": "linhas posteriores",
+        "drogas": [
+          {
+            "droga": "Trabectedina",
+            "dose": 1.5,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "infusão de 24 h por cateter venoso central"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Dexametasona 20 mg EV 30 min antes de cada dose (bula)",
+        "ajusteObrigatorio": "Ajuste hepático e por toxicidade conforme bula; CPK e função hepática antes de cada ciclo",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Trabectedina: nenhuma demanda nem portaria de incorporação na Conitec para sarcoma de partes moles; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA YONDELIS (openFDA set_id 472bd78e-be17-4b9d-90f4-9482c3aec9ff, 2026-01-06), indicação lipossarcoma/leiomiossarcoma",
+          "pagina": null,
+          "trecho": "1.5 mg/m 2 as a 24-hour intravenous infusion, every 3 weeks through a central venous line",
           "estado": "VERIFICADO"
         }
       },
@@ -1094,9 +1405,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.016-9",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA DE OSTEOSSARCOMA OU OUTRO SARCOMA ÓSSEO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1136,9 +1453,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.05.021-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA ADJUVANTE DO OSTEOSSARCOMA",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1147,7 +1470,8 @@
           "trecho": "Cisplatina 50 mg/m² EV D1 e D2 Doxorrubicina 25 mg/m² EV D1 a D3",
           "estado": "VERIFICADO"
         },
-        "observacao": "3 ciclos após neoadjuvância; se adjuvante exclusivo, total de 6 ciclos (SBOC p.12)."
+        "observacao": "3 ciclos após neoadjuvância; se adjuvante exclusivo, total de 6 ciclos (SBOC p.12).",
+        "condicao": "Distinguir: complemento pós-neoadjuvância (número de ciclos depende dos pré-operatórios) × adjuvância exclusiva. PENDENTE."
       },
       {
         "id": "sarcomas-osteo-ap-metastatico",
@@ -1178,9 +1502,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.030-3",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA ÓSSEO METASTATICO / RECIDIVADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1227,9 +1557,15 @@
         "ajusteObrigatorio": "Metotrexato em alta dose exige resgate com leucovorina, hidratação/alcalinização e dosagem sérica — SEM_FONTE no pack (conferir bula/protocolo institucional). HD-MTX pode ser difícil em adultos.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.016-9",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA DE OSTEOSSARCOMA OU OUTRO SARCOMA ÓSSEO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1277,9 +1613,15 @@
         "ajusteObrigatorio": "Resgate com leucovorina e monitorização de MTX sérico — SEM_FONTE no pack.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.05.021-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA ADJUVANTE DO OSTEOSSARCOMA",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1319,9 +1661,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.030-3",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA ÓSSEO METASTATICO / RECIDIVADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1368,9 +1716,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.030-3",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA ÓSSEO METASTATICO / RECIDIVADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1409,9 +1763,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.030-3",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA ÓSSEO METASTATICO / RECIDIVADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1444,7 +1804,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Pembrolizumabe: nenhuma demanda nem portaria de incorporação na Conitec para osteossarcoma MSI-H/dMMR/TMB-H; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1491,9 +1860,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.016-9",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA DE OSTEOSSARCOMA OU OUTRO SARCOMA ÓSSEO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Ewing enquadrado como 'outro sarcoma ósseo'; fase pós-operatória sem procedimento adjuvante específico para Ewing."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1533,9 +1908,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.016-9",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA DE OSTEOSSARCOMA OU OUTRO SARCOMA ÓSSEO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Ewing enquadrado como 'outro sarcoma ósseo'; fase pós-operatória sem procedimento adjuvante específico para Ewing."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1575,9 +1956,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.030-3",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA ÓSSEO METASTATICO / RECIDIVADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1608,9 +1995,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.030-3",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA ÓSSEO METASTATICO / RECIDIVADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1649,9 +2042,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.030-3",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DE SARCOMA ÓSSEO METASTATICO / RECIDIVADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1660,17 +2059,167 @@
           "trecho": "Gencitabina 675 mg/m² EV D1 e D8 Docetaxel 75-100 mg/m² EV D8",
           "estado": "VERIFICADO"
         }
+      },
+      {
+        "id": "sarcomas-pm-larotrectinibe",
+        "nome": "Larotrectinibe (fusão NTRK)",
+        "cenario": "paliativo — sarcoma de partes moles com fusão NTRK",
+        "linha": "qualquer linha",
+        "drogas": [
+          {
+            "droga": "Larotrectinibe",
+            "dose": 100,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 12/12h",
+            "observacao": "adultos; contínuo"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Hepatopatia moderada/grave e inibidores de CYP3A: ajuste pela bula",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 72, de 06/12/2021 (DOU 07/12/2021, s.1, p.160) — cópia BVS SES-SP U_PT-MS-SCTIE-72_061221.pdf",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, o larotrectinibe",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Não incorporado para tumores sólidos NTRK (Portaria SCTIE/MS 72/2021); reavaliação de 2025 só pediátrica."
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA VITRAKVI (openFDA set_id 0c8ca614-58b2-4aa4-83d3-0387a8f782fd, 2026-05-22), indicação agnóstica a tumor sólido com fusão NTRK",
+          "pagina": null,
+          "trecho": "100 mg orally twice daily",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "sarcomas-dfsp-imatinibe",
+        "nome": "Imatinibe (dermatofibrossarcoma protuberans)",
+        "cenario": "DFSP irressecável, recorrente ou metastático",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Imatinibe",
+            "dose": 400,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 12/12h",
+            "observacao": "800 mg/dia em 2 tomadas (bula); com alimento"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Ajuste hepático/renal e por toxicidade conforme bula",
+        "fichaId": null,
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Gleevec (openFDA set_id 211ef2da-2868-4a77-8055-1cb2cd78e24b, 2026-07-13), indicação DFSP",
+          "pagina": null,
+          "trecho": "The recommended dose of Gleevec is 800 mg/day for adult patients with DFSP",
+          "estado": "VERIFICADO"
+        },
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Imatinibe: nenhuma demanda nem portaria de incorporação na Conitec para DFSP (incorporado no SUS só para LMC, LLA Ph+, GIST e outras indicações não-sarcoma); não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
+        }
+      },
+      {
+        "id": "sarcomas-tcg-denosumabe",
+        "nome": "Denosumabe (tumor de células gigantes ósseo)",
+        "cenario": "TCG ósseo irressecável ou metastático",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Denosumabe",
+            "dose": 120,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D1; no 1º mês também D8 e D15",
+            "observacao": "depois 120 mg a cada 4 semanas; cálcio e vitamina D"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Corrigir hipocalcemia antes; avaliação odontológica (osteonecrose de mandíbula)",
+        "fichaId": null,
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA XGEVA (openFDA set_id 628f0998-1206-4001-aeee-18133aa9f3bf, 2026-06-23), indicação Giant Cell Tumor of Bone",
+          "pagina": null,
+          "trecho": "120 mg every 4 weeks with additional 120 mg doses on Days 8 and 15",
+          "estado": "VERIFICADO"
+        },
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Denosumabe: nenhuma demanda nem portaria de incorporação na Conitec para tumor de células gigantes ósseo (demandas Conitec de 2022 foram para osteoporose, não incorporado); não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
+        }
       }
     ],
     "radioterapia": [
       {
-        "cenario": "Partes moles — RT pré ou pós-operatória (alto grau, profundo, >5 cm)",
-        "doseTotalGy": null,
-        "fracoes": null,
+        "cenario": "Partes moles de membro — RT pré-operatória (alto grau, profundo, >5 cm)",
+        "doseTotalGy": 50,
+        "fracoes": 25,
         "concomitante": "nenhuma (QT + RT neoadjuvante factível em extremidades)",
-        "pendencia": "SEM_FONTE",
-        "observacao": "Cirurgia 4-8 semanas após RT neoadjuvante; RT adjuvante 4-8 semanas após cirurgia.",
+        "observacao": "Cirurgia 4-8 semanas após a RT (SBOC). Dose/fracionamento do ensaio, INFERIDO.",
         "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov API v2 NCT02520128 (COMPLETED) — IMRT em sarcoma de partes moles de membro, coorte 1",
+          "pagina": null,
+          "estado": "INFERIDO",
+          "trecho": "Pre-operative RT - 50 Gy in 25 daily fractions over 5 weeks"
+        },
+        "fonteIndicacao": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "A RT pré-operatória ou adjuvante está indicada nos casos de sarcoma de alto",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Partes moles de membro — RT pós-operatória (margens negativas)",
+        "doseTotalGy": 60,
+        "fracoes": 30,
+        "concomitante": "nenhuma (QT + RT neoadjuvante factível em extremidades)",
+        "observacao": "Iniciar 4-8 semanas após a cirurgia (SBOC). Margem positiva: 66 Gy/33 fr no mesmo ensaio. INFERIDO.",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov API v2 NCT02520128 (COMPLETED) — IMRT em sarcoma de partes moles de membro, coorte 1",
+          "pagina": null,
+          "estado": "INFERIDO",
+          "trecho": "Post-operative RT - 60 Gy in 30 daily fractions to the high dose"
+        },
+        "fonteIndicacao": {
           "tipo": "SBOC",
           "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
           "pagina": 10,
@@ -1705,6 +2254,13 @@
           "pagina": 14,
           "trecho": "A dose de RT adjuvante (45-60 Gy) reduz significativamente a recorrência local",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "Fracionamento da RT adjuvante no Ewing (SBOC 45-60 Gy) — aceno de RT.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC ósseos p.14"
+          ]
         }
       },
       {
@@ -1719,6 +2275,13 @@
           "pagina": 16,
           "trecho": "A RT em altas doses é recomendada para condrossarcomas da base do",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "RT em altas doses (osteossarcoma irressecável, condrossarcoma de base de crânio, cordoma) sem dose — aceno de RT.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC ósseos p.16"
+          ]
         }
       }
     ],
@@ -1784,15 +2347,15 @@
         "seAlvo": "Fusão NTRK (partes moles)",
         "opcao": "Larotrectinibe",
         "evidencia": "NE alto/FR forte (SBOC)",
-        "sus": "DADO_AUSENTE",
-        "pendencia": "DOSE_SEM_FONTE_NO_CAPITULO",
+        "sus": "nao (Portaria SCTIE/MS 72/2021)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-de-partes-moles-v6-VERSAO-PARA-COLABORACAO.pdf",
           "pagina": 14,
           "trecho": "Fusão NTRK Larotrectinibe",
           "estado": "VERIFICADO"
-        }
+        },
+        "protocoloId": "sarcomas-pm-larotrectinibe"
       },
       {
         "seAlvo": "Sarcoma alveolar de partes moles",
@@ -1818,30 +2381,29 @@
           "pagina": 14,
           "trecho": "Dermatofibrossarcoma protuberans Imatinibe",
           "estado": "VERIFICADO"
-        }
+        },
+        "protocoloId": "sarcomas-dfsp-imatinibe"
       },
       {
         "seAlvo": "TCG ósseo irressecável/metastático",
         "opcao": "Denosumabe",
         "evidencia": "NE moderado/FR forte",
         "sus": "DADO_AUSENTE",
-        "pendencia": "DOSE_SEM_FONTE",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
           "pagina": 18,
           "trecho": "Denosumabe é o tratamento padrão em TCG irressecável ou metastá -",
           "estado": "VERIFICADO"
-        }
+        },
+        "protocoloId": "sarcomas-tcg-denosumabe"
       }
     ],
     "suporte": {
       "emetogenicidade": "SEM_FONTE no pack",
       "riscoNeutropeniaFebril": "Alto nos esquemas com ifosfamida + antraciclina e gencitabina + docetaxel: G-CSF previsto pela SBOC",
       "outros": [
-        "Mesna com ifosfamida (conferir bula)",
-        "Dose acumulada de antraciclina",
-        "Leucovorina com MTX alta dose"
+        "Dose acumulada de antraciclina"
       ],
       "fonte": {
         "tipo": "SBOC",
@@ -1849,6 +2411,34 @@
         "pagina": 11,
         "trecho": "Fator estimulador de colônicas de",
         "estado": "VERIFICADO"
+      },
+      "mesna": {
+        "regra": "Mesna EV = 20% da dose de ifosfamida (mg/m²) às 0, 4 e 8 h, em cada dia de ifosfamida (total 60%); manter a proporção se a ifosfamida for ajustada. Alternativa EV + VO na bula.",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA MESNEX (openFDA set_id 1dd69e84-616d-fb77-e063-6394a90af2f4, 2025-12-10)",
+          "pagina": null,
+          "trecho": "the ratio of MESNEX to ifosfamide should be maintained",
+          "estado": "VERIFICADO"
+        }
+      },
+      "leucovorinaMTXAltaDose": {
+        "regra": "Resgate com leucovorina 15 mg (~10 mg/m²) a cada 6 h por 10 doses, iniciando 24 h após o início da infusão de MTX; ajustar pelos níveis séricos de MTX e creatinina (bula).",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Leucovorin Calcium (openFDA set_id 1cb701ca-2478-4268-9d69-80293965d59d, 2022-06-01), indicação: resgate após MTX em alta dose no osteossarcoma",
+          "pagina": null,
+          "trecho": "15 mg (approximately 10 mg/m 2 ) every 6 hours for 10 doses",
+          "estado": "VERIFICADO"
+        }
+      },
+      "hidratacaoMTX": {
+        "texto": "Hidratação e alcalinização urinária do MTX em alta dose: volumes/pH não extraídos nesta rodada.",
+        "classe": "DEPENDE_BULA_ANVISA",
+        "buscasFeitas": [
+          "Bula FDA leucovorina",
+          "SBOC ósseos"
+        ]
       }
     },
     "ensaios": [
@@ -2102,13 +2692,48 @@
     ]
   },
   "pendencias": [
-    "SEM_FONTE: dose/fracionamento da RT pré e pós-operatória em partes moles (SBOC não traz).",
-    "SEM_FONTE: fracionamento da RT adjuvante no Ewing (SBOC: 45-60 Gy).",
-    "SEM_FONTE: mesna, hidratação e resgate com leucovorina (MTX alta dose) — conferir bula/protocolo institucional.",
-    "Trabectedina e gencitabina + dacarbazina NÃO entraram como protocolo por inconsistência na SBOC (ver conflitos).",
-    "SEM_FONTE: doses de larotrectinibe (sarcoma), imatinibe (DFSP, cordoma), denosumabe (TCG), regorafenibe — capítulo não traz.",
-    "SUS: nenhum dado de incorporação verificado para este pack.",
-    "Catálogo: sem ids para USG de partes moles, RM de membro, RX de segmento ósseo, NGS e testes germinativos."
+    {
+      "texto": "Fracionamento da RT adjuvante do Ewing não buscado (RT fora do escopo de oncologia clínica).",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "SBOC ósseos p.14"
+      ]
+    },
+    {
+      "texto": "Mesna (proporção 20% × 3) e resgate com leucovorina preenchidos pela bula FDA. Falta só o protocolo de hidratação/alcalinização do MTX em alta dose (bula ANVISA ou protocolo institucional).",
+      "classe": "DEPENDE_BULA_ANVISA",
+      "buscasFeitas": [
+        "Bula FDA MESNEX",
+        "Bula FDA leucovorina",
+        "SBOC sarcomas ósseos"
+      ]
+    },
+    {
+      "texto": "Trabectedina entrou pela bula FDA. Gencitabina + dacarbazina segue fora: SBOC traz D1 e D15 com intervalo de 2 semanas (incoerente) e não há bula/ensaio aberto lido — curador decide se busca a referência original.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC partes moles p.13",
+        "Onco PRO aula 78",
+        "openFDA"
+      ]
+    },
+    {
+      "texto": "Larotrectinibe, imatinibe (DFSP) e denosumabe (TCG) com dose da bula FDA na indicação. Seguem sem dose: imatinibe no cordoma e regorafenibe no osteossarcoma (sem indicação em bula FDA; dependem de bula ANVISA ou ensaio).",
+      "classe": "DEPENDE_BULA_ANVISA",
+      "buscasFeitas": [
+        "Bula FDA VITRAKVI, Gleevec, XGEVA, Stivarga (sem indicação sarcoma)",
+        "SBOC partes moles p.14",
+        "SBOC ósseos p.18"
+      ]
+    },
+    {
+      "texto": "Sem id no catálogo v1.1: USG de partes moles, RM de membro, RX de segmento ósseo, NGS/TMB e testes germinativos (códigos SIGTAP anotados nos itens). Inclusão depende de D-F1-02.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "catálogo v1.1",
+        "SIGTAP 09/2026"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -2127,7 +2752,15 @@
         "trecho": "trabectedina 1,3mg/m2",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Não registrar protocolo; SBOC traz '1,5 g/m²' (provável erro de unidade: mg/m²). Conferir bula antes de qualquer uso."
+      "escolhaSeguranca": "Resolvido pela bula FDA: 1,5 mg/m² EV em 24 h a cada 21 dias (protocolo sarcomas-pm-trabectedina). '1,5 g/m²' da SBOC é erro de unidade; 1,3 mg/m² do curso não adotado.",
+      "fonteC": {
+        "tipo": "BULA",
+        "referencia": "Bula FDA YONDELIS (openFDA set_id 472bd78e-be17-4b9d-90f4-9482c3aec9ff, 2026-01-06), indicação lipossarcoma/leiomiossarcoma",
+        "pagina": null,
+        "trecho": "1.5 mg/m 2 as a 24-hour intravenous infusion, every 3 weeks through a central venous line",
+        "estado": "VERIFICADO"
+      },
+      "decisaoNecessaria": false
     },
     {
       "tema": "Gencitabina + dacarbazina: dias × intervalo",
@@ -2145,7 +2778,8 @@
         "trecho": "A cada 2 semanas",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Não registrar protocolo (D1 e D15 com intervalo de 2 semanas é incoerente); conferir referência original"
+      "escolhaSeguranca": "Não registrar protocolo (D1 e D15 com intervalo de 2 semanas é incoerente); conferir referência original",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Doxorrubicina + dacarbazina: número de ciclos na linha paliativa",
@@ -2163,7 +2797,8 @@
         "trecho": "Dacarbazina 900-1.000 mg/m² EV D1",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Registrar 1ª linha com a menor dose (750 mg/m²) e 3 ciclos como na tabela; reavaliar com o curador"
+      "escolhaSeguranca": "Registrar 1ª linha com a menor dose (750 mg/m²) e 3 ciclos como na tabela; reavaliar com o curador",
+      "decisaoNecessaria": true
     }
   ],
   "curadoria": {
@@ -2174,8 +2809,55 @@
       "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Sarcomas-osseos-v5-VERSAO-PARA-COLABORACAO.pdf",
       "Onco PRO 2026/slides-pro-2026/78 - Aula 78 - Sarcomas de Partes Moles",
       "Onco PRO 2026/slides-pro-2026/79 - Aula 79 - Sarcomas Ósseos",
-      "ClinicalTrials.gov API v2"
+      "ClinicalTrials.gov API v2",
+      "SIGTAP competência 09/2026",
+      "Bulas FDA YONDELIS, VITRAKVI, Gleevec, XGEVA, MESNEX, Leucovorin (openFDA)",
+      "ClinicalTrials.gov API v2 NCT02520128",
+      "Portaria SCTIE/MS 72/2021",
+      "Painel de Demandas Conitec 15/06/2026"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-11",
+        "redator": "Claude (agente curador)",
+        "resolvidas": 2,
+        "classificadas": 5,
+        "susPreenchidos": 25,
+        "notas": []
+      }
+    ]
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): A05 AP adjuvante do osteossarcoma",
+      "acao": "condição de aplicação explícita"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): cenários misturados no mesmo protocolo",
+      "acao": "sarcomas-pm-ai-d1d5-periop dividido em sarcomas-pm-ai-d1d5-periop-neoadjuvante, sarcomas-pm-ai-d1d5-periop-adjuvante"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): cenários misturados no mesmo protocolo",
+      "acao": "sarcomas-pm-ai-d1d3-periop dividido em sarcomas-pm-ai-d1d3-periop-neoadjuvante, sarcomas-pm-ai-d1d3-periop-adjuvante"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): cenários misturados no mesmo protocolo",
+      "acao": "sarcomas-pm-ei-periop dividido em sarcomas-pm-ei-periop-neoadjuvante, sarcomas-pm-ei-periop-adjuvante"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "1 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
 }

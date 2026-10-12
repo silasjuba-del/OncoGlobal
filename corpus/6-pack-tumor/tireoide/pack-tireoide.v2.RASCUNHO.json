@@ -153,8 +153,14 @@
           "tipo": "PAAF",
           "quando": "Nódulo tireoidiano suspeito",
           "catalogoId": "PAAF_TIREOIDE",
-          "fonte": null,
-          "pendencia": "SEM_FONTE"
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "PCDT Carcinoma Diferenciado da Tireoide — Portaria SAS/MS nº 7, de 03/01/2014 (gov.br/conitec pcdt_carcinomatireoide.pdf)",
+            "pagina": 24,
+            "trecho": "ultrassonografia de qualidade e punção por agulha fina por ela guiada",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Laudo pelo Sistema Bethesda (PCDT p.7): tireoidectomia total em 'suspeito' e 'maligno'; lobectomia em 'suspeita de neoplasia folicular'."
         },
         {
           "tipo": "core",
@@ -182,8 +188,8 @@
         {
           "alvo": "BRAF V600E",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "CDT iodorrefratário/avançado",
           "consequencia": "Opção de dabrafenibe ± trametinibe ou vemurafenibe em linhas subsequentes",
@@ -195,14 +201,14 @@
             "trecho": "Testagem somática - idealmente por NGS (incluindo DNA e RNA):",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "Fusão NTRK1-3",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "CDT iodorrefratário/avançado",
           "consequencia": "Larotrectinibe em 1ª linha",
@@ -214,14 +220,14 @@
             "trecho": "Fusão de NTRK1-3;",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "FISH",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "Fusão RET",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "CDT iodorrefratário/avançado",
           "consequencia": "Selpercatinibe em 1ª linha (dose não informada para CDT na SBOC)",
@@ -233,8 +239,8 @@
             "trecho": "Fusão de RET;",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "FISH",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "BRAF V600E",
@@ -255,8 +261,8 @@
         {
           "alvo": "BRAF V600E",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "universal",
           "cenario": "Anaplásico (alternativa à IHQ)",
           "consequencia": "Igual à linha anterior",
@@ -268,14 +274,14 @@
             "trecho": "deve ser pesquisada (por NGS ou IHQ) em todos os casos",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "RET germinativo",
           "metodo": "outro",
           "catalogoId": null,
-          "pendencia": "SEM_ID_NO_CATALOGO",
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "universal",
           "cenario": "Medular (todos), sangue ou swab bucal",
           "consequencia": "Diagnóstico de MEN2 e rastreio familiar; ~6% dos 'esporádicos' têm RET germinativo",
@@ -286,13 +292,15 @@
             "pagina": 6,
             "trecho": "Realização de teste genético germinativo para o gene RET em todos os",
             "estado": "VERIFICADO"
-          }
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "RET somático",
           "metodo": "outro",
           "catalogoId": null,
-          "pendencia": "SEM_ID_NO_CATALOGO",
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "Medular avançado ou metastático (lâminas/blocos)",
           "consequencia": "Seleciona selpercatinibe",
@@ -303,7 +311,9 @@
             "pagina": 7,
             "trecho": "A testagem para mutação somática de RET, com as análises de lâminas",
             "estado": "VERIFICADO"
-          }
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "Germinativo CDT (PTEN, APC, DICER1 etc.)",
@@ -320,6 +330,14 @@
             "pagina": 6,
             "trecho": "Não recomendamos a testagem germinativa rotineira em todos os pacientes",
             "estado": "VERIFICADO"
+          },
+          "pendenciaClasse": {
+            "texto": "Painel germinativo multigene (PTEN, APC, DICER1) sem id: amplicon ≤500 pb não cobre painel.",
+            "classe": "DECISAO_CLINICA_DR_SILAS",
+            "buscasFeitas": [
+              "catálogo v1.1",
+              "SIGTAP 09/2026"
+            ]
           }
         }
       ]
@@ -413,6 +431,14 @@
           "pagina": 6,
           "trecho": "Exclusão de hiperparatireoidismo primário e feocromocitoma",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "Metanefrinas sem id no catálogo; SIGTAP tem só 02.02.01.024-4 (catecolaminas).",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026 procs"
+          ]
         }
       },
       {
@@ -772,7 +798,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Cabozantinibe: nenhuma demanda nem portaria de incorporação na Conitec para carcinoma diferenciado de tireoide (única demanda na Conitec foi para rim, não incorporada em 2020/2021); não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -813,7 +848,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Dabrafenibe + trametinibe: nenhuma demanda nem portaria de incorporação na Conitec para carcinoma diferenciado de tireoide; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -846,7 +890,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Dabrafenibe: nenhuma demanda nem portaria de incorporação na Conitec para carcinoma diferenciado de tireoide; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -879,7 +932,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Vemurafenibe: nenhuma demanda nem portaria de incorporação na Conitec para carcinoma diferenciado de tireoide; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -910,9 +972,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 72, de 06/12/2021 (DOU 07/12/2021, s.1, p.160) — cópia BVS SES-SP U_PT-MS-SCTIE-72_061221.pdf",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, o larotrectinibe",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Não incorporado para tumores sólidos NTRK em adultos (Portaria SCTIE/MS 72/2021). Em 2025 a Conitec avaliou apenas a população pediátrica (Relatório 1031). Sem alternativa-alvo no SUS."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -945,7 +1013,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Selpercatinibe: nenhuma demanda nem portaria de incorporação na Conitec para carcinoma medular de tireoide; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -978,7 +1055,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Vandetanibe: nenhuma demanda nem portaria de incorporação na Conitec para carcinoma medular de tireoide; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1011,7 +1097,16 @@
         "sus": {
           "disponivel": "DADO_AUSENTE",
           "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Cabozantinibe: nenhuma demanda nem portaria de incorporação na Conitec para carcinoma medular de tireoide; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1043,9 +1138,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.036-2",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO CARCINOMA DA TIREOIDE EM ESTÁDIO DE IVA ATÉ IVC",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1084,9 +1185,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.036-2",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO CARCINOMA DA TIREOIDE EM ESTÁDIO DE IVA ATÉ IVC",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1133,9 +1240,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.036-2",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO CARCINOMA DA TIREOIDE EM ESTÁDIO DE IVA ATÉ IVC",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1166,9 +1279,15 @@
         "ajusteObrigatorio": null,
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "fonte": null,
-          "pendencia": "SUS_SEM_FONTE_NO_PACK"
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.036-2",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO CARCINOMA DA TIREOIDE EM ESTÁDIO DE IVA ATÉ IVC",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1177,30 +1296,310 @@
           "trecho": "Doxorrubicina 60 mg/m² EV D1 a cada 3 semanas",
           "estado": "VERIFICADO"
         }
+      },
+      {
+        "id": "tireoide-anaplasico-paclitaxel-carboplatina",
+        "nome": "Paclitaxel + carboplatina a cada 21 dias (anaplásico)",
+        "cenario": "Anaplásico (estádio IV) — irressecável/metastático, sem alvo ou sem acesso a alvo",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "antes da carboplatina"
+          },
+          {
+            "droga": "Carboplatina",
+            "dose": 6,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "Pré-medicação de hipersensibilidade ao paclitaxel conforme bula",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.036-2",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO CARCINOMA DA TIREOIDE EM ESTÁDIO DE IVA ATÉ IVC",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
+        },
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov API v2 NCT00507429 (TERMINATED), braço 2 controle; SBOC cita o esquema sem doses (Tireoide diferenciado e anaplásico, p.12)",
+          "pagina": null,
+          "trecho": "Six 21-day cycles of Carboplatin (AUC 6) + paclitaxel (200 mg/m2) given on Day 1",
+          "estado": "INFERIDO"
+        },
+        "nct": "NCT00507429",
+        "nctEstado": "VERIFICADO"
+      },
+      {
+        "id": "tireoide-anaplasico-paclitaxel-semanal",
+        "nome": "Paclitaxel semanal (anaplásico)",
+        "cenario": "Anaplásico (estádio IV) — irressecável/metastático, sem alvo ou sem acesso a alvo",
+        "linha": "1ª linha ou concomitante à RT",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": "3 de cada 4 semanas"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "Pré-medicação de hipersensibilidade conforme bula",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.036-2",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO CARCINOMA DA TIREOIDE EM ESTÁDIO DE IVA ATÉ IVC",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
+        },
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov API v2 NCT03085056 (ACTIVE_NOT_RECRUITING) — descrito no registro como regime padrão do anaplásico (braço associa trametinibe)",
+          "pagina": null,
+          "trecho": "paclitaxel 80mg/m^2 weekly for 3 out of 4 weeks, which is a standard regimen",
+          "estado": "INFERIDO"
+        },
+        "nct": "NCT03085056",
+        "nctEstado": "VERIFICADO"
+      },
+      {
+        "id": "tireoide-anaplasico-doxorrubicina",
+        "nome": "Doxorrubicina monoterapia (anaplásico)",
+        "cenario": "Anaplásico (estádio IV) — irressecável/metastático, sem alvo ou sem acesso a alvo",
+        "linha": "1ª linha ou subsequente",
+        "drogas": [
+          {
+            "droga": "Doxorrubicina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "bula: 60-75 mg/m² a cada 21 dias em monoterapia; registrado o limite inferior. Dose cumulativa >550 mg/m²: risco de cardiomiopatia"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Reduzir na hiperbilirrubinemia (bula, Tabela 1); FEVE antes e durante",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.036-2",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO CARCINOMA DA TIREOIDE EM ESTÁDIO DE IVA ATÉ IVC",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Doxorubicin HCl (openFDA set_id 00634b2b-4e48-4178-8877-28582af894ad, 2026-04-30), indicação 'metastatic thyroid carcinoma'",
+          "pagina": null,
+          "trecho": "Single agent : 60 to 75 mg/m 2 given intravenously every 21 days",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "tireoide-anaplasico-dabrafenibe-trametinibe",
+        "nome": "Dabrafenibe + trametinibe (anaplásico BRAF V600E)",
+        "cenario": "Anaplásico localmente avançado ou metastático com BRAF V600E, sem opção locorregional satisfatória (IVB neoadjuvante ou IVC)",
+        "linha": "1ª linha preferencial",
+        "drogas": [
+          {
+            "droga": "Dabrafenibe",
+            "dose": 150,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 12/12h",
+            "observacao": "1 h antes ou 2 h após refeição; contínuo"
+          },
+          {
+            "droga": "Trametinibe",
+            "dose": 2,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "contínuo"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Pirexia e ajustes conforme bula",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Dabrafenibe + trametinibe: nenhuma demanda nem portaria de incorporação na Conitec para carcinoma anaplásico de tireoide; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Tafinlar/Mekinist (openFDA set_id fee1e6b1-e1a5-4254-9f2e-a70e0f8dbdea, 2026-05-20; 0002ad27-779d-42ab-83b5-bc65453412a1, 2026-05-07), indicação 1.5/1.4 ATC",
+          "pagina": null,
+          "trecho": "The recommended dosage of TAFINLAR in adult patients is 150 mg (two 75 mg capsules) orally twice daily",
+          "estado": "VERIFICADO"
+        },
+        "fonteDroga2": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Tafinlar/Mekinist (openFDA set_id fee1e6b1-e1a5-4254-9f2e-a70e0f8dbdea, 2026-05-20; 0002ad27-779d-42ab-83b5-bc65453412a1, 2026-05-07), indicação 1.5/1.4 ATC",
+          "pagina": null,
+          "trecho": "The recommended dosage of MEKINIST in adult patients is 2 mg orally once daily",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "tireoide-cdt-selpercatinibe",
+        "nome": "Selpercatinibe (CDT com fusão RET, iodorrefratário)",
+        "cenario": "CDT avançado/metastático com fusão RET, iodorrefratário",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Selpercatinibe",
+            "dose": 160,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 12/12h",
+            "observacao": "peso ≥50 kg: 160 mg 12/12h; <50 kg: 120 mg 12/12h (bula). Contínuo; com IBP, tomar com refeição"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Peso <50 kg: 120 mg 12/12h; reduzir na hepatopatia grave (bula 2.7)",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "DADO_AUSENTE",
+          "fonte": null,
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
+          "pendenciaClasse": {
+            "texto": "Selpercatinibe: nenhuma demanda nem portaria de incorporação na Conitec para carcinoma de tireoide com fusão RET; não consta como incorporado — acesso fora de APAC depende de compra institucional ou judicialização.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA RETEVMO (openFDA set_id 7fa848ba-a59c-4144-9f52-64d090f4d828, 2026-07-14), indicação 1.3 (thyroid cancer with RET gene fusion)",
+          "pagina": null,
+          "trecho": "Less than 50 kg: 120 mg orally twice daily 50 kg or greater: 160 mg",
+          "estado": "VERIFICADO"
+        }
       }
     ],
     "radioterapia": [
       {
-        "cenario": "Radioiodoterapia (I-131) adjuvante/ablação no CDT",
+        "cenario": "I-131 — CDT baixo/intermediário risco, sem suspeita de doença residual (ablação)",
         "doseTotalGy": null,
         "fracoes": null,
-        "concomitante": "não se aplica (dose em mCi)",
-        "pendencia": "SEM_FONTE",
-        "observacao": "SBOC não traz atividade de I-131; doses em mCi citadas na aula PRO aparecem só em casos clínicos. Não estimar.",
-        "fonte": null
+        "atividadeMCi": {
+          "min": 30,
+          "max": 100
+        },
+        "concomitante": "não se aplica (atividade em mCi)",
+        "observacao": "1.110-3.700 MBq. SIGTAP: 03.04.09.005-0 (30 mCi) e 03.04.09.006-9 (50 mCi) ambulatoriais; 03.04.09.002-6 (100 mCi) com internação.",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Carcinoma Diferenciado da Tireoide — Portaria SAS/MS nº 7, de 03/01/2014 (gov.br/conitec pcdt_carcinomatireoide.pdf)",
+          "pagina": 18,
+          "trecho": "devem receber atividades entre 1.110 e 3.700 MBq (30 e 100 mCi)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "I-131 — CDT baixo/intermediário risco com suspeita de doença microscópica residual ou fator de pior prognóstico",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "atividadeMCi": {
+          "min": 100,
+          "max": null
+        },
+        "concomitante": "não se aplica",
+        "observacao": "Atividade mínima de 3.700 MBq.",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Carcinoma Diferenciado da Tireoide — Portaria SAS/MS nº 7, de 03/01/2014 (gov.br/conitec pcdt_carcinomatireoide.pdf)",
+          "pagina": 18,
+          "trecho": "recomenda-se neste Protocolo o emprego de ablação com atividade mínima de 3.700 MBq",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "I-131 — CDT com doença residual macroscópica ou metástases à distância (terapêutica)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "atividadeMCi": {
+          "min": 200,
+          "max": null
+        },
+        "concomitante": "não se aplica",
+        "observacao": "Não inferior a 7.400 MBq, sem ultrapassar a atividade radiotóxica para a medula. SBOC: iodorrefratário se dose cumulativa >600 mCi.",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Carcinoma Diferenciado da Tireoide — Portaria SAS/MS nº 7, de 03/01/2014 (gov.br/conitec pcdt_carcinomatireoide.pdf)",
+          "pagina": 18,
+          "trecho": "valores não inferiores a 7.400 MBq (200 mCi)",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "cenario": "Anaplásico IVA/IVB — RT concomitante à QT pós-cirurgia",
-        "doseTotalGy": null,
-        "fracoes": null,
+        "doseTotalGy": 66,
+        "fracoes": 33,
         "concomitante": "cisplatina, doxorrubicina ou paclitaxel (doses não informadas)",
-        "pendencia": "SEM_FONTE",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
           "pagina": 12,
           "trecho": "Cirurgia seguida de RT concomitante à QT (cisplatina, doxorrubicina ou paclitaxel)",
           "estado": "VERIFICADO"
+        },
+        "observacao": "IMRT 66 Gy/33 fr com paclitaxel semanal concomitante — braços do NCT01236547 (COMPLETED). Dose da QT concomitante: ver protocolo tireoide-anaplasico-paclitaxel-semanal (registro não traz a dose da fase concomitante).",
+        "fonteFracionamento": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov API v2 NCT01236547 (COMPLETED)",
+          "pagina": null,
+          "trecho": "IMRT 5 days per week for 6.5 weeks (total of 66 Gy in 33 fractions)",
+          "estado": "INFERIDO"
         }
       },
       {
@@ -1215,6 +1614,13 @@
           "pagina": 7,
           "trecho": "Considerar RT adjuvante caso se identifique doença T4",
           "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "Dose/fracionamento da RT adjuvante do medular não tabelados (RT fora do escopo de oncologia clínica).",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC medular p.7"
+          ]
         }
       }
     ],
@@ -1262,6 +1668,17 @@
           "trecho": "Cirurgia seguida de RT concomitante à QT (cisplatina, doxorrubicina ou paclitaxel)",
           "estado": "VERIFICADO"
         }
+      },
+      {
+        "procedimento": "Tireoidectomia total",
+        "quando": "CDT >1 cm, salvo contraindicação (PCDT 2014)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Carcinoma Diferenciado da Tireoide — Portaria SAS/MS nº 7, de 03/01/2014 (gov.br/conitec pcdt_carcinomatireoide.pdf)",
+          "pagina": 13,
+          "trecho": "Nos pacientes com diagnóstico de carcinoma maiores que 1 cm, o tratamento inicial é a",
+          "estado": "VERIFICADO"
+        }
       }
     ],
     "biomarcadorTratamento": [
@@ -1270,43 +1687,45 @@
         "opcao": "Selpercatinibe em 1ª linha",
         "evidencia": "Respostas altas e sustentadas (SBOC)",
         "sus": "DADO_AUSENTE",
-        "observacao": "Dose não informada para CDT na SBOC; não transferir a dose do medular.",
-        "pendencia": "DOSE_SEM_FONTE_CDT",
+        "observacao": "Dose pela bula FDA na indicação de fusão RET da tireoide (não transferida do medular).",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
           "pagina": 11,
           "trecho": "Tumores com fusão de RET apresentam respostas altas e sustentadas",
           "estado": "VERIFICADO"
-        }
+        },
+        "protocoloId": "tireoide-cdt-selpercatinibe"
       },
       {
         "seAlvo": "BRAF V600E (anaplásico IVB)",
         "opcao": "Inibidor BRAF/MEK neoadjuvante",
         "evidencia": "ROAR (fase II), Zafereo et al.",
         "sus": "DADO_AUSENTE",
-        "pendencia": "DOSE_SEM_FONTE_ANAPLASICO",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
           "pagina": 12,
           "trecho": "considerar inibidor de BRAF/MEK neoadjuvante",
           "estado": "VERIFICADO"
-        }
+        },
+        "protocoloId": "tireoide-anaplasico-dabrafenibe-trametinibe",
+        "observacao": "Dose pela bula FDA (indicação ATC): ver protocolo tireoide-anaplasico-dabrafenibe-trametinibe"
       },
       {
         "seAlvo": "BRAF V600E (anaplásico IVC)",
         "opcao": "Inibidor BRAF/MEK preferencial",
         "evidencia": "ROAR: resposta 56%, SG mediana 14,5 m",
         "sus": "DADO_AUSENTE",
-        "pendencia": "DOSE_SEM_FONTE_ANAPLASICO",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-diferenciado-e-anaplasico-v5-VERSAO-PARA-COLABORACAO-1.pdf",
           "pagina": 12,
           "trecho": "preferencialmente inibidor de BRAF/MEK",
           "estado": "VERIFICADO"
-        }
+        },
+        "protocoloId": "tireoide-anaplasico-dabrafenibe-trametinibe",
+        "observacao": "Dose pela bula FDA (indicação ATC): ver protocolo tireoide-anaplasico-dabrafenibe-trametinibe"
       },
       {
         "seAlvo": "Mutação RET (medular)",
@@ -1470,9 +1889,28 @@
           "TSH",
           "USG_TIREOIDE"
         ],
-        "periodicidade": "SEM_FONTE no pack (SBOC não detalha seguimento do CDT)",
-        "pendencia": "SEM_FONTE",
-        "fonte": null
+        "periodicidade": "TSH, tireoglobulina e anticorpo antitireoglobulina (sem id no catálogo) + USG cervical; periodicidade individual (PCDT 2014 não fixa intervalo).",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Carcinoma Diferenciado da Tireoide — Portaria SAS/MS nº 7, de 03/01/2014 (gov.br/conitec pcdt_carcinomatireoide.pdf)",
+          "pagina": 24,
+          "trecho": "No seguimento dos pacientes é fundamental a garantia dos exames de TSH, tireoglobulina e",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "CDT — alvo de TSH com levotiroxina (PCDT Quadro 4)",
+        "exames": [
+          "TSH"
+        ],
+        "periodicidade": "Doença persistente/metastática: <0,1 mU/L. Livre de doença: alto/intermediário risco 0,1-0,5 mU/L por 5-10 anos; baixo risco 0,5-2,0 (conforme risco da reposição). Individualizar pelo risco cardiovascular/ósseo.",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "PCDT Carcinoma Diferenciado da Tireoide — Portaria SAS/MS nº 7, de 03/01/2014 (gov.br/conitec pcdt_carcinomatireoide.pdf)",
+          "pagina": 21,
+          "trecho": "Quadro 4 – Esquema de terapia de reposição de levotiroxina",
+          "estado": "VERIFICADO"
+        }
       }
     ]
   },
@@ -1615,14 +2053,31 @@
     ]
   },
   "pendencias": [
-    "SEM_FONTE: atividade de I-131 (mCi) por risco ATA e alvo de TSH por risco — SBOC não traz; buscar ATA 2025/SBEM.",
-    "SEM_FONTE: indicação de PAAF (Bethesda/TI-RADS) e extensão cirúrgica do CDT (só aula PRO: lobectomia ≤2 cm).",
-    "SEM_FONTE: doses de QT no anaplásico (paclitaxel + carboplatina, paclitaxel semanal, doxorrubicina) e de BRAF/MEK no anaplásico — protocolos não entraram.",
-    "SEM_FONTE: dose de selpercatinibe na fusão RET do CDT (não transferida do medular).",
-    "SEM_FONTE: dose e fracionamento de RT no anaplásico e no medular adjuvante.",
-    "SUS: lenvatinibe/sorafenibe não incorporados (Portaria 42/2024); selpercatinibe, vandetanibe, cabozantinibe, larotrectinibe e BRAF/MEK sem dado SUS no pack.",
-    "Catálogo: sem ids para NGS, RET germinativo, metanefrinas e USG de pescoço (usado USG_TIREOIDE).",
-    "Seguimento do CDT (tireoglobulina, anti-Tg, TSH, USG) sem fonte SBOC."
+    {
+      "texto": "RT do anaplásico preenchida (66 Gy/33 fr, ensaio, INFERIDO); RT adjuvante do medular segue sem dose — aceno de RT.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "SBOC",
+        "ClinicalTrials.gov NCT01236547"
+      ]
+    },
+    {
+      "texto": "Lenvatinibe/sorafenibe: não incorporados (Portaria SECTICS 42/2024). Larotrectinibe: não incorporado (Portaria SCTIE 72/2021). QT citotóxica: APAC 03.04.02.036-2. Selpercatinibe, vandetanibe, cabozantinibe e BRAF/MEK: sem demanda nem portaria na Conitec.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Painel de Demandas Conitec (exportação 15/06/2026)",
+        "TecnologiasDemandadas Conitec 15/04/2026",
+        "web: gov.br/conitec, Conass Informa"
+      ]
+    },
+    {
+      "texto": "RET germinativo/somático mapeados para MOLECULAR_PCR_MUTACAO (alt. SEQUENCIAMENTO_AMPLICON). Seguem sem id: painel NGS amplo, painel germinativo multigene, metanefrinas e anti-Tg; USG de pescoço usa USG_TIREOIDE.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "catálogo v1.1",
+        "SIGTAP 09/2026"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -1641,7 +2096,8 @@
         "trecho": "A dosagem da cápsula é 140 mg por dia.",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "60 mg/dia em comprimido; nunca intercambiar mg a mg com a cápsula de 140 mg; SBOC informa não aprovação no Brasil para medular"
+      "escolhaSeguranca": "60 mg/dia em comprimido; nunca intercambiar mg a mg com a cápsula de 140 mg; SBOC informa não aprovação no Brasil para medular",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Radiofármaco do PET DOTATATE",
@@ -1659,7 +2115,27 @@
         "trecho": "PET com gálio-DOTATATE",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Tratar como PET/CT 68Ga-DOTATATE; registrar provável erro de digitação na SBOC"
+      "escolhaSeguranca": "Tratar como PET/CT 68Ga-DOTATATE; registrar provável erro de digitação na SBOC",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Limite de tamanho para lobectomia no CDT",
+      "fonteA": {
+        "tipo": "DIRETRIZ",
+        "referencia": "PCDT Carcinoma Diferenciado da Tireoide — Portaria SAS/MS nº 7, de 03/01/2014 (gov.br/conitec pcdt_carcinomatireoide.pdf)",
+        "pagina": 13,
+        "trecho": "lobectomia poderia ser realizada em pacientes com tumores menores que 1 cm (T1a)",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026/slides-pro-2026/57 - Aula 57 - Tireoide",
+        "pagina": 21,
+        "trecho": "Lobectomia: recomendado para tumores ≤2 cm",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Regra SUS (PCDT 2014): tireoidectomia total >1 cm; lobectomia até 2 cm (ATA 2025 via curso; PCDT cita MSKCC até 4 cm) só por decisão do cirurgião/médico. PCDT em revisão (CP Conitec 88/2026).",
+      "decisaoNecessaria": true
     }
   ],
   "curadoria": {
@@ -1670,8 +2146,32 @@
       "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Tireoide-carcinoma-medular-v5-VERSAO-PARA-COLABORACAO-1.pdf",
       "Onco PRO 2026/slides-pro-2026/57 - Aula 57 - Tireoide",
       "Portaria SECTICS/MS 42/2024 (web, IELS 178)",
-      "ClinicalTrials.gov API v2"
+      "ClinicalTrials.gov API v2",
+      "PCDT Carcinoma Diferenciado da Tireoide — Portaria SAS/MS nº 7, de 03/01/2014 (gov.br/conitec pcdt_carcinomatireoide.pdf)",
+      "Bula FDA RETEVMO, TAFINLAR, MEKINIST, Doxorubicin (openFDA)",
+      "ClinicalTrials.gov API v2 NCT00507429, NCT03085056, NCT01236547",
+      "SIGTAP competência 09/2026",
+      "Painel de Demandas Conitec 15/06/2026",
+      "Portaria SCTIE/MS 72/2021"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-11",
+        "redator": "Claude (agente curador)",
+        "resolvidas": 5,
+        "classificadas": 3,
+        "susPreenchidos": 8,
+        "notas": []
+      }
+    ]
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "6 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
 }

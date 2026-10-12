@@ -227,9 +227,8 @@
         }
       },
       {
-        "catalogoId": null,
+        "catalogoId": "COOMBS_DIRETO",
         "rotulo": "Teste de Coombs",
-        "pendencia": "SEM_ID_NO_CATALOGO",
         "cenario": "todos",
         "indicacao": "universal",
         "fonte": {
@@ -238,7 +237,16 @@
           "pagina": 6,
           "trecho": "Teste de Coombs",
           "estado": "VERIFICADO"
-        }
+        },
+        "pendenciaClasse": {
+          "texto": "Teste de Coombs sem id no catálogo v1.1; SIGTAP 02.02.02.054-1 (TAD).",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
       },
       {
         "catalogoId": "DHL",
@@ -690,13 +698,22 @@
         "fichaId": null,
         "sus": {
           "disponivel": "DADO_AUSENTE",
-          "pendencia": "não consta no PCDT 2014; incorporação não verificada",
+          "pendencia": "SUS_SEM_FONTE_NO_PACK",
           "fonte": {
             "tipo": "DIRETRIZ",
             "referencia": "PCDT LDGCB 2014 (1ª linha só CHOP/R-CHOP)",
             "pagina": 9,
             "trecho": "o CHOP deve ser considerado o de escolha",
             "estado": "DADO_AUSENTE"
+          },
+          "pendenciaClasse": {
+            "texto": "Polatuzumabe vedotina: nenhuma demanda nem portaria na Conitec; não consta do PCDT 2014.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "Painel de Demandas Conitec (exportação 15/06/2026)",
+              "TecnologiasDemandadas Conitec 15/04/2026",
+              "web: gov.br/conitec, Conass Informa"
+            ]
           }
         },
         "fonte": {
@@ -705,7 +722,16 @@
           "pagina": null,
           "trecho": "prednisone 100 mg orally once daily on Days 1–5 for 6 cycles",
           "estado": "VERIFICADO"
-        }
+        },
+        "fases": [
+          "C1–C6: polatuzumabe + R-CHP",
+          "C7–C8: rituximabe isolado (conforme bula POLIVY)"
+        ],
+        "pendencias": [
+          "Representar a fase C7–C8 de rituximabe em linha própria."
+        ],
+        "calendarioExecutavel": false,
+        "motivoCalendario": "fase C7–C8 não representada"
       }
     ],
     "radioterapia": [
@@ -778,6 +804,30 @@
         "pagina": 10,
         "trecho": "Reservado para os casos de doentes intensamente neutropênicos, em intervalo de quimioterapia",
         "estado": "VERIFICADO"
+      },
+      "profilaxiaHBV": {
+        "texto": "Profilaxia de reativação de HBV com anti-CD20 (HBsAg+ ou anti-HBc+ de risco): antiviral de alta barreira (entecavir, tenofovir disoproxila ou alafenamida) durante o tratamento e por ≥12 meses após o último anti-CD20 (ASCO PCO, INFERIDO); entecavir 0,5 mg VO 1x/dia (bula, virgem de nucleosídeo; ajuste renal). Escolha/duração final: médico + hepatologia.",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "ASCO Provisional Clinical Opinion Update — Hepatitis B Virus Screening and Management for Patients with Cancer Prior to Therapy (PMC11828660), tabela de diretrizes",
+          "pagina": null,
+          "trecho": "at least 12 mos for patients receiving anti-CD20 therapies",
+          "estado": "INFERIDO"
+        },
+        "fonteDose": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Entecavir (openFDA set_id 007a6ad8-4d23-4543-ae48-c651cac7dd7b, 2019-11-24)",
+          "pagina": null,
+          "trecho": "Nucleoside-inhibitor-treatment-naïve with compensated liver disease (greater than or equal to 16 years old): 0.5 mg once daily",
+          "estado": "VERIFICADO"
+        }
+      },
+      "pendenciaClasse": {
+        "texto": "Emetogenicidade/NF via módulo de suporte; intratecal e CNS-IPI = aceno de hematologia.",
+        "classe": "DEPENDE_MOTOR_CODIGO",
+        "buscasFeitas": [
+          "MASCC/ESMO 2023"
+        ]
       }
     },
     "ensaios": [
@@ -871,7 +921,8 @@
       "BIOPSIA_MEDULA",
       "ECOCARDIOGRAMA",
       "TSH",
-      "CITOLOGIA_LIQUIDOS"
+      "CITOLOGIA_LIQUIDOS",
+      "COOMBS_DIRETO"
     ],
     "interacoesConsultar": [
       {
@@ -990,14 +1041,61 @@
     ]
   },
   "pendencias": [
-    "Coombs e líquor sem catalogoId (SEM_ID_NO_CATALOGO)",
-    "CNS-IPI e dose/esquema da profilaxia intratecal ou metotrexato EV: SEM_FONTE aberta lida",
-    "Profilaxia antiviral de HBV (droga/dose/duração): SEM_FONTE aberta lida",
-    "Doses dos esquemas de 2ª linha (DHAP, ESHAP, ICE, EPOCH, MINE): não constam no PCDT LDGCB 2014 — não transcritos",
-    "CAR-T, glofitamabe, epcoritamabe, tafasitamabe+lenalidomida (curso/NCCN): sem incorporação SUS verificada e sem dose lida",
-    "Pola-R-CHP: incorporação SUS não verificada",
-    "Dose de RT de consolidação: SEM_FONTE",
-    "PCDT de 2014 em revisão (consultas públicas Conitec 2026 sobre rituximabe manutenção/resgate e TCTH alogênico)"
+    {
+      "texto": "Líquor já mapeado para CITOLOGIA_LIQUIDOS (faturamento a confirmar). Coombs sem id (SIGTAP 02.02.02.054-1); inclusão depende de D-F1-02.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "catálogo v1.1",
+        "SIGTAP 09/2026"
+      ]
+    },
+    {
+      "texto": "Profilaxia de SNC (intratecal/MTX EV) e CNS-IPI — hematologia, aceno geral.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "PCDT LDGCB 2014 p.11"
+      ]
+    },
+    {
+      "texto": "Resgate do LDGCB não buscado (orientação do Dr. Silas). PCDT 2014 sem doses; rituximabe no resgate em análise na Conitec (2026).",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "PCDT LDGCB 2014",
+        "Painel Conitec 15/06/2026"
+      ]
+    },
+    {
+      "texto": "Terapias celulares/biespecíficos sem incorporação SUS — aceno geral.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "PCDT/DDT vigentes e preliminares 2026",
+        "Onco PRO aula 80/82"
+      ]
+    },
+    {
+      "texto": "Polatuzumabe sem demanda/portaria na Conitec; alternativa SUS: R-CHOP.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Painel de Demandas Conitec (exportação 15/06/2026)",
+        "TecnologiasDemandadas Conitec 15/04/2026",
+        "web: gov.br/conitec, Conass Informa"
+      ]
+    },
+    {
+      "texto": "RT de consolidação — aceno de RT.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "PCDT LDGCB 2014 p.11",
+        "Onco PRO aula 80"
+      ]
+    },
+    {
+      "texto": "Reconferir quando o PCDT revisado for publicado (consultas Conitec 2026).",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Painel Conitec 15/06/2026"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -1016,7 +1114,8 @@
         "trecho": "prednisone 100 mg orally once daily on Days 1–5 for 6 cycles",
         "estado": "CONFLITANTE"
       },
-      "escolhaSeguranca": "Mantido 40 mg/m2 do PCDT vigente; 100 mg fixos é alternativa aceita no PCDT preliminar de LF 2026 ('40 mg/m2 ou 100 mg'). Médico escolhe."
+      "escolhaSeguranca": "Mantido 40 mg/m2 do PCDT vigente; 100 mg fixos é alternativa aceita no PCDT preliminar de LF 2026 ('40 mg/m2 ou 100 mg'). Médico escolhe.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Rituximabe em HIV+",
@@ -1034,7 +1133,8 @@
         "trecho": "R-CHOP ou R-Pola-CHP x3",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Registrado o critério do PCDT (HIV negativo) como regra SUS; diretrizes atuais podem divergir — decisão médica com infectologia."
+      "escolhaSeguranca": "Registrado o critério do PCDT (HIV negativo) como regra SUS; diretrizes atuais podem divergir — decisão médica com infectologia.",
+      "decisaoNecessaria": true
     },
     {
       "tema": "Indicação de R-CHOP em EC I–II sem B/bulky",
@@ -1052,7 +1152,8 @@
         "trecho": "R-CHOP x3",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "SUS: R-CHOP pelo critério do PCDT; demais I–II recebem CHOP. Diretriz internacional usa R-CHOP para todos."
+      "escolhaSeguranca": "SUS: R-CHOP pelo critério do PCDT; demais I–II recebem CHOP. Diretriz internacional usa R-CHOP para todos.",
+      "decisaoNecessaria": false
     }
   ],
   "curadoria": {
@@ -1063,8 +1164,33 @@
       "PCDT Linfoma de Hodgkin 2020 (seção Regulação, rituximabe fornecido pelo MS)",
       "Bula FDA rituximabe (Truxima), POLIVY (openFDA)",
       "Onco PRO 2026, Módulo 9, Aula 80 — Linfomas (págs. 17–24)",
-      "ClinicalTrials.gov API v2 — NCT03274492"
+      "ClinicalTrials.gov API v2 — NCT03274492",
+      "ASCO PCO HBV (PMC11828660)",
+      "Bula FDA Entecavir (openFDA)",
+      "Painel de Demandas Conitec 15/06/2026"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-11",
+        "redator": "Claude (agente curador)",
+        "resolvidas": 1,
+        "classificadas": 7,
+        "susPreenchidos": 0,
+        "notas": []
+      }
+    ]
+  },
+  "escopo": {
+    "classe": "ACENO_GERAL_ONCO_HEMATOLOGIA",
+    "nota": "Foco do OncoGlobal é oncologia clínica (Dr. Silas, 2026-10-11). Pack de hematologia mantido como aceno geral: conteúdo preservado, sem aprofundamento nem prioridade de curadoria."
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): A05 Pola-R-CHP sem rituximabe C7–C8",
+      "acao": "fases explícitas; calendarioExecutavel false"
+    }
+  ]
 }

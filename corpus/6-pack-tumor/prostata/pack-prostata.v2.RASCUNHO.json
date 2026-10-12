@@ -911,13 +911,24 @@
         "ajusteObrigatorio": "Contraindicação relativa: doença cardiovascular significativa (SBOC p.13).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040207",
+              "nome": "HORMONIOTERAPIA PRÉVIA À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA"
+            },
+            {
+              "codigo": "0304050342",
+              "nome": "HORMONIOTERAPIA ADJUVANTE À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040207 HORMONIOTERAPIA PRÉVIA À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA; 0304050342 HORMONIOTERAPIA ADJUVANTE À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA PRÉVIA À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -956,13 +967,24 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040207",
+              "nome": "HORMONIOTERAPIA PRÉVIA À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA"
+            },
+            {
+              "codigo": "0304050342",
+              "nome": "HORMONIOTERAPIA ADJUVANTE À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040207 HORMONIOTERAPIA PRÉVIA À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA; 0304050342 HORMONIOTERAPIA ADJUVANTE À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA PRÉVIA À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -986,7 +1008,16 @@
             "via": "VO",
             "dias": "contínuo por 2 anos",
             "observacao": "SBOC não traz dose neste cenário; bula (mCRPC/mCSPC) não cobre esta indicação — não transferir.",
-            "pendencia": "SEM_FONTE"
+            "pendencia": {
+              "texto": "Dose sem fonte no cenário localizado de alto risco (STAMPEDE G/J).",
+              "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+              "buscasFeitas": [
+                "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4 p.14-15 e -Prostata-localizado-v4 p.14-15: indicação sem dose",
+                "https://clinicaltrials.gov/api/v2/studies/NCT00268476: braços G/J descritos sem dose (interventions sem descrição)",
+                "fontes/pro26/59 p.5/15/16 e 60 p.10: só 'abiraterona 24m', sem dose",
+                "Rótulo FDA Zytiga: indicação só mCRPC/mCSPC — não transferível ao localizado"
+              ]
+            }
           },
           {
             "droga": "Prednisolona/prednisona",
@@ -995,7 +1026,16 @@
             "via": "VO",
             "dias": "contínuo por 2 anos",
             "observacao": "Dose não informada pela SBOC neste cenário.",
-            "pendencia": "SEM_FONTE"
+            "pendencia": {
+              "texto": "Dose sem fonte no cenário localizado de alto risco (STAMPEDE G/J).",
+              "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+              "buscasFeitas": [
+                "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4 p.14-15 e -Prostata-localizado-v4 p.14-15: indicação sem dose",
+                "https://clinicaltrials.gov/api/v2/studies/NCT00268476: braços G/J descritos sem dose (interventions sem descrição)",
+                "fontes/pro26/59 p.5/15/16 e 60 p.10: só 'abiraterona 24m', sem dose",
+                "Rótulo FDA Zytiga: indicação só mCRPC/mCSPC — não transferível ao localizado"
+              ]
+            }
           },
           {
             "droga": "Leuprorrelina (acetato, depósito trimestral)",
@@ -1019,13 +1059,14 @@
         "ajusteObrigatorio": "Sem aprovação Anvisa para esta indicação (SBOC p.14). Não trocar abiraterona por enzalutamida (ENZARAD negativo).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de abiraterona no localizado de alto risco (STAMPEDE) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304050342 — decisão do serviço. Abiraterona incorporada só na doença metastática (Portarias SECTICS/MS nº 32 e 33/2024). TDA isolada com RT: APAC 0304040207/0304050342.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para abiraterona no localizado de alto risco (STAMPEDE) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1034,8 +1075,7 @@
           "pagina": 14,
           "trecho": "o uso de abiraterona por 2 anos associado à TDA por 3 anos",
           "estado": "VERIFICADO"
-        },
-        "pendencia": "SEM_FONTE"
+        }
       },
       {
         "id": "prostata-rb-rt-salvamento-tda",
@@ -1065,13 +1105,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050342",
+              "nome": "HORMONIOTERAPIA ADJUVANTE À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA"
+            }
+          ],
+          "observacao": "TDA associada à RT de salvamento. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050342 HORMONIOTERAPIA ADJUVANTE À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA ADJUVANTE À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1125,13 +1172,14 @@
         "ajusteObrigatorio": "Histórico de epilepsia: contraindicação à enzalutamida (SBOC avançada p.17). Interações CYP (INAT-25).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de enzalutamida na recidiva bioquímica (EMBARK) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020079 — decisão do serviço. Enzalutamida não incorporada em mHSPC, nmCRPC e mCRPC (Portarias SECTICS/MS nº 32 e 33/2024).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para enzalutamida na recidiva bioquímica (EMBARK) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1170,13 +1218,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020079 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1215,13 +1270,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020079 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1260,13 +1322,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020079 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1305,13 +1374,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020079 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1365,13 +1441,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de degarelix nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020079 — decisão do serviço. Relatório preliminar do PCDT de próstata (CP 86/2026) só o cita na revisão de evidência.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para degarelix nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -1403,13 +1480,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020079 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1449,14 +1533,20 @@
         "ajusteObrigatorio": "Monitorar TGO/TGP, potássio e PA (bula). Interações INAT-23/INAT-24. Associado à TDA contínua.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Portaria SECTICS/MS nº 32, de 22/08/2024; Relatório nº 911 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-32-de-22-de-agosto-de-2024-580075201",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "abiraterona em monoterapia ou associada ao docetaxel",
+            "estado": "VERIFICADO"
+          },
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ]
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1487,13 +1577,14 @@
         "ajusteObrigatorio": "Epilepsia: contraindicação (SBOC p.17). INAT-25.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Alternativa SUS: abiraterona (Portaria SECTICS/MS nº 32/2024).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Portaria SECTICS/MS nº 32, de 22/08/2024; Relatório nº 911 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-32-de-22-de-agosto-de-2024-580075201",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "Não incorporar, no âmbito do SUS, medicamentos enzalutamida, darolutamida e apalutamida",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1525,13 +1616,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Alternativa SUS: abiraterona (Portaria SECTICS/MS nº 32/2024).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Portarias SECTICS/MS nº 32 e nº 33, de 22/08/2024; Relatórios nº 911/912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-33-de-22-de-agosto-de-2024-580101368",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "a apalutamida, darolutamida e enzalutamida (associados à TPA)",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1579,14 +1671,20 @@
         "ajusteObrigatorio": "Hemograma, função hepática antes de cada ciclo (SBOC p.12). INAT-18 (docetaxel × CYP3A4 fortes).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Portaria SECTICS/MS nº 32, de 22/08/2024; Relatório nº 911 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-32-de-22-de-agosto-de-2024-580075201",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "abiraterona em monoterapia ou associada ao docetaxel",
+            "estado": "VERIFICADO"
+          },
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ]
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1625,13 +1723,14 @@
         "ajusteObrigatorio": "INAT-18.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Alternativa SUS: docetaxel + abiraterona (Portaria SECTICS/MS nº 32/2024).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Portarias SECTICS/MS nº 32 e nº 33, de 22/08/2024; Relatórios nº 911/912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-32-de-22-de-agosto-de-2024-580075201",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "Não incorporar, no âmbito do SUS, medicamentos enzalutamida, darolutamida e apalutamida",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1663,13 +1762,13 @@
         "ajusteObrigatorio": "Manter TDA contínua.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Portaria SECTICS/MS nº 33, de 22/08/2024; Relatório nº 912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-33-de-22-de-agosto-de-2024-580101368",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "de não incorporar a enzalutamida para pacientes com câncer de próstata",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1701,13 +1800,13 @@
         "ajusteObrigatorio": "Manter TDA contínua.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Portarias SECTICS/MS nº 32 e nº 33, de 22/08/2024; Relatórios nº 911/912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-33-de-22-de-agosto-de-2024-580101368",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "a apalutamida, darolutamida e enzalutamida (associados à TPA)",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1739,13 +1838,13 @@
         "ajusteObrigatorio": "Manter TDA contínua.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Portarias SECTICS/MS nº 32 e nº 33, de 22/08/2024; Relatórios nº 911/912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-32-de-22-de-agosto-de-2024-580075201",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "Não incorporar, no âmbito do SUS, medicamentos enzalutamida, darolutamida e apalutamida",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1785,14 +1884,21 @@
         "ajusteObrigatorio": "Não sequenciar após enzalutamida (resistência cruzada, SBOC p.18). TGO/TGP, potássio, PA. INAT-23/INAT-24.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "observacao": "Pós-docetaxel: Portaria SCTIE nº 38/2019.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Portaria SECTICS/MS nº 33, de 22/08/2024; Relatório nº 912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-33-de-22-de-agosto-de-2024-580101368",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          }
+            "trecho": "resistente à castração, metastático e virgens de quimioterapia",
+            "estado": "VERIFICADO"
+          },
+          "apac": [
+            {
+              "codigo": "0304020060",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA"
+            }
+          ]
         },
         "fonte": {
           "tipo": "SBOC",
@@ -1823,13 +1929,14 @@
         "ajusteObrigatorio": "Não sequenciar após abiraterona. Epilepsia: contraindicação. INAT-25.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Alternativa SUS: abiraterona (Portarias SCTIE nº 38/2019 e SECTICS/MS nº 33/2024).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Portaria SECTICS/MS nº 33, de 22/08/2024; Relatório nº 912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-33-de-22-de-agosto-de-2024-580101368",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "de não incorporar a enzalutamida para pacientes com câncer de próstata",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1861,13 +1968,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020060",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020060 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1899,13 +2013,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020060",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020060 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1937,13 +2058,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020060",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020060 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -1983,13 +2111,20 @@
         "ajusteObrigatorio": "Hemograma e função hepática antes de cada ciclo. INAT-18.",
         "fichaId": "FICHA.prostata.docetaxel-21-21-dias__paliativo-metastatico@1.0.0",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020087",
+              "nome": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020087 QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2008,36 +2143,55 @@
         "drogas": [
           {
             "droga": "Docetaxel",
-            "dose": null,
+            "dose": 50,
             "unidade": "mg/m2",
             "via": "EV",
-            "dias": "D1",
-            "observacao": "Esquema citado apenas na aula Onco PRO 2026 (p.5); ausente na SBOC 2026 e na bula — dose não preenchida.",
-            "pendencia": "SEM_FONTE"
+            "dias": "D1 (a cada 14 dias = D1 e D15 de ciclo de 28 dias)",
+            "observacao": "Aula Onco PRO 2026 (CURSO, INFERIDO); esquema D1/D15 q28 confirmado no registro PROSTY (NCT00255606), que não traz a dose.",
+            "fonte": {
+              "tipo": "CURSO",
+              "referencia": "fontes/pro26/61_-_Aula_61_-_Próstata_-_CRPC_M0_e_M1_-_Parte_1.txt",
+              "pagina": 5,
+              "trecho": "Docetaxel 50mg/m² D1 e D15 q28d + Pred 10mg/d",
+              "estado": "INFERIDO"
+            }
           },
           {
             "droga": "Prednisona",
-            "dose": null,
+            "dose": 10,
             "unidade": "mg",
             "via": "VO",
-            "dias": "contínuo",
-            "observacao": "",
-            "pendencia": "SEM_FONTE"
+            "dias": "1x/dia contínuo",
+            "observacao": "Aula PRO; PROSTY: prednisona oral D1-D28.",
+            "fonte": {
+              "tipo": "CURSO",
+              "referencia": "fontes/pro26/61_-_Aula_61_-_Próstata_-_CRPC_M0_e_M1_-_Parte_1.txt",
+              "pagina": 5,
+              "trecho": "Docetaxel 50mg/m² D1 e D15 q28d + Pred 10mg/d",
+              "estado": "INFERIDO"
+            }
           }
         ],
         "cicloDias": 14,
         "numeroCiclos": null,
-        "premedicacao": "",
+        "premedicacao": "Dexametasona VO 8 mg 12 h, 3 h e 1 h antes do docetaxel (regime da bula para mCRPC com prednisona concomitante; bula refere-se a 75 mg/m² q3s — INFERIDO para o quinzenal).",
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020087",
+              "nome": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020087 QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2047,7 +2201,13 @@
           "trecho": "esquema fracionado (50mg/m² q2s) é alternativa menos tóxica",
           "estado": "INFERIDO"
         },
-        "pendencia": "SEM_FONTE"
+        "fonteEsquema": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00255606 (PROSTY, braço I)",
+          "pagina": null,
+          "trecho": "docetaxel IV over 1 hour on days 1 and 15",
+          "estado": "VERIFICADO"
+        }
       },
       {
         "id": "prostata-mcrpc-cabazitaxel-prednisona",
@@ -2078,13 +2238,14 @@
         "ajusteObrigatorio": "Risco de neutropenia febril: avaliar profilaxia com G-CSF (bula não detalhada aqui).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de cabazitaxel nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020087 — decisão do serviço. Não citado no relatório preliminar do PCDT de próstata (CP 86/2026).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para cabazitaxel nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2124,13 +2285,20 @@
         "ajusteObrigatorio": "Ecocardiograma basal (cardiotoxicidade de antraciclinas/antracenedionas — bula).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020087",
+              "nome": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020087 QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2162,13 +2330,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020087",
+              "nome": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020087 QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2200,13 +2375,14 @@
         "ajusteObrigatorio": "Hemograma mensal (anemia); INAT-26 (olaparibe × CYP3A).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de olaparibe (próstata) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020087 — decisão do serviço.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para olaparibe (próstata) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2254,13 +2430,14 @@
         "ajusteObrigatorio": "INAT-23, INAT-26. Bula FDA restringe a BRCAm; SBOC: aprovado Anvisa independentemente de HRR.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de olaparibe (próstata) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020087 — decisão do serviço. Abiraterona isolada incorporada (Portaria SECTICS/MS nº 33/2024).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para olaparibe (próstata) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2300,13 +2477,14 @@
         "ajusteObrigatorio": "Hemograma (anemia); INAT-25.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de talazoparibe (próstata) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020087 — decisão do serviço. Enzalutamida não incorporada (Portaria SECTICS/MS nº 33/2024).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para talazoparibe (próstata) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2338,13 +2516,14 @@
         "ajusteObrigatorio": "CI-08 (autoimune/transplante); INAT-27, INAT-28.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (próstata TMB-alto) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020087 — decisão do serviço.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (próstata TMB-alto) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2383,13 +2562,14 @@
         "ajusteObrigatorio": "Se associado a enzalutamida (PEACE-3): proteção óssea mandatória (SBOC p.18). Unidade fora do enum do esquema (kBq/kg).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de dicloreto de rádio-223 nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para dicloreto de rádio-223 nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2421,13 +2601,14 @@
         "ajusteObrigatorio": "Exige PET-PSMA (PET_PSMA sem código SUS) — sem alternativa SUS para seleção; disponibilidade SUS do radiofármaco: DADO_AUSENTE.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de lutécio-177-PSMA-617 nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). PET-PSMA para seleção sem id no catálogo.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para lutécio-177-PSMA-617 nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2463,17 +2644,24 @@
         ],
         "cicloDias": 21,
         "numeroCiclos": null,
-        "premedicacao": "",
+        "premedicacao": "Dexametasona VO 16 mg/dia (8 mg 12/12 h) por 3 dias, iniciando 1 dia antes do docetaxel (bula FDA docetaxel).",
         "ajusteObrigatorio": "CI-04 (Calvert), INAT-18.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020087",
+              "nome": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020087 QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2481,6 +2669,13 @@
           "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
           "pagina": 21,
           "trecho": "Carboplatina AUC 5 + Docetaxel 75 mg/m² EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "premedicacaoFonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22docetaxel%22&limit=1 (set_id 00c61d11-d6b7-4618-b6f6-2592dbcc8af7)",
+          "pagina": null,
+          "trecho": "dexamethasone 16 mg per day (e.g., 8 mg twice daily) for 3 days",
           "estado": "VERIFICADO"
         }
       },
@@ -2513,13 +2708,20 @@
         "ajusteObrigatorio": "CI-01 (função renal), INAT-15 (ototóxicos).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020087",
+              "nome": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020087 QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2555,17 +2757,18 @@
         ],
         "cicloDias": 21,
         "numeroCiclos": null,
-        "premedicacao": "",
+        "premedicacao": "30 min antes de cada dose: anti-histamínico (difenidramina 25 mg ou equivalente), dexametasona 8 mg e antagonista H2, EV (bula FDA Jevtana); antiemético conforme necessidade.",
         "ajusteObrigatorio": "CI-04.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de cabazitaxel nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020087 — decisão do serviço. Carboplatina via APAC.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para cabazitaxel nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2573,6 +2776,13 @@
           "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
           "pagina": 16,
           "trecho": "Carboplatina AUC 5 + Cabazitaxel 20 mg/m² EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "premedicacaoFonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cabazitaxel%22&limit=1 (set_id de3d9c26-572b-4ea4-9b2d-dd58a2b3e8fa)",
+          "pagina": null,
+          "trecho": "Administer intravenously 30 minutes before each dose of JEVTANA: Antihistamine",
           "estado": "VERIFICADO"
         }
       },
@@ -2597,13 +2807,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de denosumabe (oncologia) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Denosumabe não incorporado para osteoporose (Portarias SCTIE nº 62 e 64/2022). Alternativa SUS na metástase óssea: ácido zoledrônico (APAC 0304080071).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para denosumabe (oncologia) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2635,13 +2846,20 @@
         "ajusteObrigatorio": "Ajuste por clearance de creatinina (bula).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304080071",
+              "nome": "INIBIDOR DA OSTEÓLISE"
+            }
+          ],
+          "observacao": "Procedimento INIBIDOR DA OSTEÓLISE com CID C795 (metástase óssea) compatível. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304080071 INIBIDOR DA OSTEÓLISE. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "INIBIDOR DA OSTEÓLISE",
+            "estado": "VERIFICADO"
           }
         },
         "fonte": {
@@ -2673,13 +2891,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de denosumabe (oncologia) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Denosumabe não incorporado para osteoporose (Portarias SCTIE nº 62 e 64/2022). Alternativa SUS na metástase óssea: ácido zoledrônico (APAC 0304080071).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para denosumabe (oncologia) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2711,13 +2930,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "parcial",
+          "observacao": "Fora do câncer (perda óssea por TDA): ácido zoledrônico está no SUS para osteoporose (Portaria SCTIE nº 61/2022) e doença de Paget (SCTIE nº 85/2018) — acesso segue o PCDT de osteoporose; sem procedimento APAC oncológico para esta indicação (0304080071 exige C795/C80/C900).",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "Relatório preliminar do PCDT do Adenocarcinoma de Próstata (CP 86/2026), ainda não aprovado — https://www.gov.br/conitec/pt-br/midias/consultas/relatorios/2026/relatorio-preliminar-pcdt-adenocarcinoma-de-prostata-cp-86/@@display-file/file",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "Como opções terapêuticas complementares para CaP metastático resistente à castração",
+            "estado": "INFERIDO"
           }
         },
         "fonte": {
@@ -2750,9 +2970,17 @@
         "fichaId": null,
         "sus": {
           "disponivel": "DADO_AUSENTE",
+          "pendencia": {
+            "texto": "Alendronato na perda óssea induzida por TDA: indicação fora da oncologia (PCDT de osteoporose); não verificado nesta rodada.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "planilha Recomendações da Conitec (oncologia): sem registro",
+              "SIGTAP 03.04: sem procedimento compatível"
+            ]
+          },
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "SIGTAP/CONITEC não consultados; diretriz SBOC não informa incorporação SUS",
+            "referencia": "SIGTAP 2026-09 / planilha Recomendações da Conitec",
             "pagina": null,
             "trecho": null,
             "estado": "DADO_AUSENTE"
@@ -2763,6 +2991,52 @@
           "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
           "pagina": 12,
           "trecho": "Alendronato 70 mg VO semanalmente.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mhspc-darolutamida",
+        "nome": "Darolutamida + TDA (ARANOTE) — mHSPC sem docetaxel",
+        "cenario": "metastático sensível à castração (mHSPC)",
+        "linha": "1ª linha (intensificação)",
+        "drogas": [
+          {
+            "droga": "Darolutamida",
+            "dose": 600,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "2x/dia contínuo, com alimento",
+            "observacao": "Associada à TDA contínua (ver protocolos de TDA). SBOC: opção alternativa (NE forte/FR fraca)."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Uso contínuo; cicloDias 28 por convenção do pack. Interações CYP3A4/BCRP (bula).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Alternativa SUS: abiraterona (Portaria SECTICS/MS nº 32/2024).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portarias SECTICS/MS nº 32 e nº 33, de 22/08/2024; Relatórios nº 911/912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-32-de-22-de-agosto-de-2024-580075201",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do SUS, medicamentos enzalutamida, darolutamida e apalutamida",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=spl_product_data_elements:darolutamide&limit=1 (NUBEQA 2025-06-03, set_id 1a7cb212-56e4-4b9d-a73d-bfee7fe4735e)",
+          "pagina": null,
+          "trecho": "NUBEQA 600 mg (two 300 mg tablets) administered orally twice daily",
+          "estado": "VERIFICADO"
+        },
+        "fonteEnsaio": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT04736199 (ARANOTE)",
+          "pagina": null,
+          "trecho": "darolutamide 600 mg (2 tablets of 300 mg) twice daily with food",
           "estado": "VERIFICADO"
         }
       }
@@ -2872,7 +3146,7 @@
         "seAlvo": "BRCA1/2 ou ATM (após progressão a novo agente hormonal)",
         "opcao": "Olaparibe 300 mg VO 2x/dia",
         "evidencia": "Fase III (PROfound); benefício maior em BRCA1/2, limitado em ATM",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — olaparibe/talazoparibe sem avaliação CONITEC para próstata (INFERIDO); enzalutamida não incorporada (Portaria SECTICS/MS nº 33/2024)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
@@ -2885,7 +3159,7 @@
         "seAlvo": "HRR/BRCA (sem ARPI prévio na fase sensível)",
         "opcao": "Abiraterona/prednisona + olaparibe ou enzalutamida + talazoparibe",
         "evidencia": "Fase III (PROpel, TALAPRO-2); aprovadas Anvisa independentemente de HRR",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — olaparibe/talazoparibe sem avaliação CONITEC para próstata (INFERIDO); enzalutamida não incorporada (Portaria SECTICS/MS nº 33/2024)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
@@ -2898,7 +3172,7 @@
         "seAlvo": "TMB ≥ 10 mut/Mb",
         "opcao": "Pembrolizumabe",
         "evidencia": "Aprovação agnóstica; dados retrospectivos em próstata (NE baixo)",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — pembrolizumabe sem avaliação CONITEC para próstata (INFERIDO)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
@@ -2911,7 +3185,7 @@
         "seAlvo": "PSMA+ no PET/CT PSMA",
         "opcao": "177Lu-PSMA-617",
         "evidencia": "Fase III (VISION; PSMAfore pré-QT)",
-        "sus": "DADO_AUSENTE (PET-PSMA sem código SUS)",
+        "sus": "nao — lutécio-177-PSMA-617 sem avaliação CONITEC (INFERIDO); PET-PSMA sem id no catálogo",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
@@ -2924,7 +3198,7 @@
         "seAlvo": "BRCA mutado sem acesso a iPARP",
         "opcao": "QT com platina",
         "evidencia": "Fase II",
-        "sus": "DADO_AUSENTE",
+        "sus": "sim — quimioterapia de CRPC via APAC 0304020087 (SIGTAP 2026-09)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
@@ -3082,8 +3356,8 @@
       },
       {
         "nome": "STAMPEDE (abiraterona no alto risco não metastático)",
-        "nct": null,
-        "nctEstado": "NAO_VERIFICADO",
+        "nct": "NCT00268476",
+        "nctEstado": "VERIFICADO",
         "populacao": "Localizado alto risco / N+",
         "bracos": "TDA 3 anos ± abiraterona 2 anos",
         "desfecho": "SLM, SG",
@@ -3094,7 +3368,8 @@
           "pagina": 14,
           "trecho": "houve redução de 47% no risco de sobrevida livre de metástases",
           "estado": "VERIFICADO"
-        }
+        },
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT00268476 (também ISRCTN78818544)"
       },
       {
         "nome": "proPSMA",
@@ -3110,6 +3385,19 @@
           "pagina": 11,
           "trecho": "acurácia de 92% versus 65%, P<0.0001",
           "estado": "VERIFICADO"
+        },
+        "registroAlternativo": {
+          "id": "ACTRN12617000005358",
+          "estado": "VERIFICADO",
+          "url": "https://www.anzctr.org.au/Trial/Registration/TrialReview.aspx?ACTRN=12617000005358"
+        },
+        "nctPendencia": {
+          "texto": "proPSMA não tem NCT; registrado no ANZCTR (ACTRN12617000005358, título conferido).",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "CT.gov query.term=proPSMA",
+            "CT.gov query.term=PSMA PET staging high risk prostate Hofman"
+          ]
         }
       }
     ],
@@ -3479,19 +3767,82 @@
     ]
   },
   "pendencias": [
-    "Status SUS/APAC (SIGTAP/CONITEC) de abiraterona, enzalutamida, apalutamida, darolutamida, iPARP, cabazitaxel, rádio-223, Lu-PSMA, degarelix, gosserrelina e leuprorrelina não consta na SBOC: DADO_AUSENTE — curador deve confirmar na tabela SIGTAP/APAC vigente.",
-    "Doses de agonistas/antagonistas LHRH tiradas de bula FDA (openFDA); confirmar com bula ANVISA das apresentações disponíveis no serviço. Indicação de bula = câncer de próstata avançado; uso com RT no localizado sustentado pela SBOC (classe e duração).",
-    "Abiraterona no localizado alto risco (STAMPEDE): dose não informada pela SBOC neste cenário e sem aprovação Anvisa — drogas com dose null (SEM_FONTE).",
-    "Docetaxel quinzenal (ficha FICHA.prostata.docetaxel-quinzenal…): esquema só na aula Onco PRO 2026; SBOC 2026 e bula não trazem — dose null, fichaId null.",
-    "Olaparibe + abiraterona: SBOC p.16 traz prednisona 5 mg 1x/dia, enquanto abiraterona isolada no mCRPC usa 5 mg 2x/dia (p.15) — confirmar com bula ANVISA do Lynparza.",
-    "Definição de alto risco mHSPC (SBOC p.10) impressa como 'Gleason > 8' e '3 lesões ósseas' — conferir com o PDF/LATITUDE (Gleason ≥ 8, ≥ 3 lesões).",
-    "Darolutamida sem docetaxel no mHSPC (ARANOTE): SBOC cita como opção alternativa (NE forte/FR fraca), sem tabela de dose para este esquema — não criado protocolo.",
-    "RT: doses (Gy/frações) só na aula Onco PRO 2026 (CURSO/INFERIDO); SBOC 2026 não traz dose/fracionamento. RT do primário no mHSPC baixo volume não é abordada pela SBOC 2026; aula cita também '20x 2,7 Gy' (possível truncamento) — não incluído.",
-    "Lu-PSMA depende de PET-PSMA (sem código SUS); sem alternativa SUS para seleção.",
-    "Painéis NGS (germinativo/somático HRR, TMB) sem id no catálogo (SEM_ID_NO_CATALOGO).",
-    "Intervalo do PSA no seguimento pós-prostatectomia não especificado pela SBOC.",
-    "Unidades kBq/kg e GBq (radiofármacos) fora do enum de unidade do esquema v2.",
-    "Premedicação/antiemese de taxanos e profilaxia de neutropenia febril não informadas pela SBOC."
+    {
+      "texto": "Doses de agonistas/antagonistas LHRH tiradas de bula FDA (openFDA); confirmar com bula ANVISA das apresentações disponíveis no serviço. Indicação de bula = câncer de próstata avançado; uso com RT no localizado sustentado pela SBOC (classe e duração).",
+      "classe": "DEPENDE_BULA_ANVISA",
+      "buscasFeitas": [
+        "openFDA leuprolida/gosserrelina/degarelix (já usados)"
+      ]
+    },
+    {
+      "texto": "Abiraterona no localizado alto risco (STAMPEDE): dose não informada pela SBOC neste cenário e sem aprovação Anvisa — drogas com dose null (SEM_FONTE).",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4 p.14-15 e -Prostata-localizado-v4 p.14-15: indicação sem dose",
+        "https://clinicaltrials.gov/api/v2/studies/NCT00268476: braços G/J descritos sem dose (interventions sem descrição)",
+        "fontes/pro26/59 p.5/15/16 e 60 p.10: só 'abiraterona 24m', sem dose",
+        "Rótulo FDA Zytiga: indicação só mCRPC/mCSPC — não transferível ao localizado"
+      ]
+    },
+    {
+      "texto": "Olaparibe + abiraterona: SBOC p.16 traz prednisona 5 mg 1x/dia, enquanto abiraterona isolada no mCRPC usa 5 mg 2x/dia (p.15) — confirmar com bula ANVISA do Lynparza. Bula FDA: 5 mg 2x/dia — registrado em conflitos.",
+      "classe": "DEPENDE_BULA_ANVISA",
+      "buscasFeitas": [
+        "openFDA Lynparza (set_id 741ff3e3-dc1a-45a6-84e5-2481b27131aa)",
+        "SBOC próstata avançada 2026 p.16"
+      ]
+    },
+    {
+      "texto": "Definição de alto risco mHSPC (SBOC p.10) impressa como 'Gleason > 8' e '3 lesões ósseas' — conferir com o PDF/LATITUDE (Gleason ≥ 8, ≥ 3 lesões). Texto extraído do PDF confirma a grafia da SBOC (p.10).",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4 p.10"
+      ]
+    },
+    {
+      "texto": "RT: doses (Gy/frações) só na aula Onco PRO 2026 (CURSO/INFERIDO); SBOC 2026 não traz dose/fracionamento. RT do primário no mHSPC baixo volume não é abordada pela SBOC 2026; aula cita também '20x 2,7 Gy' (possível truncamento) — não incluído.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+      ]
+    },
+    {
+      "texto": "Lu-PSMA depende de PET-PSMA (sem código SUS); sem alternativa SUS para seleção.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "catálogo exames v1.1: sem PET-PSMA",
+        "CONITEC: lutécio-PSMA sem avaliação"
+      ]
+    },
+    {
+      "texto": "Painéis NGS (germinativo/somático HRR, TMB) sem id no catálogo (SEM_ID_NO_CATALOGO).",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json v1.1: sem painel NGS/TMB"
+      ]
+    },
+    {
+      "texto": "Intervalo do PSA no seguimento pós-prostatectomia não especificado pela SBOC.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "SBOC próstata localizado 2026: sem intervalo de PSA pós-prostatectomia"
+      ]
+    },
+    {
+      "texto": "Unidades kBq/kg e GBq (radiofármacos) fora do enum de unidade do esquema v2.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "docs/ondas/F1-PACK-ESQUEMA-V2.md: enum de unidade sem kBq/kg e GBq"
+      ]
+    },
+    {
+      "texto": "Antiemese e profilaxia de neutropenia febril não informadas pela SBOC. (Pré-medicação de docetaxel e cabazitaxel preenchida pela bula FDA nesta rodada.)",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC próstata avançada 2026: sem antiemese/profilaxia de NF",
+        "openFDA docetaxel e Jevtana: pré-medicação apenas"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -3510,7 +3861,8 @@
         "trecho": "The dose regimen of Xofigo is 55 kBq (1.49 microcurie) per kg body weight",
         "estado": "CONFLITANTE"
       },
-      "escolhaSeguranca": "Protocolo segue a bula vigente do produto (55 kBq/kg, 6 injeções); 50 kBq/kg corresponde à padronização antiga de atividade. Médico/medicina nuclear confirma conforme bula ANVISA do lote."
+      "escolhaSeguranca": "Protocolo segue a bula vigente do produto (55 kBq/kg, 6 injeções); 50 kBq/kg corresponde à padronização antiga de atividade. Médico/medicina nuclear confirma conforme bula ANVISA do lote.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Número de ciclos de 177Lu-PSMA-617",
@@ -3528,7 +3880,8 @@
         "trecho": "7.4 GBq (200 mCi) every 6 weeks for 6 doses",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Máximo de 6 ciclos (teto comum às duas fontes); número exato por resposta/toxicidade a critério médico."
+      "escolhaSeguranca": "Máximo de 6 ciclos (teto comum às duas fontes); número exato por resposta/toxicidade a critério médico.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Dose de cabazitaxel na combinação com carboplatina (variante agressiva)",
@@ -3546,7 +3899,8 @@
         "trecho": "Carboplatina AUC 5 + Cabazitaxel 20-25 mg/m²",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Usar 20 mg/m² (menor dose, menos toxicidade hematológica)."
+      "escolhaSeguranca": "Usar 20 mg/m² (menor dose, menos toxicidade hematológica).",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Abiraterona em dose reduzida com alimento",
@@ -3564,7 +3918,8 @@
         "trecho": "1,000 mg orally once daily with prednisone 5 mg orally twice daily",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Protocolo usa 1.000 mg/dia (bula e esquema principal SBOC); 250 mg com alimento só como alternativa de acesso, por decisão médica explícita."
+      "escolhaSeguranca": "Protocolo usa 1.000 mg/dia (bula e esquema principal SBOC); 250 mg com alimento só como alternativa de acesso, por decisão médica explícita.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Olaparibe + abiraterona: população",
@@ -3582,7 +3937,8 @@
         "trecho": "BRCA -mutated metastatic castration-resistant prostate cancer in combination with abiraterone",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Testar BRCA/HRR antes; priorizar a combinação nos portadores de BRCA/HRR (maior benefício); em HRR proficiente, decisão médica."
+      "escolhaSeguranca": "Testar BRCA/HRR antes; priorizar a combinação nos portadores de BRCA/HRR (maior benefício); em HRR proficiente, decisão médica.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Definição de recidiva bioquímica pós-prostatectomia",
@@ -3600,7 +3956,8 @@
         "trecho": "Critério clássico: PSA ≥ 0,2 ng/mL, confirmado por nova dosagem",
         "estado": "INFERIDO"
       },
-      "escolhaSeguranca": "Adotar SBOC 2026 (≥ 0,1 ng/mL confirmado), limiar usado em RADICALS e GETUG-AFU 17; detecção mais precoce para salvamento."
+      "escolhaSeguranca": "Adotar SBOC 2026 (≥ 0,1 ng/mL confirmado), limiar usado em RADICALS e GETUG-AFU 17; detecção mais precoce para salvamento.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Docetaxel quinzenal 50 mg/m²",
@@ -3618,7 +3975,27 @@
         "trecho": "Docetaxel 75 mg/m² EV D1 a cada 3 semanas, 6 ciclos",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Pack só preenche o esquema 21/21 da SBOC; quinzenal fica com dose null (SEM_FONTE) até fonte SBOC/bula."
+      "escolhaSeguranca": "Pack só preenche o esquema 21/21 da SBOC; quinzenal fica com dose null (SEM_FONTE) até fonte SBOC/bula. Rodada 2: dose 50 mg/m² preenchida como CURSO/INFERIDO (aula PRO; esquema PROSTY NCT00255606) — validar antes do uso.",
+      "decisaoNecessaria": true
+    },
+    {
+      "tema": "Prednisona com olaparibe + abiraterona (PROpel)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 16,
+        "trecho": "Prednisona 5 mg VO 1x/dia continuamente",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22olaparib%22&limit=1 (Lynparza 2025-07-10, set_id 741ff3e3-dc1a-45a6-84e5-2481b27131aa)",
+        "pagina": null,
+        "trecho": "in combination with prednisone or prednisolone 5 mg orally twice daily",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Dose do pack mantida como na SBOC (verificada); a bula FDA e a abiraterona isolada usam 5 mg 2x/dia. Conferir bula ANVISA do Lynparza antes do uso.",
+      "decisaoNecessaria": true
     }
   ],
   "curadoria": {
@@ -3636,8 +4013,30 @@
       "corpus/fichas/prostata/*.json",
       "corpus/6-pack-tumor/prostata/prostata.v1.RASCUNHO.json (referência, não editado)",
       "openFDA: leuprolide, goserelin, degarelix, enzalutamide, abiraterone, olaparib, talazoparib, cabazitaxel, Xofigo, Pluvicto",
-      "ClinicalTrials.gov API v2: NCT01957436, NCT02799602, NCT03511664, NCT02987543, NCT03732820, NCT03395197, NCT02319837, NCT00699751"
+      "ClinicalTrials.gov API v2: NCT01957436, NCT02799602, NCT03511664, NCT02987543, NCT03732820, NCT03395197, NCT02319837, NCT00699751",
+      "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
+      "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
     ],
-    "aprovacaoClinica": null
+    "aprovacaoClinica": null,
+    "rodada2": {
+      "data": "2026-10-11",
+      "redator": "Claude (Opus 5.5) — redução de pendências e conflitos; aprovação clínica pendente",
+      "pendenciasResolvidas": [
+        {
+          "texto": "Status SUS/APAC (SIGTAP/CONITEC) de abiraterona, enzalutamida, apalutamida, darolutamida, iPARP, cabazitaxel, rádio-223, Lu-PSMA, degarelix, gosserrelina e leuprorrelina não consta na SBOC: DADO_AUSENTE — curador deve confirmar na tabela SIGTAP/APAC vigente.",
+          "resolucao": "Status SUS preenchido: abiraterona sim (SCTIE 38/2019; SECTICS 32 e 33/2024); enzalutamida/apalutamida/darolutamida não (SECTICS 32 e 33/2024); LHRH/QT via APAC 0304020079/0304020060/0304020087/0304040207/0304050342; zoledrônico APAC 0304080071; iPARP, cabazitaxel, rádio-223, Lu-PSMA, degarelix e denosumabe sem avaliação CONITEC."
+        },
+        {
+          "texto": "Docetaxel quinzenal (ficha FICHA.prostata.docetaxel-quinzenal…): esquema só na aula Onco PRO 2026; SBOC 2026 e bula não trazem — dose null, fichaId null.",
+          "resolucao": "Docetaxel 50 mg/m² D1 q14 + prednisona 10 mg/dia (aula PRO, CURSO/INFERIDO); esquema confirmado no registro PROSTY NCT00255606."
+        },
+        {
+          "texto": "Darolutamida sem docetaxel no mHSPC (ARANOTE): SBOC cita como opção alternativa (NE forte/FR fraca), sem tabela de dose para este esquema — não criado protocolo.",
+          "resolucao": "Protocolo prostata-mhspc-darolutamida (600 mg 2x/dia, bula Nubeqa; ARANOTE)."
+        }
+      ],
+      "correcoes": []
+    }
   }
 }

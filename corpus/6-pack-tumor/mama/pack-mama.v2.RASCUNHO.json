@@ -260,8 +260,8 @@
         {
           "alvo": "PIK3CA / AKT1 / PTEN",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "condicional",
           "cenario": "Metastático RE+/HER2- (tecido ou ctDNA; PCR aceitável para PIK3CA)",
           "consequencia": "PIK3CAm com recidiva ≤12 meses da HT adjuvante: fulvestranto + palbociclibe + inavolisibe; pós-iCDK: capivasertibe + fulvestranto",
@@ -273,14 +273,14 @@
             "trecho": "Pesquisa de mutação PIK3CA, AKT e PTEN em tumores RE+/HER2-;",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "ESR1",
           "metodo": "NGS",
-          "catalogoId": "MOLECULAR_PCR_MUTACAO",
-          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
           "quandoPedir": "pesquisa",
           "cenario": "Metastático RE+/HER2- após iCDK4/6 (ctDNA)",
           "consequencia": "Informativo: elacestranto e imlunestranto sem aprovação Anvisa e fora das recomendações SBOC 2026",
@@ -292,8 +292,8 @@
             "trecho": "A medicação não está nas recomendações da diretriz porque não possui aprovação",
             "estado": "VERIFICADO"
           },
-          "catalogoIdAlternativo": "SEQUENCIAMENTO_AMPLICON",
-          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
         },
         {
           "alvo": "HER2-low / ultra-low",
@@ -791,13 +791,28 @@
         "ajusteObrigatorio": "G-CSF profilático obrigatório no esquema dose-densa. ECO antes da antraciclina.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050130",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I"
+            },
+            {
+              "codigo": "0304050075",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II"
+            },
+            {
+              "codigo": "0304050067",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III"
+            }
+          ],
+          "observacao": "Procedimento conforme estádio (I/II/III). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico. Filgrastim nos esquemas dose-densos previsto no PCDT de Mama (Portaria Conjunta SAES/SECTICS nº 17/2024).",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050130 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I; 0304050075 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II; 0304050067 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-acdd-adjuvante",
@@ -845,13 +860,28 @@
         "ajusteObrigatorio": "",
         "fichaId": "FICHA.mama.ac-t-fase-ac__neo-adjuvante@1.0.0",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050130",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I"
+            },
+            {
+              "codigo": "0304050075",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II"
+            },
+            {
+              "codigo": "0304050067",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III"
+            }
+          ],
+          "observacao": "Procedimento conforme estádio (I/II/III). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050130 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I; 0304050075 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II; 0304050067 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-ac-adjuvante",
@@ -891,13 +921,28 @@
         "ajusteObrigatorio": "",
         "fichaId": "FICHA.mama.ac-t-fase-t-paclitaxel-semanal__adjuvante@1.0.0",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050130",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I"
+            },
+            {
+              "codigo": "0304050075",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II"
+            },
+            {
+              "codigo": "0304050067",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III"
+            }
+          ],
+          "observacao": "Procedimento conforme estádio (I/II/III). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050130 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I; 0304050075 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II; 0304050067 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-paclitaxel-semanal-adjuvante",
@@ -929,13 +974,28 @@
         "ajusteObrigatorio": "SBOC: com suporte de G-CSF; 4 a 6 ciclos.",
         "fichaId": "FICHA.mama.tc__neo-adjuvante@1.0.0",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050130",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I"
+            },
+            {
+              "codigo": "0304050075",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II"
+            },
+            {
+              "codigo": "0304050067",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III"
+            }
+          ],
+          "observacao": "Procedimento conforme estádio (I/II/III). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050130 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I; 0304050075 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II; 0304050067 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-tc-adjuvante",
@@ -975,13 +1035,28 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050130",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I"
+            },
+            {
+              "codigo": "0304050075",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II"
+            },
+            {
+              "codigo": "0304050067",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III"
+            }
+          ],
+          "observacao": "Procedimento conforme estádio (I/II/III). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050130 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I; 0304050075 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II; 0304050067 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-cmf-classico-adjuvante",
@@ -1029,13 +1104,28 @@
         "ajusteObrigatorio": "SBOC: a cada 3-4 semanas, por 6 ciclos (ciclo de 21 dias registrado; 28 dias é alternativa).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050130",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I"
+            },
+            {
+              "codigo": "0304050075",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II"
+            },
+            {
+              "codigo": "0304050067",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III"
+            }
+          ],
+          "observacao": "Procedimento conforme estádio (I/II/III). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050130 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I; 0304050075 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II; 0304050067 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-carbo-paclitaxel-semanal-adjuvante-tn",
@@ -1075,13 +1165,28 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050130",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I"
+            },
+            {
+              "codigo": "0304050075",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II"
+            },
+            {
+              "codigo": "0304050067",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III"
+            }
+          ],
+          "observacao": "Procedimento conforme estádio (I/II/III). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050130 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I; 0304050075 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II; 0304050067 QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-capecitabina-residual-tn",
@@ -1113,13 +1218,14 @@
         "ajusteObrigatorio": "Uso contínuo por 1 ano; ciclo não se aplica.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de olaparibe (adjuvante gBRCA, OlympiA) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304050075/0304050067 — decisão do serviço. Olaparibe consta do rol de altíssimo custo (Portaria Conjunta SCTIE/SAES nº 2/2026) apenas para indicações já incorporadas.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para olaparibe (adjuvante gBRCA, OlympiA) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "mama-olaparibe-adjuvante",
@@ -1151,13 +1257,28 @@
         "ajusteObrigatorio": "Uso contínuo; avaliação ginecológica anual, antecipar se sangramento.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050040",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I"
+            },
+            {
+              "codigo": "0304050121",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II"
+            },
+            {
+              "codigo": "0304050113",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III"
+            }
+          ],
+          "observacao": "Procedimento conforme estádio (I/II/III). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050040 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I; 0304050121 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II; 0304050113 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-tamoxifeno-adjuvante",
@@ -1189,13 +1310,28 @@
         "ajusteObrigatorio": "Densitometria antes e a cada 1-2 anos.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050040",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I"
+            },
+            {
+              "codigo": "0304050121",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II"
+            },
+            {
+              "codigo": "0304050113",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III"
+            }
+          ],
+          "observacao": "Procedimento conforme estádio (I/II/III). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050040 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I; 0304050121 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II; 0304050113 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-anastrozol-adjuvante",
@@ -1227,13 +1363,28 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050040",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I"
+            },
+            {
+              "codigo": "0304050121",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II"
+            },
+            {
+              "codigo": "0304050113",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III"
+            }
+          ],
+          "observacao": "Procedimento conforme estádio (I/II/III). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050040 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I; 0304050121 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II; 0304050113 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-letrozol-adjuvante",
@@ -1265,13 +1416,28 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050040",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I"
+            },
+            {
+              "codigo": "0304050121",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II"
+            },
+            {
+              "codigo": "0304050113",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III"
+            }
+          ],
+          "observacao": "Procedimento conforme estádio (I/II/III). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050040 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I; 0304050121 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II; 0304050113 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-exemestano-adjuvante",
@@ -1303,13 +1469,28 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050040",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I"
+            },
+            {
+              "codigo": "0304050121",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II"
+            },
+            {
+              "codigo": "0304050113",
+              "nome": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III"
+            }
+          ],
+          "observacao": "Procedimento conforme estádio (I/II/III). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050040 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I; 0304050121 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO II; 0304050113 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO III. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-gosserrelina-supressao-adjuvante",
@@ -1341,13 +1522,13 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 88, de 30/10/2025; Relatório nº 1055 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-88-de-30-de-outubro-de-2025-666149468",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "linfonodo positivo e com alto risco de recorrência, conforme Protocolo Clínico",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-abemaciclibe-adjuvante",
@@ -1379,13 +1560,14 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Consulta Pública SCTIE/MS nº 61/2026 com recomendação preliminar desfavorável; sem portaria de decisão até 11/10/2026. Alternativa SUS: abemaciclibe adjuvante (Portaria SECTICS/MS nº 88/2025) se critérios.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "Consulta Pública SCTIE/MS nº 61, de 24/07/2026 (DOU 28/07/2026; término 17/08/2026); relatório preliminar — https://www.gov.br/conitec/pt-br/assuntos/participacao-social/consultas-publicas/encerradas/2026",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "recomendação preliminar desfavorável à incorporação ao SUS",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-ribociclibe-adjuvante",
@@ -1617,13 +1799,14 @@
         "ajusteObrigatorio": "FEVE basal e a cada 3 meses; suspender se queda absoluta ≥16% ou abaixo do LIN com queda ≥10% (bula trastuzumabe); SBOC: pausa de 4 semanas.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pertuzumabe adjuvante (APHINITY) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Neoadjuvante: não incorporado (Portaria SCTIE/MS nº 12/2026). Alternativa SUS: trastuzumabe adjuvante (Portaria SCTIE/MS nº 19/2012).",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "Pertuzumabe incorporado só no metastático (Portaria 57/2017); adjuvante não verificado — alternativa SUS: trastuzumabe isolado",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pertuzumabe adjuvante (APHINITY) nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "mama-pertuzumabe-adjuvante",
@@ -1672,11 +1855,19 @@
         "fichaId": null,
         "sus": {
           "disponivel": "DADO_AUSENTE",
+          "pendencia": {
+            "texto": "CDIS (CID D05) não consta entre os CID compatíveis dos procedimentos APAC de hormonioterapia de mama (somente C50x) no SIGTAP 2026-09.",
+            "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+            "buscasFeitas": [
+              "SIGTAP 2026-09: CIDs de 0304050040/0121/0113 = C500-C506",
+              "planilha Recomendações da Conitec: sem registro para CDIS"
+            ]
+          },
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json) — 0304050040 HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
             "pagina": null,
-            "trecho": null,
+            "trecho": "HORMONIOTERAPIA DO CARCINOMA DE MAMA EM ESTÁDIO I",
             "estado": "DADO_AUSENTE"
           }
         },
@@ -1709,13 +1900,20 @@
         "ajusteObrigatorio": "G-CSF obrigatório. ECO antes.",
         "fichaId": "FICHA.mama.ac-t-fase-ac__neo-adjuvante@1.0.0",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040029",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA (PRÉVIA)"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040029 QUIMIOTERAPIA DO CARCINOMA DE MAMA (PRÉVIA). Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE MAMA (PRÉVIA)",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-acdd-neoadjuvante",
@@ -1763,13 +1961,20 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040029",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA (PRÉVIA)"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040029 QUIMIOTERAPIA DO CARCINOMA DE MAMA (PRÉVIA). Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE MAMA (PRÉVIA)",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-paclitaxel-semanal-neoadjuvante",
@@ -1801,13 +2006,20 @@
         "ajusteObrigatorio": "",
         "fichaId": "FICHA.mama.ac-ct-fase-ct-carboplatina-paclitaxel-semanal__neo-adjuvante@1.0.0",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040029",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA (PRÉVIA)"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040029 QUIMIOTERAPIA DO CARCINOMA DE MAMA (PRÉVIA). Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE MAMA (PRÉVIA)",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-cat-neoadjuvante",
@@ -1955,13 +2167,14 @@
         "ajusteObrigatorio": "FEVE basal e a cada 3 meses; suspender se queda absoluta ≥16% ou abaixo do LIN com queda ≥10% (bula trastuzumabe); SBOC: pausa de 4 semanas. SBOC: 6-9 ciclos.",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Alternativa SUS: TCH ou AC→TH com trastuzumabe (APAC 0304040185).",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "Trastuzumabe incorporado (Portaria 18/19-2012); pertuzumabe neoadjuvante não verificado — alternativa SUS: TCH ou AC→TH",
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 12, de 12/02/2026; Relatório nº 1082 — https://www.in.gov.br/web/dou/-/portaria-sctie/ms-n-12-de-12-de-fevereiro-de-2026-687405830",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, o pertuzumabe",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-tchp-neoadjuvante",
@@ -2179,13 +2392,14 @@
         "ajusteObrigatorio": "Glicemia/HbA1c basal e periódica (hiperglicemia).",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de capivasertibe nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020486 — decisão do serviço. Fulvestranto isolado é previsto no PCDT de Mama 2024 (APAC 0304020478/0304020486).",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "Capivasertibe: CONITEC não verificado",
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para capivasertibe nesta indicação",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
           }
         },
         "id": "mama-fulvestranto-capivasertibe-met",
@@ -2295,13 +2509,24 @@
         "ajusteObrigatorio": "Ajuste por ClCr conforme bula; atenção a síndrome mão-pé.",
         "fichaId": "FICHA.mama.capecitabina-monoterapia__paliativo-metastatico@1.0.0",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020133",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO -1ª LINHA"
+            },
+            {
+              "codigo": "0304020141",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020133 QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO -1ª LINHA; 0304020141 QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO -1ª LINHA",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-capecitabina-met",
@@ -2333,13 +2558,24 @@
         "ajusteObrigatorio": "",
         "fichaId": "FICHA.mama.capecitabina-docetaxel-xt__paliativo-metastatico@1.0.0",
         "sus": {
-          "disponivel": "DADO_AUSENTE",
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020133",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO -1ª LINHA"
+            },
+            {
+              "codigo": "0304020141",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
           "fonte": {
-            "tipo": "DIRETRIZ",
-            "referencia": "CONITEC/PCDT não verificado para este esquema nesta curadoria",
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020133 QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO -1ª LINHA; 0304020141 QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO -1ª LINHA",
+            "estado": "VERIFICADO"
           }
         },
         "id": "mama-docetaxel-capecitabina-met",
@@ -2372,6 +2608,485 @@
           "trecho": "in combination with docetaxel at 75 mg/m 2 administered intravenously on day 1",
           "estado": "VERIFICADO"
         }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pembrolizumabe 200 mg a cada 21 dias em paralelo ao ciclo de 28 dias da QT. TSH/T4L, função hepática e glicemia (irAE).",
+        "fichaId": null,
+        "id": "mama-pembrolizumabe-nab-paclitaxel-met",
+        "nome": "Pembrolizumabe + nab-paclitaxel (KEYNOTE-355) — TN metastático 1ª linha",
+        "cenario": "Metastático triplo-negativo PD-L1 CPS ≥10, 1ª linha",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 a cada 3 semanas",
+            "observacao": "Bula FDA: 200 mg q3s ou 400 mg q6s; PD-L1 CPS ≥10. Fonte da dose: https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22KEYTRUDA%22&limit=1 (set_id 9333c79b-d487-4538-a9f0-71b91a02b287) — \"locally recurrent unresectable or metastatic TNBC 200 mg every 3 weeks\""
+          },
+          {
+            "droga": "Nab-paclitaxel",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (TN metastático, KEYNOTE-355) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020133 — decisão do serviço.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (TN metastático, KEYNOTE-355) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02819518",
+          "pagina": null,
+          "trecho": "nab-paclitaxel 100 mg/m^2 IV on Days 1, 8 and 15 of each 28-day cycle",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pembrolizumabe 200 mg a cada 21 dias em paralelo ao ciclo de 28 dias da QT. irAE.",
+        "fichaId": null,
+        "id": "mama-pembrolizumabe-paclitaxel-met",
+        "nome": "Pembrolizumabe + paclitaxel (KEYNOTE-355) — TN metastático 1ª linha",
+        "cenario": "Metastático triplo-negativo PD-L1 CPS ≥10, 1ª linha",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 a cada 3 semanas",
+            "observacao": "Bula FDA: 200 mg q3s ou 400 mg q6s; PD-L1 CPS ≥10. Fonte da dose: https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22KEYTRUDA%22&limit=1 (set_id 9333c79b-d487-4538-a9f0-71b91a02b287) — \"locally recurrent unresectable or metastatic TNBC 200 mg every 3 weeks\""
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 90,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (TN metastático, KEYNOTE-355) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020133 — decisão do serviço.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (TN metastático, KEYNOTE-355) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02819518",
+          "pagina": null,
+          "trecho": "paclitaxel 90 mg/m^2 IV on Days 1, 8 and 15 of each 28-day cycle",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Hemograma antes de D1 e D8. irAE.",
+        "fichaId": null,
+        "id": "mama-pembrolizumabe-gem-carbo-met",
+        "nome": "Pembrolizumabe + gencitabina + carboplatina (KEYNOTE-355) — TN metastático 1ª linha",
+        "cenario": "Metastático triplo-negativo PD-L1 CPS ≥10, 1ª linha",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 a cada 3 semanas",
+            "observacao": "Bula FDA: 200 mg q3s ou 400 mg q6s; PD-L1 CPS ≥10. Fonte da dose: https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22KEYTRUDA%22&limit=1 (set_id 9333c79b-d487-4538-a9f0-71b91a02b287) — \"locally recurrent unresectable or metastatic TNBC 200 mg every 3 weeks\""
+          },
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          },
+          {
+            "droga": "Carboplatina",
+            "dose": 2,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": "Fonte: https://clinicaltrials.gov/api/v2/studies/NCT02819518 — \"an Area Under the Curve (AUC) 2 (carboplatin) on Days 1 and 8\""
+          }
+        ],
+        "cicloDias": 21,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (TN metastático, KEYNOTE-355) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020133 — decisão do serviço.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (TN metastático, KEYNOTE-355) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02819518",
+          "pagina": null,
+          "trecho": "gemcitabine/carboplatin 1000 mg/m^2 (gemcitabine)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "FEVE basal e periódica; vigiar pneumonite/DPI (suspender se suspeita).",
+        "fichaId": null,
+        "id": "mama-tdxd-her2pos-met",
+        "nome": "Trastuzumabe deruxtecana — HER2+ metastático",
+        "cenario": "Metastático HER2+ após anti-HER2 (2ª linha, conforme SBOC)",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Trastuzumabe deruxtecana",
+            "dose": 5.4,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Secao do rotulo 'HER2-Positive, HER2-Low, or HER2-Ultralow Breast Cancer' (monoterapia). 1a linha HER2+ com pertuzumabe: mesma dose + pertuzumabe 840 mg C1 / 420 mg."
+          }
+        ],
+        "cicloDias": 21,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "PCDT de Mama 2024 registra T-DXd como não incorporado. Alternativa SUS: QT + trastuzumabe (APAC 0304020419/0427).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "PCDT Câncer de Mama (Portaria Conjunta SAES/SECTICS nº 17, de 25/11/2024) — https://www.gov.br/conitec/pt-br/midias/protocolos/pcdt-cancer-de-mama",
+            "pagina": null,
+            "trecho": "este ainda não incorporado ao SUS, devendo passar pelos ritos de incorporação",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22ENHERTU%22&limit=1 (set_id 7e67e73e-ddf4-4e4d-8b50-09d7514910b6)",
+          "pagina": null,
+          "trecho": "ENHERTU 5.4 mg/kg every 3 weeks until disease progression or unacceptable toxicity",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "FEVE; vigiar pneumonite/DPI.",
+        "fichaId": null,
+        "id": "mama-tdxd-her2low-met",
+        "nome": "Trastuzumabe deruxtecana — HER2-low/ultralow metastático",
+        "cenario": "Metastático HER2-low (1+ ou 2+/ISH-) ou ultralow após QT ou endocrinoterapia",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "Trastuzumabe deruxtecana",
+            "dose": 5.4,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Mesma secao do rotulo cobre HER2-low/ultralow metastatico."
+          }
+        ],
+        "cicloDias": 21,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Alternativa SUS: QT citotóxica (APAC 0304020133/0141).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "PCDT Câncer de Mama (Portaria Conjunta SAES/SECTICS nº 17, de 25/11/2024) — https://www.gov.br/conitec/pt-br/midias/protocolos/pcdt-cancer-de-mama",
+            "pagina": null,
+            "trecho": "este ainda não incorporado ao SUS, devendo passar pelos ritos de incorporação",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22ENHERTU%22&limit=1 (set_id 7e67e73e-ddf4-4e4d-8b50-09d7514910b6)",
+          "pagina": null,
+          "trecho": "ENHERTU 5.4 mg/kg every 3 weeks until disease progression or unacceptable toxicity",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Hemograma antes de cada dose (neutropenia); diarreia; UGT1A1*28 aumenta toxicidade (bula).",
+        "fichaId": null,
+        "id": "mama-sacituzumabe-govitecana-met",
+        "nome": "Sacituzumabe govitecana — TN ou RH+/HER2- metastático",
+        "cenario": "Metastático triplo-negativo após ≥2 linhas (≥1 metastática) ou RH+/HER2- após endócrina e QT",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "Sacituzumabe govitecana",
+            "dose": 10,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": "Rotulo cobre TNBC e RH+/HER2- metastaticos. SBOC antiga (Cancer_de_Mama_RH_Metastatico p.32) confirma 'D1, 8 q21d'."
+          }
+        ],
+        "cicloDias": 21,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de sacituzumabe govitecana nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020141 — decisão do serviço.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para sacituzumabe govitecana nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22TRODELVY%22&limit=1 (set_id 57a597d2-03f0-472e-b148-016d7169169d)",
+          "pagina": null,
+          "trecho": "10 mg/kg on Days 1 and 8 of 21-day cycles",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Dose máxima 540 mg (≥90 kg). Profilaxia/vigilância de estomatite e ceratite; vigiar DPI.",
+        "fichaId": null,
+        "id": "mama-datopotamabe-deruxtecana-met",
+        "nome": "Datopotamabe deruxtecana — RH+/HER2- metastático",
+        "cenario": "Metastático RH+/HER2- após endócrina e QT",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "Datopotamabe deruxtecana",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Dose max 540 mg se >=90 kg. Indicacao do rotulo inclui RH+/HER2- metastatico pos-endocrina e QT, e TNBC nao candidato a IO."
+          }
+        ],
+        "cicloDias": 21,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de datopotamabe deruxtecana nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020141 — decisão do serviço.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para datopotamabe deruxtecana nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22DATROWAY%22&limit=1 (set_id 2950227c-6230-4ca4-a135-46e44d9424a0)",
+          "pagina": null,
+          "trecho": "6 mg/kg (up to a maximum of 540 mg for patients ≥90 kg)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Uso contínuo; cicloDias 28 por convenção do pack. Glicemia, lipídios, estomatite (bochecho de dexametasona), pneumonite.",
+        "fichaId": null,
+        "id": "mama-everolimo-exemestano-met",
+        "nome": "Everolimo + exemestano (BOLERO-2) — RH+/HER2- metastático",
+        "cenario": "Metastático RH+/HER2- pós-inibidor de aromatase",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "Everolimo",
+            "dose": 10,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": ""
+          },
+          {
+            "droga": "Exemestano",
+            "dose": 25,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Alternativa SUS: fulvestranto ou iCDK4/6 (Portaria SCTIE/MS nº 73/2021).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 04/2014 (DOU 30/01/2014); Relatório nº 91 — https://www.gov.br/conitec/pt-br/midias/dados-em-excel/recomendacoesdaconitec_20260615.xlsx/@@download/file",
+            "pagina": null,
+            "trecho": "Câncer de mama avançado na pós-menopausa",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Câncer_de_Mama_RH_Metastático.txt",
+          "pagina": 27,
+          "trecho": "Everolimus 10 mg VO/dia + exemestano 25 mg VO/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Uso contínuo; cicloDias 28 por convenção. Hemograma mensal; ajuste se ClCr 31-50 (bula).",
+        "fichaId": null,
+        "id": "mama-olaparibe-gbrca-met",
+        "nome": "Olaparibe — gBRCA1/2 HER2- metastático",
+        "cenario": "Metastático HER2- com mutação germinativa BRCA1/2, após QT",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "Olaparibe",
+            "dose": 300,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "12/12 h contínuo",
+            "observacao": "Rotulo lista gBRCAm HER2-negative metastatic breast cancer. Comprimidos. PRO aula 40 p.33 concorda (CURSO)."
+          }
+        ],
+        "cicloDias": 28,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de olaparibe (mama metastática) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020141 — decisão do serviço.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para olaparibe (mama metastática) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22LYNPARZA%22&limit=1 (set_id 741ff3e3-dc1a-45a6-84e5-2481b27131aa)",
+          "pagina": null,
+          "trecho": "The recommended dosage of Lynparza is 300 mg taken orally twice daily",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Uso contínuo; cicloDias 28 por convenção. Hemograma mensal; ajuste renal (bula).",
+        "fichaId": null,
+        "id": "mama-talazoparibe-gbrca-met",
+        "nome": "Talazoparibe — gBRCA1/2 HER2- metastático",
+        "cenario": "Metastático HER2- com mutação germinativa BRCA1/2",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "Talazoparibe",
+            "dose": 1,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de talazoparibe nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020141 — decisão do serviço.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para talazoparibe nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22TALZENNA%22&limit=1 (set_id 13839d4f-6acf-4ffb-a128-79df59319273)",
+          "pagina": null,
+          "trecho": "The recommended dosage of TALZENNA is 1 mg taken orally once daily",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Hemograma semanal; neuropatia.",
+        "fichaId": null,
+        "id": "mama-paclitaxel-d1-d8-d15-met",
+        "nome": "Paclitaxel D1, D8, D15 a cada 28 dias — metastático",
+        "cenario": "Metastático HER2- com indicação de QT",
+        "linha": "1ª linha ou subsequentes",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 90,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": "Braco placebo+paclitaxel do KEYNOTE-355 (TN metastatico 1a linha): esquema D1,D8,D15 q28 (nao semanal continuo). PRO aula 40 p.20 (E2100) traz 90 mg/m2 D1,D8,D15 q4w (CURSO). Rotulo FDA de paclitaxel so traz 175 mg/m2 q3w para mama metastatica."
+          }
+        ],
+        "cicloDias": 28,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020133",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO -1ª LINHA"
+            },
+            {
+              "codigo": "0304020141",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020133 QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO -1ª LINHA; 0304020141 QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE MAMA AVANÇADO -1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02819518",
+          "pagina": null,
+          "trecho": "paclitaxel 90 mg/m^2 IV on Days 1, 8 and 15 of each 28-day cycle",
+          "estado": "VERIFICADO"
+        }
       }
     ],
     "radioterapia": [
@@ -2380,7 +3095,13 @@
         "doseTotalGy": null,
         "fracoes": null,
         "concomitante": "",
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ]
+        },
         "observacao": "SBOC indica RT após conservadora; dose/fracionamento não constam nas diretrizes lidas.",
         "fonte": {
           "tipo": "SBOC",
@@ -2395,7 +3116,13 @@
         "doseTotalGy": null,
         "fracoes": null,
         "concomitante": "capecitabina radiossensibilizante (dose não especificada)",
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ]
+        },
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-neoadjuvante-v8-VERSaO-FINAL.pdf",
@@ -2447,7 +3174,7 @@
         "seAlvo": "gBRCA1/2 (alto risco, inicial)",
         "opcao": "Olaparibe adjuvante 1 ano",
         "evidencia": "NE alto/FR forte",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — olaparibe adjuvante sem avaliação CONITEC (INFERIDO; Lei 8.080 art. 19-Q)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-localizada-adjuvancia-v7-VERSaO-FINAL.pdf",
@@ -2460,7 +3187,7 @@
         "seAlvo": "gBRCA1/2 (metastático HER2-)",
         "opcao": "Olaparibe ou talazoparibe",
         "evidencia": "NE alto/FR forte",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — olaparibe/talazoparibe sem avaliação CONITEC (INFERIDO)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
@@ -2473,7 +3200,7 @@
         "seAlvo": "PIK3CAm + resistência endócrina (recidiva ≤12 meses da HT adjuvante)",
         "opcao": "Fulvestranto + palbociclibe + inavolisibe (1ª linha)",
         "evidencia": "NE alto/FR forte",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — alpelisibe não incorporado (PCDT Mama, Portaria Conjunta SAES/SECTICS nº 17/2024); capivasertibe sem avaliação",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
@@ -2486,7 +3213,7 @@
         "seAlvo": "PIK3CA/AKT1/PTEN pós-iCDK4/6",
         "opcao": "Capivasertibe + fulvestranto (alpelisibe se capivasertibe indisponível)",
         "evidencia": "NE alto/FR forte",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — capivasertibe sem avaliação CONITEC; everolimo + exemestano não incorporado (Portaria SCTIE/MS nº 04/2014)",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
@@ -2499,7 +3226,7 @@
         "seAlvo": "HER2-low (1+ ou 2+/ISH-) ou ultra-low",
         "opcao": "Trastuzumabe deruxtecana",
         "evidencia": "NE alto/FR forte",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — T-DXd: PCDT Mama 2024 'ainda não incorporado ao SUS'",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
@@ -2512,7 +3239,7 @@
         "seAlvo": "PD-L1 CPS ≥10 (triplo-negativo metastático)",
         "opcao": "Pembrolizumabe + QT (paclitaxel, nab-paclitaxel ou carboplatina + gencitabina); pembrolizumabe 200 mg q3s ou 400 mg q6s (bula)",
         "evidencia": "NE alto/FR forte",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — pembrolizumabe metastático sem avaliação CONITEC (neoadjuvante: CP 39/2026, recomendação preliminar desfavorável)",
         "fonte": {
           "tipo": "BULA",
           "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=9333c79b-d487-4538-a9f0-71b91a02b287 (KEYTRUDA IV (pembrolizumabe) — rótulo FDA; openFDA consultado 2026-10-11)",
@@ -2538,7 +3265,7 @@
         "seAlvo": "MSI-H/dMMR, TMB-H, NTRK",
         "opcao": "Terapia guiada por biomarcador (3ª linha em diante)",
         "evidencia": "NE moderado/FR forte",
-        "sus": "DADO_AUSENTE",
+        "sus": "nao — sem avaliação CONITEC para uso agnóstico",
         "fonte": {
           "tipo": "SBOC",
           "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Mama-doenca-metastatica-v6-VERSaO-FINAL.pdf",
@@ -2631,8 +3358,8 @@
       },
       {
         "nome": "NATALEE",
-        "nct": null,
-        "nctEstado": "NAO_VERIFICADO",
+        "nct": "NCT03701334",
+        "nctEstado": "VERIFICADO",
         "populacao": "RH+/HER2- risco alto/intermediário",
         "bracos": "Ribociclibe + IA vs IA",
         "desfecho": "SLDi",
@@ -2643,7 +3370,8 @@
           "pagina": 15,
           "trecho": "mostrou ganho de 4,5% em SLDi em relação ao grupo controle",
           "estado": "VERIFICADO"
-        }
+        },
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT03701334 (consultado 2026-10-11)"
       },
       {
         "nome": "APHINITY",
@@ -2739,6 +3467,20 @@
           "pagina": 18,
           "trecho": "o ganho absoluto em 5 anos com capecitabina foi de",
           "estado": "VERIFICADO"
+        },
+        "registroAlternativo": {
+          "id": "UMIN000000843",
+          "estado": "NAO_CONFIRMADO",
+          "url": "https://center6.umin.ac.jp/cgi-open-bin/ctr_e/index.cgi"
+        },
+        "nctPendencia": {
+          "texto": "CREATE-X (JBCRG-04) não está no ClinicalTrials.gov; UMIN000000843 citado na literatura, página UMIN não aberta.",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "CT.gov query.term=CREATE-X capecitabine",
+            "CT.gov query.term=JBCRG-04",
+            "UMIN (varredura recptno R000000998-R000001017)"
+          ]
         }
       }
     ],
@@ -3037,15 +3779,44 @@
     ]
   },
   "pendencias": [
-    "SEM_FONTE: doses de RT (mama/parede/drenagens) não constam nas diretrizes SBOC lidas.",
-    "SEM_FONTE: doses de pembrolizumabe + QT parceira, T-DXd, sacituzumabe, Dato-DXd, everolimo, olaparibe/talazoparibe no metastático — SBOC metastática v6 não traz tabela de doses; buscar bula ANVISA antes de criar protocolos.",
-    "SEM_FONTE: paclitaxel semanal no metastático (SBOC p.24 cita regime semanal sem dose).",
-    "SUS: status CONITEC de ACdd/AC/T/TC/CMF (citotóxicos via APAC) não verificado documentalmente; iCDK4/6 só por fonte secundária (Portaria 73/2021, texto não lido).",
-    "SUS: pembrolizumabe TNBC neoadjuvante em CP 39/2026 sem decisão final localizada; alternativa SUS: AC→T com carboplatina.",
-    "NATALEE: NCT não confirmado na API (número testado retornou vazio).",
-    "Emetogenicidade: classificação formal (MASCC/ASCO) não está nas fontes SBOC lidas.",
-    "PCDT Câncer de Mama (Portaria Conjunta SAES/SECTICS nº 17/2024) não lido no original.",
-    "Aula PRO 41 (mama na gestação) não incorporada."
+    {
+      "texto": "SEM_FONTE: doses de RT (mama/parede/drenagens) não constam nas diretrizes SBOC lidas.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+      ]
+    },
+    {
+      "texto": "SUS: pembrolizumabe TNBC neoadjuvante em CP 39/2026 com recomendação preliminar desfavorável (150ª reunião), sem portaria de decisão no DOU até 11/10/2026; alternativa SUS: AC→T com carboplatina.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "gov.br/conitec consultas públicas encerradas 2026",
+        "in.gov.br busca 'pembrolizumabe' 01/06-11/10/2026"
+      ]
+    },
+    {
+      "texto": "Emetogenicidade: classificação formal (MASCC/ASCO) não está nas fontes SBOC lidas.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC mama 2026 (4 diretrizes) sem classificação",
+        "ASCO 2020 Emetic Risk Chart (old-prod.asco.org) inacessível a partir deste ambiente"
+      ]
+    },
+    {
+      "texto": "Aula PRO 41 (mama na gestação) não incorporada.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "Escopo: incorporar ou não mama na gestação ao pack v2"
+      ]
+    },
+    {
+      "texto": "Doses dos protocolos metastáticos novos vêm de rótulo FDA/ensaio; conferir bula ANVISA das apresentações disponíveis.",
+      "classe": "DEPENDE_BULA_ANVISA",
+      "buscasFeitas": [
+        "openFDA (Keytruda, Enhertu, Trodelvy, Datroway, Lynparza, Talzenna)",
+        "ClinicalTrials.gov NCT02819518"
+      ]
+    }
   ],
   "conflitos": [
     {
@@ -3064,7 +3835,8 @@
         "trecho": "Neoadjuvant: Administer PERJETA, trastuzumab or trastuzumab hyaluronidase-oysk, and chemotherapy preoperatively",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Registrado docetaxel 75 mg/m2 como droga principal (presente em SBOC e bula); paclitaxel D1/D8 só como observação."
+      "escolhaSeguranca": "Registrado docetaxel 75 mg/m2 como droga principal (presente em SBOC e bula); paclitaxel D1/D8 só como observação.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Monitorização de FEVE com trastuzumabe",
@@ -3082,7 +3854,8 @@
         "trecho": "LVEF measurements every 6 months for at least 2 years following completion",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Usar o mais restritivo: a cada 3 meses no tratamento e a cada 6 meses por 2 anos após adjuvância (bula). Não citar classe/nível ESC 2022."
+      "escolhaSeguranca": "Usar o mais restritivo: a cada 3 meses no tratamento e a cada 6 meses por 2 anos após adjuvância (bula). Não citar classe/nível ESC 2022.",
+      "decisaoNecessaria": false
     },
     {
       "tema": "Duração do pegfilgrastim/filgrastim no ACdd",
@@ -3100,7 +3873,8 @@
         "trecho": "Filgrastima 300 mcg SC D2-D10 ou",
         "estado": "VERIFICADO"
       },
-      "escolhaSeguranca": "Divergência D3-D10 (adjuvância) × D2-D10 (neo) mantida por cenário, sem transferência."
+      "escolhaSeguranca": "Divergência D3-D10 (adjuvância) × D2-D10 (neo) mantida por cenário, sem transferência.",
+      "decisaoNecessaria": false
     }
   ],
   "curadoria": {
@@ -3114,8 +3888,46 @@
       "Onco PRO 2026 Aula 35 (pág. 11) — apoio",
       "Rótulos FDA via openFDA: Herceptin, Perjeta, Keytruda IV, Xeloda, Ibrance, Kisqali, Femara",
       "ClinicalTrials.gov API v2 (NCTs listados)",
-      "CONITEC/Portarias via busca web (fontes secundárias; ver referências)"
+      "CONITEC/Portarias via busca web (fontes secundárias; ver referências)",
+      "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
+      "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
     ],
-    "aprovacaoClinica": null
-  }
+    "aprovacaoClinica": null,
+    "rodada2": {
+      "data": "2026-10-11",
+      "redator": "Claude (Opus 5.5) — redução de pendências e conflitos; aprovação clínica pendente",
+      "pendenciasResolvidas": [
+        {
+          "texto": "SEM_FONTE: doses de pembrolizumabe + QT parceira, T-DXd, sacituzumabe, Dato-DXd, everolimo, olaparibe/talazoparibe no metastático — SBOC metastática v6 não traz tabela de doses; buscar bula ANVISA antes de criar protocolos.",
+          "resolucao": "Criados 11 protocolos metastáticos com dose de bula FDA (pembrolizumabe, T-DXd, sacituzumabe, Dato-DXd, olaparibe, talazoparibe), braços do KEYNOTE-355 (NCT02819518) e SBOC antiga (everolimo + exemestano p.27)."
+        },
+        {
+          "texto": "SEM_FONTE: paclitaxel semanal no metastático (SBOC p.24 cita regime semanal sem dose).",
+          "resolucao": "Paclitaxel 90 mg/m² D1, D8, D15 q28 (braço controle KEYNOTE-355) — protocolo mama-paclitaxel-d1-d8-d15-met."
+        },
+        {
+          "texto": "SUS: status CONITEC de ACdd/AC/T/TC/CMF (citotóxicos via APAC) não verificado documentalmente; iCDK4/6 só por fonte secundária (Portaria 73/2021, texto não lido).",
+          "resolucao": "Citotóxicos/hormonais: procedimentos APAC SIGTAP 2026-09; iCDK4/6 Portaria SCTIE/MS nº 73/2021 aberta no DOU; abemaciclibe adjuvante Portaria SECTICS/MS nº 88/2025."
+        },
+        {
+          "texto": "NATALEE: NCT não confirmado na API (número testado retornou vazio).",
+          "resolucao": "NATALEE = NCT03701334 (registro aberto)."
+        },
+        {
+          "texto": "PCDT Câncer de Mama (Portaria Conjunta SAES/SECTICS nº 17/2024) não lido no original.",
+          "resolucao": "PCDT de Mama (Portaria Conjunta SAES/SECTICS nº 17/2024) consultado em gov.br/conitec para T-DXd, alpelisibe, fulvestranto e filgrastim."
+        }
+      ],
+      "correcoes": []
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "2 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
 }

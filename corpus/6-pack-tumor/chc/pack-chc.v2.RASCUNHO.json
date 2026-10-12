@@ -360,7 +360,7 @@
         }
       },
       {
-        "catalogoId": null,
+        "catalogoId": "ELASTOGRAFIA_HEPATICA",
         "rotulo": "Elastografia hepática",
         "cenario": "estadiamento",
         "indicacao": "condicional",
@@ -372,7 +372,7 @@
           "trecho": "quando plaquetas < 150.000/mm³ ou elastografia hepática > 20 kPa",
           "estado": "VERIFICADO"
         },
-        "pendencia": "SEM_ID_NO_CATALOGO"
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
       }
     ],
     "gruposConduta": [
@@ -562,26 +562,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "sorafenibe ou lenvatinibe se padronizados localmente; senão suporte",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "notaProcedimento": "Existe procedimento APAC 0304020389 (QT de carcinoma do fígado ou do trato biliar avançado), valor fixo; cobertura desta droga não confirmada — verificar padronização local.",
-          "fonteProcedimento": {
-            "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020389",
-            "pagina": null,
-            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
-            "estado": "VERIFICADO"
-          }
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "sorafenibe ou lenvatinibe se padronizados localmente; senão suporte"
         },
         "fonte": {
           "tipo": "BULA",
@@ -643,26 +633,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "sorafenibe ou lenvatinibe se padronizados localmente",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "notaProcedimento": "Existe procedimento APAC 0304020389 (QT de carcinoma do fígado ou do trato biliar avançado), valor fixo; cobertura desta droga não confirmada — verificar padronização local.",
-          "fonteProcedimento": {
-            "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020389",
-            "pagina": null,
-            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
-            "estado": "VERIFICADO"
-          }
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "sorafenibe ou lenvatinibe se padronizados localmente"
         },
         "fonte": {
           "tipo": "BULA",
@@ -694,48 +674,67 @@
         "linha": "1ª linha",
         "drogas": [
           {
-            "droga": "Nivolumabe",
-            "dose": null,
-            "unidade": "mg",
-            "via": "EV",
-            "dias": null,
-            "observacao": ""
-          },
-          {
-            "droga": "Ipilimumabe",
-            "dose": null,
+            "droga": "Nivolumabe (indução, 4 doses)",
+            "dose": 1,
             "unidade": "mg/kg",
             "via": "EV",
-            "dias": null,
-            "observacao": ""
+            "dias": "D1",
+            "observacao": "a cada 3 semanas × 4",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA OPDIVO (nivolumab) IV (openFDA/DailyMed set_id f570b9c4-6846-4de2-abfa-4d0a4ae4e394), seção 2 (HCC, CheckMate 9DW), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "ipilimumab 3 mg/kg on the same day every 3 weeks for 4 doses",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Ipilimumabe (indução, 4 doses)",
+            "dose": 3,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "mesmo dia, após nivolumabe; a cada 3 semanas × 4",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA OPDIVO (nivolumab) IV (openFDA/DailyMed set_id f570b9c4-6846-4de2-abfa-4d0a4ae4e394), seção 2 (HCC, CheckMate 9DW), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "ipilimumab 3 mg/kg on the same day every 3 weeks for 4 doses",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Nivolumabe (manutenção)",
+            "dose": 480,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 a cada 4 semanas",
+            "observacao": "ou 240 mg a cada 2 semanas; até progressão/toxicidade",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA OPDIVO (nivolumab) IV (openFDA/DailyMed set_id f570b9c4-6846-4de2-abfa-4d0a4ae4e394), seção 2 (HCC, CheckMate 9DW), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "then 240 mg every 2 weeks or 480 mg every 4 weeks",
+              "estado": "VERIFICADO"
+            }
           }
         ],
-        "cicloDias": null,
-        "numeroCiclos": null,
+        "cicloDias": 21,
+        "numeroCiclos": 4,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "sorafenibe ou lenvatinibe se padronizados localmente",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "notaProcedimento": "Existe procedimento APAC 0304020389 (QT de carcinoma do fígado ou do trato biliar avançado), valor fixo; cobertura desta droga não confirmada — verificar padronização local.",
-          "fonteProcedimento": {
-            "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020389",
-            "pagina": null,
-            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
-            "estado": "VERIFICADO"
-          }
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "sorafenibe ou lenvatinibe se padronizados localmente"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -744,9 +743,9 @@
           "trecho": "e ipilimumabe + nivolumabe NE AL TO/FR FORTE",
           "estado": "DADO_AUSENTE"
         },
-        "pendencia": "SEM_FONTE",
-        "nota": "SBOC não traz doses; rótulo openFDA disponível nesta sessão é da formulação SC (Opdivo Qvantig)",
-        "doseVerificada": false
+        "nota": "Doses da bula FDA OPDIVO IV (HCC); SBOC não tabela doses.",
+        "doseVerificada": true,
+        "numeroCiclosNota": "4 ciclos de indução (q3s); manutenção com nivolumabe isolado."
       },
       {
         "id": "chc-1l-lenvatinibe",
@@ -755,40 +754,52 @@
         "linha": "1ª linha",
         "drogas": [
           {
-            "droga": "Lenvatinibe",
-            "dose": null,
+            "droga": "Lenvatinibe (peso < 60 kg)",
+            "dose": 8,
             "unidade": "mg",
             "via": "VO",
-            "dias": "contínuo",
-            "observacao": "SBOC cita 12 mg/dia do estudo; dose por peso exige bula"
+            "dias": "contínuo, 1x/dia",
+            "observacao": "usar só uma das linhas, conforme peso real",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA LENVIMA (lenvatinib) (openFDA/DailyMed set_id f4bedd21-efde-44c6-9d9c-b48b78d7ed1e), seção 2.5 (DailyMed SPL v81), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "8 mg orally once daily for patients less than 60 kg",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Lenvatinibe (peso ≥ 60 kg)",
+            "dose": 12,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": "usar só uma das linhas, conforme peso real",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA LENVIMA (lenvatinib) (openFDA/DailyMed set_id f4bedd21-efde-44c6-9d9c-b48b78d7ed1e), seção 2.5 (DailyMed SPL v81), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "12 mg orally once daily for patients greater than or equal to 60 kg",
+              "estado": "VERIFICADO"
+            }
           }
         ],
-        "cicloDias": null,
+        "cicloDias": 28,
         "numeroCiclos": null,
         "premedicacao": "",
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "sorafenibe se padronizado",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "notaProcedimento": "Existe procedimento APAC 0304020389 (QT de carcinoma do fígado ou do trato biliar avançado), valor fixo; cobertura desta droga não confirmada — verificar padronização local.",
-          "fonteProcedimento": {
-            "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020389",
-            "pagina": null,
-            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
-            "estado": "VERIFICADO"
-          }
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "sorafenibe se padronizado"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -798,9 +809,9 @@
           "estado": "INFERIDO"
         },
         "continuo": true,
-        "pendencia": "SEM_FONTE",
-        "nota": "dose dependente de peso na bula; bula ANVISA/FDA não obtida nesta sessão",
-        "doseVerificada": false
+        "nota": "Dose por peso conforme bula FDA LENVIMA; 12 mg da SBOC corresponde ao estrato ≥ 60 kg.",
+        "doseVerificada": true,
+        "cicloNota": "uso contínuo; ciclo de 28 dias apenas para registro"
       },
       {
         "id": "chc-1l-sorafenibe",
@@ -823,26 +834,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "suporte clínico",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "parcial",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Portaria SCTIE/MS nº 35, de 28/08/2018, Relatório CONITEC nº 368; DDT Carcinoma Hepatocelular (Portaria Conjunta nº 18/2022) — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2018/portariassctie-30e32a36_2018.pdf",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          },
-          "notaProcedimento": "Existe procedimento APAC 0304020389 (QT de carcinoma do fígado ou do trato biliar avançado), valor fixo; cobertura desta droga não confirmada — verificar padronização local.",
-          "fonteProcedimento": {
-            "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020389",
-            "pagina": null,
-            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
+            "trecho": "Não incorporar o tosilato de sorafenibe para carcinoma (CHC) avançado irresecável",
             "estado": "VERIFICADO"
-          }
+          },
+          "nota": "Não incorporado como medicamento centralizado (2018), mas a DDT de CHC 2022 o recomenda na 1ª linha dentro da APAC 0304020389 (custo do serviço).",
+          "alternativaSUS": "suporte clínico"
         },
         "fonte": {
           "tipo": "SBOC",
@@ -875,26 +876,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "suporte clínico",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "parcial",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "DDT Carcinoma Hepatocelular no Adulto — Portaria Conjunta SAES/SCTIE nº 18, de 14/10/2022 (DOU nº 202, 24/10/2022) — https://www.gov.br/conitec/pt-br/midias/protocolos/ddt/20221024_portariaconjunta18ddtcarcinomahepatocelularnoadulto.pdf",
             "pagina": null,
-            "trecho": null,
-            "estado": "DADO_AUSENTE"
-          },
-          "notaProcedimento": "Existe procedimento APAC 0304020389 (QT de carcinoma do fígado ou do trato biliar avançado), valor fixo; cobertura desta droga não confirmada — verificar padronização local.",
-          "fonteProcedimento": {
-            "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020389",
-            "pagina": null,
-            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
+            "trecho": "segunda-linha do CHC avançado ou metastático pode empregar regorafenibe",
             "estado": "VERIFICADO"
-          }
+          },
+          "nota": "Sem avaliação CONITEC, mas citado na DDT de CHC como 2ª linha dentro da APAC 0304020389 (custo do serviço).",
+          "alternativaSUS": "suporte clínico"
         },
         "fonte": {
           "tipo": "BULA",
@@ -933,26 +924,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "suporte clínico",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "notaProcedimento": "Existe procedimento APAC 0304020389 (QT de carcinoma do fígado ou do trato biliar avançado), valor fixo; cobertura desta droga não confirmada — verificar padronização local.",
-          "fonteProcedimento": {
-            "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020389",
-            "pagina": null,
-            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
-            "estado": "VERIFICADO"
-          }
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "suporte clínico"
         },
         "fonte": {
           "tipo": "BULA",
@@ -992,26 +973,16 @@
         "ajusteObrigatorio": "",
         "fichaId": null,
         "sus": {
-          "disponivel": "DADO_AUSENTE",
-          "via": null,
-          "nota": "Incorporação no SUS não confirmada nas fontes lidas (sem decisão CONITEC/PCDT localizada); custo não coberto pelo valor do procedimento APAC sem confirmação.",
-          "alternativaSUS": "suporte clínico",
-          "pendencia": "SUS_INCORPORACAO_A_CONFIRMAR",
+          "disponivel": "nao",
           "fonte": {
             "tipo": "NORMA",
-            "referencia": "não localizada",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
             "pagina": null,
             "trecho": null,
-            "estado": "DADO_AUSENTE"
+            "estado": "INFERIDO"
           },
-          "notaProcedimento": "Existe procedimento APAC 0304020389 (QT de carcinoma do fígado ou do trato biliar avançado), valor fixo; cobertura desta droga não confirmada — verificar padronização local.",
-          "fonteProcedimento": {
-            "tipo": "NORMA",
-            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020389",
-            "pagina": null,
-            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
-            "estado": "VERIFICADO"
-          }
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "suporte clínico"
         },
         "fonte": {
           "tipo": "BULA",
@@ -1035,7 +1006,15 @@
         "cenario": "SBRT locorregional (selecionados, quando ressecção/transplante/ablação/TACE não apropriados; invasão macrovascular; falha locorregional)",
         "doseTotalGy": null,
         "fracoes": null,
-        "pendencia": "SEM_FONTE (SBOC não define dose; curso cita esquemas de estudos — não usados)",
+        "pendencia": {
+          "texto": "SEM_FONTE (SBOC não define dose; curso cita esquemas de estudos — não usados)",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC 2026 CHC p.9/12",
+            "Onco PRO 2026 aula 11"
+          ],
+          "nota": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11)."
+        },
         "concomitante": "não",
         "fonte": {
           "tipo": "SBOC",
@@ -1049,7 +1028,15 @@
         "cenario": "RT paliativa (metástase óssea dolorosa, dor hepática por grande carga tumoral)",
         "doseTotalGy": null,
         "fracoes": null,
-        "pendencia": "SEM_FONTE",
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC 2026 CHC p.9/12",
+            "Onco PRO 2026 aula 11"
+          ],
+          "nota": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11)."
+        },
         "concomitante": "não",
         "fonte": {
           "tipo": "SBOC",
@@ -1409,7 +1396,8 @@
       "TGP",
       "TTPA",
       "UREIA",
-      "USG_ABDOMEN_SUPERIOR"
+      "USG_ABDOMEN_SUPERIOR",
+      "ELASTOGRAFIA_HEPATICA"
     ],
     "interacoesConsultar": [
       {
@@ -1527,14 +1515,57 @@
     ]
   },
   "pendencias": [
-    "SEM_FONTE: doses de nivolumabe + ipilimumabe (1ª linha) e lenvatinibe (dose por peso) — SBOC não tabela doses",
-    "Doses de atezolizumabe, bevacizumabe, durvalumabe, tremelimumabe, regorafenibe, cabozantinibe e ramucirumabe vindas de rótulo FDA (openFDA); bula ANVISA não consultada",
-    "SEM_FONTE: dose de SBRT e de RT paliativa",
-    "SEM_ID_NO_CATALOGO: elastografia hepática",
-    "SUS_INCORPORACAO_A_CONFIRMAR: todas as terapias sistêmicas (existe APAC 0304020389; cobertura da droga não confirmada)",
-    "Confirmar código SIGTAP usado para TACE (0304080047 QT intra-arterial é compatível com C22.0)",
-    "Albumina mapeada como PROTEINAS_TOTAIS_FRACOES (não há id de albumina isolada no catálogo)",
-    "SEM_FONTE: emetogenicidade/risco de NF"
+    {
+      "texto": "Doses de atezolizumabe, bevacizumabe, durvalumabe, tremelimumabe, regorafenibe, cabozantinibe e ramucirumabe vindas de rótulo FDA (openFDA); bula ANVISA não consultada",
+      "classe": "DEPENDE_BULA_ANVISA",
+      "buscasFeitas": [
+        "openFDA (rótulos citados nos protocolos)"
+      ]
+    },
+    {
+      "texto": "SEM_FONTE: dose de SBRT e de RT paliativa",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "SBOC 2026 CHC p.9/12",
+        "Onco PRO 2026 aula 11"
+      ],
+      "nota": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11)."
+    },
+    {
+      "texto": "SEM_ID_NO_CATALOGO: elastografia hepática",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json (164 ids)"
+      ]
+    },
+    {
+      "texto": "SUS_INCORPORACAO_A_CONFIRMAR: todas as terapias sistêmicas (existe APAC 0304020389; cobertura da droga não confirmada)",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Planilha CONITEC 15/06/2026",
+        "Painel de Demandas CONITEC",
+        "busca gov.br/conitec",
+        "DOU (portarias citadas)"
+      ],
+      "nota": "sus.disponivel preenchido em todos os protocolos com portaria/relatório quando existe. Sem avaliação CONITEC (registrado 'nao', INFERIDO): 1l-atezolizumabe-bevacizumabe, 1l-durvalumabe-tremelimumabe, 1l-nivolumabe-ipilimumabe, 1l-lenvatinibe, 2l-cabozantinibe, 2l-ramucirumabe."
+    },
+    {
+      "texto": "Albumina mapeada como PROTEINAS_TOTAIS_FRACOES (não há id de albumina isolada no catálogo)",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json"
+      ],
+      "nota": "Depende de id de albumina isolada no catálogo."
+    },
+    {
+      "texto": "SEM_FONTE: emetogenicidade/risco de NF",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC 2026 CHC",
+        "Onco PRO 2026 aulas 87-88"
+      ],
+      "nota": "Classificação por droga vem do módulo de suporte."
+    }
   ],
   "conflitos": [
     {
@@ -1553,7 +1584,16 @@
         "trecho": null,
         "estado": "DADO_AUSENTE"
       },
-      "escolhaSeguranca": "Dose = null até conferência na bula (12 mg é a dose do estudo para peso maior; não aplicar a todos)."
+      "escolhaSeguranca": "Dose = null até conferência na bula (12 mg é a dose do estudo para peso maior; não aplicar a todos).",
+      "decisaoNecessaria": false,
+      "resolucao": "Bula FDA LENVIMA: 12 mg/dia se ≥ 60 kg, 8 mg/dia se < 60 kg; duas linhas por peso.",
+      "fonteC": {
+        "tipo": "BULA",
+        "referencia": "Rótulo FDA LENVIMA (lenvatinib) (openFDA/DailyMed set_id f4bedd21-efde-44c6-9d9c-b48b78d7ed1e), seção 2.5 (DailyMed SPL v81), acesso 2026-10-11; bula ANVISA não consultada",
+        "pagina": null,
+        "trecho": "8 mg orally once daily for patients less than 60 kg",
+        "estado": "VERIFICADO"
+      }
     }
   ],
   "curadoria": {
@@ -1566,6 +1606,19 @@
       "SIGTAP 2026-09",
       "ClinicalTrials.gov API v2"
     ],
-    "aprovacaoClinica": null
+    "aprovacaoClinica": null,
+    "reducaoPendencias20261011": {
+      "data": "2026-10-11",
+      "resolvidas": [
+        {
+          "pendencia": "SEM_FONTE: doses de nivolumabe + ipilimumabe (1ª linha) e lenvatinibe (dose por peso) — SBOC não tabela doses",
+          "como": "Nivolumabe 1 mg/kg + ipilimumabe 3 mg/kg q3s × 4, depois nivolumabe 480 mg q4s (bula FDA OPDIVO); lenvatinibe 8 mg (< 60 kg) ou 12 mg (≥ 60 kg) (bula FDA LENVIMA)."
+        },
+        {
+          "pendencia": "Confirmar código SIGTAP usado para TACE (0304080047 QT intra-arterial é compatível com C22.0)",
+          "como": "SIGTAP 2026-09: 0304080047 (QUIMIOTERAPIA INTRA-ARTERIAL) tem C220 entre os CID compatíveis."
+        }
+      ]
+    }
   }
 }
