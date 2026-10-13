@@ -3,9 +3,16 @@ import type { PortaConsulta, PedidoBundle } from "../api/porta.js";
 import type { FonteRevisao, PedidoRevisaoExtracao, ReconciliacaoProposta, RevisaoPreparada } from "../api/revisaoExtracao.js";
 import { ErroPorta } from "../api/porta.js";
 
+export type RevisaoExtracaoConfirmada = {
+  contexto: PedidoBundle;
+  operationId: string;
+  codigo: "GRAVADA" | "REPLAY";
+};
+
 /** Linked sources are reviewed locally, independently of provider availability. */
-export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
+export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoConfirmarRevisao }: {
   porta: PortaConsulta; contexto: PedidoBundle; patientLabel?: string;
+  aoConfirmarRevisao?: (revisao: RevisaoExtracaoConfirmada) => void;
 }) {
   const [fontes, setFontes] = useState<Array<{ draftId: string; rotulo: string }>>([]);
   const [fontesSemVinculo, setFontesSemVinculo] = useState<Array<{ draftId: string; sourceId: string;
@@ -13,6 +20,7 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
   const [fontePendenteId, setFontePendenteId] = useState("");
   const [fonte, setFonte] = useState<FonteRevisao["draft"] | null>(null);
   const [ids, setIds] = useState<string[]>([]);
+  const [incluirTextoOriginal, setIncluirTextoOriginal] = useState(false);
   const [preparada, setPreparada] = useState<{ pedido: PedidoRevisaoExtracao; resposta: RevisaoPreparada } | null>(null);
   const [fontesSelecionadas, setFontesSelecionadas] = useState<string[]>([]);
   const [reconciliacao, setReconciliacao] = useState<ReconciliacaoProposta | null>(null);
@@ -28,7 +36,7 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
     const atual = ++geracao.current;
     const abort = new AbortController();
     controller.current = abort;
-    setFonte(null); setIds([]); setPreparada(null); setConcluida(false); setFontes([]);
+    setFonte(null); setIds([]); setIncluirTextoOriginal(false); setPreparada(null); setConcluida(false); setFontes([]);
     setFontesSemVinculo([]); setFontePendenteId(""); setFontesSelecionadas([]); setReconciliacao(null); setMensagem("");
     emCurso.current = false; setOcupado(false);
     if (porta.oncoassistFontes && porta.carregarFonteRevisao) {
@@ -57,7 +65,7 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
   }
 
   async function abrir(draftId: string) {
-    setFonte(null); setIds([]); setPreparada(null); setConcluida(false);
+    setFonte(null); setIds([]); setIncluirTextoOriginal(false); setPreparada(null); setConcluida(false);
     if (!draftId || !porta.carregarFonteRevisao) return;
     await executar(async (atual) => {
       const r = await porta.carregarFonteRevisao!(draftId, controller.current?.signal);
@@ -90,15 +98,16 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
   }
 
   async function preparar() {
-    if (!fonte || !ids.length || !porta.prepararRevisaoExtracao) return;
+    if (!fonte || (!ids.length && !incluirTextoOriginal) || !porta.prepararRevisaoExtracao) return;
     setPreparada(null);
     const pedido = { draftId: fonte.draftId, expectedRevision: fonte.revision, patientId,
-      factIds: [...ids], operationId: crypto.randomUUID() };
+      factIds: [...ids], operationId: crypto.randomUUID(), ...(incluirTextoOriginal ? { incluirTextoOriginal: true } : {}) };
     await executar(async (atual) => {
       const resposta = await porta.prepararRevisaoExtracao!(pedido, controller.current?.signal);
       if (atual !== geracao.current) return;
       if (!mesmoContexto(resposta.conteudo.contexto)
-        || JSON.stringify(resposta.conteudo.selectedFactIds) !== JSON.stringify(ids)) throw new Error("SELECAO_DIVERGENTE");
+        || JSON.stringify(resposta.conteudo.selectedFactIds) !== JSON.stringify(ids)
+        || (resposta.conteudo.incluirTextoOriginal === true) !== incluirTextoOriginal) throw new Error("SELECAO_DIVERGENTE");
       setPreparada({ pedido, resposta });
     });
   }
@@ -119,10 +128,13 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
   async function confirmar() {
     if (!preparada || !porta.confirmarRevisaoExtracao || concluida) return;
     await executar(async (atual) => {
-      await porta.confirmarRevisaoExtracao!({ ...preparada.pedido,
+      const resposta = await porta.confirmarRevisaoExtracao!({ ...preparada.pedido,
         comprovanteExibicao: preparada.resposta.comprovanteExibicao }, controller.current?.signal);
       if (atual !== geracao.current) return;
+      if (resposta.codigo !== "GRAVADA" && resposta.codigo !== "REPLAY") throw new ErroPorta(resposta.codigo);
       setConcluida(true); setMensagem("Revisão registrada. Candidatos incertos conservam sua pendência.");
+      aoConfirmarRevisao?.({ contexto: { ...preparada.resposta.conteudo.contexto },
+        operationId: preparada.pedido.operationId, codigo: resposta.codigo });
     });
   }
 
@@ -195,6 +207,10 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
       {fonte.payload.patientLinkReview.segmentId
         ? <p>Trecho vinculado explicitamente: {fonte.payload.patientLinkReview.segmentId}</p> : null}
       <h3>Texto original</h3><pre style={{ whiteSpace: "pre-wrap" }}>{fonte.payload.input.rawTranscript}</pre>
+      <label><input type="checkbox" checked={incluirTextoOriginal} disabled={ocupado || concluida
+        || !fonte.payload.input.rawTranscript.trim() || !fonte.payload.patientLinkReview.segmentId}
+        onChange={(e) => { setPreparada(null); setIncluirTextoOriginal(e.target.checked); }} />
+        Incluir texto original deste trecho na evolução</label>
       {fonte.payload.alertasRads?.length ? <section aria-label="Alertas RADS para revisão">
         <h3>Alertas de imagem — confirmação médica pendente</h3>
         {fonte.payload.alertasRads.map((a, i) => <p key={i}>{a.nome}: {a.trecho} — fonte {a.sourceId}</p>)}
@@ -206,7 +222,7 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel }: {
           }} />{fact.rawEvidence} — {fact.evidence}{fact.requiresConfirmation ? " · confirmação adicional pendente" : ""}
         </label>)}
       </fieldset>
-      <button type="button" disabled={ocupado || concluida || ids.length === 0} onClick={() => void preparar()}>Preparar revisão</button>
+      <button type="button" disabled={ocupado || concluida || (ids.length === 0 && !incluirTextoOriginal)} onClick={() => void preparar()}>Preparar revisão</button>
     </> : null}
     {preparada ? <section aria-label="Conteúdo preparado para revisão">
       <h3>Resumo dos achados selecionados</h3><pre style={{ whiteSpace: "pre-wrap" }}>{preparada.resposta.conteudo.resumo}</pre>

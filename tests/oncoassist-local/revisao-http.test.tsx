@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, expect, it, vi } from "vitest";
 import { criarServidorLocal } from "../../src/server/http.js";
 import { criarGerenciadorSessao } from "../../src/server/sessao.js";
@@ -49,7 +49,7 @@ it("UI → HTTP real → revisão exibida → ledger: exige seleção e segundo 
     await screen.findByRole("option", { name: "Fonte local 1" });
     fireEvent.change(screen.getByLabelText("Fonte para revisão"), { target: { value: extracted.draftId } });
     await screen.findByText(raw);
-    const checkboxes = await screen.findAllByRole("checkbox");
+    const checkboxes = within(screen.getByRole("group", { name: "Achados para revisão" })).getAllByRole("checkbox");
     expect(checkboxes).toHaveLength(2);
     expect(screen.queryByRole("button", { name: "Confirmar revisão exibida" })).toBeNull();
     fireEvent.click(checkboxes[0]!);

@@ -199,9 +199,17 @@ function exibirBundle(deps: ServidorDeps, token: string,
   return { status: 200, body: { patientId: input.patientId, encounterId: input.encounterId, documentos } };
 }
 
-/** Revisão é conteúdo do Retrato; o relógio só fornece a data de emissão. */
-function revisaoDocumentosFlash(deps:ServidorDeps,contexto:{patientId:string;encounterId:string;tumorLotId:string|null}):string {
-  return deps.motorF1?.retrato(contexto).revisao ?? hashConteudoExibido(listarEventos(deps.db,contexto.patientId));
+/** Fatos e resumos com recibo válido compõem a revisão documental; o relógio não a altera. */
+function revisaoDocumentosFlash(deps:ServidorDeps,contexto:{patientId:string;encounterId:string;tumorLotId:string|null},
+  sessao: Parameters<typeof lerConsulta>[3]):string {
+  const retrato = deps.motorF1?.retrato(contexto).revisao ?? hashConteudoExibido(listarEventos(deps.db,contexto.patientId));
+  const consulta = lerConsulta(deps.db, contexto.patientId, deps.agora(), sessao, contexto.tumorLotId,
+    { ...opcoesLeituraConsulta(deps, sessao), encounterId: contexto.encounterId });
+  if ("codigo" in consulta) return retrato;
+  const resumos = consulta.evolucoesRascunho.filter((e) => e.revisaoRegistrada)
+    .map(({ draftId, revision, resumo }) => ({ draftId, revision, resumo }))
+    .sort((a, b) => a.draftId.localeCompare(b.draftId));
+  return resumos.length ? hashConteudoExibido({ retrato, resumos }) : retrato;
 }
 
 /** ConfirmarBloco is strict; all clinical contents are fetched from local drafts, not HTTP input. */
@@ -247,7 +255,7 @@ function confirmarBloco(deps: ServidorDeps, token: string, input: Confirmar): { 
   const operacaoExistente = deps.db.prepare("SELECT criadoEm FROM operation WHERE operationId=?").get(input.idempotencyKey);
   const em = operacaoExistente?.criadoEm as string | undefined ?? deps.agora();
   if(!operacaoExistente) {
-    const revisaoAtual=revisaoDocumentosFlash(deps,contexto);
+    const revisaoAtual=revisaoDocumentosFlash(deps,contexto,sessao);
     const vencido=drafts.some(d=>{
       const p=d!.payload as Record<string,unknown>,meta=p.preparacaoS9;
       return meta&&typeof meta==="object"&&"revisao" in meta&&meta.revisao!==revisaoAtual;
@@ -1047,12 +1055,13 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if ("codigo" in consultaRevisada) return reply(409, consultaRevisada.codigo);
       const resumoClinico = consultaRevisada.resumoConfirmadoParaDocumento;
       const contextoS9={patientId:parsed.data.patientId,encounterId:parsed.data.encounterId,tumorLotId:parsed.data.tumorLotId};
-      const revisaoS9=revisaoDocumentosFlash(deps,contextoS9);
+      const revisaoS9=revisaoDocumentosFlash(deps,contextoS9,sessao);
       const capturadoEm=listarEventos(deps.db,parsed.data.patientId).filter(e=>e.encounterId===parsed.data.encounterId)
         .sort((a,b)=>Date.parse(a.criadoEm)-Date.parse(b.criadoEm))[0]?.criadoEm ?? deps.agora();
       const civilS9=dataCivilDoServico(deps.agora(),"-03:00");
       if(civilS9.estado!=="OK")return reply(409,civilS9.codigo);
       const hashDecisao=hashConteudoExibido({contexto:contextoS9,plano:parsed.data.plano,revisao:revisaoS9});
+      const resumoRef = `resumo-revisado:${hashConteudoExibido(resumoClinico)}`;
       if("idempotencyKey" in parsed.data) {
         const eventosAssinados=listarEventos(deps.db,parsed.data.patientId).filter(e=>e.tipo==="DOCUMENTO"&&e.revisao==="ASSINADO");
         const finalizada=listarDrafts(deps.db,parsed.data.patientId).some(d=>{
@@ -1060,13 +1069,15 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
           const p=d.payload as Record<string,unknown>,meta=p.preparacaoS9;
           if(!meta||typeof meta!=="object"||!("revisao" in meta)||typeof meta.revisao!=="string"||!Array.isArray(p.fontes))return false;
           const anterior=hashConteudoExibido({contexto:contextoS9,plano:parsed.data!.plano,revisao:meta.revisao});
-          return p.fontes.some(f=>f&&typeof f==="object"&&"contentHash" in f&&f.contentHash===anterior)
+          // Fontes antigas sem identidade narrativa mantêm a barreira conservadora de repetição.
+          return p.fontes.some(f=>f&&typeof f==="object"&&"contentHash" in f&&f.contentHash===anterior
+            && "localizador" in f && (f.localizador===resumoRef || f.localizador===null))
             &&eventosAssinados.some(e=>e.payload&&typeof e.payload==="object"&&"data" in e.payload&&e.payload.data&&typeof e.payload.data==="object"&&"data" in e.payload.data
               &&e.payload.data.data&&typeof e.payload.data.data==="object"&&"documentId" in e.payload.data.data&&e.payload.data.data.documentId===p.documentId);
         });
         if(finalizada)return reply(409,"FLASH_JA_FINALIZADA");
       }
-      const fonteS9={fonte:{sourceId:`flash-decisao:${hashDecisao}`,classe:"MANUAL" as const,localizador:null,
+      const fonteS9={fonte:{sourceId:`flash-decisao:${hashDecisao}`,classe:"MANUAL" as const,localizador:resumoRef,
         dataClinica:civilS9.dataCivil,dataCaptura:capturadoEm,versao:"s9-flash@1",contentHash:hashDecisao},
         dataReferencia:civilS9.dataCivil,revisao:revisaoS9};
       const result = "expectedRevision" in parsed.data
@@ -1221,13 +1232,16 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     }
     if (rota === "revisarRascunho" || rota === "prepararRevisao") {
       const parsed = z.object({ draftId: z.string().min(1), expectedRevision: z.number().int().nonnegative(),
-        patientId: Id, factIds: z.array(Id).min(1).optional(), operationId: z.string().min(8).optional(),
+        patientId: Id, factIds: z.array(Id).optional(), operationId: z.string().min(8).optional(),
+        incluirTextoOriginal: z.boolean().optional(),
         exceptionId: Id.optional(), acao: z.enum(["CONFIRMAR", "CORRIGIR", "DESCARTAR", "LIGAR_PACIENTE"]).optional(),
         sourceId: Id.optional(), encounterId: Id.optional(), tumorLotId: Id.nullable().optional(),
         idempotencyKey: z.string().min(8).optional(),
         comprovanteExibicao: z.object({ documentId: Id, documentVersion: z.number().int().positive(),
           conteudoHash: z.string().regex(/^[0-9a-f]{64}$/) }).strict().optional() })
-        .strict().refine((value) => value.factIds === undefined || value.operationId !== undefined).safeParse(raw);
+        .strict().refine((value) => value.factIds === undefined
+          ? value.incluirTextoOriginal !== true
+          : value.operationId !== undefined && (value.factIds.length > 0 || value.incluirTextoOriginal === true)).safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
       const legadoVinculo = z.object({ draftId: Id, expectedRevision: z.number().int().nonnegative(), patientId: Id })
         .strict().safeParse(raw);
@@ -1423,6 +1437,13 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         : null;
       if (!linkedSegment || linkedSegment.sourceId !== extractionInput.sourceId)
         return reply(409, "SEGMENTO_VINCULADO_NAO_CONSTA");
+      if (parsed.data.incluirTextoOriginal === true) {
+        if (linkedSegment.sourceType !== extractionInput.sourceType
+          || linkedSegment.recordingId !== extractionInput.recordingId) return reply(409, "PROVENIENCIA_DIVERGENTE");
+        const fonteVinculada = { ...payloadOriginal };
+        delete fonteVinculada.patientLinkReview;
+        if (hashConteudoExibido(fonteVinculada) !== linkReview.sourceHash) return reply(409, "FONTE_ALTERADA");
+      }
       const linkEventRow = deps.db.prepare(`SELECT * FROM clinical_event WHERE operationId=? AND tipo='ReviewDecision'`)
         .get(linkReview.reviewDecisionId) as Record<string, unknown> | undefined;
       let linkEvent: Record<string, unknown> | null = null;
@@ -1474,11 +1495,13 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
             && (value as Record<string, unknown>).segmentId === linkedSegmentId),
           patientId: parsed.data.patientId, encounterId: contexto.encounterId,
           tumorLotId: contexto.tumorLotId ?? null, factIds: parsed.data.factIds, operationId,
+          ...(parsed.data.incluirTextoOriginal === true ? { incluirTextoOriginal: true,
+            segmentoVinculado: { id: linkedSegment.id, ...(linkedSegment.page ? { page: linkedSegment.page } : {}) } } : {}),
           medicoId: sessao.medicoId, em,
           origem: { draftId: draft.draftId, revision: draft.revision, conteudoHash: hashConteudoExibido(draft.payload) } });
       } catch (error) {
         const code = error instanceof Error ? error.message : "EXTRACAO_RASCUNHO_INVALIDO";
-        return reply(409, ["FACT_IDS_INVALIDOS", "PROVENIENCIA_DIVERGENTE", "FATO_NAO_ENCONTRADO"].includes(code)
+        return reply(409, ["FACT_IDS_INVALIDOS", "PROVENIENCIA_DIVERGENTE", "FATO_NAO_ENCONTRADO", "TEXTO_ORIGINAL_INVALIDO"].includes(code)
           ? code : "EXTRACAO_RASCUNHO_INVALIDO");
       }
       if (operacaoExistente && !summaryDraft)

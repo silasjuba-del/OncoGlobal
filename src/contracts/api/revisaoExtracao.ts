@@ -17,7 +17,7 @@ export const ComprovanteRevisao = z.object({ documentId: z.string(), documentVer
 export const RevisaoPreparada = z.object({ codigo: z.literal("REVISAO_PREPARADA"), criaEventoClinico: z.literal(false),
   conteudo: z.object({ kind: z.literal("EVOLUCAO_RASCUNHO"), status: z.literal("RASCUNHO"), resumo: z.string(),
     contexto: z.object({ patientId: z.string(), encounterId: z.string(), tumorLotId: z.string().nullable() }),
-    selectedFactIds: z.array(z.string()), facts: z.array(ClinicalFact),
+    selectedFactIds: z.array(z.string()), facts: z.array(ClinicalFact), incluirTextoOriginal: z.literal(true).optional(),
   }).passthrough(), comprovanteExibicao: ComprovanteRevisao });
 export const ReconciliacaoProposta = z.object({
   codigo: z.literal("RECONCILIACAO_PROPOSTA"), decisaoClinicaTomada: z.literal(false),
@@ -35,7 +35,7 @@ export const ReconciliacaoProposta = z.object({
   timelines: z.array(z.unknown()),
 });
 export type PedidoRevisaoExtracao = { draftId: string; expectedRevision: number; patientId: string;
-  factIds: string[]; operationId: string; comprovanteExibicao?: z.infer<typeof ComprovanteRevisao> };
+  factIds: string[]; operationId: string; incluirTextoOriginal?: boolean; comprovanteExibicao?: z.infer<typeof ComprovanteRevisao> };
 export type FonteRevisao = z.infer<typeof FonteRevisao>;
 export type RevisaoPreparada = z.infer<typeof RevisaoPreparada>;
 export type ReconciliacaoProposta = z.infer<typeof ReconciliacaoProposta>;

@@ -1,10 +1,13 @@
 import { afterEach,expect,it } from "vitest";
 import { createHash } from "node:crypto";
+import { createRequire } from "node:module";
 import { abrirAmbiente,cadastrarPaciente,criarDiretorio,removerDiretorio,PACIENTE,ENCONTRO } from "../../f0-fecha/fixtures/consulta-completa.js";
 import { lerDraft } from "../../../src/kernel/ledger/drafts.js";
 import { processarUploadLocal } from "../../../src/server/upload.js";
-import { createCanvas } from "@napi-rs/canvas";
+import { createCanvas, GlobalFonts } from "@napi-rs/canvas";
 import { deflateSync } from "node:zlib";
+// A fixture rasteriza a mesma fonte empacotada em qualquer sistema, sem fallback do SO.
+GlobalFonts.registerFromPath(createRequire(import.meta.url).resolve("pdfjs-dist/standard_fonts/LiberationSans-Regular.ttf"), "F1SyntheticOCR");
 let ambiente:Awaited<ReturnType<typeof abrirAmbiente>>|undefined;
 afterEach(async()=>{if(ambiente){await ambiente.close();removerDiretorio(ambiente.dir);ambiente=undefined;}});
 const pedido={patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null,id:"upload-sintetico",sourceId:"fonte-upload",sourceType:"medical_note",tipo:"PDF",bytesBase64:Buffer.from("arquivo sintetico").toString("base64")};
@@ -36,7 +39,7 @@ it("rejeita contexto diferente e campo nomearquivo; máximo 8MB sem gravação c
 });
 it("imagem sintética passa por OCR Tesseract realmente local e permanece rascunho não vinculado",async()=>{
   const a=await abrir(),canvas=createCanvas(1000,240),ctx=canvas.getContext("2d");
-  ctx.fillStyle="white";ctx.fillRect(0,0,1000,240);ctx.fillStyle="black";ctx.font="40px sans-serif";
+  ctx.fillStyle="white";ctx.fillRect(0,0,1000,240);ctx.fillStyle="black";ctx.font="40px F1SyntheticOCR";
   ctx.fillText("08/10/2026",30,65);ctx.fillText("Creatinina 1,2 mg/dL.",30,135);
   const bytesBase64=canvas.toBuffer("image/png").toString("base64");
   const r=await a.request<{draftId:string;conversionStatus:string}>("/consulta/upload",{...pedido,id:"imagem-sintetica-real",sourceId:"imagem-fonte-real",tipo:"IMAGEM",bytesBase64});
@@ -48,7 +51,7 @@ it("imagem sintética passa por OCR Tesseract realmente local e permanece rascun
 });
 it("PDF somente bitmap é renderizado e lido pelo OCR local mantendo original e página",async()=>{
   const a=await abrir(),canvas=createCanvas(1000,240),ctx=canvas.getContext("2d");
-  ctx.fillStyle="white";ctx.fillRect(0,0,1000,240);ctx.fillStyle="black";ctx.font="40px sans-serif";ctx.fillText("08/10/2026 Creatinina 1,2 mg/dL.",30,100);
+  ctx.fillStyle="white";ctx.fillRect(0,0,1000,240);ctx.fillStyle="black";ctx.font="40px F1SyntheticOCR";ctx.fillText("08/10/2026 Creatinina 1,2 mg/dL.",30,100);
   const rgba=ctx.getImageData(0,0,1000,240).data,rgb=Buffer.alloc(1000*240*3);
   for(let i=0,j=0;i<rgba.length;i+=4){rgb[j++]=rgba[i]!;rgb[j++]=rgba[i+1]!;rgb[j++]=rgba[i+2]!;}
   const imagem=deflateSync(rgb),draw=Buffer.from("q 1000 0 0 240 0 0 cm /Im0 Do Q");

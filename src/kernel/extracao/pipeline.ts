@@ -206,12 +206,19 @@ function vinculosPersistidos(state: ExtractionState): ReadonlyMap<string, string
   // pelo chamador autenticado. Aqui apenas se confere formato/escopo; este
   // módulo puro não atesta persistência e não aceita ações diretamente de HTTP.
   const confirmados = new Map<string, string>();
+  if (!state.input.confirmacoes?.length || !state.input.confirmacoesFonte?.length) return confirmados;
   const entradas = fontes(state.input);
+  // A fonte é selecionada pelo par recordingId/sourceId; seus segmentos compartilham o mesmo hash.
+  const hashesPorFonte = new Map<ExtractionSource, string>();
   for (const segment of state.segments) {
     const exceptionId = `exc:UNLINKED_PATIENT:${segment.id}`;
     const fonte = entradas.find((f) => f.recordingId === segment.recordingId && f.sourceId === segment.sourceId);
     if (!fonte) continue;
-    const contentHash = createHash("sha256").update(fonte.rawTranscript).digest("hex");
+    let contentHash = hashesPorFonte.get(fonte);
+    if (contentHash === undefined) {
+      contentHash = createHash("sha256").update(fonte.rawTranscript).digest("hex");
+      hashesPorFonte.set(fonte, contentHash);
+    }
     // É versão técnica de importação, não versão inferida de exame ou conclusão clínica.
     const sourceVersion = fonte.examIdentity?.versao?.trim() || "legado@1";
     const provas = (state.input.confirmacoesFonte ?? []).filter((proof) => {
