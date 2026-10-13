@@ -254,7 +254,12 @@ describe("E2E F1 · caso cólon metastático em FOLFIRI (sintético, HTTP real, 
     });
     expect(assinada).toMatchObject({ status: 200, data: { codigo: "GRAVADA" } });
     const documentosAssinados = listarEventos(amb.db, PACIENTE_ID).filter((e) => e.revisao === "ASSINADO" && e.tipo === "DOCUMENTO");
-    expect(documentosAssinados.length).toBeGreaterThanOrEqual(1);
+    expect(preparada.data.documentos).toHaveLength(2); // plano legado sem solicitações: evolução + retorno PENDENTE
+    expect(documentosAssinados).toHaveLength(2);
+    expect(documentosAssinados.map(e => (e.payload as { data: { data: { tipoDocumento: string } } }).data.data.tipoDocumento).sort())
+      .toEqual(["FLASH_EVOLUCAO", "FLASH_RETORNO"]);
+    expect(documentosAssinados.map(e => (e.payload as { data: { data: { documentId: string } } }).data.data.documentId).sort())
+      .toEqual(preparada.data.documentos.map(d => d.documentId).sort());
     const evolucao = documentosAssinados.find((e) => JSON.stringify(e.payload).includes("FLASH_EVOLUCAO"));
     expect(evolucao).toBeDefined();
     const textoEvolucao = JSON.stringify(evolucao!.payload);
@@ -285,6 +290,7 @@ describe("E2E F1 · caso cólon metastático em FOLFIRI (sintético, HTTP real, 
 
     // ETAPA 8 — encerrar tudo, reiniciar com o mesmo banco, nova autenticação, reabrir
     const hashAntes = documentosAssinados.map((e) => JSON.stringify(e.payload));
+    const ledgerHashAntes = sha256(JSON.stringify(listarEventos(amb.db, PACIENTE_ID)));
     await amb.close();
     ambientes.splice(ambientes.indexOf(amb), 1);
     const reaberto = await abrirAmbienteColon(amb.dir); ambientes.push(reaberto);
@@ -298,6 +304,7 @@ describe("E2E F1 · caso cólon metastático em FOLFIRI (sintético, HTTP real, 
     // mesma história, hashes e fatos; reimpressão na sessão nova não duplica nada
     const documentosReabertos = listarEventos(reaberto.db, PACIENTE_ID).filter((e) => e.revisao === "ASSINADO" && e.tipo === "DOCUMENTO");
     expect(documentosReabertos.map((e) => JSON.stringify(e.payload))).toEqual(hashAntes);
+    expect(sha256(JSON.stringify(listarEventos(reaberto.db, PACIENTE_ID)))).toBe(ledgerHashAntes);
     const totalEventos = listarEventos(reaberto.db, PACIENTE_ID).length;
     const impressao2 = await reaberto.request("/acao", {
       verbo: "IMPRIMIR", objeto: { tipo: "DOCUMENTO", id: doc0.documentId, versao: doc0.documentVersion },
@@ -306,6 +313,12 @@ describe("E2E F1 · caso cólon metastático em FOLFIRI (sintético, HTTP real, 
     });
     expect(impressao2.status).toBe(200);
     expect(listarEventos(reaberto.db, PACIENTE_ID).length).toBe(totalEventos);
+    expect(sha256(JSON.stringify(listarEventos(reaberto.db, PACIENTE_ID)))).toBe(ledgerHashAntes);
+    // Uma nova intenção de fechar o mesmo plano assinado não cria outro conjunto clínico.
+    const fecharNovamente = await reaberto.request("/consulta/flash/preparar",
+      { ...contexto, plano, idempotencyKey: "e2e-colon-flash-nova-intencao" });
+    expect(fecharNovamente).toMatchObject({ status: 409, data: { codigo: "FLASH_JA_FINALIZADA" } });
+    expect(sha256(JSON.stringify(listarEventos(reaberto.db, PACIENTE_ID)))).toBe(ledgerHashAntes);
     // encontro anterior não incorpora retrospectivamente os achados posteriores
     const anterior = await reaberto.request<Record<string, any>>("/consulta/carregar",
       { patientId: PACIENTE_ID, encounterId: ENCONTRO_ANTERIOR, tumorLotId: null });

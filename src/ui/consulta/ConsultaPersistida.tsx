@@ -1,3 +1,5 @@
+import { InvestigacaoMinima } from './InvestigacaoMinima.js';
+import { DutosClinica } from './DutosClinica.js';
 import { useEffect, useRef, useState } from "react";
 import type { AcaoIntent, ConsultaVisao, FlashPreparada, PedidoBundle, PortaConsulta } from "../api/porta.js";
 import { ErroPorta } from "../api/porta.js";
@@ -219,6 +221,8 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     {visaoPronta.alertas.filter((a) => a.presentationOverride).map((a) =>
       <aside role="alert" data-banner="e1" key={a.alertaId}><strong>Emergência E1</strong><p>{a.texto}</p></aside>)}
     {mensagem ? <p aria-live="polite">{mensagem}</p> : null}
+    <InvestigacaoMinima porta={porta} contexto={contexto} {...(visaoPronta.retrato?{revisaoEsperada:visaoPronta.retrato.revisao}:{})} />
+    <DutosClinica {...(visaoPronta.dutos?{dados:visaoPronta.dutos}:{})} />
     <VisaoIntegradaMinima {...(visaoPronta.retrato ? {retrato:visaoPronta.retrato}: {})}
       {...(visaoPronta.visaoIntegrada ? {visao:visaoPronta.visaoIntegrada}: {})} />
     <h3>Evolução revisada</h3>

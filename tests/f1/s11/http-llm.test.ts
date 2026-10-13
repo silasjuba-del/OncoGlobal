@@ -54,6 +54,15 @@ describe("S11 HTTP→gateway→LLM→draft sem fato", () => {
     const extrair = vi.fn(); const a = await abrir({ env, transporte: { extrair } });
     expect((await a.request({ ...pedido, patientId: "outro" })).status).toBe(409); expect(extrair).not.toHaveBeenCalled();
   });
+  it("nova revisão de fatos impede replay da proposta anterior como atual", async () => {
+    const extrair = vi.fn(async () => output()); const a = await abrir({ env, transporte: { extrair } });
+    expect((await a.request(pedido)).status).toBe(201);
+    salvarDraft(a.db, { draftId: "cadastro2", patientId: ctx.patientId, sourceId: "cad2", rawRef: "local", payload: {}, diagnostics: [], revision: 0, criadoEm: agora });
+    confirmar(a.db, { operationId: "cadastro2", ...ctx, sessao: a.sessoes.obter(a.token)!, reviewDecisionId: "revisao2", em: agora, registros: [{ draftId: "cadastro2", expectedRevision: 0,
+      eventId: "evcad2", tipo: "Paciente", revisao: "CONFIRMADO", fontes: [], payload: { patientId: ctx.patientId, nome: "Maria Teste", identificadores: [], nascimento: null, sexoCadastral: "F", divergencia: false } }] });
+    const r = await a.request(pedido); expect(r.status).toBe(409); expect(r.body.codigo).toBe("PROPOSTA_LLM_DESATUALIZADA");
+    expect(extrair).toHaveBeenCalledOnce();
+  });
   it.each(["contexto", "fonte"])("mudança de %s durante await descarta resultado", async tipo => {
     let liberar!: (v: unknown) => void; let iniciou!: () => void;
     const started = new Promise<void>(resolve => { iniciou = resolve; });

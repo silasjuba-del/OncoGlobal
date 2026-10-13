@@ -14,6 +14,7 @@ import {
 import { g02PhiEgress, g27SaidaExternaLimpa } from "../harness/gates.js";
 import type { DicionarioPaciente } from "../llm/desidentificar.js";
 import { instrucoesExtracaoOpenAi, schemaExtracaoOpenAi } from "../llm/openai/index.js";
+import { payloadDocumentoOriginal } from "../llm/openai/documentoOriginal.js";
 
 type Intent = z.infer<typeof ActionIntent>;
 
@@ -35,7 +36,7 @@ export type ResultadoValidacaoSaida = { ok: true; evidencia: EvidenciaSaidaExter
 /** Separate server-only authorization for draft extraction; never accepts the original-document exception. */
 export interface EvidenciaExtracaoLlm {
   modo: "DESIDENTIFICADO";
-  origem: "UPLOAD_LOCAL_EXPLICITO";
+  origem: "UPLOAD_LOCAL_EXPLICITO" | "RETRATO_CONFIRMADO";
   destino: "https://api.openai.com/v1/responses";
   modelo: string;
   store: false;
@@ -48,8 +49,18 @@ export interface EvidenciaExtracaoLlm {
     sourceHash: string; payloadHash: string; vigente: true; escopo: "EXTRACAO_RASCUNHO" };
 }
 export type ResultadoValidacaoExtracaoLlm = { ok: true; evidencia: EvidenciaExtracaoLlm } | { ok: false };
+export interface EvidenciaDocumentoOriginalLlm {
+  decisaoId: "D-W9-66"; modo: "DOCUMENTO_ORIGINAL"; origem: "UPLOAD_LOCAL_EXPLICITO";
+  provider: "OPENAI"; destino: "https://api.openai.com/v1/responses"; modelo: string; store: false;
+  revisaoObrigatoria: true; phi: "EXCECAO_EXPRESSA"; payload: string;
+  fonte: { id: string; versao: number; hash: string; mime: "application/pdf"; paginas: number };
+  lease: { id: string; emitidaEm: string; expiraEm: string; usada: false; medicoId: string };
+  autorizacao: { patientId: string; encounterId: string; tumorLotId: string | null; sourceId: string; sourceVersion: number;
+    sourceHash: string; payloadHash: string; vigente: true; escopo: "D_W9_66_TRANSCRICAO_NAO_VERIFICADA" };
+}
+export type ResultadoValidacaoDocumentoOriginal = { ok: true; evidencia: EvidenciaDocumentoOriginalLlm } | { ok: false };
 export interface Executor {
-  executar(intent: Intent, evidencia?: EvidenciaSaidaExterna, extracaoLlm?: EvidenciaExtracaoLlm): Promise<{ ok: true; recibo: string } | { ok: false; incerto: boolean; erro: string }>;
+  executar(intent: Intent, evidencia?: EvidenciaSaidaExterna, extracaoLlm?: EvidenciaExtracaoLlm, original?: EvidenciaDocumentoOriginalLlm): Promise<{ ok: true; recibo: string } | { ok: false; incerto: boolean; erro: string }>;
 }
 export interface ResultadoGateway {
   decisao: "EXECUTADA" | "REPLAY" | "NEGADA" | "OUTCOME_UNKNOWN" | "FALHOU";
@@ -256,7 +267,8 @@ function evidenciasSaidaPassam(intent: Intent, evidencia: EvidenciaSaidaExterna)
 }
 
 function extracaoLlmPassa(intent: Intent, e: EvidenciaExtracaoLlm): boolean {
-  if (e.modo !== "DESIDENTIFICADO" || e.origem !== "UPLOAD_LOCAL_EXPLICITO" || e.store !== false
+  const origemEsperada = intent.objeto.tipo === "RETRATO_SINTESE" ? "RETRATO_CONFIRMADO" : "UPLOAD_LOCAL_EXPLICITO";
+  if (e.modo !== "DESIDENTIFICADO" || e.origem !== origemEsperada || e.store !== false
     || e.revisaoObrigatoria !== true || e.destino !== "https://api.openai.com/v1/responses"
     || typeof e.modelo !== "string" || !e.modelo.trim() || !dicionarioConhecido(e.dicionarioPaciente)
     || typeof e.payload !== "string" || !e.payload || !e.fonte || !e.autorizacao || !e.sanitizationReport) return false;
@@ -291,6 +303,30 @@ function extracaoLlmPassa(intent: Intent, e: EvidenciaExtracaoLlm): boolean {
   return g02PhiEgress(`${e.modelo}\n${String(b.instructions)}\n${content.text}`, e.dicionarioPaciente).decisao === "PASSA"
     && g27SaidaExternaLimpa({ artefato: { tipo: "TEXTO", metadados: {} }, destino: e.destino, sanitizationReport: report }).decisao === "PASSA";
 }
+function documentoOriginalPassa(intent: Intent, e: EvidenciaDocumentoOriginalLlm, sessao: Sessao, agora: string): boolean {
+  if (e.decisaoId !== "D-W9-66" || e.modo !== "DOCUMENTO_ORIGINAL" || e.origem !== "UPLOAD_LOCAL_EXPLICITO"
+    || e.provider !== "OPENAI" || e.destino !== "https://api.openai.com/v1/responses" || e.store !== false
+    || e.phi !== "EXCECAO_EXPRESSA" || e.revisaoObrigatoria !== true || !e.fonte || !e.lease || !e.autorizacao
+    || typeof e.modelo !== "string" || !e.modelo.trim() || typeof e.payload !== "string" || e.fonte.mime !== "application/pdf") return false;
+  const now = Date.parse(agora), issued = Date.parse(e.lease.emitidaEm), expires = Date.parse(e.lease.expiraEm);
+  if (!Number.isFinite(now) || !Number.isFinite(issued) || !Number.isFinite(expires) || issued > now || expires <= now
+    || expires - issued > 60_000 || expires > Date.parse(sessao.expiraEm) || e.lease.usada !== false
+    || !e.lease.id || e.lease.medicoId !== sessao.medicoId || !Number.isInteger(e.fonte.paginas) || e.fonte.paginas < 1 || e.fonte.paginas > 40) return false;
+  const a = e.autorizacao;
+  if (intent.escopo.patientId === null || intent.escopo.encounterId === null || a.patientId !== intent.escopo.patientId
+    || a.encounterId !== intent.escopo.encounterId || e.fonte.id !== intent.objeto.id || e.fonte.versao !== intent.objeto.versao
+    || a.sourceId !== e.fonte.id || a.sourceVersion !== e.fonte.versao || a.sourceHash !== e.fonte.hash
+    || a.payloadHash !== hashPayload(e.payload) || a.vigente !== true || a.escopo !== "D_W9_66_TRANSCRICAO_NAO_VERIFICADA"
+    || (intent.destino !== null && intent.destino !== e.destino)) return false;
+  const b = JSON.parse(e.payload) as { input?: { content?: { file_data?: unknown }[] }[] };
+  const data = b.input?.[0]?.content?.[0]?.file_data;
+  if (typeof data !== "string" || !data.startsWith("data:application/pdf;base64,")) return false;
+  const base64 = data.slice("data:application/pdf;base64,".length);
+  if (base64.length > 12_000_000 || !/^[A-Za-z0-9+/]+={0,2}$/.test(base64) || e.payload !== payloadDocumentoOriginal(e.modelo, base64)) return false;
+  const bytes = Buffer.from(base64, "base64");
+  return bytes.toString("base64") === base64 && bytes.subarray(0, 5).toString() === "%PDF-"
+    && createHash("sha256").update(bytes).digest("hex") === e.fonte.hash;
+}
 
 const HARD_FORBIDDEN: { id: string; teste: (i: Intent) => boolean }[] = [
   { id: "rede-social-paciente", teste: (i) => /rede[_\s-]?social/i.test(i.destino ?? "") && !!i.escopo.patientId },
@@ -323,6 +359,7 @@ export function criarGateway(deps: {
   /** Contexto obtido do servidor/ledger; nunca derivado de um booleano do corpo HTTP. */
   validarSaida?: (intent: Intent, sessao: Sessao) => Promise<ResultadoValidacaoSaida> | ResultadoValidacaoSaida;
   validarExtracaoLlm?: (intent: Intent, sessao: Sessao) => Promise<ResultadoValidacaoExtracaoLlm> | ResultadoValidacaoExtracaoLlm;
+  validarDocumentoOriginalLlm?: (intent: Intent, sessao: Sessao) => Promise<ResultadoValidacaoDocumentoOriginal> | ResultadoValidacaoDocumentoOriginal;
 }) {
   const auditarSeguro = (r: RegistroAuditoria): boolean => { try { deps.auditar(r); return true; } catch { return false; } };
   const negar = (acao: string, motivoCodigo: string): ResultadoGateway => {
@@ -358,7 +395,19 @@ export function criarGateway(deps: {
 
       let evidencia: EvidenciaSaidaExterna | undefined;
       let extracaoLlm: EvidenciaExtracaoLlm | undefined;
-      if ((intent.verbo as string) === "LLM_EXTRACAO") {
+      let originalLlm: EvidenciaDocumentoOriginalLlm | undefined;
+      if ((intent.verbo as string) === "LLM_EXTRACAO" && intent.objeto.tipo === "PDF_ORIGINAL_D_W9_66") {
+        if (!deps.validarDocumentoOriginalLlm) return negar(acao, "D_W9_66_SEM_PROVA_SERVIDOR");
+        try {
+          const v = await deps.validarDocumentoOriginalLlm(intent, sessao);
+          if (!v || v.ok !== true) return negar(acao, "D_W9_66_NAO_AUTORIZADA");
+          const copia = structuredClone(v.evidencia);
+          if (!evidenciaEhJson(copia) || !documentoOriginalPassa(intent, copia, sessao, deps.agora())) return negar(acao, "D_W9_66_PROVA_INVALIDA");
+          originalLlm = congelarProfundo(copia);
+          if (!auditarSeguro({ acaoPedida: "LLM_EXTRACAO", decisao: "PERMITIDA", motivoCodigo: "G02_G27_D_W9_66_EXCECAO_DOCUMENTAL", em: deps.agora() }))
+            return negar(acao, "AUDITORIA_INDISPONIVEL");
+        } catch { return negar(acao, "D_W9_66_PROVA_INVALIDA"); }
+      } else if ((intent.verbo as string) === "LLM_EXTRACAO") {
         if (!deps.validarExtracaoLlm) return negar(acao, "LLM_EXTRACAO_SEM_PROVA_SERVIDOR");
         try {
           const v = await deps.validarExtracaoLlm(intent, sessao);
@@ -394,7 +443,9 @@ export function criarGateway(deps: {
       }
 
       // Hash de conteúdo validado integra a chave idempotente; mudança de payload/destino nunca reaproveita autorização anterior.
-      const payloadHash = createHash("sha256").update(JSON.stringify(extracaoLlm
+      const payloadHash = createHash("sha256").update(JSON.stringify(originalLlm
+        ? { intent, payloadHash: originalLlm.autorizacao.payloadHash, sourceHash: originalLlm.fonte.hash, destino: originalLlm.destino }
+        : extracaoLlm
         ? { intent, payloadHash: extracaoLlm.sanitizationReport.payloadHash, sourceHash: extracaoLlm.fonte.hash, destino: extracaoLlm.destino }
         : evidencia
         ? { intent, payloadHash: evidencia.sanitizationReport.payloadHash, destino: evidencia.destinoCanonico }
@@ -421,16 +472,16 @@ export function criarGateway(deps: {
         if (reserva.registro.payloadHash !== payloadHash) return negar(acao, "CHAVE_REUSADA_PAYLOAD_DIFERENTE");
         return replay(reserva.registro.resultado);
       }
-      if ((evidencia || extracaoLlm) && !auditarSeguro({ acaoPedida: acao, decisao: "PERMITIDA", motivoCodigo: "OK", em: deps.agora() })) {
+      if ((evidencia || extracaoLlm || originalLlm) && !auditarSeguro({ acaoPedida: acao, decisao: "PERMITIDA", motivoCodigo: "OK", em: deps.agora() })) {
         deps.store.delete?.(chave);
         return negar(acao, "AUDITORIA_INDISPONIVEL");
       }
       const promessa = (async (): Promise<ResultadoGateway> => {
         let resultado: ResultadoGateway;
         try {
-          const r = await exec.executar(intent, evidencia, extracaoLlm);
+          const r = await exec.executar(intent, evidencia, extracaoLlm, originalLlm);
           resultado = r.ok
-            ? { decisao: "EXECUTADA", motivoCodigo: "OK", recibo: (evidencia || extracaoLlm) ? `saida-${randomUUID()}` : r.recibo }
+            ? { decisao: "EXECUTADA", motivoCodigo: "OK", recibo: (evidencia || extracaoLlm || originalLlm) ? `saida-${randomUUID()}` : r.recibo }
             : r.incerto
               ? { decisao: "OUTCOME_UNKNOWN", motivoCodigo: "RESULTADO_INCERTO_SEM_REENVIO" }
               : { decisao: "FALHOU", motivoCodigo: "FALHA_EXECUTOR" };
@@ -440,7 +491,7 @@ export function criarGateway(deps: {
         // FALHOU = falha certa sem efeito: libera a chave para nova tentativa explícita.
         if (resultado.decisao === "FALHOU") deps.store.delete?.(chave);
         else deps.store.set(chave, { payloadHash, resultado }, deps.agora());
-        if (!evidencia && !extracaoLlm) auditarSeguro({ acaoPedida: acao, decisao: "PERMITIDA", motivoCodigo: resultado.motivoCodigo, em: deps.agora() });
+        if (!evidencia && !extracaoLlm && !originalLlm) auditarSeguro({ acaoPedida: acao, decisao: "PERMITIDA", motivoCodigo: resultado.motivoCodigo, em: deps.agora() });
         return resultado;
       })();
       emAndamento.set(chave, { payloadHash, promessa });

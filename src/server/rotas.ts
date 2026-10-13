@@ -1,7 +1,10 @@
 import { PrescriptionItem } from "../contracts/w10/prescricao.js";
+import { projetarDutos } from "./projecaoDutos.js";
 import { rotearBiblioteca } from "./biblioteca.js";
 import { rotearDutos, referenciaSigtapDuto } from "./dutos.js";
-import { executarExtracaoLlm } from "./extracaoLlm.js";
+import { reconciliarMedicamentos } from "./medicamentos.js";
+import { obterInvestigacao, type DepsInvestigacao } from "./investigacao.js";
+import { executarSinteseRetratoLlm, executarDocumentoOriginalLlm, executarExtracaoLlm } from "./extracaoLlm.js";
 import type { criarRuntimeExtracaoLlm } from "../kernel/llm/openai/runtime.js";
 import { processarUploadLocal } from "./upload.js";
 import { ConsultaCarregar } from "../contracts/f1/consultaCarregar.js";
@@ -10,9 +13,10 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import type { DatabaseSync } from "node:sqlite";
 import { z } from "zod";
 import { DataCivil, Id, type Fonte } from "../contracts/base.js";
-import { Contato, Triagem } from "../contracts/clinico.js";
+import { Paciente, Contato, Triagem } from "../contracts/clinico.js";
 import { ActionIntent, ConfirmarBloco, type ConfirmarBloco as Confirmar } from "../contracts/operacao.js";
 import { lerDraft, listarDrafts, salvarDraft } from "../kernel/comandos/portas.js";
+import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
 import { sqliteIdempotencia } from "../kernel/ledger/idempotencia.js";
 import { proporPrescricao, executarConfirmacao as confirmar } from "../kernel/comandos/index.js";
 import { listarEventos } from "../kernel/comandos/portas.js";
@@ -58,6 +62,7 @@ export interface ServidorDeps {
   oncoassistJev?: ReturnType<typeof criarOncoassistJev>;
   motorF1?:ReturnType<typeof criarMotorF1>;
   extracaoLlm?:ReturnType<typeof criarRuntimeExtracaoLlm>;
+  packInvestigacao?:NonNullable<DepsInvestigacao["packInvestigacao"]>;
   agora: () => string;
   log: (entry: { rota: string; codigo: string; status: number }) => void;
 }
@@ -336,6 +341,10 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
   const rota = req.url === "/login" ? "login"
     : req.url === "/consulta/bundle" ? "bundle"
       : req.url === "/consulta/confirmar" ? "confirmar"
+        : req.url === "/consulta/medicamentos/reconciliar" ? "reconciliarMedicamentos"
+        : req.url === "/consulta/oncoassist/sintese" ? "sinteseRetratoLlm"
+        : req.url === "/consulta/llm/documento-original" ? "documentoOriginalLlm"
+        : req.url === "/consulta/investigacao" ? "investigacao"
         : req.url === "/consulta/llm/extrair" ? "extracaoLlm"
         : ["/biblioteca/importar","/biblioteca/curar","/biblioteca/ativar","/biblioteca/rollback","/biblioteca/consultar","/biblioteca/estado"].includes(req.url??"") ? req.url!
         : ["/farmacia/enviar","/farmacia/conferir","/salao/registrar-administracao","/apac/validar-emissao","/chat/aceitar-decisao","/tarefas/receber","/tarefas/concluir"].includes(req.url??"") ? req.url!
@@ -392,6 +401,14 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
     // O gate de autenticação continua anterior a esta checagem.
     if (rota === "acao" && !contentTypeJson(req)) return reply(415, "CONTENT_TYPE_INVALIDO");
     const raw = await body(req,rota === "upload" ? 11_300_000 : 1_000_000);
+    if(rota === "reconciliarMedicamentos"){const result=reconciliarMedicamentos(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
+    if(rota === "sinteseRetratoLlm"){const result=await executarSinteseRetratoLlm(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
+    if(rota === "documentoOriginalLlm"){const result=await executarDocumentoOriginalLlm(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
+    if(rota === "investigacao"){
+      const p=z.object({patientId:Id,encounterId:Id,tumorLotId:Id.nullable()}).strict().safeParse(raw);if(!p.success)return reply(400,"PAYLOAD_INVALIDO");
+      const ctx=deps.sessoes.consultaSelecionada(token);if(!ctx||ctx.patientId!==p.data.patientId||ctx.encounterId!==p.data.encounterId||(ctx.tumorLotId??null)!==p.data.tumorLotId)return reply(409,"CONTEXTO_CONSULTA_ALTERADO");
+      const result=obterInvestigacao(deps,p.data);return reply(200,result.codigo,result);
+    }
     if(rota === "extracaoLlm"){const result=await executarExtracaoLlm(raw,token,deps);return reply(result.status,String(result.body.codigo),result.body);}
     const biblioteca=rotearBiblioteca(deps,token,rota,raw,sessao);if(biblioteca)return reply(biblioteca.status,String((biblioteca.body as {codigo?:string}).codigo??"BIBLIOTECA_CONSULTADA"),biblioteca.body);
     const duto=rotearDutos(deps,token,rota,raw,sessao);if(duto)return reply(duto.status,String((duto.body as {codigo?:string}).codigo??"DUTO_PROCESSADO"),duto.body);
@@ -1037,7 +1054,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       const integrado = !("codigo" in result) && deps.motorF1
         ? await deps.motorF1.consultar({patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},leituraInicial) : null;
       return reply("codigo" in result ? 404 : 200, "codigo" in result ? result.codigo : "CONSULTA_CARREGADA",
-        integrado ? {...result,retrato:integrado.retrato,...(integrado.visaoIntegrada?{visaoIntegrada:integrado.visaoIntegrada}:{})}:result);
+        integrado && !("codigo" in result) ? {...result,dutos:projetarDutos(leituraInicial?.itens??[],{patientId:result.patientId,encounterId:result.encounterId,tumorLotId:result.tumorLotId},deps.corpus),retrato:integrado.retrato,...(integrado.visaoIntegrada?{visaoIntegrada:integrado.visaoIntegrada}:{})}:result);
     }
     if (rota === "rascunhoFlash" || rota === "prepararFlash") {
       const base = { patientId: Id, encounterId: Id, tumorLotId: Id.nullable(), plano: PlanoFlashEntrada };
@@ -1077,7 +1094,11 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         });
         if(finalizada)return reply(409,"FLASH_JA_FINALIZADA");
       }
-      const fonteS9={fonte:{sourceId:`flash-decisao:${hashDecisao}`,classe:"MANUAL" as const,localizador:resumoRef,
+      const cadastros=eventosVigentes(listarEventos(deps.db,parsed.data.patientId).filter(e=>Date.parse(e.criadoEm)<=Date.parse(deps.agora()))).filter(e=>e.tipo==="Paciente"&&["CONFIRMADO","ASSINADO"].includes(e.revisao)).flatMap(e=>{
+        const p=Paciente.safeParse(dadosDoEvento(e));return p.success&&p.data.patientId===parsed.data.patientId?[{patientId:p.data.patientId,nome:p.data.nome,cadastroEventId:e.eventId}]:[];
+      });
+      const identidadePaciente=cadastros.at(-1);
+      const fonteS9={...(identidadePaciente?{identidadePaciente}:{}),identidadeResponsavel:{medicoId:sessao.medicoId,crm:sessao.crm},medicamentos:parsed.data.plano.receitas??[],fonte:{sourceId:`flash-decisao:${hashDecisao}`,classe:"MANUAL" as const,localizador:resumoRef,
         dataClinica:civilS9.dataCivil,dataCaptura:capturadoEm,versao:"s9-flash@1",contentHash:hashDecisao},
         dataReferencia:civilS9.dataCivil,revisao:revisaoS9};
       const result = "expectedRevision" in parsed.data
@@ -1489,7 +1510,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       let revisao: ReturnType<typeof prepararRevisaoExtracao>;
       try {
         revisao = prepararRevisaoExtracao({ draftId: draft.draftId, sourceId: extractionInput.sourceId,
-          rawTranscript: linkedSegment.rawTranscript, sourceType: extractionInput.sourceType,
+          rawTranscript: linkedSegment.rawTranscript, sourceType: extractionInput.sourceType,vinculoConfirmado:true,
           facts: factsForLinkedSegment,
           exceptions: extractionState.confirmationRequired.filter((value) => value && typeof value === "object"
             && (value as Record<string, unknown>).segmentId === linkedSegmentId),

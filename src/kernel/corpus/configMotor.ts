@@ -9,6 +9,7 @@ import type { LabRuleset } from "../../rules/tipos-w3.js";
 import type { RulesetInteracoes } from "../../rules/w8/interacoes.js";
 import { SalaoRuleset } from "../../contracts/regras.js";
 import { avaliarValidadeExame } from "../../rules/f0c/clinica.js";
+import { criarCruzamentosMotor } from "./cruzamentos.js";
 import { lerTetosCumulativos } from "../../rules/f0c/tetosCumulativos.js";
 
 const sha=(s:string)=>createHash("sha256").update(s).digest("hex");
@@ -57,11 +58,15 @@ export function carregarConfigMotor():ConfigMotor {
   }catch{/* Gap. */}
   // Pin the actual approved validity table returned by the pure compiled rule.
   // Deployment does not depend on a TypeScript source file being present.
+  try{const texto=readFileSync(join(raiz,"corpus","f0c","classes-farmacos.v1.json"),"utf8");
+    const catalogo=JSON.parse(texto) as {id:string;versao:string;aliases:Record<string,string[]>;classes:Record<string,string[]>};
+    if(catalogo.id&&catalogo.versao&&catalogo.aliases&&catalogo.classes){opcoes.catalogoInteracoes={aliases:catalogo.aliases,classes:catalogo.classes};regras.push({id:catalogo.id,versao:catalogo.versao,hash:sha(texto)});}
+  }catch{/* No class/alias inference without the local catalog. */}
   const validadeConteudo={
     hemogramaHoras:avaliarValidadeExame("HEMOGRAMA",null,null).validadeHoras,
     bioquimicaHoras:avaliarValidadeExame("BIOQUIMICA",null,null).validadeHoras,
   };
   const validadeRef={id:"f0c-validade-exames",versao:"D-F0C-01-06",hash:sha(JSON.stringify(validadeConteudo))};
   regras.push(validadeRef);opcoes.validadeExame={referencia:validadeRef,status:"CONFERIDA_MEDICO",fonte:"docs/DECISOES.md · D-F0C-01..06",conteudo:validadeConteudo};
-  return{regras,biblioteca:{id:"corpus-local",versao:"F1",hash:sha(JSON.stringify(regras))},opcoes};
+  return{regras,biblioteca:{id:"corpus-local",versao:"F1",hash:sha(JSON.stringify(regras))},opcoes,cruzamentos:criarCruzamentosMotor(opcoes,opcoes.catalogoInteracoes)};
 }

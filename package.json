@@ -1,7 +1,7 @@
 {
   "name": "oncoglobal",
   "version": "0.0.1",
-  "description": "OncoGlobal WORK — motor longitudinal de contexto oncológico (PLANO v1.1)",
+  "description": "OncoGlobal WORK \u2014 motor longitudinal de contexto oncol\u00f3gico (PLANO v1.1)",
   "directories": {
     "doc": "docs",
     "test": "tests"
@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/silasjuba-del/OncoGlobal#readme",
   "dependencies": {
+    "@napi-rs/canvas": "1.0.10",
     "@tesseract.js-data/por": "^1.0.0",
     "@typesafe-ai/sdk": "0.6.0",
     "pdfjs-dist": "^6.4.299",

@@ -1,3 +1,5 @@
+import type { InvestigacaoConsultaVisao } from './investigacao.js';
+import type { DutosClinicaVisao } from './dutos.js';
 import type { z } from "zod";
 import type { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
 import type { Fonte } from "../base.js";
@@ -123,6 +125,7 @@ export interface FlashPreparada {
 }
 
 export interface ConsultaVisao {
+  dutos?: DutosClinicaVisao;
   instrumentosClinicos?: readonly {instrumento:string;avaliacao:ResultadoInstrumento}[];
   resumoEvolucao?: string | null;
   historicoDocumentos?: readonly { eventId: string; documentId: string; documentVersion: number; titulo: string;
@@ -278,6 +281,9 @@ export interface ChatSetorVisao {
 }
 
 export interface PortaConsulta {
+  reconciliarMedicamentos?(pedido: {patientId:string;encounterId:string;tumorLotId:string|null;operationId:string;medicamentos:string[];listaAtualCompleta:true}, signal?:AbortSignal):Promise<{codigo:"GRAVADA"|"REPLAY";eventId:string}>;
+  sintetizarRetrato?(contexto: { patientId: string; encounterId: string; tumorLotId: string | null; idempotencyKey: string }, signal?: AbortSignal): Promise<import("./sinteseProposta.js").SintesePropostaResposta>;
+  investigacao?(contexto: PedidoBundle, signal?: AbortSignal): Promise<InvestigacaoConsultaVisao>;
   avaliarInstrumento?(contexto:{patientId:string;encounterId:string;tumorLotId:string|null},pedido:unknown):Promise<ResultadoInstrumento>;
   uploadDocumentoLocal?(pedido:PedidoUploadLocal,signal?:AbortSignal):Promise<ResultadoUploadLocal>;
   /** Configuração global autenticada; ausente quando a porta não oferece persistência. */

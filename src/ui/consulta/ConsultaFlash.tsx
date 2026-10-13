@@ -1,4 +1,4 @@
-import type { SituacaoExame, ExameRecenteFlash, ItemFlash, EstadoApacFlash, ApacFlash, RetornoFlash, TarefasRetornoFlash, ConsultaFlashProps, PlanoFlash } from '../../contracts/api/flash.js';
+import type { SituacaoExame, ExameRecenteFlash, ItemFlash, EstadoApacFlash, ApacFlash, RetornoFlash, TarefasRetornoFlash, ConsultaFlashProps, PlanoFlash,ReceitaManualFlash } from '../../contracts/api/flash.js';
 export type { SituacaoExame, ExameRecenteFlash, ItemFlash, EstadoApacFlash, ApacFlash, RetornoFlash, TarefasRetornoFlash, ConsultaFlashProps, PlanoFlash } from '../../contracts/api/flash.js';
 import { useState } from "react";
 import { marcadoInicialmente } from "./Bundle.js";
@@ -37,12 +37,16 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
   const [ciclo, setCiclo] = useState(inicial?.decisaoQt?.solicitarCiclo ?? false);
   const [data, setData] = useState(inicial?.decisaoQt?.data ?? props.hoje ?? "");
   const [prazo, setPrazo] = useState(() => { const d = inicial ? inicial.retorno.dias : props.retorno.dias; return d == null ? "" : String(d); });
+  const [receita,setReceita]=useState<ReceitaManualFlash>(()=>inicial?.receitas?.[0]??{id:`receita-manual-${crypto.randomUUID()}`,medicamento:"",dose:null,orientacao:null,duracao:null,via:null,quantidade:null});
+  const [incluirReceita,setIncluirReceita]=useState(()=>!!inicial?.receitas?.[0]&&inicial.receitasMarcadas.includes(inicial.receitas[0].id));
   const dias = prazo.trim() === "" ? null : Number(prazo);
-  const invalido = dias !== null && (!Number.isInteger(dias) || dias < 1 || dias > 3650);
+  const prazoInvalido = dias !== null && (!Number.isInteger(dias) || dias < 1 || dias > 3650);
+  const receitaInvalida=incluirReceita&&!receita.medicamento.trim();
+  const invalido=prazoInvalido||receitaInvalida;
   function plano(): PlanoFlash {
     const laboratorio = [...new Set([...labs, ...limparOutros(outrosLab)])];
     const imagem = [...new Set([...rad, ...limparOutros(outrosRad)])];
-    return { acoesMarcadas: [], receitasMarcadas: [], apac: { ...props.apac, emitir: false },
+    return { acoesMarcadas: [], receitasMarcadas: incluirReceita?[receita.id]:[],...(receita.medicamento.trim()?{receitas:[{...receita,medicamento:receita.medicamento.trim()}]}:{}),apac: { ...props.apac, emitir: false },
       retorno: { ...props.retorno, dias: invalido ? null : dias, examesAntesDoRetorno: [...laboratorio, ...imagem] },
       tarefasRetorno: { retorno: true, laboratorio: laboratorio.length > 0, imagem: imagem.length > 0 },
       solicitacoes: { laboratorio, imagem }, decisaoQt: { solicitarCiclo: ciclo, data: data || null } };
@@ -76,8 +80,16 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
         {selecao("RAD", RAD, rad, setRad, outrosRad, setOutrosRad, "Solicitações de imagem")}
         <section className="flash-coluna" aria-label="Decisão médica sobre o ciclo"><h3>QT</h3><p>{presente(c.tratamentoAtual)} · {presente(c.cicloDia)}</p><label className="flash-check"><input type="checkbox" checked={ciclo} onChange={e => setCiclo(e.target.checked)} />Liberar ciclo {c.cicloDia ?? ""}</label><label className="flash-outros">Data<input type="date" aria-label="Data do ciclo" value={data} onChange={e => setData(e.target.value)} /></label><small>Decisão do médico</small></section>
       </div></fieldset>
+      <fieldset className="flash-edicao" disabled={props.ocupado} aria-label="Receita manual"><legend>Receita manual — médico escreve</legend>
+        <label className="flash-check"><input type="checkbox" checked={incluirReceita} onChange={e=>setIncluirReceita(e.target.checked)}/>Incluir receita digitada</label>
+        {([ ["medicamento","Medicamento"],["dose","Dose"],["orientacao","Orientação / posologia"],["duracao","Duração"],["via","Via"],["quantidade","Quantidade"] ] as const).map(([campo,rotulo])=>
+          <label className="flash-outros" key={campo}>{rotulo}<input type="text" aria-label={`${rotulo} da receita`} maxLength={campo==="orientacao"?2000:300}
+            value={receita[campo]??""} onChange={e=>setReceita(atual=>({...atual,[campo]:campo==="medicamento"?e.target.value:e.target.value.trim()?e.target.value:null}))}/></label>)}
+        <small>Campos vazios continuam não informados. Dose, via e quantidade não são completadas automaticamente.</small>
+      </fieldset>
     </div>
     <footer className="flash-rodape"><label>Retorno em <input type="number" aria-label="Prazo do retorno em dias" min={1} max={3650} value={prazo} disabled={props.ocupado} aria-invalid={invalido} onChange={e => setPrazo(e.target.value)} /> dias</label><div><button type="button" disabled={props.ocupado || invalido} onClick={() => props.aoSalvarRascunho(plano())}>SALVAR RASCUNHO</button><button type="button" disabled={props.ocupado || invalido} onClick={() => props.aoFinalizar(plano())}>{props.rotuloFinalizar ?? "REVISAR · IMPRIMIR"}</button></div></footer>
-    {invalido && <p role="alert">Informe um número inteiro entre 1 e 3650 dias, ou deixe vazio para PENDENTE.</p>}
+    {prazoInvalido && <p role="alert">Informe um número inteiro entre 1 e 3650 dias, ou deixe vazio para PENDENTE.</p>}
+    {receitaInvalida && <p role="alert">Informe o medicamento para incluir a receita digitada.</p>}
   </section>;
 }

@@ -96,6 +96,9 @@ const ApacFlashEntrada = z.object({
 export const PlanoFlashEntrada = z.object({
   acoesMarcadas: z.array(Id).max(50),
   receitasMarcadas: z.array(Id).max(50),
+  receitas:z.array(z.object({id:z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$/).refine(v=>!["constructor","prototype","__proto__"].includes(v)),
+    medicamento:z.string().trim().min(1).max(300),dose:z.string().trim().min(1).max(300).nullable(),orientacao:z.string().trim().min(1).max(2000).nullable(),
+    duracao:z.string().trim().min(1).max(300).nullable(),via:z.string().trim().min(1).max(300).nullable(),quantidade:z.string().trim().min(1).max(300).nullable()}).strict()).max(50).refine(v=>new Set(v.map(r=>r.id)).size===v.length,"RECEITA_ID_DUPLICADO").optional(),
   apac: ApacFlashEntrada,
   retorno: z.object({
     dias: z.number().int().min(1).max(3650).nullable(),
@@ -120,6 +123,7 @@ export type PlanoFlashEntradaTipo = z.infer<typeof PlanoFlashEntrada>;
 /** O contrato da visão omite opcionais ausentes, inclusive no objeto retorno. */
 function planoParaVisao(plano: PlanoFlashEntradaTipo): PlanoFlash {
   return { acoesMarcadas: plano.acoesMarcadas, receitasMarcadas: plano.receitasMarcadas, apac: plano.apac,
+    ...(plano.receitas===undefined?{}:{receitas:plano.receitas}),
     retorno: { dias: plano.retorno.dias, examesAntesDoRetorno: plano.retorno.examesAntesDoRetorno,
       ...(plano.retorno.motivo !== undefined ? { motivo: plano.retorno.motivo } : {}) },
     ...(plano.tarefasRetorno !== undefined ? { tarefasRetorno: plano.tarefasRetorno } : {}),
@@ -134,6 +138,8 @@ interface Resposta { status: number; body: Record<string, unknown>; preparacaoDo
 export interface FonteDocumentosFlash {
   fonte: Fonte; dataReferencia: string; revisao: string;
   medicamentos?: NonNullable<EntradaDocumentosConsulta["decisao"]>["medicamentos"];
+  identidadePaciente?:{patientId:string;nome:string;cadastroEventId:string};
+  identidadeResponsavel?:{medicoId:string;crm:string};
 }
 
 
@@ -236,6 +242,10 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
   const medicamentos = fonteDocumentos?.medicamentos ?? [];
   if (input.plano.acoesMarcadas.length > 0 || input.plano.receitasMarcadas.some(id => !medicamentos.some(m => m.id === id)))
     return { status: 409, body: { codigo: "ITENS_FLASH_SEM_DOCUMENTO" } };
+  if(input.plano.receitas?.some(r=>!medicamentos.some(m=>m.id===r.id&&hashConteudoExibido(m)===hashConteudoExibido(r))))
+    return {status:409,body:{codigo:"RECEITA_MANUAL_SEM_FONTE_MEDICA"}};
+  if(fonteDocumentos?.identidadePaciente&&(fonteDocumentos.identidadePaciente.patientId!==input.patientId||!fonteDocumentos.identidadePaciente.nome.trim()||!fonteDocumentos.identidadePaciente.cadastroEventId.trim()))
+    return {status:409,body:{codigo:"IDENTIDADE_DOCUMENTOS_DIVERGENTE"}};
   if (fonteDocumentos && (!Fonte.safeParse(fonteDocumentos.fonte).success || !DataCivil.safeParse(fonteDocumentos.dataReferencia).success || !fonteDocumentos.revisao.trim()))
     return { status: 409, body: { codigo: "FONTE_DOCUMENTOS_INVALIDA" } };
   if (input.plano.decisaoQt?.solicitarCiclo && !input.plano.decisaoQt.data)
@@ -280,7 +290,7 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
         : d.tipoDocumento===TIPO_DOC.laboratorio ? g.tipoDocumento==="PEDIDO_EXAME" && lab.some(exame=>g.texto.includes(`Exame: ${exame}\n`))
         : d.tipoDocumento===TIPO_DOC.imagem ? g.tipoDocumento==="PEDIDO_EXAME" && imagem.some(exame=>g.texto.includes(`Exame: ${exame}\n`)) : false);
       if (!gerados.length) continue;
-      d.texto=gerados.map(g=>g.texto).join("\n\n");
+      d.texto=gerados.map(g=>d.tipoDocumento===TIPO_DOC.retorno ? g.texto.replace(/^Retorno: em /m,"Retorno em ") : g.texto).join("\n\n");
       for(const g of gerados)if(!mapaDocumentos.has(g.documentId))mapaDocumentos.set(g.documentId,d.documentId);
       d.extra={...d.extra,fontes:[fonteDocumentos.fonte],preparacaoS9:{revisao:fonteDocumentos.revisao,documentos:gerados.map(g=>({documentId:g.documentId,documentHash:g.documentHash,templateRef:g.templateRef}))}};
     }
@@ -300,6 +310,13 @@ function prepararDocumentosFlash(db: DatabaseSync, agora: string, input: Context
     const conjunto=docs.find(d=>d.tipoDocumento===TIPO_DOC.conjunto);
     if(conjunto){const incluidos=docs.filter(d=>d!==conjunto);conjunto.texto=incluidos.map(d=>`${d.titulo}\n${d.texto}`).join("\n\n---\n\n");conjunto.extra={...conjunto.extra,documentosIncluidos:incluidos.map(d=>({documentId:d.documentId,documentVersion:1,titulo:d.titulo}))};}
   }
+  if(fonteDocumentos?.identidadePaciente){
+    const identidadePaciente=fonteDocumentos.identidadePaciente;
+    for(const d of docs){d.texto=`Paciente: ${identidadePaciente.nome} · ${identidadePaciente.patientId}\n\n${d.texto}`;d.extra={...d.extra,identidadePaciente};}
+    const conjunto=docs.find(d=>d.tipoDocumento===TIPO_DOC.conjunto);
+    if(conjunto)conjunto.texto=docs.filter(d=>d!==conjunto).map(d=>`${d.titulo}\n${d.texto}`).join("\n\n---\n\n");
+  }
+  if(fonteDocumentos?.identidadeResponsavel)for(const d of docs)d.extra={...d.extra,identidadeResponsavel:fonteDocumentos.identidadeResponsavel};
   const draftsDocs = docs.map((d) => ({
     doc: d,
     payload: {

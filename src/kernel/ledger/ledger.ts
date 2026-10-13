@@ -3,6 +3,18 @@ import type { DatabaseSync } from "node:sqlite";
 import { AuditEvent, ClinicalEvent, Operation, type ClinicalEvent as Evento } from "../../contracts/operacao.js";
 import { transacao } from "./db.js";
 
+/** D-F1-18: a reconciliação de medicamentos pertence ao paciente, não ao tumor.
+ * Only this typed global list can supersede the same field across tumor lots.
+ * Patient identity and every tumor-specific record retain the original guard.
+ */
+function listaMedicamentos(e:{tipo:unknown;payload:unknown}):boolean {
+ if(typeof e.tipo!=="string"||!/^FATO(?:@1)?$/.test(e.tipo)||!e.payload||typeof e.payload!=="object")return false;
+ const p=e.payload as Record<string,unknown>,v=p.data;
+ if(!v||typeof v!=="object"||Array.isArray(v))return false;
+ const d=v as Record<string,unknown>;
+ return d.campo==="medicamentos"&&Array.isArray(d.valor)&&d.valor.every(x=>typeof x==="string"&&x.trim().length>0);
+}
+
 export type Operacao = typeof Operation._output;
 export type Gravacao = { estado: "GRAVADA" | "REPLAY" | "NEGADA"; resultRef: string | null; motivo?: string };
 
@@ -72,8 +84,10 @@ export function gravarOperacao(
        revisao,criadoEm,criadoPor,supersedesEventId) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`);
     for (const e of valid) {
       if (e.supersedesEventId) {
-        const old = db.prepare("SELECT patientId,tumorLotId FROM clinical_event WHERE eventId=?").get(e.supersedesEventId);
-        if (!old || old.patientId !== e.patientId || old.tumorLotId !== e.tumorLotId)
+        const old = db.prepare("SELECT patientId,tumorLotId,tipo,payload FROM clinical_event WHERE eventId=?").get(e.supersedesEventId);
+        let global=false;
+        try{global=!!old&&listaMedicamentos(e)&&listaMedicamentos({tipo:old.tipo,payload:JSON.parse(String(old.payload))});}catch{/* invalid previous record cannot authorize a scope exception */}
+        if (!old || old.patientId !== e.patientId || (old.tumorLotId !== e.tumorLotId&&!global))
           throw new Error("SUPERSEDES_CONTEXT_INVALID");
       }
       insert.run(e.eventId, e.operationId, e.eventIndex, e.patientId, e.tumorLotId,

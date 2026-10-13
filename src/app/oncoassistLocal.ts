@@ -49,7 +49,7 @@ export async function iniciarOncoassistLocal(opcoes: OpcoesOncoassistLocal) {
   const sessoes = criarGerenciadorSessao({ medicoId: opcoes.medicoId, crm: opcoes.crm,
     senha: opcoes.senha, duracaoMs: 8 * 60 * 60 * 1000, agora });
   const db = abrirLedger(arquivo);
-  const extracaoLlm = criarRuntimeExtracaoLlm({ auditar: e => auditar(db, { ator: { tipo: "SISTEMA", id: "llm-extracao" },
+  const extracaoLlm = criarRuntimeExtracaoLlm({ agora, auditar: e => auditar(db, { ator: { tipo: "SISTEMA", id: "llm-extracao" },
     acaoPedida: "LLM_EXTRACAO", decisao: e.status === "PROPOSTA" ? "PERMITIDA" : "NEGADA", motivoCodigo: e.codigo,
     em: agora(), politicaVersao: e.promptId }) });
   const gateway = criarGateway({ agora, store: sqliteIdempotencia(db), executores: {
@@ -57,6 +57,7 @@ export async function iniciarOncoassistLocal(opcoes: OpcoesOncoassistLocal) {
     LLM_EXTRACAO: extracaoLlm.executor,
   },
     validarExtracaoLlm: extracaoLlm.validarExtracaoLlm,
+    validarDocumentoOriginalLlm: extracaoLlm.validarDocumentoOriginalLlm,
     auditar: (e) => auditar(db, { ator: { tipo: "SISTEMA", id: "oncoassist-local" },
       ...e, politicaVersao: "oncoassist-local-v1" }),
   });
