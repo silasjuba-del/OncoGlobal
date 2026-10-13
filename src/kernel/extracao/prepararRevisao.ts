@@ -12,6 +12,7 @@ export interface RevisaoExtracaoPreparada {
     readonly contexto: { readonly patientId: string; readonly encounterId: string; readonly tumorLotId: string | null };
     readonly status: "RASCUNHO";
     readonly resumo: string;
+    readonly incluirTextoOriginal?: true;
     readonly selectedFactIds: readonly string[];
     readonly facts: readonly FatoClinico[];
     readonly fontes: readonly Fonte[];
@@ -89,16 +90,22 @@ export function prepararRevisaoExtracao(input: {
   readonly encounterId: string;
   readonly tumorLotId: string | null;
   readonly factIds: readonly string[];
+  readonly incluirTextoOriginal?: boolean;
+  readonly segmentoVinculado?: { readonly id: string; readonly page?: number };
   readonly operationId: string;
   readonly medicoId: string;
   readonly em: string;
   readonly origem?: { readonly draftId: string; readonly revision: number; readonly conteudoHash: string };
 }): RevisaoExtracaoPreparada {
-  if (!input.factIds.length || new Set(input.factIds).size !== input.factIds.length)
+  if ((!input.factIds.length && input.incluirTextoOriginal !== true) || new Set(input.factIds).size !== input.factIds.length)
     throw new Error("FACT_IDS_INVALIDOS");
+  if (input.incluirTextoOriginal === true && (!input.rawTranscript.trim() || input.rawTranscript.length > 200_000
+    || !input.segmentoVinculado?.id)) throw new Error("TEXTO_ORIGINAL_INVALIDO");
   FactSourceType.parse(input.sourceType);
   const facts = input.facts.map((fact) => ClinicalFact.parse(fact));
   if (facts.some((fact) => fact.sourceId !== input.sourceId || fact.sourceType !== input.sourceType))
+    throw new Error("PROVENIENCIA_DIVERGENTE");
+  if (input.incluirTextoOriginal === true && facts.some((fact) => fact.segmentId !== input.segmentoVinculado!.id))
     throw new Error("PROVENIENCIA_DIVERGENTE");
   const byId = new Map(facts.map((fact) => [fact.id, fact]));
   const selected = input.factIds.map((id) => byId.get(id));
@@ -118,6 +125,10 @@ export function prepararRevisaoExtracao(input: {
     const fonte = fonteDoFato(fact);
     return [`${fonte.sourceId}\0${fonte.localizador ?? ""}\0${fonte.dataClinica ?? ""}`, fonte] as const;
   })).values()];
+  if (input.incluirTextoOriginal === true) fontes.push({ sourceId: input.sourceId, classe: sourceClass,
+    localizador: `segmento:${input.segmentoVinculado!.id}`
+      + (input.segmentoVinculado!.page ? `;pagina:${input.segmentoVinculado!.page}` : ""),
+    dataClinica: null, dataCaptura: input.em, versao: "extracao-local-v1", contentHash });
 
   const linhas = escolhidos.map((fact) => {
     const data = dataIso(fact.date);
@@ -138,6 +149,9 @@ export function prepararRevisaoExtracao(input: {
   const blocos = [...new Set(linhas.map((item) => item.secao))].map((titulo) =>
     [titulo, ...linhas.filter((item) => item.secao === titulo).map((item) => item.texto)].join("\n"));
   const resumo = ["Evolução clínica — rascunho de revisão médica", ...blocos,
+    ...(input.incluirTextoOriginal === true ? ["Texto original do trecho vinculado — inclusão selecionada pelo médico",
+      `Fonte ${input.sourceId}; segmento ${input.segmentoVinculado!.id}; transcrição literal, sem conversão em fatos.`,
+      input.rawTranscript] : []),
     ...(pendentes.length || excecoes.length ? ["Pendências", ...pendentes, ...excecoes] : []),
     `Fonte original ${input.sourceId} preservada no rascunho de extração; trechos não extraídos não foram convertidos em fatos.`,
     "Este rascunho não fecha estadiamento TNM, dose ou conduta.",
@@ -147,6 +161,7 @@ export function prepararRevisaoExtracao(input: {
     kind: "EVOLUCAO_RASCUNHO",
     contexto: { patientId: input.patientId, encounterId: input.encounterId, tumorLotId: input.tumorLotId },
     status: "RASCUNHO", resumo, selectedFactIds: [...input.factIds], facts: escolhidos,
+    ...(input.incluirTextoOriginal === true ? { incluirTextoOriginal: true as const } : {}),
     fontes, review: { medicoId: input.medicoId, em: input.em, operationId: input.operationId },
     ...(input.origem ? { origem: { ...input.origem } } : {}),
   };

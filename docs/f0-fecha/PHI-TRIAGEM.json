@@ -1068,22 +1068,6 @@
       "items": []
     },
     {
-      "path": "src/ui/api/fake.ts",
-      "sha256": "c4d52f55492d121136fa4ed0100b74d44952a66d19c80ddfdb0897641af10f08",
-      "items": [
-        {
-          "type": "telefone",
-          "line": 214,
-          "ordinal": 0,
-          "status": "synthetic_declared",
-          "evidenceRef": "src/ui/api/fake.ts:210-218",
-          "reason": "Factory local da porta fake: contato construido sem paciente ou vinculo, exclusivamente para demonstracao.",
-          "contextTag": null
-        }
-      ],
-      "hashMode": "utf8-lf"
-    },
-    {
       "path": "src/ui/oncochart/fontes/geist-latin-wght-normal.woff2",
       "sha256": "0cbbe6286a00f356e98980783cc950a9b693751e04aedfb97d9526ff6dc2b316",
       "category": "technical_font_asset",
@@ -1786,31 +1770,6 @@
           "status": "synthetic_declared",
           "evidenceRef": "tests/server/adv006-saida.test.ts:27-35",
           "reason": "Destino em dominio reservado .invalid; executor fake e prova de zero efeitos externos.",
-          "contextTag": null
-        }
-      ],
-      "hashMode": "utf8-lf"
-    },
-    {
-      "path": "tests/server/leituras-http.test.ts",
-      "sha256": "674406e44f13daab3612a96a497f5e72f81f5ca5f6cd2b147b1835cacf0346bc",
-      "items": [
-        {
-          "type": "telefone",
-          "line": 88,
-          "ordinal": 0,
-          "status": "synthetic_declared",
-          "evidenceRef": "tests/server/leituras-http.test.ts:93; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
-        },
-        {
-          "type": "telefone",
-          "line": 100,
-          "ordinal": 0,
-          "status": "synthetic_declared",
-          "evidenceRef": "tests/server/leituras-http.test.ts:98,105; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
       ],

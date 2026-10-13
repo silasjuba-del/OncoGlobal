@@ -1,4 +1,6 @@
 import { createHash } from "node:crypto";
+import { DataCivil, Instante } from "../../../contracts/base.js";
+import { validarPayloadEvento } from "../../../contracts/envelope.js";
 import { ClinicalEvent } from "../../../contracts/operacao.js";
 import { Retrato, type FatoRetrato } from "../../../contracts/f1/retrato.js";
 
@@ -40,13 +42,9 @@ function ordem(a: ClinicalEvent, b: ClinicalEvent): number {
     || a.eventIndex - b.eventIndex || a.eventId.localeCompare(b.eventId);
 }
 function consulta(e: ClinicalEvent): boolean {
-  const d = dados(e);
-  return ["ConsultaConfirmada", "ConsultaConfirmada@1"].includes(e.tipo) && d !== null
-    && typeof d.dataClinica === "string" && /^\d{4}-\d{2}-\d{2}$/.test(d.dataClinica)
-    && Array.isArray(d.documentoIds) && d.documentoIds.length > 0
-    && d.documentoIds.every(v => v && typeof v === "object" && typeof v.documentId === "string"
-      && v.documentId.length > 0 && Number.isInteger(v.documentVersion) && v.documentVersion > 0);
+  return ["ConsultaConfirmada", "ConsultaConfirmada@1"].includes(e.tipo) && validarPayloadEvento(e.tipo, dados(e)).ok;
 }
+const diaClinico = (instante: number) => new Date(instante - 3 * 60 * 60 * 1000).toISOString().slice(0, 10);
 
 /** Projeção pura. Contexto é fornecido pelo chamador; nenhum evento pode mudar o encontro aberto. */
 export function projetarRetrato(eventos: readonly ClinicalEvent[], contexto: ContextoRetrato,
@@ -68,6 +66,37 @@ export function projetarRetrato(eventos: readonly ClinicalEvent[], contexto: Con
   const confirmados = [...porId.values()].filter(e => !duplicados.has(e.eventId) && !impedidos.has(e.eventId)
     && e.patientId === contexto.patientId && Date.parse(e.criadoEm) <= horizonte
     && ["CONFIRMADO", "ASSINADO"].includes(e.revisao)).sort(ordem);
+  // A agenda ancora somente o dia civil, nunca assinatura ou horário de conclusão.
+  // Sem marco verificável, permanece o horizonte legado de registro/data clínica.
+  const marcos = new Map<string, { consultas: ClinicalEvent[]; agendas: ClinicalEvent[] }>();
+  for (const e of confirmados) {
+    const ehConsulta = ["ConsultaConfirmada", "ConsultaConfirmada@1"].includes(e.tipo);
+    if (!ehConsulta && !["AgendaEntry", "AgendaEntry@1"].includes(e.tipo)) continue;
+    const encontro = marcos.get(e.encounterId) ?? { consultas: [], agendas: [] };
+    encontro[ehConsulta ? "consultas" : "agendas"].push(e);
+    marcos.set(e.encounterId, encontro);
+  }
+  const datasEncontros = new Map<string, string>();
+  const encontrosIndeterminados = new Set<string>();
+  for (const [encounterId, encontro] of marcos) {
+    const candidatos = encontro.consultas.length ? encontro.consultas : encontro.agendas;
+    const datas = new Set<string>();
+    for (const e of candidatos) {
+      const d = dados(e), data = d?.[encontro.consultas.length ? "dataClinica" : "data"];
+      const motivo = !DataCivil.safeParse(data).success ? "DATA_ENCONTRO_INVALIDA"
+        : !validarPayloadEvento(e.tipo, d).ok ? "MARCO_ENCONTRO_INVALIDO"
+        : !encontro.consultas.length && (d?.patientId !== e.patientId || d?.encounterId !== e.encounterId)
+          ? "CONTEXTO_ENCONTRO_DIVERGENTE" : null;
+      if (motivo) { diagnostico(e, motivo); encontrosIndeterminados.add(encounterId); }
+      else datas.add(data as string);
+    }
+    if (datas.size > 1) {
+      candidatos.forEach(e => diagnostico(e, "DATA_ENCONTRO_AMBIGUA"));
+      encontrosIndeterminados.add(encounterId);
+    }
+    if (!encontrosIndeterminados.has(encounterId) && datas.size === 1) datasEncontros.set(encounterId, [...datas][0]!);
+  }
+  const dataEncontroAtual = datasEncontros.get(contexto.encounterId);
   const materiais = new Map<string, FatoRetrato>();
   for (const e of confirmados) {
     const d = dados(e);
@@ -75,13 +104,18 @@ export function projetarRetrato(eventos: readonly ClinicalEvent[], contexto: Con
     if (consulta(e)) continue;
     // Eventos de operação não são fatos clínicos. Campo clínico ou tipo material explícito.
     if (typeof d.campo !== "string" && !materiaisConhecidos.has(e.tipo)) continue;
+    if (encontrosIndeterminados.has(contexto.encounterId) || encontrosIndeterminados.has(e.encounterId)) continue;
+    const dataOrigem = datasEncontros.get(e.encounterId);
+    if (dataEncontroAtual && dataOrigem && dataOrigem > dataEncontroAtual) continue;
     const alcance = escopo(e, d);
     if (alcance === "TUMOR" && e.tumorLotId !== contexto.tumorLotId) continue;
     const dataClinica = tempo(d, e);
     if (dataClinica && /^\d{4}-\d{2}-\d{2}(?:T|$)/.test(dataClinica)) {
-      const instante = Date.parse(dataClinica.length === 10 ? `${dataClinica}T00:00:00-03:00` : dataClinica);
-      if (!Number.isFinite(instante)) { diagnostico(e, "TEMPO_CLINICO_INVALIDO"); continue; }
-      if (instante > horizonte) { diagnostico(e, "TEMPO_CLINICO_FUTURO"); continue; }
+      const civil = dataClinica.length === 10;
+      if (!(civil ? DataCivil : Instante).safeParse(dataClinica).success) { diagnostico(e, "TEMPO_CLINICO_INVALIDO"); continue; }
+      const dia = civil ? dataClinica : diaClinico(Date.parse(dataClinica));
+      if (civil ? dia > diaClinico(horizonte) : Date.parse(dataClinica) > horizonte) { diagnostico(e, "TEMPO_CLINICO_FUTURO"); continue; }
+      if (dataEncontroAtual && dia > dataEncontroAtual) continue;
     }
     try {
       const ref = { eventId: e.eventId, revisao: hashCanonico(e) };
@@ -104,13 +138,15 @@ export function projetarRetrato(eventos: readonly ClinicalEvent[], contexto: Con
   const fatos = [...materiais.values()].filter(f => !substituidos.has(f.ref.eventId))
     .sort((a, b) => (a.tempoClinico ?? "9999").localeCompare(b.tempoClinico ?? "9999")
       || a.tempoRegistro.localeCompare(b.tempoRegistro) || a.ref.eventId.localeCompare(b.ref.eventId));
-  const marcoAtual = confirmados.filter(e => e.encounterId === contexto.encounterId && consulta(e)).at(-1);
+  const marcoAtual = confirmados.filter(e => e.encounterId === contexto.encounterId && consulta(e)
+    && !encontrosIndeterminados.has(e.encounterId)).at(-1);
   const inicioAtual = confirmados.filter(e => e.encounterId === contexto.encounterId).at(0);
   const limite = marcoAtual ?? inicioAtual;
   // A data de um exame importado não é a data da consulta aberta.
-  const dataAtual = marcoAtual ? String(dados(marcoAtual)?.dataClinica)
-    : inicioAtual ? new Date(Date.parse(inicioAtual.criadoEm) - 3 * 60 * 60 * 1000).toISOString().slice(0, 10) : null;
+  // Sem âncora, o fallback de registro permanece exclusivo do delta legado.
+  const dataAtual = dataEncontroAtual ?? (inicioAtual ? diaClinico(Date.parse(inicioAtual.criadoEm)) : null);
   const anterior = confirmados.filter(e => consulta(e) && e.encounterId !== contexto.encounterId
+    && !encontrosIndeterminados.has(contexto.encounterId) && !encontrosIndeterminados.has(e.encounterId)
     && e.tumorLotId === contexto.tumorLotId && limite && ordem(e, limite) < 0
     && (!dataAtual || String(dados(e)?.dataClinica) < dataAtual))
     .sort((a, b) => String(dados(a)?.dataClinica).localeCompare(String(dados(b)?.dataClinica)) || ordem(a, b)).at(-1);

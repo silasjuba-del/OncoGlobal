@@ -158,21 +158,35 @@ describe("W10 FUGU-EIXO-02 · revisão de extração por HTTP real", () => {
       } });
       const eventos = listarEventos(ambiente.db, PACIENTE)
         .filter((evento) => evento.operationId === selecao.operationId);
-      expect(eventos).toHaveLength(1);
-      expect(eventos[0]).toMatchObject({
+      expect(eventos).toHaveLength(2);
+      const fatos = eventos.filter((evento) => evento.tipo === "FATO");
+      expect(fatos).toHaveLength(1);
+      expect(fatos[0]).toMatchObject({
         tipo: "FATO", patientId: PACIENTE, encounterId: ENCONTRO, revisao: "CONFIRMADO",
         payload: { data: { factId: fato.id, sourceId: FONTE, rawEvidence: fato.rawEvidence } },
       });
-      expect(eventos[0]?.fontes[0]?.contentHash)
+      expect(fatos[0]?.fontes[0]?.contentHash)
         .toBe(createHash("sha256").update(TRANSCRICAO, "utf8").digest("hex"));
+      const recibos = eventos.filter((evento) => evento.tipo === "ReviewDecision");
+      expect(recibos).toHaveLength(1);
+      expect(recibos[0]).toMatchObject({ patientId: PACIENTE, encounterId: ENCONTRO, tumorLotId: null,
+        revisao: "CONFIRMADO", criadoPor: { tipo: "SESSAO", id: "medico-teste" }, fontes: fatos[0]!.fontes,
+        payload: { data: { kind: "ExtracaoResumoRevisado", draftId: preparo.data.comprovanteExibicao.documentId,
+          draftRevision: 2, conteudoHash: hashConteudoExibido(preparo.data.conteudo), sourceId: FONTE,
+          sourceContentHash: createHash("sha256").update(TRANSCRICAO, "utf8").digest("hex"),
+          origem: { draftId: selecao.draftId, revision: 1,
+            conteudoHash: hashConteudoExibido(lerDraft(ambiente.db, selecao.draftId)!.payload) } } } });
+      expect(recibos[0]?.payload).not.toHaveProperty("data.campo");
+      expect(recibos[0]?.payload).not.toHaveProperty("data.valor");
       expect(quantidadeFatos(ambiente)).toBe(1);
       expect(lerDraft(ambiente.db, selecao.draftId)?.payload)
         .toMatchObject({ kind: "EXTRACAO_RASCUNHO", input: { rawTranscript: TRANSCRICAO } });
-      expect(lerDraft(ambiente.db, preparo.data.comprovanteExibicao.documentId)?.revision).toBe(1);
+      expect(lerDraft(ambiente.db, preparo.data.comprovanteExibicao.documentId)?.revision).toBe(2);
 
       const replay = await post<Revisao>(ambiente, "/consulta/rascunho/revisar", confirmarFato);
       expect(replay).toMatchObject({ status: 200, data: { codigo: "REPLAY" } });
       expect(quantidadeFatos(ambiente)).toBe(1);
+      expect(listarEventos(ambiente.db, PACIENTE).filter((evento) => evento.operationId === selecao.operationId)).toEqual(eventos);
     } finally { await ambiente.close(); }
   });
 

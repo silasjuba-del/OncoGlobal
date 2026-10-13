@@ -1,11 +1,13 @@
 // @vitest-environment jsdom
-// F0-COMPLEMENTO: interação real com React + porta HTTP + servidor local + SQLite; somente o cadastro é semeado.
+// F0-COMPLEMENTO: interação real com React + porta HTTP + servidor local + SQLite; cadastro e agenda sintéticos são semeados.
 import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, expect, it, vi } from "vitest";
 import { TelaConsulta } from "../../src/ui/telas/TelaConsulta.js";
 import { criarPortaHttp } from "../../src/ui/api/http.js";
 import { criarChaves } from "../../src/ui/api/chaves.js";
-import { abrirAmbiente, cadastrarPaciente, criarDiretorio, removerDiretorio, PACIENTE, SENHA } from "../f0-fecha/fixtures/consulta-completa.js";
+import { salvarDraft } from "../../src/kernel/ledger/drafts.js";
+import { confirmar as confirmarNoLedger } from "../../src/kernel/ledger/writeRouter.js";
+import { abrirAmbiente, cadastrarPaciente, criarDiretorio, removerDiretorio, PACIENTE, SENHA, AGORA } from "../f0-fecha/fixtures/consulta-completa.js";
 let ambiente: Awaited<ReturnType<typeof abrirAmbiente>> | undefined;
 let diretorio: string | undefined;
 afterEach(async () => {
@@ -14,7 +16,16 @@ afterEach(async () => {
   if(diretorio) { removerDiretorio(diretorio); diretorio=undefined; }
 });
 it("salva seleção real, reabre após reinício e exibe documentos antes da assinatura", async () => {
-  diretorio=criarDiretorio(); ambiente=await abrirAmbiente(diretorio); cadastrarPaciente(ambiente);
+  diretorio=criarDiretorio(); ambiente=await abrirAmbiente(diretorio);
+  const contexto = cadastrarPaciente(ambiente);
+  // A tela resolve o encontro explícito na agenda; usa o mesmo encontro real da fixture.
+  const draftId = "agenda-flash-jornada-sintetica";
+  salvarDraft(ambiente.db, { draftId, patientId: contexto.patientId, sourceId: draftId, rawRef: "fixture-local-sintetica",
+    payload: {}, diagnostics: [], revision: 0, criadoEm: AGORA });
+  expect(confirmarNoLedger(ambiente.db, { ...contexto, tumorLotId: null, operationId: "agenda-flash-jornada-operacao",
+    reviewDecisionId: "agenda-flash-jornada-revisao", sessao: ambiente.sessoes.obter(ambiente.token)!, em: AGORA,
+    registros: [{ draftId, expectedRevision: 0, eventId: "agenda-flash-jornada-evento", tipo: "AgendaEntry",
+      payload: { ...contexto, data: AGORA.slice(0, 10), horario: "09:00" }, fontes: [], revisao: "CONFIRMADO" }] }).estado).toBe("GRAVADA");
   const fetchReal=globalThis.fetch.bind(globalThis);
   const chamadas:string[]=[];
   vi.stubGlobal("fetch", async (input: RequestInfo | URL, init?: RequestInit) => {
@@ -24,6 +35,7 @@ it("salva seleção real, reabre após reinício e exibe documentos antes da ass
   async function montar() {
     const porta=criarPortaHttp({onSessaoExpirada:()=>{throw new Error("SESSAO_EXPIRADA");}});
     expect((await porta.login(SENHA)).ok).toBe(true);
+    expect((await porta.agendaDoDia()).itens).toEqual([expect.objectContaining(contexto)]);
     render(<TelaConsulta patientId={PACIENTE} porta={porta} chaves={criarChaves()} />);
     fireEvent.click(await screen.findByRole("button",{name:"Consulta Flash"}));
     await screen.findByLabelText("Solicitações laboratoriais");

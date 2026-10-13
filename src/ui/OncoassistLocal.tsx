@@ -4,7 +4,7 @@ import { criarPortaHttp, type OpcoesHttp } from "./api/http.js";
 import { criarChaves } from "./api/chaves.js";
 import type { PedidoBundle, PortaConsulta } from "./api/porta.js";
 import { PainelOncoassist } from "./consulta/PainelOncoassist.js";
-import { RevisaoExtracaoLocal } from "./consulta/RevisaoExtracaoLocal.js";
+import { RevisaoExtracaoLocal, type RevisaoExtracaoConfirmada } from "./consulta/RevisaoExtracaoLocal.js";
 import { TelaSalao } from "./telas/TelaSalao.js";
 import { CaixaCanal } from "./telas/canal/CaixaCanal.js";
 import { ConsultaPersistida } from "./consulta/ConsultaPersistida.js";
@@ -27,11 +27,20 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const [contexto, setContexto] = useState<PedidoBundle | null>(null);
   const [ocupado, setOcupado] = useState(false);
   const [versaoFontes,setVersaoFontes]=useState(0);
+  const [versaoClinica, setVersaoClinica] = useState(0);
   const [mensagem, setMensagem] = useState("");
   const [tela, setTela] = useState<"consulta" | "salao" | "canal" | "apac" | "config">("consulta");
   const geracao = useRef(0);
   const chaves = useMemo(() => criarChaves(), []);
   const pacienteAtivo = agenda.find((item) => item.patientId === contexto?.patientId && item.encounterId === contexto?.encounterId);
+  const geracaoContexto = geracao.current;
+
+  function revisaoConfirmada(revisao: RevisaoExtracaoConfirmada) {
+    if (geracao.current !== geracaoContexto || !contexto
+      || revisao.contexto.patientId !== contexto.patientId || revisao.contexto.encounterId !== contexto.encounterId
+      || revisao.contexto.tumorLotId !== contexto.tumorLotId) return;
+    setVersaoClinica((v) => v + 1);
+  }
 
   const limpar = useCallback(() => {
     geracao.current++;
@@ -117,10 +126,10 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
       {ocupado ? <p role="status">Abrindo consulta…</p> : null}
       {tela === "consulta" && contexto ? <div key={`${contexto.patientId}:${contexto.encounterId}:${contexto.tumorLotId ?? ""}`}>
         <UploadDocumentoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)}/>
-        <RevisaoExtracaoLocal key={versaoFontes} porta={porta} contexto={contexto}
+        <RevisaoExtracaoLocal key={versaoFontes} porta={porta} contexto={contexto} aoConfirmarRevisao={revisaoConfirmada}
           {...(pacienteAtivo ? { patientLabel: pacienteAtivo.nome } : {})} />
         <PainelOncoassist porta={porta} contexto={contexto} />
-        <ConsultaPersistida porta={porta} contexto={contexto} aoAbrirApac={() => setTela("apac")} />
+        <ConsultaPersistida porta={porta} contexto={contexto} versaoClinica={versaoClinica} aoAbrirApac={() => setTela("apac")} />
       </div> : null}
       {tela === "salao" ? <TelaSalao porta={porta} /> : null}
       {tela === "apac" ? <TelaApacLote porta={porta} chaves={chaves} /> : null}

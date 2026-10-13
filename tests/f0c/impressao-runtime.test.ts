@@ -36,7 +36,8 @@ async function preparar() {
 it('conjunto essencial percorre HTTP preparar/exibir/confirmar e gateway real escreve HTML assinado escapado',async()=>{
   const f=await preparar();await f.assinar();
   const doc=await f.resolver.resolver({id:f.target.id,version:1});expect(doc?.assinado).toBe(true);
-  expect(doc?.html).toContain('Pedido de laboratório');expect(doc?.html).toContain('TC tórax');expect(doc?.html).toContain('Retorno em 21 dias');
+  expect(doc?.html).toContain('Pedido de laboratório');expect(doc?.html).toContain('TC tórax');expect(doc?.html).toContain('Retorno: em 21 dias');
+  expect(doc?.html).toContain('Data prevista: 2026-10-30');
   expect(doc?.html).toContain('&lt;script&gt;window.print()&lt;/script&gt;');expect(doc?.html).not.toContain('<script>window.print()');
   expect(autorizarSaida(f.a.db,f.intent)).toEqual({ok:true});
   const gateway=criarGateway({agora:()=>AGORA,store:memoriaIdempotencia(),auditar:()=>{},executores:{IMPRIMIR:f.executor}});

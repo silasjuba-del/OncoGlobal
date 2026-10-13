@@ -1,23 +1,22 @@
-/** E2E — consulta oncológica completa do caso cólon (câncer de cólon metastático em FOLFIRI).
- *  Cobre Etapas 1–8 do prompt v1.0.0: ambiente real (HTTP+SQLite arquivo+relógio injetado),
+/** Integração E2E HTTP do caso cólon (câncer de cólon metastático em FOLFIRI).
+ *  Exercita o servidor real (HTTP+SQLite arquivo+relógio injetado),
  *  kit documental com bytes reais (PDF digital + PNG escaneado + PDF bitmap com OCR local),
  *  vínculo explícito, revisão, triagem pré-ciclo, Flash, assinatura, reimpressão e reabertura.
- *  WRITE_SET desta tarefa: este arquivo + fixtures/colon-e2e.ts. Nenhum código de produto alterado. */
+ *  A prova da interface em navegador é separada desta bateria HTTP. */
 import { afterEach, describe, expect, it } from "vitest";
-import { rmSync } from "node:fs";
 import { listarEventos } from "../../src/kernel/ledger/ledger.js";
 import { lerDraft } from "../../src/kernel/ledger/drafts.js";
 import {
   DATA_CLINICA, ENCONTRO_ANTERIOR, ENCONTRO_ATUAL, PACIENTE_ID,
   SENHA, TUMOR_LOT_ID, abrirAmbienteColon, cadastrarCasoColon, criarDiretorioColon,
-  kitColon, pngEscaneado, triagemColon, type FonteKit,
+  kitColon, pngEscaneado, pdfBitmap, removerDiretorioColon, sha256, triagemColon, type FonteKit,
 } from "./fixtures/colon-e2e.js";
 
 const dirs: string[] = [];
 const ambientes: Array<Awaited<ReturnType<typeof abrirAmbienteColon>>> = [];
 afterEach(async () => {
   for (const amb of ambientes.splice(0)) await amb.close();
-  for (const dir of dirs.splice(0)) rmSync(dir, { recursive: true, force: true });
+  for (const dir of dirs.splice(0)) removerDiretorioColon(dir);
 });
 
 async function novoCaso() {
@@ -57,8 +56,9 @@ async function vincularFonte(amb: Awaited<ReturnType<typeof abrirAmbienteColon>>
 
 /** Confirma um fato já vinculado: exibe (preparar-revisão) e só então grava. */
 async function confirmarFato(amb: Awaited<ReturnType<typeof abrirAmbienteColon>>, draftId: string,
-  expectedRevision: number, factId: string, operationId: string) {
-  const selecao = { draftId, expectedRevision, patientId: PACIENTE_ID, factIds: [factId], operationId };
+  expectedRevision: number, factId: string | null, operationId: string, incluirTextoOriginal = false) {
+  const selecao = { draftId, expectedRevision, patientId: PACIENTE_ID, factIds: factId ? [factId] : [], operationId,
+    ...(incluirTextoOriginal ? { incluirTextoOriginal: true } : {}) };
   const preview = await amb.request<{ codigo: string; comprovanteExibicao: { documentId: string; documentVersion: number; conteudoHash: string } }>(
     "/consulta/rascunho/preparar-revisao", selecao);
   expect(preview.status).toBe(200);
@@ -70,6 +70,28 @@ async function confirmarFato(amb: Awaited<ReturnType<typeof abrirAmbienteColon>>
 }
 
 describe("E2E F1 · caso cólon metastático em FOLFIRI (sintético, HTTP real, SQLite arquivo)", () => {
+  it("data somente no cabeçalho não é atribuída ao resultado pela revisão genérica", async () => {
+    const amb = await novoCaso();
+    await selecionarContexto(amb);
+    const bytes = pdfBitmap(["09/10/2026 - Laboratorio (sintetico)", "Hemoglobina 8,2 g/dL."]);
+    const fonte: FonteKit = { id: "upload-colon-data-pendente", sourceId: "colon-data-pendente",
+      sourceType: "medical_note", tipo: "PDF", bytes, sha256: sha256(bytes), dataClinica: DATA_CLINICA };
+    const up = await uploadFonte(amb, fonte);
+    expect(up.status).toBe(201);
+    const vinculo = await vincularFonte(amb, up.data.draftId, fonte.sourceId, up.data.revision);
+    expect(vinculo.status).toBe(200);
+    const facts = (lerDraft(amb.db, up.data.draftId)!.payload as { state: { facts: Array<{
+      id: string; domain: string; date?: string; requiresConfirmation: boolean;
+    }> } }).state.facts;
+    const hb = facts.find(f => f.domain === "lab")!;
+    expect(hb).toBeDefined(); expect(hb.date).toBeUndefined(); expect(hb.requiresConfirmation).toBe(true);
+    const revista = await confirmarFato(amb, up.data.draftId, vinculo.data.revision, hb.id, "colon-data-pendente-revisao");
+    expect(revista.confirmado).toMatchObject({ status: 200, data: { codigo: "GRAVADA" } });
+    const eventos = listarEventos(amb.db, PACIENTE_ID).filter(e => e.operationId === "colon-data-pendente-revisao");
+    expect(eventos.some(e => e.tipo === "FATO")).toBe(false);
+    expect(eventos.some(e => e.tipo === "ReviewDecision" && JSON.stringify(e.payload).includes(hb.id))).toBe(true);
+  });
+
   it("Etapas 1–8: kit documental → revisão → triagem → Flash assinada → reimpressão → reabertura sem duplicação", async () => {
     const amb = await novoCaso();
     // ETAPA 1 — contexto do ambiente e do caso
@@ -119,7 +141,7 @@ describe("E2E F1 · caso cólon metastático em FOLFIRI (sintético, HTTP real, 
       rascunhos.set(fonte.sourceId, { ...r, revision: vinculo.data.revision });
     }
 
-    // candidatos: diagnóstico (A), laboratório Hb (C); B (diarreia/neutropenia/febre) permanece texto
+    // Candidatos estruturados: diagnóstico (A), Hb (C). Relatos não extraídos exigem seleção literal.
     const fatosA = ((lerDraft(amb.db, rascunhos.get("e2e-colon-historico")!.draftId)!.payload) as { state: { facts: Array<{ id: string; domain: string; value: unknown; rawEvidence: string; date?: string }> } }).state.facts;
     const diagnostico = fatosA.find((f) => f.domain === "diagnosis");
     expect(diagnostico).toBeDefined();
@@ -132,8 +154,8 @@ describe("E2E F1 · caso cólon metastático em FOLFIRI (sintético, HTTP real, 
     expect(JSON.stringify(hb!.value)).toContain("8,2");
     expect(JSON.stringify(hb!.value)).toContain("g/dL");
     expect(JSON.stringify(hb!.value)).not.toContain("82");
-    // a data clínica 09/10/2026 fica preservada na fonte (página 1 do laboratório)
-    expect(hb!.date ?? null).toBeNull(); // OCR por página: data na linha-cabeçalho, não no fato
+    // A fonte positiva associa a data ao resultado; não herda data apenas do cabeçalho.
+    expect(hb!.date).toBe(DATA_CLINICA);
     expect(textoOcr("e2e-colon-laboratorio")).toContain("09/10/2026");
     // Resultados esperados 4/8: sem fato de ANC e sem nenhum fato de biomarcador inventado
     const todosFatos = [...fatosA, ...fatosC,
@@ -144,37 +166,49 @@ describe("E2E F1 · caso cólon metastático em FOLFIRI (sintético, HTTP real, 
 
     // revisão médica confirma apenas o conteúdo exibido
     const revDiag = await confirmarFato(amb, rascunhos.get("e2e-colon-historico")!.draftId,
-      rascunhos.get("e2e-colon-historico")!.revision, diagnostico!.id, "e2e-colon-op-diagnostico");
+      rascunhos.get("e2e-colon-historico")!.revision, diagnostico!.id, "e2e-colon-op-diagnostico", true);
     expect(revDiag.confirmado).toMatchObject({ status: 200, data: { codigo: "GRAVADA" } });
+    const revTexto = await confirmarFato(amb, rascunhos.get("e2e-colon-avaliacao")!.draftId,
+      rascunhos.get("e2e-colon-avaliacao")!.revision, null, "e2e-colon-op-avaliacao-literal", true);
+    expect(revTexto.confirmado).toMatchObject({ status: 200, data: { codigo: "GRAVADA" } });
+    const eventosTexto = listarEventos(amb.db, PACIENTE_ID).filter(e => e.operationId === "e2e-colon-op-avaliacao-literal");
+    expect(eventosTexto).toHaveLength(1);
+    expect(eventosTexto[0]!.tipo).toBe("ReviewDecision");
     const revHb = await confirmarFato(amb, rascunhos.get("e2e-colon-laboratorio")!.draftId,
       rascunhos.get("e2e-colon-laboratorio")!.revision, hb!.id, "e2e-colon-op-hb");
     expect(revHb.confirmado).toMatchObject({ status: 200, data: { codigo: "GRAVADA" } });
-    // o diagnóstico EXPLICIT vira FATO; o laboratório normalizado (8,2→8.2) vira decisão
-    // médica de confirmação (ReviewDecision acao CONFIRMAR) — proveniência DOCUMENT_CONFIRMED
-    const fatoDiagnostico = listarEventos(amb.db, PACIENTE_ID).filter((e) => e.tipo === "FATO");
-    expect(fatoDiagnostico).toHaveLength(1);
-    const confirmacoes = listarEventos(amb.db, PACIENTE_ID).filter((e) => e.tipo === "ReviewDecision"
-      && JSON.stringify(e.payload).includes('"acao":"CONFIRMAR"')
-      && JSON.stringify(e.payload).includes("Hemoglobina"));
-    expect(confirmacoes.length).toBeGreaterThanOrEqual(1);
+    const fatosConfirmados = listarEventos(amb.db, PACIENTE_ID).filter((e) => e.tipo === "FATO");
+    expect(fatosConfirmados).toHaveLength(2);
+    const laboratorioConfirmado = fatosConfirmados.find(e => e.operationId === "e2e-colon-op-hb");
+    expect(laboratorioConfirmado?.payload).toMatchObject({ data: {
+      valor: { marker: "Hemoglobina", value: 8.2, unit: "g/dL" }, factDate: DATA_CLINICA,
+    } });
     // proveniência: registros carregam o paciente e o encontro corretos
-    for (const evento of [...fatoDiagnostico, ...confirmacoes]) {
+    for (const evento of fatosConfirmados) {
       expect(evento.patientId).toBe(PACIENTE_ID);
       expect(evento.encounterId).toBe(ENCONTRO_ATUAL);
     }
+    const leituraHb = await amb.request<Record<string, any>>("/consulta/carregar", {
+      patientId: PACIENTE_ID, encounterId: ENCONTRO_ATUAL, tumorLotId: TUMOR_LOT_ID,
+    });
+    expect(leituraHb.status).toBe(200);
+    expect(leituraHb.data.retrato.fatos).toEqual(expect.arrayContaining([
+      expect.objectContaining({ ref: expect.objectContaining({ eventId: laboratorioConfirmado!.eventId }) }),
+    ]));
+    expect(leituraHb.data.visaoIntegrada.lacunas.some((l: { codigo: string }) => l.codigo === "LAB_AUSENTE")).toBe(false);
 
     // ETAPA 5 (parcial, pré-conduta) — triagem pré-ciclo com os achados do caso
     const triagem = triagemColon();
     const salvaTriagem = await amb.request<Record<string, any>>("/consulta/salao/triagem", { triagem, expectedRevision: null });
     expect(salvaTriagem.status).toBe(200);
     expect(salvaTriagem.data.codigo).toBe("RASCUNHO_SALVO");
-    // projeção do salão: Hb 8,2 g/dL está no limite (regra "igual ao limite passa"), ANC e
-    // febre ausentes, CTCAE 2 < 3 → nenhum corte; ANC segue PENDENTE, nunca VERDE por ausência
+    // Valores informados não acionam cortes no ruleset da fixture. ANC e temperatura numérica
+    // ausentes continuam PENDENTES; o relato "sem febre" não fabrica uma temperatura.
     const cartoes = salvaTriagem.data.cartoes as Array<{ entrada: { patientId: string }; temCorte: boolean;
       destino: string; emergencia: boolean }>;
     const cartao = cartoes.find((c) => c.entrada.patientId === PACIENTE_ID);
     expect(cartao).toBeDefined();
-    expect(cartao!.temCorte).toBe(false); // Hb 8,2 no limite passa; CTCAE 2 < 3; sem febre
+    expect(cartao!.temCorte).toBe(false);
     expect(cartao!.emergencia).toBe(false);
     expect(cartao!.destino).toBe("FILA_MEDICO"); // ANC pendente não vira corte nem liberação automática
     // Resultado esperado 7: sem corte clínico, a liberação do salão é recusada (nada de "liberar assim mesmo")
@@ -227,6 +261,11 @@ describe("E2E F1 · caso cólon metastático em FOLFIRI (sintético, HTTP real, 
     expect(textoEvolucao).toContain("câncer de cólon metastático");
     expect(textoEvolucao).toContain("8,2");
     expect(textoEvolucao).toContain("g/dL");
+    expect(textoEvolucao).toContain("FOLFIRI em curso");
+    expect(textoEvolucao).toContain("não disponíveis no material apresentado");
+    expect(textoEvolucao).toMatch(/diarreia CTCAE grau 2/i);
+    expect(textoEvolucao).toMatch(/Neutropenia referida; paciente sem febre/i);
+    expect(textoEvolucao).not.toMatch(/neutropenia febril|MSS|pMMR|wild-type/i);
     // nenhum registro de administração surge da assinatura; nenhuma decisão de próximo ciclo automática
     expect(listarEventos(amb.db, PACIENTE_ID).some((e) => /ADMINISTRACAO|LIBERACAO_CICLO/.test(e.tipo))).toBe(false);
     // APAC permanece PENDENTE sem código inventado
@@ -358,11 +397,10 @@ describe("E2E F1 · caso cólon metastático em FOLFIRI (sintético, HTTP real, 
         patientId: PACIENTE_ID, factIds: [diag.id], operationId: "e2e-colon-op-replay" });
     expect(previewConflito.status).toBe(409);
     expect(previewConflito.data.codigo).toBe("CHAVE_IDEMPOTENCIA_REUTILIZADA");
-    // a confirmação do laboratório normalizado grava decisões médicas (ReviewDecision acao
-    // CONFIRMAR), não FATO direto; o REPLAY não duplicou nenhum evento da operação
+    // Laboratório explícito e datado vira FATO; o REPLAY não duplica fato nem revisão do resumo.
     const daOperacao = listarEventos(amb.db, PACIENTE_ID).filter((e) => e.operationId === "e2e-colon-op-replay");
     expect(daOperacao).toHaveLength(2); // review-fact + review-summary
-    expect(daOperacao.some((e) => e.tipo === "ReviewDecision" && JSON.stringify(e.payload).includes('"acao":"CONFIRMAR"'))).toBe(true);
+    expect(daOperacao.filter((e) => e.tipo === "FATO")).toHaveLength(1);
   });
 
   it("ataque 12: instrução maliciosa no documento não executa nada e permanete só como texto", async () => {

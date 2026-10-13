@@ -100,11 +100,16 @@ describe("S2 Retrato longitudinal", () => {
     expect(r.resumo[0]?.fatos[0]).toEqual(r.fatos[0]?.ref);
   });
   it("não altera documento assinado ou fato de snapshot histórico após correção", () => {
-    const antigo = evento("assinado", "TNM", {revisao: "ASSINADO", criadoEm: "2026-10-01T12:00:00-03:00"});
+    const antigo = evento("assinado", "TNM", {revisao: "ASSINADO", criadoEm: "2026-10-01T12:00:00-03:00",
+      payload: {data: {campo: "TNM", valor: "cT2", dataClinica: "2026-10-01"}}});
+    antigo.fontes = antigo.fontes.map(f => ({...f, dataClinica: "2026-10-01", dataCaptura: antigo.criadoEm}));
     const antes = JSON.stringify(antigo);
     const antigoRetrato = projetarRetrato([antigo], {...contexto, agora: "2026-10-02T12:00:00-03:00"});
     const novo = evento("novo", "TNM", {supersedesEventId: antigo.eventId});
     const repetido = projetarRetrato([antigo,novo], {...contexto, agora: "2026-10-02T12:00:00-03:00"});
+    expect(antigoRetrato.fatos.map(f=>f.ref.eventId)).toEqual(["assinado"]);
+    expect(repetido.fatos.map(f=>f.ref.eventId)).toEqual(["assinado"]);
+    expect(repetido.fatos.some(f=>f.ref.eventId === "novo")).toBe(false);
     expect(antigoRetrato).toEqual(repetido); expect(JSON.stringify(antigo)).toBe(antes);
   });
   it("tempo futuro não entra no presente; duplicata não elege valor", () => {

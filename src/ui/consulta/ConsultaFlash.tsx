@@ -63,7 +63,7 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
       </section>
       <section className="flash-linha" aria-label="Resultados laboratoriais"><h3>LABS <small>· últimos resultados</small></h3><div className="flash-resultados">{props.laboratorios?.length ? props.laboratorios.map((e, i) => <span key={`${e.nome}-${i}`} title={situacao[e.situacao]}>{e.nome}: {e.fraseLaudo || "PENDENTE"} <small>({e.data}) · {situacao[e.situacao]}</small></span>) : <span>PENDENTE</span>}</div></section>
       <section className="flash-linha" aria-label="Tratamento vigente"><h3>QT</h3><p><strong>{presente(c.tratamentoAtual)} · ciclo {presente(c.cicloDia)}</strong> <small>Previsto · último administrado: {presente(c.ultimoAdministrado)}</small></p></section>
-      <section className="flash-seguranca" aria-label="Toxicidades e alergia"><div><strong>TOX</strong> {props.toxicidades?.length ? props.toxicidades.join(" · ") : "Sem sintomas registrados"}</div><div><strong>ALERGIA</strong> {c.alergia?.trim() || "Não informada"}</div></section>
+      <section className="flash-seguranca" aria-label="Toxicidades e alergia"><div><strong>TOX</strong> {props.toxicidades?.length ? props.toxicidades.join(" · ") : "Informação estruturada PENDENTE"}</div><div><strong>ALERGIA</strong> {c.alergia?.trim() || "Não informada"}</div></section>
       {props.avisos?.length ? <p role="alert" aria-label="Lembretes agrupados">{props.avisos.join("; ")}</p> : null}
       {props.parciaisCumulativos?.length ? <p className="flash-alaranjado" data-cor="ALARANJADO">{props.parciaisCumulativos.join("; ")}</p> : null}
       {props.sugestoesLaboratorio?.length ? <button type="button" onClick={() => setOutrosLab(atual =>

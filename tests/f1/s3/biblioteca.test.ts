@@ -46,7 +46,7 @@ describe('S3 biblioteca offline manual', () => {
   });
   it('não permite declaração de aprovação, PHI, traversal ou dependências ausentes/cíclicas', () => {
     const { biblioteca: b } = ambiente();
-    for (const extra of [{ curadoria: 'ALERTA' }, { texto: 'CPF 123.456.789-10' }, { dependencias: [{ id: 'ausente', versao: '1.0.0' }] }, { dependencias: [{ id: 'item-a', versao: '1.0.0' }] }]) {
+    for (const extra of [{ curadoria: 'ALERTA' }, { texto: 'CPF 000.000.000-00' }, { dependencias: [{ id: 'ausente', versao: '1.0.0' }] }, { dependencias: [{ id: 'item-a', versao: '1.0.0' }] }]) {
       const p = pacote('1.0.0', extra); expect(() => b.importarPacote(p.manifesto, p.ler)).toThrow();
     }
     const p = pacote(); expect(() => b.importarPacote({ ...p.manifesto, itens: [{ ...p.manifesto.itens[0], arquivo: '../item.json' }] }, p.ler)).toThrow();

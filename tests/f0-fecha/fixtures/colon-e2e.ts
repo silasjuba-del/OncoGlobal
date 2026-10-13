@@ -1,12 +1,13 @@
 /** Kit documental + ambiente do E2E do caso cólon (câncer de cólon metastático em FOLFIRI).
  *  Tudo sintético; dados fixos conforme prompt v1.0.0 do caso.
  *  WRITE_SET desta tarefa: este arquivo, e2e-colon-f1.test.ts (mesmo diretório pai). */
-import { mkdtempSync } from "node:fs";
+import { mkdtempSync, realpathSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { basename, dirname, join } from "node:path";
 import { deflateSync } from "node:zlib";
 import { createHash } from "node:crypto";
-import { createCanvas } from "@napi-rs/canvas";
+import { createRequire } from "node:module";
+import { createCanvas, GlobalFonts } from "@napi-rs/canvas";
 import { abrirLedger } from "../../../src/kernel/ledger/db.js";
 import { salvarDraft } from "../../../src/kernel/ledger/drafts.js";
 import { confirmar } from "../../../src/kernel/ledger/writeRouter.js";
@@ -26,6 +27,10 @@ export const TUMOR_LOT_ID = "tumor-e2e-colon-001";
 export const SENHA = "senha-sintetica-e2e-colon-01";
 export const MEDICO_ID = "medico-e2e-colon";
 export const CRM = "CRM-E2E-0000";
+
+if (!GlobalFonts.registerFromPath(createRequire(import.meta.url).resolve(
+  "pdfjs-dist/standard_fonts/LiberationSans-Regular.ttf"), "E2EColon"))
+  throw new Error("FONTE_SINTETICA_COLON_INDISPONIVEL");
 
 export const sha256 = (b: Buffer | string) => createHash("sha256").update(b).digest("hex");
 
@@ -58,7 +63,7 @@ export function pdfDigital(linhas: string[]): Buffer {
 export function pngEscaneado(linhas: string[], altura = 620): Buffer {
   const canvas = createCanvas(1800, altura), ctx = canvas.getContext("2d");
   ctx.fillStyle = "white"; ctx.fillRect(0, 0, 1800, altura);
-  ctx.fillStyle = "black"; ctx.font = "64px Arial"; ctx.textBaseline = "top";
+  ctx.fillStyle = "black"; ctx.font = "64px E2EColon"; ctx.textBaseline = "top";
   let y = 60;
   for (const linha of linhas) { ctx.fillText(linha, 60, y); y += 130; }
   return canvas.toBuffer("image/png");
@@ -68,7 +73,7 @@ export function pngEscaneado(linhas: string[], altura = 620): Buffer {
 export function pdfBitmap(linhas: string[]): Buffer {
   const canvas = createCanvas(1800, 560), ctx = canvas.getContext("2d");
   ctx.fillStyle = "white"; ctx.fillRect(0, 0, 1800, 560);
-  ctx.fillStyle = "black"; ctx.font = "64px Arial"; ctx.textBaseline = "top";
+  ctx.fillStyle = "black"; ctx.font = "64px E2EColon"; ctx.textBaseline = "top";
   let y = 60;
   for (const linha of linhas) { ctx.fillText(linha, 60, y); y += 130; }
   const rgba = ctx.getImageData(0, 0, 1800, 560).data, rgb = Buffer.alloc(1800 * 560 * 3);
@@ -110,7 +115,7 @@ export function kitColon(): FonteKit[] {
   ]);
   const c = pdfBitmap([
     "09/10/2026 - Laboratorio (sintetico)",
-    "Hemoglobina 8,2 g/dL.",
+    "09/10/2026 Hemoglobina 8,2 g/dL.",
     "Neutrofilos: nao informado.",
   ]);
   return [
@@ -173,11 +178,11 @@ export function cadastrarCasoColon(amb: Awaited<ReturnType<typeof abrirAmbienteC
   seed("cad-e2e-colon", "cadastro-evento-e2e-colon-anterior", "Paciente",
     { patientId: PACIENTE_ID, identificadores: [], nome: PACIENTE_NOME, nascimento: null,
       sexoCadastral: "NAO_INFORMADO", divergencia: false }, ENCONTRO_ANTERIOR);
-  seed("ctx-e2e-colon-anterior", "contexto-evento-e2e-colon-anterior", "ContextoOncologico",
-    { texto: "Acompanhamento oncológico em andamento; sem valores clínicos registrados neste encontro." }, ENCONTRO_ANTERIOR);
+  seed("ctx-e2e-colon-anterior", "contexto-evento-e2e-colon-anterior", "AgendaEntry",
+    { patientId: PACIENTE_ID, encounterId: ENCONTRO_ANTERIOR, data: "2026-10-05", horario: "09:00" }, ENCONTRO_ANTERIOR);
   // Encontro atual: chegada para a consulta de reavaliação/pré-ciclo (achados ainda não registrados).
-  seed("chegada-e2e-colon-atual", "chegada-evento-e2e-colon-atual", "ContextoOncologico",
-    { texto: "Consulta de reavaliação/pré-ciclo agendada; achados serão registrados neste encontro." }, ENCONTRO_ATUAL);
+  seed("chegada-e2e-colon-atual", "chegada-evento-e2e-colon-atual", "AgendaEntry",
+    { patientId: PACIENTE_ID, encounterId: ENCONTRO_ATUAL, data: "2026-10-12", horario: "10:00" }, ENCONTRO_ATUAL);
   // Lote tumoral do caso (identificador fixo do prompt; sem CID/histologia inventadas).
   seed("lot-e2e-colon", "lote-evento-e2e-colon", "TumorLot", {
     tumorLotId: TUMOR_LOT_ID, patientId: PACIENTE_ID,
@@ -189,6 +194,13 @@ export function cadastrarCasoColon(amb: Awaited<ReturnType<typeof abrirAmbienteC
 }
 
 export function criarDiretorioColon(): string { return mkdtempSync(join(tmpdir(), "e2e-colon-f1-")); }
+
+export function removerDiretorioColon(dir: string): void {
+  const real = realpathSync(dir), raiz = realpathSync(tmpdir());
+  if (dirname(real).toLowerCase() !== raiz.toLowerCase() || !basename(real).startsWith("e2e-colon-f1-"))
+    throw new Error("TEMP_COLON_FORA_DO_ESCOPO");
+  rmSync(real, { recursive: true, force: true });
+}
 
 /** Campo semáforo mínimo válido para a Triagem (salão preenche fonte/revisão no servidor;
  *  o contrato exige ≥1 fonte nos campos PRESENTE, mesmo que o servidor descarte a lista). */

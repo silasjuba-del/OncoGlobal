@@ -13,8 +13,13 @@ type DocumentoPreview = { documentId: string; documentVersion: number; draftId: 
 type Preview = { preparacao: FlashPreparada; documentos: DocumentoPreview[]; operacao: string };
 
 /** Composição HTTP real. Nenhum cadastro, prescrição ou histórico de demonstração. */
-export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: PortaConsulta; contexto: PedidoBundle; aoAbrirApac?:()=>void }) {
-  const [visao, setVisao] = useState<ConsultaIntegrada | null>(null);
+export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica = 0 }: {
+  porta: PortaConsulta; contexto: PedidoBundle; aoAbrirApac?:()=>void; versaoClinica?: number;
+}) {
+  const [consultaCarregada, setConsultaCarregada] = useState<{
+    visao: ConsultaIntegrada | null; erro: string; porta: PortaConsulta;
+    contexto: PedidoBundle; versao: number; versaoClinica: number;
+  } | null>(null);
   const [flash, setFlash] = useState(false);
   const [preview, setPreview] = useState<Preview | null>(null);
   const [mensagem, setMensagem] = useState("");
@@ -22,28 +27,47 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: Po
   const [versao, setVersao] = useState(0);
   const [impressaoPendente, setImpressaoPendente] = useState<AcaoIntent | null>(null);
   const geracao = useRef(0);
+  const geracaoLeitura = useRef(0);
+  const versaoAtual = useRef({ versao, versaoClinica });
+  versaoAtual.current = { versao, versaoClinica };
   const emCurso = useRef(false);
   const tentativaPreparacao = useRef<{ plano: string; operacao: string } | null>(null);
   const { patientId, encounterId, tumorLotId } = contexto;
+  // Invalida também no render: a visão anterior não parece atual antes de o efeito recarregar.
+  const cargaAtual = consultaCarregada?.porta === porta && consultaCarregada.versao === versao
+    && consultaCarregada.versaoClinica === versaoClinica && consultaCarregada.contexto.patientId === patientId
+    && consultaCarregada.contexto.encounterId === encounterId && consultaCarregada.contexto.tumorLotId === tumorLotId
+    ? consultaCarregada : null;
+  const visao = cargaAtual?.erro ? null : cargaAtual?.visao ?? null;
+  const visaoParaEdicao = consultaCarregada?.porta === porta && consultaCarregada.contexto.patientId === patientId
+    && consultaCarregada.contexto.encounterId === encounterId && consultaCarregada.contexto.tumorLotId === tumorLotId
+    ? consultaCarregada.visao : null;
 
   useEffect(() => {
-    const atual = ++geracao.current;
-    setVisao(null); setMensagem("");
-    emCurso.current = false; setOcupado(false); setPreview(null); setFlash(false);
+    geracao.current++;
+    emCurso.current = false; setOcupado(false); setFlash(false); setImpressaoPendente(null);
     tentativaPreparacao.current = null;
+    return () => { geracao.current++; };
+  }, [porta, patientId, encounterId, tumorLotId]);
+
+  useEffect(() => {
+    const atual = ++geracaoLeitura.current;
+    setMensagem(""); setPreview(null);
+    const carga = { porta, contexto: { patientId, encounterId, tumorLotId }, versao, versaoClinica };
+    const falhar = (erro: string) => setConsultaCarregada((anterior) => ({ ...carga, erro,
+      visao: anterior?.porta === porta && anterior.contexto.patientId === patientId
+        && anterior.contexto.encounterId === encounterId && anterior.contexto.tumorLotId === tumorLotId ? anterior.visao : null }));
     void porta.carregarConsulta(patientId, tumorLotId, encounterId).then((bruto) => {
-      if (atual !== geracao.current) return;
+      if (atual !== geracaoLeitura.current) return;
       const r = ConsultaResposta.safeParse(bruto);
       if (!r.success || r.data.patientId !== patientId || r.data.encounterId !== encounterId
         || r.data.tumorLotId !== tumorLotId) {
-        setMensagem("Consulta completa PENDENTE: contexto ou dados ainda indisponíveis."); return;
+        falhar("Consulta completa PENDENTE: contexto ou dados ainda indisponíveis."); return;
       }
-      setVisao(r.data);
-    }, () => { if (atual === geracao.current) setMensagem("Não foi possível carregar a consulta persistida."); });
-    return () => { geracao.current++; };
-  }, [porta, patientId, encounterId, tumorLotId, versao]);
-
-  useEffect(() => { setImpressaoPendente(null); }, [patientId, encounterId, tumorLotId]);
+      setConsultaCarregada({ ...carga, visao: r.data, erro: "" });
+    }, () => { if (atual === geracaoLeitura.current) falhar("Não foi possível carregar a consulta persistida."); });
+    return () => { geracaoLeitura.current++; };
+  }, [porta, patientId, encounterId, tumorLotId, versao, versaoClinica]);
 
   async function executar(acao: (atual: number) => Promise<void>) {
     if (emCurso.current) return;
@@ -64,26 +88,29 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: Po
         expectedRevision: visao.flash?.rascunho?.revision ?? null });
       if (atual !== geracao.current) return;
       setMensagem("Rascunho salvo; sem assinatura.");
-      setVisao((v) => v?.flash ? { ...v, flash: { ...v.flash,
-        rascunho: { draftId: resultado.draftId, revision: resultado.revision, plano } } } : v);
+      setConsultaCarregada((carregada) => carregada?.visao?.flash ? { ...carregada,
+        visao: { ...carregada.visao, flash: { ...carregada.visao.flash,
+          rascunho: { draftId: resultado.draftId, revision: resultado.revision, plano } } } } : carregada);
     });
   }
 
   function preparar(plano: PlanoFlash) {
     if (!porta.prepararFinalizacaoFlash) return;
     void executar(async (atual) => {
-      const chavePlano = JSON.stringify([patientId, encounterId, tumorLotId, plano]);
+      const chavePlano = JSON.stringify([patientId, encounterId, tumorLotId, versaoClinica, plano]);
       // Uma resposta perdida não cria outro conjunto de documentos ao repetir o mesmo plano.
       if (tentativaPreparacao.current?.plano !== chavePlano)
         tentativaPreparacao.current = { plano: chavePlano, operacao: crypto.randomUUID() };
       const { operacao } = tentativaPreparacao.current;
       const preparacao = await porta.prepararFinalizacaoFlash!({ patientId, encounterId, tumorLotId,
         plano, idempotencyKey: operacao });
-      if (atual !== geracao.current) return;
+      if (atual !== geracao.current || versaoAtual.current.versao !== versao
+        || versaoAtual.current.versaoClinica !== versaoClinica) return;
       if (!preparacao.registros.length || !preparacao.documentos.length) throw new Error("DOCUMENTOS_AUSENTES");
       const bundle = await porta.exibirBundle({ patientId, encounterId, tumorLotId,
         draftIds: preparacao.registros.map((r) => r.id) });
-      if (atual !== geracao.current) return;
+      if (atual !== geracao.current || versaoAtual.current.versao !== versao
+        || versaoAtual.current.versaoClinica !== versaoClinica) return;
       if (bundle.patientId !== patientId || bundle.encounterId !== encounterId
         || bundle.documentos.length !== preparacao.documentos.length) throw new Error("BUNDLE_DIVERGENTE");
       const documentos = bundle.documentos.map((doc): DocumentoPreview => {
@@ -129,7 +156,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: Po
         destino: null,
         idempotencyKey: `${exibido.operacao}:imprimir`,
       };
-      setImpressaoPendente(intent);
+      setImpressaoPendente(null);
       try {
         const impresso = await porta.acao(intent);
         if (atual !== geracao.current) return;
@@ -137,10 +164,12 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: Po
           setImpressaoPendente(null);
           setMensagem("Documentos assinados. Arquivo HTML imprimível gerado no servidor local. Isso não comprova impressão física.");
         } else {
+          setImpressaoPendente(intent);
           setMensagem("Documentos assinados. A impressão continua pendente; a assinatura não será repetida.");
         }
       } catch {
         if (atual !== geracao.current) return;
+        setImpressaoPendente(intent);
         setMensagem("Documentos assinados. A impressão continua pendente; a assinatura não será repetida.");
       }
       setVersao((v) => v + 1);
@@ -178,14 +207,13 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: Po
 
   const visaoPronta = visao && visao.patientId === patientId && visao.encounterId === encounterId
     && visao.tumorLotId === tumorLotId ? visao : null;
-  if (!visaoPronta) return <section aria-label="Consulta persistida"><p aria-live="polite">
-    {mensagem || "Carregando consulta persistida…"}</p></section>;
-  const propsFlash: ConsultaFlashProps = {
-    ...montarPropsFlash(visaoPronta, null, preparar, salvar),
+  const propsFlash: ConsultaFlashProps | null = visaoParaEdicao ? {
+    ...montarPropsFlash(visaoParaEdicao, null, preparar, salvar),
     ...(aoAbrirApac ? {aoAbrirApac} : {}),
-    ocupado, rotuloFinalizar: "Revisar documentos para assinatura", aoSalvarRascunho: salvar, aoFinalizar: preparar,
-  };
+    ocupado: ocupado || !visaoPronta, rotuloFinalizar: "Revisar documentos para assinatura", aoSalvarRascunho: salvar, aoFinalizar: preparar,
+  } : null;
   return <section aria-label="Consulta persistida">
+    {!visaoPronta ? <p aria-live="polite">{cargaAtual?.erro || "Carregando consulta persistida…"}</p> : <>
     <h2>{visaoPronta.cabecalho.paciente.nome} · consulta local</h2>
     <p>{visaoPronta.hoje} · Dados pendentes: {visaoPronta.cabecalho.pendentes}</p>
     {visaoPronta.alertas.filter((a) => a.presentationOverride).map((a) =>
@@ -204,7 +232,11 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: Po
         if (!porta.avaliarInstrumento) throw new Error("Cálculo autenticado indisponível nesta tela.");
         return porta.avaliarInstrumento({ patientId, encounterId, tumorLotId }, pedido);
       }} />
-    {flash ? <ConsultaFlash {...propsFlash} /> : null}
+    </>}
+    {flash && propsFlash ? <div hidden={!visaoPronta}>
+      <ConsultaFlash key={`${patientId}:${encounterId}:${tumorLotId ?? ""}`} {...propsFlash} />
+    </div> : null}
+    {visaoPronta ? <>
     {preview ? <section aria-label="Conteúdo para assinatura">
       <h3>Confira os documentos desta consulta</h3>
       {preview.documentos.map((doc) => <article key={doc.documentId}>
@@ -224,5 +256,6 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac }: { porta: Po
           <button type="button" disabled={ocupado} onClick={()=>reimprimir(doc)}>Reimprimir versão {doc.documentVersion} · {doc.titulo}</button>
         </article>)}
     </section>
+    </> : null}
   </section>;
 }
