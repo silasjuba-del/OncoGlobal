@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
+import { createHash } from "node:crypto";
 import type { ClinicalEvent } from "../../../src/contracts/operacao.js";
-import { projetarRetrato, type ContextoRetrato } from "../../../src/kernel/projections/retrato/index.js";
+import { hashCanonico, projetarRetrato, type ContextoRetrato } from "../../../src/kernel/projections/retrato/index.js";
 
 const agora = "2026-10-12T12:00:00-03:00";
 const contexto: ContextoRetrato = { patientId: "p", encounterId: "e0", tumorLotId: "t0", agora,
@@ -20,6 +21,17 @@ const fato = (id: string, encounterId: string, factDate: string, extra: Partial<
     valor: { marker: "HB", value: 8.2, unit: "g/dL" } }, extra);
 const ids = (r: ReturnType<typeof projetarRetrato>) => r.fatos.map(f => f.ref.eventId).sort();
 const agendas = () => [agenda("agenda-e0", "e0", "2026-10-05"), agenda("agenda-e1", "e1", "2026-10-12")];
+function assinaturaFlash(id: string, dia: string): [ClinicalEvent, ClinicalEvent] {
+  const em = `${dia}T12:00:00-03:00`, reviewDecisionId = `review-${id}`, operationId = `assinar-${id}`;
+  const corpo = { documentId: `doc-${id}`, documentVersion: 1, origem: "CONSULTA_FLASH", tipoDocumento: "FLASH_EVOLUCAO",
+    contexto: { patientId: "p", encounterId: "e0", tumorLotId: "t0" }, texto: "Documento sintético exibido e assinado" };
+  const documento = evento(`documento-${id}`, "e0", "DOCUMENTO", {}, { operationId, criadoEm: em, revisao: "ASSINADO",
+    payload: { reviewDecisionId, data: { data: corpo, signature: { documentId: corpo.documentId, documentVersion: 1,
+      documentHash: hashCanonico(corpo), reviewDecisionId, serverActorId: "medico-sintetico" } } } });
+  const marco = evento(`fechamento-${id}`, "e0", "ConsultaConfirmada", {}, { operationId, criadoEm: em,
+    payload: { reviewDecisionId, data: { dataClinica: dia, documentoIds: [{ documentId: corpo.documentId, documentVersion: 1 }] } } });
+  return [marco, documento];
+}
 
 describe("S2 corte civil do encontro histórico", () => {
   it("exclui Hb posterior de E0 mesmo com cadastro, agendas e Hb registrados juntos; E1 consome Hb", () => {
@@ -114,5 +126,99 @@ describe("S2 corte civil do encontro histórico", () => {
     expect(ids(r)).toEqual(["hb-legada"]);
     expect(r.integridade).toEqual([expect.objectContaining({ eventoId: "hb-futura", motivo: "TEMPO_CLINICO_FUTURO" })]);
     expect(r.geradoEm).toBe(agora);
+  });
+
+  it("assinaturas correlacionadas em dias diferentes não mudam a data da agenda nem apagam fatos", () => {
+    const entrada = [agenda("agenda", "e0", "2026-10-05"), ...assinaturaFlash("primeira", "2026-10-12"),
+      ...assinaturaFlash("segunda", "2026-10-13"), fato("hb-e0", "e0", "2026-10-05"), fato("depois-consulta", "e0", "2026-10-06")];
+    const ctx = { ...contexto, agora: "2026-10-13T12:00:00-03:00" };
+    const r = projetarRetrato(entrada, ctx);
+    expect(ids(r)).toEqual(["documento-primeira", "documento-segunda", "hb-e0"]);
+    expect(r.integridade).toEqual([]);
+    expect(projetarRetrato([...entrada].reverse(), ctx)).toEqual(r);
+  });
+
+  it("uma data clínica independente prevalece sobre agenda e assinaturas posteriores", () => {
+    const r = projetarRetrato([agenda("agenda", "e0", "2026-10-12"), consulta("clinica", "e0", "2026-10-05"),
+      ...assinaturaFlash("assinada", "2026-10-12"), fato("hb-e0", "e0", "2026-10-05"), fato("depois-consulta", "e0", "2026-10-06")], contexto);
+    expect(ids(r)).toEqual(["documento-assinada", "hb-e0"]);
+    expect(r.integridade).toEqual([]);
+  });
+
+  it("sem agenda, re-assinatura mantém o teto observacional mais restritivo com pendência explícita", () => {
+    const fatos = [fato("hb-observada", "e0", "2026-10-12"), fato("posterior", "e0", "2026-10-13")];
+    const ctx = { ...contexto, agora: "2026-10-13T12:00:00-03:00" };
+    const antes = projetarRetrato([...assinaturaFlash("primeira", "2026-10-12"), ...fatos], ctx);
+    const depois = projetarRetrato([...assinaturaFlash("primeira", "2026-10-12"), ...assinaturaFlash("segunda", "2026-10-13"), ...fatos], ctx);
+    expect(ids(antes).filter(id => !id.startsWith("documento-"))).toEqual(["hb-observada"]);
+    expect(ids(depois).filter(id => !id.startsWith("documento-"))).toEqual(["hb-observada"]);
+    expect(depois.fatos.find(f => f.ref.eventId === "hb-observada")).toEqual(antes.fatos.find(f => f.ref.eventId === "hb-observada"));
+    expect(depois.integridade).toEqual(["primeira", "segunda"].map(id => ({ eventoId: `fechamento-${id}`, tipo: "ConsultaConfirmada", motivo: "DATA_ENCONTRO_AUSENTE_LIMITE_ASSINATURA" })));
+    expect(depois.geradoEm).toBe(ctx.agora);
+    expect(fatos[0]!.payload).toEqual({ data: { campo: "extracao.lab:HB", domain: "lab", factDate: "2026-10-12", valor: { marker: "HB", value: 8.2, unit: "g/dL" } } });
+  });
+
+  it.each(["agenda", "clinica"])("assinaturas técnicas não resolvem conflito real de %s", origem => {
+    const criar = origem === "agenda" ? agenda : consulta;
+    const r = projetarRetrato([criar("real-a", "e0", "2026-10-05"), criar("real-b", "e0", "2026-10-06"),
+      ...assinaturaFlash("assinada", "2026-10-12"), fato("hb-e0", "e0", "2026-10-05")], contexto);
+    expect(r.fatos).toEqual([]);
+    expect(r.integridade.map(p => [p.eventoId, p.motivo])).toEqual([["real-a", "DATA_ENCONTRO_AMBIGUA"], ["real-b", "DATA_ENCONTRO_AMBIGUA"]]);
+  });
+
+  it.each(["patientId", "encounterId", "tumorLotId", "operationId", "sem-assinatura", "hash", "autor", "referencia", "conjunto-incompleto"])(
+    "tentativa de fechamento inválida (%s) não vira data clínica nem amplia E0 com somente agenda", falha => {
+      const [marco, documento] = assinaturaFlash("falso", "2026-10-12");
+      const payload = documento.payload as { reviewDecisionId: string; data: { data: Record<string, unknown>; signature: Record<string, unknown> } };
+      if (["patientId", "encounterId", "tumorLotId", "operationId"].includes(falha)) (documento as unknown as Record<string, unknown>)[falha] = "outro-contexto";
+      else if (falha === "sem-assinatura") documento.revisao = "CONFIRMADO";
+      else if (falha === "hash") payload.data.signature.documentHash = "hash-divergente";
+      else if (falha === "autor") payload.data.signature.serverActorId = "outro-medico";
+      else if (falha === "referencia") payload.data.signature.documentVersion = 2;
+      const extras = falha === "conjunto-incompleto" ? [{ ...documento, eventId: "documento-nao-referenciado" }] : [];
+      for (const ancora of [agenda("agenda-e0", "e0", "2026-10-05"), consulta("clinica", "e0", "2026-10-05")]) {
+        const r = projetarRetrato([ancora, marco, documento, ...extras,
+          fato("hb-e0", "e0", "2026-10-05"), fato("hb-depois", "e0", "2026-10-06")], contexto);
+        expect(ids(r)).toContain("hb-e0");
+        expect(ids(r)).not.toContain("hb-depois");
+        expect(r.integridade).toContainEqual({ eventoId: marco.eventId, tipo: "ConsultaConfirmada", motivo: "FECHAMENTO_FLASH_CORRELACAO_INVALIDA" });
+      }
+    });
+
+  it("data adulterada em fechamento reconhecível fica pendente e não vira marco clínico independente", () => {
+    const [marco, documento] = assinaturaFlash("documentada", "2026-10-12");
+    (marco.payload as { data: { dataClinica: string } }).data.dataClinica = "2026-10-06";
+    const r = projetarRetrato([agenda("agenda", "e0", "2026-10-05"), marco, documento,
+      fato("hb-e0", "e0", "2026-10-05"), fato("hb-depois", "e0", "2026-10-06")], contexto);
+    expect(ids(r)).toContain("hb-e0"); expect(ids(r)).not.toContain("hb-depois");
+    expect(r.integridade.some(p => p.eventoId === marco.eventId && p.motivo === "FECHAMENTO_FLASH_CORRELACAO_INVALIDA")).toBe(true);
+  });
+
+  it("identidade determinística reconhece tentativa sem documento; não confere validade nem amplia a agenda", () => {
+    const [marco] = assinaturaFlash("sem-documentos", "2026-10-12");
+    marco.eventId = createHash("sha256").update(`${marco.operationId}:consulta-confirmada`).digest("hex");
+    const r = projetarRetrato([agenda("agenda", "e0", "2026-10-05"), marco,
+      fato("hb-e0", "e0", "2026-10-05"), fato("hb-depois", "e0", "2026-10-06")], contexto);
+    expect(ids(r)).toEqual(["hb-e0"]);
+    expect(r.integridade).toContainEqual({ eventoId: marco.eventId, tipo: "ConsultaConfirmada", motivo: "FECHAMENTO_FLASH_CORRELACAO_INVALIDA" });
+  });
+
+  it("operação com documento adicional de outro paciente não é validada pelo subconjunto do paciente atual", () => {
+    const [marco, documento] = assinaturaFlash("operacao-parcial", "2026-10-12");
+    const estranho = { ...documento, eventId: "documento-outro-paciente", patientId: "outro-paciente" };
+    const r = projetarRetrato([agenda("agenda", "e0", "2026-10-05"), marco, documento, estranho,
+      fato("hb-e0", "e0", "2026-10-05"), fato("hb-depois", "e0", "2026-10-06")], contexto);
+    expect(ids(r)).toContain("hb-e0"); expect(ids(r)).not.toContain("hb-depois");
+    expect(r.integridade).toContainEqual({ eventoId: marco.eventId, tipo: "ConsultaConfirmada", motivo: "FECHAMENTO_FLASH_CORRELACAO_INVALIDA" });
+  });
+
+  it("sem agenda, tentativa inválida não substitui o teto de assinatura válida nem cria horizonte sem suporte", () => {
+    const valida = assinaturaFlash("valida", "2026-10-12"), [invalida] = assinaturaFlash("invalida", "2026-10-13");
+    invalida.eventId = createHash("sha256").update(`${invalida.operationId}:consulta-confirmada`).digest("hex");
+    const fatos = [fato("observado", "e0", "2026-10-12"), fato("posterior", "e0", "2026-10-13")];
+    const ctx = { ...contexto, agora: "2026-10-13T12:00:00-03:00" };
+    const r = projetarRetrato([...valida, invalida, ...fatos], ctx);
+    expect(ids(r)).toContain("observado"); expect(ids(r)).not.toContain("posterior");
+    expect(projetarRetrato([invalida, ...fatos], ctx).fatos).toEqual([]);
   });
 });

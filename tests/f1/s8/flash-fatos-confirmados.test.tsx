@@ -139,6 +139,30 @@ describe("Flash · exibição de fatos de extração confirmados", () => {
     }
   });
 
+  it.each([
+    { caso: "múltiplos positivos", segundo: dx("outro", "neoplasia pulmonar"), fonte: "fonte-outro", literal: "neoplasia pulmonar" },
+    { caso: "positivo e negado", segundo: dx("negado", { raw: "câncer de cólon metastático", negated: true }), fonte: "fonte-negado", literal: "negação ou qualificação preservada" },
+    { caso: "positivo e qualificado", segundo: dx("qualificado", { raw: "neoplasia pancreática", suspeita: true }), fonte: "fonte-qualificado", literal: "neoplasia pancreática" },
+  ])("cabeçalho preenchido não elege diagnóstico diante de $caso", async ({ segundo, fonte, literal }) => {
+    const v = await visao([dx(), segundo]);
+    v.cabecalho.lotes[0]!.topografia = presente("câncer de cólon metastático");
+    const antes = JSON.stringify(v), p = props(v);
+    expect(p.cabecalho.diagnostico).toBe("A CONFERIR — afirmações diagnósticas divergentes");
+    expect(p.avisos?.join(" ")).toContain("sem eleição automática");
+    expect(p.avisos?.join(" ")).toContain("câncer de cólon metastático");
+    expect(p.avisos?.join(" ")).toContain(literal);
+    expect(p.avisos?.join(" ")).toContain("fonte-dx");
+    expect(p.avisos?.join(" ")).toContain(fonte);
+    render(<ConsultaFlash {...p} />);
+    const cabecalho = screen.getByRole("region", { name: "Revisão rápida" });
+    expect(cabecalho.textContent).toContain("A CONFERIR — afirmações diagnósticas divergentes");
+    expect(cabecalho.textContent).not.toContain("câncer de cólon metastático");
+    expect(cabecalho.textContent).not.toContain("neoplasia pulmonar");
+    expect(cabecalho.textContent).not.toContain("neoplasia pancreática");
+    expect(screen.getByLabelText("Lembretes agrupados").textContent).toContain(fonte);
+    expect(JSON.stringify(v)).toBe(antes);
+  });
+
   it.each(["sem neoplasia", "não há neoplasia", "suspeita de neoplasia", "neoplasia?"])(
     "não remove qualificadores do literal %s para afirmar diagnóstico", async literal => {
       const p = props(await visao([dx("literal-qualificado", literal)]));
