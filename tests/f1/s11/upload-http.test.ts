@@ -67,3 +67,13 @@ it("PDF somente bitmap é renderizado e lido pelo OCR local mantendo original e 
   expect(payload.input.rawTranscript).toMatch(/Creatinina/i);expect(payload.original.documento.paginas[0]?.n).toBe(1);expect(payload.original.bytesBase64).toBe(pdf.toString("base64"));
   expect(draft.patientId).toBeNull();
 });
+it("PDF com várias páginas gera recordingId distinto por página e salva rascunho (P1 PR #13)",async()=>{
+  const a=await abrir(),sessao=a.sessoes.obter(a.token)!;
+  const paginas=[{n:1,texto:"08/10/2026 Creatinina 1,2 mg/dL."},{n:2,texto:"08/10/2026 Hemoglobina 11,0 g/dL."},{n:3,texto:"08/10/2026 Plaquetas 210000/mm3."}];
+  const r=await processarUploadLocal({db:a.db,sessoes:a.sessoes,agora:()=>"2026-10-09T12:00:00-03:00",converterUpload:async entrada=>({status:"PRONTO",documento:{id:entrada.id,tipo:entrada.tipo,hash:"hash-multipagina",recebidoEm:entrada.recebidoEm,paginas}})},a.token,sessao,{...pedido,id:"upload-multipagina"});
+  expect(r.status).toBe(201);
+  const draft=lerDraft(a.db,String(r.body.draftId))!;
+  const ids=[(draft.payload as any).state.input.recordingId,...(draft.payload as any).state.input.additionalSources.map((s:{recordingId:string})=>s.recordingId)];
+  expect(new Set(ids).size).toBe(3);expect(ids[0]).toBe("upload-multipagina");
+  expect(a.eventos().filter(e=>e.revisao==="ASSINADO")).toHaveLength(0);
+});

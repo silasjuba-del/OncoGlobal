@@ -1073,11 +1073,16 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       const resumoClinico = consultaRevisada.resumoConfirmadoParaDocumento;
       const contextoS9={patientId:parsed.data.patientId,encounterId:parsed.data.encounterId,tumorLotId:parsed.data.tumorLotId};
       const revisaoS9=revisaoDocumentosFlash(deps,contextoS9,sessao);
-      const capturadoEm=listarEventos(deps.db,parsed.data.patientId).filter(e=>e.encounterId===parsed.data.encounterId)
-        .sort((a,b)=>Date.parse(a.criadoEm)-Date.parse(b.criadoEm))[0]?.criadoEm ?? deps.agora();
       const civilS9=dataCivilDoServico(deps.agora(),"-03:00");
       if(civilS9.estado!=="OK")return reply(409,civilS9.codigo);
       const hashDecisao=hashConteudoExibido({contexto:contextoS9,plano:parsed.data.plano,revisao:revisaoS9});
+      // Captura = momento real da primeira preparação desta decisão; replays recuperam o valor gravado.
+      const sourceIdS9=`flash-decisao:${hashDecisao}`;
+      const capturadoEm=listarDrafts(deps.db,parsed.data.patientId).flatMap(d=>{
+        const fs=d.payload&&typeof d.payload==="object"?(d.payload as Record<string,unknown>).fontes:undefined;
+        return Array.isArray(fs)?fs.flatMap(f=>f&&typeof f==="object"&&(f as Record<string,unknown>).sourceId===sourceIdS9
+          &&typeof (f as Record<string,unknown>).dataCaptura==="string"?[(f as Record<string,unknown>).dataCaptura as string]:[]):[];
+      }).sort((a,b)=>Date.parse(a)-Date.parse(b))[0] ?? deps.agora();
       const resumoRef = `resumo-revisado:${hashConteudoExibido(resumoClinico)}`;
       if("idempotencyKey" in parsed.data) {
         const eventosAssinados=listarEventos(deps.db,parsed.data.patientId).filter(e=>e.tipo==="DOCUMENTO"&&e.revisao==="ASSINADO");
@@ -1101,7 +1106,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       if ("idempotencyKey" in parsed.data && cadastros.length !== 1)
         return reply(409,cadastros.length ? "IDENTIDADE_PACIENTE_AMBIGUA" : "IDENTIDADE_PACIENTE_AUSENTE");
       const identidadePaciente=cadastros[0];
-      const fonteS9={...(identidadePaciente?{identidadePaciente}:{}),identidadeResponsavel:{medicoId:sessao.medicoId,crm:sessao.crm},medicamentos:parsed.data.plano.receitas??[],fonte:{sourceId:`flash-decisao:${hashDecisao}`,classe:"MANUAL" as const,localizador:resumoRef,
+      const fonteS9={...(identidadePaciente?{identidadePaciente}:{}),identidadeResponsavel:{medicoId:sessao.medicoId,crm:sessao.crm},medicamentos:parsed.data.plano.receitas??[],fonte:{sourceId:sourceIdS9,classe:"MANUAL" as const,localizador:resumoRef,
         dataClinica:civilS9.dataCivil,dataCaptura:capturadoEm,versao:"s9-flash@1",contentHash:hashDecisao},
         dataReferencia:civilS9.dataCivil,revisao:revisaoS9};
       const result = "expectedRevision" in parsed.data

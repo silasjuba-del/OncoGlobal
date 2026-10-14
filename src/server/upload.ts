@@ -58,8 +58,9 @@ export async function processarUploadLocal(deps:DepsUpload,token:string,sessao:S
   const rawTranscript=textoIntegral.length>200_000?"":textoIntegral;
   const input={recordingId:p.data.id,sourceId:p.data.sourceId,sourceType:p.data.sourceType,rawTranscript};
   const primeira=leitura.documento.paginas[0];
+  // Cada página é uma entrada do pipeline; recordingId distinto por página evita colisão multifonte.
   const state=executarPipelineExtracao(rawTranscript&&primeira?{...input,rawTranscript:primeira.texto,page:primeira.n,
-    additionalSources:leitura.documento.paginas.slice(1).map(pagina=>({...input,rawTranscript:pagina.texto,page:pagina.n}))}:input);
+    additionalSources:leitura.documento.paginas.slice(1).map(pagina=>({...input,recordingId:`${input.recordingId}#p${pagina.n}`,rawTranscript:pagina.texto,page:pagina.n}))}:input);
   const salvo=salvarDraft(deps.db,{draftId,patientId:null,sourceId:p.data.sourceId,rawRef:`upload-local:${p.data.id}`,
     payload:{kind:"EXTRACAO_RASCUNHO",input,state,alerts:[],alertasRads:[],
       original:{tipo:p.data.tipo,bytesBase64:base64,contentHash,documento:leitura.documento,status:leitura.status,
