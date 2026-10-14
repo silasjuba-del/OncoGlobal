@@ -1,7 +1,25 @@
-import { expect, it, vi } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { ambienteHttp } from "./http-fixture.js";
 import { readFileSync } from "node:fs";
 import { SaidasHttp, respostaHttpValida } from "../../src/contracts/api/saidasHttp.js";
+
+const fonteRotas = readFileSync("src/server/rotas.ts", "utf8");
+const tabelaRotas = fonteRotas.slice(fonteRotas.indexOf("const rota = req.url"), fonteRotas.indexOf("const reply ="));
+const urls = [...new Set([...tabelaRotas.matchAll(/"(\/[a-z/-]+)"/g)].map(m => m[1]!))];
+
+describe("todas as portas públicas preservam método, autenticação e JSON", () => {
+  let ambiente: Awaited<ReturnType<typeof ambienteHttp>>;
+  beforeAll(async () => { ambiente = await ambienteHttp(); });
+  afterAll(async () => { await ambiente.close(); });
+  it.each(urls)("%s recusa método/payload inválidos antes de qualquer efeito", async rota => {
+    expect((await ambiente.request(rota, "GET", "", ambiente.token)).status).toBe(404);
+    if (rota !== "/login") expect((await ambiente.request(rota, "POST", "{}")).status).toBe(401);
+    const r = await ambiente.request(rota, "POST", "{", ambiente.token, "application/json");
+    expect(r.status).toBe(400);
+    expect(JSON.parse(r.body)).toEqual({ codigo: "JSON_INVALIDO" });
+    expect(ambiente.efeitos()).toBe(0);
+  });
+});
 
 it("toda rota pública possui contrato de saída; resposta vazia nunca é sucesso", () => {
   const fonte = readFileSync("src/server/rotas.ts", "utf8");
