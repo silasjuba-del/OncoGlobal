@@ -7,6 +7,7 @@ import { labSeries, weightSeries, type PontoLab } from "../../kernel/projections
 import { avaliarTriagem } from "../../rules/triagem.js";
 import { idadeDoDado, PESO_VALIDADE_DIAS } from "../../rules/prescricao/index.js";
 import { DataCivil } from "../../contracts/base.js";
+import type { CriterioElegibilidade } from "../../contracts/api/criterioElegibilidade.js";
 import { semaforoInteracoes, type RulesetSemaforo } from "../../rules/semaforoInteracoes.js";
 import type { CatalogoInteracoes } from "../../contracts/f0c/interacoes.js";
 import { elegibilidadeCiclo, type SinalElegibilidade } from "../../rules/elegibilidadeCiclo.js";
@@ -105,7 +106,24 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const avisosCriticos = criticos.filter(c=>c.estado === "AVISO").map(c=>`${c.analito}: ${c.medida!.valor} ${c.medida!.unidade}`);
   const anc = ultimoLab(labs,"neutrofilos",i.hoje), plq = ultimoLab(labs,"plaquetas",i.hoje);
   const portaPendentes: string[] = [], portaAlertas: string[] = [];
+  const criteriosPorta: CriterioElegibilidade[] = [];
+  const regraPorta = rs.success ? { id: rs.data.header.id, versao: rs.data.header.versao, fonte: rs.data.header.fonte.referencia } : null;
   for (const [nome,p,minimo] of [["neutrófilos",anc,1500],["plaquetas",plq,100000]] as const) {
+    const id = key(nome);
+    const candidatos = labs.filter(l => analito(l.campo) === id && Date.parse(l.data) <= horizonte);
+    const ultimaData = Math.max(-Infinity, ...candidatos.map(l => Date.parse(l.data)));
+    const ultimos = candidatos.filter(l => Date.parse(l.data) === ultimaData);
+    const conflito = new Set(ultimos.map(l => `${l.valor}|${l.unidade}`)).size > 1;
+    const fontes = (p ? [p] : ultimos).map(l => ({ eventId: l.eventId, sourceId: l.sourceId, medidoEm: l.data }));
+    const unidadeValida = p && ["/µL","/uL","/μL"].includes(p.unidade);
+    criteriosPorta.push({ schema: "CriterioElegibilidade@1", id: `${id}.limiar`,
+      estado: conflito ? "CONFLITO" : !unidadeValida ? "AUSENTE" : p.valor < minimo ? "NAO_ATENDE" : "ATENDE",
+      texto: `${nome}: mínimo do serviço ${minimo}/µL`, fontes,
+      regra: rs.success && (nome === "neutrófilos" ? rs.data.cortes.ancMin : rs.data.cortes.plqMin) === minimo ? regraPorta : null });
+    criteriosPorta.push({ schema: "CriterioElegibilidade@1", id: `${id}.validade`,
+      estado: conflito ? "CONFLITO" : p && avaliarValidadeExame("HEMOGRAMA",p.data,i.agora).estado === "VALIDO" ? "ATENDE" : "AUSENTE",
+      // A função de validade usa sua própria política; não atribuir seu prazo ao ruleset de triagem.
+      texto: `${nome}: validade do hemograma`, fontes, regra: null });
     if (!p || !["/µL","/uL","/μL"].includes(p.unidade)) { portaPendentes.push(`${nome}: dado/unidade ausente ou em conflito`); continue; }
     if (p.valor < minimo) portaAlertas.push(`${nome} abaixo do corte do serviço (${minimo}/µL)`);
     if (avaliarValidadeExame("HEMOGRAMA",p.data,i.agora).estado !== "VALIDO") portaPendentes.push(`${nome}: validade não confirmada`);
@@ -135,7 +153,7 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const elegibilidade = elegibilidadeCiclo({ plaquetas:i.plaquetas,
     ...(i.condicionais ? {condicionais:i.condicionais} : {}),
     ...(i.intervalo ? {intervalo:i.intervalo} : {}),
-    portaCiclo: sinal(portaAlertas.length ? "VERMELHO" : portaPendentes.length ? "PENDENTE" : "VERDE", [...portaAlertas,...portaPendentes]),
+    portaCiclo: { ...sinal(portaAlertas.length ? "VERMELHO" : portaPendentes.length ? "PENDENTE" : "VERDE", [...portaAlertas,...portaPendentes]), criterios: criteriosPorta },
     triagem: avalTriagem ? sinal(avalTriagem.cortes.length ? "VERMELHO" : avalTriagem.pendentes.length ? "PENDENTE" : "VERDE",
       [...avalTriagem.cortes,...avalTriagem.pendentes].map(m=>m.texto)) : pend("triagem ausente ou ambígua"),
     ctcae, interacoes:sinalInteracoes,

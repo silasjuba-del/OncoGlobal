@@ -9,6 +9,13 @@ const base:EntradaAvaliacaoConsulta={eventos:[],patientId:paciente.patientId,tum
 function evento(id:string,tipo:string,data:unknown):ClinicalEvent {return {eventId:id,operationId:`op-${id}`,eventIndex:0,patientId:base.patientId,encounterId:base.encounterId,tumorLotId:null,tipo,payload:{data},fontes:[fonteSintetica("fonte-medida")],revisao:"CONFIRMADO",criadoEm:"2026-10-10T10:00:00-03:00",criadoPor:{tipo:"SESSAO",id:"medico"},supersedesEventId:null};}
 const lab=(id:string,campo:string,valor:number,data="2026-10-09T10:00:00-03:00",unidade="mmol/L")=>evento(id,"LabResult",{campo,valor,data,unidade,sourceId:"fonte-medida"});
 describe("auditoria clínica adversarial da composição",()=>{
+ it("critério reprovado não esconde plaquetas ausentes na porta do ciclo",()=>{
+  const r=avaliarConsulta({...base,eventos:[lab("anc","neutrofilos",1000,"2026-10-09T10:00:00-03:00","/uL")]});
+  expect(r.elegibilidade).toMatchObject({cor:"VERMELHO",criterios:expect.arrayContaining([
+   expect.objectContaining({schema:"CriterioElegibilidade@1",id:"neutrofilos.limiar",estado:"NAO_ATENDE"}),
+   expect.objectContaining({schema:"CriterioElegibilidade@1",id:"plaquetas.limiar",estado:"AUSENTE"}),
+  ])});
+ });
  it("Na146 atual gera aviso D06 mas não inventa emergência",()=>{
   const r=avaliarConsulta({...base,eventos:[lab("na","sodio",146)]});
   expect(r.criticos.find(c=>c.analito==="NA")?.estado).toBe("AVISO");

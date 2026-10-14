@@ -1,5 +1,6 @@
 // W11-H13 · elegibilidade de ciclo: cruzamento puro. Verde nunca é liberação; ausente nunca é verde; sem amarelo.
 import { describe, expect, it } from "vitest";
+import { CriterioElegibilidade } from "../../src/contracts/api/criterioElegibilidade.js";
 import {
   elegibilidadeCiclo,
   type EntradasElegibilidadeCiclo,
@@ -28,6 +29,15 @@ function todasVerdes(): EntradasElegibilidadeCiclo {
 const PALAVRAS_PROIBIDAS = /liber|aprov|apto/i;
 
 describe("elegibilidade de ciclo (cruzamento sem amarelo)", () => {
+  it.each([["ATENDE", "VERDE"], ["NAO_ATENDE", "VERMELHO"], ["AUSENTE", "PENDENTE"], ["CONFLITO", "PENDENTE"]] as const)(
+    "critério %s deriva %s mesmo quando o agregado recebido está verde", (estado, cor) => {
+      const criterio = CriterioElegibilidade.parse({ schema: "CriterioElegibilidade@1", id: "criterio-sintetico", estado,
+        texto: "Critério sintético", fontes: [], regra: null });
+      const saida = elegibilidadeCiclo({ ...todasVerdes(), portaCiclo: { ...verde, criterios: [criterio] } });
+      expect(saida.cor).toBe(cor);
+      expect(saida.criterios).toEqual([criterio]);
+      expect(saida.coberturaCriterios?.pendentes).toBe(estado === "AUSENTE" || estado === "CONFLITO" ? 1 : 0);
+    });
   it("todas verdes resultam em VERDE com rótulo neutro, sem liberação", () => {
     const saida = elegibilidadeCiclo(todasVerdes());
     expect(saida.cor).toBe("VERDE");
