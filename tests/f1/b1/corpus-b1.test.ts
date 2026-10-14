@@ -39,7 +39,21 @@ describe("F1-B1 validador do lote clínico", () => {
     const p: string[] = verificarB1(d);
     expect(p.some(x => x.includes("adrenal-cca-edp-sem-mitotano") && x.includes("D-F1-29"))).toBe(true);
   }));
-  it("adversarial: decisão trocada no objeto apontado falha", () => usar(d => {
+  it("thread #17: protocolo proposto sem mitotano não pode afirmar fornecimento de mitotano (D-F1-29)", () => {
+    const real = JSON.parse(readFileSync(join(REAL, ADRENAL), "utf8"));
+    const sem = real.tratamento.protocolos.find((p: any) => p.id === "adrenal-cca-edp-sem-mitotano");
+    expect(JSON.stringify({ ...sem, fonte: undefined, fonteVia: undefined })).not.toMatch(/mitotano[^"]*forneci/i);
+    usar(d => {
+      mexer(d, ADRENAL, j => { j.tratamento.protocolos.find((p: any) => p.id === "adrenal-cca-edp-sem-mitotano").sus.observacao += " Mitotano dentro da APAC paliativa (fornecimento pelo serviço)."; });
+      expect(verificarB1(d).some((x: string) => x.includes("afirma fornecimento de mitotano"))).toBe(true);
+    });
+    usar(d => {
+      // citação literal da fonte continua permitida
+      mexer(d, ADRENAL, j => { j.tratamento.protocolos.find((p: any) => p.id === "adrenal-cca-edp-sem-mitotano").fonte.trecho += " mitotano com fornecimento"; });
+      expect(verificarB1(d).some((x: string) => x.includes("afirma fornecimento"))).toBe(false);
+    });
+  });
+  it("adversarial: decisão trocada no objeto apontado (5HT3) falha", () => usar(d => {
     mexer(d, SUPORTE, j => { j.itens.find((i: any) => i.id === "SUP-NVQ-ALTO-5HT3").politicaLocal.decisao = "D-F1-3"; });
     expect(verificarB1(d).some((x: string) => x.includes("SUP-NVQ-ALTO-5HT3") && x.includes("D-F1-30"))).toBe(true);
   }));

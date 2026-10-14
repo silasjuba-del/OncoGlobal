@@ -72,7 +72,29 @@ export function verificarB1(raiz) {
     const caminho = join(raiz, String(arquivo));
     if (!existsSync(caminho)) continue;
     let json; try { json = JSON.parse(readFileSync(caminho, "utf8")); } catch { continue; }
+    // fármacos indisponíveis no mercado declarados neste arquivo (D-F1-29)
+    const indisponiveis = [...new Set([...objetos(json)]
+      .filter((o) => typeof o.droga === "string" && o.disponibilidadeMercado?.estado === "INDISPONIVEL")
+      .map((o) => o.droga.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()))];
     for (const o of objetos(json)) {
+      // protocolo proposto não afirma fornecimento de fármaco indisponível (D-F1-29); citação literal de fonte (fonte*) é preservada
+      if (o.propor === true && Array.isArray(o.drogas) && indisponiveis.length) {
+        const textos = [];
+        const coletar = (v, chave) => {
+          if (typeof chave === "string" && /^fonte/i.test(chave)) return;
+          if (typeof v === "string") textos.push(v);
+          else if (Array.isArray(v)) v.forEach((x) => coletar(x));
+          else if (v && typeof v === "object") for (const [k, x] of Object.entries(v)) coletar(x, k);
+        };
+        coletar(o);
+        for (const t of textos) {
+          // por frase: "fornecimento pelo CACON" e "esquema sem mitotano" em frases distintas não são afirmação de fornecimento
+          for (const frase of t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(/[.;]\s+/)) {
+            const droga = indisponiveis.find((d) => frase.includes(d) && /forneci/.test(frase));
+            if (droga) problemas.push(`${arquivo}: protocolo proposto ${o.id ?? "?"} afirma fornecimento de ${droga}, indisponível (D-F1-29)`);
+          }
+        }
+      }
       // lembrete nunca gera pedido nem trava (D-F1-32)
       if (o.tipo === "LEMBRETE" && (o.gerarPedido !== false || o.bloqueia !== false))
         problemas.push(`${arquivo}: lembrete ${o.id ?? "?"} deve ter gerarPedido=false e bloqueia=false`);
