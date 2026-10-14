@@ -104,13 +104,13 @@
     "exames": [],
     "gruposConduta": [
       {
-        "grupo": "baixo risco (escore ≤6)",
-        "conduta": "monoterapia (MTX+FA ou dactinomicina)",
+        "grupo": "baixo risco (escore FIGO 0–4, D-F1-50; eviQ/Lok ≤6 como variante)",
+        "conduta": "monoterapia (MTX 50 mg fixa + folínico 7,5 mg, ou dactinomicina)",
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
-          "referencia": "eviQ 668/1018 + Lok A5",
+          "referencia": "BC GOTDLRM + D-F1-50",
           "pagina": null,
-          "trecho": "low-risk single agent",
+          "trecho": "score 0-4 single agent",
           "estado": "CONSULTADO"
         }
       },
@@ -137,11 +137,11 @@
         }
       },
       {
-        "grupo": "ultra-alto (escore ≥13 Lok / ≥12 eviQ)",
+        "grupo": "ultra-alto (escore FIGO ≥12, D-F1-50; Lok ≥13 como variante)",
         "conduta": "EP de indução",
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
-          "referencia": "Lok 2025 + eviQ 1347",
+          "referencia": "eviQ 1347 + D-F1-50",
           "pagina": null,
           "trecho": "low-dose EP induction",
           "estado": "CONSULTADO"
@@ -211,7 +211,7 @@
         "numeroCiclos": null,
         "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
         "ajusteObrigatorio": "Consolidar 3 ciclos além da normalização do β-hCG.",
-        "fichaId": "FICHA.neoplasia-trofoblastica-gestacional.metotrexato-acido-folinico-baixo-risco__baixo-risco-escore-figo-6@1.0.0",
+        "fichaId": "FICHA.neoplasia-trofoblastica-gestacional.metotrexato-acido-folinico-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50@1.0.0",
         "sus": {
           "disponivel": "VERIFICAR",
           "fonte": {
@@ -252,7 +252,7 @@
         "numeroCiclos": null,
         "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
         "ajusteObrigatorio": "",
-        "fichaId": "FICHA.neoplasia-trofoblastica-gestacional.dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-6@1.0.0",
+        "fichaId": "FICHA.neoplasia-trofoblastica-gestacional.dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50@1.0.0",
         "sus": {
           "disponivel": "VERIFICAR",
           "fonte": {
@@ -439,7 +439,7 @@
         "numeroCiclos": null,
         "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
         "ajusteObrigatorio": "",
-        "fichaId": "FICHA.neoplasia-trofoblastica-gestacional.ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-inducao@1.0.0",
+        "fichaId": "FICHA.neoplasia-trofoblastica-gestacional.ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-figo-12-d-f1-50-inducao@1.0.0",
         "sus": {
           "disponivel": "VERIFICAR",
           "fonte": {

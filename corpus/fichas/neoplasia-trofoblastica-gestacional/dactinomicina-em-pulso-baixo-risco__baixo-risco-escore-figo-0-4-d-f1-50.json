@@ -1,12 +1,12 @@
 {
-  "templateId": "FICHA.nao-informado-ficha-institucional.5-fu-folinato-flox-p1512__nao-especificado@1.0.0",
-  "tumor": "Não informado (ficha institucional)",
-  "nome": "5-FU + Folinato (FLOX — P1512)",
-  "cenario": "não especificado",
+  "templateId": "FICHA.neoplasia-trofoblastica-gestacional.dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50@1.0.0",
+  "tumor": "Neoplasia trofoblástica gestacional",
+  "nome": "Dactinomicina em pulso (baixo risco)",
+  "cenario": "baixo risco (escore FIGO 0–4, D-F1-50)",
   "versao": "1.0.0",
-  "hash": "b6d5e6f62869877fad28d28c431ba7e567a982818a86b3b1576335f13b1c7ae6",
-  "codigoInstitucional": "P1512",
-  "intervaloDias": null,
+  "hash": "8f21567e1cde0cd48dc1bae769532b43829dcf81b476e37093f604c9412c19f1",
+  "codigoInstitucional": null,
+  "intervaloDias": 14,
   "ciclos": null,
   "itens": [
     {
@@ -98,10 +98,10 @@
       "overrideMotivo": null
     },
     {
-      "drug": "Folinato de cálcio (leucovorina)",
+      "drug": "Dactinomicina",
       "classe": "QT",
       "sequence": 5,
-      "standardDose": null,
+      "standardDose": 1.25,
       "doseBasis": "MG_M2",
       "calculatedDose": null,
       "prescribedDose": null,
@@ -111,42 +111,18 @@
       "route": "EV",
       "diluent": null,
       "finalVolumeMl": null,
-      "infusionTime": null,
+      "infusionTime": "5 min",
       "days": [
-        "d1",
-        "d2"
+        "d1"
       ],
-      "observacao": "NAO_LOCALIZADO para D1–D2 com a identidade local [VERIFICAR].",
-      "source": "PROTOCOL",
-      "overrideMotivo": null
-    },
-    {
-      "drug": "Fluoruracila (5-FU)",
-      "classe": "QT",
-      "sequence": 6,
-      "standardDose": null,
-      "doseBasis": "MG_M2",
-      "calculatedDose": null,
-      "prescribedDose": null,
-      "unit": "mg/m²",
-      "adjustmentPercent": null,
-      "adjustmentReason": null,
-      "route": "EV",
-      "diluent": null,
-      "finalVolumeMl": null,
-      "infusionTime": null,
-      "days": [
-        "d1",
-        "d2"
-      ],
-      "observacao": "NAO_LOCALIZADO para D1–D2 com a identidade local (fontes D1–D2 vigentes são infusionais tipo de Gramont) [VERIFICAR].",
+      "observacao": "1,25 mg/m² IV em 3–5 min (cap 2 mg), q14d. Alternativa Lok: 0,5 mg/dia D1–5.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
     {
       "drug": "Soro fisiológico 0,9% 250 mL (lavagem pós-QT)",
       "classe": "POS_QT",
-      "sequence": 7,
+      "sequence": 6,
       "standardDose": 1,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -167,6 +143,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-27 (FLOX/P1512: 5-FU + folinato em D1 E D2 — corrige o texto 5, que trazia só D1) e D-F1-49. Fontes externas F1-B2 (2026-10-14): EXT-LEG-006 (eviQ, ID 79 — Colorectal cancer adjuvant Mayo Clinic (DESCONTINUADO), v3 (descontinuado), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-004 (eviQ, ID 1271 — Colorectal cancer adjuvant Roswell Park, v6, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). A planilha oncoMed rotulava 'FLOX' sem oxaliplatina (FA 20 + 5-FU 500): traço institucional secundário com erros conhecidos — doses não adotadas sem decisão.",
+  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-027 (eviQ, ID 1018 — GTN low risk dactinomycin, acesso 2026-10-14, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Diretriz: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json).",
   "status": "RASCUNHO"
 }

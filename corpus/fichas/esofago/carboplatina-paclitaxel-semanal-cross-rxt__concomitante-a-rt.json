@@ -4,7 +4,7 @@
   "nome": "Carboplatina + Paclitaxel semanal (CROSS + RxT)",
   "cenario": "concomitante à RT",
   "versao": "1.0.0",
-  "hash": "541d5b57a8fa7ffdaee15a0b398a12ac4064acc60dc2664785433084ce355c75",
+  "hash": "6a979c73df204d62c864c249710333588814e52fbc8232b5227632886d95ae20",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": 5,
@@ -137,7 +137,7 @@
       "days": [
         "d1"
       ],
-      "observacao": "D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].",
+      "observacao": "D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },

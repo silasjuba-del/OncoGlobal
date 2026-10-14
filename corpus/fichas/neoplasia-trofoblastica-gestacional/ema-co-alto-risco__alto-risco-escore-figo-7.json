@@ -4,7 +4,7 @@
   "nome": "EMA-CO (alto risco)",
   "cenario": "alto risco (escore FIGO ≥7)",
   "versao": "1.0.0",
-  "hash": "96985ecce02d8b791ef959dda59402fad91ea7eb5356791be5cc5cce25ff0f06",
+  "hash": "32701c8dbfed99f3b9a12b1cb3c102a09688f0aab6917f508f85b99341a7a03f",
   "codigoInstitucional": null,
   "intervaloDias": 14,
   "ciclos": null,
@@ -199,7 +199,7 @@
       "drug": "Vincristina",
       "classe": "QT",
       "sequence": 9,
-      "standardDose": 1,
+      "standardDose": 0.8,
       "doseBasis": "MG_M2",
       "calculatedDose": null,
       "prescribedDose": null,
@@ -213,7 +213,7 @@
       "days": [
         "d8"
       ],
-      "observacao": "1 mg/m² (cap 2 mg) em minibag (eviQ). BC/Lok: 0,8 mg/m² [variante].",
+      "observacao": "D-F1-50: 0,8 mg/m² (cap 2 mg; BC/Lok). eviQ 599: 1 mg/m² [variante registrada].",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },

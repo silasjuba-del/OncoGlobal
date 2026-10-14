@@ -103,7 +103,7 @@
           "QT",
           "cirurgia"
         ],
-        "criterio": "SBOC p. 12 (≤25 anos local; externo 40)",
+        "criterio": "idade-limite local 40 anos (D-F1-50; SBOC p. 12 usava ≤25)",
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
           "referencia": "SBOC ósseos v5 p. 12",
@@ -568,13 +568,10 @@
   },
   "pendencias": [
     {
-      "texto": "Corte de idade local (MAP ≤25 / AP >25) sem apoio externo — fontes usam 40 anos",
-      "classe": "DECISAO_MEDICA_PENDENTE",
+      "texto": "Corte de idade RESOLVIDO por D-F1-50: 40 anos (eviQ >40; BC <40; EURAMOS ≤40; Onkopedia/AAOC <40 — 5 apoios externos; SBOC usava 25)",
+      "classe": "RESOLVIDO_POR_DECISAO",
       "buscasFeitas": [
-        "eviQ 1901 notas (>40)",
-        "BC SANAHDMAP (<40)",
-        "EURAMOS (≤40)",
-        "SBOC p. 12 (25)"
+        "D-F1-50"
       ]
     },
     {

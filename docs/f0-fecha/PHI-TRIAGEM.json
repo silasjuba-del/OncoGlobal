@@ -21,7 +21,7 @@
     },
     {
       "path": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json",
-      "sha256": "b1da158d8a5ab86a1971845525be2e1e96ba1d7045cd52d1a59fda5e2a667a85",
+      "sha256": "ff437ba4e426f42a634c68e069500c641b9d35c3b19c1ed913405abfc29ca4fb",
       "items": [],
       "hashMode": "utf8-lf"
     },
@@ -3091,20 +3091,20 @@
     },
     {
       "path": "corpus/fichas/neoplasia-trofoblastica-gestacional/ema-co-alto-risco__alto-risco-escore-figo-7.json",
-      "sha256": "1010023ad3cd1851bdae0ba919c9fa6cb92b1111fc17e74bbfda2c0bfa8b21be",
+      "sha256": "0a9b4887a741ae44d456f4ec13bd5a22ab164b98f4f192273c2da656beff765a",
       "items": [],
       "hashMode": "utf8-lf"
     },
     {
       "path": "corpus/manifesto/b2-fichas.v1.json",
-      "sha256": "4320686f90e2ec6bd807f9c3600047af14658512c7a1bd40442dfb38c4ebf72a",
+      "sha256": "b703541fd8720025ae8a920a4384fd9edc61eb379d3d2768e4ded8321af5d554",
       "items": [
         {
           "type": "telefone",
-          "line": 1778,
+          "line": 1655,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "corpus/manifesto/b2-fichas.v1.json:1778",
+          "evidenceRef": "corpus/manifesto/b2-fichas.v1.json:1655",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "json_sha256_field_64hex"
         }

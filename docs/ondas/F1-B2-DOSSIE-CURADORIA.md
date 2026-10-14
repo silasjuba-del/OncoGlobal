@@ -128,3 +128,18 @@ Atualizações de estado (sem reescrever §2):
 - Validador: `npm run check:corpus` → `scripts/corpus-b2.mjs` (hash, RASCUNHO, cobertura por campo, fontes existentes, NAO_LOCALIZADO=null, fichaId dos packs resolve, fichas soltas).
 - Regeneração determinística: `node tests/corpus-fichas/gerar-fichas-b2.mjs` e `node scripts/gerar-packs-b2.mjs`; apresentação: `node scripts/gerar-dossie-fichas.mjs`.
 - O gerador histórico `gerar-fichas.mjs` está congelado (executá-lo apagaria as edições B1 — verificado e restaurado durante o trabalho; guard documentado no gerador B2).
+
+## 6. D-F1-50 aplicada (2026-10-14) — oito decisões do Dr. Silas implementadas em RASCUNHO
+
+| Decisão | Implementação |
+|---|---|
+| MTX baixo risco = 50 mg fixa | Ficha NTG MTX+FA (conflito NCCN-2019 × PDQ encerrado; 1 mg/kg proscrita) |
+| P1577 5-FU = 425 mg/m² (NHS CR004) | Ficha P1577 dosada (folinato 20 + 5-FU 425 IV bolus; EXT-LEG-019, SHA bce06e52…; red. 370; 300 c/ RT); lacuna que resta: duração total (CR004 30 semanas × D1–D36 local) |
+| P1512 = LV5FU2 | Ficha reescrita: folinato 200 2h + 5-FU 400 bolus + 600 CI 22h D1–D2 q14 (doses da DECISAO_MEDICA 2026-10-08 do FOLFOX4 sem oxaliplatina); eviQ-97 modificado registrado como variante não adotada |
+| Osteossarcoma idade = 40 anos | MAP C1–4/C5–6 e AP (SBOC usava 25); doxorrubicina permanece 25×3 |
+| Criar pembrolizumabe CEC | Ficha nova (200 mg q21d/400 q42d, 30 min, ≤24 m; eviQ 5066 + NCCN CSCC v1.2026 2A + KEYNOTE-629; ressalva EMA negativa); pack CEC com fichaId |
+| Vulva RT = 57,6 Gy | Pack ancorado (1,8 Gy × 32, GOG 205/Moore 2012; D-F1-50) |
+| NTG cortes/doses mais baixos | Baixo 0–4 (BC), ultra ≥12 (eviQ), VCR 0,8 (BC/Lok), folínico 7,5 mg (Charing Cross clássico) |
+| Retirar cisplatina+vinorelbina | Ficha-dossiê excluída; protocolo removido do pack CUP com registro de buscas preservado; lista local agora 4 esquemas (D-F1-36 ajustada) |
+
+Estado pós-D-F1-50: 22 fichas B2 (21 anteriores − vinorelbina + pembrolizumabe), **0 campos NAO_LOCALIZADO** em fichas, packs atualizados. Todas continuam RASCUNHO — ativação clínica segue exigindo aprovação item a item (D-F1-49).

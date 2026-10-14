@@ -220,6 +220,47 @@
         "criterioAplicacao": ""
       },
       {
+        "id": "cec-pembro",
+        "nome": "Pembrolizumabe",
+        "cenario": "laCSCC/mCSCC inelegível a terapia curativa",
+        "linha": "1ª linha (alternativa ao cemiplimabe)",
+        "drogas": [
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 q21d",
+            "observacao": "ou 400 mg q42d; ≤24 meses"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "sem pré-medicação de rotina",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.cec-de-pele-cutaneo.pembrolizumabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 5066 (EXT-SARC-008) + NCCN CSCC v1.2026 (rodada v2) + D-F1-50",
+          "pagina": null,
+          "trecho": "200 mg q21d/400 mg q42d; preferred 2A com cemiplimabe",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "KEYNOTE-629 (PMID 34293460): ORR 50% LA / 35% met. FDA aprovado; EMA NÃO aprovou p/ CEC cutâneo (ressalva regulatória).",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
         "id": "cec-cis-rt",
         "nome": "Cisplatina semanal + RT",
         "cenario": "localmente avançado",

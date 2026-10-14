@@ -83,6 +83,7 @@ const EXT = {
   "EXT-LEG-008": { instituicao: "eviQ", titulo: "ID 4103 — Breast cancer neo/adjuvant weekly paclitaxel", url: "https://www.eviq.org.au/medical-oncology/breast/neo-adjuvant/4103", versao: "v3", sha256: "87ae596953be152a84493a54488bee595c7f9fdd842ff6e72a3b7802e9c78269" },
   "EXT-LEG-009": { instituicao: "eviQ", titulo: "ID 42 — Breast cancer metastatic weekly paclitaxel", url: "https://www.eviq.org.au/medical-oncology/breast/metastatic/42", versao: "v10", sha256: "dbfe03a1cafd9609f58a62c65f4016165189dc5f4adbc889c811990da69b9932" },
   "EXT-LEG-012": { instituicao: "BC Cancer", titulo: "BRAVTW — Paclitaxel weekly (palliative)", url: "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Breast/BRAVTW_Protocol.pdf", versao: "rev 2014", sha256: "c4bb07d88e848876e0b0b5df3542c6822973c99f3279869d5afa99f3374f5ea3" },
+  "EXT-LEG-019": { instituicao: "Northern Cancer Alliance (NHS, Reino Unido)", titulo: "CR004 v1.4 — Weekly 5-Fluorouracil and Folinic Acid (CRP09)", url: "https://www.northerncanceralliance.nhs.uk/wp-content/uploads/2018/11/CR0045FU-Folinic-Acid-Weekly-CRP09-CR004-v1.4.pdf", versao: "v1.4", sha256: "bce06e52a9e212af45a707ad384f423059d6e4f80f8790762ad37e10266d5b6a" },
   "EXT-LEG-013": { instituicao: "BC Cancer", titulo: "Monografia — Paclitaxel", url: "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Referral%20Forms%20for%20Chemotherapy%20Protocols/Paclitaxel-monograph.pdf", versao: "rev 30/12/2019", sha256: "309ea2204ac554704cf2c2c01bd8aa7869eab5283c62f9d0105e906a4bfc14cd" },
   "EXT-CUP-001": { instituicao: "Annals of Oncology (Minnie Pearl Network — Greco FA et al.)", titulo: "Carcinoma of unknown primary site: phase II trials with docetaxel plus cisplatin or carboplatin (Ann Oncol 2000;11(2):211-5)", url: "https://pubmed.ncbi.nlm.nih.gov/10761758/", versao: "PMID 10761758", sha256: "ee44761328d239808081378acb84a7ad22276147f56bd4f424fea13ebaabafce" },
   "EXT-CUP-003": { instituicao: "Am J Clin Oncol (Mukai H et al.)", titulo: "Safety and efficacy of docetaxel and cisplatin in unknown primary cancer (Am J Clin Oncol 2010;33(1):32-5)", url: "https://pubmed.ncbi.nlm.nih.gov/19786850/", versao: "PMID 19786850", sha256: "0397ebfcc446642090d14de9332de34ce7007e9c04cfa042fee0e3fbc67f354b" },
@@ -97,6 +98,7 @@ const EXT = {
   "EXT-SARC-002": { instituicao: "eviQ", titulo: "ID 1916 — Ewing sarcoma VDC (part 1)", url: "https://www.eviq.org.au/medical-oncology/sarcoma/bone-sarcoma/1916-ewing-sarcoma-vdc-vincristine-doxorubicin", versao: "v8 (PDF v6 conferido)", sha256: "8983c9377e81a2d6820716f6e2ce15135df0eb7217bd8cb5fe4cde5765101f8a" },
   "EXT-SARC-003": { instituicao: "eviQ", titulo: "ID 3465 — Ewing sarcoma IE (part 2)", url: "https://www.eviq.org.au/medical-oncology/sarcoma/bone-sarcoma/3465-ewing-sarcoma-ie-ifosfamide-and-etoposide", versao: "v8 (PDF v5 conferido)", sha256: "483b41b9432901f6eca983da4dfa77503c6b49bb7cfd3aadf78f59b5c4d087bf" },
   "EXT-SARC-004": { instituicao: "eviQ", titulo: "ID 1901 — Osteosarcoma MAP", url: "https://www.eviq.org.au/medical-oncology/sarcoma/bone-sarcoma/1901-osteosarcoma-map-methotrexate-doxorubicin", versao: "v6 (PDF v5 conferido)", sha256: "df945221c9a78b4dfedfb6241007f36ce825f66e33a6eb525eb98bbcb7cff0c9" },
+  "EXT-SARC-008": { instituicao: "eviQ", titulo: "ID 5066 — Tumour-agnostic advanced or metastatic pembrolizumab", url: "https://www.eviq.org.au/p/5066", versao: "v1 (acesso 2026-10-14)", sha256: "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2" },
   "EXT-SARC-009": { instituicao: "BC Cancer", titulo: "SAALT2W — Ewing/EFT interval-compressed (2-week) alternation com filgrastim", url: "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SAALT2W_Protocol.pdf", versao: "rev 01/08/2026", sha256: "a3667f35a67bf51f4ea4536ea5fbfb228be85a7a8c6e9b393fae96fc444159c3" },
   "EXT-SARC-014": { instituicao: "BC Cancer", titulo: "SANAHDMAP — Osteosarcoma high-dose MTX + DOXOrubicin + CISplatin", url: "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SANAHDMAP_Protocol.pdf", versao: "rev 01/06/2026", sha256: "d9f85193d1184934d8d9b6cbd8382cc70144f8f4dd7ff88525cfd5218e33d214" },
   "EXT-SARC-015": { instituicao: "BC Cancer", titulo: "SAAVAP — Advanced osteosarcoma DOXOrubicin + CISplatin", url: "https://www.bccancer.bc.ca/chemotherapy-protocols-site/Documents/Sarcoma/SAAVAP_Protocol.pdf", versao: "rev 01/03/2022", sha256: "0215e9ba4f7ef5516e3474f4f7df2e2034e0c171078edcb19a7bf248787f5f3e" },
@@ -131,26 +133,31 @@ const FICHAS = [];
 const F = (spec) => FICHAS.push(spec);
 
 // ===== LEGADO (D-F1-26/27/49) =====
-F({ tumor: "Não informado (ficha institucional)", nome: "Folinato + 5-FU semanal (P1577)", cenario: NE, codigo: "P1577", intervalo: null, ciclos: null,
-  identidade: "Folinato 20 mg/m² + 5-FU semanal, D1–D36 (D-F1-26); tumor de origem não comprovado",
-  fontesItens: { "Folinato de cálcio (leucovorina)": { decisaoLocal: "D-F1-26 (folinato 20 mg/m² semanal)" }, "Fluoruracila (5-FU)": { situacao: "NAO_LOCALIZADO" } },
-  divergencias: ["Nenhuma fonte externa vigente usa folinato 20 mg/m² no semanal: QUASAR (eviQ 1494/98) usa folinato 50 mg fixa + 5-FU 370 mg/m²; Roswell Park modificado (eviQ 1271/1275) usa folinato 50 mg fixa + 5-FU 500 mg/m² D1,8,15,22,29,36 em ciclo de 56 d; BC GIAVFL traz LV 20 mg/m² IV push apenas como opção (metastático)"],
-  lacunas: ["dose do 5-FU sem fonte aplicável à variante local (folinato 20): null [VERIFICAR]", "duração do ciclo não decidida localmente (Roswell mod.: 56 d) [VERIFICAR]"],
-  fonteDecisao: `D-F1-26 (identidade P1577: folinato 20 mg/m² + 5-FU semanal D1–D36, ficha própria, SEM vínculo com Roswell Park) e D-F1-49 (ficha institucional nova sem SISAC; mudança de fonte não aprova doses). Fontes externas F1-B2 (${ACESSO}): ${ref(["EXT-LEG-001", "EXT-LEG-002", "EXT-LEG-004", "EXT-LEG-005"])}. Divergência registrada: nenhuma fonte vigente casa folinato 20 mg/m² no semanal — 5-FU permanece null [VERIFICAR].`,
+F({ tumor: "Não informado (ficha institucional)", nome: "Folinato + 5-FU semanal (P1577)", cenario: NE, codigo: "P1577", intervalo: 7, ciclos: null,
+  identidade: "Folinato 20 mg/m² + 5-FU 425 mg/m² semanais IV bolus (D-F1-26 + D-F1-50; NHS CR004 casa exatamente com a identidade); dias locais D1–D36 (D-F1-26)",
+  fontesItens: { "Folinato de cálcio (leucovorina)": { sourceIds: ["EXT-LEG-019"], decisaoLocal: "D-F1-26 (folinato 20 mg/m² semanal); CR004 corrobora 20 mg/m² IV bolus" }, "Fluoruracila (5-FU) em bolus": { sourceIds: ["EXT-LEG-019"], decisaoLocal: "D-F1-50 (dose 425 mg/m²)" } },
+  divergencias: ["QUASAR (eviQ 1494/98): folinato 50 fixa + 5-FU 370; Roswell mod. (eviQ 1271/1275): folinato 50 fixa + 5-FU 500 em ciclo 56 d — variantes NAO adotadas", "CR004 corre 30 doses semanais (30 semanas); a duracao local D1–D36 vem de D-F1-26 [extensao a definir]"],
+  lacunas: ["duração total do tratamento local (CR004: 30 semanas; D-F1-26: D1–D36) [VERIFICAR]"],
+  fonteDecisao: `D-F1-26 (identidade: folinato 20 + 5-FU semanal D1–D36, sem vínculo com Roswell Park); D-F1-49; D-F1-50 (dose do 5-FU = 425 mg/m²). Fonte que casa com a identidade (${ACESSO}): ${ref(["EXT-LEG-019"])} — folinato 20 mg/m² IV bolus + 5-FU 425 mg/m² IV bolus (reduzível a 370; 300 com RT), semanal. Variantes não adotadas: ${ref(["EXT-LEG-001", "EXT-LEG-004"])}.`,
   itens: [
-    qt("Folinato de cálcio (leucovorina)", 20, "m2", D(1, 8, 15, 22, 29, 36), { t: null, obs: "Folinato 20 mg/m² semanal (D-F1-26). Tempo de infusão sem fonte para esta variante (QUASAR: bolus; Roswell: 2 h com folinato 50 fixa) [VERIFICAR]." }),
-    qt("Fluoruracila (5-FU)", null, "m2", D(1, 8, 15, 22, 29, 36), { obs: "NAO_LOCALIZADO para a variante local (folinato 20): QUASAR 370 mg/m² (folinato 50 fixa); Roswell mod. 500 mg/m² (folinato 50 fixa, ciclo 56 d). Dose null até decisão [VERIFICAR — D-F1-49 regra 3]." }),
+    qt("Folinato de cálcio (leucovorina)", 20, "m2", D(1, 8, 15, 22, 29, 36), { t: "bolus", obs: "CR004 v1.4: 20 mg/m² IV bolus (slow bolus via saline drip) — corrobora a dose local D-F1-26." }),
+    qt("Fluoruracila (5-FU) em bolus", 425, "m2", D(1, 8, 15, 22, 29, 36), { t: "bolus", obs: "D-F1-50 (425 mg/m², NHS CR004). CR004: reduzível a 370 (PS); 300 com RT; slow bolus via saline drip; fonte corre 30 doses semanais — duração local D1–D36 (D-F1-26) [extensão a definir]." }),
   ] });
 
-F({ tumor: "Não informado (ficha institucional)", nome: "5-FU + Folinato (FLOX — P1512)", cenario: NE, codigo: "P1512", intervalo: null, ciclos: null,
-  identidade: "5-FU + folinato em D1 e D2 (D-F1-27); sem oxaliplatina; tumor de origem não comprovado",
-  fontesItens: { "Folinato de cálcio (leucovorina)": { situacao: "NAO_LOCALIZADO" }, "Fluoruracila (5-FU)": { situacao: "NAO_LOCALIZADO" } },
-  divergencias: ["Regimes D1–D2 vigentes nas fontes são infusionais (de Gramont: LV 50 mg + 5-FU 400 bolus + 2.400 CIV 46 h q14d) — não bolus puro de 2 dias", "Mayo (D1–D5 bolus) DESCONTINUADO por toxicidade (eviQ 79 v3)"],
-  lacunas: ["doses de folinato e 5-FU não decididas localmente para o P1512 (D-F1-27 fixa só os dias D1 e D2): null [VERIFICAR]", "intervalo não decidido (de Gramont: 14 d) [VERIFICAR]"],
-  fonteDecisao: `D-F1-27 (FLOX/P1512: 5-FU + folinato em D1 E D2 — corrige o texto 5, que trazia só D1) e D-F1-49. Fontes externas F1-B2 (${ACESSO}): ${ref(["EXT-LEG-006", "EXT-LEG-004"])}. A planilha oncoMed rotulava 'FLOX' sem oxaliplatina (FA 20 + 5-FU 500): traço institucional secundário com erros conhecidos — doses não adotadas sem decisão.`,
+F({ tumor: "Não informado (ficha institucional)", nome: "LV5FU2 — 5-FU + folinato (P1512)", cenario: NE, codigo: "P1512", intervalo: 14, ciclos: null,
+  identidade: "LV5FU2 (de Gramont sem terceiro fármaco): folinato 200 + 5-FU 400 bolus + 5-FU 600 CI 22 h, D1–D2, q14 (D-F1-27 + D-F1-50)",
+  fontesItens: {
+    "Folinato de cálcio (leucovorina)": { decisaoLocal: "D-F1-50: P1512 mapeado como LV5FU2 (= FOLFOX4 sem oxaliplatina; DECISAO_MEDICA 2026-10-08 traz LV 200 mg/m² 2 h D1–D2)" },
+    "Fluoruracila (5-FU) em bolus": { decisaoLocal: "D-F1-50: LV5FU2 — 400 mg/m² bolus D1–D2 (DECISAO_MEDICA 2026-10-08 FOLFOX4)" },
+    "Fluoruracila (5-FU) infusão contínua": { decisaoLocal: "D-F1-50: LV5FU2 — 600 mg/m² CI 22 h D1–D2 (DECISAO_MEDICA 2026-10-08 FOLFOX4)" },
+  },
+  divergencias: ["eviQ 97 (de Gramont MODIFICADO) usa LV 50 fixa + 2.400 CIV 46 h — variante NAO adotada", "FLOX original (NSABP C-07) e mFLOX levam oxaliplatina — não casam com o P1512", "Mayo (D1–D5 bolus) DESCONTINUADO (eviQ 79)"],
+  lacunas: [],
+  fonteDecisao: `D-F1-27 (P1512 = 5-FU + folinato em D1 E D2) e D-F1-49; D-F1-50 (mapeamento como LV5FU2 — doses da DECISAO_MEDICA 2026-10-08 do FOLFOX4 sem a oxaliplatina, corroborado pelo LV5FU2 das diretrizes digestivas na rodada v2). Contexto externo: ${ref(["EXT-LEG-006", "EXT-LEG-004"])}.`,
   itens: [
-    qt("Folinato de cálcio (leucovorina)", null, "m2", D(1, 2), { obs: "NAO_LOCALIZADO para D1–D2 com a identidade local [VERIFICAR]." }),
-    qt("Fluoruracila (5-FU)", null, "m2", D(1, 2), { obs: "NAO_LOCALIZADO para D1–D2 com a identidade local (fontes D1–D2 vigentes são infusionais tipo de Gramont) [VERIFICAR]." }),
+    qt("Folinato de cálcio (leucovorina)", 200, "m2", D(1, 2), { t: "2 h", obs: "LV5FU2 (D-F1-50): 200 mg/m² IV 2 h em D1 e D2." }),
+    qt("Fluoruracila (5-FU) em bolus", 400, "m2", D(1, 2), { t: "bolus", obs: "LV5FU2 (D-F1-50): 400 mg/m² IV bolus em D1 e D2 — bolus é o desenho do esquema (de Gramont/FOLFOX4)." }),
+    qt("Fluoruracila (5-FU) infusão contínua", 600, "m2", D(1, 2), { t: "22 h", obs: "LV5FU2 (D-F1-50): 600 mg/m² CI 22 h em D1 e D2. Não é a bomba de 46 h." }),
   ] });
 
 // ===== CUP (D-F1-36/49) =====
@@ -188,16 +195,7 @@ F({ tumor: CUP, nome: "Docetaxel + Gemcitabina", cenario: NE, intervalo: 21, cic
     qt("Docetaxel", 75, "m2", D(8), { t: "60 min", dil: "SF 0,9%", vol: 250, obs: "Pouessel 2004: 75 mg/m² somente em D8 (após a gemcitabina do dia)." }),
   ] });
 
-F({ tumor: CUP, nome: "Cisplatina + Vinorelbina", cenario: NE, intervalo: null, ciclos: null, premedDias: D(1, 8),
-  identidade: "CUP (D-F1-36); fonte direta da DUPLA não localizada — ficha-dossiê (todos os campos de dose NAO_LOCALIZADO)",
-  fontesItens: { Vinorelbina: { situacao: "NAO_LOCALIZADO" }, Cisplatina: { situacao: "NAO_LOCALIZADO" } },
-  divergencias: ["A única combinação cisplatina+vinorelbina+gemcitabina em CUP é a TRIPLA de Palmeri 2006 — retirar a gemcitabina NÃO é transcrição (proibido por D-F1-49/instrução)"],
-  lacunas: ["dose de vinorelbina: NAO_LOCALIZADO (buscas PubMed/eviQ/BC/CCO/ClinicalTrials.gov documentadas em RELATORIO-CUP.md)", "dose de cisplatina: NAO_LOCALIZADO para a dupla em CUP", "dias e intervalo: não comprovados [VERIFICAR]"],
-  fonteDecisao: `D-F1-36 e D-F1-49. Dupla sem fonte direta após busca documentada (EXT-CUP-016 e registro de buscas no relatório F1-B2). Contexto/negação: ${ref(["EXT-CUP-012"])}. Ficha existe como dossiê de curadoria — não entra no fluxo operacional enquanto a lacuna persistir.`,
-  itens: [
-    qt("Vinorelbina", null, "m2", D(1, 8), { t: "10 min", obs: "NAO_LOCALIZADO para a dupla em CUP (dias plausíveis D1/D8 a confirmar) [VERIFICAR]." }),
-    CIS(null, D(1), { obs: "NAO_LOCALIZADO para a dupla em CUP (dia único plausível a confirmar) [VERIFICAR]." }),
-  ] });
+// Cisplatina + Vinorelbina RETIRADA por D-F1-50 (fonte direta NAO_LOCALIZADA após 7 estratégias; ficha-dossiê removida).
 
 F({ tumor: CUP, nome: "Cisplatina + 5-Fluorouracil (CUP escamoso)", cenario: "escamoso metastático (primário oculto)", intervalo: 21, ciclos: null,
   identidade: "CUP de histologia escamosa com investigação de cabeça e pescoço completa negativa (Khansur 1995)",
@@ -247,11 +245,11 @@ F({ tumor: EW, nome: "Ewing IE (ciclo B — alternado ao VDC)", cenario: "1ª li
 const OST = "Osteossarcoma";
 const MAP_FONTES = { Doxorrubicina: { sourceIds: ["LOC-SBOC-OSSEOS"], variantes: "eviQ/BC/EURAMOS: 37,5 mg/m² ×2 D1–D2" }, Cisplatina: { sourceIds: ["LOC-SBOC-OSSEOS", "EXT-SARC-004"] }, Metotrexato: { sourceIds: ["EXT-SARC-004"] }, "Folinato de cálcio (resgate do MTX)": { sourceIds: ["EXT-SARC-004"] }, Pegfilgrastim: { sourceIds: ["EXT-SARC-004", "EXT-SARC-014"] } };
 F({ tumor: OST, nome: "MAP (ciclos 1–4)", cenario: NE, intervalo: 35, ciclos: 4, premedDias: R(1, 2), altoRisco: true,
-  identidade: "Osteossarcoma de alto grau, neoadjuvante/adjuvante (SBOC p.12 ≤25 anos; corte externo das fontes é 40)",
+  identidade: "Osteossarcoma de alto grau, neoadjuvante/adjuvante; idade-limite local 40 ANOS por D-F1-50 (era 25 na SBOC; externo: eviQ nota >40, BC <40, EURAMOS ≤40, Onkopedia/AAOC <40)",
   fontesItens: MAP_FONTES,
-  divergencias: ["cisplatina: SBOC 60 D1–D2 (= eviQ 1901 60×2 em 2 h) × BC SANAHDMAP 50×2 (60×2 excepcional) × ensaios 120/ciclo (contínua 72 h; D1)", "doxorrubicina: SBOC 25 D1–D3 (total 75) × eviQ/BC/EURAMOS 37,5×2 D1–D2 (mesmo total 75)", "folínico: eviQ 15 mg/m² q6h × BC 25 mg fixa q6h", "corte de idade: SBOC/SOnHe usam 25 anos; NENHUMA fonte externa usa 25 (eviQ nota >40; BC <40; EURAMOS ≤40) — divergência aberta", "cisplatina 80 mg/m² (SOnHe): NAO_LOCALIZADO nas fontes externas"],
-  lacunas: ["corte de idade 25 anos sem apoio externo — decisão do Dr. Silas pendente", "cisplatina 80 (SOnHe) sem fonte externa — não adotada"],
-  fonteDecisao: `D-F1-34 e D-F1-49. Diretriz local: ${ref(["LOC-SBOC-OSSEOS"])} — MAP: cisplatina 60 D1–D2 + doxorrubicina 25 D1–D3 + MTX 12 g/m². Protocolo operacional: ${ref(["EXT-SARC-004", "EXT-SARC-014"])}. Estrutura de ciclos (C1–4 = 35 d com MTX D22/D29; C5–6 = 28 d sem cisplatina com MTX D15/D22) e cirurgia entre C2–C3 segundo eviQ/BC. G-CSF primário obrigatório (BC).`,
+  divergencias: ["cisplatina: SBOC 60 D1–D2 (= eviQ 1901 60×2 em 2 h) × BC SANAHDMAP 50×2 (60×2 excepcional) × ensaios 120/ciclo (contínua 72 h; D1)", "doxorrubicina: SBOC 25 D1–D3 (total 75) × eviQ/BC/EURAMOS 37,5×2 D1–D2 (mesmo total 75)", "folínico: eviQ 15 mg/m² q6h × BC 25 mg fixa q6h", "RESOLVIDO por D-F1-50: idade-limite local = 40 anos (5 apoios externos)", "cisplatina 80 mg/m² (SOnHe): NAO_LOCALIZADO nas fontes externas"],
+  lacunas: ["cisplatina 80 (SOnHe) sem fonte externa — não adotada"],
+  fonteDecisao: `D-F1-34 e D-F1-49. Diretriz local: ${ref(["LOC-SBOC-OSSEOS"])} — MAP: cisplatina 60 D1–D2 + doxorrubicina 25 D1–D3 + MTX 12 g/m². Protocolo operacional: ${ref(["EXT-SARC-004", "EXT-SARC-014"])}. Estrutura de ciclos (C1–4 = 35 d com MTX D22/D29; C5–6 = 28 d sem cisplatina com MTX D15/D22) e cirurgia entre C2–C3 segundo eviQ/BC. G-CSF primário obrigatório (BC). D-F1-50: idade-limite local = 40 anos.`,
   itens: [
     qt("Doxorrubicina", 25, "m2", D(1, 2, 3), { t: "15 min", obs: "SBOC p.12: 25 mg/m² D1–D3 (total 75). eviQ/BC/EURAMOS: 37,5 ×2 D1–D2 (mesmo total) [variante]." }),
     CIS(60, D(1, 2), { t: "2 h", obs: "SBOC p.12 e eviQ 1901: 60 mg/m² D1–D2 (eviQ: em 1.000 mL SF em 2 h; BC: 50×2, 60×2 excepcional)." }),
@@ -261,7 +259,7 @@ F({ tumor: OST, nome: "MAP (ciclos 1–4)", cenario: NE, intervalo: 35, ciclos: 
   ] });
 
 F({ tumor: OST, nome: "MAP (ciclos 5–6 — sem cisplatina)", cenario: NE, intervalo: 28, ciclos: 2, premedDias: D(1), altoRisco: true,
-  identidade: "Osteossarcoma, ciclos finais do MAP (eviQ 1901: sem cisplatina; MTX nas semanas 3 e 4)",
+  identidade: "Osteossarcoma, ciclos finais do MAP (eviQ 1901: sem cisplatina; MTX semanas 3–4); idade-limite 40 anos (D-F1-50)",
   fontesItens: MAP_FONTES,
   divergencias: ["mesmas divergências de dose do MAP C1–4 (doxo/fracionamento; folínico)"],
   lacunas: ["confirmação local da estrutura C5–6 sem cisplatina (SBOC descreve MAP sem separar) [VERIFICAR]"],
@@ -274,10 +272,10 @@ F({ tumor: OST, nome: "MAP (ciclos 5–6 — sem cisplatina)", cenario: NE, inte
   ] });
 
 F({ tumor: OST, nome: "AP (doxorrubicina + cisplatina)", cenario: NE, intervalo: 21, ciclos: null, altoRisco: true,
-  identidade: "Osteossarcoma sem MTX (SBOC p.12 usa AP >25 anos; SAAVAP cobre osteossarcoma avançado)",
+  identidade: "Osteossarcoma sem MTX; idade-limite local 40 anos por D-F1-50 (SBOC p.12 usava >25; SAAVAP cobre avançado)",
   fontesItens: { Doxorrubicina: { sourceIds: ["EXT-SARC-015", "LOC-SBOC-OSSEOS"] }, Cisplatina: { sourceIds: ["EXT-SARC-015", "LOC-SBOC-OSSEOS"] } },
-  divergencias: ["SAAVAP: doxo 75 IV push + cis 100 em 2 h q21d até progressão/toxicidade; considerar doxo 60 se >40 anos", "idade local >25 × corte externo >40 (mesma divergência do MAP)", "eviQ 1901 nota: '>40 anos: considerar AP sem HDMTX'"],
-  lacunas: ["AP adjuvante formal ≤25 anos sem protocolo dedicado (NAO_LOCALIZADO); idade-limite local pendente de decisão"],
+  divergencias: ["SAAVAP: doxo 75 IV push + cis 100 em 2 h q21d até progressão/toxicidade; considerar doxo 60 se >40 anos", "RESOLVIDO por D-F1-50: idade-limite local = 40 anos", "eviQ 1901 nota: '>40 anos: considerar AP sem HDMTX'"],
+  lacunas: ["AP adjuvante formal sem protocolo operacional dedicado (SAAVAP cobre avançado)"],
   fonteDecisao: `D-F1-34 e D-F1-49. Fonte operacional: ${ref(["EXT-SARC-015"])}. Diretriz local: ${ref(["LOC-SBOC-OSSEOS"])} (AP para >25 anos — corte sem apoio externo). Nota eviQ 1901: considerar AP sem HDMTX acima de 40 anos.`,
   itens: [
     qt("Doxorrubicina", 75, "m2", D(1), { t: "15 min", obs: "SAAVAP: 75 mg/m² IV push D1 (considerar 60 se >40 anos)." }),
@@ -341,20 +339,30 @@ F({ tumor: CEC, nome: "Cisplatina semanal + RxT (CEC de pele)", cenario: "concom
     CIS(40, D(1), { obs: "eviQ 292: 40 mg/m² semanal concomitante à RT (~6 semanas). Extrapolação de CECP declarada." }),
   ] });
 
+F({ tumor: CEC, nome: "Pembrolizumabe", cenario: "localmente avançado/metastático — inelegível a cirurgia/RT curativas", intervalo: 21, ciclos: null, semPremed: true,
+  identidade: "CSCC cutâneo localmente avançado/metastático inelegível a terapia curativa (D-F1-50; NCCN CSCC v1.2026 prefere pembro/cemi 2A — rodada v2)",
+  fontesItens: { Pembrolizumabe: { sourceIds: ["EXT-SARC-008"], decisaoLocal: "D-F1-50 (criação da ficha; dose 200 mg q21d)" } },
+  divergencias: ["FDA aprovado p/ CSCC; EMA NÃO aprovou pembrolizumabe para CEC cutâneo (só cemiplimabe) — ressalva regulatória registrada (rodada v2)", "KEYNOTE-629 (PMID 34293460): ORR 50% (localmente avançado) / 35% (metastático)"],
+  lacunas: ["disponibilidade SUS: VERIFICAR (H2)"],
+  fonteDecisao: `D-F1-34, D-F1-49 e D-F1-50 (criação). Protocolo operacional: ${ref(["EXT-SARC-008"])} (200 mg IV q21d OU 400 mg q42d, em 50–100 mL SF 0,9% em 30 min, até 24 meses). Indicação em CEC pela diretriz NCCN CSCC v1.2026 (pembro preferido 2A com cemiplimabe) e KEYNOTE-629 — registrados na rodada v2 (RELATORIO-F1-B2-PENDENCIAS-V2 §E3). Ressalva: EMA negativa para esta indicação.`,
+  itens: [
+    qt("Pembrolizumabe", 200, "mg", D(1), { dil: "SF 0,9%", t: "30 min", obs: "200 mg IV q21d (D-F1-50; eviQ 5066). Alternativa da fonte: 400 mg q42d. Diluição 50–100 mL SF 0,9%; até 24 meses ou toxicidade." }),
+  ] });
+
 // ===== NTG (D-F1-34/49; Lok 2025 + eviQ) =====
 const NTG = "Neoplasia trofoblástica gestacional";
-F({ tumor: NTG, nome: "Metotrexato + ácido folínico (baixo risco)", cenario: "baixo risco (escore FIGO ≤6)", intervalo: 14, ciclos: null, semPremed: true,
-  identidade: "NTG de baixo risco (escore ≤6 eviQ/Lok; BC usa 0–4), 1ª linha",
+F({ tumor: NTG, nome: "Metotrexato + ácido folínico (baixo risco)", cenario: "baixo risco (escore FIGO 0–4, D-F1-50)", intervalo: 14, ciclos: null, semPremed: true,
+  identidade: "NTG de baixo risco — corte local 0–4 por D-F1-50 (BC; eviQ/Lok ≤6 como variante registrada), 1ª linha",
   fontesItens: { Metotrexato: { sourceIds: ["EXT-CNV-026", "EXT-CNV-031"] }, "Ácido folínico (resgate)": { sourceIds: ["EXT-CNV-026", "EXT-CNV-031"] } },
   divergencias: ["eviQ 668: MTX 50 mg fixa IM D1,3,5,7 + folínico 15 mg VO D2,4,6,8 (24 h pós MTX)", "Lok A5: MTX 1 mg/kg IM D1,3,5,7 OU 50 mg fixa (variante Charing Cross usada na Aula 31)", "BC GOTDLRM: folínico 30 h após o MTX (não 24 h); alternativa 5 dias 0,4 mg/kg/dia IV sem folínico", "cortes de risco: eviQ/Lok ≤6 × BC 0–4"],
   lacunas: [],
-  fonteDecisao: `D-F1-34 e D-F1-49. Protocolo operacional: ${ref(["EXT-CNV-026"])}. Diretriz original: ${ref(["EXT-CNV-031"])} (Tabela A5 — 'MTX once every 2 weeks': 1 mg/kg OU 50 mg fixa; FA 15 mg 24–30 h após, D2,4,6,8). Consolidação: 3 ciclos além da normalização do β-hCG.`,
+  fonteDecisao: `D-F1-34, D-F1-49 e D-F1-50 (corte 0–4; MTX 50 mg fixa; folínico 7,5 mg 24 h). Protocolo operacional: ${ref(["EXT-CNV-026"])}. Diretriz original: ${ref(["EXT-CNV-031"])}. Consolidação: 3 ciclos além da normalização do β-hCG.`,
   itens: [
-    qt("Metotrexato", 50, "mg", D(1, 3, 5, 7), { route: "IM", obs: "eviQ 668/Lok A5: 50 mg fixa IM nos dias 1, 3, 5 e 7 (variante 1 mg/kg — Charing Cross/Lok) [decisão de variante registrada]." }),
-    qt("Ácido folínico (resgate)", 15, "mg", D(2, 4, 6, 8), { route: "VO", obs: "15 mg VO 24 h após cada dose de MTX (BC: 30 h [variante]); alternativa IV/IM." }),
+    qt("Metotrexato", 50, "mg", D(1, 3, 5, 7), { route: "IM", obs: "D-F1-50: 50 mg fixa IM D1,3,5,7 (eviQ 668; PDQ/Charing Cross). Variante 1 mg/kg NAO_LOCALIZADA na verificação v2 — não usar." }),
+    qt("Ácido folínico (resgate)", 7.5, "mg", D(2, 4, 6, 8), { route: "VO", obs: "D-F1-50: 7,5 mg VO (variante clássica Charing Cross) 24 h após cada MTX (BC: 30 h [variante]; versões modernas: 15 mg [variante])." }),
   ] });
 
-F({ tumor: NTG, nome: "Dactinomicina em pulso (baixo risco)", cenario: "baixo risco (escore FIGO ≤6)", intervalo: 14, ciclos: null,
+F({ tumor: NTG, nome: "Dactinomicina em pulso (baixo risco)", cenario: "baixo risco (escore FIGO 0–4, D-F1-50)", intervalo: 14, ciclos: null,
   identidade: "NTG de baixo risco — alternativa ao MTX ou resistência/contraindicação a ele (eviQ 1018)",
   fontesItens: { Dactinomicina: { sourceIds: ["EXT-CNV-027", "EXT-CNV-031"] } },
   divergencias: ["eviQ 1018: 1,25 mg/m² IV (cap 2 mg) D1 q14d; consolidação 3 ciclos pós-β-hCG normal (BC: 2 ciclos)", "Lok A5: alternativa 0,5 mg IV/dia D1–5"],
@@ -375,7 +383,7 @@ F({ tumor: NTG, nome: "EMA-CO (alto risco)", cenario: "alto risco (escore FIGO �
     qt("Metotrexato", 300, "m2", D(1), { t: "12 h", dil: "SF 0,9%", vol: 1000, obs: "300 mg/m² IV em 1.000 mL SF em 12 h (D1)." }),
     qt("Dactinomicina", 0.5, "mg", D(1, 2), { t: "5 min", obs: "0,5 mg IV D1 e D2." }),
     qt("Folinato de cálcio (resgate do MTX)", 15, "mg", D(2), { route: "VO", obs: "15 mg VO q12h ×4 doses, iniciando 24 h após o início do MTX (D2)." }),
-    qt("Vincristina", 1, "m2", D(8), { t: "10 min", dil: "SF 0,9%", vol: 50, obs: "1 mg/m² (cap 2 mg) em minibag (eviQ). BC/Lok: 0,8 mg/m² [variante]." }),
+    qt("Vincristina", 0.8, "m2", D(8), { t: "10 min", dil: "SF 0,9%", vol: 50, obs: "D-F1-50: 0,8 mg/m² (cap 2 mg; BC/Lok). eviQ 599: 1 mg/m² [variante registrada]." }),
     qt("Ciclofosfamida", 600, "m2", D(8), { t: "60 min", dil: "SF 0,9%", vol: 500, obs: "600 mg/m² D8." }),
     it("Filgrastim", "POS_QT", 5, "ugkg", "SC", [...R(3, 5), ...R(9, 11)], { obs: "5 µg/kg/dia SC D3–D5 e D9–D11 (eviQ nota: 2–3 dias frequentemente suficientes; BC: sem filgrastim)." }),
   ] });
@@ -395,10 +403,10 @@ F({ tumor: NTG, nome: "EMA/EP (resistência ao EMA-CO)", cenario: "resistente ao
     CIS(75, D(8), { obs: "Tabela A5: cisplatina 75 mg/m² IV D8 (eviQ 1378: em 1.000 mL SF em 60 min com hidratação)." }),
   ] });
 
-F({ tumor: NTG, nome: "EP de indução (escore ultra-alto)", cenario: "escore alto/ultra-alto — indução", intervalo: 7, ciclos: null, premedDias: D(1, 2),
-  identidade: "NTG com doença extensa (tórax/fígado/SNC) e/ou hemorragia — indução antes do EMA-CO/EMA-EP (eviQ 1347)",
+F({ tumor: NTG, nome: "EP de indução (escore ultra-alto)", cenario: "escore alto/ultra-alto (FIGO ≥12, D-F1-50) — indução", intervalo: 7, ciclos: null, premedDias: D(1, 2),
+  identidade: "NTG com doença extensa (tórax/fígado/SNC) e/ou hemorragia — indução antes do EMA-CO/EMA-EP; corte local FIGO ≥12 por D-F1-50 (eviQ 1347; Lok ≥13 [variante])",
   fontesItens: { Etoposídeo: { sourceIds: ["EXT-CNV-030", "EXT-CNV-031"] }, Cisplatina: { sourceIds: ["EXT-CNV-030", "EXT-CNV-031"] } },
-  divergencias: ["corte de indicação: eviQ 1347 usa escore FIGO ≥12; Lok 2025 define ultra-alto como ≥13 — divergência registrada", "frequência: eviQ 1347 'Frequency: 7 days' (=semanal, D1–D2 por semana); Lok: 'once weekly' 1–3 ciclos"],
+  divergencias: ["corte de indicação RESOLVIDO por D-F1-50: ≥12 (eviQ 1347); Lok 2025 usa ≥13 [variante registrada]", "frequência: eviQ 1347 'Frequency: 7 days' (=semanal, D1–D2 por semana); Lok: 'once weekly' 1–3 ciclos"],
   lacunas: ["número de ciclos por paciente clínico (1–3) e transição para EMA-CO/EMA-EP: decisão clínica"],
   fonteDecisao: `D-F1-34 e D-F1-49. Protocolo operacional: ${ref(["EXT-CNV-030"])}. Diretriz: ${ref(["EXT-CNV-031"])} (Low-dose EP once weekly: etoposídeo 100 + cisplatina 20, D1–D2).`,
   itens: [

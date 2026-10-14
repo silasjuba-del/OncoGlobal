@@ -4,7 +4,7 @@
   "nome": "AC-T (fase T — paclitaxel semanal)",
   "cenario": "adjuvante",
   "versao": "1.0.0",
-  "hash": "d9bd134f721f4c0bac1d252901611749efc7e4a231ab4d6181d6131a446f3b8d",
+  "hash": "5b0898e03a786631c006abd994b75f0ea7be5c1cb3cdab7963d58729665ec531",
   "codigoInstitucional": "P1393",
   "intervaloDias": 7,
   "ciclos": 12,
@@ -137,7 +137,7 @@
       "days": [
         "d1"
       ],
-      "observacao": "Ficha real P1393: dose fixa com Dose Prot 0; a base mg/m² vem da planilha/SOnHe. D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].",
+      "observacao": "Ficha real P1393: dose fixa com Dose Prot 0; a base mg/m² vem da planilha/SOnHe. D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },

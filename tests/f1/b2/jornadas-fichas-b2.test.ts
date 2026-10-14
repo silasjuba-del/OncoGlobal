@@ -74,6 +74,6 @@ describe("F1-B2 · jornadas das 22 fichas novas (D-F1-49)", () => {
     if (rMap.ok) expect(rMap.itens.find((i) => i.item.drug === "Metotrexato")!.item.calculatedDose).toBe(21600); // 12.000 × 1,8
     const p1577 = JSON.parse(readFileSync(join(RAIZ, "corpus/fichas/nao-informado-ficha-institucional/folinato-5-fu-semanal-p1577__nao-especificado.json"), "utf8"));
     const r1577 = instanciarProtocolo({ ...p1577, status: "CONFERIDA_MEDICO" } as any, dados, [] as any);
-    if (r1577.ok) { expect(r1577.itens.find((i) => /Fluoruracila/.test(i.item.drug))!.estado).not.toBe("PRONTO"); expect(r1577.pendentes).toBeGreaterThanOrEqual(1); }
+    if (r1577.ok) expect(r1577.itens.find((i) => /Fluoruracila/.test(i.item.drug))!.item.calculatedDose).toBe(765); // D-F1-50: 425 × 1,8 (NHS CR004)
   });
 });

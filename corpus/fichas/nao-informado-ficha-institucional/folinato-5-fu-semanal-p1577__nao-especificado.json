@@ -4,9 +4,9 @@
   "nome": "Folinato + 5-FU semanal (P1577)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "c33d53d3014628bdfd2fc9429e3d82db3524d9e12831cdd2f9dd2e9d3cd1686a",
+  "hash": "1e3ab10136fd7f7dc1c6b2ccdad85151f027ccd8d20d2ba6598f688c7678c8e8",
   "codigoInstitucional": "P1577",
-  "intervaloDias": null,
+  "intervaloDias": 7,
   "ciclos": null,
   "itens": [
     {
@@ -111,7 +111,7 @@
       "route": "EV",
       "diluent": null,
       "finalVolumeMl": null,
-      "infusionTime": null,
+      "infusionTime": "bolus",
       "days": [
         "d1",
         "d8",
@@ -120,15 +120,15 @@
         "d29",
         "d36"
       ],
-      "observacao": "Folinato 20 mg/m² semanal (D-F1-26). Tempo de infusão sem fonte para esta variante (QUASAR: bolus; Roswell: 2 h com folinato 50 fixa) [VERIFICAR].",
+      "observacao": "CR004 v1.4: 20 mg/m² IV bolus (slow bolus via saline drip) — corrobora a dose local D-F1-26.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
     {
-      "drug": "Fluoruracila (5-FU)",
+      "drug": "Fluoruracila (5-FU) em bolus",
       "classe": "QT",
       "sequence": 6,
-      "standardDose": null,
+      "standardDose": 425,
       "doseBasis": "MG_M2",
       "calculatedDose": null,
       "prescribedDose": null,
@@ -138,7 +138,7 @@
       "route": "EV",
       "diluent": null,
       "finalVolumeMl": null,
-      "infusionTime": null,
+      "infusionTime": "bolus",
       "days": [
         "d1",
         "d8",
@@ -147,7 +147,7 @@
         "d29",
         "d36"
       ],
-      "observacao": "NAO_LOCALIZADO para a variante local (folinato 20): QUASAR 370 mg/m² (folinato 50 fixa); Roswell mod. 500 mg/m² (folinato 50 fixa, ciclo 56 d). Dose null até decisão [VERIFICAR — D-F1-49 regra 3].",
+      "observacao": "D-F1-50 (425 mg/m², NHS CR004). CR004: reduzível a 370 (PS); 300 com RT; slow bolus via saline drip; fonte corre 30 doses semanais — duração local D1–D36 (D-F1-26) [extensão a definir].",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
@@ -175,6 +175,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-26 (identidade P1577: folinato 20 mg/m² + 5-FU semanal D1–D36, ficha própria, SEM vínculo com Roswell Park) e D-F1-49 (ficha institucional nova sem SISAC; mudança de fonte não aprova doses). Fontes externas F1-B2 (2026-10-14): EXT-LEG-001 (eviQ (Cancer Institute NSW), ID 1494 — Colorectal cancer adjuvant QUASAR weekly fluorouracil and folinic acid, v7, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-002 (eviQ, ID 98 — Colorectal cancer metastatic QUASAR weekly fluorouracil and folinic acid, v6, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-004 (eviQ, ID 1271 — Colorectal cancer adjuvant Roswell Park, v6, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-005 (eviQ, ID 1275 — Colorectal cancer metastatic Roswell Park, v5, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Divergência registrada: nenhuma fonte vigente casa folinato 20 mg/m² no semanal — 5-FU permanece null [VERIFICAR].",
+  "fonte": "D-F1-26 (identidade: folinato 20 + 5-FU semanal D1–D36, sem vínculo com Roswell Park); D-F1-49; D-F1-50 (dose do 5-FU = 425 mg/m²). Fonte que casa com a identidade (2026-10-14): EXT-LEG-019 (Northern Cancer Alliance (NHS, Reino Unido), CR004 v1.4 — Weekly 5-Fluorouracil and Folinic Acid (CRP09), v1.4, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) — folinato 20 mg/m² IV bolus + 5-FU 425 mg/m² IV bolus (reduzível a 370; 300 com RT), semanal. Variantes não adotadas: EXT-LEG-001 (eviQ (Cancer Institute NSW), ID 1494 — Colorectal cancer adjuvant QUASAR weekly fluorouracil and folinic acid, v7, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-004 (eviQ, ID 1271 — Colorectal cancer adjuvant Roswell Park, v6, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json).",
   "status": "RASCUNHO"
 }

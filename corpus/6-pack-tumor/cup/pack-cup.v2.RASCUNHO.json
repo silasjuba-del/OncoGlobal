@@ -104,12 +104,12 @@
         "modalidades": [
           "QT dupla"
         ],
-        "criterio": "D-F1-36",
+        "criterio": "D-F1-36 (5 esquemas) ajustada pela D-F1-50 (retirada de cisplatina+vinorelbina — 4 esquemas)",
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
-          "referencia": "D-F1-36 (decisão local)",
+          "referencia": "D-F1-36 + D-F1-50",
           "pagina": null,
-          "trecho": "lista de 5 esquemas — a lista decide esquemas, não doses",
+          "trecho": "lista decide esquemas, não doses",
           "estado": "CONSULTADO"
         }
       },
@@ -278,55 +278,6 @@
         "criterioAplicacao": ""
       },
       {
-        "id": "cup-cis-vin",
-        "nome": "Cisplatina + vinorelbina",
-        "cenario": "não especificado (DOSSIÊ — sem fonte direta)",
-        "linha": "—",
-        "drogas": [
-          {
-            "droga": "vinorelbina",
-            "dose": null,
-            "unidade": "mg/m2",
-            "via": "EV",
-            "dias": "D1/D8 [VERIFICAR]",
-            "observacao": "NAO_LOCALIZADO"
-          },
-          {
-            "droga": "cisplatina",
-            "dose": null,
-            "unidade": "mg/m2",
-            "via": "EV",
-            "dias": "D1 [VERIFICAR]",
-            "observacao": "NAO_LOCALIZADO"
-          }
-        ],
-        "cicloDias": null,
-        "numeroCiclos": null,
-        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
-        "ajusteObrigatorio": "",
-        "fichaId": "FICHA.primario-desconhecido-cup.cisplatina-vinorelbina__nao-especificado@1.0.0",
-        "sus": {
-          "disponivel": "VERIFICAR",
-          "fonte": {
-            "tipo": "DECISAO_MEDICA",
-            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
-            "pagina": null,
-            "trecho": "",
-            "estado": "PENDENTE"
-          }
-        },
-        "fonte": {
-          "tipo": "PROTOCOLO_INSTITUCIONAL",
-          "referencia": "Busca documentada 2026-10-14 (RELATORIO-CUP.md)",
-          "pagina": null,
-          "trecho": "dupla sem fonte direta; tripla Palmeri 2006 NÃO derivável",
-          "estado": "CONSULTADO"
-        },
-        "observacao": "Ficha-dossiê: não entra no fluxo operacional enquanto a lacuna persistir.",
-        "derivadoDe": null,
-        "criterioAplicacao": ""
-      },
-      {
         "id": "cup-cis-5fu",
         "nome": "Cisplatina + 5-FU (CUP escamoso)",
         "cenario": "escamoso metastático (primário oculto)",
@@ -430,15 +381,15 @@
   },
   "pendencias": [
     {
-      "texto": "Cisplatina + vinorelbina em CUP: NAO_LOCALIZADO após 6 estratégias PubMed + ClinicalTrials.gov + eviQ/BC/CCO + NCI PDQ (só existe a tripla de Palmeri 2006; retirar gemcitabina não é transcrição)",
-      "classe": "NAO_LOCALIZADO",
+      "texto": "Cisplatina + vinorelbina: RETIRADA da lista por D-F1-50 (fonte direta NAO_LOCALIZADA após 7 estratégias — registro de buscas preservado: PubMed, ClinicalTrials.gov, eviQ, BC, CCO-403, NCI PDQ, ESMO íntegra; tripla Palmeri não é derivável)",
+      "classe": "RETIRADA_POR_DECISAO",
       "buscasFeitas": [
-        "PubMed (termos documentados)",
-        "ClinicalTrials.gov API",
-        "eviQ (sem protocolo de CUP)",
-        "BC (único: PUCAT)",
-        "CCO (403)",
-        "NCI PDQ"
+        "PubMed",
+        "ClinicalTrials.gov",
+        "eviQ",
+        "BC",
+        "NCI PDQ",
+        "ESMO 2023 íntegra"
       ]
     },
     {

@@ -1,10 +1,10 @@
 {
-  "templateId": "FICHA.neoplasia-trofoblastica-gestacional.ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-inducao@1.0.0",
+  "templateId": "FICHA.neoplasia-trofoblastica-gestacional.ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-figo-12-d-f1-50-inducao@1.0.0",
   "tumor": "Neoplasia trofoblástica gestacional",
   "nome": "EP de indução (escore ultra-alto)",
-  "cenario": "escore alto/ultra-alto — indução",
+  "cenario": "escore alto/ultra-alto (FIGO ≥12, D-F1-50) — indução",
   "versao": "1.0.0",
-  "hash": "f31cf10a8ced81c7d0b4f5a2c89f1adfd4f9938da2c918abb890d436da2a1436",
+  "hash": "a08fa8f55001ef6e6e35666a1478ae0ceab24395d77d3acea9e7e2c3317d01fc",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": null,

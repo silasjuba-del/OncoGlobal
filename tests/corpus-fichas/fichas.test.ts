@@ -37,21 +37,27 @@ const eh5fu = (drug: string) => /fluoruracila|fluorouracil|5-?fu\b/i.test(drug);
 const ehTaxano = (drug: string) => /paclitaxel|docetaxel|cabazitaxel/i.test(drug);
 
 // Esquemas de bomba: 5-FU obrigatoriamente em infusão de 46 h, sem bolus (D-W9-23a, D-W9-50).
-const FAMILIA_BOMBA = /\b(FOLFOX|FOLFIRI|FOLFIRINOX|FOLFOXIRI|FLOT|LV5FU2)\b/i;
+// "Leucovorina (LV5FU2)" = ficha ESÔFAGO com a regra local da bomba de 46 h (D-W9-23a); o LV5FU2 do P1512
+// (D-F1-50) é o de Gramont clássico (bolus 400 + 600 CI 22 h) e NÃO entra na família de bomba.
+const FAMILIA_BOMBA = /\b(FOLFOX|FOLFIRI|FOLFIRINOX|FOLFOXIRI|FLOT)\b|Leucovorina \(LV5FU2\)/i;
 // 5-FU em bolus só onde o bolus é o desenho do esquema (Mayo mantido por D-W9-23b; Roswell Park; CMF).
-const BOLUS_POR_DESENHO = /Mayo Clinic|Roswell Park|^CMF$/;
+const BOLUS_POR_DESENHO = /Mayo Clinic|Roswell Park|^CMF$|Folinato \+ 5-FU semanal \(P1577\)|LV5FU2/
 // Outros 5-FU infusionais fora da bomba de 46 h, declarados um a um (revisão institucional / esquema próprio).
 const INFUSAO_FORA_46H: Record<string, string> = {
   "DCF modificado (institucional)": "6 h",
   "Cisplatina + 5-Fluorouracil (PF)": "24 h",
   // F1-B2 (D-F1-49): Khansur 1995 — 1.000 mg/m²/dia CI ×4 dias em CUP escamoso.
   "Cisplatina + 5-Fluorouracil (CUP escamoso)": "24 h",
+  // F1-B2 (D-F1-50): LV5FU2 (P1512 mapeado pela decisão) — 600 mg/m² CI 22 h em D1 e D2.
+  "LV5FU2 — 5-FU + folinato (P1512)": "22 h",
   // FOLFOX4 — decisão Dr. Silas 2026-10-08 (bolus + infusão de 22 h; ficha nova, não altera a FOLFOX de 46 h).
   "FOLFOX4 — com port-a-cath": "22 h",
   "FOLFOX4 — sem port-a-cath": "22 h",
 };
 // Bolus de 5-FU fora do desenho Mayo/Roswell Park/CMF: só as duas FOLFOX4 — decisão Dr. Silas 2026-10-08. Nominais, nada mais.
 const BOLUS_EXCECAO_FOLFOX4 = ["FOLFOX4 — com port-a-cath", "FOLFOX4 — sem port-a-cath"];
+// F1-B2 (D-F1-50): P1577 = NHS CR004 (slow IV bolus); LV5FU2 = de Gramont/FOLFOX4 sem oxaliplatina (bolus 400 por desenho).
+const BOLUS_EXCECAO_D50 = ["Folinato + 5-FU semanal (P1577)", "LV5FU2 — 5-FU + folinato (P1512)"];
 
 describe("corpus/fichas", () => {
   it("existem fichas (60 da planilha + P1477 fora dela)", () => {
@@ -123,12 +129,12 @@ describe("corpus/fichas", () => {
       for (const { ficha, arquivo } of parseadas) {
         const bolus = ficha.itens.filter((i) => eh5fu(i.drug) && /bolus/i.test(i.drug));
         if (bolus.length === 0) continue;
-        if (BOLUS_EXCECAO_FOLFOX4.includes(ficha.nome)) continue;
+        if (BOLUS_EXCECAO_FOLFOX4.includes(ficha.nome) || BOLUS_EXCECAO_D50.includes(ficha.nome)) continue;
         expect(BOLUS_POR_DESENHO.test(ficha.nome), arquivo).toBe(true);
         expect(FAMILIA_BOMBA.test(ficha.nome), arquivo).toBe(false);
       }
       const nomesComBolus = parseadas.filter((p) => p.ficha.itens.some((i) => eh5fu(i.drug) && /bolus/i.test(i.drug))).map((p) => p.ficha.nome).sort();
-      expect(nomesComBolus).toEqual(["5-FU + Leucovorina (Mayo Clinic)", "5-FU + Leucovorina (Roswell Park)", "CMF", ...BOLUS_EXCECAO_FOLFOX4].sort());
+      expect(nomesComBolus).toEqual(["5-FU + Leucovorina (Mayo Clinic)", "5-FU + Leucovorina (Roswell Park)", "CMF", ...BOLUS_EXCECAO_FOLFOX4, ...BOLUS_EXCECAO_D50].sort());
     });
 
     it("a FOLFOX de 46 h existente continua sem bolus e em 46 h", () => {
@@ -179,7 +185,7 @@ describe("corpus/fichas", () => {
         expect(ficha.itens.some((i) => /difenidramina/i.test(i.drug)), arquivo).toBe(false);
         const temEV = ficha.itens.some((i) => i.classe === "QT" && i.route === "EV");
         if (!temEV) continue;
-        if (ficha.nome === "Cemiplimabe") continue; // F1-B2 (D-F1-49): anti-PD1 sem pré-medicação de rotina (eviQ 4151/BC SMAVCEM)
+        if (ficha.nome === "Cemiplimabe" || ficha.nome === "Pembrolizumabe") continue; // F1-B2 (D-F1-49/50): anti-PD1 sem pré-medicação de rotina (eviQ 4151/5066)
         const nomes = ficha.itens.map((i) => i.drug.toLowerCase());
         expect(nomes.some((n) => n.startsWith("ondansetrona")), arquivo).toBe(true);
         expect(nomes.some((n) => n.startsWith("dexametasona")), arquivo).toBe(true);
@@ -336,18 +342,26 @@ describe("F1-B2 — fichas institucionais novas (D-F1-49)", () => {
     }
   });
 
-  it("P1577: folinato 20 mg/m² semanal (D-F1-26) e 5-FU null NAO_LOCALIZADO", () => {
+  it("P1577 (D-F1-50): folinato 20 + 5-FU 425 semanais IV bolus (NHS CR004 casa com a identidade)", () => {
     const f = nome("Não informado (ficha institucional)", "Folinato + 5-FU semanal (P1577)").ficha;
     expect(f.codigoInstitucional).toBe("P1577");
     expect(f.itens.find((i) => /folinato/i.test(i.drug))!.standardDose).toBe(20);
-    expect(f.itens.find((i) => eh5fu(i.drug))!.standardDose).toBeNull();
-    expect(f.itens.find((i) => eh5fu(i.drug))!.days).toEqual(["d1", "d8", "d15", "d22", "d29", "d36"]);
+    const fu = f.itens.find((i) => eh5fu(i.drug))!;
+    expect(fu.standardDose).toBe(425);
+    expect(fu.days).toEqual(["d1", "d8", "d15", "d22", "d29", "d36"]);
+    expect(f.fonte).toContain("EXT-LEG-019");
+    expect(f.intervaloDias).toBe(7);
   });
 
-  it("FLOX (P1512): 5-FU e folinato null em D1 e D2 (D-F1-27 fixa só os dias)", () => {
-    const f = nome("Não informado (ficha institucional)", "5-FU + Folinato (FLOX — P1512)").ficha;
+  it("LV5FU2 (P1512, D-F1-50): folinato 200 2h + 5-FU 400 bolus + 600 CI 22h, D1–D2, q14", () => {
+    const f = nome("Não informado (ficha institucional)", "LV5FU2 — 5-FU + folinato (P1512)").ficha;
     expect(f.codigoInstitucional).toBe("P1512");
-    expect(f.itens.filter((i) => eh5fu(i.drug) || /folinato/i.test(i.drug)).map((i) => [i.standardDose, i.days])).toEqual([[null, ["d1", "d2"]], [null, ["d1", "d2"]]]);
+    expect(f.intervaloDias).toBe(14);
+    expect(f.itens.find((i) => /folinato/i.test(i.drug))!.standardDose).toBe(200);
+    expect(f.itens.find((i) => eh5fu(i.drug) && /bolus/i.test(i.drug))!.standardDose).toBe(400);
+    const ci = f.itens.find((i) => eh5fu(i.drug) && !/bolus/i.test(i.drug))!;
+    expect(ci.standardDose).toBe(600);
+    expect(ci.infusionTime).toBe("22 h");
   });
 
   it("CUP: variantes preparadas e a dupla cisplatina+vinorelbina toda NAO_LOCALIZADO", () => {
@@ -359,8 +373,6 @@ describe("F1-B2 — fichas institucionais novas (D-F1-49)", () => {
     const dg = nome("Primário desconhecido (CUP)", "Docetaxel + Gemcitabina").ficha;
     expect(dg.itens.find((i) => /gemcitabina/i.test(i.drug))!.standardDose).toBe(1000);
     expect(dg.itens.find((i) => /docetaxel/i.test(i.drug))!.days).toEqual(["d8"]); // Pouessel 2004: docetaxel só no D8
-    const cv = nome("Primário desconhecido (CUP)", "Cisplatina + Vinorelbina").ficha;
-    expect(cv.itens.filter((i) => ["Vinorelbina", "Cisplatina"].includes(i.drug)).every((i) => i.standardDose === null)).toBe(true);
     const cf = nome("Primário desconhecido (CUP)", "Cisplatina + 5-Fluorouracil (CUP escamoso)").ficha;
     expect(cf.itens.find((i) => /^cisplatina/i.test(i.drug))!.standardDose).toBe(100);
     expect(cf.itens.find((i) => eh5fu(i.drug))!.infusionTime).toBe("24 h");
@@ -417,6 +429,11 @@ describe("F1-B2 — fichas institucionais novas (D-F1-49)", () => {
     expect(c.itens.some((i) => /ondansetrona|dexametasona|prometazina/i.test(i.drug))).toBe(false);
     expect(nome("CEC de pele (cutâneo)", "Carboplatina + Paclitaxel 21/21 dias (CEC de pele)").ficha.fonte).toMatch(/extrapola[iç]/i);
     expect(nome("CEC de pele (cutâneo)", "Cisplatina semanal + RxT (CEC de pele)").ficha.fonte).toMatch(/extrapola[iç]/i);
+    const pem = nome("CEC de pele (cutâneo)", "Pembrolizumabe").ficha; // D-F1-50
+    expect(pem.itens.find((i) => /pembrolizumabe/i.test(i.drug))!.standardDose).toBe(200);
+    expect(pem.itens.find((i) => /pembrolizumabe/i.test(i.drug))!.infusionTime).toBe("30 min");
+    expect(pem.fonte).toContain("EXT-SARC-008");
+    expect(pem.fonte).toContain("EMA");
   });
 
   it("NTG: EMA/EP com D2 SOMENTE folínico (Lok 2025 Tabela A5/Figura A4); EMA-CO e baixo risco conforme eviQ", () => {
@@ -427,12 +444,26 @@ describe("F1-B2 — fichas institucionais novas (D-F1-49)", () => {
     expect(ep.itens.find((i) => /^cisplatina/i.test(i.drug))!.days).toEqual(["d8"]);
     const co = nome("Neoplasia trofoblástica gestacional", "EMA-CO (alto risco)").ficha;
     expect(co.itens.find((i) => /^metotrexato/i.test(i.drug))!.infusionTime).toBe("12 h");
-    expect(co.itens.find((i) => /vincristina/i.test(i.drug))!.standardDose).toBe(1);
+    expect(co.itens.find((i) => /vincristina/i.test(i.drug))!.standardDose).toBe(0.8); // D-F1-50
     expect(co.itens.find((i) => /filgrastim/i.test(i.drug))!.days).toEqual(["d3-d5", "d9-d11"]);
     const br = nome("Neoplasia trofoblástica gestacional", "Metotrexato + ácido folínico (baixo risco)").ficha;
     expect(br.itens.find((i) => /^metotrexato/i.test(i.drug))!.days).toEqual(["d1", "d3", "d5", "d7"]);
-    expect(br.itens.find((i) => /folínico/i.test(i.drug))!.days).toEqual(["d2", "d4", "d6", "d8"]);
-    expect(nome("Neoplasia trofoblástica gestacional", "EP de indução (escore ultra-alto)").ficha.intervaloDias).toBe(7);
+    expect(br.itens.find((i) => /^metotrexato/i.test(i.drug))!.standardDose).toBe(50); // D-F1-50: 50 mg fixa
+    const fol = br.itens.find((i) => /folínico/i.test(i.drug))!;
+    expect(fol.days).toEqual(["d2", "d4", "d6", "d8"]);
+    expect(fol.standardDose).toBe(7.5); // D-F1-50: 7,5 mg (Charing Cross clássico)
+    expect(br.cenario).toContain("0–4"); // D-F1-50: corte baixo risco 0–4
+    const ep5 = nome("Neoplasia trofoblástica gestacional", "EP de indução (escore ultra-alto)").ficha;
+    expect(ep5.intervaloDias).toBe(7);
+    expect(ep5.cenario).toContain("12"); // D-F1-50: ultra-alto ≥12
+  });
+
+  it("Osteossarcoma (D-F1-50): idade-limite 40 anos registrada; doxorrubicina permanece 25×3 (SBOC)", () => {
+    const m14 = nome("Osteossarcoma", "MAP (ciclos 1–4)").ficha;
+    expect(m14.itens.find((i) => /doxorrubicina/i.test(i.drug))!.standardDose).toBe(25); // D-F1-50: só a idade mudou
+    expect(m14.itens.find((i) => /doxorrubicina/i.test(i.drug))!.days).toEqual(["d1", "d2", "d3"]);
+    expect(m14.fonte).toContain("D-F1-50");
+    expect(nome("Osteossarcoma", "AP (doxorrubicina + cisplatina)").ficha.fonte).toContain("40 anos");
   });
 
   it("manifesto: dose DOCUMENTADA tem fonte existente; NAO_LOCALIZADO tem valor null; fontes com hash completo", () => {
@@ -443,6 +474,6 @@ describe("F1-B2 — fichas institucionais novas (D-F1-49)", () => {
       if (c.situacao === "NAO_LOCALIZADO") { naoLocalizado++; expect(c.valor).toBeNull(); }
       if (c.situacao === "DOCUMENTADO") for (const s of c.sourceIds) expect(fontes[s], `${f.arquivo} ${s}`).toBeDefined();
     }
-    expect(naoLocalizado).toBe(5); // P1577 5-FU; FLOX folinato+5-FU; CUP cis+vinorelbina (2)
+    expect(naoLocalizado).toBe(0); // D-F1-50: P1577 dosado (NHS CR004), P1512->LV5FU2, cis+vinorelbina retirada
   });
 });

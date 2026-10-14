@@ -245,15 +245,15 @@
     "radioterapia": [
       {
         "cenario": "localmente avançado",
-        "doseTotalGy": null,
-        "fracoes": null,
-        "pendencia": "esquema de RT com radioterapia (GOG 205: ~5,7 semanas; dose exata a definir)",
+        "doseTotalGy": 57.6,
+        "fracoes": 32,
+        "pendencia": "fração 1,8 Gy ×32 (GOG 205); D-F1-50 ancorou a dose — replanejamento fino com radioterapia",
         "concomitante": true,
         "fonte": {
           "tipo": "PROTOCOLO_INSTITUCIONAL",
-          "referencia": "Moore 2012 (PMID 22079361)",
+          "referencia": "Moore 2012 — GOG 205 (PMID 22079361); D-F1-50",
           "pagina": null,
-          "trecho": "RT + weekly cisplatin 40",
+          "trecho": "57,6 Gy (1,8 Gy × 32) + cisplatina 40 mg/m² semanal (máx 7 semanas)",
           "estado": "CONSULTADO"
         }
       }

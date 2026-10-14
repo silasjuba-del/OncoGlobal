@@ -64,6 +64,13 @@
       "versao": "rev 2014",
       "sha256": "c4bb07d88e848876e0b0b5df3542c6822973c99f3279869d5afa99f3374f5ea3"
     },
+    "EXT-LEG-019": {
+      "instituicao": "Northern Cancer Alliance (NHS, Reino Unido)",
+      "titulo": "CR004 v1.4 — Weekly 5-Fluorouracil and Folinic Acid (CRP09)",
+      "url": "https://www.northerncanceralliance.nhs.uk/wp-content/uploads/2018/11/CR0045FU-Folinic-Acid-Weekly-CRP09-CR004-v1.4.pdf",
+      "versao": "v1.4",
+      "sha256": "bce06e52a9e212af45a707ad384f423059d6e4f80f8790762ad37e10266d5b6a"
+    },
     "EXT-LEG-013": {
       "instituicao": "BC Cancer",
       "titulo": "Monografia — Paclitaxel",
@@ -161,6 +168,13 @@
       "url": "https://www.eviq.org.au/medical-oncology/sarcoma/bone-sarcoma/1901-osteosarcoma-map-methotrexate-doxorubicin",
       "versao": "v6 (PDF v5 conferido)",
       "sha256": "df945221c9a78b4dfedfb6241007f36ce825f66e33a6eb525eb98bbcb7cff0c9"
+    },
+    "EXT-SARC-008": {
+      "instituicao": "eviQ",
+      "titulo": "ID 5066 — Tumour-agnostic advanced or metastatic pembrolizumab",
+      "url": "https://www.eviq.org.au/p/5066",
+      "versao": "v1 (acesso 2026-10-14)",
+      "sha256": "8f0d7dc3d23e5238b7f352e3f231f791b612f491cd6bfd562bbe79c19b3c5fd2"
     },
     "EXT-SARC-009": {
       "instituicao": "BC Cancer",
@@ -293,10 +307,10 @@
     {
       "arquivo": "corpus/fichas/nao-informado-ficha-institucional/folinato-5-fu-semanal-p1577__nao-especificado.json",
       "templateId": "FICHA.nao-informado-ficha-institucional.folinato-5-fu-semanal-p1577__nao-especificado@1.0.0",
-      "hash": "c33d53d3014628bdfd2fc9429e3d82db3524d9e12831cdd2f9dd2e9d3cd1686a",
+      "hash": "1e3ab10136fd7f7dc1c6b2ccdad85151f027ccd8d20d2ba6598f688c7678c8e8",
       "versao": "1.0.0",
       "status": "RASCUNHO",
-      "identidadeClinica": "Folinato 20 mg/m² + 5-FU semanal, D1–D36 (D-F1-26); tumor de origem não comprovado",
+      "identidadeClinica": "Folinato 20 mg/m² + 5-FU 425 mg/m² semanais IV bolus (D-F1-26 + D-F1-50; NHS CR004 casa exatamente com a identidade); dias locais D1–D36 (D-F1-26)",
       "decisisoes": [
         "D-F1-49"
       ],
@@ -346,21 +360,26 @@
           "valor": 20,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO_POR_DECISAO_LOCAL",
-          "sourceIds": [],
+          "sourceIds": [
+            "EXT-LEG-019"
+          ],
           "localizador": null,
           "divergencias": [],
           "aprovacaoClinica": null,
-          "decisaoLocal": "D-F1-26 (folinato 20 mg/m² semanal)"
+          "decisaoLocal": "D-F1-26 (folinato 20 mg/m² semanal); CR004 corrobora 20 mg/m² IV bolus"
         },
         {
-          "campo": "itens[drug=Fluoruracila (5-FU);days=d1,d8,d15,d22,d29,d36].standardDose",
-          "valor": null,
+          "campo": "itens[drug=Fluoruracila (5-FU) em bolus;days=d1,d8,d15,d22,d29,d36].standardDose",
+          "valor": 425,
           "unidade": "mg/m²",
-          "situacao": "NAO_LOCALIZADO",
-          "sourceIds": [],
+          "situacao": "DOCUMENTADO_POR_DECISAO_LOCAL",
+          "sourceIds": [
+            "EXT-LEG-019"
+          ],
           "localizador": null,
           "divergencias": [],
-          "aprovacaoClinica": null
+          "aprovacaoClinica": null,
+          "decisaoLocal": "D-F1-50 (dose 425 mg/m²)"
         },
         {
           "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
@@ -374,21 +393,21 @@
         }
       ],
       "divergencias": [
-        "Nenhuma fonte externa vigente usa folinato 20 mg/m² no semanal: QUASAR (eviQ 1494/98) usa folinato 50 mg fixa + 5-FU 370 mg/m²; Roswell Park modificado (eviQ 1271/1275) usa folinato 50 mg fixa + 5-FU 500 mg/m² D1,8,15,22,29,36 em ciclo de 56 d; BC GIAVFL traz LV 20 mg/m² IV push apenas como opção (metastático)"
+        "QUASAR (eviQ 1494/98): folinato 50 fixa + 5-FU 370; Roswell mod. (eviQ 1271/1275): folinato 50 fixa + 5-FU 500 em ciclo 56 d — variantes NAO adotadas",
+        "CR004 corre 30 doses semanais (30 semanas); a duracao local D1–D36 vem de D-F1-26 [extensao a definir]"
       ],
       "lacunas": [
-        "dose do 5-FU sem fonte aplicável à variante local (folinato 20): null [VERIFICAR]",
-        "duração do ciclo não decidida localmente (Roswell mod.: 56 d) [VERIFICAR]"
+        "duração total do tratamento local (CR004: 30 semanas; D-F1-26: D1–D36) [VERIFICAR]"
       ],
       "aprovacaoClinica": null
     },
     {
-      "arquivo": "corpus/fichas/nao-informado-ficha-institucional/5-fu-folinato-flox-p1512__nao-especificado.json",
-      "templateId": "FICHA.nao-informado-ficha-institucional.5-fu-folinato-flox-p1512__nao-especificado@1.0.0",
-      "hash": "b6d5e6f62869877fad28d28c431ba7e567a982818a86b3b1576335f13b1c7ae6",
+      "arquivo": "corpus/fichas/nao-informado-ficha-institucional/lv5fu2-5-fu-folinato-p1512__nao-especificado.json",
+      "templateId": "FICHA.nao-informado-ficha-institucional.lv5fu2-5-fu-folinato-p1512__nao-especificado@1.0.0",
+      "hash": "abbee7313aaceb5d9a1823491e78ae0d51516a7cc0936c63b9b03f5a5d1b50b9",
       "versao": "1.0.0",
       "status": "RASCUNHO",
-      "identidadeClinica": "5-FU + folinato em D1 e D2 (D-F1-27); sem oxaliplatina; tumor de origem não comprovado",
+      "identidadeClinica": "LV5FU2 (de Gramont sem terceiro fármaco): folinato 200 + 5-FU 400 bolus + 5-FU 600 CI 22 h, D1–D2, q14 (D-F1-27 + D-F1-50)",
       "decisisoes": [
         "D-F1-49"
       ],
@@ -435,23 +454,36 @@
         },
         {
           "campo": "itens[drug=Folinato de cálcio (leucovorina);days=d1,d2].standardDose",
-          "valor": null,
+          "valor": 200,
           "unidade": "mg/m²",
-          "situacao": "NAO_LOCALIZADO",
+          "situacao": "DOCUMENTADO_POR_DECISAO_LOCAL",
           "sourceIds": [],
           "localizador": null,
           "divergencias": [],
-          "aprovacaoClinica": null
+          "aprovacaoClinica": null,
+          "decisaoLocal": "D-F1-50: P1512 mapeado como LV5FU2 (= FOLFOX4 sem oxaliplatina; DECISAO_MEDICA 2026-10-08 traz LV 200 mg/m² 2 h D1–D2)"
         },
         {
-          "campo": "itens[drug=Fluoruracila (5-FU);days=d1,d2].standardDose",
-          "valor": null,
+          "campo": "itens[drug=Fluoruracila (5-FU) em bolus;days=d1,d2].standardDose",
+          "valor": 400,
           "unidade": "mg/m²",
-          "situacao": "NAO_LOCALIZADO",
+          "situacao": "DOCUMENTADO_POR_DECISAO_LOCAL",
           "sourceIds": [],
           "localizador": null,
           "divergencias": [],
-          "aprovacaoClinica": null
+          "aprovacaoClinica": null,
+          "decisaoLocal": "D-F1-50: LV5FU2 — 400 mg/m² bolus D1–D2 (DECISAO_MEDICA 2026-10-08 FOLFOX4)"
+        },
+        {
+          "campo": "itens[drug=Fluoruracila (5-FU) infusão contínua;days=d1,d2].standardDose",
+          "valor": 600,
+          "unidade": "mg/m²",
+          "situacao": "DOCUMENTADO_POR_DECISAO_LOCAL",
+          "sourceIds": [],
+          "localizador": null,
+          "divergencias": [],
+          "aprovacaoClinica": null,
+          "decisaoLocal": "D-F1-50: LV5FU2 — 400 mg/m² bolus D1–D2 (DECISAO_MEDICA 2026-10-08 FOLFOX4)"
         },
         {
           "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
@@ -465,13 +497,11 @@
         }
       ],
       "divergencias": [
-        "Regimes D1–D2 vigentes nas fontes são infusionais (de Gramont: LV 50 mg + 5-FU 400 bolus + 2.400 CIV 46 h q14d) — não bolus puro de 2 dias",
-        "Mayo (D1–D5 bolus) DESCONTINUADO por toxicidade (eviQ 79 v3)"
+        "eviQ 97 (de Gramont MODIFICADO) usa LV 50 fixa + 2.400 CIV 46 h — variante NAO adotada",
+        "FLOX original (NSABP C-07) e mFLOX levam oxaliplatina — não casam com o P1512",
+        "Mayo (D1–D5 bolus) DESCONTINUADO (eviQ 79)"
       ],
-      "lacunas": [
-        "doses de folinato e 5-FU não decididas localmente para o P1512 (D-F1-27 fixa só os dias D1 e D2): null [VERIFICAR]",
-        "intervalo não decidido (de Gramont: 14 d) [VERIFICAR]"
-      ],
+      "lacunas": [],
       "aprovacaoClinica": null
     },
     {
@@ -847,158 +877,6 @@
         "Pouessel 2004 (Cancer): gemcitabina 1.000 mg/m² D1 e D8 (30 min) + docetaxel 75 mg/m² D8 (1 h); q3sem, máx 6 — corrige o mapa local (que estimava 75/900 ou 60/800 e atribuía a Hainsworth)"
       ],
       "lacunas": [],
-      "aprovacaoClinica": null
-    },
-    {
-      "arquivo": "corpus/fichas/primario-desconhecido-cup/cisplatina-vinorelbina__nao-especificado.json",
-      "templateId": "FICHA.primario-desconhecido-cup.cisplatina-vinorelbina__nao-especificado@1.0.0",
-      "hash": "a650d0fe458b150e60ba89bb59d15ce5d6602f09f88a62e27580f9bc94f27777",
-      "versao": "1.0.0",
-      "status": "RASCUNHO",
-      "identidadeClinica": "CUP (D-F1-36); fonte direta da DUPLA não localizada — ficha-dossiê (todos os campos de dose NAO_LOCALIZADO)",
-      "decisisoes": [
-        "D-F1-49"
-      ],
-      "campos": [
-        {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d8].standardDose",
-          "valor": 1,
-          "unidade": "frasco",
-          "situacao": "PADRAO_LOCAL",
-          "sourceIds": [],
-          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
-          "localizador": "padrão institucional das fichas",
-          "divergencias": []
-        },
-        {
-          "campo": "itens[drug=Ondansetrona;days=d1,d8].standardDose",
-          "valor": 8,
-          "unidade": "mg",
-          "situacao": "PADRAO_LOCAL",
-          "sourceIds": [],
-          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
-          "localizador": "padrão institucional das fichas",
-          "divergencias": []
-        },
-        {
-          "campo": "itens[drug=Dexametasona;days=d1,d8].standardDose",
-          "valor": 10,
-          "unidade": "mg",
-          "situacao": "PADRAO_LOCAL",
-          "sourceIds": [],
-          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
-          "localizador": "padrão institucional das fichas",
-          "divergencias": []
-        },
-        {
-          "campo": "itens[drug=Prometazina;days=d1,d8].standardDose",
-          "valor": 25,
-          "unidade": "mg",
-          "situacao": "PADRAO_LOCAL",
-          "sourceIds": [],
-          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
-          "localizador": "padrão institucional das fichas",
-          "divergencias": []
-        },
-        {
-          "campo": "itens[drug=Vinorelbina;days=d1,d8].standardDose",
-          "valor": null,
-          "unidade": "mg/m²",
-          "situacao": "NAO_LOCALIZADO",
-          "sourceIds": [],
-          "localizador": null,
-          "divergencias": [],
-          "aprovacaoClinica": null
-        },
-        {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pré-cisplatina);days=d1].standardDose",
-          "valor": 1,
-          "unidade": "frasco",
-          "situacao": "PADRAO_LOCAL",
-          "sourceIds": [],
-          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
-          "localizador": "padrão institucional das fichas",
-          "divergencias": []
-        },
-        {
-          "campo": "itens[drug=Sulfato de magnésio 10% 10 mL;days=d1].standardDose",
-          "valor": 10,
-          "unidade": "mL",
-          "situacao": "PADRAO_LOCAL",
-          "sourceIds": [],
-          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
-          "localizador": "padrão institucional das fichas",
-          "divergencias": []
-        },
-        {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1].standardDose",
-          "valor": 4,
-          "unidade": "mL",
-          "situacao": "PADRAO_LOCAL",
-          "sourceIds": [],
-          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
-          "localizador": "padrão institucional das fichas",
-          "divergencias": []
-        },
-        {
-          "campo": "itens[drug=Cisplatina;days=d1].standardDose",
-          "valor": null,
-          "unidade": "mg/m²",
-          "situacao": "NAO_LOCALIZADO",
-          "sourceIds": [],
-          "localizador": null,
-          "divergencias": [],
-          "aprovacaoClinica": null
-        },
-        {
-          "campo": "itens[drug=Manitol 20% frasco 250 mL;days=d1].standardDose",
-          "valor": 1,
-          "unidade": "frasco",
-          "situacao": "PADRAO_LOCAL",
-          "sourceIds": [],
-          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
-          "localizador": "padrão institucional das fichas",
-          "divergencias": []
-        },
-        {
-          "campo": "itens[drug=Soro fisiológico 0,9% 500 mL (pós-cisplatina);days=d1].standardDose",
-          "valor": 1,
-          "unidade": "frasco",
-          "situacao": "PADRAO_LOCAL",
-          "sourceIds": [],
-          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
-          "localizador": "padrão institucional das fichas",
-          "divergencias": []
-        },
-        {
-          "campo": "itens[drug=Cloreto de potássio 19,1% 4 mL;days=d1].standardDose",
-          "valor": 4,
-          "unidade": "mL",
-          "situacao": "PADRAO_LOCAL",
-          "sourceIds": [],
-          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
-          "localizador": "padrão institucional das fichas",
-          "divergencias": []
-        },
-        {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d8].standardDose",
-          "valor": 1,
-          "unidade": "frasco",
-          "situacao": "PADRAO_LOCAL",
-          "sourceIds": [],
-          "decisaoLocal": "D-W9-23c/34c/50; D-F1-30/48 (pré/pos-QT locais)",
-          "localizador": "padrão institucional das fichas",
-          "divergencias": []
-        }
-      ],
-      "divergencias": [
-        "A única combinação cisplatina+vinorelbina+gemcitabina em CUP é a TRIPLA de Palmeri 2006 — retirar a gemcitabina NÃO é transcrição (proibido por D-F1-49/instrução)"
-      ],
-      "lacunas": [
-        "dose de vinorelbina: NAO_LOCALIZADO (buscas PubMed/eviQ/BC/CCO/ClinicalTrials.gov documentadas em RELATORIO-CUP.md)",
-        "dose de cisplatina: NAO_LOCALIZADO para a dupla em CUP",
-        "dias e intervalo: não comprovados [VERIFICAR]"
-      ],
       "aprovacaoClinica": null
     },
     {
@@ -1459,10 +1337,10 @@
     {
       "arquivo": "corpus/fichas/osteossarcoma/map-ciclos-1-4__nao-especificado.json",
       "templateId": "FICHA.osteossarcoma.map-ciclos-1-4__nao-especificado@1.0.0",
-      "hash": "82b6e7a91beac5fee55f9079609b16d53c0dbce411011585b9d7f2aee811dbad",
+      "hash": "9b70912315e00818686e9d33f831e58033a7a63db51df09b322ad7d79d9cf2c8",
       "versao": "1.0.0",
       "status": "RASCUNHO",
-      "identidadeClinica": "Osteossarcoma de alto grau, neoadjuvante/adjuvante (SBOC p.12 ≤25 anos; corte externo das fontes é 40)",
+      "identidadeClinica": "Osteossarcoma de alto grau, neoadjuvante/adjuvante; idade-limite local 40 ANOS por D-F1-50 (era 25 na SBOC; externo: eviQ nota >40, BC <40, EURAMOS ≤40, Onkopedia/AAOC <40)",
       "decisisoes": [
         "D-F1-49"
       ],
@@ -1644,11 +1522,10 @@
         "cisplatina: SBOC 60 D1–D2 (= eviQ 1901 60×2 em 2 h) × BC SANAHDMAP 50×2 (60×2 excepcional) × ensaios 120/ciclo (contínua 72 h; D1)",
         "doxorrubicina: SBOC 25 D1–D3 (total 75) × eviQ/BC/EURAMOS 37,5×2 D1–D2 (mesmo total 75)",
         "folínico: eviQ 15 mg/m² q6h × BC 25 mg fixa q6h",
-        "corte de idade: SBOC/SOnHe usam 25 anos; NENHUMA fonte externa usa 25 (eviQ nota >40; BC <40; EURAMOS ≤40) — divergência aberta",
+        "RESOLVIDO por D-F1-50: idade-limite local = 40 anos (5 apoios externos)",
         "cisplatina 80 mg/m² (SOnHe): NAO_LOCALIZADO nas fontes externas"
       ],
       "lacunas": [
-        "corte de idade 25 anos sem apoio externo — decisão do Dr. Silas pendente",
         "cisplatina 80 (SOnHe) sem fonte externa — não adotada"
       ],
       "aprovacaoClinica": null
@@ -1659,7 +1536,7 @@
       "hash": "8141b1d3d73bb15022ba954dc8552fb42b90eb3a9ad3b4c94a790a8bdf1dbcfa",
       "versao": "1.0.0",
       "status": "RASCUNHO",
-      "identidadeClinica": "Osteossarcoma, ciclos finais do MAP (eviQ 1901: sem cisplatina; MTX nas semanas 3 e 4)",
+      "identidadeClinica": "Osteossarcoma, ciclos finais do MAP (eviQ 1901: sem cisplatina; MTX semanas 3–4); idade-limite 40 anos (D-F1-50)",
       "decisisoes": [
         "D-F1-49"
       ],
@@ -1778,7 +1655,7 @@
       "hash": "1b4381779582d00ab71d3b95aa548b9851c174b3144a12152087525f73faea16",
       "versao": "1.0.0",
       "status": "RASCUNHO",
-      "identidadeClinica": "Osteossarcoma sem MTX (SBOC p.12 usa AP >25 anos; SAAVAP cobre osteossarcoma avançado)",
+      "identidadeClinica": "Osteossarcoma sem MTX; idade-limite local 40 anos por D-F1-50 (SBOC p.12 usava >25; SAAVAP cobre avançado)",
       "decisisoes": [
         "D-F1-49"
       ],
@@ -1922,11 +1799,11 @@
       ],
       "divergencias": [
         "SAAVAP: doxo 75 IV push + cis 100 em 2 h q21d até progressão/toxicidade; considerar doxo 60 se >40 anos",
-        "idade local >25 × corte externo >40 (mesma divergência do MAP)",
+        "RESOLVIDO por D-F1-50: idade-limite local = 40 anos",
         "eviQ 1901 nota: '>40 anos: considerar AP sem HDMTX'"
       ],
       "lacunas": [
-        "AP adjuvante formal ≤25 anos sem protocolo dedicado (NAO_LOCALIZADO); idade-limite local pendente de decisão"
+        "AP adjuvante formal sem protocolo operacional dedicado (SAAVAP cobre avançado)"
       ],
       "aprovacaoClinica": null
     },
@@ -2470,12 +2347,46 @@
       "aprovacaoClinica": null
     },
     {
-      "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/metotrexato-acido-folinico-baixo-risco__baixo-risco-escore-figo-6.json",
-      "templateId": "FICHA.neoplasia-trofoblastica-gestacional.metotrexato-acido-folinico-baixo-risco__baixo-risco-escore-figo-6@1.0.0",
-      "hash": "f4eff5b7005298b60cd5a0850577b89473807531a7821f9c1872ba45feb5548b",
+      "arquivo": "corpus/fichas/cec-de-pele-cutaneo/pembrolizumabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas.json",
+      "templateId": "FICHA.cec-de-pele-cutaneo.pembrolizumabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas@1.0.0",
+      "hash": "55b44bce18f6807beb94dcfbf09f0a41310c8f9f629bcb52cd35e89dee311774",
       "versao": "1.0.0",
       "status": "RASCUNHO",
-      "identidadeClinica": "NTG de baixo risco (escore ≤6 eviQ/Lok; BC usa 0–4), 1ª linha",
+      "identidadeClinica": "CSCC cutâneo localmente avançado/metastático inelegível a terapia curativa (D-F1-50; NCCN CSCC v1.2026 prefere pembro/cemi 2A — rodada v2)",
+      "decisisoes": [
+        "D-F1-49"
+      ],
+      "campos": [
+        {
+          "campo": "itens[drug=Pembrolizumabe;days=d1].standardDose",
+          "valor": 200,
+          "unidade": "mg",
+          "situacao": "DOCUMENTADO_POR_DECISAO_LOCAL",
+          "sourceIds": [
+            "EXT-SARC-008"
+          ],
+          "localizador": null,
+          "divergencias": [],
+          "aprovacaoClinica": null,
+          "decisaoLocal": "D-F1-50 (criação da ficha; dose 200 mg q21d)"
+        }
+      ],
+      "divergencias": [
+        "FDA aprovado p/ CSCC; EMA NÃO aprovou pembrolizumabe para CEC cutâneo (só cemiplimabe) — ressalva regulatória registrada (rodada v2)",
+        "KEYNOTE-629 (PMID 34293460): ORR 50% (localmente avançado) / 35% (metastático)"
+      ],
+      "lacunas": [
+        "disponibilidade SUS: VERIFICAR (H2)"
+      ],
+      "aprovacaoClinica": null
+    },
+    {
+      "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/metotrexato-acido-folinico-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50.json",
+      "templateId": "FICHA.neoplasia-trofoblastica-gestacional.metotrexato-acido-folinico-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50@1.0.0",
+      "hash": "b098605bb8d83539529a15877a6db3fd8dc053522a9ad8aebdf8f315cf4d41d7",
+      "versao": "1.0.0",
+      "status": "RASCUNHO",
+      "identidadeClinica": "NTG de baixo risco — corte local 0–4 por D-F1-50 (BC; eviQ/Lok ≤6 como variante registrada), 1ª linha",
       "decisisoes": [
         "D-F1-49"
       ],
@@ -2495,7 +2406,7 @@
         },
         {
           "campo": "itens[drug=Ácido folínico (resgate);days=d2,d4,d6,d8].standardDose",
-          "valor": 15,
+          "valor": 7.5,
           "unidade": "mg",
           "situacao": "DOCUMENTADO",
           "sourceIds": [
@@ -2517,9 +2428,9 @@
       "aprovacaoClinica": null
     },
     {
-      "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-6.json",
-      "templateId": "FICHA.neoplasia-trofoblastica-gestacional.dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-6@1.0.0",
-      "hash": "c236a064ff93ad5fe631df90d247031e5616802a18da425b46925b2d7b4bada5",
+      "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50.json",
+      "templateId": "FICHA.neoplasia-trofoblastica-gestacional.dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50@1.0.0",
+      "hash": "8f21567e1cde0cd48dc1bae769532b43829dcf81b476e37093f604c9412c19f1",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "NTG de baixo risco — alternativa ao MTX ou resistência/contraindicação a ele (eviQ 1018)",
@@ -2601,7 +2512,7 @@
     {
       "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/ema-co-alto-risco__alto-risco-escore-figo-7.json",
       "templateId": "FICHA.neoplasia-trofoblastica-gestacional.ema-co-alto-risco__alto-risco-escore-figo-7@1.0.0",
-      "hash": "96985ecce02d8b791ef959dda59402fad91ea7eb5356791be5cc5cce25ff0f06",
+      "hash": "32701c8dbfed99f3b9a12b1cb3c102a09688f0aab6917f508f85b99341a7a03f",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "NTG de alto risco (escore ≥7) ou resistente a MTX/dactinomicina (eviQ 599)",
@@ -2699,7 +2610,7 @@
         },
         {
           "campo": "itens[drug=Vincristina;days=d8].standardDose",
-          "valor": 1,
+          "valor": 0.8,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO",
           "sourceIds": [
@@ -2957,12 +2868,12 @@
       "aprovacaoClinica": null
     },
     {
-      "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-inducao.json",
-      "templateId": "FICHA.neoplasia-trofoblastica-gestacional.ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-inducao@1.0.0",
-      "hash": "f31cf10a8ced81c7d0b4f5a2c89f1adfd4f9938da2c918abb890d436da2a1436",
+      "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-figo-12-d-f1-50-inducao.json",
+      "templateId": "FICHA.neoplasia-trofoblastica-gestacional.ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-figo-12-d-f1-50-inducao@1.0.0",
+      "hash": "a08fa8f55001ef6e6e35666a1478ae0ceab24395d77d3acea9e7e2c3317d01fc",
       "versao": "1.0.0",
       "status": "RASCUNHO",
-      "identidadeClinica": "NTG com doença extensa (tórax/fígado/SNC) e/ou hemorragia — indução antes do EMA-CO/EMA-EP (eviQ 1347)",
+      "identidadeClinica": "NTG com doença extensa (tórax/fígado/SNC) e/ou hemorragia — indução antes do EMA-CO/EMA-EP; corte local FIGO ≥12 por D-F1-50 (eviQ 1347; Lok ≥13 [variante])",
       "decisisoes": [
         "D-F1-49"
       ],
@@ -3105,7 +3016,7 @@
         }
       ],
       "divergencias": [
-        "corte de indicação: eviQ 1347 usa escore FIGO ≥12; Lok 2025 define ultra-alto como ≥13 — divergência registrada",
+        "corte de indicação RESOLVIDO por D-F1-50: ≥12 (eviQ 1347); Lok 2025 usa ≥13 [variante registrada]",
         "frequência: eviQ 1347 'Frequency: 7 days' (=semanal, D1–D2 por semana); Lok: 'once weekly' 1–3 ciclos"
       ],
       "lacunas": [

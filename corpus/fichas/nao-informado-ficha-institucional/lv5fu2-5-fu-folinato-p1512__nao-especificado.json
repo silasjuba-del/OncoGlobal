@@ -1,11 +1,11 @@
 {
-  "templateId": "FICHA.neoplasia-trofoblastica-gestacional.dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-6@1.0.0",
-  "tumor": "Neoplasia trofoblástica gestacional",
-  "nome": "Dactinomicina em pulso (baixo risco)",
-  "cenario": "baixo risco (escore FIGO ≤6)",
+  "templateId": "FICHA.nao-informado-ficha-institucional.lv5fu2-5-fu-folinato-p1512__nao-especificado@1.0.0",
+  "tumor": "Não informado (ficha institucional)",
+  "nome": "LV5FU2 — 5-FU + folinato (P1512)",
+  "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "c236a064ff93ad5fe631df90d247031e5616802a18da425b46925b2d7b4bada5",
-  "codigoInstitucional": null,
+  "hash": "abbee7313aaceb5d9a1823491e78ae0d51516a7cc0936c63b9b03f5a5d1b50b9",
+  "codigoInstitucional": "P1512",
   "intervaloDias": 14,
   "ciclos": null,
   "itens": [
@@ -98,10 +98,10 @@
       "overrideMotivo": null
     },
     {
-      "drug": "Dactinomicina",
+      "drug": "Folinato de cálcio (leucovorina)",
       "classe": "QT",
       "sequence": 5,
-      "standardDose": 1.25,
+      "standardDose": 200,
       "doseBasis": "MG_M2",
       "calculatedDose": null,
       "prescribedDose": null,
@@ -111,18 +111,65 @@
       "route": "EV",
       "diluent": null,
       "finalVolumeMl": null,
-      "infusionTime": "5 min",
+      "infusionTime": "2 h",
       "days": [
-        "d1"
+        "d1",
+        "d2"
       ],
-      "observacao": "1,25 mg/m² IV em 3–5 min (cap 2 mg), q14d. Alternativa Lok: 0,5 mg/dia D1–5.",
+      "observacao": "LV5FU2 (D-F1-50): 200 mg/m² IV 2 h em D1 e D2.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Fluoruracila (5-FU) em bolus",
+      "classe": "QT",
+      "sequence": 6,
+      "standardDose": 400,
+      "doseBasis": "MG_M2",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg/m²",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "bolus",
+      "days": [
+        "d1",
+        "d2"
+      ],
+      "observacao": "LV5FU2 (D-F1-50): 400 mg/m² IV bolus em D1 e D2 — bolus é o desenho do esquema (de Gramont/FOLFOX4).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Fluoruracila (5-FU) infusão contínua",
+      "classe": "QT",
+      "sequence": 7,
+      "standardDose": 600,
+      "doseBasis": "MG_M2",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg/m²",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "22 h",
+      "days": [
+        "d1",
+        "d2"
+      ],
+      "observacao": "LV5FU2 (D-F1-50): 600 mg/m² CI 22 h em D1 e D2. Não é a bomba de 46 h.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
     {
       "drug": "Soro fisiológico 0,9% 250 mL (lavagem pós-QT)",
       "classe": "POS_QT",
-      "sequence": 6,
+      "sequence": 8,
       "standardDose": 1,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -143,6 +190,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-027 (eviQ, ID 1018 — GTN low risk dactinomycin, acesso 2026-10-14, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Diretriz: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json).",
+  "fonte": "D-F1-27 (P1512 = 5-FU + folinato em D1 E D2) e D-F1-49; D-F1-50 (mapeamento como LV5FU2 — doses da DECISAO_MEDICA 2026-10-08 do FOLFOX4 sem a oxaliplatina, corroborado pelo LV5FU2 das diretrizes digestivas na rodada v2). Contexto externo: EXT-LEG-006 (eviQ, ID 79 — Colorectal cancer adjuvant Mayo Clinic (DESCONTINUADO), v3 (descontinuado), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-004 (eviQ, ID 1271 — Colorectal cancer adjuvant Roswell Park, v6, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json).",
   "status": "RASCUNHO"
 }
