@@ -49,3 +49,30 @@ it("identificador de estudo/catálogo não mascara rótulo pessoal no mesmo text
   const pessoal = fixture("Prontuário: 0304050016");
   expect(() => exportarBiblioteca(pessoal.root, pessoal.out)).toThrow("PHI_ESTRUTURAL");
 });
+it.each([
+  { nomePaciente: "Pessoa Sintética", nascimento: "01/02/1970" },
+  { paciente: { nome: "Pessoa Sintética", dataNascimento: "1970-02-01" } },
+  { patientId: "paciente-sintetico-identificavel" },
+])("campos JSON com identidade não saem como biblioteca: %j", dados => {
+  const f = fixture();
+  writeFileSync(join(f.root, "corpus/1-exames/item.json"), JSON.stringify(dados));
+  expect(() => exportarBiblioteca(f.root, f.out)).toThrow("PHI_ESTRUTURAL");
+  expect(existsSync(f.out)).toBe(false);
+});
+it("exporta raízes consumidas pelo app e registra binários/scripts excluídos", () => {
+  const f = fixture();
+  for (const raiz of ["fichas", "regulatorio", "receitas", "f0c/sigtap/fontes"]) mkdirSync(join(f.root, "corpus", raiz), { recursive: true });
+  for (const raiz of ["fichas", "regulatorio", "receitas"]) writeFileSync(join(f.root, "corpus", raiz, "item.json"), '{"id":"fixture","texto":"Referência sintética"}');
+  writeFileSync(join(f.root, "corpus/f0c/sigtap/fontes/original.zip"), "binario-nao-exportavel");
+  writeFileSync(join(f.root, "corpus/f0c/gerar-cadastro.mjs"), "nao executar");
+  expect(exportarBiblioteca(f.root, f.out).arquivos).toBe(4);
+  const m = JSON.parse(readFileSync(join(f.out, "manifesto.json"), "utf8"));
+  expect(m.naoExportados).toHaveLength(2);
+  expect(existsSync(join(f.out, "corpus/f0c/gerar-cadastro.mjs"))).toBe(false);
+  expect(validarPacoteConsulta(f.out).arquivos).toBe(4);
+});
+it("arquivo extra não inventariado não passa na validação de retorno", () => {
+  const f = fixture(); exportarBiblioteca(f.root, f.out);
+  writeFileSync(join(f.out, "extra.txt"), "Paciente: Pessoa Sintética");
+  expect(() => validarPacoteConsulta(f.out)).toThrow("ARQUIVO_NAO_INVENTARIADO");
+});

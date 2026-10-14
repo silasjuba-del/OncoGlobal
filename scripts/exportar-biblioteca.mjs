@@ -5,8 +5,6 @@ import { createHash } from "node:crypto";
 import { scanText, sha256 } from "./phi-repo.mjs";
 import { detectarPhiEstrutural } from "../src/kernel/llm/phiEstrutural.ts";
 
-const RAIZES = ["1-exames", "2-receitas", "3-laudos", "4-interacoes-contraindicacoes", "5-ctcae-acao", "6-pack-tumor", "7-orientacoes", "8-encaminhamentos",
-  "rulesets", "templates", "prompts", "glossario", "f0c"];
 const hash = bytes => createHash("sha256").update(bytes).digest("hex");
 // Revisão técnica do trecho exato em laudo-transporte, baseLegal[2].trecho:
 // "domicílio feita por médico" é prosa normativa genérica, sem endereço pessoal.
@@ -17,22 +15,33 @@ const ENDERECO_TRECHO_PUBLICO = new Set([
   "a81e44bb0f787979da32fc83a8117e265ee2aa5a99581a4c4a278347b8736c87",
 ]);
 const relativoSeguro = p => typeof p === "string" && !p.includes("\\") && !p.split("/").some(x => !x || x === "." || x === "..")
-  && /^corpus\/[a-zA-Z0-9_-]+\//.test(p) && RAIZES.includes(p.split("/")[1]) && !p.includes(":");
+  && p.startsWith("corpus/") && !p.includes(":") && /\.(json|md|txt)$/.test(p);
 function dentro(root, path) {
   const r = relative(root, path);
   if (isAbsolute(r) || r === ".." || r.startsWith(`..${sep}`) || resolve(root, r) !== path) throw new Error("CAMINHO_FORA_DA_RAIZ");
 }
-function stringsClinicas(value) {
+function stringsClinicas(value, contexto = "") {
   if (!value || typeof value !== "object") return [];
-  return Object.entries(value).flatMap(([key, item]) => typeof item === "string"
-    ? /^(texto|trecho|observacao|orientacao|conteudo)$/i.test(key) ? [item] : [] : stringsClinicas(item));
+  return Object.entries(value).flatMap(([key, item]) => {
+    const k = key.normalize("NFD").replace(/[\u0300-\u036f\W_]/g, "").toLowerCase();
+    if (item === null || item === undefined) return [];
+    if (typeof item === "object") return stringsClinicas(item, `${contexto}.${k}`);
+    const s = String(item);
+    const vazioDeModelo = /^(?:\s*|[_\s-]+|\{\{[^{}]+\}\}|\[[^\]]+\]|FATO_CONFIRMADO|CONFIG|DECISAO_MEDICA)$/.test(s);
+    if (!vazioDeModelo && (/^(nomepaciente|patientname|patientid|pacienteid|nascimento|datanascimento|birthdate|dateofbirth|cpf|cns|prontuario)$/.test(k)
+      || (/paciente|patient/.test(contexto) && /^(nome|name|id)$/.test(k)))) throw new Error("PHI_ESTRUTURAL_JSON");
+    if (k === "sha256" && /^[a-f0-9]{64}$/.test(s)) return [];
+    const rotulo = /^(endereco|address)$/.test(k) ? "Endereço" : /^(telefone|phone)$/.test(k) ? "Telefone" : null;
+    return [s, ...(rotulo ? [`${rotulo}: ${s}`] : [])];
+  });
 }
 function conferirTexto(bytes, caminho, triagem) {
   const texto = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
   const pin = triagem.files?.find(f => f.path === caminho);
   const scan = scanText(texto, caminho, { manifest: triagem, sha256: sha256(bytes, pin?.hashMode ?? "raw", caminho) });
   if (scan.findings.length || scan.pending.length) throw new Error(`PHI_PENDENTE:${caminho}`);
-  const json = caminho.endsWith(".json") ? JSON.parse(texto) : null;
+  let json = null;
+  if (caminho.endsWith(".json")) { try { json = JSON.parse(texto); } catch { throw new Error(`JSON_INVALIDO:${caminho}`); } }
   const textos = json ? stringsClinicas(json) : [texto];
   // Referências públicas podem conter links. Demais categorias exigem revisão antes de exportar.
   // Somente a categoria numérica distingue identificadores públicos de sequências pessoais.
@@ -60,7 +69,7 @@ export function exportarBiblioteca(rootDir, destino) {
   const root = realpathSync(rootDir), out = novoDestino(root, destino);
   const triagemPath = resolve(root, "docs/f0-fecha/PHI-TRIAGEM.json");
   const triagem = existsSync(triagemPath) ? JSON.parse(readFileSync(triagemPath, "utf8")) : { files: [] };
-  const arquivos = [];
+  const arquivos = [], naoExportados = [];
   function visitar(dir) {
     if (lstatSync(dir).isSymbolicLink()) throw new Error("LINK_NAO_PERMITIDO");
     for (const entry of readdirSync(dir, { withFileTypes: true }).sort((a,b) => a.name.localeCompare(b.name))) {
@@ -68,7 +77,10 @@ export function exportarBiblioteca(rootDir, destino) {
       if (lstatSync(path).isSymbolicLink()) throw new Error("LINK_NAO_PERMITIDO");
       if (entry.isDirectory()) { visitar(path); continue; }
       const caminho = relative(root, path).split(sep).join("/");
-      if (!relativoSeguro(caminho) || !/\.(json|md|txt)$/.test(caminho)) throw new Error(`FORMATO_NAO_VERIFICADO:${caminho}`);
+      if (!/\.(json|md|txt)$/.test(caminho)) {
+        naoExportados.push({ caminho, motivo: "BINARIO_OU_SCRIPT_FORA_DO_ESCOPO" }); continue;
+      }
+      if (!relativoSeguro(caminho)) throw new Error(`CAMINHO_INVALIDO:${caminho}`);
       const bytes = readFileSync(path), { texto, json } = conferirTexto(bytes, caminho, triagem);
       arquivos.push({ caminho, bytes, metadados: { caminho, id: json?.id ?? json?.header?.id ?? null,
         versao: json?.versao ?? json?.version ?? json?.header?.versao ?? null, sha256: hash(bytes),
@@ -78,9 +90,10 @@ export function exportarBiblioteca(rootDir, destino) {
         verificar: (texto.match(/\[VERIFICAR\]|SEM_FONTE/g) ?? []).length } });
     }
   }
-  for (const p of RAIZES) { const dir = resolve(root, "corpus", p); if (existsSync(dir)) visitar(dir); }
+  visitar(resolve(root, "corpus"));
   if (!arquivos.length) throw new Error("CORPUS_VAZIO");
-  const manifesto = { schema: "ExportacaoConsultaCorpus@1", somenteConsulta: true, arquivos: arquivos.map(a => a.metadados) };
+  const manifesto = { schema: "ExportacaoConsultaCorpus@1", escopo: "CORPUS_TEXTUAL_COMPLETO", somenteConsulta: true,
+    arquivos: arquivos.map(a => a.metadados), naoExportados };
   // A validação termina antes de criar o destino. Não deixa pacote parcialmente validado.
   for (const a of arquivos) { const path = resolve(out, a.caminho); dentro(out, path); mkdirSync(dirname(path), { recursive: true }); writeFileSync(path, a.bytes); }
   writeFileSync(resolve(out, "manifesto.json"), JSON.stringify(manifesto, null, 2) + "\n");
@@ -96,6 +109,7 @@ export function validarPacoteConsulta(diretorio) {
   const root = realpathSync(diretorio), m = JSON.parse(readFileSync(resolve(root, "manifesto.json"), "utf8"));
   if (m.schema !== "ExportacaoConsultaCorpus@1" || m.somenteConsulta !== true || !Array.isArray(m.arquivos) || !m.arquivos.length) throw new Error("MANIFESTO_INVALIDO");
   const vistos = new Set();
+  const metadados = new Set(["manifesto.json", "pendencias.json", "LEIA-ME.md"]);
   for (const a of m.arquivos) {
     if (!relativoSeguro(a.caminho) || vistos.has(a.caminho)) throw new Error("CAMINHO_INVALIDO_OU_DUPLICADO");
     vistos.add(a.caminho);
@@ -108,6 +122,22 @@ export function validarPacoteConsulta(diretorio) {
     const triagemLocal = existsSync(triagemPath) ? JSON.parse(readFileSync(triagemPath, "utf8")) : { files: [] };
     conferirTexto(bytes, a.caminho, triagemLocal);
   }
+  function inventariar(dir) {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      const path = resolve(dir, e.name); dentro(root, realpathSync(path));
+      if (lstatSync(path).isSymbolicLink()) throw new Error("LINK_NAO_PERMITIDO");
+      if (e.isDirectory()) { inventariar(path); continue; }
+      const rel = relative(root, path).split(sep).join("/");
+      if (!vistos.has(rel) && !metadados.has(rel)) throw new Error("ARQUIVO_NAO_INVENTARIADO");
+      if (metadados.has(rel)) {
+        const bytes = readFileSync(path);
+        // Hashes são metadados tipados; não podem introduzir texto arbitrário nesta validação.
+        const texto = bytes.toString("utf8").replace(/("sha256"\s*:\s*")[a-f0-9]{64}(")/g, "$1HASH_VERIFICADO$2");
+        conferirTexto(Buffer.from(texto), rel, { files: [] });
+      }
+    }
+  }
+  inventariar(root);
   return { arquivos: vistos.size, estado: "RASCUNHO", alerta: false };
 }
 
