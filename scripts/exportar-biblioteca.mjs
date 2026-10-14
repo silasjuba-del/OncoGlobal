@@ -8,6 +8,14 @@ import { detectarPhiEstrutural } from "../src/kernel/llm/phiEstrutural.ts";
 const RAIZES = ["1-exames", "2-receitas", "3-laudos", "4-interacoes-contraindicacoes", "5-ctcae-acao", "6-pack-tumor", "7-orientacoes", "8-encaminhamentos",
   "rulesets", "templates", "prompts", "glossario", "f0c"];
 const hash = bytes => createHash("sha256").update(bytes).digest("hex");
+// Revisão técnica do trecho exato em laudo-transporte, baseLegal[2].trecho:
+// "domicílio feita por médico" é prosa normativa genérica, sem endereço pessoal.
+// O hash cobre TODO o texto. Qualquer acréscimo perde a exceção; não altera o detector de egresso.
+const ENDERECO_TRECHO_PUBLICO = new Set([
+  "4127c5b7ea08602af2539aa6472d93b7b073d6812b5b709f5551a9bb17c39c26",
+  // pack-penis: "pacientes aptos a seguimento" casa com a abreviação de apartamento.
+  "a81e44bb0f787979da32fc83a8117e265ee2aa5a99581a4c4a278347b8736c87",
+]);
 const relativoSeguro = p => typeof p === "string" && !p.includes("\\") && !p.split("/").some(x => !x || x === "." || x === "..")
   && /^corpus\/[a-zA-Z0-9_-]+\//.test(p) && RAIZES.includes(p.split("/")[1]) && !p.includes(":");
 function dentro(root, path) {
@@ -27,7 +35,12 @@ function conferirTexto(bytes, caminho, triagem) {
   const json = caminho.endsWith(".json") ? JSON.parse(texto) : null;
   const textos = json ? stringsClinicas(json) : [texto];
   // Referências públicas podem conter links. Demais categorias exigem revisão antes de exportar.
-  if (textos.some(t => detectarPhiEstrutural(t).some(c => c !== "URL_OU_IP"))) throw new Error(`PHI_ESTRUTURAL:${caminho}`);
+  // Somente a categoria numérica distingue identificadores públicos de sequências pessoais.
+  // Rótulos como CPF/prontuário continuam avaliados no texto ORIGINAL, mesmo usando esses dígitos.
+  const semIdsPublicos = t => t.replace(/\b(?:NCT\d{8}|ISRCTN\d{8}|ACTRN\d{14}|PMID\s*\d{6,9}|PMC\d{6,9}|UMIN\d{9}|LY\d{7}|0[1-8]\d{8})\b/g, "ID_PUBLICO");
+  if (textos.some(t => detectarPhiEstrutural(t).some(c => c !== "URL_OU_IP"
+    && !(c === "SEQUENCIA_NUMERICA_LONGA" && !detectarPhiEstrutural(semIdsPublicos(t)).includes(c))
+    && !(c === "ENDERECO" && ENDERECO_TRECHO_PUBLICO.has(hash(t)))))) throw new Error(`PHI_ESTRUTURAL:${caminho}`);
   return { texto, json };
 }
 function novoDestino(root, destino) {
@@ -91,7 +104,9 @@ export function validarPacoteConsulta(diretorio) {
     if (lstatSync(path).isSymbolicLink()) throw new Error("LINK_NAO_PERMITIDO");
     const bytes = readFileSync(path);
     if (hash(bytes) !== a.sha256) throw new Error("HASH_DIVERGENTE");
-    conferirTexto(bytes, a.caminho, { files: [] });
+    const triagemPath = resolve(dirname(fileURLToPath(import.meta.url)), "../docs/f0-fecha/PHI-TRIAGEM.json");
+    const triagemLocal = existsSync(triagemPath) ? JSON.parse(readFileSync(triagemPath, "utf8")) : { files: [] };
+    conferirTexto(bytes, a.caminho, triagemLocal);
   }
   return { arquivos: vistos.size, estado: "RASCUNHO", alerta: false };
 }

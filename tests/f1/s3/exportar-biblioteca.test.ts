@@ -36,3 +36,16 @@ it("não sobrescreve destino nem exporta para dentro do repositório", () => {
   exportarBiblioteca(f.root, f.out);
   expect(() => exportarBiblioteca(f.root, f.out)).toThrow("DESTINO_JA_EXISTE");
 });
+it("exceção de prosa pública é exata e não encobre conteúdo pessoal acrescentado", () => {
+  const j = JSON.parse(readFileSync("corpus/3-laudos/transporte/laudo-transporte.v1.RASCUNHO.json", "utf8"));
+  const publico = fixture(j.baseLegal[2].trecho); exportarBiblioteca(publico.root, publico.out);
+  const adulterado = fixture(j.baseLegal[2].trecho + " Paciente: Pessoa Sintética");
+  expect(() => exportarBiblioteca(adulterado.root, adulterado.out)).toThrow("PHI_ESTRUTURAL");
+});
+it("identificador de estudo/catálogo não mascara rótulo pessoal no mesmo texto", () => {
+  const publico = fixture("Referência sintética: NCT99999999; APAC 0304050016");
+  exportarBiblioteca(publico.root, publico.out);
+  expect(validarPacoteConsulta(publico.out).arquivos).toBe(1);
+  const pessoal = fixture("Prontuário: 0304050016");
+  expect(() => exportarBiblioteca(pessoal.root, pessoal.out)).toThrow("PHI_ESTRUTURAL");
+});
