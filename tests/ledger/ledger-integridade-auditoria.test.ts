@@ -1,6 +1,6 @@
 import { DatabaseSync } from "node:sqlite";
 import { afterEach, describe, expect, it } from "vitest";
-import { criarSchema } from "../../src/kernel/ledger/schema";
+import { criarSchema } from "../../src/kernel/ledger/schema.js";
 
 const databases: DatabaseSync[] = [];
 function banco(): DatabaseSync {
