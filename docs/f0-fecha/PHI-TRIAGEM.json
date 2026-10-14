@@ -3126,6 +3126,22 @@
         }
       ],
       "hashMode": "utf8-lf"
+    },
+    {
+      "path": "corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json",
+      "sha256": "8b67d51b74254aee22f62d94f51ec01e7167ed9fef8c3c0d1b5191328a914e38",
+      "items": [
+        {
+          "type": "cns",
+          "line": 7,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json:7",
+          "reason": "Sequência de 15 dígitos contida no valor do campo hash (token hexadecimal de 64 caracteres) do JSON da ficha — contenção confirmada programaticamente nesta sessão; não é CNS.",
+          "contextTag": null
+        }
+      ],
+      "hashMode": "utf8-lf"
     }
   ],
   "protectedPaths": []
