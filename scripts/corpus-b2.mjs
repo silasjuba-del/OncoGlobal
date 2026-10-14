@@ -64,6 +64,20 @@ export function verificarB2(root = RAIZ) {
     if (vistos.has(rel) || alteradas.has(rel)) continue;
     if (readFileSync(p, "utf8").includes("D-F1-49")) problemas.push(`ficha cita D-F1-49 fora do manifesto B2: ${rel}`);
   }
+  // fichaId dos 6 packs B2 deve resolver para uma ficha existente (tumor do pack = pasta da ficha)
+  const conhecidos = new Set(vistos);
+  const SLUG_FICHA = { ewing: "ewing", osteossarcoma: "osteossarcoma", "cec-pele": "cec-de-pele-cutaneo", ntg: "neoplasia-trofoblastica-gestacional", vulva: "vulva", cup: "primario-desconhecido-cup" };
+  for (const slug of Object.keys(SLUG_FICHA)) {
+    const pack = JSON.parse(readFileSync(join(root, `corpus/6-pack-tumor/${slug}/pack-${slug}.v2.RASCUNHO.json`), "utf8"));
+    if (pack.status !== "RASCUNHO" || pack.consultavel !== true || pack.alerta !== false) problemas.push(`pack ${slug} fora do estado RASCUNHO/consultável/não-alerta`);
+    if (pack.curadoria?.aprovacaoClinica !== null) problemas.push(`pack ${slug} com aprovacaoClinica não-nula`);
+    for (const proto of pack.tratamento?.protocolos ?? []) {
+      if (proto.fichaId === null || proto.fichaId === undefined) continue;
+      const alvo = join(root, "corpus/fichas", SLUG_FICHA[slug]);
+      const existe = listar(alvo).some((f) => JSON.parse(readFileSync(f, "utf8")).templateId === proto.fichaId);
+      if (!existe) problemas.push(`pack ${slug}: fichaId não resolvido: ${proto.fichaId}`);
+    }
+  }
   for (const a of m.fichasAlteradas) {
     let json; try { json = JSON.parse(readFileSync(join(root, a.caminho), "utf8")); } catch { problemas.push(`alterada ilegível: ${a.caminho}`); continue; }
     if (json.templateId !== a.templateId || hashDe(json) !== json.hash) problemas.push(`alterada com hash/identidade divergente: ${a.caminho}`);
