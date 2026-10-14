@@ -1,71 +1,218 @@
 {
-  "versao": "1.0.0",
+  "versao": "1.1.0",
   "fatia": "F1-B1",
   "geradoEm": "2026-10-14",
   "alteracoes": [
     {
       "arquivo": "corpus/fichas/cabeca-e-pescoco/carboplatina-paclitaxel-semanal__nao-especificado.json",
+      "caminho": "",
+      "campo": "fonte",
+      "decisao": "D-F1-28"
+    },
+    {
+      "arquivo": "corpus/fichas/cabeca-e-pescoco/carboplatina-paclitaxel-semanal__nao-especificado.json",
+      "caminho": "itens[drug=Paclitaxel]",
+      "campo": "observacao",
       "decisao": "D-F1-28"
     },
     {
       "arquivo": "corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json",
+      "caminho": "",
+      "campo": "fonte",
+      "decisao": "D-F1-28"
+    },
+    {
+      "arquivo": "corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json",
+      "caminho": "itens[drug=Paclitaxel]",
+      "campo": "observacao",
       "decisao": "D-F1-28"
     },
     {
       "arquivo": "corpus/fichas/mama/ac-ct-fase-ct-carboplatina-paclitaxel-semanal__neo-adjuvante.json",
+      "caminho": "",
+      "campo": "fonte",
+      "decisao": "D-F1-28"
+    },
+    {
+      "arquivo": "corpus/fichas/mama/ac-ct-fase-ct-carboplatina-paclitaxel-semanal__neo-adjuvante.json",
+      "caminho": "itens[drug=Paclitaxel]",
+      "campo": "observacao",
       "decisao": "D-F1-28"
     },
     {
       "arquivo": "corpus/fichas/mama/ac-t-fase-t-paclitaxel-semanal__adjuvante.json",
+      "caminho": "",
+      "campo": "fonte",
+      "decisao": "D-F1-28"
+    },
+    {
+      "arquivo": "corpus/fichas/mama/ac-t-fase-t-paclitaxel-semanal__adjuvante.json",
+      "caminho": "itens[drug=Paclitaxel]",
+      "campo": "observacao",
       "decisao": "D-F1-28"
     },
     {
       "arquivo": "corpus/fichas/mama/ac-th-fase-th-paclitaxel-semanal-trastuzumabe__neo-adjuvante.json",
+      "caminho": "",
+      "campo": "fonte",
+      "decisao": "D-F1-28"
+    },
+    {
+      "arquivo": "corpus/fichas/mama/ac-th-fase-th-paclitaxel-semanal-trastuzumabe__neo-adjuvante.json",
+      "caminho": "itens[drug=Paclitaxel]",
+      "campo": "observacao",
       "decisao": "D-F1-28"
     },
     {
       "arquivo": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json",
+      "caminho": "",
+      "campo": "fonte",
+      "decisao": "D-F1-28"
+    },
+    {
+      "arquivo": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json",
+      "caminho": "itens[drug=Paclitaxel]",
+      "campo": "observacao",
       "decisao": "D-F1-28"
     },
     {
       "arquivo": "corpus/fichas/pulmao-cpnpc/cisplatina-docetaxel__nao-especificado.json",
+      "caminho": "",
+      "campo": "fonte",
+      "decisao": "D-F1-43"
+    },
+    {
+      "arquivo": "corpus/fichas/pulmao-cpnpc/cisplatina-docetaxel__nao-especificado.json",
+      "caminho": "itens[drug=Cimetidina]",
+      "campo": "observacao",
+      "decisao": "D-F1-43"
+    },
+    {
+      "arquivo": "corpus/fichas/pulmao-cpnpc/cisplatina-docetaxel__nao-especificado.json",
+      "caminho": "itens[drug=Dipirona]",
+      "campo": "observacao",
       "decisao": "D-F1-43"
     },
     {
       "arquivo": "corpus/1-exames/labs/labs-por-esquema.v1.RASCUNHO.json",
+      "caminho": "painels[classe=esquemas com cisplatina]",
+      "campo": "decisao",
       "decisao": "D-F1-31"
     },
     {
       "arquivo": "corpus/1-exames/labs/labs-por-esquema.v1.RASCUNHO.json",
+      "caminho": "painels[classe=fluoropirimidinas (5-FU/capecitabina)]",
+      "campo": "decisao",
       "decisao": "D-F1-32"
     },
     {
       "arquivo": "corpus/3-laudos/inss/laudo-inss.v1.RASCUNHO.json",
+      "caminho": "regrasEmissao",
+      "campo": "decisao",
       "decisao": "D-F1-37"
     },
     {
       "arquivo": "corpus/3-laudos/inss/laudo-inss.v1.RASCUNHO.json",
+      "caminho": "regrasEmissao.dadoAusente",
+      "campo": "decisao",
       "decisao": "D-F1-38"
     },
     {
       "arquivo": "corpus/3-laudos/inss/laudo-inss.v1.RASCUNHO.json",
+      "caminho": "validade",
+      "campo": "decisao",
       "decisao": "D-F1-39"
     },
     {
       "arquivo": "corpus/3-laudos/inss/laudo-inss.v1.RASCUNHO.json",
+      "caminho": "regrasEmissao.incapacidade",
+      "campo": "decisao",
       "decisao": "D-F1-46"
     },
     {
       "arquivo": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
+      "caminho": "tratamento.protocolos[id=adrenal-cca-mitotano-adjuvante].disponibilidadeMercado",
+      "campo": "decisao",
+      "decisao": "D-F1-29"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
+      "caminho": "tratamento.protocolos[id=adrenal-cca-mitotano-adjuvante].drogas[droga=Mitotano].disponibilidadeMercado",
+      "campo": "decisao",
+      "decisao": "D-F1-29"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
+      "caminho": "tratamento.protocolos[id=adrenal-cca-edp-mitotano].disponibilidadeMercado",
+      "campo": "decisao",
+      "decisao": "D-F1-29"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
+      "caminho": "tratamento.protocolos[id=adrenal-cca-edp-mitotano].drogas[droga=Mitotano].disponibilidadeMercado",
+      "campo": "decisao",
+      "decisao": "D-F1-29"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
+      "caminho": "tratamento.protocolos[id=adrenal-cca-edp-sem-mitotano]",
+      "campo": "decisao",
       "decisao": "D-F1-29"
     },
     {
       "arquivo": "corpus/6-pack-tumor/prostata/pack-prostata.v2.RASCUNHO.json",
+      "caminho": "tratamento.protocolos[id=prostata-tda-leuprorrelina-im-28d]",
+      "campo": "decisao",
       "decisao": "D-F1-24"
     },
     {
       "arquivo": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
+      "caminho": "itens[id=SUP-NVQ-ALTO-NK1-ORAL].politicaLocal",
+      "campo": "decisao",
+      "decisao": "D-F1-30"
+    },
+    {
+      "arquivo": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
+      "caminho": "itens[id=SUP-NVQ-ALTO-NK1-IV].politicaLocal",
+      "campo": "decisao",
+      "decisao": "D-F1-30"
+    },
+    {
+      "arquivo": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
+      "caminho": "itens[id=SUP-NVQ-ALTO-5HT3].politicaLocal",
+      "campo": "decisao",
+      "decisao": "D-F1-30"
+    },
+    {
+      "arquivo": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
+      "caminho": "itens[id=SUP-NVQ-ALTO-OLZ].politicaLocal",
+      "campo": "decisao",
+      "decisao": "D-F1-30"
+    },
+    {
+      "arquivo": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
+      "caminho": "itens[id=SUP-NVQ-MOD-5HT3].politicaLocal",
+      "campo": "decisao",
+      "decisao": "D-F1-30"
+    },
+    {
+      "arquivo": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
+      "caminho": "itens[id=SUP-NVQ-CARBO5-NK1].politicaLocal",
+      "campo": "decisao",
+      "decisao": "D-F1-30"
+    },
+    {
+      "arquivo": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
+      "caminho": "itens[id=SUP-NVQ-TARDIA-ESCAPE].politicaLocal",
+      "campo": "decisao",
+      "decisao": "D-F1-30"
+    },
+    {
+      "arquivo": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
+      "caminho": "itens[id=SUP-NVQ-2A-LINHA-METOCLOPRAMIDA].politicaLocal",
+      "campo": "decisao",
       "decisao": "D-F1-30"
     }
-  ]
+  ],
+  "localizador": "caminho = objeto alterado (\"\" = raiz; seletor [chave=valor] casa exatamente um elemento); campo = propriedade do objeto que cita a decisão"
 }

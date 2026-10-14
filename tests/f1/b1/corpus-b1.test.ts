@@ -4,7 +4,7 @@ import { dirname } from "node:path";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 // @ts-expect-error módulo .mjs sem declaração de tipos
-import { verificarB1 } from "../../../scripts/corpus-b1.mjs";
+import { resolverLocalizador, verificarB1 } from "../../../scripts/corpus-b1.mjs";
 
 const REAL = process.cwd();
 const MANIFESTO = "corpus/manifesto/b1-alteracoes.v1.json";
@@ -33,6 +33,40 @@ describe("F1-B1 validador do lote clínico", () => {
     writeFileSync(p, readFileSync(p, "utf8").split("D-F1-28").join("D-X"));
     expect(verificarB1(d).some((x: string) => x.includes("sem citar a decisão de origem D-F1-28"))).toBe(true);
   }));
+  it("adversarial (thread #17): remover decisao do protocolo adrenal-cca-edp-sem-mitotano falha, mesmo com D-F1-29 em outros objetos do arquivo", () => usar(d => {
+    mexer(d, ADRENAL, j => { delete j.tratamento.protocolos.find((p: any) => p.id === "adrenal-cca-edp-sem-mitotano").decisao; });
+    expect(readFileSync(join(d, ADRENAL), "utf8")).toContain("D-F1-29");
+    const p: string[] = verificarB1(d);
+    expect(p.some(x => x.includes("adrenal-cca-edp-sem-mitotano") && x.includes("D-F1-29"))).toBe(true);
+  }));
+  it("adversarial: decisão trocada no objeto apontado falha", () => usar(d => {
+    mexer(d, SUPORTE, j => { j.itens.find((i: any) => i.id === "SUP-NVQ-ALTO-5HT3").politicaLocal.decisao = "D-F1-3"; });
+    expect(verificarB1(d).some((x: string) => x.includes("SUP-NVQ-ALTO-5HT3") && x.includes("D-F1-30"))).toBe(true);
+  }));
+  it("adversarial: entrada do manifesto sem localizador, com objeto ausente ou ambíguo falha", () => usar(d => {
+    mexer(d, MANIFESTO, j => {
+      j.alteracoes[0] = { arquivo: j.alteracoes[0].arquivo, decisao: j.alteracoes[0].decisao };
+      j.alteracoes.push({ arquivo: ADRENAL, decisao: "D-F1-29", caminho: "tratamento.protocolos[id=nao-existe]", campo: "decisao" });
+      j.alteracoes.push({ arquivo: SUPORTE, decisao: "D-F1-30", caminho: "itens[categoria=__inexistente__]", campo: "decisao" });
+    });
+    const p: string[] = verificarB1(d);
+    expect(p.some(x => x.includes("sem localizador por objeto"))).toBe(true);
+    expect(p.some(x => x.includes("localizador não encontrado (tratamento.protocolos[id=nao-existe])"))).toBe(true);
+  }));
+  it("borda: localizador resolve raiz, rejeita índice numérico e seletor ambíguo", () => {
+    const j = { a: [{ id: "x", v: 1 }, { id: "x", v: 2 }, { id: "y", b: { c: "D-F1-1" } }], r: "D-F1-2" };
+    expect(resolverLocalizador(j, "")).toMatchObject({ ok: true, valor: j });
+    expect(resolverLocalizador(j, "a[id=y].b")).toMatchObject({ ok: true, valor: { c: "D-F1-1" } });
+    expect(resolverLocalizador(j, "a[id=x]")).toMatchObject({ ok: false, erro: expect.stringContaining("ambíguo") });
+    expect(resolverLocalizador(j, "a[0]")).toMatchObject({ ok: false });
+    expect(resolverLocalizador(j, "a[id=y")).toMatchObject({ ok: false, erro: expect.stringContaining("malformado") });
+    expect(resolverLocalizador(j, "r")).toMatchObject({ ok: false, erro: expect.stringContaining("não aponta objeto") });
+  });
+  it("todo objeto alterado do manifesto é localizável e cada arquivo do lote tem ao menos um localizador", () => {
+    const m = JSON.parse(readFileSync(join(REAL, MANIFESTO), "utf8"));
+    for (const a of m.alteracoes) { expect(typeof a.caminho, a.arquivo).toBe("string"); expect(typeof a.campo, a.arquivo).toBe("string"); }
+    expect(m.alteracoes.find((a: any) => a.caminho === "tratamento.protocolos[id=adrenal-cca-edp-sem-mitotano]")).toMatchObject({ campo: "decisao", decisao: "D-F1-29" });
+  });
   it("adversarial: DPYD que gera pedido ou trava falha", () => usar(d => {
     mexer(d, LABS, j => { j.painels.at(-1).lembretes[0].gerarPedido = true; });
     expect(verificarB1(d).some((x: string) => x.includes("lembrete DPYD"))).toBe(true);

@@ -7,6 +7,42 @@ function* objetos(v) {
   if (v && typeof v === "object") { yield v; for (const x of Object.values(v)) yield* objetos(x); }
 }
 
+/**
+ * Localizador por objeto (proveniência por OBJETO, não por arquivo).
+ * Formato: "a.b[chave=valor].c"; "" aponta a raiz. Seletor por chave=valor deve casar exatamente UM elemento.
+ * Índice numérico não é aceito: a ordem do array pode mudar sem mudar o objeto.
+ * @returns {{ ok: true, valor: any } | { ok: false, erro: string }}
+ */
+export function resolverLocalizador(raiz, caminho) {
+  if (typeof caminho !== "string") return { ok: false, erro: "localizador ausente" };
+  const segmentos = [];
+  let atual = "", colchete = false;
+  for (const c of caminho) {
+    if (c === "[") colchete = true;
+    if (c === "]") colchete = false;
+    if (c === "." && !colchete) { segmentos.push(atual); atual = ""; continue; }
+    atual += c;
+  }
+  if (colchete) return { ok: false, erro: `localizador malformado (${caminho})` };
+  if (atual !== "" || segmentos.length) segmentos.push(atual);
+  let v = raiz;
+  for (const seg of segmentos) {
+    const m = /^([^[\]]+)(?:\[([^=\]]+)=([^\]]*)\])?$/.exec(seg);
+    if (!m) return { ok: false, erro: `localizador malformado (${caminho})` };
+    const [, chave, campoSel, valorSel] = m;
+    if (!v || typeof v !== "object" || Array.isArray(v) || !Object.hasOwn(v, chave)) return { ok: false, erro: `localizador não encontrado (${caminho})` };
+    v = v[chave];
+    if (campoSel !== undefined) {
+      if (!Array.isArray(v)) return { ok: false, erro: `localizador não aponta lista em ${chave} (${caminho})` };
+      const achados = v.filter((x) => x && typeof x === "object" && String(x[campoSel]) === valorSel);
+      if (achados.length !== 1) return { ok: false, erro: `localizador ${achados.length === 0 ? "não encontrado" : "ambíguo"} (${caminho})` };
+      v = achados[0];
+    }
+  }
+  if (!v || typeof v !== "object" || Array.isArray(v)) return { ok: false, erro: `localizador não aponta objeto (${caminho})` };
+  return { ok: true, valor: v };
+}
+
 /** @returns {string[]} problemas; vazio = ok */
 export function verificarB1(raiz) {
   const problemas = [];
@@ -15,12 +51,21 @@ export function verificarB1(raiz) {
   let alteracoes;
   try { alteracoes = JSON.parse(readFileSync(manifesto, "utf8")).alteracoes; } catch (e) { return [`manifesto B1 inválido: ${e.message}`]; }
   if (!Array.isArray(alteracoes)) return ["manifesto B1 sem lista de alterações"];
-  // 1. cada item alterado cita a decisão de origem dentro do próprio arquivo
-  for (const { arquivo, decisao } of alteracoes) {
+  // 1. cada OBJETO alterado cita a decisão de origem no campo apontado (não basta o arquivo citar em outro lugar)
+  const cache = new Map();
+  for (const { arquivo, decisao, caminho, campo } of alteracoes) {
     if (!/^D-F1-\d+$/.test(String(decisao))) { problemas.push(`${arquivo}: decisão de origem inválida (${decisao})`); continue; }
-    const caminho = join(raiz, String(arquivo));
-    if (!existsSync(caminho)) { problemas.push(`${arquivo}: arquivo do manifesto não existe`); continue; }
-    if (!readFileSync(caminho, "utf8").includes(decisao)) problemas.push(`${arquivo}: alterado sem citar a decisão de origem ${decisao}`);
+    if (typeof caminho !== "string" || typeof campo !== "string" || !campo) { problemas.push(`${arquivo}: alteração ${decisao} sem localizador por objeto (caminho + campo)`); continue; }
+    const disco = join(raiz, String(arquivo));
+    if (!existsSync(disco)) { problemas.push(`${arquivo}: arquivo do manifesto não existe`); continue; }
+    if (!cache.has(disco)) { try { cache.set(disco, JSON.parse(readFileSync(disco, "utf8"))); } catch { cache.set(disco, null); } }
+    const json = cache.get(disco);
+    if (json === null) { problemas.push(`${arquivo}: JSON inválido`); continue; }
+    const alvo = resolverLocalizador(json, caminho);
+    if (!alvo.ok) { problemas.push(`${arquivo}: ${alvo.erro}`); continue; }
+    const valor = alvo.valor[campo];
+    if (typeof valor !== "string" || !new RegExp(`\\b${decisao}\\b`).test(valor))
+      problemas.push(`${arquivo}: objeto ${caminho || "(raiz)"} alterado sem citar a decisão de origem ${decisao} em ${campo}`);
   }
   // 2. regras estruturais sobre os arquivos do manifesto
   for (const arquivo of new Set(alteracoes.map((a) => a.arquivo))) {
