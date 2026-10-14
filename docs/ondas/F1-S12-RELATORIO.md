@@ -1,6 +1,6 @@
 # F1-S12 — fechamento e evidências
 
-Estado: **entrega técnica e auditoria S12 concluídas**, com integração pelo [PR #14](https://github.com/silasjuba-del/OncoGlobal/pull/14) condicionada aos checks do HEAD. Provas integrais confirmadas no commit `29cee755`; alterações seguintes de encerramento são documentais. Isso não encerra a curadoria S3c nem declara integração clínica dos 33 rascunhos inativos.
+Estado: **entrega técnica e auditoria S12 concluídas**, com integração pelo [PR #14](https://github.com/silasjuba-del/OncoGlobal/pull/14) condicionada aos checks do HEAD. Provas integrais confirmadas em `29cee755` e `5e1b9f7`; a correção final de risco FN desconhecido está descrita abaixo e exige nova CI do HEAD no mesmo PR. Isso não encerra a curadoria S3c nem declara integração clínica dos 33 rascunhos inativos.
 
 ## Quadro de execução aprovado
 
@@ -60,8 +60,9 @@ Resultados medidos nesta árvore de produto e na CI de `29cee755`, sem reutiliza
 - Backend: resultado desconhecido após envio preservado; retry/restart pela mesma chave não retransmite; documento legado mantém HTML. Revisão independente sem novo defeito concreto nesse escopo.
 - UI: receitas múltiplas, seleção individual, edição preservada e resultados tardios/contexto antigo cobertos. Script de latência foi explicitamente limitado a DOM/frames e passou a rolar o título ao viewport; não mede pixels físicos ou streaming.
 - Primeira bateria local encontrou artefatos de navegador ainda no workspace e nomes de arquivos sintéticos parecidos com email. Os artefatos foram preservados fora da árvore publicável; o nome do arquivo de teste passou a derivar do ID/versão. Scanner não foi afrouxado.
+- Revisão automática do PR encontrou risco FN estruturado com valor interno nulo classificado como dado documentado sem regra. Correção final: desembrulhar o valor e exigir número finito; nulo, ausente, texto, booleano, objeto/lista e não finito permanecem `RISCO_FN_DADO_AUSENTE`. Zero explícito e números finitos preservam a lacuna de regra, sem limiar novo nem indicação clínica. Regressões acrescentadas em `formulas-aplicabilidade.test.ts`; os checks do HEAD do PR são a referência final após essa correção.
 
-### Gates finais
+### Gates da base validada (`29cee755` / `5e1b9f7`)
 
 | Execução | Resultado |
 | --- | --- |

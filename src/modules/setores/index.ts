@@ -249,7 +249,8 @@ function lacunasAplicabilidadeTratamento(o:AchadosSetor,r:Retrato,tratamentos:Fa
       lacuna(o,`${prefixo}_CONTEXTO_NAO_ATUAL`,'Aplicabilidade do dado neste encontro não confirmada.',refs);continue;
     }
     if(risco){
-      if(f.dados.valor===null||f.dados.valor===undefined){lacuna(o,'RISCO_FN_DADO_AUSENTE','Risco de neutropenia febril não informado.',refs);continue;}
+      const valor=dados(f).valor;
+      if(typeof valor!=='number'||!Number.isFinite(valor)){lacuna(o,'RISCO_FN_DADO_AUSENTE','Risco de neutropenia febril não informado como valor numérico finito.',refs);continue;}
       lacuna(o,'RISCO_FN_SEM_REGRA','Risco de neutropenia febril documentado; regra de aplicabilidade e suporte não disponível nesta avaliação. Revisão médica necessária, sem indicação automática.',refs,true);
       continue;
     }

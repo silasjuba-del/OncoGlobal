@@ -1,6 +1,6 @@
 # Relatório F1 — encerramento S12
 
-Estado: **entrega técnica e auditoria S12 concluídas**. [PR #14](https://github.com/silasjuba-del/OncoGlobal/pull/14) concentra o gate final de integração em `codex/f1-conclusao`. CI da árvore de produto: 3350/3350 testes padrão, 620/620 F1, 240/240 W10 e 41/41 W8. Curadoria e integração clínica dos rascunhos do catálogo permanecem explicitamente separadas abaixo.
+Estado: **entrega técnica e auditoria S12 concluídas**. [PR #14](https://github.com/silasjuba-del/OncoGlobal/pull/14) concentra o gate final de integração em `codex/f1-conclusao`. Base `5e1b9f7` validada: 3350/3350 testes padrão, 620/620 F1, 240/240 W10 e 41/41 W8. A correção final de risco FN nulo acrescenta regressões e exige nova CI do HEAD no PR. Curadoria e integração clínica dos rascunhos do catálogo permanecem explicitamente separadas abaixo.
 
 ## Escopo entregue
 
@@ -14,7 +14,7 @@ Melhorias aproveitadas: identificação persistente do paciente/encontro, navega
 - Impressos antigos sem metadados novos mantêm o render original; cadastro posterior não altera seus bytes.
 - Falha, timeout ou resposta inválida após início de envio LLM preserva resultado desconhecido e impede duplicar a transmissão pela mesma chave, inclusive após reinício do SQLite. Auditoria registra metadados/códigos, sem conteúdo clínico nem chave.
 - Metadado de interação condicionada inválido produz lacuna explícita. Lista completa sem par não gera falso aviso de falta de pares nem sinal verde. Exposição histórica permanece avaliada; listas conflitantes não são unidas. Reataque independente confirmou as correções.
-- Risco FN e clearance documentados têm consumo referenciado e lacunas de dado/aplicabilidade/regra, sem criar indicação terapêutica, fórmula nova ou ajuste de dose.
+- Risco FN e clearance documentados têm consumo referenciado e lacunas de dado/aplicabilidade/regra, sem criar indicação terapêutica, fórmula nova ou ajuste de dose. Risco FN com valor interno nulo, não numérico ou não finito é dado ausente; zero explícito não é tratado como ausência.
 
 ## Decisões e limites
 

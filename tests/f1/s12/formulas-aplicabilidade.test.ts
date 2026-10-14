@@ -23,13 +23,32 @@ function avaliar(f: FatoRetrato) {
   return saida;
 }
 describe("S12 A13: risco FN e clearance têm porta explícita sem regra clínica inventada", () => {
-  it.each([0.1, 0.2, 0.3])("risco informado %s produz a mesma lacuna de regra, sem limiar ou indicação", valor => {
+  it.each([0, 0.1, 0.2, 0.3])("risco informado %s produz a mesma lacuna de regra, sem limiar ou indicação", valor => {
     const f = fato("riscoFN", { valor, unidade: "FRACAO" }), s = avaliar(f), l = s.lacunas.find(l => l.codigo === "RISCO_FN_SEM_REGRA");
     expect(l?.fatos).toEqual([f.ref, tratamento.ref]); expect(s.entradas).toContainEqual(f.ref);
     expect(l?.texto).not.toMatch(/G-CSF|20%|prescrever/i);
   });
-  it("risco desconhecido não é risco zero", () => {
-    expect(avaliar(fato("riscoFN", null)).lacunas.some(l => l.codigo === "RISCO_FN_DADO_AUSENTE")).toBe(true);
+  it.each([0, 0.2])("risco numérico direto %s preserva a lacuna de regra", valor => {
+    expect(avaliar(fato("riscoFN", valor)).lacunas.some(l => l.codigo === "RISCO_FN_SEM_REGRA")).toBe(true);
+  });
+  it.each([
+    { nome: "nulo direto", valor: null },
+    { nome: "ausente direto", valor: undefined },
+    { nome: "nulo na fração", valor: { valor: null, unidade: "FRACAO" } },
+    { nome: "ausente na fração", valor: { unidade: "FRACAO" } },
+    { nome: "NaN na fração", valor: { valor: NaN, unidade: "FRACAO" } },
+    { nome: "infinito na fração", valor: { valor: Infinity, unidade: "FRACAO" } },
+    { nome: "infinito negativo direto", valor: -Infinity },
+    { nome: "texto numérico na fração", valor: { valor: "0.2", unidade: "FRACAO" } },
+    { nome: "texto desconhecido direto", valor: "desconhecido" },
+    { nome: "booleano na fração", valor: { valor: false, unidade: "FRACAO" } },
+    { nome: "objeto na fração", valor: { valor: {}, unidade: "FRACAO" } },
+    { nome: "lista direta", valor: [0.2] },
+  ])("risco $nome mantém lacuna de dado sem alegar risco documentado", ({ valor }) => {
+    const f = fato("riscoFN", valor), s = avaliar(f);
+    expect(s.lacunas.find(l => l.codigo === "RISCO_FN_DADO_AUSENTE")?.fatos).toEqual([f.ref, tratamento.ref]);
+    expect(s.lacunas.some(l => l.codigo === "RISCO_FN_SEM_REGRA")).toBe(false);
+    expect(s.entradas).toContainEqual(f.ref);
   });
   it("clearance explícito vigente referencia dado e tratamento, mas não ajusta dose nem substitui droga", () => {
     const f = fato("clearance", clearance()), s = avaliar(f), l = s.lacunas.find(l => l.codigo === "RENAL_TRATAMENTO_SEM_REGRA");
