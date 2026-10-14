@@ -23,15 +23,42 @@ export function criarServidorLocal(deps: ServidorDeps, config: { host?: string; 
     salaoRuleset: deps.salaoRuleset === undefined ? corpus?.ruleset ?? null : deps.salaoRuleset };
   const configMotor=carregarConfigMotor();
   runtimeDeps.motorF1=deps.motorF1??criarMotorF1(deps.db,deps.agora,()=>({...configMotor,biblioteca:referenciaBibliotecaAtiva(deps.db)??configMotor.biblioteca}));
-  void runtimeDeps.motorF1.processar().catch(()=>deps.log({rota:"motor-f1",codigo:"RECUPERACAO_PENDENTE",status:503}));
+  let encerrando = false;
+  const pendentes = new Set<Promise<unknown>>();
+  const acompanhar = (trabalho: Promise<unknown>) => {
+    const acompanhado = trabalho.finally(() => pendentes.delete(acompanhado));
+    pendentes.add(acompanhado);
+    void acompanhado.catch(() => {}); // Os caminhos abaixo já registram erro sem conteúdo clínico.
+  };
+  acompanhar(runtimeDeps.motorF1.processar().catch(()=>deps.log({rota:"motor-f1",codigo:"RECUPERACAO_PENDENTE",status:503})));
   const server = createServer((req, res) => {
-    void rotear(runtimeDeps, req, res).then(()=>runtimeDeps.motorF1?.processar()).catch(() => {
+    if (encerrando) {
+      res.writeHead(503, { "Content-Type": "application/json", "Cache-Control": "no-store" });
+      res.end(JSON.stringify({ codigo: "SERVIDOR_ENCERRANDO" }));
+      return;
+    }
+    acompanhar(rotear(runtimeDeps, req, res).then(()=>runtimeDeps.motorF1?.processar()).catch(() => {
       // The router handles expected failures; this fallback remains PHI-free.
       runtimeDeps.log({ rota: "desconhecida", codigo: "ERRO_INTERNO", status: 500 });
       if (!res.headersSent) res.writeHead(500);
       res.end();
-    });
+    }));
   });
+  // HTTP respondido não significa que o processamento pós-commit terminou.
+  // O callback/evento close só libera o chamador para fechar SQLite após drenar esse trabalho.
+  const fecharHttp = server.close.bind(server);
+  let encerramento: Promise<Error | undefined> | null = null;
+  server.close = (callback) => {
+    if (!encerramento) {
+      encerrando = true;
+      encerramento = (async () => {
+        while (pendentes.size) await Promise.allSettled([...pendentes]);
+        return new Promise<Error | undefined>(resolve => fecharHttp(error => resolve(error)));
+      })();
+    }
+    if (callback) void encerramento.then(error => callback(error));
+    return server;
+  };
   if (ownsSettings) server.on("close", () => settings?.close());
   server.listen(config.port ?? 0, "127.0.0.1");
   return server;
