@@ -8,7 +8,6 @@ export interface OpcoesPdfLocal { ocrConfig?: ConfigOcrLocal; ocr?: ProvedorOcrL
 /** Kernel port for local digital extraction and optional scan OCR. Never requests a new photo. */
 export async function converterPdfLocal(entrada: EntradaLeitura, opcoes: OpcoesPdfLocal = {}): Promise<ResultadoLeitura> {
   const digital = await converterEntradaLocalAsync({ ...entrada, tipo: "PDF_DIGITAL" });
-  if (!opcoes.ocrConfig) return digital;
   if (typeof entrada.conteudo === "string") return digital;
   const tarefa = getDocument({ data: new Uint8Array(entrada.conteudo), disableFontFace: true,
     useSystemFonts: false, useWorkerFetch: false, useWasm: false, verbosity: 0 });
@@ -21,6 +20,8 @@ export async function converterPdfLocal(entrada: EntradaLeitura, opcoes: OpcoesP
       if (opcoes.signal?.aborted) throw Error("CANCELADO");
       const textoDigital = digital.documento.paginas.find(p => p.n === n)?.texto;
       if (textoDigital) { paginas.push({ n, texto: textoDigital }); continue; }
+      // Página escaneada sem OCR instalado: não some do documento; o upload fica pendente para revisão do original.
+      if (!opcoes.ocrConfig) { incompleto = true; continue; }
       const pagina = await doc.getPage(n); const viewport = pagina.getViewport({ scale: 2 });
       if (viewport.width * viewport.height > 20_000_000) throw Error("PDF_LIMITE_PIXELS");
       const canvas = createCanvas(Math.ceil(viewport.width), Math.ceil(viewport.height));

@@ -34,7 +34,7 @@ import { projetarVinculosContato, type ContatoProjetado } from "../kernel/projec
 import { hashConteudoExibido } from "./sessao.js";
 import { projetarRetratoTransversal } from "./retratoTransversal.js";
 import { projetarContextoClinico, projetarHistoricoClinico } from "./f0c/contextoClinico.js";
-import { avaliarConsulta, type EntradaAvaliacaoConsulta } from "./f0c/avaliacaoConsulta.js";
+import { avaliarConsulta, horizonteDoEncontro, type EntradaAvaliacaoConsulta } from "./f0c/avaliacaoConsulta.js";
 import { coletarFontesSalao } from "./f0c/salao.js";
 import { projetarInstrumentosClinicos } from "./f0c/instrumentosClinicos.js";
 import type { RegraInstrumento } from "../contracts/f0c/instrumentos.js";
@@ -325,7 +325,10 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   // Escopo da consulta: eventos do paciente no lote selecionado ou sem lote (ex.: biópsia, paciente).
   const eventosDaConsulta = all.filter((event) => event.patientId === patientId
     && (escopoDoEvento(event) === "PACIENTE" || event.tumorLotId === null || event.tumorLotId === (lote?.tumorLotId ?? undefined)));
-  const alertaPlaquetas = alertaPlaquetasDaConsulta(eventosDaConsulta, config.limiarPlaquetas ?? null);
+  // Mesmo corte de avaliarConsulta: plaquetas de encontro posterior não reescrevem a elegibilidade de consulta reaberta.
+  const horizontePlaquetas = horizonteDoEncontro(all.filter((event) => event.patientId === patientId), current.encounterId, agora);
+  const alertaPlaquetas = alertaPlaquetasDaConsulta(eventosDaConsulta.filter((event) => Date.parse(event.criadoEm) <= horizontePlaquetas),
+    config.limiarPlaquetas ?? null);
   const contextoClinico = projetarContextoClinico({ eventos: all, patientId, tumorLotId: lote?.tumorLotId ?? null,
     encounterId: current.encounterId, agora, episodio, ciclo: ciclos.at(-1) ?? null, ...(config.templates ? {templates:config.templates} : {}) });
   const condicionais=projetarCondicionaisClinicas({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,

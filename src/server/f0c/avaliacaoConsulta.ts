@@ -45,16 +45,20 @@ export interface EntradaAvaliacaoConsulta {
   cumulativo?: SinalElegibilidade;
 }
 
+/** Encontro reaberto: o horizonte termina onde começa o encontro seguinte; evidência posterior não reescreve a consulta antiga. */
+export function horizonteDoEncontro(eventosDoPaciente: readonly ClinicalEvent[], encounterId: string, agora: string): number {
+  const inicio = new Map<string, number>();
+  for (const e of eventosDoPaciente) { const t = Date.parse(e.criadoEm); if (Number.isFinite(t) && t < (inicio.get(e.encounterId) ?? Infinity)) inicio.set(e.encounterId, t); }
+  const inicioAtual = inicio.get(encounterId);
+  const seguinte = inicioAtual === undefined ? Infinity
+    : Math.min(Infinity, ...[...inicio].filter(([id, t]) => id !== encounterId && t > inicioAtual).map(([, t]) => t));
+  return Math.min(Date.parse(agora), seguinte - 1);
+}
+
 /** A avaliação consome o mesmo ledger da consulta; dado ausente continua com motivo explícito. */
 export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const doPaciente = i.eventos.filter(e => e.patientId === i.patientId);
-  // Encontro reaberto: o horizonte termina onde começa o encontro seguinte; evidência posterior não reescreve a consulta antiga.
-  const inicio = new Map<string, number>();
-  for (const e of doPaciente) { const t = Date.parse(e.criadoEm); if (Number.isFinite(t) && t < (inicio.get(e.encounterId) ?? Infinity)) inicio.set(e.encounterId, t); }
-  const inicioAtual = inicio.get(i.encounterId);
-  const seguinte = inicioAtual === undefined ? Infinity
-    : Math.min(Infinity, ...[...inicio].filter(([id, t]) => id !== i.encounterId && t > inicioAtual).map(([, t]) => t));
-  const horizonte = Math.min(Date.parse(i.agora), seguinte - 1);
+  const horizonte = horizonteDoEncontro(doPaciente, i.encounterId, i.agora);
   // Fatos sistêmicos (labs, administrações, medicamentos…) são do paciente, independentemente do lote de origem.
   const escopo = doPaciente.filter(e => (e.tumorLotId === null || e.tumorLotId === i.tumorLotId || escopoDoEvento(e) === "PACIENTE")
     && Date.parse(e.criadoEm) <= horizonte);
