@@ -16,8 +16,8 @@ describe("S11 extração OpenAI sem autoridade nem PHI", () => {
     expect(criarExtratorOpenAi({ env: { ...env, OPENAI_API_KEY: "" } }).status().codigo).toBe("CHAVE_AUSENTE");
   });
   it("sem gate de auditoria live e CI proíbem transporte real", () => {
-    expect(criarExtratorOpenAi({ env }).status().codigo).toBe("LIVE_SEM_GATE_AUDITORIA");
-    expect(criarExtratorOpenAi({ env: { ...env, CI: "true", ONCOASSIST_OPENAI_LIVE_AUDIT: "true" }, auditar: () => {} }).status().codigo).toBe("LIVE_SEM_GATE_AUDITORIA");
+    expect(criarExtratorOpenAi({ env }).status().codigo).toBe("D_F1_40_LLM_SO_LOCAL");
+    expect(criarExtratorOpenAi({ env: { ...env, CI: "true", ONCOASSIST_OPENAI_LIVE_AUDIT: "true" }, auditar: () => {} }).status().codigo).toBe("D_F1_40_LLM_SO_LOCAL");
     expect(statusDocumentoOriginalOpenAi().status).toBe("PENDENTE");
   });
   it("desidentifica antes de chamar, store false, formato strict, sem identidade interna no payload", async () => {
@@ -87,10 +87,19 @@ describe("G-02b: PHI fora do dicionário fica local (P1 PR #13)", () => {
     expect(r).toMatchObject({ status: "PENDENTE", codigo: "G02_PHI_ESTRUTURAL" });
     expect(extrair).not.toHaveBeenCalled();
   });
-  it("transporte real sem prova do gateway sobre o payload exato não envia", async () => {
+  it("D-F1-40: com flags, chave e auditoria live, o transporte real continua proibido e não envia", async () => {
     const fetchSpy = vi.spyOn(globalThis, "fetch");
-    const r = await criarExtratorOpenAi({ env: { ...env, ONCOASSIST_OPENAI_LIVE_AUDIT: "true" }, auditar: () => {} }).extrair(entrada, dic);
-    expect(r).toMatchObject({ status: "PENDENTE", codigo: "PAYLOAD_SEM_PROVA_GATEWAY" });
+    const r = await criarExtratorOpenAi({ env: { ...env, ONCOASSIST_OPENAI_LIVE_AUDIT: "true" }, auditar: () => {} })
+      .extrair(entrada, { ...dic, payloadAutorizado: "qualquer" });
+    expect(r).toMatchObject({ status: "PENDENTE", codigo: "D_F1_40_LLM_SO_LOCAL" });
     expect(fetchSpy).not.toHaveBeenCalled(); fetchSpy.mockRestore();
+  });
+});
+
+describe("D-F1-40: LLM só local também para documento original", () => {
+  it("transcritor sem transporte injetado fica PENDENTE com flags, chave e auditoria live", async () => {
+    const { criarTranscritorDocumentoOriginal } = await import("../../../src/kernel/llm/openai/documentoOriginal.js");
+    const t = criarTranscritorDocumentoOriginal({ env: { ...env, ONCOASSIST_OPENAI_DOCUMENTS_ENABLED: "true", ONCOASSIST_OPENAI_LIVE_AUDIT: "true" }, auditar: () => {} });
+    expect(t.status()).toMatchObject({ status: "PENDENTE", codigo: "D_F1_40_LLM_SO_LOCAL" });
   });
 });

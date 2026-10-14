@@ -74,8 +74,8 @@ export function criarExtratorOpenAi(opcoes: OpcoesOpenAi = {}) {
     if (env.ONCOASSIST_OPENAI_ENABLED !== "true") return { status: "PENDENTE", codigo: "DESABILITADO" };
     if (!modelo) return { status: "PENDENTE", codigo: "MODELO_API_NAO_CONFIGURADO" };
     if (!chave) return { status: "PENDENTE", codigo: "CHAVE_AUSENTE" };
-    if (!opcoes.transporte && ((!!env.CI && env.CI !== "false") || env.ONCOASSIST_OPENAI_LIVE_AUDIT !== "true" || !opcoes.auditar))
-      return { status: "PENDENTE", codigo: "LIVE_SEM_GATE_AUDITORIA" };
+    // D-F1-40: LLM só local. Nenhum transporte externo real, mesmo com flags e chave; só transporte injetado (teste, sem rede).
+    if (!opcoes.transporte) return { status: "PENDENTE", codigo: "D_F1_40_LLM_SO_LOCAL" };
     return { status: "DISPONIVEL", codigo: opcoes.transporte ? "TRANSPORTE_INJETADO" : "CONFIGURADO_NAO_ATESTADO" };
   };
   return { status, async extrair(entrada: unknown, contexto: ContextoServidorOpenAi, signal?: AbortSignal): Promise<ResultadoExtracao> {
