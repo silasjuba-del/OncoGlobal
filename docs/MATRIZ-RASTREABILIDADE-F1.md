@@ -94,10 +94,12 @@ Linha por requisito verificável (requisito → código/artefato → teste → e
 
 | Gate | Comando | Resultado |
 |---|---|---|
-| verify integral (2×) | `npm run verify` | (a executar) |
-| verify:f1 | `npm run verify:f1` | (a executar) |
-| red team W10 | vitest config redteam | (a executar) |
-| adversarial W8 | vitest config adv-w8 | (a executar) |
-| ui:build | `npm run ui:build` | (a executar) |
-| exportação + validarPacoteConsulta | `node scripts/exportar-biblioteca.mjs <tmp>` + API | (a executar) |
-| conversor real | `node scripts/converter-biblioteca.mjs <snap> <out>` | (a executar) |
+| verify integral (2×) | `npm run verify` | **PASS 2×** no HEAD `08403ec` (14:37–14:57): 3.595 testes/456 arquivos cada execução; SHA e árvore conferidos antes/depois de cada gate; logs em %TEMP%/oncoglobal-f1-gates-20261014-143758 |
+| verify:f1 | `npm run verify:f1` | **PASS**: 775 testes/93 arquivos |
+| red team W10 | vitest config redteam | **PASS**: 240 testes/31 arquivos |
+| adversarial W8 | vitest config adv-w8 | **PASS**: 41 testes/9 arquivos |
+| ui:build | `npm run ui:build` | **PASS** |
+| exportação + validarPacoteConsulta | `node scripts/exportar-biblioteca.mjs <tmp>` + API | **PASS**: 253 arquivos textuais do corpus (224 anteriores + 22 fichas B2 + 6 packs + manifesto b2); validarPacoteConsulta = {arquivos:253, estado:RASCUNHO, alerta:false}; destino inexistente fora do repo |
+| conversor real | `node scripts/converter-biblioteca.mjs <snap> <out>` | **PASS**: 1 item incluído (labs-por-esquema, URL DailyMed verificada 2026-10-14) / 252 excluídos com motivos; pacote-http dentro dos limites; provado pelo importador interno real |
+
+Observações dos gates: (1) a primeira rodada da bateria (logs …132751) falhou 1 teste — o scanner PHI do repositório — por prefixos de hash hexadecimal no texto das fichas/docs e CPF literal de fixture; corrigido na raiz (fontes sem prefixos; CPF montado em runtime; triagem reconciliada item a item com motivos técnicos; nenhum achado real silenciado) e a bateria foi re-executada ÍNTEGRA no HEAD final; (2) números de execuções anteriores desta rodada (3.595/456 etc.) valem apenas para o HEAD indicado.
