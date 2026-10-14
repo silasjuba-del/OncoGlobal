@@ -67,3 +67,37 @@ Os nomes dos testes sem prefixo nesta tabela estão em `tests/f1/s12/`. Esta aud
 ## Gates transversais
 
 `npm run verify`, `npm run verify:f1`, red team W10/W8, matriz F0, PHI com índice igual à árvore, builds, CRIT-5 HTTP/navegador, demonstração documental, reinício e reimpressão compõem a prova. Consultar os números e limites do relatório S12; não substituir uma demonstração por teste unitário nem declarar provider real a partir de transporte injetado.
+
+## Rodada F1-B2 sem SISAC + adendo ao eixo N (2026-10-14 — rótulos F-B2*)
+
+Linha por requisito verificável (requisito → código/artefato → teste → execução/SHA → resultado → limite). Ramo `codex/f1-b2-fontes`, empilhado em `ea02ea2` (PR #18).
+
+| Requisito | Código/artefato | Teste | SHA | Resultado | Limite |
+|---|---|---|---|---|---|
+| F-B2-1 Nova diretriz sem SISAC registrada preservando D-F1-48 | `docs/DECISOES.md` (D-F1-49) | leitura/auditoria | `7dd1e6b` | PASS | registro documental |
+| F-B2-2 22 fichas novas RASCUNHO sem SISAC | `corpus/fichas/**` + `tests/corpus-fichas/gerar-fichas-b2.mjs` | `tests/corpus-fichas/fichas.test.ts` (bloco F1-B2, 10 its) | `7dd1e6b` | PASS (39/39) | nenhuma CONFERIDA_MEDICO; 5 campos NAO_LOCALIZADO |
+| F-B2-3 Proveniência por campo com fonte verificada | `corpus/manifesto/b2-fichas.v1.json` | `scripts/corpus-b2.mjs` (via `npm run check:corpus`) | `7dd1e6b`/`5f56dfe` | PASS (240 arquivos) | DOCUMENTADO exige sourceId; decisões locais rotuladas |
+| F-B2-4 6 packs com fichaId resolvendo para ficha | `corpus/6-pack-tumor/{ewing,osteossarcoma,cec-pele,ntg,vulva,cup}` | `scripts/corpus-b2.mjs` (fichaId+estado) | `5f56dfe` | PASS | packs RASCUNHO; aprovacaoClinica null |
+| F-B2-5 Ambiguidades com localizador | `docs/ondas/F1-B2-DOSSIE-CURADORIA.md` §2 + conflitos dos packs | leitura/auditoria | `8b8de07` | PASS (12 temas) | 6 decisões humanas pendentes |
+| F-B2-6 Apresentação legível gerada do artefato | `scripts/gerar-dossie-fichas.mjs` → `docs/ondas/F1-B2-QUADROS.md` | regeneração determinística | `8b8de07` | PASS | documento gerado; não editar à mão |
+| F-B2-7 Jornada por ficha: carregamento/recusa/cálculo/pendência | — | `tests/f1/b2/jornadas-fichas-b2.test.ts` | `93ea1b4` | PASS (3/3) | promoção a CONFERIDA só em memória de teste; HTTP da rota coberto em leituras-http |
+| F-N-1 Conversor snapshot→PacoteBiblioteca@1 com staging | `scripts/converter-biblioteca.mjs` | `tests/f1/s3/converter-biblioteca.test.ts` | `eb53645` | PASS (bateria obrigatória do adendo) | primeiro lote = 1 item (fonte com URL verificada); expansão exige mapeamento |
+| F-N-2 Validação pela API interna real | idem (importarPacote na prova) | idem ("importação RASCUNHO…", "hash divergente…") | `eb53645` | PASS | validarConteudo privado não duplicado |
+| F-N-3 Caminho HTTP completo importar→curar→ativar→consultar | — | idem ("F1-N ponte no HTTP real") | `eb53645` | PASS | ALERTA recusado inclusive REGRA; um pacote ativo por vez |
+| F-N-4 Exceções PHI não transferidas | idem (exclusão com motivo) | idem ("PHI não atravessa") | `eb53645` | PASS | importador mais estrito que o export (por desenho) |
+| F-N-5 Aplicabilidade desconhecida ≠ universal | idem | idem ("converte o primeiro lote…") | `eb53645` | PASS (APLICABILIDADE_DESCONHECIDA) | — |
+| F-N-6 Fix do backtracking quadrático do kernel | `src/kernel/corpus/biblioteca.ts` | 4 baterias s3 (69/69, 5 s vs 418 s antes) | `eb53645` | PASS | semântica de rejeição preservada |
+| F-N-7 P-02/P-03/P-30 localizados | `docs/_arquivo/w10/PEDIDOS-LUNA3.md` + relatório | leitura | `8b8de07`/RELATORIO | PASS (P-30 inexistente) | não tratados como decisões canônicas |
+| F-B2-8 Gates do HEAD final | — | `verify`×2, `verify:f1`, W10, W8, `ui:build`, exportação+validarPacoteConsulta, conversor real | (ver seção de gates abaixo) | ver abaixo | crash/timeout/árvore alterada não contam como PASS |
+
+### Gates do HEAD (preencher ao executar)
+
+| Gate | Comando | Resultado |
+|---|---|---|
+| verify integral (2×) | `npm run verify` | (a executar) |
+| verify:f1 | `npm run verify:f1` | (a executar) |
+| red team W10 | vitest config redteam | (a executar) |
+| adversarial W8 | vitest config adv-w8 | (a executar) |
+| ui:build | `npm run ui:build` | (a executar) |
+| exportação + validarPacoteConsulta | `node scripts/exportar-biblioteca.mjs <tmp>` + API | (a executar) |
+| conversor real | `node scripts/converter-biblioteca.mjs <snap> <out>` | (a executar) |
