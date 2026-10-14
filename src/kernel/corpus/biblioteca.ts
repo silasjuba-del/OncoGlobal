@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import type { DatabaseSync } from 'node:sqlite';
 import { z } from 'zod';
+import { detectarPhiEstrutural } from '../llm/phiEstrutural.js';
 
 const chave = z.string().regex(/^[a-zA-Z0-9_-]{1,100}$/);
 const versao = z.string().regex(/^\d+\.\d+\.\d+$/);
@@ -54,6 +55,10 @@ function validarConteudo(manifesto: unknown, ler: (arquivo: string) => string): 
     // Pacote público não aceita identificadores comuns de paciente; declaração PUBLIC não basta.
     const publico = JSON.stringify(item);
     if (/\b\d{3}\.\d{3}\.\d{3}-\d{2}\b|\b\d{11}\b|\b\d{15}\b|[\w.+-]+@[\w.-]+\.[a-z]{2,}/i.test(publico)) throw new Error('IDENTIFICADOR_PESSOAL');
+    // A fonte bibliográfica é uma URL obrigatória. Nos textos, URLs de referência são permitidas;
+    // as demais categorias estruturais (nome rotulado, endereço, nascimento...) continuam recusadas.
+    const textoPublico = [item.titulo, item.texto, item.proveniencia.trecho, item.proveniencia.licenca].join('\n');
+    if (detectarPhiEstrutural(textoPublico).some(c => c !== 'URL_OU_IP')) throw new Error('IDENTIFICADOR_PESSOAL');
     return item;
   });
   const mapa = new Map(itens.map(i => [i.id, i]));

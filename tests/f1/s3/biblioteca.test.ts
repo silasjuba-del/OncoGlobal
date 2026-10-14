@@ -21,6 +21,13 @@ function pacote(versao = '1.0.0', extra = {}) {
   return { manifesto, ler: () => bytes, bytes };
 }
 describe('S3 biblioteca offline manual', () => {
+  it.each(['Paciente: Pessoa Sintética', 'Endereço: Rua Sintética', 'Nascimento: 01/01/2000'])(
+    'pacote público com identificador estrutural é recusado antes de persistir (%s)', texto => {
+      const { db, biblioteca: b } = ambiente(); const p = pacote('1.0.0', { texto });
+      expect(() => b.importarPacote(p.manifesto, p.ler)).toThrow('IDENTIFICADOR_PESSOAL');
+      expect(db.prepare('SELECT count(*) AS n FROM biblioteca_pacote').get()?.n).toBe(0);
+      db.close();
+    });
   it('importação nunca aprova; curadoria item a item distingue consulta e alerta', () => {
     const { biblioteca: b } = ambiente(); const p = pacote(); const id = b.importarPacote(p.manifesto, p.ler);
     expect(b.estado(id, 'item-a')).toBe('RASCUNHO'); expect(() => b.ativar(id)).toThrow('SEM_ITEM_APROVADO');
