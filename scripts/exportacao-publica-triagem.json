@@ -1,0 +1,438 @@
+{
+  "escopo": "Somente texto integral identico; nao altera o detector de egresso nem aprova conteudo clinico.",
+  "schema": "TriagemPublicaExportacao@1",
+  "itens": [
+    {
+      "sha256": "b67f092ac12a6b1bdf8761d9a7c9538fd4313a2b9f4b86e06fffbcdb997beea2",
+      "categorias": [
+        "ENDERECO"
+      ],
+      "arquivo": "corpus/3-laudos/transporte/laudo-transporte.v1.RASCUNHO.json",
+      "campo": ".finalidade",
+      "motivo": "Texto normativo/generico: domicilio ou apto/aptos; nao e endereco individual."
+    },
+    {
+      "sha256": "4127c5b7ea08602af2539aa6472d93b7b073d6812b5b709f5551a9bb17c39c26",
+      "categorias": [
+        "ENDERECO"
+      ],
+      "arquivo": "corpus/3-laudos/transporte/laudo-transporte.v1.RASCUNHO.json",
+      "campo": ".baseLegal.2.trecho",
+      "motivo": "Texto normativo/generico: domicilio ou apto/aptos; nao e endereco individual."
+    },
+    {
+      "sha256": "a9fd92d03917ad458c302dc3c023f8b1c11c4aa4d8c7bc27e4ad383198df4773",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json",
+      "campo": ".celulas.118.nota",
+      "motivo": "Identificador de termo MedDRA ou estudo A6181004 no texto integral de referencia; nao identifica paciente e nao aprova a afirmacao clinica."
+    },
+    {
+      "sha256": "9ef17de03631a2a0c3f111dba16f4351a4e31a6063695cc3c07adeb372e883e9",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/5-ctcae-acao/ctcae-graus.v1.RASCUNHO.json",
+      "campo": ".nota",
+      "motivo": "Identificador de termo MedDRA ou estudo A6181004 no texto integral de referencia; nao identifica paciente e nao aprova a afirmacao clinica."
+    },
+    {
+      "sha256": "8064339f123ec27edd5dac2afe9817bcf8209785f4ee044ce3c48c360b449133",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/5-ctcae-acao/ctcae-graus.v1.RASCUNHO.json",
+      "campo": ".termos.8.nota",
+      "motivo": "Identificador de termo MedDRA ou estudo A6181004 no texto integral de referencia; nao identifica paciente e nao aprova a afirmacao clinica."
+    },
+    {
+      "sha256": "b750beb0a71c9ba6e4aa524f31ac8f409eef0dcdeb2650ee56c113eec0ec8f0e",
+      "categorias": [
+        "ENDERECO"
+      ],
+      "arquivo": "corpus/6-pack-tumor/colorretal/pack-colorretal.v2.RASCUNHO.json",
+      "campo": ".ligacoes.formulasXYZ.5.y",
+      "motivo": "Texto normativo/generico: domicilio ou apto/aptos; nao e endereco individual."
+    },
+    {
+      "sha256": "a032b905087e04b6ab609037d81a73c685d00c70b85413628c9a2e1828723551",
+      "categorias": [
+        "REGISTRO_PROFISSIONAL"
+      ],
+      "arquivo": "corpus/6-pack-tumor/esofago/pack-esofago.v2.RASCUNHO.json",
+      "campo": ".tratamento.radioterapia.2.pendencia.buscasFeitas.1",
+      "motivo": "CROSS e nome de estudo na consulta bibliografica, nao registro CRO."
+    },
+    {
+      "sha256": "20aae4781f1c15a96aed1f05ff5abec52e7c55fcaeace4a1fd6bf66981c90f8c",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/gist/pack-gist.v2.RASCUNHO.json",
+      "campo": ".tratamento.ensaios.4.nome",
+      "motivo": "Identificador de termo MedDRA ou estudo A6181004 no texto integral de referencia; nao identifica paciente e nao aprova a afirmacao clinica."
+    },
+    {
+      "sha256": "552f71b0dab63a6e672ab3a587fa0758970a95909cbeeabfaab65f84148f22c7",
+      "categorias": [
+        "ENDERECO"
+      ],
+      "arquivo": "corpus/6-pack-tumor/ldgcb/pack-ldgcb.v2.RASCUNHO.json",
+      "campo": ".ligacoes.formulasXYZ.3.y",
+      "motivo": "Texto normativo/generico: domicilio ou apto/aptos; nao e endereco individual."
+    },
+    {
+      "sha256": "eac7326945515b9ac56d1ac52b1242d4622ee1ee735c392344e0a2203762dc50",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/mama/pack-mama.v2.RASCUNHO.json",
+      "campo": ".tratamento.ensaios.10.nctPendencia.buscasFeitas.2",
+      "motivo": "Numeros de protocolo UMIN em busca bibliografica; nao e cadastro de paciente."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".tratamento.protocolos.0.sus.fonte.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".tratamento.protocolos.1.sus.fonte.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".tratamento.protocolos.2.sus.fonte.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".tratamento.protocolos.3.sus.fonte.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".tratamento.protocolos.4.sus.fonte.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".tratamento.protocolos.5.sus.fonte.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".tratamento.protocolos.6.sus.fonte.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".tratamento.protocolos.8.sus.fonte.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".tratamento.protocolos.9.sus.fonte.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".tratamento.protocolos.10.sus.fonte.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".tratamento.protocolos.11.sus.fonte.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".tratamento.protocolos.12.sus.fonte.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".tratamento.protocolos.13.sus.fonte.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".ligacoes.formulasXYZ.1.fonte.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "89593300dd17f442e061dc6fb6679c2ba993670e367b6682fbe7b9012e873e76",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/melanoma/pack-melanoma.v2.RASCUNHO.json",
+      "campo": ".conflitos.0.fonteB.referencia",
+      "motivo": "Data no nome do PDF publico DDT melanoma; nao e data pessoal."
+    },
+    {
+      "sha256": "85d55c9ffb243a3ae68d4f8e83c5ead225a4d55e6152865981d8eb3a88b106f3",
+      "categorias": [
+        "IDADE_90_MAIS"
+      ],
+      "arquivo": "corpus/6-pack-tumor/mieloma/pack-mieloma.v2.RASCUNHO.json",
+      "campo": ".tratamento.protocolos.1.ajusteObrigatorio",
+      "motivo": "Intervalo de dose em mg/m2 no texto de referencia; nao e idade de paciente."
+    },
+    {
+      "sha256": "f28f81652dea6a876c51a5fa2028540542efc89432f173307dc464ff7a4379ca",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/ovario/pack-ovario.v2.RASCUNHO.json",
+      "campo": ".pendencias.0.buscasFeitas.4",
+      "motivo": "Dois identificadores PubMed em citacao bibliografica, sem dose e sem paciente."
+    },
+    {
+      "sha256": "abbfce6e4ab820a90e5ee9098bde42daa83b626009d70740a8748eba67d5a982",
+      "categorias": [
+        "ENDERECO"
+      ],
+      "arquivo": "corpus/6-pack-tumor/penis/pack-penis.v2.RASCUNHO.json",
+      "campo": ".estadiamento.gruposConduta.2.conduta",
+      "motivo": "Texto normativo/generico: domicilio ou apto/aptos; nao e endereco individual."
+    },
+    {
+      "sha256": "a81e44bb0f787979da32fc83a8117e265ee2aa5a99581a4c4a278347b8736c87",
+      "categorias": [
+        "ENDERECO"
+      ],
+      "arquivo": "corpus/6-pack-tumor/penis/pack-penis.v2.RASCUNHO.json",
+      "campo": ".estadiamento.gruposConduta.2.fonte.trecho",
+      "motivo": "Texto normativo/generico: domicilio ou apto/aptos; nao e endereco individual."
+    },
+    {
+      "sha256": "a81e44bb0f787979da32fc83a8117e265ee2aa5a99581a4c4a278347b8736c87",
+      "categorias": [
+        "ENDERECO"
+      ],
+      "arquivo": "corpus/6-pack-tumor/penis/pack-penis.v2.RASCUNHO.json",
+      "campo": ".tratamento.cenarios.2.fonte.trecho",
+      "motivo": "Texto normativo/generico: domicilio ou apto/aptos; nao e endereco individual."
+    },
+    {
+      "sha256": "e0fd3cda8c4b85c23d834f978a5ee93721f1090d22856ef934e435484ac3f100",
+      "categorias": [
+        "ENDERECO"
+      ],
+      "arquivo": "corpus/6-pack-tumor/penis/pack-penis.v2.RASCUNHO.json",
+      "campo": ".tratamento.cirurgia.1.quando",
+      "motivo": "Texto normativo/generico: domicilio ou apto/aptos; nao e endereco individual."
+    },
+    {
+      "sha256": "a81e44bb0f787979da32fc83a8117e265ee2aa5a99581a4c4a278347b8736c87",
+      "categorias": [
+        "ENDERECO"
+      ],
+      "arquivo": "corpus/6-pack-tumor/penis/pack-penis.v2.RASCUNHO.json",
+      "campo": ".tratamento.cirurgia.1.fonte.trecho",
+      "motivo": "Texto normativo/generico: domicilio ou apto/aptos; nao e endereco individual."
+    },
+    {
+      "sha256": "8b3f595ce2c1835bd9652cc2d98134a65b39b9576892ef6d0b553874d84e03ab",
+      "categorias": [
+        "IDENTIFICADOR_ROTULADO"
+      ],
+      "arquivo": "corpus/6-pack-tumor/penis/pack-penis.v2.RASCUNHO.json",
+      "campo": ".tratamento.suporte.pendencia.buscasFeitas.0",
+      "motivo": "Penis e titulo da diretriz SBOC com ano; nao e identificador NIS."
+    },
+    {
+      "sha256": "8b3f595ce2c1835bd9652cc2d98134a65b39b9576892ef6d0b553874d84e03ab",
+      "categorias": [
+        "IDENTIFICADOR_ROTULADO"
+      ],
+      "arquivo": "corpus/6-pack-tumor/penis/pack-penis.v2.RASCUNHO.json",
+      "campo": ".pendencias.9.buscasFeitas.0",
+      "motivo": "Penis e titulo da diretriz SBOC com ano; nao e identificador NIS."
+    },
+    {
+      "sha256": "530f8bdd1468b505578c3e9b24b439a392bb042034575994375ccc7119584a45",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/prostata/pack-prostata.v2.RASCUNHO.json",
+      "campo": ".tratamento.ensaios.9.registroAlternativo.url",
+      "motivo": "URL de registro publico ANZCTR; parametro ACTRN identifica estudo."
+    },
+    {
+      "sha256": "7c9cc3c6c234a45e2b6281751e4e745839f7793a0a40cb4e2898b3f2b4b6514e",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/rim/pack-rim.v2.RASCUNHO.json",
+      "campo": ".tratamento.suporte.fonte.referencia",
+      "motivo": "Data de vigencia da bula openFDA, nao data pessoal."
+    },
+    {
+      "sha256": "aa5039527c0917bb0e346fe44306ed68075511b0950f78a4574c20094ac8985e",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/rim/pack-rim.v2.RASCUNHO.json",
+      "campo": ".tratamento.seguimento.4.fonte.referencia",
+      "motivo": "Data de vigencia da bula openFDA, nao data pessoal."
+    },
+    {
+      "sha256": "7c9cc3c6c234a45e2b6281751e4e745839f7793a0a40cb4e2898b3f2b4b6514e",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/rim/pack-rim.v2.RASCUNHO.json",
+      "campo": ".tratamento.seguimento.5.fonte.referencia",
+      "motivo": "Data de vigencia da bula openFDA, nao data pessoal."
+    },
+    {
+      "sha256": "7c9cc3c6c234a45e2b6281751e4e745839f7793a0a40cb4e2898b3f2b4b6514e",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/6-pack-tumor/rim/pack-rim.v2.RASCUNHO.json",
+      "campo": ".ligacoes.formulasXYZ.6.fonte.referencia",
+      "motivo": "Data de vigencia da bula openFDA, nao data pessoal."
+    },
+    {
+      "sha256": "00998f7b2e1f1d0438e9fa758579fba5813d119e17d533cb6592fcf209216955",
+      "categorias": [
+        "ENDERECO"
+      ],
+      "arquivo": "corpus/6-pack-tumor/testiculo/pack-testiculo.v2.RASCUNHO.json",
+      "campo": ".tratamento.cenarios.0.cenario",
+      "motivo": "Texto normativo/generico: domicilio ou apto/aptos; nao e endereco individual."
+    },
+    {
+      "sha256": "abaf56f51e1d72f5b03290f1d37e5636b5792b6a3c41ac9e47e57a6c93480454",
+      "categorias": [
+        "ENDERECO"
+      ],
+      "arquivo": "corpus/6-pack-tumor/testiculo/pack-testiculo.v2.RASCUNHO.json",
+      "campo": ".tratamento.cenarios.0.criterio",
+      "motivo": "Texto normativo/generico: domicilio ou apto/aptos; nao e endereco individual."
+    },
+    {
+      "sha256": "464ae6446d970880f4ea3fb6dfb848c841f6b839f9e6c3ffd23e12d24b272c79",
+      "categorias": [
+        "SEQUENCIA_NUMERICA_LONGA"
+      ],
+      "arquivo": "corpus/rulesets/agenda-apac-emissao.v1.json",
+      "campo": ".emissao.cnesExemploEditavel",
+      "motivo": "CNES de exemplo editavel, restrito ao campo cnesExemploEditavel; nao identifica pessoa."
+    },
+    {
+      "sha256": "7b115e38f417414cfa4d6a4ba84803b06cd1764c4af07d61f92be3f159ec6bed",
+      "categorias": [
+        "REGISTRO_PROFISSIONAL"
+      ],
+      "arquivo": "corpus/templates/kit/orientacao-nutricional.v1.json",
+      "campo": ".textoFonteOriginal",
+      "motivo": "Identificacao profissional do autor em modelo com campos de paciente vazios; nao contem identificacao de paciente."
+    },
+    {
+      "sha256": "a2c7c665b93fee87fce0cc8fa64a5388cbf60909b6fd424f2ad4033303a960ce",
+      "categorias": [
+        "REGISTRO_PROFISSIONAL"
+      ],
+      "arquivo": "corpus/templates/kit/receita-sintomaticos.v1.json",
+      "campo": ".textoFonteOriginal",
+      "motivo": "Identificacao profissional do autor em modelo com campos de paciente vazios; nao contem identificacao de paciente."
+    },
+    {
+      "sha256": "8d9b0fca7b78e6e385c0fe2ccdf00deaddcc4729d3bc68b84942f90349340aeb",
+      "categorias": [
+        "REGISTRO_PROFISSIONAL"
+      ],
+      "arquivo": "corpus/templates/kit/relatorio-pericial.v1.json",
+      "campo": ".secoes.0.campos.0.texto",
+      "motivo": "Identificacao profissional do autor em modelo com campos de paciente vazios; nao contem identificacao de paciente."
+    },
+    {
+      "sha256": "366d962d001186b1b15f1463b386b8ca030ba007d7321ff219e384b52cefeaf7",
+      "categorias": [
+        "REGISTRO_PROFISSIONAL"
+      ],
+      "arquivo": "corpus/templates/kit/relatorio-pericial.v1.json",
+      "campo": ".textoFonteOriginal",
+      "motivo": "Identificacao profissional do autor em modelo com campos de paciente vazios; nao contem identificacao de paciente."
+    },
+    {
+      "sha256": "1368ecaed84eaa6eca5e95e60c03f95946ca34d1f4e72df1b6e50c50cb18a9af",
+      "categorias": [
+        "REGISTRO_PROFISSIONAL"
+      ],
+      "arquivo": "corpus/templates/kit/requisicao-exames-ciclos.v1.json",
+      "campo": ".textoFonteOriginal",
+      "motivo": "Identificacao profissional do autor em modelo com campos de paciente vazios; nao contem identificacao de paciente."
+    },
+    {
+      "sha256": "7bbbfeccd5082db41c477adc9aa7af896a164d1efe6cc515d68b097e612a37b8",
+      "categorias": [
+        "REGISTRO_PROFISSIONAL"
+      ],
+      "arquivo": "corpus/templates/kit/sinais-alarme.v1.json",
+      "campo": ".textoFonteOriginal",
+      "motivo": "Identificacao profissional do autor em modelo com campos de paciente vazios; nao contem identificacao de paciente."
+    }
+  ]
+}

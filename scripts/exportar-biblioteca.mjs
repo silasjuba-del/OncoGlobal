@@ -6,33 +6,61 @@ import { scanText, sha256 } from "./phi-repo.mjs";
 import { detectarPhiEstrutural } from "../src/kernel/llm/phiEstrutural.ts";
 
 const hash = bytes => createHash("sha256").update(bytes).digest("hex");
-// Revisão técnica do trecho exato em laudo-transporte, baseLegal[2].trecho:
-// "domicílio feita por médico" é prosa normativa genérica, sem endereço pessoal.
-// O hash cobre TODO o texto. Qualquer acréscimo perde a exceção; não altera o detector de egresso.
-const ENDERECO_TRECHO_PUBLICO = new Set([
-  "4127c5b7ea08602af2539aa6472d93b7b073d6812b5b709f5551a9bb17c39c26",
-  // pack-penis: "pacientes aptos a seguimento" casa com a abreviação de apartamento.
-  "a81e44bb0f787979da32fc83a8117e265ee2aa5a99581a4c4a278347b8736c87",
-]);
+function parseJsonUnico(texto) {
+  let valor;
+  try { valor = JSON.parse(texto); } catch { throw new Error("JSON_INVALIDO"); }
+  // JSON.parse aceita chaves repetidas e apaga o primeiro valor, que poderia conter identidade.
+  const tokens = texto.match(/"(?:\\.|[^"\\])*"|[{}\[\]:,]|-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?|true|false|null/g) ?? [];
+  const pilha = [];
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i];
+    if (t === "{") pilha.push(new Set());
+    else if (t === "[") pilha.push(null);
+    else if (t === "}" || t === "]") pilha.pop();
+    else if (t.startsWith('"') && tokens[i + 1] === ":") {
+      const chaves = pilha.at(-1), chave = JSON.parse(t);
+      if (!chaves || chaves.has(chave)) throw new Error("JSON_CHAVE_DUPLICADA");
+      chaves.add(chave);
+    }
+  }
+  return valor;
+}
+const LEIA_ME = "# Biblioteca para consulta e curadoria manual\n\nSnapshot de arquivos, sem ativação e sem transmissão de rede. Todos entram como RASCUNHO, alerta=false. Campos sem fonte/versão permanecem nulos. A fonte interna de um item pode existir mesmo quando a raiz do arquivo não possui fonte.\n\nA volta deve usar validarPacoteConsulta antes de staging local. Este formato preserva os schemas originais; não é PacoteBiblioteca@1 e não pode ser enviado diretamente à rota /biblioteca/importar. Conversão em item executável exige contrato, fonte e aprovação médica individual.\n";
+const canonico = value => JSON.stringify(value, (_key, v) => v && typeof v === "object" && !Array.isArray(v)
+  ? Object.fromEntries(Object.keys(v).sort().map(k => [k, v[k]])) : v);
+const metadadosArquivo = (caminho, bytes, texto, json) => ({ caminho, id: json?.id ?? json?.header?.id ?? null,
+  versao: json?.versao ?? json?.version ?? json?.header?.versao ?? null, sha256: hash(bytes),
+  estado: "RASCUNHO", consultavel: true, alerta: false, curadoriaOriginal: json?.curadoria?.estado ?? json?.status ?? null,
+  fontes: json?.fontes ?? json?.fonte ?? json?.header?.fonte ?? null, verificar: (texto.match(/\[VERIFICAR\]|SEM_FONTE/g) ?? []).length });
+const pendenciasDoManifesto = m => ({ itens: m.arquivos.filter(a => a.verificar || !a.fontes).map(a =>
+  ({ caminho: a.caminho, semFonteNaRaiz: !a.fontes, verificar: a.verificar })),
+  externas: ["F1-B2 aguarda planilha SISAC", "Conflitos de decisão exigem revisão médica", "Genspark sem sincronização por API"] });
+// Revisão técnica de textos integrais, com localizador e motivo. Pacotes recebidos não fornecem exceções.
+const triagemPublica = JSON.parse(readFileSync(new URL("./exportacao-publica-triagem.json", import.meta.url), "utf8"));
+const categoriasPublicas = new Map(triagemPublica.itens.map(i => [`${i.arquivo}|${i.campo}|${i.sha256}`, new Set(i.categorias)]));
 const relativoSeguro = p => typeof p === "string" && !p.includes("\\") && !p.split("/").some(x => !x || x === "." || x === "..")
   && p.startsWith("corpus/") && !p.includes(":") && /\.(json|md|txt)$/.test(p);
 function dentro(root, path) {
   const r = relative(root, path);
   if (isAbsolute(r) || r === ".." || r.startsWith(`..${sep}`) || resolve(root, r) !== path) throw new Error("CAMINHO_FORA_DA_RAIZ");
 }
-function stringsClinicas(value, contexto = "") {
+function stringsClinicas(value, contexto = "", caminho = "") {
   if (!value || typeof value !== "object") return [];
   return Object.entries(value).flatMap(([key, item]) => {
     const k = key.normalize("NFD").replace(/[\u0300-\u036f\W_]/g, "").toLowerCase();
     if (item === null || item === undefined) return [];
-    if (typeof item === "object") return stringsClinicas(item, `${contexto}.${k}`);
+    if (typeof item === "object") return stringsClinicas(item, `${contexto}.${k}`, `${caminho}.${key}`);
     const s = String(item);
     const vazioDeModelo = /^(?:\s*|[_\s-]+|\{\{[^{}]+\}\}|\[[^\]]+\]|FATO_CONFIRMADO|CONFIG|DECISAO_MEDICA)$/.test(s);
-    if (!vazioDeModelo && (/^(nomepaciente|patientname|patientid|pacienteid|nascimento|datanascimento|birthdate|dateofbirth|cpf|cns|prontuario)$/.test(k)
+    if (!vazioDeModelo && (/^(nomepaciente|patientname|patientid|pacienteid|nascimento|datanascimento|birthdate|dateofbirth|cpf|cns|prontuario|numeroprontuario|medicalrecordnumber|rg|nis|pis)$/.test(k)
       || (/(?:^|\.)(?:pacientes?|patients?)(?:\.|$)/.test(contexto) && /^(nome|name|id)$/.test(k)))) throw new Error("PHI_ESTRUTURAL_JSON");
+    // Medidas/contagens numéricas são dados tipados; IDs pessoais numéricos foram recusados acima.
+    // O scanner bruto continua conferindo CPF/CNS/telefone no arquivo inteiro.
+    if (typeof item !== "string") return [];
     if (/^(sha256|hash|contenthash)$/.test(k) && /^(?:[a-f0-9]{40}|[a-f0-9]{64})$/.test(s)) return [];
+    if (k === "codigoibge" && /^\d{7}$/.test(s)) return []; // Identificador do município, não de pessoa.
     const rotulo = /^(endereco|address)$/.test(k) ? "Endereço" : /^(telefone|phone)$/.test(k) ? "Telefone" : null;
-    return [s, ...(rotulo ? [`${rotulo}: ${s}`] : [])];
+    return [{ texto: s, campo: `${caminho}.${key}` }, ...(rotulo ? [{ texto: `${rotulo}: ${s}`, campo: `${caminho}.${key}` }] : [])];
   });
 }
 function conferirTexto(bytes, caminho, triagem) {
@@ -41,17 +69,24 @@ function conferirTexto(bytes, caminho, triagem) {
   const scan = scanText(texto, caminho, { manifest: triagem, sha256: sha256(bytes, pin?.hashMode ?? "raw", caminho) });
   if (scan.findings.length || scan.pending.length) throw new Error(`PHI_PENDENTE:${caminho}`);
   let json = null;
-  if (caminho.endsWith(".json")) { try { json = JSON.parse(texto); } catch { throw new Error(`JSON_INVALIDO:${caminho}`); } }
+  if (caminho.endsWith(".json")) json = parseJsonUnico(texto);
   let textos;
-  try { textos = json ? stringsClinicas(json) : [texto]; }
+  try { textos = json ? stringsClinicas(json) : [{ texto, campo: "$texto" }]; }
   catch { throw new Error(`PHI_ESTRUTURAL_JSON:${caminho}`); }
   // Referências públicas podem conter links. Demais categorias exigem revisão antes de exportar.
   // Somente a categoria numérica distingue identificadores públicos de sequências pessoais.
   // Rótulos como CPF/prontuário continuam avaliados no texto ORIGINAL, mesmo usando esses dígitos.
-  const semIdsPublicos = t => t.replace(/\b(?:NCT\d{8}|ISRCTN\d{8}|ACTRN\d{14}|PMID\s*\d{6,9}|PMC\d{6,9}|UMIN\d{9}|LY\d{7}|0[1-8]\d{8})\b/g, "ID_PUBLICO");
-  if (textos.some(t => detectarPhiEstrutural(t).some(c => c !== "URL_OU_IP"
+  const semIdsPublicos = t => t
+    .replace(/\b(?:[0-9a-f]{64}|[0-9a-f]{40})\b/gi, "HASH_REFERENCIA")
+    .replace(/\b(?:PMID|PubMed)\s*:?\s*\d{6,9}(?:,\s*\d{6,9})*/g, "REFERENCIAS_PUBMED")
+    .replace(/\b(?:NCT\d{8}|ISRCTN\d{8}|ACTRN\d{14}|(?:PMID|PubMed)\s*:?\s*\d{6,9}|PMC\d{6,9}|UMIN\d{9}|LY\d{7}|CNES\s*\d{7}|0[1-8]\d{8})\b/g, "ID_PUBLICO")
+    .replace(/\b[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}\b/gi, "UUID_REFERENCIA")
+    .replace(/https:\/\/(?:pubmed\.ncbi\.nlm\.nih\.gov|dailymed\.nlm\.nih\.gov|api\.fda\.gov|www\.gov\.br|www\.in\.gov\.br|oncologypro\.esmo\.org|ninho\.inca\.gov\.br)\/[^\s<>]+/g, "REFERENCIA_PUBLICA")
+    .replace(/\b10\.\d{4,9}\/[^\s<>]+/g, "DOI_REFERENCIA")
+    .replace(/\b(?:TabelaUnificada_\d{6}_v\d{10}\.zip|20\d{2}-\d{2}\.v\d{10}\.f0c-\d+)\b/g, "VERSAO_SIGTAP");
+  if (textos.some(({ texto: t, campo }) => detectarPhiEstrutural(t).some(c => c !== "URL_OU_IP"
     && !(c === "SEQUENCIA_NUMERICA_LONGA" && !detectarPhiEstrutural(semIdsPublicos(t)).includes(c))
-    && !(c === "ENDERECO" && ENDERECO_TRECHO_PUBLICO.has(hash(t)))))) throw new Error(`PHI_ESTRUTURAL:${caminho}`);
+    && !categoriasPublicas.get(`${caminho}|${campo}|${hash(t)}`)?.has(c)))) throw new Error(`PHI_ESTRUTURAL:${caminho}`);
   return { texto, json };
 }
 function novoDestino(root, destino) {
@@ -84,12 +119,7 @@ export function exportarBiblioteca(rootDir, destino) {
       }
       if (!relativoSeguro(caminho)) throw new Error(`CAMINHO_INVALIDO:${caminho}`);
       const bytes = readFileSync(path), { texto, json } = conferirTexto(bytes, caminho, triagem);
-      arquivos.push({ caminho, bytes, metadados: { caminho, id: json?.id ?? json?.header?.id ?? null,
-        versao: json?.versao ?? json?.version ?? json?.header?.versao ?? null, sha256: hash(bytes),
-        estado: "RASCUNHO", consultavel: true, alerta: false,
-        curadoriaOriginal: json?.status ?? json?.header?.aprovadoEm ?? null,
-        fontes: json?.fontes ?? json?.fonte ?? json?.header?.fonte ?? null,
-        verificar: (texto.match(/\[VERIFICAR\]|SEM_FONTE/g) ?? []).length } });
+      arquivos.push({ caminho, bytes, metadados: metadadosArquivo(caminho, bytes, texto, json) });
     }
   }
   visitar(resolve(root, "corpus"));
@@ -99,17 +129,17 @@ export function exportarBiblioteca(rootDir, destino) {
   // A validação termina antes de criar o destino. Não deixa pacote parcialmente validado.
   for (const a of arquivos) { const path = resolve(out, a.caminho); dentro(out, path); mkdirSync(dirname(path), { recursive: true }); writeFileSync(path, a.bytes); }
   writeFileSync(resolve(out, "manifesto.json"), JSON.stringify(manifesto, null, 2) + "\n");
-  writeFileSync(resolve(out, "pendencias.json"), JSON.stringify({ itens: manifesto.arquivos.filter(a => a.verificar || !a.fontes).map(a =>
-    ({ caminho: a.caminho, semFonteNaRaiz: !a.fontes, verificar: a.verificar })),
-    externas: ["F1-B2 aguarda planilha SISAC", "Conflitos de decisão exigem revisão médica", "Genspark sem sincronização por API"] }, null, 2) + "\n");
-  writeFileSync(resolve(out, "LEIA-ME.md"), "# Biblioteca para consulta e curadoria manual\n\nSnapshot de arquivos, sem ativação e sem transmissão de rede. Todos entram como RASCUNHO, alerta=false. Campos sem fonte/versão permanecem nulos. A fonte interna de um item pode existir mesmo quando a raiz do arquivo não possui fonte.\n\nA volta deve usar validarPacoteConsulta antes de staging local. Este formato preserva os schemas originais; não é PacoteBiblioteca@1 e não pode ser enviado diretamente à rota /biblioteca/importar. Conversão em item executável exige contrato, fonte e aprovação médica individual.\n");
+  writeFileSync(resolve(out, "pendencias.json"), JSON.stringify(pendenciasDoManifesto(manifesto), null, 2) + "\n");
+  writeFileSync(resolve(out, "LEIA-ME.md"), LEIA_ME);
   return { destino: out, arquivos: arquivos.length };
 }
 
 /** Verifica bytes e estado antes de qualquer revisão/importação; não toca o ledger nem ativa regras. */
 export function validarPacoteConsulta(diretorio) {
-  const root = realpathSync(diretorio), m = JSON.parse(readFileSync(resolve(root, "manifesto.json"), "utf8"));
-  if (m.schema !== "ExportacaoConsultaCorpus@1" || m.somenteConsulta !== true || !Array.isArray(m.arquivos) || !m.arquivos.length) throw new Error("MANIFESTO_INVALIDO");
+  const root = realpathSync(diretorio), m = parseJsonUnico(readFileSync(resolve(root, "manifesto.json"), "utf8"));
+  if (m.schema !== "ExportacaoConsultaCorpus@1" || m.escopo !== "CORPUS_TEXTUAL_COMPLETO" || m.somenteConsulta !== true
+    || !Array.isArray(m.arquivos) || !m.arquivos.length || !Array.isArray(m.naoExportados)
+    || Object.keys(m).sort().join() !== ["schema", "escopo", "somenteConsulta", "arquivos", "naoExportados"].sort().join()) throw new Error("MANIFESTO_INVALIDO");
   const vistos = new Set();
   const metadados = new Set(["manifesto.json", "pendencias.json", "LEIA-ME.md"]);
   for (const a of m.arquivos) {
@@ -122,8 +152,17 @@ export function validarPacoteConsulta(diretorio) {
     if (hash(bytes) !== a.sha256) throw new Error("HASH_DIVERGENTE");
     const triagemPath = resolve(dirname(fileURLToPath(import.meta.url)), "../docs/f0-fecha/PHI-TRIAGEM.json");
     const triagemLocal = existsSync(triagemPath) ? JSON.parse(readFileSync(triagemPath, "utf8")) : { files: [] };
-    conferirTexto(bytes, a.caminho, triagemLocal);
+    const { texto, json } = conferirTexto(bytes, a.caminho, triagemLocal);
+    // Metadados são derivados dos bytes já escaneados, nunca uma superfície de texto arbitrário.
+    if (canonico(a) !== canonico(metadadosArquivo(a.caminho, bytes, texto, json))) throw new Error("METADADOS_DIVERGENTES");
   }
+  for (const e of m.naoExportados) if (!e || Object.keys(e).sort().join() !== "caminho,motivo" || e.motivo !== "BINARIO_OU_SCRIPT_FORA_DO_ESCOPO"
+    || typeof e.caminho !== "string" || !e.caminho.startsWith("corpus/") || e.caminho.includes("\\") || e.caminho.includes(":")
+    || e.caminho.split("/").some(p => !p || p === "." || p === "..") || /\.(json|md|txt)$/.test(e.caminho)) throw new Error("EXCLUSOES_INVALIDAS");
+  const exclusoes = JSON.stringify(m.naoExportados).replace(/TabelaUnificada_\d{6}_v\d{10}\.zip/g, "FONTE_SIGTAP.zip");
+  conferirTexto(Buffer.from(exclusoes), "exclusoes.json", { files: [] });
+  if (canonico(parseJsonUnico(readFileSync(resolve(root, "pendencias.json"), "utf8"))) !== canonico(pendenciasDoManifesto(m))) throw new Error("PENDENCIAS_DIVERGENTES");
+  if (readFileSync(resolve(root, "LEIA-ME.md"), "utf8") !== LEIA_ME) throw new Error("INSTRUCOES_DIVERGENTES");
   function inventariar(dir) {
     for (const e of readdirSync(dir, { withFileTypes: true })) {
       const path = resolve(dir, e.name); dentro(root, realpathSync(path));
@@ -131,12 +170,6 @@ export function validarPacoteConsulta(diretorio) {
       if (e.isDirectory()) { inventariar(path); continue; }
       const rel = relative(root, path).split(sep).join("/");
       if (!vistos.has(rel) && !metadados.has(rel)) throw new Error("ARQUIVO_NAO_INVENTARIADO");
-      if (metadados.has(rel)) {
-        const bytes = readFileSync(path);
-        // Hashes são metadados tipados; não podem introduzir texto arbitrário nesta validação.
-        const texto = bytes.toString("utf8").replace(/("sha256"\s*:\s*")[a-f0-9]{64}(")/g, "$1HASH_VERIFICADO$2");
-        conferirTexto(Buffer.from(texto), rel, { files: [] });
-      }
     }
   }
   inventariar(root);

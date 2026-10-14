@@ -3064,6 +3064,40 @@
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
         }
       ]
+    },
+    {
+      "path": "scripts/exportacao-publica-triagem.json",
+      "sha256": "2b1b9ceb97994a6b494c3d3261cba75f5169b1f0267dbba30131460e5af573ca",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 60,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "scripts/exportacao-publica-triagem.json:60",
+          "reason": "Candidato inteiramente contido em campo sha256 JSON de 64 caracteres hexadecimais; hash de texto de referencia, nao telefone.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 87,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "scripts/exportacao-publica-triagem.json:87",
+          "reason": "Candidato inteiramente contido em campo sha256 JSON de 64 caracteres hexadecimais; hash de texto de referencia, nao telefone.",
+          "contextTag": "json_sha256_field_64hex"
+        },
+        {
+          "type": "telefone",
+          "line": 231,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "scripts/exportacao-publica-triagem.json:231",
+          "reason": "Candidato inteiramente contido em campo sha256 JSON de 64 caracteres hexadecimais; hash de texto de referencia, nao telefone.",
+          "contextTag": "json_sha256_field_64hex"
+        }
+      ]
     }
   ],
   "protectedPaths": []

@@ -2,6 +2,7 @@ import { afterEach, expect, it } from "vitest";
 import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { createHash } from "node:crypto";
 import { exportarBiblioteca, validarPacoteConsulta } from "../../../scripts/exportar-biblioteca.mjs";
 const dirs: string[] = [];
 afterEach(() => dirs.splice(0).forEach(d => rmSync(d, { recursive: true, force: true })));
@@ -38,9 +39,16 @@ it("não sobrescreve destino nem exporta para dentro do repositório", () => {
 });
 it("exceção de prosa pública é exata e não encobre conteúdo pessoal acrescentado", () => {
   const j = JSON.parse(readFileSync("corpus/3-laudos/transporte/laudo-transporte.v1.RASCUNHO.json", "utf8"));
-  const publico = fixture(j.baseLegal[2].trecho); exportarBiblioteca(publico.root, publico.out);
-  const adulterado = fixture(j.baseLegal[2].trecho + " Paciente: Pessoa Sintética");
+  const configurar = (texto: string) => {
+    const f = fixture(); mkdirSync(join(f.root, "corpus/3-laudos/transporte"), { recursive: true });
+    writeFileSync(join(f.root, "corpus/3-laudos/transporte/laudo-transporte.v1.RASCUNHO.json"), JSON.stringify({ baseLegal: [null, null, { trecho: texto }] }));
+    return f;
+  };
+  const publico = configurar(j.baseLegal[2].trecho); exportarBiblioteca(publico.root, publico.out);
+  const adulterado = configurar(j.baseLegal[2].trecho + " Paciente: Pessoa Sintética");
   expect(() => exportarBiblioteca(adulterado.root, adulterado.out)).toThrow("PHI_ESTRUTURAL");
+  const foraDoLocalizador = fixture(j.baseLegal[2].trecho);
+  expect(() => exportarBiblioteca(foraDoLocalizador.root, foraDoLocalizador.out)).toThrow("PHI_ESTRUTURAL");
 });
 it("identificador de estudo/catálogo não mascara rótulo pessoal no mesmo texto", () => {
   const publico = fixture("Referência sintética: NCT99999999; APAC 0304050016");
@@ -53,6 +61,7 @@ it.each([
   { nomePaciente: "Pessoa Sintética", nascimento: "01/02/1970" },
   { paciente: { nome: "Pessoa Sintética", dataNascimento: "1970-02-01" } },
   { patientId: "paciente-sintetico-identificavel" },
+  { cpf: 1234567 },
 ])("campos JSON com identidade não saem como biblioteca: %j", dados => {
   const f = fixture();
   writeFileSync(join(f.root, "corpus/1-exames/item.json"), JSON.stringify(dados));
@@ -80,4 +89,41 @@ it("instruções ao paciente com IDs de conteúdo não são um cadastro de pacie
   const f = fixture();
   writeFileSync(join(f.root, "corpus/1-exames/item.json"), JSON.stringify({ instrucoesPaciente: [{ id: "IP-01", texto: "Orientação genérica" }] }));
   expect(exportarBiblioteca(f.root, f.out).arquivos).toBe(1);
+});
+it.each(["manifesto", "pendencias", "leia-me"])("metadados de retorno não aceitam informação adicional: %s", alvo => {
+  const f = fixture(); exportarBiblioteca(f.root, f.out);
+  if (alvo === "leia-me") writeFileSync(join(f.out, "LEIA-ME.md"), "Paciente: Pessoa Sintética");
+  else {
+    const path = join(f.out, `${alvo}.json`), j = JSON.parse(readFileSync(path, "utf8"));
+    j.nomePaciente = "Pessoa Sintética"; writeFileSync(path, JSON.stringify(j));
+  }
+  expect(() => validarPacoteConsulta(f.out)).toThrow();
+});
+it("manifesto não pode modificar identidade/fonte dos arquivos sem modificar seus bytes", () => {
+  const f = fixture(); exportarBiblioteca(f.root, f.out);
+  const path = join(f.out, "manifesto.json"), j = JSON.parse(readFileSync(path, "utf8"));
+  j.arquivos[0].fontes = "Outra fonte"; writeFileSync(path, JSON.stringify(j));
+  expect(() => validarPacoteConsulta(f.out)).toThrow("METADADOS_DIVERGENTES");
+});
+it("chave JSON duplicada não pode apagar identidade antes da inspeção estrutural", () => {
+  const f = fixture();
+  writeFileSync(join(f.root, "corpus/1-exames/item.json"), '{"nomePaciente":"Pessoa Sintética","nomePaciente":null}');
+  expect(() => exportarBiblioteca(f.root, f.out)).toThrow("JSON_CHAVE_DUPLICADA");
+});
+it("exceções públicas correspondem ao campo e ao texto integral efetivamente revisados", () => {
+  const pins = JSON.parse(readFileSync("scripts/exportacao-publica-triagem.json", "utf8")) as {
+    itens: { arquivo: string; campo: string; sha256: string; motivo: string }[];
+  };
+  const vistos = new Set<string>();
+  for (const pin of pins.itens) {
+    expect(pin.arquivo.startsWith("corpus/")).toBe(true);
+    const chave = `${pin.arquivo}|${pin.campo}`;
+    expect(vistos.has(chave), chave).toBe(false); vistos.add(chave);
+    let value: any = JSON.parse(readFileSync(pin.arquivo, "utf8"));
+    for (const parte of pin.campo.split(".").filter(Boolean)) {
+      expect(Object.hasOwn(value, parte), chave).toBe(true); value = value[parte];
+    }
+    expect(createHash("sha256").update(String(value)).digest("hex"), chave).toBe(pin.sha256);
+    expect(pin.motivo.length).toBeGreaterThan(10);
+  }
 });
