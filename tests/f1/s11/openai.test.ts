@@ -69,3 +69,28 @@ describe("S11 extração OpenAI sem autoridade nem PHI", () => {
     } finally { vi.unstubAllGlobals(); }
   });
 });
+
+describe("G-02b: PHI fora do dicionário fica local (P1 PR #13)", () => {
+  it.each([
+    ["endereço", "Reside na Rua das Flores 120. Creatinina 1,2 mg/dL em 12/10/2026."],
+    ["CEP", "CEP 69000-000. Creatinina 1,2 mg/dL em 12/10/2026."],
+    ["prontuário rotulado", "Prontuário: 4455. Creatinina 1,2 mg/dL em 12/10/2026."],
+    ["sequência numérica longa", "Pedido 98765432. Creatinina 1,2 mg/dL em 12/10/2026."],
+    ["nome rotulado fora do dicionário", "Mãe: Joana Silva. Creatinina 1,2 mg/dL em 12/10/2026."],
+    ["data de internação", "Internação em 03/09/2026. Creatinina 1,2 mg/dL em 12/10/2026."],
+    ["idade ≥ 90", "Paciente de 93 anos. Creatinina 1,2 mg/dL em 12/10/2026."],
+    ["CRM", "Dr. responsável CRM-AM 1234. Creatinina 1,2 mg/dL em 12/10/2026."],
+  ])("%s bloqueia antes do transporte", async (_, texto) => {
+    const extrair = vi.fn(async () => saida());
+    const r = await criarExtratorOpenAi({ env, transporte: { extrair } })
+      .extrair({ ...entrada, fonte: { ...entrada.fonte, paginas: [{ n: 1, texto }] } }, dic);
+    expect(r).toMatchObject({ status: "PENDENTE", codigo: "G02_PHI_ESTRUTURAL" });
+    expect(extrair).not.toHaveBeenCalled();
+  });
+  it("transporte real sem prova do gateway sobre o payload exato não envia", async () => {
+    const fetchSpy = vi.spyOn(globalThis, "fetch");
+    const r = await criarExtratorOpenAi({ env: { ...env, ONCOASSIST_OPENAI_LIVE_AUDIT: "true" }, auditar: () => {} }).extrair(entrada, dic);
+    expect(r).toMatchObject({ status: "PENDENTE", codigo: "PAYLOAD_SEM_PROVA_GATEWAY" });
+    expect(fetchSpy).not.toHaveBeenCalled(); fetchSpy.mockRestore();
+  });
+});

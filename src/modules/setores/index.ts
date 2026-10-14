@@ -176,18 +176,20 @@ function avaliarCondicionadasDoRetrato(o: AchadosSetor, r: Retrato, p: Prescrica
 }
 export function avaliarInteracoes(r:Retrato,c:Correlacao,op:OpcoesSetores={}):AchadosSetor {
   const {out:o,fatos}=inicio(r,c,'INTERACOES',/medic|reconcili/);const p=proposta(o,op.proposta);
+  // Aliases aprovados são a mesma droga: comparar listas e pares pela identidade do catálogo; alias ambíguo fica distinto.
+  const ident=(v:string)=>identidadeFarmaco(v,op.catalogoInteracoes)||`?${key(v.trim())}`;
   if(!fatos.length||!fatos.some(f=>key(f.campo??'')==='medicamentos'||dados(f).reconciliada===true||dados(f).reconciliacaoConfirmada===true)){lacuna(o,'MEDS_RECONCILIAR','Lista de medicamentos precisa de reconciliação explícita, inclusive antes do ciclo 1.',fatos);return o;}
   const atuais=fatos.flatMap(f=>nomesMedicamentos(f).map(nome=>({nome,f})));
   const listas = fatos.filter(f => key(f.campo ?? '') === 'medicamentos').map(f =>
     Array.isArray(f.dados.valor) && f.dados.valor.every(v => typeof v === 'string' && v.trim())
-      ? [...new Set((f.dados.valor as string[]).map(v => key(v.trim())))].sort() : null);
+      ? [...new Set((f.dados.valor as string[]).map(ident))].sort() : null);
   if (new Set(listas.filter(l => l !== null).map(canon)).size > 1) {
     lacuna(o,'MEDS_RECONCILIACAO_CONFLITANTE','Listas completas confirmadas divergem; não unir medicamentos nem escolher uma lista.',
       fatos.filter(f => key(f.campo ?? '') === 'medicamentos'));
     return o;
   }
   const listaConhecida = listas.length > 0 && listas.every(l => l !== null) && new Set(listas.map(canon)).size === 1;
-  const identidades = new Set([...atuais.map(m => m.nome), ...(p?.itens.map(i => i.drug) ?? [])].map(n => key(n.trim())));
+  const identidades = new Set([...atuais.map(m => m.nome), ...(p?.itens.map(i => i.drug) ?? [])].map(ident));
   const semParesLexicais = listaConhecida && identidades.size < 2;
   const temContextoCondicionado = r.fatos.some(f => f.tipo === 'FATO' && f.campo === 'interacoesContexto');
   // Ausência de par atual dispensa só o lexical; histórico explícito ainda exige avaliação temporal.
@@ -201,20 +203,20 @@ export function avaliarInteracoes(r:Retrato,c:Correlacao,op:OpcoesSetores={}):Ac
   avaliarCondicionadasDoRetrato(o,r,p,fatos,op,rows.filter(condicionada));
   if (semParesLexicais) return o;
   const pares=new Set<string>();
-  for(const item of p?.itens??[])for(const med of atuais){if(key(item.drug)===key(med.nome))continue;const id=[key(item.drug),key(med.nome)].sort().join('+');if(pares.has(id))continue;pares.add(id);
+  for(const item of p?.itens??[])for(const med of atuais){if(ident(item.drug)===ident(med.nome))continue;const id=[ident(item.drug),ident(med.nome)].sort().join('+');if(pares.has(id))continue;pares.add(id);
     if(parCondicionado(item.drug,med.nome))continue;
     const v=avaliarInteracaoMedicamentosa(item.drug,med.nome,lexicais,op.catalogoInteracoes);if(!v.regraAtiva)lacuna(o,id,v.motivo,[med.f],true);else{o.cobertura.avaliados++;achado(o,id,v.severidade===null?`${v.motivo}; aviso de fonte sem severidade curada; não determina elegibilidade.`:v.motivo,v.severidade===null?'PENDENTE':v.estado,[med.f],[op.interacoes.referencia]);}}
   for(let i=0;i<(p?.itens.length??0);i++)for(let j=i+1;j<(p?.itens.length??0);j++){
-    const drugA=p!.itens[i]!.drug,drugB=p!.itens[j]!.drug;if(key(drugA)===key(drugB))continue;
-    const id=[key(drugA),key(drugB)].sort().join('+');if(pares.has(id))continue;pares.add(id);
+    const drugA=p!.itens[i]!.drug,drugB=p!.itens[j]!.drug;if(ident(drugA)===ident(drugB))continue;
+    const id=[ident(drugA),ident(drugB)].sort().join('+');if(pares.has(id))continue;pares.add(id);
     if(parCondicionado(drugA,drugB))continue;
     const v=avaliarInteracaoMedicamentosa(drugA,drugB,lexicais,op.catalogoInteracoes);
     if(!v.regraAtiva)lacuna(o,id,v.motivo,[],true);else{lacuna(o,`PROPOSTA:${id}`,`${v.motivo}; avaliação da proposta exige referência tipada ao rascunho.`);}
   }
   // An existing reconciled medication list is independently evaluable, even without a future Rx proposal.
   for (let i=0;i<atuais.length;i++) for (let j=i+1;j<atuais.length;j++) {
-    const a=atuais[i]!,b=atuais[j]!;if(key(a.nome)===key(b.nome))continue;
-    const id=[key(a.nome),key(b.nome)].sort().join('+');if(pares.has(id))continue;pares.add(id);
+    const a=atuais[i]!,b=atuais[j]!;if(ident(a.nome)===ident(b.nome))continue;
+    const id=[ident(a.nome),ident(b.nome)].sort().join('+');if(pares.has(id))continue;pares.add(id);
     if(parCondicionado(a.nome,b.nome))continue;
     const v=avaliarInteracaoMedicamentosa(a.nome,b.nome,lexicais,op.catalogoInteracoes);
     const refs=[...new Map([a.f,b.f].map(f=>[canon(f.ref),f])).values()];

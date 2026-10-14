@@ -165,3 +165,14 @@ it("listas equivalentes em ordem diferente mantêm o par confirmado, sem falso c
   expect(s.lacunas.some(l => l.codigo === "MEDS_RECONCILIACAO_CONFLITANTE")).toBe(false);
   expect(s.achados.filter(a => a.id === "INTERACOES:capecitabina+varfarina")).toHaveLength(1);
 });
+
+it("aliases aprovados da mesma droga não geram falso conflito nem suprimem o par capecitabina+varfarina (P1 PR #14)", () => {
+  const a = { ...fato("medicamentos", ["capecitabina", "warfarin"]), ref: { eventId: "lista-alias-a", revisao: "1" } };
+  const b = { ...fato("medicamentos", ["capecitabina", "varfarina"]), ref: { eventId: "lista-alias-b", revisao: "1" } };
+  const r: Retrato = { schema: "Retrato@1", ...ctx, revisao: "r-listas-alias", versaoProjecao: "1", geradoEm: em,
+    regras: config.regras, biblioteca: config.biblioteca, fatos: [a, b], integridade: [], resumo: [], delta: { encounterAnteriorId: null, novos: [], substituidos: [] } };
+  const c: Correlacao = { ...ctx, operationId: "op-listas-alias", revisaoFatos: r.revisao, regras: r.regras, biblioteca: r.biblioteca, proposta: null };
+  const s = avaliarInteracoes(r, c, config.opcoes);
+  expect(s.lacunas.some(l => l.codigo === "MEDS_RECONCILIACAO_CONFLITANTE")).toBe(false);
+  expect(s.achados.filter(x => x.id === "INTERACOES:capecitabina+varfarina")).toHaveLength(1);
+});
