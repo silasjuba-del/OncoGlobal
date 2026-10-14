@@ -374,14 +374,19 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   const presenteNoLote = (d: { campo: string; valor: string | null } | undefined) =>
     d?.campo === "PRESENTE" && typeof d.valor === "string" && d.valor.trim() ? d.valor : null;
   // Armadilha (a): encontro reaberto não usa a versão do lote confirmada em encontro POSTERIOR.
-  const loteNoHorizonte = lote ? porTipo(all.filter((e) => e.patientId === patientId && Date.parse(e.criadoEm) <= horizontePlaquetas),
-    "TumorLot", TumorLot).find((x) => x.event.patientId === patientId && x.value.tumorLotId === lote.tumorLotId)?.value : undefined;
+  const lotesNoHorizonte = lote ? porTipo(all.filter((e) => e.patientId === patientId && Date.parse(e.criadoEm) <= horizontePlaquetas),
+    "TumorLot", TumorLot).filter((x) => x.value.patientId === patientId && x.value.tumorLotId === lote.tumorLotId) : [];
+  const loteNoHorizonte = lotesNoHorizonte.length === 1 ? lotesNoHorizonte[0]!.value : undefined;
+  if (lotesNoHorizonte.length > 1) pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
   const triagemNutricional = sugerirTriagemNutricional({
     tumor: [presenteNoLote(loteNoHorizonte?.topografia), presenteNoLote(loteNoHorizonte?.histologia)].filter((t): t is string => t !== null).join(" ") || null,
     cid: presenteNoLote(loteNoHorizonte?.cid),
-    imc: imcDeMedidas(avaliacao.dadosCorporais.pesoKg, avaliacao.dadosCorporais.alturaCm),
+    imc: imcDeMedidas(avaliacao.dadosNutricionais.pesoKg, avaliacao.dadosNutricionais.alturaCm),
   });
-  const sugestaoNutricional = textoSugestaoNutricional(triagemNutricional);
+  const textoNutricional = textoSugestaoNutricional(triagemNutricional);
+  const sugestaoNutricional = textoNutricional && triagemNutricional.motivos.some(m => m.startsWith("IMC "))
+    ? `${textoNutricional} (peso medido em ${avaliacao.dadosNutricionais.medidoEm}; fonte ${avaliacao.dadosNutricionais.sourceId}; conferir atualidade)`
+    : textoNutricional;
   pendenciasLeitura.push(...contextoClinico.pendencias,
     ...Object.entries(contextoClinico.campos).filter(([,c]) => c.valor === null).map(([nome]) => `${nome.toUpperCase()}_NAO_CARREGADAS`));
   const anteriores = patientEvents.filter(e => e.encounterId !== current.encounterId && Date.parse(e.criadoEm) < Date.parse(current.criadoEm));

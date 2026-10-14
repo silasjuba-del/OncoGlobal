@@ -44,7 +44,7 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
     salvarDraft(db, { draftId: id, patientId: PAC, sourceId: `src-${id}`, rawRef: "fixture-local", payload: {}, diagnostics: [], revision: 0, criadoEm: em });
     const r = confirmar(db, { operationId: `op-nutri-${String(seq).padStart(3, "0")}`, patientId: PAC, tumorLotId, encounterId: enc,
       reviewDecisionId: `rev-${id}`, sessao: sessoes.obter(token)!, em,
-      registros: [{ draftId: id, expectedRevision: 0, eventId: `ev-${id}`, tipo, payload, fontes: [], revisao: "CONFIRMADO" }] });
+      registros: [{ draftId: id, expectedRevision: 0, eventId: `ev-${id}`, tipo, payload, fontes: [fonteSintetica("medida-nutri")], revisao: "CONFIRMADO" }] });
     expect(r.estado).toBe("GRAVADA");
   };
   const pac = { patientId: PAC, identificadores: [], nome: PAC, nascimento: null, sexoCadastral: "NAO_INFORMADO", divergencia: false };
@@ -60,10 +60,49 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
       body: JSON.stringify({ patientId: PAC, encounterId, ...(tumorLotId ? { tumorLotId } : {}) }) });
     return { status: r.status, body: await r.json() as Record<string, any> };
   };
-  return { carregar, eventos: () => listarEventos(db, PAC).length, antes };
+  return { carregar, seed, eventos: () => listarEventos(db, PAC).length, antes };
 }
 
 describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", () => {
+  it.each([["Esôfago", "Mama"], ["Mama", "Esôfago"]])("conflito: %s e %s no mesmo lote não elegem a primeira versão", async (a, b) => {
+    const c = await consultaCom([{ id: "lote-conflito", topografia: a }, { id: "lote-conflito", topografia: b }]);
+    const v = await c.carregar("lote-conflito");
+    expect(v.status).toBe(200);
+    expect(v.body.flash.sugestoesClinicas).toBeUndefined();
+    expect(v.body.pendenciasLeitura).toContain("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
+    expect(c.eventos()).toBe(c.antes);
+  });
+  it("peso documentado há mais de 30 dias mantém sugestão nutricional datada, sem liberar dose", async () => {
+    const c = await consultaCom([{ id: "lote-mama", topografia: "Mama" }]);
+    c.seed("Weight", { kg: 50, origem: "MEDIDO", data: "2026-09-01", sourceId: "medida-nutri" });
+    c.seed("FATO", { campo: "alturaCm", valor: 170 });
+    const antes = c.eventos();
+    const v = await c.carregar();
+    expect(v.body.flash.sugestoesClinicas?.[0]).toMatch(/IMC 17\.3 < 18/);
+    expect(v.body.flash.sugestoesClinicas?.[0]).toContain("2026-09-01");
+    expect(v.body.flash.sugestoesClinicas?.[0]).toContain("conferir atualidade");
+    expect(v.body.avaliacaoClinica.dadosCorporais.pesoKg).toBeNull();
+    expect(v.body.avaliacaoClinica.dadosNutricionais.sourceId).toBe("medida-nutri");
+    expect(c.eventos()).toBe(antes);
+  });
+  it.each(["conflito", "futuro", "sem fonte"])("peso %s não produz sugestão por IMC", async (caso) => {
+    const c = await consultaCom([{ id: "lote-mama", topografia: "Mama" }]);
+    c.seed("Weight", { kg: 50, origem: "MEDIDO", data: caso === "futuro" ? "2026-10-15" : "2026-09-01",
+      sourceId: caso === "sem fonte" ? "nao-vinculada" : "medida-nutri" });
+    if (caso === "conflito") c.seed("Weight", { kg: 80, origem: "MEDIDO", data: "2026-09-01", sourceId: "medida-nutri" });
+    c.seed("FATO", { campo: "alturaCm", valor: 170 });
+    const v = await c.carregar();
+    expect(v.body.flash.sugestoesClinicas).toBeUndefined();
+  });
+  it("IMC documentado ainda sugere quando o lote conflita, sem escolher um tumor", async () => {
+    const c = await consultaCom([{ id: "lote-conflito", topografia: "Esôfago" }, { id: "lote-conflito", topografia: "Mama" }]);
+    c.seed("Weight", { kg: 50, origem: "MEDIDO", data: "2026-10-14", sourceId: "medida-nutri" });
+    c.seed("FATO", { campo: "alturaCm", valor: 170 });
+    const v = await c.carregar("lote-conflito");
+    expect(v.body.flash.sugestoesClinicas?.[0]).toContain("IMC 17.3 < 18");
+    expect(v.body.flash.sugestoesClinicas?.[0]).not.toContain("esôfago");
+    expect(v.body.pendenciasLeitura).toContain("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
+  });
   it("positivo: lote de esôfago confirmado mostra a sugestão na Flash, sem gravar nada", async () => {
     const c = await consultaCom([{ id: "lote-esofago", topografia: "Esôfago torácico" }]);
     const v = await c.carregar();

@@ -152,6 +152,10 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const altura=campo("alturaCm");
   const dadosCorporais={pesoKg:renal.valoresUsados.peso.valor,alturaCm:typeof altura === "number" && altura>0 ? altura : null,
     bsaM2:null,clcr:renal.clcrMlMin,medidoEm:peso?.data ?? null};
+  // Nutrição usa a última medida documentada, sem confundir a validade para dose com ausência de medida.
+  // A data/fonte acompanham a sugestão; isto não declara peso atual nem libera cálculo de dose.
+  const dadosNutricionais = { pesoKg: peso && peso.kg > 0 && new Set(pesosDia.map(p => p.kg)).size === 1 ? peso.kg : null,
+    alturaCm: dadosCorporais.alturaCm, medidoEm: peso?.data ?? null, sourceId: peso?.sourceId ?? null };
   const avisosFlash = [...avisosCriticos,
     ...(variacaoPeso !== null && variacaoPeso>=0.10 ? ["Variação de peso de pelo menos 10%: revisar prescrição"] : []),
     ...(interacoes.estado === "VERMELHO" ? [interacoes.motivo] : []),
@@ -160,6 +164,6 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     ...(hbv.faltantes.length ? [`Verificar sorologias: ${hbv.faltantes.join(", ")}`] : []),
     ...(i.cumulativo?.estado === "VERMELHO" ? i.cumulativo.motivos.map(m => m.texto) : [])];
   const sugestoesLaboratorio = [...(interacoes.achados.some(a=>key(a.drogaA).includes("capecitabina") && key(a.drogaBouClasse).includes("varfarina")) ? ["INR"] : []),...hbv.faltantes];
-  return { elegibilidade, renal, dadosCorporais, variacaoPeso, criticos, hbv, interacoes, emergencia, avisosFlash, sugestoesLaboratorio,
+  return { elegibilidade, renal, dadosCorporais, dadosNutricionais, variacaoPeso, criticos, hbv, interacoes, emergencia, avisosFlash, sugestoesLaboratorio,
     lembrete: elegibilidade.motivos.map(m=>m.texto).filter((t,index,a)=>a.indexOf(t)===index).join("; ") };
 }
