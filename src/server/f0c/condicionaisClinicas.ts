@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { horizonteDoEncontro } from "./avaliacaoConsulta.js";
 import type { ClinicalEvent } from "../../contracts/operacao.js";
 import type { RegraCondicional, RegraTermoComplementar } from "../../contracts/f0c/condicionais.js";
 import { projetarSnapshot } from "../../kernel/projections/snapshot.js";
@@ -41,7 +42,8 @@ export interface EntradaCondicionaisClinicas {
 }
 
 export function projetarCondicionaisClinicas(i: EntradaCondicionaisClinicas) {
-  const instante = Date.parse(i.agora), hoje = dataCivilNoOffset(i.agora, i.offsetServico ?? "-03:00");
+  const instante = horizonteDoEncontro(i.eventos.filter(e => e.patientId === i.patientId), i.encounterId, i.agora);
+  const hoje = dataCivilNoOffset(i.agora, i.offsetServico ?? "-03:00");
   const eventos = i.eventos.filter((e) => e.tipo === "FATO" && e.patientId === i.patientId && e.tumorLotId === i.tumorLotId
     && e.encounterId === i.encounterId && (e.revisao === "CONFIRMADO" || e.revisao === "ASSINADO")
     && Number.isFinite(Date.parse(e.criadoEm)) && Date.parse(e.criadoEm) <= instante);

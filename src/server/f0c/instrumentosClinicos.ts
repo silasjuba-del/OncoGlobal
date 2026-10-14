@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { horizonteDoEncontro } from "./avaliacaoConsulta.js";
 import type { ClinicalEvent } from "../../contracts/operacao.js";
 import type { InstrumentoId, RegraInstrumento, ResultadoInstrumento } from "../../contracts/f0c/instrumentos.js";
 import { projetarSnapshot } from "../../kernel/projections/snapshot.js";
@@ -66,7 +67,7 @@ const ids: readonly InstrumentoId[] = ["KPS", "CHILD_PUGH", "ALBI", "KHORANA", "
 
 /** Lê somente FATO instrumento.<ID> confirmado da consulta atual. Ausência não solicita instrumento. */
 export function projetarInstrumentosClinicos(i: EntradaInstrumentosClinicos): ResultadoInstrumentosClinicos {
-  const instante = Date.parse(i.agora);
+  const instante = horizonteDoEncontro(i.eventos.filter(e => e.patientId === i.patientId), i.encounterId, i.agora);
   if (!Number.isFinite(instante) || !i.patientId.trim() || !i.encounterId.trim()) return { avaliacoes: [], pendencias: ["ESCOPO_OU_AGORA_INVALIDO"] };
   const eventos = i.eventos.filter((e) => e.tipo === "FATO" && e.patientId === i.patientId && e.encounterId === i.encounterId
     && e.tumorLotId === i.tumorLotId && (e.revisao === "CONFIRMADO" || e.revisao === "ASSINADO")

@@ -140,4 +140,14 @@ describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", (
     const atual = await c.carregar("lote-esofago");
     expect(atual.body.flash.sugestoesClinicas?.[0]).toMatch(/câncer de esôfago/);
   });
+  it("Flash histórica mantém laboratório antigo e omite cirurgia de encontro posterior", async () => {
+    const c = await consultaCom([{ id: "lote-mama", topografia: "Mama", encontro: "encontro-antigo", em: "2026-09-01T09:00:00-03:00" }],
+      { id: "encontro-antigo", em: "2026-09-01T09:00:00-03:00" });
+    c.seed("LabResult", { campo: "creatinina", valor: 1, unidade: "mg/dL", data: "2026-09-01", sourceId: "medida-nutri" }, null, "encontro-antigo", "2026-09-01T09:00:00-03:00");
+    c.seed("LabResult", { campo: "creatinina", valor: 9, unidade: "mg/dL", data: "2026-10-14", sourceId: "medida-nutri" });
+    c.seed("Surgery", { tipo: "CIRURGIA", id: "cx", data: "2026-10-14", procedimento: "Procedimento sintético", observacao: null }, "lote-mama");
+    const v = await c.carregar("lote-mama", "encontro-antigo");
+    expect(v.body.flash.laboratorios.map((l: any) => l.fraseLaudo)).toEqual(["1 mg/dL"]);
+    expect(v.body.historicoTratamento.linhas).toEqual([]);
+  });
 });
