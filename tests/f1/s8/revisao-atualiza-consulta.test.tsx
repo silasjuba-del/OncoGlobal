@@ -119,10 +119,11 @@ it.each(["GRAVADA", "REPLAY"] as const)("%s atualiza automaticamente, oculta vis
   f.carregar.mockImplementationOnce(() => recarga.promise);
   fireEvent.click(botao);
   await screen.findByText(/Revisão registrada/);
-  expect(f.carregar).toHaveBeenCalledTimes(chamadasAntes + 1);
+  // A confirmação e o efeito de recarga são commits distintos do React.
+  await waitFor(() => expect(f.carregar).toHaveBeenCalledTimes(chamadasAntes + 1));
   expect(f.carregar).toHaveBeenLastCalledWith(f.contexto.patientId, f.contexto.tumorLotId, f.contexto.encounterId);
   const consulta = screen.getByRole("region", { name: "Consulta persistida" });
-  expect(consulta.textContent).toContain("Carregando consulta persistida");
+  await waitFor(() => expect(consulta.textContent).toContain("Carregando consulta persistida"));
   expect(consulta.textContent).not.toContain(antiga);
   expect(consulta.textContent).not.toContain(geradoAntes);
   expect(within(consulta).queryByRole("region", { name: "Visão clínica integrada" })).toBeNull();
