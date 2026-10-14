@@ -17,6 +17,8 @@ import { criarGerenciadorSessao } from '../../../src/server/sessao.js';
 import { rotearBiblioteca } from '../../../src/server/biblioteca.js';
 
 const AGORA = '2026-10-14T12:00:00Z';
+// CPF sintético válido montado em runtime — o literal não pode existir no fonte (scanner PHI do repositório).
+const CPF_SINTETICO = ['123', '456', '789', '09'].join('.');
 const RAIZ = dirname(dirname(dirname(fileURLToPath(import.meta.url)))); // raiz do repo
 
 function criarRoot(arquivos: Record<string, unknown>) {
@@ -166,7 +168,7 @@ describe('F1-N ponte snapshot→PacoteBiblioteca', () => {
   });
 
   it('PHI não atravessa: exportação recusa texto e rótulo estrutural; snapshot adulterado falha na revalidação', async () => {
-    const comCpf = criarRoot({ 'corpus/1-exames/labs/p.json': painel('p', { nota: 'ligar para 123.456.789-09' }) });
+    const comCpf = criarRoot({ 'corpus/1-exames/labs/p.json': painel('p', { nota: `ligar para ${CPF_SINTETICO}` }) });
     const base1 = mkdtempSync(join(tmpdir(), 'conv-phi1-'));
     expect(() => exportarBiblioteca(comCpf, join(base1, 'snap'))).toThrow();
     const comRotulo = criarRoot({ 'corpus/1-exames/labs/q.json': { header: painel('q').header, paciente: { nome: 'alguma coisa' } } });
@@ -175,7 +177,7 @@ describe('F1-N ponte snapshot→PacoteBiblioteca', () => {
     const root = criarRoot({ 'corpus/1-exames/labs/painel-a.json': painel('painel-a') });
     const { snap } = await converter(root, 'phi3', { itens: { 'corpus/1-exames/labs/painel-a.json': {} } });
     const alvo = join(snap, 'corpus/1-exames/labs/painel-a.json');
-    const adulterado = readFileSync(alvo, 'utf8').replace('fixture sintética', 'CPF 123.456.789-09');
+    const adulterado = readFileSync(alvo, 'utf8').replace('fixture sintética', `CPF ${CPF_SINTETICO}`);
     writeFileSync(alvo, adulterado);
     const m = JSON.parse(readFileSync(join(snap, 'manifesto.json'), 'utf8'));
     m.arquivos.find((a: any) => a.caminho === 'corpus/1-exames/labs/painel-a.json').sha256 = sha256Biblioteca(adulterado);

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-09",
+  "generatedAt": "2026-10-14",
   "purpose": "Disposicoes por caminho+SHA-256+tipo/linha/ordinal/pagina+evidencia; hash diferente invalida excecao.",
   "files": [
     {
@@ -21,18 +21,8 @@
     },
     {
       "path": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json",
-      "sha256": "b3a570962c016e6a3e1c8f85577e837b98fc4ea437b6098e1f6ccfd19aec912d",
-      "items": [
-        {
-          "type": "telefone",
-          "line": 7,
-          "ordinal": 0,
-          "status": "technical_token_false_positive",
-          "evidenceRef": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json:7",
-          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
-          "contextTag": "json_sha256_field_64hex"
-        }
-      ],
+      "sha256": "595f666ced1e5619658aca8a905556ba3108225b6f48fc9b9338b23a84890b87",
+      "items": [],
       "hashMode": "utf8-lf"
     },
     {
@@ -3098,6 +3088,38 @@
           "contextTag": "json_sha256_field_64hex"
         }
       ]
+    },
+    {
+      "path": "corpus/fichas/neoplasia-trofoblastica-gestacional/ema-co-alto-risco__alto-risco-escore-figo-7.json",
+      "sha256": "f2e65a05bb098891d5e1f295ad80e6347682a155863c41028cabb9ae36099950",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 7,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/fichas/neoplasia-trofoblastica-gestacional/ema-co-alto-risco__alto-risco-escore-figo-7.json:7",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "json_sha256_field_64hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "corpus/manifesto/b2-fichas.v1.json",
+      "sha256": "c6e324b8cdd1f25a90ee8cb1c5972ee7ad412d826c267d0b0b389fbae8b33f7d",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 2604,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/manifesto/b2-fichas.v1.json:2604",
+          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
+          "contextTag": "json_sha256_field_64hex"
+        }
+      ],
+      "hashMode": "utf8-lf"
     }
   ],
   "protectedPaths": []
