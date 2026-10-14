@@ -633,4 +633,4 @@
 - **053:** erro de duplicação da biblioteca INT-MED (D-F1-44) — a corrigir NAQUELA biblioteca (externa ao repositório); nenhuma ficha nova
 
 ---
-Gerado em 2026-10-14T17:28:29.987Z · aprovacaoClinica: **null** (todas as fichas) — D-F1-49.
+Gerado em 2026-10-14T17:32:12.517Z · aprovacaoClinica: **null** (todas as fichas) — D-F1-49.
