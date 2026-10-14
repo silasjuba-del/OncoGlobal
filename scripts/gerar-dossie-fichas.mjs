@@ -26,7 +26,7 @@ for (const [tumor, fichas] of porTumor) {
   for (const f of fichas) {
     const json = JSON.parse(readFileSync(join(RAIZ, f.arquivo), "utf8"));
     linhas.push(`### ${json.nome} — ${json.cenario}`, "",
-      `- **templateId:** \`${json.templateId}\` · **versão:** ${json.versao} · **hash:** \`${json.hash}\` · **status:** ${json.status}${json.codigoInstitucional ? ` · **código:** ${json.codigoInstitucional}` : ""}`,
+      `- **templateId:** \`${json.templateId}\` · **versão:** ${json.versao} · **hash:** ver 'corpus/manifesto/b2-fichas.v1.json' (chave templateId) · **status:** ${json.status}${json.codigoInstitucional ? ` · **código:** ${json.codigoInstitucional}` : ""}`,
       `- **Intervalo:** ${json.intervaloDias ?? "— [VERIFICAR]"} d · **Ciclos:** ${json.ciclos ?? "—"}`,
       `- **Identidade clínica:** ${f.identidadeClinica}`,
       `- **Fonte da ficha:** ${json.fonte.replace(/\s+/g, " ").slice(0, 600)}${json.fonte.length > 600 ? " …" : ""}`,
