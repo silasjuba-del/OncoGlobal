@@ -29,8 +29,8 @@ export function criarTranscritorDocumentoOriginal(opcoes: OpcoesOpenAi = {}) {
   const status = () => {
     if (env.ONCOASSIST_OPENAI_ENABLED !== "true" || env.ONCOASSIST_OPENAI_DOCUMENTS_ENABLED !== "true") return { status: "PENDENTE" as const, codigo: "D_W9_66_DESABILITADA" };
     if (!modelo || !chave) return { status: "PENDENTE" as const, codigo: !modelo ? "MODELO_API_NAO_CONFIGURADO" : "CHAVE_AUSENTE" };
-    if (!opcoes.transporte && ((!!env.CI && env.CI !== "false") || env.ONCOASSIST_OPENAI_LIVE_AUDIT !== "true" || !opcoes.auditar))
-      return { status: "PENDENTE" as const, codigo: "LIVE_SEM_GATE_AUDITORIA" };
+    // D-F1-40: LLM só local. Nenhum transporte externo real, mesmo com flags e chave; só transporte injetado (teste, sem rede).
+    if (!opcoes.transporte) return { status: "PENDENTE" as const, codigo: "D_F1_40_LLM_SO_LOCAL" };
     return { status: "DISPONIVEL" as const, codigo: opcoes.transporte ? "TRANSPORTE_INJETADO" : "CONFIGURADO_NAO_ATESTADO" };
   };
   return { status, async transcrever(payload: string, fonteHash: string, paginas: number, signal?: AbortSignal): Promise<ResultadoDocumentoOriginal> {
