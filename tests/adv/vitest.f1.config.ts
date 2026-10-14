@@ -10,7 +10,7 @@ export default defineConfig({
       'tests/adv/f1*.{test,spec,adv}.{ts,tsx}',
       'tests/adv/f1*/**/*.{test,spec,adv}.{ts,tsx}',
     ],
-    pool: 'threads',
+    pool: process.platform === 'win32' ? 'forks' : 'threads',
     maxWorkers: 1,
     fileParallelism: false,
     testTimeout: 30_000,

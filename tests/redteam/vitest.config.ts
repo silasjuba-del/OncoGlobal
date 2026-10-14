@@ -8,7 +8,7 @@ export default defineConfig({
   root: new URL("../..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"),
   test: {
     include: ["tests/redteam/**/*.test.ts", "tests/redteam/**/*.adv.ts"],
-    pool: "threads",
+    pool: process.platform === "win32" ? "forks" : "threads",
     maxWorkers: 1,
     fileParallelism: false,
   },

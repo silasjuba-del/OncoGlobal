@@ -56,8 +56,9 @@ export default defineConfig(async () => {
         ...(comAdv ? (raizFixture ? [] : [`**/${PASTA_FIXTURE}/${PASTA_ADV}/**`])
           : [`**/${PASTA_ADV}/**`]),
       ],
-      // O plugin do React junto do jsdom estoura os 60s de arranque do worker no Windows.
-      pool: "threads",
+      // Threads encerraram a bateria Windows com 0xC0000409, sem resultado de teste.
+      // Processos isolam o estado nativo (SQLite/canvas/OCR); não alteram quais testes executam.
+      pool: process.platform === "win32" ? "forks" : "threads",
       maxWorkers: 1,
       // npm run verify termina em `npm test` sem flag CLI; ainda assim, um arquivo por vez.
       fileParallelism: false,
