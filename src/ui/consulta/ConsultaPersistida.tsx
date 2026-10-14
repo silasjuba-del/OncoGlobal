@@ -214,7 +214,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     ...(aoAbrirApac ? {aoAbrirApac} : {}),
     ocupado: ocupado || !visaoPronta, rotuloFinalizar: "Revisar documentos para assinatura", aoSalvarRascunho: salvar, aoFinalizar: preparar,
   } : null;
-  return <section aria-label="Consulta persistida">
+  return <section aria-label="Consulta persistida" className="consulta-persistida">
     {!visaoPronta ? <p aria-live="polite">{cargaAtual?.erro || "Carregando consulta persistida…"}</p> : <>
     <h2>{visaoPronta.cabecalho.paciente.nome} · consulta local</h2>
     <p>{visaoPronta.hoje} · Dados pendentes: {visaoPronta.cabecalho.pendentes}</p>
@@ -223,14 +223,18 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     {mensagem ? <p aria-live="polite">{mensagem}</p> : null}
     <InvestigacaoMinima porta={porta} contexto={contexto} {...(visaoPronta.retrato?{revisaoEsperada:visaoPronta.retrato.revisao}:{})} />
     <DutosClinica {...(visaoPronta.dutos?{dados:visaoPronta.dutos}:{})} />
+    <div id="consulta-resumo" className="consulta-secao" tabIndex={-1}>
     <VisaoIntegradaMinima {...(visaoPronta.retrato ? {retrato:visaoPronta.retrato}: {})}
       {...(visaoPronta.visaoIntegrada ? {visao:visaoPronta.visaoIntegrada}: {})} />
     <h3>Evolução revisada</h3>
     <pre style={{ whiteSpace: "pre-wrap" }}>{visaoPronta.resumoEvolucao ?? "Evolução PENDENTE de revisão."}</pre>
     {visaoPronta.retratoTransversal ? <CartaoTransversal entrada={visaoPronta.retratoTransversal} />
       : <p>Cartão transversal PENDENTE de fonte estruturada.</p>}
+    </div>
+    <div id="consulta-conduta" className="consulta-secao consulta-acoes" tabIndex={-1}>
     <button type="button" disabled={ocupado} onClick={() => { setPreview(null); setFlash(true); }}>Consulta Flash</button>
     <button type="button" disabled={ocupado} onClick={() => setVersao((v) => v + 1)}>Reabrir histórico</button>
+    </div>
     <InstrumentosClinicos key={`${patientId}:${encounterId}:${tumorLotId ?? ""}`} ocupado={ocupado}
       aoAvaliar={async (pedido) => {
         if (!porta.avaliarInstrumento) throw new Error("Cálculo autenticado indisponível nesta tela.");
@@ -252,7 +256,7 @@ export function ConsultaPersistida({ porta, contexto, aoAbrirApac, versaoClinica
     {impressaoPendente ? <p>
       <button type="button" disabled={ocupado} onClick={repetirImpressao}>Solicitar impressão novamente</button>
     </p> : null}
-    <section aria-label="Histórico de documentos assinados"><h3>Histórico de documentos assinados</h3>
+    <section id="consulta-historico" className="consulta-secao" tabIndex={-1} aria-label="Histórico de documentos assinados"><h3>Histórico de documentos assinados</h3>
       {(visaoPronta.historicoDocumentos ?? []).length === 0 ? <p>Nenhum documento assinado neste histórico.</p>
         : visaoPronta.historicoDocumentos!.map((doc) => <article key={doc.eventId}>
           <h4>{doc.titulo} · versão {doc.documentVersion}</h4><p>{doc.assinadoEm} · {doc.autorId} · consulta {doc.encounterId} · tumor {doc.tumorLotId ?? "não selecionado"}</p>

@@ -50,7 +50,8 @@ export async function iniciarOncoassistLocal(opcoes: OpcoesOncoassistLocal) {
     senha: opcoes.senha, duracaoMs: 8 * 60 * 60 * 1000, agora });
   const db = abrirLedger(arquivo);
   const extracaoLlm = criarRuntimeExtracaoLlm({ agora, auditar: e => auditar(db, { ator: { tipo: "SISTEMA", id: "llm-extracao" },
-    acaoPedida: "LLM_EXTRACAO", decisao: e.status === "PROPOSTA" ? "PERMITIDA" : "NEGADA", motivoCodigo: e.codigo,
+    // Permissão de egresso não promove proposta ou transcrição a fato clínico.
+    acaoPedida: "LLM_EXTRACAO", decisao: ["PROPOSTA", "DERIVADO_LLM_NAO_VERIFICADO"].includes(e.status) ? "PERMITIDA" : "NEGADA", motivoCodigo: e.codigo,
     em: agora(), politicaVersao: e.promptId }) });
   const gateway = criarGateway({ agora, store: sqliteIdempotencia(db), executores: {
     IMPRIMIR: criarExecutorImprimir({dataDir:opcoes.dataDir,agora,resolverDocumento:criarResolverDocumentoLedger(db)}),

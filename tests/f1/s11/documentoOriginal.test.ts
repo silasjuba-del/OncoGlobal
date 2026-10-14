@@ -79,12 +79,12 @@ describe("D-W9-66 técnica offline, separada e desligada por padrão", () => {
     expect((await g.executar(intent, sessao)).decisao).toBe("NEGADA"); expect(executar).not.toHaveBeenCalled();
   });
   it.each([{ ...saida(), ator: "MEDICO" }, { paginas: [{ n: 2, texto: "inventado" }] }, { paginas: [{ n: 1, texto: "x", state: "SIGNED" }] }])("saída inválida nunca ganha autoridade", async resposta => {
-    const a = await preparar({ resposta }); expect((await a.gateway.executar(intent, sessao)).decisao).toBe("FALHOU");
+    const a = await preparar({ resposta }); expect((await a.gateway.executar(intent, sessao)).decisao).toBe("OUTCOME_UNKNOWN");
     expect(a.runtime.resultadoDocumentoOriginal(intent.idempotencyKey)?.status).toBe("PENDENTE");
   });
   it("timeout não publica transcrição tardia", async () => {
     const transcritor = criarTranscritorDocumentoOriginal({ env: { ...env, ONCOASSIST_OPENAI_TIMEOUT_MS: "5" }, transporte: { extrair: async () => new Promise(() => {}) } });
-    expect(await transcritor.transcrever(payloadDocumentoOriginal(modelo, base64), sourceHash, 1)).toEqual({ status: "PENDENTE", codigo: "TIMEOUT" });
+    expect(await transcritor.transcrever(payloadDocumentoOriginal(modelo, base64), sourceHash, 1)).toEqual({ status: "PENDENTE", codigo: "TIMEOUT", envioIniciado: true });
   });
   it("corpo não pode fornecer lease/provider/modelo/store/ator; falta vínculo de upload nega", async () => {
     const db = abrirLedger(":memory:"); bancos.push(db);

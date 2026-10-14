@@ -139,7 +139,7 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
   }
 
   if (!porta.carregarFonteRevisao) return null;
-  return <section aria-label="Revisão clínica da extração">
+  return <section aria-label="Revisão clínica da extração" className="revisao-extracao">
     <h2>Revisar extração</h2>
     <p>Selecione os achados, confira o resumo e registre sua revisão.</p>
     {mensagem ? <p role="status">{mensagem}</p> : null}
@@ -203,10 +203,14 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
       <option value="">Selecione uma fonte</option>
       {fontes.map((f) => <option key={f.draftId} value={f.draftId}>{f.rotulo}</option>)}
     </select></label>
-    {fonte ? <>
+    {fonte ? <div className="revisao-colunas">
+      <section className="revisao-fonte" aria-label="Fonte original vinculada">
       {fonte.payload.patientLinkReview.segmentId
         ? <p>Trecho vinculado explicitamente: {fonte.payload.patientLinkReview.segmentId}</p> : null}
       <h3>Texto original</h3><pre style={{ whiteSpace: "pre-wrap" }}>{fonte.payload.input.rawTranscript}</pre>
+      <p className="consulta-fonte-ref">Fonte {fonte.payload.input.sourceId}</p>
+      </section>
+      <div className="revisao-decisoes">
       <label><input type="checkbox" checked={incluirTextoOriginal} disabled={ocupado || concluida
         || !fonte.payload.input.rawTranscript.trim() || !fonte.payload.patientLinkReview.segmentId}
         onChange={(e) => { setPreparada(null); setIncluirTextoOriginal(e.target.checked); }} />
@@ -223,7 +227,6 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
         </label>)}
       </fieldset>
       <button type="button" disabled={ocupado || concluida || (ids.length === 0 && !incluirTextoOriginal)} onClick={() => void preparar()}>Preparar revisão</button>
-    </> : null}
     {preparada ? <section aria-label="Conteúdo preparado para revisão">
       <h3>Resumo dos achados selecionados</h3><pre style={{ whiteSpace: "pre-wrap" }}>{preparada.resposta.conteudo.resumo}</pre>
       <details><summary>Fatos, fontes e contexto desta revisão</summary>
@@ -231,5 +234,7 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosCon
       </details>
       <button type="button" disabled={ocupado || concluida} onClick={() => void confirmar()}>Confirmar revisão exibida</button>
     </section> : null}
+      </div>
+    </div> : null}
   </section>;
 }

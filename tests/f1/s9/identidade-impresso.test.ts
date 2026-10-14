@@ -20,7 +20,7 @@ function documento(d:DatabaseSync,extra:Record<string,unknown>={}){
  evento(d,"assinatura","DOCUMENTO",{data:corpo,signature:{documentId:corpo.documentId,documentVersion:1,documentHash:hashCanonico(corpo),serverActorId:"medico-opaco",reviewDecisionId:"review"}},assinadoEm,pacienteId,"ASSINADO");
 }
 it("ID opaco imprime nome legível histórico e atualização posterior não altera HTML, texto ou hash",async()=>{
- const d=db();cadastro(d,"cadastro-original","Paciente Sintético Original","2026-10-09T10:00:00-03:00");documento(d);
+ const d=db();cadastro(d,"cadastro-original","Paciente Sintético Original","2026-10-09T10:00:00-03:00");documento(d,{identidadePaciente:{patientId:pacienteId,nome:"Paciente Sintético Original",cadastroEventId:"cadastro-original"}});
  const resolver=criarResolverDocumentoLedger(d),original=await resolver.resolver({id:"doc-identidade",version:1});
  expect(original?.html).toContain("Paciente: Paciente Sintético Original");expect(original?.html).toContain(`Prontuário: ${pacienteId}`);
  const assinado=d.prepare("SELECT * FROM clinical_event WHERE eventId='assinatura'").get();

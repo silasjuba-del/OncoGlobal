@@ -1094,10 +1094,13 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         });
         if(finalizada)return reply(409,"FLASH_JA_FINALIZADA");
       }
-      const cadastros=eventosVigentes(listarEventos(deps.db,parsed.data.patientId).filter(e=>Date.parse(e.criadoEm)<=Date.parse(deps.agora()))).filter(e=>e.tipo==="Paciente"&&["CONFIRMADO","ASSINADO"].includes(e.revisao)).flatMap(e=>{
+      const cadastros=eventosVigentes(listarEventos(deps.db,parsed.data.patientId).filter(e=>Date.parse(e.criadoEm)<=Date.parse(deps.agora()))).filter(e=>["Paciente","Paciente@1"].includes(e.tipo)&&["CONFIRMADO","ASSINADO"].includes(e.revisao)).flatMap(e=>{
         const p=Paciente.safeParse(dadosDoEvento(e));return p.success&&p.data.patientId===parsed.data.patientId?[{patientId:p.data.patientId,nome:p.data.nome,cadastroEventId:e.eventId}]:[];
       });
-      const identidadePaciente=cadastros.at(-1);
+      // Preparar documentos exige identidade única. Salvar uma minuta continua permitido.
+      if ("idempotencyKey" in parsed.data && cadastros.length !== 1)
+        return reply(409,cadastros.length ? "IDENTIDADE_PACIENTE_AMBIGUA" : "IDENTIDADE_PACIENTE_AUSENTE");
+      const identidadePaciente=cadastros[0];
       const fonteS9={...(identidadePaciente?{identidadePaciente}:{}),identidadeResponsavel:{medicoId:sessao.medicoId,crm:sessao.crm},medicamentos:parsed.data.plano.receitas??[],fonte:{sourceId:`flash-decisao:${hashDecisao}`,classe:"MANUAL" as const,localizador:resumoRef,
         dataClinica:civilS9.dataCivil,dataCaptura:capturadoEm,versao:"s9-flash@1",contentHash:hashDecisao},
         dataReferencia:civilS9.dataCivil,revisao:revisaoS9};

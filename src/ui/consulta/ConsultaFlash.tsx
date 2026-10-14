@@ -5,6 +5,8 @@ import { marcadoInicialmente } from "./Bundle.js";
 import type { MarcacaoTarefasRetorno } from "./TarefasRetorno.js";
 // @ts-expect-error folha CSS pura, resolvida pelo Vite
 import "./flash.css";
+// @ts-expect-error folha CSS pura, resolvida pelo Vite
+import "./consulta-local.css";
 
 
 
@@ -25,6 +27,11 @@ const RAD = ["TC tórax", "TC abdome superior", "TC abdome inferior", "Cintilogr
 const presente = (v?: string) => v?.trim() || "PENDENTE";
 const limparOutros = (v: string) => v.split(";").map(x => x.trim()).filter(Boolean);
 const situacao = { DENTRO_DO_LIMITE: "dentro do limite", FORA_DO_LIMITE: "fora do limite", SEM_REFERENCIA: "sem referência" };
+type ReceitaEmEdicao = { conteudo: ReceitaManualFlash; incluir: boolean; persistida: boolean };
+const novaReceita = (): ReceitaEmEdicao => ({ conteudo: { id: `receita-manual-${crypto.randomUUID()}`,
+  medicamento: "", dose: null, orientacao: null, duracao: null, via: null, quantidade: null }, incluir: false, persistida: false });
+const camposReceita = [["medicamento", "Medicamento"], ["dose", "Dose"], ["orientacao", "Orientação / posologia"],
+  ["duracao", "Duração"], ["via", "Via"], ["quantidade", "Quantidade"]] as const;
 
 export function ConsultaFlash(props: ConsultaFlashProps) {
   const { cabecalho: c, planoInicial: inicial } = props;
@@ -37,16 +44,21 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
   const [ciclo, setCiclo] = useState(inicial?.decisaoQt?.solicitarCiclo ?? false);
   const [data, setData] = useState(inicial?.decisaoQt?.data ?? props.hoje ?? "");
   const [prazo, setPrazo] = useState(() => { const d = inicial ? inicial.retorno.dias : props.retorno.dias; return d == null ? "" : String(d); });
-  const [receita,setReceita]=useState<ReceitaManualFlash>(()=>inicial?.receitas?.[0]??{id:`receita-manual-${crypto.randomUUID()}`,medicamento:"",dose:null,orientacao:null,duracao:null,via:null,quantidade:null});
-  const [incluirReceita,setIncluirReceita]=useState(()=>!!inicial?.receitas?.[0]&&inicial.receitasMarcadas.includes(inicial.receitas[0].id));
+  const [receitas, setReceitas] = useState<ReceitaEmEdicao[]>(() => inicial?.receitas?.length
+    ? inicial.receitas.map(conteudo => ({ conteudo: { ...conteudo }, incluir: inicial.receitasMarcadas.includes(conteudo.id), persistida: true }))
+    : [novaReceita()]);
   const dias = prazo.trim() === "" ? null : Number(prazo);
   const prazoInvalido = dias !== null && (!Number.isInteger(dias) || dias < 1 || dias > 3650);
-  const receitaInvalida=incluirReceita&&!receita.medicamento.trim();
+  const receitaInvalida = receitas.some(r => !r.conteudo.medicamento.trim()
+    && (r.incluir || r.persistida || camposReceita.some(([campo]) => r.conteudo[campo]?.trim())));
   const invalido=prazoInvalido||receitaInvalida;
   function plano(): PlanoFlash {
     const laboratorio = [...new Set([...labs, ...limparOutros(outrosLab)])];
     const imagem = [...new Set([...rad, ...limparOutros(outrosRad)])];
-    return { acoesMarcadas: [], receitasMarcadas: incluirReceita?[receita.id]:[],...(receita.medicamento.trim()?{receitas:[{...receita,medicamento:receita.medicamento.trim()}]}:{}),apac: { ...props.apac, emitir: false },
+    const preenchidas = receitas.filter(r => r.conteudo.medicamento.trim());
+    return { acoesMarcadas: [], receitasMarcadas: preenchidas.filter(r => r.incluir).map(r => r.conteudo.id),
+      ...(preenchidas.length ? { receitas: preenchidas.map(r => ({ ...r.conteudo, medicamento: r.conteudo.medicamento.trim() })) } : {}),
+      apac: { ...props.apac, emitir: false },
       retorno: { ...props.retorno, dias: invalido ? null : dias, examesAntesDoRetorno: [...laboratorio, ...imagem] },
       tarefasRetorno: { retorno: true, laboratorio: laboratorio.length > 0, imagem: imagem.length > 0 },
       solicitacoes: { laboratorio, imagem }, decisaoQt: { solicitarCiclo: ciclo, data: data || null } };
@@ -80,16 +92,29 @@ export function ConsultaFlash(props: ConsultaFlashProps) {
         {selecao("RAD", RAD, rad, setRad, outrosRad, setOutrosRad, "Solicitações de imagem")}
         <section className="flash-coluna" aria-label="Decisão médica sobre o ciclo"><h3>QT</h3><p>{presente(c.tratamentoAtual)} · {presente(c.cicloDia)}</p><label className="flash-check"><input type="checkbox" checked={ciclo} onChange={e => setCiclo(e.target.checked)} />Liberar ciclo {c.cicloDia ?? ""}</label><label className="flash-outros">Data<input type="date" aria-label="Data do ciclo" value={data} onChange={e => setData(e.target.value)} /></label><small>Decisão do médico</small></section>
       </div></fieldset>
-      <fieldset className="flash-edicao" disabled={props.ocupado} aria-label="Receita manual"><legend>Receita manual — médico escreve</legend>
-        <label className="flash-check"><input type="checkbox" checked={incluirReceita} onChange={e=>setIncluirReceita(e.target.checked)}/>Incluir receita digitada</label>
-        {([ ["medicamento","Medicamento"],["dose","Dose"],["orientacao","Orientação / posologia"],["duracao","Duração"],["via","Via"],["quantidade","Quantidade"] ] as const).map(([campo,rotulo])=>
-          <label className="flash-outros" key={campo}>{rotulo}<input type="text" aria-label={`${rotulo} da receita`} maxLength={campo==="orientacao"?2000:300}
-            value={receita[campo]??""} onChange={e=>setReceita(atual=>({...atual,[campo]:campo==="medicamento"?e.target.value:e.target.value.trim()?e.target.value:null}))}/></label>)}
+      <fieldset className="flash-edicao flash-receitas" disabled={props.ocupado} aria-label="Receita manual"><legend>Receitas — médico escreve</legend>
+        {receitas.map((item, indice) => <section className="flash-receita" aria-label={`Receita ${indice + 1}`} key={item.conteudo.id}>
+          <div className="flash-receita-titulo"><h4>Medicamento {indice + 1}</h4>
+            <button type="button" aria-label={`Remover receita ${indice + 1}`} onClick={() =>
+              setReceitas(atuais => atuais.filter(r => r.conteudo.id !== item.conteudo.id))}>Remover</button></div>
+          <label className="flash-check"><input type="checkbox" checked={item.incluir}
+            aria-label={`Incluir receita digitada${indice ? ` ${indice + 1}` : ""}`}
+            onChange={e => setReceitas(atuais => atuais.map(r => r.conteudo.id === item.conteudo.id ? { ...r, incluir: e.target.checked } : r))} />Incluir na receita</label>
+          <div className="flash-receita-campos">{camposReceita.map(([campo, rotulo]) =>
+            <label className="flash-outros" key={campo}>{rotulo}<input type="text"
+              aria-label={`${rotulo} da receita${indice ? ` ${indice + 1}` : ""}`} maxLength={campo === "orientacao" ? 2000 : 300}
+              value={item.conteudo[campo] ?? ""} onChange={e => {
+                const valor = campo === "medicamento" ? e.target.value : e.target.value.trim() ? e.target.value : null;
+                setReceitas(atuais => atuais.map(r => r.conteudo.id === item.conteudo.id
+                  ? { ...r, conteudo: { ...r.conteudo, [campo]: valor } } : r));
+              }} /></label>)}</div>
+        </section>)}
+        <button type="button" onClick={() => setReceitas(atuais => [...atuais, novaReceita()])}>Adicionar medicamento</button>
         <small>Campos vazios continuam não informados. Dose, via e quantidade não são completadas automaticamente.</small>
       </fieldset>
     </div>
     <footer className="flash-rodape"><label>Retorno em <input type="number" aria-label="Prazo do retorno em dias" min={1} max={3650} value={prazo} disabled={props.ocupado} aria-invalid={invalido} onChange={e => setPrazo(e.target.value)} /> dias</label><div><button type="button" disabled={props.ocupado || invalido} onClick={() => props.aoSalvarRascunho(plano())}>SALVAR RASCUNHO</button><button type="button" disabled={props.ocupado || invalido} onClick={() => props.aoFinalizar(plano())}>{props.rotuloFinalizar ?? "REVISAR · IMPRIMIR"}</button></div></footer>
     {prazoInvalido && <p role="alert">Informe um número inteiro entre 1 e 3650 dias, ou deixe vazio para PENDENTE.</p>}
-    {receitaInvalida && <p role="alert">Informe o medicamento para incluir a receita digitada.</p>}
+    {receitaInvalida && <p role="alert">Informe o medicamento ou remova a linha para continuar. Os outros campos serão preservados.</p>}
   </section>;
 }

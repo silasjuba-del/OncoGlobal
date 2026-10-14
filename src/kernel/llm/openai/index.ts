@@ -21,7 +21,7 @@ export interface OpcoesOpenAi {
   auditar?: (evento: Readonly<{ codigo: string; promptId: string; fonteHash: string; status: string }>) => void;
 }
 export interface ContextoServidorOpenAi { dicionario: DicionarioPaciente; payloadAutorizado?: string }
-export type ResultadoExtracao = { status: "PENDENTE"; codigo: string }
+export type ResultadoExtracao = { status: "PENDENTE"; codigo: string; envioIniciado?: true }
   | { status: "PROPOSTA"; revisaoObrigatoria: true; correlacao: Correlacao; fonteHash: string; modelo: string;
       promptId: string; candidatos: z.infer<typeof SaidaExtracao>["candidatos"]; resumo: z.infer<typeof SaidaExtracao>["resumo"] };
 
@@ -80,8 +80,9 @@ export function criarExtratorOpenAi(opcoes: OpcoesOpenAi = {}) {
     const parsed = Entrada.safeParse(entrada); if (!parsed.success) return { status: "PENDENTE", codigo: "ENTRADA_INVALIDA" };
     const snapshot = structuredClone(parsed.data);
     const fonteHash = createHash("sha256").update(JSON.stringify(snapshot.fonte.paginas)).digest("hex");
+    let envioIniciado = false;
     const reportar = (codigo: string, status: string) => { try { opcoes.auditar?.({ codigo, status, promptId: PROMPT_ID, fonteHash }); } catch { /* Audit callback receives no PHI. */ } };
-    const pendente = (codigo: string): ResultadoExtracao => { reportar(codigo, "PENDENTE"); return { status: "PENDENTE", codigo }; };
+    const pendente = (codigo: string): ResultadoExtracao => { reportar(codigo, "PENDENTE"); return { status: "PENDENTE", codigo, ...(envioIniciado ? { envioIniciado: true as const } : {}) }; };
     const dic = z.object({ nomes: z.array(z.string().trim().min(1)).min(1), identificadores: z.array(z.string().trim().min(1)) }).strict().safeParse(contexto?.dicionario);
     if (!dic.success) return pendente("G02_DICIONARIO_AUSENTE");
     if (signal?.aborted) return pendente("CANCELADO");
@@ -104,6 +105,8 @@ export function criarExtratorOpenAi(opcoes: OpcoesOpenAi = {}) {
     let aoAbortar: (() => void) | undefined;
     try {
       const interrupcao = new Promise<never>((_, reject) => { aoAbortar = () => reject(Error("CANCELADO")); controller.signal.addEventListener("abort", aoAbortar, { once: true }); });
+      // A partir da chamada ao transporte, erro/timeout não prova ausência de egresso.
+      envioIniciado = true;
       const resposta = await Promise.race([(opcoes.transporte ?? criarTransporteOpenAi(chave!)).extrair(payload, controller.signal), interrupcao]);
       const validada = SaidaExtracao.safeParse(resposta);
       if (!validada.success) return pendente("RESPOSTA_INVALIDA");

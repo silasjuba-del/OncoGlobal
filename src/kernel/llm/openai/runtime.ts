@@ -66,20 +66,22 @@ export function criarRuntimeExtracaoLlm(opcoes: OpcoesOpenAi & { agora?: () => s
         || !p.atual() || Date.parse(original.lease.expiraEm) <= Date.parse(agora())) return { ok: false, incerto: false, erro: "LEASE_INVALIDA" };
       p.usada = true;
       const r = await transcritor.transcrever(original.payload, original.fonte.hash, original.fonte.paginas);
+      const envioIniciado = r.status === "DERIVADO_LLM_NAO_VERIFICADO" || r.envioIniciado === true;
       if (!p.atual()) { resultadosOriginais.set(intent.idempotencyKey, { status: "PENDENTE", codigo: "FONTE_OU_CONTEXTO_DESATUALIZADO" });
-        return { ok: false, incerto: false, erro: "FONTE_OU_CONTEXTO_DESATUALIZADO" }; }
+        return { ok: false, incerto: envioIniciado, erro: "FONTE_OU_CONTEXTO_DESATUALIZADO" }; }
       resultadosOriginais.set(intent.idempotencyKey, r);
-      return r.status === "DERIVADO_LLM_NAO_VERIFICADO" ? { ok: true, recibo: "DERIVADO_NAO_VERIFICADO" } : { ok: false, incerto: false, erro: r.codigo };
+      return r.status === "DERIVADO_LLM_NAO_VERIFICADO" ? { ok: true, recibo: "DERIVADO_NAO_VERIFICADO" } : { ok: false, incerto: envioIniciado, erro: r.codigo };
     }
     const p = fontes.get(intent.idempotencyKey);
     if (!p || !prova || prova.payload !== p.evidencia.payload || prova.fonte.hash !== p.evidencia.fonte.hash || !p.atual())
       return { ok: false, incerto: false, erro: "FONTE_DESATUALIZADA" };
     const resultado = await extrator.extrair(p.entrada, { ...p.contexto, payloadAutorizado: prova.payload });
+    const envioIniciado = resultado.status === "PROPOSTA" || resultado.envioIniciado === true;
     if (!p.atual()) { resultados.set(intent.idempotencyKey, { status: "PENDENTE", codigo: "FONTE_OU_CONTEXTO_DESATUALIZADO" });
-      return { ok: false, incerto: false, erro: "FONTE_OU_CONTEXTO_DESATUALIZADO" }; }
+      return { ok: false, incerto: envioIniciado, erro: "FONTE_OU_CONTEXTO_DESATUALIZADO" }; }
     resultados.set(intent.idempotencyKey, resultado);
     return resultado.status === "PROPOSTA" ? { ok: true, recibo: "PROPOSTA_LLM" }
-      : { ok: false, incerto: false, erro: resultado.codigo };
+      : { ok: false, incerto: envioIniciado, erro: resultado.codigo };
   } };
   return { status: extrator.status, statusDocumentoOriginal: transcritor.status, preparar, validarExtracaoLlm,
     prepararDocumentoOriginal, validarDocumentoOriginalLlm, executor,
