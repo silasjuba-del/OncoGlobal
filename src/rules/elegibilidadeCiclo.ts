@@ -70,7 +70,7 @@ export function elegibilidadeCiclo(entradas: EntradasElegibilidadeCiclo): SaidaE
       estado: original.estado === "VERMELHO" || original.criterios.some(c => c.estado === "NAO_ATENDE") ? "VERMELHO" as const
         : original.estado === "PENDENTE" || original.criterios.some(c => c.estado === "AUSENTE" || c.estado === "CONFLITO") ? "PENDENTE" as const
         : "VERDE" as const,
-      motivos: [...original.motivos, ...original.criterios.filter(c => c.estado !== "ATENDE").map(c => ({ texto: c.texto }))]
+      motivos: [...original.motivos, ...original.criterios.filter(c => c.estado !== "ATENDE").map((c): MotivoEntradaElegibilidade => ({ texto: c.texto }))]
         .filter((m, index, todos) => todos.findIndex(x => x.texto === m.texto) === index),
     } : original;
     if (sinal === undefined) continue;
