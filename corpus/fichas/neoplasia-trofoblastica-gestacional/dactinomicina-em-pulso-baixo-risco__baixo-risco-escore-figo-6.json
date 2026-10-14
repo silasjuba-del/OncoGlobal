@@ -1,0 +1,148 @@
+{
+  "templateId": "FICHA.neoplasia-trofoblastica-gestacional.dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-6@1.0.0",
+  "tumor": "Neoplasia trofoblástica gestacional",
+  "nome": "Dactinomicina em pulso (baixo risco)",
+  "cenario": "baixo risco (escore FIGO ≤6)",
+  "versao": "1.0.0",
+  "hash": "45f56f3469fc919fc1f61b22c800faf57f0eb60c17d8051b87358af6bf98e238",
+  "codigoInstitucional": null,
+  "intervaloDias": 14,
+  "ciclos": null,
+  "itens": [
+    {
+      "drug": "Soro fisiológico 0,9% 250 mL (lavagem de acesso)",
+      "classe": "PRE_QT",
+      "sequence": 1,
+      "standardDose": 1,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "frasco",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": 250,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Lavar acesso venoso pré e pós QT (planilha).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Ondansetrona",
+      "classe": "PRE_QT",
+      "sequence": 2,
+      "standardDose": 8,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "15 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Padrão local (D-W9-23c/34c; D-F1-30).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Dexametasona",
+      "classe": "PRE_QT",
+      "sequence": 3,
+      "standardDose": 10,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "15 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Antiemese local sem NK1 (D-W9-23c/34c).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Prometazina",
+      "classe": "PRE_QT",
+      "sequence": 4,
+      "standardDose": 25,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Pré-medicação local (D-W9-34c).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Dactinomicina",
+      "classe": "QT",
+      "sequence": 5,
+      "standardDose": 1.25,
+      "doseBasis": "MG_M2",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg/m²",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "5 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "1,25 mg/m² IV em 3–5 min (cap 2 mg), q14d. Alternativa Lok: 0,5 mg/dia D1–5.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Soro fisiológico 0,9% 250 mL (lavagem pós-QT)",
+      "classe": "POS_QT",
+      "sequence": 6,
+      "standardDose": 1,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "frasco",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": 250,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Lavar acesso venoso pós-QT (planilha).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    }
+  ],
+  "limiaresBula": null,
+  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-027 (eviQ, ID 1018 — GTN low risk dactinomycin, acesso 2026-10-14, acesso 2026-10-14, sha256 e1d1ecd154c7…). Diretriz: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14, sha256 c2ed13a3f708…).",
+  "status": "RASCUNHO"
+}

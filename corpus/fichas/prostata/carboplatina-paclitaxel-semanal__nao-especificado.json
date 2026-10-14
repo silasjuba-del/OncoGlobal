@@ -4,7 +4,7 @@
   "nome": "Carboplatina + Paclitaxel semanal",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "9a8bdb80d1039432d305194c40fdad9853465732ca28e3046e70f1cbf98829d5",
+  "hash": "8c52169b6569fc8da8c74339623d5cd9128955ae6d29104bab9c264ec0e8b705",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": null,
@@ -137,7 +137,7 @@
       "days": [
         "d1"
       ],
-      "observacao": "D-F1-28: paclitaxel semanal em SF 0,9% 500 mL.",
+      "observacao": "D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
@@ -187,6 +187,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal).",
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal). F1-B2 (D-F1-49, 2026-10-14): fontes externas do paclitaxel semanal — EXT-LEG-008 (eviQ, ID 4103 — Breast cancer neo/adjuvant weekly paclitaxel, v3, acesso 2026-10-14, sha256 87ae596953be…); EXT-LEG-009 (eviQ, ID 42 — Breast cancer metastatic weekly paclitaxel, v10, acesso 2026-10-14, sha256 dbfe03a1cafd…); EXT-LEG-012 (BC Cancer, BRAVTW — Paclitaxel weekly (palliative), rev 2014, acesso 2026-10-14, sha256 c4bb07d88e84…); EXT-LEG-013 (BC Cancer, Monografia — Paclitaxel, rev 30/12/2019, acesso 2026-10-14, sha256 309ea2204ac5…). Conferido: 80 mg/m² q7d (eviQ 4103/42; 'usual' 80 na monografia BC; BRAVTW usa 90 [variante]); infusão 60 min; filtro inline ≤0,22 µm e materiais não-PVC/DEHP-free; hipersensibilidade típica nos 10 primeiros minutos das 2 primeiras infusões. Divergência de diluente REGISTRADA e não aplicada: eviQ 250 mL × decisão local SF 0,9% 500 mL (D-F1-28, mantida). Premeds das fontes (loratadina+dexa VO no eviQ; dexa+difenidramina+famotidina IV no BC) divergem do padrão local (D-W9-34c/D-F1-48) — padrão local mantido.",
   "status": "RASCUNHO"
 }

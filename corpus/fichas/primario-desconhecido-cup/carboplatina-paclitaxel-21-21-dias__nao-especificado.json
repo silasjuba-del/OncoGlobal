@@ -1,0 +1,192 @@
+{
+  "templateId": "FICHA.primario-desconhecido-cup.carboplatina-paclitaxel-21-21-dias__nao-especificado@1.0.0",
+  "tumor": "Primário desconhecido (CUP)",
+  "nome": "Carboplatina + Paclitaxel 21/21 dias",
+  "cenario": "não especificado",
+  "versao": "1.0.0",
+  "hash": "18861fdc033341a6742f57a189b54bafb84376745ae25b14f66eff640fde03f2",
+  "codigoInstitucional": null,
+  "intervaloDias": 21,
+  "ciclos": null,
+  "itens": [
+    {
+      "drug": "Soro fisiológico 0,9% 250 mL (lavagem de acesso)",
+      "classe": "PRE_QT",
+      "sequence": 1,
+      "standardDose": 1,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "frasco",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": 250,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Lavar acesso venoso pré e pós QT (planilha).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Ondansetrona",
+      "classe": "PRE_QT",
+      "sequence": 2,
+      "standardDose": 8,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "15 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Padrão local (D-W9-23c/34c; D-F1-30).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Dexametasona",
+      "classe": "PRE_QT",
+      "sequence": 3,
+      "standardDose": 10,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "15 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Antiemese local sem NK1 (D-W9-23c/34c).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Prometazina",
+      "classe": "PRE_QT",
+      "sequence": 4,
+      "standardDose": 25,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Pré-medicação local (D-W9-34c). 30 min antes do taxano (ficha real P1456).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Cimetidina",
+      "classe": "PRE_QT",
+      "sequence": 5,
+      "standardDose": 300,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "15 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Todo taxano (D-W9-34c; D-F1-48: fixa — só P1399/P1426 são 'se necessário').",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Paclitaxel",
+      "classe": "QT",
+      "sequence": 6,
+      "standardDose": 200,
+      "doseBasis": "MG_M2",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg/m²",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "3 h",
+      "days": [
+        "d1"
+      ],
+      "observacao": "PUCAT/HeCOG: 200 mg/m² em 3 h, ADMINISTRAR PRIMEIRO (antes da carboplatina). Variante SOnHe: 175 mg/m² [decisão pendente]. Equipamento não-PVC/DEHP-free e filtro ≤0,22 µm.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Carboplatina",
+      "classe": "QT",
+      "sequence": 7,
+      "standardDose": 6,
+      "doseBasis": "AUC",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "AUC",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": "60 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "Calvert AUC 6 (GFR cap 125). Variante SOnHe: AUC 5 [decisão pendente].",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Soro fisiológico 0,9% 250 mL (lavagem pós-QT)",
+      "classe": "POS_QT",
+      "sequence": 8,
+      "standardDose": 1,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "frasco",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": 250,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "Lavar acesso venoso pós-QT (planilha).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    }
+  ],
+  "limiaresBula": null,
+  "fonte": "D-F1-36 e D-F1-49. Variante preparada: PUCAT/HeCOG. Fontes: EXT-CUP-004 (BC Cancer, PUCAT — Primary Treatment of Cancer of Unknown Primary using CARBOplatin and PACLitaxel, rev 01/12/2024, acesso 2026-10-14, sha256 f3a066472ea4…); EXT-CUP-006 (J Clin Oncol (HeCOG — Briasoulis E et al.), Carboplatin plus paclitaxel in unknown primary carcinoma: phase II (JCO 2000;18(17):3101-7), PMID 10963638, acesso 2026-10-14, sha256 ee6c095b3baa…). Variante local SOnHe (AUC 5 + 175) documentada em Protocolos SOnHe 2024, p. 379 (sha256 d201d11819ac…). Diluente/materiais do paclitaxel: não-PVC/DEHP-free + filtro ≤0,22 µm (PUCAT).",
+  "status": "RASCUNHO"
+}

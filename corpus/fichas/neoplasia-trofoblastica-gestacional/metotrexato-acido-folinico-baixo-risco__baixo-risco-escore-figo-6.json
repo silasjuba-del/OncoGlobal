@@ -1,0 +1,66 @@
+{
+  "templateId": "FICHA.neoplasia-trofoblastica-gestacional.metotrexato-acido-folinico-baixo-risco__baixo-risco-escore-figo-6@1.0.0",
+  "tumor": "Neoplasia trofoblástica gestacional",
+  "nome": "Metotrexato + ácido folínico (baixo risco)",
+  "cenario": "baixo risco (escore FIGO ≤6)",
+  "versao": "1.0.0",
+  "hash": "98f7a0701743989e005aa59ca163a0a4ec3d5fa9d5821376eaec76f4703a0ae6",
+  "codigoInstitucional": null,
+  "intervaloDias": 14,
+  "ciclos": null,
+  "itens": [
+    {
+      "drug": "Metotrexato",
+      "classe": "QT",
+      "sequence": 1,
+      "standardDose": 50,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "IM",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d1",
+        "d3",
+        "d5",
+        "d7"
+      ],
+      "observacao": "eviQ 668/Lok A5: 50 mg fixa IM nos dias 1, 3, 5 e 7 (variante 1 mg/kg — Charing Cross/Lok) [decisão de variante registrada].",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Ácido folínico (resgate)",
+      "classe": "QT",
+      "sequence": 2,
+      "standardDose": 15,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d2",
+        "d4",
+        "d6",
+        "d8"
+      ],
+      "observacao": "15 mg VO 24 h após cada dose de MTX (BC: 30 h [variante]); alternativa IV/IM.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    }
+  ],
+  "limiaresBula": null,
+  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-026 (eviQ, ID 668 — Gestational trophoblastic neoplasia low risk methotrexate and folinic acid, v4 (PDF v3), acesso 2026-10-14, sha256 b66fbb8a28ce…). Diretriz original: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14, sha256 c2ed13a3f708…) (Tabela A5 — 'MTX once every 2 weeks': 1 mg/kg OU 50 mg fixa; FA 15 mg 24–30 h após, D2,4,6,8). Consolidação: 3 ciclos além da normalização do β-hCG.",
+  "status": "RASCUNHO"
+}
