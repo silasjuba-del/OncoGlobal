@@ -1,4 +1,5 @@
 import { PrescriptionItem } from "../contracts/w10/prescricao.js";
+import { respostaHttpValida } from "../contracts/api/saidasHttp.js";
 import { projetarDutos } from "./projecaoDutos.js";
 import { rotearBiblioteca } from "./biblioteca.js";
 import { rotearDutos, referenciaSigtapDuto } from "./dutos.js";
@@ -382,6 +383,10 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
                               : req.url === "/consulta/salao/liberar" ? "liberarSalao"
                                 : req.url === "/consulta/canal/vincular" ? "vincularCanal" : "desconhecida";
   const reply = (status: number, codigo: string, result: unknown = { codigo }) => {
+    if (!respostaHttpValida(rota, status, result)) {
+      deps.log({ rota, codigo: "RESPOSTA_FORA_CONTRATO", status: 500 });
+      return send(res, 500, { codigo: "RESPOSTA_FORA_CONTRATO" });
+    }
     deps.log({ rota, codigo, status }); send(res, status, result);
   };
   if (req.method !== "POST" || rota === "desconhecida") return reply(404, "ROTA_NAO_ENCONTRADA");
