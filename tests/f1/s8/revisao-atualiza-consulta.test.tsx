@@ -218,6 +218,10 @@ it("refresh após revisão preserva a edição Flash não salva e só a reexibe 
   const prazo = screen.getByLabelText("Prazo do retorno em dias") as HTMLInputElement;
   fireEvent.change(prazo, { target: { value: "63" } });
   fireEvent.change(screen.getByLabelText("Outros LAB"), { target: { value: "Exame sintético preservado" } });
+  const medicamento = screen.getByLabelText("Medicamento da receita") as HTMLInputElement;
+  fireEvent.change(medicamento, { target: { value: "Medicamento sintético manual" } });
+  fireEvent.change(screen.getByLabelText("Dose da receita"), { target: { value: "Dose escrita pelo médico" } });
+  fireEvent.click(screen.getByRole("checkbox", { name: "Incluir receita digitada" }));
   const confirmar = await prepararRevisao(f), recarga = adiada<ConsultaVisao>();
   f.carregar.mockImplementationOnce(() => recarga.promise);
   fireEvent.click(confirmar); await screen.findByText(/Revisão registrada/);
@@ -228,6 +232,10 @@ it("refresh após revisão preserva a edição Flash não salva e só a reexibe 
   expect(screen.getByLabelText("Prazo do retorno em dias")).toBe(prazo);
   expect(prazo.value).toBe("63");
   expect((screen.getByLabelText("Outros LAB") as HTMLInputElement).value).toBe("Exame sintético preservado");
+  expect(screen.getByLabelText("Medicamento da receita")).toBe(medicamento);
+  expect(medicamento.value).toBe("Medicamento sintético manual");
+  expect((screen.getByLabelText("Dose da receita") as HTMLInputElement).value).toBe("Dose escrita pelo médico");
+  expect((screen.getByRole("checkbox", { name: "Incluir receita digitada" }) as HTMLInputElement).checked).toBe(true);
 });
 
 it.each(["erro", "negada"])("refresh durante impressão %s conserva retry e chave sem reassinar", async (falha) => {

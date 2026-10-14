@@ -10,8 +10,8 @@ export type RevisaoExtracaoConfirmada = {
 };
 
 /** Linked sources are reviewed locally, independently of provider availability. */
-export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoConfirmarRevisao }: {
-  porta: PortaConsulta; contexto: PedidoBundle; patientLabel?: string;
+export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoFatosConfirmados, aoConfirmarRevisao }: {
+  porta: PortaConsulta; contexto: PedidoBundle; patientLabel?: string; aoFatosConfirmados?: (contexto: PedidoBundle) => void;
   aoConfirmarRevisao?: (revisao: RevisaoExtracaoConfirmada) => void;
 }) {
   const [fontes, setFontes] = useState<Array<{ draftId: string; rotulo: string }>>([]);
@@ -128,13 +128,13 @@ export function RevisaoExtracaoLocal({ porta, contexto, patientLabel, aoConfirma
   async function confirmar() {
     if (!preparada || !porta.confirmarRevisaoExtracao || concluida) return;
     await executar(async (atual) => {
-      const resposta = await porta.confirmarRevisaoExtracao!({ ...preparada.pedido,
+      const resultado = await porta.confirmarRevisaoExtracao!({ ...preparada.pedido,
         comprovanteExibicao: preparada.resposta.comprovanteExibicao }, controller.current?.signal);
       if (atual !== geracao.current) return;
-      if (resposta.codigo !== "GRAVADA" && resposta.codigo !== "REPLAY") throw new ErroPorta(resposta.codigo);
+      if (resultado.codigo !== "GRAVADA" && resultado.codigo !== "REPLAY") throw new ErroPorta("REVISAO_NAO_CONFIRMADA");
       setConcluida(true); setMensagem("Revisão registrada. Candidatos incertos conservam sua pendência.");
-      aoConfirmarRevisao?.({ contexto: { ...preparada.resposta.conteudo.contexto },
-        operationId: preparada.pedido.operationId, codigo: resposta.codigo });
+      aoFatosConfirmados?.({patientId, encounterId, tumorLotId: tumorLotId ?? null});
+      aoConfirmarRevisao?.({contexto: {...preparada.resposta.conteudo.contexto}, operationId: preparada.pedido.operationId, codigo: resultado.codigo});
     });
   }
 

@@ -1,3 +1,5 @@
+import { InvestigacaoConsultaVisao } from '../../contracts/api/investigacao.js';
+import { SintesePropostaResposta } from '../../contracts/api/sinteseProposta.js';
 import { ActionIntent, ConfirmarBloco } from "../../contracts/operacao.js";
 import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
 import { FonteRevisao, ReconciliacaoProposta, RevisaoPreparada } from "./revisaoExtracao.js";
@@ -73,6 +75,28 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   }
 
   return {
+    async reconciliarMedicamentos(pedido, signal) {
+      const {status,json}=await enviar("/consulta/medicamentos/reconciliar",pedido,true,signal);
+      const r=z.object({codigo:z.enum(["GRAVADA","REPLAY"]),eventId:z.string().min(1)}).safeParse(json);
+      if((status===200||status===201)&&r.success)return r.data;
+      const refs=json&&typeof json==="object"&&"refs" in json&&Array.isArray(json.refs)?json.refs.filter((v):v is string=>typeof v==="string").join(", "):undefined;
+      throw new ErroPorta(codigoDe(json,"RECONCILIACAO_MEDICAMENTOS_NEGADA"),refs);
+    },
+    async sintetizarRetrato(contexto, signal) {
+      const { status, json } = await enviar("/consulta/oncoassist/sintese", contexto, true, signal);
+      const r = SintesePropostaResposta.safeParse(json);
+      if (!r.success || ![200, 201, 409].includes(status)) throw new ErroPorta(codigoDe(json, "SINTESE_PENDENTE"));
+      if (r.data.contexto.patientId !== contexto.patientId || r.data.contexto.encounterId !== contexto.encounterId || r.data.contexto.tumorLotId !== contexto.tumorLotId)
+        throw new ErroPorta("SINTESE_FORA_CONTEXTO");
+      return r.data;
+    },
+    async investigacao(contexto, signal) {
+      const {status,json}=await enviar("/consulta/investigacao",{patientId:contexto.patientId,encounterId:contexto.encounterId,tumorLotId:contexto.tumorLotId},true,signal);
+      const r=InvestigacaoConsultaVisao.safeParse(json);
+      if(status!==200)throw new ErroPorta(codigoDe(json,"INVESTIGACAO_PENDENTE"));
+      if(!r.success||r.data.contexto.patientId!==contexto.patientId||r.data.contexto.encounterId!==contexto.encounterId||r.data.contexto.tumorLotId!==contexto.tumorLotId)throw new ErroPorta("INVESTIGACAO_FORA_CONTEXTO");
+      return r.data;
+    },
     async uploadDocumentoLocal(pedido,signal) {
       const {status,json}=await enviar("/consulta/upload",pedido,true,signal);
       const parsed=z.object({codigo:z.enum(["RASCUNHO_SALVO","REPLAY"]),draftId:z.string().min(1),revision:z.number().int().nonnegative(),

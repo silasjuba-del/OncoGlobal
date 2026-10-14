@@ -1,5 +1,6 @@
 import { createHash } from "node:crypto";
 import type { DatabaseSync } from "node:sqlite";
+import { Paciente } from "../../contracts/clinico.js";
 import { ClinicalEvent } from "../../contracts/operacao.js";
 import { dadosDoEvento, eventosVigentes } from "../projections/snapshot.js";
 import { hashCanonico as hashConteudoExibido } from "../../rules/conteudoCanonico.js";
@@ -43,8 +44,37 @@ export function criarResolverDocumentoLedger(db: DatabaseSync): ResolverDocument
       }
       if (textos.join("\n\n---\n\n") !== corpo.texto) return null;
     }
+    // Identidade é resolvida no horizonte da assinatura; cadastro posterior não reescreve documento.
+    const cadastros=eventos.filter(c=>c.patientId===e.patientId&&(c.tipo==="Paciente"||c.tipo==="Paciente@1")
+      &&["CONFIRMADO","ASSINADO"].includes(c.revisao)&&Date.parse(c.criadoEm)<=Date.parse(e.criadoEm)).flatMap(c=>{
+      const p=Paciente.safeParse(dadosDoEvento(c));return p.success&&p.data.patientId===e.patientId&&p.data.nome.trim().length>0?[{evento:c,paciente:p.data}]:[];
+    });
+    let nomePaciente:string|null=null;
+    if(corpo.identidadePaciente!==undefined) {
+      const identidade=objeto(corpo.identidadePaciente);
+      if(!identidade||identidade.patientId!==e.patientId||typeof identidade.nome!=="string"||!identidade.nome.trim()
+        ||typeof identidade.cadastroEventId!=="string")return null;
+      const cadastro=cadastros.find(c=>c.evento.eventId===identidade.cadastroEventId);
+      if(!cadastro||cadastro.paciente.nome!==identidade.nome)return null;
+      nomePaciente=identidade.nome;
+    } else {
+      const vigentes=new Set(eventosVigentes(cadastros.map(c=>c.evento)).map(c=>c.eventId));
+      const atuais=cadastros.filter(c=>vigentes.has(c.evento.eventId));
+      const ultimoInstante=Math.max(...atuais.map(c=>Date.parse(c.evento.criadoEm)));
+      const nomes=[...new Set(atuais.filter(c=>Date.parse(c.evento.criadoEm)===ultimoInstante).map(c=>c.paciente.nome))];
+      if(nomes.length===1)nomePaciente=nomes[0]!;
+    }
+    let responsavel=e.criadoPor.id;
+    if(corpo.identidadeResponsavel!==undefined) {
+      const identidade=objeto(corpo.identidadeResponsavel);
+      if(!identidade||identidade.medicoId!==e.criadoPor.id
+        ||(identidade.nome!==undefined&&(typeof identidade.nome!=="string"||!identidade.nome.trim()))
+        ||(identidade.crm!==undefined&&(typeof identidade.crm!=="string"||!identidade.crm.trim())))return null;
+      responsavel=[typeof identidade.nome==="string"?identidade.nome:e.criadoPor.id,
+        ...(typeof identidade.crm==="string"?[identidade.crm]:[])].join(" · ");
+    }
     const titulo = typeof corpo.titulo === "string" ? corpo.titulo : "Documento";
-    const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>${escapar(titulo)}</title></head><body><h1>${escapar(titulo)}</h1><p>Prontuário: ${escapar(e.patientId)}</p><pre style="white-space:pre-wrap;font-family:inherit">${escapar(String(corpo.texto))}</pre><p>Responsável: ${escapar(e.criadoPor.id)} · ${escapar(e.criadoEm)}</p></body></html>`;
+    const html = `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>${escapar(titulo)}</title></head><body><h1>${escapar(titulo)}</h1><p>Paciente: ${escapar(nomePaciente ?? "Nome PENDENTE no horizonte da assinatura")}</p><p>Prontuário: ${escapar(e.patientId)}</p><pre style="white-space:pre-wrap;font-family:inherit">${escapar(String(corpo.texto))}</pre><p>Responsável: ${escapar(responsavel)} · ${escapar(e.criadoEm)}</p></body></html>`;
     return {id,version,patientId:e.patientId,html,assinado:true,hash:createHash("sha256").update(html,"utf8").digest("hex")};
   } };
 }

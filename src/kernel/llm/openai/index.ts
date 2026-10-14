@@ -43,7 +43,7 @@ export function criarTransporteOpenAi(chave: string): TransporteOpenAi {
 }
 
 /** No document upload exception is silently enabled: D-W9-66 needs a separate server proof and gateway. */
-export const statusDocumentoOriginalOpenAi = () => ({ status: "PENDENTE" as const, codigo: "D_W9_66_DOCUMENTO_ORIGINAL_INDISPONIVEL" });
+export const statusDocumentoOriginalOpenAi = () => ({ status: "PENDENTE" as const, codigo: "D_W9_66_PORTA_DOCUMENTAL_SEPARADA_OBRIGATORIA" });
 
 /** Pure preparation for a server-owned gateway proof. The original pages and correlation never leave the process. */
 export function prepararPayloadExtracaoOpenAi(entrada: unknown, contexto: ContextoServidorOpenAi, modelo: string):

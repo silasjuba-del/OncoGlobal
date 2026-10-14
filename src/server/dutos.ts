@@ -36,21 +36,36 @@ const TarefaPedido = z.object({ ...Base, tarefaId: Id }).strict();
 const Rotas = new Set(['/farmacia/enviar','/farmacia/conferir','/salao/registrar-administracao','/apac/validar-emissao','/chat/aceitar-decisao','/tarefas/receber','/tarefas/concluir']);
 const negar = (codigo: string, status = 409): ResultadoDuto => ({ status, body: { codigo } });
 
-/** Resolve assinatura vigente, identidade do ator e hash do conteúdo real; não confia em referência do cliente. */
-export function resolverPrescricaoDuto(eventos: readonly ClinicalEvent[], contexto: { patientId:string;encounterId:string;tumorLotId:string|null }, ref: z.infer<typeof ReferenciaDocumento>): PrescricaoAssinadaRef | null {
+export type DiagnosticoPrescricaoDuto = {ok:true;prescricao:PrescricaoAssinadaRef}|{ok:false;codigo:string};
+/** Vigência clínica por identidade explícita: maior versão assinada válida do mesmo documento/contexto. */
+export function verificarPrescricaoDuto(eventos: readonly ClinicalEvent[], contexto: {patientId:string;encounterId:string;tumorLotId:string|null}, ref: z.infer<typeof ReferenciaDocumento>): DiagnosticoPrescricaoDuto {
+ const pedido=ReferenciaDocumento.safeParse({documentId:ref?.documentId,documentVersion:ref?.documentVersion});
+ if(!pedido.success)return {ok:false,codigo:'REFERENCIA_PRESCRICAO_INVALIDA'};
  const docs=eventosVigentes(eventos).filter(e=>e.tipo==='DOCUMENTO'&&e.revisao==='ASSINADO'&&e.patientId===contexto.patientId&&e.encounterId===contexto.encounterId&&e.tumorLotId===contexto.tumorLotId);
- if(docs.some(e=>{const d=dadosDoEvento(e)?.data as {documentId?:unknown;documentVersion?:unknown}|undefined;return d?.documentId===ref.documentId&&typeof d.documentVersion==='number'&&d.documentVersion>ref.documentVersion;}))return null;
- const candidatos=docs.filter(e => e.tipo==='DOCUMENTO' && e.revisao==='ASSINADO' && e.patientId===contexto.patientId && e.encounterId===contexto.encounterId && e.tumorLotId===contexto.tumorLotId).flatMap(e=>{
-  const d=dadosDoEvento(e), corpo=d?.data, sig=SignatureReference.safeParse(d?.signature);
-  if(!corpo || typeof corpo!=='object' || Array.isArray(corpo) || !sig.success)return [];
-  const c=corpo as Record<string,unknown>;
-  if(c.documentId!==ref.documentId||c.documentVersion!==ref.documentVersion||sig.data.documentId!==ref.documentId||sig.data.documentVersion!==ref.documentVersion
-    ||sig.data.serverActorId!==e.criadoPor.id||sig.data.reviewDecisionId!==(e.payload as {reviewDecisionId?:unknown}).reviewDecisionId||sig.data.documentHash!==hashCanonico(c))return [];
-  // Um laudo ou receita sintomática assinados não são uma prescrição antineoplásica.
-  if(!['PRESCRICAO','PRESCRICAO_QT','QT','TERAPIA_ALVO_IO','HORMONIOTERAPIA'].includes(String(c.tipoDocumento??c.tipo)))return [];
-  return [{patientId:contexto.patientId,encounterId:contexto.encounterId,tumorLotId:contexto.tumorLotId,...ref,documentHash:sig.data.documentHash,revisao:'ASSINADO' as const}];
- });
- return candidatos.length===1?candidatos[0]!:null;
+ const grupo=docs.filter(e=>{const d=dadosDoEvento(e),corpo=d?.data,assinatura=d?.signature;
+  return corpo&&typeof corpo==='object'&&!Array.isArray(corpo)&&(corpo as Record<string,unknown>).documentId===pedido.data.documentId
+    ||assinatura&&typeof assinatura==='object'&&!Array.isArray(assinatura)&&(assinatura as Record<string,unknown>).documentId===pedido.data.documentId;});
+ if(!grupo.length)return {ok:false,codigo:'PRESCRICAO_ASSINADA_VIGENTE_NAO_ENCONTRADA'};
+ const candidatos:PrescricaoAssinadaRef[]=[];
+ for(const e of grupo){
+  const d=dadosDoEvento(e),corpo=d?.data,sig=SignatureReference.safeParse(d?.signature);
+  if(!corpo||typeof corpo!=='object'||Array.isArray(corpo)||!sig.success||e.criadoPor.tipo!=='SESSAO')return {ok:false,codigo:'PRESCRICAO_ASSINATURA_INVALIDA'};
+  const c=corpo as Record<string,unknown>,identidade=ReferenciaDocumento.safeParse({documentId:c.documentId,documentVersion:c.documentVersion});
+  if(!identidade.success||identidade.data.documentId!==pedido.data.documentId||sig.data.documentId!==identidade.data.documentId||sig.data.documentVersion!==identidade.data.documentVersion
+    ||sig.data.serverActorId!==e.criadoPor.id||sig.data.reviewDecisionId!==(e.payload as {reviewDecisionId?:unknown}).reviewDecisionId)
+    return {ok:false,codigo:'PRESCRICAO_ASSINATURA_INVALIDA'};
+  try{if(sig.data.documentHash!==hashCanonico(c))return {ok:false,codigo:'PRESCRICAO_HASH_INVALIDO'};}catch{return {ok:false,codigo:'PRESCRICAO_HASH_INVALIDO'};}
+  if(!['PRESCRICAO','PRESCRICAO_QT','QT','TERAPIA_ALVO_IO','HORMONIOTERAPIA'].includes(String(c.tipoDocumento??c.tipo)))return {ok:false,codigo:'DOCUMENTO_NAO_E_PRESCRICAO'};
+  candidatos.push({patientId:contexto.patientId,encounterId:contexto.encounterId,tumorLotId:contexto.tumorLotId,...identidade.data,documentHash:sig.data.documentHash,revisao:'ASSINADO'});
+ }
+ if(new Set(candidatos.map(c=>c.documentVersion)).size!==candidatos.length)return {ok:false,codigo:'PRESCRICAO_VERSAO_AMBIGUA'};
+ const atual=candidatos.reduce((a,b)=>a.documentVersion>b.documentVersion?a:b);
+ if(atual.documentVersion!==pedido.data.documentVersion)return {ok:false,codigo:'PRESCRICAO_VERSAO_DESATUALIZADA'};
+ return {ok:true,prescricao:atual};
+}
+/** Compatibility: callers needing only a verified full reference retain the same interface. */
+export function resolverPrescricaoDuto(eventos: readonly ClinicalEvent[], contexto: {patientId:string;encounterId:string;tumorLotId:string|null}, ref: z.infer<typeof ReferenciaDocumento>): PrescricaoAssinadaRef|null {
+ const r=verificarPrescricaoDuto(eventos,contexto,ref);return r.ok?r.prescricao:null;
 }
 /** A versão e hash descrevem a tabela ativa realmente carregada e confrontada no boot. */
 export function referenciaSigtapDuto(corpus: DepsDutos['corpus'], competencia: string): ReferenciaSigtap | null {
@@ -74,8 +89,9 @@ function executarDuto(deps: DepsDutos, token: string, rota: string, entrada: unk
  const eventos=listarEventos(deps.db,c.patientId), vigentes=eventosVigentes(eventos).filter(e=>e.patientId===c.patientId&&e.encounterId===c.encounterId&&e.tumorLotId===c.tumorLotId&&['CONFIRMADO','ASSINADO'].includes(e.revisao));
  const requestHash=hashCanonico({rota,entrada});
  const replay=eventos.filter(e=>e.operationId===c.operationId);
- const prescricao='prescricao' in pedido?resolverPrescricaoDuto(eventos,contexto,pedido.prescricao):null;
- if('prescricao' in pedido&&!prescricao)return negar('PRESCRICAO_ASSINADA_VIGENTE_NAO_ENCONTRADA');
+ const diagnostico='prescricao' in pedido?verificarPrescricaoDuto(eventos,contexto,pedido.prescricao):null;
+ if(diagnostico&&!diagnostico.ok)return negar(diagnostico.codigo);
+ const prescricao=diagnostico?.ok?diagnostico.prescricao:null;
  if(replay.length){
   if(replay.length!==1||replay[0]!.fontes[0]?.contentHash!==requestHash||replay[0]!.criadoPor.id!==auth.data.medicoId||replay[0]!.encounterId!==c.encounterId||replay[0]!.tumorLotId!==c.tumorLotId)return negar('OPERATION_ID_CONFLITO');
   return {status:200,body:{codigo:'REPLAY',eventId:replay[0]!.eventId}};

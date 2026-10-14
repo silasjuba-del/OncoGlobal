@@ -67,4 +67,3 @@ it("salva seleção real, reabre após reinício e exibe documentos antes da ass
   expect(chamadas.filter(p=>p==="/consulta/confirmar")).toHaveLength(1);
   expect(ambiente.eventos().filter(e=>JSON.stringify(e.payload).includes("FLASH_APAC"))).toHaveLength(0);
 }, 30_000);
-
