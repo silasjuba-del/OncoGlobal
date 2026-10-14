@@ -1,0 +1,398 @@
+{
+  "header": {
+    "id": "pack-vulva",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-14",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "D-F1-35/D-F1-49 + eviQ 1529 v9 + BC GOCXCRT/GOCXCAT",
+      "trecho": "cisplatina semanal + RT; carboplatina/paclitaxel q21d",
+      "edicao": "F1-B2 2026-10-14"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-14"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Carcinoma epidermoide de vulva",
+    "cid10": [
+      "C51.9"
+    ],
+    "subtipos": [],
+    "cenarios": [],
+    "limitesAplicabilidade": "Pack novo F1-B2 (D-F1-34/49): RASCUNHO de curadoria; nenhum conteúdo ativo; doses somente nas fichas com fonte (b2-fichas.v1.json)."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "EXAME_CLINICO_GINECOLOGICO",
+        "rotulo": "Exame clínico-ginecológico com biópsia",
+        "indicacao": "universal",
+        "quando": "diagnóstico",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SOnHe p. 89",
+          "pagina": null,
+          "trecho": "exame + biópsia",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC/MR pélvica (linfonodos inguino-femorais)",
+        "indicacao": "avançado",
+        "quando": "planejamento terapêutico",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SOnHe p. 89",
+          "pagina": null,
+          "trecho": "imagem linfonodal",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "biópsia incisional",
+          "quando": "antes do tratamento",
+          "catalogoId": "BIOPSIA",
+          "fonte": {
+            "tipo": "PROTOCOLO_INSTITUCIONAL",
+            "referencia": "SOnHe p. 89",
+            "pagina": null,
+            "trecho": "biópsia",
+            "estado": "CONSULTADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "histologia",
+        "HPV quando aplicável"
+      ],
+      "molecular": []
+    }
+  },
+  "estadiamento": {
+    "sistema": "FIGO 2021 (vulva)",
+    "edicao": "2021",
+    "fonte": {
+      "tipo": "PROTOCOLO_INSTITUCIONAL",
+      "referencia": "SOnHe p. 89 [VERIFICAR edição]",
+      "pagina": null,
+      "trecho": "estadiamento FIGO",
+      "estado": "CONSULTADO"
+    },
+    "exames": [],
+    "gruposConduta": [
+      {
+        "grupo": "localmente avançado (T3/T4 irressecável)",
+        "conduta": "quimiorradioterapia com cisplatina semanal",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 1529 + GOG 205 (Moore 2012)",
+          "pagina": null,
+          "trecho": "weekly cisplatin + RT",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "grupo": "recorrente/metastático inelegível a QRT",
+        "conduta": "carboplatina + paclitaxel q21d",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "BC GOCXCAT (inclui vulva)",
+          "pagina": null,
+          "trecho": "CARBO+AUC/PACL 175",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [],
+      "naoPedirDeRotina": []
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "localmente avançado",
+        "intencao": "controle locorregional",
+        "modalidades": [
+          "QT+RT"
+        ],
+        "criterio": "D-F1-35",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 1529 v9",
+          "pagina": null,
+          "trecho": "Vulval SCC locally advanced cisPlatin weekly chemoradiation",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "cenario": "recorrente/avançado sem QRT",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT"
+        ],
+        "criterio": "D-F1-35",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "BC GOCXCAT",
+          "pagina": null,
+          "trecho": "cervix, vulva, or vagina; recurrent or IIIb-IVb",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "vulva-cis-rt",
+        "nome": "Cisplatina semanal + RT",
+        "cenario": "localmente avançado",
+        "linha": "1ª linha (concomitante)",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 q7d com RT",
+            "observacao": "5–6 ciclos; no dia de RT"
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.vulva.cisplatina-semanal-rxt-vulva__concomitante-a-rt@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 1529 v9 (EXT-CNV-021) + BC GOCXCRT",
+          "pagina": null,
+          "trecho": "40 mg/m² IV weekly with RT",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "vulva-carbopac",
+        "nome": "Carboplatina + paclitaxel q21d",
+        "cenario": "recorrente/avançado",
+        "linha": "1ª linha paliativa",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "3 h"
+          },
+          {
+            "droga": "carboplatina",
+            "dose": 6,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "AUC 5 se RT prévia extensa (GOCXCAT)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.vulva.carboplatina-paclitaxel-21-21-dias-vulva__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "BC GOCXCAT rev 10/2025 (EXT-CNV-024) + SOnHe p. 89/91",
+          "pagina": null,
+          "trecho": "PACL 175 3h + CARBO AUC 6 (5 if prior RT)",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "localmente avançado",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "pendencia": "esquema de RT com radioterapia (GOG 205: ~5,7 semanas; dose exata a definir)",
+        "concomitante": true,
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Moore 2012 (PMID 22079361)",
+          "pagina": null,
+          "trecho": "RT + weekly cisplatin 40",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Reavalição cirúrgica pós-QRT (ressecção de resíduo)",
+        "quando": "após quimiorradioterapia",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 1529 + GOG 205",
+          "pagina": null,
+          "trecho": "surgical assessment after CRT",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [],
+    "ensaios": [],
+    "seguimento": [],
+    "suporte": {
+      "emetogenicidade": "baixa-moderada (cisplatina semanal 40)",
+      "riscoNeutropeniaFebril": "moderado",
+      "outros": [
+        "CrCl >50-60 requerido (eviQ 1529/GOCXCRT)",
+        "neuropatia/otoaudiologia prévia (cautelas eviQ)"
+      ],
+      "fonte": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "eviQ 1529 + GOCXCRT",
+        "pagina": null,
+        "trecho": "cautions",
+        "estado": "CONSULTADO"
+      }
+    }
+  },
+  "ligacoes": {
+    "exames": [
+      "BIOPSIA",
+      "TC_PELVE",
+      "HEMOGRAMA",
+      "CREATININA",
+      "CLEARANCE_CREATININA"
+    ],
+    "interacoesConsultar": [],
+    "ctcaeAcao": [],
+    "suporteReceitas": [],
+    "orientacoes": [],
+    "encaminhamentos": [],
+    "laudos": [],
+    "formulasXYZ": []
+  },
+  "pendencias": [
+    {
+      "texto": "Variante de AUC na carboplatina (6 × 5) e paclitaxel (175 × outras) — decisão local pendente",
+      "classe": "DECISAO_MEDICA_PENDENTE",
+      "buscasFeitas": [
+        "GOCXCAT (AUC 6→5)",
+        "SOnHe p. 89/91 (AUC 5)",
+        "eviQ 3579 (HNSCC, AUC 5)"
+      ]
+    },
+    {
+      "texto": "Dose total de RT do esquema concomitante — definir com radioterapia",
+      "classe": "PENDENCIA_TECNICA",
+      "buscasFeitas": [
+        "Moore 2012 (esquema ~40 Gy em frações?) — ler texto integral"
+      ]
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "Atribuição do estudo de referência da QRT",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "material local (Sv-Sau-EB)",
+        "pagina": null,
+        "trecho": "'Gill Gynecol Oncol 2015 (GOG 205?)'",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "PubMed 22079361",
+        "pagina": null,
+        "trecho": "Moore DH et al., Gynecol Oncol 2012;124(3):529-33 (GOG 205)",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Corrigido: GOG 205 = Moore 2012",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "AUC da carboplatina",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "BC GOCXCAT",
+        "pagina": null,
+        "trecho": "AUC 6; AUC 5 se RT prévia extensa",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "SOnHe p. 89/91",
+        "pagina": null,
+        "trecho": "AUC 5 + 175",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Ficha com AUC 6 (protocolo que inclui vulva); variante registrada",
+      "decisaoNecessaria": "Dr. Silas decide a variante"
+    }
+  ],
+  "curadoria": {
+    "redator": "GLM (agente curador, missão F1-B2) — rascunho para revisão",
+    "redigidoEm": "2026-10-14",
+    "fontesLidas": [
+      "eviQ 1529 (HTML vivo v9 + PDF v6 arquivado)",
+      "BC GOCXCRT/GOCXCAT (rev 08/2026 e 10/2025)",
+      "Moore 2012 (GOG 205, PMID 22079361)",
+      "eviQ 3579",
+      "SOnHe p. 89-91",
+      "Aula 32",
+      "Sv-Sau-EB p. 143"
+    ],
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-14",
+        "redator": "GLM",
+        "resolvidas": 0,
+        "classificadas": 2,
+        "susPreenchidos": 0,
+        "notas": [
+          "D-F1-49: fichas institucionais novas sem SISAC; mudança de fonte não aprova doses"
+        ]
+      }
+    ]
+  },
+  "escopo": {
+    "classe": "EXPANSAO_F1_B2_SEM_SISAC",
+    "nota": "Pack novo da D-F1-34 construído na F1-B2 (D-F1-49) com fontes externas verificadas; conteúdo consultável em RASCUNHO, sem ativação clínica."
+  },
+  "correcoes": []
+}

@@ -1,0 +1,595 @@
+{
+  "header": {
+    "id": "pack-ewing",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-14",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "D-F1-34/D-F1-49 + eviQ 3464 v2 + Womer 2012 (PMID 23091096)",
+      "trecho": "VDC/IE interval-compressed",
+      "edicao": "F1-B2 2026-10-14"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-14"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Sarcoma de Ewing (ósseo e extraósseo, incl. PNET)",
+    "cid10": [
+      "C41.9",
+      "C49.9"
+    ],
+    "subtipos": [],
+    "cenarios": [],
+    "limitesAplicabilidade": "Pack novo F1-B2 (D-F1-34/49): RASCUNHO de curadoria; nenhum conteúdo ativo; doses somente nas fichas com fonte (b2-fichas.v1.json)."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "RM_LOCAL",
+        "rotulo": "RM do sítio primário com contraste",
+        "indicacao": "universal",
+        "quando": "Diagnóstico e planejamento de terapia local",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SBOC 2026 ósseos v5 p. 15 (LOC-SBOC-OSSEOS)",
+          "pagina": null,
+          "trecho": "estadiamento local com RM",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "indicacao": "universal",
+        "quando": "Estadiamento (metástases pulmonares)",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SBOC 2026 ósseos v5 p. 15",
+          "pagina": null,
+          "trecho": "TC de tórax no estadiamento",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "CINTILOGRAFIA_OSSSEA",
+        "rotulo": "Cintilografia óssea ou PET-CT",
+        "indicacao": "universal",
+        "quando": "Estadiamento (doença óssea à distância)",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SBOC 2026 ósseos v5 p. 15",
+          "pagina": null,
+          "trecho": "rastreio de metástases ósseas",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "biópsia",
+          "quando": "antes da terapia sistêmica",
+          "catalogoId": "BIOPSIA",
+          "fonte": {
+            "tipo": "PROTOCOLO_INSTITUCIONAL",
+            "referencia": "SBOC 2026 ósseos v5",
+            "pagina": null,
+            "trecho": "diagnóstico por biópsia",
+            "estado": "CONSULTADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "histologia (células pequenas redondas)",
+        "imuno-histoquímica (CD99; EWSR1-FLI1 quando necessário)"
+      ],
+      "molecular": []
+    }
+  },
+  "estadiamento": {
+    "sistema": "[VERIFICAR]",
+    "edicao": null,
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "AJCC/ENEA pendente de conferência (D-F1-49)",
+      "pagina": null,
+      "trecho": "",
+      "estado": "PENDENTE"
+    },
+    "exames": [],
+    "gruposConduta": [],
+    "marcadores": {
+      "uteis": [],
+      "naoPedirDeRotina": []
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "localizado/metastático — 1ª linha",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT",
+          "cirurgia",
+          "RT"
+        ],
+        "criterio": "D-F1-34; SBOC p. 15",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SBOC 2026 ósseos v5 p. 15",
+          "pagina": null,
+          "trecho": "VDC/IE dose-denso NE ALTO/FR FORTE",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "ewing-vdc",
+        "nome": "VDC (braço A do VDC/IE, q14)",
+        "cenario": "1ª linha",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "vincristina",
+            "dose": 1.5,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "máx 2 mg"
+          },
+          {
+            "droga": "doxorrubicina",
+            "dose": 37.5,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D2",
+            "observacao": "teto 375 mg/m2"
+          },
+          {
+            "droga": "ciclofosfamida",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "mesna",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "+ 800 VO 2h/6h"
+          },
+          {
+            "droga": "pegfilgrastim",
+            "dose": 6,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D3",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 7,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.ewing.ewing-vdc-ciclo-a-alternado-ao-ie__1-linha-dose-denso-q14@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 1916 v8 (EXT-SARC-002)",
+          "pagina": null,
+          "trecho": "VDC: quimio D1–2; pegfilgrastim D3",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "Componente repete a cada 28 d alternando com IE (administração a cada 14 d).",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "ewing-ie",
+        "nome": "IE (braço B do VDC/IE, q14)",
+        "cenario": "1ª linha",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D5",
+            "observacao": ""
+          },
+          {
+            "droga": "ifosfamida",
+            "dose": 1800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D5",
+            "observacao": "teto cumulativo ≤72 g/m2"
+          },
+          {
+            "droga": "mesna",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D5 (0/4/8 h)",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 7,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.ewing.ewing-ie-ciclo-b-alternado-ao-vdc__1-linha-dose-denso-q14@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 3465 v8 (EXT-SARC-003)",
+          "pagina": null,
+          "trecho": "IE: quimio D1–5; pegfilgrastim D6",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "Pegfilgrastim 6 mg SC D6 (na ficha).",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "ewing-17ciclos",
+        "nome": "VDC/IE 17 ciclos (opção eviQ/AEWS1031)",
+        "cenario": "1ª linha selecionada",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "vide eviQ 3464",
+            "dose": null,
+            "unidade": "",
+            "via": "",
+            "dias": "",
+            "observacao": "9 V[D]C com vincristina D1+D8 alternando com 8 IE; VC (sem doxo) após teto"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 3464 v2 (EXT-SARC-001) + Leavey 2021 (PMID 34652968)",
+          "pagina": null,
+          "trecho": "9 cycles of V[D]C (vincristine day 1 and 8) alternating with 8 cycles of IE",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "SEM ficha (dossiê): condicionado à decisão local.",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "ewing-iritemo",
+        "nome": "Irinotecano + temozolomida (recidiva)",
+        "cenario": "recidiva/refratário",
+        "linha": "salvamento",
+        "drogas": [
+          {
+            "droga": "irinotecano",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D5",
+            "observacao": ""
+          },
+          {
+            "droga": "temozolomida",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1–D5",
+            "observacao": "≥1 h antes do irinotecano"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 3620 v3 (EXT-SARC-005)",
+          "pagina": null,
+          "trecho": "temozolomide 100 mg/m²/d VO D1-5 + irinotecan 50 mg/m²/d IV D1-5",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "ewing-tc",
+        "nome": "Topotecano + ciclofosfamida (recidiva)",
+        "cenario": "recidiva/refratário",
+        "linha": "salvamento",
+        "drogas": [
+          {
+            "droga": "topotecano",
+            "dose": 0.75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D5",
+            "observacao": ""
+          },
+          {
+            "droga": "ciclofosfamida",
+            "dose": 250,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D5",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 4245 v2 INTERIM (EXT-SARC-006)",
+          "pagina": null,
+          "trecho": "topotecan 0.75 + cyclophosphamide 250 D1-5; pegfilgrastim D6",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "Protocolo INTERIM (base em abstract não publicado — aviso da própria eviQ).",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "terapia local",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "pendencia": "dose de RT a definir com radioterapia (SBOC p. 15)",
+        "concomitante": false,
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SBOC 2026 ósseos v5 p. 15",
+          "pagina": null,
+          "trecho": "RT conforme terapia local",
+          "estado": "CONSULTADO"
+        },
+        "fonteIndicacao": null
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Ressecção do primário",
+        "quando": "após 6 ciclos de QT (≈ semana 11–13)",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 3464/SAALT2W",
+          "pagina": null,
+          "trecho": "local therapy after 6 cycles",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [],
+    "ensaios": [],
+    "seguimento": [],
+    "suporte": {
+      "emetogenicidade": "alto (D-F1-30 local: ondansetrona 1ª linha, sem NK1)",
+      "riscoNeutropeniaFebril": "alto — G-CSF por braço (pegfilgrastim D3 VDC / D6 IE)",
+      "outros": [
+        "teto de doxorrubicina 375 mg/m²",
+        "cap de ifosfamida 72 g/m² (Fanconi renal)"
+      ],
+      "fonte": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "eviQ 1916/3465 + BC SAALT2W",
+        "pagina": null,
+        "trecho": "suporte por braço",
+        "estado": "CONSULTADO"
+      },
+      "mesna": {
+        "regra": "conforme braço (ver fichas)",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 1916/3465",
+          "pagina": null,
+          "trecho": "mesna por braço",
+          "estado": "CONSULTADO"
+        }
+      }
+    }
+  },
+  "ligacoes": {
+    "exames": [
+      "RM_LOCAL",
+      "TC_TORAX",
+      "CINTILOGRAFIA_OSSSEA",
+      "BIOPSIA",
+      "ECOCARDIOGRAMA",
+      "HEMOGRAMA",
+      "CREATININA",
+      "CLEARANCE_CREATININA"
+    ],
+    "interacoesConsultar": [],
+    "ctcaeAcao": [],
+    "suporteReceitas": [],
+    "orientacoes": [],
+    "encaminhamentos": [],
+    "laudos": [],
+    "formulasXYZ": []
+  },
+  "pendencias": [
+    {
+      "texto": "Desenho institucional SOnHe p. 314/317 (17 ciclos com doxorrubicina C1–C11 e dactinomicina C11–C17): NAO_LOCALIZADO externamente — sobreposição doxo+dactinomicina no mesmo ciclo não corroborada",
+      "classe": "CONFLITO_FONTE",
+      "buscasFeitas": [
+        "eviQ 3464/1916/3465",
+        "BC SAALT2W",
+        "PubMed (Grier/Whelan/Leavey/Womer)"
+      ]
+    },
+    {
+      "texto": "Versão convencional q3sem (eviQ: 'VDC or IE every 21 days') disponível como alternativa",
+      "classe": "VARIANTE_NAO_PREPARADA",
+      "buscasFeitas": [
+        "eviQ 1916/3465 notas",
+        "SAALT3W"
+      ]
+    },
+    {
+      "texto": "Elegibilidade <30 anos (SAALT2W) e cautelas (LVEF<45%, CrCl<60) a conferir no serviço",
+      "classe": "APLICABILIDADE",
+      "buscasFeitas": [
+        "SAALT2W ELIGIBILITY"
+      ]
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "Suporte G-CSF por braço (ambiguidade local do pegfilgrastim D3)",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "material local (SOnHe/pesquisa interna)",
+        "pagina": null,
+        "trecho": "pegfilgrastim D3 sem delimitação de braço",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "eviQ 1916/3465",
+        "pagina": null,
+        "trecho": "pegfilgrastim D3 no VDC e D6 no IE",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Adotado por braço conforme eviQ (fichas Ewing VDC/IE)",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Citação-base do dose-denso",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "material local",
+        "pagina": null,
+        "trecho": "'Whelan JCO 2018;36(31)'",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "Womer 2012 (PMID 23091096)",
+        "pagina": null,
+        "trecho": "interval compression 14 vs 21 d, EFS 73% vs 65%",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Corrigido: Whelan 2018 é Euro-E.W.I.N.G. 99 (BuMel vs VAI); base do q2sem é Womer 2012",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Doxorrubicina por administração",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "eviQ 1916",
+        "pagina": null,
+        "trecho": "37,5 mg/m² ×2 D1–D2",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "BC SAALT2W",
+        "pagina": null,
+        "trecho": "75 mg/m² IV push D1",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Ficha preparada com 37,5×2 (eviQ); variante registrada",
+      "decisaoNecessaria": "Dr. Silas pode preferir push único"
+    }
+  ],
+  "curadoria": {
+    "redator": "GLM (agente curador, missão F1-B2) — rascunho para revisão",
+    "redigidoEm": "2026-10-14",
+    "fontesLidas": [
+      "eviQ 3464/1916/3465 (HTML vivo + PDF)",
+      "BC Cancer SAALT2W/SAALT3W",
+      "Womer 2012, Leavey 2021, Cash 2023 (PubMed)",
+      "SBOC 2026 ósseos v5",
+      "SOnHe 2024 p. 314/317",
+      "eviQ 3620/4245 (recidiva)"
+    ],
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-14",
+        "redator": "GLM",
+        "resolvidas": 0,
+        "classificadas": 3,
+        "susPreenchidos": 0,
+        "notas": [
+          "D-F1-49: fichas institucionais novas sem SISAC; mudança de fonte não aprova doses"
+        ]
+      }
+    ]
+  },
+  "escopo": {
+    "classe": "EXPANSAO_F1_B2_SEM_SISAC",
+    "nota": "Pack novo da D-F1-34 construído na F1-B2 (D-F1-49) com fontes externas verificadas; conteúdo consultável em RASCUNHO, sem ativação clínica."
+  },
+  "correcoes": []
+}

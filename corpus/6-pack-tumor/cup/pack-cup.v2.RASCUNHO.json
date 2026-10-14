@@ -1,0 +1,570 @@
+{
+  "header": {
+    "id": "pack-cup",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-14",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "D-F1-36/D-F1-49 + BC PUCAT + estudos originais (Greco/Mukai/Pouessel/Khansur)",
+      "trecho": "5 esquemas da decisão local",
+      "edicao": "F1-B2 2026-10-14"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-14"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Carcinoma de primário desconhecido (CUP)",
+    "cid10": [
+      "C80.9",
+      "C77"
+    ],
+    "subtipos": [],
+    "cenarios": [],
+    "limitesAplicabilidade": "Pack novo F1-B2 (D-F1-34/49): RASCUNHO de curadoria; nenhum conteúdo ativo; doses somente nas fichas com fonte (b2-fichas.v1.json)."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_TORAX_ABDOME_PELVE",
+        "rotulo": "TC tórax/abdome/pelve",
+        "indicacao": "universal",
+        "quando": "investigação inicial padronizada",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "ESMO 2015/2023 (contexto)",
+          "pagina": null,
+          "trecho": "imaging-based standardized workup",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET-CT (selecionados)",
+        "indicacao": "selecionados",
+        "quando": "quando pode mudar conduta",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "NCI PDQ (EXT-CUP-016)",
+          "pagina": null,
+          "trecho": "PET in selected CUP",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "biópsia do sítio acessível",
+          "quando": "diagnóstico",
+          "catalogoId": "BIOPSIA",
+          "fonte": {
+            "tipo": "PROTOCOLO_INSTITUCIONAL",
+            "referencia": "NCI PDQ",
+            "pagina": null,
+            "trecho": "biopsy for diagnosis",
+            "estado": "CONSULTADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "histologia",
+        "imuno-histoquímica direcionada",
+        "predictive biomarkers (quando aplicável)"
+      ],
+      "molecular": []
+    }
+  },
+  "estadiamento": {
+    "sistema": "[VERIFICAR]",
+    "edicao": null,
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Estadiamento específico pendente de curadoria (D-F1-34/49)",
+      "pagina": null,
+      "trecho": "",
+      "estado": "PENDENTE"
+    },
+    "exames": [],
+    "gruposConduta": [],
+    "marcadores": {
+      "uteis": [],
+      "naoPedirDeRotina": []
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "CUP de bom prognóstico/adenocarcinoma",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT dupla"
+        ],
+        "criterio": "D-F1-36",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "D-F1-36 (decisão local)",
+          "pagina": null,
+          "trecho": "lista de 5 esquemas — a lista decide esquemas, não doses",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "cenario": "CUP escamoso (investigação H&N completa negativa)",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT"
+        ],
+        "criterio": "população de Khansur",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Khansur 1995 (PMID 7743377)",
+          "pagina": null,
+          "trecho": "metastatic squamous cell carcinoma from unknown primary",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "cup-cis-doc",
+        "nome": "Cisplatina + docetaxel",
+        "cenario": "não especificado",
+        "linha": "conforme seleção",
+        "drogas": [
+          {
+            "droga": "docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 8,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.primario-desconhecido-cup.cisplatina-docetaxel__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Greco 2000 (PMID 10761758; EXT-CUP-001)",
+          "pagina": null,
+          "trecho": "docetaxel 75 + cisplatin 75 every three weeks; max 8",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "Variante Mukai (60/80) registrada na ficha.",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "cup-carbo-pac",
+        "nome": "Carboplatina + paclitaxel",
+        "cenario": "não especificado",
+        "linha": "conforme seleção",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 (primeiro)",
+            "observacao": "3 h"
+          },
+          {
+            "droga": "carboplatina",
+            "dose": 6,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Calvert; GFR cap 125"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.primario-desconhecido-cup.carboplatina-paclitaxel-21-21-dias__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "BC PUCAT rev 12/2024 (EXT-CUP-004) + HeCOG (PMID 10963638)",
+          "pagina": null,
+          "trecho": "paclitaxel first + CARBO AUC 6; G-CSF D5-12 no estudo",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "cup-doc-gem",
+        "nome": "Docetaxel + gemcitabina",
+        "cenario": "não especificado",
+        "linha": "conforme seleção",
+        "drogas": [
+          {
+            "droga": "gemcitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": "30 min"
+          },
+          {
+            "droga": "docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D8",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.primario-desconhecido-cup.docetaxel-gemcitabina__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Pouessel 2004 (PMID 15022294; EXT-CUP-009)",
+          "pagina": null,
+          "trecho": "gemcitabine D1/D8 + docetaxel D8 q3w",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "cup-cis-vin",
+        "nome": "Cisplatina + vinorelbina",
+        "cenario": "não especificado (DOSSIÊ — sem fonte direta)",
+        "linha": "—",
+        "drogas": [
+          {
+            "droga": "vinorelbina",
+            "dose": null,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1/D8 [VERIFICAR]",
+            "observacao": "NAO_LOCALIZADO"
+          },
+          {
+            "droga": "cisplatina",
+            "dose": null,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 [VERIFICAR]",
+            "observacao": "NAO_LOCALIZADO"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.primario-desconhecido-cup.cisplatina-vinorelbina__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Busca documentada 2026-10-14 (RELATORIO-CUP.md)",
+          "pagina": null,
+          "trecho": "dupla sem fonte direta; tripla Palmeri 2006 NÃO derivável",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "Ficha-dossiê: não entra no fluxo operacional enquanto a lacuna persistir.",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "cup-cis-5fu",
+        "nome": "Cisplatina + 5-FU (CUP escamoso)",
+        "cenario": "escamoso metastático (primário oculto)",
+        "linha": "conforme seleção",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "fluoruracila",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D4 CI",
+            "observacao": "24 h/dia (96 h)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.primario-desconhecido-cup.cisplatina-5-fluorouracil-cup-escamoso__escamoso-metastatico-primario-oculto@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Khansur 1995 (PMID 7743377)",
+          "pagina": null,
+          "trecho": "cisplatin 100 D1 + 5-FU 1000 mg/m²/d ×4",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "linfonodos cervicais (suspeita de primário oculto H&N)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "pendencia": "fora do escopo D-F1-36",
+        "concomitante": false,
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "NCI PDQ",
+          "pagina": null,
+          "trecho": "RT in nodal subsets",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "cirurgia": [],
+    "biomarcadorTratamento": [],
+    "ensaios": [],
+    "seguimento": [],
+    "suporte": {
+      "emetogenicidade": "alta com cisplatina (D-F1-30 local)",
+      "riscoNeutropeniaFebril": "conforme dupla",
+      "outros": [
+        "hidratação e Mg/K da cisplatina (padrão local)"
+      ],
+      "fonte": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "padrão local D-W9-34d",
+        "pagina": null,
+        "trecho": "suporte locais",
+        "estado": "CONSULTADO"
+      }
+    }
+  },
+  "ligacoes": {
+    "exames": [
+      "BIOPSIA",
+      "TC_TORAX_ABDOME_PELVE",
+      "PET_CT_FDG",
+      "HEMOGRAMA",
+      "CREATININA",
+      "CLEARANCE_CREATININA"
+    ],
+    "interacoesConsultar": [],
+    "ctcaeAcao": [],
+    "suporteReceitas": [],
+    "orientacoes": [],
+    "encaminhamentos": [],
+    "laudos": [],
+    "formulasXYZ": []
+  },
+  "pendencias": [
+    {
+      "texto": "Cisplatina + vinorelbina em CUP: NAO_LOCALIZADO após 6 estratégias PubMed + ClinicalTrials.gov + eviQ/BC/CCO + NCI PDQ (só existe a tripla de Palmeri 2006; retirar gemcitabina não é transcrição)",
+      "classe": "NAO_LOCALIZADO",
+      "buscasFeitas": [
+        "PubMed (termos documentados)",
+        "ClinicalTrials.gov API",
+        "eviQ (sem protocolo de CUP)",
+        "BC (único: PUCAT)",
+        "CCO (403)",
+        "NCI PDQ"
+      ]
+    },
+    {
+      "texto": "Full text ESMO 2023 (PMID 36563965) e 2015 (PMID 26314775) bloqueados (403/Cloudflare) — registros PubMed retidos",
+      "classe": "ACESSO",
+      "buscasFeitas": [
+        "academic.oup.com",
+        "annalsofoncology.org"
+      ]
+    },
+    {
+      "texto": "Escolha de variantes (75/75 × 60/80; 200/AUC6 × 175/AUC5) pendente de decisão",
+      "classe": "DECISAO_MEDICA_PENDENTE",
+      "buscasFeitas": [
+        "Greco vs Mukai",
+        "PUCAT/HeCOG vs SOnHe"
+      ]
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "Doses de cisplatina+docetaxel",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "Greco 2000",
+        "pagina": null,
+        "trecho": "75/75 q3sem (n=26)",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "Mukai 2010",
+        "pagina": null,
+        "trecho": "doc 60 + cis 80 (n=45)",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Ficha com Greco 75/75; variante registrada",
+      "decisaoNecessaria": "Dr. Silas decide"
+    },
+    {
+      "tema": "Variante de carboplatina+paclitaxel",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "BC PUCAT/HeCOG",
+        "pagina": null,
+        "trecho": "paclitaxel 200 + AUC 6",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "SOnHe p. 379 (local)",
+        "pagina": null,
+        "trecho": "175 + AUC 5",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Ficha com PUCAT (protocolo institucional específico de CUP); variante registrada",
+      "decisaoNecessaria": "Dr. Silas decide"
+    },
+    {
+      "tema": "Dupla cisplatina+vinorelbina vs tripla",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "decisão local D-F1-36",
+        "pagina": null,
+        "trecho": "dupla cis+vinorelbina",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "Palmeri 2006 (PMID 17109447)",
+        "pagina": null,
+        "trecho": "tripla cis+gem+vin",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Não derivado: ficha-dossiê com doses NAO_LOCALIZADO",
+      "decisaoNecessaria": "Fonte direta da dupla ou alteração da lista"
+    },
+    {
+      "tema": "População do cis+5-FU",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "Khansur 1995",
+        "pagina": null,
+        "trecho": "escamoso com investigação H&N negativa (n=15)",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "eviQ 288 (operacional)",
+        "pagina": null,
+        "trecho": "população H&N R/M; cis 75",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Ficha restrita ao cenário escamoso; generalização proibida",
+      "decisaoNecessaria": false
+    }
+  ],
+  "curadoria": {
+    "redator": "GLM (agente curador, missão F1-B2) — rascunho para revisão",
+    "redigidoEm": "2026-10-14",
+    "fontesLidas": [
+      "Greco 2000, Mukai 2003/2010, Briasoulis 2000, Hayashi 2019, Huebner 2009, Pouessel 2004, Khansur 1995, Palmeri 2006 (PubMed efetch)",
+      "BC PUCAT (protocolo+PPPO) e índice Primary Unknown",
+      "eviQ 288 (PDF v5)",
+      "Fizazi 2015 / Krämer 2023 (registros)",
+      "NCI PDQ",
+      "HemOnc (triangulação)",
+      "ESMO 2015/2023 (contexto)"
+    ],
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-14",
+        "redator": "GLM",
+        "resolvidas": 0,
+        "classificadas": 3,
+        "susPreenchidos": 0,
+        "notas": [
+          "D-F1-49: fichas institucionais novas sem SISAC; mudança de fonte não aprova doses"
+        ]
+      }
+    ]
+  },
+  "escopo": {
+    "classe": "EXPANSAO_F1_B2_SEM_SISAC",
+    "nota": "Pack novo da D-F1-34 construído na F1-B2 (D-F1-49) com fontes externas verificadas; conteúdo consultável em RASCUNHO, sem ativação clínica."
+  },
+  "correcoes": []
+}
