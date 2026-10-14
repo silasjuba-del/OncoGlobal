@@ -1,3 +1,5 @@
+import { validarPayloadEvento } from "../contracts/envelope.js";
+import { FUSO_SERVICO } from "../contracts/f1/relogio.js";
 import type { DatabaseSync } from "node:sqlite";
 import { z, type ZodType } from "zod";
 import { DataCivil, Fonte } from "../contracts/base.js";
@@ -5,19 +7,19 @@ import { ClinicalEvent, Apac } from "../contracts/operacao.js";
 import { Paciente, TumorLot, Triagem, TreatmentEpisode, Ciclo } from "../contracts/clinico.js";
 import { Conversation } from "../contracts/agentes.js";
 import { Contato } from "../contracts/clinico.js";
-import { dadosDoEvento, eventosVigentes } from "../kernel/projections/snapshot.js";
+import { dadosDoEvento, escopoDoEvento, eventosVigentes, projetarSnapshot } from "../kernel/projections/snapshot.js";
 import { apacTimeline } from "../kernel/projections/apacTimeline.js";
 import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
 import { apacPrazo } from "../rules/apac.js";
-import { listarDrafts } from "../kernel/ledger/drafts.js";
+import { listarDrafts } from "../kernel/comandos/portas.js";
 import type { Sessao } from "../contracts/base.js";
-import type { SetorChat } from "../ui/api/porta.js";
+import type { SetorChat } from "../contracts/api/porta.js";
 import { SalaoRuleset, type ContextoTriagem } from "../contracts/regras.js";
 import { avaliarCorteSalao, avaliarTriagem } from "../rules/triagem.js";
 import { ordenarFila } from "../rules/fila.js";
-import { antiglosa, CAMPOS_OBRIGATORIOS_PADRAO } from "../apac/antiglosa.js";
+import { antiglosa, CAMPOS_OBRIGATORIOS_PADRAO } from "../modules/apac/antiglosa.js";
 import type { CaixaNumerada } from "../contracts/w10/clinico-w10.js";
-import type { TabelasSigtap } from "../apac/sigtap.js";
+import type { TabelasSigtap } from "../modules/apac/sigtap.js";
 import { avaliarSerieRecist, type RecistSerieInput } from "../rules/recist/index.js";
 import { ClinicalFact } from "../contracts/w10/extracao.js";
 import { reconciliarCampos } from "../kernel/extracao/reconciliacao.js";
@@ -31,6 +33,16 @@ import { projetarFlash, rascunhoFlashDoContexto, type ModeloFlash } from "./flas
 import { projetarVinculosContato, type ContatoProjetado } from "../kernel/projections/vinculosContato.js";
 import { hashConteudoExibido } from "./sessao.js";
 import { projetarRetratoTransversal } from "./retratoTransversal.js";
+import { projetarContextoClinico, projetarHistoricoClinico } from "./f0c/contextoClinico.js";
+import { avaliarConsulta, horizonteDoEncontro, type EntradaAvaliacaoConsulta } from "./f0c/avaliacaoConsulta.js";
+import { coletarFontesSalao } from "./f0c/salao.js";
+import { projetarInstrumentosClinicos } from "./f0c/instrumentosClinicos.js";
+import type { RegraInstrumento } from "../contracts/f0c/instrumentos.js";
+import { projetarCondicionaisClinicas, type EntradaCondicionaisClinicas } from "./f0c/condicionaisClinicas.js";
+import { projetarIntervaloCiclo } from "./f0c/intervaloCiclo.js";
+import { avaliarInteracoesCondicionadasDaConsulta } from "./f0c/interacoesCondicionadas.js";
+import { projetarCumulativoClinico } from "./f0c/cumulativoClinico.js";
+import { chaveDroga, type LimiteExposicaoCumulativa } from "../rules/cumulativoAlerta.js";
 
 const RecistSerieSchema = z.object({
   patientId: z.string().min(1), tumorLotId: z.string().nullable(), episodioId: z.string().min(1),
@@ -68,15 +80,33 @@ const ChatMessage = z.object({
   autor: z.string().min(1), texto: z.string(),
 }).strict();
 
-function eventos(db: DatabaseSync) {
-  return db.prepare("SELECT * FROM clinical_event").all().flatMap((row) => {
+/** Pendência de integridade do ledger: evento gravado que não passa no contrato. Sem payload clínico. */
+export interface PendenciaIntegridade { eventoId: string; patientId: string | null; tipo: string | null; motivo: "JSON_INVALIDO" | "CONTRATO_INVALIDO" | "PAYLOAD_FORA_DO_CONTRATO"; schema?: string; }
+
+/** Pré-F1 (auditoria A4): nada some em silêncio. Evento malformado sai da projeção, mas fica registrado como pendência. */
+export function lerEventosComIntegridade(db: DatabaseSync) {
+  const pendenciasIntegridade: PendenciaIntegridade[] = [];
+  const itens = db.prepare("SELECT * FROM clinical_event").all().flatMap((row) => {
+    const eventoId = String(row.eventId ?? `${String(row.operationId ?? "?")}#${String(row.eventIndex ?? "?")}`);
+    const patientId = row.patientId == null ? null : String(row.patientId);
+    const tipo = row.tipo == null ? null : String(row.tipo);
+    let bruto: unknown;
     try {
-      return [ClinicalEvent.parse({ ...row, payload: JSON.parse(String(row.payload)),
-        fontes: JSON.parse(String(row.fontes)), criadoPor: JSON.parse(String(row.criadoPor)) })];
-    } catch { return []; }
+      bruto = { ...row, payload: JSON.parse(String(row.payload)), fontes: JSON.parse(String(row.fontes)), criadoPor: JSON.parse(String(row.criadoPor)) };
+    } catch { pendenciasIntegridade.push({ eventoId, patientId, tipo, motivo: "JSON_INVALIDO" }); return []; }
+    const parsed = ClinicalEvent.safeParse(bruto);
+    if (!parsed.success) { pendenciasIntegridade.push({ eventoId, patientId, tipo, motivo: "CONTRATO_INVALIDO" }); return []; }
+    const payload = validarPayloadEvento(parsed.data.tipo, dadosDoEvento(parsed.data));
+    if (!payload.ok) {
+      pendenciasIntegridade.push({eventoId,patientId,tipo,motivo:"PAYLOAD_FORA_DO_CONTRATO",schema:payload.schema}); return [];
+    }
+    return [parsed.data];
   }).sort((a, b) => Date.parse(a.criadoEm) - Date.parse(b.criadoEm)
     || a.operationId.localeCompare(b.operationId) || a.eventIndex - b.eventIndex);
+  return { itens, pendenciasIntegridade };
 }
+
+function eventos(db: DatabaseSync) { return lerEventosComIntegridade(db).itens; }
 function data(e: ReturnType<typeof eventos>[number]) { return dadosDoEvento(e); }
 function valorCandidatoResumo(value: unknown): string {
   if (typeof value === "string") return value;
@@ -155,14 +185,25 @@ export function lerPaciente(db: DatabaseSync, patientId: string) {
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value ?? null;
 }
 export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, sessao: Sessao,
-  tumorLotId?: string | null, config: { limiarPlaquetas?: LimiarAlertaPlaquetas | null; modeloFlash?: ModeloFlash | null } = {}) {
-  const all = eventos(db), paciente = porTipo(all, "Paciente", Paciente)
+  tumorLotId?: string | null, config: { aoLer?: (leitura:ReturnType<typeof lerEventosComIntegridade>)=>void; encounterId?: string; offsetServico?: string; limiarPlaquetas?: LimiarAlertaPlaquetas | null; modeloFlash?: ModeloFlash | null;
+    templates?: readonly unknown[]; salaoRuleset?: unknown; interacoes?: EntradaAvaliacaoConsulta["interacoes"];
+    catalogo?: EntradaAvaliacaoConsulta["catalogo"]; feveRuleset?: EntradaAvaliacaoConsulta["feveRuleset"];
+    instrumentos?: readonly RegraInstrumento[];
+    tetosCumulativos?: readonly LimiteExposicaoCumulativa[];
+    condicionais?: {regras:EntradaCondicionaisClinicas["regras"];termos:NonNullable<EntradaCondicionaisClinicas["regrasTermos"]>} } = {}) {
+  const leitura = lerEventosComIntegridade(db);
+  config.aoLer?.(leitura);
+  // Só as pendências com identidade deste paciente; evento sem patientId é diagnóstico global, nunca de todos os prontuários.
+  const pendenciasIntegridade = leitura.pendenciasIntegridade.filter((p) => p.patientId === patientId);
+  const all = leitura.itens, paciente = porTipo(all, "Paciente", Paciente)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).at(-1)?.value;
-  if (!paciente) return { codigo: "PACIENTE_NAO_ENCONTRADO" as const };
+  // Cadastro corrompido não some: o 404 leva o diagnóstico, sem reconstruir identidade pelo payload inválido.
+  if (!paciente) return { codigo: "PACIENTE_NAO_ENCONTRADO" as const, pendenciasIntegridade };
   const patientEvents = eventosVigentes(all.filter((e) => e.patientId === patientId));
-  const current = patientEvents.at(-1);
+  if (!config.encounterId) return { codigo: "ENCONTRO_EXPLICITO_OBRIGATORIO" as const };
+  const current = patientEvents.find(e => e.encounterId === config.encounterId);
   if (!current) return { codigo: "CONSULTA_NAO_ENCONTRADA" as const };
-  const civil = dataCivilDoServico(agora, "-03:00");
+  const civil = dataCivilDoServico(agora, config.offsetServico ?? FUSO_SERVICO);
   if (civil.estado !== "OK") return { codigo: civil.codigo };
   const lotes = porTipo(all, "TumorLot", TumorLot)
     .filter((x) => x.value.patientId === patientId && x.event.patientId === patientId).map((x) => x.value);
@@ -209,10 +250,21 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     if (!payload || typeof payload !== "object" || Array.isArray(payload)) return [];
     const value = payload as Record<string, unknown>;
     const review = value.review && typeof value.review === "object" ? value.review as Record<string, unknown> : null;
-    const revisaoRegistrada = !!review && all.some((event) => event.operationId === review.operationId
-      && event.patientId === patientId && event.encounterId === current.encounterId
-      && event.tumorLotId === (lote?.tumorLotId ?? null)
-      && (event.revisao === "CONFIRMADO" || event.revisao === "ASSINADO"));
+    const revisaoRegistrada = !!review && all.some((event) => {
+      if (event.tipo !== "ReviewDecision" || event.operationId !== review.operationId
+        || event.patientId !== patientId || event.encounterId !== current.encounterId
+        || event.tumorLotId !== (lote?.tumorLotId ?? null)
+        || event.criadoPor.tipo !== "SESSAO" || event.criadoPor.id !== review.medicoId
+        || (event.revisao !== "CONFIRMADO" && event.revisao !== "ASSINADO")) return false;
+      const receipt = data(event);
+      return receipt?.kind === "ExtracaoResumoRevisado" && receipt.draftId === draft.draftId
+        && receipt.draftRevision === draft.revision && receipt.sourceId === draft.sourceId
+        && receipt.conteudoHash === hashConteudoExibido(value)
+        && Array.isArray(value.fontes) && value.fontes.length > 0
+        && value.fontes.every((source) => { const fonte = Fonte.safeParse(source);
+          return fonte.success && fonte.data.sourceId === receipt.sourceId
+            && fonte.data.contentHash === receipt.sourceContentHash; });
+    });
     return value.kind === "EVOLUCAO_RASCUNHO" && typeof value.resumo === "string"
       ? [{ draftId: draft.draftId, revision: draft.revision, status: "RASCUNHO" as const, resumo: value.resumo,
         revisaoRegistrada, somentePreparada: !!value.origem && !revisaoRegistrada }]
@@ -263,8 +315,8 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   const resumoConfirmadoParaDocumento = resumoRegistrado
     ? [resumoRegistrado, ...(textoConflitos ? [textoConflitos] : [])].join("\n\n") : null;
   const pendenciasLeitura = [
-    "SNAPSHOT_DE_CAMPOS_NAO_PERSISTIDO", "ALERGIAS_NAO_CARREGADAS", "COMORBIDADES_NAO_CARREGADAS",
-    "ALERTAS_NAO_PERSISTIDOS", "DELTA_ANTERIOR_NAO_PROJETADO",
+    ...(pendenciasIntegridade.length ? ["EVENTO_COM_INTEGRIDADE_PENDENTE"] : []),
+    "ALERTAS_NAO_PERSISTIDOS",
     ...(!lote ? [loteAmbiguo ? "TUMOR_LOT_AMBIGUO_NO_ENCONTRO" : "TUMOR_LOT_NAO_ENCONTRADO"] : []),
     ...(!episodio ? ["EPISODIO_NAO_ENCONTRADO"] : []),
   ];
@@ -272,8 +324,67 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     .filter((field) => field.estado === "PENDENTE").length, lote ? 0 : 1);
   // Escopo da consulta: eventos do paciente no lote selecionado ou sem lote (ex.: biópsia, paciente).
   const eventosDaConsulta = all.filter((event) => event.patientId === patientId
-    && (event.tumorLotId === null || event.tumorLotId === (lote?.tumorLotId ?? undefined)));
-  const alertaPlaquetas = alertaPlaquetasDaConsulta(eventosDaConsulta, config.limiarPlaquetas ?? null);
+    && (escopoDoEvento(event) === "PACIENTE" || event.tumorLotId === null || event.tumorLotId === (lote?.tumorLotId ?? undefined)));
+  // Mesmo corte de avaliarConsulta: plaquetas de encontro posterior não reescrevem a elegibilidade de consulta reaberta.
+  const horizontePlaquetas = horizonteDoEncontro(all.filter((event) => event.patientId === patientId), current.encounterId, agora);
+  const alertaPlaquetas = alertaPlaquetasDaConsulta(eventosDaConsulta.filter((event) => Date.parse(event.criadoEm) <= horizontePlaquetas),
+    config.limiarPlaquetas ?? null);
+  const contextoClinico = projetarContextoClinico({ eventos: all, patientId, tumorLotId: lote?.tumorLotId ?? null,
+    encounterId: current.encounterId, agora, episodio, ciclo: ciclos.at(-1) ?? null, ...(config.templates ? {templates:config.templates} : {}) });
+  const condicionais=projetarCondicionaisClinicas({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
+    encounterId:current.encounterId,agora,programados:ciclos.at(-1)?.itens.map(item=>item.droga) ?? null,
+    regras:config.condicionais?.regras ?? [],regrasTermos:config.condicionais?.termos ?? []});
+  const avisosCondicionais=condicionais.avaliacoes.filter(r=>r.estado==="AVISO").flatMap(r=>r.motivos);
+  const pendenciasCondicionais=condicionais.avaliacoes.filter(r=>r.estado==="PENDENTE").flatMap(r=>r.pendencias);
+  const intervalo=projetarIntervaloCiclo({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
+    encounterId:current.encounterId,agora,hoje:civil.dataCivil,episodio,ciclo:ciclos.at(-1) ?? null,templates:config.templates ?? []});
+  const interacoesCondicionadas=avaliarInteracoesCondicionadasDaConsulta({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
+    encounterId:current.encounterId,agora,regrasInteracoes:config.interacoes?.interacoes ?? [],...(config.catalogo?{catalogo:config.catalogo}:{})});
+  const avisosInteracoesCondicionadas=interacoesCondicionadas.resultados.filter(r=>r.estado==="AVISO");
+  const tetos=config.tetosCumulativos ?? [];
+  const drogasCiclo=ciclos.at(-1)?.itens.map(item=>item.droga).filter(d=>d.trim()) ?? [];
+  const vigiadas=[...new Set(drogasCiclo.filter(d=>tetos.some(t=>chaveDroga(t.droga)===chaveDroga(d))))];
+  const cumulativo=projetarCumulativoClinico({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
+    encounterId:current.encounterId,agora,limites:tetos.filter(t=>vigiadas.some(d=>chaveDroga(t.droga)===chaveDroga(d))),
+    programados:vigiadas});
+  const sinalCumulativo=(() => {
+    const avisos=cumulativo.avaliacoes.filter(a=>a.avaliacao.estado==="AVISO");
+    if (!avisos.length) return undefined;
+    return {estado:"VERMELHO" as const,motivos:avisos.map(a=>({texto:`${a.droga}: dose acumulada chegou no teto. Revisão médica, sem bloqueio.`}))};
+  })();
+  const parciaisCumulativos=cumulativo.avaliacoes.filter(a=>a.avaliacao.estado==="ALARANJADO")
+    .map(a=>`${a.droga}: item parcial, abaixo do teto.`);
+  const avaliacao = avaliarConsulta({ eventos: all, patientId, tumorLotId: lote?.tumorLotId ?? null,
+    encounterId:current.encounterId, agora, hoje:civil.dataCivil, paciente, episodio, ciclo:ciclos.at(-1) ?? null,
+    plaquetas:sinalPlaquetas(alertaPlaquetas), salaoRuleset:config.salaoRuleset,
+    ...(config.interacoes ? {interacoes:config.interacoes} : {}), ...(config.catalogo ? {catalogo:config.catalogo} : {}),
+    ...(config.feveRuleset ? {feveRuleset:config.feveRuleset} : {}),
+    ...(interacoesCondicionadas.resultados.length ? {interacoesCondicionadas:{
+      estado:avisosInteracoesCondicionadas.length?"VERMELHO" as const:interacoesCondicionadas.resultados.some(r=>r.estado==="PENDENTE")?"PENDENTE" as const:"VERDE" as const,
+      motivos:interacoesCondicionadas.resultados.filter(r=>r.estado!=="NAO_APLICAVEL").map(r=>({texto:r.motivo}))}} : {}),
+    ...(intervalo.aplicavel !== false ? {intervalo:{estado:intervalo.estado==="AVISO"?"VERMELHO" as const:intervalo.estado==="PENDENTE"?"PENDENTE" as const:"VERDE" as const,
+      motivos:intervalo.estado==="SEM_AVISO"?[]:[{texto:`Intervalo do ciclo: ${intervalo.motivo ?? "PENDENTE"}`} ]}} : {}),
+    ...(sinalCumulativo ? {cumulativo:sinalCumulativo} : {}),
+    ...(condicionais.avaliacoes.some(r=>r.estado!=="NAO_APLICAVEL") ? {condicionais:{
+      estado:avisosCondicionais.length ? "VERMELHO" as const : pendenciasCondicionais.length ? "PENDENTE" as const : "VERDE" as const,
+      motivos:[...avisosCondicionais,...pendenciasCondicionais].map(texto=>({texto}))}} : {}) });
+  pendenciasLeitura.push(...contextoClinico.pendencias,
+    ...Object.entries(contextoClinico.campos).filter(([,c]) => c.valor === null).map(([nome]) => `${nome.toUpperCase()}_NAO_CARREGADAS`));
+  const anteriores = patientEvents.filter(e => e.encounterId !== current.encounterId && Date.parse(e.criadoEm) < Date.parse(current.criadoEm));
+  const anterior = anteriores.at(-1);
+  const snapshotAtual = projetarSnapshot(all, patientId, lote?.tumorLotId ?? null, current.encounterId, "s0-delta-v1");
+  const snapshotAnterior = anterior ? projetarSnapshot(all, patientId, lote?.tumorLotId ?? null, anterior.encounterId, "s0-delta-v1") : null;
+  const delta = { temSnapshotAnterior: snapshotAnterior !== null, itens: snapshotAnterior
+    ? [...new Set([...Object.keys(snapshotAnterior.campos), ...Object.keys(snapshotAtual.campos)])].sort().flatMap(campo => {
+      const antes = snapshotAnterior.campos[campo], atual = snapshotAtual.campos[campo];
+      if (JSON.stringify(antes?.valor) === JSON.stringify(atual?.valor) && antes?.estado === atual?.estado) return [];
+      return [{ id: `delta:${campo}`, rotulo: campo, kind: "MUDOU" as const, estado: atual?.estado ?? "PENDENTE" as const,
+        candidatos: [{rotulo: "Anterior",valorTexto: JSON.stringify(antes?.valor ?? null)}, {rotulo: "Atual",valorTexto: JSON.stringify(atual?.valor ?? null)}] }];
+    }) : [] };
+
+  const historicoClinico = projetarHistoricoClinico({ eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
+    encounterId:current.encounterId,agora });
+  const historicoSistemico = historicoDaConsulta(eventosDaConsulta);
   let documentosComIntegridadePendente = 0;
   const historicoDocumentos = eventosDaConsulta.filter((evento) => evento.tipo === "DOCUMENTO"
     && evento.revisao === "ASSINADO").flatMap((evento) => {
@@ -283,6 +394,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     const assinatura = envelope?.signature && typeof envelope.signature === "object"
       ? envelope.signature as Record<string, unknown> : null;
     if (!corpo || typeof corpo.documentId !== "string" || typeof corpo.texto !== "string"
+      || typeof corpo.documentVersion !== "number" || !Number.isInteger(corpo.documentVersion) || corpo.documentVersion < 1
       || !assinatura || assinatura.documentId !== corpo.documentId
       || assinatura.documentVersion !== corpo.documentVersion
       || assinatura.serverActorId !== evento.criadoPor.id
@@ -290,24 +402,28 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
       documentosComIntegridadePendente++; return [];
     }
     return [{ eventId: evento.eventId, documentId: corpo.documentId,
+      documentVersion: corpo.documentVersion, tumorLotId: evento.tumorLotId,
       titulo: typeof corpo.titulo === "string" ? corpo.titulo : "Documento assinado",
       texto: corpo.texto, assinadoEm: evento.criadoEm, autorId: evento.criadoPor.id,
       encounterId: evento.encounterId }];
   });
   if (documentosComIntegridadePendente) pendenciasLeitura.push("DOCUMENTO_COM_INTEGRIDADE_PENDENTE");
   return {
+    pendenciasIntegridade,
     hoje: civil.dataCivil, patientId, encounterId: current.encounterId,
     tumorLotId: lote?.tumorLotId ?? null,
     cabecalho: { hoje: civil.dataCivil, paciente, lotes, loteSelecionadoId: lote?.tumorLotId ?? null,
-      episodio, ciclo: ciclos.at(-1) ?? null, semaforo: "PENDENTE" as const,
+      episodio, ciclo: ciclos.at(-1) ?? null, semaforo: avaliacao.elegibilidade.cor,
       pendentes: pendenciasLeitura.length + pendenciasCampos, contatosDesdeUltima: (() => {
         const contacts = porTipo(all, "Contato", Contato);
         const projected = projetarVinculosContato(contacts, all);
         return contacts.map((x) => contatoUnico(x.value.contatoId, patientId, projected))
           .filter((x): x is Contato => x !== null);
       })(),
-      alergiasPaciente: [], comorbidadesPaciente: [] },
-    alertas: [], delta: { temSnapshotAnterior: false, itens: [] }, evidencias: [],
+      alergiasPaciente: contextoClinico.flash.alergia === "Não informada" ? [] : [contextoClinico.flash.alergia],
+      comorbidadesPaciente: Array.isArray(contextoClinico.campos.comorbidades.valor)
+        ? contextoClinico.campos.comorbidades.valor.filter((v):v is string=>typeof v === "string") : [] },
+    alertas: [], delta, evidencias: [],
     evolucoesRascunho,
     resumoEvolucao: resumoEvolucaoComConflitos,
     resumoConfirmadoParaDocumento,
@@ -321,21 +437,32 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     estado: "PARCIAL" as const, pendenciasLeitura,
     // W11-H22: calculados aqui, a partir do ledger, com a data do servidor passada explicitamente.
     datasFixas: projetarDatasFixas(eventosDaConsulta, civil.dataCivil),
-    historicoTratamento: historicoDaConsulta(eventosDaConsulta),
+    historicoTratamento: { ...historicoSistemico,
+      linhas:[...historicoSistemico.linhas,...historicoClinico.linhas].sort((a,b)=>(a.data ?? a.periodo?.inicio ?? "").localeCompare(b.data ?? b.periodo?.inicio ?? "")),
+      codigo:historicoSistemico.codigo ?? historicoClinico.codigo },
     alertaPlaquetas,
     // W12-F4: Flash calculada do ledger; a data de referência é a do servidor, passada explicitamente.
-    flash: projetarFlash(eventosDaConsulta, civil.dataCivil, config.modeloFlash ?? null,
+    flash: { ...projetarFlash(eventosDaConsulta, civil.dataCivil, config.modeloFlash ?? null,
       rascunhoFlashDoContexto(db, { patientId, encounterId: current.encounterId, tumorLotId: lote?.tumorLotId ?? null })),
-    elegibilidade: elegibilidadeCiclo({ portaCiclo: null, triagem: null, ctcae: null, interacoes: null,
-      funcaoOrganica: null, plaquetas: sinalPlaquetas(alertaPlaquetas) }),
+      ...contextoClinico.flash, avisos:[...avaliacao.avisosFlash,...avisosCondicionais,...avisosInteracoesCondicionadas.map(r=>r.motivo)],sugestoesLaboratorio:avaliacao.sugestoesLaboratorio,
+      ...(parciaisCumulativos.length ? {parciaisCumulativos} : {}) },
+    elegibilidade: avaliacao.elegibilidade,
+    avaliacaoClinica: avaliacao,
+    condicionaisClinicas:condicionais,
+    interacoesCondicionadas,
+    intervaloCiclo:intervalo,
+    cumulativoClinico:cumulativo,
+    camposClinicos: contextoClinico.campos,
+    instrumentosClinicos:projetarInstrumentosClinicos({eventos:all,patientId,tumorLotId:lote?.tumorLotId ?? null,
+      encounterId:current.encounterId,agora,regras:config.instrumentos ?? []}).avaliacoes,
   };
 }
 export function lerLotes(db: DatabaseSync, patientId: string) {
   return porTipo(eventos(db), "TumorLot", TumorLot)
     .filter((x) => x.event.patientId === patientId && x.value.patientId === patientId).map((x) => x.value);
 }
-export function lerAgenda(db: DatabaseSync, agora: string) {
-  const civil = dataCivilDoServico(agora, "-03:00");
+export function lerAgenda(db: DatabaseSync, agora: string, offsetServico = FUSO_SERVICO) {
+  const civil = dataCivilDoServico(agora, offsetServico);
   if (civil.estado !== "OK") return { codigo: civil.codigo, hoje: null, itens: [], estado: "PENDENTE" as const };
   const all = eventos(db), rows = porTipo(all, "AgendaEntry", AgendaEntry);
   const items = rows.filter(({ event, value }) => value.data === civil.dataCivil
@@ -392,11 +519,11 @@ export function validarCatalogoApac(caixas: readonly CaixaNumerada[]):
 }
 
 export function lerApacs(db: DatabaseSync, agora: string, config: {
-  caixas: readonly CaixaNumerada[]; sigtap: TabelasSigtap; cnesConfigurado: string;
+  caixas: readonly CaixaNumerada[]; sigtap: TabelasSigtap; cnesConfigurado: string; offsetServico?: string;
 }) {
   const all = eventos(db), apacs = apacTimeline(all);
   const catalogoApac = validarCatalogoApac(config.caixas);
-  const civil = dataCivilDoServico(agora, "-03:00");
+  const civil = dataCivilDoServico(agora, config.offsetServico ?? FUSO_SERVICO);
   if (civil.estado !== "OK") return { hoje: null, itens: [], estado: "PENDENTE", codigo: civil.codigo };
   const lots = porTipo(all, "TumorLot", TumorLot), patients = porTipo(all, "Paciente", Paciente);
   return { hoje: civil.dataCivil, itens: apacs.flatMap((apac) => {
@@ -407,19 +534,22 @@ export function lerApacs(db: DatabaseSync, agora: string, config: {
     const paciente = patients.find((x) => x.value.patientId === lote.patientId
       && x.event.patientId === lote.patientId)?.value;
     if (!paciente || !event || event.patientId !== paciente.patientId) return [];
+    const avisos = all.filter(e => e.patientId === paciente.patientId && e.tipo === "ApacAviso" && Date.parse(e.criadoEm) <= Date.parse(agora) && ["CONFIRMADO", "ASSINADO"].includes(e.revisao))
+      .filter(e => data(e)?.apacId === apac.apacId && data(e)?.competencia === apac.competencia);
+    const ultimoAvisoEm = avisos.at(-1)?.criadoEm ?? null;
     let prazo: ReturnType<typeof apacPrazo> | null = null;
-    try { prazo = apacPrazo(apac.dataGeracaoApp, civil.dataCivil, null); } catch { /* malformed civil date stays pending */ }
+    try { prazo = apacPrazo(apac.dataGeracaoApp, civil.dataCivil, ultimoAvisoEm); } catch { /* malformed civil date stays pending */ }
     const doLote = apacs.filter((other) => other.competencia === apac.competencia);
     const resultadoAntiglosa = catalogoApac.estado === "DISPONIVEL"
       ? antiglosa(apac, { hoje: civil.dataCivil, sigtap: config.sigtap, caixas: catalogoApac.caixas,
         cnesConfigurado: config.cnesConfigurado, apacsDoLote: doLote }) : null;
     return [{ apac, lote, nomePaciente: paciente.nome, patientId: paciente.patientId,
       encounterId: event.encounterId,
-      ultimoAvisoEm: null, campoOrigem: null,
+      ultimoAvisoEm, campoOrigem: null,
       motivoNegativa: apac.resultadoExterno?.valor === "NEGADA" ? apac.resultadoExterno.motivo : null,
       prazo: prazo ? { ...prazo, estado: prazo.dias < 0 ? "PENDENTE" : prazo.estado } : { estado: "PENDENTE" },
       antiglosa: resultadoAntiglosa,
-      antiglosaEstado: resultadoAntiglosa ? "AVALIADA_COM_TABELA_SIGTAP_AUSENTE" : "PENDENTE_CATALOGO_AUSENTE" }];
+      antiglosaEstado: resultadoAntiglosa ? (config.sigtap[apac.competencia] ? "AVALIADA_COM_TABELA_SIGTAP" : "AVALIADA_COM_TABELA_SIGTAP_AUSENTE") : "PENDENTE_CATALOGO_AUSENTE" }];
   }), estado: apacs.length ? "PARCIAL" : "FONTE_AUSENTE" };
 }
 export function lerConversas(db: DatabaseSync) {
@@ -467,11 +597,11 @@ export function lerTriagens(db: DatabaseSync) {
   // ordering signal and must never erase a duplicate or an older clinical arrival.
   return [...persisted, ...drafts].map(({ criadoEm: _criadoEm, ...item }) => item);
 }
-export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown) {
-  const civil = dataCivilDoServico(agora, "-03:00");
+export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown, offsetServico = FUSO_SERVICO) {
+  const civil = dataCivilDoServico(agora, offsetServico);
   const parsedRuleset = SalaoRuleset.safeParse(rulesetInput);
   const triagensTodas = lerTriagens(db);
-  const agendaHoje = lerAgenda(db, agora).itens;
+  const agendaHoje = lerAgenda(db, agora, offsetServico).itens;
   const agendaOrdem = new Map(agendaHoje.map((item, index) =>
     [JSON.stringify([item.patientId, item.encounterId]), index] as const));
   const agendaCandidatos = agendaHoje.flatMap((item) => {
@@ -499,7 +629,7 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown)
       estadoRascunho: p.draftId ? "RASCUNHO" as const : null })), ...agendaCandidatos], cartoes: [], decisoes };
   }
   const doDia = triagensTodas.filter((item) => {
-    const data = dataCivilDoServico(item.chegadaEm, "-03:00");
+    const data = dataCivilDoServico(item.chegadaEm, offsetServico);
     return data.estado === "OK" && data.dataCivil === civil.dataCivil;
   });
   const porPaciente = new Map<string, typeof doDia>();
@@ -513,15 +643,21 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown)
     requisitosAplicaveis: ["pas", "fc", "spo2", "tempDecimos", "hbDgDl", "anc", "plq", "coletaHemograma", "ecog", "grauCtcae"] };
   const calculados = triagens.flatMap((p) => {
     if (!p.paciente || !p.fontes[0]) return [];
-    const base = avaliarTriagem(p.triagem, contexto, ruleset);
-    const portao = avaliarCorteSalao(p.triagem, { pad: null, crCentesimos: null }, ruleset);
+    const fontesSalao = coletarFontesSalao({eventos:allEvents,patientId:p.patientId,encounterId:p.encounterId,hoje:civil.dataCivil,agora,offsetServico});
+    const base = avaliarTriagem(p.triagem, {...contexto,prescricaoVigente:fontesSalao.prescricaoVigente}, ruleset);
+    const brutoPortao = avaliarCorteSalao(p.triagem, { pad: fontesSalao.pad, crCentesimos: fontesSalao.creatininaCentesimos }, ruleset);
+    // D-W9-82: ausência do dado não coletado no salão vira aviso, sem encaminhamento universal.
+    // Plausibilidade/conflito de dados presentes e os outros critérios não são suprimidos.
+    const portao = {...brutoPortao,pendentes:brutoPortao.pendentes.filter(m =>
+      !(fontesSalao.creatininaCentesimos === null && m.codigo === "pendente.corteSalao.cr.alta")
+      && !(fontesSalao.pad === null && m.codigo === "pendente.corteSalao.pad.alta"))};
     const temCorte = base.cortes.length > 0 || portao.motivos.length > 0;
     const temPendencia = base.pendentes.length > 0 || portao.pendentes.length > 0;
     const destino = temCorte || temPendencia ? "FILA_MEDICO" as const : base.destino;
     return [{ card: { entrada: { patientId: p.patientId, ecog: p.triagem.ecog.valor,
       recurso: p.triagem.recurso, idadeAnos: p.triagem.idadeAnos, chegadaEm: p.chegadaEm },
       destino, emergencia: base.emergencia, temCorte, nome: p.paciente.nome },
-      base, portao, fonte: p.fontes[0] }];
+      base, portao, fonte: p.fontes[0], avisos:fontesSalao.avisos.map(texto=>({patientId:p.patientId,texto})) }];
   });
   const ordenadas = ordenarFila(calculados.map((x) => x.card.entrada), ruleset);
   const byPatient = new Map(calculados.map((x) => [x.card.entrada.patientId, x.card]));
@@ -548,6 +684,7 @@ export function lerSalao(db: DatabaseSync, agora: string, rulesetInput: unknown)
   });
   return { hoje: civil.dataCivil, ruleset, contexto, fonte: calculados[0]?.fonte ?? null,
     cartoes, pacientes: pacientesOrdenados, decisoes: decisionesVisiveis,
+    avisos:calculados.flatMap(x=>x.avisos),
     estado: "PARCIAL" as const,
     pendencias: [...calculados.flatMap((x) => [...x.base.pendentes, ...x.portao.pendentes]),
       ...pacientesComTriagemDuplicada.map(() => ({ codigo: "TRIAGEM_DUPLICADA", estado: "PENDENTE" as const }))] };

@@ -12,6 +12,8 @@ interface Item {
   severidade: null;
   gravidadeEditorial?: string;
   csvN?: number;
+  regraId?: string;
+  motivoInativo?: string;
 }
 
 const json = JSON.parse(readFileSync("corpus/rulesets/interacoes.v1.json", "utf8")) as {
@@ -19,21 +21,22 @@ const json = JSON.parse(readFileSync("corpus/rulesets/interacoes.v1.json", "utf8
 };
 
 describe("GROK-08 semaforoInteracoes", () => {
-  it("o catálogo importado continua todo inativo e não acrescenta par com TKI", () => {
-    expect(json.interacoes).toHaveLength(34);
-    expect(json.interacoes.every((i) => i.ativo === false)).toBe(true);
-    expect(json.interacoes.every((i) => i.fonte.referencia === "[VERIFICAR]")).toBe(true);
-    expect(json.interacoes.every((i) => i.mecanismo === null && i.severidade === null)).toBe(true);
+  it("F0-COMPLEMENTO preserva34 legados e ativa somente novos pares com suporte aplicável", () => {
+    expect(json.interacoes.filter(i => !i.regraId)).toHaveLength(34);
+    expect(json.interacoes.filter(i => i.regraId)).toHaveLength(11);
+    expect(json.interacoes.filter((i) => i.ativo)).toHaveLength(8);
+    expect(json.interacoes.some(i => i.ativo && i.drogaA === "capecitabina" && i.drogaBouClasse === "varfarina")).toBe(true);
+    expect(json.interacoes.filter((i) => !i.ativo && !i.regraId).every((i) => i.fonte.referencia === "[VERIFICAR]")).toBe(true);
+    expect(json.interacoes.filter(i => !i.regraId).every((i) => i.mecanismo === null && i.severidade === null)).toBe(true);
     const pares = json.interacoes.map((i) => `${i.drogaA}×${i.drogaBouClasse}`);
     expect(pares.filter((p) => p.includes("TKI"))).toHaveLength(2);
     expect(json.interacoes.filter((i) => i.csvN !== undefined)).toHaveLength(30);
     expect(json.interacoes.some((i) => i.gravidadeEditorial?.startsWith("Contraindicada"))).toBe(true);
   });
 
-  it("capecitabina e varfarina no arquivo real ficam PENDENTE e não bloqueiam", () => {
+  it("capecitabina e varfarina no arquivo real ficam VERMELHO e não bloqueiam", () => {
     const r = semaforoInteracoes({ medicamentos: ["capecitabina", "varfarina"] }, json);
-    expect(r.estado).toBe("PENDENTE");
-    expect(r.estado).not.toBe("VERMELHO");
+    expect(r.estado).toBe("VERMELHO");
     expect(r.bloqueiaSalvar).toBe(false);
     expect(r.motivo).not.toContain("sem interação");
   });
@@ -64,7 +67,7 @@ describe("GROK-08 semaforoInteracoes", () => {
     const ativo = {
       ...base,
       ativo: true,
-      fonte: { tipo: "LITERATURA", referencia: base.fonte.referencia, trecho: "trecho que sustenta (K-27)" },
+      fonte: { tipo: "LITERATURA", referencia: "fonte sintética para teste", trecho: "trecho que sustenta (K-27)" },
     };
     const r = semaforoInteracoes(
       { medicamentos: [drogaA, drogaBouClasse] },
@@ -76,7 +79,7 @@ describe("GROK-08 semaforoInteracoes", () => {
     expect(r.motivo).toContain("D-W9-22d");
   });
 
-  it("sem interação só com checagem completa e ruleset ativo, sem par casado", () => {
+  it("F0-COMPLEMENTO: boolean de checagem e regra alheia não provam cobertura", () => {
     const rs = {
       interacoes: [{
         drogaA: "capecitabina",
@@ -94,8 +97,8 @@ describe("GROK-08 semaforoInteracoes", () => {
       ],
       checagemCompleta: true,
     }, rs);
-    expect(completa.estado).toBe("VERDE");
-    expect(completa.motivo).toContain("sem interação");
+    expect(completa.estado).toBe("PENDENTE");
+    expect(completa.motivo).toContain("cobertura documental");
     expect(completa.bloqueiaSalvar).toBe(false);
   });
 });

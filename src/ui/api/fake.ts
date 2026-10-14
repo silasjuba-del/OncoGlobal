@@ -27,6 +27,7 @@ import type { CabecalhoVisao } from "../consulta/viewmodels.js";
 import type { AfirmacaoVisao } from "../evidencia/CardEvidencia.js";
 import type { CartaoSalaoVisao } from "../salao/QuadroSalao.js";
 import { ErroPorta, type AgendaVisao, type CaixaCanalVisao, type ChatSetorVisao, type ConsultaVisao, type ItemApacVisao, type LotesApacVisao, type MensagemCanalVisao, type PortaConsulta, type SalaoVisao, type SetorChat } from "./porta.js";
+import type { FlashPreparada } from "./porta.js";
 
 export const HOJE = "2026-10-05";
 const AGORA = "2026-10-05T08:00:00-03:00";
@@ -211,7 +212,7 @@ function contatoNaoVinculado(): Contato {
   return {
     contatoId: "ct-canal",
     canal: "WHATSAPP_PESSOAL",
-    endereco: "+55 83 90000-0006",
+    endereco: "contato-sintetico-demo",
     patientId: null,
     relacao: "DESCONHECIDO",
     vinculadoEm: null,
@@ -486,6 +487,19 @@ function itemApac(
 /** Porta em memória. Seis pacientes sintéticos; nenhum dado real. */
 export function criarPortaFalsa(): PortaConsulta {
   const fichas = montarFichas();
+  const preparacoes = new Map<string,{payload:string;resultado:FlashPreparada}>();
+  const documentosPreparados = new Map<string,{patientId:string;encounterId:string;tumorLotId:string|null;doc:DocumentoBundleVisao;texto:string}>();
+  const confirmacoes = new Map<string,string>();
+  const efeitos = new Map<string,string>();
+  const rascunhos = new Map<string,NonNullable<NonNullable<ConsultaVisao["flash"]>["rascunho"]>>();
+  const chaveContexto=(p:{patientId:string;encounterId:string;tumorLotId:string|null})=>JSON.stringify([p.patientId,p.encounterId,p.tumorLotId]);
+  let sequenciaDocumento=0;
+  const contextoValido=(p:{patientId:string;encounterId:string;tumorLotId:string|null})=>{
+    const atual=fichas.get(p.patientId);
+    if(!atual || atual.consulta.encounterId!==p.encounterId || (p.tumorLotId!==null&&!atual.consulta.cabecalho.lotes.some(l=>l.tumorLotId===p.tumorLotId)))throw new ErroPorta("CONTEXTO_DIVERGENTE");
+    return atual;
+  };
+  const hashConteudo=async(conteudo:unknown)=>Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(JSON.stringify(conteudo))))).map(v=>v.toString(16).padStart(2,"0")).join("");
   const ordemAgenda = [
     { id: ID.pendente, horario: "08:00", pronta: false },
     { id: ID.verde, horario: "08:30", pronta: true },
@@ -670,18 +684,26 @@ export function criarPortaFalsa(): PortaConsulta {
   }
 
   return {
-    // W12-F4: o fake só devolve formas coerentes; não grava nada.
+    // Estado sintético por instância: o fake respeita o percurso preparar/revisar/assinar.
     async salvarRascunhoFlash(pedido) {
-      return { codigo: "RASCUNHO_SALVO" as const, draftId: `flash-rascunho-${pedido.patientId}`,
-        revision: (pedido.expectedRevision ?? -1) + 1 };
+      contextoValido(pedido);const rascunho=rascunhos.get(chaveContexto(pedido));
+      if((rascunho?.revision??null)!==pedido.expectedRevision)throw new ErroPorta("REVISAO_RASCUNHO_CONFLITANTE");
+      const resultado={codigo:"RASCUNHO_SALVO" as const,draftId:`flash-rascunho-${pedido.patientId}`,revision:(pedido.expectedRevision??-1)+1};
+      rascunhos.set(chaveContexto(pedido),{draftId:resultado.draftId,revision:resultado.revision,plano:structuredClone(pedido.plano)});
+      return resultado;
     },
-    async prepararFinalizacaoFlash() {
-      return {
-        registros: [{ id: "flash-doc-sintetico", expectedRevision: 0 }],
-        documentos: [{ documentId: "flash-doc-sintetico", documentVersion: 1, titulo: "Evolução da Consulta Flash",
-          tipoDocumento: "FLASH_EVOLUCAO" }],
-        alvoImpressao: null,
-      };
+    async prepararFinalizacaoFlash(pedido) {
+      contextoValido(pedido);
+      const chave=JSON.stringify([pedido.patientId,pedido.encounterId,pedido.tumorLotId,pedido.idempotencyKey]),payload=JSON.stringify(pedido);
+      const anterior=preparacoes.get(chave);if(anterior){if(anterior.payload!==payload)throw new ErroPorta("IDEMPOTENCY_CONFLICT");return structuredClone(anterior.resultado);}
+      const documentId=sequenciaDocumento++===0?"flash-doc-sintetico":`flash-doc-sintetico-${sequenciaDocumento}`;
+      const texto=`Evolução sintética para revisão\n${JSON.stringify(pedido.plano,null,2)}`;
+      const conteudo={texto,contexto:{patientId:pedido.patientId,encounterId:pedido.encounterId,tumorLotId:pedido.tumorLotId}};
+      const doc:DocumentoBundleVisao={documentId,documentVersion:1,draftId:documentId,titulo:"Evolução da Consulta Flash",preMarcado:false,visivel:true,conteudo,conteudoHash:await hashConteudo(conteudo)};
+      documentosPreparados.set(documentId,{patientId:pedido.patientId,encounterId:pedido.encounterId,tumorLotId:pedido.tumorLotId,doc,texto});
+      const resultado:FlashPreparada={registros:[{id:documentId,expectedRevision:0}],documentos:[{documentId,documentVersion:1,titulo:doc.titulo,tipoDocumento:"FLASH_EVOLUCAO"}],
+        alvoImpressao:{tipo:"DOCUMENTO",id:documentId,versao:1}};
+      preparacoes.set(chave,{payload,resultado});return structuredClone(resultado);
     },
 
     async login(senha: string) {
@@ -692,36 +714,71 @@ export function criarPortaFalsa(): PortaConsulta {
     async confirmar(bloco) {
       const parsed = ConfirmarBloco.safeParse(bloco);
       if (!parsed.success || "medicoId" in bloco) throw new ErroPorta("PAYLOAD_INVALIDO");
-      return { codigo: "CONFIRMADO", resultRef: "ref-sintetica" };
+      const atual=contextoValido(bloco),chave=JSON.stringify([bloco.patientId,bloco.encounterId,bloco.tumorLotId,bloco.idempotencyKey]),payload=JSON.stringify(bloco);
+      const anterior=confirmacoes.get(chave);if(anterior){if(anterior!==payload)throw new ErroPorta("IDEMPOTENCY_CONFLICT");return {codigo:"REPLAY",resultRef:"ref-sintetica"};}
+      if(!bloco.registros.every(r=>{const doc=documentosPreparados.get(r.id);return doc?doc.patientId===bloco.patientId&&doc.encounterId===bloco.encounterId&&doc.tumorLotId===bloco.tumorLotId&&r.expectedRevision===0
+        :atual.consulta.fechamento.registros.some(e=>e.id===r.id&&e.expectedRevision===r.expectedRevision);}))throw new ErroPorta("REGISTRO_DIVERGENTE");
+      const history=[...(atual.consulta.historicoDocumentos??[])];
+      for(const exibido of bloco.documentosExibidos){
+        const preparado=documentosPreparados.get(exibido.documentId),legado=atual.consulta.fechamento.documentos.find(d=>d.documentId===exibido.documentId&&d.documentVersion===exibido.documentVersion);
+        if(preparado&&(preparado.patientId!==bloco.patientId||preparado.encounterId!==bloco.encounterId||preparado.tumorLotId!==bloco.tumorLotId||preparado.doc.documentVersion!==exibido.documentVersion))throw new ErroPorta("DOCUMENTO_DIVERGENTE");
+        if(preparado&&!bloco.registros.some(r=>r.id===preparado.doc.draftId))throw new ErroPorta("REGISTRO_DIVERGENTE");
+        if(!preparado&&!legado)throw new ErroPorta("DOCUMENTO_AUSENTE");
+        if(history.some(d=>d.documentId===exibido.documentId&&d.documentVersion===exibido.documentVersion))throw new ErroPorta("FLASH_JA_FINALIZADA");
+        history.push({eventId:`signed-${exibido.documentId}`,documentId:exibido.documentId,documentVersion:exibido.documentVersion,titulo:preparado?.doc.titulo??legado!.titulo,
+          texto:preparado?.texto??"Conteúdo sintético revisado",assinadoEm:AGORA,autorId:AUTOR,encounterId:bloco.encounterId,tumorLotId:bloco.tumorLotId});
+      }
+      confirmacoes.set(chave,payload);atual.consulta={...atual.consulta,historicoDocumentos:history};
+      return { codigo: "GRAVADA", resultRef: "ref-sintetica" };
     },
 
     async acao(intent) {
       const parsed = ActionIntent.safeParse(intent);
       if (!parsed.success || "medicoId" in intent) throw new ErroPorta("PAYLOAD_INVALIDO");
+      const chave=JSON.stringify([intent.escopo.patientId,intent.escopo.encounterId,intent.idempotencyKey]),payload=JSON.stringify(intent);
+      const anterior=efeitos.get(chave);if(anterior){if(anterior!==payload)throw new ErroPorta("IDEMPOTENCY_CONFLICT");return {codigo:parsed.data.verbo,decisao:"REPLAY"};}
+      if(intent.verbo==="IMPRIMIR"){
+        const doc=fichas.get(intent.escopo.patientId??"")?.consulta.historicoDocumentos?.find(d=>d.documentId===intent.objeto.id&&d.documentVersion===intent.objeto.versao&&d.encounterId===intent.escopo.encounterId);
+        if(!doc)throw new ErroPorta("DOCUMENTO_ASSINADO_AUSENTE");
+      }
+      efeitos.set(chave,payload);
       return { codigo: parsed.data.verbo, decisao: "EXECUTADA" };
     },
 
     async exibirBundle(pedido) {
       const atual = fichas.get(pedido.patientId);
       if (!atual) throw new ErroPorta("PACIENTE_AUSENTE");
+      contextoValido(pedido);
+      if(pedido.draftIds?.length){
+        const docs=pedido.draftIds.map(id=>documentosPreparados.get(id));
+        if(docs.some(d=>!d||d.patientId!==pedido.patientId||d.encounterId!==pedido.encounterId||d.tumorLotId!==pedido.tumorLotId))throw new ErroPorta("DOCUMENTO_DIVERGENTE");
+        return {patientId:pedido.patientId,encounterId:pedido.encounterId,documentos:docs.map(d=>structuredClone(d!.doc))};
+      }
       return {
         patientId: pedido.patientId,
         encounterId: pedido.encounterId,
-        documentos: atual.consulta.fechamento.documentos.map((d) => ({ ...d })),
+        documentos: await Promise.all(atual.consulta.fechamento.documentos.map(async(d) => {
+          const conteudo={texto:"Conteúdo sintético revisado",contexto:{patientId:pedido.patientId,encounterId:pedido.encounterId,tumorLotId:pedido.tumorLotId}};
+          return {...d,draftId:atual.consulta.fechamento.registros[0]?.id??d.documentId,conteudo,conteudoHash:await hashConteudo(conteudo)};
+        })),
       };
     },
 
     // [SERVIDOR_PENDENTE]
-    async carregarConsulta(patientId, tumorLotId) {
+    async carregarConsulta(patientId, tumorLotId, encounterId) {
       const atual = fichas.get(patientId);
       if (!atual) throw new ErroPorta("PACIENTE_AUSENTE");
+      if (!encounterId || encounterId !== atual.consulta.encounterId) throw new ErroPorta("ENCONTRO_EXPLICITO_OBRIGATORIO");
+      const lote= tumorLotId===undefined?atual.consulta.tumorLotId:tumorLotId;
+      const rascunho=rascunhos.get(chaveContexto({patientId,encounterId,tumorLotId:lote}));
+      const consulta=atual.consulta.flash?{...atual.consulta,flash:{...atual.consulta.flash,...(rascunho?{rascunho}: {})}}:atual.consulta;
       if (tumorLotId !== undefined) {
         if (tumorLotId !== null && !atual.consulta.cabecalho.lotes.some((lote) => lote.tumorLotId === tumorLotId))
           throw new ErroPorta("PAYLOAD_INVALIDO");
-        return { ...atual.consulta, tumorLotId,
+        return { ...consulta, tumorLotId,
           cabecalho: { ...atual.consulta.cabecalho, loteSelecionadoId: tumorLotId } };
       }
-      return atual.consulta;
+      return consulta;
     },
 
     // [SERVIDOR_PENDENTE]

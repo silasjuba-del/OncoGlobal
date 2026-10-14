@@ -1,5 +1,6 @@
 // D-W9-34b · FEVE abaixo do limite, com antraciclina ou anti-HER2 programado, é alerta.
 // PROVISORIO-W10: trocar EcoFeve / FarmacoProgramado por src/contracts/w10/ quando a ficha publicar o eco e a classe.
+import { DataCivil } from "../contracts/base.js";
 
 export interface EcoFeve {
   percentual: number | null;
@@ -15,6 +16,7 @@ export interface FarmacoProgramado {
 export interface EntradaAlertaFeve {
   feve: EcoFeve;
   programados: readonly FarmacoProgramado[];
+  hoje?: string;
 }
 
 export interface ClasseCardiotoxica {
@@ -156,7 +158,7 @@ function motivo(codigo: string, corpo: string, rs: RulesetAlertaFeve): MotivoFev
 
 function percentualUtil(valor: number | null): number | null {
   if (valor === null) return null;
-  if (typeof valor !== "number" || !Number.isFinite(valor) || valor < 0 || valor > 100) return null;
+  if (typeof valor !== "number" || !Number.isFinite(valor) || valor <= 0 || valor > 100) return null;
   return valor;
 }
 
@@ -181,6 +183,14 @@ export function alertarFeve(entrada: EntradaAlertaFeve, rs: RulesetAlertaFeve): 
   }
   const nomes = casados.map((c) => c.nome).join(", ");
   const classes = [...new Set(casados.map((c) => c.classe))].join(", ");
+  const pendentes: MotivoFeve[] = [];
+  if (metodo === null) pendentes.push(motivo("pendente.feve.metodo", `método da FEVE ausente com ${nomes} programado`, rs));
+  if (data === null) pendentes.push(motivo("pendente.feve.data", `data da FEVE ausente com ${nomes} programado`, rs));
+  if (data !== null && (!DataCivil.safeParse(data).success
+    || (entrada.hoje !== undefined && (!DataCivil.safeParse(entrada.hoje).success || data > entrada.hoje)))) {
+    return {...base,estado:"PENDENTE",percentual:null,motivos:[],pendentes:[...pendentes,
+      motivo("pendente.feve.dataInvalida","data da FEVE inválida ou futura; conferir fonte",rs)]};
+  }
   const bruto = entrada.feve.percentual;
   if (bruto === null) {
     return {
@@ -188,7 +198,7 @@ export function alertarFeve(entrada: EntradaAlertaFeve, rs: RulesetAlertaFeve): 
       estado: "PENDENTE",
       percentual: null,
       motivos: [],
-      pendentes: [motivo("pendente.feve.ausente", `FEVE ausente com ${nomes} programado (${classes}); não vira 0`, rs)],
+      pendentes: [motivo("pendente.feve.ausente", `FEVE ausente com ${nomes} programado (${classes}); não vira 0`, rs), ...pendentes],
     };
   }
   const percentual = percentualUtil(bruto);
@@ -198,13 +208,10 @@ export function alertarFeve(entrada: EntradaAlertaFeve, rs: RulesetAlertaFeve): 
       estado: "PENDENTE",
       percentual: null,
       motivos: [],
-      pendentes: [motivo("pendente.feve.valor", `FEVE ilegível com ${nomes} programado (${classes}); não vira 0`, rs)],
+      pendentes: [motivo("pendente.feve.valor", `FEVE inválida (${String(bruto)}) com ${nomes} programado (${classes}); conferir valor`, rs), ...pendentes],
     };
   }
   if (percentual < rs.limiteExclusivo) {
-    const pendentes: MotivoFeve[] = [];
-    if (metodo === null) pendentes.push(motivo("pendente.feve.metodo", `método da FEVE ausente com ${nomes} programado`, rs));
-    if (data === null) pendentes.push(motivo("pendente.feve.data", `data da FEVE ausente com ${nomes} programado`, rs));
     const metodoTxt = metodo ?? "método ausente";
     const dataTxt = data ?? "data ausente";
     return {
@@ -219,5 +226,5 @@ export function alertarFeve(entrada: EntradaAlertaFeve, rs: RulesetAlertaFeve): 
       )],
     };
   }
-  return { ...base, estado: "SEM_ALERTA", percentual, motivos: [], pendentes: [] };
+  return { ...base, estado: pendentes.length ? "PENDENTE" : "SEM_ALERTA", percentual, motivos: [], pendentes };
 }

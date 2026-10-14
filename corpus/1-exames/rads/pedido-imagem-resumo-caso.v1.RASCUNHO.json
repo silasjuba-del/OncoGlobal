@@ -1,0 +1,69 @@
+{
+  "header": {
+    "id": "pedido-imagem-resumo-caso",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-F1-04 (docs/DECISOES.md) — pedido sai com resumo do caso; ACR Appropriateness Criteria + iRefer/RCR 9ª ed. como referencial de conteúdo",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "finalidade": "Modelo de pedido de exame de imagem com resumo do caso em até 5 LINHAS, gerado pelo app a partir de fatos confirmados e CONFERIDO com 1 clique pelo médico.",
+  "estrutura": {
+    "resumoDoCaso_max5linhas": {
+      "fatoConfirmado": [
+        "diagnóstico e estadiamento confirmados",
+        "tratamento atual (esquema, data do último ciclo quando aplicável)",
+        "tratamento anterior (QT/RT/hormonioterapia)",
+        "cirurgia e radioterapia relevantes (o que, quando)",
+        "último exame comparável com data (número/protocolo)"
+      ],
+      "decisaoMedica": [
+        "PERGUNTA CLÍNICA específica (o que o radiologista precisa responder)"
+      ],
+      "regra": "Não inferir informação ausente; campo sem dado fica em branco — nunca 'provável'/'há tempos'."
+    },
+    "exameSolicitado": "Somente por ID do catálogo (1-exames/catalogo) — nunca nome livre",
+    "conferenciaMedica": "Bloco de 1 clique antes da emissão (médico confere resumo + pergunta + identidade)"
+  },
+  "referencialConteudo": {
+    "fonte1": {
+      "tipo": "DIRETRIZ",
+      "referencia": "ACR Appropriateness Criteria (acr.org)",
+      "trecho": "evidence-based guidelines... complexity and severity of a patient's clinical condition should dictate the selection",
+      "edicao": "página vigente"
+    },
+    "fonte2": {
+      "tipo": "DIRETRIZ",
+      "referencia": "iRefer/RCR 9ª ed. (irefer.org.uk)",
+      "trecho": "recommend the most appropriate investigation to address a clinical question... Has it been done already?",
+      "edicao": "9ª"
+    },
+    "ressalva": "Documento específico do CBR (cbr.org.br) sobre conteúdo obrigatório do pedido: SEM_FONTE (site inacessível; leads: Critérios de Adequação CBR, Parecer CFM 23/2019)."
+  },
+  "privacidade": "Sem PHI além do que o pedido já exige (D-F1-04). Documento persistido e reaberto sem duplicação indevida (integração — Codex).",
+  "pendencias": [
+    "Fonte CBR (ou aprovar ACR/iRefer como referencial)",
+    "Vínculo do bloco comparável ao último exame por ID do laudo"
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-F1-04 (docs/DECISOES.md) — pedido sai com resumo do caso; ACR Appropriateness Criteria + iRefer/RCR 9ª ed. como referencial de conteúdo",
+      "trecho": "Todo pedido de exame de imagem sai automaticamente com o resumo do caso",
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  }
+}

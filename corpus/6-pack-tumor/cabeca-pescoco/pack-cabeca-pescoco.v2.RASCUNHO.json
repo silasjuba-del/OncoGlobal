@@ -1,0 +1,2312 @@
+{
+  "header": {
+    "id": "pack-cabeca-pescoco",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "SBOC — Cabeça e pescoço: doença localizada e localmente avançada (2025) + CCP recorrente e metastática v5 (2026)",
+      "trecho": "Cabeça e pescoço: doença localizada e localmente avançada",
+      "edicao": "SBOC 2025 (localizado) / v5 2026 (R/M)"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Carcinoma epidermoide (CEC) de cabeça e pescoço — cavidade oral, orofaringe, laringe, hipofaringe e nasofaringe",
+    "cid10": [
+      "C00-C14",
+      "C30-C32"
+    ],
+    "subtipos": [
+      "cavidade oral",
+      "orofaringe p16-negativo",
+      "orofaringe p16-positivo (HPV)",
+      "laringe (supraglote, glote, subglote)",
+      "hipofaringe",
+      "nasofaringe (OMS tipos 1-3)"
+    ],
+    "cenarios": [
+      "localizado",
+      "localmente_avancado_ressecavel",
+      "localmente_avancado_irressecavel",
+      "adjuvante",
+      "inducao",
+      "recorrente",
+      "metastatico"
+    ],
+    "limitesAplicabilidade": "Não cobre glândulas salivares, seios paranasais específicos, pele, tireoide nem primário oculto além do citado. Estadiamento AJCC 8ª ed., mas a SBOC registra que o tratamento ainda se baseia na AJCC 7ª ed."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_PESCOCO",
+        "rotulo": "TC de face e pescoço com contraste",
+        "indicacao": "universal",
+        "quando": "Estádios I-II: considerar; estádios III-IV: indicada",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 13,
+          "trecho": "TC de face e pescoço (considerar complementar com RM de face e pescoço);",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_COLUNA_CERVICAL",
+        "rotulo": "RM de face/pescoço (catálogo: RM coluna cervical/pescoço)",
+        "indicacao": "condicional",
+        "quando": "Complementar à TC; preferência em seios paranasais, fossas nasais e nasofaringe",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 15,
+          "trecho": "exame de preferência para tumores de seios parana -",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Catálogo não tem item específico 'RM de face'; usado RM_COLUNA_CERVICAL (coluna cervical/pescoço). Confirmar código SIGTAP de RM de face.",
+        "pendencia": "CONFERIR_EQUIVALENCIA_CATALOGO"
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "indicacao": "condicional",
+        "quando": "LFN multiestação, cadeia cervical inferior ou alto grau; rastreio de 2º primário em tabagista",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 13,
+          "trecho": "Considerar TC de tórax para pacientes com envolvimento linfonodal multiestação",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT FDG",
+        "indicacao": "condicional",
+        "quando": "Estádios III-IV (T3-T4 ou ≥N1), se disponível; ênfase em orofaringe HPV",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 13,
+          "trecho": "O PET/CT é preferível na doença localmente avançada",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [
+      {
+        "catalogoId": "VIDEONASOLARINGOSCOPIA",
+        "rotulo": "Videonasofaringolaringoscopia com biópsia",
+        "indicacao": "universal",
+        "quando": "Laringe e hipofaringe",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 14,
+          "trecho": "Videonasofaringolaringoscopia (com biópsia sempre que exequível);",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Item do catálogo está SEM_CODIGO_SUS."
+      },
+      {
+        "catalogoId": "LARINGOSCOPIA",
+        "rotulo": "Laringoscopia direta sob anestesia geral",
+        "indicacao": "condicional",
+        "quando": "Avaliação de extensão e biópsia em laringe/hipofaringe",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 14,
+          "trecho": "Pode ser necessário realizar laringoscopia direta, sob anestesia geral,",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "EDA",
+        "rotulo": "Esofagoscopia",
+        "indicacao": "condicional",
+        "quando": "Hipofaringe com limite inferior não avaliável e plano cirúrgico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 14,
+          "trecho": "Esofagoscopia: se o limite inferior do tumor não puder ser avaliado pelos",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "endoscopica",
+          "quando": "Biópsia do primário antes de qualquer planejamento terapêutico",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+            "pagina": 13,
+            "trecho": "ter diagnóstico anatomopatológico confir-",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "PAAF",
+          "quando": "LFN cervical suspeito (prática habitual)",
+          "catalogoId": "BIOPSIA_GANGLIO",
+          "fonte": null,
+          "pendencia": "SEM_FONTE"
+        }
+      ],
+      "laudoDeveConter": [
+        "subsítio anatômico",
+        "profundidade de invasão (cavidade oral)",
+        "margens",
+        "extensão extranodal (EEN)",
+        "invasão perineural e embolização vascular",
+        "número e tamanho de LFN",
+        "p16 por IHQ em orofaringe",
+        "histologia OMS em nasofaringe"
+      ],
+      "molecular": [
+        {
+          "alvo": "p16 (surrogate de HPV)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "Orofaringe (e LFN cervical de primário oculto)",
+          "consequencia": "Positivo se ≥70% das células tumorais; define estadiamento AJCC 8 específico de orofaringe HPV+. Tratamento em geral igual ao HPV-negativo.",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+            "pagina": 4,
+            "trecho": "imuno-histoquímica com expressão de p16 em 70% ou mais das células tumorais",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "HPV de alto risco (confirmação)",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
+          "quandoPedir": "condicional",
+          "cenario": "Orofaringe com p16 discordante/duvidoso",
+          "consequencia": "Hibridização in situ para HPV não é rotina; foco no p16",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026/slides-pro-2026/54 - Aula 54 - CCP - Tratamento da doença recidivada metastática",
+            "pagina": 23,
+            "trecho": "Não há necessidade de realizar hibridização in situ para HPV rotineiramente",
+            "estado": "INFERIDO"
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "HPV_MOLECULAR"
+        },
+        {
+          "alvo": "EBV (EBER)",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "Nasofaringe / LFN cervical T0",
+          "consequencia": "Hibridização in situ para correlação com EBV; IHQ não recomendada",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+            "pagina": 14,
+            "trecho": "Pode se indicar hibridização in situ na amostra tumoral para avaliar",
+            "estado": "VERIFICADO"
+          },
+          "pendenciaClasse": {
+            "texto": "Hibridização in situ para EBV sem id no catálogo.",
+            "classe": "DECISAO_CLINICA_DR_SILAS",
+            "buscasFeitas": [
+              "catálogo v1.1",
+              "SIGTAP 09/2026"
+            ]
+          }
+        },
+        {
+          "alvo": "PD-L1 CPS",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "Recorrente/metastático (exceto nasofaringe)",
+          "consequencia": "CPS ≥1 vs 0 seleciona pembrolizumabe vs Extreme/TPEx na diretriz; no SUS esses regimes não estão incorporados (Portaria SECTICS 41/2024)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "PD-L1 CPS ≥ 1",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª (2017); tratamento ainda baseado na 7ª",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+      "pagina": 4,
+      "trecho": "O estadiamento TNM deve seguir os critérios da AJCC 8ª edição (2017).",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "TC_PESCOCO",
+        "rotulo": "TC face e pescoço",
+        "cenario": "III-IV",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 13,
+          "trecho": "TC de face e pescoço (considerar complementar com RM de face e pescoço);",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "cenario": "III-IV selecionados",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 13,
+          "trecho": "Considerar TC de tórax para pacientes com envolvimento linfonodal multiestação",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT",
+        "cenario": "T3-T4 ou ≥N1",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 13,
+          "trecho": "O PET/CT é preferível na doença localmente avançada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RX_TORAX_PA_PERFIL",
+        "rotulo": "RX de tórax (NÃO recomendado para metástase pulmonar)",
+        "cenario": "todos",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 15,
+          "trecho": "A radiografia simples de tórax não é recomendada na avaliação",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "Estádios I-II",
+        "conduta": "Modalidade única (cirurgia ou RT conforme subsítio)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 18,
+          "trecho": "Doença inicial (estádios I e II)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Localmente avançado ressecável (III-IV)",
+        "conduta": "Cirurgia + esvaziamento ± RT/QT adjuvante, ou preservação de órgão com RT + QT",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 19,
+          "trecho": "Doença localmente avançada ressecável (estádios III e IV)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Localmente avançado irressecável (T4b, LFN irressecável)",
+        "conduta": "RT + CDDP alta dose (ECOG 0-1); RT + docetaxel/cetuximabe ou RT isolada (ECOG 2 ou inelegível); suporte (ECOG >2)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 21,
+          "trecho": "Preferencial: CDDP alta dose",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Orofaringe p16-positivo",
+        "conduta": "Estadiamento próprio AJCC 8; tratamento em geral conforme HPV-negativo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 25,
+          "trecho": "Em geral, tratamento conforme HPV-negativo;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Recorrente/metastático",
+        "conduta": "Resgate cirúrgico se possível; senão QT paliativa por linha e ECOG",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Considerar cirurgia de resgate ou salvamento.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "TSH",
+          "uso": "Anual após RT de cabeça e pescoço (hipotireoidismo)",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+            "pagina": 41,
+            "trecho": "TSH anual:",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "CEA",
+        "marcadores tumorais séricos em geral (sem fonte de uso)"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "Cavidade oral I-II",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia com margens 3D",
+          "esvaziamento cervical eletivo se espessura >3 mm",
+          "RT ± QT adjuvante por fatores de risco"
+        ],
+        "criterio": "RT isolada só se inoperável ou recusa",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 18,
+          "trecho": "Cirurgia com ressecção ampla com margens tridimensionais",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Adjuvante (todos os subsítios exceto nasofaringe)",
+        "intencao": "curativa",
+        "modalidades": [
+          "RT adjuvante",
+          "RT + CDDP"
+        ],
+        "criterio": "RT: pT3/pT4, pN2/pN3, invasão perineural ou vascular; RT + QT: margem comprometida ou EEN",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 18,
+          "trecho": "RT adjuvante: tumores pT3/pT4 ou com metástases LFN múltiplas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Orofaringe I-II",
+        "intencao": "curativa",
+        "modalidades": [
+          "RT isolada no primário e pescoço bilateral",
+          "cirurgia transoral + esvaziamento eletivo"
+        ],
+        "criterio": "Ipsilateral só em amígdala T1-T2 lateralizado N0",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 22,
+          "trecho": "RT isolada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Laringe T3 com preservação de órgão",
+        "intencao": "curativa",
+        "modalidades": [
+          "RT + CDDP",
+          "TPF indução → RT"
+        ],
+        "criterio": "Só com seguimento adequado e cirurgia de resgate em tempo hábil",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 29,
+          "trecho": "preservação de laringe deve ser feita somente se houver disponibili -",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Localmente avançado irressecável",
+        "intencao": "curativa",
+        "modalidades": [
+          "RT + QT concomitante",
+          "indução TPF → RT + QT (jovens, alto volume T4/N2b-N3)"
+        ],
+        "criterio": "ECOG 0-1",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 21,
+          "trecho": "Para pacientes jovens, sem comorbidades e com alto volume de doença",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Nasofaringe III-IV",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT indução → RT + CDDP",
+          "RT + CDDP alta dose ± QT adjuvante"
+        ],
+        "criterio": "Indução preferencial em T4 ou N2-N3",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 38,
+          "trecho": "Doença localmente avançada (estádios III e IV):",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Recorrente/metastático (exceto nasofaringe)",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT paliativa",
+          "reirradiação em casos selecionados"
+        ],
+        "criterio": "ECOG 0-1 poliQT; ECOG 2 agente único ou suporte; ECOG >2 suporte",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "QT com agente único ou cuidados de suporte",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "cabeca-pescoco-cddp100-rt-definitivo",
+        "nome": "Cisplatina alta dose concomitante à RT",
+        "cenario": "definitivo (concomitante à RT)",
+        "linha": "concomitante",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D22, D43",
+            "observacao": "durante a RT"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": 3,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Inelegível se ClCr <50 mL/min, ECOG >2, Child-Pugh B/C, plaquetas <100.000, neutrófilos <1.500, Hb <9 g/dL, ICC NYHA III-IV, perda auditiva relevante ou neuropatia sintomática (SBOC p.15).",
+        "fichaId": "FICHA.cabeca-e-pescoco.cisplatina-rxt__concomitante-a-rt@1.0.0",
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.006-1",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA A CIRURGIA OU CONCOMITANTE A RADIOTERAPIA DO CARCINOMA EPIDERMÓIDE",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Cenário definitivo: procedimento 03.04.04.006-1 (DDT 2015, p.22: procedimentos de QT prévia compatíveis com a concomitante). Cenário adjuvante (RT pós-operatória): enquadramento de faturamento a confirmar — a Portaria SAS/MS nº 20/2015 excluiu a QT adjuvante do CEC de cabeça e pescoço da Tabela SUS (DDT 2015, p.1)."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 16,
+          "trecho": "Cisplatina 100 mg/m² EV D1, D22 e D43",
+          "estado": "VERIFICADO"
+        },
+        "calendario": "D1, D22 e D43 durante a RT (curso único, não ciclo repetível)",
+        "calendarioExecutavel": false,
+        "motivoCalendario": "D1/D22/D43 não cabe em ciclo de 21 dias repetido",
+        "derivadoDe": "cabeca-pescoco-cddp100-rt",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "id": "cabeca-pescoco-cddp100-rt-adjuvante",
+        "nome": "Cisplatina alta dose concomitante à RT",
+        "cenario": "adjuvante pós-operatório (concomitante à RT)",
+        "linha": "concomitante",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D22, D43",
+            "observacao": "durante a RT"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": 3,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Inelegível se ClCr <50 mL/min, ECOG >2, Child-Pugh B/C, plaquetas <100.000, neutrófilos <1.500, Hb <9 g/dL, ICC NYHA III-IV, perda auditiva relevante ou neuropatia sintomática (SBOC p.15).",
+        "fichaId": "FICHA.cabeca-e-pescoco.cisplatina-rxt__concomitante-a-rt@1.0.0",
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.006-1",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA A CIRURGIA OU CONCOMITANTE A RADIOTERAPIA DO CARCINOMA EPIDERMÓIDE",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Cenário definitivo: procedimento 03.04.04.006-1 (DDT 2015, p.22: procedimentos de QT prévia compatíveis com a concomitante). Cenário adjuvante (RT pós-operatória): enquadramento de faturamento a confirmar — a Portaria SAS/MS nº 20/2015 excluiu a QT adjuvante do CEC de cabeça e pescoço da Tabela SUS (DDT 2015, p.1)."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 16,
+          "trecho": "Cisplatina 100 mg/m² EV D1, D22 e D43",
+          "estado": "VERIFICADO"
+        },
+        "calendario": "D1, D22 e D43 durante a RT (curso único, não ciclo repetível)",
+        "calendarioExecutavel": false,
+        "motivoCalendario": "D1/D22/D43 não cabe em ciclo de 21 dias repetido",
+        "derivadoDe": "cabeca-pescoco-cddp100-rt",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "id": "cabeca-pescoco-cddp40-semanal-rt-definitivo",
+        "nome": "Cisplatina semanal concomitante à RT",
+        "cenario": "definitivo (concomitante à RT)",
+        "linha": "concomitante (alternativa)",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": "durante a RT; buscar dose cumulativa >200 mg/m²"
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Mesmos critérios de inelegibilidade à cisplatina (SBOC p.15). Dose cumulativa total >200 mg/m² (SBOC p.35).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.006-1",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA A CIRURGIA OU CONCOMITANTE A RADIOTERAPIA DO CARCINOMA EPIDERMÓIDE",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Cenário definitivo: procedimento 03.04.04.006-1 (DDT 2015, p.22: procedimentos de QT prévia compatíveis com a concomitante). Cenário adjuvante (RT pós-operatória): enquadramento de faturamento a confirmar — a Portaria SAS/MS nº 20/2015 excluiu a QT adjuvante do CEC de cabeça e pescoço da Tabela SUS (DDT 2015, p.1)."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 16,
+          "trecho": "Cisplatina 40 mg/m² EV D1 semanal",
+          "estado": "VERIFICADO"
+        },
+        "derivadoDe": "cabeca-pescoco-cddp40-semanal-rt",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "id": "cabeca-pescoco-cddp40-semanal-rt-adjuvante",
+        "nome": "Cisplatina semanal concomitante à RT",
+        "cenario": "adjuvante pós-operatório (concomitante à RT)",
+        "linha": "concomitante (alternativa)",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": "durante a RT; buscar dose cumulativa >200 mg/m²"
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Mesmos critérios de inelegibilidade à cisplatina (SBOC p.15). Dose cumulativa total >200 mg/m² (SBOC p.35).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.006-1",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA A CIRURGIA OU CONCOMITANTE A RADIOTERAPIA DO CARCINOMA EPIDERMÓIDE",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Cenário definitivo: procedimento 03.04.04.006-1 (DDT 2015, p.22: procedimentos de QT prévia compatíveis com a concomitante). Cenário adjuvante (RT pós-operatória): enquadramento de faturamento a confirmar — a Portaria SAS/MS nº 20/2015 excluiu a QT adjuvante do CEC de cabeça e pescoço da Tabela SUS (DDT 2015, p.1)."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 16,
+          "trecho": "Cisplatina 40 mg/m² EV D1 semanal",
+          "estado": "VERIFICADO"
+        },
+        "derivadoDe": "cabeca-pescoco-cddp40-semanal-rt",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "id": "cabeca-pescoco-docetaxel15-rt-definitivo",
+        "nome": "Docetaxel semanal concomitante à RT (inelegível à cisplatina)",
+        "cenario": "definitivo (concomitante à RT)",
+        "linha": "concomitante — inelegível CDDP",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 15,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": "durante a RT"
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.006-1",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA A CIRURGIA OU CONCOMITANTE A RADIOTERAPIA DO CARCINOMA EPIDERMÓIDE",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Cenário definitivo: procedimento 03.04.04.006-1 (DDT 2015, p.22: procedimentos de QT prévia compatíveis com a concomitante). Cenário adjuvante (RT pós-operatória): enquadramento de faturamento a confirmar — a Portaria SAS/MS nº 20/2015 excluiu a QT adjuvante do CEC de cabeça e pescoço da Tabela SUS (DDT 2015, p.1)."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 16,
+          "trecho": "Docetaxel 15 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "derivadoDe": "cabeca-pescoco-docetaxel15-rt",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "id": "cabeca-pescoco-docetaxel15-rt-adjuvante",
+        "nome": "Docetaxel semanal concomitante à RT (inelegível à cisplatina)",
+        "cenario": "adjuvante pós-operatório (concomitante à RT)",
+        "linha": "concomitante — inelegível CDDP",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 15,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": "durante a RT"
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.006-1",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA A CIRURGIA OU CONCOMITANTE A RADIOTERAPIA DO CARCINOMA EPIDERMÓIDE",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Cenário definitivo: procedimento 03.04.04.006-1 (DDT 2015, p.22: procedimentos de QT prévia compatíveis com a concomitante). Cenário adjuvante (RT pós-operatória): enquadramento de faturamento a confirmar — a Portaria SAS/MS nº 20/2015 excluiu a QT adjuvante do CEC de cabeça e pescoço da Tabela SUS (DDT 2015, p.1)."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 16,
+          "trecho": "Docetaxel 15 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "derivadoDe": "cabeca-pescoco-docetaxel15-rt",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "id": "cabeca-pescoco-cetuximabe-rt",
+        "nome": "Cetuximabe concomitante à RT (inelegível à cisplatina)",
+        "cenario": "definitivo (concomitante à RT)",
+        "linha": "concomitante — inelegível CDDP",
+        "drogas": [
+          {
+            "droga": "Cetuximabe",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D-7 (1 semana antes da RT)",
+            "observacao": "dose de ataque"
+          },
+          {
+            "droga": "Cetuximabe",
+            "dose": 250,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": "durante a RT"
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Câncer de Cabeça e Pescoço — Portaria SAS/MS nº 516, de 17/06/2015 (gov.br/conitec ddt_cancercabecapescoco_2015.pdf), considerandos (cita Portaria SCTIE/MS nº 57, de 10/12/2013, e nº 23, de 08/06/2015)",
+            "pagina": 1,
+            "trecho": "que tornam públicas as decisões de não incorporar o cetuximabe",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Cetuximabe não incorporado para CEC de cabeça e pescoço localmente avançado (Portaria SCTIE/MS 57/2013). Alternativa SUS no inelegível à cisplatina: carboplatina ± 5-FU concomitante, outro radiossensibilizante (DDT p.16) ou RT isolada."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 16,
+          "trecho": "Cetuximabe 400 mg/m² EV (dose de ataque)",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Inferior à cisplatina em orofaringe HPV (RTOG 1016, De-Escalate); reservar a contraindicação à CDDP."
+      },
+      {
+        "id": "cabeca-pescoco-carbo-5fu-rt",
+        "nome": "Carboplatina + 5-FU concomitante à RT",
+        "cenario": "definitivo (concomitante à RT) — orofaringe, se cetuximabe indisponível",
+        "linha": "concomitante — inelegível CDDP",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 70,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluorouracila (5-FU)",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D4",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.006-1",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA A CIRURGIA OU CONCOMITANTE A RADIOTERAPIA DO CARCINOMA EPIDERMÓIDE",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. DDT 2015 (p.22): procedimentos de QT prévia são também compatíveis com a QT concomitante à RT."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 16,
+          "trecho": "Carboplatina 70 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "cabeca-pescoco-carbo-auc2-semanal-rt",
+        "nome": "Carboplatina semanal concomitante à RT",
+        "cenario": "concomitante à RT após indução, ou não candidato à CDDP",
+        "linha": "concomitante",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 2,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": "durante a RT"
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.006-1",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA A CIRURGIA OU CONCOMITANTE A RADIOTERAPIA DO CARCINOMA EPIDERMÓIDE",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. DDT 2015 (p.22): procedimentos de QT prévia são também compatíveis com a QT concomitante à RT."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 35,
+          "trecho": "uso de carboplatina AUC 2 semanal concomitante à RT é outra",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Resultados sugerem inferioridade de eficácia vs CDDP (SBOC p.35)."
+      },
+      {
+        "id": "cabeca-pescoco-tpf-inducao",
+        "nome": "TPF de indução (não-nasofaringe)",
+        "cenario": "neoadjuvante/indução",
+        "linha": "indução",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluorouracila (5-FU)",
+            "dose": 750,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "mg/m²/24h em bomba de infusão contínua"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Após indução NÃO usar CDDP alta dose concomitante (SBOC p.37): RT isolada, carboplatina semanal, cetuximabe ou CDDP semanal.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.006-1",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA A CIRURGIA OU CONCOMITANTE A RADIOTERAPIA DO CARCINOMA EPIDERMÓIDE",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. DDT 2015 (p.22): procedimentos de QT prévia são também compatíveis com a QT concomitante à RT."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 17,
+          "trecho": "Docetaxel 75 mg/m² EV D1 Cisplatina 75 mg/m² EV D1 5-Fluorouracil 750 mg/m²/24h",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "cabeca-pescoco-tpf-nasofaringe",
+        "nome": "TPF de indução (nasofaringe)",
+        "cenario": "neoadjuvante/indução — nasofaringe",
+        "linha": "indução",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluorouracila (5-FU)",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "mg/m²/24h em bomba de infusão contínua"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.008-8",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA A CIRURGIA OU CONCOMITANTE A RADIOTERAPIA DE CARCINOMA DE NASOFARINGE",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Estádios III a IVB."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 17,
+          "trecho": "Docetaxel 60 mg/m² EV D1 Cisplatina 60 mg/m² EV D1 5-Fluorouracil 600 mg/m²/24h",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "cabeca-pescoco-gc-nasofaringe",
+        "nome": "Cisplatina + gencitabina de indução (nasofaringe)",
+        "cenario": "neoadjuvante/indução — nasofaringe",
+        "linha": "indução",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.008-8",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA A CIRURGIA OU CONCOMITANTE A RADIOTERAPIA DE CARCINOMA DE NASOFARINGE",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Estádios III a IVB."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 17,
+          "trecho": "Cisplatina 80 mg/m² EV D1 Gencitabina 1.000 mg/m² EV D1/D8",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "cabeca-pescoco-pf-inducao",
+        "nome": "Cisplatina + 5-FU de indução",
+        "cenario": "neoadjuvante/indução",
+        "linha": "indução",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluorouracila (5-FU)",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D4",
+            "observacao": "mg/m²/24h em bomba de infusão contínua"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 3,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.04.006-1",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PRÉVIA A CIRURGIA OU CONCOMITANTE A RADIOTERAPIA DO CARCINOMA EPIDERMÓIDE",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. DDT 2015 (p.22): procedimentos de QT prévia são também compatíveis com a QT concomitante à RT."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 17,
+          "trecho": "Cisplatina 80 mg/m² EV D1 5-Fluorouracil 1.000 mg/m²/24h EV D1 a D4",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "cabeca-pescoco-capecitabina-metronomica-nasofaringe",
+        "nome": "Capecitabina metronômica adjuvante (nasofaringe LA)",
+        "cenario": "adjuvante após tratamento padrão — nasofaringe",
+        "linha": "manutenção/adjuvante",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 625,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D28 contínuo, 2x/dia",
+            "observacao": "por 1 ano; dose da p.40 (conflito com 650 mg/m² na p.38)"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 13,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Câncer de Cabeça e Pescoço — Portaria SAS/MS nº 516, de 17/06/2015 (gov.br/conitec ddt_cancercabecapescoco_2015.pdf)",
+            "pagina": 19,
+            "trecho": "não deve ser indicada para doentes com carcinoma de nasofaringe",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "DDT 2015: QT adjuvante à radioquimioterapia não indicada na nasofaringe; QT adjuvante do CEC de cabeça e pescoço excluída da Tabela SUS (Portaria SAS/MS 20/2015). Opção da diretriz SBOC sem cobertura SUS — decisão médica caso a caso."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 40,
+          "trecho": "capecitabina metronômica 625 mg/ m² 2x/dia continuamente por um ano",
+          "estado": "CONFLITANTE"
+        },
+        "observacao": "SBOC: capecitabina ainda não aprovada neste contexto no Brasil. numeroCiclos 13 = 1 ano em ciclos de 28 dias (conversão de duração, não de dose)."
+      },
+      {
+        "id": "cabeca-pescoco-rm-pembrolizumabe",
+        "nome": "Pembrolizumabe monoterapia (CPS ≥1)",
+        "cenario": "metastático/recorrente (exceto nasofaringe)",
+        "linha": "1ª linha, ECOG 0-1",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "até progressão, toxicidade ou 35 ciclos"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 35,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 41, de 19/09/2024 (DOU 20/09/2024, s.1, p.147) — decisão de NÃO incorporar; ementa via IELS nº 178 SES-SP",
+            "pagina": null,
+            "trecho": "os regimes de tratamento com cetuximabe ou pembrolizumabe para carcinoma espinocelular",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Não incorporado no SUS para CEC de cabeça e pescoço recidivado/metastático. Alternativa SUS: platina + 5-FU ou platina + paclitaxel a cada 21 dias."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Pembrolizumabe 200 mg EV D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "cabeca-pescoco-rm-platina-5fu-pembro",
+        "nome": "Platina + 5-FU + pembrolizumabe",
+        "cenario": "metastático/recorrente (exceto nasofaringe)",
+        "linha": "1ª linha, ECOG 0-1",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou carboplatina AUC 5 D1"
+          },
+          {
+            "droga": "Fluorouracila (5-FU)",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D4",
+            "observacao": "mg/m²/24h infusão contínua"
+          },
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "manter isolado após 6 ciclos até 35 ciclos"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 41, de 19/09/2024 (DOU 20/09/2024, s.1, p.147) — decisão de NÃO incorporar; ementa via IELS nº 178 SES-SP",
+            "pagina": null,
+            "trecho": "os regimes de tratamento com cetuximabe ou pembrolizumabe para carcinoma espinocelular",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Não incorporado no SUS para CEC de cabeça e pescoço recidivado/metastático. Alternativa SUS: platina + 5-FU ou platina + paclitaxel a cada 21 dias."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Cisplatina 100 mg/m² EV D1 (ou Carboplatina AUC 5 EV D1)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "cabeca-pescoco-rm-extreme",
+        "nome": "Extreme: platina + 5-FU + cetuximabe (CPS 0)",
+        "cenario": "metastático/recorrente (exceto nasofaringe)",
+        "linha": "1ª linha, ECOG 0-1",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou carboplatina AUC 5 D1"
+          },
+          {
+            "droga": "Fluorouracila (5-FU)",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D4",
+            "observacao": "mg/m²/24h infusão contínua"
+          },
+          {
+            "droga": "Cetuximabe",
+            "dose": 250,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15 (semanal)",
+            "observacao": "ataque 400 mg/m² no C1; manutenção isolada após 6 ciclos"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 41, de 19/09/2024 (DOU 20/09/2024, s.1, p.147) — decisão de NÃO incorporar; ementa via IELS nº 178 SES-SP",
+            "pagina": null,
+            "trecho": "os regimes de tratamento com cetuximabe ou pembrolizumabe para carcinoma espinocelular",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Não incorporado no SUS para CEC de cabeça e pescoço recidivado/metastático. Alternativa SUS: platina + 5-FU ou platina + paclitaxel a cada 21 dias."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Platina + 5-FU + Cetuximabe (Extreme)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "cabeca-pescoco-rm-tpex",
+        "nome": "TPEx: cisplatina + docetaxel + cetuximabe (CPS 0)",
+        "cenario": "metastático/recorrente (exceto nasofaringe)",
+        "linha": "1ª linha, ECOG 0-1",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Cetuximabe",
+            "dose": 250,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15 (semanal)",
+            "observacao": "ataque 400 mg/m² no C1; manutenção 500 mg/m² a cada 2 semanas"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "Com suporte de G-CSF (SBOC p.7).",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 41, de 19/09/2024 (DOU 20/09/2024, s.1, p.147) — decisão de NÃO incorporar; ementa via IELS nº 178 SES-SP",
+            "pagina": null,
+            "trecho": "os regimes de tratamento com cetuximabe ou pembrolizumabe para carcinoma espinocelular",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Não incorporado no SUS para CEC de cabeça e pescoço recidivado/metastático. Alternativa SUS: platina + 5-FU ou platina + paclitaxel a cada 21 dias."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Cisplatina 75 mg/m² EV D1 - Docetaxel 75 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "cabeca-pescoco-rm-platina-paclitaxel",
+        "nome": "Platina + paclitaxel (alternativa SUS)",
+        "cenario": "metastático/recorrente (exceto nasofaringe)",
+        "linha": "1ª linha — indisponibilidade de cetuximabe e pembrolizumabe",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou carboplatina AUC 5 D1"
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": "FICHA.cabeca-e-pescoco.carboplatina-paclitaxel__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.020-6",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO CARCINOMA EPIDERMÓIDE DE CABEÇA E PESCOÇO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. DDT 2015 (p.18): metotrexato, platina ou taxano na doença recidivada/metastática."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Paclitaxel 175 mg/m² EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Ficha vinculada é a variante carboplatina AUC 5 + paclitaxel 175."
+      },
+      {
+        "id": "cabeca-pescoco-rm-pf",
+        "nome": "Platina + 5-FU (alternativa SUS)",
+        "cenario": "metastático/recorrente (exceto nasofaringe)",
+        "linha": "1ª linha — indisponibilidade de cetuximabe e pembrolizumabe",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou carboplatina AUC 5 D1"
+          },
+          {
+            "droga": "Fluorouracila (5-FU)",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D4",
+            "observacao": "mg/m²/24h infusão contínua"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": "FICHA.cabeca-e-pescoco.cisplatina-5-fluorouracil-pf__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.020-6",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO CARCINOMA EPIDERMÓIDE DE CABEÇA E PESCOÇO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. DDT 2015 (p.18): metotrexato, platina ou taxano na doença recidivada/metastática."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "5-FU 1.000 mg/m²/24h EV (bomba de infusão contínua) D1 a D4",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "cabeca-pescoco-rm-nivolumabe",
+        "nome": "Nivolumabe (2ª linha)",
+        "cenario": "metastático/recorrente (exceto nasofaringe)",
+        "linha": "2ª linha, ECOG 0-1; ou PD <6 meses após platina",
+        "drogas": [
+          {
+            "droga": "Nivolumabe",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativas SBOC: 480 mg a cada 4 semanas ou 3 mg/kg a cada 2 semanas"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 37, de 05/09/2024 (DOU 06/09/2024, s.1, p.96) — via Conass Informa nº 146/2024",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde – SUS, nivolumabe",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Não incorporado no SUS em 2ª linha. Alternativa: agentes únicos (metotrexato, docetaxel, paclitaxel)."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Nivolumabe 240 mg EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "cabeca-pescoco-rm-metotrexato",
+        "nome": "Metotrexato semanal",
+        "cenario": "metastático/recorrente",
+        "linha": "linhas subsequentes, ECOG 0-2",
+        "drogas": [
+          {
+            "droga": "Metotrexato",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": "FICHA.cabeca-e-pescoco.metotrexato-semanal__paliativo-metastatico@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.020-6",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO CARCINOMA EPIDERMÓIDE DE CABEÇA E PESCOÇO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. DDT 2015 (p.18): metotrexato, platina ou taxano na doença recidivada/metastática."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Metotrexato 40 mg/m² EV D1 semanalmente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "cabeca-pescoco-rm-docetaxel-q21",
+        "nome": "Docetaxel a cada 3 semanas",
+        "cenario": "metastático/recorrente",
+        "linha": "linhas subsequentes, ECOG 0-2",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": "FICHA.cabeca-e-pescoco.docetaxel-monoterapia__paliativo-metastatico@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.020-6",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO CARCINOMA EPIDERMÓIDE DE CABEÇA E PESCOÇO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. DDT 2015 (p.18): metotrexato, platina ou taxano na doença recidivada/metastática."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Docetaxel 75 mg/m² EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "cabeca-pescoco-rm-paclitaxel-semanal",
+        "nome": "Paclitaxel semanal",
+        "cenario": "metastático/recorrente",
+        "linha": "linhas subsequentes, ECOG 0-2",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 90,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.020-6",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO CARCINOMA EPIDERMÓIDE DE CABEÇA E PESCOÇO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. DDT 2015 (p.18): metotrexato, platina ou taxano na doença recidivada/metastática."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Paclitaxel 90 mg /m² EV D1 semanalmente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "cabeca-pescoco-nasofaringe-rm-gc",
+        "nome": "Cisplatina + gencitabina (nasofaringe R/M)",
+        "cenario": "metastático/recorrente — nasofaringe",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.015-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO CARCINOMA DE NASOFARINGE",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "gencitabina (1.000 mg/m² EV D1 e D8)",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Anti-PD-1 associados (toripalimabe, camrelizumabe, tislelizumabe) não disponíveis no Brasil (SBOC p.13)."
+      },
+      {
+        "id": "cabeca-pescoco-pf-adjuvante-nasofaringe",
+        "nome": "Cisplatina + 5-FU adjuvante após radioquimioterapia (nasofaringe)",
+        "cenario": "adjuvante após radioquimioterapia — nasofaringe localmente avançado",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluorouracila (5-FU)",
+            "dose": 1000,
+            "unidade": "mg/m2/dia",
+            "via": "EV",
+            "dias": "D1 a D4",
+            "observacao": "infusão contínua de 96 h (1000 mg/m²/dia)"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 3,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Iniciar 4 semanas após o fim da RT (braço do ensaio).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Câncer de Cabeça e Pescoço — Portaria SAS/MS nº 516, de 17/06/2015 (gov.br/conitec ddt_cancercabecapescoco_2015.pdf)",
+            "pagina": 19,
+            "trecho": "não deve ser indicada para doentes com carcinoma de nasofaringe",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "QT adjuvante não coberta pelo SUS (DDT 2015; Portaria SAS/MS 20/2015)."
+        },
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov API v2 NCT03306121 (ACTIVE_NOT_RECRUITING), braço CCRT+PF; SBOC cita o esquema sem doses (Cabeça localizado, p.40)",
+          "pagina": null,
+          "trecho": "cisplatin (80mg/m2 on day 1) and 5-fluorouracil (1000mg/m2 civ 96h) every four weeks",
+          "estado": "INFERIDO"
+        },
+        "nct": "NCT03306121",
+        "nctEstado": "VERIFICADO"
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "RT pós-operatória (cavidade oral, orofaringe, hipofaringe, laringe)",
+        "doseTotalGy": 66,
+        "fracoes": 33,
+        "concomitante": "CDDP se margem comprometida ou EEN",
+        "tecnica": "IMRT",
+        "observacao": "Iniciar até 6 semanas e completar em <100 dias da cirurgia (SBOC p.34).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 34,
+          "trecho": "A dose padrão é de 66 Gy em 33 frações com",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "RT definitiva — nasofaringe (tumor macroscópico)",
+        "doseTotalGy": 70,
+        "fracoes": 33,
+        "concomitante": "CDDP",
+        "observacao": "SBOC: ≥70 Gy no macroscópico e 50-60 Gy no alto risco subclínico. Fracionamento 70 Gy/33 fr do componente de radioquimioterapia (padrão institucional) do NCT06592599 (RECRUITING), estado INFERIDO. Radio-oncologista confirma.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 39,
+          "trecho": "A dose de RT deve ser de pelo menos 70 Gy no tumor",
+          "estado": "VERIFICADO"
+        },
+        "fonteFracionamento": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov API v2 NCT06592599 (RECRUITING)",
+          "pagina": null,
+          "trecho": "Intensity modulated radiotherapy, 70 Gy in 33 fractions M-F once daily",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "cenario": "RT definitiva — cavidade oral, orofaringe, laringe, hipofaringe (± QT)",
+        "doseTotalGy": 70,
+        "fracoes": 35,
+        "concomitante": "CDDP alta dose ou alternativas",
+        "observacao": "DDT 2015: irradiação de finalidade radical 70 Gy (p.17). Fracionamento 2 Gy × 35 do braço IMRT do RTOG 0522 (NCT00265941, COMPLETED; no ensaio, 6 frações/semana). Esquema semanal e técnica: radio-oncologista.",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Câncer de Cabeça e Pescoço — Portaria SAS/MS nº 516, de 17/06/2015 (gov.br/conitec ddt_cancercabecapescoco_2015.pdf)",
+          "pagina": 17,
+          "trecho": "devem receber irradiação com finalidade radical (70 Gy)",
+          "estado": "INFERIDO"
+        },
+        "fonteFracionamento": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov API v2 NCT00265941 (COMPLETED) — RTOG 0522",
+          "pagina": null,
+          "trecho": "70 Gy in 35 2.0 Gy fractions over 6 weeks",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "cenario": "RT isolada ECOG >2 (definitiva ou paliativa)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "nenhuma",
+        "pendencia": "SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 21,
+          "trecho": "RT isolada (dose e fracionamento definitivo ou paliativo)",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "Dose/fracionamento da RT isolada no ECOG >2 não tabelados (RT fora do escopo de oncologia clínica).",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC Cabeça localizado p.21",
+            "DDT CCP 2015"
+          ]
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Ressecção com margens tridimensionais + esvaziamento cervical eletivo (níveis I, IIa, III) se espessura >3 mm",
+        "quando": "Cavidade oral I-II",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 18,
+          "trecho": "Para tumores com espessura superior a 3 mm recomenda-se com esvazia-",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Esvaziamento cervical antes de RT + QT",
+        "quando": "N3 volumoso (discutir)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 37,
+          "trecho": "deve-se discutir a realização de esvaziamento cervical antes",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Esvaziamento cervical se doença persistente em PET/CT 12 semanas após RT",
+        "quando": "N2-N3 com resposta completa no primário",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 37,
+          "trecho": "realização do mesmo 12 semanas após o término do tratamento",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Laringectomia total + esvaziamento cervical",
+        "quando": "Laringe T4a; ou sem condições de seguimento para preservação",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 29,
+          "trecho": "Laringectomia total + esvaziamento cervical:",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Cirurgia de resgate",
+        "quando": "Recorrência locorregional ressecável",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Considerar cirurgia de resgate ou salvamento.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "PD-L1 CPS ≥1 (R/M)",
+        "opcao": "Pembrolizumabe ± QT",
+        "evidencia": "KEYNOTE-048",
+        "sus": "nao — Portaria SECTICS/MS 41/2024",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Pembrolizumabe monoterapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "PD-L1 CPS 0 (R/M)",
+        "opcao": "Extreme ou TPEx",
+        "evidencia": "Extreme; TPExtreme (fase II)",
+        "sus": "nao — cetuximabe R/M não incorporado (Portaria 41/2024)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Platina + 5-FU + Cetuximabe (Extreme)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "p16 positivo (orofaringe)",
+        "opcao": "Sem desintensificação fora de estudo; tratar como HPV-negativo",
+        "evidencia": "RTOG 1016, De-Escalate (cetuximabe inferior)",
+        "sus": "não se aplica",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 25,
+          "trecho": "Em geral, tratamento conforme HPV-negativo;",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": "Cisplatina alta dose: alta (classificação MASCC/ASCO — não descrita na SBOC)",
+      "riscoNeutropeniaFebril": "TPEx com G-CSF (SBOC p.7); TPF: SEM_FONTE no pack",
+      "outros": [
+        "Suporte odontológico antes, durante e após a RT",
+        "Equipe multidisciplinar (fono, nutrição, psicologia, fisioterapia)"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+        "pagina": 34,
+        "trecho": "É fundamental o suporte odonto-",
+        "estado": "VERIFICADO"
+      },
+      "pendencia": "EMETOGENICIDADE_SEM_FONTE_SBOC",
+      "pendenciaClasse": {
+        "texto": "Emetogenicidade por esquema via módulo de suporte (MASCC/ESMO 2023).",
+        "classe": "DEPENDE_MOTOR_CODIGO",
+        "buscasFeitas": [
+          "MASCC/ESMO 2023 (PMC10937211)"
+        ]
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "KEYNOTE-048",
+        "nct": "NCT02358031",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CEC CP R/M 1ª linha",
+        "bracos": "Pembrolizumabe vs pembro + QT vs Extreme",
+        "desfecho": "SG",
+        "resultado": "Pembro mono ganho de SG em CPS ≥1 (12,3 vs 10,3 m; HR 0,78)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02358031",
+          "pagina": null,
+          "trecho": "Pembrolizumab (MK-3475) for First Line Treatment of Recurrent or Metastatic",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CheckMate 141",
+        "nct": "NCT02105636",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CEC CP R/M pós-platina",
+        "bracos": "Nivolumabe vs escolha do investigador",
+        "desfecho": "SG",
+        "resultado": "7,5 vs 5,1 m; HR 0,70",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02105636",
+          "pagina": null,
+          "trecho": "Trial of Nivolumab vs Therapy of Investigator's Choice",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "RTOG 1016",
+        "nct": "NCT01302834",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Orofaringe HPV+ localmente avançado",
+        "bracos": "RT + cisplatina vs RT + cetuximabe",
+        "desfecho": "SG (não inferioridade)",
+        "resultado": "Cetuximabe inferior (SG 5 anos 77,9% vs 84,1%)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT01302834",
+          "pagina": null,
+          "trecho": "Radiation Therapy With Cisplatin or Cetuximab in Treating Patients With Oropharyngeal",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "1º ano",
+        "exames": [
+          "VIDEONASOLARINGOSCOPIA"
+        ],
+        "periodicidade": "Avaliação clínica com nasofibrolaringoscopia a cada 1-3 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 41,
+          "trecho": "A cada 1 a 3 meses no 1º ano;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "2º ano",
+        "exames": [
+          "VIDEONASOLARINGOSCOPIA"
+        ],
+        "periodicidade": "A cada 2-6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 41,
+          "trecho": "A cada 2-6 meses no 2º ano;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "3º ao 5º ano",
+        "exames": [
+          "VIDEONASOLARINGOSCOPIA",
+          "TC_PESCOCO"
+        ],
+        "periodicidade": "A cada 4-8 meses; imagem locorregional periódica (TC ou RM)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 41,
+          "trecho": "A cada 4-8 meses entre 3º e 5º ano;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Pós-RT, anual",
+        "exames": [
+          "TSH"
+        ],
+        "periodicidade": "Anual",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 41,
+          "trecho": "TSH anual:",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Tabagistas >50 anos e >20 anos-maço",
+        "exames": [
+          "TC_TORAX"
+        ],
+        "periodicidade": "Rastreio de câncer de pulmão",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 41,
+          "trecho": "De acordo com a história de tabagismo (> 50 anos e +20 anos-maço).",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "N2-N3 após tratamento não cirúrgico",
+        "exames": [
+          "PET_CT_FDG"
+        ],
+        "periodicidade": "PET/CT 12 semanas após término; se RC, clínico mensal no 1º ano e bimensal no 2º",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 37,
+          "trecho": "realização do mesmo 12 semanas após o término do tratamento",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "BIOPSIA_GANGLIO",
+      "EDA",
+      "IMUNOHISTOQUIMICA",
+      "LARINGOSCOPIA",
+      "PET_CT_FDG",
+      "RM_COLUNA_CERVICAL",
+      "RX_TORAX_PA_PERFIL",
+      "TC_PESCOCO",
+      "TC_TORAX",
+      "TSH",
+      "VIDEONASOLARINGOSCOPIA",
+      "HPV_MOLECULAR"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "Cisplatina",
+        "com": "aminoglicosídeos, diuréticos de alça (nefro/ototoxicidade)",
+        "ref": null
+      },
+      {
+        "droga": "Fluorouracila (5-FU)",
+        "com": "varfarina; deficiência de DPD",
+        "ref": null
+      },
+      {
+        "droga": "Docetaxel",
+        "com": "inibidores fortes de CYP3A4",
+        "ref": null
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "mucosite/radiodermite",
+        "termosCTCAEv6": [
+          "Oral mucositis",
+          "Dermatitis radiation",
+          "Dysphagia"
+        ]
+      },
+      {
+        "classe": "nefro/ototoxicidade por cisplatina",
+        "termosCTCAEv6": [
+          "Acute kidney injury",
+          "Hearing impaired",
+          "Tinnitus",
+          "Peripheral sensory neuropathy"
+        ]
+      },
+      {
+        "classe": "rash por cetuximabe",
+        "termosCTCAEv6": [
+          "Rash acneiform",
+          "Infusion related reaction",
+          "Hypomagnesemia"
+        ]
+      },
+      {
+        "classe": "imunorrelacionados",
+        "termosCTCAEv6": [
+          "Hypothyroidism",
+          "Pneumonitis",
+          "Colitis"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "antiemético alto risco (cisplatina 100 mg/m²)",
+      "hidratação e magnésio pré/pós cisplatina",
+      "bochechos/analgesia para mucosite",
+      "G-CSF no TPEx"
+    ],
+    "orientacoes": [
+      "cessação de tabagismo e álcool",
+      "cuidados com pele irradiada",
+      "avaliação odontológica pré-RT",
+      "nutrição/gastrostomia quando indicado"
+    ],
+    "encaminhamentos": [
+      "cirurgia de cabeça e pescoço",
+      "radioterapia",
+      "odontologia",
+      "fonoaudiologia",
+      "nutrição",
+      "psicologia",
+      "serviço social"
+    ],
+    "laudos": [
+      "APAC de radioterapia",
+      "APAC de quimioterapia (CID C00-C14, C30-C32)",
+      "laudo de IHQ p16 em orofaringe"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "CEC CP ressecado com margem comprometida ou extensão extranodal",
+        "y": "elegível à cisplatina",
+        "z": "RT adjuvante 66 Gy/33 fr (IMRT) + cisplatina 100 mg/m² D1, D22, D43 (ou 40 mg/m² semanal)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 34,
+          "trecho": "A dose padrão é de 66 Gy em 33 frações com",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CEC CP com indicação de RT + QT",
+        "y": "inelegível à cisplatina (ClCr <50, ECOG >2, perda auditiva, neuropatia etc.)",
+        "z": "RT + docetaxel 15 mg/m² EV semanal; alternativas RT + cetuximabe ou RT isolada",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 19,
+          "trecho": "Pacientes inelegíveis à CDDP:",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CEC CP R/M 1ª linha, ECOG 0-1, no SUS",
+        "y": "cetuximabe e pembrolizumabe não incorporados (Portaria SECTICS 41/2024)",
+        "z": "Platina + 5-FU ou platina + paclitaxel a cada 21 dias",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Esquemas alternativos (em caso de indisponibilidade de cetuximabe e pembrolizumabe)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CEC de orofaringe",
+        "y": "IHQ p16 em ≥70% das células",
+        "z": "Estadiar como orofaringe HPV+ (AJCC 8) e tratar em geral como HPV-negativo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+          "pagina": 4,
+          "trecho": "imuno-histoquímica com expressão de p16 em 70% ou mais das células tumorais",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    {
+      "texto": "Catálogo v1.1 sem RM de face (usado RM_COLUNA_CERVICAL a conferir), sem hibridização in situ para HPV/EBV (EBER) e sem PD-L1 específico (usado IMUNOHISTOQUIMICA). Inclusão no catálogo depende de aprovação D-F1-02.",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json (164 ids)",
+        "SIGTAP 09/2026 procs"
+      ],
+      "resolucao": "Exigir hibridização in situ (EBER/HPV) quando indicada (10B); sem código SUS próprio, pedir por outra via."
+    },
+    {
+      "texto": "Emetogenicidade e profilaxia de NF por esquema não vêm da SBOC; a classificação por droga (MASCC/ESMO 2023, PMC10937211) deve ser aplicada pelo módulo de suporte, não copiada no pack.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC Cabeça localizado",
+        "SBOC CCP recorrente",
+        "MASCC/ESMO 2023 (PMC10937211)"
+      ]
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "Capecitabina metronômica (nasofaringe)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+        "pagina": 38,
+        "trecho": "Considerar capecitabina metronomica 650 mg/m² bid por um ano:",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+        "pagina": 40,
+        "trecho": "capecitabina metronômica 625 mg/ m² 2x/dia continuamente por um ano",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "625 mg/m² 2x/dia (menor dose, a do estudo citado)",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "625 mg/m² 2x/dia (9A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "Edição AJCC",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+        "pagina": 4,
+        "trecho": "O estadiamento TNM deve seguir os critérios da AJCC 8ª edição (2017).",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+        "pagina": 4,
+        "trecho": "tratamento destes tumores ainda é baseado na AJCC 7ª Edição.",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Registrar estadiamento AJCC 8 e conferir a indicação terapêutica pelos critérios da diretriz",
+      "decisaoNecessaria": false
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (agente curador, rascunho)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC/sboc/diretrizes/Cabeça localizado .pdf (SBOC 2025, publ. 13/09/2025)",
+      "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-CCP-recorrente-e-metastatica-v5-VERSAO-PARA-COLABORACAO.pdf",
+      "Onco PRO 2026/slides-pro-2026/53 - Aula 53 - CCP - Visão geral e tratamento da doença localizada",
+      "Onco PRO 2026/slides-pro-2026/54 - Aula 54 - CCP - Tratamento da doença recidivada metastática",
+      "Portarias SECTICS/MS 37/2024 e 41/2024 (web)",
+      "ClinicalTrials.gov API v2",
+      "DDT Câncer de Cabeça e Pescoço — Portaria SAS/MS nº 516, de 17/06/2015 (gov.br/conitec ddt_cancercabecapescoco_2015.pdf)",
+      "SIGTAP competência 09/2026 (tb_descricao)",
+      "ClinicalTrials.gov API v2 NCT03306121, NCT06592599, NCT00265941"
+    ],
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-11",
+        "redator": "Claude (agente curador)",
+        "resolvidas": 4,
+        "classificadas": 2,
+        "susPreenchidos": 17,
+        "notas": [
+          "PF adjuvante de nasofaringe: doses do braço CCRT+PF do NCT03306121 (estado INFERIDO); SUS não cobre."
+        ]
+      }
+    ]
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): A03 calendário cisplatina 100 + RT",
+      "acao": "cicloDias null; calendário explícito"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): cenários misturados no mesmo protocolo",
+      "acao": "cabeca-pescoco-cddp100-rt dividido em cabeca-pescoco-cddp100-rt-definitivo, cabeca-pescoco-cddp100-rt-adjuvante"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): cenários misturados no mesmo protocolo",
+      "acao": "cabeca-pescoco-cddp40-semanal-rt dividido em cabeca-pescoco-cddp40-semanal-rt-definitivo, cabeca-pescoco-cddp40-semanal-rt-adjuvante"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): cenários misturados no mesmo protocolo",
+      "acao": "cabeca-pescoco-docetaxel15-rt dividido em cabeca-pescoco-docetaxel15-rt-definitivo, cabeca-pescoco-docetaxel15-rt-adjuvante"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "1 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
+}

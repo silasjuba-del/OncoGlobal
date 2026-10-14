@@ -1,0 +1,135 @@
+{
+  "header": {
+    "id": "pack-gastrico-v1-glm",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.4; 06-tumor-packs-1-5.md (gástrico parcial, intervalos NÃO_VERIFICADOS — substituídos aqui por fontes verificadas)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "cid": [
+    "C16"
+  ],
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição [VERIFICAR]"
+  },
+  "biomarcadoresPath": {
+    "metastatico": [
+      "HER2 (IHC/ISH) [I,A]",
+      "PD-L1 CPS [I,A]",
+      "MSI-H/dMMR [II,A]",
+      "CLDN18.2 (IHC, 'se disponível') [I,A]"
+    ],
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "ESMO Gastric CPG 2022 (Lordick, Ann Oncol 33:1005-20, PMID 35914639; PMC10937212 rec 2c)",
+      "trecho": "HER2... PD-L1 CPS... MSI-H/dMMR",
+      "edicao": "2022 (living v1.1 2023)"
+    }
+  },
+  "examesPorId": {
+    "estadiamento": [
+      "EDA",
+      "ANATOMOPATOLOGICO",
+      "IMUNOHISTOQUIMICA",
+      "TC_TORAX",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE"
+    ],
+    "condicionais": [
+      "PET_CT_FDG (não de rotina [III,C])",
+      "laparoscopia + citologia peritoneal (ressecáveis candidatos a QT perioperatória [III,B]) — procedimento, não exame de catálogo"
+    ],
+    "labsBaseline": [
+      "HEMOGRAMA",
+      "CREATININA",
+      "TGO",
+      "TGP",
+      "VITAMINA_B12"
+    ]
+  },
+  "fases": [
+    {
+      "fase": "estadiamento_inicial",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "ESMO Gastric 2022 recs 3a-3c",
+        "trecho": "CT with contrast of thorax and abdomen",
+        "edicao": "2022"
+      },
+      "nota": "EDA + biópsias + TC TAP [V,A]; PET não de rotina [III,C]; laparoscopia diagnóstica + lavado em ressecáveis [III,B]."
+    },
+    {
+      "fase": "seguimento_pos_tratamento_curativo",
+      "intervalos": {
+        "consulta": "Anamnese/exame q3-6m por 1-2 anos, depois q6-12m até 5 anos",
+        "tc": "TC TAP q6m nos 2 primeiros anos, depois anual até 5 anos",
+        "eda_alta": "Pós-mucosectomia endoscópica: EDA q6m no 1º ano → anual até 5; pós-cirurgia conforme necessidade",
+        "b12": "Hemograma + VITAMINA_B12 q3m até 3 anos, q6m até 5 anos, depois 1x/ano (monitoramento vitalício)"
+      },
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "NCCN Guidelines for Patients: Stomach Cancer 2026",
+        "trecho": "every 6 months for the first 2 years",
+        "edicao": "2026"
+      }
+    },
+    {
+      "fase": "suporte_nutricional_pos_gastrectomia",
+      "regra": "Distinção obrigatória: gastrectomia TOTAL × PARCIAL × má absorção — reposição de B12 vitalícia na absorção comprometida (inclui gastrectomia total): 350 mcg/dia VO OU 1000-2000 mcg IM a cada 1-3 meses (GPP, consenso 100%)",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "ESPEN Practical Guideline Micronutrients 2024 (Berger, Clin Nutr 43:825-857, Rec 21.8/21.9)",
+        "trecho": "350 µg/day orally OR intramuscularly 1000–2000 µg every 1–3 months",
+        "edicao": "2024"
+      },
+      "ressalva": "NÃO atribuir o calendário de exames do NCCN à fonte ESPEN (esta só trata suplementação) — fontes separadas por campo [regra do prompt mestre §13]."
+    },
+    {
+      "fase": "metastatico",
+      "exames": [
+        "TC_TORAX",
+        "TC_ABDOMEN_SUPERIOR",
+        "TC_PELVE"
+      ],
+      "nota": "Em candidatos a mais terapia: TC q6-12 semanas (ESMO 2022 rec via PMC10937212)."
+    }
+  ],
+  "limitesAplicabilidade": "Adenocarcinoma gástrico adulto; junção esôfago-gástrica tem classificação própria (Siewert) fora deste pack.",
+  "pendencias": [
+    "Edição AJCC",
+    "Laparoscopia/citologia: modelar como procedimento no catálogo (SEM_CODIGO_SUS?) — decisão do Codex/Dr. Silas"
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DIRETRIZ",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.4; 06-tumor-packs-1-5.md (gástrico parcial, intervalos NÃO_VERIFICADOS — substituídos aqui por fontes verificadas)",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "supersededBy": "pack-gastrico",
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "A9 red team: colisão com corpus/packs/gastrico",
+      "original": "gastrico",
+      "corrigido": "pack-gastrico-v1-glm"
+    }
+  ]
+}

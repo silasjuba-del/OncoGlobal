@@ -83,6 +83,12 @@ describe("elegibilidade de ciclo (cruzamento sem amarelo)", () => {
     }
   });
 
+  it("teto vermelho entra no farol existente; item parcial não cria quarta cor", () => {
+    const teto: SinalElegibilidade = { estado: "VERMELHO", motivos: [{ texto: "doxorrubicina: dose acumulada chegou no teto" }] };
+    expect(elegibilidadeCiclo({ ...todasVerdes(), cumulativo: teto }).cor).toBe("VERMELHO");
+    expect(elegibilidadeCiclo(todasVerdes()).cor).toBe("VERDE");
+  });
+
   it("é determinística: mesma entrada, mesma saída", () => {
     const entrada = { ...todasVerdes(), triagem: pendente, interacoes: moderada };
     expect(elegibilidadeCiclo(entrada)).toEqual(elegibilidadeCiclo(entrada));

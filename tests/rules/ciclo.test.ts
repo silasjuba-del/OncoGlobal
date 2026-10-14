@@ -33,6 +33,12 @@ describe("FN-09 ciclo vai ao médico (esquema AC)", () => {
 });
 
 describe("FN-09 outros esquemas", () => {
+  it("F0C: AC ciclo 3 não ignora prescrição sem vigência", () => {
+    expect(cicloVaiAoMedico("AC",3,resultado({qtPodeIniciarSemMedico:false}),doseRuleset)).toBe(true);
+  });
+  it("F0C: não trata qualquer token AC como o esquema AC", () => {
+    expect(cicloVaiAoMedico("OUTRO-AC-EXPERIMENTAL",1,resultado(),doseRuleset)).toBe(false);
+  });
   it("não-AC sem condições para iniciar sem médico → true", () =>
     expect(cicloVaiAoMedico("FOLFOX", 2, resultado({ qtPodeIniciarSemMedico: false }), doseRuleset)).toBe(true));
   it("não-AC apto a iniciar sem médico → false", () =>

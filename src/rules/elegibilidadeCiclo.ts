@@ -1,54 +1,25 @@
+import type { CorElegibilidade, NivelMotivoElegibilidade, OrigemElegibilidade, MotivoEntradaElegibilidade, SinalElegibilidade, EntradasElegibilidadeCiclo, MotivoElegibilidadeCiclo, SaidaElegibilidadeCiclo } from '../contracts/api/elegibilidadeCiclo.js';
+export type { CorElegibilidade, NivelMotivoElegibilidade, OrigemElegibilidade, MotivoEntradaElegibilidade, SinalElegibilidade, EntradasElegibilidadeCiclo, MotivoElegibilidadeCiclo, SaidaElegibilidadeCiclo } from '../contracts/api/elegibilidadeCiclo.js';
 // W11-H13 · elegibilidade de ciclo: CRUZA saídas já calculadas (porta, triagem, CTCAE, interações, plaquetas,
 // função orgânica, intercorrência). Não recalcula nada. Entradas chegam por parâmetro (tipos estruturais locais):
 // este módulo não importa outras regras.
 // Semáforo de 3 cores SEM AMARELO: VERDE · VERMELHO · PENDENTE. "VERDE" significa só "sem impedimento identificado";
 // verde nunca é liberação, aprovação nem aptidão. Ausente nunca é verde. Ato médico continua fora do sistema.
 
-export type CorElegibilidade = "VERDE" | "VERMELHO" | "PENDENTE";
-export type NivelMotivoElegibilidade = "atencao" | "importante" | "contraindicacao";
-export type OrigemElegibilidade =
-  | "portaCiclo"
-  | "triagem"
-  | "ctcae"
-  | "interacoes"
-  | "plaquetas"
-  | "funcaoOrganica"
-  | "intercorrencia";
 
-export interface MotivoEntradaElegibilidade {
-  texto: string;
-  /** Nível de interação/alerta. "atencao" corresponde à interação moderada. Qualquer nível torna a entrada VERMELHO. */
-  nivel?: NivelMotivoElegibilidade;
-}
+
+
+
+
 
 /** Saída já calculada por um módulo de regra. `null` = dado ausente (nunca vira verde). */
-export interface SinalElegibilidade {
-  estado: CorElegibilidade;
-  motivos: readonly MotivoEntradaElegibilidade[];
-}
 
-export interface EntradasElegibilidadeCiclo {
-  portaCiclo: SinalElegibilidade | null;
-  triagem: SinalElegibilidade | null;
-  ctcae: SinalElegibilidade | null;
-  interacoes: SinalElegibilidade | null;
-  plaquetas: SinalElegibilidade | null;
-  funcaoOrganica: SinalElegibilidade | null;
-  /** Opcional: quando não informada, não entra no cruzamento. Quando informada, segue as mesmas regras. */
-  intercorrencia?: SinalElegibilidade | null;
-}
 
-export interface MotivoElegibilidadeCiclo {
-  origem: OrigemElegibilidade;
-  texto: string;
-  nivel?: NivelMotivoElegibilidade;
-}
 
-export interface SaidaElegibilidadeCiclo {
-  cor: CorElegibilidade;
-  motivos: MotivoElegibilidadeCiclo[];
-  rotulo: string;
-}
+
+
+
+
 
 const ORDEM: readonly OrigemElegibilidade[] = [
   "portaCiclo",
@@ -58,6 +29,7 @@ const ORDEM: readonly OrigemElegibilidade[] = [
   "plaquetas",
   "funcaoOrganica",
   "intercorrencia",
+  "emergencia", "feve", "basal", "condicionais", "intervalo", "cumulativo",
 ];
 
 const ROTULO_NIVEL: Record<NivelMotivoElegibilidade, string> = {
@@ -88,11 +60,15 @@ export function elegibilidadeCiclo(entradas: EntradasElegibilidadeCiclo): SaidaE
   const motivos: MotivoElegibilidadeCiclo[] = [];
   let temVermelho = false;
   let temPendente = false;
+  let total = 0;
+  let pendentes = 0;
 
   for (const origem of ORDEM) {
     const sinal = sinalDe(entradas, origem);
     if (sinal === undefined) continue;
+    total++;
     if (sinal === null) {
+      pendentes++;
       temPendente = true;
       motivos.push({ origem, texto: "dado ausente para esta entrada" });
       continue;
@@ -107,6 +83,7 @@ export function elegibilidadeCiclo(entradas: EntradasElegibilidadeCiclo): SaidaE
       continue;
     }
     if (sinal.estado === "PENDENTE") {
+      pendentes++;
       temPendente = true;
       const textos = motivosDe(origem, sinal);
       if (textos.length === 0) motivos.push({ origem, texto: "pendente sem descrição" });
@@ -114,6 +91,8 @@ export function elegibilidadeCiclo(entradas: EntradasElegibilidadeCiclo): SaidaE
     }
   }
 
+  if (total === 0) temPendente = true;
   const cor: CorElegibilidade = temVermelho ? "VERMELHO" : temPendente ? "PENDENTE" : "VERDE";
-  return { cor, motivos: cor === "VERDE" ? [] : motivos, rotulo: ROTULO[cor] };
+  return { cor, motivos: cor === "VERDE" ? [] : motivos, rotulo: ROTULO[cor],
+    cobertura: { avaliadas: total - pendentes, pendentes, total } };
 }

@@ -1,0 +1,227 @@
+{
+  "header": {
+    "id": "contraindicacoes-complemento",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.1 bloco de contraindicações (verificação médica Codex M1-1, M2-2, M2-3, M3-2, M3-3, M6-2)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "nota": "Complemento às 22 regras ativas de f0c/condicionais.v1.json (que seguem intactas). Distinção obrigatória por item: contraindicação × precaução × ajuste de dose × interrupção temporária × descontinuação × decisão individual. Limiar do serviço = alerta; ficha relaxa ou endurece com fonte; NUNCA bloqueia (regra F1). Exclusão de população em ensaio clínico NÃO é contraindicação absoluta.",
+  "itens": [
+    {
+      "id": "CI-01",
+      "tipo": "RENAL",
+      "drogas": [
+        "cisplatina"
+      ],
+      "classificacao": "PRECACAO_CONTRAINDICACAO_PRODUTO",
+      "criterio": "Ficha Pharmacia/DailyMed: contraindicada em disfunção renal prévia com ClCr <60 mL/min (varia por fabricante; corte ANVISA não confirmado)",
+      "acaoServico": "ALERTA_VERIFICAR_PRODUTO",
+      "condutaCurta": "Confirmar produto/protocolo e método renal (ClCr, não TFGe) antes de cada ciclo.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed cisplatina (setid 76aea034-6d58-4390-a164-36aa09c1f101) + CIMA 62107 §4.3, acesso 11/10/2026",
+        "trecho": "depuración de creatinina < 60 ml/min",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: validar corte na bula do produto usado no serviço"
+    },
+    {
+      "id": "CI-02",
+      "tipo": "RENAL",
+      "drogas": [
+        "pemetrexede"
+      ],
+      "classificacao": "CONTRAINDICACAO_PRODUTO",
+      "criterio": "Não administrar se ClCr <45 mL/min",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "Aferir ClCr antes de cada ciclo; hemograma D1/D8/D15 conforme bula; não iniciar ciclo se ANC <1500/mm³ ou plaquetas <100.000/mm³.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed pemetrexede §§2.1–2.6 (setid 4cc1574b-3d2f-489b-9ad3-55695bb97200), acesso 11/10/2026",
+        "trecho": "less than 45 mL/min",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "CI-03",
+      "tipo": "RENAL",
+      "drogas": [
+        "capecitabina"
+      ],
+      "classificacao": "CONTRAINDICACAO_PRODUTO",
+      "criterio": "Brasil (espelho da bula do paciente): contraindicada se depuração de creatinina <30 mL/min. EUA: reduzir 25% se ClCr 30–50 (Cockcroft-Gault); <30 sem dose estabelecida",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "ClCr antes do início e conforme evolução; ajuste 30–50 mL/min = reduzir 25% (fonte FDA; exceção da seção 8.6 NÃO se importa para o SUS).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed Xeloda §§2.7 e 8.6 (setid e702d84d-7162-4751-bf37-d724cc7e45a5); bula profissional ANVISA pendente",
+        "trecho": "creatinine clearance below 30 mL/min",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula profissional ANVISA"
+    },
+    {
+      "id": "CI-04",
+      "tipo": "RENAL",
+      "drogas": [
+        "carboplatina"
+      ],
+      "classificacao": "AJUSTE_FORMULA",
+      "criterio": "Calvert: dose TOTAL (mg) = AUC-alvo × (GFR + 25); ClCr <60 mL/min = maior risco de mielossupressão, NÃO redução percentual automática adicional",
+      "acaoServico": "BIBLIOTECA_CONSULTA",
+      "condutaCurta": "Usar dose total em mg (não mg/m²); método renal, AUC e limites dependem do protocolo.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed carboplatina, Formula Dosing (setid f330f5a2-2cad-402f-bcbb-26245a753276), acesso 11/10/2026",
+        "trecho": "Total Dose (mg) = (target AUC) x (GFR + 25)",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "CI-05",
+      "tipo": "HEPATICO",
+      "drogas": [
+        "doxorrubicina (convencional; NÃO lipossomal)"
+      ],
+      "classificacao": "AJUSTE_ESCALONADO",
+      "criterio": "Bilirrubina total 1,2–3 mg/dL: administrar 50%; 3,1–5 mg/dL: administrar 25%; >5 mg/dL ou Child-Pugh C: não iniciar/descontinuar",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "Bilirrubina antes de cada ciclo; percentual ADMINISTRADO é o campo a registrar (distinto do percentual reduzido).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed doxorrubicina §2.2 (setid 971de64b-ff09-4370-afd9-6eb1093ad27d), acesso 11/10/2026",
+        "trecho": "Greater than 5 mg/dL → Do not initiate",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "CI-06",
+      "tipo": "CARDIACO",
+      "drogas": [
+        "trastuzumabe"
+      ],
+      "classificacao": "INTERRUPCAO_TEMPORARIA_REGRADA",
+      "criterio": "Bula: interromper ≥4 semanas se queda absoluta ≥16 pontos percentuais de FEVE, OU FEVE abaixo do limite institucional E queda ≥10 pontos. ESC 2022: disfunção assintomática grave em anti-HER2 (<40%) = interrupção temporária I-C; 40–49% assintomática admite continuidade com vigilância IIa-B",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "Queda de FEVE em PONTOS PERCENTUAIS absolutos (não relativa); bula e diretriz ESC permanecem identificadas separadamente — não fundir.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Herceptin §2.5 (setid 492dbdb2) + ESC 2022 tabela 25 (PDF cardio-onco.fr p. 4286/58), acesso 11/10/2026",
+        "trecho": "at least 4 weeks",
+        "edicao": "2022"
+      },
+      "pendencia": null
+    },
+    {
+      "id": "CI-07",
+      "tipo": "TEV",
+      "drogas": [
+        "tamoxifeno"
+      ],
+      "classificacao": "CONTRAINDICACAO_CONTEXTUAL",
+      "criterio": "Bula contraindica tamoxifeno com TVP/TEP prévio NO cenário de redução de incidência/DCIS; no câncer invasivo exige avaliação individual de benefício/risco",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "TEV prévio + tamoxifeno: revisar com fonte (IA, por exemplo) conforme cenário; risco é maior nos 2 primeiros anos.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed tamoxifeno, Contraindications/Warnings (setid 8d731e7e-3b04-49a2-a0f6-3779422174cc), acesso 11/10/2026",
+        "trecho": "history of DVT or pulmonary embolus",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: diretriz formal ESMO/ASCO com trecho literal ainda pendente"
+    },
+    {
+      "id": "CI-08",
+      "tipo": "AUTOIMUNE_TRANSPLANTE",
+      "drogas": [
+        "inibidores de checkpoint"
+      ],
+      "classificacao": "PRECACAO_CONDICIONAL",
+      "criterio": "População excluída dos estudos (doença autoimune que exige imunossupressão sistêmica); HSCT alogênico com complicações fatais descritas; rejeição de órgão sólido relatada",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Autoimune ativa/transplante: avaliação individual — exclusão de ensaio NÃO é contraindicação absoluta.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed Keytruda (setid 9333c79b-d487-4538-a9f0-71b91a02b287)",
+        "trecho": "Fatal and other serious complications can occur in patients who receive allogeneic hematopoietic stem cell transplantation",
+        "edicao": "acesso Loop 1"
+      },
+      "pendencia": "INCERTO (Codex A27)"
+    },
+    {
+      "id": "CI-09",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "regime selecionado para câncer de mama",
+        "doxorrubicina",
+        "cisplatina",
+        "ciclofosfamida",
+        "gemcitabina",
+        "imatinibe",
+        "orais em geral"
+      ],
+      "classificacao": "DECISAO_INDIVIDUAL_POR_PRODUTO_TRIMESTRE",
+      "criterio": "NCI PDQ: QT selecionada para câncer de mama PODE ser considerada após o primeiro trimestre — isso NÃO autoriza todas as drogas nem outros tumores",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Gestação + QT: produto/indicação/trimestre específicos; lactação e contracepção têm regras próprias por bula.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "NCI PDQ, Breast Cancer Treatment During Pregnancy, acesso 11/10/2026",
+        "trecho": "may be considered after the first trimester",
+        "edicao": "PDQ vigente"
+      },
+      "pendencia": "PARCIAL: demais produtos/prazos INCERTOS; regras de gestação das 9 drogas já existentes em condicionais.v1.json seguem válidas"
+    },
+    {
+      "id": "CI-10",
+      "tipo": "DPD",
+      "drogas": [
+        "capecitabina",
+        "5-FU"
+      ],
+      "classificacao": "PRECACAO_GENETICA",
+      "criterio": "Avaliar deficiência de DPYD antes de iniciar (salvo necessidade imediata, rótulo FDA); evitar em deficiência completa conhecida; parcial = individualização, sem percentual inventado",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "DPYD não avaliado com fluoropirimidina programada = campo PENDENTE próprio na tela do tema; deficiência completa conhecida = evitar.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed Xeloda boxed warning e §§2.1, 5.1, acesso 11/10/2026",
+        "trecho": "avoid use in patients with known complete DPD deficiency",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: regra operacional brasileira requer curadoria do serviço"
+    }
+  ],
+  "resumoCuradoria": {
+    "totalItens": 10,
+    "comFontePlena": 6,
+    "parciaisOuIncertos": 4,
+    "nota": "As 22 regras de condicionais.v1.json não são alteradas nem duplicadas aqui; este arquivo só acrescenta."
+  },
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "LITERATURA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.1 bloco de contraindicações (verificação médica Codex M1-1, M2-2, M2-3, M3-2, M3-3, M6-2)",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  }
+}

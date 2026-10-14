@@ -81,8 +81,8 @@ export function cadastrarPaciente(ambiente: Awaited<ReturnType<typeof abrirAmbie
   return { patientId, encounterId };
 }
 
-export async function carregarConsulta(ambiente: Awaited<ReturnType<typeof abrirAmbiente>>, patientId = PACIENTE) {
-  const result = await ambiente.request<Record<string, any>>("/consulta/carregar", { patientId });
+export async function carregarConsulta(ambiente: Awaited<ReturnType<typeof abrirAmbiente>>, patientId = PACIENTE, encounterId = patientId === PACIENTE ? ENCONTRO : "encontro-teste-93") {
+  const result = await ambiente.request<Record<string, any>>("/consulta/carregar", { patientId, encounterId });
   if (result.status !== 200) throw new Error(`CONSULTA_NAO_CARREGADA:${result.data.codigo}`);
   return result;
 }

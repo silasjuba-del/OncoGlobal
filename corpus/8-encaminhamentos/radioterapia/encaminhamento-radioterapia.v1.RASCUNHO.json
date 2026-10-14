@@ -1,0 +1,93 @@
+{
+  "header": {
+    "id": "encaminhamento-radioterapia",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "estrutura comum §15 + prazos/prioridade (consolidado §3.3)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "destinoNoSus": "Serviço de radioterapia via regulação (SISREG); APAC de radioterapia conforme regras vigentes",
+  "motivosListaFechada": [
+    "radioterapia adjuvante pós-cirúrgica",
+    "neoadjuvância / tratamento radical exclusivo (ex.: colo do útero, reto)",
+    "radioterapia paliativa (metástase óssea dolorosa, compressão, sangramento, cérebro)",
+    "boost/irradiação parcial conforme protocolo",
+    "reavaliação durante tratamento (toxicidade)"
+  ],
+  "estrutura": {
+    "fatoConfirmado": [
+      "diagnóstico (CID) e data",
+      "estadiamento (sistema + edição + data)",
+      "AP/IHQ e biomarcadores",
+      "cirurgia prévia (data e descrição) e QT em curso/realizada",
+      "imagens com data (para planejamento)"
+    ],
+    "decisaoMedica": [
+      "intenção do tratamento (curativa × paliativa) e sítio a irradiar",
+      "pergunta clínica ao radioterapeuta",
+      "urgência com critério"
+    ]
+  },
+  "urgencia": {
+    "eletivo": "adjuvância dentro da janela do protocolo",
+    "prioritario": "dentro dos 60 dias da Lei 12.732/2012 (radioterapia conta como 1º tratamento); metástase óssea com risco iminente de fratura/compressão medular = subir prioridade com critério descrito",
+    "urgente": "compressão medular confirmada / hemorragia ativa — contato direto"
+  },
+  "prioridadeEstatuto": "Lei 14.238/2021 art. 4º §2º.",
+  "documentosQueSeguem": [
+    "AP/IHQ",
+    "imagens de planejamento (TC/RM recentes)",
+    "resumo clínico"
+  ],
+  "proibicoes": [
+    "Prescrever dose/tecnica de RT (é do radioterapeuta)",
+    "Inferir urgência pelo tumor",
+    "Fluxo municipal inventado"
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "NORMA",
+      "referencia": "estrutura comum §15 + prazos/prioridade (consolidado §3.3)",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "packs": [
+    "pack-colo-utero",
+    "pack-cabeca-pescoco",
+    "pack-esofago",
+    "pack-colorretal",
+    "pack-mama",
+    "pack-prostata",
+    "pack-pulmao",
+    "pack-canal-anal",
+    "pack-gliomas"
+  ],
+  "portas": {
+    "consome": [
+      "templates/resumo-prontuario-modelo-servico (resumo do caso)",
+      "tumor",
+      "patologia",
+      "exames.realizados",
+      "prescricao.vigente"
+    ],
+    "oferece": [
+      "documento.encaminhamento-radioterapia",
+      "agenda (retorno pós-encaminhamento)"
+    ]
+  }
+}

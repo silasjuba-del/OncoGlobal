@@ -1,0 +1,112 @@
+{
+  "header": {
+    "id": "laudo-judicializacao-drogas",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2; modelo existente templates/laudo-judicial.v1.json (não alterado)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "destinatario": "Defensoria Pública / Poder Judiciário (Vara de Fazenda Pública)",
+  "finalidade": "Relatório médico para ação judicial de fornecimento de medicamento/produto fora das listas do SUS.",
+  "baseLegal": [
+    {
+      "norma": "CF/1988",
+      "artigo": "art. 196",
+      "trecho": "A saúde é direito de todos e dever do Estado",
+      "vigencia": "vigente",
+      "estado": "CONFIRMADA",
+      "pendencia": null
+    },
+    {
+      "norma": "STF — Repercussão Geral Tema 6 (RE 566.471)",
+      "artigo": null,
+      "trecho": "É possível, excepcionalmente, a concessão judicial de medicamento registrado na ANVISA, mas não incorporado às listas de dispensação do SUS",
+      "vigencia": "vigente",
+      "estado": "CITADA (portal STF)",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE (audit: INCERTA — não aberta)"
+    }
+  ],
+  "requisitosConteudo": {
+    "fatoConfirmado": [
+      "Identificação, CID, data do diagnóstico, estadiamento",
+      "Tratamento anterior realizado e resposta",
+      "Exames que documentam a indicação"
+    ],
+    "decisaoMedica": [
+      "Medicamento/produto indicado, posologia e duração prevista (DECISAO_MEDICA com fonte da indicação)",
+      "Ineficácia ou ausência de alternativa terapêutica no SUS para o caso (por que a opção padrão não serve)",
+      "Risco de progressão sem o medicamento",
+      "NUNCA conclusão jurídica automática"
+    ]
+  },
+  "documentosAnexos": [
+    "diretriz/bula/estudo que fundamenta a indicação",
+    " histórico de dispensação tentada",
+    "comprovante de não disponibilidade (quando houver)"
+  ],
+  "proibicoesTextoFixo": [
+    "Afirmação de 'direito adquirido' ou tese jurídica como texto fixo",
+    "Prescrição sem indicação individual documentada",
+    "Prometer resposta ao tratamento"
+  ],
+  "observacoes": "Requisitos do STF para deferimento: eficácia pela medicina baseada em evidências + ineficácia/ausência de alternativa no SUS + indicação médica documentada e expressa. O relatório sustenta os TRÊS eixos com fatos e decisão médica separados.",
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "NORMA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2; modelo existente templates/laudo-judicial.v1.json (não alterado)",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "assinatura": {
+    "origem": "CONFIG",
+    "campos": [
+      "medico.nome",
+      "medico.crm_uf",
+      "medico.rqe",
+      "local",
+      "data",
+      "assinatura_carimbo"
+    ],
+    "fonte": "relatorio-pericial.v1 + Res. CFM 2.381/2024 (identificação mínima do médico; texto oficial PENDENTE de reabertura)"
+  },
+  "validade": {
+    "valor": null,
+    "pendencia": "DECISAO_DR_SILAS: validade do documento por finalidade"
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "A9 red team: colisão de id com corpus/templates/laudo-judicial.v1.json",
+      "original": "laudo-judicial",
+      "corrigido": "laudo-judicializacao-drogas"
+    }
+  ],
+  "portas": {
+    "consome": [
+      "prontuario.identificacao",
+      "tumor (CID, data do diagnóstico, estadiamento)",
+      "resumoLongitudinal",
+      "prescricao.vigente",
+      "templates/resumo-prontuario-modelo-servico"
+    ],
+    "oferece": [
+      "documento.laudo-judicializacao-drogas"
+    ]
+  }
+}

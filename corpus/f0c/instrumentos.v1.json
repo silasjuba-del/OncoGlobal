@@ -1,0 +1,55 @@
+{
+  "id": "instrumentos-f0c",
+  "versao": "1.0.0",
+  "nota": "Escopo autorizado pelo Dr. Silas. Fontes conferidas pelo Codex em 2026-10-10. Somente cálculo/registro; sem conduta automática. Aplicabilidade deve ser confirmada pelo médico. As unidades abaixo são exigidas; nenhuma conversão silenciosa.",
+  "instrumentos": [
+    {
+      "id": "KPS", "versao": "SEER-acesso-2026-10-10", "ativo": true,
+      "fonte": { "tipo": "LITERATURA", "trecho": "The scale relates purely to physical ability and covers 11 points", "referencia": "https://www.training.seer.cancer.gov/followup/dataset/karnofsky-scale.html", "conferidoEm": "2026-10-10" },
+      "escopo": "Performance documentada pelo médico, sem inferência por ECOG ou narrativa.",
+      "valores": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    },
+    {
+      "id": "CHILD_PUGH", "versao": "VA-INR-2026-10-10", "ativo": true,
+      "fonte": { "tipo": "LITERATURA", "trecho": "A = 5-6 points B = 7-9 points C = 10-15 points", "referencia": "https://www.hepatitis.va.gov/provider/tools/child-pugh-calculator.asp", "conferidoEm": "2026-10-10" },
+      "escopo": "Cirrose: variante com INR; não aplica automaticamente variantes para colestase ou interpreta INR sob anticoagulante.",
+      "bilirrubinaMgDl": { "1": "<2", "2": "2 a 3 inclusive", "3": ">3" },
+      "albuminaGDl": { "1": ">3.5", "2": "2.8 a 3.5 inclusive", "3": "<2.8" },
+      "inr": { "1": "<1.7", "2": "1.7 a 2.3 inclusive", "3": ">2.3" },
+      "ascite": { "AUSENTE": 1, "RESPONSIVA_DIURETICO": 2, "REFRATARIA": 3 },
+      "encefalopatia": { "AUSENTE": 1, "GRAU_1_2": 2, "GRAU_3_4": 3 },
+      "classes": { "A": "5-6", "B": "7-9", "C": "10-15" }
+    },
+    {
+      "id": "ALBI", "versao": "Johnson-2015", "ativo": true,
+      "fonte": { "tipo": "LITERATURA", "trecho": "where bilirubin is in μmol/L and albumin in g/L.", "referencia": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4322258/", "conferidoEm": "2026-10-10" },
+      "fonteValidacaoCortes": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5473065/",
+      "escopo": "Reserva hepática em carcinoma hepatocelular; não é Child-Pugh, não gera dose.",
+      "formula": "0.66 * log10(bilirrubina umol/L) - 0.085 * albumina g/L",
+      "classes": { "1": "escore <= -2.60", "2": "-2.60 < escore <= -1.39", "3": "escore > -1.39" }
+    },
+    {
+      "id": "KHORANA", "versao": "Khorana-2008", "ativo": true,
+      "fonte": { "tipo": "LITERATURA", "trecho": "high-risk (score ≥ 3)", "referencia": "https://ashpublications.org/blood/article/111/10/4902/24209/Development-and-validation-of-a-predictive-model", "conferidoEm": "2026-10-10" },
+      "escopo": "Modelo original: dados basais antes de QT em pacientes oncológicos ambulatoriais. Não determina profilaxia.",
+      "sitio": { "ESTOMAGO": 2, "PANCREAS": 2, "PULMAO": 1, "LINFOMA": 1, "GINECOLOGICO": 1, "BEXIGA": 1, "TESTICULO": 1, "OUTRO": 0 },
+      "pontosAdicionais": ["1 se plaquetas >=350 em 10^9/L", "1 se Hb <10 g/dL OU estimulante eritropoiese", "1 se leucocitos >11 em 10^9/L", "1 se IMC >=35 kg/m2"],
+      "classes": { "BAIXO": "0", "INTERMEDIARIO": "1-2", "ALTO": ">=3" }
+    },
+    {
+      "id": "G8", "versao": "SIOG-G8-original", "ativo": true,
+      "fonte": { "tipo": "LITERATURA", "trecho": "0 : >85\n1 : 80-85\n2 : <80", "referencia": "https://siog.org/wp-content/uploads/2015/10/g8_english_0.pdf", "conferidoEm": "2026-10-10" },
+      "fonteCorte": "https://siog.org/educational-resources/comprehensive-geriatric-assessment/",
+      "escopo": "Rastreamento geriátrico em pessoa idosa com câncer; aplicação confirmada pelo médico; resultado não substitui avaliação geriátrica.",
+      "ingestao3Meses": { "REDUCAO_GRAVE": 0, "REDUCAO_MODERADA": 1, "SEM_REDUCAO": 2 },
+      "perdaPeso3Meses": { "MAIS_3_KG": 0, "NAO_SABE": 1, "ENTRE_1_3_KG": 2, "SEM_PERDA": 3 },
+      "mobilidade": { "LEITO_CADEIRA": 0, "SAI_LEITO_NAO_CASA": 1, "SAI_CASA": 2 },
+      "neuropsicologico": { "DEMENCIA_OU_DEPRESSAO_GRAVE": 0, "LEVE": 1, "AUSENTE": 2 },
+      "imcKgM2": { "0": "<19", "1": "19 a <21", "2": "21 a <23", "3": ">=23" },
+      "medicamentosPorDia": { "0": ">3", "1": "<=3" },
+      "autoavaliacaoSaude": { "PIOR": 0, "NAO_SABE": 0.5, "IGUAL": 1, "MELHOR": 2 },
+      "idadeAnos": { "0": ">85", "1": "80-85", "2": "<80" },
+      "total": "0 a 17; <=14 rastreamento alterado"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "header": {
+    "id": "encaminhamento-psico-oncologia",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "lista do serviço — critérios PENDENTE aprovação",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "estrutura": {
+    "fatoConfirmado": [
+      "diagnóstico (CID) e data",
+      "estadiamento (sistema e edição)",
+      "tratamento realizado e em curso",
+      "ECOG",
+      "medicamentos em uso",
+      "exames recentes com data"
+    ],
+    "decisaoMedica": [
+      "motivo (lista fechada)",
+      "pergunta clínica",
+      "urgência com critério"
+    ]
+  },
+  "portas": {
+    "consome": [
+      "templates/resumo-prontuario-modelo-servico",
+      "tumor",
+      "toxicidade.vigente",
+      "consulta.ecog"
+    ],
+    "oferece": [
+      "documento.encaminhamento"
+    ]
+  },
+  "proibicoes": [
+    "conduta do especialista escrita pelo app",
+    "semáforo ou cor no documento (D-F1-01)"
+  ],
+  "destinoNoSus": "Psicologia/psico-oncologia do serviço; CAPS se risco",
+  "motivosListaFechada": [
+    "sofrimento emocional relevante no rastreio",
+    "ansiedade ou depressão interferindo no tratamento",
+    "adesão comprometida",
+    "luto antecipatório / família",
+    "ideação suicida (urgente: CAPS/PS)"
+  ],
+  "urgencia": {
+    "eletivo": "apoio",
+    "prioritario": "interferência no tratamento",
+    "urgente": "ideação suicida: CAPS ou PS no mesmo dia"
+  },
+  "packs": {
+    "tipo": "TRANSVERSAL",
+    "aplicaA": "TODOS_OS_PACKS",
+    "nota": "contrato: o motor oferece este encaminhamento em qualquer pack (Codex 2026-10-11 pediu contrato explícito em vez de texto)"
+  },
+  "pendencias": [
+    "Instrumento de rastreio (ex.: termômetro de distress) a decidir."
+  ]
+}

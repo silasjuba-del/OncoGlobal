@@ -1,3 +1,5 @@
+import type { LimiarAlertaPlaquetas, EntradaPlaquetas, AlertaPlaquetas, GrauCandidatoPlaquetas, ClassificadorPlaquetas, PainelPlaquetas } from '../contracts/api/plaquetasAlerta.js';
+export type { LimiarAlertaPlaquetas, EntradaPlaquetas, AlertaPlaquetas, GrauCandidatoPlaquetas, ClassificadorPlaquetas, PainelPlaquetas } from '../contracts/api/plaquetasAlerta.js';
 // W11-H6 · Decisão clínica Dr. Silas (2026-10-08): plaquetas MENOR que o limiar exclusivo geram ALERTA,
 // independente do CTCAE. Alerta é avaliado ANTES e SEPARADO da graduação; não depende nem é suprimido por ela.
 // Alerta nunca bloqueia salvar nem altera destino. Limiar e plausibilidade entram pelo JSON (lab-thresholds.v1).
@@ -5,45 +7,19 @@
 
 type Bruto = Record<string, unknown>;
 
-export interface LimiarAlertaPlaquetas {
-  ativo: boolean;
-  rulesetId: string;
-  rulesetVersao: string;
-  decisao: string;
-  limiarExclusivo: number;
-  plausivelMin: number;
-  plausivelMax: number;
-}
 
-export interface EntradaPlaquetas {
-  valor: number | null;
-  data: string | null;
-}
 
-export interface AlertaPlaquetas {
-  tipo: "ALERTA_PLAQUETAS";
-  estado: "ALERTA" | "SEM_ALERTA" | "PENDENTE";
-  valor: number | null;
-  data: string | null;
-  limiarExclusivo: number;
-  motivo: string;
-  regraId: string;
-  rulesetVersao: string;
-  bloqueiaSalvar: false;
-}
+
+
+
 
 /** Candidato de graduação CTCAE. Nunca confirmado pelo sistema; ausente nunca vira 0. */
-export interface GrauCandidatoPlaquetas {
-  grau: number | null;
-  estado: "PENDENTE";
-  confirmadoPeloMedico: false;
-  motivo: string;
-}
 
-export type ClassificadorPlaquetas = (valor: number | null) => GrauCandidatoPlaquetas;
+
+
 
 /** Posição 0: alerta clínico. Posição 1: graduação CTCAE (sempre depois). */
-export type PainelPlaquetas = readonly [AlertaPlaquetas, GrauCandidatoPlaquetas];
+
 
 function objeto(valor: unknown, caminho: string): Bruto {
   if (typeof valor !== "object" || valor === null || Array.isArray(valor)) throw new Error(`${caminho} ausente`);

@@ -13,6 +13,8 @@ import {
 } from "../../contracts/w10/closure.js";
 import { g02PhiEgress, g27SaidaExternaLimpa } from "../harness/gates.js";
 import type { DicionarioPaciente } from "../llm/desidentificar.js";
+import { instrucoesExtracaoOpenAi, schemaExtracaoOpenAi } from "../llm/openai/index.js";
+import { payloadDocumentoOriginal } from "../llm/openai/documentoOriginal.js";
 
 type Intent = z.infer<typeof ActionIntent>;
 
@@ -31,8 +33,34 @@ export interface EvidenciaSaidaExterna {
 }
 export type ResultadoValidacaoSaida = { ok: true; evidencia: EvidenciaSaidaExterna }
   | { ok: false; codigo?: string };
+/** Separate server-only authorization for draft extraction; never accepts the original-document exception. */
+export interface EvidenciaExtracaoLlm {
+  modo: "DESIDENTIFICADO";
+  origem: "UPLOAD_LOCAL_EXPLICITO" | "RETRATO_CONFIRMADO";
+  destino: "https://api.openai.com/v1/responses";
+  modelo: string;
+  store: false;
+  revisaoObrigatoria: true;
+  fonte: { id: string; versao: number; hash: string };
+  payload: string;
+  dicionarioPaciente: DicionarioPaciente;
+  sanitizationReport: { riscoResidual: "BAIXO"; versaoSanitizador: string; payloadHash: string; sourceHash: string };
+  autorizacao: { patientId: string; encounterId: string; sourceId: string; sourceVersion: number;
+    sourceHash: string; payloadHash: string; vigente: true; escopo: "EXTRACAO_RASCUNHO" };
+}
+export type ResultadoValidacaoExtracaoLlm = { ok: true; evidencia: EvidenciaExtracaoLlm } | { ok: false };
+export interface EvidenciaDocumentoOriginalLlm {
+  decisaoId: "D-W9-66"; modo: "DOCUMENTO_ORIGINAL"; origem: "UPLOAD_LOCAL_EXPLICITO";
+  provider: "OPENAI"; destino: "https://api.openai.com/v1/responses"; modelo: string; store: false;
+  revisaoObrigatoria: true; phi: "EXCECAO_EXPRESSA"; payload: string;
+  fonte: { id: string; versao: number; hash: string; mime: "application/pdf"; paginas: number };
+  lease: { id: string; emitidaEm: string; expiraEm: string; usada: false; medicoId: string };
+  autorizacao: { patientId: string; encounterId: string; tumorLotId: string | null; sourceId: string; sourceVersion: number;
+    sourceHash: string; payloadHash: string; vigente: true; escopo: "D_W9_66_TRANSCRICAO_NAO_VERIFICADA" };
+}
+export type ResultadoValidacaoDocumentoOriginal = { ok: true; evidencia: EvidenciaDocumentoOriginalLlm } | { ok: false };
 export interface Executor {
-  executar(intent: Intent, evidencia?: EvidenciaSaidaExterna): Promise<{ ok: true; recibo: string } | { ok: false; incerto: boolean; erro: string }>;
+  executar(intent: Intent, evidencia?: EvidenciaSaidaExterna, extracaoLlm?: EvidenciaExtracaoLlm, original?: EvidenciaDocumentoOriginalLlm): Promise<{ ok: true; recibo: string } | { ok: false; incerto: boolean; erro: string }>;
 }
 export interface ResultadoGateway {
   decisao: "EXECUTADA" | "REPLAY" | "NEGADA" | "OUTCOME_UNKNOWN" | "FALHOU";
@@ -60,6 +88,14 @@ export type ReadTransport = (request: {
 }) => Promise<unknown>;
 
 const readHash = (value: string) => createHash("sha256").update(value, "utf8").digest("hex");
+/** An empty dictionary is absence of evidence, not evidence that patient identity is absent. */
+function dicionarioConhecido(value: unknown): value is DicionarioPaciente {
+  if (!value || typeof value !== "object") return false;
+  const dic = value as { nomes?: unknown; identificadores?: unknown };
+  return Array.isArray(dic.nomes) && dic.nomes.length > 0 && Array.isArray(dic.identificadores)
+    && dic.nomes.every(n => typeof n === "string" && n.trim().length > 0)
+    && dic.identificadores.every(id => typeof id === "string" && id.trim().length > 0);
+}
 
 /** Fail-closed authorization for READ. No patient/encounter identity, payload or credential reaches audit. */
 export function autorizarPedidoLeitura(input: unknown, options: {
@@ -126,10 +162,7 @@ export async function executarLeitura(input: unknown, options: {
     const auditOk = auditarFalha(authorization.request.destination, "READ_TRANSPORTE_AUSENTE");
     return { estado: "NEGADA", motivoCodigo: auditOk ? "READ_TRANSPORTE_AUSENTE" : "AUDITORIA_INDISPONIVEL", requestHash: authorization.requestHash };
   }
-  if (!options.dicionarioPaciente || !Array.isArray(options.dicionarioPaciente.nomes)
-    || !Array.isArray(options.dicionarioPaciente.identificadores)
-    || options.dicionarioPaciente.nomes.some((item) => typeof item !== "string")
-    || options.dicionarioPaciente.identificadores.some((item) => typeof item !== "string")) {
+  if (!dicionarioConhecido(options.dicionarioPaciente)) {
     const auditOk = auditarFalha(authorization.request.destination, "READ_VALIDACAO_PHI_AUSENTE");
     return { estado: "NEGADA", motivoCodigo: auditOk ? "READ_VALIDACAO_PHI_AUSENTE" : "AUDITORIA_INDISPONIVEL", requestHash: authorization.requestHash };
   }
@@ -213,7 +246,8 @@ function evidenciaEhJson(value: unknown, vistos = new WeakSet<object>()): boolea
 
 function evidenciasSaidaPassam(intent: Intent, evidencia: EvidenciaSaidaExterna): boolean {
   if (!evidencia || typeof evidencia !== "object" || typeof evidencia.payload !== "string" || !evidencia.payload
-    || typeof evidencia.destinoCanonico !== "string" || !evidencia.destinoCanonico.trim()) return false;
+    || typeof evidencia.destinoCanonico !== "string" || !evidencia.destinoCanonico.trim()
+    || !dicionarioConhecido(evidencia.dicionarioPaciente)) return false;
   const { artefato, autorizacao, sanitizationReport: report } = evidencia;
   const payloadHash = hashPayload(evidencia.payload);
   const destino = evidencia.destinoCanonico;
@@ -230,6 +264,68 @@ function evidenciasSaidaPassam(intent: Intent, evidencia: EvidenciaSaidaExterna)
   const g27 = g27SaidaExternaLimpa({ artefato: { tipo: artefato.tipo, metadados: artefato.metadados ?? null },
     destino, sanitizationReport: report });
   return g02.decisao === "PASSA" && g27.decisao === "PASSA";
+}
+
+function extracaoLlmPassa(intent: Intent, e: EvidenciaExtracaoLlm): boolean {
+  const origemEsperada = intent.objeto.tipo === "RETRATO_SINTESE" ? "RETRATO_CONFIRMADO" : "UPLOAD_LOCAL_EXPLICITO";
+  if (e.modo !== "DESIDENTIFICADO" || e.origem !== origemEsperada || e.store !== false
+    || e.revisaoObrigatoria !== true || e.destino !== "https://api.openai.com/v1/responses"
+    || typeof e.modelo !== "string" || !e.modelo.trim() || !dicionarioConhecido(e.dicionarioPaciente)
+    || typeof e.payload !== "string" || !e.payload || !e.fonte || !e.autorizacao || !e.sanitizationReport) return false;
+  const a = e.autorizacao, report = e.sanitizationReport;
+  const ph = hashPayload(e.payload);
+  if (intent.escopo.patientId === null || intent.escopo.encounterId === null
+    || a.patientId !== intent.escopo.patientId || a.encounterId !== intent.escopo.encounterId
+    || e.fonte.id !== intent.objeto.id || e.fonte.versao !== intent.objeto.versao
+    || a.sourceId !== e.fonte.id || a.sourceVersion !== e.fonte.versao || !e.fonte.hash
+    || a.sourceHash !== e.fonte.hash || report.sourceHash !== e.fonte.hash || a.payloadHash !== ph
+    || report.payloadHash !== ph || a.vigente !== true || a.escopo !== "EXTRACAO_RASCUNHO"
+    || (intent.destino !== null && intent.destino !== e.destino)) return false;
+  const body: unknown = JSON.parse(e.payload);
+  if (!body || typeof body !== "object") return false;
+  const b = body as Record<string, unknown>;
+  if (Object.keys(b).some(k => !["model", "store", "tools", "instructions", "input", "text"].includes(k))) return false;
+  const text = b.text as { format?: { type?: unknown; strict?: unknown; name?: unknown; schema?: unknown } } | undefined;
+  if (b.store !== false || b.model !== e.modelo || !Array.isArray(b.tools) || b.tools.length !== 0
+    || text?.format?.type !== "json_schema" || text.format.strict !== true
+    || !Array.isArray(b.input) || b.input.length !== 1) return false;
+  if (b.instructions !== instrucoesExtracaoOpenAi || text.format.name !== "f1_extracao"
+    || JSON.stringify(text.format.schema) !== JSON.stringify(schemaExtracaoOpenAi())) return false;
+  // The sanitized extraction route only accepts text. Files, images and tools require a different, unavailable proof.
+  const input = b.input[0] as { role?: unknown; content?: unknown } | null;
+  if (!input || Object.keys(input).some(k => !["role", "content"].includes(k))
+    || input.role !== "user" || !Array.isArray(input.content) || input.content.length !== 1) return false;
+  const content = input.content[0] as { type?: unknown; text?: unknown } | null;
+  if (!content || Object.keys(content).some(k => !["type", "text"].includes(k))
+    || content.type !== "input_text" || typeof content.text !== "string") return false;
+  // Numeric bounds in the approved JSON schema are protocol metadata, not patient data.
+  // Every free-text/data field is still inspected; the schema and instructions must match the approved template above.
+  return g02PhiEgress(`${e.modelo}\n${String(b.instructions)}\n${content.text}`, e.dicionarioPaciente).decisao === "PASSA"
+    && g27SaidaExternaLimpa({ artefato: { tipo: "TEXTO", metadados: {} }, destino: e.destino, sanitizationReport: report }).decisao === "PASSA";
+}
+function documentoOriginalPassa(intent: Intent, e: EvidenciaDocumentoOriginalLlm, sessao: Sessao, agora: string): boolean {
+  if (e.decisaoId !== "D-W9-66" || e.modo !== "DOCUMENTO_ORIGINAL" || e.origem !== "UPLOAD_LOCAL_EXPLICITO"
+    || e.provider !== "OPENAI" || e.destino !== "https://api.openai.com/v1/responses" || e.store !== false
+    || e.phi !== "EXCECAO_EXPRESSA" || e.revisaoObrigatoria !== true || !e.fonte || !e.lease || !e.autorizacao
+    || typeof e.modelo !== "string" || !e.modelo.trim() || typeof e.payload !== "string" || e.fonte.mime !== "application/pdf") return false;
+  const now = Date.parse(agora), issued = Date.parse(e.lease.emitidaEm), expires = Date.parse(e.lease.expiraEm);
+  if (!Number.isFinite(now) || !Number.isFinite(issued) || !Number.isFinite(expires) || issued > now || expires <= now
+    || expires - issued > 60_000 || expires > Date.parse(sessao.expiraEm) || e.lease.usada !== false
+    || !e.lease.id || e.lease.medicoId !== sessao.medicoId || !Number.isInteger(e.fonte.paginas) || e.fonte.paginas < 1 || e.fonte.paginas > 40) return false;
+  const a = e.autorizacao;
+  if (intent.escopo.patientId === null || intent.escopo.encounterId === null || a.patientId !== intent.escopo.patientId
+    || a.encounterId !== intent.escopo.encounterId || e.fonte.id !== intent.objeto.id || e.fonte.versao !== intent.objeto.versao
+    || a.sourceId !== e.fonte.id || a.sourceVersion !== e.fonte.versao || a.sourceHash !== e.fonte.hash
+    || a.payloadHash !== hashPayload(e.payload) || a.vigente !== true || a.escopo !== "D_W9_66_TRANSCRICAO_NAO_VERIFICADA"
+    || (intent.destino !== null && intent.destino !== e.destino)) return false;
+  const b = JSON.parse(e.payload) as { input?: { content?: { file_data?: unknown }[] }[] };
+  const data = b.input?.[0]?.content?.[0]?.file_data;
+  if (typeof data !== "string" || !data.startsWith("data:application/pdf;base64,")) return false;
+  const base64 = data.slice("data:application/pdf;base64,".length);
+  if (base64.length > 12_000_000 || !/^[A-Za-z0-9+/]+={0,2}$/.test(base64) || e.payload !== payloadDocumentoOriginal(e.modelo, base64)) return false;
+  const bytes = Buffer.from(base64, "base64");
+  return bytes.toString("base64") === base64 && bytes.subarray(0, 5).toString() === "%PDF-"
+    && createHash("sha256").update(bytes).digest("hex") === e.fonte.hash;
 }
 
 const HARD_FORBIDDEN: { id: string; teste: (i: Intent) => boolean }[] = [
@@ -262,6 +358,8 @@ export function criarGateway(deps: {
   auditar: (r: RegistroAuditoria) => void;
   /** Contexto obtido do servidor/ledger; nunca derivado de um booleano do corpo HTTP. */
   validarSaida?: (intent: Intent, sessao: Sessao) => Promise<ResultadoValidacaoSaida> | ResultadoValidacaoSaida;
+  validarExtracaoLlm?: (intent: Intent, sessao: Sessao) => Promise<ResultadoValidacaoExtracaoLlm> | ResultadoValidacaoExtracaoLlm;
+  validarDocumentoOriginalLlm?: (intent: Intent, sessao: Sessao) => Promise<ResultadoValidacaoDocumentoOriginal> | ResultadoValidacaoDocumentoOriginal;
 }) {
   const auditarSeguro = (r: RegistroAuditoria): boolean => { try { deps.auditar(r); return true; } catch { return false; } };
   const negar = (acao: string, motivoCodigo: string): ResultadoGateway => {
@@ -296,6 +394,31 @@ export function criarGateway(deps: {
       if (proibido) return negar(acao, `HARD_FORBIDDEN:${proibido.id}`);
 
       let evidencia: EvidenciaSaidaExterna | undefined;
+      let extracaoLlm: EvidenciaExtracaoLlm | undefined;
+      let originalLlm: EvidenciaDocumentoOriginalLlm | undefined;
+      if ((intent.verbo as string) === "LLM_EXTRACAO" && intent.objeto.tipo === "PDF_ORIGINAL_D_W9_66") {
+        if (!deps.validarDocumentoOriginalLlm) return negar(acao, "D_W9_66_SEM_PROVA_SERVIDOR");
+        try {
+          const v = await deps.validarDocumentoOriginalLlm(intent, sessao);
+          if (!v || v.ok !== true) return negar(acao, "D_W9_66_NAO_AUTORIZADA");
+          const copia = structuredClone(v.evidencia);
+          if (!evidenciaEhJson(copia) || !documentoOriginalPassa(intent, copia, sessao, deps.agora())) return negar(acao, "D_W9_66_PROVA_INVALIDA");
+          originalLlm = congelarProfundo(copia);
+          if (!auditarSeguro({ acaoPedida: "LLM_EXTRACAO", decisao: "PERMITIDA", motivoCodigo: "G02_G27_D_W9_66_EXCECAO_DOCUMENTAL", em: deps.agora() }))
+            return negar(acao, "AUDITORIA_INDISPONIVEL");
+        } catch { return negar(acao, "D_W9_66_PROVA_INVALIDA"); }
+      } else if ((intent.verbo as string) === "LLM_EXTRACAO") {
+        if (!deps.validarExtracaoLlm) return negar(acao, "LLM_EXTRACAO_SEM_PROVA_SERVIDOR");
+        try {
+          const v = await deps.validarExtracaoLlm(intent, sessao);
+          if (!v || v.ok !== true) return negar(acao, "LLM_EXTRACAO_NAO_AUTORIZADA");
+          const copia = structuredClone(v.evidencia);
+          if (!evidenciaEhJson(copia)) return negar(acao, "LLM_EXTRACAO_PROVA_INVALIDA");
+          if ((copia.modo as string) !== "DESIDENTIFICADO") return negar(acao, "D_W9_66_DOCUMENTO_ORIGINAL_INDISPONIVEL");
+          if (!extracaoLlmPassa(intent, copia)) return negar(acao, "LLM_EXTRACAO_PROVA_INVALIDA");
+          extracaoLlm = congelarProfundo(copia);
+        } catch { return negar(acao, "LLM_EXTRACAO_PROVA_INVALIDA"); }
+      }
       if (VERBOS_SAIDA_EXTERNA.has(intent.verbo)) {
         if (!deps.validarSaida) return negar(acao, "SAIDA_NAO_AUTORIZADA");
         let validacao: ResultadoValidacaoSaida;
@@ -320,7 +443,11 @@ export function criarGateway(deps: {
       }
 
       // Hash de conteúdo validado integra a chave idempotente; mudança de payload/destino nunca reaproveita autorização anterior.
-      const payloadHash = createHash("sha256").update(JSON.stringify(evidencia
+      const payloadHash = createHash("sha256").update(JSON.stringify(originalLlm
+        ? { intent, payloadHash: originalLlm.autorizacao.payloadHash, sourceHash: originalLlm.fonte.hash, destino: originalLlm.destino }
+        : extracaoLlm
+        ? { intent, payloadHash: extracaoLlm.sanitizationReport.payloadHash, sourceHash: extracaoLlm.fonte.hash, destino: extracaoLlm.destino }
+        : evidencia
         ? { intent, payloadHash: evidencia.sanitizationReport.payloadHash, destino: evidencia.destinoCanonico }
         : intent)).digest("hex");
       const chave = intent.idempotencyKey;
@@ -345,16 +472,16 @@ export function criarGateway(deps: {
         if (reserva.registro.payloadHash !== payloadHash) return negar(acao, "CHAVE_REUSADA_PAYLOAD_DIFERENTE");
         return replay(reserva.registro.resultado);
       }
-      if (evidencia && !auditarSeguro({ acaoPedida: acao, decisao: "PERMITIDA", motivoCodigo: "OK", em: deps.agora() })) {
+      if ((evidencia || extracaoLlm || originalLlm) && !auditarSeguro({ acaoPedida: acao, decisao: "PERMITIDA", motivoCodigo: "OK", em: deps.agora() })) {
         deps.store.delete?.(chave);
         return negar(acao, "AUDITORIA_INDISPONIVEL");
       }
       const promessa = (async (): Promise<ResultadoGateway> => {
         let resultado: ResultadoGateway;
         try {
-          const r = await exec.executar(intent, evidencia);
+          const r = await exec.executar(intent, evidencia, extracaoLlm, originalLlm);
           resultado = r.ok
-            ? { decisao: "EXECUTADA", motivoCodigo: "OK", recibo: evidencia ? `saida-${randomUUID()}` : r.recibo }
+            ? { decisao: "EXECUTADA", motivoCodigo: "OK", recibo: (evidencia || extracaoLlm || originalLlm) ? `saida-${randomUUID()}` : r.recibo }
             : r.incerto
               ? { decisao: "OUTCOME_UNKNOWN", motivoCodigo: "RESULTADO_INCERTO_SEM_REENVIO" }
               : { decisao: "FALHOU", motivoCodigo: "FALHA_EXECUTOR" };
@@ -364,7 +491,7 @@ export function criarGateway(deps: {
         // FALHOU = falha certa sem efeito: libera a chave para nova tentativa explícita.
         if (resultado.decisao === "FALHOU") deps.store.delete?.(chave);
         else deps.store.set(chave, { payloadHash, resultado }, deps.agora());
-        if (!evidencia) auditarSeguro({ acaoPedida: acao, decisao: "PERMITIDA", motivoCodigo: resultado.motivoCodigo, em: deps.agora() });
+        if (!evidencia && !extracaoLlm && !originalLlm) auditarSeguro({ acaoPedida: acao, decisao: "PERMITIDA", motivoCodigo: resultado.motivoCodigo, em: deps.agora() });
         return resultado;
       })();
       emAndamento.set(chave, { payloadHash, promessa });
@@ -426,8 +553,8 @@ export function autorizarLeitura(
   if (!Array.isArray(politica.fontesPermitidas) || !politica.fontesPermitidas.includes(fonteId)) {
     return negar("LEITURA_SEM_PERMISSAO");
   }
-  const dic = dicionarioPaciente as { nomes?: unknown; identificadores?: unknown } | null | undefined;
-  if (!dic || typeof dic !== "object" || !Array.isArray(dic.nomes) || !Array.isArray(dic.identificadores)) {
+  const dic = dicionarioPaciente;
+  if (!dicionarioConhecido(dic)) {
     return negar("G02_DICIONARIO_AUSENTE");
   }
   let veredito: ReturnType<typeof g02PhiEgress>;

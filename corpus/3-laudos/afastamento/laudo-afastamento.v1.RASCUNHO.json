@@ -1,0 +1,96 @@
+{
+  "header": {
+    "id": "laudo-afastamento",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "destinatario": "Empregador / RH / departamento pessoal",
+  "finalidade": "Atestado médico de afastamento do trabalho durante tratamento oncológico.",
+  "baseLegal": [
+    {
+      "norma": "Resolução CFM 2.381/2024",
+      "artigo": "§1º",
+      "trecho": "Todos os documentos médicos devem conter minimamente: I. Identificação do médico: nome e CRM/UF",
+      "vigencia": "em vigor desde 05/11/2024 (atesta CFM obrigatória desde 06/03/2025, Res. 2.382/2024)",
+      "estado": "LOCALIZADA (CRMPi/CFM)",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE (audit marcou INCERTA — não aberta)"
+    },
+    {
+      "norma": "CLT",
+      "artigo": "art. 473, IV",
+      "trecho": "O empregado poderá deixar de comparecer ao serviço sem prejuízo do salário",
+      "vigencia": "vigente",
+      "estado": "CITADA (Planalto)",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE"
+    }
+  ],
+  "requisitosConteudo": {
+    "fatoConfirmado": [
+      "Identificação do paciente",
+      "CID-10 (conforme autorização do paciente e finalidade)",
+      "Data do atendimento"
+    ],
+    "decisaoMedica": [
+      "Tempo de afastamento indicado (data inicial e final, ou dias)",
+      "Necessidade de acompanhamento/acompanhante em tratamento fora do município (conecta com laudo TFD)"
+    ]
+  },
+  "documentosAnexos": [],
+  "proibicoesTextoFixo": [
+    "Afastamento universal por N dias como texto fixo",
+    "CID sem autorização quando o paciente optar por não revelar"
+  ],
+  "observacoes": "Texto curto (LEI L10); identificação médica completa (nome + CRM/UF + assinatura identificada) obrigatória pela Res. CFM vigente.",
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "NORMA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "assinatura": {
+    "origem": "CONFIG",
+    "campos": [
+      "medico.nome",
+      "medico.crm_uf",
+      "medico.rqe",
+      "local",
+      "data",
+      "assinatura_carimbo"
+    ],
+    "fonte": "relatorio-pericial.v1 + Res. CFM 2.381/2024 (identificação mínima do médico; texto oficial PENDENTE de reabertura)"
+  },
+  "validade": {
+    "valor": null,
+    "pendencia": "DECISAO_DR_SILAS: validade do documento por finalidade"
+  },
+  "portas": {
+    "consome": [
+      "prontuario.identificacao",
+      "tumor (CID, data do diagnóstico, estadiamento)",
+      "resumoLongitudinal",
+      "prescricao.vigente",
+      "templates/resumo-prontuario-modelo-servico"
+    ],
+    "oferece": [
+      "documento.laudo-afastamento"
+    ]
+  }
+}

@@ -1,3 +1,5 @@
+import type { CandidatoVisao, AfirmacaoVisao } from '../../contracts/api/evidencia.js';
+export type { CandidatoVisao, AfirmacaoVisao } from '../../contracts/api/evidencia.js';
 import { useState } from "react";
 import type { z } from "zod";
 import type { Fonte } from "../../contracts/base.js";
@@ -7,23 +9,10 @@ import { GavetaFonte } from "./GavetaFonte.js";
 
 type CamadaEvidencia = z.infer<typeof EvidenceLayer>;
 
-export interface CandidatoVisao {
-  valorTexto: string;
-  fontes: readonly Fonte[];
-}
+
 
 /** Projeção de leitura do átomo C-03 + evidenceLayer. Não elege valor em CONFLITO. */
-export interface AfirmacaoVisao {
-  rotulo: string;
-  valorTexto: string | null;
-  estado: Semaforo;
-  campo: StatusCampo;
-  motivo: string;
-  revisao: Revisao;
-  fontes: readonly Fonte[];
-  evidenceLayer: CamadaEvidencia;
-  candidatos?: readonly CandidatoVisao[];
-}
+
 
 const CAMADA: Record<CamadaEvidencia, string> = {
   DOCUMENT_TEXT: "texto do laudo",

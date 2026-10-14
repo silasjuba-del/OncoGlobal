@@ -432,6 +432,26 @@ describe("scanner PHI do repositório", () => {
     } finally { rmSync(root, { recursive: true, force: true }); }
   });
 
+  it("zip sem disposição permanece pendente; zip com hash e magic conferidos sai da fila", async () => {
+    const root = initGitRepo();
+    try {
+      const bytes = Buffer.from([0x50, 0x4b, 0x03, 0x04, 0, 0]);
+      writeFileSync(join(root, "tabela.zip"), bytes);
+      const sem = await scanRepository(root, { schemaVersion: 1, files: [], protectedPaths: [] });
+      expect(sem.unscanned).toContainEqual({ type: "arquivo_zip", path: "tabela.zip", status: "UNVERIFIED" });
+      expect(sem.pending).toContainEqual(expect.objectContaining({ type: "official_public_archive", path: "tabela.zip", status: "PENDENTE" }));
+      const hash = sha256(bytes);
+      const com = await scanRepository(root, { schemaVersion: 1, files: [{
+        path: "tabela.zip", sha256: hash, category: "official_public_archive", magic: "zip_local_header",
+        evidenceRef: "fixture", reason: "arquivo público sintético de teste", items: [],
+      }], protectedPaths: [] });
+      expect(com.findings).toEqual([]);
+      expect(com.unscanned).toEqual([]);
+      expect(com.pending).toEqual([]);
+      expect(com.dispositionsApplied).toContainEqual({ type: "official_public_archive", path: "tabela.zip", status: "DISPOSED" });
+    } finally { rmSync(root, { recursive: true, force: true }); }
+  });
+
   it("mantém findings e arquivos não escaneados explícitos no repositório", async () => {
     const manifest = JSON.parse(readFileSync("docs/f0-fecha/PHI-TRIAGEM.json", "utf8"));
     const result = await scanRepository(process.cwd(), manifest);

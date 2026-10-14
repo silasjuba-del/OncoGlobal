@@ -1,10 +1,12 @@
+import type { TarefaRetornoId, MarcacaoTarefasRetorno } from '../../contracts/api/tarefas.js';
+export type { TarefaRetornoId, MarcacaoTarefasRetorno } from '../../contracts/api/tarefas.js';
 import { COPY_PT_BR } from "../copy/pt-BR.js";
 
 const C = COPY_PT_BR.flashRetorno;
 
-export type TarefaRetornoId = "retorno" | "laboratorio" | "imagem";
 
-export type MarcacaoTarefasRetorno = Readonly<Record<TarefaRetornoId, boolean>>;
+
+
 
 /** Cartão "Tarefas do retorno". Controlado: não executa nada, só mostra e alterna marcações. */
 export function TarefasRetorno({

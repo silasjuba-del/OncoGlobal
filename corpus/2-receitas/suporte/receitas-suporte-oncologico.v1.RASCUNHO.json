@@ -1,0 +1,2318 @@
+{
+  "header": {
+    "id": "receitas-suporte-oncologico",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "MASCC/ESMO 2023 antiemese; ASCO/IDSA 2018 NF ambulatorial; ASCO 2020 HBV; MASCC/ISOO 2020; bulas FDA (openFDA); RDC Anvisa 999/2025; RENAME 2024; Onco PRO 2026 aulas 87/88/90 (apoio)",
+      "trecho": "four-drug regimen including single doses of a 5-HT3 receptor antagonist, dexamethasone",
+      "edicao": "2026-10-11"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "nota": "Receitas de suporte oncológico ambulatorial (SUS). Cada item traz dose com fonte e trecho ≤14 palavras; sem fonte = dose null + pendencia SEM_FONTE. Nada aqui é ativo (sem 'ativo: true') até aprovação clínica. Doses são para adulto com função orgânica normal salvo ajuste explícito.",
+  "legendaEstadoFonte": {
+    "VERIFICADO": "trecho conferido nesta sessão em bula FDA (openFDA), diretriz aberta (MASCC/ESMO, eviQ, ASCO/IDSA, MASCC/ISOO) ou ensaio pivotal",
+    "VERIFICADO_OUTRA_INDICACAO": "dose conferida em bula, mas para indicação diferente da oncológica (off-label)",
+    "APOIO_AULA": "dose sustentada só pela aula Onco PRO 2026 (apoio) — confirmar em bula/diretriz antes de liberar",
+    "VERIFICADO_POR_AUSENCIA": "busca textual no documento normativo não encontrou a substância/apresentação",
+    "SEM_FONTE": "dose null; não prescrever pelo sistema"
+  },
+  "fontesConsultadas": [
+    "MASCC/ESMO 2023 — HEC (Herrstedt et al., Support Care Cancer 2023; PMC10739516)",
+    "MASCC/ESMO 2023 guideline update (Herrstedt et al., ESMO Open 2024;9:102195; PMC10937211)",
+    "eviQ (Cancer Institute NSW) — Prevention of anti-cancer therapy induced nausea and vomiting, ID 7",
+    "ASCO/IDSA 2018 — Outpatient Management of Fever and Neutropenia (Taplitz et al., JCO 2018;36:1443)",
+    "ASCO PCO 2020 — HBV Screening and Management (Hwang et al., JCO 2020; PMID 32716741)",
+    "ASCO 2020 — Management of Cancer Cachexia (Roeland et al., JCO 2020; PMID 32432946)",
+    "MASCC/ISOO 2020 — Mucositis guidelines (Elad et al., Cancer 2020; PMC7540329)",
+    "AVERT (Carrier et al., NEJM 2019;380:711; PMID 30511879)",
+    "CASSINI (Khorana et al., NEJM 2019;380:720; PMID 30786186)",
+    "ASCO VTE 2019/2023 (Key et al., JCO 2020; PMID 31381464; JCO 2023; PMID 37075273)",
+    "Onco PRO 2026 Aula 87 — Emergências Oncológicas 2 (NF, trombose, lise)",
+    "Onco PRO 2026 Aula 88 — Náuseas e vômitos, diarreia, caquexia",
+    "Onco PRO 2026 Aula 90 — Dor",
+    "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+    "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+    "openFDA drug label API (bulas listadas por set_id em cada item)"
+  ],
+  "itens": [
+    {
+      "id": "SUP-NVQ-ALTO-NK1-ORAL",
+      "indicacao": "Profilaxia de NVIQ — alto risco emetogênico (e MEC com carboplatina AUC ≥5)",
+      "gatilho": "esquema de alto risco emetogênico (cisplatina, AC/EC, ciclofosfamida ≥1500 mg/m²)",
+      "droga": "aprepitanto",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024 — oncologia via APAC/serviço",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "125 mg D1; 80 mg D2 e D3",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "1x/dia, 1 h antes da QT (D2–D3 pela manhã se sem QT)",
+      "duracao": "3 dias por ciclo",
+      "ajusteRenal": "sem ajuste descrito na bula",
+      "ajusteHepatico": "dados limitados em Child-Pugh C (bula) — cautela",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Inibidor moderado de CYP3A4: dexametasona oral deve ser reduzida (dose da tabela já considera); reduz eficácia de anticoncepcional hormonal; varfarina — monitorar INR.",
+      "orientacaoPaciente": "Tome a cápsula 1 hora antes da quimioterapia no 1º dia e de manhã nos 2 dias seguintes.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA aprepitant cápsulas (set_id 377c3ecb-fdec-dde4-e063-6294a90a29bd, effective 2026-03-09)",
+        "secao": "2.1, Tabela 1",
+        "trecho": "125 mg on Day 1 and 80 mg on Days 2 and 3",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "MASCC/ESMO 2023 — HEC (Herrstedt et al., Support Care Cancer 2023; PMC10739516)",
+          "secao": "Recomendações HEC",
+          "trecho": "four-drug regimen ... 5-HT3 receptor antagonist, dexamethasone ... NK1 receptor antagonist ... olanzapine",
+          "estado": "VERIFICADO"
+        }
+      ]
+    },
+    {
+      "id": "SUP-NVQ-ALTO-NK1-IV",
+      "indicacao": "Alternativa IV ao aprepitanto oral no alto risco",
+      "gatilho": "esquema de alto risco emetogênico; impossibilidade de VO",
+      "droga": "fosaprepitanto",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "150",
+      "unidade": "mg",
+      "via": "EV (infusão 20–30 min)",
+      "frequencia": "dose única D1, terminar ~30 min antes da QT",
+      "duracao": "D1",
+      "ajusteRenal": "sem ajuste descrito",
+      "ajusteHepatico": "cautela em hepatopatia grave",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Mesmas do aprepitanto (CYP3A4; dexametasona com dose reduzida; anticoncepcional).",
+      "orientacaoPaciente": "Este remédio para enjoo é aplicado na veia antes da quimioterapia.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA fosaprepitant injetável (set_id 1a7d2f44-b578-4d99-a4ff-f267626064d0, effective 2026-03-19)",
+        "secao": "2.1",
+        "trecho": "150 mg on Day 1 as an intravenous infusion over 20 to 30 minutes",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "id": "SUP-NVQ-ALTO-5HT3",
+      "indicacao": "Antagonista 5-HT3 no alto risco",
+      "gatilho": "esquema de alto risco emetogênico, dose única pré-QT",
+      "droga": "ondansetrona",
+      "apresentacaoSUS": {
+        "texto": "cloridrato de ondansetrona 4 mg e 8 mg comprimido (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 28",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "24",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "dose única 30 min antes da QT",
+      "duracao": "D1",
+      "ajusteRenal": "sem ajuste",
+      "ajusteHepatico": "hepatopatia grave: máx. 8 mg/dia (bula)",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Prolongamento de QT (somar com outros QT-prolongadores, hipoK/hipoMg); contraindicado com apomorfina; síndrome serotoninérgica com ISRS/IRSN/tramadol.",
+      "orientacaoPaciente": "Tome os comprimidos meia hora antes da quimioterapia.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA ondansetron comprimidos (set_id 00327696-c496-4c83-a63e-9e29fd6246d4, effective 2024-04-24)",
+        "secao": "2.1, Tabela 1",
+        "trecho": "A single 24 mg dose administered 30 minutes before ... highly emetogenic chemotherapy",
+        "estado": "VERIFICADO"
+      },
+      "nota": "Alternativa: palonosetrona (SUP-NVQ-5HT3-PALO). MASCC 2023 não identificou diferença relevante entre 5-HT3."
+    },
+    {
+      "id": "SUP-NVQ-5HT3-PALO",
+      "indicacao": "Antagonista 5-HT3 de longa ação (alto e moderado risco)",
+      "gatilho": "esquema de alto ou moderado risco emetogênico",
+      "droga": "palonosetrona",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "0,25",
+      "unidade": "mg",
+      "via": "EV (30 s)",
+      "frequencia": "dose única ~30 min antes da QT",
+      "duracao": "D1",
+      "ajusteRenal": "sem ajuste",
+      "ajusteHepatico": "sem ajuste",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Síndrome serotoninérgica com outros serotoninérgicos.",
+      "orientacaoPaciente": "Este remédio para enjoo é aplicado na veia uma vez antes da quimioterapia.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA palonosetron injetável (set_id 0a781796-bb74-4c5f-8d26-9ce520b818f7, effective 2020-06-09)",
+        "secao": "2.1, Tabela 1",
+        "trecho": "Adults 0.25 mg as a single dose",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "id": "SUP-NVQ-ALTO-DEX",
+      "indicacao": "Corticoide no alto risco (com NK1)",
+      "gatilho": "esquema de alto risco emetogênico — distinguir não-AC (cisplatina) × AC",
+      "droga": "dexametasona",
+      "apresentacaoSUS": {
+        "texto": "dexametasona 4 mg comprimido; 4 mg/mL solução injetável (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 54",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "12 mg D1; 8 mg D2–D4 (não-AC). AC/EC: 12 mg só no D1",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "1x/dia",
+      "duracao": "não-AC: 4 dias; AC: 1 dia",
+      "ajusteRenal": "sem ajuste",
+      "ajusteHepatico": "sem ajuste específico",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Dose já reduzida pela interação com NK1 (CYP3A4); hiperglicemia; sem evidência para omitir em QT+imunoterapia (ASCO 2020).",
+      "orientacaoPaciente": "Tome de manhã, com comida, nos dias indicados, mesmo sem enjoo.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA aprepitant cápsulas (set_id 377c3ecb-fdec-dde4-e063-6294a90a29bd, effective 2026-03-09)",
+        "secao": "2.1, Tabela 1 (HEC)",
+        "trecho": "Dexamethasone Adults 12 mg orally 8 mg orally 8 mg orally 8 mg orally",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "MASCC/ESMO 2023 — HEC (Herrstedt et al., Support Care Cancer 2023; PMC10739516)",
+          "secao": "Resumo",
+          "trecho": "no need to prescribe steroids (dexamethasone) beyond day 1 after AC HEC",
+          "estado": "VERIFICADO"
+        }
+      ]
+    },
+    {
+      "id": "SUP-NVQ-ALTO-OLZ",
+      "indicacao": "4ª droga no alto risco (não-AC e AC)",
+      "gatilho": "esquema de alto risco emetogênico",
+      "droga": "olanzapina",
+      "apresentacaoSUS": {
+        "texto": "olanzapina 5 mg e 10 mg comprimido (Especializado — PCDT psiquiátrico; uso antiemético é off-label no SUS)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 101",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "10 (opção 5 mg se sedação preocupa/idoso)",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "1x/dia (5 mg pode ser ao deitar)",
+      "duracao": "D1–D4",
+      "ajusteRenal": "sem ajuste",
+      "ajusteHepatico": "cautela",
+      "controle344": {
+        "lista": "C1",
+        "nota": "Receita de Controle Especial em 2 vias",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I, Lista C1",
+          "trecho": "LISTA - C1 ... 140. Olanzapina",
+          "estado": "VERIFICADO"
+        }
+      },
+      "interacoesCriticas": "Sedação aditiva com opioide/benzodiazepínico; QT; hiperglicemia; evitar em idoso com demência.",
+      "orientacaoPaciente": "Pode dar sono: tome à noite e não dirija se ficar sonolento.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MASCC/ESMO 2023 guideline update (Herrstedt et al., ESMO Open 2024;9:102195; PMC10937211)",
+        "secao": "Dose and schedule of olanzapine (HEC)",
+        "trecho": "The best investigated dose is 10 mg",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "MASCC/ESMO 2023 guideline update (Herrstedt et al., ESMO Open 2024;9:102195; PMC10937211)",
+          "secao": "idem",
+          "trecho": "a starting daily dose of 5 mg and/or administration at bedtime is an option",
+          "estado": "VERIFICADO"
+        },
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "ASCO Antiemetics 2020 (Hesketh et al., JCO 2020; PMID 32658626)",
+          "secao": "Abstract",
+          "trecho": "Dosing information now includes the option of a 5-mg dose of olanzapine",
+          "estado": "VERIFICADO"
+        }
+      ]
+    },
+    {
+      "id": "SUP-NVQ-MOD-5HT3",
+      "indicacao": "Profilaxia de NVIQ — moderado risco (oxaliplatina, irinotecano, carboplatina <5, outros MEC)",
+      "gatilho": "esquema de moderado risco emetogênico",
+      "droga": "ondansetrona",
+      "apresentacaoSUS": {
+        "texto": "ondansetrona 8 mg comprimido (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 28",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "8",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "30 min antes da QT e 8 h após (D1)",
+      "duracao": "D1 (MASCC 2023: nada de rotina após D1)",
+      "ajusteRenal": "sem ajuste",
+      "ajusteHepatico": "hepatopatia grave: máx. 8 mg/dia",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "QT; apomorfina (contraindicado); serotoninérgicos.",
+      "orientacaoPaciente": "Tome 1 comprimido meia hora antes da quimioterapia e outro 8 horas depois.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA ondansetron comprimidos (set_id 00327696-c496-4c83-a63e-9e29fd6246d4, effective 2024-04-24)",
+        "secao": "2.1, Tabela 1 (MEC)",
+        "trecho": "8 mg administered 30 minutes before ... subsequent 8 mg dose 8 hours after",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "MASCC/ESMO 2023 guideline update (Herrstedt et al., ESMO Open 2024;9:102195; PMC10937211)",
+          "secao": "Recomendações MEC",
+          "trecho": "No steroid (or other antiemetic) should be routinely administered after day 1",
+          "estado": "VERIFICADO"
+        }
+      ],
+      "nota": "CONFLITO: a bula FDA ainda prevê 8 mg 12/12 h por 1–2 dias pós-QT; MASCC/ESMO 2023 não recomenda antiemético de rotina após D1 em MEC. Adotado MASCC; decisão do Dr. Silas."
+    },
+    {
+      "id": "SUP-NVQ-MOD-DEX",
+      "indicacao": "Corticoide no moderado risco",
+      "gatilho": "esquema de moderado risco emetogênico",
+      "droga": "dexametasona",
+      "apresentacaoSUS": {
+        "texto": "dexametasona 4 mg comprimido (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 54",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "8",
+      "unidade": "mg",
+      "via": "VO ou EV",
+      "frequencia": "dose única D1",
+      "duracao": "D1",
+      "ajusteRenal": "sem ajuste",
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Se carboplatina AUC ≥5 com NK1: usar 12 mg D1 (tabela MEC do aprepitanto).",
+      "orientacaoPaciente": "Tome de manhã no dia da quimioterapia.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "eviQ (Cancer Institute NSW) — Prevention of anti-cancer therapy induced nausea and vomiting, ID 7",
+        "secao": "Moderate risk (30 to 90%) — Day 1",
+        "trecho": "Dexamethasone 8 mg PO or IV",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "MASCC/ESMO 2023 guideline update (Herrstedt et al., ESMO Open 2024;9:102195; PMC10937211)",
+          "secao": "Recomendações MEC",
+          "trecho": "A two-drug regimen, including single doses of a 5-HT3-RA and DEX",
+          "estado": "VERIFICADO"
+        }
+      ],
+      "nota": "eviQ lista dexametasona D2–D3 opcional; MASCC 2023 recomenda não usar após D1 — adotado MASCC."
+    },
+    {
+      "id": "SUP-NVQ-CARBO5-NK1",
+      "indicacao": "Carboplatina AUC ≥5: tripla (5-HT3 + dexametasona + NK1)",
+      "gatilho": "carboplatina AUC ≥5",
+      "droga": "aprepitanto + dexametasona",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024 — aprepitanto",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "aprepitanto 125 mg D1, 80 mg D2–D3; dexametasona 12 mg só D1",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "1x/dia",
+      "duracao": "3 dias (dexametasona 1 dia)",
+      "ajusteRenal": "sem ajuste",
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "CYP3A4 (ver SUP-NVQ-ALTO-NK1-ORAL).",
+      "orientacaoPaciente": "Tome as cápsulas por 3 dias a partir do dia da quimioterapia.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MASCC/ESMO 2023 guideline update (Herrstedt et al., ESMO Open 2024;9:102195; PMC10937211)",
+        "secao": "Prevention of acute N&V following carboplatin-based MEC",
+        "trecho": "three-drug regimen ... recommended for patients receiving carboplatin AUC ≥5",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "LITERATURA",
+          "referencia": "openFDA/DailyMed — bula FDA aprepitant cápsulas (set_id 377c3ecb-fdec-dde4-e063-6294a90a29bd, effective 2026-03-09)",
+          "secao": "2.1, Tabela 2 (MEC)",
+          "trecho": "Dexamethasone Adults 12 mg orally none none",
+          "estado": "VERIFICADO"
+        }
+      ]
+    },
+    {
+      "id": "SUP-NVQ-BAIXO",
+      "indicacao": "Baixo risco emetogênico — agente único (profilaxia opcional ou resgate)",
+      "gatilho": "esquema de baixo risco emetogênico (10–30%)",
+      "droga": "dexametasona OU ondansetrona OU metoclopramida (escolher um)",
+      "apresentacaoSUS": {
+        "texto": "dexametasona 4 mg cp; ondansetrona 8 mg cp; metoclopramida 10 mg cp (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 28",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "dexametasona 4–8 mg OU ondansetrona 8 mg (metoclopramida: dose SEM_FONTE)",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "dose única D1",
+      "duracao": "D1",
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Não somar dois agentes (sobretratamento apontado pela MASCC).",
+      "orientacaoPaciente": "Use só um destes remédios, antes da quimioterapia ou se tiver enjoo.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "eviQ (Cancer Institute NSW) — Prevention of anti-cancer therapy induced nausea and vomiting, ID 7",
+        "secao": "Low risk (10 to 30%)",
+        "trecho": "single dose of 4 to 8 mg ... ondansetron 8 mg",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "MASCC/ESMO 2023 guideline update (Herrstedt et al., ESMO Open 2024;9:102195; PMC10937211)",
+          "secao": "Low emetic risk",
+          "trecho": "A single antiemetic agent, such as dexamethasone, a 5-HT3-RA or ... metoclopramide",
+          "estado": "VERIFICADO"
+        }
+      ],
+      "pendencia": "metoclopramida em NVIQ sem dose fontada nesta curadoria (bula FDA só refluxo/gastroparesia)"
+    },
+    {
+      "id": "SUP-NVQ-MINIMO",
+      "indicacao": "Mínimo risco emetogênico — sem profilaxia de rotina",
+      "gatilho": "esquema de risco mínimo (<10%) sem história de náusea/vômito",
+      "droga": "nenhuma",
+      "apresentacaoSUS": null,
+      "dose": null,
+      "unidade": null,
+      "via": null,
+      "frequencia": null,
+      "duracao": null,
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": null,
+      "interacoesCriticas": null,
+      "orientacaoPaciente": "Não precisa de remédio para enjoo antes; avise se passar mal.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MASCC/ESMO 2023 guideline update (Herrstedt et al., ESMO Open 2024;9:102195; PMC10937211)",
+        "secao": "Minimal emetic risk",
+        "trecho": "No antiemetic should be routinely administered before ChT of minimal emetic risk",
+        "estado": "VERIFICADO"
+      },
+      "nota": "Imunoterapia isolada ou combinada sem QT: sem antiemético de rotina (ASCO 2020)."
+    },
+    {
+      "id": "SUP-NVQ-TARDIA-ESCAPE",
+      "indicacao": "Náusea tardia/de escape (breakthrough) após excluir outras causas",
+      "gatilho": "náusea/vômito apesar da profilaxia (CTCAE Nausea ≥G2 ou Vomiting ≥G1)",
+      "droga": "olanzapina",
+      "apresentacaoSUS": {
+        "texto": "olanzapina 5 mg comprimido (Especializado)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 101",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "5 (até 10)",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "1x/dia",
+      "duracao": "3 dias",
+      "ajusteRenal": "sem ajuste",
+      "ajusteHepatico": "cautela",
+      "controle344": {
+        "lista": "C1",
+        "nota": "Receita de Controle Especial em 2 vias",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I, Lista C1",
+          "trecho": "LISTA - C1 ... 140. Olanzapina",
+          "estado": "VERIFICADO"
+        }
+      },
+      "interacoesCriticas": "Sedação com opioide/benzodiazepínico; não usar se já recebeu olanzapina na profilaxia (trocar de classe).",
+      "orientacaoPaciente": "Se o enjoo voltar em casa, tome 1 comprimido à noite por 3 dias e avise a equipe.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "eviQ (Cancer Institute NSW) — Prevention of anti-cancer therapy induced nausea and vomiting, ID 7",
+        "secao": "Breakthrough",
+        "trecho": "olanzapine 5 mg PO daily, when not used prophylactically",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "MASCC/ESMO 2023 — multiple-day/high-dose/breakthrough (Rapoport et al.; PMC10725845)",
+          "secao": "Breakthrough",
+          "trecho": "single dose of olanzapine daily for 3 days",
+          "estado": "VERIFICADO"
+        },
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "Onco PRO 2026 Aula 88 — Náuseas e vômitos, diarreia, caquexia",
+          "secao": "pág. 15",
+          "trecho": "Olanzapina: Primeira opção para resgate caso não tenha sido usado",
+          "estado": "APOIO_AULA"
+        }
+      ],
+      "nota": "Antes: descartar metástase SNC, obstrução, hipercalcemia, outros fármacos, dispepsia (IBP) — Aula 88 pág. 15."
+    },
+    {
+      "id": "SUP-DOR-DIPIRONA",
+      "indicacao": "Dor leve (EVA 1–3) ou adjuvante em qualquer degrau",
+      "gatilho": "dor 1–3/10 ou associação ao opioide",
+      "droga": "dipirona",
+      "apresentacaoSUS": {
+        "texto": "dipirona 500 mg comprimido; 500 mg/mL solução oral (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 98",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "500–1000",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "6/6 h",
+      "duracao": "contínuo enquanto houver dor; reavaliar 24–48 h",
+      "ajusteRenal": "cautela",
+      "ajusteHepatico": "cautela",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Agranulocitose rara (atenção em QT mielotóxica); hipotensão EV; metotrexato (soma mielotoxicidade).",
+      "orientacaoPaciente": "Tome de 6 em 6 horas; procure o serviço se tiver febre com dor de garganta.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Onco PRO 2026 Aula 90 — Dor",
+        "secao": "pág. 14",
+        "trecho": "Dipirona 500–1000 mg 6/6h; máx. 4–6 g/dia",
+        "estado": "APOIO_AULA"
+      },
+      "pendencia": "dose máxima: aula admite até 6 g/dia; bula ANVISA não conferida nesta curadoria — sugerido teto de 4 g/dia até conferência"
+    },
+    {
+      "id": "SUP-DOR-PARACETAMOL",
+      "indicacao": "Dor leve ou adjuvante",
+      "gatilho": "dor 1–3/10",
+      "droga": "paracetamol",
+      "apresentacaoSUS": {
+        "texto": "paracetamol 500 mg comprimido; 200 mg/mL solução oral (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 101",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "500–1000",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "6/6 h",
+      "duracao": "reavaliar 24–48 h",
+      "ajusteRenal": null,
+      "ajusteHepatico": "evitar/reduzir em hepatopatia, etilismo, caquexia; teto 3 g/dia nesses casos (aula)",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Somar paracetamol de associações (máx. 4 g/dia); varfarina (INR) em uso regular.",
+      "orientacaoPaciente": "Não passe de 8 comprimidos de 500 mg por dia, contando outros remédios com paracetamol.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA acetaminophen (OTC) (set_id 004c39cd-b4f4-1cae-e063-6294a90a0697, effective 2025-10-03)",
+        "secao": "Warnings — Liver warning",
+        "trecho": "Severe liver damage may occur if adult takes more than 4,000 mg",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "Onco PRO 2026 Aula 90 — Dor",
+          "secao": "pág. 14",
+          "trecho": "Paracetamol 500–1000 mg 6/6h; máx. 3–4 g/dia",
+          "estado": "APOIO_AULA"
+        }
+      ]
+    },
+    {
+      "id": "SUP-DOR-AINE",
+      "indicacao": "Dor óssea/inflamatória, curto prazo, com cautela",
+      "gatilho": "dor óssea metastática sem contraindicação (renal, plaquetas, anticoagulação, GI, CV)",
+      "droga": "ibuprofeno",
+      "apresentacaoSUS": {
+        "texto": "ibuprofeno 200, 300, 600 mg comprimido (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 91",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "400",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "4/6 h se necessário (máx. 3200 mg/dia)",
+      "duracao": "curto prazo",
+      "ajusteRenal": "evitar em DRC/LRA, desidratação, cisplatina/pemetrexede",
+      "ajusteHepatico": "evitar em hepatopatia grave",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Anticoagulantes/antiagregantes e plaquetopenia (sangramento); corticoide (GI — associar IBP); metotrexato e pemetrexede (toxicidade); nefrotóxicos.",
+      "orientacaoPaciente": "Tome com comida e por poucos dias; pare e avise se tiver fezes escuras ou inchaço.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA ibuprofen comprimidos (Rx) (set_id 00872852-680a-41b3-901b-b991b12a176d, effective 2025-02-14)",
+        "secao": "Dosage — Mild to moderate pain",
+        "trecho": "400 mg every 4 to 6 hours as necessary for relief of pain",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "Onco PRO 2026 Aula 90 — Dor",
+          "secao": "pág. 14",
+          "trecho": "curto prazo; checar rim, plaquetas, anticoagulação, GI e CV",
+          "estado": "APOIO_AULA"
+        }
+      ]
+    },
+    {
+      "id": "SUP-DOR-TRAMADOL",
+      "indicacao": "Dor leve-moderada (opioide fraco)",
+      "gatilho": "dor 4–6/10 quando não se opta por opioide forte em dose baixa",
+      "droga": "tramadol",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "50–100",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "4/6 h se necessário (máx. 400 mg/dia)",
+      "duracao": "reavaliar; prescrever laxante junto",
+      "ajusteRenal": "ClCr <30: intervalo 12/12 h, máx. 200 mg/dia",
+      "ajusteHepatico": "hepatopatia grave: 50 mg 12/12 h (bula)",
+      "controle344": {
+        "lista": "A2 (adendo: ≤100 mg/unidade → Receita de Controle Especial 2 vias)",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I, Lista A2",
+          "trecho": "tramadol ... não exceda 100 miligramas ... Receita de Controle Especial",
+          "estado": "VERIFICADO"
+        }
+      },
+      "interacoesCriticas": "Síndrome serotoninérgica (ISRS/IRSN/ondansetrona); reduz limiar convulsivo; inibidores CYP2D6 reduzem efeito; benzodiazepínicos (depressão respiratória).",
+      "orientacaoPaciente": "Pode dar enjoo e prisão de ventre: use o laxante receitado junto.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA tramadol comprimidos (set_id 007bf37f-0e46-426a-ac8c-be63d4b7414c, effective 2026-04-10)",
+        "secao": "2.3",
+        "trecho": "50 mg to 100 mg ... not to exceed 400 mg/day",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "Onco PRO 2026 Aula 90 — Dor",
+          "secao": "pág. 13",
+          "trecho": "Opioide forte em dose baixa é preferível a insistir em opioide fraco",
+          "estado": "APOIO_AULA"
+        }
+      ]
+    },
+    {
+      "id": "SUP-DOR-CODEINA",
+      "indicacao": "Dor leve-moderada (opioide fraco)",
+      "gatilho": "dor 4–6/10",
+      "droga": "codeína (fosfato)",
+      "apresentacaoSUS": {
+        "texto": "fosfato de codeína 30 e 60 mg comprimido; 3 mg/mL solução oral (Especializado)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 109",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "15–60",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "4/4 h se necessário (máx. 360 mg/dia)",
+      "duracao": "reavaliar; laxante obrigatório",
+      "ajusteRenal": "cautela (metabólitos ativos)",
+      "ajusteHepatico": "cautela",
+      "controle344": {
+        "lista": "A2 (adendo: ≤100 mg/unidade → Receita de Controle Especial 2 vias)",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I, Lista A2cod",
+          "trecho": "codeína ... não exceda 100 miligramas por unidade posológica ... Receita de Controle Especial",
+          "estado": "VERIFICADO"
+        }
+      },
+      "interacoesCriticas": "Metabolizador ultrarrápido CYP2D6 (toxicidade); inibidores CYP2D6/3A4; benzodiazepínicos.",
+      "orientacaoPaciente": "Use o laxante todos os dias enquanto tomar este remédio.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA codeine sulfate comprimidos (set_id 010905f9-3bcb-4b50-9fe8-a3ad0010f14c, effective 2025-12-22)",
+        "secao": "2.3",
+        "trecho": "15 to 60 mg every 4 hours as needed for pain",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "id": "SUP-DOR-MORFINA-LI",
+      "indicacao": "Dor moderada-intensa (opioide forte), virgem de opioide",
+      "gatilho": "dor ≥4/10 ou progressiva",
+      "droga": "morfina (sulfato) liberação imediata",
+      "apresentacaoSUS": {
+        "texto": "sulfato de morfina 10 e 30 mg comprimido; 10 mg/mL solução oral (Especializado)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 103",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "5 mg (fixo) + 5 mg de resgate",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "4/4 h fixo + resgate se dor ≥4/10",
+      "duracao": "reavaliar em 24 h; ≥3 resgates/24 h → ajustar dose fixa",
+      "ajusteRenal": "cuidado em DRC (metabólitos ativos) — considerar alternativa (aula pág. 16)",
+      "ajusteHepatico": "cuidado em hepatopatia",
+      "controle344": {
+        "lista": "A1 (Notificação de Receita A)",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I, Lista A1",
+          "trecho": "LISTA - A1 LISTA DAS SUBSTÂNCIAS ENTORPECENTES",
+          "estado": "VERIFICADO"
+        }
+      },
+      "interacoesCriticas": "Benzodiazepínicos/álcool/gabapentinoides: depressão respiratória; laxante obrigatório.",
+      "orientacaoPaciente": "Tome de 4 em 4 horas, use a dose extra se a dor voltar e tome o laxante todo dia.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Onco PRO 2026 Aula 90 — Dor",
+        "secao": "pág. 15",
+        "trecho": "Morfina IR 5 mg VO 4/4 h + Morfina IR 5 mg",
+        "estado": "APOIO_AULA"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "LITERATURA",
+          "referencia": "openFDA/DailyMed — bula FDA morphine sulfate comprimidos LI (set_id 07593aa4-f2c4-4d6e-b186-ab2a4ecaa38a, effective 2025-10-10)",
+          "secao": "2.2",
+          "trecho": "adults is 15 mg to 30 mg every 4 hours as needed",
+          "estado": "VERIFICADO"
+        }
+      ],
+      "nota": "Bula FDA inicia 15–30 mg; aula (ASCO 2023/NCCN 2025) inicia 5 mg em virgem — adotado 5 mg (mais conservador) e titular."
+    },
+    {
+      "id": "SUP-DOR-RESGATE-CONVERSAO",
+      "indicacao": "Regras de resgate, titulação e rotação de opioide",
+      "gatilho": "paciente em opioide forte",
+      "droga": "morfina (regra de cálculo)",
+      "apresentacaoSUS": null,
+      "dose": "resgate = 10–20% da dose diária total (≈1/6); VO:EV ≈ 3:1; rotação: reduzir 25–50% da dose equianalgésica",
+      "unidade": "regra",
+      "via": "VO/EV",
+      "frequencia": "resgate conforme dor; dor intensa: reavaliar 30–60 min e escalonar 50–100%",
+      "duracao": null,
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "A1 (Notificação de Receita A)",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I, Lista A1",
+          "trecho": "LISTA - A1 LISTA DAS SUBSTÂNCIAS ENTORPECENTES",
+          "estado": "VERIFICADO"
+        }
+      },
+      "interacoesCriticas": "Metadona e fentanil TD são exceções (ver SUP-DOR-METADONA).",
+      "orientacaoPaciente": "Anote quantas doses extras usou por dia para o médico ajustar.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Onco PRO 2026 Aula 90 — Dor",
+        "secao": "pág. 17",
+        "trecho": "Resgate = 10–20% da dose diária total de opioide",
+        "estado": "APOIO_AULA"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "Onco PRO 2026 Aula 90 — Dor",
+          "secao": "pág. 16",
+          "trecho": "VO:EV ≈3:1",
+          "estado": "APOIO_AULA"
+        },
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "Onco PRO 2026 Aula 90 — Dor",
+          "secao": "pág. 22",
+          "trecho": "Reduza dose 25–50%",
+          "estado": "APOIO_AULA"
+        }
+      ],
+      "pendencia": "tabela equianalgésica completa (oxicodona, hidromorfona, fentanil) SEM_FONTE nesta curadoria"
+    },
+    {
+      "id": "SUP-DOR-METADONA",
+      "indicacao": "Dor neuropática/alta dose prévia/DRC — com supervisão especializada",
+      "gatilho": "falha/toxicidade de morfina; decisão de especialista",
+      "droga": "metadona",
+      "apresentacaoSUS": {
+        "texto": "cloridrato de metadona 5 e 10 mg comprimido (Especializado)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 96",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "2,5 (virgem de opioide)",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "8/8 a 12/12 h",
+      "duracao": "titular devagar (meia-vida longa e variável)",
+      "ajusteRenal": "opção na DRC (aula), titular com cautela",
+      "ajusteHepatico": "cautela",
+      "controle344": {
+        "lista": "A1 (Notificação de Receita A)",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I, Lista A1",
+          "trecho": "LISTA - A1 LISTA DAS SUBSTÂNCIAS ENTORPECENTES",
+          "estado": "VERIFICADO"
+        }
+      },
+      "interacoesCriticas": "Prolongamento de QT (ECG); inibidores/indutores CYP3A4/2B6/2C19/2D6; benzodiazepínicos.",
+      "orientacaoPaciente": "Não aumente a dose por conta própria: o efeito acumula em alguns dias.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA methadone comprimidos (set_id 1a536622-dda3-41af-ab08-28e7c1bc9300, effective 2024-01-11)",
+        "secao": "2.2",
+        "trecho": "methadone hydrochloride tablets with 2.5 mg orally every 8 to 12 hours",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "LITERATURA",
+          "referencia": "openFDA/DailyMed — bula FDA methadone (Tabela 1 de conversão) (set_id 13541167-95f4-4cb9-9d7d-3c1aced5c5f6, effective 2026-05-27)",
+          "secao": "Tabela 1 (conversão de morfina oral)",
+          "trecho": "Less than 100 mg 20% to 30% ... 100 mg to 300 mg",
+          "estado": "VERIFICADO"
+        }
+      ],
+      "nota": "Conversão (SÓ morfina VO → metadona VO, % da dose diária de morfina): <100 mg 20–30%; 100–300 mg 10–20%; 300–600 mg 8–12%; 600–1000 mg 5–10%; >1000 mg <5%. A bula avisa: NÃO é tabela equianalgésica e NÃO serve para converter de metadona para outro opioide."
+    },
+    {
+      "id": "SUP-CONST-LACTULOSE",
+      "indicacao": "Constipação / profilaxia com opioide (osmótico)",
+      "gatilho": "início de opioide (obrigatório) ou CTCAE Constipation ≥G1",
+      "droga": "lactulose",
+      "apresentacaoSUS": {
+        "texto": "lactulose 667 mg/mL xarope (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 31",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "15–30 mL (10–20 g); até 60 mL",
+      "unidade": "mL",
+      "via": "VO",
+      "frequencia": "1x/dia",
+      "duracao": "enquanto usar opioide",
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Distensão/flatulência; cuidado em obstrução intestinal.",
+      "orientacaoPaciente": "Tome todo dia; pode misturar com suco ou água.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA lactulose solução oral (set_id 0f19e4ed-c90a-4330-a7fa-bf911aa98f09, effective 2025-09-15)",
+        "secao": "Dosage and Administration",
+        "trecho": "usual dose is 1 to 2 tablespoonfuls (15 to 30 mL ...) daily",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "Onco PRO 2026 Aula 90 — Dor",
+          "secao": "pág. 27",
+          "trecho": "A mão que prescreve a morfina prescreve o laxante",
+          "estado": "APOIO_AULA"
+        }
+      ]
+    },
+    {
+      "id": "SUP-CONST-BISACODIL",
+      "indicacao": "Constipação por opioide (estimulante)",
+      "gatilho": "uso de opioide; constipação",
+      "droga": "bisacodil",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "1 a 3 comprimidos (conferir mg da apresentação nacional)",
+      "unidade": "comprimido",
+      "via": "VO",
+      "frequencia": "1x/dia (dose única)",
+      "duracao": "enquanto usar opioide",
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Antiácidos/leite desfazem o revestimento entérico; evitar em obstrução.",
+      "orientacaoPaciente": "Tome à noite com água, sem leite.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA bisacodyl comprimidos (OTC) (set_id 02358772-6724-4f1a-b3d8-bc36e58b5cfc, effective 2025-05-01)",
+        "secao": "Directions",
+        "trecho": "take 1 to 3 tablets in a single daily dose",
+        "estado": "VERIFICADO"
+      },
+      "pendencia": "mg por comprimido não confirmado (rótulo OTC fala em comprimidos)"
+    },
+    {
+      "id": "SUP-CONST-SENE",
+      "indicacao": "Constipação por opioide (estimulante)",
+      "gatilho": "uso de opioide; constipação",
+      "droga": "senosídeos (sene)",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "2 comprimidos (máx. 4 comprimidos 2x/dia)",
+      "unidade": "comprimido",
+      "via": "VO",
+      "frequencia": "1x/dia ao deitar",
+      "duracao": "enquanto usar opioide",
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Cólica; evitar em obstrução.",
+      "orientacaoPaciente": "Tome à noite; aumente só se o médico orientar.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA sennosides comprimidos (OTC) (set_id 0b7736df-c7de-7d00-e063-6294a90aa57e, effective 2026-02-26)",
+        "secao": "Directions",
+        "trecho": "2 tablets once a day 4 tablets twice a day",
+        "estado": "VERIFICADO"
+      },
+      "pendencia": "mg de senosídeos por comprimido varia por produto — conferir apresentação"
+    },
+    {
+      "id": "SUP-CONST-MACROGOL",
+      "indicacao": "Constipação (osmótico)",
+      "gatilho": "constipação; alternativa à lactulose",
+      "droga": "macrogol (PEG 3350)",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "17",
+      "unidade": "g",
+      "via": "VO (diluir em 120–240 mL)",
+      "frequencia": "1x/dia",
+      "duracao": "conforme resposta",
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Evitar em obstrução.",
+      "orientacaoPaciente": "Dissolva o pó em um copo de água e tome uma vez ao dia.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA polyethylene glycol 3350 (OTC) (set_id 02e36812-53c2-003b-e063-6394a90aed12, effective 2024-01-31)",
+        "secao": "Directions",
+        "trecho": "use once a day ... (17 g) stir and dissolve",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "id": "SUP-DIA-LOPERAMIDA-IRI",
+      "indicacao": "Diarreia tardia por irinotecano",
+      "gatilho": "1ª evacuação amolecida após irinotecano (CTCAE Diarrhea G1–G2)",
+      "droga": "loperamida",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "4 mg na 1ª evacuação; depois 2 mg 2/2 h (à noite 4 mg 4/4 h)",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "até 12 h sem diarreia",
+      "duracao": "não usar >48 h seguidas nessa dose (íleo paralítico)",
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Doses acima do recomendado: torsades/QT; inibidores CYP3A4/P-gp aumentam exposição.",
+      "orientacaoPaciente": "Ao primeiro sinal de fezes moles, tome 2 cápsulas e depois 1 a cada 2 horas; se passar de 48 h ou tiver febre, procure o serviço.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA CAMPTOSAR (irinotecano) (set_id e518dfc6-7e93-4fee-a66c-51e1ab71c056, effective 2026-05-12)",
+        "secao": "5.x Diarrhea",
+        "trecho": "4 mg at the first onset ... then 2 mg every 2 hours",
+        "estado": "VERIFICADO"
+      },
+      "nota": "G3–G4, febre, desidratação ou >48 h: avaliação presencial (Aula 88; Bossi ESMO 2018)."
+    },
+    {
+      "id": "SUP-DIA-LOPERAMIDA-FP",
+      "indicacao": "Diarreia por fluoropirimidina/outras QT (não complicada)",
+      "gatilho": "CTCAE Diarrhea G1–G2 sem febre",
+      "droga": "loperamida",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "4 mg inicial; 2 mg após cada evacuação líquida",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "após cada evacuação (máx. 16 mg/dia)",
+      "duracao": "melhora esperada em 48 h",
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "QT/torsades acima da dose; CYP3A4/P-gp.",
+      "orientacaoPaciente": "Tome 2 cápsulas e depois 1 a cada evacuação líquida, no máximo 8 por dia, e beba bastante líquido.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA loperamide 2 mg cápsulas (Rx) (set_id 03c907d5-87f8-47a6-9544-5a24f5272739, effective 2026-01-05)",
+        "secao": "Dosage — Acute Diarrhea",
+        "trecho": "initial dose is 4 mg ... maximum daily dose is 16 mg",
+        "estado": "VERIFICADO"
+      },
+      "nota": "Diarreia grave precoce com fluoropirimidina: pensar em deficiência de DPD (Aula 88 pág. 21)."
+    },
+    {
+      "id": "SUP-DIA-ATROPINA-IRI",
+      "indicacao": "Síndrome colinérgica aguda do irinotecano (cólica, salivação, lacrimejamento)",
+      "gatilho": "sintomas colinérgicos durante/logo após irinotecano",
+      "droga": "atropina",
+      "apresentacaoSUS": null,
+      "dose": "0,25–1",
+      "unidade": "mg",
+      "via": "SC",
+      "frequencia": "dose única (repetir conforme protocolo)",
+      "duracao": null,
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Glaucoma de ângulo fechado, retenção urinária, taquiarritmia.",
+      "orientacaoPaciente": "Avise a enfermagem se tiver cólica, suor ou salivação durante a infusão.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Onco PRO 2026 Aula 88 — Náuseas e vômitos, diarreia, caquexia",
+        "secao": "pág. 21",
+        "trecho": "Responde bem com atropina (0.25-1 mg, SC)",
+        "estado": "APOIO_AULA"
+      },
+      "pendencia": "apresentação RENAME não conferida; uso em ambiente de infusão"
+    },
+    {
+      "id": "SUP-MUC-HIGIENE",
+      "indicacao": "Prevenção de mucosite oral — cuidado oral básico multiagente",
+      "gatilho": "QT, RT de cabeça e pescoço ou TCTH",
+      "droga": "protocolo de higiene oral (escovação, fio, bochecho suave)",
+      "apresentacaoSUS": null,
+      "dose": null,
+      "unidade": null,
+      "via": null,
+      "frequencia": null,
+      "duracao": null,
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": null,
+      "interacoesCriticas": null,
+      "orientacaoPaciente": "Escove os dentes com escova macia após as refeições e faça bochecho com água várias vezes ao dia.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MASCC/ISOO 2020 — Mucositis guidelines (Elad et al., Cancer 2020; PMC7540329)",
+        "secao": "Tabela — BOC (LoE III)",
+        "trecho": "implementation of multiagent combination oral care protocols is beneficial",
+        "estado": "VERIFICADO"
+      },
+      "pendencia": "composição do bochecho (soro/bicarbonato) sem recomendação fontada"
+    },
+    {
+      "id": "SUP-MUC-CRIOTERAPIA",
+      "indicacao": "Prevenção de mucosite com 5-FU em bolus",
+      "gatilho": "5-FU em bolus",
+      "droga": "crioterapia oral (gelo na boca)",
+      "apresentacaoSUS": null,
+      "dose": "30",
+      "unidade": "min",
+      "via": "oral",
+      "frequencia": "durante a infusão em bolus",
+      "duracao": "cada aplicação",
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": null,
+      "interacoesCriticas": null,
+      "orientacaoPaciente": "Chupe gelo durante os 30 minutos da aplicação.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MASCC/ISOO 2020 — Mucositis guidelines (Elad et al., Cancer 2020; PMC7540329)",
+        "secao": "Cryotherapy (LoE II)",
+        "trecho": "using 30 min of oral cryotherapy ... bolus 5-FU CT",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "id": "SUP-MUC-BENZIDAMINA",
+      "indicacao": "Prevenção de mucosite em RT de cabeça e pescoço",
+      "gatilho": "RT cabeça-pescoço dose moderada (≤50 Gy) ou RT-QT",
+      "droga": "benzidamina (bochecho)",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": null,
+      "unidade": null,
+      "via": null,
+      "frequencia": null,
+      "duracao": null,
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": null,
+      "orientacaoPaciente": "Faça o bochecho como orientado durante a radioterapia, sem engolir.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MASCC/ISOO 2020 — Mucositis guidelines (Elad et al., Cancer 2020; PMC7540329)",
+        "secao": "Anti-inflammatory agents (LoE I)",
+        "trecho": "recommends benzydamine mouthwash ... H N cancer receiving a moderate dose RT",
+        "estado": "VERIFICADO"
+      },
+      "pendencia": "SEM_FONTE — concentração/volume/frequência do bochecho não extraídos de fonte"
+    },
+    {
+      "id": "SUP-GCSF-PRIMARIA",
+      "indicacao": "Profilaxia primária de neutropenia febril",
+      "gatilho": "risco FN ≥20% do esquema (10–20%: individualizar por idade/comorbidade/PS)",
+      "droga": "filgrastim",
+      "apresentacaoSUS": {
+        "texto": "filgrastim 300 mcg solução injetável (Especializado; em oncologia via APAC/serviço)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 87",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "5",
+      "unidade": "mcg/kg/dia",
+      "via": "SC",
+      "frequencia": "1x/dia, iniciar ≥24 h após a QT (aula: 24–72 h)",
+      "duracao": "até recuperação do nadir (bula: até 2 semanas ou CAN 10.000/mm³); suspender se CAN >10.000",
+      "ajusteRenal": "sem ajuste",
+      "ajusteHepatico": "sem ajuste",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Não aplicar nas 24 h antes da QT; dor óssea; esplenomegalia/rotura rara.",
+      "orientacaoPaciente": "Aplique a injeção na barriga uma vez ao dia nos dias marcados; dor nos ossos é comum.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA NEUPOGEN (filgrastim) (set_id 97cc73cc-b5b7-458a-a933-77b00523e193, effective 2026-07-23)",
+        "secao": "2.1",
+        "trecho": "recommended starting dosage ... is 5 mcg/kg/day ... single daily injection",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "Onco PRO 2026 Aula 87 — Emergências Oncológicas 2 (NF, trombose, lise)",
+          "secao": "pág. 16",
+          "trecho": "Risco do esquema ≥ 20% → usar G-CSF",
+          "estado": "APOIO_AULA"
+        },
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "Onco PRO 2026 Aula 87 — Emergências Oncológicas 2 (NF, trombose, lise)",
+          "secao": "pág. 13",
+          "trecho": "5 mcg/kg/dia – 24-72 horas após último dia",
+          "estado": "APOIO_AULA"
+        }
+      ],
+      "pendencia": "ASCO 2015 G-CSF não aberto nesta curadoria (critério ≥20% vem da aula)"
+    },
+    {
+      "id": "SUP-GCSF-SECUNDARIA",
+      "indicacao": "Profilaxia secundária após neutropenia febril",
+      "gatilho": "NF em ciclo prévio, intenção curativa/adjuvante, sem toxicidade extramedular limitante",
+      "droga": "filgrastim",
+      "apresentacaoSUS": {
+        "texto": "filgrastim 300 mcg (Especializado)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 87",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "5",
+      "unidade": "mcg/kg/dia",
+      "via": "SC",
+      "frequencia": "1x/dia, ≥24 h após a QT",
+      "duracao": "até recuperação do nadir",
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "G-CSF terapêutico na NF estabelecida não reduz mortalidade — não usar de rotina.",
+      "orientacaoPaciente": "Nos próximos ciclos você fará a injeção para evitar nova queda de defesa.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Onco PRO 2026 Aula 87 — Emergências Oncológicas 2 (NF, trombose, lise)",
+        "secao": "pág. 16",
+        "trecho": "Após NF em tratamento curativo/adjuvante → preferir G-CSF no próximo ciclo",
+        "estado": "APOIO_AULA"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "LITERATURA",
+          "referencia": "openFDA/DailyMed — bula FDA NEUPOGEN (filgrastim) (set_id 97cc73cc-b5b7-458a-a933-77b00523e193, effective 2026-07-23)",
+          "secao": "2.1",
+          "trecho": "recommended starting dosage ... is 5 mcg/kg/day",
+          "estado": "VERIFICADO"
+        }
+      ]
+    },
+    {
+      "id": "SUP-NF-BR-AMOXCLAV",
+      "indicacao": "Neutropenia febril de baixo risco — tratamento oral ambulatorial (associar ciprofloxacino)",
+      "gatilho": "MASCC ≥21 + critérios clínicos e logísticos",
+      "droga": "amoxicilina + clavulanato",
+      "apresentacaoSUS": {
+        "texto": "amoxicilina + clavulanato de potássio 500 mg + 125 mg comprimido (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 58",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "500/125 (8/8 h) ou 875/125 (12/12 h)",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "8/8 h (apresentação RENAME) ou 12/12 h",
+      "duracao": null,
+      "ajusteRenal": "ClCr <30: não usar 875 mg (bula)",
+      "ajusteHepatico": "hepatotoxicidade colestática — cautela",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Alergia a penicilina → clindamicina (dose SEM_FONTE); metotrexato (excreção reduzida).",
+      "orientacaoPaciente": "Tome junto com o ciprofloxacino e volte ao hospital se a febre continuar ou piorar.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA amoxicillin-clavulanate comprimidos (set_id 0425932a-f6e1-49a6-8480-720f179ace14, effective 2025-10-14)",
+        "secao": "2",
+        "trecho": "875 mg every 12 hours or ... 500 mg every 8 hours",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "ASCO/IDSA 2018 — Outpatient Management of Fever and Neutropenia (Taplitz et al., JCO 2018;36:1443)",
+          "secao": "Fig./recomendações",
+          "trecho": "Oral empiric therapy with a fluoroquinolone ... plus amoxicillin/clavulanate",
+          "estado": "VERIFICADO"
+        },
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "Onco PRO 2026 Aula 87 — Emergências Oncológicas 2 (NF, trombose, lise)",
+          "secao": "pág. 10",
+          "trecho": "Amoxicilina-clavulanato + Ciprofloxacino",
+          "estado": "APOIO_AULA"
+        }
+      ],
+      "nota": "Pré-requisitos: MASCC ≥21 NÃO autoriza alta sozinho; 1ª dose no serviço, observação ≥4 h, suporte logístico/psicossocial, acesso rápido ao PS, sem profilaxia prévia com quinolona; sem defervescência em 2–3 dias → internar (ASCO/IDSA 2018; Aula 87 pág. 10/14).",
+      "pendencia": "duração total do tratamento ambulatorial SEM_FONTE (ASCO/IDSA não fixa dose/duração no texto)"
+    },
+    {
+      "id": "SUP-NF-BR-CIPRO",
+      "indicacao": "Neutropenia febril de baixo risco — tratamento oral ambulatorial (associar amoxicilina-clavulanato)",
+      "gatilho": "MASCC ≥21 + critérios clínicos e logísticos; sem profilaxia prévia com quinolona",
+      "droga": "ciprofloxacino",
+      "apresentacaoSUS": {
+        "texto": "ciprofloxacino 250 e 500 mg comprimido (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 61",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "500–750",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "12/12 h",
+      "duracao": null,
+      "ajusteRenal": "ClCr 30–50: 250–500 mg 12/12 h; 5–29: 250–500 mg 18/18 h (bula)",
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Quelação com cálcio/ferro/antiácidos (separar 2 h antes/6 h depois); QT; tizanidina (contraindicado); teofilina; varfarina.",
+      "orientacaoPaciente": "Não tome junto com leite, cálcio ou antiácido; separe por algumas horas.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA ciprofloxacin comprimidos (set_id 0fac4466-fbe5-49d2-96e3-e3ac2739bd5b, effective 2026-04-07)",
+        "secao": "Adult Dosage Guidelines",
+        "trecho": "Skin and Skin Structure 500 to 750 mg every 12 hours",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "ASCO/IDSA 2018 — Outpatient Management of Fever and Neutropenia (Taplitz et al., JCO 2018;36:1443)",
+          "secao": "Fig./recomendações",
+          "trecho": "Oral empiric therapy with a fluoroquinolone (ie, ciprofloxacin or levofloxacin)",
+          "estado": "VERIFICADO"
+        },
+        {
+          "tipo": "LITERATURA",
+          "referencia": "openFDA/DailyMed — bula FDA ciprofloxacin (Tabela 4 renal) (set_id 0c355077-7361-41d0-9e82-eb31beaf5daa, effective 2025-03-06)",
+          "secao": "Tabela 4",
+          "trecho": "30 -50 250 – 500 mg every 12 hours",
+          "estado": "VERIFICADO"
+        }
+      ],
+      "nota": "Pré-requisitos: MASCC ≥21 NÃO autoriza alta sozinho; 1ª dose no serviço, observação ≥4 h, suporte logístico/psicossocial, acesso rápido ao PS, sem profilaxia prévia com quinolona; sem defervescência em 2–3 dias → internar (ASCO/IDSA 2018; Aula 87 pág. 10/14). Dose de cipro em NF não está na bula: usada a faixa de infecções graves da bula.",
+      "pendencia": "duração SEM_FONTE"
+    },
+    {
+      "id": "SUP-HBV-ENTECAVIR",
+      "indicacao": "Profilaxia de reativação de HBV",
+      "gatilho": "HBsAg+ (qualquer terapia sistêmica, exceto hormonioterapia isolada) OU HBsAg−/anti-HBc+ com anti-CD20 ou TCTH",
+      "droga": "entecavir",
+      "apresentacaoSUS": {
+        "texto": "entecavir 0,5 mg e 1 mg comprimido (Estratégico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 65",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "0,5",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "1x/dia em jejum (2 h antes/depois de refeição)",
+      "duracao": "durante a terapia e ≥12 meses após o término",
+      "ajusteRenal": "ClCr 30–<50: 0,5 mg 48/48 h; 10–<30: 0,5 mg 72/72 h; <10/HD: 0,5 mg 7/7 dias",
+      "ajusteHepatico": "descompensado: 1 mg/dia (bula)",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Nefrotóxicos alteram depuração; acidose lática rara.",
+      "orientacaoPaciente": "Tome todo dia em jejum e não pare sem falar com o médico, mesmo depois da quimioterapia.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA entecavir comprimidos (set_id 01ec50a1-6c6c-46f0-8c74-73542b0a59c3, effective 2025-01-09)",
+        "secao": "2.2 e Tabela 2",
+        "trecho": "nucleoside-inhibitor-treatment-naïve adults ... is 0.5 mg once daily",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "ASCO PCO 2020 — HBV Screening and Management (Hwang et al., JCO 2020; PMID 32716741)",
+          "secao": "Abstract",
+          "trecho": "antiviral prophylactic therapy through and for minimum 12 months following anticancer therapy",
+          "estado": "VERIFICADO"
+        }
+      ]
+    },
+    {
+      "id": "SUP-HBV-TENOFOVIR",
+      "indicacao": "Profilaxia de reativação de HBV (alternativa)",
+      "gatilho": "HBsAg+ (qualquer terapia sistêmica, exceto hormonioterapia isolada) OU HBsAg−/anti-HBc+ com anti-CD20 ou TCTH",
+      "droga": "tenofovir desoproxila (fumarato)",
+      "apresentacaoSUS": {
+        "texto": "fumarato de tenofovir desoproxila 300 mg comprimido (Estratégico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 67",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "300",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "1x/dia",
+      "duracao": "durante a terapia e ≥12 meses após",
+      "ajusteRenal": "ClCr 30–49: 300 mg 48/48 h; 10–29: 72–96 h; HD: 7/7 dias",
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Nefrotoxicidade somada (cisplatina, AINE, aminoglicosídeo); perda óssea.",
+      "orientacaoPaciente": "Tome um comprimido por dia e faça os exames de rim pedidos.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA tenofovir disoproxil fumarate (set_id 08a30772-02fc-4f63-e063-6394a90afd43, effective 2025-10-09)",
+        "secao": "2.1 e 2.3",
+        "trecho": "300 mg once daily taken orally without regard to food",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "ASCO PCO 2020 — HBV Screening and Management (Hwang et al., JCO 2020; PMID 32716741)",
+          "secao": "Texto (PMC11828660)",
+          "trecho": "Anti-HBV drugs with a high resistance barrier (entecavir, TDF, or TAF)",
+          "estado": "VERIFICADO"
+        }
+      ]
+    },
+    {
+      "id": "SUP-OSSO-ZOLEDRONATO",
+      "indicacao": "Metástase óssea de tumor sólido / mieloma — prevenção de eventos esqueléticos",
+      "gatilho": "metástase óssea ou mieloma",
+      "droga": "ácido zoledrônico",
+      "apresentacaoSUS": {
+        "texto": "RENAME 2024 só tem 5 mg/100 mL (osteoporose, Especializado); 4 mg oncológico fora da RENAME (APAC)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 91",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "4 (ClCr >60)",
+      "unidade": "mg",
+      "via": "EV ≥15 min",
+      "frequencia": "a cada 3–4 semanas",
+      "duracao": "conforme indicação",
+      "ajusteRenal": "ClCr 50–60: 3,5 mg; 40–49: 3,3 mg; 30–39: 3,0 mg; <30: não recomendado. Creatinina antes de cada dose.",
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Nefrotóxicos; hipocalcemia (associar cálcio + vitamina D); osteonecrose de mandíbula — avaliação odontológica antes.",
+      "orientacaoPaciente": "Vá ao dentista antes de começar e tome o cálcio com vitamina D todos os dias.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA zoledronic acid 4 mg/5 mL (set_id 00a5bd5a-e5ee-4bad-b510-a4d4485485c8, effective 2023-09-18)",
+        "secao": "2.2 e Tabela 1",
+        "trecho": "every 3 to 4 weeks ... creatinine clearance of greater than 60",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "id": "SUP-OSSO-DENOSUMABE",
+      "indicacao": "Metástase óssea de tumor sólido / mieloma (alternativa)",
+      "gatilho": "metástase óssea ou mieloma",
+      "droga": "denosumabe 120 mg",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "120",
+      "unidade": "mg",
+      "via": "SC",
+      "frequencia": "a cada 4 semanas",
+      "duracao": "conforme indicação",
+      "ajusteRenal": "sem ajuste de dose, mas maior risco de hipocalcemia em ClCr <30/diálise",
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Hipocalcemia (corrigir antes; cálcio + vitamina D); osteonecrose de mandíbula; rebote de fraturas ao suspender.",
+      "orientacaoPaciente": "Tome cálcio e vitamina D todo dia e avise se tiver formigamento ou câimbras.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA XGEVA (denosumabe 120 mg) (set_id 628f0998-1206-4001-aeee-18133aa9f3bf, effective 2026-06-23)",
+        "secao": "2.2",
+        "trecho": "Administer 120 mg every 4 weeks as a subcutaneous injection",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "id": "SUP-OSSO-CALCIO-VITD",
+      "indicacao": "Suplementação com antirreabsortivo",
+      "gatilho": "uso de zoledronato ou denosumabe (sem hipercalcemia)",
+      "droga": "carbonato de cálcio + colecalciferol",
+      "apresentacaoSUS": {
+        "texto": "carbonato de cálcio 1.250 mg (500 mg de cálcio elementar) + colecalciferol 200 UI comprimido (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 27",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "cálcio 500 mg + vitamina D 400 UI",
+      "unidade": "mg / UI",
+      "via": "VO",
+      "frequencia": "1x/dia",
+      "duracao": "enquanto usar antirreabsortivo",
+      "ajusteRenal": "monitorar cálcio na DRC",
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Separar 2–6 h de quinolonas, levotiroxina e ferro; cálcio elementar ≠ massa do sal (achado N13).",
+      "orientacaoPaciente": "Tome o cálcio com a refeição, longe do remédio da tireoide.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA zoledronic acid 4 mg/5 mL (set_id 00a5bd5a-e5ee-4bad-b510-a4d4485485c8, effective 2023-09-18)",
+        "secao": "2.3",
+        "trecho": "oral calcium supplements of 500 mg and ... 400 international units",
+        "estado": "VERIFICADO"
+      },
+      "nota": "A bula do zoledronato não diz se 500 mg é cálcio elementar; o comprimido RENAME traz 500 mg elementar + 200 UI — 1 cp NÃO completa 400 UI de vitamina D (precisa fonte adicional de 200 UI)."
+    },
+    {
+      "id": "SUP-CAQ-MEGESTROL",
+      "indicacao": "Anorexia/caquexia em câncer avançado (ensaio terapêutico)",
+      "gatilho": "anorexia com perda de peso em que se decide testar fármaco",
+      "droga": "acetato de megestrol",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "400–800",
+      "unidade": "mg/dia",
+      "via": "VO (suspensão)",
+      "frequencia": "1x/dia",
+      "duracao": "reavaliar; menor tempo possível",
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Risco de TEV (tromboflebite, TEP) — evitar com TEV prévio/alto risco; hiperglicemia; supressão adrenal.",
+      "orientacaoPaciente": "Procure o serviço se a perna inchar ou doer, ou se tiver falta de ar.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA megestrol acetate suspensão oral (set_id 01119031-9943-4afb-8b45-cb71682f0482, effective 2026-07-09)",
+        "secao": "Dosage and Administration",
+        "trecho": "recommended adult initial dosage ... is 800 mg/day (20 mL/day)",
+        "estado": "VERIFICADO_OUTRA_INDICACAO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "ASCO 2020 — Management of Cancer Cachexia (Roeland et al., JCO 2020; PMID 32432946)",
+          "secao": "Abstract",
+          "trecho": "pharmacologic interventions that may be used include progesterone analogs",
+          "estado": "VERIFICADO"
+        },
+        {
+          "tipo": "LITERATURA",
+          "referencia": "openFDA/DailyMed — bula FDA megestrol acetate suspensão oral (set_id 01119031-9943-4afb-8b45-cb71682f0482, effective 2026-07-09)",
+          "secao": "Postmarketing",
+          "trecho": "thromboembolic phenomena including thrombophlebitis and pulmonary embolism",
+          "estado": "VERIFICADO"
+        }
+      ],
+      "nota": "Dose da bula é para anorexia na AIDS; uso oncológico é off-label. ASCO 2020: nenhum fármaco é padrão; pode-se optar por não prescrever."
+    },
+    {
+      "id": "SUP-TEV-ENOXAPARINA",
+      "indicacao": "Profilaxia de TEV",
+      "gatilho": "ambulatorial iniciando QT com Khorana ≥2 e baixo risco de sangramento (ou internado clínico)",
+      "droga": "enoxaparina",
+      "apresentacaoSUS": {
+        "texto": "enoxaparina sódica 40 mg/0,4 mL e 60 mg/0,6 mL (Especializado)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 36",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "40",
+      "unidade": "mg",
+      "via": "SC",
+      "frequencia": "1x/dia",
+      "duracao": "enquanto durar o risco (internado: 6–11 dias na bula)",
+      "ajusteRenal": "ClCr <30: 30 mg 1x/dia",
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Plaquetopenia (QT, TIH), AINE/antiagregante, punção neuraxial.",
+      "orientacaoPaciente": "Aplique na barriga uma vez ao dia e avise se tiver sangramento ou manchas roxas grandes.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA enoxaparin sodium (set_id 014c6710-f2c4-fd1e-e063-6394a90ae525, effective 2024-06-21)",
+        "secao": "2.1 e Tabela 1 (renal)",
+        "trecho": "40 mg once a day ... medical patients at risk for thromboembolic complications",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "Onco PRO 2026 Aula 87 — Emergências Oncológicas 2 (NF, trombose, lise)",
+          "secao": "pág. 27",
+          "trecho": "Khorana ≥ 2 pode ser oferecido profilaxia com Apixabana, Rivaroxabana ou HBPM",
+          "estado": "APOIO_AULA"
+        },
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "ASCO VTE 2019/2023 (Key et al., JCO 2020; PMID 31381464; JCO 2023; PMID 37075273)",
+          "secao": "Abstract 2019",
+          "trecho": "thromboprophylaxis with apixaban, rivaroxaban, or LMWH to selected high-risk outpatients",
+          "estado": "VERIFICADO"
+        }
+      ],
+      "nota": "A dose de 40 mg é da indicação 'paciente clínico internado'; para ambulatorial oncológico a bula não fixa dose."
+    },
+    {
+      "id": "SUP-TEV-APIXABANA",
+      "indicacao": "Profilaxia de TEV ambulatorial",
+      "gatilho": "ambulatorial iniciando QT com Khorana ≥2 e baixo risco de sangramento (ou internado clínico)",
+      "droga": "apixabana",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "2,5",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "12/12 h",
+      "duracao": "até 180 dias (AVERT)",
+      "ajusteRenal": "ClCr <25 excluído do estudo — evitar sem fonte",
+      "ajusteHepatico": "evitar em hepatopatia grave",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Inibidores/indutores fortes de CYP3A4 e P-gp; antiagregantes/AINE; tumores GI/GU com lesão luminal (sangramento).",
+      "orientacaoPaciente": "Tome de 12 em 12 horas e avise se tiver sangramento.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "AVERT (Carrier et al., NEJM 2019;380:711; PMID 30511879)",
+        "secao": "Methods",
+        "trecho": "apixaban (2.5 mg twice daily) for thromboprophylaxis in ambulatory patients",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "DIRETRIZ",
+          "referencia": "ASCO VTE 2019/2023 (Key et al., JCO 2020; PMID 31381464; JCO 2023; PMID 37075273)",
+          "secao": "Abstract 2019",
+          "trecho": "thromboprophylaxis with apixaban, rivaroxaban, or LMWH to selected high-risk outpatients",
+          "estado": "VERIFICADO"
+        }
+      ]
+    },
+    {
+      "id": "SUP-TEV-RIVAROXABANA",
+      "indicacao": "Profilaxia de TEV ambulatorial",
+      "gatilho": "ambulatorial iniciando QT com Khorana ≥2 e baixo risco de sangramento (ou internado clínico)",
+      "droga": "rivaroxabana",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "10",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "1x/dia",
+      "duracao": "até 180 dias (CASSINI)",
+      "ajusteRenal": "ClCr <15: evitar (bula)",
+      "ajusteHepatico": "evitar Child-Pugh B/C",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Inibidores combinados de CYP3A4/P-gp; antiagregantes/AINE.",
+      "orientacaoPaciente": "Tome um comprimido por dia e avise se tiver sangramento.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "CASSINI (Khorana et al., NEJM 2019;380:720; PMID 30786186)",
+        "secao": "Methods",
+        "trecho": "rivaroxaban (at a dose of 10 mg) ... daily for up to 180 days",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "id": "SUP-INF-FLUCONAZOL",
+      "indicacao": "Candidíase orofaríngea ou esofágica (tratamento)",
+      "gatilho": "placas brancas orais/odinofagia em paciente em QT/RT",
+      "droga": "fluconazol",
+      "apresentacaoSUS": {
+        "texto": "fluconazol 100 e 150 mg cápsula; 10 mg/mL suspensão oral (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 66",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "200 mg no D1; depois 100 mg",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "1x/dia",
+      "duracao": "orofaríngea: ≥2 semanas; esofágica: ≥3 semanas e ≥2 após melhora",
+      "ajusteRenal": "ClCr ≤50: 50% da dose após o ataque",
+      "ajusteHepatico": "hepatotoxicidade — monitorar",
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Inibe CYP2C9/2C19/3A4: varfarina, fenitoína, sulfonilureias, alguns TKI; prolongamento de QT.",
+      "orientacaoPaciente": "Tome uma vez ao dia até o fim, mesmo se a boca melhorar antes.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA fluconazole comprimidos (set_id 01df20c4-7b94-044e-e063-6394a90a406a, effective 2025-11-17)",
+        "secao": "Dosage — Oropharyngeal candidiasis",
+        "trecho": "200 mg on the first day, followed by 100 mg once daily",
+        "estado": "VERIFICADO"
+      },
+      "pendencia": "profilaxia antifúngica ambulatorial (sem candidíase) SEM_FONTE — não recomendada de rotina em baixo risco (Aula 87 pág. 15)"
+    },
+    {
+      "id": "SUP-INF-ACICLOVIR-HZ",
+      "indicacao": "Herpes-zóster (tratamento)",
+      "gatilho": "zóster localizado, idealmente ≤72 h do rash",
+      "droga": "aciclovir",
+      "apresentacaoSUS": {
+        "texto": "aciclovir 200 mg comprimido (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 58",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "800",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "4/4 h, 5x/dia",
+      "duracao": "7–10 dias",
+      "ajusteRenal": "ClCr 10–25: 800 mg 8/8 h; 0–10: 800 mg 12/12 h",
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Nefrotóxicos; hidratação adequada.",
+      "orientacaoPaciente": "São 4 comprimidos de 200 mg por vez, 5 vezes ao dia; beba bastante água.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA acyclovir comprimidos (set_id 01ae85df-d1a0-44f7-b4c0-0ac74d2216d4, effective 2024-09-05)",
+        "secao": "Dosage — Acute Treatment of Herpes Zoster",
+        "trecho": "800 mg every 4 hours orally, 5 times daily for 7 to 10 days",
+        "estado": "VERIFICADO"
+      },
+      "fontesApoio": [
+        {
+          "tipo": "LITERATURA",
+          "referencia": "openFDA/DailyMed — bula FDA acyclovir (Tabela 3 renal) (set_id 067109d0-2539-42b6-9e95-102b58ca54dc, effective s/d)",
+          "secao": "Tabela 3",
+          "trecho": "800 mg every 4 hours >25 10-25 0-10",
+          "estado": "VERIFICADO"
+        }
+      ],
+      "nota": "Cálculo com RENAME: 800 mg = 4 cp de 200 mg por tomada (20 cp/dia). Zóster disseminado/imunossupressão grave: aciclovir EV (fora deste item)."
+    },
+    {
+      "id": "SUP-INF-VALACICLOVIR-HZ",
+      "indicacao": "Herpes-zóster (tratamento, alternativa posológica)",
+      "gatilho": "zóster localizado ≤72 h do rash",
+      "droga": "valaciclovir",
+      "apresentacaoSUS": {
+        "texto": "não consta na RENAME 2024",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "busca textual no PDF (254 p.)",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "dose": "1000",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "8/8 h",
+      "duracao": "7 dias",
+      "ajusteRenal": "ClCr 30–49: 1 g 12/12 h; 10–29: 1 g 24/24 h; <10: 500 mg 24/24 h",
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Nefrotóxicos; neurotoxicidade em DRC/idoso sem ajuste.",
+      "orientacaoPaciente": "Tome de 8 em 8 horas por 7 dias e beba bastante água.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "openFDA/DailyMed — bula FDA valacyclovir comprimidos (set_id 021ab9d0-7b75-40cf-afde-446942d64388, effective 2026-05-28)",
+        "secao": "2.1 e Tabela 1",
+        "trecho": "Herpes Zoster 1 gram 3 times daily for 7 days",
+        "estado": "VERIFICADO"
+      },
+      "nota": "Bula: eficácia não estabelecida em imunocomprometidos além de HIV (supressão de herpes genital)."
+    },
+    {
+      "id": "SUP-INF-ANTIVIRAL-PROFILAXIA",
+      "indicacao": "Profilaxia antiviral (HSV/VZV) ambulatorial — ex.: inibidor de proteassoma, análogos de purina",
+      "gatilho": "regime de alto risco de reativação herpética",
+      "droga": "aciclovir/valaciclovir",
+      "apresentacaoSUS": null,
+      "dose": null,
+      "unidade": null,
+      "via": null,
+      "frequencia": null,
+      "duracao": null,
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": null,
+      "orientacaoPaciente": "Seu médico dirá se você precisa de remédio para prevenir herpes.",
+      "fonte": {
+        "tipo": null,
+        "referencia": null,
+        "secao": null,
+        "trecho": null,
+        "estado": "SEM_FONTE",
+        "motivo": "dose profilática oncológica não encontrada em bula/diretriz consultada"
+      },
+      "pendencia": "SEM_FONTE"
+    }
+  ],
+  "resumo": {
+    "total": 47,
+    "doseVerificada": 37,
+    "doseApoioAula": 5,
+    "doseOutraIndicacao": 1,
+    "semFonte": 3,
+    "naoAplicavel": 1
+  },
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "Claude (curadoria farmacoterapêutica F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DIRETRIZ",
+      "referencia": "MASCC/ESMO 2023; ASCO/IDSA 2018; ASCO 2020 HBV; MASCC/ISOO 2020; bulas FDA; RDC 999/2025; RENAME 2024",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação); aprovação clínica real = curadoria.aprovacaoClinica (null)."
+  }
+}

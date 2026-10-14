@@ -11,9 +11,11 @@ const corpus = (nome: string): unknown =>
   JSON.parse(readFileSync(join(process.cwd(), "corpus", "rulesets", nome), "utf8"));
 
 describe("RT-11 · ruleset inativo nunca vira VERMELHO nem 'sem interação'", () => {
-  it("interações reais do corpus (ativo:false) ⇒ PENDENTE 'não verificado', nunca VERMELHO", () => {
-    const ruleset = corpus("interacoes.v1.json");
-    const saida = avaliarInteracaoMedicamentosa("capecitabina", "varfarina", ruleset as RulesetInteracoes);
+  it("interações do corpus explicitamente desativadas ⇒ PENDENTE 'não verificado', nunca VERMELHO", () => {
+    const original = corpus("interacoes.v1.json") as RulesetInteracoes;
+    // F0-COMPLEMENTO: par real agora curado; esta prova permanece sobre ativo:false.
+    const ruleset = { ...original, interacoes: original.interacoes.map((item) => ({ ...item, ativo: false })) };
+    const saida = avaliarInteracaoMedicamentosa("capecitabina", "varfarina", ruleset);
     expect(saida.estado).toBe("PENDENTE");
     expect(saida.motivo).toMatch(/não verificado/iu);
   });

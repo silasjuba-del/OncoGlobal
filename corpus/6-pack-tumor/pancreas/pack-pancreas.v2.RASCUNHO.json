@@ -1,0 +1,2466 @@
+{
+  "header": {
+    "id": "pack-pancreas",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Pâncreas: adenocarcinoma v4 (Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf)",
+      "trecho": "objetivo apoiar as decisões clínicas no tratamento de tumores de pâncreas",
+      "edicao": "v4, 2026 (versão para colaboração); doses idênticas à v6 de 2025"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Adenocarcinoma ductal de pâncreas",
+    "cid10": [
+      "C25"
+    ],
+    "subtipos": [
+      "adenocarcinoma ductal",
+      "carcinoma de células acinares (NGS upfront)",
+      "BRCA1/2 germinativo",
+      "KRAS selvagem"
+    ],
+    "cenarios": [
+      "ressecavel",
+      "borderline (anatômico A, biológico B, clínico C)",
+      "localmente_avancado",
+      "metastatico"
+    ],
+    "limitesAplicabilidade": "Adulto com adenocarcinoma de pâncreas exócrino. Não cobre neoplasias neuroendócrinas pancreáticas nem tumores periampulares (ver pack de vias biliares para ampola). Pack propõe; médico decide.",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 4,
+      "trecho": "As medidas do tumor primário e LFN se referem sempre às maiores dimensões",
+      "estado": "VERIFICADO"
+    }
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome com protocolo para pâncreas (antes de drenagem biliar)",
+        "indicacao": "universal",
+        "quando": "todos os pacientes; preferencialmente antes da drenagem de vias biliares",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Com protocolo para pâncreas, preferencialmente antes de drenagem de vias biliares.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "indicacao": "universal",
+        "quando": "todos os pacientes",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "TC de abdome e tórax Todos os pacientes$",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_ABDOMEN_SUPERIOR",
+        "rotulo": "RM de abdome",
+        "indicacao": "condicional",
+        "quando": "contraindicação a contraste iodado, lesão isodensa à TC ou lesões hepáticas suspeitas",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Pacientes com contraindicação a contraste iodado, lesões isodensas ao parênquima pancreático",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT",
+        "indicacao": "condicional",
+        "quando": "localizado com fatores de mau prognóstico (tumor ≥ 2–3 cm, CA 19-9 ≥ 500, N+, perda de peso, dor celíaca)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Para pacientes com tumores estadiados pelos outros métodos como localizados e com fatores",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [
+      {
+        "catalogoId": "CPRE",
+        "rotulo": "CPRE (drenagem biliar quando indicada)",
+        "indicacao": "condicional",
+        "quando": "icterícia obstrutiva; fazer a TC com protocolo antes da drenagem",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Com protocolo para pâncreas, preferencialmente antes de drenagem de vias biliares.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "VIDEOLAPAROSCOPIA",
+        "rotulo": "Videolaparoscopia",
+        "indicacao": "condicional",
+        "quando": "localizado com fatores de mau prognóstico, conforme disponibilidade",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Videolaparoscopia Conforme disponibilidade em casos selecionados§",
+          "estado": "VERIFICADO"
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
+      }
+    ],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "PAAF",
+          "quando": "confirmação histológica do primário: PAAF guiada por ecoendoscopia (sem id de ecoendoscopia no catálogo); biópsia prévia cada vez mais favorecida mesmo em lesão ressecável",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "pendencia": "SEM_ID_NO_CATALOGO (ecoendoscopia)",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/06 - Aula 06 - Câncer de Pâncreas- Conceitos Iniciais.pdf",
+            "pagina": 13,
+            "trecho": "EUS (Endoscopic Ultrasound): pode auxiliar em PAAF",
+            "estado": "INFERIDO"
+          }
+        },
+        {
+          "tipo": "core",
+          "quando": "biópsia percutânea guiada de lesão metastática (ex.: fígado)",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "pendencia": "SEM_FONTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": null,
+            "pagina": null,
+            "trecho": null,
+            "estado": "DADO_AUSENTE"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "tipo histológico (ductal × acinar)",
+        "pT/pN AJCC 8ª (linfonodos para-aórticos = M1)",
+        "margens"
+      ],
+      "laudoFonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 4,
+        "trecho": "LFN para-aórticos representam estação 16 nodal e assim por dizer não são",
+        "estado": "VERIFICADO"
+      },
+      "molecular": [
+        {
+          "alvo": "BRCA1/2 germinativo",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "universal",
+          "cenario": "preferencialmente ao diagnóstico inicial (sequenciamento germinativo; não PCR)",
+          "consequencia": "platina na neoadjuvância/1ª linha; manutenção com olaparibe após ≥ 4 meses de platina sem progressão",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 17,
+            "trecho": "A testagem de mutação germinativa do BRCA1/2 deve ser preferencialmente realizada",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "MMR (triagem)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "doença avançada; positivos confirmar por método molecular",
+          "consequencia": "imunoterapia se dMMR",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 18,
+            "trecho": "IHQ de triagem pode ser realizada para MMR e NTRK; casos positivos devem",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "NTRK (triagem)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "doença avançada; positivos confirmar por FISH/PCR",
+          "consequencia": "inibidor de TRK",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 18,
+            "trecho": "IHQ de triagem pode ser realizada para MMR e NTRK; casos positivos devem",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "KRAS",
+          "metodo": "PCR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
+          "quandoPedir": "condicional",
+          "cenario": "sem alterações na triagem IHQ",
+          "consequencia": "KRAS selvagem (~10%) justifica NGS amplo/RNAseq",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 18,
+            "trecho": "a avaliação do KRAS por PCR pode ser recomendada — cerca de 10%",
+            "estado": "VERIFICADO"
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
+        },
+        {
+          "alvo": "painel amplo DNA/RNA",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "KRAS selvagem; histotipo acinar (upfront)",
+          "consequencia": "fusões e alterações acionáveis; HRD",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 18,
+            "trecho": "NGS deve ser considerado upfront em histotipos acinares",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "HER2 (hiperexpressão)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "doença avançada, se possível/conforme acesso",
+          "consequencia": "trastuzumabe-deruxtecana",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 18,
+            "trecho": "solicitar pesquisa de hiperexpressão de HER2 através de imunohistoquímica",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "DPYD (deficiência de DPD)",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "candidatos a fluoropirimidina, se disponível",
+          "consequencia": "deficiência total contraindica; parcial reduz dose",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 20,
+            "trecho": "recomenda-se a pesquisa de deficiência de DPD em todos os pacientes candidatos",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição + classificação de ressecabilidade (ressecável, borderline A/B/C, localmente avançado A/B, metastático)",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 21,
+      "trecho": "AJCC Cancer Staging Manual [Internet]. 8th ed.",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Hemograma Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGO",
+        "rotulo": "TGO (função hepática)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Função hepática Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "rotulo": "TGP (função hepática)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Função hepática Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BILIRRUBINA",
+        "rotulo": "Bilirrubinas (função hepática)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Função hepática Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FOSFATASE_ALCALINA",
+        "rotulo": "Fosfatase alcalina (função hepática)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Função hepática Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "GAMA_GT",
+        "rotulo": "Gama-GT (função hepática)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Função hepática Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Creatinina (função renal)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Função renal Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "UREIA",
+        "rotulo": "Ureia (função renal)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Função renal Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CA199",
+        "rotulo": "CA 19-9 (sem código SIGTAP no catálogo; preferencialmente após normalizar bilirrubinas)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos; idealmente após normalização das bilirrubinas",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Preferencialmente após normalização de bilirrubinas.",
+          "estado": "VERIFICADO"
+        },
+        "sigtap": null,
+        "notaSUS": "CA 19-9 não tem código SIGTAP (catálogo: sigtap null)"
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "ressecável sem fatores de mau prognóstico",
+        "conduta": "cirurgia → QT adjuvante (ou neoadjuvância)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Sem fatores de mau prognóstico Com fatores de mau prognóstico Cirurgia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "ressecável com fatores de mau prognóstico (≥ 2–3 cm, CA 19-9 ≥ 500, N+, perda de peso/dor celíaca)",
+        "conduta": "tratamento neoadjuvante → cirurgia (preferencial)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Fatores de mau prognóstico:7–17 Tumor ≥ 2-3 cm; CA19-9 ≥ 500 UI/ml;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "borderline anatômico",
+        "conduta": "QT neoadjuvante (mFOLFIRINOX preferencial) ± QT+RT → cirurgia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Tratamento neoadjuvante:29–35 Preferencial: - Folfirinox modificado NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "localmente avançado",
+        "conduta": "QT de indução (mFOLFIRINOX); reavaliar: cirurgia se ressecável, QT+RT, manter/trocar QT",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "Tratamento de indução:31,44,45 Preferencial: - Folfirinox modificado NE AL TO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "metastático ECOG 0–1",
+        "conduta": "FOLFIRINOX (modificado ou tradicional), NALIRIFOX ou gencitabina + nab-paclitaxel",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "sugere-se dar preferência pelo esquema Folfirinox em vez de gencitabina + nab-paclitaxel",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "metastático ECOG 2",
+        "conduta": "gencitabina + nab-paclitaxel ou gencitabina",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Gencitabina + nab-Paclitaxel (NE moderado/FR forte) Gencitabina monoterapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "metastático ECOG 3–4",
+        "conduta": "suporte clínico exclusivo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "ECOG 3-4 Suporte clínico exclusivo",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "CA199",
+          "uso": "estadiamento (≥ 500 UI/mL = borderline biológico) e seguimento se elevado ao diagnóstico; sem código SIGTAP",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "CA19-9 ≥ 500 UI/ml",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "CA 19-9 no seguimento de quem não o tinha elevado ao diagnóstico",
+        "CEA (não citado na diretriz SBOC de pâncreas)"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "ressecavel",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia",
+          "QT adjuvante 6 meses",
+          "neoadjuvância se mau prognóstico"
+        ],
+        "criterio": "fatores de mau prognóstico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Tratamento adjuvante:23–27 ECOG 0/1 e < 80 anos: Preferencial:",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "borderline",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT neoadjuvante",
+          "QT+RT (papel incerto)",
+          "cirurgia",
+          "adjuvância controversa"
+        ],
+        "criterio": "tipo A/B/C",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "O papel da QT + RT neoadjuvante após QT neoadjuvante no cenário",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "localmente_avancado",
+        "intencao": "paliativa (conversão possível)",
+        "modalidades": [
+          "QT de indução",
+          "QT+RT definitiva",
+          "cirurgia se conversão"
+        ],
+        "criterio": "resposta à indução",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "Considerar cirurgia na doença ressecável NE MUITO BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT 1ª/2ª linha",
+          "olaparibe manutenção (gBRCA)",
+          "descalonamento"
+        ],
+        "criterio": "ECOG, linha prévia, BRCA",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Não existem estudos randomizados que comparem os regimes de Folfirinox e Gencitabina",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "pancreas-neoadjuvante-mfolfirinox",
+        "nome": "mFOLFIRINOX neoadjuvante",
+        "cenario": "ressecavel com mau prognóstico / borderline",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Irinotecano",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 48 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "sem bolus"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): só existe APAC de doença avançada (0304020052); não há procedimento adjuvante/neoadjuvante para o CID",
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Drogas convencionais disponíveis, mas sem procedimento APAC específico para o cenário perioperatório: depende de regra local de faturamento."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Folfirinox modificado Oxaliplatina 85 mg/m² EV D1 A cada 2 semanas Irinotecano 150",
+          "estado": "VERIFICADO"
+        },
+        "fonteIndicacao": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Preferenciais: - Folfirinox modificado NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "pancreas-neoadjuvante-gencitabina-nab-paclitaxel",
+        "nome": "Gencitabina + nab-paclitaxel neoadjuvante",
+        "cenario": "ressecavel com mau prognóstico / borderline (não candidatos a FOLFIRINOX)",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": ""
+          },
+          {
+            "droga": "Nab-paclitaxel",
+            "dose": 125,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "mFOLFIRINOX ou gencitabina (nab-paclitaxel sem incorporação identificada)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Gencitabina 1.000 mg/m² EV D1, D8 e D15 A cada 4 semanas Nab-Paclitaxel",
+          "estado": "VERIFICADO"
+        },
+        "nota": "evitar gencitabina monoterapia como neoadjuvante",
+        "doseVerificada": true
+      },
+      {
+        "id": "pancreas-neoadjuvante-gencitabina-cisplatina-hrd",
+        "nome": "Gencitabina + cisplatina (HRD/BRCA) neoadjuvante",
+        "cenario": "borderline anatômico com HRD",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": null,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": null,
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": null,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": null,
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): só existe APAC de doença avançada (0304020052); não há procedimento adjuvante/neoadjuvante para o CID",
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Drogas convencionais disponíveis, mas sem procedimento APAC específico para o cenário perioperatório: depende de regra local de faturamento."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Considerar Gencitabina + Cisplatina (pacientes HRD) NE BAIXO/FR FORTE",
+          "estado": "DADO_AUSENTE"
+        },
+        "pendencia": {
+          "texto": "Doses de gencitabina + cisplatina neoadjuvante (HRD) não tabeladas.",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "SBOC 2026 v4 e 2025 v6 pâncreas",
+            "Onco PRO 2026 aula 07",
+            "ClinicalTrials.gov NCT01585805 (gem 600 + cis 25 D3/D10 q21 — doença avançada, cenário diferente; não transferido)"
+          ]
+        },
+        "nota": "SBOC indica o esquema sem tabelar doses; não transferir doses de vias biliares (ABC-02)",
+        "doseVerificada": false
+      },
+      {
+        "id": "pancreas-adjuvante-mfolfirinox",
+        "nome": "mFOLFIRINOX adjuvante (PRODIGE 24)",
+        "cenario": "ressecavel (ECOG 0–1, < 80 anos)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Irinotecano",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 48 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "sem bolus"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 12,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): só existe APAC de doença avançada (0304020052); não há procedimento adjuvante/neoadjuvante para o CID",
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Drogas convencionais disponíveis, mas sem procedimento APAC específico para o cenário perioperatório: depende de regra local de faturamento."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Folfirinox modificado Oxaliplatina 85 mg/m² EV D1 A cada 2 semanas Irinotecano 150",
+          "estado": "VERIFICADO"
+        },
+        "duracao": "6 meses",
+        "fonteDuracao": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "randomizados para 6 meses de Folfirinox modificado ad- juvante",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true,
+        "fonteCiclos": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT01526135 (PRODIGE 24) — https://clinicaltrials.gov/api/v2/studies/NCT01526135, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "mFolfirinox every 14 days, 12 cycles, 24 weeks.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pancreas-adjuvante-gencitabina-capecitabina",
+        "nome": "Gencitabina + capecitabina adjuvante (ESPAC-4)",
+        "cenario": "ressecavel (não candidatos a FOLFIRINOX)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": ""
+          },
+          {
+            "droga": "Capecitabina",
+            "dose": 830,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D21",
+            "observacao": "12/12 h"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.pancreas.gemcitabina-capecitabina__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): só existe APAC de doença avançada (0304020052); não há procedimento adjuvante/neoadjuvante para o CID",
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Drogas convencionais disponíveis, mas sem procedimento APAC específico para o cenário perioperatório: depende de regra local de faturamento."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Capecitabina 830 mg/m² VO 12/12h D1 a D21",
+          "estado": "VERIFICADO"
+        },
+        "duracao": "6 meses",
+        "doseVerificada": true,
+        "numeroCiclosNota": "derivado: 6 meses (SBOC) ÷ ciclos de 28 dias"
+      },
+      {
+        "id": "pancreas-adjuvante-gencitabina",
+        "nome": "Gencitabina adjuvante (CONKO-001)",
+        "cenario": "ressecavel (não candidatos a FOLFIRINOX)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.pancreas.gemcitabina-monoterapia__adjuvante@1.0.0",
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): só existe APAC de doença avançada (0304020052); não há procedimento adjuvante/neoadjuvante para o CID",
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Drogas convencionais disponíveis, mas sem procedimento APAC específico para o cenário perioperatório: depende de regra local de faturamento."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Gencitabina monoterapia Gencitabina 1.000 mg/m² EV D1, D8 e D15 A cada 4 semanas",
+          "estado": "VERIFICADO"
+        },
+        "duracao": "6 meses",
+        "doseVerificada": true,
+        "fonteCiclos": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT01526135 (PRODIGE 24) — https://clinicaltrials.gov/api/v2/studies/NCT01526135, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "(= 1 cycle) repeated 6 times (i.e., 6 cycles) during 24 weeks",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pancreas-adjuvante-5fu-lv",
+        "nome": "5-FU/LV adjuvante",
+        "cenario": "ressecavel (não candidatos a FOLFIRINOX)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 48 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 12,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): só existe APAC de doença avançada (0304020052); não há procedimento adjuvante/neoadjuvante para o CID",
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Drogas convencionais disponíveis, mas sem procedimento APAC específico para o cenário perioperatório: depende de regra local de faturamento."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "5-FU/LV Leucovorin 400 mg/m² EV D1 A cada 2 semanas5-Fluorouracil 400 mg/m²",
+          "estado": "VERIFICADO"
+        },
+        "duracao": "6 meses",
+        "doseVerificada": true,
+        "numeroCiclosNota": "derivado: 6 meses (SBOC) ÷ ciclos de 14 dias"
+      },
+      {
+        "id": "pancreas-inducao-mfolfirinox",
+        "nome": "mFOLFIRINOX de indução (localmente avançado)",
+        "cenario": "localmente_avancado",
+        "linha": "indução",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Irinotecano",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 48 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "sem bolus"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020052 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de pâncreas avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Folfirinox modificado Oxaliplatina 85 mg/m² EV D1 A cada 2 semanas Irinotecano 150",
+          "estado": "VERIFICADO"
+        },
+        "nota": "em doença estável sem sintomas: manter ou descalonar para FOLFIRI/5-FU",
+        "doseVerificada": true
+      },
+      {
+        "id": "pancreas-paliativo-1l-folfirinox-tradicional",
+        "nome": "FOLFIRINOX tradicional (PRODIGE 4/ACCORD 11)",
+        "cenario": "metastatico (ECOG 0–1)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Irinotecano",
+            "dose": 180,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 48 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.pancreas.folfirinox__paliativo-metastatico@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020052 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de pâncreas avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Folfirinox tradicional Oxaliplatina 85 mg/m² EV D1 A cada 2 semanas Irinotecano 180",
+          "estado": "VERIFICADO"
+        },
+        "fonte5FU": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "5-Fluorouracil 400 mg/m² EV (bolus) D1 5-Fluorouracil 2.400 mg/m² EV",
+          "estado": "VERIFICADO"
+        },
+        "descalonamento": "após 4–6 meses (ou neuropatia ≥ G2): FOLFIRI ou 5-FU/LV",
+        "doseVerificada": true
+      },
+      {
+        "id": "pancreas-paliativo-1l-mfolfirinox",
+        "nome": "mFOLFIRINOX",
+        "cenario": "metastatico (ECOG 0–1)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Irinotecano",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 48 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "sem bolus"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020052 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de pâncreas avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Folfirinox modificado Oxaliplatina 85 mg/m² EV D1 A cada 2 semanas Irinotecano 150",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "pancreas-paliativo-1l-gencitabina-nab-paclitaxel",
+        "nome": "Gencitabina + nab-paclitaxel (MPACT)",
+        "cenario": "metastatico (ECOG 0–2)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": ""
+          },
+          {
+            "droga": "Nab-paclitaxel",
+            "dose": 125,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "gencitabina monoterapia ou FOLFIRINOX (procedimento 0304020052)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Gencitabina 1.000 mg/m² EV D1, D8 e D15 A cada 4 semanas Nab-Paclitaxel",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "pancreas-paliativo-1l-gencitabina",
+        "nome": "Gencitabina monoterapia",
+        "cenario": "metastatico (ECOG 2)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020052 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de pâncreas avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Gencitabina monoterapia Gencitabina 1.000 mg/m² EV D1, D8 e D15 A cada 4 semanas",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "pancreas-paliativo-1l-nalirifox",
+        "nome": "NALIRIFOX (NAPOLI-3)",
+        "cenario": "metastatico (ECOG 0–1)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Irinotecano lipossomal",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "não substituir por irinotecano convencional",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "ONIVYDE 50 mg/m 2 as an intravenous infusion over 90 minutes, followed by oxaliplatin",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "ONIVYDE 50 mg/m 2 as an intravenous infusion over 90 minutes, followed by oxaliplatin",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "leucovorin 400 mg/m 2 intravenously over 30 minutes, followed by fluorouracil 2400 mg/m 2",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "leucovorin 400 mg/m 2 intravenously over 30 minutes, followed by fluorouracil 2400 mg/m 2",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "FOLFIRINOX (procedimento 0304020052)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Nalirifox (NE alto/FR forte)",
+          "estado": "DADO_AUSENTE"
+        },
+        "nota": "Doses da bula FDA (NAPOLI-3). SBOC: irinotecano lipossomal não disponível no Brasil — usar alternativa SUS.",
+        "fonteDisponibilidade": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "É importante lembrar que o irinotecano lipossomal não está disponível no Brasil.",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true,
+        "fonteDose": {
+          "tipo": "BULA",
+          "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+          "pagina": null,
+          "trecho": "every 2 weeks",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pancreas-manutencao-olaparibe",
+        "nome": "Olaparibe de manutenção (POLO) — gBRCA1/2",
+        "cenario": "metastatico gBRCA, estável/resposta após ≥ 4 meses de platina",
+        "linha": "manutenção",
+        "drogas": [
+          {
+            "droga": "Olaparibe",
+            "dose": 300,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo",
+            "observacao": "2x/dia"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "vigilância ou manutenção com fluoropirimidina"
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "openFDA drug label LYNPARZA (https://api.fda.gov/drug/label.json?search=openfda.brand_name:LYNPARZA), acesso 2026-10-11; bula ANVISA não consultada",
+          "pagina": null,
+          "trecho": "The recommended dosage of Lynparza is 300 mg taken orally twice daily",
+          "estado": "VERIFICADO"
+        },
+        "continuo": true,
+        "fonteIndicacao": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "a manutenção com olaparibe até progressão ou toxicidade limitante é uma opção",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "pancreas-descalonamento-folfiri",
+        "nome": "FOLFIRI (descalonamento pós-FOLFIRINOX)",
+        "cenario": "metastatico/localmente avançado em uso de mFOLFIRINOX",
+        "linha": "manutenção/descalonamento",
+        "drogas": [
+          {
+            "droga": "Irinotecano",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 48 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020052 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de pâncreas avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Folfiri Irinotecano 150 mg/m² EV D1 A cada 2 semanas Leucovorin 400",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "pancreas-descalonamento-5fu-lv",
+        "nome": "5-FU/LV (descalonamento a partir do 9º ciclo — PANOPTIMOX)",
+        "cenario": "metastatico em FOLFIRINOX",
+        "linha": "manutenção/descalonamento",
+        "drogas": [
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 48 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020052 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de pâncreas avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "5-FU/LV Leucovorin 400 mg/m² EV D1 A cada 2 semanas5-Fluorouracil 400 mg/m²",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "pancreas-paliativo-2l-nal-iri-5fu",
+        "nome": "Irinotecano lipossomal + 5-FU/LV (NAPOLI-1)",
+        "cenario": "metastatico pós-gencitabina",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Irinotecano lipossomal",
+            "dose": 70,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "homozigoto UGT1A1*28: iniciar 50 mg/m² (bula)",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "Patients randomized to ONIVYDE/FU/LV received ONIVYDE 70 mg/m 2 as an intravenous infusion",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "followed by leucovorin 400 mg/m 2 intravenously over 30 minutes, followed by fluorouracil 2400",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA ONIVYDE (irinotecan lipossomal) (openFDA/DailyMed set_id c8b58efa-1820-48a4-b70d-62918fc4abfc), seções 2.2 e 14 (NAPOLI-3/NAPOLI-1), acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "followed by leucovorin 400 mg/m 2 intravenously over 30 minutes, followed by fluorouracil 2400",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "FOLFIRINOX ou FOLFOX de 2ª linha (procedimento 0304020052)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "- Nal-IRI + 5-FU/LV (NE alto/FR forte)",
+          "estado": "DADO_AUSENTE"
+        },
+        "nota": "Doses da bula FDA (NAPOLI-1). Irinotecano lipossomal indisponível no Brasil segundo a SBOC.",
+        "doseVerificada": true
+      },
+      {
+        "id": "pancreas-paliativo-2l-folfox",
+        "nome": "FOLFOX de 2ª linha (pós-gencitabina)",
+        "cenario": "metastatico pós-gencitabina",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01121848 (PANCREOX — mFOLFOX6 em 2ª linha de pâncreas) — https://clinicaltrials.gov/api/v2/studies/NCT01121848, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "Day 1: Oxaliplatin 85 mg/m2 (given as a 2-hour infusion)",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01121848 (PANCREOX — mFOLFOX6 em 2ª linha de pâncreas) — https://clinicaltrials.gov/api/v2/studies/NCT01121848, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "Day 1: LV 400 mg/m2 (given as a 2-hour infusion simultaneous to oxaliplatin)",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01121848 (PANCREOX — mFOLFOX6 em 2ª linha de pâncreas) — https://clinicaltrials.gov/api/v2/studies/NCT01121848, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "bolus IV 400 mg/m2 dose on Day 1 followed by 2400 mg/m2 continuous infusion",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01121848 (PANCREOX — mFOLFOX6 em 2ª linha de pâncreas) — https://clinicaltrials.gov/api/v2/studies/NCT01121848, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "bolus IV 400 mg/m2 dose on Day 1 followed by 2400 mg/m2 continuous infusion",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020052 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de pâncreas avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020052",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PÂNCREAS AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "- FOLFOX (NE moderado/FR forte)",
+          "estado": "DADO_AUSENTE"
+        },
+        "nota": "Doses do braço mFOLFOX6 do ensaio PANCREOX (pâncreas, 2ª linha pós-gencitabina); não transferidas de outro tumor.",
+        "doseVerificada": true,
+        "fonteCiclo": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT01121848 (PANCREOX — mFOLFOX6 em 2ª linha de pâncreas) — https://clinicaltrials.gov/api/v2/studies/NCT01121848, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "This chemotherapy regimen will be administered each two weeks.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "pancreas-paliativo-2l-gencitabina-nab-paclitaxel",
+        "nome": "Gencitabina + nab-paclitaxel após 5-FU",
+        "cenario": "metastatico pós-FOLFIRINOX (ECOG 0–1)",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": ""
+          },
+          {
+            "droga": "Nab-paclitaxel",
+            "dose": 125,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "gencitabina monoterapia (procedimento 0304020052)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Gencitabina 1.000 mg/m² EV D1, D8 e D15 A cada 4 semanas Nab-Paclitaxel",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "QT+RT neoadjuvante (ressecável alto risco/borderline/LA respondedor)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC 2026 pâncreas p.12/15",
+            "Onco PRO 2026 aula 07"
+          ],
+          "nota": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11); fracionamento não buscado."
+        },
+        "concomitante": "gencitabina ou capecitabina; preferir RT de curso longo convencional à SBRT",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "recomenda-se RT de curso longo convencional à RT esterotáxica (SBRT)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "QT+RT definitiva (LA estável com sintomas locais ou intolerância à QT)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC 2026 pâncreas p.12/15",
+            "Onco PRO 2026 aula 07"
+          ],
+          "nota": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11); fracionamento não buscado."
+        },
+        "concomitante": "não especificado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "Sintomas locais ou intolerância à QT: - QT + RT definitiva",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "ressecção pancreática (duodenopancreatectomia/pancreatectomia conforme topografia)",
+        "quando": "ressecável; borderline/LA após resposta",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Cirurgia /long-arrow-alt-right QT adjuvante (NE alto/FR forte)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "BRCA1/2 germinativo",
+        "opcao": "esquema com platina; olaparibe de manutenção após ≥ 4 meses de platina",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "que apresentem doença estável ou reposta radiológica após 4 meses de trata",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "HRD (germinativa ou somática)",
+        "opcao": "esquema contendo platina na neoadjuvância",
+        "evidencia": "NE baixo/FR forte",
+        "sus": "parcial",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "é sugerido a utilização de esquema contendo uma platina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "HER2 hiperexpresso",
+        "opcao": "trastuzumabe-deruxtecana",
+        "evidencia": "NE baixo/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "para avaliar tratamento com trastuzumabe-deruxtecana NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": null,
+      "riscoNeutropeniaFebril": null,
+      "pendencia": "SEM_FONTE",
+      "outros": [
+        "no seguimento: avaliar insuficiência pancreática exócrina, deficiências vitamínicas, diabetes, eletrólitos e sequelas tardias",
+        "pesquisa de DPD antes de fluoropirimidina, se disponível"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 20,
+        "trecho": "Incluir avaliação de síndrome disabsortiva/insuficiência pancreática exócrina, deficiências vita",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "PRODIGE 24",
+        "nct": "NCT01526135",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT01526135 (consultado 2026-10-11)",
+        "populacao": "ressecado, CA 19-9 pós-op < 180",
+        "bracos": "mFOLFIRINOX × gencitabina 6 meses",
+        "desfecho": "SG",
+        "resultado": "SG 54,4 × 35 meses (HR 0,64)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Os pacientes tratados com Folfirinox modificado tiveram uma SG mediana de 54,4",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ESPAC-4",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "nctFonte": null,
+        "populacao": "ressecado",
+        "bracos": "gencitabina + capecitabina × gencitabina",
+        "desfecho": "SG",
+        "resultado": "SG 28,0 × 25,5 meses (HR 0,82)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "A terapia combinada melhorou a SG mediana em comparação com a gencitabina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "MPACT",
+        "nct": "NCT00844649",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT00844649 (consultado 2026-10-11)",
+        "populacao": "metastático 1ª linha",
+        "bracos": "gencitabina + nab-paclitaxel × gencitabina",
+        "desfecho": "SG",
+        "resultado": "SG 8,5 × 6,7 meses (HR 0,72)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "O estudo Mpact com 861 pacientes com adenocarcinoma de pâncreas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "PRODIGE 4/ACCORD 11",
+        "nct": "NCT00112658",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT00112658 (consultado 2026-10-11)",
+        "populacao": "metastático 1ª linha",
+        "bracos": "FOLFIRINOX × gencitabina",
+        "desfecho": "SG",
+        "resultado": "SG 11,1 × 6,8 meses (HR 0,57)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "O estudo Prodige 4/Accord 11 com 342 pacientes relatou que a SG",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "NAPOLI-3",
+        "nct": "NCT04083235",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT04083235 (consultado 2026-10-11)",
+        "populacao": "metastático 1ª linha, ECOG 0–1",
+        "bracos": "NALIRIFOX × gencitabina + nab-paclitaxel",
+        "desfecho": "SG",
+        "resultado": "SG 11,1 × 9,2 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "O estudo de fase III Napoli-3 trial avaliou 770 pacientes",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "POLO",
+        "nct": "NCT02184195",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT02184195 (consultado 2026-10-11)",
+        "populacao": "metastático gBRCA sem progressão após ≥ 16 semanas de platina",
+        "bracos": "olaparibe × placebo",
+        "desfecho": "SLP",
+        "resultado": "SLP 7,4 × 3,8 meses (HR 0,53); SG sem diferença",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "a sua aprovação é com base em um benefício de SLP",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "NAPOLI-1",
+        "nct": "NCT01494506",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT01494506 (consultado 2026-10-11)",
+        "populacao": "metastático pós-gencitabina",
+        "bracos": "nal-IRI + 5-FU/LV × 5-FU/LV",
+        "desfecho": "SG",
+        "resultado": "SG 6,1 × 4,2 meses (HR 0,67)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "O estudo de fase III Napoli-1 trial avaliou pacientes",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "SWOG S1505",
+        "nct": "NCT02562716",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT02562716 (consultado 2026-10-11)",
+        "populacao": "potencialmente ressecável",
+        "bracos": "mFOLFIRINOX × gencitabina + nab-paclitaxel perioperatórios",
+        "desfecho": "SG 2 anos",
+        "resultado": "47% × 48%",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "foi de 47% com Folfirinox e 48% com gencitabina mais nab-paclitaxel",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "Alliance A021501",
+        "nct": "NCT02839343",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT02839343 (consultado 2026-10-11)",
+        "populacao": "borderline",
+        "bracos": "mFOLFIRINOX ± SBRT neoadjuvante",
+        "desfecho": "SG",
+        "resultado": "SBRT não melhorou SG",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "A adição de RT corporal estereotáxica ao Folfirinox modificado neoad- juvante não melhorou",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "pós-tratamento curativo, anos 1–2",
+        "exames": [
+          "CA199",
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR"
+        ],
+        "periodicidade": "avaliação clínica, CA 19-9 (se elevado ao diagnóstico) e TC a cada 3 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "A cada 3 meses nos primeiros 2 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "anos 3–5",
+        "exames": [
+          "CA199",
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR"
+        ],
+        "periodicidade": "a cada 6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "A cada 6 meses do 3º ao 5º ano",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "BILIRRUBINA",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "CA199",
+      "CPRE",
+      "CREATININA",
+      "FOSFATASE_ALCALINA",
+      "GAMA_GT",
+      "HEMOGRAMA",
+      "IMUNOHISTOQUIMICA",
+      "PET_CT_FDG",
+      "RM_ABDOMEN_SUPERIOR",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_TORAX",
+      "TGO",
+      "TGP",
+      "UREIA",
+      "MOLECULAR_PCR_MUTACAO",
+      "SEQUENCIAMENTO_AMPLICON",
+      "VIDEOLAPAROSCOPIA"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "5-FU/capecitabina",
+        "com": "brivudina",
+        "ref": "INAT-04"
+      },
+      {
+        "droga": "capecitabina",
+        "com": "varfarina/cumarínicos",
+        "ref": "INAT-02"
+      },
+      {
+        "droga": "irinotecano",
+        "com": "inibidores/indutores fortes de CYP3A4/UGT1A1",
+        "ref": "INAT-13"
+      },
+      {
+        "droga": "irinotecano",
+        "com": "indutores fortes de CYP3A4",
+        "ref": "INAT-14"
+      },
+      {
+        "droga": "olaparibe",
+        "com": "inibidores fortes/moderados de CYP3A",
+        "ref": "INAT-26"
+      },
+      {
+        "droga": "cisplatina",
+        "com": "ototóxicos",
+        "ref": "INAT-15"
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "fluoropirimidina",
+        "termosCTCAEv6": [
+          "Diarrhea",
+          "Mucositis oral",
+          "Palmar-plantar erythrodysesthesia syndrome"
+        ]
+      },
+      {
+        "classe": "irinotecano",
+        "termosCTCAEv6": [
+          "Diarrhea",
+          "Neutrophil count decreased"
+        ]
+      },
+      {
+        "classe": "platina",
+        "termosCTCAEv6": [
+          "Peripheral sensory neuropathy"
+        ]
+      },
+      {
+        "classe": "taxano",
+        "termosCTCAEv6": [
+          "Peripheral sensory neuropathy"
+        ]
+      },
+      {
+        "classe": "inibidor de PARP (olaparibe)",
+        "termosCTCAEv6": [
+          "Anemia",
+          "Nausea"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "receita-sintomaticos-modelo-servico",
+      "enzimas pancreáticas se insuficiência exócrina (sem receita no corpus — pendência)"
+    ],
+    "orientacoes": [
+      "dieta-por-tumor",
+      "sinais-alarme-consolidado"
+    ],
+    "encaminhamentos": [
+      "encaminhamento-cirurgia-oncologica",
+      "encaminhamento-radioterapia",
+      "oncogenética (BRCA germinativo)",
+      "nutrição"
+    ],
+    "laudos": [
+      "laudo-nutricao"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "adenocarcinoma de pâncreas ressecado, ECOG 0–1 e < 80 anos",
+        "y": "mFOLFIRINOX adjuvante por 6 meses",
+        "z": "não candidato: gencitabina + capecitabina, gencitabina ou 5-FU/LV",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Não candidatos a Folfirinox: - Gencitabina + Capecitabina NE AL TO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "ressecável com CA 19-9 ≥ 500, N+ ou tumor ≥ 2–3 cm",
+        "y": "neoadjuvância (mFOLFIRINOX ou gencitabina + nab-paclitaxel)",
+        "z": "completar 6 meses totais de QT no pós-operatório se condições clínicas",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "completando total de 6 meses, desde que paciente apresente condições clínicas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "todo adenocarcinoma de pâncreas ao diagnóstico",
+        "y": "pedir BRCA1/2 germinativo por sequenciamento (NGS)",
+        "z": "gBRCA com resposta/estabilidade após 4 meses de platina → olaparibe de manutenção",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "A testagem de mutação germinativa do BRCA1/2 deve ser preferencialmente realizada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "metastático em FOLFIRINOX há 4–6 meses ou neuropatia ≥ G2",
+        "y": "descalonar para FOLFIRI ou 5-FU/LV",
+        "z": "progressão: 2ª linha conforme 1ª linha (pós-5-FU → gencitabina + nab-paclitaxel)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "considerar descalonamento de tratamento para Folfiri ou 5-Fluorouracil",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    {
+      "texto": "SEM_FONTE: doses de gencitabina + cisplatina (HRD), NALIRIFOX, nal-IRI + 5-FU/LV e FOLFOX de 2ª linha (não tabeladas na SBOC de pâncreas)",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC 2026/2025 pâncreas",
+        "Onco PRO 2026 aula 07",
+        "bula FDA ONIVYDE",
+        "ClinicalTrials.gov NCT01121848, NCT01585805"
+      ],
+      "nota": "NALIRIFOX e nal-IRI resolvidos (bula FDA ONIVYDE); FOLFOX 2ª linha resolvido (PANCREOX NCT01121848). Resta gencitabina + cisplatina neoadjuvante (HRD)."
+    },
+    {
+      "texto": "SEM_FONTE: doses/fracionamento de QT+RT neoadjuvante e definitiva",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "SBOC 2026 pâncreas p.12/15",
+        "Onco PRO 2026 aula 07"
+      ],
+      "nota": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11); fracionamento não buscado."
+    },
+    {
+      "texto": "SEM_ID_NO_CATALOGO: BRCA germinativo (NGS), KRAS (PCR), NGS amplo/RNAseq, DPYD, videolaparoscopia",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json (164 ids)"
+      ],
+      "nota": "Depende de ampliação do catálogo de exames."
+    },
+    {
+      "texto": "CA 19-9: catalogoId CA199 existe, mas sem código SIGTAP",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json"
+      ],
+      "nota": "Código SIGTAP do CA 19-9 é atributo do catálogo, não do pack."
+    },
+    {
+      "texto": "SUS_PROCEDIMENTO_A_CONFIRMAR: QT neoadjuvante/adjuvante de pâncreas sem procedimento no cadastro SIGTAP local (só 0304020052 avançado)",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
+      ],
+      "nota": "Não há procedimento SIGTAP de QT neoadjuvante/adjuvante deste tumor; enquadramento depende da regra anti-glosa."
+    },
+    {
+      "texto": "SUS_INCORPORACAO_A_CONFIRMAR: nab-paclitaxel, olaparibe, irinotecano lipossomal, T-DXd",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Planilha CONITEC 15/06/2026",
+        "Painel de Demandas CONITEC",
+        "busca gov.br/conitec",
+        "DOU (portarias citadas)"
+      ],
+      "nota": "sus.disponivel preenchido em todos os protocolos com portaria/relatório quando existe. Sem avaliação CONITEC (registrado 'nao', INFERIDO): neoadjuvante-gencitabina-nab-paclitaxel, paliativo-1l-gencitabina-nab-paclitaxel, paliativo-1l-nalirifox, manutencao-olaparibe, paliativo-2l-nal-iri-5fu, paliativo-2l-gencitabina-nab-paclitaxel."
+    },
+    {
+      "texto": "Olaparibe: dose de bula FDA (openFDA); bula ANVISA não consultada",
+      "classe": "PROVISORIA_BULA_FDA",
+      "buscasFeitas": [
+        "openFDA LYNPARZA"
+      ],
+      "resolucao": "Bula FDA provisória (resposta 1)."
+    },
+    {
+      "texto": "SEM_FONTE: emetogenicidade/risco de NF por esquema",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC 2026 pâncreas",
+        "Onco PRO 2026 aulas 87-88"
+      ],
+      "nota": "Classificação por droga vem do módulo de suporte."
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "Irinotecano lipossomal recomendado × indisponível no Brasil",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 17,
+        "trecho": "- Nal-IRI + 5-FU/LV (NE alto/FR forte)",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 19,
+        "trecho": "É importante lembrar que o irinotecano lipossomal não está disponível no Brasil.",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "NALIRIFOX e nal-IRI registrados sem dose e com alternativa SUS (FOLFIRINOX/FOLFOX/gencitabina).",
+      "decisaoNecessaria": false,
+      "resolucao": "Doses de NALIRIFOX e nal-IRI preenchidas pela bula FDA; indisponibilidade no Brasil mantida — usar FOLFIRINOX/FOLFOX/gencitabina (APAC 0304020052)."
+    },
+    {
+      "tema": "SBOC 2025 v6 × 2026 v4",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/28---Diretrizes-SBOC-2025---Pancreas-v6-PARA-CONTRIBUICOES.pdf",
+        "pagina": 8,
+        "trecho": "Folfirinox tradicional Oxaliplatina 85 mg/m² EV D1 A cada 2 semanas Irinotecano 180",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 8,
+        "trecho": "Folfirinox tradicional Oxaliplatina 85 mg/m² EV D1 A cada 2 semanas Irinotecano 180",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Sem divergência de dose entre as edições; usada a 2026. FOLFIRINOX tradicional contém oxaliplatina 85 mg/m² D1.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Duração da infusão de 5-FU (48 h na SBOC pâncreas × 46 h na SBOC vias biliares)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Pancreas-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 8,
+        "trecho": "5-Fluorouracil 2.400 mg/m² EV (bomba de infusão contínua de 48h) D1",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 19,
+        "trecho": "5-FU 2.400 mg/m² EV D1 (46h)",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Mantido 48 h no pack de pâncreas conforme a fonte do tumor; registrar para padronização da ficha do serviço.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Serviço trabalha com 46 h em bomba ou D1–D2 com 8 h/dia (43A); a fonte do tumor (48 h) fica como referência.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (curador oncológico, rascunho para validação do Dr. Silas)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC 2026 Pâncreas v4 (integral)",
+      "SBOC 2025 Pâncreas v6 (comparação de doses)",
+      "openFDA Lynparza",
+      "SIGTAP 2026-09",
+      "ClinicalTrials.gov API v2",
+      "corpus/fichas/pancreas/*"
+    ],
+    "aprovacaoClinica": null,
+    "reducaoPendencias20261011": {
+      "data": "2026-10-11",
+      "resolvidas": [
+        {
+          "pendencia": "SEM_FONTE: método de obtenção histológica (ecoendoscopia com punção não descrita; sem id no catálogo)",
+          "como": "PAAF guiada por ecoendoscopia (Onco PRO 2026 aula 06 p.13, CURSO, INFERIDO); ecoendoscopia segue sem id no catálogo."
+        },
+        {
+          "pendencia": "Duração em meses (6 meses) sem número de ciclos explícito na fonte para adjuvância",
+          "como": "PRODIGE 24 (NCT01526135): mFOLFIRINOX 12 ciclos, gencitabina 6 ciclos; gem-cape (6) e 5-FU/LV (12) derivados de 6 meses ÷ intervalo."
+        }
+      ]
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "1 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
+}

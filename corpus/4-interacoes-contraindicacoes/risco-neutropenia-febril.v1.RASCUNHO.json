@@ -1,0 +1,235 @@
+{
+  "header": {
+    "id": "risco-neutropenia-febril",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Regra de risco de NF para G-CSF primário: ASCO 2026/2015 e EORTC 2010 (resumos verificados); NCCN Hematopoietic Growth Factors não acessível (licença)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "nota": "Proposta (nunca prescrição automática). Fecha o defeito A10/X+Y=Z nº 5 do red team. NCCN não lido (acesso restrito) — nada aqui é atribuído ao NCCN. Esquema sem fonte de risco = riscoNF null.",
+  "regra": {
+    "categoriasRiscoEsquema": [
+      {
+        "id": "ALTO",
+        "faixa": "≥20%",
+        "acaoProposta": "PROPOR_GCSF_PRIMARIO",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Gyawali B et al. WBC Growth Factors: ASCO Guideline Update. J Clin Oncol 2026;44(9):812-24, DOI 10.1200/JCO-25-02938, PMID 41740078 (resumo PubMed)",
+          "secao": "Recommendations",
+          "estado": "VERIFICADO_2026-10-11",
+          "edicao": "2026",
+          "trecho": "risk of febrile neutropenia from chemotherapy is approximately 20% or higher"
+        }
+      },
+      {
+        "id": "INTERMEDIARIO",
+        "faixa": "10–20%",
+        "acaoProposta": "AVALIAR_FATORES_DO_PACIENTE",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Aapro MS et al. 2010 update of EORTC G-CSF guidelines. Eur J Cancer 2011;47(1):8-32, PMID 21095116 (resumo PubMed; tabela de esquemas NÃO acessível — 403)",
+          "secao": "Abstract",
+          "estado": "VERIFICADO_2026-10-11",
+          "edicao": "2010",
+          "trecho": "particular attention should be given to patient-related risk factors"
+        }
+      },
+      {
+        "id": "BAIXO",
+        "faixa": "<10%",
+        "acaoProposta": "NAO_PROPOR_ROTINA",
+        "fonte": null,
+        "pendencia": "SEM_FONTE",
+        "notaPendencia": "Faixa <10% sem trecho literal verificado nos resumos; categoria por complemento lógico."
+      }
+    ],
+    "fatoresPaciente": [
+      {
+        "id": "IDADE_65",
+        "criterio": "idade ≥65 anos",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Aapro MS et al. 2010 update of EORTC G-CSF guidelines. Eur J Cancer 2011;47(1):8-32, PMID 21095116 (resumo PubMed; tabela de esquemas NÃO acessível — 403)",
+          "secao": "Abstract",
+          "estado": "VERIFICADO_2026-10-11",
+          "edicao": "2010",
+          "trecho": "elderly age (≥65 years) and neutrophil count be evaluated"
+        }
+      },
+      {
+        "id": "NEUTROFILOS_BASAIS",
+        "criterio": "contagem de neutrófilos (baixa) antes do ciclo",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Aapro MS et al. 2010 update of EORTC G-CSF guidelines. Eur J Cancer 2011;47(1):8-32, PMID 21095116 (resumo PubMed; tabela de esquemas NÃO acessível — 403)",
+          "secao": "Abstract",
+          "estado": "VERIFICADO_2026-10-11",
+          "edicao": "2010",
+          "trecho": "elderly age (≥65 years) and neutrophil count be evaluated"
+        }
+      },
+      {
+        "id": "HISTORIA_MEDICA_DOENCA",
+        "criterio": "história médica ou características da doença de alto risco (genérico na fonte)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Gyawali B et al. WBC Growth Factors: ASCO Guideline Update. J Clin Oncol 2026;44(9):812-24, DOI 10.1200/JCO-25-02938, PMID 41740078 (resumo PubMed)",
+          "secao": "Recommendations",
+          "estado": "VERIFICADO_2026-10-11",
+          "edicao": "2026",
+          "trecho": "high risk of febrile neutropenia based on age, medical history, or disease characteristics"
+        }
+      },
+      {
+        "id": "NF_PREVIA",
+        "criterio": "NF em ciclo anterior → G-CSF nos ciclos seguintes (profilaxia SECUNDÁRIA, não primária)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "Aapro MS et al. 2010 update of EORTC G-CSF guidelines. Eur J Cancer 2011;47(1):8-32, PMID 21095116 (resumo PubMed; tabela de esquemas NÃO acessível — 403)",
+          "secao": "Abstract",
+          "estado": "VERIFICADO_2026-10-11",
+          "edicao": "2010",
+          "trecho": "after a previous episode of FN, patients receive prophylactic administration of G-CSF"
+        }
+      },
+      {
+        "id": "ECOG",
+        "criterio": "ECOG ruim",
+        "fonte": null,
+        "pendencia": "SEM_FONTE"
+      },
+      {
+        "id": "COMORBIDADES",
+        "criterio": "comorbidades (renal, hepática, DPOC, cardiopatia, DM, HIV etc.)",
+        "fonte": null,
+        "pendencia": "SEM_FONTE"
+      },
+      {
+        "id": "OUTROS",
+        "criterio": "QT/RT prévia extensa, infiltração medular, cirurgia/ferida aberta recente, desnutrição",
+        "fonte": null,
+        "pendencia": "SEM_FONTE",
+        "notaPendencia": "Lista típica do NCCN — não lido; não atribuir."
+      }
+    ],
+    "logica": [
+      "Esquema ALTO (≥20%) e sem alternativa igualmente eficaz sem G-CSF → PROPOR G-CSF primário (ASCO 2026).",
+      "Esquema INTERMEDIÁRIO (10–20%) + fator(es) do paciente → PROPOR AVALIAR G-CSF primário; número mínimo de fatores = null (SEM_FONTE; decisão médica pendente).",
+      "Esquema dose-denso/dose-intenso com benefício de sobrevida → PROPOR G-CSF (EORTC).",
+      "NF prévia → profilaxia secundária (não é regra primária).",
+      "Esquema com riscoNF null → não classificar; pedir decisão médica."
+    ],
+    "fonteDoseDenso": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Aapro MS et al. 2010 update of EORTC G-CSF guidelines. Eur J Cancer 2011;47(1):8-32, PMID 21095116 (resumo PubMed; tabela de esquemas NÃO acessível — 403)",
+      "secao": "Abstract",
+      "estado": "VERIFICADO_2026-10-11",
+      "edicao": "2010",
+      "trecho": "dose-dense or dose-intense chemotherapy strategies have survival benefits, prophylactic G-CSF support"
+    },
+    "fonteAdicional": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Smith TJ et al. ASCO WBC Growth Factors Update. J Clin Oncol 2015;33(28):3199-212, PMID 26169616 (resumo PubMed)",
+      "secao": "Recommendations",
+      "estado": "VERIFICADO_2026-10-11",
+      "edicao": "2015",
+      "trecho": "warranted when the risk of febrile neutropenia is approximately 20% or higher"
+    }
+  },
+  "esquemas": [
+    {
+      "id": "TAC",
+      "nome": "docetaxel + doxorrubicina + ciclofosfamida (mama adjuvante)",
+      "riscoNF": "≥20%",
+      "incidenciaFonte": "NF 25% (TAC) vs 3% (FAC) no estudo TAX316",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "docetaxel Hospira, DailyMed/openFDA setid 00c61d11-d6b7-4618-b6f6-2592dbcc8af7, versão 2025-01-20",
+        "secao": "6.1 TAX316 tabela",
+        "trecho": "Febrile neutropenia 25 N/A 3 N/A",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: incidência de bula (ensaio); classificação EORTC/NCCN não lida"
+    },
+    {
+      "id": "AC_T_DOSE_DENSO",
+      "nome": "AC→paclitaxel dose-denso (q14d)",
+      "riscoNF": null,
+      "exigeGCSFPorDesenho": true,
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "Aapro MS et al. 2010 update of EORTC G-CSF guidelines. Eur J Cancer 2011;47(1):8-32, PMID 21095116 (resumo PubMed; tabela de esquemas NÃO acessível — 403)",
+        "secao": "Abstract",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2010",
+        "trecho": "dose-dense or dose-intense chemotherapy strategies have survival benefits, prophylactic G-CSF support"
+      },
+      "pendencia": "PARCIAL: percentual de risco não extraído"
+    },
+    {
+      "id": "TC",
+      "nome": "docetaxel + ciclofosfamida",
+      "riscoNF": null,
+      "fonte": null,
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "id": "DCF",
+      "nome": "docetaxel + cisplatina + 5-FU (gástrico/cabeça e pescoço)",
+      "riscoNF": null,
+      "fonte": null,
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "id": "FOLFIRINOX",
+      "nome": "FOLFIRINOX (pâncreas)",
+      "riscoNF": null,
+      "fonte": null,
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "id": "BEACOPP_ESC",
+      "nome": "BEACOPP escalonado (Hodgkin)",
+      "riscoNF": null,
+      "fonte": null,
+      "pendencia": "SEM_FONTE"
+    },
+    {
+      "id": "DOCETAXEL_PROSTATA_75",
+      "nome": "docetaxel 75 mg/m² q3s + prednisona (próstata)",
+      "riscoNF": null,
+      "incidenciaFonte": "NF 3% na tabela de bula (TAX327)",
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "notaPendencia": "Incidência de bula baixa (3%) não equivale a classificação; não usar como 'baixo' sem diretriz."
+    }
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "status": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "Claude (curadoria farmacológica F1, rodada v2)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "LITERATURA",
+      "referencia": "PubMed 41740078, 26169616, 21095116; openFDA docetaxel",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação); aprovação clínica real = curadoria.aprovacaoClinica (null). Nenhum item tem ativo:true; alerta global false."
+  }
+}

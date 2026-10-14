@@ -1,0 +1,86 @@
+{
+  "header": {
+    "id": "dieta-por-tumor",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.3 [CODEX M1-2]",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "publico": "PACIENTE — linguagem simples, frases curtas",
+  "tumores": [
+    {
+      "tumor": "cabeca-e-pescoco",
+      "texto": "Coma comida mole, pastosa ou batida se engolir dói. Refeições pequenas e frequentes. Comidas mornas incomodam menos que muito quentes. Se não conseguir comer o suficiente, use suplemento oral indicado pela equipe.",
+      "fontes": [
+        "ASPEN via NutriTotal (nutritotal.com.br)",
+        "Oncoalícia (oncoalicia.com)"
+      ],
+      "ressalva": "Fontes secundárias nacionais; diretriz primária de nutrição por tumor cabe à curadoria."
+    },
+    {
+      "tumor": "esofago-estomago",
+      "texto": "Coma pouco de cada vez: 6 ou mais refeições pequenas por dia. Coma a proteína primeiro. Evite líquidos junto da refeição se encher rápido. Se surgir suor, batimento e diarréia depois de comer (dumping), deite-se 30 minutos e evite doces concentrados.",
+      "fontes": [
+        "Oncoguia — 'Cuidados com a alimentação' (oncoguia.org.br, 2024)",
+        "Einstein (einstein.br)"
+      ]
+    },
+    {
+      "tumor": "colorretal-com-estomia",
+      "texto": "Experimente um alimento novo de cada vez para saber o que causa gás ou fezes pastosas. Mastigue bem. Beba água ao longo do dia. Anote os alimentos que incomodam e mostre à equipe.",
+      "fontes": [
+        "INCA — Cuidados com estomias intestinais e urinárias, 2ª ed. 2018, cap. Alimentação (PDF arquivado web.archive.org; página viva inca.gov.br/publicacoes/cartilhas)"
+      ],
+      "ressalva": "PDF conferido: fala de gases/odor/quantidade e 'um alimento de cada vez'; 'fibras/resíduo' não aparecem literalmente — não inventar lista de fibras."
+    },
+    {
+      "tumor": "pancreas",
+      "texto": "Se as fezes ficarem claras, oleosas ou flutuando, avise a equipe: pode ser má digestão de gordura. Coma pouco e mais vezes, com menos gordura. Use as enzimas exatamente como mandado, junto das refeições.",
+      "fontes": [
+        "Oncoguia — 'Vivendo com câncer de pâncreas'",
+        "GANEP 2024 (ganepeducacao.com.br)",
+        "PanCAN (pancan.org)"
+      ],
+      "ressalva": "Dose de enzimas é prescrição individual — nenhum número aqui."
+    }
+  ],
+  "proibicoes": [
+    "Prescrever suplemento sem indicação da equipe",
+    "Texto ao paciente sem aprovação"
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO_APLICACAO_PACIENTE",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DIRETRIZ",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.3 [CODEX M1-2]",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "portas": {
+    "consome": [
+      "tumor.pack (6-pack-tumor: cabeca-pescoco, esofago, gastrico, colorretal, pancreas)",
+      "historico.cirurgias (gastrectomia, estomia, duodenopancreatectomia)"
+    ],
+    "oferece": [
+      "documento.orientacaoDieta"
+    ],
+    "gatilhos": [
+      "pack do tumor aplicado",
+      "cirurgia registrada"
+    ]
+  }
+}

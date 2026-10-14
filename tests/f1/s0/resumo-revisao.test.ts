@@ -1,0 +1,32 @@
+import {describe,it,expect} from 'vitest';
+import {abrirLedger} from '../../../src/kernel/ledger/db.js';
+import {confirmar,salvarDraft} from '../../../src/kernel/ledger/writeRouter.js';
+import {lerDraft} from '../../../src/kernel/ledger/drafts.js';
+import {listarEventos} from '../../../src/kernel/ledger/ledger.js';
+import {prepararRevisaoExtracao} from '../../../src/kernel/extracao/prepararRevisao.js';
+import {lerConsulta} from '../../../src/server/leituras.js';
+const em='2026-10-12T09:00:00-03:00';
+const sessao={medicoId:'m',crm:'CRM-TESTE',emitidaEm:em,expiraEm:'2026-10-12T20:00:00-03:00'};
+function fixture(){const db=abrirLedger(':memory:');
+ salvarDraft(db,{draftId:'cadastro',patientId:'p',sourceId:'cadastro-source',rawRef:'opaco',payload:{},diagnostics:[],revision:0,criadoEm:em});
+ confirmar(db,{operationId:'cadastro-op',patientId:'p',encounterId:'e',tumorLotId:null,reviewDecisionId:'cadastro-review',sessao,em,registros:[{draftId:'cadastro',expectedRevision:0,eventId:'cadastro-evento',tipo:'Paciente',payload:{patientId:'p',identificadores:[],nome:'Pessoa Sintética',nascimento:null,sexoCadastral:'F',divergencia:false},fontes:[],revisao:'CONFIRMADO'}]});
+ const rawTranscript='Creatinina 1,4 mg/dL em 12/10/2026.';
+ const preparada=prepararRevisaoExtracao({draftId:'extracao',sourceId:'fonte',rawTranscript,sourceType:'lab_feed',facts:[{id:'f',segmentId:'seg',patientCandidateId:null,domain:'lab',value:{marker:'creatinina',value:1.4,unit:'mg/dL'},sourceId:'fonte',sourceType:'lab_feed',evidence:'EXPLICIT',rawEvidence:rawTranscript,date:'2026-10-12',confidence:1,requiresConfirmation:false}],exceptions:[],patientId:'p',encounterId:'e',tumorLotId:null,factIds:['f'],operationId:'revisao',medicoId:'m',em,origem:{draftId:'extracao',revision:1,conteudoHash:'origem-canonica-fixada'}});
+ salvarDraft(db,{draftId:preparada.draftId,patientId:'p',sourceId:'fonte',rawRef:'opaco',payload:preparada.payload,diagnostics:[],revision:0,criadoEm:em});
+ const ler=()=>{const out=lerConsulta(db,'p',em,sessao,null,{encounterId:'e'});if(!('evolucoesRascunho' in out))throw new Error('CONSULTA_AUSENTE');return out;};
+ const gravar=()=>confirmar(db,{operationId:'revisao',patientId:'p',encounterId:'e',tumorLotId:null,reviewDecisionId:'revisao',sessao,em,registros:preparada.registros.map(reg=>({...reg,fontes:[...reg.fontes],draftId:preparada.draftId,expectedRevision:0,revisao:'CONFIRMADO' as const}))});
+ return {db,preparada,ler,gravar};}
+describe('S0 receipt de revisão do resumo exato',()=>{
+ it('preparação não confirma texto; confirmação cria FATO e receipt, sem DOCUMENTO',()=>{const f=fixture();try{expect(f.ler().evolucoesRascunho![0]?.revisaoRegistrada).toBe(false);expect(f.gravar().estado).toBe('GRAVADA');expect(f.ler().evolucoesRascunho![0]?.revisaoRegistrada).toBe(true);const es=listarEventos(f.db,'p').filter(e=>e.operationId==='revisao');expect(es.filter(e=>e.tipo==='FATO')).toHaveLength(1);expect(es.filter(e=>e.tipo==='ReviewDecision')).toHaveLength(1);expect(es.some(e=>e.tipo==='DOCUMENTO')).toBe(false);expect(f.gravar().estado).toBe('REPLAY');expect(listarEventos(f.db,'p').filter(e=>e.operationId==='revisao')).toHaveLength(2);}finally{f.db.close();}});
+ it.each(['resumo','fonte','origem'] as const)('A confirmado não confirma B com %s alterado e mesma operação/revisão',(campo)=>{const f=fixture();try{f.gravar();const draft=lerDraft(f.db,f.preparada.draftId)!;const p=structuredClone(draft.payload) as typeof f.preparada.payload;
+  if(campo==='resumo')(p as {resumo:string}).resumo='Texto B novo não revisado';
+  else if(campo==='fonte')(p.fontes[0] as {contentHash:string}).contentHash='hash-de-outra-fonte';
+  else (p.origem as {conteudoHash:string}).conteudoHash='origem-alterada';
+  f.db.prepare('UPDATE draft_envelope SET payload=? WHERE draftId=?').run(JSON.stringify(p),draft.draftId);
+  expect(lerDraft(f.db,draft.draftId)?.revision).toBe(draft.revision);
+  expect(f.ler().evolucoesRascunho![0]?.revisaoRegistrada).toBe(false);expect(f.ler().evolucoesRascunho![0]?.somentePreparada).toBe(true);
+  expect(listarEventos(f.db,'p').filter(e=>e.operationId==='revisao'&&e.tipo==='FATO')).toHaveLength(1);
+ }finally{f.db.close();}});
+ it('nova revisão do draft exige novo receipt mesmo mantendo texto e operação',()=>{const f=fixture();try{f.gravar();const draft=lerDraft(f.db,f.preparada.draftId)!;salvarDraft(f.db,{...draft,revision:draft.revision+1});expect(f.ler().evolucoesRascunho![0]?.revisaoRegistrada).toBe(false);expect(listarEventos(f.db,'p').filter(e=>e.tipo==='FATO')).toHaveLength(1);}finally{f.db.close();}});
+ it('evento antigo da mesma operação sem receipt não confirma resumo',()=>{const f=fixture();try{confirmar(f.db,{operationId:'revisao',patientId:'p',encounterId:'e',tumorLotId:null,reviewDecisionId:'revisao',sessao,em,registros:[{...f.preparada.registros[0]!,fontes:[...f.preparada.registros[0]!.fontes],draftId:f.preparada.draftId,expectedRevision:0,revisao:'CONFIRMADO'}]});expect(f.ler().evolucoesRascunho![0]?.revisaoRegistrada).toBe(false);}finally{f.db.close();}});
+});

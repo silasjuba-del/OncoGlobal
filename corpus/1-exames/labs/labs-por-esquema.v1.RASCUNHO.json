@@ -1,0 +1,141 @@
+{
+  "header": {
+    "id": "labs-por-esquema",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "bulas/diretrizes citadas por esquema (consolidado §3.1); exames por ID do catálogo",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "nota": "Painel pré-ciclo por classe/esquema. Regra de integridade: periodicidade/validade/contexto só entram COM fonte; dado ausente, conflitante ou não aplicável é tratado explicitamente (null). Não criar limiar universal para todas as drogas; limiar do serviço × regra de bula × grau CTCAE são camadas distintas (lab-thresholds segue no motor, migra Codex).",
+  "painels": [
+    {
+      "classe": "pemetrexede (antimetabólito)",
+      "porCiclo": [
+        "HEMOGRAMA",
+        "CREATININA",
+        "CLEARANCE_CREATININA"
+      ],
+      "periodicidade": "ClCr antes de cada ciclo; hemograma D1/D8/D15",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed pemetrexede §§2.1–2.6, acesso 11/10/2026",
+        "trecho": "assess creatinine clearance before each cycle... blood counts Day 1, 8, 15",
+        "edicao": "2026-10-11"
+      }
+    },
+    {
+      "classe": "antraciclina/anti-HER2 (cardiotoxicidade)",
+      "baselineESerial": [
+        "ECOCARDIOGRAMA"
+      ],
+      "periodicidade": "Basal em todos antes de antraciclina e antes de anti-HER2 (ESC 2022 I-B, tabelas 7/8); serial conforme protocolo e queda de FEVE (Herceptin §2.5)",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "ESC 2022 (PDF cardio-onco.fr pp. 4259-4260) + Herceptin §2.5",
+        "trecho": "assess Lvef prior to initiation... at regular intervals",
+        "edicao": "2022"
+      }
+    },
+    {
+      "classe": "TKI/CDK4-6 com risco de QT",
+      "baseline": [
+        "ECG",
+        "POTASSIO",
+        "CALCIO",
+        "MAGNESIO",
+        "FOSFORO"
+      ],
+      "periodicidade": "Ribociclibe: K/Ca/P/Mg basais e nos 6 primeiros ciclos; ECG basal + D14C1 (bula §§2.2/5.4)",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed Kisqali §§2.2, 5.3–5.4",
+        "trecho": "at baseline and in the first 6 cycles",
+        "edicao": "2026-10-11"
+      },
+      "ressalva": "Osimertinibe: intervalo fixo de ECG não estabelecido na fonte — grupos de risco."
+    },
+    {
+      "classe": "imunoterapia (ICI)",
+      "baseline": [
+        "TSH",
+        "T4_LIVRE",
+        "CORTISOL",
+        "Glicemia (GLICEMIA)",
+        "TGO",
+        "TGP",
+        "CREATININA"
+      ],
+      "periodicidade": null,
+      "pendencia": "SEM_FONTE — cadência de monitorização endócrina/hepática/renal por ICI das bulas/diretrizes não extraída nesta rodada (prioridade próxima)"
+    },
+    {
+      "classe": "esquemas com cisplatina",
+      "porCiclo": [
+        "CREATININA",
+        "CLEARANCE_CREATININA",
+        "MAGNESIO",
+        "POTASSIO",
+        "CALCIO"
+      ],
+      "periodicidade": null,
+      "pendencia": "SEM_FONTE — cadência exata (pré/pós hidratação) depende do protocolo do serviço; eletrólitos citados na bula sem janela literal extraída"
+    },
+    {
+      "classe": "sorologias pré-tratamento (transversal)",
+      "baseline": [
+        "HBSAG",
+        "ANTI_HBC_TOTAL",
+        "ANTI_HBS",
+        "ANTI_HCV",
+        "HIV"
+      ],
+      "periodicidade": "Antes de iniciar regimes imunossupressores/anti-CD20, conforme programa de profilaxia HBV do serviço",
+      "pendencia": "PARCIAL — diretriz nacional de profilaxia HBV a citar (agenda CONITEC/MS) na próxima rodada"
+    },
+    {
+      "classe": "anticoagulação (monitorização)",
+      "monitorizacao": [
+        "TAP",
+        "TTPA"
+      ],
+      "periodicidade": "Quando em varfarina + quimioterapia (INR frequente — interação INAT-02)",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed Xeloda §§5.2/7.2",
+        "trecho": "Monitor INR more frequently",
+        "edicao": "2026-10-11"
+      }
+    }
+  ],
+  "revisaoLabThresholds": {
+    "nota": "A revisão integral do lab-thresholds.v1.json (ANC, LEU, PLQ, HB, CREAT, CLCR, AST, ALT, BILI, NA, K, MG, CA, P, GLIC, ALB, DHL, ACUR, TROP, TSH, T4, CORT) é tarefa do MOTOR (Codex) com as regras: unidade canônica antes do valor; ClCr ≠ TFGe, indexado × não indexado; preservar convenções legadas de Hb/creatinina e cortes já decididos; NÃO criar limiar universal; separar limiar do serviço × bula × grau CTCAE.",
+    "estado": "NAO_EXECUTADO_AQUI (código/motor — fora da ordem 'não tocar no código')"
+  },
+  "resumo": {
+    "painels": 7,
+    "comFonte": 4,
+    "semFonteOuParcial": 3
+  },
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "LITERATURA",
+      "referencia": "bulas/diretrizes citadas por esquema (consolidado §3.1); exames por ID do catálogo",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  }
+}

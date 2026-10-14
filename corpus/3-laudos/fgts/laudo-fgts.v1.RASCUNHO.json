@@ -1,0 +1,107 @@
+{
+  "header": {
+    "id": "laudo-fgts",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2 (CONFIRMADA em auditoria Planalto 11/10/2026)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "destinatario": "Caixa Econômica Federal (agência ou app)",
+  "finalidade": "Saque do FGTS pelo trabalhador (ou dependente) acometido de neoplasia maligna.",
+  "baseLegal": [
+    {
+      "norma": "Lei 8.036/1990",
+      "artigo": "art. 20, XI (incluído pela Lei 8.922/1994)",
+      "trecho": "quando o trabalhador ou qualquer de seus dependentes for acometido de neoplasia maligna",
+      "vigencia": "vigente",
+      "estado": "CONFIRMADA (Planalto, auditada)",
+      "pendencia": null
+    }
+  ],
+  "resalvaRenovacao": "Renovação anual do saque enquanto durar o tratamento é PRÁTICA da Caixa, sem previsão literal na lei — não escrever como direito certo no texto fixo (audit).",
+  "requisitosConteudo": {
+    "fatoConfirmado": [
+      "Identificação, CID (C00–C97 / comportamento maligno)",
+      "Data do diagnóstico (laudo patológico)",
+      "Tratamento realizado ou em curso, quando houver (informativo, não requisito)"
+    ],
+    "decisaoMedica": [
+      "Afirmar que o paciente (ou dependente) é ou foi acometido de neoplasia maligna, com CID e data do diagnóstico — a lei exige a moléstia, não tratamento em curso nem grau de incapacidade",
+      "NUNCA conclusão sobre valor/saldo/direito ao saque"
+    ]
+  },
+  "documentosAnexos": [
+    "documento pessoal",
+    "comprovante de dependência quando aplicável"
+  ],
+  "proibicoesTextoFixo": [
+    "Menção a valor/saldo",
+    "Garantir renovação anual como direito"
+  ],
+  "observacoes": "Aplica-se também a dependente acometido (mesma norma). Texto mínimo: diagnóstico + CID + data. Tratamento em curso NÃO é requisito legal.",
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "NORMA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2 (CONFIRMADA em auditoria Planalto 11/10/2026)",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "HS-1 red team GLM",
+      "original": "Afirmar que o paciente porta neoplasia maligna e está em tratamento",
+      "corrigido": "é ou foi acometido de neoplasia maligna (CID + data)",
+      "fonte": {
+        "tipo": "NORMA",
+        "referencia": "Lei 8.036/1990 art. 20 XI (Planalto)",
+        "trecho": "acometido de neoplasia maligna",
+        "estado": "VERIFICADO"
+      }
+    }
+  ],
+  "assinatura": {
+    "origem": "CONFIG",
+    "campos": [
+      "medico.nome",
+      "medico.crm_uf",
+      "medico.rqe",
+      "local",
+      "data",
+      "assinatura_carimbo"
+    ],
+    "fonte": "relatorio-pericial.v1 + Res. CFM 2.381/2024 (identificação mínima do médico; texto oficial PENDENTE de reabertura)"
+  },
+  "validade": {
+    "valor": null,
+    "pendencia": "DECISAO_DR_SILAS: validade do documento por finalidade"
+  },
+  "portas": {
+    "consome": [
+      "prontuario.identificacao",
+      "tumor (CID, data do diagnóstico, estadiamento)",
+      "resumoLongitudinal",
+      "prescricao.vigente",
+      "templates/resumo-prontuario-modelo-servico"
+    ],
+    "oferece": [
+      "documento.laudo-fgts"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "header": {
+    "id": "encaminhamento-nutricao",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "salao-triagem.v1 (pesoVermelho 5 kg/60 d) + orientações de dieta F1 — critérios PENDENTE aprovação",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "estrutura": {
+    "fatoConfirmado": [
+      "diagnóstico (CID) e data",
+      "estadiamento (sistema e edição)",
+      "tratamento realizado e em curso",
+      "ECOG",
+      "medicamentos em uso",
+      "exames recentes com data"
+    ],
+    "decisaoMedica": [
+      "motivo (lista fechada)",
+      "pergunta clínica",
+      "urgência com critério"
+    ]
+  },
+  "portas": {
+    "consome": [
+      "templates/resumo-prontuario-modelo-servico",
+      "tumor",
+      "toxicidade.vigente",
+      "consulta.ecog"
+    ],
+    "oferece": [
+      "documento.encaminhamento"
+    ]
+  },
+  "proibicoes": [
+    "conduta do especialista escrita pelo app",
+    "semáforo ou cor no documento (D-F1-01)"
+  ],
+  "destinoNoSus": "Nutrição do serviço de oncologia",
+  "motivosListaFechada": [
+    "perda de peso ≥ 5 kg em 60 dias (salao-triagem.pesoVermelho)",
+    "disfagia ou mucosite que impede alimentação",
+    "estomia, gastrectomia ou duodenopancreatectomia",
+    "necessidade de dieta enteral (ver laudo de nutrição)",
+    "caquexia/anorexia"
+  ],
+  "urgencia": {
+    "eletivo": "orientação pós-cirúrgica",
+    "prioritario": "perda de peso ativa",
+    "urgente": "ingestão oral ausente: avaliar internação"
+  },
+  "packs": [
+    "pack-cabeca-pescoco",
+    "pack-esofago",
+    "pack-gastrico",
+    "pack-pancreas",
+    "pack-colorretal"
+  ],
+  "laudos": [
+    "laudo-nutricao"
+  ]
+}

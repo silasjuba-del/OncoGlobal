@@ -32,7 +32,8 @@ describe("W10-LUNA2 · data civil de serviço e prazo APAC", () => {
     expect(apacPrazo(apac, civil("2026-03-26T15:00:00-03:00"), null)).toMatchObject({ dias: 84, aviso: false, faturamentoPodeEmitir: true, consultaSegue: true });
     expect(apacPrazo(apac, civil("2026-03-27T15:00:00-03:00"), null)).toMatchObject({ dias: 85, aviso: true, faturamentoPodeEmitir: true, consultaSegue: true });
     expect(apacPrazo(apac, civil("2026-03-31T15:00:00-03:00"), null)).toMatchObject({ dias: 89, aviso: true, faturamentoPodeEmitir: true, consultaSegue: true });
-    expect(apacPrazo(apac, civil("2026-04-01T15:00:00-03:00"), null)).toMatchObject({ dias: 90, aviso: false, estado: "VENCIDA", faturamentoPodeEmitir: false, consultaSegue: true });
+    // F0-COMPLEMENTO corrige aviso perdido D90+.
+    expect(apacPrazo(apac, civil("2026-04-01T15:00:00-03:00"), null)).toMatchObject({ dias: 90, aviso: true, estado: "VENCIDA", faturamentoPodeEmitir: false, consultaSegue: true });
     expect(apacPrazo("2026-04-02", civil("2026-04-01T15:00:00-03:00"), null).faturamentoPodeEmitir).toBe(false);
   });
 });

@@ -1,0 +1,256 @@
+{
+  "header": {
+    "id": "receitas-especiais-estrutura",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "prompt mestre §9.2–9.5 + veredicto Codex '2026-10-11_codex-veredicto-receitas-farmacos.md' (40 consultas, 6 achados DANO)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "nota": "ESTRUTURA DAS 4 FAMÍLIAS ESPECIAIS com os únicos campos hoje sustentáveis por fonte. Toda posologia fica null + pendencia SEM_FONTE até bula/diretriz brasileira específica — a auditoria Codex reprovou a importação direta dos arquivos externos (ivermectina, SMX-TMP/PJP, nitrofurantoína, candidíase na gestação, beclometasona e RHZE = erros verificados de DANO). Regra: profilaxia ≠ tratamento; hipertensão por anti-VEGF não recebe scheme universal; MASCC ≥21 NÃO autoriza alta isoladamente; cálcio elementar ≠ massa do sal.",
+  "familias": [
+    {
+      "familia": "cardio",
+      "itens": [
+        {
+          "id": "CARD-TEV",
+          "nome": "Anticoagulação no câncer (TEV)",
+          "drogas": [
+            "enoxaparina",
+            "rivaroxabana",
+            "apixabana"
+          ],
+          "campos": [
+            "indicação (profilaxia × tratamento)",
+            "função renal",
+            "plaquetas",
+            "risco hemorrágico"
+          ],
+          "posologia": null,
+          "pendencia": "SEM_FONTE — bulas por droga com faixas por indicação e renal (consulta prioritária sugerida pela auditoria: 'enoxaparina bula profissional depuração renal')"
+        },
+        {
+          "id": "CARD-HTN-VEGF",
+          "nome": "Hipertensão por anti-VEGF",
+          "campos": [
+            "graduação CTCAE (R25)",
+            "anti-hipertensivo escolhido",
+            "interrupção quando grave"
+          ],
+          "posologia": null,
+          "pendencia": "SEM_FONTE"
+        },
+        {
+          "id": "CARD-PROT",
+          "nome": "Cardioproteção em antraciclina/anti-HER2",
+          "campos": [
+            "ECOCARDIOGRAMA basal/serial (ESC 2022 I-B — VERIFICADO)",
+            "estratégia de administração",
+            "cardiologia quando disfunção"
+          ],
+          "posologia": null,
+          "pendencia": "SEM_FONTE (a monitorização já está em labs-por-esquema; FÁRMACO de cardioproteção exige prescrição individual)"
+        }
+      ]
+    },
+    {
+      "familia": "nefro",
+      "itens": [
+        {
+          "id": "NEFRO-HID-CIS",
+          "nome": "Hidratação de cisplatina",
+          "campos": [
+            "volume",
+            "eletrólitos",
+            "antiemese"
+          ],
+          "posologia": null,
+          "pendencia": "SEM_FONTE — protocolo do serviço; NÃO universalizar volume"
+        },
+        {
+          "id": "NEFRO-AJUSTE",
+          "nome": "Ajuste por função renal",
+          "vinculo": "CI-01 a CI-04 de contraindicacoes-complemento (cortes verificados: cisplatina <60 por produto, pemetrexede <45, capecitabina <30, Calvert)",
+          "pendencia": null
+        },
+        {
+          "id": "NEFRO-MG-K",
+          "nome": "Hipomagnesemia e hipocalemia",
+          "campos": [
+            "MAGNESIO",
+            "POTASSIO",
+            "reposição individual"
+          ],
+          "posologia": null,
+          "pendencia": "SEM_FONTE"
+        },
+        {
+          "id": "NEFRO-LISE",
+          "nome": "Profilaxia de lise tumoral",
+          "drogas": [
+            "alopurinol",
+            "hidratação"
+          ],
+          "campos": [
+            "risco (doença, carga)",
+            "renal"
+          ],
+          "posologia": null,
+          "pendencia": "SEM_FONTE — alopurinol profilático tem fonte só no contexto gota (ACR 2020 S08); oncológico exige diretriz própria"
+        }
+      ]
+    },
+    {
+      "familia": "infecciosas",
+      "itens": [
+        {
+          "id": "INFE-NFB",
+          "nome": "Neutropenia febril de baixo risco ambulatorial",
+          "campos": [
+            "MASCC (estratificação — NÃO autoriza alta sozinho)",
+            "antibiótico oral",
+            "reavaliação 48-72 h",
+            "critério de retorno"
+          ],
+          "posologia": null,
+          "pendencia": "SEM_FONTE"
+        },
+        {
+          "id": "INFE-HBV",
+          "nome": "Profilaxia HBV por sorologia",
+          "drogas": [
+            "entecavir",
+            "tenofovir"
+          ],
+          "campos": [
+            "HBSAG/ANTI_HBC/ANTI_HBS",
+            "risco do regime"
+          ],
+          "posologia": null,
+          "pendencia": "SEM_FONTE"
+        },
+        {
+          "id": "INFE-PJP",
+          "nome": "PJP (profilaxia × tratamento)",
+          "drogas": [
+            "SMX-TMP"
+          ],
+          "campos": [
+            "indicação",
+            "imunossupressão vigente",
+            "função renal"
+          ],
+          "posologia": null,
+          "pendencia": "SEM_FONTE — VEREDICTO Codex N02: regra genérica 800/160 12/12 h é DANO; PCDT HIV usa TMP 15-20 mg/kg/dia 21 dias para PCP e NÃO transfere ao oncológico"
+        },
+        {
+          "id": "INFE-HZ",
+          "nome": "Herpes zoster",
+          "campos": [
+            "janela terapêutica",
+            "renal"
+          ],
+          "posologia": null,
+          "pendencia": "SEM_FONTE"
+        }
+      ]
+    },
+    {
+      "familia": "endocrino",
+      "itens": [
+        {
+          "id": "ENDO-GLIC",
+          "nome": "Hiperglicemia por corticoide",
+          "campos": [
+            "GLICEMIA/HBA1C",
+            "regime conforme valor"
+          ],
+          "posologia": null,
+          "pendencia": "SEM_FONTE"
+        },
+        {
+          "id": "ENDO-HIPO",
+          "nome": "Hipotireoidismo por imunoterapia",
+          "drogas": [
+            "levotiroxina"
+          ],
+          "campos": [
+            "TSH/T4_LIVRE",
+            "reavaliação"
+          ],
+          "posologia": null,
+          "pendencia": "SEM_FONTE"
+        },
+        {
+          "id": "ENDO-ADRENAL",
+          "nome": "Insuficiência adrenal por imunoterapia",
+          "campos": [
+            "CORTISOL",
+            "reposição individual",
+            "emergência se crise"
+          ],
+          "posologia": null,
+          "pendencia": "SEM_FONTE"
+        },
+        {
+          "id": "ENDO-OSSO",
+          "nome": "Osteoproteção em IA/ADT",
+          "drogas": [
+            "cálcio",
+            "vitamina D",
+            "bifosfonato",
+            "denosumabe"
+          ],
+          "campos": [
+            "cálcio ELEMENTAR (≠ massa do sal — achado N13)",
+            "DENSITOMETRIA_OSSEA",
+            "VITAMINA_D"
+          ],
+          "posologia": null,
+          "pendencia": "SEM_FONTE"
+        }
+      ]
+    }
+  ],
+  "estado50Receitas": {
+    "fonte": "C:\\Users\\silas\\.zcode\\workspace\\default\\50-receitas-medicas-ambulatoriais.CORRIGIDO.md + farmacos-por-classe.CORRIGIDO.md (originais imutáveis)",
+    "veredicto": "Codex 11/10/2026: NO-GO/REPROVADO para uso direto e para importação",
+    "hardStops": [
+      "N01 ivermectina 60 kg = 2 cp (não 4)",
+      "N02 SMX-TMP PJP genérico",
+      "N03 nitrofurantoína formulação BR",
+      "N04 candidíase na gestação (nistatina 14 noites)",
+      "N05 beclometasona 2×250=500",
+      "N06 RHZE 50 kg = 3 cp (36-50 kg)"
+    ],
+    "idsPreservados": "50 receitas externas e 190 fármacos referenciados como contagem; nada foi importado para o corpus nesta execução",
+    "caminho": "As fichas entram quando o Dr. Silas aplicar as correções nos arquivos externos e a re-auditoria liberar; o prompt de averiguação está em docs/ondas/F1-CORPUS-PROMPT-AUDITORIA-50-RECEITAS.md"
+  },
+  "resumo": {
+    "itensEstruturados": 15,
+    "comPosologiaFontada": 0,
+    "vinculadosAOutrosPilares": 1,
+    "estado": "PARCIAL — estrutura completa, doses propositivamente vazias por falta de fonte liberada"
+  },
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO + DOSES_SEM_FONTE (veredicto Codex 11/10/2026: NO-GO para os arquivos externos)",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "prompt mestre §9.2–9.5 + veredicto Codex '2026-10-11_codex-veredicto-receitas-farmacos.md' (40 consultas, 6 achados DANO)",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  }
+}

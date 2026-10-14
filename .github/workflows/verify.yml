@@ -51,3 +51,6 @@ jobs:
       - name: Reataque W8 (inclui .adv.ts)
         if: ${{ !cancelled() }}
         run: node node_modules/vitest/vitest.mjs run --config tests/adv-w8/vitest.config.ts --no-file-parallelism
+      - name: F1 — fechamento sem exceções e bateria completa (inclui .adv.ts)
+        if: ${{ !cancelled() }}
+        run: npm run verify:f1

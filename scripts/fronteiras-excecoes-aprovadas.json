@@ -1,0 +1,223 @@
+{
+  "aprovadoEm": "2026-10-12",
+  "origem": "PR #7 pré-F1",
+  "prazo": "F1-S3",
+  "pares": [
+    {
+      "arquivo": "src/app/estudio/servidor.ts",
+      "import": "src/impressao/apacLaudo.js"
+    },
+    {
+      "arquivo": "src/app/estudio/servidor.ts",
+      "import": "src/impressao/kit.js"
+    },
+    {
+      "arquivo": "src/app/estudio/servidor.ts",
+      "import": "src/kernel/gateway/gateway.js"
+    },
+    {
+      "arquivo": "src/app/estudio/servidor.ts",
+      "import": "src/server/sessao.js"
+    },
+    {
+      "arquivo": "src/app/executores/desabilitados.ts",
+      "import": "src/kernel/gateway/gateway.js"
+    },
+    {
+      "arquivo": "src/app/executores/imprimir.ts",
+      "import": "src/kernel/gateway/gateway.js"
+    },
+    {
+      "arquivo": "src/app/executores/resolverDocumentoLedger.ts",
+      "import": "src/kernel/projections/snapshot.js"
+    },
+    {
+      "arquivo": "src/app/executores/resolverDocumentoLedger.ts",
+      "import": "src/server/sessao.js"
+    },
+    {
+      "arquivo": "src/app/oncoassist.ts",
+      "import": "src/kernel/llm/desidentificar.js"
+    },
+    {
+      "arquivo": "src/app/oncoassist.ts",
+      "import": "src/kernel/llm/jev/contrato.js"
+    },
+    {
+      "arquivo": "src/app/oncoassist.ts",
+      "import": "src/kernel/llm/jev/sdk.js"
+    },
+    {
+      "arquivo": "src/app/oncoassistLocal.ts",
+      "import": "src/kernel/gateway/gateway.js"
+    },
+    {
+      "arquivo": "src/app/oncoassistLocal.ts",
+      "import": "src/kernel/ledger/db.js"
+    },
+    {
+      "arquivo": "src/app/oncoassistLocal.ts",
+      "import": "src/kernel/ledger/idempotencia.js"
+    },
+    {
+      "arquivo": "src/app/oncoassistLocal.ts",
+      "import": "src/kernel/ledger/ledger.js"
+    },
+    {
+      "arquivo": "src/app/oncoassistLocal.ts",
+      "import": "src/server/http.js"
+    },
+    {
+      "arquivo": "src/app/oncoassistLocal.ts",
+      "import": "src/server/sessao.js"
+    },
+    {
+      "arquivo": "src/app/oncoboard/index.ts",
+      "import": "src/kernel/llm/desidentificar.js"
+    },
+    {
+      "arquivo": "src/app/revisaoExtracao.ts",
+      "import": "src/kernel/extracao/normalizacao.js"
+    },
+    {
+      "arquivo": "src/orchestration/pipeline-extracao.ts",
+      "import": "src/kernel/extracao/biomarcadores.js"
+    },
+    {
+      "arquivo": "src/orchestration/pipeline-extracao.ts",
+      "import": "src/kernel/extracao/caixaRevisao.js"
+    },
+    {
+      "arquivo": "src/orchestration/pipeline-extracao.ts",
+      "import": "src/kernel/extracao/deduplicacao.js"
+    },
+    {
+      "arquivo": "src/orchestration/pipeline-extracao.ts",
+      "import": "src/kernel/extracao/eventoRevisao.js"
+    },
+    {
+      "arquivo": "src/orchestration/pipeline-extracao.ts",
+      "import": "src/kernel/extracao/extrator.js"
+    },
+    {
+      "arquivo": "src/orchestration/pipeline-extracao.ts",
+      "import": "src/kernel/extracao/normalizacao.js"
+    },
+    {
+      "arquivo": "src/orchestration/pipeline-extracao.ts",
+      "import": "src/kernel/extracao/patient-resolver.js"
+    },
+    {
+      "arquivo": "src/orchestration/pipeline-extracao.ts",
+      "import": "src/kernel/extracao/reconciliacao.js"
+    },
+    {
+      "arquivo": "src/orchestration/pipeline-extracao.ts",
+      "import": "src/kernel/extracao/safety.js"
+    },
+    {
+      "arquivo": "src/orchestration/pipeline-extracao.ts",
+      "import": "src/kernel/extracao/segmenter.js"
+    },
+    {
+      "arquivo": "src/orchestration/pipeline-extracao.ts",
+      "import": "src/kernel/extracao/tipos.js"
+    },
+    {
+      "arquivo": "src/orchestration/pipeline-extracao.ts",
+      "import": "src/kernel/projections/radiologia.js"
+    },
+    {
+      "arquivo": "src/orchestration/pipeline-extracao.ts",
+      "import": "src/kernel/projections/timelinePaciente.js"
+    },
+    {
+      "arquivo": "src/rules/f0c/tetosCumulativos.ts",
+      "import": "src/rules/cumulativoAlerta.js"
+    },
+    {
+      "arquivo": "src/server/autorizacao.ts",
+      "import": "src/kernel/ledger/ledger.js"
+    },
+    {
+      "arquivo": "src/server/corpus.ts",
+      "import": "src/apac/sigtap.js"
+    },
+    {
+      "arquivo": "src/server/flash.ts",
+      "import": "src/config/flash.js"
+    },
+    {
+      "arquivo": "src/server/flash.ts",
+      "import": "src/kernel/ledger/drafts.js"
+    },
+    {
+      "arquivo": "src/server/flash.ts",
+      "import": "src/ui/api/porta.js"
+    },
+    {
+      "arquivo": "src/server/flash.ts",
+      "import": "src/ui/consulta/ConsultaFlash.js"
+    },
+    {
+      "arquivo": "src/server/http.ts",
+      "import": "src/config/settings.js"
+    },
+    {
+      "arquivo": "src/server/leituras.ts",
+      "import": "src/apac/antiglosa.js"
+    },
+    {
+      "arquivo": "src/server/leituras.ts",
+      "import": "src/apac/sigtap.js"
+    },
+    {
+      "arquivo": "src/server/leituras.ts",
+      "import": "src/kernel/ledger/drafts.js"
+    },
+    {
+      "arquivo": "src/server/leituras.ts",
+      "import": "src/ui/api/porta.js"
+    },
+    {
+      "arquivo": "src/server/rotas.ts",
+      "import": "src/app/oncoassist.js"
+    },
+    {
+      "arquivo": "src/server/rotas.ts",
+      "import": "src/app/pesquisa/conhecimento.js"
+    },
+    {
+      "arquivo": "src/server/rotas.ts",
+      "import": "src/app/revisaoExtracao.js"
+    },
+    {
+      "arquivo": "src/server/rotas.ts",
+      "import": "src/config/flash.js"
+    },
+    {
+      "arquivo": "src/server/rotas.ts",
+      "import": "src/config/servico.js"
+    },
+    {
+      "arquivo": "src/server/rotas.ts",
+      "import": "src/config/settings.js"
+    },
+    {
+      "arquivo": "src/server/rotas.ts",
+      "import": "src/estatistica/index.js"
+    },
+    {
+      "arquivo": "src/server/rotas.ts",
+      "import": "src/kernel/ledger/drafts.js"
+    },
+    {
+      "arquivo": "src/server/rotas.ts",
+      "import": "src/kernel/ledger/ledger.js"
+    },
+    {
+      "arquivo": "src/server/rotas.ts",
+      "import": "src/orchestration/pipeline-extracao.js"
+    }
+  ]
+}

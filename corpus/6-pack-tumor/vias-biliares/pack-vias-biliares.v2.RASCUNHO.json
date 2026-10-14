@@ -1,0 +1,2031 @@
+{
+  "header": {
+    "id": "pack-vias-biliares",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Vias biliares v5 (Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf)",
+      "trecho": "objetivo apoiar as decisões clínicas no tratamento de vias biliares",
+      "edicao": "v5, 2026 (versão para colaboração)"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Câncer de vias biliares (colangiocarcinoma intra-hepático, peri-hilar, distal; vesícula biliar; ampola de Vater)",
+    "cid10": [
+      "C22.1",
+      "C23",
+      "C24"
+    ],
+    "subtipos": [
+      "colangiocarcinoma intra-hepático (iCCA)",
+      "colangiocarcinoma peri-hilar",
+      "colangiocarcinoma distal",
+      "carcinoma de vesícula biliar",
+      "adenocarcinoma ampular (intestinal × pancreatobiliar/misto)"
+    ],
+    "cenarios": [
+      "localizado_ressecavel",
+      "neoadjuvancia_selecionada",
+      "avancado_1l",
+      "avancado_2l"
+    ],
+    "limitesAplicabilidade": "Adulto com carcinoma de vias biliares. Estadiamento AJCC 8ª difere por sítio (vesícula, intra-hepático, peri-hilar, distal). Não cobre CHC (pack próprio) nem tumores neuroendócrinos. Pack propõe; médico decide.",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 4,
+      "trecho": "Vesícula biliar Tumor primário",
+      "estado": "VERIFICADO"
+    }
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome",
+        "indicacao": "universal",
+        "quando": "todos os pacientes",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "TC de abdome e tórax Todos os pacientes NE MODERADO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "indicacao": "universal",
+        "quando": "todos os pacientes",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "TC de abdome e tórax Todos os pacientes NE MODERADO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "COLANGIO_RM",
+        "rotulo": "Colangiorressonância",
+        "indicacao": "condicional",
+        "quando": "conforme disponibilidade",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Colangiorresonância/ RM abdome Conforme disponibilidade NE AL TO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_ABDOMEN_SUPERIOR",
+        "rotulo": "RM de abdome",
+        "indicacao": "condicional",
+        "quando": "conforme disponibilidade",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Colangiorresonância/ RM abdome Conforme disponibilidade NE AL TO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT",
+        "indicacao": "condicional",
+        "quando": "conforme disponibilidade em casos selecionados",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "PET/CT Conforme disponibilidade em casos selecionados",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [
+      {
+        "catalogoId": "CPRE",
+        "rotulo": "CPRE",
+        "indicacao": "condicional",
+        "quando": "casos selecionados",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "CPRE Para casos selecionados",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "endoscopica",
+          "quando": "tumores distais: coleta por ecoendoscopia (PAAF) ou CPRE, que também permite drenagem biliar; demais: confirmação histológica pelo método disponível",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "pendencia": "SEM_ID_NO_CATALOGO (ecoendoscopia/CPRE)",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/08 - Aula 08 - Câncer de Vias Biliares- Conceitos Iniciais.pdf",
+            "pagina": 14,
+            "trecho": "EUS (Endoscopic Ultrasound) e CPRE: tumores distais",
+            "estado": "INFERIDO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "sítio (iCCA, peri-hilar, distal, vesícula, ampola)",
+        "subtipo histológico na ampola (intestinal × pancreatobiliar/misto)",
+        "pT/pN AJCC 8ª por sítio",
+        "margens (R1 orienta RT adjuvante em eCCA/vesícula)"
+      ],
+      "laudoFonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 14,
+        "trecho": "A escolha do regime adjuvante pode ser guiada pelo subtipo histológico",
+        "estado": "VERIFICADO"
+      },
+      "molecular": [
+        {
+          "alvo": "painel NGS de DNA (IDH1, FGFR2, outros) com RNA-seq para fusões",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
+          "quandoPedir": "condicional",
+          "cenario": "preferencialmente ao diagnóstico de doença avançada",
+          "consequencia": "IDH1 → ivosidenibe; fusão FGFR2 → pemigatinibe; NTRK → larotrectinibe; TMB > 10",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 18,
+            "trecho": "O método preferencial é o sequenciamento de nova geração (NGS), idealmente com",
+            "estado": "VERIFICADO"
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
+        },
+        {
+          "alvo": "HER2 (hiperexpressão)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "doença avançada (sobretudo vesícula e extra-hepático)",
+          "consequencia": "trastuzumabe-deruxtecana em 2ª linha",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 18,
+            "trecho": "deve-se realizar IHQ para pesquisa de hipe- rexpressão de HER2",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "MMR (proficiência das enzimas de reparo)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "doença avançada",
+          "consequencia": "pembrolizumabe se dMMR/MSI-H virgem de imunoterapia",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 18,
+            "trecho": "proficiência das enzimas de reparo e triagem para NTRK",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "NTRK (triagem)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "doença avançada",
+          "consequencia": "larotrectinibe",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 18,
+            "trecho": "proficiência das enzimas de reparo e triagem para NTRK",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "DPYD (deficiência de DPD)",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "candidatos a fluoropirimidina (inclui capecitabina adjuvante), se disponível",
+          "consequencia": "deficiência total contraindica; parcial reduz dose",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 20,
+            "trecho": "recomenda-se a pesquisa de deficiência de DPD em todos os pacientes candidatos",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição — sistemas distintos para vesícula, colangiocarcinoma intra-hepático, peri-hilar e distal",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 21,
+      "trecho": "AJCC cancer staging manual. Eight edition",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Hemograma Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGO",
+        "rotulo": "TGO (função hepática)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Função hepática Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "rotulo": "TGP (função hepática)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Função hepática Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BILIRRUBINA",
+        "rotulo": "Bilirrubinas (função hepática)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Função hepática Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FOSFATASE_ALCALINA",
+        "rotulo": "Fosfatase alcalina (função hepática)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Função hepática Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "GAMA_GT",
+        "rotulo": "Gama-GT (função hepática)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Função hepática Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Creatinina (função renal)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Função renal Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "UREIA",
+        "rotulo": "Ureia (função renal)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Função renal Todos os pacientes NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CA199",
+        "rotulo": "CA 19-9 (sem código SIGTAP; preferencialmente após normalizar bilirrubinas)",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "CA19-9, CEA Todos os pacientes* NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        },
+        "sigtap": null
+      },
+      {
+        "catalogoId": "CEA",
+        "rotulo": "CEA",
+        "cenario": "estadiamento",
+        "indicacao": "universal",
+        "quando": "todos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "CA19-9, CEA Todos os pacientes* NE BAIXO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "vesícula T1a",
+        "conduta": "colecistectomia simples",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "T1a: colecistectomia simples",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "vesícula T1b–T3 (N0–N2)",
+        "conduta": "colecistectomia radical + linfadenectomia → capecitabina adjuvante 8 ciclos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "T2-T3 N0-N2: colecistectomia radical + linfadenectomia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "colangiocarcinoma intra-hepático ressecável",
+        "conduta": "hepatectomia parcial → capecitabina adjuvante 8 ciclos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "O padrão de cirurgia é hepatectomia parcial;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "colangiocarcinoma hilar ressecável",
+        "conduta": "ressecção do ducto extra-hepático + hepatectomia ampliada + linfadenectomia → capecitabina",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Ressecção cirúrgica deve incluir retirada de ducto biliar extra-hepático",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "colangiocarcinoma distal ressecável",
+        "conduta": "duodenopancreatectomia → capecitabina",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Cirurgia é duodenopancreatectomia.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "ampola de Vater ressecada (T1–T3 N0–N2)",
+        "conduta": "QT adjuvante à base de gencitabina; por subtipo: pancreatobiliar/misto gencitabina ou FOLFIRINOX; intestinal fluoropirimidina ± oxaliplatina",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Recomenda-se QT adjuvante a base de gencitabina em pacientes com tumores periampulares",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "ressecável de alto risco ou limítrofe/irressecável potencialmente conversível",
+        "conduta": "considerar neoadjuvância em centro experiente (NE baixo/FR fraca)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Considerar neoadjuvância em pacientes selecionados com tumores de vias biliares",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "avançado, elegível à imunoterapia",
+        "conduta": "cisplatina + gencitabina + durvalumabe ou pembrolizumabe",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "recomenda-se associação de cisplatina, gencitabina à imunoterapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "avançado, contraindicação à imunoterapia",
+        "conduta": "cisplatina + gencitabina; inelegível à cisplatina: GEMOX ou gencitabina + carboplatina",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "o esquema de cisplatina e gencitabina é o preferencial",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "CA199",
+          "uso": "basal (após normalizar bilirrubinas) e seguimento se elevado ao diagnóstico; sem código SIGTAP",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 12,
+            "trecho": "CA19-9, CEA Todos os pacientes* NE BAIXO/FR FORTE",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "CEA",
+          "uso": "basal e seguimento se elevado ao diagnóstico",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 12,
+            "trecho": "CA19-9, CEA Todos os pacientes* NE BAIXO/FR FORTE",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "CA 19-9/CEA no seguimento se não estavam elevados ao diagnóstico"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "localizado_ressecavel",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia por sítio",
+          "capecitabina adjuvante (BILCAP)",
+          "RT adjuvante em eCCA/vesícula R1"
+        ],
+        "criterio": "sítio e margens",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Recomenda-se QT adjuvante com Capecitabina por 8 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "neoadjuvancia_selecionada",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT neoadjuvante",
+          "QT + durvalumabe (conversão)",
+          "Y90/infusão arterial (iCCA)"
+        ],
+        "criterio": "alto risco ou conversão; centro experiente",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Realizar preferencialmente em centros experientes e após discussão multidisciplinar.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "avancado",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT ± imunoterapia",
+          "terapia-alvo 2ª linha"
+        ],
+        "criterio": "elegibilidade à IO/cisplatina; perfil molecular",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Preferencialmente, deve-se realizar avalição molecular ao diagnóstico de doença avançada",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "vias-biliares-adjuvante-capecitabina",
+        "nome": "Capecitabina adjuvante (BILCAP)",
+        "cenario": "localizado_ressecavel (vesícula T1b+, iCCA, hilar, distal)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 1250,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "12/12 h (= 2.500 mg/m²/dia), D1–D14 a cada 21 dias; a tabela SBOC p.19 grafa '2.500 mg/m² 12/12h' (dobro) — erro de fonte",
+            "fonte": {
+              "tipo": "CURSO",
+              "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/09 - Aula 09 - Câncer de Vias Biliares- Tratamento da doença localizada e avançada.pdf",
+              "pagina": 6,
+              "trecho": "2500mg/m²/d D1-D14 q21d",
+              "estado": "INFERIDO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 8,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): só existe APAC de doença avançada (0304020389); não há procedimento adjuvante/neoadjuvante para o CID",
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Drogas convencionais disponíveis, mas sem procedimento APAC específico para o cenário perioperatório: depende de regra local de faturamento."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Capecitabina Capecitabina 2.500 mg/m² VO 12/12h D1 a D14 A cada 3 semanas",
+          "estado": "CONFLITANTE"
+        },
+        "fonteNumeroCiclos": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Recomenda-se QT adjuvante com Capecitabina por 8 ciclos",
+          "estado": "VERIFICADO"
+        },
+        "alertaSeguranca": "Não prescrever 2.500 mg/m² a cada 12 h (5.000 mg/m²/dia).",
+        "doseVerificada": false,
+        "notaDose": "Dose diária do BILCAP pela aula Onco PRO 2026 nº 09 (INFERIDO), coerente com a bula FDA de monoterapia (1.250 mg/m² 12/12 h)."
+      },
+      {
+        "id": "vias-biliares-adjuvante-gencitabina-ampola",
+        "nome": "Gencitabina adjuvante (ampola de Vater; ESPAC-3)",
+        "cenario": "localizado_ressecavel (ampola, sobretudo pancreatobiliar/misto)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json): só existe APAC de doença avançada (0304020389); não há procedimento adjuvante/neoadjuvante para o CID",
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Drogas convencionais disponíveis, mas sem procedimento APAC específico para o cenário perioperatório: depende de regra local de faturamento."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Gencitabina Gencitabina 1.000 mg/m² EV D1, D8 e D15 A cada 4 semanas",
+          "estado": "VERIFICADO"
+        },
+        "fonteIndicacao": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Recomenda-se QT adjuvante a base de gencitabina em pacientes com tumores periampulares",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "vias-biliares-1l-gemcis-durvalumabe",
+        "nome": "Gencitabina + cisplatina + durvalumabe (TOPAZ-1)",
+        "cenario": "avancado_1l (elegível à IO)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          },
+          {
+            "droga": "Durvalumabe",
+            "dose": 1500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "q21 com QT; depois a cada 28 dias na manutenção"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 8,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "gencitabina + cisplatina (procedimento 0304020389)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "A cada 3 semanas, 8 ciclos; seguido de Durvalumabe a cada 28 dias",
+          "estado": "VERIFICADO"
+        },
+        "fonteDoses": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Gencitabina 1.000 mg/m² EV D1 e D8 Cisplatina 25 mg/m² EV D1 e D8",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "vias-biliares-1l-gemcis-pembrolizumabe",
+        "nome": "Gencitabina + cisplatina + pembrolizumabe (KEYNOTE-966)",
+        "cenario": "avancado_1l (elegível à IO)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          },
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 8,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "gencitabina + cisplatina (procedimento 0304020389)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "A cada 3 semanas, 8 ciclos; seguido de Gencitabina e Pembrolizumabe na manutenção",
+          "estado": "VERIFICADO"
+        },
+        "manutencao": "gencitabina + pembrolizumabe (cisplatina limitada a 8 ciclos)",
+        "doseVerificada": true
+      },
+      {
+        "id": "vias-biliares-1l-gemcis",
+        "nome": "Gencitabina + cisplatina (ABC-02)",
+        "cenario": "avancado_1l (contraindicação à IO)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 8,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020389 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT de carcinoma do fígado ou do trato biliar avançado (CIDs C22.1, C23, C24).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020389",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Cisplatina 25 mg/m² EV D1 e D8 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "numeroCiclosNota": "não informado na tabela SBOC",
+        "doseVerificada": true,
+        "fonteCiclos": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT00262769 (ABC-02) — https://clinicaltrials.gov/api/v2/studies/NCT00262769, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "Treatment repeats every 21 days for 8 courses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "vias-biliares-1l-gemox",
+        "nome": "Gencitabina + oxaliplatina (GEMOX)",
+        "cenario": "avancado_1l (inelegível à cisplatina)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "faixa na fonte 85–100 mg/m² (SBOC p.19); registrado o limite inferior — médico escolhe na faixa"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020389 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT de carcinoma do fígado ou do trato biliar avançado (CIDs C22.1, C23, C24).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020389",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Oxaliplatina 85-100 mg/m² EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "FAIXA_NA_FONTE: limite inferior registrado (DECISAO_CLINICA_DR_SILAS)",
+        "doseVerificada": false
+      },
+      {
+        "id": "vias-biliares-1l-gem-carboplatina",
+        "nome": "Gencitabina + carboplatina",
+        "cenario": "avancado_1l (inelegível à cisplatina)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          },
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020389 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT de carcinoma do fígado ou do trato biliar avançado (CIDs C22.1, C23, C24).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020389",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Carboplatina AUC 5 EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "vias-biliares-1l-folfirinox-ampola",
+        "nome": "FOLFIRINOX (adenocarcinoma ampular avançado)",
+        "cenario": "avancado_1l (ampular, pancreatobiliar/misto)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Folinato de cálcio",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Irinotecano",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020389 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT de carcinoma do fígado ou do trato biliar avançado (CIDs C22.1, C23, C24).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020389",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Folfirinox Folinato de cálcio 400 mg/m² EV D1 Irinotecano 150 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "vias-biliares-1l-capox-ampola",
+        "nome": "CAPOX (adenocarcinoma ampular avançado, intestinal)",
+        "cenario": "avancado_1l (ampular)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "12/12 h"
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020389 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT de carcinoma do fígado ou do trato biliar avançado (CIDs C22.1, C23, C24).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020389",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Capox Capecitabina 1.000 mg/m² VO 12/12h D1 a D14 Oxaliplatina 130 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "vias-biliares-2l-mfolfox",
+        "nome": "FOLFOX (ABC-06) — 2ª linha sem alvo, ou ampular 1ª linha",
+        "cenario": "avancado_2l",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Folinato de cálcio",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020389 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT de carcinoma do fígado ou do trato biliar avançado (CIDs C22.1, C23, C24).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020389",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA DO FÍGADO OU DO TRATO BILIAR AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Folfox (ABC-06) Folinato de cálcio 400 mg/m² EV D1 Oxaliplatina 85 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "vias-biliares-2l-ivosidenibe",
+        "nome": "Ivosidenibe (ClarIDHy) — IDH1 mutado",
+        "cenario": "avancado_2l (IDH1)",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Ivosidenibe",
+            "dose": 500,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo",
+            "observacao": "1x/dia"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "FOLFOX (procedimento 0304020389)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Ivosidenibe Ivosidenibe 500 mg VO 1x/dia Continuamente",
+          "estado": "VERIFICADO"
+        },
+        "continuo": true,
+        "doseVerificada": true
+      },
+      {
+        "id": "vias-biliares-2l-pemigatinibe",
+        "nome": "Pemigatinibe (FIGHT-202) — fusão/rearranjo FGFR2",
+        "cenario": "avancado_2l (FGFR2)",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Pemigatinibe",
+            "dose": 13.5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "1x/dia"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "FOLFOX (procedimento 0304020389)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Pemigatinibe Pemigatinibe 13,5 mg VO 1x/dia D1 a D14 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "vias-biliares-2l-trastuzumabe-deruxtecana",
+        "nome": "Trastuzumabe-deruxtecana — HER2+",
+        "cenario": "avancado_2l (HER2+)",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Trastuzumabe-deruxtecana",
+            "dose": 5.4,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "FOLFOX (procedimento 0304020389)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Trastuzumabe deruxtecana 5,4 mg/kg EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "nota": "dose biliar 5,4 mg/kg difere da gástrica 6,4 mg/kg — não intercambiar",
+        "doseVerificada": true
+      },
+      {
+        "id": "vias-biliares-2l-pembrolizumabe",
+        "nome": "Pembrolizumabe — dMMR/MSI-H (ou TMB > 10) sem IO prévia",
+        "cenario": "avancado_2l (dMMR/MSI-H; TMB > 10)",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou 400 mg a cada 6 semanas"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "FOLFOX (procedimento 0304020389)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 19,
+          "trecho": "Pembrolizumabe 200 mg EV D1 a cada 3 semanas (ou 400 mg",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "vias-biliares-2l-larotrectinibe",
+        "nome": "Larotrectinibe — fusão NTRK",
+        "cenario": "avancado (NTRK+)",
+        "linha": "2ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "Larotrectinibe",
+            "dose": 100,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo",
+            "observacao": "2x/dia (adultos com SC ≥ 1 m²)"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 72/2021 (publ. 07/12/2021), Relatório CONITEC nº 679 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2021/20211207_portaria_72.pdf",
+            "pagina": null,
+            "trecho": "o larotrectinibe para o tratamento de adultos e crianças com tumores sólidos",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado para adultos. Só o subgrupo pediátrico foi incorporado (Portaria SECTICS/MS nº 71/2025).",
+          "alternativaSUS": "FOLFOX (procedimento 0304020389)"
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "openFDA drug label VITRAKVI (https://api.fda.gov/drug/label.json?search=openfda.brand_name:VITRAKVI), acesso 2026-10-11; bula ANVISA não consultada",
+          "pagina": null,
+          "trecho": "Body Surface Area of 1 Meter-Squared or greater: 100 mg orally twice daily",
+          "estado": "VERIFICADO"
+        },
+        "continuo": true,
+        "alertaFonte": "SBOC p.19 traz '100 mg/m² VO 2x/dia D1 a D21 a cada 4 semanas' — ver conflito; usada a bula",
+        "doseVerificada": true
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "RT/QT-RT adjuvante em eCCA/vesícula de alto risco, sobretudo R1 (não rotineira no iCCA)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC 2026 vias biliares p.15",
+            "Onco PRO 2026 aula 09"
+          ],
+          "nota": "Radioterapia é aceno geral (orientação do Dr. Silas 2026-10-11). Registro SWOG S0809 (NCT00789958) localizado, não incorporado."
+        },
+        "concomitante": "quimiorradioterapia (esquema não especificado)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "a RT adjuvante pode ser considerada em eCCA/ GBC de alto risco, particularmente R1",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "colecistectomia simples (T1a) ou radical + linfadenectomia (T1b–T3)",
+        "quando": "carcinoma de vesícula",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "T1b: colecistecomia radical + linfadenectomia11",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "hepatectomia parcial",
+        "quando": "colangiocarcinoma intra-hepático",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "O padrão de cirurgia é hepatectomia parcial;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "ressecção do ducto extra-hepático + hepatectomia ampliada + linfadenectomia",
+        "quando": "colangiocarcinoma hilar",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Ressecção cirúrgica deve incluir retirada de ducto biliar extra-hepático",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "duodenopancreatectomia",
+        "quando": "colangiocarcinoma distal/ampola",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Cirurgia é duodenopancreatectomia.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "IDH1 mutado (iCCA ~20%)",
+        "opcao": "ivosidenibe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Para pacientes com esta mutação e que tenham progredi- do após 1ª linha",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "fusão FGFR2 (iCCA 15–20%)",
+        "opcao": "pemigatinibe 13,5 mg/dia",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "pemigatinibe 13,5 mg/dia é op- ção terapêutica para tumores com esta alteração",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "HER2 hiperexpresso (vesícula/extra-hepático até 15%)",
+        "opcao": "trastuzumabe-deruxtecana",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "está recomendado em 2ª linha tratamento com trastuzumabe deruxtecana",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "fusão NTRK",
+        "opcao": "larotrectinibe",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Fusão de NTRK é alteração rara, porém caso identificada, pode-se usar",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "dMMR/MSI-H sem IO prévia",
+        "opcao": "pembrolizumabe",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Pembrolizumabe é indicado em 2ª linha baseado nos achados do estudo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "TMB > 10 mut/Mb sem IO prévia",
+        "opcao": "pembrolizumabe (eficácia incerta nesta população)",
+        "evidencia": "NE baixo/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Em pacientes com TMB acima de 10 mut/Mb e que não tenham sido",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": null,
+      "riscoNeutropeniaFebril": null,
+      "pendencia": "SEM_FONTE",
+      "outros": [
+        "drenagem biliar quando indicada (CPRE em casos selecionados)",
+        "dosar CA 19-9 após normalização das bilirrubinas",
+        "pesquisa de DPD antes de capecitabina/5-FU, se disponível"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 12,
+        "trecho": "Preferêncialmente após normalização das bilirrubinas2",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "BILCAP",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "nctFonte": null,
+        "populacao": "câncer de vias biliares ressecado",
+        "bracos": "capecitabina × observação",
+        "desfecho": "SG",
+        "resultado": "SG 51,1 × 36,1 meses (HR 0,75)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "O estudo Bilcap mostrou dados de capecitabina na adjuvância com aumento da SG",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ESPAC-3 (periampular)",
+        "nct": "NCT00058201",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT00058201 (consultado 2026-10-11)",
+        "populacao": "periampular ressecado",
+        "bracos": "gencitabina ou 5-FU/LV × observação",
+        "desfecho": "SG",
+        "resultado": "benefício após ajuste multivariado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "principalmente no estudo fase III ESPAC-3 versão 2",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "TOPAZ-1",
+        "nct": "NCT03875235",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT03875235 (consultado 2026-10-11)",
+        "populacao": "avançado 1ª linha",
+        "bracos": "GemCis + durvalumabe × GemCis",
+        "desfecho": "SG",
+        "resultado": "SG 12,8 × 11,5 meses (HR 0,80)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "associação com durvalumabe (SG mediana: 12,8 versus 11,5 me- ses; HR 0,80",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "KEYNOTE-966",
+        "nct": "NCT04003636",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT04003636 (consultado 2026-10-11)",
+        "populacao": "avançado 1ª linha",
+        "bracos": "GemCis + pembrolizumabe × GemCis",
+        "desfecho": "SG",
+        "resultado": "SG 12,7 × 10,9 meses (HR 0,83)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "associação com pembrolizu- mabe (SG 12,7 versus 10,9 meses; HR 0,83",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ABC-02",
+        "nct": "NCT00262769",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT00262769 (consultado 2026-10-11)",
+        "populacao": "avançado 1ª linha",
+        "bracos": "gencitabina + cisplatina × gencitabina",
+        "desfecho": "SG",
+        "resultado": "SG 11,7 × 8,1 meses (HR 0,64)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "SG mediana: 11,7 versus 8,1 meses; HR 0,64",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ABC-06",
+        "nct": "NCT01926236",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT01926236 (consultado 2026-10-11)",
+        "populacao": "avançado 2ª linha",
+        "bracos": "mFOLFOX + controle de sintomas × controle de sintomas",
+        "desfecho": "SG",
+        "resultado": "SG 6,2 × 5,3 meses (HR 0,69)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "a 2ª linha de tratamento recomendada é mFolfox6 (SG mediana: 6,2 versus 5,3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ClarIDHy",
+        "nct": "NCT02989857",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT02989857 (consultado 2026-10-11)",
+        "populacao": "colangiocarcinoma IDH1 mutado pós-1ª linha",
+        "bracos": "ivosidenibe × placebo",
+        "desfecho": "SLP/SG",
+        "resultado": "SG 10,3 × 7,5 meses (HR 0,79)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "é recomendado ivosidenibe (SG mediana 10,3 versus 7,5 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "FIGHT-202",
+        "nct": "NCT02924376",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT02924376 (consultado 2026-10-11)",
+        "populacao": "colangiocarcinoma FGFR2 pós-1ª linha",
+        "bracos": "pemigatinibe (braço único)",
+        "desfecho": "TR",
+        "resultado": "TR 35,5%; SG 21,1 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "SG mediana 21,1 meses; TR 35,5%; SLP 6,9 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "DESTINY-PanTumor02",
+        "nct": "NCT04482309",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT04482309 (consultado 2026-10-11)",
+        "populacao": "tumores HER2+ selecionados (inclui biliar)",
+        "bracos": "T-DXd (braço único)",
+        "desfecho": "TR",
+        "resultado": "TR 36,4%; SG 11,7 meses (biliar)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "trastuzumabe deruxtecana (TR 36,4%; SG 11,7 meses)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "pós-tratamento curativo, anos 1–2",
+        "exames": [
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "CA199",
+          "CEA"
+        ],
+        "periodicidade": "clínica e TC a cada 3 meses; CA 19-9/CEA se elevados ao diagnóstico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "A cada 3 meses nos primeiros 2 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "anos 3–5",
+        "exames": [
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "CA199",
+          "CEA"
+        ],
+        "periodicidade": "a cada 6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "A cada 6 meses do 3º ao 5º ano",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "BILIRRUBINA",
+      "CA199",
+      "CEA",
+      "COLANGIO_RM",
+      "CPRE",
+      "CREATININA",
+      "FOSFATASE_ALCALINA",
+      "GAMA_GT",
+      "HEMOGRAMA",
+      "IMUNOHISTOQUIMICA",
+      "PET_CT_FDG",
+      "RM_ABDOMEN_SUPERIOR",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_TORAX",
+      "TGO",
+      "TGP",
+      "UREIA",
+      "MOLECULAR_PCR_MUTACAO",
+      "SEQUENCIAMENTO_AMPLICON"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "capecitabina/5-FU",
+        "com": "brivudina",
+        "ref": "INAT-04"
+      },
+      {
+        "droga": "capecitabina",
+        "com": "varfarina/cumarínicos",
+        "ref": "INAT-02"
+      },
+      {
+        "droga": "capecitabina",
+        "com": "fenitoína",
+        "ref": "INAT-03"
+      },
+      {
+        "droga": "cisplatina",
+        "com": "ototóxicos",
+        "ref": "INAT-15"
+      },
+      {
+        "droga": "irinotecano",
+        "com": "inibidores/indutores de CYP3A4/UGT1A1",
+        "ref": "INAT-13"
+      },
+      {
+        "droga": "ivosidenibe/pemigatinibe (TKI/alvo oral)",
+        "com": "inibidores/indutores fortes de CYP3A4",
+        "ref": "INAT-23"
+      },
+      {
+        "droga": "anti-PD-1/PD-L1",
+        "com": "corticosteroide basal / antibiótico",
+        "ref": "INAT-27"
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "fluoropirimidina",
+        "termosCTCAEv6": [
+          "Palmar-plantar erythrodysesthesia syndrome",
+          "Diarrhea",
+          "Mucositis oral"
+        ]
+      },
+      {
+        "classe": "platina",
+        "termosCTCAEv6": [
+          "Creatinine increased",
+          "Hearing impaired",
+          "Peripheral sensory neuropathy"
+        ]
+      },
+      {
+        "classe": "imunoterapia (ICI)",
+        "termosCTCAEv6": [
+          "Hepatitis",
+          "Colitis",
+          "Pneumonitis"
+        ]
+      },
+      {
+        "classe": "TKI (por molécula)",
+        "termosCTCAEv6": [
+          "Hyperphosphatemia",
+          "Electrocardiogram QT corrected interval prolonged",
+          "Retinopathy"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "receita-sintomaticos-modelo-servico"
+    ],
+    "orientacoes": [
+      "dieta-por-tumor",
+      "sinais-alarme-consolidado"
+    ],
+    "encaminhamentos": [
+      "encaminhamento-cirurgia-oncologica",
+      "encaminhamento-radioterapia",
+      "endoscopia/CPRE para drenagem biliar"
+    ],
+    "laudos": [],
+    "formulasXYZ": [
+      {
+        "x": "colangiocarcinoma ou carcinoma de vesícula ressecado",
+        "y": "capecitabina adjuvante por 8 ciclos (dose a confirmar — erro na tabela SBOC)",
+        "z": "eCCA/vesícula R1: considerar RT adjuvante após discussão multidisciplinar",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Recomenda-se QT adjuvante com Capecitabina por 8 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "câncer de vias biliares avançado elegível à imunoterapia",
+        "y": "gencitabina + cisplatina + durvalumabe ou pembrolizumabe por 8 ciclos",
+        "z": "SUS sem IO identificada → gencitabina + cisplatina (APAC 0304020389)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "recomenda-se associação de cisplatina, gencitabina à imunoterapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "doença avançada ao diagnóstico",
+        "y": "NGS com RNA-seq + IHQ HER2, MMR e NTRK",
+        "z": "IDH1 → ivosidenibe; FGFR2 → pemigatinibe; HER2+ → T-DXd; sem alvo → FOLFOX 2ª linha",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Preferencialmente, deve-se realizar avalição molecular ao diagnóstico de doença avançada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "adenocarcinoma de ampola ressecado",
+        "y": "definir subtipo histológico",
+        "z": "pancreatobiliar/misto: gencitabina ou FOLFIRINOX; intestinal: fluoropirimidina ± oxaliplatina",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "com o subtipo pancreatobiliar ou misto orientado gencitabina ou Folfirinox",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    {
+      "texto": "FAIXA_NA_FONTE: oxaliplatina 85–100 mg/m² no GEMOX",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC 2026 vias biliares p.19",
+        "Onco PRO 2026 aula 09 (85 mg/m² D2 q14 — outro calendário)"
+      ],
+      "nota": "Registrado o limite inferior (85 mg/m²).",
+      "resolucao": "Oxaliplatina 85 mg/m² (44A)."
+    },
+    {
+      "texto": "SEM_FONTE: número de ciclos do GemCis sem IO; dose de RT adjuvante; método de obtenção histológica; esquemas neoadjuvantes",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC 2026 vias biliares",
+        "Onco PRO 2026 aulas 08-09",
+        "ClinicalTrials.gov NCT00262769 (ABC-02)"
+      ],
+      "nota": "GemCis 8 ciclos (ABC-02) e obtenção histológica (EUS/CPRE, curso) resolvidos; RT adjuvante classificada como aceno geral; esquemas neoadjuvantes seguem sem fonte (SBOC não recomenda fora de estudo)."
+    },
+    {
+      "texto": "SEM_ID_NO_CATALOGO: NGS/RNA-seq, DPYD",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json (164 ids)"
+      ]
+    },
+    {
+      "texto": "CA 19-9: catalogoId CA199 sem código SIGTAP",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json"
+      ],
+      "nota": "Código SIGTAP é atributo do catálogo."
+    },
+    {
+      "texto": "SUS_PROCEDIMENTO_A_CONFIRMAR: QT adjuvante de vias biliares (só 0304020389 avançado no cadastro local)",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/f0c/sigtap/2026-09.json (154 procedimentos 03.04)"
+      ],
+      "nota": "Não há procedimento SIGTAP de QT neoadjuvante/adjuvante deste tumor; enquadramento depende da regra anti-glosa."
+    },
+    {
+      "texto": "SUS_INCORPORACAO_A_CONFIRMAR: durvalumabe, pembrolizumabe, ivosidenibe, pemigatinibe, T-DXd, larotrectinibe",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Planilha CONITEC 15/06/2026",
+        "Painel de Demandas CONITEC",
+        "busca gov.br/conitec",
+        "DOU (portarias citadas)"
+      ],
+      "nota": "sus.disponivel preenchido em todos os protocolos com portaria/relatório quando existe. Sem avaliação CONITEC (registrado 'nao', INFERIDO): 1l-gemcis-durvalumabe, 1l-gemcis-pembrolizumabe, 2l-ivosidenibe, 2l-pemigatinibe, 2l-trastuzumabe-deruxtecana, 2l-pembrolizumabe."
+    },
+    {
+      "texto": "BILCAP sem NCT (registro ISRCTN); nctEstado NAO_VERIFICADO",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "ClinicalTrials.gov (BILCAP)"
+      ],
+      "nota": "BILCAP registrado no ISRCTN, sem NCT."
+    },
+    {
+      "texto": "SEM_FONTE: emetogenicidade/risco de NF",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC 2026 vias biliares",
+        "Onco PRO 2026 aulas 87-88"
+      ]
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "Capecitabina adjuvante — dose da tabela SBOC",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 19,
+        "trecho": "Capecitabina Capecitabina 2.500 mg/m² VO 12/12h D1 a D14 A cada 3 semanas",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "openFDA drug label XELODA (https://api.fda.gov/drug/label.json?search=openfda.brand_name:XELODA), acesso 2026-10-11; bula ANVISA não consultada",
+        "pagina": null,
+        "trecho": "Single agent: 1,250 mg/m 2 twice daily orally for the first 14 days",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "A tabela SBOC, lida literalmente, dá 5.000 mg/m²/dia (o dobro da dose de monoterapia em bula, 1.250 mg/m² 12/12 h = 2.500 mg/m²/dia). Provável erro de digitação ('2.500 mg/m²/dia'). Dose = null no pack; não transferir a dose de bula de outra indicação sem decisão médica.",
+      "decisaoNecessaria": false,
+      "resolucao": "Aula Onco PRO 2026 nº 09 confirma 2.500 mg/m²/dia D1–D14 q21 (BILCAP); pack registra 1.250 mg/m² 12/12 h.",
+      "fonteC": {
+        "tipo": "CURSO",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/09 - Aula 09 - Câncer de Vias Biliares- Tratamento da doença localizada e avançada.pdf",
+        "pagina": 6,
+        "trecho": "2500mg/m²/d D1-D14 q21d",
+        "estado": "INFERIDO"
+      }
+    },
+    {
+      "tema": "Larotrectinibe — dose e calendário",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Vias-biliares-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 19,
+        "trecho": "Larotrectinibe Larotrectinibe 100 mg/m² VO 2x/dia D1 a D21 A cada 4 semanas",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "openFDA drug label VITRAKVI (https://api.fda.gov/drug/label.json?search=openfda.brand_name:VITRAKVI), acesso 2026-10-11; bula ANVISA não consultada",
+        "pagina": null,
+        "trecho": "Body Surface Area of 1 Meter-Squared or greater: 100 mg orally twice daily",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Adulto: 100 mg 2x/dia contínuo (bula; também SBOC estômago 2026 p.14). 100 mg/m² é dose pediátrica (SC < 1 m²); pausa D22–D28 não existe na bula.",
+      "decisaoNecessaria": false
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (curador oncológico, rascunho para validação do Dr. Silas)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC 2026 Vias biliares v5 (integral)",
+      "openFDA Xeloda, Vitrakvi",
+      "SIGTAP 2026-09",
+      "ClinicalTrials.gov API v2"
+    ],
+    "aprovacaoClinica": null,
+    "reducaoPendencias20261011": {
+      "data": "2026-10-11",
+      "resolvidas": [
+        {
+          "pendencia": "CONFLITANTE/ERRO DE FONTE: capecitabina adjuvante 2.500 mg/m² 12/12 h na tabela SBOC (dose = null até confirmação)",
+          "como": "Capecitabina 1.250 mg/m² 12/12 h D1–D14 q21 × 8 (2.500 mg/m²/dia, Onco PRO 2026 aula 09, INFERIDO)."
+        },
+        {
+          "pendencia": "ERRO DE FONTE: larotrectinibe '100 mg/m² 2x/dia D1–D21 q4s' na tabela SBOC; usado rótulo (100 mg 2x/dia contínuo)",
+          "como": "Já tratado no protocolo e em conflitos (bula: 100 mg 2x/dia contínuo); duplicata removida da lista."
+        }
+      ]
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "1 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
+}

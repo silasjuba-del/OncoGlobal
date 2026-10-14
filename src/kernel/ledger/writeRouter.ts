@@ -3,8 +3,12 @@ import { type Sessao } from "../../contracts/base.js";
 import { ClinicalEvent, type ClinicalEvent as Evento } from "../../contracts/operacao.js";
 import { lerDraft, salvarDraft } from "./drafts.js";
 import { auditar, gravarOperacao, hashPayload, resultadoExistente, type Gravacao } from "./ledger.js";
+import { transacao } from "./db.js";
 
 export { salvarDraft };
+const emissores = new WeakMap<DatabaseSync, (req:Confirmacao, eventos:readonly Evento[])=>void>();
+/** Callback síncrono, na transação da confirmação: nunca transporte ou efeito externo. */
+export function aoCommitar(db:DatabaseSync, fn:(req:Confirmacao,eventos:readonly Evento[])=>void):void { emissores.set(db,fn); }
 
 export interface RegistroConfirmacao {
   draftId: string;
@@ -44,7 +48,8 @@ export function confirmar(db: DatabaseSync, req: Confirmacao): Gravacao {
   const replay = resultadoExistente(db, op);
   if (replay) return replay;
   try {
-    return gravarOperacao(db, op, eventos, () => {
+    return transacao(db, () => {
+      const resultado = gravarOperacao(db, op, eventos, () => {
       for (const r of req.registros) {
         const draft = lerDraft(db, r.draftId);
         if (!draft || draft.revision !== r.expectedRevision || draft.patientId !== req.patientId)
@@ -52,6 +57,9 @@ export function confirmar(db: DatabaseSync, req: Confirmacao): Gravacao {
       }
       for (const r of req.registros)
         db.prepare("UPDATE draft_envelope SET revision=revision+1 WHERE draftId=?").run(r.draftId);
+      });
+      if (resultado.estado === "GRAVADA") emissores.get(db)?.(req,eventos);
+      return resultado;
     });
   } catch (error) {
     if (error instanceof Error && error.message === "EXPECTED_REVISION_CONFLICT") {

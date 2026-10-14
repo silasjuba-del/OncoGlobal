@@ -1068,22 +1068,6 @@
       "items": []
     },
     {
-      "path": "src/ui/api/fake.ts",
-      "sha256": "c4d52f55492d121136fa4ed0100b74d44952a66d19c80ddfdb0897641af10f08",
-      "items": [
-        {
-          "type": "telefone",
-          "line": 214,
-          "ordinal": 0,
-          "status": "synthetic_declared",
-          "evidenceRef": "src/ui/api/fake.ts:210-218",
-          "reason": "Factory local da porta fake: contato construido sem paciente ou vinculo, exclusivamente para demonstracao.",
-          "contextTag": null
-        }
-      ],
-      "hashMode": "utf8-lf"
-    },
-    {
       "path": "src/ui/oncochart/fontes/geist-latin-wght-normal.woff2",
       "sha256": "0cbbe6286a00f356e98980783cc950a9b693751e04aedfb97d9526ff6dc2b316",
       "category": "technical_font_asset",
@@ -1675,7 +1659,7 @@
     },
     {
       "path": "tests/rules-w8/caso07.test.ts",
-      "sha256": "e48253330ec84297e68547f88b130ddd99f24bf8022c50cf4df55f43ddb83250",
+      "sha256": "78b6253d84c0e1480f86a9cadee03787330114f73e114f1c1d2d03283114f3f0",
       "items": [
         {
           "type": "cns",
@@ -1786,31 +1770,6 @@
           "status": "synthetic_declared",
           "evidenceRef": "tests/server/adv006-saida.test.ts:27-35",
           "reason": "Destino em dominio reservado .invalid; executor fake e prova de zero efeitos externos.",
-          "contextTag": null
-        }
-      ],
-      "hashMode": "utf8-lf"
-    },
-    {
-      "path": "tests/server/leituras-http.test.ts",
-      "sha256": "674406e44f13daab3612a96a497f5e72f81f5ca5f6cd2b147b1835cacf0346bc",
-      "items": [
-        {
-          "type": "telefone",
-          "line": 88,
-          "ordinal": 0,
-          "status": "synthetic_declared",
-          "evidenceRef": "tests/server/leituras-http.test.ts:93; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
-          "contextTag": null
-        },
-        {
-          "type": "telefone",
-          "line": 100,
-          "ordinal": 0,
-          "status": "synthetic_declared",
-          "evidenceRef": "tests/server/leituras-http.test.ts:98,105; docs/ondas/F0-FECHAMENTO-ASTRA.md:54",
-          "reason": "A fonte tem declaracao local de fixture/dados sinteticos; esta excecao vale apenas para este token e este hash de arquivo.",
           "contextTag": null
         }
       ],
@@ -2607,7 +2566,7 @@
     },
     {
       "path": "tests/f0-fecha/phi-repo.test.ts",
-      "sha256": "07f9fd2c28db5338c939d841dd9b54e2fc8b18766e272e64b00334ed8018f038",
+      "sha256": "60dc236d0eb43c9ff748a77e8dea9872ac74f1fa10eae1ca8a6f1fb141191ebe",
       "hashMode": "utf8-lf",
       "items": [
         {
@@ -2872,6 +2831,213 @@
           "status": "technical_token_false_positive",
           "reason": "Tokens completos de SHA no inventário final renovado; candidatos comparados e conferidos, sem identificador pessoal.",
           "evidenceRef": "docs/f0-fecha/EQUIVALENCIA-FINAL.md; docs/f0-fecha/inventario-final.json:556"
+        }
+      ]
+    },
+    {
+      "path": "corpus/f0c/sigtap/fontes/TabelaUnificada_202609_v2610050950.zip",
+      "sha256": "e2f1a210d8de4148f946e74f18b7726d4bc8145c97f48c2338874851789a03df",
+      "category": "official_public_archive",
+      "magic": "zip_local_header",
+      "evidenceRef": "corpus/f0c/sigtap/README.md",
+      "reason": "Tabela Unificada SIGTAP pública de setembro/2026, hash pinado; não é prontuário.",
+      "items": []
+    },
+    {
+      "path": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
+      "sha256": "6baf91e631031ec341e52708de1a5f05586f82e0f8ab4480fa1c88e687c1344e",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 1658,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json:1658",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+        }
+      ]
+    },
+    {
+      "path": "corpus/4-interacoes-contraindicacoes/contraindicacoes-complemento.v1.RASCUNHO.json",
+      "sha256": "35ee3fca560a6fadc23ae8663533dfbc496e61b896d8d60e5e0074613f1c4512",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 137,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/4-interacoes-contraindicacoes/contraindicacoes-complemento.v1.RASCUNHO.json:137",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+        }
+      ]
+    },
+    {
+      "path": "corpus/4-interacoes-contraindicacoes/contraindicacoes-complemento.v2.RASCUNHO.json",
+      "sha256": "3bc463e95c9ed25f40cb4653d2026d0365407ce2e7f35a1364f51afdfc54104b",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 197,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/4-interacoes-contraindicacoes/contraindicacoes-complemento.v2.RASCUNHO.json:197",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+        }
+      ]
+    },
+    {
+      "path": "corpus/4-interacoes-contraindicacoes/interacoes-complemento.v1.RASCUNHO.json",
+      "sha256": "5284928e9d10a4bd9884016a60adfcaf1896493c0a3894e1c9db551f9538b1b3",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 318,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/4-interacoes-contraindicacoes/interacoes-complemento.v1.RASCUNHO.json:318",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+        }
+      ]
+    },
+    {
+      "path": "corpus/4-interacoes-contraindicacoes/interacoes-complemento.v2.RASCUNHO.json",
+      "sha256": "49aeeecbbe9e5d6c6c5f34e616e3424b158c22a1ad21125784269ddf0174e49a",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 479,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/4-interacoes-contraindicacoes/interacoes-complemento.v2.RASCUNHO.json:479",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+        }
+      ]
+    },
+    {
+      "path": "corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json",
+      "sha256": "baebd04fc8a1f014f7a547bab52dfc9670b2b1c141156ebc23e8ff94308d4426",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 970,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:970",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+        },
+        {
+          "type": "telefone",
+          "line": 989,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:989",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+        },
+        {
+          "type": "telefone",
+          "line": 1143,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:1143",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+        },
+        {
+          "type": "telefone",
+          "line": 1163,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:1163",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+        },
+        {
+          "type": "telefone",
+          "line": 1183,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:1183",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+        },
+        {
+          "type": "telefone",
+          "line": 1202,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:1202",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+        }
+      ]
+    },
+    {
+      "path": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
+      "sha256": "b1f4aa7e60cd39de93ea347627bbf3be30cab82352b0069589f6aaacc2863f24",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 707,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json:707",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente. Revista por Claude em 2026-10-12 na integração com f1/integrado 2f1e795: mesmo UUID set_id, hash e linha atualizados."
+        }
+      ]
+    },
+    {
+      "path": "corpus/6-pack-tumor/sarcomas/pack-sarcomas.v2.RASCUNHO.json",
+      "sha256": "6a7a42e9f0324ccb7935a3a048b9a147bd537f5b93d9a99871becb491a256472",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 2557,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/sarcomas/pack-sarcomas.v2.RASCUNHO.json:2557",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente. Revista por Claude em 2026-10-12 na integração com f1/integrado 2f1e795: mesmo UUID set_id, hash e linha atualizados."
+        }
+      ]
+    },
+    {
+      "path": "corpus/6-pack-tumor/tireoide/pack-tireoide.v2.RASCUNHO.json",
+      "sha256": "d8ebc30222354a05e227b67efa26b40e9bc11f267964b815b5a6fe3146d8b9d0",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 1395,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/tireoide/pack-tireoide.v2.RASCUNHO.json:1395",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente. Revista por Claude em 2026-10-12 na integração com f1/integrado 2f1e795: mesmo UUID set_id, hash e linha atualizados."
+        }
+      ]
+    },
+    {
+      "path": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md",
+      "sha256": "2aaaf2252c44586034ef1fb1b7cf2b41b2515039ad2d3a7c0a1357112b41a5a8",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 47,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md:47",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
+        },
+        {
+          "type": "telefone",
+          "line": 65,
+          "ordinal": 0,
+          "status": "technical_token_false_positive",
+          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md:65",
+          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
         }
       ]
     }

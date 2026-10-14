@@ -75,7 +75,11 @@ function sanitizarPdf(e: EntradaSanitizacao, base: RelatorioSanitizacao): Result
   });
   const mantidos = ["conteúdo das páginas (texto/imagens) — não alterado; passe pela FN-24 antes"];
   const transformacoes = ["valores de metadado substituídos por espaços (tamanho e offsets preservados)"];
-  let risco: "BAIXO" | "ALTO" = "BAIXO";
+  let risco: "BAIXO" | "ALTO" = e.detectorPhi ? "BAIXO" : "ALTO";
+  if (!e.detectorPhi) {
+    mantidos.push("conteúdo das páginas sem detector de PHI");
+    transformacoes.push("[VERIFICAR] ausência de detector de PHI não prova limpeza do conteúdo preservado");
+  }
   if (/\/ObjStm\b/.test(s)) {
     risco = "ALTO";
     mantidos.push("fluxos de objetos comprimidos (/ObjStm) não inspecionados");
@@ -85,7 +89,9 @@ function sanitizarPdf(e: EntradaSanitizacao, base: RelatorioSanitizacao): Result
     risco = "ALTO";
     transformacoes.push("[VERIFICAR] PDF criptografado: metadado não inspecionável");
   }
-  if (e.detectorPhi?.(s)) {
+  let phi = false;
+  try { phi = e.detectorPhi?.(s) ?? true; } catch { phi = true; }
+  if (phi) {
     risco = "ALTO";
     mantidos.push("PHI detectado no conteúdo do PDF");
   }
@@ -103,7 +109,8 @@ export function sanitizarArtefato(e: EntradaSanitizacao): ResultadoSanitizacao {
       return sanitizarPdf(e, base);
     case "TEXTO": {
       const texto = e.texto ?? "";
-      const phi = e.detectorPhi ? e.detectorPhi(texto) : true; // sem detector não há prova de limpeza
+      let phi = true; // sem detector não há prova de limpeza
+      try { phi = e.detectorPhi ? e.detectorPhi(texto) : true; } catch { phi = true; }
       return { texto, report: { ...base, mantidos: ["texto inalterado (use FN-24 para desidentificar)"], transformacoes: [e.detectorPhi ? "PHI residual verificado" : "[VERIFICAR] sem detector de PHI informado"], riscoResidual: phi ? "ALTO" : "BAIXO" } };
     }
     default:

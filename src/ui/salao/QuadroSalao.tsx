@@ -1,15 +1,11 @@
+import type { CartaoSalaoVisao } from '../../contracts/api/salao.js';
+export type { CartaoSalaoVisao } from '../../contracts/api/salao.js';
 import { useState } from "react";
 import type { EntradaFila, SalaoRuleset } from "../../contracts/regras.js";
 import type { Destino } from "../../contracts/estados.js";
 import { ordenarFila } from "../../rules/index.js";
 
-export interface CartaoSalaoVisao {
-  entrada: EntradaFila;
-  destino: Destino;
-  emergencia: boolean;
-  temCorte: boolean;
-  nome: string;
-}
+
 
 const COLUNAS: readonly { destino: Destino; titulo: string }[] = [
   { destino: "FRENTE", titulo: "FRENTE" },

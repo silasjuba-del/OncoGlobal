@@ -574,6 +574,16 @@
       "ondeAparece": ["configurações", "Consulta Flash"],
       "tipo": "REGRA_CLINICA",
       "editavelPor": "MEDICO"
+    },
+    {
+      "numero": 18,
+      "chave": "config.servico.receituarioEspecial",
+      "nome": "Receituário especial disponível no serviço",
+      "significado": "Configuração explícita do médico sobre a disponibilidade de receituário especial no serviço; padrão ausente é falso.",
+      "ondeAparece": ["configurações", "prescrição"],
+      "tipo": "REGRA_CLINICA",
+      "editavelPor": "MEDICO"
     }
   ]
 }
+

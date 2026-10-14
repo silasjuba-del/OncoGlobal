@@ -5,7 +5,7 @@ import { randomUUID, randomBytes, createHash } from 'node:crypto';
 import { criarGerenciadorSessao } from '../../server/sessao.js';
 import { criarGateway, type StoreIdempotencia, type ResultadoGateway } from '../../kernel/gateway/gateway.js';
 import { criarWorkspaceStore, ConflitoPersistencia } from '../persistencia/store.js';
-import { criarExecutorImprimir, type DocumentoParaImpressao } from '../executores/imprimir.js';
+import { criarExecutorImprimir, type DocumentoParaImpressao } from '../../kernel/gateway/executores/imprimir.js';
 import { criarPreferenciasImpressora } from '../impressoras.js';
 import { readWorkspace, changeWorkspace } from './workspace.js';
 import { renderPage, renderLogin, esc, form, type PageInput } from './pagina.js';

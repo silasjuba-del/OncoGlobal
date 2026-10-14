@@ -1,0 +1,123 @@
+{
+  "header": {
+    "id": "pack-pulmao-v1-glm",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.4",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "cid": [
+    "C34"
+  ],
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição [VERIFICAR]"
+  },
+  "biomarcadoresPath": {
+    "painel_metastatico_obrigatorio": [
+      "EGFR (incl. ex19del, L858R, variantes raras, ex20ins)",
+      "KRAS G12C",
+      "ALK",
+      "ROS1",
+      "BRAF V600E",
+      "NTRK",
+      "MET ex14",
+      "RET",
+      "HER2",
+      "NRG1",
+      "PD-L1"
+    ],
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "NCCN NSCLC v5.2026 (Patients: Metastatic NSCLC 2026); ESMO mNSCLC 2023 (Hendriks, PMID 36669645) — EGFR/ALK [I,A]",
+      "trecho": "EGFR mutation status should be determined",
+      "edicao": "2023-2026"
+    },
+    "ressalva": "Distinguir RECOMENDAÇÃO, DISPONIBILIDADE no SUS e REQUISITO do protocolo — campo por campo; cada biomarcador incluído foi conferido individualmente nesta redação, sem cópia cega de lista."
+  },
+  "examesPorId": {
+    "diagnostico_estadiamento": [
+      "TC_TORAX",
+      "TC_ABDOMEN_SUPERIOR",
+      "PET_CT_FDG",
+      "BRONCOSCOPIA",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "ANATOMOPATOLOGICO",
+      "IMUNOHISTOQUIMICA"
+    ],
+    "labsBaseline": [
+      "HEMOGRAMA",
+      "CREATININA",
+      "TGO",
+      "TGP",
+      "TSH"
+    ]
+  },
+  "fases": [
+    {
+      "fase": "pos_resseccao",
+      "intervalos": {
+        "tc": "TC de tórax ± contraste q6m por 2-3 anos, depois anual (dose baixa)",
+        "consulta": "Anamnese + exame junto da TC"
+      },
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "NCCN NSCLC 2026 (Patients: Early & Locally Advanced NSCLC, Guide 15)",
+        "trecho": "every 6 months for 2 to 3 years",
+        "edicao": "2026"
+      },
+      "ressalva": "PENDENTE DE VALIDAÇÃO [CODEX M1-2]; esquema difere para irradiados/estádios II — manter por cenário."
+    },
+    {
+      "fase": "em_tratamento_metastatico",
+      "intervalos": {
+        "reavaliacao_tc": "A cada 6-12 semanas (manutenção) / a cada 2-4 ciclos conforme regime"
+      },
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "NCCN NSCLC v5.2026 (metastatic)",
+        "trecho": "every 6 to 12 weeks",
+        "edicao": "v5.2026"
+      },
+      "ressalva": "PENDENTE DE VALIDAÇÃO [CODEX M1-2]."
+    }
+  ],
+  "limitesAplicabilidade": "CPNPC adulto; microcitose (CPCP) tem esquemas próprios fora deste pack até nova curadoria.",
+  "pendencias": [
+    "Validação por afirmação [CODEX M1-2]",
+    "Edição AJCC",
+    "CPCP: decidir pack próprio ou seção"
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO + PENDENTE_DE_VALIDACAO_POR_AFIRMACAO [CODEX M1-2]",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DIRETRIZ",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.4",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "supersededBy": "pack-pulmao",
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "A9 red team: colisão com corpus/packs/pulmao",
+      "original": "pulmao",
+      "corrigido": "pack-pulmao-v1-glm"
+    }
+  ]
+}

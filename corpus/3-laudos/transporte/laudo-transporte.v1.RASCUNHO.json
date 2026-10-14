@@ -1,0 +1,117 @@
+{
+  "header": {
+    "id": "laudo-transporte",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2 (correções auditadas: Lei 15.390/2026 REVIEW_REQUIRED)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "destinatario": "Secretaria municipal/estadual de Saúde (TFD); operadoras de transporte (passe livre local)",
+  "finalidade": "DUPLA, sem pasta duplicada: (a) autorização de TFD — tratamento fora do domicílio com custeio; (b) requerimento de passe livre intermunicipal/municipal quando houver lei local.",
+  "baseLegal": [
+    {
+      "norma": "Portaria SAS/MS 55/1999",
+      "artigo": "art. 2º",
+      "trecho": "O TFD só será autorizado quando houver garantia de atendimento no município de referência com horário e data definido previamente",
+      "vigencia": "VIGENTE (base atual)",
+      "estado": "LOCALIZADA (BVSMS)",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE"
+    },
+    {
+      "norma": "Portaria SAS/MS 55/1999",
+      "artigo": "arts. 4º/7º",
+      "trecho": "diárias para alimentação e pernoite para paciente e acompanhante",
+      "vigencia": "VIGENTE",
+      "estado": "CITADA",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE"
+    },
+    {
+      "norma": "Lei 15.390/2026",
+      "artigo": "art. 2º (vigência) — acrescenta art. 19-X à Lei 8.080/1990",
+      "trecho": "ajuda de custo... indicação para tratamento fora do Município de domicílio feita por médico; diárias para alimentação... pernoite; acompanhante se solicitado",
+      "vigencia": "ENTRA EM VIGOR 16/04/2027 (1 ano após publicação em 16/04/2026); vedada abaixo de 50 km ou mesma região metropolitana",
+      "estado": "CONFIRMADA (Planalto) — REVIEW_REQUIRED por vigência futura",
+      "pendencia": "ATUALIZAR vigenteDesde em 16/04/2027"
+    },
+    {
+      "norma": "Lei 8.899/1994",
+      "artigo": "art. 1º",
+      "trecho": "concede passe livre às pessoas portadoras de deficiência, comprovadamente carentes",
+      "vigencia": "vigente (interestadual, só PCD)",
+      "estado": "CONFIRMADA (Planalto, auditada)",
+      "pendencia": null
+    }
+  ],
+  "requisitosConteudo": {
+    "fatoConfirmado": [
+      "Identificação, CID, tratamento programado",
+      "Município de origem × município de referência",
+      "Datas dos atendimentos (a vaga deve estar garantida — art. 2º)",
+      "Necessidade de acompanhante (DECISAO_MEDICA com critério)"
+    ],
+    "decisaoMedica": [
+      "Indicação do tratamento fora do domicílio (condição clínica que impede tratamento local)",
+      "Indicação de acompanhante",
+      "Duração prevista do período de tratamento fora"
+    ]
+  },
+  "documentosAnexos": [
+    "comprovante de vaga/agendamento",
+    "laudo de referência do atendimento"
+  ],
+  "proibicoesTextoFixo": [
+    "Afirmar direito ao transporte como texto fixo",
+    "Declarar incapacidade para viajar sem exame"
+  ],
+  "observacoes": "Passe livre para paciente oncológico SEM deficiência reconhecida depende de lei estadual/municipal — campo 'leiLocal' a preencher por município (PENDENTE por localidade).",
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "NORMA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2 (correções auditadas: Lei 15.390/2026 REVIEW_REQUIRED)",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "assinatura": {
+    "origem": "CONFIG",
+    "campos": [
+      "medico.nome",
+      "medico.crm_uf",
+      "medico.rqe",
+      "local",
+      "data",
+      "assinatura_carimbo"
+    ],
+    "fonte": "relatorio-pericial.v1 + Res. CFM 2.381/2024 (identificação mínima do médico; texto oficial PENDENTE de reabertura)"
+  },
+  "validade": {
+    "valor": null,
+    "pendencia": "DECISAO_DR_SILAS: validade do documento por finalidade"
+  },
+  "portas": {
+    "consome": [
+      "prontuario.identificacao",
+      "tumor (CID, data do diagnóstico, estadiamento)",
+      "resumoLongitudinal",
+      "prescricao.vigente",
+      "templates/resumo-prontuario-modelo-servico"
+    ],
+    "oferece": [
+      "documento.laudo-transporte"
+    ]
+  }
+}

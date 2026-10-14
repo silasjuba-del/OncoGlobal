@@ -74,69 +74,36 @@ describe("W12-F1 linha pontualizada", () => {
     expect(montarLinhaPontualizada(e).startsWith("Diagnóstico: Adenocarcinoma de pulmão · Biópsia:")).toBe(true);
   });
 
-  it("aparece no topo da Flash e some quando não há dado", () => {
-    const { unmount } = render(<ConsultaFlash {...props({ cabecalho: {} })} />);
-    expect(screen.getByLabelText("Achados-chave").textContent).toBe(LINHA_COMPLETA);
-    unmount();
-    render(<ConsultaFlash {...props({ cabecalho: {}, exames: [] })} />);
-    expect(screen.queryByLabelText("Achados-chave")).toBeNull();
+  // F0-COMPLEMENTO: biópsia e imagem agora compartilham uma linha, com data e trecho.
+  it("exibe data e frase em uma linha e explicita ausência", () => {
+    const {unmount}=render(<ConsultaFlash {...props({cabecalho:{}})} />);
+    expect(screen.getByLabelText("Biópsia e imagem").textContent).toBe("01/10 · Biópsia: adenocarcinoma | 02/10 · TC tórax: nódulo 43 mm | 03/10 · Cintilografia: captação T7");
+    unmount(); render(<ConsultaFlash {...props({exames:[]})} />);
+    expect(screen.getByLabelText("Biópsia e imagem").textContent).toContain("PENDENTE");
   });
 });
-
-describe("W12-F1 tarefas do retorno", () => {
-  it("com modelo salvo: pré-marca só o que o modelo marca; imagem nasce desmarcada", () => {
-    render(<ConsultaFlash {...props()} />);
-    expect(screen.queryByRole("checkbox", { name: /^Retorno/ })).toBeNull();
-    expect(cb(/^Laboratório/).checked).toBe(true);
-    expect(cb(/^Imagem/).checked).toBe(false);
-    expect(screen.queryByText(/sem modelo padrão salvo/i)).toBeNull();
-  });
-
-  it("sem modelo salvo: tudo desmarcado e aviso curto", () => {
-    const base = props().tarefasRetorno!;
-    render(
-      <ConsultaFlash
-        {...props({
-          tarefasRetorno: { ...base, modeloPadraoSalvo: false, laboratorio: item("lab", "Laboratório", "SUGESTAO", true) },
-        })}
-      />,
-    );
-    expect(screen.queryByRole("checkbox", { name: /^Retorno/ })).toBeNull();
-    expect(cb(/^Laboratório/).checked).toBe(false);
-    expect(cb(/^Imagem/).checked).toBe(false);
-    expect(screen.getByText(/sem modelo padrão salvo/i)).toBeTruthy();
-  });
-
-  it("mostra o prazo do retorno", () => {
-    render(<ConsultaFlash {...props()} />);
-    expect(screen.getByText(/^Retorno \(30 dias\)/)).toBeTruthy();
-  });
-
-  it("1 clique em Finalizar chama o fechamento com exatamente os itens marcados", () => {
-    const aoFinalizar = vi.fn();
-    const aoSalvarRascunho = vi.fn();
-    render(<ConsultaFlash {...props({ aoFinalizar, aoSalvarRascunho })} />);
-    fireEvent.click(cb(/^Imagem/));
-    fireEvent.click(screen.getByRole("button", { name: "FINALIZAR · IMPRIMIR · SAIR" }));
-    expect(aoSalvarRascunho).not.toHaveBeenCalled();
-    expect(aoFinalizar).toHaveBeenCalledTimes(1);
-    const plano = aoFinalizar.mock.calls[0]?.[0] as PlanoFlash;
-    expect(plano.tarefasRetorno).toEqual({ retorno: true, laboratorio: true, imagem: true });
-    expect(plano.apac.emitir).toBe(false);
-  });
-
-  it("teclado: checkbox e Finalizar recebem foco", () => {
-    render(<ConsultaFlash {...props()} />);
-    const lab = cb(/^Laboratório/);
-    lab.focus();
-    expect(document.activeElement).toBe(lab);
-    const btn = screen.getByRole("button", { name: "FINALIZAR · IMPRIMIR · SAIR" });
-    btn.focus();
-    expect(document.activeElement).toBe(btn);
-  });
-
-  it("nenhuma string proibida na tela", () => {
-    render(<ConsultaFlash {...props()} />);
-    expect(document.body.textContent ?? "").not.toMatch(PROIBIDAS);
-  });
+describe("F0-COMPLEMENTO seleção explícita de solicitações", () => {
+ it("modelo legado booleano não inventa quais exames solicitar", () => {
+  render(<ConsultaFlash {...props()} />);
+  for(const check of screen.getAllByRole("checkbox")) expect((check as HTMLInputElement).checked).toBe(false);
+  expect(screen.queryByRole("checkbox",{name:/^Retorno/})).toBeNull();
+ });
+ it("prazo permanece editável e seleção agrupada entrega itens reais", () => {
+  const p=props(); render(<ConsultaFlash {...p} />);
+  expect((screen.getByLabelText("Prazo do retorno em dias") as HTMLInputElement).value).toBe("30");
+  fireEvent.click(screen.getByRole("button",{name:"Selecionar todos LAB"}));
+  fireEvent.click(cb(/^TC tórax$/));
+  fireEvent.click(screen.getByRole("button",{name:"REVISAR · IMPRIMIR"}));
+  expect(p.aoSalvarRascunho).not.toHaveBeenCalled();
+  const plano=(p.aoFinalizar as ReturnType<typeof vi.fn>).mock.calls[0]?.[0] as PlanoFlash;
+  expect(plano.tarefasRetorno).toEqual({retorno:true,laboratorio:true,imagem:true});
+  expect(plano.solicitacoes?.imagem).toEqual(["TC tórax"]); expect(plano.apac.emitir).toBe(false);
+ });
+ it("teclado alcança checkbox e botão de revisão", () => {
+  render(<ConsultaFlash {...props()} />); const lab=cb(/^HMG$/); lab.focus(); expect(document.activeElement).toBe(lab);
+  const btn=screen.getByRole("button",{name:"REVISAR · IMPRIMIR"}); btn.focus(); expect(document.activeElement).toBe(btn);
+ });
+ it("sem estado de aprovação da máquina", () => {
+  render(<ConsultaFlash {...props()} />); expect(document.body.textContent ?? "").not.toMatch(PROIBIDAS);
+ });
 });

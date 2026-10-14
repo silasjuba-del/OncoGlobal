@@ -1,0 +1,175 @@
+{
+  "header": {
+    "id": "orientacoes-dieteticas-modelo-servico",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Modelo do serviço: C:/Users/silas/OneDrive/ONCOMED/Dev-oncoMed/Templates/[C] Template - Orientacoes Dieteticas Oncologicas.docx (15/04/2026), convertido pelo Claude em 11/10/2026 por ordem do Dr. Silas",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "papel": "Texto ao paciente vindo do modelo do serviço. Só vai ao paciente depois de aprovado pelo Dr. Silas, frase a frase. Conteúdo com fonte fica em dieta-geral-qt / dieta-por-toxicidade (GLM).",
+  "cabecalho": {
+    "origem": "CONFIG",
+    "campos": [
+      {
+        "id": "servico.nome",
+        "rotulo": "Serviço"
+      },
+      {
+        "id": "medico.nome",
+        "rotulo": "Médico"
+      },
+      {
+        "id": "medico.crm",
+        "rotulo": "CRM/UF"
+      },
+      {
+        "id": "medico.rqe",
+        "rotulo": "RQE"
+      }
+    ],
+    "nota": "O modelo original traz 'HOSPITAL DO BEM | CRM-SP XXXXX' fixo. Serviço e registro do médico saem de configuração, nunca de texto fixo.",
+    "pendencia": "DECISAO_DR_SILAS: serviço e CRM/UF oficiais (SP × PB)"
+  },
+  "campos": [
+    {
+      "id": "paciente.nome",
+      "rotulo": "Paciente",
+      "origem": "FATO_CONFIRMADO",
+      "porta": "prontuario.identificacao.nome"
+    },
+    {
+      "id": "data",
+      "rotulo": "Data",
+      "origem": "CONFIG"
+    }
+  ],
+  "textoFixo": [
+    {
+      "id": "DT-01",
+      "texto": "Faça 5 a 6 pequenas refeições por dia, a cada 3 horas.",
+      "estado": "MANTIDO_PENDENTE_FONTE"
+    },
+    {
+      "id": "DT-02",
+      "texto": "Beba pelo menos 2 a 2,5 litros de líquidos por dia.",
+      "estado": "MANTIDO_PENDENTE_FONTE",
+      "nota": "Contraindicado em IC/DRC com restrição hídrica: precisa de condição de exclusão ligada a comorbidades."
+    },
+    {
+      "id": "DT-03",
+      "texto": "Lave bem frutas e legumes.",
+      "estado": "MANTIDO_PENDENTE_FONTE"
+    },
+    {
+      "id": "DT-04",
+      "texto": "Na fase de imunidade baixa, evite carnes, peixes e ovos crus ou mal passados e queijos não pasteurizados.",
+      "estado": "MANTIDO_PENDENTE_FONTE",
+      "gatilho": "lab NEUTROFILOS (CTCAE v6) / fase de nadir",
+      "nota": "Restrição de vegetais crus em geral é controversa (INCA × outras instituições): não generalizar."
+    },
+    {
+      "id": "DT-05",
+      "texto": "Evite alimentos muito quentes ou muito gelados se tiver feridas na boca ou formigamento.",
+      "estado": "MANTIDO_PENDENTE_FONTE",
+      "gatilho": "CTCAE: mucosite oral; neuropatia por oxaliplatina"
+    },
+    {
+      "id": "DT-06",
+      "texto": "Não use suplementos ou chás sem falar com a equipe.",
+      "estado": "MANTIDO_PENDENTE_FONTE"
+    },
+    {
+      "id": "DT-07",
+      "texto": "Evite bebida alcoólica durante o tratamento.",
+      "estado": "MANTIDO_PENDENTE_FONTE"
+    }
+  ],
+  "manejoPorSintoma": [
+    {
+      "sintoma": "náusea",
+      "gatilho": "CTCAE Nausea",
+      "texto": "Prefira alimentos frios ou em temperatura ambiente; biscoito de água e sal ao acordar.",
+      "estado": "MANTIDO_PENDENTE_FONTE"
+    },
+    {
+      "sintoma": "feridas na boca",
+      "gatilho": "CTCAE Mucositis oral",
+      "texto": "Prefira alimentos pastosos ou líquidos frios; evite ácidos, picantes, duros ou secos.",
+      "estado": "MANTIDO_PENDENTE_FONTE"
+    },
+    {
+      "sintoma": "diarreia",
+      "gatilho": "CTCAE Diarrhea",
+      "texto": "Reduza fibras duras; banana, arroz, maçã sem casca; soro de reidratação oral.",
+      "estado": "MANTIDO_PENDENTE_FONTE",
+      "ligacao": "Diarreia com febre, sangue ou ≥ 4 episódios acima do habitual segue sinais de alarme (SAMU/PS) — confirmar corte com CTCAE e D-W9-38."
+    },
+    {
+      "sintoma": "intestino preso",
+      "gatilho": "CTCAE Constipation",
+      "texto": "Aumente fibras (mamão, ameixa), água e caminhadas leves, se liberado.",
+      "estado": "MANTIDO_PENDENTE_FONTE"
+    },
+    {
+      "sintoma": "falta de apetite e perda de peso",
+      "gatilho": "salao-triagem.pesoVermelho (5 kg/60 d)",
+      "texto": "Enriqueça as refeições com azeite e proteína; suplemento oral se prescrito.",
+      "estado": "MANTIDO_PENDENTE_FONTE",
+      "nota": "Marcas comerciais (Ensure, Fresubin) removidas do texto ao paciente."
+    },
+    {
+      "sintoma": "gosto alterado",
+      "gatilho": "CTCAE Dysgeusia",
+      "texto": "Use talheres de plástico e tempere com ervas.",
+      "estado": "MANTIDO_PENDENTE_FONTE"
+    }
+  ],
+  "removidosDoModelo": [
+    {
+      "trecho": "Açúcares simples favorecem inflamação e podem piorar fadiga e imunossupressão",
+      "motivo": "Afirmação sem fonte de diretriz (INCA/ESPEN); risco de restrição em paciente desnutrido."
+    },
+    {
+      "trecho": "Frituras/gordura saturada aumentam estresse oxidativo e inflamação sistêmica",
+      "motivo": "Sem fonte; pode reduzir ingestão calórica em caquexia."
+    },
+    {
+      "trecho": "Embutidos e ultraprocessados: carcinógenos",
+      "motivo": "Linguagem de prevenção primária, não de tratamento; sem fonte para o contexto."
+    },
+    {
+      "trecho": "Antioxidantes em altas doses podem interferir na quimioterapia",
+      "motivo": "Mantido só como DT-06 (não usar suplementos sem falar com a equipe), sem a explicação causal sem fonte."
+    },
+    {
+      "trecho": "lavar frutas/legumes com hipoclorito",
+      "motivo": "Instrução de concentração ausente; reescrita como 'lave bem' até haver fonte (ANVISA/INCA)."
+    }
+  ],
+  "portas": {
+    "consome": [
+      "toxicidade.vigente (CTCAE v6)",
+      "lab.NEUTROFILOS",
+      "peso (salao-triagem)",
+      "comorbidades (IC, DRC, DM)",
+      "tumor.sitio (dieta-por-tumor)"
+    ],
+    "oferece": [
+      "documento.orientacaoDieta"
+    ]
+  },
+  "pendencias": [
+    "Fonte por frase (INCA Guia 2020; Consenso Nacional de Nutrição Oncológica; ESPEN).",
+    "Exclusões por comorbidade (restrição hídrica, DM).",
+    "Aprovação do texto final pelo Dr. Silas."
+  ]
+}

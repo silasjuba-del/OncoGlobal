@@ -18,7 +18,7 @@ describe("F07 — cálculo RECIST no consumidor real permanece proposto", () => 
     const db = abrirLedger(":memory:");
     try {
       const pontos = [ponto("baseline", "2026-01-01", 20), ponto("atual", "2026-02-01", 30)];
-      for (const p of pontos) persistirFixture(db, evento(p.eventId, { imagem: "sintética" }, {
+      for (const p of pontos) persistirFixture(db, evento(p.eventId, { campo: "imagem", valor: "sintética" }, {
         fontes: [{ sourceId: `fonte-${p.eventId}`, classe: "DOCUMENT", localizador: null,
           dataClinica: p.data, dataCaptura: "2026-10-07T12:00:00Z", versao: "1", contentHash: `hash-${p.eventId}` }],
       }));
