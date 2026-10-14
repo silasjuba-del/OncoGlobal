@@ -44,3 +44,18 @@ describe("auditoria clínica adversarial da composição",()=>{
   expect(avaliarConsulta({...base,eventos:[peso,cr]}).renal.estado).toBe("PENDENTE");
  });
 });
+
+describe("horizonte do encontro e escopo do paciente (P1 PR #13)",()=>{
+ it("lab de outro lote tumoral continua valendo para o paciente",()=>{
+  const r=avaliarConsulta({...base,tumorLotId:"lote-b",eventos:[{...lab("na-lote-a","sodio",146),tumorLotId:"lote-a"}]});
+  expect(r.criticos.find(c=>c.analito==="NA")?.estado).toBe("AVISO");
+ });
+ it("encontro antigo reaberto não usa lab registrado em encontro posterior",()=>{
+  const antigo={...evento("abertura-antiga","FATO",{campo:"observacao",valor:"x"}),criadoEm:"2026-10-01T10:00:00-03:00"};
+  const posterior={...lab("na-posterior","sodio",146,"2026-10-09T10:00:00-03:00"),encounterId:"encontro-posterior",criadoEm:"2026-10-09T11:00:00-03:00"};
+  const r=avaliarConsulta({...base,eventos:[antigo,posterior]});
+  expect(r.criticos.find(c=>c.analito==="NA")?.estado).toBe("PENDENTE");
+  const atual=avaliarConsulta({...base,encounterId:"encontro-posterior",eventos:[antigo,posterior]});
+  expect(atual.criticos.find(c=>c.analito==="NA")?.estado).toBe("AVISO");
+ });
+});

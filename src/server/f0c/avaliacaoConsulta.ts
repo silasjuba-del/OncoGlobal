@@ -2,7 +2,7 @@ import type { ClinicalEvent } from "../../contracts/operacao.js";
 import type { Paciente, Ciclo, TreatmentEpisode } from "../../contracts/clinico.js";
 import { Triagem } from "../../contracts/clinico.js";
 import { SalaoRuleset } from "../../contracts/regras.js";
-import { dadosDoEvento, eventosVigentes, projetarSnapshot } from "../../kernel/projections/snapshot.js";
+import { dadosDoEvento, escopoDoEvento, eventosVigentes, projetarSnapshot } from "../../kernel/projections/snapshot.js";
 import { labSeries, weightSeries, type PontoLab } from "../../kernel/projections/series.js";
 import { avaliarTriagem } from "../../rules/triagem.js";
 import { idadeDoDado, PESO_VALIDADE_DIAS } from "../../rules/prescricao/index.js";
@@ -47,8 +47,17 @@ export interface EntradaAvaliacaoConsulta {
 
 /** A avaliação consome o mesmo ledger da consulta; dado ausente continua com motivo explícito. */
 export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
-  const escopo = i.eventos.filter(e => e.patientId === i.patientId && (e.tumorLotId === null || e.tumorLotId === i.tumorLotId)
-    && Date.parse(e.criadoEm) <= Date.parse(i.agora));
+  const doPaciente = i.eventos.filter(e => e.patientId === i.patientId);
+  // Encontro reaberto: o horizonte termina onde começa o encontro seguinte; evidência posterior não reescreve a consulta antiga.
+  const inicio = new Map<string, number>();
+  for (const e of doPaciente) { const t = Date.parse(e.criadoEm); if (Number.isFinite(t) && t < (inicio.get(e.encounterId) ?? Infinity)) inicio.set(e.encounterId, t); }
+  const inicioAtual = inicio.get(i.encounterId);
+  const seguinte = inicioAtual === undefined ? Infinity
+    : Math.min(Infinity, ...[...inicio].filter(([id, t]) => id !== i.encounterId && t > inicioAtual).map(([, t]) => t));
+  const horizonte = Math.min(Date.parse(i.agora), seguinte - 1);
+  // Fatos sistêmicos (labs, administrações, medicamentos…) são do paciente, independentemente do lote de origem.
+  const escopo = doPaciente.filter(e => (e.tumorLotId === null || e.tumorLotId === i.tumorLotId || escopoDoEvento(e) === "PACIENTE")
+    && Date.parse(e.criadoEm) <= horizonte);
   const atuais = eventosVigentes(escopo);
   const snapshot = projetarSnapshot(escopo.filter(e => e.tipo === "FATO"), i.patientId, i.tumorLotId, i.encounterId, "f0c-avaliacao-v1");
   const atuaisSnapshot=projetarSnapshot(escopo.filter(e=>e.tipo==="FATO" && e.encounterId===i.encounterId),i.patientId,i.tumorLotId,i.encounterId,"f0c-atual-v1");
@@ -56,7 +65,7 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     const campoFonte=(nome==="medicamentos" ? atuaisSnapshot : snapshot).campos[nome];
     return campoFonte?.estado === "VERDE" && campoFonte.eventIds.every(id=>atuais.some(e=>e.eventId===id && e.fontes.length>0)) ? campoFonte.valor : null;
   };
-  const labs = labSeries(atuais).filter(p => Date.parse(p.data) <= Date.parse(i.agora)
+  const labs = labSeries(atuais).filter(p => Date.parse(p.data) <= horizonte
     && atuais.some(e => e.eventId === p.eventId && e.fontes.some(f=>f.sourceId === p.sourceId)));
   const medida = (nome: string) => {
     const p = ultimoLab(labs, nome, i.hoje);
@@ -65,7 +74,7 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   };
   const cr = ultimoLab(labs, "creatinina", i.hoje);
   const pesos = weightSeries(atuais).filter(p => p.origem === "MEDIDO" && p.data.slice(0,10) <= i.hoje
-    && DataCivil.safeParse(p.data.slice(0,10)).success && Date.parse(p.data)<=Date.parse(i.agora) && atuais.some(e=>e.eventId===p.eventId && e.fontes.some(f=>f.sourceId===p.sourceId)))
+    && DataCivil.safeParse(p.data.slice(0,10)).success && Date.parse(p.data)<=horizonte && atuais.some(e=>e.eventId===p.eventId && e.fontes.some(f=>f.sourceId===p.sourceId)))
     .sort((a,b) => Date.parse(b.data)-Date.parse(a.data));
   const peso=pesos[0];
   const pesosDia = peso ? pesos.filter(p => Date.parse(p.data) === Date.parse(peso.data)) : [];
