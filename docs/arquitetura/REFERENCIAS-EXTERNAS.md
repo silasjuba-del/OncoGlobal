@@ -111,13 +111,14 @@ separação extração → regra → minuta → decisão; autoridade médica (s�
 - **PADRÃO:** ordem médica assinada gera tarefa de farmácia/dispensação rastreável, por setor.
 - **FONTE:** Bahmni.
 - **CAPACIDADE REUTILIZÁVEL:** fila da farmácia (estado Farmácia 4) e salão de QT ligados à prescrição assinada.
-- **LOCAL NO ONCOGLOBAL:** salão (`lerSalao`), tarefas de retorno S9, futura fila de farmácia.
-- **CONTRATO AFETADO:** futuro contrato de tarefa de farmácia (fora da F1).
+- **LOCAL NO ONCOGLOBAL:** já existe o duto de conferência farmacêutica da F1: contrato `src/contracts/api/farmacia.ts` e rotas `/farmacia/enviar` e `/farmacia/conferir` em `src/server/dutos.ts`, além do salão (`lerSalao`) e das tarefas de retorno S9. O que ainda não existe é a tarefa de dispensação/preparo derivada da conferência.
+- **CONTRATO AFETADO:** estender `contracts/api/farmacia.ts` (compatível com a máquina de estados atual); nunca criar um segundo contrato paralelo de farmácia.
 - **RISCO DE ACOPLAMENTO:** alto se integrar OpenERP/Odoo do Bahmni → rejeitado; baixo como padrão.
-- **RISCO CLÍNICO:** médio (dispensação errada). Mitiga: tarefa só nasce de documento ASSINADO.
+- **RISCO CLÍNICO:** médio (dispensação errada). Mitiga: tarefa só nasce de documento ASSINADO já conferido no duto atual.
 - **RISCO OPERACIONAL:** médio (setores ainda não ativos; v1 monousuário).
-- **DECISÃO:** ADAPTAR, adiado para fase de setores (pós-F1).
-- **TESTE NECESSÁRIO:** tarefa de farmácia nunca nasce de minuta; cancelamento da prescrição propaga para a fila.
+- **DECISÃO:** ADAPTAR. A conferência F1 permanece como está; só a dispensação fica para a fase de setores (pós-F1).
+- **JUSTIFICATIVA:** reaproveita o duto existente em vez de duplicar estados.
+- **TESTE NECESSÁRIO:** os testes atuais de `/farmacia/enviar` e `/farmacia/conferir` continuam verdes; a tarefa de dispensação nunca nasce de minuta nem de conferência pendente; cancelar a prescrição propaga para a fila.
 
 ---
 
