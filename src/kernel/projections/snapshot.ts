@@ -55,8 +55,8 @@ export function dadosDoEvento(evento: ClinicalEvent): Record<string, unknown> | 
 /** Escopo sistêmico é do sujeito, independentemente do lote de origem. */
 export function escopoDoEvento(e: ClinicalEvent): "PACIENTE" | "TUMOR" {
   const d = dadosDoEvento(e);
-  return ["alergias", "comorbidades", "medicamentos", "funcaoOrganica", "exposicoes"].includes(String(d?.campo))
-    || ["LabResult", "TreatmentAdministration"].includes(e.tipo) ? "PACIENTE" : "TUMOR";
+  return ["alergias", "comorbidades", "medicamentos", "funcaoOrganica", "exposicoes", "alturaCm"].includes(String(d?.campo))
+    || ["Weight", "LabResult", "TreatmentAdministration"].includes(e.tipo) ? "PACIENTE" : "TUMOR";
 }
 
 function refsDoEvento(data: Record<string, unknown>): RulesetRef[] {

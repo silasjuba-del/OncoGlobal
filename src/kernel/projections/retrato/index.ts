@@ -25,7 +25,7 @@ function dados(e: ClinicalEvent): Record<string, unknown> | null {
   return data && typeof data === "object" && !Array.isArray(data) ? data as Record<string, unknown> : null;
 }
 const normalizarChave = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-const sistemicos = new Set(["alergias", "alergia", "comorbidades", "medicamentos", "medicacao", "funcaoorganica", "exposicoes", "exposicaocumulativa", "cumulativos", "dosecumulativa"]);
+const sistemicos = new Set(["alergias", "alergia", "comorbidades", "medicamentos", "medicacao", "funcaoorganica", "exposicoes", "exposicaocumulativa", "cumulativos", "dosecumulativa", "alturacm"]);
 const materiaisConhecidos = new Set(["Paciente", "TumorLot", "Weight", "ImagingReport", "Biopsy", "TreatmentEpisode", "Ciclo", "DOCUMENTO",
   "LabResult", "TreatmentAdministration", "TreatmentCycle", "SignedDocument", "DocumentSigned"]);
 function escopo(e: ClinicalEvent, d: Record<string, unknown>): FatoRetrato["escopo"] {

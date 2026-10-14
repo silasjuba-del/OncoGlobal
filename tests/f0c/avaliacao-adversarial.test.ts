@@ -53,6 +53,13 @@ describe("auditoria clínica adversarial da composição",()=>{
 });
 
 describe("horizonte do encontro e escopo do paciente (P1 PR #13)",()=>{
+ it("peso e altura do paciente atravessam lotes tumorais sem herdar outro paciente",()=>{
+  const peso={...evento("peso-a","Weight",{kg:70,origem:"MEDIDO",data:"2026-10-09",sourceId:"fonte-medida"}),tumorLotId:"lote-a"};
+  const altura={...evento("altura-a","FATO",{campo:"alturaCm",valor:170}),tumorLotId:"lote-a"};
+  const r=avaliarConsulta({...base,tumorLotId:"lote-b",eventos:[peso,altura,
+   {...peso,eventId:"outro",patientId:"paciente-diferente",payload:{data:{kg:90,origem:"MEDIDO",data:"2026-10-10",sourceId:"fonte-medida"}}}]});
+  expect(r.dadosNutricionais).toMatchObject({pesoKg:70,alturaCm:170});
+ });
  it("lab de outro lote tumoral continua valendo para o paciente",()=>{
   const r=avaliarConsulta({...base,tumorLotId:"lote-b",eventos:[{...lab("na-lote-a","sodio",146),tumorLotId:"lote-a"}]});
   expect(r.criticos.find(c=>c.analito==="NA")?.estado).toBe("AVISO");
