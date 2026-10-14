@@ -2,7 +2,12 @@
 // Pura e offline. Gatilhos decididos: câncer de esôfago, câncer de estômago e IMC < 18.
 // Dado ausente nunca vira "sem triagem": o resultado é PENDENTE.
 
-export interface EntradaTriagemNutricional { tumor: string | null | undefined; imc: number | null | undefined }
+export interface EntradaTriagemNutricional {
+  tumor: string | null | undefined;
+  imc: number | null | undefined;
+  /** CID-10 do lote, quando confirmado: C15 = esôfago, C16 = estômago (classificação, não decisão clínica nova). */
+  cid?: string | null | undefined;
+}
 export type EstadoTriagemNutricional = "SUGERIR" | "NAO_SUGERIR" | "PENDENTE";
 export interface ResultadoTriagemNutricional {
   estado: EstadoTriagemNutricional;
@@ -18,16 +23,36 @@ const GATILHO_TUMOR: ReadonlyArray<readonly [RegExp, string]> = [
   [/\besofag/, "câncer de esôfago"],
   [/\b(estomag|gastric)/, "câncer de estômago"],
 ];
+const GATILHO_CID: ReadonlyArray<readonly [RegExp, string]> = [
+  [/^C15/, "câncer de esôfago"],
+  [/^C16/, "câncer de estômago"],
+];
+
+/** IMC = peso (kg) / altura (m)², uma casa decimal. Medida ausente ou inválida ⇒ null (nunca 0). */
+export function imcDeMedidas(pesoKg: number | null | undefined, alturaCm: number | null | undefined): number | null {
+  if (typeof pesoKg !== "number" || typeof alturaCm !== "number" || !Number.isFinite(pesoKg) || !Number.isFinite(alturaCm)
+    || pesoKg <= 0 || alturaCm <= 0) return null;
+  const m = alturaCm / 100;
+  return Math.round((pesoKg / (m * m)) * 10) / 10;
+}
 
 export function sugerirTriagemNutricional(entrada: EntradaTriagemNutricional): ResultadoTriagemNutricional {
   const motivos: string[] = [];
   const tumor = typeof entrada.tumor === "string" && entrada.tumor.trim() ? semAcento(entrada.tumor) : null;
-  const gatilho = tumor === null ? null : GATILHO_TUMOR.find(([re]) => re.test(tumor))?.[1] ?? null;
+  const cid = typeof entrada.cid === "string" && entrada.cid.trim() ? entrada.cid.trim().toUpperCase() : null;
+  const porTumor = tumor === null ? undefined : GATILHO_TUMOR.find(([re]) => re.test(tumor))?.[1];
+  const porCid = cid === null ? undefined : GATILHO_CID.find(([re]) => re.test(cid))?.[1];
+  const gatilho = porTumor ?? porCid ?? null;
   if (gatilho) motivos.push(gatilho);
   const imc = typeof entrada.imc === "number" && Number.isFinite(entrada.imc) && entrada.imc > 0 && entrada.imc < 100 ? entrada.imc : null;
   if (imc !== null && imc < IMC_CORTE) motivos.push(`IMC ${imc} < ${IMC_CORTE}`);
   if (motivos.length) return { estado: "SUGERIR", instrumento: "NRS-2002", motivos, bloqueia: false };
-  if (tumor === null) return { estado: "PENDENTE", instrumento: "NRS-2002", motivos: ["tumor não informado"], bloqueia: false };
+  if (tumor === null && cid === null) return { estado: "PENDENTE", instrumento: "NRS-2002", motivos: ["tumor não informado"], bloqueia: false };
   if (imc === null) return { estado: "PENDENTE", instrumento: "NRS-2002", motivos: ["IMC ausente ou inválido"], bloqueia: false };
   return { estado: "NAO_SUGERIR", instrumento: "NRS-2002", motivos: [], bloqueia: false };
+}
+
+/** Texto da Flash: só SUGERIR vira linha; PENDENTE/NAO_SUGERIR não poluem a revisão rápida. Nunca é pedido. */
+export function textoSugestaoNutricional(r: ResultadoTriagemNutricional): string | null {
+  return r.estado === "SUGERIR" ? `Sugestão: triagem nutricional (${r.instrumento}) — ${r.motivos.join("; ")}` : null;
 }

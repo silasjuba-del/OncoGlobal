@@ -22,6 +22,7 @@ export interface ConsultaFlashProps {
   avisos?: readonly string[];
   parciaisCumulativos?: readonly string[];
   sugestoesLaboratorio?: readonly string[];
+  sugestoesClinicas?: readonly string[];
   pacienteNome?: string;
   hoje?: string;
   planoInicial?: PlanoFlash;

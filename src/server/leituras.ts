@@ -43,6 +43,7 @@ import { projetarIntervaloCiclo } from "./f0c/intervaloCiclo.js";
 import { avaliarInteracoesCondicionadasDaConsulta } from "./f0c/interacoesCondicionadas.js";
 import { projetarCumulativoClinico } from "./f0c/cumulativoClinico.js";
 import { chaveDroga, type LimiteExposicaoCumulativa } from "../rules/cumulativoAlerta.js";
+import { imcDeMedidas, sugerirTriagemNutricional, textoSugestaoNutricional } from "../rules/index.js";
 
 const RecistSerieSchema = z.object({
   patientId: z.string().min(1), tumorLotId: z.string().nullable(), episodioId: z.string().min(1),
@@ -368,6 +369,16 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     ...(condicionais.avaliacoes.some(r=>r.estado!=="NAO_APLICAVEL") ? {condicionais:{
       estado:avisosCondicionais.length ? "VERMELHO" as const : pendenciasCondicionais.length ? "PENDENTE" as const : "VERDE" as const,
       motivos:[...avisosCondicionais,...pendenciasCondicionais].map(texto=>({texto}))}} : {}) });
+  // D-F1-33/D-F1-48 · triagem nutricional NRS-2002: só do lote selecionado (nunca herda outro lote) e do peso/altura
+  // vigentes no horizonte do encontro. Só SUGERE: não gera pedido, não trava e não entra no semáforo.
+  const presenteNoLote = (d: { campo: string; valor: string | null } | undefined) =>
+    d?.campo === "PRESENTE" && typeof d.valor === "string" && d.valor.trim() ? d.valor : null;
+  const triagemNutricional = sugerirTriagemNutricional({
+    tumor: [presenteNoLote(lote?.topografia), presenteNoLote(lote?.histologia)].filter((t): t is string => t !== null).join(" ") || null,
+    cid: presenteNoLote(lote?.cid),
+    imc: imcDeMedidas(avaliacao.dadosCorporais.pesoKg, avaliacao.dadosCorporais.alturaCm),
+  });
+  const sugestaoNutricional = textoSugestaoNutricional(triagemNutricional);
   pendenciasLeitura.push(...contextoClinico.pendencias,
     ...Object.entries(contextoClinico.campos).filter(([,c]) => c.valor === null).map(([nome]) => `${nome.toUpperCase()}_NAO_CARREGADAS`));
   const anteriores = patientEvents.filter(e => e.encounterId !== current.encounterId && Date.parse(e.criadoEm) < Date.parse(current.criadoEm));
@@ -445,7 +456,8 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     flash: { ...projetarFlash(eventosDaConsulta, civil.dataCivil, config.modeloFlash ?? null,
       rascunhoFlashDoContexto(db, { patientId, encounterId: current.encounterId, tumorLotId: lote?.tumorLotId ?? null })),
       ...contextoClinico.flash, avisos:[...avaliacao.avisosFlash,...avisosCondicionais,...avisosInteracoesCondicionadas.map(r=>r.motivo)],sugestoesLaboratorio:avaliacao.sugestoesLaboratorio,
-      ...(parciaisCumulativos.length ? {parciaisCumulativos} : {}) },
+      ...(parciaisCumulativos.length ? {parciaisCumulativos} : {}),
+      ...(sugestaoNutricional ? {sugestoesClinicas:[sugestaoNutricional]} : {}) },
     elegibilidade: avaliacao.elegibilidade,
     avaliacaoClinica: avaliacao,
     condicionaisClinicas:condicionais,

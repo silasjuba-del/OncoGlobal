@@ -25,6 +25,9 @@ export { avaliarIntervaloPosQt, lerIntervalos };
 export { avaliarCanalRedflags, lerCanalRedflags };
 export { valorAtual } from "./valorAtual.js";
 export type { Leitura, PedidoValorAtual, ResultadoValorAtual } from "./valorAtual.js";
+// D-F1-33/D-F1-48 · triagem nutricional (NRS-2002) só sugere; consumida pela leitura da consulta (Flash).
+export { sugerirTriagemNutricional, imcDeMedidas, textoSugestaoNutricional } from "./triagemNutricional.js";
+export type { EntradaTriagemNutricional, ResultadoTriagemNutricional } from "./triagemNutricional.js";
 
 const CIVIL_PRONTA = /^\d{4}-\d{2}-\d{2}$/;
 

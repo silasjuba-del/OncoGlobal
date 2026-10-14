@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { sugerirTriagemNutricional as t } from "../../../src/rules/triagemNutricional.js";
+import { sugerirTriagemNutricional as t, imcDeMedidas, textoSugestaoNutricional } from "../../../src/rules/triagemNutricional.js";
+import * as regras from "../../../src/rules/index.js";
 
 describe("F1-B1 triagem nutricional (D-F1-33, NRS-2002)", () => {
   it.each(["Esôfago", "esofago", "ESÔFAGO", "Estômago", "estomago", "Gástrico"])("positivo: tumor %s sugere", tumor => {
@@ -28,5 +29,26 @@ describe("F1-B1 triagem nutricional (D-F1-33, NRS-2002)", () => {
   });
   it("nunca bloqueia", () => {
     for (const e of [{ tumor: "Esofago", imc: 15 }, { tumor: "Mama", imc: null }, { tumor: null, imc: null }]) expect(t(e).bloqueia).toBe(false);
+  });
+  it("thread #17: a fachada estável de regras exporta a triagem nutricional", () => {
+    expect(regras.sugerirTriagemNutricional).toBe(t);
+    expect(typeof regras.imcDeMedidas).toBe("function");
+  });
+  it("CID confirmado C15/C16 dispara mesmo sem texto do tumor; outro CID não", () => {
+    expect(t({ tumor: null, cid: "C15.4", imc: null }).motivos).toEqual(["câncer de esôfago"]);
+    expect(t({ tumor: null, cid: "c169", imc: 25 }).motivos).toEqual(["câncer de estômago"]);
+    expect(t({ tumor: null, cid: "C50.9", imc: 25 }).estado).toBe("NAO_SUGERIR");
+    expect(t({ tumor: null, cid: "C50.9", imc: null }).estado).toBe("PENDENTE");
+  });
+  it("IMC de medidas: uma casa, ausente/inválido é null (nunca 0)", () => {
+    expect(imcDeMedidas(50, 170)).toBe(17.3);
+    expect(imcDeMedidas(70, 170)).toBe(24.2);
+    for (const [p, a] of [[null, 170], [70, null], [0, 170], [70, 0], [Number.NaN, 170], [70, -1]] as const) expect(imcDeMedidas(p, a)).toBeNull();
+    expect(t({ tumor: "Mama", imc: imcDeMedidas(50, 170) }).estado).toBe("SUGERIR");
+  });
+  it("texto da Flash só existe para SUGERIR", () => {
+    expect(textoSugestaoNutricional(t({ tumor: "Esôfago", imc: 17 }))).toBe("Sugestão: triagem nutricional (NRS-2002) — câncer de esôfago; IMC 17 < 18");
+    expect(textoSugestaoNutricional(t({ tumor: "Mama", imc: null }))).toBeNull();
+    expect(textoSugestaoNutricional(t({ tumor: "Mama", imc: 25 }))).toBeNull();
   });
 });

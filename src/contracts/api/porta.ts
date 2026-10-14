@@ -88,6 +88,8 @@ export interface FlashVisao {
   avisos?: readonly string[];
   parciaisCumulativos?: readonly string[];
   sugestoesLaboratorio?: readonly string[];
+  /** D-F1-33 · sugestões clínicas que nunca viram pedido nem trava (ex.: triagem nutricional NRS-2002). */
+  sugestoesClinicas?: readonly string[];
   modeloSolicitacoes?: {laboratorio:string[];imagem:string[]};
   laboratorios?: readonly { data: string; nome: string; fraseLaudo?: string;
     situacao: "DENTRO_DO_LIMITE" | "FORA_DO_LIMITE" | "SEM_REFERENCIA" }[];
