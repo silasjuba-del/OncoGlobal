@@ -37,6 +37,7 @@ describe("elegibilidade de ciclo (cruzamento sem amarelo)", () => {
       expect(saida.cor).toBe(cor);
       expect(saida.criterios).toEqual([criterio]);
       expect(saida.coberturaCriterios?.pendentes).toBe(estado === "AUSENTE" || estado === "CONFLITO" ? 1 : 0);
+      if (estado !== "ATENDE") expect(saida.motivos).toContainEqual({ origem: "portaCiclo", texto: "Critério sintético" });
     });
   it("todas verdes resultam em VERDE com rótulo neutro, sem liberação", () => {
     const saida = elegibilidadeCiclo(todasVerdes());
