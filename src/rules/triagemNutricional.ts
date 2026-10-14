@@ -28,13 +28,16 @@ const GATILHO_CID: ReadonlyArray<readonly [RegExp, string]> = [
   [/^C16/, "câncer de estômago"],
 ];
 
-/** IMC = peso (kg) / altura (m)², uma casa decimal. Medida ausente ou inválida ⇒ null (nunca 0). */
+/** IMC = peso (kg) / altura (m)², SEM arredondar: o corte < 18 compara o valor real. Ausente ou inválido ⇒ null (nunca 0). */
 export function imcDeMedidas(pesoKg: number | null | undefined, alturaCm: number | null | undefined): number | null {
   if (typeof pesoKg !== "number" || typeof alturaCm !== "number" || !Number.isFinite(pesoKg) || !Number.isFinite(alturaCm)
     || pesoKg <= 0 || alturaCm <= 0) return null;
   const m = alturaCm / 100;
-  return Math.round((pesoKg / (m * m)) * 10) / 10;
+  return pesoKg / (m * m);
 }
+
+/** Só para exibir: trunca em uma casa (17,96 → 17,9), para o texto nunca mostrar valor ≥ corte quando o real está abaixo. */
+const imcExibido = (imc: number): number => Math.floor(imc * 10 + 1e-9) / 10;
 
 export function sugerirTriagemNutricional(entrada: EntradaTriagemNutricional): ResultadoTriagemNutricional {
   const motivos: string[] = [];
@@ -45,7 +48,7 @@ export function sugerirTriagemNutricional(entrada: EntradaTriagemNutricional): R
   const gatilho = porTumor ?? porCid ?? null;
   if (gatilho) motivos.push(gatilho);
   const imc = typeof entrada.imc === "number" && Number.isFinite(entrada.imc) && entrada.imc > 0 && entrada.imc < 100 ? entrada.imc : null;
-  if (imc !== null && imc < IMC_CORTE) motivos.push(`IMC ${imc} < ${IMC_CORTE}`);
+  if (imc !== null && imc < IMC_CORTE) motivos.push(`IMC ${imcExibido(imc)} < ${IMC_CORTE}`);
   if (motivos.length) return { estado: "SUGERIR", instrumento: "NRS-2002", motivos, bloqueia: false };
   if (tumor === null && cid === null) return { estado: "PENDENTE", instrumento: "NRS-2002", motivos: ["tumor não informado"], bloqueia: false };
   if (imc === null) return { estado: "PENDENTE", instrumento: "NRS-2002", motivos: ["IMC ausente ou inválido"], bloqueia: false };

@@ -40,11 +40,18 @@ describe("F1-B1 triagem nutricional (D-F1-33, NRS-2002)", () => {
     expect(t({ tumor: null, cid: "C50.9", imc: 25 }).estado).toBe("NAO_SUGERIR");
     expect(t({ tumor: null, cid: "C50.9", imc: null }).estado).toBe("PENDENTE");
   });
-  it("IMC de medidas: uma casa, ausente/inválido é null (nunca 0)", () => {
-    expect(imcDeMedidas(50, 170)).toBe(17.3);
-    expect(imcDeMedidas(70, 170)).toBe(24.2);
+  it("IMC de medidas: valor NÃO arredondado (o corte compara o valor real), ausente/inválido é null (nunca 0)", () => {
+    expect(imcDeMedidas(50, 170)).toBeCloseTo(17.301, 3);
+    expect(imcDeMedidas(70, 170)).toBeCloseTo(24.221, 3);
     for (const [p, a] of [[null, 170], [70, null], [0, 170], [70, 0], [Number.NaN, 170], [70, -1]] as const) expect(imcDeMedidas(p, a)).toBeNull();
     expect(t({ tumor: "Mama", imc: imcDeMedidas(50, 170) }).estado).toBe("SUGERIR");
+  });
+  it("thread #17: IMC real logo abaixo de 18 (51,9 kg / 170 cm ≈ 17,96) sugere; texto nunca mostra valor ≥ corte", () => {
+    const r = t({ tumor: "Mama", imc: imcDeMedidas(51.9, 170) });
+    expect(r.estado).toBe("SUGERIR");
+    expect(r.motivos).toEqual(["IMC 17.9 < 18"]);
+    expect(t({ tumor: "Mama", imc: 17.999 }).estado).toBe("SUGERIR");
+    expect(t({ tumor: "Mama", imc: imcDeMedidas(52.02, 170) }).estado).toBe("NAO_SUGERIR");
   });
   it("texto da Flash só existe para SUGERIR", () => {
     expect(textoSugestaoNutricional(t({ tumor: "Esôfago", imc: 17 }))).toBe("Sugestão: triagem nutricional (NRS-2002) — câncer de esôfago; IMC 17 < 18");
