@@ -29,8 +29,8 @@ function stringsClinicas(value, contexto = "") {
     const s = String(item);
     const vazioDeModelo = /^(?:\s*|[_\s-]+|\{\{[^{}]+\}\}|\[[^\]]+\]|FATO_CONFIRMADO|CONFIG|DECISAO_MEDICA)$/.test(s);
     if (!vazioDeModelo && (/^(nomepaciente|patientname|patientid|pacienteid|nascimento|datanascimento|birthdate|dateofbirth|cpf|cns|prontuario)$/.test(k)
-      || (/paciente|patient/.test(contexto) && /^(nome|name|id)$/.test(k)))) throw new Error("PHI_ESTRUTURAL_JSON");
-    if (k === "sha256" && /^[a-f0-9]{64}$/.test(s)) return [];
+      || (/(?:^|\.)(?:pacientes?|patients?)(?:\.|$)/.test(contexto) && /^(nome|name|id)$/.test(k)))) throw new Error("PHI_ESTRUTURAL_JSON");
+    if (/^(sha256|hash|contenthash)$/.test(k) && /^(?:[a-f0-9]{40}|[a-f0-9]{64})$/.test(s)) return [];
     const rotulo = /^(endereco|address)$/.test(k) ? "Endereço" : /^(telefone|phone)$/.test(k) ? "Telefone" : null;
     return [s, ...(rotulo ? [`${rotulo}: ${s}`] : [])];
   });
@@ -42,7 +42,9 @@ function conferirTexto(bytes, caminho, triagem) {
   if (scan.findings.length || scan.pending.length) throw new Error(`PHI_PENDENTE:${caminho}`);
   let json = null;
   if (caminho.endsWith(".json")) { try { json = JSON.parse(texto); } catch { throw new Error(`JSON_INVALIDO:${caminho}`); } }
-  const textos = json ? stringsClinicas(json) : [texto];
+  let textos;
+  try { textos = json ? stringsClinicas(json) : [texto]; }
+  catch { throw new Error(`PHI_ESTRUTURAL_JSON:${caminho}`); }
   // Referências públicas podem conter links. Demais categorias exigem revisão antes de exportar.
   // Somente a categoria numérica distingue identificadores públicos de sequências pessoais.
   // Rótulos como CPF/prontuário continuam avaliados no texto ORIGINAL, mesmo usando esses dígitos.

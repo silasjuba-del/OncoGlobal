@@ -76,3 +76,8 @@ it("arquivo extra não inventariado não passa na validação de retorno", () =>
   writeFileSync(join(f.out, "extra.txt"), "Paciente: Pessoa Sintética");
   expect(() => validarPacoteConsulta(f.out)).toThrow("ARQUIVO_NAO_INVENTARIADO");
 });
+it("instruções ao paciente com IDs de conteúdo não são um cadastro de paciente", () => {
+  const f = fixture();
+  writeFileSync(join(f.root, "corpus/1-exames/item.json"), JSON.stringify({ instrucoesPaciente: [{ id: "IP-01", texto: "Orientação genérica" }] }));
+  expect(exportarBiblioteca(f.root, f.out).arquivos).toBe(1);
+});
