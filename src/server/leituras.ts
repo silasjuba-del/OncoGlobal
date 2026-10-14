@@ -376,8 +376,15 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   // Armadilha (a): encontro reaberto não usa a versão do lote confirmada em encontro POSTERIOR.
   const lotesNoHorizonte = lote ? porTipo(all.filter((e) => e.patientId === patientId && Date.parse(e.criadoEm) <= horizontePlaquetas),
     "TumorLot", TumorLot).filter((x) => x.value.patientId === patientId && x.value.tumorLotId === lote.tumorLotId) : [];
-  const loteNoHorizonte = lotesNoHorizonte.length === 1 ? lotesNoHorizonte[0]!.value : undefined;
-  if (lotesNoHorizonte.length > 1) pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
+  // Evidências diferentes podem confirmar o mesmo conteúdo. Ignorar apenas a proveniência na
+  // comparação; valores, estados, revisão, estadiamentos e marcos continuam distintos.
+  // Os lotes originais, com todas as fontes, permanecem em cabecalho.lotes e no ledger.
+  const conteudoLote = (value: TumorLot) => JSON.stringify(value, (chave, valor: unknown) =>
+    chave === "fontes" ? undefined : valor && typeof valor === "object" && !Array.isArray(valor)
+      ? Object.fromEntries(Object.entries(valor).sort(([a],[b]) => a.localeCompare(b))) : valor);
+  const conteudosLote = new Set(lotesNoHorizonte.map(x => conteudoLote(x.value)));
+  const loteNoHorizonte = conteudosLote.size === 1 ? lotesNoHorizonte[0]!.value : undefined;
+  if (conteudosLote.size > 1) pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
   const triagemNutricional = sugerirTriagemNutricional({
     tumor: [presenteNoLote(loteNoHorizonte?.topografia), presenteNoLote(loteNoHorizonte?.histologia)].filter((t): t is string => t !== null).join(" ") || null,
     cid: presenteNoLote(loteNoHorizonte?.cid),

@@ -27,7 +27,7 @@ const ausente = () => ({ valor: null, estado: "PENDENTE", campo: "AUSENTE", moti
 const presente = (valor: string, id: string) => ({ valor, estado: "VERDE", campo: "PRESENTE", motivo: "fixture sintética",
   fontes: [fonteSintetica(id)], revisao: "CONFIRMADO" });
 
-async function consultaCom(lotes: { id: string; topografia?: string; cid?: string; encontro?: string; em?: string }[], encontroAntigo?: { id: string; em: string }) {
+async function consultaCom(lotes: { id: string; topografia?: string; cid?: string; encontro?: string; em?: string; fonte?: string }[], encontroAntigo?: { id: string; em: string }) {
   const root = mkdtempSync(join(tmpdir(), "f1-b1-nutri-")); dirs.push(root);
   const db = abrirLedger(join(root, "ledger.sqlite")); dbs.push(db);
   const sessoes = criarGerenciadorSessao({ medicoId: "medico-teste", crm: "CRM-TESTE", senha: "senha-sintetica-comprida", duracaoMs: 60_000, agora: () => AGORA });
@@ -51,7 +51,7 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
   if (encontroAntigo) seed("Paciente", pac, null, encontroAntigo.id, encontroAntigo.em);
   seed("Paciente", pac);
   for (const l of lotes) seed("TumorLot", { tumorLotId: l.id, patientId: PAC,
-    cid: l.cid ? presente(l.cid, `cid-${l.id}`) : ausente(), topografia: l.topografia ? presente(l.topografia, `topo-${l.id}`) : ausente(),
+    cid: l.cid ? presente(l.cid, l.fonte ?? `cid-${l.id}`) : ausente(), topografia: l.topografia ? presente(l.topografia, l.fonte ?? `topo-${l.id}`) : ausente(),
     histologia: ausente(), estadiamentos: [], finalidadeApac: ausente(), marcos: [] }, l.id, l.encontro ?? ENC, l.em ?? AGORA);
   const antes = listarEventos(db, PAC).length;
   const carregar = async (tumorLotId?: string, encounterId = ENC) => {
@@ -64,6 +64,15 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
 }
 
 describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", () => {
+  it.each([["fonte-a", "fonte-b"], ["fonte-b", "fonte-a"]])("confirmações concordantes de um lote preservam %s e %s sem inventar conflito", async (a, b) => {
+    const c = await consultaCom([a,b].map(fonte => ({ id: "lote-esofago", topografia: "Esôfago", cid: "C15", fonte })));
+    const v = await c.carregar("lote-esofago");
+    expect(v.status).toBe(200);
+    expect(v.body.pendenciasLeitura).not.toContain("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
+    expect(v.body.flash.sugestoesClinicas?.[0]).toMatch(/câncer de esôfago/);
+    expect(v.body.cabecalho.lotes.flatMap((l: any) => l.topografia.fontes.map((f: any) => f.sourceId))).toEqual(expect.arrayContaining([a,b]));
+    expect(c.eventos()).toBe(c.antes);
+  });
   it.each([["Esôfago", "Mama"], ["Mama", "Esôfago"]])("conflito: %s e %s no mesmo lote não elegem a primeira versão", async (a, b) => {
     const c = await consultaCom([{ id: "lote-conflito", topografia: a }, { id: "lote-conflito", topografia: b }]);
     const v = await c.carregar("lote-conflito");
