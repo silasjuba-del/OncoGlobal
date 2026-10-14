@@ -31,6 +31,24 @@ it("PHI estrutural impede criar o pacote, mesmo com rótulo de fonte pública", 
   expect(() => exportarBiblioteca(f.root, f.out)).toThrow("PHI_ESTRUTURAL");
   expect(existsSync(f.out)).toBe(false);
 });
+it.each([
+  "Paciente: Pessoa Sintética",
+  ["Paciente: Pessoa Sintética"],
+  [["Paciente: Pessoa Sintética"]],
+  { "Paciente: Pessoa Sintética": null },
+  { "Paciente: Pessoa Sintética": { referencia: "genérica" } },
+])("inspeciona texto decodificado na raiz JSON e em arrays: %j", dados => {
+  const f = fixture();
+  writeFileSync(join(f.root, "corpus/1-exames/item.json"), JSON.stringify(dados));
+  expect(() => exportarBiblioteca(f.root, f.out)).toThrow("PHI_ESTRUTURAL");
+  expect(existsSync(f.out)).toBe(false);
+});
+it.each(["Referência bibliográfica genérica", 0, false, null])("preserva JSON escalar público sem inventar metadados: %j", dados => {
+  const f = fixture();
+  writeFileSync(join(f.root, "corpus/1-exames/item.json"), JSON.stringify(dados));
+  expect(exportarBiblioteca(f.root, f.out).arquivos).toBe(1);
+  expect(validarPacoteConsulta(f.out)).toEqual({ arquivos: 1, estado: "RASCUNHO", alerta: false });
+});
 it("não sobrescreve destino nem exporta para dentro do repositório", () => {
   const f = fixture();
   expect(() => exportarBiblioteca(f.root, join(f.root, "exportado"))).toThrow("FORA_DO_REPOSITORIO");

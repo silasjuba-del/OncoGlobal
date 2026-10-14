@@ -23,16 +23,19 @@ const obj = (v: unknown): Record<string, unknown> | null => v && typeof v === "o
 const sinal = (estado: SinalElegibilidade["estado"], textos: string[]): SinalElegibilidade => ({ estado, motivos: textos.map(texto => ({ texto })) });
 const pend = (texto: string) => sinal("PENDENTE", [texto]);
 
-/** Seleção com conflito explícito: não faz média, não usa upload como data de coleta. */
-export function ultimoLab(pontos: readonly PontoLab[], campo: string, hoje: string) {
+function labsMaisRecentes(pontos: readonly PontoLab[], campo: string, hoje: string) {
   const candidatos = pontos.filter(p => analito(p.campo) === analito(campo) && p.data.slice(0, 10) <= hoje
     && Number.isFinite(Date.parse(p.data)) && Number.isFinite(p.valor) && p.sourceId.trim())
     .sort((a, b) => Date.parse(b.data) - Date.parse(a.data));
   const primeiro = candidatos[0];
-  if (!primeiro) return null;
-  const iguais = candidatos.filter(p => Date.parse(p.data) === Date.parse(primeiro.data));
+  return primeiro ? candidatos.filter(p => Date.parse(p.data) === Date.parse(primeiro.data)) : [];
+}
+
+/** Seleção com conflito explícito: não faz média, não usa upload como data de coleta. */
+export function ultimoLab(pontos: readonly PontoLab[], campo: string, hoje: string) {
+  const iguais = labsMaisRecentes(pontos, campo, hoje);
   if (new Set(iguais.map(p => `${p.valor}|${p.unidade}`)).size !== 1) return null;
-  return primeiro;
+  return iguais[0]!;
 }
 
 export interface EntradaAvaliacaoConsulta {
@@ -110,11 +113,10 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const regraPorta = rs.success ? { id: rs.data.header.id, versao: rs.data.header.versao, fonte: rs.data.header.fonte.referencia } : null;
   for (const [nome,p,minimo] of [["neutrófilos",anc,1500],["plaquetas",plq,100000]] as const) {
     const id = key(nome);
-    const candidatos = labs.filter(l => analito(l.campo) === id && Date.parse(l.data) <= horizonte);
-    const ultimaData = Math.max(-Infinity, ...candidatos.map(l => Date.parse(l.data)));
-    const ultimos = candidatos.filter(l => Date.parse(l.data) === ultimaData);
+    const ultimos = labsMaisRecentes(labs, nome, i.hoje);
     const conflito = new Set(ultimos.map(l => `${l.valor}|${l.unidade}`)).size > 1;
-    const fontes = (p ? [p] : ultimos).map(l => ({ eventId: l.eventId, sourceId: l.sourceId, medidoEm: l.data }));
+    // Um valor concordante pode ter várias evidências; a escolha numérica não descarta suas fontes.
+    const fontes = ultimos.map(l => ({ eventId: l.eventId, sourceId: l.sourceId, medidoEm: l.data }));
     const unidadeValida = p && ["/µL","/uL","/μL"].includes(p.unidade);
     criteriosPorta.push({ schema: "CriterioElegibilidade@1", id: `${id}.limiar`,
       estado: conflito ? "CONFLITO" : !unidadeValida ? "AUSENTE" : p.valor < minimo ? "NAO_ATENDE" : "ATENDE",

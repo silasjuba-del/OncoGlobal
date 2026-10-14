@@ -45,8 +45,10 @@ function dentro(root, path) {
   if (isAbsolute(r) || r === ".." || r.startsWith(`..${sep}`) || resolve(root, r) !== path) throw new Error("CAMINHO_FORA_DA_RAIZ");
 }
 function stringsClinicas(value, contexto = "", caminho = "") {
+  if (typeof value === "string") return [{ texto: value, campo: caminho || "$raiz" }];
   if (!value || typeof value !== "object") return [];
-  return Object.entries(value).flatMap(([key, item]) => {
+  const chaves = Array.isArray(value) ? [] : Object.keys(value).map(key => ({ texto: key, campo: `${caminho}.$chave:${key}` }));
+  return chaves.concat(Object.entries(value).flatMap(([key, item]) => {
     const k = key.normalize("NFD").replace(/[\u0300-\u036f\W_]/g, "").toLowerCase();
     if (item === null || item === undefined) return [];
     if (typeof item === "object") return stringsClinicas(item, `${contexto}.${k}`, `${caminho}.${key}`);
@@ -61,7 +63,7 @@ function stringsClinicas(value, contexto = "", caminho = "") {
     if (k === "codigoibge" && /^\d{7}$/.test(s)) return []; // Identificador do município, não de pessoa.
     const rotulo = /^(endereco|address)$/.test(k) ? "Endereço" : /^(telefone|phone)$/.test(k) ? "Telefone" : null;
     return [{ texto: s, campo: `${caminho}.${key}` }, ...(rotulo ? [{ texto: `${rotulo}: ${s}`, campo: `${caminho}.${key}` }] : [])];
-  });
+  }));
 }
 function conferirTexto(bytes, caminho, triagem) {
   const texto = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
@@ -71,12 +73,14 @@ function conferirTexto(bytes, caminho, triagem) {
   let json = null;
   if (caminho.endsWith(".json")) json = parseJsonUnico(texto);
   let textos;
-  try { textos = json ? stringsClinicas(json) : [{ texto, campo: "$texto" }]; }
+  try { textos = caminho.endsWith(".json") ? stringsClinicas(json) : [{ texto, campo: "$texto" }]; }
   catch { throw new Error(`PHI_ESTRUTURAL_JSON:${caminho}`); }
   // Referências públicas podem conter links. Demais categorias exigem revisão antes de exportar.
   // Somente a categoria numérica distingue identificadores públicos de sequências pessoais.
   // Rótulos como CPF/prontuário continuam avaliados no texto ORIGINAL, mesmo usando esses dígitos.
   const semIdsPublicos = t => t
+    // Nome legado de campo de curadoria (data da revisão), conferido nos dez packs que o utilizam.
+    .replace(/^reducaoPendencias20261011$/, "REVISAO_CORPUS")
     .replace(/\b(?:[0-9a-f]{64}|[0-9a-f]{40})\b/gi, "HASH_REFERENCIA")
     .replace(/\b(?:PMID|PubMed)\s*:?\s*\d{6,9}(?:,\s*\d{6,9})*/g, "REFERENCIAS_PUBMED")
     .replace(/\b(?:NCT\d{8}|ISRCTN\d{8}|ACTRN\d{14}|(?:PMID|PubMed)\s*:?\s*\d{6,9}|PMC\d{6,9}|UMIN\d{9}|LY\d{7}|CNES\s*\d{7}|0[1-8]\d{8})\b/g, "ID_PUBLICO")

@@ -9,6 +9,20 @@ const base:EntradaAvaliacaoConsulta={eventos:[],patientId:paciente.patientId,tum
 function evento(id:string,tipo:string,data:unknown):ClinicalEvent {return {eventId:id,operationId:`op-${id}`,eventIndex:0,patientId:base.patientId,encounterId:base.encounterId,tumorLotId:null,tipo,payload:{data},fontes:[fonteSintetica("fonte-medida")],revisao:"CONFIRMADO",criadoEm:"2026-10-10T10:00:00-03:00",criadoPor:{tipo:"SESSAO",id:"medico"},supersedesEventId:null};}
 const lab=(id:string,campo:string,valor:number,data="2026-10-09T10:00:00-03:00",unidade="mmol/L")=>evento(id,"LabResult",{campo,valor,data,unidade,sourceId:"fonte-medida"});
 describe("auditoria clínica adversarial da composição",()=>{
+ it.each([["neutrofilos",2000],["plaquetas",150000]] as const)("preserva fontes concordantes de %s nos critérios de limiar e validade",(campo,valor)=>{
+  const data="2026-10-09T10:00:00-03:00";
+  const exames=["a","b"].map(sufixo=>({...evento(`lab-${sufixo}`,"LabResult",{campo,valor,data,unidade:"/uL",sourceId:`fonte-${sufixo}`}),fontes:[fonteSintetica(`fonte-${sufixo}`)]}));
+  const antigo=lab("antigo",campo,valor,"2026-10-08T10:00:00-03:00","/uL");
+  for(const atuais of [exames,[...exames].reverse()]) {
+   const r=avaliarConsulta({...base,eventos:[antigo,...atuais]});
+   for(const sufixo of ["limiar","validade"]) {
+    const criterio=r.elegibilidade.criterios?.find(c=>c.id===`${campo}.${sufixo}`);
+    expect(criterio?.estado).toBe("ATENDE");
+    expect(criterio?.fontes).toHaveLength(2);
+    expect(criterio?.fontes).toEqual(expect.arrayContaining(exames.map(e=>({eventId:e.eventId,sourceId:e.fontes[0]!.sourceId,medidoEm:data}))));
+   }
+  }
+ });
  it("critério reprovado não esconde plaquetas ausentes na porta do ciclo",()=>{
   const r=avaliarConsulta({...base,eventos:[lab("anc","neutrofilos",1000,"2026-10-09T10:00:00-03:00","/uL")]});
   expect(r.elegibilidade).toMatchObject({cor:"VERMELHO",criterios:expect.arrayContaining([
