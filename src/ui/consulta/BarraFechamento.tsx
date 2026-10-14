@@ -1,3 +1,5 @@
+import type { AlvoImpressao } from '../../contracts/api/impressao.js';
+export type { AlvoImpressao } from '../../contracts/api/impressao.js';
 import { useState } from "react";
 import type { z } from "zod";
 import { ActionIntent, ConfirmarBloco, type Alerta } from "../../contracts/operacao.js";
@@ -7,11 +9,7 @@ type Confirmar = z.infer<typeof ConfirmarBloco>;
 type Bloco = Confirmar["bloco"];
 type IntentImprimir = z.infer<typeof ActionIntent>;
 
-export interface AlvoImpressao {
-  tipo: string;
-  id: string;
-  versao: number;
-}
+
 
 function marcacaoInicial(documentos: readonly DocumentoBundleVisao[]): Readonly<Record<string, boolean>> {
   const marcados: Record<string, boolean> = {};

@@ -52,6 +52,13 @@ export function dadosDoEvento(evento: ClinicalEvent): Record<string, unknown> | 
     ? data as Record<string, unknown> : null;
 }
 
+/** Escopo sistêmico é do sujeito, independentemente do lote de origem. */
+export function escopoDoEvento(e: ClinicalEvent): "PACIENTE" | "TUMOR" {
+  const d = dadosDoEvento(e);
+  return ["alergias", "comorbidades", "medicamentos", "funcaoOrganica", "exposicoes"].includes(String(d?.campo))
+    || ["LabResult", "TreatmentAdministration"].includes(e.tipo) ? "PACIENTE" : "TUMOR";
+}
+
 function refsDoEvento(data: Record<string, unknown>): RulesetRef[] {
   if (!Array.isArray(data.rulesetRefs)) return [];
   return data.rulesetRefs.filter((v): v is RulesetRef =>
@@ -102,7 +109,7 @@ export function projetarSnapshot(
   // A substituição só tem autoridade dentro do horizonte da consulta projetada.
   // Uma correção de consulta futura não remove o evento da consulta histórica.
   const noHorizonte = eventos.filter((e) => e.patientId === patientId
-    && (e.tumorLotId === tumorLotId || e.tumorLotId === null)
+    && (escopoDoEvento(e) === "PACIENTE" || e.tumorLotId === tumorLotId || e.tumorLotId === null)
     && (!alvo.length || Date.parse(e.criadoEm) <= cutoff));
   const relevantes = eventosVigentes(noHorizonte);
   const campos: Record<string, ValorProjetado> = Object.create(null);

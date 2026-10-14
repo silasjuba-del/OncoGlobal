@@ -52,11 +52,11 @@ describe("GROK-03 alertarFeve", () => {
     expect(r.bloqueiaSalvar).toBe(false);
   });
 
-  it("FEVE medida 0 alerta; é valor, não ausência", () => {
+  it("F0-COMPLEMENTO: FEVE 0 é inválida e fica pendente para conferência", () => {
     const r = alertarFeve(entrada({ feve: { percentual: 0, metodo: "Simpson", data: "2026-03-01" } }), rs);
-    expect(r.estado).toBe("ALERTA");
-    expect(r.percentual).toBe(0);
-    expect(r.motivos[0]?.texto).toContain("0%");
+    expect(r.estado).toBe("PENDENTE");
+    expect(r.percentual).toBeNull();
+    expect(r.pendentes[0]?.codigo).toBe("pendente.feve.valor");
   });
 
   it("sem antraciclina nem anti-HER2 não alerta, mesmo com FEVE baixa ou ausente", () => {

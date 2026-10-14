@@ -1,27 +1,15 @@
+import type { EstadoChip, LeituraEstoque, ValidadeChip, ChipEstoque } from '../../contracts/api/estoque.js';
+export type { EstadoChip, LeituraEstoque, ValidadeChip, ChipEstoque } from '../../contracts/api/estoque.js';
 // GRK-07 · Chip de estoque. Informa; não trava; não sugere troca. Leitura velha → DESCONHECIDO.
 import { diferencaDiasCivis, fonteInformada } from "../base.js";
 
-export type EstadoChip = "DISPONIVEL" | "INDISPONIVEL" | "DESCONHECIDO";
 
-export interface LeituraEstoque {
-  origem: string;
-  data: string;
-  estado: "DISPONIVEL" | "INDISPONIVEL";
-}
 
-export interface ValidadeChip {
-  dias: number;
-  fonte: string;
-}
 
-export interface ChipEstoque {
-  estado: EstadoChip;
-  origem: string | null;
-  data: string | null;
-  trava: false;
-  sugereTroca: false;
-  motivo: string;
-}
+
+
+
+
 
 export function avaliarChip(
   leitura: LeituraEstoque | null,

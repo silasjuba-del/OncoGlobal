@@ -64,6 +64,7 @@ it("vincula apenas EXTRAÇÃO_RASCUNHO não vinculada a paciente existente e con
       sourceType: "medical_note", rawTranscript: "Diagnóstico: adenocarcinoma. Sem evidência de metástases.",
     });
     expect(extracao.status).toBe(201);
+    expect((await post(f, "/consulta/carregar", { patientId: pacienteB, encounterId: "encontro-72" })).status).toBe(200);
     const real = await post(f, "/consulta/rascunho/revisar", {
       draftId: extracao.data.draftId, expectedRevision: 0, patientId: pacienteB,
     });
@@ -87,7 +88,7 @@ it("não confirma em lote um rascunho clínico não exibido e mantém o document
     const patientId = "Paciente Teste 73", encounterId = "encontro-73";
     semearPaciente(f, patientId, encounterId);
     salvarRascunho(f, { draftId: "documento-73", patientId,
-      payload: { documentId: "documento-73", documentVersion: 1, documentHash: "a".repeat(64), encounterId, tumorLotId: null } });
+      payload: { documentId: "documento-73", documentVersion: 1, documentHash: "a".repeat(64), texto:"Documento sintético para revisão", encounterId, tumorLotId: null } });
     salvarRascunho(f, { draftId: "extracao-73", patientId,
       payload: { kind: "EXTRACAO_RASCUNHO", contexto: { patientId, encounterId, tumorLotId: null } } });
 
@@ -119,8 +120,8 @@ it("preserva contexto paciente/encontro na prescrição e limpa seleção invál
   try {
     const pacienteA = "Paciente Teste 74", pacienteB = "Paciente Teste 75";
     semearPaciente(f, pacienteA, "encontro-74"); semearPaciente(f, pacienteB, "encontro-75");
-    expect((await post(f, "/consulta/carregar", { patientId: pacienteA })).status).toBe(200);
-    expect((await post(f, "/consulta/carregar", { patientId: pacienteB })).status).toBe(200);
+    expect((await post(f, "/consulta/carregar", { patientId: pacienteA, encounterId: "encontro-74" })).status).toBe(200);
+    expect((await post(f, "/consulta/carregar", { patientId: pacienteB, encounterId: "encontro-75" })).status).toBe(200);
 
     const corpoA = { patientId: pacienteA, encounterId: "encontro-74", tumorLotId: null, expression: "Medicamento Teste 10 mg" };
     const contagensAntes = listarDrafts(f.db, pacienteA).length + listarDrafts(f.db, pacienteB).length;
@@ -135,11 +136,11 @@ it("preserva contexto paciente/encontro na prescrição e limpa seleção invál
     expect(lerDraft(f.db, draftId)).toMatchObject({ patientId: pacienteB,
       payload: { kind: "PRESCRICAO_RASCUNHO", status: "RASCUNHO", assinada: false } });
 
-    expect((await post(f, "/consulta/carregar", { patientId: "Paciente Teste 79" })).status).toBe(404);
+    expect((await post(f, "/consulta/carregar", { patientId: "Paciente Teste 79", encounterId: "encontro-79" })).status).toBe(404);
     const depoisDaFalha = listarDrafts(f.db, pacienteB).length;
     expect((await post(f, "/consulta/prescricao/rascunho", corpoB)).status).toBe(409);
     expect(listarDrafts(f.db, pacienteB)).toHaveLength(depoisDaFalha);
-    expect((await post(f, "/consulta/carregar", { patientId: pacienteB })).status).toBe(200);
+    expect((await post(f, "/consulta/carregar", { patientId: pacienteB, encounterId: "encontro-75" })).status).toBe(200);
     expect((await post(f, "/consulta/prescricao/rascunho", corpoB)).status).toBe(201);
   } finally { await f.close(); }
 });

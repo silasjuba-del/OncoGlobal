@@ -1,0 +1,96 @@
+{
+  "header": {
+    "id": "dieta-por-toxicidade",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.3 [CODEX M1-2]",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "publico": "PACIENTE — linguagem simples, frases curtas",
+  "toxicidades": [
+    {
+      "id": "nausea",
+      "texto": "Coma torrada, biscoito salgado, arroz, batata, iogurte ou gelatina. Evite fritura e comida com cheiro forte. Coma devagar. Gengibre e limão podem ajudar. Não deite logo após comer.",
+      "fontes": [
+        "MSKCC (português, mskcc.org)",
+        "AC Camargo — guia de radioterapia (accamargo.org.br)"
+      ]
+    },
+    {
+      "id": "mucosite",
+      "texto": "Evite ácidos (laranja, limão, tomate), picantes e muito salgados. Comida morna, macia, cozida, em purê ou batida. Use canudo para líquidos frios. Se aftas impedirem de comer, procure o serviço.",
+      "fontes": [
+        "AC Camargo — 'Seu guia de quimioterapia' 2025 (URL completa pendente)",
+        "HRCP/Passos (hrcpassos.org.br)"
+      ]
+    },
+    {
+      "id": "diarreia",
+      "texto": "Beba muito líquido em pequenos goles (soro, água, caldos). Evite leite e derivados por alguns dias. Evite fritura e comida muito gordurosa. Coma arroz, banana, torrada e frango cozido. Se durar mais de 1 dia ou vier com vômito, procure o serviço.",
+      "fontes": [
+        "AC Camargo 2025 (guia de alimentação na QT)"
+      ],
+      "ressalva": "Diarreia >24 h conecta com red flag (D-W9-28) — saída PS."
+    },
+    {
+      "id": "constipacao",
+      "texto": "Beba água durante o dia. Coma frutas com casca, verdura cozida e grãos integrais se liberado. Ande um pouco todos os dias. Se não evacuar por mais de 2 dias, avise a equipe antes de tomar laxante por conta.",
+      "fontes": [
+        "INCA — Constipação intestinal no câncer avançado (ninho.inca.gov.br/…/12758)"
+      ]
+    },
+    {
+      "id": "perda-de-peso",
+      "texto": "Enriqueça a comida: adicione ovo, leite em pó, azeite ou manteiga na sopa e no purê. Coma a cada 2-3 horas. Não pule refeições. Se o cinto ou a roupa folgarem, avise a equipe.",
+      "fontes": [
+        "INCA — cartilha músculo/sarcopenia (…/18160) e 'Dietas restritivas: fique fora dessa!' (…/12782)"
+      ]
+    },
+    {
+      "id": "neutropenia-seguranca",
+      "texto": "Com carne, frango e peixe SEMPRE bem passados. Ovo com gema dura. Água filtrada ou fervida. Nada cru de origem animal. Descongele na geladeira e não recongele. Lave frutas e verduras com cuidado.",
+      "fontes": [
+        "INCA Guia 2020 'Queda de imunidade' + Cartilha TCTH INCA"
+      ],
+      "ressalva": "Febre acima de 37,8 °C = PS agora (não é orientação dietética — é sinal de alarme; D-W9-38)."
+    }
+  ],
+  "proibicoes": [
+    "Receita caseira com dose",
+    "Texto ao paciente sem aprovação"
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO_APLICACAO_PACIENTE",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DIRETRIZ",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.3 [CODEX M1-2]",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "portas": {
+    "consome": [
+      "toxicidade.vigente (CTCAE v6: Nausea, Vomiting, Mucositis oral, Diarrhea, Constipation, Dysgeusia, Anorexia, Neutrophil count decreased)",
+      "5-ctcae-acao (suporte)"
+    ],
+    "oferece": [
+      "documento.orientacaoDieta"
+    ],
+    "gatilhos": [
+      "termo CTCAE v6 registrado no encontro"
+    ]
+  }
+}

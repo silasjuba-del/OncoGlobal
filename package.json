@@ -1,7 +1,7 @@
 {
   "name": "oncoglobal",
   "version": "0.0.1",
-  "description": "OncoGlobal WORK — motor longitudinal de contexto oncológico (PLANO v1.1)",
+  "description": "OncoGlobal WORK \u2014 motor longitudinal de contexto oncol\u00f3gico (PLANO v1.1)",
   "directories": {
     "doc": "docs",
     "test": "tests"
@@ -10,11 +10,14 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "check:boundaries": "node scripts/check-boundaries.mjs",
+    "check:boundaries:fechar-f1-s3": "node scripts/check-boundaries.mjs --fechar-fase=F1-S3",
     "check:corpus": "node scripts/validate-corpus.mjs",
     "verify": "npm run typecheck && npm run check:boundaries && npm run check:corpus && npm test",
     "ui:dev": "vite",
     "oncoassist:local": "node scripts/iniciar-oncoassist.mjs",
-    "ui:build": "vite build"
+    "ui:build": "vite build",
+    "test:f1": "vitest run --config tests/adv/vitest.f1.config.ts",
+    "verify:f1": "npm run check:boundaries:fechar-f1-s3 && npm run test:f1"
   },
   "repository": {
     "type": "git",
@@ -27,10 +30,13 @@
   },
   "homepage": "https://github.com/silasjuba-del/OncoGlobal#readme",
   "dependencies": {
+    "@napi-rs/canvas": "1.0.10",
+    "@tesseract.js-data/por": "^1.0.0",
     "@typesafe-ai/sdk": "0.6.0",
     "pdfjs-dist": "^6.4.299",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
+    "tesseract.js": "^7.0.0",
     "zod": "^4.6.5"
   },
   "devDependencies": {

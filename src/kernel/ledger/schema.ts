@@ -53,6 +53,22 @@ export function criarSchema(db: DatabaseSync): void {
       resultado TEXT NOT NULL,
       atualizadoEm TEXT NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS estimulo_tecnico (
+      id TEXT PRIMARY KEY, operationId TEXT NOT NULL, conteudo TEXT NOT NULL, criadoEm TEXT NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS execucao_tecnica (
+      runId TEXT NOT NULL REFERENCES estimulo_tecnico(id), indice INTEGER NOT NULL,
+      estado TEXT NOT NULL CHECK(estado IN ('PENDENTE','EM_CURSO','PRONTO','CONCLUIDO','FALHOU')),
+      conteudo TEXT NOT NULL, criadoEm TEXT NOT NULL, PRIMARY KEY(runId,indice)
+    );
+    CREATE TRIGGER IF NOT EXISTS estimulo_no_update BEFORE UPDATE ON estimulo_tecnico
+      BEGIN SELECT RAISE(ABORT, 'estimulo append-only'); END;
+    CREATE TRIGGER IF NOT EXISTS estimulo_no_delete BEFORE DELETE ON estimulo_tecnico
+      BEGIN SELECT RAISE(ABORT, 'estimulo append-only'); END;
+    CREATE TRIGGER IF NOT EXISTS execucao_no_update BEFORE UPDATE ON execucao_tecnica
+      BEGIN SELECT RAISE(ABORT, 'execucao append-only'); END;
+    CREATE TRIGGER IF NOT EXISTS execucao_no_delete BEFORE DELETE ON execucao_tecnica
+      BEGIN SELECT RAISE(ABORT, 'execucao append-only'); END;
     CREATE TRIGGER IF NOT EXISTS clinical_event_no_update BEFORE UPDATE ON clinical_event
       BEGIN SELECT RAISE(ABORT, 'clinical_event append-only'); END;
     CREATE TRIGGER IF NOT EXISTS clinical_event_no_delete BEFORE DELETE ON clinical_event

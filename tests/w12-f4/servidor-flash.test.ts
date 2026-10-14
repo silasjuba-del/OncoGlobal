@@ -88,7 +88,7 @@ async function ambiente(opts: { comSettings?: boolean } = {}) {
   };
   persistir("Paciente", { patientId: PACIENTE, identificadores: [], nome: "Paciente Teste 41", nascimento: null,
     sexoCadastral: "NAO_INFORMADO", divergencia: false });
-  const carregar = () => post("/consulta/carregar", { patientId: PACIENTE });
+  const carregar = () => post("/consulta/carregar", { patientId: PACIENTE, encounterId: ENCONTRO });
   const ctx = { patientId: PACIENTE, encounterId: ENCONTRO, tumorLotId: null as string | null };
   const finalizar = async (p: object, key: string) => {
     const prep = await post("/consulta/flash/preparar", { ...ctx, plano: p, idempotencyKey: key });
@@ -296,7 +296,8 @@ describe("W12-F4 · visão entrega a Flash do ledger", () => {
     const visao = await f.carregar();
     expect(visao.status).toBe(200);
     expect(visao.body.flash).toEqual({ exames: [], retornoDias: null, modeloPadraoSalvo: false,
-      laboratorioPreMarcado: false, imagemPreMarcada: false });
+      laboratorioPreMarcado: false, imagemPreMarcada: false, laboratorios: [], alergia: "Não informada", toxicidades: [],
+      avisos: [], sugestoesLaboratorio: [] });
   });
 
   it("sem serviço de configuração: continua sem modelo", async () => {
@@ -311,12 +312,12 @@ describe("W12-F4 · visão entrega a Flash do ledger", () => {
       fraseLaudo: "carcinoma invasivo de tipo não especial", situacao: "SEM_REFERENCIA" });
     f.persistir("ImagingReport", { dataClinica: "2026-10-01", nome: "TC de tórax",
       fraseLaudo: "sem lesão nova", situacao: "DENTRO_DO_LIMITE" });
-    f.persistir("ImagingReport", { dataClinica: "2026-10-02", nome: "RM sem frase", situacao: "SEM_REFERENCIA" });
+    f.persistir("ImagingReport", { dataClinica: "2026-10-02", nome: "RM sem frase", textoLaudo: "Material literal sintético sem frase estruturada", situacao: "SEM_REFERENCIA" });
     f.persistir("ImagingReport", { dataClinica: "2026-12-31", nome: "Exame de data futura", fraseLaudo: "x" });
     const visao = await f.carregar();
     expect(visao.body.flash.exames).toEqual([
-      { data: "2026-10-01", nome: "TC de tórax", fraseLaudo: "sem lesão nova", situacao: "DENTRO_DO_LIMITE" },
-      { data: "2026-09-20", nome: "Biópsia de mama", fraseLaudo: "carcinoma invasivo de tipo não especial", situacao: "SEM_REFERENCIA" },
+      { data: "2026-10-01", nome: "TC de tórax", fraseLaudo: "sem lesão nova", situacao: "DENTRO_DO_LIMITE", eventId: "event-f4-3", sourceIds: ["fonte-f4-3"] },
+      { data: "2026-09-20", nome: "Biópsia de mama", fraseLaudo: "carcinoma invasivo de tipo não especial", situacao: "SEM_REFERENCIA", eventId: "event-f4-2", sourceIds: ["fonte-f4-2"] },
     ]);
   });
 

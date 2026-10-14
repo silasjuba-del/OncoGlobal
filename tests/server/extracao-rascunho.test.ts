@@ -59,6 +59,10 @@ it("persiste extração como rascunho não vinculado e recupera após reabrir o 
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
     body: JSON.stringify({ draftId: result.draftId, expectedRevision: 0, patientId: "Paciente Teste 99" }) });
   expect(destinoInexistente.status).toBe(404);
+  const selecao = await fetch(`http://127.0.0.1:${address.port}/consulta/carregar`, { method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({patientId: paciente.patientId, encounterId: "encontro-31"}) });
+  expect(selecao.status).toBe(200);
   const review = await fetch(`http://127.0.0.1:${address.port}/consulta/rascunho/revisar`, { method: "POST",
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
     body: JSON.stringify({ draftId: result.draftId, expectedRevision: 0, patientId: paciente.patientId }) });
@@ -66,7 +70,7 @@ it("persiste extração como rascunho não vinculado e recupera após reabrir o 
   expect(await review.json()).toMatchObject({ codigo: "VINCULO_REVISTO", linkedPatientId: paciente.patientId, criaEventoClinico: false });
   const consulta = await fetch(`http://127.0.0.1:${address.port}/consulta/carregar`, { method: "POST",
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ patientId: paciente.patientId }) });
+    body: JSON.stringify({ patientId: paciente.patientId, encounterId: "encontro-31" }) });
   expect(consulta.status).toBe(200);
   expect(await consulta.json()).toMatchObject({ patientId: paciente.patientId, encounterId: "encontro-31",
     cabecalho: { paciente, semaforo: "PENDENTE" } });

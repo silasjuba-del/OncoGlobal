@@ -15,5 +15,10 @@ export interface RunOrk {
   etapa: string;
   resultados: ResultadoPasso[];
 }
-export type AgenteFake = (contexto: Readonly<{ evento: string; resultados: readonly ResultadoPasso[] }>)
+export type AgenteFake = (contexto: Readonly<{ evento: string; resultados: readonly ResultadoPasso[]; signal?: AbortSignal }>)
   => Promise<unknown>;
+
+export interface OpcoesOrk {
+  onTimeout?: (id: string) => void;
+  aoDescartarTardio?: (id: string) => void;
+}

@@ -1,0 +1,96 @@
+{
+  "header": {
+    "id": "campos-laudo-endoscopico",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "referenciais por procedimento (consolidado §3.4 packs; intervalos só com fonte e cenário definido)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "finalidade": "O que cada laudo endoscópico deve conter para o app extrair, por procedimento (IDs do catálogo entre colchetes).",
+  "procedimentos": [
+    {
+      "id": "EDA",
+      "campos": [
+        "localização da lesão (terços)",
+        "aspecto (Paris/Borrmann quando relatado)",
+        "biópsias (número/sítios)",
+        "hemostasia/complicação"
+      ],
+      "usoPorTumor": "Gástrico/esofágico: diagnóstico + vigilância pós-mucosectomia (q6m no 1º ano → anual até 5 — NCCN Stomach 2026); esôfago (pack 06 local)"
+    },
+    {
+      "id": "COLONOSCOPIA",
+      "campos": [
+        "preparo (adequado/inadequado)",
+        "extensão alcançada (ceco)",
+        "lesões (número, tamanho, local, pit pattern quando relatado)",
+        "polipectomia/biópsia",
+        "complicações"
+      ],
+      "usoPorTumor": "Colorretal: no diagnóstico e na vigilância ano 1 → ano 3 → q5 anos (NCCN Colon v2.2026; cadência 3/5 via PMC12146933)"
+    },
+    {
+      "id": "RETOSSIGMOIDOSCOPIA",
+      "campos": [
+        "extensão",
+        "lesões",
+        "tonus/estase quando relatado"
+      ],
+      "usoPorTumor": "Reto pós-tratamento não cirúrgico: q3-4m anos 1-2 → q6m (NCCN Rectal 2026)"
+    },
+    {
+      "id": "BRONCOSCOPIA",
+      "campos": [
+        "via (rígida/flexível)",
+        "lesão endobrônquica (localização, grau de obstrução)",
+        "biópsias/lavado/escovado",
+        "complicações"
+      ],
+      "usoPorTumor": "Pulmão: diagnóstico/estadiamento (pack pulmão)"
+    },
+    {
+      "id": "CISTOSCOPIA",
+      "campos": [
+        "lesão vesical (número, tamanho, local)",
+        "reseção (TUR) e fragmentos",
+        "complicações"
+      ],
+      "usoPorTumor": "Bexiga (referências do 07-tumor-packs-6-10.md — sem pack F1 novo)"
+    }
+  ],
+  "regraIntervalos": "Intervalo de repetição só entra com fonte E cenário definido (citados acima por procedimento); sem fonte = null.",
+  "proibicoes": [
+    "Normalizar 'preparo inadequado' em exame completo",
+    "Inferir alcance não relatado"
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DIRETRIZ",
+      "referencia": "referenciais por procedimento (consolidado §3.4 packs; intervalos só com fonte e cenário definido)",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "portas": {
+    "consome": [
+      "6-pack-tumor (indicação e intervalo de vigilância)"
+    ],
+    "oferece": [
+      "exames.realizados[EDA|COLONOSCOPIA|RETOSSIGMOIDOSCOPIA|BRONCOSCOPIA|CISTOSCOPIA|...] → pack, resumo do caso"
+    ]
+  }
+}

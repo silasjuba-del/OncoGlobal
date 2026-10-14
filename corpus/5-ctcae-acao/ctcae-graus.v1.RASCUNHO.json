@@ -1,0 +1,177 @@
+{
+  "header": {
+    "id": "ctcae-graus",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "NCI/CTEP CTCAE v6.0 (MedDRA 28.0) — XLSX oficial, Clean Copy e Mapping (SHA-256 4d7b4fcfdcb25c45a23b02c07fcb20eab7f284b23862e4e4e64bb8823c2f440b); CSV local docs/referencias/onco-referencia/02-ctcae-v6.csv com 55 registros, parseado integralmente nesta execução",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "nota": "18 tópicos do prompt mestre §12.1. Conferência desta execução: 17/18 termos PRESENTES no CSV local (R2–R42); ausente apenas 'Urinary protein increased'. Regras Codex M4-1/A16: não exigir graus 1–4 quando o termo oficial não os possui; preservar grau 5 quando aplicável; 'Proteinuria' substituído por 'Urinary protein increased' (10046553); 'Rash acneiform' excluído → Mapping 'Rash maculo-papular' com nota 'Pustular drug eruption' (10082061) em EGFR-i; mapeamento não conserva grau v5; dado ausente não vira grau 0. Os graus resumidos abaixo transcrevem o CSV local; critérios completos, MedDRA e limites inclusivos/exclusivos devem vir do XLSX oficial na migração. Termos laboratoriais/clínicos já existentes em rulesets/salao-ctcae.v1.json são preservados.",
+  "termos": [
+    {
+      "id": "CT-01",
+      "topico": "Diarreia",
+      "termoOficial": "Diarrhea",
+      "csvRegistro": "R4",
+      "graus": "G1 consistência/frequência; G2 +4–6 evac/dia sobre basal; G3 ≥7/dia, hospitalização, IV; G4 risco de vida, urgência; G5 óbito"
+    },
+    {
+      "id": "CT-02",
+      "topico": "Mucosite oral",
+      "termoOficial": "Mucositis oral",
+      "csvRegistro": "R6",
+      "graus": "G1 assintomático/leve; G2 dor moderada/úlcera sem interferir ingestão; G3 dor intensa interferindo; G4 risco de vida; G5 óbito"
+    },
+    {
+      "id": "CT-03",
+      "topico": "Náusea",
+      "termoOficial": "Nausea",
+      "csvRegistro": "R2",
+      "graus": "G1 perda de apetite; G2 ingestão diminuída sem perda de peso/desidratação; G3 ingestão inadequada, sonda/NPT/hospitalização; sem G4/G5"
+    },
+    {
+      "id": "CT-04",
+      "topico": "Vômito",
+      "termoOficial": "Vomiting",
+      "csvRegistro": "R3",
+      "graus": "G1 sem intervenção; G2 hidratação IV ambulatorial; G3 sonda/NPT/hospitalização; G4 risco de vida; G5 óbito"
+    },
+    {
+      "id": "CT-05",
+      "topico": "Neuropatia periférica sensitiva",
+      "termoOficial": "Peripheral sensory neuropathy",
+      "csvRegistro": "R10",
+      "graus": "G1 sintomas leves; G2 moderados, limitando AVD instrumental; G3 graves, limitando AVD de autocuidado; G4 risco de vida"
+    },
+    {
+      "id": "CT-06",
+      "topico": "Síndrome mão-pé",
+      "termoOficial": "Palmar-plantar erythrodysesthesia syndrome",
+      "csvRegistro": "R11",
+      "graus": "G1 alterações mínimas (eritema/edema/hiperceratose); G2 descamação/bolhas/sangramento limitando AVD instrumental; G3 graves limitando autocuidado; sem G4"
+    },
+    {
+      "id": "CT-07",
+      "topico": "Fadiga",
+      "termoOficial": "Fatigue",
+      "csvRegistro": "R8",
+      "graus": "conforme registro R8 do CSV (escala de limitação funcional)"
+    },
+    {
+      "id": "CT-08",
+      "topico": "Reação infusional",
+      "termoOficial": "Infusion related reaction",
+      "csvRegistro": "R42",
+      "graus": "conforme registro R42 do CSV; distinguir de Allergic reaction (R43)"
+    },
+    {
+      "id": "CT-09",
+      "topico": "Rash (nomenclatura v6)",
+      "termoOficial": "Rash maculo-papular",
+      "csvRegistro": "R12",
+      "graus": "G1 assintomático; G2 sintomas leves; G3 >50% superfície ou sintomas moderados/graves; critérios G4/G5 no registro",
+      "nota": "'Rash acneiform' EXCLUÍDO da v6; em EGFR-i considerar 'Pustular drug eruption' (10082061). Mapeamento não conserva grau v5."
+    },
+    {
+      "id": "CT-10",
+      "topico": "Hipertensão",
+      "termoOficial": "Hypertension",
+      "csvRegistro": "R25",
+      "graus": "G1 inexistente na v6; G2 PAS 140–159/PAD 90–99 recorrente ou sintomática; G3 PAS 160–179/PAD 100–109 persistente ou indicando >1 fármaco; G4 PAS ≥180/PAD ≥110, risco de vida"
+    },
+    {
+      "id": "CT-11",
+      "topico": "Proteinúria (nomenclatura v6)",
+      "termoOficial": "Urinary protein increased",
+      "csvRegistro": "AUSENTE_NO_CSV",
+      "graus": "Adultos, urina 24 h: G1 ≥LSN e <1,0 g; G2 1,0 a <3,5 g; G3 ≥3,5 g. Fita e P:C têm critérios próprios; pediatria difere; 24 h prevalece",
+      "pendencia": "ACRESCENTAR_NO_CSV_LOCAL (conferência Codex: termo antigo 'Proteinuria' gera grau sem correspondência v6)"
+    },
+    {
+      "id": "CT-12",
+      "topico": "ALT e AST (dois termos)",
+      "termoOficial": "Alanine aminotransferase increased (R22); Aspartate aminotransferase increased (R23)",
+      "csvRegistro": "R22 e R23",
+      "graus": "G1 >LSN–3,0×LSN (basal normal) ou 1,0–1,5× basal; G2 >3–5×LSN ou >1,5–2× basal; G3 >5–20×LSN ou >2–4× basal; G4 >20×LSN"
+    },
+    {
+      "id": "CT-13",
+      "topico": "Bilirrubina",
+      "termoOficial": "Blood bilirubin increased",
+      "csvRegistro": "R24",
+      "graus": "G1 >LSN–1,5×LSN ou 1,0–1,5× basal; G2 >1,5–3×LSN ou >1,5–2,5× basal; G3 >3–10×LSN; G4 >10×LSN"
+    },
+    {
+      "id": "CT-14",
+      "topico": "Creatinina",
+      "termoOficial": "Creatinine increased",
+      "csvRegistro": "R21",
+      "graus": "G1 >LSN–1,5×LSN; G2 >1,5–3×LSN (ou basal); G3 >3–6×LSN; G4 >6×LSN"
+    },
+    {
+      "id": "CT-15",
+      "topico": "Neutropenia (contagem)",
+      "termoOficial": "Neutrophil count decreased",
+      "csvRegistro": "R14",
+      "graus": "G1 <1500–1000/mm³; G2 <1000–500; G3 <500–100; G4 <100 (conferido Codex M4-1)",
+      "nota": "Neutropenia FEBRIL é registro próprio (R17) — diagnóstico, não linha de graduação isolada."
+    },
+    {
+      "id": "CT-16",
+      "topico": "Colite imunomediada",
+      "termoOficial": "Colitis",
+      "csvRegistro": "R30",
+      "graus": "conforme registro R30 do CSV"
+    },
+    {
+      "id": "CT-17",
+      "topico": "Pneumonite",
+      "termoOficial": "Pneumonitis",
+      "csvRegistro": "R29",
+      "graus": "conforme registro R29 do CSV"
+    },
+    {
+      "id": "CT-18",
+      "topico": "Hipotireoidismo",
+      "termoOficial": "Hypothyroidism",
+      "csvRegistro": "R31",
+      "graus": "conforme registro R31 do CSV"
+    }
+  ],
+  "termosVizininhosUteis": {
+    "nota": "Presentes no CSV e relevantes para o serviço: QTc prolongado (R28), disfunção ventricular esquerda (R27), febre (R47), sepse (R48), extravasamento (R49), TEV (R26), hiper/hipoglicemia (R35), adrenal (R33), hipofisite (R34), febrile neutropenia (R17).",
+    "acao": "Migração Codex pode referenciar estes registros sem novo levantamento."
+  },
+  "resumoCuradoria": {
+    "termosNoEscopo": 18,
+    "presentesNoCsvLocal": 17,
+    "ausentes": [
+      "Urinary protein increased → ACRESCENTAR"
+    ],
+    "comGrausJaTranscritos": 13,
+    "referenciadosSemTranscricao": 5,
+    "nota": "Nenhum critério foi regredido a v5; grau 5 preservado onde existe. Unidade, basal e limites inclusivos/exclusivos vêm do XLSX oficial na migração."
+  },
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DIRETRIZ",
+      "referencia": "NCI/CTEP CTCAE v6.0 (MedDRA 28.0) — XLSX oficial, Clean Copy e Mapping (SHA-256 4d7b4fcfdcb25c45a23b02c07fcb20eab7f284b23862e4e4e64bb8823c2f440b); CSV local docs/referencias/onco-referencia/02-ctcae-v6.csv com 55 registros, parseado integralmente nesta execução",
+      "trecho": null,
+      "edicao": "v6.0, 2025"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  }
+}

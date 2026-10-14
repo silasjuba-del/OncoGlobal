@@ -1,0 +1,25 @@
+{
+  "header": {
+    "id": "cumulativo-tetos",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-10",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "D-F0C-08",
+      "trecho": "Doxorrubicina 550 mg/m², epirrubicina 900 mg/m², mitoxantrona 140 mg/m², bleomicina 400 U e 200 U/m², cisplatina 300 mg/m², oxaliplatina 850 mg/m². Cada droga no próprio teto. Chegar no teto acende alarme vermelho, sem bloqueio. Item parcial acende alaranjado. Dado ausente continua pendente.",
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-10"
+  },
+  "decisao": "D-F0C-08",
+  "limites": [
+    { "ativo": true, "regraId": "TETO-DOXORRUBICINA", "versao": "2026-10-10", "droga": "doxorrubicina", "unidade": "mg/m2", "maximo": 550, "comparador": "GTE", "classe": "regraLocal", "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "D-F0C-08", "trecho": "Doxorrubicina 550 mg/m²." } },
+    { "ativo": true, "regraId": "TETO-EPIRUBICINA", "versao": "2026-10-10", "droga": "epirrubicina", "unidade": "mg/m2", "maximo": 900, "comparador": "GTE", "classe": "regraLocal", "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "D-F0C-08", "trecho": "Epirrubicina 900 mg/m²." } },
+    { "ativo": true, "regraId": "TETO-MITOXANTRONA", "versao": "2026-10-10", "droga": "mitoxantrona", "unidade": "mg/m2", "maximo": 140, "comparador": "GTE", "classe": "regraLocal", "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "D-F0C-08", "trecho": "Mitoxantrona 140 mg/m²." } },
+    { "ativo": true, "regraId": "TETO-BLEOMICINA-U", "versao": "2026-10-10", "droga": "bleomicina", "unidade": "U", "maximo": 400, "comparador": "GTE", "classe": "regraLocal", "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "D-F0C-08", "trecho": "Bleomicina 400 U totais." } },
+    { "ativo": true, "regraId": "TETO-BLEOMICINA-UM2", "versao": "2026-10-10", "droga": "bleomicina", "unidade": "U/m2", "maximo": 200, "comparador": "GTE", "classe": "regraLocal", "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "D-F0C-08", "trecho": "Bleomicina 200 U/m²." } },
+    { "ativo": true, "regraId": "TETO-CISPLATINA", "versao": "2026-10-10", "droga": "cisplatina", "unidade": "mg/m2", "maximo": 300, "comparador": "GTE", "classe": "regraLocal", "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "D-F0C-08", "trecho": "Cisplatina 300 mg/m²." } },
+    { "ativo": true, "regraId": "TETO-OXALIPLATINA", "versao": "2026-10-10", "droga": "oxaliplatina", "unidade": "mg/m2", "maximo": 850, "comparador": "GTE", "classe": "regraLocal", "fonte": { "tipo": "DECISAO_MEDICA", "referencia": "D-F0C-08", "trecho": "Oxaliplatina 850 mg/m²." } }
+  ]
+}

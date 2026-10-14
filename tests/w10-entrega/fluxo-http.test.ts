@@ -76,6 +76,28 @@ async function revisarComExibicao(app: Awaited<ReturnType<typeof iniciar>>, pedi
   return app.request("/consulta/rascunho/revisar", exibida);
 }
 
+/** O recibo atesta o resumo exato; não é um segundo fato nem uma decisão sobre um candidato. */
+function verificarRecibo(db: ReturnType<typeof abrirLedger>, operationId: string) {
+  const eventos = listarEventos(db, PATIENT).filter((event) => event.operationId === operationId);
+  const recibos = eventos.filter((event) => (event.payload as any).data.kind === "ExtracaoResumoRevisado");
+  expect(recibos).toHaveLength(1);
+  const evento = recibos[0]!, recibo = (evento.payload as any).data;
+  expect(evento.tipo).toBe("ReviewDecision");
+  expect(evento.revisao).toBe("CONFIRMADO");
+  expect(evento.encounterId).toBe(ENCOUNTER);
+  expect(evento.criadoPor).toMatchObject({ tipo: "SESSAO", id: "medico-teste-88" });
+  expect(recibo).not.toHaveProperty("campo"); expect(recibo).not.toHaveProperty("valor");
+  const draft = lerDraft(db, recibo.draftId)!;
+  expect(draft).toBeDefined();
+  expect(draft.patientId).toBe(PATIENT);
+  expect(recibo).toMatchObject({ draftRevision: draft.revision, sourceId: draft.sourceId,
+    conteudoHash: hashConteudoExibido(draft.payload), origem: (draft.payload as any).origem });
+  expect(evento.fontes.length).toBeGreaterThan(0);
+  expect(evento.fontes.every((fonte) => fonte.sourceId === recibo.sourceId
+    && fonte.contentHash === recibo.sourceContentHash)).toBe(true);
+  return { eventos, candidatos: eventos.filter((event) => event !== evento) };
+}
+
 describe("W10 entrega · extração, revisão explícita e recuperação HTTP", () => {
   it("autentica, exige revisão por fato, rejeita replay divergente/cross-patient/stale e recupera evolução após reabrir SQLite", async () => {
     const dir = mkdtempSync(join(tmpdir(), "w10-entrega-http-"));
@@ -88,7 +110,7 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
       expect((await app.request("/consulta/extrair", { recordingId: "rec-88", sourceId: "src-88",
         sourceType: "imaging_report", rawTranscript: "Lesão pulmonar 38 mm" }, false)).status).toBe(401);
 
-      expect((await app.request("/consulta/carregar", { patientId: PATIENT })).status).toBe(200);
+      expect((await app.request("/consulta/carregar", { patientId: PATIENT, encounterId: ENCOUNTER })).status).toBe(200);
       const sourceText = "10/09/2026 Lesão pulmonar 38 mm\nNódulo linfonodal axilar 14 mm eixo curto";
       const extracted = await app.request("/consulta/extrair", { recordingId: "gravacao-sintetica-88",
         sourceId: "laudo-sintetico-88", sourceType: "imaging_report", rawTranscript: sourceText });
@@ -114,7 +136,8 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
       expect(reviewed.data.evolucaoRascunho).toContain(target14.id);
       expect(reviewed.data.evolucaoRascunho).not.toMatch(/\b[cp]?N[0-3X]|\bM[0-1X]\b/u);
       expect(lerDraft(db, extracted.data.draftId)).toMatchObject({ patientId: PATIENT, revision: 1 });
-      const clinical = listarEventos(db, PATIENT).filter((event) => event.operationId === reviewBody.operationId);
+      const { eventos: revisaoRegistrada, candidatos: clinical } = verificarRecibo(db, reviewBody.operationId);
+      expect(revisaoRegistrada).toHaveLength(2);
       expect(clinical).toHaveLength(1);
       expect(clinical[0]?.tipo).toBe("FATO");
       expect((clinical[0]?.payload as any).data).toMatchObject({ campo: expect.stringContaining("extracao.imaging"),
@@ -143,7 +166,7 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
       expect(replay.data.codigo).toBe("REPLAY");
       expect((await app.request("/consulta/rascunho/revisar", { ...exibidaNovamente,
         expectedRevision: 1, factIds: [target14.id] })).status).toBe(409);
-      expect(listarEventos(db, PATIENT).filter((event) => event.operationId === reviewBody.operationId)).toHaveLength(1);
+      expect(verificarRecibo(db, reviewBody.operationId).eventos).toEqual(revisaoRegistrada);
       const summaryDraftId = reviewed.data.draftId as string;
 
       // Grafo local only: the route returns references explicitly marked unusable as rules/facts.
@@ -156,13 +179,13 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
       await app.close(); db.close();
       db = abrirLedger(file);
       app = await iniciar(db);
-      expect((await app.request("/consulta/carregar", { patientId: PATIENT })).status).toBe(200);
+      expect((await app.request("/consulta/carregar", { patientId: PATIENT, encounterId: ENCOUNTER })).status).toBe(200);
       const loaded = await app.request("/consulta/rascunho", { draftId: summaryDraftId });
       expect(loaded.status).toBe(200);
       expect(loaded.data.draft.payload.resumo).toContain("38 mm");
-      const consultation = await app.request("/consulta/carregar", { patientId: PATIENT });
+      const consultation = await app.request("/consulta/carregar", { patientId: PATIENT, encounterId: ENCOUNTER });
       expect(consultation.data.resumoEvolucao).toContain("38 mm");
-      expect(listarEventos(db, PATIENT).filter((event) => event.operationId === reviewBody.operationId)).toHaveLength(1);
+      expect(verificarRecibo(db, reviewBody.operationId).eventos).toEqual(revisaoRegistrada);
 
       const genericConfirm = { patientId: PATIENT, tumorLotId: null, encounterId: ENCOUNTER, bloco: "EVOLUCAO",
         registros: [{ id: summaryDraftId, expectedRevision: 1 }], documentosExibidos: [], reconhecerAlertas: [],
@@ -191,7 +214,7 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
         evidence: "UNCERTAIN", requiresConfirmation: true })]));
 
       semearPaciente(db, app.token, app.sessoes);
-      expect((await app.request("/consulta/carregar", { patientId: PATIENT })).status).toBe(200);
+      expect((await app.request("/consulta/carregar", { patientId: PATIENT, encounterId: ENCOUNTER })).status).toBe(200);
       const spokenFact = spoken.data.facts.find((fact: { domain: string }) => fact.domain === "lab");
       await app.request("/consulta/rascunho/revisar", { draftId: spoken.data.draftId,
         expectedRevision: 0, patientId: PATIENT });
@@ -199,7 +222,8 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
         expectedRevision: 1, patientId: PATIENT, factIds: [spokenFact.id], operationId: "review-plaud-88" });
       expect(spokenReview.status).toBe(200);
       expect(spokenReview.data.evolucaoRascunho).toContain("incerteza original preservada");
-      const spokenEvents = listarEventos(db, PATIENT).filter((event) => event.operationId === "review-plaud-88");
+      const { eventos: spokenRevision, candidatos: spokenEvents } = verificarRecibo(db, "review-plaud-88");
+      expect(spokenRevision).toHaveLength(2);
       expect(spokenEvents).toHaveLength(1);
       expect(spokenEvents[0]?.tipo).toBe("ReviewDecision");
 
@@ -222,7 +246,7 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
     const app = await iniciar(db);
     try {
       semearPaciente(db, app.token, app.sessoes);
-      expect((await app.request("/consulta/carregar", { patientId: PATIENT })).status).toBe(200);
+      expect((await app.request("/consulta/carregar", { patientId: PATIENT, encounterId: ENCOUNTER })).status).toBe(200);
       const result = await app.request("/consulta/extrair", { recordingId: "labs-sinteticos-88",
         sourceId: "laudo-laboratorial-88", sourceType: "medical_note",
         rawTranscript: "01/09/2026 creatinina 1,2 mg/dL; Hb 11,2 g/dL\n01/10/2026 creatinina 1,4 mg/dL" });
@@ -236,7 +260,9 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
         expectedRevision: 1, patientId: PATIENT, factIds: facts.map((fact) => fact.id),
         operationId: "review-labs-operation-88" });
       expect(review.status).toBe(200);
-      const events = listarEventos(db, PATIENT).filter((event) => event.operationId === "review-labs-operation-88");
+      const { eventos: revisaoLabs, candidatos: events } = verificarRecibo(db, "review-labs-operation-88");
+      expect(revisaoLabs).toHaveLength(4); expect(events).toHaveLength(3);
+      expect(events.every((event) => event.tipo === "FATO")).toBe(true);
       const campos = events.map((event) => (event.payload as any).data.campo);
       expect(new Set(campos).size).toBe(2); // creatinina tem observações em dias diferentes; Hb é campo distinto.
       const creatininaDates = events.filter((event) => (event.payload as any).data.campo === "extracao.lab:CREATININA")
@@ -253,13 +279,13 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
     const app = await iniciar(db);
     try {
       semearPaciente(db, app.token, app.sessoes);
-      await app.request("/consulta/carregar", { patientId: PATIENT });
+      await app.request("/consulta/carregar", { patientId: PATIENT, encounterId: ENCOUNTER });
       const first = await app.request("/consulta/extrair", { recordingId: "nota-a-88", sourceId: "nota-a-source-88",
         sourceType: "medical_note", rawTranscript: "Diagnóstico: adenocarcinoma de pulmão" });
       const factA = first.data.facts.find((fact: { domain: string }) => fact.domain === "diagnosis");
       await app.request("/consulta/rascunho/revisar", { draftId: first.data.draftId,
         expectedRevision: 0, patientId: PATIENT });
-      let before = await app.request("/consulta/carregar", { patientId: PATIENT });
+      let before = await app.request("/consulta/carregar", { patientId: PATIENT, encounterId: ENCOUNTER });
       expect(before.data.conflitosRevisaoExtracao).toEqual([]);
       expect(before.data.resumoEvolucao).toBeNull();
       const reviewedA = await revisarComExibicao(app, { draftId: first.data.draftId,
@@ -275,7 +301,7 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
         expectedRevision: 1, patientId: PATIENT, factIds: [factB.id], operationId: "review-dx-b-88" });
       expect(reviewedB.status).toBe(200);
 
-      const loaded = await app.request("/consulta/carregar", { patientId: PATIENT });
+      const loaded = await app.request("/consulta/carregar", { patientId: PATIENT, encounterId: ENCOUNTER });
       expect(loaded.data.conflitosRevisaoExtracao).toHaveLength(1);
       expect(loaded.data.conflitosRevisaoExtracao[0].candidatos.map((candidate: { sourceId: string }) => candidate.sourceId))
         .toEqual(["nota-a-source-88", "nota-b-source-88"]);
@@ -290,7 +316,7 @@ describe("W10 entrega · extração, revisão explícita e recuperação HTTP", 
     const app = await iniciar(db);
     try {
       semearPaciente(db, app.token, app.sessoes);
-      await app.request("/consulta/carregar", { patientId: PATIENT });
+      await app.request("/consulta/carregar", { patientId: PATIENT, encounterId: ENCOUNTER });
       const extracted = await app.request("/consulta/extrair", { recordingId: "tnm-sintetico-88",
         sourceId: "laudo-stage-88", sourceType: "medical_note", rawTranscript: "Estadiamento cT2N0M0 em 10/09/2026" });
       const stage = extracted.data.facts.find((fact: { domain: string }) => fact.domain === "stage");

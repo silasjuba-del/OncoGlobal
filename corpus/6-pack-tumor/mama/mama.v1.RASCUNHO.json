@@ -1,0 +1,131 @@
+{
+  "header": {
+    "id": "pack-mama-v1-glm",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.4 (Codex M1-2/M3-3)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "cid": [
+    "C50"
+  ],
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição [VERIFICAR edição vigente na aprovação]"
+  },
+  "biomarcadoresPath": {
+    "obrigatoriosLaudo": [
+      "ER (IHQ)",
+      "PgR (IHQ)",
+      "HER2 (IHQ; FISH/ISH se IHC 2+)",
+      "Ki-67"
+    ],
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "ESMO Pocket Breast Cancer 2023, pp. 60–61 (data.esmo.org/guidelines/pdf/publicassets/ESMO_2023_BreastCancer.pdf)",
+      "trecho": "ER, PgR, HER2 and Ki-67",
+      "edicao": "2023"
+    }
+  },
+  "examesPorId": {
+    "labsBaseline": [
+      "HEMOGRAMA",
+      "CREATININA",
+      "TGO",
+      "TGP",
+      "TSH"
+    ],
+    "imagemBasal": [
+      "MAMOGRAFIA_DIAGNOSTICA",
+      "USG_MAMAS_BILATERAL",
+      "USG_AXILAS"
+    ],
+    "cardioBaseline": [
+      "ECOCARDIOGRAMA"
+    ]
+  },
+  "fases": [
+    {
+      "fase": "estadiamento_inicial",
+      "exames": [
+        "MAMOGRAFIA_DIAGNOSTICA",
+        "USG_MAMAS_BILATERAL",
+        "USG_AXILAS"
+      ],
+      "nota": "Imagem sistêmica basal (TC/PET) conforme estadiamento clínico e sintomas — decisão individual."
+    },
+    {
+      "fase": "pre_tratamento_sistemico",
+      "exames": [
+        "HEMOGRAMA",
+        "CREATININA",
+        "TGO",
+        "TGP",
+        "TSH",
+        "ECOCARDIOGRAMA"
+      ],
+      "nota": "ECO basal (FEVE, idealmente 3D; GLS se disponível) antes de antraciclina e antes de anti-HER2 em TODOS: ESC 2022 Classe I-B, tabelas 7/8 [CONFIRMADO Codex M3-3 — PDF cardio-onco.fr pp. 4259-4260]. NÃO é regra de eco antes de qualquer QT."
+    },
+    {
+      "fase": "seguimento_pos_tratamento",
+      "intervalos": {
+        "consulta": "Conforme risco (ESMO 2023: esquema por estratificação; cadência exata por diretriz aprovada no serviço)",
+        "mamografia": "Anual",
+        "exames_rotina_assintomatica": "Marcadores (CEA/CA153), hemograma, bioquímica e imagem sistêmica NÃO em rotina de vigilância de assintomáticas"
+      },
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "ESMO Pocket Breast Cancer 2023, pp. 60–61",
+        "trecho": "follow-up... annual mammography",
+        "edicao": "2023"
+      },
+      "ressalva": "US/RM podem ser indicadas individualmente — 'mamografia como única imagem' NÃO é regra absoluta [Codex M1-2]. Concordância exata com NCCN 2026/SBOC 2025 NÃO VERIFICADA; SBOC 2025 (adjuvância) cita exame q3-6m a1-3 → q6-12m a4-5 → anual + avaliação ginecológica anual."
+    },
+    {
+      "fase": "metastatico",
+      "exames": [
+        "TC_TORAX",
+        "TC_ABDOMEN_SUPERIOR",
+        "TC_PELVE"
+      ],
+      "nota": "Reavaliação por imagem conforme linhas de tratamento; dor óssea/risco → CINTILOGRAFIA_OSSEA ou RM conforme caso; DENSITOMETRIA_OSSEA se inibidor de aromatase (monitorização da perda óssea)."
+    }
+  ],
+  "limitesAplicabilidade": "Pack ambulatorial adulto; gravidez e homens com câncer de mama têm fluxos próprios (não cobertos).",
+  "pendencias": [
+    "Confirmar edição AJCC vigente",
+    "Confrontar cadência ESMO × NCCN 2026 × SBOC 2025 na aprovação (NÃO VERIFICADO)"
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DIRETRIZ",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.4 (Codex M1-2/M3-3)",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "supersededBy": "pack-mama",
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "A9 red team: colisão com corpus/packs/mama",
+      "original": "mama",
+      "corrigido": "pack-mama-v1-glm"
+    }
+  ]
+}

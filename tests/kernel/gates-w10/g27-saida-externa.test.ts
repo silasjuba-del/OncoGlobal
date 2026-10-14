@@ -14,7 +14,7 @@ describe("G-27 · sanitizador de PDF", () => {
   it("remove autor/título/produtor/XMP, preserva tamanho e emite relatório BAIXO", () => {
     const ent = bytes(pdf());
     expect(Object.keys(extrairMetadadosPdf(ent)).sort()).toEqual(["Author", "CreationDate", "Producer", "Title", "XMP"]);
-    const r = sanitizarArtefato({ artefatoId: "a1", tipo: "PDF", bytes: ent, em: EM });
+    const r = sanitizarArtefato({ artefatoId: "a1", tipo: "PDF", bytes: ent, em: EM, detectorPhi: conteudo => conteudo.includes("Paciente Teste 01") });
     expect(r.bytes!.length).toBe(ent.length);
     expect(Buffer.from(r.bytes!).toString("latin1")).not.toContain("Paciente Teste 01");
     expect(extrairMetadadosPdf(r.bytes!)).toEqual({});

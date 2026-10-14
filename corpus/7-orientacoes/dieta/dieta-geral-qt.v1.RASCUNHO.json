@@ -1,0 +1,79 @@
+{
+  "header": {
+    "id": "dieta-geral-qt",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.3 [CODEX M1-2: PENDENTE DE VALIDAÇÃO POR AFIRMAÇÃO]",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "publico": "PACIENTE — linguagem até 8ª série, frases curtas, sem jargão",
+  "secoes": [
+    {
+      "id": "durante-tratamento",
+      "texto": "Coma o que conseguir, quando conseguir. Refeições pequenas, várias vezes ao dia, valem mais que pratos grandes. Beba água em pequenos goles durante o dia, se o médico não limitou o líquido. Coma alimentos ricos em proteína (ovo, frango, carne, leite, feijão) em cada refeição. Lave as mãos antes de comer.",
+      "fontes": [
+        "INCA — Guia de nutrição para pacientes e cuidadores, 4ª ed. 2020 (ninho.inca.gov.br/…/12392)",
+        "Consenso Nacional de Nutrição Oncológica 2ª ed. 2015, vol. II 2016 (inca.gov.br PDF oficial)"
+      ],
+      "ressalva": "Volume fixo de água NÃO se impõe a pacientes com restrição (insuficiência cardíaca/renal, ascite) — hidratação individualizada."
+    },
+    {
+      "id": "seguranca-alimentar",
+      "texto": "Coma só alimentos bem lavados, cozidos e frescos. Carne sempre bem passada. Ovos com gema firme. Beba água filtrada ou fervida. Não recongele descongelado. Não coma comida crua de rua.",
+      "fontes": [
+        "INCA Guia 2020 — seção 'Queda de imunidade'",
+        "Cartilha TCTH INCA (ninho.inca.gov.br/…/18225)"
+      ],
+      "ressalva": "Restrição total de frutas/hortaliças cruas ('dieta neutropênica') é CONTROVERSA entre instituições — decidir com o serviço; carnes/ovos crus e não pasteurizados = unânime."
+    },
+    {
+      "id": "o-que-evitar",
+      "texto": "Evite dietas da moda, jejum prolongado e suplementos sem falar com a equipe. Emagrecer sem querer durante o tratamento não é bom: avise a equipe."
+    }
+  ],
+  "referencialGeral": {
+    "fonte": "ESPEN practical guideline: clinical nutrition in cancer (Arends et al., Clin Nutr 40:5-91, 2021, DOI 10.1016/j.clnu.2021.02.005)",
+    "uso": "Base técnico-profissional; não é texto de paciente"
+  },
+  "proibicoes": [
+    "Volume fixo universal de água",
+    "Apresentar preferência institucional como consenso universal",
+    "Texto ir ao paciente sem aprovação"
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO_APLICACAO_PACIENTE (D-WhatsApp: nenhum texto vai ao paciente sem aprovação)",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DIRETRIZ",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.3 [CODEX M1-2: PENDENTE DE VALIDAÇÃO POR AFIRMAÇÃO]",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "portas": {
+    "consome": [
+      "prescricao.vigente (início de QT)",
+      "salao-triagem.pesoVermelho",
+      "comorbidades (IC, DRC, DM: exclusões)"
+    ],
+    "oferece": [
+      "documento.orientacaoDieta"
+    ],
+    "gatilhos": [
+      "início do primeiro ciclo",
+      "perda de peso ≥ 5 kg em 60 dias"
+    ]
+  }
+}

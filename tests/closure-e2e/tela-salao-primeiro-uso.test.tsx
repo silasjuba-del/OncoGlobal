@@ -96,7 +96,7 @@ it("UI de primeiro uso envia triagem como draft e registra liberação no SQLite
     expect.objectContaining({ patientId, nome: "Paciente Sintético Primeiro Uso" }),
     expect.objectContaining({ patientId: outroPatientId, nome: "Paciente Sintético Outra Agenda" }),
   ]));
-  const contexto = await porta.carregarConsulta(patientId);
+  const contexto = await porta.carregarConsulta(patientId, undefined, encounterId);
   expect(contexto.encounterId).toBe(encounterId);
   const fila = await porta.filaSalao().catch((error: unknown) => {
     throw new Error(`fila HTTP não corresponde a SalaoResposta: ${salaDiagnostics.join(" | ") || "sem issues zod"}; `

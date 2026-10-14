@@ -1,0 +1,657 @@
+{
+  "header": {
+    "id": "contraindicacoes-complemento-v2",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Curadoria v2 sobre contraindicacoes-complemento v1 (GLM) + red team 2026-10-11; bulas FDA/openFDA e CIMA citadas por item",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "substitui": [
+    "contraindicacoes-complemento"
+  ],
+  "nota": "Complemento às 22 regras ativas de f0c/condicionais.v1.json (que seguem intactas). Distinção obrigatória por item: contraindicação × precaução × ajuste de dose × interrupção temporária × descontinuação × decisão individual. Limiar do serviço = alerta; ficha relaxa ou endurece com fonte; NUNCA bloqueia (regra F1). Exclusão de população em ensaio clínico NÃO é contraindicação absoluta. v2: classe/nível ESC 2022 não afirmados (não verificados).",
+  "itens": [
+    {
+      "id": "CI-01",
+      "tipo": "RENAL",
+      "drogas": [
+        "cisplatina"
+      ],
+      "classificacao": "ALERTA_CORTE_VARIAVEL_POR_FABRICANTE",
+      "criterio": "Corte VARIA por fabricante: CIMA 62107 (Cisplatino Pharmacia, Espanha) contraindica com depuração de creatinina <60 mL/min; FDA Sagent: contraindicada em 'pre-existing renal impairment' sem corte numérico; FDA WG Critical Care (PLR 2026): sem contraindicação renal, 'considerar alternativa ou redução' com ClCr reduzido. Corte ANVISA não confirmado.",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "Confirmar produto/protocolo e método renal (ClCr, não TFGe) antes de cada ciclo.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "CIMA AEMPS FT_62107 (Cisplatino Pharmacia) §4.3, acesso 11/10/2026",
+        "secao": "4.3",
+        "trecho": "depuración de creatinina < 60 ml/min",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: validar corte na bula ANVISA do produto usado no serviço",
+      "variacaoPorFabricante": [
+        {
+          "produto": "Cisplatino Pharmacia 1 mg/ml (CIMA 62107)",
+          "regra": "contraindicado se ClCr <60 mL/min",
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "CIMA AEMPS FT_62107 §4.3",
+            "secao": "4.3",
+            "trecho": "depuración de creatinina < 60 ml/min",
+            "estado": "VERIFICADO_2026-10-11",
+            "edicao": "2026-10-11"
+          }
+        },
+        {
+          "produto": "Cisplatin Sagent (FDA)",
+          "regra": "contraindicada em disfunção renal prévia, sem corte numérico",
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "DailyMed/openFDA setid 00396546-6a80-4b9f-a5f8-c22c1d1bb173",
+            "secao": "Contraindications",
+            "trecho": "contraindicated in patients with pre-existing renal impairment",
+            "estado": "VERIFICADO_2026-10-11",
+            "edicao": "2024-01-20"
+          }
+        },
+        {
+          "produto": "Cisplatin WG Critical Care (FDA, PLR)",
+          "regra": "considerar alternativa ou redução de dose com ClCr reduzido",
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "DailyMed/openFDA setid 508496cb-3441-46b3-a4fe-e0d440e6adc6",
+            "secao": "2.5",
+            "trecho": "Consider alternative treatments or dose reductions for patients with impaired creatinine clearance",
+            "estado": "VERIFICADO_2026-10-11",
+            "edicao": "2026-06-24"
+          }
+        }
+      ],
+      "origem": "v1 atualizado em v2"
+    },
+    {
+      "id": "CI-02",
+      "tipo": "RENAL",
+      "drogas": [
+        "pemetrexede"
+      ],
+      "classificacao": "CONTRAINDICACAO_PRODUTO",
+      "criterio": "Não administrar se ClCr <45 mL/min",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "Aferir ClCr antes de cada ciclo; hemograma D1/D8/D15 conforme bula; não iniciar ciclo se ANC <1500/mm³ ou plaquetas <100.000/mm³.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed pemetrexede §§2.1–2.6 (setid 4cc1574b-3d2f-489b-9ad3-55695bb97200), acesso 11/10/2026",
+        "secao": null,
+        "trecho": "less than 45 mL/min",
+        "estado": "HERDADO_V1_NAO_REABERTO",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null,
+      "origem": "v1 copiado"
+    },
+    {
+      "id": "CI-03",
+      "tipo": "RENAL",
+      "drogas": [
+        "capecitabina"
+      ],
+      "classificacao": "CONTRAINDICACAO_PRODUTO",
+      "criterio": "Brasil (espelho da bula do paciente): contraindicada se depuração de creatinina <30 mL/min. EUA: reduzir 25% se ClCr 30–50 (Cockcroft-Gault); <30 sem dose estabelecida",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "ClCr antes do início e conforme evolução; ajuste 30–50 mL/min = reduzir 25% (fonte FDA; exceção da seção 8.6 NÃO se importa para o SUS).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed Xeloda §§2.7 e 8.6 (setid e702d84d-7162-4751-bf37-d724cc7e45a5); bula profissional ANVISA pendente",
+        "secao": null,
+        "trecho": "creatinine clearance below 30 mL/min",
+        "estado": "HERDADO_V1_NAO_REABERTO",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula profissional ANVISA",
+      "origem": "v1 copiado"
+    },
+    {
+      "id": "CI-04",
+      "tipo": "RENAL",
+      "drogas": [
+        "carboplatina"
+      ],
+      "classificacao": "AJUSTE_FORMULA",
+      "criterio": "Calvert: dose TOTAL (mg) = AUC-alvo × (GFR + 25); ClCr <60 mL/min = maior risco de mielossupressão, NÃO redução percentual automática adicional",
+      "acaoServico": "BIBLIOTECA_CONSULTA",
+      "condutaCurta": "Usar dose total em mg (não mg/m²); método renal, AUC e limites dependem do protocolo.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed carboplatina, Formula Dosing (setid f330f5a2-2cad-402f-bcbb-26245a753276), acesso 11/10/2026",
+        "secao": null,
+        "trecho": "Total Dose (mg) = (target AUC) x (GFR + 25)",
+        "estado": "HERDADO_V1_NAO_REABERTO",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null,
+      "origem": "v1 copiado"
+    },
+    {
+      "id": "CI-05",
+      "tipo": "HEPATICO",
+      "drogas": [
+        "doxorrubicina (convencional; NÃO lipossomal)"
+      ],
+      "classificacao": "AJUSTE_ESCALONADO",
+      "criterio": "Bilirrubina total 1,2–3 mg/dL: administrar 50%; 3,1–5 mg/dL: administrar 25%; >5 mg/dL ou Child-Pugh C: não iniciar/descontinuar",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "Bilirrubina antes de cada ciclo; percentual ADMINISTRADO é o campo a registrar (distinto do percentual reduzido).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed doxorrubicina §2.2 (setid 971de64b-ff09-4370-afd9-6eb1093ad27d), acesso 11/10/2026",
+        "secao": null,
+        "trecho": "Greater than 5 mg/dL → Do not initiate",
+        "estado": "HERDADO_V1_NAO_REABERTO",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null,
+      "origem": "v1 copiado"
+    },
+    {
+      "id": "CI-06",
+      "tipo": "CARDIACO",
+      "drogas": [
+        "trastuzumabe"
+      ],
+      "classificacao": "INTERRUPCAO_TEMPORARIA_REGRADA",
+      "criterio": "Bula Herceptin: suspender ≥4 semanas se queda absoluta de FEVE ≥16 pontos percentuais em relação ao pré-tratamento, OU FEVE abaixo do limite inferior institucional E queda absoluta ≥10 pontos.",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "Queda em pontos percentuais absolutos (não relativa). Classe/nível ESC 2022 NÃO afirmados (não verificados nesta cadeia).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "Herceptin, DailyMed/openFDA setid 492dbdb2-077e-4064-bff3-372d6af0a7a2, versão 2026-05-29",
+        "secao": "2.5",
+        "trecho": "≥ 16% absolute decrease in LVEF from pre-treatment values",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null,
+      "notaESC": "Menção à ESC 2022 (tabela 25, I-C/IIa-B) do v1 REMOVIDA do critério: PDF retornou 403 no red team (A11) — reinserir só com trecho verificado.",
+      "origem": "v1 atualizado em v2"
+    },
+    {
+      "id": "CI-07",
+      "tipo": "TEV",
+      "drogas": [
+        "tamoxifeno"
+      ],
+      "classificacao": "CONTRAINDICACAO_CONTEXTUAL",
+      "criterio": "Bula contraindica tamoxifeno com TVP/TEP prévio NO cenário de redução de incidência/DCIS; no câncer invasivo exige avaliação individual de benefício/risco",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "TEV prévio + tamoxifeno: revisar com fonte (IA, por exemplo) conforme cenário; risco é maior nos 2 primeiros anos.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed tamoxifeno, Contraindications/Warnings (setid 8d731e7e-3b04-49a2-a0f6-3779422174cc), acesso 11/10/2026",
+        "secao": null,
+        "trecho": "history of DVT or pulmonary embolus",
+        "estado": "HERDADO_V1_NAO_REABERTO",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: diretriz formal ESMO/ASCO com trecho literal ainda pendente",
+      "origem": "v1 copiado"
+    },
+    {
+      "id": "CI-08",
+      "tipo": "AUTOIMUNE_TRANSPLANTE",
+      "drogas": [
+        "inibidores de checkpoint"
+      ],
+      "classificacao": "PRECACAO_CONDICIONAL",
+      "criterio": "Keytruda/Opdivo (FDA): sem contraindicação formal ('None'); complicações fatais com HSCT alogênico antes ou depois; rejeição de órgão sólido listada entre reações imunomediadas; autoimune ativa = critério de exclusão dos estudos, NÃO contraindicação de bula.",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Autoimune ativa/transplante: avaliação individual — exclusão de ensaio NÃO é contraindicação absoluta.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "Keytruda IV, DailyMed/openFDA setid 9333c79b-d487-4538-a9f0-71b91a02b287, versão 2026-07-10",
+        "secao": "4; 5.3",
+        "trecho": "Fatal and other serious complications can occur in patients who receive allogeneic HSCT",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula ANVISA de cada ICI; trecho v1 tinha 16 palavras (encurtado)",
+      "origem": "v1 atualizado em v2"
+    },
+    {
+      "id": "CI-09",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "regime selecionado para câncer de mama",
+        "doxorrubicina",
+        "cisplatina",
+        "ciclofosfamida",
+        "gemcitabina",
+        "imatinibe",
+        "orais em geral"
+      ],
+      "classificacao": "DECISAO_INDIVIDUAL_POR_PRODUTO_TRIMESTRE",
+      "criterio": "NCI PDQ: QT selecionada para câncer de mama PODE ser considerada após o primeiro trimestre — isso NÃO autoriza todas as drogas nem outros tumores",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Gestação + QT: produto/indicação/trimestre específicos; lactação e contracepção têm regras próprias por bula.",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "NCI PDQ, Breast Cancer Treatment During Pregnancy, acesso 11/10/2026",
+        "secao": null,
+        "trecho": "may be considered after the first trimester",
+        "estado": "HERDADO_V1_NAO_REABERTO",
+        "edicao": "PDQ vigente"
+      },
+      "pendencia": "PARCIAL: demais produtos/prazos INCERTOS; regras de gestação das 9 drogas já existentes em condicionais.v1.json seguem válidas",
+      "origem": "v1 copiado"
+    },
+    {
+      "id": "CI-10",
+      "tipo": "DPD",
+      "drogas": [
+        "capecitabina",
+        "5-FU"
+      ],
+      "classificacao": "PRECACAO_GENETICA",
+      "criterio": "Avaliar deficiência de DPYD antes de iniciar (salvo necessidade imediata, rótulo FDA); evitar em deficiência completa conhecida; parcial = individualização, sem percentual inventado",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "DPYD não avaliado com fluoropirimidina programada = campo PENDENTE próprio na tela do tema; deficiência completa conhecida = evitar.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "DailyMed Xeloda boxed warning e §§2.1, 5.1, acesso 11/10/2026",
+        "secao": null,
+        "trecho": "avoid use in patients with known complete DPD deficiency",
+        "estado": "HERDADO_V1_NAO_REABERTO",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: regra operacional brasileira requer curadoria do serviço",
+      "origem": "v1 copiado"
+    },
+    {
+      "id": "CI-11",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "ciclofosfamida"
+      ],
+      "classificacao": "ADVERTENCIA_TOXICIDADE_EMBRIOFETAL",
+      "criterio": "Bula: pode causar dano fetal; orientar contracepção efetiva conforme bula (prazos pós-tratamento são por produto).",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Só quando a aplicabilidade reprodutiva for explícita; não inferir por sexo cadastral/idade. Gestação confirmada = decisão individual (produto/trimestre).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "ciclofosfamida XGen, DailyMed/openFDA setid 02e64046-687d-449e-e063-6294a90a6c32, versão 2024-12-20",
+        "secao": "5.7",
+        "trecho": "Embryo-Fetal Toxicity: Can cause fetal harm.",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula ANVISA",
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-12",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "gemcitabina"
+      ],
+      "classificacao": "ADVERTENCIA_TOXICIDADE_EMBRIOFETAL",
+      "criterio": "Bula: pode causar dano fetal; orientar contracepção efetiva conforme bula (prazos pós-tratamento são por produto).",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Só quando a aplicabilidade reprodutiva for explícita; não inferir por sexo cadastral/idade. Gestação confirmada = decisão individual (produto/trimestre).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "gemcitabina Mylan, DailyMed/openFDA setid 06dd9d40-74fc-4409-93b1-a46be7126331, versão 2024-11-11",
+        "secao": "5.7",
+        "trecho": "Embryo-Fetal Toxicity: Can cause fetal harm.",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula ANVISA",
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-13",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "pemetrexede"
+      ],
+      "classificacao": "ADVERTENCIA_TOXICIDADE_EMBRIOFETAL",
+      "criterio": "Bula: pode causar dano fetal; orientar contracepção efetiva conforme bula (prazos pós-tratamento são por produto).",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Só quando a aplicabilidade reprodutiva for explícita; não inferir por sexo cadastral/idade. Gestação confirmada = decisão individual (produto/trimestre).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "pemetrexede Pemrydi RTU (Amneal), DailyMed/openFDA setid 0f006b06-ab85-423d-ba0c-dfc3fc25844e, versão 2025-07-08",
+        "secao": "5.7",
+        "trecho": "pemetrexed can cause fetal harm when administered to a pregnant woman",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula ANVISA",
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-14",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "capecitabina (oral)"
+      ],
+      "classificacao": "REMISSAO_SEM_REGRA_NOVA",
+      "criterio": "Bula: pode causar dano fetal; orientar contracepção efetiva conforme bula (prazos pós-tratamento são por produto).",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Só quando a aplicabilidade reprodutiva for explícita; não inferir por sexo cadastral/idade. Gestação confirmada = decisão individual (produto/trimestre).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "capecitabina Dr. Reddy's, DailyMed/openFDA setid 007e3432-c8aa-2a76-52ba-c346924c08a7, versão 2025-11-20",
+        "secao": "5.11",
+        "trecho": "capecitabine tablets can cause fetal harm",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula ANVISA",
+      "origem": "novo v2",
+      "nota": "JÁ COBERTO em f0c/condicionais.v1.json GESTACAO_CAPECITABINA (ativo). Registrado só como remissão verificada hoje; não criar segundo alerta."
+    },
+    {
+      "id": "CI-15",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "osimertinibe"
+      ],
+      "classificacao": "ADVERTENCIA_TOXICIDADE_EMBRIOFETAL",
+      "criterio": "Bula: pode causar dano fetal; orientar contracepção efetiva conforme bula (prazos pós-tratamento são por produto).",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Só quando a aplicabilidade reprodutiva for explícita; não inferir por sexo cadastral/idade. Gestação confirmada = decisão individual (produto/trimestre).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "Tagrisso, DailyMed/openFDA setid 5e81b4a7-b971-45e1-9c31-29cea8c87ce7, versão 2024-09-25",
+        "secao": "5.8",
+        "trecho": "TAGRISSO can cause fetal harm",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula ANVISA",
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-16",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "erlotinibe"
+      ],
+      "classificacao": "ADVERTENCIA_TOXICIDADE_EMBRIOFETAL",
+      "criterio": "Bula: pode causar dano fetal; orientar contracepção efetiva conforme bula (prazos pós-tratamento são por produto).",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Só quando a aplicabilidade reprodutiva for explícita; não inferir por sexo cadastral/idade. Gestação confirmada = decisão individual (produto/trimestre).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "erlotinibe Armas, DailyMed/openFDA setid 2c4c7353-b81c-4651-8aac-6d15e88145af, versão 2019-10-25",
+        "secao": "5.10",
+        "trecho": "erlotinib tablets can cause fetal harm when administered to a pregnant woman",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula ANVISA",
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-17",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "gefitinibe"
+      ],
+      "classificacao": "ADVERTENCIA_TOXICIDADE_EMBRIOFETAL",
+      "criterio": "Bula: pode causar dano fetal; orientar contracepção efetiva conforme bula (prazos pós-tratamento são por produto).",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Só quando a aplicabilidade reprodutiva for explícita; não inferir por sexo cadastral/idade. Gestação confirmada = decisão individual (produto/trimestre).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "Iressa, DailyMed/openFDA setid 827d60e8-7e07-41b7-c28b-49ef1c4a5a41, versão 2023-02-28",
+        "secao": "5.7",
+        "trecho": "IRESSA can cause fetal harm when administered to a pregnant woman",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula ANVISA",
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-18",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "imatinibe"
+      ],
+      "classificacao": "ADVERTENCIA_TOXICIDADE_EMBRIOFETAL",
+      "criterio": "Bula: pode causar dano fetal; orientar contracepção efetiva conforme bula (prazos pós-tratamento são por produto).",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Só quando a aplicabilidade reprodutiva for explícita; não inferir por sexo cadastral/idade. Gestação confirmada = decisão individual (produto/trimestre).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "Gleevec, DailyMed/openFDA setid 211ef2da-2868-4a77-8055-1cb2cd78e24b, versão 2026-07-13",
+        "secao": "5.10",
+        "trecho": "Gleevec can cause fetal harm when administered to a pregnant woman.",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula ANVISA",
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-19",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "sunitinibe"
+      ],
+      "classificacao": "ADVERTENCIA_TOXICIDADE_EMBRIOFETAL",
+      "criterio": "Bula: pode causar dano fetal; orientar contracepção efetiva conforme bula (prazos pós-tratamento são por produto).",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Só quando a aplicabilidade reprodutiva for explícita; não inferir por sexo cadastral/idade. Gestação confirmada = decisão individual (produto/trimestre).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "Sutent, DailyMed/openFDA setid 43a4d7f8-48ae-4a63-9108-2fa8e3ea9d9c, versão 2026-02-20",
+        "secao": "5.15",
+        "trecho": "SUTENT can cause fetal harm",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula ANVISA",
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-20",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "palbociclibe"
+      ],
+      "classificacao": "ADVERTENCIA_TOXICIDADE_EMBRIOFETAL",
+      "criterio": "Bula: pode causar dano fetal; orientar contracepção efetiva conforme bula (prazos pós-tratamento são por produto).",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Só quando a aplicabilidade reprodutiva for explícita; não inferir por sexo cadastral/idade. Gestação confirmada = decisão individual (produto/trimestre).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "Ibrance, DailyMed/openFDA setid 89a142d5-7e61-48bf-9e77-e2cd124c4792, versão 2026-07-06",
+        "secao": "5.3",
+        "trecho": "IBRANCE can cause fetal harm.",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula ANVISA",
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-21",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "ribociclibe"
+      ],
+      "classificacao": "ADVERTENCIA_TOXICIDADE_EMBRIOFETAL",
+      "criterio": "Bula: pode causar dano fetal; orientar contracepção efetiva conforme bula (prazos pós-tratamento são por produto).",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Só quando a aplicabilidade reprodutiva for explícita; não inferir por sexo cadastral/idade. Gestação confirmada = decisão individual (produto/trimestre).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "Kisqali, DailyMed/openFDA setid aaeaef94-f3f5-4367-8ea2-b181d7be2da8, versão 2026-07-01",
+        "secao": "5.7",
+        "trecho": "KISQALI can cause fetal harm when administered to a pregnant woman.",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula ANVISA",
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-22",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "olaparibe"
+      ],
+      "classificacao": "ADVERTENCIA_TOXICIDADE_EMBRIOFETAL",
+      "criterio": "Bula: pode causar dano fetal; orientar contracepção efetiva conforme bula (prazos pós-tratamento são por produto).",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Só quando a aplicabilidade reprodutiva for explícita; não inferir por sexo cadastral/idade. Gestação confirmada = decisão individual (produto/trimestre).",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "Lynparza, DailyMed/openFDA setid 741ff3e3-dc1a-45a6-84e5-2481b27131aa, versão 2025-07-10",
+        "secao": "5.5",
+        "trecho": "Lynparza can cause fetal harm when administered to a pregnant woman",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula ANVISA",
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-23",
+      "tipo": "GESTACAO",
+      "drogas": [
+        "cabozantinibe",
+        "abemaciclibe",
+        "pazopanibe",
+        "abiraterona/enzalutamida (uso masculino)"
+      ],
+      "classificacao": null,
+      "criterio": null,
+      "acaoServico": null,
+      "condutaCurta": null,
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "notaPendencia": "Trecho de gestação não extraído nesta rodada; não herdar dos TKIs acima.",
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-24",
+      "tipo": "RENAL",
+      "drogas": [
+        "oxaliplatina"
+      ],
+      "classificacao": "AJUSTE_DOSE",
+      "criterio": "Insuficiência renal grave (ClCr <30 mL/min, Cockcroft-Gault): reduzir dose de oxaliplatina para 65 mg/m².",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "ClCr por Cockcroft-Gault antes de cada ciclo; não é contraindicação na bula FDA.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "oxaliplatina Meitheal, DailyMed/openFDA setid 11377169-7986-45b1-8298-6f0533efa3c3, versão 2024-10-03",
+        "secao": "2.3",
+        "trecho": "In patients with severe renal impairment (creatinine clearance [CLcr] less than 30 mL/min",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: bula ANVISA (corte pode diferir)",
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-25",
+      "tipo": "HEPATICO",
+      "drogas": [
+        "irinotecano"
+      ],
+      "classificacao": "PRECAUCAO_AJUSTE",
+      "criterio": "Bilirrubina >2 mg/dL: dose não pode ser recomendada (dados insuficientes). Bilirrubina elevada: considerar redução de 1 nível na dose inicial. Bilirrubina ≥1,0 mg/dL: mais neutropenia G3/4 no 1º ciclo (50% vs 18%).",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "Complementa IRINOTECANO_HEPATICO (condicionais.v1, limites da população estudada) — não duplicar alerta.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "Camptosar, DailyMed/openFDA setid e518dfc6-7e93-4fee-a66c-51e1ab71c056, versão 2026-05-12",
+        "secao": "2; 5.10",
+        "trecho": "Dosing for patients with bilirubin >2 mg/dL cannot be recommended",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null,
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-26",
+      "tipo": "CIRURGIA_FISTULA",
+      "drogas": [
+        "bevacizumabe"
+      ],
+      "classificacao": "DESCONTINUACAO_E_JANELA",
+      "criterio": "Cirurgia: suspender ≥28 dias antes de cirurgia eletiva; não administrar por ≥28 dias após cirurgia maior e até cicatrização adequada. Fístula: descontinuar em perfuração GI, fístula traqueoesofágica (qualquer grau), fístula grau 4 ou fístula envolvendo órgão interno.",
+      "acaoServico": "ALERTA",
+      "condutaCurta": "Janela cirúrgica já em BEVACIZUMABE_CIRURGIA (condicionais.v1); item novo é a regra de fístula.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "Avastin, DailyMed/openFDA setid 939b5d1f-9fb2-4499-80ef-0607aa6b114e, versão 2025-01-06",
+        "secao": "2.1; Tabela 1; 5.1",
+        "trecho": "Tracheoesophageal fistula, any grade Fistula, Grade 4",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": null,
+      "origem": "novo v2"
+    },
+    {
+      "id": "CI-27",
+      "tipo": "AUTOIMUNE_TRANSPLANTE",
+      "drogas": [
+        "pembrolizumabe",
+        "nivolumabe"
+      ],
+      "classificacao": "PRECAUCAO_CONDICIONAL",
+      "criterio": "Bula: contraindicações 'None'. Rejeição de transplante de órgão sólido listada como reação imunomediada; autoimune que exigiu terapia sistêmica = exclusão dos estudos (não contraindicação).",
+      "acaoServico": "ALERTA_VERIFICAR_CASO",
+      "condutaCurta": "Transplantado ou autoimune ativa: discussão individual (transplante/reumato); exclusão de ensaio ≠ contraindicação.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "Opdivo Qvantig, DailyMed/openFDA setid 7f8c38fa-42f4-4387-9e8c-7a1c66855d8b, versão 2026-05-12; Keytruda IV DailyMed/openFDA setid 9333c79b-d487-4538-a9f0-71b91a02b287",
+        "secao": "4; 5.1; 14",
+        "trecho": "solid organ transplant rejection, other transplant (including corneal graft) rejection",
+        "estado": "VERIFICADO_2026-10-11",
+        "edicao": "2026-10-11"
+      },
+      "pendencia": "PARCIAL: Opdivo IV e bula ANVISA não lidos (openFDA retornou formulação SC)",
+      "origem": "novo v2"
+    }
+  ],
+  "resumoCuradoria": {
+    "total": 27,
+    "comFonteVerificadaHoje": 19,
+    "herdadosNaoReabertos": 7,
+    "semFonte": 1,
+    "nota": "As 22 regras de condicionais.v1.json seguem intactas; CI-14/CI-25/CI-26 remetem a regras já existentes."
+  },
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "status": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "Claude (curadoria farmacológica F1, rodada v2)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "LITERATURA",
+      "referencia": "openFDA drug/label (11/10/2026); CIMA AEMPS FT_62107; DailyMed",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação); aprovação clínica real = curadoria.aprovacaoClinica (null). Nenhum item tem ativo:true; alerta global false."
+  }
+}

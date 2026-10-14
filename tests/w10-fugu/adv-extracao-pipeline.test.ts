@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
 import { executarPipelineExtracao } from "../../src/orchestration/pipeline-extracao.js";
 import { classificarMetastaseVisceral, seriesDeImagem } from "../../src/kernel/projections/radiologia.js";
@@ -73,6 +74,9 @@ describe("ADV · extração/pipeline não promove o que não foi dito", () => {
 
     const ligado = executarPipelineExtracao({
       ...base, sourceType: "plaud", rawTranscript: texto,
+      confirmacoesFonte: [{ exceptionId: vinculo.id, segmentId: vinculo.segmentId!, sourceId: base.sourceId,
+        recordingId: base.recordingId, contentHash: createHash("sha256").update(texto).digest("hex"),
+        sourceVersion: "legado@1", patientId: "P07", reviewDecisionId: "review-persisted-07" }],
       confirmacoes: [{ exceptionId: vinculo.id, acao: "LIGAR_PACIENTE", medicoId: "medico-teste", em, patientId: "P07" }],
     });
     expect(ligado.timelines).toHaveLength(1);

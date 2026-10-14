@@ -1,0 +1,3476 @@
+{
+  "header": {
+    "id": "pack-testiculo",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Testículo v3 (versão para colaboração), arquivo Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.pdf",
+      "trecho": "apoiar as decisões clínicas no tratamento de tumores de testículo",
+      "edicao": "v3 2026"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Tumores de células germinativas do testículo (seminoma e não seminoma)",
+    "cid10": [
+      "C62",
+      "C62.0",
+      "C62.1",
+      "C62.9"
+    ],
+    "subtipos": [
+      "seminoma puro",
+      "não seminoma (carcinoma embrionário, tumor do saco vitelino, coriocarcinoma, teratoma, misto)"
+    ],
+    "cenarios": [
+      "estadio_I_seminoma",
+      "estadio_I_nao_seminoma",
+      "estadio_IS",
+      "estadio_patologico_II_pos_RPLND",
+      "estadio_clinico_II",
+      "avancado_IGCCCG_baixo",
+      "avancado_IGCCCG_intermediario_alto",
+      "massa_residual_pos_QT",
+      "resgate",
+      "refratario_paliativo"
+    ],
+    "limitesAplicabilidade": "Homens pós-puberais com tumor germinativo testicular. Não cobre tumores do estroma/cordões sexuais, linfoma testicular, tumores pediátricos nem detalha primário extragonadal (mediastinal entra só como critério de alto risco IGCCCG). Por convenção (curso), tumor com qualquer componente não seminomatoso ou seminoma com AFP elevada é manejado como não seminoma. Pack propõe; médico decide."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "USG_BOLSA_ESCROTAL",
+        "rotulo": "Ultrassonografia de bolsa escrotal (testículo)",
+        "indicacao": "universal",
+        "quando": "Massa testicular suspeita, antes da orquiectomia; não citada na SBOC 2026 (apoio do curso)",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "pro26/69_-_Aula_69_-_Neoplasia_germinativa_-_Visão_geral_estadiamento_estratificação.txt",
+          "pagina": 16,
+          "trecho": "USG de testículo",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "cirurgica",
+          "quando": "Orquiectomia radical por via inguinal em toda massa testicular suspeita, antes do tratamento sistêmico; via escrotal contraindicada (curso). SBOC 2026 pressupõe orquiectomia em todos os fluxos.",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "pro26/69_-_Aula_69_-_Neoplasia_germinativa_-_Visão_geral_estadiamento_estratificação.txt",
+            "pagina": 18,
+            "trecho": "Orquiectomia radical (via inguinal)",
+            "estado": "INFERIDO"
+          }
+        },
+        {
+          "tipo": "outra",
+          "quando": "Exceção: doença metastática volumosa/sintomática — considerar QT citorredutora imediata antes da orquiectomia (curso).",
+          "catalogoId": null,
+          "rotulo": "QT antes da orquiectomia",
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "pro26/69_-_Aula_69_-_Neoplasia_germinativa_-_Visão_geral_estadiamento_estratificação.txt",
+            "pagina": 18,
+            "trecho": "Doença metastática volumosa/sintomática → considerar QT citorredutora imediata",
+            "estado": "INFERIDO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "Histologia: seminoma puro × não seminoma, com proporção de cada componente (carcinoma embrionário, saco vitelino, coriocarcinoma, teratoma)",
+        "Tamanho do tumor (pT1a < 3 cm × pT1b ≥ 3 cm — só para seminoma puro)",
+        "Invasão linfovascular (ILV)",
+        "Invasão de rete testis",
+        "Invasão hilar, de epidídimo, de túnica/camada mesotelial visceral, de cordão espermático e de escroto (pT)",
+        "Predomínio de carcinoma embrionário",
+        "Neoplasia germinativa intratubular (in situ)"
+      ],
+      "molecular": [
+        {
+          "alvo": "OCT4, CD117, CD30, SALL4, glipican-3, AFP, β-hCG (painel de diferenciação)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "histologia incerta ou primário de linha média",
+          "consequencia": "define seminoma × não seminoma e subtipo; muda conduta de estádio I a III",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "pro26/69_-_Aula_69_-_Neoplasia_germinativa_-_Visão_geral_estadiamento_estratificação.txt",
+            "pagina": 7,
+            "trecho": "Patologia / IHQ OCT4+ / CD117+ / PLAP+",
+            "estado": "INFERIDO"
+          }
+        },
+        {
+          "alvo": "Isocromossomo 12p / excesso de 12p",
+          "metodo": "FISH/CISH",
+          "catalogoId": "FISH",
+          "quandoPedir": "condicional",
+          "cenario": "tumor de linha média de histogênese incerta",
+          "consequencia": "apoia origem germinativa",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "pro26/69_-_Aula_69_-_Neoplasia_germinativa_-_Visão_geral_estadiamento_estratificação.txt",
+            "pagina": 9,
+            "trecho": "Útil em tumores de linha média de histogênese incerta",
+            "estado": "INFERIDO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição (com categoria S de marcadores) + classificação prognóstica IGCCCG para estádios II-III",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+      "pagina": 4,
+      "trecho": "AJCC 8ª edição",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "cenario": "estadiamento inicial",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "TC de tórax;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome",
+        "cenario": "estadiamento inicial (TC ou RM de abdome e pelve)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "TC ou RM de abdome e pelve;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve",
+        "cenario": "estadiamento inicial (TC ou RM de abdome e pelve)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "TC ou RM de abdome e pelve;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_ABDOMEN_SUPERIOR",
+        "rotulo": "RM de abdome (alternativa à TC)",
+        "cenario": "estadiamento inicial",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "TC ou RM de abdome e pelve;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM de pelve (alternativa à TC)",
+        "cenario": "estadiamento inicial",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "TC ou RM de abdome e pelve;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_CRANIO",
+        "rotulo": "RM de crânio",
+        "cenario": "sintoma neurológico, BHCG muito elevado ou metástases viscerais extensas",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Considerar RM de crânio em caso de suspeita clínica de metástase cerebral",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CINTILOGRAFIA_OSSEA",
+        "rotulo": "Cintilografia óssea",
+        "cenario": "sintomas ósseos",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Cintilografia óssea, se sintomas.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "AFP",
+        "rotulo": "Alfafetoproteína",
+        "cenario": "pré e pós-orquiectomia (categoria S e IGCCCG)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Marcadores tumorais: DHL, AFP e HCG.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BETA_HCG",
+        "rotulo": "β-hCG",
+        "cenario": "pré e pós-orquiectomia (categoria S e IGCCCG)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Marcadores tumorais: DHL, AFP e HCG.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "DHL",
+        "rotulo": "Desidrogenase lática",
+        "cenario": "pré e pós-orquiectomia (categoria S e IGCCCG)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Marcadores tumorais: DHL, AFP e HCG.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma",
+        "cenario": "estadiamento inicial",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Hemograma;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Creatinina (função renal)",
+        "cenario": "estadiamento inicial",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Função renal;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "UREIA",
+        "rotulo": "Ureia (função renal)",
+        "cenario": "estadiamento inicial",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Função renal;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGO",
+        "rotulo": "TGO (função hepática)",
+        "cenario": "estadiamento inicial",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Função hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "rotulo": "TGP (função hepática)",
+        "cenario": "estadiamento inicial",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Função hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BILIRRUBINA",
+        "rotulo": "Bilirrubinas (função hepática)",
+        "cenario": "estadiamento inicial",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Função hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "SODIO",
+        "rotulo": "Sódio",
+        "cenario": "estadiamento inicial",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Eletrólitos: sódio, potássio e magnésio",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "POTASSIO",
+        "rotulo": "Potássio",
+        "cenario": "estadiamento inicial",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Eletrólitos: sódio, potássio e magnésio",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "MAGNESIO",
+        "rotulo": "Magnésio",
+        "cenario": "estadiamento inicial",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Eletrólitos: sódio, potássio e magnésio",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TESTOSTERONA_TOTAL",
+        "rotulo": "Testosterona total",
+        "cenario": "suspeita de hipogonadismo",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Níveis hormonais: testosterona total, LH e FSH",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "LH",
+        "rotulo": "LH",
+        "cenario": "suspeita de hipogonadismo",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Níveis hormonais: testosterona total, LH e FSH",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FSH",
+        "rotulo": "FSH",
+        "cenario": "suspeita de hipogonadismo",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Níveis hormonais: testosterona total, LH e FSH",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "AUDIOMETRIA_TONAL",
+        "rotulo": "Audiometria tonal",
+        "cenario": "basal antes de cisplatina e antes de cada dose subsequente (bula); SBOC não cita",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:cisplatin&limit=1",
+          "pagina": null,
+          "trecho": "Audiometric testing should be performed prior to initiating therapy",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ESPIROMETRIA",
+        "rotulo": "Prova de função pulmonar (espirometria; DLCO sem id próprio no catálogo)",
+        "cenario": "basal antes de esquema com bleomicina; SBOC não cita",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "pro26/70_-_Aula_70_-_Neoplasia_germinativa_-_Tratamento.txt",
+          "pagina": 17,
+          "trecho": "Avaliação funcional: DLCO",
+          "estado": "INFERIDO"
+        },
+        "pendencia": "DLCO sem id próprio no catálogo (ESPIROMETRIA = prova de função pulmonar completa)"
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT FDG",
+        "cenario": "não indicado no estadiamento inicial; só reavaliação de massa residual > 3 cm em seminoma pós-QT",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 19,
+          "trecho": "PET/CT (8+ semanas após término da QT)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "S0",
+        "conduta": "Marcadores normais",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 6,
+          "trecho": "S0 Marcadores nos níveis da normalidade",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "S1",
+        "conduta": "DHL < 1,5x LSN e HCG < 5.000 mU/mL e AFP < 1.000 ng/mL",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 6,
+          "trecho": "DHL < 1,5x LSN + HCG < 5.000 mU/mL + AFP < 1.000 ng/mL",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "S2",
+        "conduta": "DHL 1,5-10x LSN ou HCG 5.000-50.000 mU/mL ou AFP 1.000-10.000 ng/mL",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 6,
+          "trecho": "DHL 1,5-10x LSN ou HCG 5.000-50.000 mU/mL ou AFP 1.000-10.000 ng/mL",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "S3",
+        "conduta": "DHL > 10x LSN ou HCG > 50.000 mU/mL ou AFP > 10.000 ng/mL",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 6,
+          "trecho": "HCG > 50.000 mU/mL ou AFP > 10.000 ng/mL",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Estádio IA / IB",
+        "conduta": "pT1 N0 M0 S0 (IA); pT2-pT4 N0 M0 S0 (IB) — conduta por histologia (seminoma × não seminoma) e ILV",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 6,
+          "trecho": "IA pT1 N0 M0 S0 IB pT2-pT4 N0 M0 S0",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Estádio IS",
+        "conduta": "Qualquer pT N0 M0 S1-S3 com elevação persistente pós-orquiectomia: tratar como doença avançada de baixo risco",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Tratar como doença avançada de baixo risco",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Estádio IIA / IIB / IIC",
+        "conduta": "N1 / N2 / N3, M0, S0/S1 — conduta por histologia; se marcadores elevados pós-orquiectomia, tratar como estádio III",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Estádio IIA/IIB/IIC com elevação de marcadores tumorais pós-orquiectomia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Estádio III (IIIA/IIIB/IIIC)",
+        "conduta": "M1 ou S2/S3 — QT conforme risco IGCCCG",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 6,
+          "trecho": "III Qualquer Qualquer M1 Sx",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IGCCCG seminoma — baixo",
+        "conduta": "Qualquer sítio primário e ausência de metástase visceral não pulmonar (DHL > 2,5x LSN = mau prognóstico nesta categoria) → BEP × 3 ou EP × 4",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "DHL > 2,5x LSN é fator de mau prognóstico nesta categoria",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IGCCCG seminoma — intermediário",
+        "conduta": "Metástase visceral não pulmonar → BEP × 4 (VIP × 4 ou TIP × 4 se contraindicação à bleomicina)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "Intermediário - Presença de metástase visceral não-pulmonar",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IGCCCG seminoma — alto",
+        "conduta": "Não existe seminoma de alto risco",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "Alto - Não há seminoma de alto risco",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IGCCCG não seminoma — baixo",
+        "conduta": "Primário testicular/retroperitoneal, sem metástase visceral não pulmonar, AFP < 1.000 e HCG < 5.000 e DHL < 1,5x LSN → BEP × 3 ou EP × 4",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "AFP < 1.000 ng/mL e HCG < 5.000 mU/mL e DHL < 1,5x LSN",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IGCCCG não seminoma — intermediário",
+        "conduta": "Primário testicular/retroperitoneal, sem metástase visceral não pulmonar, AFP 1.000-10.000 ou HCG 5.000-50.000 ou DHL 1,5-10x LSN → BEP × 4",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "AFP 1.000-10.000 ng/mL ou HCG 5.000-50.000 mU/mL ou DHL 1,5-10x LSN",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IGCCCG não seminoma — alto",
+        "conduta": "Primário mediastinal ou metástase visceral não pulmonar ou AFP > 10.000 ou HCG > 50.000 ou DHL > 10x LSN → BEP × 4",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "AFP > 10.000 ng/mL ou HCG > 50.000 mU/mL ou DHL > 10x LSN",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "AFP",
+          "uso": "Diagnóstico, categoria S e IGCCCG (valor pós-orquiectomia, meia-vida 5-7 dias), resposta e seguimento. AFP elevada exclui seminoma puro (curso).",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 7,
+            "trecho": "considerando a meia-vida (AFP: 5-7 dias; HCG: 24-36 horas)",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "BETA_HCG",
+          "uso": "Diagnóstico, categoria S e IGCCCG (valor pós-orquiectomia, meia-vida 24-36 h pela SBOC), resposta e seguimento.",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 7,
+            "trecho": "os valores séricos devem ser considerados após orquiectomia",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "DHL",
+          "uso": "Categoria S e IGCCCG em múltiplos do LSN; DHL elevada isolada não deve guiar tratamento do estádio IS.",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 11,
+            "trecho": "valores elevados de DHL isoladamente não devem guiar o tratamento",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "PET/CT FDG no estadiamento inicial (curso, aula 69 pág. 16; SBOC só o cita para massa residual de seminoma)",
+        "Cintilografia óssea sem sintomas (SBOC pág. 8)",
+        "RM de crânio sem suspeita clínica (SBOC pág. 8)",
+        "Tratar estádio IS por AFP baixa (< 20) ou elevação sem dosagens consecutivas crescentes (SBOC pág. 11)"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "Seminoma puro EC I — apto ao seguimento",
+        "intencao": "curativa",
+        "modalidades": [
+          "vigilância ativa após orquiectomia"
+        ],
+        "criterio": "Paciente apto a aderir ao seguimento clínico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Vigilância ativa após orquiectomia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Seminoma puro EC I — inapto ao seguimento",
+        "intencao": "curativa",
+        "modalidades": [
+          "carboplatina AUC 7 × 1 (preferencial)",
+          "RT 3D para-aórtica 20 Gy (alternativa)"
+        ],
+        "criterio": "Paciente inapto a aderir ao seguimento clínico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Opção preferencial: Carboplatina adjuvante por 1 ciclo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Não seminoma EC I sem ILV",
+        "intencao": "curativa",
+        "modalidades": [
+          "vigilância ativa",
+          "BEP × 1",
+          "RPLND (centros com experiência)"
+        ],
+        "criterio": "Ausência de ILV no tumor",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Ausência de ILV no tumor",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Não seminoma EC I com ILV ou outros fatores de risco",
+        "intencao": "curativa",
+        "modalidades": [
+          "BEP × 1 (preferencial)",
+          "vigilância ativa",
+          "RPLND (FR fraca)"
+        ],
+        "criterio": "ILV e/ou invasão de rete testis, carcinoma embrionário",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Presença de ILV no tumor e/ou outros fatores de risco",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Estádio IS (marcador persistentemente elevado pós-orquiectomia)",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT como doença avançada de baixo risco (BEP × 3 ou EP × 4)"
+        ],
+        "criterio": "Elevação persistente e consecutiva; não por DHL isolada nem AFP < 20",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Elevação persistente do marcador após orquiectomia (estádio IS)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Estádio patológico II após RPLND primária",
+        "intencao": "curativa",
+        "modalidades": [
+          "pIIA: vigilância ou BEP × 2 ou EP × 2",
+          "pIIB/pIIC: BEP × 2 ou EP × 2",
+          "pN3: BEP × 3 ou EP × 4"
+        ],
+        "criterio": "pN após RPLND primária",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Vigilância ativa ou BEP 2 ciclos ou EP 2 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Seminoma EC IIA/IIB não bulky (≤ 3 cm)",
+        "intencao": "curativa",
+        "modalidades": [
+          "RT para-aórtica + pelve superior ipsilateral 30-36 Gy",
+          "BEP × 3 ou EP × 4",
+          "RPLND em casos selecionados (recusa de QT e RT)"
+        ],
+        "criterio": "Linfonodos ≤ 3 cm, marcadores pós-orquiectomia negativos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Estádio IIA/IIB não-bulky (≤ 3 cm)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Seminoma EC IIB e IIC",
+        "intencao": "curativa",
+        "modalidades": [
+          "BEP × 3 ou EP × 4"
+        ],
+        "criterio": "IIB/IIC",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Estádio IIB e IIC BEP 3 ciclos ou EP 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Não seminoma EC IIA com marcadores negativos",
+        "intencao": "curativa",
+        "modalidades": [
+          "RPLND (FR forte)",
+          "QT",
+          "vigilância ativa"
+        ],
+        "criterio": "IIA, marcadores negativos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Estádio IIA com marcadores negativos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Não seminoma EC IIB/IIC com marcadores negativos",
+        "intencao": "curativa",
+        "modalidades": [
+          "BEP × 3 ou EP × 4"
+        ],
+        "criterio": "IIB/IIC, marcadores negativos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Estádio IIB/IIC com marcadores negativos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "EC II com marcadores elevados pós-orquiectomia",
+        "intencao": "curativa",
+        "modalidades": [
+          "tratar como estádio III (IGCCCG)"
+        ],
+        "criterio": "Marcadores elevados após orquiectomia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Tratamento como estádio III.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Estádio III — baixo risco IGCCCG",
+        "intencao": "curativa",
+        "modalidades": [
+          "BEP × 3",
+          "EP × 4"
+        ],
+        "criterio": "IGCCCG baixo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "Baixo risco IGCCCG BEP 3 ciclos ou EP 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Estádio III — risco intermediário/alto IGCCCG",
+        "intencao": "curativa",
+        "modalidades": [
+          "BEP × 4 (preferencial)",
+          "VIP × 4 ou TIP × 4 se contraindicação à bleomicina",
+          "intensificação (GETUG-13) pode ser considerada no alto risco com declínio desfavorável de marcadores após ciclo 1 — sem esquema detalhado na SBOC"
+        ],
+        "criterio": "IGCCCG intermediário ou alto",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "Opção preferencial: BEP 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Massa residual pós-QT — seminoma",
+        "intencao": "curativa",
+        "modalidades": [
+          "≤ 3 cm e marcadores negativos: vigilância",
+          "> 3 cm: PET/CT ≥ 8 semanas após QT; negativo: vigilância; positivo: biópsia ou novo PET/CT, ou RPLND bilateral se factível",
+          "progressão/marcadores em elevação: QT de 2ª linha"
+        ],
+        "criterio": "Eixo transaxial longo em TC; marcadores",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 19,
+          "trecho": "Massa residual > 3 cm no eixo transaxial longo em TC",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Massa residual pós-QT — não seminoma",
+        "intencao": "curativa",
+        "modalidades": [
+          "< 1 cm: seguimento ou RPLND com preservação simpática",
+          "≥ 1 cm com marcadores negativos: RPLND bilateral com preservação das fibras simpáticas",
+          "teratoma/necrose ou viável < 10% com baixo risco inicial: seguimento",
+          "viável > 10% ou risco inicial intermediário/alto: QT × 2 (EP, TIP, VIP ou VeIP)",
+          "marcadores elevados: QT de 2ª linha",
+          "crescimento com marcadores negativos: suspeitar síndrome do teratoma em crescimento → ressecção"
+        ],
+        "criterio": "Tamanho da massa residual e marcadores",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 19,
+          "trecho": "Massa residual ≥ 1 cm no eixo transaxial longo em TC e marcadores negativos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Doença recidivada (resgate)",
+        "intencao": "curativa",
+        "modalidades": [
+          "TIP × 4 ou VeIP × 4 (doses convencionais; preferência com fatores favoráveis)",
+          "carboplatina + etoposídeo em altas doses com TCTH (preferência com ≥ 1 fator desfavorável)",
+          "cirurgia em lesão residual pós-resgate ou recidiva tardia (> 2 anos)"
+        ],
+        "criterio": "Fatores prognósticos na recidiva: sítio primário, tipo e duração da resposta, metástase hepática/óssea/cerebral, AFP ou HCG > 1.000",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 22,
+          "trecho": "Nível de marcadores tumorais (AFP ou HCG) > 1.000.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Doença recidivada refratária",
+        "intencao": "paliativa",
+        "modalidades": [
+          "GemOx",
+          "gemcitabina + paclitaxel",
+          "gemcitabina + paclitaxel + oxaliplatina",
+          "epirrubicina + cisplatina (máx. 4 ciclos)",
+          "etoposídeo oral"
+        ],
+        "criterio": "Progressão após QT em altas doses/múltiplas linhas; escolha conforme drogas prévias",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 24,
+          "trecho": "Epirrubicina + Cisplatina (máximo 4 ciclos)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Mau prognóstico com queda inadequada de marcadores após o 1º ciclo",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT intensificada (GETUG-13)"
+        ],
+        "criterio": "Intensificação conforme GETUG-13 citado no MOC; não é rotina. Doses do esquema intensificado: conferir no capítulo/estudo.",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "testiculo-carboplatina-auc7-adjuvante",
+        "nome": "Carboplatina AUC 7 adjuvante (dose única)",
+        "cenario": "Seminoma puro estádio clínico I, paciente inapto a aderir ao seguimento",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": 7,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "dose total (mg) = AUC × (TFG + 25) — fórmula de Calvert (bula FDA carboplatina); dose única"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": "1 ou 2",
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Calvert (CI-04): dose em mg = AUC alvo × (TFG + 25). SBOC cita apenas 1 ciclo (dose única); 2 ciclos não citados.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "Carboplatina AUC 7 EV D1 Periodicidade: dose única",
+          "estado": "VERIFICADO"
+        },
+        "fontesAdicionais": [
+          {
+            "tipo": "DIRETRIZ",
+            "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        ],
+        "notaCiclos": "MOC: carboplatina AUC 7 por 1 ou 2 ciclos no seminoma I."
+      },
+      {
+        "id": "testiculo-bep-x1-adjuvante-ec1-nao-seminoma",
+        "nome": "BEP × 1 adjuvante",
+        "cenario": "Não seminoma estádio clínico I (preferencial se ILV presente; opção se ILV ausente)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "bleomicina",
+            "dose": 30,
+            "unidade": "UI",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": "dose fixa; dose máxima cumulativa 400 UI (SBOC pág. 9); bula: cautela acima de 400 unidades totais"
+          },
+          {
+            "droga": "etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "dose diária (total 100 mg/m2 por ciclo)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 1,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18). Bleomicina: ajuste se ClCr < 50 mL/min (bula FDA bleomicina); teto cumulativo 400 UI; prova de função pulmonar basal (curso: DLCO).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Opção preferencial: BEP 1 ciclo após a orquiectomia",
+          "estado": "VERIFICADO"
+        },
+        "criterioAplicacao": "Não seminoma estádio I com invasão vascular e má adesão ao seguimento (MOC).",
+        "fontesAdicionais": [
+          {
+            "tipo": "DIRETRIZ",
+            "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        ]
+      },
+      {
+        "id": "testiculo-bep-x2-adjuvante-pos-rplnd",
+        "nome": "BEP × 2 adjuvante após RPLND primária",
+        "cenario": "Estádio patológico IIA (opção à vigilância), IIB ou IIC após RPLND primária",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "bleomicina",
+            "dose": 30,
+            "unidade": "UI",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": "dose fixa; dose máxima cumulativa 400 UI (SBOC pág. 9); bula: cautela acima de 400 unidades totais"
+          },
+          {
+            "droga": "etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "dose diária (total 100 mg/m2 por ciclo)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 2,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18). Bleomicina: ajuste se ClCr < 50 mL/min (bula FDA bleomicina); teto cumulativo 400 UI; prova de função pulmonar basal (curso: DLCO).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "BEP 2 ciclos ou EP 2 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-ep-x2-adjuvante-pos-rplnd",
+        "nome": "EP × 2 adjuvante após RPLND primária",
+        "cenario": "Estádio patológico IIA (opção à vigilância), IIB ou IIC após RPLND primária",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "dose diária (total 100 mg/m2 por ciclo)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 2,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Vigilância ativa ou BEP 2 ciclos ou EP 2 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-bep-x3-adjuvante-pos-rplnd-pn3",
+        "nome": "BEP × 3 após RPLND primária (pN3)",
+        "cenario": "Estádio patológico II com pN3 após RPLND primária",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "bleomicina",
+            "dose": 30,
+            "unidade": "UI",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": "dose fixa; dose máxima cumulativa 400 UI (SBOC pág. 9); bula: cautela acima de 400 unidades totais"
+          },
+          {
+            "droga": "etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "dose diária (total 100 mg/m2 por ciclo)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18). Bleomicina: ajuste se ClCr < 50 mL/min (bula FDA bleomicina); teto cumulativo 400 UI; prova de função pulmonar basal (curso: DLCO).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "BEP 3 ciclos ou EP 4 ciclos, em caso de pN3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-ep-x4-adjuvante-pos-rplnd-pn3",
+        "nome": "EP × 4 após RPLND primária (pN3)",
+        "cenario": "Estádio patológico II com pN3 após RPLND primária",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "dose diária (total 100 mg/m2 por ciclo)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "BEP 3 ciclos ou EP 4 ciclos, em caso de pN3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-bep-x3-baixo-risco",
+        "nome": "BEP × 3 (doença avançada de baixo risco IGCCCG)",
+        "cenario": "Estádio IS; estádio clínico II (seminoma IIA/IIB ≤3 cm, IIB/IIC; não seminoma IIB/IIC marcadores negativos); estádio III baixo risco IGCCCG",
+        "linha": "primeira linha (curativa)",
+        "drogas": [
+          {
+            "droga": "bleomicina",
+            "dose": 30,
+            "unidade": "UI",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": "dose fixa; dose máxima cumulativa 400 UI (SBOC pág. 9); bula: cautela acima de 400 unidades totais"
+          },
+          {
+            "droga": "etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "dose diária (total 100 mg/m2 por ciclo)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18). Bleomicina: ajuste se ClCr < 50 mL/min (bula FDA bleomicina); teto cumulativo 400 UI; prova de função pulmonar basal (curso: DLCO). Carboplatina não substitui cisplatina (SBOC pág. 17).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "Baixo risco IGCCCG BEP 3 ciclos ou EP 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-ep-x4-baixo-risco",
+        "nome": "EP × 4 (doença avançada de baixo risco IGCCCG)",
+        "cenario": "Estádio IS; estádio clínico II (mesmas indicações do BEP × 3); estádio III baixo risco IGCCCG; alternativa sem bleomicina",
+        "linha": "primeira linha (curativa)",
+        "drogas": [
+          {
+            "droga": "etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "dose diária (total 100 mg/m2 por ciclo)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18). Carboplatina não substitui cisplatina (SBOC pág. 17).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "Baixo risco IGCCCG BEP 3 ciclos ou EP 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-bep-x4-intermediario-alto",
+        "nome": "BEP × 4 (risco intermediário/alto IGCCCG)",
+        "cenario": "Estádio III risco intermediário ou alto IGCCCG (seminoma intermediário; não seminoma intermediário/alto)",
+        "linha": "primeira linha (curativa)",
+        "drogas": [
+          {
+            "droga": "bleomicina",
+            "dose": 30,
+            "unidade": "UI",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": "dose fixa; dose máxima cumulativa 400 UI (SBOC pág. 9); bula: cautela acima de 400 unidades totais"
+          },
+          {
+            "droga": "etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "dose diária (total 100 mg/m2 por ciclo)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18). Bleomicina: ajuste se ClCr < 50 mL/min (bula FDA bleomicina); teto cumulativo 400 UI; prova de função pulmonar basal (curso: DLCO).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "Opção preferencial: BEP 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-vip-x4-intermediario-alto",
+        "nome": "VIP × 4 (risco intermediário/alto, contraindicação à bleomicina)",
+        "cenario": "Estádio III risco intermediário/alto IGCCCG com contraindicação à bleomicina",
+        "linha": "primeira linha (curativa)",
+        "drogas": [
+          {
+            "droga": "etoposídeo",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "ifosfamida",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "mesna",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "uroprotetor da ifosfamida"
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "dose diária (total 100 mg/m2 por ciclo)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18). VIP associa-se a maior mielotoxicidade (SBOC pág. 17).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "Contraindicação à Bleomicina: VIP 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-tip-x4-intermediario-alto",
+        "nome": "TIP × 4 (risco intermediário/alto, contraindicação à bleomicina)",
+        "cenario": "Estádio III risco intermediário/alto IGCCCG com contraindicação ou indisponibilidade da bleomicina",
+        "linha": "primeira linha (curativa)",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": 250,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "infusão em 24 h"
+          },
+          {
+            "droga": "ifosfamida",
+            "dose": 1500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2 a D5",
+            "observacao": "com mesna"
+          },
+          {
+            "droga": "mesna",
+            "dose": 300,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2 a D5, em bolus na hora 0, 4 h e 8 h de cada dose de ifosfamida",
+            "observacao": "Regra da bula: 20% da dose de ifosfamida (p/p) por bolus, 60%/dia; ifosfamida 1500 mg/m² → 300 mg/m² ×3/dia (derivação aritmética).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22mesna%22&limit=1 (MESNEX 2025-12-10, set_id 1dd69e84-616d-fb77-e063-6394a90af2f4)",
+              "pagina": null,
+              "trecho": "dosage equal to 20% of the ifosfamide dosage weight by weight (w/w)",
+              "estado": "INFERIDO"
+            }
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2 a D5",
+            "observacao": "dose diária"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18). Ifosfamida sempre com mesna; mesna 20% da dose de ifosfamida ×3/dia (bula). Paclitaxel: ver INAT-17.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "TIP 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-ep-x2-pos-rplnd-massa-residual",
+        "nome": "EP × 2 após ressecção de massa residual com tumor viável",
+        "cenario": "Não seminoma pós-QT: RPLND de massa residual com tumor viável > 10% ou risco inicial intermediário/alto",
+        "linha": "consolidação pós-ressecção",
+        "drogas": [
+          {
+            "droga": "etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "dose diária (total 100 mg/m2 por ciclo)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 2,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18). Doses conforme tabela SBOC pág. 9 ('Etoposídeo 100 mg/m² EV D1 a D5').",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 19,
+          "trecho": "Tumor viável > 10% ou risco intermediário/alto inicial: QT 2 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-tip-x2-pos-rplnd-massa-residual",
+        "nome": "TIP × 2 após ressecção de massa residual com tumor viável",
+        "cenario": "Não seminoma pós-QT: RPLND de massa residual com tumor viável > 10% ou risco inicial intermediário/alto",
+        "linha": "consolidação pós-ressecção",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": 250,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "infusão em 24 h"
+          },
+          {
+            "droga": "ifosfamida",
+            "dose": 1500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2 a D5",
+            "observacao": "com mesna"
+          },
+          {
+            "droga": "mesna",
+            "dose": 300,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2 a D5, em bolus na hora 0, 4 h e 8 h de cada dose de ifosfamida",
+            "observacao": "Regra da bula: 20% da dose de ifosfamida (p/p) por bolus, 60%/dia; ifosfamida 1500 mg/m² → 300 mg/m² ×3/dia (derivação aritmética).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22mesna%22&limit=1 (MESNEX 2025-12-10, set_id 1dd69e84-616d-fb77-e063-6394a90af2f4)",
+              "pagina": null,
+              "trecho": "dosage equal to 20% of the ifosfamide dosage weight by weight (w/w)",
+              "estado": "INFERIDO"
+            }
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2 a D5",
+            "observacao": "dose diária"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 2,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18). Ifosfamida sempre com mesna; mesna 20% da dose de ifosfamida ×3/dia (bula). Doses conforme tabela SBOC pág. 9 ('Paclitaxel 250 mg/m² EV D1 infusional em 24h').",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 19,
+          "trecho": "Tumor viável > 10% ou risco intermediário/alto inicial: QT 2 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-vip-x2-pos-rplnd-massa-residual",
+        "nome": "VIP × 2 após ressecção de massa residual com tumor viável",
+        "cenario": "Não seminoma pós-QT: RPLND de massa residual com tumor viável > 10% ou risco inicial intermediário/alto",
+        "linha": "consolidação pós-ressecção",
+        "drogas": [
+          {
+            "droga": "etoposídeo",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "ifosfamida",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "mesna",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "dose diária (total 100 mg/m2 por ciclo)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 2,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18). Doses conforme tabela SBOC pág. 9 ('Etoposídeo 75 mg/m² EV D1 a D5').",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 19,
+          "trecho": "Tumor viável > 10% ou risco intermediário/alto inicial: QT 2 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-veip-x2-pos-rplnd-massa-residual",
+        "nome": "VeIP × 2 após ressecção de massa residual com tumor viável",
+        "cenario": "Não seminoma pós-QT: RPLND de massa residual com tumor viável > 10% ou risco inicial intermediário/alto",
+        "linha": "consolidação pós-ressecção",
+        "drogas": [
+          {
+            "droga": "vimblastina",
+            "dose": 0.11,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 e D2",
+            "observacao": "mg/kg/dia"
+          },
+          {
+            "droga": "ifosfamida",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "com mesna"
+          },
+          {
+            "droga": "mesna",
+            "dose": 240,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5, em bolus na hora 0, 4 h e 8 h de cada dose de ifosfamida",
+            "observacao": "Regra da bula: 20% da dose de ifosfamida (p/p) por bolus, 60%/dia; ifosfamida 1200 mg/m² → 240 mg/m² ×3/dia (derivação aritmética).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22mesna%22&limit=1 (MESNEX 2025-12-10, set_id 1dd69e84-616d-fb77-e063-6394a90af2f4)",
+              "pagina": null,
+              "trecho": "dosage equal to 20% of the ifosfamide dosage weight by weight (w/w)",
+              "estado": "INFERIDO"
+            }
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "dose diária (total 100 mg/m2 por ciclo)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 2,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18). Ifosfamida sempre com mesna; mesna 20% da dose de ifosfamida ×3/dia (bula). Doses conforme tabela SBOC pág. 10 ('Vimblastina 0,11 mg/kg/dia EV D1 e D2').",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060208",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060208 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 19,
+          "trecho": "Tumor viável > 10% ou risco intermediário/alto inicial: QT 2 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-tip-x4-resgate",
+        "nome": "TIP × 4 (resgate em doses convencionais)",
+        "cenario": "Doença recidivada após QT de 1ª linha com cisplatina (preferência na recidiva com fatores de bom prognóstico)",
+        "linha": "segunda linha (resgate)",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": 250,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "infusão em 24 h"
+          },
+          {
+            "droga": "ifosfamida",
+            "dose": 1500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2 a D5",
+            "observacao": "com mesna"
+          },
+          {
+            "droga": "mesna",
+            "dose": 300,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2 a D5, em bolus na hora 0, 4 h e 8 h de cada dose de ifosfamida",
+            "observacao": "Regra da bula: 20% da dose de ifosfamida (p/p) por bolus, 60%/dia; ifosfamida 1500 mg/m² → 300 mg/m² ×3/dia (derivação aritmética).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22mesna%22&limit=1 (MESNEX 2025-12-10, set_id 1dd69e84-616d-fb77-e063-6394a90af2f4)",
+              "pagina": null,
+              "trecho": "dosage equal to 20% of the ifosfamide dosage weight by weight (w/w)",
+              "estado": "INFERIDO"
+            }
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2 a D5",
+            "observacao": "dose diária"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18). Ifosfamida sempre com mesna; mesna 20% da dose de ifosfamida ×3/dia (bula).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060216",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060216 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 22,
+          "trecho": "QT em doses convencionais TIP 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-veip-x4-resgate",
+        "nome": "VeIP × 4 (resgate em doses convencionais)",
+        "cenario": "Doença recidivada após QT de 1ª linha com cisplatina",
+        "linha": "segunda linha (resgate)",
+        "drogas": [
+          {
+            "droga": "vimblastina",
+            "dose": 0.11,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 e D2",
+            "observacao": "mg/kg/dia"
+          },
+          {
+            "droga": "ifosfamida",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "com mesna"
+          },
+          {
+            "droga": "mesna",
+            "dose": 240,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5, em bolus na hora 0, 4 h e 8 h de cada dose de ifosfamida",
+            "observacao": "Regra da bula: 20% da dose de ifosfamida (p/p) por bolus, 60%/dia; ifosfamida 1200 mg/m² → 240 mg/m² ×3/dia (derivação aritmética).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22mesna%22&limit=1 (MESNEX 2025-12-10, set_id 1dd69e84-616d-fb77-e063-6394a90af2f4)",
+              "pagina": null,
+              "trecho": "dosage equal to 20% of the ifosfamide dosage weight by weight (w/w)",
+              "estado": "INFERIDO"
+            }
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "dose diária (total 100 mg/m2 por ciclo)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18). Ifosfamida sempre com mesna; mesna 20% da dose de ifosfamida ×3/dia (bula).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060216",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060216 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 22,
+          "trecho": "VeIP 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-carboplatina-etoposideo-altas-doses-resgate",
+        "nome": "Carboplatina + etoposídeo em altas doses com suporte de células-tronco hematopoiéticas",
+        "cenario": "Doença recidivada com ≥1 fator desfavorável na recidiva (primeiro resgate)",
+        "linha": "segunda linha (resgate) — centro de TCTH",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": null,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": null,
+            "observacao": "altas doses; esquema não detalhado na SBOC",
+            "pendencia": {
+              "texto": "Carboplatina em altas doses calculada por AUC no protocolo TIGER; dose não consta no registro.",
+              "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+              "buscasFeitas": [
+                "https://clinicaltrials.gov/api/v2/studies/NCT02375204: 'carboplatin daily on Days 1-3' sem dose/AUC (busca por AUC sem resultado)",
+                "fontes/sboc/Testiculo_sboc, Testiculos-1, SBOC 2026 p.22-23: sem dose",
+                "fontes/pro26/70: sem dose de altas doses"
+              ]
+            }
+          },
+          {
+            "droga": "etoposídeo",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D3 (ciclos de altas doses do TI-CE; reinfusão de CTH no D5)",
+            "observacao": "Braço TI-CE do TIGER (NCT02375204); precedido de 2 ciclos de mobilização (paclitaxel 200 mg/m² D1 + ifosfamida 2.000 mg/m² D1-D3, q14) no mesmo registro.",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02375204 (TIGER, braço B TI-CE)",
+              "pagina": null,
+              "trecho": "etoposide 400 mg/m^2 daily on Days 1-3",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Encaminhar a centro com TCTH autólogo; carboplatina por AUC conforme protocolo do centro (não consta no registro).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304060216",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Quimioterapia via APAC de 2ª linha; TCTH autólogo é procedimento de transplante à parte (cobertura não verificada nesta rodada). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060216 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 22,
+          "trecho": "Carboplatina + Etoposídeo em altas doses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-gemox-paliativo",
+        "nome": "GemOx",
+        "cenario": "Doença recidivada refratária (após altas doses/múltiplas linhas)",
+        "linha": "paliativa",
+        "drogas": [
+          {
+            "droga": "gemcitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          },
+          {
+            "droga": "oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Escolha conforme drogas de linhas anteriores (SBOC pág. 24).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060216",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060216 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Gemcitabina 1.000 mg/m² EV D1 e D8 Oxaliplatina 130 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-gemcitabina-paclitaxel-paliativo",
+        "nome": "Gemcitabina + paclitaxel",
+        "cenario": "Doença recidivada refratária",
+        "linha": "paliativa",
+        "drogas": [
+          {
+            "droga": "gemcitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          },
+          {
+            "droga": "paclitaxel",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8 e D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Paclitaxel: ver INAT-17.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060216",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060216 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Paclitaxel 100 mg/m² EV D1, D8 e D15 Periodicidade: a cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-gop-paliativo",
+        "nome": "Gemcitabina + paclitaxel + oxaliplatina",
+        "cenario": "Doença recidivada refratária",
+        "linha": "paliativa",
+        "drogas": [
+          {
+            "droga": "gemcitabina",
+            "dose": 800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          },
+          {
+            "droga": "paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          },
+          {
+            "droga": "oxaliplatina",
+            "dose": 120,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Paclitaxel: ver INAT-17.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060216",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060216 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Gemcitabina 800 mg/m² EV D1 e D8 Paclitaxel 80 mg/m² EV D1 e D8",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-epirrubicina-cisplatina-paliativo",
+        "nome": "Epirrubicina + cisplatina",
+        "cenario": "Doença recidivada refratária",
+        "linha": "paliativa",
+        "drogas": [
+          {
+            "droga": "epirrubicina",
+            "dose": 90,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5",
+            "observacao": "dose diária (total 100 mg/m2 por ciclo)"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "Hidratação, antiemese e pré-medicação não especificadas na SBOC 2026 — conforme protocolo institucional (pendência SEM_FONTE).",
+        "ajusteObrigatorio": "Máximo de 4 ciclos (SBOC pág. 10). Cisplatina: creatinina, ureia, Mg, Na, K e Ca antes de cada ciclo e audiometria basal e antes de cada dose (bula FDA cisplatina; CI-01). Evitar atrasos e reduções de dose (SBOC pág. 18).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060216",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060216 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Epirrubicina 90 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "testiculo-etoposideo-oral-paliativo",
+        "nome": "Etoposídeo oral",
+        "cenario": "Doença recidivada refratária",
+        "linha": "paliativa",
+        "drogas": [
+          {
+            "droga": "etoposídeo",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "contínuo (1x/dia)",
+            "observacao": "alternativa SBOC: 50-100 mg/dia VO D1 a D21"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304060216",
+              "nome": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304060216 QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE TUMOR GERMINATIVO DE TESTÍCULO - 2ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Etoposídeo 50 mg/m² VO 1x/dia continuamente OU",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "Seminoma puro EC I inapto ao seguimento (alternativa à carboplatina)",
+        "doseTotalGy": 20,
+        "fracoes": null,
+        "concomitante": "não",
+        "pendencia": {
+          "texto": "SEM_FONTE para número de frações",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ]
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "RT 3D adjuvante com campo para-aórtico com dose total de 20 Gy",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Seminoma EC IIA/IIB não bulky (≤ 3 cm): para-aórtica + pelve superior ipsilateral, boost opcional",
+        "doseTotalGy": "30-36",
+        "fracoes": null,
+        "concomitante": "não",
+        "pendencia": {
+          "texto": "SEM_FONTE para número de frações",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ]
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "boost opcional nos LFN alterados (dose total de 30-36 Gy)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Orquiectomia radical inguinal",
+        "quando": "Toda massa testicular suspeita; diagnóstica e terapêutica (exceção: QT citorredutora imediata em doença volumosa/sintomática)",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "pro26/69_-_Aula_69_-_Neoplasia_germinativa_-_Visão_geral_estadiamento_estratificação.txt",
+          "pagina": 18,
+          "trecho": "Orquiectomia radical (via inguinal)",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "procedimento": "Linfadenectomia retroperitoneal primária (RPLND)",
+        "quando": "Não seminoma EC I (opção) e EC IIA marcadores negativos; seminoma IIA/IIB em casos selecionados; preferir centros com experiência",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "A RPLND deve ser prioritariamente realizada em centros com experência",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "RPLND bilateral pós-QT com preservação das fibras simpáticas pós-ganglionares",
+        "quando": "Não seminoma com massa residual ≥ 1 cm e marcadores negativos; seminoma PET+ como alternativa se factível",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 19,
+          "trecho": "Linfadenectomia retroperitoneal bilateral com preservação das fibras simpáticas pós-ganglionares",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Ressecção de lesão em crescimento com marcadores negativos",
+        "quando": "Síndrome do teratoma em crescimento",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 21,
+          "trecho": "síndrome do teratoma em crescimento, cujo tratamento recomendado é ressecção cirúrgica",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Cirurgia do sítio de doença após resgate",
+        "quando": "Não seminoma com lesão residual após QT de resgate ou recidiva tardia (> 2 anos), se ressecção completa factível",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 22,
+          "trecho": "devem ser avaliados para cirurgia do sítio de doença",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [],
+    "suporte": {
+      "emetogenicidade": "DADO_AUSENTE (SBOC 2026 não classifica; definir por protocolo institucional de antiemese para cisplatina fracionada D1-D5)",
+      "riscoNeutropeniaFebril": "G-CSF profilático primário não indicado de rotina; profilaxia secundária nos ciclos remanescentes após complicação infecciosa ou atraso por mielotoxicidade. Evitar atrasos e reduções de dose.",
+      "outros": [
+        "Criopreservação de sêmen antes da orquiectomia e de tratamentos locais/sistêmicos (SBOC pág. 8)",
+        "Bleomicina: toxicidade pulmonar é a principal (pneumonite/fibrose); risco maior acima de 400 unidades totais (bula FDA)",
+        "Excesso de O2 pode precipitar lesão pulmonar após bleomicina — informar anestesia antes de RPLND (curso, aula 70 pág. 17)",
+        "Cisplatina: ototoxicidade cumulativa — audiometria basal e antes das doses (bula FDA)"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 18,
+        "trecho": "não há indicação para uso de aplicação profilática de fatores de crescimento",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "MRC TE19/EORTC 30982 (carboplatina AUC 7 × RT, seminoma EC I)",
+        "nct": "NCT00003014",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Seminoma estádio I",
+        "bracos": "Carboplatina AUC 7 dose única × RT",
+        "desfecho": "Recorrência",
+        "resultado": "Não inferioridade; RLD 94,7% × 96% em 6,5 anos; menos segundos tumores com carboplatina",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "confirmou a não-inferioridade da Carboplatina AUC 7 versus RT",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "registro ISRCTN27163214 (não NCT)",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT00003014 (MRC-TE19, EORTC-30982)"
+      },
+      {
+        "nome": "SWENOTECA (adaptado ao risco, não seminoma EC I)",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "populacao": "Não seminoma estádio I",
+        "bracos": "BEP × 1 se ILV; vigilância ou BEP se sem ILV",
+        "desfecho": "Recidiva",
+        "resultado": "Com ILV: recidiva 3,2% com BEP × 41,7% em vigilância",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Nos pacientes com invasão linfovascular a recidiva foi reduzida para 3,2%",
+          "estado": "VERIFICADO"
+        },
+        "nctPendencia": {
+          "texto": "Sem registro de SWENOTECA para não seminoma EC I (único registro, NCT02341989, é SWENOTECA-ABC em seminoma).",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "SWENOTECA",
+            "nonseminomatous stage I retroperitoneal lymph node dissection BEP",
+            "testicular cancer stage I nonseminoma one cycle BEP"
+          ]
+        }
+      },
+      {
+        "nome": "AUO AH 01/94 (RPLND × BEP × 1)",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "populacao": "Não seminoma EC I (383 pacientes)",
+        "bracos": "RPLND × BEP × 1",
+        "desfecho": "Recidiva",
+        "resultado": "Menor recidiva com BEP × 1 vs RPLND em centros não de referência",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "BEP por um ciclo quando comparado à RPLND realizada em centros",
+          "estado": "VERIFICADO"
+        },
+        "nctPendencia": {
+          "texto": "Estudo anterior ao registro obrigatório; sem NCT.",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "AUO AH 01/94",
+            "AUO testis",
+            "stage I nonseminomatous germ cell retroperitoneal lymphadenectomy"
+          ]
+        }
+      },
+      {
+        "nome": "GETUG T93BP (BEP × 3 × EP × 4, baixo risco)",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "populacao": "Não seminoma metastático de bom prognóstico",
+        "bracos": "BEP × 3 × EP × 4",
+        "desfecho": "Sobrevida livre de recorrência",
+        "resultado": "91% × 86% (p = 0,135); não desenhado para SG",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "sobrevida livre de recorrência de 91% e 86% para BEPx3 e EPx4",
+          "estado": "VERIFICADO"
+        },
+        "nctPendencia": {
+          "texto": "Sem registro localizado.",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "GETUG T93BP",
+            "GETUG germ cell",
+            "EP versus BEP germ cell good prognosis",
+            "germ cell tumor good risk etoposide cisplatin three versus four"
+          ]
+        }
+      },
+      {
+        "nome": "ECOG/SWOG/CALGB — BEP × 4 × VIP × 4 (Nichols 1998)",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "populacao": "Tumor germinativo avançado disseminado",
+        "bracos": "BEP × 4 × VIP × 4",
+        "desfecho": "SG 2 anos",
+        "resultado": "71% × 74% (p = 0,78); VIP mais mielotóxico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "BEP 71% e VIP 74%; p = 0,78",
+          "estado": "VERIFICADO"
+        },
+        "nctPendencia": {
+          "texto": "Estudo dos anos 1980-90; sem registro localizado.",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "BEP VIP germ cell Nichols",
+            "E3887",
+            "ifosfamide germ cell advanced disseminated cisplatin etoposide bleomycin",
+            "cisplatin etoposide bleomycin ifosfamide germ cell 1998"
+          ]
+        }
+      },
+      {
+        "nome": "GETUG 13 (intensificação por declínio de marcadores, alto risco)",
+        "nct": "NCT00104676",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Não seminoma estádio II/III de mau prognóstico",
+        "bracos": "BEP × intensificação dose-densa com paclitaxel, oxaliplatina e ifosfamida no declínio desfavorável",
+        "desfecho": "SLP 5 anos",
+        "resultado": "SLP 60% × 47% (HR 0,65); SG sem diferença significativa; mais toxicidade",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00104676",
+          "pagina": null,
+          "trecho": "Combination Chemotherapy in Treating Patients With Stage II or Stage III Germ Cell Tumors",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "TIP × BEP fase 2 (intermediário/alto risco, Feldman)",
+        "nct": "NCT01873326",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Tumor germinativo intermediário/alto risco sem tratamento prévio",
+        "bracos": "TIP × BEP",
+        "desfecho": "Resposta",
+        "resultado": "Respostas semelhantes; TIP alternativa na indisponibilidade de bleomicina (SBOC pág. 17)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT01873326",
+          "pagina": null,
+          "trecho": "Paclitaxel, Ifosfamide and Cisplatin (TIP) Versus Bleomycin, Etoposide and Cisplatin (BEP)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "TIGER (TIP × TI-CE altas doses no primeiro resgate)",
+        "nct": "NCT02375204",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Tumor germinativo recidivado após QT com cisplatina (420 pacientes)",
+        "bracos": "TIP convencional × TI-CE altas doses com TCTH",
+        "desfecho": "SG",
+        "resultado": "Em andamento (registro ACTIVE_NOT_RECRUITING)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02375204",
+          "pagina": null,
+          "trecho": "Standard-Dose Combination Chemotherapy or High-Dose Combination Chemotherapy and Stem Cell Transplant",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "COTRIMS / PRIMETEST / SEMS (RPLND em seminoma IIA/IIB)",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "populacao": "Seminoma estádio clínico IIA/IIB",
+        "bracos": "RPLND primária (fase II)",
+        "desfecho": "Recidiva",
+        "resultado": "Recidiva 17,8% (11,8-30%); cirurgiões experientes",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "a cirurgia se demonstrou segura e com uma taxa de recidiva de 17,8%",
+          "estado": "VERIFICADO"
+        },
+        "registros": [
+          {
+            "nome": "PRIMETEST",
+            "nct": "NCT02797626",
+            "estado": "VERIFICADO"
+          },
+          {
+            "nome": "SEMS",
+            "nct": "NCT02537548",
+            "estado": "VERIFICADO"
+          },
+          {
+            "nome": "COTRIMS",
+            "nct": null,
+            "estado": "NAO_ENCONTRADO"
+          }
+        ],
+        "nctPendencia": {
+          "texto": "COTRIMS sem NCT (provável registro DRKS, não consultável); PRIMETEST e SEMS verificados.",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "COTRIMS",
+            "COTRIMS seminoma",
+            "seminoma COTRIMS",
+            "ISRCTN: COTRIMS"
+          ]
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "1º e 2º anos",
+        "exames": [
+          "AFP",
+          "BETA_HCG",
+          "DHL",
+          "TC_ABDOMEN_SUPERIOR",
+          "RX_TORAX_PA_PERFIL",
+          "TC_TORAX"
+        ],
+        "periodicidade": "Consulta + marcadores a cada 2 meses; TC de abdome e RX de tórax (ou TC de tórax) a cada 4 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 25,
+          "trecho": "Consulta + marcadores séricos a cada 2 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "3º ano",
+        "exames": [
+          "AFP",
+          "BETA_HCG",
+          "DHL",
+          "TC_ABDOMEN_SUPERIOR",
+          "RX_TORAX_PA_PERFIL",
+          "TC_TORAX"
+        ],
+        "periodicidade": "Consulta + marcadores a cada 3 meses; TC de abdome e RX de tórax (ou TC de tórax) a cada 6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 25,
+          "trecho": "Consulta + marcadores séricos a cada 3 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "4º e 5º anos",
+        "exames": [
+          "AFP",
+          "BETA_HCG",
+          "DHL",
+          "TC_ABDOMEN_SUPERIOR",
+          "RX_TORAX_PA_PERFIL",
+          "TC_TORAX"
+        ],
+        "periodicidade": "Consulta + marcadores a cada 6 meses; TC de abdome e RX de tórax (ou TC de tórax) anuais",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 25,
+          "trecho": "4º e 5º anos Consulta + marcadores séricos a cada 6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Sobrevivência (orientações gerais)",
+        "exames": [
+          "GLICEMIA",
+          "COLESTEROL_TOTAL",
+          "COLESTEROL_HDL",
+          "COLESTEROL_LDL",
+          "TRIGLICERIDEOS"
+        ],
+        "periodicidade": "Monitoramento de PA, glicemia e perfil lipídico (periodicidade não especificada)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 25,
+          "trecho": "Monitoramento de PA, glicemia e perfil lipídico",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "anos 1–2",
+        "exames": [
+          "AFP",
+          "BETA_HCG",
+          "DHL"
+        ],
+        "periodicidade": "a cada 3 meses",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "periodo": "anos 3–4",
+        "exames": [
+          "AFP",
+          "BETA_HCG",
+          "DHL"
+        ],
+        "periodicidade": "a cada 6 meses",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "periodo": "ano 5",
+        "exames": [
+          "AFP",
+          "BETA_HCG",
+          "DHL"
+        ],
+        "periodicidade": "anual",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "USG_BOLSA_ESCROTAL",
+      "ANATOMOPATOLOGICO",
+      "IMUNOHISTOQUIMICA",
+      "FISH",
+      "TC_TORAX",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "RM_ABDOMEN_SUPERIOR",
+      "RM_PELVE",
+      "RM_CRANIO",
+      "CINTILOGRAFIA_OSSEA",
+      "AFP",
+      "BETA_HCG",
+      "DHL",
+      "HEMOGRAMA",
+      "CREATININA",
+      "UREIA",
+      "TGO",
+      "TGP",
+      "BILIRRUBINA",
+      "SODIO",
+      "POTASSIO",
+      "MAGNESIO",
+      "TESTOSTERONA_TOTAL",
+      "LH",
+      "FSH",
+      "AUDIOMETRIA_TONAL",
+      "ESPIROMETRIA",
+      "PET_CT_FDG",
+      "RX_TORAX_PA_PERFIL",
+      "GLICEMIA",
+      "COLESTEROL_TOTAL",
+      "COLESTEROL_HDL",
+      "COLESTEROL_LDL",
+      "TRIGLICERIDEOS"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "cisplatina",
+        "com": "ototóxicos e aminoglicosídeos",
+        "ref": "INAT-15"
+      },
+      {
+        "droga": "cisplatina",
+        "com": "disfunção renal",
+        "ref": "CI-01"
+      },
+      {
+        "droga": "carboplatina",
+        "com": "cálculo por Calvert (TFG)",
+        "ref": "CI-04"
+      },
+      {
+        "droga": "paclitaxel (TIP, gem-pacli, GOP)",
+        "com": "clopidogrel",
+        "ref": "INAT-17"
+      },
+      {
+        "droga": "todos os citotóxicos",
+        "com": "vacinas de vírus vivo",
+        "ref": "INAT-29"
+      },
+      {
+        "droga": "bleomicina",
+        "com": "oxigênio em alta concentração (anestesia/RPLND)",
+        "ref": null
+      },
+      {
+        "droga": "ifosfamida",
+        "com": "mesna (uroproteção obrigatória)",
+        "ref": null
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "pulmonar (bleomicina)",
+        "termosCTCAEv6": [
+          "Pneumonitis",
+          "Pulmonary fibrosis",
+          "Dyspnea"
+        ]
+      },
+      {
+        "classe": "ototoxicidade (cisplatina)",
+        "termosCTCAEv6": [
+          "Hearing impaired",
+          "Tinnitus"
+        ]
+      },
+      {
+        "classe": "renal/eletrólitos (cisplatina)",
+        "termosCTCAEv6": [
+          "Acute kidney injury",
+          "Creatinine increased",
+          "Hypomagnesemia",
+          "Hypokalemia"
+        ]
+      },
+      {
+        "classe": "hematológica",
+        "termosCTCAEv6": [
+          "Febrile neutropenia",
+          "Neutrophil count decreased",
+          "Platelet count decreased",
+          "Anemia"
+        ]
+      },
+      {
+        "classe": "neurológica",
+        "termosCTCAEv6": [
+          "Peripheral sensory neuropathy",
+          "Encephalopathy"
+        ]
+      },
+      {
+        "classe": "urotelial (ifosfamida)",
+        "termosCTCAEv6": [
+          "Cystitis noninfective",
+          "Hematuria"
+        ]
+      },
+      {
+        "classe": "cutânea/vascular (bleomicina)",
+        "termosCTCAEv6": [
+          "Skin hyperpigmentation",
+          "Raynaud phenomenon",
+          "Fever"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "antiemese para cisplatina D1-D5 (protocolo institucional)",
+      "G-CSF profilaxia secundária após neutropenia febril ou atraso por mielotoxicidade",
+      "mesna com ifosfamida"
+    ],
+    "orientacoes": [
+      "Criopreservação de sêmen antes da orquiectomia e de qualquer tratamento",
+      "Adesão ao seguimento é critério de escolha no estádio I",
+      "Informar exposição à bleomicina antes de anestesia/oxigenoterapia",
+      "Controle de peso, atividade física regular, evitar tabagismo; monitorar PA, glicemia e perfil lipídico"
+    ],
+    "encaminhamentos": [
+      "urologia",
+      "encaminhamento-cirurgia-oncologica",
+      "encaminhamento-radioterapia",
+      "banco de sêmen / reprodução humana",
+      "centro de TCTH (QT em altas doses)"
+    ],
+    "laudos": [
+      "laudo-inss",
+      "laudo-afastamento",
+      "laudo-transporte"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "Marcadores pós-orquiectomia: DHL < 1,5x LSN e HCG < 5.000 mU/mL e AFP < 1.000 ng/mL",
+        "y": "classificar S1",
+        "z": "se N0 M0 com elevação persistente = estádio IS → tratar como doença avançada de baixo risco",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 6,
+          "trecho": "DHL < 1,5x LSN + HCG < 5.000 mU/mL + AFP < 1.000 ng/mL",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "DHL 1,5-10x LSN ou HCG 5.000-50.000 mU/mL ou AFP 1.000-10.000 ng/mL",
+        "y": "classificar S2",
+        "z": "N1-N3 M0 S2 ou M1a S2 = estádio IIIB",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 6,
+          "trecho": "DHL 1,5-10x LSN ou HCG 5.000-50.000 mU/mL ou AFP 1.000-10.000 ng/mL",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "DHL > 10x LSN ou HCG > 50.000 mU/mL ou AFP > 10.000 ng/mL",
+        "y": "classificar S3",
+        "z": "estádio IIIC; em não seminoma = IGCCCG alto risco → BEP × 4",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 6,
+          "trecho": "HCG > 50.000 mU/mL ou AFP > 10.000 ng/mL",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Marcador elevado no pré-operatório",
+        "y": "repetir AFP e β-hCG após orquiectomia respeitando a meia-vida (AFP 5-7 dias; HCG 24-36 h)",
+        "z": "só o valor pós-orquiectomia define S e IGCCCG",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "considerando a meia-vida (AFP: 5-7 dias; HCG: 24-36 horas)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Não seminoma estádio II/III, primário testicular/retroperitoneal, sem metástase visceral não pulmonar, AFP < 1.000, HCG < 5.000 e DHL < 1,5x LSN",
+        "y": "IGCCCG baixo risco",
+        "z": "BEP × 3 ou EP × 4",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "AFP < 1.000 ng/mL e HCG < 5.000 mU/mL e DHL < 1,5x LSN",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Não seminoma sem metástase visceral não pulmonar com AFP 1.000-10.000 ou HCG 5.000-50.000 ou DHL 1,5-10x LSN",
+        "y": "IGCCCG risco intermediário",
+        "z": "BEP × 4 (VIP × 4 ou TIP × 4 se contraindicação à bleomicina)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "AFP 1.000-10.000 ng/mL ou HCG 5.000-50.000 mU/mL ou DHL 1,5-10x LSN",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Não seminoma com primário mediastinal, metástase visceral não pulmonar, AFP > 10.000, HCG > 50.000 ou DHL > 10x LSN (pelo menos um)",
+        "y": "IGCCCG alto risco",
+        "z": "BEP × 4; declínio desfavorável após ciclo 1 → considerar intensificação",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "AFP > 10.000 ng/mL ou HCG > 50.000 mU/mL ou DHL > 10x LSN",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Seminoma estádio II/III sem metástase visceral não pulmonar (qualquer marcador/sítio)",
+        "y": "IGCCCG baixo risco (DHL > 2,5x LSN = pior prognóstico dentro da categoria)",
+        "z": "BEP × 3 ou EP × 4",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "DHL > 2,5x LSN é fator de mau prognóstico nesta categoria",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Seminoma com metástase visceral não pulmonar",
+        "y": "IGCCCG intermediário (não existe seminoma de alto risco)",
+        "z": "BEP × 4",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 7,
+          "trecho": "Intermediário - Presença de metástase visceral não-pulmonar",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Seminoma pós-QT com massa residual > 3 cm e marcadores negativos",
+        "y": "PET/CT FDG ≥ 8 semanas após término da QT",
+        "z": "negativo: vigilância; positivo: biópsia ou novo PET/CT (ou RPLND bilateral)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 19,
+          "trecho": "PET/CT (8+ semanas após término da QT)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Não seminoma pós-QT com massa residual ≥ 1 cm e marcadores negativos",
+        "y": "RPLND bilateral com preservação das fibras simpáticas",
+        "z": "viável > 10% ou risco inicial intermediário/alto → QT × 2",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 19,
+          "trecho": "Massa residual ≥ 1 cm no eixo transaxial longo em TC e marcadores negativos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Esquema com cisplatina (BEP, EP, VIP, TIP, VeIP)",
+        "y": "AUDIOMETRIA_TONAL basal e antes das doses subsequentes",
+        "z": "ototoxicidade cumulativa; dose seguinte só com acuidade auditiva dentro do normal (bula)",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:cisplatin&limit=1",
+          "pagina": null,
+          "trecho": "Audiometric testing should be performed prior to initiating therapy",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Bleomicina 30 UI D1, D8, D15 por ciclo",
+        "y": "somar dose cumulativa e solicitar prova de função pulmonar basal (ESPIROMETRIA)",
+        "z": "teto de 400 UI; toxicidade pulmonar aumenta acima de 400 unidades",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "(dose máxima cumulativa de 400UI)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Seminoma puro EC I inapto ao seguimento",
+        "y": "carboplatina AUC 7 dose única (Calvert)",
+        "z": "dose (mg) = 7 × (TFG + 25)",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:carboplatin&limit=1",
+          "pagina": null,
+          "trecho": "Total Dose (mg) = (target AUC) × (GFR + 25)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    {
+      "texto": "Carboplatina em altas doses (TI-CE): dose por AUC não consta no registro do TIGER — encaminhar a centro de TCTH.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "https://clinicaltrials.gov/api/v2/studies/NCT02375204: 'carboplatin daily on Days 1-3' sem dose/AUC (busca por AUC sem resultado)",
+        "fontes/sboc/Testiculo_sboc, Testiculos-1, SBOC 2026 p.22-23: sem dose",
+        "fontes/pro26/70: sem dose de altas doses"
+      ]
+    },
+    {
+      "texto": "Carboplatina AUC 7 × 2 ciclos: não citada na SBOC 2026 (só dose única) — não incluída",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC 2026 v3: só dose única"
+      ],
+      "resolucao": "Resolvido pelo MOC 2026 (conferência)."
+    },
+    {
+      "texto": "BEP × 2 no não seminoma EC I: citado só no curso (aula 70 pág. 9); SBOC 2026 recomenda BEP × 1 — não incluído como protocolo",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC 2026 v3: BEP ×1; aula 70 p.9: BEP ×2"
+      ],
+      "resolucao": "Resolvido pelo MOC 2026 (conferência)."
+    },
+    {
+      "texto": "Esquema de intensificação GETUG-13 (alto risco com declínio desfavorável): sem doses na SBOC — não incluído como protocolo",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC 2026 v3: sem doses do GETUG-13 (NCT00104676 no pack); esquema de centro de referência"
+      ],
+      "resolucao": "Resolvido pelo MOC 2026 (conferência)."
+    },
+    {
+      "texto": "Frações das RT de 20 Gy e 30-36 Gy não especificadas na SBOC — SEM_FONTE",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+      ]
+    },
+    {
+      "texto": "USG de bolsa escrotal, orquiectomia inguinal, painel IHQ, i(12p) e DLCO só têm apoio do curso (INFERIDO); SBOC 2026 não os cita",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC 2026 v3, Testiculo_sboc.txt, Testiculos-1.txt: itens não citados; apoio só do curso"
+      ],
+      "resolucao": "Condicionais, provisórios (58A)."
+    },
+    {
+      "texto": "Audiometria (cisplatina) e ajuste renal da bleomicina apoiados em rótulo FDA (openFDA); bula ANVISA não consultada",
+      "classe": "PROVISORIA_BULA_FDA",
+      "buscasFeitas": [
+        "openFDA cisplatina e bleomicina"
+      ],
+      "resolucao": "Bula FDA provisória (resposta 1)."
+    },
+    {
+      "texto": "DLCO sem id próprio no catálogo; mapeado em ESPIROMETRIA (prova de função pulmonar completa)",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json v1.1: sem DLCO próprio"
+      ]
+    },
+    {
+      "texto": "PET/CT FDG para massa residual de seminoma e TCTH autólogo em tumor germinativo: cobertura SUS não verificada.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SIGTAP pinado 2026-09 cobre só 03.04 (sem imagem/transplante)",
+        "planilha Recomendações da Conitec: sem registro específico"
+      ]
+    },
+    {
+      "texto": "Emetogenicidade e hidratação da cisplatina fracionada D1-D5 não especificadas na SBOC — protocolo institucional",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC testículo 2024/2025/2026: sem emetogenicidade/hidratação",
+        "ASCO 2020 Emetic Risk Chart inacessível a partir deste ambiente"
+      ]
+    },
+    {
+      "texto": "Seguimento SBOC pág. 25 não estratifica por histologia nem por modalidade de tratamento (vigilância × QT)",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC 2026 p.25: tabela única de seguimento"
+      ],
+      "resolucao": "Resolvido pelo MOC 2026 (conferência)."
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "Meia-vida do β-hCG",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 7,
+        "trecho": "considerando a meia-vida (AFP: 5-7 dias; HCG: 24-36 horas)",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "pro26/69_-_Aula_69_-_Neoplasia_germinativa_-_Visão_geral_estadiamento_estratificação.txt",
+        "pagina": 11,
+        "trecho": "β-hCG : 36 – 72 horas",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Adotar SBOC 2026 (24-36 h); antes de declarar estádio IS ou falha de declínio, confirmar com dosagens seriadas — médico decide.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Intervalo do PET/CT repetido em seminoma com massa residual PET+",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 19,
+        "trecho": "Seguimento com novo PET/CT em 6 semanas",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 20,
+        "trecho": "Um segundo PET/CT deve ser realizado 8 semanas após",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Inconsistência interna da SBOC 2026 (pág. 19/21 × pág. 20). PET inicial ≥ 8 semanas pós-QT (pág. 19); para repetição, preferir intervalo maior (8 semanas) pelo alto índice de falso-positivo.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Corte da massa residual em não seminoma (eixo e limite)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 19,
+        "trecho": "Massa residual ≥ 1 cm no eixo transaxial longo em TC e marcadores negativos",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 20,
+        "trecho": "massa residual > 1 cm (no eixo curto na imagem de tomografia transversal)",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Inconsistência interna da SBOC 2026. Usar a recomendação formal (pág. 19: ≥ 1 cm, eixo longo), mais inclusiva para RPLND (não deixar teratoma).",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Dose de bleomicina",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 9,
+        "trecho": "Bleomicina 30UI EV D1, D8 e D15",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:bleomycin&limit=1",
+        "pagina": null,
+        "trecho": "testicular carcinoma – 0.25 to 0.50 units/kg (10 to 20 units/m 2 )",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Manter dose fixa de 30 UI do esquema BEP da SBOC (regime específico do tumor); da bula usar teto cumulativo de 400 unidades e redução se ClCr < 50 mL/min.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Número de ciclos de BEP adjuvante no não seminoma EC I",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 11,
+        "trecho": "BEP 1 ciclo após a orquiectomia",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "pro26/70_-_Aula_70_-_Neoplasia_germinativa_-_Tratamento.txt",
+        "pagina": 9,
+        "trecho": "BEP x1 ou 2",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Adotar SBOC 2026: BEP × 1 (menor exposição a bleomicina/cisplatina).",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Indicação de adjuvância no seminoma EC I",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 11,
+        "trecho": "Paciente inaptos para aderir ao seguimento clínico",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "pro26/70_-_Aula_70_-_Neoplasia_germinativa_-_Tratamento.txt",
+        "pagina": 7,
+        "trecho": "com fatores de risco (tumor > 4 cm e/ou invasão de rete testis)",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Adotar SBOC 2026: critério é a adesão ao seguimento; fatores de risco do curso só como informação para discussão com o paciente.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Nível de evidência — seminoma massa residual ≤ 3 cm",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 19,
+        "trecho": "Vigilância/seguimento NE MODERADO/FR FORTE",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 21,
+        "trecho": "Vigilância/ seguimento (NE baixo/FR forte)",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Divergência só no NE entre texto e fluxograma; conduta igual (vigilância).",
+      "decisaoNecessaria": false
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (curadoria assistida, Opus 5.5)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "fontes/sboc/Diretrizes-SBOC-2026-Testiculo-v3-VERSAO-PARA-COLABORACAO.txt (integral, 32 págs.)",
+      "fontes/sboc/Testiculo_sboc.txt (SBOC 2025, comparada por diff)",
+      "fontes/sboc/Testiculos-1.txt (SBOC 2024, não vigente, comparada por diff)",
+      "fontes/pro26/69_-_Aula_69_-_Neoplasia_germinativa_-_Visão_geral_estadiamento_estratificação.txt",
+      "fontes/pro26/70_-_Aula_70_-_Neoplasia_germinativa_-_Tratamento.txt",
+      "https://api.fda.gov/drug/label.json?search=openfda.generic_name:bleomycin&limit=1",
+      "https://api.fda.gov/drug/label.json?search=openfda.generic_name:cisplatin&limit=1",
+      "https://api.fda.gov/drug/label.json?search=openfda.generic_name:carboplatin&limit=1",
+      "https://clinicaltrials.gov/api/v2/studies/NCT00104676",
+      "https://clinicaltrials.gov/api/v2/studies/NCT01873326",
+      "https://clinicaltrials.gov/api/v2/studies/NCT02375204",
+      "docs/ondas/F1-PACK-ESQUEMA-V2.md",
+      "corpus/exames/exames-sigtap.v1.json",
+      "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
+      "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
+    ],
+    "aprovacaoClinica": null,
+    "rodada2": {
+      "data": "2026-10-11",
+      "redator": "Claude (Opus 5.5) — redução de pendências e conflitos; aprovação clínica pendente",
+      "pendenciasResolvidas": [
+        {
+          "texto": "Mesna em TIP e VeIP: SBOC 2026 diz '(com Mesna)' sem dose — SEM_FONTE",
+          "resolucao": "Mesna 20% da ifosfamida ×3/dia (bula Mesnex/FDA): 300 mg/m² no TIP e 240 mg/m² no VeIP (estado INFERIDO: derivação aritmética)."
+        },
+        {
+          "texto": "Etoposídeo (altas doses, com carboplatina): etoposídeo em altas doses: doses e número de ciclos não detalhados na SBOC — SEM_FONTE (encaminhar a centro de TCTH)",
+          "resolucao": "Etoposídeo 400 mg/m² D1-D3 ×3 ciclos (TIGER TI-CE, NCT02375204). Carboplatina segue classificada."
+        },
+        {
+          "texto": "Status SUS/SIGTAP dos protocolos (APAC de tumor germinativo)",
+          "resolucao": "APAC 0304060208 (1ª linha) e 0304060216 (2ª linha) para todos os protocolos."
+        },
+        {
+          "texto": "Versões anteriores da diretriz: Testiculos-1.txt (SBOC 01/05/2024, marcada 'VERSÃO NÃO VIGENTE') e Testiculo_sboc.txt (SBOC 17/05/2025) — doses, cortes S/IGCCCG e recomendações iguais à 2026 v3; a 2024 não traz a discussão de RPLND em seminoma IIA/IIB (COTRIMS/PRIMETEST/SEMS). Prevalece a 2026 v3.",
+          "resolucao": "Informativo (versões anteriores conferidas) — não é pendência."
+        }
+      ],
+      "correcoes": []
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 3",
+      "acao": "seguimento do MOC acrescentado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 12",
+      "acao": "AUC 7 ×1–2 e GETUG-13 (intensificação no mau prognóstico) com fonte MOC"
+    }
+  ]
+}

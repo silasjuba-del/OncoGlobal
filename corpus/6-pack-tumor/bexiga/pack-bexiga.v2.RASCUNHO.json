@@ -1,0 +1,3892 @@
+{
+  "header": {
+    "id": "pack-bexiga",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Bexiga v3 (versão para colaboração), arquivo Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+      "trecho": "apoiar as decisões clínicas no tratamento de tumores de bexiga",
+      "edicao": "v3 2026 (publicação 30/04/2026)"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Carcinoma urotelial de bexiga",
+    "cid10": [
+      "C67",
+      "D09.0",
+      "C65",
+      "C66"
+    ],
+    "subtipos": [
+      "carcinoma urotelial não músculo-invasivo (Ta, Tis, T1)",
+      "carcinoma urotelial músculo-invasivo (T2-T4a)",
+      "carcinoma urotelial localmente avançado/metastático",
+      "carcinoma urotelial do trato urinário superior (pelve renal/ureter) — cobertura parcial, só aula PRO"
+    ],
+    "cenarios": [
+      "nao_musculo_invasivo",
+      "musculo_invasivo_localizado",
+      "localmente_avancado",
+      "metastatico",
+      "trato_superior"
+    ],
+    "limitesAplicabilidade": "Baseado na diretriz SBOC 2026 de bexiga (v3, versão para colaboração). A diretriz não trata o trato urinário superior (pelve renal/ureter); esse cenário aparece apenas com dados da aula Onco PRO 2026 (CURSO, INFERIDO) e sem doses. Histologias não uroteliais (escamoso, adenocarcinoma, pequenas células) estão fora do escopo. Pack propõe; médico decide."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "indicacao": "universal",
+        "quando": "Estadiamento inicial e seguimento da doença músculo-invasiva/avançada (parte da TC de tórax e abdome total)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 8,
+          "trecho": "Método de primeira linha para estadiamento inicial e seguimento",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome com fase excretora (urotomografia)",
+        "indicacao": "universal",
+        "quando": "Estadiamento; a fase excretora avalia ureteres e pelve renal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 8,
+          "trecho": "A fase excretora fundamental para detectar possíveis lesões uroteliais em ureteres e pelve renal",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve com fase excretora",
+        "indicacao": "universal",
+        "quando": "Estadiamento junto à TC de abdome (abdome total)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 8,
+          "trecho": "Método de primeira linha para estadiamento inicial e seguimento",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CONTRASTE_TC",
+        "rotulo": "Contraste iodado para TC (fase excretora)",
+        "indicacao": "universal",
+        "quando": "Campo do pedido da TC; cautela em função renal comprometida ou alergia a iodo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 8,
+          "trecho": "Usar com cautela em pacientes com função renal comprometida ou alergia a iodo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM de pelve (multiparamétrica, VI-RADS)",
+        "indicacao": "condicional",
+        "quando": "Contraindicação a contraste iodado ou necessidade de detalhar a pelve; VI-RADS idealmente antes da RTU quando diferenciar T1 de T2 muda a conduta",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 8,
+          "trecho": "idealmente antes da RTU, em casos em que diferenciar tumor superficial (T1)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CONTRASTE_RM",
+        "rotulo": "Contraste para RM",
+        "indicacao": "condicional",
+        "quando": "Campo do pedido da RM de pelve",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 8,
+          "trecho": "Alternativa para estadiamento pélvico quando há contraindicação ao contraste iodado",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [
+      {
+        "catalogoId": "CISTOSCOPIA",
+        "rotulo": "Cistoscopia com biópsia",
+        "indicacao": "universal",
+        "quando": "Todo paciente com achado suspeito (padrão-ouro diagnóstico)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 9,
+          "trecho": "Deve ser sempre realizada em pacientes com achados suspeitos",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "outra",
+          "quando": "Citologia urinária (Sistema de Paris 2022) na suspeita de alto grau ou CIS; negativa não exclui tumor",
+          "catalogoId": "CITOLOGIA_LIQUIDOS",
+          "rotulo": "Citologia urinária",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+            "pagina": 10,
+            "trecho": "Tem grande sensibilidade para diagnóstico de tumores de alto grau e CIS",
+            "estado": "VERIFICADO"
+          },
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        },
+        {
+          "tipo": "endoscopica",
+          "quando": "RTU de lesões vesicais: diagnóstica, estadiadora e potencialmente terapêutica; amostra deve conter camada muscular, em recipiente separado",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+            "pagina": 9,
+            "trecho": "A amostra deve conter camada muscular para estadiamento preciso",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "endoscopica",
+          "quando": "Nova RTU em 4 a 6 semanas em tumor de alto grau ou suspeita de doença residual",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+            "pagina": 9,
+            "trecho": "Nova RTU em 4 a 6 semanas é recomendada em tumores de alto grau",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "cirurgica",
+          "quando": "Peça de cistectomia radical + linfadenectomia pélvica bilateral (estadiamento patológico pT/ypT, pN/ypN que guia adjuvância)",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+            "pagina": 19,
+            "trecho": "Cistectomia radical + linfadenectomia pélvica bilateral.",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "localização, número e tamanho das lesões (SBOC p. 9)",
+        "padrão morfológico (papilífero/sólido) e anormalidades da mucosa (SBOC p. 9)",
+        "presença ou ausência de camada muscular própria na amostra (SBOC p. 9)",
+        "grau OMS 2004/2016 (baixo/alto grau) e G1-G3, usados na classificação de risco (SBOC p. 7)",
+        "estádio T (Ta, Tis, T1, T2...) e presença de CIS (SBOC p. 4 e 7)",
+        "na peça de cistectomia: ypT/pT e ypN/pN (definem nivolumabe/durvalumabe/QT adjuvante — SBOC p. 21)"
+      ],
+      "molecular": [
+        {
+          "alvo": "FGFR3 (mutações R248C, S249C, G370C, Y373C) e fusões FGFR2/FGFR3",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
+          "quandoPedir": "condicional",
+          "cenario": "metastatico",
+          "consequencia": "Alteração presente: erdafitinibe após 1ª linha (SBOC p. 27/29)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+            "pagina": 25,
+            "trecho": "Recomenda-se, quando disponível, a realização de testes moleculares para alterações em FGFR2/FGFR3",
+            "estado": "VERIFICADO"
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
+        },
+        {
+          "alvo": "FGFR2/FGFR3 (mutação/fusão) — alternativa por PCR",
+          "metodo": "PCR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
+          "quandoPedir": "condicional",
+          "cenario": "metastatico",
+          "consequencia": "Mesma consequência do NGS; PCR cobre painel restrito de alterações",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026 — pro26/68_-_Aula_68_-_Bexiga_-_Doença_avançada.txt",
+            "pagina": 6,
+            "trecho": "FGFR2/3 (NGS, FISH ou PCR) – Mutação / Fusão*.",
+            "estado": "INFERIDO"
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
+        },
+        {
+          "alvo": "Fusões FGFR2/FGFR3 — alternativa por FISH",
+          "metodo": "FISH/CISH",
+          "catalogoId": "FISH",
+          "quandoPedir": "condicional",
+          "cenario": "metastatico",
+          "consequencia": "Detecta fusões, não mutações de ponto",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026 — pro26/68_-_Aula_68_-_Bexiga_-_Doença_avançada.txt",
+            "pagina": 6,
+            "trecho": "FGFR2/3 (NGS, FISH ou PCR) – Mutação / Fusão*.",
+            "estado": "INFERIDO"
+          },
+          "faturamentoNaoDemonstrado": true
+        },
+        {
+          "alvo": "HER2 (IHQ, critérios de escore do câncer gástrico)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "metastatico",
+          "consequencia": "HER2 IHQ 3+: trastuzumabe deruxtecana em 2ª linha ou posterior",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+            "pagina": 25,
+            "trecho": "expressão de HER2 por imuno-histoquímica utilizando os critérios de escore do câncer gástrico",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "PD-L1 (IHQ)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "metastatico — só inelegível à cisplatina",
+          "consequencia": "PD-L1 positivo em inelegível à cisplatina: pembrolizumabe 1ª linha. Corte e clone não definidos na SBOC (ver conflitos)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+            "pagina": 25,
+            "trecho": "Pembrolizumabe (se PD-L1 positivo)",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "MSI/dMMR (IHQ MLH1, MSH2, MSH6, PMS2 ou PCR)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "paciente < 50 anos, tumor de pelve renal/ureter ou história familiar (suspeita de Lynch)",
+          "consequencia": "Investigação de síndrome de Lynch; não consta da SBOC 2026",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "CURSO",
+            "referencia": "Onco PRO 2026 — pro26/68_-_Aula_68_-_Bexiga_-_Doença_avançada.txt",
+            "pagina": 5,
+            "trecho": "Instabilidade de microssatélite é rara, deve ser considerada",
+            "estado": "INFERIDO"
+          }
+        },
+        {
+          "alvo": "ctDNA pós-cistectomia",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "pesquisa",
+          "cenario": "musculo_invasivo pós-cistectomia",
+          "consequencia": "Atezolizumabe adjuvante guiado por ctDNA não aprovado pela Anvisa; interpretar com cautela",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+            "pagina": 22,
+            "trecho": "O teste de ctDNA já se encontra disponível no Brasil",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição (2017)",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+      "pagina": 31,
+      "trecho": "AJCC Cancer Staging Manual [Internet]. 8th ed.",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "URINA_TIPO_I",
+        "rotulo": "Urina tipo I (hematúria)",
+        "cenario": "avaliação inicial de hematúria, antes da cistoscopia",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026 — pro26/66_-_Aula_66_-_Bexiga_-_Visão_geral_NMIBC.txt",
+          "pagina": 11,
+          "trecho": "AVALIAÇÃO INICIAL: urina 1, cistoscopia + biópsia",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "cenario": "musculo_invasivo e avançado",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 8,
+          "trecho": "Método de primeira linha para estadiamento inicial e seguimento",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome com fase excretora",
+        "cenario": "musculo_invasivo e avançado",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 8,
+          "trecho": "A fase excretora fundamental para detectar possíveis lesões uroteliais em ureteres e pelve renal",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve",
+        "cenario": "musculo_invasivo e avançado",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 8,
+          "trecho": "Método de primeira linha para estadiamento inicial e seguimento",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM de pelve multiparamétrica (VI-RADS)",
+        "cenario": "dúvida T1 × T2 ou contraindicação a contraste iodado",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 8,
+          "trecho": "Alternativa para estadiamento pélvico quando há contraindicação ao contraste iodado",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT FDG",
+        "cenario": "suspeita de metástase à distância ou dúvida específica de estadiamento; não é padrão universal. Cobertura SUS para esta indicação não verificada (alternativa SUS: TC)",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 8,
+          "trecho": "Considerar em situações selecionadas em que se suspeita de metástases distantes",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CLEARANCE_CREATININA",
+        "rotulo": "Clearance de creatinina",
+        "cenario": "todo candidato a QT (elegibilidade à cisplatina: ClCr < 60 mL/min = inelegível)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 10,
+          "trecho": "Presença de qualquer dos seguintes critérios torna o paciente inelegível à cisplatina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Creatinina sérica",
+        "cenario": "todo candidato a QT",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 10,
+          "trecho": "Presença de qualquer dos seguintes critérios torna o paciente inelegível à cisplatina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "AUDIOMETRIA_TONAL",
+        "rotulo": "Audiometria tonal",
+        "cenario": "candidato a cisplatina com queixa auditiva (perda auditiva ≥ grau 2 = inelegível)",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 10,
+          "trecho": "Presença de qualquer dos seguintes critérios torna o paciente inelegível à cisplatina",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "NMIBC baixo risco (Ta/T1 LG/G1 primário, único, < 3 cm, sem CIS, ≤ 70 anos)",
+        "conduta": "RTU + instilação intravesical única de quimioterápico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 14,
+          "trecho": "Instilação intravesical única de quimioterápico após RTU",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "NMIBC risco intermediário",
+        "conduta": "RTU + BCG intravesical por 1 ano",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 14,
+          "trecho": "Instilação intravesical de BCG por 1 ano",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "NMIBC alto risco (T1 HG/G3 sem CIS; todo CIS; demais conforme fatores clínicos)",
+        "conduta": "RTU (nova RTU se alto grau) + BCG por 1 a 3 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 14,
+          "trecho": "Instilação intravesical de BCG por 1 a 3 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "NMIBC muito alto risco",
+        "conduta": "Considerar cistectomia imediata",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 14,
+          "trecho": "Considerar cistectomia imediata;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "NMIBC não responsivo a BCG",
+        "conduta": "Cistectomia radical preferível; se recusa/inelegível: pembrolizumabe ou QT intravesical (gencitabina ± docetaxel) ou ensaio clínico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 16,
+          "trecho": "Cistectomia radical (preferível)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "MIBC T2-T4a e/ou N1, elegível à cisplatina",
+        "conduta": "QT neoadjuvante (GC + durvalumabe, MVACdd ou GC) → cistectomia radical + linfadenectomia pélvica bilateral",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 19,
+          "trecho": "Tumores T2-T4a e/ou N1;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "MIBC inelegível ou que recusa cistectomia (ideal T2-T3a, unifocal < 5 cm, sem hidronefrose, sem CIS extenso)",
+        "conduta": "Preservação vesical trimodal: RTU máxima → QT + RT",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 23,
+          "trecho": "Não candidatos à cistectomia radical ou que recusem o tratamento cirúrgico;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "pT3-4 e/ou N+ sem neoadjuvância",
+        "conduta": "QT adjuvante (GC 4 ciclos ou MVACdd 3-4 ciclos) se elegível",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 21,
+          "trecho": "Doença de alto risco (T3-4 e/ou N+) sem neoadjuvância:",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "ypT2-4 e/ou ypN+ após QT neoadjuvante",
+        "conduta": "Nivolumabe adjuvante por 1 ano",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 21,
+          "trecho": "Nivolumabe por 1 ano (em caso de ypT2-4 e/ou ypN+ com doença",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Doença avançada elegível à cisplatina",
+        "conduta": "EV + pembrolizumabe; GC → avelumabe; MVACdd → avelumabe; GC + nivolumabe",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 25,
+          "trecho": "Elegíveis à cisplatina:",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Doença avançada inelegível à cisplatina",
+        "conduta": "EV + pembrolizumabe; gencitabina + carboplatina → avelumabe; pembrolizumabe se PD-L1 positivo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 25,
+          "trecho": "Inelegíveis à cisplatina:",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "CITOLOGIA_LIQUIDOS",
+          "rotulo": "Citologia urinária",
+          "uso": "Diagnóstico e seguimento do alto risco (cistoscopia + citologia)",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+            "pagina": 30,
+            "trecho": "Alto risco: cistoscopia + citologia urinária aos 3 meses, se negativo, a cada",
+            "estado": "VERIFICADO"
+          },
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        }
+      ],
+      "naoPedirDeRotina": [
+        "marcadores tumorais séricos (CEA, CA 19-9, CA 125) — sem papel no carcinoma urotelial",
+        "marcadores urinários além da citologia (SBOC p. 10: não há marcador urinário específico para carcinoma invasivo)"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "NMIBC baixo risco",
+        "intencao": "curativa",
+        "modalidades": [
+          "RTU",
+          "QT intravesical dose única"
+        ],
+        "criterio": "Instilação em até 24 h após RTU; não fazer se perfuração vesical; manter 1-2 h",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 16,
+          "trecho": "A instilação pós-RTU deve ser feita em até 24h após o procedimento",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "NMIBC intermediário/alto risco",
+        "intencao": "curativa",
+        "modalidades": [
+          "RTU",
+          "BCG intravesical"
+        ],
+        "criterio": "Contraindicações absolutas à BCG: 2 primeiras semanas pós-RTU, hematúria macroscópica, cateterização traumática, ITU sintomática",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 14,
+          "trecho": "Nas duas primeiras semanas após a RTU;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "NMIBC muito alto risco ou não responsivo a BCG",
+        "intencao": "curativa",
+        "modalidades": [
+          "cistectomia radical",
+          "pembrolizumabe (recusa/inelegível)",
+          "QT intravesical de resgate"
+        ],
+        "criterio": "Indicações de cistectomia precoce: subestadiamento, progressão para músculo-invasivo, não responsivo a BCG",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 14,
+          "trecho": "Pacientes com tumores não responsivos BCG;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "MIBC elegível à cisplatina",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT neoadjuvante",
+          "cistectomia radical + linfadenectomia",
+          "adjuvância conforme ypTN"
+        ],
+        "criterio": "T2-T4a e/ou N1 elegível à cisplatina; benefício não intercambiável com carboplatina",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 20,
+          "trecho": "Os resultados não são intercambiáveis para esquemas baseados em carboplatina.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "MIBC — preservação vesical trimodal",
+        "intencao": "curativa",
+        "modalidades": [
+          "RTU máxima",
+          "RT",
+          "QT radiossensibilizante"
+        ],
+        "criterio": "Reavaliação com citologia + RTU após 40-45 Gy; resposta completa/parcial → completar 60-64 Gy; sem resposta → cistectomia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 23,
+          "trecho": "Se ausência de resposta ou progressão: cistectomia radical.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "MIBC — adjuvante",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT adjuvante",
+          "imunoterapia adjuvante"
+        ],
+        "criterio": "pT2N0 sem adjuvante; pT3-4/N+ sem neo: QT; ypT2-4/ypN+: nivolumabe; GC + durvalumabe prévio: durvalumabe",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 21,
+          "trecho": "Sem indicação de tratamento adjuvante (em caso de ypT2N0 após QT",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "MIBC — EV + pembrolizumabe perioperatório",
+        "intencao": "curativa",
+        "modalidades": [
+          "pesquisa clínica"
+        ],
+        "criterio": "Sem aprovação Anvisa; restrito a pesquisa clínica (EV-303/EV-304). Não há protocolo neste pack",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 20,
+          "trecho": "essa abordagem terapêutica ainda não possui aprovação regulatória pela Anvisa no Brasil",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Doença avançada 1ª linha",
+        "intencao": "paliativa",
+        "modalidades": [
+          "quimioimunoterapia",
+          "QT platina + manutenção avelumabe",
+          "imunoterapia"
+        ],
+        "criterio": "Definir elegibilidade à cisplatina (critérios de Galsky)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 25,
+          "trecho": "Para pacientes elegíveis, regimes contendo cisplatina devem ser",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Doença avançada 2ª linha ou posterior",
+        "intencao": "paliativa",
+        "modalidades": [
+          "imunoterapia",
+          "ADC",
+          "terapia-alvo",
+          "QT"
+        ],
+        "criterio": "Após QT: imunoterapia; após imunoterapia: EV preferencial; FGFR3 mut/fusão FGFR2/3: erdafitinibe; HER2 IHQ 3+: T-DXd",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 27,
+          "trecho": "Após QT na 1ª linha:",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Trato urinário superior (pelve renal/ureter)",
+        "intencao": "curativa",
+        "modalidades": [
+          "nefroureterectomia com cuff vesical + linfadenectomia",
+          "QT neoadjuvante/adjuvante"
+        ],
+        "criterio": "Não coberto pela SBOC 2026; dado apenas da aula PRO (POUT para adjuvância). Doses não definidas neste pack",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026 — pro26/67_-_Aula_67_-_Bexiga_-_Doença_inicial_músculo-invasiva_e_Pelve_renal.txt",
+          "pagina": 17,
+          "trecho": "Nefroureterectomia com ressecção de cuff vesical / LNFD",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "bexiga-nmibc-qt-intravesical-dose-unica",
+        "nome": "QT intravesical dose única pós-RTU (mitomicina C, gencitabina ou doxorrubicina)",
+        "cenario": "NMIBC baixo risco",
+        "linha": "adjuvante intravesical imediata",
+        "drogas": [
+          {
+            "droga": "mitomicina C",
+            "dose": 40,
+            "unidade": "mg",
+            "via": "intravesical",
+            "dias": "dose única em até 24 h da RTU (40 mg em 40 mL de SF 0,9%)",
+            "observacao": "SBOC não define dose; aula PRO cita gencitabina 2 g ou mitomicina C (CURSO, INFERIDO). Instilar em até 24 h, manter 1-2 h, não instilar se perfuração.",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02695771 (Bladder Instillation Comparison Study, fase 3, concluído)",
+              "pagina": null,
+              "trecho": "Mitomycin C 40 mg in 40 mL of 0.9% sodium chloride",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "gencitabina",
+            "dose": 2000,
+            "unidade": "mg",
+            "via": "intravesical",
+            "dias": "dose única em até 24 h da RTU (2 g em 100 mL de SF 0,9%)",
+            "observacao": "Alternativa equivalente (SBOC p. 16); dose SEM_FONTE na SBOC.",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02695771",
+              "pagina": null,
+              "trecho": "Gemcitabine 2 grams in 100 mL of 0.9% sodium chloride",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": 1,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Não instilar se perfuração vesical. Doses do ensaio fase 3 NCT02695771 (SBOC sem dose).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050016",
+              "nome": "QUIMIOTERAPIA INTRA-VESICAL"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050016 QUIMIOTERAPIA INTRA-VESICAL. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA INTRA-VESICAL",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 16,
+          "trecho": "Mitomicina C, gencitabina e doxorrubicina apresentaram os mesmos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-nmibc-bcg-intermediario",
+        "nome": "BCG intravesical 1 ano (risco intermediário)",
+        "cenario": "NMIBC risco intermediário",
+        "linha": "adjuvante intravesical",
+        "drogas": [
+          {
+            "droga": "BCG",
+            "dose": 81,
+            "unidade": "mg",
+            "via": "intravesical",
+            "dias": "indução semanal ×6; manutenção 3 instilações semanais nos meses 3, 6 e 12 (1 ano)",
+            "observacao": "Dose do MOC (cepa usada no livro); a dose depende da cepa disponível — bula da cepa NÃO VERIFICADA.",
+            "pendencia": {
+              "texto": "Dose da BCG depende da cepa disponível no serviço (SBOC 120 mg/40 mg sem cepa; TICE 1 frasco ~50 mg; Connaught 81 mg).",
+              "classe": "DEPENDE_BULA_ANVISA",
+              "buscasFeitas": [
+                "SBOC 2026 bexiga p.16",
+                "openFDA TICE BCG (set_id c9b74876-e665-442b-87ad-b7333bc9a67a)",
+                "aula PRO 66 p.18"
+              ]
+            },
+            "esquemaFonte": {
+              "tipo": "CURSO",
+              "referencia": "fontes/pro26/66_-_Aula_66_-_Bexiga_-_Visão_geral_NMIBC.txt",
+              "pagina": 18,
+              "trecho": "BCG por 1 ano: Indução (6 sem) + Manutenção (3 sem nos meses 3-6-",
+              "estado": "INFERIDO"
+            }
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Contraindicações absolutas: 2 primeiras semanas pós-RTU, hematúria macroscópica, cateterização uretral traumática, ITU sintomática.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304050016",
+              "nome": "QUIMIOTERAPIA INTRA-VESICAL"
+            }
+          ],
+          "observacao": "BCG intravesical sem avaliação CONITEC; acesso pela rede de atenção oncológica (fonte secundária: Nota Técnica SES-SP nº 06/2015, assistência farmacêutica). Procedimento intravesical com CID C67x compatível. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050016 QUIMIOTERAPIA INTRA-VESICAL. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA INTRA-VESICAL",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 16,
+          "trecho": "A dose de 1/3 (40 mg) durante um ano",
+          "estado": "VERIFICADO"
+        },
+        "fonteDose": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "id": "bexiga-nmibc-bcg-alto-risco",
+        "nome": "BCG intravesical 1-3 anos (alto risco)",
+        "cenario": "NMIBC alto risco",
+        "linha": "adjuvante intravesical",
+        "drogas": [
+          {
+            "droga": "BCG",
+            "dose": 81,
+            "unidade": "mg",
+            "via": "intravesical",
+            "dias": "indução semanal ×6; manutenção 3 instilações semanais nos meses 3, 6, 12, 18, 24 e 30 (até 3 anos)",
+            "observacao": "Dose do MOC (cepa usada no livro); a dose depende da cepa disponível — bula da cepa NÃO VERIFICADA.",
+            "pendencia": {
+              "texto": "Dose da BCG depende da cepa disponível no serviço (SBOC 120 mg/40 mg sem cepa; TICE 1 frasco ~50 mg; Connaught 81 mg).",
+              "classe": "DEPENDE_BULA_ANVISA",
+              "buscasFeitas": [
+                "SBOC 2026 bexiga p.16",
+                "openFDA TICE BCG (set_id c9b74876-e665-442b-87ad-b7333bc9a67a)",
+                "aula PRO 66 p.18"
+              ]
+            },
+            "esquemaFonte": {
+              "tipo": "CURSO",
+              "referencia": "fontes/pro26/66_-_Aula_66_-_Bexiga_-_Visão_geral_NMIBC.txt",
+              "pagina": 18,
+              "trecho": "BCG por 1-3 anos: Indução (6 sem) + Manutenção (meses 3-6-12-18-24-",
+              "estado": "INFERIDO"
+            }
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Mesmas contraindicações absolutas da BCG (SBOC p. 14).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304050016",
+              "nome": "QUIMIOTERAPIA INTRA-VESICAL"
+            }
+          ],
+          "observacao": "BCG intravesical sem avaliação CONITEC; acesso pela rede de atenção oncológica (fonte secundária: Nota Técnica SES-SP nº 06/2015, assistência farmacêutica). Procedimento intravesical com CID C67x compatível. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050016 QUIMIOTERAPIA INTRA-VESICAL. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA INTRA-VESICAL",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 16,
+          "trecho": "A Eortc indica a dose full (120 mg) durante 3 anos",
+          "estado": "VERIFICADO"
+        },
+        "fonteDose": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "id": "bexiga-nmibc-pembrolizumabe-bcg-nao-responsivo",
+        "nome": "Pembrolizumabe (NMIBC alto risco não responsivo a BCG)",
+        "cenario": "NMIBC não responsivo a BCG, recusa ou inelegível à cistectomia",
+        "linha": "pós-BCG",
+        "drogas": [
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Alternativa: 400 mg EV a cada 6 semanas. Duração 24 meses. Bula no Brasil restrita a CIS com ou sem papilífero (SBOC p. 17)."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Até 24 meses; manejo de eventos imunomediados.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (NMIBC não responsivo a BCG) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304050016 — decisão do serviço. Alternativa SUS: cistectomia ou gencitabina ± docetaxel intravesical.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (NMIBC não responsivo a BCG) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 16,
+          "trecho": "Pembrolizumabe IV 200 mg IV a cada 3 semanas ou 400 mg IV",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-nmibc-gencitabina-docetaxel-intravesical",
+        "nome": "Gencitabina + docetaxel intravesical sequencial (pós-BCG)",
+        "cenario": "NMIBC não responsivo a BCG, recusa ou inelegível à cistectomia",
+        "linha": "pós-BCG intravesical",
+        "drogas": [
+          {
+            "droga": "gencitabina",
+            "dose": 1000,
+            "unidade": "mg",
+            "via": "intravesical",
+            "dias": "semanal ×6 (indução), depois mensal (manutenção)",
+            "observacao": "1 g na fonte. Frequência da indução não informada na SBOC; manutenção mensal por 12-24 meses."
+          },
+          {
+            "droga": "docetaxel",
+            "dose": 37.5,
+            "unidade": "mg",
+            "via": "intravesical",
+            "dias": "semanal ×6 após a gencitabina (indução), depois mensal",
+            "observacao": "Instilação sequencial após gencitabina. Frequência da indução não informada na SBOC."
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Indução semanal ×6 seguida de manutenção mensal (24 meses no ensaio NCT07322263; SBOC: 12-24 meses).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050016",
+              "nome": "QUIMIOTERAPIA INTRA-VESICAL"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050016 QUIMIOTERAPIA INTRA-VESICAL. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA INTRA-VESICAL",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 16,
+          "trecho": "Gencitabina 1 g + Docetaxel 37,5 mg seguido de manutenção mensal por 12-24 meses",
+          "estado": "VERIFICADO"
+        },
+        "esquemaFonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT07322263 (GEM/DOCE em NMIBC AR BCG-não responsivo, fase 2)",
+          "pagina": null,
+          "trecho": "6-week induction phase (weekly instillations), followed by a 24-month maintenance phase (monthly instillations)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-nmibc-gencitabina-intravesical",
+        "nome": "Gencitabina intravesical semanal (pós-BCG)",
+        "cenario": "NMIBC não responsivo a BCG, recusa ou inelegível à cistectomia",
+        "linha": "pós-BCG intravesical",
+        "drogas": [
+          {
+            "droga": "gencitabina",
+            "dose": 2000,
+            "unidade": "mg",
+            "via": "intravesical",
+            "dias": "semanal x 6 semanas, depois mensal x 10 meses",
+            "observacao": "2 g na fonte; via intravesical confirmada pelo Dr. Silas (D-F1-17 6A) — 'IV' da SBOC p. 16 é erro de grafia."
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Manutenção mensal por 10 meses após a indução.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050016",
+              "nome": "QUIMIOTERAPIA INTRA-VESICAL"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050016 QUIMIOTERAPIA INTRA-VESICAL. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA INTRA-VESICAL",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 16,
+          "trecho": "Gencitabina 2 g IV semanal por 6 semanas seguido de manutenção mensal",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-mibc-neo-gc-durvalumabe",
+        "nome": "GC + durvalumabe neoadjuvante (NIAGARA)",
+        "cenario": "MIBC T2-T4a e/ou N1 elegível à cisplatina",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 70,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ClCr < 60 mL/min = inelegível (D-F1-17 4A). A dose fracionada da SBOC (35 mg/m² D1 e D8 se ClCr 40-59) não é padrão: só caso a caso, por decisão médica individual."
+          },
+          {
+            "droga": "durvalumabe",
+            "dose": 1500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Elegibilidade à cisplatina (formulaXYZ). Após cistectomia: protocolo adjuvante bexiga-mibc-adj-durvalumabe.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de durvalumabe perioperatório (NIAGARA) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304040070 — decisão do serviço. Durvalumabe incorporado só no CPNPC estádio III (Portaria SECTICS nº 21/2024). Alternativa SUS: GC neoadjuvante.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para durvalumabe perioperatório (NIAGARA) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 11,
+          "trecho": "A cada 3 semanas, 4 ciclos; após a cistectomia, manter durvalumabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-mibc-neo-mvacdd",
+        "nome": "MVAC dose densa neoadjuvante",
+        "cenario": "MIBC T2-T4a e/ou N1 elegível à cisplatina",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "metotrexato",
+            "dose": 30,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "vimblastina",
+            "dose": 3,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2",
+            "observacao": ""
+          },
+          {
+            "droga": "doxorrubicina",
+            "dose": 30,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 70,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "Filgrastima 300 mcg SC D3 a D9 (parte do esquema, SBOC p. 11).",
+        "ajusteObrigatorio": "Elegibilidade à cisplatina. 3 a 6 ciclos (SBOC p. 19-20: pelo menos 3 e no máximo 6).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 11,
+          "trecho": "Metotrexato 30 mg/m² EV D1 A cada 2 semanas Vimblastina 3 mg/m²",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-mibc-neo-gc-28d",
+        "nome": "Gencitabina + cisplatina neoadjuvante (padrão, 28 dias)",
+        "cenario": "MIBC T2-T4a e/ou N1 elegível à cisplatina",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 70,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Doses da tabela geral de GC (SBOC p. 11); SBOC p. 19 cita NCCN com 4 ciclos a cada 21 dias (ver protocolo 21 dias e conflitos).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 11,
+          "trecho": "Cisplatina 70 mg/m² EV D1 Gencitabina 1.000 mg/m² EV D1, D8 e D15",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-mibc-neo-gc-21d",
+        "nome": "Gencitabina + cisplatina neoadjuvante (alternativa, 21 dias, cisplatina fracionada)",
+        "cenario": "MIBC T2-T4a e/ou N1 elegível à cisplatina",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 35,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": ""
+          },
+          {
+            "droga": "gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Alternativa da tabela de GC (SBOC p. 11); 4 ciclos (SBOC p. 19).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 11,
+          "trecho": "Gencitabina 1.000 mg/m2 EV D1 e D8 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-mibc-adj-durvalumabe",
+        "nome": "Durvalumabe adjuvante pós-NIAGARA",
+        "cenario": "Pós-cistectomia em quem recebeu GC + durvalumabe neoadjuvante",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "durvalumabe",
+            "dose": 1500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 8,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de durvalumabe perioperatório (NIAGARA) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304040070 — decisão do serviço. Durvalumabe incorporado só no CPNPC estádio III (Portaria SECTICS nº 21/2024). Alternativa SUS: GC neoadjuvante.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para durvalumabe perioperatório (NIAGARA) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 11,
+          "trecho": "manter durvalumabe a cada 4 semanas por 8 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-mibc-adj-nivolumabe",
+        "nome": "Nivolumabe adjuvante (1 ano)",
+        "cenario": "ypT2-4 e/ou ypN+ com doença residual músculo-invasiva após QT neoadjuvante (considerar também em ypT2N0)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "nivolumabe",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Alternativa: 480 mg EV a cada 4 semanas (SBOC p. 12). Duração 1 ano (SBOC p. 21)."
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Duração total de 1 ano.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de nivolumabe adjuvante (urotelial) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304040070 — decisão do serviço.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para nivolumabe adjuvante (urotelial) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 12,
+          "trecho": "Nivolumabe 240 mg EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-mibc-adj-gc",
+        "nome": "Gencitabina + cisplatina adjuvante",
+        "cenario": "pT3-4 e/ou N+ sem QT neoadjuvante, elegível à cisplatina",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 70,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 4,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Sem contraindicação (ECOG ≥ 2, neuropatia ≥ G2, ClCr < 60 mL/min); > 70 anos: IVCF-20 (SBOC p. 21). Doses da tabela geral de GC (SBOC p. 11).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "Sem procedimento adjuvante específico de bexiga no subgrupo 03.04.05; 0304040070 (subgrupo 03.04.04) com CID C67x compatível. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 21,
+          "trecho": "Doença de alto risco (T3-4 e/ou N+) sem neoadjuvância:",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-mibc-adj-mvacdd",
+        "nome": "MVAC dose densa adjuvante",
+        "cenario": "pT3-4 e/ou N+ sem QT neoadjuvante, elegível à cisplatina",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "metotrexato",
+            "dose": 30,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "vimblastina",
+            "dose": 3,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2",
+            "observacao": ""
+          },
+          {
+            "droga": "doxorrubicina",
+            "dose": 30,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 70,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "Filgrastima 300 mcg SC D3 a D9 (SBOC p. 11).",
+        "ajusteObrigatorio": "3 a 4 ciclos (SBOC p. 21). Mesmos critérios de elegibilidade da QT adjuvante.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "Sem procedimento adjuvante específico de bexiga no subgrupo 03.04.05; 0304040070 (subgrupo 03.04.04) com CID C67x compatível. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 11,
+          "trecho": "Metotrexato 30 mg/m² EV D1 A cada 2 semanas Vimblastina 3 mg/m²",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-mibc-tmt-cisplatina-rt",
+        "nome": "Cisplatina concomitante à RT (preservação vesical, preferencial)",
+        "cenario": "MIBC preservação vesical trimodal",
+        "linha": "definitivo (concomitante à RT)",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 70,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D22 da RT",
+            "observacao": "+ 1 dose adicional se prosseguir QT/RT após reavaliação (SBOC p. 11)."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 2,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Elegibilidade à cisplatina; reavaliação com citologia + RTU após 40-45 Gy.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "QT concomitante à RT; procedimento bexiga-específico (subgrupo 03.04.04) aplicado por compatibilidade de CID. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 11,
+          "trecho": "Cisplatina 70 mg/m² EV D1 e D22 da RT",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-mibc-tmt-5fu-mitomicina-rt",
+        "nome": "5-FU + mitomicina C concomitante à RT",
+        "cenario": "MIBC preservação vesical — baixo PS ou função renal alterada",
+        "linha": "definitivo (concomitante à RT)",
+        "drogas": [
+          {
+            "droga": "5-fluorouracil",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5 e D16 a D20 da RT",
+            "observacao": ""
+          },
+          {
+            "droga": "mitomicina C",
+            "dose": 12,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 da RT",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": 1,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Curso único concomitante à RT (dias referidos ao calendário da RT).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "QT concomitante à RT; procedimento bexiga-específico (subgrupo 03.04.04) aplicado por compatibilidade de CID. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 12,
+          "trecho": "5-Fluorouracil 500 mg/m² EV D1 a D5 e D16 a D20 da RT",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-mibc-tmt-gencitabina-rt",
+        "nome": "Gencitabina semanal concomitante à RT",
+        "cenario": "MIBC preservação vesical — baixo PS ou função renal alterada",
+        "linha": "definitivo (concomitante à RT)",
+        "drogas": [
+          {
+            "droga": "gencitabina",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15, D22, D28 da RT",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": 5,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040070",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA"
+            }
+          ],
+          "observacao": "QT concomitante à RT; procedimento bexiga-específico (subgrupo 03.04.04) aplicado por compatibilidade de CID. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040070 QUIMIOTERAPIA DO CARCINOMA DE BEXIGA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA DE BEXIGA",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 12,
+          "trecho": "Gencitabina 100 mg/m² EV D1, D8, D15, D22, D28 (concomitante à RT)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-ev-pembrolizumabe-1l",
+        "nome": "Enfortumabe vedotina + pembrolizumabe",
+        "cenario": "Doença avançada, elegível ou inelegível à cisplatina",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "enfortumabe vedotina",
+            "dose": 1.25,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": "Dose máxima 125 mg — rótulo FDA PADCEV (openFDA): \"1.25 mg/kg (up to a maximum dose of 125 mg)\"; aula PRO idem."
+          },
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Dose máxima de EV 125 mg por aplicação. Monitorar pele, neuropatia periférica e glicemia.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de enfortumabe vedotina + pembrolizumabe nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para enfortumabe vedotina + pembrolizumabe nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 13,
+          "trecho": "Enfortumabe vedotina 1,25 mg/kg EV D1 e D8 Pembrolizumabe 200 mg D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-gc-1l",
+        "nome": "Gencitabina + cisplatina 1ª linha (seguir com avelumabe se sem progressão)",
+        "cenario": "Doença avançada elegível à cisplatina",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "cisplatina",
+            "dose": 70,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": "Alternativa SBOC: cisplatina 35 mg/m² D1, D8 + gencitabina 1.000 mg/m² D1, D8 a cada 21 dias."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "4 a 6 ciclos. Sem progressão após 4-6 ciclos: manutenção com avelumabe (protocolo bexiga-met-avelumabe-manutencao).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 11,
+          "trecho": "Cisplatina 70 mg/m² EV D1 Gencitabina 1.000 mg/m² EV D1, D8 e D15",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-mvacdd-1l",
+        "nome": "MVAC dose densa 1ª linha (seguir com avelumabe se sem progressão)",
+        "cenario": "Doença avançada elegível à cisplatina",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "metotrexato",
+            "dose": 30,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "vimblastina",
+            "dose": 3,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2",
+            "observacao": ""
+          },
+          {
+            "droga": "doxorrubicina",
+            "dose": 30,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 70,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "Filgrastima 300 mcg SC D3 a D9 (SBOC p. 11).",
+        "ajusteObrigatorio": "Número de ciclos no cenário avançado não definido na SBOC; manutenção com avelumabe após QT de platina sem progressão.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 25,
+          "trecho": "MVACdd seguido de Avelumabe manutenção",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-gc-nivolumabe-1l",
+        "nome": "Gencitabina + cisplatina + nivolumabe → nivolumabe manutenção (CheckMate 901)",
+        "cenario": "Doença avançada elegível à cisplatina",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": ""
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 70,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "nivolumabe",
+            "dose": 360,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Após GC: manutenção nivolumabe 480 mg EV D1 a cada 4 semanas por até 2 anos (SBOC p. 11)."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de nivolumabe (urotelial) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para nivolumabe (urotelial) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 11,
+          "trecho": "Nivolumabe 360 mg EV D1 A cada 3 semanas até 6 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-gemcitabina-carboplatina-1l",
+        "nome": "Gencitabina + carboplatina 1ª linha (seguir com avelumabe se sem progressão)",
+        "cenario": "Doença avançada inelegível à cisplatina",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Calvert."
+          },
+          {
+            "droga": "gencitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "4 a 6 ciclos. Carboplatina por Calvert (CI-04). Sem progressão após 4-6 ciclos: avelumabe.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 12,
+          "trecho": "Carboplatina AUC 5 EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-avelumabe-manutencao",
+        "nome": "Avelumabe manutenção pós-platina",
+        "cenario": "Doença avançada sem progressão após 4-6 ciclos de QT com platina",
+        "linha": "manutenção de 1ª linha",
+        "drogas": [
+          {
+            "droga": "avelumabe",
+            "dose": 800,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Só para quem não progrediu à QT; benefício independente de PD-L1 (SBOC p. 26).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de avelumabe nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para avelumabe nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 13,
+          "trecho": "Avelumabe 800 mg EV D1 (após 4-6 ciclos de QT baseada em platina)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-pembrolizumabe-1l-pdl1",
+        "nome": "Pembrolizumabe 1ª linha (inelegível à cisplatina, PD-L1 positivo)",
+        "cenario": "Doença avançada inelegível à cisplatina com PD-L1 positivo",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Alternativa: 400 mg EV a cada 6 semanas."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Corte de PD-L1 não definido na SBOC (ver conflitos).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (urotelial) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (urotelial) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 12,
+          "trecho": "Pembrolizumabe 200 mg EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-pembrolizumabe-2l",
+        "nome": "Pembrolizumabe 2ª linha (após QT)",
+        "cenario": "Doença avançada com progressão após QT de platina, sem imunoterapia prévia",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Alternativa: 400 mg EV a cada 6 semanas."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (urotelial) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (urotelial) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 27,
+          "trecho": "Após QT na 1ª linha:",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-atezolizumabe-2l",
+        "nome": "Atezolizumabe 2ª linha (após QT)",
+        "cenario": "Doença avançada com progressão após QT de platina",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "atezolizumabe",
+            "dose": 1200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de atezolizumabe (urotelial) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para atezolizumabe (urotelial) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 12,
+          "trecho": "Atezolizumabe 1.200 mg EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-durvalumabe-2l",
+        "nome": "Durvalumabe 2ª linha (após QT)",
+        "cenario": "Doença avançada com progressão após QT de platina",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "durvalumabe",
+            "dose": 10,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 a cada 2 semanas, até 12 meses",
+            "observacao": "Coorte urotelial do Study 1108 (NCT01693562). Indicação retirada nos EUA (rótulo FDA atual sem 2ª linha urotelial); 1.500 mg da SBOC é do NIAGARA — não transferido.",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT01693562 (Study 1108, coorte de expansão UC)",
+              "pagina": null,
+              "trecho": "MEDI4736 10 mg/kg Q2W in the dose-expansion phase for maximum of 12 months",
+              "estado": "VERIFICADO"
+            },
+            "pendencia": {
+              "texto": "Indicação de 2ª linha urotelial retirada nos EUA; conferir registro ANVISA antes do uso.",
+              "classe": "DEPENDE_BULA_ANVISA",
+              "buscasFeitas": [
+                "openFDA Imfinzi (2026-08-31): sem 2ª linha urotelial",
+                "CT.gov NCT01693562"
+              ]
+            }
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de durvalumabe (urotelial avançado) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para durvalumabe (urotelial avançado) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 27,
+          "trecho": "- Atezolizumabe;54 - Durvalumabe.55",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-enfortumabe-2l",
+        "nome": "Enfortumabe vedotina monoterapia (após imunoterapia)",
+        "cenario": "Doença avançada com progressão após platina e imunoterapia",
+        "linha": "2ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "enfortumabe vedotina",
+            "dose": 1.25,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": "Dose máxima 125 mg — rótulo FDA PADCEV (openFDA): \"1.25 mg/kg (up to a maximum dose of 125 mg)\"."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de enfortumabe vedotina nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para enfortumabe vedotina nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 13,
+          "trecho": "Enfortumabe vedotina 1,25 mg/kg/dose EV D1, D8 e D15 A cada 28 dias",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-vinflunina-2l",
+        "nome": "Vinflunina",
+        "cenario": "Doença avançada com progressão após imunoterapia",
+        "linha": "2ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "vinflunina",
+            "dose": 320,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "280 mg/m² se ECOG 2."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de vinflunina nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para vinflunina nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 13,
+          "trecho": "ser reduzida para 280 mg/m² se ECOG 2) A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-paclitaxel-2l",
+        "nome": "Paclitaxel monoterapia",
+        "cenario": "Doença avançada com progressão após imunoterapia",
+        "linha": "2ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Braço de escolha do médico do TROPiCS-04 (pós-platina e pós-anti-PD-(L)1); apoio: braço controle do KEYNOTE-045 (NCT02256436).",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT04527991 (TROPiCS-04, braço de escolha do médico; pós-platina E pós-anti-PD-(L)1)",
+              "pagina": null,
+              "trecho": "Paclitaxel 175 mg/m^2 IV on Day 1 of every 21-day cycle",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 27,
+          "trecho": "Monoterapia com Paclitaxel, Docetaxel, Pemetrexede ou Paclitaxel ligado à albumina.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-docetaxel-2l",
+        "nome": "Docetaxel monoterapia",
+        "cenario": "Doença avançada com progressão após imunoterapia",
+        "linha": "2ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Braço de escolha do médico do TROPiCS-04 (pós-platina e pós-anti-PD-(L)1); apoio: braço controle do KEYNOTE-045 (NCT02256436).",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT04527991 (TROPiCS-04)",
+              "pagina": null,
+              "trecho": "Docetaxel 75 mg/m^2 IV on Day 1 of every 21-day cycle",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 27,
+          "trecho": "Monoterapia com Paclitaxel, Docetaxel, Pemetrexede ou Paclitaxel ligado à albumina.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-pemetrexede-2l",
+        "nome": "Pemetrexede monoterapia",
+        "cenario": "Doença avançada com progressão após imunoterapia",
+        "linha": "2ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "pemetrexede",
+            "dose": null,
+            "unidade": null,
+            "via": "EV",
+            "dias": null,
+            "observacao": "SBOC não traz dose; sem indicação urotelial em bula FDA consultada.",
+            "pendencia": {
+              "texto": "Dose sem fonte no urotelial avançado.",
+              "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+              "buscasFeitas": [
+                "fontes/sboc/SBOC 2024/2025/2026 Bexiga: só citação p.27 (refs 58-60), sem dose",
+                "Rótulo FDA pemetrexede: sem indicação urotelial (já registrado no pack)",
+                "https://clinicaltrials.gov/api/v2/studies/NCT00035061 (fase 2 pemetrexede em CU recorrente): intervenção sem dose no registro",
+                "CT.gov 'pemetrexed urothelial/bladder': só combinações"
+              ]
+            }
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "CI-02 (ClCr < 45) e INAT-16 (AINE) se vier a ser usado.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 27,
+          "trecho": "Monoterapia com Paclitaxel, Docetaxel, Pemetrexede ou Paclitaxel ligado à albumina.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-nab-paclitaxel-2l",
+        "nome": "Paclitaxel ligado à albumina monoterapia",
+        "cenario": "Doença avançada com progressão após imunoterapia",
+        "linha": "2ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "paclitaxel ligado à albumina",
+            "dose": null,
+            "unidade": null,
+            "via": "EV",
+            "dias": null,
+            "observacao": "SBOC não traz dose.",
+            "pendencia": {
+              "texto": "Dose sem fonte no urotelial avançado.",
+              "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+              "buscasFeitas": [
+                "fontes/sboc/SBOC Bexiga: sem dose",
+                "CT.gov 'nab-paclitaxel urothelial', 'ABI-007 urothelial', 'nab-paclitaxel transitional cell': só combinações/1ª linha/perioperatório",
+                "Rótulo FDA de nab-paclitaxel não consultado (não teria indicação urotelial; não transferir)"
+              ]
+            }
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de paclitaxel ligado à albumina (urotelial) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para paclitaxel ligado à albumina (urotelial) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 27,
+          "trecho": "Monoterapia com Paclitaxel, Docetaxel, Pemetrexede ou Paclitaxel ligado à albumina.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-carboplatina-paclitaxel",
+        "nome": "Carboplatina + paclitaxel",
+        "cenario": "Doença avançada, bom PS (combinação com carboplatina; ganho de resposta sem impacto em sobrevida)",
+        "linha": "2ª linha ou posterior / inelegível à cisplatina",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Calvert."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "CI-04 (Calvert); INAT-17 (clopidogrel).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 12,
+          "trecho": "Paclitaxel 200 mg/m² EV D1 A cada 3 semanas Carboplatina AUC 5",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-gencitabina-paclitaxel",
+        "nome": "Gencitabina + paclitaxel (regime sem platina)",
+        "cenario": "Doença avançada inelegível à platina ou após platina, bom PS",
+        "linha": "2ª linha ou posterior / inelegível à platina",
+        "drogas": [
+          {
+            "droga": "paclitaxel",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "gencitabina",
+            "dose": 2500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "Filgrastima se necessário (SBOC p. 12; dose não informada).",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020400",
+              "nome": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020400 QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE CARCINOMA UROTELIAL AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 12,
+          "trecho": "Gencitabina 2.500 mg/m² EV D1 Suporte com Filgrastima, se necessário",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-erdafitinibe",
+        "nome": "Erdafitinibe (alteração de FGFR2 ou FGFR3)",
+        "cenario": "Doença avançada com alteração de FGFR, após 1ª linha",
+        "linha": "2ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "erdafitinibe",
+            "dose": 8,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": "SBOC: 8-9 mg/dia. Rótulo FDA BALVERSA (openFDA): \"8 mg orally once daily with a dose increase to 9 mg daily\" aos 14-21 dias conforme tolerância/fósforo."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Fósforo sérico (escalonamento 8 → 9 mg); avaliação oftalmológica. Elegível com alteração de FGFR2 ou FGFR3 (mutação ou fusão) pela SBOC (D-F1-17 5B); o rótulo FDA cita só FGFR3.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de erdafitinibe nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para erdafitinibe nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 13,
+          "trecho": "Erdafitinibe 8-9 mg/dia VO Continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "bexiga-met-trastuzumabe-deruxtecana",
+        "nome": "Trastuzumabe deruxtecana (HER2 IHQ 3+)",
+        "cenario": "Doença avançada HER2 IHQ 3+ sem outras opções satisfatórias ou após falha",
+        "linha": "2ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "trastuzumabe deruxtecana",
+            "dose": 5.4,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Confirmar HER2 IHQ 3+; vigiar doença pulmonar intersticial.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de trastuzumabe deruxtecana (urotelial) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020400 — decisão do serviço. Alternativa SUS: QT com platina ou taxano (APAC 0304020400).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para trastuzumabe deruxtecana (urotelial) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 13,
+          "trecho": "Trastuzumabe-deruxtecana 5,4 mg/kg EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "Preservação vesical — fase inicial",
+        "doseTotalGy": "40-45",
+        "fracoes": null,
+        "concomitante": "Cisplatina (preferencial); 5-FU + mitomicina ou gencitabina se baixo PS/função renal alterada. Volume: toda a bexiga, próstata, uretra proximal e drenagem linfática pélvica",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 23,
+          "trecho": "40-45 Gy em toda a bexiga, próstata, uretra proximal e drenagem linfática pélvica;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Preservação vesical — boost após resposta completa ou parcial",
+        "doseTotalGy": "64-65",
+        "fracoes": null,
+        "concomitante": "Boost 10-15 Gy em toda a bexiga + 10 Gy no tumor; mantém QT concomitante",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 23,
+          "trecho": "seguido de boost de 10 Gy no tumor (dose total: 64-65 Gy)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Preservação vesical — protocolo UK (alternativa)",
+        "doseTotalGy": 64,
+        "fracoes": 32,
+        "concomitante": "QT radiossensibilizante conforme opções acima",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 23,
+          "trecho": "64 Gy em 32 frações em toda a bexiga (protocolo UK).",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "RTU de lesões vesicais (com camada muscular, recipiente separado)",
+        "quando": "Diagnóstico, estadiamento e tratamento do NMIBC",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 9,
+          "trecho": "A amostra deve conter camada muscular para estadiamento preciso",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Nova RTU",
+        "quando": "4 a 6 semanas em tumor de alto grau ou suspeita de doença residual",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 9,
+          "trecho": "Nova RTU em 4 a 6 semanas é recomendada em tumores de alto grau",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Cistectomia radical + linfadenectomia pélvica bilateral",
+        "quando": "MIBC (após neoadjuvância se elegível); NMIBC muito alto risco, não responsivo a BCG, subestadiado ou com progressão",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 19,
+          "trecho": "Cistectomia radical + linfadenectomia pélvica bilateral.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Cistectomia de resgate",
+        "quando": "Ausência de resposta ou progressão na preservação vesical trimodal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 23,
+          "trecho": "Se ausência de resposta ou progressão: cistectomia radical.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Nefroureterectomia com ressecção de cuff vesical + linfadenectomia (trato superior)",
+        "quando": "Carcinoma urotelial de pelve renal/ureter — não coberto pela SBOC 2026",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026 — pro26/67_-_Aula_67_-_Bexiga_-_Doença_inicial_músculo-invasiva_e_Pelve_renal.txt",
+          "pagina": 17,
+          "trecho": "Nefroureterectomia com ressecção de cuff vesical / LNFD",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "Alteração de FGFR2 ou FGFR3 (mutação, ex. FGFR3 R248C/S249C/G370C/Y373C, ou fusão FGFR2/3)",
+        "opcao": "Erdafitinibe 8-9 mg/dia VO",
+        "evidencia": "NE moderado/FR forte (SBOC p. 29)",
+        "sus": "nao — erdafitinibe sem avaliação CONITEC (INFERIDO)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 25,
+          "trecho": "FGFR3 R248C, S249C, G370C e Y373C, bem como as fusões FGFR3-TACC3",
+          "estado": "VERIFICADO"
+        },
+        "decisao": {
+          "texto": "FGFR2 ou FGFR3 (SBOC), não só FGFR3.",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 5B",
+            "pagina": null,
+            "trecho": null,
+            "estado": "VERIFICADO"
+          }
+        }
+      },
+      {
+        "seAlvo": "HER2 IHQ 3+",
+        "opcao": "Trastuzumabe deruxtecana 5,4 mg/kg a cada 3 semanas",
+        "evidencia": "NE moderado/FR forte (SBOC p. 29)",
+        "sus": "nao — T-DXd sem avaliação CONITEC (INFERIDO)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 27,
+          "trecho": "HER2 IHQ 3+: - Trastuzumabe-deruxtecana (T-DXd).",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "PD-L1 positivo em inelegível à cisplatina",
+        "opcao": "Pembrolizumabe 1ª linha",
+        "evidencia": "NE alto/FR forte (SBOC p. 25), base em fase II",
+        "sus": "nao — pembrolizumabe/atezolizumabe sem avaliação CONITEC para urotelial (INFERIDO); alternativa SUS: gencitabina + carboplatina (APAC 0304020400)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 25,
+          "trecho": "Pembrolizumabe (se PD-L1 positivo)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": "Esquemas com cisplatina (GC, MVACdd, CDDP + RT): classificação de emetogenicidade não descrita na SBOC de bexiga — SEM_FONTE neste pack; usar protocolo antiemético institucional.",
+      "riscoNeutropeniaFebril": "MVACdd exige filgrastima 300 mcg SC D3 a D9 como parte do esquema; gencitabina + paclitaxel com filgrastima se necessário (SBOC p. 11-12).",
+      "outros": [
+        "Elegibilidade à cisplatina antes de toda QT (formulaXYZ) — SBOC p. 10",
+        "> 70 anos: IVCF-20 antes da QT adjuvante — SBOC p. 21",
+        "Erdafitinibe: fósforo sérico para escalonamento de dose (rótulo FDA); avaliação oftalmológica (aula PRO, CURSO)",
+        "Enfortumabe vedotina: dose máxima 125 mg; vigiar pele, neuropatia e glicemia (rótulo FDA / aula PRO)",
+        "T-DXd: vigiar doença pulmonar intersticial (aula PRO, CURSO)"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 11,
+        "trecho": "Filgrastima 300 mcg SC D3 ao D9",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "NIAGARA",
+        "nct": "NCT03732677",
+        "nctEstado": "VERIFICADO",
+        "populacao": "MIBC elegível à cisplatina",
+        "bracos": "GC + durvalumabe neo → cistectomia → durvalumabe adjuvante × GC neo → cistectomia",
+        "desfecho": "SLE, SG",
+        "resultado": "SLE 24 m 67,8% × 59,8% (HR 0,68); SG 24 m 82,2% × 75,2% (HR 0,75) — SBOC p. 20",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03732677",
+          "pagina": null,
+          "trecho": "Durvalumab+ Gemcitabine/Cisplatin (Neoadjuvant Treatment) and Durvalumab (Adjuvant Treatment)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "VESPER",
+        "nct": "NCT01812369",
+        "nctEstado": "VERIFICADO",
+        "populacao": "MIBC perioperatório",
+        "bracos": "MVACdd × 6 × GC × 4",
+        "desfecho": "SG 5 anos",
+        "resultado": "SG 5 anos 66% × 57% (HR 0,71) — SBOC p. 19",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT01812369",
+          "pagina": null,
+          "trecho": "Perioperative Chemotherapy for Patients With Locally Advanced Bladder Cancer",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CheckMate 274",
+        "nct": "NCT02632409",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Carcinoma urotelial músculo-invasivo de alto risco pós-cirurgia (bexiga e trato superior)",
+        "bracos": "Nivolumabe × placebo até 1 ano",
+        "desfecho": "SLD",
+        "resultado": "Benefício em SLD, maior com PD-L1 ≥ 1%; SG final aguardada — SBOC p. 21",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02632409",
+          "pagina": null,
+          "trecho": "Nivolumab, Compared to Placebo, in Patients With Bladder or Upper Urinary Tract Cancer",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "JAVELIN Bladder 100",
+        "nct": "NCT02603432",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Avançado sem progressão após 4-6 ciclos de gencitabina + platina",
+        "bracos": "Avelumabe manutenção × suporte",
+        "desfecho": "SG",
+        "resultado": "Mediana SG 21,4 × 14,3 meses (HR 0,56) — SBOC p. 26",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02603432",
+          "pagina": null,
+          "trecho": "A Study Of Avelumab In Patients With Locally Advanced Or Metastatic Urothelial Cancer",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "EV-302 / KEYNOTE-A39",
+        "nct": "NCT04223856",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Avançado não tratado",
+        "bracos": "EV + pembrolizumabe × gencitabina + cisplatina/carboplatina",
+        "desfecho": "SLP, SG",
+        "resultado": "SLP 12,5 × 6,3 m (HR 0,45); SG 31,5 × 16,1 m (HR 0,47) — SBOC p. 26",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT04223856",
+          "pagina": null,
+          "trecho": "Enfortumab Vedotin and Pembrolizumab vs. Chemotherapy Alone in Untreated Locally Advanced",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CheckMate 901",
+        "nct": "NCT03036098",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Avançado não tratado elegível à cisplatina",
+        "bracos": "GC + nivolumabe → nivolumabe × GC",
+        "desfecho": "SG, SLP",
+        "resultado": "Mediana SG 21,7 × 18,9 m (HR 0,78) — SBOC p. 26",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03036098",
+          "pagina": null,
+          "trecho": "Standard of Care Chemotherapy Compared to the Standard of Care Chemotherapy Alone",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "THOR",
+        "nct": "NCT03390504",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Avançado com alterações de FGFR, tratado previamente",
+        "bracos": "Erdafitinibe × vinflunina ou docetaxel",
+        "desfecho": "SG",
+        "resultado": "SBOC p. 28 cita fase II com 40% de resposta; aula PRO: mSG 12,1 × 7,8 m (HR 0,64) (CURSO)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03390504",
+          "pagina": null,
+          "trecho": "A Study of Erdafitinib Compared With Vinflunine or Docetaxel or Pembrolizumab",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "KEYNOTE-057",
+        "nct": "NCT02625961",
+        "nctEstado": "VERIFICADO",
+        "populacao": "NMIBC alto risco não responsivo a BCG",
+        "bracos": "Pembrolizumabe braço único",
+        "desfecho": "RC (coorte A), SLD (coorte B)",
+        "resultado": "RC 41% (IC95% 31-51), duração mediana 16,2 m — SBOC p. 17",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02625961",
+          "pagina": null,
+          "trecho": "Study of Pembrolizumab (MK-3475) and Pembrolizumab With Other Investigational Agents",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "EV-303/KEYNOTE-905 e EV-304/KEYNOTE-B15 (EV + pembrolizumabe perioperatório)",
+        "nct": "NCT03924895",
+        "nctEstado": "VERIFICADO",
+        "populacao": "MIBC candidato à cistectomia, elegível e inelegível à cisplatina",
+        "bracos": "EV + pembrolizumabe perioperatório × padrão",
+        "desfecho": "RPC, SLE, SG",
+        "resultado": "Benefício relatado; sem aprovação Anvisa — SBOC p. 20",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 20,
+          "trecho": "essa abordagem terapêutica ainda não possui aprovação regulatória pela Anvisa no Brasil",
+          "estado": "VERIFICADO"
+        },
+        "registros": [
+          {
+            "nome": "EV-303/KEYNOTE-905",
+            "nct": "NCT03924895",
+            "estado": "VERIFICADO"
+          },
+          {
+            "nome": "EV-304/KEYNOTE-B15",
+            "nct": "NCT04700124",
+            "estado": "VERIFICADO"
+          }
+        ]
+      },
+      {
+        "nome": "IMvigor011 (atezolizumabe adjuvante guiado por ctDNA)",
+        "nct": "NCT04660344",
+        "nctEstado": "VERIFICADO",
+        "populacao": "MIBC pós-cistectomia ctDNA positivo",
+        "bracos": "Atezolizumabe × placebo",
+        "desfecho": "SLD, SG",
+        "resultado": "Ganho de SLD e SG; atezolizumabe sem aprovação Anvisa para adjuvância — SBOC p. 22",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 22,
+          "trecho": "O teste de ctDNA já se encontra disponível no Brasil",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "NMIBC baixo risco",
+        "exames": [
+          "CISTOSCOPIA"
+        ],
+        "periodicidade": "3 meses; se negativa, após 9 meses; depois anual por 5 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 30,
+          "trecho": "Baixo risco: cistoscopia aos 3 meses, se negativo, após 9 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "NMIBC alto risco",
+        "exames": [
+          "CISTOSCOPIA"
+        ],
+        "periodicidade": "Cistoscopia + citologia urinária (sem id no catálogo) aos 3 meses; se negativas, a cada 3 meses por 2 anos, a cada 6 meses até 5 anos, depois anual",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 30,
+          "trecho": "3 meses por 2 anos e então a cada 6 meses até 5 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "MIBC pós-cistectomia, pós-trimodal e doença avançada",
+        "exames": [
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "TC_PELVE"
+        ],
+        "periodicidade": "Periodicidade não definida na SBOC 2026 (SEM_FONTE); TC é o método de seguimento citado; trimodal exige cistoscopia de seguimento (aula PRO)",
+        "pendencia": {
+          "texto": "Periodicidade do seguimento pós-cistectomia/pós-trimodal/doença avançada sem fonte.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "fontes/sboc/SBOC 2026 p.8/30, Bexiga.txt p.23, Bexiga_2.txt p.26-27: periodicidade só para NMIBC",
+            "fontes/pro26/67 p.16: 'Seguimento com cistoscopia' (trimodal) sem intervalo; 66 p.20 só NMIBC"
+          ]
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 8,
+          "trecho": "Método de primeira linha para estadiamento inicial e seguimento",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "bexiga preservada: primeiros 18 meses",
+        "exames": [
+          "CISTOSCOPIA",
+          "CITOLOGIA_LIQUIDOS"
+        ],
+        "periodicidade": "a cada 3 meses",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "periodo": "bexiga preservada: 18 meses seguintes",
+        "exames": [
+          "CISTOSCOPIA",
+          "CITOLOGIA_LIQUIDOS"
+        ],
+        "periodicidade": "a cada 6 meses",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "periodo": "bexiga preservada: até o ano 5",
+        "exames": [
+          "CISTOSCOPIA",
+          "CITOLOGIA_LIQUIDOS"
+        ],
+        "periodicidade": "anual; urotomografia anual (TC_ABDOMEN_SUPERIOR + TC_PELVE com contraste)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "INFERIDO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "TC_TORAX",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "CONTRASTE_TC",
+      "RM_PELVE",
+      "CONTRASTE_RM",
+      "CISTOSCOPIA",
+      "ANATOMOPATOLOGICO",
+      "FISH",
+      "IMUNOHISTOQUIMICA",
+      "URINA_TIPO_I",
+      "PET_CT_FDG",
+      "CLEARANCE_CREATININA",
+      "CREATININA",
+      "AUDIOMETRIA_TONAL",
+      "CITOLOGIA_LIQUIDOS",
+      "MOLECULAR_PCR_MUTACAO",
+      "SEQUENCIAMENTO_AMPLICON"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "cisplatina",
+        "com": "ototóxicos (aminoglicosídeos, diuréticos de alça)",
+        "ref": "INAT-15"
+      },
+      {
+        "droga": "cisplatina",
+        "com": "função renal (ClCr < 60 mL/min = inelegível na bexiga)",
+        "ref": "CI-01"
+      },
+      {
+        "droga": "carboplatina",
+        "com": "cálculo de dose por Calvert",
+        "ref": "CI-04"
+      },
+      {
+        "droga": "pembrolizumabe / nivolumabe / avelumabe / atezolizumabe / durvalumabe",
+        "com": "corticoide basal",
+        "ref": "INAT-27"
+      },
+      {
+        "droga": "pembrolizumabe / nivolumabe / avelumabe / atezolizumabe / durvalumabe",
+        "com": "antibiótico",
+        "ref": "INAT-28"
+      },
+      {
+        "droga": "pembrolizumabe / nivolumabe / avelumabe / atezolizumabe / durvalumabe",
+        "com": "doença autoimune / transplante",
+        "ref": "CI-08"
+      },
+      {
+        "droga": "paclitaxel",
+        "com": "clopidogrel",
+        "ref": "INAT-17"
+      },
+      {
+        "droga": "docetaxel",
+        "com": "inibidores fortes de CYP3A4",
+        "ref": "INAT-18"
+      },
+      {
+        "droga": "erdafitinibe",
+        "com": "inibidores/indutores de CYP3A4",
+        "ref": "INAT-23"
+      },
+      {
+        "droga": "pemetrexede",
+        "com": "AINE",
+        "ref": "INAT-16"
+      },
+      {
+        "droga": "pemetrexede",
+        "com": "ClCr < 45 mL/min",
+        "ref": "CI-02"
+      },
+      {
+        "droga": "citotóxicos (GC, MVACdd, gencitabina + carboplatina)",
+        "com": "vacinas de vírus vivo",
+        "ref": "INAT-29"
+      },
+      {
+        "droga": "BCG intravesical",
+        "com": "imunossupressão / hematúria macroscópica / ITU (contraindicações absolutas SBOC p. 14)",
+        "ref": null
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "Platina (cisplatina)",
+        "termosCTCAEv6": [
+          "Hearing impaired",
+          "Tinnitus",
+          "Acute kidney injury",
+          "Peripheral sensory neuropathy",
+          "Nausea",
+          "Vomiting"
+        ]
+      },
+      {
+        "classe": "Mielotoxicidade (GC, MVACdd, gencitabina + carboplatina)",
+        "termosCTCAEv6": [
+          "Neutrophil count decreased",
+          "Febrile neutropenia",
+          "Platelet count decreased",
+          "Anemia"
+        ]
+      },
+      {
+        "classe": "Enfortumabe vedotina",
+        "termosCTCAEv6": [
+          "Rash maculo-papular",
+          "Stevens-Johnson syndrome",
+          "Peripheral sensory neuropathy",
+          "Hyperglycemia",
+          "Dry eye"
+        ]
+      },
+      {
+        "classe": "Inibidores de checkpoint",
+        "termosCTCAEv6": [
+          "Pneumonitis",
+          "Colitis",
+          "Diarrhea",
+          "Hepatic failure",
+          "Hypothyroidism",
+          "Hyperthyroidism",
+          "Adrenal insufficiency",
+          "Rash maculo-papular"
+        ]
+      },
+      {
+        "classe": "Erdafitinibe",
+        "termosCTCAEv6": [
+          "Hyperphosphatemia",
+          "Retinopathy",
+          "Dry eye",
+          "Mucositis oral",
+          "Palmar-plantar erythrodysesthesia syndrome",
+          "Diarrhea",
+          "Nail changes"
+        ]
+      },
+      {
+        "classe": "Trastuzumabe deruxtecana",
+        "termosCTCAEv6": [
+          "Pneumonitis",
+          "Nausea",
+          "Neutrophil count decreased",
+          "Fatigue"
+        ]
+      },
+      {
+        "classe": "BCG intravesical",
+        "termosCTCAEv6": [
+          "Cystitis noninfective",
+          "Urinary frequency",
+          "Hematuria",
+          "Fever",
+          "Arthralgia",
+          "Sepsis"
+        ]
+      },
+      {
+        "classe": "RT pélvica",
+        "termosCTCAEv6": [
+          "Cystitis noninfective",
+          "Proctitis",
+          "Diarrhea",
+          "Urinary frequency"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "antiemético para esquemas com cisplatina (protocolo institucional)",
+      "hidratação e reposição de magnésio/potássio com cisplatina",
+      "filgrastima 300 mcg SC D3-D9 no MVACdd",
+      "lubrificante ocular e manejo de hiperfosfatemia (dieta/quelante) com erdafitinibe",
+      "hidratante cutâneo e controle glicêmico com enfortumabe vedotina",
+      "analgesia/antiespasmódico urinário para cistite pós-BCG ou RT"
+    ],
+    "orientacoes": [
+      "cessação do tabagismo (principal fator de risco modificável — aula PRO)",
+      "BCG: não instilar com hematúria macroscópica ou ITU sintomática; reter a solução pelo tempo orientado",
+      "imunoterapia: comunicar diarreia, tosse/falta de ar, rash, fadiga intensa",
+      "erdafitinibe: comunicar alterações visuais; fósforo sérico conforme pedido",
+      "enfortumabe vedotina: comunicar lesões de pele, formigamento, sede/poliúria"
+    ],
+    "encaminhamentos": [
+      "encaminhamento-cirurgia-oncologica",
+      "encaminhamento-radioterapia",
+      "urologia",
+      "oftalmologia (erdafitinibe)",
+      "geriatria (IVCF-20 em > 70 anos)",
+      "aconselhamento genético (suspeita de Lynch, trato superior)"
+    ],
+    "laudos": [
+      "laudo-inss",
+      "laudo-afastamento",
+      "laudo-loas",
+      "laudo-fgts",
+      "laudo-transporte",
+      "laudo-judicial"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "Paciente com carcinoma urotelial candidato a QT (neoadjuvante, adjuvante, trimodal ou paliativa)",
+        "y": "Avaliar elegibilidade à cisplatina: ClCr, classe NYHA, ECOG/KPS, neuropatia periférica e audição",
+        "z": "Qualquer um presente torna inelegível: ClCr < 60 mL/min; ICC NYHA ≥ III; ECOG ≥ 2 ou KPS ≤ 60-70%; neuropatia ≥ grau 2; perda auditiva ≥ grau 2 (CTCAE v4). Inelegível: não usar carboplatina como substituto na neoadjuvância (SBOC p. 20)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 10,
+          "trecho": "Presença de qualquer dos seguintes critérios torna o paciente inelegível à cisplatina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "NMIBC de alto grau, ressecção incompleta ou suspeita de doença residual após RTU",
+        "y": "Nova RTU",
+        "z": "Realizar em 4 a 6 semanas, antes de definir BCG ou cistectomia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 9,
+          "trecho": "Nova RTU em 4 a 6 semanas é recomendada em tumores de alto grau",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "MIBC em preservação vesical, após 40-45 Gy de QT + RT",
+        "y": "Citologia urinária + nova RTU",
+        "z": "Resposta completa ou parcial (Ta/Tis): completar QT + RT até 60-64 Gy; ausência de resposta ou progressão: cistectomia radical",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 23,
+          "trecho": "prosseguir QT + RT até dose de 60-64 Gy;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Peça de cistectomia ypT2-4 e/ou ypN+ após QT neoadjuvante (sem durvalumabe prévio)",
+        "y": "Nivolumabe adjuvante",
+        "z": "Por 1 ano; se recebeu GC + durvalumabe neoadjuvante, seguir durvalumabe 8 ciclos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 21,
+          "trecho": "Nivolumabe por 1 ano (em caso de ypT2-4 e/ou ypN+ com doença",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Doença avançada após 4-6 ciclos de QT com platina",
+        "y": "Reestadiar com TC",
+        "z": "Sem progressão: avelumabe manutenção; com progressão: 2ª linha (imunoterapia se não recebeu)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 13,
+          "trecho": "Avelumabe 800 mg EV D1 (após 4-6 ciclos de QT baseada em platina)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Carcinoma urotelial avançado",
+        "y": "Pesquisar FGFR2/FGFR3 (NGS/PCR, sem id no catálogo) e HER2 por IHQ (escore gástrico)",
+        "z": "FGFR3 mutado ou fusão FGFR2/3: erdafitinibe; HER2 IHQ 3+: T-DXd, a partir da 2ª linha",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 25,
+          "trecho": "Recomenda-se, quando disponível, a realização de testes moleculares para alterações em FGFR2/FGFR3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "NMIBC com indicação de BCG",
+        "y": "Checar contraindicações absolutas antes de cada instilação",
+        "z": "Não instilar nas 2 primeiras semanas pós-RTU, com hematúria macroscópica, após cateterização traumática ou com ITU sintomática",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 14,
+          "trecho": "Em pacientes com hematúria macroscópica;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "pT3-4 e/ou N+ após cistectomia sem neoadjuvância",
+        "y": "Checar contraindicações à QT adjuvante (ECOG ≥ 2, neuropatia ≥ G2, ClCr < 60) e IVCF-20 se > 70 anos",
+        "z": "Elegível: GC 4 ciclos ou MVACdd 3-4 ciclos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+          "pagina": 21,
+          "trecho": "Para doentes com idade > 70 anos, acrescentar o cálculo do índice",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    {
+      "texto": "Trato urinário superior (pelve renal/ureter) não coberto pela SBOC 2026: sem doses, sem protocolo; buscar diretriz específica (NCCN/EAU UTUC; POUT para adjuvância).",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC 2024/2025/2026 bexiga: TUS não coberto; incluir NCCN/EAU UTUC exige decisão de escopo"
+      ],
+      "classeAnterior": "DECISAO_CLINICA_DR_SILAS",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Trato urinário superior fica fora deste pack; terá pack próprio futuro (UTUC, EAU/NCCN).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 7A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "resolucao": "Trato urinário superior fica fora deste pack; terá pack próprio futuro (UTUC, EAU/NCCN)."
+    },
+    {
+      "texto": "BCG: dose depende da cepa (SBOC 120 mg/40 mg EORTC × aula PRO Connaught 81 mg/Tice 50 mg); esquema de indução/manutenção sem fonte SBOC — conferir bula da cepa disponível no SUS.",
+      "classe": "PROVISORIA_BULA_FDA",
+      "buscasFeitas": [
+        "SBOC 2026 p.16",
+        "openFDA TICE BCG",
+        "aula PRO 66 p.18"
+      ],
+      "resolucao": "Dose do MOC (81 mg ×6 + manutenção) como provisória até a bula da cepa (D-F1-16, resposta 1)."
+    },
+    {
+      "texto": "Pemetrexede e nab-paclitaxel em 2ª linha: doses SEM_FONTE.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "fontes/sboc/SBOC 2024/2025/2026 Bexiga: só citação p.27 (refs 58-60), sem dose",
+        "Rótulo FDA pemetrexede: sem indicação urotelial (já registrado no pack)",
+        "https://clinicaltrials.gov/api/v2/studies/NCT00035061 (fase 2 pemetrexede em CU recorrente): intervenção sem dose no registro",
+        "CT.gov 'pemetrexed urothelial/bladder': só combinações",
+        "fontes/sboc/SBOC Bexiga: sem dose",
+        "CT.gov 'nab-paclitaxel urothelial', 'ABI-007 urothelial', 'nab-paclitaxel transitional cell': só combinações/1ª linha/perioperatório",
+        "Rótulo FDA de nab-paclitaxel não consultado (não teria indicação urotelial; não transferir)"
+      ]
+    },
+    {
+      "texto": "PD-L1: corte e clone para pembrolizumabe 1ª linha não definidos na SBOC; conferir bula ANVISA (aula PRO: CPS ≥ 10 para pembrolizumabe).",
+      "classe": "PROVISORIA_BULA_FDA",
+      "buscasFeitas": [
+        "SBOC 2026 bexiga: sem corte",
+        "aula PRO: CPS ≥10 (a confirmar)"
+      ],
+      "resolucao": "Regra da bula: CPS ≥ 10 para pembrolizumabe em monoterapia; provisório até a bula ANVISA (D-F1-16 resposta 1; MOC item 13)."
+    },
+    {
+      "texto": "Seguimento pós-cistectomia, pós-trimodal e da doença avançada: periodicidade sem fonte na SBOC 2026.",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "fontes/sboc/SBOC 2026 p.8/30, Bexiga.txt p.23, Bexiga_2.txt p.26-27: periodicidade só para NMIBC",
+        "fontes/pro26/67 p.16: 'Seguimento com cistoscopia' (trimodal) sem intervalo; 66 p.20 só NMIBC"
+      ],
+      "resolucao": "Seguimento caso a caso (8A)."
+    },
+    {
+      "texto": "Emetogenicidade dos esquemas não descrita na SBOC de bexiga.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC bexiga 2024/2025/2026: sem classificação",
+        "ASCO 2020 Emetic Risk Chart inacessível a partir deste ambiente"
+      ]
+    },
+    {
+      "texto": "Sem id no catálogo: citologia urinária, NGS/PCR de FGFR, ctDNA (SEM_ID_NO_CATALOGO).",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json v1.1: sem citologia urinária, FGFR, ctDNA"
+      ]
+    },
+    {
+      "texto": "Via 'intravesical' fora do enum do esquema v2 (EV|VO|SC|IM) — necessário ampliar o enum; filgrastima (mcg) mantida em premedicação por não caber no enum de unidade.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "docs/ondas/F1-PACK-ESQUEMA-V2.md: enum de unidade sem mcg para filgrastima"
+      ]
+    },
+    {
+      "texto": "Ficha FICHA.pulmao-cpnpc.carboplatina-gemcitabina tem a mesma dose do esquema de bexiga (gem 1000 D1, D8 + carbo AUC5), mas não foi ligada (tumor diferente); avaliar ficha própria de bexiga.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/fichas: sem ficha de bexiga para gencitabina + carboplatina"
+      ]
+    },
+    {
+      "texto": "Número de ciclos de MVACdd na doença avançada não definido na SBOC.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC bexiga 2024/2025/2026: nº de ciclos de MVACdd na doença avançada não definido"
+      ]
+    },
+    {
+      "texto": "Criar pack UTUC (trato urinário superior: pelve renal/ureter) com base EAU/NCCN — decisão D-F1-17 7A.",
+      "classe": "TAREFA_CURADORIA",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Pack próprio futuro para UTUC (EAU/NCCN).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 7A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "buscasFeitas": []
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "Duração do durvalumabe adjuvante pós-NIAGARA",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 11,
+        "trecho": "manter durvalumabe a cada 4 semanas por 8 ciclos",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — pro26/67_-_Aula_67_-_Bexiga_-_Doença_inicial_músculo-invasiva_e_Pelve_renal.txt",
+        "pagina": 14,
+        "trecho": "Cis+Gem+Durvalumabe → cistectomia → Durvalumabe 2 anos",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "SBOC: 8 ciclos a cada 4 semanas (igual ao desenho do NIAGARA descrito na SBOC p. 20).",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Dose do avelumabe de manutenção",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 13,
+        "trecho": "Avelumabe 800 mg EV D1 (após 4-6 ciclos de QT baseada em platina)",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — pro26/68_-_Aula_68_-_Bexiga_-_Doença_avançada.txt",
+        "pagina": 9,
+        "trecho": "Avelumabe 10 mg/kg q2s",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "SBOC: 800 mg dose fixa a cada 2 semanas; 10 mg/kg é a dose do estudo citada na aula.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Unidade do enfortumabe vedotina em monoterapia",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 13,
+        "trecho": "Enfortumabe vedotina 1,25 mg/kg/dose EV D1, D8 e D15 A cada 28 dias",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — pro26/68_-_Aula_68_-_Bexiga_-_Doença_avançada.txt",
+        "pagina": 17,
+        "trecho": "Enfortumabevedotin: 1,25mg/m² D1, D8 e D15 q28d.",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "mg/kg (SBOC e rótulo FDA), com teto de 125 mg; 'mg/m²' da aula tratado como erro de digitação.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Número de ciclos de MVACdd neoadjuvante",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 19,
+        "trecho": "MVACdd 3 a 6 ciclos;",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — pro26/67_-_Aula_67_-_Bexiga_-_Doença_inicial_músculo-invasiva_e_Pelve_renal.txt",
+        "pagina": 14,
+        "trecho": "ddMVAC × 4 ciclos → cistectomia",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "SBOC: 3 a 6 ciclos; decisão médica dentro do intervalo.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Cisplatina fracionada no NIAGARA com ClCr 40-59 × critério de inelegibilidade ClCr < 60",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 10,
+        "trecho": "Presença de qualquer dos seguintes critérios torna o paciente inelegível à cisplatina",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 11,
+        "trecho": "Durvalumabe 1.500 mg EV D1",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Pelo critério de Galsky (SBOC p. 10), ClCr < 60 mL/min = inelegível. A dose fracionada da tabela (35 mg/m² D1, D8 se ClCr 40-59) fica como decisão médica individual, não como padrão do pack. Aula PRO p. 14 também cita split-dose em TFG 40-60 como caso limítrofe.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "ClCr < 60 mL/min = inelegível à cisplatina (Galsky/SBOC p. 10). Dose fracionada (35 mg/m² D1 e D8) só caso a caso, por decisão médica individual — não é padrão do pack.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 4A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "Alvo do erdafitinibe",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 27,
+        "trecho": "Mutação FGFR3 ou fusão FGFR2/3: - Erdafitinibe.",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "Rótulo FDA (openFDA): https://api.fda.gov/drug/label.json?search=openfda.brand_name:BALVERSA&limit=1",
+        "pagina": null,
+        "trecho": "Confirm the presence of FGFR3 genetic alterations in tumor specimens",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Alteração de FGFR3 (mutação ou fusão) atende às duas fontes; fusão isolada de FGFR2 só por decisão médica após conferir bula ANVISA.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Erdafitinibe para alteração de FGFR2 OU FGFR3 (mutação ou fusão), conforme SBOC; não restrito a FGFR3.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 5B",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "Dose da BCG",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 16,
+        "trecho": "A Eortc indica a dose full (120 mg) durante 3 anos",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — pro26/66_-_Aula_66_-_Bexiga_-_Visão_geral_NMIBC.txt",
+        "pagina": 18,
+        "trecho": "BCG Connaught 81mg ou Tice BCG 50mg + SF 50mL via SVD por 2h",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "MOC: 81 mg por 6 semanas + manutenção. Não substitui a bula da cepa (NÃO VERIFICADA).",
+      "decisaoNecessaria": false,
+      "fonteC": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "INFERIDO"
+      },
+      "decisao": {
+        "texto": "Dose do MOC (81 mg ×6 + manutenção) como provisória até a bula da cepa (D-F1-16, resposta 1).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "Via da gencitabina 2 g no NMIBC pós-BCG",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 16,
+        "trecho": "Gencitabina 2 g IV semanal por 6 semanas seguido de manutenção mensal",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 16,
+        "trecho": "Tratamentos intravesicais:",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Via intravesical (o item está sob 'Tratamentos intravesicais' e a referência 13 é de gencitabina intravesical); 'IV' tratado como erro de grafia. Confirmar com o médico.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Gencitabina 2 g pós-BCG = via intravesical ('IV' da SBOC é erro de grafia).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas D-F1-17 (Dr. Silas Negrão, 2026-10-12), item 6A",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "Pembrolizumabe no NMIBC não responsivo a BCG — população",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 16,
+        "trecho": "desde que recusem ou sejam inelegíveis à cistectomia.",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2025 Bexiga — sboc/Bexiga_2.txt",
+        "pagina": 16,
+        "trecho": "grau sem Tis, desde que sejam inelegíveis para cistectomia.",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "SBOC 2026 (recusa ou inelegibilidade), limitado ao que a bula no Brasil aprova: CIS com ou sem papilífero (SBOC 2026 p. 17).",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Corte de PD-L1 para pembrolizumabe 1ª linha em inelegível à cisplatina",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 25,
+        "trecho": "Pembrolizumabe (se PD-L1 positivo)",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — pro26/68_-_Aula_68_-_Bexiga_-_Doença_avançada.txt",
+        "pagina": 13,
+        "trecho": "APROVADO PELA ANVISA CPS ≥10",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Regra = bula ANVISA: monoterapia em inelegível à cisplatina exige PD-L1 (CPS ≥ 10 para pembrolizumabe). O MOC diz independente de PD-L1; não copiar o livro.",
+      "decisaoNecessaria": false,
+      "fonteC": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "INFERIDO"
+      }
+    },
+    {
+      "tema": "Intervalo da GC neoadjuvante",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 11,
+        "trecho": "Cisplatina 70 mg/m² EV D1 Gencitabina 1.000 mg/m² EV D1, D8 e D15",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "SBOC 2026 Bexiga v3 — sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 19,
+        "trecho": "Guideline do NCCN recomenda GC por 4 ciclos a cada 21 dias",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Ambos registrados como protocolos separados (28 dias padrão e 21 dias com cisplatina fracionada, da própria tabela SBOC); escolha médica.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Docetaxel intravesical 37,5 × 37 mg",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt",
+        "pagina": 16,
+        "trecho": "Gencitabina 1 g + Docetaxel 37,5 mg seguido de manutenção mensal por",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "ENSAIO",
+        "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT07322263",
+        "pagina": null,
+        "trecho": "Gemcitabine (1000mg) followed by Docetaxel (37 mg)",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Mantida a dose da SBOC (37,5 mg); diferença irrelevante, esquema de frequência do ensaio usado.",
+      "decisaoNecessaria": false
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (curadoria assistida, Opus 5.5)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "sboc/Diretrizes-SBOC-2026-Bexiga-v3-VERSAO-PARA-COLABORACAO-1.txt (integral, 38 páginas)",
+      "sboc/Bexiga.txt (SBOC 2024, publicação 15/05/2024 — conferido por diferença)",
+      "sboc/Bexiga_2.txt (SBOC 2025, publicação 17/05/2025 — conferido por diferença)",
+      "pro26/66_-_Aula_66_-_Bexiga_-_Visão_geral_NMIBC.txt",
+      "pro26/67_-_Aula_67_-_Bexiga_-_Doença_inicial_músculo-invasiva_e_Pelve_renal.txt",
+      "pro26/68_-_Aula_68_-_Bexiga_-_Doença_avançada.txt",
+      "corpus/exames/exames-sigtap.v1.json",
+      "https://api.fda.gov/drug/label.json?search=openfda.brand_name:BALVERSA&limit=1",
+      "https://api.fda.gov/drug/label.json?search=openfda.brand_name:PADCEV&limit=1",
+      "https://clinicaltrials.gov/api/v2/studies/ (NCT03732677, NCT04223856, NCT02632409, NCT02603432, NCT03036098, NCT03390504, NCT01812369, NCT02625961)",
+      "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
+      "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
+    ],
+    "aprovacaoClinica": null,
+    "rodada2": {
+      "data": "2026-10-11",
+      "redator": "Claude (Opus 5.5) — redução de pendências e conflitos; aprovação clínica pendente",
+      "pendenciasResolvidas": [
+        {
+          "texto": "QT intravesical dose única (mitomicina C/gencitabina/doxorrubicina): dose SEM_FONTE.",
+          "resolucao": "Mitomicina C 40 mg ou gencitabina 2 g, dose única (ensaio fase 3 NCT02695771)."
+        },
+        {
+          "texto": "Gencitabina + docetaxel intravesical: frequência da indução SEM_FONTE.",
+          "resolucao": "Indução semanal ×6 e manutenção mensal (NCT07322263, BCG-não responsivo)."
+        },
+        {
+          "texto": "Durvalumabe 2ª linha, paclitaxel, docetaxel, pemetrexede e nab-paclitaxel em 2ª linha: durvalumabe, paclitaxel e docetaxel",
+          "resolucao": "Durvalumabe 10 mg/kg q2s (Study 1108; com ressalva de registro); paclitaxel 175 e docetaxel 75 mg/m² q21 (TROPiCS-04/KEYNOTE-045). Pemetrexede e nab-paclitaxel seguem classificados."
+        },
+        {
+          "texto": "Status SUS/CONITEC de imunoterapias, EV, erdafitinibe, T-DXd e vinflunina não verificado (DADO_AUSENTE). PET/CT FDG para bexiga sem cobertura SUS verificada.",
+          "resolucao": "Status SUS preenchido: QT via APAC 0304020400/0304040070/0304050016; imunoterapias, EV, erdafitinibe, T-DXd e vinflunina sem avaliação CONITEC; BCG parcial (fonte secundária)."
+        },
+        {
+          "texto": "Fontes conferidas: SBOC 2024 (Bexiga.txt) e 2025 (Bexiga_2.txt) têm as mesmas doses da 2026; diferenças são de texto/recomendação (ver conflitos).",
+          "resolucao": "Informativo (fontes conferidas) — não é pendência."
+        }
+      ],
+      "correcoes": []
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "2 vínculos rebaixados a catalogoIdCandidato"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 3",
+      "acao": "seguimento do MOC acrescentado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 11",
+      "acao": "POUT RATIFICADO (cisplatina 70 D1 + gencitabina 1.000 D1/D8 q21 ×4 se ClCr ≥50; carboplatina AUC 4,5–5 se ClCr 30–49)"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 13",
+      "acao": "PD-L1 na 1ª linha inelegível: mantida a restrição da bula"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 14",
+      "acao": "BCG 81 mg ×6 + manutenção (MOC) preenchido; bula da cepa pendente"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 5B (Dr. Silas)",
+      "acao": "erdafitinibe: elegibilidade ampliada para alteração de FGFR2 ou FGFR3 (SBOC p. 27); conflito 'Alvo do erdafitinibe' fechado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 6A (Dr. Silas)",
+      "acao": "bexiga-nmibc-gencitabina-intravesical: via intravesical confirmada; conflito fechado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 4A (Dr. Silas)",
+      "acao": "ClCr < 60 = inelegível à cisplatina; dose fracionada rebaixada a decisão caso a caso; conflito fechado"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-17 item 7A (Dr. Silas)",
+      "acao": "pendência de escopo do TUS fechada; nova pendência 'criar pack UTUC (EAU/NCCN)'"
+    }
+  ]
+}

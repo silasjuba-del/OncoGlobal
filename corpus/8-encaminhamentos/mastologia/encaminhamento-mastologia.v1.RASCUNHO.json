@@ -1,0 +1,84 @@
+{
+  "header": {
+    "id": "encaminhamento-mastologia",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "estrutura comum do prompt mestre §15 + base legal de prioridade/prazos (docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.3)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "destinoNoSus": "Serviço de mastologia via central de regulação (SISREG) — vaga conforme oferta",
+  "motivosListaFechada": [
+    "confirmação diagnóstica de nódulo/lesão mamária suspeita",
+    "estadiamento e conduta cirúrgica de câncer de mama confirmado",
+    "avaliação de recorrência local",
+    "seguimento cirúrgico pós-tratamento neoadjuvante",
+    "avaliação de complicações cirúrgicas"
+  ],
+  "estrutura": {
+    "fatoConfirmado": [
+      "diagnóstico (CID) e data",
+      "estadiamento (sistema + edição + data — ex.: AJCC 8ª [VERIFICAR])",
+      "AP/IHQ: ER, PgR, HER2, Ki-67 (conforme pack mama)",
+      "imagens com data (mamografia/US/RM)",
+      "tratamento já realizado (cirurgia, QT, RT, hormonioterapia)"
+    ],
+    "decisaoMedica": [
+      "pergunta clínica específica ao mastologista (ex.: 'cirurgia agora ou após neoadjuvância?')",
+      "urgência com critério (ver abaixo)"
+    ]
+  },
+  "urgencia": {
+    "eletivo": "seguimento de rotina",
+    "prioritario": "diagnóstico confirmado dentro do prazo da Lei 12.732/2012 — 1º tratamento em até 60 dias do diagnóstico patológico (Planalto, art. 2º, CONFIRMADO); exames de elucidação em 30 dias (Lei 13.896/2019, CONFIRMADO)",
+    "urgente": "complicação/condição que não admite espera de regulação — contato direto conforme fluxo do serviço"
+  },
+  "prioridadeEstatuto": "Paciente com câncer tem atendimento prioritário: Lei 14.238/2021, art. 4º, V e §2º (CONFIRMADO no Planalto).",
+  "documentosQueSeguem": [
+    "AP/IHQ",
+    "imagens em mídia/número",
+    "relatório resumo (D-F1-04 aplicado a relatórios)"
+  ],
+  "proibicoes": [
+    "Inferir urgência só pelo nome do tumor",
+    "Inventar destino/fluxo municipal",
+    "Preencher conclusão do especialista"
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "NORMA",
+      "referencia": "estrutura comum do prompt mestre §15 + base legal de prioridade/prazos (docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.3)",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "packs": [
+    "pack-mama"
+  ],
+  "portas": {
+    "consome": [
+      "templates/resumo-prontuario-modelo-servico (resumo do caso)",
+      "tumor",
+      "patologia",
+      "exames.realizados",
+      "prescricao.vigente"
+    ],
+    "oferece": [
+      "documento.encaminhamento-mastologia",
+      "agenda (retorno pós-encaminhamento)"
+    ]
+  }
+}

@@ -1,0 +1,3807 @@
+{
+  "header": {
+    "id": "pack-gastrico",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Estômago: doença localizada v7 + Estômago: doença avançada v5",
+      "trecho": "objetivo apoiar as decisões clínicas no tratamento de tumores de estômago: doença localizada",
+      "edicao": "Estômago localizado v7 e doença avançada v5, 2026 (publicação 29/04/2026, versões para colaboração)"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [
+    "pack-gastrico-v1-glm"
+  ],
+  "identidade": {
+    "tumor": "Adenocarcinoma gástrico e da transição esofagogástrica (TEG/JEG Siewert III)",
+    "cid10": [
+      "C16"
+    ],
+    "subtipos": [
+      "adenocarcinoma (intestinal, difuso)",
+      "dMMR/MSI-H",
+      "HER2 positivo",
+      "CLDN18.2 positivo"
+    ],
+    "cenarios": [
+      "localizado_ressecavel (≥cT2 e/ou cN+)",
+      "ressecado_sem_neoadjuvancia",
+      "metastatico_1l",
+      "metastatico_2l",
+      "metastatico_3l"
+    ],
+    "limitesAplicabilidade": "Adulto com adenocarcinoma gástrico/TEG. Não cobre GIST, linfoma, neuroendócrino. Adenocarcinoma metastático de esôfago/JEG também usa a parte metastática deste pack. Pack propõe; médico decide.",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 4,
+      "trecho": "Vide capítulo de doença localizada.",
+      "estado": "VERIFICADO"
+    }
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax com contraste",
+        "indicacao": "universal",
+        "quando": "estadiamento",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "TC de tórax e abdome com contraste",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome com contraste",
+        "indicacao": "universal",
+        "quando": "estadiamento",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "TC de tórax e abdome com contraste",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve (abdome total na doença avançada)",
+        "indicacao": "condicional",
+        "quando": "doença avançada: TC de abdome total",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "TC de tórax e abdome total com contraste EV.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT",
+        "indicacao": "condicional",
+        "quando": "utilidade limitada; videolaparoscopia negativa com suspeita de metástase na TC",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "pode ser indicado quando videolaparoscopia negativa e suspeita de metástase em TC",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [
+      {
+        "catalogoId": "EDA",
+        "rotulo": "EDA com múltiplas biópsias (histológico e molecular); Siewert na TEG",
+        "indicacao": "universal",
+        "quando": "diagnóstico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "EDA com biópsia (preferencialmente, múltiplas biópsias para obtenção de amostra adequada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "Ecoendoscopia",
+        "indicacao": "condicional",
+        "quando": "se disponível; sem M1, suspeita de T1/T2",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Ecoendoscopia (se disponível): na ausência de M1 e, preferencialmente, na suspeita",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "SEM_ID_NO_CATALOGO"
+      },
+      {
+        "catalogoId": "VIDEOLAPAROSCOPIA",
+        "rotulo": "Videolaparoscopia com citologia de lavado peritoneal",
+        "indicacao": "condicional",
+        "quando": "N+, cT3/T4 e M0",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Videolaparoscopia com citologia de lavado peritoneal: se N+, cT3/T4 e M0.",
+          "estado": "VERIFICADO"
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
+      }
+    ],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "endoscopica",
+          "quando": "múltiplas biópsias na EDA; idealmente 6–8 fragmentos para HER2",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 5,
+            "trecho": "Caso sejam oriundos de biópsia, idealmente seis a oito fragmentos devem ser analisados",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "cirurgica",
+          "quando": "gastrectomia com linfadenectomia D2 (≥ 15 linfonodos examinados)",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "gastrectomia com linfadenectomia D2 (com pelo menos 15 LFN examinados)",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "tipo histológico",
+        "pT e pN (AJCC 8ª)",
+        "número de linfonodos examinados (≥ 15)",
+        "margens (R0/R1)",
+        "status MMR"
+      ],
+      "laudoFonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 7,
+        "trecho": "gastrectomia com linfadenectomia D2 (com pelo menos 15 LFN examinados)",
+        "estado": "VERIFICADO"
+      },
+      "molecular": [
+        {
+          "alvo": "MMR/MSI",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "todo caso (localizado e avançado)",
+          "consequencia": "prognóstico; imunoterapia na doença avançada/2ª linha",
+          "disponivelSUS": "parcial",
+          "metodosAlternativos": [
+            "PCR",
+            "NGS"
+          ],
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 5,
+            "trecho": "Rastreamento universal de instabilidade tumoral através de imunohistoquímica para proteínas de reparo",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "HER2",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "doença metastática com indicação de tratamento sistêmico; critérios gástricos (não de mama)",
+          "consequencia": "3+ positivo; 2+ confirmar por ISH; 0/1+ negativo → trastuzumabe",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 5,
+            "trecho": "São considerados positivos tumores 3+/3+. Casos 2+/3+ devem ser confirmados",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "HER2 (amplificação)",
+          "metodo": "FISH/CISH",
+          "catalogoId": "HER2_QUANTIFICACAO",
+          "quandoPedir": "condicional",
+          "cenario": "IHQ 2+",
+          "consequencia": "confirma positividade",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 5,
+            "trecho": "devem ser confirmados por hibridização in situ (FISH, SISH ou CISH)",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "PD-L1 (CPS; TAP para tislelizumabe)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "doença metastática HER2 negativa ou positiva",
+          "consequencia": "imunoterapia de 1ª linha (CPS ≥ 1; preferência CPS ≥ 5)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 5,
+            "trecho": "o nível de expressão de PD-L1 está associado ao benefício da imunoterapia",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Claudina 18.2",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "doença metastática HER2 negativa",
+          "consequencia": "positivo = coloração 2+/3+ em ≥ 75% das células → zolbetuximabe",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 6,
+            "trecho": "coloração de membrana moderada a forta (2+/3+) em ≥ 75% das células",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "NTRK (fusão)",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
+          "quandoPedir": "condicional",
+          "cenario": "opcional; quando larotrectinibe acessível",
+          "consequencia": "larotrectinibe",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 6,
+            "trecho": "quando larotrectinibe está acessível aos pacientes com fusão de NTRK",
+            "estado": "VERIFICADO"
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
+        },
+        {
+          "alvo": "DPYD (deficiência de DPD)",
+          "metodo": "outro",
+          "catalogoId": null,
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "candidatos a fluoropirimidina, se o teste estiver disponível",
+          "consequencia": "deficiência total contraindica; parcial reduz dose",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 16,
+            "trecho": "recomenda-se a pesquisa de deficiência de DPD em todos os pacientes candidatos",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição (agrupamento patológico)",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 13,
+      "trecho": "AJCC Cancer Staging Manual [Internet]. 8th ed.",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma com plaquetas",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "quando": "basal; anemia ferropriva",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Hemograma completo com plaquetas (avaliar indicação de propedêutica para anemia ferropriva)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGO",
+        "rotulo": "TGO",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "quando": "função hepática",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Hemograma completo com plaquetas (avaliar indicação de propedêutica para anemia ferropriva)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "rotulo": "TGP",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "quando": "função hepática",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Hemograma completo com plaquetas (avaliar indicação de propedêutica para anemia ferropriva)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BILIRRUBINA",
+        "rotulo": "Bilirrubinas",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "quando": "função hepática",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Hemograma completo com plaquetas (avaliar indicação de propedêutica para anemia ferropriva)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Creatinina",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "quando": "função renal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Hemograma completo com plaquetas (avaliar indicação de propedêutica para anemia ferropriva)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "UREIA",
+        "rotulo": "Ureia",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "quando": "função renal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Hemograma completo com plaquetas (avaliar indicação de propedêutica para anemia ferropriva)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FERRITINA",
+        "rotulo": "Ferritina",
+        "cenario": "localizado",
+        "indicacao": "condicional",
+        "quando": "anemia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Hemograma completo com plaquetas (avaliar indicação de propedêutica para anemia ferropriva)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FERRO_SERICO",
+        "rotulo": "Ferro sérico",
+        "cenario": "localizado",
+        "indicacao": "condicional",
+        "quando": "anemia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Hemograma completo com plaquetas (avaliar indicação de propedêutica para anemia ferropriva)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CEA",
+        "rotulo": "CEA",
+        "cenario": "avançado",
+        "indicacao": "universal",
+        "quando": "doença avançada (basal)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Hemograma e plaquetas; Função renal; Função hepática; CEA.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "estádio clínico IA",
+        "conduta": "cirurgia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Estádio clínico IA",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "≥cT2 e/ou cN+ (IB–III), bom PS",
+        "conduta": "QT perioperatória + gastrectomia D2 (FLOT + durvalumabe preferencial)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "para a maioria dos pacientes ≥T2 e/ou N+ com bom performance status",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "ressecado sem QT prévia, pT3-4 ou pN+ com D2",
+        "conduta": "QT adjuvante (CapOx 8 ciclos preferencial)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Doença localizada (pT3-4 ou N+) ressecada, com linfadenectomia D2",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "ressecado ≥pT2/pN+ com cirurgia subótima (não-D2), R0/R1, ECOG ≤ 2",
+        "conduta": "QT + RT adjuvante (MacDonald) ou FOLFOX/CapOx seguido de RT",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "ressecada, R0 ou R1, pacientes com ECOG ≤ 2 e cirurgia subótima",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "metastático HER2 negativo",
+        "conduta": "fluoropirimidina + platina ± imunoterapia (PD-L1) ou zolbetuximabe (CLDN18.2+)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Fluoropirimidina + Platina: 5FU + CDDP , Capecitabina + CDDP , FOLFOX ou CapOx",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "metastático HER2 positivo",
+        "conduta": "trastuzumabe + fluoropirimidina + platina; + pembrolizumabe se CPS ≥ 1",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "a adição de trastuzumabe a fluoropirimidina e platina (FP) aumenta SG",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "ECOG 3–4",
+        "conduta": "cuidados exclusivos de suporte (exceto PS baixo pela própria doença)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Para pacientes com ECOG 3 ou 4, os cuidados exclusivos de suporte",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "CEA",
+          "uso": "basal na doença avançada",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 5,
+            "trecho": "Hemograma e plaquetas; Função renal; Função hepática; CEA.",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "imagem periódica no seguimento do operado (sem impacto em sobrevida; individualizar)",
+        "CA 19-9 (não citado na diretriz SBOC 2026 de estômago)"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "localizado_ressecavel",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT perioperatória",
+          "gastrectomia + D2"
+        ],
+        "criterio": "≥cT2 e/ou cN+, bom PS, comorbidades controladas",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "A cirurgia ideal é gastrectomia com linfadenectomia D2",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "ressecado_sem_neoadjuvancia",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT adjuvante",
+          "QT+RT adjuvante se cirurgia subótima"
+        ],
+        "criterio": "pT3-4/pN+ (D2) ou ≥pT2/pN+ (não-D2)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "pT3/T4 ou pN+ com cirurgia ótima (D2)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT",
+          "anti-HER2",
+          "imunoterapia",
+          "anti-CLDN18.2",
+          "antiangiogênico 2ª linha"
+        ],
+        "criterio": "HER2, PD-L1, CLDN18.2, MSI, PS",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "combinação de uma platina com uma fluoropirimidina permanece como esquema padrão",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "gastrico-perioperatorio-flot-durvalumabe",
+        "nome": "FLOT + durvalumabe perioperatório (MATTERHORN)",
+        "cenario": "localizado_ressecavel",
+        "linha": "perioperatório",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Ácido folínico",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "referenciaSBOC": {
+              "dose": 2600,
+              "droga": "5-FU infusão 24 h"
+            },
+            "fonteDose": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Durvalumabe",
+            "dose": 1500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "a cada 4 semanas; depois 10 ciclos de manutenção",
+            "intervaloDias": 28
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 8,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "FLOT perioperatório (procedimentos 0304040177/0304050253)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Docetaxel 50 mg/m² EV D1 + Oxaliplatina 85 mg/m² EV D1 +",
+          "estado": "VERIFICADO"
+        },
+        "numeroCiclosNota": "8 ciclos de FLOT a cada 14 dias (4 pré + 4 pós) = 2 + 2 ciclos de durvalumabe a cada 4 semanas; depois durvalumabe 1.500 mg a cada 4 semanas por 10 ciclos. Leituras '2+2' (estômago) e '4+4' (esôfago) são equivalentes.",
+        "fonteCalendario": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "2 ciclos pré- e 2 ciclos pós-cirurgia, seguido por durvalumabe a cada 4 semanas",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true,
+        "fonteCiclosBula": {
+          "tipo": "BULA",
+          "referencia": "Rótulo FDA IMFINZI (durvalumab) (openFDA/DailyMed set_id 8baba4ea-2855-42fa-9bd9-5a7548d4cec3), seção 2 (GC/GEJC ressecável), acesso 2026-10-11; bula ANVISA não consultada",
+          "pagina": null,
+          "trecho": "in combination with FLOT chemotherapy every 4 weeks for up to 2 cycles",
+          "estado": "VERIFICADO"
+        },
+        "fases": [
+          "pré-operatória",
+          "pós-operatória",
+          "manutenção com durvalumabe"
+        ],
+        "calendarioExecutavel": false,
+        "motivoCalendario": "FLOT q14 + durvalumabe q28: calendário por componente; não usar repetidor uniforme",
+        "notaServico": "Dose do serviço: 5-FU 2.400 mg/m² em 46 h (decisão do Dr. Silas, D-F1-16); SBOC/MOC: 2.600 mg/m² em 24 h."
+      },
+      {
+        "id": "gastrico-perioperatorio-flot",
+        "nome": "FLOT perioperatório (FLOT4)",
+        "cenario": "localizado_ressecavel",
+        "linha": "perioperatório",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Ácido folínico",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "sem bolus",
+            "referenciaSBOC": {
+              "dose": 2600,
+              "droga": "5-FU infusão 24 h"
+            },
+            "fonteDose": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 8,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304040177 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Fase pré-operatória; fase pós-operatória no procedimento 0304050253.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304040177",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO (PRÉ-OPERATÓRIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "A cada 2 semanas, 4 ciclos pré- e 4 pós-gastrectomia (total de 8 ciclos)",
+          "estado": "VERIFICADO"
+        },
+        "fonteDoses": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Ácido folínico 200 mg/m² EV D1 + 5-FU 2.600 mg/m² EV D1 em 24h",
+          "estado": "VERIFICADO"
+        },
+        "fichaNota": "ficha FLOT existente é paliativa (estomago-jeg/flot__paliativo-metastatico) e traz 5-FU 2.400 — não vinculada",
+        "doseVerificada": true,
+        "notaServico": "Dose do serviço: 5-FU 2.400 mg/m² em 46 h (decisão do Dr. Silas, D-F1-16); SBOC/MOC: 2.600 mg/m² em 24 h."
+      },
+      {
+        "id": "gastrico-perioperatorio-cisplatina-5fu",
+        "nome": "Cisplatina + 5-FU perioperatório (FNCLCC/FFCD)",
+        "cenario": "localizado_ressecavel",
+        "linha": "perioperatório",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "faixa na fonte 75–100 mg/m² (SBOC p.7); registrado o limite inferior — médico escolhe na faixa",
+            "fonteDose": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "5-FU infusão contínua",
+            "dose": 800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": "dose por dia"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304040177 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Fase pré-operatória; fase pós-operatória no procedimento 0304050253.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304040177",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO (PRÉ-OPERATÓRIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Cisplatina 75-100 mg/m² EV D1 + 5-FU 800 mg/m²/dia EV D1 a D5",
+          "estado": "VERIFICADO"
+        },
+        "pendencia": "FAIXA_NA_FONTE: limite inferior registrado (DECISAO_CLINICA_DR_SILAS)",
+        "calendario": "2–3 ciclos pré e 3–4 pós (total 6)",
+        "doseVerificada": false
+      },
+      {
+        "id": "gastrico-perioperatorio-folfox",
+        "nome": "FOLFOX perioperatório (frágeis/sem acesso ao FLOT)",
+        "cenario": "localizado_ressecavel",
+        "linha": "perioperatório",
+        "drogas": [
+          {
+            "droga": "Ácido folínico",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 8,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304040177 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Fase pré-operatória; fase pós-operatória no procedimento 0304050253.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304040177",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO (PRÉ-OPERATÓRIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Ácido folínico 400 mg/m² EV D1 + Oxaliplatina 85 mg/m² EV D1 +",
+          "estado": "VERIFICADO"
+        },
+        "calendario": "4 ciclos pré e 4 pós-gastrectomia",
+        "fonteCalendario": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "A cada 2 semanas, 4 ciclos pré e 4 ciclos pós-gastrectomia",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-adjuvante-capox",
+        "nome": "CapOx adjuvante (CLASSIC)",
+        "cenario": "ressecado_sem_neoadjuvancia (pT3-4 ou N+, D2)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "12/12 h"
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 8,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.estomago-jeg.xelox-capox__adjuvante@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304050253 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "QT adjuvante (pós-operatória) de estômago.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304050253",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO (PÓS OPERATÓRIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Capecitabina 1.000 mg/m² VO 12/12h D1 a D14 + Oxaliplatina 130 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-adjuvante-xp",
+        "nome": "Capecitabina + cisplatina adjuvante (ARTIST)",
+        "cenario": "ressecado_sem_neoadjuvancia",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "12/12 h"
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304050253 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "QT adjuvante (pós-operatória) de estômago.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304050253",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO (PÓS OPERATÓRIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Capecitabina 1.000 mg/m² VO 12/12h D1 a D14 + Cisplatina 60 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-adjuvante-folfox",
+        "nome": "FOLFOX adjuvante",
+        "cenario": "ressecado_sem_neoadjuvancia",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Ácido folínico",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 12,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304050253 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "QT adjuvante (pós-operatória) de estômago.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304050253",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO (PÓS OPERATÓRIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "A cada 2 semanas, 12 ciclos",
+          "estado": "VERIFICADO"
+        },
+        "fonteDoses": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Ácido folínico 400 mg/m² EV D1 + Oxaliplatina 85 mg/m² EV D1 +",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-adjuvante-de-gramont",
+        "nome": "Esquema de Gramont adjuvante (ITACA-S)",
+        "cenario": "ressecado_sem_neoadjuvancia",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Leucovorin",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D2",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D2",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão 22 h",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D2",
+            "observacao": "dose por dia"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 9,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304050253 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "QT adjuvante (pós-operatória) de estômago.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304050253",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO (PÓS OPERATÓRIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Leucovorin 100 mg/m² EV D1 e D2 + 5-FU 400 mg/m² EV",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true,
+        "fonteCiclo": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT01640782 (ITACA-S) — https://clinicaltrials.gov/api/v2/studies/NCT01640782, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "22h continuous infusion on days 1 and 2, every 2 weeks for 9 administrations",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "gastrico-adjuvante-macdonald",
+        "nome": "QT + RT adjuvante — esquema MacDonald (INT-0116)",
+        "cenario": "ressecado_sem_neoadjuvancia (cirurgia subótima, ≥pT2/pN+)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Leucovorin (ciclos 1, 4 e 5)",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus (ciclos 1, 4 e 5)",
+            "dose": 425,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin (ciclo 2, semana 1 da RT, a partir do D28)",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D4",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus (ciclo 2)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D4",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin (ciclo 3, semana 5 da RT)",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D3",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus (ciclo 3)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D3",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 5,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304050253 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "QT adjuvante (pós-operatória) de estômago.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304050253",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO (PÓS OPERATÓRIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Leucovorin 20 mg/m² EV D1 a D5 5-FU 425 mg/m² (bolus)",
+          "estado": "VERIFICADO"
+        },
+        "radioterapiaAssociada": "45 Gy (4.500 cGy) em 5 semanas",
+        "fonteRT": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "4.500 cGy em 5 semanas",
+          "estado": "VERIFICADO"
+        },
+        "nota": "SBOC reserva para margens comprometidas e/ou poucos linfonodos; capecitabina é alternativa ao 5-FU",
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-adjuvante-capox-seguido-rt",
+        "nome": "CapOx seguido de RT com fluoropirimidina (cirurgia subótima)",
+        "cenario": "ressecado_sem_neoadjuvancia (cirurgia subótima)",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 2000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "dose diária total (= 1.000 mg/m² 12/12 h)"
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304050253 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "QT adjuvante (pós-operatória) de estômago.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304050253",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO (PÓS OPERATÓRIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Capecitabina 2.000 mg/m²/dia VO D1 a D14 + Oxaliplatina 130 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "duracao": "4 a 6 meses, seguido de RT com fluoropirimidina (dose de RT não informada — SEM_FONTE)",
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-5fu-cisplatina",
+        "nome": "5-FU + cisplatina",
+        "cenario": "metastatico_1l (HER2−)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "5-FU infusão contínua",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D4",
+            "observacao": "dose por dia"
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020044 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de estômago avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020044",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "5-Fluorouracil 1.000 mg/m²/dia EV (bomba de infusão contínua) D1 a D4 Cisplatina 75 mg/m²",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-folfox",
+        "nome": "FOLFOX/FLO",
+        "cenario": "metastatico_1l (HER2−)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.estomago-jeg.folfox__paliativo-metastatico@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020044 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de estômago avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020044",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Oxaliplatina 85 mg/m² EV D1 Leucovorin 400 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "fonteDoses5FU": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "5-Fluorouracil 400 mg/m² EV (bolus) D1 5-Fluorouracil 2.400 mg/m² EV",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-capecitabina-cisplatina",
+        "nome": "Capecitabina + cisplatina",
+        "cenario": "metastatico_1l (HER2−)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "12/12 h"
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020044 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de estômago avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020044",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Capecitabina 1.000 mg/m² VO 12/12h D1 a D14 Cisplatina 80 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-capox",
+        "nome": "CAPOX",
+        "cenario": "metastatico_1l (HER2−)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "12/12 h"
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020044 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de estômago avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020044",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Capecitabina 1.000 mg/m² VO 12/12h D1 a D14 Oxaliplatina 130 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-flox",
+        "nome": "FLOX (sem 5-FU infusional/capecitabina disponível)",
+        "cenario": "metastatico_1l (HER2−)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D15, D29",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "semanal por 6 semanas",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "semanal por 6 semanas",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 56,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020044 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de estômago avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020044",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Oxaliplatina 85 mg/m² EV D1, D15 e D29 Leucovorin 500 mg/m² EV D1 semanal",
+          "estado": "VERIFICADO"
+        },
+        "calendario": "por 6 semanas, a cada 8 semanas",
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-folfox-nivolumabe",
+        "nome": "FOLFOX + nivolumabe (CheckMate 649)",
+        "cenario": "metastatico_1l (HER2−, PD-L1 ≥ 1; preferência CPS ≥ 5 e/ou MSI-H)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Nivolumabe",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 30, de 01/05/2025 (DOU nº 84, 07/05/2025), Relatório CONITEC nº 999 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-30-de-1o-de-maio-de-2025",
+            "pagina": null,
+            "trecho": "o nivolumabe para o tratamento de adultos com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado. Alternativa SUS: mesma QT sem nivolumabe (APAC 0304020044).",
+          "alternativaSUS": "FOLFOX (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Folfox (como descrito acima) Nivolumabe 240 mg EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-capox-nivolumabe",
+        "nome": "CAPOX + nivolumabe (CheckMate 649)",
+        "cenario": "metastatico_1l (HER2−, PD-L1 ≥ 1)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "12/12 h"
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Nivolumabe",
+            "dose": 360,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 30, de 01/05/2025 (DOU nº 84, 07/05/2025), Relatório CONITEC nº 999 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-30-de-1o-de-maio-de-2025",
+            "pagina": null,
+            "trecho": "o nivolumabe para o tratamento de adultos com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado. Alternativa SUS: mesma QT sem nivolumabe (APAC 0304020044).",
+          "alternativaSUS": "CAPOX (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Capox (como descrito acima) Nivolumabe 360 mg EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-capox-pembrolizumabe",
+        "nome": "Pembrolizumabe + fluoropirimidina + platina (KEYNOTE-859) — exemplo com CAPOX",
+        "cenario": "metastatico_1l (HER2−, PD-L1 CPS ≥ 1)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "12/12 h"
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "CAPOX (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Pembrolizumabe 200 mg EV D1 a cada 3 semanas QT (Fluoropirimidina + Platina)",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-capox-tislelizumabe",
+        "nome": "Tislelizumabe + fluoropirimidina + platina (RATIONALE-305) — exemplo com CAPOX",
+        "cenario": "metastatico_1l (HER2−, PD-L1 TAP ≥ 5%)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "12/12 h"
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Tislelizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "CAPOX (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Tislelizumabe 200 mg EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-folfiri",
+        "nome": "FOLFIRI",
+        "cenario": "metastatico_1l (HER2−; recidiva precoce após platina)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Irinotecano",
+            "dose": 180,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.estomago-jeg.folfiri__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020044 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de estômago avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020044",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Irinotecano 180 mg/m² EV D1 Leucovorin 400 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-mdcf",
+        "nome": "mDCF",
+        "cenario": "metastatico_1l (bom PS; tripla reservada)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D3",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D2",
+            "observacao": "dose por dia"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.estomago-jeg.dcf-modificado-institucional__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020044 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de estômago avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020044",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Docetaxel 40 mg/m² EV D1 Cisplatina 40 mg/m² EV D2",
+          "estado": "VERIFICADO"
+        },
+        "alertaFicha": "ficha institucional: 5-FU 600 mg/m² D1–D2 sem bolus; SBOC: 400 bolus D1 + 1.000 mg/m²/dia D1–D2 — ver conflitos",
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-flot",
+        "nome": "FLOT paliativo",
+        "cenario": "metastatico_1l (bom PS)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Docetaxel",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "referenciaSBOC": {
+              "dose": 2600,
+              "droga": "5-FU infusão 24 h"
+            },
+            "fonteDose": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.estomago-jeg.flot__paliativo-metastatico@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020044 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de estômago avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020044",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "5-Fluorouracil 400 mg/m² EV (bolus) D1 5-Fluorouracil 2.600 mg/m² EV",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true,
+        "pendencia": "FONTE_CONFLITANTE",
+        "notaServico": "Dose do serviço: 5-FU 2.400 mg/m² em 46 h (decisão do Dr. Silas, D-F1-16); SBOC/MOC: 2.600 mg/m² em 24 h."
+      },
+      {
+        "id": "gastrico-paliativo-1l-capox-zolbetuximabe",
+        "nome": "CAPOX + zolbetuximabe (GLOW)",
+        "cenario": "metastatico_1l (HER2−, CLDN18.2+)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "12/12 h"
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Zolbetuximabe (ciclo 1)",
+            "dose": 800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Zolbetuximabe (a partir do ciclo 2)",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "CAPOX (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Zolbetuximabe 600 mg/m² EV D1 (a partir do ciclo 2) A cada 21 dias",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-folfox-zolbetuximabe",
+        "nome": "FOLFOX + zolbetuximabe (SPOTLIGHT)",
+        "cenario": "metastatico_1l (HER2−, CLDN18.2+)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Zolbetuximabe (ciclo 1)",
+            "dose": 800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Zolbetuximabe (a partir do ciclo 2)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "a cada 14 dias com FOLFOX (bula FDA); 600 mg/m² a cada 21 dias só com CAPOX",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "Rótulo FDA VYLOY (zolbetuximab-clzb) (openFDA/DailyMed set_id e7695a21-abb6-47ac-93f8-0ece5a9c4409), seção 2, acesso 2026-10-11; bula ANVISA não consultada",
+              "pagina": null,
+              "trecho": "600 mg/m 2 every 3 weeks or 400 mg/m 2 every 2 weeks",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "FOLFOX (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Folfox (como descrito acima) + Zolbetuximabe 800 mg/m² EV D1 (ciclo 1)",
+          "estado": "CONFLITANTE"
+        },
+        "notaConflito": "Resolvido pela bula FDA VYLOY: com FOLFOX (q14), manutenção 400 mg/m² a cada 2 semanas.",
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-trastuzumabe-xp",
+        "nome": "Trastuzumabe + capecitabina + cisplatina (ToGA)",
+        "cenario": "metastatico_1l (HER2+)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Trastuzumabe (C1, ataque)",
+            "dose": 8,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "apenas no ciclo 1"
+          },
+          {
+            "droga": "Trastuzumabe (a partir do C2)",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "12/12 h"
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 33, de 12/05/2025 (DOU nº 90, 15/05/2025), Relatório CONITEC nº 998 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-33-de-12-de-maio-de-2025",
+            "pagina": null,
+            "trecho": "o trastuzumabe para o tratamento de adultos com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Incorporado para estômago/JEG HER2+ (1ª linha), com QT na APAC 0304020044.",
+          "alternativaSUS": "capecitabina + cisplatina sem trastuzumabe (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Trastuzumabe 8 mg/kg EV D1 (dose de ataque no C1) seguido de",
+          "estado": "VERIFICADO"
+        },
+        "fonteManutencao": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Trastuzumabe 6 mg/kg EV D1 (a partir do C2) a cada 3 semanas OU",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-trastuzumabe-capox",
+        "nome": "Trastuzumabe + CAPOX",
+        "cenario": "metastatico_1l (HER2+)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Trastuzumabe (C1, ataque)",
+            "dose": 8,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "apenas no ciclo 1"
+          },
+          {
+            "droga": "Trastuzumabe (a partir do C2)",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "12/12 h"
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 33, de 12/05/2025 (DOU nº 90, 15/05/2025), Relatório CONITEC nº 998 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-33-de-12-de-maio-de-2025",
+            "pagina": null,
+            "trecho": "o trastuzumabe para o tratamento de adultos com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Incorporado para estômago/JEG HER2+ (1ª linha), com QT na APAC 0304020044.",
+          "alternativaSUS": "CAPOX sem trastuzumabe (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Trastuzumabe 8 mg/kg EV D1 (dose de ataque no C1) seguido de",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-trastuzumabe-folfox",
+        "nome": "Trastuzumabe + FOLFOX",
+        "cenario": "metastatico_1l (HER2+)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Trastuzumabe (C1, ataque)",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "apenas no ciclo 1"
+          },
+          {
+            "droga": "Trastuzumabe (a partir do C2)",
+            "dose": 4,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 33, de 12/05/2025 (DOU nº 90, 15/05/2025), Relatório CONITEC nº 998 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-33-de-12-de-maio-de-2025",
+            "pagina": null,
+            "trecho": "o trastuzumabe para o tratamento de adultos com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Incorporado para estômago/JEG HER2+ (1ª linha), com QT na APAC 0304020044.",
+          "alternativaSUS": "FOLFOX sem trastuzumabe (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Trastuzumabe 4 mg/kg EV D1 (a partir do C2) a cada 2 semanas",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-1l-pembrolizumabe-trastuzumabe-capox",
+        "nome": "Pembrolizumabe + trastuzumabe + fluoropirimidina + platina (KEYNOTE-811) — exemplo com CAPOX",
+        "cenario": "metastatico_1l (HER2+, PD-L1 CPS ≥ 1)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Trastuzumabe (C1, ataque)",
+            "dose": 8,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "apenas no ciclo 1"
+          },
+          {
+            "droga": "Trastuzumabe (a partir do C2)",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14",
+            "observacao": "12/12 h"
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 33, de 12/05/2025 (DOU nº 90, 15/05/2025), Relatório CONITEC nº 998 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-33-de-12-de-maio-de-2025",
+            "pagina": null,
+            "trecho": "o trastuzumabe para o tratamento de adultos com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Trastuzumabe + CAPOX incorporados; pembrolizumabe sem avaliação CONITEC no estômago (não fornecido).",
+          "alternativaSUS": "CAPOX (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Trastuzumabe 8 mg/kg EV D1 (dose de ataque no C1) seguido de 6 mg/kg",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-2l-paclitaxel-ramucirumabe",
+        "nome": "Paclitaxel + ramucirumabe (RAINBOW)",
+        "cenario": "metastatico_2l",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": ""
+          },
+          {
+            "droga": "Ramucirumabe",
+            "dose": 8,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 e D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 27, de 01/05/2025 (DOU nº 84), Relatório CONITEC nº 997 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-27-de-1o-de-maio-de-2025",
+            "pagina": null,
+            "trecho": "o ramucirumabe para adultos diagnosticados com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado. Alternativa SUS: paclitaxel isolado (APAC 0304020044).",
+          "alternativaSUS": "paclitaxel semanal (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "A cada 4 semanas Ramucirumabe 8 mg/kg EV D1 e D15",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-2l-paclitaxel",
+        "nome": "Paclitaxel semanal",
+        "cenario": "metastatico_2l",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15",
+            "observacao": "opção: 175 mg/m² D1 a cada 3 semanas"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020044 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de estômago avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020044",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Paclitaxel 80 mg/m² EV D1, D8 e D15 A cada 4 semanas Opção",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-2l-ramucirumabe",
+        "nome": "Ramucirumabe monoterapia (REGARD)",
+        "cenario": "metastatico_2l",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Ramucirumabe",
+            "dose": 8,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 e D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 27, de 01/05/2025 (DOU nº 84), Relatório CONITEC nº 997 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2025/portaria-sectics-ms-no-27-de-1o-de-maio-de-2025",
+            "pagina": null,
+            "trecho": "o ramucirumabe para adultos diagnosticados com câncer de estômago",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado. Alternativa SUS: paclitaxel isolado (APAC 0304020044).",
+          "alternativaSUS": "paclitaxel, docetaxel ou irinotecano (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Ramucirumabe 8 mg/kg EV D1 e D15 A cada 4 semanas",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-2l-docetaxel",
+        "nome": "Docetaxel monoterapia",
+        "cenario": "metastatico_2l",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.estomago-jeg.docetaxel-monoterapia__paliativo-metastatico@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020044 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de estômago avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020044",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Docetaxel 75 mg/m² EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-2l-irinotecano",
+        "nome": "Irinotecano monoterapia",
+        "cenario": "metastatico_2l",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Irinotecano",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "opções na fonte: 125 mg/m² D1 e D8 q21; 300 mg/m² D1 q21"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.estomago-jeg.irinotecano-monoterapia__paliativo-metastatico@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "via": "APAC procedimento 0304020044 (valor fixo por procedimento; escolha das drogas é do serviço)",
+          "nota": "Citotóxico dentro do procedimento de QT do adenocarcinoma de estômago avançado.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json), procedimento 0304020044",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE ESTÔMAGO AVANÇADO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Irinotecano 150 mg/m² EV D1 a cada 2 semanas A cada 2 semanas",
+          "estado": "VERIFICADO"
+        },
+        "alertaFicha": "ficha do serviço: 180 mg/m² q14 (não consta na SBOC) — ver conflitos",
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-2l-pembrolizumabe-msi",
+        "nome": "Pembrolizumabe (dMMR/MSI-H sem imunoterapia prévia)",
+        "cenario": "metastatico_2l (dMMR/MSI-H)",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "QT de 2ª linha (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Pembrolizumabe 200 mg EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-2l-trastuzumabe-deruxtecana",
+        "nome": "Trastuzumabe-deruxtecana (DESTINY-Gastric04)",
+        "cenario": "metastatico_2l (HER2+ pós-trastuzumabe)",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Trastuzumabe-deruxtecana",
+            "dose": 6.4,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "paclitaxel ± ramucirumabe/QT 2ª linha (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Trastuzumabe-deruxtecana 6,4 mg/kg EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-3l-trifluridina-tipiracila",
+        "nome": "Trifluridina/tipiracila (TAGS)",
+        "cenario": "metastatico_3l",
+        "linha": "3ª linha",
+        "drogas": [
+          {
+            "droga": "Trifluridina/tipiracila",
+            "dose": 35,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D5 e D8-D12",
+            "observacao": "2x/dia"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço.",
+          "alternativaSUS": "suporte clínico ou QT não usada (procedimento 0304020044)"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Tipiracil/Trifluridina 35 mg/m² VO 2x/dia D1 a D5 e D8 a D12",
+          "estado": "VERIFICADO"
+        },
+        "nota": "SBOC: aprovada no Brasil e incluída no rol da ANS (saúde suplementar) — não equivale a SUS",
+        "doseVerificada": true
+      },
+      {
+        "id": "gastrico-paliativo-ntrk-larotrectinibe",
+        "nome": "Larotrectinibe (fusão NTRK)",
+        "cenario": "metastatico (NTRK+)",
+        "linha": "2ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "Larotrectinibe",
+            "dose": 100,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo",
+            "observacao": "2x/dia"
+          }
+        ],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 72/2021 (publ. 07/12/2021), Relatório CONITEC nº 679 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2021/20211207_portaria_72.pdf",
+            "pagina": null,
+            "trecho": "o larotrectinibe para o tratamento de adultos e crianças com tumores sólidos",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado para adultos. Só o subgrupo pediátrico foi incorporado (Portaria SECTICS/MS nº 71/2025).",
+          "alternativaSUS": "QT de linha subsequente"
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Larotrectinibe 100 mg VO 2x/dia Continuamente",
+          "estado": "VERIFICADO"
+        },
+        "continuo": true,
+        "doseVerificada": true
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "QT+RT adjuvante MacDonald (cirurgia subótima)",
+        "doseTotalGy": 45,
+        "fracoes": 25,
+        "concomitante": "5-FU/leucovorin bolus (ciclos 2 e 3)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "4.500 cGy em 5 semanas",
+          "estado": "VERIFICADO"
+        },
+        "fonteFracoes": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT00188266 — https://clinicaltrials.gov/api/v2/studies/NCT00188266, acesso 2026-10-11 — seção de descrição, referência ao estudo SWOG/INT-0116",
+          "pagina": null,
+          "trecho": "concurrent radiation (4500 cGy/25 fractions) versus surgery alone",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "RT após FOLFOX/CapOx adjuvante (cirurgia subótima)",
+        "doseTotalGy": 45,
+        "fracoes": 25,
+        "concomitante": "fluoropirimidina",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "A cada 2 semanas, por 4 a 6 meses, seguido de RT com fluoropirimidina",
+          "estado": "VERIFICADO"
+        },
+        "fonteDose": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT00407186 (CRITICS) — https://clinicaltrials.gov/api/v2/studies/NCT00407186, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "45 Gy in 25 fracions (5 days/week)",
+          "estado": "INFERIDO"
+        },
+        "observacao": "QT/RT pós-operatória gástrica após QT (CRITICS: capecitabina + cisplatina concomitantes); mesmo alvo/dose do INT-0116. Estado INFERIDO por diferença de cenário (CRITICS = após QT perioperatória)."
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "gastrectomia com linfadenectomia D2 (≥ 15 LFN), cirurgião de volume adequado",
+        "quando": "doença localizada ressecável",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "A cirurgia ideal é gastrectomia com linfadenectomia D2",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "ressecção endoscópica ou gastrectomia subtotal + erradicação de H. pylori",
+        "quando": "após ressecção endoscópica/subtotal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Erradicar H. pylori com antibioticoterapia e inibidor de bomba de próton.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "HER2+ (IHQ 3+ ou 2+/ISH+)",
+        "opcao": "trastuzumabe + FP; + pembrolizumabe se CPS ≥ 1; 2ª linha T-DXd",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Pembrolizumabe + Trastuzumabe + QT (Fluoropirimidina + Platina) (NE alto/FR forte)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "HER2− PD-L1 CPS ≥ 1 (preferência ≥ 5)",
+        "opcao": "QT + nivolumabe ou pembrolizumabe; TAP ≥ 5% tislelizumabe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Por isso não recomendamos o uso em paciente com CPS < 1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "HER2− CLDN18.2+ (≥ 75% 2+/3+), principalmente CPS < 5",
+        "opcao": "FOLFOX/CAPOX + zolbetuximabe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Favorecemos o uso de zolbetuximabe associada à QT em pacientes com tumores HER2 negativos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "dMMR/MSI-H",
+        "opcao": "imunoterapia (isolada é opção); pembrolizumabe em 2ª linha se sem IO prévia",
+        "evidencia": "NE baixo–alto",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "No grupo de pacientes com MSI-H o tratamento com imunoterapia isolada é uma opção",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "fusão NTRK",
+        "opcao": "larotrectinibe",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "DADO_AUSENTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "Tumores com fusão do gene NTRK NE MODERADO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": null,
+      "riscoNeutropeniaFebril": null,
+      "pendencia": "SEM_FONTE (diretriz não classifica; usar corpus de suporte)",
+      "outros": [
+        "intervenção nutricional pré e pós-operatória imediata",
+        "monitorar deficiência de vitamina B12 e ferro, sobretudo após gastrectomia total",
+        "rastrear H. pylori em familiares de 1º grau",
+        "histórico familiar para síndromes hereditárias"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 13,
+        "trecho": "Monitorar para deficiência nutricional (vitamina B12 e ferro), principalmente após gastrectomia total",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "FLOT4",
+        "nct": "NCT01216644",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT01216644 (consultado 2026-10-11)",
+        "populacao": "gástrico/JEG ressecável ≥cT2 e/ou N+",
+        "bracos": "FLOT × ECF/ECX perioperatório",
+        "desfecho": "SG",
+        "resultado": "SG mediana 50 × 35 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "O estudo Flot4 comparou ECF/ECX com Flot por um total de 8 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "MATTERHORN",
+        "nct": "NCT04592913",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT04592913 (consultado 2026-10-11)",
+        "populacao": "gástrico/JEG ressecável",
+        "bracos": "FLOT + durvalumabe × FLOT + placebo",
+        "desfecho": "SLE",
+        "resultado": "SLE HR 0,71; SG HR 0,78",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "O estudo Matterhorn, de fase III, randomizado e duplo cego",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ESOPEC",
+        "nct": "NCT02509286",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT02509286 (consultado 2026-10-11)",
+        "populacao": "adenocarcinoma ressecável de JEG/esôfago",
+        "bracos": "FLOT × CROSS",
+        "desfecho": "SG",
+        "resultado": "SG mediana 66 × 37 meses (HR 0,70)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "A SG mediana foi significativamente superior no grupo Flot (66 meses)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CLASSIC",
+        "nct": "NCT00411229",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT00411229 (consultado 2026-10-11)",
+        "populacao": "gástrico ressecado com D2",
+        "bracos": "CapOx 8 ciclos × observação",
+        "desfecho": "SLD",
+        "resultado": "SLD 3 anos 74% × 59% (HR 0,56)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "comparou CapOx adjuvante por 8 ciclos com observação exclusiva",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CheckMate 649",
+        "nct": "NCT02872116",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT02872116 (consultado 2026-10-11)",
+        "populacao": "gástrico/JEG metastático HER2−, 1ª linha",
+        "bracos": "QT + nivolumabe × QT",
+        "desfecho": "SG/SLP (CPS ≥ 5)",
+        "resultado": "SG 14,4 × 11,1 meses (HR 0,71)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "O estudo CheckMate 649 comparou QT (Capox/Folfox) versus QT e ni",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "KEYNOTE-859",
+        "nct": "NCT03675737",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT03675737 (consultado 2026-10-11)",
+        "populacao": "gástrico/JEG HER2−, 1ª linha",
+        "bracos": "QT + pembrolizumabe × QT",
+        "desfecho": "SG",
+        "resultado": "SG 12,9 × 11,5 meses (HR 0,78)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Recentemente foram apresentados os resultados do Keynote-859",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "KEYNOTE-811",
+        "nct": "NCT03615326",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT03615326 (consultado 2026-10-11)",
+        "populacao": "gástrico/JEG HER2+, 1ª linha",
+        "bracos": "QT + trastuzumabe ± pembrolizumabe",
+        "desfecho": "SLP/SG",
+        "resultado": "SG CPS ≥ 1: 20,1 × 15,7 meses (HR 0,79)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "O estudo Keynote-811 comparou QT (CF ou Capox) + trastuzumabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "SPOTLIGHT",
+        "nct": "NCT03504397",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT03504397 (consultado 2026-10-11)",
+        "populacao": "HER2− CLDN18.2+, 1ª linha",
+        "bracos": "mFOLFOX6 ± zolbetuximabe",
+        "desfecho": "SLP/SG",
+        "resultado": "SG 18,23 × 15,54 meses (HR 0,75)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "no Spotlight a SG foi 18,23 versus 15,54 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "GLOW",
+        "nct": "NCT03653507",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT03653507 (consultado 2026-10-11)",
+        "populacao": "HER2− CLDN18.2+, 1ª linha",
+        "bracos": "CAPOX ± zolbetuximabe",
+        "desfecho": "SLP/SG",
+        "resultado": "SG 14,39 × 12,16 meses (HR 0,77)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "no Glow a SG foi de 14,39 versus 12,16 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "RATIONALE-305",
+        "nct": "NCT03777657",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT03777657 (consultado 2026-10-11)",
+        "populacao": "gástrico/JEG HER2−, 1ª linha",
+        "bracos": "tislelizumabe + QT × placebo + QT",
+        "desfecho": "SG",
+        "resultado": "TAP ≥ 5%: SG 17,2 × 12,6 meses (HR 0,74)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "O estudo Rationale-305 é um estudo de fase III, randomizado",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "RAINBOW",
+        "nct": "NCT01170663",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT01170663 (consultado 2026-10-11)",
+        "populacao": "gástrico 2ª linha",
+        "bracos": "paclitaxel ± ramucirumabe",
+        "desfecho": "SG",
+        "resultado": "SG 9,6 × 7,4 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "SG em comparação ao taxano isolado (9,6 versus 7,4 meses; p=0,017)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "DESTINY-Gastric04",
+        "nct": "NCT04704934",
+        "nctEstado": "VERIFICADO",
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT04704934 (consultado 2026-10-11)",
+        "populacao": "HER2+ pós-trastuzumabe",
+        "bracos": "T-DXd × paclitaxel + ramucirumabe",
+        "desfecho": "SG",
+        "resultado": "SG 14,7 × 11,4 meses (HR 0,70)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "O estudo fase III Destiny-Gastric04, randomizou 494 pacientes",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "operado, anos 1–2",
+        "exames": [],
+        "periodicidade": "exame clínico a cada 3 meses; imagem individualizada (sem papel claro de imagem periódica)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Exame clínico: a cada 3 meses por 2 anos, a cada 6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "operado, anos 3–5",
+        "exames": [],
+        "periodicidade": "exame clínico a cada 6 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Exame clínico: a cada 3 meses por 2 anos, a cada 6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "pós-gastrectomia (sobretudo total)",
+        "exames": [
+          "VITAMINA_B12",
+          "FERRITINA",
+          "FERRO_SERICO",
+          "HEMOGRAMA"
+        ],
+        "periodicidade": "monitorar deficiência de B12 e ferro (periodicidade não definida na fonte)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Monitorar para deficiência nutricional (vitamina B12 e ferro), principalmente após gastrectomia total",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "gastrectomia parcial/subtotal",
+        "exames": [
+          "EDA"
+        ],
+        "periodicidade": "EDA se indicação clínica",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "realizar endoscopia digestiva alta se indicação clínica",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "BILIRRUBINA",
+      "CEA",
+      "CREATININA",
+      "EDA",
+      "FERRITINA",
+      "FERRO_SERICO",
+      "HEMOGRAMA",
+      "HER2_QUANTIFICACAO",
+      "IMUNOHISTOQUIMICA",
+      "PET_CT_FDG",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "TC_TORAX",
+      "TGO",
+      "TGP",
+      "UREIA",
+      "VITAMINA_B12",
+      "MOLECULAR_PCR_MUTACAO",
+      "FISH",
+      "VIDEOLAPAROSCOPIA"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "5-FU/capecitabina",
+        "com": "brivudina",
+        "ref": "INAT-04"
+      },
+      {
+        "droga": "capecitabina",
+        "com": "varfarina/cumarínicos",
+        "ref": "INAT-02"
+      },
+      {
+        "droga": "capecitabina",
+        "com": "fenitoína",
+        "ref": "INAT-03"
+      },
+      {
+        "droga": "cisplatina",
+        "com": "ototóxicos",
+        "ref": "INAT-15"
+      },
+      {
+        "droga": "docetaxel",
+        "com": "inibidores fortes de CYP3A4",
+        "ref": "INAT-18"
+      },
+      {
+        "droga": "paclitaxel",
+        "com": "clopidogrel",
+        "ref": "INAT-17"
+      },
+      {
+        "droga": "irinotecano",
+        "com": "inibidores/indutores de CYP3A4/UGT1A1",
+        "ref": "INAT-13"
+      },
+      {
+        "droga": "anti-PD-1",
+        "com": "corticosteroide basal / antibiótico",
+        "ref": "INAT-27"
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "fluoropirimidina",
+        "termosCTCAEv6": [
+          "Diarrhea",
+          "Mucositis oral",
+          "Palmar-plantar erythrodysesthesia syndrome"
+        ]
+      },
+      {
+        "classe": "platina",
+        "termosCTCAEv6": [
+          "Peripheral sensory neuropathy",
+          "Creatinine increased"
+        ]
+      },
+      {
+        "classe": "taxano",
+        "termosCTCAEv6": [
+          "Peripheral sensory neuropathy",
+          "Febrile neutropenia"
+        ]
+      },
+      {
+        "classe": "anti-HER2 (trastuzumabe)",
+        "termosCTCAEv6": [
+          "Ejection fraction decreased",
+          "Heart failure"
+        ]
+      },
+      {
+        "classe": "imunoterapia (ICI)",
+        "termosCTCAEv6": [
+          "Colitis",
+          "Pneumonitis",
+          "Hypothyroidism"
+        ]
+      },
+      {
+        "classe": "irinotecano",
+        "termosCTCAEv6": [
+          "Diarrhea",
+          "Neutrophil count decreased"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "receita-sintomaticos-modelo-servico"
+    ],
+    "orientacoes": [
+      "dieta-por-tumor (esofago-estomago)",
+      "sinais-alarme-consolidado"
+    ],
+    "encaminhamentos": [
+      "encaminhamento-cirurgia-oncologica",
+      "encaminhamento-radioterapia",
+      "nutrição",
+      "oncogenética se história familiar"
+    ],
+    "laudos": [
+      "laudo-nutricao"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "adenocarcinoma gástrico ≥cT2 e/ou cN+, M0, bom PS",
+        "y": "QT perioperatória (FLOT ± durvalumabe) + gastrectomia D2",
+        "z": "SUS: FLOT via APAC pré/pós-operatória; durvalumabe sem incorporação identificada",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "para a maioria dos pacientes ≥T2 e/ou N+ com bom performance status",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "gastrectomia D2 sem QT prévia, pT3-4 ou pN+",
+        "y": "CapOx adjuvante 8 ciclos",
+        "z": "intolerância: XP 6 ciclos, FOLFOX 12 ciclos ou de Gramont",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "CapOx 8 ciclos (NE alto/FR forte)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "metastático com indicação sistêmica",
+        "y": "pedir HER2 (IHQ ± ISH), PD-L1 CPS, CLDN18.2 e MMR",
+        "z": "HER2+ → trastuzumabe + FP; HER2− CPS ≥ 5 → QT + nivolumabe; CLDN18.2+ e CPS < 5 → zolbetuximabe",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Todo paciente com câncer gástrico metastático e indicação de tratamento sistêmico",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "HER2+ em progressão após trastuzumabe",
+        "y": "trastuzumabe-deruxtecana 6,4 mg/kg q21",
+        "z": "SUS sem T-DXd identificado → paclitaxel ± ramucirumabe/QT de 2ª linha",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "suportam o uso de trastuzumabe-deruxtecana como escolha padrão",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    {
+      "texto": "CONFLITANTE: FLOT paliativo com 5-FU bolus 400 mg/m² (só na tabela de doença avançada)",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC 2026 estômago avançado p.8",
+        "SBOC 2025 v7",
+        "Onco PRO 2026 aula 05"
+      ],
+      "resolucao": "FLOT paliativo sem bolus, igual ao perioperatório (26A)."
+    },
+    {
+      "texto": "FAIXA_NA_FONTE: cisplatina 75–100 mg/m² no CF perioperatório",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC 2026 estômago localizado p.7"
+      ],
+      "nota": "Registrado o limite inferior (75 mg/m²).",
+      "resolucao": "Cisplatina 75 mg/m² (27A)."
+    },
+    {
+      "texto": "SEM_ID_NO_CATALOGO: ecoendoscopia, videolaparoscopia com citologia, NTRK, DPYD",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json (164 ids)"
+      ],
+      "nota": "Depende de ampliação do catálogo de exames."
+    },
+    {
+      "texto": "SUS_INCORPORACAO_A_CONFIRMAR: nivolumabe, pembrolizumabe, tislelizumabe, durvalumabe, zolbetuximabe, trastuzumabe (gástrico), ramucirumabe, T-DXd, trifluridina/tipiracila, larotrectinibe",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Planilha CONITEC 15/06/2026",
+        "Painel de Demandas CONITEC",
+        "busca gov.br/conitec",
+        "DOU (portarias citadas)"
+      ],
+      "nota": "sus.disponivel preenchido em todos os protocolos com portaria/relatório quando existe. Sem avaliação CONITEC (registrado 'nao', INFERIDO): perioperatorio-flot-durvalumabe, paliativo-1l-capox-pembrolizumabe, paliativo-1l-capox-tislelizumabe, paliativo-1l-capox-zolbetuximabe, paliativo-1l-folfox-zolbetuximabe, paliativo-2l-pembrolizumabe-msi, paliativo-2l-trastuzumabe-deruxtecana, paliativo-3l-trifluridina-tipiracila."
+    },
+    {
+      "texto": "SEM_FONTE: emetogenicidade e risco de NF por esquema",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC 2026 estômago",
+        "Onco PRO 2026 aulas 87-88"
+      ],
+      "nota": "Classificação por droga vem do módulo de suporte."
+    },
+    {
+      "texto": "Fichas do serviço divergentes da SBOC (FLOT 5-FU 2.400; mDCF institucional; irinotecano 180 q14)",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "corpus/fichas",
+        "SBOC 2026 estômago"
+      ],
+      "resolucao": "FLOT 2.400/46 h; irinotecano pela SBOC; mDCF de Shah com cisplatina no D3 (D-F1-15/16)."
+    },
+    {
+      "texto": "Pembrolizumabe + QT e tislelizumabe + QT descritos com CAPOX como exemplo; a SBOC permite qualquer fluoropirimidina + platina",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC 2026 estômago avançado p.8-9"
+      ],
+      "resolucao": "Qualquer fluoropirimidina + platina (29A)."
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "FLOT + durvalumabe — número de ciclos",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 7,
+        "trecho": "2 ciclos pré- e 2 ciclos pós-cirurgia, seguido por durvalumabe a cada 4 semanas",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Esofago-v4-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 17,
+        "trecho": "FLOT a cada 2 semanas, 4 ciclos pré- e 4 ciclos pós-operatórios",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Interpretação: '2 ciclos' do capítulo de estômago = ciclos de 28 dias do durvalumabe (= 4 FLOT). Pack não fixa numeroCiclos; médico confirma. 2025 (v7 localizado) não tinha este esquema.",
+      "decisaoNecessaria": false,
+      "resolucao": "Bula FDA IMFINZI: 2 ciclos de durvalumabe (q4s) = 4 FLOT (q14) em cada fase; numeroCiclos = 8 FLOT.",
+      "fonteC": {
+        "tipo": "BULA",
+        "referencia": "Rótulo FDA IMFINZI (durvalumab) (openFDA/DailyMed set_id 8baba4ea-2855-42fa-9bd9-5a7548d4cec3), seção 2 (GC/GEJC ressecável), acesso 2026-10-11; bula ANVISA não consultada",
+        "pagina": null,
+        "trecho": "in combination with FLOT chemotherapy every 4 weeks for up to 2 cycles",
+        "estado": "VERIFICADO"
+      },
+      "decisao": {
+        "texto": "FLOT: 2.400 mg/m² em 46 h (serviço). Irinotecano: seguir a SBOC.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "FOLFOX + zolbetuximabe — intervalo",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 8,
+        "trecho": "Zolbetuximabe 600 mg/m² EV D1 (a partir do ciclo 2) A cada 21 dias",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 7,
+        "trecho": "(bomba de infusão contínua de 46h) D1 A cada 2 semanas",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "cicloDias = null para FOLFOX + zolbetuximabe; CAPOX + zolbetuximabe (q21) mantido.",
+      "decisaoNecessaria": false,
+      "resolucao": "Bula FDA VYLOY: 400 mg/m² a cada 2 semanas com FOLFOX; cicloDias = 14.",
+      "fonteC": {
+        "tipo": "BULA",
+        "referencia": "Rótulo FDA VYLOY (zolbetuximab-clzb) (openFDA/DailyMed set_id e7695a21-abb6-47ac-93f8-0ece5a9c4409), seção 2, acesso 2026-10-11; bula ANVISA não consultada",
+        "pagina": null,
+        "trecho": "600 mg/m 2 every 3 weeks or 400 mg/m 2 every 2 weeks",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "tema": "FLOT paliativo com 5-FU bolus",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 8,
+        "trecho": "5-Fluorouracil 400 mg/m² EV (bolus) D1 5-Fluorouracil 2.600 mg/m² EV",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-localizado-v7-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 7,
+        "trecho": "Ácido folínico 200 mg/m² EV D1 + 5-FU 2.600 mg/m² EV D1 em 24h",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Protocolo paliativo marcado CONFLITANTE (doseVerificada=false). O FLOT perioperatório não tem bolus; não transferir entre cenários — médico decide.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "FLOT paliativo sem bolus, igual ao perioperatório (26A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "PD-L1 para pembrolizumabe (CPS > 1 × ≥ 1)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 5,
+        "trecho": "A aprovação de pembrolizumabe no Brasil, está associada à expressão de PD-L1 (CPS >1).",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 8,
+        "trecho": "Pembrolizumabe + QT (HER2 negativo e PD-L1 ≥ 1)",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Usar CPS ≥ 1 (tabela e fluxograma), com preferência por CPS ≥ 5 conforme texto.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Ficha mDCF institucional × SBOC",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 8,
+        "trecho": "Docetaxel 40 mg/m² EV D1 Cisplatina 40 mg/m² EV D2",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "NORMA",
+        "referencia": "corpus/fichas/estomago-jeg/dcf-modificado-institucional__nao-especificado.json",
+        "pagina": null,
+        "trecho": "Fluoruracila (5-FU) infusional 600 mg/m² d1-d2",
+        "estado": "CONFLITANTE"
+      },
+      "escolhaSeguranca": "Pack registra a SBOC (5-FU 400 bolus D1 + 1.000 mg/m²/dia D1–D2); ficha institucional preservada para decisão do Dr. Silas.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "FLOT 2.400/46 h; irinotecano pela SBOC; mDCF de Shah com cisplatina no D3 (D-F1-15/16).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "Fichas FLOT e irinotecano × SBOC",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 13,
+        "trecho": "Irinotecano 150 mg/m² EV D1 a cada 2 semanas A cada 2 semanas",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "NORMA",
+        "referencia": "corpus/fichas/estomago-jeg/irinotecano-monoterapia__paliativo-metastatico.json; flot__paliativo-metastatico.json",
+        "pagina": null,
+        "trecho": "Irinotecano 180 mg/m² d1 q14; FLOT 5-FU 2400 mg/m²",
+        "estado": "CONFLITANTE"
+      },
+      "escolhaSeguranca": "Pack registra doses SBOC; fichas não editadas.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "FLOT 2.400/46 h; irinotecano pela SBOC; mDCF de Shah com cisplatina no D3 (D-F1-15/16).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "SBOC 2025 × 2026 (doença avançada)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2025---Estomago-avancado-v7-FINAL.pdf",
+        "pagina": 8,
+        "trecho": "Zolbetuximabe 600 mg/m² EV D1 (a partir do ciclo 2)",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 8,
+        "trecho": "Tislelizumabe + QT (HER2 negativo e TAP ≥ 5)",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Doses idênticas entre 2025 v7 e 2026 v5; 2026 acrescenta tislelizumabe. Usada a 2026.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "mDCF: dia da cisplatina e 5-FU (SBOC × MOC/Shah)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Estomago-doenca-avancada-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 8,
+        "trecho": "Docetaxel 40 mg/m² EV D1 Cisplatina 40 mg/m² EV D2",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "INFERIDO"
+      },
+      "detalhe": "MOC (Shah): docetaxel 40 D1, cisplatina 40 D3, bolus 5-FU 400 + leucovorin 400 + 5-FU 2.000 em 48 h, a cada 14 dias. Pack (SBOC): cisplatina D2; 5-FU 1.000/dia D1–D2 (= 2.000 em 48 h).",
+      "escolhaSeguranca": "Doses totais coincidem; diverge o dia da cisplatina (D2 × D3). Manter a SBOC até decisão.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Cisplatina no D3 (esquema de Shah).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-15)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (curador oncológico, rascunho para validação do Dr. Silas)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC 2026 Estômago localizado v7",
+      "SBOC 2026 Estômago doença avançada v5",
+      "SBOC 2025 Estômago avançado v7 e Estômago 1/2 (2025) — comparação de doses",
+      "SIGTAP 2026-09",
+      "ClinicalTrials.gov API v2",
+      "corpus/fichas/estomago-jeg/*",
+      "gastrico.v1.RASCUNHO.json (substituído, não editado)"
+    ],
+    "aprovacaoClinica": null,
+    "reducaoPendencias20261011": {
+      "data": "2026-10-11",
+      "resolvidas": [
+        {
+          "pendencia": "CONFLITANTE: número de ciclos de FLOT no FLOT + durvalumabe (estômago '2+2' × esôfago '4+4')",
+          "como": "Bula FDA IMFINZI: durvalumabe a cada 4 semanas por até 2 ciclos pré e 2 pós = 4 + 4 FLOT q14; numeroCiclos = 8."
+        },
+        {
+          "pendencia": "CONFLITANTE: FOLFOX + zolbetuximabe 'a cada 21 dias' (cicloDias nulo)",
+          "como": "Bula FDA VYLOY: com FOLFOX q14, manutenção 400 mg/m² a cada 2 semanas; cicloDias = 14 (ver correcoes)."
+        },
+        {
+          "pendencia": "SEM_FONTE: intervalo entre ciclos do de Gramont adjuvante; fracionamento da RT adjuvante (45 Gy) e dose de RT após FOLFOX/CapOx",
+          "como": "de Gramont q14 (ITACA-S, NCT01640782); RT 45 Gy/25 fr (INT-0116 citado em NCT00188266); RT após FOLFOX/CapOx 45 Gy/25 fr (CRITICS NCT00407186, INFERIDO)."
+        }
+      ]
+    }
+  },
+  "correcoes": [
+    {
+      "campo": "gastrico-paliativo-1l-folfox-zolbetuximabe.zolbetuximabe(manutenção)",
+      "antes": "600 mg/m2 (SBOC: a cada 21 dias)",
+      "depois": "400 mg/m2 a cada 14 dias",
+      "motivo": "FOLFOX é q14; a bula FDA VYLOY prevê 400 mg/m² a cada 2 semanas (ou 600 mg/m² a cada 3 semanas). A SBOC p.8 aplica 600 mg/m² 'a cada 21 dias' ao FOLFOX, calendário incompatível.",
+      "fonte": {
+        "tipo": "BULA",
+        "referencia": "Rótulo FDA VYLOY (zolbetuximab-clzb) (openFDA/DailyMed set_id e7695a21-abb6-47ac-93f8-0ece5a9c4409), seção 2, acesso 2026-10-11; bula ANVISA não consultada",
+        "pagina": null,
+        "trecho": "600 mg/m 2 every 3 weeks or 400 mg/m 2 every 2 weeks",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): A03 calendário FLOT/durvalumabe",
+      "acao": "intervaloDias 28 no durvalumabe; calendarioExecutavel false; fases explícitas"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "1 vínculos rebaixados a catalogoIdCandidato"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 4",
+      "acao": "mDCF de Shah registrado como conflito (dia da cisplatina); FLOT 2.600 em 24 h já é o valor do pack"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão do Dr. Silas",
+      "acao": "mDCF: cisplatina 40 mg/m² no D3"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "D-F1-17",
+      "acao": "FLOT paliativo sem bolus (26A)"
+    }
+  ]
+}

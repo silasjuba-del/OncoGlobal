@@ -1,8 +1,8 @@
 {
   "header": {
     "id": "interacoes",
-    "versao": "1.0.0",
-    "vigenteDesde": "2026-10-05",
+    "versao": "1.2.0",
+    "vigenteDesde": "2026-10-10",
     "fonte": {
       "tipo": "DECISAO_MEDICA",
       "referencia": "contrato Delta Δ15 do PLANO; sementes citadas no plano; mecanismo/severidade/manejo e ativação pendem de fonte com trecho [VERIFICAR]",
@@ -12,7 +12,7 @@
     "curador": "Dr. Silas Negrão",
     "aprovadoEm": "2026-10-05"
   },
-  "nota": "Sementes do plano e linhas de 03-interacoes-qt.csv. Tudo ativo:false. referencia fica [VERIFICAR] até o Dr. Silas ativar item a item; a citação da linha está em fonte.trecho. gravidadeEditorial é a coluna editorial e não bloqueia (D-W9-22d).",
+  "nota": "F0-COMPLEMENTO: 34 registros legados preservados; novos registros f0cGrupo têm fonte primária conferida e recorte explícito. Ativo significa aviso documental não bloqueante, não contraindicação automática. A data aprovadoEm no header pertence à estrutura anterior; verificadoEm registra conferência documental desta revisão. Regras dependentes de janela, função renal ou sequência permanecem inativas.",
   "interacoes": [
     {
       "drogaA": "capecitabina",
@@ -23,13 +23,13 @@
       "notaManejo": null,
       "fonte": {
         "tipo": "LITERATURA",
-        "referencia": "[VERIFICAR]",
-        "trecho": null,
-        "edicao": null
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=007e3432-c8aa-2a76-52ba-c346924c08a7&version=15",
+        "trecho": "Monitor INR more frequently and dose adjust oral vitamin K antagonist as appropriate",
+        "edicao": "version=15, seção 7.2"
       },
-      "fonteVersao": null,
-      "verificadoEm": null,
-      "ativo": false
+      "fonteVersao": "DailyMed version=15",
+      "verificadoEm": "2026-10-10",
+      "ativo": true
     },
     {
       "drogaA": "inibidor de tirosino quinase (TKI)",
@@ -681,6 +681,287 @@
       "csvN": 30,
       "gravidadeEditorial": "Moderada (associação observacional; causalidade não estabelecida)",
       "observacaoCsv": null
+    },
+    {
+      "regraId": "F0C-INT-02",
+      "f0cGrupo": "fluoropirimidinas-fenitoina",
+      "drogaA": "capecitabina",
+      "drogaBouClasse": "fenitoína",
+      "mecanismo": "Aumento de concentração de fenitoína descrito durante coadministração.",
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": "Conferir concentrações e sinais de toxicidade; não ajustar dose automaticamente. Não extrapola para5-FU.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://www.ema.europa.eu/en/documents/product-information/xeloda-epar-product-information_en.pdf",
+        "trecho": "increased phenytoin plasma concentrations resulting in symptoms",
+        "edicao": "EMA Xeloda SmPC §4.5; documento consultado10/10/2026; seção10 sem data impressa"
+      },
+      "fonteVersao": "EMA Xeloda SmPC §4.5; documento consultado10/10/2026; seção10 sem data impressa",
+      "verificadoEm": "2026-10-10",
+      "ativo": true,
+      "escopo": "Somente medicamentos informados no contexto atual e identidades exatas do catálogo; não aplica prescrição/ajuste/adiamento automático."
+    },
+    {
+      "regraId": "F0C-INT-03",
+      "f0cGrupo": "fluoropirimidinas-brivudina",
+      "drogaA": "fluoropirimidinas listadas na bula Xeloda",
+      "drogaBouClasse": "brivudina",
+      "mecanismo": "Inibição da DPD pela brivudina.",
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": "A fonte contempla uso concomitante e intervalo de quatro semanas após brivudina; a ordem inversa tem regra própria.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://www.ema.europa.eu/en/documents/product-information/xeloda-epar-product-information_en.pdf",
+        "trecho": "This interaction, which leads to increased fluoropyrimidine toxicity, is potentially fatal.",
+        "edicao": "EMA Xeloda SmPC §4.3–4.5; consultado10/10/2026"
+      },
+      "fonteVersao": "EMA Xeloda SmPC §4.3–4.5; consultado10/10/2026",
+      "verificadoEm": "2026-10-10",
+      "ativo": false,
+      "escopo": "Somente medicamentos informados no contexto atual e identidades exatas do catálogo; não aplica prescrição/ajuste/adiamento automático.",
+      "motivoInativo": "Motor lexical permanece inativo; avaliação disponível exclusivamente no motor condicionado com fontes, datas, formulação e completude verificadas.",
+      "avaliacaoCondicionada": {
+        "ativo": true,
+        "tipo": "BRIVUDINA_FLUOROPIRIMIDINA",
+        "params": {
+          "horasAposBrivudina": 672,
+          "horasAposCapecitabina": 24
+        }
+      }
+    },
+    {
+      "regraId": "F0C-INT-04",
+      "f0cGrupo": "irinotecano-indutores",
+      "drogaA": "irinotecano",
+      "drogaBouClasse": "indutores de CYP3A4 listados na bula Camptosar",
+      "mecanismo": "Redução da exposição ao irinotecano/SN-38.",
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": "Aviso para coadministração atual; troca e intervalo prévio de duas semanas descritos na bula não são automatizados. Não inclui formulação lipossomal.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e518dfc6-7e93-4fee-a66c-51e1ab71c056",
+        "trecho": "Do not administer strong CYP3A4 inducers with CAMPTOSAR unless there are no therapeutic alternatives.",
+        "edicao": "Camptosar injetável convencional; Revised4/2024; §7.2"
+      },
+      "fonteVersao": "Camptosar injetável convencional; Revised4/2024; §7.2",
+      "verificadoEm": "2026-10-10",
+      "ativo": true,
+      "escopo": "Somente medicamentos informados no contexto atual e identidades exatas do catálogo; não aplica prescrição/ajuste/adiamento automático."
+    },
+    {
+      "regraId": "F0C-INT-05",
+      "f0cGrupo": "irinotecano-inibidores",
+      "drogaA": "irinotecano",
+      "drogaBouClasse": "inibidores de CYP3A4 ou UGT1A1 listados na bula Camptosar",
+      "mecanismo": "Aumento de exposição ao irinotecano/SN-38.",
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": "Aviso para coadministração atual. A retirada prévia de inibidores descrita na bula não é automatizada; não inclui irinotecano lipossomal.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e518dfc6-7e93-4fee-a66c-51e1ab71c056",
+        "trecho": "Strong CYP3A4 or UGT1A1 Inhibitors",
+        "edicao": "Camptosar injetável convencional; Revised4/2024; §7.3"
+      },
+      "fonteVersao": "Camptosar injetável convencional; Revised4/2024; §7.3",
+      "verificadoEm": "2026-10-10",
+      "ativo": true,
+      "escopo": "Somente medicamentos informados no contexto atual e identidades exatas do catálogo; não aplica prescrição/ajuste/adiamento automático."
+    },
+    {
+      "regraId": "F0C-INT-06",
+      "f0cGrupo": "taxanos-inibidores",
+      "drogaA": "docetaxel",
+      "drogaBouClasse": "inibidores fortes de CYP3A4 listados na bula docetaxel",
+      "mecanismo": "Aumento da exposição ao docetaxel.",
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": "Recorte exclusivo docetaxel. A bula apresenta manejo individual; não aplica redução automática nem estende a paclitaxel/nab-paclitaxel.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=654319ae-e5f9-4a6a-b566-201923153b6e",
+        "trecho": "Avoid using concomitant strong CYP3A4 inhibitors",
+        "edicao": "Docetaxel injetável Alembic; Revised8/2025; §2.7 e7"
+      },
+      "fonteVersao": "Docetaxel injetável Alembic; Revised8/2025; §2.7 e7",
+      "verificadoEm": "2026-10-10",
+      "ativo": true,
+      "escopo": "Somente medicamentos informados no contexto atual e identidades exatas do catálogo; não aplica prescrição/ajuste/adiamento automático."
+    },
+    {
+      "regraId": "F0C-INT-07",
+      "f0cGrupo": "platina-nefrotoxicos",
+      "drogaA": "cisplatina",
+      "drogaBouClasse": "aminoglicosídeos sistêmicos verificados",
+      "mecanismo": "Potencialização da nefrotoxicidade da cisplatina.",
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": "Conferir função renal e exposição sistêmica. Não extrapola para carboplatina/oxaliplatina, vancomicina ou aminoglicosídeo tópico.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=76aea034-6d58-4390-a164-36aa09c1f101",
+        "trecho": "Cisplatin produces cumulative nephrotoxicity which is potentiated by aminoglycoside antibiotics.",
+        "edicao": "Cisplatin Injection Hikma; Updated19/11/2025; WARNINGS"
+      },
+      "fonteVersao": "Cisplatin Injection Hikma; Updated19/11/2025; WARNINGS",
+      "verificadoEm": "2026-10-10",
+      "ativo": true,
+      "escopo": "Somente medicamentos informados no contexto atual e identidades exatas do catálogo; não aplica prescrição/ajuste/adiamento automático."
+    },
+    {
+      "regraId": "F0C-INT-08",
+      "f0cGrupo": "pemetrexede-aine",
+      "drogaA": "pemetrexede",
+      "drogaBouClasse": "ibuprofeno",
+      "mecanismo": "Aumento da exposição ao pemetrexede.",
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": "Janela-2dias/dia/+2dias em ClCr45–79mL/min exige dados de função renal e exposição. Não generaliza para todosAINEs.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f5a860f3-37ec-429c-ae04-9c88d7c55c08",
+        "trecho": "Ibuprofen increases exposure (AUC) of pemetrexed",
+        "edicao": "Alimta; Revised5/2023; §2.5,5.6,7,12.3"
+      },
+      "fonteVersao": "Alimta; Revised5/2023; §2.5,5.6,7,12.3",
+      "verificadoEm": "2026-10-10",
+      "ativo": false,
+      "escopo": "Somente medicamentos informados no contexto atual e identidades exatas do catálogo; não aplica prescrição/ajuste/adiamento automático.",
+      "motivoInativo": "Motor lexical permanece inativo; avaliação disponível exclusivamente no motor condicionado com fontes, datas, formulação e completude verificadas.",
+      "avaliacaoCondicionada": {
+        "ativo": true,
+        "tipo": "PEMETREXEDE_IBUPROFENO",
+        "params": {
+          "clcrMin": 45,
+          "clcrMaxExclusivo": 80,
+          "diasAntes": 2,
+          "diasDepois": 2,
+          "validadeRenalHoras": 168
+        }
+      }
+    },
+    {
+      "regraId": "F0C-INT-09A",
+      "f0cGrupo": "metotrexato-smxtmp-aine",
+      "drogaA": "metotrexato",
+      "drogaBouClasse": "sulfametoxazol-trimetoprima",
+      "mecanismo": "Aumento de metotrexato livre por ligação proteica e transporte renal.",
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": "Aviso de coadministração, conforme tabela da bula doSMX-TMP oral. Não converter em dose, suspensão ou bloqueio automático.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=f0e73842-6002-43c2-97fc-0cadc1bf6346",
+        "trecho": "Sulfonamides can also displace methotrexate from plasma protein binding sites",
+        "edicao": "Sulfamethoxazole and trimethoprim tablets; Updated02/04/2026; tabela1 interações"
+      },
+      "fonteVersao": "Sulfamethoxazole and trimethoprim tablets; Updated02/04/2026; tabela1 interações",
+      "verificadoEm": "2026-10-10",
+      "ativo": true,
+      "escopo": "Somente medicamentos informados no contexto atual e identidades exatas do catálogo; não aplica prescrição/ajuste/adiamento automático."
+    },
+    {
+      "regraId": "F0C-INT-09B",
+      "f0cGrupo": "metotrexato-smxtmp-aine",
+      "drogaA": "metotrexato",
+      "drogaBouClasse": "AINEs sistêmicos verificados",
+      "mecanismo": "Possível aumento de exposição e toxicidade do metotrexato.",
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": "Alerta de revisão, especialmente em altas doses; não significa que todo uso concomitante é contraindicado. Também conferida bulaoral Updated30/01/2026 §7.1.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0d63ba29-b692-41b4-87e8-351265c8273f",
+        "trecho": "Aspirin and other nonsteroidal anti-inflammatory drugs",
+        "edicao": "Methotrexate Injection; Updated10/06/2025; §7.1"
+      },
+      "fonteVersao": "Methotrexate Injection; Updated10/06/2025; §7.1",
+      "verificadoEm": "2026-10-10",
+      "ativo": true,
+      "escopo": "Somente medicamentos informados no contexto atual e identidades exatas do catálogo; não aplica prescrição/ajuste/adiamento automático.",
+      "fontesComplementares": [
+        {
+          "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f177e6fa-c482-432d-8208-937468ab3f10",
+          "edicao": "Updated30/01/2026; §7.1"
+        }
+      ]
+    },
+    {
+      "regraId": "F0C-INT-10",
+      "f0cGrupo": "vacina-viva-qt",
+      "drogaA": "citotóxicos do recorte vacinal",
+      "drogaBouClasse": "vacinas vivas verificadas",
+      "mecanismo": "Risco vacinal dependente de imunocompetência e exposição imunossupressora.",
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": "Vacinas vivas precisam de contexto temporal e clínico; não extrapola para inativadas/recombinantes ou vacinação de contatos.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://www.cdc.gov/vaccines/hcp/imz-best-practices/altered-immunocompetence.html",
+        "trecho": "Live, attenuated vaccines should not be administered for at least 3 months after such immunosuppressive therapy.",
+        "edicao": "CDC Altered Immunocompetence;26/06/2024; Other Immunosuppressive Drugs"
+      },
+      "fonteVersao": "CDC Altered Immunocompetence;26/06/2024; Other Immunosuppressive Drugs",
+      "verificadoEm": "2026-10-10",
+      "ativo": false,
+      "escopo": "Somente medicamentos informados no contexto atual e identidades exatas do catálogo; não aplica prescrição/ajuste/adiamento automático.",
+      "motivoInativo": "Motor lexical permanece inativo; avaliação disponível exclusivamente no motor condicionado com fontes, datas, formulação e completude verificadas.",
+      "avaliacaoCondicionada": {
+        "ativo": true,
+        "tipo": "VACINA_VIVA_QT",
+        "params": {
+          "mesesAposTermino": 3
+        }
+      }
+    },
+    {
+      "regraId": "F0C-INT-11",
+      "f0cGrupo": "doxorrubicina-trastuzumabe",
+      "drogaA": "doxorrubicina",
+      "drogaBouClasse": "trastuzumabe",
+      "mecanismo": "Risco cardíaco dependente da ordem e proximidade das exposições.",
+      "severidade": null,
+      "monitorizacao": null,
+      "notaManejo": "A recomendação citada é antraciclina APÓS trastuzumabe. AC→TH sequencial não é esse cenário.",
+      "fonte": {
+        "tipo": "LITERATURA",
+        "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=492dbdb2-077e-4064-bff3-372d6af0a7a2",
+        "trecho": "If possible, avoid anthracycline-based therapy for up to 7 months after stopping Herceptin.",
+        "edicao": "Herceptin IV; Revised5/2026; §7"
+      },
+      "fonteVersao": "Herceptin IV; Revised5/2026; §7",
+      "verificadoEm": "2026-10-10",
+      "ativo": false,
+      "escopo": "Somente medicamentos informados no contexto atual e identidades exatas do catálogo; não aplica prescrição/ajuste/adiamento automático.",
+      "motivoInativo": "Motor lexical permanece inativo; avaliação disponível exclusivamente no motor condicionado com fontes, datas, formulação e completude verificadas.",
+      "avaliacaoCondicionada": {
+        "ativo": true,
+        "tipo": "DOXORRUBICINA_TRASTUZUMABE",
+        "params": {
+          "mesesAposTrastuzumabe": 7
+        },
+        "fonteConcomitancia": {
+          "tipo": "LITERATURA",
+          "referencia": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0f153c1e-efce-4276-8273-d9e4c8455d16",
+          "trecho": "Avoid concurrent administration of doxorubicin and trastuzumab.",
+          "edicao": "Adriamycin injetável convencional; §7.2, documento consultado10/10/2026"
+        }
+      }
     }
-  ]
+  ],
+  "coberturaF0": {
+    "gruposPrevistos": 11,
+    "parPreexistente": "capecitabina-varfarina",
+    "registrosNovos": 11,
+    "gruposComLimitacaoTemporal": [
+      "fluoropirimidinas-brivudina",
+      "pemetrexede-aine",
+      "vacina-viva-qt",
+      "doxorrubicina-trastuzumabe"
+    ],
+    "naoCoberto": "Cobertura de classes é somente a lista explícita. Ausência de alerta não prova ausência de interação."
+  }
 }

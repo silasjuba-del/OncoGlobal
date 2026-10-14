@@ -1,0 +1,125 @@
+{
+  "header": {
+    "id": "laudo-loas",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "destinatario": "INSS — Benefício de Prestação Continuada (BPC/LOAS)",
+  "finalidade": "Subsidiar BPC da pessoa com deficiência (impedimento de longo prazo) ou idoso 65+, família com renda per capita ≤ 1/4 do salário-mínimo.",
+  "baseLegal": [
+    {
+      "norma": "Lei 8.742/1993",
+      "artigo": "art. 20",
+      "trecho": "O benefício de prestação continuada é a garantia de um salário-mínimo mensal à pessoa com deficiência e ao idoso",
+      "vigencia": "vigente",
+      "estado": "CITADA (Planalto)",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE"
+    },
+    {
+      "norma": "Lei 8.742/1993",
+      "artigo": "art. 20, §2º",
+      "trecho": "impedimento de longo prazo de natureza física, mental, intelectual ou sensorial",
+      "vigencia": "vigente",
+      "estado": "CITADA",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE"
+    },
+    {
+      "norma": "Lei 8.742/1993",
+      "artigo": "art. 21",
+      "trecho": "O benefício de prestação continuada deve ser revisto a cada 2 (dois) anos",
+      "vigencia": "vigente",
+      "estado": "CITADA",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE"
+    },
+    {
+      "norma": "Decreto 6.214/2007",
+      "artigo": "art. 16, §1º",
+      "trecho": "A avaliação da deficiência e do grau de impedimento será realizada por meio de avaliação social e avaliação médica",
+      "vigencia": "vigente",
+      "estado": "CITADA",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE (audit: INCERTA)"
+    },
+    {
+      "norma": "Resolução INSS da Avaliação Médica e Social",
+      "artigo": null,
+      "trecho": null,
+      "vigencia": null,
+      "estado": "NÃO LOCALIZADA",
+      "pendencia": "SEM_FONTE (equivalentes: Decreto 6.214/07 + Port. Intermin. MDS/INSS 1/2014 + IN INSS 128/2022)"
+    }
+  ],
+  "requisitosConteudo": {
+    "fatoConfirmado": [
+      "Identificação, CID, data do diagnóstico, estadiamento",
+      "Tratamento e datas",
+      "Limitações funcionais documentadas (para a avaliação médica)",
+      "Barreiras enfrentadas (subsidiam a avaliação social)"
+    ],
+    "decisaoMedica": [
+      "Caráter de longo prazo da limitação (≥2 anos, conceito legal)",
+      "Grau de impedimento em palavras claras",
+      "NUNCA texto fixo concluindo elegibilidade/deficiência"
+    ]
+  },
+  "documentosAnexos": [
+    "documentos médicos que comprovem o impedimento",
+    "comprovantes de tratamento contínuo"
+  ],
+  "proibicoesTextoFixo": [
+    "Concluir 'pessoa com deficiência' como texto fixo",
+    "Afirmar direito ao benefício"
+  ],
+  "observacoes": "Renda é critério administrativo (família/INSS), não médico.",
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "NORMA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "assinatura": {
+    "origem": "CONFIG",
+    "campos": [
+      "medico.nome",
+      "medico.crm_uf",
+      "medico.rqe",
+      "local",
+      "data",
+      "assinatura_carimbo"
+    ],
+    "fonte": "relatorio-pericial.v1 + Res. CFM 2.381/2024 (identificação mínima do médico; texto oficial PENDENTE de reabertura)"
+  },
+  "validade": {
+    "valor": null,
+    "pendencia": "DECISAO_DR_SILAS: validade do documento por finalidade"
+  },
+  "portas": {
+    "consome": [
+      "prontuario.identificacao",
+      "tumor (CID, data do diagnóstico, estadiamento)",
+      "resumoLongitudinal",
+      "prescricao.vigente",
+      "templates/resumo-prontuario-modelo-servico"
+    ],
+    "oferece": [
+      "documento.laudo-loas"
+    ]
+  }
+}

@@ -240,9 +240,11 @@ describe("F0 E6b · consulta completa com HTTP real e SQLite temporário", () =>
     const replay = await fluxo.confirmar(comprovante);
     expect(replay.status).toBe(200);
     expect(replay.data.codigo).toBe("REPLAY");
-    expect(ambiente.eventos().filter((event) => event.operationId === "e6b-retry-operation-92")).toHaveLength(1);
+    expect(ambiente.eventos().filter((event) => event.operationId === "e6b-retry-operation-92")).toHaveLength(2);
+    expect(ambiente.eventos().filter((event) => event.operationId === "e6b-retry-operation-92" && event.tipo === "FATO")).toHaveLength(1);
+    expect(ambiente.eventos().filter((event) => event.operationId === "e6b-retry-operation-92" && event.tipo === "ReviewDecision")).toHaveLength(1);
     const summaryId = fluxo.preview.data.comprovanteExibicao.documentId;
-    expect(lerDraft(ambiente.db, summaryId)?.revision).toBe(1);
+    expect(lerDraft(ambiente.db, summaryId)?.revision).toBe(2);
   });
 
   it("recusa paciente trocado e conteúdo editado depois da exibição", async () => {

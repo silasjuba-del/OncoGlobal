@@ -1,0 +1,960 @@
+{
+  "header": {
+    "id": "receitas-especiais-v2",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Bulas FDA (openFDA) por droga; ASCO VTE 2019/2023; ASCO 2020 HBV; ASCO/IDSA 2018; RDC Anvisa 999/2025; RENAME 2024; Onco PRO 2026 aula 87 (apoio)",
+      "trecho": "HBsAg-positive ... should receive antiviral prophylactic therapy through and for minimum 12 months",
+      "edicao": "2026-10-11"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "substitui": [
+    "receitas-especiais-estrutura"
+  ],
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "nota": "v2 das 4 famílias especiais: os 15 itens do v1 (itemV1) com posologia preenchida quando há fonte; itens com mais de uma droga foram desdobrados. Regras do v1 mantidas: profilaxia ≠ tratamento; anti-VEGF sem esquema universal; MASCC ≥21 não autoriza alta sozinho; cálcio elementar ≠ massa do sal; hidratação de cisplatina não universalizada.",
+  "legendaEstadoFonte": {
+    "VERIFICADO": "trecho conferido nesta sessão em bula FDA (openFDA), diretriz aberta (MASCC/ESMO, eviQ, ASCO/IDSA, MASCC/ISOO) ou ensaio pivotal",
+    "VERIFICADO_OUTRA_INDICACAO": "dose conferida em bula, mas para indicação diferente da oncológica (off-label)",
+    "APOIO_AULA": "dose sustentada só pela aula Onco PRO 2026 (apoio) — confirmar em bula/diretriz antes de liberar",
+    "VERIFICADO_POR_AUSENCIA": "busca textual no documento normativo não encontrou a substância/apresentação",
+    "SEM_FONTE": "dose null; não prescrever pelo sistema"
+  },
+  "familias": [
+    {
+      "familia": "cardio",
+      "itens": [
+        {
+          "id": "CARD-TEV-ENOXAPARINA",
+          "indicacao": "Tratamento de TEV associado ao câncer",
+          "gatilho": "TVP/TEP confirmada (inclui TEP incidental segmentar ou mais proximal)",
+          "droga": "enoxaparina",
+          "apresentacaoSUS": {
+            "texto": "enoxaparina sódica 40 mg/0,4 mL e 60 mg/0,6 mL (Especializado)",
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+              "secao": "p. 36",
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          },
+          "dose": "1",
+          "unidade": "mg/kg",
+          "via": "SC",
+          "frequencia": "12/12 h",
+          "duracao": "≥6 meses (ASCO; prolongar se câncer ativo)",
+          "ajusteRenal": "ClCr <30: 1 mg/kg 1x/dia (bula)",
+          "ajusteHepatico": null,
+          "controle344": {
+            "lista": "comum",
+            "nota": null,
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+              "secao": "Anexo I (A1–F) — substância ausente",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "interacoesCriticas": "Plaquetopenia (<50 mil: rever dose), AINE/antiagregantes, punção neuraxial.",
+          "orientacaoPaciente": "Aplique de 12 em 12 horas e procure o serviço se tiver sangramento.",
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "openFDA/DailyMed — bula FDA enoxaparin sodium (set_id 014c6710-f2c4-fd1e-e063-6394a90ae525, effective 2024-06-21)",
+            "secao": "2.1 e Tabela 1",
+            "trecho": "1 mg/kg every 12 hours administered subcutaneously",
+            "estado": "VERIFICADO"
+          },
+          "fontesApoio": [
+            {
+              "tipo": "DIRETRIZ",
+              "referencia": "Onco PRO 2026 Aula 87 — Emergências Oncológicas 2 (NF, trombose, lise)",
+              "secao": "pág. 25",
+              "trecho": "Tempo do tratamento de 6 meses, passível de prolongamento",
+              "estado": "APOIO_AULA"
+            }
+          ],
+          "itemV1": "CARD-TEV"
+        },
+        {
+          "id": "CARD-TEV-APIXABANA",
+          "indicacao": "Tratamento de TEV associado ao câncer (opção oral)",
+          "gatilho": "TVP/TEP confirmada, sem lesão luminal GI/GU sangrante",
+          "droga": "apixabana",
+          "apresentacaoSUS": {
+            "texto": "não consta na RENAME 2024",
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+              "secao": "busca textual no PDF (254 p.)",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "dose": "10 mg 12/12 h por 7 dias; depois 5 mg 12/12 h (após 6 meses: 2,5 mg 12/12 h para reduzir recorrência)",
+          "unidade": "mg",
+          "via": "VO",
+          "frequencia": "12/12 h",
+          "duracao": "≥6 meses",
+          "ajusteRenal": "dados limitados em ClCr <25 — individualizar",
+          "ajusteHepatico": "evitar hepatopatia grave",
+          "controle344": {
+            "lista": "comum",
+            "nota": null,
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+              "secao": "Anexo I (A1–F) — substância ausente",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "interacoesCriticas": "Inibidores/indutores fortes de CYP3A4 e P-gp (vários TKI, azóis, rifampicina, carbamazepina).",
+          "orientacaoPaciente": "Na primeira semana a dose é maior; siga a tabela que o médico entregou.",
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "openFDA/DailyMed — bula FDA ELIQUIS (apixabana) (set_id 1523ab32-2c2c-6501-e063-6394a90aa0b3, effective 2025-02-03)",
+            "secao": "2.1",
+            "trecho": "10 mg taken orally twice daily for the first 7 days ... 5 mg",
+            "estado": "VERIFICADO"
+          },
+          "fontesApoio": [
+            {
+              "tipo": "DIRETRIZ",
+              "referencia": "ASCO VTE 2019/2023 (Key et al., JCO 2020; PMID 31381464; JCO 2023; PMID 37075273)",
+              "secao": "Abstract 2023",
+              "trecho": "Apixaban was also added as an option for the treatment of VTE",
+              "estado": "VERIFICADO"
+            },
+            {
+              "tipo": "DIRETRIZ",
+              "referencia": "Onco PRO 2026 Aula 87 — Emergências Oncológicas 2 (NF, trombose, lise)",
+              "secao": "pág. 26 (API-CAT)",
+              "trecho": "APIXABANA 2,5MG 12/12H APIXABANA 5MG 12/12H",
+              "estado": "APOIO_AULA"
+            }
+          ],
+          "itemV1": "CARD-TEV"
+        },
+        {
+          "id": "CARD-TEV-RIVAROXABANA",
+          "indicacao": "Tratamento de TEV associado ao câncer (opção oral)",
+          "gatilho": "TVP/TEP confirmada, sem lesão luminal GI/GU sangrante",
+          "droga": "rivaroxabana",
+          "apresentacaoSUS": {
+            "texto": "não consta na RENAME 2024",
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+              "secao": "busca textual no PDF (254 p.)",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "dose": "15 mg 12/12 h por 21 dias; depois 20 mg 1x/dia",
+          "unidade": "mg",
+          "via": "VO (com alimento)",
+          "frequencia": "12/12 h → 1x/dia",
+          "duracao": "≥6 meses",
+          "ajusteRenal": "ClCr <15: evitar",
+          "ajusteHepatico": "evitar Child-Pugh B/C",
+          "controle344": {
+            "lista": "comum",
+            "nota": null,
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+              "secao": "Anexo I (A1–F) — substância ausente",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "interacoesCriticas": "Inibidores combinados de CYP3A4/P-gp; maior sangramento GI/GU em câncer (ASCO 2019).",
+          "orientacaoPaciente": "Tome com comida; nas 3 primeiras semanas são 2 comprimidos por dia.",
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "openFDA/DailyMed — bula FDA XARELTO (rivaroxabana) (set_id 10db92f9-2300-4a80-836b-673e1ae91610, effective 2026-09-10)",
+            "secao": "2.1",
+            "trecho": "15 mg orally twice daily ... first 21 days followed by 20 mg",
+            "estado": "VERIFICADO"
+          },
+          "itemV1": "CARD-TEV"
+        },
+        {
+          "id": "CARD-HTN-VEGF",
+          "indicacao": "Hipertensão por anti-VEGF",
+          "gatilho": "CTCAE Hypertension ≥G2 em anti-VEGF/TKI",
+          "droga": "anti-hipertensivo individual",
+          "apresentacaoSUS": null,
+          "dose": null,
+          "unidade": null,
+          "via": null,
+          "frequencia": null,
+          "duracao": null,
+          "ajusteRenal": null,
+          "ajusteHepatico": null,
+          "controle344": null,
+          "interacoesCriticas": null,
+          "orientacaoPaciente": "Meça a pressão em casa e traga as anotações.",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "secao": null,
+            "trecho": null,
+            "estado": "SEM_FONTE",
+            "motivo": "sem esquema universal fontado (regra v1: hipertensão por anti-VEGF não recebe esquema universal)"
+          },
+          "pendencia": "SEM_FONTE",
+          "itemV1": "CARD-HTN-VEGF"
+        },
+        {
+          "id": "CARD-PROT",
+          "indicacao": "Cardioproteção em antraciclina/anti-HER2",
+          "gatilho": "antraciclina ou anti-HER2 (ECO basal/serial — ESC 2022 I-B, já em labs-por-esquema)",
+          "droga": "fármaco cardioprotetor individual",
+          "apresentacaoSUS": null,
+          "dose": null,
+          "unidade": null,
+          "via": null,
+          "frequencia": null,
+          "duracao": null,
+          "ajusteRenal": null,
+          "ajusteHepatico": null,
+          "controle344": null,
+          "interacoesCriticas": null,
+          "orientacaoPaciente": "Faça o ecocardiograma nas datas pedidas.",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "secao": null,
+            "trecho": null,
+            "estado": "SEM_FONTE",
+            "motivo": "fármaco de cardioproteção exige prescrição individual/cardiologia"
+          },
+          "pendencia": "SEM_FONTE",
+          "itemV1": "CARD-PROT"
+        }
+      ]
+    },
+    {
+      "familia": "nefro",
+      "itens": [
+        {
+          "id": "NEFRO-HID-CIS",
+          "indicacao": "Hidratação de cisplatina",
+          "gatilho": "cisplatina",
+          "droga": "SF 0,9% ± KCl/MgSO4 (protocolo do serviço)",
+          "apresentacaoSUS": null,
+          "dose": null,
+          "unidade": null,
+          "via": null,
+          "frequencia": null,
+          "duracao": null,
+          "ajusteRenal": null,
+          "ajusteHepatico": null,
+          "controle344": null,
+          "interacoesCriticas": null,
+          "orientacaoPaciente": "Beba bastante líquido nos dias seguintes, se o médico liberar.",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "secao": null,
+            "trecho": null,
+            "estado": "SEM_FONTE",
+            "motivo": "protocolo do serviço; NÃO universalizar volume (regra v1)"
+          },
+          "pendencia": "SEM_FONTE",
+          "itemV1": "NEFRO-HID-CIS"
+        },
+        {
+          "id": "NEFRO-AJUSTE",
+          "indicacao": "Ajuste por função renal",
+          "gatilho": "ClCr/TFG reduzida",
+          "droga": "vínculo",
+          "apresentacaoSUS": null,
+          "dose": null,
+          "unidade": null,
+          "via": null,
+          "frequencia": null,
+          "duracao": null,
+          "ajusteRenal": null,
+          "ajusteHepatico": null,
+          "controle344": null,
+          "interacoesCriticas": null,
+          "orientacaoPaciente": null,
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "CI-01 a CI-04 de contraindicacoes-complemento (cortes verificados: cisplatina <60 por produto, pemetrexede <45, capecitabina <30, Calvert)",
+            "secao": "vínculo",
+            "trecho": null,
+            "estado": "VERIFICADO"
+          },
+          "nota": "Sem posologia própria — os ajustes renais por droga de suporte estão em cada item.",
+          "itemV1": "NEFRO-AJUSTE"
+        },
+        {
+          "id": "NEFRO-K-ORAL",
+          "indicacao": "Hipocalemia leve-moderada (reposição oral)",
+          "gatilho": "K+ baixo ≥2,5 mEq/L (ex.: cisplatina, anti-EGFR, diarreia)",
+          "droga": "cloreto de potássio (oral, liberação prolongada)",
+          "apresentacaoSUS": {
+            "texto": "RENAME 2024 traz só KCl 19,1% injetável (Básico); oral não localizado",
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+              "secao": "p. 35",
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          },
+          "dose": "prevenção 20 mEq/dia; tratamento 40–100 mEq/dia divididos (máx. 40 mEq por tomada)",
+          "unidade": "mEq",
+          "via": "VO",
+          "frequencia": "dividido, com refeição",
+          "duracao": "guiada por K+ sérico",
+          "ajusteRenal": "DRC: risco de hipercalemia — monitorar",
+          "ajusteHepatico": null,
+          "controle344": {
+            "lista": "comum",
+            "nota": null,
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+              "secao": "Anexo I (A1–F) — substância ausente",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "interacoesCriticas": "IECA/BRA, espironolactona, AINE, trimetoprima (hipercalemia); corrigir Mg junto.",
+          "orientacaoPaciente": "Engula inteiro com água durante a refeição.",
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "openFDA/DailyMed — bula FDA potassium chloride ER (set_id 00615fad-ad3b-46e8-a89d-48290d937ae2, effective 2025-09-23)",
+            "secao": "2.2",
+            "trecho": "Treatment of hypokalemia : Doses range from 40 to 100 mEq/day",
+            "estado": "VERIFICADO"
+          },
+          "nota": "K+ <2,5 mEq/L: via EV (bula).",
+          "itemV1": "NEFRO-MG-K"
+        },
+        {
+          "id": "NEFRO-MG",
+          "indicacao": "Hipomagnesemia (cisplatina, anti-EGFR)",
+          "gatilho": "Mg sérico baixo",
+          "droga": "magnésio (oral/EV)",
+          "apresentacaoSUS": {
+            "texto": "sulfato de magnésio injetável (Básico)",
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+              "secao": "p. 33",
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          },
+          "dose": null,
+          "unidade": null,
+          "via": null,
+          "frequencia": null,
+          "duracao": null,
+          "ajusteRenal": null,
+          "ajusteHepatico": null,
+          "controle344": {
+            "lista": "comum",
+            "nota": null,
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+              "secao": "Anexo I (A1–F) — substância ausente",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "interacoesCriticas": null,
+          "orientacaoPaciente": "Faça os exames de sangue pedidos para acompanhar o magnésio.",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "secao": null,
+            "trecho": null,
+            "estado": "SEM_FONTE",
+            "motivo": "reposição de Mg sem dose fontada nesta curadoria"
+          },
+          "pendencia": "SEM_FONTE",
+          "itemV1": "NEFRO-MG-K"
+        },
+        {
+          "id": "NEFRO-LISE-ALOPURINOL",
+          "indicacao": "Profilaxia de síndrome de lise tumoral (risco baixo-intermediário)",
+          "gatilho": "risco intermediário de SLT (Cairo-Bishop/Howard) sem hiperuricemia prévia",
+          "droga": "alopurinol",
+          "apresentacaoSUS": {
+            "texto": "alopurinol 100 e 300 mg comprimido (Básico)",
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+              "secao": "p. 91",
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          },
+          "dose": "300–800",
+          "unidade": "mg/dia",
+          "via": "VO",
+          "frequencia": "1x/dia ou dividido",
+          "duracao": "iniciar 24–48 h antes da QT; suspender quando o risco cessar (2–3 dias)",
+          "ajusteRenal": "TFG 10–20: 200 mg/dia; <10: 100 mg/dia; diálise: 50 mg 12/12 h ou 100 mg/dia",
+          "ajusteHepatico": null,
+          "controle344": {
+            "lista": "comum",
+            "nota": null,
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+              "secao": "Anexo I (A1–F) — substância ausente",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "interacoesCriticas": "Azatioprina/6-mercaptopurina (reduzir 65–75%); SJS/NET (HLA-B*58:01); não reduz ácido úrico já formado (rasburicase se hiperuricemia).",
+          "orientacaoPaciente": "Comece 1 a 2 dias antes da quimioterapia e beba bastante água.",
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "openFDA/DailyMed — bula FDA allopurinol comprimidos (set_id 005048dd-844f-468c-bf56-1a09727e3477, effective 2024-07-08)",
+            "secao": "2.4 e Tabela 2",
+            "trecho": "Adult patients – 300 mg to 800 mg orally daily",
+            "estado": "VERIFICADO"
+          },
+          "fontesApoio": [
+            {
+              "tipo": "DIRETRIZ",
+              "referencia": "Onco PRO 2026 Aula 87 — Emergências Oncológicas 2 (NF, trombose, lise)",
+              "secao": "pág. 34–35",
+              "trecho": "Intermediário Hidratação EV; alopurinol/febuxostate; labs seriados",
+              "estado": "APOIO_AULA"
+            }
+          ],
+          "nota": "CONFLITO: bula FDA pede urina 'neutra ou levemente alcalina'; Aula 87 pág. 36: NÃO alcalinizar de rotina. Adotado: não alcalinizar. Risco alto/SLT estabelecida = internação + rasburicase (fora de receita ambulatorial).",
+          "itemV1": "NEFRO-LISE"
+        }
+      ]
+    },
+    {
+      "familia": "infecciosas",
+      "itens": [
+        {
+          "id": "INFE-NFB-AMOXCLAV",
+          "indicacao": "NF baixo risco ambulatorial",
+          "gatilho": "MASCC ≥21 + critérios clínicos/logísticos (MASCC NÃO autoriza alta sozinho)",
+          "droga": "amoxicilina + clavulanato (+ ciprofloxacino)",
+          "apresentacaoSUS": {
+            "texto": "500 mg + 125 mg comprimido (Básico)",
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+              "secao": "p. 58",
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          },
+          "dose": "500/125 8/8 h ou 875/125 12/12 h",
+          "unidade": "mg",
+          "via": "VO",
+          "frequencia": "8/8 h ou 12/12 h",
+          "duracao": null,
+          "ajusteRenal": "ClCr <30: não usar 875 mg",
+          "ajusteHepatico": null,
+          "controle344": {
+            "lista": "comum",
+            "nota": null,
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+              "secao": "Anexo I (A1–F) — substância ausente",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "interacoesCriticas": "Alergia a penicilina → clindamicina (dose SEM_FONTE).",
+          "orientacaoPaciente": "Tome junto com o ciprofloxacino e volte se a febre não ceder em 2 a 3 dias.",
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "openFDA/DailyMed — bula FDA amoxicillin-clavulanate comprimidos (set_id 0425932a-f6e1-49a6-8480-720f179ace14, effective 2025-10-14)",
+            "secao": "2",
+            "trecho": "875 mg every 12 hours or ... 500 mg every 8 hours",
+            "estado": "VERIFICADO"
+          },
+          "fontesApoio": [
+            {
+              "tipo": "DIRETRIZ",
+              "referencia": "ASCO/IDSA 2018 — Outpatient Management of Fever and Neutropenia (Taplitz et al., JCO 2018;36:1443)",
+              "secao": "recomendações",
+              "trecho": "Oral empiric therapy with a fluoroquinolone ... plus amoxicillin/clavulanate",
+              "estado": "VERIFICADO"
+            }
+          ],
+          "nota": "Espelha SUP-NF-BR-AMOXCLAV / SUP-NF-BR-CIPRO (ciprofloxacino 500–750 mg 12/12 h). Pré-requisitos: MASCC ≥21 NÃO autoriza alta sozinho; 1ª dose no serviço, observação ≥4 h, suporte logístico/psicossocial, acesso rápido ao PS, sem profilaxia prévia com quinolona; sem defervescência em 2–3 dias → internar (ASCO/IDSA 2018; Aula 87 pág. 10/14).",
+          "pendencia": "duração SEM_FONTE",
+          "itemV1": "INFE-NFB"
+        },
+        {
+          "id": "INFE-HBV-ENTECAVIR",
+          "indicacao": "Profilaxia HBV por sorologia",
+          "gatilho": "HBsAg+ (qualquer terapia sistêmica, exceto hormonioterapia isolada) OU HBsAg−/anti-HBc+ com anti-CD20 ou TCTH",
+          "droga": "entecavir (alternativa: tenofovir 300 mg/dia — SUP-HBV-TENOFOVIR)",
+          "apresentacaoSUS": {
+            "texto": "entecavir 0,5 mg comprimido (Estratégico)",
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+              "secao": "p. 65",
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          },
+          "dose": "0,5",
+          "unidade": "mg",
+          "via": "VO",
+          "frequencia": "1x/dia em jejum",
+          "duracao": "durante e ≥12 meses após a terapia",
+          "ajusteRenal": "ClCr 30–<50: 48/48 h; 10–<30: 72/72 h; <10/HD: 7/7 dias",
+          "ajusteHepatico": null,
+          "controle344": {
+            "lista": "comum",
+            "nota": null,
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+              "secao": "Anexo I (A1–F) — substância ausente",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "interacoesCriticas": "Nefrotóxicos.",
+          "orientacaoPaciente": "Tome todo dia em jejum e não pare sem falar com o médico.",
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "openFDA/DailyMed — bula FDA entecavir comprimidos (set_id 01ec50a1-6c6c-46f0-8c74-73542b0a59c3, effective 2025-01-09)",
+            "secao": "2.2",
+            "trecho": "nucleoside-inhibitor-treatment-naïve adults ... is 0.5 mg once daily",
+            "estado": "VERIFICADO"
+          },
+          "fontesApoio": [
+            {
+              "tipo": "DIRETRIZ",
+              "referencia": "ASCO PCO 2020 — HBV Screening and Management (Hwang et al., JCO 2020; PMID 32716741)",
+              "secao": "Abstract",
+              "trecho": "past HBV ... anti-CD20 monoclonal antibodies or stem-cell transplantation, should receive antiviral prophylaxis",
+              "estado": "VERIFICADO"
+            }
+          ],
+          "nota": "HBsAg−/anti-HBc+ com terapia não de alto risco: monitorar HBsAg e ALT; tratar se reativar (ASCO 2020).",
+          "itemV1": "INFE-HBV"
+        },
+        {
+          "id": "INFE-PJP-SMXTMP",
+          "indicacao": "Profilaxia de PJP (NÃO tratamento)",
+          "gatilho": "imunossuprimido com risco aumentado de PJP — critério oncológico de indicação pendente",
+          "droga": "sulfametoxazol + trimetoprima",
+          "apresentacaoSUS": {
+            "texto": "sulfametoxazol + trimetoprima 400 mg + 80 mg comprimido (Básico)",
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+              "secao": "p. 77",
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          },
+          "dose": "800/160 (1 cp 'forte' = 2 cp de 400/80 da RENAME)",
+          "unidade": "mg",
+          "via": "VO",
+          "frequencia": "1x/dia",
+          "duracao": "enquanto durar a imunossupressão",
+          "ajusteRenal": "ClCr 15–30: metade da dose; <15: não recomendado",
+          "ajusteHepatico": "cautela",
+          "controle344": {
+            "lista": "comum",
+            "nota": null,
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+              "secao": "Anexo I (A1–F) — substância ausente",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "interacoesCriticas": "METOTREXATO (mielotoxicidade grave — vínculo NOVO-01); varfarina (INR); hipercalemia; mielossupressão somada à QT.",
+          "orientacaoPaciente": "Tome 2 comprimidos juntos uma vez ao dia e beba bastante água.",
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "openFDA/DailyMed — bula FDA sulfamethoxazole-trimethoprim comprimidos (set_id 07a49665-fe2a-4a92-a57e-49db224b012e, effective 2024-01-08)",
+            "secao": "Dosage — Pneumocystis jirovecii Pneumonia: Prophylaxis",
+            "trecho": "recommended dosage for prophylaxis in adults is 1 ... double strength tablet daily",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Mantém veredicto Codex N02: o esquema 800/160 de 12/12 h e o de tratamento (TMP 15–20 mg/kg/dia) NÃO são profilaxia. Atenção à conta: RENAME só tem 400/80 → 2 cp/dia.",
+          "pendencia": "critério de indicação oncológica (ex.: corticoide em dose/tempo) SEM_FONTE nesta curadoria",
+          "itemV1": "INFE-PJP"
+        },
+        {
+          "id": "INFE-HZ-VALACICLOVIR",
+          "indicacao": "Herpes-zóster",
+          "gatilho": "zóster localizado ≤72 h do rash",
+          "droga": "valaciclovir (alternativa SUS: aciclovir 800 mg 5x/dia 7–10 dias = 4 cp de 200 mg por tomada)",
+          "apresentacaoSUS": {
+            "texto": "não consta na RENAME 2024 — aciclovir 200 mg cp na RENAME, p. 58",
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+              "secao": "busca textual no PDF (254 p.)",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "dose": "1000",
+          "unidade": "mg",
+          "via": "VO",
+          "frequencia": "8/8 h",
+          "duracao": "7 dias",
+          "ajusteRenal": "ClCr 30–49: 1 g 12/12 h; 10–29: 1 g 24/24 h; <10: 500 mg 24/24 h",
+          "ajusteHepatico": null,
+          "controle344": {
+            "lista": "comum",
+            "nota": null,
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+              "secao": "Anexo I (A1–F) — substância ausente",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "interacoesCriticas": "Nefrotóxicos.",
+          "orientacaoPaciente": "Comece logo e tome por 7 dias, bebendo bastante água.",
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "openFDA/DailyMed — bula FDA valacyclovir comprimidos (set_id 021ab9d0-7b75-40cf-afde-446942d64388, effective 2026-05-28)",
+            "secao": "2.1",
+            "trecho": "Herpes Zoster 1 gram 3 times daily for 7 days",
+            "estado": "VERIFICADO"
+          },
+          "fontesApoio": [
+            {
+              "tipo": "LITERATURA",
+              "referencia": "openFDA/DailyMed — bula FDA acyclovir comprimidos (set_id 01ae85df-d1a0-44f7-b4c0-0ac74d2216d4, effective 2024-09-05)",
+              "secao": "Dosage",
+              "trecho": "800 mg every 4 hours orally, 5 times daily for 7 to 10 days",
+              "estado": "VERIFICADO"
+            }
+          ],
+          "itemV1": "INFE-HZ"
+        }
+      ]
+    },
+    {
+      "familia": "endocrino",
+      "itens": [
+        {
+          "id": "ENDO-GLIC",
+          "indicacao": "Hiperglicemia por corticoide",
+          "gatilho": "glicemia elevada em uso de corticoide",
+          "droga": "regime conforme valor",
+          "apresentacaoSUS": null,
+          "dose": null,
+          "unidade": null,
+          "via": null,
+          "frequencia": null,
+          "duracao": null,
+          "ajusteRenal": null,
+          "ajusteHepatico": null,
+          "controle344": null,
+          "interacoesCriticas": null,
+          "orientacaoPaciente": "Meça a glicose nos horários pedidos.",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "secao": null,
+            "trecho": null,
+            "estado": "SEM_FONTE",
+            "motivo": "regime hipoglicemiante sem fonte nesta curadoria"
+          },
+          "pendencia": "SEM_FONTE",
+          "itemV1": "ENDO-GLIC"
+        },
+        {
+          "id": "ENDO-HIPO-LEVOTIROXINA",
+          "indicacao": "Hipotireoidismo por imunoterapia",
+          "gatilho": "TSH elevado com T4 livre baixo (ou sintomático)",
+          "droga": "levotiroxina",
+          "apresentacaoSUS": {
+            "texto": "levotiroxina sódica 12,5–100 mcg comprimido (Básico)",
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+              "secao": "p. 55",
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          },
+          "dose": "1,6 mcg/kg/dia (dose plena); idoso/cardiopata: iniciar abaixo e titular",
+          "unidade": "mcg/kg/dia",
+          "via": "VO",
+          "frequencia": "1x/dia em jejum",
+          "duracao": "titular 12,5–25 mcg a cada 4–6 semanas por TSH/T4L",
+          "ajusteRenal": null,
+          "ajusteHepatico": null,
+          "controle344": {
+            "lista": "comum",
+            "nota": null,
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+              "secao": "Anexo I (A1–F) — substância ausente",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "interacoesCriticas": "Cálcio, ferro, IBP, sucralfato reduzem absorção (separar 4 h); varfarina (INR); antes de repor, excluir insuficiência adrenal.",
+          "orientacaoPaciente": "Tome em jejum, 30 a 60 minutos antes do café, longe do cálcio.",
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "openFDA/DailyMed — bula FDA levothyroxine sodium (set_id 008de8fd-150f-4022-8ccb-c8bfa94875c7, effective 2026-03-24)",
+            "secao": "2.3",
+            "trecho": "Full replacement dose is 1.6 mcg/kg/day. Some patients require a lower starting dose",
+            "estado": "VERIFICADO"
+          },
+          "pendencia": "dose inicial específica para irAE (ASCO irAE 2021) não aberta nesta curadoria",
+          "itemV1": "ENDO-HIPO"
+        },
+        {
+          "id": "ENDO-ADRENAL",
+          "indicacao": "Insuficiência adrenal por imunoterapia",
+          "gatilho": "cortisol baixo/ACTH; crise = emergência",
+          "droga": "hidrocortisona (reposição individual)",
+          "apresentacaoSUS": {
+            "texto": "hidrocortisona 100 e 500 mg pó injetável (Básico) — oral não localizado",
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+              "secao": "p. 57",
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          },
+          "dose": null,
+          "unidade": null,
+          "via": null,
+          "frequencia": null,
+          "duracao": null,
+          "ajusteRenal": null,
+          "ajusteHepatico": null,
+          "controle344": {
+            "lista": "comum",
+            "nota": null,
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+              "secao": "Anexo I (A1–F) — substância ausente",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "interacoesCriticas": null,
+          "orientacaoPaciente": "Em febre, vômitos ou cirurgia, procure o serviço: a dose pode precisar dobrar.",
+          "fonte": {
+            "tipo": null,
+            "referencia": null,
+            "secao": null,
+            "trecho": null,
+            "estado": "SEM_FONTE",
+            "motivo": "dose de reposição fisiológica sem fonte aberta nesta curadoria"
+          },
+          "pendencia": "SEM_FONTE",
+          "itemV1": "ENDO-ADRENAL"
+        },
+        {
+          "id": "ENDO-OSSO-DENOSUMABE60",
+          "indicacao": "Perda óssea em inibidor de aromatase adjuvante ou ADT (câncer de próstata não metastático)",
+          "gatilho": "IA ou ADT com alto risco de fratura (densitometria)",
+          "droga": "denosumabe 60 mg",
+          "apresentacaoSUS": {
+            "texto": "não consta na RENAME 2024",
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+              "secao": "busca textual no PDF (254 p.)",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "dose": "60",
+          "unidade": "mg",
+          "via": "SC",
+          "frequencia": "a cada 6 meses",
+          "duracao": "conforme risco; não interromper sem plano (rebote)",
+          "ajusteRenal": "ClCr <30/diálise: maior risco de hipocalcemia grave",
+          "ajusteHepatico": null,
+          "controle344": {
+            "lista": "comum",
+            "nota": null,
+            "fonte": {
+              "tipo": "NORMA",
+              "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+              "secao": "Anexo I (A1–F) — substância ausente",
+              "trecho": null,
+              "estado": "VERIFICADO_POR_AUSENCIA"
+            }
+          },
+          "interacoesCriticas": "Hipocalcemia; osteonecrose de mandíbula; fraturas vertebrais múltiplas após suspensão.",
+          "orientacaoPaciente": "Tome cálcio e vitamina D todo dia e não atrase a injeção de 6 em 6 meses.",
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "openFDA/DailyMed — bula FDA Prolia (denosumabe 60 mg) (set_id 49e5afe9-a0c7-40c4-af9f-f287a80c5c88, effective 2026-06-26)",
+            "secao": "1.4, 1.5, 2.3",
+            "trecho": "Administer 60 mg every 6 months as a subcutaneous injection",
+            "estado": "VERIFICADO"
+          },
+          "fontesApoio": [
+            {
+              "tipo": "LITERATURA",
+              "referencia": "openFDA/DailyMed — bula FDA Prolia (denosumabe 60 mg) (set_id 49e5afe9-a0c7-40c4-af9f-f287a80c5c88, effective 2026-06-26)",
+              "secao": "2.3",
+              "trecho": "take calcium 1000 mg daily and at least 400 IU vitamin D",
+              "estado": "VERIFICADO"
+            }
+          ],
+          "nota": "Cálcio 1000 mg/dia + vitamina D ≥400 UI/dia (bula Prolia; não especifica 'elementar' — achado N13: prescrever como cálcio elementar). Com o comprimido RENAME (500 mg elementar + 200 UI): 2 cp/dia = 1000 mg + 400 UI.",
+          "pendencia": "bifosfonato (zoledronato 4 mg 6/6 meses em IA) SEM_FONTE nesta curadoria; RENAME tem só zoledronato 5 mg/100 mL (osteoporose)",
+          "itemV1": "ENDO-OSSO"
+        }
+      ]
+    }
+  ],
+  "mapaV1": [
+    {
+      "itemV1": "CARD-TEV",
+      "itensV2": [
+        "CARD-TEV-ENOXAPARINA",
+        "CARD-TEV-APIXABANA",
+        "CARD-TEV-RIVAROXABANA"
+      ]
+    },
+    {
+      "itemV1": "CARD-HTN-VEGF",
+      "itensV2": [
+        "CARD-HTN-VEGF"
+      ]
+    },
+    {
+      "itemV1": "CARD-PROT",
+      "itensV2": [
+        "CARD-PROT"
+      ]
+    },
+    {
+      "itemV1": "NEFRO-HID-CIS",
+      "itensV2": [
+        "NEFRO-HID-CIS"
+      ]
+    },
+    {
+      "itemV1": "NEFRO-AJUSTE",
+      "itensV2": [
+        "NEFRO-AJUSTE"
+      ]
+    },
+    {
+      "itemV1": "NEFRO-MG-K",
+      "itensV2": [
+        "NEFRO-K-ORAL",
+        "NEFRO-MG"
+      ]
+    },
+    {
+      "itemV1": "NEFRO-LISE",
+      "itensV2": [
+        "NEFRO-LISE-ALOPURINOL"
+      ]
+    },
+    {
+      "itemV1": "INFE-NFB",
+      "itensV2": [
+        "INFE-NFB-AMOXCLAV"
+      ]
+    },
+    {
+      "itemV1": "INFE-HBV",
+      "itensV2": [
+        "INFE-HBV-ENTECAVIR"
+      ]
+    },
+    {
+      "itemV1": "INFE-PJP",
+      "itensV2": [
+        "INFE-PJP-SMXTMP"
+      ]
+    },
+    {
+      "itemV1": "INFE-HZ",
+      "itensV2": [
+        "INFE-HZ-VALACICLOVIR"
+      ]
+    },
+    {
+      "itemV1": "ENDO-GLIC",
+      "itensV2": [
+        "ENDO-GLIC"
+      ]
+    },
+    {
+      "itemV1": "ENDO-HIPO",
+      "itensV2": [
+        "ENDO-HIPO-LEVOTIROXINA"
+      ]
+    },
+    {
+      "itemV1": "ENDO-ADRENAL",
+      "itensV2": [
+        "ENDO-ADRENAL"
+      ]
+    },
+    {
+      "itemV1": "ENDO-OSSO",
+      "itensV2": [
+        "ENDO-OSSO-DENOSUMABE60"
+      ]
+    }
+  ],
+  "resumo": {
+    "total": 18,
+    "doseVerificada": 11,
+    "doseApoioAula": 0,
+    "doseOutraIndicacao": 0,
+    "semFonte": 6,
+    "naoAplicavel": 1
+  },
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "Claude (curadoria farmacoterapêutica F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Bulas FDA; ASCO VTE/HBV/IDSA; RDC 999/2025; RENAME 2024",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação); aprovação clínica real = curadoria.aprovacaoClinica (null)."
+  }
+}

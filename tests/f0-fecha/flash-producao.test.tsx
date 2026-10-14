@@ -37,14 +37,14 @@ describe("F0 · Consulta Flash em produção", () => {
     render(<Configuracoes tema="dia" onTema={() => {}} onFechar={() => {}}
       porta={{ lerCaixaConfiguracao, alterarCaixaConfiguracao }} />);
 
-    const laboratorio = await screen.findByRole("checkbox", { name: "Pré-marcar laboratório na Consulta Flash" });
-    const imagem = screen.getByRole("checkbox", { name: "Pré-marcar imagem na Consulta Flash" });
+    const laboratorio = await screen.findByRole("checkbox", { name: "Modelo HMG" });
+    const imagem = screen.getByRole("checkbox", { name: "Modelo TC tórax" });
     expect((laboratorio as HTMLInputElement).checked).toBe(false);
-    expect((imagem as HTMLInputElement).checked).toBe(true);
+    expect((imagem as HTMLInputElement).checked).toBe(false);
     fireEvent.click(laboratorio);
     fireEvent.click(screen.getByRole("button", { name: "Salvar modelo Flash" }));
     await waitFor(() => expect(alterarCaixaConfiguracao).toHaveBeenCalledWith(expect.objectContaining({
-      numero: NUMERO_CAIXA_MODELO_FLASH, valorNovo: { laboratorio: true, imagem: true }, expectedRevision: 4,
+      numero: NUMERO_CAIXA_MODELO_FLASH, valorNovo: { laboratorio: true, imagem: false, solicitacoes: {laboratorio:["HMG"],imagem:[]} }, expectedRevision: 4,
     })));
     expect(screen.getByLabelText("status configuração Flash").textContent).toContain("gravado no servidor");
   });
@@ -88,3 +88,4 @@ describe("F0 · Consulta Flash em produção", () => {
     expect(aoSalvarRascunho.mock.calls[1]?.[0].retorno.dias).toBeNull();
   });
 });
+

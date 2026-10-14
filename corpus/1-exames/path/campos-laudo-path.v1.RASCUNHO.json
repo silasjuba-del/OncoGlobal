@@ -1,0 +1,169 @@
+{
+  "header": {
+    "id": "campos-laudo-path",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "ESMO/NCCN/PCDT citados por tumor (consolidado §3.4)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "finalidade": "Campos que o app extrai do laudo anatomopatológico/IHQ por tumor. Resultado positivo/negativo/indeterminado/AUSENTE sem normalização indevida — ausência relatada ≠ negativo. O app NÃO fecha estádio por extração.",
+  "camposComuns": [
+    "material/sítio",
+    "data do procedimento",
+    "histologia",
+    "grau/diferenciação",
+    "invasão (quando aplicável)",
+    "margens (quando aplicável)",
+    "contagem de linfonodos (quando aplicável)"
+  ],
+  "porTumor": [
+    {
+      "tumor": "mama",
+      "campos": [
+        "ER (%)",
+        "PgR (%)",
+        "HER2 (IHC 0/1+/2+/3+; FISH se 2+)",
+        "Ki-67 (%)"
+      ],
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "ESMO Pocket Breast 2023 pp. 60–61",
+        "trecho": "ER, PgR, HER2 and Ki-67",
+        "edicao": "2023"
+      },
+      "catalogoIds": [
+        "ANATOMOPATOLOGICO",
+        "IMUNOHISTOQUIMICA",
+        "ANATOMOPATOLOGICO_MAMA_BIOPSIA",
+        "HER2_QUANTIFICACAO",
+        "FISH"
+      ],
+      "molecularSemCodigoSUS": "Codex 2026-10-11 (auditoria): no SIGTAP 09/2026, 0202100081 (PCR/qPCR) e 0202100111 (Sanger por amplicon, até 500 pb) são APAC secundário com compatibilidades de doenças raras; não equivalem a NGS e não têm faturamento oncológico demonstrado. NGS de painel não tem código. HER2 (0202100049) e FISH (0202100090) existem, mas a via de faturamento por indicação deve ser confirmada."
+    },
+    {
+      "tumor": "colorretal",
+      "campos": [
+        "MMR (IHQ MLH1/MSH2/MSH6/PMS) ou MSI",
+        "KRAS/NRAS (exons 2-4)",
+        "BRAF",
+        "HER2 (se RAS selvagem, em metastático)"
+      ],
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "ESMO mCRC 2026 (PMID 41990853)",
+        "trecho": "in all patients at diagnosis",
+        "edicao": "2026"
+      },
+      "catalogoIds": [
+        "ANATOMOPATOLOGICO",
+        "IMUNOHISTOQUIMICA"
+      ],
+      "molecularSemCodigoSUS": "Codex 2026-10-11 (auditoria): no SIGTAP 09/2026, 0202100081 (PCR/qPCR) e 0202100111 (Sanger por amplicon, até 500 pb) são APAC secundário com compatibilidades de doenças raras; não equivalem a NGS e não têm faturamento oncológico demonstrado. NGS de painel não tem código. HER2 (0202100049) e FISH (0202100090) existem, mas a via de faturamento por indicação deve ser confirmada."
+    },
+    {
+      "tumor": "pulmao (CPNPC)",
+      "campos": [
+        "EGFR (mutações sensíveis e raras, ex20ins)",
+        "ALK",
+        "ROS1",
+        "BRAF",
+        "KRAS G12C",
+        "NTRK",
+        "MET ex14",
+        "RET",
+        "HER2",
+        "NRG1",
+        "PD-L1 (TPS)"
+      ],
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "NCCN NSCLC v5.2026 + ESMO mNSCLC 2023 (Hendriks)",
+        "trecho": "EGFR... ALK... [I,A]",
+        "edicao": "2023-2026"
+      },
+      "ressalva": "Recomendação × disponibilidade SUS × requisito do protocolo = campos distintos.",
+      "catalogoIds": [
+        "ANATOMOPATOLOGICO",
+        "IMUNOHISTOQUIMICA"
+      ],
+      "molecularSemCodigoSUS": "Codex 2026-10-11 (auditoria): no SIGTAP 09/2026, 0202100081 (PCR/qPCR) e 0202100111 (Sanger por amplicon, até 500 pb) são APAC secundário com compatibilidades de doenças raras; não equivalem a NGS e não têm faturamento oncológico demonstrado. NGS de painel não tem código. HER2 (0202100049) e FISH (0202100090) existem, mas a via de faturamento por indicação deve ser confirmada."
+    },
+    {
+      "tumor": "gastrico",
+      "campos": [
+        "HER2 (IHC/ISH)",
+        "PD-L1 CPS",
+        "MSI-H/dMMR",
+        "CLDN18.2 (se disponível)"
+      ],
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "ESMO Gastric 2022 rec 2c (PMC10937212)",
+        "trecho": "HER2... PD-L1 CPS... MSI-H/dMMR... CLDN18.2",
+        "edicao": "2022"
+      },
+      "catalogoIds": [
+        "ANATOMOPATOLOGICO",
+        "IMUNOHISTOQUIMICA"
+      ],
+      "molecularSemCodigoSUS": "Codex 2026-10-11 (auditoria): no SIGTAP 09/2026, 0202100081 (PCR/qPCR) e 0202100111 (Sanger por amplicon, até 500 pb) são APAC secundário com compatibilidades de doenças raras; não equivalem a NGS e não têm faturamento oncológico demonstrado. NGS de painel não tem código. HER2 (0202100049) e FISH (0202100090) existem, mas a via de faturamento por indicação deve ser confirmada."
+    },
+    {
+      "tumor": "prostata",
+      "campos": [
+        "Gleason (primário+secundário)",
+        "extensão local",
+        "volume acometido",
+        "invasão perineural/linfovascular quando relatada"
+      ],
+      "fonte": {
+        "tipo": "NORMA",
+        "referencia": "PCDT Próstata (Portaria SAS 498/2016)",
+        "trecho": null,
+        "edicao": "2016"
+      },
+      "catalogoIds": [
+        "ANATOMOPATOLOGICO",
+        "IMUNOHISTOQUIMICA"
+      ],
+      "molecularSemCodigoSUS": "Codex 2026-10-11 (auditoria): no SIGTAP 09/2026, 0202100081 (PCR/qPCR) e 0202100111 (Sanger por amplicon, até 500 pb) são APAC secundário com compatibilidades de doenças raras; não equivalem a NGS e não têm faturamento oncológico demonstrado. NGS de painel não tem código. HER2 (0202100049) e FISH (0202100090) existem, mas a via de faturamento por indicação deve ser confirmada."
+    }
+  ],
+  "proibicoes": [
+    "Inventar biomarcador não relatado",
+    "Converter 'não realizado' em 'negativo'",
+    "Fechar estádio pela extração"
+  ],
+  "herdado": "rulesets/patologia-agregacao.v1.json segue no motor (migração Codex) — este rascunho acrescenta campos por tumor, não substitui.",
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DIRETRIZ",
+      "referencia": "ESMO/NCCN/PCDT citados por tumor (consolidado §3.4)",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "portas": {
+    "consome": [
+      "patologia.laudo (extração RADS/PATH)",
+      "6-pack-tumor (biomarcadores obrigatórios por cenário)"
+    ],
+    "oferece": [
+      "patologia.marcadores[] → pack, prescrição proposta, resumo do caso"
+    ]
+  }
+}

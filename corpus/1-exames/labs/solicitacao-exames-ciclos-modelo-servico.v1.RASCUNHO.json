@@ -1,0 +1,200 @@
+{
+  "header": {
+    "id": "solicitacao-exames-ciclos-modelo-servico",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Modelo do serviço: C:/Users/silas/OneDrive/ONCOMED/Dev-oncoMed/Templates/[C] Template - Solicitacao de Exames 3 Ciclos.docx (15/04/2026), convertido pelo Claude em 11/10/2026 por ordem do Dr. Silas",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "papel": "Forma da requisição por ciclo. A lista de exames NÃO é fixa: sai do esquema (labs-por-esquema.v1.RASCUNHO.json) e do catálogo por id. O painel do modelo fica só como referência histórica.",
+  "cabecalho": {
+    "origem": "CONFIG",
+    "campos": [
+      {
+        "id": "servico.nome",
+        "rotulo": "Serviço"
+      },
+      {
+        "id": "medico.nome",
+        "rotulo": "Médico"
+      },
+      {
+        "id": "medico.crm",
+        "rotulo": "CRM/UF"
+      },
+      {
+        "id": "medico.rqe",
+        "rotulo": "RQE"
+      }
+    ],
+    "nota": "O modelo original traz 'HOSPITAL DO BEM | CRM-SP XXXXX' fixo. Serviço e registro do médico saem de configuração, nunca de texto fixo.",
+    "pendencia": "DECISAO_DR_SILAS: serviço e CRM/UF oficiais (SP × PB)"
+  },
+  "campos": [
+    {
+      "id": "paciente.nome",
+      "rotulo": "Paciente",
+      "origem": "FATO_CONFIRMADO",
+      "porta": "prontuario.identificacao.nome"
+    },
+    {
+      "id": "prontuario.numero",
+      "rotulo": "Prontuário",
+      "origem": "FATO_CONFIRMADO",
+      "porta": "prontuario.numero"
+    },
+    {
+      "id": "dx",
+      "rotulo": "Diagnóstico e CID",
+      "origem": "FATO_CONFIRMADO",
+      "porta": "tumor"
+    },
+    {
+      "id": "protocolo",
+      "rotulo": "Protocolo",
+      "origem": "FATO_CONFIRMADO",
+      "porta": "prescricao.vigente.esquema"
+    }
+  ],
+  "ciclos": {
+    "quantidade": {
+      "origem": "DECISAO_MEDICA",
+      "padraoModelo": 3,
+      "padraoKitRepo": 4,
+      "nota": "Modelo de abril: 3 ciclos; kit de maio no repo (requisicao-exames-ciclos.v1.json): 4 ciclos. Decisão do Dr. Silas."
+    },
+    "datas": {
+      "origem": "FATO_CONFIRMADO",
+      "porta": "datasFixas / agenda-qt"
+    }
+  },
+  "painelDoModelo": [
+    {
+      "catalogoId": "HEMOGRAMA"
+    },
+    {
+      "catalogoId": "UREIA"
+    },
+    {
+      "catalogoId": "CREATININA"
+    },
+    {
+      "catalogoId": "TGO"
+    },
+    {
+      "catalogoId": "TGP"
+    },
+    {
+      "catalogoId": "FOSFATASE_ALCALINA"
+    },
+    {
+      "catalogoId": "GAMA_GT"
+    },
+    {
+      "catalogoId": "BILIRRUBINA"
+    },
+    {
+      "catalogoId": "DHL"
+    },
+    {
+      "catalogoId": "PROTEINAS_TOTAIS_FRACOES"
+    }
+  ],
+  "diferencasDoModelo": [
+    {
+      "item": "Contagem de plaquetas",
+      "acao": "REMOVIDO",
+      "motivo": "Já incluída no HEMOGRAMA (0202020380)."
+    },
+    {
+      "item": "Sódio, potássio, magnésio, cálcio",
+      "acao": "AUSENTE_NO_MODELO",
+      "ids": [
+        "SODIO",
+        "POTASSIO",
+        "MAGNESIO",
+        "CALCIO"
+      ],
+      "motivo": "Estão no kit de maio e são exigidos por esquema (cisplatina, cetuximabe, panitumumabe): entram via labs-por-esquema, não fixos."
+    },
+    {
+      "item": "DHL e proteínas totais",
+      "acao": "CONDICIONAL",
+      "motivo": "Não são rotina para todo esquema; ficam por esquema/pack."
+    }
+  ],
+  "examesPorEsquema": {
+    "porta": "1-exames/labs/labs-por-esquema.v1.RASCUNHO.json",
+    "nota": "Substitui as linhas livres 'Exames específicos do protocolo'."
+  },
+  "instrucoesPaciente": [
+    {
+      "id": "IP-01",
+      "texto": "Faça os exames de preferência na véspera de cada ciclo, ou conforme combinado.",
+      "estado": "MANTIDO",
+      "ligacao": "Validade: HEMOGRAMA 72 h, bioquímica 168 h (src/rules/f0c/clinica.ts)."
+    },
+    {
+      "id": "IP-02",
+      "texto": "Envie os resultados pelo canal do serviço.",
+      "estado": "PENDENTE",
+      "nota": "Modelo manda foto do laudo por WhatsApp: exige consentimento e base legal LGPD antes de virar texto oficial."
+    },
+    {
+      "id": "IP-03",
+      "texto": "O ciclo só é feito depois da liberação médica.",
+      "estado": "MANTIDO"
+    },
+    {
+      "id": "IP-04",
+      "texto": "Se tiver febre, sangramento ou mal-estar antes do ciclo, procure o pronto-socorro.",
+      "estado": "CORRIGIDO",
+      "original": "comunicar via WhatsApp ou PS",
+      "fonte": "Regra de 2 saídas (SAMU/PS)"
+    },
+    {
+      "id": "IP-05",
+      "texto": "Jejum:",
+      "origem": "DECISAO_MEDICA",
+      "estado": "MANTIDO"
+    }
+  ],
+  "assinatura": {
+    "id": "assinatura",
+    "origem": "CONFIG",
+    "campos": [
+      "medico.nome",
+      "medico.crm",
+      "medico.rqe",
+      "local",
+      "data",
+      "assinatura_carimbo"
+    ]
+  },
+  "portas": {
+    "consome": [
+      "prescricao.vigente / proposta",
+      "1-exames/labs/labs-por-esquema",
+      "corpus/exames/exames-sigtap",
+      "datasFixas",
+      "rulesets/lab-thresholds"
+    ],
+    "oferece": [
+      "documento.requisicaoExames",
+      "exames.solicitados (dedupe-exame)"
+    ]
+  },
+  "pendencias": [
+    "3 × 4 ciclos.",
+    "Canal de envio de resultados (LGPD)."
+  ]
+}

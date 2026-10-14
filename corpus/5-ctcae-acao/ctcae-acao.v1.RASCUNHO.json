@@ -1,0 +1,315 @@
+{
+  "header": {
+    "id": "ctcae-acao",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "bulas citadas por célula (via docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.1, verificação Codex 11/10/2026); terms por registro do CSV CTCAE v6 local",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "nota": "Matriz classe × termo × grau → acao ∈ {MANTER, REDUZIR_20, REDUZIR_25, REDUZIR_30, ADIAR, SUSPENDER, SUSPENDER_DEFINITIVO, CONSULTA}. PROIBIDO preencher produto cartesiano com conduta inventada: sem fonte, acao=null com pendência. A ação é PROPOSTA na tela; o médico decide; CTCAE não libera ciclo nem calcula redução sozinho. Recorrência, duração, recuperação e intenção terapêutica alteram a conduta e estão modeladas onde a fonte permite.",
+  "acoesPossiveis": [
+    "MANTER",
+    "REDUZIR_20",
+    "REDUZIR_25",
+    "REDUZIR_30",
+    "ADIAR",
+    "SUSPENDER",
+    "SUSPENDER_DEFINITIVO",
+    "CONSULTA"
+  ],
+  "matriz": [
+    {
+      "classe": "fluoropirimidina",
+      "referenciaTermos": [
+        "CT-01 diarreia R4",
+        "CT-02 mucosite R6",
+        "CT-06 mão-pé R11",
+        "DPYD"
+      ],
+      "celulas": [
+        {
+          "termo": "DPYD deficiência completa",
+          "grau": "n/a",
+          "acao": "SUSPENDER_DEFINITIVO",
+          "suporteIds": [],
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "DailyMed Xeloda boxed warning, acesso 11/10/2026",
+            "trecho": "avoid use in patients with known complete DPD deficiency",
+            "edicao": "2026-10-11"
+          },
+          "nota": "Deficiência parcial: individualização, sem percentual inventado."
+        },
+        {
+          "termo": "síndrome mão-pé",
+          "grau": "3",
+          "acao": null,
+          "pendencia": "SEM_FONTE",
+          "suporteIds": [],
+          "nota": "Bula Xeloda §2.6 descreve interrupção/redução; extrair trecho com os percentuais exatos antes de propor."
+        },
+        {
+          "termo": "diarreia/mucosite grau 3",
+          "grau": "3",
+          "acao": null,
+          "pendencia": "SEM_FONTE",
+          "suporteIds": [],
+          "nota": "Conduta de redução por toxicidade deve vir da tabela da bula do produto usado."
+        }
+      ]
+    },
+    {
+      "classe": "antimetabólito (pemetrexede)",
+      "referenciaTermos": [
+        "CT-15 neutropenia R14",
+        "CT-14 creatinina R21"
+      ],
+      "celulas": [
+        {
+          "termo": "pré-ciclo: ANC <1500 ou PLQ <100.000",
+          "grau": "n/a",
+          "acao": "ADIAR",
+          "suporteIds": [],
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "DailyMed pemetrexede §§2.1–2.6, acesso 11/10/2026",
+            "trecho": "Do not initiate... ANC <1500/mm³",
+            "edicao": "2026-10-11"
+          },
+          "nota": "ClCr <45 mL/min: não administrar (ver contraindicação CI-02)."
+        },
+        {
+          "termo": "toxicidade hematológica grave não recuperada",
+          "grau": "3-4",
+          "acao": null,
+          "pendencia": "SEM_FONTE",
+          "suporteIds": [],
+          "nota": "Tabela de modificação de dose da bula (3,0 g/dia? não aplicável) — extrair percentuais literais."
+        }
+      ]
+    },
+    {
+      "classe": "antraciclina",
+      "referenciaTermos": [
+        "CI-05 hepático",
+        "CI-06/INAT-19 cardiotoxicidade"
+      ],
+      "celulas": [
+        {
+          "termo": "bilirrubina total 1,2–3 mg/dL",
+          "grau": "n/a",
+          "acao": "REDUZIR_50",
+          "suporteIds": [],
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "DailyMed doxorrubicina §2.2, acesso 11/10/2026",
+            "trecho": "1.2 - 3 mg/dL → 50%",
+            "edicao": "2026-10-11"
+          },
+          "nota": "REDUZIR_50 não está no enum: modelar como percentual administrado 50 (campo distinto do percentual reduzido). Ação exibida: 'administrar 50%'."
+        },
+        {
+          "termo": "bilirrubina total 3,1–5 mg/dL",
+          "grau": "n/a",
+          "acao": "REDUZIR_75_ADMINISTRAR_25",
+          "suporteIds": [],
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "idem",
+            "trecho": "3.1 - 5 mg/dL → 25%",
+            "edicao": "2026-10-11"
+          }
+        },
+        {
+          "termo": "bilirrubina >5 mg/dL ou Child-Pugh C",
+          "grau": "n/a",
+          "acao": "SUSPENDER",
+          "suporteIds": [],
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "idem",
+            "trecho": "Greater than 5 mg/dL → Do not initiate",
+            "edicao": "2026-10-11"
+          }
+        }
+      ]
+    },
+    {
+      "classe": "anti-HER2 (trastuzumabe)",
+      "referenciaTermos": [
+        "CI-06 FEVE"
+      ],
+      "celulas": [
+        {
+          "termo": "queda FEVE ≥16 pontos OU <LIN com queda ≥10 pontos",
+          "grau": "n/a",
+          "acao": "SUSPENDER",
+          "suporteIds": [],
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "Herceptin §2.5, acesso 11/10/2026",
+            "trecho": "at least 4 weeks",
+            "edicao": "2026-10-11"
+          },
+          "nota": "Retomar se FEVE normalizar e queda ≤15 pontos dentro da janela da bula; ESC 2022 (I-C): FEVE <40% assintomático = interrupção temporária."
+        },
+        {
+          "termo": "FEVE 40–49% assintomático",
+          "grau": "n/a",
+          "acao": "CONSULTA",
+          "suporteIds": [],
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "ESC 2022 tabela 25 (continuidade com vigilância, IIa-B)",
+            "trecho": "asymptomatic... may be considered",
+            "edicao": "2022"
+          },
+          "nota": "Bula e ESC seguem identificadas separadamente."
+        }
+      ]
+    },
+    {
+      "classe": "TKI (por molécula)",
+      "referenciaTermos": [
+        "CT-10 hipertensão R25",
+        "CT-09 rash R12",
+        "QTc R28"
+      ],
+      "celulas": [
+        {
+          "termo": "QTc >500 ms em ≥2 ECGs (osimertinibe)",
+          "grau": "n/a",
+          "acao": "SUSPENDER",
+          "suporteIds": [],
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "DailyMed Tagrisso §2.5, acesso 11/10/2026",
+            "trecho": "withhold",
+            "edicao": "2026-10-11"
+          },
+          "nota": "Retomar conforme bula após correção."
+        },
+        {
+          "termo": "QTcF <450 ms exigido para iniciar ribociclibe; >480/500 durante",
+          "grau": "n/a",
+          "acao": "CONSULTA",
+          "suporteIds": [],
+          "fonte": {
+            "tipo": "LITERATURA",
+            "referencia": "DailyMed Kisqali tabela 4 §§2.2/5.3",
+            "trecho": "QTcF <450 ms",
+            "edicao": "2026-10-11"
+          },
+          "nota": "Manejo por indicação e recorrência conforme tabela 4 da bula."
+        },
+        {
+          "termo": "hipertensão/rash por TKI",
+          "grau": "2-3",
+          "acao": null,
+          "pendencia": "SEM_FONTE",
+          "suporteIds": [],
+          "nota": "Tabelas de modificação por molécula (pazopanibe/sunitinibe) não extraídas nesta rodada."
+        }
+      ]
+    },
+    {
+      "classe": "imunoterapia (ICI)",
+      "referenciaTermos": [
+        "CT-16 colite R30",
+        "CT-17 pneumonite R29",
+        "CT-18 hipotireoidismo R31",
+        "R33 adrenal",
+        "R34 hipofisite"
+      ],
+      "celulas": [
+        {
+          "termo": "colite/pneumonite/endocrinopatia imune",
+          "grau": "2-4",
+          "acao": null,
+          "pendencia": "SEM_FONTE",
+          "suporteIds": [],
+          "nota": "Algoritmos por grau (hold × corticoide × descontinuação definitiva) das bulas Keytruda/Opdivo NÃO extraídos nesta rodada — prioridade da próxima; não inventar corte de grau."
+        }
+      ]
+    },
+    {
+      "classe": "taxano",
+      "referenciaTermos": [
+        "CT-05 neuropatia R10"
+      ],
+      "celulas": [
+        {
+          "termo": "neuropatia periférica sensitiva",
+          "grau": "2-3",
+          "acao": null,
+          "pendencia": "SEM_FONTE",
+          "suporteIds": [],
+          "nota": "Tabelas de modificação de docetaxel/paclitaxel não extraídas."
+        }
+      ]
+    },
+    {
+      "classe": "platina",
+      "referenciaTermos": [
+        "CT-14 creatinina R21"
+      ],
+      "celulas": [
+        {
+          "termo": "creatina aumentada / nefrotoxicidade",
+          "grau": "2-3",
+          "acao": null,
+          "pendencia": "SEM_FONTE",
+          "suporteIds": [],
+          "nota": "Condutas cisplatina (hidratação, adiamento) dependem de protocolo do serviço."
+        }
+      ]
+    },
+    {
+      "classe": "irinotecano",
+      "referenciaTermos": [
+        "CT-01 diarreia R4",
+        "CT-15 neutropenia R14"
+      ],
+      "celulas": [
+        {
+          "termo": "diarreia/neutropenia",
+          "grau": "3-4",
+          "acao": null,
+          "pendencia": "SEM_FONTE",
+          "suporteIds": [],
+          "nota": "Tabela de modificação da bula Camptosar não extraída nesta rodada."
+        }
+      ]
+    }
+  ],
+  "resumoCuradoria": {
+    "classesMinimas": 9,
+    "classesComCelulaFontada": 6,
+    "celulasComFonte": 9,
+    "celulasNulas": 7,
+    "suportesVinculados": 0,
+    "nota": "suporteIds (receita/orientação/exame/encaminhamento por id) ficam vazios até existirem os ids dos pilares 2/7/8 aprovados — vínculo é tarefa da integração, não da redação. Não há produto cartesiano preenchido por inferência."
+  },
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "LITERATURA",
+      "referencia": "bulas citadas por célula (via docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.1, verificação Codex 11/10/2026); terms por registro do CSV CTCAE v6 local",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  }
+}

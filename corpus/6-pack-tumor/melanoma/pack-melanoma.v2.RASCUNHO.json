@@ -1,0 +1,1764 @@
+{
+  "header": {
+    "id": "pack-melanoma",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "SBOC 2026 — Melanoma cutâneo v5",
+      "trecho": "apoiar as decisões clínicas no tratamento do melanoma cutâneo",
+      "edicao": "v5 2026"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Melanoma cutâneo",
+    "cid10": [
+      "C43",
+      "D03"
+    ],
+    "subtipos": [
+      "extensivo superficial",
+      "nodular",
+      "lentigo maligno",
+      "acral lentiginoso"
+    ],
+    "cenarios": [
+      "localizado_0_IIA",
+      "II_alto_risco_IIB_IIC",
+      "III_adjuvante",
+      "III_neoadjuvante",
+      "IV_ressecado",
+      "avancado_irressecavel_metastatico"
+    ],
+    "limitesAplicabilidade": "Não cobre melanoma de mucosa nem uveal. Subtipos histológicos listados sem fonte específica no pack."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "indicacao": "condicional",
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "quando": "IIB-IIC; III; IV",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "TC de tórax e abdome (incluir imagem da pelve ou do pescoço",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome",
+        "quando": "IIB-IIC; III; IV",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "TC de tórax e abdome (incluir imagem da pelve ou do pescoço",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve (conforme sítio primário)",
+        "quando": "III e IV; II alto risco conforme localização",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "TC de tórax e abdome superior e pelve (incluir imagem de pescoço a",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": "RM_CRANIO",
+        "rotulo": "RM de crânio com contraste",
+        "quando": "Considerar a partir de IIIB; obrigatória no IV",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "RM de crânio com contraste deve ser realizada;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT FDG",
+        "quando": "Alternativa às TCs no IIIC-IIID e no IV oligometastático; não rotineiro no III microscópico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Alternativa às tomografias é a realização do PET/CT,",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "indicacao": "condicional",
+        "catalogoId": null,
+        "rotulo": "USG da cadeia linfonodal de drenagem",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "quando": "Pode ser considerada nos estádios 0-II; seguimento de BLS positiva sem linfadenectomia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Avaliação de LFN de cadeia de drenagem através de USG pode ser",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "USG de cadeia linfonodal sem id no catálogo (USG_AXILAS cobre só axila).",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1"
+          ]
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "excisional",
+          "quando": "Abordagem inicial quando factível, incluindo subcutâneo; shaving superficial não recomendado",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 10,
+            "trecho": "A biópsia excisional, quando factível, é recomendada como abordagem inicial",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "core",
+          "quando": "LFN clinicamente acometido (core preferencial; PAAF ou excisional alternativas)",
+          "catalogoId": "BIOPSIA_GANGLIO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 11,
+            "trecho": "deve-se proceder a core biopsy, preferencialmente, ou biópsia por agulha fina",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "espessura de Breslow (mm)",
+        "ulceração",
+        "índice mitótico (/mm²)",
+        "nível de Clark",
+        "invasão angiolinfática",
+        "microssatelitose",
+        "margens (lateral e profunda)",
+        "LFN sentinela: número e tamanho do depósito (≥1 mm relevante no IIIA)"
+      ],
+      "molecular": [
+        {
+          "alvo": "BRAF V600 (E/K)",
+          "metodo": "PCR",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
+          "quandoPedir": "universal",
+          "cenario": "Estádio III e doença avançada/irressecável",
+          "consequencia": "Mutado: opção BRAF/MEK adjuvante (III) e na doença avançada; não muda a preferência por imunoterapia em 1ª linha",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 12,
+            "trecho": "todo paciente com melanoma estádio III deve ser submetido à investigação",
+            "estado": "VERIFICADO"
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
+        },
+        {
+          "alvo": "BRAF V600 (E/K)",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
+          "quandoPedir": "universal",
+          "cenario": "Doença avançada/irressecável (permite KIT, NRAS, NTRK no mesmo painel)",
+          "consequencia": "Idem; painel também detecta fusões NTRK (larotrectinibe)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 17,
+            "trecho": "Todos os pacientes com melanoma avançado/irressecável devem ser",
+            "estado": "VERIFICADO"
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
+        },
+        {
+          "alvo": "BRAF V600E",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "pendencia": "METODO_NAO_ESPECIFICADO_SBOC (IHQ VE1 detecta só V600E; V600K exige método molecular)",
+          "quandoPedir": "condicional",
+          "cenario": "Triagem rápida quando teste molecular indisponível",
+          "consequencia": "Negativo não exclui V600K",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 17,
+            "trecho": "Todos os pacientes com melanoma avançado/irressecável devem ser",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "KIT, NRAS, fusões NTRK",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
+          "quandoPedir": "condicional",
+          "cenario": "Estádio IV, quando disponível",
+          "consequencia": "NTRK: larotrectinibe; KIT/NRAS sem drogas aprovadas",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 8,
+            "trecho": "A pesquisa de mutações adicionais como KIT, NRAS e fusões de NTRK",
+            "estado": "VERIFICADO"
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 4,
+      "trecho": "Estadiamento (AJCC 8ª Edição)",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": null,
+        "rotulo": "Sem imagem de rotina (0, IA-IIA com BLS negativa)",
+        "cenario": "0-IIA",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Exames de imagem de rotina não são recomendados;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC tórax/abdome ± pelve/pescoço",
+        "cenario": "IIB-IV",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "TC de tórax e abdome (incluir imagem da pelve ou do pescoço",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_CRANIO",
+        "rotulo": "RM crânio",
+        "cenario": "IV (obrigatória); III a partir de IIIB (considerar)",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Considerar RM de crânio com contraste, sobretudo nos pacientes a partir",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "DHL",
+        "rotulo": "DHL",
+        "cenario": "IV (compõe a categoria M)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Exames laboratoriais, incluindo desidrogenase lática (DHL);",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "0, IA-IIA",
+        "conduta": "Ampliação de margens ± BLS; seguimento",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "A ampliação de margens da lesão primária varia conforme a profundidade",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IIB-IIC",
+        "conduta": "Adjuvância com anti-PD-1 por 12 meses (opção), estudo ou seguimento; BRAF/MEK não indicado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "não está indicado, até o momento, para pacientes com doença estadio II",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "III",
+        "conduta": "Neoadjuvância preferencial se LFN clínico; adjuvância anti-PD-1 ou BRAF/MEK (se BRAF) por 12 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "O tratamento neoadjuvante deve ser a opção preferencial para pacientes com",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IV ressecado sem doença",
+        "conduta": "Anti-PD-1 monoterapia por 12 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "candidatos ao uso de agentes anti-PD-1 em monoterapia por 12",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Irressecável/metastático",
+        "conduta": "Imunoterapia em 1ª linha independente de BRAF; BRAF/MEK se rápida progressão, alto volume, SNC sintomático ou corticoide",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "a imunoterapia constitui o tratamento de escolha em 1ª linha sempre que possível",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "DHL",
+          "uso": "Estadiamento M (M1a-d (0)/(1)) e prognóstico no estádio IV",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 8,
+            "trecho": "Exames laboratoriais, incluindo desidrogenase lática (DHL);",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "PET/CT no estádio III microscópico",
+        "imagem de rotina nos estádios 0-IIA"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "Primário: margens por Breslow",
+        "intencao": "curativa",
+        "modalidades": [
+          "in situ 0,5-1 cm",
+          "≤1 mm: 1 cm",
+          "1-2 mm: 1-2 cm",
+          ">2 mm: 2 cm"
+        ],
+        "criterio": "Índice de Breslow",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Breslow > 2 mm 2 cm",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Biópsia de LFN sentinela",
+        "intencao": "curativa",
+        "modalidades": [
+          "BLS"
+        ],
+        "criterio": "Sem LFN clínico e Breslow >0,8-1,0 mm, ou <0,8-1,0 com ulceração, ou margem profunda positiva",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Breslow >0,8-1,0 mm",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "BLS positiva",
+        "intencao": "curativa",
+        "modalidades": [
+          "USG seriada da base nodal sem linfadenectomia",
+          "linfadenectomia se sem acesso a seguimento ou múltiplos sentinelas"
+        ],
+        "criterio": "DeCOG e MSLT-II",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "acompanhamento seriado com USG da base nodal, sem realização de linfadenectomia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Adjuvante IIB/IIC, III, IV ressecado",
+        "intencao": "curativa",
+        "modalidades": [
+          "anti-PD-1 12 meses",
+          "dabrafenibe + trametinibe 12 meses (só III BRAF)",
+          "RT selecionada (III)"
+        ],
+        "criterio": "IIIA com depósito ≥1 mm",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "O tratamento adjuvante deve ser considerado em pacientes com melanoma",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Neoadjuvante (III com LFN clínico)",
+        "intencao": "curativa",
+        "modalidades": [
+          "ipilimumabe + nivolumabe 2 ciclos → cirurgia",
+          "pembrolizumabe 3 ciclos → cirurgia → 15 ciclos"
+        ],
+        "criterio": "Sem contraindicação à imunoterapia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "O tratamento neoadjuvante deve ser a opção preferencial para pacientes com",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Oligometastático",
+        "intencao": "paliativa",
+        "modalidades": [
+          "ressecção ou SBRT após resposta sistêmica"
+        ],
+        "criterio": "Discussão multidisciplinar",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Na doença oligometastática, discutir em time multidisciplinar possibilidade de",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "melanoma-adj-pembrolizumabe",
+        "nome": "Pembrolizumabe adjuvante",
+        "cenario": "adjuvante — IIB/IIC, III, IV ressecado",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou 400 mg a cada 6 semanas; por 12 meses"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+            "pagina": 29,
+            "trecho": "no SUS da alfainterferona para a quimioterapia adjuvante do melanoma cutâneo",
+            "estado": "INFERIDO"
+          },
+          "observacao": "DDT 2022: a única adjuvância incorporada é a alfainterferona (estádio III); anti-PD-1 e BRAF/MEK foram incorporados só para 1ª linha do melanoma avançado não cirúrgico/metastático (Portarias SCTIE 2020). Alternativa SUS: alfainterferona (III) ou seguimento."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Pembrolizumabe 200 mg/dose EV a cada 3 semanas ou 400 mg/dose",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Duração de 12 meses (número de ciclos não convertido)."
+      },
+      {
+        "id": "melanoma-adj-nivolumabe-480",
+        "nome": "Nivolumabe adjuvante (IIB/IIC)",
+        "cenario": "adjuvante — IIB/IIC",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Nivolumabe",
+            "dose": 480,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "por 12 meses"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+            "pagina": 29,
+            "trecho": "no SUS da alfainterferona para a quimioterapia adjuvante do melanoma cutâneo",
+            "estado": "INFERIDO"
+          },
+          "observacao": "DDT 2022: a única adjuvância incorporada é a alfainterferona (estádio III); anti-PD-1 e BRAF/MEK foram incorporados só para 1ª linha do melanoma avançado não cirúrgico/metastático (Portarias SCTIE 2020). Alternativa SUS: alfainterferona (III) ou seguimento."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Nivolumabe 480 mg EV a cada 4 semanas por 12 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "melanoma-adj-nivolumabe-iii",
+        "nome": "Nivolumabe adjuvante (III/IV ressecado)",
+        "cenario": "adjuvante — III e IV ressecado",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Nivolumabe",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativas: 3 mg/kg a cada 2 semanas ou 480 mg a cada 4 semanas; por 12 meses"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+            "pagina": 29,
+            "trecho": "no SUS da alfainterferona para a quimioterapia adjuvante do melanoma cutâneo",
+            "estado": "INFERIDO"
+          },
+          "observacao": "DDT 2022: a única adjuvância incorporada é a alfainterferona (estádio III); anti-PD-1 e BRAF/MEK foram incorporados só para 1ª linha do melanoma avançado não cirúrgico/metastático (Portarias SCTIE 2020). Alternativa SUS: alfainterferona (III) ou seguimento."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Nivolumabe 3 mg/kg EV a cada 2 semanas ou 240 mg/dose",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "melanoma-adj-dabrafenibe-trametinibe",
+        "nome": "Dabrafenibe + trametinibe adjuvante (BRAF V600)",
+        "cenario": "adjuvante — estádio III BRAF mutado",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Dabrafenibe",
+            "dose": 150,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 12/12h",
+            "observacao": "por 12 meses"
+          },
+          {
+            "droga": "Trametinibe",
+            "dose": 2,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "por 12 meses"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+            "pagina": 29,
+            "trecho": "no SUS da alfainterferona para a quimioterapia adjuvante do melanoma cutâneo",
+            "estado": "INFERIDO"
+          },
+          "observacao": "DDT 2022: a única adjuvância incorporada é a alfainterferona (estádio III); anti-PD-1 e BRAF/MEK foram incorporados só para 1ª linha do melanoma avançado não cirúrgico/metastático (Portarias SCTIE 2020). Alternativa SUS: alfainterferona (III) ou seguimento."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Dabrafenibe 150 mg VO 12/12h e Trametinibe 2 mg VO 1x/dia",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Não indicado no estádio II."
+      },
+      {
+        "id": "melanoma-neo-ipi-nivo",
+        "nome": "Ipilimumabe + nivolumabe neoadjuvante (NADINA)",
+        "cenario": "neoadjuvante — III com LFN clínico",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Ipilimumabe",
+            "dose": 80,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Nivolumabe",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 2,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+            "pagina": 30,
+            "trecho": "não incorporação do ipilimumabe para tratar pacientes com melanoma cutâneo metastático",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Ipilimumabe não incorporado (Relatório Conitec 391/2018). Alternativa SUS: anti-PD-1 em monoterapia."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "Ipilimumabe 80 mg + Nivolumabe 240 mg EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "observacao": "Seguido de cirurgia e adjuvância conforme resposta patológica."
+      },
+      {
+        "id": "melanoma-neo-pembrolizumabe",
+        "nome": "Pembrolizumabe neoadjuvante (SWOG S1801)",
+        "cenario": "neoadjuvante — III com LFN clínico",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "3 ciclos antes da cirurgia; depois 15 ciclos adjuvantes"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+            "pagina": 29,
+            "trecho": "no SUS da alfainterferona para a quimioterapia adjuvante do melanoma cutâneo",
+            "estado": "INFERIDO"
+          },
+          "observacao": "DDT 2022: a única adjuvância incorporada é a alfainterferona (estádio III); anti-PD-1 e BRAF/MEK foram incorporados só para 1ª linha do melanoma avançado não cirúrgico/metastático (Portarias SCTIE 2020). Alternativa SUS: alfainterferona (III) ou seguimento."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "Pembrolizumabe 200 mg EV a cada 3 semanas por 3 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "melanoma-av-ipi3-nivo1",
+        "nome": "Ipilimumabe 3 mg/kg + nivolumabe 1 mg/kg",
+        "cenario": "avançado/metastático",
+        "linha": "1ª linha (preferencial se SNC assintomático, DHL alto, alto volume)",
+        "drogas": [
+          {
+            "droga": "Ipilimumabe",
+            "dose": 3,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "4 ciclos"
+          },
+          {
+            "droga": "Nivolumabe",
+            "dose": 1,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "4 ciclos; depois nivolumabe 3 mg/kg a cada 2 semanas"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+            "pagina": 30,
+            "trecho": "não incorporação do ipilimumabe para tratar pacientes com melanoma cutâneo metastático",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Ipilimumabe não incorporado (Relatório Conitec 391/2018). Alternativa SUS: anti-PD-1 em monoterapia."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Ipilimumabe 3 mg/kg + Nivolumabe 1 mg/kg EV a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "melanoma-av-nivo-relatlimabe",
+        "nome": "Nivolumabe + relatlimabe",
+        "cenario": "avançado/metastático",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Nivolumabe",
+            "dose": 480,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Relatlimabe",
+            "dose": 160,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Sem portaria CONITEC de incorporação localizada para a droga nesta indicação; existe a APAC 0304020230 (SIGTAP 2026-09 pinado (corpus/f0c/sigtap/2026-09.json)), cujo valor não custeia droga de alto custo",
+            "trecho": "QUIMIOTERAPIA DO MELANOMA MALIGNO AVANÇADO",
+            "estado": "INFERIDO"
+          },
+          "observacao": "Interpretação da regra de incorporação, não decisão publicada; o serviço pode usar dentro do valor da APAC."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "nivolumabe 480 mg + Relatlimabe 160 mg EV a cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "melanoma-av-nivolumabe",
+        "nome": "Nivolumabe monoterapia",
+        "cenario": "avançado/metastático",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Nivolumabe",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativas: 3 mg/kg a cada 2 semanas ou 480 mg a cada 4 semanas"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+            "pagina": 30,
+            "trecho": "(nivolumabe ou pembrolizumabe) para tratamento de primeira linha do",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Classe anti-PD-1 incorporada para 1ª linha do melanoma avançado não cirúrgico e metastático (Portaria SCTIE/MS 23/2020; DDT 2022). Acesso local pode variar."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Nivolumabe 3 mg/kg EV a cada 2 semanas ou 240 mg EV",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "melanoma-av-pembrolizumabe",
+        "nome": "Pembrolizumabe monoterapia",
+        "cenario": "avançado/metastático",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "alternativas: 2 mg/kg a cada 3 semanas ou 400 mg a cada 6 semanas"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+            "pagina": 30,
+            "trecho": "(nivolumabe ou pembrolizumabe) para tratamento de primeira linha do",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Classe anti-PD-1 incorporada para 1ª linha do melanoma avançado não cirúrgico e metastático (Portaria SCTIE/MS 23/2020; DDT 2022). Acesso local pode variar."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Pembrolizumabe 2 mg/kg EV a cada 3 semanas ou 200 mg/dose EV",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "melanoma-av-dabrafenibe-trametinibe",
+        "nome": "Dabrafenibe + trametinibe (BRAF V600)",
+        "cenario": "avançado/metastático BRAF mutado",
+        "linha": "1ª linha (crise visceral, SNC sintomático, corticoide) ou após imunoterapia",
+        "drogas": [
+          {
+            "droga": "Dabrafenibe",
+            "dose": 150,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 12/12h",
+            "observacao": "contínuo até progressão (SBOC: continuamente); ciclo de 28 dias é convenção de registro"
+          },
+          {
+            "droga": "Trametinibe",
+            "dose": 2,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "contínuo até progressão (SBOC: continuamente); ciclo de 28 dias é convenção de registro"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+            "pagina": 30,
+            "trecho": "(nivolumabe ou pembrolizumabe) para tratamento de primeira linha do",
+            "estado": "INFERIDO"
+          },
+          "observacao": "DDT 2022: terapia-alvo (vemurafenibe, dabrafenibe, cobimetinibe, trametinibe) avaliada; incorporada apenas a classe anti-PD-1 (inferido)."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Dabrafenibe 150 mg VO 12/12h + Trametinibe 2 mg VO 1x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "melanoma-av-encorafenibe-binimetinibe",
+        "nome": "Encorafenibe + binimetinibe (BRAF V600)",
+        "cenario": "avançado/metastático BRAF mutado",
+        "linha": "1ª linha ou após imunoterapia",
+        "drogas": [
+          {
+            "droga": "Encorafenibe",
+            "dose": 450,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "contínuo até progressão (SBOC: continuamente); ciclo de 28 dias é convenção de registro"
+          },
+          {
+            "droga": "Binimetinibe",
+            "dose": 45,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 12/12h",
+            "observacao": "contínuo até progressão (SBOC: continuamente); ciclo de 28 dias é convenção de registro"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+            "pagina": 30,
+            "trecho": "(nivolumabe ou pembrolizumabe) para tratamento de primeira linha do",
+            "estado": "INFERIDO"
+          },
+          "observacao": "DDT 2022: terapia-alvo (vemurafenibe, dabrafenibe, cobimetinibe, trametinibe) avaliada; incorporada apenas a classe anti-PD-1 (inferido)."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Encorafenibe 450 mg VO 1x/dia + Binimetinibe 45 mg VO 12/12h,",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "melanoma-av-vemurafenibe-cobimetinibe",
+        "nome": "Vemurafenibe + cobimetinibe (BRAF V600)",
+        "cenario": "avançado/metastático BRAF mutado",
+        "linha": "1ª linha ou após imunoterapia",
+        "drogas": [
+          {
+            "droga": "Vemurafenibe",
+            "dose": 960,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 12/12h",
+            "observacao": "contínuo até progressão (SBOC: continuamente); ciclo de 28 dias é convenção de registro"
+          },
+          {
+            "droga": "Cobimetinibe",
+            "dose": 60,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D21, 1x/dia",
+            "observacao": "7 dias de pausa"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+            "pagina": 30,
+            "trecho": "(nivolumabe ou pembrolizumabe) para tratamento de primeira linha do",
+            "estado": "INFERIDO"
+          },
+          "observacao": "DDT 2022: terapia-alvo (vemurafenibe, dabrafenibe, cobimetinibe, trametinibe) avaliada; incorporada apenas a classe anti-PD-1 (inferido)."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Vemurafenibe 960 mg VO 12/12h, continuamente + Cobimetinibe 60 mg VO 1x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "melanoma-av-ipilimumabe",
+        "nome": "Ipilimumabe monoterapia",
+        "cenario": "avançado/metastático",
+        "linha": "2ª linha após anti-PD-1",
+        "drogas": [
+          {
+            "droga": "Ipilimumabe",
+            "dose": 3,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+            "pagina": 30,
+            "trecho": "não incorporação do ipilimumabe para tratar pacientes com melanoma cutâneo metastático",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Ipilimumabe não incorporado (Relatório Conitec 391/2018). Alternativa SUS: anti-PD-1 em monoterapia."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Ipilimumabe 3 mg/kg EV a cada 3 semanas por 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "melanoma-av-larotrectinibe",
+        "nome": "Larotrectinibe (fusão NTRK)",
+        "cenario": "avançado/metastático com fusão NTRK",
+        "linha": "qualquer linha",
+        "drogas": [
+          {
+            "droga": "Larotrectinibe",
+            "dose": 100,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 12/12h",
+            "observacao": "contínuo até progressão (SBOC: continuamente); ciclo de 28 dias é convenção de registro"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 72, de 06/12/2021 (DOU 07/12/2021, s.1, p.160) — cópia BVS SES-SP U_PT-MS-SCTIE-72_061221.pdf",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, o larotrectinibe",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Não incorporado para tumores sólidos NTRK em adultos (Portaria SCTIE/MS 72/2021); a reavaliação de 2025 tratou só da população pediátrica."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "larotrectinibe 100 mg 12/12h por via oral, continuamente.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "melanoma-av-dacarbazina",
+        "nome": "Dacarbazina",
+        "cenario": "avançado/metastático",
+        "linha": "indisponibilidade de imunoterapia/alvo ou progressão",
+        "drogas": [
+          {
+            "droga": "Dacarbazina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "via não escrita na linha da SBOC"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.023-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO MELANOMA MALIGNO (DOENÇA METASTÁTICA, RECIDIVADA OU LOCO-REGIONAL AVANÇADA)",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Dacarbazina 1.000 mg/m² a cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "fonteVia": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Dacarbazine for Injection (openFDA set_id 0d81315c-7021-4091-b703-ad135390c936, 2025-09-22)",
+          "pagina": null,
+          "trecho": "250 mg/square meter body surface/day I.V. for 5 days",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "melanoma-av-cvd",
+        "nome": "CVD (cisplatina + vinblastina + dacarbazina)",
+        "cenario": "avançado/metastático",
+        "linha": "indisponibilidade de imunoterapia/alvo ou progressão",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D4",
+            "observacao": ""
+          },
+          {
+            "droga": "Vinblastina",
+            "dose": 2,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D4",
+            "observacao": ""
+          },
+          {
+            "droga": "Dacarbazina",
+            "dose": 800,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.023-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO MELANOMA MALIGNO (DOENÇA METASTÁTICA, RECIDIVADA OU LOCO-REGIONAL AVANÇADA)",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Cisplatina 20 mg/m² no D1 a D4 + Vinblastina 2 mg/m² no D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "melanoma-av-carbo-paclitaxel",
+        "nome": "Carboplatina + paclitaxel",
+        "cenario": "avançado/metastático",
+        "linha": "indisponibilidade de imunoterapia/alvo ou progressão",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC: AUC 5-6"
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.023-0",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALIATIVA DO MELANOMA MALIGNO (DOENÇA METASTÁTICA, RECIDIVADA OU LOCO-REGIONAL AVANÇADA)",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Carboplatina AUC 5-6 + Paclitaxel 175 mg/m² EV D1 a cada 3",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "RT adjuvante após linfadenectomia (III selecionado)",
+        "doseTotalGy": 48,
+        "fracoes": 20,
+        "concomitante": "nenhuma",
+        "observacao": "Melhora controle local sem ganho de SLR/SG, com mais linfedema (SBOC p.15). Dose de referência do ensaio ANZMTG/TROG 02.01 (NCT00287196, COMPLETED), estado INFERIDO.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "RT para pacientes selecionados com base na localização, tamanho, número",
+          "estado": "VERIFICADO"
+        },
+        "fonteFracionamento": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov API v2 NCT00287196 (COMPLETED)",
+          "pagina": null,
+          "trecho": "48 Gy reference dose in 20 fractions at 5 fractions per week",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "cenario": "SBRT/RT em oligometástase ou SNC",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "sistêmico em curso",
+        "pendencia": "SEM_FONTE",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "Na doença oligometastática, discutir em time multidisciplinar possibilidade de",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "SBRT/RT em oligometástase ou SNC sem dose — aceno de RT.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "SBOC Melanoma p.16"
+          ]
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Ampliação de margens (in situ 0,5-1 cm; ≤1 mm 1 cm; 1-2 mm 1-2 cm; >2 mm 2 cm)",
+        "quando": "Todo primário ressecável",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Breslow > 2 mm 2 cm",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Biópsia de linfonodo sentinela",
+        "quando": "Breslow >0,8-1,0 mm ou <0,8 com ulceração, sem LFN clínico",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Breslow >0,8-1,0 mm",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Linfadenectomia terapêutica",
+        "quando": "Doença linfonodal clínica sem metástase à distância (considerar neoadjuvância)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "A linfadenectomia terapêutica deve ser considerada em pacientes com doença linfonodal clínica",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "BRAF V600 (estádio III)",
+        "opcao": "Dabrafenibe + trametinibe adjuvante 12 meses",
+        "evidencia": "COMBI-AD (SLR HR 0,52)",
+        "sus": "nao (DDT 2022: adjuvância incorporada só com alfainterferona)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Dabrafenibe 150 mg VO 12/12h e Trametinibe 2 mg VO 1x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "BRAF V600 (avançado)",
+        "opcao": "iBRAF + iMEK",
+        "evidencia": "DREAMseq favorece imunoterapia em 1ª linha",
+        "sus": "nao (inferido da DDT 2022)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 21,
+          "trecho": "superioridade para o braço de imunoterapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "Fusão NTRK",
+        "opcao": "Larotrectinibe",
+        "evidencia": "Raro",
+        "sus": "nao (Portaria SCTIE/MS 72/2021)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "larotrectinibe 100 mg 12/12h por via oral, continuamente.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": "Imunoterapia: mínima (sem fonte SBOC); CVD: SEM_FONTE",
+      "riscoNeutropeniaFebril": "SEM_FONTE",
+      "outros": [
+        "Manejo de eventos imunorrelacionados",
+        "Pirexia com BRAF/MEK"
+      ],
+      "fonte": null,
+      "pendencia": "SEM_FONTE",
+      "pendenciaClasse": {
+        "texto": "Emetogenicidade/NF por esquema via módulo de suporte (MASCC/ESMO 2023, PMC10937211).",
+        "classe": "DEPENDE_MOTOR_CODIGO",
+        "buscasFeitas": [
+          "SBOC Melanoma",
+          "MASCC/ESMO 2023"
+        ]
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "COMBI-AD",
+        "nct": "NCT01682083",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Estádio III BRAF V600 ressecado",
+        "bracos": "Dabrafenibe + trametinibe vs placebo 12 meses",
+        "desfecho": "SLR",
+        "resultado": "HR 0,52",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT01682083",
+          "pagina": null,
+          "trecho": "Dabrafenib With Trametinib in the Adjuvant Treatment of High-risk BRAF V600",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CheckMate 067",
+        "nct": "NCT01844505",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Melanoma avançado sem tratamento",
+        "bracos": "Nivo + ipi vs nivo vs ipi",
+        "desfecho": "SG/SLP",
+        "resultado": "SG mediana 71,9 vs 36,9 vs 19,9 m (10 anos)",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT01844505",
+          "pagina": null,
+          "trecho": "Nivolumab or Nivolumab Plus Ipilimumab Versus Ipilimumab Alone",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "NADINA",
+        "nct": "NCT04949113",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Estádio III macroscópico",
+        "bracos": "Ipi + nivo neoadjuvante vs nivo adjuvante",
+        "desfecho": "SLE",
+        "resultado": "HR 0,32",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT04949113",
+          "pagina": null,
+          "trecho": "Neoadjuvant Ipilimumab Plus Nivolumab Versus Standard Adjuvant Nivolumab",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "KEYNOTE-716",
+        "nct": "NCT03553836",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Estádio IIB/IIC ressecado",
+        "bracos": "Pembrolizumabe vs placebo",
+        "desfecho": "SLR",
+        "resultado": "HR 0,62",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03553836",
+          "pagina": null,
+          "trecho": "Pembrolizumab Compared to Placebo in Resected High-risk Stage II Melanoma",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "Indefinido",
+        "exames": [],
+        "periodicidade": "Dermatologista a cada 6-12 meses; autoexame de pele e LFN",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 21,
+          "trecho": "Acompanhamento dermatológico a cada 6 a 12 meses,",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Anos 1-2 e 3-5 (BLS positiva sem linfadenectomia ou BLS indicada não feita)",
+        "exames": [],
+        "periodicidade": "USG da cadeia nodal a cada 4 meses por 2 anos, depois a cada 6 meses até 5 anos",
+        "pendencia": "USG_LINFONODAL_SEM_ID_NO_CATALOGO",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 21,
+          "trecho": "Considerar ultrassonografia da cadeia nodal a cada 4 meses durante os",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "USG linfonodal de seguimento sem id no catálogo.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1"
+          ]
+        }
+      },
+      {
+        "periodo": "pT3b N0 ou maior",
+        "exames": [
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "PET_CT_FDG",
+          "RM_CRANIO"
+        ],
+        "periodicidade": "A cada 3-4 meses nos 2 primeiros anos, depois menos frequente",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 21,
+          "trecho": "Considerar exames de imagem (TC ou PET/CT e RM de crânio) para",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "BIOPSIA_GANGLIO",
+      "DHL",
+      "IMUNOHISTOQUIMICA",
+      "PET_CT_FDG",
+      "RM_CRANIO",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "TC_TORAX",
+      "MOLECULAR_PCR_MUTACAO",
+      "SEQUENCIAMENTO_AMPLICON"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "Dabrafenibe",
+        "com": "indutores/inibidores de CYP3A4 e CYP2C8",
+        "ref": null
+      },
+      {
+        "droga": "Vemurafenibe",
+        "com": "drogas que prolongam QT",
+        "ref": null
+      },
+      {
+        "droga": "Encorafenibe",
+        "com": "inibidores fortes de CYP3A4",
+        "ref": null
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "imunorrelacionados",
+        "termosCTCAEv6": [
+          "Colitis",
+          "Hepatitis",
+          "Pneumonitis",
+          "Hypophysitis",
+          "Hypothyroidism",
+          "Adrenal insufficiency"
+        ]
+      },
+      {
+        "classe": "BRAF/MEK",
+        "termosCTCAEv6": [
+          "Fever",
+          "Ejection fraction decreased",
+          "Retinopathy",
+          "Photosensitivity"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "corticoide para eventos imunorrelacionados graus 2+",
+      "antipirético/protocolo de pirexia com dabrafenibe",
+      "fotoproteção"
+    ],
+    "orientacoes": [
+      "autoexame de pele e cadeias linfonodais",
+      "fotoproteção e evitar UV artificial",
+      "sinais de alerta de eventos imunorrelacionados"
+    ],
+    "encaminhamentos": [
+      "cirurgia oncológica",
+      "dermatologia",
+      "radioterapia",
+      "oncogenética (história familiar de melanoma/pâncreas)"
+    ],
+    "laudos": [
+      "APAC de quimioterapia/imunoterapia (C43)",
+      "laudo anatomopatológico com Breslow, ulceração, mitoses"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "Melanoma estádio III ressecado (IIIA com depósito ≥1 mm)",
+        "y": "BRAF V600 mutado",
+        "z": "Dabrafenibe 150 mg 12/12h + trametinibe 2 mg/dia por 12 meses, ou anti-PD-1 12 meses; BRAF selvagem: anti-PD-1 12 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Dabrafenibe 150 mg VO 12/12h e Trametinibe 2 mg VO 1x/dia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Melanoma avançado/irressecável no SUS",
+        "y": "classe anti-PD-1 incorporada em 1ª linha (DDT 2022)",
+        "z": "Nivolumabe ou pembrolizumabe em monoterapia; ipilimumabe e BRAF/MEK não incorporados",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+          "pagina": 30,
+          "trecho": "(nivolumabe ou pembrolizumabe) para tratamento de primeira linha do",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Melanoma sem LFN clínico",
+        "y": "Breslow >0,8-1,0 mm (ou menor com ulceração)",
+        "z": "Biópsia de linfonodo sentinela; se positiva, USG seriada da base nodal sem linfadenectomia na maioria",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Breslow >0,8-1,0 mm",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Metástase cerebral sintomática ou em corticoide",
+        "y": "BRAF V600 mutado",
+        "z": "Considerar abordagem local (cirurgia/RT) ou iBRAF/MEK",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "ou com inibidores de BRAF/MEK, se pre-",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    {
+      "texto": "BRAF V600 mapeado para MOLECULAR_PCR_MUTACAO (alt. SEQUENCIAMENTO_AMPLICON), faturamento por indicação a confirmar. Método (PCR × NGS × IHQ VE1, que não detecta V600K) não definido pela SBOC — escolha com a patologia.",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC Melanoma 2026 p.12",
+        "DDT Melanoma 2022",
+        "catálogo v1.1"
+      ],
+      "resolucao": "BRAF por PCR ou NGS; não usar IHQ VE1 isolada (37A)."
+    },
+    {
+      "texto": "RT adjuvante preenchida (48 Gy/20 fr, ensaio, INFERIDO); SBRT segue sem dose — RT fora do escopo de oncologia clínica.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "SBOC",
+        "ClinicalTrials.gov NCT00287196"
+      ]
+    },
+    {
+      "texto": "Adjuvâncias são de 12 meses (SBOC); a conversão em número de ciclos depende do intervalo escolhido (14, 21 ou 28 dias) e deve ser calculada pelo motor a partir de 'duração 12 meses', não fixada à mão.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC Melanoma 2026"
+      ]
+    },
+    {
+      "texto": "USG de cadeia linfonodal de drenagem sem id no catálogo v1.1 (só USG_AXILAS). Inclusão depende de D-F1-02.",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "catálogo v1.1",
+        "SIGTAP 09/2026"
+      ],
+      "resolucao": "Incluir no catálogo (38A)."
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "Adjuvância nos estádios IIB/IIC — diretriz × SUS",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 12,
+        "trecho": "Pembrolizumabe 200 mg/dose EV a cada 3 semanas ou 400 mg/dose",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "NORMA",
+        "referencia": "DDT Melanoma Cutâneo (Conitec, versão pós-Conitec 16/05/2022; aprovada por Portaria Conjunta SAES/SCTIE nº 19/2022) — gov.br/conitec 20220516_ddt_melanoma_-pos-conitec.pdf",
+        "pagina": 29,
+        "trecho": "terapias adjuvantes ainda não são estabelecidas como de rotina",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Registrar como opção da diretriz não coberta pela DDT do SUS; decisão médica caso a caso",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Opção da diretriz fora da DDT/SUS, caso a caso (36A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (agente curador, rascunho)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Melanoma-cutaneo-v5-VERSAO-PARA-COLABORACAO.pdf",
+      "Onco PRO 2026/slides-pro-2026/72 - Aula 72 - Melanoma - Visão Geral e Manejo da Doença Localizada",
+      "Onco PRO 2026/slides-pro-2026/73 - Aula 73 - Melanoma - Doença Avançada",
+      "DDT Melanoma Cutâneo Conitec 2022 (PDF lido)",
+      "ClinicalTrials.gov API v2",
+      "SIGTAP competência 09/2026",
+      "Portaria SCTIE/MS 72/2021",
+      "Bula FDA Dacarbazine (openFDA)",
+      "ClinicalTrials.gov API v2 NCT00287196",
+      "Painel de Demandas Conitec 15/06/2026"
+    ],
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-11",
+        "redator": "Claude (agente curador)",
+        "resolvidas": 2,
+        "classificadas": 4,
+        "susPreenchidos": 9,
+        "notas": [
+          "Relatlimabe sem demanda na Conitec (classificado no próprio protocolo)."
+        ]
+      }
+    ]
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "3 vínculos rebaixados a catalogoIdCandidato"
+    }
+  ]
+}

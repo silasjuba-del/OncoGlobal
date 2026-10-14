@@ -1,0 +1,2047 @@
+{
+  "header": {
+    "id": "pack-colo-utero",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Colo do útero v4 (versão para colaboração)",
+      "trecho": "RT + Cisplatina 40 mg/m² EV semanalmente durante a RT, seguido de bra",
+      "edicao": "SBOC 2026 v4"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Câncer do colo do útero",
+    "cid10": [
+      "C53"
+    ],
+    "subtipos": [
+      "Carcinoma escamoso",
+      "Adenocarcinoma",
+      "Carcinoma adenoescamoso"
+    ],
+    "cenarios": [
+      "inicial_IA-IB1",
+      "localmente_avancado_IB2-IVA",
+      "recorrencia_local",
+      "metastatico_IVB_recorrente"
+    ],
+    "limitesAplicabilidade": "Estadiamento FIGO 2018/AJCC conforme SBOC 2026. Não cobre neuroendócrino de pequenas células, sarcomas, gestação (aula PRO 26) nem rastreamento/vacinação além do resumo. A SBOC 2026 v4 é versão para colaboração. Pack propõe; médico decide."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM de pelve",
+        "indicacao": "universal",
+        "quando": "Tamanho tumoral, paramétrio, estruturas adjacentes e linfonodos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "RM da pelve para avaliar o tamanho do tumor e sua relação com",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT-FDG",
+        "indicacao": "condicional",
+        "quando": "Se disponível, lesões ≥ IB1; exame de escolha para metástase linfonodal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "O PET/CT é o exame de escolha para a detecção de metástases",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [
+      {
+        "catalogoId": "CISTOSCOPIA",
+        "rotulo": "Cistoscopia",
+        "indicacao": "condicional",
+        "quando": "Suspeita de invasão vesical",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "Cistoscopia se suspeita de invasão de bexiga.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RETOSSIGMOIDOSCOPIA",
+        "rotulo": "Retossigmoidoscopia",
+        "indicacao": "condicional",
+        "quando": "Suspeita de invasão retal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "Retossigmoidoscopia se suspeita de invasão de reto.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "outra",
+          "quando": "Biópsia dirigida (colposcopia) ou conização para IA",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 9,
+            "trecho": "Colposcopia com biópsia (e tratamento de",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "outra",
+          "quando": "Recorrência antes de cirurgia de resgate: confirmar por biópsia",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 24,
+            "trecho": "Neste caso a recorrência deve ser confirmada por",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "Tipo histológico (escamoso, adenocarcinoma, adenoescamoso)",
+        "Profundidade de invasão estromal (mm) e terço (superficial/médio/profundo)",
+        "Maior dimensão tumoral",
+        "Invasão linfovascular",
+        "Margens (cone/traquelectomia/histerectomia)",
+        "Invasão parametrial",
+        "Linfonodos (pélvicos/para-aórticos; micro/macrometástase)"
+      ],
+      "molecular": [
+        {
+          "alvo": "PD-L1 (CPS)",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "Doença IVB, persistente ou recorrente — 1ª linha",
+          "consequencia": "CPS ≥1: pembrolizumabe + platina/paclitaxel ± bevacizumabe; CPS <1: platina/paclitaxel ± bevacizumabe",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 27,
+            "trecho": "CPS ≥ 1",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "HER2",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "2ª linha metastática",
+          "consequencia": "HER2 IHQ 3+ (metodologia gástrica): trastuzumabe deruxtecana 5,4 mg/kg",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+            "pagina": 28,
+            "trecho": "(HER2 IHQ 3+ metodologia padrão gástrico)",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "FIGO",
+    "edicao": "FIGO 2018 / TNM (tabelas SBOC 2026 v4)",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+      "pagina": 12,
+      "trecho": "Estadiamento FIGO/TNM21,22",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM de pelve",
+        "cenario": "Todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "RM da pelve para avaliar o tamanho do tumor e sua relação com",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_ABDOMEN_SUPERIOR",
+        "rotulo": "RM ou TC de abdome",
+        "cenario": "A partir de IB (ureteres, LFN retroperitoneais)",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "RM ou TC de abdome para avaliar ureteres, LFN pélvicos e retroperitoneais",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome (alternativa à RM)",
+        "cenario": "A partir de IB",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "RM ou TC de abdome para avaliar ureteres, LFN pélvicos e retroperitoneais",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RX_TORAX_PA_PERFIL",
+        "rotulo": "RX de tórax",
+        "cenario": "Todos (ou TC)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "RX ou TC de tórax.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "cenario": "Alternativa ao RX",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "RX ou TC de tórax.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET/CT-FDG",
+        "cenario": "≥ IB1, se disponível",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "Se disponível, indicado para lesões ≥ Ib1.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma",
+        "cenario": "Todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "Hemograma;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGO",
+        "rotulo": "Função hepática",
+        "cenario": "Todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "Função hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "rotulo": "Função hepática",
+        "cenario": "Todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "Função hepática;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Função renal",
+        "cenario": "Todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "Função renal;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "HIV",
+        "rotulo": "Sorologia HIV",
+        "cenario": "Todos",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 15,
+          "trecho": "Sorologia HIV.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "IA1",
+        "conduta": "Conização (fertilidade) ou histerectomia simples; linfadenectomia/LFN sentinela se invasão vascular",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 16,
+          "trecho": "Estádio IA1 NE MODERADO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IA2",
+        "conduta": "Traquelectomia + linfadenectomia (fertilidade) ou histerectomia radical modificada se invasão vascular",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 16,
+          "trecho": "Traquelectomia + linfadenectomia pélvica NE MODERADO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IB1",
+        "conduta": "Histerectomia radical + linfadenectomia pélvica (LFN sentinela); adjuvância por Sedlis/alto risco",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 18,
+          "trecho": "Histerectomia radical + linfadenectomia pélvica bilateral (considerar pesquisa de",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IB2-IIA",
+        "conduta": "Histerectomia + linfadenectomia ou RT + cisplatina semanal + braquiterapia; considerar indução carboplatina/paclitaxel (IB3+)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 20,
+          "trecho": "Histerectomia total + linfadenectomia pélvica NE AL TO/FR FORTE ou",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IIB-IVA",
+        "conduta": "RT + cisplatina semanal + braquiterapia; considerar indução (INTERLACE) ou pembrolizumabe (preferencial FIGO III-IV, KEYNOTE-A18)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 21,
+          "trecho": "RT + Cisplatina 40 mg/m² EV semanalmente durante a RT, seguido de bra",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "IVB / recorrente à distância",
+        "conduta": "QT paliativa ± imunoterapia ± bevacizumabe conforme PD-L1",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 25,
+          "trecho": "Tratamento paliativo 1ª linha",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [],
+      "naoPedirDeRotina": [
+        "Marcadores séricos (SCC, CEA, CA-125) não constam no estadiamento SBOC 2026",
+        "p16/HPV: sem trecho na SBOC 2026 v4; não usar para estadiamento"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "IA-IB1 operável",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia (conização/traquelectomia/histerectomia)",
+          "avaliação linfonodal",
+          "adjuvância conforme risco"
+        ],
+        "criterio": "Fertilidade, invasão vascular, margens",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 18,
+          "trecho": "Até estádio IB1 é possível propor histerectomia simples + linfadenectomia pél",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Pós-operatório risco intermediário (Sedlis)",
+        "intencao": "curativa",
+        "modalidades": [
+          "RT adjuvante ± braquiterapia",
+          "± cisplatina se adenocarcinoma/adenoescamoso"
+        ],
+        "criterio": "Critérios de Sedlis sem alto risco",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 18,
+          "trecho": "Considerar RT adjuvante ± braquiterapia (IMRT, se disponível)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Pós-operatório alto risco",
+        "intencao": "curativa",
+        "modalidades": [
+          "RT + cisplatina 40 mg/m² semanal"
+        ],
+        "criterio": "LFN pélvico positivo (inclui N1mi), margem positiva ou paramétrio",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 20,
+          "trecho": "RT + Cisplatina 40 mg/m² EV semanalmente durante a RT NE AL TO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Localmente avançado IB2-IVA (definitivo)",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT-RT com cisplatina semanal",
+          "braquiterapia",
+          "indução carboplatina + paclitaxel",
+          "pembrolizumabe (preferencial FIGO III-IV)"
+        ],
+        "criterio": "Sem QT adjuvante após QT-RT curativa (OUTBACK negativo)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 22,
+          "trecho": "não recomendamos tratamento sistêmico após QT+RT curativa",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "Recorrência local",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT-RT se não irradiada",
+          "histerectomia/exenteração se RT prévia",
+          "QT paliativa ± imunoterapia se inoperável"
+        ],
+        "criterio": "RT prévia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 24,
+          "trecho": "Considerar QT + RT em pacientes sem tratamento prévio com RT",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "IVB / persistente / recorrente — 1ª linha",
+        "intencao": "paliativa",
+        "modalidades": [
+          "platina + paclitaxel ± pembrolizumabe ± bevacizumabe"
+        ],
+        "criterio": "PD-L1 CPS ≥1 ou <1",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 25,
+          "trecho": "Keynote-826 (preferencial)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "IVB / recorrente — 2ª linha",
+        "intencao": "paliativa",
+        "modalidades": [
+          "cemiplimabe",
+          "T-DXd se HER2 3+",
+          "monoterapias"
+        ],
+        "criterio": "Imunoterapia prévia; ECOG 0-1",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 28,
+          "trecho": "Tratamento paliativo 2ª linha",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal, magnésio e audiometria se sintomas; hidratação conforme ficha do serviço. Número de doses = semanas de RT externa (não especificado na SBOC).",
+        "fichaId": "FICHA.colo-do-utero.cisplatina-semanal-rxt__concomitante-a-rt@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040045",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DO COLO UTERINO"
+            }
+          ],
+          "observacao": "Único procedimento colo-específico fora da doença avançada (subgrupo 03.04.04); aplicado à QT concomitante por compatibilidade de CID (C53x). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040045 QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DO COLO UTERINO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DO COLO UTERINO",
+            "estado": "INFERIDO"
+          }
+        },
+        "id": "colo-cisplatina-semanal-qtrt-definitiva",
+        "nome": "Cisplatina semanal concomitante à RT — definitivo",
+        "cenario": "QT-RT definitiva IB2-IVA (seguida de braquiterapia)",
+        "linha": "definitivo",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal durante a RT",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 21,
+          "trecho": "RT + Cisplatina 40 mg/m² EV semanalmente durante a RT, seguido de bra",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal, magnésio e audiometria se sintomas; hidratação conforme ficha do serviço.",
+        "fichaId": "FICHA.colo-do-utero.cisplatina-semanal-rxt__concomitante-a-rt@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040045",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DO COLO UTERINO"
+            }
+          ],
+          "observacao": "Único procedimento colo-específico fora da doença avançada (subgrupo 03.04.04); aplicado à QT concomitante por compatibilidade de CID (C53x). Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040045 QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DO COLO UTERINO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DO COLO UTERINO",
+            "estado": "INFERIDO"
+          }
+        },
+        "id": "colo-cisplatina-semanal-qtrt-adjuvante",
+        "nome": "Cisplatina semanal concomitante à RT — adjuvante alto risco",
+        "cenario": "Pós-histerectomia radical com LFN+, margem+ ou paramétrio+",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal durante a RT",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 20,
+          "trecho": "RT + Cisplatina 40 mg/m² EV semanalmente durante a RT NE AL TO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Hemograma semanal (toxicidade hematológica maior). Seguir com QT-RT com cisplatina e braquiterapia.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040045",
+              "nome": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DO COLO UTERINO"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040045 QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DO COLO UTERINO. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO CARCINOMA EPIDERMÓIDE / ADENOCARCINOMA DO COLO UTERINO",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "colo-carbo-paclitaxel-inducao-interlace",
+        "nome": "Indução carboplatina AUC2 + paclitaxel semanal (INTERLACE) → QT-RT",
+        "cenario": "Localmente avançado (FIGO 2008 IB2-IVA no estudo) antes da QT-RT; não se aplica a IVB",
+        "linha": "indução (neoadjuvante à QT-RT)",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 2,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": ""
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 80,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 21,
+          "trecho": "Considerar QT de indução com Carboplatina AUC 2 + Paclitaxel 80 mg/m²",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 5,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal, magnésio e audiometria se sintomas; hidratação conforme ficha do serviço. TSH/T4L e função hepática (irAE).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC — Relatório preliminar CP 37/2026 (pembrolizumabe CCU PD-L1 ≥1); sem decisão final localizada",
+            "pagina": null,
+            "trecho": "recomendou inicialmente a não incorporação do pembrolizumabe no SUS",
+            "estado": "INFERIDO"
+          }
+        },
+        "id": "colo-pembrolizumabe-qtrt-keynote-a18",
+        "nome": "Pembrolizumabe + QT-RT com cisplatina (KEYNOTE-A18)",
+        "cenario": "Localmente avançado IIB-IVA (preferencial FIGO III-IV)",
+        "linha": "definitivo",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal durante a RT",
+            "observacao": ""
+          },
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 a cada 3 semanas",
+            "observacao": "5 ciclos"
+          },
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 400,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 a cada 6 semanas",
+            "observacao": "15 ciclos após a fase de 200 mg"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 21,
+          "trecho": "Considerar associação de Pembrolizumabe 200 mg EV D1 a cada 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal, magnésio e audiometria se sintomas; hidratação conforme ficha do serviço. Bevacizumabe contraindicado com fístula, obstrução/perfuração intestinal ou cirurgia <4 semanas; PA e proteinúria.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC — Relatório preliminar CP 37/2026 (pembrolizumabe CCU PD-L1 ≥1); sem decisão final localizada",
+            "pagina": null,
+            "trecho": "recomendou inicialmente a não incorporação do pembrolizumabe no SUS",
+            "estado": "INFERIDO"
+          }
+        },
+        "id": "colo-keynote826-cis-pacli-pembro",
+        "nome": "Cisplatina + paclitaxel + pembrolizumabe ± bevacizumabe (KEYNOTE-826)",
+        "cenario": "IVB/persistente/recorrente 1ª linha, PD-L1 CPS ≥1 (preferencial)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "ou carboplatina AUC 5; 6 ciclos"
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "6 ciclos"
+          },
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "até 35 ciclos"
+          },
+          {
+            "droga": "Bevacizumabe",
+            "dose": 15,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "opcional, até progressão"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 25,
+          "trecho": "Bevacizumabe 15 mg/",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal, magnésio e audiometria se sintomas; hidratação conforme ficha do serviço. Contraindicações ao bevacizumabe: fístula, obstrução/perfuração, cirurgia <4 semanas.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC — recomendação de não incorporação do bevacizumabe no CCU persistente/recorrente/metastático (citada em pareceres TJRJ/TRF2 2024-2025; relatório não lido no original)",
+            "pagina": null,
+            "trecho": "decidiu pela recomendação de não incorporação",
+            "estado": "INFERIDO"
+          }
+        },
+        "id": "colo-cis-pacli-bev",
+        "nome": "Cisplatina + paclitaxel ± bevacizumabe",
+        "cenario": "IVB/persistente/recorrente 1ª linha (CPS ≥1 sem pembrolizumabe, ou CPS <1)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Bevacizumabe",
+            "dose": 15,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "se disponível"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 25,
+          "trecho": "Cisplatina 50 mg/m² + Paclitaxel 175 mg/m² EV D1 a cada 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC — recomendação de não incorporação do bevacizumabe no CCU persistente/recorrente/metastático (citada em pareceres TJRJ/TRF2 2024-2025; relatório não lido no original)",
+            "pagina": null,
+            "trecho": "decidiu pela recomendação de não incorporação",
+            "estado": "INFERIDO"
+          }
+        },
+        "id": "colo-carbo-pacli-bev",
+        "nome": "Carboplatina + paclitaxel ± bevacizumabe",
+        "cenario": "IVB/recorrente 1ª linha (preferir se cisplatina prévia)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Bevacizumabe",
+            "dose": 15,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "se disponível"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 25,
+          "trecho": "Carboplatina AUC 5 + Paclitaxel 175 mg/m² EV D1 a cada 3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal, magnésio e audiometria se sintomas; hidratação conforme ficha do serviço.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "colo-cis-vinorelbina",
+        "nome": "Cisplatina + vinorelbina",
+        "cenario": "IVB/recorrente 1ª linha (alternativa por toxicidade/comorbidade)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Vinorelbina",
+            "dose": 30,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 25,
+          "trecho": "Cisplatina 50 mg/m² D1 + Vinorelbine 30 mg/m² nos D1 e D8 EV a",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal, magnésio e audiometria se sintomas; hidratação conforme ficha do serviço.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "colo-cis-gemcitabina",
+        "nome": "Cisplatina + gemcitabina",
+        "cenario": "IVB/recorrente 1ª linha (alternativa)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Gemcitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 25,
+          "trecho": "Cisplatina 50 mg/m² D1 + Gemcitabina 1.000 mg/m² D1 e D8 EV a",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Função renal, magnésio e audiometria se sintomas; hidratação conforme ficha do serviço.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "colo-cis-topotecano",
+        "nome": "Cisplatina + topotecano",
+        "cenario": "IVB/recorrente 1ª linha (alternativa)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Topotecano",
+            "dose": 0.75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D3",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 25,
+          "trecho": "Cisplatina 50 mg/m² D1 + Topotecano 0,75 mg/m² D1 a D3 EV a",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC — recomendação de não incorporação do bevacizumabe no CCU persistente/recorrente/metastático (citada em pareceres TJRJ/TRF2 2024-2025; relatório não lido no original)",
+            "pagina": null,
+            "trecho": "decidiu pela recomendação de não incorporação",
+            "estado": "INFERIDO"
+          }
+        },
+        "id": "colo-topotecano-pacli-bev",
+        "nome": "Topotecano + paclitaxel + bevacizumabe",
+        "cenario": "IVB/recorrente 1ª linha quando platina impossível",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Topotecano",
+            "dose": 0.75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D3",
+            "observacao": ""
+          },
+          {
+            "droga": "Paclitaxel",
+            "dose": 175,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Bevacizumabe",
+            "dose": 15,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 25,
+          "trecho": "Topotecano 0,75 mg/m² D1 a D3 + Paclitaxel 175 mg/m² D1 +",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "TSH/T4L, função hepática (irAE).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de cemiplimabe nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020184 — decisão do serviço. Alternativa SUS: QT de 2ª linha (pemetrexede, vinorelbina, topotecano etc.).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para cemiplimabe nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "id": "colo-cemiplimabe-2l",
+        "nome": "Cemiplimabe — 2ª linha",
+        "cenario": "Recorrente/metastático sem imunoterapia prévia",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Cemiplimabe",
+            "dose": 350,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "até 96 semanas"
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 28,
+          "trecho": "Cemiplimabe 350 mg EV D1 a cada 3 semanas por até 96",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Vigiar pneumonite/DPI; FEVE basal.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de trastuzumabe deruxtecana (colo HER2 3+) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020184 — decisão do serviço.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para trastuzumabe deruxtecana (colo HER2 3+) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "id": "colo-tdxd-her2-2l",
+        "nome": "Trastuzumabe deruxtecana — HER2 IHQ 3+",
+        "cenario": "Recorrente/metastático HER2 3+ (com ou sem imunoterapia prévia)",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Trastuzumabe deruxtecana",
+            "dose": 5.4,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 28,
+          "trecho": "Trastuzumabe deruxtecana 5,4 mg/kg EV D1 a cada 3 semanas (HER2",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pré-medicação com ácido fólico e B12 conforme bula (não descrita na SBOC).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "colo-pemetrexede-2l",
+        "nome": "Pemetrexede — 2ª linha",
+        "cenario": "Pós-imunoterapia",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Pemetrexede",
+            "dose": 900,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 28,
+          "trecho": "Pemetrexede 900 mg/m² EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "colo-vinorelbina-2l",
+        "nome": "Vinorelbina — 2ª linha",
+        "cenario": "Pós-imunoterapia",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Vinorelbina",
+            "dose": 30,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 28,
+          "trecho": "Vinorelbine 30 mg/m² EV D1 e D8 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Mesna obrigatória (dose não especificada na SBOC; ver ficha do serviço/bula). Ver conflito de intervalo com a ficha.",
+        "fichaId": "FICHA.colo-do-utero.ifosfamida-mesna__paliativo-metastatico@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "colo-ifosfamida-2l",
+        "nome": "Ifosfamida — 2ª linha",
+        "cenario": "Pós-imunoterapia",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Ifosfamida",
+            "dose": 1200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": "SBOC grafa 1,2 g/m2"
+          },
+          {
+            "droga": "Mesna",
+            "dose": 240,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 a D5, em bolus na hora 0, 4 h e 8 h de cada dose de ifosfamida",
+            "observacao": "Regra da bula: 20% da dose de ifosfamida (p/p) por bolus, 60%/dia; com ifosfamida 1.200 mg/m² = 240 mg/m² ×3/dia. Fonte: https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22MESNEX%22&limit=1 (set_id 1dd69e84-616d-fb77-e063-6394a90af2f4) — \"dosage equal to 20% of the ifosfamide dosage weight by weight (w/w)\" (dose derivada aritmeticamente da regra da bula).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22MESNEX%22&limit=1 (set_id 1dd69e84-616d-fb77-e063-6394a90af2f4)",
+              "pagina": null,
+              "trecho": "dosage equal to 20% of the ifosfamide dosage weight by weight (w/w)",
+              "estado": "INFERIDO"
+            }
+          }
+        ],
+        "cicloDias": 28,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 28,
+          "trecho": "Ifosfamida 1,2 g/m² EV D1 a D5 a cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "colo-topotecano-2l",
+        "nome": "Topotecano D1-D5 — 2ª linha",
+        "cenario": "Pós-imunoterapia",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Topotecano",
+            "dose": 1.5,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 28,
+          "trecho": "Topotecano 1,5 mg/m² EV D1 a D5 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "colo-irinotecano-2l",
+        "nome": "Irinotecano semanal — 2ª linha",
+        "cenario": "Pós-imunoterapia",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Irinotecano",
+            "dose": 125,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15 e D22",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 42,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 28,
+          "trecho": "Irinotecano 125 mg/m² EV D1, D8, D15 e D22 a cada 6 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020184",
+              "nome": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA."
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020184 QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E VAGINA.. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DA NEOPLASIA MALIGNA AVANÇADA DO COLO OU DO CORPO UTERINO AVANÇADO, VULVA E",
+            "estado": "VERIFICADO"
+          }
+        },
+        "id": "colo-docetaxel-2l",
+        "nome": "Docetaxel — 2ª linha",
+        "cenario": "Pós-imunoterapia",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 28,
+          "trecho": "Docetaxel 100 mg/m² EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "Braquiterapia após RT externa + cisplatina (IB2-IIA)",
+        "doseTotalGy": 80,
+        "fracoes": null,
+        "concomitante": "cisplatina semanal (com a RT externa)",
+        "observacao": "SBOC: dose total no ponto A 80-85 Gy; fracionamento não especificado.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 20,
+          "trecho": "quiterapia (dose total no ponto A: 80-85 Gy)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "RT externa pélvica definitiva/adjuvante",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "cisplatina 40 mg/m² semanal",
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ]
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 21,
+          "trecho": "Estender o campo da RT em caso de comprovação de envolvimento de",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "RT para-aórtica (LFN para-aórtico comprovado ou alto risco, p.ex. ilíaca comum)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "concomitante": "cisplatina semanal",
+        "pendencia": {
+          "texto": "SEM_FONTE",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+          ]
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 21,
+          "trecho": "Considerar a RT profilática para-aórtica em caso de grande probabili",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Conização / traquelectomia (preservação de fertilidade)",
+        "quando": "IA1-IA2; IB1 ≤2 cm sem LFN",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 18,
+          "trecho": "Considerar traquelectomia radical + linfadenectomia pélvica (considerar",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Histerectomia radical + linfadenectomia pélvica bilateral (LFN sentinela)",
+        "quando": "IB1-IIA",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 18,
+          "trecho": "Histerectomia radical + linfadenectomia pélvica bilateral (considerar pesquisa de",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Histerectomia ou exenteração pélvica",
+        "quando": "Recorrência local após RT, doença sistêmica excluída",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 24,
+          "trecho": "Considerar cirurgia (histerectomia ou exenteração pélvica) em pacientes com",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "PD-L1 CPS ≥1 (1ª linha metastática)",
+        "opcao": "Pembrolizumabe + platina/paclitaxel ± bevacizumabe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "nao — CP SCTIE/MS nº 37/2026 com recomendação preliminar desfavorável; sem portaria de decisão até 11/10/2026; alternativa SUS: cisplatina + paclitaxel (APAC 0304020184)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 25,
+          "trecho": "Keynote-826 (preferencial)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "HER2 IHQ 3+",
+        "opcao": "Trastuzumabe deruxtecana 5,4 mg/kg q3s",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "nao — T-DXd sem avaliação CONITEC (INFERIDO)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 28,
+          "trecho": "Trastuzumabe deruxtecana 5,4 mg/kg EV D1 a cada 3 semanas (HER2",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "Sem imunoterapia prévia (2ª linha)",
+        "opcao": "Cemiplimabe; pembrolizumabe se CPS ≥1 (sem aprovação Anvisa nesta indicação)",
+        "evidencia": "NE alto/FR forte (cemiplimabe)",
+        "sus": "nao — cemiplimabe sem avaliação CONITEC (INFERIDO); alternativa SUS: QT de 2ª linha (APAC 0304020184)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 28,
+          "trecho": "sem aprovação da Anvisa nesta indicação",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": "Cisplatina: alto risco emetogênico (classificação não consta na SBOC colo; seguir receita do serviço)",
+      "riscoNeutropeniaFebril": "Maior toxicidade hematológica com indução carboplatina/paclitaxel semanal (INTERLACE)",
+      "outros": [
+        "Hidratação e magnésio com cisplatina",
+        "Bevacizumabe: checar fístula/obstrução/perfuração e cirurgia recente"
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+        "pagina": 21,
+        "trecho": "as custas de maior toxicidade, especialmente hematológica",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "INTERLACE",
+        "nct": "NCT01566240",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Localmente avançado FIGO 2008 IB2-IVA (não inclui IVB)",
+        "bracos": "Carboplatina + paclitaxel semanal de indução → QT-RT vs QT-RT",
+        "desfecho": "SLP; SG",
+        "resultado": "SLP HR 0,65; SG HR 0,60 (67 meses)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 21,
+          "trecho": "500 pacientes estádio [FIGO 2008] IB2 a IVa para serem randomizadas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "KEYNOTE-A18",
+        "nct": "NCT04221945",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Localmente avançado de alto risco",
+        "bracos": "Pembrolizumabe + QT-RT → pembrolizumabe vs placebo",
+        "desfecho": "SLP; SG",
+        "resultado": "SLP HR 0,70; SG imatura na versão SBOC",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 21,
+          "trecho": "maior SLP (HR 0,70; IC 95% 0,55–0,89; p=0,0020)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "KEYNOTE-826",
+        "nct": "NCT03635567",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Persistente/recorrente/metastático 1ª linha",
+        "bracos": "Pembrolizumabe + platina/paclitaxel ± bevacizumabe vs placebo",
+        "desfecho": "SLP; SG",
+        "resultado": "Ganho de resposta, SLP e SG; benefício predominante em PD-L1+",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 26,
+          "trecho": "demonstrou ganho em taxa de resposta, SLP e SG",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "GOG-240",
+        "nct": "NCT00803062",
+        "nctEstado": "VERIFICADO",
+        "populacao": "IVB/recorrente/persistente",
+        "bracos": "QT ± bevacizumabe",
+        "desfecho": "SG",
+        "resultado": "SG 17 vs 13,3 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 26,
+          "trecho": "aumento da SG (17 versus 13,3 meses; p=0,0035)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "EMPOWER-Cervical 1 (cemiplimabe)",
+        "nct": "NCT03257267",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Recorrente após platina",
+        "bracos": "Cemiplimabe vs QT do investigador",
+        "desfecho": "SG",
+        "resultado": "Primeiro ganho de SG em 2ª linha",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 28,
+          "trecho": "demonstrou pela primeira vez um ganho de SG em segunda linha",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "IA1-IB1: anos 1-2",
+        "exames": [],
+        "periodicidade": "Exame clínico a cada 3-6 meses; citologia anual; exames guiados por sintomas",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 30,
+          "trecho": "Exame clínico a cada 3-6 meses por 2 anos, a cada 6-12 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "IB3, IIA-IVA: 3-6 meses pós-tratamento",
+        "exames": [
+          "RM_PELVE",
+          "PET_CT_FDG"
+        ],
+        "periodicidade": "Uma vez entre 3 e 6 meses após o término; depois exame clínico a cada 3-6 meses por 2 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 30,
+          "trecho": "RM de pelve e PET/CT entre 3 a 6 meses após o término",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "IVB em QT",
+        "exames": [
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "TC_PELVE",
+          "HEMOGRAMA"
+        ],
+        "periodicidade": "TC a cada 2-3 meses; laboratório a cada consulta",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 30,
+          "trecho": "TC de tórax, abdome e pelve a cada 2-3 meses.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "CISTOSCOPIA",
+      "CREATININA",
+      "HEMOGRAMA",
+      "HIV",
+      "IMUNOHISTOQUIMICA",
+      "PET_CT_FDG",
+      "RETOSSIGMOIDOSCOPIA",
+      "RM_ABDOMEN_SUPERIOR",
+      "RM_PELVE",
+      "RX_TORAX_PA_PERFIL",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "TC_TORAX",
+      "TGO",
+      "TGP"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "Cisplatina",
+        "com": "Aminoglicosídeos, diuréticos de alça e outros nefro/ototóxicos",
+        "ref": ""
+      },
+      {
+        "droga": "Ifosfamida",
+        "com": "Aprepitanto/fármacos que alteram CYP3A4 (encefalopatia)",
+        "ref": ""
+      },
+      {
+        "droga": "Paclitaxel",
+        "com": "Inibidores/indutores de CYP2C8/3A4",
+        "ref": ""
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "Cisplatina",
+        "termosCTCAEv6": [
+          "Acute kidney injury",
+          "Hypomagnesemia",
+          "Tinnitus",
+          "Hearing impaired",
+          "Nausea",
+          "Vomiting"
+        ]
+      },
+      {
+        "classe": "Bevacizumabe",
+        "termosCTCAEv6": [
+          "Hypertension",
+          "Proteinuria",
+          "Gastrointestinal fistula",
+          "Rectal perforation"
+        ]
+      },
+      {
+        "classe": "Imunoterapia",
+        "termosCTCAEv6": [
+          "Hypothyroidism",
+          "Colitis",
+          "Pneumonitis",
+          "Hepatitis"
+        ]
+      },
+      {
+        "classe": "Ifosfamida",
+        "termosCTCAEv6": [
+          "Encephalopathy",
+          "Cystitis noninfective"
+        ]
+      },
+      {
+        "classe": "Radioterapia pélvica",
+        "termosCTCAEv6": [
+          "Proctitis",
+          "Diarrhea",
+          "Cystitis noninfective"
+        ]
+      },
+      {
+        "classe": "Mielotoxicidade",
+        "termosCTCAEv6": [
+          "Neutrophil count decreased",
+          "Febrile neutropenia",
+          "Anemia",
+          "Platelet count decreased"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "Antiemese de alto risco (cisplatina)",
+      "Hidratação e reposição de magnésio pré/pós cisplatina",
+      "Mesna com ifosfamida"
+    ],
+    "orientacoes": [
+      "Sinais de fístula/sangramento em uso de bevacizumabe",
+      "Dilatador vaginal após braquiterapia (se previsto no serviço)",
+      "Sintomas de imunotoxicidade"
+    ],
+    "encaminhamentos": [
+      "Radioterapia (RT externa + braquiterapia)",
+      "Oncoginecologia cirúrgica",
+      "Preservação de fertilidade (IA-IB1 jovens)",
+      "Infectologia se HIV+"
+    ],
+    "laudos": [
+      "APAC radioterapia",
+      "APAC quimioterapia (finalidade curativa concomitante / paliativa)"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "Pós-histerectomia radical",
+        "y": "LFN+, margem+ ou paramétrio+",
+        "z": "Sim: RT + cisplatina 40 mg/m² semanal; não, mas Sedlis+: RT ± braquiterapia (± cisplatina se adeno)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 18,
+          "trecho": "Risco alto (1+ dos seguintes fatores: LFN pélvico positivo, margem posi",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Doença IVB/recorrente 1ª linha",
+        "y": "PD-L1 CPS",
+        "z": "CPS ≥1: platina + paclitaxel + pembrolizumabe ± bevacizumabe; CPS <1: platina + paclitaxel ± bevacizumabe",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 27,
+          "trecho": "CPS < 1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Localmente avançado FIGO 2008 IB2-IVA",
+        "y": "Candidata a indução",
+        "z": "Carboplatina AUC2 + paclitaxel 80 semanal ×6 → QT-RT; não aplicar a IVB",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 21,
+          "trecho": "500 pacientes estádio [FIGO 2008] IB2 a IVa para serem randomizadas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Recorrência local",
+        "y": "RT prévia",
+        "z": "Sem RT: QT-RT; com RT: cirurgia de resgate se biópsia+ e sem doença sistêmica; inoperável: QT ± imunoterapia",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 24,
+          "trecho": "Considerar QT + RT em pacientes sem tratamento prévio com RT",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "2ª linha",
+        "y": "Imunoterapia prévia e HER2",
+        "z": "Sem IO: cemiplimabe; HER2 3+: T-DXd; com IO: monoterapia (pemetrexede, vinorelbina, ifosfamida, topotecano, irinotecano, docetaxel)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 28,
+          "trecho": "Com exposição prévia à imunoterapia:",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    {
+      "texto": "SEM_FONTE: dose/fracionamento da RT externa pélvica e para-aórtica; braquiterapia só com dose total no ponto A (80-85 Gy).",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+      ]
+    },
+    {
+      "texto": "SEM_FONTE: p16/HPV na SBOC colo 2026 — não incluído (não usar p16 como critério de estadiamento).",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC colo 2026 v4, Colo-do-utero.txt e Câncer_de_Colo_Uterino.txt: p16 não usado no estadiamento"
+      ],
+      "resolucao": "p16/HPV só no diagnóstico, nunca no estadiamento (12A)."
+    },
+    {
+      "texto": "KEYNOTE-A18: SG imatura na versão SBOC; atualização não incorporada.",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC colo 2026 v4 (SG imatura); atualização de SG fora da SBOC exige decisão de incorporar fonte externa"
+      ],
+      "resolucao": "Aguardar atualização SBOC (13A)."
+    },
+    {
+      "texto": "SBOC colo 2026 v4 é versão para colaboração — revisar ao sair a final.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "acervo local SBOC: só a versão para colaboração v4 de 2026"
+      ]
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "Intervalo da ifosfamida em 2ª linha",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+        "pagina": 28,
+        "trecho": "Ifosfamida 1,2 g/m² EV D1 a D5 a cada 4 semanas",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "NORMA",
+        "referencia": "corpus/fichas/colo-do-utero/ifosfamida-mesna__paliativo-metastatico.json (intervaloDias 21)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "CONFLITANTE"
+      },
+      "escolhaSeguranca": "MANTER_PENDENTE: o próprio MOC diverge (recomendação a cada 3 semanas × citação do GOG a cada 4 semanas).",
+      "decisaoNecessaria": false,
+      "fonteC": {
+        "tipo": "DIRETRIZ",
+        "referencia": "MOC Tumores Sólidos 2026 (atualização jul–ago/2026) — conferência enviada pelo Dr. Silas em 2026-10-12 (docs/ondas/F1-MOC-2026-CONFERENCIA.md)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "INFERIDO"
+      },
+      "decisao": {
+        "texto": "Ciclo de 28 dias.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (fechamento do tópico corpus F1)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "Cisplatina × carboplatina na 1ª linha",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+        "pagina": 26,
+        "trecho": "pacientes virgens de platina, cisplatina foi superio à carboplatina",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:\\Users\\silas\\OneDrive\\ONCO-DOCS ((TUDOAQUI)\\SBOC\\sboc\\diretrizes\\Diretrizes-SBOC-2026-Colo-do-utero-v4-VERSAO-PARA-COLABORACAO-1.pdf",
+        "pagina": 26,
+        "trecho": "cisplatina por carboplatina, especialmente em pacientes previamente expostos a cisplatina",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Cisplatina preferida em virgens de platina; carboplatina se cisplatina prévia ou contraindicação.",
+      "decisaoNecessaria": false
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (Opus 5.5) — curador de rascunho; aprovação clínica pendente",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC 2026 Colo do útero v4 (págs. 4-30)",
+      "Onco PRO 2026 Aulas 25-26 (consulta de apoio; sem dado numérico incorporado)",
+      "ClinicalTrials.gov API v2 (NCTs listados)",
+      "CONITEC via busca web (fontes secundárias)",
+      "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
+      "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
+    ],
+    "aprovacaoClinica": null,
+    "rodada2": {
+      "data": "2026-10-11",
+      "redator": "Claude (Opus 5.5) — redução de pendências e conflitos; aprovação clínica pendente",
+      "pendenciasResolvidas": [
+        {
+          "texto": "SEM_FONTE: dose de mesna com ifosfamida (SBOC não especifica).",
+          "resolucao": "Mesna 240 mg/m² ×3/dia (20% da ifosfamida, bula Mesnex/FDA) adicionada a colo-ifosfamida-2l (estado INFERIDO: derivação aritmética)."
+        },
+        {
+          "texto": "SUS: bevacizumabe e pembrolizumabe com base em fontes secundárias (pareceres judiciais e notícia da CP 37/2026); relatórios CONITEC não lidos no original.",
+          "resolucao": "Bevacizumabe: não incorporado (Portaria SCTIE/MS nº 06/2017; Relatório 242 — planilha oficial CONITEC). Pembrolizumabe: CP 37/2026, recomendação preliminar desfavorável, sem decisão final."
+        },
+        {
+          "texto": "SUS: citotóxicos (cisplatina, carboplatina, paclitaxel etc.) via APAC — não verificado documentalmente.",
+          "resolucao": "Citotóxicos: APAC SIGTAP 2026-09 0304020184 (avançado) e 0304040045 (colo uterino)."
+        }
+      ],
+      "correcoes": []
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 7",
+      "acao": "ifosfamida: MOC diverge internamente; mantido pendente"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão do Dr. Silas",
+      "acao": "ifosfamida no colo: ciclo de 28 dias"
+    }
+  ]
+}

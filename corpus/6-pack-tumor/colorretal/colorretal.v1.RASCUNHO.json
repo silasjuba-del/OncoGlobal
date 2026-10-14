@@ -1,0 +1,125 @@
+{
+  "header": {
+    "id": "pack-colorretal-v1-glm",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.4",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "cid": [
+    "C18",
+    "C19",
+    "C20"
+  ],
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição [VERIFICAR]"
+  },
+  "biomarcadoresPath": {
+    "diagnostico_todos": [
+      "MMR/MSI (IHQ ou PCR)"
+    ],
+    "metastatico_todos": [
+      "MMR/MSI",
+      "KRAS/NRAS exons 2-4",
+      "BRAF"
+    ],
+    "metastatico_condicional": [
+      "HER2 (IHC/FISH se RAS selvagem)"
+    ],
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "ESMO mCRC CPG 2026 (Cremolini, Ann Oncol 37:759-776, PMID 41990853)",
+      "trecho": "MMR... RAS... BRAF in all",
+      "edicao": "2026"
+    }
+  },
+  "examesPorId": {
+    "estadiamento": [
+      "COLONOSCOPIA",
+      "TC_TORAX",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "CEA"
+    ],
+    "labsBaseline": [
+      "HEMOGRAMA",
+      "CREATININA",
+      "TGO",
+      "TGP"
+    ]
+  },
+  "fases": [
+    {
+      "fase": "seguimento_pos_resseccao_curativa_II_III",
+      "intervalos": {
+        "consulta_cea": "Exame físico + CEA q3-6m nos anos 1-2; depois q6m até o ano 5",
+        "tc": "TC tórax/abdome/pelve q6-12m por 5 anos",
+        "colonoscopia": "Ano 1 (3-6 meses se colonoscopia completa não feita no diagnóstico); depois conforme achados: sem adenoma → ano 3, depois q5 anos"
+      },
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "NCCN Colon v2.2026 (NCCN Guidelines for Patients: Colon Cancer 2026, PDF oficial); cadência 3/5 anos via PMC12146933",
+        "trecho": "CEA every 3–6 months... CT... every 6–12 months",
+        "edicao": "v2.2026"
+      },
+      "ressalva": "Bloco marcado PENDENTE DE VALIDAÇÃO POR AFIRMAÇÃO [CODEX M1-2]."
+    },
+    {
+      "fase": "reto_pos_tratamento_nao_cirurgico",
+      "intervalos": {
+        "adicionais": "Toque retal + retossigmoidoscopia/RETOSSIGMOIDOSCOPIA q3-4m no ano 1-2 → q6m; RM de pelve (fora do catálogo de id — solicitar inclusão) q6m até 3 anos",
+        "base": "NCCN Rectal 2026 (patients PDF)"
+      },
+      "ressalva": "PENDENTE DE VALIDAÇÃO [CODEX M1-2]; RM PELVE existe no catálogo (RM_PELVE) — corrigir vínculo na migração."
+    },
+    {
+      "fase": "metastatico",
+      "exames": [
+        "TC_TORAX",
+        "TC_ABDOMEN_SUPERIOR",
+        "TC_PELVE",
+        "CEA"
+      ],
+      "nota": "Reavaliação imaging conforme linha; CEA na doença avançada para monitorização (EGTM: uso restrito a monitorização)."
+    }
+  ],
+  "limitesAplicabilidade": "Não universalizar cadência de uma estratégia (cirúrgico × não cirúrgico × metastático) a todas. Estádio I: colonoscopia ano 1, sem imagem rotineira.",
+  "pendencias": [
+    "RM_PELVE corrigida no vínculo de exames do reto",
+    "Validação por afirmação dos intervalos (CODEX M1-2)",
+    "Edição AJCC"
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO + PENDENTE_DE_VALIDACAO_POR_AFIRMACAO [CODEX M1-2]",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DIRETRIZ",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.4",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "supersededBy": "pack-colorretal",
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "A9 red team: colisão com corpus/packs/colorretal",
+      "original": "colorretal",
+      "corrigido": "pack-colorretal-v1-glm"
+    }
+  ]
+}

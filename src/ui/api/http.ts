@@ -1,8 +1,11 @@
+import { InvestigacaoConsultaVisao } from '../../contracts/api/investigacao.js';
+import { SintesePropostaResposta } from '../../contracts/api/sinteseProposta.js';
 import { ActionIntent, ConfirmarBloco } from "../../contracts/operacao.js";
 import { EstadoOncoassist, FontesOncoassist, RespostaOncoassist } from "./oncoassist.js";
 import { FonteRevisao, ReconciliacaoProposta, RevisaoPreparada } from "./revisaoExtracao.js";
 import { AcaoResposta, AgendaResposta, ApacResposta, BundleResposta, CanalResposta, ChatResposta, ConfirmacaoResposta, ConsultaResposta, FlashPreparadaResposta, FlashRascunhoResposta, SalaoResposta } from "./respostas.js";
 import { z } from "zod";
+import { ResultadoInstrumentoSchema } from "../../contracts/f0c/resultadoInstrumento.js";
 import {
   ErroPorta,
   type AcaoIntent,
@@ -72,6 +75,41 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
   }
 
   return {
+    async reconciliarMedicamentos(pedido, signal) {
+      const {status,json}=await enviar("/consulta/medicamentos/reconciliar",pedido,true,signal);
+      const r=z.object({codigo:z.enum(["GRAVADA","REPLAY"]),eventId:z.string().min(1)}).safeParse(json);
+      if((status===200||status===201)&&r.success)return r.data;
+      const refs=json&&typeof json==="object"&&"refs" in json&&Array.isArray(json.refs)?json.refs.filter((v):v is string=>typeof v==="string").join(", "):undefined;
+      throw new ErroPorta(codigoDe(json,"RECONCILIACAO_MEDICAMENTOS_NEGADA"),refs);
+    },
+    async sintetizarRetrato(contexto, signal) {
+      const { status, json } = await enviar("/consulta/oncoassist/sintese", contexto, true, signal);
+      const r = SintesePropostaResposta.safeParse(json);
+      if (!r.success || ![200, 201, 409].includes(status)) throw new ErroPorta(codigoDe(json, "SINTESE_PENDENTE"));
+      if (r.data.contexto.patientId !== contexto.patientId || r.data.contexto.encounterId !== contexto.encounterId || r.data.contexto.tumorLotId !== contexto.tumorLotId)
+        throw new ErroPorta("SINTESE_FORA_CONTEXTO");
+      return r.data;
+    },
+    async investigacao(contexto, signal) {
+      const {status,json}=await enviar("/consulta/investigacao",{patientId:contexto.patientId,encounterId:contexto.encounterId,tumorLotId:contexto.tumorLotId},true,signal);
+      const r=InvestigacaoConsultaVisao.safeParse(json);
+      if(status!==200)throw new ErroPorta(codigoDe(json,"INVESTIGACAO_PENDENTE"));
+      if(!r.success||r.data.contexto.patientId!==contexto.patientId||r.data.contexto.encounterId!==contexto.encounterId||r.data.contexto.tumorLotId!==contexto.tumorLotId)throw new ErroPorta("INVESTIGACAO_FORA_CONTEXTO");
+      return r.data;
+    },
+    async uploadDocumentoLocal(pedido,signal) {
+      const {status,json}=await enviar("/consulta/upload",pedido,true,signal);
+      const parsed=z.object({codigo:z.enum(["RASCUNHO_SALVO","REPLAY"]),draftId:z.string().min(1),revision:z.number().int().nonnegative(),
+        linkedPatientId:z.string().nullable(),requiresMedicalReview:z.literal(true),conversionStatus:z.enum(["PRONTO","PENDENTE"]).optional(),motivo:z.string().nullable().optional()}).safeParse(json);
+      if((status===201||status===200)&&parsed.success){const {conversionStatus,motivo,...r}=parsed.data;return {...r,...(conversionStatus===undefined?{}:{conversionStatus}),...(motivo===undefined?{}:{motivo})};}
+      throw new ErroPorta("UPLOAD_RECUSADO",codigoDe(json,"UPLOAD_INVALIDO"));
+    },
+    async avaliarInstrumento(contexto,pedido) {
+      const r=await enviar("/consulta/instrumento/avaliar",{...contexto,pedido},true);
+      const parsed=z.object({resultado:ResultadoInstrumentoSchema,gravado:z.literal(false),assinado:z.literal(false)}).safeParse(r.json);
+      if(r.status!==200 || !parsed.success)throw new ErroPorta(codigoDe(r.json,"PAYLOAD_INVALIDO"));
+      return parsed.data.resultado;
+    },
     async lerCaixaConfiguracao(numero) {
       const { status, json } = await enviar("/config/caixa/ler", { numero }, true);
       const parsed = CaixaConfiguracaoResposta.safeParse(json);
@@ -193,8 +231,9 @@ export function criarPortaHttp(opcoes: OpcoesHttp): PortaConsulta {
     },
 
     // [SERVIDOR_PENDENTE]
-    async carregarConsulta(patientId, tumorLotId) {
-      return leitura("/consulta/carregar", { patientId, ...(tumorLotId === undefined ? {} : { tumorLotId }) }, ConsultaResposta);
+    async carregarConsulta(patientId, tumorLotId, encounterId) {
+      if (!encounterId) throw new ErroPorta("ENCONTRO_EXPLICITO_OBRIGATORIO");
+      return leitura("/consulta/carregar", { patientId, encounterId, ...(tumorLotId === undefined ? {} : { tumorLotId }) }, ConsultaResposta);
     },
 
     // [SERVIDOR_PENDENTE]

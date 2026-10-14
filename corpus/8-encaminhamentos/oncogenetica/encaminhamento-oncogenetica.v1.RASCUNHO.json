@@ -1,0 +1,122 @@
+{
+  "header": {
+    "id": "encaminhamento-oncogenetica",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Onco PRO 2026 aula 83 Oncogenética, que cita NCCN Genetic/Familial High-Risk Assessment v2.2025",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "estrutura": {
+    "fatoConfirmado": [
+      "diagnóstico (CID) e data",
+      "estadiamento (sistema e edição)",
+      "tratamento realizado e em curso",
+      "ECOG",
+      "medicamentos em uso",
+      "exames recentes com data"
+    ],
+    "decisaoMedica": [
+      "motivo (lista fechada)",
+      "pergunta clínica",
+      "urgência com critério"
+    ]
+  },
+  "portas": {
+    "consome": [
+      "templates/resumo-prontuario-modelo-servico",
+      "tumor",
+      "toxicidade.vigente",
+      "consulta.ecog"
+    ],
+    "oferece": [
+      "documento.encaminhamento"
+    ]
+  },
+  "proibicoes": [
+    "conduta do especialista escrita pelo app",
+    "semáforo ou cor no documento (D-F1-01)"
+  ],
+  "destinoNoSus": "Serviço de genética médica / aconselhamento genético (disponibilidade local DADO_AUSENTE)",
+  "motivosListaFechada": [
+    {
+      "motivo": "câncer de ovário (história pessoal)",
+      "fonte": {
+        "tipo": "CURSO",
+        "referencia": "PRO26 aula 83",
+        "pagina": 46,
+        "trecho": "história pessoal de câncer de ovário, de câncer de pâncreas",
+        "estado": "INFERIDO"
+      }
+    },
+    {
+      "motivo": "câncer de pâncreas (história pessoal)",
+      "fonte": {
+        "tipo": "CURSO",
+        "referencia": "PRO26 aula 83",
+        "pagina": 46,
+        "trecho": "pâncreas ou de próstata de alto grau ou metastático",
+        "estado": "INFERIDO"
+      }
+    },
+    {
+      "motivo": "câncer de próstata metastático ou de alto grau",
+      "fonte": {
+        "tipo": "CURSO",
+        "referencia": "PRO26 aula 83",
+        "pagina": 5,
+        "trecho": "independentemente da idade do diagnóstico e do histórico familiar",
+        "estado": "INFERIDO"
+      }
+    },
+    {
+      "motivo": "câncer de mama em idade jovem ou com história familiar sugestiva",
+      "fonte": {
+        "tipo": "CURSO",
+        "referencia": "PRO26 aula 83",
+        "pagina": 20,
+        "trecho": "tumores em idade jovem são relacionados à predisposição hereditária",
+        "estado": "INFERIDO"
+      },
+      "pendencia": "corte de idade: confirmar na NCCN v2.2025"
+    },
+    {
+      "motivo": "tumor colorretal ou de endométrio com dMMR/MSI-H (suspeita de síndrome de Lynch)",
+      "fonte": {
+        "tipo": "CURSO",
+        "referencia": "PRO26 aula 83",
+        "pagina": 44,
+        "trecho": "câncer de cólon com instabilidade de microssatélites",
+        "estado": "INFERIDO"
+      }
+    },
+    {
+      "motivo": "variante patogênica germinativa identificada (aconselhamento e testagem de familiares)",
+      "fonte": null
+    }
+  ],
+  "urgencia": {
+    "eletivo": "padrão",
+    "prioritario": "resultado germinativo muda tratamento em curso (ex.: PARPi, cirurgia redutora de risco)"
+  },
+  "packs": [
+    "pack-mama",
+    "pack-ovario",
+    "pack-pancreas",
+    "pack-prostata",
+    "pack-colorretal",
+    "pack-endometrio"
+  ],
+  "pendencias": [
+    "Critérios numéricos (idade, nº de parentes) só da NCCN/diretriz aberta, não do curso.",
+    "Disponibilidade de teste germinativo no SUS."
+  ]
+}

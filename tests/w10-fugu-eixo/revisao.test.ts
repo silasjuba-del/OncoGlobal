@@ -83,7 +83,7 @@ function quantidadeFatos(ambiente: Ambiente): number {
 
 async function extrairEVincular(ambiente: Ambiente): Promise<{ selecao: Selecao; fato: FatoExtraido }> {
   const consulta = await post<{ patientId: string; encounterId: string }>(
-    ambiente, "/consulta/carregar", { patientId: PACIENTE });
+    ambiente, "/consulta/carregar", { patientId: PACIENTE, encounterId: ENCONTRO });
   expect(consulta.status).toBe(200);
   expect(consulta.data).toMatchObject({ patientId: PACIENTE, encounterId: ENCONTRO });
 
@@ -158,21 +158,35 @@ describe("W10 FUGU-EIXO-02 · revisão de extração por HTTP real", () => {
       } });
       const eventos = listarEventos(ambiente.db, PACIENTE)
         .filter((evento) => evento.operationId === selecao.operationId);
-      expect(eventos).toHaveLength(1);
-      expect(eventos[0]).toMatchObject({
+      expect(eventos).toHaveLength(2);
+      const fatos = eventos.filter((evento) => evento.tipo === "FATO");
+      expect(fatos).toHaveLength(1);
+      expect(fatos[0]).toMatchObject({
         tipo: "FATO", patientId: PACIENTE, encounterId: ENCONTRO, revisao: "CONFIRMADO",
         payload: { data: { factId: fato.id, sourceId: FONTE, rawEvidence: fato.rawEvidence } },
       });
-      expect(eventos[0]?.fontes[0]?.contentHash)
+      expect(fatos[0]?.fontes[0]?.contentHash)
         .toBe(createHash("sha256").update(TRANSCRICAO, "utf8").digest("hex"));
+      const recibos = eventos.filter((evento) => evento.tipo === "ReviewDecision");
+      expect(recibos).toHaveLength(1);
+      expect(recibos[0]).toMatchObject({ patientId: PACIENTE, encounterId: ENCONTRO, tumorLotId: null,
+        revisao: "CONFIRMADO", criadoPor: { tipo: "SESSAO", id: "medico-teste" }, fontes: fatos[0]!.fontes,
+        payload: { data: { kind: "ExtracaoResumoRevisado", draftId: preparo.data.comprovanteExibicao.documentId,
+          draftRevision: 2, conteudoHash: hashConteudoExibido(preparo.data.conteudo), sourceId: FONTE,
+          sourceContentHash: createHash("sha256").update(TRANSCRICAO, "utf8").digest("hex"),
+          origem: { draftId: selecao.draftId, revision: 1,
+            conteudoHash: hashConteudoExibido(lerDraft(ambiente.db, selecao.draftId)!.payload) } } } });
+      expect(recibos[0]?.payload).not.toHaveProperty("data.campo");
+      expect(recibos[0]?.payload).not.toHaveProperty("data.valor");
       expect(quantidadeFatos(ambiente)).toBe(1);
       expect(lerDraft(ambiente.db, selecao.draftId)?.payload)
         .toMatchObject({ kind: "EXTRACAO_RASCUNHO", input: { rawTranscript: TRANSCRICAO } });
-      expect(lerDraft(ambiente.db, preparo.data.comprovanteExibicao.documentId)?.revision).toBe(1);
+      expect(lerDraft(ambiente.db, preparo.data.comprovanteExibicao.documentId)?.revision).toBe(2);
 
       const replay = await post<Revisao>(ambiente, "/consulta/rascunho/revisar", confirmarFato);
       expect(replay).toMatchObject({ status: 200, data: { codigo: "REPLAY" } });
       expect(quantidadeFatos(ambiente)).toBe(1);
+      expect(listarEventos(ambiente.db, PACIENTE).filter((evento) => evento.operationId === selecao.operationId)).toEqual(eventos);
     } finally { await ambiente.close(); }
   });
 
@@ -204,7 +218,7 @@ describe("W10 FUGU-EIXO-02 · revisão de extração por HTTP real", () => {
 
       const login = await post<{ token: string }>(ambiente, "/login", { senha: SENHA }, "");
       expect(login.status).toBe(200);
-      expect((await post(ambiente, "/consulta/carregar", { patientId: PACIENTE }, login.data.token)).status)
+      expect((await post(ambiente, "/consulta/carregar", { patientId: PACIENTE, encounterId: ENCONTRO }, login.data.token)).status)
         .toBe(200);
       const outraSessao = await post<Codigo>(ambiente, "/consulta/rascunho/revisar", {
         ...selecao, comprovanteExibicao: comprovante,
@@ -213,7 +227,7 @@ describe("W10 FUGU-EIXO-02 · revisão de extração por HTTP real", () => {
       expect(quantidadeFatos(ambiente)).toBe(0);
 
       semearPaciente(ambiente, "43");
-      expect((await post(ambiente, "/consulta/carregar", { patientId: OUTRO_PACIENTE })).status).toBe(200);
+      expect((await post(ambiente, "/consulta/carregar", { patientId: OUTRO_PACIENTE, encounterId: "encontro-teste-43" })).status).toBe(200);
       const consultaTrocada = await post<Codigo>(ambiente, "/consulta/rascunho/revisar", {
         ...selecao, comprovanteExibicao: comprovante,
       });
@@ -221,7 +235,7 @@ describe("W10 FUGU-EIXO-02 · revisão de extração por HTTP real", () => {
         status: 409, data: { codigo: "PACIENTE_FORA_DA_CONSULTA_SELECIONADA" },
       });
       expect(quantidadeFatos(ambiente)).toBe(0);
-      expect((await post(ambiente, "/consulta/carregar", { patientId: PACIENTE })).status).toBe(200);
+      expect((await post(ambiente, "/consulta/carregar", { patientId: PACIENTE, encounterId: ENCONTRO })).status).toBe(200);
       const exibicaoRevogada = await post<Codigo>(ambiente, "/consulta/rascunho/revisar", {
         ...selecao, comprovanteExibicao: comprovante,
       });

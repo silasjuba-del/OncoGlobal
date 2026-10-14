@@ -1,0 +1,4147 @@
+{
+  "header": {
+    "id": "pack-prostata",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Próstata: doença localizada v4 e Próstata: doença avançada v4 (versão para colaboração), arquivos Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.pdf e Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.pdf",
+      "trecho": "Terapia de deprivação androgênica (TDA) com objetivo de supressão dos níveis",
+      "edicao": "v4 2026"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [
+    "pack-prostata-v1-glm"
+  ],
+  "identidade": {
+    "tumor": "Adenocarcinoma de próstata",
+    "cid10": [
+      "C61"
+    ],
+    "subtipos": [
+      "adenocarcinoma acinar",
+      "histologia intraductal/ductal",
+      "variantes agressivas (anaplásico, pequenas células/neuroendócrino)"
+    ],
+    "cenarios": [
+      "localizado_muito_baixo_baixo",
+      "localizado_intermediario",
+      "localizado_alto_muito_alto",
+      "recidiva_bioquimica",
+      "mHSPC",
+      "nmCRPC",
+      "mCRPC",
+      "variante_agressiva"
+    ],
+    "limitesAplicabilidade": "Adultos com adenocarcinoma de próstata. Prevenção/rastreamento fora do escopo de conduta. Doses de TDA (agonistas/antagonistas LHRH) vêm de bula FDA (SBOC não traz posologia). Status SUS/APAC dos medicamentos não informado pela SBOC: DADO_AUSENTE. Pack propõe; médico decide."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "RM_PROSTATA_MP",
+        "rotulo": "RM multiparamétrica de próstata",
+        "indicacao": "universal",
+        "quando": "Antes da biópsia de próstata (estratifica e reduz biópsias e diagnóstico de ISUP 1).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "A RM de próstata deve ser realizada antes da biópsia de próstata.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "USG_PROSTATA_TRANSRETAL",
+        "rotulo": "USG transretal (guia de biópsia)",
+        "indicacao": "condicional",
+        "quando": "Guia de biópsia randômica + lesão-alvo; SBOC prefere biópsia randômica associada à lesão-alvo.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "existe preferência a realização de biópsia randômica e da lesão-alvo",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "core",
+          "quando": "Biópsia por agulha randômica + dirigida à lesão-alvo da RM.",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 10,
+            "trecho": "existe preferência a realização de biópsia randômica e da lesão-alvo",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "core",
+          "quando": "Exame anatomopatológico dos fragmentos (Gleason/ISUP e demais aspectos para grupos de risco).",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 9,
+            "trecho": "Um exame anatomopatológico adequado é de fundamental importância",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "Escore de Gleason (padrão primário + secundário) e grupo ISUP 1-5",
+        "Número de fragmentos positivos e % de comprometimento por fragmento",
+        "Presença de histologia intraductal/ductal",
+        "Variante agressiva (anaplásico/pequenas células) quando presente",
+        "Na peça: pT, margens, invasão de vesículas seminais, linfonodos (pN)"
+      ],
+      "molecular": [
+        {
+          "alvo": "Painel germinativo BRCA1/2, ATM, genes MMR (e genes da síndrome suspeita)",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "rotulo": "Painel germinativo (NGS)",
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "localizado: ancestralidade judaica ashkenazi, risco alto/muito alto, histologia intraductal/ductal ou ISUP ≥ 3",
+          "consequencia": "Aconselhamento genético, rastreamento familiar; informa elegibilidade futura a iPARP.",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 10,
+            "trecho": "O painel mínimo deve conter a análise dos genes BRCA1/2, ATM, DNA MMR",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Genes de reparo HRR (BRCA1/2, ATM e outros) — somático e/ou germinativo",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "rotulo": "NGS tumoral/germinativo HRR",
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "universal",
+          "cenario": "doença avançada (mCRPC; idealmente antes da 1ª linha)",
+          "consequencia": "Olaparibe (BRCA1/2, ATM após ARPI); combinações iPARP + ARPI com maior benefício em BRCA/HRR.",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 19,
+            "trecho": "é fundamental realizar a testagem genômica dos pacientes com câncer de próstata avançado",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Proteínas de reparo de DNA (MMR: MLH1, MSH2, MSH6, PMS2) — dMMR/MSI-H",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "doença avançada resistente à castração",
+          "consequencia": "Possível benefício de imunoterapia; aprovação agnóstica de MSI-H não incluiu próstata.",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 19,
+            "trecho": "diagnosticado por teste genético ou por imuno-histoquímica para proteínas de reparo",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Carga mutacional tumoral (TMB ≥ 10 mut/Mb)",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "rotulo": "TMB por NGS",
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "quandoPedir": "condicional",
+          "cenario": "mCRPC após falha de novo agente hormonal",
+          "consequencia": "Pembrolizumabe como opção.",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 17,
+            "trecho": "Pembrolizumabe: pacientes com carga mutacional ≥ 10 mut/Mb",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Expressão de PSMA (seleção para 177Lu-PSMA-617)",
+          "metodo": "outro",
+          "catalogoId": "PET_PSMA",
+          "quandoPedir": "condicional",
+          "cenario": "mCRPC candidato a Lutécio-PSMA",
+          "consequencia": "Lutécio-PSMA somente se doença PSMA+ no PET/CT PSMA.",
+          "disponivelSUS": "nao",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 17,
+            "trecho": "Lutécio-PSMA: pacientes com PET/CT PSMA+",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+      "pagina": 4,
+      "trecho": "AJCC (8ª edição)",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Hemograma Todos os pacientes",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BILIRRUBINA",
+        "rotulo": "Bilirrubinas",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Função hepática (bilirrubinas, coagulograma e albumina)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PROTEINAS_TOTAIS_FRACOES",
+        "rotulo": "Albumina (proteínas totais e frações)",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Função hepática (bilirrubinas, coagulograma e albumina)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TAP",
+        "rotulo": "Coagulograma — TP",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Coagulograma (TP , TTPa)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TTPA",
+        "rotulo": "Coagulograma — TTPa",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Coagulograma (TP , TTPa)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGO",
+        "rotulo": "AST",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Enzimas hepáticas (AST, AL T)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "rotulo": "ALT",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Enzimas hepáticas (AST, AL T)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Função renal — creatinina",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Função renal (ureia, creatinina)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "UREIA",
+        "rotulo": "Função renal — ureia",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Função renal (ureia, creatinina)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FOSFATASE_ALCALINA",
+        "rotulo": "Fosfatase alcalina",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Fosfatase alcalina (FALC)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PSA_TOTAL",
+        "rotulo": "PSA",
+        "cenario": "localizado e avançado",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "FALC • PSA • Testosterona",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TESTOSTERONA_TOTAL",
+        "rotulo": "Testosterona",
+        "cenario": "localizado e avançado (basal; confirmar castração < 50 ng/dL)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "FALC • PSA • Testosterona",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_PROSTATA_MP",
+        "rotulo": "RM multiparamétrica da próstata / RM de pelve",
+        "cenario": "localizado (todos) e avançado (tumor primário)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "RM multiparamétrica da próstata (estadiamento do tumor primário)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CINTILOGRAFIA_OSSEA",
+        "rotulo": "Cintilografia óssea (Tc-99m)",
+        "cenario": "localizado risco intermediário, alto e muito alto; baixo/muito baixo se FALC elevada ou dor óssea; todo avançado",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Cintilografia óssea Riscos intermediário, alto e muito alto",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome",
+        "cenario": "localizado risco alto ou muito alto; todo avançado",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "TC abdome Risco alto ou muito alto",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve",
+        "cenario": "avançado (TC de tórax, abdome e pelve)",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "TC de tórax, abdome e pelve",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "cenario": "avançado",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "TC de tórax, abdome e pelve",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CONTRASTE_TC",
+        "rotulo": "Contraste iodado para TC",
+        "cenario": "TC de estadiamento; RM substitui TC de abdome/pelve se contraindicação a contraste",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "RM pode substituir TC de abdome e pelve se contraindicação ao uso do contraste",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RX_TORAX_PA_PERFIL",
+        "rotulo": "RX de tórax",
+        "cenario": "localizado risco alto ou muito alto",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "TC abdome Risco alto ou muito alto RX tórax",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_PSMA",
+        "rotulo": "PET/PSMA (sem código SUS)",
+        "cenario": "localizado risco intermediário desfavorável, alto e muito alto (preferencial se disponível); recidiva bioquímica. SUS: sem código SIGTAP — alternativa SUS: TC (tórax/abdome/pelve) + cintilografia óssea + RM de pelve.",
+        "indicacao": "condicional",
+        "sus": {
+          "disponivel": "nao",
+          "alternativa": [
+            "TC_TORAX",
+            "TC_ABDOMEN_SUPERIOR",
+            "TC_PELVE",
+            "CINTILOGRAFIA_OSSEA",
+            "RM_PELVE"
+          ],
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/exames/exames-sigtap.v1.json (catálogo SIGTAP do projeto)",
+            "pagina": null,
+            "trecho": "sem código SUS",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "PET/PSMA (se disponível, e preferencial)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "DENSITOMETRIA_OSSEA",
+        "rotulo": "Densitometria óssea",
+        "cenario": "doença avançada (TDA prolongada)",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "Densitometria óssea",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_COLUNA_TORACICA",
+        "rotulo": "TC ou RM de coluna (direcionada a sintomas)",
+        "cenario": "suspeita de compressão medular/dor (segmento conforme clínica: RM_COLUNA_CERVICAL/TORACICA/LOMBAR)",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 8,
+          "trecho": "TC ou RM de coluna em caso de suspeita de compressão medular",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM ou TC de pelve na recidiva bioquímica",
+        "cenario": "recidiva bioquímica",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "RM ou TC de pelve deve ser recomendada",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "Muito baixo e baixo risco",
+        "conduta": "Vigilância ativa preferencial; alternativas: prostatectomia radical, RT externa ou braquiterapia.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Opção preferencial: vigilância ativa",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Intermediário favorável",
+        "conduta": "Prostatectomia radical ou RT externa sem TDA; vigilância ativa em selecionados (> 70 anos/comorbidades, ISUP 2).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "não deve ser indicada de rotina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Intermediário desfavorável",
+        "conduta": "Prostatectomia radical ou RT externa + TDA por 4 a 6 meses.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Considerar o uso de agonista ou antagonista de LHRH por 4 a 6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Alto e muito alto risco",
+        "conduta": "RT externa + TDA 18 a 36 meses (± abiraterona 2 anos em selecionados); ou prostatectomia radical com linfadenectomia pélvica discutida em reunião multidisciplinar.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "agonista (ou antagonista) de LHRH concomitante e adjuvante por 18 a 36 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Pós-prostatectomia pT3b, N+ ou ISUP ≥ 4",
+        "conduta": "Discutir RT adjuvante; maioria: seguimento com PSA e RT de salvamento precoce.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "Discutir RT adjuvante em pacientes com tumores pT3b, LFN positivos ou ISUP ≥ 4.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Recidiva bioquímica",
+        "conduta": "Pós-PR: PSA ≥ 0,1 ng/mL confirmado; pós-RT: nadir + 2 ng/mL (Phoenix). Reestadiar; RT de salvamento ± TDA; TDA + enzalutamida se alto risco sem resgate local.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "elevação de PSA com valor ≥ 0,1 ng/mL, confirmado por segundo exame",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "mHSPC alto volume",
+        "conduta": "Doença visceral ou ≥ 4 lesões ósseas com ≥ 1 fora da coluna vertebral e da pelve (critério operacional fixado em D-F1-20, 49A; a SBOC p.10 escreve 'fora do esqueleto axial'): TDA + ARPI ou triplete (docetaxel + abiraterona ou darolutamida).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-20, 49A); grafia SBOC p.10 preservada em conflitos: 'Critério operacional de alto volume no mHSPC'",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "mHSPC alto risco (LATITUDE)",
+        "conduta": "Classificação prognóstica complementar ao volume: ≥ 2 de 3 — Gleason ≥ 8, ≥ 3 lesões ósseas, metástase visceral mensurável. Não substitui o volume CHAARTED na decisão de intensificação; ~10% dos casos são discordantes (alto volume + alto risco = pior prognóstico; baixo + baixo = melhor). Fatores adicionais (não substituem): doença de novo vs metacrônica; M1c > M1b > M1a; LDH alta, albumina baixa, ALP alta, CRP alta, Hb baixa; grade group 5; PS ruim e dor intensa.",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-20)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "mHSPC baixo volume",
+        "conduta": "TDA + ARPI (abiraterona, enzalutamida, apalutamida); benefício do docetaxel controverso.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Ainda há controvérsia quanto à indicação de tratamento quimio-hormonal com docetaxel",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "nmCRPC (PSADT ≤ 10 meses)",
+        "conduta": "Manter TDA + enzalutamida, apalutamida ou darolutamida.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "castração com tempo de duplicação do PSA ≤ 10 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "mCRPC",
+        "conduta": "Manter TDA; sequência individualizada (sintomas, ECOG, visceral, HRR, TMB, PSMA); terapia óssea + cálcio + vitamina D.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 23,
+          "trecho": "Associar terapia óssea + reposição cálcio + vitamina D",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "PSA_TOTAL",
+          "uso": "Diagnóstico, grupo de risco, vigilância ativa (3-6 meses), recidiva bioquímica (≥ 0,1 pós-PR; nadir + 2 pós-RT), seguimento do metastático a cada 3 meses, PSADT.",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 12,
+            "trecho": "Exame clínico e PSA a cada 3 meses;",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "TESTOSTERONA_TOTAL",
+          "uso": "Confirmar castração (< 50 ng/dL) e definir resistência à castração (nmCRPC/mCRPC).",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 10,
+            "trecho": "supressão dos níveis de testosterona valores inferiores a 50 ng/dL",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "FOSFATASE_ALCALINA",
+          "uso": "Indica cintilografia óssea em baixo/muito baixo risco quando elevada.",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 10,
+            "trecho": "Se FALC elevada ou dor óssea",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "CEA",
+          "uso": "Suspeita de variante neuroendócrina/agressiva (CEA elevado, junto com hipercalcemia e DHL elevado).",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 21,
+            "trecho": "marcadores de tumor neuroendócrino (CEA elevado, hipercalcemia, DHL elevado)",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "DHL",
+          "uso": "Suspeita de variante agressiva.",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 21,
+            "trecho": "marcadores de tumor neuroendócrino (CEA elevado, hipercalcemia, DHL elevado)",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "CALCIO",
+          "uso": "Hipercalcemia na variante agressiva; hipocalcemia com denosumabe.",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 22,
+            "trecho": "o risco de hipocalcemia foi o dobro com denosumabe",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "VITAMINA_D",
+          "uso": "Manter 25-OH vitamina D ≥ 30 ng/mL durante TDA.",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+            "pagina": 22,
+            "trecho": "Vitamina D 1.000 a 2.000 unidades por dia para manter o nível sérico",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "PSA livre (PSA_LIVRE, sem código SUS) — não citado pela SBOC para estadiamento/seguimento",
+        "PET-FDG no adenocarcinoma típico (não citado pela SBOC)",
+        "Cintilografia óssea em baixo/muito baixo risco assintomático com FALC normal"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "localizado muito baixo/baixo risco",
+        "intencao": "curativa",
+        "modalidades": [
+          "vigilância ativa (preferencial)",
+          "prostatectomia radical",
+          "RT externa",
+          "braquiterapia"
+        ],
+        "criterio": "Expectativa de vida curta: observação e tratamento conforme sintomas.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "Opção preferencial: vigilância ativa",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "localizado intermediário",
+        "intencao": "curativa",
+        "modalidades": [
+          "prostatectomia radical",
+          "RT externa ± TDA 4-6 meses (desfavorável)",
+          "vigilância ativa (favorável selecionado)"
+        ],
+        "criterio": "TDA só no desfavorável; contraindicação relativa: cardiopatia significativa.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Considerar o uso de agonista ou antagonista de LHRH por 4 a 6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "localizado alto/muito alto",
+        "intencao": "curativa",
+        "modalidades": [
+          "RT externa + TDA 18-36 meses",
+          "± abiraterona 2 anos (2 de 3 fatores ou N+ clínico)",
+          "prostatectomia radical + linfadenectomia (selecionados, reunião multidisciplinar)"
+        ],
+        "criterio": "Cirurgia idealmente com 1 fator de risco e expectativa de vida longa.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "agonista (ou antagonista) de LHRH concomitante e adjuvante por 18 a 36 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "recidiva bioquímica",
+        "intencao": "curativa",
+        "modalidades": [
+          "RT de salvamento (leito ± pelve) ± TDA 6 meses-2 anos",
+          "prostatectomia de salvamento pós-RT (recidiva local por biópsia)",
+          "TDA isolada precoce (Gleason 8-10, PSADT < 6 meses)",
+          "TDA intermitente",
+          "TDA + enzalutamida (alto risco sem resgate local)"
+        ],
+        "criterio": "PSA pré-RT > 0,5 ng/mL favorece TDA associada; PSA > 1 pós-PR ou > 2 pós-RT com PSADT < 9 meses = alto risco.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "RT de salvamento pode ser utilizada em pacientes com recidiva no leito prostático",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "mHSPC",
+        "intencao": "paliativa",
+        "modalidades": [
+          "TDA (orquiectomia, agonista ou antagonista LHRH) + ARPI",
+          "TDA + docetaxel + abiraterona ou darolutamida (alto volume)"
+        ],
+        "criterio": "TDA isolada desencorajada salvo contraindicação; QT + TDA sem novo agente hormonal não recomendada.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "O uso de TDA isolado deve ser desencorajado",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "nmCRPC",
+        "intencao": "paliativa",
+        "modalidades": [
+          "TDA contínua + enzalutamida/apalutamida/darolutamida"
+        ],
+        "criterio": "PSA em progressão com testosterona < 50 ng/dL, sem metástase em imagem convencional, PSADT ≤ 10 meses.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "na ausência de doença metastática por exames de imagem convencionais",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "mCRPC assintomático/pouco sintomático",
+        "intencao": "paliativa",
+        "modalidades": [
+          "ARPI (se não exposto)",
+          "iPARP + ARPI",
+          "olaparibe (HRR após ARPI)",
+          "docetaxel",
+          "cabazitaxel",
+          "rádio-223",
+          "Lutécio-PSMA",
+          "pembrolizumabe (TMB-alto)"
+        ],
+        "criterio": "Não sequenciar abiraterona ↔ enzalutamida.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "Hormonioterapia, preferencialmente com agente de 2ª geração",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "mCRPC sintomático",
+        "intencao": "paliativa",
+        "modalidades": [
+          "docetaxel",
+          "rádio-223",
+          "abiraterona + olaparibe",
+          "olaparibe",
+          "depois ARPI, cabazitaxel, Lutécio-PSMA"
+        ],
+        "criterio": "Rádio-223: doença óssea predominante, sem visceral, LFN < 3 cm.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 20,
+          "trecho": "sem doença visceral e linfonodomegalia <3 cm",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "variante histológica agressiva",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT com platina (carbo-docetaxel, cis-etoposídeo, carbo-cabazitaxel)"
+        ],
+        "criterio": "Critérios de Aparicio; também BRCA sem acesso a iPARP.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 21,
+          "trecho": "Outras situações para se considerar esquemas quimioterápicos que contenham platina",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "prostata-rt-tda-curta",
+        "nome": "RT externa + TDA curta (agonista LHRH 4 a 6 meses)",
+        "cenario": "localizado — risco intermediário desfavorável (definitivo)",
+        "linha": "tratamento definitivo",
+        "drogas": [
+          {
+            "droga": "Leuprorrelina (acetato, depósito trimestral)",
+            "dose": 22.5,
+            "unidade": "mg",
+            "via": "IM",
+            "dias": "D1 a cada 12 semanas",
+            "observacao": "Agonista ou antagonista de LHRH por 4 a 6 meses com RT (SBOC). Dose/apresentação da bula; alternativa: gosserelina 10,8 mg SC a cada 12 semanas (bula). Duração = SBOC.",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:leuprolide+AND+dosage_and_administration:%2222.5+mg%22&limit=1 (set_id 1563a30b-66e0-445d-ba3e-1ccd5218133f, LEUPROLIDE ACETATE DEPOT)",
+              "pagina": null,
+              "trecho": "22.5 mg for 3 months administration, given as a single intramuscular injection",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 84,
+        "numeroCiclos": 2,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Contraindicação relativa: doença cardiovascular significativa (SBOC p.13).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040207",
+              "nome": "HORMONIOTERAPIA PRÉVIA À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA"
+            },
+            {
+              "codigo": "0304050342",
+              "nome": "HORMONIOTERAPIA ADJUVANTE À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040207 HORMONIOTERAPIA PRÉVIA À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA; 0304050342 HORMONIOTERAPIA ADJUVANTE À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "HORMONIOTERAPIA PRÉVIA À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Considerar o uso de agonista ou antagonista de LHRH por 4 a 6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-rt-tda-longa",
+        "nome": "RT externa + TDA longa (agonista LHRH 18 a 36 meses)",
+        "cenario": "localizado — risco alto e muito alto (definitivo)",
+        "linha": "tratamento definitivo",
+        "drogas": [
+          {
+            "droga": "Leuprorrelina (acetato, depósito trimestral)",
+            "dose": 22.5,
+            "unidade": "mg",
+            "via": "IM",
+            "dias": "D1 a cada 12 semanas",
+            "observacao": "Concomitante e adjuvante à RT por 18 a 36 meses (SBOC p.14). Dose/apresentação da bula.",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:leuprolide+AND+dosage_and_administration:%2222.5+mg%22&limit=1 (set_id 1563a30b-66e0-445d-ba3e-1ccd5218133f, LEUPROLIDE ACETATE DEPOT)",
+              "pagina": null,
+              "trecho": "22.5 mg for 3 months administration, given as a single intramuscular injection",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 84,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304040207",
+              "nome": "HORMONIOTERAPIA PRÉVIA À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA"
+            },
+            {
+              "codigo": "0304050342",
+              "nome": "HORMONIOTERAPIA ADJUVANTE À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304040207 HORMONIOTERAPIA PRÉVIA À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA; 0304050342 HORMONIOTERAPIA ADJUVANTE À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "HORMONIOTERAPIA PRÉVIA À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "agonista (ou antagonista) de LHRH concomitante e adjuvante por 18 a 36 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-rt-tda-abiraterona-alto-risco",
+        "nome": "RT + TDA 3 anos + abiraterona 2 anos (STAMPEDE, alto/muito alto selecionado)",
+        "cenario": "localizado — alto/muito alto risco com 2 de 3 fatores (T3a/b/T4, ISUP ≥ 4, PSA > 40) ou LFN clínicos positivos",
+        "linha": "tratamento definitivo",
+        "drogas": [
+          {
+            "droga": "Abiraterona (acetato)",
+            "dose": null,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo por 2 anos",
+            "observacao": "SBOC não traz dose neste cenário; bula (mCRPC/mCSPC) não cobre esta indicação — não transferir.",
+            "pendencia": {
+              "texto": "Dose sem fonte no cenário localizado de alto risco (STAMPEDE G/J).",
+              "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+              "buscasFeitas": [
+                "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4 p.14-15 e -Prostata-localizado-v4 p.14-15: indicação sem dose",
+                "https://clinicaltrials.gov/api/v2/studies/NCT00268476: braços G/J descritos sem dose (interventions sem descrição)",
+                "fontes/pro26/59 p.5/15/16 e 60 p.10: só 'abiraterona 24m', sem dose",
+                "Rótulo FDA Zytiga: indicação só mCRPC/mCSPC — não transferível ao localizado"
+              ]
+            }
+          },
+          {
+            "droga": "Prednisolona/prednisona",
+            "dose": null,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo por 2 anos",
+            "observacao": "Dose não informada pela SBOC neste cenário.",
+            "pendencia": {
+              "texto": "Dose sem fonte no cenário localizado de alto risco (STAMPEDE G/J).",
+              "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+              "buscasFeitas": [
+                "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4 p.14-15 e -Prostata-localizado-v4 p.14-15: indicação sem dose",
+                "https://clinicaltrials.gov/api/v2/studies/NCT00268476: braços G/J descritos sem dose (interventions sem descrição)",
+                "fontes/pro26/59 p.5/15/16 e 60 p.10: só 'abiraterona 24m', sem dose",
+                "Rótulo FDA Zytiga: indicação só mCRPC/mCSPC — não transferível ao localizado"
+              ]
+            }
+          },
+          {
+            "droga": "Leuprorrelina (acetato, depósito trimestral)",
+            "dose": 22.5,
+            "unidade": "mg",
+            "via": "IM",
+            "dias": "D1 a cada 12 semanas",
+            "observacao": "TDA por 3 anos (SBOC p.14). Dose/apresentação da bula.",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:leuprolide+AND+dosage_and_administration:%2222.5+mg%22&limit=1 (set_id 1563a30b-66e0-445d-ba3e-1ccd5218133f, LEUPROLIDE ACETATE DEPOT)",
+              "pagina": null,
+              "trecho": "22.5 mg for 3 months administration, given as a single intramuscular injection",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 84,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Sem aprovação Anvisa para esta indicação (SBOC p.14). Não trocar abiraterona por enzalutamida (ENZARAD negativo).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de abiraterona no localizado de alto risco (STAMPEDE) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304050342 — decisão do serviço. Abiraterona incorporada só na doença metastática (Portarias SECTICS/MS nº 32 e 33/2024). TDA isolada com RT: APAC 0304040207/0304050342.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para abiraterona no localizado de alto risco (STAMPEDE) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "o uso de abiraterona por 2 anos associado à TDA por 3 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-rb-rt-salvamento-tda",
+        "nome": "RT de salvamento + TDA (PSA pré-RT > 0,5 ng/mL)",
+        "cenario": "recidiva bioquímica pós-prostatectomia (salvamento local)",
+        "linha": "salvamento",
+        "drogas": [
+          {
+            "droga": "Leuprorrelina (acetato, depósito trimestral)",
+            "dose": 22.5,
+            "unidade": "mg",
+            "via": "IM",
+            "dias": "D1 a cada 12 semanas",
+            "observacao": "Tempo de TDA de 6 meses (GETUG-16) a 2 anos (RADICALS-HD) — SBOC p.16. Dose/apresentação da bula.",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:leuprolide+AND+dosage_and_administration:%2222.5+mg%22&limit=1 (set_id 1563a30b-66e0-445d-ba3e-1ccd5218133f, LEUPROLIDE ACETATE DEPOT)",
+              "pagina": null,
+              "trecho": "22.5 mg for 3 months administration, given as a single intramuscular injection",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 84,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304050342",
+              "nome": "HORMONIOTERAPIA ADJUVANTE À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA"
+            }
+          ],
+          "observacao": "TDA associada à RT de salvamento. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304050342 HORMONIOTERAPIA ADJUVANTE À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "HORMONIOTERAPIA ADJUVANTE À RADIOTERAPIA EXTERNA DO ADENOCARCINOMA DE PRÓSTATA",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "Considerar associar TDA nos pacientes com PSA pré-RT acima 0,5 ng/mL.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-rb-tda-enzalutamida",
+        "nome": "TDA + enzalutamida (RB de alto risco, sem resgate local; EMBARK)",
+        "cenario": "recidiva bioquímica de alto risco (PSA > 1 pós-PR ou > 2 pós-RT, PSADT < 9 meses), sem resgate local",
+        "linha": "sistêmico",
+        "drogas": [
+          {
+            "droga": "Enzalutamida",
+            "dose": 160,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "Dose da bula (indicação nmCSPC com RB de alto risco). Intermitência recomendada se boa resposta na semana 37 (SBOC p.17). Uso contínuo (SBOC: 'continuamente'); cicloDias 28 = convenção de dispensação/avaliação, não pausa.",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:enzalutamide&limit=1 (set_id b129fdc9-1d8e-425c-a5a9-8a2ed36dfbdf, XTANDI)",
+              "pagina": null,
+              "trecho": "The recommended dosage of XTANDI is 160 mg administered orally once daily",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Leuprorrelina (acetato, depósito trimestral)",
+            "dose": 22.5,
+            "unidade": "mg",
+            "via": "IM",
+            "dias": "D1 a cada 12 semanas",
+            "observacao": "Dose/apresentação da bula.",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:leuprolide+AND+dosage_and_administration:%2222.5+mg%22&limit=1 (set_id 1563a30b-66e0-445d-ba3e-1ccd5218133f, LEUPROLIDE ACETATE DEPOT)",
+              "pagina": null,
+              "trecho": "22.5 mg for 3 months administration, given as a single intramuscular injection",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Histórico de epilepsia: contraindicação à enzalutamida (SBOC avançada p.17). Interações CYP (INAT-25).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de enzalutamida na recidiva bioquímica (EMBARK) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020079 — decisão do serviço. Enzalutamida não incorporada em mHSPC, nmCRPC e mCRPC (Portarias SECTICS/MS nº 32 e 33/2024).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para enzalutamida na recidiva bioquímica (EMBARK) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "TDA em combinação com eenzalutamida",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-tda-leuprorrelina-im",
+        "nome": "TDA — leuprorrelina IM trimestral",
+        "cenario": "doença avançada (mHSPC; manter contínua em nmCRPC/mCRPC)",
+        "linha": "base de todas as linhas",
+        "drogas": [
+          {
+            "droga": "Leuprorrelina (acetato, depósito trimestral)",
+            "dose": 22.5,
+            "unidade": "mg",
+            "via": "IM",
+            "dias": "D1 a cada 12 semanas",
+            "observacao": "Objetivo: testosterona < 50 ng/dL (SBOC p.10). Considerar bicalutamida 50 mg/dia por ~15 dias antes se risco de flare sintomático (protocolo prostata-bicalutamida-antiflare).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:leuprolide+AND+dosage_and_administration:%2222.5+mg%22&limit=1 (set_id 1563a30b-66e0-445d-ba3e-1ccd5218133f, LEUPROLIDE ACETATE DEPOT)",
+              "pagina": null,
+              "trecho": "22.5 mg for 3 months administration, given as a single intramuscular injection",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 84,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020079 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "Terapia de deprivação androgênica (TDA) com objetivo de supressão dos níveis",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-tda-leuprorrelina-sc",
+        "nome": "TDA — leuprorrelina SC trimestral",
+        "cenario": "doença avançada (mHSPC; manter contínua em nmCRPC/mCRPC)",
+        "linha": "base de todas as linhas",
+        "drogas": [
+          {
+            "droga": "Leuprorrelina (acetato, depósito SC trimestral)",
+            "dose": 22.5,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D1 a cada 3 meses",
+            "observacao": "Objetivo: testosterona < 50 ng/dL (SBOC p.10).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:leuprolide+AND+dosage_and_administration:%2222.5+mg%22&limit=1 (set_id b7b679a9-6823-4ef8-8d31-3ab5058ffcfc, ELIGARD)",
+              "pagina": null,
+              "trecho": "22.5 mg subcutaneously every 3 months",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 90,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020079 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "Terapia de deprivação androgênica (TDA) com objetivo de supressão dos níveis",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-tda-gosserelina-trimestral",
+        "nome": "TDA — gosserelina 10,8 mg SC a cada 12 semanas",
+        "cenario": "doença avançada (mHSPC; manter contínua em nmCRPC/mCRPC)",
+        "linha": "base de todas as linhas",
+        "drogas": [
+          {
+            "droga": "Gosserrelina (implante trimestral)",
+            "dose": 10.8,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D1 a cada 12 semanas",
+            "observacao": "Objetivo: testosterona < 50 ng/dL (SBOC p.10).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:goserelin&limit=1 (set_id e4cb3c20-2738-400a-b522-3f36f71fe6c5, ZOLADEX 10,8 mg)",
+              "pagina": null,
+              "trecho": "ZOLADEX, at a dose of 10.8 mg, should be administered subcutaneously every 12 weeks",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 84,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020079 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "Terapia de deprivação androgênica (TDA) com objetivo de supressão dos níveis",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-tda-gosserelina-mensal",
+        "nome": "TDA — gosserelina 3,6 mg SC a cada 28 dias",
+        "cenario": "doença avançada (mHSPC; manter contínua em nmCRPC/mCRPC)",
+        "linha": "base de todas as linhas",
+        "drogas": [
+          {
+            "droga": "Gosserrelina (implante mensal)",
+            "dose": 3.6,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D1 a cada 28 dias",
+            "observacao": "Objetivo: testosterona < 50 ng/dL (SBOC p.10).",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:goserelin&limit=1 (set_id 294b168b-6e5f-4db9-bf70-d599271458b3, ZOLADEX 3,6 mg)",
+              "pagina": null,
+              "trecho": "ZOLADEX, at a dose of 3.6 mg, should be administered subcutaneously every 28 days",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020079 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "Terapia de deprivação androgênica (TDA) com objetivo de supressão dos níveis",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-tda-degarelix",
+        "nome": "TDA — antagonista LHRH (degarelix)",
+        "cenario": "doença avançada; preferencial se urgência de castração (compressão medular, dor refratária, obstrução urinária, CIVD)",
+        "linha": "base de todas as linhas",
+        "drogas": [
+          {
+            "droga": "Degarelix (dose de ataque)",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D1 (somente 1º ciclo; 2 injeções de 120 mg)",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:degarelix&limit=1 (set_id ab11dd8a-0fd9-4013-89ab-e114557c7e4b, FIRMAGON)",
+              "pagina": null,
+              "trecho": "Starting Dosage: 240 mg given as two injections of 120 mg each",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Degarelix (manutenção)",
+            "dose": 80,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D1 a cada 28 dias, a partir de 28 dias após o ataque",
+            "observacao": "",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:degarelix&limit=1 (set_id ab11dd8a-0fd9-4013-89ab-e114557c7e4b, FIRMAGON)",
+              "pagina": null,
+              "trecho": "Maintenance Dosage: 80 mg administered as a single injection every 28 days",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de degarelix nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020079 — decisão do serviço. Relatório preliminar do PCDT de próstata (CP 86/2026) só o cita na revisão de evidência.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para degarelix nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "deve-se favorecer o uso de antagonista do LHRH ou castração cirúrgica",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-bicalutamida-antiflare",
+        "nome": "Bicalutamida anti-flare antes do agonista LHRH",
+        "cenario": "início de agonista LHRH em doença avançada com risco de flare sintomático",
+        "linha": "suporte à TDA",
+        "drogas": [
+          {
+            "droga": "Bicalutamida",
+            "dose": 50,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia por cerca de 15 dias antes do agonista",
+            "observacao": "Antiandrógeno em monoterapia não é recomendado (SBOC p.9)."
+          }
+        ],
+        "cicloDias": 15,
+        "numeroCiclos": 1,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020079 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "a bicalutamida 50 mg/dia) por cerca de 15 dias antes",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mhspc-abiraterona-prednisona",
+        "nome": "TDA + abiraterona + prednisona",
+        "cenario": "metastático sensível à castração (mHSPC)",
+        "linha": "1ª linha (intensificação)",
+        "drogas": [
+          {
+            "droga": "Abiraterona (acetato)",
+            "dose": 1000,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente. Uso contínuo (SBOC: 'continuamente'); cicloDias 28 = convenção de dispensação/avaliação, não pausa."
+          },
+          {
+            "droga": "Prednisona",
+            "dose": 5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente (mHSPC; difere do mCRPC)."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Monitorar TGO/TGP, potássio e PA (bula). Interações INAT-23/INAT-24. Associado à TDA contínua.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 32, de 22/08/2024; Relatório nº 911 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-32-de-22-de-agosto-de-2024-580075201",
+            "pagina": null,
+            "trecho": "abiraterona em monoterapia ou associada ao docetaxel",
+            "estado": "VERIFICADO"
+          },
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ]
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Abiraterona 1.000 mg VO 1x/dia continuamente Prednisona 5 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mhspc-enzalutamida",
+        "nome": "TDA + enzalutamida",
+        "cenario": "metastático sensível à castração (mHSPC)",
+        "linha": "1ª linha (intensificação)",
+        "drogas": [
+          {
+            "droga": "Enzalutamida",
+            "dose": 160,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente. Uso contínuo (SBOC: 'continuamente'); cicloDias 28 = convenção de dispensação/avaliação, não pausa."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Epilepsia: contraindicação (SBOC p.17). INAT-25.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Alternativa SUS: abiraterona (Portaria SECTICS/MS nº 32/2024).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 32, de 22/08/2024; Relatório nº 911 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-32-de-22-de-agosto-de-2024-580075201",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do SUS, medicamentos enzalutamida, darolutamida e apalutamida",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Enzalutamida 160 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mhspc-apalutamida",
+        "nome": "TDA + apalutamida",
+        "cenario": "metastático sensível à castração (mHSPC)",
+        "linha": "1ª linha (intensificação)",
+        "drogas": [
+          {
+            "droga": "Apalutamida",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente. Uso contínuo (SBOC: 'continuamente'); cicloDias 28 = convenção de dispensação/avaliação, não pausa."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Alternativa SUS: abiraterona (Portaria SECTICS/MS nº 32/2024).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portarias SECTICS/MS nº 32 e nº 33, de 22/08/2024; Relatórios nº 911/912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-33-de-22-de-agosto-de-2024-580101368",
+            "pagina": null,
+            "trecho": "a apalutamida, darolutamida e enzalutamida (associados à TPA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Apalutamida 240 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mhspc-docetaxel-abiraterona-prednisona",
+        "nome": "TDA + docetaxel + abiraterona + prednisona (triplete; PEACE-1)",
+        "cenario": "metastático sensível à castração (mHSPC), preferencialmente alto volume",
+        "linha": "1ª linha (intensificação)",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "A cada 3 semanas, 6 ciclos."
+          },
+          {
+            "droga": "Abiraterona (acetato)",
+            "dose": 1000,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo",
+            "observacao": "1x/dia continuamente."
+          },
+          {
+            "droga": "Prednisona",
+            "dose": 5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo",
+            "observacao": "1x/dia continuamente."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "Conforme protocolo institucional de docetaxel (não informado pela SBOC).",
+        "ajusteObrigatorio": "Hemograma, função hepática antes de cada ciclo (SBOC p.12). INAT-18 (docetaxel × CYP3A4 fortes).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 32, de 22/08/2024; Relatório nº 911 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-32-de-22-de-agosto-de-2024-580075201",
+            "pagina": null,
+            "trecho": "abiraterona em monoterapia ou associada ao docetaxel",
+            "estado": "VERIFICADO"
+          },
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ]
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Docetaxel 75 mg/m² EV D1 a cada 3 semanas, 6 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mhspc-docetaxel-darolutamida",
+        "nome": "TDA + docetaxel + darolutamida (triplete; ARASENS)",
+        "cenario": "metastático sensível à castração (mHSPC), preferencialmente alto volume",
+        "linha": "1ª linha (intensificação)",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "A cada 3 semanas, 6 ciclos."
+          },
+          {
+            "droga": "Darolutamida",
+            "dose": 600,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo",
+            "observacao": "12/12 h continuamente."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "Conforme protocolo institucional de docetaxel (não informado pela SBOC).",
+        "ajusteObrigatorio": "INAT-18.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Alternativa SUS: docetaxel + abiraterona (Portaria SECTICS/MS nº 32/2024).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portarias SECTICS/MS nº 32 e nº 33, de 22/08/2024; Relatórios nº 911/912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-32-de-22-de-agosto-de-2024-580075201",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do SUS, medicamentos enzalutamida, darolutamida e apalutamida",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 10,
+          "trecho": "Darolutamida 600 mg VO 12/12 h continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-nmcrpc-enzalutamida",
+        "nome": "TDA + enzalutamida (nmCRPC, PSADT ≤ 10 meses)",
+        "cenario": "não metastático resistente à castração (nmCRPC)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Enzalutamida",
+            "dose": 160,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente. Uso contínuo (SBOC: 'continuamente'); cicloDias 28 = convenção de dispensação/avaliação, não pausa."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Manter TDA contínua.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 33, de 22/08/2024; Relatório nº 912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-33-de-22-de-agosto-de-2024-580101368",
+            "pagina": null,
+            "trecho": "de não incorporar a enzalutamida para pacientes com câncer de próstata",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Enzalutamida 160 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-nmcrpc-apalutamida",
+        "nome": "TDA + apalutamida (nmCRPC, PSADT ≤ 10 meses)",
+        "cenario": "não metastático resistente à castração (nmCRPC)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Apalutamida",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente. Uso contínuo (SBOC: 'continuamente'); cicloDias 28 = convenção de dispensação/avaliação, não pausa."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Manter TDA contínua.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portarias SECTICS/MS nº 32 e nº 33, de 22/08/2024; Relatórios nº 911/912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-33-de-22-de-agosto-de-2024-580101368",
+            "pagina": null,
+            "trecho": "a apalutamida, darolutamida e enzalutamida (associados à TPA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Apalutamida 240 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-nmcrpc-darolutamida",
+        "nome": "TDA + darolutamida (nmCRPC, PSADT ≤ 10 meses)",
+        "cenario": "não metastático resistente à castração (nmCRPC)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Darolutamida",
+            "dose": 600,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "12/12 h continuamente. Uso contínuo (SBOC: 'continuamente'); cicloDias 28 = convenção de dispensação/avaliação, não pausa."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Manter TDA contínua.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portarias SECTICS/MS nº 32 e nº 33, de 22/08/2024; Relatórios nº 911/912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-32-de-22-de-agosto-de-2024-580075201",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do SUS, medicamentos enzalutamida, darolutamida e apalutamida",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Darolutamida 600 mg VO 12/12 h continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-abiraterona-prednisona",
+        "nome": "Abiraterona + prednisona (mCRPC)",
+        "cenario": "metastático resistente à castração (mCRPC)",
+        "linha": "1ª linha (sem ARPI prévio) ou 2ª linha após docetaxel/rádio-223",
+        "drogas": [
+          {
+            "droga": "Abiraterona (acetato)",
+            "dose": 1000,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente. Uso contínuo (SBOC: 'continuamente'); cicloDias 28 = convenção de dispensação/avaliação, não pausa."
+          },
+          {
+            "droga": "Prednisona",
+            "dose": 5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "2x/dia continuamente (mCRPC)."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Não sequenciar após enzalutamida (resistência cruzada, SBOC p.18). TGO/TGP, potássio, PA. INAT-23/INAT-24.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "observacao": "Pós-docetaxel: Portaria SCTIE nº 38/2019.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 33, de 22/08/2024; Relatório nº 912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-33-de-22-de-agosto-de-2024-580101368",
+            "pagina": null,
+            "trecho": "resistente à castração, metastático e virgens de quimioterapia",
+            "estado": "VERIFICADO"
+          },
+          "apac": [
+            {
+              "codigo": "0304020060",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA"
+            }
+          ]
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Abiraterona 1.000 mg VO 1x/dia continuamente Prednisona 5 mg VO 2x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-enzalutamida",
+        "nome": "Enzalutamida (mCRPC)",
+        "cenario": "metastático resistente à castração (mCRPC)",
+        "linha": "1ª linha (sem ARPI prévio) ou 2ª linha",
+        "drogas": [
+          {
+            "droga": "Enzalutamida",
+            "dose": 160,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente. Uso contínuo (SBOC: 'continuamente'); cicloDias 28 = convenção de dispensação/avaliação, não pausa."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Não sequenciar após abiraterona. Epilepsia: contraindicação. INAT-25.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Alternativa SUS: abiraterona (Portarias SCTIE nº 38/2019 e SECTICS/MS nº 33/2024).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 33, de 22/08/2024; Relatório nº 912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-33-de-22-de-agosto-de-2024-580101368",
+            "pagina": null,
+            "trecho": "de não incorporar a enzalutamida para pacientes com câncer de próstata",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Enzalutamida 160 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-bicalutamida",
+        "nome": "Bicalutamida (hormonioterapia de 1ª geração)",
+        "cenario": "metastático resistente à castração (mCRPC) — sem acesso a agentes com ganho de SG",
+        "linha": "alternativa de recurso limitado",
+        "drogas": [
+          {
+            "droga": "Bicalutamida",
+            "dose": 50,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente. Sem ganho de SG demonstrado (SBOC p.17-18)."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020060",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020060 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Bicalutamida 50 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-destilbenol",
+        "nome": "Destilbenol (estrógeno)",
+        "cenario": "metastático resistente à castração (mCRPC) — sem acesso a agentes com ganho de SG",
+        "linha": "alternativa de recurso limitado",
+        "drogas": [
+          {
+            "droga": "Destilbenol (dietilestilbestrol)",
+            "dose": 1,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente. Avaliar risco tromboembólico (bula não consultada)."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020060",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020060 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Destilbenol 1 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-dexametasona",
+        "nome": "Dexametasona em dose baixa",
+        "cenario": "metastático resistente à castração (mCRPC) — sem acesso a agentes com ganho de SG",
+        "linha": "alternativa de recurso limitado",
+        "drogas": [
+          {
+            "droga": "Dexametasona",
+            "dose": 0.5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020060",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020060 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 2ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "Dexametasona 0,5 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-docetaxel-prednisona",
+        "nome": "Docetaxel + prednisona 21/21 dias (mCRPC)",
+        "cenario": "metastático resistente à castração (mCRPC)",
+        "linha": "1ª linha (sintomáticos) ou 2ª linha (após ARPI)",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "A cada 3 semanas, 6 ciclos (SBOC p.16)."
+          },
+          {
+            "droga": "Prednisona",
+            "dose": 5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D21 (contínuo)",
+            "observacao": "2x/dia continuamente."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "Ficha local: ondansetrona + dexametasona EV D1 (ver ficha).",
+        "ajusteObrigatorio": "Hemograma e função hepática antes de cada ciclo. INAT-18.",
+        "fichaId": "FICHA.prostata.docetaxel-21-21-dias__paliativo-metastatico@1.0.0",
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020087",
+              "nome": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020087 QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "Docetaxel 75 mg/m² EV D1 a cada 3 semanas, 6 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-docetaxel-quinzenal",
+        "nome": "Docetaxel quinzenal (esquema fracionado) + prednisona",
+        "cenario": "metastático resistente à castração (mCRPC)",
+        "linha": "alternativa menos tóxica ao docetaxel 21/21",
+        "drogas": [
+          {
+            "droga": "Docetaxel",
+            "dose": 50,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 (a cada 14 dias = D1 e D15 de ciclo de 28 dias)",
+            "observacao": "Aula Onco PRO 2026 (CURSO, INFERIDO); esquema D1/D15 q28 confirmado no registro PROSTY (NCT00255606), que não traz a dose.",
+            "fonte": {
+              "tipo": "CURSO",
+              "referencia": "fontes/pro26/61_-_Aula_61_-_Próstata_-_CRPC_M0_e_M1_-_Parte_1.txt",
+              "pagina": 5,
+              "trecho": "Docetaxel 50mg/m² D1 e D15 q28d + Pred 10mg/d",
+              "estado": "INFERIDO"
+            }
+          },
+          {
+            "droga": "Prednisona",
+            "dose": 10,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "1x/dia contínuo",
+            "observacao": "Aula PRO; PROSTY: prednisona oral D1-D28.",
+            "fonte": {
+              "tipo": "CURSO",
+              "referencia": "fontes/pro26/61_-_Aula_61_-_Próstata_-_CRPC_M0_e_M1_-_Parte_1.txt",
+              "pagina": 5,
+              "trecho": "Docetaxel 50mg/m² D1 e D15 q28d + Pred 10mg/d",
+              "estado": "INFERIDO"
+            }
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "premedicacao": "Dexametasona VO 8 mg 12 h, 3 h e 1 h antes do docetaxel (regime da bula para mCRPC com prednisona concomitante; bula refere-se a 75 mg/m² q3s — INFERIDO para o quinzenal).",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020087",
+              "nome": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020087 QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026 — fontes/pro26/61_-_Aula_61_-_Próstata_-_CRPC_M0_e_M1_-_Parte_1.txt",
+          "pagina": 5,
+          "trecho": "esquema fracionado (50mg/m² q2s) é alternativa menos tóxica",
+          "estado": "INFERIDO"
+        },
+        "fonteEsquema": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00255606 (PROSTY, braço I)",
+          "pagina": null,
+          "trecho": "docetaxel IV over 1 hour on days 1 and 15",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-cabazitaxel-prednisona",
+        "nome": "Cabazitaxel + prednisona (mCRPC pós-docetaxel)",
+        "cenario": "metastático resistente à castração (mCRPC)",
+        "linha": "linhas subsequentes (após docetaxel)",
+        "drogas": [
+          {
+            "droga": "Cabazitaxel",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "A cada 3 semanas, 6 ciclos. Bula: 20 mg/m² (25 mg/m² em selecionados)."
+          },
+          {
+            "droga": "Prednisona",
+            "dose": 5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D21 (contínuo)",
+            "observacao": "2x/dia continuamente (bula: 10 mg/dia — mesma dose diária)."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 6,
+        "premedicacao": "Conforme bula/protocolo institucional (não informado pela SBOC).",
+        "ajusteObrigatorio": "Risco de neutropenia febril: avaliar profilaxia com G-CSF (bula não detalhada aqui).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de cabazitaxel nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020087 — decisão do serviço. Não citado no relatório preliminar do PCDT de próstata (CP 86/2026).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para cabazitaxel nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "Cabazitaxel 20 mg/m² EV D1 a cada 3 semanas, 6 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-mitoxantrona-prednisona",
+        "nome": "Mitoxantrona + prednisona",
+        "cenario": "metastático resistente à castração (mCRPC)",
+        "linha": "alternativa (sem ganho de SG)",
+        "drogas": [
+          {
+            "droga": "Mitoxantrona",
+            "dose": 12,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "A cada 3 semanas. Dose cumulativa/cardiotoxicidade: ver bula."
+          },
+          {
+            "droga": "Prednisona",
+            "dose": 5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D21 (contínuo)",
+            "observacao": "2x/dia continuamente."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Ecocardiograma basal (cardiotoxicidade de antraciclinas/antracenedionas — bula).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020087",
+              "nome": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020087 QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "Mitoxantrona 12 mg/m² EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-ciclofosfamida-oral",
+        "nome": "Ciclofosfamida oral metronômica",
+        "cenario": "metastático resistente à castração (mCRPC) — sem acesso a agentes com ganho de SG",
+        "linha": "alternativa de recurso limitado",
+        "drogas": [
+          {
+            "droga": "Ciclofosfamida",
+            "dose": 100,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D21",
+            "observacao": "1x/dia por 21 dias a cada 4 semanas."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020087",
+              "nome": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020087 QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "Ciclofosfamida oral 100 mg VO 1x/dia por 21 dias a cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-olaparibe",
+        "nome": "Olaparibe (mCRPC com alteração BRCA1/2 ou ATM após ARPI)",
+        "cenario": "metastático resistente à castração (mCRPC), alteração em genes de reparo (BRCA1/2, ATM)",
+        "linha": "após progressão a novo agente hormonal",
+        "drogas": [
+          {
+            "droga": "Olaparibe",
+            "dose": 300,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "2x/dia continuamente. Uso contínuo (SBOC: 'continuamente'); cicloDias 28 = convenção de dispensação/avaliação, não pausa."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Hemograma mensal (anemia); INAT-26 (olaparibe × CYP3A).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de olaparibe (próstata) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020087 — decisão do serviço.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para olaparibe (próstata) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "Olaparibe 300 mg VO 2x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-olaparibe-abiraterona-prednisona",
+        "nome": "Olaparibe + abiraterona + prednisona (PROpel)",
+        "cenario": "metastático resistente à castração (mCRPC) sem ARPI prévio na fase sensível; benefício maior com BRCA/HRR",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Olaparibe",
+            "dose": 300,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "2x/dia continuamente."
+          },
+          {
+            "droga": "Abiraterona (acetato)",
+            "dose": 1000,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente."
+          },
+          {
+            "droga": "Prednisona",
+            "dose": 5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente conforme SBOC p.16 (difere de abiraterona isolada no mCRPC, 2x/dia — ver pendências).",
+            "frequencia": "5 mg 2x/dia (12/12 h)",
+            "fonteDose": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+              "pagina": null,
+              "trecho": null,
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "INAT-23, INAT-26. Bula FDA restringe a BRCAm; SBOC: aprovado Anvisa independentemente de HRR.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de olaparibe (próstata) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020087 — decisão do serviço. Abiraterona isolada incorporada (Portaria SECTICS/MS nº 33/2024).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para olaparibe (próstata) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "Olaparibe 300 mg VO 2x/dia continuamente Abiraterona 1.000 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-talazoparibe-enzalutamida",
+        "nome": "Talazoparibe + enzalutamida (TALAPRO-2)",
+        "cenario": "metastático resistente à castração (mCRPC) sem ARPI prévio na fase sensível; benefício maior com BRCA/HRR",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Talazoparibe",
+            "dose": 0.5,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente."
+          },
+          {
+            "droga": "Enzalutamida",
+            "dose": 160,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28 (contínuo)",
+            "observacao": "1x/dia continuamente."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Hemograma (anemia); INAT-25.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de talazoparibe (próstata) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020087 — decisão do serviço. Enzalutamida não incorporada (Portaria SECTICS/MS nº 33/2024).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para talazoparibe (próstata) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "Talazoparibe 0,5 mg VO 1x/dia continuamente Enzalutamida 160 mg VO 1x/dia continuamente",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-pembrolizumabe-tmb",
+        "nome": "Pembrolizumabe (TMB ≥ 10 mut/Mb)",
+        "cenario": "metastático resistente à castração (mCRPC) com TMB ≥ 10 mut/Mb após ARPI",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "A cada 3 semanas (alternativa SBOC: 400 mg EV D1 a cada 6 semanas)."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "CI-08 (autoimune/transplante); INAT-27, INAT-28.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de pembrolizumabe (próstata TMB-alto) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020087 — decisão do serviço.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para pembrolizumabe (próstata TMB-alto) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "Pembrolizumabe 200 mg EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-radio-223",
+        "nome": "Rádio-223 (doença óssea predominante, sintomática)",
+        "cenario": "metastático resistente à castração (mCRPC), doença óssea predominante, sem visceral, LFN < 3 cm",
+        "linha": "1ª linha (sintomáticos) ou subsequentes",
+        "drogas": [
+          {
+            "droga": "Rádio-223 (dicloreto)",
+            "dose": 55,
+            "unidade": "kBq/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "A cada 4 semanas, 6 injeções (bula). SBOC p.16 cita 50 kB/kg — ver conflitos.",
+            "fonte": {
+              "tipo": "BULA",
+              "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:xofigo&limit=1 (set_id a398400e-bd31-41a9-9696-4f7c06569ede, XOFIGO)",
+              "pagina": null,
+              "trecho": "The dose regimen of Xofigo is 55 kBq (1.49 microcurie) per kg body weight",
+              "estado": "CONFLITANTE"
+            }
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Se associado a enzalutamida (PEACE-3): proteção óssea mandatória (SBOC p.18). Unidade fora do enum do esquema (kBq/kg).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de dicloreto de rádio-223 nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para dicloreto de rádio-223 nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "Radium-223 50 kB/kg EV a cada 4 semanas",
+          "estado": "CONFLITANTE"
+        }
+      },
+      {
+        "id": "prostata-mcrpc-lutecio-psma",
+        "nome": "177Lu-PSMA-617 (doença PSMA+)",
+        "cenario": "metastático resistente à castração (mCRPC) PSMA+ no PET-PSMA, após ARPI e taxano",
+        "linha": "linhas subsequentes",
+        "drogas": [
+          {
+            "droga": "177Lu-PSMA-617 (vipivotida tetraxetana)",
+            "dose": 7.4,
+            "unidade": "GBq",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "A cada 6 semanas por 4 a 6 ciclos (SBOC); bula: 6 doses. Unidade fora do enum do esquema (GBq)."
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Exige PET-PSMA (PET_PSMA sem código SUS) — sem alternativa SUS para seleção; disponibilidade SUS do radiofármaco: DADO_AUSENTE.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de lutécio-177-PSMA-617 nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). PET-PSMA para seleção sem id no catálogo.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para lutécio-177-PSMA-617 nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "177Lu-PSMA-617 7,4 GBq EV a cada 6 semanas por 4 a 6 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-variante-agressiva-carboplatina-docetaxel",
+        "nome": "Carboplatina + docetaxel (variante agressiva/anaplásica/pequenas células)",
+        "cenario": "mCRPC com variante histológica agressiva",
+        "linha": "1ª linha da variante",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Calvert (CI-04)."
+          },
+          {
+            "droga": "Docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Dexametasona VO 16 mg/dia (8 mg 12/12 h) por 3 dias, iniciando 1 dia antes do docetaxel (bula FDA docetaxel).",
+        "ajusteObrigatorio": "CI-04 (Calvert), INAT-18.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020087",
+              "nome": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020087 QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 21,
+          "trecho": "Carboplatina AUC 5 + Docetaxel 75 mg/m² EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "premedicacaoFonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22docetaxel%22&limit=1 (set_id 00c61d11-d6b7-4618-b6f6-2592dbcc8af7)",
+          "pagina": null,
+          "trecho": "dexamethasone 16 mg per day (e.g., 8 mg twice daily) for 3 days",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-variante-agressiva-cisplatina-etoposideo",
+        "nome": "Cisplatina + etoposídeo (variante agressiva/pequenas células)",
+        "cenario": "mCRPC com variante histológica agressiva",
+        "linha": "1ª linha da variante",
+        "drogas": [
+          {
+            "droga": "Cisplatina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D3",
+            "observacao": ""
+          },
+          {
+            "droga": "Etoposídeo",
+            "dose": 120,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D3",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "CI-01 (função renal), INAT-15 (ototóxicos).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020087",
+              "nome": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020087 QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA RESISTENTE A HORMONIOTERAPIA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 21,
+          "trecho": "Cisplatina 25 mg/m² + Etoposídeo 120 mg/m² EV D1 a D3",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-variante-agressiva-carboplatina-cabazitaxel",
+        "nome": "Carboplatina + cabazitaxel (variante agressiva)",
+        "cenario": "mCRPC com variante histológica agressiva",
+        "linha": "1ª linha da variante",
+        "drogas": [
+          {
+            "droga": "Carboplatina",
+            "dose": 5,
+            "unidade": "AUC",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Calvert (CI-04)."
+          },
+          {
+            "droga": "Cabazitaxel",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "SBOC p.16: 20 mg/m²; p.21: 20-25 mg/m² — usado o menor (ver conflitos)."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "30 min antes de cada dose: anti-histamínico (difenidramina 25 mg ou equivalente), dexametasona 8 mg e antagonista H2, EV (bula FDA Jevtana); antiemético conforme necessidade.",
+        "ajusteObrigatorio": "CI-04.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de cabazitaxel nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Eventual fornecimento só por padronização local dentro do valor da APAC 0304020087 — decisão do serviço. Carboplatina via APAC.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para cabazitaxel nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "Carboplatina AUC 5 + Cabazitaxel 20 mg/m² EV D1 a cada 3 semanas",
+          "estado": "VERIFICADO"
+        },
+        "premedicacaoFonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cabazitaxel%22&limit=1 (set_id de3d9c26-572b-4ea4-9b2d-dd58a2b3e8fa)",
+          "pagina": null,
+          "trecho": "Administer intravenously 30 minutes before each dose of JEVTANA: Antihistamine",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-osso-denosumabe-120",
+        "nome": "Denosumabe 120 mg (eventos esqueléticos, mCRPC com metástase óssea)",
+        "cenario": "mCRPC com metástases ósseas",
+        "linha": "suporte ósseo",
+        "drogas": [
+          {
+            "droga": "Denosumabe",
+            "dose": 120,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D1",
+            "observacao": "A cada 4 semanas. Hipocalcemia 13% vs 6% com zoledrônico (SBOC p.22); cálcio + vitamina D."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de denosumabe (oncologia) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Denosumabe não incorporado para osteoporose (Portarias SCTIE nº 62 e 64/2022). Alternativa SUS na metástase óssea: ácido zoledrônico (APAC 0304080071).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para denosumabe (oncologia) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 21,
+          "trecho": "Denosumabe 120 mg SC D1 a cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-osso-zoledronico-4",
+        "nome": "Ácido zoledrônico 4 mg (eventos esqueléticos, mCRPC com metástase óssea)",
+        "cenario": "mCRPC com metástases ósseas",
+        "linha": "suporte ósseo",
+        "drogas": [
+          {
+            "droga": "Ácido zoledrônico",
+            "dose": 4,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "A cada 3 meses (não-inferior a 4/4 semanas, SBOC p.21)."
+          }
+        ],
+        "cicloDias": 84,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Ajuste por clearance de creatinina (bula).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304080071",
+              "nome": "INIBIDOR DA OSTEÓLISE"
+            }
+          ],
+          "observacao": "Procedimento INIBIDOR DA OSTEÓLISE com CID C795 (metástase óssea) compatível. Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304080071 INIBIDOR DA OSTEÓLISE. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "INIBIDOR DA OSTEÓLISE",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 21,
+          "trecho": "Ácido zoledrônico 4 mg EV D1 a cada 3 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-osso-denosumabe-60",
+        "nome": "Denosumabe 60 mg (perda óssea induzida por TDA)",
+        "cenario": "TDA prolongada com osteopenia/alto risco de fratura (não para prevenir eventos ósseos no mHSPC)",
+        "linha": "suporte ósseo",
+        "drogas": [
+          {
+            "droga": "Denosumabe",
+            "dose": 60,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D1",
+            "observacao": "A cada 6 meses, com cálcio 1.000 mg + vitamina D 400-1.000 UI/dia."
+          }
+        ],
+        "cicloDias": 182,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Sem incorporação federal de denosumabe (oncologia) nesta indicação (sem relatório/portaria CONITEC localizado até 11/10/2026). Denosumabe não incorporado para osteoporose (Portarias SCTIE nº 62 e 64/2022). Alternativa SUS na metástase óssea: ácido zoledrônico (APAC 0304080071).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Lei nº 8.080/1990, art. 19-Q (https://www.planalto.gov.br/ccivil_03/leis/l8080.htm) + planilha oficial 'Recomendações da Conitec' (xlsx, entradas até 19/08/2026) e consultas públicas 2024-2026 sem registro para denosumabe (oncologia) nesta indicação",
+            "pagina": null,
+            "trecho": "A incorporação, a exclusão ou a alteração pelo SUS de novos medicamentos",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 12,
+          "trecho": "Denosumabe 60 mg SC D1 a cada 6 meses;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-osso-zoledronico-5-anual",
+        "nome": "Ácido zoledrônico 5 mg anual (perda óssea induzida por TDA)",
+        "cenario": "TDA prolongada com osteopenia/alto risco de fratura",
+        "linha": "suporte ósseo",
+        "drogas": [
+          {
+            "droga": "Ácido zoledrônico",
+            "dose": 5,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "Anualmente, com cálcio + vitamina D."
+          }
+        ],
+        "cicloDias": 365,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "parcial",
+          "observacao": "Fora do câncer (perda óssea por TDA): ácido zoledrônico está no SUS para osteoporose (Portaria SCTIE nº 61/2022) e doença de Paget (SCTIE nº 85/2018) — acesso segue o PCDT de osteoporose; sem procedimento APAC oncológico para esta indicação (0304080071 exige C795/C80/C900).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Relatório preliminar do PCDT do Adenocarcinoma de Próstata (CP 86/2026), ainda não aprovado — https://www.gov.br/conitec/pt-br/midias/consultas/relatorios/2026/relatorio-preliminar-pcdt-adenocarcinoma-de-prostata-cp-86/@@display-file/file",
+            "pagina": null,
+            "trecho": "Como opções terapêuticas complementares para CaP metastático resistente à castração",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 12,
+          "trecho": "Ácido zoledrônico 5 mg EV D1 anualmente;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-osso-alendronato",
+        "nome": "Alendronato semanal (perda óssea induzida por TDA)",
+        "cenario": "TDA prolongada com osteopenia/alto risco de fratura",
+        "linha": "suporte ósseo",
+        "drogas": [
+          {
+            "droga": "Alendronato",
+            "dose": 70,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1",
+            "observacao": "Semanalmente, com cálcio + vitamina D."
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "RENAME / Programa Farmácia Popular (alendronato de sódio 70 mg) — conferir elenco vigente",
+            "trecho": null,
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 12,
+          "trecho": "Alendronato 70 mg VO semanalmente.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "prostata-mhspc-darolutamida",
+        "nome": "Darolutamida + TDA (ARANOTE) — mHSPC sem docetaxel",
+        "cenario": "metastático sensível à castração (mHSPC)",
+        "linha": "1ª linha (intensificação)",
+        "drogas": [
+          {
+            "droga": "Darolutamida",
+            "dose": 600,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "2x/dia contínuo, com alimento",
+            "observacao": "Associada à TDA contínua (ver protocolos de TDA). SBOC: opção alternativa (NE forte/FR fraca)."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Uso contínuo; cicloDias 28 por convenção do pack. Interações CYP3A4/BCRP (bula).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "observacao": "Alternativa SUS: abiraterona (Portaria SECTICS/MS nº 32/2024).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portarias SECTICS/MS nº 32 e nº 33, de 22/08/2024; Relatórios nº 911/912 — https://www.in.gov.br/web/dou/-/portaria-sectics/ms-n-32-de-22-de-agosto-de-2024-580075201",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do SUS, medicamentos enzalutamida, darolutamida e apalutamida",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "https://api.fda.gov/drug/label.json?search=spl_product_data_elements:darolutamide&limit=1 (NUBEQA 2025-06-03, set_id 1a7cb212-56e4-4b9d-a73d-bfee7fe4735e)",
+          "pagina": null,
+          "trecho": "NUBEQA 600 mg (two 300 mg tablets) administered orally twice daily",
+          "estado": "VERIFICADO"
+        },
+        "fonteEnsaio": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT04736199 (ARANOTE)",
+          "pagina": null,
+          "trecho": "darolutamide 600 mg (2 tablets of 300 mg) twice daily with food",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "localizado — RT externa definitiva (braço RT do ProtecT, aula)",
+        "doseTotalGy": 74,
+        "fracoes": 37,
+        "concomitante": "TDA 3 a 6 meses no ensaio; na diretriz, TDA conforme grupo de risco",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026 — fontes/pro26/59_-_Aula_59_-_Próstata_-_Doença_localizada.txt",
+          "pagina": 10,
+          "trecho": "74 Gy 37fr + TDA 3 a 6m",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "cenario": "pós-prostatectomia — RT adjuvante/salvamento (esquemas de RADICALS-RT, GETUG-AFU 17)",
+        "doseTotalGy": 66,
+        "fracoes": 33,
+        "concomitante": "TDA conforme PSA pré-RT e risco",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026 — fontes/pro26/59_-_Aula_59_-_Próstata_-_Doença_localizada.txt",
+          "pagina": 18,
+          "trecho": "66 Gy x 33 fr",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "cenario": "pós-prostatectomia — RT adjuvante/salvamento hipofracionada (RADICALS-RT)",
+        "doseTotalGy": 52.5,
+        "fracoes": 20,
+        "concomitante": "",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026 — fontes/pro26/59_-_Aula_59_-_Próstata_-_Doença_localizada.txt",
+          "pagina": 18,
+          "trecho": "52.5 Gy x 20",
+          "estado": "INFERIDO"
+        }
+      },
+      {
+        "cenario": "mHSPC baixo volume — RT do primário (STAMPEDE braço H, aula): esquema semanal",
+        "doseTotalGy": 36,
+        "fracoes": 6,
+        "concomitante": "Com TDA ± terapia sistêmica. SBOC 2026 não aborda RT do primário — pendência.",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026 — fontes/pro26/60_-_Aula_60_-_Próstata_-_Recidiva_bioquímica_e_mCSPC.txt",
+          "pagina": 27,
+          "trecho": "aplicação semanal (6x6 36Gy)",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Prostatectomia radical",
+        "quando": "Muito baixo/baixo (alternativa), intermediário (opção padrão).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Prostatectomia radical",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Prostatectomia radical com linfadenectomia pélvica (estendida)",
+        "quando": "Alto risco (NE baixo/FR forte) e muito alto (FR fraca); discutir em reunião multidisciplinar.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "Prostatectomia radical com linfadenectomia pélvica: alto risco",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Prostatectomia de salvamento",
+        "quando": "Recidiva local confirmada por biópsia após RT; morbidade elevada.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "Pode ser uma opção naqueles pacientes tratados inicialmente com RT",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Orquiectomia bilateral (castração cirúrgica)",
+        "quando": "TDA em doença avançada; preferencial (ou antagonista) em urgência de castração.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "Orquiectomia bilateral (castração cirúrgica);",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "BRCA1/2 ou ATM (após progressão a novo agente hormonal)",
+        "opcao": "Olaparibe 300 mg VO 2x/dia",
+        "evidencia": "Fase III (PROfound); benefício maior em BRCA1/2, limitado em ATM",
+        "sus": "nao — olaparibe/talazoparibe sem avaliação CONITEC para próstata (INFERIDO); enzalutamida não incorporada (Portaria SECTICS/MS nº 33/2024)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 23,
+          "trecho": "Para pacientes com alteração de genes de reparo do DNA (BRCA1/2 ou ATM)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "HRR/BRCA (sem ARPI prévio na fase sensível)",
+        "opcao": "Abiraterona/prednisona + olaparibe ou enzalutamida + talazoparibe",
+        "evidencia": "Fase III (PROpel, TALAPRO-2); aprovadas Anvisa independentemente de HRR",
+        "sus": "nao — olaparibe/talazoparibe sem avaliação CONITEC para próstata (INFERIDO); enzalutamida não incorporada (Portaria SECTICS/MS nº 33/2024)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 19,
+          "trecho": "Ambas as combinações de inibidores de parp estão atualmente aprovadas pela Anvisa",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "TMB ≥ 10 mut/Mb",
+        "opcao": "Pembrolizumabe",
+        "evidencia": "Aprovação agnóstica; dados retrospectivos em próstata (NE baixo)",
+        "sus": "nao — pembrolizumabe sem avaliação CONITEC para próstata (INFERIDO)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "Pembrolizumabe: pacientes com carga mutacional ≥ 10 mut/Mb",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "PSMA+ no PET/CT PSMA",
+        "opcao": "177Lu-PSMA-617",
+        "evidencia": "Fase III (VISION; PSMAfore pré-QT)",
+        "sus": "nao — lutécio-177-PSMA-617 sem avaliação CONITEC (INFERIDO); PET-PSMA sem id no catálogo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 17,
+          "trecho": "Lutécio-PSMA: pacientes com PET/CT PSMA+",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "BRCA mutado sem acesso a iPARP",
+        "opcao": "QT com platina",
+        "evidencia": "Fase II",
+        "sus": "sim — quimioterapia de CRPC via APAC 0304020087 (SIGTAP 2026-09)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 21,
+          "trecho": "presença de mutação de BRCA (quando o inibidor de PARP estiver indisponível)",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": "Docetaxel/cabazitaxel/mitoxantrona: não informada pela SBOC (DADO_AUSENTE) — seguir corpus de antiemese.",
+      "riscoNeutropeniaFebril": "Não informado pela SBOC (DADO_AUSENTE); cabazitaxel e docetaxel exigem hemograma antes de cada ciclo.",
+      "outros": [
+        "Cálcio 1.000 mg/dia + vitamina D 1.000-2.000 UI/dia durante TDA (manter 25-OH-D ≥ 30 ng/mL).",
+        "Bisfosfonatos não devem ser usados de rotina para prevenir eventos ósseos no mHSPC.",
+        "Proteção óssea mandatória se rádio-223 associado a enzalutamida.",
+        "Denosumabe: hipocalcemia (13%) — monitorar cálcio."
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 22,
+        "trecho": "Cálcio 1.000 mg/dia",
+        "estado": "VERIFICADO"
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "PEACE-1",
+        "nct": "NCT01957436",
+        "nctEstado": "VERIFICADO",
+        "populacao": "mHSPC de novo",
+        "bracos": "SOC (TDA ± docetaxel) ± abiraterona ± RT",
+        "desfecho": "SG, SLP radiológica",
+        "resultado": "Triplete com ganho de SG, mais evidente no alto volume (SBOC p.11).",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT01957436",
+          "pagina": null,
+          "trecho": "A Phase III Study for Patients With Metastatic Hormone-naïve Prostate Cancer",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ARASENS",
+        "nct": "NCT02799602",
+        "nctEstado": "VERIFICADO",
+        "populacao": "mHSPC",
+        "bracos": "TDA + docetaxel ± darolutamida",
+        "desfecho": "SG",
+        "resultado": "Ganho de SG com darolutamida (SBOC p.11).",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02799602",
+          "pagina": null,
+          "trecho": "Darolutamide in Addition to Standard Androgen Deprivation Therapy and Docetaxel",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "VISION",
+        "nct": "NCT03511664",
+        "nctEstado": "VERIFICADO",
+        "populacao": "mCRPC PSMA+ pós-ARPI e taxano",
+        "bracos": "177Lu-PSMA-617 + SOC vs SOC",
+        "desfecho": "SLPr, SG",
+        "resultado": "Ganho de SLPr e SG (SBOC p.18).",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03511664",
+          "pagina": null,
+          "trecho": "Study of 177Lu-PSMA-617 In Metastatic Castrate-Resistant Prostate Cancer",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "PROfound",
+        "nct": "NCT02987543",
+        "nctEstado": "VERIFICADO",
+        "populacao": "mCRPC com alteração HRR pós-ARPI",
+        "bracos": "Olaparibe vs troca de ARPI",
+        "desfecho": "SLPr, SG",
+        "resultado": "Maior resposta, SLP e SG; maior em BRCA1/2 (SBOC p.18).",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02987543",
+          "pagina": null,
+          "trecho": "Study of Olaparib (Lynparza™) Versus Enzalutamide or Abiraterone Acetate",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "PROpel",
+        "nct": "NCT03732820",
+        "nctEstado": "VERIFICADO",
+        "populacao": "mCRPC 1ª linha",
+        "bracos": "Olaparibe + abiraterona vs placebo + abiraterona",
+        "desfecho": "SLPr",
+        "resultado": "Benefício evidente em HRR/BRCA mutado; menos claro em HRR proficiente (SBOC p.19).",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03732820",
+          "pagina": null,
+          "trecho": "Study on Olaparib Plus Abiraterone as First-line Therapy",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "TALAPRO-2",
+        "nct": "NCT03395197",
+        "nctEstado": "VERIFICADO",
+        "populacao": "mCRPC 1ª linha",
+        "bracos": "Talazoparibe + enzalutamida vs enzalutamida",
+        "desfecho": "SLPr, SG",
+        "resultado": "Ganho de SG, maior em BRCA (SBOC p.19).",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT03395197",
+          "pagina": null,
+          "trecho": "Talazoparib + Enzalutamide vs. Enzalutamide Monotherapy in mCRPC",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "EMBARK",
+        "nct": "NCT02319837",
+        "nctEstado": "VERIFICADO",
+        "populacao": "RB de alto risco (nmHSPC)",
+        "bracos": "Enzalutamida + leuprorrelina vs leuprorrelina vs enzalutamida",
+        "desfecho": "SLM, SG",
+        "resultado": "Combinação com ganho de SLM e SG (SBOC p.17).",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT02319837",
+          "pagina": null,
+          "trecho": "Safety and Efficacy Study of Enzalutamide Plus Leuprolide",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ALSYMPCA",
+        "nct": "NCT00699751",
+        "nctEstado": "VERIFICADO",
+        "populacao": "mCRPC sintomático com metástases ósseas",
+        "bracos": "Rádio-223 vs placebo",
+        "desfecho": "SG",
+        "resultado": "Ganho de SG e qualidade de vida (SBOC p.20).",
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "https://clinicaltrials.gov/api/v2/studies/NCT00699751",
+          "pagina": null,
+          "trecho": "A Phase III Study of Radium-223 Dichloride in Patients",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "STAMPEDE (abiraterona no alto risco não metastático)",
+        "nct": "NCT00268476",
+        "nctEstado": "VERIFICADO",
+        "populacao": "Localizado alto risco / N+",
+        "bracos": "TDA 3 anos ± abiraterona 2 anos",
+        "desfecho": "SLM, SG",
+        "resultado": "Redução de 47% em metástase à distância e 40% em morte (SBOC p.14).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 14,
+          "trecho": "houve redução de 47% no risco de sobrevida livre de metástases",
+          "estado": "VERIFICADO"
+        },
+        "nctFonte": "https://clinicaltrials.gov/api/v2/studies/NCT00268476 (também ISRCTN78818544)"
+      },
+      {
+        "nome": "proPSMA",
+        "nct": null,
+        "nctEstado": "NAO_VERIFICADO",
+        "populacao": "Intermediário desfavorável/alto risco pré-tratamento curativo",
+        "bracos": "PET-PSMA vs imagem convencional",
+        "desfecho": "Acurácia",
+        "resultado": "Acurácia 92% vs 65% (SBOC p.11).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "acurácia de 92% versus 65%, P<0.0001",
+          "estado": "VERIFICADO"
+        },
+        "registroAlternativo": {
+          "id": "ACTRN12617000005358",
+          "estado": "VERIFICADO",
+          "url": "https://www.anzctr.org.au/Trial/Registration/TrialReview.aspx?ACTRN=12617000005358"
+        },
+        "nctPendencia": {
+          "texto": "proPSMA não tem NCT; registrado no ANZCTR (ACTRN12617000005358, título conferido).",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "CT.gov query.term=proPSMA",
+            "CT.gov query.term=PSMA PET staging high risk prostate Hofman"
+          ]
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "Vigilância ativa (muito baixo/baixo risco)",
+        "exames": [
+          "PSA_TOTAL",
+          "RM_PROSTATA_MP",
+          "BIOPSIA_PERCUTANEA_GUIADA"
+        ],
+        "periodicidade": "PSA a cada 3-6 meses; RM de próstata a cada 12 meses; toque retal a cada 12 meses; biópsia confirmatória em 12 meses.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "PSA a cada 3-6 meses;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Pós-prostatectomia radical",
+        "exames": [
+          "PSA_TOTAL"
+        ],
+        "periodicidade": "PSA periódico (intervalo não especificado pela SBOC — DADO_AUSENTE).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 15,
+          "trecho": "O seguimento clínico com realização periódica de PSA",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "mHSPC em TDA ± ARPI",
+        "exames": [
+          "PSA_TOTAL",
+          "TESTOSTERONA_TOTAL",
+          "HEMOGRAMA",
+          "CREATININA",
+          "TGO",
+          "TGP",
+          "FOSFATASE_ALCALINA",
+          "CINTILOGRAFIA_OSSEA",
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "TC_PELVE"
+        ],
+        "periodicidade": "Exame clínico e PSA a cada 3 meses; demais laboratórios e imagem a cada 6-12 meses conforme evolução.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 12,
+          "trecho": "Exame clínico e PSA a cada 3 meses;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Durante QT (triplete ou mCRPC)",
+        "exames": [
+          "HEMOGRAMA",
+          "TGO",
+          "TGP",
+          "BILIRRUBINA",
+          "CREATININA"
+        ],
+        "periodicidade": "Antes de cada ciclo.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 12,
+          "trecho": "seguidos de acordo com os protocolos de QT",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "RM_PROSTATA_MP",
+      "USG_PROSTATA_TRANSRETAL",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "ANATOMOPATOLOGICO",
+      "IMUNOHISTOQUIMICA",
+      "PET_PSMA",
+      "HEMOGRAMA",
+      "BILIRRUBINA",
+      "PROTEINAS_TOTAIS_FRACOES",
+      "TAP",
+      "TTPA",
+      "TGO",
+      "TGP",
+      "CREATININA",
+      "UREIA",
+      "FOSFATASE_ALCALINA",
+      "PSA_TOTAL",
+      "TESTOSTERONA_TOTAL",
+      "CINTILOGRAFIA_OSSEA",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "TC_TORAX",
+      "CONTRASTE_TC",
+      "RX_TORAX_PA_PERFIL",
+      "RM_PELVE",
+      "DENSITOMETRIA_OSSEA",
+      "RM_COLUNA_TORACICA",
+      "CEA",
+      "DHL",
+      "CALCIO",
+      "VITAMINA_D"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "docetaxel / cabazitaxel",
+        "com": "inibidores fortes de CYP3A4",
+        "ref": "INAT-18"
+      },
+      {
+        "droga": "abiraterona",
+        "com": "inibidores/indutores de CYP3A4",
+        "ref": "INAT-23"
+      },
+      {
+        "droga": "abiraterona",
+        "com": "espironolactona",
+        "ref": "INAT-24"
+      },
+      {
+        "droga": "enzalutamida / apalutamida",
+        "com": "substratos de CYP (varfarina, anticoagulantes, etc.)",
+        "ref": "INAT-25"
+      },
+      {
+        "droga": "olaparibe",
+        "com": "inibidores/indutores de CYP3A",
+        "ref": "INAT-26"
+      },
+      {
+        "droga": "pembrolizumabe",
+        "com": "corticoide basal / antibiótico",
+        "ref": "INAT-27"
+      },
+      {
+        "droga": "pembrolizumabe",
+        "com": "antibiótico",
+        "ref": "INAT-28"
+      },
+      {
+        "droga": "citotóxicos (docetaxel, cabazitaxel, mitoxantrona, platinas)",
+        "com": "vacinas vivas",
+        "ref": "INAT-29"
+      },
+      {
+        "droga": "cisplatina",
+        "com": "ototóxicos",
+        "ref": "INAT-15"
+      },
+      {
+        "droga": "cisplatina",
+        "com": "função renal",
+        "ref": "CI-01"
+      },
+      {
+        "droga": "carboplatina",
+        "com": "cálculo de Calvert",
+        "ref": "CI-04"
+      },
+      {
+        "droga": "pembrolizumabe",
+        "com": "doença autoimune/transplante",
+        "ref": "CI-08"
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "TDA / ARPI",
+        "termosCTCAEv6": [
+          "Hot flashes",
+          "Fatigue",
+          "Osteoporosis",
+          "Hypertension",
+          "Fall",
+          "Fracture"
+        ]
+      },
+      {
+        "classe": "Abiraterona",
+        "termosCTCAEv6": [
+          "Alanine aminotransferase increased",
+          "Aspartate aminotransferase increased",
+          "Hypokalemia",
+          "Hypertension",
+          "Edema limbs"
+        ]
+      },
+      {
+        "classe": "Enzalutamida / apalutamida / darolutamida",
+        "termosCTCAEv6": [
+          "Seizure",
+          "Fatigue",
+          "Rash maculo-papular",
+          "Hypothyroidism",
+          "Fall"
+        ]
+      },
+      {
+        "classe": "Taxanos (docetaxel, cabazitaxel)",
+        "termosCTCAEv6": [
+          "Neutrophil count decreased",
+          "Febrile neutropenia",
+          "Peripheral sensory neuropathy",
+          "Diarrhea",
+          "Alopecia"
+        ]
+      },
+      {
+        "classe": "Inibidores de PARP",
+        "termosCTCAEv6": [
+          "Anemia",
+          "Platelet count decreased",
+          "Nausea",
+          "Fatigue"
+        ]
+      },
+      {
+        "classe": "Radiofármacos (rádio-223, Lu-PSMA)",
+        "termosCTCAEv6": [
+          "Anemia",
+          "Platelet count decreased",
+          "Dry mouth",
+          "Diarrhea"
+        ]
+      },
+      {
+        "classe": "Terapia óssea",
+        "termosCTCAEv6": [
+          "Hypocalcemia",
+          "Osteonecrosis of jaw",
+          "Creatinine increased"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "cálcio 1.000 mg/dia + vitamina D (TDA prolongada)",
+      "antiemese para docetaxel/cabazitaxel (corpus de receitas)",
+      "prednisona contínua com abiraterona"
+    ],
+    "orientacoes": [
+      "TDA: fogachos, perda de massa óssea/muscular, risco cardiovascular — atividade física",
+      "Abiraterona: tomar em jejum (bula) e não suspender prednisona",
+      "Enzalutamida: risco de convulsão e quedas",
+      "Rádio-223/Lu-PSMA: cuidados de radioproteção",
+      "Denosumabe/zoledrônico: avaliação odontológica (osteonecrose)"
+    ],
+    "encaminhamentos": [
+      "encaminhamento-radioterapia",
+      "encaminhamento-cirurgia-oncologica",
+      "urologia",
+      "medicina nuclear",
+      "aconselhamento genético"
+    ],
+    "laudos": [
+      "laudo-inss",
+      "laudo-afastamento",
+      "laudo-loas",
+      "laudo-transporte",
+      "laudo-judicial"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "Pós-prostatectomia com PSA ≥ 0,1 ng/mL confirmado por segundo exame",
+        "y": "Reestadiar com RM ou TC de pelve, RX de tórax, cintilografia óssea e laboratório (PET-PSMA se disponível; no SUS, sem código)",
+        "z": "Define recidiva locorregional (RT de salvamento ± TDA) versus sistêmica",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "elevação de PSA com valor ≥ 0,1 ng/mL, confirmado por segundo exame",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "RT de salvamento com PSA pré-RT > 0,5 ng/mL",
+        "y": "Associar TDA à RT de salvamento (6 meses a 2 anos)",
+        "z": "Reduz risco de progressão metastática (GETUG-16, RADICALS-HD)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 16,
+          "trecho": "Considerar associar TDA nos pacientes com PSA pré-RT acima 0,5 ng/mL.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Risco intermediário desfavorável tratado com RT externa",
+        "y": "Agonista ou antagonista de LHRH por 4 a 6 meses",
+        "z": "Melhora recidiva bioquímica, sobrevida câncer-específica e SG",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "Considerar o uso de agonista ou antagonista de LHRH por 4 a 6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "PSA em progressão com testosterona < 50 ng/dL, sem metástase em imagem convencional e PSADT ≤ 10 meses",
+        "y": "Manter TDA e associar enzalutamida, apalutamida ou darolutamida",
+        "z": "nmCRPC: ganho de sobrevida livre de metástase e SG",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 13,
+          "trecho": "castração com tempo de duplicação do PSA ≤ 10 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "mHSPC candidato a QT",
+        "y": "Docetaxel + TDA associado a abiraterona ou darolutamida (não terapia dupla)",
+        "z": "Triplete com ganho de SG, maior no alto volume",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 11,
+          "trecho": "não devem receber apenas a terapia dupla",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "mCRPC com alteração BRCA1/2 ou ATM após progressão a novo agente hormonal",
+        "y": "Olaparibe 300 mg VO 2x/dia",
+        "z": "Maior resposta, SLP e SG versus troca de ARPI",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 23,
+          "trecho": "Para pacientes com alteração de genes de reparo do DNA (BRCA1/2 ou ATM)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Urgência de castração (compressão medular, dor refratária, obstrução urinária, CIVD)",
+        "y": "Antagonista LHRH ou orquiectomia bilateral",
+        "z": "Castração em 24-36 horas, sem flare",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 9,
+          "trecho": "deve-se favorecer o uso de antagonista do LHRH ou castração cirúrgica",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Progressão a abiraterona + prednisona ou a enzalutamida",
+        "y": "Não trocar por outro ARPI; considerar docetaxel, rádio-223 (ósseo sintomático) ou olaparibe (HRR)",
+        "z": "Resistência cruzada entre ARPIs",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+          "pagina": 18,
+          "trecho": "não se recomenda o uso sequencial de enzalutamida após progressão a abiraterona",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    {
+      "texto": "Doses de agonistas/antagonistas LHRH tiradas de bula FDA (openFDA); confirmar com bula ANVISA das apresentações disponíveis no serviço. Indicação de bula = câncer de próstata avançado; uso com RT no localizado sustentado pela SBOC (classe e duração).",
+      "classe": "PROVISORIA_BULA_FDA",
+      "buscasFeitas": [
+        "openFDA leuprolida/gosserrelina/degarelix (já usados)"
+      ],
+      "resolucao": "Bula FDA provisória (resposta 1)."
+    },
+    {
+      "texto": "Abiraterona no localizado alto risco (STAMPEDE): dose não informada pela SBOC neste cenário e sem aprovação Anvisa — drogas com dose null (SEM_FONTE).",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4 p.14-15 e -Prostata-localizado-v4 p.14-15: indicação sem dose",
+        "https://clinicaltrials.gov/api/v2/studies/NCT00268476: braços G/J descritos sem dose (interventions sem descrição)",
+        "fontes/pro26/59 p.5/15/16 e 60 p.10: só 'abiraterona 24m', sem dose",
+        "Rótulo FDA Zytiga: indicação só mCRPC/mCSPC — não transferível ao localizado"
+      ]
+    },
+    {
+      "texto": "Olaparibe + abiraterona: SBOC p.16 traz prednisona 5 mg 1x/dia, enquanto abiraterona isolada no mCRPC usa 5 mg 2x/dia (p.15) — confirmar com bula ANVISA do Lynparza. Bula FDA: 5 mg 2x/dia — registrado em conflitos.",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "openFDA Lynparza (set_id 741ff3e3-dc1a-45a6-84e5-2481b27131aa)",
+        "SBOC próstata avançada 2026 p.16"
+      ],
+      "resolucao": "Prednisona 5 mg 2x/dia (48A)."
+    },
+    {
+      "texto": "Definição de alto risco mHSPC (SBOC p.10) impressa como 'Gleason > 8' e '3 lesões ósseas' — conferir com o PDF/LATITUDE (Gleason ≥ 8, ≥ 3 lesões). Texto extraído do PDF confirma a grafia da SBOC (p.10).",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4 p.10"
+      ],
+      "resolucao": "Alto risco mHSPC (49A, LATITUDE): ≥ 2 de 3 — Gleason ≥ 8, ≥ 3 lesões ósseas, metástase visceral mensurável. A grafia '> 8' da SBOC p.10 fica superada pela decisão médica (≥ 8)."
+    },
+    {
+      "texto": "Artigos originais CHAARTED e LATITUDE não estão no repo; critérios registrados por decisão médica (D-F1-20); anexar fonte primária com página quando disponível.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "repo OncoGlobal: sem PDF/texto de CHAARTED e LATITUDE em fontes/"
+      ]
+    },
+    {
+      "texto": "RT: doses (Gy/frações) só na aula Onco PRO 2026 (CURSO/INFERIDO); SBOC 2026 não traz dose/fracionamento. RT do primário no mHSPC baixo volume não é abordada pela SBOC 2026; aula cita também '20x 2,7 Gy' (possível truncamento) — não incluído.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Orientação do Dr. Silas (11/10/2026): radioterapia é aceno geral; sem busca de fracionamento nesta rodada"
+      ]
+    },
+    {
+      "texto": "Lu-PSMA depende de PET-PSMA (sem código SUS); sem alternativa SUS para seleção.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "catálogo exames v1.1: sem PET-PSMA",
+        "CONITEC: lutécio-PSMA sem avaliação"
+      ]
+    },
+    {
+      "texto": "Painéis NGS (germinativo/somático HRR, TMB) sem id no catálogo (SEM_ID_NO_CATALOGO).",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json v1.1: sem painel NGS/TMB"
+      ]
+    },
+    {
+      "texto": "Intervalo do PSA no seguimento pós-prostatectomia não especificado pela SBOC.",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC próstata localizado 2026: sem intervalo de PSA pós-prostatectomia"
+      ],
+      "resolucao": "Dr. Silas (2026-10-12): \"RIM E PRÓSTATA = BAIXO RISCO\" — vigilância/observação aplicável ao baixo risco. Intervalo numérico de imagem/PSA não fixado pelo Dr. Silas; registrar quando definido."
+    },
+    {
+      "texto": "Unidades kBq/kg e GBq (radiofármacos) fora do enum de unidade do esquema v2.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "docs/ondas/F1-PACK-ESQUEMA-V2.md: enum de unidade sem kBq/kg e GBq"
+      ]
+    },
+    {
+      "texto": "Antiemese e profilaxia de neutropenia febril não informadas pela SBOC. (Pré-medicação de docetaxel e cabazitaxel preenchida pela bula FDA nesta rodada.)",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC próstata avançada 2026: sem antiemese/profilaxia de NF",
+        "openFDA docetaxel e Jevtana: pré-medicação apenas"
+      ]
+    },
+    {
+      "texto": "Tabela de PSA no seguimento: não localizada no MOC 2026 (conferência 2026-10-12).",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "resolucao": "Dr. Silas (2026-10-12): \"RIM E PRÓSTATA = BAIXO RISCO\" — vigilância/observação aplicável ao baixo risco. Intervalo numérico de imagem/PSA não fixado pelo Dr. Silas; registrar quando definido."
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "Critério operacional de alto volume no mHSPC",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 10,
+        "trecho": "Presença de doença visceral ou 4+ lesões ósseas, sendo uma fora do esqueleto axial",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "DECISAO_MEDICA",
+        "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-20, 49A)",
+        "pagina": null,
+        "trecho": null,
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "O grupo 'mHSPC alto volume' usa o critério fixado pelo médico (≥ 1 lesão fora da coluna vertebral e da pelve, CHAARTED). A grafia da SBOC ('fora do esqueleto axial') fica preservada aqui como redação histórica, sem juízo de equivalência: vale o critério aprovado pelo médico.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Alto volume CHAARTED: visceral OU ≥ 4 lesões ósseas com ≥ 1 fora da coluna vertebral e da pelve (49A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-20)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "Dose de rádio-223",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 16,
+        "trecho": "Radium-223 50 kB/kg EV a cada 4 semanas",
+        "estado": "CONFLITANTE"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:xofigo&limit=1 (set_id a398400e-bd31-41a9-9696-4f7c06569ede, XOFIGO)",
+        "pagina": null,
+        "trecho": "The dose regimen of Xofigo is 55 kBq (1.49 microcurie) per kg body weight",
+        "estado": "CONFLITANTE"
+      },
+      "escolhaSeguranca": "Protocolo segue a bula vigente do produto (55 kBq/kg, 6 injeções); 50 kBq/kg corresponde à padronização antiga de atividade. Médico/medicina nuclear confirma conforme bula ANVISA do lote.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Número de ciclos de 177Lu-PSMA-617",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 16,
+        "trecho": "177Lu-PSMA-617 7,4 GBq EV a cada 6 semanas por 4 a 6 ciclos",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "https://api.fda.gov/drug/label.json?search=openfda.brand_name:pluvicto&limit=1 (set_id 14908037-2892-4d98-a053-253ce35afb1a, PLUVICTO)",
+        "pagina": null,
+        "trecho": "7.4 GBq (200 mCi) every 6 weeks for 6 doses",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Máximo de 6 ciclos (teto comum às duas fontes); número exato por resposta/toxicidade a critério médico.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Dose de cabazitaxel na combinação com carboplatina (variante agressiva)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 16,
+        "trecho": "Carboplatina AUC 5 + Cabazitaxel 20 mg/m² EV D1 a cada 3 semanas",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 21,
+        "trecho": "Carboplatina AUC 5 + Cabazitaxel 20-25 mg/m²",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Usar 20 mg/m² (menor dose, menos toxicidade hematológica).",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Abiraterona em dose reduzida com alimento",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 18,
+        "trecho": "abiraterona em dose reduzida (250 mg por dia) após alimentação",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:abiraterone&limit=1 (set_id 0c91aa38-3b0a-232c-8eb1-55f08e8e6644)",
+        "pagina": null,
+        "trecho": "1,000 mg orally once daily with prednisone 5 mg orally twice daily",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Protocolo usa 1.000 mg/dia (bula e esquema principal SBOC); 250 mg com alimento só como alternativa de acesso, por decisão médica explícita.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Olaparibe + abiraterona: população",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 19,
+        "trecho": "Ambas as combinações de inibidores de parp estão atualmente aprovadas pela Anvisa",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:olaparib&limit=1 (set_id 741ff3e3-dc1a-45a6-84e5-2481b27131aa, LYNPARZA)",
+        "pagina": null,
+        "trecho": "BRCA -mutated metastatic castration-resistant prostate cancer in combination with abiraterone",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Testar BRCA/HRR antes; priorizar a combinação nos portadores de BRCA/HRR (maior benefício); em HRR proficiente, decisão médica.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Prednisona 5 mg 2x/dia (48A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "Definição de recidiva bioquímica pós-prostatectomia",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 16,
+        "trecho": "elevação de PSA com valor ≥ 0,1 ng/mL, confirmado por segundo exame",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — fontes/pro26/60_-_Aula_60_-_Próstata_-_Recidiva_bioquímica_e_mCSPC.txt",
+        "pagina": 5,
+        "trecho": "Critério clássico: PSA ≥ 0,2 ng/mL, confirmado por nova dosagem",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Adotar SBOC 2026 (≥ 0,1 ng/mL confirmado), limiar usado em RADICALS e GETUG-AFU 17; detecção mais precoce para salvamento.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Docetaxel quinzenal 50 mg/m²",
+      "fonteA": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026 — fontes/pro26/61_-_Aula_61_-_Próstata_-_CRPC_M0_e_M1_-_Parte_1.txt",
+        "pagina": 5,
+        "trecho": "esquema fracionado (50mg/m² q2s) é alternativa menos tóxica",
+        "estado": "INFERIDO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 16,
+        "trecho": "Docetaxel 75 mg/m² EV D1 a cada 3 semanas, 6 ciclos",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Pack só preenche o esquema 21/21 da SBOC; quinzenal fica com dose null (SEM_FONTE) até fonte SBOC/bula. Rodada 2: dose 50 mg/m² preenchida como CURSO/INFERIDO (aula PRO; esquema PROSTY NCT00255606) — validar antes do uso.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Opção provisória (47A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "Prednisona com olaparibe + abiraterona (PROpel)",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt",
+        "pagina": 16,
+        "trecho": "Prednisona 5 mg VO 1x/dia continuamente",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22olaparib%22&limit=1 (Lynparza 2025-07-10, set_id 741ff3e3-dc1a-45a6-84e5-2481b27131aa)",
+        "pagina": null,
+        "trecho": "in combination with prednisone or prednisolone 5 mg orally twice daily",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Dose do pack mantida como na SBOC (verificada); a bula FDA e a abiraterona isolada usam 5 mg 2x/dia. Conferir bula ANVISA do Lynparza antes do uso.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Prednisona 5 mg 2x/dia (48A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (curadoria assistida, Opus 5.5)",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "fontes/sboc/Diretrizes-SBOC-2026-Prostata-localizado-v4-VERSAO-PARA-COLABORACAO.txt (integral)",
+      "fontes/sboc/Diretrizes-SBOC-2026-Prostata-doenca-avancada-v4-VERSAO-PARA-COLABORACAO.txt (integral)",
+      "fontes/pro26/58_-_Aula_58_-_Próstata_-_Visão_geral.txt",
+      "fontes/pro26/59_-_Aula_59_-_Próstata_-_Doença_localizada.txt",
+      "fontes/pro26/60_-_Aula_60_-_Próstata_-_Recidiva_bioquímica_e_mCSPC.txt",
+      "fontes/pro26/61_-_Aula_61_-_Próstata_-_CRPC_M0_e_M1_-_Parte_1.txt",
+      "fontes/pro26/62_-_Aula_62_-_Próstata_-_CRPC_M1_-_Parte_2.txt (busca)",
+      "corpus/exames/exames-sigtap.v1.json",
+      "corpus/fichas/prostata/*.json",
+      "corpus/6-pack-tumor/prostata/prostata.v1.RASCUNHO.json (referência, não editado)",
+      "openFDA: leuprolide, goserelin, degarelix, enzalutamide, abiraterone, olaparib, talazoparib, cabazitaxel, Xofigo, Pluvicto",
+      "ClinicalTrials.gov API v2: NCT01957436, NCT02799602, NCT03511664, NCT02987543, NCT03732820, NCT03395197, NCT02319837, NCT00699751",
+      "CONITEC: planilha 'Recomendações da Conitec' (xlsx até 19/08/2026), portarias SCTIE/SECTICS no DOU, consultas públicas 2024-2026",
+      "SIGTAP 2026-09 (corpus/f0c/sigtap/2026-09.json)",
+      "openFDA (rótulos FDA) e ClinicalTrials.gov API v2 / ISRCTN / ANZCTR"
+    ],
+    "aprovacaoClinica": null,
+    "rodada2": {
+      "data": "2026-10-11",
+      "redator": "Claude (Opus 5.5) — redução de pendências e conflitos; aprovação clínica pendente",
+      "pendenciasResolvidas": [
+        {
+          "texto": "Status SUS/APAC (SIGTAP/CONITEC) de abiraterona, enzalutamida, apalutamida, darolutamida, iPARP, cabazitaxel, rádio-223, Lu-PSMA, degarelix, gosserrelina e leuprorrelina não consta na SBOC: DADO_AUSENTE — curador deve confirmar na tabela SIGTAP/APAC vigente.",
+          "resolucao": "Status SUS preenchido: abiraterona sim (SCTIE 38/2019; SECTICS 32 e 33/2024); enzalutamida/apalutamida/darolutamida não (SECTICS 32 e 33/2024); LHRH/QT via APAC 0304020079/0304020060/0304020087/0304040207/0304050342; zoledrônico APAC 0304080071; iPARP, cabazitaxel, rádio-223, Lu-PSMA, degarelix e denosumabe sem avaliação CONITEC."
+        },
+        {
+          "texto": "Docetaxel quinzenal (ficha FICHA.prostata.docetaxel-quinzenal…): esquema só na aula Onco PRO 2026; SBOC 2026 e bula não trazem — dose null, fichaId null.",
+          "resolucao": "Docetaxel 50 mg/m² D1 q14 + prednisona 10 mg/dia (aula PRO, CURSO/INFERIDO); esquema confirmado no registro PROSTY NCT00255606."
+        },
+        {
+          "texto": "Darolutamida sem docetaxel no mHSPC (ARANOTE): SBOC cita como opção alternativa (NE forte/FR fraca), sem tabela de dose para este esquema — não criado protocolo.",
+          "resolucao": "Protocolo prostata-mhspc-darolutamida (600 mg 2x/dia, bula Nubeqa; ARANOTE)."
+        }
+      ],
+      "correcoes": []
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão do Dr. Silas",
+      "acao": "decisão \"baixo risco\" registrada para a vigilância"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "D-F1-17",
+      "acao": "prednisona 5 mg 2x/dia com olaparibe + abiraterona (48A)"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Decisão D-F1-20 item 49 (Dr. Silas)",
+      "acao": "alto risco mHSPC (LATITUDE ≥ 2 de 3) registrado como grupo complementar ao volume CHAARTED; pendência de grafia '> 8' resolvida; pendência de fonte primária adicionada"
+    }
+  ]
+}

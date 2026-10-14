@@ -1,0 +1,4345 @@
+{
+  "header": {
+    "id": "pack-colorretal",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "Diretrizes SBOC 2026 — Cólon: doença localizada v3; Cólon: doença avançada v3; Reto v4 (versões para colaboração)",
+      "trecho": "Esta diretriz tem como objetivo apoiar as decisões clínicas no tratamento",
+      "edicao": "SBOC 2026 (v3/v3/v4)"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [
+    "pack-colorretal-v1-glm"
+  ],
+  "identidade": {
+    "tumor": "Adenocarcinoma colorretal (cólon e reto, cenários separados)",
+    "cid10": [
+      "C18",
+      "C19",
+      "C20"
+    ],
+    "subtipos": [
+      "cólon direito",
+      "cólon esquerdo",
+      "reto alto (manejar como cólon)",
+      "reto médio-baixo",
+      "pMMR/MSS",
+      "dMMR/MSI-H"
+    ],
+    "cenarios": [
+      "colon_localizado_I",
+      "colon_II",
+      "colon_III",
+      "colon_neoadjuvante_selecionado",
+      "reto_inicial_cT1-2N0",
+      "reto_localmente_avancado_sem_risco",
+      "reto_localmente_avancado_alto_risco",
+      "reto_dMMR",
+      "watch_and_wait",
+      "metastatico_ressecavel",
+      "metastatico_potencialmente_ressecavel",
+      "metastatico_irressecavel"
+    ],
+    "limitesAplicabilidade": "Somente adenocarcinoma. Fora do escopo: canal anal (pack canal-anal), tumores neuroendócrinos (pack neuroendocrinos), GIST (pack gist), apêndice cecal e pseudomixoma. Reto acima da reflexão peritoneal segue o cólon.",
+    "fonte": {
+      "tipo": "SBOC",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+      "pagina": 8,
+      "trecho": "neoplasia situada na porção recoberta por peritônio deve ser manejada como câncer de cólon",
+      "estado": "VERIFICADO"
+    }
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "indicacao": "universal",
+        "quando": "estadiamento inicial (cólon e reto)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "TC de tórax e abdome total;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome superior (parte de 'abdome total')",
+        "indicacao": "universal",
+        "quando": "estadiamento do cólon; no reto pode ser trocada por RM de abdome superior",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "TC de tórax e abdome total;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve (parte de 'abdome total')",
+        "indicacao": "universal",
+        "quando": "estadiamento do cólon",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "TC de tórax e abdome total;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM de pelve com protocolo para reto",
+        "indicacao": "condicional",
+        "quando": "todo câncer de reto (avalia margem circunferencial); reestadiamento pós-neoadjuvância",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "RM de pelve (protocolo para reto);",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_ABDOMEN_SUPERIOR",
+        "rotulo": "RM de abdome superior",
+        "indicacao": "condicional",
+        "quando": "reto (alternativa à TC de abdome superior); dúvida de lesão hepática",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "TC de tórax e RM ou tomografia de abdome superior;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET-CT FDG",
+        "indicacao": "condicional",
+        "quando": "não é rotina; só para dúvida de doença à distância/ressecabilidade de M1",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/12 - Aula 12 - Câncer Colorretal- Conceitos iniciais.pdf",
+          "pagina": 18,
+          "trecho": "PET CT: não recomendado de rotina",
+          "estado": "INFERIDO"
+        }
+      }
+    ],
+    "endoscopicos": [
+      {
+        "catalogoId": "COLONOSCOPIA",
+        "rotulo": "Colonoscopia completa com biópsia",
+        "indicacao": "universal",
+        "quando": "diagnóstico e estadiamento; se incompleta, completar após cirurgia (6 meses)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Colonoscopia;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "Ultrassom endoscópico retal",
+        "indicacao": "condicional",
+        "quando": "lesões superficiais do reto candidatas a excisão local (cT1 × cT2) ou RM contraindicada; não usar para reestadiamento",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "O ultrassom endoscópico pode apresentar maior precisão que a RM",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "endoscopica",
+          "quando": "biópsia na colonoscopia",
+          "catalogoId": "ANATOMOPATOLOGICO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "incluir pesquisa de deficiência de enzimas de reparo e pesquisa de PI3KCA",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "tipo histológico e grau",
+        "pT e pN (AJCC)",
+        "número de linfonodos examinados (inadequado se < 12)",
+        "depósitos tumorais (pN1c)",
+        "invasão linfovascular e/ou perineural",
+        "tumor budding",
+        "margens (radial/circunferencial no reto)",
+        "obstrução ou perfuração",
+        "status MMR (IHQ)",
+        "regressão tumoral após neoadjuvância (reto)"
+      ],
+      "laudoFonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 10,
+        "trecho": "Amostragem inadequada de LFN (< 12 LFN dissecados)",
+        "estado": "VERIFICADO"
+      },
+      "molecular": [
+        {
+          "alvo": "MMR (MLH1, MSH2, MSH6, PMS2) / MSI",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "universal",
+          "cenario": "todo diagnóstico (localizado e avançado)",
+          "consequencia": "estádio II dMMR: sem adjuvância; reto dMMR: imunoterapia; metastático dMMR: imunoterapia 1ª linha; suspeita de Lynch → oncogenética",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "incluir pesquisa de deficiência de enzimas de reparo e pesquisa de PI3KCA",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "PIK3CA",
+          "metodo": "PCR",
+          "catalogoId": null,
+          "quandoPedir": "universal",
+          "cenario": "estádios II–III",
+          "consequencia": "mutado: AAS 160 mg/dia por 3 anos",
+          "disponivelSUS": "DADO_AUSENTE",
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 7,
+            "trecho": "incluir pesquisa de deficiência de enzimas de reparo e pesquisa de PI3KCA",
+            "estado": "VERIFICADO"
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
+        },
+        {
+          "alvo": "KRAS/NRAS (éxons 2–4), BRAF V600E, incluindo KRAS G12C",
+          "metodo": "PCR",
+          "catalogoId": null,
+          "quandoPedir": "condicional",
+          "cenario": "doença metastática",
+          "consequencia": "define anti-EGFR (RAS/BRAF selvagem), encorafenibe+cetuximabe (BRAF V600E), sotorasibe+panitumumabe (G12C)",
+          "disponivelSUS": "DADO_AUSENTE",
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 9,
+            "trecho": "Na doença metastática é recomendada a pesquisa de painel mais amplo de biomarcadores",
+            "estado": "VERIFICADO"
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
+        },
+        {
+          "alvo": "HER2",
+          "metodo": "IHQ",
+          "catalogoId": "IMUNOHISTOQUIMICA",
+          "quandoPedir": "condicional",
+          "cenario": "metastático RAS selvagem",
+          "consequencia": "HER2 hiperexpresso/amplificado: trastuzumabe-deruxtecana em linhas posteriores (FISH/CISH se IHQ duvidosa)",
+          "disponivelSUS": "parcial",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 21,
+            "trecho": "RAS selvagem e HER2 hiperexpresso/amplificado:",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Fusão NTRK",
+          "metodo": "NGS",
+          "catalogoId": null,
+          "quandoPedir": "condicional",
+          "cenario": "metastático refratário",
+          "consequencia": "larotrectinibe",
+          "disponivelSUS": "DADO_AUSENTE",
+          "pendencia": "FATURAMENTO_NAO_DEMONSTRADO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 21,
+            "trecho": "Fusão de NTRK presente:",
+            "estado": "VERIFICADO"
+          },
+          "mapeamentoCatalogo": "Codex 2026-10-11 (veredito entrega final): código SIGTAP do método é APAC secundário de doenças raras; não equivale a NGS nem comprova faturamento oncológico",
+          "catalogoIdCandidato": "MOLECULAR_PCR_MUTACAO"
+        },
+        {
+          "alvo": "DPYD (deficiência de DPD)",
+          "metodo": "PCR",
+          "catalogoId": null,
+          "quandoPedir": "universal",
+          "cenario": "antes de qualquer fluoropirimidina (se teste disponível)",
+          "consequencia": "deficiência total: contraindicação absoluta; parcial: redução de dose",
+          "disponivelSUS": "DADO_AUSENTE",
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 25,
+            "trecho": "recomenda-se a pesquisa de deficiência de DPD em todos os pacientes candidatos",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "ctDNA pós-operatório",
+          "metodo": "outro",
+          "catalogoId": null,
+          "quandoPedir": "pesquisa",
+          "cenario": "estádios II–III",
+          "consequencia": "prognóstico; ainda não muda conduta",
+          "disponivelSUS": "nao",
+          "pendencia": "SEM_ID_NO_CATALOGO",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 22,
+            "trecho": "o uso de ctDNA neste cenário ainda não muda a prática clínica.",
+            "estado": "VERIFICADO"
+          }
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª",
+    "fonte": {
+      "tipo": "CURSO",
+      "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/12 - Aula 12 - Câncer Colorretal- Conceitos iniciais.pdf",
+      "pagina": 18,
+      "trecho": "AJCC 8th edition staging manual",
+      "estado": "INFERIDO"
+    },
+    "notaEdicao": "A SBOC 2026 traz as tabelas TNM sem declarar a edição; a 8ª vem do curso PRO (INFERIDO).",
+    "exames": [
+      {
+        "catalogoId": "COLONOSCOPIA",
+        "rotulo": "Colonoscopia",
+        "cenario": "cólon e reto",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Colonoscopia;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "cenario": "cólon e reto",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "TC de tórax e abdome total;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_ABDOMEN_SUPERIOR",
+        "rotulo": "TC de abdome",
+        "cenario": "cólon e reto",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "TC de tórax e abdome total;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve",
+        "cenario": "cólon",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "TC de tórax e abdome total;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "RM_PELVE",
+        "rotulo": "RM de pelve (protocolo reto)",
+        "cenario": "reto",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "RM de pelve (protocolo para reto);",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CEA",
+        "rotulo": "CEA",
+        "cenario": "cólon e reto",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "CEA.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "Cólon estádio I",
+        "conduta": "Cirurgia; sem adjuvância.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Não recomendado tratamento adjuvante.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Cólon estádio II dMMR/MSI-H ou risco habitual",
+        "conduta": "Observação clínica.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Observação clínica NE MODERADO/FR FORTE",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Cólon estádio II alto risco (pMMR)",
+        "conduta": "Fluoropirimidina adjuvante por 6 meses.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "QT adjuvante à base de fluoropirimidinas (esquemas a seguir)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Cólon estádio II muito alto risco (< 12 LFN e/ou T4)",
+        "conduta": "Considerar adicionar oxaliplatina (CAPOX 3 meses).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "considerar a adição de oxaliplatina ao esquema com fluoropirimidina",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Cólon estádio III baixo risco (T1–3 N1)",
+        "conduta": "CAPOX 4 ciclos (preferencial) ou mFOLFOX6 6 meses/FLOX.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Baixo risco: T1-T3 e N1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Cólon estádio III alto risco (T4 ou N2; LFN + depósitos ≥ 4)",
+        "conduta": "CAPOX 8 ciclos ou mFOLFOX6 12 ciclos (3 meses de CAPOX pode ser discutido).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Alto risco: T4 ou N2",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Cólon estádio III > 70 anos, ECOG ≤ 2",
+        "conduta": "Fluoropirimidina em monoterapia por 6 meses.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "Fluoropirimidina em monoterapia por 6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Estádio II–III com PIK3CA mutado",
+        "conduta": "AAS 160 mg/dia por 3 anos (adicional à QT).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "AAS 160 mg diariamente por 3 anos;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Reto cT2N0 pMMR",
+        "conduta": "TME upfront; preservação de reto (QT/RT ou TNT + watch-and-wait) é opção.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "A excisão total do mesorreto (TME) upfront é o tratamento padrão-ouro para tumores cT2N0",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Reto cT2N1/cT3N0-1 sem risco (pMMR)",
+        "conduta": "QT/RT longa → TME, QT neo seletiva (PROSPECT), TME upfront ou SCRT.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "QT/RT neoadjuvante de curso longo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Reto com risco (cT4, fáscia comprometida, cN2, EMVI, LFN lateral > 7 mm)",
+        "conduta": "TNT (indução mFOLFIRINOX ou consolidação FOLFOX/CAPOX).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "QT de indução com mFolfirinox por 3 meses (6 ciclos)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Reto localmente avançado dMMR",
+        "conduta": "Anti-PD-1 por 6 meses; resposta completa → watch-and-wait.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "Imunoterapia com um anti-PD-1 durante seis meses é recomendada",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Estádio IV",
+        "conduta": "Ver cenários metastáticos (ressecável, potencialmente ressecável, irressecável).",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "mFolfox6 6 ciclos pré- e 6 ciclos pós-cirurgia",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "CEA",
+          "uso": "estadiamento, prognóstico e seguimento (a cada visita)",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 23,
+            "trecho": "CEA: a cada visita médica",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "CA 19-9 (sem indicação formal — curso PRO)",
+        "PET-CT de rotina"
+      ],
+      "naoPedirFonte": {
+        "tipo": "CURSO",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/12 - Aula 12 - Câncer Colorretal- Conceitos iniciais.pdf",
+        "pagina": 18,
+        "trecho": "CA19.9 não tem indicação formal",
+        "estado": "INFERIDO"
+      }
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "colon_adjuvante",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia",
+          "QT adjuvante"
+        ],
+        "criterio": "Iniciar o quanto antes, idealmente em 8–12 semanas após a cirurgia.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "preferencialmente dentro das 8-12 semanas após cirurgia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "colon_neoadjuvante_selecionado",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT neoadjuvante (FOLFOX/CAPOX)",
+          "cirurgia"
+        ],
+        "criterio": "cT4b, linfonodos volumosos, risco de margem positiva ou inoperável clínico.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 21,
+          "trecho": "sendo uma opção para pacientes selecionados, como os localmente avançados (cT4b",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "reto_alto",
+        "intencao": "curativa",
+        "modalidades": [
+          "cirurgia",
+          "QT adjuvante como cólon"
+        ],
+        "criterio": "Acima da reflexão peritoneal.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "neoplasia situada na porção recoberta por peritônio deve ser manejada como câncer de cólon",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "reto_T1N0_baixo_risco",
+        "intencao": "curativa",
+        "modalidades": [
+          "ressecção local transanal"
+        ],
+        "criterio": "< 3 cm, ≤ 30% da circunferência, G1–2, sem invasão LV/PN, sem budding.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Tumores restritos à mucosa e à submucosa sem critérios de risco (< 3 cm",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "reto_localmente_avancado_preservacao",
+        "intencao": "curativa",
+        "modalidades": [
+          "TNT",
+          "watch-and-wait"
+        ],
+        "criterio": "Reto distal candidato à amputação, RM de alta qualidade e seguimento rigoroso possível; sem RM de qualidade → QT/RT seguida de TME.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "indisponibilidade de RM de alta qualidade, a estratégia convencional de QT/RT seguida por TME",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico_ressecavel",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT perioperatória mFOLFOX6 6+6",
+          "metastasectomia/ablação"
+        ],
+        "criterio": "Não associar anticorpo monoclonal.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Não combinar anticorpo monoclonal.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico_potencialmente_ressecavel",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT de conversão",
+          "cirurgia"
+        ],
+        "criterio": "Conversão por 2–3 meses, nunca > 6 meses.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "preferencialmente de 2 a 3 meses e nunca excedendo 6 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "metastatico_irressecavel",
+        "intencao": "paliativa",
+        "modalidades": [
+          "QT ± anticorpo",
+          "imunoterapia (dMMR)",
+          "terapia-alvo"
+        ],
+        "criterio": "Escolha por MMR, RAS/BRAF e lateralidade; ECOG 3–4 → suporte exclusivo.",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Pacientes com ECOG 3 ou 4 devem ser tratados com suporte exclusivo.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": null,
+        "id": "colorretal-capecitabina-adj",
+        "nome": "Capecitabina adjuvante",
+        "cenario": "colon_adjuvante_estadio_II_alto_risco_ou_III_idoso",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14, 12/12h",
+            "observacao": "SBOC: dose de prática; dose original do estudo 1.250 mg/m² 12/12h (ver conflitos)."
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 8,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050024",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE ADENOCARCINOMA DE CÓLON",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Capecitabina 1.000 mg/m² VO 12/12h D1 a D14*",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": null,
+        "id": "colorretal-degramont-modificado-adj",
+        "nome": "deGramont modificado (5-FU/LV infusional)",
+        "cenario": "colon_adjuvante_estadio_II_alto_risco_ou_III_idoso",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 46 h)",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "bomba de infusão de 46 h"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 12,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050024",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE ADENOCARCINOMA DE CÓLON",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "5-Fluorouracil 2.400 mg/m² EV (bomba de infusão de 46h) D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": "FICHA.colon-reto.5-fu-leucovorina-mayo-clinic__nao-especificado@1.0.0",
+        "id": "colorretal-mayo-adj",
+        "nome": "Mayo (5-FU/LV bolus)",
+        "cenario": "colon_adjuvante_estadio_II_alto_risco_ou_III_idoso",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Leucovorin",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 425,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5",
+            "observacao": "PRO aula 13 cita 370 mg/m² — conflito registrado; vale a SBOC."
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 6,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050024",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE ADENOCARCINOMA DE CÓLON",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "5-Fluorouracil 425 mg/m² EV (bolus) D1 a D5",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": null,
+        "id": "colorretal-quasar-adj",
+        "nome": "QUASAR (5-FU/LV bolus semanal 30 semanas)",
+        "cenario": "colon_adjuvante_estadio_II_alto_risco_ou_III_idoso",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Leucovorin",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 370,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": 30,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050024",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE ADENOCARCINOMA DE CÓLON",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Semanalmente, por 30 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": "FICHA.colon-reto.5-fu-leucovorina-roswell-park__nao-especificado@1.0.0",
+        "id": "colorretal-roswell-park-adj",
+        "nome": "Roswell Park (5-FU/LV bolus semanal)",
+        "cenario": "colon_adjuvante_estadio_II_alto_risco_ou_III_idoso",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Leucovorin",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15, D22, D29, D36",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8, D15, D22, D29, D36",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 56,
+        "numeroCiclos": 3,
+        "observacao": "SBOC: 3 a 4 ciclos.",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050024",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE ADENOCARCINOMA DE CÓLON",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 12,
+          "trecho": "Semanalmente por 6 semanas, a cada 8 semanas, por 3 a 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": "FICHA.colon-reto.capox-xelox__adjuvante@1.0.0",
+        "id": "colorretal-capox-adj-4c",
+        "nome": "CAPOX 4 ciclos (3 meses) — estádio III baixo risco (preferencial)",
+        "cenario": "colon_adjuvante_estadio_III_baixo_risco",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14, 12/12h",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "observacao": "A ficha institucional traz 8 ciclos; para baixo risco a SBOC prefere 4. Ajustar número de ciclos na prescrição.",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050024",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE ADENOCARCINOMA DE CÓLON",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Esquema CapOx 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": "FICHA.colon-reto.capox-xelox__adjuvante@1.0.0",
+        "id": "colorretal-capox-adj-8c",
+        "nome": "CAPOX 8 ciclos (6 meses) — estádio III alto risco",
+        "cenario": "colon_adjuvante_estadio_III_alto_risco",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14, 12/12h",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 8,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050024",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE ADENOCARCINOMA DE CÓLON",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Esquema CapOx 8 ciclos;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": null,
+        "id": "colorretal-mfolfox6-adj",
+        "nome": "mFOLFOX6 adjuvante (12 ciclos; 6 ciclos se 3 meses)",
+        "cenario": "colon_adjuvante_estadio_III",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 46 h)",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 12,
+        "observacao": "Não há ficha adjuvante de mFOLFOX6; a ficha FOLFOX paliativa não tem o bolus de 400 mg/m².",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050024",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE ADENOCARCINOMA DE CÓLON",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Esquema mFolfox6 12 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": null,
+        "id": "colorretal-flox-adj",
+        "nome": "FLOX adjuvante (sem bomba de infusão)",
+        "cenario": "colon_adjuvante_estadio_III",
+        "linha": "adjuvante",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D15, D29",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal x 6",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal x 6",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 56,
+        "numeroCiclos": 3,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304050024",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE ADENOCARCINOMA DE CÓLON",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Oxaliplatina 85 mg/m² EV D1, D15 e D29",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": "FICHA.reto.capecitabina-rxt-radiossensibilizacao__concomitante-a-rt@1.0.0",
+        "id": "colorretal-reto-qtrt-capecitabina",
+        "nome": "QT/RT curso longo com capecitabina",
+        "cenario": "reto_neoadjuvante_qtrt_curso_longo",
+        "linha": "neoadjuvante (concomitante à RT)",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 825,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "12/12h nos dias de RT",
+            "observacao": "RT 50–50,4 Gy; TME 6–12 semanas após."
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "observacao": "Ciclo semanal = dias de RT (5/semana) durante todo o curso de RT.",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304040010",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE RETO (PRÉVIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Capecitabina 825 mg/m² VO 2x/dia nos dias de RT",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": null,
+        "id": "colorretal-reto-qtrt-5fu-infusional",
+        "nome": "QT/RT curso longo com 5-FU infusional",
+        "cenario": "reto_neoadjuvante_qtrt_curso_longo",
+        "linha": "neoadjuvante (concomitante à RT)",
+        "drogas": [
+          {
+            "droga": "Fluoruracila (infusão contínua)",
+            "dose": 225,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "contínuo, por dia, durante toda a RT",
+            "observacao": "dose diária (mg/m²/dia)"
+          }
+        ],
+        "cicloDias": 7,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304040010",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE RETO (PRÉVIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "5-FU 225 mg/m²/dia EV em infusão contínua durante a RT.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": null,
+        "id": "colorretal-reto-qtrt-5fu-bolus",
+        "nome": "QT/RT curso longo com 5-FU bolus (alternativa)",
+        "cenario": "reto_neoadjuvante_qtrt_curso_longo",
+        "linha": "neoadjuvante (concomitante à RT)",
+        "drogas": [
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 350,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1-D5 das semanas 1 e 5 de RT",
+            "observacao": "alternativa SBOC: 400 mg/m²/dia D1-D4 nas semanas 1 e 5"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 2,
+        "observacao": "Duas aplicações (semanas 1 e 5 da RT).",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304040010",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE RETO (PRÉVIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "5-FU 350 mg/m²/dia EV em bólus por 5 dias",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "colorretal-reto-tnt-consolidacao",
+        "nome": "TNT: QT/RT curso longo → QT de consolidação (FOLFOX 8 ciclos ou CAPOX 5 ciclos)",
+        "cenario": "reto_localmente_avancado_preservacao_ou_alto_risco",
+        "linha": "neoadjuvante total",
+        "drogas": [],
+        "cicloDias": null,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "DPD antes de fluoropirimidina.",
+        "fichaId": null,
+        "composicao": "QT/RT (capecitabina 825 mg/m² 12/12h ou 5-FU 225 mg/m²/dia) → 4 meses de FOLFOX (8 ciclos) ou CAPOX (5 ciclos); avaliação de resposta 2–4 semanas após a QT.",
+        "pendencia": "SEM_FONTE: a diretriz de Reto não traz as doses do FOLFOX/CAPOX de consolidação; doses do cólon não são transferidas.",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304040010",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE RETO (PRÉVIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "8 ciclos de Folfox ou 5 ciclos de Capox",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "colorretal-reto-tnt-inducao-mfolfirinox",
+        "nome": "TNT: indução mFOLFIRINOX 6 ciclos → QT/RT → TME → FOLFOX/CAPOX (PRODIGE-23)",
+        "cenario": "reto_localmente_avancado_alto_risco",
+        "linha": "neoadjuvante total",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01804790 (PRODIGE 23) — https://clinicaltrials.gov/api/v2/studies/NCT01804790, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "oxaliplatin: 85 mg/m² in 2 hours at D1 irinotecan: 180 mg/m²",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Irinotecano",
+            "dose": 180,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01804790 (PRODIGE 23) — https://clinicaltrials.gov/api/v2/studies/NCT01804790, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "oxaliplatin: 85 mg/m² in 2 hours at D1 irinotecan: 180 mg/m²",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01804790 (PRODIGE 23) — https://clinicaltrials.gov/api/v2/studies/NCT01804790, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "folinic acid: 400 mg/m² simultaneously in 2 hours at D1",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "5-FU infusão contínua 48 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "sem bolus (PRODIGE 23)",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01804790 (PRODIGE 23) — https://clinicaltrials.gov/api/v2/studies/NCT01804790, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "2400 mg/m² continuous infusion during 48 hours (1200 mg/m² at D1 and D2)",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "DPD; UGT1A1 não exigido pela fonte.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304040010",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE RETO (PRÉVIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "QT de indução com mFolfirinox por 3 meses (6 ciclos)",
+          "estado": "VERIFICADO"
+        },
+        "doseVerificada": true,
+        "notaDose": "Doses do braço experimental do PRODIGE 23 (registro ClinicalTrials.gov), não transferidas do cólon metastático."
+      },
+      {
+        "id": "colorretal-reto-qt-neo-seletiva-prospect",
+        "nome": "QT neoadjuvante seletiva (modelo PROSPECT): FOLFOX x6 ou CAPOX x4 → TME",
+        "cenario": "reto_localmente_avancado_sem_risco_pMMR",
+        "linha": "neoadjuvante",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "FOLFOX × 6",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01515787 (PROSPECT) — https://clinicaltrials.gov/api/v2/studies/NCT01515787, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "Oxaliplatin 85 mg/m\\^2 IV over 2 hours on day 1, leucovorin 400 mg/m\\^2",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01515787 (PROSPECT) — https://clinicaltrials.gov/api/v2/studies/NCT01515787, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "Oxaliplatin 85 mg/m\\^2 IV over 2 hours on day 1, leucovorin 400 mg/m\\^2",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "5-FU bolus",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01515787 (PROSPECT) — https://clinicaltrials.gov/api/v2/studies/NCT01515787, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "5-fluorouracil 400 mg/m\\^2 bolus over 5-15 minutes then 2400 mg/m\\^2",
+              "estado": "VERIFICADO"
+            }
+          },
+          {
+            "droga": "5-FU infusão contínua 46 h",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "46–48 h",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT01515787 (PROSPECT) — https://clinicaltrials.gov/api/v2/studies/NCT01515787, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "5-fluorouracil 400 mg/m\\^2 bolus over 5-15 minutes then 2400 mg/m\\^2",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": 6,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Proibido em dMMR (SBOC).",
+        "fichaId": null,
+        "pendencia": {
+          "texto": "Doses do CAPOX × 4 (alternativa) não descritas no registro do PROSPECT nem na SBOC Reto.",
+          "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+          "buscasFeitas": [
+            "SBOC 2026 Reto p.17",
+            "ClinicalTrials.gov NCT01515787",
+            "Onco PRO 2026 aula 16"
+          ]
+        },
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304040010",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE RETO (PRÉVIA)",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Folfox (x 6 ciclos) ou Capox (x 4 ciclos)",
+          "estado": "VERIFICADO"
+        },
+        "notaDose": "Doses do FOLFOX do braço PROSPECT (registro ClinicalTrials.gov)."
+      },
+      {
+        "id": "colorretal-reto-dmmr-anti-pd1-neoadjuvante",
+        "nome": "Anti-PD-1 por 6 meses (reto médio-baixo dMMR localmente avançado)",
+        "cenario": "reto_localmente_avancado_dMMR_neoadjuvante",
+        "linha": "neoadjuvante / definitivo",
+        "drogas": [
+          {
+            "droga": "Dostarlimabe",
+            "dose": 500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "6 meses (9 ciclos de 21 dias); sem aprovação no Brasil neste cenário",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT04165772 (dostarlimabe em dMMR localmente avançado) — https://clinicaltrials.gov/api/v2/studies/NCT04165772, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "TSR-042/Dostarlimab at a dose of 500mg IV, over 30 minutes Q 3 weeks",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 9,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Sem aprovação no Brasil nesse cenário. Alternativa SUS: protocolo pMMR (QT/RT ± QT), evitando QT pré-operatória exclusiva.",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 22,
+            "trecho": "imunoterapia não está aprovada no Brasil para o tratamento inicial",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "Imunoterapia com um anti-PD-1 durante seis meses é recomendada",
+          "estado": "VERIFICADO"
+        },
+        "fonteCiclos": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT04165772 (dostarlimabe em dMMR localmente avançado) — https://clinicaltrials.gov/api/v2/studies/NCT04165772, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "up to 6 months (9, 21-day cycles) of PD-1 blockade",
+          "estado": "VERIFICADO"
+        },
+        "notaDose": "SBOC recomenda anti-PD-1 sem nomear droga; registro do estudo (dostarlimabe). Médico confirma a droga disponível.",
+        "derivadoDe": "colorretal-reto-dmmr-anti-pd1",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "id": "colorretal-reto-dmmr-anti-pd1-definitivo",
+        "nome": "Anti-PD-1 por 6 meses (reto médio-baixo dMMR localmente avançado)",
+        "cenario": "reto_localmente_avancado_dMMR_definitivo_nao_operatorio",
+        "linha": "neoadjuvante / definitivo",
+        "drogas": [
+          {
+            "droga": "Dostarlimabe",
+            "dose": 500,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "6 meses (9 ciclos de 21 dias); sem aprovação no Brasil neste cenário",
+            "fonte": {
+              "tipo": "ENSAIO",
+              "referencia": "ClinicalTrials.gov NCT04165772 (dostarlimabe em dMMR localmente avançado) — https://clinicaltrials.gov/api/v2/studies/NCT04165772, acesso 2026-10-11",
+              "pagina": null,
+              "trecho": "TSR-042/Dostarlimab at a dose of 500mg IV, over 30 minutes Q 3 weeks",
+              "estado": "VERIFICADO"
+            }
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 9,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Sem aprovação no Brasil nesse cenário. Alternativa SUS: protocolo pMMR (QT/RT ± QT), evitando QT pré-operatória exclusiva.",
+          "fonte": {
+            "tipo": "SBOC",
+            "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+            "pagina": 22,
+            "trecho": "imunoterapia não está aprovada no Brasil para o tratamento inicial",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "Imunoterapia com um anti-PD-1 durante seis meses é recomendada",
+          "estado": "VERIFICADO"
+        },
+        "fonteCiclos": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT04165772 (dostarlimabe em dMMR localmente avançado) — https://clinicaltrials.gov/api/v2/studies/NCT04165772, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "up to 6 months (9, 21-day cycles) of PD-1 blockade",
+          "estado": "VERIFICADO"
+        },
+        "notaDose": "SBOC recomenda anti-PD-1 sem nomear droga; registro do estudo (dostarlimabe). Médico confirma a droga disponível.",
+        "derivadoDe": "colorretal-reto-dmmr-anti-pd1",
+        "criterioAplicacao": "PENDENTE: critério de aplicação deste cenário a explicitar (separado do original por mistura de cenários)."
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": "FICHA.colon-reto.folfox__paliativo-metastatico@1.0.0",
+        "id": "colorretal-mfolfox6-met",
+        "nome": "mFOLFOX6",
+        "cenario": "metastatico",
+        "linha": "1ª/2ª linha; perioperatório (6 pré + 6 pós) na doença ressecável",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 46 h)",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "observacao": "A ficha não tem o bolus de 400 mg/m² (ver conflitos).",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020010",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE COLON AVANÇADO -1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "5-Fluorouracil 2.400 mg/m² EV (bomba de infusão de 46h) D1",
+          "estado": "VERIFICADO"
+        },
+        "observacaoCenario": "Uso perioperatório (metástase hepática ressecável) deve ser protocolo próprio; este registro é do cenário metastático paliativo."
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": "FICHA.colon-reto.folfox4-com-port__paliativo-metastatico@1.0.0",
+        "id": "colorretal-folfox4-met",
+        "nome": "FOLFOX4",
+        "cenario": "metastatico",
+        "linha": "1ª/2ª linha",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D2",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D2",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão 22 h)",
+            "dose": 600,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D2",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "observacao": "Variante sem port: FICHA.colon-reto.folfox4-sem-port__paliativo-metastatico@1.0.0.",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020010",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE COLON AVANÇADO -1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "5-Fluorouracil 600 mg/m² EV (bomba de infusão de 22h) D1 e D2",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": "FICHA.colon-reto.folfiri__paliativo-metastatico@1.0.0",
+        "id": "colorretal-folfiri-met",
+        "nome": "FOLFIRI",
+        "cenario": "metastatico",
+        "linha": "1ª/2ª linha",
+        "drogas": [
+          {
+            "droga": "Irinotecano",
+            "dose": 180,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 46 h)",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "observacao": "A ficha não tem o bolus de 400 mg/m² (ver conflitos).",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020010",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE COLON AVANÇADO -1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Irinotecano 180 mg/m² EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": null,
+        "id": "colorretal-folfirinox-met",
+        "nome": "FOLFIRINOX (cólon metastático)",
+        "cenario": "metastatico_ou_conversao",
+        "linha": "1ª linha / conversão",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Irinotecano",
+            "dose": 180,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 46 h)",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020010",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE COLON AVANÇADO -1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 5,
+          "trecho": "Folfirinox Oxaliplatina 85 mg/m² EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": "FICHA.colon-reto.folfoxiri__paliativo-metastatico@1.0.0",
+        "id": "colorretal-folfoxiri-met",
+        "nome": "FOLFOXIRI (± bevacizumabe)",
+        "cenario": "metastatico_doenca_agressiva_PS0-1",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Irinotecano",
+            "dose": 165,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 46 h)",
+            "dose": 3200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "observacao": "Bolus de 400 mg/m² listado pela SBOC foi OMITIDO por segurança (FOLFOXIRI clássico e ficha sem bolus). LV: SBOC 200 mg/m² × ficha 400 mg/m². Ver conflitos.",
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020010",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE COLON AVANÇADO -1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Irinotecano 165 mg/m² EV D1",
+          "estado": "CONFLITANTE"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": null,
+        "id": "colorretal-capox-met",
+        "nome": "CAPOX (metastático; opção se bomba indisponível)",
+        "cenario": "metastatico",
+        "linha": "1ª/2ª linha",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14, 12/12h",
+            "observacao": ""
+          },
+          {
+            "droga": "Oxaliplatina",
+            "dose": 130,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020010",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE COLON AVANÇADO -1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Capecitabina 1.000 mg/m² VO 12/12h D1 a D14",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": null,
+        "id": "colorretal-flox-met",
+        "nome": "FLOX (metastático)",
+        "cenario": "metastatico",
+        "linha": "2ª linha se bomba indisponível",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D15, D29",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal x 6",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 semanal x 6",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 56,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020028",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE COLON AVANÇADO - 2ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Por 6 semanas, a cada 8 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Diarreia tardia: loperamida conforme bula.",
+        "fichaId": "FICHA.colon-reto.irinotecano-monoterapia__nao-especificado@1.0.0",
+        "id": "colorretal-irinotecano-mono",
+        "nome": "Irinotecano monoterapia",
+        "cenario": "metastatico",
+        "linha": "2ª linha",
+        "drogas": [
+          {
+            "droga": "Irinotecano",
+            "dose": 350,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "corpus/f0c/sigtap/2026-09.json (SIGTAP competência 2026-09) — procedimento 0304020028",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DO ADENOCARCINOMA DE COLON AVANÇADO - 2ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Irinotecano 350 mg/m² EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Suspender bevacizumabe 6–8 semanas antes de cirurgia (SBOC).",
+        "fichaId": "FICHA.colon-reto.folfiri-bevacizumabe__paliativo-metastatico@1.0.0",
+        "id": "colorretal-mfolfox6-bevacizumabe",
+        "nome": "mFOLFOX6 ou FOLFIRI + bevacizumabe",
+        "cenario": "metastatico_RAS_mutado_ou_lado_direito",
+        "linha": "1ª/2ª linha",
+        "drogas": [
+          {
+            "droga": "Bevacizumabe",
+            "dose": 5,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "somado ao doublet (doses do mFOLFOX6/FOLFIRI acima)"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Anticorpo não incorporado ao SUS para CCRm (1ª linha). Alternativa SUS: o mesmo doublet de QT sem anticorpo, via APAC de QT do cólon/reto avançado. Uso do anticorpo só se o CACON/UNACON o custear dentro da APAC.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório de Recomendação nº 754/2022 (bevacizumabe, cetuximabe, panitumumabe 1ª linha CCRm); decisão final citada em parecer TJRJ 0806/2025 — portaria não conferida no DOU",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, os anticorpos monoclonais",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Bevacizumabe 5 mg/kg EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Somente RAS selvagem.",
+        "fichaId": null,
+        "id": "colorretal-mfolfox6-panitumumabe",
+        "nome": "mFOLFOX6 + panitumumabe",
+        "cenario": "metastatico_RAS_BRAF_selvagem_lado_esquerdo",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Oxaliplatina",
+            "dose": 85,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 46 h)",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Panitumumabe",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "somado ao doublet"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Anticorpo não incorporado ao SUS para CCRm (1ª linha). Alternativa SUS: o mesmo doublet de QT sem anticorpo, via APAC de QT do cólon/reto avançado. Uso do anticorpo só se o CACON/UNACON o custear dentro da APAC.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório de Recomendação nº 754/2022 (bevacizumabe, cetuximabe, panitumumabe 1ª linha CCRm); decisão final citada em parecer TJRJ 0806/2025 — portaria não conferida no DOU",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, os anticorpos monoclonais",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Panitumumabe 6 mg/kg EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        },
+        "composicaoDe": [
+          "colorretal-mfolfox6-met"
+        ]
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Somente RAS selvagem.",
+        "fichaId": null,
+        "id": "colorretal-folfiri-panitumumabe",
+        "nome": "FOLFIRI + panitumumabe",
+        "cenario": "metastatico_RAS_BRAF_selvagem_lado_esquerdo",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Irinotecano",
+            "dose": 180,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Leucovorin",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (bolus)",
+            "dose": 400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 46 h)",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Panitumumabe",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "somado ao doublet"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Anticorpo não incorporado ao SUS para CCRm (1ª linha). Alternativa SUS: o mesmo doublet de QT sem anticorpo, via APAC de QT do cólon/reto avançado. Uso do anticorpo só se o CACON/UNACON o custear dentro da APAC.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório de Recomendação nº 754/2022 (bevacizumabe, cetuximabe, panitumumabe 1ª linha CCRm); decisão final citada em parecer TJRJ 0806/2025 — portaria não conferida no DOU",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, os anticorpos monoclonais",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Panitumumabe 6 mg/kg EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        },
+        "composicaoDe": [
+          "colorretal-folfiri-met"
+        ]
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Somente RAS selvagem.",
+        "fichaId": null,
+        "id": "colorretal-mfolfox6-cetuximabe",
+        "nome": "mFOLFOX6 ou FOLFIRI + cetuximabe",
+        "cenario": "metastatico_RAS_BRAF_selvagem_lado_esquerdo",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Cetuximabe",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "somado ao doublet"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Anticorpo não incorporado ao SUS para CCRm (1ª linha). Alternativa SUS: o mesmo doublet de QT sem anticorpo, via APAC de QT do cólon/reto avançado. Uso do anticorpo só se o CACON/UNACON o custear dentro da APAC.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório de Recomendação nº 754/2022 (bevacizumabe, cetuximabe, panitumumabe 1ª linha CCRm); decisão final citada em parecer TJRJ 0806/2025 — portaria não conferida no DOU",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, os anticorpos monoclonais",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Cetuximabe 500 mg/m² EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "id": "colorretal-irinotecano-panitumumabe-q3s",
+        "nome": "Irinotecano + panitumumabe (preferencial, a cada 3 semanas)",
+        "cenario": "metastatico_RAS_BRAF_selvagem",
+        "linha": "2ª/3ª linha",
+        "drogas": [
+          {
+            "droga": "Irinotecano",
+            "dose": 350,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Panitumumabe",
+            "dose": 9,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Anticorpo não incorporado ao SUS para CCRm (1ª linha). Alternativa SUS: o mesmo doublet de QT sem anticorpo, via APAC de QT do cólon/reto avançado. Uso do anticorpo só se o CACON/UNACON o custear dentro da APAC.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório de Recomendação nº 754/2022 (bevacizumabe, cetuximabe, panitumumabe 1ª linha CCRm); decisão final citada em parecer TJRJ 0806/2025 — portaria não conferida no DOU",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, os anticorpos monoclonais",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Panitumumabe 9 mg/kg EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "id": "colorretal-irinotecano-panitumumabe-q2s",
+        "nome": "Irinotecano + panitumumabe (alternativa, a cada 2 semanas)",
+        "cenario": "metastatico_RAS_BRAF_selvagem",
+        "linha": "2ª/3ª linha",
+        "drogas": [
+          {
+            "droga": "Irinotecano",
+            "dose": 180,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Panitumumabe",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Anticorpo não incorporado ao SUS para CCRm (1ª linha). Alternativa SUS: o mesmo doublet de QT sem anticorpo, via APAC de QT do cólon/reto avançado. Uso do anticorpo só se o CACON/UNACON o custear dentro da APAC.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório de Recomendação nº 754/2022 (bevacizumabe, cetuximabe, panitumumabe 1ª linha CCRm); decisão final citada em parecer TJRJ 0806/2025 — portaria não conferida no DOU",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, os anticorpos monoclonais",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Panitumumabe 6 mg/kg EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "id": "colorretal-irinotecano-cetuximabe",
+        "nome": "Irinotecano + cetuximabe",
+        "cenario": "metastatico_RAS_BRAF_selvagem",
+        "linha": "2ª/3ª linha",
+        "drogas": [
+          {
+            "droga": "Irinotecano",
+            "dose": 180,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Cetuximabe",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Anticorpo não incorporado ao SUS para CCRm (1ª linha). Alternativa SUS: o mesmo doublet de QT sem anticorpo, via APAC de QT do cólon/reto avançado. Uso do anticorpo só se o CACON/UNACON o custear dentro da APAC.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório de Recomendação nº 754/2022 (bevacizumabe, cetuximabe, panitumumabe 1ª linha CCRm); decisão final citada em parecer TJRJ 0806/2025 — portaria não conferida no DOU",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, os anticorpos monoclonais",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Cetuximabe 500 mg/m² EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "id": "colorretal-cetuximabe-mono",
+        "nome": "Cetuximabe monoterapia",
+        "cenario": "metastatico_RAS_BRAF_selvagem",
+        "linha": "3ª/4ª linha",
+        "drogas": [
+          {
+            "droga": "Cetuximabe",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Anticorpo não incorporado ao SUS para CCRm (1ª linha). Alternativa SUS: o mesmo doublet de QT sem anticorpo, via APAC de QT do cólon/reto avançado. Uso do anticorpo só se o CACON/UNACON o custear dentro da APAC.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório de Recomendação nº 754/2022 (bevacizumabe, cetuximabe, panitumumabe 1ª linha CCRm); decisão final citada em parecer TJRJ 0806/2025 — portaria não conferida no DOU",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, os anticorpos monoclonais",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 6,
+          "trecho": "Cetuximabe 500 mg/m² EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "id": "colorretal-panitumumabe-mono",
+        "nome": "Panitumumabe monoterapia",
+        "cenario": "metastatico_RAS_BRAF_selvagem",
+        "linha": "3ª/4ª linha",
+        "drogas": [
+          {
+            "droga": "Panitumumabe",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Anticorpo não incorporado ao SUS para CCRm (1ª linha). Alternativa SUS: o mesmo doublet de QT sem anticorpo, via APAC de QT do cólon/reto avançado. Uso do anticorpo só se o CACON/UNACON o custear dentro da APAC.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório de Recomendação nº 754/2022 (bevacizumabe, cetuximabe, panitumumabe 1ª linha CCRm); decisão final citada em parecer TJRJ 0806/2025 — portaria não conferida no DOU",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, os anticorpos monoclonais",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Panitumumabe 6 mg/kg EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "id": "colorretal-folfiri-aflibercepte",
+        "nome": "FOLFIRI + aflibercepte",
+        "cenario": "metastatico",
+        "linha": "2ª linha após FOLFOX",
+        "drogas": [
+          {
+            "droga": "Aflibercepte",
+            "dose": 4,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "somado ao FOLFIRI"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "PCDT Adenocarcinoma de Cólon e Reto — Portaria Conjunta SAES/SCTIE nº 25, de 17/11/2025 (DOU nº 236, 11/12/2025) — https://www.gov.br/conitec/pt-br/midias/protocolos/adenocarcinoma-de-colon-e-de-reto-pcdt",
+            "pagina": null,
+            "trecho": "por não terem sido avaliados pela Conitec para tratamento de adenocarcinoma",
+            "estado": "VERIFICADO"
+          },
+          "nota": "PCDT não preconiza (não avaliado pela CONITEC). Alternativa SUS: QT da APAC de 2ª linha."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Aflibercepte 4 mg/kg EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "id": "colorretal-folfiri-ramucirumabe",
+        "nome": "FOLFIRI + ramucirumabe",
+        "cenario": "metastatico",
+        "linha": "2ª linha após FOLFOX",
+        "drogas": [
+          {
+            "droga": "Ramucirumabe",
+            "dose": 8,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "somado ao FOLFIRI"
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "PCDT Adenocarcinoma de Cólon e Reto — Portaria Conjunta SAES/SCTIE nº 25, de 17/11/2025 (DOU nº 236, 11/12/2025) — https://www.gov.br/conitec/pt-br/midias/protocolos/adenocarcinoma-de-colon-e-de-reto-pcdt",
+            "pagina": null,
+            "trecho": "por não terem sido avaliados pela Conitec para tratamento de adenocarcinoma",
+            "estado": "VERIFICADO"
+          },
+          "nota": "PCDT não preconiza (não avaliado pela CONITEC). Alternativa SUS: QT da APAC de 2ª linha."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Ramucirumabe 8 mg/kg EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": null,
+        "id": "colorretal-capecitabina-bevacizumabe-avex",
+        "nome": "Capecitabina + bevacizumabe (AVEX)",
+        "cenario": "metastatico_idoso_fragil_ou_indolente",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Capecitabina",
+            "dose": 1000,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D14, 12/12h",
+            "observacao": ""
+          },
+          {
+            "droga": "Bevacizumabe",
+            "dose": 7.5,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Bevacizumabe não incorporado. Alternativa SUS: capecitabina isolada (APAC 1ª linha).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório de Recomendação nº 754/2022 (bevacizumabe, cetuximabe, panitumumabe 1ª linha CCRm); decisão final citada em parecer TJRJ 0806/2025 — portaria não conferida no DOU",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, os anticorpos monoclonais",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Bevacizumabe 7,5 mg/kg EV D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Pesquisa de deficiência de DPD antes de fluoropirimidina (SBOC); ajuste renal/hepático conforme bula.",
+        "fichaId": null,
+        "id": "colorretal-5fu-panitumumabe-panda",
+        "nome": "5-FU/LV + panitumumabe (PANDA)",
+        "cenario": "metastatico_idoso_fragil_RAS_selvagem",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Leucovorin",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Fluoruracila (infusão contínua 46 h)",
+            "dose": 2400,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          },
+          {
+            "droga": "Panitumumabe",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "nota": "Panitumumabe não incorporado. Alternativa SUS: 5-FU/LV isolado (APAC 1ª linha).",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "CONITEC Relatório de Recomendação nº 754/2022 (bevacizumabe, cetuximabe, panitumumabe 1ª linha CCRm); decisão final citada em parecer TJRJ 0806/2025 — portaria não conferida no DOU",
+            "pagina": null,
+            "trecho": "Não incorporar, no âmbito do Sistema Único de Saúde - SUS, os anticorpos monoclonais",
+            "estado": "INFERIDO"
+          }
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "5-FU + Panitumumabe (Panda) Leucovorin 200 mg/m² EV D1",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Interações CYP3A4 (INAT-23).",
+        "fichaId": null,
+        "id": "colorretal-regorafenibe",
+        "nome": "Regorafenibe (escalonamento ReDOS no C1)",
+        "cenario": "metastatico_refratario",
+        "linha": "3ª/4ª linha",
+        "drogas": [
+          {
+            "droga": "Regorafenibe",
+            "dose": 160,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D21, 1x/dia",
+            "observacao": "C1: 80 mg/dia sem. 1, 120 mg/dia sem. 2, 160 mg/dia sem. 3 se tolerado"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "PCDT Adenocarcinoma de Cólon e Reto — Portaria Conjunta SAES/SCTIE nº 25, de 17/11/2025 (DOU nº 236, 11/12/2025) — https://www.gov.br/conitec/pt-br/midias/protocolos/adenocarcinoma-de-colon-e-de-reto-pcdt",
+            "pagina": null,
+            "trecho": "por não terem sido avaliados pela Conitec para tratamento de adenocarcinoma",
+            "estado": "VERIFICADO"
+          },
+          "nota": "PCDT não preconiza (não avaliado pela CONITEC). Alternativa SUS: QT da APAC de 2ª linha."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Regorafenibe 160 mg 1x/dia VO D1 a D21 A cada 4 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "id": "colorretal-trifluridina-tipiracila",
+        "nome": "Trifluridina/tipiracila",
+        "cenario": "metastatico_refratario",
+        "linha": "3ª/4ª linha",
+        "drogas": [
+          {
+            "droga": "Trifluridina/tipiracila",
+            "dose": 35,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D5 e D8-D12, 12/12h",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "PCDT Adenocarcinoma de Cólon e Reto — Portaria Conjunta SAES/SCTIE nº 25, de 17/11/2025 (DOU nº 236, 11/12/2025) — https://www.gov.br/conitec/pt-br/midias/protocolos/adenocarcinoma-de-colon-e-de-reto-pcdt",
+            "pagina": null,
+            "trecho": "por não terem sido avaliados pela Conitec para tratamento de adenocarcinoma",
+            "estado": "VERIFICADO"
+          },
+          "nota": "PCDT não preconiza (não avaliado pela CONITEC). Alternativa SUS: QT da APAC de 2ª linha."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 7,
+          "trecho": "Trifluridina/Tipiracila 35 mg/m² 12/12h VO D1 a D5",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "id": "colorretal-trifluridina-tipiracila-bevacizumabe",
+        "nome": "Trifluridina/tipiracila + bevacizumabe (SUNLIGHT; preferencial)",
+        "cenario": "metastatico_refratario",
+        "linha": "3ª/4ª linha",
+        "drogas": [
+          {
+            "droga": "Trifluridina/tipiracila",
+            "dose": 35,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1-D5 e D8-D12, 12/12h",
+            "observacao": ""
+          },
+          {
+            "droga": "Bevacizumabe",
+            "dose": 5,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 e D15",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "PCDT Adenocarcinoma de Cólon e Reto — Portaria Conjunta SAES/SCTIE nº 25, de 17/11/2025 (DOU nº 236, 11/12/2025) — https://www.gov.br/conitec/pt-br/midias/protocolos/adenocarcinoma-de-colon-e-de-reto-pcdt",
+            "pagina": null,
+            "trecho": "por não terem sido avaliados pela Conitec para tratamento de adenocarcinoma",
+            "estado": "VERIFICADO"
+          },
+          "nota": "PCDT não preconiza (não avaliado pela CONITEC). Alternativa SUS: QT da APAC de 2ª linha."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Bevacizumabe 5 mg/kg EV D1 e D15",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Interações CYP3A4 (INAT-23).",
+        "fichaId": null,
+        "id": "colorretal-encorafenibe-cetuximabe",
+        "nome": "Encorafenibe + cetuximabe",
+        "cenario": "metastatico_BRAF_V600E",
+        "linha": "2ª linha ou posterior (sem inibidor de BRAF/EGFR prévio)",
+        "drogas": [
+          {
+            "droga": "Encorafenibe",
+            "dose": 300,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": ""
+          },
+          {
+            "droga": "Cetuximabe",
+            "dose": 250,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "semanal (D1, D8, D15, D22)",
+            "observacao": "C1D1 ataque 400 mg/m²; alternativa 500 mg/m² D1 e D15"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Cetuximabe 250 mg/m² EV semanalmente (dose de ataque no C1D1: 400 mg/m²)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "id": "colorretal-encorafenibe-cetuximabe-mfolfox6",
+        "nome": "Encorafenibe + cetuximabe + mFOLFOX6 (BREAKWATER)",
+        "cenario": "metastatico_BRAF_V600E",
+        "linha": "1ª linha (preferencial)",
+        "drogas": [
+          {
+            "droga": "Encorafenibe",
+            "dose": 300,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": ""
+          },
+          {
+            "droga": "Cetuximabe",
+            "dose": 500,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D15",
+            "observacao": "ou 250 mg/m² semanal com ataque 400 mg/m²; somado ao mFOLFOX6"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "BRAF-V600E mutado: mFolfox6 + Encorafenibe+ Cetuximabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Corticoide basal e antibióticos: ver INAT-27/INAT-28.",
+        "fichaId": null,
+        "id": "colorretal-pembrolizumabe",
+        "nome": "Pembrolizumabe",
+        "cenario": "metastatico_dMMR_MSI-H",
+        "linha": "1ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "Pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SECTICS/MS nº 74/2023 (publ. 29/12/2023), Relatório CONITEC nº 863; citado no PCDT Cólon e Reto 2025 — https://www.gov.br/conitec/pt-br/midias/protocolos/adenocarcinoma-de-colon-e-de-reto-pcdt",
+            "pagina": null,
+            "trecho": "não foi incorporado para o tratamento de pacientes com câncer de cólon e reto",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado (dMMR/MSI-H 1ª linha). Alternativa SUS: QT da APAC 1ª linha."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Pembrolizumabe 200 mg EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Ver INAT-27/INAT-28.",
+        "fichaId": null,
+        "id": "colorretal-nivolumabe",
+        "nome": "Nivolumabe",
+        "cenario": "metastatico_dMMR_MSI-H",
+        "linha": "1ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "Nivolumabe",
+            "dose": 3,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Nivolumabe 3 mg/kg EV D1 A cada 2 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Ver INAT-27/INAT-28.",
+        "fichaId": null,
+        "id": "colorretal-nivolumabe-ipilimumabe",
+        "nome": "Nivolumabe + ipilimumabe (esquema CheckMate-8HW)",
+        "cenario": "metastatico_dMMR_MSI-H",
+        "linha": "1ª linha (preferencial)",
+        "drogas": [
+          {
+            "droga": "Nivolumabe",
+            "dose": 240,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 x 4 doses (indução)",
+            "observacao": ""
+          },
+          {
+            "droga": "Ipilimumabe",
+            "dose": 1,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1 x 4 doses (indução)",
+            "observacao": ""
+          },
+          {
+            "droga": "Nivolumabe (manutenção)",
+            "dose": 480,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1, após a indução",
+            "observacao": "a cada 4 semanas"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 4,
+        "observacao": "Indução q21d x4, depois nivolumabe 480 mg q28d. A tabela de doses da SBOC (p.8) traz outro intervalo — ver conflitos.",
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "nivolumabe 240 mg + ipilimumabe 1 mg/kg a cada 3 semanas por 4 doses",
+          "estado": "CONFLITANTE"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "Vigiar pneumonite/DPI conforme bula.",
+        "fichaId": null,
+        "id": "colorretal-trastuzumabe-deruxtecana",
+        "nome": "Trastuzumabe-deruxtecana",
+        "cenario": "metastatico_RAS_selvagem_HER2_positivo",
+        "linha": "3ª linha ou posterior",
+        "drogas": [
+          {
+            "droga": "Trastuzumabe-deruxtecana",
+            "dose": 5.4,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Trastuzumabe-deruxtecana 5,4 mg/kg EV D1 A cada 3 semanas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "id": "colorretal-sotorasibe-panitumumabe",
+        "nome": "Sotorasibe + panitumumabe",
+        "cenario": "metastatico_KRAS_G12C",
+        "linha": "após QT padrão",
+        "drogas": [
+          {
+            "droga": "Sotorasibe",
+            "dose": 960,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 1x/dia",
+            "observacao": "dose/frequência pela bula"
+          },
+          {
+            "droga": "Panitumumabe",
+            "dose": 6,
+            "unidade": "mg/kg",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 14,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Planilha oficial de recomendações da CONITEC (versão 15/06/2026, portarias até 19/08/2026) + Painel de Demandas CONITEC + busca no portal gov.br/conitec (2026-10-11): nenhuma avaliação para esta indicação",
+            "pagina": null,
+            "trecho": null,
+            "estado": "INFERIDO"
+          },
+          "nota": "Sem avaliação/incorporação pela CONITEC para esta indicação: não fornecido pelo SUS; uso só dentro do valor da APAC, a critério do serviço."
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "FDA/DailyMed Lumakras (sotorasibe) set_id c80a362c-7ac3-4894-a076-0691e68ef8c1, seção 2.2",
+          "pagina": null,
+          "trecho": "in combination with panitumumab for mCRC: 960 mg orally once daily",
+          "estado": "VERIFICADO"
+        },
+        "fonteAdicional": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "associado a panitumumabe (6 mg/kg a cada 2 semanas)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "id": "colorretal-larotrectinibe",
+        "nome": "Larotrectinibe",
+        "cenario": "metastatico_fusao_NTRK",
+        "linha": "qualquer linha após padrão",
+        "drogas": [
+          {
+            "droga": "Larotrectinibe",
+            "dose": 100,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "contínuo, 12/12h",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "sus": {
+          "disponivel": "nao",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 72/2021 (publ. 07/12/2021), Relatório CONITEC nº 679 — https://www.gov.br/conitec/pt-br/midias/relatorios/portaria/2021/20211207_portaria_72.pdf",
+            "pagina": null,
+            "trecho": "o larotrectinibe para o tratamento de adultos e crianças com tumores sólidos",
+            "estado": "VERIFICADO"
+          },
+          "nota": "Não incorporado para adultos. Só o subgrupo pediátrico foi incorporado (Portaria SECTICS/MS nº 71/2025)."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 8,
+          "trecho": "Larotrectinibe 100 mg 12/12h VO continuamente",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "reto_qtrt_curso_longo",
+        "doseTotalGy": 50.4,
+        "doseTotalFaixa": "50–50,4 Gy",
+        "fracoes": 28,
+        "concomitante": "capecitabina 825 mg/m² 12/12h nos dias de RT ou 5-FU 225 mg/m²/dia IC (ou 5-FU bolus semanas 1 e 5)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "RT 50–50,4 Gy associada a:",
+          "estado": "VERIFICADO"
+        },
+        "fonteFracoes": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov NCT00349076 (CAO/ARO/AIO-04) — https://clinicaltrials.gov/api/v2/studies/NCT00349076, acesso 2026-10-11",
+          "pagina": null,
+          "trecho": "28 fractions; single dose: 1,8 Gy once per day",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "reto_SCRT_curso_curto",
+        "doseTotalGy": 25,
+        "fracoes": 5,
+        "concomitante": "sem QT concomitante",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "25 Gy em 5 frações",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Colectomia oncológica com linfadenectomia (≥ 12 linfonodos)",
+        "quando": "cólon localizado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Amostragem inadequada de LFN (< 12 LFN dissecados)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Excisão total do mesorreto (TME)",
+        "quando": "reto cT2N0 upfront; após neoadjuvância, 6–12 semanas depois da QT/RT longa",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "TME entre 6 e 12 semanas após a conclusão da QT/RT de curso longo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Ressecção local transanal (TEM/TAMIS)",
+        "quando": "reto T1N0 sem fatores de risco",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "Tumores restritos à mucosa e à submucosa sem critérios de risco (< 3 cm",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "Metastasectomia ou ablação térmica hepática",
+        "quando": "metástases pequenas, recidiva tardia, metacrônicas ou cirurgia poupadora de parênquima",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 9,
+          "trecho": "Considerar se metástase(s) muito pequena(s) ou recidiva após alguns anos",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "RAS e BRAF selvagens + primário no cólon esquerdo (metastático)",
+        "opcao": "doublet (mFOLFOX6/FOLFIRI) + cetuximabe ou panitumumabe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "anti-EGFR não incorporado; alternativa: doublet isolado (APAC)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Se o tumor é do lado esquerdo, favorecemos adição de anti-EGFR",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "RAS mutado ou primário no cólon direito (metastático)",
+        "opcao": "doublet ± bevacizumabe; FOLFOXIRI + bevacizumabe se agressivo e PS 0–1",
+        "evidencia": "NE alto/FR fraca para bevacizumabe",
+        "sus": "bevacizumabe não incorporado; alternativa: doublet isolado (APAC)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Se o tumor primário é do lado direito, favorecemos adição do Bevacizumabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "BRAF V600E (metastático)",
+        "opcao": "1ª linha: encorafenibe + cetuximabe + mFOLFOX6; depois: encorafenibe + cetuximabe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "não verificado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "BRAF-V600E mutado: mFolfox6 + Encorafenibe+ Cetuximabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "dMMR/MSI-H (metastático)",
+        "opcao": "ipilimumabe + nivolumabe (preferencial); nivolumabe ou pembrolizumabe",
+        "evidencia": "NE alto/FR forte (combinação)",
+        "sus": "não verificado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "MSI-H / dMMR: Ipilimumabe + Nivolumabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "HER2 positivo + RAS selvagem",
+        "opcao": "trastuzumabe-deruxtecana",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "não verificado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 21,
+          "trecho": "RAS selvagem e HER2 hiperexpresso/amplificado: Trastuzumabe-deruxtecana",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "KRAS G12C",
+        "opcao": "sotorasibe + panitumumabe",
+        "evidencia": "NE alto/FR forte",
+        "sus": "não verificado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 21,
+          "trecho": "Mutação de KRAS G12C: Sotorasibe + Panitumumabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "Fusão NTRK",
+        "opcao": "larotrectinibe",
+        "evidencia": "NE moderado/FR forte",
+        "sus": "não verificado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 21,
+          "trecho": "Fusão de NTRK presente: Larotrectinibe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "PIK3CA mutado (estádio II–III)",
+        "opcao": "AAS 160 mg/dia por 3 anos",
+        "evidencia": "ALASCCA (fase III)",
+        "sus": "AAS disponível na atenção básica (não verificado nesta curadoria)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "AAS 160 mg diariamente por 3 anos;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "dMMR estádio III (adjuvância)",
+        "opcao": "FOLFOX + atezolizumabe (ATOMIC) — sem aprovação regulatória no Brasil",
+        "evidencia": "fase III",
+        "sus": "não",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "ainda não há aprovação dessa abordagem pelas agências regulatórias em nosso país.",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": null,
+      "riscoNeutropeniaFebril": null,
+      "pendencia": "SEM_FONTE: SBOC colorretal não classifica emetogenicidade nem risco de NF por esquema.",
+      "outros": [
+        "CAPOX: enterocolite grave em cerca de 15% no nosso meio; cautela em frágeis, ≥ 65 anos, ClCr < 60 ou pós-hemicolectomia direita.",
+        "Neuropatia por oxaliplatina: suspender a oxaliplatina e manter 5-FU/LV não piora SLD/SG (sobretudo após > 3 meses).",
+        "Bevacizumabe: suspender 6–8 semanas antes de cirurgia.",
+        "Pesquisa de DPD antes de fluoropirimidina, se disponível.",
+        "Atividade física estruturada supervisionada (estádio II alto risco e III)."
+      ],
+      "fonte": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 19,
+        "trecho": "Capox em nosso meio está associado a enterocolite grave em aproximadamente 15%",
+        "estado": "VERIFICADO"
+      },
+      "fontesAdicionais": [
+        {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 10,
+          "trecho": "este deve ser suspenso de 6 a 8 semanas previamente à cirurgia.",
+          "estado": "VERIFICADO"
+        },
+        {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "incorporação de programa estruturado de exercício supervisionado",
+          "estado": "VERIFICADO"
+        }
+      ]
+    },
+    "ensaios": [
+      {
+        "nome": "IDEA (componente CALGB/SWOG 80702)",
+        "nct": "NCT01150045",
+        "nctEstado": "VERIFICADO",
+        "populacao": "cólon estádio III",
+        "bracos": "oxaliplatina + FP por 3 × 6 meses",
+        "desfecho": "SLD",
+        "resultado": "CAPOX 3 meses não inferior em T1–3 N1",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "o uso de Capox por 3 meses em pacientes considerados de menor risco",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ALASCCA",
+        "nct": "NCT02647099",
+        "nctEstado": "VERIFICADO",
+        "populacao": "cólon/reto II–III com PIK3CA mutado",
+        "bracos": "AAS × placebo por 3 anos",
+        "desfecho": "recorrência",
+        "resultado": "HR 0,49 para recorrência em 3 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "redução aproximada de 50% no risco de recorrência em 3 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CHALLENGE",
+        "nct": "NCT00819208",
+        "nctEstado": "VERIFICADO",
+        "populacao": "cólon II alto risco e III",
+        "bracos": "exercício estruturado × orientação",
+        "desfecho": "SLR",
+        "resultado": "SLR 5 anos 80% × 73%",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "melhor sobrevida livre de recidiva em 5 anos (80% versus 73%)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "ATOMIC (Alliance A021502)",
+        "nct": "NCT02912559",
+        "nctEstado": "VERIFICADO",
+        "populacao": "cólon III dMMR",
+        "bracos": "FOLFOX ± atezolizumabe",
+        "desfecho": "SLD",
+        "resultado": "HR 0,50",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 20,
+          "trecho": "Esses dados favorecem a adição atezolizumabe à terapia padrão",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "PRODIGE-23 (Néofirinox)",
+        "nct": "NCT01804790",
+        "nctEstado": "VERIFICADO",
+        "populacao": "reto localmente avançado",
+        "bracos": "mFOLFIRINOX indução + QT/RT + TME + adjuvante × padrão",
+        "desfecho": "SLD",
+        "resultado": "único TNT com ganho de sobrevida",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 21,
+          "trecho": "é o único que demonstrou ganho de sobrevida",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "OPRA",
+        "nct": "NCT02008656",
+        "nctEstado": "VERIFICADO",
+        "populacao": "reto II–III",
+        "bracos": "TNT indução × consolidação",
+        "desfecho": "SLD 3 anos; preservação de órgão",
+        "resultado": "preservação em cerca de metade; consolidação favorece preservação",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "favorecendo o esquema QT/RT seguido de QT de consolidação",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "PROSPECT",
+        "nct": "NCT01515787",
+        "nctEstado": "VERIFICADO",
+        "populacao": "reto cT2N1/cT3N0-1 sem ameaça à fáscia",
+        "bracos": "FOLFOX neo seletivo × QT/RT",
+        "desfecho": "SLD",
+        "resultado": "não inferior",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "a QT neoadjuvante isolada é não inferior à QT/RT em SLD",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "RAPIDO",
+        "nct": "NCT01558921",
+        "nctEstado": "VERIFICADO",
+        "populacao": "reto alto risco",
+        "bracos": "SCRT → QT → TME × QT/RT",
+        "desfecho": "falha relacionada à doença",
+        "resultado": "mais recorrência local com SCRT (10% × 6%)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 18,
+          "trecho": "identificou maior recorrência local no braço que recebeu TNT com SCRT",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "Dostarlimabe reto dMMR (Cercek)",
+        "nct": "NCT04165772",
+        "nctEstado": "VERIFICADO",
+        "populacao": "reto localmente avançado dMMR",
+        "bracos": "dostarlimabe 6 meses",
+        "desfecho": "cCR",
+        "resultado": "49/49 com resposta clínica completa",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "Todos os 49 pacientes que completaram o tratamento apresentaram resposta clínica completa",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "PARADIGM",
+        "nct": "NCT02394795",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCRm RAS selvagem",
+        "bracos": "mFOLFOX6 + panitumumabe × + bevacizumabe",
+        "desfecho": "SG (lado esquerdo)",
+        "resultado": "37,9 × 34,3 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 14,
+          "trecho": "O braço anti-EGFR apresentou SG mediana de 37,9 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "BREAKWATER",
+        "nct": "NCT04607421",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCRm BRAF V600E 1ª linha",
+        "bracos": "encorafenibe + cetuximabe + mFOLFOX6 × padrão",
+        "desfecho": "SLP/SG",
+        "resultado": "SG 30,3 × 15,1 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 16,
+          "trecho": "SG mediana também foi superior no braço experimental 30,3 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "KEYNOTE-177",
+        "nct": "NCT02563002",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCRm dMMR 1ª linha",
+        "bracos": "pembrolizumabe × QT",
+        "desfecho": "SLP",
+        "resultado": "16,5 × 8,2 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "A SLP mediana foi de 16,5 meses no grupo imunoterapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CheckMate-8HW",
+        "nct": "NCT04008030",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCRm dMMR",
+        "bracos": "nivo + ipi × nivo × QT",
+        "desfecho": "SLP",
+        "resultado": "HR 0,21 vs QT; HR 0,62 vs nivo",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Houve ganho em SLP com a combinação de imunoterapia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "SUNLIGHT",
+        "nct": "NCT04737187",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCRm refratário",
+        "bracos": "FTD/TPI ± bevacizumabe",
+        "desfecho": "SG",
+        "resultado": "10,8 × 7,5 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 21,
+          "trecho": "prolongou a SG, o desfecho primário, de 7,5 meses para 10,8 meses",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "CodeBreaK 300",
+        "nct": "NCT05198934",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCRm KRAS G12C",
+        "bracos": "sotorasibe + panitumumabe × FTD/TPI ou regorafenibe",
+        "desfecho": "SLP",
+        "resultado": "5,6 × 2,0 meses",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "mediana de aproximadamente 5,6 versus 2,0 meses no grupo controle",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "nome": "DESTINY-CRC02",
+        "nct": "NCT04744831",
+        "nctEstado": "VERIFICADO",
+        "populacao": "CCRm HER2+",
+        "bracos": "T-DXd 5,4 × 6,4 mg/kg",
+        "desfecho": "TRO",
+        "resultado": "37,8% com 5,4 mg/kg",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "Resultou em uma taxa de resposta objetiva de 37,8%",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "Cólon estádio I",
+        "exames": [
+          "COLONOSCOPIA"
+        ],
+        "periodicidade": "1 ano após a cirurgia; depois 3 e 5 anos (1 ano se pólipo avançado; 6 meses se colonoscopia pré-operatória incompleta)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "Colonoscopia: repetir 1 ano após a cirurgia.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Cólon estádios II–III — consulta e CEA",
+        "exames": [
+          "CEA"
+        ],
+        "periodicidade": "a cada 3 meses por 2 anos, depois a cada 6 meses até 5 anos; CEA em toda visita",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "História e exame clínico: a cada 3 meses por 2 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Cólon estádios II–III — imagem",
+        "exames": [
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "TC_PELVE"
+        ],
+        "periodicidade": "a cada 6 meses por 2 anos e anual até 5 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "Exames de imagem: a cada 6 meses por 2 anos e anualmente até 5",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Cólon estádios II–III — colonoscopia",
+        "exames": [
+          "COLONOSCOPIA"
+        ],
+        "periodicidade": "1 ano após a cirurgia; depois 3 e 5 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 23,
+          "trecho": "Colonoscopia: repetir 1 ano após a cirurgia.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Reto operado",
+        "exames": [
+          "CEA",
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "TC_PELVE",
+          "COLONOSCOPIA"
+        ],
+        "periodicidade": "como o cólon",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 24,
+          "trecho": "Vide a diretriz “Cólon: doença localizada”.",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Reto em watch-and-wait — toque e endoscopia",
+        "exames": [
+          "RETOSSIGMOIDOSCOPIA"
+        ],
+        "periodicidade": "toque retal e sigmoidoscopia a cada 4 meses por 2 anos, depois a cada 6 meses por mais 3 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 24,
+          "trecho": "toque retal e sigmoidoscopia a cada 4 meses nos primeiros 2 anos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Reto em watch-and-wait — RM",
+        "exames": [
+          "RM_PELVE"
+        ],
+        "periodicidade": "a cada 6 meses por 2 anos; anual do 3º ao 5º ano",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 24,
+          "trecho": "a cada 6 meses por 2 anos e anualmente do terceiro ao quinto ano",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "Reto em watch-and-wait — TC",
+        "exames": [
+          "TC_TORAX",
+          "TC_ABDOMEN_SUPERIOR",
+          "TC_PELVE"
+        ],
+        "periodicidade": "anual por 5 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 24,
+          "trecho": "tomografia de tórax, abdome e pelve anualmente por 5 anos",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "ANATOMOPATOLOGICO",
+      "CEA",
+      "COLONOSCOPIA",
+      "IMUNOHISTOQUIMICA",
+      "PET_CT_FDG",
+      "RETOSSIGMOIDOSCOPIA",
+      "RM_ABDOMEN_SUPERIOR",
+      "RM_PELVE",
+      "TC_ABDOMEN_SUPERIOR",
+      "TC_PELVE",
+      "TC_TORAX",
+      "MOLECULAR_PCR_MUTACAO",
+      "SEQUENCIAMENTO_AMPLICON",
+      "FISH"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "fluoropirimidinas (5-FU, capecitabina, trifluridina/tipiracila)",
+        "com": "brivudina (interação fatal por inibição da DPD; intervalo mínimo de 4 semanas)",
+        "ref": "INAT-04"
+      },
+      {
+        "droga": "capecitabina",
+        "com": "varfarina e outros cumarínicos",
+        "ref": "INAT-02"
+      },
+      {
+        "droga": "capecitabina",
+        "com": "fenitoína",
+        "ref": "INAT-03"
+      },
+      {
+        "droga": "irinotecano",
+        "com": "inibidores fortes de CYP3A4/UGT1A1",
+        "ref": "INAT-13"
+      },
+      {
+        "droga": "irinotecano",
+        "com": "indutores fortes de CYP3A4",
+        "ref": "INAT-14"
+      },
+      {
+        "droga": "regorafenibe, encorafenibe, sotorasibe",
+        "com": "inibidores/indutores de CYP3A4",
+        "ref": "INAT-23"
+      },
+      {
+        "droga": "pembrolizumabe, nivolumabe, ipilimumabe",
+        "com": "corticoide sistêmico basal",
+        "ref": "INAT-27"
+      },
+      {
+        "droga": "pembrolizumabe, nivolumabe, ipilimumabe",
+        "com": "antibióticos sistêmicos próximos ao início",
+        "ref": "INAT-28"
+      },
+      {
+        "droga": "citotóxicos",
+        "com": "vacinas vivas",
+        "ref": "INAT-29"
+      },
+      {
+        "droga": "capecitabina / 5-FU",
+        "com": "deficiência de DPD",
+        "ref": "CI-10"
+      },
+      {
+        "droga": "capecitabina",
+        "com": "insuficiência renal grave",
+        "ref": "CI-03"
+      }
+    ],
+    "interacoesFonte": {
+      "tipo": "BULA",
+      "referencia": "EMA — Xeloda (capecitabina) EPAR Product Information, SmPC seções 4.3/4.5 (https://www.ema.europa.eu/en/documents/product-information/xeloda-epar-product-information_en.pdf)",
+      "pagina": null,
+      "trecho": "Brivudine must not be administered concomitantly with capecitabine",
+      "estado": "VERIFICADO"
+    },
+    "ctcaeAcao": [
+      {
+        "classe": "fluoropirimidina",
+        "termosCTCAEv6": [
+          "Diarrhea",
+          "Mucositis oral",
+          "Palmar-plantar erythrodysesthesia syndrome",
+          "Neutrophil count decreased"
+        ]
+      },
+      {
+        "classe": "platina",
+        "termosCTCAEv6": [
+          "Peripheral sensory neuropathy"
+        ]
+      },
+      {
+        "classe": "irinotecano",
+        "termosCTCAEv6": [
+          "Diarrhea",
+          "Neutrophil count decreased"
+        ]
+      },
+      {
+        "classe": "imunoterapia (ICI)",
+        "termosCTCAEv6": [
+          "Colitis",
+          "Hypothyroidism",
+          "Pneumonitis"
+        ]
+      },
+      {
+        "classe": "TKI (por molécula)",
+        "termosCTCAEv6": [
+          "Palmar-plantar erythrodysesthesia syndrome",
+          "Hypertension"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "loperamida (diarreia por irinotecano/fluoropirimidina)",
+      "antiemético conforme esquema",
+      "creme/cuidado para síndrome mão-pé (capecitabina)"
+    ],
+    "orientacoes": [
+      "atividade-fisica",
+      "sinais-alarme-consolidado",
+      "dieta-por-tumor",
+      "dieta-por-toxicidade"
+    ],
+    "encaminhamentos": [
+      "cirurgia-oncologica",
+      "radioterapia",
+      "oncogenetica (dMMR com suspeita de Lynch; < 50 anos)",
+      "nutricao",
+      "cuidados-paliativos"
+    ],
+    "laudos": [
+      "APAC de quimioterapia (SIGTAP 0304050024, 0304020010, 0304020028, 0304040010, 0304050032, 0304020095, 0304020109)",
+      "judicializacao-drogas (anticorpos não incorporados)"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "CCR metastático irressecável, RAS e BRAF selvagens, primário no cólon esquerdo",
+        "y": "candidato a QT intensiva",
+        "z": "doublet (mFOLFOX6/FOLFIRI) + anti-EGFR; no SUS, sem anti-EGFR incorporado: doublet isolado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 13,
+          "trecho": "Se o tumor é do lado esquerdo, favorecemos adição de anti-EGFR",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CCR metastático dMMR/MSI-H",
+        "y": "sem imunoterapia prévia",
+        "z": "ipilimumabe + nivolumabe (preferencial) ou anti-PD-1 isolado",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "MSI-H / dMMR: Ipilimumabe + Nivolumabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Candidato a fluoropirimidina",
+        "y": "deficiência de DPD (variante DPYD)",
+        "z": "total: contraindicação absoluta; parcial: reduzir dose",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 25,
+          "trecho": "contraindicação absoluta de uso desta ou indicação de redução de dose",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Paciente em fluoropirimidina (5-FU/capecitabina)",
+        "y": "brivudina concomitante ou nas últimas 4 semanas",
+        "z": "não iniciar/não coadministrar; intervalo mínimo de 4 semanas após brivudina",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "EMA — Xeloda (capecitabina) EPAR Product Information, SmPC seções 4.3/4.5 (https://www.ema.europa.eu/en/documents/product-information/xeloda-epar-product-information_en.pdf)",
+          "pagina": null,
+          "trecho": "at least a 4-week waiting period between end of treatment with brivudine",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Cólon estádio II",
+        "y": "dMMR/MSI-H",
+        "z": "observação, sem adjuvância",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "Não recomendado tratamento adjuvante",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Cólon estádio III T1–3 N1",
+        "y": "apto a oxaliplatina",
+        "z": "CAPOX 4 ciclos (3 meses)",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 17,
+          "trecho": "Esquema CapOx 4 ciclos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Cólon/reto estádio II–III",
+        "y": "PIK3CA mutado",
+        "z": "AAS 160 mg/dia por 3 anos",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 11,
+          "trecho": "AAS 160 mg diariamente por 3 anos;",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "CCR metastático BRAF V600E",
+        "y": "1ª linha",
+        "z": "encorafenibe + cetuximabe + mFOLFOX6",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 15,
+          "trecho": "BRAF-V600E mutado: mFolfox6 + Encorafenibe+ Cetuximabe",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Reto localmente avançado dMMR",
+        "y": "acesso a anti-PD-1",
+        "z": "anti-PD-1 por 6 meses; sem acesso: protocolo pMMR, evitando QT pré-operatória exclusiva",
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Reto-v4-VERSAO-PARA-COLABORACAO.pdf",
+          "pagina": 22,
+          "trecho": "QT pré-operatória exclusiva, nos moldes do estudo Prospect, deve ser evitada",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    {
+      "texto": "SEM_FONTE: doses de FOLFOX/CAPOX de consolidação e de mFOLFOX/CAPOX do PROSPECT no reto (SBOC Reto não traz).",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "SBOC 2026 Reto p.13/17",
+        "Onco PRO 2026 aula 16",
+        "ClinicalTrials.gov NCT02008656 (OPRA, sem doses no registro)",
+        "ClinicalTrials.gov NCT01515787 (PROSPECT)"
+      ],
+      "nota": "FOLFOX do PROSPECT resolvido; restam doses do FOLFOX/CAPOX de consolidação (TNT) e do CAPOX do PROSPECT."
+    },
+    {
+      "texto": "SEM_FONTE: emetogenicidade e risco de neutropenia febril por esquema.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "SBOC 2026 cólon/reto",
+        "Onco PRO 2026 aulas 87-88"
+      ]
+    },
+    {
+      "texto": "SEM_ID_NO_CATALOGO: PIK3CA, RAS/BRAF, NTRK, DPYD, ctDNA, ultrassom endoscópico retal.",
+      "classe": "DEPENDE_MOTOR_CODIGO",
+      "buscasFeitas": [
+        "corpus/exames/exames-sigtap.v1.json (164 ids)"
+      ]
+    },
+    {
+      "texto": "SUS: confirmar no DOU a portaria final do Relatório CONITEC 754/2022 (anticorpos 1ª linha) e verificar CONITEC para imunoterapia, encorafenibe, T-DXd, sotorasibe, regorafenibe, trifluridina/tipiracila.",
+      "classe": "SEM_FONTE_PUBLICA_APOS_BUSCA",
+      "buscasFeitas": [
+        "Planilha CONITEC 15/06/2026",
+        "Painel de Demandas CONITEC",
+        "busca gov.br/conitec",
+        "DOU (portarias citadas)"
+      ],
+      "nota": "sus.disponivel preenchido em todos os protocolos com portaria/relatório quando existe. Sem avaliação CONITEC (registrado 'nao', INFERIDO): encorafenibe-cetuximabe, encorafenibe-cetuximabe-mfolfox6, nivolumabe, nivolumabe-ipilimumabe, trastuzumabe-deruxtecana, sotorasibe-panitumumabe."
+    },
+    {
+      "texto": "Edição AJCC: SBOC 2026 não declara; 8ª vem do curso (INFERIDO).",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC 2026 cólon localizado/avançado e reto",
+        "Onco PRO 2026 aula 12"
+      ],
+      "resolucao": "AJCC 8ª edição (17A)."
+    },
+    {
+      "texto": "Fichas institucionais FOLFOX e FOLFIRI paliativas sem bolus de 5-FU 400 mg/m²; ficha FOLFOXIRI com LV 400 — revisar fichas (fora do WRITE_SET).",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "corpus/fichas/colon-reto",
+        "SBOC 2026"
+      ],
+      "resolucao": "Sem bolus, leucovorina 200 (TRIBE) (14A)."
+    },
+    {
+      "texto": "deGramont '1.200 mg/m² 46 h' da SBOC (p.12) omitido até esclarecimento.",
+      "classe": "RESOLVIDA_DECISAO_MEDICA",
+      "buscasFeitas": [
+        "SBOC 2026 cólon localizado p.12"
+      ],
+      "resolucao": "LV5FU2 fora até esclarecer (18A)."
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "FOLFOXIRI — bolus de 5-FU e dose de leucovorin",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 6,
+        "trecho": "Irinotecano 165 mg/m² EV D1",
+        "estado": "CONFLITANTE"
+      },
+      "fonteADetalhe": "SBOC p.6 lista LV 200 + 5-FU bolus 400 + 3.200 mg/m² 46 h",
+      "fonteB": {
+        "tipo": "NORMA",
+        "referencia": "corpus/fichas/colon-reto/folfoxiri__paliativo-metastatico.json",
+        "pagina": null,
+        "trecho": null,
+        "estado": "VERIFICADO"
+      },
+      "fonteBDetalhe": "Ficha: LV 400, sem bolus, 5-FU 3.200 46 h (FOLFOXIRI clássico/TRIBE não usa bolus)",
+      "escolhaSeguranca": "Omitir o bolus no pack (menor exposição a 5-FU); LV e bolus para decisão do médico.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Sem bolus, leucovorina 200 (TRIBE) (14A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "mFOLFOX6 e FOLFIRI — bolus de 5-FU 400 mg/m²",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 5,
+        "trecho": "5-Fluorouracil 400 mg/m² EV (bolus) D1",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "NORMA",
+        "referencia": "corpus/fichas/colon-reto/folfox__paliativo-metastatico.json e folfiri__paliativo-metastatico.json",
+        "pagina": null,
+        "trecho": null,
+        "estado": "VERIFICADO"
+      },
+      "fonteBDetalhe": "Fichas sem a linha de bolus",
+      "escolhaSeguranca": "Pack registra o esquema SBOC; fichas marcadas para revisão; prescrição pela ficha exige conferência manual do bolus.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "COM bolus de 5-FU 400 mg/m² (fichas a alinhar).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-16)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "Esquema Mayo — dose de 5-FU",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 12,
+        "trecho": "5-Fluorouracil 425 mg/m² EV (bolus) D1 a D5",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "CURSO",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/slides-pro-2026/Módulo 2 - Tumores Gastrointestinais/13 - Aula 13 - Câncer Colorretal- Doença Localizada.pdf",
+        "pagina": 7,
+        "trecho": "MAYO CLINIC: 5-FU 370mg/m2 D1-D5 q28d (x 6)",
+        "estado": "INFERIDO"
+      },
+      "escolhaSeguranca": "Vale a SBOC (425 mg/m², igual à ficha e à aula 14 do próprio curso); 370 mg/m² é a dose do QUASAR semanal.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Nivolumabe + ipilimumabe — intervalo",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 8,
+        "trecho": "Ipilimumabe 1 mg/kg EV D1 A cada 6 semanas",
+        "estado": "CONFLITANTE"
+      },
+      "fonteADetalhe": "Tabela de doses p.8: nivolumabe 3 mg/kg q3s + ipilimumabe 1 mg/kg q6s (combinação que não corresponde a nenhum estudo citado)",
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-avancado-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 17,
+        "trecho": "nivolumabe 240 mg + ipilimumabe 1 mg/kg a cada 3 semanas por 4 doses",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Pack usa o esquema do CheckMate-8HW descrito na própria SBOC p.17 (indução de 4 doses e depois nivolumabe 480 mg q4s). O médico confirma.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "Esquema CheckMate-8HW (16A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    },
+    {
+      "tema": "Capecitabina — 1.000 × 1.250 mg/m² 12/12h",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 12,
+        "trecho": "Capecitabina 1.000 mg/m² VO 12/12h D1 a D14*",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 12,
+        "trecho": "dose original do estudo ter sido de 1.250 mg/m² VO 12/12h",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "1.000 mg/m² 12/12h (menor dose, prática recomendada pela SBOC).",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "deGramont 'não modificado' — 5-FU 1.200 mg/m² em 46 h",
+      "fonteA": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 12,
+        "trecho": "5-Fluorouracil 1.200 mg/m² EV (bomba de infusão de 46h) D1",
+        "estado": "CONFLITANTE"
+      },
+      "fonteB": {
+        "tipo": "SBOC",
+        "referencia": "C:/Users/silas/OneDrive/ONCO-DOCS ((TUDOAQUI)/SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Colon-doenca-localizada-v3-VERSAO-PARA-COLABORACAO.pdf",
+        "pagina": 12,
+        "trecho": "5-Fluorouracil 2.400 mg/m² EV (bomba de infusão de 46h) D1",
+        "estado": "VERIFICADO"
+      },
+      "fonteBDetalhe": "O LV5FU2 original usa 600 mg/m² em 22 h D1–D2; 1.200 em 46 h pode ser dose diária mal transcrita",
+      "escolhaSeguranca": "Esquema não entra no pack; usar o deGramont modificado.",
+      "decisaoNecessaria": false,
+      "decisao": {
+        "texto": "LV5FU2 fora até esclarecer (18A).",
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "Dr. Silas Negrão, 2026-10-12 (D-F1-17)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      }
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (agente curador, Opus 5.5) sob demanda do Dr. Silas Negrão",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "SBOC 2026 Cólon: doença localizada v3 (pp. 1–25)",
+      "SBOC 2026 Cólon: doença avançada v3 (pp. 1–25)",
+      "SBOC 2026 Reto v4 (pp. 1–24)",
+      "Onco PRO 2026 aulas 12–16 (doses e estadiamento por busca dirigida)",
+      "EMA Xeloda SmPC (brivudina, DPD)",
+      "FDA Lumakras (sotorasibe)",
+      "ClinicalTrials.gov API v2 (16 NCT verificados em 11/10/2026)",
+      "SIGTAP 2026-09 (corpus/f0c/sigtap)",
+      "CONITEC Relatório 754/2022 (via pareceres TJRJ/TJMG)",
+      "Fichas corpus/fichas/colon-reto e reto"
+    ],
+    "aprovacaoClinica": null,
+    "reducaoPendencias20261011": {
+      "data": "2026-10-11",
+      "resolvidas": [
+        {
+          "pendencia": "SEM_FONTE: doses do mFOLFIRINOX de indução (PRODIGE-23) no reto.",
+          "como": "PRODIGE 23 (NCT01804790): oxaliplatina 85, irinotecano 180, LV 400, 5-FU 2.400 mg/m² 48 h, q14 × 6."
+        },
+        {
+          "pendencia": "SEM_FONTE: droga/dose/intervalo do anti-PD-1 no reto dMMR.",
+          "como": "Dostarlimabe 500 mg q3s × 9 (NCT04165772)."
+        },
+        {
+          "pendencia": "SEM_FONTE: fracionamento da RT longa (50–50,4 Gy) no reto.",
+          "como": "50,4 Gy em 28 frações de 1,8 Gy (CAO/ARO/AIO-04, NCT00349076)."
+        }
+      ]
+    }
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): A02 combinação representada só pelo anticorpo",
+      "acao": "doublet copiado dos protocolos-base do mesmo pack (mesma fonte SBOC) + panitumumabe; FOLFIRI separado"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): cenários misturados no mesmo protocolo",
+      "acao": "colorretal-reto-dmmr-anti-pd1 dividido em colorretal-reto-dmmr-anti-pd1-neoadjuvante, colorretal-reto-dmmr-anti-pd1-definitivo"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): faturamento molecular não demonstrado",
+      "acao": "3 vínculos rebaixados a catalogoIdCandidato"
+    },
+    {
+      "data": "2026-10-12",
+      "por": "Claude",
+      "achado": "Conferência MOC 2026 item 4",
+      "acao": "FOLFIRI irinotecano 180 e bolus de 400 no FOLFOX6/FOLFIRI conferem com o MOC (já eram os valores do pack); fichas institucionais sem bolus seguem D-W9-50"
+    }
+  ]
+}

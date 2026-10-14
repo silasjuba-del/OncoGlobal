@@ -1,0 +1,1709 @@
+{
+  "header": {
+    "id": "pack-mieloma",
+    "versao": "2.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "DDT Mieloma Múltiplo — Portaria Conjunta SAES/SECTICS nº 27/2023",
+      "trecho": "O TCTH autólogo é o padrão ouro no tratamento do paciente com MM",
+      "edicao": "DDT 2023 (vigente)"
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Mieloma múltiplo (MM)",
+    "cid10": [
+      "C90.0"
+    ],
+    "subtipos": [
+      "IgG",
+      "IgA",
+      "cadeias leves",
+      "não secretor"
+    ],
+    "cenarios": [
+      "recem_diagnosticado_elegivel_TCTH",
+      "recem_diagnosticado_inelegivel_TCTH",
+      "manutencao",
+      "recaido_refratario"
+    ],
+    "limitesAplicabilidade": "Adultos ≥19 anos com MM sintomático (CRAB ou SLiM). DDT exclui plasmocitoma solitário, mieloma osteoesclerótico e leucemia de células plasmáticas. GMSI, mieloma latente e amiloidose AL apenas no diagnóstico diferencial."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": null,
+        "rotulo": "TC de corpo inteiro de baixa dose (tórax, coluna, pelve e áreas sintomáticas)",
+        "pendencia": "SEM_ID_NO_CATALOGO (usar TC_TORAX, TC_COLUNA_*, TC_PELVE até haver id próprio)",
+        "indicacao": "universal",
+        "quando": "Ao diagnóstico (obrigatória) e na suspeita de progressão/recidiva",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023 — https://www.gov.br/conitec/pt-br/midias/protocolos/ddt/portaria-conjunta-no-27-ddt-mieloma-multiplo.pdf",
+          "pagina": 4,
+          "trecho": "Os exames recomendados incluem ressonância nuclear magnética (RNM) e tomografia computadorizada (TC) de baixa",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "TC de corpo inteiro de baixa dose (tórax, coluna, pelve e áreas sintomáticas): sem id de corpo inteiro no catálogo v1.1.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1"
+          ]
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax (parte da avaliação esquelética)",
+        "indicacao": "universal",
+        "quando": "Ao diagnóstico",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "A TC deve incluir avaliação do tórax, coluna, pelve e outras áreas esqueléticas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_COLUNA_TORACICA",
+        "rotulo": "TC de coluna (cervical, torácica e lombar)",
+        "indicacao": "universal",
+        "quando": "Ao diagnóstico; usar também TC_COLUNA_CERVICAL e TC_COLUNA_LOMBAR",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "A TC deve incluir avaliação do tórax, coluna, pelve e outras áreas esqueléticas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TC_PELVE",
+        "rotulo": "TC de pelve",
+        "indicacao": "universal",
+        "quando": "Ao diagnóstico",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "A TC deve incluir avaliação do tórax, coluna, pelve e outras áreas esqueléticas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "RM de corpo inteiro (se TC de corpo inteiro negativa)",
+        "pendencia": "SEM_ID_NO_CATALOGO (RM_COLUNA_* existem; corpo inteiro não)",
+        "indicacao": "condicional",
+        "quando": "TC de corpo inteiro negativa; >1 lesão focal ≥5 mm é evento definidor (SLiM)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "RNM de corpo inteiro é obrigatória no caso da TC de corpo inteiro negativa",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "RM de corpo inteiro (se TC de corpo inteiro negativa): sem id de corpo inteiro no catálogo v1.1.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1"
+          ]
+        }
+      },
+      {
+        "catalogoId": "PET_CT_FDG",
+        "rotulo": "PET-CT FDG (alternativa para avaliação óssea)",
+        "indicacao": "condicional",
+        "quando": "Opção do curso; DDT aceita PET/CT para lesão osteolítica (CRAB)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023, Quadro 1",
+          "pagina": 5,
+          "trecho": "Uma ou mais lesões osteolíticas à radiografia óssea, TC ou PET/CT",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "outra",
+          "quando": "Mielograma (aspirado) — plasmócitos clonais",
+          "catalogoId": "MIELOGRAMA",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Mieloma Múltiplo 2023",
+            "pagina": 4,
+            "trecho": "mielograma, biópsia de medula óssea e imunofenotipagem",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "outra",
+          "quando": "Biópsia de medula óssea",
+          "catalogoId": "BIOPSIA_MEDULA",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Mieloma Múltiplo 2023",
+            "pagina": 4,
+            "trecho": "mielograma, biópsia de medula óssea e imunofenotipagem",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "tipo": "core",
+          "quando": "Biópsia de lesão óssea/partes moles (plasmocitoma) quando aplicável",
+          "catalogoId": "BIOPSIA_PERCUTANEA_GUIADA",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Mieloma Múltiplo 2023, Quadro 3",
+            "pagina": 7,
+            "trecho": "Lesão óssea ou de tecido mole única documentada em biópsia",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "Percentual de plasmócitos clonais na medula (≥10% para MM; ≥60% é SLiM)",
+        "Clonalidade (restrição kappa/lambda) por IHQ ou citometria",
+        "FISH no aspirado: t(4;14), del(17p13), t(14;16); se disponível 1q+, t(11;14)"
+      ],
+      "molecular": [
+        {
+          "alvo": "Painel mínimo t(4;14), del(17p13), t(14;16); ampliado 1q+, t(11;14)",
+          "metodo": "FISH/CISH",
+          "catalogoId": "FISH_MIELOMA",
+          "quandoPedir": "universal",
+          "cenario": "diagnóstico (R-ISS) e recidiva",
+          "consequencia": "Define R-ISS III/alto risco; orienta momento do TCTH e escolha do esquema",
+          "disponivelSUS": "sim",
+          "observacao": "catalogoId FISH é genérico (por doença); não há id específico de painel de mieloma",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Mieloma Múltiplo 2023",
+            "pagina": 4,
+            "trecho": "A avaliação citogenética é obrigatória para o diagnóstico",
+            "estado": "VERIFICADO"
+          },
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: SIGTAP 02.02.10.024-3 (FISH para mieloma múltiplo)"
+        },
+        {
+          "alvo": "Plasmócitos clonais (imunofenotipagem)",
+          "metodo": "outro",
+          "catalogoId": "IMUNOFENOTIPAGEM",
+          "quandoPedir": "universal",
+          "cenario": "diagnóstico",
+          "consequencia": "Confirma clonalidade",
+          "disponivelSUS": "sim",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Mieloma Múltiplo 2023",
+            "pagina": 4,
+            "trecho": "mielograma, biópsia de medula óssea e imunofenotipagem",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "alvo": "Cariótipo convencional (alternativa ao FISH)",
+          "metodo": "outro",
+          "catalogoId": "CARIOTIPO_MEDULA",
+          "pendencia": "FATURAMENTO_A_CONFIRMAR",
+          "quandoPedir": "condicional",
+          "cenario": "se FISH indisponível",
+          "consequencia": "Risco citogenético",
+          "disponivelSUS": "DADO_AUSENTE",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Mieloma Múltiplo 2023",
+            "pagina": 4,
+            "trecho": "citogenética convencional ou, preferencialmente, teste citogenético por Hibridização in Situ",
+            "estado": "VERIFICADO"
+          },
+          "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.1: código SIGTAP genérico de método; elegibilidade de faturamento por indicação a confirmar"
+        }
+      ]
+    }
+  },
+  "estadiamento": {
+    "sistema": "R-ISS",
+    "edicao": "R-ISS (Palumbo 2015) conforme DDT 2023; curso cita também R2-ISS/IMWG alto risco",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "DDT Mieloma Múltiplo 2023",
+      "pagina": 5,
+      "trecho": "versão revisada do Sistema de Estadiamento Internacional Revisado (R-ISS)",
+      "estado": "VERIFICADO"
+    },
+    "exames": [
+      {
+        "catalogoId": "HEMOGRAMA",
+        "rotulo": "Hemograma com esfregaço",
+        "cenario": "triagem",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "A triagem inicial dos pacientes deve considerar o hemograma completo",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "UREIA",
+        "rotulo": "Ureia",
+        "cenario": "triagem",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "níveis séricos de ureia e creatinina, cálcio, eletroforese e imunofixação",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CREATININA",
+        "rotulo": "Creatinina",
+        "cenario": "triagem",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "níveis séricos de ureia e creatinina, cálcio, eletroforese e imunofixação",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CALCIO",
+        "rotulo": "Cálcio (corrigir por albumina ou iônico)",
+        "cenario": "triagem",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "níveis séricos de ureia e creatinina, cálcio, eletroforese e imunofixação",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ELETROFORESE_PROTEINAS",
+        "rotulo": "Eletroforese de proteínas séricas e urinárias",
+        "cenario": "triagem",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "eletroforese e imunofixação de proteínas séricas e urinárias, dosagem sérica de imunoglobulinas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "IMUNOELETROFORESE",
+        "rotulo": "Imunofixação sérica e urinária",
+        "cenario": "triagem",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "eletroforese e imunofixação de proteínas séricas e urinárias, dosagem sérica de imunoglobulinas",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "CADEIAS_LEVES",
+        "rotulo": "Cadeias leves livres kappa/lambda séricas",
+        "cenario": "triagem",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "dosagem de cadeias leves (kappa e lambda) livres, albumina e desidrogenase láctica (DHL)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "IGG",
+        "rotulo": "Dosagem de imunoglobulinas IgA, IgM, IgG, IgE",
+        "cenario": "triagem",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "dosagem sérica de imunoglobulinas (IgA, IgM, IgG e IgE)",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "Dosagem de imunoglobulinas IgA, IgM, IgG, IgE: sem id no catálogo v1.1; SIGTAP 02.02.03.015-6/016-4/017-2/018-0 (IgA, IgE, IgG, IgM).",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
+      },
+      {
+        "catalogoId": "PROTEINAS_TOTAIS_FRACOES",
+        "rotulo": "Albumina (ISS/R-ISS)",
+        "cenario": "triagem",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "dosagem de cadeias leves (kappa e lambda) livres, albumina e desidrogenase láctica (DHL)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "DHL",
+        "rotulo": "LDH (R-ISS)",
+        "cenario": "triagem",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "dosagem de cadeias leves (kappa e lambda) livres, albumina e desidrogenase láctica (DHL)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BETA2_MICROGLOBULINA",
+        "rotulo": "Beta-2-microglobulina (ISS/R-ISS)",
+        "cenario": "suspeita apoiada",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "beta-2 microglobulina, proteína C reativa (PCR), velocidade de hemossedimentação (VHS)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "PCR",
+        "rotulo": "Proteína C reativa",
+        "cenario": "suspeita apoiada",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "beta-2 microglobulina, proteína C reativa (PCR), velocidade de hemossedimentação (VHS)",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "VHS",
+        "rotulo": "VHS",
+        "cenario": "suspeita apoiada",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "beta-2 microglobulina, proteína C reativa (PCR), velocidade de hemossedimentação (VHS)",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "VHS: sem id no catálogo v1.1; SIGTAP 02.02.02.015-0.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
+        },
+        "mapeamentoCatalogo": "Claude 2026-10-11, catálogo v1.2 (exame laboratorial/procedimento com código SIGTAP próprio)"
+      },
+      {
+        "catalogoId": "PROTEINURIA_24H",
+        "rotulo": "Proteinúria de 24 h (com eletroforese/imunofixação urinária)",
+        "cenario": "suspeita apoiada",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "imunofixação na urina de 24 horas (se não realizada na investigação inicial), proteinúria",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TAP",
+        "rotulo": "TP",
+        "cenario": "confirmado (planejamento)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "tempo de protrombina (TP) e tempo de tromboplastina parcial ativada (TTPa), fibrinogênio",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TTPA",
+        "rotulo": "TTPa",
+        "cenario": "confirmado (planejamento)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "tempo de protrombina (TP) e tempo de tromboplastina parcial ativada (TTPa), fibrinogênio",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FIBRINOGENIO",
+        "rotulo": "Fibrinogênio",
+        "cenario": "confirmado (planejamento)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "tempo de protrombina (TP) e tempo de tromboplastina parcial ativada (TTPa), fibrinogênio",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "BILIRRUBINA",
+        "rotulo": "Bilirrubinas",
+        "cenario": "confirmado (planejamento)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "bilirrubina total (BT) e frações, fosfatase alcalina, aminotransferases/transaminases, gama-glutamil transferase",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "FOSFATASE_ALCALINA",
+        "rotulo": "Fosfatase alcalina",
+        "cenario": "confirmado (planejamento)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "bilirrubina total (BT) e frações, fosfatase alcalina, aminotransferases/transaminases, gama-glutamil transferase",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGO",
+        "rotulo": "TGO",
+        "cenario": "confirmado (planejamento)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "bilirrubina total (BT) e frações, fosfatase alcalina, aminotransferases/transaminases, gama-glutamil transferase",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "TGP",
+        "rotulo": "TGP",
+        "cenario": "confirmado (planejamento)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "bilirrubina total (BT) e frações, fosfatase alcalina, aminotransferases/transaminases, gama-glutamil transferase",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "GAMA_GT",
+        "rotulo": "Gama-GT",
+        "cenario": "confirmado (planejamento)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "bilirrubina total (BT) e frações, fosfatase alcalina, aminotransferases/transaminases, gama-glutamil transferase",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "ACIDO_URICO",
+        "rotulo": "Ácido úrico",
+        "cenario": "confirmado (planejamento)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "gama-glutamil transferase, ácido úrico e glicemia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": "GLICEMIA",
+        "rotulo": "Glicemia",
+        "cenario": "confirmado (planejamento)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "gama-glutamil transferase, ácido úrico e glicemia",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "Viscosidade sérica (proteína M >5 g/dL ou sintomas) — na falta, fundo de olho",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "cenario": "hiperviscosidade",
+        "indicacao": "condicional",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "recomenda-se a dosagem da viscosidade sérica",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "Viscosidade sérica (proteína M >5 g/dL ou sintomas) — na falta, fundo de olho: sem id no catálogo v1.1; SIGTAP sem código localizado.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
+        }
+      },
+      {
+        "catalogoId": null,
+        "rotulo": "D-dímero",
+        "pendencia": "SEM_ID_NO_CATALOGO",
+        "cenario": "confirmado (planejamento)",
+        "indicacao": "universal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "fibrinogênio, d-dímero, bilirrubina total (BT) e frações",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "D-dímero: sem id no catálogo v1.1; SIGTAP sem código localizado na busca.",
+          "classe": "DECISAO_CLINICA_DR_SILAS",
+          "buscasFeitas": [
+            "catálogo v1.1",
+            "SIGTAP 09/2026"
+          ]
+        }
+      }
+    ],
+    "gruposConduta": [
+      {
+        "grupo": "R-ISS I: β2M <3,5 mg/L + albumina ≥3,5 g/dL + sem t(4;14)/t(14;16)/del17p + LDH normal",
+        "conduta": "Prognóstico (SG 5 anos 82%)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023, Quadro 2",
+          "pagina": 6,
+          "trecho": "β2 -microglobulina <3,5mg/L",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "R-ISS II: nem I nem III",
+        "conduta": "Prognóstico (SG 5 anos 62%)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023, Quadro 2",
+          "pagina": 6,
+          "trecho": "Sem critérios de estágio I ou III",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "R-ISS III: β2M ≥5,5 mg/L + [t(4;14), t(14;16) ou del17p13] ou LDH > LSN",
+        "conduta": "Alto risco (SG 5 anos 40%); considerar no momento do TCTH e no esquema",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023, Quadro 2",
+          "pagina": 6,
+          "trecho": "β2 -microglobulina ≥5,5mg/L",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Elegível ao TCTH: <75 anos, BD ≤2,0 mg/dL, creatinina ≤2,5 mg/dL (exceto TRS estável), Zubrod 0–2, NYHA I–II",
+        "conduta": "Indução tripla com IP → melfalano 200 mg/m2 → TCTH autólogo → manutenção",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 9,
+          "trecho": "inclui pacientes com idade inferior a 75 anos, níveis de bilirrubina direta",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "grupo": "Inelegível ao TCTH",
+        "conduta": "Indução com IMiD + IP (ex.: VMP, VTd) até progressão quando aplicável",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 10,
+          "trecho": "podem iniciar terapia de indução completa com imunomoduladores e inibidores de proteassoma",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "marcadores": {
+      "uteis": [
+        {
+          "catalogoId": "ELETROFORESE_PROTEINAS",
+          "uso": "proteína M — resposta e recidiva bioquímica (aumento ≥1 g/dL)",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Mieloma Múltiplo 2023",
+            "pagina": 11,
+            "trecho": "aumento nos níveis absolutos da proteína M sérica maior ou igual a 1 g/dL",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "CADEIAS_LEVES",
+          "uso": "razão envolvida/não envolvida ≥100 (com envolvida ≥100 mg/L) = SLiM; seguimento",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Mieloma Múltiplo 2023, Quadro 1",
+            "pagina": 5,
+            "trecho": "Razão entre níveis séricos de cadeias leves envolvidas e não envolvidas maior ou igual",
+            "estado": "VERIFICADO"
+          }
+        },
+        {
+          "catalogoId": "BETA2_MICROGLOBULINA",
+          "uso": "ISS/R-ISS",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Mieloma Múltiplo 2023, Quadro 2",
+            "pagina": 6,
+            "trecho": "β2 -microglobulina ≥5,5mg/L",
+            "estado": "VERIFICADO"
+          }
+        }
+      ],
+      "naoPedirDeRotina": [
+        "Radiografia de esqueleto (inventário ósseo) — baixa sensibilidade (curso)",
+        "Mielograma na recidiva (opcional; preferir FISH)"
+      ]
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "recem_diagnosticado_elegivel_TCTH",
+        "intencao": "paliativa",
+        "modalidades": [
+          "indução tripla com inibidor de proteassoma",
+          "melfalano em alta dose + TCTH autólogo",
+          "manutenção"
+        ],
+        "criterio": "≥3–4 ciclos de indução; bortezomibe incorporado (Portaria SCTIE 43/2020)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 9,
+          "trecho": "priorizando-se o uso de terapia tripla que inclua, pelo menos, inibidor de proteassoma",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "recem_diagnosticado_inelegivel_TCTH",
+        "intencao": "paliativa",
+        "modalidades": [
+          "IMiD + IP (bortezomibe, Portaria SCTIE 45/2020)"
+        ],
+        "criterio": "fora dos critérios de TCTH",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 10,
+          "trecho": "podem iniciar terapia de indução completa com imunomoduladores e inibidores de proteassoma",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "manutencao",
+        "intencao": "paliativa",
+        "modalidades": [
+          "talidomida (única IMiD no SUS)"
+        ],
+        "criterio": "pós-TCTH; lenalidomida não incorporada (Portaria SCTIE 21/2022)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 9,
+          "trecho": "A talidomida é o imunomodulador disponível no âmbito do SUS",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "cenario": "recaido_refratario",
+        "intencao": "paliativa",
+        "modalidades": [
+          "esquema triplo com drogas não usadas antes",
+          "novo TCTH autólogo em selecionados",
+          "bortezomibe (Portaria SCTIE 44/2020)"
+        ],
+        "criterio": "recidiva clínica: tratar imediatamente; bioquímica: observar ou tratar se rápida/alto risco",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 11,
+          "trecho": "na primeira recidiva, esquemas com três medicamentos, envolvendo aqueles não utilizados na terapia",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "mieloma-vtd-28d",
+        "nome": "VTd (bortezomibe + talidomida + dexametasona), ciclo de 28 dias",
+        "cenario": "recem_diagnosticado_elegivel_TCTH (indução)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "bortezomibe",
+            "dose": 1.3,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D4, D8, D11",
+            "observacao": "bula permite EV ou SC; ≥72 h entre doses"
+          },
+          {
+            "droga": "talidomida",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "diário (D1–D28)",
+            "observacao": "escalonamento: 50 mg D1–14 e 100 mg D15–28 até 200 mg/dia (GEM05MENOS65)",
+            "titulacao": {
+              "inicio": "PENDENTE: dose inicial (50 ou 100 mg) conforme fonte",
+              "alvo": 200,
+              "regra": "escalonamento: 50 mg D1–14 e 100 mg D15–28 até 200 mg/dia (GEM05MENOS65)"
+            }
+          },
+          {
+            "droga": "dexametasona",
+            "dose": 40,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1–D4 e D9–D12",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 6,
+        "premedicacao": "Profilaxia com aciclovir (bortezomibe/corticoide em alta dose) — dose SEM_FONTE",
+        "ajusteObrigatorio": "DDT: indução de pelo menos 3–4 ciclos. Tromboprofilaxia com talidomida (SEM_FONTE de esquema). Ajuste de bortezomibe em hepatopatia (bula).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Mieloma Múltiplo 2023 (Portaria SCTIE/MS 43/2020)",
+            "pagina": 9,
+            "trecho": "o bortezomibe foi incorporado no âmbito do SUS para uso em combinação",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023, Apêndice (evidência GEM05MENOS65, Rosiñol 2012)",
+          "pagina": 47,
+          "trecho": "D 40 mg VO dias 1-4, dias 9-12 em 6 ciclos de 4 semanas",
+          "estado": "VERIFICADO"
+        },
+        "calendarioExecutavel": false,
+        "motivoCalendario": "titulação da talidomida estava só em observação"
+      },
+      {
+        "id": "mieloma-melfalano-200-tcth",
+        "nome": "Melfalano em alta dose (condicionamento pré-TCTH autólogo)",
+        "cenario": "recem_diagnosticado_elegivel_TCTH (consolidação com TCTH)",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "melfalano",
+            "dose": 200,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D-2 ou D-1 (dose única); infusão das células no D0",
+            "observacao": "insuficiência renal: restringir a 100–140 mg/m2"
+          }
+        ],
+        "cicloDias": 1,
+        "numeroCiclos": 1,
+        "premedicacao": "Conforme protocolo do centro transplantador",
+        "ajusteObrigatorio": "Insuficiência renal: 100 a 140 mg/m2 (DDT p.15).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Mieloma Múltiplo 2023",
+            "pagina": 9,
+            "trecho": "O esquema de condicionamento pré-TCTH recomendado é melfalana 200 mg/m2",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 9,
+          "trecho": "melfalana 200 mg/m2 em dose única, a ser administrada no dia -1 ou -2",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "mieloma-vmp",
+        "nome": "VMP (bortezomibe + melfalano + prednisona)",
+        "cenario": "recem_diagnosticado_inelegivel_TCTH",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "bortezomibe",
+            "dose": 1.3,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "C1–C4: D1, D4, D8, D11, D22, D25, D29, D32; C5–C9: D1, D8, D22, D29",
+            "observacao": "EV ou SC (bula)"
+          },
+          {
+            "droga": "melfalano",
+            "dose": 9,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1 a D4",
+            "observacao": ""
+          },
+          {
+            "droga": "prednisona",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1 a D4",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 42,
+        "numeroCiclos": 9,
+        "premedicacao": "Profilaxia com aciclovir (dose SEM_FONTE)",
+        "ajusteObrigatorio": "Ajuste de bortezomibe por neuropatia e hepatopatia; ajuste de melfalano por função renal (bula; valores SEM_FONTE neste pack).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "DDT Mieloma Múltiplo 2023 (Portaria SCTIE/MS 45/2020)",
+            "pagina": 10,
+            "trecho": "O bortezomibe pode ser utilizado, uma vez que foi incorporado no âmbito do SUS",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA bortezomibe — openFDA set_id 04aafa6a-a50d-4a47-a831-be8e8bb992ac (2024-07-22), seção 2.2; idem DDT 2023 Apêndice p.61 (VISTA)",
+          "pagina": null,
+          "trecho": "in combination with oral melphalan and oral prednisone for 9, six week treatment cycles",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "mieloma-td",
+        "nome": "Td (talidomida + dexametasona)",
+        "cenario": "recem_diagnosticado_inelegivel_TCTH ou recaida, quando bortezomibe não for possível",
+        "linha": "1ª linha / recaída",
+        "drogas": [
+          {
+            "droga": "talidomida",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "diário (D1–D28), ao deitar",
+            "observacao": "DDT: 50–200 mg/dia; reduzir conforme tolerância"
+          },
+          {
+            "droga": "dexametasona",
+            "dose": 40,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1–D4, D9–D12, D17–D20",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "Programa de prevenção de gravidez; interromper por constipação, sonolência ou neuropatia (bula). Tromboprofilaxia (SEM_FONTE de esquema).",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Mieloma Múltiplo 2023",
+            "pagina": 9,
+            "trecho": "A talidomida é o imunomodulador disponível no âmbito do SUS",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA THALOMID — openFDA set_id 2eda833b-1357-4ed4-a093-194524fcb061 (2023-03-24), seção 2.2",
+          "pagina": null,
+          "trecho": "dexamethasone is 40 mg/day on days 1-4, 9-12, and 17-20 every 28 days",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "id": "mieloma-acido-zoledronico",
+        "nome": "Ácido zoledrônico (doença óssea)",
+        "cenario": "todos os pacientes com MM (obrigatório se doença óssea)",
+        "linha": "suporte",
+        "drogas": [
+          {
+            "droga": "ácido zoledrônico",
+            "dose": 4,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 (infusão ≥15 min)",
+            "observacao": "DDT: mensal; bula: a cada 3–4 semanas; máximo 24 meses (DDT) salvo sem resposta parcial"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "Vitamina D 400 UI/dia VO + cálcio 500 mg/dia VO (iniciar após normalizar cálcio se hipercalcemia)",
+        "ajusteObrigatorio": "ClCr <30 mL/min: não usar bisfosfonato (DDT). Ajuste por ClCr conforme bula. Monitorar creatinina e eletrólitos mensalmente. Alternativa: pamidronato 90 mg EV mensal em 4 h.",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "DIRETRIZ",
+            "referencia": "DDT Mieloma Múltiplo 2023",
+            "pagina": 14,
+            "trecho": "O ácido zoledrônico é o bisfosfonato mais indicado para pacientes recém diagnosticados",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 14,
+          "trecho": "dose de 4 mg deve ser administrada por via intravenosa, uma vez ao mês",
+          "estado": "VERIFICADO"
+        },
+        "duracao": "mensal; duração por decisão clínica (não converter em 24 ciclos de 28 dias)"
+      },
+      {
+        "id": "mieloma-vcd-cybord-21d",
+        "nome": "VCd / CyBorD (bortezomibe + ciclofosfamida oral + dexametasona)",
+        "cenario": "indução — elegível a TCTH autólogo",
+        "linha": "1ª linha (indução)",
+        "drogas": [
+          {
+            "droga": "bortezomibe",
+            "dose": 1.3,
+            "unidade": "mg/m2",
+            "via": "SC",
+            "dias": "D1, D4, D8, D11",
+            "observacao": "DDT Quadro 4: 1,3 mg/m² EV ou SC"
+          },
+          {
+            "droga": "ciclofosfamida",
+            "dose": 300,
+            "unidade": "mg/m2",
+            "via": "VO",
+            "dias": "D1, D8, D15",
+            "observacao": "DDT Quadro 4: 300 mg/m² VO 1x/semana"
+          },
+          {
+            "droga": "dexametasona",
+            "dose": 20,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1, D2, D4, D5, D8, D9, D11, D12",
+            "observacao": "dose do ensaio (DDT Quadro 4 cita 40 mg); médico escolhe"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": 3,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Neuropatia periférica: ajuste do bortezomibe conforme bula; profilaxia antiviral",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.03.025-2",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA DE MIELOMA MÚLTIPLO  1ª LINHA",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Bortezomibe incorporado (2020; DDT 2023); ciclofosfamida e dexametasona na APAC."
+        },
+        "fonte": {
+          "tipo": "ENSAIO",
+          "referencia": "ClinicalTrials.gov API v2 NCT01539083 (COMPLETED), braço VCD de indução; doses de bortezomibe e ciclofosfamida concordam com DDT MM 2023, Quadro 4 (p.13)",
+          "pagina": null,
+          "trecho": "cyclophosphamide 300 mg/m^2 orally on Days 1, 8, and 15",
+          "estado": "INFERIDO"
+        },
+        "nct": "NCT01539083",
+        "nctEstado": "VERIFICADO"
+      },
+      {
+        "id": "mieloma-lenalidomida-manutencao",
+        "nome": "Lenalidomida — manutenção pós-TCTH autólogo",
+        "cenario": "manutenção após TCTH autólogo (recém-diagnosticado)",
+        "linha": "manutenção",
+        "drogas": [
+          {
+            "droga": "lenalidomida",
+            "dose": 10,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "D1-D28, 1x/dia",
+            "observacao": "iniciar após recuperação hematológica (NAA ≥1.000/mcL e/ou plaquetas ≥75.000/mcL); após 3 ciclos pode subir a 15 mg/dia se tolerado (bula)"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": null,
+        "ajusteObrigatorio": "Ajuste renal pela bula; tromboprofilaxia recomendada; programa de prevenção de gravidez",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "Portaria SCTIE/MS nº 26, de 28/05/2026 — via Conass Informa nº 99/2026 (conass.org.br/?p=56979); Relatório Conitec nº 1098",
+            "pagina": null,
+            "trecho": "Incorporar, no âmbito do Sistema Único de Saúde – SUS, a lenalidomida",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Incorporada para manutenção pós-TCTH 'conforme Protocolo Clínico do MS' — DDT 2023 ainda não atualizada; dispensação local pode não estar implantada."
+        },
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Lenalidomide (openFDA set_id 1b2716cf-24b4-4157-a218-58ede63917bd, 2026-05-27), seção 2.1",
+          "pagina": null,
+          "trecho": "MM maintenance therapy following auto-HSCT: 10 mg once daily continuously on Days 1 to 28",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "paliação de dor óssea, fratura iminente ou compressão medular iminente",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "observacao": "DDT: baixas doses, até 30 Gy (teto, não dose fixa)",
+        "pendencia": "SEM_FONTE (dose/fracionamento exato)",
+        "concomitante": "não",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 14,
+          "trecho": "baixas doses de radiação (até 30 Gy) podem ser usadas para paliação",
+          "estado": "VERIFICADO"
+        },
+        "pendenciaClasse": {
+          "texto": "RT em mieloma/plasmocitoma — aceno de RT.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "DDT MM 2023",
+            "Onco PRO aula 82"
+          ]
+        }
+      },
+      {
+        "cenario": "plasmocitoma solitário (fora do escopo da DDT)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "observacao": "curso: ISRT 40–50 Gy",
+        "pendencia": "dado só do curso (INFERIDO)",
+        "concomitante": "não",
+        "fonte": {
+          "tipo": "CURSO",
+          "referencia": "Onco PRO 2026, Módulo 9, Aula 82 — Mieloma múltiplo",
+          "pagina": 22,
+          "trecho": "RDT – ISRT – 40-50Gy",
+          "estado": "INFERIDO"
+        },
+        "pendenciaClasse": {
+          "texto": "RT em mieloma/plasmocitoma — aceno de RT.",
+          "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+          "buscasFeitas": [
+            "DDT MM 2023",
+            "Onco PRO aula 82"
+          ]
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Avaliação ortopédica/neurocirúrgica; cifoplastia com balão em fratura vertebral sintomática",
+        "quando": "Fratura iminente/atual de ossos longos, compressão medular, instabilidade de coluna",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 14,
+          "trecho": "A avaliação por ortopedista deve ser solicitada em caso de fratura iminente",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "Alto risco citogenético [t(4;14), t(14;16), del17p]",
+        "opcao": "Informar momento do TCTH e esquema; 2º TCTH autólogo pode ser considerado",
+        "evidencia": "DDT 2023",
+        "sus": "sim",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 9,
+          "trecho": "para pacientes com alto risco citogenético ou para pacientes que recaíram",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "seAlvo": "CD38",
+        "opcao": "Daratumumabe (Dara-VRd, DRd, DVd — curso/NCCN)",
+        "evidencia": "CASTOR avaliado pela Conitec",
+        "sus": "nao (Portaria SCTIE 18/2022)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 11,
+          "trecho": "o medicamento não foi incorporado ao SUS para esta indicação",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "suporte": {
+      "emetogenicidade": null,
+      "riscoNeutropeniaFebril": null,
+      "outros": [
+        "Aciclovir profilático com bortezomibe, corticoide em alta dose ou melfalano/TCTH (DDT p.15; dose SEM_FONTE)",
+        "Bisfosfonato para todos; vitamina D 400 UI/dia + cálcio 500 mg/dia",
+        "Hidratação e evitar nefrotóxicos (AINE, contraste iodado, aminoglicosídeo)",
+        "Vacinação ≥14 dias antes do tratamento (CRIE); evitar vacinas vivas em tratamento",
+        "Profilaxia antimicrobiana não rotineira; imunoglobulina se hipogamaglobulinemia com infecções graves"
+      ],
+      "pendencia": "SEM_FONTE (emetogenicidade, NF, dose do aciclovir, tromboprofilaxia com IMiD)",
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "DDT Mieloma Múltiplo 2023",
+        "pagina": 15,
+        "trecho": "deverão receber profilaxia com aciclovir, a fim de reduzir o risco de reativação",
+        "estado": "VERIFICADO"
+      },
+      "antiviral": {
+        "texto": "Bula do bortezomibe: considerar profilaxia antiviral para herpes-zóster; DDT 2023 (p.15) indica aciclovir com bortezomibe/TCTH. Dose do aciclovir profilático não fixada em bula nem na DDT.",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Bortezomib (openFDA set_id 04aafa6a-a50d-4a47-a831-be8e8bb992ac, 2024-07-22)",
+          "pagina": null,
+          "trecho": "Consider using antiviral prophylaxis in subjects being treated with bortezomib",
+          "estado": "VERIFICADO"
+        }
+      },
+      "tromboprofilaxiaIMiD": {
+        "texto": "Talidomida: considerar tromboprofilaxia conforme fatores de risco individuais (bula); regime não fixado.",
+        "fonte": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Thalidomide (openFDA set_id 2eda833b-1357-4ed4-a093-194524fcb061, 2023-03-24)",
+          "pagina": null,
+          "trecho": "Consider thromboprophylaxis based on an assessment of individual patients' underlying risk factors",
+          "estado": "VERIFICADO"
+        }
+      },
+      "pendenciaClasse": {
+        "texto": "Emetogenicidade/NF via módulo de suporte; doses de aciclovir/tromboprofilaxia = decisão médica.",
+        "classe": "DEPENDE_MOTOR_CODIGO",
+        "buscasFeitas": [
+          "MASCC/ESMO 2023"
+        ]
+      }
+    },
+    "ensaios": [
+      {
+        "nome": "VISTA",
+        "nct": "NCT00111319",
+        "nctEstado": "VERIFICADO",
+        "populacao": "MM recém-diagnosticado inelegível ao TCTH",
+        "bracos": "VMP × MP",
+        "desfecho": "tempo até progressão",
+        "resultado": "Base do VMP (bula)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023, Apêndice p.61; ClinicalTrials.gov API v2 NCT00111319 (COMPLETED)",
+          "pagina": 61,
+          "trecho": "9 ciclos de 6 semanas",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "seguimento": [
+      {
+        "periodo": "suspeita de recidiva",
+        "exames": [
+          "HEMOGRAMA",
+          "UREIA",
+          "CREATININA",
+          "CALCIO",
+          "ELETROFORESE_PROTEINAS",
+          "IMUNOELETROFORESE",
+          "CADEIAS_LEVES",
+          "PROTEINAS_TOTAIS_FRACOES",
+          "DHL",
+          "FISH"
+        ],
+        "periodicidade": "na suspeita; TC de corpo inteiro recomendada",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 4,
+          "trecho": "Na suspeita de recidiva, recomenda-se repetir os exames laboratoriais iniciais",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "periodo": "em uso de bisfosfonato",
+        "exames": [
+          "CLEARANCE_CREATININA",
+          "SODIO",
+          "POTASSIO",
+          "CALCIO"
+        ],
+        "periodicidade": "mensal",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 14,
+          "trecho": "Deve-se monitorar, mensalmente, o clearance de creatinina e os níveis de eletrólitos",
+          "estado": "VERIFICADO"
+        }
+      }
+    ],
+    "apacSigtap": [
+      {
+        "procedimento": "03.04.03.025-2",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.03.025-2",
+          "pagina": null,
+          "trecho": "QUIMIOTERAPIA DE MIELOMA MÚLTIPLO  1ª LINHA",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "procedimento": "03.04.03.026-0",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.03.026-0",
+          "pagina": null,
+          "trecho": "QUIMIOTERAPIA DE 2ª LINHA PARA CONTROLE TEMPORÁRIO DE MIELOMA MÚLTIPLO",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "ligacoes": {
+    "exames": [
+      "TC_TORAX",
+      "TC_COLUNA_CERVICAL",
+      "TC_COLUNA_TORACICA",
+      "TC_COLUNA_LOMBAR",
+      "TC_PELVE",
+      "PET_CT_FDG",
+      "MIELOGRAMA",
+      "BIOPSIA_MEDULA",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "FISH",
+      "IMUNOFENOTIPAGEM",
+      "HEMOGRAMA",
+      "UREIA",
+      "CREATININA",
+      "CALCIO",
+      "ELETROFORESE_PROTEINAS",
+      "IMUNOELETROFORESE",
+      "CADEIAS_LEVES",
+      "PROTEINAS_TOTAIS_FRACOES",
+      "DHL",
+      "BETA2_MICROGLOBULINA",
+      "PCR",
+      "PROTEINURIA_24H",
+      "TAP",
+      "TTPA",
+      "FIBRINOGENIO",
+      "BILIRRUBINA",
+      "FOSFATASE_ALCALINA",
+      "TGO",
+      "TGP",
+      "GAMA_GT",
+      "ACIDO_URICO",
+      "GLICEMIA",
+      "CLEARANCE_CREATININA",
+      "SODIO",
+      "POTASSIO",
+      "CARIOTIPO_MEDULA",
+      "FISH_MIELOMA",
+      "IGG",
+      "VHS"
+    ],
+    "interacoesConsultar": [
+      {
+        "droga": "bortezomibe",
+        "com": "indutores fortes de CYP3A4 (evitar); inibidores fortes de CYP3A4 (monitorar)",
+        "ref": null
+      },
+      {
+        "droga": "talidomida",
+        "com": "sedativos/álcool; drogas trombogênicas",
+        "ref": null
+      },
+      {
+        "droga": "ácido zoledrônico",
+        "com": "aminoglicosídeos, diuréticos de alça, outros nefrotóxicos",
+        "ref": null
+      }
+    ],
+    "ctcaeAcao": [
+      {
+        "classe": "neurológica (bortezomibe/talidomida)",
+        "termosCTCAEv6": [
+          "Neuropatia periférica sensitiva",
+          "Neuropatia periférica motora"
+        ]
+      },
+      {
+        "classe": "tromboembólica (talidomida)",
+        "termosCTCAEv6": [
+          "Evento tromboembólico"
+        ]
+      },
+      {
+        "classe": "renal/metabólica",
+        "termosCTCAEv6": [
+          "Lesão renal aguda",
+          "Hipercalcemia",
+          "Hipocalcemia"
+        ]
+      },
+      {
+        "classe": "óssea (bisfosfonato)",
+        "termosCTCAEv6": [
+          "Osteonecrose da mandíbula"
+        ]
+      },
+      {
+        "classe": "infecciosa",
+        "termosCTCAEv6": [
+          "Herpes-zóster",
+          "Infecção pulmonar"
+        ]
+      }
+    ],
+    "suporteReceitas": [
+      "vitamina D 400 UI/dia + cálcio 500 mg/dia VO",
+      "aciclovir profilático (dose SEM_FONTE)",
+      "ácido zoledrônico 4 mg EV mensal"
+    ],
+    "orientacoes": [
+      "hidratação; evitar AINE e contraste iodado",
+      "sinais de compressão medular (urgência)",
+      "prevenção de gravidez com talidomida",
+      "higiene oral e avaliação odontológica com bisfosfonato"
+    ],
+    "encaminhamentos": [
+      "centro de TCTH (avaliar elegibilidade precocemente)",
+      "radioterapia",
+      "nefrologia (IR sem melhora em 48 h)",
+      "ortopedia/neurocirurgia",
+      "cuidados-paliativos"
+    ],
+    "laudos": [
+      "APAC de quimioterapia de mieloma múltiplo (código SIGTAP: SEM_FONTE nas fontes lidas)",
+      "inscrição no Sistema Nacional de Transplantes"
+    ],
+    "formulasXYZ": [
+      {
+        "x": "Plasmócitos clonais ≥10% na MO ou plasmocitoma",
+        "y": "≥1 CRAB (Ca >11 mg/dL ou >1 mg/dL acima LSN; ClCr <40 ou Cr >2 mg/dL; Hb <10 ou 2 g/dL abaixo; ≥1 lesão lítica) ou ≥1 SLiM",
+        "z": "diagnóstico de mieloma múltiplo (IMWG 2014)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023, Quadro 1",
+          "pagina": 5,
+          "trecho": "confirmado com a presença de lesão de órgão alvo conforme critérios CRAB",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "SLiM: plasmócitos clonais ≥60%",
+        "y": "ou razão de cadeias leves envolvida/não envolvida ≥100 (envolvida ≥100 mg/L) ou >1 lesão focal ≥5 mm na RM",
+        "z": "evento definidor de mieloma mesmo sem CRAB",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023, Quadro 1",
+          "pagina": 5,
+          "trecho": "Mais de uma lesão focal à RNM de, pelo menos, 5 mm de tamanho",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "β2M ≥5,5 mg/L",
+        "y": "e [t(4;14), t(14;16), del17p13] ou LDH > LSN",
+        "z": "R-ISS III",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023, Quadro 2",
+          "pagina": 6,
+          "trecho": "Presença de t(4;14), t(14;16) ou del17p13",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "MM em uso de bisfosfonato",
+        "y": "ClCr <30 mL/min",
+        "z": "não usar bisfosfonato",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 14,
+          "trecho": "Pacientes com clearance de creatinina inferior a 30 mL/min não devem utilizar bisfosfonatos",
+          "estado": "VERIFICADO"
+        }
+      },
+      {
+        "x": "Recidiva bioquímica assintomática",
+        "y": "duplicação da proteína M em 2 meses, ou aumento ≥1 g/dL sérica, ≥500 mg/24h urinária, ou CLL envolvida ≥20 mg/dL",
+        "z": "considerar tratar (senão observar)",
+        "fonte": {
+          "tipo": "DIRETRIZ",
+          "referencia": "DDT Mieloma Múltiplo 2023",
+          "pagina": 11,
+          "trecho": "Duplicação da componente M em duas medidas consecutivas, separadas por até dois meses",
+          "estado": "VERIFICADO"
+        }
+      }
+    ]
+  },
+  "pendencias": [
+    {
+      "texto": "Cariótipo já mapeado (CARIOTIPO_MEDULA). Seguem sem id: TC e RM de corpo inteiro, imunoglobulinas, VHS, viscosidade e D-dímero (códigos SIGTAP anotados quando existem).",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "catálogo v1.1",
+        "SIGTAP 09/2026"
+      ]
+    },
+    {
+      "texto": "Indicação de antiviral e de tromboprofilaxia com IMiD sustentada por bula (FDA) e DDT; dose do aciclovir e regime antitrombótico não fixados em fonte pública lida.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "DDT MM 2023 p.15",
+        "Bula FDA bortezomibe, talidomida, aciclovir (sem indicação profilática)"
+      ]
+    },
+    {
+      "texto": "Esquemas de indução/recidiva internacionais (anti-CD38, VRd, KRd, biespecíficos, CAR-T) não transcritos — aceno de hematologia. Status SUS corrigido: lenalidomida manutenção pós-TCTH incorporada (Portaria SCTIE 26/2026); carfilzomibe incorporado para R/R após 1 linha (Portaria SECTICS 65/2023); daratumumabe e lenalidomida em outras indicações seguem não incorporados (2022/2023).",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Painel de Demandas Conitec 15/06/2026",
+        "Conass Informa 99/2026",
+        "DDT MM 2023"
+      ]
+    },
+    {
+      "texto": "DDT dá faixa 50-200 mg/dia 'conforme tolerância' sem duração — dose individual pelo médico.",
+      "classe": "DECISAO_CLINICA_DR_SILAS",
+      "buscasFeitas": [
+        "DDT MM 2023 Quadro 4"
+      ]
+    },
+    {
+      "texto": "RT paliativa (até 30 Gy, sem fracionamento) — aceno de RT.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "DDT MM 2023 p.14"
+      ]
+    },
+    {
+      "texto": "Amiloidose AL e plasmocitoma fora do escopo da DDT — aceno de hematologia.",
+      "classe": "ACENO_GERAL_FORA_ESCOPO_ONCO_CLINICA",
+      "buscasFeitas": [
+        "Onco PRO aula 82"
+      ]
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "Indução no elegível: Dara-VRd/Isa-VRd 4 ciclos (curso/NCCN) × tripla com bortezomibe sem lenalidomida/daratumumabe (SUS)",
+      "fonteA": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026, Aula 82",
+        "pagina": 13,
+        "trecho": "4x Dara-VRD ou IsaVRD",
+        "estado": "INFERIDO"
+      },
+      "fonteB": {
+        "tipo": "DIRETRIZ",
+        "referencia": "DDT Mieloma Múltiplo 2023",
+        "pagina": 10,
+        "trecho": "o medicamento não foi incorporado ao SUS para esta indicação",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "SUS: VTd (ou outra tripla com bortezomibe) → melfalano 200 → TCTH. Esquemas com anti-CD38/lenalidomida registrados só como diretriz internacional.",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Manutenção pós-TCTH: lenalidomida ≥2 anos (curso) × talidomida (SUS)",
+      "fonteA": {
+        "tipo": "CURSO",
+        "referencia": "Onco PRO 2026, Aula 82",
+        "pagina": 13,
+        "trecho": "Lenalidomida 2 anos (pelo menos)",
+        "estado": "INFERIDO"
+      },
+      "fonteB": {
+        "tipo": "DIRETRIZ",
+        "referencia": "DDT Mieloma Múltiplo 2023",
+        "pagina": 9,
+        "trecho": "A talidomida é o imunomodulador disponível no âmbito do SUS",
+        "estado": "VERIFICADO"
+      },
+      "escolhaSeguranca": "Atualizado 2026-10-11: lenalidomida foi INCORPORADA para manutenção pós-TCTH (Portaria SCTIE/MS 26/2026). SUS passa a ter talidomida (DDT 2023) e lenalidomida (protocolo mieloma-lenalidomida-manutencao); confirmar implantação local e atualização da DDT.",
+      "fonteC": {
+        "tipo": "NORMA",
+        "referencia": "Portaria SCTIE/MS nº 26, de 28/05/2026 — via Conass Informa nº 99/2026 (conass.org.br/?p=56979); Relatório Conitec nº 1098",
+        "pagina": null,
+        "trecho": "Incorporar, no âmbito do Sistema Único de Saúde – SUS, a lenalidomida",
+        "estado": "VERIFICADO"
+      },
+      "decisaoNecessaria": true
+    },
+    {
+      "tema": "Intervalo do ácido zoledrônico",
+      "fonteA": {
+        "tipo": "DIRETRIZ",
+        "referencia": "DDT Mieloma Múltiplo 2023",
+        "pagina": 14,
+        "trecho": "dose de 4 mg deve ser administrada por via intravenosa, uma vez ao mês",
+        "estado": "VERIFICADO"
+      },
+      "fonteB": {
+        "tipo": "BULA",
+        "referencia": "Bula FDA ácido zoledrônico — openFDA set_id 00a5bd5a-e5ee-4bad-b510-a4d4485485c8 (2023-09-18)",
+        "pagina": null,
+        "trecho": "4 mg infused over no less than 15 minutes every 3 to 4 weeks",
+        "estado": "CONFLITANTE"
+      },
+      "escolhaSeguranca": "Adotado mensal (28 dias), dentro da faixa da bula e alinhado à DDT; ajuste renal pela bula.",
+      "decisaoNecessaria": false
+    }
+  ],
+  "curadoria": {
+    "redator": "Claude (agente curador, Opus 5.5) — rascunho para revisão",
+    "redigidoEm": "2026-10-11",
+    "fontesLidas": [
+      "DDT Mieloma Múltiplo 2023 (Portaria Conjunta 27/2023) — seções 1–6 e tabelas de evidência do Apêndice (p.47–48, 61)",
+      "Bulas FDA bortezomibe, THALOMID, ácido zoledrônico (openFDA)",
+      "Onco PRO 2026, Módulo 9, Aula 82 — Mieloma múltiplo (págs. 1–31)",
+      "ClinicalTrials.gov API v2 — NCT00111319",
+      "Portaria SCTIE/MS 26/2026 (Conass Informa 99/2026)",
+      "Painel de Demandas Conitec 15/06/2026",
+      "Bulas FDA Lenalidomide, Bortezomib, Thalidomide (openFDA)",
+      "ClinicalTrials.gov API v2 NCT01539083",
+      "SIGTAP competência 09/2026"
+    ],
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-11",
+        "redator": "Claude (agente curador)",
+        "resolvidas": 3,
+        "classificadas": 6,
+        "susPreenchidos": 2,
+        "notas": []
+      }
+    ]
+  },
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "local": "conflitos[1].escolhaSeguranca e pendências",
+      "de": "SUS: talidomida; lenalidomida não incorporada (Portaria SCTIE 21/2022).",
+      "para": "Atualizado 2026-10-11: lenalidomida foi INCORPORADA para manutenção pós-TCTH (Portaria SCTIE/MS 26/2026). SUS passa a ter talidomida (DDT 2023) e lenalidomida (protocolo mieloma-lenalidomida-manutencao); confirmar implantação local e atualização da DDT.",
+      "motivo": "Status SUS desatualizado: Portaria SCTIE/MS nº 26, de 28/05/2026, incorporou a lenalidomida na manutenção pós-TCTH (a Portaria SCTIE 21/2022 de não incorporação foi superada).",
+      "fonte": {
+        "tipo": "NORMA",
+        "referencia": "Portaria SCTIE/MS nº 26, de 28/05/2026 — via Conass Informa nº 99/2026 (conass.org.br/?p=56979); Relatório Conitec nº 1098",
+        "pagina": null,
+        "trecho": "Incorporar, no âmbito do Sistema Único de Saúde – SUS, a lenalidomida",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "data": "2026-10-11",
+      "local": "pendências (lista de não incorporados)",
+      "de": "KRd/DKd citados como não incorporados",
+      "para": "Carfilzomibe incorporado para MM recidivado/refratário após 1 terapia prévia (Portaria SECTICS/MS nº 65, de 09/11/2023); esquemas com carfilzomibe seguem sem protocolo no pack (aceno de hematologia) e fora da DDT 2023.",
+      "motivo": "Status SUS do carfilzomibe omitido/errado no pack.",
+      "fonte": {
+        "tipo": "NORMA",
+        "referencia": "Painel de Demandas Conitec (exportação 15/06/2026) — Carfilzomibe, MM recidivado/refratário após uma terapia prévia (decisão 13/11/2023)",
+        "pagina": null,
+        "trecho": "Processo encerrado: decisão de incorporação no SUS",
+        "estado": "VERIFICADO"
+      }
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): A03 titulação da talidomida",
+      "acao": "campo titulacao estruturado; calendarioExecutavel false"
+    },
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "Codex 2026-10-11 (veredito entrega final): A05 duração do zoledrônico",
+      "acao": "numeroCiclos null; duração explícita"
+    }
+  ],
+  "escopo": {
+    "classe": "ACENO_GERAL_ONCO_HEMATOLOGIA",
+    "nota": "Foco do OncoGlobal é oncologia clínica (Dr. Silas, 2026-10-11). Pack de hematologia mantido como aceno geral: conteúdo preservado, sem aprofundamento nem prioridade de curadoria."
+  }
+}

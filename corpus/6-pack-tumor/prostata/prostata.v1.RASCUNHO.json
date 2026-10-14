@@ -1,0 +1,123 @@
+{
+  "header": {
+    "id": "pack-prostata-v1-glm",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.4",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "cid": [
+    "C61"
+  ],
+  "estadiamento": {
+    "sistema": "AJCC",
+    "edicao": "8ª edição [VERIFICAR]"
+  },
+  "preservacaoLocal": "Pack original corpus/packs/prostata.v1.json tem basal já parcialmente aprovado — NÃO regredir; este rascunho acrescenta fases/intervalos com fonte.",
+  "biomarcadoresPath": {
+    "obrigatoriosLaudo": [
+      "Gleason (grau primário + secundário)",
+      "extensão"
+    ],
+    "nota": "PSA_TOTAL e PSA_LIVRE são labs (catálogo), não IHQ."
+  },
+  "examesPorId": {
+    "investigacao": [
+      "PSA_TOTAL",
+      "PSA_LIVRE",
+      "RM_PROSTATA_MP",
+      "BIOPSIA_PERCUTANEA_GUIADA",
+      "USG_PROSTATA_TRANSRETAL"
+    ],
+    "metastatico": [
+      "CINTILOGRAFIA_OSSEA",
+      "TC_TORAX",
+      "TC_PELVE",
+      "PET_PSMA"
+    ],
+    "labsBaseline": [
+      "HEMOGRAMA",
+      "CREATININA",
+      "TESTOSTERONA_TOTAL"
+    ]
+  },
+  "fases": [
+    {
+      "fase": "vigilancia_ativa",
+      "intervalos": {
+        "psa": "1-2x/ano",
+        "toque_retal": "1x/ano",
+        "rm": "RM_PROSTATA_MP 1-2 em 2 anos",
+        "biopsia": "a cada 1-3 anos; confirmatória 1-2 anos após a inicial"
+      },
+      "fonte": {
+        "tipo": "DIRETRIZ",
+        "referencia": "NCCN Prostate v5.2026 (Patients: Early-Stage Prostate Cancer 2026)",
+        "trecho": "PSA testing 1 to 2 times a year",
+        "edicao": "v5.2026"
+      },
+      "ressalva": "PENDENTE DE VALIDAÇÃO [CODEX M1-2]. Vigilância ativa é DISTINTA de seguimento pós-tratamento."
+    },
+    {
+      "fase": "seguimento_pos_tratamento",
+      "intervalos": {
+        "psa": "PCDT/SUS (Portaria SAS 498/2016): aos 3, 6 e 12 meses após o tratamento inicial; semestralmente até o 3º ano; anualmente depois",
+        "definicoes_recidiva": "Pós-prostatectomia: PSA >0,2 ng/mL; pós-radioterapia: nadir +2 ng/mL",
+        "imagem": "Apenas se PSA/toque sugerirem recidiva (não rotina assintomática)"
+      },
+      "fonte": {
+        "tipo": "NORMA",
+        "referencia": "PCDT Adenocarcinoma de Próstata — Portaria SAS nº 498/2016 (gov.br/saude/pt-br/assuntos/pcdt)",
+        "trecho": "mensuração do PSA aos 3, 6 e 12 meses",
+        "edicao": "2016 (PCDT vigente)"
+      },
+      "ressalva": "Recidiva bioquímica exige CONFIRMAÇÃO antes de tratar (não tratar número único). PÓS-CIRURGIA × PÓS-RT têm definições distintas."
+    }
+  ],
+  "rastreamento": {
+    "posicao": "INCA/MS: NÃO rastrear populacionalmente com PSA/toque; decisão compartilhada apenas se solicitado ativamente",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "INCA — Nota Técnica 'Recomendação pelo não rastreamento populacional do câncer de próstata' (2013, pág. atualizada 2019)",
+      "trecho": "não rastreamento populacional",
+      "edicao": "vigente"
+    }
+  },
+  "limitesAplicabilidade": "Rastreamento populacional é DISTINTO de investigação individual de caso suspeito — o pack cobre o segundo.",
+  "pendencias": [
+    "Validação por afirmação [CODEX M1-2]",
+    "Edição AJCC"
+  ],
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO + PENDENTE_DE_VALIDACAO_POR_AFIRMACAO [CODEX M1-2]",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "DIRETRIZ",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.4",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "supersededBy": "pack-prostata",
+  "correcoes": [
+    {
+      "data": "2026-10-11",
+      "por": "Claude",
+      "achado": "A9 red team: colisão com corpus/packs/prostata",
+      "original": "prostata",
+      "corrigido": "pack-prostata-v1-glm"
+    }
+  ]
+}

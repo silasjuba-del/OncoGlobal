@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { describe, expect, it } from "vitest";
 import {
   executarPipelineExtracao, type ExtractionInput, type ExtractionSource,
@@ -6,6 +7,23 @@ import {
   conflitoPlanejadoOrdenado, reconciliarTratamento,
 } from "../../src/kernel/extracao/reconciliacao.js";
 import type { ClinicalFact, ReviewAction } from "../../src/kernel/extracao/tipos.js";
+
+/** Fixtures representam ações e provas já persistidas no ledger, sem alterar o motor. */
+function executarComProvas(input: ExtractionInput): ReturnType<typeof executarPipelineExtracao> {
+  if (!input.confirmacoes?.length) return executarPipelineExtracao(input);
+  const preliminar = executarPipelineExtracao({ ...input, confirmacoes: [], confirmacoesFonte: [] });
+  const fontes = [input, ...(input.additionalSources ?? [])];
+  const confirmacoesFonte = input.confirmacoes.flatMap((acao, indice) => {
+    const segment = preliminar.segments.find((s) => `exc:UNLINKED_PATIENT:${s.id}` === acao.exceptionId);
+    const fonte = fontes.find((f) => f.recordingId === segment?.recordingId && f.sourceId === segment?.sourceId);
+    if (!segment || !fonte || !acao.patientId) return [];
+    return [{ exceptionId: acao.exceptionId, segmentId: segment.id, sourceId: fonte.sourceId,
+      recordingId: fonte.recordingId, patientId: acao.patientId, reviewDecisionId: `review-persistido:${indice}`,
+      contentHash: createHash("sha256").update(fonte.rawTranscript).digest("hex"),
+      sourceVersion: fonte.examIdentity?.versao?.trim() || "legado@1" }];
+  });
+  return executarPipelineExtracao({ ...input, confirmacoesFonte });
+}
 
 const em = "2030-01-03T10:00:00-03:00";
 const contexto = { encounterId: "enc-sintetico", dataClinica: "03/01/2030" };
@@ -91,7 +109,7 @@ describe("F03 · plano verbalizado ≠ prescrição no dono da reconciliação",
 
 describe("F03 · consumidor real do pipeline não presume identidade nem autoridade", () => {
   it("antes da revisão persistida mantém o plano literal incerto e NÃO junta fontes", () => {
-    const r = executarPipelineExtracao({
+    const r = executarComProvas({
       ...entrada, openedPatientId: "paciente-sintetico",
       registeredPatients: [{ patientId: "paciente-sintetico" }],
     });
@@ -108,10 +126,10 @@ describe("F03 · consumidor real do pipeline não presume identidade nem autorid
   });
 
   it("com ambas as decisões já persistidas e mesmo encontro/data: CONFLICT com candidatos das duas fontes", () => {
-    const semVinculo = executarPipelineExtracao(entrada);
+    const semVinculo = executarComProvas(entrada);
     // A função só recebe ações vindas do ledger; este fixture representa ações já
     // confirmadas pelo médico. O pipeline não escreve nem inventa eventos/autor.
-    const r = executarPipelineExtracao({ ...entrada, confirmacoes: ligacoes(semVinculo) });
+    const r = executarComProvas({ ...entrada, confirmacoes: ligacoes(semVinculo) });
     const plano = r.facts.find((f) => f.domain === "plan")!;
     const prescricao = r.facts.find((f) => f.domain === "drug")!;
     const conflito = r.exceptions.find((e) => e.reason.includes("planned_regimen"));
@@ -131,7 +149,7 @@ describe("F03 · consumidor real do pipeline não presume identidade nem autorid
   });
 
   it("um vínculo só, pacientes distintos, outro encontro ou outra data não autorizam confronto", () => {
-    const preliminar = executarPipelineExtracao(entrada);
+    const preliminar = executarComProvas(entrada);
     const [fala, receita] = ligacoes(preliminar);
     expect(fala).toBeDefined();
     expect(receita).toBeDefined();
@@ -149,16 +167,16 @@ describe("F03 · consumidor real do pipeline não presume identidade nem autorid
       }] },
     ];
     for (const variante of variantes) {
-      const r = executarPipelineExtracao(variante);
+      const r = executarComProvas(variante);
       expect(r.exceptions.some((e) => e.reason.includes("planned_regimen"))).toBe(false);
       expect(r.facts).toHaveLength(2);
     }
   });
 
   it("ações de vínculo contraditórias no mesmo segmento não ligam paciente nem geram confronto", () => {
-    const preliminar = executarPipelineExtracao(entrada);
+    const preliminar = executarComProvas(entrada);
     const [fala, receita] = ligacoes(preliminar);
-    const r = executarPipelineExtracao({ ...entrada,
+    const r = executarComProvas({ ...entrada,
       confirmacoes: [fala!, { ...fala!, patientId: "paciente-diferente" }, receita!] });
     expect(r.exceptions.some((e) => e.reason.includes("planned_regimen"))).toBe(false);
     expect(r.timelines).toHaveLength(1); // só a prescrição tem vínculo não ambíguo
@@ -173,8 +191,8 @@ describe("F03 · consumidor real do pipeline não presume identidade nem autorid
     const comRepeticao: ExtractionInput = {
       ...entrada, additionalSources: [prescricao, repetida],
     };
-    const preliminar = executarPipelineExtracao(comRepeticao);
-    const r = executarPipelineExtracao({ ...comRepeticao,
+    const preliminar = executarComProvas(comRepeticao);
+    const r = executarComProvas({ ...comRepeticao,
       confirmacoes: ligacoes(preliminar, ["paciente-sintetico", "paciente-sintetico", "paciente-sintetico"]) });
     expect(r.facts).toHaveLength(3);
     expect(r.deduplicacao.repeticoes).toHaveLength(1);
@@ -193,7 +211,7 @@ describe("F03 · consumidor real do pipeline não presume identidade nem autorid
       ...prescricao, recordingId: "outra-data-f03",
       contexto: { ...contexto, dataClinica: "04/01/2030" },
     };
-    const r = executarPipelineExtracao({
+    const r = executarComProvas({
       ...entrada, additionalSources: [prescricao, novaData],
     });
     expect(r.deduplicacao.repeticoes).toEqual([]);

@@ -2,7 +2,7 @@
 import { describe, expect, it } from "vitest";
 import type { EntradaDose, ReducaoPct } from "../../src/contracts/index.js";
 import { calcularDose } from "../../src/rules/index.js";
-import { RULESET_VERSAO, doseRuleset } from "../fixtures/rulesets.js";
+import { doseRuleset } from "../fixtures/rulesets.js";
 
 const entradaDose = (over: Partial<EntradaDose> = {}): EntradaDose => ({
   doseAdministradaAnteriorMg: 100,
@@ -18,7 +18,7 @@ describe("FN-04 reduções e arredondamento", () => {
     for (const [reducaoPct, esperado] of [[0, 100], [20, 80], [30, 70], [40, 60]] as const) {
       const r = calcularDose(entradaDose({ reducaoPct }), doseRuleset);
       expect(r.doseMg).toBe(esperado);
-      expect(r.rulesetVersao).toBe(RULESET_VERSAO);
+      expect(r.rulesetVersao).toBe(doseRuleset.header.versao);
     }
   });
   it("base 125 com redução 30 → 88 (87,5 arredonda para cima, uma vez, após a redução)", () => {
@@ -52,6 +52,6 @@ describe("FN-04 ciclos sem peso (Q30/Q31)", () => {
     expect(r.ciclosSemPesoConsecutivos).toBe(0);
     expect(r.estado).toBe("VERDE");
   });
-  it("saída carrega rulesetVersao 1.0.0", () =>
-    expect(calcularDose(entradaDose(), doseRuleset).rulesetVersao).toBe(RULESET_VERSAO));
+  it("saída carrega a versão própria do ruleset de dose", () =>
+    expect(calcularDose(entradaDose(), doseRuleset).rulesetVersao).toBe(doseRuleset.header.versao));
 });

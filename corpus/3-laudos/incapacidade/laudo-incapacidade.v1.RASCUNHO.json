@@ -1,0 +1,108 @@
+{
+  "header": {
+    "id": "laudo-incapacidade",
+    "versao": "1.0.0",
+    "vigenteDesde": "2026-10-11",
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2 (CONFIRMADA em auditoria Planalto 11/10/2026)",
+      "trecho": null,
+      "edicao": null
+    },
+    "curador": "Dr. Silas Negrão",
+    "aprovadoEm": "2026-10-11"
+  },
+  "destinatario": "Receita Federal (isenção de IR) e INSS (aposentadoria por incapacidade permanente) — FINALIDADES DISTINTAS",
+  "finalidade": "Dois usos, uma estrutura: (a) isenção de IR sobre proventos de aposentadoria por moléstia grave (neoplasia maligna); (b) subsídio à aposentadoria por incapacidade permanente (Lei 8.213 arts. 42-47).",
+  "baseLegal": [
+    {
+      "norma": "Lei 7.713/1988",
+      "artigo": "art. 6º, XIV (redação da Lei 11.052/2004)",
+      "trecho": "com base em conclusão da medicina especializada, mesmo que a doença tenha sido contraída depois da aposentadoria",
+      "vigencia": "vigente",
+      "estado": "CONFIRMADA (Planalto, auditada)",
+      "pendencia": null
+    },
+    {
+      "norma": "Lei 8.213/1991",
+      "artigo": "arts. 42-47",
+      "trecho": "incapaz e insusceptível de reabilitação (art. 42)",
+      "vigencia": "vigente",
+      "estado": "CITADA",
+      "pendencia": "VERIFICACAO_JURIDICA_PENDENTE"
+    },
+    {
+      "norma": "Serviço gov.br 'Solicitar Isenção do IR'",
+      "artigo": null,
+      "trecho": "laudo com diagnóstico, CID e data de início da doença",
+      "vigencia": "vigente",
+      "estado": "CITADA (gov.br)",
+      "pendencia": "PARCIAL"
+    }
+  ],
+  "requisitosConteudo": {
+    "fatoConfirmado": [
+      "Identificação, CID (neoplasia maligna)",
+      "DATA DO DIAGNÓSTICO (essencial para a Receita; a isenção vale da data em diante com laudo)",
+      "Data da aposentadoria, quando aplicável",
+      "Tratamento atual"
+    ],
+    "decisaoMedica": [
+      "Para isenção de IR: afirmação de que porta neoplasia maligna (conclusão da medicina especializada)",
+      "Para incapacidade permanente: prognóstico funcional de incapacidade insusceptível de reabilitação — DECISAO_MEDICA individual, nunca texto fixo"
+    ]
+  },
+  "documentosAnexos": [
+    "histórico patológico",
+    "comprovante de aposentadoria (uso b)"
+  ],
+  "proibicoesTextoFixo": [
+    "Concluir incapacidade permanente como texto fixo",
+    "Isenção retroativa sem data documentada"
+  ],
+  "observacoes": "Distinguir no cabeçalho do documento qual finalidade está sendo emitida; exigências do INSS (perícia própria) não mudam com este laudo.",
+  "curadoria": {
+    "estado": "RASCUNHO",
+    "redigidoEm": "2026-10-11",
+    "redator": "GLM (rascunho de curadoria F1)",
+    "aprovacaoClinica": null,
+    "pendencia": "AGUARDANDO_APROVACAO",
+    "consultavel": true,
+    "alerta": false,
+    "fonteDocumental": {
+      "tipo": "NORMA",
+      "referencia": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md §3.2 (CONFIRMADA em auditoria Planalto 11/10/2026)",
+      "trecho": null,
+      "edicao": "2026-10-11"
+    },
+    "notaConvencao": "aprovadoEm segue a convenção legada do BLOCO COMUM para RASCUNHO (data de redação) até a migração D-F1-05 separar consultavel/alerta no contrato; a aprovação clínica real é curadoria.aprovacaoClinica (null)."
+  },
+  "assinatura": {
+    "origem": "CONFIG",
+    "campos": [
+      "medico.nome",
+      "medico.crm_uf",
+      "medico.rqe",
+      "local",
+      "data",
+      "assinatura_carimbo"
+    ],
+    "fonte": "relatorio-pericial.v1 + Res. CFM 2.381/2024 (identificação mínima do médico; texto oficial PENDENTE de reabertura)"
+  },
+  "validade": {
+    "valor": null,
+    "pendencia": "DECISAO_DR_SILAS: validade do documento por finalidade"
+  },
+  "portas": {
+    "consome": [
+      "prontuario.identificacao",
+      "tumor (CID, data do diagnóstico, estadiamento)",
+      "resumoLongitudinal",
+      "prescricao.vigente",
+      "templates/resumo-prontuario-modelo-servico"
+    ],
+    "oferece": [
+      "documento.laudo-incapacidade"
+    ]
+  }
+}
