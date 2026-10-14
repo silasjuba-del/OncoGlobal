@@ -1,6 +1,6 @@
 # F1-S12 — fechamento e evidências
 
-Estado: EM EXECUÇÃO. Não constitui declaração de fechamento enquanto os gates abaixo não estiverem comprovados.
+Estado: **entrega técnica e auditoria S12 concluídas**, com integração pelo [PR #14](https://github.com/silasjuba-del/OncoGlobal/pull/14) condicionada aos checks do HEAD. Provas integrais confirmadas no commit `29cee755`; alterações seguintes de encerramento são documentais. Isso não encerra a curadoria S3c nem declara integração clínica dos 33 rascunhos inativos.
 
 ## Quadro de execução aprovado
 
@@ -24,15 +24,15 @@ Estado: EM EXECUÇÃO. Não constitui declaração de fechamento enquanto os gat
 
 | Gate | Critério | Estado |
 | --- | --- | --- |
-| Dependências S0–S11 | Aceites mapeados ao código integrado e a provas observáveis | EM EXECUÇÃO |
-| A12–A19 | Portas, fórmulas, longitudinalidade, invalidação, proposta, dutos, conflitos e biblioteca/alerta | EM EXECUÇÃO |
-| CRIT-5 | p95 determinístico ≤2 s; primeiro texto ≤4 s; tela completa ≤20 s; denominadores explícitos | EM EXECUÇÃO |
-| Caso-guia | Cólon aceito; demo final, reabertura e ausência de duplicação | EM EXECUÇÃO |
-| Fixture documental | Pantoprazol literal + HMG/Cr + retorno14 + tarefa; campos não ditos pendentes; ≤5 cliques com contagem explícita | EM EXECUÇÃO |
-| PHI | Scanner índice=árvore; saídas ordinárias e exceção D-W9-66 diferenciadas | EM EXECUÇÃO |
+| Dependências S0–S11 | Aceites técnicos mapeados ao código e provas; limites da cobertura explicitados na matriz | PASS TÉCNICO |
+| A12–A19 | Portas, fórmulas, longitudinalidade, invalidação, proposta, dutos e conflitos | AUDITORIA REALIZADA; lacunas de catálogo registradas, sem PASS de integração clínica dos 33 |
+| CRIT-5 | p95 determinístico ≤2 s; primeiro texto ≤4 s; tela completa ≤20 s; denominadores explícitos | PASS, no escopo HTTP e DOM/frames descrito |
+| Caso-guia | Cólon aceito; demo final, reabertura e ausência de duplicação | PASS |
+| Fixture documental | Pantoprazol literal + HMG/Cr + retorno14 + tarefa; campos não ditos pendentes; ≤5 cliques com contagem explícita | PASS |
+| PHI | Scanner índice=árvore; saídas ordinárias e exceção D-W9-66 diferenciadas | PASS; zero findings/unscanned/pending na reexecução |
 | Provider ao vivo | Não executado; dispensado expressamente por Silas neste fechamento. Gates de código/CI preservados; sem chamada real nem novas solicitações de credencial após a dispensa. | FORA DO ESCOPO POR DECISÃO HUMANA |
-| Matriz e relatórios | Matriz F1, caso-guia e RELATORIO-F1 com resultados e limitações | EM EXECUÇÃO |
-| Integração | Revisão independente, checks do HEAD e PR de fechamento | EM EXECUÇÃO |
+| Matriz e relatórios | Matriz F1, caso-guia, mapa dos 33 e RELATORIO-F1 | CONCLUÍDO |
+| Integração | Revisão independente; árvore de produto validada; checks e histórico de merge no PR #14 | GATE FINAL NO PR; somente `codex/f1-conclusao` |
 
 ## Reconciliação
 
@@ -43,7 +43,7 @@ Estado: EM EXECUÇÃO. Não constitui declaração de fechamento enquanto os gat
 
 ## Resultados finais
 
-Resultados medidos nesta árvore; os gates ainda em execução não são declarados concluídos.
+Resultados medidos nesta árvore de produto e na CI de `29cee755`, sem reutilizar contagens de entregas anteriores. A reconciliação de ancestralidade com `28bdb6d` não alterou a árvore: `b493305c3e42adeb843e0271fb445bcec1c9b578` antes e depois do merge.
 
 ### Provas observadas no aplicativo
 
@@ -61,6 +61,19 @@ Resultados medidos nesta árvore; os gates ainda em execução não são declara
 - UI: receitas múltiplas, seleção individual, edição preservada e resultados tardios/contexto antigo cobertos. Script de latência foi explicitamente limitado a DOM/frames e passou a rolar o título ao viewport; não mede pixels físicos ou streaming.
 - Primeira bateria local encontrou artefatos de navegador ainda no workspace e nomes de arquivos sintéticos parecidos com email. Os artefatos foram preservados fora da árvore publicável; o nome do arquivo de teste passou a derivar do ID/versão. Scanner não foi afrouxado.
 
-### Gates finais ainda a registrar
+### Gates finais
 
-Verificação global, scanner após saneamento, F1/adversariais, medições finais e integração serão preenchidos pelos respectivos logs, sem reutilizar números de outro commit.
+| Execução | Resultado |
+| --- | --- |
+| CI integral `npm run verify` | 3350/3350 testes, 444 arquivos; typecheck, fronteiras e corpus PASS |
+| F1 regular + adversarial, Windows e CI | 620/620 testes, 84 arquivos; zero exceções de fronteira |
+| CI W10 | 240/240 testes, 31 arquivos |
+| CI W8 | 41/41 testes, 9 arquivos |
+| Matriz F0 | 290/290 linhas, 184 verdes, zero vermelhos, 106 N-A normativos |
+| Reataque local após duas falhas iniciais | 21/21 em quatro arquivos: PHI, receitas UI/HTTP, impressão legada e latência |
+| CRIT-5 HTTP, sem concorrência local pesada | 30 amostras + 3 aquecimentos; p95 29,12 ms; máximo incluindo primeira requisição 177,01 ms; startup com seed/login 513,38 ms |
+| CRIT-5 navegador | p95 texto 318,7 ms / tela 359,8 ms; máximos 474,7 / 807,3 ms |
+
+Contagens das baterias se sobrepõem e não devem ser somadas. A primeira execução Windows completa terminou com 3348/3350; após saneamento dos artefatos/arquivo sintético e espera HTTP explícita no teste de receitas, o reataque passou e a CI integral passou com 3350/3350. O timeout de integração do teste não altera os limites CRIT-5.
+
+CI verificável: [execução integral](https://github.com/silasjuba-del/OncoGlobal/actions/runs/38493445272). O PR exige novos checks após o commit documental final. A aprovação clínica continua humana, por item, e provider ao vivo permanece dispensado.
