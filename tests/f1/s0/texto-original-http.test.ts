@@ -211,3 +211,21 @@ it("false e ausente conservam payload/hash legado com fatos selecionados", () =>
   expect(prepararRevisaoExtracao({ ...legado, incluirTextoOriginal: false })).toEqual(prepararRevisaoExtracao(legado));
   expect(prepararRevisaoExtracao(legado).payload).not.toHaveProperty("incluirTextoOriginal");
 });
+
+
+it("vínculo trusted resolve só pendência de identidade; texto literal não promove relato nem incerteza clínica", () => {
+  const entrada = { ...entradaKernel, exceptions: [
+    { kind: "UNLINKED_PATIENT", reason: "Paciente exige vínculo médico." },
+    { kind: "UNCERTAIN_FACT", reason: "Relato de toxicidade exige revisão clínica." },
+  ] };
+  const pendente = prepararRevisaoExtracao(entrada);
+  expect(pendente.payload.resumo).toContain("Paciente exige vínculo médico.");
+  const vinculado = prepararRevisaoExtracao({ ...entrada, vinculoConfirmado: true });
+  expect(vinculado.payload.resumo).not.toContain("Paciente exige vínculo médico.");
+  expect(vinculado.payload.resumo).toContain("Relato de toxicidade exige revisão clínica.");
+  expect(vinculado.payload.resumo).toContain(literal);
+  expect(vinculado.payload.facts).toEqual([]);
+  expect(vinculado.registros.map(r => r.tipo)).toEqual(["ReviewDecision"]);
+  expect(vinculado.registros[0]!.payload).not.toHaveProperty("campo");
+  expect(vinculado.registros[0]!.payload).not.toHaveProperty("valor");
+});

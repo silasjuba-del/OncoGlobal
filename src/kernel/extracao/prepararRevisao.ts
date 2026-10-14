@@ -84,6 +84,8 @@ export function prepararRevisaoExtracao(input: {
   readonly sourceId: string;
   readonly rawTranscript: string;
   readonly sourceType: string;
+  /** Prova resolvida pelo servidor após verificar ReviewDecision de vínculo e hash da fonte. */
+  readonly vinculoConfirmado?: boolean;
   readonly facts: readonly unknown[];
   readonly exceptions: readonly unknown[];
   readonly patientId: string;
@@ -144,6 +146,7 @@ export function prepararRevisaoExtracao(input: {
   const pendentes = facts.filter((fact) => !selectedSet.has(fact.id)).map((fact) =>
     `- Fato não selecionado (${fact.id}, ${fact.domain}): permanece pendente de revisão; fonte ${fact.sourceId}; trecho: ${fact.rawEvidence}`);
   const excecoes = input.exceptions.map((value) => objeto(value)).filter((value): value is Record<string, unknown> => value !== null)
+    .filter(item => !(input.vinculoConfirmado === true && item.kind === "UNLINKED_PATIENT"))
     .map((item) => typeof item.reason === "string" ? `- Pendência de extração: ${item.reason}` : null)
     .filter((item): item is string => item !== null);
   const blocos = [...new Set(linhas.map((item) => item.secao))].map((titulo) =>

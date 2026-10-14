@@ -34,7 +34,9 @@ export interface ConsultaFlashProps {
 
 export interface PlanoFlash {
   acoesMarcadas: readonly string[]; receitasMarcadas: readonly string[];
+  receitas?: readonly ReceitaManualFlash[];
   apac: ApacFlash & { emitir: false }; retorno: RetornoFlash; tarefasRetorno?: MarcacaoTarefasRetorno;
   solicitacoes?: { laboratorio: string[]; imagem: string[] };
   decisaoQt?: { solicitarCiclo: boolean; data: string | null };
 }
+export interface ReceitaManualFlash {id:string;medicamento:string;dose:string|null;orientacao:string|null;duracao:string|null;via:string|null;quantidade:string|null}

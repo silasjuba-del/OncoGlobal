@@ -36,7 +36,7 @@ describe("S11 extração OpenAI sem autoridade nem PHI", () => {
   });
   it.each(["ator", "estado", "autorizado", "doseCalculada"])("saída não pode acrescentar autoridade %s", async campo => {
     const r = await criarExtratorOpenAi({ env, transporte: { extrair: async () => ({ ...saida(), [campo]: "CONFIRMADO" }) } }).extrair(entrada, dic);
-    expect(r).toEqual({ status: "PENDENTE", codigo: "RESPOSTA_INVALIDA" });
+    expect(r).toEqual({ status: "PENDENTE", codigo: "RESPOSTA_INVALIDA", envioIniciado: true });
   });
   it.each(["pagina", "trecho", "valor", "unidade", "data", "resumo"])("rejeita evidência inventada em %s", async campo => {
     const s = saida(); const c = s.candidatos[0]!;
@@ -47,7 +47,7 @@ describe("S11 extração OpenAI sem autoridade nem PHI", () => {
     if (campo === "data") c.dataClinica = "2027-01-01";
     if (campo === "resumo") s.resumo[0]!.texto = "Liberado tratamento";
     const r = await criarExtratorOpenAi({ env, transporte: { extrair: async () => s } }).extrair(entrada, dic);
-    expect(r).toEqual({ status: "PENDENTE", codigo: "REFERENCIA_SEM_EVIDENCIA_LITERAL" });
+    expect(r).toEqual({ status: "PENDENTE", codigo: "REFERENCIA_SEM_EVIDENCIA_LITERAL", envioIniciado: true });
   });
   it("instrução maliciosa no documento não pode passar assinatura inventada na resposta", async () => {
     const r = await criarExtratorOpenAi({ env, transporte: { extrair: async () => ({ ...saida(), assinar: true }) } })
@@ -57,7 +57,7 @@ describe("S11 extração OpenAI sem autoridade nem PHI", () => {
   it("timeout não publica saída tardia", async () => {
     let liberar!: (x: unknown) => void; const p = new Promise(resolve => { liberar = resolve; });
     const r = await criarExtratorOpenAi({ env: { ...env, ONCOASSIST_OPENAI_TIMEOUT_MS: "5" }, transporte: { extrair: async () => p } }).extrair(entrada, dic);
-    expect(r).toEqual({ status: "PENDENTE", codigo: "TIMEOUT" }); liberar(saida());
+    expect(r).toEqual({ status: "PENDENTE", codigo: "TIMEOUT", envioIniciado: true }); liberar(saida());
     await Promise.resolve(); expect(r.status).toBe("PENDENTE");
   });
   it("transporte fixa endpoint e não aceita redirecionamento; teste offline de fetch", async () => {

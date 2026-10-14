@@ -6,6 +6,9 @@ import { PrescricaoProposta } from '../../contracts/f1/prescricaoProposta.js';
 import { avaliarLabAlerts } from '../../rules/labAlerts.js';
 import { avaliarValidadeExame } from '../../rules/f0c/clinica.js';
 import { validadeHemograma } from '../../rules/validade.js';
+import { ContextoInteracoesCondicionadas } from '../../contracts/f0c/interacoesCondicionadas.js';
+import { identidadeFarmaco, casaTermoFarmaco, type CatalogoInteracoes } from '../../contracts/f0c/interacoes.js';
+import { avaliarInteracoesCondicionadas } from '../../rules/f0c/interacoesCondicionadas.js';
 import { avaliarInteracaoMedicamentosa, type RulesetInteracoes } from '../../rules/w8/interacoes.js';
 import { avaliarCtcaeGrau } from '../../rules/ctcaeGrau.js';
 import { avaliarRecist } from '../../rules/recist.js';
@@ -23,6 +26,7 @@ export interface OpcoesSetores {
   laboratorio?: RegraAprovada<LabRuleset>;
   validadeHemograma?: RegraAprovada<SalaoRuleset>;
   interacoes?: RegraAprovada<RulesetInteracoes>;
+  catalogoInteracoes?: CatalogoInteracoes;
   ctcae?: RegraAprovada<CtcaeRuleset>;
   recist?: RegraAprovada<RecistRuleset>;
   tetos?: RegraAprovada<LimiteExposicaoCumulativa[]>;
@@ -112,18 +116,111 @@ export function avaliarPatologia(r:Retrato,c:Correlacao,op:OpcoesSetores={}):Ach
   return o;
 }
 function nomesMedicamentos(f:FatoRetrato):string[]{const d=dados(f);const lista=Array.isArray(f.dados.valor)?f.dados.valor:Array.isArray(d.medicamentos)?d.medicamentos:[d];return lista.flatMap(x=>{if(typeof x==='string')return [x];if(x&&typeof x==='object'){const n=(x as Record<string,unknown>).drug??(x as Record<string,unknown>).nome;return typeof n==='string'?[n]:[];}return [];});}
+function condicionada(item: unknown): boolean {
+  if (!item || typeof item !== 'object') return false;
+  const value = (item as Record<string, unknown>).avaliacaoCondicionada;
+  // Any conditional metadata excludes the row from the blanket lexical evaluator.
+  return value !== null && value !== undefined;
+}
+function avaliarCondicionadasDoRetrato(o: AchadosSetor, r: Retrato, p: PrescricaoProposta | undefined,
+  fatosMedicamentos: FatoRetrato[], op: OpcoesSetores, regras: readonly unknown[]): void {
+  if (!regras.length || !op.interacoes) return;
+  const comTipo = regras.filter(row => {
+    const c = (row as Record<string, unknown>).avaliacaoCondicionada;
+    return c !== null && typeof c === 'object' && !Array.isArray(c)
+      && typeof (c as Record<string, unknown>).tipo === 'string' && String((c as Record<string, unknown>).tipo).trim().length > 0;
+  });
+  if (comTipo.length !== regras.length) lacuna(o, 'INTERACOES_REGRA_CONDICIONADA_INVALIDA',
+    'Metadado condicionado sem tipo válido; cobertura não demonstrada e avaliação lexical não autorizada.', fatosMedicamentos, true);
+  if (!comTipo.length) return;
+  const ctxs = r.fatos.filter(f => f.tipo === 'FATO' && f.campo === 'interacoesContexto'
+    && f.encounterId === o.correlacao.encounterId && f.tumorLotId === o.correlacao.tumorLotId);
+  const invalidar = (codigo: string, texto: string) => lacuna(o, codigo, texto, ctxs, true);
+  if (!ctxs.length || ctxs.some(f => !f.fontes.length || Date.parse(f.tempoRegistro)>Date.parse(op.agora??r.geradoEm))
+    || new Set(ctxs.map(f => canon(dados(f)))).size !== 1) {
+    invalidar('INTERACOES_CONTEXTO_AUSENTE_OU_CONFLITANTE', 'Interações condicionadas exigem contexto reconciliado do encontro atual com fontes, sem conflito.'); return;
+  }
+  const parsed = ContextoInteracoesCondicionadas.safeParse({...dados(ctxs[0]!), referencia: op.agora ?? r.geradoEm});
+  if (!parsed.success) { invalidar('INTERACOES_CONTEXTO_INVALIDO', 'Contexto temporal, formulação, função orgânica ou fonte inválidos.'); return; }
+  const ctx = parsed.data;
+  const referencias = [...(ctx.reconciliacao ? [ctx.reconciliacao.fonte] : []), ...ctx.exposicoes.map(x => x.fonte),
+    ...ctx.coadministracoes.map(x => x.fonte), ...(ctx.clearance ? [ctx.clearance.fonte] : []),
+    ...ctx.vacinas.map(x => x.fonte), ...(ctx.quimioterapia ? [ctx.quimioterapia.fonte] : []),
+    ...(ctx.recuperacaoImune ? [ctx.recuperacaoImune.fonte] : [])];
+  const conhecidas = new Set(r.fatos.filter(f => Date.parse(f.tempoRegistro) <= Date.parse(op.agora ?? r.geradoEm)).flatMap(f => f.fontes.map(x => x.sourceId)));
+  if (referencias.some(id => !conhecidas.has(id))) { invalidar('INTERACOES_FONTE_NAO_REFERENCIADA', 'Contexto referencia fonte ausente do Retrato confirmado.'); return; }
+  const nome = (v: string) => identidadeFarmaco(v, op.catalogoInteracoes);
+  const meds = fatosMedicamentos.filter(f => f.encounterId === o.correlacao.encounterId && f.campo === 'medicamentos');
+  const listas = meds.map(f => [...new Set(nomesMedicamentos(f).map(nome))].sort());
+  const listaContexto = [...new Set((ctx.medicamentosAtuais ?? []).map(nome))].sort();
+  if (!listas.length || listas.some(l => l.some(n => !n) || canon(l) !== canon(listaContexto))) {
+    invalidar('INTERACOES_MEDICAMENTOS_DIVERGENTES', 'Contexto condicionado não corresponde à lista de medicamentos confirmada neste encontro.'); return;
+  }
+  const exposicoes = new Set(ctx.exposicoes.map(x => nome(x.droga)));
+  if (p?.itens.some(item => !nome(item.drug) || !exposicoes.has(nome(item.drug)))) {
+    invalidar('INTERACOES_PROPOSTA_NAO_COBERTA', 'Contexto não documenta exposição/formulação de todos os medicamentos propostos; não inferir do texto.'); return;
+  }
+  const fontesNecessarias = new Set(referencias);
+  const evidencias = [...new Map([...ctxs, ...meds, ...r.fatos.filter(f => f.fontes.some(x => fontesNecessarias.has(x.sourceId)))].map(f => [canon(f.ref), f])).values()];
+  o.entradas = [...new Map([...o.entradas, ...evidencias.map(f => f.ref)].map(ref => [canon(ref), ref])).values()];
+  const resultados = avaliarInteracoesCondicionadas(ctx, comTipo, op.catalogoInteracoes);
+  const tipos = new Set(comTipo.flatMap(row => { const obj = row as Record<string, unknown>; const c = obj.avaliacaoCondicionada as Record<string, unknown> | undefined; return typeof c?.tipo === 'string' ? [c.tipo] : []; }));
+  for (const tipo of tipos) {
+    const v = resultados.find(item => item.tipo === tipo);
+    if (!v || v.estado === 'PENDENTE') { lacuna(o, `CONDICIONADA:${tipo}`, v?.motivo ?? 'Tipo de interação condicionada não implementado.', evidencias, true); continue; }
+    o.cobertura.avaliados++;
+    // AVISO is a sourced clinical warning, not a graded severity or contraindication inferred by code.
+    achado(o, `CONDICIONADA:${tipo}`, `${v.estado === 'AVISO' ? 'Aviso condicionado: ' : 'Condição individual não aplicável: '}${v.motivo} Não determina elegibilidade geral e não altera prescrição.`,
+      'PENDENTE', evidencias, [op.interacoes.referencia]);
+  }
+}
 export function avaliarInteracoes(r:Retrato,c:Correlacao,op:OpcoesSetores={}):AchadosSetor {
   const {out:o,fatos}=inicio(r,c,'INTERACOES',/medic|reconcili/);const p=proposta(o,op.proposta);
   if(!fatos.length||!fatos.some(f=>key(f.campo??'')==='medicamentos'||dados(f).reconciliada===true||dados(f).reconciliacaoConfirmada===true)){lacuna(o,'MEDS_RECONCILIAR','Lista de medicamentos precisa de reconciliação explícita, inclusive antes do ciclo 1.',fatos);return o;}
-  if(!regra(o,op.interacoes)){lacuna(o,'INTERACAO_SEM_REGRA','Catálogo curado de interações ausente.',fatos,true);return o;}if(!p)return o;
-  const atuais=fatos.flatMap(f=>nomesMedicamentos(f).map(nome=>({nome,f})));const pares=new Set<string>();
-  for(const item of p.itens)for(const med of atuais){if(key(item.drug)===key(med.nome))continue;const id=[key(item.drug),key(med.nome)].sort().join('+');if(pares.has(id))continue;pares.add(id);
-    const v=avaliarInteracaoMedicamentosa(item.drug,med.nome,op.interacoes.conteudo);if(!v.regraAtiva)lacuna(o,id,v.motivo,[med.f],true);else{o.cobertura.avaliados++;achado(o,id,v.motivo,v.estado,[med.f],[op.interacoes.referencia]);}}
-  for(let i=0;i<p.itens.length;i++)for(let j=i+1;j<p.itens.length;j++){
-    const drugA=p.itens[i]!.drug,drugB=p.itens[j]!.drug;if(key(drugA)===key(drugB))continue;
+  const atuais=fatos.flatMap(f=>nomesMedicamentos(f).map(nome=>({nome,f})));
+  const listas = fatos.filter(f => key(f.campo ?? '') === 'medicamentos').map(f =>
+    Array.isArray(f.dados.valor) && f.dados.valor.every(v => typeof v === 'string' && v.trim())
+      ? [...new Set((f.dados.valor as string[]).map(v => key(v.trim())))].sort() : null);
+  if (new Set(listas.filter(l => l !== null).map(canon)).size > 1) {
+    lacuna(o,'MEDS_RECONCILIACAO_CONFLITANTE','Listas completas confirmadas divergem; não unir medicamentos nem escolher uma lista.',
+      fatos.filter(f => key(f.campo ?? '') === 'medicamentos'));
+    return o;
+  }
+  const listaConhecida = listas.length > 0 && listas.every(l => l !== null) && new Set(listas.map(canon)).size === 1;
+  const identidades = new Set([...atuais.map(m => m.nome), ...(p?.itens.map(i => i.drug) ?? [])].map(n => key(n.trim())));
+  const semParesLexicais = listaConhecida && identidades.size < 2;
+  const temContextoCondicionado = r.fatos.some(f => f.tipo === 'FATO' && f.campo === 'interacoesContexto');
+  // Ausência de par atual dispensa só o lexical; histórico explícito ainda exige avaliação temporal.
+  if (semParesLexicais && !temContextoCondicionado) return o;
+  if(!regra(o,op.interacoes)){lacuna(o,'INTERACAO_SEM_REGRA','Catálogo curado de interações ausente.',fatos,true);return o;}
+  const rows = op.interacoes.conteudo.interacoes;
+  const parCondicionado = (a: string, b: string) => rows.some(row => condicionada(row) &&
+    ((casaTermoFarmaco(row.drogaA,a,op.catalogoInteracoes)&&casaTermoFarmaco(row.drogaBouClasse,b,op.catalogoInteracoes))
+      ||(casaTermoFarmaco(row.drogaA,b,op.catalogoInteracoes)&&casaTermoFarmaco(row.drogaBouClasse,a,op.catalogoInteracoes))));
+  const lexicais: RulesetInteracoes = {...op.interacoes.conteudo, interacoes: rows.filter(item => !condicionada(item))};
+  avaliarCondicionadasDoRetrato(o,r,p,fatos,op,rows.filter(condicionada));
+  if (semParesLexicais) return o;
+  const pares=new Set<string>();
+  for(const item of p?.itens??[])for(const med of atuais){if(key(item.drug)===key(med.nome))continue;const id=[key(item.drug),key(med.nome)].sort().join('+');if(pares.has(id))continue;pares.add(id);
+    if(parCondicionado(item.drug,med.nome))continue;
+    const v=avaliarInteracaoMedicamentosa(item.drug,med.nome,lexicais,op.catalogoInteracoes);if(!v.regraAtiva)lacuna(o,id,v.motivo,[med.f],true);else{o.cobertura.avaliados++;achado(o,id,v.severidade===null?`${v.motivo}; aviso de fonte sem severidade curada; não determina elegibilidade.`:v.motivo,v.severidade===null?'PENDENTE':v.estado,[med.f],[op.interacoes.referencia]);}}
+  for(let i=0;i<(p?.itens.length??0);i++)for(let j=i+1;j<(p?.itens.length??0);j++){
+    const drugA=p!.itens[i]!.drug,drugB=p!.itens[j]!.drug;if(key(drugA)===key(drugB))continue;
     const id=[key(drugA),key(drugB)].sort().join('+');if(pares.has(id))continue;pares.add(id);
-    const v=avaliarInteracaoMedicamentosa(drugA,drugB,op.interacoes.conteudo);
+    if(parCondicionado(drugA,drugB))continue;
+    const v=avaliarInteracaoMedicamentosa(drugA,drugB,lexicais,op.catalogoInteracoes);
     if(!v.regraAtiva)lacuna(o,id,v.motivo,[],true);else{lacuna(o,`PROPOSTA:${id}`,`${v.motivo}; avaliação da proposta exige referência tipada ao rascunho.`);}
+  }
+  // An existing reconciled medication list is independently evaluable, even without a future Rx proposal.
+  for (let i=0;i<atuais.length;i++) for (let j=i+1;j<atuais.length;j++) {
+    const a=atuais[i]!,b=atuais[j]!;if(key(a.nome)===key(b.nome))continue;
+    const id=[key(a.nome),key(b.nome)].sort().join('+');if(pares.has(id))continue;pares.add(id);
+    if(parCondicionado(a.nome,b.nome))continue;
+    const v=avaliarInteracaoMedicamentosa(a.nome,b.nome,lexicais,op.catalogoInteracoes);
+    const refs=[...new Map([a.f,b.f].map(f=>[canon(f.ref),f])).values()];
+    if(!v.regraAtiva)lacuna(o,id,v.motivo,refs,true);
+    else {o.cobertura.avaliados++;achado(o,id,v.severidade===null?`${v.motivo}; aviso de fonte sem severidade curada; não determina elegibilidade.`:v.motivo,
+      v.severidade===null?'PENDENTE':v.estado,refs,[op.interacoes.referencia]);}
   }
   if(!pares.size)lacuna(o,'INTERACAO_PARES_AUSENTES','Nenhum par medicamentoso distinto disponível para avaliação.',fatos);
   return o;
@@ -140,8 +237,39 @@ export function avaliarToxicidades(r:Retrato,c:Correlacao,op:OpcoesSetores={}):A
   for(const f of fatos){const p=Ctcae.safeParse(dados(f));if(!p.success){lacuna(o,'CTCAE_DADOS','Medidas, termo e versão CTCAE necessários.',[f]);continue;}
     const v=avaliarCtcaeGrau({termo:p.data.termo,ctcae_version:p.data.ctcae_version,medidas:p.data.medidas,...(p.data.basal?{basal:p.data.basal}:{})},op.ctcae.conteudo);if(v.candidate_grade===null)lacuna(o,'CTCAE_GRAU_AUSENTE',v.achado.motivo,[f]);else{o.cobertura.avaliados++;achado(o,f.ref.eventId,`CTCAE v6 grau candidato ${v.candidate_grade}; revisão médica obrigatória; nenhuma dose alterada.`,'PENDENTE',[f],[op.ctcae.referencia]);}}return o;
 }
+/** Portas de dados já documentados; sem regra de aplicabilidade não há conduta ou cálculo novos. */
+function lacunasAplicabilidadeTratamento(o:AchadosSetor,r:Retrato,tratamentos:FatoRetrato[],op:OpcoesSetores):void {
+  const campos=new Set(['riscofn','clearance','clcr','clcrcockcroftgault','funcaorenal']);
+  for(const f of r.fatos.filter(f=>f.tipo==='FATO'&&campos.has(key(f.campo??'')))) {
+    const risco=key(f.campo??'')==='riscofn',prefixo=risco?'RISCO_FN':'CLEARANCE';
+    const refs=[...new Map([f,...tratamentos].map(x=>[canon(x.ref),x])).values()];
+    o.entradas=[...new Map([...o.entradas,f.ref].map(ref=>[canon(ref),ref])).values()];
+    if(!f.fontes.length){lacuna(o,`${prefixo}_FONTE_AUSENTE`,'Dado de aplicabilidade sem fonte rastreável.',refs);continue;}
+    if(f.encounterId!==r.encounterId||Date.parse(f.tempoRegistro)>Date.parse(op.agora??r.geradoEm)){
+      lacuna(o,`${prefixo}_CONTEXTO_NAO_ATUAL`,'Aplicabilidade do dado neste encontro não confirmada.',refs);continue;
+    }
+    if(risco){
+      if(f.dados.valor===null||f.dados.valor===undefined){lacuna(o,'RISCO_FN_DADO_AUSENTE','Risco de neutropenia febril não informado.',refs);continue;}
+      lacuna(o,'RISCO_FN_SEM_REGRA','Risco de neutropenia febril documentado; regra de aplicabilidade e suporte não disponível nesta avaliação. Revisão médica necessária, sem indicação automática.',refs,true);
+      continue;
+    }
+    const d=dados(f),v=d.valorMlMin,unidade=Object.hasOwn(d,'unidade')?d.unidade:Object.hasOwn(d,'valorMlMin')?'mL/min':null;
+    if(typeof d.fonte!=='string'||!f.fontes.some(s=>s.sourceId===d.fonte)){
+      lacuna(o,'CLEARANCE_FONTE_DIVERGENTE','Fonte declarada do clearance não corresponde ao fato confirmado.',refs);continue;
+    }
+    if(typeof v!=='number'||!Number.isFinite(v)||v<=0||unidade!=='mL/min'||d.metodo!=='COCKCROFT_GAULT'){
+      lacuna(o,'CLEARANCE_DADO_INVALIDO','Clearance requer valor explícito em mL/min e método documentado; não converter pela magnitude.',refs);continue;
+    }
+    if(d.validoParaDose!==true){lacuna(o,'CLEARANCE_APLICABILIDADE_NAO_CONFIRMADA','Aplicabilidade do clearance para dose não confirmada.',refs);continue;}
+    if(!regra(o,op.validadeExame)){lacuna(o,'CLEARANCE_VALIDADE_SEM_REGRA','Validade do dado renal não demonstrada por regra aprovada.',refs,true);continue;}
+    const validade=avaliarValidadeExame('BIOQUIMICA',typeof d.coleta==='string'?d.coleta:null,op.agora??r.geradoEm,op.validadeExame.conteudo.bioquimicaHoras);
+    if(validade.estado!=='VALIDO'){lacuna(o,'CLEARANCE_VALIDADE',validade.motivo??'Validade do dado renal não demonstrada.',refs);continue;}
+    lacuna(o,'RENAL_TRATAMENTO_SEM_REGRA','Clearance documentado; aplicação ao tratamento exige regra aprovada específica. Revisão médica necessária, sem substituir fármaco ou ajustar dose.',refs,true);
+  }
+}
 export function avaliarTratamento(r:Retrato,c:Correlacao,op:OpcoesSetores={}):AchadosSetor {
   const {out:o,fatos}=inicio(r,c,'TRATAMENTO',/tratamento|treatment|administr|prescri|ciclo|exposicaocumulativa/);const p=proposta(o,op.proposta);
+  lacunasAplicabilidadeTratamento(o,r,fatos,op);
   for(const f of fatos){const d=dados(f);const camada=String(d.camada??d.status??'NAO_INFORMADA');lacuna(o,`TRATAMENTO_CONTEXTO:${f.ref.eventId}`,`Registro de tratamento ${camada}; planejado, proposto, assinado e administrado são evidências distintas.`,[f]);}
   if(p)for(const item of p.itens){lacuna(o,`PROPOSTA:${item.sequence}`,`Proposta ${item.classe}: ${item.drug}; não comprova assinatura nem administração.`);
     if(item.calculatedDose===null||item.prescribedDose===null)lacuna(o,`DOSE:${item.sequence}`,'Dose calculada ou prescrita ausente; nenhum cálculo por LLM.');}

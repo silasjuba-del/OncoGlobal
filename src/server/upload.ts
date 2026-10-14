@@ -15,7 +15,7 @@ const Upload = z.object({patientId:z.string().min(1),encounterId:z.string().min(
   id:z.string().min(1).max(200),sourceId:z.string().min(1).max(200),sourceType:FactSourceType,
   tipo:z.enum(["PDF","IMAGEM"]),bytesBase64:z.string().min(1).max(Math.ceil(MAX_BYTES/3)*4)}).strict();
 const hash=(v:string|Uint8Array)=>createHash("sha256").update(v).digest("hex");
-const requireLocal=createRequire(join(process.cwd(),"package.json"));
+const requireLocal=createRequire(import.meta.url);
 export function configuracaoOcrInstalada():ConfigOcrLocal|null {
   try {
     return {workerPath:requireLocal.resolve("tesseract.js/src/worker-script/node/index.js"),

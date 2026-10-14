@@ -1,13 +1,12 @@
 import { afterEach,expect,it } from "vitest";
 import { createHash } from "node:crypto";
-import { createRequire } from "node:module";
 import { abrirAmbiente,cadastrarPaciente,criarDiretorio,removerDiretorio,PACIENTE,ENCONTRO } from "../../f0-fecha/fixtures/consulta-completa.js";
 import { lerDraft } from "../../../src/kernel/ledger/drafts.js";
 import { processarUploadLocal } from "../../../src/server/upload.js";
 import { createCanvas, GlobalFonts } from "@napi-rs/canvas";
+import { createRequire } from "node:module";
+GlobalFonts.registerFromPath(createRequire(import.meta.url).resolve("pdfjs-dist/standard_fonts/LiberationSans-Regular.ttf"),"F1SyntheticOCR");
 import { deflateSync } from "node:zlib";
-// A fixture rasteriza a mesma fonte empacotada em qualquer sistema, sem fallback do SO.
-GlobalFonts.registerFromPath(createRequire(import.meta.url).resolve("pdfjs-dist/standard_fonts/LiberationSans-Regular.ttf"), "F1SyntheticOCR");
 let ambiente:Awaited<ReturnType<typeof abrirAmbiente>>|undefined;
 afterEach(async()=>{if(ambiente){await ambiente.close();removerDiretorio(ambiente.dir);ambiente=undefined;}});
 const pedido={patientId:PACIENTE,encounterId:ENCONTRO,tumorLotId:null,id:"upload-sintetico",sourceId:"fonte-upload",sourceType:"medical_note",tipo:"PDF",bytesBase64:Buffer.from("arquivo sintetico").toString("base64")};

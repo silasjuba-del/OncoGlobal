@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { DataCivil, Instante } from "../../../contracts/base.js";
 import { validarPayloadEvento } from "../../../contracts/envelope.js";
+import { Fonte } from "../../../contracts/base.js";
 import { ClinicalEvent } from "../../../contracts/operacao.js";
 import { Retrato, type FatoRetrato } from "../../../contracts/f1/retrato.js";
 
@@ -94,6 +95,57 @@ function classificarMarco(e: ClinicalEvent, operacao: readonly ClinicalEvent[], 
     || ids.has(objeto(dados(doc)?.data)?.documentId) || ids.has(objeto(dados(doc)?.signature)?.documentId));
   if (!tentativa) return "CLINICO";
   return !operacaoComFalha && fechamentoFlash(e, operacao) ? "TECNICO_VALIDO" : "TECNICO_INVALIDO";
+}
+
+function wrapperDado(v:unknown):Record<string,unknown>|null {
+  const d=objeto(v);
+  return d&&Object.hasOwn(d,"valor")&&["campo","revisao","estado","fontes"].some(k=>Object.hasOwn(d,k))?d:null;
+}
+function valorConfirmado(v:unknown):unknown {
+  const d=wrapperDado(v);
+  if(!d)return v;
+  return d.campo==="PRESENTE"&&["CONFIRMADO","ASSINADO"].includes(String(d.revisao))&&d.valor!==null
+    &&Array.isArray(d.fontes)&&d.fontes.length>0&&d.fontes.every(f=>Fonte.safeParse(f).success)?d.valor:null;
+}
+function qualificadores(d:Record<string,unknown>):string {
+  const itens=["status","certeza","evidence","provenance","negado","suspeita","incerto"].flatMap(k=>{
+    const v=d[k];if(v===undefined||v===null||v==="EXPLICIT"||v==="DOCUMENT_CONFIRMED")return [];
+    return typeof v==="string"||typeof v==="boolean"?[`${k}: ${typeof v==="boolean"?(v?"sim":"não"):v}`]:[];
+  });
+  return itens.length?` (${itens.join("; ")})`:"";
+}
+/** Somente estruturas clínicas conhecidas viram narrativa; IDs/contratos não viram prosa. */
+function textoClinico(bruto:unknown):string|null {
+  const valor=valorConfirmado(bruto);
+  if(valor===null||valor===undefined)return null;
+  if(typeof valor==="string")return valor.trim()||null;
+  if(typeof valor==="number")return Number.isFinite(valor)?String(valor):null;
+  if(typeof valor==="boolean")return valor?"sim":"não";
+  if(Array.isArray(valor)){const itens=valor.map(textoClinico).filter((s):s is string=>s!==null);return itens.length?itens.join("; "):null;}
+  const d=objeto(valor);if(!d)return null;
+  const literal=["literal","texto","nome"].find(k=>typeof d[k]==="string"&&String(d[k]).trim());
+  if(literal)return `${String(d[literal]).trim()}${qualificadores(d)}`;
+  const marker=typeof d.marker==="string"?d.marker:typeof d.codigo==="string"?d.codigo:null;
+  const medida=Object.hasOwn(d,"value")?d.value:d.valor;
+  const texto=marker?textoClinico(medida):null;
+  if(marker&&texto!==null){const unidade=typeof d.unit==="string"?d.unit:typeof d.unidade==="string"?d.unidade:null;
+    return `${marker}: ${texto}${unidade?` ${unidade}`:""}${qualificadores(d)}`;}
+  if(typeof d.prefixo==="string"&&["T","N","M","grupo"].some(k=>typeof d[k]==="string")){
+    const termos=["T","N","M","grupo"].filter(k=>typeof d[k]==="string").map(k=>`${k}: ${d[k]}`);
+    return `${d.prefixo} · ${termos.join("; ")}${typeof d.data==="string"?` · ${d.data}`:""}`;
+  }
+  return null;
+}
+const rotulos:Record<string,string>={nome:"Paciente",nascimento:"Nascimento",sexoCadastral:"Sexo cadastral",cid:"CID",topografia:"Topografia",histologia:"Histologia",estadiamentos:"Estadiamento",TNM:"Estadiamento",
+  diagnostico:"Diagnóstico",alergias:"Alergias",comorbidades:"Comorbidades",medicamentos:"Medicamentos",pesoKg:"Peso (kg)",valor:"Valor",unidade:"Unidade",origem:"Origem",textoLaudo:"Laudo",resumo:"Laudo",achados:"Achados",biomarcadores:"Biomarcadores",resultado:"Resultado",
+  modalidade:"Modalidade",intencao:"Intenção",linha:"Linha",esquemaId:"Esquema",inicio:"Início",fim:"Fim",numero:"Ciclo",previstoEm:"Previsto para",origemPeso:"Origem do peso",esquema:"Esquema",dataClinica:"Data clínica",campo:"Analito",data:"Data",valores:"Laboratório",droga:"Droga",quantidadeEfetivaMg:"Quantidade efetiva (mg)",status:"Situação",motivo:"Motivo",
+  "extracao.lab":"Laboratório","extracao.diagnosis":"Diagnóstico","extracao.histology":"Histologia","extracao.biomarker":"Biomarcador","extracao.metastasis":"Metástase","extracao.drug":"Medicamento","extracao.regimen":"Esquema","extracao.cycle":"Ciclo","extracao.symptom":"Sintoma","extracao.toxicity":"Toxicidade","extracao.imaging":"Imagem","extracao.procedure":"Procedimento","extracao.plan":"Plano"};
+function fraseClinica(f:FatoRetrato,campo:string,bruto:unknown):Retrato["resumo"] {
+  const rotulo=rotulos[campo.split(":")[0]!]??campo;
+  const wrapper=wrapperDado(bruto);
+  if(wrapper?.campo==="CONFLITO")return [{texto:`${rotulo}: conflito documentado; revisão pendente, sem valor selecionado.`,fatos:[f.ref]}];
+  const texto=textoClinico(bruto);if(!texto||texto==="NAO_INFORMADO")return [];
+  return [{texto:`${rotulo}: ${texto}${wrapper?qualificadores(wrapper):""}.`,fatos:[f.ref]}];
 }
 
 /** Projeção pura. Contexto é fornecido pelo chamador; nenhum evento pode mudar o encontro aberto. */
@@ -236,9 +288,9 @@ export function projetarRetrato(eventos: readonly ClinicalEvent[], contexto: Con
     return Date.parse(antigo.tempoRegistro) <= Date.parse(anterior.criadoEm) && Date.parse(novo.criadoEm) > Date.parse(anterior.criadoEm) ? [antigo.ref] : [];
   }) : [];
   const resumo = fatos.flatMap(f => {
-    if (["DOCUMENTO", "SignedDocument", "DocumentSigned"].includes(f.tipo)) return [];
+    if (["DOCUMENTO", "SignedDocument", "DocumentSigned"].includes(f.tipo) || ["farmacia.conferencia","apac.validacaoEmissao"].includes(f.campo??"")) return [];
     if (!f.campo) {
-      // Seleção declarada por tipo. Cada dado mantém estados e qualificadores literais.
+      // Subcampos Dado conservam a revisão própria; confirmação do contêiner não os promove.
       const camposPorTipo: Record<string, readonly string[]> = {
         Paciente: ["nome", "nascimento", "sexoCadastral"],
         TumorLot: ["cid", "topografia", "histologia", "estadiamentos"],
@@ -249,17 +301,14 @@ export function projetarRetrato(eventos: readonly ClinicalEvent[], contexto: Con
         LabResult: ["campo", "valor", "unidade", "data", "valores"],
         TreatmentAdministration: ["droga", "quantidadeEfetivaMg", "status", "motivo", "inicio", "fim"],
       };
-      return (camposPorTipo[f.tipo] ?? []).flatMap(campo => !Object.hasOwn(f.dados, campo) || f.dados[campo] === null ? []
-        : [{ texto: `${f.tipo}.${campo}: ${canonico(f.dados[campo])}.`, fatos: [f.ref] }]);
+      return (camposPorTipo[f.tipo] ?? []).flatMap(campo => !Object.hasOwn(f.dados,campo)?[]:fraseClinica(f,campo,f.dados[campo]));
     }
     if (!Object.hasOwn(f.dados, "valor") || f.dados.valor === null) return [];
-    const qualificadores = ["status", "certeza", "evidence", "provenance", "negado", "suspeita"].filter(k => Object.hasOwn(f.dados, k))
-      .map(k => `${k}=${canonico(f.dados[k])}`).join(", ");
     // Renderização literal: confirmação documental não transforma uma suspeita em diagnóstico.
-    return [{ texto: `${f.campo}: ${canonico(f.dados.valor)}${qualificadores ? ` (${qualificadores})` : ""}.`, fatos: [f.ref] }];
+    return fraseClinica(f,f.campo,f.dados.valor).map(frase=>({...frase,texto:frase.texto.replace(/\.$/,`${qualificadores(f.dados)}.`)}));
   });
   const conteudo = { schema: "Retrato@1" as const, patientId: contexto.patientId, encounterId: contexto.encounterId,
-    tumorLotId: contexto.tumorLotId, versaoProjecao: "retrato-f1-v1", regras: [...contexto.regras].sort((a,b)=>a.id.localeCompare(b.id)||a.versao.localeCompare(b.versao)||a.hash.localeCompare(b.hash)),
+    tumorLotId: contexto.tumorLotId, versaoProjecao: "retrato-f1-v3", regras: [...contexto.regras].sort((a,b)=>a.id.localeCompare(b.id)||a.versao.localeCompare(b.versao)||a.hash.localeCompare(b.hash)),
     biblioteca: contexto.biblioteca, fatos, integridade: problemas.sort((a,b)=>a.eventoId.localeCompare(b.eventoId)||a.motivo.localeCompare(b.motivo)),
     delta: { encounterAnteriorId: anterior?.encounterId ?? null, novos, substituidos: antigas }, resumo };
   return Retrato.parse({ ...conteudo, revisao: hashCanonico(conteudo), geradoEm: contexto.agora });

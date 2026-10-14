@@ -4,13 +4,17 @@ import { criarPortaHttp, type OpcoesHttp } from "./api/http.js";
 import { criarChaves } from "./api/chaves.js";
 import type { PedidoBundle, PortaConsulta } from "./api/porta.js";
 import { PainelOncoassist } from "./consulta/PainelOncoassist.js";
-import { RevisaoExtracaoLocal, type RevisaoExtracaoConfirmada } from "./consulta/RevisaoExtracaoLocal.js";
+import { ReconciliarMedicamentos } from "./consulta/ReconciliarMedicamentos.js";
+import { SinteseProposta } from "./consulta/SinteseProposta.js";
+import { RevisaoExtracaoLocal } from "./consulta/RevisaoExtracaoLocal.js";
 import { TelaSalao } from "./telas/TelaSalao.js";
 import { CaixaCanal } from "./telas/canal/CaixaCanal.js";
 import { ConsultaPersistida } from "./consulta/ConsultaPersistida.js";
 import { TelaApacLote } from "./telas/apac/TelaApacLote.js";
 import { Configuracoes } from "./oncochart/Configuracoes.js";
 import { UploadDocumentoLocal } from "./consulta/UploadDocumentoLocal.js";
+// @ts-expect-error folha CSS pura, resolvida pelo Vite
+import "./consulta/consulta-local.css";
 
 const agendaSchema = z.object({ itens: z.array(z.object({ patientId: z.string().min(1), encounterId: z.string().min(1), nome: z.string(), horario: z.string() })) });
 const consultaSchema = z.object({ patientId: z.string().min(1), encounterId: z.string().min(1), tumorLotId: z.string().nullable() });
@@ -27,25 +31,19 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
   const [contexto, setContexto] = useState<PedidoBundle | null>(null);
   const [ocupado, setOcupado] = useState(false);
   const [versaoFontes,setVersaoFontes]=useState(0);
-  const [versaoClinica, setVersaoClinica] = useState(0);
+  const [versaoConsulta,setVersaoConsulta]=useState(0);
   const [mensagem, setMensagem] = useState("");
   const [tela, setTela] = useState<"consulta" | "salao" | "canal" | "apac" | "config">("consulta");
   const geracao = useRef(0);
   const chaves = useMemo(() => criarChaves(), []);
+  const contextoAtual=useRef(contexto); contextoAtual.current=contexto;
+  const geracaoTela=geracao.current;
   const pacienteAtivo = agenda.find((item) => item.patientId === contexto?.patientId && item.encounterId === contexto?.encounterId);
-  const geracaoContexto = geracao.current;
-
-  function revisaoConfirmada(revisao: RevisaoExtracaoConfirmada) {
-    if (geracao.current !== geracaoContexto || !contexto
-      || revisao.contexto.patientId !== contexto.patientId || revisao.contexto.encounterId !== contexto.encounterId
-      || revisao.contexto.tumorLotId !== contexto.tumorLotId) return;
-    setVersaoClinica((v) => v + 1);
-  }
 
   const limpar = useCallback(() => {
     geracao.current++;
     setSenha(""); setAutenticado(false); setAgenda([]); setSelecionado(""); setTela("consulta");
-    setContexto(null); setOcupado(false); setSessao((s) => s + 1);
+    setContexto(null); setOcupado(false); setVersaoConsulta(0); setSessao((s) => s + 1);
   }, []);
   const expirar = useCallback(() => { limpar(); setMensagem("Sessão expirada. Entre novamente."); }, [limpar]);
   const porta = useMemo(() => fabricaPorta({ onSessaoExpirada: expirar }), [fabricaPorta, expirar, sessao]);
@@ -81,7 +79,7 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
       try {
         const consulta = consultaSchema.safeParse(await porta.carregarConsulta(patientId, undefined, encounterId));
         if (atual !== geracao.current) return;
-        if (consulta.success && consulta.data.patientId === patientId) {
+        if (consulta.success && consulta.data.patientId === patientId && consulta.data.encounterId === encounterId) {
           setContexto(consulta.data); return;
         }
       } catch { /* An active appointment can start a new encounter without prior clinical events. */ }
@@ -98,17 +96,17 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
     } finally { if (atual === geracao.current) setOcupado(false); }
   }
 
-  return <main aria-label="OncoAssist local" style={{ maxWidth: 1200, margin: "2rem auto", padding: "1rem" }}>
-    <h1>OncoAssist local</h1>
-    <p>Documentos do servidor local. Sugestões aguardam revisão médica.</p>
-    <a href="/">Voltar à demonstração</a>
+  return <main aria-label="OncoAssist local" className="oncoassist-local">
+    <header className="consulta-appbar"><div><h1>OncoAssist local</h1>
+      <p>Documentos do servidor local. Sugestões aguardam revisão médica.</p></div>
+      <a href="/">Voltar à demonstração</a></header>
     {mensagem ? <p role="status">{mensagem}</p> : null}
     {!autenticado ? <form onSubmit={(event) => void entrar(event)}>
       <label>Senha do servidor <input type="password" autoComplete="current-password" value={senha}
         minLength={12} maxLength={512} required disabled={ocupado} onChange={(e) => setSenha(e.target.value)} /></label>
       <button type="submit" disabled={ocupado || senha.length < 12}>{ocupado ? "Conectando…" : "Entrar"}</button>
     </form> : <>
-      <button type="button" onClick={() => { limpar(); setMensagem(""); }}>Sair</button>
+      <div className="consulta-controles"><button type="button" onClick={() => { limpar(); setMensagem(""); }}>Sair</button>
       {agenda.length === 0 ? <p>Nenhum paciente na agenda local de hoje.</p> : <label>Paciente da agenda
         <select aria-label="Paciente da agenda" value={selecionado} disabled={ocupado}
           onChange={(e) => void abrir(e.target.value)}>
@@ -123,13 +121,45 @@ export function OncoassistLocal({ fabricaPorta = criarPortaHttp }: {
         <button type="button" disabled={ocupado} onClick={() => setTela("apac")}>APAC</button>
         <button type="button" disabled={ocupado} onClick={() => setTela("config")}>Configurações Flash</button>
       </nav>
+      </div>
       {ocupado ? <p role="status">Abrindo consulta…</p> : null}
-      {tela === "consulta" && contexto ? <div key={`${contexto.patientId}:${contexto.encounterId}:${contexto.tumorLotId ?? ""}`}>
-        <UploadDocumentoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)}/>
-        <RevisaoExtracaoLocal key={versaoFontes} porta={porta} contexto={contexto} aoConfirmarRevisao={revisaoConfirmada}
+      {tela === "consulta" && contexto ? <div className="consulta-local" key={`${contexto.patientId}:${contexto.encounterId}:${contexto.tumorLotId ?? ""}`}>
+        <section className="consulta-identidade" aria-label="Identificação da consulta">
+          <div className="consulta-identidade-linha"><strong>{pacienteAtivo?.nome ?? contexto.patientId}</strong>
+            <span>{pacienteAtivo?.horario ? `Agenda ${pacienteAtivo.horario}` : "Consulta selecionada"}</span></div>
+          <p className="consulta-identificadores">Paciente <b>{contexto.patientId}</b> · Encontro <b>{contexto.encounterId}</b>
+            {contexto.tumorLotId ? <> · Lote <b>{contexto.tumorLotId}</b></> : " · Lote tumoral não vinculado"}</p>
+          <nav aria-label="Navegar nesta consulta" className="consulta-ancoras">
+            <a href="#consulta-documentos">Documentos</a><a href="#consulta-revisao">Revisão da fonte</a>
+            <a href="#consulta-medicamentos">Medicamentos</a><a href="#consulta-sintese">Síntese proposta</a>
+            <a href="#consulta-resumo">Visão integrada</a><a href="#consulta-conduta">Conduta e assinatura</a>
+            <a href="#consulta-historico">Histórico</a>
+          </nav>
+        </section>
+        <div id="consulta-documentos" className="consulta-secao" tabIndex={-1}>
+          <UploadDocumentoLocal porta={porta} contexto={contexto} aoSalvar={()=>setVersaoFontes(v=>v+1)}/>
+        </div>
+        <div id="consulta-revisao" className="consulta-secao" tabIndex={-1}>
+        <RevisaoExtracaoLocal key={versaoFontes} porta={porta} contexto={contexto}
+          aoFatosConfirmados={(confirmado)=>{
+            const ativo=contextoAtual.current;
+            if(geracao.current!==geracaoTela||!ativo||ativo.patientId!==confirmado.patientId||ativo.encounterId!==confirmado.encounterId
+              ||ativo.tumorLotId!==confirmado.tumorLotId||!agenda.some(item=>item.patientId===ativo.patientId&&item.encounterId===ativo.encounterId))return;
+            setVersaoConsulta(v=>v+1);
+          }}
           {...(pacienteAtivo ? { patientLabel: pacienteAtivo.nome } : {})} />
-        <PainelOncoassist porta={porta} contexto={contexto} />
-        <ConsultaPersistida porta={porta} contexto={contexto} versaoClinica={versaoClinica} aoAbrirApac={() => setTela("apac")} />
+        </div>
+        <PainelOncoassist key={`painel:${versaoConsulta}`} porta={porta} contexto={contexto} />
+        <div id="consulta-medicamentos" className="consulta-secao" tabIndex={-1}>
+        <ReconciliarMedicamentos porta={porta} contexto={{...contexto,tumorLotId:contexto.tumorLotId??null}} aoFatosConfirmados={(confirmado)=>{
+          const c=contextoAtual.current;
+          if(geracao.current===geracaoTela&&c?.patientId===confirmado.patientId&&c.encounterId===confirmado.encounterId&&(c.tumorLotId??null)===(confirmado.tumorLotId??null)&&agenda.some(item=>item.patientId===c.patientId&&item.encounterId===c.encounterId))setVersaoConsulta(v=>v+1);
+        }}/>
+        </div>
+        <div id="consulta-sintese" className="consulta-secao" tabIndex={-1}>
+        <SinteseProposta key={`sintese:${versaoConsulta}`} porta={porta} contexto={contexto}/>
+        </div>
+        <ConsultaPersistida versaoClinica={versaoConsulta} porta={porta} contexto={contexto} aoAbrirApac={() => setTela("apac")} />
       </div> : null}
       {tela === "salao" ? <TelaSalao porta={porta} /> : null}
       {tela === "apac" ? <TelaApacLote porta={porta} chaves={chaves} /> : null}

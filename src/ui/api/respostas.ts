@@ -1,3 +1,4 @@
+import { DutosClinicaVisao } from '../../contracts/api/dutos.js';
 import { z } from "zod";
 import { DataCivil, Fonte } from "../../contracts/base.js";
 import { Paciente, TumorLot, TreatmentEpisode, Ciclo, Contato } from "../../contracts/clinico.js";
@@ -24,7 +25,7 @@ const Afirmacao = z.object({ rotulo: Texto, valorTexto: Texto.nullable(), estado
   candidatos: z.array(z.object({ valorTexto: Texto, fontes: z.array(Fonte) })).optional()
 }).transform(({ candidatos, ...item }) => ({ ...item, ...(candidatos === undefined ? {} : { candidatos }) }));
 export const ConsultaResposta: z.ZodType<ConsultaIntegrada> = z.object({ hoje: DataCivil,
-  retrato: Retrato.optional(), visaoIntegrada: VisaoIntegrada.optional(),
+  retrato: Retrato.optional(), visaoIntegrada: VisaoIntegrada.optional(), dutos: DutosClinicaVisao.optional(),
   resumoEvolucao: Texto.nullable().default(null),
   historicoDocumentos: z.array(z.object({ eventId: Texto, documentId: Texto, titulo: Texto,
     documentVersion: z.number().int().positive(), tumorLotId: Texto.nullable(),
@@ -44,6 +45,8 @@ export const ConsultaResposta: z.ZodType<ConsultaIntegrada> = z.object({ hoje: D
     alertasVermelhos: z.array(Alerta) }),
 }).passthrough().superRefine((resposta, ctx) => {
   const r = resposta.retrato, v = resposta.visaoIntegrada;
+  const d = resposta.dutos;
+  if(d&&(d.contexto.patientId!==resposta.patientId||d.contexto.encounterId!==resposta.encounterId||d.contexto.tumorLotId!==resposta.tumorLotId))ctx.addIssue({code:"custom",message:"DUTOS_FORA_CONTEXTO"});
   if (r && (r.patientId !== resposta.patientId || r.encounterId !== resposta.encounterId || r.tumorLotId !== resposta.tumorLotId))
     ctx.addIssue({code:"custom",message:"RETRATO_FORA_CONTEXTO"});
   if (v && (!r || v.correlacao.patientId !== resposta.patientId || v.correlacao.encounterId !== resposta.encounterId
@@ -57,7 +60,8 @@ export const ConsultaResposta: z.ZodType<ConsultaIntegrada> = z.object({ hoje: D
       || v && [...v.achados,...v.lacunas].some(a=>a.fatos.some(f=>!referencias.has(`${f.eventId}@${f.revisao}`))))
       ctx.addIssue({code:"custom",message:"REFERENCIA_FATO_DIVERGENTE"});
   }
-}).transform(({retrato,visaoIntegrada,...resposta}) => ({...resposta,
+}).transform(({retrato,visaoIntegrada,dutos,...resposta}) => ({...resposta,
+  ...(dutos === undefined ? {} : {dutos}),
   ...(retrato === undefined ? {} : {retrato}), ...(visaoIntegrada === undefined ? {} : {visaoIntegrada})}));
 export const AgendaResposta: z.ZodType<AgendaVisao> = z.object({ hoje: DataCivil, itens: z.array(z.object({
   horario: Texto, patientId: Texto, encounterId: Texto.optional(), nome: Texto, prontuario: Texto, semaforo: Semaforo,
