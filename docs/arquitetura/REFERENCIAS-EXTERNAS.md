@@ -41,14 +41,14 @@ separação extração → regra → minuta → decisão; autoridade médica (s�
 - **PADRÃO:** recomendação nasce como proposta (`RequestGroup` com `intent=proposal`) e só vira ordem após decisão humana.
 - **FONTE:** FHIR CR.
 - **CAPACIDADE REUTILIZÁVEL:** separação minuta × decisão assinada.
-- **LOCAL NO ONCOGLOBAL:** `PrescricaoProposta` (proposta), comando `ConfirmarBloco` (`src/server/rotas.ts`) que produz o documento ASSINADO, Flash (`src/server/flash.ts`).
-- **CONTRATO AFETADO:** nenhum novo; reforça estados Revisão (RAW→ASSINADO). `ActionIntent` não participa: ele cobre ações externas (imprimir, enviar, exportar).
+- **LOCAL NO ONCOGLOBAL:** hoje são dois degraus separados. (1) `proporPrescricao` grava `PrescricaoProposta@1` só como rascunho de avaliação (`assina:false`, `exporta:false`); ele não é assinável. (2) A assinatura acontece por `ConfirmarBloco` (`src/server/rotas.ts`) sobre rascunhos de documento com `documentId`, `documentVersion` e `documentHash`, como os documentos que o Flash monta em `prepararFinalizacaoFlash` (`src/server/flash.ts`). Não existe ponte direta proposta → documento assinado.
+- **CONTRATO AFETADO:** nenhum novo agora. Uma fatia futura que ligue proposta a documento precisa definir essa ponte de forma explícita (proposta avaliada → rascunho de documento com hash → `ConfirmarBloco`), sem tornar `PrescricaoProposta` assinável. `ActionIntent` não participa: ele cobre ações externas (imprimir, enviar, exportar).
 - **RISCO DE ACOPLAMENTO:** baixo.
 - **RISCO CLÍNICO:** baixo; protege autoridade médica.
 - **RISCO OPERACIONAL:** baixo.
-- **DECISÃO:** ADOTAR (como invariante já vigente).
-- **JUSTIFICATIVA:** idêntico ao par `PrescricaoProposta` → `ConfirmarBloco` com assinatura médica.
-- **TESTE NECESSÁRIO:** nenhuma rota cria evento ASSINADO fora de `ConfirmarBloco` com sessão médica válida e referência de assinatura (já coberto em W10/W8; manter no gate).
+- **DECISÃO:** ADOTAR (o princípio já vigora: proposta nunca é ordem).
+- **JUSTIFICATIVA:** coincide com a separação atual entre rascunho de avaliação e documento assinado.
+- **TESTE NECESSÁRIO:** `PrescricaoProposta@1` nunca vira evento ASSINADO; `ConfirmarBloco` recusa rascunho sem `documentId`/`documentVersion`/`documentHash` ou sem sessão médica válida.
 
 ## 4. Módulos independentes por capacidade clínica (micro-frontends)
 - **PADRÃO:** app composto por módulos com fronteira própria, registrados num shell; telas montadas por capacidade.
@@ -111,8 +111,8 @@ separação extração → regra → minuta → decisão; autoridade médica (s�
 - **PADRÃO:** ordem médica assinada gera tarefa de farmácia/dispensação rastreável, por setor.
 - **FONTE:** Bahmni.
 - **CAPACIDADE REUTILIZÁVEL:** fila da farmácia (estado Farmácia 4) e salão de QT ligados à prescrição assinada.
-- **LOCAL NO ONCOGLOBAL:** já existe o duto de conferência farmacêutica da F1: contrato `src/contracts/api/farmacia.ts` e rotas `/farmacia/enviar` e `/farmacia/conferir` em `src/server/dutos.ts`, além do salão (`lerSalao`) e das tarefas de retorno S9. O que ainda não existe é a tarefa de dispensação/preparo derivada da conferência.
-- **CONTRATO AFETADO:** estender `contracts/api/farmacia.ts` (compatível com a máquina de estados atual); nunca criar um segundo contrato paralelo de farmácia.
+- **LOCAL NO ONCOGLOBAL:** já existe o duto de conferência farmacêutica da F1: rotas `/farmacia/enviar` e `/farmacia/conferir` em `src/server/dutos.ts`, `src/server/projecaoDutos.ts` e `src/modules/farmacia/duto.ts`, todas sobre `ConferenciaFarmacia` de `src/contracts/f1/dutos.ts`. Há também a API separada de estados em `src/modules/farmacia/estados.ts` (`src/contracts/api/farmacia.ts`). O que ainda não existe é a tarefa de dispensação/preparo derivada da conferência.
+- **CONTRATO AFETADO:** estender `ConferenciaFarmacia` (`src/contracts/f1/dutos.ts`), compatível com o duto atual; antes da fatia, decidir se `contracts/api/farmacia.ts` é unificado ou aposentado. Nunca criar uma terceira máquina de estados de farmácia.
 - **RISCO DE ACOPLAMENTO:** alto se integrar OpenERP/Odoo do Bahmni → rejeitado; baixo como padrão.
 - **RISCO CLÍNICO:** médio (dispensação errada). Mitiga: tarefa só nasce de documento ASSINADO já conferido no duto atual.
 - **RISCO OPERACIONAL:** médio (setores ainda não ativos; v1 monousuário).
