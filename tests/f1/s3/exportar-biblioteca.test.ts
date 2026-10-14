@@ -80,6 +80,16 @@ it.each([
   { paciente: { nome: "Pessoa Sintética", dataNascimento: "1970-02-01" } },
   { patientId: "paciente-sintetico-identificavel" },
   { cpf: 1234567 },
+  { nomePaciente: { valor: "Pessoa Sintética" } },
+  { patientId: ["paciente-sintetico-identificavel"] },
+  { paciente: { nome: { valor: "Pessoa Sintética" } } },
+  { paciente: { id: ["identificador-sintetico"] } },
+  { dataNascimento: { valor: "1970-01-01" } },
+  { paciente: "Pessoa Sintética" },
+  { telefone: { valor: "contato-sintetico" } },
+  { endereco: ["local-sintetico"] },
+  { nomePaciente: "[Pessoa Sintética]" },
+  { patientId: "{{identificador-sintetico}}" },
 ])("campos JSON com identidade não saem como biblioteca: %j", dados => {
   const f = fixture();
   writeFileSync(join(f.root, "corpus/1-exames/item.json"), JSON.stringify(dados));

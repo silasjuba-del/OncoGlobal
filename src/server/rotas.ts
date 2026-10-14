@@ -466,6 +466,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         || contexto.encounterId !== parsed.data.triagem.encounterId)
         return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
       if (!lerPaciente(deps.db, contexto.patientId)) return reply(404, "PACIENTE_NAO_ENCONTRADO");
+      const agoraSalao = deps.agora();
+      const salaoAntes = lerSalao(deps.db, agoraSalao, deps.salaoRuleset);
+      if ("estado" in salaoAntes && salaoAntes.estado === "PENDENTE") return reply(503, salaoAntes.codigo, salaoAntes);
       const draftId = `salao-triagem-${sha(JSON.stringify([contexto.patientId, contexto.encounterId])).slice(0, 36)}`;
       const existente = lerDraft(deps.db, draftId);
       const rawTriagem = parsed.data.triagem;
@@ -481,21 +484,21 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       const retryDaMesmaGravacao = mesmoConteudo && (parsed.data.expectedRevision === null
         ? existente!.revision === 0 : existente!.revision === parsed.data.expectedRevision + 1);
       if (retryDaMesmaGravacao)
-        return reply(200, "REPLAY", { ...lerSalao(deps.db, deps.agora(), deps.salaoRuleset), codigo: "REPLAY" });
+        return reply(200, "REPLAY", { ...salaoAntes, codigo: "REPLAY" });
       if ((existente?.revision ?? null) !== parsed.data.expectedRevision)
         return reply(409, "REVISAO_RASCUNHO_CONFLITANTE");
-      const em = existente ? existente.criadoEm : deps.agora();
+      const em = existente ? existente.criadoEm : agoraSalao;
       const dataCaptura = dataCivilDoServico(em, "-03:00");
       const fonte: Fonte = { sourceId: `triagem-${sha(draftId).slice(0, 24)}`, classe: "MANUAL",
         localizador: "triagem presencial", dataClinica: dataCaptura.estado === "OK" ? dataCaptura.dataCivil : null,
-        dataCaptura: deps.agora(),
+        dataCaptura: agoraSalao,
         versao: "salao-triagem-v1", contentHash };
       const dado = <T>(valor: T | null, label: string) => valor === null
         ? { valor: null, estado: "PENDENTE" as const, campo: "AUSENTE" as const,
           motivo: `${label} ausente na triagem`, fontes: [], revisao: "RAW" as const }
         : { valor, estado: "PENDENTE" as const, campo: "PRESENTE" as const,
           motivo: `${label} informado em triagem; aguarda revisão`, fontes: [fonte], revisao: "REVISAR" as const };
-      const triagem = { ...rawTriagem, chegadaEm: existente ? rawTriagem.chegadaEm : deps.agora(),
+      const triagem = { ...rawTriagem, chegadaEm: existente ? rawTriagem.chegadaEm : agoraSalao,
         pas: dado(rawTriagem.pas.valor, "pressão sistólica"), fc: dado(rawTriagem.fc.valor, "frequência cardíaca"),
         spo2: dado(rawTriagem.spo2.valor, "saturação"), tempDecimos: dado(rawTriagem.tempDecimos.valor, "temperatura"),
         hbDgDl: dado(rawTriagem.hbDgDl.valor, "hemoglobina"), anc: dado(rawTriagem.anc.valor, "neutrófilos"),
@@ -505,8 +508,8 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         rawRef: `triagem-local:${contexto.encounterId}`, payload: { kind: "SALAO_TRIAGEM_RASCUNHO",
           contexto: { patientId: contexto.patientId, encounterId: contexto.encounterId, tumorLotId: null },
           status: "RASCUNHO", triagem, source: fonte, contentHash }, diagnostics: ["AGUARDA_DECISAO_MEDICA"],
-        revision: (existente?.revision ?? -1) + 1, criadoEm: deps.agora() });
-      return reply(200, "RASCUNHO_SALVO", { ...lerSalao(deps.db, deps.agora(), deps.salaoRuleset),
+        revision: (existente?.revision ?? -1) + 1, criadoEm: agoraSalao });
+      return reply(200, "RASCUNHO_SALVO", { ...lerSalao(deps.db, agoraSalao, deps.salaoRuleset),
         codigo: "RASCUNHO_SALVO", rascunho: { draftId: saved.draftId, revision: saved.revision,
           criaEventoClinico: false } });
     }
@@ -517,6 +520,9 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       const contexto = deps.sessoes.consultaSelecionada(token);
       if (!contexto || contexto.patientId !== parsed.data.patientId || contexto.encounterId !== parsed.data.encounterId)
         return reply(409, "CONTEXTO_CONSULTA_ALTERADO");
+      const agoraSalao = deps.agora();
+      const projected = lerSalao(deps.db, agoraSalao, deps.salaoRuleset);
+      if ("estado" in projected && projected.estado === "PENDENTE") return reply(503, projected.codigo, projected);
       const draftId = `salao-triagem-${sha(JSON.stringify([contexto.patientId, contexto.encounterId])).slice(0, 36)}`;
       const draft = lerDraft(deps.db, draftId);
       if (!draft || draft.patientId !== contexto.patientId) return reply(409, "TRIAGEM_RASCUNHO_AUSENTE");
@@ -534,17 +540,16 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
           && value.triagemRevision + 1 === draft.revision);
       if (priorDecision) {
         if (priorDecision.motivo === parsed.data.motivo)
-          return reply(200, "REPLAY", { ...lerSalao(deps.db, deps.agora(), deps.salaoRuleset), codigo: "REPLAY" });
+          return reply(200, "REPLAY", { ...projected, codigo: "REPLAY" });
         if (existing) return reply(409, "OPERATION_HASH_CONFLICT");
         return reply(409, "LIBERACAO_JA_REGISTRADA", { codigo: "LIBERACAO_JA_REGISTRADA", motivoPreservado: true });
       }
       if (draft.revision !== parsed.data.expectedRevision
         && !(existing && draft.revision === parsed.data.expectedRevision + 1))
         return reply(409, "REVISAO_RASCUNHO_CONFLITANTE");
-      const projected = lerSalao(deps.db, deps.agora(), deps.salaoRuleset);
       const card = projected.cartoes.find((item) => item.entrada.patientId === contexto.patientId);
       if (!card?.temCorte) return reply(409, "CORTE_AUSENTE");
-      const em = existing?.criadoEm ?? deps.agora();
+      const em = existing?.criadoEm ?? agoraSalao;
       const payload = { campo: "liberacaoComCorteSalao", patientId: contexto.patientId,
         encounterId: contexto.encounterId, triagemDraftId: draft.draftId,
         triagemRevision: parsed.data.expectedRevision,
@@ -556,7 +561,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
           expectedRevision: parsed.data.expectedRevision, eventId: `salao-release-event-${sha(operationId).slice(0, 32)}`,
           tipo: "ReviewDecision", payload, fontes: [], revisao: "CONFIRMADO" }] });
       if (result.estado === "NEGADA") return reply(409, result.motivo ?? "LIBERACAO_NEGADA");
-      return reply(200, result.estado, { ...lerSalao(deps.db, deps.agora(), deps.salaoRuleset), codigo: result.estado });
+      return reply(200, result.estado, { ...lerSalao(deps.db, agoraSalao, deps.salaoRuleset), codigo: result.estado });
     }
     if (rota === "vincularCanal") {
       const parsed = z.object({ contatoId: Id, patientId: Id, idempotencyKey: z.string().min(8).max(120) }).strict().safeParse(raw);

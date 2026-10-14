@@ -2,6 +2,9 @@ import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { ambienteHttp } from "./http-fixture.js";
 import { readFileSync } from "node:fs";
 import { SaidasHttp, respostaHttpValida } from "../../src/contracts/api/saidasHttp.js";
+import { salvarDraft, listarDrafts } from "../../src/kernel/ledger/drafts.js";
+import { confirmar } from "../../src/kernel/ledger/writeRouter.js";
+import { fonteSintetica, triagemBase } from "../fixtures/triagem.js";
 
 const fonteRotas = readFileSync("src/server/rotas.ts", "utf8");
 const tabelaRotas = fonteRotas.slice(fonteRotas.indexOf("const rota = req.url"), fonteRotas.indexOf("const reply ="));
@@ -59,6 +62,32 @@ it.each(["/consulta/agenda", "/consulta/apac"])("%s conserva o motivo da pendên
     const recuperada = await a.request(rota, "POST", "{}", a.token, "application/json");
     expect(recuperada.status).toBe(200);
     expect(JSON.parse(recuperada.body).hoje).toBe("2026-10-05");
+  } finally { await a.close(); }
+});
+
+it.each([null, {}])("triagem com ruleset indisponível %j é recusada antes de gravar", async salaoRuleset => {
+  const a = await ambienteHttp({ salaoRuleset });
+  try {
+    const triagem = triagemBase(), em = "2026-10-05T12:00:00Z";
+    const contexto = { patientId: triagem.patientId, encounterId: triagem.encounterId, tumorLotId: null };
+    salvarDraft(a.db, { draftId: "cadastro-sintetico", patientId: contexto.patientId, sourceId: "fixture", rawRef: "fixture-local", payload: {}, diagnostics: [], revision: 0, criadoEm: em });
+    expect(confirmar(a.db, { ...contexto, operationId: "cadastro-sintetico-op", reviewDecisionId: "revisao-cadastro", sessao: a.sessoes.obter(a.token)!, em,
+      registros: [{ draftId: "cadastro-sintetico", expectedRevision: 0, eventId: "cadastro-evento", tipo: "Paciente", fontes: [fonteSintetica()], revisao: "CONFIRMADO", payload: {
+        patientId: contexto.patientId, nome: "Paciente sintético", identificadores: [], nascimento: null, sexoCadastral: "NAO_INFORMADO", divergencia: false } }] }).estado).toBe("GRAVADA");
+    a.sessoes.selecionarConsulta(a.token, contexto);
+    const antes = listarDrafts(a.db, contexto.patientId);
+    for (let tentativa = 0; tentativa < 2; tentativa++) {
+      const r = await a.request("/consulta/salao/triagem", "POST", JSON.stringify({ triagem, expectedRevision: null }), a.token, "application/json");
+      expect(r.status).toBe(503);
+      expect(JSON.parse(r.body)).toMatchObject({ codigo: "RULESET_SALAO_INVALIDO", estado: "PENDENTE" });
+      expect(listarDrafts(a.db, contexto.patientId)).toEqual(antes);
+      expect(a.db.prepare("SELECT count(*) AS n FROM clinical_event WHERE tipo='Triagem'").get()?.n).toBe(0);
+    }
+    const liberar = await a.request("/consulta/salao/liberar", "POST", JSON.stringify({ patientId: contexto.patientId, encounterId: contexto.encounterId,
+      expectedRevision: 0, motivo: "decisão sintética", idempotencyKey: "liberacao-sintetica" }), a.token, "application/json");
+    expect(liberar.status).toBe(503);
+    expect(JSON.parse(liberar.body)).toMatchObject({ codigo: "RULESET_SALAO_INVALIDO", estado: "PENDENTE" });
+    expect(listarDrafts(a.db, contexto.patientId)).toEqual(antes);
   } finally { await a.close(); }
 });
 

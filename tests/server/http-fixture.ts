@@ -4,7 +4,7 @@ import { criarGateway, memoriaIdempotencia } from "../../src/kernel/gateway/gate
 import { criarServidorLocal } from "../../src/server/http.js";
 import { criarGerenciadorSessao } from "../../src/server/sessao.js";
 
-export async function ambienteHttp() {
+export async function ambienteHttp(opcoes: { salaoRuleset?: unknown } = {}) {
   let agora = "2026-10-05T12:00:00Z";
   const db = abrirLedger(":memory:");
   let efeitos = 0;
@@ -17,7 +17,7 @@ export async function ambienteHttp() {
       ENVIAR_EMAIL: { executar: async () => { efeitos++; return { ok: true, recibo: "email-teste" }; } },
       EXPORTAR_APAC: { executar: async () => { efeitos++; return { ok: true, recibo: "exportado-teste" }; } },
     } });
-  const server = criarServidorLocal({ db, sessoes, gateway, agora: () => agora, log: (e) => logs.push(e) });
+  const server = criarServidorLocal({ db, sessoes, gateway, ...opcoes, agora: () => agora, log: (e) => logs.push(e) });
   await new Promise<void>((resolve) => server.listening ? resolve() : server.once("listening", resolve));
   const address = server.address();
   if (!address || typeof address === "string") throw new Error("PORTA_AUSENTE");

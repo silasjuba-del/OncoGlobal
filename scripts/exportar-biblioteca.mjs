@@ -51,11 +51,17 @@ function stringsClinicas(value, contexto = "", caminho = "") {
   return chaves.concat(Object.entries(value).flatMap(([key, item]) => {
     const k = key.normalize("NFD").replace(/[\u0300-\u036f\W_]/g, "").toLowerCase();
     if (item === null || item === undefined) return [];
-    if (typeof item === "object") return stringsClinicas(item, `${contexto}.${k}`, `${caminho}.${key}`);
+    const identidade = /^(pacientes?|patients?|nomepaciente|patientname|patientid|pacienteid|nascimento|datanascimento|birthdate|dateofbirth|cpf|cns|prontuario|numeroprontuario|medicalrecordnumber|rg|nis|pis|endereco|address|telefone|phone)$/.test(k)
+      || (/(?:^|\.)(?:pacientes?|patients?)(?:\.|$)/.test(contexto) && /^(nome|name|id)$/.test(k));
+    // O rótulo não pode desaparecer ao entrar em um objeto/array (ex.: patientId: [valor]).
+    if (typeof item === "object") {
+      if (identidade) throw new Error("PHI_ESTRUTURAL_JSON");
+      return stringsClinicas(item, `${contexto}.${k}`, `${caminho}.${key}`);
+    }
     const s = String(item);
-    const vazioDeModelo = /^(?:\s*|[_\s-]+|\{\{[^{}]+\}\}|\[[^\]]+\]|FATO_CONFIRMADO|CONFIG|DECISAO_MEDICA)$/.test(s);
-    if (!vazioDeModelo && (/^(nomepaciente|patientname|patientid|pacienteid|nascimento|datanascimento|birthdate|dateofbirth|cpf|cns|prontuario|numeroprontuario|medicalrecordnumber|rg|nis|pis)$/.test(k)
-      || (/(?:^|\.)(?:pacientes?|patients?)(?:\.|$)/.test(contexto) && /^(nome|name|id)$/.test(k)))) throw new Error("PHI_ESTRUTURAL_JSON");
+    // Colchetes/chaves não provam placeholder: podem envolver um identificador real.
+    const vazioDeModelo = /^[\s_-]*$/.test(s);
+    if (!vazioDeModelo && identidade) throw new Error("PHI_ESTRUTURAL_JSON");
     // Medidas/contagens numéricas são dados tipados; IDs pessoais numéricos foram recusados acima.
     // O scanner bruto continua conferindo CPF/CNS/telefone no arquivo inteiro.
     if (typeof item !== "string") return [];
