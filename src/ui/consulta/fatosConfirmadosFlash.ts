@@ -136,7 +136,7 @@ export function fatosConfirmadosFlash(i: Contexto & { retrato?: unknown; diagnos
     diagnostico = "A CONFERIR — cabeçalho diagnóstico em conflito";
     if (candidatos.length) avisos.push(`Diagnóstico extraído preservado para conferência: ${valores}.`);
   } else if (candidatos.length > 1 || diagnosticoQualificado && candidatos.length) {
-    if (!diagnostico) diagnostico = "A CONFERIR — afirmações diagnósticas divergentes";
+    diagnostico = "A CONFERIR — afirmações diagnósticas divergentes";
     avisos.push(`Diagnósticos documentados A CONFERIR, sem eleição automática: ${valores}.`);
   } else if (candidatos.length === 1) {
     const unico = candidatos[0]!;
