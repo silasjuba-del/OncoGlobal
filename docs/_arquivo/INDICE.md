@@ -2,7 +2,7 @@
 
 Documentos e evidências de fases anteriores, preservados sem exclusão. Base integrada: `b12a6b6`. A rota atual é [RELATORIO-F1](../RELATORIO-F1.md), [matriz F1](../MATRIZ-RASTREABILIDADE-F1.md) e [decisões](../DECISOES.md).
 
-Cada arquivo abaixo tinha o mesmo blob em HEAD e origin/main antes da movimentação. Arquivos ainda consumidos pelo código ou pelos testes permaneceram no local original. Nenhum teste ou arquivo de corpus foi arquivado.
+Cada arquivo abaixo tinha o mesmo blob em HEAD e origin/main antes da movimentação. Treze documentos com consumidores preservados permanecem no local original. A ferramenta histórica `w5/ferramentas/vitest-lock.ps1` continua disponível: os dois runners de mutação usam seu destino neste arquivo, resolvido a partir de `$PSScriptRoot`, sem depender do checkout antigo `w5-orq`. Nenhum teste ou arquivo de corpus foi arquivado.
 
 | Origem | Arquivo preservado |
 |---|---|

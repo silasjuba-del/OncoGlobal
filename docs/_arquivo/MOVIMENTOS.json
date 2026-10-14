@@ -2321,7 +2321,11 @@
       "origem": "docs/w5/ferramentas/vitest-lock.ps1",
       "destino": "docs/_arquivo/w5/ferramentas/vitest-lock.ps1",
       "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
-      "base": "b12a6b6"
+      "base": "b12a6b6",
+      "consumidoresAtualizados": [
+        "tests/adv/f05-mutate-gates.ps1",
+        "tests/adv/f05-mutate-implicitos.ps1"
+      ]
     },
     {
       "origem": "docs/w6/APP-WIRING.patch",
