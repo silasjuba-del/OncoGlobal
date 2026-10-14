@@ -209,7 +209,7 @@ Base inicial P1: 195 IDs, 85 PARCIAL/110 A_AUDITAR por referências textuais, ze
 A W5 não está pronta: os SEM_TESTE de G/INV/N abaixo são lacunas reais. Os bloqueios de autorização/escopo e as ambiguidades de lote continuam documentados. Fonte de verdade do resultado de execução: RELATORIO-W5.md, não a presença de COBERTO em um componente isolado.
 
 ## F5 · Mutações dos gates
-RED-R2 mutou, **um por vez**, o corpo de cada função abaixo para sempre retornar `PASSA` numa worktree detached e limpa; restaurou bytes exatos após cada rodada e removeu somente a detached após checar raiz/status, sem `--force`. Fonte completa: `docs/w5/achados/_F05-MUTACAO.md`, runner `tests/adv/f05-mutate-gates.ps1`; baseline de `tests/kernel/kernel.test.ts` = 23 PASS.
+RED-R2 mutou, **um por vez**, o corpo de cada função abaixo para sempre retornar `PASSA` numa worktree detached e limpa; restaurou bytes exatos após cada rodada e removeu somente a detached após checar raiz/status, sem `--force`. Fonte completa: `docs/_arquivo/w5/achados/_F05-MUTACAO.md`, runner `tests/adv/f05-mutate-gates.ps1`; baseline de `tests/kernel/kernel.test.ts` = 23 PASS.
 
 | Gate | Teste unitário direcionado sob mutação | Exit | Limite de integração |
 |---|---|---:|---|

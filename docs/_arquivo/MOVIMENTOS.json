@@ -1,0 +1,2598 @@
+{
+  "baseIntegrada": "b12a6b6",
+  "movimentos": [
+    {
+      "origem": "docs/f0-complemento/EXECUCAO.md",
+      "destino": "docs/_arquivo/f0-complemento/EXECUCAO.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-complemento/INICIO-CODEX-2026-10-10.md",
+      "destino": "docs/_arquivo/f0-complemento/INICIO-CODEX-2026-10-10.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A1-base/01-tsc.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A1-base/01-tsc.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A1-base/02-fronteiras.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A1-base/02-fronteiras.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A1-base/03-corpus.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A1-base/03-corpus.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A1-base/04-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A1-base/04-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A1-base/05-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A1-base/05-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A1-base/06-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A1-base/06-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A1-base/07-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A1-base/07-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A1-base/08-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A1-base/08-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A1-base/09-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A1-base/09-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A1-base/HEAD.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A1-base/HEAD.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A1-base/adv-w8.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A1-base/adv-w8.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A1-base/comandos.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A1-base/comandos.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A1-base/redteam.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A1-base/redteam.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A1-base/resultados.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A1-base/resultados.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/01-tsc.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/01-tsc.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/02-fronteiras.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/02-fronteiras.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/03-corpus.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/03-corpus.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/04-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/04-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/05-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/05-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/06-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/06-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/07-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/07-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/08-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/08-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/09-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/09-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/10-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/10-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/HEAD.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/HEAD.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/adv-w8.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/adv-w8.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/comandos.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/comandos.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/redteam.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/redteam.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A3-integracao/resultados.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A3-integracao/resultados.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/01-tsc.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/01-tsc.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/02-fronteiras.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/02-fronteiras.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/03-corpus.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/03-corpus.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/04-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/04-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/05-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/05-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/06-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/06-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/07-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/07-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/08-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/08-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/09-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/09-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/10-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/10-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/HEAD.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/HEAD.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/adv-w8.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/adv-w8.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/comandos.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/comandos.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/redteam.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/redteam.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/A6-portao/resultados.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/A6-portao/resultados.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/01-tsc.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/01-tsc.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/02-fronteiras.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/02-fronteiras.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/03-corpus.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/03-corpus.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/04-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/04-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/05-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/05-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/06-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/06-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/07-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/07-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/08-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/08-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/08-identidade-isolada.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/08-identidade-isolada.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/09-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/09-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/10-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/10-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/HEAD.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/HEAD.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/adv-w8.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/adv-w8.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/comandos.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/comandos.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/redteam.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/redteam.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L1/resultados.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L1/resultados.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/01-tsc.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/01-tsc.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/02-fronteiras.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/02-fronteiras.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/03-corpus.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/03-corpus.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/04-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/04-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/05-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/05-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/06-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/06-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/07-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/07-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/08-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/08-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/09-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/09-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/10-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/10-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/HEAD.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/HEAD.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/adv-w8.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/adv-w8.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/comandos.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/comandos.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/redteam.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/redteam.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L2-C2/resultados.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L2-C2/resultados.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/01-tsc.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/01-tsc.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/02-fronteiras.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/02-fronteiras.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/03-corpus.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/03-corpus.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/04-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/04-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/05-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/05-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/06-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/06-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/07-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/07-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/08-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/08-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/09-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/09-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/10-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/10-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/HEAD.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/HEAD.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/adv-w8.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/adv-w8.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/comandos.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/comandos.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/redteam.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/redteam.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3-repeticao/resultados.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3-repeticao/resultados.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/01-tsc.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/01-tsc.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/02-fronteiras.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/02-fronteiras.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/03-corpus.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/03-corpus.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/04-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/04-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/05-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/05-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/05-reataque.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/05-reataque.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/06-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/06-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/07-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/07-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/08-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/08-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/08-reataque.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/08-reataque.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/09-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/09-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/10-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/10-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/HEAD.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/HEAD.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/adv-w8.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/adv-w8.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/comandos.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/comandos.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/redteam.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/redteam.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L3/resultados.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L3/resultados.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/01-tsc.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/01-tsc.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/02-fronteiras.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/02-fronteiras.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/03-corpus.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/03-corpus.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/04-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/04-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/05-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/05-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/06-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/06-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/07-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/07-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/08-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/08-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/09-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/09-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/10-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/10-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/10-diagnostico-forks.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/10-diagnostico-forks.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/HEAD.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/HEAD.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/adv-w8.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/adv-w8.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/comandos.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/comandos.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/redteam.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/redteam.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-corrigido/resultados.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-corrigido/resultados.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/01-tsc.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/01-tsc.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/02-fronteiras.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/02-fronteiras.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/03-corpus.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/03-corpus.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/04-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/04-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/05-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/05-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/06-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/06-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/07-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/07-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/08-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/08-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/09-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/09-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/10-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/10-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/HEAD.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/HEAD.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/adv-w8.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/adv-w8.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/comandos.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/comandos.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/redteam.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/redteam.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4-forks/resultados.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4-forks/resultados.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/01-tsc.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/01-tsc.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/02-fronteiras.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/02-fronteiras.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/03-corpus.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/03-corpus.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/04-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/04-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/05-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/05-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/06-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/06-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/07-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/07-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/08-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/08-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/09-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/09-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/10-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/10-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/HEAD.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/HEAD.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/adv-w8.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/adv-w8.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/comandos.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/comandos.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/redteam.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/redteam.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/C1-L4/resultados.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/C1-L4/resultados.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/01-tsc.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/01-tsc.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/02-fronteiras.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/02-fronteiras.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/03-corpus.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/03-corpus.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/04-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/04-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/05-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/05-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/06-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/06-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/07-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/07-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/08-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/08-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/09-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/09-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/10-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/10-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/HEAD.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/HEAD.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/adv-w8.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/adv-w8.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/comandos.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/comandos.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/redteam.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/redteam.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final-reataque/resultados.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final-reataque/resultados.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/01-tsc.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/01-tsc.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/02-fronteiras.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/02-fronteiras.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/03-corpus.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/03-corpus.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/04-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/04-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/05-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/05-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/06-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/06-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/07-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/07-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/08-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/08-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/09-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/09-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/10-bloco.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/10-bloco.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/HEAD.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/HEAD.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/adv-w8.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/adv-w8.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/comandos.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/comandos.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/redteam.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/redteam.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/D2-final/resultados.json",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/D2-final/resultados.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/auditoria-claude/pedido-anthropic.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/auditoria-claude/pedido-anthropic.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/auditoria-claude/pedido-delta-final.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/auditoria-claude/pedido-delta-final.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/auditoria-claude/pedido-preliminar.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/auditoria-claude/pedido-preliminar.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/auditoria-claude/pedido-reataque-final.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/auditoria-claude/pedido-reataque-final.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/c2-l5/phi-repo-test-attempt2.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/c2-l5/phi-repo-test-attempt2.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/c2-l5/phi-repo-test-final.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/c2-l5/phi-repo-test-final.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/c2-l5/phi-repo-test.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/c2-l5/phi-repo-test.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/c2-l5/typecheck-attempt2.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/c2-l5/typecheck-attempt2.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/c2-l5/typecheck-final.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/c2-l5/typecheck-final.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/c2-l5/typecheck.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/c2-l5/typecheck.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna3/bloco-vitest.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna3/bloco-vitest.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna3/corpus.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna3/corpus.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna3/fronteiras.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna3/fronteiras.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna3/tsc.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna3/tsc.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna3/ui-triagem.txt",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna3/ui-triagem.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4-e1/e1-impressao-gates.exit",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4-e1/e1-impressao-gates.exit",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4-e1/e1-impressao-gates.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4-e1/e1-impressao-gates.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4-e1/tsc.exit",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4-e1/tsc.exit",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/apac-fix-focused.exit",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/apac-fix-focused.exit",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/apac-fix-focused.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/apac-fix-focused.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/bloco-servidor-pre-apacfix.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/bloco-servidor-pre-apacfix.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/bloco-servidor.exit",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/bloco-servidor.exit",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/bloco-servidor.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/bloco-servidor.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/bloco-ui-attempt1.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/bloco-ui-attempt1.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/bloco-ui.exit",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/bloco-ui.exit",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/bloco-ui.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/bloco-ui.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/config-ui.exit",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/config-ui.exit",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/config-ui.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/config-ui.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/corpus.exit",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/corpus.exit",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/corpus.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/corpus.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/flash-w12-attempt1.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/flash-w12-attempt1.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/flash-w12-pre-apacfix.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/flash-w12-pre-apacfix.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/flash-w12.exit",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/flash-w12.exit",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/fronteiras.exit",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/fronteiras.exit",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/fronteiras.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/fronteiras.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/servidor-apac-isolado.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/servidor-apac-isolado.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/tsc.exit",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/tsc.exit",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna4/tsc.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna4/tsc.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna5/phi-scan-attempt1.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna5/phi-scan-attempt1.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna5/phi-scan-attempt2.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna5/phi-scan-attempt2.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna5/phi-scan-attempt3.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna5/phi-scan-attempt3.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna5/ui-round-1.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna5/ui-round-1.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna5/ui-round-2.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna5/ui-round-2.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/f0-fecha/evidencias/luna5/ui-round-3.log",
+      "destino": "docs/_arquivo/f0-fecha/evidencias/luna5/ui-round-3.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.ORIGINAL-2026-10-11.md",
+      "destino": "docs/_arquivo/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.ORIGINAL-2026-10-11.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/F1-CORPUS-PROMPT-MISTRAL-PACKS.md",
+      "destino": "docs/_arquivo/ondas/F1-CORPUS-PROMPT-MISTRAL-PACKS.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/F1-CORPUS-PROMPT-REDTEAM-GLM.md",
+      "destino": "docs/_arquivo/ondas/F1-CORPUS-PROMPT-REDTEAM-GLM.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/PR8-RECONCILIACAO-2026-10-13.md",
+      "destino": "docs/_arquivo/ondas/PR8-RECONCILIACAO-2026-10-13.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md",
+      "destino": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W10-CADEIA-ASTRA.md",
+      "destino": "docs/_arquivo/ondas/W10-CADEIA-ASTRA.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W10-CURSOR.md",
+      "destino": "docs/_arquivo/ondas/W10-CURSOR.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W10-FUGU.md",
+      "destino": "docs/_arquivo/ondas/W10-FUGU.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W10-PLANO.md",
+      "destino": "docs/_arquivo/ondas/W10-PLANO.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W10-REDTEAM-GLM.md",
+      "destino": "docs/_arquivo/ondas/W10-REDTEAM-GLM.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W12-GROK.md",
+      "destino": "docs/_arquivo/ondas/W12-GROK.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W2-CABECALHO-COMUM.md",
+      "destino": "docs/_arquivo/ondas/W2-CABECALHO-COMUM.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W2-CURSOR.md",
+      "destino": "docs/_arquivo/ondas/W2-CURSOR.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W2-FUGU.md",
+      "destino": "docs/_arquivo/ondas/W2-FUGU.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W2-GLM.md",
+      "destino": "docs/_arquivo/ondas/W2-GLM.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W3-CODEX.md",
+      "destino": "docs/_arquivo/ondas/W3-CODEX.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W3-GROK.md",
+      "destino": "docs/_arquivo/ondas/W3-GROK.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W4-FUGU.md",
+      "destino": "docs/_arquivo/ondas/W4-FUGU.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W5-FUGU-ULTRA.md",
+      "destino": "docs/_arquivo/ondas/W5-FUGU-ULTRA.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W6-CURSOR.md",
+      "destino": "docs/_arquivo/ondas/W6-CURSOR.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W7-CODEX.md",
+      "destino": "docs/_arquivo/ondas/W7-CODEX.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W8-ANTIGRAVITY.md",
+      "destino": "docs/_arquivo/ondas/W8-ANTIGRAVITY.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W8-COMUM.md",
+      "destino": "docs/_arquivo/ondas/W8-COMUM.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W8-GLM.md",
+      "destino": "docs/_arquivo/ondas/W8-GLM.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W8-MUSE.md",
+      "destino": "docs/_arquivo/ondas/W8-MUSE.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W9-CODEX-GATES.md",
+      "destino": "docs/_arquivo/ondas/W9-CODEX-GATES.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W9-COMUM.md",
+      "destino": "docs/_arquivo/ondas/W9-COMUM.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W9-CURSOR.md",
+      "destino": "docs/_arquivo/ondas/W9-CURSOR.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/ondas/W9-GROK.md",
+      "destino": "docs/_arquivo/ondas/W9-GROK.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-ASTRA.md",
+      "destino": "docs/_arquivo/progresso/W10-ASTRA.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-CURSOR.md",
+      "destino": "docs/_arquivo/progresso/W10-CURSOR.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-FUGU-ADV-EIXO.md",
+      "destino": "docs/_arquivo/progresso/W10-FUGU-ADV-EIXO.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-FUGU.md",
+      "destino": "docs/_arquivo/progresso/W10-FUGU.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-INT-APAC.md",
+      "destino": "docs/_arquivo/progresso/W10-INT-APAC.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-INT-FICHAS.md",
+      "destino": "docs/_arquivo/progresso/W10-INT-FICHAS.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-INT-GATES.md",
+      "destino": "docs/_arquivo/progresso/W10-INT-GATES.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-INT-PRESCRICAO.md",
+      "destino": "docs/_arquivo/progresso/W10-INT-PRESCRICAO.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-LUNA1.md",
+      "destino": "docs/_arquivo/progresso/W10-LUNA1.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-LUNA2.md",
+      "destino": "docs/_arquivo/progresso/W10-LUNA2.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-LUNA3.md",
+      "destino": "docs/_arquivo/progresso/W10-LUNA3.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-LUNA4.md",
+      "destino": "docs/_arquivo/progresso/W10-LUNA4.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-LUNA5.md",
+      "destino": "docs/_arquivo/progresso/W10-LUNA5.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-REDTEAM.md",
+      "destino": "docs/_arquivo/progresso/W10-REDTEAM.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W10-RETOMADA-JEV-FUGU.md",
+      "destino": "docs/_arquivo/progresso/W10-RETOMADA-JEV-FUGU.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W12-GROK.md",
+      "destino": "docs/_arquivo/progresso/W12-GROK.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W2-CURSOR.md",
+      "destino": "docs/_arquivo/progresso/W2-CURSOR.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W2-FUGU.md",
+      "destino": "docs/_arquivo/progresso/W2-FUGU.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W2-GLM.md",
+      "destino": "docs/_arquivo/progresso/W2-GLM.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W3-CODEX.md",
+      "destino": "docs/_arquivo/progresso/W3-CODEX.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W3-GROK.md",
+      "destino": "docs/_arquivo/progresso/W3-GROK.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W6-CURSOR.md",
+      "destino": "docs/_arquivo/progresso/W6-CURSOR.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W7-CODEX.md",
+      "destino": "docs/_arquivo/progresso/W7-CODEX.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W8-ANTIGRAVITY.md",
+      "destino": "docs/_arquivo/progresso/W8-ANTIGRAVITY.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W8-GLM.md",
+      "destino": "docs/_arquivo/progresso/W8-GLM.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/progresso/W8-MUSE.md",
+      "destino": "docs/_arquivo/progresso/W8-MUSE.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/CLOSURE-FUGU.md",
+      "destino": "docs/_arquivo/w10/CLOSURE-FUGU.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/CLOSURE-LUNA1.md",
+      "destino": "docs/_arquivo/w10/CLOSURE-LUNA1.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/CLOSURE-LUNA2.md",
+      "destino": "docs/_arquivo/w10/CLOSURE-LUNA2.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/CLOSURE-LUNA3.md",
+      "destino": "docs/_arquivo/w10/CLOSURE-LUNA3.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/CORRECOES-MUSE-37edd9d.md",
+      "destino": "docs/_arquivo/w10/CORRECOES-MUSE-37edd9d.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/ENTREGA-CASO-SINTETICO.json",
+      "destino": "docs/_arquivo/w10/ENTREGA-CASO-SINTETICO.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/ENTREGA-INTEGRACAO.md",
+      "destino": "docs/_arquivo/w10/ENTREGA-INTEGRACAO.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/ENTREGA-LUNA1.md",
+      "destino": "docs/_arquivo/w10/ENTREGA-LUNA1.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/ENTREGA-LUNA2.md",
+      "destino": "docs/_arquivo/w10/ENTREGA-LUNA2.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/ENTREGA-LUNA3.md",
+      "destino": "docs/_arquivo/w10/ENTREGA-LUNA3.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/ENTREGA-LUNA4.md",
+      "destino": "docs/_arquivo/w10/ENTREGA-LUNA4.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/ENTREGA-LUNA5.md",
+      "destino": "docs/_arquivo/w10/ENTREGA-LUNA5.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/ENTREGA-PLANO-ASTRA.md",
+      "destino": "docs/_arquivo/w10/ENTREGA-PLANO-ASTRA.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/ENTREGA-RESULTADO.md",
+      "destino": "docs/_arquivo/w10/ENTREGA-RESULTADO.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/ENTREGA-REVISAO-ASTRA.md",
+      "destino": "docs/_arquivo/w10/ENTREGA-REVISAO-ASTRA.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/EQUIPE-10-FATIAS-20261008.md",
+      "destino": "docs/_arquivo/w10/EQUIPE-10-FATIAS-20261008.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/FUGU-RODADA-2.md",
+      "destino": "docs/_arquivo/w10/FUGU-RODADA-2.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/ONCOASSIST-JEV.md",
+      "destino": "docs/_arquivo/w10/ONCOASSIST-JEV.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/PEDIDO-ASTRA-ORQUESTRA-EIXO-2026-10-07.md",
+      "destino": "docs/_arquivo/w10/PEDIDO-ASTRA-ORQUESTRA-EIXO-2026-10-07.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/PEDIDOS-ASTRA.md",
+      "destino": "docs/_arquivo/w10/PEDIDOS-ASTRA.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/PEDIDOS-CURSOR.md",
+      "destino": "docs/_arquivo/w10/PEDIDOS-CURSOR.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/PEDIDOS-FUGU.md",
+      "destino": "docs/_arquivo/w10/PEDIDOS-FUGU.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/PEDIDOS-INT-GATES.md",
+      "destino": "docs/_arquivo/w10/PEDIDOS-INT-GATES.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/PEDIDOS-INT-PRESCRICAO.md",
+      "destino": "docs/_arquivo/w10/PEDIDOS-INT-PRESCRICAO.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/PEDIDOS-LUNA1.md",
+      "destino": "docs/_arquivo/w10/PEDIDOS-LUNA1.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/PEDIDOS-LUNA2.md",
+      "destino": "docs/_arquivo/w10/PEDIDOS-LUNA2.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/PEDIDOS-LUNA3.md",
+      "destino": "docs/_arquivo/w10/PEDIDOS-LUNA3.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/PEDIDOS-LUNA4.md",
+      "destino": "docs/_arquivo/w10/PEDIDOS-LUNA4.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/PEDIDOS-LUNA5.md",
+      "destino": "docs/_arquivo/w10/PEDIDOS-LUNA5.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/REAUDITORIA-23937b2-CORRECOES.md",
+      "destino": "docs/_arquivo/w10/REAUDITORIA-23937b2-CORRECOES.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/REDTEAM-ACHADOS.md",
+      "destino": "docs/_arquivo/w10/REDTEAM-ACHADOS.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/REDTEAM-DISTRIBUICAO.md",
+      "destino": "docs/_arquivo/w10/REDTEAM-DISTRIBUICAO.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/RESPOSTAS-TECH-LEAD.md",
+      "destino": "docs/_arquivo/w10/RESPOSTAS-TECH-LEAD.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/RESULTADO-10-FATIAS-20261008.md",
+      "destino": "docs/_arquivo/w10/RESULTADO-10-FATIAS-20261008.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/ACHADOS-REVISAO.md",
+      "destino": "docs/_arquivo/w10/astra/ACHADOS-REVISAO.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/FUGU-RETURN-RETOMADA.txt",
+      "destino": "docs/_arquivo/w10/astra/FUGU-RETURN-RETOMADA.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/LUNA1.md",
+      "destino": "docs/_arquivo/w10/astra/LUNA1.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/LUNA2.md",
+      "destino": "docs/_arquivo/w10/astra/LUNA2.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/LUNA3.md",
+      "destino": "docs/_arquivo/w10/astra/LUNA3.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/LUNA4.md",
+      "destino": "docs/_arquivo/w10/astra/LUNA4.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/LUNA5.md",
+      "destino": "docs/_arquivo/w10/astra/LUNA5.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/MISSAO-FUGU-RETOMADA.txt",
+      "destino": "docs/_arquivo/w10/astra/MISSAO-FUGU-RETOMADA.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/PLANO-EXECUCAO.md",
+      "destino": "docs/_arquivo/w10/astra/PLANO-EXECUCAO.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/RETOMADA-10-FATIAS-JEV.md",
+      "destino": "docs/_arquivo/w10/astra/RETOMADA-10-FATIAS-JEV.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/REVISAO-ASTRA.md",
+      "destino": "docs/_arquivo/w10/astra/REVISAO-ASTRA.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/evidencias/20261007-035444-068-INTEGRACAO-HTTP-INDEPENDENTE.log",
+      "destino": "docs/_arquivo/w10/astra/evidencias/20261007-035444-068-INTEGRACAO-HTTP-INDEPENDENTE.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/evidencias/20261007-035444-068-INTEGRACAO-HTTP-INDEPENDENTE.log.boundaries.txt",
+      "destino": "docs/_arquivo/w10/astra/evidencias/20261007-035444-068-INTEGRACAO-HTTP-INDEPENDENTE.log.boundaries.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/evidencias/20261007-035444-068-INTEGRACAO-HTTP-INDEPENDENTE.log.corpus.txt",
+      "destino": "docs/_arquivo/w10/astra/evidencias/20261007-035444-068-INTEGRACAO-HTTP-INDEPENDENTE.log.corpus.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/evidencias/20261007-035444-068-INTEGRACAO-HTTP-INDEPENDENTE.log.vitest.txt",
+      "destino": "docs/_arquivo/w10/astra/evidencias/20261007-035444-068-INTEGRACAO-HTTP-INDEPENDENTE.log.vitest.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/evidencias/20261007-035530-436-FINAL-INTEGRADO.log",
+      "destino": "docs/_arquivo/w10/astra/evidencias/20261007-035530-436-FINAL-INTEGRADO.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/evidencias/20261007-035530-436-FINAL-INTEGRADO.log.boundaries.txt",
+      "destino": "docs/_arquivo/w10/astra/evidencias/20261007-035530-436-FINAL-INTEGRADO.log.boundaries.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/evidencias/20261007-035530-436-FINAL-INTEGRADO.log.corpus.txt",
+      "destino": "docs/_arquivo/w10/astra/evidencias/20261007-035530-436-FINAL-INTEGRADO.log.corpus.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/evidencias/20261007-035530-436-FINAL-INTEGRADO.log.vitest.txt",
+      "destino": "docs/_arquivo/w10/astra/evidencias/20261007-035530-436-FINAL-INTEGRADO.log.vitest.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/evidencias/20261007-035829-779-FINAL-ADVERSARIAL-W8.log",
+      "destino": "docs/_arquivo/w10/astra/evidencias/20261007-035829-779-FINAL-ADVERSARIAL-W8.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/evidencias/20261007-035829-779-FINAL-ADVERSARIAL-W8.log.vitest.txt",
+      "destino": "docs/_arquivo/w10/astra/evidencias/20261007-035829-779-FINAL-ADVERSARIAL-W8.log.vitest.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/evidencias/20261007-040139-690-FINAL-HTTP-RECIST-ESTATISTICA.log",
+      "destino": "docs/_arquivo/w10/astra/evidencias/20261007-040139-690-FINAL-HTTP-RECIST-ESTATISTICA.log",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/evidencias/20261007-040139-690-FINAL-HTTP-RECIST-ESTATISTICA.log.boundaries.txt",
+      "destino": "docs/_arquivo/w10/astra/evidencias/20261007-040139-690-FINAL-HTTP-RECIST-ESTATISTICA.log.boundaries.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/evidencias/20261007-040139-690-FINAL-HTTP-RECIST-ESTATISTICA.log.corpus.txt",
+      "destino": "docs/_arquivo/w10/astra/evidencias/20261007-040139-690-FINAL-HTTP-RECIST-ESTATISTICA.log.corpus.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/evidencias/20261007-040139-690-FINAL-HTTP-RECIST-ESTATISTICA.log.vitest.txt",
+      "destino": "docs/_arquivo/w10/astra/evidencias/20261007-040139-690-FINAL-HTTP-RECIST-ESTATISTICA.log.vitest.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w10/astra/validar.ps1",
+      "destino": "docs/_arquivo/w10/astra/validar.ps1",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w12/PARECER-CODEX-2026-10-09.md",
+      "destino": "docs/_arquivo/w12/PARECER-CODEX-2026-10-09.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/ACHADOS.md",
+      "destino": "docs/_arquivo/w5/ACHADOS.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/AMB.md",
+      "destino": "docs/_arquivo/w5/AMB.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/BRIEFING-AGENTES.md",
+      "destino": "docs/_arquivo/w5/BRIEFING-AGENTES.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/CLAIMS.md",
+      "destino": "docs/_arquivo/w5/CLAIMS.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/CONTRATO-PROPOSTAS.md",
+      "destino": "docs/_arquivo/w5/CONTRATO-PROPOSTAS.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/ESTADO.md",
+      "destino": "docs/_arquivo/w5/ESTADO.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/P1-DOMINIO.md",
+      "destino": "docs/_arquivo/w5/P1-DOMINIO.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/P1-E2E-UI.md",
+      "destino": "docs/_arquivo/w5/P1-E2E-UI.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/P1-KERNEL.md",
+      "destino": "docs/_arquivo/w5/P1-KERNEL.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/P1-REGRAS.md",
+      "destino": "docs/_arquivo/w5/P1-REGRAS.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/RELATORIO-W5.md",
+      "destino": "docs/_arquivo/w5/RELATORIO-W5.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-001.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-001.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-002.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-002.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-003.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-003.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-004.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-004.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-005.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-005.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-006.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-006.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-007.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-007.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-008.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-008.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-009.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-009.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-010.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-010.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-011.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-011.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-012.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-012.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-013.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-013.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-014.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-014.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-015.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-015.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-016.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-016.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-017.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-017.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-018.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-018.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-019.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-019.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/ADV-020.md",
+      "destino": "docs/_arquivo/w5/achados/ADV-020.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/_ADV001-HTTP-REATACK.md",
+      "destino": "docs/_arquivo/w5/achados/_ADV001-HTTP-REATACK.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/_F05-IMPLICITOS-FINAL.md",
+      "destino": "docs/_arquivo/w5/achados/_F05-IMPLICITOS-FINAL.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/_F05-MUTACAO.md",
+      "destino": "docs/_arquivo/w5/achados/_F05-MUTACAO.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/_P1-MATRIZ-RED.md",
+      "destino": "docs/_arquivo/w5/achados/_P1-MATRIZ-RED.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/_P1-RED-FINAL.md",
+      "destino": "docs/_arquivo/w5/achados/_P1-RED-FINAL.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/_P2-RODADA1-RED.md",
+      "destino": "docs/_arquivo/w5/achados/_P2-RODADA1-RED.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/_P2-RODADA2-RED.md",
+      "destino": "docs/_arquivo/w5/achados/_P2-RODADA2-RED.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/_P5-FINAL-RED.md",
+      "destino": "docs/_arquivo/w5/achados/_P5-FINAL-RED.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/achados/_P5-LIMPEZA-RED.md",
+      "destino": "docs/_arquivo/w5/achados/_P5-LIMPEZA-RED.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/ferramentas/varredura-ids.mjs",
+      "destino": "docs/_arquivo/w5/ferramentas/varredura-ids.mjs",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w5/ferramentas/vitest-lock.ps1",
+      "destino": "docs/_arquivo/w5/ferramentas/vitest-lock.ps1",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w6/APP-WIRING.patch",
+      "destino": "docs/_arquivo/w6/APP-WIRING.patch",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w7/COMMITS.json",
+      "destino": "docs/_arquivo/w7/COMMITS.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w7/COMO-EXECUTAR.md",
+      "destino": "docs/_arquivo/w7/COMO-EXECUTAR.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w7/PLANO-UI-PESQUISA.md",
+      "destino": "docs/_arquivo/w7/PLANO-UI-PESQUISA.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w7/VALIDACAO-UI-PESQUISA.md",
+      "destino": "docs/_arquivo/w7/VALIDACAO-UI-PESQUISA.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w7/VERIFY-FINAL.txt",
+      "destino": "docs/_arquivo/w7/VERIFY-FINAL.txt",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w7/conferir-apac-browser.js",
+      "destino": "docs/_arquivo/w7/conferir-apac-browser.js",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w7/exemplo-estudo.json",
+      "destino": "docs/_arquivo/w7/exemplo-estudo.json",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w7/fluxo-browser.js",
+      "destino": "docs/_arquivo/w7/fluxo-browser.js",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w7/kit-preview/apac-html.png",
+      "destino": "docs/_arquivo/w7/kit-preview/apac-html.png",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w7/kit-preview/apac-pg1.png",
+      "destino": "docs/_arquivo/w7/kit-preview/apac-pg1.png",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w7/kit-preview/workspace-pesquisa.png",
+      "destino": "docs/_arquivo/w7/kit-preview/workspace-pesquisa.png",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w7/patches/README.md",
+      "destino": "docs/_arquivo/w7/patches/README.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w7/patches/comando-estudio.patch",
+      "destino": "docs/_arquivo/w7/patches/comando-estudio.patch",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w8/ACHADOS-KIMI.md",
+      "destino": "docs/_arquivo/w8/ACHADOS-KIMI.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    },
+    {
+      "origem": "docs/w8/PEDIDOS-ANTIGRAVITY.md",
+      "destino": "docs/_arquivo/w8/PEDIDOS-ANTIGRAVITY.md",
+      "motivo": "Historico de F0 ou prompt superado; sem consumidor de codigo por caminho/nome",
+      "base": "b12a6b6"
+    }
+  ],
+  "mantidosPorConsumidor": [
+    {
+      "arquivo": "docs/ondas/ADENDO-W6-W7.md",
+      "consumidores": [
+        "corpus/templates/kit/apac-laudo.v1.json",
+        "corpus/templates/kit/orientacao-nutricional.v1.json",
+        "corpus/templates/kit/receita-sintomaticos.v1.json",
+        "corpus/templates/kit/relatorio-pericial.v1.json",
+        "corpus/templates/kit/requisicao-exames-ciclos.v1.json",
+        "corpus/templates/kit/sinais-alarme.v1.json",
+        "tests/corpus-kit/templates.test.ts"
+      ]
+    },
+    {
+      "arquivo": "docs/ondas/F0-FECHAMENTO-ASTRA.md",
+      "consumidores": [
+        "scripts/matriz-f0.mjs"
+      ]
+    },
+    {
+      "arquivo": "docs/ondas/F1-CORPUS-PROMPT-AUDITORIA-50-RECEITAS.md",
+      "consumidores": [
+        "corpus/2-receitas/especiais/receitas-especiais-estrutura.v1.RASCUNHO.json"
+      ]
+    },
+    {
+      "arquivo": "docs/ondas/W10-COMUM.md",
+      "consumidores": [
+        "scripts/verificar-manifesto.mjs",
+        "tests/w10-grok/grok-11-manifesto.test.ts"
+      ]
+    },
+    {
+      "arquivo": "docs/ondas/W10-GROK.md",
+      "consumidores": [
+        "scripts/verificar-manifesto.mjs",
+        "tests/w10-grok/grok-11-manifesto.test.ts"
+      ]
+    },
+    {
+      "arquivo": "docs/ondas/W8-KIMI.md",
+      "consumidores": [
+        "tests/cobertura/_mapa.test.ts"
+      ]
+    },
+    {
+      "arquivo": "docs/progresso/W10-GROK.md",
+      "consumidores": [
+        "scripts/verificar-manifesto.mjs",
+        "tests/w10-grok/grok-11-manifesto.test.ts"
+      ]
+    },
+    {
+      "arquivo": "docs/progresso/W8-KIMI.md",
+      "consumidores": [
+        "tests/cobertura/_mapa.test.ts"
+      ]
+    },
+    {
+      "arquivo": "docs/w10/PEDIDOS-GROK.md",
+      "consumidores": [
+        "scripts/verificar-manifesto.mjs",
+        "src/kernel/harness/ownership.ts"
+      ]
+    },
+    {
+      "arquivo": "docs/w10/PEDIDOS-INT-APAC.md",
+      "consumidores": [
+        "src/modules/apac/antiglosa.ts"
+      ]
+    },
+    {
+      "arquivo": "docs/w12/PEDIDOS-GROK.md",
+      "consumidores": [
+        "scripts/verificar-manifesto.mjs",
+        "src/kernel/harness/ownership.ts"
+      ]
+    },
+    {
+      "arquivo": "docs/w5/MATRIZ.md",
+      "consumidores": [
+        "tests/adv-w8/g07-t49-lateralidade.adv.ts",
+        "tests/adv-w8/g08-t50-anatomia-sexo.adv.ts",
+        "tests/adv-w8/g09-t51-ptnm-biopsia.adv.ts",
+        "tests/adv-w8/g27-saida-externa-limpa.adv.ts",
+        "tests/cobertura/_mapa.test.ts"
+      ]
+    },
+    {
+      "arquivo": "docs/w5/ferramentas/claim.ps1",
+      "consumidores": [
+        "tests/adv-w8/n19-manifesto-merge.adv.ts"
+      ]
+    }
+  ],
+  "naoMescladosPreservados": [],
+  "atualizacoesDeLinks": [
+    "docs/DECISOES.md",
+    "docs/FECHAMENTO-F0.md",
+    "docs/MATRIZ-RASTREABILIDADE-F1.md",
+    "docs/_arquivo/ondas/W10-CADEIA-ASTRA.md",
+    "docs/_arquivo/ondas/W10-CURSOR.md",
+    "docs/_arquivo/ondas/W10-FUGU.md",
+    "docs/_arquivo/ondas/W10-PLANO.md",
+    "docs/_arquivo/ondas/W10-REDTEAM-GLM.md",
+    "docs/_arquivo/ondas/W12-GROK.md",
+    "docs/_arquivo/ondas/W3-CODEX.md",
+    "docs/_arquivo/ondas/W3-GROK.md",
+    "docs/_arquivo/ondas/W4-FUGU.md",
+    "docs/_arquivo/ondas/W5-FUGU-ULTRA.md",
+    "docs/_arquivo/ondas/W6-CURSOR.md",
+    "docs/_arquivo/ondas/W7-CODEX.md",
+    "docs/_arquivo/ondas/W8-ANTIGRAVITY.md",
+    "docs/_arquivo/ondas/W8-COMUM.md",
+    "docs/_arquivo/ondas/W8-GLM.md",
+    "docs/_arquivo/ondas/W8-MUSE.md",
+    "docs/_arquivo/ondas/W9-CODEX-GATES.md",
+    "docs/_arquivo/ondas/W9-COMUM.md",
+    "docs/_arquivo/ondas/W9-CURSOR.md",
+    "docs/_arquivo/ondas/W9-GROK.md",
+    "docs/_arquivo/progresso/W10-ASTRA.md",
+    "docs/_arquivo/progresso/W10-CURSOR.md",
+    "docs/_arquivo/progresso/W10-FUGU-ADV-EIXO.md",
+    "docs/_arquivo/progresso/W10-FUGU.md",
+    "docs/_arquivo/progresso/W10-INT-GATES.md",
+    "docs/_arquivo/progresso/W10-INT-PRESCRICAO.md",
+    "docs/_arquivo/progresso/W10-LUNA2.md",
+    "docs/_arquivo/progresso/W10-LUNA3.md",
+    "docs/_arquivo/progresso/W10-LUNA4.md",
+    "docs/_arquivo/progresso/W10-LUNA5.md",
+    "docs/_arquivo/progresso/W10-REDTEAM.md",
+    "docs/_arquivo/progresso/W10-RETOMADA-JEV-FUGU.md",
+    "docs/_arquivo/progresso/W2-CURSOR.md",
+    "docs/_arquivo/progresso/W6-CURSOR.md",
+    "docs/_arquivo/progresso/W7-CODEX.md",
+    "docs/_arquivo/progresso/W8-ANTIGRAVITY.md",
+    "docs/_arquivo/w10/ENTREGA-PLANO-ASTRA.md",
+    "docs/_arquivo/w10/FUGU-RODADA-2.md",
+    "docs/_arquivo/w10/PEDIDO-ASTRA-ORQUESTRA-EIXO-2026-10-07.md",
+    "docs/_arquivo/w10/PEDIDOS-FUGU.md",
+    "docs/_arquivo/w10/REDTEAM-ACHADOS.md",
+    "docs/_arquivo/w10/REDTEAM-DISTRIBUICAO.md",
+    "docs/_arquivo/w10/astra/FUGU-RETURN-RETOMADA.txt",
+    "docs/_arquivo/w10/astra/LUNA1.md",
+    "docs/_arquivo/w10/astra/LUNA2.md",
+    "docs/_arquivo/w10/astra/LUNA4.md",
+    "docs/_arquivo/w10/astra/MISSAO-FUGU-RETOMADA.txt",
+    "docs/_arquivo/w10/astra/PLANO-EXECUCAO.md",
+    "docs/_arquivo/w10/astra/RETOMADA-10-FATIAS-JEV.md",
+    "docs/_arquivo/w5/AMB.md",
+    "docs/_arquivo/w5/BRIEFING-AGENTES.md",
+    "docs/_arquivo/w5/ESTADO.md",
+    "docs/_arquivo/w5/achados/ADV-006.md",
+    "docs/_arquivo/w5/achados/ADV-013.md",
+    "docs/_arquivo/w5/achados/_P1-RED-FINAL.md",
+    "docs/_arquivo/w5/ferramentas/varredura-ids.mjs",
+    "docs/_arquivo/w7/COMO-EXECUTAR.md",
+    "docs/f0-fecha/C2-L5-PHI.md",
+    "docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json",
+    "docs/f0-fecha/PHI-TRIAGEM.json",
+    "docs/f0-fecha/PROVA-EOL-MANIFESTO.json",
+    "docs/f0-fecha/Q50-ACEITE.json",
+    "docs/ondas/F0-FECHAMENTO-ASTRA.md",
+    "docs/ondas/W10-COMUM.md",
+    "docs/ondas/W10-GROK.md",
+    "docs/ondas/W8-KIMI.md",
+    "docs/planejamento/AUDITORIA-PRE-CODIGO-2026-10-07.md",
+    "docs/planejamento/DIARIO.md",
+    "docs/planejamento/fontes/M-0_PLN-001_papel-planejamento.md",
+    "docs/progresso/W10-GROK.md",
+    "docs/progresso/W8-KIMI.md",
+    "docs/referencias/evidencias/ONCOASSIST-KB-ACR-EMERGENCIAS-F2.md",
+    "docs/w10/PEDIDOS-GROK.md",
+    "docs/w5/MATRIZ.md"
+  ]
+}

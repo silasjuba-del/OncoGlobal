@@ -32,7 +32,7 @@ Todo material do Dr. Silas vira registro, **sempre desidentificado** ("Paciente 
 1. `C:\Users\silas\Projects\OncoGlobal\docs\CONTEXTO-NOVA-ABA.md`
 2. `docs/DECISOES.md` inteiro (Q01–Q59, A1–A11, D-W5, D-W8, D-W9-01…66 e a entrada "Integração W10")
 3. `docs/specs/ONCOASSIST-PROGRAMA-X-CODIGO.md`, `docs/specs/ARQUITETURA-ECOSSISTEMA.md`, `docs/specs/EXECSPEC-CKG-PROTOCOL.md`
-4. `docs/ondas/W10-COMUM.md` e `docs/w10/REDTEAM-DISTRIBUICAO.md`
+4. `docs/ondas/W10-COMUM.md` e `docs/_arquivo/w10/REDTEAM-DISTRIBUICAO.md`
 5. Memória: `C:\Users\silas\.claude\projects\C--Users-silas-iCloudDrive-Oncomind-ONCOGLOBAL-ONCOMIND-CANONICA\memory\project_oncoglobal_pendencias_w10.md`
 
 ## Estado atual (2026-10-07)

@@ -23,7 +23,7 @@ Esta matriz liga os aceites técnicos ao código e às provas. Os resultados exe
 
 ## Red team A12–A19
 
-Os identificadores são os de `docs/ondas/F1-CORPUS-PROMPT-REDTEAM-GLM.md`, não ataques homônimos de ondas anteriores.
+Os identificadores são os de `docs/_arquivo/ondas/F1-CORPUS-PROMPT-REDTEAM-GLM.md`, não ataques homônimos de ondas anteriores.
 
 | Ataque | Prova | Resultado e fronteira |
 | --- | --- | --- |

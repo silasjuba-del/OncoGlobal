@@ -1,7 +1,7 @@
 # W8-KIMI · 10 FATIAS · cobertura normativa e regressão (testes)
 
-> Leia primeiro `docs/ondas/W8-COMUM.md`. EXECUTOR = `KIMI`. Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w8-kimi` · branch `f0/w8-kimi`.
-> **Faixa:** só **testes novos**: `tests/cobertura/**`, `tests/fixtures/caso07/**`, `tests/adv-w8/**`, `docs/progresso/W8-KIMI.md`, `docs/w8/ACHADOS-KIMI.md`. **Você não edita `src/`.**
+> Leia primeiro `docs/_arquivo/ondas/W8-COMUM.md`. EXECUTOR = `KIMI`. Worktree `C:\Users\silas\Projects\OncoGlobal-wt\w8-kimi` · branch `f0/w8-kimi`.
+> **Faixa:** só **testes novos**: `tests/cobertura/**`, `tests/fixtures/caso07/**`, `tests/adv-w8/**`, `docs/progresso/W8-KIMI.md`, `docs/_arquivo/w8/ACHADOS-KIMI.md`. **Você não edita `src/`.**
 > **Regra de ouro:** teste que passa vai para `tests/cobertura/`. Teste que **falha** prova defeito ou lacuna: vai para `tests/adv-w8/` com extensão `*.adv.ts` (o Vitest regular só pega `*.test.ts`; rode com `npx vitest run tests/adv-w8/<arquivo>.adv.ts`) e vira item em `ACHADOS-KIMI.md` com causa provável e arquivo. Nunca ajuste a expectativa para casar com o código.
 > Mapa de lacunas: `docs/w5/MATRIZ.md` e o relatório W5 (SEM_TESTE: G-07, G-08, G-09, G-27, K-26, FN-16, N17, N19, T-34, T-49, T-50, T-51, T-56).
 

@@ -1,35 +1,46 @@
-# Relatório F1 — encerramento S12
+# F1 — estado de entrega e rota de continuidade
 
-Estado: **entrega técnica e auditoria S12 concluídas**. [PR #14](https://github.com/silasjuba-del/OncoGlobal/pull/14) concentra o gate final de integração em `codex/f1-conclusao`. Base `5e1b9f7` validada: 3350/3350 testes padrão, 620/620 F1, 240/240 W10 e 41/41 W8. A correção final de risco FN nulo acrescenta regressões e exige nova CI do HEAD no PR. Curadoria e integração clínica dos rascunhos do catálogo permanecem explicitamente separadas abaixo.
+Atualizado em 2026-10-14. **Fechamento em verificação; ainda não declarar a fase encerrada.**
+Base integrada: `main` em `b12a6b6`. Lote B1: [PR #17](https://github.com/silasjuba-del/OncoGlobal/pull/17), base de retomada `8633ebb`.
+Correções Codex: [PR #18](https://github.com/silasjuba-del/OncoGlobal/pull/18), ramo `codex/f1-finalizacao`, encadeado no #17.
+Os PRs não foram mesclados nesta retomada.
 
-## Escopo entregue
+## Correções comprovadas nesta retomada
 
-A consulta local incorpora documentos e OCR, exibe revisão com fonte, confirma fatos explicitamente, reavalia Retrato e setores, preserva edição em andamento, prepara documentos para conferência e assinatura e reabre versões históricas. Reconciliação de medicamentos, investigação, síntese proposta e dutos locais têm contratos e consumidores verificáveis. Maestro/ORK continua sendo o orquestrador; não foi introduzido outro backend.
+| Problema | Correção e prova |
+|---|---|
+| Peso com mais de 30 dias desaparecia da triagem nutricional | `9e58adb`: medida documentada com data/fonte e pedido de conferir atualidade; peso continua indisponível para dose. `tests/f1/b1/triagemNutricional-consulta.test.ts`. |
+| Duas versões de um lote eram escolhidas pela ordem | `9e58adb`: pendência explícita; nenhuma eleição de tumor. IMC independente continua podendo sustentar sugestão. Mesma prova HTTP, nas duas ordens. |
+| Sete projeções incorporavam fatos ou retificações posteriores ao encontro | `ae5389d`: limite do encontro antes da resolução de versões, em contexto, histórico cirúrgico, cumulativos, condicionais, instrumentos, interações e intervalo. `tests/f1/s12/horizonte-projecoes.test.ts` e `tests/f0c/intervalo-ciclo.test.ts`. |
+| Servidor enviava respostas de sucesso sem contrato | `305f44f`: 54 rotas vinculadas a schemas, compartilhados com a UI quando já existentes. Resposta inválida retorna `RESPOSTA_FORA_CONTRATO`, sem conteúdo no log. `tests/server/contratos-saida.test.ts`. Campos de conteúdo extensível continuam JSON; isto não substitui validação clínica. |
+| Pacote declarado público aceitava identificadores estruturais | `c9ad160`: nome rotulado, endereço e nascimento recusados antes de persistir. `tests/f1/s3/biblioteca.test.ts`. Links bibliográficos são permitidos; aprovação continua item a item. |
 
-Melhorias aproveitadas: identificação persistente do paciente/encontro, navegação por seções, fonte ao lado da revisão em telas largas e receitas manuais múltiplas sem perder as não selecionadas. Investigações e sínteses antigas saem da tela quando o contexto muda. Não foram adotados defaults de dose, liberação automática ou novos limiares clínicos das propostas externas.
+As regressões foram executadas em vermelho antes das respectivas correções. A bateria HTTP/dutos/biblioteca passou com 101 testes em 21 arquivos; a bateria temporal, com 56 testes em seis arquivos, seguida da regressão adicional de intervalo. Typecheck passou. Verificação integral e adversariais do HEAD final ainda devem ser concluídas e registradas abaixo. Execução interrompida sem totais não é PASS.
 
-## Correções de fechamento
+## Organização documental
 
-- Cadastro de paciente ambíguo bloqueia preparação/assinatura, inclusive quando muda depois da prévia. A identidade única é congelada no documento.
-- Impressos antigos sem metadados novos mantêm o render original; cadastro posterior não altera seus bytes.
-- Falha, timeout ou resposta inválida após início de envio LLM preserva resultado desconhecido e impede duplicar a transmissão pela mesma chave, inclusive após reinício do SQLite. Auditoria registra metadados/códigos, sem conteúdo clínico nem chave.
-- Metadado de interação condicionada inválido produz lacuna explícita. Lista completa sem par não gera falso aviso de falta de pares nem sinal verde. Exposição histórica permanece avaliada; listas conflitantes não são unidas. Reataque independente confirmou as correções.
-- Risco FN e clearance documentados têm consumo referenciado e lacunas de dado/aplicabilidade/regra, sem criar indicação terapêutica, fórmula nova ou ajuste de dose. Risco FN com valor interno nulo, não numérico ou não finito é dado ausente; zero explícito não é tratado como ausência.
+403 arquivos históricos já incorporados em `main` foram movidos, sem exclusão, para [o arquivo](_arquivo/INDICE.md). O relatório S12 anterior foi preservado [separadamente](_arquivo/RELATORIO-F1-S12-ANTERIOR.md), totalizando 404 documentos e evidências arquivados.
+Os 13 arquivos com consumidores conhecidos permanecem nos caminhos originais. O [mapa de movimentações](_arquivo/MOVIMENTOS.json) identifica origem, destino e consumidores. Referências foram atualizadas; gates, testes e corpus não foram arquivados.
+As 18 famílias de duplicatas foram inventariadas. As duas fachadas CNS já compartilhavam a implementação de `src/rules/cns.ts`; não há justificativa para remover compatibilidade pública apenas por serem idênticas.
 
-## Decisões e limites
+## Trabalho ainda necessário para o aceite integral A–P
 
-1A mantém o corpus clínico discutido privado. Esta entrega não publica esse conteúdo nem o ativa por aprovação coletiva. S3c é curadoria contínua: consultável e alerta são estados distintos, com aprovação por item. Cobertura incompleta continua explícita.
+| Eixo | Estado verificável |
+|---|---|
+| A / B1 | Correções originais preservadas e dois novos achados corrigidos no #18. Revisão final e integração pendentes. |
+| B / O | Inventário de duplicatas feito; fachadas públicas preservadas. Varredura completa de código morto e simplificação ainda não concluídas. |
+| C | Contratos de sucesso nas 54 rotas e testes das três rotas lacunares adicionados. A matriz positivo/negativo/borda de todas as rotas e gates não foi completada. |
+| D / E | Sete falhas temporais corrigidas. Testes anteriores de Maestro/ORK e sete setores existem; reexecução integral e E2E do HEAD final pendentes. |
+| F / G / H / I / J / L | B1 e consumidores existentes preservados. A auditoria completa das relações ficha/pack/exames e das jornadas ainda não equivale a encerramento. B2 continua dependente da fonte SISAC. |
+| K | Agregado de três cores preservado. Contrato versionado por critério ainda não implementado. |
+| M | Novas regressões e testes HTTP executados. Duas execuções completas finais e demonstração de navegador pendentes. |
+| N | Importação/curadoria local existente endurecida. Exportador do pacote integral da biblioteca ainda não implementado. |
+| P | Documentos históricos arquivados com índice. Worktrees e branches concorrentes preservadas; inventário/destinação final ainda pendentes. |
 
-A12 mapeou os 33 rascunhos originais, sem comprovar sua integração operacional: 17 células CTCAE não têm suporte vinculado, duas entradas de exames no pack gástrico antigo são textuais e faltam bindings de consumidores. Esses defeitos de catálogo estão em `ondas/F1-S12-PORTAS-CORPUS.md`. A entrega técnica e a auditoria S12 não equivalem ao encerramento da integração clínica de todo o corpus.
+## Dependências externas e limites mantidos
 
-2A aceita o comportamento do caso sintético. 3A autorizou integrar PR #10 em `codex/f1-conclusao`, concluído em `3b7ec8f`. A entrega complementar de PR #11 é reconciliada nesta S12 com as correções posteriores. `main` e `f1/integrado` não são destinos desta entrega.
-
-Ao pedido de credencial para prova ao vivo do provider, Silas decidiu: **“NAO PRECISA ESTE TOPICO”**. A prova ao vivo foi retirada do escopo por decisão humana, não marcada PASS. Os gates de código, PHI e transporte injetado permanecem. Voz, implantação multiusuária e aprovação de protocolos clínicos adicionais não fazem parte deste fechamento.
-
-## Evidências
-
-- [Matriz F1](MATRIZ-RASTREABILIDADE-F1.md): aceites S0–S11, A12–A19, consumidores e testes.
-- [Caso-guia](ondas/F1-CASO-GUIA.md): entradas, percurso, documentos, cinco cliques e reprodução.
-- [S12](ondas/F1-S12-RELATORIO.md): resultados atuais dos gates, medições e integração.
-
-Logs e vídeos sintéticos brutos permanecem locais. Reimpressão comprova geração HTML, não saída física em papel. Um setor avaliado com lacuna não equivale a cobertura clínica completa nem a prescrição liberada.
+- D-F1-48: a planilha SISAC é necessária para F1-B2. Não criar doses ou packs sem a fonte; o caminho local foi solicitado ao Dr. Silas.
+- Conflitos de decisões clínicas permanecem para decisão médica. Correção técnica não promove rascunho a regra aprovada.
+- Merge e liberação clínica exigem o aceite do Dr. Silas e os gates do repositório. Não contornar proteção.
+- Provider ao vivo foi dispensado anteriormente pelo Dr. Silas; não marcar PASS por teste injetado. Extração só local (D-F1-40), Jev mantido (D-F1-45), voz e operação multiusuária fora da F1.
+- Relação de aceites anteriores: [matriz F1](MATRIZ-RASTREABILIDADE-F1.md), [caso-guia](ondas/F1-CASO-GUIA.md), [S12 histórico](ondas/F1-S12-RELATORIO.md). Números históricos não valem como execução do HEAD atual.

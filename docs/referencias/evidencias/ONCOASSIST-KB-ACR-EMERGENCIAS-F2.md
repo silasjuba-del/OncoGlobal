@@ -10,7 +10,7 @@
 | **Médico** | Confirma alerta + pede exame | — |
 
 ## Fonte canônica
-- Tabela completa e status: [`AUDITORIA-ACR-v2.md`](./AUDITORIA-ACR-v2.md) + [`AUDITORIA-ACR-v2.csv`](./AUDITORIA-ACR-v2.csv)
+- Tabela completa e status: [`AUDITORIA-ACR-v2.md`](AUDITORIA-ACR-v2.md) + [`AUDITORIA-ACR-v2.csv`](AUDITORIA-ACR-v2.csv)
 - Ratings: PDFs ACR Appropriateness Criteria (links na auditoria)
 - Regra dura da auditoria: sem fonte = **UNKNOWN**; nada estimado
 

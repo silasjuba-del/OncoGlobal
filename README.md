@@ -8,14 +8,16 @@ Repo autônomo, do zero. Isolado. Não é ONCOMED.
 - Decisões do Dr. Silas: [`docs/DECISOES.md`](docs/DECISOES.md) (Q01–Q59 + A1–A11)
 - Eixo X/Y/Z (o que / o estado / a ação): [`docs/EIXO-CORRECAO.md`](docs/EIXO-CORRECAO.md) e [`docs/planejamento/fontes/`](docs/planejamento/fontes/)
 - Manifesto da primeira onda (histórico, não é o estado de hoje): [`docs/MANIFESTO-W1-F0.md`](docs/MANIFESTO-W1-F0.md)
-- Ramo de trabalho: `f0/w1-integrado`
+- Estado atual da F1: [`docs/RELATORIO-F1.md`](docs/RELATORIO-F1.md) e [`docs/MATRIZ-RASTREABILIDADE-F1.md`](docs/MATRIZ-RASTREABILIDADE-F1.md).
+- Base integrada: `main`. Branches de entrega passam por PR e pelos gates; a existência de um relatório histórico não comprova integração.
+- Legado preservado: [`docs/_arquivo/INDICE.md`](docs/_arquivo/INDICE.md). Prompts e estados de ondas arquivadas não orientam novas execuções.
 
 ## Stack
 Node 24 · TypeScript strict · Zod (contrato único) · SQLite (`node:sqlite`) · Vitest. Monólito modular, monousuário na v1.
 
 ## Verificar
 ```bash
-npm install
+npm ci
 npm run verify   # typecheck + fronteiras de import + testes
 ```
 

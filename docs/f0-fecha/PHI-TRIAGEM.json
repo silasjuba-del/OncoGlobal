@@ -497,15 +497,15 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "docs/ondas/W3-CODEX.md",
-      "sha256": "7addd8d58e0aebfd5012a44fa5b58215bc170080133ffa625f6f56d8846202a4",
+      "path": "docs/_arquivo/ondas/W3-CODEX.md",
+      "sha256": "4f3d0243048baf234ed84f03bf4df3fb62084905a061ac24ca5c1aea7e399711",
       "items": [
         {
           "type": "email",
           "line": 17,
           "ordinal": 0,
           "status": "public_author_metadata",
-          "evidenceRef": "docs/ondas/W3-CODEX.md:17; contexto de autoria/proveniência",
+          "evidenceRef": "docs/_arquivo/ondas/W3-CODEX.md:17; contexto de autoria/proveniência",
           "reason": "Metadado público de autoria em handoff/contexto de fonte; disposição individualizada e hash-bound.",
           "contextTag": null
         }
@@ -513,15 +513,15 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "docs/ondas/W3-GROK.md",
-      "sha256": "b1344107e0ea228627aca39a4bd3a0c6d5b398de40ebf88366c14850370aaee4",
+      "path": "docs/_arquivo/ondas/W3-GROK.md",
+      "sha256": "3b315fcb990dd46e7e0f927939e0920776a9ddd76677cd706f78e71c54044003",
       "items": [
         {
           "type": "email",
           "line": 2,
           "ordinal": 0,
           "status": "public_author_metadata",
-          "evidenceRef": "docs/ondas/W3-GROK.md:2; contexto de autoria/proveniência",
+          "evidenceRef": "docs/_arquivo/ondas/W3-GROK.md:2; contexto de autoria/proveniência",
           "reason": "Metadado público de autoria em handoff/contexto de fonte; disposição individualizada e hash-bound.",
           "contextTag": null
         }
@@ -529,15 +529,15 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "docs/ondas/W8-GLM.md",
-      "sha256": "6cf49c11143d8a98f008ab6b16f91c26bad626f35f6eebee349181dbd68dfa8e",
+      "path": "docs/_arquivo/ondas/W8-GLM.md",
+      "sha256": "b98c8d8f736df1f91e3ee5e992942f2e61f0becbd625d57b9057572a3da2c8c1",
       "items": [
         {
           "type": "email",
           "line": 8,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/W8-GLM.md:8",
+          "evidenceRef": "docs/_arquivo/ondas/W8-GLM.md:8",
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         },
@@ -546,7 +546,7 @@
           "line": 11,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/W8-GLM.md:11",
+          "evidenceRef": "docs/_arquivo/ondas/W8-GLM.md:11",
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         },
@@ -555,7 +555,7 @@
           "line": 14,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/W8-GLM.md:14",
+          "evidenceRef": "docs/_arquivo/ondas/W8-GLM.md:14",
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         },
@@ -564,7 +564,7 @@
           "line": 17,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/W8-GLM.md:17",
+          "evidenceRef": "docs/_arquivo/ondas/W8-GLM.md:17",
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         }
@@ -573,7 +573,7 @@
     },
     {
       "path": "docs/planejamento/AUDITORIA-PRE-CODIGO-2026-10-07.md",
-      "sha256": "5cab02b2916da5e8c27a2982706d5cd6f56fc72b58a94b13b3527bcd1fe79ae9",
+      "sha256": "51730ae4d0d1656d8d3d4dd60b45c484cf6b4218b1716430c37fe37cffffbaff",
       "items": [
         {
           "type": "cns",
@@ -638,15 +638,15 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "docs/progresso/W10-RETOMADA-JEV-FUGU.md",
-      "sha256": "abd4befad9b799ea2e50c91bf663fc1f549c502a3097d28c370fe151088774a5",
+      "path": "docs/_arquivo/progresso/W10-RETOMADA-JEV-FUGU.md",
+      "sha256": "ab3647b2710a9c24a2b5daea614b66b1f568668d37733beab2f7dbbe2a40b19b",
       "items": [
         {
           "type": "telefone",
           "line": 38,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/progresso/W10-RETOMADA-JEV-FUGU.md:38",
+          "evidenceRef": "docs/_arquivo/progresso/W10-RETOMADA-JEV-FUGU.md:38",
           "reason": "Codigo numerico de encerramento nativo de worker, explicitamente descrito no texto; nao e contato.",
           "contextTag": null
         }
@@ -654,7 +654,7 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "docs/progresso/W3-CODEX.md",
+      "path": "docs/_arquivo/progresso/W3-CODEX.md",
       "sha256": "d32d761bc5ed35c0d851c669056573d8ff14a3522c102315e926c8fe5ed5a60d",
       "items": [
         {
@@ -662,7 +662,7 @@
           "line": 91,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/progresso/W3-CODEX.md:91",
+          "evidenceRef": "docs/_arquivo/progresso/W3-CODEX.md:91",
           "reason": "Codigo de crash de worker Windows em evidencia tecnica, nao telefone.",
           "contextTag": null
         }
@@ -670,7 +670,7 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "docs/progresso/W8-GLM.md",
+      "path": "docs/_arquivo/progresso/W8-GLM.md",
       "sha256": "ec9f7088b8ba95445fc7d61598e09181343d96e2d1a7725589bb901b7d12b4ef",
       "items": [
         {
@@ -678,7 +678,7 @@
           "line": 22,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/progresso/W8-GLM.md:22",
+          "evidenceRef": "docs/_arquivo/progresso/W8-GLM.md:22",
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         },
@@ -687,7 +687,7 @@
           "line": 22,
           "ordinal": 1,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/progresso/W8-GLM.md:22",
+          "evidenceRef": "docs/_arquivo/progresso/W8-GLM.md:22",
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         },
@@ -696,7 +696,7 @@
           "line": 22,
           "ordinal": 2,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/progresso/W8-GLM.md:22",
+          "evidenceRef": "docs/_arquivo/progresso/W8-GLM.md:22",
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         },
@@ -705,7 +705,7 @@
           "line": 22,
           "ordinal": 3,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/progresso/W8-GLM.md:22",
+          "evidenceRef": "docs/_arquivo/progresso/W8-GLM.md:22",
           "reason": "Identificador de microprompt com formato de versão/arquivo; não é endereço de contato.",
           "contextTag": "microprompt_version_filename"
         }
@@ -714,7 +714,7 @@
     },
     {
       "path": "docs/progresso/W8-KIMI.md",
-      "sha256": "01b4442faafb815d6a21151ec7666b56971daa70a5e23ce153151a1d2db7d7b3",
+      "sha256": "f0bc5d35e5857bc7924e746bf08272cc973b021c47c7bd47c95cc8b203188e24",
       "items": [
         {
           "type": "cns",
@@ -946,7 +946,7 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "docs/w10/astra/REVISAO-ASTRA.md",
+      "path": "docs/_arquivo/w10/astra/REVISAO-ASTRA.md",
       "sha256": "275acc883d34abc250574c6e6113129d970ce3f37a0917c05c02fcb36a723588",
       "items": [
         {
@@ -954,7 +954,7 @@
           "line": 140,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/w10/astra/REVISAO-ASTRA.md:140",
+          "evidenceRef": "docs/_arquivo/w10/astra/REVISAO-ASTRA.md:140",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         }
@@ -962,7 +962,7 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "docs/w5/CLAIMS.md",
+      "path": "docs/_arquivo/w5/CLAIMS.md",
       "sha256": "0bc7b0e0a2a1cc887e43bfc96384d572b4854d69cfbe2f471c08ddfadb5c1f18",
       "items": [
         {
@@ -970,7 +970,7 @@
           "line": 87,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/w5/CLAIMS.md:87",
+          "evidenceRef": "docs/_arquivo/w5/CLAIMS.md:87",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         },
@@ -979,7 +979,7 @@
           "line": 88,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/w5/CLAIMS.md:88",
+          "evidenceRef": "docs/_arquivo/w5/CLAIMS.md:88",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         },
@@ -988,7 +988,7 @@
           "line": 132,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/w5/CLAIMS.md:132",
+          "evidenceRef": "docs/_arquivo/w5/CLAIMS.md:132",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         },
@@ -997,7 +997,7 @@
           "line": 133,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/w5/CLAIMS.md:133",
+          "evidenceRef": "docs/_arquivo/w5/CLAIMS.md:133",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         },
@@ -1006,7 +1006,7 @@
           "line": 134,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/w5/CLAIMS.md:134",
+          "evidenceRef": "docs/_arquivo/w5/CLAIMS.md:134",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         },
@@ -1015,7 +1015,7 @@
           "line": 135,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/w5/CLAIMS.md:135",
+          "evidenceRef": "docs/_arquivo/w5/CLAIMS.md:135",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         },
@@ -1024,7 +1024,7 @@
           "line": 136,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/w5/CLAIMS.md:136",
+          "evidenceRef": "docs/_arquivo/w5/CLAIMS.md:136",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         },
@@ -1033,7 +1033,7 @@
           "line": 137,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/w5/CLAIMS.md:137",
+          "evidenceRef": "docs/_arquivo/w5/CLAIMS.md:137",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         }
@@ -1041,7 +1041,7 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "docs/w5/P1-REGRAS.md",
+      "path": "docs/_arquivo/w5/P1-REGRAS.md",
       "sha256": "3caf6a944c3917674b0395e856e1b156832f7673a38268534d470e1ad2bfd6b2",
       "items": [
         {
@@ -1049,7 +1049,7 @@
           "line": 126,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/w5/P1-REGRAS.md:126",
+          "evidenceRef": "docs/_arquivo/w5/P1-REGRAS.md:126",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "commit_hash_40_or_64_hex"
         }
@@ -1057,16 +1057,16 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "docs/w7/kit-preview/apac-html.png",
+      "path": "docs/_arquivo/w7/kit-preview/apac-html.png",
       "sha256": "0c04a6d1fe0b1d769584d542dcbc723d177bf97b6a2acd2730a4ab662aa2f978",
       "category": "synthetic_visual_review",
       "magic": "png_signature",
-      "evidenceRef": "docs/w7/COMO-EXECUTAR.md:48",
+      "evidenceRef": "docs/_arquivo/w7/COMO-EXECUTAR.md:48",
       "reason": "Revisao visual root: formulario PENDENTE/vazio, rascunho sem paciente.",
       "items": []
     },
     {
-      "path": "docs/w7/kit-preview/apac-pg1.png",
+      "path": "docs/_arquivo/w7/kit-preview/apac-pg1.png",
       "sha256": "b430ef2b5157b4788aba6b1b798b6c0a0e10b19f8bbeac3ee3e5148242d36f35",
       "category": "synthetic_visual_review",
       "magic": "png_signature",
@@ -1075,11 +1075,11 @@
       "items": []
     },
     {
-      "path": "docs/w7/kit-preview/workspace-pesquisa.png",
+      "path": "docs/_arquivo/w7/kit-preview/workspace-pesquisa.png",
       "sha256": "28a9549331080759063ebdfb6504641c49b097c5915a49e27867ba86a1e9182c",
       "category": "synthetic_visual_review",
       "magic": "png_signature",
-      "evidenceRef": "docs/w7/COMO-EXECUTAR.md:57",
+      "evidenceRef": "docs/_arquivo/w7/COMO-EXECUTAR.md:57",
       "reason": "Revisao visual root: estudo marcado como ficticio e paciente de teste; sem alegacao universal de anonimato.",
       "items": []
     },
@@ -2473,7 +2473,7 @@
     },
     {
       "path": "docs/f0-fecha/CLAUDE-TRIAGEM-PHI.json",
-      "sha256": "a6addb0fbf6f65708ee9f18ee32b70d842a9d7633b2fab18d4e1d73dd4b1f56c",
+      "sha256": "9e167000db67ba73ab27a958b349cee01ae3a47be2924c363e1512fc66f15261",
       "hashMode": "utf8-lf",
       "items": [
         {
@@ -2549,7 +2549,7 @@
       ]
     },
     {
-      "path": "docs/f0-fecha/evidencias/C1-L1/08-bloco.log",
+      "path": "docs/_arquivo/f0-fecha/evidencias/C1-L1/08-bloco.log",
       "sha256": "36289cfcb3ccb684fa32d0a1552b5d631b4e448defca2dc5af6a4b86ba9fad75",
       "hashMode": "utf8-lf",
       "items": [
@@ -2560,12 +2560,12 @@
           "contextTag": null,
           "status": "technical_token_false_positive",
           "reason": "Código nativo de saída do processo Windows, não telefone.",
-          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/evidencias/C1-L1/08-bloco.log:17"
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/_arquivo/f0-fecha/evidencias/C1-L1/08-bloco.log:17"
         }
       ]
     },
     {
-      "path": "docs/f0-fecha/evidencias/C1-L1/resultados.json",
+      "path": "docs/_arquivo/f0-fecha/evidencias/C1-L1/resultados.json",
       "sha256": "618d2ac85b08cb1aa25e6d58d4ad72d690646a38e1ae0527aa7218abb750e6cc",
       "hashMode": "utf8-lf",
       "items": [
@@ -2576,7 +2576,7 @@
           "contextTag": null,
           "status": "technical_token_false_positive",
           "reason": "Código nativo de saída do processo Windows, não telefone.",
-          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/f0-fecha/evidencias/C1-L1/resultados.json:70"
+          "evidenceRef": "docs/f0-fecha/PORTABILIDADE-PHI.md; docs/_arquivo/f0-fecha/evidencias/C1-L1/resultados.json:70"
         }
       ]
     },
@@ -2756,7 +2756,7 @@
       ]
     },
     {
-      "path": "docs/f0-fecha/evidencias/D2-final/09-bloco.log",
+      "path": "docs/_arquivo/f0-fecha/evidencias/D2-final/09-bloco.log",
       "sha256": "23e8cb9ef2668cba3baa16e4aebdcaddba5fbf982477af69ce7953120e0fe76c",
       "hashMode": "utf8-lf",
       "items": [
@@ -2767,7 +2767,7 @@
           "contextTag": null,
           "status": "technical_token_false_positive",
           "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
-          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:21"
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/_arquivo/f0-fecha/evidencias/D2-final/09-bloco.log:21"
         },
         {
           "type": "email",
@@ -2776,7 +2776,7 @@
           "contextTag": null,
           "status": "technical_token_false_positive",
           "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
-          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:22"
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/_arquivo/f0-fecha/evidencias/D2-final/09-bloco.log:22"
         },
         {
           "type": "email",
@@ -2785,7 +2785,7 @@
           "contextTag": null,
           "status": "technical_token_false_positive",
           "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
-          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:23"
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/_arquivo/f0-fecha/evidencias/D2-final/09-bloco.log:23"
         },
         {
           "type": "email",
@@ -2794,7 +2794,7 @@
           "contextTag": null,
           "status": "technical_token_false_positive",
           "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
-          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:24"
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/_arquivo/f0-fecha/evidencias/D2-final/09-bloco.log:24"
         },
         {
           "type": "email",
@@ -2803,7 +2803,7 @@
           "contextTag": null,
           "status": "technical_token_false_positive",
           "reason": "Nome de arquivo citado no falso positivo histórico, não endereço pessoal.",
-          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:25"
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/_arquivo/f0-fecha/evidencias/D2-final/09-bloco.log:25"
         },
         {
           "type": "email",
@@ -2812,7 +2812,7 @@
           "contextTag": null,
           "status": "synthetic_declared",
           "reason": "Endereço reservado sintético da configuração Git temporária citado no log de falha.",
-          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:26"
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/_arquivo/f0-fecha/evidencias/D2-final/09-bloco.log:26"
         },
         {
           "type": "email",
@@ -2821,7 +2821,7 @@
           "contextTag": null,
           "status": "synthetic_declared",
           "reason": "Endereço reservado sintético da configuração Git temporária citado no log de falha.",
-          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/f0-fecha/evidencias/D2-final/09-bloco.log:27"
+          "evidenceRef": "docs/f0-fecha/CORRECAO-PHI-LEGADA.md; docs/_arquivo/f0-fecha/evidencias/D2-final/09-bloco.log:27"
         }
       ]
     },
@@ -2869,7 +2869,7 @@
           "line": 1698,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json:1698",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json:1698",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente. Revisto por Fugu em 2026-10-14 na F1-B1 (PR #17): mesmo UUID set_id; linhas e hash atualizados apos o lote clinico."
         }
       ]
@@ -2884,7 +2884,7 @@
           "line": 137,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/4-interacoes-contraindicacoes/contraindicacoes-complemento.v1.RASCUNHO.json:137",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/4-interacoes-contraindicacoes/contraindicacoes-complemento.v1.RASCUNHO.json:137",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
         }
       ]
@@ -2899,7 +2899,7 @@
           "line": 197,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/4-interacoes-contraindicacoes/contraindicacoes-complemento.v2.RASCUNHO.json:197",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/4-interacoes-contraindicacoes/contraindicacoes-complemento.v2.RASCUNHO.json:197",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
         }
       ]
@@ -2914,7 +2914,7 @@
           "line": 318,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/4-interacoes-contraindicacoes/interacoes-complemento.v1.RASCUNHO.json:318",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/4-interacoes-contraindicacoes/interacoes-complemento.v1.RASCUNHO.json:318",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
         }
       ]
@@ -2929,7 +2929,7 @@
           "line": 479,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/4-interacoes-contraindicacoes/interacoes-complemento.v2.RASCUNHO.json:479",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/4-interacoes-contraindicacoes/interacoes-complemento.v2.RASCUNHO.json:479",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
         }
       ]
@@ -2944,7 +2944,7 @@
           "line": 970,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:970",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:970",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
         },
         {
@@ -2952,7 +2952,7 @@
           "line": 989,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:989",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:989",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
         },
         {
@@ -2960,7 +2960,7 @@
           "line": 1143,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:1143",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:1143",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
         },
         {
@@ -2968,7 +2968,7 @@
           "line": 1163,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:1163",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:1163",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
         },
         {
@@ -2976,7 +2976,7 @@
           "line": 1183,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:1183",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:1183",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
         },
         {
@@ -2984,7 +2984,7 @@
           "line": 1202,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:1202",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/5-ctcae-acao/ctcae-acao.v2.RASCUNHO.json:1202",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
         }
       ]
@@ -2999,7 +2999,7 @@
           "line": 723,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json:723",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json:723",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente. Revista por Claude em 2026-10-12 na integração com f1/integrado 2f1e795: mesmo UUID set_id, hash e linha atualizados. Revisto por Fugu em 2026-10-14 na F1-B1 (PR #17): mesmo UUID set_id; linhas e hash atualizados apos o lote clinico."
         },
         {
@@ -3007,7 +3007,7 @@
           "line": 909,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json:909",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json:909",
           "reason": "Revisao Fugu em 2026-10-14 (F1-B1, PR #17): candidato contido integralmente no UUID set_id openFDA da bula de doxorrubicina citada no novo protocolo adrenal-cca-edp-sem-mitotano; nao e telefone de paciente."
         }
       ]
@@ -3022,7 +3022,7 @@
           "line": 2557,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/sarcomas/pack-sarcomas.v2.RASCUNHO.json:2557",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/sarcomas/pack-sarcomas.v2.RASCUNHO.json:2557",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente. Revista por Claude em 2026-10-12 na integração com f1/integrado 2f1e795: mesmo UUID set_id, hash e linha atualizados."
         }
       ]
@@ -3037,7 +3037,7 @@
           "line": 1395,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/tireoide/pack-tireoide.v2.RASCUNHO.json:1395",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/6-pack-tumor/tireoide/pack-tireoide.v2.RASCUNHO.json:1395",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente. Revista por Claude em 2026-10-12 na integração com f1/integrado 2f1e795: mesmo UUID set_id, hash e linha atualizados."
         }
       ]
@@ -3052,7 +3052,7 @@
           "line": 47,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md:47",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md:47",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
         },
         {
@@ -3060,7 +3060,7 @@
           "line": 65,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md:65",
+          "evidenceRef": "docs/_arquivo/ondas/PRE-F1-CORRECAO-2026-10-12.md; docs/ondas/F1-CORPUS-BUSCAS-CONSOLIDADAS.md:65",
           "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente."
         }
       ]
