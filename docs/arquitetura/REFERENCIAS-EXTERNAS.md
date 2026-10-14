@@ -29,13 +29,13 @@ separação extração → regra → minuta → decisão; autoridade médica (s�
 - **FONTE:** FHIR CR (PlanDefinition/`condition`, CQL como ideia, não como motor).
 - **CAPACIDADE REUTILIZÁVEL:** semáforo de ciclo com motivo por critério.
 - **LOCAL NO ONCOGLOBAL:** `src/rules/elegibilidadeCiclo.ts`, `src/server/f0c/avaliacaoConsulta.ts`.
-- **CONTRATO AFETADO:** `SinalElegibilidade` (já tem `motivos[]`).
+- **CONTRATO AFETADO:** `SinalElegibilidade` (`src/contracts/api/elegibilidadeCiclo.ts`) hoje só tem um `estado` agregado e `motivos[]` em texto; `avaliacaoConsulta.ts` junta neutrófilos e plaquetas num único sinal. A fatia precisa de um contrato novo e versionado de critério (id do critério, estado ATENDE / NAO_ATENDE / AUSENTE / CONFLITO, fonte, referência da regra), mantendo `SinalElegibilidade` como agregado derivado e compatível.
 - **RISCO DE ACOPLAMENTO:** médio se adotar CQL/motor FHIR → rejeitado; baixo como padrão.
 - **RISCO CLÍNICO:** médio: critério mal codificado gera falso VERDE. Mitiga: ausente nunca é VERDE.
 - **RISCO OPERACIONAL:** baixo.
 - **DECISÃO:** ADAPTAR (padrão sim; CQL/motor externo não — cálculos determinísticos e offline em TS).
 - **JUSTIFICATIVA:** coerente com "LLM só para cognição" e regras puras já existentes.
-- **TESTE NECESSÁRIO:** tabela de critérios × {presente, ausente, conflito, vencido}: nenhum caminho com dado ausente produz VERDE.
+- **TESTE NECESSÁRIO:** tabela de critérios × {presente, ausente, conflito, vencido}: cada critério devolve o próprio estado; um critério reprovado não esconde outro AUSENTE; nenhum caminho com dado ausente produz VERDE.
 
 ## 3. Plano / recomendação como proposta, não ordem
 - **PADRÃO:** recomendação nasce como proposta (`RequestGroup` com `intent=proposal`) e só vira ordem após decisão humana.
@@ -105,7 +105,7 @@ separação extração → regra → minuta → decisão; autoridade médica (s�
 - **RISCO CLÍNICO:** baixo.
 - **RISCO OPERACIONAL:** baixo.
 - **DECISÃO:** ADAPTAR (inspiração de composição; código próprio).
-- **TESTE NECESSÁRIO:** testes de UI da jornada: ≤ 5 cliques no retorno de rotina (Q18) e "validar tudo" bloqueado com VERMELHO.
+- **TESTE NECESSÁRIO:** testes de UI da jornada: ≤ 5 cliques no retorno de rotina (Q18). Com VERMELHO, "validar tudo" continua disponível (K-14, `docs/PLANO-FINAL-ONCOGLOBAL-v1.1.md`): a tela lista os alertas, o clique registra ciente (`reconhecidoEm`) e não vale como autorização clínica (já coberto em `tests/ui-telas/consulta.test.tsx`).
 
 ## 9. Atendimento → farmácia → dispensação; organização por setores
 - **PADRÃO:** ordem médica assinada gera tarefa de farmácia/dispensação rastreável, por setor.
