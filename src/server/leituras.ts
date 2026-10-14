@@ -373,9 +373,12 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   // vigentes no horizonte do encontro. Só SUGERE: não gera pedido, não trava e não entra no semáforo.
   const presenteNoLote = (d: { campo: string; valor: string | null } | undefined) =>
     d?.campo === "PRESENTE" && typeof d.valor === "string" && d.valor.trim() ? d.valor : null;
+  // Armadilha (a): encontro reaberto não usa a versão do lote confirmada em encontro POSTERIOR.
+  const loteNoHorizonte = lote ? porTipo(all.filter((e) => e.patientId === patientId && Date.parse(e.criadoEm) <= horizontePlaquetas),
+    "TumorLot", TumorLot).find((x) => x.event.patientId === patientId && x.value.tumorLotId === lote.tumorLotId)?.value : undefined;
   const triagemNutricional = sugerirTriagemNutricional({
-    tumor: [presenteNoLote(lote?.topografia), presenteNoLote(lote?.histologia)].filter((t): t is string => t !== null).join(" ") || null,
-    cid: presenteNoLote(lote?.cid),
+    tumor: [presenteNoLote(loteNoHorizonte?.topografia), presenteNoLote(loteNoHorizonte?.histologia)].filter((t): t is string => t !== null).join(" ") || null,
+    cid: presenteNoLote(loteNoHorizonte?.cid),
     imc: imcDeMedidas(avaliacao.dadosCorporais.pesoKg, avaliacao.dadosCorporais.alturaCm),
   });
   const sugestaoNutricional = textoSugestaoNutricional(triagemNutricional);
