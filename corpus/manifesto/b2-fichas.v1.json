@@ -293,7 +293,7 @@
     {
       "arquivo": "corpus/fichas/nao-informado-ficha-institucional/folinato-5-fu-semanal-p1577__nao-especificado.json",
       "templateId": "FICHA.nao-informado-ficha-institucional.folinato-5-fu-semanal-p1577__nao-especificado@1.0.0",
-      "hash": "5f24a5e3b223df0f8a2f1d9096ae54582bdae56a9b4a9f07522752adec5da059",
+      "hash": "c33d53d3014628bdfd2fc9429e3d82db3524d9e12831cdd2f9dd2e9d3cd1686a",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "Folinato 20 mg/m² + 5-FU semanal, D1–D36 (D-F1-26); tumor de origem não comprovado",
@@ -385,7 +385,7 @@
     {
       "arquivo": "corpus/fichas/nao-informado-ficha-institucional/5-fu-folinato-flox-p1512__nao-especificado.json",
       "templateId": "FICHA.nao-informado-ficha-institucional.5-fu-folinato-flox-p1512__nao-especificado@1.0.0",
-      "hash": "5de6194ba3df76df1d7bb423fb08fb3480d769eae43ea22b0a5cc6b151e19c14",
+      "hash": "b6d5e6f62869877fad28d28c431ba7e567a982818a86b3b1576335f13b1c7ae6",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "5-FU + folinato em D1 e D2 (D-F1-27); sem oxaliplatina; tumor de origem não comprovado",
@@ -477,7 +477,7 @@
     {
       "arquivo": "corpus/fichas/primario-desconhecido-cup/cisplatina-docetaxel__nao-especificado.json",
       "templateId": "FICHA.primario-desconhecido-cup.cisplatina-docetaxel__nao-especificado@1.0.0",
-      "hash": "a49393bd963b32196ddf5bce8225af19fb8e66b0f78672f6595be7efbf7bb89b",
+      "hash": "278fb176810989ec4b4718a7bba93509172e39430d2d9e0e5116f66040f50133",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CUP metastático, 1ª linha (D-F1-36); variante preparada: Greco 2000 75/75 q3sem",
@@ -642,7 +642,7 @@
     {
       "arquivo": "corpus/fichas/primario-desconhecido-cup/carboplatina-paclitaxel-21-21-dias__nao-especificado.json",
       "templateId": "FICHA.primario-desconhecido-cup.carboplatina-paclitaxel-21-21-dias__nao-especificado@1.0.0",
-      "hash": "18861fdc033341a6742f57a189b54bafb84376745ae25b14f66eff640fde03f2",
+      "hash": "0e9f34013d0b29b453f5df251cfcaa24c3099e1fbf4c2e4d18b8dd1cc53d78d3",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CUP, 1ª linha (D-F1-36); variante preparada: BC PUCAT/HeCOG (paclitaxel 200 → carbo AUC 6)",
@@ -750,7 +750,7 @@
     {
       "arquivo": "corpus/fichas/primario-desconhecido-cup/docetaxel-gemcitabina__nao-especificado.json",
       "templateId": "FICHA.primario-desconhecido-cup.docetaxel-gemcitabina__nao-especificado@1.0.0",
-      "hash": "c9500df1dd3ee0445b8d9aa73f6067e00a689c3d340ace31a290319b8f5286e6",
+      "hash": "cb42a75da17db139cd9503523e3dba512b5fe4c2ade93c816e6f8547769b58c9",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CUP, 1ª linha (D-F1-36); variante preparada: Pouessel 2004 (gem D1/D8 + doc D8)",
@@ -852,7 +852,7 @@
     {
       "arquivo": "corpus/fichas/primario-desconhecido-cup/cisplatina-vinorelbina__nao-especificado.json",
       "templateId": "FICHA.primario-desconhecido-cup.cisplatina-vinorelbina__nao-especificado@1.0.0",
-      "hash": "8db88dbbb24a719f0f5a6970bbcce2d31d591b993cbe01abb87f652236b31912",
+      "hash": "a650d0fe458b150e60ba89bb59d15ce5d6602f09f88a62e27580f9bc94f27777",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CUP (D-F1-36); fonte direta da DUPLA não localizada — ficha-dossiê (todos os campos de dose NAO_LOCALIZADO)",
@@ -1004,7 +1004,7 @@
     {
       "arquivo": "corpus/fichas/primario-desconhecido-cup/cisplatina-5-fluorouracil-cup-escamoso__escamoso-metastatico-primario-oculto.json",
       "templateId": "FICHA.primario-desconhecido-cup.cisplatina-5-fluorouracil-cup-escamoso__escamoso-metastatico-primario-oculto@1.0.0",
-      "hash": "8178d913c2f710f9061af297d4a3fc7862ad7ec596c6ba83240db278eca3636b",
+      "hash": "fea3d48956b37f568d9efa428f07cbad4b5b4cddf0110e32b5077229321ed69a",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CUP de histologia escamosa com investigação de cabeça e pescoço completa negativa (Khansur 1995)",
@@ -1159,7 +1159,7 @@
     {
       "arquivo": "corpus/fichas/ewing/ewing-vdc-ciclo-a-alternado-ao-ie__1-linha-dose-denso-q14.json",
       "templateId": "FICHA.ewing.ewing-vdc-ciclo-a-alternado-ao-ie__1-linha-dose-denso-q14@1.0.0",
-      "hash": "1ca66e362aee69479707b44651de4c7c85c759825a774d4d2436d7064ac8d9e8",
+      "hash": "3743c536c570f5a8fb22d057835ff2e92b104130ecb265c927c13fee1a3f1395",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "Ewing localizado/metastático, 1ª linha VDC/IE interval-compressed (SBOC 2026 ósseos p. 15; Womer 2012)",
@@ -1318,7 +1318,7 @@
     {
       "arquivo": "corpus/fichas/ewing/ewing-ie-ciclo-b-alternado-ao-vdc__1-linha-dose-denso-q14.json",
       "templateId": "FICHA.ewing.ewing-ie-ciclo-b-alternado-ao-vdc__1-linha-dose-denso-q14@1.0.0",
-      "hash": "f0f7fb299d79a2f8c5fa6ec0f629f0570c5500b20133adb0d3a62c99d3a76735",
+      "hash": "f94aaf552c0ccc6811300f8145b708399b0b0027b4d5e5e9e03a966986715f31",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "Ewing, braço IE do VDC/IE interval-compressed (ifosfamida+etoposídeo D1–D5)",
@@ -1459,7 +1459,7 @@
     {
       "arquivo": "corpus/fichas/osteossarcoma/map-ciclos-1-4__nao-especificado.json",
       "templateId": "FICHA.osteossarcoma.map-ciclos-1-4__nao-especificado@1.0.0",
-      "hash": "aa6a1ba7c63ff607481b7f42f9ca96226273a6a6e05a689eb651093ecd81f08a",
+      "hash": "82b6e7a91beac5fee55f9079609b16d53c0dbce411011585b9d7f2aee811dbad",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "Osteossarcoma de alto grau, neoadjuvante/adjuvante (SBOC p.12 ≤25 anos; corte externo das fontes é 40)",
@@ -1656,7 +1656,7 @@
     {
       "arquivo": "corpus/fichas/osteossarcoma/map-ciclos-5-6-sem-cisplatina__nao-especificado.json",
       "templateId": "FICHA.osteossarcoma.map-ciclos-5-6-sem-cisplatina__nao-especificado@1.0.0",
-      "hash": "501f8e0ed12643c8b69677fdf26a5b07fe869e6aaa11fa58218b195c25cd756e",
+      "hash": "8141b1d3d73bb15022ba954dc8552fb42b90eb3a9ad3b4c94a790a8bdf1dbcfa",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "Osteossarcoma, ciclos finais do MAP (eviQ 1901: sem cisplatina; MTX nas semanas 3 e 4)",
@@ -1775,7 +1775,7 @@
     {
       "arquivo": "corpus/fichas/osteossarcoma/ap-doxorrubicina-cisplatina__nao-especificado.json",
       "templateId": "FICHA.osteossarcoma.ap-doxorrubicina-cisplatina__nao-especificado@1.0.0",
-      "hash": "c80b44eb0ca8e32ec085446b9529f5efdfb7902121e85e390f10b8c2dd8f693c",
+      "hash": "1b4381779582d00ab71d3b95aa548b9851c174b3144a12152087525f73faea16",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "Osteossarcoma sem MTX (SBOC p.12 usa AP >25 anos; SAAVAP cobre osteossarcoma avançado)",
@@ -1933,7 +1933,7 @@
     {
       "arquivo": "corpus/fichas/vulva/cisplatina-semanal-rxt-vulva__concomitante-a-rt.json",
       "templateId": "FICHA.vulva.cisplatina-semanal-rxt-vulva__concomitante-a-rt@1.0.0",
-      "hash": "c061b160ac1b8f8bc26472dfb649b795eea6c526a66568bed4c6783888c250ea",
+      "hash": "1457a3144a5ef8f6b1b1fe2a2d499200505fc244e640b7c8bb6cbae2e7aec4ab",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CEC de vulva localmente avançado (T3/T4 não ressecável por vulvectomia radical), previamente não tratado (eviQ 1529)",
@@ -2076,7 +2076,7 @@
     {
       "arquivo": "corpus/fichas/vulva/carboplatina-paclitaxel-21-21-dias-vulva__nao-especificado.json",
       "templateId": "FICHA.vulva.carboplatina-paclitaxel-21-21-dias-vulva__nao-especificado@1.0.0",
-      "hash": "35052cec16f6e23f7d001cc5fc2683b22e285a928470b1f816952da27e0a4d5c",
+      "hash": "1c6a174f264ff1d41c4411bd9a7acb01482a7905671a77e1ff3a19c97435d39c",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CEC/adenocarcinoma de vulva recorrente ou avançado, inelegível a quimiorradioterapia (GOCXCAT inclui vulva)",
@@ -2182,7 +2182,7 @@
     {
       "arquivo": "corpus/fichas/cec-de-pele-cutaneo/cemiplimabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas.json",
       "templateId": "FICHA.cec-de-pele-cutaneo.cemiplimabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas@1.0.0",
-      "hash": "0d0b9839eb328ad7bb9a632eaaed38bc65a51ecea786613eabf8c5bad3110832",
+      "hash": "3e1544d835b6013d58ed1d4c4171fe8f9a485b2208cda1e22e11ec9e0edf666c",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CSCC metastático ou localmente avançado sem candidatura a cirurgia/RT curativas (eviQ 4151)",
@@ -2224,7 +2224,7 @@
     {
       "arquivo": "corpus/fichas/cec-de-pele-cutaneo/carboplatina-paclitaxel-21-21-dias-cec-de-pele__nao-especificado.json",
       "templateId": "FICHA.cec-de-pele-cutaneo.carboplatina-paclitaxel-21-21-dias-cec-de-pele__nao-especificado@1.0.0",
-      "hash": "014baa4d919ffbab820fd5d6c6aed74d75a288d36fc94602f75c3e424494595b",
+      "hash": "8ac2e185abc5c227f57d6aa6df0615acea953ae06dd4cbd2321326f920f423c9",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CEC cutâneo avançado — EXTRAPOLAÇÃO explícita de CECP recorrente/metastático (eviQ 3579)",
@@ -2329,7 +2329,7 @@
     {
       "arquivo": "corpus/fichas/cec-de-pele-cutaneo/cisplatina-semanal-rxt-cec-de-pele__concomitante-a-rt.json",
       "templateId": "FICHA.cec-de-pele-cutaneo.cisplatina-semanal-rxt-cec-de-pele__concomitante-a-rt@1.0.0",
-      "hash": "22794c176e4fef09bc55a34e0b11907fde56dcc21b32da8718e8444826a04f41",
+      "hash": "da65e793f24a7a71346b225b2bfaa7c504adfcf2f5eca446c72b7ce2778a1250",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "CEC cutâneo localmente avançado — EXTRAPOLAÇÃO de CECP localmente avançado (eviQ 292)",
@@ -2472,7 +2472,7 @@
     {
       "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/metotrexato-acido-folinico-baixo-risco__baixo-risco-escore-figo-6.json",
       "templateId": "FICHA.neoplasia-trofoblastica-gestacional.metotrexato-acido-folinico-baixo-risco__baixo-risco-escore-figo-6@1.0.0",
-      "hash": "98f7a0701743989e005aa59ca163a0a4ec3d5fa9d5821376eaec76f4703a0ae6",
+      "hash": "f4eff5b7005298b60cd5a0850577b89473807531a7821f9c1872ba45feb5548b",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "NTG de baixo risco (escore ≤6 eviQ/Lok; BC usa 0–4), 1ª linha",
@@ -2519,7 +2519,7 @@
     {
       "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-6.json",
       "templateId": "FICHA.neoplasia-trofoblastica-gestacional.dactinomicina-em-pulso-baixo-risco__baixo-risco-escore-figo-6@1.0.0",
-      "hash": "45f56f3469fc919fc1f61b22c800faf57f0eb60c17d8051b87358af6bf98e238",
+      "hash": "c236a064ff93ad5fe631df90d247031e5616802a18da425b46925b2d7b4bada5",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "NTG de baixo risco — alternativa ao MTX ou resistência/contraindicação a ele (eviQ 1018)",
@@ -2601,7 +2601,7 @@
     {
       "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/ema-co-alto-risco__alto-risco-escore-figo-7.json",
       "templateId": "FICHA.neoplasia-trofoblastica-gestacional.ema-co-alto-risco__alto-risco-escore-figo-7@1.0.0",
-      "hash": "1e6d0f9241a295141f21c9d1e4c438f53c816f8a9c6a2240393704f29ddc4f66",
+      "hash": "96985ecce02d8b791ef959dda59402fad91ea7eb5356791be5cc5cce25ff0f06",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "NTG de alto risco (escore ≥7) ou resistente a MTX/dactinomicina (eviQ 599)",
@@ -2755,7 +2755,7 @@
     {
       "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/ema-ep-resistencia-ao-ema-co__resistente-ao-ema-co.json",
       "templateId": "FICHA.neoplasia-trofoblastica-gestacional.ema-ep-resistencia-ao-ema-co__resistente-ao-ema-co@1.0.0",
-      "hash": "c82c21f6b89d70ca70374d02b8e3408165ea23ae060048660114eabca4b860bc",
+      "hash": "d7a1dfd02eb0cac49aa5bd2c3e1907e6358572a54f117dec09e3762d055ba4b6",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "NTG com resistência ao EMA-CO — estrutura EXATA da Tabela A5 de Lok 2025 (D2 sem etoposídeo/dactinomicina)",
@@ -2959,7 +2959,7 @@
     {
       "arquivo": "corpus/fichas/neoplasia-trofoblastica-gestacional/ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-inducao.json",
       "templateId": "FICHA.neoplasia-trofoblastica-gestacional.ep-de-inducao-escore-ultra-alto__escore-alto-ultra-alto-inducao@1.0.0",
-      "hash": "1425bf28b8b1bc6762881a5122d9d231cc0d699467a3b7e9f902f9b0bddbce32",
+      "hash": "f31cf10a8ced81c7d0b4f5a2c89f1adfd4f9938da2c918abb890d436da2a1436",
       "versao": "1.0.0",
       "status": "RASCUNHO",
       "identidadeClinica": "NTG com doença extensa (tórax/fígado/SNC) e/ou hemorragia — indução antes do EMA-CO/EMA-EP (eviQ 1347)",

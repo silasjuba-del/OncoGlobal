@@ -4,7 +4,7 @@
   "nome": "Cisplatina + Docetaxel",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "a49393bd963b32196ddf5bce8225af19fb8e66b0f78672f6595be7efbf7bb89b",
+  "hash": "278fb176810989ec4b4718a7bba93509172e39430d2d9e0e5116f66040f50133",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": null,
@@ -319,6 +319,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-36 (lista de esquemas de CUP) e D-F1-49. Variante preparada: Greco 2000 (75/75 q3sem, máx 8 ciclos). Fontes: EXT-CUP-001 (Annals of Oncology (Minnie Pearl Network — Greco FA et al.), Carcinoma of unknown primary site: phase II trials with docetaxel plus cisplatin or carboplatin (Ann Oncol 2000;11(2):211-5), PMID 10761758, acesso 2026-10-14, sha256 ee44761328d2…); EXT-CUP-003 (Am J Clin Oncol (Mukai H et al.), Safety and efficacy of docetaxel and cisplatin in unknown primary cancer (Am J Clin Oncol 2010;33(1):32-5), PMID 19786850, acesso 2026-10-14, sha256 0397ebfcc446…). Antiemese/hidratação: padrão local (D-W9-23c/34c, D-F1-30).",
+  "fonte": "D-F1-36 (lista de esquemas de CUP) e D-F1-49. Variante preparada: Greco 2000 (75/75 q3sem, máx 8 ciclos). Fontes: EXT-CUP-001 (Annals of Oncology (Minnie Pearl Network — Greco FA et al.), Carcinoma of unknown primary site: phase II trials with docetaxel plus cisplatin or carboplatin (Ann Oncol 2000;11(2):211-5), PMID 10761758, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-CUP-003 (Am J Clin Oncol (Mukai H et al.), Safety and efficacy of docetaxel and cisplatin in unknown primary cancer (Am J Clin Oncol 2010;33(1):32-5), PMID 19786850, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Antiemese/hidratação: padrão local (D-W9-23c/34c, D-F1-30).",
   "status": "RASCUNHO"
 }

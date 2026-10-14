@@ -4,7 +4,7 @@
   "nome": "AC-TH (fase TH — paclitaxel semanal + trastuzumabe)",
   "cenario": "neo/adjuvante",
   "versao": "1.0.0",
-  "hash": "87d231f849ad0b7dc1350e06e37b8844f060e4beb8366f3855cff24f5dd113ce",
+  "hash": "f776c1795e6489aa3da7c8829474ddd0668f54ea2e82444492486214e9b6aa8f",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": 4,
@@ -149,7 +149,7 @@
         "d8",
         "d15"
       ],
-      "observacao": "Semanal por 12 semanas (SOnHe TH p. 21). D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].",
+      "observacao": "Semanal por 12 semanas (SOnHe TH p. 21). D-F1-28: paclitaxel semanal em SF 0,9% 500 mL. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada]. F1-B2: 80 mg/m²/60 min confirmados externamente (EXT-LEG-008/009); diluente SF 0,9% 500 mL é decisão local (D-F1-28) — eviQ usa 250 mL [divergência registrada].",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
@@ -223,6 +223,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema TH\" p. 21; SBOC 2026 mama (docs/referencias/evidencias/SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md): trastuzumabe ataque 8 mg/kg, depois 6 mg/kg; decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal). F1-B2 (D-F1-49, 2026-10-14): fontes externas do paclitaxel semanal — EXT-LEG-008 (eviQ, ID 4103 — Breast cancer neo/adjuvant weekly paclitaxel, v3, acesso 2026-10-14, sha256 87ae596953be…); EXT-LEG-009 (eviQ, ID 42 — Breast cancer metastatic weekly paclitaxel, v10, acesso 2026-10-14, sha256 dbfe03a1cafd…); EXT-LEG-012 (BC Cancer, BRAVTW — Paclitaxel weekly (palliative), rev 2014, acesso 2026-10-14, sha256 c4bb07d88e84…); EXT-LEG-013 (BC Cancer, Monografia — Paclitaxel, rev 30/12/2019, acesso 2026-10-14, sha256 309ea2204ac5…). Conferido: 80 mg/m² q7d (eviQ 4103/42; 'usual' 80 na monografia BC; BRAVTW usa 90 [variante]); infusão 60 min; filtro inline ≤0,22 µm e materiais não-PVC/DEHP-free; hipersensibilidade típica nos 10 primeiros minutos das 2 primeiras infusões. Divergência de diluente REGISTRADA e não aplicada: eviQ 250 mL × decisão local SF 0,9% 500 mL (D-F1-28, mantida). Premeds das fontes (loratadina+dexa VO no eviQ; dexa+difenidramina+famotidina IV no BC) divergem do padrão local (D-W9-34c/D-F1-48) — padrão local mantido.",
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema TH\" p. 21; SBOC 2026 mama (docs/referencias/evidencias/SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md): trastuzumabe ataque 8 mg/kg, depois 6 mg/kg; decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal). F1-B2 (D-F1-49, 2026-10-14): fontes externas do paclitaxel semanal — EXT-LEG-008 (eviQ, ID 4103 — Breast cancer neo/adjuvant weekly paclitaxel, v3, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-009 (eviQ, ID 42 — Breast cancer metastatic weekly paclitaxel, v10, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-012 (BC Cancer, BRAVTW — Paclitaxel weekly (palliative), rev 2014, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-013 (BC Cancer, Monografia — Paclitaxel, rev 30/12/2019, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Conferido: 80 mg/m² q7d (eviQ 4103/42; 'usual' 80 na monografia BC; BRAVTW usa 90 [variante]); infusão 60 min; filtro inline ≤0,22 µm e materiais não-PVC/DEHP-free; hipersensibilidade típica nos 10 primeiros minutos das 2 primeiras infusões. Divergência de diluente REGISTRADA e não aplicada: eviQ 250 mL × decisão local SF 0,9% 500 mL (D-F1-28, mantida). Premeds das fontes (loratadina+dexa VO no eviQ; dexa+difenidramina+famotidina IV no BC) divergem do padrão local (D-W9-34c/D-F1-48) — padrão local mantido.",
   "status": "RASCUNHO"
 }

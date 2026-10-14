@@ -4,7 +4,7 @@
   "nome": "MAP (ciclos 1–4)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "aa6a1ba7c63ff607481b7f42f9ca96226273a6a6e05a689eb651093ecd81f08a",
+  "hash": "82b6e7a91beac5fee55f9079609b16d53c0dbce411011585b9d7f2aee811dbad",
   "codigoInstitucional": null,
   "intervaloDias": 35,
   "ciclos": 4,
@@ -376,6 +376,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-34 e D-F1-49. Diretriz local: LOC-SBOC-OSSEOS (SBOC, Diretrizes SBOC 2026 — Sarcomas Ósseos v5 (VERSÃO PARA COLABORAÇÃO), p. 12 (MAP e AP); p. 14–15 (recidivas)) — MAP: cisplatina 60 D1–D2 + doxorrubicina 25 D1–D3 + MTX 12 g/m². Protocolo operacional: EXT-SARC-004 (eviQ, ID 1901 — Osteosarcoma MAP, v6 (PDF v5 conferido), acesso 2026-10-14, sha256 df945221c9a7…); EXT-SARC-014 (BC Cancer, SANAHDMAP — Osteosarcoma high-dose MTX + DOXOrubicin + CISplatin, rev 01/06/2026, acesso 2026-10-14, sha256 d9f85193d118…). Estrutura de ciclos (C1–4 = 35 d com MTX D22/D29; C5–6 = 28 d sem cisplatina com MTX D15/D22) e cirurgia entre C2–C3 segundo eviQ/BC. G-CSF primário obrigatório (BC).",
+  "fonte": "D-F1-34 e D-F1-49. Diretriz local: LOC-SBOC-OSSEOS (SBOC, Diretrizes SBOC 2026 — Sarcomas Ósseos v5 (VERSÃO PARA COLABORAÇÃO), p. 12 (MAP e AP); p. 14–15 (recidivas)) — MAP: cisplatina 60 D1–D2 + doxorrubicina 25 D1–D3 + MTX 12 g/m². Protocolo operacional: EXT-SARC-004 (eviQ, ID 1901 — Osteosarcoma MAP, v6 (PDF v5 conferido), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-014 (BC Cancer, SANAHDMAP — Osteosarcoma high-dose MTX + DOXOrubicin + CISplatin, rev 01/06/2026, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Estrutura de ciclos (C1–4 = 35 d com MTX D22/D29; C5–6 = 28 d sem cisplatina com MTX D15/D22) e cirurgia entre C2–C3 segundo eviQ/BC. G-CSF primário obrigatório (BC).",
   "status": "RASCUNHO"
 }

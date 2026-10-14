@@ -4,7 +4,7 @@
   "nome": "MAP (ciclos 5–6 — sem cisplatina)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "501f8e0ed12643c8b69677fdf26a5b07fe869e6aaa11fa58218b195c25cd756e",
+  "hash": "8141b1d3d73bb15022ba954dc8552fb42b90eb3a9ad3b4c94a790a8bdf1dbcfa",
   "codigoInstitucional": null,
   "intervaloDias": 28,
   "ciclos": 2,
@@ -215,6 +215,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-34 e D-F1-49. Estrutura eviQ 1901 (C5–6 de 28 d: doxo semana 1 + MTX semanas 3–4, SEM cisplatina): EXT-SARC-004 (eviQ, ID 1901 — Osteosarcoma MAP, v6 (PDF v5 conferido), acesso 2026-10-14, sha256 df945221c9a7…); EXT-SARC-014 (BC Cancer, SANAHDMAP — Osteosarcoma high-dose MTX + DOXOrubicin + CISplatin, rev 01/06/2026, acesso 2026-10-14, sha256 d9f85193d118…).",
+  "fonte": "D-F1-34 e D-F1-49. Estrutura eviQ 1901 (C5–6 de 28 d: doxo semana 1 + MTX semanas 3–4, SEM cisplatina): EXT-SARC-004 (eviQ, ID 1901 — Osteosarcoma MAP, v6 (PDF v5 conferido), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-014 (BC Cancer, SANAHDMAP — Osteosarcoma high-dose MTX + DOXOrubicin + CISplatin, rev 01/06/2026, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json).",
   "status": "RASCUNHO"
 }

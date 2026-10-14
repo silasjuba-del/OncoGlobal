@@ -4,7 +4,7 @@
   "nome": "EMA-CO (alto risco)",
   "cenario": "alto risco (escore FIGO ≥7)",
   "versao": "1.0.0",
-  "hash": "1e6d0f9241a295141f21c9d1e4c438f53c816f8a9c6a2240393704f29ddc4f66",
+  "hash": "96985ecce02d8b791ef959dda59402fad91ea7eb5356791be5cc5cce25ff0f06",
   "codigoInstitucional": null,
   "intervaloDias": 14,
   "ciclos": null,
@@ -288,6 +288,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-028 (eviQ, ID 599 — GTN high risk EMA-CO, v8 (PDF v5), acesso 2026-10-14, sha256 aa5e8ebebdd5…) (D1: ETO+MTX 12 h+dactino; D2: ETO+dactino+folínico 24 h pós-MTX; D8: VCR+CTX; filgrastim D3–5 e D9–11; q14d). Diretriz: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14, sha256 c2ed13a3f708…).",
+  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-028 (eviQ, ID 599 — GTN high risk EMA-CO, v8 (PDF v5), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (D1: ETO+MTX 12 h+dactino; D2: ETO+dactino+folínico 24 h pós-MTX; D8: VCR+CTX; filgrastim D3–5 e D9–11; q14d). Diretriz: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json).",
   "status": "RASCUNHO"
 }

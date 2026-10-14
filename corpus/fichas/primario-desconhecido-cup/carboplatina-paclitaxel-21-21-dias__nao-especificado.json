@@ -4,7 +4,7 @@
   "nome": "Carboplatina + Paclitaxel 21/21 dias",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "18861fdc033341a6742f57a189b54bafb84376745ae25b14f66eff640fde03f2",
+  "hash": "0e9f34013d0b29b453f5df251cfcaa24c3099e1fbf4c2e4d18b8dd1cc53d78d3",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": null,
@@ -187,6 +187,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-36 e D-F1-49. Variante preparada: PUCAT/HeCOG. Fontes: EXT-CUP-004 (BC Cancer, PUCAT — Primary Treatment of Cancer of Unknown Primary using CARBOplatin and PACLitaxel, rev 01/12/2024, acesso 2026-10-14, sha256 f3a066472ea4…); EXT-CUP-006 (J Clin Oncol (HeCOG — Briasoulis E et al.), Carboplatin plus paclitaxel in unknown primary carcinoma: phase II (JCO 2000;18(17):3101-7), PMID 10963638, acesso 2026-10-14, sha256 ee6c095b3baa…). Variante local SOnHe (AUC 5 + 175) documentada em Protocolos SOnHe 2024, p. 379 (sha256 d201d11819ac…). Diluente/materiais do paclitaxel: não-PVC/DEHP-free + filtro ≤0,22 µm (PUCAT).",
+  "fonte": "D-F1-36 e D-F1-49. Variante preparada: PUCAT/HeCOG. Fontes: EXT-CUP-004 (BC Cancer, PUCAT — Primary Treatment of Cancer of Unknown Primary using CARBOplatin and PACLitaxel, rev 01/12/2024, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-CUP-006 (J Clin Oncol (HeCOG — Briasoulis E et al.), Carboplatin plus paclitaxel in unknown primary carcinoma: phase II (JCO 2000;18(17):3101-7), PMID 10963638, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Variante local SOnHe (AUC 5 + 175) documentada em Protocolos SOnHe 2024, p. 379 (sha256 d201d11819ac…). Diluente/materiais do paclitaxel: não-PVC/DEHP-free + filtro ≤0,22 µm (PUCAT).",
   "status": "RASCUNHO"
 }

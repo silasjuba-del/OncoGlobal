@@ -4,7 +4,7 @@
   "nome": "Ewing IE (ciclo B — alternado ao VDC)",
   "cenario": "1ª linha, dose-denso q14",
   "versao": "1.0.0",
-  "hash": "f0f7fb299d79a2f8c5fa6ec0f629f0570c5500b20133adb0d3a62c99d3a76735",
+  "hash": "f94aaf552c0ccc6811300f8145b708399b0b0027b4d5e5e9e03a966986715f31",
   "codigoInstitucional": null,
   "intervaloDias": 14,
   "ciclos": 7,
@@ -253,6 +253,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-SARC-003 (eviQ, ID 3465 — Ewing sarcoma IE (part 2), v8 (PDF v5 conferido), acesso 2026-10-14, sha256 483b41b94329…); EXT-SARC-001 (eviQ, ID 3464 — Ewing sarcoma VDC/IE overview, v2 (review due 31/12/2026), acesso 2026-10-14, sha256 53f7ba21100c…). Elegibilidade SAALT2W <30 anos; cautelas eviQ (LVEF <45%, CrCl <60).",
+  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-SARC-003 (eviQ, ID 3465 — Ewing sarcoma IE (part 2), v8 (PDF v5 conferido), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-001 (eviQ, ID 3464 — Ewing sarcoma VDC/IE overview, v2 (review due 31/12/2026), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Elegibilidade SAALT2W <30 anos; cautelas eviQ (LVEF <45%, CrCl <60).",
   "status": "RASCUNHO"
 }

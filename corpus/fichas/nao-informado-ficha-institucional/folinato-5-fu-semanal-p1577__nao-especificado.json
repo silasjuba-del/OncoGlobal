@@ -4,7 +4,7 @@
   "nome": "Folinato + 5-FU semanal (P1577)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "5f24a5e3b223df0f8a2f1d9096ae54582bdae56a9b4a9f07522752adec5da059",
+  "hash": "c33d53d3014628bdfd2fc9429e3d82db3524d9e12831cdd2f9dd2e9d3cd1686a",
   "codigoInstitucional": "P1577",
   "intervaloDias": null,
   "ciclos": null,
@@ -175,6 +175,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-26 (identidade P1577: folinato 20 mg/m² + 5-FU semanal D1–D36, ficha própria, SEM vínculo com Roswell Park) e D-F1-49 (ficha institucional nova sem SISAC; mudança de fonte não aprova doses). Fontes externas F1-B2 (2026-10-14): EXT-LEG-001 (eviQ (Cancer Institute NSW), ID 1494 — Colorectal cancer adjuvant QUASAR weekly fluorouracil and folinic acid, v7, acesso 2026-10-14, sha256 15ccde66d16d…); EXT-LEG-002 (eviQ, ID 98 — Colorectal cancer metastatic QUASAR weekly fluorouracil and folinic acid, v6, acesso 2026-10-14, sha256 0a2a30296620…); EXT-LEG-004 (eviQ, ID 1271 — Colorectal cancer adjuvant Roswell Park, v6, acesso 2026-10-14, sha256 ffef9ab7f139…); EXT-LEG-005 (eviQ, ID 1275 — Colorectal cancer metastatic Roswell Park, v5, acesso 2026-10-14, sha256 19f7c18e533a…). Divergência registrada: nenhuma fonte vigente casa folinato 20 mg/m² no semanal — 5-FU permanece null [VERIFICAR].",
+  "fonte": "D-F1-26 (identidade P1577: folinato 20 mg/m² + 5-FU semanal D1–D36, ficha própria, SEM vínculo com Roswell Park) e D-F1-49 (ficha institucional nova sem SISAC; mudança de fonte não aprova doses). Fontes externas F1-B2 (2026-10-14): EXT-LEG-001 (eviQ (Cancer Institute NSW), ID 1494 — Colorectal cancer adjuvant QUASAR weekly fluorouracil and folinic acid, v7, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-002 (eviQ, ID 98 — Colorectal cancer metastatic QUASAR weekly fluorouracil and folinic acid, v6, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-004 (eviQ, ID 1271 — Colorectal cancer adjuvant Roswell Park, v6, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-005 (eviQ, ID 1275 — Colorectal cancer metastatic Roswell Park, v5, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Divergência registrada: nenhuma fonte vigente casa folinato 20 mg/m² no semanal — 5-FU permanece null [VERIFICAR].",
   "status": "RASCUNHO"
 }

@@ -4,7 +4,7 @@
   "nome": "AP (doxorrubicina + cisplatina)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "c80b44eb0ca8e32ec085446b9529f5efdfb7902121e85e390f10b8c2dd8f693c",
+  "hash": "1b4381779582d00ab71d3b95aa548b9851c174b3144a12152087525f73faea16",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": null,
@@ -297,6 +297,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-34 e D-F1-49. Fonte operacional: EXT-SARC-015 (BC Cancer, SAAVAP — Advanced osteosarcoma DOXOrubicin + CISplatin, rev 01/03/2022, acesso 2026-10-14, sha256 0215e9ba4f7e…). Diretriz local: LOC-SBOC-OSSEOS (SBOC, Diretrizes SBOC 2026 — Sarcomas Ósseos v5 (VERSÃO PARA COLABORAÇÃO), p. 12 (MAP e AP); p. 14–15 (recidivas)) (AP para >25 anos — corte sem apoio externo). Nota eviQ 1901: considerar AP sem HDMTX acima de 40 anos.",
+  "fonte": "D-F1-34 e D-F1-49. Fonte operacional: EXT-SARC-015 (BC Cancer, SAAVAP — Advanced osteosarcoma DOXOrubicin + CISplatin, rev 01/03/2022, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Diretriz local: LOC-SBOC-OSSEOS (SBOC, Diretrizes SBOC 2026 — Sarcomas Ósseos v5 (VERSÃO PARA COLABORAÇÃO), p. 12 (MAP e AP); p. 14–15 (recidivas)) (AP para >25 anos — corte sem apoio externo). Nota eviQ 1901: considerar AP sem HDMTX acima de 40 anos.",
   "status": "RASCUNHO"
 }

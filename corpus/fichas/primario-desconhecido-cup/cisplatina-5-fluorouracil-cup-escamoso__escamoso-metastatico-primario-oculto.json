@@ -4,7 +4,7 @@
   "nome": "Cisplatina + 5-Fluorouracil (CUP escamoso)",
   "cenario": "escamoso metastático (primário oculto)",
   "versao": "1.0.0",
-  "hash": "8178d913c2f710f9061af297d4a3fc7862ad7ec596c6ba83240db278eca3636b",
+  "hash": "fea3d48956b37f568d9efa428f07cbad4b5b4cddf0110e32b5077229321ed69a",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": null,
@@ -297,6 +297,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-36 e D-F1-49. Fonte: EXT-CUP-010 (Cancer Invest (Khansur T et al.), Cisplatin and 5-fluorouracil for metastatic squamous cell carcinoma from unknown primary (1995;13(3):263-6), PMID 7743377, acesso 2026-10-14, sha256 e6cac6d4978f…). Protocolo operacional análogo (população distinta — H&N): EXT-CUP-011 (eviQ, ID 288 — Head and neck SCC recurrent/metastatic ciSplatin and fluorouracil, v5, acesso 2026-10-14, sha256 e4363157a12d…). População da variante preparada: escamosa, com investigação H&N completa negativa.",
+  "fonte": "D-F1-36 e D-F1-49. Fonte: EXT-CUP-010 (Cancer Invest (Khansur T et al.), Cisplatin and 5-fluorouracil for metastatic squamous cell carcinoma from unknown primary (1995;13(3):263-6), PMID 7743377, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Protocolo operacional análogo (população distinta — H&N): EXT-CUP-011 (eviQ, ID 288 — Head and neck SCC recurrent/metastatic ciSplatin and fluorouracil, v5, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). População da variante preparada: escamosa, com investigação H&N completa negativa.",
   "status": "RASCUNHO"
 }

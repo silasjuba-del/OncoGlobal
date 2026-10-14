@@ -4,7 +4,7 @@
   "nome": "Ewing VDC (ciclo A — alternado ao IE)",
   "cenario": "1ª linha, dose-denso q14",
   "versao": "1.0.0",
-  "hash": "1ca66e362aee69479707b44651de4c7c85c759825a774d4d2436d7064ac8d9e8",
+  "hash": "3743c536c570f5a8fb22d057835ff2e92b104130ecb265c927c13fee1a3f1395",
   "codigoInstitucional": null,
   "intervaloDias": 14,
   "ciclos": 7,
@@ -276,6 +276,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-34 e D-F1-49. Base do q2sem: Womer 2012 (AEWS0031) — EXT-SARC-022 (J Clin Oncol (Womer RB et al. — AEWS0031), Interval-compressed chemotherapy for Ewing sarcoma (JCO 2012;30(33):4148-54), PMID 23091096, acesso 2026-10-14, sha256 8861d1b15f22…) (correção: 'Whelan JCO 2018' é Euro-E.W.I.N.G. 99/BuMel, não VDC/IE dose-denso). Protocolos operacionais: EXT-SARC-001 (eviQ, ID 3464 — Ewing sarcoma VDC/IE overview, v2 (review due 31/12/2026), acesso 2026-10-14, sha256 53f7ba21100c…); EXT-SARC-002 (eviQ, ID 1916 — Ewing sarcoma VDC (part 1), v8 (PDF v6 conferido), acesso 2026-10-14, sha256 8983c9377e81…); EXT-SARC-009 (BC Cancer, SAALT2W — Ewing/EFT interval-compressed (2-week) alternation com filgrastim, rev 01/08/2026, acesso 2026-10-14, sha256 a3667f35a67b…). Diretriz local: LOC-SBOC-OSSEOS (SBOC, Diretrizes SBOC 2026 — Sarcomas Ósseos v5 (VERSÃO PARA COLABORAÇÃO), p. 12 (MAP e AP); p. 14–15 (recidivas)). Teto cumulativo de doxorrubicina 375 mg/m² (eviQ/BC): ao atingir, omitir (BC mantém VC; eviQ substitui por dactinomicina 1,25 mg/m² D1 só se cardiotoxicidade). Terapia local após 6 ciclos (eviQ 3464).",
+  "fonte": "D-F1-34 e D-F1-49. Base do q2sem: Womer 2012 (AEWS0031) — EXT-SARC-022 (J Clin Oncol (Womer RB et al. — AEWS0031), Interval-compressed chemotherapy for Ewing sarcoma (JCO 2012;30(33):4148-54), PMID 23091096, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (correção: 'Whelan JCO 2018' é Euro-E.W.I.N.G. 99/BuMel, não VDC/IE dose-denso). Protocolos operacionais: EXT-SARC-001 (eviQ, ID 3464 — Ewing sarcoma VDC/IE overview, v2 (review due 31/12/2026), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-002 (eviQ, ID 1916 — Ewing sarcoma VDC (part 1), v8 (PDF v6 conferido), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-SARC-009 (BC Cancer, SAALT2W — Ewing/EFT interval-compressed (2-week) alternation com filgrastim, rev 01/08/2026, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Diretriz local: LOC-SBOC-OSSEOS (SBOC, Diretrizes SBOC 2026 — Sarcomas Ósseos v5 (VERSÃO PARA COLABORAÇÃO), p. 12 (MAP e AP); p. 14–15 (recidivas)). Teto cumulativo de doxorrubicina 375 mg/m² (eviQ/BC): ao atingir, omitir (BC mantém VC; eviQ substitui por dactinomicina 1,25 mg/m² D1 só se cardiotoxicidade). Terapia local após 6 ciclos (eviQ 3464).",
   "status": "RASCUNHO"
 }

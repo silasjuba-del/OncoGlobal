@@ -21,7 +21,7 @@
     },
     {
       "path": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json",
-      "sha256": "595f666ced1e5619658aca8a905556ba3108225b6f48fc9b9338b23a84890b87",
+      "sha256": "b1da158d8a5ab86a1971845525be2e1e96ba1d7045cd52d1a59fda5e2a667a85",
       "items": [],
       "hashMode": "utf8-lf"
     },
@@ -3091,14 +3091,20 @@
     },
     {
       "path": "corpus/fichas/neoplasia-trofoblastica-gestacional/ema-co-alto-risco__alto-risco-escore-figo-7.json",
-      "sha256": "f2e65a05bb098891d5e1f295ad80e6347682a155863c41028cabb9ae36099950",
+      "sha256": "1010023ad3cd1851bdae0ba919c9fa6cb92b1111fc17e74bbfda2c0bfa8b21be",
+      "items": [],
+      "hashMode": "utf8-lf"
+    },
+    {
+      "path": "corpus/manifesto/b2-fichas.v1.json",
+      "sha256": "4320686f90e2ec6bd807f9c3600047af14658512c7a1bd40442dfb38c4ebf72a",
       "items": [
         {
           "type": "telefone",
-          "line": 7,
+          "line": 1778,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "corpus/fichas/neoplasia-trofoblastica-gestacional/ema-co-alto-risco__alto-risco-escore-figo-7.json:7",
+          "evidenceRef": "corpus/manifesto/b2-fichas.v1.json:1778",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "json_sha256_field_64hex"
         }
@@ -3106,15 +3112,15 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "corpus/manifesto/b2-fichas.v1.json",
-      "sha256": "c6e324b8cdd1f25a90ee8cb1c5972ee7ad412d826c267d0b0b389fbae8b33f7d",
+      "path": "corpus/fichas/osteossarcoma/ap-doxorrubicina-cisplatina__nao-especificado.json",
+      "sha256": "63bddb69ff1931e289a69c65aa0c95dc224f9f3bd63752901bdda5c7185dbb65",
       "items": [
         {
           "type": "telefone",
-          "line": 2604,
+          "line": 7,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "corpus/manifesto/b2-fichas.v1.json:2604",
+          "evidenceRef": "corpus/fichas/osteossarcoma/ap-doxorrubicina-cisplatina__nao-especificado.json:7",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "json_sha256_field_64hex"
         }

@@ -4,7 +4,7 @@
   "nome": "Carboplatina + Paclitaxel 21/21 dias (vulva)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "35052cec16f6e23f7d001cc5fc2683b22e285a928470b1f816952da27e0a4d5c",
+  "hash": "1c6a174f264ff1d41c4411bd9a7acb01482a7905671a77e1ff3a19c97435d39c",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": null,
@@ -187,6 +187,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-35 e D-F1-49. Protocolo BC que INCLUI vulva na elegibilidade: EXT-CNV-024 (BC Cancer, GOCXCAT — Gynecologic CARBOplatin + PACLitaxel (inclui vulva), rev 01/10/2025, acesso 2026-10-14, sha256 03ddeed2cc30…). Material local: LOC-SONHE (SOnHe, Protocolos SOnHe 2024, p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. 314/317 (Ewing institucional)) (p. 89–91, AUC 5 + 175).",
+  "fonte": "D-F1-35 e D-F1-49. Protocolo BC que INCLUI vulva na elegibilidade: EXT-CNV-024 (BC Cancer, GOCXCAT — Gynecologic CARBOplatin + PACLitaxel (inclui vulva), rev 01/10/2025, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Material local: LOC-SONHE (SOnHe, Protocolos SOnHe 2024, p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. 314/317 (Ewing institucional)) (p. 89–91, AUC 5 + 175).",
   "status": "RASCUNHO"
 }

@@ -4,7 +4,7 @@
   "nome": "EP de indução (escore ultra-alto)",
   "cenario": "escore alto/ultra-alto — indução",
   "versao": "1.0.0",
-  "hash": "1425bf28b8b1bc6762881a5122d9d231cc0d699467a3b7e9f902f9b0bddbce32",
+  "hash": "f31cf10a8ced81c7d0b4f5a2c89f1adfd4f9938da2c918abb890d436da2a1436",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": null,
@@ -310,6 +310,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-030 (eviQ, ID 1347 — GTN low dose EP (indução, escore alto/ultra-alto), v5 (PDF v2), acesso 2026-10-14, sha256 3e0e8bcb23e6…). Diretriz: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14, sha256 c2ed13a3f708…) (Low-dose EP once weekly: etoposídeo 100 + cisplatina 20, D1–D2).",
+  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-030 (eviQ, ID 1347 — GTN low dose EP (indução, escore alto/ultra-alto), v5 (PDF v2), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Diretriz: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (Low-dose EP once weekly: etoposídeo 100 + cisplatina 20, D1–D2).",
   "status": "RASCUNHO"
 }

@@ -4,7 +4,7 @@
   "nome": "EMA/EP (resistência ao EMA-CO)",
   "cenario": "resistente ao EMA-CO",
   "versao": "1.0.0",
-  "hash": "c82c21f6b89d70ca70374d02b8e3408165ea23ae060048660114eabca4b860bc",
+  "hash": "d7a1dfd02eb0cac49aa5bd2c3e1907e6358572a54f117dec09e3762d055ba4b6",
   "codigoInstitucional": null,
   "intervaloDias": 14,
   "ciclos": null,
@@ -390,6 +390,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-34 e D-F1-49. Diretriz ORIGINAL verificada (duas cópias independentes: ORBi + Radboud, dupla leitura visual + camada de texto): EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14, sha256 c2ed13a3f708…). Equivalente operacional: EXT-CNV-029 (eviQ, ID 1378 — GTN EP-EMA (equivalente operacional do EMA/EP), v8 (PDF v5), acesso 2026-10-14, sha256 1d2de6226e37…) (EP-EMA: D1 EP 150/75; D8 EMA; D9 folínico; filgrastim D2–4 e D9–11).",
+  "fonte": "D-F1-34 e D-F1-49. Diretriz ORIGINAL verificada (duas cópias independentes: ORBi + Radboud, dupla leitura visual + camada de texto): EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Equivalente operacional: EXT-CNV-029 (eviQ, ID 1378 — GTN EP-EMA (equivalente operacional do EMA/EP), v8 (PDF v5), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (EP-EMA: D1 EP 150/75; D8 EMA; D9 folínico; filgrastim D2–4 e D9–11).",
   "status": "RASCUNHO"
 }

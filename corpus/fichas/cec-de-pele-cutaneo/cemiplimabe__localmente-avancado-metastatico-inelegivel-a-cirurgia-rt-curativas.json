@@ -4,7 +4,7 @@
   "nome": "Cemiplimabe",
   "cenario": "localmente avançado/metastático — inelegível a cirurgia/RT curativas",
   "versao": "1.0.0",
-  "hash": "0d0b9839eb328ad7bb9a632eaaed38bc65a51ecea786613eabf8c5bad3110832",
+  "hash": "3e1544d835b6013d58ed1d4c4171fe8f9a485b2208cda1e22e11ec9e0edf666c",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": null,
@@ -55,6 +55,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-001 (eviQ, ID 4151 — Cemiplimab monotherapy, v5 (review due 31/12/2028), acesso 2026-10-14, sha256 c006e4a23668…) (página viva v5, 02/09/2026; PDF capturado v1) + BC SMAVCEM (rev 08/2025) + DailyMed LIBTAYO SPL (setid 4347ae1f…). Sem pré-medicação de rotina (eviQ/BC).",
+  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-001 (eviQ, ID 4151 — Cemiplimab monotherapy, v5 (review due 31/12/2028), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (página viva v5, 02/09/2026; PDF capturado v1) + BC SMAVCEM (rev 08/2025) + DailyMed LIBTAYO SPL (setid 4347ae1f…). Sem pré-medicação de rotina (eviQ/BC).",
   "status": "RASCUNHO"
 }

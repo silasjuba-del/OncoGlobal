@@ -4,7 +4,7 @@
   "nome": "Cisplatina + Vinorelbina",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "8db88dbbb24a719f0f5a6970bbcce2d31d591b993cbe01abb87f652236b31912",
+  "hash": "a650d0fe458b150e60ba89bb59d15ce5d6602f09f88a62e27580f9bc94f27777",
   "codigoInstitucional": null,
   "intervaloDias": null,
   "ciclos": null,
@@ -303,6 +303,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-36 e D-F1-49. Dupla sem fonte direta após busca documentada (EXT-CUP-016 e registro de buscas no relatório F1-B2). Contexto/negação: EXT-CUP-012 (Cancer (Palmeri S et al.), Cisplatin and gemcitabine with either vinorelbine or paclitaxel in CUP — TRIPLA (contexto/negação da dupla), PMID 17109447, acesso 2026-10-14, sha256 1305f0ed4e7b…). Ficha existe como dossiê de curadoria — não entra no fluxo operacional enquanto a lacuna persistir.",
+  "fonte": "D-F1-36 e D-F1-49. Dupla sem fonte direta após busca documentada (EXT-CUP-016 e registro de buscas no relatório F1-B2). Contexto/negação: EXT-CUP-012 (Cancer (Palmeri S et al.), Cisplatin and gemcitabine with either vinorelbine or paclitaxel in CUP — TRIPLA (contexto/negação da dupla), PMID 17109447, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Ficha existe como dossiê de curadoria — não entra no fluxo operacional enquanto a lacuna persistir.",
   "status": "RASCUNHO"
 }

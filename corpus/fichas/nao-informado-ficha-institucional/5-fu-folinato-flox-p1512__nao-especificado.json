@@ -4,7 +4,7 @@
   "nome": "5-FU + Folinato (FLOX — P1512)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "5de6194ba3df76df1d7bb423fb08fb3480d769eae43ea22b0a5cc6b151e19c14",
+  "hash": "b6d5e6f62869877fad28d28c431ba7e567a982818a86b3b1576335f13b1c7ae6",
   "codigoInstitucional": "P1512",
   "intervaloDias": null,
   "ciclos": null,
@@ -167,6 +167,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-27 (FLOX/P1512: 5-FU + folinato em D1 E D2 — corrige o texto 5, que trazia só D1) e D-F1-49. Fontes externas F1-B2 (2026-10-14): EXT-LEG-006 (eviQ, ID 79 — Colorectal cancer adjuvant Mayo Clinic (DESCONTINUADO), v3 (descontinuado), acesso 2026-10-14, sha256 5c8eb97d75f0…); EXT-LEG-004 (eviQ, ID 1271 — Colorectal cancer adjuvant Roswell Park, v6, acesso 2026-10-14, sha256 ffef9ab7f139…). A planilha oncoMed rotulava 'FLOX' sem oxaliplatina (FA 20 + 5-FU 500): traço institucional secundário com erros conhecidos — doses não adotadas sem decisão.",
+  "fonte": "D-F1-27 (FLOX/P1512: 5-FU + folinato em D1 E D2 — corrige o texto 5, que trazia só D1) e D-F1-49. Fontes externas F1-B2 (2026-10-14): EXT-LEG-006 (eviQ, ID 79 — Colorectal cancer adjuvant Mayo Clinic (DESCONTINUADO), v3 (descontinuado), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json); EXT-LEG-004 (eviQ, ID 1271 — Colorectal cancer adjuvant Roswell Park, v6, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). A planilha oncoMed rotulava 'FLOX' sem oxaliplatina (FA 20 + 5-FU 500): traço institucional secundário com erros conhecidos — doses não adotadas sem decisão.",
   "status": "RASCUNHO"
 }

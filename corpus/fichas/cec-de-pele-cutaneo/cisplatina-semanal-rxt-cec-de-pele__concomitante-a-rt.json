@@ -4,7 +4,7 @@
   "nome": "Cisplatina semanal + RxT (CEC de pele)",
   "cenario": "concomitante à RT",
   "versao": "1.0.0",
-  "hash": "22794c176e4fef09bc55a34e0b11907fde56dcc21b32da8718e8444826a04f41",
+  "hash": "da65e793f24a7a71346b225b2bfaa7c504adfcf2f5eca446c72b7ce2778a1250",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": null,
@@ -275,6 +275,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional (CECP localmente avançado — extrapolação explícita): EXT-CNV-016 (eviQ, ID 292 — Head and neck locally advanced ciSplatin weekly with radiation therapy, v10 (PDF v8), acesso 2026-10-14, sha256 1ade96c5a456…).",
+  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional (CECP localmente avançado — extrapolação explícita): EXT-CNV-016 (eviQ, ID 292 — Head and neck locally advanced ciSplatin weekly with radiation therapy, v10 (PDF v8), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json).",
   "status": "RASCUNHO"
 }

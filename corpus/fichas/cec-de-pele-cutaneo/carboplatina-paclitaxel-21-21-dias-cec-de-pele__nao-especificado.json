@@ -4,7 +4,7 @@
   "nome": "Carboplatina + Paclitaxel 21/21 dias (CEC de pele)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "014baa4d919ffbab820fd5d6c6aed74d75a288d36fc94602f75c3e424494595b",
+  "hash": "8ac2e185abc5c227f57d6aa6df0615acea953ae06dd4cbd2321326f920f423c9",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": null,
@@ -187,6 +187,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional (população CECP R/M — extrapolação explícita): EXT-CNV-008 (eviQ, ID 3579 — Head and neck SCC recurrent/metastatic CARBOplatin and PACLitaxel, acesso 2026-10-14, acesso 2026-10-14, sha256 4bc8230b1301…). Material local: LOC-SONHE (SOnHe, Protocolos SOnHe 2024, p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. 314/317 (Ewing institucional)) (p. 236–238, opções incluem cemiplimabe preferencial).",
+  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional (população CECP R/M — extrapolação explícita): EXT-CNV-008 (eviQ, ID 3579 — Head and neck SCC recurrent/metastatic CARBOplatin and PACLitaxel, acesso 2026-10-14, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Material local: LOC-SONHE (SOnHe, Protocolos SOnHe 2024, p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. 314/317 (Ewing institucional)) (p. 236–238, opções incluem cemiplimabe preferencial).",
   "status": "RASCUNHO"
 }

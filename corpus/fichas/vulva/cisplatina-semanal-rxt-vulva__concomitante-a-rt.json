@@ -4,7 +4,7 @@
   "nome": "Cisplatina semanal + RxT (vulva)",
   "cenario": "concomitante à RT",
   "versao": "1.0.0",
-  "hash": "c061b160ac1b8f8bc26472dfb649b795eea6c526a66568bed4c6783888c250ea",
+  "hash": "1457a3144a5ef8f6b1b1fe2a2d499200505fc244e640b7c8bb6cbae2e7aec4ab",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": null,
@@ -275,6 +275,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-35 e D-F1-49. Protocolo ESPECÍFICO de vulva: EXT-CNV-021 (eviQ, ID 1529 — Vulval SCC locally advanced ciPlatin (weekly) chemoradiation, v9 (11/02/2026; PDF v6 arquivado), acesso 2026-10-14, sha256 001b974eb8c1…). Protocolo BC que inclui vulva: EXT-CNV-023 (BC Cancer, GOCXCRT — Gynecologic locally advanced CISplatin weekly ×5 com RT (inclui vulva), rev 01/08/2026, acesso 2026-10-14, sha256 c1d840871c5d…). Material local: LOC-SONHE (SOnHe, Protocolos SOnHe 2024, p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. 314/317 (Ewing institucional)) (p. 89–91).",
+  "fonte": "D-F1-35 e D-F1-49. Protocolo ESPECÍFICO de vulva: EXT-CNV-021 (eviQ, ID 1529 — Vulval SCC locally advanced ciPlatin (weekly) chemoradiation, v9 (11/02/2026; PDF v6 arquivado), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Protocolo BC que inclui vulva: EXT-CNV-023 (BC Cancer, GOCXCRT — Gynecologic locally advanced CISplatin weekly ×5 com RT (inclui vulva), rev 01/08/2026, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Material local: LOC-SONHE (SOnHe, Protocolos SOnHe 2024, p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. 314/317 (Ewing institucional)) (p. 89–91).",
   "status": "RASCUNHO"
 }

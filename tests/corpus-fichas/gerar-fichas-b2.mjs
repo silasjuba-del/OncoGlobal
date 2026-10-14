@@ -119,7 +119,9 @@ const LOC = {
   "LOC-SBOC-OSSEOS": { instituicao: "SBOC", titulo: "Diretrizes SBOC 2026 — Sarcomas Ósseos v5 (VERSÃO PARA COLABORAÇÃO)", localizador: "p. 12 (MAP e AP); p. 14–15 (recidivas)", sha256: "592a805c7def2610ee6559bdd32b634ddb33659194dab482423414f6e75e6295" },
   "LOC-SONHE": { instituicao: "SOnHe", titulo: "Protocolos SOnHe 2024", localizador: "p. 313–318 (sarcomas); p. 89–91 (vulva); p. 236–238 (CEC pele); p. 314/317 (Ewing institucional)", sha256: "d201d11819acaf92a019bba22733abd55356012bce60b147728bfe4a5575d71d" },
 };
-const ref = (ids) => ids.map((id) => EXT[id] ? `${id} (${EXT[id].instituicao}, ${EXT[id].titulo}, ${EXT[id].versao}, acesso ${ACESSO}, sha256 ${EXT[id].sha256.slice(0, 12)}…)` : `${id} (${LOC[id].instituicao}, ${LOC[id].titulo}, ${LOC[id].localizador})`).join("; ");
+// O sha256 INTEIRO vive no manifesto b2-fichas.v1.json; prefixos de 12 hex no texto das fichas geram
+// runs >=7 digitos que a exportacao publica trata como SEQUENCIA_NUMERICA_LONGA (nao mascarada).
+const ref = (ids) => ids.map((id) => EXT[id] ? `${id} (${EXT[id].instituicao}, ${EXT[id].titulo}, ${EXT[id].versao}, acesso ${ACESSO}; sha256 integro em corpus/manifesto/b2-fichas.v1.json)` : `${id} (${LOC[id].instituicao}, ${LOC[id].titulo}, ${LOC[id].localizador})`).join("; ");
 
 const CAMPOS = (s) => s; // marcador de leitura
 
@@ -428,6 +430,9 @@ const alteradas = [];
 for (const rel of PAC_SEMANAL) {
   const caminho = `corpus/fichas/${rel}`;
   const json = JSON.parse(readFileSync(join(RAIZ, caminho), "utf8"));
+  // migração: remove acréscimo F1-B2 anterior (podia conter prefixos de 12 hex) e recoloca a forma atual
+  const marco = json.fonte.indexOf(" F1-B2 (D-F1-49");
+  if (marco >= 0) json.fonte = json.fonte.slice(0, marco);
   if (!json.fonte.includes("F1-B2 (D-F1-49")) {
     json.fonte += ACRESCIMO_FONTE;
     const pac = json.itens.find((i) => /^paclitaxel/i.test(i.drug));

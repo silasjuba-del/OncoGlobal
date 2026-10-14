@@ -4,7 +4,7 @@
   "nome": "Docetaxel + Gemcitabina",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "c9500df1dd3ee0445b8d9aa73f6067e00a689c3d340ace31a290319b8f5286e6",
+  "hash": "cb42a75da17db139cd9503523e3dba512b5fe4c2ade93c816e6f8547769b58c9",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": null,
@@ -193,6 +193,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "D-F1-36 e D-F1-49. Fonte: EXT-CUP-009 (Cancer (Pouessel D et al.), Gemcitabine and docetaxel as front-line chemotherapy in unknown primary (Cancer 2004;100(6):1257-61), PMID 15022294, acesso 2026-10-14, sha256 38fcece6a642…). Correção de citação registrada: o estudo original de CUP é Pouessel 2004, não Hainsworth.",
+  "fonte": "D-F1-36 e D-F1-49. Fonte: EXT-CUP-009 (Cancer (Pouessel D et al.), Gemcitabine and docetaxel as front-line chemotherapy in unknown primary (Cancer 2004;100(6):1257-61), PMID 15022294, acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Correção de citação registrada: o estudo original de CUP é Pouessel 2004, não Hainsworth.",
   "status": "RASCUNHO"
 }
