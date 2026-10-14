@@ -1127,6 +1127,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       const parsed = z.object({}).strict().safeParse(raw);
       if (!parsed.success) return reply(400, "PAYLOAD_INVALIDO");
       const result = lerAgenda(deps.db, deps.agora());
+      if (result.hoje === null) return reply(503, result.codigo, result);
       return reply(200, result.estado === "FONTE_AUSENTE" ? "FONTE_AGENDA_AUSENTE" : "AGENDA_CARREGADA", result);
     }
     if (rota === "salao") {
@@ -1149,6 +1150,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       const cnes = deps.settings?.readProfile(sessao).perfil.instituicao.cnes ?? "";
       const result = lerApacs(deps.db, deps.agora(), { caixas: deps.corpus?.caixasTodas ?? [],
         sigtap: deps.corpus?.sigtap ?? {}, cnesConfigurado: cnes });
+      if (result.hoje === null) return reply(503, result.codigo, result);
       return reply(200, result.estado === "FONTE_AUSENTE" ? "FONTE_APAC_AUSENTE" : "APAC_CARREGADA", result);
     }
     if (rota === "chat") {

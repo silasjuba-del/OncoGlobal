@@ -44,6 +44,24 @@ it("servidor recusa saída inválida de login sem transmitir dados do resultado 
   } finally { vi.restoreAllMocks(); await a.close(); }
 });
 
+it.each(["/consulta/agenda", "/consulta/apac"])("%s conserva o motivo da pendência quando a data do serviço está indisponível", async rota => {
+  const a = await ambienteHttp();
+  try {
+    for (const [agora, codigo] of [["invalido", "INSTANTE_INVALIDO"], ["", "INSTANTE_AUSENTE"]]) {
+      a.now(agora!);
+      const r = await a.request(rota, "POST", "{}", a.token, "application/json");
+      expect(r.status).toBe(503);
+      expect(JSON.parse(r.body)).toEqual({ hoje: null, itens: [], estado: "PENDENTE", codigo });
+      expect(a.logs.at(-1)).toMatchObject({ status: 503, codigo });
+      expect(a.efeitos()).toBe(0);
+    }
+    a.now("2026-10-05T12:00:00Z");
+    const recuperada = await a.request(rota, "POST", "{}", a.token, "application/json");
+    expect(recuperada.status).toBe(200);
+    expect(JSON.parse(recuperada.body).hoje).toBe("2026-10-05");
+  } finally { await a.close(); }
+});
+
 it.each(["/consulta/investigacao", "/consulta/instrumento/avaliar", "/consulta/llm/documento-original"])("%s exige sessão, valida payload e mantém contexto explícito", async rota => {
   const a = await ambienteHttp();
   try {
