@@ -1254,6 +1254,59 @@
         }
       },
       {
+        "id": "prostata-tda-leuprorrelina-im-28d",
+        "nome": "TDA — leuprorrelina IM mensal (7,5 mg a cada 28 dias)",
+        "cenario": "doença avançada (mHSPC; manter contínua em nmCRPC/mCRPC)",
+        "linha": "base de todas as linhas",
+        "drogas": [
+          {
+            "droga": "Leuprorrelina (acetato)",
+            "dose": 7.5,
+            "unidade": "mg",
+            "via": "IM",
+            "dias": "D1 a cada 28 dias",
+            "observacao": "Esquema do serviço (D-F1-24). O 'depot 60 dias' do texto 3 é erro de extração. Objetivo: testosterona < 50 ng/dL (SBOC p.10).",
+            "fonte": {
+              "tipo": "DECISAO_MEDICA",
+              "referencia": "D-F1-24 (Dr. Silas, 2026-10-14)",
+              "pagina": null,
+              "trecho": null,
+              "estado": "DECIDIDO"
+            }
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "apac": [
+            {
+              "codigo": "0304020079",
+              "nome": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA"
+            }
+          ],
+          "observacao": "Modelo APAC: procedimento não vinculado a medicamento; o hospital habilitado padroniza e adquire o antineoplásico.",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 2026-09 (corpus/f0c/sigtap/2026-09.json, ZIP DATASUS pinado): 0304020079 HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA. Modelo APAC: Portaria Conjunta SAES/SCTIE nº 20, de 27/10/2022 (DDT Carcinoma de Células Renais), trecho-padrão das DDT oncológicas.",
+            "pagina": null,
+            "trecho": "HORMONIOTERAPIA DO ADENOCARCINOMA DE PRÓSTATA AVANÇADO - 1ª LINHA",
+            "estado": "VERIFICADO"
+          }
+        },
+        "fonte": {
+          "tipo": "DECISAO_MEDICA",
+          "referencia": "D-F1-24 (Dr. Silas, 2026-10-14)",
+          "pagina": null,
+          "trecho": null,
+          "estado": "DECIDIDO"
+        },
+        "decisao": "D-F1-24"
+      },
+      {
         "id": "prostata-tda-leuprorrelina-sc",
         "nome": "TDA — leuprorrelina SC trimestral",
         "cenario": "doença avançada (mHSPC; manter contínua em nmCRPC/mCRPC)",

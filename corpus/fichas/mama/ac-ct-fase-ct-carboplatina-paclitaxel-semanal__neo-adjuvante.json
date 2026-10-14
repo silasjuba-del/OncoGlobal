@@ -4,7 +4,7 @@
   "nome": "AC-CT (fase CT — carboplatina + paclitaxel semanal)",
   "cenario": "neo/adjuvante",
   "versao": "1.0.0",
-  "hash": "725f631d408a1d4486f0e1b7c189ad0d949f4aee282868caa4e77bb8539061d0",
+  "hash": "b9dd582f3352dd9a71bdc23d765bcc274bb7289a7d6309f659c9b5d7cb350aff",
   "codigoInstitucional": null,
   "intervaloDias": 7,
   "ciclos": 12,
@@ -131,13 +131,13 @@
       "adjustmentPercent": null,
       "adjustmentReason": null,
       "route": "EV",
-      "diluent": null,
-      "finalVolumeMl": null,
+      "diluent": "SF 0,9%",
+      "finalVolumeMl": 500,
       "infusionTime": "60 min",
       "days": [
         "d1"
       ],
-      "observacao": "Semanal.",
+      "observacao": "Semanal. D-F1-28: paclitaxel semanal em SF 0,9% 500 mL.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
@@ -187,6 +187,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema Carbotaxol semanal\" p. 21; decisões D-W9-23, D-W9-34, D-W9-50.",
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema Carbotaxol semanal\" p. 21; decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal).",
   "status": "RASCUNHO"
 }

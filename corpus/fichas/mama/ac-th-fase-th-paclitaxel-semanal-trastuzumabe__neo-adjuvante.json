@@ -4,7 +4,7 @@
   "nome": "AC-TH (fase TH — paclitaxel semanal + trastuzumabe)",
   "cenario": "neo/adjuvante",
   "versao": "1.0.0",
-  "hash": "6521e3b106c5b445c6e5dc77bda3c59d5bfefd0cdd2d6b658b4e6aa04b77ef2a",
+  "hash": "7a292f661bee7a7a46acf8b0c3c1734fb5b006eb6465cb01cf365021bdc1ef34",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": 4,
@@ -141,15 +141,15 @@
       "adjustmentPercent": null,
       "adjustmentReason": null,
       "route": "EV",
-      "diluent": null,
-      "finalVolumeMl": null,
+      "diluent": "SF 0,9%",
+      "finalVolumeMl": 500,
       "infusionTime": "60 min",
       "days": [
         "d1",
         "d8",
         "d15"
       ],
-      "observacao": "Semanal por 12 semanas (SOnHe TH p. 21).",
+      "observacao": "Semanal por 12 semanas (SOnHe TH p. 21). D-F1-28: paclitaxel semanal em SF 0,9% 500 mL.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
@@ -223,6 +223,6 @@
     }
   ],
   "limiaresBula": null,
-  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema TH\" p. 21; SBOC 2026 mama (docs/referencias/evidencias/SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md): trastuzumabe ataque 8 mg/kg, depois 6 mg/kg; decisões D-W9-23, D-W9-34, D-W9-50.",
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); SOnHe 2024 (secundária, setor privado): Mama \"Esquema TH\" p. 21; SBOC 2026 mama (docs/referencias/evidencias/SBOC-2026-MAMA-NEOADJUVANCIA-RESUMO.md): trastuzumabe ataque 8 mg/kg, depois 6 mg/kg; decisões D-W9-23, D-W9-34, D-W9-50. D-F1-28 (diluente do paclitaxel semanal).",
   "status": "RASCUNHO"
 }

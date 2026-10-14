@@ -4,7 +4,7 @@
   "nome": "Cisplatina + Docetaxel",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "f1a350268f40f4264677ce979033e41c09b479d154a0078bc126c25a5d9156e4",
+  "hash": "57789d7f15797958afc6446c50c8a7a4028fc42cd9a7d2e874a40d7a429c2f88",
   "codigoInstitucional": "P1426",
   "intervaloDias": 21,
   "ciclos": 6,
@@ -115,7 +115,7 @@
       "days": [
         "d1"
       ],
-      "observacao": "Todo taxano (D-W9-34c). A ficha real P1426 (docetaxel + CDDP) não trazia cimetidina; vale a regra posterior.",
+      "observacao": "SE NECESSÁRIO (D-F1-43). Todo taxano (D-W9-34c). A ficha real P1426 (docetaxel + CDDP) não trazia cimetidina; vale a regra posterior.",
       "source": "PROTOCOL",
       "overrideMotivo": null
     },
@@ -316,9 +316,31 @@
       "observacao": "Lavar acesso venoso pós-QT (planilha).",
       "source": "PROTOCOL",
       "overrideMotivo": null
+    },
+    {
+      "drug": "Dipirona",
+      "classe": "PRE_QT",
+      "sequence": 15,
+      "standardDose": null,
+      "doseBasis": "OTHER",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "a definir pelo médico",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "a definir pelo médico",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "SE NECESSÁRIO (D-F1-43). Dose e via sem padrão decidido: o médico define [VERIFICAR].",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
     }
   ],
   "limiaresBula": null,
-  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); ficha real P1426 (docs/referencias/modelos/05); decisões D-W9-23, D-W9-34, D-W9-50.",
+  "fonte": "Planilha revisada Dr. Silas (docs/referencias/protocolos/protocolos-citotoxicos-revisado-silas.csv, aba SUS-Estado); ficha real P1426 (docs/referencias/modelos/05); decisões D-W9-23, D-W9-34, D-W9-50. D-F1-43 (dipirona e cimetidina como item se necessário).",
   "status": "RASCUNHO"
 }

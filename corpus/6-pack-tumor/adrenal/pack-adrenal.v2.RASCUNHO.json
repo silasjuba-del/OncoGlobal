@@ -613,7 +613,12 @@
             "unidade": "mg",
             "via": "VO",
             "dias": "D1-D28, diário (dividido em 3-4 tomadas)",
-            "observacao": "aula PRO: iniciar 1 g/dia, 3 g/dia em 1 semana, até 6 g/dia em 4-12 semanas (máx. 12 g/dia), guiado por mitotanemia 14-20 mcg/mL; duração 3-5 anos"
+            "observacao": "aula PRO: iniciar 1 g/dia, 3 g/dia em 1 semana, até 6 g/dia em 4-12 semanas (máx. 12 g/dia), guiado por mitotanemia 14-20 mcg/mL; duração 3-5 anos",
+            "disponibilidadeMercado": {
+              "estado": "INDISPONIVEL",
+              "decisao": "D-F1-29",
+              "motivo": "mitotano fora do mercado; o app não propõe e marca como indisponível"
+            }
           }
         ],
         "cicloDias": 28,
@@ -638,7 +643,13 @@
           "trecho": "Iniciar com 1 g/d e aumentar para 3 g/d em 01 semana.",
           "estado": "INFERIDO"
         },
-        "observacao": "SBOC recomenda mitotano adjuvante com aumento gradual sem fixar dose; números da aula PRO."
+        "observacao": "SBOC recomenda mitotano adjuvante com aumento gradual sem fixar dose; números da aula PRO.",
+        "propor": false,
+        "disponibilidadeMercado": {
+          "estado": "INDISPONIVEL",
+          "decisao": "D-F1-29",
+          "motivo": "mitotano fora do mercado; o app não propõe e marca como indisponível"
+        }
       },
       {
         "id": "adrenal-cca-edp-mitotano",
@@ -676,7 +687,12 @@
             "unidade": "mg",
             "via": "VO",
             "dias": "D1-D28, 1x/dia",
-            "observacao": "SBOC: 1 a 4 g/dia; titular"
+            "observacao": "SBOC: 1 a 4 g/dia; titular",
+            "disponibilidadeMercado": {
+              "estado": "INDISPONIVEL",
+              "decisao": "D-F1-29",
+              "motivo": "mitotano fora do mercado; o app não propõe e marca como indisponível"
+            }
           }
         ],
         "cicloDias": 28,
@@ -708,6 +724,12 @@
           "pagina": null,
           "trecho": "For Intravenous Use Only",
           "estado": "VERIFICADO"
+        },
+        "propor": false,
+        "disponibilidadeMercado": {
+          "estado": "INDISPONIVEL",
+          "decisao": "D-F1-29",
+          "motivo": "mitotano fora do mercado; o app não propõe e marca como indisponível"
         }
       },
       {
@@ -827,6 +849,71 @@
         },
         "nct": "NCT01152827",
         "nctEstado": "VERIFICADO"
+      },
+      {
+        "id": "adrenal-cca-edp-sem-mitotano",
+        "nome": "EDP sem mitotano",
+        "cenario": "metastático — CCA estádio IV",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "Doxorrubicina",
+            "dose": 20,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1, D8",
+            "observacao": "via EV: bula ('For Intravenous Use Only')"
+          },
+          {
+            "droga": "Etoposídeo",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D2 a D4",
+            "observacao": ""
+          },
+          {
+            "droga": "Cisplatina",
+            "dose": 40,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D3, D4",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "",
+        "ajusteObrigatorio": null,
+        "fichaId": null,
+        "sus": {
+          "disponivel": "sim",
+          "fonte": {
+            "tipo": "NORMA",
+            "referencia": "SIGTAP competência 09/2026 (tb_procedimento/tb_descricao) — procedimento 03.04.02.012-5",
+            "pagina": null,
+            "trecho": "QUIMIOTERAPIA PALITIVA DO CARCINOMA DE ADRENAL (DOENÇA METASTÁTICA RECIDIVADA OU LOCO -REGIONAL AVANÇADA)",
+            "estado": "VERIFICADO"
+          },
+          "observacao": "Financiado por APAC de quimioterapia (valor por procedimento, não por droga); o SIGTAP não nomeia o esquema — escolha e fornecimento pelo CACON/UNACON. Mitotano dentro da APAC paliativa (fornecimento pelo serviço)."
+        },
+        "fonte": {
+          "tipo": "SBOC",
+          "referencia": "SBOC/sboc/diretrizes/Diretrizes-SBOC-2026-Carcinomas-da-adrenal-v3-VERSAO-PARA-COLABORACAO-1.pdf",
+          "pagina": 8,
+          "trecho": "doxorrubicina 20 mg/m² D1 e D8 e mitotano 1 a 4 g VO 1x/dia",
+          "estado": "VERIFICADO"
+        },
+        "fonteVia": {
+          "tipo": "BULA",
+          "referencia": "Bula FDA Doxorubicin HCl (openFDA set_id 00634b2b-4e48-4178-8877-28582af894ad, 2026-04-30)",
+          "pagina": null,
+          "trecho": "For Intravenous Use Only",
+          "estado": "VERIFICADO"
+        },
+        "propor": true,
+        "decisao": "D-F1-29",
+        "observacaoProtocolo": "D-F1-29: com o mitotano indisponível, o app propõe EDP sem mitotano; FIRM-ACT (EDP-M) fica como referência consultável. Doses de EDP herdadas do protocolo FIRM-ACT."
       }
     ],
     "radioterapia": [

@@ -84,7 +84,11 @@
         "CALCIO"
       ],
       "periodicidade": null,
-      "pendencia": "SEM_FONTE — cadência exata (pré/pós hidratação) depende do protocolo do serviço; eletrólitos citados na bula sem janela literal extraída"
+      "pendencia": "SEM_FONTE — cadência exata (pré/pós hidratação) depende do protocolo do serviço; eletrólitos citados na bula sem janela literal extraída",
+      "baseline": [
+        "AUDIOMETRIA_TONAL"
+      ],
+      "decisao": "D-F1-31"
     },
     {
       "classe": "sorologias pré-tratamento (transversal)",
@@ -111,6 +115,27 @@
         "trecho": "Monitor INR more frequently",
         "edicao": "2026-10-11"
       }
+    },
+    {
+      "classe": "fluoropirimidinas (5-FU/capecitabina)",
+      "lembretes": [
+        {
+          "id": "DPYD",
+          "rotulo": "Genotipagem DPYD",
+          "disponibilidadeSUS": "AUSENTE_NO_SUS",
+          "tipo": "LEMBRETE",
+          "gerarPedido": false,
+          "bloqueia": false
+        }
+      ],
+      "periodicidade": null,
+      "decisao": "D-F1-32",
+      "fonte": {
+        "tipo": "DECISAO_MEDICA",
+        "referencia": "D-F1-32 (Dr. Silas, 2026-10-14)",
+        "trecho": null,
+        "edicao": "2026-10-14"
+      }
     }
   ],
   "revisaoLabThresholds": {
@@ -118,8 +143,8 @@
     "estado": "NAO_EXECUTADO_AQUI (código/motor — fora da ordem 'não tocar no código')"
   },
   "resumo": {
-    "painels": 7,
-    "comFonte": 4,
+    "painels": 8,
+    "comFonte": 5,
     "semFonteOuParcial": 3
   },
   "curadoria": {

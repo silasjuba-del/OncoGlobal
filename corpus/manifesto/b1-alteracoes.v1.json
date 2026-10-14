@@ -1,0 +1,71 @@
+{
+  "versao": "1.0.0",
+  "fatia": "F1-B1",
+  "geradoEm": "2026-10-14",
+  "alteracoes": [
+    {
+      "arquivo": "corpus/fichas/cabeca-e-pescoco/carboplatina-paclitaxel-semanal__nao-especificado.json",
+      "decisao": "D-F1-28"
+    },
+    {
+      "arquivo": "corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json",
+      "decisao": "D-F1-28"
+    },
+    {
+      "arquivo": "corpus/fichas/mama/ac-ct-fase-ct-carboplatina-paclitaxel-semanal__neo-adjuvante.json",
+      "decisao": "D-F1-28"
+    },
+    {
+      "arquivo": "corpus/fichas/mama/ac-t-fase-t-paclitaxel-semanal__adjuvante.json",
+      "decisao": "D-F1-28"
+    },
+    {
+      "arquivo": "corpus/fichas/mama/ac-th-fase-th-paclitaxel-semanal-trastuzumabe__neo-adjuvante.json",
+      "decisao": "D-F1-28"
+    },
+    {
+      "arquivo": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json",
+      "decisao": "D-F1-28"
+    },
+    {
+      "arquivo": "corpus/fichas/pulmao-cpnpc/cisplatina-docetaxel__nao-especificado.json",
+      "decisao": "D-F1-43"
+    },
+    {
+      "arquivo": "corpus/1-exames/labs/labs-por-esquema.v1.RASCUNHO.json",
+      "decisao": "D-F1-31"
+    },
+    {
+      "arquivo": "corpus/1-exames/labs/labs-por-esquema.v1.RASCUNHO.json",
+      "decisao": "D-F1-32"
+    },
+    {
+      "arquivo": "corpus/3-laudos/inss/laudo-inss.v1.RASCUNHO.json",
+      "decisao": "D-F1-37"
+    },
+    {
+      "arquivo": "corpus/3-laudos/inss/laudo-inss.v1.RASCUNHO.json",
+      "decisao": "D-F1-38"
+    },
+    {
+      "arquivo": "corpus/3-laudos/inss/laudo-inss.v1.RASCUNHO.json",
+      "decisao": "D-F1-39"
+    },
+    {
+      "arquivo": "corpus/3-laudos/inss/laudo-inss.v1.RASCUNHO.json",
+      "decisao": "D-F1-46"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/adrenal/pack-adrenal.v2.RASCUNHO.json",
+      "decisao": "D-F1-29"
+    },
+    {
+      "arquivo": "corpus/6-pack-tumor/prostata/pack-prostata.v2.RASCUNHO.json",
+      "decisao": "D-F1-24"
+    },
+    {
+      "arquivo": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
+      "decisao": "D-F1-30"
+    }
+  ]
+}

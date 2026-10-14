@@ -92,7 +92,13 @@
           "trecho": "four-drug regimen ... 5-HT3 receptor antagonist, dexamethasone ... NK1 receptor antagonist ... olanzapine",
           "estado": "VERIFICADO"
         }
-      ]
+      ],
+      "politicaLocal": {
+        "propor": false,
+        "estado": "REFERENCIA_CONSULTAVEL",
+        "decisao": "D-F1-30",
+        "motivo": "política local: sem NK1 e sem olanzapina"
+      }
     },
     {
       "id": "SUP-NVQ-ALTO-NK1-IV",
@@ -135,6 +141,12 @@
         "secao": "2.1",
         "trecho": "150 mg on Day 1 as an intravenous infusion over 20 to 30 minutes",
         "estado": "VERIFICADO"
+      },
+      "politicaLocal": {
+        "propor": false,
+        "estado": "REFERENCIA_CONSULTAVEL",
+        "decisao": "D-F1-30",
+        "motivo": "política local: sem NK1 e sem olanzapina"
       }
     },
     {
@@ -179,7 +191,12 @@
         "trecho": "A single 24 mg dose administered 30 minutes before ... highly emetogenic chemotherapy",
         "estado": "VERIFICADO"
       },
-      "nota": "Alternativa: palonosetrona (SUP-NVQ-5HT3-PALO). MASCC 2023 não identificou diferença relevante entre 5-HT3."
+      "nota": "Alternativa: palonosetrona (SUP-NVQ-5HT3-PALO). MASCC 2023 não identificou diferença relevante entre 5-HT3.",
+      "politicaLocal": {
+        "propor": true,
+        "linhaAntiemese": 1,
+        "decisao": "D-F1-30"
+      }
     },
     {
       "id": "SUP-NVQ-5HT3-PALO",
@@ -333,7 +350,13 @@
           "trecho": "Dosing information now includes the option of a 5-mg dose of olanzapine",
           "estado": "VERIFICADO"
         }
-      ]
+      ],
+      "politicaLocal": {
+        "propor": false,
+        "estado": "REFERENCIA_CONSULTAVEL",
+        "decisao": "D-F1-30",
+        "motivo": "política local: sem NK1 e sem olanzapina"
+      }
     },
     {
       "id": "SUP-NVQ-MOD-5HT3",
@@ -386,7 +409,12 @@
           "estado": "VERIFICADO"
         }
       ],
-      "nota": "CONFLITO: a bula FDA ainda prevê 8 mg 12/12 h por 1–2 dias pós-QT; MASCC/ESMO 2023 não recomenda antiemético de rotina após D1 em MEC. Adotado MASCC; decisão do Dr. Silas."
+      "nota": "CONFLITO: a bula FDA ainda prevê 8 mg 12/12 h por 1–2 dias pós-QT; MASCC/ESMO 2023 não recomenda antiemético de rotina após D1 em MEC. Adotado MASCC; decisão do Dr. Silas.",
+      "politicaLocal": {
+        "propor": true,
+        "linhaAntiemese": 1,
+        "decisao": "D-F1-30"
+      }
     },
     {
       "id": "SUP-NVQ-MOD-DEX",
@@ -491,7 +519,13 @@
           "trecho": "Dexamethasone Adults 12 mg orally none none",
           "estado": "VERIFICADO"
         }
-      ]
+      ],
+      "politicaLocal": {
+        "propor": false,
+        "estado": "REFERENCIA_CONSULTAVEL",
+        "decisao": "D-F1-30",
+        "motivo": "política local: sem NK1 e sem olanzapina"
+      }
     },
     {
       "id": "SUP-NVQ-BAIXO",
@@ -629,7 +663,13 @@
           "estado": "APOIO_AULA"
         }
       ],
-      "nota": "Antes: descartar metástase SNC, obstrução, hipercalcemia, outros fármacos, dispepsia (IBP) — Aula 88 pág. 15."
+      "nota": "Antes: descartar metástase SNC, obstrução, hipercalcemia, outros fármacos, dispepsia (IBP) — Aula 88 pág. 15.",
+      "politicaLocal": {
+        "propor": false,
+        "estado": "REFERENCIA_CONSULTAVEL",
+        "decisao": "D-F1-30",
+        "motivo": "política local: sem NK1 e sem olanzapina"
+      }
     },
     {
       "id": "SUP-DOR-DIPIRONA",
@@ -2289,14 +2329,62 @@
         "motivo": "dose profilática oncológica não encontrada em bula/diretriz consultada"
       },
       "pendencia": "SEM_FONTE"
+    },
+    {
+      "id": "SUP-NVQ-2A-LINHA-METOCLOPRAMIDA",
+      "indicacao": "2ª linha antiemética (após ondansetrona)",
+      "gatilho": "náusea/vômito apesar da ondansetrona (resgate)",
+      "droga": "metoclopramida",
+      "apresentacaoSUS": {
+        "texto": "metoclopramida 10 mg comprimido (Básico)",
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RENAME 2024 (Portaria GM/MS 6.324/2024), PDF BVS-MS",
+          "secao": "p. 28",
+          "trecho": null,
+          "estado": "VERIFICADO"
+        }
+      },
+      "dose": "SEM_FONTE",
+      "unidade": "mg",
+      "via": "VO",
+      "frequencia": "SEM_FONTE",
+      "duracao": "SEM_FONTE",
+      "ajusteRenal": null,
+      "ajusteHepatico": null,
+      "controle344": {
+        "lista": "comum",
+        "nota": null,
+        "fonte": {
+          "tipo": "NORMA",
+          "referencia": "RDC Anvisa 999/2025 (Anexo I da Portaria SVS/MS 344/98, atualização 97)",
+          "secao": "Anexo I (A1–F) — substância ausente",
+          "trecho": null,
+          "estado": "VERIFICADO_POR_AUSENCIA"
+        }
+      },
+      "interacoesCriticas": "Não somar com outro antiemético de resgate sem decisão médica.",
+      "orientacaoPaciente": "Use só se o enjoo continuar depois do remédio principal.",
+      "politicaLocal": {
+        "propor": true,
+        "linhaAntiemese": 2,
+        "decisao": "D-F1-30"
+      },
+      "fonte": {
+        "tipo": "DECISAO_MEDICA",
+        "referencia": "D-F1-30 (Dr. Silas, 2026-10-14): ondansetrona 1ª linha, metoclopramida 2ª linha",
+        "trecho": null,
+        "estado": "DECIDIDO"
+      },
+      "pendencia": "dose, frequência e duração da metoclopramida sem fonte nesta curadoria; o médico define [VERIFICAR]"
     }
   ],
   "resumo": {
-    "total": 47,
+    "total": 48,
     "doseVerificada": 37,
     "doseApoioAula": 5,
     "doseOutraIndicacao": 1,
-    "semFonte": 3,
+    "semFonte": 4,
     "naoAplicavel": 1
   },
   "curadoria": {
