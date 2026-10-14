@@ -41,14 +41,14 @@ separação extração → regra → minuta → decisão; autoridade médica (s�
 - **PADRÃO:** recomendação nasce como proposta (`RequestGroup` com `intent=proposal`) e só vira ordem após decisão humana.
 - **FONTE:** FHIR CR.
 - **CAPACIDADE REUTILIZÁVEL:** separação minuta × decisão assinada.
-- **LOCAL NO ONCOGLOBAL:** `PrescricaoProposta`, Flash (`src/server/flash.ts`), documentos ASSINADO.
-- **CONTRATO AFETADO:** nenhum novo; reforça estados Revisão (RAW→ASSINADO).
+- **LOCAL NO ONCOGLOBAL:** `PrescricaoProposta` (proposta), comando `ConfirmarBloco` (`src/server/rotas.ts`) que produz o documento ASSINADO, Flash (`src/server/flash.ts`).
+- **CONTRATO AFETADO:** nenhum novo; reforça estados Revisão (RAW→ASSINADO). `ActionIntent` não participa: ele cobre ações externas (imprimir, enviar, exportar).
 - **RISCO DE ACOPLAMENTO:** baixo.
 - **RISCO CLÍNICO:** baixo; protege autoridade médica.
 - **RISCO OPERACIONAL:** baixo.
 - **DECISÃO:** ADOTAR (como invariante já vigente).
-- **JUSTIFICATIVA:** idêntico ao ActionIntent + assinatura médica.
-- **TESTE NECESSÁRIO:** nenhuma rota cria evento ASSINADO sem sessão médica e intent explícito (já coberto em W10/W8; manter no gate).
+- **JUSTIFICATIVA:** idêntico ao par `PrescricaoProposta` → `ConfirmarBloco` com assinatura médica.
+- **TESTE NECESSÁRIO:** nenhuma rota cria evento ASSINADO fora de `ConfirmarBloco` com sessão médica válida e referência de assinatura (já coberto em W10/W8; manter no gate).
 
 ## 4. Módulos independentes por capacidade clínica (micro-frontends)
 - **PADRÃO:** app composto por módulos com fronteira própria, registrados num shell; telas montadas por capacidade.
