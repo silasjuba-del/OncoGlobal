@@ -3,6 +3,7 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { createHash } from "node:crypto";
 import { ProtocolTemplate } from "../../../src/contracts/w10/prescricao.js";
+import { instanciarProtocolo } from "../../../src/rules/prescricao/instanciarProtocolo.js";
 
 const rd = (p: string) => JSON.parse(readFileSync(join(process.cwd(), p), "utf8"));
 const lista = (d: string): string[] => readdirSync(d).flatMap(f => { const p = join(d, f); return statSync(p).isDirectory() ? lista(p) : p.endsWith(".json") ? [p] : []; });
@@ -38,6 +39,30 @@ describe("F1-B1 valores aplicados ao corpus", () => {
     const cim = f.itens.find((x: any) => /^cimetidina/i.test(x.drug)), dip = f.itens.find((x: any) => x.drug === "Dipirona");
     expect(cim.observacao).toMatch(/^SE NECESSÁRIO \(D-F1-43\)/); expect(dip.observacao).toMatch(/^SE NECESSÁRIO \(D-F1-43\)/);
     expect(dip.standardDose).toBeNull(); expect(hashDe(f)).toBe(f.hash); expect(ProtocolTemplate.safeParse(f).success).toBe(true);
+  });
+  it("D-F1-43 · armadilha (e): na instanciação, nenhum PRE_QT fica depois de POS_QT; dipirona entra logo após a cimetidina", () => {
+    const dados = { pesoKg: 70, alturaCm: 170, bsaM2: 1.8, clcr: 90, medidoEm: "2026-10-14T09:00:00-03:00" };
+    const fichas = lista("corpus/fichas").map(p => JSON.parse(readFileSync(p, "utf8"))).filter(f => Array.isArray(f.itens));
+    expect(fichas.length).toBeGreaterThan(0);
+    for (const f of fichas) {
+      const seqs = f.itens.map((i: any) => i.sequence);
+      expect(new Set(seqs).size, f.templateId).toBe(seqs.length);
+      // simula a promoção do RASCUNHO: a ordem gerada é a ordem do template.
+      const r = instanciarProtocolo({ ...f, status: "CONFERIDA_MEDICO" }, dados);
+      expect(r.ok, f.templateId).toBe(true);
+      if (!r.ok) continue;
+      const classes = r.itens.map(x => x.item.classe);
+      const primeiroPos = classes.indexOf("POS_QT");
+      if (primeiroPos >= 0) expect(classes.slice(primeiroPos).includes("PRE_QT"), f.templateId).toBe(false);
+      const s = r.itens.map(x => x.item.sequence);
+      expect(s, f.templateId).toEqual([...s].sort((a, b) => a - b));
+    }
+    const p1426 = rd("corpus/fichas/pulmao-cpnpc/cisplatina-docetaxel__nao-especificado.json");
+    const r = instanciarProtocolo({ ...p1426, status: "CONFERIDA_MEDICO" }, dados);
+    if (!r.ok) throw new Error("P1426 não instanciou");
+    const nomes = r.itens.map(x => x.item.drug);
+    expect(nomes.indexOf("Dipirona")).toBe(nomes.findIndex(n => /^cimetidina/i.test(n)) + 1);
+    expect(nomes.indexOf("Dipirona")).toBeLessThan(nomes.indexOf("Docetaxel"));
   });
   it("D-F1-42: AT (P1603) segue em 60 mg/m² de doxorrubicina", () => {
     const f = rd("corpus/fichas/mama/doxorrubicina-paclitaxel-at__nao-especificado.json");

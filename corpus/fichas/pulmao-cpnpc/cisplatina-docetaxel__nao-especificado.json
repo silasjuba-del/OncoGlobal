@@ -4,7 +4,7 @@
   "nome": "Cisplatina + Docetaxel",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "57789d7f15797958afc6446c50c8a7a4028fc42cd9a7d2e874a40d7a429c2f88",
+  "hash": "4edde9dcd430588286cb58c0111eb9b4efadb7cd9a7b35232c13de6dc87f3ee9",
   "codigoInstitucional": "P1426",
   "intervaloDias": 21,
   "ciclos": 6,
@@ -120,9 +120,31 @@
       "overrideMotivo": null
     },
     {
+      "drug": "Dipirona",
+      "classe": "PRE_QT",
+      "sequence": 6,
+      "standardDose": null,
+      "doseBasis": "OTHER",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "a definir pelo médico",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "a definir pelo médico",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "SE NECESSÁRIO (D-F1-43). Dose e via sem padrão decidido: o médico define [VERIFICAR].",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
       "drug": "Docetaxel",
       "classe": "QT",
-      "sequence": 6,
+      "sequence": 7,
       "standardDose": 75,
       "doseBasis": "MG_M2",
       "calculatedDose": null,
@@ -144,7 +166,7 @@
     {
       "drug": "Soro fisiológico 0,9% 500 mL (pré-cisplatina)",
       "classe": "PRE_QT",
-      "sequence": 7,
+      "sequence": 8,
       "standardDose": 1,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -166,7 +188,7 @@
     {
       "drug": "Sulfato de magnésio 10% 10 mL",
       "classe": "PRE_QT",
-      "sequence": 8,
+      "sequence": 9,
       "standardDose": 10,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -188,7 +210,7 @@
     {
       "drug": "Cloreto de potássio 19,1% 4 mL",
       "classe": "PRE_QT",
-      "sequence": 9,
+      "sequence": 10,
       "standardDose": 4,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -210,7 +232,7 @@
     {
       "drug": "Cisplatina",
       "classe": "QT",
-      "sequence": 10,
+      "sequence": 11,
       "standardDose": 75,
       "doseBasis": "MG_M2",
       "calculatedDose": null,
@@ -232,7 +254,7 @@
     {
       "drug": "Manitol 20% frasco 250 mL",
       "classe": "QT",
-      "sequence": 11,
+      "sequence": 12,
       "standardDose": 1,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -254,7 +276,7 @@
     {
       "drug": "Soro fisiológico 0,9% 500 mL (pós-cisplatina)",
       "classe": "POS_QT",
-      "sequence": 12,
+      "sequence": 13,
       "standardDose": 1,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -276,7 +298,7 @@
     {
       "drug": "Cloreto de potássio 19,1% 4 mL",
       "classe": "POS_QT",
-      "sequence": 13,
+      "sequence": 14,
       "standardDose": 4,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -298,7 +320,7 @@
     {
       "drug": "Soro fisiológico 0,9% 250 mL (lavagem pós-QT)",
       "classe": "POS_QT",
-      "sequence": 14,
+      "sequence": 15,
       "standardDose": 1,
       "doseBasis": "FIXED",
       "calculatedDose": null,
@@ -314,28 +336,6 @@
         "d1"
       ],
       "observacao": "Lavar acesso venoso pós-QT (planilha).",
-      "source": "PROTOCOL",
-      "overrideMotivo": null
-    },
-    {
-      "drug": "Dipirona",
-      "classe": "PRE_QT",
-      "sequence": 15,
-      "standardDose": null,
-      "doseBasis": "OTHER",
-      "calculatedDose": null,
-      "prescribedDose": null,
-      "unit": "a definir pelo médico",
-      "adjustmentPercent": null,
-      "adjustmentReason": null,
-      "route": "a definir pelo médico",
-      "diluent": null,
-      "finalVolumeMl": null,
-      "infusionTime": null,
-      "days": [
-        "d1"
-      ],
-      "observacao": "SE NECESSÁRIO (D-F1-43). Dose e via sem padrão decidido: o médico define [VERIFICAR].",
       "source": "PROTOCOL",
       "overrideMotivo": null
     }
