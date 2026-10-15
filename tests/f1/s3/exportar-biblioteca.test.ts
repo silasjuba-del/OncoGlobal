@@ -77,6 +77,8 @@ it("identificador de estudo/catálogo não mascara rótulo pessoal no mesmo text
 });
 it.each([
   { nomePaciente: "Pessoa Sintética", nascimento: "01/02/1970" },
+  { nomeCompletoPaciente: "Pessoa Sintética" },
+  { patientFullName: "Pessoa Sintética" },
   { paciente: { nome: "Pessoa Sintética", dataNascimento: "1970-02-01" } },
   { patientId: "paciente-sintetico-identificavel" },
   { cpf: 1234567 },
@@ -94,6 +96,13 @@ it.each([
   const f = fixture();
   writeFileSync(join(f.root, "corpus/1-exames/item.json"), JSON.stringify(dados));
   expect(() => exportarBiblioteca(f.root, f.out)).toThrow("PHI_ESTRUTURAL");
+  expect(existsSync(f.out)).toBe(false);
+});
+it.each(["prontuario-1234567", "Paciente-Pessoa-Sintetica", "nomeCompletoPaciente-Pessoa-Sintetica"])("recusa identidade no caminho antes de criar saída: %s", nome => {
+  const f = fixture();
+  mkdirSync(join(f.root, "corpus", nome), { recursive: true });
+  writeFileSync(join(f.root, "corpus", nome, "item.json"), '{"texto":"Referência sintética"}');
+  expect(() => exportarBiblioteca(f.root, f.out)).toThrow("PHI_CAMINHO");
   expect(existsSync(f.out)).toBe(false);
 });
 it("exporta raízes consumidas pelo app e registra binários/scripts excluídos", () => {

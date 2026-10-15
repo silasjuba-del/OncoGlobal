@@ -65,6 +65,14 @@ async function consultaCom(lotes: { id: string; topografia?: string; histologia?
 }
 
 describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", () => {
+  it.each([null,"lote-outro"])("evidência tumoral de envelope %s não contamina o lote selecionado",async envelope=>{
+    const c=await consultaCom([{id:"lote-mama",topografia:"Mama"}]);
+    c.seed("TumorLot",{tumorLotId:"lote-mama",patientId:"Paciente Teste Nutri",cid:ausente(),histologia:ausente(),topografia:presente("Esôfago","outra-fonte"),estadiamentos:[],finalidadeApac:ausente(),marcos:[]},envelope);
+    const v=await c.carregar("lote-mama");
+    expect(v.status).toBe(200);
+    expect(v.body.pendenciasLeitura).not.toContain("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
+    expect(v.body.flash.sugestoesClinicas).toBeUndefined();
+  });
   it("supersessão remove a versão antiga antes de contar lotes",async()=>{
     const c=await consultaCom([]),lote={tumorLotId:"lote-corrigido",patientId:"Paciente Teste Nutri",cid:ausente(),histologia:ausente(),estadiamentos:[],finalidadeApac:ausente(),marcos:[]};
     const anterior=c.seed("TumorLot",{...lote,topografia:presente("Mama","anterior")},"lote-corrigido");

@@ -376,7 +376,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
       && d.fontes.length > 0 && typeof d.valor === "string" && d.valor.trim() ? d.valor : null;
   // Armadilha (a): encontro reaberto não usa a versão do lote confirmada em encontro POSTERIOR.
   const lotesNoHorizonte = lote ? porTipo(all.filter((e) => e.patientId === patientId && Date.parse(e.criadoEm) <= horizontePlaquetas),
-    "TumorLot", TumorLot).filter((x) => x.value.patientId === patientId && x.value.tumorLotId === lote.tumorLotId) : [];
+    "TumorLot", TumorLot).filter((x) => x.event.tumorLotId === lote.tumorLotId && x.value.patientId === patientId && x.value.tumorLotId === lote.tumorLotId) : [];
   // Evidências diferentes podem confirmar o mesmo conteúdo. Ignorar apenas a proveniência na
   // comparação; valores, estados, revisão, estadiamentos e marcos continuam distintos.
   // Os lotes originais, com todas as fontes, permanecem em cabecalho.lotes e no ledger.
@@ -409,7 +409,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   if (triagemNutricional.motivos.some(m => /divergentes/.test(m)))
     pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_SITIOS_NAO_RECONCILIADOS");
   const sugestaoNutricional = textoNutricional && triagemNutricional.motivos.some(m => m.startsWith("IMC "))
-    ? `${textoNutricional} (peso medido em ${avaliacao.dadosNutricionais.medidoEm}; fonte ${avaliacao.dadosNutricionais.sourceId}; altura ${alturaDocumentada} cm: ${fontesAltura.map(f => `${f.data} (fonte ${f.fontes}; evento ${f.eventId})`).join("; ")}; conferir atualidade)`
+    ? `${textoNutricional} (peso medido em ${avaliacao.dadosNutricionais.medidoEm}; fontes ${avaliacao.dadosNutricionais.fontes.map(f => `${f.sourceId} (evento ${f.eventId})`).join(", ")}; altura ${alturaDocumentada} cm: ${fontesAltura.map(f => `${f.data} (fonte ${f.fontes}; evento ${f.eventId})`).join("; ")}; conferir atualidade)`
     : textoNutricional;
   pendenciasLeitura.push(...contextoClinico.pendencias,
     ...Object.entries(contextoClinico.campos).filter(([,c]) => c.valor === null).map(([nome]) => `${nome.toUpperCase()}_NAO_CARREGADAS`));
