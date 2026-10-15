@@ -28,8 +28,15 @@ const GATILHO_CID: ReadonlyArray<readonly [RegExp, string]> = [
   [/^C15/, "câncer de esôfago"],
   [/^C16/, "câncer de estômago"],
 ];
-// Apenas nomes de sítio explicitamente escritos; não inferir órgão de um subtipo histológico genérico.
-const OUTRO_SITIO = /\b(?:mama|mamario|mamaria|pulmao|pulmonar|prostata|prostatico|colorretal|colon|reto|renal|rim|tireoide|vulva|pele|cutaneo|ovario|ovariano|endometrio|pancreas|pancreatico|bexiga|figado)\b/;
+/** Vocabulário fechado de formas reconhecidas; qualquer termo não reconciliado fica pendente. */
+function campoDeSitioReconhecido(texto: string | null, histologico: boolean): boolean {
+  if (texto === null) return true;
+  const semSitios = texto.replace(/\b(?:esofago|esofagico|esofagica|estomago|gastrico|gastrica)\b/g, " ");
+  const semForma = histologico
+    ? semSitios.replace(/\b(?:adenocarcinoma|carcinoma|epidermoide|escamoso|escamosas|celulas|invasivo|invasiva|cec|bem|pouco|moderadamente|diferenciado|diferenciada)\b/g, " ")
+    : semSitios.replace(/\b(?:cancer|terco|toracico|distal|proximal|medio|superior|inferior|cervical|corpo|fundo|antro)\b/g, " ");
+  return semForma.replace(/\b(?:de|do|da|dos|das|em)\b/g, " ").replace(/[\s(),.-]/g, "") === "";
+}
 
 /** IMC = peso (kg) / altura (m)², SEM arredondar: o corte < 18 compara o valor real. Ausente ou inválido ⇒ null (nunca 0). */
 export function imcDeMedidas(pesoKg: number | null | undefined, alturaCm: number | null | undefined): number | null {
@@ -52,8 +59,8 @@ export function sugerirTriagemNutricional(entrada: EntradaTriagemNutricional): R
   const porCodigo = GATILHO_CID.filter(([re]) => cid !== null && re.test(cid)).map(([, nome]) => nome);
   const gatilhos = [...new Set([...porTexto, ...porHistologia, ...porCodigo])];
   const conflito = gatilhos.length > 1 || (gatilhos.length > 0 &&
-    ((tumor !== null && (porTexto.length !== 1 || OUTRO_SITIO.test(tumor)))
-      || (histologia !== null && OUTRO_SITIO.test(histologia)) || (cid !== null && porCodigo.length !== 1)));
+    ((tumor !== null && (porTexto.length !== 1 || !campoDeSitioReconhecido(tumor,false)))
+      || !campoDeSitioReconhecido(histologia,true) || (cid !== null && porCodigo.length !== 1)));
   const imc = typeof entrada.imc === "number" && Number.isFinite(entrada.imc) && entrada.imc > 0 && entrada.imc < 100 ? entrada.imc : null;
   if (conflito) {
     const pendencia = "topografia, histologia ou CID divergentes ou não reconciliados — conferir fontes";

@@ -7,6 +7,8 @@ describe("F1-B1 triagem nutricional (D-F1-33, NRS-2002)", () => {
     {tumor:"Mama",cid:"C15.4"},
     {tumor:"Mama",histologia:"adenocarcinoma gástrico"},
     {tumor:"Esôfago",histologia:"carcinoma ductal de mama"},
+    {tumor:"Esôfago",histologia:"carcinoma adrenocortical"},
+    {tumor:"Esôfago",histologia:"histologia de sítio ainda não reconciliado"},
     {tumor:"Estômago",cid:"C15.4"},
   ])("IMC é gatilho independente, mantendo o conflito entre fontes (%j)", entrada => {
     const r=t({...entrada,imc:17});expect(r.estado).toBe("SUGERIR");
