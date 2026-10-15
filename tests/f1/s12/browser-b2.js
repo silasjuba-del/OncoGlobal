@@ -177,9 +177,8 @@ export async function jornadaB2NoNavegador(page, opts) {
         const rasc = await post("/consulta/prescricao/rascunho", { patientId, encounterId, tumorLotId: null, templateId: f.templateId });
         const inst = rasc.json.instanciacao;
         if (!inst?.ok) { pintar(art, "Instanciação falhou na proposta."); return; }
-        const itens = inst.itens.filter((i) => i.estado === "PRONTO").map((i, idx) => ({
+        const itens = inst.itens.filter((i) => i.estado === "PRONTO").map((i) => ({
           ...i.item,
-          sequence: idx + 1,
           source: "MANUAL",
           overrideMotivo: i.item.classe === "QT"
             ? "confirmação médica — jornada B2 sintética S12 (não prescrição real)"
