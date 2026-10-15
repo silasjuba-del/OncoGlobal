@@ -143,7 +143,7 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
         <dt>Hash do pacote selecionado</dt><dd><code>{pacoteAtual.hash}</code></dd>
         <dt>Itens</dt><dd>{pacoteAtual.itens.length}</dd></dl>
       {estado?.pacoteId !== selecionado ? <button type="button" disabled={ocupado} onClick={() => void carregar(selecionado)}>Abrir para revisão</button> : null}
-      {itens.map((item) => <article key={item.id} className="biblioteca-item">
+      {itens.map((item) => <article key={`${selecionado}:${estado?.hash}:${item.id}`} className="biblioteca-item">
         <h4>{item.titulo}</h4><p>{item.tipo} · Pilar {item.pilar} · versão {item.versao} · <strong>{item.estado}</strong></p>
         <p>Fonte: <a href={item.proveniencia.fonte} target="_blank" rel="noreferrer">{item.proveniencia.fonte}</a></p>
         <p>Publicado {item.proveniencia.publicadoEm} · recuperado {item.proveniencia.recuperadoEm} · licença {item.proveniencia.licenca}</p>
