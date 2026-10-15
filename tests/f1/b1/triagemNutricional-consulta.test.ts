@@ -28,7 +28,7 @@ const presente = (valor: string, id: string) => ({ valor, estado: "VERDE", campo
   fontes: [fonteSintetica(id)], revisao: "CONFIRMADO" });
 
 type MedidaTeste = { kg: number; data: string; fonte?: boolean; em?: string; encontro?: string; origem?: string };
-async function consultaCom(lotes: { id: string; topografia?: string; cid?: string; encontro?: string; em?: string }[], encontroAntigo?: { id: string; em: string }, medidas: MedidaTeste[] = []) {
+async function consultaCom(lotes: { id: string; topografia?: string; cid?: string; encontro?: string; em?: string }[], encontroAntigo?: { id: string; em: string }, medidas: MedidaTeste[] = [], dataAltura: string | null = "2026-09-01") {
   const root = mkdtempSync(join(tmpdir(), "f1-b1-nutri-")); dirs.push(root);
   const db = abrirLedger(join(root, "ledger.sqlite")); dbs.push(db);
   const sessoes = criarGerenciadorSessao({ medicoId: "medico-teste", crm: "CRM-TESTE", senha: "senha-sintetica-comprida", duracaoMs: 60_000, agora: () => AGORA });
@@ -54,7 +54,7 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
   for (const l of lotes) seed("TumorLot", { tumorLotId: l.id, patientId: PAC,
     cid: l.cid ? presente(l.cid, `cid-${l.id}`) : ausente(), topografia: l.topografia ? presente(l.topografia, `topo-${l.id}`) : ausente(),
     histologia: ausente(), estadiamentos: [], finalidadeApac: ausente(), marcos: [] }, l.id, l.encontro ?? ENC, l.em ?? AGORA);
-  if (medidas.length) seed("FATO", { campo: "alturaCm", valor: 170 }, null, encontroAntigo?.id ?? ENC,
+  if (medidas.length) seed("FATO", { campo: "alturaCm", valor: 170, dataClinica: dataAltura }, null, encontroAntigo?.id ?? ENC,
     encontroAntigo?.em ?? AGORA, "altura-nutri");
   for (const [i, m] of medidas.entries()) {
     const sourceId = `peso-nutri-${i}`;
@@ -79,8 +79,15 @@ describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", (
     expect(v.status).toBe(200);
     expect(v.body.flash.sugestoesClinicas?.[0]).toMatch(/IMC 17\.9 < 18/);
     expect(v.body.flash.sugestoesClinicas?.[0]).toMatch(/2026-09-01.*peso-nutri-0.*conferir medidas atuais/);
+    expect(v.body.flash.sugestoesClinicas?.[0]).toMatch(/altura 170 cm: 2026-09-01.*altura-nutri/);
     expect(v.body.avaliacaoClinica.dadosCorporais.pesoKg).toBeNull();
     expect(c.eventos()).toBe(c.antes);
+  });
+  it.each([null, "2026-10-15"])("altura sem data ou com medição futura mantém IMC pendente (%s)", async dataAltura => {
+    const v = await (await consultaCom([{ id: "lote-mama", topografia: "Mama" }], undefined,
+      [{ kg: 51.9, data: "2026-09-01" }], dataAltura)).carregar();
+    expect(v.status).toBe(200);
+    expect(v.body.flash.sugestoesClinicas).toBeUndefined();
   });
   it.each([
     [{ kg: 51.9, data: "2026-09-01" }, { kg: 70, data: "2026-10-14" }],

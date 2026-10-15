@@ -383,7 +383,19 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   const ultimoPeso = pesosNutricionais[0];
   const pesoNutricional = ultimoPeso && new Set(pesosNutricionais
     .filter(p => Date.parse(p.data) === Date.parse(ultimoPeso.data)).map(p => p.kg)).size === 1 ? ultimoPeso : null;
-  const imcDocumentado = imcDeMedidas(pesoNutricional?.kg, avaliacao.dadosCorporais.alturaCm);
+  const fatosNutricionais = eventosDaConsulta.filter(e => e.tipo === "FATO" && Date.parse(e.criadoEm) <= horizontePlaquetas);
+  const alturaProjetada = projetarSnapshot(fatosNutricionais, patientId, lote?.tumorLotId ?? null,
+    current.encounterId, "nutricao-altura-v1").campos.alturaCm;
+  const fontesAltura = (alturaProjetada?.eventIds ?? []).flatMap(id => {
+    const e = fatosNutricionais.find(e => e.eventId === id), d = e ? data(e) : null;
+    const dia = DataCivil.safeParse(d?.dataClinica);
+    return e && e.fontes.length && dia.success && Date.parse(dia.data) <= horizontePlaquetas
+      ? [{ eventId: id, data: dia.data, fontes: e.fontes.map(f => f.sourceId).join(", ") }] : [];
+  });
+  const alturaDocumentada = alturaProjetada?.estado === "VERDE" && fontesAltura.length > 0
+    && fontesAltura.length === alturaProjetada.eventIds.length && typeof alturaProjetada.valor === "number"
+    ? alturaProjetada.valor : null;
+  const imcDocumentado = imcDeMedidas(pesoNutricional?.kg, alturaDocumentada);
   if (lotesNoHorizonte.length > 1) pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
   const triagemNutricional = lotesNoHorizonte.length > 1 ? null : sugerirTriagemNutricional({
     tumor: [presenteNoLote(loteNoHorizonte?.topografia), presenteNoLote(loteNoHorizonte?.histologia)].filter((t): t is string => t !== null).join(" ") || null,
@@ -392,7 +404,7 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
   });
   const textoNutricional = triagemNutricional ? textoSugestaoNutricional(triagemNutricional) : null;
   const sugestaoNutricional = textoNutricional && pesoNutricional && triagemNutricional?.motivos.some(m => m.startsWith("IMC "))
-    ? `${textoNutricional}; peso documentado em ${pesoNutricional.data} (fonte ${pesoNutricional.sourceId}); conferir medidas atuais`
+    ? `${textoNutricional}; peso documentado em ${pesoNutricional.data} (fonte ${pesoNutricional.sourceId}); altura ${alturaDocumentada} cm: ${fontesAltura.map(f => `${f.data} (fonte ${f.fontes}; evento ${f.eventId})`).join("; ")}; conferir medidas atuais`
     : textoNutricional;
   pendenciasLeitura.push(...contextoClinico.pendencias,
     ...Object.entries(contextoClinico.campos).filter(([,c]) => c.valor === null).map(([nome]) => `${nome.toUpperCase()}_NAO_CARREGADAS`));
