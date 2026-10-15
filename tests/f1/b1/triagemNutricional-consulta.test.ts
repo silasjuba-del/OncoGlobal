@@ -68,10 +68,29 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
       body: JSON.stringify({ patientId: PAC, encounterId, ...(tumorLotId ? { tumorLotId } : {}) }) });
     return { status: r.status, body: await r.json() as Record<string, any> };
   };
-  return { carregar, eventos: () => listarEventos(db, PAC).length, antes };
+  return { carregar, seed, eventos: () => listarEventos(db, PAC).length, antes };
 }
 
 describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", () => {
+  it.each(["RAW", "PENDENTE", "SEM_FONTE"])("campo tumoral %s dentro de evento confirmado não sugere", async caso => {
+    const c = await consultaCom([]);
+    const campo = { ...presente("Esôfago", "topo-teste"),
+      ...(caso === "RAW" ? { revisao: "RAW", estado: "PENDENTE" } : caso === "PENDENTE" ? { estado: "PENDENTE" } : { fontes: [] }) };
+    c.seed("TumorLot", { tumorLotId: "lote-pendente", patientId: "Paciente Teste Nutri", cid: ausente(),
+      topografia: campo, histologia: ausente(), estadiamentos: [], finalidadeApac: ausente(), marcos: [] }, "lote-pendente");
+    const v = await c.carregar("lote-pendente");
+    if (caso === "SEM_FONTE") expect(v.status).toBe(404); // PRESENTE sem fonte viola o contrato antes da projeção.
+    else { expect(v.status).toBe(200); expect(v.body.flash.sugestoesClinicas).toBeUndefined(); }
+  });
+  it("peso e altura do mesmo paciente atravessam lotes sem alterar a validade para dose", async () => {
+    const c = await consultaCom([{ id: "lote-mama", topografia: "Mama" }, { id: "lote-pulmao", topografia: "Pulmão" }]);
+    c.seed("Weight", { kg: 51.9, origem: "MEDIDO", data: "2026-09-01", sourceId: "peso-outro-lote" }, "lote-mama", undefined, undefined, "peso-outro-lote");
+    c.seed("FATO", { campo: "alturaCm", valor: 170, dataClinica: "2026-09-01" }, "lote-mama", undefined, undefined, "altura-outro-lote");
+    const v = await c.carregar("lote-pulmao");
+    expect(v.status).toBe(200);
+    expect(v.body.flash.sugestoesClinicas?.[0]).toMatch(/IMC 17\.9 < 18.*peso-outro-lote.*altura-outro-lote/);
+    expect(v.body.avaliacaoClinica.dadosCorporais.pesoKg).toBeNull();
+  });
   it("peso documental com mais de 30 dias sugere triagem com data e fonte, sem liberar peso para dose", async () => {
     const c = await consultaCom([{ id: "lote-mama", topografia: "Mama" }], undefined,
       [{ kg: 51.9, data: "2026-09-01" }]);

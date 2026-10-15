@@ -371,19 +371,23 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
       motivos:[...avisosCondicionais,...pendenciasCondicionais].map(texto=>({texto}))}} : {}) });
   // D-F1-33/D-F1-48 · evidência documental no horizonte do encontro, independente da validade para dose.
   // Só SUGERE: não gera pedido, não trava e não entra no semáforo. Medidas atuais exigem conferência.
-  const presenteNoLote = (d: { campo: string; valor: string | null } | undefined) =>
-    d?.campo === "PRESENTE" && typeof d.valor === "string" && d.valor.trim() ? d.valor : null;
+  const presenteNoLote = (d: TumorLot["topografia"] | undefined) =>
+    d?.campo === "PRESENTE" && d.estado === "VERDE" && ["CONFIRMADO", "ASSINADO"].includes(d.revisao)
+      && d.fontes.length > 0 && typeof d.valor === "string" && d.valor.trim() ? d.valor : null;
   // Armadilha (a): encontro reaberto não usa a versão do lote confirmada em encontro POSTERIOR.
   const lotesNoHorizonte = lote ? porTipo(all.filter((e) => e.patientId === patientId && Date.parse(e.criadoEm) <= horizontePlaquetas),
     "TumorLot", TumorLot).filter((x) => x.value.patientId === patientId && x.event.tumorLotId === lote.tumorLotId
       && x.value.tumorLotId === lote.tumorLotId) : [];
   const loteNoHorizonte = lotesNoHorizonte.length === 1 ? lotesNoHorizonte[0]!.value : undefined;
-  const pesosNutricionais = pesosMedidosDocumentados(eventosVigentes(eventosDaConsulta
+  const eventosNutricionais = all.filter(e => e.patientId === patientId);
+  const pesosNutricionais = pesosMedidosDocumentados(eventosVigentes(eventosNutricionais
     .filter(e => Date.parse(e.criadoEm) <= horizontePlaquetas)), civil.dataCivil, horizontePlaquetas);
   const ultimoPeso = pesosNutricionais[0];
   const pesoNutricional = ultimoPeso && new Set(pesosNutricionais
     .filter(p => Date.parse(p.data) === Date.parse(ultimoPeso.data)).map(p => p.kg)).size === 1 ? ultimoPeso : null;
-  const fatosNutricionais = eventosDaConsulta.filter(e => e.tipo === "FATO" && Date.parse(e.criadoEm) <= horizontePlaquetas);
+  // Peso e altura pertencem ao paciente; o lote de origem não restringe a medida corporal.
+  const fatosNutricionais = eventosNutricionais.filter(e => e.tipo === "FATO" && data(e)?.campo === "alturaCm"
+    && Date.parse(e.criadoEm) <= horizontePlaquetas).map(e => ({ ...e, tumorLotId: null }));
   const alturaProjetada = projetarSnapshot(fatosNutricionais, patientId, lote?.tumorLotId ?? null,
     current.encounterId, "nutricao-altura-v1").campos.alturaCm;
   const fontesAltura = (alturaProjetada?.eventIds ?? []).flatMap(id => {
