@@ -64,6 +64,26 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
 }
 
 describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", () => {
+  it.each(["mais recente", "informado"])("não usa baixo peso superado ou somente informado (%s)", async (caso) => {
+    const c = await consultaCom([{ id: "lote-mama", topografia: "Mama" }]);
+    c.seed("Weight", { kg: 51.9, origem: caso === "informado" ? "INFORMADO_PACIENTE" : "MEDIDO", data: "2026-09-01", sourceId: "medida-nutri" });
+    if (caso === "mais recente") c.seed("Weight", { kg: 70, origem: "MEDIDO", data: "2026-10-14", sourceId: "medida-nutri" });
+    c.seed("FATO", { campo: "alturaCm", valor: 170 });
+    const v = await c.carregar();
+    expect(v.status).toBe(200);
+    expect(v.body.flash.sugestoesClinicas).toBeUndefined();
+  });
+  it("reabertura não usa baixo peso registrado em encontro posterior", async () => {
+    const em = "2026-09-01T09:00:00-03:00";
+    const c = await consultaCom([{ id: "lote-mama", topografia: "Mama", encontro: "encontro-antigo", em }],
+      { id: "encontro-antigo", em });
+    c.seed("FATO", { campo: "alturaCm", valor: 170 }, null, "encontro-antigo", em);
+    c.seed("Weight", { kg: 51.9, origem: "MEDIDO", data: "2026-09-01", sourceId: "medida-nutri" });
+    const antigo = await c.carregar("lote-mama", "encontro-antigo");
+    expect(antigo.status).toBe(200);
+    expect(antigo.body.flash.sugestoesClinicas).toBeUndefined();
+    expect((await c.carregar("lote-mama")).body.flash.sugestoesClinicas?.[0]).toMatch(/IMC 17\.9 < 18/);
+  });
   it.each([["fonte-a", "fonte-b"], ["fonte-b", "fonte-a"]])("confirmações concordantes de um lote preservam %s e %s sem inventar conflito", async (a, b) => {
     const c = await consultaCom([a,b].map(fonte => ({ id: "lote-esofago", topografia: "Esôfago", cid: "C15", fonte })));
     const v = await c.carregar("lote-esofago");
