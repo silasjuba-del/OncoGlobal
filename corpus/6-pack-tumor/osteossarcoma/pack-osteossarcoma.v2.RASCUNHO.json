@@ -1,0 +1,693 @@
+{
+  "header": {
+    "schema": "CabecalhoRascunho@1",
+    "id": "pack-osteossarcoma",
+    "versao": "2.0.0",
+    "fonte": {
+      "tipo": "DIRETRIZ",
+      "referencia": "D-F1-34/D-F1-49 + SBOC 2026 ósseos v5 p. 12 + eviQ 1901 v6",
+      "trecho": "MAP e AP",
+      "edicao": "F1-B2 2026-10-14"
+    },
+    "redigidoEm": "2026-10-14",
+    "curador": null,
+    "aprovadoEm": null
+  },
+  "status": "RASCUNHO",
+  "consultavel": true,
+  "alerta": false,
+  "substitui": [],
+  "identidade": {
+    "tumor": "Osteossarcoma",
+    "cid10": [
+      "C41.9"
+    ],
+    "subtipos": [],
+    "cenarios": [],
+    "limitesAplicabilidade": "Pack novo F1-B2 (D-F1-34/49): RASCUNHO de curadoria; nenhum conteúdo ativo; doses somente nas fichas com fonte (b2-fichas.v1.json)."
+  },
+  "diagnostico": {
+    "imagem": [
+      {
+        "catalogoId": "RM_LOCAL",
+        "rotulo": "RM do primário com contraste",
+        "indicacao": "universal",
+        "quando": "Diagnóstico/planejamento (salto pulmonar)",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SBOC ósseos v5 p. 12",
+          "pagina": null,
+          "trecho": "RM do sítio",
+          "estado": "CONSULTADO"
+        }
+      },
+      {
+        "catalogoId": "TC_TORAX",
+        "rotulo": "TC de tórax",
+        "indicacao": "universal",
+        "quando": "Estadiamento (metástases pulmonares)",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SBOC ósseos v5 p. 12",
+          "pagina": null,
+          "trecho": "TC de tórax",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "endoscopicos": [],
+    "patologico": {
+      "obtencao": [
+        {
+          "tipo": "biópsia",
+          "quando": "antes da QT",
+          "catalogoId": "BIOPSIA",
+          "fonte": {
+            "tipo": "PROTOCOLO_INSTITUCIONAL",
+            "referencia": "SBOC ósseos v5",
+            "pagina": null,
+            "trecho": "biópsia pré-quimioterapia",
+            "estado": "CONSULTADO"
+          }
+        }
+      ],
+      "laudoDeveConter": [
+        "subtipo histológico",
+        "resposta à neoadjuvância (necrose %)"
+      ],
+      "molecular": []
+    }
+  },
+  "estadiamento": {
+    "sistema": "[VERIFICAR]",
+    "edicao": null,
+    "fonte": {
+      "tipo": "DECISAO_MEDICA",
+      "referencia": "Estadiamento específico pendente de curadoria (D-F1-34/49)",
+      "pagina": null,
+      "trecho": "",
+      "estado": "PENDENTE"
+    },
+    "exames": [],
+    "gruposConduta": [],
+    "marcadores": {
+      "uteis": [],
+      "naoPedirDeRotina": []
+    }
+  },
+  "tratamento": {
+    "cenarios": [
+      {
+        "cenario": "alto grau, localizado — neoadjuvante/adjuvante",
+        "intencao": "curativa",
+        "modalidades": [
+          "QT",
+          "cirurgia"
+        ],
+        "criterio": "idade-limite local 40 anos (D-F1-50; SBOC p. 12 usava ≤25)",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SBOC ósseos v5 p. 12",
+          "pagina": null,
+          "trecho": "MAP",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "protocolos": [
+      {
+        "id": "osteo-map-c14",
+        "nome": "MAP — ciclos 1–4",
+        "cenario": "neoadjuvante/adjuvante",
+        "linha": "1ª linha",
+        "drogas": [
+          {
+            "droga": "doxorrubicina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D3",
+            "observacao": "eviQ: 37,5×2 (variante)"
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 60,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D2",
+            "observacao": "em 2 h (eviQ 1901)"
+          },
+          {
+            "droga": "metotrexato",
+            "dose": 12000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D22 e D29",
+            "observacao": "4 h; máx 20 g"
+          },
+          {
+            "droga": "folínico",
+            "dose": 15,
+            "unidade": "mg/m2",
+            "via": "EV nas primeiras 4 doses; depois EV/VO",
+            "dias": "24 h pós-MTX q6h",
+            "observacao": "continuar até MTX <0,1 µmol/L; dose/via conforme níveis"
+          },
+          {
+            "droga": "pegfilgrastim",
+            "dose": 6,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D4",
+            "observacao": "≥24 h após fim da doxo D3; condição temporal eviQ adaptada ao fracionamento SBOC/D-F1-50"
+          }
+        ],
+        "cicloDias": 35,
+        "numeroCiclos": 4,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.osteossarcoma.map-ciclos-1-4__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SBOC ósseos v5 p. 12 + eviQ 1901 v6 (EXT-SARC-004)",
+          "pagina": null,
+          "trecho": "cisplatin 60 D1-2; MTX D22/D29; folinic 15 q6h",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "osteo-map-c56",
+        "nome": "MAP — ciclos 5–6 (sem cisplatina)",
+        "cenario": "adjuvante",
+        "linha": "1ª linha (finalização)",
+        "drogas": [
+          {
+            "droga": "doxorrubicina",
+            "dose": 25,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D3",
+            "observacao": ""
+          },
+          {
+            "droga": "metotrexato",
+            "dose": 12000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D15 e D22",
+            "observacao": ""
+          },
+          {
+            "droga": "folínico",
+            "dose": 15,
+            "unidade": "mg/m2",
+            "via": "EV nas primeiras 4 doses; depois EV/VO",
+            "dias": "24 h pós-MTX q6h",
+            "observacao": "continuar até MTX <0,1 µmol/L; dose/via conforme níveis"
+          },
+          {
+            "droga": "pegfilgrastim",
+            "dose": 6,
+            "unidade": "mg",
+            "via": "SC",
+            "dias": "D4",
+            "observacao": "≥24 h após fim da doxo D3; condição temporal eviQ adaptada ao fracionamento SBOC/D-F1-50"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": 2,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.osteossarcoma.map-ciclos-5-6-sem-cisplatina__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 1901 v6",
+          "pagina": null,
+          "trecho": "C5-6: 28 d, sem cisplatina, MTX semanas 3–4",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "osteo-ap",
+        "nome": "AP (doxorrubicina + cisplatina)",
+        "cenario": "sem MTX",
+        "linha": "conforme idade/função renal",
+        "drogas": [
+          {
+            "droga": "doxorrubicina",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "considerar 60 se >40 a"
+          },
+          {
+            "droga": "cisplatina",
+            "dose": 100,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1",
+            "observacao": "2 h; 1 L NS + manitol 30 g + KCl"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": "FICHA.osteossarcoma.ap-doxorrubicina-cisplatina__nao-especificado@1.0.0",
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "BC SAAVAP (EXT-SARC-015) + SBOC p. 12",
+          "pagina": null,
+          "trecho": "doxo 75 + cis 100 q21d",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "osteo-ifep",
+        "nome": "Ifosfamida + etoposídeo (recidiva)",
+        "cenario": "recidiva/refratário",
+        "linha": "salvamento",
+        "drogas": [
+          {
+            "droga": "etoposídeo",
+            "dose": 150,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D3",
+            "observacao": ""
+          },
+          {
+            "droga": "ifosfamida",
+            "dose": 3000,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1–D3",
+            "observacao": "+ mesna"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "BC SAAVIME3 rev 22/09/2026 (EXT-SARC-018)",
+          "pagina": null,
+          "trecho": "etoposide 150 + ifosfamide 3000 D1-3; bony incluído",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "osteo-gemdoc",
+        "nome": "Gemcitabina + docetaxel (recidiva)",
+        "cenario": "recidiva/refratário",
+        "linha": "salvamento",
+        "drogas": [
+          {
+            "droga": "gemcitabina",
+            "dose": 900,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D1 e D8",
+            "observacao": "90 min"
+          },
+          {
+            "droga": "docetaxel",
+            "dose": 75,
+            "unidade": "mg/m2",
+            "via": "EV",
+            "dias": "D8",
+            "observacao": ""
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 1898 v5 (EXT-SARC-007) + BC SAAVGEMD",
+          "pagina": null,
+          "trecho": "gem 900 D1/D8 + doc 75 D8; indicação oficial STS — extrapolação para ósseo declarada",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "Indicação oficial dos protocolos é sarcoma de partes moles.",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "osteo-regorafenibe",
+        "nome": "Regorafenibe (recidiva)",
+        "cenario": "metastático pré-tratado",
+        "linha": "≥2ª linha",
+        "drogas": [
+          {
+            "droga": "regorafenibe",
+            "dose": 160,
+            "unidade": "mg",
+            "via": "VO",
+            "dias": "21 de 28 dias",
+            "observacao": "REGOBONE"
+          }
+        ],
+        "cicloDias": 28,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "Duffaud Lancet Oncol 2019;20(1):120-33 (PMID 30477937)",
+          "pagina": null,
+          "trecho": "160 mg/day, 21 of 28 days",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      },
+      {
+        "id": "osteo-pembro-msi",
+        "nome": "Pembrolizumabe (MSI-H/dMMR)",
+        "cenario": "metastático MSI-H/dMMR",
+        "linha": "conforme biomarcador",
+        "drogas": [
+          {
+            "droga": "pembrolizumabe",
+            "dose": 200,
+            "unidade": "mg",
+            "via": "EV",
+            "dias": "D1 q21d",
+            "observacao": "ou 400 mg q42d"
+          }
+        ],
+        "cicloDias": 21,
+        "numeroCiclos": null,
+        "premedicacao": "Padrão local (D-W9-23c/34c; D-F1-30/48)",
+        "ajusteObrigatorio": "",
+        "fichaId": null,
+        "sus": {
+          "disponivel": "VERIFICAR",
+          "fonte": {
+            "tipo": "DECISAO_MEDICA",
+            "referencia": "D-F1-34/49 — disponibilidade SUS por item a verificar",
+            "pagina": null,
+            "trecho": "",
+            "estado": "PENDENTE"
+          }
+        },
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 5066 (EXT-SARC-008) + BC UTAAVPEM6",
+          "pagina": null,
+          "trecho": "tumour-agnostic dMMR/MSI-H",
+          "estado": "CONSULTADO"
+        },
+        "observacao": "",
+        "derivadoDe": null,
+        "criterioAplicacao": ""
+      }
+    ],
+    "radioterapia": [
+      {
+        "cenario": "excepcional (metástases/irressecável)",
+        "doseTotalGy": null,
+        "fracoes": null,
+        "pendencia": "a definir com radioterapia",
+        "concomitante": false,
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "SBOC ósseos v5",
+          "pagina": null,
+          "trecho": "RT papel limitado",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "cirurgia": [
+      {
+        "procedimento": "Ressecção ampla do primário (± metástasectomia pulmonar)",
+        "quando": "entre os ciclos 2 e 3 (reinício 2–3 semanas após)",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "BC SANAHDMAP/eviQ 1901",
+          "pagina": null,
+          "trecho": "surgery between cycles 2-3",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "biomarcadorTratamento": [
+      {
+        "seAlvo": "MSI-H/dMMR",
+        "opcao": "pembrolizumabe",
+        "evidencia": "tumour-agnostic (eviQ 5066)",
+        "sus": "VERIFICAR",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "eviQ 5066",
+          "pagina": null,
+          "trecho": "dMMR/MSI-H",
+          "estado": "CONSULTADO"
+        }
+      }
+    ],
+    "ensaios": [],
+    "seguimento": [],
+    "suporte": {
+      "emetogenicidade": "alto (D-F1-30 local)",
+      "riscoNeutropeniaFebril": "alto — G-CSF primário obrigatório (BC SANAHDMAP)",
+      "outros": [
+        "monitorização de MTX: níveis h48 + diário até <0,1 µmol/L; pH urinário q6h; alcalinização (BC)",
+        "audiometria (cisplatina — D-F1-31)",
+        "ECG/ECO antes de antraciclina"
+      ],
+      "fonte": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "BC SANAHDMAP (EXT-SARC-014)",
+        "pagina": null,
+        "trecho": "G-CSF mandatory; MTX levels",
+        "estado": "CONSULTADO"
+      },
+      "mesna": {
+        "regra": "n/a",
+        "fonte": {
+          "tipo": "PROTOCOLO_INSTITUCIONAL",
+          "referencia": "—",
+          "pagina": null,
+          "trecho": "—",
+          "estado": "CONSULTADO"
+        }
+      }
+    }
+  },
+  "ligacoes": {
+    "exames": [
+      "RM_LOCAL",
+      "TC_TORAX",
+      "BIOPSIA",
+      "ECOCARDIOGRAMA",
+      "AUDIOMETRIA",
+      "HEMOGRAMA",
+      "CREATININA",
+      "CLEARANCE_CREATININA"
+    ],
+    "interacoesConsultar": [],
+    "ctcaeAcao": [],
+    "suporteReceitas": [],
+    "orientacoes": [],
+    "encaminhamentos": [],
+    "laudos": [],
+    "formulasXYZ": []
+  },
+  "pendencias": [
+    {
+      "texto": "Corte de idade RESOLVIDO por D-F1-50: 40 anos (eviQ >40; BC <40; EURAMOS ≤40; Onkopedia/AAOC <40 — 5 apoios externos; SBOC usava 25)",
+      "classe": "RESOLVIDO_POR_DECISAO",
+      "buscasFeitas": [
+        "D-F1-50"
+      ]
+    },
+    {
+      "texto": "Cisplatina 80 mg/m² (SOnHe): NAO_LOCALIZADO nas fontes externas",
+      "classe": "CONFLITO_FONTE",
+      "buscasFeitas": [
+        "eviQ 1901",
+        "BC SANAHDMAP (50×2; 60×2 excepcional)",
+        "EURAMOS (120/ciclo)"
+      ]
+    },
+    {
+      "texto": "Estrutura C5–6 sem cisplatina é do eviQ (SBOC descreve MAP sem separar) — confirmar adesão local",
+      "classe": "VARIANTE",
+      "buscasFeitas": [
+        "eviQ 1901 C5-6"
+      ]
+    }
+  ],
+  "conflitos": [
+    {
+      "tema": "Cisplatina no MAP",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "SBOC p. 12",
+        "pagina": null,
+        "trecho": "60 mg/m² D1–D2",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "BC SANAHDMAP",
+        "pagina": null,
+        "trecho": "50×2 (60×2 excepcional); ensaios 120/ciclo",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Ficha com 60×2 (SBOC = eviQ 1901)",
+      "decisaoNecessaria": false
+    },
+    {
+      "tema": "Fracionamento de doxorrubicina",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "SBOC p. 12",
+        "pagina": null,
+        "trecho": "25 mg/m² D1–D3",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "eviQ/BC/EURAMOS",
+        "pagina": null,
+        "trecho": "37,5 ×2 D1–D2 (mesmo total 75)",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Ficha com 25×3 (SBOC); variante registrada",
+      "decisaoNecessaria": "Dr. Silas decide o fracionamento"
+    },
+    {
+      "tema": "Resgate folínico do MTX",
+      "fonteA": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "eviQ 1901",
+        "pagina": null,
+        "trecho": "15 mg/m² q6h",
+        "estado": "CONSULTADO"
+      },
+      "fonteB": {
+        "tipo": "PROTOCOLO_INSTITUCIONAL",
+        "referencia": "BC SANAHDMAP",
+        "pagina": null,
+        "trecho": "25 mg fixa q6h",
+        "estado": "CONSULTADO"
+      },
+      "escolhaSeguranca": "Ficha com 15 mg/m² (eviQ)",
+      "decisaoNecessaria": false
+    }
+  ],
+  "curadoria": {
+    "redator": "GLM (agente curador, missão F1-B2) — rascunho para revisão",
+    "redigidoEm": "2026-10-14",
+    "fontesLidas": [
+      "SBOC 2026 ósseos v5 (p. 12, 14-15)",
+      "eviQ 1901 (HTML v6 + PDF v5)",
+      "BC SANAHDMAP/SAAVAP/SAAVIME3/SAAVGEMD",
+      "Meyers 2005, Bielack 2015/2016, Winkler 1988, Bacci 2000, BCCA 2012 (tabela eviQ)",
+      "Duffaud 2019",
+      "SOnHe 2024 p. 313-318",
+      "Aula 79"
+    ],
+    "aprovacaoClinica": null,
+    "rodadaPendencias": [
+      {
+        "data": "2026-10-14",
+        "redator": "GLM",
+        "resolvidas": 0,
+        "classificadas": 3,
+        "susPreenchidos": 0,
+        "notas": [
+          "D-F1-49: fichas institucionais novas sem SISAC; mudança de fonte não aprova doses"
+        ]
+      }
+    ]
+  },
+  "escopo": {
+    "classe": "EXPANSAO_F1_B2_SEM_SISAC",
+    "nota": "Pack novo da D-F1-34 construído na F1-B2 (D-F1-49) com fontes externas verificadas; conteúdo consultável em RASCUNHO, sem ativação clínica."
+  },
+  "correcoes": []
+}

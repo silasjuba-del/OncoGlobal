@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-09",
+  "generatedAt": "2026-10-14",
   "purpose": "Disposicoes por caminho+SHA-256+tipo/linha/ordinal/pagina+evidencia; hash diferente invalida excecao.",
   "files": [
     {
@@ -13,22 +13,6 @@
           "ordinal": 0,
           "status": "technical_token_false_positive",
           "evidenceRef": "corpus/fichas/esofago/carboplatina-paclitaxel-21-21-dias__nao-especificado.json:7",
-          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
-          "contextTag": "json_sha256_field_64hex"
-        }
-      ],
-      "hashMode": "utf8-lf"
-    },
-    {
-      "path": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json",
-      "sha256": "b3a570962c016e6a3e1c8f85577e837b98fc4ea437b6098e1f6ccfd19aec912d",
-      "items": [
-        {
-          "type": "telefone",
-          "line": 7,
-          "ordinal": 0,
-          "status": "technical_token_false_positive",
-          "evidenceRef": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json:7",
           "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
           "contextTag": "json_sha256_field_64hex"
         }
@@ -3096,6 +3080,38 @@
           "evidenceRef": "scripts/exportacao-publica-triagem.json:231",
           "reason": "Candidato inteiramente contido em campo sha256 JSON de 64 caracteres hexadecimais; hash de texto de referencia, nao telefone.",
           "contextTag": "json_sha256_field_64hex"
+        }
+      ]
+    },
+    {
+      "path": "corpus/fichas/nao-informado-ficha-institucional/lv5fu2-5-fu-folinato-p1512__nao-especificado.json",
+      "sha256": "00a338058d39f354ad167db0673e06a6be517e2c08006e85a6876c1eeea77340",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 7,
+          "ordinal": 0,
+          "contextTag": "json_sha256_field_64hex",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/fichas/nao-informado-ficha-institucional/lv5fu2-5-fu-folinato-p1512__nao-especificado.json:7",
+          "reason": "Revisão Codex 2026-10-15: candidato contido no hash SHA-256 canônico de 64 hex da ficha LV5FU2, repetido no manifesto; nenhum identificador pessoal."
+        }
+      ]
+    },
+    {
+      "path": "corpus/manifesto/b2-fichas.v1.json",
+      "sha256": "b56775330c20ae14d49950e53182d95e2d2a093918f944dc4116d9630e1540dd",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 407,
+          "ordinal": 0,
+          "contextTag": "json_sha256_field_64hex",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/manifesto/b2-fichas.v1.json:407",
+          "reason": "Revisão Codex 2026-10-15: candidato contido no hash SHA-256 canônico de 64 hex da ficha LV5FU2, repetido no manifesto; nenhum identificador pessoal."
         }
       ]
     }

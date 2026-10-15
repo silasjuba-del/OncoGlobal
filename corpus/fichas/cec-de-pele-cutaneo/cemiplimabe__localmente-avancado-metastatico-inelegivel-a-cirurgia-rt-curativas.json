@@ -1,0 +1,60 @@
+{
+  "templateId": "FICHA.cec-de-pele-cutaneo.cemiplimabe__localmente-avancado-metastatico-inelegivel-a-cirurgia-rt-curativas@1.0.0",
+  "tumor": "CEC de pele (cutâneo)",
+  "nome": "Cemiplimabe",
+  "cenario": "localmente avançado/metastático — inelegível a cirurgia/RT curativas",
+  "versao": "1.0.0",
+  "hash": "3e1544d835b6013d58ed1d4c4171fe8f9a485b2208cda1e22e11ec9e0edf666c",
+  "codigoInstitucional": null,
+  "intervaloDias": 21,
+  "ciclos": null,
+  "itens": [
+    {
+      "drug": "Cemiplimabe",
+      "classe": "QT",
+      "sequence": 1,
+      "standardDose": 350,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": "SF 0,9%",
+      "finalVolumeMl": 50,
+      "infusionTime": "30 min",
+      "days": [
+        "d1"
+      ],
+      "observacao": "350 mg IV q21d em 50 mL SF 0,9% em 30 min; filtro in-line 0,2–5 µm; estabilidade ≤8 h TA ou ≤10 d 2–8 °C; até progressão/toxicidade (até 2 anos).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Soro fisiológico 0,9% 50 mL (flush pós-infusão)",
+      "classe": "POS_QT",
+      "sequence": 2,
+      "standardDose": 1,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "frasco",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "EV",
+      "diluent": null,
+      "finalVolumeMl": 50,
+      "infusionTime": null,
+      "days": [
+        "d1"
+      ],
+      "observacao": "eviQ 4151: flush de 50 mL de SF 0,9% ao término.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    }
+  ],
+  "limiaresBula": null,
+  "fonte": "D-F1-34 e D-F1-49. Protocolo operacional: EXT-CNV-001 (eviQ, ID 4151 — Cemiplimab monotherapy, v5 (review due 31/12/2028), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json) (página viva v5, 02/09/2026; PDF capturado v1) + BC SMAVCEM (rev 08/2025) + DailyMed LIBTAYO SPL (setid 4347ae1f…). Sem pré-medicação de rotina (eviQ/BC).",
+  "status": "RASCUNHO"
+}

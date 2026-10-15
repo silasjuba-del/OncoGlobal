@@ -1,0 +1,66 @@
+{
+  "templateId": "FICHA.neoplasia-trofoblastica-gestacional.metotrexato-acido-folinico-baixo-risco__baixo-risco-escore-figo-0-4-d-f1-50@1.0.0",
+  "tumor": "Neoplasia trofoblástica gestacional",
+  "nome": "Metotrexato + ácido folínico (baixo risco)",
+  "cenario": "baixo risco (escore FIGO 0–4, D-F1-50)",
+  "versao": "1.0.0",
+  "hash": "b098605bb8d83539529a15877a6db3fd8dc053522a9ad8aebdf8f315cf4d41d7",
+  "codigoInstitucional": null,
+  "intervaloDias": 14,
+  "ciclos": null,
+  "itens": [
+    {
+      "drug": "Metotrexato",
+      "classe": "QT",
+      "sequence": 1,
+      "standardDose": 50,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "IM",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d1",
+        "d3",
+        "d5",
+        "d7"
+      ],
+      "observacao": "D-F1-50: 50 mg fixa IM D1,3,5,7 (eviQ 668; PDQ/Charing Cross). Variante 1 mg/kg NAO_LOCALIZADA na verificação v2 — não usar.",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    },
+    {
+      "drug": "Ácido folínico (resgate)",
+      "classe": "QT",
+      "sequence": 2,
+      "standardDose": 7.5,
+      "doseBasis": "FIXED",
+      "calculatedDose": null,
+      "prescribedDose": null,
+      "unit": "mg",
+      "adjustmentPercent": null,
+      "adjustmentReason": null,
+      "route": "VO",
+      "diluent": null,
+      "finalVolumeMl": null,
+      "infusionTime": null,
+      "days": [
+        "d2",
+        "d4",
+        "d6",
+        "d8"
+      ],
+      "observacao": "D-F1-50: 7,5 mg VO (variante clássica Charing Cross) 24 h após cada MTX (BC: 30 h [variante]; versões modernas: 15 mg [variante]).",
+      "source": "PROTOCOL",
+      "overrideMotivo": null
+    }
+  ],
+  "limiaresBula": null,
+  "fonte": "D-F1-34, D-F1-49 e D-F1-50 (corte 0–4; MTX 50 mg fixa; folínico 7,5 mg 24 h). Protocolo operacional: EXT-CNV-026 (eviQ, ID 668 — Gestational trophoblastic neoplasia low risk methotrexate and folinic acid, v4 (PDF v3), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Diretriz original: EXT-CNV-031 (J Clin Oncol (Lok C et al. — EOTTD/ESGO/ISSTD/GCIG), Practical Guidelines for the Treatment of Gestational Trophoblastic Disease (JCO 2025;43(18); DOI 10.1200/JCO-24-02326) — Tabela A5 e Figura A4, 2025 (pós-print ORBi 2268/340461), acesso 2026-10-14; sha256 integro em corpus/manifesto/b2-fichas.v1.json). Consolidação: 3 ciclos além da normalização do β-hCG.",
+  "status": "RASCUNHO"
+}
