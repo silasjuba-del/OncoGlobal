@@ -16,6 +16,36 @@ const item: ItemBibliotecaResposta = {
 const hash = "a".repeat(64);
 const manifesto = { schema: "PacoteBiblioteca@1", id: "fixture", versao: "1.0.0", origem: "GENSPARK_MANUAL", classificacao: "PUBLIC", criadoEm: "2026-01-02T00:00:00Z", itens: [] };
 
+it("retira item consultável após revisão e confirmação explícita, limpando resultados anteriores", async () => {
+  let obsoleto = false;
+  const referencia = {id:"fixture",versao:"1.0.0",hash};
+  const api: ApiBiblioteca = {
+    estado: vi.fn(async (pacoteId?:string) => ({ ativa:"fixture@1.0.0",referencia,pacoteId:pacoteId??null,hash:pacoteId?hash:null,ativacao:null,
+      pacotes:[{pacoteId:"fixture@1.0.0",versao:"1.0.0",hash,ativo:true,itens:[{id:item.id,estado:obsoleto?"OBSOLETO" as const:"CONSULTAVEL" as const}]}],
+      itens:pacoteId?[{...item,estado:obsoleto?"OBSOLETO" as const:"CONSULTAVEL" as const}]:[] })),
+    curar:vi.fn(async () => {obsoleto=true;return {codigo:"ITEM_CURADO"};}),
+    consultar:vi.fn(async()=>({itens:obsoleto?[]:[item],referencia})), importar:vi.fn(),ativar:vi.fn(),rollback:vi.fn(),
+  };
+  const confirmar=vi.spyOn(window,"confirm").mockReturnValue(false);
+  render(<BibliotecaLocal api={api}/>);
+  fireEvent.click(await screen.findByRole("button",{name:"Abrir para revisão"}));
+  const botao=await screen.findByRole("button",{name:"Marcar OBSOLETO"});
+  expect((botao as HTMLButtonElement).disabled).toBe(true);
+  fireEvent.click(screen.getByText("Exibir conteúdo e trecho da fonte"));
+  const leitura=screen.getByLabelText(/Li e conferi o conteúdo e a fonte/) as HTMLInputElement;
+  await waitFor(()=>expect(leitura.disabled).toBe(false));fireEvent.click(leitura);
+  fireEvent.click(botao);expect(api.curar).not.toHaveBeenCalled();
+  fireEvent.click(screen.getByRole("button",{name:"Consultar"}));
+  const consulta=screen.getByRole("region",{name:"Consultar biblioteca"});
+  await within(consulta).findByText("Texto público de exemplo.");
+  confirmar.mockReturnValue(true);fireEvent.click(botao);
+  await waitFor(()=>expect(api.curar).toHaveBeenCalledWith({pacoteId:"fixture@1.0.0",itemId:item.id,expectedHash:hash,estado:"OBSOLETO"}));
+  await screen.findByText(/marcado como OBSOLETO/);
+  expect(within(consulta).queryByText("Texto público de exemplo.")).toBeNull();
+  fireEvent.click(screen.getByRole("button",{name:"Consultar"}));
+  await within(consulta).findByText("Nenhum resultado para estes filtros.");
+});
+
 it("importa como rascunho e só cura/ativa após exibir e confirmar conteúdo e versão", async () => {
   let curado = false, ativa: string | null = null;
   const pacote = { pacoteId: "fixture@1.0.0", versao: "1.0.0", hash, ativo: false, itens: [{ id: item.id, estado: curado ? "CONSULTAVEL" as const : "RASCUNHO" as const }] };

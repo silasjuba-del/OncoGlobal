@@ -160,12 +160,12 @@ export async function bootServidorDemoB2(dirArg?: string) {
         sexoCadastral: "F", divergencia: false }, []);
     seed(PACIENTE_B2, ENCONTRO_B2, "agenda-b2-s12", "AgendaEntry",
       { patientId: PACIENTE_B2, encounterId: ENCONTRO_B2, data: AGORA.slice(0, 10), horario: "10:30" }, []);
-    const medidaEm = "2026-10-12T08:00:00-03:00";
+    const medidaEm = "2026-10-12";
     const fontePeso = fonteSintetica("medida-b2-peso");
     seed(PACIENTE_B2, ENCONTRO_B2, "peso-b2-s12", "Weight",
       { kg: 70, origem: "MEDIDO", data: medidaEm, sourceId: fontePeso.sourceId }, [fontePeso]);
     seed(PACIENTE_B2, ENCONTRO_B2, "altura-b2-s12", "FATO",
-      { campo: "alturaCm", valor: 170, unidade: "cm", data: medidaEm, sourceId: "medida-b2-altura" },
+      { campo: "alturaCm", valor: 170, unidade: "cm", data: medidaEm, dataClinica: medidaEm, sourceId: "medida-b2-altura" },
       [fonteSintetica("medida-b2-altura")]);
     seed(PACIENTE_B2, ENCONTRO_B2, "cr-b2-s12", "LabResult",
       { campo: "creatinina", valor: 1.0, unidade: "mg/dL", data: medidaEm, sourceId: "lab-b2-cr" },

@@ -75,13 +75,15 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
     finally { setOcupado(false); }
   }
 
-  async function curar(item: ItemBibliotecaResposta) {
+  async function curar(item: ItemBibliotecaResposta, destino: "CONSULTAVEL" | "OBSOLETO" = "CONSULTAVEL") {
     if (!estado?.hash || !conteudoConferido[item.id]) return;
+    if (destino === "OBSOLETO" && !window.confirm(`Marcar “${item.titulo}” como OBSOLETO? O item deixará de aparecer nas consultas da biblioteca.`)) return;
     setErro(""); setOcupado(true);
+    limparConsulta();
     try {
-      await api.curar({ pacoteId: selecionado, itemId: item.id, expectedHash: estado.hash, estado: "CONSULTAVEL" });
+      await api.curar({ pacoteId: selecionado, itemId: item.id, expectedHash: estado.hash, estado: destino });
       await carregar(selecionado);
-      setAviso(`Item “${item.titulo}” marcado como CONSULTAVEL após sua revisão.`);
+      setAviso(`Item “${item.titulo}” marcado como ${destino} após sua revisão.`);
     } catch (e) { setErro(mensagemErro(e)); }
     finally { setOcupado(false); }
   }
@@ -154,6 +156,7 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
         <label><input type="checkbox" disabled={!itensExibidos[item.id]} checked={Boolean(conteudoConferido[item.id])}
           onChange={(e) => setConteudoConferido((anterior) => ({ ...anterior, [item.id]: e.target.checked }))} /> Li e conferi o conteúdo e a fonte deste item.</label>
         {item.estado === "RASCUNHO" ? <button type="button" disabled={ocupado || !conteudoConferido[item.id]} onClick={() => void curar(item)}>Marcar CONSULTAVEL</button> : null}
+        {item.estado === "CONSULTAVEL" || item.estado === "ALERTA" ? <button type="button" disabled={ocupado || !conteudoConferido[item.id]} onClick={() => void curar(item, "OBSOLETO")}>Marcar OBSOLETO</button> : null}
       </article>)}
       {itens.length ? <label><input type="checkbox" disabled={!itens.every((item) => conteudoConferido[item.id]) || itens.some((item) => item.estado === "RASCUNHO" || item.estado === "ALERTA")}
         checked={versaoRevisada} onChange={(e) => setVersaoRevisada(e.target.checked)} />

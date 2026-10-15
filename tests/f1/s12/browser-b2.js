@@ -41,6 +41,14 @@ async function portaLivre() {
 
 const SERVIDOR_B2_TS = "/tests/f1/s12/fixtures/servidor-demo-b2.ts";
 
+/** A evidência vem do draft recebido. O manifesto serve somente para comparar. */
+export function conferirTrilhaB2(template, esperado) {
+  if (!template || !esperado || !["templateId", "versao", "hash"].every(k =>
+    typeof template[k] === "string" && template[k].length > 0 && template[k] === esperado[k]))
+    throw new Error("TRILHA_AUSENTE_OU_DIVERGENTE");
+  return { templateId: template.templateId, versao: template.versao, hash: template.hash };
+}
+
 function iniciarProcesso(cmd, args, env, logStream) {
   const child = spawn(cmd, args, { cwd: ROOT, env: { ...process.env, ...env }, stdio: ["pipe", "pipe", "pipe"] });
   child.stdout.on("data", (b) => logStream.write(b));
@@ -87,6 +95,8 @@ export async function jornadaB2NoNavegador(page, opts) {
   await page.getByRole("region", { name: "Consulta persistida", exact: true }).waitFor();
 
   await page.exposeFunction("__s12Promover", (templateId) => promoverStdin(templateId));
+  await page.exposeFunction("__s12ConferirTrilha", (template, templateId) =>
+    conferirTrilhaB2(template, familias.find(f => f.templateId === templateId)));
 
   await page.evaluate(({ apiBase, senha, patientId, encounterId, familias }) => {
     sessionStorage.setItem("s12B2Senha", senha);
@@ -153,7 +163,10 @@ export async function jornadaB2NoNavegador(page, opts) {
         await new Promise((r) => setTimeout(r, 400));
         const r = await post("/consulta/prescricao/rascunho", { patientId, encounterId, tumorLotId: null, templateId: f.templateId });
         const inst = r.json.instanciacao;
-        const trilha = `template ${f.templateId} · versão ${f.versao} · hash ${f.hash}`;
+        const draft = await post("/consulta/rascunho", { draftId: r.json.draftId });
+        const recebida = await window.__s12ConferirTrilha(draft.json?.draft?.payload?.template, f.templateId);
+        art.dataset.trilhaRecebida = JSON.stringify(recebida);
+        const trilha = `template ${recebida.templateId} · versão ${recebida.versao} · hash ${recebida.hash}`;
         pintar(art, `HTTP ${r.status}\ncálculo: ${inst?.ok ? "OK" : "RECUSADO"}\ntrilha: ${trilha}\n${JSON.stringify(r.json, null, 2).slice(0, 4000)}`);
         art.dataset.ultimoDraft = r.json.draftId ?? "";
         art.dataset.instanciacaoOk = inst?.ok ? "1" : "0";
@@ -178,9 +191,11 @@ export async function jornadaB2NoNavegador(page, opts) {
           operationId: crypto.randomUUID(), expectedRevision: null, itens,
         });
         const draft = await post("/consulta/rascunho", { draftId: rasc.json.draftId });
+        const recebida = await window.__s12ConferirTrilha(draft.json?.draft?.payload?.template, f.templateId);
+        art.dataset.trilhaRecebida = JSON.stringify(recebida);
         pintar(art, `proposta HTTP ${prop.status} codigo ${prop.json.codigo ?? prop.json.revision}\n`
-          + `documento-rascunho: ${JSON.stringify(draft.json?.payload?.kind ?? draft.json).slice(0, 500)}\n`
-          + `trilha: ${f.templateId} · ${f.versao} · ${f.hash}\n`
+          + `documento-rascunho: ${JSON.stringify(draft.json?.draft?.payload?.kind ?? draft.json).slice(0, 500)}\n`
+          + `trilha: ${recebida.templateId} · ${recebida.versao} · ${recebida.hash}\n`
           + `itens calculados: ${itens.length}`);
       }
     });
@@ -207,7 +222,8 @@ export async function jornadaB2NoNavegador(page, opts) {
     if (!textoProp.includes("proposta HTTP 201") && !textoProp.includes("proposta HTTP 200")) {
       throw new Error(`PROPOSTA_NAO_SALVA:${f.familia}:${textoProp.slice(0, 200)}`);
     }
-    resultados.push({ familia: f.familia, templateId: f.templateId, recusaVisivel: true, trilhaHash: f.hash, proposta: true });
+    const recebida = conferirTrilhaB2(JSON.parse(await art.getAttribute("data-trilha-recebida") ?? "null"), f);
+    resultados.push({ familia: f.familia, templateId: recebida.templateId, recusaVisivel: true, trilhaHash: recebida.hash, versao: recebida.versao, proposta: true });
     await page.screenshot({ path: join(opts.evidenceDir, `${f.familia}.png`), fullPage: true });
   }
 
@@ -259,8 +275,9 @@ async function main() {
     demo.promoverTemplate(templateId);
   };
 
-  const browser = await playwright.chromium.launch({ headless: true });
+  let browser;
   try {
+    browser = await playwright.chromium.launch({ headless: true });
     const page = await browser.newPage();
     await page.goto(`http://127.0.0.1:${uiPort}/oncoassist.html`);
     const resultado = await jornadaB2NoNavegador(page, {
@@ -293,7 +310,8 @@ async function main() {
     writeFileSync(join(evidenceDir, "resumo.json"), JSON.stringify({ manifesto: manifesto2, familias: FAMILIAS_B2, resultado, reinicio: { documentosHistorico: qtd } }, null, 2));
     await demo.app.close();
   } finally {
-    await browser.close();
+    await browser?.close();
+    try { await demo?.app.close(); } catch { /* app pode já ter sido fechada antes do reinício */ }
     await viteDev?.close();
   }
   log({ fase: "fim", logPath, evidenceDir });
