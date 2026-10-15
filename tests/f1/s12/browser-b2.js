@@ -286,8 +286,10 @@ async function main() {
     await page2.getByLabel("Paciente da agenda").selectOption(manifesto2.b2.encounterId);
     await page2.getByRole("region", { name: "Consulta persistida", exact: true }).waitFor();
     const historico = page2.getByRole("region", { name: "Histórico de documentos assinados", exact: true });
+    await historico.waitFor();
     const qtd = await historico.locator("article").count();
-    log({ prova: "REINICIO_MESMO_SQLITE", dir: demoDir, documentosHistorico: qtd, persistiu: qtd >= 0 });
+    // Histórico vazio comprova somente a leitura da região após reinício, não persistência de propostas ou assinatura.
+    log({ prova: "REINICIO_MESMO_SQLITE", dir: demoDir, documentosHistorico: qtd, historicoConsultado: true });
     writeFileSync(join(evidenceDir, "resumo.json"), JSON.stringify({ manifesto: manifesto2, familias: FAMILIAS_B2, resultado, reinicio: { documentosHistorico: qtd } }, null, 2));
     await demo.app.close();
   } finally {
