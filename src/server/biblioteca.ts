@@ -14,7 +14,7 @@ const Conteudo=z.union([z.object({texto:z.string().max(1000000)}).strict(),z.obj
 const Importar=z.object({manifesto:ManifestoBiblioteca,arquivos:z.record(z.string().regex(/^[a-zA-Z0-9_-]+\.json$/),Conteudo)}).strict();
 const Curar=z.object({pacoteId:Id,itemId:Id,expectedHash:Hash,estado:z.enum(['CONSULTAVEL','ALERTA','OBSOLETO'])}).strict();
 const Ativar=z.object({pacoteId:Id,expectedHash:Hash,expectedCuradoriaHash:Hash}).strict();
-const Rollback=z.object({expectedAtiva:Id,expectedHash:Hash}).strict();
+const Rollback=z.object({expectedAtiva:Id,expectedHash:Hash,expectedAnterior:Id,expectedAnteriorHash:Hash,expectedAnteriorCuradoriaHash:Hash}).strict();
 const Filtros=z.object({tumor:z.string().optional(),histologia:z.string().optional(),estadio:z.string().optional(),biomarcador:z.string().optional(),linha:z.string().optional()}).strict();
 const Consultar=z.object({filtros:Filtros,modo:z.enum(['CONSULTA','ALERTA']).default('CONSULTA')}).strict();
 const Estado=z.object({pacoteId:Id.optional()}).strict();
@@ -80,8 +80,14 @@ export function rotearBiblioteca(deps:DepsBiblioteca,token:string,rota:string,bo
    return {status:200,body:{codigo:'BIBLIOTECA_ATIVADA',referencia:referenciaBibliotecaAtiva(deps.db)}};
   }
   if(rota==='/biblioteca/rollback'){
-   const p=Rollback.parse(body);if(lib.ativa()!==p.expectedAtiva)throw new Error('BIBLIOTECA_REVISAO_DIVERGENTE');
-   conferirHash(deps.db,p.expectedAtiva,p.expectedHash);lib.voltarAnterior();
+   const p=Rollback.parse(body);
+   transacao(deps.db,()=>{
+    if(lib.ativa()!==p.expectedAtiva)throw new Error('BIBLIOTECA_REVISAO_DIVERGENTE');
+    conferirHash(deps.db,p.expectedAtiva,p.expectedHash);
+    conferirHash(deps.db,p.expectedAnterior,p.expectedAnteriorHash);
+    if(hashCuradoriaPacote(deps.db,p.expectedAnterior)!==p.expectedAnteriorCuradoriaHash)throw Error('BIBLIOTECA_REVISAO_DIVERGENTE');
+    lib.voltarAnterior(p.expectedAnterior);
+   });
    return {status:200,body:{codigo:'BIBLIOTECA_RESTAURADA',referencia:referenciaBibliotecaAtiva(deps.db)}};
   }
   if(rota==='/biblioteca/consultar'){
@@ -99,7 +105,9 @@ export function rotearBiblioteca(deps:DepsBiblioteca,token:string,rota:string,bo
    return {pacoteId:r.id,versao:manifesto.versao,hash:r.hash,ativo:r.id===ativaId,
     itens:manifesto.itens.map(i=>({id:i.id,estado:estados.get(i.id)??"RASCUNHO"}))};
   });
+  const anterior=lib.anteriorValida();
   return {status:200,body:{ativa:lib.ativa(),referencia:referenciaBibliotecaAtiva(deps.db),pacoteId:id,hash:row?.hash??null,curadoriaHash:id?hashCuradoriaPacote(deps.db,id):null,
+    anteriorRollback:anterior?{pacoteId:anterior,hash:pacote(deps.db,anterior)!.hash,curadoriaHash:hashCuradoriaPacote(deps.db,anterior)}:null,
     ativacao:ativacao??null,pacotes,itens:id?lib.listar(id):[]}};
  }catch(error){return {status:error instanceof z.ZodError?400:409,body:{codigo:error instanceof z.ZodError?'BIBLIOTECA_PEDIDO_INVALIDO':error instanceof Error&&/^[A-Z_]+$/.test(error.message)?error.message:'BIBLIOTECA_OPERACAO_RECUSADA'}};}
 }

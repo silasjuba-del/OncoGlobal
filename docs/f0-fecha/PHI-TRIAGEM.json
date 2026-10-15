@@ -3093,7 +3093,7 @@
           "ordinal": 0,
           "status": "technical_token_false_positive",
           "evidenceRef": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json:1339",
-          "reason": "H2/H4: correspondência integralmente contida em campo sha256 de fonte documental, token hexadecimal de 64 caracteres conferido. Nenhum contato ou identificador de paciente; triagem técnica vinculada ao hash integral do pack.",
+          "reason": "Token sha256 documental integral de 64 hex conferido contra 8d0e990; merge acrescentou 40 linhas antes dos mesmos quatro tokens, sem contato pessoal. Revisao tecnica 2026-10-15.",
           "contextTag": "json_sha256_field_64hex"
         },
         {
@@ -3102,7 +3102,7 @@
           "ordinal": 0,
           "status": "technical_token_false_positive",
           "evidenceRef": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json:1357",
-          "reason": "H2/H4: correspondência integralmente contida em campo sha256 de fonte documental, token hexadecimal de 64 caracteres conferido. Nenhum contato ou identificador de paciente; triagem técnica vinculada ao hash integral do pack.",
+          "reason": "Token sha256 documental integral de 64 hex conferido contra 8d0e990; merge acrescentou 40 linhas antes dos mesmos quatro tokens, sem contato pessoal. Revisao tecnica 2026-10-15.",
           "contextTag": "json_sha256_field_64hex"
         },
         {
@@ -3111,7 +3111,7 @@
           "ordinal": 0,
           "status": "technical_token_false_positive",
           "evidenceRef": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json:1566",
-          "reason": "H2/H4: correspondência integralmente contida em campo sha256 de fonte documental, token hexadecimal de 64 caracteres conferido. Nenhum contato ou identificador de paciente; triagem técnica vinculada ao hash integral do pack.",
+          "reason": "Token sha256 documental integral de 64 hex conferido contra 8d0e990; merge acrescentou 40 linhas antes dos mesmos quatro tokens, sem contato pessoal. Revisao tecnica 2026-10-15.",
           "contextTag": "json_sha256_field_64hex"
         },
         {
@@ -3120,7 +3120,7 @@
           "ordinal": 0,
           "status": "technical_token_false_positive",
           "evidenceRef": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json:1580",
-          "reason": "H2/H4: correspondência integralmente contida em campo sha256 de fonte documental, token hexadecimal de 64 caracteres conferido. Nenhum contato ou identificador de paciente; triagem técnica vinculada ao hash integral do pack.",
+          "reason": "Token sha256 documental integral de 64 hex conferido contra 8d0e990; merge acrescentou 40 linhas antes dos mesmos quatro tokens, sem contato pessoal. Revisao tecnica 2026-10-15.",
           "contextTag": "json_sha256_field_64hex"
         }
       ],

@@ -24,6 +24,28 @@ it("proposta persiste a origem validada e recusa contexto ou template adulterado
     const lido=await post('/consulta/rascunho',{draftId:salvo.body.draftId});
     expect(lido.body.draft.payload).toMatchObject({schema:'PrescricaoProposta@1',templateId:template.templateId,templateVersao:template.versao,templateHash:template.hash,rascunhoOrigemId:rasc.body.draftId,estado:'DRAFT'});
     const original=lerDraft(demo.app.db,rasc.body.draftId)!;
+    const antes=demo.app.db.prepare('SELECT count(*) n FROM draft_envelope').get()!.n;
+    for(const ataque of ['drug','dose','unit','days','omissao','duplicado','calculatedDose'] as const){
+      const adulterados=structuredClone(itens);
+      if(ataque==='drug')adulterados[0].drug='Fármaco sintético alheio';
+      if(ataque==='dose')adulterados[0].prescribedDose+=1;
+      if(ataque==='unit')adulterados[0].unit='unidade-alheia';
+      if(ataque==='days')adulterados[0].days=['d99'];
+      if(ataque==='calculatedDose')adulterados[0].calculatedDose+=1;
+      if(ataque==='omissao')adulterados.push({...adulterados[0],sequence:999});
+      if(ataque==='duplicado')adulterados.push(structuredClone(adulterados[0]));
+      const negado=await post('/consulta/prescricao/propor',{...pedido,id:`itens-${ataque}`,operationId:`op-itens-${ataque}`,itens:adulterados});
+      expect(negado,ataque).toMatchObject({status:409,body:{codigo:'ORIGEM_TEMPLATE_ITENS_DIVERGENTES'}});
+    }
+    expect(demo.app.db.prepare('SELECT count(*) n FROM draft_envelope').get()!.n).toBe(antes);
+    const ajustados=structuredClone(itens);
+    ajustados[0].prescribedDose=Math.floor(ajustados[0].calculatedDose*0.8+0.5);
+    ajustados[0].adjustmentPercent=-20;ajustados[0].adjustmentReason='Ajuste médico sintético de teste';
+    expect((await post('/consulta/prescricao/propor',{...pedido,id:'ajuste-sem-base',operationId:'op-ajuste-sem-base',itens:ajustados})).status).toBe(409);
+    const payloadAjuste=structuredClone(original.payload) as any;
+    payloadAjuste.instanciacao.itens.find((i:any)=>i.estado==='PRONTO').doseAnteriorPrescrita=itens[0].calculatedDose;
+    salvarDraft(demo.app.db,{...original,draftId:'origem-ajuste-explicito',payload:payloadAjuste});
+    expect((await post('/consulta/prescricao/propor',{...pedido,id:'ajuste-explicito',operationId:'op-ajuste-explicito',rascunhoOrigemId:'origem-ajuste-explicito',itens:ajustados})).status).toBe(201);
     for(const ataque of ['paciente','hash','contexto'] as const){
       const payload=structuredClone(original.payload) as any;
       if(ataque==='hash')payload.template.hash='0'.repeat(64);

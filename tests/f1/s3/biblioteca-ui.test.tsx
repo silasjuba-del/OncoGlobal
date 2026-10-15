@@ -102,10 +102,12 @@ it("importa como rascunho e só cura/ativa após exibir e confirmar conteúdo e 
 it("consulta conteúdo e exige confirmação para rollback da ativa", async () => {
   const estado: BibliotecaEstado = {
     ativa: "fixture@1.0.0", referencia: { id: "fixture", versao: "1.0.0", hash }, pacoteId: null, hash: null,
-    ativacao: null, pacotes: [{ pacoteId: "fixture@1.0.0", versao: "1.0.0", hash, ativo: true, itens: [{ id: item.id, estado: "CONSULTAVEL" }] }], itens: [],
+    anteriorRollback:{pacoteId:"fixture@0.9.0",hash,curadoriaHash:hash},
+    ativacao: null, pacotes: [{ pacoteId: "fixture@1.0.0", versao: "1.0.0", hash, ativo: true, itens: [{ id: item.id, estado: "CONSULTAVEL" }] },
+      {pacoteId:"fixture@0.9.0",versao:"0.9.0",hash,ativo:false,itens:[{id:item.id,estado:"CONSULTAVEL"}]}], itens: [],
   };
   const api: ApiBiblioteca = {
-    estado: vi.fn(async () => estado), importar: vi.fn(), curar: vi.fn(), ativar: vi.fn(),
+    estado: vi.fn(async (id?:string) => id?{...estado,pacoteId:id,hash,curadoriaHash:hash,itens:[{...item,estado:"CONSULTAVEL" as const}]}:estado), importar: vi.fn(), curar: vi.fn(), ativar: vi.fn(),
     rollback: vi.fn(async () => ({ codigo: "BIBLIOTECA_RESTAURADA" })),
     consultar: vi.fn(async () => ({ itens: [item], referencia: estado.referencia })),
   };
@@ -117,7 +119,15 @@ it("consulta conteúdo e exige confirmação para rollback da ativa", async () =
   fireEvent.click(consultar);
   await screen.findByText("Texto público de exemplo.");
   fireEvent.click(screen.getByRole("button", { name: "Restaurar versão anterior" }));
-  await waitFor(() => expect(api.rollback).toHaveBeenCalledWith({ expectedAtiva: "fixture@1.0.0", expectedHash: hash }));
+  await screen.findByText(/Confira o conteúdo e as fontes da versão anterior/);
+  expect(api.rollback).not.toHaveBeenCalled();
+  fireEvent.click(screen.getByText("Exibir conteúdo e trecho da fonte"));
+  const leitura=screen.getByLabelText(/Li e conferi o conteúdo e a fonte/) as HTMLInputElement;
+  await waitFor(()=>expect(leitura.disabled).toBe(false));fireEvent.click(leitura);
+  fireEvent.click(screen.getByLabelText(/Revisei a versão, o hash e os itens exibidos/));
+  fireEvent.click(screen.getByRole("button", { name: "Restaurar versão anterior" }));
+  await waitFor(() => expect(api.rollback).toHaveBeenCalledWith({ expectedAtiva: "fixture@1.0.0", expectedHash: hash,expectedAnterior:"fixture@0.9.0",expectedAnteriorHash:hash,expectedAnteriorCuradoriaHash:hash }));
+  expect(window.confirm).toHaveBeenCalledWith(expect.stringContaining("fixture@0.9.0"));
 });
 
 it("remove controles de ativação se a atualização do pacote falhar, sem expor erro bruto", async () => {

@@ -168,6 +168,19 @@ export function criarBiblioteca(db: DatabaseSync, portas: PortasBiblioteca) {
     return r?.estado ?? 'RASCUNHO';
   };
   const ativa = (): string | null => (db.prepare('SELECT pacote FROM biblioteca_ativacao ORDER BY seq DESC LIMIT 1').get() as { pacote: string } | undefined)?.pacote ?? null;
+  const anteriorValida = (): string | null => {
+    const registros = db.prepare('SELECT pacote FROM biblioteca_ativacao ORDER BY seq DESC').all() as { pacote: string }[];
+    const atual = ativa();
+    for (const {pacote:id} of registros) {
+      if (id === atual) continue;
+      try {
+        const p = lerPacote(id), estados = new Map(listarCuradoriaAtual(db,id).map(r=>[r.item,r.estado]));
+        const aprovada = (item:string) => ['CONSULTAVEL','ALERTA'].includes(estados.get(item) ?? 'RASCUNHO');
+        if (p.itens.some(i=>aprovada(i.id)) && !p.itens.some(i=>aprovada(i.id) && i.dependencias.some(d=>!aprovada(d.id)))) return id;
+      } catch { /* pacote inválido não é candidato ao rollback */ }
+    }
+    return null;
+  };
   const ativar = (id: string, motivo: AtivacaoBiblioteca['motivo']): void => transacao(() => {
     const ator = autoridade(); const pacote = lerPacote(id);
     const curadoria = new Map(listarCuradoriaAtual(db,id).map(r=>[r.item,r.estado]));
@@ -207,20 +220,13 @@ export function criarBiblioteca(db: DatabaseSync, portas: PortasBiblioteca) {
       });
     },
     ativar(id: string): void { ativar(id, 'ATIVACAO'); },
-    voltarAnterior(): void {
-      const registros = db.prepare('SELECT pacote FROM biblioteca_ativacao ORDER BY seq DESC').all() as { pacote: string }[];
-      const atual = ativa();
-      for (const row of registros) {
-        if (row.pacote === atual) continue;
-        try { const p = lerPacote(row.pacote);
-          if (!p.itens.some(i => ['CONSULTAVEL', 'ALERTA'].includes(estado(row.pacote, i.id)))) continue;
-          if (p.itens.some(i => ['CONSULTAVEL', 'ALERTA'].includes(estado(row.pacote, i.id)) &&
-            i.dependencias.some(d => !['CONSULTAVEL', 'ALERTA'].includes(estado(row.pacote, d.id))))) continue;
-        } catch { continue; }
-        ativar(row.pacote, 'ROLLBACK'); return;
-      }
-      throw new Error('SEM_VERSAO_ANTERIOR_VALIDA');
+    voltarAnterior(expectedAnterior?: string): void {
+      const id = anteriorValida();
+      if (expectedAnterior !== undefined && id !== expectedAnterior) throw new Error('BIBLIOTECA_REVISAO_DIVERGENTE');
+      if (!id) throw new Error('SEM_VERSAO_ANTERIOR_VALIDA');
+      ativar(id, 'ROLLBACK');
     },
+    anteriorValida,
     ativa,
     estado,
     listar(id: string) {

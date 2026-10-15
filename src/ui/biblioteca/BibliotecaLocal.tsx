@@ -103,10 +103,19 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
 
   async function rollback() {
     const ativa = estado?.ativa, hash = estado?.pacotes.find((p) => p.pacoteId === ativa)?.hash;
-    if (!ativa || !hash || !window.confirm(`Restaurar a versão anterior à ativa ${ativa}? O servidor verificará o hash ${hash}.`)) return;
+    const alvo = estado?.anteriorRollback;
+    if (!ativa || !hash || !alvo) return;
+    if (selecionado !== alvo.pacoteId || !versaoRevisada) {
+      await carregar(alvo.pacoteId);
+      setAviso("Confira o conteúdo e as fontes da versão anterior e marque a revisão antes de restaurar.");
+      return;
+    }
+    if (estado?.hash !== alvo.hash || estado.curadoriaHash !== alvo.curadoriaHash
+      || !window.confirm(`Restaurar ${alvo.pacoteId} (hash ${alvo.hash}; revisão ${alvo.curadoriaHash}) no lugar de ${ativa}?`)) return;
     setErro(""); setOcupado(true);
     try {
-      await api.rollback({ expectedAtiva: ativa, expectedHash: hash });
+      await api.rollback({ expectedAtiva: ativa, expectedHash: hash, expectedAnterior:alvo.pacoteId,
+        expectedAnteriorHash:alvo.hash,expectedAnteriorCuradoriaHash:alvo.curadoriaHash });
       await carregar(); setAviso("Versão anterior válida restaurada.");
     } catch (e) { setErro(mensagemErro(e)); }
     finally { setOcupado(false); }
@@ -130,7 +139,7 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
   return <section className="biblioteca-local" aria-labelledby="biblioteca-titulo">
     <header><div><h2 id="biblioteca-titulo">Biblioteca de conhecimento</h2>
       <p>Pacotes públicos versionados. Importar cria rascunho; curadoria e ativação exigem revisão humana.</p></div>
-      <button type="button" disabled={ocupado || !estado?.ativa} onClick={() => void rollback()}>Restaurar versão anterior</button></header>
+      <button type="button" disabled={ocupado || !estado?.anteriorRollback} onClick={() => void rollback()}>Restaurar versão anterior</button></header>
     {erro ? <p role="alert">{erro}</p> : null}
     {aviso ? <p role="status">{aviso}</p> : null}
     <div className="biblioteca-controles">

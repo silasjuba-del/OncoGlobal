@@ -33,6 +33,7 @@ import type { carregarCorpusServidor } from "./corpus.js";
 import { parserLinha } from "../rules/prescricao/parserLinha.js";
 import { classificarDocumento } from "../rules/prescricao/classificarDocumento.js";
 import { instanciarProtocolo } from "../rules/prescricao/instanciarProtocolo.js";
+import { aplicarAjuste } from "../rules/prescricao/aplicarAjuste.js";
 import { rotearItemReceita } from "../rules/prescricao/receituarioEspecial.js";
 import { lerConfiguracaoServico, NUMERO_CAIXA_RECEITUARIO_ESPECIAL } from "../contracts/configServico.js";
 import { dataCivilDoServico } from "../kernel/gateway/tempo.js";
@@ -434,7 +435,7 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
       let origem: {templateId:string;templateVersao:string;templateHash:string;rascunhoOrigemId:string}|null=null;
       if(parsed.data.rascunhoOrigemId){
         const draft=lerDraft(deps.db,parsed.data.rascunhoOrigemId),ctxOrigem=contextoDraft(draft?.payload);
-        const payload=draft?.payload as {kind?:unknown;template?:unknown;contexto?:{patientId?:string};instanciacao?:{ok?:boolean}}|undefined;
+        const payload=draft?.payload as {kind?:unknown;template?:unknown;contexto?:{patientId?:string};instanciacao?:{ok?:boolean;itens?:{estado:string;item:unknown;doseAnteriorPrescrita?:number|null}[]}}|undefined;
         if(!draft||draft.patientId!==ctx.patientId||!ctxOrigem||payload?.contexto?.patientId!==ctx.patientId||ctxOrigem.encounterId!==ctx.encounterId
           ||ctxOrigem.tumorLotId!==(ctx.tumorLotId??null)||payload?.kind!=="PRESCRICAO_RASCUNHO"||payload.instanciacao?.ok!==true)
           return reply(409,"ORIGEM_TEMPLATE_INVALIDA");
@@ -442,6 +443,21 @@ export async function rotear(deps: ServidorDeps, req: IncomingMessage, res: Serv
         if(!t.success||t.data.status!=="CONFERIDA_MEDICO")return reply(409,"ORIGEM_TEMPLATE_INVALIDA");
         const candidatos=deps.corpus?.templatesProtocolo.filter(x=>x.templateId===t.data.templateId&&x.versao===t.data.versao&&x.hash===t.data.hash)??[];
         if(candidatos.length!==1||hashConteudoExibido(candidatos[0])!==hashConteudoExibido(t.data))return reply(409,"ORIGEM_TEMPLATE_DIVERGENTE");
+        const prontos=payload.instanciacao?.itens?.filter(i=>i.estado==="PRONTO")??[];
+        const originais=prontos.map(i=>PrescriptionItem.safeParse(i.item));
+        if(originais.length!==parsed.data.itens.length||originais.some(i=>!i.success))return reply(409,"ORIGEM_TEMPLATE_ITENS_DIVERGENTES");
+        const parteFixa=(item:PrescriptionItem)=>{
+          const {source,overrideMotivo,prescribedDose,adjustmentPercent,adjustmentReason,...fixa}=item;
+          return fixa;
+        };
+        for(const [indice,item] of parsed.data.itens.entries()){
+          const original=originais[indice]!;
+          if(!original.success||hashConteudoExibido(parteFixa(item))!==hashConteudoExibido(parteFixa(original.data)))return reply(409,"ORIGEM_TEMPLATE_ITENS_DIVERGENTES");
+          const ajuste=item.adjustmentPercent===null?null:aplicarAjuste(original.data,item.adjustmentPercent,item.adjustmentReason??"",{doseBase:prontos[indice]!.doseAnteriorPrescrita??null});
+          if(ajuste&&!ajuste.ok)return reply(409,"ORIGEM_TEMPLATE_ITENS_DIVERGENTES");
+          const doseEsperada=ajuste?.ok?ajuste.item.prescribedDose:original.data.prescribedDose;
+          if(item.prescribedDose!==doseEsperada)return reply(409,"ORIGEM_TEMPLATE_ITENS_DIVERGENTES");
+        }
         origem={templateId:t.data.templateId,templateVersao:t.data.versao,templateHash:t.data.hash,rascunhoOrigemId:draft.draftId};
       }
       const revisao=sha(JSON.stringify([r.revisao,parsed.data.itens,...(origem?[origem]:[])]));
