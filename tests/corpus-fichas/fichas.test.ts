@@ -338,7 +338,7 @@ describe("F1-B2 — fichas institucionais novas (D-F1-49)", () => {
     for (const a of manifest.fichasAlteradas) {
       const achada = parseadas.find((p) => p.ficha.templateId === a.templateId);
       expect(achada, a.caminho).toBeDefined();
-      expect(achada!.ficha.fonte).toContain("EXT-LEG-008");
+      expect(achada!.ficha.fonte).toContain(a.caminho.includes("/esofago/") ? "EXT-LEG-013" : "EXT-LEG-008");
     }
   });
 
@@ -348,7 +348,9 @@ describe("F1-B2 — fichas institucionais novas (D-F1-49)", () => {
     expect(f.itens.find((i) => /folinato/i.test(i.drug))!.standardDose).toBe(20);
     const fu = f.itens.find((i) => eh5fu(i.drug))!;
     expect(fu.standardDose).toBe(425);
-    expect(fu.days).toEqual(["d1", "d8", "d15", "d22", "d29", "d36"]);
+    expect(fu.days).toEqual(["d1"]);
+    expect(f.ciclos).toBe(6);
+    expect(Array.from({length:f.ciclos!},(_,c)=>1+c*f.intervaloDias!)).toEqual([1,8,15,22,29,36]);
     expect(f.fonte).toContain("EXT-LEG-019");
     expect(f.intervaloDias).toBe(7);
   });
@@ -439,7 +441,8 @@ describe("F1-B2 — fichas institucionais novas (D-F1-49)", () => {
   it("NTG: EMA/EP com D2 SOMENTE folínico (Lok 2025 Tabela A5/Figura A4); EMA-CO e baixo risco conforme eviQ", () => {
     const ep = nome("Neoplasia trofoblástica gestacional", "EMA/EP (resistência ao EMA-CO)").ficha;
     const d2 = ep.itens.filter((i) => i.days.includes("d2"));
-    expect(d2.map((i) => i.drug)).toEqual(["Folinato de cálcio (resgate do MTX)"]);
+    expect(d2.map((i) => i.drug)).toEqual(["Folinato de cálcio (resgate do MTX +24 h)", "Folinato de cálcio (resgate do MTX +36 h)"]);
+    expect(ep.itens.filter(i=>i.days.includes("d3")).map(i=>i.drug)).toEqual(["Folinato de cálcio (resgate do MTX +48 h)", "Folinato de cálcio (resgate do MTX +60 h)"]);
     expect(ep.itens.find((i) => /etoposideo-d8|Etoposideo-d8|etoposídeo \(D8/i.test(i.drug))!.standardDose).toBe(150);
     expect(ep.itens.find((i) => /^cisplatina/i.test(i.drug))!.days).toEqual(["d8"]);
     const co = nome("Neoplasia trofoblástica gestacional", "EMA-CO (alto risco)").ficha;

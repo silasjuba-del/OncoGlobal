@@ -307,16 +307,16 @@
     {
       "arquivo": "corpus/fichas/nao-informado-ficha-institucional/folinato-5-fu-semanal-p1577__nao-especificado.json",
       "templateId": "FICHA.nao-informado-ficha-institucional.folinato-5-fu-semanal-p1577__nao-especificado@1.0.0",
-      "hash": "156bb7d54e5c68c3de8834d54f6e48ff471c247f67530b660ed2d22f4b0d9088",
+      "hash": "a764e263b9f145e9ebe2048879ba52a0799752f14f5b84b2110c31c939d9870f",
       "versao": "1.0.0",
       "status": "RASCUNHO",
-      "identidadeClinica": "Folinato 20 mg/m² + 5-FU 425 mg/m² semanais IV bolus (D-F1-26 + D-F1-50; NHS CR004 casa exatamente com a identidade); dias locais D1–D36 (D-F1-26)",
+      "identidadeClinica": "Folinato 20 mg/m² + 5-FU 425 mg/m² semanais IV bolus (D-F1-26 + D-F1-50; NHS CR004 casa exatamente com a identidade); dias absolutos D1–D36 (D-F1-26): seis ciclos semanais com administração em D1 de cada ciclo",
       "decisisoes": [
         "D-F1-49"
       ],
       "campos": [
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1,d8,d15,d22,d29,d36].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem de acesso);days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -326,7 +326,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Ondansetrona;days=d1,d8,d15,d22,d29,d36].standardDose",
+          "campo": "itens[drug=Ondansetrona;days=d1].standardDose",
           "valor": 8,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -336,7 +336,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Dexametasona;days=d1,d8,d15,d22,d29,d36].standardDose",
+          "campo": "itens[drug=Dexametasona;days=d1].standardDose",
           "valor": 10,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -346,7 +346,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Prometazina;days=d1,d8,d15,d22,d29,d36].standardDose",
+          "campo": "itens[drug=Prometazina;days=d1].standardDose",
           "valor": 25,
           "unidade": "mg",
           "situacao": "PADRAO_LOCAL",
@@ -356,7 +356,7 @@
           "divergencias": []
         },
         {
-          "campo": "itens[drug=Folinato de cálcio (leucovorina);days=d1,d8,d15,d22,d29,d36].standardDose",
+          "campo": "itens[drug=Folinato de cálcio (leucovorina);days=d1].standardDose",
           "valor": 20,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO_POR_DECISAO_LOCAL",
@@ -369,7 +369,7 @@
           "decisaoLocal": "D-F1-26 (folinato 20 mg/m² semanal); CR004 corrobora 20 mg/m² IV bolus"
         },
         {
-          "campo": "itens[drug=Fluoruracila (5-FU) em bolus;days=d1,d8,d15,d22,d29,d36].standardDose",
+          "campo": "itens[drug=Fluoruracila (5-FU) em bolus;days=d1].standardDose",
           "valor": 425,
           "unidade": "mg/m²",
           "situacao": "DOCUMENTADO_POR_DECISAO_LOCAL",
@@ -382,7 +382,7 @@
           "decisaoLocal": "D-F1-50 (dose 425 mg/m²)"
         },
         {
-          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1,d8,d15,d22,d29,d36].standardDose",
+          "campo": "itens[drug=Soro fisiológico 0,9% 250 mL (lavagem pós-QT);days=d1].standardDose",
           "valor": 1,
           "unidade": "frasco",
           "situacao": "PADRAO_LOCAL",
@@ -3114,9 +3114,6 @@
       "templateId": "FICHA.esofago.carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt@1.0.0",
       "motivo": "acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados",
       "fontesAcrescentadas": [
-        "EXT-LEG-008",
-        "EXT-LEG-009",
-        "EXT-LEG-012",
         "EXT-LEG-013"
       ]
     },
