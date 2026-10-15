@@ -3,6 +3,13 @@ import { sugerirTriagemNutricional as t, imcDeMedidas, textoSugestaoNutricional 
 import * as regras from "../../../src/rules/index.js";
 
 describe("F1-B1 triagem nutricional (D-F1-33, NRS-2002)", () => {
+  it.each([
+    {tumor:"Estômago",cid:"C15.4"}, {tumor:"Esôfago",cid:"C16.9"}, {tumor:"Esôfago e estômago",cid:null},
+  ])("sítios contraditórios não elegem um diagnóstico (%j)", entrada => {
+    const r = t({...entrada,imc:24}); expect(r.estado).toBe("PENDENTE");
+    expect(r.motivos[0]).toMatch(/divergentes.*esôfago|divergentes.*estômago/);
+    expect(textoSugestaoNutricional(r)).toBeNull();
+  });
   it.each(["Esôfago", "esofago", "ESÔFAGO", "Estômago", "estomago", "Gástrico"])("positivo: tumor %s sugere", tumor => {
     const r = t({ tumor, imc: 24 });
     expect(r.estado).toBe("SUGERIR"); expect(r.instrumento).toBe("NRS-2002"); expect(r.bloqueia).toBe(false);

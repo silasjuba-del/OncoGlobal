@@ -2861,16 +2861,16 @@
     },
     {
       "path": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json",
-      "sha256": "006fb30ecef38e94347928b2136438594d9844fe23618c454c94a4bd22487b5b",
+      "sha256": "b816e778453c29ab802e5df85249b27cd3c4073140727e7034ebe19bf1e4a4ce",
       "hashMode": "utf8-lf",
       "items": [
         {
           "type": "telefone",
-          "line": 1698,
+          "line": 1703,
           "ordinal": 0,
           "status": "technical_token_false_positive",
-          "evidenceRef": "docs/ondas/PRE-F1-CORRECAO-2026-10-12.md; corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json:1698",
-          "reason": "Revisao Codex em 2026-10-12: candidato contido integralmente no UUID set_id/setid de referencia bibliografica DailyMed/openFDA; nao e telefone de paciente. Revisto por Fugu em 2026-10-14 na F1-B1 (PR #17): mesmo UUID set_id; linhas e hash atualizados apos o lote clinico."
+          "evidenceRef": "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json:1703",
+          "reason": "Revisão Codex 2026-10-15: mesmo UUID público set_id da bula de ciprofloxacino, conferido no campo referencia; não é telefone. Atualização de posição após correção D-F1-30, sem ampliar exceção."
         }
       ]
     },
