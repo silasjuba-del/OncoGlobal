@@ -33,6 +33,8 @@ export interface AtivacaoBiblioteca {
 export interface PortasBiblioteca {
   /** Autoridade obtida na sessão do servidor, nunca no pacote/payload. */
   autorizarCuradoria: () => { atorId: string } | null;
+  /** Relógio do servidor para tornar auditável a ordem temporal das mutações. */
+  agora?: () => string;
   /** Deve persistir o estímulo usando este db, dentro da transação aberta. Não fazer efeitos externos. */
   emitir: (db: DatabaseSync, evento: AtivacaoBiblioteca) => void;
 }
@@ -117,6 +119,26 @@ export function criarBiblioteca(db: DatabaseSync, portas: PortasBiblioteca) {
     CREATE TRIGGER IF NOT EXISTS biblioteca_curadoria_no_delete BEFORE DELETE ON biblioteca_curadoria BEGIN SELECT RAISE(ABORT,'curadoria imutavel'); END;
     CREATE TRIGGER IF NOT EXISTS biblioteca_ativacao_no_update BEFORE UPDATE ON biblioteca_ativacao BEGIN SELECT RAISE(ABORT,'ativacao imutavel'); END;
     CREATE TRIGGER IF NOT EXISTS biblioteca_ativacao_no_delete BEFORE DELETE ON biblioteca_ativacao BEGIN SELECT RAISE(ABORT,'ativacao imutavel'); END;`);
+  // Migração aditiva: bancos existentes preservam seu histórico sem datas; novas linhas
+  // sempre recebem ator e instante. Não reescrevemos eventos anteriores nem hashes.
+  const colunas = (tabela: string): Set<string> => new Set(
+    (db.prepare(`PRAGMA table_info(${tabela})`).all() as { name: string }[]).map(c => c.name),
+  );
+  db.exec('SAVEPOINT biblioteca_schema_migration');
+  try {
+    for (const [tabela, nome, tipo] of [
+      ['biblioteca_curadoria', 'registrado_em', 'TEXT'], ['biblioteca_ativacao', 'ator', 'TEXT'],
+      ['biblioteca_ativacao', 'registrado_em', 'TEXT'],
+    ] as const) if (!colunas(tabela).has(nome)) db.exec(`ALTER TABLE ${tabela} ADD COLUMN ${nome} ${tipo}`);
+    db.exec('RELEASE biblioteca_schema_migration');
+  } catch (error) {
+    db.exec('ROLLBACK TO biblioteca_schema_migration'); db.exec('RELEASE biblioteca_schema_migration'); throw error;
+  }
+  const agora = (): string => {
+    const instante = (portas.agora ?? (() => new Date().toISOString()))();
+    if (!z.iso.datetime({ offset: true }).safeParse(instante).success) throw new Error('RELOGIO_SERVICO_INVALIDO');
+    return instante;
+  };
   const transacao = <T>(fn: () => T): T => {
     db.exec('SAVEPOINT biblioteca_write');
     try { const r = fn(); db.exec('RELEASE biblioteca_write'); return r; }
@@ -141,7 +163,7 @@ export function criarBiblioteca(db: DatabaseSync, portas: PortasBiblioteca) {
   };
   const ativa = (): string | null => (db.prepare('SELECT pacote FROM biblioteca_ativacao ORDER BY seq DESC LIMIT 1').get() as { pacote: string } | undefined)?.pacote ?? null;
   const ativar = (id: string, motivo: AtivacaoBiblioteca['motivo']): void => transacao(() => {
-    autoridade(); const pacote = lerPacote(id);
+    const ator = autoridade(); const pacote = lerPacote(id);
     if (!pacote.itens.some(i => ['CONSULTAVEL', 'ALERTA'].includes(estado(id, i.id)))) throw new Error('SEM_ITEM_APROVADO');
     for (const item of pacote.itens) {
       if (!['CONSULTAVEL', 'ALERTA'].includes(estado(id, item.id))) continue;
@@ -149,7 +171,7 @@ export function criarBiblioteca(db: DatabaseSync, portas: PortasBiblioteca) {
     }
     const anterior = ativa();
     if (anterior === id) return;
-    db.prepare('INSERT INTO biblioteca_ativacao(pacote,anterior,motivo) VALUES(?,?,?)').run(id, anterior, motivo);
+    db.prepare('INSERT INTO biblioteca_ativacao(pacote,anterior,motivo,ator,registrado_em) VALUES(?,?,?,?,?)').run(id, anterior, motivo, ator, agora());
     portas.emitir(db, { tipo: 'BIBLIOTECA_ATIVADA', biblioteca: { id: pacote.manifesto.id, versao: pacote.manifesto.versao }, anterior, motivo });
   });
   return {
@@ -173,7 +195,7 @@ export function criarBiblioteca(db: DatabaseSync, portas: PortasBiblioteca) {
         const item = p.itens.find(i => i.id === itemId);
         if (!item) throw new Error('ITEM_AUSENTE');
         if (novo === 'ALERTA' && item.tipo !== 'REGRA') throw new Error('REFERENCIA_NAO_GERA_ALERTA');
-        db.prepare('INSERT INTO biblioteca_curadoria(pacote,item,estado,ator) VALUES(?,?,?,?)').run(id, itemId, novo, ator);
+        db.prepare('INSERT INTO biblioteca_curadoria(pacote,item,estado,ator,registrado_em) VALUES(?,?,?,?,?)').run(id, itemId, novo, ator, agora());
       });
     },
     ativar(id: string): void { ativar(id, 'ATIVACAO'); },
@@ -193,6 +215,16 @@ export function criarBiblioteca(db: DatabaseSync, portas: PortasBiblioteca) {
     },
     ativa,
     estado,
+    listar(id: string) {
+      const pacote = lerPacote(id);
+      return pacote.itens.map(item => {
+        const r = db.prepare('SELECT estado,ator,registrado_em FROM biblioteca_curadoria WHERE pacote=? AND item=? ORDER BY seq DESC LIMIT 1')
+          .get(id, item.id) as { estado: EstadoCuradoria; ator: string; registrado_em: string | null } | undefined;
+        const estadoAtual: EstadoCuradoria = r?.estado ?? 'RASCUNHO';
+        return { ...item, estado: estadoAtual,
+          curadoria: r ? { ator: r.ator, registradoEm: r.registrado_em } : null };
+      });
+    },
     consultar(filtros: FiltrosBiblioteca, modo: 'CONSULTA' | 'ALERTA' = 'CONSULTA'): ConteudoBiblioteca[] {
       const id = ativa(); if (!id) return [];
       const p = lerPacote(id);

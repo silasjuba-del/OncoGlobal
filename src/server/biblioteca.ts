@@ -1,6 +1,6 @@
 import type { DatabaseSync } from 'node:sqlite';
 import { z } from 'zod';
-import { Sessao, type Sessao as SessaoTipo } from '../contracts/base.js';
+import { Instante, Sessao, type Sessao as SessaoTipo } from '../contracts/base.js';
 import { hashCanonico } from '../modules/hash.js';
 import { criarBiblioteca, ManifestoBiblioteca, sha256Biblioteca, type FiltrosBiblioteca } from '../kernel/corpus/biblioteca.js';
 import { transacao } from '../kernel/ledger/db.js';
@@ -34,7 +34,9 @@ export function referenciaBibliotecaAtiva(db:DatabaseSync):{id:string;versao:str
 /** Entrada manual autenticada; pacote nunca recebe autoridade nem acesso ao filesystem. */
 export function rotearBiblioteca(deps:DepsBiblioteca,token:string,rota:string,body:unknown,sessaoResolvida:SessaoTipo):ResultadoBiblioteca|null {
  if(!Rotas.has(rota))return null;
- const em=deps.agora(),sessao=Sessao.safeParse(deps.sessoes.obter(token));
+ const em=deps.agora();
+ if(!Instante.safeParse(em).success)return {status:503,body:{codigo:'RELOGIO_SERVICO_INVALIDO'}};
+ const sessao=Sessao.safeParse(deps.sessoes.obter(token));
  if(!sessao.success||hashCanonico(sessao.data)!==hashCanonico(sessaoResolvida)||Date.parse(sessao.data.emitidaEm)>Date.parse(em)||Date.parse(sessao.data.expiraEm)<=Date.parse(em))return {status:401,body:{codigo:'SESSAO_INVALIDA'}};
  const emitir=()=>{
   const ref=referenciaBibliotecaAtiva(deps.db);if(!ref)throw new Error('BIBLIOTECA_ATIVA_AUSENTE');
@@ -44,7 +46,7 @@ export function rotearBiblioteca(deps:DepsBiblioteca,token:string,rota:string,bo
   // Technical record: never a signed clinical fact or a PHI transport.
   gravarEstimulo(deps.db,{schema:'EstimuloTecnico@1',id,operationId:id,tipo:'BIBLIOTECA_ATIVADA',patientId:null,encounterId:null,tumorLotId:null,revisaoEntrada:ref.hash,criadoEm:em,ator:'SISTEMA'});
  };
- const lib=criarBiblioteca(deps.db,{autorizarCuradoria:()=>({atorId:sessao.data.medicoId}),emitir});
+  const lib=criarBiblioteca(deps.db,{autorizarCuradoria:()=>({atorId:sessao.data.medicoId}),agora:()=>em,emitir});
  try {
   if(rota==='/biblioteca/importar'){
    const p=Importar.parse(body),refs=new Set(p.manifesto.itens.map(i=>i.arquivo));
@@ -77,8 +79,17 @@ export function rotearBiblioteca(deps:DepsBiblioteca,token:string,rota:string,bo
    const p=Consultar.parse(body);return {status:200,body:{itens:lib.consultar(Object.fromEntries(Object.entries(p.filtros).filter(([,v])=>v!==undefined)) as FiltrosBiblioteca,p.modo),referencia:referenciaBibliotecaAtiva(deps.db)}};
   }
   const p=Estado.parse(body),id=p.pacoteId??lib.ativa(),row=id?pacote(deps.db,id):null;
-  const m=row?ManifestoBiblioteca.parse((JSON.parse(String(row.conteudo)) as {manifesto:unknown}).manifesto):null;
   if(p.pacoteId&&!row)throw new Error('PACOTE_AUSENTE');
-  return {status:200,body:{ativa:lib.ativa(),referencia:referenciaBibliotecaAtiva(deps.db),pacoteId:id,hash:row?.hash??null,itens:m?.itens.map(i=>({id:i.id,estado:lib.estado(String(id),i.id)}))??[]}};
+  if (id && row) conferirHash(deps.db,id,String(row.hash));
+  const ativacao=id?deps.db.prepare('SELECT pacote,anterior,motivo,ator,registrado_em AS registradoEm FROM biblioteca_ativacao WHERE pacote=? ORDER BY seq DESC LIMIT 1').get(id):undefined;
+  const ativaId=lib.ativa();
+  const pacotes=(deps.db.prepare('SELECT id,hash,conteudo FROM biblioteca_pacote ORDER BY id').all() as {id:string;hash:string;conteudo:string}[]).map(r=>{
+   conferirHash(deps.db,r.id,r.hash);
+   const manifesto=ManifestoBiblioteca.parse((JSON.parse(r.conteudo) as {manifesto:unknown}).manifesto);
+   return {pacoteId:r.id,versao:manifesto.versao,hash:r.hash,ativo:r.id===ativaId,
+    itens:lib.listar(r.id).map(i=>({id:i.id,estado:i.estado}))};
+  });
+  return {status:200,body:{ativa:lib.ativa(),referencia:referenciaBibliotecaAtiva(deps.db),pacoteId:id,hash:row?.hash??null,
+    ativacao:ativacao??null,pacotes,itens:id?lib.listar(id):[]}};
  }catch(error){return {status:error instanceof z.ZodError?400:409,body:{codigo:error instanceof z.ZodError?'BIBLIOTECA_PEDIDO_INVALIDO':error instanceof Error&&/^[A-Z_]+$/.test(error.message)?error.message:'BIBLIOTECA_OPERACAO_RECUSADA'}};}
 }
