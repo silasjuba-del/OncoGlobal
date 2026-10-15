@@ -122,7 +122,8 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
     const ultimos = labsMaisRecentes(labs, nome, i.hoje);
     const conflito = new Set(ultimos.map(l => `${l.valor}|${l.unidade}`)).size > 1;
     // Um valor concordante pode ter várias evidências; a escolha numérica não descarta suas fontes.
-    const fontes = ultimos.map(l => ({ eventId: l.eventId, sourceId: l.sourceId, medidoEm: l.data }));
+    const fontes = ultimos.flatMap(l => atuais.find(e => e.eventId === l.eventId)!.fontes
+      .map(f => ({ eventId: l.eventId, sourceId: f.sourceId, medidoEm: l.data })));
     const unidadeValida = p && ["/µL","/uL","/μL"].includes(p.unidade);
     criteriosPorta.push({ schema: "CriterioElegibilidade@1", id: `${id}.limiar`,
       estado: conflito ? "CONFLITO" : !unidadeValida ? "AUSENTE" : p.valor < minimo ? "NAO_ATENDE" : "ATENDE",
@@ -184,7 +185,9 @@ export function avaliarConsulta(i: EntradaAvaliacaoConsulta) {
   const pesoNutricional = pesosNutricionais[0];
   const concordantes = pesoNutricional ? pesosNutricionais.filter(p => p.data === pesoNutricional.data) : [];
   const dadosNutricionais = { pesoKg: pesoNutricional && new Set(concordantes.map(p => p.kg)).size === 1 ? pesoNutricional.kg : null,
-    alturaCm: dadosCorporais.alturaCm, medidoEm: pesoNutricional?.data ?? null, sourceId: pesoNutricional?.sourceId ?? null };
+    alturaCm: dadosCorporais.alturaCm, medidoEm: pesoNutricional?.data ?? null, sourceId: pesoNutricional?.sourceId ?? null,
+    fontes: concordantes.flatMap(p => doPaciente.find(e => e.eventId === p.eventId)!.fontes
+      .map(f => ({eventId:p.eventId,sourceId:f.sourceId,medidoEm:p.data}))) };
   const avisosFlash = [...avisosCriticos,
     ...(variacaoPeso !== null && variacaoPeso>=0.10 ? ["Variação de peso de pelo menos 10%: revisar prescrição"] : []),
     ...(interacoes.estado === "VERMELHO" ? [interacoes.motivo] : []),

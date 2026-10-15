@@ -9,6 +9,19 @@ const base:EntradaAvaliacaoConsulta={eventos:[],patientId:paciente.patientId,tum
 function evento(id:string,tipo:string,data:unknown):ClinicalEvent {return {eventId:id,operationId:`op-${id}`,eventIndex:0,patientId:base.patientId,encounterId:base.encounterId,tumorLotId:null,tipo,payload:{data},fontes:[fonteSintetica("fonte-medida")],revisao:"CONFIRMADO",criadoEm:"2026-10-10T10:00:00-03:00",criadoPor:{tipo:"SESSAO",id:"medico"},supersedesEventId:null};}
 const lab=(id:string,campo:string,valor:number,data="2026-10-09T10:00:00-03:00",unidade="mmol/L")=>evento(id,"LabResult",{campo,valor,data,unidade,sourceId:"fonte-medida"});
 describe("auditoria clínica adversarial da composição",()=>{
+ it("preserva todas as fontes do envelope de um exame concordante",()=>{
+  const e={...lab("multifonte","neutrofilos",2000,"2026-10-09T10:00:00-03:00","/uL"),fontes:[fonteSintetica("fonte-medida"),fonteSintetica("fonte-adicional")]};
+  for(const c of avaliarConsulta({...base,eventos:[e]}).elegibilidade.criterios!.filter(c=>c.id.startsWith("neutrofilos.")))
+   expect(c.fontes.map(f=>f.sourceId)).toEqual(["fonte-medida","fonte-adicional"]);
+ });
+ it("peso concordante preserva eventos e fontes sem eleger o primeiro",()=>{
+  const pesos=["a","b"].map(id=>({...evento(`peso-${id}`,"Weight",{kg:50,origem:"MEDIDO",data:"2026-10-09",sourceId:"fonte-medida"}),fontes:[fonteSintetica("fonte-medida"),fonteSintetica(`fonte-${id}`)]}));
+  for(const eventos of [pesos,[...pesos].reverse()]){
+   const d=avaliarConsulta({...base,eventos}).dadosNutricionais;
+   expect(d.pesoKg).toBe(50);
+   expect((d as any).fontes).toEqual(expect.arrayContaining(pesos.flatMap(e=>e.fontes.map(f=>({eventId:e.eventId,sourceId:f.sourceId,medidoEm:"2026-10-09"})))));
+  }
+ });
  it.each([["neutrofilos",2000],["plaquetas",150000]] as const)("preserva fontes concordantes de %s nos critérios de limiar e validade",(campo,valor)=>{
   const data="2026-10-09T10:00:00-03:00";
   const exames=["a","b"].map(sufixo=>({...evento(`lab-${sufixo}`,"LabResult",{campo,valor,data,unidade:"/uL",sourceId:`fonte-${sufixo}`}),fontes:[fonteSintetica(`fonte-${sufixo}`)]}));

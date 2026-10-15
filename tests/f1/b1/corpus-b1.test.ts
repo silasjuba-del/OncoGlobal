@@ -27,6 +27,11 @@ const LAUDO = "corpus/3-laudos/inss/laudo-inss.v1.RASCUNHO.json";
 const SUPORTE = "corpus/2-receitas/suporte/receitas-suporte-oncologico.v1.RASCUNHO.json";
 
 describe("F1-B1 validador do lote clínico", () => {
+  it("manifesto ausente ou vazio falha fechado",()=>usar(d=>{
+    rmSync(join(d,MANIFESTO));expect(verificarB1(d)).toContain("manifesto B1 obrigatório ausente");
+    writeFileSync(join(d,MANIFESTO),JSON.stringify({alteracoes:[]}));
+    expect(verificarB1(d)).toContain("manifesto B1 sem lista de alterações");
+  }));
   it("positivo: o corpus real passa", () => { expect(verificarB1(REAL)).toEqual([]); });
   it("adversarial: item alterado sem citar a decisão de origem falha", () => usar(d => {
     const p = join(d, "corpus/fichas/mama/ac-t-fase-t-paclitaxel-semanal__adjuvante.json");
@@ -102,8 +107,8 @@ describe("F1-B1 validador do lote clínico", () => {
     expect(p.some(x => x.includes("D-F1-37"))).toBe(true);
     expect(p.some(x => x.includes("D-F1-38"))).toBe(true);
   }));
-  it("borda: sem manifesto o checkout passa (fatia não aplicada)", () => {
+  it("borda: checkout sem manifesto obrigatório é recusado", () => {
     const d = mkdtempSync(join(tmpdir(), "b1-vazio-"));
-    try { expect(verificarB1(d)).toEqual([]); } finally { rmSync(d, { recursive: true, force: true }); }
+    try { expect(verificarB1(d)).toEqual(["manifesto B1 obrigatório ausente"]); } finally { rmSync(d, { recursive: true, force: true }); }
   });
 });

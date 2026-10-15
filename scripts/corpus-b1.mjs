@@ -47,10 +47,10 @@ export function resolverLocalizador(raiz, caminho) {
 export function verificarB1(raiz) {
   const problemas = [];
   const manifesto = join(raiz, "corpus/manifesto/b1-alteracoes.v1.json");
-  if (!existsSync(manifesto)) return problemas; // fatia ainda não aplicada neste checkout
+  if (!existsSync(manifesto)) return ["manifesto B1 obrigatório ausente"];
   let alteracoes;
   try { alteracoes = JSON.parse(readFileSync(manifesto, "utf8")).alteracoes; } catch (e) { return [`manifesto B1 inválido: ${e.message}`]; }
-  if (!Array.isArray(alteracoes)) return ["manifesto B1 sem lista de alterações"];
+  if (!Array.isArray(alteracoes) || alteracoes.length === 0) return ["manifesto B1 sem lista de alterações"];
   // 1. cada OBJETO alterado cita a decisão de origem no campo apontado (não basta o arquivo citar em outro lugar)
   const cache = new Map();
   for (const { arquivo, decisao, caminho, campo } of alteracoes) {

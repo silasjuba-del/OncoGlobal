@@ -3,6 +3,29 @@ import { sugerirTriagemNutricional as t, imcDeMedidas, textoSugestaoNutricional 
 import * as regras from "../../../src/rules/index.js";
 
 describe("F1-B1 triagem nutricional (D-F1-33, NRS-2002)", () => {
+  it.each(["Estômago (cárdia)","Estômago, pequena curvatura","Esôfago abdominal","junção esofagogástrica","JEG"])("subsítio elegível permanece reconhecido: %s",tumor=>{
+    expect(t({tumor,imc:24}).estado).toBe("SUGERIR");
+  });
+  it("junção aceita CID esofágico ou gástrico e preserva divergência explícita",()=>{
+    for(const cid of ["C15.5","C16.0"])expect(t({tumor:"junção esofagogástrica",cid,imc:24}).estado).toBe("SUGERIR");
+    expect(t({tumor:"junção esofagogástrica",histologia:"carcinoma adrenocortical",imc:24}).estado).toBe("PENDENTE");
+  });
+  it.each([
+    {tumor:"Mama",cid:"C15.4"},
+    {tumor:"Mama",histologia:"adenocarcinoma gástrico"},
+    {tumor:"Esôfago",histologia:"carcinoma ductal de mama"},
+    {tumor:"Esôfago",histologia:"carcinoma adrenocortical"},
+    {tumor:"Esôfago",histologia:"histologia de sítio ainda não reconciliado"},
+    {tumor:"Estômago",cid:"C15.4"},
+  ])("IMC é gatilho independente, mantendo o conflito entre fontes (%j)", entrada => {
+    const r=t({...entrada,imc:17});expect(r.estado).toBe("SUGERIR");
+    expect(r.motivos[0]).toBe("IMC 17 < 18");expect(r.motivos[1]).toMatch(/divergentes/);
+    expect(r.motivos.join(" ")).not.toMatch(/câncer de/);
+    expect(t({...entrada,imc:24}).estado).toBe("PENDENTE");
+  });
+  it("histologia sem sítio explícito não inventa divergência com a topografia",()=>{
+    expect(t({tumor:"Esôfago",histologia:"adenocarcinoma",imc:24}).estado).toBe("SUGERIR");
+  });
   it.each([
     {tumor:"Estômago",cid:"C15.4"}, {tumor:"Esôfago",cid:"C16.9"}, {tumor:"Esôfago e estômago",cid:null},
     {tumor:"Mama",cid:"C15.4"}, {tumor:"Esôfago",cid:"C50.9"},
