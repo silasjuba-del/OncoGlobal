@@ -4,10 +4,10 @@
   "nome": "Folinato + 5-FU semanal (P1577)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "156bb7d54e5c68c3de8834d54f6e48ff471c247f67530b660ed2d22f4b0d9088",
+  "hash": "a764e263b9f145e9ebe2048879ba52a0799752f14f5b84b2110c31c939d9870f",
   "codigoInstitucional": "P1577",
   "intervaloDias": 7,
-  "ciclos": null,
+  "ciclos": 6,
   "itens": [
     {
       "drug": "Soro fisiológico 0,9% 250 mL (lavagem de acesso)",
@@ -25,12 +25,7 @@
       "finalVolumeMl": 250,
       "infusionTime": null,
       "days": [
-        "d1",
-        "d8",
-        "d15",
-        "d22",
-        "d29",
-        "d36"
+        "d1"
       ],
       "observacao": "Lavar acesso venoso pré e pós QT (planilha).",
       "source": "PROTOCOL",
@@ -52,12 +47,7 @@
       "finalVolumeMl": null,
       "infusionTime": "15 min",
       "days": [
-        "d1",
-        "d8",
-        "d15",
-        "d22",
-        "d29",
-        "d36"
+        "d1"
       ],
       "observacao": "Padrão local (D-W9-23c/34c; D-F1-30).",
       "source": "PROTOCOL",
@@ -79,12 +69,7 @@
       "finalVolumeMl": null,
       "infusionTime": "15 min",
       "days": [
-        "d1",
-        "d8",
-        "d15",
-        "d22",
-        "d29",
-        "d36"
+        "d1"
       ],
       "observacao": "Antiemese local sem NK1 (D-W9-23c/34c).",
       "source": "PROTOCOL",
@@ -106,12 +91,7 @@
       "finalVolumeMl": null,
       "infusionTime": null,
       "days": [
-        "d1",
-        "d8",
-        "d15",
-        "d22",
-        "d29",
-        "d36"
+        "d1"
       ],
       "observacao": "Pré-medicação local (D-W9-34c).",
       "source": "PROTOCOL",
@@ -133,12 +113,7 @@
       "finalVolumeMl": null,
       "infusionTime": "bolus",
       "days": [
-        "d1",
-        "d8",
-        "d15",
-        "d22",
-        "d29",
-        "d36"
+        "d1"
       ],
       "observacao": "CR004 v1.4: 20 mg/m² IV bolus (slow bolus via saline drip) — corrobora a dose local D-F1-26.",
       "source": "PROTOCOL",
@@ -160,12 +135,7 @@
       "finalVolumeMl": null,
       "infusionTime": "bolus",
       "days": [
-        "d1",
-        "d8",
-        "d15",
-        "d22",
-        "d29",
-        "d36"
+        "d1"
       ],
       "observacao": "D-F1-50 (425 mg/m², NHS CR004). CR004: reduzível a 370 (PS); 300 com RT; slow bolus via saline drip; fonte corre 30 doses semanais — duração local D1–D36 (D-F1-26) [extensão a definir].",
       "source": "PROTOCOL",
@@ -187,12 +157,7 @@
       "finalVolumeMl": 250,
       "infusionTime": null,
       "days": [
-        "d1",
-        "d8",
-        "d15",
-        "d22",
-        "d29",
-        "d36"
+        "d1"
       ],
       "observacao": "Lavar acesso venoso pós-QT (planilha).",
       "source": "PROTOCOL",

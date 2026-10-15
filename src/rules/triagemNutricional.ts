@@ -43,9 +43,15 @@ export function sugerirTriagemNutricional(entrada: EntradaTriagemNutricional): R
   const motivos: string[] = [];
   const tumor = typeof entrada.tumor === "string" && entrada.tumor.trim() ? semAcento(entrada.tumor) : null;
   const cid = typeof entrada.cid === "string" && entrada.cid.trim() ? entrada.cid.trim().toUpperCase() : null;
-  const porTumor = tumor === null ? undefined : GATILHO_TUMOR.find(([re]) => re.test(tumor))?.[1];
-  const porCid = cid === null ? undefined : GATILHO_CID.find(([re]) => re.test(cid))?.[1];
-  const gatilho = porTumor ?? porCid ?? null;
+  const porTexto = GATILHO_TUMOR.filter(([re]) => tumor !== null && re.test(tumor)).map(([, nome]) => nome);
+  const porCodigo = GATILHO_CID.filter(([re]) => cid !== null && re.test(cid)).map(([, nome]) => nome);
+  const gatilhos = [...new Set([...porTexto, ...porCodigo])];
+  if (tumor !== null && cid !== null && gatilhos.length &&
+    (porTexto.length !== 1 || porCodigo.length !== 1 || porTexto[0] !== porCodigo[0]))
+    return { estado: "PENDENTE", instrumento: "NRS-2002", motivos: ["topografia/CID divergentes ou compatibilidade não confirmada — conferir fontes"], bloqueia: false };
+  if (gatilhos.length > 1) return { estado: "PENDENTE", instrumento: "NRS-2002",
+    motivos: [`sítios tumorais divergentes: ${gatilhos.join("; ")} — conferir fontes`], bloqueia: false };
+  const gatilho = gatilhos[0] ?? null;
   if (gatilho) motivos.push(gatilho);
   const imc = typeof entrada.imc === "number" && Number.isFinite(entrada.imc) && entrada.imc > 0 && entrada.imc < 100 ? entrada.imc : null;
   if (imc !== null && imc < IMC_CORTE) motivos.push(`IMC ${imcExibido(imc)} < ${IMC_CORTE}`);

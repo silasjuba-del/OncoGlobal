@@ -140,15 +140,15 @@ const FICHAS = [];
 const F = (spec) => FICHAS.push(spec);
 
 // ===== LEGADO (D-F1-26/27/49) =====
-F({ tumor: "Não informado (ficha institucional)", nome: "Folinato + 5-FU semanal (P1577)", cenario: NE, codigo: "P1577", intervalo: 7, ciclos: null,
-  identidade: "Folinato 20 mg/m² + 5-FU 425 mg/m² semanais IV bolus (D-F1-26 + D-F1-50; NHS CR004 casa exatamente com a identidade); dias locais D1–D36 (D-F1-26)",
+F({ tumor: "Não informado (ficha institucional)", nome: "Folinato + 5-FU semanal (P1577)", cenario: NE, codigo: "P1577", intervalo: 7, ciclos: 6,
+  identidade: "Folinato 20 mg/m² + 5-FU 425 mg/m² semanais IV bolus (D-F1-26 + D-F1-50; NHS CR004 casa exatamente com a identidade); dias absolutos D1–D36 (D-F1-26): seis ciclos semanais com administração em D1 de cada ciclo",
   fontesItens: { "Folinato de cálcio (leucovorina)": { sourceIds: ["EXT-LEG-019"], decisaoLocal: "D-F1-26 (folinato 20 mg/m² semanal); CR004 corrobora 20 mg/m² IV bolus" }, "Fluoruracila (5-FU) em bolus": { sourceIds: ["EXT-LEG-019"], decisaoLocal: "D-F1-50 (dose 425 mg/m²)" } },
   divergencias: ["QUASAR (eviQ 1494/98): folinato 50 fixa + 5-FU 370; Roswell mod. (eviQ 1271/1275): folinato 50 fixa + 5-FU 500 em ciclo 56 d — variantes NAO adotadas", "CR004 corre 30 doses semanais (30 semanas); a duracao local D1–D36 vem de D-F1-26 [extensao a definir]"],
   lacunas: ["duração total do tratamento local (CR004: 30 semanas; D-F1-26: D1–D36) [VERIFICAR]"],
   fonteDecisao: `D-F1-26 (identidade: folinato 20 + 5-FU semanal D1–D36, sem vínculo com Roswell Park); D-F1-49; D-F1-50 (dose do 5-FU = 425 mg/m²). Fonte que casa com a identidade (${ACESSO}): ${ref(["EXT-LEG-019"])} — folinato 20 mg/m² IV bolus + 5-FU 425 mg/m² IV bolus (reduzível a 370; 300 com RT), semanal. Variantes não adotadas: ${ref(["EXT-LEG-001", "EXT-LEG-004"])}.`,
   itens: [
-    qt("Folinato de cálcio (leucovorina)", 20, "m2", D(1, 8, 15, 22, 29, 36), { t: "bolus", obs: "CR004 v1.4: 20 mg/m² IV bolus (slow bolus via saline drip) — corrobora a dose local D-F1-26." }),
-    qt("Fluoruracila (5-FU) em bolus", 425, "m2", D(1, 8, 15, 22, 29, 36), { t: "bolus", obs: "D-F1-50 (425 mg/m², NHS CR004). CR004: reduzível a 370 (PS); 300 com RT; slow bolus via saline drip; fonte corre 30 doses semanais — duração local D1–D36 (D-F1-26) [extensão a definir]." }),
+    qt("Folinato de cálcio (leucovorina)", 20, "m2", D(1), { t: "bolus", obs: "CR004 v1.4: 20 mg/m² IV bolus (slow bolus via saline drip) — corrobora a dose local D-F1-26." }),
+    qt("Fluoruracila (5-FU) em bolus", 425, "m2", D(1), { t: "bolus", obs: "D-F1-50 (425 mg/m², NHS CR004). CR004: reduzível a 370 (PS); 300 com RT; slow bolus via saline drip; fonte corre 30 doses semanais — duração local D1–D36 (D-F1-26) [extensão a definir]." }),
   ] });
 
 F({ tumor: "Não informado (ficha institucional)", nome: "LV5FU2 — 5-FU + folinato (P1512)", cenario: NE, codigo: "P1512", intervalo: 14, ciclos: null,
@@ -449,7 +449,7 @@ for (const rel of PAC_SEMANAL) {
   if (marco >= 0) json.fonte = json.fonte.slice(0, marco);
   const cross = rel.startsWith("esofago/");
   const nota = cross
-    ? " F1-B2 (D-F1-49): CROSS mantém paclitaxel 50 mg/m² da ficha. Fontes mamárias 80 mg/m² não confirmam dose/indicação CROSS; monografia BC sustenta somente filtro e materiais."
+    ? " F1-B2 (D-F1-49): CROSS mantém paclitaxel 50 mg/m² da ficha. Fontes mamárias 80 mg/m² não confirmam dose/indicação CROSS; monografia BC (EXT-LEG-013) sustenta somente filtro e materiais."
     : ACRESCIMO_FONTE;
   json.fonte += nota;
   const pac = json.itens.find(i => /^paclitaxel/i.test(i.drug));
@@ -498,7 +498,7 @@ const manifestoB2 = {
     identidadeClinica: spec.identidade, decisisoes: ["D-F1-49", ...(spec.decisisoes ?? [])],
     campos: camposDa(spec, t), divergencias: spec.divergencias ?? [], lacunas: spec.lacunas ?? [], aprovacaoClinica: null,
   })),
-  fichasAlteradas: alteradas.map((a) => ({ ...a, motivo: "acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados", fontesAcrescentadas: ["EXT-LEG-008", "EXT-LEG-009", "EXT-LEG-012", "EXT-LEG-013"] })),
+  fichasAlteradas: alteradas.map((a) => ({ ...a, motivo: "acréscimo de fontes externas do paclitaxel semanal (D-F1-28/D-F1-49); doses e diluente local inalterados", fontesAcrescentadas: a.caminho.includes("/esofago/") ? ["EXT-LEG-013"] : ["EXT-LEG-008", "EXT-LEG-009", "EXT-LEG-012", "EXT-LEG-013"] })),
   destinacaoCodigosLegado: {
     P1577: "ficha nova criada com identidade própria (D-F1-26); código mantido como codigoInstitucional — identidade do código comprovada pela decisão local",
     P1512: "ficha nova criada (D-F1-27: D1 e D2); código mantido como codigoInstitucional — identidade comprovada pela decisão local",

@@ -64,6 +64,21 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
 }
 
 describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", () => {
+  it.each(["RAW", "CONFIRMADO"])("campo tumoral pendente (%s) não dispara sugestão", async revisao => {
+    const c = await consultaCom([]);
+    c.seed("TumorLot", { tumorLotId: "lote-pendente", patientId: "Paciente Teste Nutri", cid: ausente(),
+      topografia: {...presente("Esôfago", "topo"), estado:"PENDENTE", revisao}, histologia: ausente(), estadiamentos: [], finalidadeApac: ausente(), marcos: [] }, "lote-pendente");
+    const v = await c.carregar("lote-pendente"); expect(v.status).toBe(200);
+    expect(v.body.flash.sugestoesClinicas).toBeUndefined();
+  });
+  it("peso e altura confirmados atravessam lotes do mesmo paciente", async () => {
+    const c = await consultaCom([{id:"lote-mama",topografia:"Mama"},{id:"lote-pulmao",topografia:"Pulmão"}]);
+    c.seed("Weight", {kg:51.9,origem:"MEDIDO",data:"2026-09-01",sourceId:"medida-nutri"}, "lote-mama");
+    c.seed("FATO", {campo:"alturaCm",valor:170,dataClinica:"2026-09-01"}, "lote-mama");
+    const v = await c.carregar("lote-pulmao"); expect(v.status).toBe(200);
+    expect(v.body.flash.sugestoesClinicas?.[0]).toMatch(/IMC 17\.9 < 18/);
+    expect(v.body.avaliacaoClinica.dadosCorporais.pesoKg).toBeNull();
+  });
   it.each([null, "2026-10-15"])("altura sem data ou com medição futura não sustenta sugestão por IMC (%s)", async dataClinica => {
     const c = await consultaCom([{ id: "lote-mama", topografia: "Mama" }]);
     c.seed("Weight", { kg: 50, origem: "MEDIDO", data: "2026-09-01", sourceId: "medida-nutri" });

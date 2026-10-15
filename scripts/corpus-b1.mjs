@@ -78,7 +78,7 @@ export function verificarB1(raiz) {
       .map((o) => o.droga.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()))];
     for (const o of objetos(json)) {
       // protocolo proposto não afirma fornecimento de fármaco indisponível (D-F1-29); citação literal de fonte (fonte*) é preservada
-      if (o.propor === true && Array.isArray(o.drogas) && indisponiveis.length) {
+      if (Array.isArray(o.drogas) && indisponiveis.length) {
         const textos = [];
         const coletar = (v, chave) => {
           if (typeof chave === "string" && /^fonte/i.test(chave)) return;
