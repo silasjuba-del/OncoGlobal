@@ -64,11 +64,17 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
 }
 
 describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", () => {
+  it.each([null, "2026-10-15"])("altura sem data ou com medição futura não sustenta sugestão por IMC (%s)", async dataClinica => {
+    const c = await consultaCom([{ id: "lote-mama", topografia: "Mama" }]);
+    c.seed("Weight", { kg: 50, origem: "MEDIDO", data: "2026-09-01", sourceId: "medida-nutri" });
+    c.seed("FATO", { campo: "alturaCm", valor: 170, dataClinica });
+    expect((await c.carregar()).body.flash.sugestoesClinicas).toBeUndefined();
+  });
   it.each(["mais recente", "informado"])("não usa baixo peso superado ou somente informado (%s)", async (caso) => {
     const c = await consultaCom([{ id: "lote-mama", topografia: "Mama" }]);
     c.seed("Weight", { kg: 51.9, origem: caso === "informado" ? "INFORMADO_PACIENTE" : "MEDIDO", data: "2026-09-01", sourceId: "medida-nutri" });
     if (caso === "mais recente") c.seed("Weight", { kg: 70, origem: "MEDIDO", data: "2026-10-14", sourceId: "medida-nutri" });
-    c.seed("FATO", { campo: "alturaCm", valor: 170 });
+    c.seed("FATO", { campo: "alturaCm", valor: 170, dataClinica: "2026-09-01" });
     const v = await c.carregar();
     expect(v.status).toBe(200);
     expect(v.body.flash.sugestoesClinicas).toBeUndefined();
@@ -77,7 +83,7 @@ describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", (
     const em = "2026-09-01T09:00:00-03:00";
     const c = await consultaCom([{ id: "lote-mama", topografia: "Mama", encontro: "encontro-antigo", em }],
       { id: "encontro-antigo", em });
-    c.seed("FATO", { campo: "alturaCm", valor: 170 }, null, "encontro-antigo", em);
+    c.seed("FATO", { campo: "alturaCm", valor: 170, dataClinica: "2026-09-01" }, null, "encontro-antigo", em);
     c.seed("Weight", { kg: 51.9, origem: "MEDIDO", data: "2026-09-01", sourceId: "medida-nutri" });
     const antigo = await c.carregar("lote-mama", "encontro-antigo");
     expect(antigo.status).toBe(200);
@@ -104,12 +110,13 @@ describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", (
   it("peso documentado há mais de 30 dias mantém sugestão nutricional datada, sem liberar dose", async () => {
     const c = await consultaCom([{ id: "lote-mama", topografia: "Mama" }]);
     c.seed("Weight", { kg: 50, origem: "MEDIDO", data: "2026-09-01", sourceId: "medida-nutri" });
-    c.seed("FATO", { campo: "alturaCm", valor: 170 });
+    c.seed("FATO", { campo: "alturaCm", valor: 170, dataClinica: "2026-09-01" });
     const antes = c.eventos();
     const v = await c.carregar();
     expect(v.body.flash.sugestoesClinicas?.[0]).toMatch(/IMC 17\.3 < 18/);
     expect(v.body.flash.sugestoesClinicas?.[0]).toContain("2026-09-01");
     expect(v.body.flash.sugestoesClinicas?.[0]).toContain("conferir atualidade");
+    expect(v.body.flash.sugestoesClinicas?.[0]).toMatch(/altura 170 cm: 2026-09-01.*medida-nutri/);
     expect(v.body.avaliacaoClinica.dadosCorporais.pesoKg).toBeNull();
     expect(v.body.avaliacaoClinica.dadosNutricionais.sourceId).toBe("medida-nutri");
     expect(c.eventos()).toBe(antes);
@@ -119,14 +126,14 @@ describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", (
     c.seed("Weight", { kg: 50, origem: "MEDIDO", data: caso === "futuro" ? "2026-10-15" : "2026-09-01",
       sourceId: caso === "sem fonte" ? "nao-vinculada" : "medida-nutri" });
     if (caso === "conflito") c.seed("Weight", { kg: 80, origem: "MEDIDO", data: "2026-09-01", sourceId: "medida-nutri" });
-    c.seed("FATO", { campo: "alturaCm", valor: 170 });
+    c.seed("FATO", { campo: "alturaCm", valor: 170, dataClinica: "2026-09-01" });
     const v = await c.carregar();
     expect(v.body.flash.sugestoesClinicas).toBeUndefined();
   });
   it("IMC documentado ainda sugere quando o lote conflita, sem escolher um tumor", async () => {
     const c = await consultaCom([{ id: "lote-conflito", topografia: "Esôfago" }, { id: "lote-conflito", topografia: "Mama" }]);
     c.seed("Weight", { kg: 50, origem: "MEDIDO", data: "2026-10-14", sourceId: "medida-nutri" });
-    c.seed("FATO", { campo: "alturaCm", valor: 170 });
+    c.seed("FATO", { campo: "alturaCm", valor: 170, dataClinica: "2026-09-01" });
     const v = await c.carregar("lote-conflito");
     expect(v.body.flash.sugestoesClinicas?.[0]).toContain("IMC 17.3 < 18");
     expect(v.body.flash.sugestoesClinicas?.[0]).not.toContain("esôfago");
