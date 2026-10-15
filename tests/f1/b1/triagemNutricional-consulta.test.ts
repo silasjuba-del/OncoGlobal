@@ -40,13 +40,14 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
   const token = sessoes.login("senha-sintetica-comprida")!.token;
   const PAC = "Paciente Teste Nutri", ENC = "encontro-nutri-01";
   let seq = 0;
-  const seed = (tipo: string, payload: unknown, tumorLotId: string | null = null, enc = ENC, em = AGORA, sourceId?: string) => {
+  const seed = (tipo: string, payload: unknown, tumorLotId: string | null = null, enc = ENC, em = AGORA, sourceId?: string, supersedesEventId?: string) => {
     seq += 1; const id = `nutri-${seq}`;
     salvarDraft(db, { draftId: id, patientId: PAC, sourceId: `src-${id}`, rawRef: "fixture-local", payload: {}, diagnostics: [], revision: 0, criadoEm: em });
     const r = confirmar(db, { operationId: `op-nutri-${String(seq).padStart(3, "0")}`, patientId: PAC, tumorLotId, encounterId: enc,
       reviewDecisionId: `rev-${id}`, sessao: sessoes.obter(token)!, em,
-      registros: [{ draftId: id, expectedRevision: 0, eventId: `ev-${id}`, tipo, payload, fontes: sourceId ? [fonteSintetica(sourceId)] : [], revisao: "CONFIRMADO" }] });
+      registros: [{ draftId: id, expectedRevision: 0, eventId: `ev-${id}`, tipo, payload, fontes: sourceId ? [fonteSintetica(sourceId)] : [], revisao: "CONFIRMADO", ...(supersedesEventId ? {supersedesEventId} : {}) }] });
     expect(r.estado).toBe("GRAVADA");
+    return `ev-${id}`;
   };
   const pac = { patientId: PAC, identificadores: [], nome: PAC, nascimento: null, sexoCadastral: "NAO_INFORMADO", divergencia: false };
   if (encontroAntigo) seed("Paciente", pac, null, encontroAntigo.id, encontroAntigo.em);
@@ -72,6 +73,15 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
 }
 
 describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", () => {
+  it("correção explícita do lote substitui a versão anterior antes da contagem",async()=>{
+    const c=await consultaCom([]);
+    const lote={tumorLotId:"lote-corrigido",patientId:"Paciente Teste Nutri",cid:ausente(),histologia:ausente(),estadiamentos:[],finalidadeApac:ausente(),marcos:[]};
+    const anterior=c.seed("TumorLot",{...lote,topografia:presente("Mama","fonte-antiga")},"lote-corrigido");
+    c.seed("TumorLot",{...lote,topografia:presente("Esôfago","fonte-corrigida")},"lote-corrigido",undefined,undefined,undefined,anterior);
+    const v=await c.carregar("lote-corrigido");expect(v.status).toBe(200);
+    expect(v.body.flash.sugestoesClinicas?.[0]).toContain("câncer de esôfago");
+    expect(v.body.pendenciasLeitura).not.toContain("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
+  });
   it.each(["RAW", "PENDENTE", "SEM_FONTE"])("campo tumoral %s dentro de evento confirmado não sugere", async caso => {
     const c = await consultaCom([]);
     const campo = { ...presente("Esôfago", "topo-teste"),
