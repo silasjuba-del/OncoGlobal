@@ -98,7 +98,7 @@ it.each([
   expect(() => exportarBiblioteca(f.root, f.out)).toThrow("PHI_ESTRUTURAL");
   expect(existsSync(f.out)).toBe(false);
 });
-it.each(["prontuario-1234567", "Paciente-Pessoa-Sintetica", "nomeCompletoPaciente-Pessoa-Sintetica"])("recusa identidade no caminho antes de criar saída: %s", nome => {
+it.each(["prontuario-1234567", "Paciente-Pessoa-Sintetica", "nomeCompletoPaciente-Pessoa-Sintetica", "fullPatientName_Pessoa_Sintetica", "nomeDoPaciente_Pessoa_Sintetica"])("recusa identidade no caminho antes de criar saída: %s", nome => {
   const f = fixture();
   mkdirSync(join(f.root, "corpus", nome), { recursive: true });
   writeFileSync(join(f.root, "corpus", nome, "item.json"), '{"texto":"Referência sintética"}');
