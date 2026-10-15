@@ -405,6 +405,8 @@ export function lerConsulta(db: DatabaseSync, patientId: string, agora: string, 
     imc: imcDeMedidas(avaliacao.dadosNutricionais.pesoKg, alturaDocumentada),
   });
   const textoNutricional = textoSugestaoNutricional(triagemNutricional);
+  if (triagemNutricional.estado === "PENDENTE" && triagemNutricional.motivos.some(m => /divergentes/.test(m)))
+    pendenciasLeitura.push("TRIAGEM_NUTRICIONAL_SITIOS_NAO_RECONCILIADOS");
   const sugestaoNutricional = textoNutricional && triagemNutricional.motivos.some(m => m.startsWith("IMC "))
     ? `${textoNutricional} (peso medido em ${avaliacao.dadosNutricionais.medidoEm}; fonte ${avaliacao.dadosNutricionais.sourceId}; altura ${alturaDocumentada} cm: ${fontesAltura.map(f => `${f.data} (fonte ${f.fontes}; evento ${f.eventId})`).join("; ")}; conferir atualidade)`
     : textoNutricional;
