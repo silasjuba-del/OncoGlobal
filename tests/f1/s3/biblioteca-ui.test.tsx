@@ -109,3 +109,22 @@ it("remove controles de ativação se a atualização do pacote falhar, sem expo
   expect(screen.queryByRole("button", { name: "Ativar pacote revisado" })).toBeNull();
   expect(screen.queryByText(/ERRO_INTERNO_COM_PAYLOAD_SENSIVEL/)).toBeNull();
 });
+
+it.each(["versao", "falha"])("retira resultados antigos ao atualizar a biblioteca (%s)", async (mudanca) => {
+  const estado: BibliotecaEstado = { ativa: "fixture@1.0.0", referencia: { id: "fixture", versao: "1.0.0", hash },
+    pacoteId: null, hash: null, ativacao: null, pacotes: [], itens: [] };
+  const ler = vi.fn().mockResolvedValueOnce(estado);
+  if (mudanca === "falha") ler.mockRejectedValueOnce(new Error("FALHA_LEITURA"));
+  else ler.mockResolvedValueOnce({ ...estado, ativa: "fixture@2.0.0", referencia: { id: "fixture", versao: "2.0.0", hash: "b".repeat(64) } });
+  const api: ApiBiblioteca = { estado: ler, importar: vi.fn(), curar: vi.fn(), ativar: vi.fn(), rollback: vi.fn(),
+    consultar: vi.fn(async () => ({ itens: [item], referencia: estado.referencia })) };
+  render(<BibliotecaLocal api={api} />);
+  const consultar = screen.getByRole("button", { name: "Consultar" }) as HTMLButtonElement;
+  await waitFor(() => expect(consultar.disabled).toBe(false));
+  fireEvent.click(consultar);
+  await screen.findByText("Texto público de exemplo.");
+  expect(screen.getByText(/Resultados da biblioteca fixture/)).toBeTruthy();
+  fireEvent.click(screen.getByRole("button", { name: "Atualizar lista" }));
+  await waitFor(() => expect(screen.queryByText("Texto público de exemplo.")).toBeNull());
+  expect(screen.queryByText(/Resultados da biblioteca fixture/)).toBeNull();
+});

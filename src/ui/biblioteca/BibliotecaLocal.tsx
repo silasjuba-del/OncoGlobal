@@ -24,15 +24,21 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
   const [versaoRevisada, setVersaoRevisada] = useState(false);
   const [filtros, setFiltros] = useState({ tumor: "", histologia: "", estadio: "", biomarcador: "", linha: "" });
   const [consultados, setConsultados] = useState<BibliotecaConsulta["itens"]>([]);
+  const [referenciaConsulta, setReferenciaConsulta] = useState<BibliotecaConsulta["referencia"]>(null);
   const [fezConsulta, setFezConsulta] = useState(false);
   const [ocupado, setOcupado] = useState(false);
   const [erro, setErro] = useState("");
   const [aviso, setAviso] = useState("");
 
+  function limparConsulta() {
+    setConsultados([]); setFezConsulta(false); setReferenciaConsulta(null);
+  }
+
   async function carregar(id?: string) {
     setErro(""); setAviso(""); setOcupado(true);
     try {
       const novo = await api.estado(id);
+      if (novo.ativa !== estado?.ativa || novo.referencia?.hash !== estado?.referencia?.hash) limparConsulta();
       const alvoId = id ?? selecionado ?? novo.ativa ?? "";
       const hashAnterior = estado?.pacotes.find((pacote) => pacote.pacoteId === alvoId)?.hash
         ?? (estado?.pacoteId === alvoId ? estado.hash : null);
@@ -45,7 +51,7 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
       setEstado(novo);
       if (id) setSelecionado(id);
       else if (!selecionado && novo.pacotes[0]) setSelecionado(novo.pacotes[0].pacoteId);
-    } catch (e) { setEstado(null); setErro(mensagemErro(e)); }
+    } catch (e) { setEstado(null); limparConsulta(); setErro(mensagemErro(e)); }
     finally { setOcupado(false); }
   }
   useEffect(() => { void carregar(); }, [api]);
@@ -102,10 +108,15 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
   }
 
   async function consultar(event: FormEvent) {
-    event.preventDefault(); setErro(""); setOcupado(true);
+    event.preventDefault(); setErro(""); setOcupado(true); limparConsulta();
     try {
       const resposta = await api.consultar({ filtros: Object.fromEntries(Object.entries(filtros).filter(([, valor]) => valor.trim())) as Partial<typeof filtros> });
+      if (!resposta.referencia || resposta.referencia.hash !== estado?.referencia?.hash) {
+        await carregar();
+        throw new Error("BIBLIOTECA_REVISAO_DIVERGENTE");
+      }
       setConsultados(resposta.itens);
+      setReferenciaConsulta(resposta.referencia);
       setFezConsulta(true);
     } catch (e) { setErro(mensagemErro(e)); }
     finally { setOcupado(false); }
@@ -152,6 +163,7 @@ export function BibliotecaLocal({ api }: { api: ApiBiblioteca }) {
     <section aria-label="Consultar biblioteca"><h3>Consultar conteúdo ativo</h3>
       <form onSubmit={(e) => void consultar(e)}><div className="biblioteca-filtros">{Object.entries(filtros).map(([key, value]) => <label key={key}>{key}<input value={value} onChange={(e) => setFiltros((antes) => ({ ...antes, [key]: e.target.value }))} /></label>)}</div>
         <button type="submit" disabled={ocupado || !estado?.ativa}>Consultar</button></form>
+      {referenciaConsulta ? <p>Resultados da biblioteca {referenciaConsulta.id} · versão {referenciaConsulta.versao}</p> : null}
       {consultados.map((item) => <article key={item.id}><h4>{item.titulo}</h4><p>{item.tipo} · {item.versao}</p><p>{item.texto}</p><p>Fonte: {item.proveniencia.fonte} · trecho: {item.proveniencia.trecho}</p></article>)}
       {fezConsulta && consultados.length === 0 ? <p>Nenhum resultado para estes filtros.</p> : null}
     </section>
