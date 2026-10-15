@@ -27,7 +27,7 @@ const ausente = () => ({ valor: null, estado: "PENDENTE", campo: "AUSENTE", moti
 const presente = (valor: string, id: string) => ({ valor, estado: "VERDE", campo: "PRESENTE", motivo: "fixture sintética",
   fontes: [fonteSintetica(id)], revisao: "CONFIRMADO" });
 
-async function consultaCom(lotes: { id: string; topografia?: string; cid?: string; encontro?: string; em?: string; fonte?: string }[], encontroAntigo?: { id: string; em: string }) {
+async function consultaCom(lotes: { id: string; topografia?: string; histologia?: string; cid?: string; encontro?: string; em?: string; fonte?: string }[], encontroAntigo?: { id: string; em: string }) {
   const root = mkdtempSync(join(tmpdir(), "f1-b1-nutri-")); dirs.push(root);
   const db = abrirLedger(join(root, "ledger.sqlite")); dbs.push(db);
   const sessoes = criarGerenciadorSessao({ medicoId: "medico-teste", crm: "CRM-TESTE", senha: "senha-sintetica-comprida", duracaoMs: 60_000, agora: () => AGORA });
@@ -39,20 +39,21 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
   const token = sessoes.login("senha-sintetica-comprida")!.token;
   const PAC = "Paciente Teste Nutri", ENC = "encontro-nutri-01";
   let seq = 0;
-  const seed = (tipo: string, payload: unknown, tumorLotId: string | null = null, enc = ENC, em = AGORA) => {
+  const seed = (tipo: string, payload: unknown, tumorLotId: string | null = null, enc = ENC, em = AGORA, supersedesEventId?: string) => {
     seq += 1; const id = `nutri-${seq}`;
     salvarDraft(db, { draftId: id, patientId: PAC, sourceId: `src-${id}`, rawRef: "fixture-local", payload: {}, diagnostics: [], revision: 0, criadoEm: em });
     const r = confirmar(db, { operationId: `op-nutri-${String(seq).padStart(3, "0")}`, patientId: PAC, tumorLotId, encounterId: enc,
       reviewDecisionId: `rev-${id}`, sessao: sessoes.obter(token)!, em,
-      registros: [{ draftId: id, expectedRevision: 0, eventId: `ev-${id}`, tipo, payload, fontes: [fonteSintetica("medida-nutri")], revisao: "CONFIRMADO" }] });
+      registros: [{ draftId: id, expectedRevision: 0, eventId: `ev-${id}`, tipo, payload, fontes: [fonteSintetica("medida-nutri")], revisao: "CONFIRMADO", ...(supersedesEventId ? {supersedesEventId} : {}) }] });
     expect(r.estado).toBe("GRAVADA");
+    return `ev-${id}`;
   };
   const pac = { patientId: PAC, identificadores: [], nome: PAC, nascimento: null, sexoCadastral: "NAO_INFORMADO", divergencia: false };
   if (encontroAntigo) seed("Paciente", pac, null, encontroAntigo.id, encontroAntigo.em);
   seed("Paciente", pac);
   for (const l of lotes) seed("TumorLot", { tumorLotId: l.id, patientId: PAC,
     cid: l.cid ? presente(l.cid, l.fonte ?? `cid-${l.id}`) : ausente(), topografia: l.topografia ? presente(l.topografia, l.fonte ?? `topo-${l.id}`) : ausente(),
-    histologia: ausente(), estadiamentos: [], finalidadeApac: ausente(), marcos: [] }, l.id, l.encontro ?? ENC, l.em ?? AGORA);
+    histologia: l.histologia ? presente(l.histologia, `histo-${l.id}`) : ausente(), estadiamentos: [], finalidadeApac: ausente(), marcos: [] }, l.id, l.encontro ?? ENC, l.em ?? AGORA);
   const antes = listarEventos(db, PAC).length;
   const carregar = async (tumorLotId?: string, encounterId = ENC) => {
     const r = await fetch(`http://127.0.0.1:${addr.port}/consulta/carregar`, { method: "POST",
@@ -64,6 +65,24 @@ async function consultaCom(lotes: { id: string; topografia?: string; cid?: strin
 }
 
 describe("F1-B1 · triagem nutricional chega à consulta (D-F1-33, NRS-2002)", () => {
+  it("supersessão remove a versão antiga antes de contar lotes",async()=>{
+    const c=await consultaCom([]),lote={tumorLotId:"lote-corrigido",patientId:"Paciente Teste Nutri",cid:ausente(),histologia:ausente(),estadiamentos:[],finalidadeApac:ausente(),marcos:[]};
+    const anterior=c.seed("TumorLot",{...lote,topografia:presente("Mama","anterior")},"lote-corrigido");
+    c.seed("TumorLot",{...lote,topografia:presente("Esôfago","atual")},"lote-corrigido",undefined,undefined,anterior);
+    const v=await c.carregar("lote-corrigido");expect(v.status).toBe(200);
+    expect(v.body.flash.sugestoesClinicas?.[0]).toContain("câncer de esôfago");
+    expect(v.body.pendenciasLeitura).not.toContain("TRIAGEM_NUTRICIONAL_LOTE_AMBIGUO");
+  });
+  it("topografia e histologia conflitantes são preservadas sem suprimir IMC independente",async()=>{
+    const c=await consultaCom([{id:"lote-conflito",topografia:"Mama",histologia:"adenocarcinoma gástrico"}]);
+    const antes=await c.carregar();expect(antes.body.flash.sugestoesClinicas).toBeUndefined();
+    expect(antes.body.pendenciasLeitura).toContain("TRIAGEM_NUTRICIONAL_SITIOS_NAO_RECONCILIADOS");
+    c.seed("Weight",{kg:50,origem:"MEDIDO",data:"2026-09-01",sourceId:"medida-nutri"});
+    c.seed("FATO",{campo:"alturaCm",valor:170,dataClinica:"2026-09-01"});
+    const depois=await c.carregar();expect(depois.body.flash.sugestoesClinicas?.[0]).toContain("IMC 17.3 < 18");
+    expect(depois.body.flash.sugestoesClinicas?.[0]).not.toContain("câncer de");
+    expect(depois.body.pendenciasLeitura).toContain("TRIAGEM_NUTRICIONAL_SITIOS_NAO_RECONCILIADOS");
+  });
   it.each(["RAW", "CONFIRMADO"])("campo tumoral pendente (%s) não dispara sugestão", async revisao => {
     const c = await consultaCom([]);
     c.seed("TumorLot", { tumorLotId: "lote-pendente", patientId: "Paciente Teste Nutri", cid: ausente(),
