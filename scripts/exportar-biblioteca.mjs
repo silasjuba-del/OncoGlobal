@@ -40,6 +40,15 @@ const triagemPublica = JSON.parse(readFileSync(new URL("./exportacao-publica-tri
 const categoriasPublicas = new Map(triagemPublica.itens.map(i => [`${i.arquivo}|${i.campo}|${i.sha256}`, new Set(i.categorias)]));
 const relativoSeguro = p => typeof p === "string" && !p.includes("\\") && !p.split("/").some(x => !x || x === "." || x === "..")
   && p.startsWith("corpus/") && !p.includes(":") && /\.(json|md|txt)$/.test(p);
+function conferirCaminhoPublico(caminho) {
+  for (const componente of caminho.split("/")) {
+    const legivel = componente.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[_-]/g, " ");
+    if (/\b(?:paciente|patient|nome\s*(?:completo\s*)?paciente|patient\s*(?:full\s*)?name)\s+/i.test(legivel)
+      || /\b(?:prontuario|cpf|cns|patientid|pacienteid)\s*[: .]?\s*\d/i.test(legivel)
+      || scanText(componente.replace(/^[A-Z0-9._-]+@\d+\.\d+\.\d+\.md$/, "PROMPT_VERSIONADO"), "caminho.txt", { manifest: {files:[]} }).findings.length)
+      throw new Error("PHI_CAMINHO");
+  }
+}
 function dentro(root, path) {
   const r = relative(root, path);
   if (isAbsolute(r) || r === ".." || r.startsWith(`..${sep}`) || resolve(root, r) !== path) throw new Error("CAMINHO_FORA_DA_RAIZ");
@@ -51,7 +60,7 @@ function stringsClinicas(value, contexto = "", caminho = "") {
   return chaves.concat(Object.entries(value).flatMap(([key, item]) => {
     const k = key.normalize("NFD").replace(/[\u0300-\u036f\W_]/g, "").toLowerCase();
     if (item === null || item === undefined) return [];
-    const identidade = /^(pacientes?|patients?|nomepaciente|patientname|patientid|pacienteid|nascimento|datanascimento|birthdate|dateofbirth|cpf|cns|prontuario|numeroprontuario|medicalrecordnumber|rg|nis|pis|endereco|address|telefone|phone)$/.test(k)
+    const identidade = /^(pacientes?|patients?|nome(?:completo)?(?:do)?paciente|(?:full)?patient(?:full)?name|patientid|pacienteid|nascimento|datanascimento|birthdate|dateofbirth|cpf|cns|prontuario|numeroprontuario|medicalrecordnumber|rg|nis|pis|endereco|address|telefone|phone)$/.test(k)
       || (/(?:^|\.)(?:pacientes?|patients?)(?:\.|$)/.test(contexto) && /^(nome|name|id)$/.test(k));
     // O rótulo não pode desaparecer ao entrar em um objeto/array (ex.: patientId: [valor]).
     if (typeof item === "object") {
@@ -121,6 +130,7 @@ export function exportarBiblioteca(rootDir, destino) {
     if (lstatSync(dir).isSymbolicLink()) throw new Error("LINK_NAO_PERMITIDO");
     for (const entry of readdirSync(dir, { withFileTypes: true }).sort((a,b) => a.name.localeCompare(b.name))) {
       const path = resolve(dir, entry.name); dentro(root, realpathSync(path));
+      conferirCaminhoPublico(relative(root, path).split(sep).join("/"));
       if (lstatSync(path).isSymbolicLink()) throw new Error("LINK_NAO_PERMITIDO");
       if (entry.isDirectory()) { visitar(path); continue; }
       const caminho = relative(root, path).split(sep).join("/");
@@ -154,6 +164,7 @@ export function validarPacoteConsulta(diretorio) {
   const metadados = new Set(["manifesto.json", "pendencias.json", "LEIA-ME.md"]);
   for (const a of m.arquivos) {
     if (!relativoSeguro(a.caminho) || vistos.has(a.caminho)) throw new Error("CAMINHO_INVALIDO_OU_DUPLICADO");
+    conferirCaminhoPublico(a.caminho);
     vistos.add(a.caminho);
     if (a.estado !== "RASCUNHO" || a.alerta !== false || a.consultavel !== true) throw new Error("ATIVACAO_NAO_PERMITIDA");
     const path = resolve(root, a.caminho); dentro(root, realpathSync(path));
@@ -170,6 +181,7 @@ export function validarPacoteConsulta(diretorio) {
     || typeof e.caminho !== "string" || !e.caminho.startsWith("corpus/") || e.caminho.includes("\\") || e.caminho.includes(":")
     || e.caminho.split("/").some(p => !p || p === "." || p === "..") || /\.(json|md|txt)$/.test(e.caminho)) throw new Error("EXCLUSOES_INVALIDAS");
   const exclusoes = JSON.stringify(m.naoExportados).replace(/TabelaUnificada_\d{6}_v\d{10}\.zip/g, "FONTE_SIGTAP.zip");
+  for (const e of m.naoExportados) conferirCaminhoPublico(e.caminho);
   conferirTexto(Buffer.from(exclusoes), "exclusoes.json", { files: [] });
   if (canonico(parseJsonUnico(readFileSync(resolve(root, "pendencias.json"), "utf8"))) !== canonico(pendenciasDoManifesto(m))) throw new Error("PENDENCIAS_DIVERGENTES");
   if (readFileSync(resolve(root, "LEIA-ME.md"), "utf8") !== LEIA_ME) throw new Error("INSTRUCOES_DIVERGENTES");
