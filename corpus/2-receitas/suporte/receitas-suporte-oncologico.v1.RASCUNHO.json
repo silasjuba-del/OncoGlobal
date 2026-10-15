@@ -297,7 +297,13 @@
           "trecho": "no need to prescribe steroids (dexamethasone) beyond day 1 after AC HEC",
           "estado": "VERIFICADO"
         }
-      ]
+      ],
+      "politicaLocal": {
+        "estado": "PENDENTE",
+        "propor": false,
+        "decisao": "D-F1-30",
+        "motivo": "Dose desta referência foi reduzida pela interação com NK1, excluído localmente. Esquema sem NK1 aguarda curadoria; não propor esta dose. A dexametasona das fichas de pré-medicação permanece inalterada."
+      }
     },
     {
       "id": "SUP-NVQ-ALTO-OLZ",

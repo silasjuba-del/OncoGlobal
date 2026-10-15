@@ -106,7 +106,7 @@ describe("F1-B1 valores aplicados ao corpus", () => {
     expect(por("SUP-NVQ-BAIXO").droga).not.toMatch(/metoclopramida/i);
     expect(por("SUP-NVQ-BAIXO").dose).not.toMatch(/metoclopramida/i);
     expect(por("SUP-NVQ-BAIXO").politicaLocal.decisao).toBe("D-F1-30");
-    for (const id of ["SUP-NVQ-ALTO-NK1-ORAL", "SUP-NVQ-ALTO-NK1-IV", "SUP-NVQ-CARBO5-NK1", "SUP-NVQ-ALTO-OLZ", "SUP-NVQ-TARDIA-ESCAPE", "SUP-NVQ-5HT3-PALO"])
+    for (const id of ["SUP-NVQ-ALTO-NK1-ORAL", "SUP-NVQ-ALTO-NK1-IV", "SUP-NVQ-CARBO5-NK1", "SUP-NVQ-ALTO-OLZ", "SUP-NVQ-TARDIA-ESCAPE", "SUP-NVQ-5HT3-PALO", "SUP-NVQ-ALTO-DEX"])
       expect(por(id).politicaLocal.propor, id).toBe(false);
     expect(s.resumo.total).toBe(s.itens.length);
   });
