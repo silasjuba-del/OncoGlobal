@@ -189,6 +189,7 @@ export async function jornadaB2NoNavegador(page, opts) {
           patientId, encounterId, tumorLotId: null, id: `proposta-b2-${f.familia}`,
           operationId: crypto.randomUUID(), expectedRevision: null, rascunhoOrigemId: rasc.json.draftId, itens,
         });
+        if(prop.status===201 && typeof prop.json.draftId==="string") art.dataset.propostaSalvaId=prop.json.draftId;
         const draft = await post("/consulta/rascunho", { draftId: rasc.json.draftId });
         const recebida = await window.__s12ConferirTrilha(draft.json?.draft?.payload?.template, f.templateId);
         art.dataset.trilhaRecebida = JSON.stringify(recebida);
