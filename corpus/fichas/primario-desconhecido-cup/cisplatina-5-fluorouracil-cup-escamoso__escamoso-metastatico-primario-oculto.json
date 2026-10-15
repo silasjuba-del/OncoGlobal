@@ -4,7 +4,7 @@
   "nome": "Cisplatina + 5-Fluorouracil (CUP escamoso)",
   "cenario": "escamoso metastático (primário oculto)",
   "versao": "1.0.0",
-  "hash": "fea3d48956b37f568d9efa428f07cbad4b5b4cddf0110e32b5077229321ed69a",
+  "hash": "46249753073e900420323ac7524b5154f0b55664be31d525a68a22bd9b72c664",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": null,
@@ -25,7 +25,10 @@
       "finalVolumeMl": 250,
       "infusionTime": null,
       "days": [
-        "d1"
+        "d1",
+        "d2",
+        "d3",
+        "d4"
       ],
       "observacao": "Lavar acesso venoso pré e pós QT (planilha).",
       "source": "PROTOCOL",
@@ -47,7 +50,10 @@
       "finalVolumeMl": null,
       "infusionTime": "15 min",
       "days": [
-        "d1"
+        "d1",
+        "d2",
+        "d3",
+        "d4"
       ],
       "observacao": "Padrão local (D-W9-23c/34c; D-F1-30).",
       "source": "PROTOCOL",
@@ -69,7 +75,10 @@
       "finalVolumeMl": null,
       "infusionTime": "15 min",
       "days": [
-        "d1"
+        "d1",
+        "d2",
+        "d3",
+        "d4"
       ],
       "observacao": "Antiemese local sem NK1 (D-W9-23c/34c).",
       "source": "PROTOCOL",
@@ -91,7 +100,10 @@
       "finalVolumeMl": null,
       "infusionTime": null,
       "days": [
-        "d1"
+        "d1",
+        "d2",
+        "d3",
+        "d4"
       ],
       "observacao": "Pré-medicação local (D-W9-34c).",
       "source": "PROTOCOL",
@@ -181,9 +193,10 @@
       "days": [
         "d1"
       ],
-      "observacao": "Khansur 1995: cisplatina 100 mg/m² D1 (variante eviQ 288 para H&N: 75). Taxa máxima 1 mg/min (padrão local das fichas reais).",
+      "observacao": "Khansur 1995: cisplatina 100 mg/m² D1 (variante eviQ 288 para H&N: 75). Taxa máxima 1 mg/min (padrão local das fichas reais); duração calculada nunca inferior ao tempo da fonte.",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "taxaMaximaMgMin": 1
     },
     {
       "drug": "Manitol 20% frasco 250 mL",
@@ -289,7 +302,10 @@
       "finalVolumeMl": 250,
       "infusionTime": null,
       "days": [
-        "d1"
+        "d1",
+        "d2",
+        "d3",
+        "d4"
       ],
       "observacao": "Lavar acesso venoso pós-QT (planilha).",
       "source": "PROTOCOL",

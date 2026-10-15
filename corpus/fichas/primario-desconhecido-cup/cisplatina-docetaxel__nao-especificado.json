@@ -4,7 +4,7 @@
   "nome": "Cisplatina + Docetaxel",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "278fb176810989ec4b4718a7bba93509172e39430d2d9e0e5116f66040f50133",
+  "hash": "45e7acfc15f06c23d7c19bb0ad6d75c7ef8b3fda2f99b2feaa6b66351eea6720",
   "codigoInstitucional": null,
   "intervaloDias": 21,
   "ciclos": null,
@@ -225,9 +225,10 @@
       "days": [
         "d1"
       ],
-      "observacao": "Greco 2000: cisplatina 75 mg/m² q3sem. Variante Mukai: 80 mg/m² em 2 h. Taxa máxima 1 mg/min (padrão local das fichas reais).",
+      "observacao": "Greco 2000: cisplatina 75 mg/m² q3sem. Variante Mukai: 80 mg/m² em 2 h. Taxa máxima 1 mg/min (padrão local das fichas reais); duração calculada nunca inferior ao tempo da fonte.",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "taxaMaximaMgMin": 1
     },
     {
       "drug": "Manitol 20% frasco 250 mL",

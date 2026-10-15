@@ -25,7 +25,7 @@ const LEIA_ME = [
   "# PacoteBiblioteca@1 convertido do snapshot de consulta",
   "",
   "Gerado por scripts/converter-biblioteca.mjs a partir de um snapshot ExportacaoConsultaCorpus@1 validado.",
-  "Itens incluídos têm proveniência com URL verificada (scripts/converter-biblioteca-mapeamento.json); os demais estão no inventario.json com motivo.",
+  "Itens incluídos têm proveniência com URL verificada e escopo explícito. Arquivos com fontes distintas exigem seção mapeada; o inventário registra a conversão parcial e fontes não convertidas.",
   "",
   "Importação NÃO é ativação: todos os itens entram como RASCUNHO e a curadoria é item a item.",
   "Pela rota HTTP: POST /biblioteca/importar com o conteúdo de pacote-http.json ({manifesto, arquivos}).",
@@ -46,6 +46,28 @@ function primeiraFonteComTrecho(valor) {
   if (f && typeof f === "object" && typeof f.referencia === "string" && f.referencia.trim() && typeof f.trecho === "string" && f.trecho.trim()) return f;
   for (const v of Object.values(valor)) { const achada = primeiraFonteComTrecho(v); if (achada) return achada; }
   return null;
+}
+
+function fontesComTrecho(valor, caminho = "") {
+  if (!valor || typeof valor !== "object") return [];
+  const fontes = [];
+  for (const [k, v] of Object.entries(valor)) {
+    const localizador = `${caminho}/${k.replaceAll("~", "~0").replaceAll("/", "~1")}`;
+    if (k === "fonte" && v && typeof v.referencia === "string" && v.referencia.trim()
+      && typeof v.trecho === "string" && v.trecho.trim()) fontes.push({ localizador, fonte: v });
+    else fontes.push(...fontesComTrecho(v, localizador));
+  }
+  return fontes;
+}
+function lerSecao(json, ponteiro) {
+  if (typeof ponteiro !== "string" || !ponteiro.startsWith("/")) throw Error("LOCALIZADOR_INVALIDO");
+  let valor = json;
+  for (const parte of ponteiro.slice(1).split("/")) {
+    const chave = parte.replaceAll("~1", "/").replaceAll("~0", "~");
+    if (!valor || typeof valor !== "object" || !Object.hasOwn(valor, chave)) throw Error("LOCALIZADOR_INEXISTENTE");
+    valor = valor[chave];
+  }
+  return valor;
 }
 
 function validarMapeamento(m) {
@@ -85,14 +107,19 @@ export async function converterBiblioteca(diretorioSnapshot, destino, opcoes = {
     const map = mapeamento.itens[a.caminho];
     if (!map) { excluidos.push({ caminho: a.caminho, motivo: "APLICABILIDADE_DESCONHECIDA", detalhe: "sem mapeamento curado; aplicabilidade desconhecida não pode virar lista vazia (universal)" }); continue; }
     const json = JSON.parse(readFileSync(join(snap, a.caminho), "utf8"));
-    const texto = readFileSync(join(snap, a.caminho), "utf8");
+    const secao = map.escopoFonte ? lerSecao(json, map.escopoFonte) : json;
+    const fontes = fontesComTrecho(secao);
+    if (new Set(fontes.map(f => JSON.stringify(f.fonte))).size > 1) {
+      excluidos.push({ caminho: a.caminho, motivo: "PROVENIENCIA_MULTIPLA_SEM_ESCOPO", detalhe: "mapear seção com fonte própria; primeira fonte não sustenta o arquivo inteiro" }); continue;
+    }
+    const texto = map.escopoFonte ? JSON.stringify(secao, null, 2) : readFileSync(join(snap, a.caminho), "utf8");
     if (texto.length > LIMITE_TEXTO_ITEM || Buffer.byteLength(texto, "utf8") > LIMITE_BYTES_ITEM) { excluidos.push({ caminho: a.caminho, motivo: "TEXTO_EXCESSIVO", detalhe: `${texto.length} chars (limite ${LIMITE_TEXTO_ITEM})` }); continue; }
     const id = slug(a.caminho.replace(/^corpus\//, "").replace(/\.(json|md|txt)$/, ""));
     if (id.length > 100) { excluidos.push({ caminho: a.caminho, motivo: "ID_EXCESSIVO", detalhe: id }); continue; }
     if (ids.has(id)) throw new Error(`COLISAO_DE_ID:${id} (${ids.get(id)} × ${a.caminho})`);
     const arquivo = `${id}.json`;
     if (arquivos.has(arquivo)) throw new Error(`COLISAO_DE_ARQUIVO:${arquivo}`);
-    const fonte = primeiraFonteComTrecho(json);
+    const fonte = primeiraFonteComTrecho(secao);
     if (!fonte) { excluidos.push({ caminho: a.caminho, motivo: "PROVENIENCIA_SEM_TRECHO", detalhe: "nenhuma fonte interna com referencia E trecho" }); continue; }
     if (!verificadas.has(map.provenienciaUrl)) { excluidos.push({ caminho: a.caminho, motivo: "URL_NAO_VERIFICADA", detalhe: map.provenienciaUrl }); continue; }
     let publicadoEm = null, publicadoEmOrigem = null;
@@ -100,7 +127,7 @@ export async function converterBiblioteca(diretorioSnapshot, destino, opcoes = {
     else if (ehData(json?.header?.vigenteDesde)) { publicadoEm = json.header.vigenteDesde; publicadoEmOrigem = "header.vigenteDesde (vigência local — a fonte não declara data completa)"; }
     if (!publicadoEm) { excluidos.push({ caminho: a.caminho, motivo: "SEM_DATA_PUBLICACAO", detalhe: `edicao=${JSON.stringify(fonte.edicao ?? null)} sem vigenteDesde` }); continue; }
     const tituloBase = json?.header?.id ?? json?.id ?? a.caminho.split("/").pop().replace(/\.json$/, "");
-    const titulo = `${tituloBase} — ${a.caminho}`;
+    const titulo = `${tituloBase} — ${a.caminho}${map.escopoFonte ? `#${map.escopoFonte}` : ""}`;
     if (titulo.length > 300) { excluidos.push({ caminho: a.caminho, motivo: "TITULO_EXCESSIVO", detalhe: `${titulo.length} chars` }); continue; }
     const versaoItem = ehSemver(a.versao) ? a.versao : "1.0.0";
     ids.set(id, a.caminho); arquivos.set(arquivo, a.caminho);
@@ -111,7 +138,9 @@ export async function converterBiblioteca(diretorioSnapshot, destino, opcoes = {
         proveniencia: { fonte: map.provenienciaUrl, trecho: fonte.trecho, publicadoEm, recuperadoEm: agora, licenca: LICENCA_DECLARATIVA },
         dependencias: [],
       },
-      origem: { caminho: a.caminho, sha256Snapshot: a.sha256, versaoOriginal: a.versao ?? null, versaoAtribuida: !ehSemver(a.versao), publicadoEmOrigem, aplicabilidadeNota: map.aplicabilidadeNota ?? null, fonteReferencia: fonte.referencia },
+      origem: { caminho: a.caminho, sha256Snapshot: a.sha256, versaoOriginal: a.versao ?? null, versaoAtribuida: !ehSemver(a.versao), publicadoEmOrigem, aplicabilidadeNota: map.aplicabilidadeNota ?? null, fonteReferencia: fonte.referencia,
+        localizador: map.escopoFonte ?? "/", escopoParcial: Boolean(map.escopoFonte),
+        outrasFontesNaoConvertidas: map.escopoFonte ? fontesComTrecho(json).filter(f => !f.localizador.startsWith(`${map.escopoFonte}/`)).map(f => f.localizador) : [] },
       arquivo,
     });
   }
@@ -183,7 +212,7 @@ export async function converterBiblioteca(diretorioSnapshot, destino, opcoes = {
     writeFileSync(join(staging, "inventario.json"), JSON.stringify({
       geradoEm: agora, snapshot: { diretorio: snap, validadoPor: "validarPacoteConsulta (scripts/exportar-biblioteca.mjs)" },
       pacote: { id: idPacote, versao: versaoPacote, itens: incluidos.length },
-      unidade: "arquivo",
+      unidade: "arquivo ou seção explicitamente mapeada",
       incluidos: incluidos.map(({ origem }) => origem),
       excluidos,
       pilares: { cobertos: porPilar, transversaisExcluidos: raizesTransversais },

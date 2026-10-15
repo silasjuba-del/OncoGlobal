@@ -20,12 +20,6 @@
       "hashMode": "utf8-lf"
     },
     {
-      "path": "corpus/fichas/prostata/carboplatina-paclitaxel-semanal__nao-especificado.json",
-      "sha256": "ff437ba4e426f42a634c68e069500c641b9d35c3b19c1ed913405abfc29ca4fb",
-      "items": [],
-      "hashMode": "utf8-lf"
-    },
-    {
       "path": "corpus/fichas/pulmao-cpnpc/carboplatina-gemcitabina__nao-especificado.json",
       "sha256": "26af286322884606de59d180f252924bf830164261c010f149d40e2373d8ec47",
       "items": [
@@ -3090,60 +3084,6 @@
       ]
     },
     {
-      "path": "corpus/fichas/neoplasia-trofoblastica-gestacional/ema-co-alto-risco__alto-risco-escore-figo-7.json",
-      "sha256": "0a9b4887a741ae44d456f4ec13bd5a22ab164b98f4f192273c2da656beff765a",
-      "items": [],
-      "hashMode": "utf8-lf"
-    },
-    {
-      "path": "corpus/manifesto/b2-fichas.v1.json",
-      "sha256": "b703541fd8720025ae8a920a4384fd9edc61eb379d3d2768e4ded8321af5d554",
-      "items": [
-        {
-          "type": "telefone",
-          "line": 1655,
-          "ordinal": 0,
-          "status": "technical_token_false_positive",
-          "evidenceRef": "corpus/manifesto/b2-fichas.v1.json:1655",
-          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
-          "contextTag": "json_sha256_field_64hex"
-        }
-      ],
-      "hashMode": "utf8-lf"
-    },
-    {
-      "path": "corpus/fichas/osteossarcoma/ap-doxorrubicina-cisplatina__nao-especificado.json",
-      "sha256": "63bddb69ff1931e289a69c65aa0c95dc224f9f3bd63752901bdda5c7185dbb65",
-      "items": [
-        {
-          "type": "telefone",
-          "line": 7,
-          "ordinal": 0,
-          "status": "technical_token_false_positive",
-          "evidenceRef": "corpus/fichas/osteossarcoma/ap-doxorrubicina-cisplatina__nao-especificado.json:7",
-          "reason": "Match contido em token hash/commit hexadecimal completo de 40/64 caracteres.",
-          "contextTag": "json_sha256_field_64hex"
-        }
-      ],
-      "hashMode": "utf8-lf"
-    },
-    {
-      "path": "corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json",
-      "sha256": "8b67d51b74254aee22f62d94f51ec01e7167ed9fef8c3c0d1b5191328a914e38",
-      "items": [
-        {
-          "type": "cns",
-          "line": 7,
-          "ordinal": 0,
-          "status": "technical_token_false_positive",
-          "evidenceRef": "corpus/fichas/esofago/carboplatina-paclitaxel-semanal-cross-rxt__concomitante-a-rt.json:7",
-          "reason": "Sequência de 15 dígitos contida no valor do campo hash (token hexadecimal de 64 caracteres) do JSON da ficha — contenção confirmada programaticamente nesta sessão; não é CNS.",
-          "contextTag": null
-        }
-      ],
-      "hashMode": "utf8-lf"
-    },
-    {
       "path": "corpus/6-pack-tumor/ewing/pack-ewing.v2.RASCUNHO.json",
       "sha256": "3db10fb344d71128abe71a12af2e85fc420f146419007d7dba86cfe2e3aa3496",
       "items": [
@@ -3282,6 +3222,38 @@
         }
       ],
       "hashMode": "utf8-lf"
+    },
+    {
+      "path": "corpus/fichas/nao-informado-ficha-institucional/lv5fu2-5-fu-folinato-p1512__nao-especificado.json",
+      "sha256": "00a338058d39f354ad167db0673e06a6be517e2c08006e85a6876c1eeea77340",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 7,
+          "ordinal": 0,
+          "contextTag": "json_sha256_field_64hex",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/fichas/nao-informado-ficha-institucional/lv5fu2-5-fu-folinato-p1512__nao-especificado.json:7",
+          "reason": "Revisão Codex 2026-10-15: candidato contido no hash SHA-256 canônico de 64 hex da ficha LV5FU2, repetido no manifesto; nenhum identificador pessoal."
+        }
+      ]
+    },
+    {
+      "path": "corpus/manifesto/b2-fichas.v1.json",
+      "sha256": "92f0646892fb235f2f4a7de43dbb1aff118ea3d701f99ad65cf844249f1da1f8",
+      "hashMode": "utf8-lf",
+      "items": [
+        {
+          "type": "telefone",
+          "line": 407,
+          "ordinal": 0,
+          "contextTag": "json_sha256_field_64hex",
+          "status": "technical_token_false_positive",
+          "evidenceRef": "corpus/manifesto/b2-fichas.v1.json:407",
+          "reason": "Revisão Codex 2026-10-15: candidato contido no hash SHA-256 canônico de 64 hex da ficha LV5FU2, repetido no manifesto; nenhum identificador pessoal."
+        }
+      ]
     }
   ],
   "protectedPaths": []

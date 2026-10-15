@@ -4,7 +4,7 @@
   "nome": "LV5FU2 — 5-FU + folinato (P1512)",
   "cenario": "não especificado",
   "versao": "1.0.0",
-  "hash": "abbee7313aaceb5d9a1823491e78ae0d51516a7cc0936c63b9b03f5a5d1b50b9",
+  "hash": "90468d8c5df0a12beb901b1e8f94d5d02a0218fd146564c23d4101536233d375",
   "codigoInstitucional": "P1512",
   "intervaloDias": 14,
   "ciclos": null,
@@ -25,7 +25,8 @@
       "finalVolumeMl": 250,
       "infusionTime": null,
       "days": [
-        "d1"
+        "d1",
+        "d2"
       ],
       "observacao": "Lavar acesso venoso pré e pós QT (planilha).",
       "source": "PROTOCOL",
@@ -47,7 +48,8 @@
       "finalVolumeMl": null,
       "infusionTime": "15 min",
       "days": [
-        "d1"
+        "d1",
+        "d2"
       ],
       "observacao": "Padrão local (D-W9-23c/34c; D-F1-30).",
       "source": "PROTOCOL",
@@ -69,7 +71,8 @@
       "finalVolumeMl": null,
       "infusionTime": "15 min",
       "days": [
-        "d1"
+        "d1",
+        "d2"
       ],
       "observacao": "Antiemese local sem NK1 (D-W9-23c/34c).",
       "source": "PROTOCOL",
@@ -91,7 +94,8 @@
       "finalVolumeMl": null,
       "infusionTime": null,
       "days": [
-        "d1"
+        "d1",
+        "d2"
       ],
       "observacao": "Pré-medicação local (D-W9-34c).",
       "source": "PROTOCOL",
@@ -182,7 +186,8 @@
       "finalVolumeMl": 250,
       "infusionTime": null,
       "days": [
-        "d1"
+        "d1",
+        "d2"
       ],
       "observacao": "Lavar acesso venoso pós-QT (planilha).",
       "source": "PROTOCOL",

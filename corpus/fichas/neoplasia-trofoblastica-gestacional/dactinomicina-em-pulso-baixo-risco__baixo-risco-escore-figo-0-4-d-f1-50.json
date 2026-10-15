@@ -4,7 +4,7 @@
   "nome": "Dactinomicina em pulso (baixo risco)",
   "cenario": "baixo risco (escore FIGO 0–4, D-F1-50)",
   "versao": "1.0.0",
-  "hash": "8f21567e1cde0cd48dc1bae769532b43829dcf81b476e37093f604c9412c19f1",
+  "hash": "c9b206a274e3f560e1f24c6d4c2d647bfc39b0c8db26dfe78ed47ae1e5595726",
   "codigoInstitucional": null,
   "intervaloDias": 14,
   "ciclos": null,
@@ -117,7 +117,8 @@
       ],
       "observacao": "1,25 mg/m² IV em 3–5 min (cap 2 mg), q14d. Alternativa Lok: 0,5 mg/dia D1–5.",
       "source": "PROTOCOL",
-      "overrideMotivo": null
+      "overrideMotivo": null,
+      "doseMaximaMg": 2
     },
     {
       "drug": "Soro fisiológico 0,9% 250 mL (lavagem pós-QT)",

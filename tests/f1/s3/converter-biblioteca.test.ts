@@ -17,6 +17,24 @@ import { criarGerenciadorSessao } from '../../../src/server/sessao.js';
 import { rotearBiblioteca } from '../../../src/server/biblioteca.js';
 
 const AGORA = '2026-10-14T12:00:00Z';
+it('não atribui o arquivo inteiro à primeira fonte: exige e respeita a seção mapeada', async () => {
+  const caminho = 'corpus/1-exames/labs/composto.json';
+  const root = criarRoot({ [caminho]: painel('composto', { painels: [
+    {classe:'pemetrexede', fonte:{referencia:'Fonte A', trecho:'trecho A', edicao:'2026-10-11'}},
+    {classe:'anti-HER2', fonte:{referencia:'Fonte B', trecho:'trecho B', edicao:'2026-10-11'}},
+    {classe:'sem suporte', recomendacao:'conteúdo não fundamentado'},
+  ] }), 'corpus/1-exames/labs/controle.json': painel('controle') });
+  const integral = await converter(root,'multiplas',{itens:{[caminho]:{}, 'corpus/1-exames/labs/controle.json':{}}});
+  expect(integral.inventario.excluidos).toEqual(expect.arrayContaining([expect.objectContaining({caminho,motivo:'PROVENIENCIA_MULTIPLA_SEM_ESCOPO'})]));
+  const parcial = await converter(root,'secao',{itens:{[caminho]:{escopoFonte:'/painels/0'}}});
+  const item = lerItem(parcial.destino, parcial.manifesto.itens[0].arquivo);
+  expect(item.texto).toContain('pemetrexede');
+  expect(item.texto).not.toContain('anti-HER2');
+  expect(item.texto).not.toContain('conteúdo não fundamentado');
+  expect(item.proveniencia.trecho).toBe('trecho A');
+  expect(parcial.inventario.incluidos[0]).toMatchObject({localizador:'/painels/0',escopoParcial:true});
+  expect(parcial.inventario.incluidos[0].outrasFontesNaoConvertidas).toContain('/painels/1/fonte');
+});
 // CPF sintético válido montado em runtime — o literal não pode existir no fonte (scanner PHI do repositório).
 const CPF_SINTETICO = ['123', '456', '789', '09'].join('.');
 const RAIZ = dirname(dirname(dirname(fileURLToPath(import.meta.url)))); // raiz do repo
@@ -31,17 +49,17 @@ const painel = (id: string, extra: Record<string, unknown> = {}) => ({
   header: { id, versao: '1.0.0', vigenteDesde: '2026-10-11', fonte: { tipo: 'LITERATURA', referencia: `Exemplo ${id}`, trecho: `trecho público ${id}`, edicao: '2026-10-11' } },
   nota: 'fixture sintética sem dados pessoais', ...extra,
 });
-function mapeamento(itens: Record<string, { aplicabilidade?: Record<string, string[]>; url?: string }>, verificacoes: string[]) {
+function mapeamento(itens: Record<string, { aplicabilidade?: Record<string, string[]>; url?: string; escopoFonte?: string }>, verificacoes: string[]) {
   const dir = mkdtempSync(join(tmpdir(), 'conv-map-'));
   const m = {
     schema: 'ConversorBibliotecaMapeamento@1', versao: '1.0.0', itens: Object.fromEntries(Object.entries(itens).map(([caminho, i]) => [caminho, {
       pilar: 1, aplicabilidade: i.aplicabilidade ?? { tumor: [], histologia: [], estadio: [], biomarcador: [], linha: [] },
-      provenienciaUrl: i.url ?? 'https://example.org/fonte',
+      provenienciaUrl: i.url ?? 'https://example.org/fonte', ...(i.escopoFonte ? {escopoFonte:i.escopoFonte} : {}),
     }])), verificacoes: verificacoes.map((url) => ({ url, verificadaEm: '2026-10-14', metodo: 'fixture' })), pendencias: [],
   };
   const arquivo = join(dir, 'mapeamento.json'); writeFileSync(arquivo, JSON.stringify(m)); return arquivo;
 }
-async function converter(root: string, nome: string, opcoes: { itens?: Record<string, { aplicabilidade?: Record<string, string[]>; url?: string }>; versao?: string; verificacoes?: string[] } = {}) {
+async function converter(root: string, nome: string, opcoes: { itens?: Record<string, { aplicabilidade?: Record<string, string[]>; url?: string; escopoFonte?: string }>; versao?: string; verificacoes?: string[] } = {}) {
   const base = mkdtempSync(join(tmpdir(), 'conv-out-'));
   const snap = join(base, `${nome}-snap`), destino = join(base, `${nome}-pac`);
   exportarBiblioteca(root, snap);
