@@ -188,13 +188,13 @@ export async function jornadaB2NoNavegador(page, opts) {
         await post("/consulta/carregar", { patientId, encounterId, tumorLotId: null });
         const prop = await post("/consulta/prescricao/propor", {
           patientId, encounterId, tumorLotId: null, id: `proposta-b2-${f.familia}`,
-          operationId: crypto.randomUUID(), expectedRevision: null, itens,
+          operationId: crypto.randomUUID(), expectedRevision: null, rascunhoOrigemId: rasc.json.draftId, itens,
         });
         const draft = await post("/consulta/rascunho", { draftId: rasc.json.draftId });
         const recebida = await window.__s12ConferirTrilha(draft.json?.draft?.payload?.template, f.templateId);
         art.dataset.trilhaRecebida = JSON.stringify(recebida);
         pintar(art, `proposta HTTP ${prop.status} codigo ${prop.json.codigo ?? prop.json.revision}\n`
-          + `documento-rascunho: ${JSON.stringify(draft.json?.draft?.payload?.kind ?? draft.json).slice(0, 500)}\n`
+          + `documento-rascunho: ${JSON.stringify(draft.json?.draft?.payload?.schema ?? draft.json?.draft?.payload?.kind ?? draft.json).slice(0, 500)}\n`
           + `trilha: ${recebida.templateId} · ${recebida.versao} · ${recebida.hash}\n`
           + `itens calculados: ${itens.length}`);
       }
@@ -223,7 +223,7 @@ export async function jornadaB2NoNavegador(page, opts) {
       throw new Error(`PROPOSTA_NAO_SALVA:${f.familia}:${textoProp.slice(0, 200)}`);
     }
     const recebida = conferirTrilhaB2(JSON.parse(await art.getAttribute("data-trilha-recebida") ?? "null"), f);
-    resultados.push({ familia: f.familia, templateId: recebida.templateId, recusaVisivel: true, trilhaHash: recebida.hash, versao: recebida.versao, proposta: true });
+    resultados.push({ familia: f.familia, templateId: recebida.templateId, recusaVisivel: true, trilhaHash: recebida.hash, versao: recebida.versao, propostaId: await art.getAttribute("data-proposta-salva-id"), proposta: true });
     await page.screenshot({ path: join(opts.evidenceDir, `${f.familia}.png`), fullPage: true });
   }
 
@@ -297,6 +297,14 @@ async function main() {
     demo = await mod2.bootServidorDemoB2(demoDir);
     const manifesto2 = demo.manifesto;
     log({ prova: "REINICIO_SERVIDOR_MESMO_SQLITE", baseUrl: manifesto2.baseUrl });
+    const { lerDraft } = await viteDev.ssrLoadModule("/src/kernel/ledger/drafts.ts");
+    const propostasReabertas = resultado.resultados.map(r => {
+      const draft = lerDraft(demo.app.db, r.propostaId), p = draft?.payload;
+      if (p?.schema !== "PrescricaoProposta@1" || p.estado !== "DRAFT" || draft.patientId !== manifesto2.b2.patientId) throw new Error("PROPOSTA_NAO_PERSISTIU");
+      conferirTrilhaB2({templateId:p.templateId,versao:p.templateVersao,hash:p.templateHash},{templateId:r.templateId,versao:r.versao,hash:r.trilhaHash});
+      return r.propostaId;
+    });
+    log({prova:"PROPOSTAS_REABERTAS_COM_TRILHA",quantidade:propostasReabertas.length});
     const page2 = await browser.newPage();
     await page2.goto(`http://127.0.0.1:${uiPort}/oncoassist.html`);
     await page2.getByLabel("Senha do servidor").fill(manifesto2.senhaDemo);
@@ -308,7 +316,7 @@ async function main() {
     const qtd = await historico.locator("article").count();
     // Histórico vazio comprova somente a leitura da região após reinício, não persistência de propostas ou assinatura.
     log({ prova: "REINICIO_MESMO_SQLITE", dir: demoDir, documentosHistorico: qtd, historicoConsultado: true });
-    writeFileSync(join(evidenceDir, "resumo.json"), JSON.stringify({ manifesto: manifesto2, familias: FAMILIAS_B2, resultado, reinicio: { documentosHistorico: qtd } }, null, 2));
+    writeFileSync(join(evidenceDir, "resumo.json"), JSON.stringify({ manifesto: manifesto2, familias: FAMILIAS_B2, resultado, reinicio: { documentosHistorico: qtd, propostasReabertas } }, null, 2));
     await demo.app.close();
   } finally {
     await browser?.close();

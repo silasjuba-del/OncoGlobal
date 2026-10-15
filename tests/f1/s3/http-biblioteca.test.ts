@@ -1,4 +1,5 @@
-import { describe,it,expect } from 'vitest';
+import { describe,it,expect,vi } from 'vitest';
+import { ambienteHttp } from '../../server/http-fixture.js';
 import { createServer } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import { abrirLedger } from '../../../src/kernel/ledger/db.js';
@@ -20,6 +21,44 @@ async function ambiente(){
  return {db,auth,novaSessao:()=>sessoes.login('segredo-sintetico-123')!,relogio(valor:string){instante=valor;},async post(rota:string,body:unknown,token=auth.token){const r=await fetch(base+rota,{method:'POST',headers:{authorization:`Bearer ${token}`,'Content-Type':'application/json'},body:JSON.stringify(body)});return {status:r.status,body:await r.json() as Record<string,any>};},async close(){await new Promise<void>((resolve,reject)=>server.close(e=>e?reject(e):resolve()));db.close();}};
 }
 describe('S3 biblioteca manual no HTTP real',()=>{
+ it('roteador real importa pacote Unicode acima de 1 MB sem perder bytes',async()=>{
+  const a=await ambienteHttp();try{
+   const base=pacote();const original=JSON.parse(base.arquivos['item.json'].texto);
+   const arquivos:Record<string,{texto:string}>={};
+   const itens=Array.from({length:8},(_,i)=>{const id=`item-${i}`,arquivo=`${id}.json`;
+    const texto=JSON.stringify({...original,id,texto:'á'.repeat(100_000)});arquivos[arquivo]={texto};
+    return {id,versao:'1.0.0',arquivo,sha256:sha256Biblioteca(texto)};});
+   const raw=JSON.stringify({manifesto:{...base.manifesto,itens},arquivos});
+   expect(Buffer.byteLength(raw)).toBeGreaterThan(1_000_000);
+   const r=await a.request('/biblioteca/importar','POST',raw,a.token,'application/json');
+   expect(r.status,r.body).toBe(201);
+   expect(a.db.prepare('SELECT count(*) n FROM biblioteca_pacote').get()?.n).toBe(1);
+   const excesso:Record<string,{texto:string}>={};
+   const refs=Array.from({length:46},(_,i)=>{const id=`excesso-${i}`,arquivo=`${id}.json`,texto=JSON.stringify({...original,id,texto:'x'.repeat(180_000)});excesso[arquivo]={texto};return {id,versao:'1.0.0',arquivo,sha256:sha256Biblioteca(texto)};});
+   const negado=await a.request('/biblioteca/importar','POST',JSON.stringify({manifesto:{...base.manifesto,id:'excesso',itens:refs},arquivos:excesso}),a.token,'application/json');
+   expect(negado.status).toBe(409);expect(JSON.parse(negado.body).codigo).toBe('PACOTE_EXCESSIVO');
+   expect(a.db.prepare('SELECT count(*) n FROM biblioteca_pacote').get()?.n).toBe(1);
+  }finally{await a.close();}
+ });
+ it('inventário lê curadoria em lote e só hidrata conteúdo do pacote selecionado',async()=>{
+  const a=await ambiente();try{
+   const base=pacote(),original=JSON.parse(base.arquivos['item.json'].texto);
+   const arquivos:Record<string,{texto:string}>={};
+   const itens=Array.from({length:120},(_,i)=>{const id=`item-${i}`,arquivo=`${id}.json`,texto=JSON.stringify({...original,id});arquivos[arquivo]={texto};return {id,versao:'1.0.0',arquivo,sha256:sha256Biblioteca(texto)};});
+   const imp=await a.post('/biblioteca/importar',{manifesto:{...base.manifesto,itens},arquivos});expect(imp.status).toBe(201);
+   await a.post('/biblioteca/curar',{pacoteId:imp.body.pacoteId,itemId:'item-0',expectedHash:imp.body.hash,estado:'OBSOLETO'});
+   const spy=vi.spyOn(a.db,'prepare');
+   try{
+    const estado=await a.post('/biblioteca/estado',{});expect(estado.body.itens).toEqual([]);
+    expect(estado.body.pacotes[0].itens).toHaveLength(120);
+    expect(estado.body.pacotes[0].itens[0].estado).toBe('OBSOLETO');
+    expect(spy.mock.calls.filter(([sql])=>/SELECT .*biblioteca_curadoria/.test(sql)).length).toBeLessThan(5);
+    spy.mockClear();
+    const detalhe=await a.post('/biblioteca/estado',{pacoteId:imp.body.pacoteId});expect(detalhe.body.itens).toHaveLength(120);
+    expect(spy.mock.calls.filter(([sql])=>/SELECT .*biblioteca_curadoria/.test(sql)).length).toBeLessThan(6);
+   }finally{spy.mockRestore();}
+  }finally{await a.close();}
+ });
  it('recusa ativação com curadoria alterada por outra sessão, inclusive retorno ao mesmo estado',async()=>{
   const a=await ambiente();try {
    const outra=a.novaSessao();const p=await a.post('/biblioteca/importar',pacote());

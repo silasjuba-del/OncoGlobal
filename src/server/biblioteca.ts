@@ -2,7 +2,7 @@ import type { DatabaseSync } from 'node:sqlite';
 import { z } from 'zod';
 import { Instante, Sessao, type Sessao as SessaoTipo } from '../contracts/base.js';
 import { hashCanonico } from '../modules/hash.js';
-import { criarBiblioteca, ManifestoBiblioteca, sha256Biblioteca, type FiltrosBiblioteca } from '../kernel/corpus/biblioteca.js';
+import { criarBiblioteca, listarCuradoriaAtual, ManifestoBiblioteca, sha256Biblioteca, type FiltrosBiblioteca } from '../kernel/corpus/biblioteca.js';
 import { transacao } from '../kernel/ledger/db.js';
 import { gravarEstimulo } from '../kernel/orquestracao/estimulos/gravar.js';
 import type { GerenciadorSessao } from './sessao.js';
@@ -25,7 +25,7 @@ function conferirHash(db:DatabaseSync,id:string,hash:string):void {
 /** Revisão do pacote selecionado, inclusive inativo; seq impede aceitar um ciclo OBSOLETO→CONSULTAVEL como revisão antiga. */
 export function hashCuradoriaPacote(db:DatabaseSync,id:string):string {
  const p=pacote(db,id);if(!p)throw Error('PACOTE_AUSENTE');conferirHash(db,id,String(p.hash));
- const estados=db.prepare('SELECT item,estado,seq FROM biblioteca_curadoria a WHERE pacote=? AND seq=(SELECT max(seq) FROM biblioteca_curadoria b WHERE b.pacote=a.pacote AND b.item=a.item) ORDER BY item').all(id);
+ const estados=listarCuradoriaAtual(db,id).map(({item,estado,seq})=>({item,estado,seq}));
  return hashCanonico({pacoteHash:p.hash,estados});
 }
 /** Hash de conteúdo e curadoria efetiva: mudança de aprovação invalida avaliação em aberto. */
@@ -34,7 +34,7 @@ export function referenciaBibliotecaAtiva(db:DatabaseSync):{id:string;versao:str
  const id=db.prepare('SELECT pacote FROM biblioteca_ativacao ORDER BY seq DESC LIMIT 1').get()?.pacote;
  if(!id)return null;const p=pacote(db,String(id));if(!p||sha256Biblioteca(String(p.conteudo))!==p.hash)throw new Error('PACOTE_HASH_DIVERGENTE');
  const conteudo=JSON.parse(String(p.conteudo)) as {manifesto:unknown};const m=ManifestoBiblioteca.parse(conteudo.manifesto);
- const estados=db.prepare('SELECT item,estado FROM biblioteca_curadoria a WHERE pacote=? AND seq=(SELECT max(seq) FROM biblioteca_curadoria b WHERE b.pacote=a.pacote AND b.item=a.item) ORDER BY item').all(String(id));
+ const estados=listarCuradoriaAtual(db,String(id)).map(({item,estado})=>({item,estado}));
  return {id:m.id,versao:m.versao,hash:hashCanonico({pacoteHash:p.hash,estados})};
 }
 /** Entrada manual autenticada; pacote nunca recebe autoridade nem acesso ao filesystem. */
@@ -95,8 +95,9 @@ export function rotearBiblioteca(deps:DepsBiblioteca,token:string,rota:string,bo
   const pacotes=(deps.db.prepare('SELECT id,hash,conteudo FROM biblioteca_pacote ORDER BY id').all() as {id:string;hash:string;conteudo:string}[]).map(r=>{
    conferirHash(deps.db,r.id,r.hash);
    const manifesto=ManifestoBiblioteca.parse((JSON.parse(r.conteudo) as {manifesto:unknown}).manifesto);
+   const estados = new Map(listarCuradoriaAtual(deps.db,r.id).map(i=>[i.item,i.estado]));
    return {pacoteId:r.id,versao:manifesto.versao,hash:r.hash,ativo:r.id===ativaId,
-    itens:lib.listar(r.id).map(i=>({id:i.id,estado:i.estado}))};
+    itens:manifesto.itens.map(i=>({id:i.id,estado:estados.get(i.id)??"RASCUNHO"}))};
   });
   return {status:200,body:{ativa:lib.ativa(),referencia:referenciaBibliotecaAtiva(deps.db),pacoteId:id,hash:row?.hash??null,curadoriaHash:id?hashCuradoriaPacote(deps.db,id):null,
     ativacao:ativacao??null,pacotes,itens:id?lib.listar(id):[]}};

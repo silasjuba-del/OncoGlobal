@@ -108,10 +108,16 @@ export function indexarAplicabilidade(itens: readonly ConteudoBiblioteca[]) {
   };
 }
 
+type RegistroCuradoria = { item: string; estado: EstadoCuradoria; seq: number; ator: string; registrado_em?: string | null };
+export function listarCuradoriaAtual(db: DatabaseSync, pacote: string): RegistroCuradoria[] {
+  return db.prepare('SELECT * FROM biblioteca_curadoria WHERE pacote=? AND seq IN (SELECT max(seq) FROM biblioteca_curadoria WHERE pacote=? GROUP BY item) ORDER BY item').all(pacote, pacote) as RegistroCuradoria[];
+}
+
 /** Loader offline. Importação não confere aprovação; cada item exige curadoria humana separada. */
 export function criarBiblioteca(db: DatabaseSync, portas: PortasBiblioteca) {
   db.exec(`CREATE TABLE IF NOT EXISTS biblioteca_pacote (id TEXT PRIMARY KEY, conteudo TEXT NOT NULL, hash TEXT NOT NULL);
     CREATE TABLE IF NOT EXISTS biblioteca_curadoria (seq INTEGER PRIMARY KEY, pacote TEXT NOT NULL REFERENCES biblioteca_pacote(id), item TEXT NOT NULL, estado TEXT NOT NULL CHECK(estado IN ('RASCUNHO','CONSULTAVEL','ALERTA','OBSOLETO')), ator TEXT NOT NULL);
+    CREATE INDEX IF NOT EXISTS biblioteca_curadoria_pacote_item ON biblioteca_curadoria(pacote,item,seq);
     CREATE TABLE IF NOT EXISTS biblioteca_ativacao (seq INTEGER PRIMARY KEY, pacote TEXT NOT NULL REFERENCES biblioteca_pacote(id), anterior TEXT, motivo TEXT NOT NULL);
     CREATE TRIGGER IF NOT EXISTS biblioteca_pacote_no_update BEFORE UPDATE ON biblioteca_pacote BEGIN SELECT RAISE(ABORT,'biblioteca imutavel'); END;
     CREATE TRIGGER IF NOT EXISTS biblioteca_pacote_no_delete BEFORE DELETE ON biblioteca_pacote BEGIN SELECT RAISE(ABORT,'biblioteca imutavel'); END;
@@ -164,10 +170,12 @@ export function criarBiblioteca(db: DatabaseSync, portas: PortasBiblioteca) {
   const ativa = (): string | null => (db.prepare('SELECT pacote FROM biblioteca_ativacao ORDER BY seq DESC LIMIT 1').get() as { pacote: string } | undefined)?.pacote ?? null;
   const ativar = (id: string, motivo: AtivacaoBiblioteca['motivo']): void => transacao(() => {
     const ator = autoridade(); const pacote = lerPacote(id);
-    if (!pacote.itens.some(i => ['CONSULTAVEL', 'ALERTA'].includes(estado(id, i.id)))) throw new Error('SEM_ITEM_APROVADO');
+    const curadoria = new Map(listarCuradoriaAtual(db,id).map(r=>[r.item,r.estado]));
+    const estadoItem = (item:string) => curadoria.get(item) ?? "RASCUNHO";
+    if (!pacote.itens.some(i => ['CONSULTAVEL', 'ALERTA'].includes(estadoItem(i.id)))) throw new Error('SEM_ITEM_APROVADO');
     for (const item of pacote.itens) {
-      if (!['CONSULTAVEL', 'ALERTA'].includes(estado(id, item.id))) continue;
-      for (const dep of item.dependencias) if (!['CONSULTAVEL', 'ALERTA'].includes(estado(id, dep.id))) throw new Error('DEPENDENCIA_NAO_APROVADA');
+      if (!['CONSULTAVEL', 'ALERTA'].includes(estadoItem(item.id))) continue;
+      for (const dep of item.dependencias) if (!['CONSULTAVEL', 'ALERTA'].includes(estadoItem(dep.id))) throw new Error('DEPENDENCIA_NAO_APROVADA');
     }
     const anterior = ativa();
     if (anterior === id) return;
@@ -217,22 +225,24 @@ export function criarBiblioteca(db: DatabaseSync, portas: PortasBiblioteca) {
     estado,
     listar(id: string) {
       const pacote = lerPacote(id);
+      const curadoria = new Map(listarCuradoriaAtual(db,id).map(r=>[r.item,r]));
       return pacote.itens.map(item => {
-        const r = db.prepare('SELECT estado,ator,registrado_em FROM biblioteca_curadoria WHERE pacote=? AND item=? ORDER BY seq DESC LIMIT 1')
-          .get(id, item.id) as { estado: EstadoCuradoria; ator: string; registrado_em: string | null } | undefined;
-        const estadoAtual: EstadoCuradoria = r?.estado ?? 'RASCUNHO';
-        return { ...item, estado: estadoAtual,
-          curadoria: r ? { ator: r.ator, registradoEm: r.registrado_em } : null };
+        const r = curadoria.get(item.id);
+        return { ...item, estado: r?.estado ?? 'RASCUNHO' as EstadoCuradoria,
+          curadoria: r ? { ator: r.ator, registradoEm: r.registrado_em ?? null } : null };
       });
     },
     consultar(filtros: FiltrosBiblioteca, modo: 'CONSULTA' | 'ALERTA' = 'CONSULTA'): ConteudoBiblioteca[] {
       const id = ativa(); if (!id) return [];
       const p = lerPacote(id);
-      const aprovada = (alvo: ConteudoBiblioteca): boolean => ['CONSULTAVEL', 'ALERTA'].includes(estado(id, alvo.id)) &&
-        alvo.dependencias.every(dep => { const d = p.itens.find(i => i.id === dep.id); return !!d && aprovada(d); });
+      const curadoria = new Map(listarCuradoriaAtual(db,id).map(r=>[r.item,r.estado]));
+      const porId = new Map(p.itens.map(i=>[i.id,i]));
+      const estadoItem = (item:string) => curadoria.get(item) ?? "RASCUNHO";
+      const aprovada = (alvo: ConteudoBiblioteca): boolean => ['CONSULTAVEL', 'ALERTA'].includes(estadoItem(alvo.id)) &&
+        alvo.dependencias.every(dep => { const d = porId.get(dep.id); return !!d && aprovada(d); });
       const aplicaveis = indexarAplicabilidade(p.itens)(filtros);
       return p.itens.filter(item => {
-        const e = estado(id, item.id);
+        const e = estadoItem(item.id);
         if (modo === 'ALERTA' ? e !== 'ALERTA' : !['CONSULTAVEL', 'ALERTA'].includes(e)) return false;
         if (!aprovada(item)) return false;
         return aplicaveis.has(item.id);
